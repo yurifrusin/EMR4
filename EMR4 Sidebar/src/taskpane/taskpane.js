@@ -6,11 +6,21 @@ const BACKEND_URL = "http://localhost:8001";
 const API_BASE    = BACKEND_URL + "/api/v1";
 const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
 
+// ─── DIALOG MODE DETECTION ───────────────────────────────────
+// When this page is opened via displayDialogAsync the URL hash
+// contains "#dialog&t=<JWT>". We detect that here, before any
+// Office.onReady logic, so the whole app can adjust accordingly.
+const _hash       = window.location.hash;
+const IS_DIALOG   = _hash.includes("#dialog");
+if (IS_DIALOG) {
+  const m = _hash.match(/[?&]?t=([^&]*)/);
+  if (m?.[1]) localStorage.setItem("emr4_token", decodeURIComponent(m[1]));
+}
+
 // ─── STATE ──────────────────────────────────────────────────
 let token          = localStorage.getItem("emr4_token");
 let currentPatient = null;
-let isMaximized    = false;
-let origDimensions = null;
+let dialogRef      = null;   // Office dialog object (main taskpane side)
 
 // Consult tab state
 let isLocked       = false;
@@ -77,43 +87,50 @@ function showView(viewId) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// MAXIMIZE / RESTORE
+// POP-OUT / ANCHOR BACK
+// ═══════════════════════════════════════════════════════════
+// In docked taskpane mode: ⛶ opens the app as a free-floating
+// OS window via displayDialogAsync — the window can be dragged
+// to any monitor and resized freely.
+//
+// In dialog/pop-out mode: ↩ closes the floating window and
+// returns control to the docked taskpane.
 // ═══════════════════════════════════════════════════════════
 
 window.toggleMaximize = function () {
-  const btn = document.getElementById("btn-maximize");
-  if (!isMaximized) {
-    // Snapshot position and size before expanding
-    origDimensions = {
-      width: window.outerWidth,
-      height: window.outerHeight,
-      x: window.screenX,
-      y: window.screenY,
-    };
-    try {
-      // screen.availWidth/Height reflects the monitor the window is currently on
-      window.resizeTo(screen.availWidth, screen.availHeight);
-      window.moveTo(screen.availLeft || 0, screen.availTop || 0);
-    } catch (e) {
-      // Embedded taskpane mode — resize not permitted; CSS expansion still applies
-    }
-    document.body.classList.add("maximized");
-    isMaximized = true;
-    btn.textContent = "↩";
-    btn.title = "Restore to original position";
-  } else {
-    if (origDimensions) {
-      try {
-        window.resizeTo(origDimensions.width, origDimensions.height);
-        window.moveTo(origDimensions.x, origDimensions.y);
-      } catch (e) {}
-    }
-    document.body.classList.remove("maximized");
-    isMaximized = false;
-    origDimensions = null;
-    btn.textContent = "⛶";
-    btn.title = "Maximize to screen";
+  if (IS_DIALOG) {
+    // We are the floating window — close and return to taskpane
+    Office.context.ui.messageParent("close-dialog");
+    return;
   }
+
+  // We are the docked taskpane — pop out
+  if (!token) { alert("Sign in before popping out."); return; }
+
+  const dialogUrl = window.location.origin + window.location.pathname
+    + "#dialog&t=" + encodeURIComponent(token);
+
+  Office.context.ui.displayDialogAsync(
+    dialogUrl,
+    { width: 55, height: 88, displayInIframe: false },
+    result => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error("Pop-out failed:", result.error?.message);
+        return;
+      }
+      dialogRef = result.value;
+      dialogRef.addEventHandler(Office.EventType.DialogMessageReceived, msg => {
+        if (msg.message === "close-dialog") {
+          dialogRef.close();
+          dialogRef = null;
+        }
+      });
+      // User closed the window via the OS ✕ button
+      dialogRef.addEventHandler(Office.EventType.DialogEventReceived, () => {
+        dialogRef = null;
+      });
+    }
+  );
 };
 
 // ═══════════════════════════════════════════════════════════
@@ -793,16 +810,27 @@ async function approveAndFinalize() {
 function initApp() {
   showTab("consult");
   setBanner(null);
-  setStatus("Ready.");
+  updateFormFields({});   // seed one empty row in each coding section
 
-  // Seed one empty row in each coding section
-  updateFormFields({});
-
-  runBackgroundSync();
-  Office.context.document.addHandlerAsync(
-    Office.EventType.DocumentSelectionChanged,
-    () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
-  );
+  if (IS_DIALOG) {
+    // Dialog / pop-out mode — Word document API is not available
+    setStatus("Pop-out mode.");
+    document.getElementById("btn-record").disabled = true;
+    document.getElementById("btn-finalize").disabled = true;
+    document.getElementById("btn-finalize").title =
+      "Open in the docked taskpane to finalise into Word";
+    // Swap maximize button to anchor-back
+    const btn = document.getElementById("btn-maximize");
+    btn.textContent = "↩";
+    btn.title = "Close pop-out — anchor back to Word";
+  } else {
+    setStatus("Ready.");
+    runBackgroundSync();
+    Office.context.document.addHandlerAsync(
+      Office.EventType.DocumentSelectionChanged,
+      () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
+    );
+  }
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -810,19 +838,48 @@ function initApp() {
 // ═══════════════════════════════════════════════════════════
 
 Office.onReady(info => {
+  // ── Dialog / pop-out mode ────────────────────────────────
+  // displayDialogAsync opens this same page with host === null.
+  // Handle it before the Word host check so the guard doesn't
+  // swallow the dialog init.
+  if (IS_DIALOG) {
+    _wireCommonHandlers();
+    if (token) { showView("view-app"); initApp(); }
+    else        { showView("view-login"); }
+    return;
+  }
+
   if (info.host !== Office.HostType.Word) return;
 
+  _wireCommonHandlers();
+
+  // ── Consult buttons (Word-only) ─────────────────────────
+  document.getElementById("btn-record").onclick   = toggleRecording;
+  document.getElementById("btn-finalize").onclick = approveAndFinalize;
+
+  // Auto-lock when the GP types in the consult panel
+  document.addEventListener("input", e => {
+    if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
+  });
+
+  // ── Resume session or show login ─────────────────────────
+  if (token) { showView("view-app"); initApp(); }
+  else        { showView("view-login"); }
+});
+
+// Handlers shared between docked taskpane and dialog/pop-out modes
+function _wireCommonHandlers() {
   // ── Tab navigation ──────────────────────────────────────
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.onclick = () => {
       showTab(btn.dataset.tab);
-      if (btn.dataset.tab === "history")  loadHistory();
-      if (btn.dataset.tab === "meds")     loadMeds();
+      if (btn.dataset.tab === "history")   loadHistory();
+      if (btn.dataset.tab === "meds")      loadMeds();
       if (btn.dataset.tab === "allergies") loadAllergies();
     };
   });
 
-  // ── Maximize / restore ──────────────────────────────────
+  // ── Pop-out / anchor-back button ────────────────────────
   document.getElementById("btn-maximize").onclick = toggleMaximize;
 
   // ── Auth ────────────────────────────────────────────────
@@ -844,21 +901,4 @@ Office.onReady(info => {
     clearTimeout(searchDebounce);
     searchDebounce = setTimeout(() => searchPatients(searchInput.value.trim()), 350);
   });
-
-  // ── Consult buttons ─────────────────────────────────────
-  document.getElementById("btn-record").onclick   = toggleRecording;
-  document.getElementById("btn-finalize").onclick = approveAndFinalize;
-
-  // Auto-lock when the GP types in the consult panel
-  document.addEventListener("input", e => {
-    if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
-  });
-
-  // ── Resume session or show login ─────────────────────────
-  if (token) {
-    showView("view-app");
-    initApp();
-  } else {
-    showView("view-login");
-  }
-});
+}
