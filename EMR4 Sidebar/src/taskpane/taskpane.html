@@ -1,57 +1,259 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EMR4 Copilot</title>
-
-    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMR4 Centaur</title>
+  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+  <link rel="stylesheet" href="taskpane.css" />
 </head>
-<body class="ms-font-m ms-Fabric">
-  <div class="sidebar-container">
-    <div class="header-row">
-      <h2>EMR4 Copilot</h2>
-      <!-- NEW AUDIO CONTROLS -->
-      <div class="audio-controls">
-        <button id="btn-record" class="btn-record">🎤 Start Recording</button>
-        <div id="audio-status" class="audio-status" style="display: none;">
-          <span class="recording-dot"></span> Listening...
+<body>
+
+<!-- ═══════════════════════════════════════════
+     LOGIN VIEW
+═══════════════════════════════════════════ -->
+<div id="view-login" class="view">
+  <div class="login-card">
+    <div class="login-logo">EMR4 <span>Centaur</span></div>
+    <div class="login-subtitle">General Practice Intelligence</div>
+    <div id="login-error" class="alert alert-error hidden"></div>
+    <input id="login-email" type="email" class="input" placeholder="Email address" autocomplete="username" />
+    <input id="login-password" type="password" class="input" placeholder="Password" autocomplete="current-password" />
+    <button id="btn-login" class="btn btn-primary btn-full">Sign In</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN APP VIEW
+═══════════════════════════════════════════ -->
+<div id="view-app" class="view hidden">
+
+  <!-- Patient Banner -->
+  <div id="patient-banner">
+    <div id="patient-info">
+      <div id="patient-name" class="patient-name">No patient loaded</div>
+      <div id="patient-meta" class="patient-meta"></div>
+    </div>
+    <div id="banner-controls">
+      <button id="btn-search-patient" class="icon-btn" title="Search patient">🔍</button>
+      <div id="status-dot" class="status-dot connected" title="Connected"></div>
+      <button id="btn-logout" class="icon-btn" title="Sign out">⏏</button>
+    </div>
+  </div>
+
+  <!-- Patient Search Overlay -->
+  <div id="search-panel" class="search-panel hidden">
+    <div class="search-inner">
+      <input id="patient-search-input" type="text" class="input" placeholder="Name, Medicare, or phone…" autocomplete="off" />
+      <div id="patient-search-results" class="search-results"></div>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <nav id="tab-nav">
+    <button class="tab-btn active" data-tab="consult">Consult</button>
+    <button class="tab-btn" data-tab="history">History</button>
+    <button class="tab-btn" data-tab="results">Results</button>
+    <button class="tab-btn" data-tab="meds">Meds</button>
+    <button class="tab-btn" data-tab="allergies">Allergies</button>
+    <button class="tab-btn" data-tab="ddx">DDx</button>
+    <button class="tab-btn" data-tab="rx">Rx</button>
+    <button class="tab-btn" data-tab="letters">Letters</button>
+  </nav>
+
+  <!-- ── PANELS ─────────────────────────────────── -->
+  <div id="panels">
+
+    <!-- CONSULT -->
+    <div class="panel" id="panel-consult">
+      <div class="panel-scroll">
+
+        <!-- Audio Scribe Controls -->
+        <div class="consult-header">
+          <button id="btn-record" class="btn btn-record">🎤 Start Recording</button>
+          <div id="audio-status" class="recording-indicator hidden">
+            <span class="rec-dot"></span> Listening…
+          </div>
+          <div id="status-msg" class="status-msg">Initializing…</div>
+        </div>
+
+        <audio id="audio-playback" controls class="audio-player hidden"></audio>
+        <div id="transcript-row" class="hidden">
+          <button class="btn btn-ghost btn-sm" onclick="toggleTranscript()">View transcript</button>
+          <textarea id="raw-transcript" class="transcript-box hidden" readonly></textarea>
+        </div>
+
+        <!-- Lock toggle -->
+        <div class="lock-row">
+          <button id="btn-lock" class="btn btn-ghost btn-sm unlocked" onclick="toggleLock()">
+            <span class="lock-icon">🔓</span>
+            <span class="lock-label">AI live</span>
+          </button>
+        </div>
+
+        <!-- Consultation Type -->
+        <div class="field-group">
+          <label class="field-label">Consultation Type</label>
+          <input type="text" id="consult-type" class="input" placeholder="Auto-filled from AI…" />
+        </div>
+
+        <!-- MBS -->
+        <div class="section-header">
+          MBS Items
+          <button class="btn btn-ghost btn-xs" onclick="addMbsRow()">+ Add</button>
+        </div>
+        <div id="mbs-container"></div>
+
+        <!-- SNOMED -->
+        <div class="section-header">
+          Clinical Diagnoses
+          <button class="btn btn-ghost btn-xs" onclick="addSnomedRow()">+ Add</button>
+        </div>
+        <div id="snomed-container"></div>
+
+        <!-- Prescriptions -->
+        <div class="section-header">
+          Prescriptions
+          <button class="btn btn-ghost btn-xs" onclick="addRxRow()">+ Add</button>
+        </div>
+        <div id="rx-container"></div>
+
+        <button id="btn-finalize" class="btn btn-finalize">Approve &amp; Finalise Record</button>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="panel hidden" id="panel-history">
+      <div class="panel-scroll">
+        <div class="panel-toolbar">
+          <span class="panel-title">Encounter History</span>
+          <button class="btn btn-ghost btn-sm" onclick="loadHistory()">↻ Refresh</button>
+        </div>
+        <div id="history-list" class="card-list">
+          <div class="placeholder">Load a patient to view history.</div>
         </div>
       </div>
-
-    <div id="status" class="status-indicator">Initializing workspace...</div>
-      <button id="btn-lock" class="btn-lock unlocked" onclick="toggleLock()" title="Toggle AI auto-update">
-        <span class="lock-icon">🔓</span>
-        <span class="lock-label">Unlocked</span>
-      </button>
     </div>
 
-    <!-- EPHEMERAL PLAYBACK CONTROLS -->
-    <audio id="audio-playback" controls style="display: none; width: 100%; margin-top: 10px;"></audio>
-    <button id="btn-toggle-transcript" class="btn-add" style="display: none; margin-top: 10px; width: 100%; background: #eee; color: #333;" onclick="toggleTranscript()">View Raw Transcript</button>
-    <textarea id="raw-transcript" readonly style="display: none; width: 100%; height: 100px; margin-top: 5px; font-size: 12px; font-family: monospace;"></textarea>
-    <!-- END EPHEMERAL PLAYBACK CONTROLS -->
-
-    <div class="section-title">Consultation Metadata</div>
-    <div class="form-group">
-      <label>Consultation Type</label>
-      <input type="text" id="consult-type" placeholder="Auto-filled from AI analysis...">
+    <!-- RESULTS (Phase 6 placeholder) -->
+    <div class="panel hidden" id="panel-results">
+      <div class="panel-scroll">
+        <div class="placeholder-phase">
+          <div class="placeholder-icon">📋</div>
+          <div class="placeholder-title">Results Inbox</div>
+          <div class="placeholder-body">Pathology and radiology results will appear here in Phase 6.</div>
+        </div>
+      </div>
     </div>
 
-    <div class="section-title">MBS Items</div>
-    <div id="mbs-container"></div>
-    <button class="btn-add" id="btn-add-mbs" onclick="addMbsRow()">+ Add MBS Item</button>
+    <!-- MEDS -->
+    <div class="panel hidden" id="panel-meds">
+      <div class="panel-scroll">
+        <div class="panel-toolbar">
+          <span class="panel-title">Active Medications</span>
+          <button class="btn btn-ghost btn-sm" onclick="loadMeds()">↻ Refresh</button>
+        </div>
+        <div id="meds-list" class="card-list">
+          <div class="placeholder">Load a patient to view medications.</div>
+        </div>
+      </div>
+    </div>
 
-    <div class="section-title">Clinical Diagnoses (SNOMED)</div>
-    <div id="snomed-container"></div>
-    <button class="btn-add" id="btn-add-snomed" onclick="addSnomedRow()">+ Add Diagnosis</button>
+    <!-- ALLERGIES -->
+    <div class="panel hidden" id="panel-allergies">
+      <div class="panel-scroll">
+        <div class="panel-toolbar">
+          <span class="panel-title">Allergies &amp; Adverse Reactions</span>
+        </div>
+        <div id="allergies-list" class="card-list"></div>
+        <div class="add-allergy-form">
+          <div class="field-group">
+            <input type="text" id="allergy-substance" class="input" placeholder="Substance (e.g. Penicillin)" />
+          </div>
+          <div class="field-row">
+            <input type="text" id="allergy-reaction" class="input" placeholder="Reaction" />
+            <select id="allergy-severity" class="input select-sm">
+              <option value="">Severity</option>
+              <option>Mild</option>
+              <option>Moderate</option>
+              <option>Severe</option>
+              <option>Life-threatening</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="addAllergy()">+ Add Allergy</button>
+        </div>
+      </div>
+    </div>
 
-    <div class="section-title">Prescriptions (AMT)</div>
-    <div id="rx-container"></div>
-    <button class="btn-add" id="btn-add-rx" onclick="addRxRow()">+ Add Medication</button>
+    <!-- DDx (Phase 5 placeholder) -->
+    <div class="panel hidden" id="panel-ddx">
+      <div class="panel-scroll">
+        <div class="placeholder-phase">
+          <div class="placeholder-icon">🧠</div>
+          <div class="placeholder-title">Differential Diagnosis Engine</div>
+          <div class="placeholder-body">AI-powered DDx with red-flag detection coming in Phase 5.</div>
+        </div>
+      </div>
+    </div>
 
-    <button class="btn-finalize" id="btn-finalize">Approve &amp; Finalise Record</button>
-  </div>
+    <!-- Rx (Phase 8 placeholder) -->
+    <div class="panel hidden" id="panel-rx">
+      <div class="panel-scroll">
+        <div class="placeholder-phase">
+          <div class="placeholder-icon">💊</div>
+          <div class="placeholder-title">ePrescribing (eRx)</div>
+          <div class="placeholder-body">Electronic prescribing via eRx Script Exchange coming in Phase 8.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LETTERS -->
+    <div class="panel hidden" id="panel-letters">
+      <div class="panel-scroll">
+        <div class="panel-toolbar">
+          <span class="panel-title">Letter Writing</span>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Letter Type</label>
+          <select id="letter-type" class="input">
+            <option value="Referral">Specialist Referral</option>
+            <option value="MedicalCertificate">Medical Certificate</option>
+            <option value="SpecialistReply">Reply to Specialist</option>
+            <option value="ToWhomItMayConcern">To Whom It May Concern</option>
+            <option value="WorkCover">WorkCover Report</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field-group" style="flex:2">
+            <label class="field-label">Recipient Name</label>
+            <input type="text" id="letter-recipient" class="input" placeholder="Dr Smith" />
+          </div>
+          <div class="field-group" style="flex:1">
+            <label class="field-label">Specialty</label>
+            <input type="text" id="letter-specialty" class="input" placeholder="Cardiology" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Reason / Clinical Summary</label>
+          <textarea id="letter-reason" class="input textarea-md" placeholder="Reason for referral or main clinical points…"></textarea>
+        </div>
+        <button id="btn-draft-letter" class="btn btn-primary" onclick="draftLetter()">
+          ✨ Draft with AI
+        </button>
+        <div id="letter-output" class="letter-preview hidden">
+          <div class="letter-subject" id="letter-subject"></div>
+          <textarea id="letter-body" class="input textarea-lg" spellcheck="true"></textarea>
+          <div class="letter-actions">
+            <button class="btn btn-primary" onclick="insertLetterIntoWord()">Insert into Word</button>
+            <button class="btn btn-ghost btn-sm" onclick="copyLetter()">📋 Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /panels -->
+</div><!-- /view-app -->
+
 </body>
 </html>

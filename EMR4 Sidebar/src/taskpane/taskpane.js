@@ -1,628 +1,33 @@
-// --- CONFIGURATION ---
-const BACKEND_URL = "http://localhost:8001/";
+// ═══════════════════════════════════════════════════════════
+//  EMR4 Centaur — Taskpane SPA
+// ═══════════════════════════════════════════════════════════
 
-// Unique ID for this taskpane session — stored with each encounter so records are traceable
-const SESSION_ID = "word_" + crypto.randomUUID().substring(0, 8);
+const BACKEND_URL = "http://localhost:8001";
+const API_BASE    = BACKEND_URL + "/api/v1";
+const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
 
-// --- STATE ---
+// ─── STATE ──────────────────────────────────────────────────
+let token          = localStorage.getItem("emr4_token");
+let currentPatient = null;
+
+// Consult tab state
+let isLocked       = false;
+let lastAiResponse = null;
+let isSyncing      = false;
+let mbsRowCount    = 0;
+let snomedRowCount = 0;
+let rxRowCount     = 0;
 let lastSyncedText = "";
-let debounceTimer = null;
-let isLocked = false;        // When true, AI updates are blocked
-let lastAiResponse = null;   // Cache of the most recent AI response
-let isSyncing = false;       // Mutex: prevents concurrent background sync calls
-let mbsRowCount = 0;         // Tracks how many MBS rows exist
-let snomedRowCount = 0;      // Tracks how many SNOMED rows exist
-let rxRowCount = 0;          // Tracks how many Rx rows exist
-
-// ============================================================
-// LOCK / UNLOCK
-// ============================================================
-
-window.toggleLock = function () {
-  isLocked = !isLocked;
-  updateLockUI();
-  if (!isLocked) {
-    // Apply the cached AI response instead of making a new API call.
-    // A new call will happen naturally the next time the document text changes.
-    if (lastAiResponse) {
-      updateFormFields(lastAiResponse);
-      document.getElementById("status").innerText =
-        "Last sync: " + new Date().toLocaleTimeString();
-    }
-    // Do NOT reset lastSyncedText — no unnecessary re-call to Gemini.
-  }
-};
-
-function autoLock() {
-  if (!isLocked) {
-    isLocked = true;
-    updateLockUI();
-  }
-}
-
-function updateLockUI() {
-  const btn = document.getElementById("btn-lock");
-  if (!btn) return;
-  if (isLocked) {
-    btn.className = "btn-lock locked";
-    btn.querySelector(".lock-icon").textContent = "🔒";
-    btn.querySelector(".lock-label").textContent = "Locked";
-    btn.title = "AI updates are paused. Click to allow AI to update fields again.";
-  } else {
-    btn.className = "btn-lock unlocked";
-    btn.querySelector(".lock-icon").textContent = "🔓";
-    btn.querySelector(".lock-label").textContent = "Unlocked";
-    btn.title = "AI is live-updating fields. Click to lock and edit manually.";
-  }
-}
-
-// Auto-lock when the GP types into any taskpane input field
-// (Event delegation on the whole sidebar so dynamically added rows are covered)
-document.addEventListener("input", function (e) {
-  if (e.target && e.target.tagName === "INPUT") {
-    autoLock();
-  }
-});
-
+let debounceTimer  = null;
+let typeaheadTimer = null;
+let mediaRecorder  = null;
+let audioChunks    = [];
+let isRecording    = false;
 let currentAudioUrl = null;
 
-window.toggleTranscript = function () {
-  const ta = document.getElementById("raw-transcript");
-  if (!ta) return;
-  if (ta.style.display === "none") {
-    ta.style.display = "block";
-  } else {
-    ta.style.display = "none";
-  }
-};
-
-// ============================================================
-// INITIALIZATION
-// ============================================================
-
-Office.onReady((info) => {
-  if (info.host === Office.HostType.Word) {
-    document.getElementById("status").innerText = "Initializing workspace...";
-    bindFinalizeButton();
-    runBackgroundSync();
-
-    Office.context.document.addHandlerAsync(
-      Office.EventType.DocumentSelectionChanged,
-      onDocumentChanged
-    );
-    document.getElementById('btn-record').onclick = toggleRecording;
-  }
-});
-
-function onDocumentChanged() {
-  clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(() => {
-    runBackgroundSync();
-  }, 2000);
-}
-
-function bindFinalizeButton() {
-  const btn = document.getElementById("btn-finalize");
-  if (btn) btn.onclick = approveAndFinalize;
-}
-
-// ============================================================
-// WORD DOCUMENT READING
-// ============================================================
-
-async function getDocumentText() {
-  return Word.run(async (context) => {
-    const body = context.document.body;
-    body.load("text");
-    await context.sync();
-    return body.text;
-  });
-}
-
-// ============================================================
-// BACKGROUND SYNC
-// ============================================================
-
-async function runBackgroundSync() {
-  // Suspend background polling while recording ambient audio
-  if (isRecording) return;
-
-  // Mutex: if a sync is already running, skip — the in-flight call will handle it
-  if (isSyncing) return;
-  isSyncing = true;
-  try {
-    const text = await getDocumentText();
-
-    if (!text || text.trim() === "") {
-      if (!isLocked) updateFormFields({});
-      document.getElementById("status").innerText = "Ready for manual input.";
-      lastSyncedText = "";
-      return;
-    }
-
-    if (text === lastSyncedText) return;
-    lastSyncedText = text;
-
-    document.getElementById("status").innerText = isLocked
-      ? "🔒 Locked — AI running in background..."
-      : "Analyzing new text...";
-
-    const response = await fetch(BACKEND_URL + "api/v1/analyze-consultation", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        document_id: SESSION_ID,
-        text_delta: text,
-        is_finalized: false,
-        clinician_overrides: null,
-      }),
-    });
-
-    const data = await response.json();
-    lastAiResponse = data; // Always cache, even when locked
-
-    if (!isLocked) {
-      updateFormFields(data);
-      document.getElementById("status").innerText =
-        "Last sync: " + new Date().toLocaleTimeString();
-    } else {
-      document.getElementById("status").innerText =
-        "🔒 Locked — AI ready. Unlock to apply new results.";
-    }
-  } catch (error) {
-    console.error("Sync error:", error);
-    document.getElementById("status").innerText =
-      "Waiting for backend connection...";
-  } finally {
-    isSyncing = false; // Always release the mutex
-  }
-}
-
-// --- AUDIO SCRIBE ENGINE ---
-let mediaRecorder;
-let audioChunks = [];
-let isRecording = false;
-
-async function toggleRecording() {
-  const btnRecord = document.getElementById('btn-record');
-  const audioStatus = document.getElementById('audio-status');
-
-  if (!isRecording) {
-    // START RECORDING
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream);
-      audioChunks = [];
-
-      mediaRecorder.ondataavailable = e => {
-        if (e.data.size > 0) audioChunks.push(e.data);
-      };
-
-      mediaRecorder.onstop = processAudio;
-
-      mediaRecorder.start();
-      isRecording = true;
-      btnRecord.innerText = "⏹️ Stop Recording";
-      btnRecord.classList.add("recording");
-      audioStatus.style.display = "flex";
-      document.getElementById('status').innerText = "Capturing consultation audio...";
-
-    } catch (err) {
-      console.error("Microphone access denied:", err);
-      alert("Microphone access is required to use the AI Scribe.");
-    }
-  } else {
-    // STOP RECORDING
-    mediaRecorder.stop();
-    // Stop all microphone tracks to release the hardware
-    mediaRecorder.stream.getTracks().forEach(track => track.stop());
-
-    isRecording = false;
-    btnRecord.innerText = "🎤 Start Recording";
-    btnRecord.classList.remove("recording");
-    audioStatus.style.display = "none";
-  }
-}
-
-async function processAudio() {
-  document.getElementById('status').innerText = "⏳ Processing audio with Vertex AI...";
-
-  // Create an audio blob from the recorded chunks
-  const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-
-  // Build a multipart/form-data payload for robust binary upload
-  const formData = new FormData();
-  formData.append('audio_file', audioBlob, 'consultation.webm');
-
-  try {
-    const response = await fetch(BACKEND_URL + "api/v1/scribe-consultation", {
-      method: "POST",
-      // fetch will automatically set the Content-Type to multipart/form-data with the correct boundary
-      body: formData
-    });
-
-    const data = await response.json();
-
-      // Update our UI boxes with the AI's extraction
-      updateFormFields(data);
-
-      // Setup ephemeral audio playback & transcript
-      if (data.audio_url) {
-        currentAudioUrl = data.audio_url;
-        const player = document.getElementById("audio-playback");
-        player.src = BACKEND_URL.replace(/\/$/, "") + currentAudioUrl;
-        player.style.display = "block";
-      }
-
-      if (data.raw_transcript) {
-        document.getElementById("raw-transcript").value = data.raw_transcript;
-        document.getElementById("btn-toggle-transcript").style.display = "block";
-      }
-
-      document.getElementById('status').innerText = "✅ Audio scribe complete!";
-
-      // Auto-lock the panel so the background sync doesn't overwrite it immediately
-      isLocked = true;
-      updateLockUI();
-
-      // BONUS: Insert the generated clinical summary directly into the Word document!
-      if (data.generated_clinical_note) {
-        Word.run(async (context) => {
-          const body = context.document.body;
-          body.insertParagraph(data.generated_clinical_note, Word.InsertLocation.end);
-          await context.sync();
-        });
-      }
-
-    } catch (error) {
-      console.error("Scribe error:", error);
-      document.getElementById('status').innerText = "❌ Scribe failed.";
-    }
-}
-
-// ============================================================
-// UI RENDERING — called only when UNLOCKED
-// ============================================================
-
-function updateFormFields(response) {
-  const meta = response.encounter_metadata || {};
-
-  // Only auto-fill Consultation Type if it is currently empty
-  const consultField = document.getElementById("consult-type");
-  if (consultField && !consultField.value) {
-    consultField.value = meta.consultation_type || "";
-  }
-
-  const mbsItems =
-    meta.mbs_item_candidates && meta.mbs_item_candidates.length > 0
-      ? meta.mbs_item_candidates
-      : [{}];
-  const diagnoses =
-    response.clinical_diagnoses && response.clinical_diagnoses.length > 0
-      ? response.clinical_diagnoses
-      : [{}];
-  const rx =
-    response.medications_and_prescriptions &&
-    response.medications_and_prescriptions.length > 0
-      ? response.medications_and_prescriptions
-      : [{}];
-
-  // Rebuild MBS rows
-  document.getElementById("mbs-container").innerHTML = "";
-  mbsRowCount = 0;
-  mbsItems.forEach((mbs) => appendMbsRow(mbs.item_number || "", mbs.description || ""));
-
-  // Rebuild SNOMED rows
-  document.getElementById("snomed-container").innerHTML = "";
-  snomedRowCount = 0;
-  diagnoses.forEach((dx) =>
-    appendSnomedRow(dx.term || "", dx.snomed_ct_au_code || "")
-  );
-
-  // Rebuild RX rows
-  document.getElementById("rx-container").innerHTML = "";
-  rxRowCount = 0;
-  rx.forEach((med) =>
-    appendRxRow(med.drug_name || "", med.dosage_text || "")
-  );
-
-  bindFinalizeButton();
-}
-
-// ============================================================
-// ROW BUILDERS
-// ============================================================
-
-function appendMbsRow(itemNumber, description) {
-  const i = mbsRowCount++;
-  const container = document.getElementById("mbs-container");
-  const div = document.createElement("div");
-  div.className = "form-group";
-  div.id = `mbs-group-${i}`;
-  div.innerHTML = `
-    <label>Item Code ${i + 1}</label>
-    <div class="flex-row">
-      <div class="input-wrapper" style="flex:0 0 28%">
-        <input type="text" id="mbs-item-${i}" value="${escHtml(itemNumber)}" autocomplete="off" placeholder="Code...">
-        <div id="mbs-suggestions-${i}" class="autocomplete-results"></div>
-      </div>
-      <input type="text" id="mbs-desc-${i}" value="${escHtml(description)}" placeholder="Description (auto-filled)" readonly style="flex:1">
-      <button class="btn-remove" onclick="removeRow('mbs-group-${i}')" title="Remove this item">✕</button>
-    </div>
-  `;
-  container.appendChild(div);
-
-  // Wire autocomplete
-  const el = document.getElementById(`mbs-item-${i}`);
-  if (el) el.addEventListener("keyup", () => handleKeystroke("mbs", i));
-}
-
-function appendSnomedRow(term, code) {
-  const i = snomedRowCount++;
-  const container = document.getElementById("snomed-container");
-  const div = document.createElement("div");
-  div.className = "form-group";
-  div.id = `snomed-group-${i}`;
-  div.innerHTML = `
-    <label>Diagnosis ${i + 1}</label>
-    <div class="flex-row">
-      <div class="input-wrapper" style="flex:1">
-        <input type="text" id="snomed-term-${i}" value="${escHtml(term)}" autocomplete="off" placeholder="Diagnosis term...">
-        <div id="snomed-suggestions-${i}" class="autocomplete-results"></div>
-      </div>
-      <input type="text" id="snomed-code-${i}" value="${escHtml(code)}" placeholder="SNOMED Code" readonly style="flex:0 0 28%">
-      <button class="btn-remove" onclick="removeRow('snomed-group-${i}')" title="Remove this diagnosis">✕</button>
-    </div>
-  `;
-  container.appendChild(div);
-
-  const el = document.getElementById(`snomed-term-${i}`);
-  if (el) el.addEventListener("keyup", () => handleKeystroke("snomed", i));
-}
-
-function appendRxRow(drugName, dosage) {
-  const i = rxRowCount++;
-  const container = document.getElementById("rx-container");
-  const div = document.createElement("div");
-  div.className = "form-group";
-  div.id = `rx-group-${i}`;
-  div.innerHTML = `
-    <label>Medication ${i + 1}</label>
-    <div class="flex-row">
-      <input type="text" id="rx-name-${i}" value="${escHtml(drugName)}" placeholder="Drug name..." style="flex:2">
-      <input type="text" id="rx-dose-${i}" value="${escHtml(dosage)}" placeholder="Dosage..." style="flex:1">
-      <button class="btn-remove" onclick="removeRow('rx-group-${i}')" title="Remove this medication">✕</button>
-    </div>
-  `;
-  container.appendChild(div);
-}
-
-// ============================================================
-// ADD BUTTONS (wired to HTML onclick)
-// ============================================================
-
-window.addMbsRow = function () {
-  autoLock();
-  appendMbsRow("", "");
-};
-
-window.addSnomedRow = function () {
-  autoLock();
-  appendSnomedRow("", "");
-};
-
-window.addRxRow = function () {
-  autoLock();
-  appendRxRow("", "");
-};
-
-window.removeRow = function (groupId) {
-  autoLock();
-  const el = document.getElementById(groupId);
-  if (el) el.remove();
-};
-
-// ============================================================
-// AUTOCOMPLETE ENGINE
-// ============================================================
-
-let typeaheadTimer;
-
-async function handleKeystroke(type, index) {
-  clearTimeout(typeaheadTimer);
-
-  const inputId = type === "mbs" ? `mbs-item-${index}` : `snomed-term-${index}`;
-  const inputEl = document.getElementById(inputId);
-  if (!inputEl) return;
-  const query = inputEl.value.trim();
-  const resultsBox = document.getElementById(`${type}-suggestions-${index}`);
-  if (!resultsBox) return;
-
-  if (query.length < 2) {
-    resultsBox.style.display = "none";
-    return;
-  }
-
-  typeaheadTimer = setTimeout(async () => {
-    resultsBox.style.display = "block";
-    resultsBox.innerHTML = '<div class="autocomplete-searching">Searching...</div>';
-
-    try {
-      const endpoint = type === "mbs" ? "search-mbs" : "search-snomed";
-      const response = await fetch(
-        `${BACKEND_URL}api/v1/${endpoint}?q=${encodeURIComponent(query)}`
-      );
-      const results = await response.json();
-      renderSuggestions(results, type, index);
-    } catch (err) {
-      resultsBox.innerHTML = '<div class="autocomplete-searching">Search failed.</div>';
-    }
-  }, 400);
-}
-
-function renderSuggestions(results, type, index) {
-  const resultsBox = document.getElementById(`${type}-suggestions-${index}`);
-  if (!resultsBox) return;
-  resultsBox.innerHTML = "";
-
-  if (!results || results.length === 0) {
-    resultsBox.innerHTML = '<div class="autocomplete-searching">No matches found.</div>';
-    setTimeout(() => (resultsBox.style.display = "none"), 2000);
-    return;
-  }
-
-  results.slice(0, 5).forEach((item) => {
-    const div = document.createElement("div");
-    div.className = "autocomplete-item";
-
-    if (type === "mbs") {
-      const preview =
-        item.description.length > 50
-          ? item.description.substring(0, 50) + "…"
-          : item.description;
-      div.innerText = `${item.item_number} — ${preview}`;
-      div.onclick = () => {
-        const codeEl = document.getElementById(`mbs-item-${index}`);
-        const descEl = document.getElementById(`mbs-desc-${index}`);
-        if (codeEl) codeEl.value = item.item_number;
-        if (descEl) descEl.value = item.description;
-        resultsBox.style.display = "none";
-      };
-    } else {
-      div.innerText = item.term;
-      div.onclick = () => {
-        const termEl = document.getElementById(`snomed-term-${index}`);
-        const codeEl = document.getElementById(`snomed-code-${index}`);
-        if (termEl) termEl.value = item.term;
-        if (codeEl) codeEl.value = item.concept_id;
-        resultsBox.style.display = "none";
-      };
-    }
-
-    resultsBox.appendChild(div);
-  });
-}
-
-// Close autocomplete dropdowns on outside click
-document.addEventListener("click", function (e) {
-  if (!e.target.closest(".input-wrapper")) {
-    document
-      .querySelectorAll(".autocomplete-results")
-      .forEach((el) => (el.style.display = "none"));
-  }
-});
-
-// ============================================================
-// FINALIZE RECORD
-// ============================================================
-
-async function approveAndFinalize() {
-  console.log("Finalize button clicked.");
-  document.getElementById("status").innerText = "⏳ Saving to Database...";
-  document.getElementById("status").style.color = "#0076d6";
-
-  const consultType =
-    (document.getElementById("consult-type") || {}).value || "";
-  const overrides = {
-    consultation_type: consultType,
-    mbs_items: [],
-    diagnoses: [],
-    medications: [],
-  };
-
-  // Collect all MBS rows
-  for (let i = 0; i < mbsRowCount; i++) {
-    const codeEl = document.getElementById(`mbs-item-${i}`);
-    if (!codeEl) continue; // row may have been removed
-    const code = codeEl.value.trim();
-    const desc = (document.getElementById(`mbs-desc-${i}`) || {}).value || "";
-    if (code) overrides.mbs_items.push({ item_number: code, description: desc });
-  }
-
-  // Collect all SNOMED rows
-  for (let i = 0; i < snomedRowCount; i++) {
-    const termEl = document.getElementById(`snomed-term-${i}`);
-    if (!termEl) continue;
-    const term = termEl.value.trim();
-    const code = (document.getElementById(`snomed-code-${i}`) || {}).value || "";
-    if (term) overrides.diagnoses.push({ term, snomed_ct_au_code: code });
-  }
-
-  // Collect all Rx rows
-  for (let i = 0; i < rxRowCount; i++) {
-    const nameEl = document.getElementById(`rx-name-${i}`);
-    if (!nameEl) continue;
-    const drug = nameEl.value.trim();
-    const dose = (document.getElementById(`rx-dose-${i}`) || {}).value || "";
-    if (drug) overrides.medications.push({ drug_name: drug, dosage_text: dose });
-  }
-
-  try {
-    const text = await getDocumentText();
-    // Call the dedicated finalize endpoint — no AI involved, just a DB save
-    const response = await fetch(BACKEND_URL + "api/v1/finalize", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        document_id: SESSION_ID,
-        text_delta: text,
-        clinician_overrides: overrides,
-        audio_url: currentAudioUrl
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-
-      if (data._saved === false) {
-        // Backend returned 200 but the DB save failed — show the real error
-        const errMsg = data._save_error || "Unknown database error";
-        document.getElementById("status").innerText = "❌ Save failed: " + errMsg;
-        document.getElementById("status").style.color = "red";
-        console.error("DB save error:", errMsg);
-      } else {
-        document.getElementById("status").innerText = "✅ Record Finalised & Saved.";
-        document.getElementById("status").style.color = "green";
-
-        // Lock the panel so the AI can't overwrite the saved record
-        isLocked = true;
-        updateLockUI();
-
-        // Disable the Finalize button to prevent double-saves
-        const btn = document.getElementById("btn-finalize");
-        if (btn) {
-          btn.disabled = true;
-          btn.textContent = "✅ Finalised";
-          btn.style.backgroundColor = "#6c757d";
-          btn.style.cursor = "default";
-        }
-
-        // Hide the ephemeral playback UI and clear the source to stop playback immediately
-        const player = document.getElementById("audio-playback");
-        if (player) {
-          player.pause();
-          player.src = "";
-          player.style.display = "none";
-        }
-        document.getElementById("raw-transcript").style.display = "none";
-        document.getElementById("btn-toggle-transcript").style.display = "none";
-        currentAudioUrl = null;
-      }
-    } else {
-      document.getElementById("status").innerText =
-        "❌ Server error: " + response.status;
-      document.getElementById("status").style.color = "red";
-    }
-  } catch (error) {
-    document.getElementById("status").innerText =
-      "❌ Network failure. Check your backend server.";
-    document.getElementById("status").style.color = "red";
-  }
-}
-
-// ============================================================
+// ═══════════════════════════════════════════════════════════
 // UTILITIES
-// ============================================================
+// ═══════════════════════════════════════════════════════════
 
 function escHtml(str) {
   return String(str || "")
@@ -631,3 +36,758 @@ function escHtml(str) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 }
+
+function formatDate(iso) {
+  if (!iso) return "—";
+  return new Date(iso).toLocaleDateString("en-AU");
+}
+
+function setStatus(msg) {
+  const el = document.getElementById("status-msg");
+  if (el) el.textContent = msg;
+}
+
+// ═══════════════════════════════════════════════════════════
+// API HELPER — attaches JWT, handles 401
+// ═══════════════════════════════════════════════════════════
+
+async function apiFetch(path, opts = {}) {
+  const headers = { ...(opts.headers || {}) };
+  if (!(opts.body instanceof FormData)) {
+    headers["Content-Type"] = headers["Content-Type"] || "application/json";
+  }
+  if (token) headers["Authorization"] = "Bearer " + token;
+  const res = await fetch(API_BASE + path, { ...opts, headers });
+  if (res.status === 401) {
+    logout();
+    return null;
+  }
+  return res;
+}
+
+// ═══════════════════════════════════════════════════════════
+// VIEW ROUTER
+// ═══════════════════════════════════════════════════════════
+
+function showView(viewId) {
+  document.querySelectorAll(".view").forEach(v => v.classList.add("hidden"));
+  document.getElementById(viewId).classList.remove("hidden");
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB ROUTER
+// ═══════════════════════════════════════════════════════════
+
+function showTab(tabName) {
+  document.querySelectorAll(".tab-btn").forEach(b =>
+    b.classList.toggle("active", b.dataset.tab === tabName)
+  );
+  document.querySelectorAll(".panel").forEach(p => p.classList.add("hidden"));
+  const panel = document.getElementById("panel-" + tabName);
+  if (panel) panel.classList.remove("hidden");
+}
+
+// ═══════════════════════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════════════════════
+
+async function login() {
+  const email    = document.getElementById("login-email").value.trim();
+  const password = document.getElementById("login-password").value;
+  const errEl    = document.getElementById("login-error");
+  const btn      = document.getElementById("btn-login");
+  errEl.classList.add("hidden");
+  btn.disabled = true;
+  btn.textContent = "Signing in…";
+  try {
+    const form = new URLSearchParams({ username: email, password });
+    const res  = await fetch(API_BASE + "/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: form.toString(),
+    });
+    if (!res.ok) {
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.detail || "Login failed");
+    }
+    const data = await res.json();
+    token = data.access_token;
+    localStorage.setItem("emr4_token", token);
+    showView("view-app");
+    initApp();
+  } catch (e) {
+    errEl.textContent = e.message;
+    errEl.classList.remove("hidden");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Sign In";
+  }
+}
+
+function logout() {
+  token = null;
+  currentPatient = null;
+  localStorage.removeItem("emr4_token");
+  showView("view-login");
+}
+
+// ═══════════════════════════════════════════════════════════
+// PATIENT BANNER & SEARCH
+// ═══════════════════════════════════════════════════════════
+
+function setBanner(patient) {
+  document.getElementById("patient-name").textContent = patient
+    ? `${patient.last_name}, ${patient.first_name}`
+    : "No patient loaded";
+  document.getElementById("patient-meta").textContent = patient
+    ? `DOB: ${formatDate(patient.date_of_birth)} · Medicare: ${patient.medicare_number || "—"}`
+    : "";
+}
+
+async function searchPatients(query) {
+  if (!query) return;
+  const res = await apiFetch(`/patients/search?q=${encodeURIComponent(query)}&limit=10`);
+  if (!res) return;
+  const patients = await res.json();
+  const container = document.getElementById("patient-search-results");
+  container.innerHTML = "";
+  if (!patients.length) {
+    container.innerHTML = '<div class="search-result-item"><span class="search-result-meta">No results found.</span></div>';
+    return;
+  }
+  patients.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "search-result-item";
+    div.innerHTML = `
+      <div class="search-result-name">${escHtml(p.last_name)}, ${escHtml(p.first_name)}</div>
+      <div class="search-result-meta">DOB: ${formatDate(p.date_of_birth)} · Medicare: ${escHtml(p.medicare_number || "—")}</div>
+    `;
+    div.onclick = () => loadPatient(p.id);
+    container.appendChild(div);
+  });
+}
+
+async function loadPatient(patientId) {
+  document.getElementById("search-panel").classList.add("hidden");
+  document.getElementById("patient-search-input").value = "";
+  document.getElementById("patient-search-results").innerHTML = "";
+
+  const res = await apiFetch(`/patients/${patientId}/summary`);
+  if (!res || !res.ok) return;
+  const data = await res.json();
+  currentPatient = data.patient;
+  setBanner(currentPatient);
+
+  // Pre-populate whichever tabs are already visible
+  if (!document.getElementById("panel-history").classList.contains("hidden")) loadHistory();
+  if (!document.getElementById("panel-meds").classList.contains("hidden")) loadMeds();
+  if (!document.getElementById("panel-allergies").classList.contains("hidden")) renderAllergies(data.allergies || []);
+}
+
+// ═══════════════════════════════════════════════════════════
+// HISTORY TAB
+// ═══════════════════════════════════════════════════════════
+
+window.loadHistory = async function () {
+  if (!currentPatient) { return; }
+  const list = document.getElementById("history-list");
+  list.innerHTML = '<div class="placeholder">Loading…</div>';
+  const res = await apiFetch(`/patients/${currentPatient.id}/encounters`);
+  if (!res || !res.ok) { list.innerHTML = '<div class="placeholder">Failed to load.</div>'; return; }
+  const encounters = await res.json();
+  list.innerHTML = "";
+  if (!encounters.length) {
+    list.innerHTML = '<div class="placeholder">No encounters on record.</div>';
+    return;
+  }
+  encounters.forEach(e => {
+    const card = document.createElement("div");
+    card.className = "card encounter-card";
+    card.innerHTML = `
+      <div class="card-header">
+        <div>
+          <div class="card-title">${escHtml(e.chief_complaint || "Consultation")}</div>
+          <div class="card-meta">${formatDate(e.consultation_date)}</div>
+        </div>
+        <span class="card-badge">${escHtml(e.status || "")}</span>
+      </div>
+      ${e.soap_subjective ? `<div class="encounter-notes">${escHtml(e.soap_subjective)}</div>` : ""}
+    `;
+    list.appendChild(card);
+  });
+};
+
+// ═══════════════════════════════════════════════════════════
+// MEDS TAB
+// ═══════════════════════════════════════════════════════════
+
+window.loadMeds = async function () {
+  if (!currentPatient) { return; }
+  const list = document.getElementById("meds-list");
+  list.innerHTML = '<div class="placeholder">Loading…</div>';
+  const res = await apiFetch(`/patients/${currentPatient.id}/medications`);
+  if (!res || !res.ok) { list.innerHTML = '<div class="placeholder">Failed to load.</div>'; return; }
+  const meds = await res.json();
+  list.innerHTML = "";
+  if (!meds.length) {
+    list.innerHTML = '<div class="placeholder">No active medications.</div>';
+    return;
+  }
+  meds.forEach(m => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="card-title">${escHtml(m.drug_name)}</div>
+        <span class="card-badge">${escHtml(m.route || "oral")}</span>
+      </div>
+      <div class="card-meta">${escHtml(m.dosage_text || "")}${m.frequency ? " · " + escHtml(m.frequency) : ""}</div>
+    `;
+    list.appendChild(card);
+  });
+};
+
+// ═══════════════════════════════════════════════════════════
+// ALLERGIES TAB
+// ═══════════════════════════════════════════════════════════
+
+function renderAllergies(allergies) {
+  const list = document.getElementById("allergies-list");
+  list.innerHTML = "";
+  if (!allergies.length) {
+    list.innerHTML = '<div class="placeholder">No recorded allergies.</div>';
+    return;
+  }
+  allergies.forEach(a => {
+    const sev = (a.severity || "").toLowerCase();
+    const badgeClass = sev === "severe" || sev === "life-threatening" ? "severe" : "allergy";
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-header">
+        <div>
+          <div class="card-title">${escHtml(a.substance)}</div>
+          <div class="card-meta">${escHtml(a.reaction || "")}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="card-badge ${badgeClass}">${escHtml(a.severity || "—")}</span>
+          <button class="btn btn-xs btn-danger" onclick="deleteAllergy('${escHtml(a.id)}')">✕</button>
+        </div>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+async function loadAllergies() {
+  if (!currentPatient) return;
+  const res = await apiFetch(`/patients/${currentPatient.id}/allergies`);
+  if (!res || !res.ok) return;
+  renderAllergies(await res.json());
+}
+
+window.addAllergy = async function () {
+  if (!currentPatient) { alert("Load a patient first."); return; }
+  const substance = document.getElementById("allergy-substance").value.trim();
+  const reaction  = document.getElementById("allergy-reaction").value.trim();
+  const severity  = document.getElementById("allergy-severity").value;
+  if (!substance) return;
+  const res = await apiFetch(`/patients/${currentPatient.id}/allergies`, {
+    method: "POST",
+    body: JSON.stringify({ substance, reaction, severity, allergy_type: "Drug" }),
+  });
+  if (!res || !res.ok) { alert("Failed to add allergy."); return; }
+  document.getElementById("allergy-substance").value = "";
+  document.getElementById("allergy-reaction").value = "";
+  document.getElementById("allergy-severity").value = "";
+  loadAllergies();
+};
+
+window.deleteAllergy = async function (allergyId) {
+  if (!currentPatient) return;
+  await apiFetch(`/patients/${currentPatient.id}/allergies/${allergyId}`, { method: "DELETE" });
+  loadAllergies();
+};
+
+// ═══════════════════════════════════════════════════════════
+// LETTERS TAB
+// ═══════════════════════════════════════════════════════════
+
+window.draftLetter = async function () {
+  if (!currentPatient) { alert("Load a patient first."); return; }
+  const btn       = document.getElementById("btn-draft-letter");
+  const letterType = document.getElementById("letter-type").value;
+  const recipient  = document.getElementById("letter-recipient").value.trim();
+  const specialty  = document.getElementById("letter-specialty").value.trim();
+  const reason     = document.getElementById("letter-reason").value.trim();
+
+  btn.disabled = true;
+  btn.textContent = "Drafting…";
+  try {
+    const res = await apiFetch(`/patients/${currentPatient.id}/letters/draft`, {
+      method: "POST",
+      body: JSON.stringify({
+        letter_type: letterType,
+        recipient_name: recipient || null,
+        recipient_specialty: specialty || null,
+        reason,
+      }),
+    });
+    if (!res || !res.ok) { alert("Letter draft failed."); return; }
+    const data = await res.json();
+    document.getElementById("letter-subject").textContent = data.subject_line || "";
+    document.getElementById("letter-body").value = data.letter_text || "";
+    document.getElementById("letter-output").classList.remove("hidden");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = "✨ Draft with AI";
+  }
+};
+
+window.insertLetterIntoWord = async function () {
+  const text = document.getElementById("letter-body").value;
+  if (!text) return;
+  await Word.run(async ctx => {
+    ctx.document.body.insertText(text, Word.InsertLocation.replace);
+    await ctx.sync();
+  });
+};
+
+window.copyLetter = function () {
+  const text = document.getElementById("letter-body").value;
+  navigator.clipboard.writeText(text).catch(() => {
+    document.getElementById("letter-body").select();
+    document.execCommand("copy");
+  });
+};
+
+// ═══════════════════════════════════════════════════════════
+// CONSULT TAB — LOCK / UNLOCK
+// ═══════════════════════════════════════════════════════════
+
+window.toggleLock = function () {
+  isLocked = !isLocked;
+  updateLockUI();
+  if (!isLocked && lastAiResponse) {
+    updateFormFields(lastAiResponse);
+    setStatus("Last sync: " + new Date().toLocaleTimeString());
+  }
+};
+
+function autoLock() {
+  if (!isLocked) { isLocked = true; updateLockUI(); }
+}
+
+function updateLockUI() {
+  const btn = document.getElementById("btn-lock");
+  if (!btn) return;
+  if (isLocked) {
+    btn.className = "btn btn-sm btn-lock locked";
+    btn.querySelector(".lock-icon").textContent = "🔒";
+    btn.querySelector(".lock-label").textContent = "Locked";
+  } else {
+    btn.className = "btn btn-sm btn-lock unlocked";
+    btn.querySelector(".lock-icon").textContent = "🔓";
+    btn.querySelector(".lock-label").textContent = "AI live";
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// CONSULT TAB — BACKGROUND SYNC
+// ═══════════════════════════════════════════════════════════
+
+async function getDocumentText() {
+  return Word.run(async ctx => {
+    const body = ctx.document.body;
+    body.load("text");
+    await ctx.sync();
+    return body.text;
+  });
+}
+
+async function runBackgroundSync() {
+  if (isRecording || isSyncing) return;
+  isSyncing = true;
+  try {
+    const text = await getDocumentText();
+    if (!text || !text.trim()) {
+      if (!isLocked) updateFormFields({});
+      setStatus("Ready.");
+      lastSyncedText = "";
+      return;
+    }
+    if (text === lastSyncedText) return;
+    lastSyncedText = text;
+    setStatus(isLocked ? "🔒 AI running in background…" : "Analysing…");
+
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers["Authorization"] = "Bearer " + token;
+    const res = await fetch(API_BASE + "/analyze-consultation", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        document_id: SESSION_ID,
+        text_delta: text,
+        is_finalized: false,
+        clinician_overrides: null,
+      }),
+    });
+    const data = await res.json();
+    lastAiResponse = data;
+    if (!isLocked) {
+      updateFormFields(data);
+      setStatus("Synced " + new Date().toLocaleTimeString());
+    } else {
+      setStatus("🔒 Locked — unlock to apply.");
+    }
+  } catch {
+    setStatus("Waiting for backend…");
+  } finally {
+    isSyncing = false;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// CONSULT TAB — AUDIO SCRIBE
+// ═══════════════════════════════════════════════════════════
+
+async function toggleRecording() {
+  const btn         = document.getElementById("btn-record");
+  const audioStatus = document.getElementById("audio-status");
+  if (!isRecording) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks   = [];
+      mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+      mediaRecorder.onstop = processAudio;
+      mediaRecorder.start();
+      isRecording = true;
+      btn.textContent = "⏹️ Stop Recording";
+      btn.classList.add("recording");
+      audioStatus.classList.remove("hidden");
+      setStatus("Capturing consultation audio…");
+    } catch {
+      alert("Microphone access is required for the AI Scribe.");
+    }
+  } else {
+    mediaRecorder.stop();
+    mediaRecorder.stream.getTracks().forEach(t => t.stop());
+    isRecording = false;
+    btn.textContent = "🎤 Start Recording";
+    btn.classList.remove("recording");
+    audioStatus.classList.add("hidden");
+  }
+}
+
+async function processAudio() {
+  setStatus("⏳ Processing audio with Vertex AI…");
+  const blob = new Blob(audioChunks, { type: "audio/webm" });
+  const form = new FormData();
+  form.append("audio_file", blob, "consultation.webm");
+  try {
+    const headers = {};
+    if (token) headers["Authorization"] = "Bearer " + token;
+    const res  = await fetch(API_BASE + "/scribe-consultation", { method: "POST", headers, body: form });
+    const data = await res.json();
+
+    updateFormFields(data);
+
+    if (data.audio_url) {
+      currentAudioUrl = data.audio_url;
+      const player    = document.getElementById("audio-playback");
+      player.src      = BACKEND_URL + data.audio_url;
+      player.classList.remove("hidden");
+    }
+    if (data.raw_transcript) {
+      document.getElementById("raw-transcript").value = data.raw_transcript;
+      document.getElementById("transcript-row").classList.remove("hidden");
+    }
+
+    setStatus("✅ Audio scribe complete.");
+    isLocked = true;
+    updateLockUI();
+
+    if (data.generated_clinical_note) {
+      Word.run(async ctx => {
+        ctx.document.body.insertParagraph(data.generated_clinical_note, Word.InsertLocation.end);
+        await ctx.sync();
+      });
+    }
+  } catch {
+    setStatus("❌ Scribe failed.");
+  }
+}
+
+window.toggleTranscript = function () {
+  document.getElementById("raw-transcript").classList.toggle("hidden");
+};
+
+// ═══════════════════════════════════════════════════════════
+// CONSULT TAB — FORM RENDERING
+// ═══════════════════════════════════════════════════════════
+
+function updateFormFields(response) {
+  const meta = response.encounter_metadata || {};
+  const consultField = document.getElementById("consult-type");
+  if (consultField && !consultField.value) consultField.value = meta.consultation_type || "";
+
+  const mbsItems  = meta.mbs_item_candidates?.length ? meta.mbs_item_candidates : [{}];
+  const diagnoses = response.clinical_diagnoses?.length ? response.clinical_diagnoses : [{}];
+  const rx        = response.medications_and_prescriptions?.length ? response.medications_and_prescriptions : [{}];
+
+  document.getElementById("mbs-container").innerHTML = "";    mbsRowCount    = 0;
+  document.getElementById("snomed-container").innerHTML = ""; snomedRowCount = 0;
+  document.getElementById("rx-container").innerHTML = "";     rxRowCount     = 0;
+
+  mbsItems.forEach(m  => appendMbsRow(m.item_number || "", m.description || ""));
+  diagnoses.forEach(d => appendSnomedRow(d.term || "", d.snomed_ct_au_code || ""));
+  rx.forEach(m        => appendRxRow(m.drug_name || "", m.dosage_text || ""));
+}
+
+// ═══════════════════════════════════════════════════════════
+// ROW BUILDERS
+// ═══════════════════════════════════════════════════════════
+
+function appendMbsRow(itemNumber, description) {
+  const i = mbsRowCount++;
+  const div = document.createElement("div");
+  div.className = "coding-row";
+  div.id = `mbs-group-${i}`;
+  div.innerHTML = `
+    <div class="input-wrapper">
+      <input type="text" id="mbs-item-${i}" class="input" value="${escHtml(itemNumber)}" autocomplete="off" placeholder="MBS code…">
+      <div id="mbs-suggestions-${i}" class="autocomplete-results"></div>
+    </div>
+    <input type="text" id="mbs-desc-${i}" class="input" value="${escHtml(description)}" placeholder="Description" readonly style="flex:2">
+    <button class="btn-remove" onclick="removeRow('mbs-group-${i}')">✕</button>
+  `;
+  document.getElementById("mbs-container").appendChild(div);
+  document.getElementById(`mbs-item-${i}`).addEventListener("keyup", () => handleKeystroke("mbs", i));
+}
+
+function appendSnomedRow(term, code) {
+  const i = snomedRowCount++;
+  const div = document.createElement("div");
+  div.className = "coding-row";
+  div.id = `snomed-group-${i}`;
+  div.innerHTML = `
+    <div class="input-wrapper" style="flex:2">
+      <input type="text" id="snomed-term-${i}" class="input" value="${escHtml(term)}" autocomplete="off" placeholder="Diagnosis…">
+      <div id="snomed-suggestions-${i}" class="autocomplete-results"></div>
+    </div>
+    <input type="text" id="snomed-code-${i}" class="input" value="${escHtml(code)}" placeholder="SNOMED code" readonly style="flex:0 0 90px">
+    <button class="btn-remove" onclick="removeRow('snomed-group-${i}')">✕</button>
+  `;
+  document.getElementById("snomed-container").appendChild(div);
+  document.getElementById(`snomed-term-${i}`).addEventListener("keyup", () => handleKeystroke("snomed", i));
+}
+
+function appendRxRow(drugName, dosage) {
+  const i = rxRowCount++;
+  const div = document.createElement("div");
+  div.className = "coding-row";
+  div.id = `rx-group-${i}`;
+  div.innerHTML = `
+    <input type="text" id="rx-name-${i}" class="input" value="${escHtml(drugName)}" placeholder="Drug name…" style="flex:2">
+    <input type="text" id="rx-dose-${i}" class="input" value="${escHtml(dosage)}" placeholder="Dosage…" style="flex:1">
+    <button class="btn-remove" onclick="removeRow('rx-group-${i}')">✕</button>
+  `;
+  document.getElementById("rx-container").appendChild(div);
+}
+
+window.addMbsRow    = function () { autoLock(); appendMbsRow("", ""); };
+window.addSnomedRow = function () { autoLock(); appendSnomedRow("", ""); };
+window.addRxRow     = function () { autoLock(); appendRxRow("", ""); };
+window.removeRow    = function (id) { autoLock(); document.getElementById(id)?.remove(); };
+
+// ═══════════════════════════════════════════════════════════
+// AUTOCOMPLETE ENGINE
+// ═══════════════════════════════════════════════════════════
+
+async function handleKeystroke(type, index) {
+  clearTimeout(typeaheadTimer);
+  const inputEl = document.getElementById(type === "mbs" ? `mbs-item-${index}` : `snomed-term-${index}`);
+  if (!inputEl) return;
+  const query = inputEl.value.trim();
+  const box   = document.getElementById(`${type}-suggestions-${index}`);
+  if (!box) return;
+  if (query.length < 2) { box.style.display = "none"; return; }
+
+  typeaheadTimer = setTimeout(async () => {
+    box.style.display = "block";
+    box.innerHTML = '<div class="autocomplete-searching">Searching…</div>';
+    try {
+      const endpoint = type === "mbs" ? "search-mbs" : "search-snomed";
+      const res = await fetch(`${API_BASE}/${endpoint}?q=${encodeURIComponent(query)}`);
+      renderSuggestions(await res.json(), type, index);
+    } catch {
+      box.innerHTML = '<div class="autocomplete-searching">Search failed.</div>';
+    }
+  }, 400);
+}
+
+function renderSuggestions(results, type, index) {
+  const box = document.getElementById(`${type}-suggestions-${index}`);
+  if (!box) return;
+  box.innerHTML = "";
+  if (!results?.length) {
+    box.innerHTML = '<div class="autocomplete-searching">No matches found.</div>';
+    setTimeout(() => (box.style.display = "none"), 2000);
+    return;
+  }
+  results.slice(0, 5).forEach(item => {
+    const div = document.createElement("div");
+    div.className = "autocomplete-item";
+    if (type === "mbs") {
+      div.textContent = `${item.item_number} — ${item.description.substring(0, 55)}`;
+      div.onclick = () => {
+        document.getElementById(`mbs-item-${index}`).value = item.item_number;
+        document.getElementById(`mbs-desc-${index}`).value = item.description;
+        box.style.display = "none";
+      };
+    } else {
+      div.textContent = item.term;
+      div.onclick = () => {
+        document.getElementById(`snomed-term-${index}`).value = item.term;
+        document.getElementById(`snomed-code-${index}`).value = item.concept_id;
+        box.style.display = "none";
+      };
+    }
+    box.appendChild(div);
+  });
+}
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".input-wrapper")) {
+    document.querySelectorAll(".autocomplete-results").forEach(el => (el.style.display = "none"));
+  }
+});
+
+// ═══════════════════════════════════════════════════════════
+// FINALIZE RECORD
+// ═══════════════════════════════════════════════════════════
+
+async function approveAndFinalize() {
+  setStatus("⏳ Saving to database…");
+  const consultType = document.getElementById("consult-type")?.value || "";
+  const overrides   = { consultation_type: consultType, mbs_items: [], diagnoses: [], medications: [] };
+
+  for (let i = 0; i < mbsRowCount; i++) {
+    const code = document.getElementById(`mbs-item-${i}`)?.value.trim();
+    if (code) overrides.mbs_items.push({ item_number: code, description: document.getElementById(`mbs-desc-${i}`)?.value || "" });
+  }
+  for (let i = 0; i < snomedRowCount; i++) {
+    const term = document.getElementById(`snomed-term-${i}`)?.value.trim();
+    if (term) overrides.diagnoses.push({ term, snomed_ct_au_code: document.getElementById(`snomed-code-${i}`)?.value || "" });
+  }
+  for (let i = 0; i < rxRowCount; i++) {
+    const drug = document.getElementById(`rx-name-${i}`)?.value.trim();
+    if (drug) overrides.medications.push({ drug_name: drug, dosage_text: document.getElementById(`rx-dose-${i}`)?.value || "" });
+  }
+
+  try {
+    const text    = await getDocumentText();
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers["Authorization"] = "Bearer " + token;
+    const res = await fetch(API_BASE + "/finalize", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ document_id: SESSION_ID, text_delta: text, clinician_overrides: overrides, audio_url: currentAudioUrl }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data._saved === false) {
+        setStatus("❌ " + (data._save_error || "Save failed"));
+      } else {
+        setStatus("✅ Record finalised & saved.");
+        isLocked = true;
+        updateLockUI();
+        const btn = document.getElementById("btn-finalize");
+        if (btn) { btn.disabled = true; btn.textContent = "✅ Finalised"; }
+        const player = document.getElementById("audio-playback");
+        if (player) { player.pause(); player.src = ""; player.classList.add("hidden"); }
+        document.getElementById("transcript-row")?.classList.add("hidden");
+        currentAudioUrl = null;
+      }
+    } else {
+      setStatus("❌ Server error " + res.status);
+    }
+  } catch {
+    setStatus("❌ Network error. Check the backend.");
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT APP (called after successful login or token resume)
+// ═══════════════════════════════════════════════════════════
+
+function initApp() {
+  showTab("consult");
+  setBanner(null);
+  setStatus("Ready.");
+
+  // Seed one empty row in each coding section
+  updateFormFields({});
+
+  runBackgroundSync();
+  Office.context.document.addHandlerAsync(
+    Office.EventType.DocumentSelectionChanged,
+    () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// OFFICE ON READY
+// ═══════════════════════════════════════════════════════════
+
+Office.onReady(info => {
+  if (info.host !== Office.HostType.Word) return;
+
+  // ── Tab navigation ──────────────────────────────────────
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.onclick = () => {
+      showTab(btn.dataset.tab);
+      if (btn.dataset.tab === "history")  loadHistory();
+      if (btn.dataset.tab === "meds")     loadMeds();
+      if (btn.dataset.tab === "allergies") loadAllergies();
+    };
+  });
+
+  // ── Auth ────────────────────────────────────────────────
+  document.getElementById("btn-login").onclick = login;
+  document.getElementById("login-password").addEventListener("keydown", e => {
+    if (e.key === "Enter") login();
+  });
+  document.getElementById("btn-logout").onclick = logout;
+
+  // ── Patient search ──────────────────────────────────────
+  const searchPanel = document.getElementById("search-panel");
+  const searchInput = document.getElementById("patient-search-input");
+  document.getElementById("btn-search-patient").onclick = () => {
+    searchPanel.classList.toggle("hidden");
+    if (!searchPanel.classList.contains("hidden")) searchInput.focus();
+  };
+  let searchDebounce;
+  searchInput.addEventListener("input", () => {
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(() => searchPatients(searchInput.value.trim()), 350);
+  });
+
+  // ── Consult buttons ─────────────────────────────────────
+  document.getElementById("btn-record").onclick   = toggleRecording;
+  document.getElementById("btn-finalize").onclick = approveAndFinalize;
+
+  // Auto-lock when the GP types in the consult panel
+  document.addEventListener("input", e => {
+    if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
+  });
+
+  // ── Resume session or show login ─────────────────────────
+  if (token) {
+    showView("view-app");
+    initApp();
+  } else {
+    showView("view-login");
+  }
+});
