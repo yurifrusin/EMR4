@@ -9,6 +9,8 @@ const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
 // ─── STATE ──────────────────────────────────────────────────
 let token          = localStorage.getItem("emr4_token");
 let currentPatient = null;
+let isMaximized    = false;
+let origDimensions = null;
 
 // Consult tab state
 let isLocked       = false;
@@ -73,6 +75,46 @@ function showView(viewId) {
   document.querySelectorAll(".view").forEach(v => v.classList.add("hidden"));
   document.getElementById(viewId).classList.remove("hidden");
 }
+
+// ═══════════════════════════════════════════════════════════
+// MAXIMIZE / RESTORE
+// ═══════════════════════════════════════════════════════════
+
+window.toggleMaximize = function () {
+  const btn = document.getElementById("btn-maximize");
+  if (!isMaximized) {
+    // Snapshot position and size before expanding
+    origDimensions = {
+      width: window.outerWidth,
+      height: window.outerHeight,
+      x: window.screenX,
+      y: window.screenY,
+    };
+    try {
+      // screen.availWidth/Height reflects the monitor the window is currently on
+      window.resizeTo(screen.availWidth, screen.availHeight);
+      window.moveTo(screen.availLeft || 0, screen.availTop || 0);
+    } catch (e) {
+      // Embedded taskpane mode — resize not permitted; CSS expansion still applies
+    }
+    document.body.classList.add("maximized");
+    isMaximized = true;
+    btn.textContent = "↩";
+    btn.title = "Restore to original position";
+  } else {
+    if (origDimensions) {
+      try {
+        window.resizeTo(origDimensions.width, origDimensions.height);
+        window.moveTo(origDimensions.x, origDimensions.y);
+      } catch (e) {}
+    }
+    document.body.classList.remove("maximized");
+    isMaximized = false;
+    origDimensions = null;
+    btn.textContent = "⛶";
+    btn.title = "Maximize to screen";
+  }
+};
 
 // ═══════════════════════════════════════════════════════════
 // TAB ROUTER
@@ -144,6 +186,31 @@ function setBanner(patient) {
     : "";
 }
 
+function populateSidebar(summary) {
+  const dxEl    = document.getElementById("sidebar-dx");
+  const medsEl  = document.getElementById("sidebar-meds");
+  const allerEl = document.getElementById("sidebar-allergies");
+  if (!dxEl) return;
+
+  const dx = summary.active_diagnoses || [];
+  dxEl.innerHTML = dx.length
+    ? dx.map(d => `<div class="sidebar-chip"><span class="chip-label">${escHtml(d.term || "")}</span></div>`).join("")
+    : '<div class="placeholder" style="font-size:11px">None recorded.</div>';
+
+  const meds = summary.active_medications || [];
+  medsEl.innerHTML = meds.length
+    ? meds.map(m => `<div class="sidebar-chip"><span class="chip-label">${escHtml(m.drug_name)}</span><span class="chip-meta">${escHtml(m.dosage_text || "")}</span></div>`).join("")
+    : '<div class="placeholder" style="font-size:11px">None active.</div>';
+
+  const allergies = summary.allergies || [];
+  allerEl.innerHTML = allergies.length
+    ? allergies.map(a => {
+        const cls = ["severe","life-threatening"].includes((a.severity||"").toLowerCase()) ? "danger" : "";
+        return `<div class="sidebar-chip ${cls}"><span class="chip-label">${escHtml(a.substance)}</span><span class="chip-meta">${escHtml(a.reaction || a.severity || "")}</span></div>`;
+      }).join("")
+    : '<div class="placeholder" style="font-size:11px">NKDA</div>';
+}
+
 async function searchPatients(query) {
   if (!query) return;
   const res = await apiFetch(`/patients/search?q=${encodeURIComponent(query)}&limit=10`);
@@ -177,6 +244,7 @@ async function loadPatient(patientId) {
   const data = await res.json();
   currentPatient = data.patient;
   setBanner(currentPatient);
+  populateSidebar(data);
 
   // Pre-populate whichever tabs are already visible
   if (!document.getElementById("panel-history").classList.contains("hidden")) loadHistory();
@@ -753,6 +821,9 @@ Office.onReady(info => {
       if (btn.dataset.tab === "allergies") loadAllergies();
     };
   });
+
+  // ── Maximize / restore ──────────────────────────────────
+  document.getElementById("btn-maximize").onclick = toggleMaximize;
 
   // ── Auth ────────────────────────────────────────────────
   document.getElementById("btn-login").onclick = login;
