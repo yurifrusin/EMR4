@@ -1,0 +1,22 @@
+Windows Terminal (Frontend):
+
+cd /d "C:\users\yurifrusin\EMR4"
+npm start
+
+Ubuntu WSL Terminal (Backend & Infrastructure):
+
+# Terminal 1: Spin up database
+cd /mnt/c/Users/YuriFrusin/Documents/EMR4
+sudo service docker start
+docker compose up -d
+
+Powershell:
+
+# Terminal 2: Run application engine
+cd c:/users/yurifrusin/documents/emr4
+.\.venv\Scripts\Activate.ps1
+$env:GEMINI_API_KEY="AQ.Ab8RN6LQ35iRutlvGfCJS8coy4KzU6R8RbduwB07s1zhU_xNHQ"
+uvicorn main:app --reload --port 8001
+
+# Terminal 3: Open reverse proxy tunnel
+ngrok http 8001

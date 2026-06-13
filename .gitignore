@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+gcp-key.json
+google-credentials*.json
+service-account*.json
+credentials*.json
+secrets*.json
+
+# Patient / clinical data and local databases
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.dump
+*.sql
+exports/
+backups/
+uploads/
+downloads/
+patient_data/
+clinical_data/
+
+# Audio / transcripts / generated media
+static/audio/
+*.webm
+*.wav
+*.mp3
+*.m4a
+*.ogg
+transcripts/
+
+# Logs and runtime files
+*.log
+logs/
+tmp/
+temp/
+*.pid
+
+# Node / Office add-in sidebar
+EMR4 Sidebar/node_modules/
+EMR4 Sidebar/dist/
+EMR4 Sidebar/build/
+EMR4 Sidebar/.env
+EMR4 Sidebar/.env.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+EMR4 Sidebar/.vscode/*
+!EMR4 Sidebar/.vscode/extensions.json
+
+# Large/generated MBS derived files
+MBS/mbs_unstructured/
+MBS/*.jsonl

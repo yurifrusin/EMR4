@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EMR4 Copilot</title>
+
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+</head>
+<body class="ms-font-m ms-Fabric">
+  <div class="sidebar-container">
+    <div class="header-row">
+      <h2>EMR4 Copilot</h2>
+      <!-- NEW AUDIO CONTROLS -->
+      <div class="audio-controls">
+        <button id="btn-record" class="btn-record">🎤 Start Recording</button>
+        <div id="audio-status" class="audio-status" style="display: none;">
+          <span class="recording-dot"></span> Listening...
+        </div>
+      </div>
+
+    <div id="status" class="status-indicator">Initializing workspace...</div>
+      <button id="btn-lock" class="btn-lock unlocked" onclick="toggleLock()" title="Toggle AI auto-update">
+        <span class="lock-icon">🔓</span>
+        <span class="lock-label">Unlocked</span>
+      </button>
+    </div>
+
+    <!-- EPHEMERAL PLAYBACK CONTROLS -->
+    <audio id="audio-playback" controls style="display: none; width: 100%; margin-top: 10px;"></audio>
+    <button id="btn-toggle-transcript" class="btn-add" style="display: none; margin-top: 10px; width: 100%; background: #eee; color: #333;" onclick="toggleTranscript()">View Raw Transcript</button>
+    <textarea id="raw-transcript" readonly style="display: none; width: 100%; height: 100px; margin-top: 5px; font-size: 12px; font-family: monospace;"></textarea>
+    <!-- END EPHEMERAL PLAYBACK CONTROLS -->
+
+    <div class="section-title">Consultation Metadata</div>
+    <div class="form-group">
+      <label>Consultation Type</label>
+      <input type="text" id="consult-type" placeholder="Auto-filled from AI analysis...">
+    </div>
+
+    <div class="section-title">MBS Items</div>
+    <div id="mbs-container"></div>
+    <button class="btn-add" id="btn-add-mbs" onclick="addMbsRow()">+ Add MBS Item</button>
+
+    <div class="section-title">Clinical Diagnoses (SNOMED)</div>
+    <div id="snomed-container"></div>
+    <button class="btn-add" id="btn-add-snomed" onclick="addSnomedRow()">+ Add Diagnosis</button>
+
+    <div class="section-title">Prescriptions (AMT)</div>
+    <div id="rx-container"></div>
+    <button class="btn-add" id="btn-add-rx" onclick="addRxRow()">+ Add Medication</button>
+
+    <button class="btn-finalize" id="btn-finalize">Approve &amp; Finalise Record</button>
+  </div>
+</body>
+</html>
