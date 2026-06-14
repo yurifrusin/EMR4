@@ -79,3 +79,7 @@ EMR4 Sidebar/.vscode/*
 # Large/generated MBS derived files
 MBS/mbs_unstructured/
 MBS/*.jsonl
+
+# Gemini conversation exports
+Gemini_conversation.md
+gemini-code-*.md
