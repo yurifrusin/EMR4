@@ -6,21 +6,9 @@ const BACKEND_URL = "http://localhost:8001";
 const API_BASE    = BACKEND_URL + "/api/v1";
 const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
 
-// ─── DIALOG MODE DETECTION ───────────────────────────────────
-// When this page is opened via displayDialogAsync the URL hash
-// contains "#dialog&t=<JWT>". We detect that here, before any
-// Office.onReady logic, so the whole app can adjust accordingly.
-const _hash       = window.location.hash;
-const IS_DIALOG   = _hash.includes("#dialog");
-if (IS_DIALOG) {
-  const m = _hash.match(/[?&]?t=([^&]*)/);
-  if (m?.[1]) localStorage.setItem("emr4_token", decodeURIComponent(m[1]));
-}
-
 // ─── STATE ──────────────────────────────────────────────────
 let token          = localStorage.getItem("emr4_token");
 let currentPatient = null;
-let dialogRef      = null;   // Office dialog object (main taskpane side)
 
 // Consult tab state
 let isLocked       = false;
@@ -85,53 +73,6 @@ function showView(viewId) {
   document.querySelectorAll(".view").forEach(v => v.classList.add("hidden"));
   document.getElementById(viewId).classList.remove("hidden");
 }
-
-// ═══════════════════════════════════════════════════════════
-// POP-OUT / ANCHOR BACK
-// ═══════════════════════════════════════════════════════════
-// In docked taskpane mode: ⛶ opens the app as a free-floating
-// OS window via displayDialogAsync — the window can be dragged
-// to any monitor and resized freely.
-//
-// In dialog/pop-out mode: ↩ closes the floating window and
-// returns control to the docked taskpane.
-// ═══════════════════════════════════════════════════════════
-
-window.toggleMaximize = function () {
-  if (IS_DIALOG) {
-    // We are the floating window — close and return to taskpane
-    Office.context.ui.messageParent("close-dialog");
-    return;
-  }
-
-  // We are the docked taskpane — pop out
-  if (!token) { alert("Sign in before popping out."); return; }
-
-  const dialogUrl = window.location.origin + window.location.pathname
-    + "#dialog&t=" + encodeURIComponent(token);
-
-  Office.context.ui.displayDialogAsync(
-    dialogUrl,
-    { width: 55, height: 88, displayInIframe: false },
-    result => {
-      if (result.status !== Office.AsyncResultStatus.Succeeded) {
-        console.error("Pop-out failed:", result.error?.message);
-        return;
-      }
-      dialogRef = result.value;
-      dialogRef.addEventHandler(Office.EventType.DialogMessageReceived, msg => {
-        if (msg.message === "close-dialog") {
-          dialogRef.close();
-          dialogRef = null;
-        }
-      });
-      // User closed the window via the OS ✕ button
-      dialogRef.addEventHandler(Office.EventType.DialogEventReceived, () => {
-        dialogRef = null;
-      });
-    }
-  );
-};
 
 // ═══════════════════════════════════════════════════════════
 // TAB ROUTER
@@ -478,10 +419,6 @@ function updateLockUI() {
 // ═══════════════════════════════════════════════════════════
 
 async function getDocumentText() {
-  if (IS_DIALOG) {
-    // Main taskpane keeps this key fresh every 3 s via the Word bridge
-    return localStorage.getItem("emr4_bridge_doctext") || "";
-  }
   return Word.run(async ctx => {
     const body = ctx.document.body;
     body.load("text");
@@ -490,30 +427,18 @@ async function getDocumentText() {
   });
 }
 
-// Route a Word insertion through the main taskpane when in dialog mode.
-// In docked mode executes directly.
 function _wordInsertParagraph(text) {
-  if (IS_DIALOG) {
-    localStorage.setItem("emr4_bridge_cmd",
-      JSON.stringify({ type: "insert-paragraph", text }));
-  } else {
-    Word.run(async ctx => {
-      ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
-      await ctx.sync();
-    });
-  }
+  Word.run(async ctx => {
+    ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
+    await ctx.sync();
+  });
 }
 
 function _wordInsertReplace(text) {
-  if (IS_DIALOG) {
-    localStorage.setItem("emr4_bridge_cmd",
-      JSON.stringify({ type: "insert-replace", text }));
-  } else {
-    Word.run(async ctx => {
-      ctx.document.body.insertText(text, Word.InsertLocation.replace);
-      await ctx.sync();
-    });
-  }
+  Word.run(async ctx => {
+    ctx.document.body.insertText(text, Word.InsertLocation.replace);
+    await ctx.sync();
+  });
 }
 
 async function runBackgroundSync() {
@@ -545,8 +470,6 @@ async function runBackgroundSync() {
     });
     const data = await res.json();
     lastAiResponse = data;
-    // Push to pop-out window so its form fields stay in sync with the document
-    if (dialogRef) localStorage.setItem("emr4_bridge_ai", JSON.stringify(data));
     if (!isLocked) {
       updateFormFields(data);
       setStatus("Synced " + new Date().toLocaleTimeString());
@@ -837,125 +760,13 @@ function initApp() {
   setBanner(null);
   updateFormFields({});
 
-  if (IS_DIALOG) {
-    // ── Pop-out / Command Center mode ──────────────────────
-    // Word API calls are proxied to the docked taskpane via
-    // localStorage storage events (same-origin, fires instantly).
-    setStatus("Command Center — live sync active.");
+  setStatus("Ready.");
+  runBackgroundSync();
 
-    // Swap ⛶ button to anchor-back
-    const btn = document.getElementById("btn-maximize");
-    btn.textContent = "↩";
-    btn.title = "Close pop-out — return to docked sidebar";
-
-    // ── Custom title bar ────────────────────────────────────
-    document.getElementById("dialog-titlebar").classList.remove("hidden");
-
-    let _winMaximised = false;
-    let _restoreW = window.outerWidth;
-    let _restoreH = window.outerHeight;
-    let _restoreX = window.screenX;
-    let _restoreY = window.screenY;
-
-    document.getElementById("btn-win-minimize").onclick = () => {
-      if (document.body.classList.contains("win-minimized")) {
-        // Restore from minimised strip
-        document.body.classList.remove("win-minimized");
-        try { window.resizeTo(_restoreW, _restoreH); } catch {}
-      } else {
-        // Collapse to a thin strip — save current size first
-        _restoreW = window.outerWidth;
-        _restoreH = window.outerHeight;
-        _restoreX = window.screenX;
-        _restoreY = window.screenY;
-        document.body.classList.add("win-minimized");
-        try { window.resizeTo(window.outerWidth, 34); } catch {}
-      }
-    };
-
-    const btnMR = document.getElementById("btn-win-maxrestore");
-    btnMR.onclick = async () => {
-      if (!_winMaximised) {
-        _restoreW = window.outerWidth;
-        _restoreH = window.outerHeight;
-        _restoreX = window.screenX;
-        _restoreY = window.screenY;
-        // requestFullscreen() is async — must be awaited; resizeTo() is the fallback
-        try {
-          await document.documentElement.requestFullscreen();
-        } catch (_) {
-          try { window.moveTo(0, 0); window.resizeTo(screen.availWidth, screen.availHeight); } catch {}
-        }
-        _winMaximised = true;
-        btnMR.innerHTML = "&#x2750;";   // ❐ restore icon
-        btnMR.title = "Restore";
-        document.body.classList.add("win-maximized");
-      } else {
-        if (document.fullscreenElement) {
-          try { await document.exitFullscreen(); } catch {}
-        } else {
-          try { window.moveTo(_restoreX, _restoreY); window.resizeTo(_restoreW, _restoreH); } catch {}
-        }
-        _winMaximised = false;
-        btnMR.innerHTML = "&#x25A1;";   // □ maximise icon
-        btnMR.title = "Maximise";
-        document.body.classList.remove("win-maximized");
-      }
-    };
-
-    // Receive AI sync results pushed by the main taskpane
-    window.addEventListener("storage", e => {
-      if (e.key !== "emr4_bridge_ai") return;
-      const data = JSON.parse(e.newValue || "null");
-      if (!data) return;
-      lastAiResponse = data;
-      if (!isLocked) {
-        updateFormFields(data);
-        setStatus("Synced " + new Date().toLocaleTimeString());
-      } else {
-        setStatus("🔒 Locked — unlock to apply.");
-      }
-    });
-
-  } else {
-    // ── Docked taskpane mode ────────────────────────────────
-    setStatus("Ready.");
-    runBackgroundSync();
-
-    // Push document text every 3 s so the pop-out can use it for Finalize
-    setInterval(async () => {
-      if (!dialogRef) return;
-      try {
-        const text = await getDocumentText();
-        localStorage.setItem("emr4_bridge_doctext", text);
-      } catch {}
-    }, 3000);
-
-    // Execute Word API commands requested by the pop-out
-    window.addEventListener("storage", async e => {
-      if (e.key !== "emr4_bridge_cmd") return;
-      const cmd = JSON.parse(e.newValue || "null");
-      if (!cmd) return;
-      try {
-        if (cmd.type === "insert-paragraph") {
-          await Word.run(async ctx => {
-            ctx.document.body.insertParagraph(cmd.text, Word.InsertLocation.end);
-            await ctx.sync();
-          });
-        } else if (cmd.type === "insert-replace") {
-          await Word.run(async ctx => {
-            ctx.document.body.insertText(cmd.text, Word.InsertLocation.replace);
-            await ctx.sync();
-          });
-        }
-      } catch (err) { console.warn("Word bridge:", err); }
-    });
-
-    Office.context.document.addHandlerAsync(
-      Office.EventType.DocumentSelectionChanged,
-      () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
-    );
-  }
+  Office.context.document.addHandlerAsync(
+    Office.EventType.DocumentSelectionChanged,
+    () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
+  );
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -963,17 +774,6 @@ function initApp() {
 // ═══════════════════════════════════════════════════════════
 
 Office.onReady(info => {
-  // ── Dialog / pop-out mode ────────────────────────────────
-  // displayDialogAsync opens this same page with host === null.
-  // Handle it before the Word host check so the guard doesn't
-  // swallow the dialog init.
-  if (IS_DIALOG) {
-    _wireCommonHandlers();
-    if (token) { showView("view-app"); initApp(); }
-    else        { showView("view-login"); }
-    return;
-  }
-
   if (info.host !== Office.HostType.Word) return;
 
   _wireCommonHandlers();
@@ -983,7 +783,6 @@ Office.onReady(info => {
   else        { showView("view-login"); }
 });
 
-// Handlers shared between docked taskpane and dialog/pop-out modes
 function _wireCommonHandlers() {
   // ── Tab navigation ──────────────────────────────────────
   document.querySelectorAll(".tab-btn").forEach(btn => {
@@ -995,12 +794,7 @@ function _wireCommonHandlers() {
     };
   });
 
-  // ── Pop-out / anchor-back button ────────────────────────
-  document.getElementById("btn-maximize").onclick = toggleMaximize;
-
   // ── Consult tab — record, finalize, auto-lock ────────────
-  // These are wired in both modes; the underlying functions check
-  // IS_DIALOG and route Word API calls through the bridge.
   document.getElementById("btn-record").onclick   = toggleRecording;
   document.getElementById("btn-finalize").onclick = approveAndFinalize;
   document.addEventListener("input", e => {
