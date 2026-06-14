@@ -36,6 +36,46 @@ html, body {
 .view { display: flex; flex-direction: column; height: 100vh; }
 .hidden { display: none !important; }
 
+/* ─── POP-OUT PLACEHOLDER ───────────────────── */
+
+.popout-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+  padding: 32px 20px;
+  text-align: center;
+  background: var(--blue-dark);
+  color: var(--white);
+}
+
+.popout-logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.popout-logo span { color: #7ec8f5; }
+
+.popout-icon {
+  font-size: 42px;
+  opacity: 0.55;
+  line-height: 1;
+}
+
+.popout-msg {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.popout-sub {
+  font-size: 12px;
+  opacity: 0.7;
+  max-width: 200px;
+  line-height: 1.5;
+}
+
 /* ─── LOGIN ─────────────────────────────────── */
 
 #view-login {
@@ -468,3 +508,113 @@ select.input { cursor: pointer; }
 
 /* ─── TRANSCRIPT ─────────────────────────────── */
 .transcript-box { min-height: 80px; font-size: 11px; font-family: monospace; color: var(--grey-4); }
+
+/* ═══════════════════════════════════════════════
+   WIDE / COMMAND CENTER LAYOUT
+   Auto-activates when the task pane is ≥ 700px wide
+   (e.g. floated out of Word and widened, or dragged
+   onto a second monitor). No buttons — purely
+   responsive. Switches to a two-column layout:
+     left col  — sticky patient summary sidebar
+     right col — tab nav + panel content
+   ═══════════════════════════════════════════════ */
+
+@media (min-width: 700px) {
+
+  body { --font-size-base: 14px; }
+
+  #view-app {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  /* Banner spans both columns */
+  #patient-banner {
+    grid-column: 1 / -1;
+    min-height: 60px;
+    padding: 10px 18px;
+  }
+
+  .patient-name { font-size: 16px; }
+  .patient-meta { font-size: 12px; }
+
+  /* Search panel needs to know about the left column */
+  .search-panel { top: 60px; }
+
+  /* Left column — patient summary sidebar */
+  #patient-sidebar {
+    display: flex !important;
+    flex-direction: column;
+    background: var(--white);
+    border-right: 1px solid var(--grey-2);
+    overflow-y: auto;
+    padding: 12px;
+    gap: 10px;
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  /* Right column — tab nav on top, panel below */
+  #tab-right-col { display: contents; }
+
+  #tab-nav {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    border-left: 1px solid var(--grey-2);
+  }
+
+  #panels {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  /* Larger inner padding on panels when wide */
+  .panel-scroll {
+    padding: 14px 20px;
+    gap: 10px;
+  }
+
+  /* Card grid — show 2 columns for history, meds, allergies */
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    align-items: start;
+  }
+
+  /* Widen coding rows in consult tab */
+  .coding-row { gap: 8px; }
+  .coding-row .input { font-size: 13px; }
+
+  /* Bigger letter preview on wide screen */
+  .textarea-lg { min-height: 420px; }
+}
+
+/* Sidebar section headings (used only in the wide layout) */
+.sidebar-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--grey-3);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--grey-2);
+  margin-bottom: 4px;
+}
+
+.sidebar-chip {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  background: var(--grey-1);
+  border: 1px solid var(--grey-2);
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+.sidebar-chip .chip-label { font-weight: 600; color: var(--text); }
+.sidebar-chip .chip-meta  { color: var(--grey-3); font-size: 11px; }
+.sidebar-chip.danger { background: #fde8e8; border-color: #f5c0c0; }
+.sidebar-chip.danger .chip-label { color: var(--red); }
