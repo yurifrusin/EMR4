@@ -78,7 +78,7 @@ html, body {
 
 #view-app {
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto auto 1fr;
   height: 100vh;
   overflow: hidden;
   position: relative;
@@ -544,17 +544,18 @@ select.input { cursor: pointer; }
   #view-app {
     display: grid;
     grid-template-columns: 260px 1fr;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto auto 1fr;
     height: 100vh;
   }
 
-  #patient-banner  { grid-column: 1 / -1; grid-row: 1; }
-  #search-panel    { grid-column: 1 / -1; grid-row: 1; } /* absolute overlay */
-  #patient-sidebar { grid-column: 1; grid-row: 2 / 4; display: flex; flex-direction: column;
-                     gap: 10px; padding: 12px; overflow-y: auto;
-                     background: var(--white); border-right: 1px solid var(--grey-2); }
-  #tab-nav         { grid-column: 2; grid-row: 2; border-left: 1px solid var(--grey-2); }
-  #panels          { grid-column: 2; grid-row: 3; }
+  #patient-banner     { grid-column: 1 / -1; grid-row: 1; }
+  #command-center-bar { grid-column: 1 / -1; grid-row: 2; }
+  #search-panel       { grid-column: 1 / -1; grid-row: 1; } /* absolute overlay */
+  #patient-sidebar    { grid-column: 1; grid-row: 3 / 5; display: flex; flex-direction: column;
+                        gap: 10px; padding: 12px; overflow-y: auto;
+                        background: var(--white); border-right: 1px solid var(--grey-2); }
+  #tab-nav            { grid-column: 2; grid-row: 3; border-left: 1px solid var(--grey-2); }
+  #panels             { grid-column: 2; grid-row: 4; }
 
   /* Wider inner padding */
   .panel-scroll { padding: 14px 20px; gap: 10px; }

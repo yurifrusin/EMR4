@@ -470,6 +470,9 @@ def main():
         doc = build_patient_document(patient, allergies, meds)
 
         dob      = patient.date_of_birth.strftime("%d-%m-%Y")
+        doc.core_properties.title = (
+            f"{patient.first_name.upper()} {patient.last_name.upper()} {dob}"
+        )
         name     = f"{patient.first_name.upper()} {patient.last_name.upper()} {dob}.docx"
         letter   = patient.last_name[0].upper()
         out_dir  = Path(r"C:\Users\YuriFrusin\OneDrive\EMR4\Data") / letter
