@@ -810,16 +810,16 @@ async function autoDetectPatient() {
       props.load("title");
       await context.sync();
       const title = (props.title || "").trim();
-      // Expect exactly: WORD WORD DD-MM-YYYY
+      if (!title) { setStatus("No doc title — open a patient file."); return; }
       const m = title.match(/^([A-Z]+)\s+([A-Z]+)\s+(\d{2}-\d{2}-\d{4})$/);
-      if (!m) return;
+      if (!m) { setStatus(`Title: "${title}" — not a patient file.`); return; }
       const [, firstName, lastName] = m;
       const res = await apiFetch(`/patients/search?q=${encodeURIComponent(firstName + " " + lastName)}&limit=1`);
       if (!res || !res.ok) return;
-      const patients = await res.json();
-      if (!patients.length) return;
+      const data = await res.json();
+      const patients = Array.isArray(data) ? data : [];
+      if (!patients.length) { setStatus(`Patient "${firstName} ${lastName}" not in DB.`); return; }
       const patient = patients[0];
-      // Persist the Word Online URL so future searches can open this file
       const docUrl = Office.context.document.url || "";
       if (docUrl && docUrl !== patient.document_url) {
         await apiFetch(`/patients/${patient.id}`, {
@@ -829,10 +829,10 @@ async function autoDetectPatient() {
         });
       }
       await loadPatient(patient.id);
-      setStatus(`Loaded: ${patient.first_name} ${patient.last_name}`);
+      setStatus(`Auto-loaded: ${patient.first_name} ${patient.last_name}${docUrl ? " + URL saved" : " (no URL)"}`);
     });
-  } catch (_) {
-    // Not a patient file or Word API unavailable — silent
+  } catch (e) {
+    setStatus(`Auto-detect: ${String(e.message || e).substring(0, 60)}`);
   }
 }
 
@@ -874,10 +874,31 @@ Office.onReady(info => {
   // ── Patient search ──────────────────────────────────────
   const searchPanel = document.getElementById("search-panel");
   const searchInput = document.getElementById("patient-search-input");
+
+  function closeSearch() {
+    searchPanel.classList.add("hidden");
+    searchInput.value = "";
+    document.getElementById("patient-search-results").innerHTML = "";
+  }
+
   document.getElementById("btn-search-patient").onclick = () => {
     searchPanel.classList.toggle("hidden");
     if (!searchPanel.classList.contains("hidden")) searchInput.focus();
+    else closeSearch();
   };
+
+  // Escape closes the search panel
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !searchPanel.classList.contains("hidden")) closeSearch();
+  });
+
+  // Click outside the search panel or button closes it
+  document.addEventListener("click", e => {
+    if (!e.target.closest("#search-panel") && !e.target.closest("#btn-search-patient")) {
+      if (!searchPanel.classList.contains("hidden")) closeSearch();
+    }
+  });
+
   let searchDebounce;
   searchInput.addEventListener("input", () => {
     clearTimeout(searchDebounce);
