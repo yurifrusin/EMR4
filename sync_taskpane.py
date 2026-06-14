@@ -38,4 +38,16 @@ print("  copied + patched taskpane.js")
 
 shutil.copy2(SRC / "assets" / "emr_centaur_logo.png", DEST / "assets" / "emr_centaur_logo.png")
 print("  copied assets/emr_centaur_logo.png")
+
+# Patch command-centre.js with the real ngrok URL (it lives directly in docs/command-centre/)
+NGROK_URL = "https://property-cinch-backfield.ngrok-free.dev"
+CC_JS = Path("docs/command-centre/command-centre.js")
+if CC_JS.exists():
+    cc_js = CC_JS.read_text(encoding="utf-8")
+    if "PLACEHOLDER_NGROK_URL" in cc_js:
+        CC_JS.write_text(cc_js.replace("PLACEHOLDER_NGROK_URL", NGROK_URL), encoding="utf-8")
+        print("  patched docs/command-centre/command-centre.js (ngrok URL)")
+    else:
+        print("  command-centre.js already patched")
+
 print("Done. Run: git add docs/ && git commit -m 'sync taskpane' && git push")

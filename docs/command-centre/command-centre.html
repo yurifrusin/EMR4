@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMR Centaur — Command Centre</title>
+  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+  <link rel="stylesheet" href="command-centre.css?v=1" />
+  <script src="command-centre.js?v=1" defer></script>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════════ -->
+<div id="cc-header">
+  <div class="cc-logo">
+    <img src="../taskpane/assets/emr_centaur_logo.png" width="30" height="30" alt="" />
+    <div>
+      <div class="cc-title">EMR Centaur — Command Centre &amp; Scribe</div>
+      <div id="cc-patient">Loading patient…</div>
+    </div>
+  </div>
+  <div id="cc-status">Initializing…</div>
+</div>
+
+<!-- ═══ BODY ══════════════════════════════════════════════ -->
+<div id="cc-body">
+
+  <!-- Recording section -->
+  <div class="cc-card" id="cc-record-section">
+    <div class="cc-card-label">🎤 AI SCRIBE</div>
+    <div class="cc-record-row">
+      <button id="btn-cc-record" class="btn btn-record">🎤 Start Recording</button>
+      <div id="cc-audio-status" class="cc-audio-status hidden">
+        <span class="rec-dot"></span>
+        <span>Recording</span>
+        <span id="cc-timer" class="cc-timer">00:00</span>
+      </div>
+    </div>
+    <audio id="cc-audio-playback" controls class="cc-audio-player hidden"></audio>
+    <div id="cc-transcript-section" class="hidden">
+      <div class="cc-field-label">TRANSCRIPT</div>
+      <textarea id="cc-transcript" class="cc-textarea" rows="5" readonly></textarea>
+    </div>
+  </div>
+
+  <!-- AI Analysis section -->
+  <div class="cc-card" id="cc-analysis-section">
+    <div class="cc-card-label-row">
+      <span class="cc-card-label">CLINICAL CODING</span>
+      <div id="cc-sync-status" class="cc-sync-status"></div>
+      <button id="btn-cc-lock" class="btn btn-lock unlocked" onclick="toggleLock()">
+        <span class="lock-icon">🔓</span>
+        <span class="lock-label">AI live</span>
+      </button>
+    </div>
+
+    <!-- Consult Type -->
+    <div class="cc-field-group">
+      <div class="cc-field-label">CONSULTATION TYPE</div>
+      <input type="text" id="cc-consult-type" class="cc-input" placeholder="Auto-filled from AI or recording…" />
+    </div>
+
+    <!-- MBS -->
+    <div class="cc-section-header">
+      MBS ITEMS
+      <button class="btn-add-row" onclick="addMbsRow()">+ Add</button>
+    </div>
+    <div id="cc-mbs-container"></div>
+
+    <!-- SNOMED -->
+    <div class="cc-section-header">
+      CLINICAL DIAGNOSES
+      <button class="btn-add-row" onclick="addSnomedRow()">+ Add</button>
+    </div>
+    <div id="cc-snomed-container"></div>
+
+    <!-- Rx -->
+    <div class="cc-section-header">
+      PRESCRIPTIONS
+      <button class="btn-add-row" onclick="addRxRow()">+ Add</button>
+    </div>
+    <div id="cc-rx-container"></div>
+  </div>
+
+</div><!-- /cc-body -->
+
+<!-- ═══ FOOTER ════════════════════════════════════════════ -->
+<div id="cc-footer">
+  <button id="btn-cc-insert" class="btn btn-ghost" onclick="insertIntoWord()" disabled>
+    ✏️ Insert Note into Word
+  </button>
+  <button id="btn-cc-finalize" class="btn btn-finalize" onclick="approveAndFinalize()" disabled>
+    ✅ Approve &amp; Finalise Record
+  </button>
+</div>
+
+</body>
+</html>

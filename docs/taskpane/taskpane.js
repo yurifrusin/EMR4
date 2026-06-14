@@ -16,6 +16,9 @@ const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
 let token          = localStorage.getItem("emr4_token");
 let currentPatient = null;
 
+// Command Centre dialog handle
+let commandCentreDialog = null;
+
 // Consult tab state
 let isLocked       = false;
 let lastAiResponse = null;
@@ -138,6 +141,8 @@ function logout() {
   token = null;
   currentPatient = null;
   localStorage.removeItem("emr4_token");
+  localStorage.removeItem("emr4_cc_patient_id");
+  document.getElementById("btn-command-center").disabled = true;
   showView("view-login");
 }
 
@@ -194,6 +199,7 @@ async function loadPatient(patientId) {
   currentPatient = data.patient;
   setBanner(currentPatient);
   updateOpenFileButton();
+  document.getElementById("btn-command-center").disabled = false;
 
   // Sidebar — allergies (available immediately from summary)
   _renderSidebarAllergies(data.allergies || []);
@@ -783,6 +789,55 @@ async function approveAndFinalize() {
 }
 
 // ═══════════════════════════════════════════════════════════
+// COMMAND CENTRE
+// ═══════════════════════════════════════════════════════════
+
+const CC_URL = "https://yurifrusin.github.io/EMR4/command-centre/command-centre.html";
+
+function openCommandCentre() {
+  if (!currentPatient) {
+    setStatus("Load a patient before opening Command Centre.");
+    return;
+  }
+  // Shared via localStorage (same yurifrusin.github.io origin)
+  localStorage.setItem("emr4_cc_patient_id", String(currentPatient.id));
+
+  Office.context.ui.displayDialogAsync(CC_URL, { height: 75, width: 55 }, result => {
+    if (result.status === Office.AsyncResultStatus.Failed) {
+      setStatus("Could not open Command Centre: " + result.error.message);
+      return;
+    }
+    commandCentreDialog = result.value;
+
+    commandCentreDialog.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
+      try {
+        const msg = JSON.parse(arg.message);
+        if (msg.type === "insert_note" && msg.text) {
+          insertNoteIntoWord(msg.text);
+        }
+      } catch (_) {}
+    });
+
+    commandCentreDialog.addEventHandler(Office.EventType.DialogEventReceived, () => {
+      commandCentreDialog = null;
+      localStorage.removeItem("emr4_cc_patient_id");
+    });
+  });
+}
+
+async function insertNoteIntoWord(text) {
+  try {
+    await Word.run(async ctx => {
+      ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
+      await ctx.sync();
+    });
+    setStatus("Note inserted into document.");
+  } catch (e) {
+    setStatus("Insert failed: " + e.message);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
 // INIT APP (called after successful login or token resume)
 // ═══════════════════════════════════════════════════════════
 
@@ -926,6 +981,9 @@ Office.onReady(info => {
     clearTimeout(searchDebounce);
     searchDebounce = setTimeout(() => searchPatients(searchInput.value.trim()), 350);
   });
+
+  // ── Command Centre ──────────────────────────────────────
+  document.getElementById("btn-command-center").onclick = openCommandCentre;
 
   // ── Consult buttons ─────────────────────────────────────
   document.getElementById("btn-finalize").onclick = approveAndFinalize;
