@@ -6,20 +6,9 @@ const BACKEND_URL = "http://localhost:8001";
 const API_BASE    = BACKEND_URL + "/api/v1";
 const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
 
-// ─── DIALOG MODE DETECTION ───────────────────────────────────
-// When this page is opened via displayDialogAsync the URL hash
-// contains "#dialog&t=<JWT>". Detect this before Office.onReady.
-const _hash     = window.location.hash;
-const IS_DIALOG = _hash.includes("#dialog");
-if (IS_DIALOG) {
-  const m = _hash.match(/[?&]?t=([^&]*)/);
-  if (m?.[1]) localStorage.setItem("emr4_token", decodeURIComponent(m[1]));
-}
-
 // ─── STATE ──────────────────────────────────────────────────
 let token          = localStorage.getItem("emr4_token");
 let currentPatient = null;
-let dialogRef      = null;   // Office dialog object (docked taskpane side)
 
 // Consult tab state
 let isLocked       = false;
@@ -155,31 +144,6 @@ function setBanner(patient) {
     : "";
 }
 
-function populateSidebar(summary) {
-  const dxEl    = document.getElementById("sidebar-dx");
-  const medsEl  = document.getElementById("sidebar-meds");
-  const allerEl = document.getElementById("sidebar-allergies");
-  if (!dxEl) return;
-
-  const dx = summary.active_diagnoses || [];
-  dxEl.innerHTML = dx.length
-    ? dx.map(d => `<div class="sidebar-chip"><span class="chip-label">${escHtml(d.term || "")}</span></div>`).join("")
-    : '<div class="placeholder" style="font-size:11px">None recorded.</div>';
-
-  const meds = summary.active_medications || [];
-  medsEl.innerHTML = meds.length
-    ? meds.map(m => `<div class="sidebar-chip"><span class="chip-label">${escHtml(m.drug_name)}</span><span class="chip-meta">${escHtml(m.dosage_text || "")}</span></div>`).join("")
-    : '<div class="placeholder" style="font-size:11px">None active.</div>';
-
-  const allergies = summary.allergies || [];
-  allerEl.innerHTML = allergies.length
-    ? allergies.map(a => {
-        const cls = ["severe","life-threatening"].includes((a.severity||"").toLowerCase()) ? "danger" : "";
-        return `<div class="sidebar-chip ${cls}"><span class="chip-label">${escHtml(a.substance)}</span><span class="chip-meta">${escHtml(a.reaction || a.severity || "")}</span></div>`;
-      }).join("")
-    : '<div class="placeholder" style="font-size:11px">NKDA</div>';
-}
-
 async function searchPatients(query) {
   if (!query) return;
   const res = await apiFetch(`/patients/search?q=${encodeURIComponent(query)}&limit=10`);
@@ -213,7 +177,6 @@ async function loadPatient(patientId) {
   const data = await res.json();
   currentPatient = data.patient;
   setBanner(currentPatient);
-  populateSidebar(data);
 
   // Pre-populate whichever tabs are already visible
   if (!document.getElementById("panel-history").classList.contains("hidden")) loadHistory();
@@ -381,9 +344,13 @@ window.draftLetter = async function () {
   }
 };
 
-window.insertLetterIntoWord = function () {
+window.insertLetterIntoWord = async function () {
   const text = document.getElementById("letter-body").value;
-  if (text) _wordInsertReplace(text);
+  if (!text) return;
+  await Word.run(async ctx => {
+    ctx.document.body.insertText(text, Word.InsertLocation.replace);
+    await ctx.sync();
+  });
 };
 
 window.copyLetter = function () {
@@ -430,40 +397,12 @@ function updateLockUI() {
 // ═══════════════════════════════════════════════════════════
 
 async function getDocumentText() {
-  if (IS_DIALOG) {
-    // Docked taskpane keeps this fresh every 3 s via the bridge
-    return localStorage.getItem("emr4_bridge_doctext") || "";
-  }
   return Word.run(async ctx => {
     const body = ctx.document.body;
     body.load("text");
     await ctx.sync();
     return body.text;
   });
-}
-
-// In dialog mode: queue command for docked taskpane to execute via Word.run.
-// In docked mode: execute directly.
-function _wordInsertParagraph(text) {
-  if (IS_DIALOG) {
-    localStorage.setItem("emr4_bridge_cmd", JSON.stringify({ type: "insert-paragraph", text }));
-  } else {
-    Word.run(async ctx => {
-      ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
-      await ctx.sync();
-    });
-  }
-}
-
-function _wordInsertReplace(text) {
-  if (IS_DIALOG) {
-    localStorage.setItem("emr4_bridge_cmd", JSON.stringify({ type: "insert-replace", text }));
-  } else {
-    Word.run(async ctx => {
-      ctx.document.body.insertText(text, Word.InsertLocation.replace);
-      await ctx.sync();
-    });
-  }
 }
 
 async function runBackgroundSync() {
@@ -495,8 +434,6 @@ async function runBackgroundSync() {
     });
     const data = await res.json();
     lastAiResponse = data;
-    // Push to floating window so its form fields stay in sync
-    if (dialogRef) localStorage.setItem("emr4_bridge_ai", JSON.stringify(data));
     if (!isLocked) {
       updateFormFields(data);
       setStatus("Synced " + new Date().toLocaleTimeString());
@@ -572,7 +509,10 @@ async function processAudio() {
     updateLockUI();
 
     if (data.generated_clinical_note) {
-      _wordInsertParagraph(data.generated_clinical_note);
+      Word.run(async ctx => {
+        ctx.document.body.insertParagraph(data.generated_clinical_note, Word.InsertLocation.end);
+        await ctx.sync();
+      });
     }
   } catch {
     setStatus("❌ Scribe failed.");
@@ -782,112 +722,19 @@ async function approveAndFinalize() {
 // INIT APP (called after successful login or token resume)
 // ═══════════════════════════════════════════════════════════
 
-// ═══════════════════════════════════════════════════════════
-// POP-OUT
-// ═══════════════════════════════════════════════════════════
-
-function _closeDialog() {
-  if (dialogRef) { try { dialogRef.close(); } catch {} dialogRef = null; }
-  showView("view-app");
-}
-
-window.toggleMaximize = function () {
-  if (IS_DIALOG) {
-    // Floating window: ask docked taskpane to close us and restore itself
-    Office.context.ui.messageParent("close-dialog");
-    return;
-  }
-  if (!token) { alert("Sign in first."); return; }
-
-  const dialogUrl = window.location.origin + window.location.pathname
-    + "#dialog&t=" + encodeURIComponent(token);
-
-  Office.context.ui.displayDialogAsync(
-    dialogUrl,
-    { width: 55, height: 88, displayInIframe: false },
-    result => {
-      if (result.status !== Office.AsyncResultStatus.Succeeded) {
-        setStatus("Pop-out failed: " + (result.error?.message || "unknown error"));
-        return;
-      }
-      dialogRef = result.value;
-      showView("view-popout-active");   // ← replace docked UI with placeholder
-
-      dialogRef.addEventHandler(Office.EventType.DialogMessageReceived, msg => {
-        if (msg.message === "close-dialog") _closeDialog();
-      });
-      // User closed via OS × button
-      dialogRef.addEventHandler(Office.EventType.DialogEventReceived, () => {
-        dialogRef = null;
-        showView("view-app");
-      });
-    }
-  );
-};
-
-// ═══════════════════════════════════════════════════════════
-// INIT APP
-// ═══════════════════════════════════════════════════════════
-
 function initApp() {
   showTab("consult");
   setBanner(null);
+  setStatus("Ready.");
+
+  // Seed one empty row in each coding section
   updateFormFields({});
 
-  if (IS_DIALOG) {
-    setStatus("Floating window — live sync active.");
-    const btnMax = document.getElementById("btn-maximize");
-    btnMax.textContent = "↩";
-    btnMax.title = "Close floating window — return to sidebar";
-
-    // Receive AI results pushed by docked taskpane
-    window.addEventListener("storage", e => {
-      if (e.key !== "emr4_bridge_ai") return;
-      const data = JSON.parse(e.newValue || "null");
-      if (!data) return;
-      lastAiResponse = data;
-      if (!isLocked) {
-        updateFormFields(data);
-        setStatus("Synced " + new Date().toLocaleTimeString());
-      } else {
-        setStatus("🔒 Locked — unlock to apply.");
-      }
-    });
-  } else {
-    setStatus("Ready.");
-    runBackgroundSync();
-
-    // Push document text every 3 s so the floating window can use it for Finalize
-    setInterval(async () => {
-      if (!dialogRef) return;
-      try { localStorage.setItem("emr4_bridge_doctext", await getDocumentText()); } catch {}
-    }, 3000);
-
-    // Execute Word API commands requested by the floating window
-    window.addEventListener("storage", async e => {
-      if (e.key !== "emr4_bridge_cmd") return;
-      const cmd = JSON.parse(e.newValue || "null");
-      if (!cmd) return;
-      try {
-        if (cmd.type === "insert-paragraph") {
-          await Word.run(async ctx => {
-            ctx.document.body.insertParagraph(cmd.text, Word.InsertLocation.end);
-            await ctx.sync();
-          });
-        } else if (cmd.type === "insert-replace") {
-          await Word.run(async ctx => {
-            ctx.document.body.insertText(cmd.text, Word.InsertLocation.replace);
-            await ctx.sync();
-          });
-        }
-      } catch (err) { console.warn("Word bridge:", err); }
-    });
-
-    Office.context.document.addHandlerAsync(
-      Office.EventType.DocumentSelectionChanged,
-      () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
-    );
-  }
+  runBackgroundSync();
+  Office.context.document.addHandlerAsync(
+    Office.EventType.DocumentSelectionChanged,
+    () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
+  );
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -895,44 +742,16 @@ function initApp() {
 // ═══════════════════════════════════════════════════════════
 
 Office.onReady(info => {
-  if (IS_DIALOG) {
-    // Floating window: host === null, skip Word host check
-    _wireCommonHandlers();
-    if (token) { showView("view-app"); initApp(); }
-    else        { showView("view-login"); }
-    return;
-  }
-
   if (info.host !== Office.HostType.Word) return;
 
-  _wireCommonHandlers();
-
-  if (token) { showView("view-app"); initApp(); }
-  else        { showView("view-login"); }
-});
-
-function _wireCommonHandlers() {
   // ── Tab navigation ──────────────────────────────────────
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.onclick = () => {
       showTab(btn.dataset.tab);
-      if (btn.dataset.tab === "history")   loadHistory();
-      if (btn.dataset.tab === "meds")      loadMeds();
+      if (btn.dataset.tab === "history")  loadHistory();
+      if (btn.dataset.tab === "meds")     loadMeds();
       if (btn.dataset.tab === "allergies") loadAllergies();
     };
-  });
-
-  // ── Pop-out / anchor-back ────────────────────────────────
-  document.getElementById("btn-maximize").onclick = toggleMaximize;
-
-  // ── Placeholder "bring back" button ─────────────────────
-  document.getElementById("btn-popout-close")?.addEventListener("click", _closeDialog);
-
-  // ── Consult tab ──────────────────────────────────────────
-  document.getElementById("btn-record").onclick   = toggleRecording;
-  document.getElementById("btn-finalize").onclick = approveAndFinalize;
-  document.addEventListener("input", e => {
-    if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
   });
 
   // ── Auth ────────────────────────────────────────────────
@@ -954,4 +773,21 @@ function _wireCommonHandlers() {
     clearTimeout(searchDebounce);
     searchDebounce = setTimeout(() => searchPatients(searchInput.value.trim()), 350);
   });
-}
+
+  // ── Consult buttons ─────────────────────────────────────
+  document.getElementById("btn-record").onclick   = toggleRecording;
+  document.getElementById("btn-finalize").onclick = approveAndFinalize;
+
+  // Auto-lock when the GP types in the consult panel
+  document.addEventListener("input", e => {
+    if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
+  });
+
+  // ── Resume session or show login ─────────────────────────
+  if (token) {
+    showView("view-app");
+    initApp();
+  } else {
+    showView("view-login");
+  }
+});
