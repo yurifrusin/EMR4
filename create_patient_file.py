@@ -133,6 +133,14 @@ def demo_header_table(doc: Document, lines: list):
         # Grey cell background — renders in Word Online unlike paragraph shading
         tcPr.append(_shd_element(GREY_BG))
 
+        # Remove all cell borders (w:nil overrides default table style borders)
+        tcBorders = OxmlElement("w:tcBorders")
+        for side in ("top", "left", "bottom", "right", "insideH", "insideV"):
+            b = OxmlElement(f"w:{side}")
+            b.set(qn("w:val"), "nil")
+            tcBorders.append(b)
+        tcPr.append(tcBorders)
+
         # Minimal cell padding (tight, like the original header)
         tcMar = OxmlElement("w:tcMar")
         for side, twips in (("top", "0"), ("bottom", "0"), ("left", "108"), ("right", "108")):
