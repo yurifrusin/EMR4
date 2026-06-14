@@ -1,14 +1,13 @@
 // ═══════════════════════════════════════════════════════════
-//  EMR Centaur — Command Centre & Scribe
-//  Launched as a displayDialogAsync popup from the taskpane.
-//  Has full microphone access (top-level window, not iframe).
-//  Shares localStorage with the taskpane (same origin).
-//  Sends Word-insertion requests back via messageParent().
+//  EMR Centaur — Command Centre & Scribe  (v2)
+//  Launched via displayDialogAsync from the taskpane.
+//  Patient ID comes from URL param ?pid=X (reliable).
+//  Auth token delivered via messageChild from taskpane after
+//  this page sends { type:"ready" } via messageParent.
+//  Falls back to localStorage token while waiting.
 // ═══════════════════════════════════════════════════════════
 
-// BACKEND_URL: same 3-way logic as taskpane.js
-// sync_taskpane.py will patch https://property-cinch-backfield.ngrok-free.dev when syncing.
-const NGROK_URL  = "https://property-cinch-backfield.ngrok-free.dev";
+const NGROK_URL   = "https://property-cinch-backfield.ngrok-free.dev";
 const BACKEND_URL = (window.location.port === "3000")
   ? "http://localhost:8001"
   : window.location.hostname.includes("ngrok")
@@ -16,8 +15,11 @@ const BACKEND_URL = (window.location.port === "3000")
     : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
 
+// Patient ID from URL param — more reliable than localStorage cross-context
+const PATIENT_ID = new URLSearchParams(window.location.search).get("pid");
+
 // ─── STATE ────────────────────────────────────────────────
-let token          = localStorage.getItem("emr4_token");
+let token          = localStorage.getItem("emr4_token"); // fallback; refreshed via messageChild
 let currentPatient = null;
 let isLocked       = false;
 let lastAiResponse = null;
@@ -30,38 +32,37 @@ let mediaRecorder  = null;
 let audioChunks    = [];
 let recordSeconds  = 0;
 let recordTimer    = null;
+let procSeconds    = 0;
+let procTimer      = null;
 let typeaheadTimer = null;
+let patientLoadAttempted = false;
 
 // ─── UTILITIES ────────────────────────────────────────────
 function escHtml(str) {
   return String(str || "")
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+    .replace(/&/g, "&amp;").replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
-
 function formatDate(iso) {
   if (!iso) return "—";
   return new Date(iso).toLocaleDateString("en-AU");
 }
-
 function setStatus(msg) {
   const el = document.getElementById("cc-status");
   if (el) el.textContent = msg;
 }
 
 // ─── OFFICE MESSAGING ─────────────────────────────────────
+// Note: throws if not launched via displayDialogAsync — callers catch.
 function sendToTaskpane(msg) {
-  try { Office.context.ui.messageParent(JSON.stringify(msg)); } catch (_) {}
+  Office.context.ui.messageParent(JSON.stringify(msg));
 }
 
 // ─── API ──────────────────────────────────────────────────
 async function apiFetch(path, opts = {}) {
   const headers = { ...(opts.headers || {}) };
-  if (!(opts.body instanceof FormData)) {
+  if (!(opts.body instanceof FormData))
     headers["Content-Type"] = headers["Content-Type"] || "application/json";
-  }
   if (token) headers["Authorization"] = "Bearer " + token;
   headers["ngrok-skip-browser-warning"] = "1";
   return fetch(API_BASE + path, { ...opts, headers });
@@ -69,23 +70,32 @@ async function apiFetch(path, opts = {}) {
 
 // ─── PATIENT ──────────────────────────────────────────────
 async function loadPatient() {
-  const patientId = localStorage.getItem("emr4_cc_patient_id");
-  if (!patientId || !token) {
-    setStatus("Open from the taskpane with a patient loaded.");
+  patientLoadAttempted = true;
+  if (!PATIENT_ID) {
+    setStatus("No patient ID — open via the taskpane button.");
     document.getElementById("cc-patient").textContent = "No patient context";
     return;
   }
+  if (!token) {
+    setStatus("Waiting for authentication…");
+    return; // will be retried when token arrives via messageChild
+  }
   try {
-    const res = await apiFetch(`/patients/${patientId}/summary`);
-    if (!res.ok) { setStatus("Failed to load patient."); return; }
+    const res = await apiFetch(`/patients/${PATIENT_ID}/summary`);
+    if (!res.ok) { setStatus("Failed to load patient (HTTP " + res.status + ")."); return; }
     const data = await res.json();
     currentPatient = data.patient;
+    const dob = new Date(currentPatient.date_of_birth);
+    const now = new Date();
+    let age = now.getFullYear() - dob.getFullYear();
+    if (now.getMonth() - dob.getMonth() < 0 ||
+        (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate())) age--;
     document.getElementById("cc-patient").textContent =
-      `${currentPatient.last_name}, ${currentPatient.first_name}  ·  DOB: ${formatDate(currentPatient.date_of_birth)}  ·  Medicare: ${currentPatient.medicare_number || "—"}`;
+      `${currentPatient.last_name}, ${currentPatient.first_name}  ·  DOB: ${formatDate(currentPatient.date_of_birth)}  ·  ${age} yrs  ·  Medicare: ${currentPatient.medicare_number || "—"}`;
     setStatus("Ready.");
     document.getElementById("btn-cc-finalize").disabled = false;
   } catch (e) {
-    setStatus("Error: " + e.message);
+    setStatus("Error loading patient: " + e.message);
   }
 }
 
@@ -107,15 +117,13 @@ async function toggleRecording() {
       btn.textContent = "⏹ Stop Recording";
       btn.classList.add("recording");
       status.classList.remove("hidden");
-
       recordTimer = setInterval(() => {
         recordSeconds++;
         const m = String(Math.floor(recordSeconds / 60)).padStart(2, "0");
         const s = String(recordSeconds % 60).padStart(2, "0");
-        const timerEl = document.getElementById("cc-timer");
-        if (timerEl) timerEl.textContent = `${m}:${s}`;
+        const el = document.getElementById("cc-timer");
+        if (el) el.textContent = `${m}:${s}`;
       }, 1000);
-
       setStatus("Recording…");
     } catch (e) {
       setStatus("Microphone denied: " + e.message);
@@ -128,12 +136,37 @@ async function toggleRecording() {
     btn.textContent = "🎤 Start Recording";
     btn.classList.remove("recording");
     status.classList.add("hidden");
-    setStatus("Processing…");
   }
 }
 
+// ─── PROCESSING INDICATOR ─────────────────────────────────
+function showProcessing() {
+  const el = document.getElementById("cc-processing");
+  if (!el) return;
+  el.classList.remove("hidden");
+  procSeconds = 0;
+  // Reset bar animation by re-inserting it
+  const bar = document.getElementById("cc-proc-bar");
+  if (bar) { bar.style.animation = "none"; bar.offsetHeight; bar.style.animation = ""; }
+  procTimer = setInterval(() => {
+    procSeconds++;
+    const m = String(Math.floor(procSeconds / 60)).padStart(2, "0");
+    const s = String(procSeconds % 60).padStart(2, "0");
+    const timerEl = document.getElementById("cc-proc-timer");
+    if (timerEl) timerEl.textContent = `${m}:${s}`;
+  }, 1000);
+}
+
+function hideProcessing() {
+  clearInterval(procTimer);
+  const el = document.getElementById("cc-processing");
+  if (el) el.classList.add("hidden");
+}
+
+// ─── AUDIO PROCESSING ─────────────────────────────────────
 async function processAudio() {
-  setStatus("⏳ Transcribing with Vertex AI…");
+  showProcessing();
+  setStatus("⏳ Sending to AI…");
   const blob = new Blob(audioChunks, { type: "audio/webm" });
   const form = new FormData();
   form.append("audio_file", blob, "consultation.webm");
@@ -143,9 +176,8 @@ async function processAudio() {
     headers["ngrok-skip-browser-warning"] = "1";
     const res  = await fetch(API_BASE + "/scribe-consultation", { method: "POST", headers, body: form });
     const data = await res.json();
-
+    hideProcessing();
     updateFormFields(data);
-
     if (data.audio_url) {
       currentAudioUrl = data.audio_url;
       const player = document.getElementById("cc-audio-playback");
@@ -156,12 +188,12 @@ async function processAudio() {
       document.getElementById("cc-transcript").value = data.raw_transcript;
       document.getElementById("cc-transcript-section").classList.remove("hidden");
     }
-
-    setStatus("✅ Transcription complete.");
+    setStatus("✅ Transcription complete — review and approve.");
     isLocked = true;
     updateLockUI();
     document.getElementById("btn-cc-insert").disabled = false;
   } catch (e) {
+    hideProcessing();
     setStatus("❌ Transcription failed: " + e.message);
   }
 }
@@ -192,18 +224,14 @@ function updateFormFields(response) {
   if (!response) return;
   lastAiResponse = response;
   const meta = response.encounter_metadata || {};
-
   const consultField = document.getElementById("cc-consult-type");
   if (consultField && !consultField.value) consultField.value = meta.consultation_type || "";
-
   const mbsItems  = meta.mbs_item_candidates?.length  ? meta.mbs_item_candidates  : [{}];
   const diagnoses = response.clinical_diagnoses?.length ? response.clinical_diagnoses : [{}];
   const rx        = response.medications_and_prescriptions?.length ? response.medications_and_prescriptions : [{}];
-
   document.getElementById("cc-mbs-container").innerHTML    = ""; mbsRowCount    = 0;
   document.getElementById("cc-snomed-container").innerHTML = ""; snomedRowCount = 0;
   document.getElementById("cc-rx-container").innerHTML     = ""; rxRowCount     = 0;
-
   mbsItems.forEach(m  => appendMbsRow(m.item_number || "",   m.description || ""));
   diagnoses.forEach(d => appendSnomedRow(d.term || "",       d.snomed_ct_au_code || ""));
   rx.forEach(m        => appendRxRow(m.drug_name || "",      m.dosage_text || ""));
@@ -213,8 +241,7 @@ function updateFormFields(response) {
 function appendMbsRow(itemNumber, description) {
   const i = mbsRowCount++;
   const div = document.createElement("div");
-  div.className = "cc-coding-row";
-  div.id = `cc-mbs-group-${i}`;
+  div.className = "cc-coding-row"; div.id = `cc-mbs-group-${i}`;
   div.innerHTML = `
     <div class="cc-input-wrap">
       <input type="text" id="cc-mbs-item-${i}" class="cc-input" value="${escHtml(itemNumber)}"
@@ -223,8 +250,7 @@ function appendMbsRow(itemNumber, description) {
     </div>
     <input type="text" id="cc-mbs-desc-${i}" class="cc-input" value="${escHtml(description)}"
            placeholder="Description" readonly style="flex:2">
-    <button class="btn-remove" onclick="removeRow('cc-mbs-group-${i}')">✕</button>
-  `;
+    <button class="btn-remove" onclick="removeRow('cc-mbs-group-${i}')">✕</button>`;
   document.getElementById("cc-mbs-container").appendChild(div);
   document.getElementById(`cc-mbs-item-${i}`).addEventListener("keyup", () => handleKeystroke("mbs", i));
 }
@@ -232,8 +258,7 @@ function appendMbsRow(itemNumber, description) {
 function appendSnomedRow(term, code) {
   const i = snomedRowCount++;
   const div = document.createElement("div");
-  div.className = "cc-coding-row";
-  div.id = `cc-snomed-group-${i}`;
+  div.className = "cc-coding-row"; div.id = `cc-snomed-group-${i}`;
   div.innerHTML = `
     <div class="cc-input-wrap" style="flex:2">
       <input type="text" id="cc-snomed-term-${i}" class="cc-input" value="${escHtml(term)}"
@@ -242,8 +267,7 @@ function appendSnomedRow(term, code) {
     </div>
     <input type="text" id="cc-snomed-code-${i}" class="cc-input" value="${escHtml(code)}"
            placeholder="SNOMED" readonly style="flex:0 0 90px">
-    <button class="btn-remove" onclick="removeRow('cc-snomed-group-${i}')">✕</button>
-  `;
+    <button class="btn-remove" onclick="removeRow('cc-snomed-group-${i}')">✕</button>`;
   document.getElementById("cc-snomed-container").appendChild(div);
   document.getElementById(`cc-snomed-term-${i}`).addEventListener("keyup", () => handleKeystroke("snomed", i));
 }
@@ -251,15 +275,13 @@ function appendSnomedRow(term, code) {
 function appendRxRow(drugName, dosage) {
   const i = rxRowCount++;
   const div = document.createElement("div");
-  div.className = "cc-coding-row";
-  div.id = `cc-rx-group-${i}`;
+  div.className = "cc-coding-row"; div.id = `cc-rx-group-${i}`;
   div.innerHTML = `
     <input type="text" id="cc-rx-name-${i}" class="cc-input" value="${escHtml(drugName)}"
            placeholder="Drug name…" style="flex:2">
     <input type="text" id="cc-rx-dose-${i}" class="cc-input" value="${escHtml(dosage)}"
            placeholder="Dosage…">
-    <button class="btn-remove" onclick="removeRow('cc-rx-group-${i}')">✕</button>
-  `;
+    <button class="btn-remove" onclick="removeRow('cc-rx-group-${i}')">✕</button>`;
   document.getElementById("cc-rx-container").appendChild(div);
 }
 
@@ -271,14 +293,11 @@ window.removeRow    = id => document.getElementById(id)?.remove();
 // ─── AUTOCOMPLETE ─────────────────────────────────────────
 async function handleKeystroke(type, index) {
   clearTimeout(typeaheadTimer);
-  const inputId = type === "mbs" ? `cc-mbs-item-${index}` : `cc-snomed-term-${index}`;
-  const inputEl = document.getElementById(inputId);
-  const boxId   = type === "mbs" ? `cc-mbs-sugg-${index}` : `cc-snomed-sugg-${index}`;
-  const box     = document.getElementById(boxId);
+  const inputEl = document.getElementById(type === "mbs" ? `cc-mbs-item-${index}` : `cc-snomed-term-${index}`);
+  const box     = document.getElementById(type === "mbs" ? `cc-mbs-sugg-${index}` : `cc-snomed-sugg-${index}`);
   if (!inputEl || !box) return;
   const query = inputEl.value.trim();
   if (query.length < 2) { box.style.display = "none"; return; }
-
   typeaheadTimer = setTimeout(async () => {
     box.style.display = "block";
     box.innerHTML = '<div class="cc-ac-hint">Searching…</div>';
@@ -286,15 +305,12 @@ async function handleKeystroke(type, index) {
       const endpoint = type === "mbs" ? "search-mbs" : "search-snomed";
       const res = await apiFetch(`/${endpoint}?q=${encodeURIComponent(query)}`);
       renderSuggestions(await res.json(), type, index);
-    } catch {
-      box.innerHTML = '<div class="cc-ac-hint">Search failed.</div>';
-    }
+    } catch { box.innerHTML = '<div class="cc-ac-hint">Search failed.</div>'; }
   }, 400);
 }
 
 function renderSuggestions(results, type, index) {
-  const boxId = type === "mbs" ? `cc-mbs-sugg-${index}` : `cc-snomed-sugg-${index}`;
-  const box   = document.getElementById(boxId);
+  const box = document.getElementById(type === "mbs" ? `cc-mbs-sugg-${index}` : `cc-snomed-sugg-${index}`);
   if (!box) return;
   box.innerHTML = "";
   if (!results?.length) {
@@ -325,25 +341,28 @@ function renderSuggestions(results, type, index) {
 }
 
 document.addEventListener("click", e => {
-  if (!e.target.closest(".cc-input-wrap")) {
+  if (!e.target.closest(".cc-input-wrap"))
     document.querySelectorAll(".cc-autocomplete").forEach(el => (el.style.display = "none"));
-  }
 });
 
 // ─── INSERT INTO WORD (via taskpane bridge) ───────────────
 window.insertIntoWord = function () {
   const transcript = document.getElementById("cc-transcript")?.value || "";
   const note = transcript || `[Consultation — ${new Date().toLocaleDateString("en-AU")}]`;
-  sendToTaskpane({ type: "insert_note", text: note });
-  setStatus("Sent to Word.");
+  try {
+    sendToTaskpane({ type: "insert_note", text: note });
+    setStatus("Sent to Word ✓");
+  } catch (e) {
+    setStatus("⚠️ Not connected to taskpane — open via the taskpane button.");
+  }
 };
 
 // ─── APPROVE & FINALISE ───────────────────────────────────
 window.approveAndFinalize = async function () {
   if (!currentPatient) { setStatus("No patient loaded."); return; }
-  const finalizeBtn = document.getElementById("btn-cc-finalize");
-  finalizeBtn.disabled  = true;
-  finalizeBtn.textContent = "Saving…";
+  const btn = document.getElementById("btn-cc-finalize");
+  btn.disabled    = true;
+  btn.textContent = "Saving…";
   setStatus("⏳ Saving to database…");
 
   const consultType = document.getElementById("cc-consult-type")?.value || "";
@@ -351,69 +370,49 @@ window.approveAndFinalize = async function () {
 
   for (let i = 0; i < mbsRowCount; i++) {
     const code = document.getElementById(`cc-mbs-item-${i}`)?.value.trim();
-    if (code) overrides.mbs_items.push({
-      item_number: code,
-      description: document.getElementById(`cc-mbs-desc-${i}`)?.value || "",
-    });
+    if (code) overrides.mbs_items.push({ item_number: code, description: document.getElementById(`cc-mbs-desc-${i}`)?.value || "" });
   }
   for (let i = 0; i < snomedRowCount; i++) {
     const term = document.getElementById(`cc-snomed-term-${i}`)?.value.trim();
-    if (term) overrides.diagnoses.push({
-      term,
-      snomed_ct_au_code: document.getElementById(`cc-snomed-code-${i}`)?.value || "",
-    });
+    if (term) overrides.diagnoses.push({ term, snomed_ct_au_code: document.getElementById(`cc-snomed-code-${i}`)?.value || "" });
   }
   for (let i = 0; i < rxRowCount; i++) {
     const drug = document.getElementById(`cc-rx-name-${i}`)?.value.trim();
-    if (drug) overrides.medications.push({
-      drug_name: drug,
-      dosage_text: document.getElementById(`cc-rx-dose-${i}`)?.value || "",
-    });
+    if (drug) overrides.medications.push({ drug_name: drug, dosage_text: document.getElementById(`cc-rx-dose-${i}`)?.value || "" });
   }
 
-  const sessionId   = "cc_" + Date.now();
-  const transcript  = document.getElementById("cc-transcript")?.value || "";
+  const sessionId  = "cc_" + Date.now();
+  const transcript = document.getElementById("cc-transcript")?.value || "";
 
   try {
-    const headers = {};
+    const headers = { "Content-Type": "application/json", "ngrok-skip-browser-warning": "1" };
     if (token) headers["Authorization"] = "Bearer " + token;
-    headers["Content-Type"] = "application/json";
-    headers["ngrok-skip-browser-warning"] = "1";
     const res = await fetch(API_BASE + "/finalize", {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        document_id: sessionId,
-        text_delta: transcript,
-        clinician_overrides: overrides,
-        audio_url: currentAudioUrl,
-      }),
+      method: "POST", headers,
+      body: JSON.stringify({ document_id: sessionId, text_delta: transcript, clinician_overrides: overrides, audio_url: currentAudioUrl }),
     });
     if (res.ok) {
       const data = await res.json();
       if (data._saved === false) {
         setStatus("❌ " + (data._save_error || "Save failed"));
-        finalizeBtn.disabled  = false;
-        finalizeBtn.textContent = "✅ Approve & Finalise Record";
+        btn.disabled = false; btn.textContent = "✅ Approve & Finalise Record";
       } else {
         setStatus("✅ Record finalised & saved.");
-        finalizeBtn.textContent = "✅ Finalised";
-        // Insert generated clinical note into Word via taskpane bridge
+        btn.textContent = "✅ Finalised";
+        isLocked = true; updateLockUI();
+        // Send generated clinical note to Word via taskpane bridge
         if (data.generated_clinical_note) {
-          sendToTaskpane({ type: "insert_note", text: data.generated_clinical_note });
+          try { sendToTaskpane({ type: "insert_note", text: data.generated_clinical_note }); }
+          catch (_) { /* not in dialog context — ignore */ }
         }
-        isLocked = true;
-        updateLockUI();
       }
     } else {
       setStatus("❌ Server error " + res.status);
-      finalizeBtn.disabled  = false;
-      finalizeBtn.textContent = "✅ Approve & Finalise Record";
+      btn.disabled = false; btn.textContent = "✅ Approve & Finalise Record";
     }
   } catch (e) {
     setStatus("❌ Network error: " + e.message);
-    finalizeBtn.disabled  = false;
-    finalizeBtn.textContent = "✅ Approve & Finalise Record";
+    btn.disabled = false; btn.textContent = "✅ Approve & Finalise Record";
   }
 };
 
@@ -421,5 +420,26 @@ window.approveAndFinalize = async function () {
 Office.onReady(() => {
   document.getElementById("btn-cc-record").onclick = toggleRecording;
   updateFormFields({});
+
+  // Listen for token delivered by taskpane via messageChild
+  Office.context.ui.addHandlerAsync(
+    Office.EventType.DialogParentMessageReceived,
+    arg => {
+      try {
+        const msg = JSON.parse(arg.message);
+        if (msg.type === "auth" && msg.token) {
+          token = msg.token;
+          localStorage.setItem("emr4_token", token);
+          // If patient load failed before token arrived, retry now
+          if (!currentPatient) loadPatient();
+        }
+      } catch (_) {}
+    }
+  );
+
+  // Tell taskpane we're ready — it will respond with { type:"auth", token }
+  try { sendToTaskpane({ type: "ready" }); } catch (_) {}
+
+  // Attempt patient load with whatever token we have from localStorage
   loadPatient();
 });

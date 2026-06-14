@@ -792,15 +792,19 @@ async function approveAndFinalize() {
 
 const CC_URL = "https://yurifrusin.github.io/EMR4/command-centre/command-centre.html";
 
-function openCommandCentre() {
+async function openCommandCentre() {
   if (!currentPatient) {
     setStatus("Load a patient before opening Command Centre.");
     return;
   }
-  // Shared via localStorage (same yurifrusin.github.io origin)
-  localStorage.setItem("emr4_cc_patient_id", String(currentPatient.id));
 
-  Office.context.ui.displayDialogAsync(CC_URL, { height: 75, width: 55 }, result => {
+  // Insert the dated consultation header into the Word document
+  await insertConsultHeader(currentPatient);
+
+  // Pass patient ID via URL param — more reliable than localStorage cross-context
+  const url = `${CC_URL}?pid=${currentPatient.id}`;
+
+  Office.context.ui.displayDialogAsync(url, { height: 75, width: 55 }, result => {
     if (result.status === Office.AsyncResultStatus.Failed) {
       setStatus("Could not open Command Centre: " + result.error.message);
       return;
@@ -810,7 +814,10 @@ function openCommandCentre() {
     commandCentreDialog.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
       try {
         const msg = JSON.parse(arg.message);
-        if (msg.type === "insert_note" && msg.text) {
+        if (msg.type === "ready") {
+          // Deliver token to the dialog so it can authenticate against the backend
+          commandCentreDialog.messageChild(JSON.stringify({ type: "auth", token }));
+        } else if (msg.type === "insert_note" && msg.text) {
           insertNoteIntoWord(msg.text);
         }
       } catch (_) {}
@@ -818,9 +825,31 @@ function openCommandCentre() {
 
     commandCentreDialog.addEventHandler(Office.EventType.DialogEventReceived, () => {
       commandCentreDialog = null;
-      localStorage.removeItem("emr4_cc_patient_id");
     });
   });
+}
+
+async function insertConsultHeader(patient) {
+  const now = new Date();
+  const dd   = String(now.getDate()).padStart(2, "0");
+  const mm   = String(now.getMonth() + 1).padStart(2, "0");
+  const yyyy = now.getFullYear();
+  const timeStr = now.toLocaleTimeString("en-AU", { hour: "numeric", minute: "2-digit", hour12: true })
+                      .replace("am", "AM").replace("pm", "PM");
+  const dob = new Date(patient.date_of_birth);
+  let age = yyyy - dob.getFullYear();
+  if (now.getMonth() - dob.getMonth() < 0 ||
+      (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate())) age--;
+  const header = `${dd}-${mm}-${yyyy}  ${patient.first_name} ${patient.last_name}  ${timeStr}  ${age} years old.`;
+  try {
+    await Word.run(async ctx => {
+      const para = ctx.document.body.insertParagraph(header, Word.InsertLocation.end);
+      para.font.bold = true;
+      await ctx.sync();
+    });
+  } catch (e) {
+    setStatus("Header insert failed: " + e.message);
+  }
 }
 
 async function insertNoteIntoWord(text) {

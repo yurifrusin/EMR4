@@ -5,9 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR Centaur — Command Centre</title>
-  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="command-centre.css?v=1" />
-  <script src="command-centre.js?v=1" defer></script>
+  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <link rel="stylesheet" href="command-centre.css?v=2" />
+  <script src="command-centre.js?v=2" defer></script>
 </head>
 <body>
 
@@ -37,6 +37,16 @@
         <span id="cc-timer" class="cc-timer">00:00</span>
       </div>
     </div>
+    <!-- AI processing overlay (shown while Vertex AI transcribes) -->
+    <div id="cc-processing" class="hidden">
+      <div class="cc-proc-inner">
+        <div class="cc-spinner"></div>
+        <div class="cc-proc-text">AI is analysing your consultation…</div>
+        <div id="cc-proc-timer" class="cc-proc-elapsed">00:00</div>
+        <div class="cc-proc-bar-wrap"><div id="cc-proc-bar" class="cc-proc-bar"></div></div>
+      </div>
+    </div>
+
     <audio id="cc-audio-playback" controls class="cc-audio-player hidden"></audio>
     <div id="cc-transcript-section" class="hidden">
       <div class="cc-field-label">TRANSCRIPT</div>
