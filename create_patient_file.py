@@ -44,13 +44,12 @@ def _get_or_add_pPr(para):
     return pPr
 
 
-def set_para_shading(para, fill: str):
-    pPr = _get_or_add_pPr(para)
+def _shd_element(fill: str):
     shd = OxmlElement("w:shd")
     shd.set(qn("w:val"),   "clear")
     shd.set(qn("w:color"), "auto")
     shd.set(qn("w:fill"),  fill)
-    pPr.append(shd)
+    return shd
 
 
 def add_bookmark(para, name: str, bm_id: int):
@@ -86,19 +85,61 @@ def configure_styles(doc: Document):
 
 # ── Paragraph builders ────────────────────────────────────────────────────────
 
-def demo_line(doc: Document, text: str):
-    """Centred, grey-shaded, blue Century Schoolbook — the demographics header style."""
-    p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    set_para_shading(p, GREY_BG)
-    p.paragraph_format.space_before = Pt(0)
-    p.paragraph_format.space_after  = Pt(0)
-    run = p.add_run(text)
-    run.font.name      = "Century Schoolbook"
-    run.font.bold      = True
-    run.font.color.rgb = BLUE
-    run.font.size      = Pt(11)
-    return p
+def demo_header_table(doc: Document, lines: list):
+    """
+    Demographics header as a borderless shaded table.
+    Paragraph shading is ignored by Word Online; table cell shading renders correctly.
+    """
+    table = doc.add_table(rows=len(lines), cols=1)
+
+    # Full-width table, no borders
+    tbl    = table._tbl
+    tblPr  = tbl.find(qn("w:tblPr"))
+    if tblPr is None:
+        tblPr = OxmlElement("w:tblPr")
+        tbl.insert(0, tblPr)
+
+    tblW = OxmlElement("w:tblW")
+    tblW.set(qn("w:w"),    "5000")
+    tblW.set(qn("w:type"), "pct")
+    tblPr.append(tblW)
+
+    tblBorders = OxmlElement("w:tblBorders")
+    for side in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        b = OxmlElement(f"w:{side}")
+        b.set(qn("w:val"),   "none")
+        b.set(qn("w:sz"),    "0")
+        b.set(qn("w:space"), "0")
+        b.set(qn("w:color"), "auto")
+        tblBorders.append(b)
+    tblPr.append(tblBorders)
+
+    for i, text in enumerate(lines):
+        cell  = table.rows[i].cells[0]
+        tc    = cell._tc
+        tcPr  = tc.get_or_add_tcPr()
+
+        # Grey cell background — renders in Word Online unlike paragraph shading
+        tcPr.append(_shd_element(GREY_BG))
+
+        # Minimal cell padding (tight, like the original header)
+        tcMar = OxmlElement("w:tcMar")
+        for side, twips in (("top", "0"), ("bottom", "0"), ("left", "108"), ("right", "108")):
+            m = OxmlElement(f"w:{side}")
+            m.set(qn("w:w"),    twips)
+            m.set(qn("w:type"), "dxa")
+            tcMar.append(m)
+        tcPr.append(tcMar)
+
+        para = cell.paragraphs[0]
+        para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        para.paragraph_format.space_before = Pt(0)
+        para.paragraph_format.space_after  = Pt(0)
+        run = para.add_run(text)
+        run.font.name      = "Century Schoolbook"
+        run.font.bold      = True
+        run.font.color.rgb = BLUE
+        run.font.size      = Pt(11)
 
 
 def section_heading(doc: Document, title: str):
@@ -150,11 +191,12 @@ def build_patient_document(patient: Patient, allergies: list, medications: list)
     medicare = patient.medicare_number or "Medicare not recorded"
 
     # ── Grey demographics header (3 lines, centred) ────────────────────────────
-    demo_line(doc,
+    demo_header_table(doc, [
         f"{patient.first_name.upper()} {patient.last_name.upper()}"
-        f"   dob {dob_str}    {age} years old    {sex}")
-    demo_line(doc, addr)
-    demo_line(doc, f"Phone: {phone}        Medicare: {medicare}")
+        f"   dob {dob_str}    {age} years old    {sex}",
+        addr,
+        f"Phone: {phone}        Medicare: {medicare}",
+    ])
 
     # Spacer after header
     sp = doc.add_paragraph()
