@@ -577,3 +577,56 @@ body.maximized .textarea-lg { min-height: 420px; }
 .sidebar-chip .chip-meta  { color: var(--grey-3); font-size: 11px; }
 .sidebar-chip.danger { background: #fde8e8; border-color: #f5c0c0; }
 .sidebar-chip.danger .chip-label { color: var(--red); }
+
+/* ─── DIALOG / POP-OUT CUSTOM TITLE BAR ────────── */
+
+#dialog-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--blue-dark);
+  color: var(--white);
+  height: 32px;
+  padding: 0 10px 0 12px;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.dialog-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.dialog-winbtns {
+  display: flex;
+  gap: 2px;
+  -webkit-app-region: no-drag;
+}
+
+.dialog-wbtn {
+  width: 32px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.dialog-wbtn:hover  { background: rgba(255,255,255,0.18); }
+.dialog-wbtn:active { background: rgba(255,255,255,0.32); }
+
+/* win-minimized: collapse everything except the title bar */
+body.win-minimized #view-login,
+body.win-minimized #view-app { display: none !important; }
+
+/* win-maximized: restore-icon on the max/restore button */
+body.win-maximized #btn-win-maxrestore { font-size: 12px; }

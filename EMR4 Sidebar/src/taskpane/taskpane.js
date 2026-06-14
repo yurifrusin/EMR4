@@ -843,10 +843,62 @@ function initApp() {
     // localStorage storage events (same-origin, fires instantly).
     setStatus("Command Center — live sync active.");
 
-    // Swap button to anchor-back
+    // Swap ⛶ button to anchor-back
     const btn = document.getElementById("btn-maximize");
     btn.textContent = "↩";
     btn.title = "Close pop-out — return to docked sidebar";
+
+    // ── Custom title bar ────────────────────────────────────
+    document.getElementById("dialog-titlebar").classList.remove("hidden");
+
+    let _winMaximised = false;
+    let _restoreW = window.outerWidth;
+    let _restoreH = window.outerHeight;
+    let _restoreX = window.screenX;
+    let _restoreY = window.screenY;
+
+    document.getElementById("btn-win-minimize").onclick = () => {
+      if (document.body.classList.contains("win-minimized")) {
+        // Restore from minimised strip
+        document.body.classList.remove("win-minimized");
+        try { window.resizeTo(_restoreW, _restoreH); } catch {}
+      } else {
+        // Collapse to a thin strip — save current size first
+        _restoreW = window.outerWidth;
+        _restoreH = window.outerHeight;
+        _restoreX = window.screenX;
+        _restoreY = window.screenY;
+        document.body.classList.add("win-minimized");
+        try { window.resizeTo(window.outerWidth, 34); } catch {}
+      }
+    };
+
+    const btnMR = document.getElementById("btn-win-maxrestore");
+    btnMR.onclick = () => {
+      if (!_winMaximised) {
+        _restoreW = window.outerWidth;
+        _restoreH = window.outerHeight;
+        _restoreX = window.screenX;
+        _restoreY = window.screenY;
+        try {
+          window.moveTo(0, 0);
+          window.resizeTo(screen.availWidth, screen.availHeight);
+        } catch {}
+        _winMaximised = true;
+        btnMR.innerHTML = "&#x2750;";   // ❐ restore icon
+        btnMR.title = "Restore";
+        document.body.classList.add("win-maximized");
+      } else {
+        try {
+          window.moveTo(_restoreX, _restoreY);
+          window.resizeTo(_restoreW, _restoreH);
+        } catch {}
+        _winMaximised = false;
+        btnMR.innerHTML = "&#x25A1;";   // □ maximise icon
+        btnMR.title = "Maximise";
+        document.body.classList.remove("win-maximized");
+      }
+    };
 
     // Receive AI sync results pushed by the main taskpane
     window.addEventListener("storage", e => {
