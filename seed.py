@@ -7,7 +7,10 @@ Usage:
 """
 import sys
 from app.database import SessionLocal
+from datetime import date
 from app.models.tenancy import Practice, User, Practitioner, UserRole
+from app.models.patients import Patient
+from app.models.clinical import Allergy
 from app.models.billing import MbsDirectory, SnomedDirectory
 from app.services.auth_service import hash_password
 
@@ -88,6 +91,51 @@ def seed():
             print(f"  Created GP user: {gp_user.email}")
         else:
             print(f"  GP user already exists: {gp_user.email}")
+
+        # --- Mock Patient ---
+        patient = db.query(Patient).filter_by(
+            practice_id=practice.id, medicare_number="2345678901"
+        ).first()
+        if not patient:
+            patient = Patient(
+                practice_id=practice.id,
+                first_name="Margaret",
+                last_name="Thompson",
+                date_of_birth=date(1952, 3, 14),
+                sex="Female",
+                medicare_number="2345678901",
+                phone_mobile="0412 345 678",
+                email="margaret.thompson@example.com",
+                address_line1="42 Eucalyptus Drive",
+                address_suburb="Parramatta",
+                address_state="NSW",
+                address_postcode="2150",
+                emergency_contact_name="Robert Thompson",
+                emergency_contact_phone="0413 999 888",
+                emergency_contact_relationship="Spouse",
+                concession_type="Pensioner",
+            )
+            db.add(patient)
+            db.flush()
+            print(f"  Created patient: {patient.first_name} {patient.last_name} ({patient.id})")
+
+            db.add(Allergy(
+                practice_id=practice.id,
+                patient_id=patient.id,
+                substance="Penicillin",
+                reaction="Anaphylaxis",
+                severity="Life-threatening",
+            ))
+            db.add(Allergy(
+                practice_id=practice.id,
+                patient_id=patient.id,
+                substance="Aspirin",
+                reaction="Urticaria",
+                severity="Moderate",
+            ))
+            print("    Added 2 allergies")
+        else:
+            print(f"  Patient already exists: {patient.id}")
 
         # --- MBS Directory seed ---
         mbs_items = [

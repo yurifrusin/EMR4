@@ -2,7 +2,11 @@
 //  EMR4 Centaur — Taskpane SPA
 // ═══════════════════════════════════════════════════════════
 
-const BACKEND_URL = "http://localhost:8001";
+// When served by Node dev server (localhost:3000), hit the local FastAPI directly.
+// When served by FastAPI itself (via ngrok or production), use the same origin.
+const BACKEND_URL = (window.location.port === "3000")
+  ? "http://localhost:8001"
+  : window.location.origin;
 const API_BASE    = BACKEND_URL + "/api/v1";
 const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
 
@@ -57,6 +61,7 @@ async function apiFetch(path, opts = {}) {
     headers["Content-Type"] = headers["Content-Type"] || "application/json";
   }
   if (token) headers["Authorization"] = "Bearer " + token;
+  headers["ngrok-skip-browser-warning"] = "1";
   const res = await fetch(API_BASE + path, { ...opts, headers });
   if (res.status === 401) {
     logout();
@@ -103,7 +108,10 @@ async function login() {
     const form = new URLSearchParams({ username: email, password });
     const res  = await fetch(API_BASE + "/auth/login", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "ngrok-skip-browser-warning": "1",
+      },
       body: form.toString(),
     });
     if (!res.ok) {
