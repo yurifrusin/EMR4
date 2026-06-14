@@ -9,9 +9,11 @@ Usage:
     .venv\Scripts\python create_patient_file.py "Margaret Thompson"
     .venv\Scripts\python create_patient_file.py --id <patient-uuid>
 """
+import io
 import sys
 import uuid
 import argparse
+import zipfile
 from datetime import date, datetime
 
 from docx import Document
@@ -255,6 +257,122 @@ def build_patient_document(patient: Patient, allergies: list, medications: list)
     return doc
 
 
+# ── Add-in auto-load embedding ────────────────────────────────────────────────
+
+# Manifest add-in ID (must match manifest.xml <Id>)
+ADDIN_ID = "38e3c046-c982-4e1f-bf8b-24e04e6c9f94"
+ADDIN_VERSION = "1.0.0.0"
+
+_WEB_EXT_XML = f"""\
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<we:webextension
+  xmlns:we="http://schemas.microsoft.com/office/webextensions/webextension/2010/11"
+  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+  id="{{2D0A3B6C-4E5F-7890-ABCD-EF1234567890}}">
+  <we:reference id="{ADDIN_ID}" version="{ADDIN_VERSION}"
+    store="developer" storeType="Developer"/>
+  <we:alternateReferences/>
+  <we:properties>
+    <we:property name="Office.AutoShowTaskpaneWithDocument" value="true"/>
+  </we:properties>
+  <we:bindings/>
+  <we:snapshot xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+</we:webextension>
+"""
+
+_TASKPANES_XML = """\
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<wetp:taskpanes
+  xmlns:wetp="http://schemas.microsoft.com/office/webextensions/taskpanes/2010/11">
+  <wetp:taskpane dockstate="right" visibility="1" width="350" row="4">
+    <wetp:webextensionref
+      xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+      r:id="rId_webext1"/>
+  </wetp:taskpane>
+</wetp:taskpanes>
+"""
+
+_CT_WEBEXT   = "application/vnd.ms-office.webextension+xml"
+_CT_TASKPANE = "application/vnd.ms-office.webextensiontaskpanes+xml"
+_REL_TASKPANE = "http://schemas.microsoft.com/office/2011/relationships/webextensiontaskpanes"
+_REL_WEBEXT   = "http://schemas.microsoft.com/office/2011/relationships/webextension"
+
+
+def embed_addin(filename: str) -> None:
+    """
+    Inject webExtension + taskpanes parts into the saved .docx so that
+    Word (desktop and Online) auto-opens the EMR Centaur taskpane.
+    """
+    # Read the existing zip into memory
+    with open(filename, "rb") as f:
+        original = f.read()
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(io.BytesIO(original), "r") as zin, \
+         zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zout:
+
+        existing_names = set(zin.namelist())
+
+        for item in zin.infolist():
+            data = zin.read(item.filename)
+
+            # ── [Content_Types].xml — add two Override entries ─────────────
+            if item.filename == "[Content_Types].xml":
+                data = data.decode("utf-8")
+                insert = ""
+                if "/word/webExtensions/webExtension1.xml" not in data:
+                    insert += (
+                        f'<Override PartName="/word/webExtensions/webExtension1.xml"'
+                        f' ContentType="{_CT_WEBEXT}"/>'
+                    )
+                if "/word/webExtensions/taskpanes.xml" not in data:
+                    insert += (
+                        f'<Override PartName="/word/webExtensions/taskpanes.xml"'
+                        f' ContentType="{_CT_TASKPANE}"/>'
+                    )
+                if insert:
+                    data = data.replace("</Types>", insert + "</Types>")
+                data = data.encode("utf-8")
+
+            # ── word/_rels/document.xml.rels — add taskpanes relationship ──
+            elif item.filename == "word/_rels/document.xml.rels":
+                data = data.decode("utf-8")
+                if _REL_TASKPANE not in data:
+                    rel = (
+                        f'<Relationship Id="rId_taskpanes"'
+                        f' Type="{_REL_TASKPANE}"'
+                        f' Target="webExtensions/taskpanes.xml"/>'
+                    )
+                    data = data.replace("</Relationships>", rel + "</Relationships>")
+                data = data.encode("utf-8")
+
+            zout.writestr(item, data)
+
+        # ── Add the two new parts ──────────────────────────────────────────
+        if "word/webExtensions/webExtension1.xml" not in existing_names:
+            zout.writestr("word/webExtensions/webExtension1.xml",
+                          _WEB_EXT_XML.encode("utf-8"))
+
+        if "word/webExtensions/taskpanes.xml" not in existing_names:
+            zout.writestr("word/webExtensions/taskpanes.xml",
+                          _TASKPANES_XML.encode("utf-8"))
+
+        # ── taskpanes needs its own _rels to point at webExtension1 ────────
+        tp_rels = (
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            f'<Relationship Id="rId_webext1" Type="{_REL_WEBEXT}"'
+            f' Target="webExtension1.xml"/>'
+            '</Relationships>'
+        )
+        if "word/webExtensions/_rels/taskpanes.xml.rels" not in existing_names:
+            zout.writestr("word/webExtensions/_rels/taskpanes.xml.rels",
+                          tp_rels.encode("utf-8"))
+
+    with open(filename, "wb") as f:
+        f.write(buf.getvalue())
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
@@ -295,8 +413,10 @@ def main():
         dob      = patient.date_of_birth.strftime("%d-%m-%Y")
         filename = f"{patient.first_name.upper()} {patient.last_name.upper()} {dob}.docx"
         doc.save(filename)
+        embed_addin(filename)
         print(f"Saved: {filename}")
         print(f"  Allergies: {len(allergies)}  |  Medications: {len(meds)}")
+        print(f"  Add-in embedded: EMR Centaur will auto-open with this document")
 
     finally:
         db.close()
