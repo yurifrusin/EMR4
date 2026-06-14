@@ -192,6 +192,12 @@ async function processAudio() {
     isLocked = true;
     updateLockUI();
     document.getElementById("btn-cc-insert").disabled = false;
+
+    // Auto-insert the AI-generated SOAP note into the Word document
+    if (data.generated_clinical_note) {
+      try { sendToTaskpane({ type: "insert_note", text: data.generated_clinical_note }); }
+      catch (_) {}
+    }
   } catch (e) {
     hideProcessing();
     setStatus("❌ Transcription failed: " + e.message);
@@ -389,7 +395,11 @@ window.approveAndFinalize = async function () {
     if (token) headers["Authorization"] = "Bearer " + token;
     const res = await fetch(API_BASE + "/finalize", {
       method: "POST", headers,
-      body: JSON.stringify({ document_id: sessionId, text_delta: transcript, clinician_overrides: overrides, audio_url: currentAudioUrl }),
+      body: JSON.stringify({
+        document_id: sessionId, text_delta: transcript,
+        clinician_overrides: overrides, audio_url: currentAudioUrl,
+        patient_id: currentPatient ? String(currentPatient.id) : null,
+      }),
     });
     if (res.ok) {
       const data = await res.json();
@@ -430,8 +440,11 @@ Office.onReady(() => {
         if (msg.type === "auth" && msg.token) {
           token = msg.token;
           localStorage.setItem("emr4_token", token);
-          // If patient load failed before token arrived, retry now
           if (!currentPatient) loadPatient();
+        } else if (msg.type === "ai_context" && msg.data) {
+          // Pre-populate fields from the taskpane's background sync analysis
+          updateFormFields(msg.data);
+          setStatus("Pre-filled from document analysis — record to update.");
         }
       } catch (_) {}
     }

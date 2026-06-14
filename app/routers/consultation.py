@@ -43,6 +43,7 @@ class FinalizePayload(BaseModel):
     text_delta: str
     clinician_overrides: OverrideData
     audio_url: Optional[str] = None
+    patient_id: Optional[str] = None
 
 
 # --- Helpers ---
@@ -270,26 +271,34 @@ async def scribe_consultation(audio_file: UploadFile = File(...)):
         f.write(audio_bytes)
 
     prompt = """
-    You are an expert AI medical scribe for an Australian general practice.
-    Listen to the following audio recording of a doctor-patient consultation.
+You are an expert AI medical scribe for an Australian general practice.
+Listen to the following audio recording of a doctor-patient consultation.
 
-    RULES:
-    1. Identify speakers (Doctor vs Patient).
-    2. Ignore small talk and non-clinical content.
-    3. Extract Subjective from patient statements; Objective/Assessment/Plan from doctor.
+RULES:
+1. Identify speakers (Doctor vs Patient).
+2. Ignore small talk and non-clinical content.
+3. Extract Subjective from patient statements; Objective/Assessment/Plan from doctor.
+4. MBS billing: default Item 23 (Level B, 5-19 min) unless duration explicitly stated.
+   < 5 min → Item 3 | 5-19 min → Item 23 | 20-39 min → Item 36 | ≥ 40 min → Item 44.
 
-    Return strict JSON:
-    {
-        "raw_transcript": "Verbatim transcript.",
-        "generated_clinical_note": "Full SOAP note.",
-        "encounter_metadata": {
-            "consultation_type": "Brief summary",
-            "mbs_item_candidates": [{"item_number": "XXX", "description": "...", "justification": "..."}]
-        },
-        "clinical_diagnoses": [{"term": "Diagnosis", "snomed_ct_au_code": "XXXXXXX"}],
-        "medications_and_prescriptions": [{"drug_name": "Drug", "dosage_text": "Dosage"}]
-    }
-    """
+CRITICAL — medications_and_prescriptions:
+- Include ONLY medications the doctor explicitly prescribes in THIS consultation.
+- Do NOT include medications mentioned as allergies, adverse reactions, or contraindications.
+- Do NOT include medications the patient already takes unless the doctor changes/reissues them.
+- If a patient mentions "I'm allergic to Amoxil", do NOT add Amoxil to medications_and_prescriptions.
+
+Return strict JSON only, no markdown:
+{
+    "raw_transcript": "Verbatim transcript of the full consultation.",
+    "generated_clinical_note": "Full SOAP note suitable for insertion into a medical record.",
+    "encounter_metadata": {
+        "consultation_type": "Brief description e.g. Level B GP consultation",
+        "mbs_item_candidates": [{"item_number": "23", "description": "Level B consultation", "justification": "Duration approx 10 min"}]
+    },
+    "clinical_diagnoses": [{"term": "Diagnosis name", "snomed_ct_au_code": "XXXXXXX"}],
+    "medications_and_prescriptions": [{"drug_name": "DrugName", "dosage_text": "dose and frequency"}]
+}
+"""
     try:
         audio_part = Part.from_data(data=audio_bytes, mime_type=audio_file.content_type)
         response = model.generate_content(
@@ -306,7 +315,14 @@ async def scribe_consultation(audio_file: UploadFile = File(...)):
 @router.post("/finalize")
 async def finalize_consultation(payload: FinalizePayload, db: Session = Depends(get_db)):
     try:
-        patient = _get_or_create_default_patient(db)
+        # Use provided patient_id; fall back to default only if not supplied
+        if payload.patient_id:
+            patient = db.query(Patient).filter(Patient.id == payload.patient_id).first()
+            if not patient:
+                return {"_saved": False, "_save_error": f"Patient {payload.patient_id} not found"}
+        else:
+            patient = _get_or_create_default_patient(db)
+
         consult_type = payload.clinician_overrides.consultation_type or "Standard Consultation"
         encounter = _save_encounter(
             db, patient, payload.document_id, payload.text_delta, consult_type,
@@ -318,7 +334,28 @@ async def finalize_consultation(payload: FinalizePayload, db: Session = Depends(
             path = payload.audio_url.lstrip("/")
             if os.path.exists(path):
                 os.remove(path)
-        return {"_saved": True, "encounter_id": str(encounter.id)}
+
+        # Build a brief clinical note from the saved data to insert into Word
+        lines = [f"Consultation: {consult_type}"]
+        if payload.clinician_overrides.diagnoses:
+            dx = [d.get("term", "") for d in payload.clinician_overrides.diagnoses if d.get("term")]
+            if dx:
+                lines.append("Diagnoses: " + ", ".join(dx))
+        if payload.clinician_overrides.mbs_items:
+            mbs = [f"MBS {m.get('item_number','')}" for m in payload.clinician_overrides.mbs_items if m.get("item_number")]
+            if mbs:
+                lines.append("Billed: " + ", ".join(mbs))
+        if payload.clinician_overrides.medications:
+            rx = [f"{m.get('drug_name','')} {m.get('dosage_text','')}".strip()
+                  for m in payload.clinician_overrides.medications if m.get("drug_name")]
+            if rx:
+                lines.append("Prescribed: " + "; ".join(rx))
+
+        return {
+            "_saved": True,
+            "encounter_id": str(encounter.id),
+            "generated_clinical_note": "\n".join(lines),
+        }
     except Exception as e:
         db.rollback()
         return {"_saved": False, "_save_error": str(e)}

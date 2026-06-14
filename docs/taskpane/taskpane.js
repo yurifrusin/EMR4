@@ -824,8 +824,11 @@ async function openCommandCentre() {
       try {
         const msg = JSON.parse(arg.message);
         if (msg.type === "ready") {
-          // Deliver token to the dialog so it can authenticate against the backend
           commandCentreDialog.messageChild(JSON.stringify({ type: "auth", token }));
+          // Also send current AI analysis so Command Centre opens pre-filled
+          if (lastAiResponse) {
+            commandCentreDialog.messageChild(JSON.stringify({ type: "ai_context", data: lastAiResponse }));
+          }
         } else if (msg.type === "insert_note" && msg.text) {
           insertNoteIntoWord(msg.text);
         }
