@@ -14,6 +14,7 @@ import sys
 import uuid
 import argparse
 import zipfile
+from pathlib import Path
 from datetime import date, datetime
 
 from docx import Document
@@ -411,12 +412,18 @@ def main():
         doc = build_patient_document(patient, allergies, meds)
 
         dob      = patient.date_of_birth.strftime("%d-%m-%Y")
-        filename = f"{patient.first_name.upper()} {patient.last_name.upper()} {dob}.docx"
-        doc.save(filename)
-        embed_addin(filename)
-        print(f"Saved: {filename}")
+        name     = f"{patient.first_name.upper()} {patient.last_name.upper()} {dob}.docx"
+        letter   = patient.last_name[0].upper()
+        out_dir  = Path(r"C:\Users\YuriFrusin\OneDrive\EMR4\Data") / letter
+        out_dir.mkdir(parents=True, exist_ok=True)
+        filepath = out_dir / name
+        doc.save(filepath)
+        # embed_addin disabled: storeType="Developer" causes Word Online's OneDrive
+        # converter to silently reject the file. Re-enable with storeType="SPCatalog"
+        # once a SharePoint App Catalog is configured.
+        # embed_addin(str(filepath))
+        print(f"Saved: {filepath}")
         print(f"  Allergies: {len(allergies)}  |  Medications: {len(meds)}")
-        print(f"  Add-in embedded: EMR Centaur will auto-open with this document")
 
     finally:
         db.close()
