@@ -178,10 +178,44 @@ async function loadPatient(patientId) {
   currentPatient = data.patient;
   setBanner(currentPatient);
 
+  // Sidebar — allergies (available immediately from summary)
+  _renderSidebarAllergies(data.allergies || []);
+
+  // Sidebar — meds (separate fetch, runs in background)
+  apiFetch(`/patients/${patientId}/medications`).then(async r => {
+    if (!r || !r.ok) return;
+    _renderSidebarMeds(await r.json());
+  });
+
   // Pre-populate whichever tabs are already visible
   if (!document.getElementById("panel-history").classList.contains("hidden")) loadHistory();
   if (!document.getElementById("panel-meds").classList.contains("hidden")) loadMeds();
   if (!document.getElementById("panel-allergies").classList.contains("hidden")) renderAllergies(data.allergies || []);
+}
+
+function _renderSidebarAllergies(allergies) {
+  const el = document.getElementById("sidebar-allergies");
+  if (!el) return;
+  if (!allergies.length) { el.innerHTML = '<span class="placeholder">None recorded.</span>'; return; }
+  el.innerHTML = allergies.map(a => {
+    const danger = /severe|life/i.test(a.severity || "") ? " danger" : "";
+    return `<div class="sidebar-chip${danger}">
+      <span class="chip-label">${escHtml(a.substance)}</span>
+      <span class="chip-meta">${escHtml(a.severity || "")}</span>
+    </div>`;
+  }).join("");
+}
+
+function _renderSidebarMeds(meds) {
+  const el = document.getElementById("sidebar-meds");
+  if (!el) return;
+  if (!meds.length) { el.innerHTML = '<span class="placeholder">None active.</span>'; return; }
+  el.innerHTML = meds.map(m =>
+    `<div class="sidebar-chip">
+      <span class="chip-label">${escHtml(m.drug_name)}</span>
+      <span class="chip-meta">${escHtml(m.dosage_text || "")}</span>
+    </div>`
+  ).join("");
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -543,6 +577,19 @@ function updateFormFields(response) {
   mbsItems.forEach(m  => appendMbsRow(m.item_number || "", m.description || ""));
   diagnoses.forEach(d => appendSnomedRow(d.term || "", d.snomed_ct_au_code || ""));
   rx.forEach(m        => appendRxRow(m.drug_name || "", m.dosage_text || ""));
+
+  // Mirror AI diagnoses into the sidebar
+  const sidebarDx = document.getElementById("sidebar-dx");
+  if (sidebarDx) {
+    const realDx = diagnoses.filter(d => d.term);
+    if (realDx.length) {
+      sidebarDx.innerHTML = realDx.map(d =>
+        `<div class="sidebar-chip"><span class="chip-label">${escHtml(d.term)}</span></div>`
+      ).join("");
+    } else {
+      sidebarDx.innerHTML = '<span class="placeholder">Listening…</span>';
+    }
+  }
 }
 
 // ═══════════════════════════════════════════════════════════

@@ -468,3 +468,80 @@ select.input { cursor: pointer; }
 
 /* ─── TRANSCRIPT ─────────────────────────────── */
 .transcript-box { min-height: 80px; font-size: 11px; font-family: monospace; color: var(--grey-4); }
+
+/* ─── PATIENT SIDEBAR (hidden until wide) ────── */
+
+#patient-sidebar { display: none; }
+
+.sidebar-section { display: flex; flex-direction: column; gap: 4px; }
+
+.sidebar-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--grey-3);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--grey-2);
+  margin-bottom: 2px;
+}
+
+.sidebar-chip {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  background: var(--grey-1);
+  border: 1px solid var(--grey-2);
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+.sidebar-chip .chip-label { font-weight: 600; color: var(--text); }
+.sidebar-chip .chip-meta  { color: var(--grey-3); font-size: 11px; }
+.sidebar-chip.danger { background: #fde8e8; border-color: #f5c0c0; }
+.sidebar-chip.danger .chip-label { color: var(--red); }
+
+/* ─── WIDE / COMMAND CENTER LAYOUT ──────────────
+   Auto-activates when taskpane is undocked and
+   widened (or maximised on a second monitor).
+   No buttons — purely responsive.
+   ─────────────────────────────────────────────── */
+
+@media (min-width: 700px) {
+
+  body { font-size: 14px; }
+
+  /* Switch view-app to a 3-row × 2-col grid:
+     row 1 — banner (full width)
+     row 2 — tab nav (right col only)
+     row 3 — sidebar (left) + panels (right)       */
+  #view-app {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto auto 1fr;
+    height: 100vh;
+  }
+
+  #patient-banner  { grid-column: 1 / -1; grid-row: 1; }
+  #search-panel    { grid-column: 1 / -1; grid-row: 1; } /* absolute overlay */
+  #patient-sidebar { grid-column: 1; grid-row: 2 / 4; display: flex; flex-direction: column;
+                     gap: 10px; padding: 12px; overflow-y: auto;
+                     background: var(--white); border-right: 1px solid var(--grey-2); }
+  #tab-nav         { grid-column: 2; grid-row: 2; border-left: 1px solid var(--grey-2); }
+  #panels          { grid-column: 2; grid-row: 3; }
+
+  /* Wider inner padding */
+  .panel-scroll { padding: 14px 20px; gap: 10px; }
+
+  /* 2-col card grids for history / meds / allergies */
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    align-items: start;
+  }
+
+  /* Bigger text areas */
+  .textarea-md { min-height: 120px; }
+  .textarea-lg { min-height: 420px; }
+}
