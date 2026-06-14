@@ -429,13 +429,9 @@ window.draftLetter = async function () {
   }
 };
 
-window.insertLetterIntoWord = async function () {
+window.insertLetterIntoWord = function () {
   const text = document.getElementById("letter-body").value;
-  if (!text) return;
-  await Word.run(async ctx => {
-    ctx.document.body.insertText(text, Word.InsertLocation.replace);
-    await ctx.sync();
-  });
+  if (text) _wordInsertReplace(text);
 };
 
 window.copyLetter = function () {
@@ -482,12 +478,42 @@ function updateLockUI() {
 // ═══════════════════════════════════════════════════════════
 
 async function getDocumentText() {
+  if (IS_DIALOG) {
+    // Main taskpane keeps this key fresh every 3 s via the Word bridge
+    return localStorage.getItem("emr4_bridge_doctext") || "";
+  }
   return Word.run(async ctx => {
     const body = ctx.document.body;
     body.load("text");
     await ctx.sync();
     return body.text;
   });
+}
+
+// Route a Word insertion through the main taskpane when in dialog mode.
+// In docked mode executes directly.
+function _wordInsertParagraph(text) {
+  if (IS_DIALOG) {
+    localStorage.setItem("emr4_bridge_cmd",
+      JSON.stringify({ type: "insert-paragraph", text }));
+  } else {
+    Word.run(async ctx => {
+      ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
+      await ctx.sync();
+    });
+  }
+}
+
+function _wordInsertReplace(text) {
+  if (IS_DIALOG) {
+    localStorage.setItem("emr4_bridge_cmd",
+      JSON.stringify({ type: "insert-replace", text }));
+  } else {
+    Word.run(async ctx => {
+      ctx.document.body.insertText(text, Word.InsertLocation.replace);
+      await ctx.sync();
+    });
+  }
 }
 
 async function runBackgroundSync() {
@@ -519,6 +545,8 @@ async function runBackgroundSync() {
     });
     const data = await res.json();
     lastAiResponse = data;
+    // Push to pop-out window so its form fields stay in sync with the document
+    if (dialogRef) localStorage.setItem("emr4_bridge_ai", JSON.stringify(data));
     if (!isLocked) {
       updateFormFields(data);
       setStatus("Synced " + new Date().toLocaleTimeString());
@@ -594,10 +622,7 @@ async function processAudio() {
     updateLockUI();
 
     if (data.generated_clinical_note) {
-      Word.run(async ctx => {
-        ctx.document.body.insertParagraph(data.generated_clinical_note, Word.InsertLocation.end);
-        await ctx.sync();
-      });
+      _wordInsertParagraph(data.generated_clinical_note);
     }
   } catch {
     setStatus("❌ Scribe failed.");
@@ -810,22 +835,67 @@ async function approveAndFinalize() {
 function initApp() {
   showTab("consult");
   setBanner(null);
-  updateFormFields({});   // seed one empty row in each coding section
+  updateFormFields({});
 
   if (IS_DIALOG) {
-    // Dialog / pop-out mode — Word document API is not available
-    setStatus("Pop-out mode.");
-    document.getElementById("btn-record").disabled = true;
-    document.getElementById("btn-finalize").disabled = true;
-    document.getElementById("btn-finalize").title =
-      "Open in the docked taskpane to finalise into Word";
-    // Swap maximize button to anchor-back
+    // ── Pop-out / Command Center mode ──────────────────────
+    // Word API calls are proxied to the docked taskpane via
+    // localStorage storage events (same-origin, fires instantly).
+    setStatus("Command Center — live sync active.");
+
+    // Swap button to anchor-back
     const btn = document.getElementById("btn-maximize");
     btn.textContent = "↩";
-    btn.title = "Close pop-out — anchor back to Word";
+    btn.title = "Close pop-out — return to docked sidebar";
+
+    // Receive AI sync results pushed by the main taskpane
+    window.addEventListener("storage", e => {
+      if (e.key !== "emr4_bridge_ai") return;
+      const data = JSON.parse(e.newValue || "null");
+      if (!data) return;
+      lastAiResponse = data;
+      if (!isLocked) {
+        updateFormFields(data);
+        setStatus("Synced " + new Date().toLocaleTimeString());
+      } else {
+        setStatus("🔒 Locked — unlock to apply.");
+      }
+    });
+
   } else {
+    // ── Docked taskpane mode ────────────────────────────────
     setStatus("Ready.");
     runBackgroundSync();
+
+    // Push document text every 3 s so the pop-out can use it for Finalize
+    setInterval(async () => {
+      if (!dialogRef) return;
+      try {
+        const text = await getDocumentText();
+        localStorage.setItem("emr4_bridge_doctext", text);
+      } catch {}
+    }, 3000);
+
+    // Execute Word API commands requested by the pop-out
+    window.addEventListener("storage", async e => {
+      if (e.key !== "emr4_bridge_cmd") return;
+      const cmd = JSON.parse(e.newValue || "null");
+      if (!cmd) return;
+      try {
+        if (cmd.type === "insert-paragraph") {
+          await Word.run(async ctx => {
+            ctx.document.body.insertParagraph(cmd.text, Word.InsertLocation.end);
+            await ctx.sync();
+          });
+        } else if (cmd.type === "insert-replace") {
+          await Word.run(async ctx => {
+            ctx.document.body.insertText(cmd.text, Word.InsertLocation.replace);
+            await ctx.sync();
+          });
+        }
+      } catch (err) { console.warn("Word bridge:", err); }
+    });
+
     Office.context.document.addHandlerAsync(
       Office.EventType.DocumentSelectionChanged,
       () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
@@ -853,15 +923,6 @@ Office.onReady(info => {
 
   _wireCommonHandlers();
 
-  // ── Consult buttons (Word-only) ─────────────────────────
-  document.getElementById("btn-record").onclick   = toggleRecording;
-  document.getElementById("btn-finalize").onclick = approveAndFinalize;
-
-  // Auto-lock when the GP types in the consult panel
-  document.addEventListener("input", e => {
-    if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
-  });
-
   // ── Resume session or show login ─────────────────────────
   if (token) { showView("view-app"); initApp(); }
   else        { showView("view-login"); }
@@ -881,6 +942,15 @@ function _wireCommonHandlers() {
 
   // ── Pop-out / anchor-back button ────────────────────────
   document.getElementById("btn-maximize").onclick = toggleMaximize;
+
+  // ── Consult tab — record, finalize, auto-lock ────────────
+  // These are wired in both modes; the underlying functions check
+  // IS_DIALOG and route Word API calls through the bridge.
+  document.getElementById("btn-record").onclick   = toggleRecording;
+  document.getElementById("btn-finalize").onclick = approveAndFinalize;
+  document.addEventListener("input", e => {
+    if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
+  });
 
   // ── Auth ────────────────────────────────────────────────
   document.getElementById("btn-login").onclick = login;
