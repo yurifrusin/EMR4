@@ -36,6 +36,7 @@ class Patient(Base):
     concession_type = Column(String(50))
     consent_facial_recognition = Column(Boolean, default=False)
     face_embedding_id = Column(String(255))
+    document_url = Column(String(2048))   # Word Online URL for patient's .docx on OneDrive
     sms_consent = Column(Boolean, default=False)
     sms_consent_date = Column(DateTime(timezone=True))
     created_at = Column(DateTime(timezone=True), server_default=func.now())

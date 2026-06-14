@@ -168,8 +168,9 @@ async function searchPatients(query) {
   patients.forEach(p => {
     const div = document.createElement("div");
     div.className = "search-result-item";
+    const fileIcon = p.document_url ? ' <span title="Patient file available">📄</span>' : "";
     div.innerHTML = `
-      <div class="search-result-name">${escHtml(p.last_name)}, ${escHtml(p.first_name)}</div>
+      <div class="search-result-name">${escHtml(p.last_name)}, ${escHtml(p.first_name)}${fileIcon}</div>
       <div class="search-result-meta">DOB: ${formatDate(p.date_of_birth)} · Medicare: ${escHtml(p.medicare_number || "—")}</div>
     `;
     div.onclick = () => loadPatient(p.id);
@@ -187,6 +188,7 @@ async function loadPatient(patientId) {
   const data = await res.json();
   currentPatient = data.patient;
   setBanner(currentPatient);
+  updateOpenFileButton();
 
   // Sidebar — allergies (available immediately from summary)
   _renderSidebarAllergies(data.allergies || []);
@@ -784,14 +786,62 @@ function initApp() {
   setBanner(null);
   setStatus("Ready.");
 
-  // Seed one empty row in each coding section
   updateFormFields({});
-
   runBackgroundSync();
+  autoDetectPatient();
+
   Office.context.document.addHandlerAsync(
     Office.EventType.DocumentSelectionChanged,
     () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
   );
+}
+
+// ─── AUTO-DETECT PATIENT FROM OPEN DOCUMENT ─────────────────
+// Reads the document title (= filename without .docx), parses
+// "FIRSTNAME LASTNAME DD-MM-YYYY", looks up the patient, loads
+// them, and stores the Word Online URL back to their record.
+async function autoDetectPatient() {
+  try {
+    await Word.run(async context => {
+      const props = context.document.properties;
+      props.load("title");
+      await context.sync();
+      const title = (props.title || "").trim();
+      // Expect exactly: WORD WORD DD-MM-YYYY
+      const m = title.match(/^([A-Z]+)\s+([A-Z]+)\s+(\d{2}-\d{2}-\d{4})$/);
+      if (!m) return;
+      const [, firstName, lastName] = m;
+      const res = await apiFetch(`/patients/search?q=${encodeURIComponent(firstName + " " + lastName)}&limit=1`);
+      if (!res || !res.ok) return;
+      const patients = await res.json();
+      if (!patients.length) return;
+      const patient = patients[0];
+      // Persist the Word Online URL so future searches can open this file
+      const docUrl = Office.context.document.url || "";
+      if (docUrl && docUrl !== patient.document_url) {
+        await apiFetch(`/patients/${patient.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ document_url: docUrl }),
+        });
+      }
+      await loadPatient(patient.id);
+      setStatus(`Loaded: ${patient.first_name} ${patient.last_name}`);
+    });
+  } catch (_) {
+    // Not a patient file or Word API unavailable — silent
+  }
+}
+
+function updateOpenFileButton() {
+  const btn = document.getElementById("btn-open-file");
+  if (!btn) return;
+  if (currentPatient && currentPatient.document_url) {
+    btn.classList.remove("hidden");
+    btn.onclick = () => window.open(currentPatient.document_url, "_blank");
+  } else {
+    btn.classList.add("hidden");
+  }
 }
 
 // ═══════════════════════════════════════════════════════════

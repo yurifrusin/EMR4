@@ -96,6 +96,14 @@ html, body {
   gap: 8px;
   min-height: 52px;
 }
+#command-center-bar {
+  padding: 6px 10px;
+  background: var(--grey-1);
+  border-bottom: 1px solid var(--grey-2);
+}
+#command-center-bar .btn { font-size: 12px; padding: 5px 10px; }
+#command-center-bar .btn:disabled { opacity: 0.55; cursor: default; }
+
 .banner-logo {
   width: 28px;
   height: 28px;

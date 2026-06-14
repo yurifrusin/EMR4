@@ -26,6 +26,7 @@ class PatientCreate(BaseModel):
     emergency_contact_phone: Optional[str] = None
     emergency_contact_relationship: Optional[str] = None
     concession_type: Optional[str] = None
+    document_url: Optional[str] = None
 
 
 class PatientUpdate(PatientCreate):
@@ -58,6 +59,7 @@ class PatientOut(BaseModel):
     emergency_contact_phone: Optional[str] = None
     emergency_contact_relationship: Optional[str] = None
     concession_type: Optional[str] = None
+    document_url: Optional[str] = None
     sms_consent: Optional[bool] = False
     consent_facial_recognition: Optional[bool] = False
     created_at: Optional[datetime] = None
