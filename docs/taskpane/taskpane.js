@@ -811,10 +811,27 @@ async function autoDetectPatient() {
       const props = context.document.properties;
       props.load("title");
       await context.sync();
-      const title = (props.title || "").trim();
-      if (!title) { setStatus("No doc title — open a patient file."); return; }
+
+      let title = (props.title || "").trim();
+      const docUrl = Office.context.document.url || "";
+
+      // Word Online doesn't expose props.title — fall back to filename in the URL
+      if (!title && docUrl) {
+        const urlPath = docUrl.split("?")[0];
+        const rawName = urlPath.split("/").pop();
+        if (rawName && /\.docx$/i.test(rawName)) {
+          title = decodeURIComponent(rawName).replace(/\.docx$/i, "").trim();
+        }
+      }
+
+      if (!title) {
+        setStatus(docUrl ? `URL: ${docUrl.substring(0, 50)}` : "No title or URL — open a patient file.");
+        return;
+      }
+
       const m = title.match(/^([A-Z]+)\s+([A-Z]+)\s+(\d{2}-\d{2}-\d{4})$/);
-      if (!m) { setStatus(`Title: "${title}" — not a patient file.`); return; }
+      if (!m) { setStatus(`"${title.substring(0, 35)}" — not a patient file.`); return; }
+
       const [, firstName, lastName] = m;
       const res = await apiFetch(`/patients/search?q=${encodeURIComponent(firstName + " " + lastName)}&limit=1`);
       if (!res || !res.ok) return;
@@ -822,7 +839,7 @@ async function autoDetectPatient() {
       const patients = Array.isArray(data) ? data : [];
       if (!patients.length) { setStatus(`Patient "${firstName} ${lastName}" not in DB.`); return; }
       const patient = patients[0];
-      const docUrl = Office.context.document.url || "";
+
       if (docUrl && docUrl !== patient.document_url) {
         await apiFetch(`/patients/${patient.id}`, {
           method: "PUT",
