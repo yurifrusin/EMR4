@@ -590,7 +590,6 @@ body.maximized .textarea-lg { min-height: 420px; }
   padding: 0 10px 0 12px;
   flex-shrink: 0;
   user-select: none;
-  -webkit-app-region: drag;
 }
 
 .dialog-title {
@@ -602,7 +601,6 @@ body.maximized .textarea-lg { min-height: 420px; }
 .dialog-winbtns {
   display: flex;
   gap: 2px;
-  -webkit-app-region: no-drag;
 }
 
 .dialog-wbtn {

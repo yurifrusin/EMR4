@@ -880,19 +880,29 @@ function initApp() {
         _restoreH = window.outerHeight;
         _restoreX = window.screenX;
         _restoreY = window.screenY;
+        // Try OS-level resize first; fall back to Fullscreen API
+        let resized = false;
         try {
           window.moveTo(0, 0);
           window.resizeTo(screen.availWidth, screen.availHeight);
+          resized = true;
         } catch {}
+        if (!resized) {
+          try { document.documentElement.requestFullscreen(); } catch {}
+        }
         _winMaximised = true;
         btnMR.innerHTML = "&#x2750;";   // ❐ restore icon
         btnMR.title = "Restore";
         document.body.classList.add("win-maximized");
       } else {
-        try {
-          window.moveTo(_restoreX, _restoreY);
-          window.resizeTo(_restoreW, _restoreH);
-        } catch {}
+        if (document.fullscreenElement) {
+          try { document.exitFullscreen(); } catch {}
+        } else {
+          try {
+            window.moveTo(_restoreX, _restoreY);
+            window.resizeTo(_restoreW, _restoreH);
+          } catch {}
+        }
         _winMaximised = false;
         btnMR.innerHTML = "&#x25A1;";   // □ maximise icon
         btnMR.title = "Maximise";
