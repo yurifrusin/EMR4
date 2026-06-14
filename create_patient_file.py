@@ -92,21 +92,18 @@ def demo_line(doc: Document, text: str):
     p.paragraph_format.space_after  = Pt(0)
     run = p.add_run(text)
     run.font.name      = "Century Schoolbook"
+    run.font.bold      = True
     run.font.color.rgb = BLUE
     run.font.size      = Pt(11)
     return p
 
 
-def section_heading(doc: Document, title: str, bm_name: str = None, bm_id: int = None):
+def section_heading(doc: Document, title: str):
     p = doc.add_heading(title, level=1)
-    # Ensure the run inherits correct font (heading style already sets this,
-    # but force it in case Word overrides)
     for run in p.runs:
         run.font.name      = "Garamond"
         run.font.bold      = True
         run.font.color.rgb = BLUE
-    if bm_name and bm_id is not None:
-        add_bookmark(p, bm_name, bm_id)
     return p
 
 
@@ -161,26 +158,24 @@ def build_patient_document(patient: Patient, allergies: list, medications: list)
     sp.paragraph_format.space_before = Pt(0)
     sp.paragraph_format.space_after  = Pt(0)
 
-    bm = 1   # bookmark id counter
-
     # ── Care Plans, Health Assessments, Recalls ────────────────────────────────
-    section_heading(doc, "Care Plans, Health Assessments and Recalls", "section_careplans", bm); bm += 1
+    section_heading(doc, "Care Plans, Health Assessments and Recalls")
     body_para(doc)
 
     # ── Family History ─────────────────────────────────────────────────────────
-    section_heading(doc, "Family History", "section_family_history", bm); bm += 1
+    section_heading(doc, "Family History")
     body_para(doc)
 
     # ── Medical History ────────────────────────────────────────────────────────
-    section_heading(doc, "Medical History", "section_medical_history", bm); bm += 1
+    section_heading(doc, "Medical History")
     body_para(doc)
 
     # ── Social History ─────────────────────────────────────────────────────────
-    section_heading(doc, "Social History", "section_social_history", bm); bm += 1
+    section_heading(doc, "Social History")
     body_para(doc, "Private Health Insurance: ")
 
     # ── Current Drugs ──────────────────────────────────────────────────────────
-    section_heading(doc, "Current Drugs", "section_current_drugs", bm); bm += 1
+    section_heading(doc, "Current Drugs")
     if medications:
         for med in medications:
             dosage = f"  —  {med.dosage_text}" if getattr(med, "dosage_text", None) else ""
@@ -189,7 +184,7 @@ def build_patient_document(patient: Patient, allergies: list, medications: list)
         body_para(doc)
 
     # ── Drug Reactions ─────────────────────────────────────────────────────────
-    section_heading(doc, "Drug Reactions", "section_drug_reactions", bm); bm += 1
+    section_heading(doc, "Drug Reactions")
     if allergies:
         for a in allergies:
             life_threat = "life" in (a.severity or "").lower()
@@ -208,11 +203,11 @@ def build_patient_document(patient: Patient, allergies: list, medications: list)
         body_para(doc, "No known drug reactions.")
 
     # ── Contemporaneous Notes ──────────────────────────────────────────────────
-    section_heading(doc, "Contemporaneous Notes", "section_contemporaneous_notes", bm); bm += 1
+    section_heading(doc, "Contemporaneous Notes")
 
-    # Ready-to-type dated header for today's consult
+    # Ready-to-type dated header — bookmark used by the add-in F2-equivalent
     p = doc.add_paragraph()
-    add_bookmark(p, "latest_consult_entry", bm); bm += 1
+    add_bookmark(p, "latest_consult_entry", 1)
     p.paragraph_format.space_before = Pt(0)
     p.paragraph_format.space_after  = Pt(4)
     run = p.add_run(
@@ -226,35 +221,35 @@ def build_patient_document(patient: Patient, allergies: list, medications: list)
         body_para(doc)
 
     # ── Vaccinations ───────────────────────────────────────────────────────────
-    section_heading(doc, "Vaccinations", "section_vaccinations", bm); bm += 1
+    section_heading(doc, "Vaccinations")
     body_para(doc)
 
     # ── Specialist Reports ────────────────────────────────────────────────────
-    section_heading(doc, "Specialist Reports", "section_specialist_reports", bm); bm += 1
+    section_heading(doc, "Specialist Reports")
     body_para(doc)
 
     # ── Diagnostic Imaging ────────────────────────────────────────────────────
-    section_heading(doc, "Diagnostic Imaging", "section_diagnostic_imaging", bm); bm += 1
+    section_heading(doc, "Diagnostic Imaging")
     body_para(doc)
 
     # ── Pathology Results ─────────────────────────────────────────────────────
-    section_heading(doc, "Pathology Results", "section_pathology_results", bm); bm += 1
+    section_heading(doc, "Pathology Results")
     body_para(doc)
 
     # ── ECG Records ───────────────────────────────────────────────────────────
-    section_heading(doc, "ECG Records", "section_ecg_records", bm); bm += 1
+    section_heading(doc, "ECG Records")
     body_para(doc)
 
     # ── Prescription Records ──────────────────────────────────────────────────
-    section_heading(doc, "Prescription Records", "section_prescription_records", bm); bm += 1
+    section_heading(doc, "Prescription Records")
     body_para(doc)
 
     # ── Correspondence ────────────────────────────────────────────────────────
-    section_heading(doc, "Correspondence", "section_correspondence", bm); bm += 1
+    section_heading(doc, "Correspondence")
     body_para(doc)
 
     # ── Management Articles ───────────────────────────────────────────────────
-    section_heading(doc, "Management Articles", "section_management_articles", bm); bm += 1
+    section_heading(doc, "Management Articles")
     body_para(doc)
 
     return doc
