@@ -51,7 +51,7 @@
   <!-- Command Center launcher -->
   <div id="command-center-bar">
     <button id="btn-command-center" class="btn btn-primary btn-full btn-sm" disabled title="Coming soon">
-      🖥️ Open Command Center
+      🎤🖥️ Open Command Centre &amp; Scribe
     </button>
   </div>
 
@@ -98,19 +98,9 @@
     <div class="panel" id="panel-consult">
       <div class="panel-scroll">
 
-        <!-- Audio Scribe Controls -->
+        <!-- AI sync status -->
         <div class="consult-header">
-          <button id="btn-record" class="btn btn-record">🎤 Start Recording</button>
-          <div id="audio-status" class="recording-indicator hidden">
-            <span class="rec-dot"></span> Listening…
-          </div>
           <div id="status-msg" class="status-msg">Initializing…</div>
-        </div>
-
-        <audio id="audio-playback" controls class="audio-player hidden"></audio>
-        <div id="transcript-row" class="hidden">
-          <button class="btn btn-ghost btn-sm" onclick="toggleTranscript()">View transcript</button>
-          <textarea id="raw-transcript" class="transcript-box hidden" readonly></textarea>
         </div>
 
         <!-- Lock toggle -->

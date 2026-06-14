@@ -928,7 +928,6 @@ Office.onReady(info => {
   });
 
   // ── Consult buttons ─────────────────────────────────────
-  document.getElementById("btn-record").onclick   = toggleRecording;
   document.getElementById("btn-finalize").onclick = approveAndFinalize;
 
   // Auto-lock when the GP types in the consult panel
