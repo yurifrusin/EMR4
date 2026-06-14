@@ -27,6 +27,7 @@ let currentAudioUrl = null;
 let mbsRowCount    = 0;
 let snomedRowCount = 0;
 let rxRowCount     = 0;
+let generatedClinicalNote = null; // SOAP note from scribe — used for Word insertion
 let isRecording    = false;
 let mediaRecorder  = null;
 let audioChunks    = [];
@@ -193,9 +194,10 @@ async function processAudio() {
     updateLockUI();
     document.getElementById("btn-cc-insert").disabled = false;
 
-    // Auto-insert the AI-generated SOAP note into the Word document
+    // Store and auto-insert the AI-generated SOAP note into the Word document
     if (data.generated_clinical_note) {
-      try { sendToTaskpane({ type: "insert_note", text: data.generated_clinical_note }); }
+      generatedClinicalNote = data.generated_clinical_note;
+      try { sendToTaskpane({ type: "insert_note", text: generatedClinicalNote }); }
       catch (_) {}
     }
   } catch (e) {
@@ -353,8 +355,8 @@ document.addEventListener("click", e => {
 
 // ─── INSERT INTO WORD (via taskpane bridge) ───────────────
 window.insertIntoWord = function () {
-  const transcript = document.getElementById("cc-transcript")?.value || "";
-  const note = transcript || `[Consultation — ${new Date().toLocaleDateString("en-AU")}]`;
+  // Use SOAP note if available; raw transcript is never inserted directly
+  const note = generatedClinicalNote || `[Consultation — ${new Date().toLocaleDateString("en-AU")}]`;
   try {
     sendToTaskpane({ type: "insert_note", text: note });
     setStatus("Sent to Word ✓");
