@@ -622,9 +622,31 @@ body.maximized .textarea-lg { min-height: 420px; }
 .dialog-wbtn:hover  { background: rgba(255,255,255,0.18); }
 .dialog-wbtn:active { background: rgba(255,255,255,0.32); }
 
-/* win-minimized: collapse everything except the title bar */
+/* win-minimized: hide views, show a restoration hint in the blank area */
 body.win-minimized #view-login,
 body.win-minimized #view-app { display: none !important; }
 
-/* win-maximized: restore-icon on the max/restore button */
-body.win-maximized #btn-win-maxrestore { font-size: 12px; }
+body.win-minimized::after {
+  content: "Window minimised — click  \2013  to restore";
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20px;
+  height: calc(100vh - 32px);
+  color: var(--grey-3);
+  font-size: 11px;
+  font-family: var(--font);
+}
+
+/* win-maximized: collapse titlebar to icon-only strip; expand content */
+body.win-maximized #dialog-titlebar {
+  height: 22px;
+  padding: 0 4px;
+}
+
+body.win-maximized .dialog-title { display: none; }
+
+body.win-maximized #view-app,
+body.win-maximized #view-login {
+  height: calc(100vh - 22px);
+}
