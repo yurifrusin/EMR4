@@ -55,21 +55,23 @@ html, body {
   gap: 12px;
 }
 
-.login-logo-img {
-  display: block;
-  width: 110px;
-  height: auto;
-  margin: 0 auto 4px;
-  object-fit: contain;
-}
 .login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-size: 22px;
   font-weight: 700;
   color: var(--blue-dark);
-  text-align: center;
   letter-spacing: -0.5px;
 }
 .login-logo span { color: var(--blue-mid); }
+.login-logo-img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
 .login-subtitle { text-align: center; color: var(--grey-3); font-size: 11px; margin-top: -4px; }
 
 /* ─── MAIN APP LAYOUT ───────────────────────── */
@@ -95,11 +97,13 @@ html, body {
   min-height: 52px;
 }
 .banner-logo {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
+  max-width: 28px;
+  max-height: 28px;
   object-fit: contain;
   flex-shrink: 0;
-  opacity: 0.92;
+  opacity: 0.9;
 }
 
 .patient-name {
