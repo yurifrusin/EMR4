@@ -66,6 +66,17 @@ def add_bookmark(para, name: str, bm_id: int):
 
 # ── Style setup ───────────────────────────────────────────────────────────────
 
+def set_default_zoom(doc: Document):
+    """Embed page-width zoom so the document fills the screen on open."""
+    settings_el = doc.settings.element
+    existing = settings_el.find(qn("w:zoom"))
+    if existing is not None:
+        settings_el.remove(existing)
+    zoom = OxmlElement("w:zoom")
+    zoom.set(qn("w:val"), "bestFit")
+    settings_el.append(zoom)
+
+
 def configure_styles(doc: Document):
     """Set Normal → Century Schoolbook 11pt, Heading 1 → Garamond Bold Blue 12pt."""
     nm = doc.styles["Normal"]
@@ -170,6 +181,7 @@ def calc_age(dob: date) -> int:
 def build_patient_document(patient: Patient, allergies: list, medications: list) -> Document:
     doc = Document()
     configure_styles(doc)
+    set_default_zoom(doc)
 
     # Page margins — match the original's feel
     for section in doc.sections:
