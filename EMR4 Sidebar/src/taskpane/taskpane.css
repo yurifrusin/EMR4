@@ -55,6 +55,13 @@ html, body {
   gap: 12px;
 }
 
+.login-logo-img {
+  display: block;
+  width: 110px;
+  height: auto;
+  margin: 0 auto 4px;
+  object-fit: contain;
+}
 .login-logo {
   font-size: 22px;
   font-weight: 700;
@@ -86,6 +93,13 @@ html, body {
   justify-content: space-between;
   gap: 8px;
   min-height: 52px;
+}
+.banner-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.92;
 }
 
 .patient-name {
