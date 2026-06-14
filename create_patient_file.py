@@ -101,11 +101,11 @@ def demo_header_table(doc: Document, lines: list):
     Demographics header as a borderless shaded table.
     Paragraph shading is ignored by Word Online; table cell shading renders correctly.
     """
-    table = doc.add_table(rows=len(lines), cols=1)
+    # Single row, single cell — no row boundaries means no hairlines between lines
+    table = doc.add_table(rows=1, cols=1)
 
-    # Full-width table, no borders
-    tbl    = table._tbl
-    tblPr  = tbl.find(qn("w:tblPr"))
+    tbl   = table._tbl
+    tblPr = tbl.find(qn("w:tblPr"))
     if tblPr is None:
         tblPr = OxmlElement("w:tblPr")
         tbl.insert(0, tblPr)
@@ -118,39 +118,35 @@ def demo_header_table(doc: Document, lines: list):
     tblBorders = OxmlElement("w:tblBorders")
     for side in ("top", "left", "bottom", "right", "insideH", "insideV"):
         b = OxmlElement(f"w:{side}")
-        b.set(qn("w:val"),   "none")
-        b.set(qn("w:sz"),    "0")
-        b.set(qn("w:space"), "0")
-        b.set(qn("w:color"), "auto")
+        b.set(qn("w:val"),   "nil")
         tblBorders.append(b)
     tblPr.append(tblBorders)
 
+    cell  = table.rows[0].cells[0]
+    tc    = cell._tc
+    tcPr  = tc.get_or_add_tcPr()
+    tcPr.append(_shd_element(GREY_BG))
+
+    tcBorders = OxmlElement("w:tcBorders")
+    for side in ("top", "left", "bottom", "right"):
+        b = OxmlElement(f"w:{side}")
+        b.set(qn("w:val"), "nil")
+        tcBorders.append(b)
+    tcPr.append(tcBorders)
+
+    tcMar = OxmlElement("w:tcMar")
+    for side, twips in (("top", "0"), ("bottom", "0"), ("left", "108"), ("right", "108")):
+        m = OxmlElement(f"w:{side}")
+        m.set(qn("w:w"),    twips)
+        m.set(qn("w:type"), "dxa")
+        tcMar.append(m)
+    tcPr.append(tcMar)
+
     for i, text in enumerate(lines):
-        cell  = table.rows[i].cells[0]
-        tc    = cell._tc
-        tcPr  = tc.get_or_add_tcPr()
-
-        # Grey cell background — renders in Word Online unlike paragraph shading
-        tcPr.append(_shd_element(GREY_BG))
-
-        # Remove all cell borders (w:nil overrides default table style borders)
-        tcBorders = OxmlElement("w:tcBorders")
-        for side in ("top", "left", "bottom", "right", "insideH", "insideV"):
-            b = OxmlElement(f"w:{side}")
-            b.set(qn("w:val"), "nil")
-            tcBorders.append(b)
-        tcPr.append(tcBorders)
-
-        # Minimal cell padding (tight, like the original header)
-        tcMar = OxmlElement("w:tcMar")
-        for side, twips in (("top", "0"), ("bottom", "0"), ("left", "108"), ("right", "108")):
-            m = OxmlElement(f"w:{side}")
-            m.set(qn("w:w"),    twips)
-            m.set(qn("w:type"), "dxa")
-            tcMar.append(m)
-        tcPr.append(tcMar)
-
-        para = cell.paragraphs[0]
+        if i == 0:
+            para = cell.paragraphs[0]
+        else:
+            para = cell.add_paragraph()
         para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         para.paragraph_format.space_before = Pt(0)
         para.paragraph_format.space_after  = Pt(0)
