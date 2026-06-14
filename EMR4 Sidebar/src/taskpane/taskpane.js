@@ -831,12 +831,15 @@ async function autoDetectPatient() {
       if (!m) { setStatus(`"${title.substring(0, 35)}" — not a patient file.`); return; }
 
       const [, firstName, lastName] = m;
-      const res = await apiFetch(`/patients/search?q=${encodeURIComponent(firstName + " " + lastName)}&limit=1`);
+      // Search by last name only (backend matches on first OR last, not combined)
+      const res = await apiFetch(`/patients/search?q=${encodeURIComponent(lastName)}&limit=20`);
       if (!res || !res.ok) return;
       const data = await res.json();
-      const patients = Array.isArray(data) ? data : [];
-      if (!patients.length) { setStatus(`Patient "${firstName} ${lastName}" not in DB.`); return; }
-      const patient = patients[0];
+      const allMatches = Array.isArray(data) ? data : [];
+      const patient = allMatches.find(p =>
+        p.first_name.toUpperCase() === firstName && p.last_name.toUpperCase() === lastName
+      );
+      if (!patient) { setStatus(`Patient "${firstName} ${lastName}" not found.`); return; }
 
       if (docUrl && docUrl !== patient.document_url) {
         await apiFetch(`/patients/${patient.id}`, {
