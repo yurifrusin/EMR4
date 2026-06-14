@@ -67,8 +67,8 @@ html, body {
 }
 .login-logo span { color: var(--blue-mid); }
 .login-logo-img {
-  width: 30px;
-  height: 30px;
+  width: 45px;
+  height: 45px;
   object-fit: contain;
   flex-shrink: 0;
 }
