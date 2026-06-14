@@ -477,11 +477,17 @@ async function runBackgroundSync() {
     lastSyncedText = text;
     setStatus(isLocked ? "🔒 AI running in background…" : "Analysing…");
 
-    const headers = { "Content-Type": "application/json" };
+    const headers = {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "1",
+    };
     if (token) headers["Authorization"] = "Bearer " + token;
+    const abort = new AbortController();
+    const timeoutId = setTimeout(() => abort.abort(), 15000);
     const res = await fetch(API_BASE + "/analyze-consultation", {
       method: "POST",
       headers,
+      signal: abort.signal,
       body: JSON.stringify({
         document_id: SESSION_ID,
         text_delta: text,
@@ -489,6 +495,7 @@ async function runBackgroundSync() {
         clinician_overrides: null,
       }),
     });
+    clearTimeout(timeoutId);
     const data = await res.json();
     lastAiResponse = data;
     if (!isLocked) {
@@ -497,8 +504,8 @@ async function runBackgroundSync() {
     } else {
       setStatus("🔒 Locked — unlock to apply.");
     }
-  } catch {
-    setStatus("Waiting for backend…");
+  } catch (e) {
+    setStatus(e?.name === "AbortError" ? "Backend timeout — retrying…" : "Waiting for backend…");
   } finally {
     isSyncing = false;
   }
