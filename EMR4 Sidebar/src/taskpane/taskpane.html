@@ -38,6 +38,7 @@
     <div id="banner-controls">
       <button id="btn-search-patient" class="icon-btn" title="Search patient">🔍</button>
       <div id="status-dot" class="status-dot connected" title="Connected"></div>
+      <button id="btn-maximize" class="icon-btn" title="Pop out to floating window">⛶</button>
       <button id="btn-logout" class="icon-btn" title="Sign out">⏏</button>
     </div>
   </div>
@@ -270,6 +271,21 @@
 
   </div><!-- /panels -->
 </div><!-- /view-app -->
+
+<!-- ═══════════════════════════════════════════
+     POP-OUT ACTIVE PLACEHOLDER
+     Shown in the docked pane while the floating
+     window is open on the second screen.
+═══════════════════════════════════════════ -->
+<div id="view-popout-active" class="view hidden">
+  <div class="popout-placeholder">
+    <div class="popout-logo">EMR4 <span>Centaur</span></div>
+    <div class="popout-icon">⛶</div>
+    <div class="popout-msg">Running in floating window</div>
+    <div class="popout-sub">The full interface is open on your other screen. Word commands are relayed automatically.</div>
+    <button id="btn-popout-close" class="btn btn-primary">&#8592; Bring back to sidebar</button>
+  </div>
+</div>
 
 </body>
 </html>
