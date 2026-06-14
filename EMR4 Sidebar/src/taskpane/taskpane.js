@@ -154,26 +154,31 @@ function setBanner(patient) {
 
 async function searchPatients(query) {
   if (!query) return;
-  const res = await apiFetch(`/patients/search?q=${encodeURIComponent(query)}&limit=10`);
-  if (!res) return;
-  const patients = await res.json();
   const container = document.getElementById("patient-search-results");
-  container.innerHTML = "";
-  if (!patients.length) {
-    container.innerHTML = '<div class="search-result-item"><span class="search-result-meta">No results found.</span></div>';
-    return;
+  try {
+    const res = await apiFetch(`/patients/search?q=${encodeURIComponent(query)}&limit=10`);
+    if (!res) return;
+    const data = await res.json();
+    const patients = Array.isArray(data) ? data : [];
+    container.innerHTML = "";
+    if (!patients.length) {
+      container.innerHTML = '<div class="search-result-item"><span class="search-result-meta">No results found.</span></div>';
+      return;
+    }
+    patients.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "search-result-item";
+      const fileIcon = p.document_url ? ' <span title="Patient file available">📄</span>' : "";
+      div.innerHTML = `
+        <div class="search-result-name">${escHtml(p.last_name)}, ${escHtml(p.first_name)}${fileIcon}</div>
+        <div class="search-result-meta">DOB: ${formatDate(p.date_of_birth)} · Medicare: ${escHtml(p.medicare_number || "—")}</div>
+      `;
+      div.onclick = () => loadPatient(p.id);
+      container.appendChild(div);
+    });
+  } catch (err) {
+    if (container) container.innerHTML = `<div class="search-result-item"><span class="search-result-meta" style="color:red">Search error: ${escHtml(String(err))}</span></div>`;
   }
-  patients.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "search-result-item";
-    const fileIcon = p.document_url ? ' <span title="Patient file available">📄</span>' : "";
-    div.innerHTML = `
-      <div class="search-result-name">${escHtml(p.last_name)}, ${escHtml(p.first_name)}${fileIcon}</div>
-      <div class="search-result-meta">DOB: ${formatDate(p.date_of_birth)} · Medicare: ${escHtml(p.medicare_number || "—")}</div>
-    `;
-    div.onclick = () => loadPatient(p.id);
-    container.appendChild(div);
-  });
 }
 
 async function loadPatient(patientId) {
