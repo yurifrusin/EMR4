@@ -100,13 +100,29 @@ def _age(dob: date) -> int:
 def _shade_paragraph(paragraph, fill_hex: str) -> None:
     """Apply solid background shading to a whole paragraph (the grey demographics
     band). Matches the Margaret Thompson template, which uses paragraph shading —
-    NOT a table — so it renders reliably in Word Online as well as desktop."""
+    NOT a table — so it renders reliably in Word Online as well as desktop.
+
+    The <w:shd> element MUST be placed before <w:spacing>/<w:jc> per the CT_PPr
+    schema order. Word desktop tolerates a misplaced shd, but Word Online silently
+    ignores it (background fails to render), so we insert it at the correct spot."""
     pPr = paragraph._p.get_or_add_pPr()
+    existing = pPr.find(qn("w:shd"))
+    if existing is not None:
+        pPr.remove(existing)
     shd = OxmlElement("w:shd")
     shd.set(qn("w:val"), "clear")
     shd.set(qn("w:color"), "auto")
     shd.set(qn("w:fill"), fill_hex)
-    pPr.append(shd)
+    # Insert before the first element that legally follows shd in CT_PPr order.
+    pPr.insert_element_before(
+        shd,
+        "w:tabs", "w:suppressAutoHyphens", "w:kinsoku", "w:wordWrap",
+        "w:overflowPunct", "w:topLinePunct", "w:autoSpaceDE", "w:autoSpaceDN",
+        "w:bidi", "w:adjustRightInd", "w:snapToGrid", "w:spacing", "w:ind",
+        "w:contextualSpacing", "w:mirrorIndents", "w:suppressOverlap", "w:jc",
+        "w:textDirection", "w:textAlignment", "w:textboxTightWrap", "w:outlineLvl",
+        "w:divId", "w:cnfStyle", "w:rPr", "w:sectPr", "w:pPrChange",
+    )
 
 
 def _apply_template_styles(doc) -> None:
