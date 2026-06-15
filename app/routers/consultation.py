@@ -13,7 +13,7 @@ from google.cloud import discoveryengine_v1 as discoveryengine
 from app.config import settings
 from app.dependencies import get_db
 from app.models.patients import Patient
-from app.models.clinical import Encounter, ClinicalDiagnosis, Prescription
+from app.models.clinical import Encounter, EncounterStatus, ClinicalDiagnosis, Prescription
 from app.models.billing import MbsClaim, MbsDirectory
 import datetime
 
@@ -135,6 +135,7 @@ def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
         consultation_type=consult_type,
         raw_document_text=text,
         is_finalized=True,
+        status=EncounterStatus.Finalized,
     )
     db.add(encounter)
     db.commit()

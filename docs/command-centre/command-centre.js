@@ -286,9 +286,9 @@ function appendRxRow(drugName, dosage) {
   div.className = "cc-coding-row"; div.id = `cc-rx-group-${i}`;
   div.innerHTML = `
     <input type="text" id="cc-rx-name-${i}" class="cc-input" value="${escHtml(drugName)}"
-           placeholder="Drug name…" style="flex:2">
+           placeholder="Drug name…" style="flex:2;min-width:0">
     <input type="text" id="cc-rx-dose-${i}" class="cc-input" value="${escHtml(dosage)}"
-           placeholder="Dosage…">
+           placeholder="Dosage…" style="flex:1;min-width:0">
     <button class="btn-remove" onclick="removeRow('cc-rx-group-${i}')">✕</button>`;
   document.getElementById("cc-rx-container").appendChild(div);
 }

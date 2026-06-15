@@ -768,7 +768,7 @@ async function approveAndFinalize() {
     const res = await fetch(API_BASE + "/finalize", {
       method: "POST",
       headers,
-      body: JSON.stringify({ document_id: SESSION_ID, text_delta: text, clinician_overrides: overrides, audio_url: currentAudioUrl }),
+      body: JSON.stringify({ document_id: SESSION_ID, text_delta: text, clinician_overrides: overrides, audio_url: currentAudioUrl, patient_id: currentPatient ? String(currentPatient.id) : null }),
     });
     if (res.ok) {
       const data = await res.json();
@@ -866,7 +866,11 @@ async function insertConsultHeader(patient) {
 async function insertNoteIntoWord(text) {
   try {
     await Word.run(async ctx => {
-      ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
+      const lines = (text || "").split("\n");
+      const body = ctx.document.body;
+      for (const line of lines) {
+        body.insertParagraph(line, Word.InsertLocation.end);
+      }
       await ctx.sync();
     });
     setStatus("Note inserted into document.");
