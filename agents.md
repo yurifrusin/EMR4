@@ -18,7 +18,7 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `6bf89dc` — "Add responsive wide layout with patient summary sidebar" |
+| **Last pushed commit** | `316fd0c` — "Reflect finalised coding in taskpane; open dialog from click gesture" |
 
 ### Tag map (all tags pushed to remote)
 
@@ -65,16 +65,35 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 - Manifest updated: ProviderName=EMR4, DefaultLocale=en-AU, button label="EMR4 Copilot"
 - `create_patient_template.py` — generates the `.dotx` with Custom XML Part
 
+### Phase 1.5 ✅ Command Centre & Scribe + document anchoring (this work)
+- **Hosting**: taskpane static files served from **GitHub Pages** (`docs/`), API calls go to **ngrok** (`property-cinch-backfield.ngrok-free.dev`). `sync_taskpane.py` copies `EMR4 Sidebar/src/taskpane/*` → `docs/taskpane/` and patches BACKEND_URL/NGROK_URL. Run it after every taskpane edit, then push. Cache-bust via `?v=N` on css/js in taskpane.html / command-centre.html — increment on every deploy.
+- **Command Centre** (`docs/command-centre/`): separate **window** via `displayDialogAsync` (NOT iframe — iframe denies microphone). Hosts the AI Scribe (record → Gemini transcribe → SOAP note review → insert). Token + patient delivered via `?pid=` URL param and `messageChild` handshake. This is the screen-real-estate surface for future Billing/Results Review — see memory `project_two_surface_architecture`.
+- **Document anchoring (Dr Shera method)** — patient `.docx` has Heading 1 section titles (Contemporaneous Notes, Vaccinations, …); consult entries are Normal+bold lines `DD-MM-YYYY  Name  H[:MM] AM/PM  N years old.` under Contemporaneous Notes (newest on top). `getCurrentConsultText()` scopes AI to ONLY the current consult (planted header → previous consult header / next Heading 1). See memory `project_document_anchoring`.
+- **Start Consultation** button + **Ctrl+Shift+N** (shared runtime, ExtendedOverrides/shortcuts.json, manifest v1.1.0.0) plants the dated header under Contemporaneous Notes and bookmarks it (`EMR4_NOTE_POINT`); notes/SOAP insert right after it.
+- **Gating**: `runBackgroundSync` does nothing until `consultStarted` (set by Start Consultation / opening Command Centre); prevents re-analysing a previously finalised consult on open. Reset on patient load / logout / finalise.
+- **consult_finalized** message: Command Centre pushes its finalised coding back to the taskpane Consult tab (locked) + refreshes history/meds/sidebar.
+- Backend `analyze-consultation`/`scribe-consultation` wrapped in `asyncio.to_thread` (Vertex AI was blocking the event loop); MBS descriptions truncated to 200 chars in prompt context (item 23's full text listed every excluded item → huge/slow prompt); encounters saved with `status=Finalized`; `finalize` takes `patient_id`.
+
 ### Not yet started
 - Phase 2 onwards (see `implementation_plan.md §12`)
+- **Phase 2 (planned) for anchoring**: content-control protect Heading 1 section headers (cannotDelete) + tag-based section location; global Ctrl+Shift+N while cursor is in the document body (needs verifying the shared-runtime shortcut fires there).
 
 ---
 
 ## 4. Key Architectural Decision Pending
 
-### Word Desktop vs Word Online
+### Word Desktop vs Word Online — ✅ RESOLVED: Word Online (browser) is the target
 
-**Decision in progress** — not yet finalised.
+Practices use browsers (Chrome confirmed working). Two-surface architecture is locked in:
+**taskpane = quick view/jobs (tabs); Command Centre window = extensive work (mic + real estate)**.
+The Command Centre must be a real window (iframe denies microphone). Office shows a
+"wants to display a new window" **consent prompt** each time — this is Office's own
+security gate, NOT the browser popup blocker, and appears unsuppressible (opening from
+the click gesture is the only mitigation tried). Accept one "Allow" click per open.
+
+Original analysis retained below for reference.
+
+### (Reference) Word Desktop vs Word Online tradeoffs
 
 **Context:** The implementation plan (§2.1) calls for the GP to undock the taskpane and maximise it on a second monitor. In Word **desktop**, the taskpane can be undocked by dragging its title bar away from the Word window edge — but only when Word itself is not maximised, and dragging from the side causes it to snap to the opposite dock rather than float. This is counterintuitive for end users.
 
@@ -137,6 +156,13 @@ Generates `EMR4 Patient File.dotx` in the project root.
 | Emoji in print statements crash on Windows | Windows cp1252 console can't encode `✅` | Replaced all emoji in print statements with ASCII equivalents e.g. `[OK]` |
 | `window.resizeTo()` / `requestFullscreen()` do nothing | Office WebView2 (desktop) blocks these APIs for `displayDialogAsync` dialogs | No fix possible in desktop Word; works in Word Online browser popup |
 | Native taskpane snaps to dock instead of floating | Office behaviour: dragging taskpane to the side of the Word window re-docks it | User must drag from title bar when Word is NOT maximised; or use Word Online |
+| Command Centre iframe: "Microphone denied" | Office `displayInIframe` dialogs don't include `microphone` in their permissions policy | Use a real window (no `displayInIframe`); mic works there |
+| "[object Object]" pasted as SOAP note | Gemini sometimes returns `generated_clinical_note` as a {S,O,A,P} object, not a string | `soapNoteToText()` in command-centre.js coerces to plain text; prompt also asks for a string |
+| Taskpane filled with previous consult on file open | `getCurrentConsultText` read any consult slice in the doc regardless of session | Gate `runBackgroundSync` on `consultStarted` — no analysis until the doctor starts a consult |
+| Phantom "Item 23" on freshly opened file | analyze-consultation defaults to item 23 with no duration; ran on near-empty doc | Same gating fix — nothing analysed until Start Consultation |
+| Vertex AI froze whole backend (3+ min loads) | `model.generate_content()` is blocking, called in async route → froze the event loop | Wrap calls in `asyncio.to_thread` |
+| Patient saved to "John Citizen" | finalize always used default patient | `FinalizePayload.patient_id`; taskpane + Command Centre both send it |
+| Terminal flooded thousands of item numbers | MBS item 23 description literally lists every excluded item (3–11000+) | Truncate MBS descriptions to 200 chars; print one-line summary not full JSON |
 
 ---
 
@@ -155,17 +181,29 @@ Generates `EMR4 Patient File.dotx` in the project root.
 | `EMR4 Sidebar/src/taskpane/taskpane.js` | Full SPA logic — auth, tabs, audio scribe, AI sync, Word API calls |
 | `EMR4 Sidebar/src/taskpane/taskpane.html` | SPA HTML — 8 tab panels + patient sidebar |
 | `EMR4 Sidebar/src/taskpane/taskpane.css` | Styles + `@media (min-width:700px)` Command Center layout |
-| `EMR4 Sidebar/manifest.xml` | Office add-in manifest |
+| `EMR4 Sidebar/manifest.xml` | Office add-in manifest (local dev) |
+| `manifest.online.xml` | **Active manifest** — GitHub Pages source, shared runtime, ExtendedOverrides → shortcuts.json, v1.1.0.0. Re-sideload after manifest changes. |
+| `EMR4 Sidebar/src/taskpane/shortcuts.json` | Keyboard-shortcut definition (Ctrl+Shift+N → StartConsultation) |
+| `docs/taskpane/` | GitHub Pages copy of the taskpane (generated by sync_taskpane.py) |
+| `docs/command-centre/command-centre.{html,js,css}` | Command Centre window (Scribe). Edit directly in docs/. |
+| `sync_taskpane.py` | Copies taskpane src → docs/ and patches BACKEND_URL/NGROK_URL. Run after every taskpane edit. |
+| `app/routers/consultation.py` | analyze-consultation, scribe-consultation, finalize. Backend AI. Restart uvicorn after edits. |
 | `.env.example` | Template for local config (actual `.env` not committed) |
 
 ---
 
 ## 8. What to Do Next
 
-1. **Decide Word Desktop vs Word Online** — test Custom XML Part read in Word Online (see §4)
-2. **If Word Online:** Restore `displayDialogAsync` pop-out from tag `phase-1-popout-experiment` and add working `window.resizeTo()` maximize button
-3. **Tag `phase-1-stable`** — once the Command Center layout is confirmed working (wide layout on second monitor), tag and push
-4. **Start Phase 2** — Living Diary: SharePoint-hosted `.docx`, Parse & Lock (`Ctrl+Shift+B`), appointment CRUD, internal messaging, SMS reminders
+1. **Finish testing Phase 1.5** — Start Consultation → type/record → review SOAP → finalise; confirm scoping, taskpane reflection of finalised coding, no phantom analysis on open.
+2. **Phase 2 of anchoring** — content-control protect Heading 1 headers (cannotDelete) + tag-based section location; verify global Ctrl+Shift+N fires while cursor is in the document body.
+3. **Tag `phase-1-stable`** once the above is confirmed.
+4. **Start Phase 2** — Living Diary: SharePoint-hosted `.docx`, Parse & Lock, appointment CRUD, internal messaging, SMS reminders.
+
+### Deploy reminders
+- Taskpane edit → `python sync_taskpane.py` → bump `?v=N` in taskpane.html → commit docs/ → push → **close & reopen the document** (shared runtime caches JS for the doc session; a sidebar toggle is not enough).
+- Command Centre edit → edit in `docs/command-centre/` → bump `?v=N` → push (loads fresh each open).
+- Backend edit (`consultation.py`) → restart uvicorn.
+- Manifest edit → re-sideload `manifest.online.xml`.
 
 ---
 
@@ -191,4 +229,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-14 — Session 2 complete. Phase 1 substantially done. Word Online decision pending.*
+*Last updated: 2026-06-15 — Phase 1.5: Command Centre & Scribe + Dr Shera document anchoring (scope AI to current consult). Word Online + two-surface architecture locked in. HEAD `316fd0c`.*
