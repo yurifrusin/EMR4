@@ -297,7 +297,7 @@ CRITICAL — medications_and_prescriptions:
 Return strict JSON only, no markdown:
 {
     "raw_transcript": "Verbatim transcript of the full consultation.",
-    "generated_clinical_note": "Full SOAP note suitable for insertion into a medical record.",
+    "generated_clinical_note": "Full SOAP note as a SINGLE PLAIN-TEXT STRING (use \\n line breaks and S:/O:/A:/P: labels). Do NOT return a nested object.",
     "encounter_metadata": {
         "consultation_type": "Brief description e.g. Level B GP consultation",
         "mbs_item_candidates": [{"item_number": "23", "description": "Level B consultation", "justification": "Duration approx 10 min"}]

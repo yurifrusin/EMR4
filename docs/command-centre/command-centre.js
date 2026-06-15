@@ -53,6 +53,24 @@ function setStatus(msg) {
   if (el) el.textContent = msg;
 }
 
+// Gemini sometimes returns the SOAP note as a string, sometimes as a structured
+// {subjective, objective, assessment, plan} object. Normalise to plain text.
+function soapNoteToText(note) {
+  if (note == null) return "";
+  if (typeof note === "string") return note;
+  if (typeof note === "object") {
+    const order  = ["subjective", "objective", "assessment", "plan"];
+    const labels = { subjective: "Subjective", objective: "Objective", assessment: "Assessment", plan: "Plan" };
+    const lines = [];
+    for (const k of order) if (note[k]) lines.push(`${labels[k]}: ${note[k]}`);
+    for (const k of Object.keys(note)) {
+      if (!order.includes(k) && note[k]) lines.push(`${k}: ${note[k]}`);
+    }
+    return lines.join("\n\n") || JSON.stringify(note);
+  }
+  return String(note);
+}
+
 // ─── OFFICE MESSAGING ─────────────────────────────────────
 // Note: throws if not launched via displayDialogAsync — callers catch.
 function sendToTaskpane(msg) {
@@ -197,7 +215,7 @@ async function processAudio() {
     // Show the AI-generated SOAP note for the doctor to review/edit BEFORE it is
     // written to Word. Nothing is inserted automatically — the doctor decides.
     if (data.generated_clinical_note) {
-      generatedClinicalNote = data.generated_clinical_note;
+      generatedClinicalNote = soapNoteToText(data.generated_clinical_note);
       const noteEl = document.getElementById("cc-clinical-note");
       if (noteEl) noteEl.value = generatedClinicalNote;
       document.getElementById("cc-note-section").classList.remove("hidden");

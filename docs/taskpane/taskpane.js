@@ -477,12 +477,20 @@ async function getDocumentText() {
 
 async function runBackgroundSync() {
   if (isRecording || isSyncing || commandCentreOpen) return;
+  // Don't analyse anything until the doctor explicitly starts a consultation this
+  // session — otherwise a previously finalised consult left in the document would
+  // be re-analysed on open and fill the fields uninvited.
+  if (!consultStarted) {
+    if (!isLocked) updateFormFields({});
+    setStatus("Ready — click Start Consultation to begin.");
+    return;
+  }
   isSyncing = true;
   try {
     const text = await getCurrentConsultText();
     if (!text || !text.trim()) {
       if (!isLocked) updateFormFields({});
-      setStatus(consultStarted ? "Listening — type your consultation notes…" : "Ready — click Start Consultation to begin.");
+      setStatus("Listening — type your consultation notes…");
       lastSyncedText = "";
       return;
     }
