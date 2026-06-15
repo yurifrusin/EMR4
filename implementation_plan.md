@@ -634,9 +634,33 @@ flowchart TD
 
 ---
 
-## 14. Antigravity Sub-Agent Strategy
+## 14. Agent / Sub-Agent Strategy (Claude Code)
 
-### Sub-Agent Definitions
+> **Reframed after building Phase 1.** This project is now developed in **Claude Code**,
+> not Antigravity. The roles below are conceptual ownership areas, not always separate
+> agents. The deployment guidance has been rewritten around a lesson learned in Phase 1.
+
+### The core principle: parallelise the decoupled, single-thread the coupled
+
+Phase 1 surfaced a recurring failure mode — **cross-file invariants silently breaking**
+when related files drift apart (e.g. the section-heading text/tag mismatch between
+`taskpane.js` and `create_patient_file.py`; see CLAUDE.md "Cross-File Invariants").
+Parallel agents editing in isolation are exactly how those invariants break.
+
+Therefore:
+- **Tightly-coupled clinical core** (taskpane SPA + FastAPI backend + Word templates +
+  `docs/` deploy) → **one coordinated thread.** These share invariants and a fiddly
+  deploy loop (edit → `sync_taskpane.py` → bump `?v=N` → push → reopen Word). Splitting
+  them across parallel agents costs more in reconciliation than it saves.
+- **Genuinely decoupled standalone apps** (kiosk, booking portal, PWA, waiting-room
+  display, results parser, VOIP template) → **good parallel sub-agent / worktree
+  candidates.** Separate codebases, few shared invariants.
+- **Bounded research/exploration** (API docs, regulatory lookups, locating code) →
+  spawn a sub-agent anytime; it's cheap and doesn't touch shared state.
+- **`security-engineer`** reviews every PHI-touching phase regardless of threading
+  (see §15A).
+
+### Ownership areas
 
 | Agent | Workspace | Role |
 |:---|:---|:---|
@@ -653,16 +677,20 @@ flowchart TD
 | `research` | `inherit` | Documentation, API research, regulatory guidance |
 | `security-engineer` | `inherit` | Threat modelling, multi-tenant isolation (RLS) + cross-tenant tests, audit logging, secrets management, de-identification validation, pen-test prep. **Has review rights over every phase that touches PHI/PII** — no PHI-handling phase merges without its sign-off. |
 
-### Phase-by-Phase Deployment
+### How to deploy agents per phase (Claude Code)
 
-Use `/teamwork-preview` for complex phases. Example for Phase 6:
+Parallel sub-agents (optionally with `isolation: worktree`) pay off when sub-tasks are
+**independent and don't share invariants**. Phase 6 (results) is a good fit — the PIT
+parser, HL7 parser, Relay Agent, and inbox API are largely separable:
 ```
-/teamwork-preview Build the results parsing system.
-Agent 1: PIT parser + test fixtures
-Agent 2: HL7 v2 parser + test fixtures
-Agent 3: Results Relay Agent
-Agent 4: Results inbox API + alert engine
+Sub-agent A: PIT parser + test fixtures
+Sub-agent B: HL7 v2 parser + test fixtures
+Sub-agent C: Results Relay Agent (+ ingest auth — see §15A)
+Sub-agent D: Results inbox API + alert engine
 ```
+By contrast, do **not** fan out the taskpane/backend/template core this way — keep it a
+single thread and lean on the Cross-File Invariants checklist. When in doubt: if two
+sub-tasks would edit files that must agree with each other, they belong in one thread.
 
 ---
 

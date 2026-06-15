@@ -18,7 +18,7 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `3364bba` — "Fix demographics grey shading not rendering in Word Online" (whitespace-normalisation commit follows) |
+| **Last pushed commit** | `ba0daf3` — "Security P0 fixes: fail-closed JWT secret + CORS allow-list" (Phase 1 close-out commit follows) |
 
 ### Tag map (all tags pushed to remote)
 
@@ -26,6 +26,7 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 |---|---|---|
 | `phase-1-raw` | `257e214` | Phase 0 + Phase 1 initial implementation — first working version |
 | `phase-1-popout-experiment` | `d79cb1d` | All pop-out / displayDialogAsync experiments from session 2 |
+| `phase-1-stable` | _Phase 1 close-out commit_ | Phase 0 + 1 + 1.5 complete & tested: patient file generator, locked section headers, CC lock, demographics, security P0 fixes, doc reconciliation. One runtime caveat: Ctrl+Shift+N in document body (wiring verified, not yet runtime-confirmed). |
 
 ### Notable un-tagged commits (in order)
 
@@ -230,10 +231,24 @@ clean child order; new injections should do the same.
 
 ## 8. What to Do Next
 
-1. **Finish testing Phase 1.5** — load Margaret Thompson → confirm "Document structure secured — N sections protected" status; Start Consultation → type/record → review SOAP → finalise; confirm no phantom analysis on open, CC lock/unlock works.
-2. **Verify Ctrl+Shift+N** fires while cursor is in the document body (not just taskpane focused).
-3. **Tag `phase-1-stable`** once the above is confirmed.
-4. **Start Phase 2** — Living Diary: SharePoint-hosted `.docx`, Parse & Lock, appointment CRUD, internal messaging, SMS reminders.
+1. ✅ **Phase 1 closed out** — `phase-1-stable` tagged. Patient file generator, locked
+   section headers, CC lock, demographics, and security P0 fixes all tested.
+2. **One runtime caveat to confirm** — Ctrl+Shift+N firing while the cursor is in the
+   **document body** (not the taskpane). The wiring is verified correct in code
+   (`shortcuts.json` → manifest `SharedRuntime` + `ExtendedOverrides` →
+   `Office.actions.associate`), but the shared-runtime shortcut firing in the body is an
+   Office runtime behaviour only confirmable live in Word. If it fails, the in-taskpane
+   keydown fallback still works; move the tag if needed.
+3. **Start Phase 2** — Living Diary: SharePoint-hosted `.docx`, Parse & Lock, appointment
+   CRUD, internal messaging, SMS reminders. **First** resolve the New Patient file↔DB
+   bridge below.
+
+### 🛠️ Known friction — the taskpane deploy loop
+Every taskpane change is: edit src → `python sync_taskpane.py` → bump `?v=N` in
+taskpane.html → commit `docs/` → push → **close & reopen the Word document**. This is the
+biggest drag on iteration speed. Candidate future improvement: a single script that does
+sync + version-bump + commit, and/or a smarter cache-bust. Not urgent, but worth it before
+Phase 2's heavier frontend work.
 
 ### ⚠️ Open architectural gap — New Patient protocol must bridge file + DB record
 
@@ -299,4 +314,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-16 — Phase 1.5 addendum: full taskpane CC lock (`setTaskpaneLocked`), Heading 1 content-control protection (`repairDocumentStructure`), per-patient generator `create_patient_file.py` with baked-in locked headers + template fonts + grey demographics band (shaded paragraphs, Online-safe OOXML order) + whitespace normalisation, CLAUDE.md added, §6 OOXML-injection-order note. Billy Frusin seeded; file/DB-record bridge gap documented (§8). Cybersecurity review → implementation_plan.md §15A security workstream + `security-engineer` sub-agent. HEAD `33bf244` + security/plan commit.*
+*Last updated: 2026-06-16 — Phase 1 closed out + `phase-1-stable` tagged. This session: taskpane CC lock, content-control header protection (`repairDocumentStructure` + baked into `create_patient_file.py`), template fonts + grey demographics band, whitespace normalisation, Billy seeded, file/DB-bridge gap documented (§8). Security: review → implementation_plan.md §15A + `security-engineer`; P0 fixes applied (fail-closed secret_key, CORS allow-list). Plan reconciliation: build-step contradiction fixed, "Word Online is strict" + Cross-File Invariants added to CLAUDE.md, §14 agent strategy rewritten for Claude Code.*
