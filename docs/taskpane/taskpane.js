@@ -483,7 +483,7 @@ async function runBackgroundSync() {
     };
     if (token) headers["Authorization"] = "Bearer " + token;
     const abort = new AbortController();
-    const timeoutId = setTimeout(() => abort.abort(), 15000);
+    const timeoutId = setTimeout(() => abort.abort(), 45000);
     const res = await fetch(API_BASE + "/analyze-consultation", {
       method: "POST",
       headers,
@@ -505,7 +505,7 @@ async function runBackgroundSync() {
       setStatus("🔒 Locked — unlock to apply.");
     }
   } catch (e) {
-    setStatus(e?.name === "AbortError" ? "Backend timeout — retrying…" : "Waiting for backend…");
+    setStatus(e?.name === "AbortError" ? "AI analysis slow — will retry on next change…" : "Waiting for backend…");
   } finally {
     isSyncing = false;
   }
