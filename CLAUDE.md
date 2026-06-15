@@ -85,6 +85,10 @@ Patient `.docx` files use **Heading 1** sections (`Contemporaneous Notes`, `Vacc
 - `consultStarted` flag gates all background AI sync — prevents re-analysing a finalised consult on document open
 - Custom XML Part `<emr4:document-type>patient|diary</emr4:document-type>` routes taskpane UI mode
 
+**Section header protection.** Each Heading 1 section is wrapped in a locked content control (`cannotDelete` + `cannotEdit`, tag `emr4-section-*`) so headers can't be accidentally deleted/reformatted. Two sources must stay in sync: `PROTECTED_SECTIONS` in `taskpane.js` and `SECTION_HEADINGS` in `create_patient_file.py`. New files get the controls baked in at creation; `repairDocumentStructure()` in `taskpane.js` retro-fits legacy files on patient load (no-op if already tagged).
+
+**Patient file generation.** `create_patient_file.py` produces a per-patient `.docx` named `FIRSTNAME LASTNAME DD-MM-YYYY.docx` (so `autoDetectPatient()` can identify it) with demographics header, the Dr Shera section headings, locked content controls, and the `document-type=patient` Custom XML Part. The core `create_patient_docx(PatientData, output_dir)` function is the integration point for the future New Patient userform's FastAPI endpoint. Fonts match the Margaret Thompson template: **Century Schoolbook 11pt** body, **Garamond 12pt** headings — both ship with Microsoft Office, so no font install is needed on Word machines.
+
 ### Deployment
 
 | Component | Where |
@@ -116,6 +120,7 @@ Patient `.docx` files use **Heading 1** sections (`Contemporaneous Notes`, `Vacc
 | [`agents.md`](agents.md) | **Read first.** Handover state, architectural decisions, per-phase completion status. Update every significant commit. |
 | [`implementation_plan.md`](implementation_plan.md) | 12-phase master blueprint and vision |
 | [`sync_taskpane.py`](sync_taskpane.py) | Copies taskpane src → docs/, patches URLs — run after every frontend edit |
+| [`create_patient_file.py`](create_patient_file.py) | Generates a per-patient `.docx` (demographics + locked section headers + Custom XML Part). `create_patient_docx()` is importable by the future New Patient userform endpoint. |
 | `EMR4 Sidebar/src/taskpane/taskpane.js` | Main taskpane SPA logic |
 | `docs/command-centre/command-centre.html` | AI Scribe window (edit directly, no build step) |
 | `app/routers/consultation.py` | Core AI analysis and scribe endpoints |

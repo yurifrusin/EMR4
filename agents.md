@@ -18,7 +18,7 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `03d5575` — "Protect Heading 1 section headers with locked content controls (v=23)" |
+| **Last pushed commit** | `bbb6b12` — "Always render address/phone/medicare lines in patient file demographics" |
 
 ### Tag map (all tags pushed to remote)
 
@@ -35,6 +35,10 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 | `7d5546e` | Disable Finalise button while CC open; restore on CC close |
 | `87359cc` | `setTaskpaneLocked()` — disable ALL taskpane editing controls while CC open (v=22) |
 | `03d5575` | `repairDocumentStructure()` — Heading 1 section headers wrapped in locked content controls (v=23) |
+| `28483bb` | Run repair on initApp + fix ContentControlAppearance "Hidden" string (v=24) |
+| `3578889` | Add `create_patient_file.py` per-patient generator; fix Care Plans heading text |
+| `910c3bb` | Bake template fonts (Century Schoolbook / Garamond) + locked content controls into generator |
+| `bbb6b12` | Always render address/phone/medicare demographic lines |
 
 ---
 
@@ -78,7 +82,9 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 
 ### Phase 1.5 addendum (this session) ✅
 - **`setTaskpaneLocked(locked)`** — disables/restores all taskpane editing controls while Command Centre is open: `btn-command-center`, `btn-start-consult`, `btn-lock`, `btn-search-patient`, `btn-open-file`, `btn-add-mbs/snomed/rx`, `btn-finalize`, `consult-type` input, and dynamic coding row containers (`.cc-locked` CSS). Called on CC open/close. Finalize stays disabled if consult was already finalised inside CC.
-- **`repairDocumentStructure()`** — wraps each known Heading 1 section header in a hidden content control (`cannotDelete: true`, `cannotEdit: true`, `tag: "emr4-section-*"`). Called automatically on every patient load; no-op if already tagged. `insertConsultHeader()` now uses tag-based CN lookup (`emr4-section-cn`) as primary with text-search fallback. `create_patient_template.py` updated to Dr Shera section order.
+- **`repairDocumentStructure()`** — wraps each known Heading 1 section header in a hidden content control (`cannotDelete: true`, `cannotEdit: true`, `tag: "emr4-section-*"`). Called from `initApp()` (every document open) AND on patient load; no-op if already tagged. Uses the `"Hidden"` appearance string (the enum is undefined at runtime). `insertConsultHeader()` uses tag-based CN lookup (`emr4-section-cn`) as primary with text-search fallback. Safety net for **legacy** files only.
+- **`create_patient_file.py`** — the per-patient `.docx` generator (supersedes the blank `create_patient_template.py` `.dotx` approach). Produces `FIRSTNAME LASTNAME DD-MM-YYYY.docx` with demographics header (always all 3 lines: name/dob/age/sex, address, phone+medicare), the 15 Dr Shera section headings each **baked into a locked content control at creation** (`w:lock=sdtContentLocked`), and the `document-type=patient` Custom XML Part. Core fn `create_patient_docx(PatientData, output_dir) -> Path` is the integration point for the future New Patient userform endpoint. CLI: `--first/--last/--dob/--sex/--address/--phone/--medicare/--out`. `SECTION_HEADINGS` (text, tag) pairs MUST stay in sync with `PROTECTED_SECTIONS` in taskpane.js.
+- **Fonts** — body **Century Schoolbook 11pt**, headings **Garamond 12pt** bold blue `0000FF`, matching the Margaret Thompson template. Both fonts ship with Microsoft Office, so **no font install is required** on any machine running Word (confirmed present in `C:\Windows\Fonts`: `GARA.TTF`, `CENSCBK.TTF`). If guaranteed rendering on non-Office machines is ever needed, embed the fonts in the `.docx` (`settings.xml` `w:embedTrueTypeFonts` + `/word/fonts/` parts) — note embeddability/licensing bits and that Word Online has limited embedded-font support. For managed fleets, push fonts via Intune/Group Policy.
 - **`CLAUDE.md`** added to repo root — codebase guidance for future Claude Code sessions.
 
 ### Not yet started
@@ -185,7 +191,8 @@ Generates `EMR4 Patient File.dotx` in the project root.
 | `app/models/` | All SQLAlchemy models |
 | `alembic/versions/` | Migration history |
 | `seed.py` | Dev data seeder |
-| `create_patient_template.py` | Generates `.dotx` with Custom XML Part |
+| `create_patient_file.py` | **Per-patient `.docx` generator** — demographics + 15 locked section headers + Custom XML Part. `create_patient_docx()` is importable by the New Patient userform endpoint. Fonts match the MT template (Century Schoolbook / Garamond). |
+| `create_patient_template.py` | Older blank `.dotx` template generator — **superseded** by `create_patient_file.py` (still uses Calibri defaults, no content controls). |
 | `EMR4 Sidebar/src/taskpane/taskpane.js` | Full SPA logic — auth, tabs, audio scribe, AI sync, Word API calls |
 | `EMR4 Sidebar/src/taskpane/taskpane.html` | SPA HTML — 8 tab panels + patient sidebar |
 | `EMR4 Sidebar/src/taskpane/taskpane.css` | Styles + `@media (min-width:700px)` Command Center layout |
@@ -237,4 +244,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-15 — Phase 1.5 addendum: full taskpane CC lock (`setTaskpaneLocked`), Heading 1 content-control protection (`repairDocumentStructure`), CLAUDE.md added. HEAD `03d5575`.*
+*Last updated: 2026-06-15 — Phase 1.5 addendum: full taskpane CC lock (`setTaskpaneLocked`), Heading 1 content-control protection (`repairDocumentStructure`), per-patient generator `create_patient_file.py` with baked-in locked headers + template fonts, CLAUDE.md added. HEAD `bbb6b12`.*
