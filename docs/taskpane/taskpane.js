@@ -837,6 +837,10 @@ function openCommandCentre() {
   commandCentreOpen = true;
   setStatus("Command Centre open — taskpane analysis paused.");
 
+  // Disable the taskpane Finalize button while CC is open — finalise via CC instead.
+  const fbtnCC = document.getElementById("btn-finalize");
+  if (fbtnCC) { fbtnCC.disabled = true; fbtnCC.textContent = "Finalise in Command Centre"; }
+
   // Pass patient ID via URL param — more reliable than localStorage cross-context
   const url = `${CC_URL}?pid=${currentPatient.id}`;
 
@@ -885,6 +889,12 @@ function openCommandCentre() {
       commandCentreDialog = null;
       commandCentreOpen = false;          // resume taskpane background analysis
       lastSyncedText = "";                // force a fresh re-sync of the document
+      // Restore the Finalize button if a consult is still in progress
+      const fbtnClose = document.getElementById("btn-finalize");
+      if (fbtnClose && consultStarted) {
+        fbtnClose.disabled = false;
+        fbtnClose.textContent = "Approve & Finalise Record";
+      }
     });
   });
 }
