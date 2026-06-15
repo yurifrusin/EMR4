@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR Centaur</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=13" />
-  <script src="taskpane.js?v=13" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=14" />
+  <script src="taskpane.js?v=14" defer></script>
 </head>
 <body>
 
@@ -101,6 +101,14 @@
         <!-- AI sync status -->
         <div class="consult-header">
           <div id="status-msg" class="status-msg">Initializing…</div>
+        </div>
+
+        <!-- Start Consultation (F2-style; also Ctrl+Shift+N) -->
+        <div class="field-group">
+          <button id="btn-start-consult" class="btn btn-primary btn-full btn-sm" disabled
+                  title="Insert a dated consult header under Contemporaneous Notes (Ctrl+Shift+N)">
+            ▶ Start Consultation
+          </button>
         </div>
 
         <!-- Lock toggle -->

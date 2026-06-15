@@ -19,8 +19,12 @@ let currentPatient = null;
 // Command Centre dialog handle
 let commandCentreDialog = null;
 let commandCentreOpen   = false;          // pause background sync while CC is driving
-let lastConsultHeader   = "";             // most recent header text inserted
+let lastConsultHeader   = "";             // most recent header text inserted (full line)
+let consultStarted      = false;          // a consult header has been planted this session
 const NOTE_BOOKMARK     = "EMR4_NOTE_POINT"; // anchors note insertion after the consult header
+const SECTION_HEADING   = "Contemporaneous Notes"; // where consults are planted
+// A consult header line: "DD-MM-YYYY  Name  H[:MM] AM/PM  N years old."
+const CONSULT_HEADER_RE = /^\d{2}-\d{2}-\d{4}\b.*\byears old\b/i;
 
 // Consult tab state
 let isLocked       = false;
@@ -145,7 +149,10 @@ function logout() {
   currentPatient = null;
   localStorage.removeItem("emr4_token");
   localStorage.removeItem("emr4_cc_patient_id");
+  consultStarted = false;
   document.getElementById("btn-command-center").disabled = true;
+  const startBtn = document.getElementById("btn-start-consult");
+  if (startBtn) startBtn.disabled = true;
   showView("view-login");
 }
 
@@ -202,7 +209,10 @@ async function loadPatient(patientId) {
   currentPatient = data.patient;
   setBanner(currentPatient);
   updateOpenFileButton();
+  consultStarted = false;   // new patient = new session
   document.getElementById("btn-command-center").disabled = false;
+  const startBtn = document.getElementById("btn-start-consult");
+  if (startBtn) startBtn.disabled = false;
 
   // Sidebar — allergies (available immediately from summary)
   _renderSidebarAllergies(data.allergies || []);
@@ -469,10 +479,10 @@ async function runBackgroundSync() {
   if (isRecording || isSyncing || commandCentreOpen) return;
   isSyncing = true;
   try {
-    const text = await getDocumentText();
+    const text = await getCurrentConsultText();
     if (!text || !text.trim()) {
       if (!isLocked) updateFormFields({});
-      setStatus("Ready.");
+      setStatus(consultStarted ? "Listening — type your consultation notes…" : "Ready — click Start Consultation to begin.");
       lastSyncedText = "";
       return;
     }
@@ -767,7 +777,7 @@ async function approveAndFinalize() {
   }
 
   try {
-    const text    = await getDocumentText();
+    const text    = await getCurrentConsultText();
     const headers = { "Content-Type": "application/json" };
     if (token) headers["Authorization"] = "Bearer " + token;
     const res = await fetch(API_BASE + "/finalize", {
@@ -783,6 +793,7 @@ async function approveAndFinalize() {
         setStatus("✅ Record finalised & saved.");
         isLocked = true;
         updateLockUI();
+        consultStarted = false;   // allow a new consultation to be started
         const btn = document.getElementById("btn-finalize");
         if (btn) { btn.disabled = true; btn.textContent = "✅ Finalised"; }
         const player = document.getElementById("audio-playback");
@@ -815,8 +826,11 @@ async function openCommandCentre() {
   commandCentreOpen = true;
   setStatus("Command Centre open — taskpane analysis paused.");
 
-  // Insert the dated consultation header into the Word document
-  await insertConsultHeader(currentPatient);
+  // Plant the dated consultation header (unless one was already started this session)
+  if (!consultStarted) {
+    await insertConsultHeader(currentPatient);
+    consultStarted = true;
+  }
 
   // Pass patient ID via URL param — more reliable than localStorage cross-context
   const url = `${CC_URL}?pid=${currentPatient.id}`;
@@ -853,23 +867,56 @@ async function openCommandCentre() {
   });
 }
 
-async function insertConsultHeader(patient) {
+// Time to the nearest half hour: "12 PM" on the hour, otherwise "5:30 PM".
+function formatHalfHour(d) {
+  const r = new Date(d);
+  r.setSeconds(0, 0);
+  r.setMinutes(Math.round(r.getMinutes() / 30) * 30); // 60 rolls into the next hour
+  let h = r.getHours();
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12; if (h === 0) h = 12;
+  const mins = r.getMinutes();
+  return mins === 0 ? `${h} ${ampm}` : `${h}:${String(mins).padStart(2, "0")} ${ampm}`;
+}
+
+// Builds the consult header in two parts so the date can be bold and the rest plain.
+function buildConsultHeader(patient) {
   const now = new Date();
   const dd   = String(now.getDate()).padStart(2, "0");
   const mm   = String(now.getMonth() + 1).padStart(2, "0");
   const yyyy = now.getFullYear();
-  const timeStr = now.toLocaleTimeString("en-AU", { hour: "numeric", minute: "2-digit", hour12: true })
-                      .replace("am", "AM").replace("pm", "PM");
-  const dob = new Date(patient.date_of_birth);
+  const dob  = new Date(patient.date_of_birth);
   let age = yyyy - dob.getFullYear();
   if (now.getMonth() - dob.getMonth() < 0 ||
       (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate())) age--;
-  const header = `${dd}-${mm}-${yyyy}  ${patient.first_name} ${patient.last_name}  ${timeStr}  ${age} years old.`;
-  lastConsultHeader = header;
+  const datePart = `${dd}-${mm}-${yyyy}`;
+  const restPart = `${patient.first_name} ${patient.last_name}  ${formatHalfHour(now)}  ${age} years old.`;
+  return { datePart, restPart, full: `${datePart}  ${restPart}` };
+}
+
+async function insertConsultHeader(patient) {
+  const { datePart, restPart, full } = buildConsultHeader(patient);
+  lastConsultHeader = full;
   try {
     await Word.run(async ctx => {
-      const para = ctx.document.body.insertParagraph(header, Word.InsertLocation.end);
-      para.font.bold = true;
+      const paras = ctx.document.body.paragraphs;
+      paras.load("items/text,items/styleBuiltIn");
+      await ctx.sync();
+
+      // Find the "Contemporaneous Notes" Heading 1 — consults are planted right under it
+      let cn = null;
+      for (const p of paras.items) {
+        if (p.styleBuiltIn === Word.BuiltInStyleName.heading1 &&
+            (p.text || "").trim().toLowerCase() === SECTION_HEADING.toLowerCase()) { cn = p; break; }
+      }
+
+      const para = cn
+        ? cn.insertParagraph(datePart, Word.InsertLocation.after)
+        : ctx.document.body.insertParagraph(datePart, Word.InsertLocation.end);
+      para.styleBuiltIn = Word.BuiltInStyleName.normal;
+      para.font.bold = true;                              // date in bold
+      const rest = para.insertText("  " + restPart, Word.InsertLocation.end);
+      rest.font.bold = false;                             // name/time/age plain
       // Bookmark the end of the header so the SOAP note inserts right after it
       para.getRange(Word.RangeLocation.end).insertBookmark(NOTE_BOOKMARK);
       await ctx.sync();
@@ -877,6 +924,49 @@ async function insertConsultHeader(patient) {
   } catch (e) {
     setStatus("Header insert failed: " + e.message);
   }
+}
+
+// Starts a new consultation: plants the dated header under Contemporaneous Notes.
+window.startConsultation = async function () {
+  if (!currentPatient) { setStatus("Load a patient before starting a consultation."); return; }
+  if (consultStarted) { setStatus("A consultation is already in progress this session."); return; }
+  await insertConsultHeader(currentPatient);
+  consultStarted = true;
+  setStatus("Consultation started — type your notes below the header.");
+};
+
+// Reads ONLY the current consultation's notes: from the planted header down to
+// the previous consult header or the next section heading — never the whole doc.
+async function getCurrentConsultText() {
+  return Word.run(async ctx => {
+    const paras = ctx.document.body.paragraphs;
+    paras.load("items/text,items/styleBuiltIn");
+    await ctx.sync();
+    const items = paras.items;
+    const isHeading1 = p => p.styleBuiltIn === Word.BuiltInStyleName.heading1;
+
+    let cnIdx = items.findIndex(p =>
+      isHeading1(p) && (p.text || "").trim().toLowerCase() === SECTION_HEADING.toLowerCase());
+    if (cnIdx === -1) return "";
+
+    // Locate the current consult header (first matching line after the section heading)
+    let startIdx = -1;
+    for (let i = cnIdx + 1; i < items.length; i++) {
+      if (isHeading1(items[i])) break;                          // hit next section — no consult yet
+      if (CONSULT_HEADER_RE.test((items[i].text || "").trim())) { startIdx = i; break; }
+    }
+    if (startIdx === -1) return "";
+
+    // Collect notes until the previous consult header or the next section heading
+    const lines = [];
+    for (let i = startIdx + 1; i < items.length; i++) {
+      const p = items[i];
+      if (isHeading1(p)) break;
+      if (CONSULT_HEADER_RE.test((p.text || "").trim())) break;
+      lines.push(p.text);
+    }
+    return lines.join("\n").trim();
+  });
 }
 
 async function insertNoteIntoWord(text) {
@@ -890,8 +980,10 @@ async function insertNoteIntoWord(text) {
 
       if (!bm.isNullObject) {
         let prev = bm.insertParagraph(lines[0] || "", Word.InsertLocation.after);
+        prev.styleBuiltIn = Word.BuiltInStyleName.normal; prev.font.bold = false;
         for (let i = 1; i < lines.length; i++) {
           prev = prev.insertParagraph(lines[i], Word.InsertLocation.after);
+          prev.styleBuiltIn = Word.BuiltInStyleName.normal; prev.font.bold = false;
         }
         // Move the bookmark to the end of the note so any later insert appends below it
         prev.getRange(Word.RangeLocation.end).insertBookmark(NOTE_BOOKMARK);
@@ -1054,6 +1146,16 @@ Office.onReady(info => {
 
   // ── Command Centre ──────────────────────────────────────
   document.getElementById("btn-command-center").onclick = openCommandCentre;
+
+  // ── Start Consultation (button + Ctrl+Shift+N while sidebar focused) ──
+  const startBtn = document.getElementById("btn-start-consult");
+  if (startBtn) startBtn.onclick = startConsultation;
+  document.addEventListener("keydown", e => {
+    if (e.ctrlKey && e.shiftKey && (e.key === "N" || e.key === "n")) {
+      e.preventDefault();
+      startConsultation();
+    }
+  });
 
   // ── Consult buttons ─────────────────────────────────────
   document.getElementById("btn-finalize").onclick = approveAndFinalize;
