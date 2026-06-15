@@ -994,18 +994,18 @@ async function repairDocumentStructure() {
         if (!tag || existingTags.has(tag)) continue;
 
         const cc = para.insertContentControl();
-        cc.tag   = tag;
-        cc.title = text;
+        cc.tag          = tag;
+        cc.title        = text;
         cc.cannotDelete = true;
         cc.cannotEdit   = true;
-        cc.appearance   = Word.ContentControlAppearance.hidden;
+        cc.appearance   = "Hidden";   // string literal — enum may be undefined at runtime
         repaired++;
       }
       await ctx.sync();
       if (repaired > 0) setStatus(`Document structure secured — ${repaired} section${repaired !== 1 ? "s" : ""} protected.`);
     });
   } catch (e) {
-    console.warn("repairDocumentStructure:", e.message);
+    setStatus("Structure repair error: " + (e.message || String(e)));
   }
 }
 
@@ -1130,6 +1130,7 @@ function initApp() {
   setStatus("Ready.");
 
   updateFormFields({});
+  repairDocumentStructure();   // protect section headers as soon as we have a document context
   runBackgroundSync();
   autoDetectPatient();
 
