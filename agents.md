@@ -253,6 +253,19 @@ persist the file to its storage home (OneDrive/SharePoint), and write the result
 needs a manual DB insert to be loadable. Decide storage location + naming + who owns
 the write (backend endpoint vs. taskpane) before building Phase 2 appointment flows.
 
+### 🔒 Security workstream now in the plan (implementation_plan.md §15A)
+
+A full cybersecurity review was done (2026-06-16). It added a `security-engineer`
+sub-agent (§14), expanded §15, and created **§15A Security Workstream** with a
+threat-model requirement, foundational controls to land early (PostgreSQL RLS for
+tenant isolation, an `audit_log` table, secrets management, CORS/JWT hardening,
+field-level encryption), and per-phase security gates (booking/kiosk identity proofing,
+prompt-injection defence, Hive Mind de-ID, Results Relay auth, PRODA certs).
+**Known P0 issues in current code, not yet fixed:** default `secret_key`
+("change-me-in-production") in `config.py` and `allow_origins=["*"]` + credentials in
+`main.py`. Tenancy is currently enforced by manual per-query `practice_id` filters
+(correct today, but RLS is the recommended defense-in-depth).
+
 ### Deploy reminders
 - Taskpane edit → `python sync_taskpane.py` → bump `?v=N` in taskpane.html → commit docs/ → push → **close & reopen the document** (shared runtime caches JS for the doc session; a sidebar toggle is not enough).
 - Command Centre edit → edit in `docs/command-centre/` → bump `?v=N` → push (loads fresh each open).
@@ -283,4 +296,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-16 — Phase 1.5 addendum: full taskpane CC lock (`setTaskpaneLocked`), Heading 1 content-control protection (`repairDocumentStructure`), per-patient generator `create_patient_file.py` with baked-in locked headers + template fonts + grey demographics band (shaded paragraphs, Online-safe OOXML order) + whitespace normalisation, CLAUDE.md added. Added §6 OOXML-injection-order note. HEAD at `3364bba` + whitespace-normalisation commit.*
+*Last updated: 2026-06-16 — Phase 1.5 addendum: full taskpane CC lock (`setTaskpaneLocked`), Heading 1 content-control protection (`repairDocumentStructure`), per-patient generator `create_patient_file.py` with baked-in locked headers + template fonts + grey demographics band (shaded paragraphs, Online-safe OOXML order) + whitespace normalisation, CLAUDE.md added, §6 OOXML-injection-order note. Billy Frusin seeded; file/DB-record bridge gap documented (§8). Cybersecurity review → implementation_plan.md §15A security workstream + `security-engineer` sub-agent. HEAD `33bf244` + security/plan commit.*

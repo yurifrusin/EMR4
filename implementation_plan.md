@@ -651,6 +651,7 @@ flowchart TD
 | `rag-pipeline-dev` | `branch` | Presidio pipeline, embeddings, Hive Mind, weighting |
 | `voip-integrator` | `branch` | 3CX CRM template, caller ID lookup |
 | `research` | `inherit` | Documentation, API research, regulatory guidance |
+| `security-engineer` | `inherit` | Threat modelling, multi-tenant isolation (RLS) + cross-tenant tests, audit logging, secrets management, de-identification validation, pen-test prep. **Has review rights over every phase that touches PHI/PII** — no PHI-handling phase merges without its sign-off. |
 
 ### Phase-by-Phase Deployment
 
@@ -670,14 +671,48 @@ Agent 4: Results inbox API + alert engine
 | Area | Requirement | Implementation |
 |:---|:---|:---|
 | **Privacy Act 1988** | Lawful collection/storage/disclosure | Encryption at rest + transit; RBAC; audit logs; AU data residency |
-| **Facial Recognition** | Explicit consent; PIA | Opt-in; Azure 1:1 verify; deletion on revocation |
-| **TGA / SaMD** | AI diagnostic tools may need ARTG | Frame as "decision support"; require GP confirmation |
+| **Notifiable Data Breaches** | Assess + notify OAIC/affected within 30 days | Incident-response runbook; breach register; detection via audit log |
+| **My Health Records Act** | Criminal penalties for unauthorised access | Access audit logging; least-privilege RBAC; MHR access gated + logged |
+| **Facial Recognition** | Explicit consent; PIA | Opt-in; Azure 1:1 verify; liveness/anti-spoofing; encryption; deletion on revocation |
+| **TGA / SaMD** | AI diagnostic tools may need ARTG | Frame as "decision support"; GP confirmation required; assess red-flag scanner separately |
 | **SMS (Spam Act 2003)** | Consent; identification; opt-out | Explicit consent tracking; practice identified; "Reply STOP" |
 | **ACMA Sender ID** | Register branded SMS IDs | Per-practice registration via ClickSend before go-live |
-| **Data Sovereignty** | AU health data stays in AU | All GCP in `australia-southeast1` |
-| **Data Retention** | 7 years min (or minor → 25) | Cloud SQL backups; 7-year retention |
-| **Hive Mind** | Practice-level opt-in; ironclad de-ID | Presidio NLP; no raw text shared; practice consent toggle |
-| **AGPL-3.0** | Cloud users must share modifications | License file in repo; contributor agreement |
+| **Data Sovereignty** | AU health data stays in AU | All GCP in `australia-southeast1`; verify Gemini/Vertex + any 3rd party stay in-region |
+| **Data Retention** | 7 years min (or minor → 25) | Cloud SQL backups; 7-year retention; reconcile with deletion-on-revocation + un-poolable Hive Mind embeddings |
+| **Hive Mind** | Practice-level opt-in; ironclad de-ID | Presidio NLP + quasi-identifier suppression + human-audited sampling gate; legal review of practice-vs-patient consent basis |
+| **AGPL-3.0** | Cloud users must share modifications | License file in repo; contributor agreement; **no secrets in code (repo is public)** |
+
+---
+
+## 15A. Security Workstream (cross-cutting)
+
+> Security is **not** a Phase 12 line item. It is a continuous workstream owned by the
+> `security-engineer` sub-agent (§14), which has review rights over every PHI-touching
+> phase. The Phase 12 "security audit / pen test" is *final validation*, not first discovery.
+
+### Threat model (do first)
+Maintain a living STRIDE threat model — at minimum one short entry per external trust
+boundary: Results Relay ingest, eRx, Tyro, ADHA/PRODA, 3CX, Azure Face, ClickSend,
+booking portal, PWA, kiosk, and the Hive Mind boundary. Update it as each phase lands.
+
+### Foundational controls — land early, while the surface is small
+| Control | Why now |
+|:---|:---|
+| **PostgreSQL Row-Level Security** keyed on `practice_id` (set per-request) | App-layer `practice_id` filters are per-query and fragile across 30+ tables built by different sub-agents. RLS makes cross-tenant leakage impossible even if a filter is forgotten. Add cross-tenant integration tests. |
+| **`audit_log` table** (append-only: who accessed/changed which patient record, when) | Legally required (Privacy Act, My Health Records Act, RACGP accreditation). Currently absent from the schema. Must precede Phase 6 & 10. |
+| **Secrets management** (GCP Secret Manager / KMS) | `secret_key` must fail-closed if default/unset; PRODA device certs and all 3rd-party keys out of the DB/filesystem and out of the public repo. |
+| **AuthN hardening** | Lock CORS to known origins; short-lived tokens + revocation; review `localStorage` token exposure (XSS); force credential reset on onboarding. |
+| **Field-level encryption** for national identifiers (Medicare, IHI, DVA, face refs) | A DB-read compromise should not yield cleartext national identifiers. |
+
+### Per-phase security gates
+| Phase | Gate — must be designed/reviewed before build |
+|:---|:---|
+| **3 / 3B / 4** (booking, PWA, kiosk) | Public unauthenticated surfaces. Strengthen identity proofing (name+DOB+Medicare is weak/enumerable); rate-limit + anti-enumeration; biometric PIA, liveness, encryption, deletion-on-revocation. |
+| **5 / 11** (DDx, scribe) | Prompt-injection defence: treat all document-sourced text as hostile; output validation; no model output triggers action without GP confirmation. SaMD assessment of red-flag scanner. |
+| **5B** (Centaur Brain) | Untrusted legacy-document ingest at scale; de-ID before fine-tuning; verify fine-tuned model can't regurgitate cross-practice training data. |
+| **5C** (Hive Mind) | **Highest scrutiny.** Quasi-identifier suppression beyond Presidio; k-anonymity/sampling audit gate; embedding re-identification risk; legal basis for patient-data secondary use under practice-level opt-in. |
+| **6** (Results) | Authenticate the Results Relay `/results/ingest` endpoint (per-practice mTLS / signed payloads) — an unauthenticated endpoint lets attackers inject fabricated results (integrity + clinical-safety attack). |
+| **10** (ADHA/PRODA) | PRODA device certs in HSM/secret manager (not DB path); mTLS; MHR access fully logged. |
 
 ---
 
