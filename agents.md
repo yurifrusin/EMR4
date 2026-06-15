@@ -18,7 +18,7 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `bbb6b12` — "Always render address/phone/medicare lines in patient file demographics" |
+| **Last pushed commit** | `3364bba` — "Fix demographics grey shading not rendering in Word Online" (whitespace-normalisation commit follows) |
 
 ### Tag map (all tags pushed to remote)
 
@@ -39,6 +39,8 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 | `3578889` | Add `create_patient_file.py` per-patient generator; fix Care Plans heading text |
 | `910c3bb` | Bake template fonts (Century Schoolbook / Garamond) + locked content controls into generator |
 | `bbb6b12` | Always render address/phone/medicare demographic lines |
+| `aa8bda2` | Demographics as shaded paragraphs (no table) + 1.15 line spacing |
+| `3364bba` | Fix grey shading order so it renders in Word Online (CT_PPr schema) |
 
 ---
 
@@ -177,6 +179,25 @@ Generates `EMR4 Patient File.dotx` in the project root.
 | Vertex AI froze whole backend (3+ min loads) | `model.generate_content()` is blocking, called in async route → froze the event loop | Wrap calls in `asyncio.to_thread` |
 | Patient saved to "John Citizen" | finalize always used default patient | `FinalizePayload.patient_id`; taskpane + Command Centre both send it |
 | Terminal flooded thousands of item numbers | MBS item 23 description literally lists every excluded item (3–11000+) | Truncate MBS descriptions to 200 chars; print one-line summary not full JSON |
+| Demographics grey shading invisible in Word Online | `<w:shd>` appended to `<w:pPr>` after `<w:spacing>`/`<w:jc>` — out of CT_PPr schema order; desktop tolerates it, Online drops it (see OOXML note below) | `_shade_paragraph()` inserts `<w:shd>` via `insert_element_before()` at the schema-correct position |
+| Word grammar underline under address | Double space between street type and locality in the input value | `_clean()` collapses internal whitespace runs to single spaces on all user-supplied fields (layout separators are literals, untouched) |
+
+### ⚠️ OOXML injection — element order matters, Word Online is strict
+
+When injecting raw OOXML into a `.docx` (e.g. `create_patient_file.py`), child
+elements **must follow the schema-defined sequence order** for their parent.
+`<w:pPr>` (CT_PPr) and `<w:rPr>` (CT_RPr) both enforce a specific child order —
+for example inside `<w:pPr>`, `<w:shd>` must precede `<w:spacing>`, `<w:ind>`,
+and `<w:jc>`.
+
+**Word Desktop is lenient** and renders out-of-order elements anyway; **Word
+Online is strict** and silently ignores a misplaced element (no error — the
+effect just doesn't apply). Since Word Online is our primary target, always insert
+injected elements at the correct position with python-docx's
+`element.insert_element_before(new, *successor_tags)` rather than `.append()`.
+This bit us twice now: the content-control `appearance` enum (use the `"Hidden"`
+string) and the paragraph shading order above. Content controls already build a
+clean child order; new injections should do the same.
 
 ---
 
@@ -244,4 +265,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-15 — Phase 1.5 addendum: full taskpane CC lock (`setTaskpaneLocked`), Heading 1 content-control protection (`repairDocumentStructure`), per-patient generator `create_patient_file.py` with baked-in locked headers + template fonts, CLAUDE.md added. HEAD `bbb6b12`.*
+*Last updated: 2026-06-16 — Phase 1.5 addendum: full taskpane CC lock (`setTaskpaneLocked`), Heading 1 content-control protection (`repairDocumentStructure`), per-patient generator `create_patient_file.py` with baked-in locked headers + template fonts + grey demographics band (shaded paragraphs, Online-safe OOXML order) + whitespace normalisation, CLAUDE.md added. Added §6 OOXML-injection-order note. HEAD at `3364bba` + whitespace-normalisation commit.*

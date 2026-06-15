@@ -15,6 +15,7 @@ CLI usage:
 """
 
 import argparse
+import re
 import shutil
 import zipfile
 from dataclasses import dataclass
@@ -91,6 +92,15 @@ class PatientData:
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _clean(s: str) -> str:
+    """Collapse internal whitespace runs to single spaces and trim. Applied to
+    user-supplied field values so e.g. a double-spaced address doesn't trigger
+    Word's grammar-error underline. The fixed layout separators between fields
+    (name / dob / age, the Phone↔Medicare gap) are literals in the f-strings and
+    are NOT affected by this."""
+    return re.sub(r"\s+", " ", s or "").strip()
+
 
 def _age(dob: date) -> int:
     today = date.today()
@@ -215,9 +225,17 @@ def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> P
         section.left_margin   = Inches(1.0)
         section.right_margin  = Inches(1.0)
 
+    # Normalise user-supplied fields (collapse stray double spaces, etc.)
+    first    = _clean(patient.first_name)
+    last     = _clean(patient.last_name)
+    sex      = _clean(patient.sex)
+    address  = _clean(patient.address)
+    phone    = _clean(patient.phone)
+    medicare = _clean(patient.medicare_number)
+
     dob_str = patient.date_of_birth.strftime("%d-%m-%Y")
     age     = _age(patient.date_of_birth)
-    name_uc = f"{patient.first_name.upper()} {patient.last_name.upper()}"
+    name_uc = f"{first.upper()} {last.upper()}"
 
     # ── Demographics header ───────────────────────────────────────────────────
     # Grey shaded band made of three centred, shaded paragraphs — exactly how the
@@ -240,9 +258,9 @@ def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> P
     # Always render all three demographic lines so the field structure is present
     # even when a value is blank — the receptionist/GP can fill gaps in-document,
     # and a userform-generated file shows the same layout as the template.
-    _header_line(f"{name_uc}   dob {dob_str}   {age} years old   {patient.sex}")
-    _header_line(patient.address or "")
-    _header_line(f"Phone: {patient.phone}        Medicare: {patient.medicare_number}")
+    _header_line(f"{name_uc}   dob {dob_str}   {age} years old   {sex}")
+    _header_line(address)
+    _header_line(f"Phone: {phone}        Medicare: {medicare}")
 
     doc.add_paragraph()  # spacer between header and first section
 
