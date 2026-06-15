@@ -61,17 +61,23 @@ for label, placeholder in fields:
 
 doc.add_paragraph()  # spacer
 
-# --- Clinical sections ---
+# --- Clinical sections (Dr Shera structure — must match PROTECTED_SECTIONS in taskpane.js) ---
 SECTIONS = [
-    ("Presenting Complaint", "Chief complaint and duration."),
-    ("History of Presenting Illness", "Expand on the presenting complaint — onset, duration, severity, modifying factors."),
-    ("Past Medical History", "Significant past diagnoses, surgeries, hospitalisations."),
-    ("Current Medications", "Drug name · dose · frequency · route"),
-    ("Allergies & Adverse Reactions", "Substance — reaction — severity"),
-    ("Social & Family History", "Occupation, smoking, alcohol, recreational drugs. Family history of relevance."),
-    ("Examination Findings", "Vital signs, systems examination."),
-    ("Assessment / Diagnoses", "Active problem list and clinical impressions."),
-    ("Management Plan", "Investigations ordered, referrals, prescriptions, safety-netting, follow-up."),
+    ("Care Plans, Health Assessments, Recalls", ""),
+    ("Family History", ""),
+    ("Medical History", ""),
+    ("Social History", "Occupation, smoking, alcohol, recreational drugs, cultural background, private insurance."),
+    ("Current Drugs", "Drug name · dose · frequency · route"),
+    ("Drug Reactions", "Substance — reaction — severity"),
+    ("Contemporaneous Notes", ""),   # GP writes here — EMR4 anchors consult headers to this section
+    ("Vaccinations", ""),
+    ("Specialist Reports", ""),
+    ("Diagnostic Imaging", ""),
+    ("Pathology Results", ""),
+    ("ECG Records", ""),
+    ("Prescription Records", ""),
+    ("Correspondence", ""),
+    ("Management Articles", ""),
 ]
 
 for heading_text, hint in SECTIONS:

@@ -23,8 +23,29 @@ let lastConsultHeader   = "";             // most recent header text inserted (f
 let consultStarted      = false;          // a consult header has been planted this session
 const NOTE_BOOKMARK     = "EMR4_NOTE_POINT"; // anchors note insertion after the consult header
 const SECTION_HEADING   = "Contemporaneous Notes"; // where consults are planted
+const SECTION_TAG_CN    = "emr4-section-cn";       // content-control tag for the CN heading
 // A consult header line: "DD-MM-YYYY  Name  H[:MM] AM/PM  N years old."
 const CONSULT_HEADER_RE = /^\d{2}-\d{2}-\d{4}\b.*\byears old\b/i;
+
+// All known Heading 1 section names in a patient file (Dr Shera structure).
+// repairDocumentStructure() wraps each found heading in a locked content control.
+const PROTECTED_SECTIONS = [
+  { text: "Contemporaneous Notes",                   tag: "emr4-section-cn" },
+  { text: "Current Drugs",                           tag: "emr4-section-current-drugs" },
+  { text: "Drug Reactions",                          tag: "emr4-section-drug-reactions" },
+  { text: "Vaccinations",                            tag: "emr4-section-vaccinations" },
+  { text: "Specialist Reports",                      tag: "emr4-section-specialist-reports" },
+  { text: "Diagnostic Imaging",                      tag: "emr4-section-imaging" },
+  { text: "Pathology Results",                       tag: "emr4-section-pathology" },
+  { text: "ECG Records",                             tag: "emr4-section-ecg" },
+  { text: "Prescription Records",                    tag: "emr4-section-prescription-records" },
+  { text: "Family History",                          tag: "emr4-section-family-history" },
+  { text: "Medical History",                         tag: "emr4-section-medical-history" },
+  { text: "Social History",                          tag: "emr4-section-social-history" },
+  { text: "Correspondence",                          tag: "emr4-section-correspondence" },
+  { text: "Care Plans, Health Assessments, Recalls", tag: "emr4-section-care-plans" },
+  { text: "Management Articles",                     tag: "emr4-section-management-articles" },
+];
 
 // Consult tab state
 let isLocked       = false;
@@ -245,6 +266,9 @@ async function loadPatient(patientId) {
   if (!document.getElementById("panel-history").classList.contains("hidden")) loadHistory();
   if (!document.getElementById("panel-meds").classList.contains("hidden")) loadMeds();
   if (!document.getElementById("panel-allergies").classList.contains("hidden")) renderAllergies(data.allergies || []);
+
+  // Silently protect section headings — no-op if already tagged, repairs if missing
+  repairDocumentStructure();
 }
 
 function _renderSidebarAllergies(allergies) {
@@ -947,6 +971,44 @@ function buildConsultHeader(patient) {
   return { datePart, restPart, full: `${datePart}  ${restPart}` };
 }
 
+// Wraps each known Heading 1 section in a locked content control so it cannot be
+// accidentally deleted or reformatted. Safe to call repeatedly — skips already-tagged
+// sections. Called automatically when a patient is loaded.
+async function repairDocumentStructure() {
+  try {
+    await Word.run(async ctx => {
+      const existing = ctx.document.contentControls;
+      existing.load("items/tag");
+      const paras = ctx.document.body.paragraphs;
+      paras.load("items/text,items/styleBuiltIn");
+      await ctx.sync();
+
+      const existingTags = new Set(existing.items.map(cc => cc.tag));
+      const tagMap = new Map(PROTECTED_SECTIONS.map(s => [s.text.toLowerCase(), s.tag]));
+
+      let repaired = 0;
+      for (const para of paras.items) {
+        if (para.styleBuiltIn !== Word.BuiltInStyleName.heading1) continue;
+        const text = (para.text || "").trim();
+        const tag = tagMap.get(text.toLowerCase());
+        if (!tag || existingTags.has(tag)) continue;
+
+        const cc = para.insertContentControl();
+        cc.tag   = tag;
+        cc.title = text;
+        cc.cannotDelete = true;
+        cc.cannotEdit   = true;
+        cc.appearance   = Word.ContentControlAppearance.hidden;
+        repaired++;
+      }
+      await ctx.sync();
+      if (repaired > 0) setStatus(`Document structure secured — ${repaired} section${repaired !== 1 ? "s" : ""} protected.`);
+    });
+  } catch (e) {
+    console.warn("repairDocumentStructure:", e.message);
+  }
+}
+
 async function insertConsultHeader(patient) {
   const { datePart, restPart, full } = buildConsultHeader(patient);
   lastConsultHeader = full;
@@ -954,17 +1016,23 @@ async function insertConsultHeader(patient) {
     await Word.run(async ctx => {
       const paras = ctx.document.body.paragraphs;
       paras.load("items/text,items/styleBuiltIn");
+      const cnCtrls = ctx.document.contentControls.getByTag(SECTION_TAG_CN);
+      cnCtrls.load("items");
       await ctx.sync();
 
-      // Find the "Contemporaneous Notes" Heading 1 — consults are planted right under it
-      let cn = null;
-      for (const p of paras.items) {
-        if (p.styleBuiltIn === Word.BuiltInStyleName.heading1 &&
-            (p.text || "").trim().toLowerCase() === SECTION_HEADING.toLowerCase()) { cn = p; break; }
+      // Prefer content-control tag (survives minor text edits); fall back to text search
+      let insertTarget = cnCtrls.items.length > 0 ? cnCtrls.items[0] : null;
+      if (!insertTarget) {
+        for (const p of paras.items) {
+          if (p.styleBuiltIn === Word.BuiltInStyleName.heading1 &&
+              (p.text || "").trim().toLowerCase() === SECTION_HEADING.toLowerCase()) {
+            insertTarget = p; break;
+          }
+        }
       }
 
-      const para = cn
-        ? cn.insertParagraph(datePart, Word.InsertLocation.after)
+      const para = insertTarget
+        ? insertTarget.insertParagraph(datePart, Word.InsertLocation.after)
         : ctx.document.body.insertParagraph(datePart, Word.InsertLocation.end);
       para.styleBuiltIn = Word.BuiltInStyleName.normal;
       para.font.bold = true;                              // date in bold
