@@ -18,6 +18,9 @@ let currentPatient = null;
 
 // Command Centre dialog handle
 let commandCentreDialog = null;
+let commandCentreOpen   = false;          // pause background sync while CC is driving
+let lastConsultHeader   = "";             // most recent header text inserted
+const NOTE_BOOKMARK     = "EMR4_NOTE_POINT"; // anchors note insertion after the consult header
 
 // Consult tab state
 let isLocked       = false;
@@ -463,7 +466,7 @@ async function getDocumentText() {
 }
 
 async function runBackgroundSync() {
-  if (isRecording || isSyncing) return;
+  if (isRecording || isSyncing || commandCentreOpen) return;
   isSyncing = true;
   try {
     const text = await getDocumentText();
@@ -807,6 +810,11 @@ async function openCommandCentre() {
     return;
   }
 
+  // Pause the taskpane's own background analysis — the Command Centre is now
+  // the single source of truth, so the two AIs don't show conflicting coding.
+  commandCentreOpen = true;
+  setStatus("Command Centre open — taskpane analysis paused.");
+
   // Insert the dated consultation header into the Word document
   await insertConsultHeader(currentPatient);
 
@@ -816,6 +824,7 @@ async function openCommandCentre() {
   Office.context.ui.displayDialogAsync(url, { height: 75, width: 55 }, result => {
     if (result.status === Office.AsyncResultStatus.Failed) {
       setStatus("Could not open Command Centre: " + result.error.message);
+      commandCentreOpen = false;
       return;
     }
     commandCentreDialog = result.value;
@@ -838,6 +847,8 @@ async function openCommandCentre() {
 
     commandCentreDialog.addEventHandler(Office.EventType.DialogEventReceived, () => {
       commandCentreDialog = null;
+      commandCentreOpen = false;          // resume taskpane background analysis
+      lastSyncedText = "";                // force a fresh re-sync of the document
     });
   });
 }
@@ -854,10 +865,13 @@ async function insertConsultHeader(patient) {
   if (now.getMonth() - dob.getMonth() < 0 ||
       (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate())) age--;
   const header = `${dd}-${mm}-${yyyy}  ${patient.first_name} ${patient.last_name}  ${timeStr}  ${age} years old.`;
+  lastConsultHeader = header;
   try {
     await Word.run(async ctx => {
       const para = ctx.document.body.insertParagraph(header, Word.InsertLocation.end);
       para.font.bold = true;
+      // Bookmark the end of the header so the SOAP note inserts right after it
+      para.getRange(Word.RangeLocation.end).insertBookmark(NOTE_BOOKMARK);
       await ctx.sync();
     });
   } catch (e) {
@@ -866,12 +880,24 @@ async function insertConsultHeader(patient) {
 }
 
 async function insertNoteIntoWord(text) {
+  const lines = (text || "").split("\n");
   try {
     await Word.run(async ctx => {
-      const lines = (text || "").split("\n");
-      const body = ctx.document.body;
-      for (const line of lines) {
-        body.insertParagraph(line, Word.InsertLocation.end);
+      // Prefer inserting right after the consult header (bookmarked), so the note
+      // lands where the doctor is looking — not at the absolute end of the document.
+      const bm = ctx.document.getBookmarkRangeOrNullObject(NOTE_BOOKMARK);
+      await ctx.sync();
+
+      if (!bm.isNullObject) {
+        let prev = bm.insertParagraph(lines[0] || "", Word.InsertLocation.after);
+        for (let i = 1; i < lines.length; i++) {
+          prev = prev.insertParagraph(lines[i], Word.InsertLocation.after);
+        }
+        // Move the bookmark to the end of the note so any later insert appends below it
+        prev.getRange(Word.RangeLocation.end).insertBookmark(NOTE_BOOKMARK);
+      } else {
+        const body = ctx.document.body;
+        for (const line of lines) body.insertParagraph(line, Word.InsertLocation.end);
       }
       await ctx.sync();
     });

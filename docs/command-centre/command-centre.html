@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR Centaur — Command Centre</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="command-centre.css?v=2" />
-  <script src="command-centre.js?v=2" defer></script>
+  <link rel="stylesheet" href="command-centre.css?v=3" />
+  <script src="command-centre.js?v=3" defer></script>
 </head>
 <body>
 
@@ -51,6 +51,12 @@
     <div id="cc-transcript-section" class="hidden">
       <div class="cc-field-label">TRANSCRIPT</div>
       <textarea id="cc-transcript" class="cc-textarea" rows="5" readonly></textarea>
+    </div>
+
+    <!-- AI-generated SOAP note — editable, reviewed before it is written to Word -->
+    <div id="cc-note-section" class="hidden">
+      <div class="cc-field-label">CLINICAL NOTE (SOAP) — review &amp; edit before inserting</div>
+      <textarea id="cc-clinical-note" class="cc-textarea" rows="8"></textarea>
     </div>
   </div>
 

@@ -194,11 +194,13 @@ async function processAudio() {
     updateLockUI();
     document.getElementById("btn-cc-insert").disabled = false;
 
-    // Store and auto-insert the AI-generated SOAP note into the Word document
+    // Show the AI-generated SOAP note for the doctor to review/edit BEFORE it is
+    // written to Word. Nothing is inserted automatically — the doctor decides.
     if (data.generated_clinical_note) {
       generatedClinicalNote = data.generated_clinical_note;
-      try { sendToTaskpane({ type: "insert_note", text: generatedClinicalNote }); }
-      catch (_) {}
+      const noteEl = document.getElementById("cc-clinical-note");
+      if (noteEl) noteEl.value = generatedClinicalNote;
+      document.getElementById("cc-note-section").classList.remove("hidden");
     }
   } catch (e) {
     hideProcessing();
@@ -355,8 +357,11 @@ document.addEventListener("click", e => {
 
 // ─── INSERT INTO WORD (via taskpane bridge) ───────────────
 window.insertIntoWord = function () {
-  // Use SOAP note if available; raw transcript is never inserted directly
-  const note = generatedClinicalNote || `[Consultation — ${new Date().toLocaleDateString("en-AU")}]`;
+  // Always use the (possibly edited) SOAP note from the review textarea
+  const noteEl = document.getElementById("cc-clinical-note");
+  const note = (noteEl && noteEl.value.trim())
+    || generatedClinicalNote
+    || `[Consultation — ${new Date().toLocaleDateString("en-AU")}]`;
   try {
     sendToTaskpane({ type: "insert_note", text: note });
     setStatus("Sent to Word ✓");
@@ -412,9 +417,11 @@ window.approveAndFinalize = async function () {
         setStatus("✅ Record finalised & saved.");
         btn.textContent = "✅ Finalised";
         isLocked = true; updateLockUI();
-        // Send generated clinical note to Word via taskpane bridge
-        if (data.generated_clinical_note) {
-          try { sendToTaskpane({ type: "insert_note", text: data.generated_clinical_note }); }
+        // Insert the reviewed SOAP note (the doctor may have edited it) into Word
+        const noteEl = document.getElementById("cc-clinical-note");
+        const note = (noteEl && noteEl.value.trim()) || generatedClinicalNote;
+        if (note) {
+          try { sendToTaskpane({ type: "insert_note", text: note }); }
           catch (_) {}
         }
         // Tell taskpane to refresh patient data (encounters, meds) from the database
