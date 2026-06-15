@@ -137,6 +137,31 @@ def seed():
         else:
             print(f"  Patient already exists: {patient.id}")
 
+        # --- Mock Patient 2: Billy Frusin (paediatric; matches the generated
+        #     BILLY FRUSIN 15-10-2015.docx used for patient-file testing) ---
+        billy = db.query(Patient).filter_by(
+            practice_id=practice.id, medicare_number="3456789012"
+        ).first()
+        if not billy:
+            billy = Patient(
+                practice_id=practice.id,
+                first_name="Billy",
+                last_name="Frusin",
+                date_of_birth=date(2015, 10, 15),
+                sex="Male",
+                medicare_number="3456789012",
+                phone_mobile="0413 222 333",
+                address_line1="15 Wattle Street",
+                address_suburb="Blacktown",
+                address_state="NSW",
+                address_postcode="2148",
+            )
+            db.add(billy)
+            db.flush()
+            print(f"  Created patient: {billy.first_name} {billy.last_name} ({billy.id})")
+        else:
+            print(f"  Patient already exists: {billy.id}")
+
         # --- MBS Directory seed ---
         mbs_items = [
             ("3",  "Professional attendance, Level A — < 5 mins", "$18.85"),

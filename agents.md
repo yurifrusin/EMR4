@@ -235,6 +235,24 @@ clean child order; new injections should do the same.
 3. **Tag `phase-1-stable`** once the above is confirmed.
 4. **Start Phase 2** — Living Diary: SharePoint-hosted `.docx`, Parse & Lock, appointment CRUD, internal messaging, SMS reminders.
 
+### ⚠️ Open architectural gap — New Patient protocol must bridge file + DB record
+
+Patient creation currently has **two disconnected halves**:
+- `create_patient_file.py` → generates the `.docx` (demographics, locked headers, Custom XML Part) but writes **nothing to the database**.
+- `POST /api/v1/patients` → creates the DB row but generates **no document**.
+
+`autoDetectPatient()` matches an open document to a patient by searching the DB on
+the filename's name — so a file with **no matching DB record loads nothing** (this
+is exactly why a freshly generated `BILLY FRUSIN 15-10-2015.docx` showed "No patient
+loaded" until Billy was inserted manually; he is now in `seed.py`).
+
+**Decision needed (New Patient userform protocol):** a single endpoint must do both
+atomically — create the DB patient (`POST /patients`), call `create_patient_docx()`,
+persist the file to its storage home (OneDrive/SharePoint), and write the resulting
+`document_url` back onto the patient record. Until that exists, every test patient
+needs a manual DB insert to be loadable. Decide storage location + naming + who owns
+the write (backend endpoint vs. taskpane) before building Phase 2 appointment flows.
+
 ### Deploy reminders
 - Taskpane edit → `python sync_taskpane.py` → bump `?v=N` in taskpane.html → commit docs/ → push → **close & reopen the document** (shared runtime caches JS for the doc session; a sidebar toggle is not enough).
 - Command Centre edit → edit in `docs/command-centre/` → bump `?v=N` → push (loads fresh each open).
