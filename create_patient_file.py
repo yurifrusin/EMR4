@@ -1,494 +1,265 @@
 """
-Generate an EMR4 patient Word document (.docx) matching Dr Shera's formatting.
+create_patient_file.py — Generate a new EMR4 Centaur patient .docx
 
-Fonts:    Century Schoolbook (body), Garamond Bold (headings)
-Colours:  #0000FF blue (headings + demographics), black (body)
-Header:   Centred, grey (#E6E6E6) shaded block — Name/DOB/Age/Sex, Address, Phone/Medicare
+The core function `create_patient_docx()` is the integration point for the future
+New Patient userform.  Import it from a FastAPI endpoint like so:
 
-Usage:
-    .venv\Scripts\python create_patient_file.py "Margaret Thompson"
-    .venv\Scripts\python create_patient_file.py --id <patient-uuid>
+    from create_patient_file import create_patient_docx, PatientData
+    path = create_patient_docx(patient, output_dir=Path("/mnt/sharepoint/patients"))
+
+CLI usage:
+    python create_patient_file.py
+    python create_patient_file.py --first Billy --last Frusin --dob 15-10-2015 \\
+        --sex Male --address "15 Rose St Blacktown NSW 2148" \\
+        --phone "0412 345 678" --medicare "1234567891"
 """
-import io
-import sys
-import uuid
+
 import argparse
+import shutil
 import zipfile
-from pathlib import Path
+from dataclasses import dataclass
 from datetime import date, datetime
+from pathlib import Path
 
 from docx import Document
-from docx.shared import Pt, RGBColor, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
-
-from app.database import SessionLocal
-from app.models.patients import Patient
-from app.models.clinical import Allergy, Prescription
+from docx.shared import Inches, Pt, RGBColor
 
 
-# ── Colours ───────────────────────────────────────────────────────────────────
-BLUE    = RGBColor(0x00, 0x00, 0xFF)
-RED     = RGBColor(0xC0, 0x00, 0x00)
-GREY_BG = "E6E6E6"   # demographics shading fill
+# ── Section headings — Dr Shera structure ─────────────────────────────────────
+# Order and exact text must match PROTECTED_SECTIONS in taskpane.js.
+# "Contemporaneous Notes" is the AI anchor — do not rename.
+SECTION_HEADINGS = [
+    "Care Plans, Health Assessments and Recalls",
+    "Family History",
+    "Medical History",
+    "Social History",
+    "Current Drugs",
+    "Drug Reactions",
+    "Contemporaneous Notes",
+    "Vaccinations",
+    "Specialist Reports",
+    "Diagnostic Imaging",
+    "Pathology Results",
+    "ECG Records",
+    "Prescription Records",
+    "Correspondence",
+    "Management Articles",
+]
+
+EMR4_BLUE   = RGBColor(0x00, 0x00, 0xCC)
+HEADER_GREY = "E8E8E8"
+
+_CUSTOM_XML_NS = "http://emr4.com/ns/document"
+_CUSTOM_XML_CONTENT = f"""<?xml version="1.0" encoding="UTF-8"?>
+<emr4:root xmlns:emr4="{_CUSTOM_XML_NS}">
+  <emr4:document-type>patient</emr4:document-type>
+  <emr4:version>1.0</emr4:version>
+</emr4:root>"""
+
+_CUSTOM_XML_RELS_ENTRY = (
+    '<Relationship Id="rIdEMR4Custom" '
+    'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml" '
+    'Target="../customXml/item1.xml"/>'
+)
+
+_CUSTOM_XML_PROPS = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ds:datastoreItem ds:itemID="{EMR4-0001-0000-0000-000000000001}"
+  xmlns:ds="http://schemas.openxmlformats.org/officeDocument/2006/customXml">
+  <ds:schemaRefs/>
+</ds:datastoreItem>"""
 
 
-# ── Low-level XML helpers ─────────────────────────────────────────────────────
-
-def _get_or_add_pPr(para):
-    pPr = para._element.find(qn("w:pPr"))
-    if pPr is None:
-        pPr = OxmlElement("w:pPr")
-        para._element.insert(0, pPr)
-    return pPr
-
-
-def _shd_element(fill: str):
-    shd = OxmlElement("w:shd")
-    shd.set(qn("w:val"),   "clear")
-    shd.set(qn("w:color"), "auto")
-    shd.set(qn("w:fill"),  fill)
-    return shd
+@dataclass
+class PatientData:
+    """All fields the New Patient userform will collect."""
+    first_name:      str
+    last_name:       str
+    date_of_birth:   date
+    sex:             str            # "Male" | "Female" | "Other"
+    address:         str = ""
+    phone:           str = ""
+    medicare_number: str = ""
 
 
-def add_bookmark(para, name: str, bm_id: int):
-    run = para.runs[0] if para.runs else para.add_run()
-    r = run._r
-    start = OxmlElement("w:bookmarkStart")
-    start.set(qn("w:id"),   str(bm_id))
-    start.set(qn("w:name"), name)
-    r.insert(0, start)
-    end = OxmlElement("w:bookmarkEnd")
-    end.set(qn("w:id"), str(bm_id))
-    r.addnext(end)
+# ── Helpers ───────────────────────────────────────────────────────────────────
 
-
-# ── Style setup ───────────────────────────────────────────────────────────────
-
-def set_default_zoom(doc: Document):
-    """Embed page-width zoom so the document fills the screen on open."""
-    settings_el = doc.settings.element
-    existing = settings_el.find(qn("w:zoom"))
-    if existing is not None:
-        settings_el.remove(existing)
-    zoom = OxmlElement("w:zoom")
-    zoom.set(qn("w:val"), "bestFit")
-    settings_el.append(zoom)
-
-
-def configure_styles(doc: Document):
-    """Set Normal → Century Schoolbook 11pt, Heading 1 → Garamond Bold Blue 12pt."""
-    nm = doc.styles["Normal"]
-    nm.font.name = "Century Schoolbook"
-    nm.font.size = Pt(11)
-
-    h1 = doc.styles["Heading 1"]
-    h1.font.name       = "Garamond"
-    h1.font.bold       = True
-    h1.font.size       = Pt(12)
-    h1.font.color.rgb  = BLUE
-    h1.paragraph_format.space_before = Pt(10)
-    h1.paragraph_format.space_after  = Pt(2)
-    # Remove any keep-with-next / outline-level clutter that Word adds
-    h1.paragraph_format.keep_with_next = False
-
-
-# ── Paragraph builders ────────────────────────────────────────────────────────
-
-def demo_header_table(doc: Document, lines: list):
-    """
-    Demographics header as a borderless shaded table.
-    Paragraph shading is ignored by Word Online; table cell shading renders correctly.
-    """
-    # Single row, single cell — no row boundaries means no hairlines between lines
-    table = doc.add_table(rows=1, cols=1)
-
-    tbl   = table._tbl
-    tblPr = tbl.find(qn("w:tblPr"))
-    if tblPr is None:
-        tblPr = OxmlElement("w:tblPr")
-        tbl.insert(0, tblPr)
-
-    tblW = OxmlElement("w:tblW")
-    tblW.set(qn("w:w"),    "5000")
-    tblW.set(qn("w:type"), "pct")
-    tblPr.append(tblW)
-
-    tblBorders = OxmlElement("w:tblBorders")
-    for side in ("top", "left", "bottom", "right", "insideH", "insideV"):
-        b = OxmlElement(f"w:{side}")
-        b.set(qn("w:val"),   "nil")
-        tblBorders.append(b)
-    tblPr.append(tblBorders)
-
-    cell  = table.rows[0].cells[0]
-    tc    = cell._tc
-    tcPr  = tc.get_or_add_tcPr()
-    tcPr.append(_shd_element(GREY_BG))
-
-    tcBorders = OxmlElement("w:tcBorders")
-    for side in ("top", "left", "bottom", "right"):
-        b = OxmlElement(f"w:{side}")
-        b.set(qn("w:val"), "nil")
-        tcBorders.append(b)
-    tcPr.append(tcBorders)
-
-    tcMar = OxmlElement("w:tcMar")
-    for side, twips in (("top", "0"), ("bottom", "0"), ("left", "108"), ("right", "108")):
-        m = OxmlElement(f"w:{side}")
-        m.set(qn("w:w"),    twips)
-        m.set(qn("w:type"), "dxa")
-        tcMar.append(m)
-    tcPr.append(tcMar)
-
-    for i, text in enumerate(lines):
-        if i == 0:
-            para = cell.paragraphs[0]
-        else:
-            para = cell.add_paragraph()
-        para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        para.paragraph_format.space_before = Pt(0)
-        para.paragraph_format.space_after  = Pt(0)
-        run = para.add_run(text)
-        run.font.name      = "Century Schoolbook"
-        run.font.bold      = True
-        run.font.color.rgb = BLUE
-        run.font.size      = Pt(11)
-
-
-def section_heading(doc: Document, title: str):
-    p = doc.add_heading(title, level=1)
-    for run in p.runs:
-        run.font.name      = "Garamond"
-        run.font.bold      = True
-        run.font.color.rgb = BLUE
-    return p
-
-
-def body_para(doc: Document, text: str = ""):
-    p = doc.add_paragraph(text)
-    p.paragraph_format.space_before = Pt(0)
-    p.paragraph_format.space_after  = Pt(3)
-    for run in p.runs:
-        run.font.name = "Century Schoolbook"
-    return p
-
-
-def calc_age(dob: date) -> int:
+def _age(dob: date) -> int:
     today = date.today()
     return today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
 
 
-# ── Document builder ──────────────────────────────────────────────────────────
+def _shade_cell(cell, fill_hex: str) -> None:
+    tcPr = cell._tc.get_or_add_tcPr()
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:val"), "clear")
+    shd.set(qn("w:color"), "auto")
+    shd.set(qn("w:fill"), fill_hex)
+    tcPr.append(shd)
 
-def build_patient_document(patient: Patient, allergies: list, medications: list) -> Document:
-    doc = Document()
-    configure_styles(doc)
-    set_default_zoom(doc)
 
-    # Page margins — match the original's feel
-    for section in doc.sections:
-        section.top_margin    = Inches(0.7)
-        section.bottom_margin = Inches(0.7)
-        section.left_margin   = Inches(0.9)
-        section.right_margin  = Inches(0.9)
+def _hide_table_borders(table) -> None:
+    tblPr = table._tbl.find(qn("w:tblPr"))
+    if tblPr is None:
+        tblPr = OxmlElement("w:tblPr")
+        table._tbl.insert(0, tblPr)
+    borders = OxmlElement("w:tblBorders")
+    for side in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        el = OxmlElement(f"w:{side}")
+        el.set(qn("w:val"), "none")
+        borders.append(el)
+    tblPr.append(borders)
 
-    age     = calc_age(patient.date_of_birth)
-    dob_str = patient.date_of_birth.strftime("%d-%m-%Y")
-    now_str = datetime.now().strftime("%d-%m-%Y")
-    time_str = datetime.now().strftime("%I:%M %p").lstrip("0")
 
-    sex = patient.sex or ""
-    addr_parts = [patient.address_line1, patient.address_suburb,
-                  patient.address_state, patient.address_postcode]
-    addr = "  ".join(p for p in addr_parts if p) or "Address not recorded"
-    phone    = patient.phone_mobile or patient.phone_home or "Phone not recorded"
-    medicare = patient.medicare_number or "Medicare not recorded"
-
-    # ── Grey demographics header (3 lines, centred) ────────────────────────────
-    demo_header_table(doc, [
-        f"{patient.first_name.upper()} {patient.last_name.upper()}"
-        f"   dob {dob_str}    {age} years old    {sex}",
-        addr,
-        f"Phone: {phone}        Medicare: {medicare}",
-    ])
-
-    # Spacer after header
-    sp = doc.add_paragraph()
-    sp.paragraph_format.space_before = Pt(0)
-    sp.paragraph_format.space_after  = Pt(0)
-
-    # ── Care Plans, Health Assessments, Recalls ────────────────────────────────
-    section_heading(doc, "Care Plans, Health Assessments and Recalls")
-    body_para(doc)
-
-    # ── Family History ─────────────────────────────────────────────────────────
-    section_heading(doc, "Family History")
-    body_para(doc)
-
-    # ── Medical History ────────────────────────────────────────────────────────
-    section_heading(doc, "Medical History")
-    body_para(doc)
-
-    # ── Social History ─────────────────────────────────────────────────────────
-    section_heading(doc, "Social History")
-    body_para(doc, "Private Health Insurance: ")
-
-    # ── Current Drugs ──────────────────────────────────────────────────────────
-    section_heading(doc, "Current Drugs")
-    if medications:
-        for med in medications:
-            dosage = f"  —  {med.dosage_text}" if getattr(med, "dosage_text", None) else ""
-            body_para(doc, f"{med.drug_name}{dosage}")
-    else:
-        body_para(doc)
-
-    # ── Drug Reactions ─────────────────────────────────────────────────────────
-    section_heading(doc, "Drug Reactions")
-    if allergies:
-        for a in allergies:
-            life_threat = "life" in (a.severity or "").lower()
-            p = doc.add_paragraph()
-            p.paragraph_format.space_before = Pt(0)
-            p.paragraph_format.space_after  = Pt(3)
-            run = p.add_run(
-                f"{a.substance}  —  {a.reaction or a.severity or ''}"
-                + ("  ⚠ LIFE-THREATENING" if life_threat else "")
+def _inject_custom_xml(docx_path: Path) -> None:
+    """Injects emr4:document-type=patient Custom XML Part so the taskpane
+    auto-detects this as a patient file and activates patient mode."""
+    tmp = docx_path.with_suffix(".tmp.docx")
+    with zipfile.ZipFile(docx_path, "r") as zin:
+        existing = set(zin.namelist())
+        rels_xml = zin.read("word/_rels/document.xml.rels").decode("utf-8")
+        if "rIdEMR4Custom" not in rels_xml:
+            rels_xml = rels_xml.replace(
+                "</Relationships>",
+                f"  {_CUSTOM_XML_RELS_ENTRY}\n</Relationships>",
             )
-            run.font.name      = "Century Schoolbook"
-            run.font.size      = Pt(11)
-            run.font.color.rgb = RED if life_threat else RGBColor(0, 0, 0)
-            run.bold           = life_threat
-    else:
-        body_para(doc, "No known drug reactions.")
-
-    # ── Contemporaneous Notes ──────────────────────────────────────────────────
-    section_heading(doc, "Contemporaneous Notes")
-
-    # Ready-to-type dated header — bookmark used by the add-in F2-equivalent
-    p = doc.add_paragraph()
-    add_bookmark(p, "latest_consult_entry", 1)
-    p.paragraph_format.space_before = Pt(0)
-    p.paragraph_format.space_after  = Pt(4)
-    run = p.add_run(
-        f"{now_str}  {patient.first_name} {patient.last_name}  {time_str}  {age} years old."
-    )
-    run.font.name = "Century Schoolbook"
-    run.font.size = Pt(11)
-    run.bold      = True
-
-    for _ in range(6):
-        body_para(doc)
-
-    # ── Vaccinations ───────────────────────────────────────────────────────────
-    section_heading(doc, "Vaccinations")
-    body_para(doc)
-
-    # ── Specialist Reports ────────────────────────────────────────────────────
-    section_heading(doc, "Specialist Reports")
-    body_para(doc)
-
-    # ── Diagnostic Imaging ────────────────────────────────────────────────────
-    section_heading(doc, "Diagnostic Imaging")
-    body_para(doc)
-
-    # ── Pathology Results ─────────────────────────────────────────────────────
-    section_heading(doc, "Pathology Results")
-    body_para(doc)
-
-    # ── ECG Records ───────────────────────────────────────────────────────────
-    section_heading(doc, "ECG Records")
-    body_para(doc)
-
-    # ── Prescription Records ──────────────────────────────────────────────────
-    section_heading(doc, "Prescription Records")
-    body_para(doc)
-
-    # ── Correspondence ────────────────────────────────────────────────────────
-    section_heading(doc, "Correspondence")
-    body_para(doc)
-
-    # ── Management Articles ───────────────────────────────────────────────────
-    section_heading(doc, "Management Articles")
-    body_para(doc)
-
-    return doc
+        with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+            for item in zin.infolist():
+                data = (
+                    rels_xml.encode()
+                    if item.filename == "word/_rels/document.xml.rels"
+                    else zin.read(item.filename)
+                )
+                zout.writestr(item, data)
+            if "customXml/item1.xml" not in existing:
+                zout.writestr("customXml/item1.xml", _CUSTOM_XML_CONTENT)
+            if "customXml/itemProps1.xml" not in existing:
+                zout.writestr("customXml/itemProps1.xml", _CUSTOM_XML_PROPS)
+    shutil.move(str(tmp), str(docx_path))
 
 
-# ── Add-in auto-load embedding ────────────────────────────────────────────────
+# ── Core function ─────────────────────────────────────────────────────────────
 
-# Manifest add-in ID (must match manifest.xml <Id>)
-ADDIN_ID = "38e3c046-c982-4e1f-bf8b-24e04e6c9f94"
-ADDIN_VERSION = "1.0.0.0"
-
-_WEB_EXT_XML = f"""\
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<we:webextension
-  xmlns:we="http://schemas.microsoft.com/office/webextensions/webextension/2010/11"
-  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-  id="{{2D0A3B6C-4E5F-7890-ABCD-EF1234567890}}">
-  <we:reference id="{ADDIN_ID}" version="{ADDIN_VERSION}"
-    store="developer" storeType="Developer"/>
-  <we:alternateReferences/>
-  <we:properties>
-    <we:property name="Office.AutoShowTaskpaneWithDocument" value="true"/>
-  </we:properties>
-  <we:bindings/>
-  <we:snapshot xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
-</we:webextension>
-"""
-
-_TASKPANES_XML = """\
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<wetp:taskpanes
-  xmlns:wetp="http://schemas.microsoft.com/office/webextensions/taskpanes/2010/11">
-  <wetp:taskpane dockstate="right" visibility="1" width="350" row="4">
-    <wetp:webextensionref
-      xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-      r:id="rId_webext1"/>
-  </wetp:taskpane>
-</wetp:taskpanes>
-"""
-
-_CT_WEBEXT   = "application/vnd.ms-office.webextension+xml"
-_CT_TASKPANE = "application/vnd.ms-office.webextensiontaskpanes+xml"
-_REL_TASKPANE = "http://schemas.microsoft.com/office/2011/relationships/webextensiontaskpanes"
-_REL_WEBEXT   = "http://schemas.microsoft.com/office/2011/relationships/webextension"
-
-
-def embed_addin(filename: str) -> None:
+def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> Path:
     """
-    Inject webExtension + taskpanes parts into the saved .docx so that
-    Word (desktop and Online) auto-opens the EMR Centaur taskpane.
+    Generate an EMR4 patient .docx and return its path.
+
+    This is the function a FastAPI /patients/{id}/create-file endpoint should call.
+    The file is named  FIRSTNAME LASTNAME DD-MM-YYYY.docx  so the taskpane
+    auto-detect logic (autoDetectPatient) can identify the patient from the filename.
     """
-    # Read the existing zip into memory
-    with open(filename, "rb") as f:
-        original = f.read()
+    doc = Document()
 
-    buf = io.BytesIO()
-    with zipfile.ZipFile(io.BytesIO(original), "r") as zin, \
-         zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zout:
+    for section in doc.sections:
+        section.top_margin    = Inches(0.75)
+        section.bottom_margin = Inches(0.75)
+        section.left_margin   = Inches(1.0)
+        section.right_margin  = Inches(1.0)
 
-        existing_names = set(zin.namelist())
+    dob_str = patient.date_of_birth.strftime("%d-%m-%Y")
+    age     = _age(patient.date_of_birth)
+    name_uc = f"{patient.first_name.upper()} {patient.last_name.upper()}"
 
-        for item in zin.infolist():
-            data = zin.read(item.filename)
+    # ── Demographics header ───────────────────────────────────────────────────
+    # Replicates the grey shaded box in the reference (Billy / Margaret) files.
+    table = doc.add_table(rows=1, cols=1)
+    _hide_table_borders(table)
+    cell = table.cell(0, 0)
+    _shade_cell(cell, HEADER_GREY)
 
-            # ── [Content_Types].xml — add two Override entries ─────────────
-            if item.filename == "[Content_Types].xml":
-                data = data.decode("utf-8")
-                insert = ""
-                if "/word/webExtensions/webExtension1.xml" not in data:
-                    insert += (
-                        f'<Override PartName="/word/webExtensions/webExtension1.xml"'
-                        f' ContentType="{_CT_WEBEXT}"/>'
-                    )
-                if "/word/webExtensions/taskpanes.xml" not in data:
-                    insert += (
-                        f'<Override PartName="/word/webExtensions/taskpanes.xml"'
-                        f' ContentType="{_CT_TASKPANE}"/>'
-                    )
-                if insert:
-                    data = data.replace("</Types>", insert + "</Types>")
-                data = data.encode("utf-8")
+    def _header_line(text: str, first: bool = False) -> None:
+        p = cell.paragraphs[0] if first else cell.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        run = p.add_run(text)
+        run.font.bold      = True
+        run.font.color.rgb = EMR4_BLUE
+        run.font.size      = Pt(11)
 
-            # ── word/_rels/document.xml.rels — add taskpanes relationship ──
-            elif item.filename == "word/_rels/document.xml.rels":
-                data = data.decode("utf-8")
-                if _REL_TASKPANE not in data:
-                    rel = (
-                        f'<Relationship Id="rId_taskpanes"'
-                        f' Type="{_REL_TASKPANE}"'
-                        f' Target="webExtensions/taskpanes.xml"/>'
-                    )
-                    data = data.replace("</Relationships>", rel + "</Relationships>")
-                data = data.encode("utf-8")
+    _header_line(f"{name_uc}   dob {dob_str}   {age} years old   {patient.sex}", first=True)
+    if patient.address:
+        _header_line(patient.address)
+    contact_parts = []
+    if patient.phone:
+        contact_parts.append(f"Phone: {patient.phone}")
+    if patient.medicare_number:
+        contact_parts.append(f"Medicare: {patient.medicare_number}")
+    if contact_parts:
+        _header_line("       ".join(contact_parts))
 
-            zout.writestr(item, data)
+    doc.add_paragraph()  # spacer between header and first section
 
-        # ── Add the two new parts ──────────────────────────────────────────
-        if "word/webExtensions/webExtension1.xml" not in existing_names:
-            zout.writestr("word/webExtensions/webExtension1.xml",
-                          _WEB_EXT_XML.encode("utf-8"))
+    # ── Section headings ──────────────────────────────────────────────────────
+    for heading_text in SECTION_HEADINGS:
+        h = doc.add_heading(heading_text, level=1)
+        for run in h.runs:
+            run.font.color.rgb = EMR4_BLUE
+        doc.add_paragraph()  # blank line under each heading for GP to write into
 
-        if "word/webExtensions/taskpanes.xml" not in existing_names:
-            zout.writestr("word/webExtensions/taskpanes.xml",
-                          _TASKPANES_XML.encode("utf-8"))
-
-        # ── taskpanes needs its own _rels to point at webExtension1 ────────
-        tp_rels = (
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-            f'<Relationship Id="rId_webext1" Type="{_REL_WEBEXT}"'
-            f' Target="webExtension1.xml"/>'
-            '</Relationships>'
-        )
-        if "word/webExtensions/_rels/taskpanes.xml.rels" not in existing_names:
-            zout.writestr("word/webExtensions/_rels/taskpanes.xml.rels",
-                          tp_rels.encode("utf-8"))
-
-    with open(filename, "wb") as f:
-        f.write(buf.getvalue())
+    # ── Save & inject Custom XML Part ────────────────────────────────────────
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    filename = f"{name_uc} {dob_str}.docx"
+    out_path = output_dir / filename
+    doc.save(str(out_path))
+    _inject_custom_xml(out_path)
+    return out_path
 
 
-# ── Main ───────────────────────────────────────────────────────────────────────
+# ── CLI ───────────────────────────────────────────────────────────────────────
 
-def main():
-    parser = argparse.ArgumentParser(description="Generate EMR4 patient file")
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("name", nargs="?", help="Patient name (partial match)")
-    group.add_argument("--id", dest="patient_id", help="Patient UUID")
-    args = parser.parse_args()
+def _prompt(label: str, default: str = "") -> str:
+    suffix = f" [{default}]" if default else ""
+    return input(f"  {label}{suffix}: ").strip() or default
 
-    db = SessionLocal()
-    try:
-        if args.patient_id:
-            patient = db.query(Patient).filter(Patient.id == uuid.UUID(args.patient_id)).first()
-        else:
-            from sqlalchemy import or_
-            q = db.query(Patient)
-            for part in args.name.split():
-                q = q.filter(or_(
-                    Patient.first_name.ilike(f"%{part}%"),
-                    Patient.last_name.ilike(f"%{part}%"),
-                ))
-            patient = q.first()
 
-        if not patient:
-            print("Patient not found.", file=sys.stderr)
-            sys.exit(1)
-
-        print(f"Generating file for: {patient.first_name} {patient.last_name}")
-
-        allergies = db.query(Allergy).filter(Allergy.patient_id == patient.id).all()
-        meds      = db.query(Prescription).filter(
-            Prescription.patient_id == patient.id,
-            Prescription.is_active == True,
-        ).all()
-
-        doc = build_patient_document(patient, allergies, meds)
-
-        dob      = patient.date_of_birth.strftime("%d-%m-%Y")
-        doc.core_properties.title = (
-            f"{patient.first_name.upper()} {patient.last_name.upper()} {dob}"
-        )
-        name     = f"{patient.first_name.upper()} {patient.last_name.upper()} {dob}.docx"
-        letter   = patient.last_name[0].upper()
-        out_dir  = Path(r"C:\Users\YuriFrusin\OneDrive\EMR4\Data") / letter
-        out_dir.mkdir(parents=True, exist_ok=True)
-        filepath = out_dir / name
-        doc.save(filepath)
-        # embed_addin disabled: storeType="Developer" causes Word Online's OneDrive
-        # converter to silently reject the file. Re-enable with storeType="SPCatalog"
-        # once a SharePoint App Catalog is configured.
-        # embed_addin(str(filepath))
-        print(f"Saved: {filepath}")
-        print(f"  Allergies: {len(allergies)}  |  Medications: {len(meds)}")
-
-    finally:
-        db.close()
+def _parse_dob(s: str) -> date:
+    for fmt in ("%d-%m-%Y", "%d/%m/%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(s, fmt).date()
+        except ValueError:
+            pass
+    raise ValueError(f"Unrecognised date: {s!r}  — use DD-MM-YYYY")
 
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser(description="Create an EMR4 patient .docx")
+    ap.add_argument("--first",    metavar="NAME",       help="First name")
+    ap.add_argument("--last",     metavar="NAME",       help="Last name")
+    ap.add_argument("--dob",      metavar="DD-MM-YYYY", help="Date of birth")
+    ap.add_argument("--sex",      choices=["Male", "Female", "Other"])
+    ap.add_argument("--address",  default=None,          help="Full address")
+    ap.add_argument("--phone",    default=None,          help="Phone number")
+    ap.add_argument("--medicare", default=None,          help="Medicare number")
+    ap.add_argument("--out",      default=".",          metavar="DIR",
+                    help="Output directory (default: current directory)")
+    args = ap.parse_args()
+
+    print("\nEMR4 — New Patient File Generator")
+    print("-" * 36)
+
+    # Required fields — prompt if not supplied via CLI
+    first   = args.first or _prompt("First name")
+    last    = args.last  or _prompt("Last name")
+    dob_raw = args.dob   or _prompt("Date of birth (DD-MM-YYYY)")
+    sex     = args.sex   or _prompt("Sex", "Female")
+
+    # Optional fields — only prompt when running fully interactively (no CLI args at all)
+    cli_mode = bool(args.first or args.last or args.dob or args.sex)
+    address  = args.address  or ("" if cli_mode else _prompt("Address (optional)"))
+    phone    = args.phone    or ("" if cli_mode else _prompt("Phone (optional)"))
+    medicare = args.medicare or ("" if cli_mode else _prompt("Medicare number (optional)"))
+
+    patient = PatientData(
+        first_name      = first.strip(),
+        last_name       = last.strip(),
+        date_of_birth   = _parse_dob(dob_raw),
+        sex             = sex,
+        address         = address,
+        phone           = phone,
+        medicare_number = medicare,
+    )
+
+    out = create_patient_docx(patient, output_dir=Path(args.out))
+    print(f"\n[OK] {out}")

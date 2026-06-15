@@ -41,7 +41,7 @@ const PROTECTED_SECTIONS = [
   { text: "Medical History",                         tag: "emr4-section-medical-history" },
   { text: "Social History",                          tag: "emr4-section-social-history" },
   { text: "Correspondence",                          tag: "emr4-section-correspondence" },
-  { text: "Care Plans, Health Assessments, Recalls", tag: "emr4-section-care-plans" },
+  { text: "Care Plans, Health Assessments and Recalls", tag: "emr4-section-care-plans" },
   { text: "Management Articles",                     tag: "emr4-section-management-articles" },
 ];
 
