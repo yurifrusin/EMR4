@@ -859,10 +859,6 @@ async function insertConsultHeader(patient) {
       const para = ctx.document.body.insertParagraph(header, Word.InsertLocation.end);
       para.font.bold = true;
       await ctx.sync();
-      // Leave a bookmark so the SOAP note inserts immediately after this header
-      const marker = para.getRange(Word.RangeLocation.end);
-      marker.insertBookmark("emr4_note_insert_point");
-      await ctx.sync();
     });
   } catch (e) {
     setStatus("Header insert failed: " + e.message);
@@ -872,14 +868,7 @@ async function insertConsultHeader(patient) {
 async function insertNoteIntoWord(text) {
   try {
     await Word.run(async ctx => {
-      let inserted = false;
-      try {
-        const bkRange = ctx.document.getBookmarkRange("emr4_note_insert_point");
-        await ctx.sync(); // throws if bookmark not found
-        bkRange.insertParagraph(text, Word.InsertLocation.after);
-        inserted = true;
-      } catch (_) { /* bookmark not present — fall through */ }
-      if (!inserted) ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
+      ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
       await ctx.sync();
     });
     setStatus("Note inserted into document.");

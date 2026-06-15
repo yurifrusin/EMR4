@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 import uuid
@@ -227,11 +228,15 @@ async def analyze_consultation(payload: ConsultationPayload, db: Session = Depen
 
     extracted = {"encounter_metadata": {}, "clinical_diagnoses": [], "medications_and_prescriptions": []}
     try:
-        response = model.generate_content(
-            prompt, generation_config=GenerationConfig(response_mime_type="application/json", temperature=0.1)
+        response = await asyncio.to_thread(
+            model.generate_content, prompt,
+            generation_config=GenerationConfig(response_mime_type="application/json", temperature=0.1)
         )
-        print(f"\n{'='*60}\n[analyze-consultation] Gemini response:\n{response.text}\n{'='*60}\n")
         extracted = json.loads(response.text)
+        mbs  = [m.get("item_number") for m in extracted.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
+        dx   = [d.get("term") for d in extracted.get("clinical_diagnoses", [])]
+        rx   = [m.get("drug_name") for m in extracted.get("medications_and_prescriptions", [])]
+        print(f"[analyze] type={extracted.get('encounter_metadata',{}).get('consultation_type','?')} | MBS={mbs} | Dx={dx} | Rx={rx}")
     except Exception as e:
         print(f"Vertex AI error: {e}")
         extracted["encounter_metadata"]["consultation_type"] = "AI Processing Error"
@@ -302,12 +307,16 @@ Return strict JSON only, no markdown:
 """
     try:
         audio_part = Part.from_data(data=audio_bytes, mime_type=audio_file.content_type)
-        response = model.generate_content(
+        response = await asyncio.to_thread(
+            model.generate_content,
             [audio_part, prompt],
             generation_config=GenerationConfig(response_mime_type="application/json", temperature=0.1),
         )
-        print(f"\n{'='*60}\n[scribe-consultation] Gemini response:\n{response.text}\n{'='*60}\n")
         result = json.loads(response.text)
+        mbs  = [m.get("item_number") for m in result.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
+        dx   = [d.get("term") for d in result.get("clinical_diagnoses", [])]
+        rx   = [m.get("drug_name") for m in result.get("medications_and_prescriptions", [])]
+        print(f"[scribe] type={result.get('encounter_metadata',{}).get('consultation_type','?')} | MBS={mbs} | Dx={dx} | Rx={rx}")
         result["audio_url"] = f"/static/audio/{audio_filename}"
         return result
     except Exception as e:
