@@ -61,7 +61,7 @@ def _search_local_mbs(query: str, db: Session) -> str:
     if not results:
         results = db.query(MbsDirectory).filter(MbsDirectory.item_number.in_(["3", "23", "36", "44"])).all()
     return "\n\n".join(
-        f"- MBS Item: {r.item_number} | Fee: {r.fee} | Description: {r.description}" for r in results
+        f"- MBS Item: {r.item_number} | Fee: {r.fee} | Description: {r.description[:200]}" for r in results
     )
 
 
