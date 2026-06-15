@@ -841,7 +841,10 @@ async function openCommandCentre() {
   // Pass patient ID via URL param — more reliable than localStorage cross-context
   const url = `${CC_URL}?pid=${currentPatient.id}`;
 
-  Office.context.ui.displayDialogAsync(url, { height: 75, width: 55 }, result => {
+  // displayInIframe avoids the "open a new window?" consent prompt that Office on
+  // the web shows for every window-based dialog. Trade-off: microphone access must
+  // still work inside the iframe — if recording breaks, remove this option.
+  Office.context.ui.displayDialogAsync(url, { height: 75, width: 55, displayInIframe: true }, result => {
     if (result.status === Office.AsyncResultStatus.Failed) {
       setStatus("Could not open Command Centre: " + result.error.message);
       commandCentreOpen = false;
