@@ -29,28 +29,33 @@ from docx.shared import Inches, Pt, RGBColor
 
 
 # ── Section headings — Dr Shera structure ─────────────────────────────────────
-# Order and exact text must match PROTECTED_SECTIONS in taskpane.js.
-# "Contemporaneous Notes" is the AI anchor — do not rename.
+# (heading text, content-control tag). Order, text, AND tags must match
+# PROTECTED_SECTIONS in taskpane.js. "Contemporaneous Notes" is the AI anchor.
 SECTION_HEADINGS = [
-    "Care Plans, Health Assessments and Recalls",
-    "Family History",
-    "Medical History",
-    "Social History",
-    "Current Drugs",
-    "Drug Reactions",
-    "Contemporaneous Notes",
-    "Vaccinations",
-    "Specialist Reports",
-    "Diagnostic Imaging",
-    "Pathology Results",
-    "ECG Records",
-    "Prescription Records",
-    "Correspondence",
-    "Management Articles",
+    ("Care Plans, Health Assessments and Recalls", "emr4-section-care-plans"),
+    ("Family History",                             "emr4-section-family-history"),
+    ("Medical History",                            "emr4-section-medical-history"),
+    ("Social History",                             "emr4-section-social-history"),
+    ("Current Drugs",                              "emr4-section-current-drugs"),
+    ("Drug Reactions",                             "emr4-section-drug-reactions"),
+    ("Contemporaneous Notes",                      "emr4-section-cn"),
+    ("Vaccinations",                               "emr4-section-vaccinations"),
+    ("Specialist Reports",                         "emr4-section-specialist-reports"),
+    ("Diagnostic Imaging",                         "emr4-section-imaging"),
+    ("Pathology Results",                          "emr4-section-pathology"),
+    ("ECG Records",                                "emr4-section-ecg"),
+    ("Prescription Records",                       "emr4-section-prescription-records"),
+    ("Correspondence",                             "emr4-section-correspondence"),
+    ("Management Articles",                        "emr4-section-management-articles"),
 ]
 
-EMR4_BLUE   = RGBColor(0x00, 0x00, 0xCC)
-HEADER_GREY = "E8E8E8"
+# Typography — must match the Margaret Thompson reference file (the template).
+EMR4_BLUE    = RGBColor(0x00, 0x00, 0xFF)   # pure blue 0000FF
+BODY_FONT    = "Century Schoolbook"          # Normal style + demographics
+HEADING_FONT = "Garamond"                    # Heading 1 section titles
+BODY_PT      = 11
+HEADING_PT   = 12
+HEADER_GREY  = "E8E8E8"
 
 _CUSTOM_XML_NS = "http://emr4.com/ns/document"
 _CUSTOM_XML_CONTENT = f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -113,6 +118,50 @@ def _hide_table_borders(table) -> None:
     tblPr.append(borders)
 
 
+def _apply_template_styles(doc) -> None:
+    """Set Normal and Heading 1 styles to match the Margaret Thompson template."""
+    normal = doc.styles["Normal"]
+    normal.font.name = BODY_FONT
+    normal.font.size = Pt(BODY_PT)
+
+    h1 = doc.styles["Heading 1"]
+    h1.font.name       = HEADING_FONT
+    h1.font.size       = Pt(HEADING_PT)
+    h1.font.bold       = True
+    h1.font.color.rgb  = EMR4_BLUE
+    h1.paragraph_format.space_before = Pt(10)  # 200 twips
+    h1.paragraph_format.space_after  = Pt(2)   # 40 twips
+
+
+def _wrap_heading_in_locked_cc(paragraph, tag: str, alias: str, cc_id: int) -> None:
+    """Wrap a heading paragraph in a block-level content control that is locked
+    against deletion AND content editing (w:lock = sdtContentLocked). This is the
+    OOXML equivalent of Office.js cannotDelete=true + cannotEdit=true, and matches
+    the tags repairDocumentStructure() looks for in taskpane.js."""
+    p = paragraph._p
+    parent = p.getparent()
+    idx = list(parent).index(p)
+
+    sdt        = OxmlElement("w:sdt")
+    sdtPr      = OxmlElement("w:sdtPr")
+    sdtContent = OxmlElement("w:sdtContent")
+
+    alias_el = OxmlElement("w:alias"); alias_el.set(qn("w:val"), alias)
+    tag_el   = OxmlElement("w:tag");   tag_el.set(qn("w:val"), tag)
+    id_el    = OxmlElement("w:id");    id_el.set(qn("w:val"), str(cc_id))
+    lock_el  = OxmlElement("w:lock");  lock_el.set(qn("w:val"), "sdtContentLocked")
+
+    for el in (alias_el, tag_el, id_el, lock_el):
+        sdtPr.append(el)
+
+    sdt.append(sdtPr)
+    sdt.append(sdtContent)
+
+    parent.insert(idx, sdt)   # put the sdt where the paragraph was
+    parent.remove(p)          # detach the paragraph
+    sdtContent.append(p)      # re-home it inside the content control
+
+
 def _inject_custom_xml(docx_path: Path) -> None:
     """Injects emr4:document-type=patient Custom XML Part so the taskpane
     auto-detects this as a patient file and activates patient mode."""
@@ -151,6 +200,7 @@ def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> P
     auto-detect logic (autoDetectPatient) can identify the patient from the filename.
     """
     doc = Document()
+    _apply_template_styles(doc)
 
     for section in doc.sections:
         section.top_margin    = Inches(0.75)
@@ -173,9 +223,10 @@ def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> P
         p = cell.paragraphs[0] if first else cell.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         run = p.add_run(text)
+        run.font.name      = BODY_FONT
         run.font.bold      = True
         run.font.color.rgb = EMR4_BLUE
-        run.font.size      = Pt(11)
+        run.font.size      = Pt(BODY_PT)
 
     _header_line(f"{name_uc}   dob {dob_str}   {age} years old   {patient.sex}", first=True)
     if patient.address:
@@ -190,12 +241,15 @@ def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> P
 
     doc.add_paragraph()  # spacer between header and first section
 
-    # ── Section headings ──────────────────────────────────────────────────────
-    for heading_text in SECTION_HEADINGS:
+    # ── Section headings (each wrapped in a locked content control) ────────────
+    for n, (heading_text, tag) in enumerate(SECTION_HEADINGS):
         h = doc.add_heading(heading_text, level=1)
         for run in h.runs:
+            run.font.name      = HEADING_FONT
             run.font.color.rgb = EMR4_BLUE
-        doc.add_paragraph()  # blank line under each heading for GP to write into
+        # Protect the heading: cannot be deleted or reformatted in Word
+        _wrap_heading_in_locked_cc(h, tag=tag, alias=heading_text, cc_id=900000 + n)
+        doc.add_paragraph()  # blank line under each heading (outside the CC) to write into
 
     # ── Save & inject Custom XML Part ────────────────────────────────────────
     output_dir = Path(output_dir)
