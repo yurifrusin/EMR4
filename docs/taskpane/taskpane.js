@@ -43,7 +43,7 @@ const PROTECTED_SECTIONS = [
   { text: "Medical History",                         tag: "emr4-section-medical-history" },
   { text: "Social History",                          tag: "emr4-section-social-history" },
   { text: "Correspondence",                          tag: "emr4-section-correspondence" },
-  { text: "Care Plans, Health Assessments, Recalls", tag: "emr4-section-care-plans" },
+  { text: "Care Plans, Health Assessments and Recalls", tag: "emr4-section-care-plans" },
   { text: "Management Articles",                     tag: "emr4-section-management-articles" },
 ];
 
@@ -1215,9 +1215,11 @@ function updateOpenFileButton() {
 Office.onReady(info => {
   if (info.host !== Office.HostType.Word) return;
 
-  // ── Global keyboard shortcut (Ctrl+Shift+N) ─────────────
+  // ── Global keyboard shortcut (Ctrl+Alt+N) ─────────────
   // Registered on the shared runtime so it fires while the cursor is in the
   // document body, reusing the taskpane's currentPatient state.
+  // NB: NOT Ctrl+Shift+N — Chrome reserves that for Incognito and the browser
+  // swallows it before Word/the add-in can see it.
   if (Office.actions && Office.actions.associate) {
     Office.actions.associate("StartConsultation", function (event) {
       Promise.resolve(startConsultation()).finally(() => event.completed());
@@ -1278,11 +1280,11 @@ Office.onReady(info => {
   // ── Command Centre ──────────────────────────────────────
   document.getElementById("btn-command-center").onclick = openCommandCentre;
 
-  // ── Start Consultation (button + Ctrl+Shift+N while sidebar focused) ──
+  // ── Start Consultation (button + Ctrl+Alt+N while sidebar focused) ──
   const startBtn = document.getElementById("btn-start-consult");
   if (startBtn) startBtn.onclick = startConsultation;
   document.addEventListener("keydown", e => {
-    if (e.ctrlKey && e.shiftKey && (e.key === "N" || e.key === "n")) {
+    if (e.ctrlKey && e.altKey && (e.key === "N" || e.key === "n")) {
       e.preventDefault();
       startConsultation();
     }

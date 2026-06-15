@@ -89,7 +89,7 @@ This directly addresses Dr Shera's concern about information being "a click away
 
 ### 3. The F2 Equivalent — Consult Header Injection
 
-The taskpane provides a keyboard shortcut (Ctrl+Shift+N) that functions identically to the old F2 macro: it finds the Contemporaneous Notes section of the open patient document and inserts a dated header:
+The taskpane provides a keyboard shortcut (Ctrl+Alt+N) that functions identically to the old F2 macro: it finds the Contemporaneous Notes section of the open patient document and inserts a dated header:
 
 ```
 14-06-2026  Margaret Thompson  10:30 AM  73 years old.

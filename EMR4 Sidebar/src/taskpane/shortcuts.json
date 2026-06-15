@@ -10,7 +10,7 @@
     {
       "action": "StartConsultation",
       "key": {
-        "default": "Ctrl+Shift+N"
+        "default": "Ctrl+Alt+N"
       }
     }
   ]

@@ -84,7 +84,7 @@ Key AI endpoints:
 
 Patient `.docx` files use **Heading 1** sections (`Contemporaneous Notes`, `Vaccinations`, …). Consult entries are Normal+bold datestamp lines under "Contemporaneous Notes" (newest on top). `getCurrentConsultText()` in the taskpane scopes AI to ONLY the current consult: from the planted header to the next consult header or the next Heading 1.
 
-- `Start Consultation` button / **Ctrl+Shift+N** plants the dated header and sets bookmark `EMR4_NOTE_POINT`
+- `Start Consultation` button / **Ctrl+Alt+N** plants the dated header and sets bookmark `EMR4_NOTE_POINT` (NOT Ctrl+Shift+N — Chrome reserves that for Incognito)
 - `consultStarted` flag gates all background AI sync — prevents re-analysing a finalised consult on document open
 - Custom XML Part `<emr4:document-type>patient|diary</emr4:document-type>` routes taskpane UI mode
 
@@ -125,6 +125,7 @@ just doesn't apply). This has bitten us repeatedly:
 - **OOXML element order** — `<w:shd>` must precede `<w:spacing>`/`<w:jc>` in `<w:pPr>`. Use ordered insertion.
 - **Content-control `appearance`** — use the `"Hidden"` string, not the `Word.ContentControlAppearance.hidden` enum (may be undefined at runtime).
 - **Shared-runtime JS cache** — a sidebar refresh is NOT enough; close & reopen the document.
+- **Keyboard shortcuts vs the browser** — Word Online runs in Chrome, which intercepts its own combos (Ctrl+Shift+N Incognito, Ctrl+Shift+T, Ctrl+Shift+B bookmarks bar, etc.) *before* Word/the add-in see them. Use `Ctrl+Alt+…` or `Alt+Shift+…` for add-in shortcuts (Start Consultation is **Ctrl+Alt+N**).
 
 **Rule of thumb:** when something renders on Desktop but not Online, suspect a
 schema-order / strictness issue before anything else. Test in Word Online, not Desktop.
