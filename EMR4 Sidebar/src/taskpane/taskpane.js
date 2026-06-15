@@ -61,6 +61,24 @@ function setStatus(msg) {
   if (el) el.textContent = msg;
 }
 
+// Disable/restore all editing controls while Command Centre is the active surface.
+function setTaskpaneLocked(locked) {
+  const ids = [
+    "btn-command-center", "btn-start-consult", "btn-lock",
+    "btn-search-patient", "btn-open-file",
+    "btn-add-mbs", "btn-add-snomed", "btn-add-rx",
+    "btn-finalize", "consult-type",
+  ];
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (el) el.disabled = locked;
+  }
+  // Dynamic coding rows — CSS lock so newly-rendered rows are also covered
+  ["mbs-container", "snomed-container", "rx-container"].forEach(id => {
+    document.getElementById(id)?.classList.toggle("cc-locked", locked);
+  });
+}
+
 // ═══════════════════════════════════════════════════════════
 // API HELPER — attaches JWT, handles 401
 // ═══════════════════════════════════════════════════════════
@@ -833,11 +851,10 @@ function openCommandCentre() {
   // Pause the taskpane's own background analysis — the Command Centre is now
   // the single source of truth, so the two AIs don't show conflicting coding.
   commandCentreOpen = true;
-  setStatus("Command Centre open — taskpane analysis paused.");
-
-  // Disable the taskpane Finalize button while CC is open — finalise via CC instead.
+  setTaskpaneLocked(true);
   const fbtnCC = document.getElementById("btn-finalize");
-  if (fbtnCC) { fbtnCC.disabled = true; fbtnCC.textContent = "Finalise in Command Centre"; }
+  if (fbtnCC) fbtnCC.textContent = "Finalise in Command Centre";
+  setStatus("Command Centre open — taskpane editing paused.");
 
   // Pass patient ID via URL param — more reliable than localStorage cross-context
   const url = `${CC_URL}?pid=${currentPatient.id}`;
@@ -887,11 +904,15 @@ function openCommandCentre() {
       commandCentreDialog = null;
       commandCentreOpen = false;          // resume taskpane background analysis
       lastSyncedText = "";                // force a fresh re-sync of the document
-      // Restore the Finalize button if a consult is still in progress
+      setTaskpaneLocked(false);
+      // If no consult is active (e.g. CC already finalised it), keep Finalize disabled
       const fbtnClose = document.getElementById("btn-finalize");
-      if (fbtnClose && consultStarted) {
-        fbtnClose.disabled = false;
-        fbtnClose.textContent = "Approve & Finalise Record";
+      if (fbtnClose) {
+        if (consultStarted) {
+          fbtnClose.textContent = "Approve & Finalise Record";
+        } else {
+          fbtnClose.disabled = true;
+        }
       }
     });
   });

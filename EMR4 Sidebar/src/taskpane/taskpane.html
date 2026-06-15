@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR Centaur</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=21" />
-  <script src="taskpane.js?v=21" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=22" />
+  <script src="taskpane.js?v=22" defer></script>
 </head>
 <body>
 
@@ -128,21 +128,21 @@
         <!-- MBS -->
         <div class="section-header">
           MBS Items
-          <button class="btn btn-ghost btn-xs" onclick="addMbsRow()">+ Add</button>
+          <button id="btn-add-mbs" class="btn btn-ghost btn-xs" onclick="addMbsRow()">+ Add</button>
         </div>
         <div id="mbs-container"></div>
 
         <!-- SNOMED -->
         <div class="section-header">
           Clinical Diagnoses
-          <button class="btn btn-ghost btn-xs" onclick="addSnomedRow()">+ Add</button>
+          <button id="btn-add-snomed" class="btn btn-ghost btn-xs" onclick="addSnomedRow()">+ Add</button>
         </div>
         <div id="snomed-container"></div>
 
         <!-- Prescriptions -->
         <div class="section-header">
           Prescriptions
-          <button class="btn btn-ghost btn-xs" onclick="addRxRow()">+ Add</button>
+          <button id="btn-add-rx" class="btn btn-ghost btn-xs" onclick="addRxRow()">+ Add</button>
         </div>
         <div id="rx-container"></div>
 
