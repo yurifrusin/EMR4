@@ -228,16 +228,12 @@ def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> P
         run.font.color.rgb = EMR4_BLUE
         run.font.size      = Pt(BODY_PT)
 
+    # Always render all three demographic lines so the field structure is present
+    # even when a value is blank — the receptionist/GP can fill gaps in-document,
+    # and a userform-generated file shows the same layout as the template.
     _header_line(f"{name_uc}   dob {dob_str}   {age} years old   {patient.sex}", first=True)
-    if patient.address:
-        _header_line(patient.address)
-    contact_parts = []
-    if patient.phone:
-        contact_parts.append(f"Phone: {patient.phone}")
-    if patient.medicare_number:
-        contact_parts.append(f"Medicare: {patient.medicare_number}")
-    if contact_parts:
-        _header_line("       ".join(contact_parts))
+    _header_line(patient.address or "")
+    _header_line(f"Phone: {patient.phone}        Medicare: {patient.medicare_number}")
 
     doc.add_paragraph()  # spacer between header and first section
 
