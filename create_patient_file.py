@@ -55,7 +55,8 @@ BODY_FONT    = "Century Schoolbook"          # Normal style + demographics
 HEADING_FONT = "Garamond"                    # Heading 1 section titles
 BODY_PT      = 11
 HEADING_PT   = 12
-HEADER_GREY  = "E8E8E8"
+HEADER_GREY  = "E6E6E6"   # grey demographics band — matches MT template
+HEADER_LINE_SPACING = 1.15
 
 _CUSTOM_XML_NS = "http://emr4.com/ns/document"
 _CUSTOM_XML_CONTENT = f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -96,26 +97,16 @@ def _age(dob: date) -> int:
     return today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
 
 
-def _shade_cell(cell, fill_hex: str) -> None:
-    tcPr = cell._tc.get_or_add_tcPr()
+def _shade_paragraph(paragraph, fill_hex: str) -> None:
+    """Apply solid background shading to a whole paragraph (the grey demographics
+    band). Matches the Margaret Thompson template, which uses paragraph shading —
+    NOT a table — so it renders reliably in Word Online as well as desktop."""
+    pPr = paragraph._p.get_or_add_pPr()
     shd = OxmlElement("w:shd")
     shd.set(qn("w:val"), "clear")
     shd.set(qn("w:color"), "auto")
     shd.set(qn("w:fill"), fill_hex)
-    tcPr.append(shd)
-
-
-def _hide_table_borders(table) -> None:
-    tblPr = table._tbl.find(qn("w:tblPr"))
-    if tblPr is None:
-        tblPr = OxmlElement("w:tblPr")
-        table._tbl.insert(0, tblPr)
-    borders = OxmlElement("w:tblBorders")
-    for side in ("top", "left", "bottom", "right", "insideH", "insideV"):
-        el = OxmlElement(f"w:{side}")
-        el.set(qn("w:val"), "none")
-        borders.append(el)
-    tblPr.append(borders)
+    pPr.append(shd)
 
 
 def _apply_template_styles(doc) -> None:
@@ -213,15 +204,17 @@ def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> P
     name_uc = f"{patient.first_name.upper()} {patient.last_name.upper()}"
 
     # ── Demographics header ───────────────────────────────────────────────────
-    # Replicates the grey shaded box in the reference (Billy / Margaret) files.
-    table = doc.add_table(rows=1, cols=1)
-    _hide_table_borders(table)
-    cell = table.cell(0, 0)
-    _shade_cell(cell, HEADER_GREY)
-
-    def _header_line(text: str, first: bool = False) -> None:
-        p = cell.paragraphs[0] if first else cell.add_paragraph()
+    # Grey shaded band made of three centred, shaded paragraphs — exactly how the
+    # Margaret Thompson template does it (paragraph shading, no table). Tables with
+    # hidden borders render inconsistently in Word Online; shaded paragraphs don't.
+    def _header_line(text: str) -> None:
+        p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        pf = p.paragraph_format
+        pf.space_before = Pt(0)
+        pf.space_after  = Pt(0)
+        pf.line_spacing = HEADER_LINE_SPACING   # 1.15 lines, tight band
+        _shade_paragraph(p, HEADER_GREY)
         run = p.add_run(text)
         run.font.name      = BODY_FONT
         run.font.bold      = True
@@ -231,7 +224,7 @@ def create_patient_docx(patient: PatientData, output_dir: Path = Path(".")) -> P
     # Always render all three demographic lines so the field structure is present
     # even when a value is blank — the receptionist/GP can fill gaps in-document,
     # and a userform-generated file shows the same layout as the template.
-    _header_line(f"{name_uc}   dob {dob_str}   {age} years old   {patient.sex}", first=True)
+    _header_line(f"{name_uc}   dob {dob_str}   {age} years old   {patient.sex}")
     _header_line(patient.address or "")
     _header_line(f"Phone: {patient.phone}        Medicare: {patient.medicare_number}")
 
