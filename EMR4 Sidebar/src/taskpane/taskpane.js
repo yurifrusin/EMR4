@@ -1091,6 +1091,15 @@ function updateOpenFileButton() {
 Office.onReady(info => {
   if (info.host !== Office.HostType.Word) return;
 
+  // ── Global keyboard shortcut (Ctrl+Shift+N) ─────────────
+  // Registered on the shared runtime so it fires while the cursor is in the
+  // document body, reusing the taskpane's currentPatient state.
+  if (Office.actions && Office.actions.associate) {
+    Office.actions.associate("StartConsultation", function (event) {
+      Promise.resolve(startConsultation()).finally(() => event.completed());
+    });
+  }
+
   // ── Tab navigation ──────────────────────────────────────
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.onclick = () => {

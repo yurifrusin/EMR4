@@ -11,7 +11,7 @@ from pathlib import Path
 SRC  = Path("EMR4 Sidebar/src/taskpane")
 DEST = Path("docs/taskpane")
 
-files = ["taskpane.html", "taskpane.css"]
+files = ["taskpane.html", "taskpane.css", "shortcuts.json"]
 for f in files:
     shutil.copy2(SRC / f, DEST / f)
     print(f"  copied {f}")

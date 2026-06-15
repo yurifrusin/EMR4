@@ -1,0 +1,17 @@
+{
+  "actions": [
+    {
+      "id": "StartConsultation",
+      "type": "ExecuteFunction",
+      "name": "Start a new consultation"
+    }
+  ],
+  "shortcuts": [
+    {
+      "action": "StartConsultation",
+      "key": {
+        "default": "Ctrl+Shift+N"
+      }
+    }
+  ]
+}
