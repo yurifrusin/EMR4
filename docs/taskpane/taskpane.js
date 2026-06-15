@@ -871,6 +871,8 @@ function openCommandCentre() {
           // tab and lock it so background sync won't overwrite it.
           if (msg.data) { updateFormFields(msg.data); isLocked = true; updateLockUI(); }
           consultStarted = false;                 // allow a new consult to be started
+          const fbtn = document.getElementById("btn-finalize");
+          if (fbtn) { fbtn.disabled = true; fbtn.textContent = "✅ Finalised"; }
           setStatus("✅ Consult finalised in Command Centre.");
           if (currentPatient) loadPatient(currentPatient.id);  // refresh history/meds/sidebar
         } else if (msg.type === "reload_patient" && currentPatient) {
@@ -954,6 +956,8 @@ window.startConsultation = async function () {
   consultStarted = true;
   isLocked = false; updateLockUI();   // fresh consult — AI live again
   updateFormFields({});               // clear any previously displayed coding
+  const fbtn = document.getElementById("btn-finalize");
+  if (fbtn) { fbtn.disabled = false; fbtn.textContent = "Approve & Finalise Record"; }
   setStatus("Consultation started — type your notes below the header.");
 };
 
@@ -992,7 +996,9 @@ async function getCurrentConsultText() {
 }
 
 async function insertNoteIntoWord(text) {
-  const lines = (text || "").split("\n");
+  // Collapse the SOAP note into a single paragraph to save space in the file —
+  // the S:/O:/A:/P: labels still delineate the sections inline.
+  const oneLine = (text || "").split("\n").map(s => s.trim()).filter(Boolean).join(" ");
   try {
     await Word.run(async ctx => {
       // Prefer inserting right after the consult header (bookmarked), so the note
@@ -1000,19 +1006,13 @@ async function insertNoteIntoWord(text) {
       const bm = ctx.document.getBookmarkRangeOrNullObject(NOTE_BOOKMARK);
       await ctx.sync();
 
-      if (!bm.isNullObject) {
-        let prev = bm.insertParagraph(lines[0] || "", Word.InsertLocation.after);
-        prev.styleBuiltIn = Word.BuiltInStyleName.normal; prev.font.bold = false;
-        for (let i = 1; i < lines.length; i++) {
-          prev = prev.insertParagraph(lines[i], Word.InsertLocation.after);
-          prev.styleBuiltIn = Word.BuiltInStyleName.normal; prev.font.bold = false;
-        }
-        // Move the bookmark to the end of the note so any later insert appends below it
-        prev.getRange(Word.RangeLocation.end).insertBookmark(NOTE_BOOKMARK);
-      } else {
-        const body = ctx.document.body;
-        for (const line of lines) body.insertParagraph(line, Word.InsertLocation.end);
-      }
+      const para = bm.isNullObject
+        ? ctx.document.body.insertParagraph(oneLine, Word.InsertLocation.end)
+        : bm.insertParagraph(oneLine, Word.InsertLocation.after);
+      para.styleBuiltIn = Word.BuiltInStyleName.normal;
+      para.font.bold = false;
+      // Move the bookmark to the end of the note so any later insert appends below it
+      para.getRange(Word.RangeLocation.end).insertBookmark(NOTE_BOOKMARK);
       await ctx.sync();
     });
     setStatus("Note inserted into document.");
