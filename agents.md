@@ -261,10 +261,13 @@ threat-model requirement, foundational controls to land early (PostgreSQL RLS fo
 tenant isolation, an `audit_log` table, secrets management, CORS/JWT hardening,
 field-level encryption), and per-phase security gates (booking/kiosk identity proofing,
 prompt-injection defence, Hive Mind de-ID, Results Relay auth, PRODA certs).
-**Known P0 issues in current code, not yet fixed:** default `secret_key`
-("change-me-in-production") in `config.py` and `allow_origins=["*"]` + credentials in
-`main.py`. Tenancy is currently enforced by manual per-query `practice_id` filters
-(correct today, but RLS is the recommended defense-in-depth).
+**P0 issues — FIXED (commit follows):** `config.py` now fails closed (refuses to
+start when `ENVIRONMENT` != `dev` and `secret_key` is the public default), and CORS
+is locked to an allow-list (`settings.cors_origins`: GitHub Pages + localhost:3000)
+instead of `["*"]`. Set `ENVIRONMENT` + a generated `SECRET_KEY` in prod `.env`.
+**Still open (P1+):** tenancy is enforced by manual per-query `practice_id` filters
+(correct today, but PostgreSQL RLS is the recommended defense-in-depth); JWT in
+`localStorage`; `audit_log` table absent.
 
 ### Deploy reminders
 - Taskpane edit → `python sync_taskpane.py` → bump `?v=N` in taskpane.html → commit docs/ → push → **close & reopen the document** (shared runtime caches JS for the doc session; a sidebar toggle is not enough).

@@ -1,13 +1,27 @@
 from pydantic_settings import BaseSettings
+from pydantic import model_validator
 from typing import Optional
+
+INSECURE_DEFAULT_SECRET = "change-me-in-production"
 
 
 class Settings(BaseSettings):
+    # "dev" | "staging" | "production" — gates the fail-closed secret check below
+    environment: str = "dev"
+
     database_url: str = "postgresql://postgres:postgres@127.0.0.1:5434/gp_pms_dev"
 
-    secret_key: str = "change-me-in-production"
+    secret_key: str = INSECURE_DEFAULT_SECRET
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 480  # 8 hours
+
+    # CORS allow-list. Taskpane + Command Centre are served from GitHub Pages;
+    # localhost:3000 is the webpack dev-server. NEVER use "*" with credentials.
+    cors_origins: list[str] = [
+        "https://yurifrusin.github.io",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
 
     gcp_project: str = "emr4-copilot"
     gcp_location: str = "us-central1"
@@ -20,6 +34,21 @@ class Settings(BaseSettings):
     clicksend_api_key: Optional[str] = None
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "case_sensitive": False}
+
+    @model_validator(mode="after")
+    def _fail_closed_on_insecure_secret(self):
+        """Refuse to start outside dev if the JWT signing key is the public default.
+        The repo is AGPL/public, so a default secret_key means anyone can forge
+        tokens for any practice."""
+        if self.environment.lower() != "dev" and (
+            not self.secret_key or self.secret_key == INSECURE_DEFAULT_SECRET
+        ):
+            raise RuntimeError(
+                f"SECRET_KEY must be set to a strong, unique value when "
+                f"ENVIRONMENT={self.environment!r}. It is currently the insecure "
+                f"public default — refusing to start."
+            )
+        return self
 
 
 settings = Settings()
