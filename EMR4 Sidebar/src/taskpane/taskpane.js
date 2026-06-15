@@ -823,12 +823,13 @@ async function openCommandCentre() {
         const msg = JSON.parse(arg.message);
         if (msg.type === "ready") {
           commandCentreDialog.messageChild(JSON.stringify({ type: "auth", token }));
-          // Also send current AI analysis so Command Centre opens pre-filled
           if (lastAiResponse) {
             commandCentreDialog.messageChild(JSON.stringify({ type: "ai_context", data: lastAiResponse }));
           }
         } else if (msg.type === "insert_note" && msg.text) {
           insertNoteIntoWord(msg.text);
+        } else if (msg.type === "reload_patient" && currentPatient) {
+          loadPatient(currentPatient.id);
         }
       } catch (_) {}
     });
@@ -856,6 +857,10 @@ async function insertConsultHeader(patient) {
       const para = ctx.document.body.insertParagraph(header, Word.InsertLocation.end);
       para.font.bold = true;
       await ctx.sync();
+      // Leave a bookmark so the SOAP note inserts immediately after this header
+      const marker = para.getRange(Word.RangeLocation.end);
+      marker.insertBookmark("emr4_note_insert_point");
+      await ctx.sync();
     });
   } catch (e) {
     setStatus("Header insert failed: " + e.message);
@@ -865,7 +870,14 @@ async function insertConsultHeader(patient) {
 async function insertNoteIntoWord(text) {
   try {
     await Word.run(async ctx => {
-      ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
+      let inserted = false;
+      try {
+        const bkRange = ctx.document.getBookmarkRange("emr4_note_insert_point");
+        await ctx.sync(); // throws if bookmark not found
+        bkRange.insertParagraph(text, Word.InsertLocation.after);
+        inserted = true;
+      } catch (_) { /* bookmark not present — fall through */ }
+      if (!inserted) ctx.document.body.insertParagraph(text, Word.InsertLocation.end);
       await ctx.sync();
     });
     setStatus("Note inserted into document.");

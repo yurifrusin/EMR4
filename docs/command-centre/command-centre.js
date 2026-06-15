@@ -415,8 +415,11 @@ window.approveAndFinalize = async function () {
         // Send generated clinical note to Word via taskpane bridge
         if (data.generated_clinical_note) {
           try { sendToTaskpane({ type: "insert_note", text: data.generated_clinical_note }); }
-          catch (_) { /* not in dialog context — ignore */ }
+          catch (_) {}
         }
+        // Tell taskpane to refresh patient data (encounters, meds) from the database
+        try { sendToTaskpane({ type: "reload_patient" }); }
+        catch (_) {}
       }
     } else {
       setStatus("❌ Server error " + res.status);

@@ -230,6 +230,7 @@ async def analyze_consultation(payload: ConsultationPayload, db: Session = Depen
         response = model.generate_content(
             prompt, generation_config=GenerationConfig(response_mime_type="application/json", temperature=0.1)
         )
+        print(f"\n{'='*60}\n[analyze-consultation] Gemini response:\n{response.text}\n{'='*60}\n")
         extracted = json.loads(response.text)
     except Exception as e:
         print(f"Vertex AI error: {e}")
@@ -305,6 +306,7 @@ Return strict JSON only, no markdown:
             [audio_part, prompt],
             generation_config=GenerationConfig(response_mime_type="application/json", temperature=0.1),
         )
+        print(f"\n{'='*60}\n[scribe-consultation] Gemini response:\n{response.text}\n{'='*60}\n")
         result = json.loads(response.text)
         result["audio_url"] = f"/static/audio/{audio_filename}"
         return result
