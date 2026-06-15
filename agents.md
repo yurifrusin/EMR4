@@ -18,7 +18,7 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `316fd0c` — "Reflect finalised coding in taskpane; open dialog from click gesture" |
+| **Last pushed commit** | `03d5575` — "Protect Heading 1 section headers with locked content controls (v=23)" |
 
 ### Tag map (all tags pushed to remote)
 
@@ -32,7 +32,9 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 | Commit | Description |
 |---|---|
 | `b0c16d0` | Fix bcrypt auth (passlib removed, direct bcrypt calls) — clean Phase 1 baseline |
-| `6bf89dc` | Current HEAD — clean native taskpane + responsive wide layout |
+| `7d5546e` | Disable Finalise button while CC open; restore on CC close |
+| `87359cc` | `setTaskpaneLocked()` — disable ALL taskpane editing controls while CC open (v=22) |
+| `03d5575` | `repairDocumentStructure()` — Heading 1 section headers wrapped in locked content controls (v=23) |
 
 ---
 
@@ -74,9 +76,15 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 - **consult_finalized** message: Command Centre pushes its finalised coding back to the taskpane Consult tab (locked) + refreshes history/meds/sidebar.
 - Backend `analyze-consultation`/`scribe-consultation` wrapped in `asyncio.to_thread` (Vertex AI was blocking the event loop); MBS descriptions truncated to 200 chars in prompt context (item 23's full text listed every excluded item → huge/slow prompt); encounters saved with `status=Finalized`; `finalize` takes `patient_id`.
 
+### Phase 1.5 addendum (this session) ✅
+- **`setTaskpaneLocked(locked)`** — disables/restores all taskpane editing controls while Command Centre is open: `btn-command-center`, `btn-start-consult`, `btn-lock`, `btn-search-patient`, `btn-open-file`, `btn-add-mbs/snomed/rx`, `btn-finalize`, `consult-type` input, and dynamic coding row containers (`.cc-locked` CSS). Called on CC open/close. Finalize stays disabled if consult was already finalised inside CC.
+- **`repairDocumentStructure()`** — wraps each known Heading 1 section header in a hidden content control (`cannotDelete: true`, `cannotEdit: true`, `tag: "emr4-section-*"`). Called automatically on every patient load; no-op if already tagged. `insertConsultHeader()` now uses tag-based CN lookup (`emr4-section-cn`) as primary with text-search fallback. `create_patient_template.py` updated to Dr Shera section order.
+- **`CLAUDE.md`** added to repo root — codebase guidance for future Claude Code sessions.
+
 ### Not yet started
 - Phase 2 onwards (see `implementation_plan.md §12`)
-- **Phase 2 (planned) for anchoring**: content-control protect Heading 1 section headers (cannotDelete) + tag-based section location; global Ctrl+Shift+N while cursor is in the document body (needs verifying the shared-runtime shortcut fires there).
+- **Verify** global Ctrl+Shift+N fires while cursor is in the document body (shared-runtime shortcut)
+- **Tag `phase-1-stable`** once full Phase 1.5 testing is confirmed
 
 ---
 
@@ -194,8 +202,8 @@ Generates `EMR4 Patient File.dotx` in the project root.
 
 ## 8. What to Do Next
 
-1. **Finish testing Phase 1.5** — Start Consultation → type/record → review SOAP → finalise; confirm scoping, taskpane reflection of finalised coding, no phantom analysis on open.
-2. **Phase 2 of anchoring** — content-control protect Heading 1 headers (cannotDelete) + tag-based section location; verify global Ctrl+Shift+N fires while cursor is in the document body.
+1. **Finish testing Phase 1.5** — load Margaret Thompson → confirm "Document structure secured — N sections protected" status; Start Consultation → type/record → review SOAP → finalise; confirm no phantom analysis on open, CC lock/unlock works.
+2. **Verify Ctrl+Shift+N** fires while cursor is in the document body (not just taskpane focused).
 3. **Tag `phase-1-stable`** once the above is confirmed.
 4. **Start Phase 2** — Living Diary: SharePoint-hosted `.docx`, Parse & Lock, appointment CRUD, internal messaging, SMS reminders.
 
@@ -229,4 +237,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-15 — Phase 1.5: Command Centre & Scribe + Dr Shera document anchoring (scope AI to current consult). Word Online + two-surface architecture locked in. HEAD `316fd0c`.*
+*Last updated: 2026-06-15 — Phase 1.5 addendum: full taskpane CC lock (`setTaskpaneLocked`), Heading 1 content-control protection (`repairDocumentStructure`), CLAUDE.md added. HEAD `03d5575`.*
