@@ -821,7 +821,10 @@ async function approveAndFinalize() {
 
 const CC_URL = "https://yurifrusin.github.io/EMR4/command-centre/command-centre.html";
 
-async function openCommandCentre() {
+// NOTE: not async, and displayDialogAsync is called synchronously within the
+// click gesture (no await before it). Awaiting first breaks the user-gesture
+// chain, which makes Office on the web more likely to block/prompt the window.
+function openCommandCentre() {
   if (!currentPatient) {
     setStatus("Load a patient before opening Command Centre.");
     return;
@@ -832,18 +835,11 @@ async function openCommandCentre() {
   commandCentreOpen = true;
   setStatus("Command Centre open — taskpane analysis paused.");
 
-  // Plant the dated consultation header (unless one was already started this session)
-  if (!consultStarted) {
-    await insertConsultHeader(currentPatient);
-    consultStarted = true;
-  }
-
   // Pass patient ID via URL param — more reliable than localStorage cross-context
   const url = `${CC_URL}?pid=${currentPatient.id}`;
 
   // Must open as a separate window (not displayInIframe) — Office's iframe dialog
-  // does not grant microphone access, which the AI Scribe requires. The browser's
-  // popup prompt can be removed by allowing popups for the Word/OneDrive domain.
+  // does not grant microphone access, which the AI Scribe requires.
   Office.context.ui.displayDialogAsync(url, { height: 75, width: 55 }, result => {
     if (result.status === Office.AsyncResultStatus.Failed) {
       setStatus("Could not open Command Centre: " + result.error.message);
@@ -851,6 +847,12 @@ async function openCommandCentre() {
       return;
     }
     commandCentreDialog = result.value;
+
+    // Plant the dated consult header now (after the window opened), unless one
+    // was already started this session.
+    if (!consultStarted) {
+      insertConsultHeader(currentPatient).then(() => { consultStarted = true; });
+    }
 
     commandCentreDialog.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
       try {
@@ -862,6 +864,13 @@ async function openCommandCentre() {
           }
         } else if (msg.type === "insert_note" && msg.text) {
           insertNoteIntoWord(msg.text);
+        } else if (msg.type === "consult_finalized") {
+          // Reflect the Command Centre's finalised coding in the taskpane Consult
+          // tab and lock it so background sync won't overwrite it.
+          if (msg.data) { updateFormFields(msg.data); isLocked = true; updateLockUI(); }
+          consultStarted = false;                 // allow a new consult to be started
+          setStatus("✅ Consult finalised in Command Centre.");
+          if (currentPatient) loadPatient(currentPatient.id);  // refresh history/meds/sidebar
         } else if (msg.type === "reload_patient" && currentPatient) {
           loadPatient(currentPatient.id);
         }
@@ -941,6 +950,8 @@ window.startConsultation = async function () {
   if (consultStarted) { setStatus("A consultation is already in progress this session."); return; }
   await insertConsultHeader(currentPatient);
   consultStarted = true;
+  isLocked = false; updateLockUI();   // fresh consult — AI live again
+  updateFormFields({});               // clear any previously displayed coding
   setStatus("Consultation started — type your notes below the header.");
 };
 

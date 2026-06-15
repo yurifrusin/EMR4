@@ -442,8 +442,17 @@ window.approveAndFinalize = async function () {
           try { sendToTaskpane({ type: "insert_note", text: note }); }
           catch (_) {}
         }
-        // Tell taskpane to refresh patient data (encounters, meds) from the database
-        try { sendToTaskpane({ type: "reload_patient" }); }
+        // Push the finalised coding to the taskpane Consult tab and refresh its
+        // history/meds/sidebar (single message, shaped like an AI analysis result).
+        const aiShaped = {
+          encounter_metadata: {
+            consultation_type: consultType,
+            mbs_item_candidates: overrides.mbs_items.map(m => ({ item_number: m.item_number, description: m.description })),
+          },
+          clinical_diagnoses: overrides.diagnoses.map(d => ({ term: d.term, snomed_ct_au_code: d.snomed_ct_au_code })),
+          medications_and_prescriptions: overrides.medications.map(m => ({ drug_name: m.drug_name, dosage_text: m.dosage_text })),
+        };
+        try { sendToTaskpane({ type: "consult_finalized", data: aiShaped }); }
         catch (_) {}
       }
     } else {
