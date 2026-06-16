@@ -1,22 +1,52 @@
-Windows Terminal (Frontend):
+EMR4 Dev Stack — Startup
+========================
 
-cd /d "C:\users\yurifrusin\EMR4"
-npm start
+ONE COMMAND (recommended):
+    .\run_dev.ps1
 
-Ubuntu WSL Terminal (Backend & Infrastructure):
+This brings up all four services in separate windows with readiness checks:
+  1. Postgres   — Docker container gp-pms-postgres on port 5434
+  2. uvicorn    — FastAPI backend (app.main:app) on port 8001
+  3. ngrok      — reserved domain property-cinch-backfield.ngrok-free.dev → 8001
+  4. npm        — webpack dev-server on localhost:3000
 
-# Terminal 1: Spin up database
-cd /mnt/c/Users/YuriFrusin/Documents/EMR4
-sudo service docker start
-docker compose up -d
+Flags:
+  .\run_dev.ps1 -Down            Stop app processes (leaves Postgres running)
+  .\run_dev.ps1 -NoDevServer     Skip webpack dev-server
+  .\run_dev.ps1 -NoNgrok         Skip ngrok
+  .\run_dev.ps1 -NoDevServer -NoNgrok   Backend + Postgres only
 
-Powershell:
+Double-click alternative: start_emr.bat (routes to run_dev.ps1)
 
-# Terminal 2: Run application engine
-cd c:/users/yurifrusin/documents/emr4
-.\.venv\Scripts\Activate.ps1
-$env:GEMINI_API_KEY="AQ.Ab8RN6LQ35iRutlvGfCJS8coy4KzU6R8RbduwB07s1zhU_xNHQ"
-uvicorn main:app --reload --port 8001
 
-# Terminal 3: Open reverse proxy tunnel
-ngrok http 8001
+MANUAL STEPS (fallback / reference only)
+-----------------------------------------
+
+1. Postgres
+   docker start gp-pms-postgres
+   # or, first time: docker compose up -d
+
+2. FastAPI backend
+   .\.venv\Scripts\Activate.ps1
+   $env:GOOGLE_APPLICATION_CREDENTIALS = ".\gcp-key.json"
+   uvicorn app.main:app --reload --port 8001
+
+3. ngrok (MUST use the reserved domain — plain 'ngrok http 8001' gives a random URL
+   that won't match the taskpane's hardcoded NGROK_URL in sync_taskpane.py)
+   ngrok http --url=property-cinch-backfield.ngrok-free.dev 8001
+
+4. npm dev-server (optional — for local taskpane iteration via localhost:3000)
+   cd "EMR4 Sidebar"
+   npm run dev-server
+   # NOT npm start — that launches Word Desktop, not the web dev server
+
+
+NOTES
+-----
+- gcp-key.json must be present at the repo root for AI endpoints (scribe/analyse)
+  to work. It is not committed — contact the repo owner for the file.
+- The Word Online taskpane is served from GitHub Pages, not the local dev server.
+  The local dev-server (localhost:3000) is only used when developing the taskpane
+  against a local URL.
+- After any taskpane deploy (python sync_taskpane.py + push): close and reopen
+  the Word document to clear the shared-runtime JS cache.

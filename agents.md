@@ -244,12 +244,22 @@ clean child order; new injections should do the same.
    CRUD, internal messaging, SMS reminders. **First** resolve the New Patient file↔DB
    bridge below.
 
-### 🛠️ Known friction — the taskpane deploy loop
-Every taskpane change is: edit src → `python sync_taskpane.py` → bump `?v=N` in
-taskpane.html → commit `docs/` → push → **close & reopen the Word document**. This is the
-biggest drag on iteration speed. Candidate future improvement: a single script that does
-sync + version-bump + commit, and/or a smarter cache-bust. Not urgent, but worth it before
-Phase 2's heavier frontend work.
+### 🛠️ Dev stack startup — now one command
+`.\run_dev.ps1` brings up the full local stack (Postgres + uvicorn + ngrok on the
+reserved domain + npm dev-server) with pre-flight checks, readiness waits, and
+idempotent re-run. `start_emr.bat` is a double-click shim. Use `-Down` to stop.
+
+**⚠️ Cross-file invariant:** `$NgrokDomain` in `run_dev.ps1` must match `NGROK_URL`
+in `sync_taskpane.py`. The reserved domain is `property-cinch-backfield.ngrok-free.dev`;
+plain `ngrok http 8001` (the old `.bat` behaviour) hands out a random URL that the
+taskpane can't reach.
+
+### 🛠️ Remaining friction — the taskpane deploy loop
+Dev stack startup is solved. The remaining drag is the **taskpane change cycle**:
+edit src → `python sync_taskpane.py` → bump `?v=N` in taskpane.html → commit `docs/`
+→ push → **close & reopen the Word document**. Candidate future improvement: a
+`deploy_taskpane.ps1` that does sync + version-bump + commit in one command.
+Not urgent for Phase 2 but worth adding during heavier frontend work.
 
 ### ⚠️ Open architectural gap — New Patient protocol must bridge file + DB record
 

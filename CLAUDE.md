@@ -12,7 +12,20 @@ Prefer architectural guidance via opusplan combined with Sonnet execution
 
 ## Commands
 
-### Backend (FastAPI)
+### Start the full local stack (one command)
+```powershell
+.\run_dev.ps1                         # Postgres + uvicorn + ngrok + npm dev-server
+.\run_dev.ps1 -Down                   # Stop app processes (leaves Postgres running)
+.\run_dev.ps1 -NoDevServer            # Skip webpack dev-server
+.\run_dev.ps1 -NoNgrok                # Skip ngrok (e.g. it's already bound)
+```
+`run_dev.ps1` is idempotent — re-running skips already-running services.
+`start_emr.bat` is a double-click shim that calls it.
+
+> **ngrok domain is a cross-file invariant** — `$NgrokDomain` in `run_dev.ps1`
+> must match `NGROK_URL` in `sync_taskpane.py`. Change one → change the other.
+
+### Backend (FastAPI) — individual commands
 ```powershell
 # Activate venv (always required first)
 .venv\Scripts\activate
@@ -142,6 +155,7 @@ These pairs live in different files and MUST agree; a mismatch fails silently
 | Consult-header text format | `buildConsultHeader()` output | `CONSULT_HEADER_RE` (both taskpane.js) |
 | Cache-bust `?v=N` | `taskpane.html` (src) | bump on every deploy, then `sync_taskpane.py` → `docs/` |
 | ngrok URL patch target string | the `BACKEND_URL` block in `taskpane.js` source | the `.replace()` pattern in `sync_taskpane.py` (breaks silently if the source text drifts) |
+| ngrok reserved domain value | `$NgrokDomain` in `run_dev.ps1` | `NGROK_URL` constant in `sync_taskpane.py` |
 
 ---
 
