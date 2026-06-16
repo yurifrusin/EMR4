@@ -183,17 +183,21 @@ def _inject_custom_xml(docx_path: Path) -> None:
     """Injects emr4:document-type=patient Custom XML Part so the taskpane
     auto-detects this as a patient file and activates patient mode.
 
-    python-docx's blank Document ships with its own customXml/item1.xml
-    (a Bibliography Sources stub) — we unconditionally replace it with ours
-    so the document-type marker is always present and correct.
+    Strategy: python-docx's blank Document already ships with its own
+    customXml/item1.xml (a Bibliography Sources stub), itemProps1.xml,
+    and the matching [Content_Types].xml Overrides + document.xml.rels
+    relationship — the full OPC wiring is already in place.  All we need
+    to do is *overwrite the body* of customXml/item1.xml with our
+    <emr4:document-type> marker.  Touching anything else risks duplicating
+    existing Overrides/relationships, which produces an OPC-invalid archive
+    that Word reports as corrupt.
+
+    Defensive fallback: if a future python-docx build ships without the
+    customXml slot we do a full injection (write all three parts + add the
+    missing Overrides and relationship) — but this path is not exercised in
+    normal use.
     """
-    # Slots we own: skip them from the original zip, then write our versions.
-    OUR_SLOTS = {
-        "customXml/item1.xml",
-        "customXml/itemProps1.xml",
-        "customXml/_rels/item1.xml.rels",
-    }
-    _RELS_ENTRY = (
+    _ITEM_RELS = (
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rIdProps1" '
@@ -204,34 +208,41 @@ def _inject_custom_xml(docx_path: Path) -> None:
 
     tmp = docx_path.with_suffix(".tmp.docx")
     with zipfile.ZipFile(docx_path, "r") as zin:
-        rels_xml = zin.read("word/_rels/document.xml.rels").decode("utf-8")
-        if "rIdEMR4Custom" not in rels_xml:
-            rels_xml = rels_xml.replace(
-                "</Relationships>",
-                f"  {_CUSTOM_XML_RELS_ENTRY}\n</Relationships>",
-            )
+        names = set(zin.namelist())
+        has_slot = "customXml/item1.xml" in names  # True in all current python-docx builds
+
         with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
             for item in zin.infolist():
-                if item.filename in OUR_SLOTS:
-                    continue  # replaced below
-                data = (
-                    rels_xml.encode()
-                    if item.filename == "word/_rels/document.xml.rels"
-                    else zin.read(item.filename)
-                )
-                # Ensure [Content_Types].xml declares our customXml part.
-                if item.filename == "[Content_Types].xml":
-                    text = data.decode("utf-8")
+                if item.filename == "customXml/item1.xml":
+                    # Replace the Bibliography stub body with our marker —
+                    # all other packaging (itemProps, rels, content-types) unchanged.
+                    zout.writestr(item, _CUSTOM_XML_CONTENT)
+                elif not has_slot and item.filename == "[Content_Types].xml":
+                    # Fallback path only: add the two missing Overrides.
+                    text = zin.read(item.filename).decode("utf-8")
                     if "customXml/item1.xml" not in text:
                         entry = '<Override PartName="/customXml/item1.xml" ContentType="application/xml"/>'
                         props = '<Override PartName="/customXml/itemProps1.xml" ContentType="application/vnd.openxmlformats-officedocument.customXmlProperties+xml"/>'
                         text = text.replace("</Types>", entry + props + "</Types>")
-                    data = text.encode("utf-8")
-                zout.writestr(item, data)
-            # Write our Custom XML Part unconditionally.
-            zout.writestr("customXml/item1.xml", _CUSTOM_XML_CONTENT)
-            zout.writestr("customXml/itemProps1.xml", _CUSTOM_XML_PROPS)
-            zout.writestr("customXml/_rels/item1.xml.rels", _RELS_ENTRY)
+                    zout.writestr(item, text.encode("utf-8"))
+                elif not has_slot and item.filename == "word/_rels/document.xml.rels":
+                    # Fallback path only: add the missing relationship.
+                    rels = zin.read(item.filename).decode("utf-8")
+                    if "rIdEMR4Custom" not in rels:
+                        rels = rels.replace(
+                            "</Relationships>",
+                            f"  {_CUSTOM_XML_RELS_ENTRY}\n</Relationships>",
+                        )
+                    zout.writestr(item, rels.encode("utf-8"))
+                else:
+                    zout.writestr(item, zin.read(item.filename))
+
+            if not has_slot:
+                # Fallback path only: create all three slot files from scratch.
+                zout.writestr("customXml/item1.xml", _CUSTOM_XML_CONTENT)
+                zout.writestr("customXml/itemProps1.xml", _CUSTOM_XML_PROPS)
+                zout.writestr("customXml/_rels/item1.xml.rels", _ITEM_RELS)
+
     shutil.move(str(tmp), str(docx_path))
 
 
