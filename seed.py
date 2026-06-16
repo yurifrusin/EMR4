@@ -7,11 +7,15 @@ Usage:
 """
 import sys
 from app.database import SessionLocal
-from datetime import date
+from datetime import date, datetime, time, timedelta
 from app.models.tenancy import Practice, User, Practitioner, UserRole
 from app.models.patients import Patient
 from app.models.clinical import Allergy
 from app.models.billing import MbsDirectory, SnomedDirectory
+from app.models.appointments import (
+    Appointment, AppointmentType, AppointmentStatus,
+    BookingChannel, PractitionerSchedule,
+)
 from app.services.auth_service import hash_password
 
 
@@ -201,6 +205,79 @@ def seed():
         for concept_id, term in snomed_items:
             if not db.query(SnomedDirectory).filter_by(concept_id=concept_id).first():
                 db.add(SnomedDirectory(concept_id=concept_id, term=term))
+
+        # --- Appointment Types ---
+        appt_types = [
+            ("Standard Consult",    15, "3B82F6", True),
+            ("Long Consult",        30, "8B5CF6", True),
+            ("Procedure",           30, "EF4444", False),
+            ("Nurse Appointment",   15, "10B981", True),
+            ("Telehealth",          15, "F59E0B", True),
+        ]
+        for name, duration, color, online in appt_types:
+            if not db.query(AppointmentType).filter_by(
+                practice_id=practice.id, name=name
+            ).first():
+                db.add(AppointmentType(
+                    practice_id=practice.id,
+                    name=name,
+                    default_duration=duration,
+                    color_hex=f"#{color}",
+                    is_bookable_online=online,
+                ))
+        db.flush()
+        print("  Appointment types seeded")
+
+        std_type = db.query(AppointmentType).filter_by(
+            practice_id=practice.id, name="Standard Consult"
+        ).first()
+
+        # --- Practitioner Schedule (Mon-Fri 09:00-17:00, 15-min slots) ---
+        for day in range(5):   # 0=Mon .. 4=Fri
+            if not db.query(PractitionerSchedule).filter_by(
+                practitioner_id=gp.id, day_of_week=day
+            ).first():
+                db.add(PractitionerSchedule(
+                    practitioner_id=gp.id,
+                    day_of_week=day,
+                    start_time=time(9, 0),
+                    end_time=time(17, 0),
+                    slot_duration_minutes=15,
+                ))
+        db.flush()
+        print("  Practitioner schedule seeded (Mon-Fri 09:00-17:00)")
+
+        # --- Sample appointments for today (so the Schedule tab is non-empty) ---
+        today = date.today()
+        def _appt_dt(h: int, m: int) -> datetime:
+            return datetime.combine(today, time(h, m))
+
+        sample_appts = [
+            (patient, _appt_dt(9, 0),  "Hypertension review"),
+            (billy,   _appt_dt(9, 15), "Paediatric check-up"),
+            (patient, _appt_dt(10, 0), "Care plan review"),
+        ]
+        for pt, start, reason in sample_appts:
+            exists = db.query(Appointment).filter_by(
+                practice_id=practice.id,
+                patient_id=pt.id,
+                start_time=start,
+            ).first()
+            if not exists:
+                db.add(Appointment(
+                    practice_id=practice.id,
+                    patient_id=pt.id,
+                    practitioner_id=gp.id,
+                    appointment_type_id=std_type.id if std_type else None,
+                    booked_by=gp_user.id,
+                    start_time=start,
+                    duration_minutes=15,
+                    status=AppointmentStatus.Booked,
+                    reason=reason,
+                    booked_via=BookingChannel.Receptionist,
+                ))
+        db.flush()
+        print(f"  Sample appointments seeded for today ({today})")
 
         db.commit()
         print("\nSeed complete.")

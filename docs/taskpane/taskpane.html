@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR Centaur</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=26" />
-  <script src="taskpane.js?v=26" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=27" />
+  <script src="taskpane.js?v=27" defer></script>
 </head>
 <body>
 
@@ -42,6 +42,7 @@
     </div>
     <div id="banner-controls">
       <button id="btn-open-file" class="icon-btn hidden" title="Open patient file in Word Online">📄</button>
+      <button id="btn-new-patient" class="icon-btn" title="New patient">➕</button>
       <button id="btn-search-patient" class="icon-btn" title="Search patient">🔍</button>
       <div id="status-dot" class="status-dot connected" title="Connected"></div>
       <button id="btn-logout" class="icon-btn" title="Sign out">⏏</button>
@@ -53,6 +54,71 @@
     <button id="btn-command-center" class="btn btn-primary btn-full btn-sm" disabled title="Coming soon">
       🎤🖥️ Open Command Centre &amp; Scribe
     </button>
+  </div>
+
+  <!-- New Patient Overlay -->
+  <div id="new-patient-panel" class="new-patient-panel hidden">
+    <div class="new-patient-inner">
+      <div class="new-patient-header">
+        <span>New Patient</span>
+        <button class="icon-btn" onclick="closeNewPatientForm()" title="Close">✕</button>
+      </div>
+      <div id="new-patient-result"></div>
+      <div class="field-row">
+        <div class="field-group" style="flex:1">
+          <label class="field-label">First name *</label>
+          <input id="np-first-name" type="text" class="input" placeholder="Given name" autocomplete="given-name" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Last name *</label>
+          <input id="np-last-name" type="text" class="input" placeholder="Surname" autocomplete="family-name" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Date of birth *</label>
+          <input id="np-dob" type="date" class="input" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Sex</label>
+          <select id="np-sex" class="input">
+            <option value="">— select —</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Medicare number</label>
+        <input id="np-medicare" type="text" class="input" placeholder="1234 56789 0" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Mobile phone</label>
+        <input id="np-phone" type="tel" class="input" placeholder="0412 345 678" autocomplete="tel" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Address</label>
+        <input id="np-address" type="text" class="input" placeholder="Street address" autocomplete="street-address" />
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="flex:2">
+          <label class="field-label">Suburb</label>
+          <input id="np-suburb" type="text" class="input" placeholder="Suburb" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">State</label>
+          <input id="np-state" type="text" class="input" placeholder="NSW" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Postcode</label>
+          <input id="np-postcode" type="text" class="input" placeholder="2000" />
+        </div>
+      </div>
+      <button id="btn-np-create" class="btn btn-primary btn-full" onclick="createNewPatient()">
+        Create Patient File
+      </button>
+    </div>
   </div>
 
   <!-- Patient Search Overlay -->
@@ -79,16 +145,20 @@
     </div>
   </div>
 
-  <!-- Tab Navigation -->
+  <!-- Tab Navigation — patient tabs shown by default; diary tabs start hidden -->
   <nav id="tab-nav">
-    <button class="tab-btn active" data-tab="consult">Consult</button>
-    <button class="tab-btn" data-tab="history">History</button>
-    <button class="tab-btn" data-tab="results">Results</button>
-    <button class="tab-btn" data-tab="meds">Meds</button>
-    <button class="tab-btn" data-tab="allergies">Allergies</button>
-    <button class="tab-btn" data-tab="ddx">DDx</button>
-    <button class="tab-btn" data-tab="rx">Rx</button>
-    <button class="tab-btn" data-tab="letters">Letters</button>
+    <button class="tab-btn active" data-tab="consult" data-mode="patient">Consult</button>
+    <button class="tab-btn" data-tab="history"   data-mode="patient">History</button>
+    <button class="tab-btn" data-tab="results"   data-mode="patient">Results</button>
+    <button class="tab-btn" data-tab="meds"      data-mode="patient">Meds</button>
+    <button class="tab-btn" data-tab="allergies" data-mode="patient">Allergies</button>
+    <button class="tab-btn" data-tab="ddx"       data-mode="patient">DDx</button>
+    <button class="tab-btn" data-tab="rx"        data-mode="patient">Rx</button>
+    <button class="tab-btn" data-tab="letters"   data-mode="patient">Letters</button>
+    <!-- Diary-mode tabs — shown only when document-type = diary -->
+    <button class="tab-btn hidden" data-tab="diary-schedule" data-mode="diary">Schedule</button>
+    <button class="tab-btn hidden" data-tab="diary-waiting"  data-mode="diary">Waiting Room</button>
+    <button class="tab-btn hidden" data-tab="diary-messages" data-mode="diary">Messages</button>
   </nav>
 
   <!-- ── PANELS ─────────────────────────────────── -->
@@ -275,6 +345,41 @@
             <button class="btn btn-primary" onclick="insertLetterIntoWord()">Insert into Word</button>
             <button class="btn btn-ghost btn-sm" onclick="copyLetter()">📋 Copy</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIARY SCHEDULE -->
+    <div class="panel hidden" id="panel-diary-schedule">
+      <div class="panel-scroll">
+        <div class="panel-toolbar">
+          <span class="panel-title">Today's Schedule</span>
+          <button class="btn btn-ghost btn-sm" onclick="loadTodaysSchedule()">&#x21BB; Refresh</button>
+        </div>
+        <div id="diary-schedule-list" class="card-list">
+          <div class="placeholder">Loading appointments&hellip;</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIARY WAITING ROOM -->
+    <div class="panel hidden" id="panel-diary-waiting">
+      <div class="panel-scroll">
+        <div class="placeholder-phase">
+          <div class="placeholder-icon">&#x1FA91;</div>
+          <div class="placeholder-title">Waiting Room</div>
+          <div class="placeholder-body">Live arrival notifications and patient status cards coming in Phase 2 Increment 2.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIARY MESSAGES -->
+    <div class="panel hidden" id="panel-diary-messages">
+      <div class="panel-scroll">
+        <div class="placeholder-phase">
+          <div class="placeholder-icon">&#x1F4AC;</div>
+          <div class="placeholder-title">Internal Messages</div>
+          <div class="placeholder-body">Inbox, compose, and urgent toasts coming in Phase 2 Increment 2.</div>
         </div>
       </div>
     </div>

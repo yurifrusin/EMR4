@@ -33,6 +33,12 @@ class Settings(BaseSettings):
     clicksend_username: Optional[str] = None
     clicksend_api_key: Optional[str] = None
 
+    # Patient file storage. Point this at a OneDrive-synced folder so generated
+    # .docx files are immediately accessible via Word Online. The backend creates
+    # the directory if it doesn't exist. Production: a SharePoint/Graph path or
+    # a cloud-storage mount. Dev: a local path the OneDrive client syncs.
+    patient_files_dir: str = "./patient_files"
+
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "case_sensitive": False}
 
     @model_validator(mode="after")

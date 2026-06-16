@@ -181,10 +181,29 @@ def _wrap_heading_in_locked_cc(paragraph, tag: str, alias: str, cc_id: int) -> N
 
 def _inject_custom_xml(docx_path: Path) -> None:
     """Injects emr4:document-type=patient Custom XML Part so the taskpane
-    auto-detects this as a patient file and activates patient mode."""
+    auto-detects this as a patient file and activates patient mode.
+
+    python-docx's blank Document ships with its own customXml/item1.xml
+    (a Bibliography Sources stub) — we unconditionally replace it with ours
+    so the document-type marker is always present and correct.
+    """
+    # Slots we own: skip them from the original zip, then write our versions.
+    OUR_SLOTS = {
+        "customXml/item1.xml",
+        "customXml/itemProps1.xml",
+        "customXml/_rels/item1.xml.rels",
+    }
+    _RELS_ENTRY = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        '<Relationship Id="rIdProps1" '
+        'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXmlProps" '
+        'Target="itemProps1.xml"/>'
+        '</Relationships>'
+    )
+
     tmp = docx_path.with_suffix(".tmp.docx")
     with zipfile.ZipFile(docx_path, "r") as zin:
-        existing = set(zin.namelist())
         rels_xml = zin.read("word/_rels/document.xml.rels").decode("utf-8")
         if "rIdEMR4Custom" not in rels_xml:
             rels_xml = rels_xml.replace(
@@ -193,16 +212,26 @@ def _inject_custom_xml(docx_path: Path) -> None:
             )
         with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
             for item in zin.infolist():
+                if item.filename in OUR_SLOTS:
+                    continue  # replaced below
                 data = (
                     rels_xml.encode()
                     if item.filename == "word/_rels/document.xml.rels"
                     else zin.read(item.filename)
                 )
+                # Ensure [Content_Types].xml declares our customXml part.
+                if item.filename == "[Content_Types].xml":
+                    text = data.decode("utf-8")
+                    if "customXml/item1.xml" not in text:
+                        entry = '<Override PartName="/customXml/item1.xml" ContentType="application/xml"/>'
+                        props = '<Override PartName="/customXml/itemProps1.xml" ContentType="application/vnd.openxmlformats-officedocument.customXmlProperties+xml"/>'
+                        text = text.replace("</Types>", entry + props + "</Types>")
+                    data = text.encode("utf-8")
                 zout.writestr(item, data)
-            if "customXml/item1.xml" not in existing:
-                zout.writestr("customXml/item1.xml", _CUSTOM_XML_CONTENT)
-            if "customXml/itemProps1.xml" not in existing:
-                zout.writestr("customXml/itemProps1.xml", _CUSTOM_XML_PROPS)
+            # Write our Custom XML Part unconditionally.
+            zout.writestr("customXml/item1.xml", _CUSTOM_XML_CONTENT)
+            zout.writestr("customXml/itemProps1.xml", _CUSTOM_XML_PROPS)
+            zout.writestr("customXml/_rels/item1.xml.rels", _RELS_ENTRY)
     shutil.move(str(tmp), str(docx_path))
 
 

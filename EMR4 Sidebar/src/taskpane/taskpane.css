@@ -575,3 +575,44 @@ select.input { cursor: pointer; }
   .textarea-md { min-height: 120px; }
   .textarea-lg { min-height: 420px; }
 }
+
+/* ── NEW PATIENT PANEL ──────────────────────────────────── */
+
+.new-patient-panel {
+  position: absolute;
+  top: 52px;           /* below the patient banner */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--grey-1);
+  z-index: 150;
+  overflow-y: auto;
+}
+
+.new-patient-inner {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+}
+
+.new-patient-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+
+/* ── DIARY MODE ─────────────────────────────────────────── */
+
+/* Appointment status badges (extend .card-badge) */
+.card-badge.arrived   { background: #fef3c7; color: #92400e; border: 1px solid #fbbf24; }
+.card-badge.completed { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.card-badge.cancelled { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+.schedule-card { cursor: default; }
+.schedule-card .card-meta { font-size: 11px; color: var(--grey-3); margin-top: 2px; }

@@ -1,13 +1,16 @@
+import sys
 import uuid
+from pathlib import Path
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import Session
+from app.config import settings
 from app.dependencies import get_db, get_current_user
 from app.models.tenancy import User
 from app.models.patients import Patient
 from app.models.clinical import ClinicalDiagnosis, Prescription, Encounter, Allergy
 from app.schemas.patients import (
-    PatientCreate, PatientUpdate, PatientOut,
+    PatientCreate, PatientUpdate, PatientOut, PatientWithFileOut,
     PatientSummary, AllergyOut, EncounterSummary, MedicationSummary, DiagnosisSummary,
 )
 
@@ -25,6 +28,61 @@ def create_patient(
     db.commit()
     db.refresh(patient)
     return patient
+
+
+@router.post("/with-file", response_model=PatientWithFileOut, status_code=status.HTTP_201_CREATED)
+def create_patient_with_file(
+    body: PatientCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Create a patient DB record AND generate their .docx file atomically.
+    The file is written to settings.patient_files_dir (configured via PATIENT_FILES_DIR
+    in .env; point it at a OneDrive-synced folder for Word Online access).
+    document_url is left null here and backfilled by the taskpane autoDetectPatient()
+    the first time the file is opened in Word Online.
+    """
+    # Lazy-import to avoid adding the repo root to the module search path globally;
+    # uvicorn is launched from the repo root so the import resolves correctly.
+    if "" not in sys.path:
+        sys.path.insert(0, "")
+    from create_patient_file import create_patient_docx, PatientData  # noqa: E402
+
+    # 1. Create the DB row.
+    patient = Patient(practice_id=current_user.practice_id, **body.model_dump())
+    db.add(patient)
+    db.commit()
+    db.refresh(patient)
+
+    # 2. Build the PatientData — map the richer PatientCreate fields to the
+    #    simpler PatientData dataclass that the generator expects.
+    address_parts = filter(None, [
+        patient.address_line1,
+        patient.address_suburb,
+        patient.address_state,
+        patient.address_postcode,
+    ])
+    address_str = " ".join(address_parts)
+    phone_str = patient.phone_mobile or patient.phone_home or ""
+
+    pd = PatientData(
+        first_name=patient.first_name,
+        last_name=patient.last_name,
+        date_of_birth=patient.date_of_birth,
+        sex=patient.sex or "Other",
+        address=address_str,
+        phone=phone_str,
+        medicare_number=patient.medicare_number or "",
+    )
+
+    # 3. Generate the .docx, creating the output directory if needed.
+    output_dir = Path(settings.patient_files_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    doc_path = create_patient_docx(pd, output_dir=output_dir)
+
+    out = PatientWithFileOut.model_validate(patient)
+    out.generated_filename = doc_path.name
+    return out
 
 
 @router.get("/search", response_model=list[PatientOut])

@@ -45,6 +45,9 @@ const PROTECTED_SECTIONS = [
   { text: "Management Articles",                     tag: "emr4-section-management-articles" },
 ];
 
+// Document mode — "patient" (default) or "diary"
+let docMode = "patient";
+
 // Consult tab state
 let isLocked       = false;
 let lastAiResponse = null;
@@ -1140,19 +1143,239 @@ async function insertNoteIntoWord(text) {
 }
 
 // ═══════════════════════════════════════════════════════════
+// DOCUMENT-TYPE DETECTION
+// ═══════════════════════════════════════════════════════════
+
+// Read the <emr4:document-type> Custom XML Part.
+// Falls back to filename heuristic if the XML read fails (Word Online risk).
+async function detectDocumentType() {
+  // Primary: Custom XML Part (injected by create_patient_file.py / create_diary_file.py).
+  // agents.md flags this as ⚠️ Medium risk in Word Online — wrap defensively.
+  try {
+    const parts = await new Promise((resolve, reject) => {
+      Office.context.document.customXmlParts.getByNamespaceAsync(
+        "http://emr4.com/ns/document",
+        r => r.status === Office.AsyncResultStatus.Succeeded
+          ? resolve(r.value) : reject(new Error(r.error))
+      );
+    });
+    if (parts && parts.length > 0) {
+      const xml = await new Promise((resolve, reject) => {
+        parts[0].getXmlAsync(
+          r => r.status === Office.AsyncResultStatus.Succeeded
+            ? resolve(r.value) : reject(new Error(r.error))
+        );
+      });
+      const m = xml.match(/<emr4:document-type>([\w]+)<\/emr4:document-type>/);
+      if (m) {
+        console.log("[EMR4] Custom XML document-type:", m[1]);
+        return m[1].toLowerCase();   // "patient" or "diary"
+      }
+    }
+  } catch (e) {
+    console.warn("[EMR4] Custom XML read failed — using filename fallback:", e.message || e);
+  }
+
+  // Fallback: parse the filename.
+  const docUrl = Office.context.document.url || "";
+  let title = "";
+  try {
+    await Word.run(async ctx => {
+      const props = ctx.document.properties;
+      props.load("title");
+      await ctx.sync();
+      title = (props.title || "").trim();
+    });
+  } catch (_) { /* ignore */ }
+  if (!title && docUrl) {
+    const raw = docUrl.split("?")[0].split("/").pop();
+    if (raw && /\.docx$/i.test(raw)) title = decodeURIComponent(raw).replace(/\.docx$/i, "").trim();
+  }
+
+  const type = /^Diary[_\s]/i.test(title) ? "diary" : "patient";
+  console.log("[EMR4] Filename fallback document-type:", type, "(title:", title, ")");
+  return type;
+}
+
+// ═══════════════════════════════════════════════════════════
+// NEW PATIENT FORM
+// ═══════════════════════════════════════════════════════════
+
+window.showNewPatientForm = function showNewPatientForm() {
+  document.getElementById("new-patient-panel").classList.remove("hidden");
+  document.getElementById("np-first-name").focus();
+}
+
+window.closeNewPatientForm = function closeNewPatientForm() {
+  document.getElementById("new-patient-panel").classList.add("hidden");
+  ["np-first-name","np-last-name","np-dob","np-sex","np-medicare",
+   "np-phone","np-address","np-suburb","np-state","np-postcode"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+  document.getElementById("new-patient-result").innerHTML = "";
+}
+
+window.createNewPatient = async function () {
+  const fn  = document.getElementById("np-first-name").value.trim();
+  const ln  = document.getElementById("np-last-name").value.trim();
+  const dob = document.getElementById("np-dob").value;
+  if (!fn || !ln || !dob) { alert("First name, last name, and date of birth are required."); return; }
+
+  const btn = document.getElementById("btn-np-create");
+  btn.disabled = true;
+  btn.textContent = "Creating…";
+  try {
+    const body = {
+      first_name:      fn,
+      last_name:       ln,
+      date_of_birth:   dob,
+      sex:             document.getElementById("np-sex").value || null,
+      medicare_number: document.getElementById("np-medicare").value.trim() || null,
+      phone_mobile:    document.getElementById("np-phone").value.trim() || null,
+      address_line1:   document.getElementById("np-address").value.trim() || null,
+      address_suburb:  document.getElementById("np-suburb").value.trim() || null,
+      address_state:   document.getElementById("np-state").value.trim() || null,
+      address_postcode:document.getElementById("np-postcode").value.trim() || null,
+    };
+    const res = await apiFetch("/patients/with-file", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+    if (!res || !res.ok) {
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.detail || `Server error ${res.status}`);
+    }
+    const data = await res.json();
+    document.getElementById("new-patient-result").innerHTML = `
+      <div class="alert alert-success">
+        <strong>&#x2713; Patient created!</strong><br>
+        File: <code>${escHtml(data.generated_filename)}</code><br>
+        Open it from your OneDrive folder — the taskpane will auto-load the record.
+      </div>`;
+  } catch (e) {
+    document.getElementById("new-patient-result").innerHTML =
+      `<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Create Patient File";
+  }
+};
+
+// ═══════════════════════════════════════════════════════════
+// DIARY MODE
+// ═══════════════════════════════════════════════════════════
+
+function _enterDiaryMode() {
+  // Swap tab nav: hide patient tabs, show diary tabs.
+  document.querySelectorAll('[data-mode="patient"]').forEach(b => b.classList.add("hidden"));
+  document.querySelectorAll('[data-mode="diary"]').forEach(b => b.classList.remove("hidden"));
+
+  // Update banner to show diary context.
+  const today = new Date();
+  document.getElementById("patient-name").textContent = "Diary Mode";
+  document.getElementById("patient-meta").textContent =
+    today.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+
+  // Hide patient-only elements.
+  const ccBar = document.getElementById("command-center-bar");
+  if (ccBar) ccBar.classList.add("hidden");
+  const sidebar = document.getElementById("patient-sidebar");
+  if (sidebar) sidebar.classList.add("hidden");
+
+  showTab("diary-schedule");
+  setStatus("Diary Mode — loading schedule…");
+}
+
+window.loadTodaysSchedule = async function () {
+  const list = document.getElementById("diary-schedule-list");
+  if (!list) return;
+  list.innerHTML = '<div class="placeholder">Loading…</div>';
+
+  const dayStart = new Date(); dayStart.setHours(0, 0, 0, 0);
+  const dayEnd   = new Date(); dayEnd.setHours(23, 59, 59, 999);
+  const params = `date_from=${dayStart.toISOString()}&date_to=${dayEnd.toISOString()}`;
+
+  try {
+    const res = await apiFetch(`/appointments?${params}`);
+    if (!res || !res.ok) {
+      list.innerHTML = '<div class="placeholder">Could not load schedule.</div>';
+      setStatus("Schedule load failed — check the API server.");
+      return;
+    }
+    const appts = await res.json();
+    if (!appts.length) {
+      list.innerHTML = '<div class="placeholder">No appointments today.</div>';
+      setStatus("Diary — no appointments today.");
+      return;
+    }
+    list.innerHTML = "";
+    appts.forEach(a => {
+      const start = new Date(a.start_time);
+      const end   = new Date(start.getTime() + (a.duration_minutes || 15) * 60000);
+      const fmt   = t => t.toLocaleTimeString("en-AU", { hour: "2-digit", minute: "2-digit", hour12: true });
+      const name  = a.patient
+        ? `${escHtml(a.patient.last_name)}, ${escHtml(a.patient.first_name)}`
+        : "Unknown";
+      const sc = _apptStatusClass(a.status);
+      const card = document.createElement("div");
+      card.className = "card schedule-card";
+      card.innerHTML = `
+        <div class="card-header">
+          <div>
+            <div class="card-title">${name}</div>
+            <div class="card-meta">${fmt(start)}&ndash;${fmt(end)}${a.reason ? " &middot; " + escHtml(a.reason) : ""}</div>
+          </div>
+          <span class="card-badge ${sc}">${escHtml(a.status || "")}</span>
+        </div>`;
+      list.appendChild(card);
+    });
+    setStatus(`Schedule: ${appts.length} appointment${appts.length !== 1 ? "s" : ""} today.`);
+  } catch (e) {
+    list.innerHTML = `<div class="placeholder">Error: ${escHtml(String(e.message || e))}</div>`;
+    setStatus("Schedule load error.");
+  }
+};
+
+function _apptStatusClass(status) {
+  const s = (status || "").toLowerCase();
+  if (s === "arrived" || s === "inconsult") return "arrived";
+  if (s === "completed")                    return "completed";
+  if (s === "cancelled" || s === "noshow" || s === "dna") return "cancelled";
+  return "";
+}
+
+// ═══════════════════════════════════════════════════════════
 // INIT APP (called after successful login or token resume)
 // ═══════════════════════════════════════════════════════════
 
 function initApp() {
-  showTab("consult");
   setBanner(null);
-  setStatus("Ready.");
+  setStatus("Detecting document…");
 
+  // Detect patient vs diary, then branch into the appropriate mode.
+  detectDocumentType().then(type => {
+    docMode = type;
+    if (type === "diary") {
+      _enterDiaryMode();
+      loadTodaysSchedule();
+    } else {
+      _initPatientMode();
+    }
+  }).catch(e => {
+    console.warn("[EMR4] detectDocumentType error, defaulting to patient mode:", e);
+    docMode = "patient";
+    _initPatientMode();
+  });
+}
+
+function _initPatientMode() {
+  showTab("consult");
+  setStatus("Ready.");
   updateFormFields({});
-  repairDocumentStructure();   // protect section headers as soon as we have a document context
+  repairDocumentStructure();
   runBackgroundSync();
   autoDetectPatient();
-
   Office.context.document.addHandlerAsync(
     Office.EventType.DocumentSelectionChanged,
     () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
@@ -1253,9 +1476,10 @@ Office.onReady(info => {
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.onclick = () => {
       showTab(btn.dataset.tab);
-      if (btn.dataset.tab === "history")  loadHistory();
-      if (btn.dataset.tab === "meds")     loadMeds();
-      if (btn.dataset.tab === "allergies") loadAllergies();
+      if (btn.dataset.tab === "history")        loadHistory();
+      if (btn.dataset.tab === "meds")           loadMeds();
+      if (btn.dataset.tab === "allergies")      loadAllergies();
+      if (btn.dataset.tab === "diary-schedule") loadTodaysSchedule();
     };
   });
 
@@ -1275,6 +1499,8 @@ Office.onReady(info => {
     searchInput.value = "";
     document.getElementById("patient-search-results").innerHTML = "";
   }
+
+  document.getElementById("btn-new-patient").onclick = showNewPatientForm;
 
   document.getElementById("btn-search-patient").onclick = () => {
     searchPanel.classList.toggle("hidden");

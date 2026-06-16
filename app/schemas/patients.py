@@ -107,6 +107,12 @@ class DiagnosisSummary(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class PatientWithFileOut(PatientOut):
+    """Returned by POST /patients/with-file — extends PatientOut with the
+    generated .docx filename so the caller can display it / copy it to OneDrive."""
+    generated_filename: str
+
+
 class PatientSummary(BaseModel):
     patient: PatientOut
     active_diagnoses: list[DiagnosisSummary] = []
