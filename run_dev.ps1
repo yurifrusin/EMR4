@@ -4,7 +4,7 @@
 
 .DESCRIPTION
     Brings up: Postgres (Docker), FastAPI/uvicorn, ngrok tunnel (reserved domain),
-    and the webpack dev-server. Idempotent — re-running skips already-running services.
+    and the webpack dev-server. Idempotent -- re-running skips already-running services.
 
     CROSS-FILE INVARIANT: $NgrokDomain must match NGROK_URL in sync_taskpane.py.
 
@@ -32,14 +32,14 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Continue"   # native-exe exit codes don't throw; we check manually
 
-# ── Configuration ─────────────────────────────────────────────────────────────
+# -- Configuration -------------------------------------------------------------
 # CROSS-FILE INVARIANT: $NgrokDomain must match NGROK_URL in sync_taskpane.py
 $BackendPort   = 8001
 $DbPort        = 5434
 $DevServerPort = 3000
 $NgrokApiPort  = 4040   # ngrok's local API / web UI
 
-# ⚠ INVARIANT: keep in sync with the NGROK_URL line in sync_taskpane.py
+# INVARIANT: keep in sync with the NGROK_URL line in sync_taskpane.py
 $NgrokDomain   = "property-cinch-backfield.ngrok-free.dev"
 
 $DbContainer   = "gp-pms-postgres"
@@ -48,7 +48,7 @@ $Gcp           = Join-Path $Root "gcp-key.json"
 $Venv          = Join-Path $Root ".venv\Scripts\Activate.ps1"
 $SidebarPath   = Join-Path $Root "EMR4 Sidebar"
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# -- Helpers -------------------------------------------------------------------
 
 function Write-Step([string]$msg) {
     Write-Host ""
@@ -96,22 +96,22 @@ function Show-StatusRow([string]$Name, [bool]$Up, [string]$Detail) {
     Write-Host ("  {0} {1,-24} {2}" -f $icon, $Name, $Detail) -ForegroundColor $color
 }
 
-# ══════════════════════════════════════════════════════════════════════════════
+# ==============================================================================
 # TEARDOWN (-Down)
-# ══════════════════════════════════════════════════════════════════════════════
+# ==============================================================================
 
 if ($Down) {
     Write-Host ""
-    Write-Host "  EMR4 — Stopping dev services" -ForegroundColor DarkCyan
-    Write-Host "  ─────────────────────────────" -ForegroundColor DarkCyan
+    Write-Host "  EMR4 -- Stopping dev services" -ForegroundColor DarkCyan
+    Write-Host "  --------------------------------" -ForegroundColor DarkCyan
 
     # uvicorn on port 8001
     $pid8001 = Get-PidOnPort $BackendPort
     if ($pid8001) {
         try { Stop-Process -Id $pid8001 -Force -ErrorAction Stop; Write-Ok "uvicorn (PID $pid8001) stopped" }
-        catch { Write-Warn "Could not stop PID $pid8001 on :$BackendPort — $($_.Exception.Message)" }
+        catch { Write-Warn "Could not stop PID $pid8001 on :$BackendPort -- $($_.Exception.Message)" }
     } else {
-        Write-Ok "uvicorn — not running"
+        Write-Ok "uvicorn -- not running"
     }
 
     # ngrok (all processes)
@@ -120,16 +120,16 @@ if ($Down) {
         $ng | Stop-Process -Force -ErrorAction SilentlyContinue
         Write-Ok "ngrok stopped ($($ng.Count) process(es))"
     } else {
-        Write-Ok "ngrok — not running"
+        Write-Ok "ngrok -- not running"
     }
 
     # dev-server on port 3000
     $pid3000 = Get-PidOnPort $DevServerPort
     if ($pid3000) {
         try { Stop-Process -Id $pid3000 -Force -ErrorAction Stop; Write-Ok "dev-server (PID $pid3000) stopped" }
-        catch { Write-Warn "Could not stop PID $pid3000 on :$DevServerPort — $($_.Exception.Message)" }
+        catch { Write-Warn "Could not stop PID $pid3000 on :$DevServerPort -- $($_.Exception.Message)" }
     } else {
-        Write-Ok "dev-server — not running"
+        Write-Ok "dev-server -- not running"
     }
 
     Write-Host ""
@@ -139,18 +139,18 @@ if ($Down) {
     exit 0
 }
 
-# ══════════════════════════════════════════════════════════════════════════════
+# ==============================================================================
 # STARTUP
-# ══════════════════════════════════════════════════════════════════════════════
+# ==============================================================================
 
 Write-Host ""
-Write-Host "  ═══════════════════════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "    EMR4 Centaur — Dev Stack Launcher" -ForegroundColor Cyan
-Write-Host "  ═══════════════════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "  =======================================================" -ForegroundColor Cyan
+Write-Host "    EMR4 Centaur -- Dev Stack Launcher" -ForegroundColor Cyan
+Write-Host "  =======================================================" -ForegroundColor Cyan
 
-# ── 1. Pre-flight ──────────────────────────────────────────────────────────
+# -- 1. Pre-flight -------------------------------------------------------------
 
-Write-Step "1/5  Pre-flight checks…"
+Write-Step "1/5  Pre-flight checks..."
 
 # venv
 if (-not (Test-Path $Venv)) {
@@ -163,7 +163,7 @@ Write-Ok "Python venv present"
 # Docker
 docker ps | Out-Null
 if ($LASTEXITCODE -ne 0) {
-    Write-Err "Docker is not responding — start Docker Desktop first"
+    Write-Err "Docker is not responding -- start Docker Desktop first"
     exit 1
 }
 Write-Ok "Docker running"
@@ -171,7 +171,7 @@ Write-Ok "Docker running"
 # ngrok on PATH (unless skipped)
 if (-not $NoNgrok) {
     if (-not (Get-Command ngrok -ErrorAction SilentlyContinue)) {
-        Write-Err "ngrok not found on PATH — install from https://ngrok.com/download"
+        Write-Err "ngrok not found on PATH -- install from https://ngrok.com/download"
         exit 1
     }
     Write-Ok "ngrok on PATH"
@@ -179,14 +179,14 @@ if (-not $NoNgrok) {
 
 # .env (dev defaults exist in config.py, so a warning is enough)
 if (-not (Test-Path (Join-Path $Root ".env"))) {
-    Write-Warn ".env absent — uvicorn uses config.py defaults (insecure JWT in dev)"
+    Write-Warn ".env absent -- uvicorn uses config.py defaults (insecure JWT in dev)"
 } else {
     Write-Ok ".env present"
 }
 
 # gcp-key.json (AI endpoints fail without it)
 if (-not (Test-Path $Gcp)) {
-    Write-Warn "gcp-key.json absent — AI endpoints (scribe, analyse) will return 500"
+    Write-Warn "gcp-key.json absent -- AI endpoints (scribe, analyse) will return 500"
 } else {
     Write-Ok "gcp-key.json present"
 }
@@ -194,25 +194,25 @@ if (-not (Test-Path $Gcp)) {
 # npm (only if dev-server requested)
 if (-not $NoDevServer) {
     if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
-        Write-Warn "npm not found — skipping dev-server (use -NoDevServer to suppress this)"
+        Write-Warn "npm not found -- skipping dev-server (use -NoDevServer to suppress this)"
         $NoDevServer = $true
     } else {
         Write-Ok "npm present"
     }
 }
 
-# ── 2. Postgres ────────────────────────────────────────────────────────────
+# -- 2. Postgres ---------------------------------------------------------------
 
-Write-Step "2/5  Postgres ($DbContainer — port $DbPort)…"
+Write-Step "2/5  Postgres ($DbContainer on port $DbPort)..."
 
 $running = docker ps --filter "name=$DbContainer" --filter "status=running" --format "{{.Names}}"
 if ($running -match $DbContainer) {
     Write-Ok "Already running"
 } else {
-    Write-Host "  Starting container '$DbContainer'…" -ForegroundColor Gray
+    Write-Host "  Starting container '$DbContainer'..." -ForegroundColor Gray
     docker start $DbContainer | Out-Null
     if ($LASTEXITCODE -ne 0) {
-        Write-Warn "docker start failed — falling back to docker compose up -d"
+        Write-Warn "docker start failed -- falling back to docker compose up -d"
         docker compose up -d | Out-Null
     }
     if (Wait-ForPort $DbPort 25) {
@@ -223,37 +223,37 @@ if ($running -match $DbContainer) {
     }
 }
 
-# ── 3. uvicorn ────────────────────────────────────────────────────────────
+# -- 3. uvicorn ----------------------------------------------------------------
 
-Write-Step "3/5  FastAPI / uvicorn (port $BackendPort)…"
+Write-Step "3/5  FastAPI / uvicorn (port $BackendPort)..."
 
 if (Test-PortListening $BackendPort) {
-    Write-Warn "Port $BackendPort already in use — skipping (uvicorn may already be running)"
+    Write-Warn "Port $BackendPort already in use -- skipping (uvicorn may already be running)"
 } else {
-    # Build the command to run in the new window. Single-quote path literals so
-    # spaces in $Root are handled correctly once the string is evaluated in the new session.
+    # Build the command string. Single-quote path literals so spaces in $Root
+    # are handled correctly when the string is evaluated in the new window.
     $uvCmd = "Set-Location '$Root'; . '$Venv'; `$env:GOOGLE_APPLICATION_CREDENTIALS = '$Gcp'; uvicorn app.main:app --reload --port $BackendPort"
     Start-Process powershell -ArgumentList "-NoProfile", "-NoExit", "-Command", $uvCmd `
         -WindowStyle Normal
 
-    Write-Host "  Waiting for /docs to respond…" -ForegroundColor Gray
+    Write-Host "  Waiting for /docs to respond..." -ForegroundColor Gray
     if (Wait-ForHttp "http://127.0.0.1:$BackendPort/docs" 35) {
         Write-Ok "uvicorn ready at http://127.0.0.1:$BackendPort"
     } else {
-        Write-Warn "uvicorn window opened but /docs did not respond in 35 s — check its window"
+        Write-Warn "uvicorn window opened but /docs did not respond in 35 s -- check its window"
     }
 }
 
-# ── 4. ngrok ──────────────────────────────────────────────────────────────
+# -- 4. ngrok ------------------------------------------------------------------
 
 if (-not $NoNgrok) {
-    Write-Step "4/5  ngrok → https://$NgrokDomain…"
+    Write-Step "4/5  ngrok -> https://$NgrokDomain..."
 
     if (Test-PortListening $NgrokApiPort) {
-        # ngrok already up — verify the tunnel URL matches (catches the 'random domain' mistake)
-        Write-Host "  ngrok already running — verifying domain binding…" -ForegroundColor Gray
+        # ngrok already up -- verify the tunnel URL matches (catches the random-domain mistake)
+        Write-Host "  ngrok already running -- verifying domain binding..." -ForegroundColor Gray
         try {
-            $j = Invoke-RestMethod "http://127.0.0.1:$NgrokApiPort/api/tunnels" -ErrorAction Stop
+            $j   = Invoke-RestMethod "http://127.0.0.1:$NgrokApiPort/api/tunnels" -ErrorAction Stop
             $url = ($j.tunnels | Where-Object { $_.proto -eq "https" } | Select-Object -First 1).public_url
             if ($url -eq "https://$NgrokDomain") {
                 Write-Ok "Tunnel confirmed: $url"
@@ -264,14 +264,14 @@ if (-not $NoNgrok) {
                 exit 1
             }
         } catch {
-            Write-Warn "Could not query ngrok API — assuming domain is correct"
+            Write-Warn "Could not query ngrok API -- assuming domain is correct"
         }
     } else {
         $ngCmd = "ngrok http --url=$NgrokDomain $BackendPort"
         Start-Process powershell -ArgumentList "-NoProfile", "-NoExit", "-Command", $ngCmd `
             -WindowStyle Normal
 
-        Write-Host "  Waiting for ngrok API on :$NgrokApiPort…" -ForegroundColor Gray
+        Write-Host "  Waiting for ngrok API on :$NgrokApiPort..." -ForegroundColor Gray
         if (Wait-ForPort $NgrokApiPort 20) {
             Start-Sleep -Milliseconds 1500   # let the tunnel register before querying
             try {
@@ -280,49 +280,50 @@ if (-not $NoNgrok) {
                 if ($url -eq "https://$NgrokDomain") {
                     Write-Ok "Tunnel confirmed: $url"
                 } else {
-                    Write-Err "ngrok started but tunnel URL is '$url' — expected https://$NgrokDomain"
+                    Write-Err "ngrok started but tunnel URL is '$url'"
+                    Write-Err "Expected: https://$NgrokDomain"
                     Write-Host "  Check that this authtoken owns the reserved domain:" -ForegroundColor Gray
                     Write-Host "  https://dashboard.ngrok.com/domains" -ForegroundColor Gray
                     exit 1
                 }
             } catch {
-                Write-Warn "ngrok API appeared but domain could not be verified — check its window"
+                Write-Warn "ngrok API appeared but domain could not be verified -- check its window"
             }
         } else {
-            Write-Warn "ngrok API did not appear on :$NgrokApiPort within 20 s — check its window"
+            Write-Warn "ngrok API did not appear on :$NgrokApiPort within 20 s -- check its window"
         }
     }
 } else {
-    Write-Step "4/5  ngrok — skipped (-NoNgrok)"
+    Write-Step "4/5  ngrok -- skipped (-NoNgrok)"
 }
 
-# ── 5. npm dev-server ─────────────────────────────────────────────────────
+# -- 5. npm dev-server ---------------------------------------------------------
 
 if (-not $NoDevServer) {
-    Write-Step "5/5  npm dev-server (localhost:$DevServerPort)…"
+    Write-Step "5/5  npm dev-server (localhost:$DevServerPort)..."
     if (Test-PortListening $DevServerPort) {
-        Write-Ok "Port $DevServerPort already in use — skipping"
+        Write-Ok "Port $DevServerPort already in use -- skipping"
     } else {
         $npmCmd = "Set-Location '$SidebarPath'; npm run dev-server"
         Start-Process powershell -ArgumentList "-NoProfile", "-NoExit", "-Command", $npmCmd `
             -WindowStyle Normal
-        Write-Host "  Webpack bundling (first run may take 10–20 s)…" -ForegroundColor Gray
+        Write-Host "  Webpack bundling (first run may take 10-20 s)..." -ForegroundColor Gray
         if (Wait-ForPort $DevServerPort 90) {
             Write-Ok "Dev-server ready at http://localhost:$DevServerPort"
         } else {
-            Write-Warn "Dev-server window opened but :$DevServerPort did not appear in 90 s — check its window"
+            Write-Warn "Dev-server window opened but :$DevServerPort did not appear in 90 s -- check its window"
         }
     }
 } else {
-    Write-Step "5/5  npm dev-server — skipped (-NoDevServer)"
+    Write-Step "5/5  npm dev-server -- skipped (-NoDevServer)"
 }
 
-# ── Summary ───────────────────────────────────────────────────────────────
+# -- Summary -------------------------------------------------------------------
 
 Write-Host ""
-Write-Host "  ═══════════════════════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "    EMR4 Dev Stack — Status" -ForegroundColor Cyan
-Write-Host "  ═══════════════════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "  =======================================================" -ForegroundColor Cyan
+Write-Host "    EMR4 Dev Stack -- Status" -ForegroundColor Cyan
+Write-Host "  =======================================================" -ForegroundColor Cyan
 Write-Host ""
 
 Show-StatusRow "Postgres"            (Test-PortListening $DbPort)        "postgresql://127.0.0.1:$DbPort/gp_pms_dev"
@@ -336,9 +337,7 @@ if (-not $NoDevServer) {
 }
 
 Write-Host ""
-Write-Host "  Word Online (GitHub Pages) reaches this stack via:" -ForegroundColor DarkGray
-Write-Host "  Word Online → GitHub Pages → ngrok → uvicorn on :$BackendPort" -ForegroundColor DarkGray
-Write-Host ""
-Write-Host "  After any taskpane deploy: close & reopen the Word document." -ForegroundColor DarkGray
+Write-Host "  Word Online (GitHub Pages) -> ngrok -> uvicorn on :$BackendPort" -ForegroundColor DarkGray
+Write-Host "  After any taskpane deploy: close and reopen the Word document." -ForegroundColor DarkGray
 Write-Host "  To stop app processes:     .\run_dev.ps1 -Down" -ForegroundColor DarkGray
 Write-Host ""
