@@ -18,7 +18,7 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `ba0daf3` — "Security P0 fixes: fail-closed JWT secret + CORS allow-list" (Phase 1 close-out commit follows) |
+| **Last pushed commit** | `1a6f15a` — "Add native Diary Grid — read-only first slice" |
 
 ### Tag map (all tags pushed to remote)
 
@@ -42,6 +42,10 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 | `bbb6b12` | Always render address/phone/medicare demographic lines |
 | `aa8bda2` | Demographics as shaded paragraphs (no table) + 1.15 line spacing |
 | `3364bba` | Fix grey shading order so it renders in Word Online (CT_PPr schema) |
+| `b160dd0` | Fix `_inject_custom_xml`: overwrite only `item1.xml` body — no duplicate OPC Override → corrupt `.docx` eliminated |
+| `a9c045a` | Fix `POST /patients/with-file` 500: validate `PatientOut` first, then construct `PatientWithFileOut` |
+| `d0d99b9` | Multi-column Word table diary + `diary_template.json` (retained as reference; **superseded by native grid**) |
+| `1a6f15a` | Native Diary Grid (`docs/diary/`): read-only room×time grid with lifecycle colours + date nav + auto-refresh |
 
 ---
 
@@ -90,8 +94,54 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 - **Fonts** — body **Century Schoolbook 11pt**, headings **Garamond 12pt** bold blue `0000FF`, matching the Margaret Thompson template. Both fonts ship with Microsoft Office, so **no font install is required** on any machine running Word (confirmed present in `C:\Windows\Fonts`: `GARA.TTF`, `CENSCBK.TTF`). If guaranteed rendering on non-Office machines is ever needed, embed the fonts in the `.docx` (`settings.xml` `w:embedTrueTypeFonts` + `/word/fonts/` parts) — note embeddability/licensing bits and that Word Online has limited embedded-font support. For managed fleets, push fonts via Intune/Group Policy.
 - **`CLAUDE.md`** added to repo root — codebase guidance for future Claude Code sessions.
 
-### Not yet started
-- Phase 2 onwards (see `implementation_plan.md §12`)
+### Phase 2 — Appointments & The Living Diary (in progress)
+
+#### ✅ New Patient file↔DB bridge (commits b160dd0, a9c045a)
+- `POST /api/v1/patients/with-file` — atomically creates DB row + generates `.docx`
+  to `settings.patient_files_dir` (default `./patient_files/`, override in `.env`).
+- `_inject_custom_xml` fixed: rewrites only the body of `customXml/item1.xml`,
+  leaving all OPC packaging intact — no more corrupt `.docx` from duplicate Override PartNames.
+- `PatientWithFileOut` schema returns `generated_filename` alongside the full patient record.
+- New Patient form in the taskpane (`+` button in banner) POSTs to `/with-file` and
+  shows the generated filename + copy instructions.
+
+#### ⭐ Strategic Pivot — Native Diary Grid (decisions 2026-06-17)
+The diary moved **off Word and onto a native HTML/JS web grid** hosted in `docs/diary/`.
+Postgres is the single source of truth; lifecycle colours are CSS off `appointment.status`.
+This eliminates: the Word-table sync fork, "who writes status to the doc" ambiguity,
+Parse & Lock (no free text to parse), co-authoring merge races, and OOXML complexity.
+The Word diary `.docx` was built (`d0d99b9`) as a proving exercise — it confirmed the
+diary is app-shaped, not document-shaped. The Word diary is now retired from the deploy path.
+The clinical note stays in Word (document-shaped, prose, letters, printing).
+
+Per-surface hybrid architecture (locked):
+- **Word**: clinical note, letters, referrals — document-shaped content
+- **Native web grid**: diary, waiting room, messaging, billing review — app-shaped content
+- **Online/mobile booking portal** (future): same appointments API backbone, different client
+
+Online/mobile booking is the clinching architectural reason — `AppointmentType.is_bookable_online`,
+`BookingChannel.{Online,App,Kiosk}`, and `GET /slots/{practitioner_id}` already exist.
+The staff diary grid and a future patient booking portal are just two clients of the same API.
+
+#### ✅ Native Diary Grid — read-only first slice (commit 1a6f15a)
+- **`docs/diary/diary.{html,js,css}`** — dedicated Office dialog window (no patient required).
+  - Opens via `displayDialogAsync(DIARY_URL, {height:90,width:90})` from taskpane `📅` button.
+  - Same `ready`→`auth` token handshake as the Command Centre.
+  - Template config embedded in `diary.js` (mirrors `diary_template.json` at repo root).
+  - Fetches `GET /appointments?date_from&date_to` + `GET /appointments/types` in parallel.
+  - Renders room×time grid: columns from template, 15-min slots 09:00–17:00, break rows.
+  - Appointment→column mapping by practitioner AHPRA (`a.practitioner.ahpra_number`).
+  - **Lifecycle colours**: Confirmed/Arrived = ALL-CAPS + bold blue, InConsult = underline,
+    Completed = green, Booked = plain black, Cancelled/NoShow/DNA = strikethrough.
+  - Appointment-type `color_hex` applied as a left-border accent (join by UUID from types list).
+  - Prev/Next/Today date navigation; Refresh button; 60-second auto-refresh.
+  - Read-only (no booking/drag/status mutations this slice).
+- **`app/schemas/appointments.py`** — added `ahpra_number: Optional[str]` to `PractitionerBrief`
+  so the diary JS can map appointments to columns by AHPRA. Zero migration required.
+- **`seed.py`** — `AppointmentType` + `PractitionerSchedule` + 3 sample appointments
+  (Margaret 09:00 `Confirmed`, Billy 09:15 `Booked`, Margaret 10:00 `Booked`) seeded idempotently.
+- **Taskpane** — `📅` Diary button in banner controls; `openDiary()` function (no patient guard).
+  Cache-bust bumped to `v=28`.
 
 ---
 
@@ -221,6 +271,9 @@ clean child order; new injections should do the same.
 | `EMR4 Sidebar/src/taskpane/shortcuts.json` | Keyboard-shortcut definition (Ctrl+Alt+N → StartConsultation) |
 | `docs/taskpane/` | GitHub Pages copy of the taskpane (generated by sync_taskpane.py) |
 | `docs/command-centre/command-centre.{html,js,css}` | Command Centre window (Scribe). Edit directly in docs/. |
+| `docs/diary/diary.{html,js,css}` | **Native Diary Grid** — edit directly in docs/ (NOT via sync_taskpane.py). Bump `?v=N` on each deploy. |
+| `diary_template.json` | Practice diary config (columns, slot defaults, breaks, footer). Embedded verbatim in `diary.js`; must be kept in sync. Future: serve from `/api/v1/diary/template`. |
+| `create_diary_file.py` | Word-table diary generator (RETIRED — built `d0d99b9`, superseded by native grid). Retained for reference only. |
 | `sync_taskpane.py` | Copies taskpane src → docs/ and patches BACKEND_URL/NGROK_URL. Run after every taskpane edit. |
 | `app/routers/consultation.py` | analyze-consultation, scribe-consultation, finalize. Backend AI. Restart uvicorn after edits. |
 | `.env.example` | Template for local config (actual `.env` not committed) |
@@ -257,23 +310,38 @@ edit src → `python sync_taskpane.py` → bump `?v=N` in taskpane.html → comm
 `deploy_taskpane.ps1` that does sync + version-bump + commit in one command.
 Not urgent for Phase 2 but worth adding during heavier frontend work.
 
-### ⚠️ Open architectural gap — New Patient protocol must bridge file + DB record
+### ✅ New Patient bridge — RESOLVED
+`POST /api/v1/patients/with-file` creates DB row + `.docx` atomically. `document_url`
+is left null at creation and backfilled by `autoDetectPatient()` on first open. See §3 Phase 2.
 
-Patient creation currently has **two disconnected halves**:
-- `create_patient_file.py` → generates the `.docx` (demographics, locked headers, Custom XML Part) but writes **nothing to the database**.
-- `POST /api/v1/patients` → creates the DB row but generates **no document**.
+### 🏗️ Next: Diary Grid interactivity (backend additions required)
+The read-only first slice is shipped. Before adding booking/drag/status mutations:
 
-`autoDetectPatient()` matches an open document to a patient by searching the DB on
-the filename's name — so a file with **no matching DB record loads nothing** (this
-is exactly why a freshly generated `BILLY FRUSIN 15-10-2015.docx` showed "No patient
-loaded" until Billy was inserted manually; he is now in `seed.py`).
+1. **Enrich `AppointmentOut`** — embed `appointment_type` (with `color_hex`) and add
+   `end_time`. Currently the diary fetches `/types` separately and joins client-side.
+2. **Allow `practitioner_id` in `AppointmentUpdate`** — required for drag-across-columns
+   (currently only `start_time`/`duration_minutes` are mutable).
+3. **Fix `/slots` overlap math** — currently uses exact start-time equality and ignores
+   `duration_minutes`. A 30-min booking leaves its overlapping slot "available" → double-book
+   bug for any online booking portal. **Must fix before any public-facing booking.**
+4. **Conflict validation** on create/update; **role gating** (receptionist vs GP) on
+   mutating routes (currently none).
+5. **`Room` + `DiaryRoster` models** — date×room→practitioner|label + CRUD. Currently columns
+   are hard-coded in `diary_template.json` / embedded in `diary.js`.
 
-**Decision needed (New Patient userform protocol):** a single endpoint must do both
-atomically — create the DB patient (`POST /patients`), call `create_patient_docx()`,
-persist the file to its storage home (OneDrive/SharePoint), and write the resulting
-`document_url` back onto the patient record. Until that exists, every test patient
-needs a manual DB insert to be loadable. Decide storage location + naming + who owns
-the write (backend endpoint vs. taskpane) before building Phase 2 appointment flows.
+### 🏗️ Later Phase 2 items (deferred)
+- **Parse & Lock** — now unnecessary for the diary (the grid replaces it). Still relevant if
+  any Word-based annotation workflow needs structure extraction later.
+- **Internal messaging router** — models exist (`InternalMessage`); no endpoints yet.
+  Messages tab in the diary window is a placeholder.
+- **SMS reminders** — ClickSend, 24–48h scheduler, two-way YES/NO webhook.
+- **Waiting Room live feed** — `/waiting-room` endpoint exists; Waiting Room tab is placeholder.
+- **Lifecycle actions** (Confirm, Arrived, InConsult, Completed) — as clickable status updates
+  on diary grid cells. Keyboard shortcuts (Ctrl+Alt+* class) and/or row buttons.
+- **`GET /api/v1/diary/template`** — serve `diary_template.json` via API instead of embedding
+  in `diary.js`, as a prelude to the template-builder UI.
+- **Multi-room/multi-practitioner roster** — `DiaryRoster` model + per-date assignment UI.
+- **Online/mobile patient booking portal** — future separate client of the same appointments API.
 
 ### 🔒 Security workstream now in the plan (implementation_plan.md §15A)
 
@@ -321,4 +389,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-16 — Phase 1 closed out + `phase-1-stable` tagged. This session: taskpane CC lock, content-control header protection (`repairDocumentStructure` + baked into `create_patient_file.py`), template fonts + grey demographics band, whitespace normalisation, Billy seeded, file/DB-bridge gap documented (§8). Security: review → implementation_plan.md §15A + `security-engineer`; P0 fixes applied (fail-closed secret_key, CORS allow-list). Plan reconciliation: build-step contradiction fixed, "Word Online is strict" + Cross-File Invariants added to CLAUDE.md, §14 agent strategy rewritten for Claude Code.*
+*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped (`POST /patients/with-file`). Strategic pivot: diary moves off Word to a native HTML/JS web grid (per-surface hybrid architecture locked). Native Diary Grid read-only first slice shipped (`docs/diary/`, commit `1a6f15a`): room×time grid, lifecycle colours, date nav, auto-refresh, `📅` taskpane button. `PractitionerBrief.ahpra_number` added for column mapping. Next: backend enrichment for interactivity (AppointmentOut embed, `/slots` overlap fix, conflict validation, Room/DiaryRoster models).*
