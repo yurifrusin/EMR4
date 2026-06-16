@@ -252,12 +252,14 @@ def seed():
         def _appt_dt(h: int, m: int) -> datetime:
             return datetime.combine(today, time(h, m))
 
+        # Margaret 09:00 is seeded as Confirmed so the diary's lifecycle
+        # colour rendering (ALL-CAPS + blue) is demonstrated out of the box.
         sample_appts = [
-            (patient, _appt_dt(9, 0),  "Hypertension review"),
-            (billy,   _appt_dt(9, 15), "Paediatric check-up"),
-            (patient, _appt_dt(10, 0), "Care plan review"),
+            (patient, _appt_dt(9, 0),  "Hypertension review",   AppointmentStatus.Confirmed),
+            (billy,   _appt_dt(9, 15), "Paediatric check-up",    AppointmentStatus.Booked),
+            (patient, _appt_dt(10, 0), "Care plan review",       AppointmentStatus.Booked),
         ]
-        for pt, start, reason in sample_appts:
+        for pt, start, reason, init_status in sample_appts:
             exists = db.query(Appointment).filter_by(
                 practice_id=practice.id,
                 patient_id=pt.id,
@@ -272,10 +274,13 @@ def seed():
                     booked_by=gp_user.id,
                     start_time=start,
                     duration_minutes=15,
-                    status=AppointmentStatus.Booked,
+                    status=init_status,
                     reason=reason,
                     booked_via=BookingChannel.Receptionist,
                 ))
+            elif exists.status == AppointmentStatus.Booked and init_status != AppointmentStatus.Booked:
+                # Idempotent upgrade: apply the demo status if user hasn't changed it
+                exists.status = init_status
         db.flush()
         print(f"  Sample appointments seeded for today ({today})")
 
