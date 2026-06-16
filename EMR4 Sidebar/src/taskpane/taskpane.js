@@ -101,7 +101,19 @@ function setTaskpaneLocked(locked) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// API HELPER — attaches JWT, handles 401
+// CONNECTIVITY INDICATOR
+// ═══════════════════════════════════════════════════════════
+
+function setConnected(ok) {
+  const d = document.getElementById("status-dot");
+  if (!d) return;
+  d.classList.toggle("connected", ok);
+  d.classList.toggle("disconnected", !ok);
+  d.title = ok ? "Connected" : "Backend unreachable";
+}
+
+// ═══════════════════════════════════════════════════════════
+// API HELPER — attaches JWT, handles 401, updates status-dot
 // ═══════════════════════════════════════════════════════════
 
 async function apiFetch(path, opts = {}) {
@@ -111,11 +123,20 @@ async function apiFetch(path, opts = {}) {
   }
   if (token) headers["Authorization"] = "Bearer " + token;
   headers["ngrok-skip-browser-warning"] = "1";
-  const res = await fetch(API_BASE + path, { ...opts, headers });
+  let res;
+  try {
+    res = await fetch(API_BASE + path, { ...opts, headers });
+  } catch (networkErr) {
+    // Network-level failure (no response at all — ERR_CONNECTION_REFUSED etc.)
+    setConnected(false);
+    throw networkErr;
+  }
   if (res.status === 401) {
     logout();
     return null;
   }
+  // Update the banner dot: any successful response means the backend is reachable
+  setConnected(res.ok);
   return res;
 }
 
@@ -1172,7 +1193,11 @@ async function autoDetectPatient() {
       const [, firstName, lastName] = m;
       // Search by last name only (backend matches on first OR last, not combined)
       const res = await apiFetch(`/patients/search?q=${encodeURIComponent(lastName)}&limit=20`);
-      if (!res || !res.ok) return;
+      if (!res) return;                          // 401 — apiFetch already called logout()
+      if (!res.ok) {                             // 502/500/etc — backend or tunnel problem
+        setStatus(`⚠ Backend unreachable (${res.status}) — start the API server, then reopen the file.`);
+        return;
+      }
       const data = await res.json();
       const allMatches = Array.isArray(data) ? data : [];
       const patient = allMatches.find(p =>
