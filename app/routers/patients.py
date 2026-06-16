@@ -80,9 +80,8 @@ def create_patient_with_file(
     output_dir.mkdir(parents=True, exist_ok=True)
     doc_path = create_patient_docx(pd, output_dir=output_dir)
 
-    out = PatientWithFileOut.model_validate(patient)
-    out.generated_filename = doc_path.name
-    return out
+    base = PatientOut.model_validate(patient)
+    return PatientWithFileOut(**base.model_dump(), generated_filename=doc_path.name)
 
 
 @router.get("/search", response_model=list[PatientOut])
