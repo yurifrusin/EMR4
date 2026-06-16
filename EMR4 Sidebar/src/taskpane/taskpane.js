@@ -882,6 +882,37 @@ async function approveAndFinalize() {
 }
 
 // ═══════════════════════════════════════════════════════════
+// DIARY WINDOW
+// ═══════════════════════════════════════════════════════════
+
+const DIARY_URL = "https://yurifrusin.github.io/EMR4/diary/diary.html";
+
+// NOTE: synchronous within the click gesture — same rule as openCommandCentre.
+// No patient guard — the diary is practice/day-scoped, not patient-scoped.
+function openDiary() {
+  Office.context.ui.displayDialogAsync(DIARY_URL, { height: 90, width: 90 }, result => {
+    if (result.status === Office.AsyncResultStatus.Failed) {
+      setStatus("Could not open Diary: " + result.error.message);
+      return;
+    }
+    const diaryDialog = result.value;
+
+    diaryDialog.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
+      try {
+        const msg = JSON.parse(arg.message);
+        if (msg.type === "ready") {
+          // Deliver the auth token so the diary can call the API
+          diaryDialog.messageChild(JSON.stringify({ type: "auth", token }));
+        }
+      } catch (_) {}
+    });
+
+    // Nothing to clean up in the taskpane when the diary window closes
+    diaryDialog.addEventHandler(Office.EventType.DialogEventReceived, () => {});
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
 // COMMAND CENTRE
 // ═══════════════════════════════════════════════════════════
 
@@ -1501,6 +1532,7 @@ Office.onReady(info => {
   }
 
   document.getElementById("btn-new-patient").onclick = showNewPatientForm;
+  document.getElementById("btn-diary").onclick = openDiary;
 
   document.getElementById("btn-search-patient").onclick = () => {
     searchPanel.classList.toggle("hidden");

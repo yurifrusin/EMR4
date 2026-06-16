@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMR Centaur — Diary</title>
+  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <link rel="stylesheet" href="diary.css?v=1" />
+  <script src="diary.js?v=1" defer></script>
+</head>
+<body>
+
+<!-- ═══ HEADER ══════════════════════════════════════════ -->
+<div id="diary-header">
+  <div class="diary-logo">
+    <div>
+      <div class="diary-logo-text">EMR Centaur — Diary</div>
+      <div class="diary-logo-sub" id="diary-practice-name">Loading…</div>
+    </div>
+  </div>
+
+  <div class="diary-date-nav">
+    <button id="btn-prev-day" title="Previous day">&#8249;</button>
+    <span id="diary-date-label">—</span>
+    <button id="btn-next-day" title="Next day">&#8250;</button>
+    <button id="btn-today" title="Go to today">Today</button>
+  </div>
+
+  <div class="diary-actions">
+    <button id="btn-refresh" title="Refresh appointments">&#8635; Refresh</button>
+    <span id="diary-status">Connecting…</span>
+  </div>
+</div>
+
+<!-- ═══ GRID ═════════════════════════════════════════════ -->
+<div id="diary-body">
+  <!-- Loading spinner (visible while fetching) -->
+  <div id="diary-loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Error state (shown on fetch failure) -->
+  <div id="diary-error" class="hidden"></div>
+
+  <!-- The grid table is injected here by diary.js -->
+  <table id="diary-grid" class="hidden">
+    <colgroup id="diary-colgroup"></colgroup>
+    <thead id="diary-thead"></thead>
+    <tbody id="diary-tbody"></tbody>
+  </table>
+</div>
+
+</body>
+</html>

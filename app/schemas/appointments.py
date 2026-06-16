@@ -31,6 +31,7 @@ class PractitionerBrief(BaseModel):
     first_name: str
     last_name: str
     provider_number: Optional[str] = None
+    ahpra_number: Optional[str] = None
 
     model_config = {"from_attributes": True}
 

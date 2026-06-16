@@ -1,0 +1,300 @@
+/* ═══════════════════════════════════════════
+   EMR4 Centaur — Diary Grid styles  v1
+   ═══════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue-dark:   #003a6c;
+  --blue-mid:    #0050a0;
+  --blue-light:  #e8f0fb;
+  --green:       #00B050;
+  --red:         #c0392b;
+  --grey-1:      #f4f5f7;
+  --grey-2:      #e1e4e8;
+  --grey-3:      #9b9b9b;
+  --grey-4:      #555;
+  --text:        #1a1a2e;
+  --white:       #ffffff;
+  --break-bg:    #f2f2f2;
+  --header-bg:   #e6e6e6;
+  --font:        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --time-col:    60px;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font);
+  font-size: 12px;
+  color: var(--text);
+  background: var(--grey-1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hidden { display: none !important; }
+
+/* ─── TOP BAR ──────────────────────────────── */
+
+#diary-header {
+  background: var(--blue-dark);
+  color: white;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  gap: 10px;
+  min-height: 46px;
+}
+
+.diary-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.diary-logo-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.diary-logo-sub {
+  font-size: 10px;
+  color: #a8c4e0;
+  margin-top: 1px;
+}
+
+.diary-date-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.diary-date-nav button {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+.diary-date-nav button:hover { background: rgba(255,255,255,0.28); }
+
+#diary-date-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #d0e4f7;
+  min-width: 190px;
+  text-align: center;
+}
+
+.diary-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#btn-refresh {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+#btn-refresh:hover { background: rgba(255,255,255,0.28); }
+#btn-refresh:disabled { opacity: 0.5; cursor: default; }
+
+#diary-status {
+  font-size: 10px;
+  color: #a8c4e0;
+  text-align: right;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── GRID WRAPPER ─────────────────────────── */
+
+#diary-body {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+/* ─── GRID TABLE ────────────────────────────── */
+
+#diary-grid {
+  border-collapse: collapse;
+  min-width: 100%;
+  table-layout: fixed;
+}
+
+/* Time column */
+#diary-grid colgroup col.col-time {
+  width: var(--time-col);
+}
+
+/* Column headers */
+#diary-grid thead tr th {
+  background: var(--header-bg);
+  border: 1px solid var(--grey-2);
+  padding: 6px 8px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+#diary-grid thead tr th.th-time {
+  color: var(--grey-3);
+  font-size: 10px;
+  font-weight: 400;
+  width: var(--time-col);
+}
+.col-room-label {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--grey-4);
+  margin-top: 1px;
+}
+
+/* Slot rows */
+#diary-grid tbody tr.slot-row td {
+  border: 1px solid var(--grey-2);
+  padding: 3px 6px;
+  vertical-align: top;
+  min-height: 28px;
+  height: 28px;
+}
+#diary-grid tbody tr.slot-row td.td-time {
+  color: var(--grey-3);
+  font-size: 10px;
+  font-weight: 500;
+  text-align: right;
+  padding-right: 8px;
+  white-space: nowrap;
+  background: var(--white);
+}
+#diary-grid tbody tr.slot-row td.td-cell {
+  background: var(--white);
+  cursor: default;
+}
+
+/* Break rows */
+#diary-grid tbody tr.break-row td {
+  background: var(--break-bg);
+  border: 1px solid var(--grey-2);
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--grey-4);
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+/* ─── APPOINTMENT LIFECYCLE STYLING ─────────── */
+
+.appt {
+  display: block;
+  padding: 1px 2px;
+  border-radius: 2px;
+  line-height: 1.4;
+  font-size: 11px;
+}
+
+/* Empty bookable slot */
+.slot-empty {
+  color: var(--grey-3);
+  font-size: 11px;
+  user-select: none;
+}
+
+/* Booked — plain black */
+.appt-booked {
+  color: var(--text);
+}
+
+/* Confirmed — ALL-CAPS + bold + blue */
+.appt-confirmed {
+  color: #0000ff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Arrived — same as confirmed (chevron already gone in the grid; no chevron in web) */
+.appt-arrived {
+  color: #0000ff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* In Consult — underline */
+.appt-inconsult {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+/* Completed — green */
+.appt-completed {
+  color: var(--green);
+}
+
+/* Cancelled / NoShow / DNA — muted strikethrough */
+.appt-cancelled {
+  color: var(--grey-3);
+  text-decoration: line-through;
+}
+
+/* Left border accent using appointment-type colour */
+.appt[data-color] {
+  border-left: 3px solid var(--appt-color, var(--grey-2));
+  padding-left: 5px;
+}
+
+/* Appointment reason sub-label */
+.appt-reason {
+  font-size: 10px;
+  color: var(--grey-3);
+  margin-top: 1px;
+  display: block;
+}
+
+/* Column tint (nurse columns etc.) */
+td.td-cell.tinted {
+  /* background set inline via style attribute */
+}
+
+/* ─── LOADING / ERROR STATES ─────────────────── */
+
+#diary-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(244,245,247,0.85);
+  z-index: 20;
+}
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--grey-2);
+  border-top-color: var(--blue-mid);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#diary-error {
+  padding: 20px;
+  color: var(--red);
+  font-size: 12px;
+}
