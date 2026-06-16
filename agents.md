@@ -26,7 +26,7 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 |---|---|---|
 | `phase-1-raw` | `257e214` | Phase 0 + Phase 1 initial implementation — first working version |
 | `phase-1-popout-experiment` | `d79cb1d` | All pop-out / displayDialogAsync experiments from session 2 |
-| `phase-1-stable` | _Phase 1 close-out commit_ | Phase 0 + 1 + 1.5 complete & tested: patient file generator, locked section headers, CC lock, demographics, security P0 fixes, doc reconciliation. One runtime caveat: Ctrl+Shift+N in document body (wiring verified, not yet runtime-confirmed). |
+| `phase-1-stable` | _Phase 1 close-out commit_ | Phase 0 + 1 + 1.5 complete & tested: patient file generator, locked section headers, CC lock, demographics, security P0 fixes, doc reconciliation. Ctrl+Alt+N (start consultation) runtime-verified firing from the document body. |
 
 ### Notable un-tagged commits (in order)
 
@@ -92,8 +92,6 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 
 ### Not yet started
 - Phase 2 onwards (see `implementation_plan.md §12`)
-- **Verify** global Ctrl+Alt+N fires while cursor is in the document body (shared-runtime shortcut)
-- **Tag `phase-1-stable`** once full Phase 1.5 testing is confirmed
 
 ---
 
@@ -233,13 +231,11 @@ clean child order; new injections should do the same.
 
 1. ✅ **Phase 1 closed out** — `phase-1-stable` tagged. Patient file generator, locked
    section headers, CC lock, demographics, and security P0 fixes all tested.
-2. **One runtime caveat to confirm** — Ctrl+Alt+N firing while the cursor is in the
-   **document body** (not the taskpane). The wiring is verified correct in code
+2. ✅ **Ctrl+Alt+N runtime-verified** — confirmed firing while the cursor is in the
+   **document body** (not just the taskpane), via the shared runtime
    (`shortcuts.json` → manifest `SharedRuntime` + `ExtendedOverrides` →
-   `Office.actions.associate`), but the shared-runtime shortcut firing in the body is an
-   Office runtime behaviour only confirmable live in Word. If it fails, the in-taskpane
-   keydown fallback still works; move the tag if needed. (Shortcut was Ctrl+Shift+N until
-   it was found to trigger Chrome Incognito; now Ctrl+Alt+N.)
+   `Office.actions.associate`). The in-taskpane keydown fallback remains as a backstop.
+   (Shortcut was Ctrl+Shift+N until it was found to trigger Chrome Incognito; now Ctrl+Alt+N.)
 3. **Start Phase 2** — Living Diary: SharePoint-hosted `.docx`, Parse & Lock, appointment
    CRUD, internal messaging, SMS reminders. **First** resolve the New Patient file↔DB
    bridge below.
