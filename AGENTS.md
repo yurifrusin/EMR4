@@ -122,6 +122,32 @@ Codex is the default orchestration agent for EMR4. This means:
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).
+- Agent-specific task packets live under `orchestration/agent_inbox/<agent>/`.
+
+### Agent inbox commands
+
+Codex can dispatch a task packet:
+
+```powershell
+python scripts\agent_worktrees.py dispatch --agent claude --title "Short title" --mission "..." --in-scope "..." --out-of-scope "..." --verification "..." --merge-criteria "..."
+```
+
+Any agent can list and read its queue:
+
+```powershell
+python scripts\agent_worktrees.py inbox --agent claude
+python scripts\agent_worktrees.py brief --agent claude
+```
+
+When an agent starts a packet, it may mark it:
+
+```powershell
+python scripts\agent_worktrees.py claim --agent claude --task claude-short-title --status in_progress
+```
+
+The packet itself contains the required `handin` and `submit` commands. Inbox
+packets are coordination artifacts; agents may update their packet's completion
+notes, but should not edit other agents' packets.
 
 ### Parallel ownership rule
 

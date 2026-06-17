@@ -7,6 +7,8 @@ single source of truth for durable project state; this file tracks active branch
 
 - Every agent starts with `python scripts\agent_worktrees.py handin`.
 - Parallel workers finish with `python scripts\agent_worktrees.py submit ...`.
+- Codex dispatches concrete task packets to `orchestration/agent_inbox/<agent>/`.
+- Agents read their next packet with `python scripts\agent_worktrees.py brief --agent <agent>`.
 - Only Codex, acting as orchestrator, advances `master` and `handoff/current` in
   parallel mode unless the user explicitly instructs otherwise.
 - Every workstream must state files in scope, files out of scope, verification, and
@@ -41,6 +43,18 @@ The default pattern should be: think hard at planning and review boundaries, exe
 at medium/high once the plan is stable, then think hard again before integration.
 
 ## Sprint 1: Diary Interactivity Foundation
+
+## Agent Inbox
+
+Task packets are stored here:
+
+- `orchestration/agent_inbox/claude/`
+- `orchestration/agent_inbox/antigravity/`
+- `orchestration/agent_inbox/codex/`
+
+Packet status values are lightweight text: `queued`, `in_progress`, `submitted`,
+`blocked`, or `merged`. The submit command pushes the worker branch only; Codex
+reviews and integrates afterward.
 
 ### Workstream A — Backend Time Model
 
@@ -97,4 +111,3 @@ at medium/high once the plan is stable, then think hard again before integration
 | Verification | App import without deprecation warning; analyze/scribe smoke test with credentials |
 | Dissent / Risks | Needs careful check against current Google docs and installed SDK versions |
 | Status | Proposed, urgent technical debt |
-
