@@ -57,7 +57,10 @@ If the user says **"handin"**, do this before starting project work:
 python scripts\agent_worktrees.py handin
 ```
 
-This is shorthand for `sync --fetch`.
+This is shorthand for `sync --fetch` **plus** the agent intake ritual: infer the
+current agent from the worktree branch, list that agent's inbox, and print the
+next queued/in-progress task packet. If the user says only "handin", do not ask
+for the longer prompt; run this command and follow the printed packet.
 
 1. Open the agent's own worktree.
 2. Read `AGENTS.md`, `CLAUDE.md` where relevant, and `implementation_plan.md`.
@@ -148,6 +151,15 @@ python scripts\agent_worktrees.py claim --agent claude --task claude-short-title
 The packet itself contains the required `handin` and `submit` commands. Inbox
 packets are coordination artifacts; agents may update their packet's completion
 notes, but should not edit other agents' packets.
+
+When a worker uses the packet's `submit` command with `--task`, the helper marks
+the source packet `submitted`, creates a Codex review packet under
+`orchestration/agent_inbox/codex/`, commits it with the branch, and pushes the
+worker branch. Codex can check submitted work with:
+
+```powershell
+python scripts\agent_worktrees.py poll --fetch
+```
 
 ### Parallel ownership rule
 

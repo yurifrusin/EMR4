@@ -6,9 +6,14 @@ single source of truth for durable project state; this file tracks active branch
 ## Operating Rules
 
 - Every agent starts with `python scripts\agent_worktrees.py handin`.
+  This now performs the full intake ritual: sync, infer agent, list inbox, and
+  print the next task packet.
 - Parallel workers finish with `python scripts\agent_worktrees.py submit ...`.
+  Packet submit commands include `--task`, which creates a Codex review packet
+  in the worker branch.
 - Codex dispatches concrete task packets to `orchestration/agent_inbox/<agent>/`.
 - Agents read their next packet with `python scripts\agent_worktrees.py brief --agent <agent>`.
+- Codex polls submissions with `python scripts\agent_worktrees.py poll --fetch`.
 - Only Codex, acting as orchestrator, advances `master` and `handoff/current` in
   parallel mode unless the user explicitly instructs otherwise.
 - Every workstream must state files in scope, files out of scope, verification, and

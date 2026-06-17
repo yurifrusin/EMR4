@@ -7,7 +7,7 @@
 | Status | queued |
 | Created | a647920 |
 | Start Command | `python scripts\agent_worktrees.py handin` |
-| Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --commit-message "Render diary appointments as intervals" --message "Diary interval rendering ready for Codex review"` |
+| Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-interval-rendering --commit-message "Render diary appointments as intervals" --message "Diary interval rendering ready for Codex review"` |
 
 ## Mission
 

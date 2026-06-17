@@ -29,7 +29,7 @@ TASK_TEMPLATE = """# {task_id}
 | Status | queued |
 | Created | {created} |
 | Start Command | `python scripts\\agent_worktrees.py handin` |
-| Submit Command | `python scripts\\agent_worktrees.py submit --agent {agent} --commit-message "{commit_message}" --message "{submit_message}"` |
+| Submit Command | `python scripts\\agent_worktrees.py submit --agent {agent} --task {task_id} --commit-message "{commit_message}" --message "{submit_message}"` |
 
 ## Mission
 
@@ -173,6 +173,85 @@ def update_task_status(path: Path, status_value: str) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def agent_from_branch(cwd: Path = REPO_ROOT) -> str | None:
+    branch = git_stdout(["branch", "--show-current"], cwd=cwd, check=False)
+    for agent, agent_branch in AGENTS.items():
+        if branch == agent_branch:
+            return agent
+    if branch == "master":
+        return "codex"
+    return None
+
+
+def next_task_for(agent: str) -> Path | None:
+    files = task_files(agent)
+    for status_value in ("in_progress", "queued"):
+        for path in files:
+            if read_task_status(path) == status_value:
+                return path
+    return files[0] if files else None
+
+
+def print_agent_brief(agent: str) -> None:
+    print()
+    print(f"[inbox] {agent}")
+    files = task_files(agent)
+    if not files:
+        print("[ok] no tasks")
+        return
+    for path in files:
+        print(f"{read_task_status(path):<12} {path.relative_to(REPO_ROOT)}")
+    selected = next_task_for(agent)
+    if selected:
+        print()
+        print(f"[brief] {selected.relative_to(REPO_ROOT)}")
+        print(selected.read_text(encoding="utf-8"))
+
+
+def append_completion_note(path: Path, summary: str) -> None:
+    if not summary:
+        return
+    text = path.read_text(encoding="utf-8").rstrip()
+    text += f"\n\nSubmitted summary:\n\n{summary.strip()}\n"
+    path.write_text(text, encoding="utf-8")
+
+
+def create_codex_review_packet(agent: str, task_id: str, branch: str, message: str) -> Path:
+    review_dir = inbox_dir("codex")
+    review_dir.mkdir(parents=True, exist_ok=True)
+    review_id = f"review-{agent}-{task_id}"
+    path = review_dir / f"{review_id}.md"
+    text = f"""# {review_id}
+
+| Item | Value |
+|---|---|
+| To | codex |
+| From | {agent} |
+| Branch | `{branch}` |
+| Source Task | `{task_id}` |
+| Status | queued |
+
+## Review Request
+
+{message or "Worker branch submitted for Codex review."}
+
+## Required Review Steps
+
+1. Fetch the worker branch.
+2. Inspect `orchestration/agent_inbox/{agent}/{task_id}.md`.
+3. Review the branch diff against `master`.
+4. Run the verification listed in the source task or explain why not.
+5. Integrate only if the work is correct, scoped, and compatible with current baton.
+
+## Completion Notes
+
+- Review result:
+- Follow-up required:
+"""
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
 def setup(args: argparse.Namespace) -> None:
     require_clean()
 
@@ -231,18 +310,30 @@ def handoff(args: argparse.Namespace) -> None:
 
 
 def submit(args: argparse.Namespace) -> None:
-    if args.commit_message:
-        commit_checkpoint(args.commit_message)
-
-    require_clean()
-
-    head = git_stdout(["rev-parse", "--short", "HEAD"])
     branch = git_stdout(["branch", "--show-current"])
     if not branch:
         raise SystemExit("Cannot submit from a detached HEAD. Check out an agent branch first.")
     if branch in {"master", HANDOFF_REF}:
         raise SystemExit("Parallel submit must come from an agent/workstream branch, not master or handoff/current.")
 
+    if args.task and args.agent:
+        matches = [
+            path for path in task_files(args.agent)
+            if path.stem == args.task or path.name == args.task
+        ]
+        if not matches:
+            raise SystemExit(f"Task not found for {args.agent}: {args.task}")
+        update_task_status(matches[0], "submitted")
+        append_completion_note(matches[0], args.summary)
+        review_path = create_codex_review_packet(args.agent, matches[0].stem, branch, args.message)
+        print(f"[ok] wrote Codex review packet: {review_path.relative_to(REPO_ROOT)}")
+
+    if args.commit_message:
+        commit_checkpoint(args.commit_message)
+
+    require_clean()
+
+    head = git_stdout(["rev-parse", "--short", "HEAD"])
     print(f"[ok] submitting {branch} at {head}")
     if args.agent:
         print(f"[ok] submitting agent: {args.agent}")
@@ -340,12 +431,58 @@ def sync(args: argparse.Namespace) -> None:
 def handin(args: argparse.Namespace) -> None:
     args.fetch = True
     sync(args)
+    if args.no_brief:
+        return
+    agent = args.agent or agent_from_branch(Path.cwd().resolve())
+    if agent:
+        print_agent_brief(agent)
+    else:
+        print("[hint] Could not infer agent from current branch. Use --agent claude, --agent antigravity, or --agent codex.")
 
 
 def status(_: argparse.Namespace) -> None:
     print(git_stdout(["status", "--short", "--branch"]))
     print()
     print(git_stdout(["worktree", "list"]))
+
+
+def poll(args: argparse.Namespace) -> None:
+    if args.fetch:
+        print(f"[fetch] {args.remote}")
+        print_result(run_git(["fetch", args.remote]))
+
+    found = False
+    for agent, branch in AGENTS.items():
+        if agent == "codex":
+            continue
+        remote_ref = f"{args.remote}/{branch}"
+        if run_git(["rev-parse", "--verify", remote_ref], check=False).returncode != 0:
+            continue
+
+        log = git_stdout(["log", "--oneline", f"master..{remote_ref}"], check=False)
+        review_files = git_stdout(
+            ["ls-tree", "-r", "--name-only", remote_ref, "orchestration/agent_inbox/codex"],
+            check=False,
+        )
+        if log or review_files:
+            found = True
+            print(f"\n[submitted] {agent} branch {remote_ref}")
+            if log:
+                print(log)
+            for file_path in review_files.splitlines():
+                if file_path.endswith(".md"):
+                    print(f"\n[review packet] {remote_ref}:{file_path}")
+                    print(git_stdout(["show", f"{remote_ref}:{file_path}"], check=False))
+
+    codex_files = task_files("codex")
+    if codex_files:
+        found = True
+        print("\n[codex local inbox]")
+        for path in codex_files:
+            print(f"{read_task_status(path):<12} {path.relative_to(REPO_ROOT)}")
+
+    if not found:
+        print("[ok] no submitted worker branches or Codex inbox packets found")
 
 
 def main() -> None:
@@ -367,7 +504,9 @@ def main() -> None:
 
     submit_parser = subparsers.add_parser("submit", help="Commit/checkpoint if requested and push current branch without moving the baton")
     submit_parser.add_argument("--agent", choices=sorted(AGENTS))
+    submit_parser.add_argument("--task", default="", help="Source inbox task id; marks task submitted and writes a Codex review packet")
     submit_parser.add_argument("--message", default="")
+    submit_parser.add_argument("--summary", default="", help="Completion summary appended to the source task packet")
     submit_parser.add_argument("--commit-message", default="", help="Stage all non-ignored changes and commit before submit")
     submit_parser.add_argument("--remote", default="origin")
     submit_parser.add_argument("--no-push", action="store_true", help="Do not push the current branch")
@@ -412,7 +551,14 @@ def main() -> None:
     handin_parser = subparsers.add_parser("handin", help="Fetch and fast-forward current worktree to the handoff ref")
     handin_parser.add_argument("--ref", default=HANDOFF_REF)
     handin_parser.add_argument("--remote", default="origin")
+    handin_parser.add_argument("--agent", choices=sorted(AGENTS))
+    handin_parser.add_argument("--no-brief", action="store_true", help="Only sync; do not print the inferred agent inbox task")
     handin_parser.set_defaults(func=handin)
+
+    poll_parser = subparsers.add_parser("poll", help="Fetch and report submitted worker branches / Codex review packets")
+    poll_parser.add_argument("--remote", default="origin")
+    poll_parser.add_argument("--fetch", action="store_true")
+    poll_parser.set_defaults(func=poll)
 
     status_parser = subparsers.add_parser("status", help="Show branch and worktree status")
     status_parser.set_defaults(func=status)

@@ -7,7 +7,7 @@
 | Status | queued |
 | Created | a647920 |
 | Start Command | `python scripts\agent_worktrees.py handin` |
-| Submit Command | `python scripts\agent_worktrees.py submit --agent claude --commit-message "Add appointment security regression tests" --message "Appointment/security regression tests ready for Codex review"` |
+| Submit Command | `python scripts\agent_worktrees.py submit --agent claude --task claude-appointment-security-tests --commit-message "Add appointment security regression tests" --message "Appointment/security regression tests ready for Codex review"` |
 
 ## Mission
 
