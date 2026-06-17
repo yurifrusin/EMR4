@@ -169,12 +169,20 @@ def task_files(agent: str | None = None, repo_root: Path = REPO_ROOT) -> list[Pa
 
 
 def read_task_status(path: Path) -> str:
-    for line in path.read_text(encoding="utf-8").splitlines():
+    return read_status_from_text(path.read_text(encoding="utf-8"))
+
+
+def read_status_from_text(text: str) -> str:
+    for line in text.splitlines():
         if line.startswith("| Status |"):
             parts = [part.strip() for part in line.split("|")]
             if len(parts) >= 4:
                 return parts[2]
     return "unknown"
+
+
+def is_actionable_status(status_value: str) -> bool:
+    return status_value in {"queued", "pending_review", "in_progress"}
 
 
 def update_task_status(path: Path, status_value: str) -> None:
@@ -484,17 +492,24 @@ def poll(args: argparse.Namespace) -> None:
             ["ls-tree", "-r", "--name-only", remote_ref, "orchestration/agent_inbox/codex"],
             check=False,
         )
-        if log or review_files:
+        actionable_reviews: list[tuple[str, str]] = []
+        for file_path in review_files.splitlines():
+            if not file_path.endswith(".md"):
+                continue
+            packet = git_stdout(["show", f"{remote_ref}:{file_path}"], check=False)
+            if is_actionable_status(read_status_from_text(packet)) and f"| From | {agent} |" in packet:
+                actionable_reviews.append((file_path, packet))
+
+        if log or actionable_reviews:
             found = True
             print(f"\n[submitted] {agent} branch {remote_ref}")
             if log:
                 print(log)
-            for file_path in review_files.splitlines():
-                if file_path.endswith(".md"):
-                    print(f"\n[review packet] {remote_ref}:{file_path}")
-                    print(git_stdout(["show", f"{remote_ref}:{file_path}"], check=False))
+            for file_path, packet in actionable_reviews:
+                print(f"\n[review packet] {remote_ref}:{file_path}")
+                print(packet)
 
-    codex_files = task_files("codex")
+    codex_files = [path for path in task_files("codex") if is_actionable_status(read_task_status(path))]
     if codex_files:
         found = True
         print("\n[codex local inbox]")
