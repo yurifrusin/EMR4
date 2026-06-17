@@ -9,9 +9,9 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Phase 2 diary foundation sprint |
-| Integrated through | `7b95515` |
+| Integrated through | current `master` |
 | Status | Ready for user review |
-| Last updated | 2026-06-17 |
+| Last updated | 2026-06-18 |
 
 ## What Changed
 
@@ -22,6 +22,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Multi-slot appointments span their real duration, overlapping bookings remain
   visible, and short appointment reasons are preserved in tooltips instead of
   being visibly clipped.
+- Narrow diary windows now wrap the top header controls instead of cutting them
+  off to the right.
 - Diary template backend foundation exists at `GET /api/v1/diary/template`.
 - Orchestration now has task packets, review packets, an integration log, audit,
   and stale disposable worktree detection.
@@ -37,10 +39,10 @@ These checks are worth doing before dispatching the next set of agent tasks:
 5. Check the seeded appointments:
    - 09:00 Margaret Thompson appears as confirmed / bold blue / all caps.
    - 09:15 Billy Frusin appears as a normal short booking without clipped reason text.
-   - 10:00 Margaret Thompson spans the expected longer duration.
+   - 10:00 Margaret Thompson spans 45 minutes and can show its reason line.
 6. Use Previous, Today, Next, and Refresh to confirm date navigation still works.
-7. Check narrow/mobile-ish width if convenient: columns should remain usable with
-   horizontal scrolling, not collapse into overlapping text.
+7. Check narrow/mobile-ish width: header controls should wrap into a taller header,
+   and columns should remain usable with horizontal scrolling.
 8. Open the break editor for a column, change a break locally, save, and confirm
    the break block re-renders.
 

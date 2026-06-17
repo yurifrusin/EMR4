@@ -262,11 +262,11 @@ def seed():
         # Margaret 09:00 is seeded as Confirmed so the diary's lifecycle
         # colour rendering (ALL-CAPS + blue) is demonstrated out of the box.
         sample_appts = [
-            (patient, _appt_dt(9, 0),  "Hypertension review",   AppointmentStatus.Confirmed),
-            (billy,   _appt_dt(9, 15), "Paediatric check-up",    AppointmentStatus.Booked),
-            (patient, _appt_dt(10, 0), "Care plan review",       AppointmentStatus.Booked),
+            (patient, _appt_dt(9, 0),  "Hypertension review",   AppointmentStatus.Confirmed, 30),
+            (billy,   _appt_dt(9, 15), "Paediatric check-up",    AppointmentStatus.Booked,    15),
+            (patient, _appt_dt(10, 0), "Care plan review",       AppointmentStatus.Booked,    45),
         ]
-        for pt, start, reason, init_status in sample_appts:
+        for pt, start, reason, init_status, duration_minutes in sample_appts:
             local_start = start.astimezone(practice_tz).time().replace(tzinfo=None)
             exists = db.query(Appointment).filter_by(
                 practice_id=practice.id,
@@ -284,7 +284,7 @@ def seed():
                     start_time=start,
                     appointment_date=today,
                     start_time_local=local_start,
-                    duration_minutes=15,
+                    duration_minutes=duration_minutes,
                     status=init_status,
                     reason=reason,
                     booked_via=BookingChannel.Receptionist,
@@ -292,6 +292,8 @@ def seed():
             elif exists.status == AppointmentStatus.Booked and init_status != AppointmentStatus.Booked:
                 # Idempotent upgrade: apply the demo status if user hasn't changed it
                 exists.status = init_status
+            if exists and exists.reason == reason and exists.duration_minutes == 15 and duration_minutes != 15:
+                exists.duration_minutes = duration_minutes
         db.flush()
         print(f"  Sample appointments seeded for today ({today})")
 

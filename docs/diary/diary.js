@@ -129,6 +129,24 @@ function apptTimeKey(apptOrIso) {
   return m ? `${m[1]}:${m[2]}` : null;
 }
 
+function apptDurationMins(appt, fallbackMins) {
+  const explicit = Number(appt?.duration_minutes);
+  if (Number.isFinite(explicit) && explicit > 0) {
+    return explicit;
+  }
+
+  if (appt?.start_time && appt?.end_time) {
+    const start = Date.parse(appt.start_time);
+    const end = Date.parse(appt.end_time);
+    const diff = (end - start) / 60000;
+    if (Number.isFinite(diff) && diff > 0) {
+      return diff;
+    }
+  }
+
+  return fallbackMins;
+}
+
 // ─── SLOT GENERATION ───────────────────────────────────────
 // Generates every time slot from start to end.
 // Breaks are per-column and are handled at the cell level.
@@ -302,8 +320,8 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
       const tY = toMins(apptTimeKey(y));
       if (tX !== tY) return tX - tY;
 
-      const dX = x.duration_minutes || intervalMins;
-      const dY = y.duration_minutes || intervalMins;
+      const dX = apptDurationMins(x, intervalMins);
+      const dY = apptDurationMins(y, intervalMins);
       return dY - dX;
     });
 
@@ -311,7 +329,7 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
     const lanes = [];
     colAppts.forEach(a => {
       const start = toMins(apptTimeKey(a));
-      const duration = Math.max(a.duration_minutes || intervalMins, intervalMins);
+      const duration = Math.max(apptDurationMins(a, intervalMins), intervalMins);
 
       let laneIdx = 0;
       while (laneIdx < lanes.length && lanes[laneIdx] > start) {
@@ -324,13 +342,13 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
     // Render appointments
     colAppts.forEach(a => {
       const start = toMins(apptTimeKey(a));
-      const duration = Math.max(a.duration_minutes || intervalMins, intervalMins);
+      const duration = Math.max(apptDurationMins(a, intervalMins), intervalMins);
 
       const topPx = (start - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
       const heightPx = duration * (SLOT_HEIGHT_PX / intervalMins);
 
       const cls = apptClass(a.status);
-      const color = a.appointment_type_id ? typeMap[a.appointment_type_id] : null;
+      const color = a.appointment_type?.color_hex || (a.appointment_type_id ? typeMap[a.appointment_type_id] : null);
 
       const span = document.createElement("span");
       span.className = `appt ${cls}`;
@@ -347,11 +365,14 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
       span.style.height = (heightPx - APPT_BLOCK_GAP_PX) + "px";
 
       const patientName = `${a.patient.first_name} ${a.patient.last_name}`;
-      span.textContent = patientName;
+      const name = document.createElement("span");
+      name.className = "appt-name";
+      name.textContent = patientName;
+      span.appendChild(name);
       if (a.reason) {
         span.title = `${patientName} - ${a.reason}`;
       }
-      if (a.reason && duration >= intervalMins * 2) {
+      if (a.reason && duration >= intervalMins * 3) {
         const reason = document.createElement("span");
         reason.className = "appt-reason";
         reason.textContent = a.reason;
@@ -477,7 +498,7 @@ async function loadDiary(silent = false) {
       const startKey = apptTimeKey(a);
       if (!startKey) return;
       const startMins = toMins(startKey);
-      const duration = a.duration_minutes || TEMPLATE.slot_defaults.interval_minutes;
+      const duration = apptDurationMins(a, TEMPLATE.slot_defaults.interval_minutes);
       const endMins = startMins + duration;
       
       let cur = startMins;
