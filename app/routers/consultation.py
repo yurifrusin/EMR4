@@ -3,6 +3,7 @@ import json
 import os
 import uuid
 from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi.responses import JSONResponse
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -15,7 +16,7 @@ from app.dependencies import get_db, get_current_user
 from app.models.patients import Patient
 from app.models.tenancy import User
 from app.models.clinical import Encounter, EncounterStatus, ClinicalDiagnosis, Prescription
-from app.models.billing import MbsClaim, MbsDirectory
+from app.models.billing import MbsClaim, MbsDirectory, ClaimStatus
 import datetime
 
 router = APIRouter(prefix="/api/v1", tags=["consultation"])
@@ -150,7 +151,7 @@ def _save_encounter(db: Session, patient: Patient, document_id: str, text: str,
                 encounter_id=encounter.id,
                 item_number=str(item_num),
                 description=item.get("description", ""),
-                claim_status="Finalized",
+                claim_status=ClaimStatus.Submitted,
             ))
 
     for diag in diagnoses:
@@ -345,7 +346,7 @@ async def finalize_consultation(
                 Patient.practice_id == current_user.practice_id,
             ).first()
             if not patient:
-                return {"_saved": False, "_save_error": f"Patient {payload.patient_id} not found"}
+                return JSONResponse(content={"_saved": False, "_save_error": f"Patient {payload.patient_id} not found"})
         else:
             patient = _get_or_create_default_patient(db, current_user.practice_id)
 
@@ -377,11 +378,11 @@ async def finalize_consultation(
             if rx:
                 lines.append("Prescribed: " + "; ".join(rx))
 
-        return {
+        return JSONResponse(content={
             "_saved": True,
             "encounter_id": str(encounter.id),
             "generated_clinical_note": "\n".join(lines),
-        }
+        })
     except Exception as e:
         db.rollback()
-        return {"_saved": False, "_save_error": str(e)}
+        return JSONResponse(content={"_saved": False, "_save_error": str(e)})

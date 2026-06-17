@@ -142,12 +142,25 @@ def slugify(text: str) -> str:
     return slug or "task"
 
 
-def inbox_dir(agent: str) -> Path:
-    return INBOX_ROOT / agent
+def repo_root_for_cwd(cwd: Path | None = None) -> Path:
+    """Return the git root for the active working directory."""
+    root_cwd = (cwd or Path.cwd()).resolve()
+    result = run_git(["rev-parse", "--show-toplevel"], cwd=root_cwd, check=False)
+    if result.returncode != 0:
+        return REPO_ROOT
+    return Path(result.stdout.strip()).resolve()
 
 
-def task_files(agent: str | None = None) -> list[Path]:
-    roots = [inbox_dir(agent)] if agent else [INBOX_ROOT / name for name in AGENTS]
+def inbox_root(repo_root: Path = REPO_ROOT) -> Path:
+    return repo_root / "orchestration" / "agent_inbox"
+
+
+def inbox_dir(agent: str, repo_root: Path = REPO_ROOT) -> Path:
+    return inbox_root(repo_root) / agent
+
+
+def task_files(agent: str | None = None, repo_root: Path = REPO_ROOT) -> list[Path]:
+    roots = [inbox_dir(agent, repo_root)] if agent else [inbox_root(repo_root) / name for name in AGENTS]
     files: list[Path] = []
     for root in roots:
         if root.exists():
@@ -216,8 +229,14 @@ def append_completion_note(path: Path, summary: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def create_codex_review_packet(agent: str, task_id: str, branch: str, message: str) -> Path:
-    review_dir = inbox_dir("codex")
+def create_codex_review_packet(
+    agent: str,
+    task_id: str,
+    branch: str,
+    message: str,
+    repo_root: Path = REPO_ROOT,
+) -> Path:
+    review_dir = inbox_dir("codex", repo_root)
     review_dir.mkdir(parents=True, exist_ok=True)
     review_id = f"review-{agent}-{task_id}"
     path = review_dir / f"{review_id}.md"
@@ -310,7 +329,8 @@ def handoff(args: argparse.Namespace) -> None:
 
 
 def submit(args: argparse.Namespace) -> None:
-    branch = git_stdout(["branch", "--show-current"])
+    repo = repo_root_for_cwd()
+    branch = git_stdout(["branch", "--show-current"], cwd=repo)
     if not branch:
         raise SystemExit("Cannot submit from a detached HEAD. Check out an agent branch first.")
     if branch in {"master", HANDOFF_REF}:
@@ -318,22 +338,22 @@ def submit(args: argparse.Namespace) -> None:
 
     if args.task and args.agent:
         matches = [
-            path for path in task_files(args.agent)
+            path for path in task_files(args.agent, repo)
             if path.stem == args.task or path.name == args.task
         ]
         if not matches:
             raise SystemExit(f"Task not found for {args.agent}: {args.task}")
         update_task_status(matches[0], "submitted")
         append_completion_note(matches[0], args.summary)
-        review_path = create_codex_review_packet(args.agent, matches[0].stem, branch, args.message)
-        print(f"[ok] wrote Codex review packet: {review_path.relative_to(REPO_ROOT)}")
+        review_path = create_codex_review_packet(args.agent, matches[0].stem, branch, args.message, repo)
+        print(f"[ok] wrote Codex review packet: {review_path.relative_to(repo)}")
 
     if args.commit_message:
-        commit_checkpoint(args.commit_message)
+        commit_checkpoint(args.commit_message, cwd=repo)
 
-    require_clean()
+    require_clean(repo)
 
-    head = git_stdout(["rev-parse", "--short", "HEAD"])
+    head = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
     print(f"[ok] submitting {branch} at {head}")
     if args.agent:
         print(f"[ok] submitting agent: {args.agent}")
@@ -341,7 +361,7 @@ def submit(args: argparse.Namespace) -> None:
         print(f"[note] {args.message}")
     if not args.no_push:
         print(f"[push] {branch} -> {args.remote}/{branch}")
-        print_result(run_git(["push", "-u", args.remote, branch]))
+        print_result(run_git(["push", "-u", args.remote, branch], cwd=repo))
     print()
     print("Codex/orchestrator should review this branch before merging or moving the baton.")
 

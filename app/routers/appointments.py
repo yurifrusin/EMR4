@@ -91,6 +91,11 @@ def _ensure_location(location_id: Optional[uuid.UUID], practice_id: uuid.UUID, d
 
 
 def _overlaps(start_a: datetime, duration_a: int, start_b: datetime, duration_b: int) -> bool:
+    # Strip timezone info so naive (request) and aware (DB TIMESTAMPTZ) datetimes compare safely.
+    if start_a.tzinfo is not None:
+        start_a = start_a.replace(tzinfo=None)
+    if start_b.tzinfo is not None:
+        start_b = start_b.replace(tzinfo=None)
     end_a = start_a + timedelta(minutes=duration_a)
     end_b = start_b + timedelta(minutes=duration_b)
     return start_a < end_b and end_a > start_b

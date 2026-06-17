@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-security-tests` |
-| Status | pending_review |
+| Status | integrated |
 | Submitted | 3737b7e |
 
 ## Summary
@@ -60,3 +60,8 @@ The task scope said "test files and minimal helpers only; no production changes.
 ## Note on `agent_worktrees.py submit`
 
 The `submit` command failed because `git_stdout(["branch", "--show-current"])` reads from `REPO_ROOT` (main repo, on `master`) not the agent worktree. Manual equivalent was performed: committed in worktree, updated task status, created this review packet, pushing `claude/current`.
+
+## Completion Notes
+
+- Review result: Integrated into `master` working tree. Regression suite passed locally with 21/21 tests.
+- Follow-up required: Keep the canonical time-model migration on the roadmap; the current timezone normalization is a tactical fix for mixed naive/aware datetimes.

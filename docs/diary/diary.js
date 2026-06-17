@@ -14,6 +14,8 @@ const BACKEND_URL = (window.location.port === "3000")
     ? window.location.origin
     : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
+const SLOT_HEIGHT_PX = 26;
+const APPT_BLOCK_GAP_PX = 3;
 
 // ─── DIARY TEMPLATE (embedded — mirrors diary_template.json at repo root) ─────
 // Breaks are per-column so each room can have different break windows.
@@ -168,7 +170,7 @@ function apptClass(status) {
 }
 
 // ─── RENDER GRID ───────────────────────────────────────────
-function renderGrid(slots, columns, apptLookup, typeMap) {
+function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
   const colgroup = document.getElementById("diary-colgroup");
   const thead    = document.getElementById("diary-thead");
   const tbody    = document.getElementById("diary-tbody");
@@ -262,12 +264,15 @@ function renderGrid(slots, columns, apptLookup, typeMap) {
         const appts = (col.practitioner_ahpra && apptLookup[col.practitioner_ahpra]?.[slotTime]) || [];
 
         if (!appts.length) {
-          const empty = document.createElement("span");
-          empty.className = "slot-empty";
-          empty.textContent = "»";
-          td.appendChild(empty);
+          const isOccupied = col.practitioner_ahpra && occupied[col.practitioner_ahpra]?.has(slotTime);
+          if (!isOccupied) {
+            const empty = document.createElement("span");
+            empty.className = "slot-empty";
+            empty.textContent = "»";
+            td.appendChild(empty);
+          }
         } else {
-          appts.forEach(a => {
+          appts.forEach((a, i) => {
             const cls   = apptClass(a.status);
             const color = a.appointment_type_id ? typeMap[a.appointment_type_id] : null;
             const span  = document.createElement("span");
@@ -276,6 +281,19 @@ function renderGrid(slots, columns, apptLookup, typeMap) {
               span.dataset.color = color;
               span.style.setProperty("--appt-color", color);
             }
+            
+            // Interval rendering styles
+            span.style.position = "absolute";
+            span.style.top = (1 + i * 4) + "px";
+            span.style.left = (1 + i * 8) + "px";
+            span.style.right = "1px";
+            span.style.zIndex = String(10 + i);
+            
+            const intervalMins = TEMPLATE.slot_defaults.interval_minutes || 15;
+            const duration = Math.max(a.duration_minutes || intervalMins, intervalMins);
+            const slotsCount = duration / intervalMins;
+            span.style.height = (slotsCount * SLOT_HEIGHT_PX - APPT_BLOCK_GAP_PX) + "px";
+            
             span.textContent = `${a.patient.first_name} ${a.patient.last_name}`;
             if (a.reason) {
               const reason = document.createElement("span");
@@ -397,7 +415,26 @@ async function loadDiary(silent = false) {
     const slots      = generateSlots(TEMPLATE);
     const apptLookup = buildApptLookup(appointments);
 
-    renderGrid(slots, TEMPLATE.columns, apptLookup, typeMap);
+    // Build occupied lookup to hide chevrons in spanned slots
+    const occupied = {};
+    appointments.forEach(a => {
+      const ahpra = a.practitioner?.ahpra_number;
+      if (!ahpra) return;
+      if (!occupied[ahpra]) occupied[ahpra] = new Set();
+      const startKey = apptTimeKey(a.start_time);
+      if (!startKey) return;
+      const startMins = toMins(startKey);
+      const duration = a.duration_minutes || TEMPLATE.slot_defaults.interval_minutes;
+      const endMins = startMins + duration;
+      
+      let cur = startMins;
+      while (cur < endMins) {
+        occupied[ahpra].add(fromMins(cur));
+        cur += TEMPLATE.slot_defaults.interval_minutes;
+      }
+    });
+
+    renderGrid(slots, TEMPLATE.columns, apptLookup, typeMap, occupied);
 
     const total = appointments.length;
     setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}`);
@@ -457,22 +494,24 @@ Office.onReady(() => {
 
   updateDateLabel();
 
-  Office.context.ui.addHandlerAsync(
-    Office.EventType.DialogParentMessageReceived,
-    arg => {
-      try {
-        const msg = JSON.parse(arg.message);
-        if (msg.type === "auth" && msg.token) {
-          token = msg.token;
-          localStorage.setItem("emr4_token", token);
-          loadDiary();
-          scheduleRefresh();
-        }
-      } catch (_) {}
-    }
-  );
+  if (Office.context?.ui?.addHandlerAsync) {
+    Office.context.ui.addHandlerAsync(
+      Office.EventType.DialogParentMessageReceived,
+      arg => {
+        try {
+          const msg = JSON.parse(arg.message);
+          if (msg.type === "auth" && msg.token) {
+            token = msg.token;
+            localStorage.setItem("emr4_token", token);
+            loadDiary();
+            scheduleRefresh();
+          }
+        } catch (_) {}
+      }
+    );
+  }
 
-  try { Office.context.ui.messageParent(JSON.stringify({ type: "ready" })); } catch (_) {}
+  try { Office.context?.ui?.messageParent(JSON.stringify({ type: "ready" })); } catch (_) {}
 
   if (token) { loadDiary(); scheduleRefresh(); }
 });

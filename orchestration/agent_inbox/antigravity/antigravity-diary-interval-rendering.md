@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | a647920 |
 | Start Command | `python scripts\agent_worktrees.py handin` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-interval-rendering --commit-message "Render diary appointments as intervals" --message "Diary interval rendering ready for Codex review"` |
@@ -47,8 +47,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Fill this in before submit:
-
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.js`, `docs/diary/diary.css`, `docs/diary/diary.html`.
+- Verification run: `node --check docs/diary/diary.js`.
+- Remaining risks: Visual overlap cascade is suitable for simple overlaps, but dense overlap lanes may need a stronger layout before interactive drag/drop.
