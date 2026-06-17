@@ -1,12 +1,12 @@
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from sqlalchemy import and_, func
 from sqlalchemy.orm import Session, joinedload
 
-from app.dependencies import get_db, get_current_user
-from app.models.tenancy import User, Practitioner
+from app.dependencies import get_db, get_current_user, require_role
+from app.models.patients import Patient
+from app.models.tenancy import User, UserRole, Practitioner, PracticeLocation
 from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     PractitionerSchedule, ScheduleOverride,
@@ -18,17 +18,136 @@ from app.schemas.appointments import (
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
 
+MUTATING_APPOINTMENT_ROLES = (
+    UserRole.Receptionist,
+    UserRole.GP,
+    UserRole.Nurse,
+    UserRole.Admin,
+    UserRole.PracticeOwner,
+)
+
+NON_BLOCKING_STATUSES = (
+    AppointmentStatus.Cancelled,
+    AppointmentStatus.NoShow,
+    AppointmentStatus.DNA,
+)
+
 
 def _get_appointment(appt_id: uuid.UUID, practice_id: uuid.UUID, db: Session) -> Appointment:
     appt = (
         db.query(Appointment)
-        .options(joinedload(Appointment.patient), joinedload(Appointment.practitioner))
+        .options(
+            joinedload(Appointment.patient),
+            joinedload(Appointment.practitioner),
+            joinedload(Appointment.appointment_type),
+        )
         .filter(Appointment.id == appt_id, Appointment.practice_id == practice_id)
         .first()
     )
     if not appt:
         raise HTTPException(status_code=404, detail="Appointment not found")
     return appt
+
+
+def _ensure_patient(patient_id: uuid.UUID, practice_id: uuid.UUID, db: Session) -> None:
+    exists = db.query(Patient.id).filter(
+        Patient.id == patient_id,
+        Patient.practice_id == practice_id,
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Patient not found")
+
+
+def _ensure_practitioner(practitioner_id: uuid.UUID, practice_id: uuid.UUID, db: Session) -> None:
+    exists = db.query(Practitioner.id).filter(
+        Practitioner.id == practitioner_id,
+        Practitioner.practice_id == practice_id,
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Practitioner not found")
+
+
+def _ensure_appointment_type(appointment_type_id: Optional[uuid.UUID], practice_id: uuid.UUID, db: Session) -> None:
+    if not appointment_type_id:
+        return
+    exists = db.query(AppointmentType.id).filter(
+        AppointmentType.id == appointment_type_id,
+        AppointmentType.practice_id == practice_id,
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Appointment type not found")
+
+
+def _ensure_location(location_id: Optional[uuid.UUID], practice_id: uuid.UUID, db: Session) -> None:
+    if not location_id:
+        return
+    exists = db.query(PracticeLocation.id).filter(
+        PracticeLocation.id == location_id,
+        PracticeLocation.practice_id == practice_id,
+        PracticeLocation.is_active == True,
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Practice location not found")
+
+
+def _overlaps(start_a: datetime, duration_a: int, start_b: datetime, duration_b: int) -> bool:
+    end_a = start_a + timedelta(minutes=duration_a)
+    end_b = start_b + timedelta(minutes=duration_b)
+    return start_a < end_b and end_a > start_b
+
+
+def _find_conflicting_appointment(
+    db: Session,
+    practice_id: uuid.UUID,
+    practitioner_id: uuid.UUID,
+    start_time: datetime,
+    duration_minutes: int,
+    exclude_id: Optional[uuid.UUID] = None,
+) -> Optional[Appointment]:
+    day_start = datetime.combine(start_time.date(), time.min).replace(tzinfo=start_time.tzinfo)
+    day_end = datetime.combine(start_time.date(), time.max).replace(tzinfo=start_time.tzinfo)
+    q = db.query(Appointment).filter(
+        Appointment.practice_id == practice_id,
+        Appointment.practitioner_id == practitioner_id,
+        Appointment.start_time >= day_start,
+        Appointment.start_time <= day_end,
+        Appointment.status.notin_(NON_BLOCKING_STATUSES),
+    )
+    if exclude_id:
+        q = q.filter(Appointment.id != exclude_id)
+
+    for existing in q.all():
+        if _overlaps(
+            start_time,
+            duration_minutes,
+            existing.start_time,
+            existing.duration_minutes or 0,
+        ):
+            return existing
+    return None
+
+
+def _raise_if_conflict(
+    db: Session,
+    practice_id: uuid.UUID,
+    practitioner_id: uuid.UUID,
+    start_time: datetime,
+    duration_minutes: int,
+    exclude_id: Optional[uuid.UUID] = None,
+) -> None:
+    conflict = _find_conflicting_appointment(
+        db, practice_id, practitioner_id, start_time, duration_minutes, exclude_id
+    )
+    if conflict:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "message": "Appointment conflicts with an existing booking",
+                "conflicting_appointment_id": str(conflict.id),
+                "conflicting_start_time": conflict.start_time.isoformat(),
+                "conflicting_end_time": conflict.end_time.isoformat(),
+            },
+        )
 
 
 # ── Appointment Types ─────────────────────────────────────────────────────────
@@ -60,7 +179,11 @@ def list_appointments(
 ):
     q = (
         db.query(Appointment)
-        .options(joinedload(Appointment.patient), joinedload(Appointment.practitioner))
+        .options(
+            joinedload(Appointment.patient),
+            joinedload(Appointment.practitioner),
+            joinedload(Appointment.appointment_type),
+        )
         .filter(Appointment.practice_id == current_user.practice_id)
     )
     if date_from:
@@ -80,14 +203,19 @@ def list_appointments(
 def create_appointment(
     body: AppointmentCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    practitioner = db.query(Practitioner).filter(
-        Practitioner.id == body.practitioner_id,
-        Practitioner.practice_id == current_user.practice_id,
-    ).first()
-    if not practitioner:
-        raise HTTPException(status_code=404, detail="Practitioner not found")
+    _ensure_patient(body.patient_id, current_user.practice_id, db)
+    _ensure_practitioner(body.practitioner_id, current_user.practice_id, db)
+    _ensure_appointment_type(body.appointment_type_id, current_user.practice_id, db)
+    _ensure_location(body.location_id, current_user.practice_id, db)
+    _raise_if_conflict(
+        db,
+        current_user.practice_id,
+        body.practitioner_id,
+        body.start_time,
+        body.duration_minutes,
+    )
 
     appt = Appointment(
         practice_id=current_user.practice_id,
@@ -113,7 +241,11 @@ def get_waiting_room(
 
     q = (
         db.query(Appointment)
-        .options(joinedload(Appointment.patient), joinedload(Appointment.practitioner))
+        .options(
+            joinedload(Appointment.patient),
+            joinedload(Appointment.practitioner),
+            joinedload(Appointment.appointment_type),
+        )
         .filter(
             Appointment.practice_id == current_user.practice_id,
             Appointment.start_time >= day_start,
@@ -145,10 +277,31 @@ def update_appointment(
     appointment_id: uuid.UUID,
     body: AppointmentUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
     appt = _get_appointment(appointment_id, current_user.practice_id, db)
-    for field, value in body.model_dump(exclude_unset=True).items():
+    values = body.model_dump(exclude_unset=True)
+
+    practitioner_id = values.get("practitioner_id", appt.practitioner_id)
+    appointment_type_id = values.get("appointment_type_id", appt.appointment_type_id)
+    location_id = values.get("location_id", appt.location_id)
+    start_time = values.get("start_time", appt.start_time)
+    duration_minutes = values.get("duration_minutes", appt.duration_minutes)
+
+    _ensure_practitioner(practitioner_id, current_user.practice_id, db)
+    _ensure_appointment_type(appointment_type_id, current_user.practice_id, db)
+    _ensure_location(location_id, current_user.practice_id, db)
+    if {"practitioner_id", "start_time", "duration_minutes"} & values.keys():
+        _raise_if_conflict(
+            db,
+            current_user.practice_id,
+            practitioner_id,
+            start_time,
+            duration_minutes,
+            exclude_id=appointment_id,
+        )
+
+    for field, value in values.items():
         setattr(appt, field, value)
     db.commit()
     return _get_appointment(appointment_id, current_user.practice_id, db)
@@ -159,7 +312,7 @@ def update_appointment_status(
     appointment_id: uuid.UUID,
     body: AppointmentStatusUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
     appt = _get_appointment(appointment_id, current_user.practice_id, db)
     appt.status = body.status
@@ -171,7 +324,7 @@ def update_appointment_status(
 def cancel_appointment(
     appointment_id: uuid.UUID,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
     appt = _get_appointment(appointment_id, current_user.practice_id, db)
     appt.status = AppointmentStatus.Cancelled
@@ -228,18 +381,20 @@ def get_available_slots(
         Appointment.practitioner_id == practitioner_id,
         Appointment.start_time >= day_start,
         Appointment.start_time < day_end,
-        Appointment.status != AppointmentStatus.Cancelled,
+        Appointment.status.notin_(NON_BLOCKING_STATUSES),
     ).all()
-
-    booked_times = {a.start_time for a in booked}
 
     slots = []
     current = day_start
     while current + timedelta(minutes=slot_mins) <= day_end:
+        available = not any(
+            _overlaps(current, slot_mins, appt.start_time, appt.duration_minutes or 0)
+            for appt in booked
+        )
         slots.append(ScheduleSlot(
             start_time=current,
             end_time=current + timedelta(minutes=slot_mins),
-            available=current not in booked_times,
+            available=available,
         ))
         current += timedelta(minutes=slot_mins)
 

@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, date, time
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from app.models.appointments import AppointmentStatus, BookingChannel
 
 
@@ -42,16 +42,18 @@ class AppointmentCreate(BaseModel):
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
     start_time: datetime
-    duration_minutes: int = 15
+    duration_minutes: int = Field(default=15, gt=0, le=480)
     reason: Optional[str] = None
     notes: Optional[str] = None
     booked_via: BookingChannel = BookingChannel.Receptionist
 
 
 class AppointmentUpdate(BaseModel):
+    practitioner_id: Optional[uuid.UUID] = None
     appointment_type_id: Optional[uuid.UUID] = None
+    location_id: Optional[uuid.UUID] = None
     start_time: Optional[datetime] = None
-    duration_minutes: Optional[int] = None
+    duration_minutes: Optional[int] = Field(default=None, gt=0, le=480)
     reason: Optional[str] = None
     notes: Optional[str] = None
     waiting_room: Optional[str] = None
@@ -70,6 +72,7 @@ class AppointmentOut(BaseModel):
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
     start_time: datetime
+    end_time: datetime
     duration_minutes: int
     status: AppointmentStatus
     reason: Optional[str] = None
@@ -80,6 +83,7 @@ class AppointmentOut(BaseModel):
     created_at: datetime
     patient: PatientBrief
     practitioner: PractitionerBrief
+    appointment_type: Optional[AppointmentTypeOut] = None
 
     model_config = {"from_attributes": True}
 

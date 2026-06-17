@@ -1,5 +1,6 @@
 import uuid
 import enum
+from datetime import timedelta
 from sqlalchemy import (
     Column, String, Boolean, DateTime, Integer, Enum, ForeignKey, Date,
     Time, Index,
@@ -64,6 +65,11 @@ class Appointment(Base):
 
     patient = relationship("Patient")
     practitioner = relationship("Practitioner")
+    appointment_type = relationship("AppointmentType")
+
+    @property
+    def end_time(self):
+        return self.start_time + timedelta(minutes=self.duration_minutes or 0)
 
     __table_args__ = (
         Index("ix_appointments_practice_id", "practice_id"),

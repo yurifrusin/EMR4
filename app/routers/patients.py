@@ -48,40 +48,49 @@ def create_patient_with_file(
         sys.path.insert(0, "")
     from create_patient_file import create_patient_docx, PatientData  # noqa: E402
 
-    # 1. Create the DB row.
-    patient = Patient(practice_id=current_user.practice_id, **body.model_dump())
-    db.add(patient)
-    db.commit()
-    db.refresh(patient)
+    doc_path = None
+    try:
+        # 1. Create the DB row without committing yet. If file generation fails,
+        #    rollback removes the patient row as well.
+        patient = Patient(practice_id=current_user.practice_id, **body.model_dump())
+        db.add(patient)
+        db.flush()
 
-    # 2. Build the PatientData — map the richer PatientCreate fields to the
-    #    simpler PatientData dataclass that the generator expects.
-    address_parts = filter(None, [
-        patient.address_line1,
-        patient.address_suburb,
-        patient.address_state,
-        patient.address_postcode,
-    ])
-    address_str = " ".join(address_parts)
-    phone_str = patient.phone_mobile or patient.phone_home or ""
+        # 2. Build the PatientData — map the richer PatientCreate fields to the
+        #    simpler PatientData dataclass that the generator expects.
+        address_parts = filter(None, [
+            patient.address_line1,
+            patient.address_suburb,
+            patient.address_state,
+            patient.address_postcode,
+        ])
+        address_str = " ".join(address_parts)
+        phone_str = patient.phone_mobile or patient.phone_home or ""
 
-    pd = PatientData(
-        first_name=patient.first_name,
-        last_name=patient.last_name,
-        date_of_birth=patient.date_of_birth,
-        sex=patient.sex or "Other",
-        address=address_str,
-        phone=phone_str,
-        medicare_number=patient.medicare_number or "",
-    )
+        pd = PatientData(
+            first_name=patient.first_name,
+            last_name=patient.last_name,
+            date_of_birth=patient.date_of_birth,
+            sex=patient.sex or "Other",
+            address=address_str,
+            phone=phone_str,
+            medicare_number=patient.medicare_number or "",
+        )
 
-    # 3. Generate the .docx, creating the output directory if needed.
-    output_dir = Path(settings.patient_files_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    doc_path = create_patient_docx(pd, output_dir=output_dir)
+        # 3. Generate the .docx, creating the output directory if needed.
+        output_dir = Path(settings.patient_files_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        doc_path = create_patient_docx(pd, output_dir=output_dir)
 
-    base = PatientOut.model_validate(patient)
-    return PatientWithFileOut(**base.model_dump(), generated_filename=doc_path.name)
+        db.commit()
+        db.refresh(patient)
+        base = PatientOut.model_validate(patient)
+        return PatientWithFileOut(**base.model_dump(), generated_filename=doc_path.name)
+    except Exception:
+        db.rollback()
+        if doc_path and doc_path.exists():
+            doc_path.unlink()
+        raise
 
 
 @router.get("/search", response_model=list[PatientOut])

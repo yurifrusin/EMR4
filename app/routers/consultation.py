@@ -11,8 +11,9 @@ import vertexai
 from vertexai.generative_models import GenerativeModel, GenerationConfig, Part
 from google.cloud import discoveryengine_v1 as discoveryengine
 from app.config import settings
-from app.dependencies import get_db
+from app.dependencies import get_db, get_current_user
 from app.models.patients import Patient
+from app.models.tenancy import User
 from app.models.clinical import Encounter, EncounterStatus, ClinicalDiagnosis, Prescription
 from app.models.billing import MbsClaim, MbsDirectory
 import datetime
@@ -102,16 +103,15 @@ def _search_mbs_rules(query: str, db: Session) -> str:
         return _search_local_mbs(query, db)
 
 
-def _get_or_create_default_patient(db: Session) -> Patient:
-    patient = db.query(Patient).filter_by(first_name="John", last_name="Citizen").first()
+def _get_or_create_default_patient(db: Session, practice_id: uuid.UUID) -> Patient:
+    patient = db.query(Patient).filter_by(
+        practice_id=practice_id,
+        first_name="John",
+        last_name="Citizen",
+    ).first()
     if not patient:
-        # Requires at least one practice to exist — use the first one found
-        from app.models.tenancy import Practice
-        practice = db.query(Practice).first()
-        if not practice:
-            raise RuntimeError("No practice found. Seed a practice first.")
         patient = Patient(
-            practice_id=practice.id,
+            practice_id=practice_id,
             first_name="John",
             last_name="Citizen",
             date_of_birth=datetime.date(1974, 4, 12),
@@ -220,7 +220,11 @@ Consultation Notes:
 
 
 @router.post("/analyze-consultation")
-async def analyze_consultation(payload: ConsultationPayload, db: Session = Depends(get_db)):
+async def analyze_consultation(
+    payload: ConsultationPayload,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     if len(payload.text_delta.strip()) < 10:
         return {"encounter_metadata": {}, "clinical_diagnoses": [], "medications_and_prescriptions": []}
 
@@ -245,7 +249,7 @@ async def analyze_consultation(payload: ConsultationPayload, db: Session = Depen
     save_error = None
     if payload.is_finalized:
         try:
-            patient = _get_or_create_default_patient(db)
+            patient = _get_or_create_default_patient(db, current_user.practice_id)
             overrides = payload.clinician_overrides
             consult_type = (
                 (overrides.consultation_type if overrides else None)
@@ -268,7 +272,10 @@ async def analyze_consultation(payload: ConsultationPayload, db: Session = Depen
 
 
 @router.post("/scribe-consultation")
-async def scribe_consultation(audio_file: UploadFile = File(...)):
+async def scribe_consultation(
+    audio_file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+):
     audio_bytes = await audio_file.read()
 
     audio_filename = f"{uuid.uuid4()}.webm"
@@ -325,15 +332,22 @@ Return strict JSON only, no markdown:
 
 
 @router.post("/finalize")
-async def finalize_consultation(payload: FinalizePayload, db: Session = Depends(get_db)):
+async def finalize_consultation(
+    payload: FinalizePayload,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     try:
         # Use provided patient_id; fall back to default only if not supplied
         if payload.patient_id:
-            patient = db.query(Patient).filter(Patient.id == payload.patient_id).first()
+            patient = db.query(Patient).filter(
+                Patient.id == payload.patient_id,
+                Patient.practice_id == current_user.practice_id,
+            ).first()
             if not patient:
                 return {"_saved": False, "_save_error": f"Patient {payload.patient_id} not found"}
         else:
-            patient = _get_or_create_default_patient(db)
+            patient = _get_or_create_default_patient(db, current_user.practice_id)
 
         consult_type = payload.clinician_overrides.consultation_type or "Standard Consultation"
         encounter = _save_encounter(
