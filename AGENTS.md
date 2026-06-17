@@ -444,6 +444,19 @@ The read-only first slice is shipped. Before adding booking/drag/status mutation
 5. **`Room` + `DiaryRoster` models** — date×room→practitioner|label + CRUD. Currently columns
    are hard-coded in `diary_template.json` / embedded in `diary.js`.
 
+#### ⚠️ Grid must be rebuilt before interactivity — per-column independent time slots
+
+The current grid is an HTML `<table>` with shared `<tr>` rows across all columns.
+This is **incompatible with interactivity**: you cannot insert a 10:10 slot in Room 1
+only, remove 10:15 from Room 2 to create a longer block, or drag-resize an appointment
+across arbitrary time boundaries.
+
+**Before any booking/drag/edit work, replace the `<table>` with independent CSS-positioned
+column divs.** Each column is its own stack; time labels are text within each slot div;
+slot height is proportional to duration (e.g. 15 min = 1 unit). No shared rows. The
+time gutter on the left is a reference overlay, not a structural spine. This is also the
+prerequisite for SSE push updates (incremental DOM patch vs full re-render).
+
 ### 🏗️ Later Phase 2 items (deferred)
 - **Parse & Lock** — now unnecessary for the diary (the grid replaces it). Still relevant if
   any Word-based annotation workflow needs structure extraction later.
