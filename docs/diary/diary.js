@@ -33,13 +33,17 @@ const TEMPLATE = {
       room_label: "Room 2", assignment: "Nurse",
       practitioner_ahpra: null, tint: "FFFF99",
       breaks: [
-        { label: "LUNCH", from: "13:00", to: "14:00" },
+        { label: "MORNING TEA", from: "10:45", to: "11:00" },
+        { label: "LUNCH",       from: "13:00", to: "14:00" },
       ],
     },
     {
       room_label: "Room 3", assignment: "[Available]",
       practitioner_ahpra: null, tint: null,
-      breaks: [],
+      breaks: [
+        { label: "MORNING TEA", from: "10:45", to: "11:00" },
+        { label: "LUNCH",       from: "13:00", to: "14:00" },
+      ],
     },
   ],
 };
