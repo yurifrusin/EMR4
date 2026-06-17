@@ -304,8 +304,10 @@ html, body {
 
 .appt-name {
   display: block;
+  line-height: 1.35;
   min-width: 0;
   overflow: hidden;
+  padding-bottom: 1px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -330,6 +332,7 @@ html, body {
 
 .appt-reason {
   font-size: 10px;
+  line-height: 1.2;
   color: var(--grey-3);
   margin-top: 1px;
   display: block;
