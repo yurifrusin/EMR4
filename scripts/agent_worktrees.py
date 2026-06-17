@@ -39,6 +39,13 @@ def git_stdout(args: list[str], cwd: Path = REPO_ROOT, check: bool = True) -> st
     return result.stdout.strip()
 
 
+def print_result(result: subprocess.CompletedProcess[str]) -> None:
+    if result.stdout:
+        print(result.stdout.strip())
+    if result.stderr:
+        sys.stderr.write(result.stderr)
+
+
 def require_clean(cwd: Path = REPO_ROOT) -> None:
     status = git_stdout(["status", "--porcelain"], cwd=cwd)
     if status:
@@ -47,9 +54,28 @@ def require_clean(cwd: Path = REPO_ROOT) -> None:
         raise SystemExit("Commit, stash, or ignore local files before continuing.")
 
 
+def commit_checkpoint(message: str, cwd: Path = REPO_ROOT) -> None:
+    run_git(["add", "-A"], cwd=cwd)
+    status = git_stdout(["status", "--porcelain"], cwd=cwd)
+    if not status:
+        print("[skip] No changes to commit.")
+        return
+
+    result = run_git(["commit", "-m", message], cwd=cwd)
+    print_result(result)
+
+
 def branch_exists(branch: str) -> bool:
     result = run_git(["show-ref", "--verify", "--quiet", f"refs/heads/{branch}"], check=False)
     return result.returncode == 0
+
+
+def push_handoff_refs(branch: str, remote: str) -> None:
+    print(f"[push] {branch} -> {remote}/{branch}")
+    print_result(run_git(["push", "-u", remote, branch]))
+
+    print(f"[push] {HANDOFF_REF} -> {remote}/{HANDOFF_REF}")
+    print_result(run_git(["push", remote, f"{HANDOFF_REF}:{HANDOFF_REF}"]))
 
 
 def setup(args: argparse.Namespace) -> None:
@@ -83,10 +109,16 @@ def setup(args: argparse.Namespace) -> None:
 
 
 def handoff(args: argparse.Namespace) -> None:
+    if args.commit_message:
+        commit_checkpoint(args.commit_message)
+
     require_clean()
 
     head = git_stdout(["rev-parse", "--short", "HEAD"])
     branch = git_stdout(["branch", "--show-current"])
+    if not branch:
+        raise SystemExit("Cannot hand off from a detached HEAD. Check out an agent branch first.")
+
     run_git(["branch", "-f", HANDOFF_REF, "HEAD"])
 
     print(f"[ok] {HANDOFF_REF} now points to {head} from {branch}")
@@ -94,14 +126,22 @@ def handoff(args: argparse.Namespace) -> None:
         print(f"[ok] outgoing agent: {args.agent}")
     if args.message:
         print(f"[note] {args.message}")
+
+    if not args.no_push:
+        push_handoff_refs(branch, args.remote)
+
     print()
     print("Next agent should run from its own worktree:")
-    print(f"  python scripts\\agent_worktrees.py sync --ref {HANDOFF_REF}")
+    print(f"  python scripts\\agent_worktrees.py sync --fetch --ref {HANDOFF_REF}")
 
 
 def sync(args: argparse.Namespace) -> None:
     repo = Path.cwd().resolve()
     require_clean(repo)
+
+    if args.fetch:
+        print(f"[fetch] {args.remote}")
+        print_result(run_git(["fetch", args.remote], cwd=repo))
 
     before = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
     run_git(["merge", "--ff-only", args.ref], cwd=repo)
@@ -128,13 +168,18 @@ def main() -> None:
     setup_parser.add_argument("--start-ref", default="master")
     setup_parser.set_defaults(func=setup)
 
-    handoff_parser = subparsers.add_parser("handoff", help="Move handoff/current to HEAD")
+    handoff_parser = subparsers.add_parser("handoff", help="Commit/checkpoint if requested, move handoff/current, and push")
     handoff_parser.add_argument("--agent", choices=sorted(AGENTS))
     handoff_parser.add_argument("--message", default="")
+    handoff_parser.add_argument("--commit-message", default="", help="Stage all non-ignored changes and commit before handoff")
+    handoff_parser.add_argument("--remote", default="origin")
+    handoff_parser.add_argument("--no-push", action="store_true", help="Do not push the current branch or handoff/current")
     handoff_parser.set_defaults(func=handoff)
 
     sync_parser = subparsers.add_parser("sync", help="Fast-forward current worktree to the handoff ref")
     sync_parser.add_argument("--ref", default=HANDOFF_REF)
+    sync_parser.add_argument("--fetch", action="store_true", help="Fetch from the remote before merging the baton")
+    sync_parser.add_argument("--remote", default="origin")
     sync_parser.set_defaults(func=sync)
 
     status_parser = subparsers.add_parser("status", help="Show branch and worktree status")

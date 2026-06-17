@@ -53,15 +53,16 @@ worktrees at once.
 
 1. Open the agent's own worktree.
 2. Read `AGENTS.md`, `CLAUDE.md` where relevant, and `implementation_plan.md`.
-3. Fast-forward to the baton:
+3. Fetch and fast-forward to the baton:
 
 ```powershell
-python scripts\agent_worktrees.py sync
+python scripts\agent_worktrees.py sync --fetch
 ```
 
 or manually:
 
 ```powershell
+git fetch origin
 git merge --ff-only handoff/current
 ```
 
@@ -69,15 +70,20 @@ git merge --ff-only handoff/current
 
 ### Ending a session / handing off
 
-1. Commit all intentional project-code changes on the current agent branch.
-2. Update this file if state, architecture, gotchas, or next steps changed.
-3. Move the baton:
+If the user says **"handoff"**, do all of this before stopping:
+
+1. Update this file if state, architecture, gotchas, or next steps changed.
+2. Run the relevant checks for the touched area, or record why they were not run.
+3. Commit all intentional project-code changes on the current agent branch.
+4. Move the baton and push the current branch + `handoff/current`:
 
 ```powershell
-python scripts\agent_worktrees.py handoff --agent codex --message "Short baton note"
+python scripts\agent_worktrees.py handoff --agent codex --commit-message "Short commit message" --message "Short baton note"
 ```
 
 Use `--agent claude` or `--agent antigravity` from those worktrees.
+If the work is already committed and the tree is clean, omit `--commit-message`.
+Use `--no-push` only when the user explicitly asks for a local-only handoff.
 
 ### Single-track rule for now
 
