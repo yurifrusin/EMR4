@@ -363,8 +363,12 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
       span.style.right = "1px";
       span.style.zIndex = String(10 + a._laneIdx);
       span.style.height = (heightPx - APPT_BLOCK_GAP_PX) + "px";
+      span.style.setProperty("--appt-height", (heightPx - APPT_BLOCK_GAP_PX) + "px");
+      span.tabIndex = 0;
 
       const patientName = `${a.patient.first_name} ${a.patient.last_name}`;
+      span.setAttribute("role", "button");
+      span.setAttribute("aria-label", a.reason ? `${patientName}. ${a.reason}` : patientName);
       const name = document.createElement("span");
       name.className = "appt-name";
       name.textContent = patientName;
@@ -378,6 +382,19 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
         reason.textContent = a.reason;
         span.appendChild(reason);
       }
+
+      span.addEventListener("click", e => {
+        e.stopPropagation();
+        const wasActive = span.classList.contains("appt-active");
+        document.querySelectorAll(".appt-active").forEach(el => el.classList.remove("appt-active"));
+        if (!wasActive) span.classList.add("appt-active");
+      });
+
+      span.addEventListener("keydown", e => {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        e.preventDefault();
+        span.click();
+      });
 
       columnBody.appendChild(span);
     });
@@ -560,6 +577,9 @@ Office.onReady(() => {
   document.getElementById("btn-modal-add").onclick = addBreakRow;
   document.getElementById("btn-modal-save").onclick = saveBreaks;
   document.getElementById("btn-modal-close").onclick = closeBreakModal;
+  document.getElementById("diary-grid").addEventListener("click", () => {
+    document.querySelectorAll(".appt-active").forEach(el => el.classList.remove("appt-active"));
+  });
 
   // Close modal on backdrop click
   document.getElementById("break-modal").addEventListener("click", e => {
