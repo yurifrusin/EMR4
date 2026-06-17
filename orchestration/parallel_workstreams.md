@@ -64,6 +64,19 @@ When reporting progress to the user, Codex should use this shape:
 - **Verified:** checks run and failures/warnings.
 - **Aligned:** which refs were pushed/realigned.
 - **Retirement:** stale disposable worktrees removed or left for review.
+- **User Review:** what the user should manually test before the next dispatch,
+  or "none required" with the reason.
+- **Next Direction:** Codex's recommendation for the next project slice and any
+  project-level concerns raised by the integrated agent work.
+
+After every fully integrated batch, Codex updates
+`orchestration/sprint_closeout.md` with:
+
+- what changed
+- recommended user review
+- what is not required before moving on
+- known follow-up
+- recommended next direction
 
 ## Reasoning Budget Guidance
 

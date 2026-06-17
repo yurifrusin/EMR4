@@ -21,6 +21,7 @@ HANDOFF_REF = "handoff/current"
 INBOX_ROOT = REPO_ROOT / "orchestration" / "agent_inbox"
 PROTOCOL_ALERTS_PATH = REPO_ROOT / "orchestration" / "protocol_alerts.md"
 INTEGRATION_LOG_PATH = REPO_ROOT / "orchestration" / "integration_log.md"
+SPRINT_CLOSEOUT_PATH = REPO_ROOT / "orchestration" / "sprint_closeout.md"
 DURABLE_BRANCHES = {"master", HANDOFF_REF, *AGENTS.values()}
 
 
@@ -762,6 +763,13 @@ def retire_stale(args: argparse.Namespace) -> None:
         print("Dry run only. Re-run with --apply to remove the clean stale worktree directories.")
 
 
+def closeout(_: argparse.Namespace) -> None:
+    if not SPRINT_CLOSEOUT_PATH.exists():
+        print("[missing] orchestration/sprint_closeout.md")
+        return
+    print(SPRINT_CLOSEOUT_PATH.read_text(encoding="utf-8"))
+
+
 def poll(args: argparse.Namespace) -> None:
     if args.fetch:
         print(f"[fetch] {args.remote}")
@@ -930,6 +938,9 @@ def main() -> None:
     retire_parser = subparsers.add_parser("retire-stale", help="Dry-run removal of clean stale disposable worker worktrees")
     retire_parser.add_argument("--apply", action="store_true", help="Actually remove clean stale disposable worktree directories")
     retire_parser.set_defaults(func=retire_stale)
+
+    closeout_parser = subparsers.add_parser("closeout", help="Print the latest user review checklist and next recommendation")
+    closeout_parser.set_defaults(func=closeout)
 
     status_parser = subparsers.add_parser("status", help="Show branch and worktree status")
     status_parser.set_defaults(func=status)

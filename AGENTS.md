@@ -207,6 +207,12 @@ python scripts\agent_worktrees.py retire-stale --apply
 `retire-stale` is a dry run by default. Dirty worktrees are never removed by the
 routine; they must be reviewed or explicitly abandoned first.
 
+6. Update `orchestration/sprint_closeout.md` and report to the user:
+   - what they should manually test before the next dispatch
+   - what does not need manual testing yet
+   - where Codex recommends taking the project next
+   - any project-level concern raised by the integrated submissions
+
 ### Parallel ownership rule
 
 Split by ownership boundary:
