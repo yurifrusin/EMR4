@@ -1,45 +1,38 @@
 {
-  "_comment": "EMR4 Centaur Diary Template — dev seed. Structured to scale to 10 columns.",
+  "_comment": "EMR4 Centaur Diary Template — dev seed. Breaks are per-column. Structured to scale to 10 columns.",
   "practice_name": "EMR4 Dev Clinic",
   "slot_defaults": {
     "start": "09:00",
     "end": "17:00",
     "interval_minutes": 15
   },
-  "breaks": [
-    {
-      "label": "MORNING TEA (10:45 – 11:00)",
-      "from": "10:45",
-      "to": "11:00"
-    },
-    {
-      "label": "LUNCH (13:00 – 14:00)",
-      "from": "13:00",
-      "to": "14:00"
-    }
-  ],
   "columns": [
     {
       "room_label": "Room 1",
       "assignment": "Dr Alex Shera",
       "practitioner_ahpra": "MED0001234567",
-      "tint": null
+      "tint": null,
+      "breaks": [
+        { "label": "MORNING TEA", "from": "10:45", "to": "11:00" },
+        { "label": "LUNCH",       "from": "13:00", "to": "14:00" }
+      ]
     },
     {
       "room_label": "Room 2",
       "assignment": "Nurse",
       "practitioner_ahpra": null,
-      "tint": "FFFF99"
+      "tint": "FFFF99",
+      "breaks": [
+        { "label": "LUNCH", "from": "13:00", "to": "14:00" }
+      ]
     },
     {
       "room_label": "Room 3",
       "assignment": "[Available]",
       "practitioner_ahpra": null,
-      "tint": null
+      "tint": null,
+      "breaks": []
     }
   ],
-  "footer": [
-    "Messages:",
-    "Phone Consultations:"
-  ]
+  "footer": ["Messages:", "Phone Consultations:"]
 }

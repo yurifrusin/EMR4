@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR Centaur — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=1" />
-  <script src="diary.js?v=1" defer></script>
+  <link rel="stylesheet" href="diary.css?v=2" />
+  <script src="diary.js?v=2" defer></script>
 </head>
 <body>
 
@@ -35,20 +35,32 @@
 
 <!-- ═══ GRID ═════════════════════════════════════════════ -->
 <div id="diary-body">
-  <!-- Loading spinner (visible while fetching) -->
   <div id="diary-loading">
     <div class="spinner"></div>
   </div>
-
-  <!-- Error state (shown on fetch failure) -->
   <div id="diary-error" class="hidden"></div>
 
-  <!-- The grid table is injected here by diary.js -->
   <table id="diary-grid" class="hidden">
     <colgroup id="diary-colgroup"></colgroup>
     <thead id="diary-thead"></thead>
     <tbody id="diary-tbody"></tbody>
   </table>
+</div>
+
+<!-- ═══ BREAK EDIT MODAL ════════════════════════════════ -->
+<div id="break-modal" class="break-modal hidden" role="dialog" aria-modal="true">
+  <div class="break-modal-inner">
+    <div class="break-modal-header">
+      <span id="break-modal-title" class="break-modal-title">Edit Breaks</span>
+      <button id="btn-modal-close" class="break-modal-close" title="Close">✕</button>
+    </div>
+    <p class="break-modal-hint">Cells within a break window show the break label instead of a bookable slot.</p>
+    <div id="break-modal-body" class="break-modal-body"></div>
+    <div class="break-modal-footer">
+      <button id="btn-modal-add" class="btn-ghost-sm">+ Add break</button>
+      <button id="btn-modal-save" class="btn-primary-sm">Save</button>
+    </div>
+  </div>
 </div>
 
 </body>

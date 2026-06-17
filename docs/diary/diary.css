@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   EMR4 Centaur — Diary Grid styles  v1
+   EMR4 Centaur — Diary Grid styles  v2
    ═══════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,11 +15,11 @@
   --grey-3:      #9b9b9b;
   --grey-4:      #555;
   --text:        #1a1a2e;
-  --white:       #ffffff;
-  --break-bg:    #f2f2f2;
+  --break-bg:    #ebebeb;
   --header-bg:   #e6e6e6;
+  --white:       #ffffff;
   --font:        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --time-col:    60px;
+  --time-col:    58px;
 }
 
 html, body {
@@ -49,11 +49,6 @@ html, body {
   min-height: 46px;
 }
 
-.diary-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 .diary-logo-text {
   font-size: 13px;
   font-weight: 700;
@@ -107,7 +102,6 @@ html, body {
   white-space: nowrap;
 }
 #btn-refresh:hover { background: rgba(255,255,255,0.28); }
-#btn-refresh:disabled { opacity: 0.5; cursor: default; }
 
 #diary-status {
   font-size: 10px;
@@ -135,7 +129,6 @@ html, body {
   table-layout: fixed;
 }
 
-/* Time column */
 #diary-grid colgroup col.col-time {
   width: var(--time-col);
 }
@@ -144,10 +137,9 @@ html, body {
 #diary-grid thead tr th {
   background: var(--header-bg);
   border: 1px solid var(--grey-2);
-  padding: 6px 8px;
+  padding: 5px 8px;
   text-align: left;
   font-size: 11px;
-  font-weight: 700;
   color: var(--text);
   position: sticky;
   top: 0;
@@ -159,6 +151,15 @@ html, body {
   font-weight: 400;
   width: var(--time-col);
 }
+#diary-grid thead tr th.th-col {
+  position: relative;
+  padding-right: 28px; /* room for edit button */
+}
+
+.col-assignment {
+  font-size: 11px;
+  font-weight: 700;
+}
 .col-room-label {
   font-size: 10px;
   font-weight: 400;
@@ -166,38 +167,57 @@ html, body {
   margin-top: 1px;
 }
 
+/* Edit-breaks button in column header */
+.break-edit-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: var(--grey-3);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 1px 3px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.break-edit-btn:hover {
+  color: var(--blue-mid);
+  border-color: var(--blue-mid);
+}
+
 /* Slot rows */
 #diary-grid tbody tr.slot-row td {
   border: 1px solid var(--grey-2);
-  padding: 3px 6px;
+  padding: 2px 5px;
   vertical-align: top;
-  min-height: 28px;
-  height: 28px;
+  height: 26px;
 }
 #diary-grid tbody tr.slot-row td.td-time {
   color: var(--grey-3);
   font-size: 10px;
   font-weight: 500;
   text-align: right;
-  padding-right: 8px;
+  padding-right: 7px;
   white-space: nowrap;
   background: var(--white);
 }
 #diary-grid tbody tr.slot-row td.td-cell {
   background: var(--white);
-  cursor: default;
 }
 
-/* Break rows */
-#diary-grid tbody tr.break-row td {
+/* Break cells (per-column) */
+#diary-grid tbody tr.slot-row td.break-cell {
   background: var(--break-bg);
-  border: 1px solid var(--grey-2);
-  padding: 4px 8px;
+  border-color: #d8d8d8;
+}
+.break-label {
   font-size: 10px;
   font-weight: 700;
   color: var(--grey-4);
-  text-align: center;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
 }
 
 /* ─── APPOINTMENT LIFECYCLE STYLING ─────────── */
@@ -210,66 +230,32 @@ html, body {
   font-size: 11px;
 }
 
-/* Empty bookable slot */
 .slot-empty {
   color: var(--grey-3);
   font-size: 11px;
   user-select: none;
 }
 
-/* Booked — plain black */
-.appt-booked {
-  color: var(--text);
-}
+.appt-booked    { color: var(--text); }
+.appt-confirmed { color: #0000ff; font-weight: 700; text-transform: uppercase; }
+.appt-arrived   { color: #0000ff; font-weight: 700; text-transform: uppercase; }
+.appt-inconsult { color: var(--text); text-decoration: underline; }
+.appt-completed { color: var(--green); }
+.appt-cancelled { color: var(--grey-3); text-decoration: line-through; }
 
-/* Confirmed — ALL-CAPS + bold + blue */
-.appt-confirmed {
-  color: #0000ff;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-/* Arrived — same as confirmed (chevron already gone in the grid; no chevron in web) */
-.appt-arrived {
-  color: #0000ff;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-/* In Consult — underline */
-.appt-inconsult {
-  color: var(--text);
-  text-decoration: underline;
-}
-
-/* Completed — green */
-.appt-completed {
-  color: var(--green);
-}
-
-/* Cancelled / NoShow / DNA — muted strikethrough */
-.appt-cancelled {
-  color: var(--grey-3);
-  text-decoration: line-through;
-}
-
-/* Left border accent using appointment-type colour */
 .appt[data-color] {
   border-left: 3px solid var(--appt-color, var(--grey-2));
   padding-left: 5px;
 }
 
-/* Appointment reason sub-label */
 .appt-reason {
   font-size: 10px;
   color: var(--grey-3);
   margin-top: 1px;
   display: block;
-}
-
-/* Column tint (nurse columns etc.) */
-td.td-cell.tinted {
-  /* background set inline via style attribute */
+  text-transform: none;
+  font-weight: 400;
+  text-decoration: none;
 }
 
 /* ─── LOADING / ERROR STATES ─────────────────── */
@@ -298,3 +284,130 @@ td.td-cell.tinted {
   color: var(--red);
   font-size: 12px;
 }
+
+/* ─── BREAK EDIT MODAL ───────────────────────── */
+
+.break-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.break-modal-inner {
+  background: var(--white);
+  border-radius: 8px;
+  width: 440px;
+  max-width: calc(100vw - 32px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+.break-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--grey-2);
+  flex-shrink: 0;
+}
+.break-modal-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.break-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--grey-3);
+  font-size: 14px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+.break-modal-close:hover { color: var(--text); background: var(--grey-1); }
+
+.break-modal-hint {
+  font-size: 11px;
+  color: var(--grey-3);
+  padding: 8px 16px 0;
+  flex-shrink: 0;
+}
+
+.break-modal-body {
+  padding: 10px 16px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.break-row-edit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.break-row-edit input[type="time"],
+.break-row-edit input[type="text"] {
+  border: 1px solid var(--grey-2);
+  border-radius: 4px;
+  padding: 4px 7px;
+  font-size: 12px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+}
+.break-row-edit input[type="time"] { width: 90px; flex-shrink: 0; }
+.break-row-edit input[type="text"] { flex: 1; }
+.br-sep { color: var(--grey-3); flex-shrink: 0; }
+.br-del {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--grey-3);
+  font-size: 12px;
+  flex-shrink: 0;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+.br-del:hover { color: var(--red); background: #fef0ef; }
+
+.break-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 14px;
+  border-top: 1px solid var(--grey-2);
+  flex-shrink: 0;
+}
+
+.btn-ghost-sm {
+  background: none;
+  border: 1px solid var(--grey-2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 5px 10px;
+  color: var(--blue-mid);
+}
+.btn-ghost-sm:hover { background: var(--blue-light); }
+
+.btn-primary-sm {
+  background: var(--blue-mid);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 14px;
+  color: white;
+}
+.btn-primary-sm:hover { background: var(--blue-dark); }

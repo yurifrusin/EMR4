@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-//  EMR Centaur — Diary Grid  v1
+//  EMR Centaur — Diary Grid  v2
 //  Launched via displayDialogAsync from the taskpane.
 //  No patient required — diary is practice/day-scoped.
 //  Auth token delivered via messageChild from taskpane after
@@ -15,28 +15,56 @@ const BACKEND_URL = (window.location.port === "3000")
     : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
 
-// ─── DIARY TEMPLATE (embedded — will move to API when template-builder ships) ─
-// Mirrors diary_template.json at the repo root.
+// ─── DIARY TEMPLATE (embedded — mirrors diary_template.json at repo root) ─────
+// Breaks are per-column so each room can have different break windows.
 const TEMPLATE = {
   practice_name: "EMR4 Dev Clinic",
   slot_defaults: { start: "09:00", end: "17:00", interval_minutes: 15 },
-  breaks: [
-    { label: "MORNING TEA (10:45 – 11:00)", from: "10:45", to: "11:00" },
-    { label: "LUNCH (13:00 – 14:00)",        from: "13:00", to: "14:00" },
-  ],
   columns: [
-    { room_label: "Room 1", assignment: "Dr Alex Shera",  practitioner_ahpra: "MED0001234567", tint: null },
-    { room_label: "Room 2", assignment: "Nurse",          practitioner_ahpra: null,            tint: "FFFF99" },
-    { room_label: "Room 3", assignment: "[Available]",    practitioner_ahpra: null,            tint: null },
+    {
+      room_label: "Room 1", assignment: "Dr Alex Shera",
+      practitioner_ahpra: "MED0001234567", tint: null,
+      breaks: [
+        { label: "MORNING TEA", from: "10:45", to: "11:00" },
+        { label: "LUNCH",       from: "13:00", to: "14:00" },
+      ],
+    },
+    {
+      room_label: "Room 2", assignment: "Nurse",
+      practitioner_ahpra: null, tint: "FFFF99",
+      breaks: [
+        { label: "LUNCH", from: "13:00", to: "14:00" },
+      ],
+    },
+    {
+      room_label: "Room 3", assignment: "[Available]",
+      practitioner_ahpra: null, tint: null,
+      breaks: [],
+    },
   ],
-  footer: ["Messages:", "Phone Consultations:"],
 };
 
+// ─── BREAK OVERRIDES (per-column, persisted to localStorage) ──────────────────
+const BREAKS_KEY = "emr4_diary_breaks_v1";
+let breakOverrides = {};   // { room_label: [{label, from, to}, ...] }
+
+function loadBreakOverrides() {
+  try { breakOverrides = JSON.parse(localStorage.getItem(BREAKS_KEY) || "{}"); }
+  catch { breakOverrides = {}; }
+}
+function saveBreakOverrides() {
+  localStorage.setItem(BREAKS_KEY, JSON.stringify(breakOverrides));
+}
+function getColumnBreaks(col) {
+  return breakOverrides[col.room_label] ?? col.breaks ?? [];
+}
+
 // ─── STATE ────────────────────────────────────────────────
-let token      = localStorage.getItem("emr4_token"); // refreshed via messageChild
-let diaryDate  = new Date();                          // the day currently displayed
+let token      = localStorage.getItem("emr4_token");
+let diaryDate  = new Date();
 let refreshTimer = null;
-const REFRESH_INTERVAL_MS = 60_000;                  // auto-refresh every 60 s
+const REFRESH_INTERVAL_MS = 60_000;
+let editingColIndex = null;  // which column's breaks are being edited
 
 // ─── UTILITIES ────────────────────────────────────────────
 function escHtml(str) {
@@ -81,37 +109,26 @@ function toMins(t) {
 function fromMins(m) {
   return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 }
-function dateToAEDT(d) {
-  // Returns a Date with time zone coerced to 00:00 local, suitable for ISO string filtering.
-  const copy = new Date(d);
-  copy.setHours(0, 0, 0, 0);
-  return copy;
+
+// Extract HH:MM from an ISO datetime string WITHOUT converting to local timezone.
+// The server stores clinic-local times as UTC-naive datetimes, so the HH:MM
+// component of the ISO string is the intended booking time regardless of the
+// client's local timezone (e.g. "2026-06-17T09:00:00+00:00" → "09:00").
+function apptTimeKey(isoStr) {
+  const m = isoStr.match(/T(\d{2}):(\d{2})/);
+  return m ? `${m[1]}:${m[2]}` : null;
 }
 
 // ─── SLOT GENERATION ───────────────────────────────────────
+// Generates every time slot from start to end.
+// Breaks are per-column and are handled at the cell level.
 function generateSlots(template) {
   const { start, end, interval_minutes } = template.slot_defaults;
-  const breaks = template.breaks || [];
-  const breakWindows = breaks.map(b => ({ from: toMins(b.from), to: toMins(b.to), label: b.label }));
-
   const slots = [];
   let cur = toMins(start);
   const endMins = toMins(end);
-
   while (cur < endMins) {
-    // At a break start → emit break row, jump to break end
-    const brk = breakWindows.find(b => b.from === cur);
-    if (brk) {
-      slots.push({ type: "break", label: brk.label });
-      cur = brk.to;
-      continue;
-    }
-    // Inside a break window → skip
-    if (breakWindows.some(b => cur > b.from && cur < b.to)) {
-      cur += interval_minutes;
-      continue;
-    }
-    slots.push({ type: "slot", time: fromMins(cur) });
+    slots.push(fromMins(cur));
     cur += interval_minutes;
   }
   return slots;
@@ -119,14 +136,13 @@ function generateSlots(template) {
 
 // ─── APPOINTMENT LOOKUP ────────────────────────────────────
 // Returns { ahpra: { "09:00": [appt, ...] } }
-// Appointments without a practitioner AHPRA go into key "__none__".
 function buildApptLookup(appointments) {
   const lookup = {};
   appointments.forEach(a => {
     const ahpra = a.practitioner?.ahpra_number || "__none__";
     if (!lookup[ahpra]) lookup[ahpra] = {};
-    const start = new Date(a.start_time);
-    const key = `${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}`;
+    const key = apptTimeKey(a.start_time);
+    if (!key) return;
     if (!lookup[ahpra][key]) lookup[ahpra][key] = [];
     lookup[ahpra][key].push(a);
   });
@@ -161,109 +177,183 @@ function renderGrid(slots, columns, apptLookup, typeMap) {
   const timeCol = document.createElement("col");
   timeCol.className = "col-time";
   colgroup.appendChild(timeCol);
-  columns.forEach(() => {
-    const col = document.createElement("col");
-    colgroup.appendChild(col);
-  });
+  columns.forEach(() => colgroup.appendChild(document.createElement("col")));
 
   // ── thead ─────────────────────────────────────────────────
   const headerRow = document.createElement("tr");
 
-  // Time header cell
   const timeTh = document.createElement("th");
   timeTh.className = "th-time";
   timeTh.textContent = "TIME";
   headerRow.appendChild(timeTh);
 
-  // Room header cells
-  columns.forEach(col => {
+  columns.forEach((col, colIdx) => {
     const th = document.createElement("th");
-    th.innerHTML = `<strong>${escHtml(col.assignment)}</strong>
-      <div class="col-room-label">${escHtml(col.room_label)}</div>`;
+    th.className = "th-col";
     if (col.tint) th.style.backgroundColor = `#${col.tint}`;
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "break-edit-btn";
+    editBtn.title = "Edit breaks for this column";
+    editBtn.textContent = "✎";
+    editBtn.onclick = e => { e.stopPropagation(); openBreakModal(colIdx); };
+
+    const nameDiv = document.createElement("div");
+    nameDiv.className = "col-assignment";
+    nameDiv.textContent = col.assignment;
+
+    const roomDiv = document.createElement("div");
+    roomDiv.className = "col-room-label";
+    roomDiv.textContent = col.room_label;
+
+    th.appendChild(nameDiv);
+    th.appendChild(roomDiv);
+    th.appendChild(editBtn);
     headerRow.appendChild(th);
   });
   thead.appendChild(headerRow);
 
   // ── tbody ─────────────────────────────────────────────────
-  slots.forEach(slot => {
+  slots.forEach(slotTime => {
     const tr = document.createElement("tr");
+    tr.className = "slot-row";
 
-    if (slot.type === "break") {
-      // Break row spans all room columns (not the time col — time col gets its own td)
-      tr.className = "break-row";
-      const timeTd = document.createElement("td");
-      timeTd.textContent = "";
-      tr.appendChild(timeTd);
+    // Time label
+    const timeTd = document.createElement("td");
+    timeTd.className = "td-time";
+    timeTd.textContent = slotTime;
+    tr.appendChild(timeTd);
 
-      const breakTd = document.createElement("td");
-      breakTd.colSpan = columns.length;
-      breakTd.textContent = slot.label;
-      tr.appendChild(breakTd);
+    // One cell per column
+    const slotMins = toMins(slotTime);
 
-    } else {
-      // Normal time slot row
-      tr.className = "slot-row";
+    columns.forEach(col => {
+      const td = document.createElement("td");
+      td.className = "td-cell";
 
-      // Time label cell
-      const timeTd = document.createElement("td");
-      timeTd.className = "td-time";
-      timeTd.textContent = slot.time;
-      tr.appendChild(timeTd);
+      const colBreaks = getColumnBreaks(col);
+      const activeBreak = colBreaks.find(
+        b => slotMins >= toMins(b.from) && slotMins < toMins(b.to)
+      );
 
-      // One cell per column
-      columns.forEach(col => {
-        const td = document.createElement("td");
-        td.className = "td-cell";
+      if (activeBreak) {
+        // Break cell: show label only on the first slot of the break
+        td.classList.add("break-cell");
+        if (col.tint) {
+          td.style.backgroundColor = `#${col.tint}88`;
+        }
+        if (slotMins === toMins(activeBreak.from)) {
+          const label = document.createElement("span");
+          label.className = "break-label";
+          label.textContent = activeBreak.label || "BREAK";
+          td.appendChild(label);
+        }
+      } else {
+        // Normal slot: apply column tint at low opacity
         if (col.tint) {
           td.classList.add("tinted");
-          td.style.backgroundColor = `#${col.tint}22`; // 13% opacity tint
+          td.style.backgroundColor = `#${col.tint}22`;
         }
 
-        const appts = (col.practitioner_ahpra && apptLookup[col.practitioner_ahpra]?.[slot.time]) || [];
+        const appts = (col.practitioner_ahpra && apptLookup[col.practitioner_ahpra]?.[slotTime]) || [];
 
         if (!appts.length) {
-          // Empty bookable slot
           const empty = document.createElement("span");
           empty.className = "slot-empty";
           empty.textContent = "»";
           td.appendChild(empty);
         } else {
           appts.forEach(a => {
-            const name = `${a.patient.first_name} ${a.patient.last_name}`;
-            const cls  = apptClass(a.status);
+            const cls   = apptClass(a.status);
             const color = a.appointment_type_id ? typeMap[a.appointment_type_id] : null;
-
-            const span = document.createElement("span");
+            const span  = document.createElement("span");
             span.className = `appt ${cls}`;
             if (color) {
               span.dataset.color = color;
               span.style.setProperty("--appt-color", color);
             }
-            span.textContent = name;
-
+            span.textContent = `${a.patient.first_name} ${a.patient.last_name}`;
             if (a.reason) {
               const reason = document.createElement("span");
               reason.className = "appt-reason";
               reason.textContent = a.reason;
               span.appendChild(reason);
             }
-
             td.appendChild(span);
           });
         }
+      }
 
-        tr.appendChild(td);
-      });
-    }
+      tr.appendChild(td);
+    });
 
     tbody.appendChild(tr);
   });
 
-  // Show the grid, hide loading/error
   document.getElementById("diary-grid").classList.remove("hidden");
   showLoading(false);
   showError("");
+}
+
+// ─── BREAK EDIT MODAL ─────────────────────────────────────
+function openBreakModal(colIdx) {
+  editingColIndex = colIdx;
+  const col = TEMPLATE.columns[colIdx];
+  document.getElementById("break-modal-title").textContent =
+    `Breaks — ${col.assignment} (${col.room_label})`;
+
+  renderBreakRows(getColumnBreaks(col));
+  document.getElementById("break-modal").classList.remove("hidden");
+}
+
+function closeBreakModal() {
+  document.getElementById("break-modal").classList.add("hidden");
+  editingColIndex = null;
+}
+
+function renderBreakRows(breaks) {
+  const body = document.getElementById("break-modal-body");
+  body.innerHTML = "";
+  (breaks || []).forEach((b, i) => {
+    body.appendChild(makeBreakRow(i, b.from, b.to, b.label));
+  });
+}
+
+function makeBreakRow(idx, from, to, label) {
+  const row = document.createElement("div");
+  row.className = "break-row-edit";
+  row.dataset.idx = idx;
+  row.innerHTML = `
+    <input class="br-from" type="time" value="${escHtml(from || "")}" title="From" />
+    <span class="br-sep">–</span>
+    <input class="br-to"   type="time" value="${escHtml(to   || "")}" title="To" />
+    <input class="br-label" type="text" value="${escHtml(label || "")}" placeholder="Label (e.g. LUNCH)" />
+    <button class="br-del" title="Remove">✕</button>`;
+  row.querySelector(".br-del").onclick = () => row.remove();
+  return row;
+}
+
+function addBreakRow() {
+  const body = document.getElementById("break-modal-body");
+  const idx  = body.querySelectorAll(".break-row-edit").length;
+  body.appendChild(makeBreakRow(idx, "", "", ""));
+}
+
+function saveBreaks() {
+  if (editingColIndex === null) return;
+  const col = TEMPLATE.columns[editingColIndex];
+  const rows = document.querySelectorAll("#break-modal-body .break-row-edit");
+  const breaks = [];
+  rows.forEach(row => {
+    const from  = row.querySelector(".br-from").value.trim();
+    const to    = row.querySelector(".br-to").value.trim();
+    const label = row.querySelector(".br-label").value.trim();
+    if (from && to) breaks.push({ from, to, label: label || "BREAK" });
+  });
+  breakOverrides[col.room_label] = breaks;
+  saveBreakOverrides();
+  closeBreakModal();
+  loadDiary(); // re-render with new breaks
 }
 
 // ─── LOAD DIARY ────────────────────────────────────────────
@@ -276,7 +366,6 @@ async function loadDiary() {
   document.getElementById("diary-grid").classList.add("hidden");
   showError("");
 
-  // Build date-range for the selected day (local midnight → next midnight)
   const dayStart = new Date(diaryDate);
   dayStart.setHours(0, 0, 0, 0);
   const dayEnd = new Date(dayStart);
@@ -290,20 +379,13 @@ async function loadDiary() {
       apiFetch(`/appointments/types`),
     ]);
 
-    if (!apptRes.ok) {
-      const txt = await apptRes.text();
-      throw new Error(`Appointments: ${apptRes.status} ${txt}`);
-    }
-    if (!typeRes.ok) {
-      const txt = await typeRes.text();
-      throw new Error(`Types: ${typeRes.status} ${txt}`);
-    }
+    if (!apptRes.ok) throw new Error(`Appointments: ${apptRes.status} ${await apptRes.text()}`);
+    if (!typeRes.ok) throw new Error(`Types: ${typeRes.status} ${await typeRes.text()}`);
 
     const appointments = await apptRes.json();
     const types        = await typeRes.json();
 
-    // Build type → color_hex map (UUID → hex string like "#3B82F6")
-    const typeMap = {};
+    const typeMap    = {};
     types.forEach(t => { typeMap[t.id] = t.color_hex; });
 
     const slots      = generateSlots(TEMPLATE);
@@ -326,11 +408,9 @@ function formatDateLabel(d) {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
   });
 }
-
 function updateDateLabel() {
   document.getElementById("diary-date-label").textContent = formatDateLabel(diaryDate);
 }
-
 function shiftDay(delta) {
   diaryDate = new Date(diaryDate);
   diaryDate.setDate(diaryDate.getDate() + delta);
@@ -341,36 +421,34 @@ function shiftDay(delta) {
 // ─── AUTO-REFRESH ──────────────────────────────────────────
 function scheduleRefresh() {
   if (refreshTimer) clearTimeout(refreshTimer);
-  refreshTimer = setTimeout(() => {
-    loadDiary();
-    scheduleRefresh();
-  }, REFRESH_INTERVAL_MS);
+  refreshTimer = setTimeout(() => { loadDiary(); scheduleRefresh(); }, REFRESH_INTERVAL_MS);
 }
-
-function doRefresh() {
-  loadDiary();
-  scheduleRefresh();
-}
+function doRefresh() { loadDiary(); scheduleRefresh(); }
 
 // ─── INIT ──────────────────────────────────────────────────
 Office.onReady(() => {
-  // Set practice name from template
+  loadBreakOverrides();
+
   const pnEl = document.getElementById("diary-practice-name");
   if (pnEl) pnEl.textContent = TEMPLATE.practice_name;
 
-  // Date navigation buttons
-  document.getElementById("btn-prev-day").onclick = () => shiftDay(-1);
-  document.getElementById("btn-next-day").onclick = () => shiftDay(+1);
-  document.getElementById("btn-today").onclick    = () => {
-    diaryDate = new Date();
-    updateDateLabel();
-    loadDiary();
+  document.getElementById("btn-prev-day").onclick  = () => shiftDay(-1);
+  document.getElementById("btn-next-day").onclick  = () => shiftDay(+1);
+  document.getElementById("btn-today").onclick     = () => {
+    diaryDate = new Date(); updateDateLabel(); loadDiary();
   };
-  document.getElementById("btn-refresh").onclick  = doRefresh;
+  document.getElementById("btn-refresh").onclick   = doRefresh;
+  document.getElementById("btn-modal-add").onclick = addBreakRow;
+  document.getElementById("btn-modal-save").onclick = saveBreaks;
+  document.getElementById("btn-modal-close").onclick = closeBreakModal;
+
+  // Close modal on backdrop click
+  document.getElementById("break-modal").addEventListener("click", e => {
+    if (e.target === e.currentTarget) closeBreakModal();
+  });
 
   updateDateLabel();
 
-  // Listen for token delivered by taskpane via messageChild
   Office.context.ui.addHandlerAsync(
     Office.EventType.DialogParentMessageReceived,
     arg => {
@@ -386,15 +464,7 @@ Office.onReady(() => {
     }
   );
 
-  // Signal readiness to the taskpane — it will reply with { type:"auth", token }
-  try {
-    Office.context.ui.messageParent(JSON.stringify({ type: "ready" }));
-  } catch (_) {}
+  try { Office.context.ui.messageParent(JSON.stringify({ type: "ready" })); } catch (_) {}
 
-  // If a token is already in localStorage (re-open without full page reload),
-  // start loading immediately without waiting for the handshake.
-  if (token) {
-    loadDiary();
-    scheduleRefresh();
-  }
+  if (token) { loadDiary(); scheduleRefresh(); }
 });
