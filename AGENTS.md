@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Phase 2 diary/grid interactivity planning and backend enrichment |
+| **Current active track** | Phase 2 — Native Diary Grid read-only slice complete; ready for interactivity increment |
 | **Next recommended work** | Enrich `AppointmentOut`, fix `/slots` overlap math, add conflict validation |
 
 ### One-time setup
@@ -133,7 +133,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `1a6f15a` — "Add native Diary Grid — read-only first slice" |
+| **Last pushed commit** | `37fe992` — "Diary: bump cache-bust v=2 -> v=3 so Morning Tea change deploys" |
 
 ### Tag map (all tags pushed to remote)
 
@@ -504,4 +504,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped (`POST /patients/with-file`). Strategic pivot: diary moves off Word to a native HTML/JS web grid (per-surface hybrid architecture locked). Native Diary Grid read-only first slice shipped (`docs/diary/`, commit `1a6f15a`): room×time grid, lifecycle colours, date nav, auto-refresh, `📅` taskpane button. `PractitionerBrief.ahpra_number` added for column mapping. Next: backend enrichment for interactivity (AppointmentOut embed, `/slots` overlap fix, conflict validation, Room/DiaryRoster models).*
+*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped. Strategic pivot: diary on native HTML/JS web grid (locked). Native Diary Grid read-only first slice complete (`docs/diary/`, commit `37fe992`): room×time grid, lifecycle colours, per-column breaks (Morning Tea + Lunch in all 3 columns), break-edit modal (✎ per column header, persists to localStorage), date nav, auto-refresh, `📅` taskpane button. `PractitionerBrief.ahpra_number` added for column mapping. UTC-naive time extraction fixed (regex on ISO string, not `new Date().getHours()`). Cache-bust discipline: bump `?v=N` in diary.html on every diary deploy. Next: backend enrichment for interactivity (AppointmentOut embed, `/slots` overlap fix, conflict validation, Room/DiaryRoster models).*
