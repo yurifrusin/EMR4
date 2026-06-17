@@ -21,15 +21,15 @@ true parallel Codex + Claude Code + Antigravity work later.
 
 | Item | Value |
 |---|---|
-| **Mode** | Single-track handoff; only one agent should make project-code changes at a time |
+| **Mode** | Parallel-capable with Codex orchestration; single-track baton remains the integration path |
 | **Baton ref** | `handoff/current` |
 | **Integration worktree** | `C:\Users\YuriFrusin\Documents\EMR4` on `master` |
 | **Agent worktree root** | `C:\Users\YuriFrusin\Documents\EMR4-worktrees\` |
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Phase 2 — Native Diary Grid read-only slice complete; ready for interactivity increment |
-| **Next recommended work** | Enrich `AppointmentOut`, fix `/slots` overlap math, add conflict validation |
+| **Current active track** | Phase 2 — hardening + diary interactivity foundation |
+| **Next recommended work** | Canonical appointment time model, interval-based diary rendering, backend-backed room/roster/break config |
 
 ### One-time setup
 
@@ -95,15 +95,37 @@ If the user says **"handoff no push"**, run the same command with `--no-push`;
 this moves the local baton but does not push the current branch or `handoff/current`.
 Use `--no-push` only when the user explicitly asks for a local-only handoff.
 
-### Single-track rule for now
+### Parallel submit, not integration
 
-Until the user explicitly starts true parallel work, treat `handoff/current` as the
-only endorsed continuation point. An agent may inspect other worktrees, but should
-not make independent project-code changes away from the baton.
+For parallel work, non-orchestrator agents should submit their branch without moving
+the baton:
 
-### Future true-parallel rule
+```powershell
+python scripts\agent_worktrees.py submit --agent claude --commit-message "Short commit message" --message "Short branch note"
+```
 
-When parallel work begins, split by ownership boundary:
+`submit` commits/checkpoints if requested and pushes the current agent branch only.
+It does **not** move `handoff/current`. Codex reviews/integrates submitted branches,
+then advances `master` and `handoff/current` after user-approved integration.
+
+### Codex Orchestrator Protocol
+
+Codex is the default orchestration agent for EMR4. This means:
+
+- Codex owns integration sequencing, branch review, and final merge recommendations.
+- Claude Code and Antigravity are encouraged to disagree, flag risks, and propose
+  better designs; dissent should be preserved in the workstream notes.
+- Final technical recommendation sits with Codex, but user approval overrides all
+  agent hierarchy.
+- No non-orchestrator agent should merge to `master` or move `handoff/current`
+  during parallel mode unless the user explicitly says so.
+- Each parallel workstream must have a narrow owner, file boundary, verification
+  plan, and merge criteria before coding starts.
+- The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).
+
+### Parallel ownership rule
+
+Split by ownership boundary:
 
 - Backend API/schema branch
 - Taskpane/diary frontend branch
@@ -133,7 +155,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `37fe992` — "Diary: bump cache-bust v=2 -> v=3 so Morning Tea change deploys" |
+| **Last pushed commit** | `01c1d84` — "AGENTS.md: document grid rebuild requirement before interactivity" |
 
 ### Tag map (all tags pushed to remote)
 
@@ -517,4 +539,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped. Strategic pivot: diary on native HTML/JS web grid (locked). Native Diary Grid read-only first slice complete (`docs/diary/`, commit `37fe992`): room×time grid, lifecycle colours, per-column breaks (Morning Tea + Lunch in all 3 columns), break-edit modal (✎ per column header, persists to localStorage), date nav, auto-refresh, `📅` taskpane button. `PractitionerBrief.ahpra_number` added for column mapping. UTC-naive time extraction fixed (regex on ISO string, not `new Date().getHours()`). Cache-bust discipline: bump `?v=N` in diary.html on every diary deploy. Next: backend enrichment for interactivity (AppointmentOut embed, `/slots` overlap fix, conflict validation, Room/DiaryRoster models).*
+*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped. Strategic pivot: diary on native HTML/JS web grid (locked). Native Diary Grid read-only first slice complete (`docs/diary/`): room×time grid, lifecycle colours, per-column breaks, break-edit modal, date nav, silent auto-refresh, and `📅` taskpane button. Backend hardening now includes authenticated consultation AI endpoints, practice-scoped finalise, transactional patient file generation, appointment role gates, conflict validation, `/slots` duration-overlap logic, `AppointmentOut.end_time`, embedded `appointment_type`, and mutable `practitioner_id`. Multi-agent mode is now parallel-capable with Codex as orchestrator and `orchestration/parallel_workstreams.md` as the live workstream board. Next: canonical appointment time model, interval-based diary rendering, backend-backed Room/DiaryRoster/break config, regression tests, and Gemini SDK migration before the 2026-06-24 deprecation removal date.*

@@ -1,0 +1,100 @@
+# EMR4 Parallel Workstreams
+
+This is the live board for Codex-orchestrated parallel work. `AGENTS.md` remains the
+single source of truth for durable project state; this file tracks active branch work.
+
+## Operating Rules
+
+- Every agent starts with `python scripts\agent_worktrees.py handin`.
+- Parallel workers finish with `python scripts\agent_worktrees.py submit ...`.
+- Only Codex, acting as orchestrator, advances `master` and `handoff/current` in
+  parallel mode unless the user explicitly instructs otherwise.
+- Every workstream must state files in scope, files out of scope, verification, and
+  merge criteria.
+- Agents should record concerns or disagreement in the "Dissent / Risks" field.
+
+## Reasoning Budget Guidance
+
+Use maximum reasoning for:
+
+- architecture decisions
+- security/privacy/clinical-safety decisions
+- schema and migration design
+- integration reviews
+- debugging unclear failures
+
+Use medium/high reasoning for:
+
+- implementing an already-approved plan
+- focused backend route work
+- frontend UI implementation from a clear spec
+- test writing
+
+Use lower reasoning only for:
+
+- mechanical version bumps
+- formatting
+- simple copy/docs updates
+- running known commands
+
+The default pattern should be: think hard at planning and review boundaries, execute
+at medium/high once the plan is stable, then think hard again before integration.
+
+## Sprint 1: Diary Interactivity Foundation
+
+### Workstream A — Backend Time Model
+
+| Item | Value |
+|---|---|
+| Owner | Codex |
+| Branch | `codex/current` or `codex/time-model` if split further |
+| Goal | Define and implement canonical appointment time representation |
+| In Scope | `app/models/appointments.py`, `app/schemas/appointments.py`, `app/routers/appointments.py`, Alembic migration, seed updates |
+| Out of Scope | Frontend drag/drop UI, room roster UI |
+| Plan | Move appointments toward clinic-local `appointment_date` + `start_time_local` + `duration_minutes` + timezone-derived UTC helpers; preserve API compatibility during transition where practical |
+| Verification | Migration applies; appointment CRUD tests; `/slots` tests; app import |
+| Dissent / Risks | Requires careful transition from existing `start_time` data |
+| Status | Proposed |
+
+### Workstream B — Diary Grid Interval Rendering
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` or `antigravity/diary-grid-intervals` |
+| Goal | Rebuild the diary grid so appointments occupy intervals, not only start cells |
+| In Scope | `docs/diary/diary.js`, `docs/diary/diary.css`, `docs/diary/diary.html` |
+| Out of Scope | Backend schema migration, appointment mutation routes |
+| Plan | Render appointment duration spans from `start_time`/`end_time`; handle overlaps visibly; preserve silent refresh |
+| Verification | Browser visual QA desktop/mobile; JS syntax; no spinner flash on auto-refresh |
+| Dissent / Risks | Needs stable backend `end_time`; should avoid drag/drop until backend time model lands |
+| Status | Proposed |
+
+### Workstream C — Appointment Tests and Security Gates
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` or `claude/appointment-tests` |
+| Goal | Add regression tests around auth, practice scoping, appointment conflicts, and slots |
+| In Scope | Test framework setup if absent, appointment/consultation route tests, fixture seed helpers |
+| Out of Scope | UI implementation |
+| Plan | Create minimal pytest suite using FastAPI TestClient or direct route/service tests; cover P0/P1 fixes |
+| Verification | Tests pass locally in `.venv`; failures are actionable |
+| Dissent / Risks | Existing app imports initialize Vertex AI; tests may need dependency overrides/mocking |
+| Status | Proposed |
+
+### Workstream D — Gemini SDK Migration Spike
+
+| Item | Value |
+|---|---|
+| Owner | Codex or Claude Code |
+| Branch | Separate branch after Sprint 1 starts |
+| Goal | Replace deprecated Vertex AI `generative_models` usage before the 2026-06-24 removal date |
+| In Scope | `app/routers/consultation.py`, config, minimal smoke test |
+| Out of Scope | Prompt redesign, SNOMED deterministic mapping |
+| Plan | Identify current supported Google Gen AI client path for Vertex; migrate with behavior preserved |
+| Verification | App import without deprecation warning; analyze/scribe smoke test with credentials |
+| Dissent / Risks | Needs careful check against current Google docs and installed SDK versions |
+| Status | Proposed, urgent technical debt |
+

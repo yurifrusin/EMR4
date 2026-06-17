@@ -135,6 +135,31 @@ def handoff(args: argparse.Namespace) -> None:
     print(f"  python scripts\\agent_worktrees.py sync --fetch --ref {HANDOFF_REF}")
 
 
+def submit(args: argparse.Namespace) -> None:
+    if args.commit_message:
+        commit_checkpoint(args.commit_message)
+
+    require_clean()
+
+    head = git_stdout(["rev-parse", "--short", "HEAD"])
+    branch = git_stdout(["branch", "--show-current"])
+    if not branch:
+        raise SystemExit("Cannot submit from a detached HEAD. Check out an agent branch first.")
+    if branch in {"master", HANDOFF_REF}:
+        raise SystemExit("Parallel submit must come from an agent/workstream branch, not master or handoff/current.")
+
+    print(f"[ok] submitting {branch} at {head}")
+    if args.agent:
+        print(f"[ok] submitting agent: {args.agent}")
+    if args.message:
+        print(f"[note] {args.message}")
+    if not args.no_push:
+        print(f"[push] {branch} -> {args.remote}/{branch}")
+        print_result(run_git(["push", "-u", args.remote, branch]))
+    print()
+    print("Codex/orchestrator should review this branch before merging or moving the baton.")
+
+
 def sync(args: argparse.Namespace) -> None:
     repo = Path.cwd().resolve()
     require_clean(repo)
@@ -180,6 +205,14 @@ def main() -> None:
     handoff_parser.add_argument("--remote", default="origin")
     handoff_parser.add_argument("--no-push", action="store_true", help="Do not push the current branch or handoff/current")
     handoff_parser.set_defaults(func=handoff)
+
+    submit_parser = subparsers.add_parser("submit", help="Commit/checkpoint if requested and push current branch without moving the baton")
+    submit_parser.add_argument("--agent", choices=sorted(AGENTS))
+    submit_parser.add_argument("--message", default="")
+    submit_parser.add_argument("--commit-message", default="", help="Stage all non-ignored changes and commit before submit")
+    submit_parser.add_argument("--remote", default="origin")
+    submit_parser.add_argument("--no-push", action="store_true", help="Do not push the current branch")
+    submit_parser.set_defaults(func=submit)
 
     sync_parser = subparsers.add_parser("sync", help="Fast-forward current worktree to the handoff ref")
     sync_parser.add_argument("--ref", default=HANDOFF_REF)
