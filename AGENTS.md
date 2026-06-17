@@ -51,6 +51,14 @@ worktrees at once.
 
 ### Starting a session in an agent worktree
 
+If the user says **"handin"**, do this before starting project work:
+
+```powershell
+python scripts\agent_worktrees.py handin
+```
+
+This is shorthand for `sync --fetch`.
+
 1. Open the agent's own worktree.
 2. Read `AGENTS.md`, `CLAUDE.md` where relevant, and `implementation_plan.md`.
 3. Fetch and fast-forward to the baton:
@@ -83,6 +91,8 @@ python scripts\agent_worktrees.py handoff --agent codex --commit-message "Short 
 
 Use `--agent claude` or `--agent antigravity` from those worktrees.
 If the work is already committed and the tree is clean, omit `--commit-message`.
+If the user says **"handoff no push"**, run the same command with `--no-push`;
+this moves the local baton but does not push the current branch or `handoff/current`.
 Use `--no-push` only when the user explicitly asks for a local-only handoff.
 
 ### Single-track rule for now

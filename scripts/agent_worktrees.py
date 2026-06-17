@@ -153,6 +153,11 @@ def sync(args: argparse.Namespace) -> None:
         print(f"[ok] Fast-forwarded from {before} to {after}")
 
 
+def handin(args: argparse.Namespace) -> None:
+    args.fetch = True
+    sync(args)
+
+
 def status(_: argparse.Namespace) -> None:
     print(git_stdout(["status", "--short", "--branch"]))
     print()
@@ -181,6 +186,11 @@ def main() -> None:
     sync_parser.add_argument("--fetch", action="store_true", help="Fetch from the remote before merging the baton")
     sync_parser.add_argument("--remote", default="origin")
     sync_parser.set_defaults(func=sync)
+
+    handin_parser = subparsers.add_parser("handin", help="Fetch and fast-forward current worktree to the handoff ref")
+    handin_parser.add_argument("--ref", default=HANDOFF_REF)
+    handin_parser.add_argument("--remote", default="origin")
+    handin_parser.set_defaults(func=handin)
 
     status_parser = subparsers.add_parser("status", help="Show branch and worktree status")
     status_parser.set_defaults(func=status)
