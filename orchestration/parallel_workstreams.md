@@ -144,7 +144,7 @@ reviews and integrates afterward.
 | In Scope | `docs/diary/diary.{html,css,js}` only |
 | Out of Scope | Backend changes, drag/drop, booking/status mutations |
 | Verification | JS syntax plus desktop/narrow browser visual QA |
-| Status | Submitted |
+| Status | Integrated |
 
 ### Workstream F — Canonical Time Regression Tests
 

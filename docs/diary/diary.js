@@ -175,31 +175,41 @@ function apptClass(status) {
 
 // ─── RENDER GRID ───────────────────────────────────────────
 function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
-  const colgroup = document.getElementById("diary-colgroup");
-  const thead    = document.getElementById("diary-thead");
-  const tbody    = document.getElementById("diary-tbody");
+  const grid = document.getElementById("diary-grid");
+  grid.innerHTML = "";
 
-  colgroup.innerHTML = "";
-  thead.innerHTML    = "";
-  tbody.innerHTML    = "";
+  const dayStartMins = toMins(TEMPLATE.slot_defaults.start);
+  const intervalMins = TEMPLATE.slot_defaults.interval_minutes || 15;
 
-  // ── colgroup ──────────────────────────────────────────────
-  const timeCol = document.createElement("col");
-  timeCol.className = "col-time";
-  colgroup.appendChild(timeCol);
-  columns.forEach(() => colgroup.appendChild(document.createElement("col")));
+  // ── 1. Create Time Column ──────────────────────────────────
+  const timeCol = document.createElement("div");
+  timeCol.className = "diary-time-column";
 
-  // ── thead ─────────────────────────────────────────────────
-  const headerRow = document.createElement("tr");
+  const timeHeader = document.createElement("div");
+  timeHeader.className = "diary-column-header";
+  timeHeader.textContent = "TIME";
+  timeCol.appendChild(timeHeader);
 
-  const timeTh = document.createElement("th");
-  timeTh.className = "th-time";
-  timeTh.textContent = "TIME";
-  headerRow.appendChild(timeTh);
+  const timeBody = document.createElement("div");
+  timeBody.className = "diary-column-body";
 
+  slots.forEach(slotTime => {
+    const label = document.createElement("div");
+    label.className = "time-slot-label";
+    label.textContent = slotTime;
+    timeBody.appendChild(label);
+  });
+  timeCol.appendChild(timeBody);
+  grid.appendChild(timeCol);
+
+  // ── 2. Create Practitioner/Room Columns ─────────────────────
   columns.forEach((col, colIdx) => {
-    const th = document.createElement("th");
-    th.className = "th-col";
+    const column = document.createElement("div");
+    column.className = "diary-column";
+
+    // Header
+    const th = document.createElement("div");
+    th.className = "diary-column-header";
     if (col.tint) th.style.backgroundColor = `#${col.tint}`;
 
     const editBtn = document.createElement("button");
@@ -219,101 +229,140 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
     th.appendChild(nameDiv);
     th.appendChild(roomDiv);
     th.appendChild(editBtn);
-    headerRow.appendChild(th);
-  });
-  thead.appendChild(headerRow);
+    column.appendChild(th);
 
-  // ── tbody ─────────────────────────────────────────────────
-  slots.forEach(slotTime => {
-    const tr = document.createElement("tr");
-    tr.className = "slot-row";
+    // Body
+    const columnBody = document.createElement("div");
+    columnBody.className = "diary-column-body";
+    if (col.tint) {
+      columnBody.style.backgroundColor = `#${col.tint}11`;
+    }
 
-    // Time label
-    const timeTd = document.createElement("td");
-    timeTd.className = "td-time";
-    timeTd.textContent = slotTime;
-    tr.appendChild(timeTd);
-
-    // One cell per column
-    const slotMins = toMins(slotTime);
-
-    columns.forEach(col => {
-      const td = document.createElement("td");
-      td.className = "td-cell";
+    // 2a. Background slots (grid lines + empty chevrons)
+    slots.forEach(slotTime => {
+      const slotMins = toMins(slotTime);
+      const slotDiv = document.createElement("div");
+      slotDiv.className = "slot-bg";
 
       const colBreaks = getColumnBreaks(col);
-      const activeBreak = colBreaks.find(
+      const hasBreak = colBreaks.some(
         b => slotMins >= toMins(b.from) && slotMins < toMins(b.to)
       );
+      const hasAppt = col.practitioner_ahpra && occupied[col.practitioner_ahpra]?.has(slotTime);
 
-      if (activeBreak) {
-        // Break cell: show label only on the first slot of the break
-        td.classList.add("break-cell");
-        if (col.tint) {
-          td.style.backgroundColor = `#${col.tint}88`;
-        }
-        if (slotMins === toMins(activeBreak.from)) {
-          const label = document.createElement("span");
-          label.className = "break-label";
-          label.textContent = activeBreak.label || "BREAK";
-          td.appendChild(label);
-        }
-      } else {
-        // Normal slot: apply column tint at low opacity
-        if (col.tint) {
-          td.classList.add("tinted");
-          td.style.backgroundColor = `#${col.tint}22`;
-        }
-
-        const appts = (col.practitioner_ahpra && apptLookup[col.practitioner_ahpra]?.[slotTime]) || [];
-
-        if (!appts.length) {
-          const isOccupied = col.practitioner_ahpra && occupied[col.practitioner_ahpra]?.has(slotTime);
-          if (!isOccupied) {
-            const empty = document.createElement("span");
-            empty.className = "slot-empty";
-            empty.textContent = "»";
-            td.appendChild(empty);
-          }
-        } else {
-          appts.forEach((a, i) => {
-            const cls   = apptClass(a.status);
-            const color = a.appointment_type_id ? typeMap[a.appointment_type_id] : null;
-            const span  = document.createElement("span");
-            span.className = `appt ${cls}`;
-            if (color) {
-              span.dataset.color = color;
-              span.style.setProperty("--appt-color", color);
-            }
-            
-            // Interval rendering styles
-            span.style.position = "absolute";
-            span.style.top = (1 + i * 4) + "px";
-            span.style.left = (1 + i * 8) + "px";
-            span.style.right = "1px";
-            span.style.zIndex = String(10 + i);
-            
-            const intervalMins = TEMPLATE.slot_defaults.interval_minutes || 15;
-            const duration = Math.max(a.duration_minutes || intervalMins, intervalMins);
-            const slotsCount = duration / intervalMins;
-            span.style.height = (slotsCount * SLOT_HEIGHT_PX - APPT_BLOCK_GAP_PX) + "px";
-            
-            span.textContent = `${a.patient.first_name} ${a.patient.last_name}`;
-            if (a.reason) {
-              const reason = document.createElement("span");
-              reason.className = "appt-reason";
-              reason.textContent = a.reason;
-              span.appendChild(reason);
-            }
-            td.appendChild(span);
-          });
-        }
+      if (!hasBreak && !hasAppt) {
+        const empty = document.createElement("span");
+        empty.className = "slot-empty";
+        empty.textContent = "»";
+        slotDiv.appendChild(empty);
       }
 
-      tr.appendChild(td);
+      columnBody.appendChild(slotDiv);
     });
 
-    tbody.appendChild(tr);
+    // 2b. Breaks (absolute positioned)
+    const colBreaks = getColumnBreaks(col);
+    colBreaks.forEach(b => {
+      const bStart = toMins(b.from);
+      const bEnd = toMins(b.to);
+
+      const topPx = (bStart - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
+      const heightPx = (bEnd - bStart) * (SLOT_HEIGHT_PX / intervalMins);
+
+      const breakEl = document.createElement("div");
+      breakEl.className = "break-block";
+      breakEl.style.top = topPx + "px";
+      breakEl.style.height = heightPx + "px";
+
+      if (col.tint) {
+        breakEl.style.backgroundColor = `#${col.tint}88`;
+      }
+
+      const labelSpan = document.createElement("span");
+      labelSpan.className = "break-block-label";
+      labelSpan.textContent = b.label || "BREAK";
+      breakEl.appendChild(labelSpan);
+
+      columnBody.appendChild(breakEl);
+    });
+
+    // 2c. Appointments (absolute positioned with lane-based cascading)
+    const colAppts = [];
+    if (col.practitioner_ahpra && apptLookup[col.practitioner_ahpra]) {
+      const practitionerApptObj = apptLookup[col.practitioner_ahpra];
+      Object.keys(practitionerApptObj).forEach(timeKey => {
+        const apptsAtTime = practitionerApptObj[timeKey] || [];
+        colAppts.push(...apptsAtTime);
+      });
+    }
+
+    // Sort by start time, then duration descending
+    colAppts.sort((x, y) => {
+      const tX = toMins(apptTimeKey(x));
+      const tY = toMins(apptTimeKey(y));
+      if (tX !== tY) return tX - tY;
+
+      const dX = x.duration_minutes || intervalMins;
+      const dY = y.duration_minutes || intervalMins;
+      return dY - dX;
+    });
+
+    // Assign lanes to handle overlaps
+    const lanes = [];
+    colAppts.forEach(a => {
+      const start = toMins(apptTimeKey(a));
+      const duration = Math.max(a.duration_minutes || intervalMins, intervalMins);
+
+      let laneIdx = 0;
+      while (laneIdx < lanes.length && lanes[laneIdx] > start) {
+        laneIdx++;
+      }
+      lanes[laneIdx] = start + duration;
+      a._laneIdx = laneIdx;
+    });
+
+    // Render appointments
+    colAppts.forEach(a => {
+      const start = toMins(apptTimeKey(a));
+      const duration = Math.max(a.duration_minutes || intervalMins, intervalMins);
+
+      const topPx = (start - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
+      const heightPx = duration * (SLOT_HEIGHT_PX / intervalMins);
+
+      const cls = apptClass(a.status);
+      const color = a.appointment_type_id ? typeMap[a.appointment_type_id] : null;
+
+      const span = document.createElement("span");
+      span.className = `appt ${cls}`;
+      if (color) {
+        span.dataset.color = color;
+        span.style.setProperty("--appt-color", color);
+      }
+
+      span.style.position = "absolute";
+      span.style.top = (topPx + 1 + a._laneIdx * 4) + "px";
+      span.style.left = (1 + a._laneIdx * 8) + "px";
+      span.style.right = "1px";
+      span.style.zIndex = String(10 + a._laneIdx);
+      span.style.height = (heightPx - APPT_BLOCK_GAP_PX) + "px";
+
+      const patientName = `${a.patient.first_name} ${a.patient.last_name}`;
+      span.textContent = patientName;
+      if (a.reason) {
+        span.title = `${patientName} - ${a.reason}`;
+      }
+      if (a.reason && duration >= intervalMins * 2) {
+        const reason = document.createElement("span");
+        reason.className = "appt-reason";
+        reason.textContent = a.reason;
+        span.appendChild(reason);
+      }
+
+      columnBody.appendChild(span);
+    });
+
+    column.appendChild(columnBody);
+    grid.appendChild(column);
   });
 
   document.getElementById("diary-grid").classList.remove("hidden");

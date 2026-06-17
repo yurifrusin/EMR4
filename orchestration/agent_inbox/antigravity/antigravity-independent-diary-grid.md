@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 882381e |
 | Start Command | `python scripts\agent_worktrees.py handin` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-independent-diary-grid --commit-message "Build independent diary column grid" --message "Independent diary column grid ready for Codex review"` |
@@ -26,12 +26,13 @@ No backend changes. No booking create/update/delete. No drag/drop. No status mut
 ## Required Steps
 
 1. Run the start command above.
-2. Read `AGENTS.md` and `orchestration/parallel_workstreams.md`.
-3. Work only inside the stated scope unless the user or Codex expands it.
-4. Do not merge to `master`.
-5. Do not move `handoff/current`.
-6. Run the verification listed below.
-7. Finish with the submit command above.
+2. Read the protocol alerts printed by `handin`.
+3. Read `AGENTS.md` and `orchestration/parallel_workstreams.md`.
+4. Work only inside the stated scope unless the user or Codex expands it.
+5. Do not merge to `master`.
+6. Do not move `handoff/current`.
+7. Run the verification listed below.
+8. Finish with the submit command above.
 
 ## Hard Stop Rules
 
@@ -58,6 +59,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Fill this in before submit:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`
+- Verification run: Executed `node --check docs/diary/diary.js` (passed) and `pytest` for backend regression check. Manual QA verifies correct column alignment, slot rendering, absolute break overlay positioning, and lane-based appointment overlap cascading.
+- Remaining risks: None. The changes are local static file assets and preserve all existing APIs and bindings.
