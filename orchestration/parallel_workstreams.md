@@ -125,3 +125,44 @@ reviews and integrates afterward.
 | Verification | App import without deprecation warning; analyze/scribe smoke test with credentials |
 | Dissent / Risks | Needs careful check against current Google docs and installed SDK versions |
 | Status | Proposed, urgent technical debt |
+
+## Sprint 2: Diary App Foundation
+
+### Workstream E — Independent Diary Grid
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-independent-diary-grid.md` |
+| Goal | Replace shared table-row diary rendering with independent positioned columns |
+| In Scope | `docs/diary/diary.{html,css,js}` only |
+| Out of Scope | Backend changes, drag/drop, booking/status mutations |
+| Verification | JS syntax plus desktop/narrow browser visual QA |
+| Status | Dispatched |
+
+### Workstream F — Canonical Time Regression Tests
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-time-model-regression-tests.md` |
+| Goal | Prove legacy `start_time` and new `appointment_date + start_time_local` behavior |
+| In Scope | Tests and minimal fixtures/helpers; tiny production fixes only if blocked |
+| Out of Scope | Frontend, schema redesign, Room/DiaryRoster |
+| Verification | `.venv\Scripts\python.exe -m pytest tests` |
+| Status | Dispatched |
+
+### Workstream G — Diary Template API Foundation
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/diary-template-api` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-diary-template-api.md` |
+| Goal | Add backend Room/DiaryRoster/template foundation compatible with current diary config |
+| In Scope | Backend models/schemas/router/migration/tests as needed |
+| Out of Scope | Frontend consumption, drag/drop, booking mutations |
+| Verification | compileall, relevant pytest, Alembic head/current/upgrade if migration added |
+| Status | Dispatched |
