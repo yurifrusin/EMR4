@@ -54,6 +54,8 @@ class Appointment(Base):
     appointment_type_id = Column(UUID(as_uuid=True), ForeignKey("appointment_types.id"), nullable=True)
     booked_by = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
     start_time = Column(DateTime(timezone=True), nullable=False)
+    appointment_date = Column(Date, nullable=False)
+    start_time_local = Column(Time, nullable=False)
     duration_minutes = Column(Integer, default=15)
     status = Column(Enum(AppointmentStatus), default=AppointmentStatus.Booked)
     reason = Column(String(500))
@@ -76,6 +78,13 @@ class Appointment(Base):
         Index("ix_appointments_patient_id", "patient_id"),
         Index("ix_appointments_practitioner_id", "practitioner_id"),
         Index("ix_appointments_start_time", "start_time"),
+        Index("ix_appointments_practice_date", "practice_id", "appointment_date"),
+        Index(
+            "ix_appointments_practitioner_date_time",
+            "practitioner_id",
+            "appointment_date",
+            "start_time_local",
+        ),
     )
 
 

@@ -29,7 +29,13 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
 | **Current active track** | Phase 2 — hardening + diary interactivity foundation |
-| **Next recommended work** | Canonical appointment time model, interval-based diary rendering, backend-backed room/roster/break config |
+| **Next recommended work** | Independent positioned-column diary grid, backend-backed room/roster/break config, Gemini SDK migration |
+
+`codex/current` is the durable Codex mirror branch. Codex-app subagents are
+separate disposable worker checkouts and may live under `.codex/worktrees/...`.
+Use unique branches for those workers, e.g. `codex/time-model` or
+`codex/<short-task-name>`, then review/integrate them through the orchestrator
+before realigning `master`, `handoff/current`, and the durable mirrors.
 
 ### One-time setup
 
@@ -497,18 +503,16 @@ Not urgent for Phase 2 but worth adding during heavier frontend work.
 is left null at creation and backfilled by `autoDetectPatient()` on first open. See §3 Phase 2.
 
 ### 🏗️ Next: Diary Grid interactivity (backend additions required)
-The read-only first slice plus interval display and backend conflict/slot hardening are shipped.
+The read-only first slice plus interval display, backend conflict/slot hardening, and canonical
+clinic-local appointment time model are shipped.
 Before adding booking/drag/status mutations:
 
-1. **Canonical appointment time model** — move from mixed naive/tz-aware datetimes toward
-   clinic-local `appointment_date + start_time_local + duration_minutes + practice timezone`,
-   with UTC instants reserved for audit/reminders/background jobs.
-2. **Independent positioned-column diary grid** — required before drag/drop, arbitrary slot
+1. **Independent positioned-column diary grid** — required before drag/drop, arbitrary slot
    lengths, or dense overlap lanes. The current table renderer is acceptable for read-only
    interval display only.
-3. **`Room` + `DiaryRoster` models** — date×room→practitioner|label + CRUD. Currently columns
+2. **`Room` + `DiaryRoster` models** — date×room→practitioner|label + CRUD. Currently columns
    are hard-coded in `diary_template.json` / embedded in `diary.js`.
-4. **`GET /api/v1/diary/template`** — serve `diary_template.json` via API instead of embedding
+3. **`GET /api/v1/diary/template`** — serve `diary_template.json` via API instead of embedding
    in `diary.js`, as a prelude to the template-builder UI.
 
 #### ⚠️ Grid must be rebuilt before interactivity — per-column independent time slots
@@ -584,4 +588,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped. Strategic pivot: diary on native HTML/JS web grid (locked). Native Diary Grid now includes read-only interval rendering (`docs/diary/`, cache-bust `v=6`): room×time grid, lifecycle colours, per-column breaks, break-edit modal, date nav, silent auto-refresh, multi-slot appointment blocks, and `📅` taskpane button. Backend hardening now includes authenticated consultation AI endpoints, practice-scoped finalise, transactional patient file generation, appointment role gates, conflict validation, `/slots` duration-overlap logic, `AppointmentOut.end_time`, embedded `appointment_type`, mutable `practitioner_id`, and 21 pytest regression tests. Multi-agent mode is parallel-capable with Codex as orchestrator; submitted Claude/Antigravity workstreams were integrated in `0ab2f27`. Next: canonical appointment time model, independent positioned-column diary grid before interactivity, backend-backed Room/DiaryRoster/break config, and Gemini SDK migration before the 2026-06-24 deprecation removal date.*
+*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped. Strategic pivot: diary on native HTML/JS web grid (locked). Native Diary Grid now includes read-only interval rendering (`docs/diary/`, cache-bust `v=7`): room×time grid, lifecycle colours, per-column breaks, break-edit modal, date nav, silent auto-refresh, multi-slot appointment blocks, and `📅` taskpane button. Backend hardening now includes authenticated consultation AI endpoints, practice-scoped finalise, transactional patient file generation, appointment role gates, conflict validation, `/slots` duration-overlap logic, canonical `appointment_date` + `start_time_local`, UTC-compatible `start_time`, `AppointmentOut.end_time`, embedded `appointment_type`, mutable `practitioner_id`, and 22 pytest regression tests. Multi-agent mode is parallel-capable with Codex as orchestrator; Codex-app subagent worker branches are now recognized separately from the durable `codex/current` mirror. Next: independent positioned-column diary grid before interactivity, backend-backed Room/DiaryRoster/break config, and Gemini SDK migration before the 2026-06-24 deprecation removal date.*

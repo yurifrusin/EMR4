@@ -7,7 +7,8 @@ Usage:
 """
 import sys
 from app.database import SessionLocal
-from datetime import date, datetime, time, timedelta
+from datetime import date, datetime, time, timedelta, timezone
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from app.models.tenancy import Practice, User, Practitioner, UserRole
 from app.models.patients import Patient
 from app.models.clinical import Allergy
@@ -249,8 +250,13 @@ def seed():
 
         # --- Sample appointments for today (so the Schedule tab is non-empty) ---
         today = date.today()
+        try:
+            practice_tz = ZoneInfo(practice.timezone or "Australia/Sydney")
+        except ZoneInfoNotFoundError:
+            practice_tz = ZoneInfo("Australia/Sydney")
+
         def _appt_dt(h: int, m: int) -> datetime:
-            return datetime.combine(today, time(h, m))
+            return datetime.combine(today, time(h, m)).replace(tzinfo=practice_tz).astimezone(timezone.utc)
 
         # Margaret 09:00 is seeded as Confirmed so the diary's lifecycle
         # colour rendering (ALL-CAPS + blue) is demonstrated out of the box.
@@ -260,10 +266,12 @@ def seed():
             (patient, _appt_dt(10, 0), "Care plan review",       AppointmentStatus.Booked),
         ]
         for pt, start, reason, init_status in sample_appts:
+            local_start = start.astimezone(practice_tz).time().replace(tzinfo=None)
             exists = db.query(Appointment).filter_by(
                 practice_id=practice.id,
                 patient_id=pt.id,
-                start_time=start,
+                appointment_date=today,
+                start_time_local=local_start,
             ).first()
             if not exists:
                 db.add(Appointment(
@@ -273,6 +281,8 @@ def seed():
                     appointment_type_id=std_type.id if std_type else None,
                     booked_by=gp_user.id,
                     start_time=start,
+                    appointment_date=today,
+                    start_time_local=local_start,
                     duration_minutes=15,
                     status=init_status,
                     reason=reason,

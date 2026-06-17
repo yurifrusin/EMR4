@@ -480,10 +480,31 @@ def poll(args: argparse.Namespace) -> None:
         print_result(run_git(["fetch", args.remote]))
 
     found = False
-    for agent, branch in AGENTS.items():
-        if agent == "codex":
-            continue
+    branch_checks = [
+        (agent, branch)
+        for agent, branch in AGENTS.items()
+        if agent != "codex"
+    ]
+
+    codex_worker_refs = git_stdout(
+        [
+            "for-each-ref",
+            f"refs/remotes/{args.remote}/codex",
+            "--format=%(refname:short)",
+        ],
+        check=False,
+    )
+    for remote_branch in codex_worker_refs.splitlines():
+        branch = remote_branch.removeprefix(f"{args.remote}/")
+        if branch and branch != AGENTS["codex"]:
+            branch_checks.append(("codex", branch))
+
+    seen_refs: set[str] = set()
+    for agent, branch in branch_checks:
         remote_ref = f"{args.remote}/{branch}"
+        if remote_ref in seen_refs:
+            continue
+        seen_refs.add(remote_ref)
         if run_git(["rev-parse", "--verify", remote_ref], check=False).returncode != 0:
             continue
 

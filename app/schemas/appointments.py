@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, date, time
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from app.models.appointments import AppointmentStatus, BookingChannel
 
 
@@ -41,11 +41,23 @@ class AppointmentCreate(BaseModel):
     practitioner_id: uuid.UUID
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
-    start_time: datetime
+    start_time: Optional[datetime] = None
+    appointment_date: Optional[date] = None
+    start_time_local: Optional[time] = None
     duration_minutes: int = Field(default=15, gt=0, le=480)
     reason: Optional[str] = None
     notes: Optional[str] = None
     booked_via: BookingChannel = BookingChannel.Receptionist
+
+    @model_validator(mode="after")
+    def require_time_input(self):
+        has_local_pair = self.appointment_date is not None and self.start_time_local is not None
+        has_partial_local_pair = (self.appointment_date is None) != (self.start_time_local is None)
+        if has_partial_local_pair:
+            raise ValueError("appointment_date and start_time_local must be supplied together")
+        if self.start_time is None and not has_local_pair:
+            raise ValueError("start_time or appointment_date + start_time_local is required")
+        return self
 
 
 class AppointmentUpdate(BaseModel):
@@ -53,6 +65,8 @@ class AppointmentUpdate(BaseModel):
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
     start_time: Optional[datetime] = None
+    appointment_date: Optional[date] = None
+    start_time_local: Optional[time] = None
     duration_minutes: Optional[int] = Field(default=None, gt=0, le=480)
     reason: Optional[str] = None
     notes: Optional[str] = None
@@ -72,6 +86,8 @@ class AppointmentOut(BaseModel):
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
     start_time: datetime
+    appointment_date: date
+    start_time_local: time
     end_time: datetime
     duration_minutes: int
     status: AppointmentStatus

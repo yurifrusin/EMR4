@@ -78,6 +78,25 @@ def test_adjacent_appointments_allowed(client, receptionist_user, practitioner, 
 
 # ─── Non-blocking statuses ────────────────────────────────────────────────────
 
+def test_create_appointment_accepts_local_date_and_time(client, receptionist_user, practitioner, patient):
+    """New clients can book with canonical clinic-local date/time fields."""
+    token = make_token(receptionist_user)
+    body = {
+        "patient_id": str(patient.id),
+        "practitioner_id": str(practitioner.id),
+        "appointment_date": "2026-06-22",
+        "start_time_local": "11:30:00",
+        "duration_minutes": 15,
+    }
+
+    resp = _post(client, token, body)
+    assert resp.status_code == 201, resp.text
+    data = resp.json()
+    assert data["appointment_date"] == "2026-06-22"
+    assert data["start_time_local"] == "11:30:00"
+    assert data["start_time"]
+
+
 @pytest.mark.parametrize("cancel_status", ["Cancelled", "NoShow", "DNA"])
 def test_non_blocking_status_frees_slot(cancel_status, client, receptionist_user, practitioner, patient):
     """A cancelled/NoShow/DNA appointment does not block the same slot."""

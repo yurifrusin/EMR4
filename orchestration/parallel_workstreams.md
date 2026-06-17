@@ -11,9 +11,18 @@ single source of truth for durable project state; this file tracks active branch
 - Parallel workers finish with `python scripts\agent_worktrees.py submit ...`.
   Packet submit commands include `--task`, which creates a Codex review packet
   in the worker branch.
+- `codex/current` is the durable Codex mirror branch. It is not the same thing as
+  a Codex-app subagent worktree. Codex subagents should use unique task branches
+  such as `codex/time-model`, `codex/gemini-sdk-migration`, or
+  `codex/<short-task-name>`.
+- Codex-app subagent worktrees may live under `.codex/worktrees/...`; treat them
+  as disposable worker checkouts. They must submit or be reviewed/integrated by
+  the orchestrator before their work is considered part of the project.
 - Codex dispatches concrete task packets to `orchestration/agent_inbox/<agent>/`.
 - Agents read their next packet with `python scripts\agent_worktrees.py brief --agent <agent>`.
 - Codex polls submissions with `python scripts\agent_worktrees.py poll --fetch`.
+  This includes Claude/Antigravity branches and submitted `codex/*` worker branches,
+  excluding the durable `codex/current` mirror.
 - Only Codex, acting as orchestrator, advances `master` and `handoff/current` in
   parallel mode unless the user explicitly instructs otherwise.
 - Every workstream must state files in scope, files out of scope, verification, and
@@ -73,7 +82,7 @@ reviews and integrates afterward.
 | Plan | Move appointments toward clinic-local `appointment_date` + `start_time_local` + `duration_minutes` + timezone-derived UTC helpers; preserve API compatibility during transition where practical |
 | Verification | Migration applies; appointment CRUD tests; `/slots` tests; app import |
 | Dissent / Risks | Requires careful transition from existing `start_time` data |
-| Status | Proposed |
+| Status | Integrated |
 
 ### Workstream B — Diary Grid Interval Rendering
 
@@ -87,7 +96,7 @@ reviews and integrates afterward.
 | Plan | Render appointment duration spans from `start_time`/`end_time`; handle overlaps visibly; preserve silent refresh |
 | Verification | Browser visual QA desktop/mobile; JS syntax; no spinner flash on auto-refresh |
 | Dissent / Risks | Needs stable backend `end_time`; should avoid drag/drop until backend time model lands |
-| Status | Proposed |
+| Status | Integrated |
 
 ### Workstream C — Appointment Tests and Security Gates
 
@@ -101,7 +110,7 @@ reviews and integrates afterward.
 | Plan | Create minimal pytest suite using FastAPI TestClient or direct route/service tests; cover P0/P1 fixes |
 | Verification | Tests pass locally in `.venv`; failures are actionable |
 | Dissent / Risks | Existing app imports initialize Vertex AI; tests may need dependency overrides/mocking |
-| Status | Proposed |
+| Status | Integrated |
 
 ### Workstream D — Gemini SDK Migration Spike
 

@@ -1,12 +1,13 @@
 import uuid
-from datetime import datetime, time, timedelta
+from datetime import date as date_type, datetime, time, timedelta, timezone
 from typing import Optional
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session, joinedload
 
 from app.dependencies import get_db, get_current_user, require_role
 from app.models.patients import Patient
-from app.models.tenancy import User, UserRole, Practitioner, PracticeLocation
+from app.models.tenancy import User, UserRole, Practitioner, Practice, PracticeLocation
 from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     PractitionerSchedule, ScheduleOverride,
@@ -31,6 +32,60 @@ NON_BLOCKING_STATUSES = (
     AppointmentStatus.NoShow,
     AppointmentStatus.DNA,
 )
+
+DEFAULT_PRACTICE_TIMEZONE = "Australia/Sydney"
+
+
+def _practice_zoneinfo(db: Session, practice_id: uuid.UUID) -> ZoneInfo:
+    timezone_name = (
+        db.query(Practice.timezone)
+        .filter(Practice.id == practice_id)
+        .scalar()
+    ) or DEFAULT_PRACTICE_TIMEZONE
+    try:
+        return ZoneInfo(timezone_name)
+    except ZoneInfoNotFoundError:
+        return ZoneInfo(DEFAULT_PRACTICE_TIMEZONE)
+
+
+def _as_practice_local(start_time: datetime, practice_tz: ZoneInfo) -> datetime:
+    if start_time.tzinfo is None:
+        return start_time.replace(tzinfo=practice_tz)
+    return start_time.astimezone(practice_tz)
+
+
+def _utc_from_local(
+    appointment_date: date_type,
+    start_time_local: time,
+    practice_tz: ZoneInfo,
+) -> datetime:
+    local_time = start_time_local.replace(tzinfo=None)
+    local_dt = datetime.combine(appointment_date, local_time).replace(tzinfo=practice_tz)
+    return local_dt.astimezone(timezone.utc)
+
+
+def _canonical_time_values(
+    practice_tz: ZoneInfo,
+    start_time: Optional[datetime] = None,
+    appointment_date: Optional[date_type] = None,
+    start_time_local: Optional[time] = None,
+) -> tuple[date_type, time, datetime]:
+    if appointment_date is not None and start_time_local is not None:
+        local_time = start_time_local.replace(tzinfo=None)
+        return appointment_date, local_time, _utc_from_local(appointment_date, local_time, practice_tz)
+
+    if start_time is not None:
+        local_dt = _as_practice_local(start_time, practice_tz)
+        return local_dt.date(), local_dt.time().replace(tzinfo=None), local_dt.astimezone(timezone.utc)
+
+    raise HTTPException(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        detail="start_time or appointment_date + start_time_local is required",
+    )
+
+
+def _local_datetime(appointment_date: date_type, start_time_local: time) -> datetime:
+    return datetime.combine(appointment_date, start_time_local.replace(tzinfo=None))
 
 
 def _get_appointment(appt_id: uuid.UUID, practice_id: uuid.UUID, db: Session) -> Appointment:
@@ -105,27 +160,26 @@ def _find_conflicting_appointment(
     db: Session,
     practice_id: uuid.UUID,
     practitioner_id: uuid.UUID,
-    start_time: datetime,
+    appointment_date: date_type,
+    start_time_local: time,
     duration_minutes: int,
     exclude_id: Optional[uuid.UUID] = None,
 ) -> Optional[Appointment]:
-    day_start = datetime.combine(start_time.date(), time.min).replace(tzinfo=start_time.tzinfo)
-    day_end = datetime.combine(start_time.date(), time.max).replace(tzinfo=start_time.tzinfo)
     q = db.query(Appointment).filter(
         Appointment.practice_id == practice_id,
         Appointment.practitioner_id == practitioner_id,
-        Appointment.start_time >= day_start,
-        Appointment.start_time <= day_end,
+        Appointment.appointment_date == appointment_date,
         Appointment.status.notin_(NON_BLOCKING_STATUSES),
     )
     if exclude_id:
         q = q.filter(Appointment.id != exclude_id)
 
+    candidate_start = _local_datetime(appointment_date, start_time_local)
     for existing in q.all():
         if _overlaps(
-            start_time,
+            candidate_start,
             duration_minutes,
-            existing.start_time,
+            _local_datetime(existing.appointment_date, existing.start_time_local),
             existing.duration_minutes or 0,
         ):
             return existing
@@ -136,12 +190,13 @@ def _raise_if_conflict(
     db: Session,
     practice_id: uuid.UUID,
     practitioner_id: uuid.UUID,
-    start_time: datetime,
+    appointment_date: date_type,
+    start_time_local: time,
     duration_minutes: int,
     exclude_id: Optional[uuid.UUID] = None,
 ) -> None:
     conflict = _find_conflicting_appointment(
-        db, practice_id, practitioner_id, start_time, duration_minutes, exclude_id
+        db, practice_id, practitioner_id, appointment_date, start_time_local, duration_minutes, exclude_id
     )
     if conflict:
         raise HTTPException(
@@ -182,6 +237,7 @@ def list_appointments(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
     q = (
         db.query(Appointment)
         .options(
@@ -192,16 +248,20 @@ def list_appointments(
         .filter(Appointment.practice_id == current_user.practice_id)
     )
     if date_from:
-        q = q.filter(Appointment.start_time >= date_from)
+        q = q.filter(
+            Appointment.start_time >= _as_practice_local(date_from, practice_tz).astimezone(timezone.utc)
+        )
     if date_to:
-        q = q.filter(Appointment.start_time < date_to)
+        q = q.filter(
+            Appointment.start_time < _as_practice_local(date_to, practice_tz).astimezone(timezone.utc)
+        )
     if practitioner_id:
         q = q.filter(Appointment.practitioner_id == practitioner_id)
     if patient_id:
         q = q.filter(Appointment.patient_id == patient_id)
     if status_filter:
         q = q.filter(Appointment.status == status_filter)
-    return q.order_by(Appointment.start_time).all()
+    return q.order_by(Appointment.appointment_date, Appointment.start_time_local).all()
 
 
 @router.post("", response_model=AppointmentOut, status_code=status.HTTP_201_CREATED)
@@ -210,6 +270,18 @@ def create_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
+    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
+    values = body.model_dump()
+    appointment_date, start_time_local, start_time = _canonical_time_values(
+        practice_tz,
+        start_time=values.get("start_time"),
+        appointment_date=values.get("appointment_date"),
+        start_time_local=values.get("start_time_local"),
+    )
+    values["appointment_date"] = appointment_date
+    values["start_time_local"] = start_time_local
+    values["start_time"] = start_time
+
     _ensure_patient(body.patient_id, current_user.practice_id, db)
     _ensure_practitioner(body.practitioner_id, current_user.practice_id, db)
     _ensure_appointment_type(body.appointment_type_id, current_user.practice_id, db)
@@ -218,14 +290,15 @@ def create_appointment(
         db,
         current_user.practice_id,
         body.practitioner_id,
-        body.start_time,
-        body.duration_minutes,
+        appointment_date,
+        start_time_local,
+        values["duration_minutes"],
     )
 
     appt = Appointment(
         practice_id=current_user.practice_id,
         booked_by=current_user.id,
-        **body.model_dump(),
+        **values,
     )
     db.add(appt)
     db.commit()
@@ -240,9 +313,8 @@ def get_waiting_room(
     current_user: User = Depends(get_current_user),
 ):
     """Today's booked/arrived/in-consult appointments — the live waiting room queue."""
-    now = datetime.utcnow()
-    day_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
-    day_end = day_start + timedelta(days=1)
+    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
+    today = datetime.now(practice_tz).date()
 
     q = (
         db.query(Appointment)
@@ -253,8 +325,7 @@ def get_waiting_room(
         )
         .filter(
             Appointment.practice_id == current_user.practice_id,
-            Appointment.start_time >= day_start,
-            Appointment.start_time < day_end,
+            Appointment.appointment_date == today,
             Appointment.status.in_([
                 AppointmentStatus.Booked,
                 AppointmentStatus.Confirmed,
@@ -265,7 +336,7 @@ def get_waiting_room(
     )
     if practitioner_id:
         q = q.filter(Appointment.practitioner_id == practitioner_id)
-    return q.order_by(Appointment.queue_position.nullslast(), Appointment.start_time).all()
+    return q.order_by(Appointment.queue_position.nullslast(), Appointment.start_time_local).all()
 
 
 @router.get("/{appointment_id}", response_model=AppointmentOut)
@@ -284,24 +355,43 @@ def update_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
+    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
     appt = _get_appointment(appointment_id, current_user.practice_id, db)
     values = body.model_dump(exclude_unset=True)
 
     practitioner_id = values.get("practitioner_id", appt.practitioner_id)
     appointment_type_id = values.get("appointment_type_id", appt.appointment_type_id)
     location_id = values.get("location_id", appt.location_id)
-    start_time = values.get("start_time", appt.start_time)
+    appointment_date = values.get("appointment_date", appt.appointment_date)
+    start_time_local = values.get("start_time_local", appt.start_time_local)
     duration_minutes = values.get("duration_minutes", appt.duration_minutes)
+
+    if {"start_time", "appointment_date", "start_time_local"} & values.keys():
+        if "start_time" in values and not ({"appointment_date", "start_time_local"} & values.keys()):
+            appointment_date, start_time_local, start_time = _canonical_time_values(
+                practice_tz,
+                start_time=values["start_time"],
+            )
+        else:
+            appointment_date, start_time_local, start_time = _canonical_time_values(
+                practice_tz,
+                appointment_date=appointment_date,
+                start_time_local=start_time_local,
+            )
+        values["appointment_date"] = appointment_date
+        values["start_time_local"] = start_time_local
+        values["start_time"] = start_time
 
     _ensure_practitioner(practitioner_id, current_user.practice_id, db)
     _ensure_appointment_type(appointment_type_id, current_user.practice_id, db)
     _ensure_location(location_id, current_user.practice_id, db)
-    if {"practitioner_id", "start_time", "duration_minutes"} & values.keys():
+    if {"practitioner_id", "start_time", "appointment_date", "start_time_local", "duration_minutes"} & values.keys():
         _raise_if_conflict(
             db,
             current_user.practice_id,
             practitioner_id,
-            start_time,
+            appointment_date,
+            start_time_local,
             duration_minutes,
             exclude_id=appointment_id,
         )
@@ -353,7 +443,8 @@ def get_available_slots(
     if not practitioner:
         raise HTTPException(status_code=404, detail="Practitioner not found")
 
-    target_date = date.date()
+    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
+    target_date = _as_practice_local(date, practice_tz).date()
     day_of_week = target_date.weekday()  # 0=Mon
 
     # Check for override on this date
@@ -383,9 +474,9 @@ def get_available_slots(
 
     # Existing appointments that day
     booked = db.query(Appointment).filter(
+        Appointment.practice_id == current_user.practice_id,
         Appointment.practitioner_id == practitioner_id,
-        Appointment.start_time >= day_start,
-        Appointment.start_time < day_end,
+        Appointment.appointment_date == target_date,
         Appointment.status.notin_(NON_BLOCKING_STATUSES),
     ).all()
 
@@ -393,7 +484,12 @@ def get_available_slots(
     current = day_start
     while current + timedelta(minutes=slot_mins) <= day_end:
         available = not any(
-            _overlaps(current, slot_mins, appt.start_time, appt.duration_minutes or 0)
+            _overlaps(
+                current,
+                slot_mins,
+                _local_datetime(appt.appointment_date, appt.start_time_local),
+                appt.duration_minutes or 0,
+            )
             for appt in booked
         )
         slots.append(ScheduleSlot(

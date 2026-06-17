@@ -116,11 +116,15 @@ function fromMins(m) {
   return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 }
 
-// Extract HH:MM from an ISO datetime string WITHOUT converting to local timezone.
-// The server stores clinic-local times as UTC-naive datetimes, so the HH:MM
-// component of the ISO string is the intended booking time regardless of the
-// client's local timezone (e.g. "2026-06-17T09:00:00+00:00" → "09:00").
-function apptTimeKey(isoStr) {
+// Extract HH:MM for diary placement. Prefer the canonical clinic-local field;
+// fall back to legacy ISO start_time for older API responses.
+function apptTimeKey(apptOrIso) {
+  if (apptOrIso && typeof apptOrIso === "object" && apptOrIso.start_time_local) {
+    const m = String(apptOrIso.start_time_local).match(/^(\d{2}):(\d{2})/);
+    return m ? `${m[1]}:${m[2]}` : null;
+  }
+  const isoStr = typeof apptOrIso === "string" ? apptOrIso : apptOrIso?.start_time;
+  if (!isoStr) return null;
   const m = isoStr.match(/T(\d{2}):(\d{2})/);
   return m ? `${m[1]}:${m[2]}` : null;
 }
@@ -147,7 +151,7 @@ function buildApptLookup(appointments) {
   appointments.forEach(a => {
     const ahpra = a.practitioner?.ahpra_number || "__none__";
     if (!lookup[ahpra]) lookup[ahpra] = {};
-    const key = apptTimeKey(a.start_time);
+    const key = apptTimeKey(a);
     if (!key) return;
     if (!lookup[ahpra][key]) lookup[ahpra][key] = [];
     lookup[ahpra][key].push(a);
@@ -421,7 +425,7 @@ async function loadDiary(silent = false) {
       const ahpra = a.practitioner?.ahpra_number;
       if (!ahpra) return;
       if (!occupied[ahpra]) occupied[ahpra] = new Set();
-      const startKey = apptTimeKey(a.start_time);
+      const startKey = apptTimeKey(a);
       if (!startKey) return;
       const startMins = toMins(startKey);
       const duration = a.duration_minutes || TEMPLATE.slot_defaults.interval_minutes;
