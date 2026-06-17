@@ -62,6 +62,9 @@ When reporting progress to the user, Codex should use this shape:
 - **Polled:** what submissions/review packets were found.
 - **Integrated:** what was accepted, repaired, rejected, or superseded.
 - **Verified:** checks run and failures/warnings.
+- **Deployed:** for `docs/` changes, whether GitHub Pages serves the expected
+  cache-bust/version. If stale, run `gh api --method POST
+  repos/yurifrusin/EMR4/pages/builds` and re-check the live URL.
 - **Aligned:** which refs were pushed/realigned.
 - **Retirement:** stale disposable worktrees removed or left for review.
 - **User Review:** what the user should manually test before the next dispatch,

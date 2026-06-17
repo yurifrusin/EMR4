@@ -58,6 +58,9 @@ These checks are worth doing before dispatching the next set of agent tasks:
 
 - `docs/diary/diary.js` still embeds the diary template literal. It should next
   fetch `GET /api/v1/diary/template`.
+- GitHub Pages can serve a stale build even after `master` is pushed. For any
+  diary/taskpane deploy, verify the live `?v=N` and trigger a Pages rebuild with
+  `gh api --method POST repos/yurifrusin/EMR4/pages/builds` if needed.
 - Two stale disposable Codex worktrees remain visible in `audit`:
   - `codex/diary-template-api`: clean, can be retired.
   - `codex/time-model`: dirty, should be reviewed before retirement.

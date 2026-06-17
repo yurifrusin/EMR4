@@ -619,6 +619,11 @@ instead of `["*"]`. Set `ENVIRONMENT` + a generated `SECRET_KEY` in prod `.env`.
 ### Deploy reminders
 - Taskpane edit → `python sync_taskpane.py` → bump `?v=N` in taskpane.html → commit docs/ → push → **close & reopen the document** (shared runtime caches JS for the doc session; a sidebar toggle is not enough).
 - Command Centre edit → edit in `docs/command-centre/` → bump `?v=N` → push (loads fresh each open).
+- Diary / GitHub Pages edit → bump `?v=N`, push, then verify the deployed
+  `https://yurifrusin.github.io/EMR4/...` HTML is actually serving the new
+  cache-bust. If GitHub Pages remains on an old commit, trigger a rebuild:
+  `gh api --method POST repos/yurifrusin/EMR4/pages/builds`, then poll the live
+  URL until the expected `?v=N` appears.
 - Backend edit (`consultation.py`) → restart uvicorn.
 - Manifest edit → re-sideload `manifest.online.xml`.
 
