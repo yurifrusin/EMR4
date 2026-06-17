@@ -17,6 +17,7 @@ from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     BookingChannel, PractitionerSchedule,
 )
+from app.models.diary import DiaryTemplate, DiaryColumn, DiaryBreak
 from app.services.auth_service import hash_password
 
 
@@ -293,6 +294,81 @@ def seed():
                 exists.status = init_status
         db.flush()
         print(f"  Sample appointments seeded for today ({today})")
+
+        # --- Diary Template ---
+        tmpl = db.query(DiaryTemplate).filter_by(practice_id=practice.id).first()
+        if not tmpl:
+            tmpl = DiaryTemplate(
+                practice_id=practice.id,
+                practice_name=practice.name,
+                slot_start=time(9, 0),
+                slot_end=time(17, 0),
+                slot_interval_minutes=15,
+                footer=["Messages:", "Phone Consultations:"],
+            )
+            db.add(tmpl)
+            db.flush()
+
+            columns_data = [
+                {
+                    "room_label": "Room 1",
+                    "assignment": f"Dr Alex Shera",
+                    "practitioner_id": gp.id,
+                    "practitioner_ahpra": "MED0001234567",
+                    "tint_hex": None,
+                    "breaks": [
+                        ("MORNING TEA", time(10, 45), time(11, 0)),
+                        ("LUNCH",       time(13, 0),  time(14, 0)),
+                    ],
+                },
+                {
+                    "room_label": "Room 2",
+                    "assignment": "Nurse",
+                    "practitioner_id": None,
+                    "practitioner_ahpra": None,
+                    "tint_hex": "FFFF99",
+                    "breaks": [
+                        ("MORNING TEA", time(10, 45), time(11, 0)),
+                        ("LUNCH",       time(13, 0),  time(14, 0)),
+                    ],
+                },
+                {
+                    "room_label": "Room 3",
+                    "assignment": "[Available]",
+                    "practitioner_id": None,
+                    "practitioner_ahpra": None,
+                    "tint_hex": None,
+                    "breaks": [
+                        ("MORNING TEA", time(10, 45), time(11, 0)),
+                        ("LUNCH",       time(13, 0),  time(14, 0)),
+                    ],
+                },
+            ]
+            for order, col_data in enumerate(columns_data):
+                col = DiaryColumn(
+                    template_id=tmpl.id,
+                    practice_id=practice.id,
+                    display_order=order,
+                    room_label=col_data["room_label"],
+                    assignment=col_data["assignment"],
+                    practitioner_id=col_data["practitioner_id"],
+                    practitioner_ahpra=col_data["practitioner_ahpra"],
+                    tint_hex=col_data["tint_hex"],
+                )
+                db.add(col)
+                db.flush()
+                for brk_order, (label, from_t, to_t) in enumerate(col_data["breaks"]):
+                    db.add(DiaryBreak(
+                        column_id=col.id,
+                        display_order=brk_order,
+                        label=label,
+                        from_time=from_t,
+                        to_time=to_t,
+                    ))
+            db.flush()
+            print(f"  Diary template seeded ({len(columns_data)} columns)")
+        else:
+            print(f"  Diary template already exists: {tmpl.id}")
 
         db.commit()
         print("\nSeed complete.")

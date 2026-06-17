@@ -13,6 +13,7 @@ from app.models.results import (
     TestRequest, Result, ResultItem, Referral, Reminder, ScannedDocument,
 )
 from app.models.billing import MbsClaim, Invoice, MbsDirectory, SnomedDirectory
+from app.models.diary import DiaryTemplate, DiaryColumn, DiaryBreak
 from app.models.messaging import InternalMessage, SmsLog
 from app.models.kiosk import CheckinEvent, PatientQrToken, CallLog
 from app.models.rag import CommunityEncounter, RagFeedback, IhiRecord, MhrUpload
@@ -27,6 +28,7 @@ __all__ = [
     "Appointment", "AppointmentType", "PractitionerSchedule", "ScheduleOverride",
     "TestRequest", "Result", "ResultItem", "Referral", "Reminder", "ScannedDocument",
     "MbsClaim", "Invoice", "MbsDirectory", "SnomedDirectory",
+    "DiaryTemplate", "DiaryColumn", "DiaryBreak",
     "InternalMessage", "SmsLog",
     "CheckinEvent", "PatientQrToken", "CallLog",
     "CommunityEncounter", "RagFeedback", "IhiRecord", "MhrUpload",

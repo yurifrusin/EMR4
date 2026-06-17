@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/diary-template-api` |
-| Status | queued |
+| Status | in_progress |
 | Created | 882381e |
 | Start Command | `python scripts\agent_worktrees.py handin` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-diary-template-api --commit-message "Add diary template API foundation" --message "Diary template API foundation ready for Codex review"` |
