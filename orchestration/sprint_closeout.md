@@ -33,17 +33,20 @@ reviewed, integrated, verified, pushed, and audited.
 These checks are worth doing before dispatching the next set of agent tasks:
 
 1. Start the dev stack with `.\run_dev.ps1`.
-2. Open the Word Online add-in and sign in as the dev clinic user.
-3. Open the diary from the taskpane.
-4. Confirm the diary loads without an auth/error banner.
-5. Check the seeded appointments:
+2. If the 10:00 demo booking still renders as a 15-minute booking, run
+   `.venv\Scripts\python.exe seed.py` once to repair existing seeded demo
+   durations without recreating the database.
+3. Open the Word Online add-in and sign in as the dev clinic user.
+4. Open the diary from the taskpane.
+5. Confirm the diary loads without an auth/error banner.
+6. Check the seeded appointments:
    - 09:00 Margaret Thompson appears as confirmed / bold blue / all caps.
    - 09:15 Billy Frusin appears as a normal short booking without clipped reason text.
    - 10:00 Margaret Thompson spans 45 minutes and can show its reason line.
-6. Use Previous, Today, Next, and Refresh to confirm date navigation still works.
-7. Check narrow/mobile-ish width: header controls should wrap into a taller header,
+7. Use Previous, Today, Next, and Refresh to confirm date navigation still works.
+8. Check narrow/mobile-ish width: header controls should wrap into a taller header,
    and columns should remain usable with horizontal scrolling.
-8. Open the break editor for a column, change a break locally, save, and confirm
+9. Open the break editor for a column, change a break locally, save, and confirm
    the break block re-renders.
 
 ## Not Required Before Moving On

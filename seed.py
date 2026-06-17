@@ -292,7 +292,11 @@ def seed():
             elif exists.status == AppointmentStatus.Booked and init_status != AppointmentStatus.Booked:
                 # Idempotent upgrade: apply the demo status if user hasn't changed it
                 exists.status = init_status
-            if exists and exists.reason == reason and exists.duration_minutes == 15 and duration_minutes != 15:
+            if (
+                exists
+                and exists.reason == reason
+                and exists.duration_minutes != duration_minutes
+            ):
                 exists.duration_minutes = duration_minutes
         db.flush()
         print(f"  Sample appointments seeded for today ({today})")

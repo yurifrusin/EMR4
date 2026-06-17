@@ -14,8 +14,8 @@ const BACKEND_URL = (window.location.port === "3000")
     ? window.location.origin
     : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
-const SLOT_HEIGHT_PX = 26;
-const APPT_BLOCK_GAP_PX = 3;
+const SLOT_HEIGHT_PX = 30;
+const APPT_BLOCK_GAP_PX = 2;
 
 // ─── DIARY TEMPLATE (embedded — mirrors diary_template.json at repo root) ─────
 // Breaks are per-column so each room can have different break windows.
@@ -372,7 +372,7 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
       if (a.reason) {
         span.title = `${patientName} - ${a.reason}`;
       }
-      if (a.reason && duration >= intervalMins * 3) {
+      if (a.reason && duration >= intervalMins * 2) {
         const reason = document.createElement("span");
         reason.className = "appt-reason";
         reason.textContent = a.reason;
