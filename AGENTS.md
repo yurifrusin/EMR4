@@ -193,7 +193,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Last pushed commit** | `e53fcd2` — "Integrate appointment tests and diary intervals" |
+| **Last pushed commit** | `HEAD` — latest pushed integration state |
 
 ### Tag map (all tags pushed to remote)
 
@@ -221,7 +221,7 @@ agent session state.
 | `a9c045a` | Fix `POST /patients/with-file` 500: validate `PatientOut` first, then construct `PatientWithFileOut` |
 | `d0d99b9` | Multi-column Word table diary + `diary_template.json` (retained as reference; **superseded by native grid**) |
 | `1a6f15a` | Native Diary Grid (`docs/diary/`): read-only room×time grid with lifecycle colours + date nav + auto-refresh |
-| `e53fcd2` | Integrates Claude appointment/security regression tests + Antigravity diary interval rendering; fixes `submit` worktree root detection |
+| `0ab2f27` | Integrates Claude appointment/security regression tests + Antigravity diary interval rendering; fixes `submit` worktree root detection |
 
 ---
 
@@ -584,4 +584,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped. Strategic pivot: diary on native HTML/JS web grid (locked). Native Diary Grid now includes read-only interval rendering (`docs/diary/`, cache-bust `v=6`): room×time grid, lifecycle colours, per-column breaks, break-edit modal, date nav, silent auto-refresh, multi-slot appointment blocks, and `📅` taskpane button. Backend hardening now includes authenticated consultation AI endpoints, practice-scoped finalise, transactional patient file generation, appointment role gates, conflict validation, `/slots` duration-overlap logic, `AppointmentOut.end_time`, embedded `appointment_type`, mutable `practitioner_id`, and 21 pytest regression tests. Multi-agent mode is parallel-capable with Codex as orchestrator; submitted Claude/Antigravity workstreams were integrated in `e53fcd2`. Next: canonical appointment time model, independent positioned-column diary grid before interactivity, backend-backed Room/DiaryRoster/break config, and Gemini SDK migration before the 2026-06-24 deprecation removal date.*
+*Last updated: 2026-06-17 — Phase 2 in progress. New Patient bridge shipped. Strategic pivot: diary on native HTML/JS web grid (locked). Native Diary Grid now includes read-only interval rendering (`docs/diary/`, cache-bust `v=6`): room×time grid, lifecycle colours, per-column breaks, break-edit modal, date nav, silent auto-refresh, multi-slot appointment blocks, and `📅` taskpane button. Backend hardening now includes authenticated consultation AI endpoints, practice-scoped finalise, transactional patient file generation, appointment role gates, conflict validation, `/slots` duration-overlap logic, `AppointmentOut.end_time`, embedded `appointment_type`, mutable `practitioner_id`, and 21 pytest regression tests. Multi-agent mode is parallel-capable with Codex as orchestrator; submitted Claude/Antigravity workstreams were integrated in `0ab2f27`. Next: canonical appointment time model, independent positioned-column diary grid before interactivity, backend-backed Room/DiaryRoster/break config, and Gemini SDK migration before the 2026-06-24 deprecation removal date.*
