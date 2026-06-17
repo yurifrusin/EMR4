@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/diary-template-api` |
-| Status | submitted |
+| Status | integrated |
 | Created | 882381e |
 | Start Command | `python scripts\agent_worktrees.py handin` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-diary-template-api --commit-message "Add diary template API foundation" --message "Diary template API foundation ready for Codex review"` |
@@ -47,6 +47,7 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-- Files changed: `app/models/diary.py` (new), `app/models/__init__.py`, `app/schemas/diary.py` (new), `app/routers/diary.py` (new), `app/main.py`, `alembic/versions/a1b2c3d4e5f6_add_diary_template_models.py` (new), `seed.py`, `tests/test_diary_template.py` (new), `AGENTS.md`
-- Verification run: `compileall` clean; `alembic upgrade head` applied; `seed.py` populated dev template; 26/26 pytest tests pass (`tests/` directory)
-- Remaining risks: Work was done directly on `master` (not `codex/diary-template-api` branch) — already integrated. Frontend `diary.js` still uses the embedded template literal; the next task is to wire it to call `GET /api/v1/diary/template` and remove the embedded constant.
+- Files changed: `app/models/diary.py` (new), `app/models/__init__.py`, `app/schemas/diary.py` (new), `app/routers/diary.py` (new), `app/main.py`, `alembic/versions/a1b2c3d4e5f6_add_diary_template_models.py` (new), `seed.py`, `tests/test_diary_template.py` (new), `AGENTS.md`.
+- Verification run: `compileall` clean; `alembic heads/current/upgrade head`; `seed.py`; 26/26 pytest tests pass.
+- Review result: Accepted on `master` after orchestrator review; `app/schemas/diary.py` was polished to use `Field(default_factory=list)` for list outputs.
+- Remaining risks: Work reached `master` before the normal review path. The protocol has been updated so future `submit` failures must stop/report instead of being worked around manually. Frontend `diary.js` still uses the embedded template literal; the next task is to wire it to `GET /api/v1/diary/template`.

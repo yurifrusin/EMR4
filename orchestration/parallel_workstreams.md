@@ -7,10 +7,15 @@ single source of truth for durable project state; this file tracks active branch
 
 - Every agent starts with `python scripts\agent_worktrees.py handin`.
   This now performs the full intake ritual: sync, infer agent, list inbox, and
-  print the next task packet.
+  print protocol alerts plus the next task packet.
+- Protocol changes must be written to `orchestration/protocol_alerts.md`.
+  Worker agents should trust those alerts over remembered prior-session details.
 - Parallel workers finish with `python scripts\agent_worktrees.py submit ...`.
   Packet submit commands include `--task`, which creates a Codex review packet
   in the worker branch.
+- If `submit` fails, the worker must stop and report the exact command, working
+  directory, branch, and error output. Do not manually push to `master` or
+  `handoff/current` as a workaround.
 - `codex/current` is the durable Codex mirror branch. It is not the same thing as
   a Codex-app subagent worktree. Codex subagents should use unique task branches
   such as `codex/time-model`, `codex/gemini-sdk-migration`, or
@@ -139,7 +144,7 @@ reviews and integrates afterward.
 | In Scope | `docs/diary/diary.{html,css,js}` only |
 | Out of Scope | Backend changes, drag/drop, booking/status mutations |
 | Verification | JS syntax plus desktop/narrow browser visual QA |
-| Status | Dispatched |
+| Status | Submitted |
 
 ### Workstream F — Canonical Time Regression Tests
 
@@ -165,4 +170,4 @@ reviews and integrates afterward.
 | In Scope | Backend models/schemas/router/migration/tests as needed |
 | Out of Scope | Frontend consumption, drag/drop, booking mutations |
 | Verification | compileall, relevant pytest, Alembic head/current/upgrade if migration added |
-| Status | Dispatched |
+| Status | Integrated |

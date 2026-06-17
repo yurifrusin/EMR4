@@ -33,6 +33,15 @@ No frontend work. No schema redesign. No Room/DiaryRoster implementation. No Gem
 6. Run the verification listed below.
 7. Finish with the submit command above.
 
+## Hard Stop Rules
+
+- Do not push to `master` or `handoff/current`.
+- Do not manually work around a failed `submit`.
+- If `submit` fails, stop and report the exact command, working directory, branch,
+  and error output to the orchestrator.
+- If these instructions conflict with remembered prior protocol, trust the current
+  `handin` alerts and this task packet.
+
 ## Verification
 
 Run .venv\\Scripts\\python.exe -m pytest tests. Also run .venv\\Scripts\\python.exe -m compileall app scripts tests if production code is touched.

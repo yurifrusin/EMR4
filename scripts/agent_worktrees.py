@@ -18,6 +18,7 @@ AGENTS = {
 }
 HANDOFF_REF = "handoff/current"
 INBOX_ROOT = REPO_ROOT / "orchestration" / "agent_inbox"
+PROTOCOL_ALERTS_PATH = REPO_ROOT / "orchestration" / "protocol_alerts.md"
 
 
 TASK_TEMPLATE = """# {task_id}
@@ -48,12 +49,22 @@ TASK_TEMPLATE = """# {task_id}
 ## Required Steps
 
 1. Run the start command above.
-2. Read `AGENTS.md` and `orchestration/parallel_workstreams.md`.
-3. Work only inside the stated scope unless the user or Codex expands it.
-4. Do not merge to `master`.
-5. Do not move `handoff/current`.
-6. Run the verification listed below.
-7. Finish with the submit command above.
+2. Read the protocol alerts printed by `handin`.
+3. Read `AGENTS.md` and `orchestration/parallel_workstreams.md`.
+4. Work only inside the stated scope unless the user or Codex expands it.
+5. Do not merge to `master`.
+6. Do not move `handoff/current`.
+7. Run the verification listed below.
+8. Finish with the submit command above.
+
+## Hard Stop Rules
+
+- Do not push to `master` or `handoff/current`.
+- Do not manually work around a failed `submit`.
+- If `submit` fails, stop and report the exact command, working directory, branch,
+  and error output to the orchestrator.
+- If these instructions conflict with remembered prior protocol, trust the current
+  `handin` alerts and this task packet.
 
 ## Verification
 
@@ -227,6 +238,18 @@ def print_agent_brief(agent: str) -> None:
         print()
         print(f"[brief] {selected.relative_to(REPO_ROOT)}")
         print(selected.read_text(encoding="utf-8"))
+
+
+def print_protocol_alerts(repo_root: Path = REPO_ROOT) -> None:
+    alerts_path = repo_root / "orchestration" / "protocol_alerts.md"
+    if not alerts_path.exists():
+        return
+    text = alerts_path.read_text(encoding="utf-8").strip()
+    if not text:
+        return
+    print()
+    print("[protocol alerts]")
+    print(text)
 
 
 def append_completion_note(path: Path, summary: str) -> None:
@@ -461,6 +484,7 @@ def handin(args: argparse.Namespace) -> None:
     sync(args)
     if args.no_brief:
         return
+    print_protocol_alerts(repo_root_for_cwd(Path.cwd().resolve()))
     agent = args.agent or agent_from_branch(Path.cwd().resolve())
     if agent:
         print_agent_brief(agent)

@@ -1,6 +1,6 @@
 from datetime import time
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class DiaryBreakOut(BaseModel):
@@ -16,7 +16,7 @@ class DiaryColumnOut(BaseModel):
     assignment: Optional[str] = None
     practitioner_ahpra: Optional[str] = None
     tint_hex: Optional[str] = None
-    breaks: list[DiaryBreakOut] = []
+    breaks: list[DiaryBreakOut] = Field(default_factory=list)
 
     model_config = {"from_attributes": True}
 
@@ -26,7 +26,7 @@ class DiaryTemplateOut(BaseModel):
     slot_start: time
     slot_end: time
     slot_interval_minutes: int
-    footer: list[str] = []
-    columns: list[DiaryColumnOut] = []
+    footer: list[str] = Field(default_factory=list)
+    columns: list[DiaryColumnOut] = Field(default_factory=list)
 
     model_config = {"from_attributes": True}
