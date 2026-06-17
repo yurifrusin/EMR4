@@ -361,13 +361,15 @@ function saveBreaks() {
 }
 
 // ─── LOAD DIARY ────────────────────────────────────────────
-async function loadDiary() {
+async function loadDiary(silent = false) {
   if (!token) {
     setStatus("Waiting for auth token…");
     return;
   }
-  showLoading(true);
-  document.getElementById("diary-grid").classList.add("hidden");
+  if (!silent) {
+    showLoading(true);
+    document.getElementById("diary-grid").classList.add("hidden");
+  }
   showError("");
 
   const dayStart = new Date(diaryDate);
@@ -400,9 +402,11 @@ async function loadDiary() {
     const total = appointments.length;
     setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}`);
   } catch (e) {
-    showLoading(false);
-    showError("Failed to load diary: " + (e.message || String(e)));
-    setStatus("Error loading diary.");
+    if (!silent) {
+      showLoading(false);
+      showError("Failed to load diary: " + (e.message || String(e)));
+    }
+    setStatus("Refresh failed — " + (e.message || String(e)));
   }
 }
 
@@ -425,7 +429,7 @@ function shiftDay(delta) {
 // ─── AUTO-REFRESH ──────────────────────────────────────────
 function scheduleRefresh() {
   if (refreshTimer) clearTimeout(refreshTimer);
-  refreshTimer = setTimeout(() => { loadDiary(); scheduleRefresh(); }, REFRESH_INTERVAL_MS);
+  refreshTimer = setTimeout(() => { loadDiary(true); scheduleRefresh(); }, REFRESH_INTERVAL_MS);
 }
 function doRefresh() { loadDiary(); scheduleRefresh(); }
 
