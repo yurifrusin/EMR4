@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/diary-template-api` |
-| Status | in_progress |
+| Status | submitted |
 | Created | 882381e |
 | Start Command | `python scripts\agent_worktrees.py handin` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-diary-template-api --commit-message "Add diary template API foundation" --message "Diary template API foundation ready for Codex review"` |
@@ -47,8 +47,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Fill this in before submit:
-
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/models/diary.py` (new), `app/models/__init__.py`, `app/schemas/diary.py` (new), `app/routers/diary.py` (new), `app/main.py`, `alembic/versions/a1b2c3d4e5f6_add_diary_template_models.py` (new), `seed.py`, `tests/test_diary_template.py` (new), `AGENTS.md`
+- Verification run: `compileall` clean; `alembic upgrade head` applied; `seed.py` populated dev template; 26/26 pytest tests pass (`tests/` directory)
+- Remaining risks: Work was done directly on `master` (not `codex/diary-template-api` branch) — already integrated. Frontend `diary.js` still uses the embedded template literal; the next task is to wire it to call `GET /api/v1/diary/template` and remove the embedded constant.
