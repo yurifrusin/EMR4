@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import re
 import subprocess
 import sys
@@ -19,6 +20,8 @@ AGENTS = {
 HANDOFF_REF = "handoff/current"
 INBOX_ROOT = REPO_ROOT / "orchestration" / "agent_inbox"
 PROTOCOL_ALERTS_PATH = REPO_ROOT / "orchestration" / "protocol_alerts.md"
+INTEGRATION_LOG_PATH = REPO_ROOT / "orchestration" / "integration_log.md"
+DURABLE_BRANCHES = {"master", HANDOFF_REF, *AGENTS.values()}
 
 
 TASK_TEMPLATE = """# {task_id}
@@ -92,6 +95,11 @@ def safe_path(path: Path) -> str:
     return path.resolve().as_posix()
 
 
+def md_cell(value: str | None) -> str:
+    text = str(value or "").replace("\n", " ").strip()
+    return text.replace("|", "\\|")
+
+
 def run_git(args: list[str], cwd: Path = REPO_ROOT, check: bool = True) -> subprocess.CompletedProcess[str]:
     cmd = ["git", "-c", f"safe.directory={safe_path(cwd)}", "-c", "core.excludesFile=", *args]
     result = subprocess.run(cmd, cwd=cwd, text=True, capture_output=True)
@@ -114,6 +122,149 @@ def print_result(result: subprocess.CompletedProcess[str]) -> None:
         print(result.stdout.strip())
     if result.stderr:
         sys.stderr.write(result.stderr)
+
+
+def local_timestamp() -> str:
+    return datetime.now().astimezone().strftime("%Y-%m-%d %H:%M %z")
+
+
+def ensure_integration_log(repo_root: Path = REPO_ROOT) -> Path:
+    path = repo_root / "orchestration" / "integration_log.md"
+    if path.exists():
+        return path
+    text = """# EMR4 Integration Log
+
+This is the operational ledger for Codex-orchestrated submits, reviews, integrations,
+and worker-worktree retirement decisions. It complements the task packets under
+`orchestration/agent_inbox/`.
+
+| When | Agent | Task | Branch | Submit/Review | Integration Commit | Result | Retire/Follow-up |
+|---|---|---|---|---|---|---|---|
+"""
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
+def append_integration_log(
+    agent: str,
+    task: str,
+    branch: str,
+    review: str,
+    integration_commit: str,
+    result: str,
+    follow_up: str,
+    repo_root: Path = REPO_ROOT,
+) -> Path:
+    path = ensure_integration_log(repo_root)
+    row = (
+        f"| {md_cell(local_timestamp())} | {md_cell(agent)} | {md_cell(task)} | "
+        f"`{md_cell(branch)}` | {md_cell(review)} | `{md_cell(integration_commit)}` | "
+        f"{md_cell(result)} | {md_cell(follow_up)} |\n"
+    )
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(row)
+    return path
+
+
+def integration_log_records(repo_root: Path = REPO_ROOT) -> list[dict[str, str]]:
+    path = repo_root / "orchestration" / "integration_log.md"
+    if not path.exists():
+        return []
+    records: list[dict[str, str]] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("|") or line.startswith("|---") or line.startswith("| When |"):
+            continue
+        parts = [part.strip().strip("`") for part in line.strip("|").split("|")]
+        if len(parts) < 8:
+            continue
+        records.append(
+            {
+                "when": parts[0],
+                "agent": parts[1],
+                "task": parts[2],
+                "branch": parts[3],
+                "review": parts[4],
+                "commit": parts[5],
+                "result": parts[6],
+                "follow_up": parts[7],
+            }
+        )
+    return records
+
+
+def integrated_branches(repo_root: Path = REPO_ROOT) -> set[str]:
+    branches: set[str] = set()
+    for record in integration_log_records(repo_root):
+        if "integrated" in record["result"].lower() and record["branch"]:
+            branches.add(record["branch"])
+    return branches
+
+
+def branch_is_ancestor(branch: str, target: str = "master", cwd: Path = REPO_ROOT) -> bool:
+    return run_git(["merge-base", "--is-ancestor", branch, target], cwd=cwd, check=False).returncode == 0
+
+
+def parse_worktrees(repo_root: Path = REPO_ROOT) -> list[dict[str, str]]:
+    text = git_stdout(["worktree", "list", "--porcelain"], cwd=repo_root)
+    worktrees: list[dict[str, str]] = []
+    current: dict[str, str] = {}
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if not line:
+            if current:
+                worktrees.append(current)
+                current = {}
+            continue
+        if line.startswith("worktree "):
+            current["path"] = line.removeprefix("worktree ")
+        elif line.startswith("HEAD "):
+            current["head"] = line.removeprefix("HEAD ")
+        elif line.startswith("branch "):
+            current["branch"] = line.removeprefix("branch refs/heads/")
+        elif line == "detached":
+            current["branch"] = "(detached)"
+    if current:
+        worktrees.append(current)
+    return worktrees
+
+
+def worktree_dirty(path: Path) -> bool:
+    return bool(git_stdout(["status", "--porcelain"], cwd=path, check=False))
+
+
+def is_disposable_worktree(item: dict[str, str]) -> bool:
+    branch = item.get("branch", "")
+    path = item.get("path", "")
+    if branch in DURABLE_BRANCHES:
+        return False
+    return branch.startswith("codex/") or "/.codex/worktrees/" in path.replace("\\", "/")
+
+
+def stale_worktree_candidates(repo_root: Path = REPO_ROOT) -> list[dict[str, str]]:
+    integrated = integrated_branches(repo_root)
+    candidates: list[dict[str, str]] = []
+    for item in parse_worktrees(repo_root):
+        branch = item.get("branch", "")
+        if not branch or not is_disposable_worktree(item):
+            continue
+        path = Path(item["path"])
+        dirty = worktree_dirty(path)
+        merged = branch_is_ancestor(branch, "master", cwd=repo_root)
+        logged_integrated = branch in integrated
+        if not (merged or logged_integrated or dirty):
+            continue
+        item = dict(item)
+        item["dirty"] = "yes" if dirty else "no"
+        item["merged"] = "yes" if merged else "no"
+        item["logged_integrated"] = "yes" if logged_integrated else "no"
+        if dirty:
+            item["recommendation"] = "review dirty worktree before retiring"
+        elif merged or logged_integrated:
+            item["recommendation"] = "safe to remove worktree; preserve branch unless separately pruned"
+        else:
+            item["recommendation"] = "inspect"
+        candidates.append(item)
+    return candidates
 
 
 def require_clean(cwd: Path = REPO_ROOT) -> None:
@@ -498,6 +649,119 @@ def status(_: argparse.Namespace) -> None:
     print(git_stdout(["worktree", "list"]))
 
 
+def print_task_summary(repo_root: Path = REPO_ROOT) -> None:
+    files = task_files(repo_root=repo_root)
+    if not files:
+        print("[tasks] none")
+        return
+    print("[tasks]")
+    for path in files:
+        print(f"{read_task_status(path):<12} {path.relative_to(repo_root)}")
+
+
+def print_integration_log_tail(limit: int = 8, repo_root: Path = REPO_ROOT) -> None:
+    records = integration_log_records(repo_root)
+    if not records:
+        print("[integration log] no records yet")
+        return
+    print(f"[integration log] last {min(limit, len(records))}")
+    for record in records[-limit:]:
+        print(
+            f"{record['when']}  {record['agent']:<11} {record['task']:<45} "
+            f"{record['commit']:<8} {record['result']}"
+        )
+
+
+def print_stale_worktrees(repo_root: Path = REPO_ROOT) -> list[dict[str, str]]:
+    candidates = stale_worktree_candidates(repo_root)
+    if not candidates:
+        print("[stale worktrees] none")
+        return []
+    print("[stale worktrees]")
+    for item in candidates:
+        print(
+            f"{item.get('branch', ''):<28} dirty={item['dirty']:<3} "
+            f"merged={item['merged']:<3} logged={item['logged_integrated']:<3} "
+            f"{item.get('path', '')}"
+        )
+        print(f"  -> {item['recommendation']}")
+    return candidates
+
+
+def audit(args: argparse.Namespace) -> None:
+    if args.fetch:
+        print(f"[fetch] {args.remote}")
+        print_result(run_git(["fetch", args.remote]))
+
+    print("[refs]")
+    for ref in ["master", HANDOFF_REF, *AGENTS.values()]:
+        result = run_git(["rev-parse", "--short", ref], check=False)
+        value = result.stdout.strip() if result.returncode == 0 else "missing"
+        print(f"{ref:<22} {value}")
+
+    print()
+    print("[worktrees]")
+    for item in parse_worktrees():
+        path = Path(item.get("path", ""))
+        dirty = "dirty" if path.exists() and worktree_dirty(path) else "clean"
+        branch = item.get("branch", "(unknown)")
+        head = item.get("head", "")[:8]
+        print(f"{branch:<28} {head:<8} {dirty:<5} {item.get('path', '')}")
+
+    print()
+    print_task_summary()
+    print()
+    print_integration_log_tail(args.limit)
+    print()
+    print_stale_worktrees()
+
+
+def record_integration(args: argparse.Namespace) -> None:
+    commit_ref = args.integration_commit or "HEAD"
+    resolved = git_stdout(["rev-parse", "--short", commit_ref], check=False)
+    commit = resolved or commit_ref
+    path = append_integration_log(
+        agent=args.agent,
+        task=args.task,
+        branch=args.branch,
+        review=args.review,
+        integration_commit=commit,
+        result=args.result,
+        follow_up=args.follow_up,
+    )
+    print(f"[ok] wrote {path.relative_to(REPO_ROOT)}")
+
+
+def retire_stale(args: argparse.Namespace) -> None:
+    candidates = stale_worktree_candidates()
+    if not candidates:
+        print("[ok] no stale disposable worktrees found")
+        return
+
+    removable = [item for item in candidates if item["dirty"] == "no"]
+    blocked = [item for item in candidates if item["dirty"] == "yes"]
+
+    if blocked:
+        print("[blocked: dirty worktrees]")
+        for item in blocked:
+            print(f"{item.get('branch', ''):<28} {item.get('path', '')}")
+
+    if not removable:
+        print("[ok] no clean stale disposable worktrees to retire")
+        return
+
+    action = "remove" if args.apply else "would remove"
+    print(f"[{action}]")
+    for item in removable:
+        print(f"{item.get('branch', ''):<28} {item.get('path', '')}")
+        if args.apply:
+            print_result(run_git(["worktree", "remove", item["path"]]))
+
+    if not args.apply:
+        print()
+        print("Dry run only. Re-run with --apply to remove the clean stale worktree directories.")
+
+
 def poll(args: argparse.Namespace) -> None:
     if args.fetch:
         print(f"[fetch] {args.remote}")
@@ -563,6 +827,13 @@ def poll(args: argparse.Namespace) -> None:
 
     if not found:
         print("[ok] no submitted worker branches or Codex inbox packets found")
+
+    candidates = stale_worktree_candidates()
+    if candidates:
+        print()
+        print("[note] stale disposable worktrees detected; run:")
+        print("  python scripts\\agent_worktrees.py audit")
+        print("  python scripts\\agent_worktrees.py retire-stale")
 
 
 def main() -> None:
@@ -639,6 +910,26 @@ def main() -> None:
     poll_parser.add_argument("--remote", default="origin")
     poll_parser.add_argument("--fetch", action="store_true")
     poll_parser.set_defaults(func=poll)
+
+    audit_parser = subparsers.add_parser("audit", help="Show orchestration refs, tasks, integration log, and stale worker worktrees")
+    audit_parser.add_argument("--remote", default="origin")
+    audit_parser.add_argument("--fetch", action="store_true")
+    audit_parser.add_argument("--limit", type=int, default=8, help="Number of integration-log rows to show")
+    audit_parser.set_defaults(func=audit)
+
+    record_parser = subparsers.add_parser("record-integration", help="Append a reviewed submit/integration to the integration ledger")
+    record_parser.add_argument("--agent", choices=sorted(AGENTS), required=True)
+    record_parser.add_argument("--task", required=True)
+    record_parser.add_argument("--branch", required=True)
+    record_parser.add_argument("--review", default="")
+    record_parser.add_argument("--integration-commit", default="")
+    record_parser.add_argument("--result", default="integrated")
+    record_parser.add_argument("--follow-up", default="")
+    record_parser.set_defaults(func=record_integration)
+
+    retire_parser = subparsers.add_parser("retire-stale", help="Dry-run removal of clean stale disposable worker worktrees")
+    retire_parser.add_argument("--apply", action="store_true", help="Actually remove clean stale disposable worktree directories")
+    retire_parser.set_defaults(func=retire_stale)
 
     status_parser = subparsers.add_parser("status", help="Show branch and worktree status")
     status_parser.set_defaults(func=status)

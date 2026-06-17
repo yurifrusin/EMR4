@@ -11,4 +11,7 @@ Read these before acting on remembered process details.
 - Codex-app worker threads are disposable worker checkouts. They must use unique
   branches such as `codex/<task-name>` and submit back for review; they are not
   the durable `codex/current` mirror.
+- Codex records integrated submits in `orchestration/integration_log.md` and runs
+  `audit` / `retire-stale` after integrations so stale disposable worktrees are
+  visible instead of surprising the next session.
 - If these alerts conflict with a prior session memory, trust these alerts.

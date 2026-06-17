@@ -28,11 +28,42 @@ single source of truth for durable project state; this file tracks active branch
 - Codex polls submissions with `python scripts\agent_worktrees.py poll --fetch`.
   This includes Claude/Antigravity branches and submitted `codex/*` worker branches,
   excluding the durable `codex/current` mirror.
+- Codex records every reviewed submit/integration in `orchestration/integration_log.md`
+  via `python scripts\agent_worktrees.py record-integration ...`.
+- After each integration, Codex runs `python scripts\agent_worktrees.py audit --fetch`
+  and, when appropriate, `python scripts\agent_worktrees.py retire-stale` to expose
+  disposable worker worktrees that should be removed or manually reviewed.
+- `retire-stale` is dry-run by default. It removes only clean disposable worker
+  worktrees when called with `--apply`; dirty worktrees are reported, never removed.
 - Only Codex, acting as orchestrator, advances `master` and `handoff/current` in
   parallel mode unless the user explicitly instructs otherwise.
 - Every workstream must state files in scope, files out of scope, verification, and
   merge criteria.
 - Agents should record concerns or disagreement in the "Dissent / Risks" field.
+
+## Transparency Routine
+
+Use a single evidence chain for every parallel task:
+
+1. Dispatch packet in `orchestration/agent_inbox/<agent>/`.
+2. Worker submit creates a Codex review packet.
+3. Codex review marks packets `integrated`, `superseded`, or `blocked`.
+4. Codex records the outcome in `orchestration/integration_log.md`.
+5. Codex runs `audit --fetch` and reports:
+   - submitted work waiting for review
+   - integration-log delta since the last poll
+   - branch/baton/mirror alignment
+   - stale disposable worktrees and whether they are clean or dirty
+6. Clean stale disposable worktrees may be retired with `retire-stale --apply`.
+   Dirty stale worktrees require explicit review or user-approved abandonment.
+
+When reporting progress to the user, Codex should use this shape:
+
+- **Polled:** what submissions/review packets were found.
+- **Integrated:** what was accepted, repaired, rejected, or superseded.
+- **Verified:** checks run and failures/warnings.
+- **Aligned:** which refs were pushed/realigned.
+- **Retirement:** stale disposable worktrees removed or left for review.
 
 ## Reasoning Budget Guidance
 
@@ -72,8 +103,8 @@ Task packets are stored here:
 - `orchestration/agent_inbox/codex/`
 
 Packet status values are lightweight text: `queued`, `in_progress`, `submitted`,
-`blocked`, or `merged`. The submit command pushes the worker branch only; Codex
-reviews and integrates afterward.
+`integrated`, `superseded`, or `blocked`. The submit command pushes the worker
+branch only; Codex reviews and integrates afterward.
 
 ### Workstream A — Backend Time Model
 
@@ -157,7 +188,7 @@ reviews and integrates afterward.
 | In Scope | Tests and minimal fixtures/helpers; tiny production fixes only if blocked |
 | Out of Scope | Frontend, schema redesign, Room/DiaryRoster |
 | Verification | `.venv\Scripts\python.exe -m pytest tests` |
-| Status | Dispatched |
+| Status | Superseded by integrated canonical time test coverage |
 
 ### Workstream G — Diary Template API Foundation
 

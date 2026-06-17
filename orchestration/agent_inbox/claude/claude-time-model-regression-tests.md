@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 882381e |
 | Start Command | `python scripts\agent_worktrees.py handin` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent claude --task claude-time-model-regression-tests --commit-message "Add canonical time model regression tests" --message "Canonical time model regression tests ready for Codex review"` |
@@ -61,3 +61,10 @@ Fill this in before submit:
 - Files changed:
 - Verification run:
 - Remaining risks:
+
+Superseded note:
+
+Claude reported from `master` that there was no active work for this packet after
+the diary-template API/testing work had already reached `master`. The canonical
+time model is covered by the integrated 26-test suite, so this packet is closed
+without a separate submit.

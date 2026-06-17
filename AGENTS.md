@@ -181,6 +181,32 @@ worker branch. Codex can check submitted work with:
 python scripts\agent_worktrees.py poll --fetch
 ```
 
+After Codex integrates a submit, it must:
+
+1. Mark the source task packet and Codex review packet `integrated` or `superseded`.
+2. Record the outcome in `orchestration/integration_log.md`:
+
+```powershell
+python scripts\agent_worktrees.py record-integration --agent antigravity --task antigravity-example --branch antigravity/current --review "Reviewed and integrated" --integration-commit HEAD --result integrated --follow-up "Mirrors realigned"
+```
+
+3. Push `master`, `handoff/current`, and durable mirrors.
+4. Run the orchestration audit:
+
+```powershell
+python scripts\agent_worktrees.py audit --fetch
+```
+
+5. Retire stale disposable worker worktrees only after audit confirms they are clean:
+
+```powershell
+python scripts\agent_worktrees.py retire-stale
+python scripts\agent_worktrees.py retire-stale --apply
+```
+
+`retire-stale` is a dry run by default. Dirty worktrees are never removed by the
+routine; they must be reviewed or explicitly abandoned first.
+
 ### Parallel ownership rule
 
 Split by ownership boundary:
