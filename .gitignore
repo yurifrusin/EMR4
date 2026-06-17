@@ -35,6 +35,8 @@ secrets*.json
 *.bak
 *.dump
 *.sql
+/*.docx
+/patient_files/
 exports/
 backups/
 uploads/
@@ -75,6 +77,15 @@ desktop.ini
 .vscode/*
 EMR4 Sidebar/.vscode/*
 !EMR4 Sidebar/.vscode/extensions.json
+
+# Agent/local workspace state
+.claude/settings.local.json
+CLAUDE.local.md
+claude.json
+antigravity.local.json
+
+# Loose local design exports
+/emr_centaur_logo.png
 
 # Large/generated MBS derived files
 MBS/mbs_unstructured/

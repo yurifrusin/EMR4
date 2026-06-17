@@ -12,6 +12,105 @@ EMR4 Centaur is an AI-native, open-source, cloud-hosted General Practice managem
 
 ---
 
+## 1A. Multi-Agent Handoff & Worktree Protocol
+
+Goal: keep **single-track handoff seamless now**, while the repo is already shaped for
+true parallel Codex + Claude Code + Antigravity work later.
+
+### Current Baton
+
+| Item | Value |
+|---|---|
+| **Mode** | Single-track handoff; only one agent should make project-code changes at a time |
+| **Baton ref** | `handoff/current` |
+| **Integration worktree** | `C:\Users\YuriFrusin\Documents\EMR4` on `master` |
+| **Agent worktree root** | `C:\Users\YuriFrusin\Documents\EMR4-worktrees\` |
+| **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
+| **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
+| **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
+| **Current active track** | Phase 2 diary/grid interactivity planning and backend enrichment |
+| **Next recommended work** | Enrich `AppointmentOut`, fix `/slots` overlap math, add conflict validation |
+
+### One-time setup
+
+From the integration worktree:
+
+```powershell
+python scripts\agent_worktrees.py setup
+```
+
+This creates:
+
+- `codex/current`
+- `claude/current`
+- `antigravity/current`
+- `handoff/current`
+
+Each agent branch has its own worktree. Never check out the same branch in two
+worktrees at once.
+
+### Starting a session in an agent worktree
+
+1. Open the agent's own worktree.
+2. Read `AGENTS.md`, `CLAUDE.md` where relevant, and `implementation_plan.md`.
+3. Fast-forward to the baton:
+
+```powershell
+python scripts\agent_worktrees.py sync
+```
+
+or manually:
+
+```powershell
+git merge --ff-only handoff/current
+```
+
+4. Run `git status`; proceed only from a clean tracked-code state.
+
+### Ending a session / handing off
+
+1. Commit all intentional project-code changes on the current agent branch.
+2. Update this file if state, architecture, gotchas, or next steps changed.
+3. Move the baton:
+
+```powershell
+python scripts\agent_worktrees.py handoff --agent codex --message "Short baton note"
+```
+
+Use `--agent claude` or `--agent antigravity` from those worktrees.
+
+### Single-track rule for now
+
+Until the user explicitly starts true parallel work, treat `handoff/current` as the
+only endorsed continuation point. An agent may inspect other worktrees, but should
+not make independent project-code changes away from the baton.
+
+### Future true-parallel rule
+
+When parallel work begins, split by ownership boundary:
+
+- Backend API/schema branch
+- Taskpane/diary frontend branch
+- Security/tests/docs branch
+
+Each branch should have a clear owner, a narrow file boundary, and an integration
+review before merge back to `master`.
+
+### Worktree mirror boundary
+
+All worktrees should be project-code mirrors when clean. Differences are allowed
+only for ignored local/runtime files:
+
+- `.env`, `.venv/`, `node_modules/`
+- generated `.docx` files and `patient_files/`
+- `.claude/settings.local.json`, `CLAUDE.local.md`, `claude.json`
+- logs, temp files, local exports such as root `emr_centaur_logo.png`
+
+Do not commit real patient data, local secrets, generated clinical documents, or
+agent session state.
+
+---
+
 ## 2. Repository & Git State
 
 | Item | Value |
@@ -255,7 +354,7 @@ clean child order; new injections should do the same.
 | File | Purpose |
 |---|---|
 | `implementation_plan.md` | Master 12-phase plan — the definitive blueprint. Read this first. |
-| `agents.md` | **This file** — agent handover |
+| `AGENTS.md` | **This file** — agent handover |
 | `app/services/auth_service.py` | bcrypt auth (no passlib) |
 | `app/config.py` | Pydantic settings |
 | `app/models/` | All SQLAlchemy models |
@@ -370,7 +469,7 @@ instead of `["*"]`. Set `ENVIRONMENT` + a generated `SECRET_KEY` in prod `.env`.
 ## 9. Handover Protocol
 
 ### For the incoming agent
-1. Read this file (`agents.md`) in full
+1. Read this file (`AGENTS.md`) in full
 2. Read `implementation_plan.md` §2 (Architecture Pivots) and §12 (Phases)
 3. Run `git log --oneline` and `git tag` to orient yourself
 4. Check `git status` — should be clean
@@ -380,7 +479,7 @@ instead of `["*"]`. Set `ENVIRONMENT` + a generated `SECRET_KEY` in prod `.env`.
 1. Run `git status` — commit anything uncommitted
 2. Update this file: current HEAD commit, current state, any new decisions or gotchas
 3. Push: `git push origin master`
-4. Tell the user: *"agents.md is updated and pushed — safe to start a new session"*
+4. Tell the user: *"AGENTS.md is updated and pushed — safe to start a new session"*
 
 ### Triggering updates
 The user can say **"update the handover doc"** at any time to trigger a refresh of this file.

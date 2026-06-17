@@ -1,12 +1,14 @@
 # CLAUDE.md
 
+@AGENTS.md
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 Prefer architectural guidance via opusplan combined with Sonnet execution
 
 ## Project Overview
 
-**EMR4 Centaur** is an AI-native General Practice management system for Australia. Microsoft Word (desktop or online) is the clinical frontend — the GP writes into a Word document and an Office.js add-in taskpane acts as the command interface. A FastAPI/PostgreSQL backend on GCP handles clinical logic; Google Gemini 2.5 Flash provides AI throughout. See [`agents.md`](agents.md) for the definitive handover state and [`implementation_plan.md`](implementation_plan.md) for the 12-phase blueprint.
+**EMR4 Centaur** is an AI-native General Practice management system for Australia. Microsoft Word (desktop or online) is the clinical frontend — the GP writes into a Word document and an Office.js add-in taskpane acts as the command interface. A FastAPI/PostgreSQL backend on GCP handles clinical logic; Google Gemini 2.5 Flash provides AI throughout. See [`AGENTS.md`](AGENTS.md) for the definitive handover state and [`implementation_plan.md`](implementation_plan.md) for the 12-phase blueprint.
 
 ---
 
@@ -163,7 +165,7 @@ These pairs live in different files and MUST agree; a mismatch fails silently
 
 | File | Purpose |
 |---|---|
-| [`agents.md`](agents.md) | **Read first.** Handover state, architectural decisions, per-phase completion status. Update every significant commit. |
+| [`AGENTS.md`](AGENTS.md) | **Read first.** Handover state, architectural decisions, per-phase completion status. Update every significant commit. |
 | [`implementation_plan.md`](implementation_plan.md) | 12-phase master blueprint and vision |
 | [`sync_taskpane.py`](sync_taskpane.py) | Copies taskpane src → docs/, patches URLs — run after every frontend edit |
 | [`create_patient_file.py`](create_patient_file.py) | Generates a per-patient `.docx` (demographics + locked section headers + Custom XML Part). `create_patient_docx()` is importable by the future New Patient userform endpoint. |
