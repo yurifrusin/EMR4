@@ -38,6 +38,9 @@ print("  copied + patched taskpane.js")
 
 shutil.copy2(SRC / "assets" / "emr_centaur_logo.png", DEST / "assets" / "emr_centaur_logo.png")
 print("  copied assets/emr_centaur_logo.png")
+if (SRC / "assets" / "cuboid4.png").exists():
+    shutil.copy2(SRC / "assets" / "cuboid4.png", DEST / "assets" / "cuboid4.png")
+    print("  copied assets/cuboid4.png")
 
 # Patch command-centre.js with the real ngrok URL (it lives directly in docs/command-centre/)
 NGROK_URL = "https://property-cinch-backfield.ngrok-free.dev"

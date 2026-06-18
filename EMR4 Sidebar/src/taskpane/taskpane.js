@@ -57,6 +57,7 @@ let snomedRowCount = 0;
 let rxRowCount     = 0;
 let lastSyncedText = "";
 let debounceTimer  = null;
+let backgroundSyncTimer = null;
 let typeaheadTimer = null;
 let mediaRecorder  = null;
 let audioChunks    = [];
@@ -85,6 +86,17 @@ function setStatus(msg) {
   if (el) el.textContent = msg;
 }
 
+function updateStartConsultButton() {
+  const btn = document.getElementById("btn-start-consult");
+  if (!btn) return;
+  const canStart = Boolean(currentPatient) && !consultStarted && !commandCentreOpen;
+  btn.disabled = !canStart;
+  btn.textContent = consultStarted ? "Consultation Started" : "▶ Start Consultation";
+  btn.title = consultStarted
+    ? "A consultation is already in progress this session."
+    : "Insert a dated consult header under Contemporaneous Notes (Ctrl+Alt+N)";
+}
+
 // Disable/restore all editing controls while Command Centre is the active surface.
 function setTaskpaneLocked(locked) {
   const ids = [
@@ -97,6 +109,7 @@ function setTaskpaneLocked(locked) {
     const el = document.getElementById(id);
     if (el) el.disabled = locked;
   }
+  if (!locked) updateStartConsultButton();
   // Dynamic coding rows — CSS lock so newly-rendered rows are also covered
   ["mbs-container", "snomed-container", "rx-container"].forEach(id => {
     document.getElementById(id)?.classList.toggle("cc-locked", locked);
@@ -211,9 +224,12 @@ function logout() {
   localStorage.removeItem("emr4_token");
   localStorage.removeItem("emr4_cc_patient_id");
   consultStarted = false;
+  if (backgroundSyncTimer) {
+    clearInterval(backgroundSyncTimer);
+    backgroundSyncTimer = null;
+  }
   document.getElementById("btn-command-center").disabled = true;
-  const startBtn = document.getElementById("btn-start-consult");
-  if (startBtn) startBtn.disabled = true;
+  updateStartConsultButton();
   showView("view-login");
 }
 
@@ -272,8 +288,7 @@ async function loadPatient(patientId) {
   updateOpenFileButton();
   consultStarted = false;   // new patient = new session
   document.getElementById("btn-command-center").disabled = false;
-  const startBtn = document.getElementById("btn-start-consult");
-  if (startBtn) startBtn.disabled = false;
+  updateStartConsultButton();
 
   // Sidebar — allergies (available immediately from summary)
   _renderSidebarAllergies(data.allergies || []);
@@ -866,6 +881,7 @@ async function approveAndFinalize() {
         isLocked = true;
         updateLockUI();
         consultStarted = false;   // allow a new consultation to be started
+        updateStartConsultButton();
         const btn = document.getElementById("btn-finalize");
         if (btn) { btn.disabled = true; btn.textContent = "✅ Finalised"; }
         const player = document.getElementById("audio-playback");
@@ -951,7 +967,10 @@ function openCommandCentre() {
     // Plant the dated consult header now (after the window opened), unless one
     // was already started this session.
     if (!consultStarted) {
-      insertConsultHeader(currentPatient).then(() => { consultStarted = true; });
+      insertConsultHeader(currentPatient).then(() => {
+        consultStarted = true;
+        updateStartConsultButton();
+      });
     }
 
     commandCentreDialog.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
@@ -969,6 +988,7 @@ function openCommandCentre() {
           // tab and lock it so background sync won't overwrite it.
           if (msg.data) { updateFormFields(msg.data); isLocked = true; updateLockUI(); }
           consultStarted = false;                 // allow a new consult to be started
+          updateStartConsultButton();
           const fbtn = document.getElementById("btn-finalize");
           if (fbtn) { fbtn.disabled = true; fbtn.textContent = "✅ Finalised"; }
           setStatus("✅ Consult finalised in Command Centre.");
@@ -1106,11 +1126,13 @@ window.startConsultation = async function () {
   if (consultStarted) { setStatus("A consultation is already in progress this session."); return; }
   await insertConsultHeader(currentPatient);
   consultStarted = true;
+  updateStartConsultButton();
   isLocked = false; updateLockUI();   // fresh consult — AI live again
   updateFormFields({});               // clear any previously displayed coding
   const fbtn = document.getElementById("btn-finalize");
   if (fbtn) { fbtn.disabled = false; fbtn.textContent = "Approve & Finalise Record"; }
   setStatus("Consultation started — type your notes below the header.");
+  setTimeout(runBackgroundSync, 0);
 };
 
 // Reads ONLY the current consultation's notes: from the planted header down to
@@ -1407,6 +1429,9 @@ function _initPatientMode() {
   repairDocumentStructure();
   runBackgroundSync();
   autoDetectPatient();
+  if (!backgroundSyncTimer) {
+    backgroundSyncTimer = setInterval(runBackgroundSync, 5000);
+  }
   Office.context.document.addHandlerAsync(
     Office.EventType.DocumentSelectionChanged,
     () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(runBackgroundSync, 2000); }
