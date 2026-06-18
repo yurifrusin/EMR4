@@ -62,13 +62,14 @@ These checks are worth doing before dispatching the next set of agent tasks:
 
 ## Known Follow-Up
 
-- `docs/diary/diary.js` still embeds the diary template literal. It should next
-  fetch `GET /api/v1/diary/template`.
 - Preserve booking flexibility when adding edit/drag UI: the API already allows
-  arbitrary `duration_minutes`, but the diary template currently has one practice-wide
-  interval. Add optional per-column slot interval config before the template editor
-  hardens around only 15-minute rows. Treat 5 minutes as the minimum staff editing/snap
-  unit, with normal columns still free to default to 10 or 15 minutes.
+  arbitrary `duration_minutes`, and the diary template now has optional per-column
+  slot interval config. Treat 5 minutes as the minimum staff editing/snap unit,
+  while keeping a stable visible grid where that is clearer for users.
+- Add user-visible time affordances for non-grid-aligned breaks/bookings: exact-time
+  hover/readouts, a "Now" jump, and an opening auto-scroll near the current time.
+- Add Room + DiaryRoster persistence so date-specific room/practitioner assignments
+  are not hard-coded in the template forever.
 - GitHub Pages can serve a stale build even after `master` is pushed. For any
   diary/taskpane deploy, verify the live `?v=N` and trigger a Pages rebuild with
   `gh api --method POST repos/yurifrusin/EMR4/pages/builds` if needed.
@@ -80,12 +81,12 @@ These checks are worth doing before dispatching the next set of agent tasks:
 
 ## Recommended Next Direction
 
-Proceed with a small, high-confidence next sprint:
+Proceed with Sprint 3: Diary Operations Foundation.
 
-1. Wire the diary frontend to `GET /api/v1/diary/template`.
-2. Add a small user-visible smoke path for template-driven rooms/columns.
-3. Retire or explicitly preserve stale disposable Codex worktrees.
-4. Start the Gemini SDK migration spike before adding more AI-facing features.
+1. Codex worker: diary time-ruler UX with 5-minute internal flexibility, exact-time
+   affordances, and a "Now" jump/auto-scroll.
+2. Claude: Room + DiaryRoster backend foundation with migration and tests.
+3. Antigravity: Gemini SDK migration spike against the Google Gen AI SDK path.
 
-Do not start drag/drop booking mutations until the template API is consumed by the
-frontend and the user has visually reviewed the diary grid foundation.
+Do not start drag/drop booking mutations until flexible time display and roster
+state are both reviewed.

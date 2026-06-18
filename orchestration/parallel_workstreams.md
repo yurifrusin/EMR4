@@ -37,6 +37,14 @@ single source of truth for durable project state; this file tracks active branch
   worktrees when called with `--apply`; dirty worktrees are reported, never removed.
 - Only Codex, acting as orchestrator, advances `master` and `handoff/current` in
   parallel mode unless the user explicitly instructs otherwise.
+- Codex must announce `HANDIN READY` before the user prompts external workers to
+  run `handin`.
+- During a sprint, Codex must not push sprint work through to `master` until all
+  active sprint agents, including any Codex subagent worker, have submitted or
+  been explicitly stood down.
+- Prefer batching non-urgent orchestration protocol edits until discussion
+  settles. Codex should remind the user before launch when agreed protocol edits
+  are pending.
 - Every workstream must state files in scope, files out of scope, verification, and
   merge criteria.
 - Agents should record concerns or disagreement in the "Dissent / Risks" field.
@@ -107,6 +115,53 @@ Use lower reasoning only for:
 
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
+
+## Sprint 3: Diary Operations Foundation
+
+| Item | Value |
+|---|---|
+| Status | Preparing for dispatch |
+| Launch Gate | User should not prompt worker agents until Codex announces `HANDIN READY` |
+| Integration Gate | Do not push to `master` until Claude, Antigravity, and Codex worker submissions are reviewed or explicitly stood down |
+
+### Workstream H - Diary Time-Ruler UX
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/diary-time-ruler-ux` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-diary-time-ruler-ux.md` |
+| Goal | Make flexible diary times visible and navigable without starting booking mutation work |
+| In Scope | `docs/diary/diary.{html,css,js}` |
+| Out of Scope | Backend roster models, appointment mutation routes, drag/drop booking edits |
+| Verification | JS syntax plus desktop/narrow smoke checks |
+| Status | Queued |
+
+### Workstream I - Room and Diary Roster Foundation
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-diary-roster-foundation.md` |
+| Goal | Persist room/roster configuration so diary columns can become date-specific |
+| In Scope | Backend models, migration, schemas/router/service/tests |
+| Out of Scope | Diary frontend, booking drag/drop, Gemini migration |
+| Verification | Relevant pytest plus migration checks |
+| Status | Queued |
+
+### Workstream J - Gemini SDK Migration Spike
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-gemini-sdk-migration-spike.md` |
+| Goal | De-risk migration away from deprecated `vertexai.generative_models` before removal |
+| In Scope | Gemini/Vertex imports and calls, dependency notes, a small compatibility layer only if safe |
+| Out of Scope | Prompt redesign, diary backend/frontend, clinical feature redesign |
+| Verification | App import / targeted tests, plus exact risks if credentials block live smoke |
+| Status | Queued |
 
 ## Sprint 1: Diary Interactivity Foundation
 

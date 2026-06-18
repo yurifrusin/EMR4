@@ -17,6 +17,14 @@ Read these before acting on remembered process details.
   report the output; Codex can then poll/reconcile the alert branch.
 - Only the Codex orchestrator advances `master` and `handoff/current` in parallel
   mode unless the user explicitly says otherwise.
+- Sprint launch rule: Codex/orchestrator must announce `HANDIN READY` before the
+  user prompts external worker agents to run `handin`.
+- Sprint integration rule: Codex/orchestrator must not push sprint work through
+  to `master` until all active sprint agents, including any Codex subagent worker,
+  have submitted or been explicitly stood down.
+- Protocol amendment rule: prefer batching non-urgent orchestration protocol edits
+  until the discussion settles. Codex should remind the user before launch if
+  agreed protocol edits are still pending.
 - Codex-app worker threads are disposable worker checkouts. They must use unique
   branches such as `codex/<task-name>` and submit back for review; they are not
   the durable `codex/current` mirror.
