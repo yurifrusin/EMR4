@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/diary-roster-smoke-review` |
-| Status | queued |
+| Status | submitted |
 | Created | 2f511a1 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-diary-roster-smoke-review --commit-message "Add diary roster smoke review" --message "Diary roster smoke review ready for Codex review"` |
@@ -61,12 +61,21 @@ Prepare the review and smoke-test surface for the roster-consumption sprint with
 
 ## Dissent / Risks
 
-Record concerns, alternative designs, or reasons this task should not be merged as-is.
+- This task deliberately avoids JS/backend changes, so it cannot prove roster
+  rendering by itself. The checklist should be applied only after the Claude and
+  Antigravity submits are integrated locally.
+- The most important residual risk is ambiguous fallback semantics: an empty
+  roster should fall back to template columns, while auth failure should remain a
+  real session-expired state rather than silently hiding a permissions issue.
 
 ## Completion Notes
 
 Fill this in before submit:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/diary_roster_smoke_review.md`;
+  `orchestration/agent_inbox/codex/codex-diary-roster-smoke-review.md`.
+- Verification run: `git diff --check` passed. No JS touched, so
+  `node --check docs\diary\diary.js` is not required.
+- Remaining risks: Browser checks are review instructions only; the actual
+  roster fetch/merge behaviour depends on the separately owned Claude and
+  Antigravity workstreams.
