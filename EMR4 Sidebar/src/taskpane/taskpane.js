@@ -1147,10 +1147,13 @@ async function getCurrentConsultText() {
     paras.load("items/text,items/styleBuiltIn");
     await ctx.sync();
     const items = paras.items;
-    const isHeading1 = p => p.styleBuiltIn === Word.BuiltInStyleName.heading1;
-
+    const sectionHeadings = new Set(PROTECTED_SECTIONS.map(s => s.text.toLowerCase()));
+    const paraText = p => (p.text || "").trim();
+    const isHeading1 = p =>
+      p.styleBuiltIn === Word.BuiltInStyleName.heading1 ||
+      sectionHeadings.has(paraText(p).toLowerCase());
     let cnIdx = items.findIndex(p =>
-      isHeading1(p) && (p.text || "").trim().toLowerCase() === SECTION_HEADING.toLowerCase());
+      paraText(p).toLowerCase() === SECTION_HEADING.toLowerCase());
     if (cnIdx === -1) return "";
 
     // Locate the current consult header (first matching line after the section heading)
