@@ -1115,6 +1115,10 @@ async function insertConsultHeader(patient) {
       rest.font.bold = false;                             // name/time/age plain
       // Bookmark the end of the header so the SOAP note inserts right after it
       para.getRange(Word.RangeLocation.end).insertBookmark(NOTE_BOOKMARK);
+      const notePara = para.insertParagraph("", Word.InsertLocation.after);
+      notePara.styleBuiltIn = Word.BuiltInStyleName.normal;
+      notePara.font.bold = false;
+      notePara.getRange(Word.RangeLocation.end).select();
       await ctx.sync();
     });
   } catch (e) {
