@@ -6,6 +6,9 @@ Read these before acting on remembered process details.
   the task packet's `submit` command. Do not manually push to `master`.
 - If `submit` fails, stop and report the exact command, working directory,
   branch, and error output to Codex/orchestrator. Do not improvise a workaround.
+- On push failure, `submit` will attempt to create a local Codex submit-alert packet,
+  commit it, and publish it to a unique `submit-alert/...` branch. Still stop and
+  report the output; Codex can then poll/reconcile the alert branch.
 - Only the Codex orchestrator advances `master` and `handoff/current` in parallel
   mode unless the user explicitly says otherwise.
 - Codex-app worker threads are disposable worker checkouts. They must use unique

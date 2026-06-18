@@ -66,7 +66,8 @@ TASK_TEMPLATE = """# {task_id}
 - Do not push to `master` or `handoff/current`.
 - Do not manually work around a failed `submit`.
 - If `submit` fails, stop and report the exact command, working directory, branch,
-  and error output to the orchestrator.
+  and error output to the orchestrator. The submit script will also try to publish
+  a `submit-alert/...` branch for Codex to poll.
 - If these instructions conflict with remembered prior protocol, trust the current
   `handin` alerts and this task packet.
 
@@ -345,7 +346,7 @@ def read_status_from_text(text: str) -> str:
 
 
 def is_actionable_status(status_value: str) -> bool:
-    return status_value in {"queued", "pending_review", "in_progress"}
+    return status_value in {"queued", "pending_review", "in_progress", "blocked"}
 
 
 def update_task_status(path: Path, status_value: str) -> None:
@@ -454,6 +455,99 @@ def create_codex_review_packet(
     return path
 
 
+def create_codex_submit_alert_packet(
+    agent: str | None,
+    task_id: str | None,
+    branch: str,
+    head: str,
+    command: str,
+    result: subprocess.CompletedProcess[str],
+    repo_root: Path,
+) -> Path:
+    alert_dir = inbox_dir("codex", repo_root)
+    alert_dir.mkdir(parents=True, exist_ok=True)
+    alert_id = f"submit-alert-{slugify(agent or 'unknown')}-{slugify(task_id or branch)}-{head}"
+    path = alert_dir / f"{alert_id}.md"
+    text = f"""# {alert_id}
+
+| Item | Value |
+|---|---|
+| To | codex |
+| From | {agent or "unknown"} |
+| Branch | `{branch}` |
+| Source Task | `{task_id or ""}` |
+| Status | blocked |
+
+## Submit Failure
+
+The worker reached submit but the push failed. The worker must stop; Codex/orchestrator
+should reconcile the branch.
+
+## Details
+
+- Working directory: `{repo_root}`
+- Branch: `{branch}`
+- Head: `{head}`
+- Command: `{command}`
+- Return code: `{result.returncode}`
+
+## Stdout
+
+```text
+{(result.stdout or "").strip()}
+```
+
+## Stderr
+
+```text
+{(result.stderr or "").strip()}
+```
+
+## Required Review Steps
+
+1. Fetch this alert branch.
+2. Inspect the worker branch and this failure packet.
+3. Reconcile with the remote branch from the Codex/orchestrator side.
+4. Do not ask the worker to manually pull/rebase unless Codex explicitly chooses that path.
+"""
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
+def publish_submit_alert(
+    agent: str | None,
+    task_id: str | None,
+    branch: str,
+    head: str,
+    command: str,
+    result: subprocess.CompletedProcess[str],
+    remote: str,
+    repo: Path,
+) -> None:
+    alert_path = create_codex_submit_alert_packet(agent, task_id, branch, head, command, result, repo)
+    print(f"[blocked] wrote Codex submit alert: {alert_path.relative_to(repo)}")
+    print_result(run_git(["add", str(alert_path.relative_to(repo))], cwd=repo, check=False))
+    commit_result = run_git(
+        ["commit", "-m", f"Report {agent or 'agent'} submit failure"],
+        cwd=repo,
+        check=False,
+    )
+    print_result(commit_result)
+    if commit_result.returncode != 0:
+        print("[blocked] could not commit submit alert; report the alert path and push failure manually.")
+        return
+
+    alert_head = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo, check=False) or head
+    alert_branch = f"submit-alert/{slugify(agent or 'unknown')}/{slugify(task_id or branch)}/{alert_head}"
+    print(f"[push] alert -> {remote}/{alert_branch}")
+    alert_push = run_git(["push", remote, f"HEAD:{alert_branch}"], cwd=repo, check=False)
+    print_result(alert_push)
+    if alert_push.returncode == 0:
+        print(f"[blocked] submit alert published on {alert_branch}")
+    else:
+        print("[blocked] failed to publish submit alert branch; report the output above manually.")
+
+
 def setup(args: argparse.Namespace) -> None:
     require_clean()
 
@@ -544,7 +638,21 @@ def submit(args: argparse.Namespace) -> None:
         print(f"[note] {args.message}")
     if not args.no_push:
         print(f"[push] {branch} -> {args.remote}/{branch}")
-        print_result(run_git(["push", "-u", args.remote, branch], cwd=repo))
+        push_cmd = ["push", "-u", args.remote, branch]
+        push_result = run_git(push_cmd, cwd=repo, check=False)
+        print_result(push_result)
+        if push_result.returncode != 0:
+            publish_submit_alert(
+                args.agent,
+                args.task,
+                branch,
+                head,
+                "git " + " ".join(push_cmd),
+                push_result,
+                args.remote,
+                repo,
+            )
+            raise SystemExit(push_result.returncode)
     print()
     print("Codex/orchestrator should review this branch before merging or moving the baton.")
 
@@ -795,6 +903,19 @@ def poll(args: argparse.Namespace) -> None:
         if branch and branch != AGENTS["codex"]:
             branch_checks.append(("codex", branch))
 
+    alert_refs = git_stdout(
+        [
+            "for-each-ref",
+            f"refs/remotes/{args.remote}/submit-alert",
+            "--format=%(refname:short)",
+        ],
+        check=False,
+    )
+    for remote_branch in alert_refs.splitlines():
+        branch = remote_branch.removeprefix(f"{args.remote}/")
+        if branch:
+            branch_checks.append(("alert", branch))
+
     seen_refs: set[str] = set()
     for agent, branch in branch_checks:
         remote_ref = f"{args.remote}/{branch}"
@@ -814,12 +935,14 @@ def poll(args: argparse.Namespace) -> None:
             if not file_path.endswith(".md"):
                 continue
             packet = git_stdout(["show", f"{remote_ref}:{file_path}"], check=False)
-            if is_actionable_status(read_status_from_text(packet)) and f"| From | {agent} |" in packet:
+            from_matches = agent == "alert" or f"| From | {agent} |" in packet
+            if is_actionable_status(read_status_from_text(packet)) and from_matches:
                 actionable_reviews.append((file_path, packet))
 
         if log or actionable_reviews:
             found = True
-            print(f"\n[submitted] {agent} branch {remote_ref}")
+            label = "submit alert" if agent == "alert" else "submitted"
+            print(f"\n[{label}] {agent} branch {remote_ref}")
             if log:
                 print(log)
             for file_path, packet in actionable_reviews:
