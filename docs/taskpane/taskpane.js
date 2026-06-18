@@ -60,6 +60,7 @@ let rxRowCount     = 0;
 let lastSyncedText = "";
 let debounceTimer  = null;
 let backgroundSyncTimer = null;
+let syncDebugState = { tick: 0, textLen: 0, fetch: "idle", http: "-", result: "-" };
 let typeaheadTimer = null;
 let mediaRecorder  = null;
 let audioChunks    = [];
@@ -86,6 +87,25 @@ function formatDate(iso) {
 function setStatus(msg) {
   const el = document.getElementById("status-msg");
   if (el) el.textContent = msg;
+}
+
+function updateSyncDebug(patch = {}) {
+  syncDebugState = { ...syncDebugState, ...patch };
+  window.emr4DebugState = {
+    ...syncDebugState,
+    consultStarted,
+    commandCentreOpen,
+    isRecording,
+    isSyncing,
+    apiBase: API_BASE,
+  };
+  const el = document.getElementById("sync-debug");
+  if (!el) return;
+  el.textContent =
+    `AI debug: tick=${syncDebugState.tick} started=${consultStarted ? "yes" : "no"} ` +
+    `cc=${commandCentreOpen ? "yes" : "no"} rec=${isRecording ? "yes" : "no"} ` +
+    `syncing=${isSyncing ? "yes" : "no"} len=${syncDebugState.textLen} ` +
+    `fetch=${syncDebugState.fetch} http=${syncDebugState.http} result=${syncDebugState.result}`;
 }
 
 function updateStartConsultButton() {
@@ -557,27 +577,39 @@ async function getDocumentText() {
 }
 
 async function runBackgroundSync() {
-  if (isRecording || isSyncing || commandCentreOpen) return;
+  if (isRecording || isSyncing || commandCentreOpen) {
+    updateSyncDebug({ fetch: isRecording ? "recording" : isSyncing ? "busy" : "cc-open" });
+    return;
+  }
   // Don't analyse anything until the doctor explicitly starts a consultation this
   // session — otherwise a previously finalised consult left in the document would
   // be re-analysed on open and fill the fields uninvited.
   if (!consultStarted) {
     if (!isLocked) updateFormFields({});
     setStatus("Ready — click Start Consultation to begin.");
+    updateSyncDebug({ fetch: "not-started", textLen: 0, http: "-", result: "-" });
     return;
   }
   isSyncing = true;
   let timeoutId = null;
   try {
+    updateSyncDebug({ tick: syncDebugState.tick + 1, fetch: "extracting", http: "-", result: "-" });
     const text = await getCurrentConsultText();
+    const textLen = (text || "").trim().length;
+    updateSyncDebug({ textLen, fetch: "extracted" });
     if (!text || !text.trim()) {
       if (!isLocked) updateFormFields({});
       setStatus("Listening — type your consultation notes…");
       lastSyncedText = "";
+      updateSyncDebug({ textLen: 0, fetch: "empty", http: "-", result: "no-text" });
       return;
     }
-    if (text === lastSyncedText) return;
+    if (text === lastSyncedText) {
+      updateSyncDebug({ fetch: "unchanged", result: "already-synced" });
+      return;
+    }
     setStatus(isLocked ? "AI running in background..." : `Analysing ${text.length} chars...`);
+    updateSyncDebug({ fetch: "posting", http: "-", result: "request" });
 
     const headers = {
       "Content-Type": "application/json",
@@ -597,6 +629,7 @@ async function runBackgroundSync() {
         clinician_overrides: null,
       }),
     });
+    updateSyncDebug({ fetch: "response", http: String(res.status) });
     if (!res.ok) {
       const body = await res.text().catch(() => "");
       throw new Error(`HTTP ${res.status}${body ? ": " + body.slice(0, 120) : ""}`);
@@ -604,6 +637,11 @@ async function runBackgroundSync() {
     const data = await res.json();
     lastAiResponse = data;
     lastSyncedText = text;
+    const meta = data.encounter_metadata || {};
+    const mbsCount = meta.mbs_item_candidates?.length || 0;
+    const dxCount = data.clinical_diagnoses?.length || 0;
+    const rxCount = data.medications_and_prescriptions?.length || 0;
+    updateSyncDebug({ fetch: "ok", result: `mbs:${mbsCount} dx:${dxCount} rx:${rxCount}` });
     if (!isLocked) {
       updateFormFields(data);
       setStatus("Synced " + new Date().toLocaleTimeString());
@@ -612,12 +650,22 @@ async function runBackgroundSync() {
     }
   } catch (e) {
     console.warn("EMR AI sync failed", e);
+    updateSyncDebug({
+      fetch: e?.name === "AbortError" ? "timeout" : "error",
+      result: String(e?.message || "backend").slice(0, 80),
+    });
     setStatus(e?.name === "AbortError" ? "AI analysis slow - retrying..." : `AI sync failed - retrying (${e?.message || "backend"})`);
   } finally {
     if (timeoutId) clearTimeout(timeoutId);
     isSyncing = false;
+    updateSyncDebug();
   }
 }
+
+window.forceAiSync = function () {
+  lastSyncedText = "";
+  return runBackgroundSync();
+};
 
 // ═══════════════════════════════════════════════════════════
 // CONSULT TAB — AUDIO SCRIBE
@@ -1146,6 +1194,7 @@ window.startConsultation = async function () {
   consultStarted = true;
   lastSyncedText = "";
   lastAiResponse = null;
+  updateSyncDebug({ tick: 0, textLen: 0, fetch: "started", http: "-", result: "-" });
   updateStartConsultButton();
   isLocked = false; updateLockUI();   // fresh consult — AI live again
   updateFormFields({});               // clear any previously displayed coding
@@ -1448,6 +1497,7 @@ function initApp() {
 function _initPatientMode() {
   showTab("consult");
   setStatus("Ready.");
+  updateSyncDebug({ fetch: "ready", textLen: 0, http: "-", result: "-" });
   updateFormFields({});
   repairDocumentStructure();
   runBackgroundSync();

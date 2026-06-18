@@ -328,6 +328,20 @@ select.input { cursor: pointer; }
   flex-shrink: 0;
 }
 
+.sync-debug {
+  flex: 1 0 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--grey-2);
+  border-radius: var(--radius);
+  background: #f8fafc;
+  color: var(--grey-4);
+  font-family: Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 .audio-player { width: 100%; height: 32px; }
 
 .lock-row { display: flex; justify-content: flex-end; }
