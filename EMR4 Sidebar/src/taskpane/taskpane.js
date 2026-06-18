@@ -98,14 +98,6 @@ function updateSyncDebug(patch = {}) {
     isSyncing,
     apiBase: API_BASE,
   };
-  const el = document.getElementById("sync-debug");
-  if (!el) return;
-  el.textContent =
-    `AI debug: tick=${syncDebugState.tick} started=${consultStarted ? "yes" : "no"} ` +
-    `cc=${commandCentreOpen ? "yes" : "no"} rec=${isRecording ? "yes" : "no"} ` +
-    `syncing=${isSyncing ? "yes" : "no"} len=${syncDebugState.textLen} ` +
-    `fetch=${syncDebugState.fetch} http=${syncDebugState.http} ` +
-    `extract=${syncDebugState.extract} result=${syncDebugState.result}`;
 }
 
 function updateStartConsultButton() {
