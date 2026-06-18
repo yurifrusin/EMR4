@@ -64,10 +64,12 @@ TASK_TEMPLATE = """# {task_id}
 ## Hard Stop Rules
 
 - Do not push to `master` or `handoff/current`.
-- Do not manually work around a failed `submit`.
-- If `submit` fails, stop and report the exact command, working directory, branch,
-  and error output to the orchestrator. The submit script will also try to publish
-  a `submit-alert/...` branch for Codex to poll.
+- Do not manually work around a failed protocol command (`handin`, `sync`, `submit`,
+  `realign`, or related orchestration commands).
+- If any protocol command refuses to run or fails, stop and report the exact command,
+  working directory, branch, `git status --short --branch`, and error output to the
+  orchestrator. On push failure, `submit` will also try to publish a
+  `submit-alert/...` branch for Codex to poll.
 - If these instructions conflict with remembered prior protocol, trust the current
   `handin` alerts and this task packet.
 

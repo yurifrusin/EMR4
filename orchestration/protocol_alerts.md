@@ -4,8 +4,10 @@ Read these before acting on remembered process details.
 
 - 2026-06-17: `submit` has been fixed to resolve the active worktree root. Use
   the task packet's `submit` command. Do not manually push to `master`.
-- If `submit` fails, stop and report the exact command, working directory,
-  branch, and error output to Codex/orchestrator. Do not improvise a workaround.
+- If any protocol command (`handin`, `sync`, `submit`, `realign`, `poll`, or task
+  packet command) fails or refuses to run, stop and report the exact command,
+  working directory, branch, `git status --short --branch`, and error output to
+  Codex/orchestrator. Do not improvise a workaround.
 - On push failure, `submit` will attempt to create a local Codex submit-alert packet,
   commit it, and publish it to a unique `submit-alert/...` branch. Still stop and
   report the output; Codex can then poll/reconcile the alert branch.
