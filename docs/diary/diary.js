@@ -52,6 +52,110 @@ const FALLBACK_TEMPLATE = {
 };
 let activeTemplate = cloneTemplate(FALLBACK_TEMPLATE);
 
+// ─── SMOKE MODE MOCKS ──────────────────────────────────────
+function getMockTemplate() {
+  return {
+    practice_name: "EMR4 Dev Clinic (Smoke Test)",
+    slot_start: "09:00:00",
+    slot_end: "17:00:00",
+    slot_interval_minutes: 15,
+    footer: ["Smoke Test Mode Active", "Click the headers to edit breaks.", "Phone Consultations: 0/3 today"],
+    columns: [
+      {
+        room_label: "Room 1",
+        assignment: "Dr Alex Shera",
+        practitioner_ahpra: "MED0001234567",
+        tint_hex: null,
+        breaks: [
+          { label: "MORNING TEA", from_time: "10:45:00", to_time: "11:00:00" },
+          { label: "LUNCH",       from_time: "13:00:00", to_time: "14:00:00" }
+        ]
+      },
+      {
+        room_label: "Room 2",
+        assignment: "Nurse",
+        practitioner_ahpra: "MED999",
+        tint_hex: "FFFF99",
+        breaks: [
+          { label: "MORNING TEA", from_time: "10:45:00", to_time: "11:00:00" },
+          { label: "LUNCH",       from_time: "13:00:00", to_time: "14:00:00" }
+        ]
+      },
+      {
+        room_label: "Room 3",
+        assignment: "[Available]",
+        practitioner_ahpra: null,
+        tint_hex: "FFC7C7",
+        breaks: [
+          { label: "LUNCH",       from_time: "13:00:00", to_time: "14:00:00" }
+        ]
+      }
+    ]
+  };
+}
+
+function getMockAppointments() {
+  return [
+    {
+      id: "smoke-appt-1",
+      start_time_local: "09:00",
+      duration_minutes: 30,
+      status: "Confirmed",
+      practitioner: { ahpra_number: "MED0001234567" },
+      patient: { first_name: "Margaret", last_name: "Thompson" },
+      reason: "Hypertension follow-up",
+      appointment_type_id: "smoke-type-1"
+    },
+    {
+      id: "smoke-appt-2",
+      start_time_local: "09:15",
+      duration_minutes: 15,
+      status: "Booked",
+      practitioner: { ahpra_number: "MED0001234567" },
+      patient: { first_name: "Billy", last_name: "Frusin" },
+      reason: "Ear ache",
+      appointment_type_id: "smoke-type-2"
+    },
+    {
+      id: "smoke-appt-3",
+      start_time_local: "10:00",
+      duration_minutes: 45,
+      status: "Booked",
+      practitioner: { ahpra_number: "MED0001234567" },
+      patient: { first_name: "Margaret", last_name: "Thompson" },
+      reason: "Care Plan review",
+      appointment_type_id: "smoke-type-1"
+    },
+    {
+      id: "smoke-appt-4",
+      start_time_local: "11:30",
+      duration_minutes: 30,
+      status: "Confirmed",
+      practitioner: { ahpra_number: "MED0001234567" },
+      patient: { first_name: "Jane", last_name: "Doe" },
+      reason: "Flu vaccine",
+      appointment_type_id: "smoke-type-2"
+    },
+    {
+      id: "smoke-appt-5",
+      start_time_local: "11:45",
+      duration_minutes: 15,
+      status: "Arrived",
+      practitioner: { ahpra_number: "MED0001234567" },
+      patient: { first_name: "John", last_name: "Smith" },
+      reason: "Script renewal",
+      appointment_type_id: "smoke-type-1"
+    }
+  ];
+}
+
+function getMockTypes() {
+  return [
+    { id: "smoke-type-1", color_hex: "#0050a0" },
+    { id: "smoke-type-2", color_hex: "#00B050" }
+  ];
+}
+
 // ─── BREAK OVERRIDES (per-column, persisted to localStorage) ──────────────────
 const BREAKS_KEY = "emr4_diary_breaks_v1";
 let breakOverrides = {};   // { room_label: [{label, from, to}, ...] }
@@ -179,6 +283,10 @@ function normalizeTemplate(raw) {
 }
 
 async function loadDiaryTemplate() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("smoke") === "true") {
+    return normalizeTemplate(getMockTemplate());
+  }
   try {
     const res = await apiFetch("/diary/template");
     if (!res.ok) throw new Error(`Template: ${res.status} ${await res.text()}`);
@@ -576,7 +684,10 @@ function saveBreaks() {
 
 // ─── LOAD DIARY ────────────────────────────────────────────
 async function loadDiary(silent = false) {
-  if (!token) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isSmokeMode = urlParams.get("smoke") === "true";
+
+  if (!token && !isSmokeMode) {
     setStatus("Waiting for auth token…");
     return;
   }
@@ -594,18 +705,26 @@ async function loadDiary(silent = false) {
   const apptParams = `date_from=${dayStart.toISOString()}&date_to=${dayEnd.toISOString()}`;
 
   try {
-    const [template, apptRes, typeRes] = await Promise.all([
-      loadDiaryTemplate(),
-      apiFetch(`/appointments?${apptParams}`),
-      apiFetch(`/appointments/types`),
-    ]);
+    let template, appointments, types;
 
-    if (!apptRes.ok) throw new Error(`Appointments: ${apptRes.status} ${await apptRes.text()}`);
-    if (!typeRes.ok) throw new Error(`Types: ${typeRes.status} ${await typeRes.text()}`);
+    if (isSmokeMode) {
+      template = normalizeTemplate(getMockTemplate());
+      appointments = getMockAppointments();
+      types = getMockTypes();
+    } else {
+      const [templateRes, apptRes, typeRes] = await Promise.all([
+        loadDiaryTemplate(),
+        apiFetch(`/appointments?${apptParams}`),
+        apiFetch(`/appointments/types`),
+      ]);
+      template = templateRes;
+      if (!apptRes.ok) throw new Error(`Appointments: ${apptRes.status} ${await apptRes.text()}`);
+      if (!typeRes.ok) throw new Error(`Types: ${typeRes.status} ${await typeRes.text()}`);
+      appointments = await apptRes.json();
+      types        = await typeRes.json();
+    }
+
     setActiveTemplate(template);
-
-    const appointments = await apptRes.json();
-    const types        = await typeRes.json();
 
     const typeMap    = {};
     types.forEach(t => { typeMap[t.id] = t.color_hex; });
@@ -635,7 +754,7 @@ async function loadDiary(silent = false) {
     renderGrid(activeTemplate, slots, apptLookup, typeMap, occupied);
 
     const total = appointments.length;
-    setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}`);
+    setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}${isSmokeMode ? " [SMOKE MODE]" : ""}`);
   } catch (e) {
     if (!silent) {
       showLoading(false);
@@ -713,5 +832,7 @@ Office.onReady(() => {
 
   try { Office.context?.ui?.messageParent(JSON.stringify({ type: "ready" })); } catch (_) {}
 
-  if (token) { loadDiary(); scheduleRefresh(); }
+  const urlParams = new URLSearchParams(window.location.search);
+  const isSmokeMode = urlParams.get("smoke") === "true";
+  if (token || isSmokeMode) { loadDiary(); scheduleRefresh(); }
 });

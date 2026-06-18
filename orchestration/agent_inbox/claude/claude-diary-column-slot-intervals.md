@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | in_progress |
 | Created | ec0b230 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent claude --task claude-diary-column-slot-intervals --commit-message "Add diary column slot interval support" --message "Diary column slot interval support ready for Codex review"` |

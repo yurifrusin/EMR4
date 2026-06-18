@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | ff387e5 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-template-smoke-path --commit-message "Add diary template smoke path" --message "Diary template smoke path ready for Codex review"` |
@@ -69,6 +69,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Fill this in before submit:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`
+- Verification run: Syntax validated with `node --check docs/diary/diary.js`. Bypassed auth via `?smoke=true` URL parameter. Manually loaded from filesystem to verify practice name, column headers, tints, solid break blocks, overlapping appointments cascading, and template-defined footer lines.
+- Remaining risks: Codex removed duplicate footer helper/CSS during integration; smoke mode remains isolated behind `?smoke=true`.
