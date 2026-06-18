@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 2f511a1 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-roster-consumption --commit-message "Consume diary roster in frontend" --message "Diary roster consumption ready for Codex review"` |
@@ -65,6 +65,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Fill this in before submit:
 
-- Files changed:
+- Files changed: `docs/diary/diary.html`, `docs/diary/diary.js`
 - Verification run:
-- Remaining risks:
+  - Node syntax check (`node --check docs/diary/diary.js`) passed successfully.
+  - Pytest suite run completed successfully; all 9 roster tests in `tests/test_diary_roster.py` passed.
+  - Visual and functional isolation of `?smoke=true` mode verified.
+- Remaining risks: None. The roster consumption fetch operates with a safe fallback and does not introduce side-effects.

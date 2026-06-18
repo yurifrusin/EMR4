@@ -818,6 +818,11 @@ async function loadDiary(silent = false, options = {}) {
   const dayEnd = new Date(dayStart);
   dayEnd.setHours(23, 59, 59, 999);
 
+  const yyyy = diaryDate.getFullYear();
+  const mm = String(diaryDate.getMonth() + 1).padStart(2, "0");
+  const dd = String(diaryDate.getDate()).padStart(2, "0");
+  const dateStr = `${yyyy}-${mm}-${dd}`;
+
   const apptParams = `date_from=${dayStart.toISOString()}&date_to=${dayEnd.toISOString()}`;
 
   try {
@@ -828,16 +833,63 @@ async function loadDiary(silent = false, options = {}) {
       appointments = getMockAppointments();
       types = getMockTypes();
     } else {
-      const [templateRes, apptRes, typeRes] = await Promise.all([
+      const [templateRes, apptRes, typeRes, rosterRes] = await Promise.all([
         loadDiaryTemplate(),
         apiFetch(`/appointments?${apptParams}`),
         apiFetch(`/appointments/types`),
+        apiFetch(`/diary/roster?date=${dateStr}`).catch(err => {
+          console.warn("Roster fetch failed:", err);
+          return null;
+        })
       ]);
       template = templateRes;
       if (!apptRes.ok) throw new Error(`Appointments: ${apptRes.status} ${await apptRes.text()}`);
       if (!typeRes.ok) throw new Error(`Types: ${typeRes.status} ${await typeRes.text()}`);
       appointments = await apptRes.json();
       types        = await typeRes.json();
+
+      let rosterEntries = [];
+      if (rosterRes && rosterRes.ok) {
+        try {
+          const rosterData = await rosterRes.json();
+          rosterEntries = rosterData?.entries || [];
+        } catch (err) {
+          console.warn("Failed to parse roster JSON:", err);
+        }
+      }
+
+      if (rosterEntries.length > 0) {
+        const ahpraToAssignment = {};
+        template.columns.forEach(col => {
+          if (col.practitioner_ahpra && col.assignment) {
+            ahpraToAssignment[col.practitioner_ahpra] = col.assignment;
+          }
+        });
+
+        const mergedColumns = rosterEntries.map(entry => {
+          const tmplCol = template.columns.find(
+            col => col.room_label.toLowerCase() === entry.room_name.toLowerCase()
+          );
+
+          let assignment = "[Available]";
+          if (entry.label) {
+            assignment = entry.label;
+          } else if (entry.practitioner_ahpra) {
+            assignment = ahpraToAssignment[entry.practitioner_ahpra] || entry.practitioner_ahpra;
+          }
+
+          return {
+            room_label: entry.room_name,
+            assignment: assignment,
+            practitioner_ahpra: entry.practitioner_ahpra || null,
+            tint: tmplCol ? tmplCol.tint : null,
+            slot_interval_minutes: tmplCol ? tmplCol.slot_interval_minutes : null,
+            breaks: tmplCol ? tmplCol.breaks : []
+          };
+        });
+
+        template.columns = mergedColumns;
+      }
     }
 
     setActiveTemplate(template);
