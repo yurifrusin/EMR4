@@ -17,7 +17,7 @@ from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     BookingChannel, PractitionerSchedule,
 )
-from app.models.diary import DiaryTemplate, DiaryColumn, DiaryBreak
+from app.models.diary import DiaryTemplate, DiaryColumn, DiaryBreak, Room, DiaryRoster
 from app.services.auth_service import hash_password
 
 
@@ -375,6 +375,53 @@ def seed():
             print(f"  Diary template seeded ({len(columns_data)} columns)")
         else:
             print(f"  Diary template already exists: {tmpl.id}")
+
+        # --- Rooms (mirror the 3 diary template columns) ---
+        rooms_data = [
+            ("Room 1", 0),
+            ("Room 2", 1),
+            ("Room 3", 2),
+        ]
+        rooms = {}
+        for room_name, order in rooms_data:
+            room = db.query(Room).filter_by(
+                practice_id=practice.id, name=room_name
+            ).first()
+            if not room:
+                room = Room(
+                    practice_id=practice.id,
+                    name=room_name,
+                    display_order=order,
+                    is_active=True,
+                )
+                db.add(room)
+                db.flush()
+            rooms[room_name] = room
+        print(f"  Rooms seeded ({len(rooms)} rooms)")
+
+        # --- DiaryRoster for today ---
+        roster_entries = [
+            (rooms["Room 1"], gp.id, "MED0001234567", None),
+            (rooms["Room 2"], None, None, "Nurse"),
+            (rooms["Room 3"], None, None, "[Available]"),
+        ]
+        for room, prac_id, ahpra, label in roster_entries:
+            exists = db.query(DiaryRoster).filter_by(
+                practice_id=practice.id,
+                room_id=room.id,
+                roster_date=today,
+            ).first()
+            if not exists:
+                db.add(DiaryRoster(
+                    practice_id=practice.id,
+                    room_id=room.id,
+                    roster_date=today,
+                    practitioner_id=prac_id,
+                    practitioner_ahpra=ahpra,
+                    label=label,
+                ))
+        db.flush()
+        print(f"  Diary roster seeded for today ({today})")
 
         db.commit()
         print("\nSeed complete.")

@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 2f511a1 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent claude --task claude-diary-roster-dev-data-contract --commit-message "Harden diary roster dev-data contract" --message "Diary roster dev-data contract ready for Codex review"` |

@@ -14,6 +14,14 @@ def test_roster_requires_auth(client):
     assert resp.status_code == 401
 
 
+def test_roster_requires_date_param(client, gp_user):
+    """Missing date query param should return 422 Unprocessable Entity."""
+    token = make_token(gp_user)
+    resp = client.get("/api/v1/diary/roster",
+                      headers={"Authorization": f"Bearer {token}"})
+    assert resp.status_code == 422
+
+
 def test_roster_empty_when_no_rooms_configured(client, gp_user):
     """A practice with no rooms returns an empty entries list (not a 404)."""
     token = make_token(gp_user)
@@ -138,6 +146,34 @@ def test_roster_cross_practice_isolation(client, db, gp_user, practice, practice
     assert resp.status_code == 200
     # gp_user belongs to practice (no rooms), so empty — not practice_b's rooms
     assert resp.json()["entries"] == []
+
+
+def test_roster_mixed_assigned_and_unassigned(client, db, gp_user, practice, practitioner):
+    """A response can contain both assigned and unassigned rooms in one call."""
+    room1 = Room(practice_id=practice.id, name="Room 1", display_order=0)
+    room2 = Room(practice_id=practice.id, name="Room 2", display_order=1)
+    db.add(room1)
+    db.add(room2)
+    db.flush()
+    db.add(DiaryRoster(
+        practice_id=practice.id,
+        room_id=room1.id,
+        roster_date=date(2026, 6, 18),
+        practitioner_id=practitioner.id,
+        practitioner_ahpra=practitioner.ahpra_number,
+    ))
+    # room2 has no roster entry for this date
+    db.flush()
+
+    token = make_token(gp_user)
+    resp = client.get("/api/v1/diary/roster?date=2026-06-18",
+                      headers={"Authorization": f"Bearer {token}"})
+    assert resp.status_code == 200
+    entries = resp.json()["entries"]
+    assert len(entries) == 2
+    assert entries[0]["practitioner_ahpra"] == "MED0001234567"
+    assert entries[1]["practitioner_id"] is None
+    assert entries[1]["label"] is None
 
 
 def test_roster_date_isolation(client, db, gp_user, practice):
