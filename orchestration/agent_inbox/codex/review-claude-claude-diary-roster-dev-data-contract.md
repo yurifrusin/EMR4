@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-diary-roster-dev-data-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

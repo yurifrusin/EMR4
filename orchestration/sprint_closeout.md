@@ -8,60 +8,64 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 3: Diary Operations Foundation |
-| Integrated through | current `master` |
-| Status | Ready for user review |
-| Last updated | 2026-06-18 |
+| Batch | Sprint 4: Diary Roster Consumption |
+| Integrated through | current local `master` pending final push |
+| Status | Verified locally |
+| Last updated | 2026-06-19 |
 
 ## What Changed
 
-- Diary now has a `Now` button, current-time marker, today auto-scroll, and exact-time
-  hover bubbles/tooltips for off-grid booking and break borders.
-- Smoke mode includes irregular times to exercise the flexible-time UX.
-- Room + DiaryRoster backend foundation exists for date-specific room assignments.
-- Gemini calls migrated from deprecated `vertexai.generative_models` usage to the
-  Google Gen AI SDK path, with lazy client construction so app/test imports do not
-  block on AI client initialization.
-- Website/app branding now displays `EMR` instead of `EMR Centaur`.
-- The in-page logo and Office ribbon icons now use `cuboid4.png`-derived assets.
-- Sprint protocol packets and Codex review packets are marked integrated, and the
-  integration ledger records the three submitted workstreams.
+- Dev seed data now creates Room 1/2/3 and today's DiaryRoster rows:
+  - Room 1 -> Dr Shera with practitioner ID and AHPRA.
+  - Room 2 -> label `Nurse`.
+  - Room 3 -> label `[Available]`.
+- Roster endpoint test coverage now includes missing-date validation and mixed
+  assigned/unassigned room responses.
+- Diary frontend now fetches `/api/v1/diary/roster?date=YYYY-MM-DD` for the
+  selected diary date and merges roster entries into visible diary columns.
+- Roster frontend merge preserves template fallback semantics:
+  - Empty/unassigned roster entries reuse matching template column assignment,
+    practitioner AHPRA, breaks, tint, and slot interval.
+  - Explicit label-only rooms such as `[Available]` still render as labels.
+  - Roster `401 Unauthorized` is re-thrown so session expiry remains visible
+    instead of silently falling back to template columns.
+- Diary asset cache-bust moved to `v=38`.
+- Added `orchestration/diary_roster_smoke_review.md` as the manual review
+  checklist for this sprint.
 
 ## Recommended User Review
 
 After the final push has deployed:
 
-1. Open/reopen the Word Online add-in and confirm the taskpane shows `EMR` and the
-   new cuboid logo.
-2. If the ribbon button still shows the old icon, refresh/re-sideload the manifest;
-   Office may cache manifest icons separately from the web pages.
-3. Open the diary from the taskpane.
-4. Confirm the diary header shows `EMR - Diary` with the cuboid logo.
-5. Use smoke mode if desired: `https://yurifrusin.github.io/EMR4/diary/diary.html?smoke=true`.
-6. Check the `Now` button, current-time marker, and whether off-grid hover bubbles
-   appear helpfully when pointing near appointment/break borders.
-7. Confirm date navigation, Refresh, narrow layout, the 10:00 long booking, and
-   visible booking notes still behave correctly.
+1. Run/apply latest migrations if the local DB is not current.
+2. Run `python seed.py` if you want the dev roster rows for today's date.
+3. Open/reopen the Word Online add-in, then open the diary.
+4. On today's date, confirm Room 1/2/3 show the expected roster assignments:
+   Dr Shera, Nurse, and `[Available]`.
+5. Navigate to a date without roster rows and confirm the diary falls back to the
+   normal template assignments rather than making every room `[Available]`.
+6. Confirm date navigation refetches roster state for the selected date.
+7. Confirm Refresh, Now/current-time marker, long appointments, booking notes,
+   break blocks, off-grid hover bubbles, and narrow layout still behave as before.
+8. If convenient, verify smoke mode still works:
+   `https://yurifrusin.github.io/EMR4/diary/diary.html?smoke=true`.
 
 ## Not Required Before Moving On
 
-- Drag/drop, resize, create, delete, or status mutations for bookings are not built yet.
-- Room/roster admin UI is not built yet; this sprint added backend foundation only.
-- Live Gemini endpoint testing still needs a credentials/runtime smoke test.
-- Full online booking portal testing is not applicable yet.
+- Booking create/edit/drag/drop/status mutations are still intentionally out of scope.
+- Roster admin UI is not built yet; this sprint only consumes existing/seeded data.
+- Online booking portal behaviour is not applicable yet.
 
 ## Known Follow-Up
 
-- Run `.venv\Scripts\python.exe -m alembic upgrade head` in local/dev databases to
-  apply the new Room/DiaryRoster migration before exercising roster endpoints.
-- Trigger/verify GitHub Pages deployment after push if the live site is stale.
-- Investigate token refresh/session renewal for long-lived diary windows; a 401 after
-  extended idle/open time currently means the taskpane session needs re-authentication.
-- Consider whether the `Now` marker and off-grid hover bubbles should be visually
-  quieter after user review.
-- Wire the diary frontend to roster data in a later sprint.
-- Build booking edit/drag UX only after flexible time display and roster state are
-  comfortable.
+- The test DB teardown can occasionally deadlock while dropping tables during
+  rapid reruns, leaving a partial test DB. This is a test infrastructure issue,
+  not introduced by the roster work. Suggested fix: harden the session-scoped
+  engine fixture teardown with retry/connection cleanup.
+- Consider adding an explicit backend `has_roster_entry` or equivalent flag later
+  so the frontend can distinguish "room exists but no roster row" from an
+  intentionally blank roster assignment without inference.
+- Realign clean worker mirrors after final push.
 - Dirty stale disposable worktree `codex/time-model` remains visible and should be
   reviewed before retirement.
 
@@ -71,15 +75,21 @@ These are Codex/orchestrator verification notes, not commands the user is expect
 to run.
 
 - `node --check docs\diary\diary.js`
-- `.venv\Scripts\python.exe -m compileall app scripts tests seed.py`
-- `.venv\Scripts\python.exe -m pytest tests -q` -> 38 passed
-- `git diff --check`
-- Manifest XML parse check for `manifest.online.xml` and `EMR4 Sidebar/manifest.xml`
-- Local browser smoke via `http://127.0.0.1:8765/` confirmed taskpane, command centre,
-  and diary load `cuboid4.png` and visible `EMR` titles.
+- `.venv\Scripts\python.exe -m pytest tests\test_agent_worktrees.py -q` -> 2 passed
+- Initial diary roster/template pytest run hit the known partial test DB teardown
+  issue (`relation "practices" does not exist`); reset the test DB schema using
+  the documented SQLAlchemy reset command.
+- `.venv\Scripts\python.exe -m pytest tests\test_diary_roster.py tests\test_diary_template.py -q` -> 18 passed after reset
+- `git diff --check` -> only CRLF normalization warnings in markdown/review
+  packet files; no whitespace errors
 
 ## Recommended Next Direction
 
-Next sprint should review the diary time-ruler UX in the live browser first, then
-move toward roster consumption in the diary frontend. Keep booking mutations deferred
-until the roster and flexible-time display feel settled.
+After user review, the next sprint should either:
+
+- add a minimal roster admin/editing surface, or
+- move to safe read-only waiting-room/status visibility before any drag/drop
+  appointment mutation work.
+
+Booking mutation should remain deferred until roster display and fallback semantics
+are comfortable in real use.

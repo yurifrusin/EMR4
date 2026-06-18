@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Preparing for dispatch |
-| Launch Gate | User should not prompt worker agents until Codex announces `HANDIN READY` |
-| Integration Gate | Do not push sprint implementation work to `master` until Claude, Antigravity, and the Codex worker have submitted or been explicitly stood down |
+| Status | Integrated, pending verification/push closeout |
+| Launch Gate | Complete |
+| Integration Gate | Complete |
 | Theme | Make date-specific roster data visible in the diary without starting booking mutation work |
 
 ### Workstream K - Diary Roster Dev-Data Contract
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `app/models/diary.py`, `app/schemas/diary.py`, `app/routers/diary.py`, `seed.py`, migrations/tests as needed |
 | Out of Scope | `docs/diary/*`, booking mutations, Gemini/taskpane/Command Centre |
 | Verification | Focused diary roster/template tests plus migration checks if changed |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream L - Diary Roster Consumption
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` |
 | Out of Scope | Backend routes/models/tests, booking mutations, taskpane/Command Centre/Gemini |
 | Verification | JS syntax plus normal/smoke/narrow/date-navigation browser checks |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream M - Diary Roster Smoke Review
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Small orchestration/checklist or smoke-review artifacts; tiny non-overlapping smoke fixture only if safe |
 | Out of Scope | Backend roster implementation, production frontend roster merge, booking mutations |
 | Verification | `git diff --check`; `node --check docs\diary\diary.js` if JS touched |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 3: Diary Operations Foundation
 

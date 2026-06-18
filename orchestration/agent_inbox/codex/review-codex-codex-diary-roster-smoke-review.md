@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/diary-roster-smoke-review` |
 | Source Task | `codex-diary-roster-smoke-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

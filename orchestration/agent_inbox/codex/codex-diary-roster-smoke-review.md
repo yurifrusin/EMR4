@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/diary-roster-smoke-review` |
-| Status | submitted |
+| Status | integrated |
 | Created | 2f511a1 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-diary-roster-smoke-review --commit-message "Add diary roster smoke review" --message "Diary roster smoke review ready for Codex review"` |
