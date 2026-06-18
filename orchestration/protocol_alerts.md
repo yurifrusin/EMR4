@@ -17,4 +17,8 @@ Read these before acting on remembered process details.
 - Codex records integrated submits in `orchestration/integration_log.md` and runs
   `audit` / `retire-stale` after integrations so stale disposable worktrees are
   visible instead of surprising the next session.
+- After Codex integrates a submitted durable worker branch, Codex should realign
+  the clean worker mirror with `python scripts\agent_worktrees.py realign --agent
+  <agent> --apply` from that worker worktree, rather than rebasing and replaying
+  the already-integrated submit commit.
 - If these alerts conflict with a prior session memory, trust these alerts.

@@ -739,6 +739,35 @@ def sync(args: argparse.Namespace) -> None:
         print(f"[ok] Fast-forwarded from {before} to {after}")
 
 
+def realign(args: argparse.Namespace) -> None:
+    repo = Path.cwd().resolve()
+    require_clean(repo)
+
+    expected_branch = AGENTS[args.agent]
+    branch = git_stdout(["branch", "--show-current"], cwd=repo)
+    if branch != expected_branch:
+        raise SystemExit(
+            f"Refusing to realign {branch or '(detached HEAD)'} as {args.agent}; "
+            f"expected branch {expected_branch}."
+        )
+
+    print(f"[fetch] {args.remote}")
+    print_result(run_git(["fetch", args.remote], cwd=repo))
+
+    target = f"{args.remote}/{expected_branch}"
+    before = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
+    target_head = git_stdout(["rev-parse", "--short", target], cwd=repo)
+
+    if not args.apply:
+        print(f"[dry-run] would reset clean {expected_branch} from {before} to {target_head}")
+        print("Re-run with --apply after Codex has integrated the submitted task.")
+        return
+
+    print_result(run_git(["reset", "--hard", target], cwd=repo))
+    after = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
+    print(f"[ok] realigned clean {expected_branch} from {before} to {after}")
+
+
 def handin(args: argparse.Namespace) -> None:
     args.fetch = True
     sync(args)
@@ -1029,6 +1058,15 @@ def main() -> None:
     sync_parser.add_argument("--fetch", action="store_true", help="Fetch from the remote before merging the baton")
     sync_parser.add_argument("--remote", default="origin")
     sync_parser.set_defaults(func=sync)
+
+    realign_parser = subparsers.add_parser(
+        "realign",
+        help="After Codex integration, reset a clean durable agent worktree to its remote current branch",
+    )
+    realign_parser.add_argument("--agent", choices=sorted(AGENTS), required=True)
+    realign_parser.add_argument("--remote", default="origin")
+    realign_parser.add_argument("--apply", action="store_true", help="Actually reset the clean worktree")
+    realign_parser.set_defaults(func=realign)
 
     handin_parser = subparsers.add_parser("handin", help="Fetch and fast-forward current worktree to the handoff ref")
     handin_parser.add_argument("--ref", default=HANDOFF_REF)
