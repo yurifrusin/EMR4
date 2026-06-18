@@ -424,6 +424,25 @@ flowchart TD
 | Waiting room feed | Live arrival notifications; patient status cards; time-in-waiting counters |
 | Nurse workflows | Pre-consult observations entry; nurse notes section in encounters |
 
+#### Phase 2 diary UX / configurability backlog
+
+- **Native grid, not Word diary**: the diary is now a native HTML/JS grid backed by
+  Postgres appointments. The earlier SharePoint/Word Parse & Lock diary concept is
+  retained as historical context only.
+- **Flexible durations**: preserve arbitrary appointment lengths (`duration_minutes`),
+  including 10-minute bookings, odd follow-up lengths, and drag-resize adjustments.
+- **Per-column slot cadence**: support optional per-column diary intervals in addition
+  to the practice default, e.g. GP columns at 15 minutes and nurse columns at 10 minutes.
+- **Readable dense bookings**: appointment cards should support click-to-front /
+  click-to-expand note inspection over overlapping bookings.
+- **Notes model**: keep urgent booking reason text visible when space allows; later add
+  a lower-priority bubble/private-note option to avoid visual overload.
+- **Lifecycle affordance**: experiment with the appointment left accent bar as a status
+  indicator for Confirmed/Arrived/InConsult/Completed while preserving appointment-type
+  meaning if useful.
+- **Now navigation**: add a header control and open-time auto-scroll to position the
+  diary just before the current time.
+
 ---
 
 ### PHASE 3 — Online Booking Portal

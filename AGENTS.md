@@ -563,9 +563,9 @@ The read-only first slice plus interval display, backend conflict/slot hardening
 clinic-local appointment time model are shipped.
 Before adding booking/drag/status mutations:
 
-1. **Independent positioned-column diary grid** — required before drag/drop, arbitrary slot
-   lengths, or dense overlap lanes. The current table renderer is acceptable for read-only
-   interval display only.
+1. ✅ **Independent positioned-column diary grid** — **DONE**. This is the foundation for
+   drag/drop, arbitrary appointment lengths, dense overlap lanes, click-to-expand notes,
+   and per-column visual flexibility.
 2. **`Room` + `DiaryRoster` models** — date×room→practitioner|label + CRUD. `DiaryTemplate` /
    `DiaryColumn` / `DiaryBreak` models now exist (migration `a1b2c3d4e5f6`); room-per-date
    roster assignment is the next modelling step.
@@ -573,18 +573,27 @@ Before adding booking/drag/status mutations:
    `DiaryTemplate` from DB, falling back to `diary_template.json` if no row exists yet.
    **Next: wire `diary.js` to call this endpoint** instead of embedding the template literal.
 
-#### ⚠️ Grid must be rebuilt before interactivity — per-column independent time slots
+#### Diary interaction backlog — preserve flexibility
 
-The current grid is an HTML `<table>` with shared `<tr>` rows across all columns.
-This is **incompatible with interactivity**: you cannot insert a 10:10 slot in Room 1
-only, remove 10:15 from Room 2 to create a longer block, or drag-resize an appointment
-across arbitrary time boundaries.
-
-**Before any booking/drag/edit work, replace the `<table>` with independent CSS-positioned
-column divs.** Each column is its own stack; time labels are text within each slot div;
-slot height is proportional to duration (e.g. 15 min = 1 unit). No shared rows. The
-time gutter on the left is a reference overlay, not a structural spine. This is also the
-prerequisite for SSE push updates (incremental DOM patch vs full re-render).
+The diary should remain flexible enough for real reception workflows:
+- **Arbitrary appointment durations** — the appointment model/API already allows positive
+  `duration_minutes` values up to 480, so 10-minute, 20-minute, 45-minute, etc. bookings
+  should remain first-class. Conflict checks and `/slots` are duration-aware.
+- **Per-column slot cadence** — currently `DiaryTemplate.slot_interval_minutes` is practice-wide,
+  while `PractitionerSchedule.slot_duration_minutes` is per practitioner. Add an optional
+  per-column interval override to `DiaryColumn` / `DiaryColumnOut` before building the template
+  editor, so a nurse column can use 10-minute slots while a GP column uses 15-minute slots.
+- **Dense overlap inspection** — keep click-to-expand appointment cards. The active booking rises
+  above overlapping bookings and wraps notes, so staff can inspect a long note without inflating
+  the whole day.
+- **Visible urgent notes, optional quiet notes** — keep appointment reasons visible when there is
+  enough duration/space; later add a separate lower-priority bubble/private note field so routine
+  notes do not overload the diary.
+- **Lifecycle colour bar** — explore using the left appointment accent bar for status/lifecycle
+  states (Booked, Confirmed, Arrived, InConsult, Completed) while preserving appointment-type
+  colour somewhere else if needed.
+- **Now navigation** — add a header button and initial auto-scroll that positions the day just
+  before the current time.
 
 ### 🏗️ Later Phase 2 items (deferred)
 - **Parse & Lock** — now unnecessary for the diary (the grid replaces it). Still relevant if

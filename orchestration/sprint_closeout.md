@@ -25,6 +25,9 @@ reviewed, integrated, verified, pushed, and audited.
 - Narrow diary windows now wrap the top header controls instead of cutting them
   off to the right.
 - Diary template backend foundation exists at `GET /api/v1/diary/template`.
+- Diary UX decisions captured for later: arbitrary appointment durations, optional
+  per-column slot cadence, click-to-expand notes, possible lifecycle colour bars,
+  and a future "Now" scroll control.
 - Orchestration now has task packets, review packets, an integration log, audit,
   and stale disposable worktree detection.
 
@@ -61,6 +64,10 @@ These checks are worth doing before dispatching the next set of agent tasks:
 
 - `docs/diary/diary.js` still embeds the diary template literal. It should next
   fetch `GET /api/v1/diary/template`.
+- Preserve booking flexibility when adding edit/drag UI: the API already allows
+  arbitrary `duration_minutes`, but the diary template currently has one practice-wide
+  interval. Add optional per-column slot interval config before the template editor
+  hardens around only 15-minute rows.
 - GitHub Pages can serve a stale build even after `master` is pushed. For any
   diary/taskpane deploy, verify the live `?v=N` and trigger a Pages rebuild with
   `gh api --method POST repos/yurifrusin/EMR4/pages/builds` if needed.
