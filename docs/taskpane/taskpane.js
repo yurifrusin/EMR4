@@ -26,6 +26,7 @@ const SECTION_HEADING   = "Contemporaneous Notes"; // where consults are planted
 const SECTION_TAG_CN    = "emr4-section-cn";       // content-control tag for the CN heading
 // A consult header line: "DD-MM-YYYY  Name  H[:MM] AM/PM  N years old."
 const CONSULT_HEADER_RE = /^\d{2}-\d{2}-\d{4}\b.*\byears old\b/i;
+const CONSULT_HEADER_PREFIX_RE = /^\d{2}-\d{2}-\d{4}\b.*?\byears old\.\s*/i;
 
 // All known Heading 1 section names in a patient file (Dr Shera structure).
 // repairDocumentStructure() wraps each found heading in a locked content control.
@@ -60,7 +61,7 @@ let rxRowCount     = 0;
 let lastSyncedText = "";
 let debounceTimer  = null;
 let backgroundSyncTimer = null;
-let syncDebugState = { tick: 0, textLen: 0, fetch: "idle", http: "-", result: "-" };
+let syncDebugState = { tick: 0, textLen: 0, fetch: "idle", http: "-", result: "-", extract: "-" };
 let typeaheadTimer = null;
 let mediaRecorder  = null;
 let audioChunks    = [];
@@ -105,7 +106,8 @@ function updateSyncDebug(patch = {}) {
     `AI debug: tick=${syncDebugState.tick} started=${consultStarted ? "yes" : "no"} ` +
     `cc=${commandCentreOpen ? "yes" : "no"} rec=${isRecording ? "yes" : "no"} ` +
     `syncing=${isSyncing ? "yes" : "no"} len=${syncDebugState.textLen} ` +
-    `fetch=${syncDebugState.fetch} http=${syncDebugState.http} result=${syncDebugState.result}`;
+    `fetch=${syncDebugState.fetch} http=${syncDebugState.http} ` +
+    `extract=${syncDebugState.extract} result=${syncDebugState.result}`;
 }
 
 function updateStartConsultButton() {
@@ -1194,7 +1196,7 @@ window.startConsultation = async function () {
   consultStarted = true;
   lastSyncedText = "";
   lastAiResponse = null;
-  updateSyncDebug({ tick: 0, textLen: 0, fetch: "started", http: "-", result: "-" });
+  updateSyncDebug({ tick: 0, textLen: 0, fetch: "started", http: "-", result: "-", extract: "-" });
   updateStartConsultButton();
   isLocked = false; updateLockUI();   // fresh consult — AI live again
   updateFormFields({});               // clear any previously displayed coding
@@ -1214,29 +1216,52 @@ async function getCurrentConsultText() {
     const items = paras.items;
     const sectionHeadings = new Set(PROTECTED_SECTIONS.map(s => s.text.toLowerCase()));
     const paraText = p => (p.text || "").trim();
+    const compact = s => String(s || "").replace(/\s+/g, " ").trim();
     const isHeading1 = p =>
       p.styleBuiltIn === Word.BuiltInStyleName.heading1 ||
       sectionHeadings.has(paraText(p).toLowerCase());
     let cnIdx = items.findIndex(p =>
       paraText(p).toLowerCase() === SECTION_HEADING.toLowerCase());
-    if (cnIdx === -1) return "";
+    if (cnIdx === -1) {
+      updateSyncDebug({ extract: "cn:-1 hdr:-1 lines:0" });
+      return "";
+    }
 
     // Locate the current consult header (first matching line after the section heading)
+    const wantedHeader = compact(lastConsultHeader);
     let startIdx = -1;
+    let selected = null;
+    let fallback = null;
     for (let i = cnIdx + 1; i < items.length; i++) {
       if (isHeading1(items[i])) break;                          // hit next section — no consult yet
-      if (CONSULT_HEADER_RE.test((items[i].text || "").trim())) { startIdx = i; break; }
+      const text = paraText(items[i]);
+      if (!CONSULT_HEADER_RE.test(text)) continue;
+      const candidate = { idx: i, tail: text.replace(CONSULT_HEADER_PREFIX_RE, "").trim() };
+      if (!fallback) fallback = candidate;
+      if (!wantedHeader || compact(text).startsWith(wantedHeader)) {
+        selected = candidate;
+        startIdx = i;
+        break;
+      }
     }
-    if (startIdx === -1) return "";
+    if (startIdx === -1 && fallback) {
+      selected = fallback;
+      startIdx = fallback.idx;
+    }
+    if (startIdx === -1) {
+      updateSyncDebug({ extract: `cn:${cnIdx} hdr:-1 lines:0` });
+      return "";
+    }
 
     // Collect notes until the previous consult header or the next section heading
-    const lines = [];
+    const lines = selected?.tail ? [selected.tail] : [];
     for (let i = startIdx + 1; i < items.length; i++) {
       const p = items[i];
       if (isHeading1(p)) break;
       if (CONSULT_HEADER_RE.test((p.text || "").trim())) break;
       lines.push(p.text);
     }
+    updateSyncDebug({ extract: `cn:${cnIdx} hdr:${startIdx} lines:${lines.length}` });
     return lines.join("\n").trim();
   });
 }
@@ -1497,7 +1522,7 @@ function initApp() {
 function _initPatientMode() {
   showTab("consult");
   setStatus("Ready.");
-  updateSyncDebug({ fetch: "ready", textLen: 0, http: "-", result: "-" });
+  updateSyncDebug({ fetch: "ready", textLen: 0, http: "-", result: "-", extract: "-" });
   updateFormFields({});
   repairDocumentStructure();
   runBackgroundSync();
