@@ -2,19 +2,22 @@ import uuid
 import json
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from vertexai.generative_models import GenerativeModel, GenerationConfig
+from google import genai
+from google.genai import types
+from app.config import settings
 from app.dependencies import get_db, get_current_user
 from app.models.tenancy import User, Practitioner
 from app.models.patients import Patient
 from app.models.clinical import Encounter, Prescription, ClinicalDiagnosis, Allergy
 from app.schemas.clinical import LetterDraftRequest, LetterDraftResponse
-import vertexai
-from app.config import settings
 
 router = APIRouter(prefix="/api/v1/patients/{patient_id}/letters", tags=["letters"])
 
-vertexai.init(project=settings.gcp_project, location=settings.gcp_location)
-_model = GenerativeModel("gemini-2.5-flash")
+ai_client = genai.Client(
+    vertexai=True,
+    project=settings.gcp_project,
+    location=settings.gcp_location
+)
 
 LETTER_TYPES = {
     "Referral": "a specialist referral letter",
@@ -99,9 +102,10 @@ Australian conventions:
 """
 
     try:
-        response = _model.generate_content(
-            prompt,
-            generation_config=GenerationConfig(response_mime_type="application/json", temperature=0.3),
+        response = ai_client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.3)
         )
         data = json.loads(response.text)
         return LetterDraftResponse(
