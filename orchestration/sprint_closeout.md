@@ -16,7 +16,7 @@ reviewed, integrated, verified, pushed, and audited.
 ## What Changed
 
 - Diary now has a `Now` button, current-time marker, today auto-scroll, and exact-time
-  chips/tooltips for off-grid bookings and breaks.
+  hover bubbles/tooltips for off-grid booking and break borders.
 - Smoke mode includes irregular times to exercise the flexible-time UX.
 - Room + DiaryRoster backend foundation exists for date-specific room assignments.
 - Gemini calls migrated from deprecated `vertexai.generative_models` usage to the
@@ -38,8 +38,8 @@ After the final push has deployed:
 3. Open the diary from the taskpane.
 4. Confirm the diary header shows `EMR - Diary` with the cuboid logo.
 5. Use smoke mode if desired: `https://yurifrusin.github.io/EMR4/diary/diary.html?smoke=true`.
-6. Check the `Now` button, current-time marker, and whether off-grid time chips are
-   helpful rather than visually noisy.
+6. Check the `Now` button, current-time marker, and whether off-grid hover bubbles
+   appear helpfully when pointing near appointment/break borders.
 7. Confirm date navigation, Refresh, narrow layout, the 10:00 long booking, and
    visible booking notes still behave correctly.
 
@@ -55,8 +55,10 @@ After the final push has deployed:
 - Run `.venv\Scripts\python.exe -m alembic upgrade head` in local/dev databases to
   apply the new Room/DiaryRoster migration before exercising roster endpoints.
 - Trigger/verify GitHub Pages deployment after push if the live site is stale.
-- Consider whether the `Now` marker and off-grid chips should be visually quieter
-  after user review.
+- Investigate token refresh/session renewal for long-lived diary windows; a 401 after
+  extended idle/open time currently means the taskpane session needs re-authentication.
+- Consider whether the `Now` marker and off-grid hover bubbles should be visually
+  quieter after user review.
 - Wire the diary frontend to roster data in a later sprint.
 - Build booking edit/drag UX only after flexible time display and roster state are
   comfortable.
@@ -64,6 +66,9 @@ After the final push has deployed:
   reviewed before retirement.
 
 ## Verification
+
+These are Codex/orchestrator verification notes, not commands the user is expected
+to run.
 
 - `node --check docs\diary\diary.js`
 - `.venv\Scripts\python.exe -m compileall app scripts tests seed.py`

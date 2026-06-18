@@ -490,6 +490,20 @@ function appendNowMarker(container, template, showLabel = false) {
   container.appendChild(marker);
 }
 
+function appendTimeEdges(el, startMins, endMins) {
+  const startEdge = document.createElement("span");
+  startEdge.className = "time-edge time-edge-start";
+  startEdge.dataset.timeLabel = `Start ${fromMins(startMins)}`;
+  startEdge.setAttribute("aria-hidden", "true");
+  el.appendChild(startEdge);
+
+  const endEdge = document.createElement("span");
+  endEdge.className = "time-edge time-edge-end";
+  endEdge.dataset.timeLabel = `End ${fromMins(endMins)}`;
+  endEdge.setAttribute("aria-hidden", "true");
+  el.appendChild(endEdge);
+}
+
 // ─── RENDER GRID ───────────────────────────────────────────
 function renderGrid(template, slots, apptLookup, typeMap, occupied) {
   const grid = document.getElementById("diary-grid");
@@ -608,10 +622,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       labelSpan.textContent = b.label || "BREAK";
       breakEl.appendChild(labelSpan);
       if (isIrregular) {
-        const timeSpan = document.createElement("span");
-        timeSpan.className = "break-time-chip";
-        timeSpan.textContent = timeRangeLabel(bStart, bEnd);
-        breakEl.appendChild(timeSpan);
+        appendTimeEdges(breakEl, bStart, bEnd);
       }
 
       columnBody.appendChild(breakEl);
@@ -691,10 +702,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       name.textContent = patientName;
       span.appendChild(name);
       if (isIrregular) {
-        const apptTime = document.createElement("span");
-        apptTime.className = "appt-time-chip";
-        apptTime.textContent = timeLabel;
-        span.appendChild(apptTime);
+        appendTimeEdges(span, start, end);
       }
       if (a.reason && duration >= intervalMins * 2) {
         const reason = document.createElement("span");
