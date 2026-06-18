@@ -28,11 +28,13 @@ Prepare the review and smoke-test surface for the roster-consumption sprint with
 1. Run the start command above.
 2. Read the protocol alerts printed by `handin`.
 3. Read `AGENTS.md` and `orchestration/parallel_workstreams.md`.
-4. Work only inside the stated scope unless the user or Codex expands it.
-5. Do not merge to `master`.
-6. Do not move `handoff/current`.
-7. Run the verification listed below.
-8. Finish with the submit command above.
+4. Create or switch to the worker branch from the current handoff tip before editing:
+   `git switch -C codex/diary-roster-smoke-review handoff/current`.
+5. Work only inside the stated scope unless the user or Codex expands it.
+6. Do not merge to `master`.
+7. Do not move `handoff/current`.
+8. Run the verification listed below.
+9. Finish with the submit command above.
 
 ## Hard Stop Rules
 
