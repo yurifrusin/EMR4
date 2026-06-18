@@ -578,11 +578,13 @@ Before adding booking/drag/status mutations:
 The diary should remain flexible enough for real reception workflows:
 - **Arbitrary appointment durations** — the appointment model/API already allows positive
   `duration_minutes` values up to 480, so 10-minute, 20-minute, 45-minute, etc. bookings
-  should remain first-class. Conflict checks and `/slots` are duration-aware.
+  should remain first-class. Conflict checks and `/slots` are duration-aware. Use **5 minutes**
+  as the minimum editing/snap unit unless a stronger clinical reason emerges.
 - **Per-column slot cadence** — currently `DiaryTemplate.slot_interval_minutes` is practice-wide,
   while `PractitionerSchedule.slot_duration_minutes` is per practitioner. Add an optional
   per-column interval override to `DiaryColumn` / `DiaryColumnOut` before building the template
   editor, so a nurse column can use 10-minute slots while a GP column uses 15-minute slots.
+  Validate configured intervals against the 5-minute minimum and prefer multiples of 5.
 - **Dense overlap inspection** — keep click-to-expand appointment cards. The active booking rises
   above overlapping bookings and wraps notes, so staff can inspect a long note without inflating
   the whole day.

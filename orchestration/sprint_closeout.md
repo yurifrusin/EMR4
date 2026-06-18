@@ -67,7 +67,8 @@ These checks are worth doing before dispatching the next set of agent tasks:
 - Preserve booking flexibility when adding edit/drag UI: the API already allows
   arbitrary `duration_minutes`, but the diary template currently has one practice-wide
   interval. Add optional per-column slot interval config before the template editor
-  hardens around only 15-minute rows.
+  hardens around only 15-minute rows. Treat 5 minutes as the minimum staff editing/snap
+  unit, with normal columns still free to default to 10 or 15 minutes.
 - GitHub Pages can serve a stale build even after `master` is pushed. For any
   diary/taskpane deploy, verify the live `?v=N` and trigger a Pages rebuild with
   `gh api --method POST repos/yurifrusin/EMR4/pages/builds` if needed.

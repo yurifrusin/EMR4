@@ -431,8 +431,10 @@ flowchart TD
   retained as historical context only.
 - **Flexible durations**: preserve arbitrary appointment lengths (`duration_minutes`),
   including 10-minute bookings, odd follow-up lengths, and drag-resize adjustments.
+  Use 5 minutes as the minimum staff editing/snap unit.
 - **Per-column slot cadence**: support optional per-column diary intervals in addition
   to the practice default, e.g. GP columns at 15 minutes and nurse columns at 10 minutes.
+  Configured intervals should be at least 5 minutes and preferably multiples of 5.
 - **Readable dense bookings**: appointment cards should support click-to-front /
   click-to-expand note inspection over overlapping bookings.
 - **Notes model**: keep urgent booking reason text visible when space allows; later add
