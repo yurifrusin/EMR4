@@ -1,6 +1,6 @@
 from datetime import time
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class DiaryBreakOut(BaseModel):
@@ -16,7 +16,15 @@ class DiaryColumnOut(BaseModel):
     assignment: Optional[str] = None
     practitioner_ahpra: Optional[str] = None
     tint_hex: Optional[str] = None
+    slot_interval_minutes: Optional[int] = Field(default=None, ge=5)
     breaks: list[DiaryBreakOut] = Field(default_factory=list)
+
+    @field_validator("slot_interval_minutes", mode="before")
+    @classmethod
+    def must_be_multiple_of_five(cls, v: Optional[int]) -> Optional[int]:
+        if v is not None and v % 5 != 0:
+            raise ValueError(f"slot_interval_minutes must be a multiple of 5, got {v}")
+        return v
 
     model_config = {"from_attributes": True}
 

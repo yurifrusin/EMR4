@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | in_progress |
+| Status | integrated |
 | Created | ec0b230 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent claude --task claude-diary-column-slot-intervals --commit-message "Add diary column slot interval support" --message "Diary column slot interval support ready for Codex review"` |
@@ -76,4 +76,4 @@ Fill this in before submit:
 
 - Files changed:
 - Verification run:
-- Remaining risks:
+- Remaining risks: Frontend currently receives `slot_interval_minutes` per column but does not yet render per-column cadences. That remains a future visual/editing slice.

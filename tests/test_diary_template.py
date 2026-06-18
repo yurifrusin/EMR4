@@ -76,6 +76,95 @@ def test_template_fallback_to_json(client, gp_user):
     assert len(data["columns"]) >= 1
 
 
+def test_column_without_slot_interval_returns_null(client, db, gp_user, practice):
+    """A column with no per-column interval returns slot_interval_minutes=null."""
+    tmpl = DiaryTemplate(
+        practice_id=practice.id,
+        slot_start=time(9, 0),
+        slot_end=time(17, 0),
+        slot_interval_minutes=15,
+        footer=[],
+    )
+    db.add(tmpl)
+    db.flush()
+    db.add(DiaryColumn(
+        template_id=tmpl.id,
+        practice_id=practice.id,
+        display_order=0,
+        room_label="Room A",
+    ))
+    db.flush()
+
+    token = make_token(gp_user)
+    resp = client.get("/api/v1/diary/template", headers={"Authorization": f"Bearer {token}"})
+    assert resp.status_code == 200
+    col = resp.json()["columns"][0]
+    assert col["slot_interval_minutes"] is None
+
+
+def test_column_with_valid_slot_interval_returned(client, db, gp_user, practice):
+    """A column with a valid per-column interval (10 min) returns that value."""
+    tmpl = DiaryTemplate(
+        practice_id=practice.id,
+        slot_start=time(9, 0),
+        slot_end=time(17, 0),
+        slot_interval_minutes=15,
+        footer=[],
+    )
+    db.add(tmpl)
+    db.flush()
+    db.add(DiaryColumn(
+        template_id=tmpl.id,
+        practice_id=practice.id,
+        display_order=0,
+        room_label="Nurse Room",
+        slot_interval_minutes=10,
+    ))
+    db.flush()
+
+    token = make_token(gp_user)
+    resp = client.get("/api/v1/diary/template", headers={"Authorization": f"Bearer {token}"})
+    assert resp.status_code == 200
+    col = resp.json()["columns"][0]
+    assert col["slot_interval_minutes"] == 10
+
+
+def test_practice_wide_interval_unaffected_by_column_override(client, db, gp_user, practice):
+    """Practice-wide slot_interval_minutes is still returned correctly when a column overrides it."""
+    tmpl = DiaryTemplate(
+        practice_id=practice.id,
+        slot_start=time(9, 0),
+        slot_end=time(17, 0),
+        slot_interval_minutes=15,
+        footer=[],
+    )
+    db.add(tmpl)
+    db.flush()
+    db.add(DiaryColumn(
+        template_id=tmpl.id,
+        practice_id=practice.id,
+        display_order=0,
+        room_label="Room GP",
+        slot_interval_minutes=None,
+    ))
+    db.add(DiaryColumn(
+        template_id=tmpl.id,
+        practice_id=practice.id,
+        display_order=1,
+        room_label="Room Nurse",
+        slot_interval_minutes=10,
+    ))
+    db.flush()
+
+    token = make_token(gp_user)
+    resp = client.get("/api/v1/diary/template", headers={"Authorization": f"Bearer {token}"})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["slot_interval_minutes"] == 15
+    assert data["columns"][0]["slot_interval_minutes"] is None
+    assert data["columns"][1]["slot_interval_minutes"] == 10
+
+
 def test_template_cross_practice_isolation(client, db, gp_user, practice_b):
     """A GP from practice A cannot see practice B's template."""
     tmpl_b = DiaryTemplate(

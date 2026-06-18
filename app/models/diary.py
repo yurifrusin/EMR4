@@ -40,6 +40,7 @@ class DiaryColumn(Base):
     practitioner_ahpra = Column(String(50), nullable=True)
     tint_hex = Column(String(7), nullable=True)
     is_active = Column(Boolean, default=True)
+    slot_interval_minutes = Column(Integer, nullable=True)
 
     template = relationship("DiaryTemplate", back_populates="columns")
     breaks = relationship("DiaryBreak", back_populates="column",
