@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-diary-roster-foundation` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -22,5 +22,5 @@ Diary roster foundation ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into master as part of Sprint 3 after focused diary roster tests passed.
+- Follow-up required: Frontend can consume roster endpoint in a later sprint; not required for current UI review.

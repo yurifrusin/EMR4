@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/diary-time-ruler-ux` |
-| Status | submitted |
+| Status | integrated |
 | Created | 05edbb6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-diary-time-ruler-ux --commit-message "Refine diary time ruler UX" --message "Diary time-ruler UX ready for Codex review"` |

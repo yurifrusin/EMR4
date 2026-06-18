@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/diary-time-ruler-ux` |
 | Source Task | `codex-diary-time-ruler-ux` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -22,5 +22,5 @@ Diary time-ruler UX ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into master as part of Sprint 3 after JS syntax and worker browser smoke checks passed.
+- Follow-up required: User should visually review smoke mode for Now marker/button and time chip density.

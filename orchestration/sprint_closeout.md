@@ -8,85 +8,73 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Phase 2 diary foundation sprint |
+| Batch | Sprint 3: Diary Operations Foundation |
 | Integrated through | current `master` |
 | Status | Ready for user review |
 | Last updated | 2026-06-18 |
 
 ## What Changed
 
-- Appointment backend is hardened around auth, practice scoping, conflict checks,
-  duration-aware slots, and canonical clinic-local date/time fields.
-- Diary UI now renders as a native independent positioned-column grid rather than
-  a shared table body.
-- Multi-slot appointments span their real duration, overlapping bookings remain
-  visible, and short appointment reasons are preserved in tooltips instead of
-  being visibly clipped.
-- Narrow diary windows now wrap the top header controls instead of cutting them
-  off to the right.
-- Diary template backend foundation exists at `GET /api/v1/diary/template`.
-- Diary UX decisions captured for later: arbitrary appointment durations, optional
-  per-column slot cadence, click-to-expand notes, possible lifecycle colour bars,
-  and a future "Now" scroll control.
-- Orchestration now has task packets, review packets, an integration log, audit,
-  and stale disposable worktree detection.
+- Diary now has a `Now` button, current-time marker, today auto-scroll, and exact-time
+  chips/tooltips for off-grid bookings and breaks.
+- Smoke mode includes irregular times to exercise the flexible-time UX.
+- Room + DiaryRoster backend foundation exists for date-specific room assignments.
+- Gemini calls migrated from deprecated `vertexai.generative_models` usage to the
+  Google Gen AI SDK path, with lazy client construction so app/test imports do not
+  block on AI client initialization.
+- Website/app branding now displays `EMR` instead of `EMR Centaur`.
+- The in-page logo and Office ribbon icons now use `cuboid4.png`-derived assets.
+- Sprint protocol packets and Codex review packets are marked integrated, and the
+  integration ledger records the three submitted workstreams.
 
 ## Recommended User Review
 
-These checks are worth doing before dispatching the next set of agent tasks:
+After the final push has deployed:
 
-1. Start the dev stack with `.\run_dev.ps1`.
-2. If the 10:00 demo booking still renders as a 15-minute booking, run
-   `.venv\Scripts\python.exe seed.py` once to repair existing seeded demo
-   durations without recreating the database.
-3. Open the Word Online add-in and sign in as the dev clinic user.
-4. Open the diary from the taskpane.
-5. Confirm the diary loads without an auth/error banner.
-6. Check the seeded appointments:
-   - 09:00 Margaret Thompson appears as confirmed / bold blue / all caps.
-   - 09:15 Billy Frusin appears as a normal short booking without clipped reason text.
-   - 10:00 Margaret Thompson spans 45 minutes and can show its reason line.
-7. Use Previous, Today, Next, and Refresh to confirm date navigation still works.
-8. Check narrow/mobile-ish width: header controls should wrap into a taller header,
-   and columns should remain usable with horizontal scrolling.
-9. Open the break editor for a column, change a break locally, save, and confirm
-   the break block re-renders.
+1. Open/reopen the Word Online add-in and confirm the taskpane shows `EMR` and the
+   new cuboid logo.
+2. If the ribbon button still shows the old icon, refresh/re-sideload the manifest;
+   Office may cache manifest icons separately from the web pages.
+3. Open the diary from the taskpane.
+4. Confirm the diary header shows `EMR - Diary` with the cuboid logo.
+5. Use smoke mode if desired: `https://yurifrusin.github.io/EMR4/diary/diary.html?smoke=true`.
+6. Check the `Now` button, current-time marker, and whether off-grid time chips are
+   helpful rather than visually noisy.
+7. Confirm date navigation, Refresh, narrow layout, the 10:00 long booking, and
+   visible booking notes still behave correctly.
 
 ## Not Required Before Moving On
 
-- Full online booking portal testing: not built yet.
-- Drag/drop appointment mutations: not built yet.
-- Room/roster admin UI testing: not built yet.
-- Clinical note workflow regression: this sprint did not touch the Word clinical
-  anchoring path, though a quick smoke test is always welcome.
+- Drag/drop, resize, create, delete, or status mutations for bookings are not built yet.
+- Room/roster admin UI is not built yet; this sprint added backend foundation only.
+- Live Gemini endpoint testing still needs a credentials/runtime smoke test.
+- Full online booking portal testing is not applicable yet.
 
 ## Known Follow-Up
 
-- Preserve booking flexibility when adding edit/drag UI: the API already allows
-  arbitrary `duration_minutes`, and the diary template now has optional per-column
-  slot interval config. Treat 5 minutes as the minimum staff editing/snap unit,
-  while keeping a stable visible grid where that is clearer for users.
-- Add user-visible time affordances for non-grid-aligned breaks/bookings: exact-time
-  hover/readouts, a "Now" jump, and an opening auto-scroll near the current time.
-- Add Room + DiaryRoster persistence so date-specific room/practitioner assignments
-  are not hard-coded in the template forever.
-- GitHub Pages can serve a stale build even after `master` is pushed. For any
-  diary/taskpane deploy, verify the live `?v=N` and trigger a Pages rebuild with
-  `gh api --method POST repos/yurifrusin/EMR4/pages/builds` if needed.
-- Two stale disposable Codex worktrees remain visible in `audit`:
-  - `codex/diary-template-api`: clean, can be retired.
-  - `codex/time-model`: dirty, should be reviewed before retirement.
-- Vertex AI `generative_models` emits a deprecation warning and should be migrated
-  before the 2026-06-24 removal date.
+- Run `.venv\Scripts\python.exe -m alembic upgrade head` in local/dev databases to
+  apply the new Room/DiaryRoster migration before exercising roster endpoints.
+- Trigger/verify GitHub Pages deployment after push if the live site is stale.
+- Consider whether the `Now` marker and off-grid chips should be visually quieter
+  after user review.
+- Wire the diary frontend to roster data in a later sprint.
+- Build booking edit/drag UX only after flexible time display and roster state are
+  comfortable.
+- Dirty stale disposable worktree `codex/time-model` remains visible and should be
+  reviewed before retirement.
+
+## Verification
+
+- `node --check docs\diary\diary.js`
+- `.venv\Scripts\python.exe -m compileall app scripts tests seed.py`
+- `.venv\Scripts\python.exe -m pytest tests -q` -> 38 passed
+- `git diff --check`
+- Manifest XML parse check for `manifest.online.xml` and `EMR4 Sidebar/manifest.xml`
+- Local browser smoke via `http://127.0.0.1:8765/` confirmed taskpane, command centre,
+  and diary load `cuboid4.png` and visible `EMR` titles.
 
 ## Recommended Next Direction
 
-Proceed with Sprint 3: Diary Operations Foundation.
-
-1. Codex worker: diary time-ruler UX with 5-minute internal flexibility, exact-time
-   affordances, and a "Now" jump/auto-scroll.
-2. Claude: Room + DiaryRoster backend foundation with migration and tests.
-3. Antigravity: Gemini SDK migration spike against the Google Gen AI SDK path.
-
-Do not start drag/drop booking mutations until flexible time display and roster
-state are both reviewed.
+Next sprint should review the diary time-ruler UX in the live browser first, then
+move toward roster consumption in the diary frontend. Keep booking mutations deferred
+until the roster and flexible-time display feel settled.

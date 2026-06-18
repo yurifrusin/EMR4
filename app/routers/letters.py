@@ -13,11 +13,18 @@ from app.schemas.clinical import LetterDraftRequest, LetterDraftResponse
 
 router = APIRouter(prefix="/api/v1/patients/{patient_id}/letters", tags=["letters"])
 
-ai_client = genai.Client(
-    vertexai=True,
-    project=settings.gcp_project,
-    location=settings.gcp_location
-)
+_ai_client = None
+
+
+def get_ai_client():
+    global _ai_client
+    if _ai_client is None:
+        _ai_client = genai.Client(
+            vertexai=True,
+            project=settings.gcp_project,
+            location=settings.gcp_location,
+        )
+    return _ai_client
 
 LETTER_TYPES = {
     "Referral": "a specialist referral letter",
@@ -102,7 +109,7 @@ Australian conventions:
 """
 
     try:
-        response = ai_client.models.generate_content(
+        response = get_ai_client().models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt,
             config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.3)

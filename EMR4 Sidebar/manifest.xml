@@ -4,7 +4,7 @@
   <Version>1.0.0.0</Version>
   <ProviderName>EMR4</ProviderName>
   <DefaultLocale>en-AU</DefaultLocale>
-  <DisplayName DefaultValue="EMR4 Centaur"/>
+  <DisplayName DefaultValue="EMR"/>
   <Description DefaultValue="GP-AI Centaur: intelligent clinical coding, scribe, and letter writing for Australian general practice."/>
   <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
@@ -72,13 +72,13 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="EMR4 Centaur is ready!"/>
-        <bt:String id="CommandsGroup.Label" DefaultValue="EMR4"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="EMR4 Copilot"/>
+        <bt:String id="GetStarted.Title" DefaultValue="EMR is ready!"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="EMR"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="EMR"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="EMR4 Centaur loaded. Go to the Home tab and click 'EMR4 Copilot' to open the AI assistant."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open EMR4 Centaur — AI clinical coding, scribe, and letter assistant"/>
+        <bt:String id="GetStarted.Description" DefaultValue="EMR loaded. Go to the Home tab and click EMR to open the AI assistant."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open EMR — AI clinical coding, scribe, and letter assistant"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

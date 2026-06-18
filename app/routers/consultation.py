@@ -21,11 +21,18 @@ import datetime
 
 router = APIRouter(prefix="/api/v1", tags=["consultation"])
 
-ai_client = genai.Client(
-    vertexai=True,
-    project=settings.gcp_project,
-    location=settings.gcp_location
-)
+_ai_client = None
+
+
+def get_ai_client():
+    global _ai_client
+    if _ai_client is None:
+        _ai_client = genai.Client(
+            vertexai=True,
+            project=settings.gcp_project,
+            location=settings.gcp_location,
+        )
+    return _ai_client
 
 
 # --- Request schemas ---
@@ -238,7 +245,7 @@ async def analyze_consultation(
     extracted = {"encounter_metadata": {}, "clinical_diagnoses": [], "medications_and_prescriptions": []}
     try:
         response = await asyncio.to_thread(
-            ai_client.models.generate_content,
+            get_ai_client().models.generate_content,
             model="gemini-2.5-flash",
             contents=prompt,
             config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.1)
@@ -322,7 +329,7 @@ Return strict JSON only, no markdown:
     try:
         audio_part = types.Part.from_bytes(data=audio_bytes, mime_type=audio_file.content_type)
         response = await asyncio.to_thread(
-            ai_client.models.generate_content,
+            get_ai_client().models.generate_content,
             model="gemini-2.5-flash",
             contents=[audio_part, prompt],
             config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.1),

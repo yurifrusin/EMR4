@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-gemini-sdk-migration-spike` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -22,5 +22,5 @@ Gemini SDK migration spike ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into master as part of Sprint 3 after import and compile checks passed.
+- Follow-up required: Live Gemini smoke still needs credentials/runtime verification.
