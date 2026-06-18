@@ -33,7 +33,7 @@ TASK_TEMPLATE = """# {task_id}
 | Branch | `{branch}` |
 | Status | queued |
 | Created | {created} |
-| Start Command | `python scripts\\agent_worktrees.py handin` |
+| Start Command | `python scripts\\agent_worktrees.py handin --agent {agent}` |
 | Submit Command | `python scripts\\agent_worktrees.py submit --agent {agent} --task {task_id} --commit-message "{commit_message}" --message "{submit_message}"` |
 
 ## Mission
@@ -595,7 +595,7 @@ def brief(args: argparse.Namespace) -> None:
     if not files:
         print(f"[ok] no tasks for {args.agent}")
         return
-    selected = files[0]
+    selected = next_task_for(args.agent) or files[0]
     if args.task:
         matches = [path for path in files if path.stem == args.task or path.name == args.task]
         if not matches:

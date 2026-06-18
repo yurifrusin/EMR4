@@ -6,7 +6,7 @@
 | Branch | `antigravity/current` |
 | Status | queued |
 | Created | ff387e5 |
-| Start Command | `python scripts\agent_worktrees.py handin` |
+| Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-template-smoke-path --commit-message "Add diary template smoke path" --message "Diary template smoke path ready for Codex review"` |
 
 ## Mission
