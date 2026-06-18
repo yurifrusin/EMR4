@@ -59,7 +59,10 @@ TASK_TEMPLATE = """# {task_id}
 5. Do not merge to `master`.
 6. Do not move `handoff/current`.
 7. Run the verification listed below.
-8. Finish with the submit command above.
+8. Fill in the Completion Notes section below with files changed, verification run,
+   and remaining risks. The submit command copies those notes into Codex's review
+   packet automatically.
+9. Finish with the submit command above.
 
 ## Hard Stop Rules
 
@@ -90,7 +93,7 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Fill this in before submit:
+Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
 - Verification run:
@@ -418,11 +421,37 @@ def append_completion_note(path: Path, summary: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def section_text(markdown: str, heading: str) -> str:
+    pattern = re.compile(
+        rf"^## {re.escape(heading)}\s*$([\s\S]*?)(?=^## |\Z)",
+        re.MULTILINE,
+    )
+    match = pattern.search(markdown)
+    return match.group(1).strip() if match else ""
+
+
+def task_completion_notes(path: Path) -> str:
+    text = path.read_text(encoding="utf-8")
+    notes = section_text(text, "Completion Notes")
+    placeholder_lines = {
+        "Fill this in before submit:",
+        "- Files changed:",
+        "- Verification run:",
+        "- Remaining risks:",
+    }
+    meaningful = [
+        line for line in notes.splitlines()
+        if line.strip() and line.strip() not in placeholder_lines
+    ]
+    return notes if meaningful else ""
+
+
 def create_codex_review_packet(
     agent: str,
     task_id: str,
     branch: str,
     message: str,
+    completion_notes: str = "",
     repo_root: Path = REPO_ROOT,
 ) -> Path:
     review_dir = inbox_dir("codex", repo_root)
@@ -442,6 +471,10 @@ def create_codex_review_packet(
 ## Review Request
 
 {message or "Worker branch submitted for Codex review."}
+
+## Worker Completion Notes
+
+{completion_notes or "_No completion notes were supplied in the source task packet. Reviewer should inspect the branch and may ask the worker for a concise summary before integration._"}
 
 ## Required Review Steps
 
@@ -627,7 +660,15 @@ def submit(args: argparse.Namespace) -> None:
             raise SystemExit(f"Task not found for {args.agent}: {args.task}")
         update_task_status(matches[0], "submitted")
         append_completion_note(matches[0], args.summary)
-        review_path = create_codex_review_packet(args.agent, matches[0].stem, branch, args.message, repo)
+        completion_notes = task_completion_notes(matches[0])
+        review_path = create_codex_review_packet(
+            args.agent,
+            matches[0].stem,
+            branch,
+            args.message,
+            completion_notes,
+            repo,
+        )
         print(f"[ok] wrote Codex review packet: {review_path.relative_to(repo)}")
 
     if args.commit_message:

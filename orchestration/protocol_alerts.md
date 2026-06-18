@@ -8,6 +8,10 @@ Read these before acting on remembered process details.
   back to Codex/orchestrator, whether it succeeds or fails. For success, report
   the command, working directory, branch, and short success result. For failure
   or refusal, include the details below and then stop.
+- Before running `submit`, fill in the source task packet's Completion Notes with
+  files changed, verification run, and remaining risks. `submit` copies those notes
+  into the Codex review packet automatically; do not leave Codex with a boilerplate
+  review packet.
 - If any protocol command (`handin`, `sync`, `submit`, `realign`, `poll`, or task
   packet command) fails or refuses to run, stop and report the exact command,
   working directory, branch, `git status --short --branch`, and error output to
