@@ -1,12 +1,13 @@
 import json
+from datetime import date
 from pathlib import Path
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session, joinedload
 
 from app.dependencies import get_db, get_current_user
 from app.models.tenancy import User
-from app.models.diary import DiaryTemplate
-from app.schemas.diary import DiaryTemplateOut
+from app.models.diary import DiaryTemplate, Room, DiaryRoster
+from app.schemas.diary import DiaryTemplateOut, DiaryRosterOut, DiaryRosterEntryOut
 
 router = APIRouter(prefix="/api/v1/diary", tags=["diary"])
 
@@ -75,3 +76,48 @@ def get_diary_template(
         )
 
     return tmpl
+
+
+@router.get("/roster", response_model=DiaryRosterOut)
+def get_diary_roster(
+    roster_date: date = Query(..., alias="date", description="Date in YYYY-MM-DD format"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Return the room roster for the authenticated user's practice on the given date.
+
+    Returns an empty entries list if no rooms are configured or no roster entries
+    exist for that date — the frontend falls back to template columns in that case.
+    """
+    rooms = (
+        db.query(Room)
+        .filter(Room.practice_id == current_user.practice_id, Room.is_active == True)
+        .order_by(Room.display_order)
+        .all()
+    )
+    if not rooms:
+        return DiaryRosterOut(date=roster_date, entries=[])
+
+    room_ids = [r.id for r in rooms]
+    roster_by_room = {
+        entry.room_id: entry
+        for entry in db.query(DiaryRoster).filter(
+            DiaryRoster.practice_id == current_user.practice_id,
+            DiaryRoster.room_id.in_(room_ids),
+            DiaryRoster.roster_date == roster_date,
+        ).all()
+    }
+
+    room_map = {r.id: r for r in rooms}
+    entries = [
+        DiaryRosterEntryOut(
+            room_id=room.id,
+            room_name=room.name,
+            display_order=room.display_order,
+            practitioner_id=roster_by_room[room.id].practitioner_id if room.id in roster_by_room else None,
+            practitioner_ahpra=roster_by_room[room.id].practitioner_ahpra if room.id in roster_by_room else None,
+            label=roster_by_room[room.id].label if room.id in roster_by_room else None,
+        )
+        for room in rooms
+    ]
+    return DiaryRosterOut(date=roster_date, entries=entries)
