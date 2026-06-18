@@ -16,6 +16,7 @@ const BACKEND_URL = (window.location.port === "3000")
 const API_BASE = BACKEND_URL + "/api/v1";
 const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
+const MIN_TIME_INCREMENT_MINS = 5;
 
 // ─── DIARY TEMPLATE FALLBACK (embedded — mirrors diary_template.json at repo root)
 // Breaks are per-column so each room can have different break windows.
@@ -76,8 +77,10 @@ function getMockTemplate() {
         assignment: "Nurse",
         practitioner_ahpra: "MED999",
         tint_hex: "FFFF99",
+        slot_interval_minutes: 10,
         breaks: [
           { label: "MORNING TEA", from_time: "10:45:00", to_time: "11:00:00" },
+          { label: "BRUNCH",      from_time: "11:05:00", to_time: "11:25:00" },
           { label: "LUNCH",       from_time: "13:00:00", to_time: "14:00:00" }
         ]
       },
@@ -145,6 +148,16 @@ function getMockAppointments() {
       patient: { first_name: "John", last_name: "Smith" },
       reason: "Script renewal",
       appointment_type_id: "smoke-type-1"
+    },
+    {
+      id: "smoke-appt-6",
+      start_time_local: "10:05",
+      duration_minutes: 20,
+      status: "Booked",
+      practitioner: { ahpra_number: "MED999" },
+      patient: { first_name: "Nora", last_name: "Patel" },
+      reason: "Dressing change",
+      appointment_type_id: "smoke-type-2"
     }
   ];
 }
@@ -177,6 +190,7 @@ let diaryDate  = new Date();
 let refreshTimer = null;
 const REFRESH_INTERVAL_MS = 60_000;
 let editingColIndex = null;  // which column's breaks are being edited
+let autoScrolledDateKey = null;
 
 // ─── UTILITIES ────────────────────────────────────────────
 function escHtml(str) {
@@ -248,6 +262,12 @@ function normalizeTemplate(raw) {
   const columns = (Array.isArray(raw.columns) ? raw.columns : [])
     .map(col => {
       const roomLabel = String(col?.room_label || "").trim();
+      const rawColumnInterval = Number(col?.slot_interval_minutes ?? col?.slot_interval);
+      const columnInterval = Number.isFinite(rawColumnInterval)
+        && rawColumnInterval >= MIN_TIME_INCREMENT_MINS
+        && rawColumnInterval % MIN_TIME_INCREMENT_MINS === 0
+        ? rawColumnInterval
+        : null;
       const breaks = (Array.isArray(col?.breaks) ? col.breaks : [])
         .map(b => ({
           label: String(b?.label || "BREAK").trim() || "BREAK",
@@ -261,6 +281,7 @@ function normalizeTemplate(raw) {
         assignment: String(col?.assignment || "").trim(),
         practitioner_ahpra: col?.practitioner_ahpra ? String(col.practitioner_ahpra).trim() : null,
         tint: normalizeTint(col?.tint_hex ?? col?.tint),
+        slot_interval_minutes: columnInterval,
         breaks,
       };
     })
@@ -326,6 +347,54 @@ function toMins(t) {
 }
 function fromMins(m) {
   return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+}
+
+function timeRangeLabel(startMins, endMins) {
+  return `${fromMins(startMins)}-${fromMins(endMins)}`;
+}
+
+function isOnMajorGrid(mins, template) {
+  const interval = template.slot_defaults.interval_minutes || 15;
+  return (mins - toMins(template.slot_defaults.start)) % interval === 0;
+}
+
+function isSameClinicDay(a, b) {
+  return a.getFullYear() === b.getFullYear()
+    && a.getMonth() === b.getMonth()
+    && a.getDate() === b.getDate();
+}
+
+function nowMins() {
+  const now = new Date();
+  return now.getHours() * 60 + now.getMinutes();
+}
+
+function markerTopPx(mins, template) {
+  const dayStartMins = toMins(template.slot_defaults.start);
+  const intervalMins = template.slot_defaults.interval_minutes || 15;
+  return (mins - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
+}
+
+function shouldAutoScrollToNow(template) {
+  if (!isSameClinicDay(diaryDate, new Date())) return false;
+  const todayKey = diaryDate.toISOString().slice(0, 10);
+  if (autoScrolledDateKey === todayKey) return false;
+  const mins = nowMins();
+  return mins >= toMins(template.slot_defaults.start) && mins <= toMins(template.slot_defaults.end);
+}
+
+function scrollToTime(mins, template) {
+  const body = document.getElementById("diary-body");
+  if (!body) return;
+  const top = Math.max(0, markerTopPx(mins, template) - SLOT_HEIGHT_PX * 2);
+  body.scrollTo({ top, behavior: "smooth" });
+}
+
+function jumpToNow() {
+  const today = new Date();
+  diaryDate = today;
+  updateDateLabel();
+  loadDiary(false, { scrollToNow: true });
 }
 
 // Extract HH:MM for diary placement. Prefer the canonical clinic-local field;
@@ -403,6 +472,24 @@ function apptClass(status) {
   }
 }
 
+function appendNowMarker(container, template, showLabel = false) {
+  if (!isSameClinicDay(diaryDate, new Date())) return;
+  const mins = nowMins();
+  if (mins < toMins(template.slot_defaults.start) || mins > toMins(template.slot_defaults.end)) return;
+
+  const marker = document.createElement("div");
+  marker.className = showLabel ? "now-marker now-marker-time" : "now-marker";
+  marker.style.top = markerTopPx(mins, template) + "px";
+  marker.title = `Current time ${fromMins(mins)}`;
+  if (showLabel) {
+    const label = document.createElement("span");
+    label.className = "now-marker-label";
+    label.textContent = fromMins(mins);
+    marker.appendChild(label);
+  }
+  container.appendChild(marker);
+}
+
 // ─── RENDER GRID ───────────────────────────────────────────
 function renderGrid(template, slots, apptLookup, typeMap, occupied) {
   const grid = document.getElementById("diary-grid");
@@ -430,6 +517,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
     label.textContent = slotTime;
     timeBody.appendChild(label);
   });
+  appendNowMarker(timeBody, template, true);
   timeCol.appendChild(timeBody);
   grid.appendChild(timeCol);
 
@@ -455,7 +543,11 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
 
     const roomDiv = document.createElement("div");
     roomDiv.className = "col-room-label";
-    roomDiv.textContent = col.room_label;
+    const columnInterval = col.slot_interval_minutes || intervalMins;
+    roomDiv.textContent = columnInterval === intervalMins
+      ? col.room_label
+      : `${col.room_label} - ${columnInterval} min`;
+    roomDiv.title = `Slot cadence: ${columnInterval} minutes`;
 
     th.appendChild(nameDiv);
     th.appendChild(roomDiv);
@@ -496,14 +588,16 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
     colBreaks.forEach(b => {
       const bStart = toMins(b.from);
       const bEnd = toMins(b.to);
+      const isIrregular = !isOnMajorGrid(bStart, template) || !isOnMajorGrid(bEnd, template);
 
       const topPx = (bStart - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
       const heightPx = (bEnd - bStart) * (SLOT_HEIGHT_PX / intervalMins);
 
       const breakEl = document.createElement("div");
-      breakEl.className = "break-block";
+      breakEl.className = isIrregular ? "break-block break-irregular" : "break-block";
       breakEl.style.top = topPx + "px";
       breakEl.style.height = heightPx + "px";
+      breakEl.title = `${b.label || "BREAK"} ${timeRangeLabel(bStart, bEnd)}`;
 
       if (col.tint) {
         breakEl.style.backgroundColor = `#${col.tint}88`;
@@ -513,6 +607,12 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       labelSpan.className = "break-block-label";
       labelSpan.textContent = b.label || "BREAK";
       breakEl.appendChild(labelSpan);
+      if (isIrregular) {
+        const timeSpan = document.createElement("span");
+        timeSpan.className = "break-time-chip";
+        timeSpan.textContent = timeRangeLabel(bStart, bEnd);
+        breakEl.appendChild(timeSpan);
+      }
 
       columnBody.appendChild(breakEl);
     });
@@ -556,6 +656,8 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
     colAppts.forEach(a => {
       const start = toMins(apptTimeKey(a));
       const duration = Math.max(apptDurationMins(a, intervalMins), intervalMins);
+      const end = start + duration;
+      const isIrregular = !isOnMajorGrid(start, template) || !isOnMajorGrid(end, template);
 
       const topPx = (start - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
       const heightPx = duration * (SLOT_HEIGHT_PX / intervalMins);
@@ -580,14 +682,19 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       span.tabIndex = 0;
 
       const patientName = `${a.patient.first_name} ${a.patient.last_name}`;
+      const timeLabel = timeRangeLabel(start, end);
       span.setAttribute("role", "button");
-      span.setAttribute("aria-label", a.reason ? `${patientName}. ${a.reason}` : patientName);
+      span.setAttribute("aria-label", a.reason ? `${patientName}. ${timeLabel}. ${a.reason}` : `${patientName}. ${timeLabel}`);
+      span.title = a.reason ? `${patientName} - ${timeLabel} - ${a.reason}` : `${patientName} - ${timeLabel}`;
       const name = document.createElement("span");
       name.className = "appt-name";
       name.textContent = patientName;
       span.appendChild(name);
-      if (a.reason) {
-        span.title = `${patientName} - ${a.reason}`;
+      if (isIrregular) {
+        const apptTime = document.createElement("span");
+        apptTime.className = "appt-time-chip";
+        apptTime.textContent = timeLabel;
+        span.appendChild(apptTime);
       }
       if (a.reason && duration >= intervalMins * 2) {
         const reason = document.createElement("span");
@@ -612,6 +719,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       columnBody.appendChild(span);
     });
 
+    appendNowMarker(columnBody, template);
     column.appendChild(columnBody);
     grid.appendChild(column);
   });
@@ -683,7 +791,7 @@ function saveBreaks() {
 }
 
 // ─── LOAD DIARY ────────────────────────────────────────────
-async function loadDiary(silent = false) {
+async function loadDiary(silent = false, options = {}) {
   const urlParams = new URLSearchParams(window.location.search);
   const isSmokeMode = urlParams.get("smoke") === "true";
 
@@ -743,15 +851,22 @@ async function loadDiary(silent = false) {
       const startMins = toMins(startKey);
       const duration = apptDurationMins(a, activeTemplate.slot_defaults.interval_minutes);
       const endMins = startMins + duration;
-      
-      let cur = startMins;
-      while (cur < endMins) {
-        occupied[ahpra].add(fromMins(cur));
-        cur += activeTemplate.slot_defaults.interval_minutes;
-      }
+
+      slots.forEach(slotTime => {
+        const slotStart = toMins(slotTime);
+        const slotEnd = slotStart + activeTemplate.slot_defaults.interval_minutes;
+        if (startMins < slotEnd && endMins > slotStart) {
+          occupied[ahpra].add(slotTime);
+        }
+      });
     });
 
+    const autoScroll = shouldAutoScrollToNow(activeTemplate);
     renderGrid(activeTemplate, slots, apptLookup, typeMap, occupied);
+    if (options.scrollToNow || autoScroll) {
+      scrollToTime(nowMins(), activeTemplate);
+      autoScrolledDateKey = diaryDate.toISOString().slice(0, 10);
+    }
 
     const total = appointments.length;
     setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}${isSmokeMode ? " [SMOKE MODE]" : ""}`);
@@ -798,6 +913,7 @@ Office.onReady(() => {
   document.getElementById("btn-today").onclick     = () => {
     diaryDate = new Date(); updateDateLabel(); loadDiary();
   };
+  document.getElementById("btn-now").onclick       = jumpToNow;
   document.getElementById("btn-refresh").onclick   = doRefresh;
   document.getElementById("btn-modal-add").onclick = addBreakRow;
   document.getElementById("btn-modal-save").onclick = saveBreaks;
