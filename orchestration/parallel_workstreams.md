@@ -116,13 +116,61 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
-## Sprint 3: Diary Operations Foundation
+## Sprint 4: Diary Roster Consumption
 
 | Item | Value |
 |---|---|
 | Status | Preparing for dispatch |
 | Launch Gate | User should not prompt worker agents until Codex announces `HANDIN READY` |
-| Integration Gate | Do not push to `master` until Claude, Antigravity, and Codex worker submissions are reviewed or explicitly stood down |
+| Integration Gate | Do not push sprint implementation work to `master` until Claude, Antigravity, and the Codex worker have submitted or been explicitly stood down |
+| Theme | Make date-specific roster data visible in the diary without starting booking mutation work |
+
+### Workstream K - Diary Roster Dev-Data Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-diary-roster-dev-data-contract.md` |
+| Goal | Make roster backend data seedable, scoped, ordered, and predictable enough for frontend consumption |
+| In Scope | `app/models/diary.py`, `app/schemas/diary.py`, `app/routers/diary.py`, `seed.py`, migrations/tests as needed |
+| Out of Scope | `docs/diary/*`, booking mutations, Gemini/taskpane/Command Centre |
+| Verification | Focused diary roster/template tests plus migration checks if changed |
+| Status | Queued |
+
+### Workstream L - Diary Roster Consumption
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-roster-consumption.md` |
+| Goal | Fetch and merge date-specific roster entries into the read-only diary frontend with safe fallback |
+| In Scope | `docs/diary/diary.{html,css,js}` |
+| Out of Scope | Backend routes/models/tests, booking mutations, taskpane/Command Centre/Gemini |
+| Verification | JS syntax plus normal/smoke/narrow/date-navigation browser checks |
+| Status | Queued |
+
+### Workstream M - Diary Roster Smoke Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/diary-roster-smoke-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-diary-roster-smoke-review.md` |
+| Goal | Prepare the review/smoke-test surface for roster consumption without duplicating implementation scopes |
+| In Scope | Small orchestration/checklist or smoke-review artifacts; tiny non-overlapping smoke fixture only if safe |
+| Out of Scope | Backend roster implementation, production frontend roster merge, booking mutations |
+| Verification | `git diff --check`; `node --check docs\diary\diary.js` if JS touched |
+| Status | Queued |
+
+## Sprint 3: Diary Operations Foundation
+
+| Item | Value |
+|---|---|
+| Status | Integrated and user-reviewed |
+| Launch Gate | Complete |
+| Integration Gate | Complete |
 
 ### Workstream H - Diary Time-Ruler UX
 
