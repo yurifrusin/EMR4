@@ -66,6 +66,9 @@ TASK_TEMPLATE = """# {task_id}
 - Do not push to `master` or `handoff/current`.
 - Do not manually work around a failed protocol command (`handin`, `sync`, `submit`,
   `realign`, or related orchestration commands).
+- Report every protocol-followed command back to Codex/orchestrator, whether it
+  succeeds or fails. For success, include the command, working directory, branch,
+  and short success result.
 - If any protocol command refuses to run or fails, stop and report the exact command,
   working directory, branch, `git status --short --branch`, and error output to the
   orchestrator. On push failure, `submit` will also try to publish a
