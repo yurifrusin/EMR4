@@ -1,6 +1,6 @@
 import uuid
 from sqlalchemy import (
-    Column, String, Boolean, Integer, Time, ForeignKey, Index, UniqueConstraint,
+    Column, Date, String, Boolean, Integer, Time, ForeignKey, Index, UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship
@@ -68,3 +68,43 @@ class DiaryBreak(Base):
     column = relationship("DiaryColumn", back_populates="breaks")
 
     __table_args__ = (Index("ix_diary_breaks_column_id", "column_id"),)
+
+
+class Room(Base):
+    """A physical room in the practice, used for date-specific diary roster assignment."""
+    __tablename__ = "rooms"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
+    name = Column(String(100), nullable=False)
+    display_order = Column(Integer, nullable=False)
+    is_active = Column(Boolean, default=True)
+
+    roster_entries = relationship("DiaryRoster", back_populates="room",
+                                  cascade="all, delete-orphan")
+
+    __table_args__ = (
+        Index("ix_rooms_practice_id", "practice_id"),
+        UniqueConstraint("practice_id", "display_order", name="uq_rooms_practice_order"),
+    )
+
+
+class DiaryRoster(Base):
+    """Date-specific room assignment: maps (practice, room, date) → practitioner or label."""
+    __tablename__ = "diary_roster"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
+    room_id = Column(UUID(as_uuid=True), ForeignKey("rooms.id"), nullable=False)
+    roster_date = Column(Date, nullable=False)
+    practitioner_id = Column(UUID(as_uuid=True), ForeignKey("practitioners.id"), nullable=True)
+    practitioner_ahpra = Column(String(50), nullable=True)
+    label = Column(String(255), nullable=True)
+
+    room = relationship("Room", back_populates="roster_entries")
+
+    __table_args__ = (
+        Index("ix_diary_roster_practice_date", "practice_id", "roster_date"),
+        UniqueConstraint("practice_id", "room_id", "roster_date",
+                         name="uq_diary_roster_practice_room_date"),
+    )

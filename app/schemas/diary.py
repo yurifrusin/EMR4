@@ -1,5 +1,6 @@
-from datetime import time
+from datetime import date, time
 from typing import Optional
+from uuid import UUID
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -38,3 +39,28 @@ class DiaryTemplateOut(BaseModel):
     columns: list[DiaryColumnOut] = Field(default_factory=list)
 
     model_config = {"from_attributes": True}
+
+
+class RoomOut(BaseModel):
+    id: UUID
+    name: str
+    display_order: int
+    is_active: bool
+
+    model_config = {"from_attributes": True}
+
+
+class DiaryRosterEntryOut(BaseModel):
+    room_id: UUID
+    room_name: str
+    display_order: int
+    practitioner_id: Optional[UUID] = None
+    practitioner_ahpra: Optional[str] = None
+    label: Optional[str] = None
+
+    model_config = {"from_attributes": True}
+
+
+class DiaryRosterOut(BaseModel):
+    date: date
+    entries: list[DiaryRosterEntryOut] = Field(default_factory=list)
