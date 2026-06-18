@@ -8,8 +8,8 @@ from sqlalchemy import or_, and_
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
-import vertexai
-from vertexai.generative_models import GenerativeModel, GenerationConfig, Part
+from google import genai
+from google.genai import types
 from google.cloud import discoveryengine_v1 as discoveryengine
 from app.config import settings
 from app.dependencies import get_db, get_current_user
@@ -21,8 +21,11 @@ import datetime
 
 router = APIRouter(prefix="/api/v1", tags=["consultation"])
 
-vertexai.init(project=settings.gcp_project, location=settings.gcp_location)
-model = GenerativeModel("gemini-2.5-flash")
+ai_client = genai.Client(
+    vertexai=True,
+    project=settings.gcp_project,
+    location=settings.gcp_location
+)
 
 
 # --- Request schemas ---
@@ -235,8 +238,10 @@ async def analyze_consultation(
     extracted = {"encounter_metadata": {}, "clinical_diagnoses": [], "medications_and_prescriptions": []}
     try:
         response = await asyncio.to_thread(
-            model.generate_content, prompt,
-            generation_config=GenerationConfig(response_mime_type="application/json", temperature=0.1)
+            ai_client.models.generate_content,
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.1)
         )
         extracted = json.loads(response.text)
         mbs  = [m.get("item_number") for m in extracted.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
@@ -315,11 +320,12 @@ Return strict JSON only, no markdown:
 }
 """
     try:
-        audio_part = Part.from_data(data=audio_bytes, mime_type=audio_file.content_type)
+        audio_part = types.Part.from_bytes(data=audio_bytes, mime_type=audio_file.content_type)
         response = await asyncio.to_thread(
-            model.generate_content,
-            [audio_part, prompt],
-            generation_config=GenerationConfig(response_mime_type="application/json", temperature=0.1),
+            ai_client.models.generate_content,
+            model="gemini-2.5-flash",
+            contents=[audio_part, prompt],
+            config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.1),
         )
         result = json.loads(response.text)
         mbs  = [m.get("item_number") for m in result.get("encounter_metadata", {}).get("mbs_item_candidates", [])]

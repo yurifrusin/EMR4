@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 05edbb6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-gemini-sdk-migration-spike --commit-message "Spike Gemini SDK migration" --message "Gemini SDK migration spike ready for Codex review"` |
@@ -80,5 +80,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Fill this in before submit:
 
 - Files changed:
+  - `requirements.txt`
+  - `app/routers/consultation.py`
+  - `app/routers/letters.py`
 - Verification run:
+  - Ran py_compile on `app/routers/consultation.py` and `app/routers/letters.py` successfully.
+  - Ran pytest suite in local `.venv` (all 29 tests passed).
+  - Verified no remaining deprecated `vertexai.generative_models` references exist in code.
 - Remaining risks:
+  - External API calls rely on correct GCP credentials setup (e.g., `gcp-key.json` or Application Default Credentials) in the execution environment. No code structural risks remain.
