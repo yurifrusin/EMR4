@@ -17,9 +17,9 @@ const API_BASE = BACKEND_URL + "/api/v1";
 const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
 
-// ─── DIARY TEMPLATE (embedded — mirrors diary_template.json at repo root) ─────
+// ─── DIARY TEMPLATE FALLBACK (embedded — mirrors diary_template.json at repo root)
 // Breaks are per-column so each room can have different break windows.
-const TEMPLATE = {
+const FALLBACK_TEMPLATE = {
   practice_name: "EMR4 Dev Clinic",
   slot_defaults: { start: "09:00", end: "17:00", interval_minutes: 15 },
   columns: [
@@ -48,7 +48,9 @@ const TEMPLATE = {
       ],
     },
   ],
+  footer: ["Messages:", "Phone Consultations:"],
 };
+let activeTemplate = cloneTemplate(FALLBACK_TEMPLATE);
 
 // ─── BREAK OVERRIDES (per-column, persisted to localStorage) ──────────────────
 const BREAKS_KEY = "emr4_diary_breaks_v1";
@@ -105,6 +107,108 @@ async function apiFetch(path, opts = {}) {
     throw new Error("401 Unauthorized");
   }
   return res;
+}
+
+function cloneTemplate(template) {
+  return JSON.parse(JSON.stringify(template));
+}
+
+function normalizeTime(value) {
+  const match = String(value || "").match(/^(\d{1,2}):(\d{2})/);
+  if (!match) return null;
+  const h = Number(match[1]);
+  const m = Number(match[2]);
+  if (!Number.isInteger(h) || !Number.isInteger(m) || h < 0 || h > 23 || m < 0 || m > 59) {
+    return null;
+  }
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+}
+
+function normalizeTint(value) {
+  const raw = String(value || "").trim().replace(/^#/, "");
+  return /^[0-9a-fA-F]{6}$/.test(raw) ? raw.toUpperCase() : null;
+}
+
+function normalizeTemplate(raw) {
+  if (!raw || typeof raw !== "object") {
+    throw new Error("Diary template response was empty");
+  }
+
+  const slotStart = normalizeTime(raw.slot_start ?? raw.slot_defaults?.start);
+  const slotEnd = normalizeTime(raw.slot_end ?? raw.slot_defaults?.end);
+  const interval = Number(raw.slot_interval_minutes ?? raw.slot_defaults?.interval_minutes);
+  if (!slotStart || !slotEnd || !Number.isFinite(interval) || interval <= 0 || toMins(slotEnd) <= toMins(slotStart)) {
+    throw new Error("Diary template slot defaults are invalid");
+  }
+
+  const columns = (Array.isArray(raw.columns) ? raw.columns : [])
+    .map(col => {
+      const roomLabel = String(col?.room_label || "").trim();
+      const breaks = (Array.isArray(col?.breaks) ? col.breaks : [])
+        .map(b => ({
+          label: String(b?.label || "BREAK").trim() || "BREAK",
+          from: normalizeTime(b?.from_time ?? b?.from),
+          to: normalizeTime(b?.to_time ?? b?.to),
+        }))
+        .filter(b => b.from && b.to && toMins(b.to) > toMins(b.from));
+
+      return {
+        room_label: roomLabel,
+        assignment: String(col?.assignment || "").trim(),
+        practitioner_ahpra: col?.practitioner_ahpra ? String(col.practitioner_ahpra).trim() : null,
+        tint: normalizeTint(col?.tint_hex ?? col?.tint),
+        breaks,
+      };
+    })
+    .filter(col => col.room_label);
+
+  if (!columns.length) {
+    throw new Error("Diary template has no usable columns");
+  }
+
+  return {
+    practice_name: String(raw.practice_name || FALLBACK_TEMPLATE.practice_name || "EMR4 Diary").trim(),
+    slot_defaults: {
+      start: slotStart,
+      end: slotEnd,
+      interval_minutes: interval,
+    },
+    columns,
+    footer: Array.isArray(raw.footer) ? raw.footer.map(item => String(item)).filter(Boolean) : [],
+  };
+}
+
+async function loadDiaryTemplate() {
+  try {
+    const res = await apiFetch("/diary/template");
+    if (!res.ok) throw new Error(`Template: ${res.status} ${await res.text()}`);
+    return normalizeTemplate(await res.json());
+  } catch (e) {
+    console.warn("Using embedded diary template fallback:", e);
+    return cloneTemplate(FALLBACK_TEMPLATE);
+  }
+}
+
+function setActiveTemplate(template) {
+  activeTemplate = template;
+  const pnEl = document.getElementById("diary-practice-name");
+  if (pnEl) pnEl.textContent = template.practice_name || "";
+  renderFooter(template);
+}
+
+function renderFooter(template) {
+  let footer = document.getElementById("diary-footer");
+  const items = Array.isArray(template.footer) ? template.footer.filter(Boolean) : [];
+  if (!items.length) {
+    footer?.remove();
+    return;
+  }
+  if (!footer) {
+    footer = document.createElement("div");
+    footer.id = "diary-footer";
+    document.getElementById("diary-body")?.appendChild(footer);
+  }
+  footer.textContent = items.join("   ");
 }
 
 // ─── TIME HELPERS ──────────────────────────────────────────
@@ -192,12 +296,13 @@ function apptClass(status) {
 }
 
 // ─── RENDER GRID ───────────────────────────────────────────
-function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
+function renderGrid(template, slots, apptLookup, typeMap, occupied) {
   const grid = document.getElementById("diary-grid");
   grid.innerHTML = "";
 
-  const dayStartMins = toMins(TEMPLATE.slot_defaults.start);
-  const intervalMins = TEMPLATE.slot_defaults.interval_minutes || 15;
+  const columns = template.columns;
+  const dayStartMins = toMins(template.slot_defaults.start);
+  const intervalMins = template.slot_defaults.interval_minutes || 15;
 
   // ── 1. Create Time Column ──────────────────────────────────
   const timeCol = document.createElement("div");
@@ -411,7 +516,7 @@ function renderGrid(slots, columns, apptLookup, typeMap, occupied) {
 // ─── BREAK EDIT MODAL ─────────────────────────────────────
 function openBreakModal(colIdx) {
   editingColIndex = colIdx;
-  const col = TEMPLATE.columns[colIdx];
+  const col = activeTemplate.columns[colIdx];
   document.getElementById("break-modal-title").textContent =
     `Breaks — ${col.assignment} (${col.room_label})`;
 
@@ -454,7 +559,7 @@ function addBreakRow() {
 
 function saveBreaks() {
   if (editingColIndex === null) return;
-  const col = TEMPLATE.columns[editingColIndex];
+  const col = activeTemplate.columns[editingColIndex];
   const rows = document.querySelectorAll("#break-modal-body .break-row-edit");
   const breaks = [];
   rows.forEach(row => {
@@ -489,13 +594,15 @@ async function loadDiary(silent = false) {
   const apptParams = `date_from=${dayStart.toISOString()}&date_to=${dayEnd.toISOString()}`;
 
   try {
-    const [apptRes, typeRes] = await Promise.all([
+    const [template, apptRes, typeRes] = await Promise.all([
+      loadDiaryTemplate(),
       apiFetch(`/appointments?${apptParams}`),
       apiFetch(`/appointments/types`),
     ]);
 
     if (!apptRes.ok) throw new Error(`Appointments: ${apptRes.status} ${await apptRes.text()}`);
     if (!typeRes.ok) throw new Error(`Types: ${typeRes.status} ${await typeRes.text()}`);
+    setActiveTemplate(template);
 
     const appointments = await apptRes.json();
     const types        = await typeRes.json();
@@ -503,7 +610,7 @@ async function loadDiary(silent = false) {
     const typeMap    = {};
     types.forEach(t => { typeMap[t.id] = t.color_hex; });
 
-    const slots      = generateSlots(TEMPLATE);
+    const slots      = generateSlots(activeTemplate);
     const apptLookup = buildApptLookup(appointments);
 
     // Build occupied lookup to hide chevrons in spanned slots
@@ -515,17 +622,17 @@ async function loadDiary(silent = false) {
       const startKey = apptTimeKey(a);
       if (!startKey) return;
       const startMins = toMins(startKey);
-      const duration = apptDurationMins(a, TEMPLATE.slot_defaults.interval_minutes);
+      const duration = apptDurationMins(a, activeTemplate.slot_defaults.interval_minutes);
       const endMins = startMins + duration;
       
       let cur = startMins;
       while (cur < endMins) {
         occupied[ahpra].add(fromMins(cur));
-        cur += TEMPLATE.slot_defaults.interval_minutes;
+        cur += activeTemplate.slot_defaults.interval_minutes;
       }
     });
 
-    renderGrid(slots, TEMPLATE.columns, apptLookup, typeMap, occupied);
+    renderGrid(activeTemplate, slots, apptLookup, typeMap, occupied);
 
     const total = appointments.length;
     setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}`);
@@ -565,8 +672,7 @@ function doRefresh() { loadDiary(); scheduleRefresh(); }
 Office.onReady(() => {
   loadBreakOverrides();
 
-  const pnEl = document.getElementById("diary-practice-name");
-  if (pnEl) pnEl.textContent = TEMPLATE.practice_name;
+  setActiveTemplate(activeTemplate);
 
   document.getElementById("btn-prev-day").onclick  = () => shiftDay(-1);
   document.getElementById("btn-next-day").onclick  = () => shiftDay(+1);

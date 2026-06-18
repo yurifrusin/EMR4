@@ -147,6 +147,16 @@ html, body {
   border-left: 1px solid var(--grey-2);
 }
 
+#diary-footer {
+  min-width: 100%;
+  background: var(--white);
+  border-top: 1px solid var(--grey-2);
+  color: var(--grey-4);
+  font-size: 11px;
+  padding: 7px 10px 8px var(--time-col);
+  white-space: pre-wrap;
+}
+
 .diary-time-column {
   width: var(--time-col);
   flex-shrink: 0;
