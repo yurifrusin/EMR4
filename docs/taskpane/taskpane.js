@@ -567,6 +567,7 @@ async function runBackgroundSync() {
     return;
   }
   isSyncing = true;
+  let timeoutId = null;
   try {
     const text = await getCurrentConsultText();
     if (!text || !text.trim()) {
@@ -576,8 +577,7 @@ async function runBackgroundSync() {
       return;
     }
     if (text === lastSyncedText) return;
-    lastSyncedText = text;
-    setStatus(isLocked ? "🔒 AI running in background…" : "Analysing…");
+    setStatus(isLocked ? "AI running in background..." : `Analysing ${text.length} chars...`);
 
     const headers = {
       "Content-Type": "application/json",
@@ -585,7 +585,7 @@ async function runBackgroundSync() {
     };
     if (token) headers["Authorization"] = "Bearer " + token;
     const abort = new AbortController();
-    const timeoutId = setTimeout(() => abort.abort(), 45000);
+    timeoutId = setTimeout(() => abort.abort(), 45000);
     const res = await fetch(API_BASE + "/analyze-consultation", {
       method: "POST",
       headers,
@@ -597,9 +597,13 @@ async function runBackgroundSync() {
         clinician_overrides: null,
       }),
     });
-    clearTimeout(timeoutId);
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`HTTP ${res.status}${body ? ": " + body.slice(0, 120) : ""}`);
+    }
     const data = await res.json();
     lastAiResponse = data;
+    lastSyncedText = text;
     if (!isLocked) {
       updateFormFields(data);
       setStatus("Synced " + new Date().toLocaleTimeString());
@@ -607,8 +611,10 @@ async function runBackgroundSync() {
       setStatus("🔒 Locked — unlock to apply.");
     }
   } catch (e) {
-    setStatus(e?.name === "AbortError" ? "AI analysis slow — will retry on next change…" : "Waiting for backend…");
+    console.warn("EMR AI sync failed", e);
+    setStatus(e?.name === "AbortError" ? "AI analysis slow - retrying..." : `AI sync failed - retrying (${e?.message || "backend"})`);
   } finally {
+    if (timeoutId) clearTimeout(timeoutId);
     isSyncing = false;
   }
 }
@@ -969,9 +975,12 @@ function openCommandCentre() {
     // Plant the dated consult header now (after the window opened), unless one
     // was already started this session.
     if (!consultStarted) {
-      insertConsultHeader(currentPatient).then(() => {
-        consultStarted = true;
-        updateStartConsultButton();
+      insertConsultHeader(currentPatient).then(inserted => {
+        if (inserted) {
+          consultStarted = true;
+          lastSyncedText = "";
+          updateStartConsultButton();
+        }
       });
     }
 
@@ -1121,8 +1130,10 @@ async function insertConsultHeader(patient) {
       notePara.getRange(Word.RangeLocation.end).select();
       await ctx.sync();
     });
+    return true;
   } catch (e) {
     setStatus("Header insert failed: " + e.message);
+    return false;
   }
 }
 
@@ -1130,8 +1141,11 @@ async function insertConsultHeader(patient) {
 window.startConsultation = async function () {
   if (!currentPatient) { setStatus("Load a patient before starting a consultation."); return; }
   if (consultStarted) { setStatus("A consultation is already in progress this session."); return; }
-  await insertConsultHeader(currentPatient);
+  const inserted = await insertConsultHeader(currentPatient);
+  if (!inserted) return;
   consultStarted = true;
+  lastSyncedText = "";
+  lastAiResponse = null;
   updateStartConsultButton();
   isLocked = false; updateLockUI();   // fresh consult — AI live again
   updateFormFields({});               // clear any previously displayed coding
