@@ -838,6 +838,9 @@ async function loadDiary(silent = false, options = {}) {
         apiFetch(`/appointments?${apptParams}`),
         apiFetch(`/appointments/types`),
         apiFetch(`/diary/roster?date=${dateStr}`).catch(err => {
+          if (err && err.message === "401 Unauthorized") {
+            throw err;
+          }
           console.warn("Roster fetch failed:", err);
           return null;
         })
@@ -870,6 +873,20 @@ async function loadDiary(silent = false, options = {}) {
           const tmplCol = template.columns.find(
             col => col.room_label.toLowerCase() === entry.room_name.toLowerCase()
           );
+
+          const hasRosterAssignment = !!entry.label || !!entry.practitioner_ahpra || !!entry.practitioner_id;
+
+          if (!hasRosterAssignment && tmplCol) {
+            // Reuse matching template column attributes if roster is empty/unassigned for this room
+            return {
+              room_label: entry.room_name,
+              assignment: tmplCol.assignment || "[Available]",
+              practitioner_ahpra: tmplCol.practitioner_ahpra || null,
+              tint: tmplCol.tint,
+              slot_interval_minutes: tmplCol.slot_interval_minutes,
+              breaks: tmplCol.breaks || []
+            };
+          }
 
           let assignment = "[Available]";
           if (entry.label) {

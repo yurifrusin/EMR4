@@ -10,13 +10,7 @@
 
 ## Review Request
 
-Diary roster consumption ready for Codex review.
-
-### Summary of Completed Work
-- **Files changed**: `docs/diary/diary.html`, `docs/diary/diary.js`
-- **Roster Integration**: Fetches `/diary/roster?date=YYYY-MM-DD` in parallel with appointments/types, matches by room name case-insensitively, and merges entries into visible columns.
-- **Safe Fallback**: Bypasses API/Roster on errors, empty lists, or 404s, falling back cleanly to the template columns.
-- **Verification**: Node syntax check passed cleanly, and all 9 roster-specific unit tests in `tests/test_diary_roster.py` passed successfully.
+Diary roster consumption fixes ready for Codex review
 
 ## Required Review Steps
 

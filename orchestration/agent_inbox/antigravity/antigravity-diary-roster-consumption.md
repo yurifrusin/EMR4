@@ -66,8 +66,11 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Fill this in before submit:
 
 - Files changed: `docs/diary/diary.html`, `docs/diary/diary.js`
+- Exact fixes made:
+  - Re-throw 401 Unauthorized errors during roster fetch to prevent session expiration from falling back to template columns.
+  - Implemented exact fallback matching: empty/unassigned roster columns (where label/AHPRA/id are all empty) now reuse their matching template column's assignments, practitioner AHPRA, breaks, tint, and slot interval.
 - Verification run:
-  - Node syntax check (`node --check docs/diary/diary.js`) passed successfully.
-  - Pytest suite run completed successfully; all 9 roster tests in `tests/test_diary_roster.py` passed.
-  - Visual and functional isolation of `?smoke=true` mode verified.
-- Remaining risks: None. The roster consumption fetch operates with a safe fallback and does not introduce side-effects.
+  - Node syntax check (`node --check docs/diary/diary.js`) completed successfully.
+  - Verified 401 errors bubble up to session handler correctly.
+  - Verified empty roster entries reuse matching template columns rather than erring to `[Available]`.
+- Remaining risks: None. Roster merging is safely isolated and handles unconfigured slots and session expiry correctly.
