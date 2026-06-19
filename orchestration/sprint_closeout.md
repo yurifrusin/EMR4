@@ -9,8 +9,8 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 7: Controlled Status Mutation |
-| Integrated through | Sprint 7 local review branch; pending push to `master` |
-| Status | Integrated locally, pending deploy/user review |
+| Integrated through | `aa594a5` on `master` / `handoff/current` |
+| Status | User review passed |
 | Last updated | 2026-06-19 |
 
 ## What Changed
@@ -22,28 +22,37 @@ reviewed, integrated, verified, pushed, and audited.
   appointment is active/expanded.
 - The diary PATCHes `/appointments/{id}/status`, refreshes after success, handles
   smoke mode locally, and shows clear errors for failed updates/session expiry.
-- Diary asset cache-bust moved to `v=42`.
+- Diary asset cache-bust moved to `v=43` after the smoke-mode status-change hotfix.
 - Added `orchestration/status_mutation_review.md` for Sprint 7 manual review.
 
 ## Recommended User Review
 
-After the final push has deployed:
+User review result: passed.
 
 1. Open the live diary from the taskpane and click an appointment card; confirm
-   the status selector appears only on the active/expanded card.
+   the status selector appears only on the active/expanded card. **Passed.**
 2. Change one appointment through `Booked`, `Confirmed`, `Arrived`, `InConsult`,
    and `Completed`; confirm the visible badge/colour/status updates after each
-   successful change.
+   successful change. **Passed.**
 3. Set an appointment to `Cancelled`, `NoShow`, and `DNA`; confirm the card is
    visually de-emphasised and no longer appears in `/appointments/waiting-room`.
+   **Passed; 10:00 Margaret set to `DNA`, excluded from waiting room.**
 4. Narrow the diary window and confirm the selector does not crowd patient names,
-   booking notes, break labels, date controls, Refresh, or Now.
+   booking notes, break labels, date controls, Refresh, or Now. **Passed.**
 5. Confirm long, overlapping, off-grid, and note-heavy appointments still render
-   and can still be inspected.
+   and can still be inspected. **Passed.**
 6. Force or observe an expired session and confirm the diary shows a clear
-   session-expired path rather than pretending the update succeeded.
+   session-expired path rather than pretending the update succeeded. **Passed;
+   invalid token produced 401 and did not silently update.**
 7. Optionally use `orchestration/status_mutation_review.md` for the full manual
-   API/UI/failure checklist.
+   API/UI/failure checklist. **Completed enough for Sprint 7 closeout.**
+
+Waiting-room API confirmation:
+
+```text
+Waiting room count: 1
+81cbe4e4-159e-4cf4-b749-a342f1bc77af  Arrived  2026-06-19  09:00:00
+```
 
 ## Not Required Before Moving On
 
