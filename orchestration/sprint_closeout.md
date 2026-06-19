@@ -81,8 +81,8 @@ to run.
 
 ## Recommended Next Direction
 
-User review passed. Codex recommends moving next toward safe read-only
-waiting-room or appointment status visibility before drag/drop booking
-mutations. The diary is now stable enough to start exposing patient-flow state,
-but booking mutation work should still wait until status visibility and review
-flows are comfortable.
+User review passed. Sprint 6 has been dispatched toward safe read-only
+waiting-room / appointment status visibility before drag/drop booking mutations.
+The diary is now stable enough to start exposing patient-flow state, but booking
+mutation work should still wait until status visibility and review flows are
+comfortable.

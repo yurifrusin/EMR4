@@ -116,6 +116,54 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 6: Read-Only Patient Flow Visibility
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Launch Gate | Preparing handin |
+| Integration Gate | Pending all submits and Codex review |
+| Theme | Make appointment status and waiting-room/patient-flow state reviewable before booking or status mutation UI |
+
+### Workstream Q - Waiting Room Status Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-waiting-room-status-contract.md` |
+| Goal | Harden read-only waiting-room/status API behavior and tests |
+| In Scope | Appointment models/schemas/router and appointment/waiting-room tests |
+| Out of Scope | Diary frontend, taskpane/Command Centre/Gemini, booking/status mutation UI |
+| Verification | Focused appointment/waiting-room pytest suites |
+| Status | Queued |
+
+### Workstream R - Diary Status Affordances
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-status-affordances.md` |
+| Goal | Make appointment lifecycle/status easier to scan in the read-only diary |
+| In Scope | `docs/diary/diary.{html,css,js}` |
+| Out of Scope | Backend, taskpane/Command Centre/Gemini, booking/status mutation controls |
+| Verification | JS syntax plus live/smoke/narrow visual checks |
+| Status | Queued |
+
+### Workstream S - Patient Flow Review Notes
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/patient-flow-review-notes` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-patient-flow-review-notes.md` |
+| Goal | Define review expectations for read-only patient-flow/status visibility |
+| In Scope | Small orchestration/checklist documentation only |
+| Out of Scope | Production backend/frontend implementation, tests, migrations, booking/status mutations |
+| Verification | `git diff --check` |
+| Status | Queued |
+
 ## Sprint 5: Diary Polish and Test Infrastructure
 
 | Item | Value |
