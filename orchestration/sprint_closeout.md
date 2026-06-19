@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 6: Read-Only Patient Flow Visibility |
 | Integrated through | Sprint 6 pushed to `master`; baton and mirrors aligned |
-| Status | Integrated and pushed, pending deploy/user review |
+| Status | User-reviewed and closed |
 | Last updated | 2026-06-19 |
 
 ## What Changed
@@ -78,7 +78,7 @@ to run.
 
 ## Recommended Next Direction
 
-If user review agrees the status affordances are readable and not too noisy, the
-next sprint should introduce receptionist-facing status mutation controls in a
-narrow way: check-in/mark arrived, start consult, complete, cancel/no-show/DNA,
-with audit-friendly backend tests before drag/drop booking edits.
+User review passed: waiting-room API status counts were correct, terminal
+statuses were absent, and diary status colours/badges were useful without feeling
+cluttered. Sprint 7 has been dispatched toward controlled receptionist-facing
+status mutation before booking create/edit/drag/drop work.

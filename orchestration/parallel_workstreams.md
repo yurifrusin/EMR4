@@ -116,11 +116,59 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 7: Controlled Status Mutation
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Launch Gate | Preparing handin |
+| Integration Gate | Pending all submits and Codex review |
+| Theme | Add safe receptionist-facing appointment status changes before booking create/edit/drag/drop work |
+
+### Workstream T - Appointment Status Mutation Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-status-mutation-contract.md` |
+| Goal | Harden backend status mutation behavior and regression coverage |
+| In Scope | Appointment status router/schema/tests; minimal production fixes only if tests expose unsafe behavior |
+| Out of Scope | Diary frontend, taskpane/Command Centre/Gemini, booking create/edit/drag/drop, roster admin UI |
+| Verification | Focused appointment status/waiting-room/slots pytest suites |
+| Status | Queued |
+
+### Workstream U - Diary Status Controls
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-status-controls.md` |
+| Goal | Add restrained diary controls for status-only mutation |
+| In Scope | `docs/diary/diary.{html,css,js}` |
+| Out of Scope | Backend, taskpane/Command Centre/Gemini, booking create/edit/drag/drop, roster admin UI |
+| Verification | JS syntax plus live/smoke/narrow/failure/session visual checks |
+| Status | Queued |
+
+### Workstream V - Status Mutation Review Plan
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/status-mutation-review-plan` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-status-mutation-review-plan.md` |
+| Goal | Define the post-integration review path for controlled status mutation |
+| In Scope | Small orchestration/checklist documentation only |
+| Out of Scope | Production backend/frontend implementation, tests, migrations, booking create/edit/drag/drop |
+| Verification | `git diff --check` |
+| Status | Queued |
+
 ## Sprint 6: Read-Only Patient Flow Visibility
 
 | Item | Value |
 |---|---|
-| Status | Integrated, pending user review |
+| Status | Integrated and user-reviewed |
 | Launch Gate | Complete |
 | Integration Gate | Complete |
 | Theme | Make appointment status and waiting-room/patient-flow state reviewable before booking or status mutation UI |
