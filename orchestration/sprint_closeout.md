@@ -34,7 +34,10 @@ reviewed, integrated, verified, pushed, and audited.
   human-readable, and cancellation now uses an explicit in-modal confirmation.
 - User-review hotfix 2: sub-grid bookings now render at their actual duration
   instead of visually expanding to the full 15-minute grid interval.
-- Diary asset cache-bust moved to `v=46`.
+- User-review hotfix 3: cancelled appointments are hidden from the working
+  diary layer and visible appointment count, while DNA/no-show remain visible
+  as greyed attendance outcomes.
+- Diary asset cache-bust moved to `v=48`.
 - Added `orchestration/booking_create_edit_review.md` for the Sprint 8 API/UI
   review path, including exact PowerShell snippets.
 

@@ -369,6 +369,10 @@ function isBlockingAppointment(appt) {
   return !["Cancelled", "NoShow", "DNA"].includes(appt.status);
 }
 
+function shouldRenderAppointment(appt) {
+  return appt.status !== "Cancelled";
+}
+
 function isOnMajorGrid(mins, template) {
   const interval = template.slot_defaults.interval_minutes || 15;
   return (mins - toMins(template.slot_defaults.start)) % interval === 0;
@@ -464,6 +468,7 @@ function generateSlots(template) {
 function buildApptLookup(appointments) {
   const lookup = {};
   appointments.forEach(a => {
+    if (!shouldRenderAppointment(a)) return;
     const ahpra = a.practitioner?.ahpra_number || "__none__";
     if (!lookup[ahpra]) lookup[ahpra] = {};
     const key = apptTimeKey(a);
@@ -1173,11 +1178,12 @@ async function loadDiary(silent = false, options = {}) {
     types.forEach(t => { typeMap[t.id] = t.color_hex; });
 
     const slots      = generateSlots(activeTemplate);
-    const apptLookup = buildApptLookup(appointments);
+    const visibleAppointments = appointments.filter(shouldRenderAppointment);
+    const apptLookup = buildApptLookup(visibleAppointments);
 
     // Build occupied lookup to hide chevrons in spanned slots
     const occupied = {};
-    appointments.forEach(a => {
+    visibleAppointments.forEach(a => {
       const ahpra = a.practitioner?.ahpra_number;
       if (!ahpra) return;
       if (!occupied[ahpra]) occupied[ahpra] = new Set();
@@ -1203,7 +1209,7 @@ async function loadDiary(silent = false, options = {}) {
       autoScrolledDateKey = diaryDate.toISOString().slice(0, 10);
     }
 
-    const total = appointments.length;
+    const total = visibleAppointments.length;
     setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}${isSmokeMode ? " [SMOKE MODE]" : ""}`);
   } catch (e) {
     if (!silent) {
