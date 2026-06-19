@@ -11,8 +11,8 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="EMR"/>
   <Description DefaultValue="EMR: intelligent clinical coding, scribe, and letter writing for Australian general practice."/>
-  <IconUrl DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/emr_cube1.png"/>
-  <HighResolutionIconUrl DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/emr_cube1.png"/>
+  <IconUrl DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/icon-64.png"/>
   <SupportUrl DefaultValue="https://github.com/yurifrusin/EMR4"/>
   <AppDomains>
     <AppDomain>https://yurifrusin.github.io</AppDomain>
@@ -76,9 +76,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/emr_cube1.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/emr_cube1.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/emr_cube1.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://yurifrusin.github.io/EMR4/taskpane/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
