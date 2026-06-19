@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/patient-flow-review-notes` |
-| Status | queued |
+| Status | submitted |
 | Created | 62cfeaa |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-patient-flow-review-notes --commit-message "Add patient flow review notes" --message "Patient flow review notes ready for Codex review"` |
@@ -66,8 +66,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
+Recovered by Codex orchestrator after the Codex worker did not start this
+documentation-only task.
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/patient_flow_review.md`;
+  `orchestration/agent_inbox/codex/codex-patient-flow-review-notes.md`.
+- Verification run: pending final `git diff --check` after merging the sprint
+  review branch.
+- Remaining risks: This is a review checklist only. It does not validate the
+  live waiting-room endpoint or diary UI until Claude and Antigravity submissions
+  are integrated and tested.
