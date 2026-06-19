@@ -116,11 +116,59 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 8: Booking Create/Edit First Slice
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Launch Gate | Complete |
+| Integration Gate | Pending |
+| Theme | Add a practical create/edit booking path without starting drag/drop/resize |
+
+### Workstream W - Booking Create/Edit Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-booking-create-edit-contract.md` |
+| Goal | Harden the backend appointment create/edit contract for diary use |
+| In Scope | Appointment models/schemas/router, focused create/edit/conflict/auth/scope tests, minimal seed/test helper changes if needed |
+| Out of Scope | Diary frontend, drag/drop/resize UI, roster admin UI, waiting-room display app, taskpane/Command Centre/Gemini, online booking portal |
+| Verification | Focused appointment conflict/status/waiting-room/slots pytest suites plus any new booking create/edit tests |
+| Status | Queued |
+
+### Workstream X - Diary Create/Edit Modal
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-create-edit-modal.md` |
+| Goal | Add restrained diary create/edit controls using the existing appointments API |
+| In Scope | `docs/diary/diary.{html,css,js}` |
+| Out of Scope | Backend routes/models/tests, drag/drop/resize, recurring appointments, roster admin UI, waiting-room display app, taskpane/Command Centre/Gemini, online booking portal |
+| Verification | JS syntax plus live/smoke/narrow create/edit/failure visual checks |
+| Status | Queued |
+
+### Workstream Y - Booking Create/Edit Review Plan
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/booking-create-edit-review-plan` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-booking-create-edit-review-plan.md` |
+| Goal | Prepare integration and user-review checklist for the create/edit booking slice |
+| In Scope | Orchestration/review documentation, including exact PowerShell API snippets for user review |
+| Out of Scope | Production backend/frontend code, migrations, drag/drop/resize, roster admin UI, taskpane/Command Centre/Gemini |
+| Verification | `git diff --check` |
+| Status | Queued |
+
 ## Sprint 7: Controlled Status Mutation
 
 | Item | Value |
 |---|---|
-| Status | Integrated, pending user review |
+| Status | Integrated and user-reviewed |
 | Launch Gate | Complete |
 | Integration Gate | Complete |
 | Theme | Add safe receptionist-facing appointment status changes before booking create/edit/drag/drop work |
