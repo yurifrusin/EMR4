@@ -90,3 +90,42 @@ to run.
 If user review passes, the next sprint can start booking create/edit planning in
 a narrow way. Recommended order: simple create/edit form or modal first, then
 drag/drop/resize later once mutation semantics and conflict handling feel solid.
+
+## Sprint 8 Closeout Draft: Booking Create/Edit First Slice
+
+This draft is for Codex integration after the active Sprint 8 submissions land.
+Do not replace the current Sprint 7 closeout until Claude's backend contract,
+Antigravity's diary modal, and Codex's review plan are submitted, reviewed,
+integrated, verified, pushed, and audited.
+
+### Draft What Changed
+
+- Backend appointment create/edit contract hardened for diary use.
+- Diary create/edit modal added for practical receptionist booking work.
+- Booking create/edit review checklist added at
+  `orchestration/booking_create_edit_review.md`.
+
+### Draft Recommended User Review
+
+- Run the required PowerShell API snippets in
+  `orchestration/booking_create_edit_review.md`.
+- Open the live diary, create one booking, edit its time/duration/reason/notes,
+  and verify the card refreshes only after successful API saves.
+- Attempt an overlapping booking and verify the UI shows a clear conflict without
+  silently mutating the grid.
+- Narrow the diary window and confirm create/edit controls coexist with patient
+  names, notes, status controls, breaks, Refresh, Now, and date navigation.
+
+### Draft Not Required Before Moving On
+
+- Drag/drop, resize, recurring appointments, delete UI, roster admin UI,
+  waiting-room display app, SMS, kiosk, online booking, taskpane consultation,
+  Command Centre, and Gemini review remain intentionally out of scope.
+
+### Draft Known Follow-Up
+
+- Decide whether delete should remain status-only cancellation or expose a
+  distinct UI action later.
+- Drag/drop/resize should wait until this manual create/edit path is reviewed.
+- Any patient-facing online booking rules should be handled in a separate portal
+  contract, not inferred from staff diary behavior.
