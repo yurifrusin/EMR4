@@ -13,7 +13,7 @@ def test_template_requires_auth(client):
     assert resp.status_code == 401
 
 
-def test_template_returns_db_record(client, db, gp_user, practice):
+def test_template_returns_db_record(client, db, gp_user, practice, practitioner):
     """When a DiaryTemplate row exists for the practice, the endpoint returns it."""
     tmpl = DiaryTemplate(
         practice_id=practice.id,
@@ -32,7 +32,7 @@ def test_template_returns_db_record(client, db, gp_user, practice):
         display_order=0,
         room_label="Room 1",
         assignment="Dr Alex Shera",
-        practitioner_ahpra="MED0001234567",
+        practitioner_ahpra=practitioner.ahpra_number,
     )
     db.add(col)
     db.flush()
@@ -58,10 +58,47 @@ def test_template_returns_db_record(client, db, gp_user, practice):
     assert len(data["columns"]) == 1
     col_out = data["columns"][0]
     assert col_out["room_label"] == "Room 1"
-    assert col_out["practitioner_ahpra"] == "MED0001234567"
+    assert col_out["practitioner_id"] == str(practitioner.id)
+    assert col_out["practitioner_ahpra"] == practitioner.ahpra_number
     assert len(col_out["breaks"]) == 1
     assert col_out["breaks"][0]["label"] == "LUNCH"
     assert col_out["breaks"][0]["from_time"] == "13:00:00"
+
+
+def test_template_resolves_missing_practitioner_id_from_ahpra(client, db, gp_user, practice, practitioner):
+    """Older seeded template columns may have AHPRA but no practitioner_id.
+
+    The diary still needs a practitioner_id so blank appointment days can create
+    bookings without first seeing an existing appointment for that practitioner.
+    """
+    tmpl = DiaryTemplate(
+        practice_id=practice.id,
+        practice_name="Test Clinic",
+        slot_start=time(9, 0),
+        slot_end=time(17, 0),
+        slot_interval_minutes=15,
+        footer=[],
+    )
+    db.add(tmpl)
+    db.flush()
+    db.add(DiaryColumn(
+        template_id=tmpl.id,
+        practice_id=practice.id,
+        display_order=0,
+        room_label="Room 1",
+        assignment="Dr Alex Shera",
+        practitioner_id=None,
+        practitioner_ahpra=practitioner.ahpra_number,
+    ))
+    db.flush()
+
+    token = make_token(gp_user)
+    resp = client.get("/api/v1/diary/template", headers={"Authorization": f"Bearer {token}"})
+
+    assert resp.status_code == 200
+    col = resp.json()["columns"][0]
+    assert col["practitioner_ahpra"] == practitioner.ahpra_number
+    assert col["practitioner_id"] == str(practitioner.id)
 
 
 def test_template_fallback_to_json(client, gp_user):

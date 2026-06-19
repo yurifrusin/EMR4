@@ -40,6 +40,10 @@ reviewed, integrated, verified, pushed, and audited.
 - User-review hotfix 2: exposed `practitioner_id` through the diary template
   API and preserved it in the diary frontend, so Dr Shera's column remains
   bookable even on days with zero existing appointments.
+- User-review hotfix 3: template columns now resolve missing practitioner IDs
+  from matching AHPRA numbers at response time, covering older DB rows where
+  `diary_columns.practitioner_id` is null. The booking form now submits on
+  Enter via the normal form submit path.
 
 ## Recommended User Review
 
@@ -103,6 +107,10 @@ to run.
   `git diff --check`, and
   `.venv\Scripts\python.exe -m pytest tests\test_diary_template.py tests\test_diary_roster.py -q`
   -> 18 passed
+- Practitioner-ID resolver hotfix verification: `node --check docs\diary\diary.js`,
+  `git diff --check`, and
+  `.venv\Scripts\python.exe -m pytest tests\test_diary_template.py tests\test_diary_roster.py -q`
+  -> 19 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 8 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_patient_flow.py -q` -> 20 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_create_edit.py tests\test_booking_patient_flow.py tests\test_appointment_conflicts.py tests\test_appointment_status_mutations.py tests\test_waiting_room.py tests\test_slots.py tests\test_patients.py -q` -> 113 passed

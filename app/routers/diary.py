@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session, joinedload
 
 from app.dependencies import get_db, get_current_user
-from app.models.tenancy import User
+from app.models.tenancy import Practitioner, User
 from app.models.diary import DiaryTemplate, Room, DiaryRoster
 from app.schemas.diary import DiaryTemplateOut, DiaryRosterOut, DiaryRosterEntryOut
 
@@ -17,6 +17,42 @@ _TEMPLATE_JSON = Path(__file__).resolve().parents[2] / "diary_template.json"
 def _load_json_fallback() -> dict:
     with open(_TEMPLATE_JSON, encoding="utf-8") as f:
         return json.load(f)
+
+
+def _practitioner_ids_by_ahpra(db: Session, practice_id) -> dict[str, str]:
+    practitioners = (
+        db.query(Practitioner)
+        .filter(
+            Practitioner.practice_id == practice_id,
+            Practitioner.ahpra_number.isnot(None),
+        )
+        .all()
+    )
+    return {p.ahpra_number: p.id for p in practitioners if p.ahpra_number}
+
+
+def _db_template_to_out(tmpl: DiaryTemplate, db: Session) -> DiaryTemplateOut:
+    ahpra_to_id = _practitioner_ids_by_ahpra(db, tmpl.practice_id)
+    return DiaryTemplateOut(
+        practice_name=tmpl.practice_name,
+        slot_start=tmpl.slot_start,
+        slot_end=tmpl.slot_end,
+        slot_interval_minutes=tmpl.slot_interval_minutes,
+        footer=tmpl.footer or [],
+        columns=[
+            {
+                "room_label": c.room_label,
+                "assignment": c.assignment,
+                "practitioner_id": c.practitioner_id or ahpra_to_id.get(c.practitioner_ahpra),
+                "practitioner_ahpra": c.practitioner_ahpra,
+                "tint_hex": c.tint_hex,
+                "slot_interval_minutes": c.slot_interval_minutes,
+                "breaks": c.breaks,
+            }
+            for c in tmpl.columns
+            if c.is_active
+        ],
+    )
 
 
 @router.get("/template", response_model=DiaryTemplateOut)
@@ -44,6 +80,7 @@ def get_diary_template(
             raise HTTPException(status_code=404, detail="No diary template configured for this practice")
         raw = _load_json_fallback()
         sd = raw.get("slot_defaults", {})
+        ahpra_to_id = _practitioner_ids_by_ahpra(db, current_user.practice_id)
         from datetime import time as _time
 
         def _parse_time(s: str) -> _time:
@@ -55,6 +92,7 @@ def get_diary_template(
             cols.append({
                 "room_label": c.get("room_label", ""),
                 "assignment": c.get("assignment"),
+                "practitioner_id": ahpra_to_id.get(c.get("practitioner_ahpra")),
                 "practitioner_ahpra": c.get("practitioner_ahpra"),
                 "tint_hex": c.get("tint"),
                 "breaks": [
@@ -75,7 +113,7 @@ def get_diary_template(
             columns=cols,
         )
 
-    return tmpl
+    return _db_template_to_out(tmpl, db)
 
 
 @router.get("/roster", response_model=DiaryRosterOut)

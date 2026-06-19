@@ -1252,8 +1252,14 @@ Office.onReady(() => {
   document.getElementById("btn-modal-close").onclick = closeBreakModal;
 
   document.getElementById("btn-booking-close").onclick = closeBookingModal;
-  document.getElementById("btn-booking-save").onclick = saveBooking;
   document.getElementById("btn-booking-delete").onclick = deleteBooking;
+  const bookingForm = document.getElementById("booking-form");
+  if (bookingForm) {
+    bookingForm.addEventListener("submit", e => {
+      e.preventDefault();
+      saveBooking();
+    });
+  }
 
   const bookingTypeSelect = document.getElementById("booking-type");
   if (bookingTypeSelect) {
