@@ -347,7 +347,7 @@ function renderFooter(template) {
   if (!footer) {
     footer = document.createElement("div");
     footer.id = "diary-footer";
-    document.getElementById("diary-body")?.appendChild(footer);
+    document.getElementById("diary-grid-container")?.appendChild(footer);
   }
   footer.textContent = items.join("   ");
 }

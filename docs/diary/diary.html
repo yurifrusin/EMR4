@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=49" />
-  <script src="diary.js?v=49" defer></script>
+  <link rel="stylesheet" href="diary.css?v=50" />
+  <script src="diary.js?v=50" defer></script>
 </head>
 <body>
 
@@ -34,7 +34,11 @@
   </div>
 
   <div class="diary-actions">
-    <button id="btn-toggle-flow" title="Toggle Waiting Room Sidebar">👥 Waiting Room (<span id="flow-waiting-count">0</span>)</button>
+    <button id="btn-toggle-flow" title="Toggle Waiting Room Sidebar">
+      <span aria-hidden="true">👥</span>
+      <span>Waiting Room</span>
+      <span class="flow-count-pill" id="flow-waiting-count">0</span>
+    </button>
     <button id="btn-refresh" title="Refresh appointments">&#8635; Refresh</button>
     <span id="diary-status">Connecting…</span>
   </div>
@@ -60,28 +64,28 @@
     <div class="flow-panel-content">
       <div class="flow-section" id="flow-sec-waiting">
         <div class="flow-section-title waiting-title">
-          Waiting Room (<span class="flow-sec-count">0</span>)
+          Waiting Room <span class="flow-sec-count">0</span>
         </div>
         <div class="flow-list" id="flow-list-waiting"></div>
       </div>
 
       <div class="flow-section" id="flow-sec-consult">
         <div class="flow-section-title consult-title">
-          In Consult (<span class="flow-sec-count">0</span>)
+          In Consult <span class="flow-sec-count">0</span>
         </div>
         <div class="flow-list" id="flow-list-consult"></div>
       </div>
 
       <div class="flow-section" id="flow-sec-expected">
         <div class="flow-section-title expected-title">
-          Expected Today (<span class="flow-sec-count">0</span>)
+          Expected Today <span class="flow-sec-count">0</span>
         </div>
         <div class="flow-list" id="flow-list-expected"></div>
       </div>
 
       <div class="flow-section" id="flow-sec-finished">
         <div class="flow-section-title finished-title">
-          Finished (<span class="flow-sec-count">0</span>)
+          Finished <span class="flow-sec-count">0</span>
         </div>
         <div class="flow-list" id="flow-list-finished"></div>
       </div>

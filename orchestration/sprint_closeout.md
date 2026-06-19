@@ -34,6 +34,9 @@ reviewed, integrated, verified, pushed, and audited.
   the document URL later.
 - Integration cleanup: removed trailing whitespace from the diary workbench
   submit before final verification.
+- User-review hotfix: moved the diary footer inside the scrollable grid
+  container so it no longer competes with the grid as a horizontal flex item,
+  and tightened the Waiting Room count display.
 
 ## Recommended User Review
 
@@ -91,6 +94,8 @@ to run.
 
 - `node --check docs\diary\diary.js` -> passed
 - `git diff --check` -> passed after integration whitespace cleanup
+- Hotfix verification: `node --check docs\diary\diary.js` and
+  `git diff --check` -> passed
 - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 8 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_patient_flow.py -q` -> 20 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_create_edit.py tests\test_booking_patient_flow.py tests\test_appointment_conflicts.py tests\test_appointment_status_mutations.py tests\test_waiting_room.py tests\test_slots.py tests\test_patients.py -q` -> 113 passed
