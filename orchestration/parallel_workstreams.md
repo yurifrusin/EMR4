@@ -120,7 +120,7 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Integrated, pending user review |
+| Status | Integrated and user-reviewed |
 | Launch Gate | Complete |
 | Integration Gate | Complete |
 | Theme | Smooth the diary user-review rough edges and harden the test infrastructure before booking mutations |

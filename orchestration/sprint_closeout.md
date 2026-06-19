@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 5: Diary Polish and Test Infrastructure |
 | Integrated through | Sprint 5 closeout commit on `master` |
-| Status | Verified locally, pending user review |
+| Status | User-reviewed and closed |
 | Last updated | 2026-06-19 |
 
 ## What Changed
@@ -81,8 +81,8 @@ to run.
 
 ## Recommended Next Direction
 
-After user review, Codex recommends moving toward safe read-only waiting-room or
-appointment status visibility before drag/drop booking mutations. The diary is
-now stable enough to start exposing patient-flow state, but booking mutation
-work should still wait until the date picker/current-time marker is reviewed in
-the live taskpane popout.
+User review passed. Codex recommends moving next toward safe read-only
+waiting-room or appointment status visibility before drag/drop booking
+mutations. The diary is now stable enough to start exposing patient-flow state,
+but booking mutation work should still wait until status visibility and review
+flows are comfortable.
