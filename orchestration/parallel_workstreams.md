@@ -116,11 +116,59 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 5: Diary Polish and Test Infrastructure
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Launch Gate | Preparing handin |
+| Integration Gate | Pending all submits and Codex review |
+| Theme | Smooth the diary user-review rough edges and harden the test infrastructure before booking mutations |
+
+### Workstream N - Test DB Teardown Hardening
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-test-db-teardown-hardening.md` |
+| Goal | Fix the recurring partial PostgreSQL test DB teardown/reset failure seen during rapid pytest reruns |
+| In Scope | `tests/conftest.py` and narrow test DB setup/teardown helpers/tests as needed |
+| Out of Scope | Production app behavior, migrations, diary frontend, taskpane/Command Centre/Gemini, booking mutations |
+| Verification | Repeat focused diary roster/template pytest runs; broader tests only if fixture changes risk shared behavior |
+| Status | Queued |
+
+### Workstream O - Diary Date and Now Marker Refinement
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-ui-date-now-refinement.md` |
+| Goal | Add a practical date control and soften the current-time marker without regressing narrow diary layout |
+| In Scope | `docs/diary/diary.{html,css,js}` |
+| Out of Scope | Backend, tests beyond narrow frontend smoke helpers, taskpane/Command Centre/Gemini, booking mutations |
+| Verification | JS syntax plus live/smoke/narrow/date-picker/Now-marker browser checks |
+| Status | Queued |
+
+### Workstream P - Diary Smoke/Live Review Checklist
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/diary-smoke-live-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-diary-smoke-live-review.md` |
+| Goal | Clarify smoke-mode versus live-diary expectations and prepare the post-integration review checklist |
+| In Scope | Small orchestration/checklist documentation only |
+| Out of Scope | Production backend/frontend implementation, migrations, seed data, taskpane/Command Centre/Gemini |
+| Verification | `git diff --check`; JS syntax only if JS is touched |
+| Status | Queued |
+
 ## Sprint 4: Diary Roster Consumption
 
 | Item | Value |
 |---|---|
-| Status | Integrated, pending verification/push closeout |
+| Status | Integrated and user-reviewed |
 | Launch Gate | Complete |
 | Integration Gate | Complete |
 | Theme | Make date-specific roster data visible in the diary without starting booking mutation work |

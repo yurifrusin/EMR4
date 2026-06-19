@@ -9,8 +9,8 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 4: Diary Roster Consumption |
-| Integrated through | current local `master` pending final push |
-| Status | Verified locally |
+| Integrated through | `cf47471` |
+| Status | User-reviewed and closed |
 | Last updated | 2026-06-19 |
 
 ## What Changed
@@ -65,7 +65,7 @@ After the final push has deployed:
 - Consider adding an explicit backend `has_roster_entry` or equivalent flag later
   so the frontend can distinguish "room exists but no roster row" from an
   intentionally blank roster assignment without inference.
-- Realign clean worker mirrors after final push.
+- Clean durable worker mirrors were realigned after final push.
 - Dirty stale disposable worktree `codex/time-model` remains visible and should be
   reviewed before retirement.
 
@@ -85,11 +85,12 @@ to run.
 
 ## Recommended Next Direction
 
-After user review, the next sprint should either:
+User review passed. Sprint 5 has been dispatched:
 
-- add a minimal roster admin/editing surface, or
-- move to safe read-only waiting-room/status visibility before any drag/drop
-  appointment mutation work.
+- Claude: harden the test DB teardown/reset path.
+- Antigravity: add a diary date control and soften the current-time marker.
+- Codex worker: clarify smoke/live diary review expectations and prepare the
+  post-integration checklist.
 
-Booking mutation should remain deferred until roster display and fallback semantics
-are comfortable in real use.
+Booking mutation should remain deferred until the diary polish and test
+infrastructure hardening have been reviewed.
