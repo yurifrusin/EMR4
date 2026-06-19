@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
-| Launch Gate | Preparing handin |
-| Integration Gate | Pending all submits and Codex review |
+| Status | Integrated, pending user review |
+| Launch Gate | Complete |
+| Integration Gate | Complete |
 | Theme | Smooth the diary user-review rough edges and harden the test infrastructure before booking mutations |
 
 ### Workstream N - Test DB Teardown Hardening
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `tests/conftest.py` and narrow test DB setup/teardown helpers/tests as needed |
 | Out of Scope | Production app behavior, migrations, diary frontend, taskpane/Command Centre/Gemini, booking mutations |
 | Verification | Repeat focused diary roster/template pytest runs; broader tests only if fixture changes risk shared behavior |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream O - Diary Date and Now Marker Refinement
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` |
 | Out of Scope | Backend, tests beyond narrow frontend smoke helpers, taskpane/Command Centre/Gemini, booking mutations |
 | Verification | JS syntax plus live/smoke/narrow/date-picker/Now-marker browser checks |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream P - Diary Smoke/Live Review Checklist
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Small orchestration/checklist documentation only |
 | Out of Scope | Production backend/frontend implementation, migrations, seed data, taskpane/Command Centre/Gemini |
 | Verification | `git diff --check`; JS syntax only if JS is touched |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 4: Diary Roster Consumption
 

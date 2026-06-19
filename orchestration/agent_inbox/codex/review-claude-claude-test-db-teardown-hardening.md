@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-test-db-teardown-hardening` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -47,5 +47,8 @@ Test DB teardown hardening ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. The fix is scoped to `tests/conftest.py`;
+  Codex reran the focused diary roster/template tests twice after integration and
+  both runs passed without the prior partial-DB failure.
+- Follow-up required: Address the unrelated `pytest_asyncio` loop-scope
+  deprecation warning later.

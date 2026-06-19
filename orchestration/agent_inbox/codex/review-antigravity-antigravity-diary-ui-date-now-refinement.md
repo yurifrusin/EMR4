@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-ui-date-now-refinement` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated with small Codex polish to move inline
+  date-picker styles into CSS and bump diary cache-bust to `v=40`.
+- Follow-up required: User should review the date picker and softened current-time
+  marker in the live taskpane popout after deploy.

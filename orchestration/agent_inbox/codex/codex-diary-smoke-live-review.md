@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/diary-smoke-live-review` |
-| Status | submitted |
+| Status | integrated |
 | Created | cf47471 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-diary-smoke-live-review --commit-message "Add diary smoke live review checklist" --message "Diary smoke/live review checklist ready for Codex review"` |

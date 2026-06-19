@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/diary-smoke-live-review` |
 | Source Task | `codex-diary-smoke-live-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -67,5 +67,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. The branch is documentation-only and
+  provides the Sprint 5 smoke/live review checklist.
+- Follow-up required: Use `orchestration/diary_smoke_live_review.md` during
+  post-deploy user review and before the next mutation-oriented sprint.
