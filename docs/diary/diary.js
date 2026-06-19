@@ -18,6 +18,10 @@ const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
 const MIN_TIME_INCREMENT_MINS = 5;
 
+let activeAppointments = [];
+let activeTypes = [];
+let ahpraToPractitionerMap = {};
+
 function isSmokeMode() {
   return new URLSearchParams(window.location.search).get("smoke") === "true";
 }
@@ -613,6 +617,13 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         empty.className = "slot-empty";
         empty.textContent = "»";
         slotDiv.appendChild(empty);
+        
+        slotDiv.style.cursor = "pointer";
+        slotDiv.title = `Book appointment at ${slotTime} in ${col.room_label}`;
+        slotDiv.onclick = (e) => {
+          e.stopPropagation();
+          openBookingModalForCreate(col, slotTime);
+        };
       }
 
       columnBody.appendChild(slotDiv);
@@ -836,6 +847,17 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       });
 
       statusChanger.appendChild(statusSelect);
+
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.className = "btn-edit-appt";
+      editBtn.textContent = "✎ Edit";
+      editBtn.onclick = (e) => {
+        e.stopPropagation();
+        openBookingModalForEdit(a);
+      };
+      statusChanger.appendChild(editBtn);
+
       span.appendChild(statusChanger);
 
       span.addEventListener("click", e => {
@@ -953,7 +975,7 @@ async function loadDiary(silent = false, options = {}) {
   const apptParams = `date_from=${dayStart.toISOString()}&date_to=${dayEnd.toISOString()}`;
 
   try {
-    let template, appointments, types;
+    let template, appointments, types, rosterEntries = [];
 
     if (isSmokeMode) {
       template = normalizeTemplate(getMockTemplate());
@@ -978,7 +1000,7 @@ async function loadDiary(silent = false, options = {}) {
       appointments = await apptRes.json();
       types        = await typeRes.json();
 
-      let rosterEntries = [];
+      rosterEntries = [];
       if (rosterRes && rosterRes.ok) {
         try {
           const rosterData = await rosterRes.json();
@@ -1035,6 +1057,59 @@ async function loadDiary(silent = false, options = {}) {
         template.columns = mergedColumns;
       }
     }
+
+    // Update global cache variables
+    activeAppointments = appointments;
+    activeTypes = types;
+
+    // Scan appointments to populate practitioner AHPRA -> ID map
+    appointments.forEach(a => {
+      if (a.practitioner && a.practitioner.ahpra_number) {
+        ahpraToPractitionerMap[a.practitioner.ahpra_number] = {
+          id: a.practitioner.id,
+          first_name: a.practitioner.first_name,
+          last_name: a.practitioner.last_name
+        };
+      }
+    });
+
+    // Scan roster entries
+    if (rosterEntries) {
+      rosterEntries.forEach(entry => {
+        if (entry.practitioner_ahpra && entry.practitioner_id) {
+          if (!ahpraToPractitionerMap[entry.practitioner_ahpra]) {
+            ahpraToPractitionerMap[entry.practitioner_ahpra] = {
+              id: entry.practitioner_id,
+              first_name: "",
+              last_name: ""
+            };
+          }
+        }
+      });
+    }
+
+    // Set mock practitioner IDs in smoke mode
+    if (isSmokeMode) {
+      ahpraToPractitionerMap["MED0001234567"] = {
+        id: "smoke-prac-1",
+        first_name: "Alex",
+        last_name: "Shera"
+      };
+      ahpraToPractitionerMap["MED999"] = {
+        id: "smoke-prac-2",
+        first_name: "Nurse",
+        last_name: "Staff"
+      };
+    }
+
+    // Assign practitioner_id to template columns
+    template.columns.forEach(col => {
+      if (col.practitioner_ahpra) {
+        col.practitioner_id = ahpraToPractitionerMap[col.practitioner_ahpra]?.id || null;
+      } else {
+        col.practitioner_id = null;
+      }
+    });
 
     setActiveTemplate(template);
 
@@ -1128,6 +1203,68 @@ Office.onReady(() => {
   document.getElementById("btn-modal-save").onclick = saveBreaks;
   document.getElementById("btn-modal-close").onclick = closeBreakModal;
 
+  document.getElementById("btn-booking-close").onclick = closeBookingModal;
+  document.getElementById("btn-booking-save").onclick = saveBooking;
+  document.getElementById("btn-booking-delete").onclick = deleteBooking;
+
+  const bookingTypeSelect = document.getElementById("booking-type");
+  if (bookingTypeSelect) {
+    bookingTypeSelect.addEventListener("change", e => {
+      const typeId = e.target.value;
+      if (typeId && activeTypes) {
+        const found = activeTypes.find(t => t.id === typeId);
+        if (found && found.default_duration) {
+          document.getElementById("booking-duration").value = found.default_duration;
+        }
+      }
+    });
+  }
+
+  document.getElementById("booking-modal").addEventListener("click", e => {
+    if (e.target === e.currentTarget) closeBookingModal();
+  });
+
+  let searchTimeout = null;
+  const patientSearchInput = document.getElementById("booking-patient-search");
+  if (patientSearchInput) {
+    patientSearchInput.addEventListener("input", e => {
+      const val = e.target.value.trim();
+      clearTimeout(searchTimeout);
+      if (val.length < 2) {
+        document.getElementById("patient-search-results").innerHTML = "";
+        document.getElementById("patient-search-results").classList.add("hidden");
+        return;
+      }
+      
+      searchTimeout = setTimeout(async () => {
+        try {
+          let results = [];
+          if (isSmokeMode()) {
+            results = searchMockPatients(val);
+          } else {
+            const res = await apiFetch(`/patients/search?q=${encodeURIComponent(val)}`);
+            if (!res.ok) throw new Error("Search failed");
+            results = await res.json();
+          }
+          renderSearchResults(results);
+        } catch (err) {
+          console.error(err);
+        }
+      }, 250);
+    });
+  }
+
+  const btnClearPatient = document.getElementById("btn-clear-patient");
+  if (btnClearPatient) {
+    btnClearPatient.onclick = () => {
+      selectedPatient = null;
+      document.getElementById("selected-patient-display").classList.add("hidden");
+      document.getElementById("booking-patient-search").value = "";
+      document.getElementById("booking-patient-search").classList.remove("hidden");
+      document.getElementById("booking-patient-search").focus();
+    };
+  }
+
   const dateWrapper = document.querySelector(".date-picker-wrapper");
   const datePicker = document.getElementById("diary-date-picker");
   if (dateWrapper && datePicker) {
@@ -1179,6 +1316,342 @@ Office.onReady(() => {
   try { Office.context?.ui?.messageParent(JSON.stringify({ type: "ready" })); } catch (_) {}
 
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmokeMode = urlParams.get("smoke") === "true";
-  if (token || isSmokeMode) { loadDiary(); scheduleRefresh(); }
+  const isSmoke = urlParams.get("smoke") === "true";
+  if (token || isSmoke) { loadDiary(); scheduleRefresh(); }
 });
+
+// ─── BOOKING MODAL LOGIC ───────────────────────────────────
+let selectedPatient = null;
+let editingAppointmentId = null;
+
+function searchMockPatients(q) {
+  const query = q.toLowerCase();
+  const allMocks = [
+    { id: "smoke-pat-1", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1955-03-24", medicare_number: "12345678901" },
+    { id: "smoke-pat-2", first_name: "Billy", last_name: "Frusin", date_of_birth: "1988-11-12", medicare_number: "22345678902" },
+    { id: "smoke-pat-3", first_name: "Jane", last_name: "Doe", date_of_birth: "1990-05-15", medicare_number: "32345678903" },
+    { id: "smoke-pat-4", first_name: "John", last_name: "Smith", date_of_birth: "1978-08-20", medicare_number: "42345678904" },
+    { id: "smoke-pat-5", first_name: "Nora", last_name: "Patel", date_of_birth: "1982-04-10", medicare_number: "52345678905" }
+  ];
+  return allMocks.filter(p => 
+    p.first_name.toLowerCase().includes(query) || 
+    p.last_name.toLowerCase().includes(query) ||
+    p.medicare_number.includes(query)
+  );
+}
+
+function openBookingModalForCreate(col, slotTime) {
+  editingAppointmentId = null;
+  selectedPatient = null;
+  document.getElementById("booking-modal-title").textContent = "New Appointment";
+  document.getElementById("btn-booking-delete").classList.add("hidden");
+  
+  document.getElementById("booking-patient-search").value = "";
+  document.getElementById("booking-patient-search").classList.remove("hidden");
+  document.getElementById("patient-search-results").innerHTML = "";
+  document.getElementById("patient-search-results").classList.add("hidden");
+  document.getElementById("selected-patient-display").classList.add("hidden");
+  
+  populatePractitionerDropdown(col.practitioner_ahpra);
+  populateTypeDropdown();
+  
+  const yyyy = diaryDate.getFullYear();
+  const mm = String(diaryDate.getMonth() + 1).padStart(2, "0");
+  const dd = String(diaryDate.getDate()).padStart(2, "0");
+  document.getElementById("booking-date").value = `${yyyy}-${mm}-${dd}`;
+  document.getElementById("booking-time").value = slotTime;
+  
+  const defaultDuration = col.slot_interval_minutes || activeTemplate.slot_defaults.interval_minutes || 15;
+  document.getElementById("booking-duration").value = defaultDuration;
+  
+  document.getElementById("booking-status").value = "Booked";
+  document.getElementById("booking-reason").value = "";
+  document.getElementById("booking-error").classList.add("hidden");
+  
+  document.getElementById("booking-modal").classList.remove("hidden");
+}
+
+function openBookingModalForEdit(appt) {
+  editingAppointmentId = appt.id;
+  selectedPatient = appt.patient;
+  document.getElementById("booking-modal-title").textContent = "Edit Appointment";
+  document.getElementById("btn-booking-delete").classList.remove("hidden");
+  
+  document.getElementById("booking-patient-search").classList.add("hidden");
+  document.getElementById("patient-search-results").classList.add("hidden");
+  document.getElementById("selected-patient-display").classList.remove("hidden");
+  document.getElementById("selected-patient-text").textContent = 
+    `${appt.patient.first_name} ${appt.patient.last_name} (DOB: ${appt.patient.date_of_birth})`;
+  document.getElementById("btn-clear-patient").classList.add("hidden");
+  
+  populatePractitionerDropdown(appt.practitioner?.ahpra_number);
+  populateTypeDropdown(appt.appointment_type_id || appt.appointment_type?.id);
+  
+  let dateStr = appt.appointment_date;
+  if (dateStr && dateStr.includes("T")) dateStr = dateStr.split("T")[0];
+  document.getElementById("booking-date").value = dateStr;
+  
+  let timeStr = appt.start_time_local;
+  if (timeStr && timeStr.length > 5) timeStr = timeStr.slice(0, 5);
+  document.getElementById("booking-time").value = timeStr;
+  
+  document.getElementById("booking-duration").value = appt.duration_minutes || 15;
+  document.getElementById("booking-status").value = appt.status || "Booked";
+  document.getElementById("booking-reason").value = appt.reason || "";
+  document.getElementById("booking-error").classList.add("hidden");
+  
+  document.getElementById("booking-modal").classList.remove("hidden");
+}
+
+function closeBookingModal() {
+  document.getElementById("booking-modal").classList.add("hidden");
+  editingAppointmentId = null;
+  selectedPatient = null;
+}
+
+function populatePractitionerDropdown(selectedAhpra) {
+  const select = document.getElementById("booking-practitioner");
+  select.innerHTML = "";
+  
+  activeTemplate.columns.forEach(col => {
+    if (col.practitioner_ahpra) {
+      const opt = document.createElement("option");
+      opt.value = col.practitioner_ahpra;
+      opt.textContent = `${col.assignment} (${col.room_label})`;
+      if (col.practitioner_ahpra === selectedAhpra) {
+        opt.selected = true;
+      }
+      select.appendChild(opt);
+    }
+  });
+}
+
+function populateTypeDropdown(selectedTypeId) {
+  const select = document.getElementById("booking-type");
+  select.innerHTML = "";
+  
+  const emptyOpt = document.createElement("option");
+  emptyOpt.value = "";
+  emptyOpt.textContent = "— Select Type —";
+  select.appendChild(emptyOpt);
+  
+  activeTypes.forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t.id;
+    opt.textContent = `${t.name} (${t.default_duration} mins)`;
+    if (t.id === selectedTypeId) {
+      opt.selected = true;
+    }
+    select.appendChild(opt);
+  });
+}
+
+function renderSearchResults(results) {
+  const dropdown = document.getElementById("patient-search-results");
+  dropdown.innerHTML = "";
+  
+  if (results.length === 0) {
+    const item = document.createElement("div");
+    item.className = "search-result-item";
+    item.style.color = "var(--grey-3)";
+    item.textContent = "No patients found.";
+    dropdown.appendChild(item);
+    dropdown.classList.remove("hidden");
+    return;
+  }
+  
+  results.forEach(p => {
+    const item = document.createElement("div");
+    item.className = "search-result-item";
+    item.textContent = `${p.first_name} ${p.last_name} (DOB: ${p.date_of_birth})`;
+    item.onclick = () => selectPatientForBooking(p);
+    dropdown.appendChild(item);
+  });
+  
+  dropdown.classList.remove("hidden");
+}
+
+function selectPatientForBooking(patient) {
+  selectedPatient = patient;
+  document.getElementById("booking-patient-search").classList.add("hidden");
+  document.getElementById("patient-search-results").classList.add("hidden");
+  document.getElementById("selected-patient-display").classList.remove("hidden");
+  document.getElementById("selected-patient-text").textContent = 
+    `${patient.first_name} ${patient.last_name} (DOB: ${patient.date_of_birth})`;
+  document.getElementById("btn-clear-patient").classList.remove("hidden");
+}
+
+async function saveBooking() {
+  const errorEl = document.getElementById("booking-error");
+  errorEl.classList.add("hidden");
+  errorEl.textContent = "";
+  
+  if (!selectedPatient) {
+    errorEl.textContent = "Please select a patient.";
+    errorEl.classList.remove("hidden");
+    return;
+  }
+  
+  const ahpra = document.getElementById("booking-practitioner").value;
+  const practitioner = ahpraToPractitionerMap[ahpra];
+  if (!practitioner || !practitioner.id) {
+    errorEl.textContent = "Practitioner ID not found. Verify practitioner column data.";
+    errorEl.classList.remove("hidden");
+    return;
+  }
+  
+  const typeId = document.getElementById("booking-type").value || null;
+  const dateVal = document.getElementById("booking-date").value;
+  const timeVal = document.getElementById("booking-time").value;
+  const duration = parseInt(document.getElementById("booking-duration").value, 10);
+  const statusVal = document.getElementById("booking-status").value;
+  const reason = document.getElementById("booking-reason").value.trim();
+  
+  if (!dateVal || !timeVal || isNaN(duration)) {
+    errorEl.textContent = "Date, time, and duration are required.";
+    errorEl.classList.remove("hidden");
+    return;
+  }
+  
+  const saveBtn = document.getElementById("btn-booking-save");
+  saveBtn.disabled = true;
+  
+  try {
+    const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
+    if (editingAppointmentId) {
+      if (isSmokeMode) {
+        const appt = mockAppointmentsCache.find(x => x.id === editingAppointmentId);
+        if (appt) {
+          appt.start_time_local = timeVal;
+          appt.duration_minutes = duration;
+          appt.status = statusVal;
+          appt.practitioner.ahpra_number = ahpra;
+          appt.reason = reason;
+          appt.appointment_type_id = typeId;
+          const foundType = activeTypes.find(t => t.id === typeId);
+          appt.appointment_type = foundType || null;
+        }
+      } else {
+        const updateRes = await apiFetch(`/appointments/${editingAppointmentId}`, {
+          method: "PUT",
+          body: JSON.stringify({
+            practitioner_id: practitioner.id,
+            appointment_type_id: typeId,
+            appointment_date: dateVal,
+            start_time_local: timeVal,
+            duration_minutes: duration,
+            reason: reason
+          })
+        });
+        if (!updateRes.ok) {
+          const text = await updateRes.text();
+          throw new Error(`Update failed: ${updateRes.status} ${text}`);
+        }
+        
+        const statusRes = await apiFetch(`/appointments/${editingAppointmentId}/status`, {
+          method: "PATCH",
+          body: JSON.stringify({ status: statusVal })
+        });
+        if (!statusRes.ok) {
+          const text = await statusRes.text();
+          throw new Error(`Status update failed: ${statusRes.status} ${text}`);
+        }
+      }
+      setStatus("Booking updated successfully.");
+    } else {
+      if (isSmokeMode) {
+        const newAppt = {
+          id: "smoke-appt-" + (mockAppointmentsCache.length + 1),
+          appointment_date: dateVal,
+          start_time_local: timeVal,
+          duration_minutes: duration,
+          status: statusVal,
+          practitioner: { ahpra_number: ahpra, id: practitioner.id, first_name: practitioner.first_name, last_name: practitioner.last_name },
+          patient: selectedPatient,
+          reason: reason,
+          appointment_type_id: typeId,
+          appointment_type: activeTypes.find(t => t.id === typeId) || null
+        };
+        mockAppointmentsCache.push(newAppt);
+      } else {
+        const createRes = await apiFetch(`/appointments`, {
+          method: "POST",
+          body: JSON.stringify({
+            patient_id: selectedPatient.id,
+            practitioner_id: practitioner.id,
+            appointment_type_id: typeId,
+            appointment_date: dateVal,
+            start_time_local: timeVal,
+            duration_minutes: duration,
+            reason: reason
+          })
+        });
+        if (!createRes.ok) {
+          const text = await createRes.text();
+          throw new Error(`Create failed: ${createRes.status} ${text}`);
+        }
+        const newApptObj = await createRes.json();
+        
+        if (statusVal !== "Booked") {
+          const statusRes = await apiFetch(`/appointments/${newApptObj.id}/status`, {
+            method: "PATCH",
+            body: JSON.stringify({ status: statusVal })
+          });
+          if (!statusRes.ok) {
+            const text = await statusRes.text();
+            throw new Error(`Set status failed: ${statusRes.status} ${text}`);
+          }
+        }
+      }
+      setStatus("Booking created successfully.");
+    }
+    
+    closeBookingModal();
+    await loadDiary(true);
+  } catch (err) {
+    console.error(err);
+    errorEl.textContent = err.message || "An error occurred while saving the booking.";
+    errorEl.classList.remove("hidden");
+  } finally {
+    saveBtn.disabled = false;
+  }
+}
+
+async function deleteBooking() {
+  if (!editingAppointmentId) return;
+  
+  if (!confirm("Are you sure you want to delete this appointment?")) {
+    return;
+  }
+  
+  const errorEl = document.getElementById("booking-error");
+  errorEl.classList.add("hidden");
+  
+  const deleteBtn = document.getElementById("btn-booking-delete");
+  deleteBtn.disabled = true;
+  
+  try {
+    const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
+    if (isSmokeMode) {
+      mockAppointmentsCache = mockAppointmentsCache.filter(x => x.id !== editingAppointmentId);
+      setStatus("Booking deleted (Mock).");
+    } else {
+      const res = await apiFetch(`/appointments/${editingAppointmentId}`, {
+        method: "DELETE"
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Delete failed: ${res.status} ${text}`);
+      }
+      setStatus("Booking deleted successfully.");
+    }
+    closeBookingModal();
+    await loadDiary(true);
+  } catch (err) {
+    console.error(err);
+    errorEl.textContent = err.message || "An error occurred while deleting the booking.";
+    errorEl.classList.remove("hidden");
+  } finally {
+    deleteBtn.disabled = false;
+  }
+}
