@@ -365,6 +365,10 @@ function timeRangeLabel(startMins, endMins) {
   return `${fromMins(startMins)}-${fromMins(endMins)}`;
 }
 
+function isBlockingAppointment(appt) {
+  return !["Cancelled", "NoShow", "DNA"].includes(appt.status);
+}
+
 function isOnMajorGrid(mins, template) {
   const interval = template.slot_defaults.interval_minutes || 15;
   return (mins - toMins(template.slot_defaults.start)) % interval === 0;
@@ -536,6 +540,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
 
   const columns = template.columns;
   const dayStartMins = toMins(template.slot_defaults.start);
+  const dayEndMins = toMins(template.slot_defaults.end);
   const intervalMins = template.slot_defaults.interval_minutes || 15;
 
   // ── 1. Create Time Column ──────────────────────────────────
@@ -695,6 +700,33 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       a._laneIdx = laneIdx;
     });
 
+    // Transparent hit targets make small free gaps bookable even inside a
+    // larger visible grid row. Appointment cards render above these targets.
+    const blockers = [];
+    colBreaks.forEach(b => {
+      blockers.push({ start: toMins(b.from), end: toMins(b.to) });
+    });
+    colAppts.forEach(a => {
+      if (!isBlockingAppointment(a)) return;
+      const start = toMins(apptTimeKey(a));
+      const duration = Math.max(apptDurationMins(a, intervalMins), MIN_TIME_INCREMENT_MINS);
+      blockers.push({ start, end: start + duration });
+    });
+    blockers.sort((a, b) => a.start - b.start || a.end - b.end);
+
+    let gapStart = dayStartMins;
+    blockers.forEach(blocker => {
+      const start = Math.max(blocker.start, dayStartMins);
+      const end = Math.min(blocker.end, dayEndMins);
+      if (start - gapStart >= MIN_TIME_INCREMENT_MINS) {
+        appendBookingGapTarget(columnBody, col, gapStart, start, dayStartMins, intervalMins);
+      }
+      if (end > gapStart) gapStart = end;
+    });
+    if (dayEndMins - gapStart >= MIN_TIME_INCREMENT_MINS) {
+      appendBookingGapTarget(columnBody, col, gapStart, dayEndMins, dayStartMins, intervalMins);
+    }
+
     // Render appointments
     colAppts.forEach(a => {
       const start = toMins(apptTimeKey(a));
@@ -750,7 +782,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       if (isIrregular) {
         appendTimeEdges(span, start, end);
       }
-      if (a.reason && duration >= intervalMins * 2) {
+      if (a.reason && heightPx >= 20) {
         const reason = document.createElement("span");
         reason.className = "appt-reason";
         reason.textContent = a.reason;
@@ -884,6 +916,25 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
   document.getElementById("diary-grid").classList.remove("hidden");
   showLoading(false);
   showError("");
+}
+
+function appendBookingGapTarget(columnBody, col, start, end, dayStartMins, intervalMins) {
+  if (!col.practitioner_ahpra) return;
+
+  const topPx = (start - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
+  const heightPx = Math.max((end - start) * (SLOT_HEIGHT_PX / intervalMins), 6);
+  const gap = document.createElement("button");
+  gap.type = "button";
+  gap.className = "booking-gap-target";
+  gap.style.top = `${topPx}px`;
+  gap.style.height = `${heightPx}px`;
+  gap.title = `Book ${timeRangeLabel(start, end)} in ${col.room_label}`;
+  gap.setAttribute("aria-label", `Book appointment at ${fromMins(start)} in ${col.room_label}`);
+  gap.addEventListener("click", e => {
+    e.stopPropagation();
+    openBookingModalForCreate(col, fromMins(start));
+  });
+  columnBody.appendChild(gap);
 }
 
 // ─── BREAK EDIT MODAL ─────────────────────────────────────
@@ -1376,7 +1427,10 @@ function openBookingModalForEdit(appt) {
   editingAppointmentId = appt.id;
   selectedPatient = appt.patient;
   document.getElementById("booking-modal-title").textContent = "Edit Appointment";
-  document.getElementById("btn-booking-delete").classList.remove("hidden");
+  const cancelBtn = document.getElementById("btn-booking-delete");
+  cancelBtn.classList.remove("hidden");
+  cancelBtn.dataset.confirming = "";
+  cancelBtn.textContent = "Cancel Appointment";
   
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
@@ -1482,6 +1536,27 @@ function selectPatientForBooking(patient) {
   document.getElementById("btn-clear-patient").classList.remove("hidden");
 }
 
+async function apiErrorMessage(res, action) {
+  const text = await res.text();
+  try {
+    const data = JSON.parse(text);
+    const detail = data.detail || data;
+    if (res.status === 409 && detail && typeof detail === "object") {
+      const start = detail.conflicting_start_time ? new Date(detail.conflicting_start_time) : null;
+      const end = detail.conflicting_end_time ? new Date(detail.conflicting_end_time) : null;
+      const range = start && end && !Number.isNaN(start.valueOf()) && !Number.isNaN(end.valueOf())
+        ? ` ${String(start.getHours()).padStart(2, "0")}:${String(start.getMinutes()).padStart(2, "0")}-${String(end.getHours()).padStart(2, "0")}:${String(end.getMinutes()).padStart(2, "0")}`
+        : "";
+      return `${action} failed: appointment conflicts with an existing booking${range}.`;
+    }
+    if (typeof detail === "string") return `${action} failed: ${detail}`;
+    if (detail?.message) return `${action} failed: ${detail.message}`;
+  } catch (_) {
+    // Use the raw response text below.
+  }
+  return `${action} failed: ${res.status}${text ? ` ${text}` : ""}`;
+}
+
 async function saveBooking() {
   const errorEl = document.getElementById("booking-error");
   errorEl.classList.add("hidden");
@@ -1545,8 +1620,7 @@ async function saveBooking() {
           })
         });
         if (!updateRes.ok) {
-          const text = await updateRes.text();
-          throw new Error(`Update failed: ${updateRes.status} ${text}`);
+          throw new Error(await apiErrorMessage(updateRes, "Update"));
         }
         
         const statusRes = await apiFetch(`/appointments/${editingAppointmentId}/status`, {
@@ -1554,8 +1628,7 @@ async function saveBooking() {
           body: JSON.stringify({ status: statusVal })
         });
         if (!statusRes.ok) {
-          const text = await statusRes.text();
-          throw new Error(`Status update failed: ${statusRes.status} ${text}`);
+          throw new Error(await apiErrorMessage(statusRes, "Status update"));
         }
       }
       setStatus("Booking updated successfully.");
@@ -1588,8 +1661,7 @@ async function saveBooking() {
           })
         });
         if (!createRes.ok) {
-          const text = await createRes.text();
-          throw new Error(`Create failed: ${createRes.status} ${text}`);
+          throw new Error(await apiErrorMessage(createRes, "Create"));
         }
         const newApptObj = await createRes.json();
         
@@ -1599,8 +1671,7 @@ async function saveBooking() {
             body: JSON.stringify({ status: statusVal })
           });
           if (!statusRes.ok) {
-            const text = await statusRes.text();
-            throw new Error(`Set status failed: ${statusRes.status} ${text}`);
+            throw new Error(await apiErrorMessage(statusRes, "Set status"));
           }
         }
       }
@@ -1620,15 +1691,18 @@ async function saveBooking() {
 
 async function deleteBooking() {
   if (!editingAppointmentId) return;
-  
-  if (!confirm("Are you sure you want to cancel this appointment?")) {
+
+  const deleteBtn = document.getElementById("btn-booking-delete");
+  const errorEl = document.getElementById("booking-error");
+  if (deleteBtn.dataset.confirming !== "true") {
+    deleteBtn.dataset.confirming = "true";
+    deleteBtn.textContent = "Confirm Cancel";
+    errorEl.textContent = "This will cancel the whole appointment, not just close the editor. Click Confirm Cancel to continue.";
+    errorEl.classList.remove("hidden");
     return;
   }
-  
-  const errorEl = document.getElementById("booking-error");
+
   errorEl.classList.add("hidden");
-  
-  const deleteBtn = document.getElementById("btn-booking-delete");
   deleteBtn.disabled = true;
   
   try {

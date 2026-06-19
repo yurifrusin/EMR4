@@ -29,7 +29,10 @@ reviewed, integrated, verified, pushed, and audited.
 - The former "delete" action is represented as cancellation because the current
   backend `DELETE` route status-cancels an appointment rather than hard-deleting
   it.
-- Diary asset cache-bust moved to `v=44`.
+- User-review hotfix: normal 15-minute appointment reasons now render in cards,
+  off-grid/free 5-minute gaps are clickable, appointment conflict errors are
+  human-readable, and cancellation now uses an explicit in-modal confirmation.
+- Diary asset cache-bust moved to `v=45`.
 - Added `orchestration/booking_create_edit_review.md` for the Sprint 8 API/UI
   review path, including exact PowerShell snippets.
 
@@ -47,10 +50,13 @@ After the final push has deployed:
    without silently changing the grid.
 5. Use Cancel Booking on the test appointment and confirm it becomes visually
    terminal/non-active rather than disappearing as a hard delete.
-6. Narrow the diary window and confirm the create/edit modal and expanded card
+6. Create a 5-minute booking in a visible free gap between two existing
+   appointments and confirm unusual start/end times show via the hover edge
+   labels.
+7. Narrow the diary window and confirm the create/edit modal and expanded card
    controls remain usable without crowding patient names, notes, status controls,
    breaks, Refresh, Now, or date navigation.
-7. Optionally run the PowerShell API snippets in
+8. Optionally run the PowerShell API snippets in
    `orchestration/booking_create_edit_review.md` for direct API confirmation.
 
 ## Not Required Before Moving On
