@@ -900,7 +900,13 @@ function appendBookingGapTarget(columnBody, col, start, end, dayStartMins, inter
   gap.setAttribute("aria-label", `Book appointment at ${fromMins(start)} in ${col.room_label}`);
   gap.addEventListener("click", e => {
     e.stopPropagation();
-    openBookingModalForCreate(col, fromMins(start));
+    const rect = gap.getBoundingClientRect();
+    const offsetY = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
+    const rawMins = start + (offsetY * intervalMins / SLOT_HEIGHT_PX);
+    const roundedOffset = Math.floor((rawMins - start) / MIN_TIME_INCREMENT_MINS) * MIN_TIME_INCREMENT_MINS;
+    const latestStart = Math.max(start, end - MIN_TIME_INCREMENT_MINS);
+    const clickedMins = Math.max(start, Math.min(start + roundedOffset, latestStart));
+    openBookingModalForCreate(col, fromMins(clickedMins));
   });
   columnBody.appendChild(gap);
 }
@@ -1253,11 +1259,18 @@ Office.onReady(() => {
 
   document.getElementById("btn-booking-close").onclick = closeBookingModal;
   document.getElementById("btn-booking-delete").onclick = deleteBooking;
+  document.getElementById("btn-booking-save").onclick = saveBooking;
   const bookingForm = document.getElementById("booking-form");
   if (bookingForm) {
     bookingForm.addEventListener("submit", e => {
       e.preventDefault();
       saveBooking();
+    });
+    bookingForm.addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        e.preventDefault();
+        saveBooking();
+      }
     });
   }
 

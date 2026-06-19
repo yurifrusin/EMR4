@@ -405,10 +405,14 @@ html, body {
   z-index: 6;
 }
 
-.booking-gap-target:hover,
+.booking-gap-target:hover {
+  background: transparent;
+  outline: none;
+}
+
 .booking-gap-target:focus-visible {
-  background: rgba(47, 128, 237, 0.08);
-  outline: 1px dashed rgba(47, 128, 237, 0.7);
+  background: transparent;
+  outline: 1px dotted rgba(47, 128, 237, 0.45);
   outline-offset: -1px;
 }
 

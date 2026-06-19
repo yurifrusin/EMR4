@@ -93,6 +93,10 @@ reviewed, integrated, verified, pushed, and audited.
 - Practitioner mapping in the diary modal depends on AHPRA-to-ID data discoverable
   from roster or appointments. Non-practitioner/label-only rooms should not be
   treated as fully bookable yet.
+- User-review hotfix: the booking save button is wired directly again after the
+  modal footer moved outside the form, Enter-to-save is preserved inside the
+  booking form, and broad free-session booking targets now calculate the clicked
+  5-minute time rather than always using the start of the free block.
 
 ## Verification
 
@@ -111,6 +115,8 @@ to run.
   `git diff --check`, and
   `.venv\Scripts\python.exe -m pytest tests\test_diary_template.py tests\test_diary_roster.py -q`
   -> 19 passed
+- Booking modal/gap-target hotfix verification: `node --check docs\diary\diary.js`
+  and `git diff --check` -> passed
 - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 8 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_patient_flow.py -q` -> 20 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_create_edit.py tests\test_booking_patient_flow.py tests\test_appointment_conflicts.py tests\test_appointment_status_mutations.py tests\test_waiting_room.py tests\test_slots.py tests\test_patients.py -q` -> 113 passed
