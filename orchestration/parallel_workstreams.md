@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
+| Status | Integrated, pending user review |
 | Launch Gate | Complete |
-| Integration Gate | Pending |
+| Integration Gate | Complete |
 | Theme | Harden the practical patient-flow layer before drag/drop/resize and roster-admin work |
 
 ### Workstream Z - Booking Patient-Flow Contract
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Appointment schemas/router/models as needed, focused appointment create/edit/status/waiting-room/slots tests |
 | Out of Scope | Diary frontend, drag/drop/resize UI, roster admin UI, taskpane/Command Centre/Gemini, patient search/New Patient work |
 | Verification | Focused appointment pytest suites plus any new patient-flow contract tests |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AA - Diary Patient-Flow Workbench
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` |
 | Out of Scope | Backend routes/models/tests/migrations, drag/drop, resize handles, roster admin UI, online booking portal, patient import tooling |
 | Verification | JS syntax plus live/smoke/narrow create/edit/status/patient-flow visual checks |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AB - Patient Search and New Patient Hardening
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Focused patient tests, `app/routers/patients.py`, `app/schemas/patients.py`, `create_patient_file.py`, seed/test helpers only as needed |
 | Out of Scope | OneDrive import tools, diary frontend, appointment/status routes, taskpane UI, Command Centre, Gemini/AI behaviour |
 | Verification | Focused patient pytest suite, `git diff --check`, generator smoke test if touched |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 8: Booking Create/Edit First Slice
 

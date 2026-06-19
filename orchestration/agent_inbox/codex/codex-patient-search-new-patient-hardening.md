@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/patient-search-new-patient-hardening` |
-| Status | submitted |
+| Status | integrated |
 | Created | 14bc9e4 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-patient-search-new-patient-hardening --commit-message "Patient search new patient hardening" --message "codex-patient-search-new-patient-hardening ready for Codex review"` |

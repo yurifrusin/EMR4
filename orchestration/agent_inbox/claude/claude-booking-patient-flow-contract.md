@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 14bc9e4 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent claude --task claude-booking-patient-flow-contract --commit-message "Booking and patient-flow contract" --message "claude-booking-patient-flow-contract ready for Codex review"` |

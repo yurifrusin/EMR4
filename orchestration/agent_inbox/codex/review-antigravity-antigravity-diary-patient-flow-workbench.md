@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-patient-flow-workbench` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -34,5 +34,8 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into Sprint 9 after removing trailing whitespace
+  from diary assets and the source packet. `node --check docs\diary\diary.js`
+  and `git diff --check` passed after cleanup.
+- Follow-up required: User should manually review the patient-flow panel in live
+  diary mode, especially narrow-window overlay behaviour and status action flow.

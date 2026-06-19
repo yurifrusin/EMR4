@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-booking-patient-flow-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -41,5 +41,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into Sprint 9. Focused appointment patient-flow
+  contract tests passed as part of the 113-test sequential backend run.
+- Follow-up required: Keep test DB runs sequential until the enum/schema reset
+  issue is fixed at fixture level.

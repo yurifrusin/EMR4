@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/patient-search-new-patient-hardening` |
 | Source Task | `codex-patient-search-new-patient-hardening` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,8 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into Sprint 9. `tests\test_patients.py` passed and
+  the patient tests passed again inside the 113-test sequential backend run.
+- Follow-up required: No backend-only manual test required, but the closeout asks
+  the user to create/search a New Patient through the taskpane as a practical
+  end-to-end check.

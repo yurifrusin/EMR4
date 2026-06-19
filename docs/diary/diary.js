@@ -627,7 +627,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         empty.className = "slot-empty";
         empty.textContent = "»";
         slotDiv.appendChild(empty);
-        
+
         slotDiv.style.cursor = "pointer";
         slotDiv.title = `Book appointment at ${slotTime} in ${col.room_label}`;
         slotDiv.onclick = (e) => {
@@ -1269,7 +1269,7 @@ Office.onReady(() => {
         document.getElementById("patient-search-results").classList.add("hidden");
         return;
       }
-      
+
       searchTimeout = setTimeout(async () => {
         try {
           let results = [];
@@ -1331,10 +1331,10 @@ Office.onReady(() => {
   // Patient Flow toggle hooks
   const btnToggleFlow = document.getElementById("btn-toggle-flow");
   if (btnToggleFlow) btnToggleFlow.onclick = toggleFlowPanel;
-  
+
   const btnCloseFlow = document.getElementById("btn-close-flow");
   if (btnCloseFlow) btnCloseFlow.onclick = toggleFlowPanel;
-  
+
   const flowOpen = localStorage.getItem("emr4_diary_flow_open");
   if (flowOpen === "true") {
     document.getElementById("diary-flow-panel")?.classList.remove("hidden");
@@ -1379,8 +1379,8 @@ function searchMockPatients(q) {
     { id: "smoke-pat-4", first_name: "John", last_name: "Smith", date_of_birth: "1978-08-20", medicare_number: "42345678904" },
     { id: "smoke-pat-5", first_name: "Nora", last_name: "Patel", date_of_birth: "1982-04-10", medicare_number: "52345678905" }
   ];
-  return allMocks.filter(p => 
-    p.first_name.toLowerCase().includes(query) || 
+  return allMocks.filter(p =>
+    p.first_name.toLowerCase().includes(query) ||
     p.last_name.toLowerCase().includes(query) ||
     p.medicare_number.includes(query)
   );
@@ -1391,29 +1391,29 @@ function openBookingModalForCreate(col, slotTime) {
   selectedPatient = null;
   document.getElementById("booking-modal-title").textContent = "New Appointment";
   document.getElementById("btn-booking-delete").classList.add("hidden");
-  
+
   document.getElementById("booking-patient-search").value = "";
   document.getElementById("booking-patient-search").classList.remove("hidden");
   document.getElementById("patient-search-results").innerHTML = "";
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.add("hidden");
-  
+
   populatePractitionerDropdown(col.practitioner_ahpra);
   populateTypeDropdown();
-  
+
   const yyyy = diaryDate.getFullYear();
   const mm = String(diaryDate.getMonth() + 1).padStart(2, "0");
   const dd = String(diaryDate.getDate()).padStart(2, "0");
   document.getElementById("booking-date").value = `${yyyy}-${mm}-${dd}`;
   document.getElementById("booking-time").value = slotTime;
-  
+
   const defaultDuration = col.slot_interval_minutes || activeTemplate.slot_defaults.interval_minutes || 15;
   document.getElementById("booking-duration").value = defaultDuration;
-  
+
   document.getElementById("booking-status").value = "Booked";
   document.getElementById("booking-reason").value = "";
   document.getElementById("booking-error").classList.add("hidden");
-  
+
   document.getElementById("booking-modal").classList.remove("hidden");
 }
 
@@ -1425,30 +1425,30 @@ function openBookingModalForEdit(appt) {
   cancelBtn.classList.remove("hidden");
   cancelBtn.dataset.confirming = "";
   cancelBtn.textContent = "Cancel Appointment";
-  
+
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.remove("hidden");
-  document.getElementById("selected-patient-text").textContent = 
+  document.getElementById("selected-patient-text").textContent =
     `${appt.patient.first_name} ${appt.patient.last_name} (DOB: ${appt.patient.date_of_birth})`;
   document.getElementById("btn-clear-patient").classList.add("hidden");
-  
+
   populatePractitionerDropdown(appt.practitioner?.ahpra_number);
   populateTypeDropdown(appt.appointment_type_id || appt.appointment_type?.id);
-  
+
   let dateStr = appt.appointment_date;
   if (dateStr && dateStr.includes("T")) dateStr = dateStr.split("T")[0];
   document.getElementById("booking-date").value = dateStr;
-  
+
   let timeStr = appt.start_time_local;
   if (timeStr && timeStr.length > 5) timeStr = timeStr.slice(0, 5);
   document.getElementById("booking-time").value = timeStr;
-  
+
   document.getElementById("booking-duration").value = appt.duration_minutes || 15;
   document.getElementById("booking-status").value = appt.status || "Booked";
   document.getElementById("booking-reason").value = appt.reason || "";
   document.getElementById("booking-error").classList.add("hidden");
-  
+
   document.getElementById("booking-modal").classList.remove("hidden");
 }
 
@@ -1461,7 +1461,7 @@ function closeBookingModal() {
 function populatePractitionerDropdown(selectedAhpra) {
   const select = document.getElementById("booking-practitioner");
   select.innerHTML = "";
-  
+
   activeTemplate.columns.forEach(col => {
     if (col.practitioner_ahpra) {
       const opt = document.createElement("option");
@@ -1478,12 +1478,12 @@ function populatePractitionerDropdown(selectedAhpra) {
 function populateTypeDropdown(selectedTypeId) {
   const select = document.getElementById("booking-type");
   select.innerHTML = "";
-  
+
   const emptyOpt = document.createElement("option");
   emptyOpt.value = "";
   emptyOpt.textContent = "— Select Type —";
   select.appendChild(emptyOpt);
-  
+
   activeTypes.forEach(t => {
     const opt = document.createElement("option");
     opt.value = t.id;
@@ -1498,7 +1498,7 @@ function populateTypeDropdown(selectedTypeId) {
 function renderSearchResults(results) {
   const dropdown = document.getElementById("patient-search-results");
   dropdown.innerHTML = "";
-  
+
   if (results.length === 0) {
     const item = document.createElement("div");
     item.className = "search-result-item";
@@ -1508,7 +1508,7 @@ function renderSearchResults(results) {
     dropdown.classList.remove("hidden");
     return;
   }
-  
+
   results.forEach(p => {
     const item = document.createElement("div");
     item.className = "search-result-item";
@@ -1516,7 +1516,7 @@ function renderSearchResults(results) {
     item.onclick = () => selectPatientForBooking(p);
     dropdown.appendChild(item);
   });
-  
+
   dropdown.classList.remove("hidden");
 }
 
@@ -1525,7 +1525,7 @@ function selectPatientForBooking(patient) {
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.remove("hidden");
-  document.getElementById("selected-patient-text").textContent = 
+  document.getElementById("selected-patient-text").textContent =
     `${patient.first_name} ${patient.last_name} (DOB: ${patient.date_of_birth})`;
   document.getElementById("btn-clear-patient").classList.remove("hidden");
 }
@@ -1555,13 +1555,13 @@ async function saveBooking() {
   const errorEl = document.getElementById("booking-error");
   errorEl.classList.add("hidden");
   errorEl.textContent = "";
-  
+
   if (!selectedPatient) {
     errorEl.textContent = "Please select a patient.";
     errorEl.classList.remove("hidden");
     return;
   }
-  
+
   const ahpra = document.getElementById("booking-practitioner").value;
   const practitioner = ahpraToPractitionerMap[ahpra];
   if (!practitioner || !practitioner.id) {
@@ -1569,23 +1569,23 @@ async function saveBooking() {
     errorEl.classList.remove("hidden");
     return;
   }
-  
+
   const typeId = document.getElementById("booking-type").value || null;
   const dateVal = document.getElementById("booking-date").value;
   const timeVal = document.getElementById("booking-time").value;
   const duration = parseInt(document.getElementById("booking-duration").value, 10);
   const statusVal = document.getElementById("booking-status").value;
   const reason = document.getElementById("booking-reason").value.trim();
-  
+
   if (!dateVal || !timeVal || isNaN(duration)) {
     errorEl.textContent = "Date, time, and duration are required.";
     errorEl.classList.remove("hidden");
     return;
   }
-  
+
   const saveBtn = document.getElementById("btn-booking-save");
   saveBtn.disabled = true;
-  
+
   try {
     const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
     if (editingAppointmentId) {
@@ -1616,7 +1616,7 @@ async function saveBooking() {
         if (!updateRes.ok) {
           throw new Error(await apiErrorMessage(updateRes, "Update"));
         }
-        
+
         const statusRes = await apiFetch(`/appointments/${editingAppointmentId}/status`, {
           method: "PATCH",
           body: JSON.stringify({ status: statusVal })
@@ -1658,7 +1658,7 @@ async function saveBooking() {
           throw new Error(await apiErrorMessage(createRes, "Create"));
         }
         const newApptObj = await createRes.json();
-        
+
         if (statusVal !== "Booked") {
           const statusRes = await apiFetch(`/appointments/${newApptObj.id}/status`, {
             method: "PATCH",
@@ -1671,7 +1671,7 @@ async function saveBooking() {
       }
       setStatus("Booking created successfully.");
     }
-    
+
     closeBookingModal();
     await loadDiary(true);
   } catch (err) {
@@ -1698,7 +1698,7 @@ async function deleteBooking() {
 
   errorEl.classList.add("hidden");
   deleteBtn.disabled = true;
-  
+
   try {
     const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
     if (isSmokeMode) {
@@ -1731,7 +1731,7 @@ let todayAppointments = [];
 async function setAppointmentStatus(appt, newStatus, selectEl = null) {
   if (selectEl) selectEl.disabled = true;
   setStatus("Updating status...");
-  
+
   try {
     if (isSmokeMode()) {
       appt.status = newStatus;
@@ -1798,7 +1798,7 @@ async function loadTodayAppointments() {
     todayAppointments = activeAppointments;
     return;
   }
-  
+
   if (isSmokeMode()) {
     todayAppointments = getMockAppointments().filter(a => {
       let dateStr = a.appointment_date;
@@ -1808,7 +1808,7 @@ async function loadTodayAppointments() {
     });
     return;
   }
-  
+
   try {
     const todayStart = new Date();
     todayStart.setHours(0, 0, 0, 0);
@@ -1827,15 +1827,15 @@ async function loadTodayAppointments() {
 async function updateFlowPanel() {
   const panel = document.getElementById("diary-flow-panel");
   if (!panel || panel.classList.contains("hidden")) return;
-  
+
   const waiting = [];
   const consult = [];
   const expected = [];
   const finished = [];
-  
+
   todayAppointments.forEach(a => {
     if (a.status === "Cancelled") return;
-    
+
     if (a.status === "Arrived") {
       waiting.push(a);
     } else if (a.status === "InConsult") {
@@ -1846,35 +1846,35 @@ async function updateFlowPanel() {
       finished.push(a);
     }
   });
-  
+
   const sortByTime = (x, y) => {
     const tX = apptTimeKey(x) || "00:00";
     const tY = apptTimeKey(y) || "00:00";
     return tX.localeCompare(tY);
   };
-  
+
   waiting.sort(sortByTime);
   consult.sort(sortByTime);
   expected.sort(sortByTime);
   finished.sort(sortByTime);
-  
+
   const secWaiting = document.querySelector("#flow-sec-waiting .flow-sec-count");
   if (secWaiting) secWaiting.textContent = waiting.length;
-  
+
   const secConsult = document.querySelector("#flow-sec-consult .flow-sec-count");
   if (secConsult) secConsult.textContent = consult.length;
-  
+
   const secExpected = document.querySelector("#flow-sec-expected .flow-sec-count");
   if (secExpected) secExpected.textContent = expected.length;
-  
+
   const secFinished = document.querySelector("#flow-sec-finished .flow-sec-count");
   if (secFinished) secFinished.textContent = finished.length;
-  
+
   renderFlowList("flow-list-waiting", waiting, "Start Consult", "InConsult");
   renderFlowList("flow-list-consult", consult, "Complete", "Completed");
   renderFlowList("flow-list-expected", expected, "Check In", "Arrived");
   renderFlowList("flow-list-finished", finished, null, null);
-  
+
   updateFlowBadgeCount();
 }
 
@@ -1882,7 +1882,7 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = "";
-  
+
   if (appts.length === 0) {
     const empty = document.createElement("div");
     empty.className = "flow-empty";
@@ -1890,19 +1890,19 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
     container.appendChild(empty);
     return;
   }
-  
+
   appts.forEach(a => {
     const card = document.createElement("div");
     card.className = `flow-card flow-card-${(a.status || "booked").toLowerCase()}`;
-    
+
     const header = document.createElement("div");
     header.className = "flow-card-header";
-    
+
     const name = document.createElement("span");
     name.className = "flow-card-name";
     name.textContent = `${a.patient.first_name} ${a.patient.last_name}`;
     header.appendChild(name);
-    
+
     const editBtn = document.createElement("button");
     editBtn.className = "flow-card-edit-btn";
     editBtn.type = "button";
@@ -1914,35 +1914,35 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
     };
     header.appendChild(editBtn);
     card.appendChild(header);
-    
+
     const details = document.createElement("div");
     details.className = "flow-card-details";
     const timeStr = apptTimeKey(a) || "09:00";
     const roomStr = a.practitioner ? `${a.practitioner.first_name} ${a.practitioner.last_name}` : "Room";
     details.textContent = `${timeStr} — ${roomStr}`;
     card.appendChild(details);
-    
+
     if (a.reason) {
       const reason = document.createElement("div");
       reason.className = "flow-card-reason";
       reason.textContent = a.reason;
       card.appendChild(reason);
     }
-    
+
     const footer = document.createElement("div");
     footer.className = "flow-card-footer";
-    
+
     const statusBadge = document.createElement("span");
     statusBadge.className = `flow-status-badge badge-${(a.status || "booked").toLowerCase()}`;
     statusBadge.textContent = getStatusLabel(a.status);
     footer.appendChild(statusBadge);
-    
+
     if (actionLabel && targetStatus) {
       const actionBtn = document.createElement("button");
       actionBtn.className = "flow-card-action-btn btn-primary-xs";
       actionBtn.type = "button";
       actionBtn.textContent = actionLabel;
-      
+
       let updatingCardStatus = false;
       actionBtn.onclick = async (e) => {
         e.stopPropagation();
@@ -1954,12 +1954,12 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
       };
       footer.appendChild(actionBtn);
     }
-    
+
     card.appendChild(footer);
-    
+
     card.onclick = (e) => {
       if (e.target.closest("button") || e.target.closest("select")) return;
-      
+
       const apptDate = new Date(a.appointment_date);
       if (!isSameClinicDay(diaryDate, apptDate)) {
         diaryDate = apptDate;
@@ -1969,7 +1969,7 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
         scrollToAppointment(a.id);
       }
     };
-    
+
     container.appendChild(card);
   });
 }
@@ -1980,7 +1980,7 @@ function scrollToAppointment(apptId) {
     el.scrollIntoView({ behavior: "smooth", block: "center" });
     el.classList.add("appt-highlight");
     setTimeout(() => el.classList.remove("appt-highlight"), 2000);
-    
+
     document.querySelectorAll(".appt-active").forEach(x => x.classList.remove("appt-active"));
     el.classList.add("appt-active");
   }
