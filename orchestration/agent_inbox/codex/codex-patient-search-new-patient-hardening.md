@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/patient-search-new-patient-hardening` |
-| Status | queued |
+| Status | submitted |
 | Created | 14bc9e4 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-patient-search-new-patient-hardening --commit-message "Patient search new patient hardening" --message "codex-patient-search-new-patient-hardening ready for Codex review"` |
@@ -62,12 +62,16 @@ Patient search/New Patient behaviour is covered by meaningful tests; any product
 
 ## Dissent / Risks
 
-Record concerns, alternative designs, or reasons this task should not be merged as-is.
+No dissent on the patient changes. Out-of-scope note: while checking the broader
+suite, the pre-existing appointment tests failed independently with appointment
+creation 500s and then test DB fixture errors (`practices` missing after teardown).
+Those failures were not caused by the patient-lane changes and should be handled
+by the appointment-contract lane or integration review.
 
 ## Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/routers/patients.py`, `tests/test_patients.py`, this task packet.
+- Verification run: `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 8 passed; reran after broader-suite failure -> 8 passed. `git diff --check` -> clean. `create_patient_file.py` was not touched; the `/patients/with-file` test generates a real `.docx` into pytest `tmp_path` as the generator smoke path.
+- Remaining risks: No user manual testing required for this backend-only hardening. Full `pytest tests -q` was attempted twice but timed out before completion; the existing appointment tests then failed separately with appointment-router/test-fixture errors outside this workstream.

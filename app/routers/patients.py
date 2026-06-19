@@ -52,7 +52,9 @@ def create_patient_with_file(
     try:
         # 1. Create the DB row without committing yet. If file generation fails,
         #    rollback removes the patient row as well.
-        patient = Patient(practice_id=current_user.practice_id, **body.model_dump())
+        patient_data = body.model_dump()
+        patient_data["document_url"] = None
+        patient = Patient(practice_id=current_user.practice_id, **patient_data)
         db.add(patient)
         db.flush()
 
