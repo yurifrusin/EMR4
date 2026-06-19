@@ -751,11 +751,14 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
 
       const selectLabel = document.createElement("label");
       selectLabel.className = "status-select-label";
+      const statusSelectId = `status-select-${a.id}`;
+      selectLabel.htmlFor = statusSelectId;
       selectLabel.textContent = "Status: ";
       statusChanger.appendChild(selectLabel);
 
       const statusSelect = document.createElement("select");
       statusSelect.className = "status-select";
+      statusSelect.id = statusSelectId;
       statusSelect.ariaLabel = "Change appointment status";
 
       const selectOptions = [

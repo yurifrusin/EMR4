@@ -59,6 +59,24 @@ def test_status_mutation_requires_auth(client, db, practice, practitioner, patie
     assert resp.status_code == 401
 
 
+def test_status_mutation_rejects_unknown_role_token(client, db, practice, practitioner, patient):
+    """A token with no mutating appointment role cannot patch appointment status."""
+    from app.services.auth_service import create_access_token
+
+    appt = _make_appt(db, practice, practitioner, patient)
+    bad_token = create_access_token({
+        "sub": str(appt.id),
+        "practice_id": str(practice.id),
+        "role": "UnknownRole",
+    })
+    resp = client.patch(
+        f"/api/v1/appointments/{appt.id}/status",
+        json={"status": "Confirmed"},
+        headers={"Authorization": f"Bearer {bad_token}"},
+    )
+    assert resp.status_code in (401, 403)
+
+
 # ─── Not found ─────────────────────────────────────────────────────────────────
 
 def test_status_mutation_nonexistent_appointment_returns_404(client, gp_user):
