@@ -800,18 +800,23 @@ def realign(args: argparse.Namespace) -> None:
     print(f"[fetch] {args.remote}")
     print_result(run_git(["fetch", args.remote], cwd=repo))
 
-    target = f"{args.remote}/{expected_branch}"
+    target = f"{args.remote}/{args.ref}"
     before = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
     target_head = git_stdout(["rev-parse", "--short", target], cwd=repo)
 
     if not args.apply:
-        print(f"[dry-run] would reset clean {expected_branch} from {before} to {target_head}")
+        print(f"[dry-run] would reset clean {expected_branch} from {before} to {target_head} ({target})")
+        if not args.no_push:
+            print(f"[dry-run] would push {expected_branch} -> {args.remote}/{expected_branch} with --force-with-lease")
         print("Re-run with --apply after Codex has integrated the submitted task.")
         return
 
     print_result(run_git(["reset", "--hard", target], cwd=repo))
     after = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
-    print(f"[ok] realigned clean {expected_branch} from {before} to {after}")
+    print(f"[ok] realigned clean {expected_branch} from {before} to {after} ({target})")
+    if not args.no_push:
+        print(f"[push] {expected_branch} -> {args.remote}/{expected_branch} (--force-with-lease)")
+        print_result(run_git(["push", "--force-with-lease", args.remote, f"HEAD:{expected_branch}"], cwd=repo))
 
 
 def handin(args: argparse.Namespace) -> None:
@@ -1042,7 +1047,7 @@ def poll(args: argparse.Namespace) -> None:
         print("  python scripts\\agent_worktrees.py retire-stale")
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -1107,11 +1112,13 @@ def main() -> None:
 
     realign_parser = subparsers.add_parser(
         "realign",
-        help="After Codex integration, reset a clean durable agent worktree to its remote current branch",
+        help="After Codex integration, reset a clean durable agent worktree to the remote handoff ref",
     )
     realign_parser.add_argument("--agent", choices=sorted(AGENTS), required=True)
+    realign_parser.add_argument("--ref", default=HANDOFF_REF)
     realign_parser.add_argument("--remote", default="origin")
     realign_parser.add_argument("--apply", action="store_true", help="Actually reset the clean worktree")
+    realign_parser.add_argument("--no-push", action="store_true", help="Do not update the remote durable mirror branch")
     realign_parser.set_defaults(func=realign)
 
     handin_parser = subparsers.add_parser("handin", help="Fetch and fast-forward current worktree to the handoff ref")
@@ -1152,6 +1159,11 @@ def main() -> None:
     status_parser = subparsers.add_parser("status", help="Show branch and worktree status")
     status_parser.set_defaults(func=status)
 
+    return parser
+
+
+def main() -> None:
+    parser = build_parser()
     args = parser.parse_args()
     args.func(args)
 

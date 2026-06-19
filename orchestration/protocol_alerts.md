@@ -37,6 +37,7 @@ Read these before acting on remembered process details.
   visible instead of surprising the next session.
 - After Codex integrates a submitted durable worker branch, Codex should realign
   the clean worker mirror with `python scripts\agent_worktrees.py realign --agent
-  <agent> --apply` from that worker worktree, rather than rebasing and replaying
-  the already-integrated submit commit.
+  <agent> --apply` from that worker worktree. This resets the clean mirror to
+  `origin/handoff/current` and force-with-lease updates the durable remote mirror
+  branch, rather than rebasing and replaying the already-integrated submit commit.
 - If these alerts conflict with a prior session memory, trust these alerts.

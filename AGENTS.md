@@ -190,14 +190,29 @@ After Codex integrates a submit, it must:
 python scripts\agent_worktrees.py record-integration --agent antigravity --task antigravity-example --branch antigravity/current --review "Reviewed and integrated" --integration-commit HEAD --result integrated --follow-up "Mirrors realigned"
 ```
 
-3. Push `master`, `handoff/current`, and durable mirrors.
-4. Run the orchestration audit:
+3. Push `master` and `handoff/current`.
+4. Realign each clean durable worker mirror to the integrated baton from that
+   worker worktree:
+
+```powershell
+python scripts\agent_worktrees.py realign --agent claude --apply
+python scripts\agent_worktrees.py realign --agent antigravity --apply
+python scripts\agent_worktrees.py realign --agent codex --apply
+```
+
+This resets the clean mirror to `origin/handoff/current`; it does not replay the
+already-integrated submit commit. By default it also updates the durable remote
+mirror branch with `--force-with-lease`, so the next worker submit starts from a
+clean remote baseline. Use `--no-push` only for a deliberate local-only repair.
+Dirty mirrors must be reviewed before realign.
+
+5. Run the orchestration audit:
 
 ```powershell
 python scripts\agent_worktrees.py audit --fetch
 ```
 
-5. Retire stale disposable worker worktrees only after audit confirms they are clean:
+6. Retire stale disposable worker worktrees only after audit confirms they are clean:
 
 ```powershell
 python scripts\agent_worktrees.py retire-stale
@@ -207,7 +222,7 @@ python scripts\agent_worktrees.py retire-stale --apply
 `retire-stale` is a dry run by default. Dirty worktrees are never removed by the
 routine; they must be reviewed or explicitly abandoned first.
 
-6. Update `orchestration/sprint_closeout.md` and report to the user:
+7. Update `orchestration/sprint_closeout.md` and report to the user:
    - what they should manually test before the next dispatch
    - what does not need manual testing yet
    - where Codex recommends taking the project next
