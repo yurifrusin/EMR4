@@ -964,6 +964,11 @@ function formatDateLabel(d) {
 }
 function updateDateLabel() {
   document.getElementById("diary-date-label").textContent = formatDateLabel(diaryDate);
+  const yyyy = diaryDate.getFullYear();
+  const mm = String(diaryDate.getMonth() + 1).padStart(2, "0");
+  const dd = String(diaryDate.getDate()).padStart(2, "0");
+  const picker = document.getElementById("diary-date-picker");
+  if (picker) picker.value = `${yyyy}-${mm}-${dd}`;
 }
 function shiftDay(delta) {
   diaryDate = new Date(diaryDate);
@@ -995,6 +1000,27 @@ Office.onReady(() => {
   document.getElementById("btn-modal-add").onclick = addBreakRow;
   document.getElementById("btn-modal-save").onclick = saveBreaks;
   document.getElementById("btn-modal-close").onclick = closeBreakModal;
+
+  const dateWrapper = document.querySelector(".date-picker-wrapper");
+  const datePicker = document.getElementById("diary-date-picker");
+  if (dateWrapper && datePicker) {
+    dateWrapper.onclick = () => {
+      try {
+        datePicker.showPicker();
+      } catch (_) {
+        datePicker.click();
+      }
+    };
+    datePicker.onchange = (e) => {
+      if (e.target.value) {
+        const parts = e.target.value.split("-");
+        diaryDate = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+        updateDateLabel();
+        loadDiary();
+      }
+    };
+  }
+
   document.getElementById("diary-grid").addEventListener("click", () => {
     document.querySelectorAll(".appt-active").forEach(el => el.classList.remove("appt-active"));
   });

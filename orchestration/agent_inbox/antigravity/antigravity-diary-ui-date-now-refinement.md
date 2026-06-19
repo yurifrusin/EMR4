@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | cf47471 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-ui-date-now-refinement --commit-message "Refine diary date and now controls" --message "Diary date and now marker refinement ready for Codex review"` |
@@ -68,6 +68,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.html, docs/diary/diary.css, docs/diary/diary.js
+- Verification run: Run node --check docs\diary\diary.js (succeeded with no errors). Verified styling of now marker (low-opacity, z-index 8 dashed line behind appointments) and current-time pill (solid red pill badge in the TIME column). Tested date-picker click and selection onchange.
+- Remaining risks: Native browser picker behavior varies slightly, but fallback handlers are present.
