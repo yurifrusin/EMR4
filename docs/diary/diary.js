@@ -17,6 +17,7 @@ const API_BASE = BACKEND_URL + "/api/v1";
 const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
 const MIN_TIME_INCREMENT_MINS = 5;
+const GRIDLINE_SNAP_TOLERANCE_MINS = 3;
 
 let activeAppointments = [];
 let activeTypes = [];
@@ -364,6 +365,33 @@ function fromMins(m) {
 
 function timeRangeLabel(startMins, endMins) {
   return `${fromMins(startMins)}-${fromMins(endMins)}`;
+}
+
+function clampMins(value, min, max) {
+  return Math.max(min, Math.min(value, max));
+}
+
+function snapBookingStartMins(rawMins, start, end, dayStartMins, intervalMins) {
+  const latestStart = Math.max(start, end - MIN_TIME_INCREMENT_MINS);
+  const nearestGridline = dayStartMins + Math.round((rawMins - dayStartMins) / intervalMins) * intervalMins;
+
+  if (
+    nearestGridline >= start
+    && nearestGridline <= latestStart
+    && Math.abs(rawMins - nearestGridline) <= GRIDLINE_SNAP_TOLERANCE_MINS
+  ) {
+    return nearestGridline;
+  }
+
+  const roundedOffset = Math.floor((rawMins - start) / MIN_TIME_INCREMENT_MINS) * MIN_TIME_INCREMENT_MINS;
+  return clampMins(start + roundedOffset, start, latestStart);
+}
+
+function bookingGapMinsFromEvent(gap, start, end, dayStartMins, intervalMins, clientY) {
+  const rect = gap.getBoundingClientRect();
+  const offsetY = Math.max(0, Math.min(clientY - rect.top, rect.height));
+  const rawMins = start + (offsetY * intervalMins / SLOT_HEIGHT_PX);
+  return snapBookingStartMins(rawMins, start, end, dayStartMins, intervalMins);
 }
 
 function isBlockingAppointment(appt) {
@@ -896,16 +924,33 @@ function appendBookingGapTarget(columnBody, col, start, end, dayStartMins, inter
   gap.className = "booking-gap-target";
   gap.style.top = `${topPx}px`;
   gap.style.height = `${heightPx}px`;
-  gap.title = `Book ${timeRangeLabel(start, end)} in ${col.room_label}`;
   gap.setAttribute("aria-label", `Book appointment at ${fromMins(start)} in ${col.room_label}`);
+
+  const previewLine = document.createElement("span");
+  previewLine.className = "booking-gap-preview-line";
+  const previewChip = document.createElement("span");
+  previewChip.className = "booking-gap-preview-chip";
+  previewChip.setAttribute("aria-hidden", "true");
+  gap.append(previewLine, previewChip);
+
+  const updatePreview = mins => {
+    const y = (mins - start) * (SLOT_HEIGHT_PX / intervalMins);
+    gap.style.setProperty("--booking-preview-y", `${y}px`);
+    previewChip.textContent = fromMins(mins);
+    gap.classList.add("is-previewing");
+    gap.setAttribute("aria-label", `Book appointment at ${fromMins(mins)} in ${col.room_label}`);
+  };
+
+  gap.addEventListener("pointermove", e => {
+    updatePreview(bookingGapMinsFromEvent(gap, start, end, dayStartMins, intervalMins, e.clientY));
+  });
+  gap.addEventListener("pointerleave", () => gap.classList.remove("is-previewing"));
+  gap.addEventListener("focus", () => updatePreview(start));
+  gap.addEventListener("blur", () => gap.classList.remove("is-previewing"));
+
   gap.addEventListener("click", e => {
     e.stopPropagation();
-    const rect = gap.getBoundingClientRect();
-    const offsetY = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
-    const rawMins = start + (offsetY * intervalMins / SLOT_HEIGHT_PX);
-    const roundedOffset = Math.floor((rawMins - start) / MIN_TIME_INCREMENT_MINS) * MIN_TIME_INCREMENT_MINS;
-    const latestStart = Math.max(start, end - MIN_TIME_INCREMENT_MINS);
-    const clickedMins = Math.max(start, Math.min(start + roundedOffset, latestStart));
+    const clickedMins = bookingGapMinsFromEvent(gap, start, end, dayStartMins, intervalMins, e.clientY);
     openBookingModalForCreate(col, fromMins(clickedMins));
   });
   columnBody.appendChild(gap);

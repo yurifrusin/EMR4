@@ -44,6 +44,9 @@ reviewed, integrated, verified, pushed, and audited.
   from matching AHPRA numbers at response time, covering older DB rows where
   `diary_columns.practitioner_id` is null. The booking form now submits on
   Enter via the normal form submit path.
+- User-review hotfix 4: bookable free-space hover now shows a custom 5-minute
+  start-time preview chip and faint line before the booking modal opens, with
+  gentle snapping near visible gridlines.
 
 ## Recommended User Review
 
@@ -97,6 +100,10 @@ reviewed, integrated, verified, pushed, and audited.
   modal footer moved outside the form, Enter-to-save is preserved inside the
   booking form, and broad free-session booking targets now calculate the clicked
   5-minute time rather than always using the start of the free block.
+- Waiting-room design follow-up: model physical waiting areas explicitly rather
+  than as one flat list. Rooms should be able to point to a default waiting
+  area, and the diary patient-flow panel can later expose area tabs or auto-focus
+  the area associated with the active room/column.
 
 ## Verification
 
@@ -116,6 +123,8 @@ to run.
   `.venv\Scripts\python.exe -m pytest tests\test_diary_template.py tests\test_diary_roster.py -q`
   -> 19 passed
 - Booking modal/gap-target hotfix verification: `node --check docs\diary\diary.js`
+  and `git diff --check` -> passed
+- Booking hover-preview hotfix verification: `node --check docs\diary\diary.js`
   and `git diff --check` -> passed
 - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 8 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_patient_flow.py -q` -> 20 passed

@@ -397,11 +397,14 @@ html, body {
   background: transparent;
   border: 0;
   cursor: pointer;
+  font: inherit;
   left: 2px;
   min-height: 6px;
+  overflow: visible;
   padding: 0;
   position: absolute;
   right: 2px;
+  text-align: left;
   z-index: 6;
 }
 
@@ -414,6 +417,44 @@ html, body {
   background: transparent;
   outline: 1px dotted rgba(47, 128, 237, 0.45);
   outline-offset: -1px;
+}
+
+.booking-gap-preview-line,
+.booking-gap-preview-chip {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 80ms ease;
+}
+
+.booking-gap-preview-line {
+  background: rgba(0, 80, 160, 0.35);
+  height: 1px;
+  left: 0;
+  right: 0;
+  top: var(--booking-preview-y, 0);
+}
+
+.booking-gap-preview-chip {
+  background: var(--white);
+  border: 1px solid rgba(0, 80, 160, 0.45);
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14);
+  color: var(--blue-dark);
+  font-size: 10px;
+  font-weight: 700;
+  left: 6px;
+  line-height: 1;
+  padding: 3px 5px;
+  top: var(--booking-preview-y, 0);
+  transform: translateY(-50%);
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.booking-gap-target.is-previewing .booking-gap-preview-line,
+.booking-gap-target.is-previewing .booking-gap-preview-chip {
+  opacity: 1;
 }
 
 .appt-booked {
