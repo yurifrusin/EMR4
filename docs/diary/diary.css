@@ -815,3 +815,48 @@ html, body {
   color: white;
 }
 .btn-primary-sm:hover { background: var(--blue-dark); }
+
+/* ─── APPOINTMENT STATUS CHANGER ────────────────── */
+.appt-status-changer {
+  display: none;
+  margin-top: 6px;
+  border-top: 1px solid var(--grey-2);
+  padding-top: 6px;
+}
+
+.appt-active .appt-status-changer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.status-select-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--grey-4);
+  text-transform: uppercase;
+}
+
+.status-select {
+  font-size: 10px;
+  padding: 1px 3px;
+  border: 1px solid var(--grey-2);
+  border-radius: 3px;
+  background-color: var(--white);
+  color: var(--text);
+  cursor: pointer;
+  outline: none;
+  font-family: var(--font);
+}
+
+.status-select:hover {
+  border-color: var(--grey-3);
+}
+
+.status-select:disabled {
+  background-color: var(--grey-1);
+  color: var(--grey-3);
+  cursor: not-allowed;
+}

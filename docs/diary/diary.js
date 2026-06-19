@@ -97,8 +97,10 @@ function getMockTemplate() {
   };
 }
 
+let mockAppointmentsCache = null;
 function getMockAppointments() {
-  return [
+  if (!mockAppointmentsCache) {
+    mockAppointmentsCache = [
     {
       id: "smoke-appt-1",
       start_time_local: "09:00",
@@ -160,6 +162,8 @@ function getMockAppointments() {
       appointment_type_id: "smoke-type-2"
     }
   ];
+  }
+  return mockAppointmentsCache;
 }
 
 function getMockTypes() {
@@ -691,6 +695,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
 
       const span = document.createElement("span");
       span.className = `appt ${cls}`;
+      span.dataset.id = a.id;
       if (color) {
         span.dataset.color = color;
         span.style.setProperty("--appt-color", color);
@@ -736,6 +741,95 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         reason.textContent = a.reason;
         span.appendChild(reason);
       }
+
+      // Inline compact status changer
+      const statusChanger = document.createElement("div");
+      statusChanger.className = "appt-status-changer";
+      statusChanger.addEventListener("click", e => {
+        e.stopPropagation();
+      });
+
+      const selectLabel = document.createElement("label");
+      selectLabel.className = "status-select-label";
+      selectLabel.textContent = "Status: ";
+      statusChanger.appendChild(selectLabel);
+
+      const statusSelect = document.createElement("select");
+      statusSelect.className = "status-select";
+      statusSelect.ariaLabel = "Change appointment status";
+
+      const selectOptions = [
+        { value: "Booked", label: "Booked" },
+        { value: "Confirmed", label: "Confirmed" },
+        { value: "Arrived", label: "Arrived" },
+        { value: "InConsult", label: "In Consult" },
+        { value: "Completed", label: "Done" },
+        { value: "Cancelled", label: "Cancelled" },
+        { value: "NoShow", label: "No Show" },
+        { value: "DNA", label: "DNA" }
+      ];
+
+      selectOptions.forEach(optData => {
+        const opt = document.createElement("option");
+        opt.value = optData.value;
+        opt.textContent = optData.label;
+        if (a.status === optData.value) {
+          opt.selected = true;
+        }
+        statusSelect.appendChild(opt);
+      });
+
+      let updatingStatus = false;
+      statusSelect.addEventListener("change", async (e) => {
+        if (updatingStatus) return;
+        const newStatus = e.target.value;
+        if (newStatus === a.status) return;
+
+        updatingStatus = true;
+        statusSelect.disabled = true;
+        setStatus("Updating status...");
+
+        try {
+          if (isSmokeMode) {
+            a.status = newStatus;
+            setStatus("Status updated (Mock)");
+            await loadDiary(true);
+            const el = document.querySelector(`.appt[data-id="${a.id}"]`);
+            if (el) el.classList.add("appt-active");
+          } else {
+            const res = await apiFetch(`/appointments/${a.id}/status`, {
+              method: "PATCH",
+              body: JSON.stringify({ status: newStatus })
+            });
+            if (!res.ok) {
+              const text = await res.text();
+              throw new Error(`Failed to update status: ${res.status} ${text}`);
+            }
+            const updatedAppt = await res.json();
+            a.status = updatedAppt.status;
+            setStatus("Status updated successfully.");
+            await loadDiary(true);
+            const el = document.querySelector(`.appt[data-id="${a.id}"]`);
+            if (el) el.classList.add("appt-active");
+          }
+        } catch (err) {
+          console.error("Error updating status:", err);
+          if (err.message === "401 Unauthorized") {
+            showError("Session expired. Please reopen the taskpane to sign in again.");
+            setStatus("Session expired.");
+          } else {
+            showError(err.message || "Failed to update appointment status.");
+            setStatus("Error updating status.");
+          }
+          statusSelect.value = a.status;
+        } finally {
+          updatingStatus = false;
+          statusSelect.disabled = false;
+        }
+      });
+
+      statusChanger.appendChild(statusSelect);
+      span.appendChild(statusChanger);
 
       span.addEventListener("click", e => {
         e.stopPropagation();
