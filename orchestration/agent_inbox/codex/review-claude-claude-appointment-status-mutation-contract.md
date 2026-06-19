@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-status-mutation-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -38,5 +38,7 @@ Appointment status mutation contract ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. The branch was test-only; Codex added
+  one role-gate regression for status PATCH during integration.
+- Follow-up required: Keep the no-state-machine transition policy explicit. It
+  is intentionally flexible for receptionist correction at this stage.

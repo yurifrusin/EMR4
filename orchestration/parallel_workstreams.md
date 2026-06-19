@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
-| Launch Gate | Preparing handin |
-| Integration Gate | Pending all submits and Codex review |
+| Status | Integrated, pending user review |
+| Launch Gate | Complete |
+| Integration Gate | Complete |
 | Theme | Add safe receptionist-facing appointment status changes before booking create/edit/drag/drop work |
 
 ### Workstream T - Appointment Status Mutation Contract
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Appointment status router/schema/tests; minimal production fixes only if tests expose unsafe behavior |
 | Out of Scope | Diary frontend, taskpane/Command Centre/Gemini, booking create/edit/drag/drop, roster admin UI |
 | Verification | Focused appointment status/waiting-room/slots pytest suites |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream U - Diary Status Controls
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` |
 | Out of Scope | Backend, taskpane/Command Centre/Gemini, booking create/edit/drag/drop, roster admin UI |
 | Verification | JS syntax plus live/smoke/narrow/failure/session visual checks |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream V - Status Mutation Review Plan
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Small orchestration/checklist documentation only |
 | Out of Scope | Production backend/frontend implementation, tests, migrations, booking create/edit/drag/drop |
 | Verification | `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 6: Read-Only Patient Flow Visibility
 

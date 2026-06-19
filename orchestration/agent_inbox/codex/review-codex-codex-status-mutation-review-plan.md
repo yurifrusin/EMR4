@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/status-mutation-review-plan` |
 | Source Task | `codex-status-mutation-review-plan` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -58,5 +58,6 @@ Manual review checklist Codex should use after integrating Claude and Antigravit
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated as a documentation-only review plan.
+- Follow-up required: Use `orchestration/status_mutation_review.md` for Sprint 7
+  manual closeout.

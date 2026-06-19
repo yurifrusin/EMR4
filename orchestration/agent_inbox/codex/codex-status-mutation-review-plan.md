@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/status-mutation-review-plan` |
-| Status | submitted |
+| Status | integrated |
 | Created | ea0b41d |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-status-mutation-review-plan --commit-message "Add status mutation review plan" --message "Status mutation review plan ready for Codex review"` |

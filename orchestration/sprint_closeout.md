@@ -8,62 +8,61 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 6: Read-Only Patient Flow Visibility |
-| Integrated through | Sprint 6 pushed to `master`; baton and mirrors aligned |
-| Status | User-reviewed and closed |
+| Batch | Sprint 7: Controlled Status Mutation |
+| Integrated through | Sprint 7 local review branch; pending push to `master` |
+| Status | Integrated locally, pending deploy/user review |
 | Last updated | 2026-06-19 |
 
 ## What Changed
 
-- Added `tests/test_waiting_room.py` with 18 tests covering the read-only
-  waiting-room endpoint: auth, included/excluded statuses, date/practice scoping,
-  practitioner filtering, ordering, and embedded appointment fields.
-- Diary appointment cards now show clearer lifecycle/status affordances with
-  status-specific tints, right-side status bars, and compact status badges.
-- Diary asset cache-bust moved to `v=41`.
-- Added `orchestration/patient_flow_review.md` to define read-only appointment
-  status semantics before booking/status mutation controls begin.
-- Replaced active EMR logo references with `emr_cube1.png` across the taskpane,
-  Command Centre, diary, taskpane source assets, and add-in manifest/ribbon icon
-  URLs.
+- Added `tests/test_appointment_status_mutations.py` covering status PATCH auth,
+  role guard, not-found/cross-practice isolation, valid/invalid statuses,
+  response shape, and waiting-room inclusion/exclusion after mutation.
+- Diary appointment cards now expose a compact status selector only when an
+  appointment is active/expanded.
+- The diary PATCHes `/appointments/{id}/status`, refreshes after success, handles
+  smoke mode locally, and shows clear errors for failed updates/session expiry.
+- Diary asset cache-bust moved to `v=42`.
+- Added `orchestration/status_mutation_review.md` for Sprint 7 manual review.
 
 ## Recommended User Review
 
 After the final push has deployed:
 
-1. Reopen the Word Online add-in and confirm the taskpane/banner/ribbon logo uses
-   the new cube image.
-2. Open the diary from the taskpane and confirm the diary and Command Centre logo
-   surfaces use the new cube image.
-3. In smoke mode, verify Booked, Confirmed, Arrived, InConsult, Completed,
-   Cancelled, NoShow, and DNA appointments are visually distinguishable.
-4. Narrow the diary window and confirm status badges do not crowd patient names,
-   booking notes, break labels, or header controls.
-5. Confirm long appointments, overlapping appointments, off-grid appointments,
-   booking notes, Refresh, Now, and the current-time marker still feel usable.
-6. If testing the API directly, confirm `/appointments/waiting-room` includes
-   Booked/Confirmed/Arrived/InConsult and excludes Completed/Cancelled/NoShow/DNA.
-7. Decide whether the compact status badges feel useful or too noisy before the
-   next sprint introduces status mutation controls.
+1. Open the live diary from the taskpane and click an appointment card; confirm
+   the status selector appears only on the active/expanded card.
+2. Change one appointment through `Booked`, `Confirmed`, `Arrived`, `InConsult`,
+   and `Completed`; confirm the visible badge/colour/status updates after each
+   successful change.
+3. Set an appointment to `Cancelled`, `NoShow`, and `DNA`; confirm the card is
+   visually de-emphasised and no longer appears in `/appointments/waiting-room`.
+4. Narrow the diary window and confirm the selector does not crowd patient names,
+   booking notes, break labels, date controls, Refresh, or Now.
+5. Confirm long, overlapping, off-grid, and note-heavy appointments still render
+   and can still be inspected.
+6. Force or observe an expired session and confirm the diary shows a clear
+   session-expired path rather than pretending the update succeeded.
+7. Optionally use `orchestration/status_mutation_review.md` for the full manual
+   API/UI/failure checklist.
 
 ## Not Required Before Moving On
 
-- Booking create/edit/drag/drop/status mutations are still intentionally out of scope.
+- Booking create/edit/drag/drop/resize is still intentionally out of scope.
 - Roster admin UI is not built yet.
 - Online booking portal behaviour is not applicable yet.
-- A full live waiting-room UI is not built yet; this sprint hardens the read-only
-  backend contract and diary visual language.
+- A full live waiting-room display app is not built yet.
+- No state-machine guard exists yet; any valid status can currently be corrected
+  to any other valid status by mutating staff roles.
 
 ## Known Follow-Up
 
 - The `pytest_asyncio` loop-scope deprecation warning remains and should be
   addressed before it becomes a default-behaviour change.
-- `tests/test_waiting_room.py` uses import-time `date.today()`; it may be fragile
-  around timezone midnight and can be hardened later if CI exposes it.
+- The PostgreSQL test DB can retain enum types after interrupted/parallel pytest
+  runs. Resetting the public schema fixed the issue during integration; avoid
+  running two pytest processes against the same `gp_pms_test` database in parallel.
 - Dirty stale disposable worktree `codex/time-model` remains visible and should be
   reviewed before retirement.
-- Archimedes did not start the documentation-only Codex task; the orchestrator
-  recovered it directly in `orchestration/patient_flow_review.md`.
 
 ## Verification
 
@@ -72,13 +71,13 @@ to run.
 
 - `node --check docs\diary\diary.js` -> passed
 - `git diff --check` -> passed
-- `python -c "import xml.etree.ElementTree as ET; ET.parse(...)"` for
-  `EMR4 Sidebar\manifest.xml` -> passed
-- `.venv\Scripts\python.exe -m pytest tests\test_waiting_room.py tests\test_appointment_conflicts.py tests\test_slots.py tests\test_auth_required.py -q` -> 37 passed
+- `.venv\Scripts\python.exe -m pytest tests\test_appointment_status_mutations.py -q` -> 23 passed
+- `.venv\Scripts\python.exe -m pytest tests\test_waiting_room.py tests\test_appointment_conflicts.py tests\test_slots.py -q` -> 31 passed after resetting stale test schema
+- `.venv\Scripts\python.exe -m pytest tests\test_appointment_status_mutations.py tests\test_waiting_room.py tests\test_appointment_conflicts.py tests\test_slots.py -q` -> 54 passed sequentially
+- `.venv\Scripts\python.exe -m pytest tests\test_diary_roster.py -q` -> 11 passed
 
 ## Recommended Next Direction
 
-User review passed: waiting-room API status counts were correct, terminal
-statuses were absent, and diary status colours/badges were useful without feeling
-cluttered. Sprint 7 has been dispatched toward controlled receptionist-facing
-status mutation before booking create/edit/drag/drop work.
+If user review passes, the next sprint can start booking create/edit planning in
+a narrow way. Recommended order: simple create/edit form or modal first, then
+drag/drop/resize later once mutation semantics and conflict handling feel solid.

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-status-controls` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. Codex associated the inline status
+  select label with its select control during integration.
+- Follow-up required: User should review live status controls for clutter,
+  session-expiry behaviour, failed PATCH recovery, and auto-refresh interaction.
