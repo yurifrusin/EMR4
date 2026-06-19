@@ -116,11 +116,59 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 9: Patient Flow and Patient Entry Hardening
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Launch Gate | Complete |
+| Integration Gate | Pending |
+| Theme | Harden the practical patient-flow layer before drag/drop/resize and roster-admin work |
+
+### Workstream Z - Booking Patient-Flow Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-booking-patient-flow-contract.md` |
+| Goal | Strengthen appointment update/status/waiting-room contract for the next diary operations layer |
+| In Scope | Appointment schemas/router/models as needed, focused appointment create/edit/status/waiting-room/slots tests |
+| Out of Scope | Diary frontend, drag/drop/resize UI, roster admin UI, taskpane/Command Centre/Gemini, patient search/New Patient work |
+| Verification | Focused appointment pytest suites plus any new patient-flow contract tests |
+| Status | Queued |
+
+### Workstream AA - Diary Patient-Flow Workbench
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-patient-flow-workbench.md` |
+| Goal | Improve the receptionist-facing diary patient-flow surface while preserving booking create/edit behaviour |
+| In Scope | `docs/diary/diary.{html,css,js}` |
+| Out of Scope | Backend routes/models/tests/migrations, drag/drop, resize handles, roster admin UI, online booking portal, patient import tooling |
+| Verification | JS syntax plus live/smoke/narrow create/edit/status/patient-flow visual checks |
+| Status | Queued |
+
+### Workstream AB - Patient Search and New Patient Hardening
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/patient-search-new-patient-hardening` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-patient-search-new-patient-hardening.md` |
+| Goal | Add meaningful tests and minimal fixes for DB-backed patient search and New Patient creation |
+| In Scope | Focused patient tests, `app/routers/patients.py`, `app/schemas/patients.py`, `create_patient_file.py`, seed/test helpers only as needed |
+| Out of Scope | OneDrive import tools, diary frontend, appointment/status routes, taskpane UI, Command Centre, Gemini/AI behaviour |
+| Verification | Focused patient pytest suite, `git diff --check`, generator smoke test if touched |
+| Status | Queued |
+
 ## Sprint 8: Booking Create/Edit First Slice
 
 | Item | Value |
 |---|---|
-| Status | Integrated, pending user review |
+| Status | Integrated and user-reviewed |
 | Launch Gate | Complete |
 | Integration Gate | Complete |
 | Theme | Add a practical create/edit booking path without starting drag/drop/resize |

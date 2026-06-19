@@ -9,8 +9,8 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 8: Booking Create/Edit First Slice |
-| Integrated through | Sprint 8 local review branch; pending push to `master` |
-| Status | Integrated locally, pending deploy/user review |
+| Integrated through | `14bc9e4` on `master` / `handoff/current` |
+| Status | User review passed |
 | Last updated | 2026-06-19 |
 
 ## What Changed
@@ -43,24 +43,26 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-After the final push has deployed:
+User review result: passed.
 
 1. Open the live diary from the taskpane and create one booking from an empty
-   slot in a practitioner-backed room.
+   slot in a practitioner-backed room. **Passed.**
 2. Confirm patient search works, the created card appears in the correct
    date/room/time/duration position, and the grid refreshes after save.
+   **Passed.**
 3. Edit the same booking's time, duration, reason, appointment type, and status;
-   confirm changes appear only after a successful save.
+   confirm changes appear only after a successful save. **Passed.**
 4. Try an overlapping booking and confirm the UI shows a readable conflict
-   without silently changing the grid.
+   without silently changing the grid. **Passed after hotfix.**
 5. Use Cancel Booking on the test appointment and confirm it becomes visually
-   terminal/non-active rather than disappearing as a hard delete.
+   terminal/non-active rather than disappearing as a hard delete. **Policy
+   adjusted: cancelled appointments are hidden from the working layer.**
 6. Create a 5-minute booking in a visible free gap between two existing
    appointments and confirm unusual start/end times show via the hover edge
-   labels.
+   labels. **Passed after hotfix.**
 7. Narrow the diary window and confirm the create/edit modal and expanded card
    controls remain usable without crowding patient names, notes, status controls,
-   breaks, Refresh, Now, or date navigation.
+   breaks, Refresh, Now, or date navigation. **Passed.**
 8. Optionally run the PowerShell API snippets in
    `orchestration/booking_create_edit_review.md` for direct API confirmation.
 
@@ -110,7 +112,12 @@ Historical Sprint 7 verification:
 
 ## Recommended Next Direction
 
-If user review passes, the next sprint should refine booking ergonomics before
-drag/drop: conflict messaging, practitioner/room availability, and whether staff
-need an explicit hard-delete/archive distinction separate from cancellation.
-Drag/drop/resize should wait until the form-based create/edit path feels solid.
+Sprint 8 user review passed. Sprint 9 has been dispatched to harden the next
+operational layer before drag/drop/resize:
+
+- backend appointment patient-flow/status contract work
+- diary patient-flow/waiting-room UI refinement
+- DB-backed patient search and New Patient creation reliability
+
+Drag/drop/resize should still wait until the patient-flow and patient-entry
+paths are tested and feel dependable.
