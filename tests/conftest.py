@@ -11,12 +11,14 @@ truncates practice-scoped data before every test so tests are isolated.
 """
 
 import os
+import time as _time
 from datetime import date, time
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import NullPool
 
 from app.dependencies import get_db
 from app.main import app
@@ -36,7 +38,9 @@ TEST_DB_URL = os.getenv(
 
 @pytest.fixture(scope="session")
 def engine():
-    eng = create_engine(TEST_DB_URL)
+    # NullPool: every connection closes immediately after use — no pool lingering
+    # across tests or between runs, which eliminates the DROP TABLE deadlock.
+    eng = create_engine(TEST_DB_URL, poolclass=NullPool)
     with eng.connect() as conn:
         conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
         conn.commit()
@@ -51,8 +55,15 @@ def engine():
 @pytest.fixture(autouse=True)
 def clean_db(engine):
     """Truncate all practice-scoped tables before each test."""
-    with engine.begin() as conn:
-        conn.execute(text("TRUNCATE practices RESTART IDENTITY CASCADE"))
+    for attempt in range(3):
+        try:
+            with engine.begin() as conn:
+                conn.execute(text("TRUNCATE practices RESTART IDENTITY CASCADE"))
+            break
+        except Exception:
+            if attempt == 2:
+                raise
+            _time.sleep(0.5)
 
 
 # ─── Per-test session ─────────────────────────────────────────────────────────
