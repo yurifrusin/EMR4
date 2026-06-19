@@ -9,8 +9,8 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 6: Read-Only Patient Flow Visibility |
-| Integrated through | Sprint 6 local review branch; pending push to `master` |
-| Status | Integrated locally, pending deploy/user review |
+| Integrated through | Sprint 6 pushed to `master`; baton and mirrors aligned |
+| Status | Integrated and pushed, pending deploy/user review |
 | Last updated | 2026-06-19 |
 
 ## What Changed
