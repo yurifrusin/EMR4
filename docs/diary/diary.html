@@ -65,5 +65,84 @@
   </div>
 </div>
 
+<!-- ═══ BOOKING CREATE/EDIT MODAL ═══════════════════════ -->
+<div id="booking-modal" class="break-modal hidden" role="dialog" aria-modal="true">
+  <div class="break-modal-inner">
+    <div class="break-modal-header">
+      <span id="booking-modal-title" class="break-modal-title">New Appointment</span>
+      <button id="btn-booking-close" class="break-modal-close" title="Close">✕</button>
+    </div>
+    <div class="booking-modal-body">
+      <form id="booking-form" onsubmit="return false;">
+        <div class="form-group">
+          <label for="booking-patient-search">Patient Search:</label>
+          <div class="patient-search-container">
+            <input type="text" id="booking-patient-search" placeholder="Type name, DOB, Medicare..." autocomplete="off" />
+            <div id="patient-search-results" class="search-results-dropdown hidden"></div>
+          </div>
+          <div id="selected-patient-display" class="selected-item-display hidden">
+            <span id="selected-patient-text"></span>
+            <button id="btn-clear-patient" type="button" class="btn-clear" title="Clear selected patient">✕</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="booking-practitioner">Practitioner / Room:</label>
+            <select id="booking-practitioner" required></select>
+          </div>
+          <div class="form-group">
+            <label for="booking-type">Appointment Type:</label>
+            <select id="booking-type"></select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="booking-date">Date:</label>
+            <input type="date" id="booking-date" required />
+          </div>
+          <div class="form-group">
+            <label for="booking-time">Time:</label>
+            <input type="time" id="booking-time" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="booking-duration">Duration (mins):</label>
+            <input type="number" id="booking-duration" min="5" max="480" step="5" required />
+          </div>
+          <div class="form-group">
+            <label for="booking-status">Status:</label>
+            <select id="booking-status">
+              <option value="Booked">Booked</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Arrived">Arrived</option>
+              <option value="InConsult">In Consult</option>
+              <option value="Completed">Done</option>
+              <option value="Cancelled">Cancelled</option>
+              <option value="NoShow">No Show</option>
+              <option value="DNA">DNA</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="booking-reason">Reason for Visit:</label>
+          <input type="text" id="booking-reason" placeholder="e.g. Script, checkup" />
+        </div>
+        
+        <div id="booking-error" class="form-error hidden"></div>
+      </form>
+    </div>
+    <div class="break-modal-footer">
+      <button id="btn-booking-delete" class="btn-danger-sm hidden">Delete Booking</button>
+      <div style="flex-grow: 1;"></div>
+      <button id="btn-booking-save" class="btn-primary-sm">Save Booking</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

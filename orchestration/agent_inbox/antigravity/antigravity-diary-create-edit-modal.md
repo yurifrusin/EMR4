@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 9ccd838 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-create-edit-modal --commit-message "Diary create/edit modal" --message "antigravity-diary-create-edit-modal ready for Codex review"` |
@@ -68,6 +68,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.html, docs/diary/diary.css, docs/diary/diary.js
+- Verification run: Ran `node --check docs\diary\diary.js` (passed). Ran unit tests `pytest tests/test_diary_roster.py` (passed 11/11). Verified input listeners, event delegation (stop-propagation), autocomplete rendering, and auto-populating duration when changing appointment types.
+- Remaining risks: Practitioner mapping requires practitioner AHPRA to map to a database ID (auto-scanned from daily appointments and rosters, with clear error messaging if booking a non-rostered/non-appointed provider).
