@@ -32,7 +32,9 @@ reviewed, integrated, verified, pushed, and audited.
 - User-review hotfix: normal 15-minute appointment reasons now render in cards,
   off-grid/free 5-minute gaps are clickable, appointment conflict errors are
   human-readable, and cancellation now uses an explicit in-modal confirmation.
-- Diary asset cache-bust moved to `v=45`.
+- User-review hotfix 2: sub-grid bookings now render at their actual duration
+  instead of visually expanding to the full 15-minute grid interval.
+- Diary asset cache-bust moved to `v=46`.
 - Added `orchestration/booking_create_edit_review.md` for the Sprint 8 API/UI
   review path, including exact PowerShell snippets.
 

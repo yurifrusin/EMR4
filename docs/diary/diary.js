@@ -690,7 +690,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
     const lanes = [];
     colAppts.forEach(a => {
       const start = toMins(apptTimeKey(a));
-      const duration = Math.max(apptDurationMins(a, intervalMins), intervalMins);
+      const duration = Math.max(apptDurationMins(a, intervalMins), MIN_TIME_INCREMENT_MINS);
 
       let laneIdx = 0;
       while (laneIdx < lanes.length && lanes[laneIdx] > start) {
@@ -730,18 +730,22 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
     // Render appointments
     colAppts.forEach(a => {
       const start = toMins(apptTimeKey(a));
-      const duration = Math.max(apptDurationMins(a, intervalMins), intervalMins);
+      const duration = Math.max(apptDurationMins(a, intervalMins), MIN_TIME_INCREMENT_MINS);
       const end = start + duration;
       const isIrregular = !isOnMajorGrid(start, template) || !isOnMajorGrid(end, template);
 
       const topPx = (start - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
       const heightPx = duration * (SLOT_HEIGHT_PX / intervalMins);
+      const visualHeightPx = Math.max(heightPx - APPT_BLOCK_GAP_PX, 10);
 
       const cls = apptClass(a.status);
       const color = a.appointment_type?.color_hex || (a.appointment_type_id ? typeMap[a.appointment_type_id] : null);
 
       const span = document.createElement("span");
       span.className = `appt ${cls}`;
+      if (duration < intervalMins) {
+        span.classList.add("appt-short");
+      }
       span.dataset.id = a.id;
       if (color) {
         span.dataset.color = color;
@@ -753,8 +757,8 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       span.style.left = (1 + a._laneIdx * 8) + "px";
       span.style.right = "1px";
       span.style.zIndex = String(10 + a._laneIdx);
-      span.style.height = (heightPx - APPT_BLOCK_GAP_PX) + "px";
-      span.style.setProperty("--appt-height", (heightPx - APPT_BLOCK_GAP_PX) + "px");
+      span.style.height = visualHeightPx + "px";
+      span.style.setProperty("--appt-height", visualHeightPx + "px");
       span.tabIndex = 0;
 
       const patientName = `${a.patient.first_name} ${a.patient.last_name}`;
