@@ -169,9 +169,15 @@ html, body {
   text-overflow: ellipsis;
 }
 
-/* ─── GRID WRAPPER ─────────────────────────── */
-
 #diary-body {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  position: relative;
+}
+
+#diary-grid-container {
   flex: 1;
   overflow: auto;
   position: relative;
@@ -1056,5 +1062,257 @@ html, body {
   .form-row {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+/* ─── PATIENT FLOW WORKBENCH ────────────────── */
+#diary-flow-panel {
+  width: 290px;
+  min-width: 290px;
+  background-color: var(--white);
+  border-left: 1px solid var(--grey-2);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.05);
+  z-index: 50;
+}
+
+#diary-flow-panel.hidden {
+  display: none !important;
+}
+
+.flow-panel-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--grey-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--grey-1);
+}
+
+.flow-panel-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--blue-dark);
+}
+
+.flow-close-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--grey-3);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+.flow-close-btn:hover {
+  color: var(--red);
+}
+
+.flow-panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--grey-1);
+}
+
+.flow-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--grey-4);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.flow-section-title.waiting-title {
+  color: var(--blue-mid);
+}
+
+.flow-section-title.consult-title {
+  color: #10b981; /* green */
+}
+
+.flow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.flow-empty {
+  font-size: 11px;
+  color: var(--grey-3);
+  font-style: italic;
+  padding: 8px;
+  background-color: var(--white);
+  border: 1px dashed var(--grey-2);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.flow-card {
+  background-color: var(--white);
+  border: 1px solid var(--grey-2);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  transition: transform 0.1s, box-shadow 0.1s, border-color 0.1s;
+}
+
+.flow-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  border-color: var(--blue-mid);
+}
+
+.flow-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.flow-card-name {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.flow-card-edit-btn {
+  background: none;
+  border: none;
+  color: var(--grey-3);
+  cursor: pointer;
+  padding: 2px 4px;
+  font-size: 11px;
+  line-height: 1;
+  border-radius: 3px;
+}
+
+.flow-card-edit-btn:hover {
+  background-color: var(--grey-1);
+  color: var(--blue-mid);
+}
+
+.flow-card-details {
+  font-size: 11px;
+  color: var(--grey-4);
+}
+
+.flow-card-reason {
+  font-size: 10px;
+  color: var(--grey-3);
+  background-color: var(--grey-1);
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.flow-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  gap: 8px;
+}
+
+.flow-status-badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 1px solid;
+  text-transform: uppercase;
+}
+
+/* Card border accents based on status */
+.flow-card-booked { border-left: 4px solid var(--grey-3); }
+.flow-card-confirmed { border-left: 4px solid var(--blue-light); }
+.flow-card-arrived { border-left: 4px solid var(--blue-mid); }
+.flow-card-inconsult { border-left: 4px solid #10b981; }
+.flow-card-completed { border-left: 4px solid #059669; }
+.flow-card-noshow { border-left: 4px solid var(--grey-3); }
+.flow-card-dna { border-left: 4px solid var(--grey-3); }
+
+/* Finished Outcomes in Workbench (Names are line-through and greyed out) */
+.flow-card-completed .flow-card-name,
+.flow-card-noshow .flow-card-name,
+.flow-card-dna .flow-card-name {
+  text-decoration: line-through;
+  color: var(--grey-3);
+}
+
+.btn-primary-xs {
+  background-color: var(--blue-mid);
+  border: none;
+  color: var(--white);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-primary-xs:hover {
+  background-color: var(--blue-dark);
+}
+
+.btn-primary-xs:disabled {
+  background-color: var(--grey-2);
+  color: var(--grey-3);
+  cursor: not-allowed;
+}
+
+/* Pulse Highlight for Grid */
+@keyframes pulse-highlight {
+  0% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(33, 150, 243, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0); }
+}
+
+.appt-highlight {
+  animation: pulse-highlight 1s ease-in-out 2;
+  border: 2px solid var(--blue-mid) !important;
+}
+
+.btn-flow-toggle {
+  background-color: var(--white);
+  border: 1px solid var(--grey-2);
+  color: var(--blue-dark);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+}
+
+.btn-flow-toggle:hover {
+  border-color: var(--blue-mid);
+  background-color: var(--blue-light);
+}
+
+@media (max-width: 768px) {
+  #diary-flow-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    box-shadow: -4px 0 16px rgba(0,0,0,0.15);
   }
 }
