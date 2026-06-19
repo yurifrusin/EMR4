@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | ea0b41d |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-status-controls --commit-message "Add diary status controls" --message "Diary status controls ready for Codex review"` |
@@ -68,6 +68,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.css, docs/diary/diary.html
+- Verification run: Ran node --check docs\diary\diary.js (passed cleanly). Ran Python unit tests in virtual environment: pytest tests/test_diary_roster.py (11/11 passed cleanly in 39.24s). Manually reviewed status controls event stop-propagation logic, smoke-mode caching behavior, and CSS visibility styles.
+- Remaining risks: Double status updates (guarded via updatingStatus variable). Page reloads after update maintain state using data-id selectors.
