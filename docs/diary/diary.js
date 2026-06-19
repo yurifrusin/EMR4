@@ -18,6 +18,10 @@ const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
 const MIN_TIME_INCREMENT_MINS = 5;
 
+function isSmokeMode() {
+  return new URLSearchParams(window.location.search).get("smoke") === "true";
+}
+
 // ─── DIARY TEMPLATE FALLBACK (embedded — mirrors diary_template.json at repo root)
 // Breaks are per-column so each room can have different break windows.
 const FALLBACK_TEMPLATE = {
@@ -793,7 +797,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         setStatus("Updating status...");
 
         try {
-          if (isSmokeMode) {
+          if (isSmokeMode()) {
             a.status = newStatus;
             setStatus("Status updated (Mock)");
             await loadDiary(true);
