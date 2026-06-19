@@ -15,6 +15,7 @@ class DiaryBreakOut(BaseModel):
 class DiaryColumnOut(BaseModel):
     room_label: str
     assignment: Optional[str] = None
+    practitioner_id: Optional[UUID] = None
     practitioner_ahpra: Optional[str] = None
     tint_hex: Optional[str] = None
     slot_interval_minutes: Optional[int] = Field(default=None, ge=5)

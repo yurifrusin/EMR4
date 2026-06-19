@@ -291,6 +291,7 @@ function normalizeTemplate(raw) {
       return {
         room_label: roomLabel,
         assignment: String(col?.assignment || "").trim(),
+        practitioner_id: col?.practitioner_id ? String(col.practitioner_id).trim() : null,
         practitioner_ahpra: col?.practitioner_ahpra ? String(col.practitioner_ahpra).trim() : null,
         tint: normalizeTint(col?.tint_hex ?? col?.tint),
         slot_interval_minutes: columnInterval,
@@ -1049,6 +1050,7 @@ async function loadDiary(silent = false, options = {}) {
             return {
               room_label: entry.room_name,
               assignment: tmplCol.assignment || "[Available]",
+              practitioner_id: tmplCol.practitioner_id || null,
               practitioner_ahpra: tmplCol.practitioner_ahpra || null,
               tint: tmplCol.tint,
               slot_interval_minutes: tmplCol.slot_interval_minutes,
@@ -1066,6 +1068,7 @@ async function loadDiary(silent = false, options = {}) {
           return {
             room_label: entry.room_name,
             assignment: assignment,
+            practitioner_id: entry.practitioner_id || null,
             practitioner_ahpra: entry.practitioner_ahpra || null,
             tint: tmplCol ? tmplCol.tint : null,
             slot_interval_minutes: tmplCol ? tmplCol.slot_interval_minutes : null,
@@ -1082,7 +1085,18 @@ async function loadDiary(silent = false, options = {}) {
     activeTypes = types;
     ahpraToPractitionerMap = {};
 
-    // Scan appointments to populate practitioner AHPRA -> ID map
+    // Scan template/roster columns first so blank days can still create bookings.
+    template.columns.forEach(col => {
+      if (col.practitioner_ahpra && col.practitioner_id) {
+        ahpraToPractitionerMap[col.practitioner_ahpra] = {
+          id: col.practitioner_id,
+          first_name: "",
+          last_name: ""
+        };
+      }
+    });
+
+    // Scan appointments to populate richer practitioner AHPRA -> ID map
     appointments.forEach(a => {
       if (a.practitioner && a.practitioner.ahpra_number) {
         ahpraToPractitionerMap[a.practitioner.ahpra_number] = {
@@ -1125,7 +1139,7 @@ async function loadDiary(silent = false, options = {}) {
     // Assign practitioner_id to template columns
     template.columns.forEach(col => {
       if (col.practitioner_ahpra) {
-        col.practitioner_id = ahpraToPractitionerMap[col.practitioner_ahpra]?.id || null;
+        col.practitioner_id = col.practitioner_id || ahpraToPractitionerMap[col.practitioner_ahpra]?.id || null;
       } else {
         col.practitioner_id = null;
       }
