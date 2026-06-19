@@ -104,6 +104,11 @@ reviewed, integrated, verified, pushed, and audited.
   than as one flat list. Rooms should be able to point to a default waiting
   area, and the diary patient-flow panel can later expose area tabs or auto-focus
   the area associated with the active room/column.
+- Waiting-room interaction follow-up: when clicking a patient-flow card expands
+  and highlights the corresponding diary booking, auto-collapse the booking after
+  a short idle period, approximately 3 seconds, unless the user starts interacting
+  with that booking. Preserve this selection/expansion state as local-only UI
+  behaviour if live multi-user diary updates are added later.
 
 ## Verification
 
