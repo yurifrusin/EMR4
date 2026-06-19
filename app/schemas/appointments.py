@@ -73,6 +73,13 @@ class AppointmentUpdate(BaseModel):
     waiting_room: Optional[str] = None
     queue_position: Optional[int] = None
 
+    @model_validator(mode="after")
+    def reject_partial_local_pair(self):
+        has_partial = (self.appointment_date is None) != (self.start_time_local is None)
+        if has_partial:
+            raise ValueError("appointment_date and start_time_local must be supplied together")
+        return self
+
 
 class AppointmentStatusUpdate(BaseModel):
     status: AppointmentStatus

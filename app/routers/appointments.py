@@ -270,7 +270,9 @@ def create_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
+    practice_id = current_user.practice_id
+    booked_by = current_user.id
+    practice_tz = _practice_zoneinfo(db, practice_id)
     values = body.model_dump()
     appointment_date, start_time_local, start_time = _canonical_time_values(
         practice_tz,
@@ -282,13 +284,13 @@ def create_appointment(
     values["start_time_local"] = start_time_local
     values["start_time"] = start_time
 
-    _ensure_patient(body.patient_id, current_user.practice_id, db)
-    _ensure_practitioner(body.practitioner_id, current_user.practice_id, db)
-    _ensure_appointment_type(body.appointment_type_id, current_user.practice_id, db)
-    _ensure_location(body.location_id, current_user.practice_id, db)
+    _ensure_patient(body.patient_id, practice_id, db)
+    _ensure_practitioner(body.practitioner_id, practice_id, db)
+    _ensure_appointment_type(body.appointment_type_id, practice_id, db)
+    _ensure_location(body.location_id, practice_id, db)
     _raise_if_conflict(
         db,
-        current_user.practice_id,
+        practice_id,
         body.practitioner_id,
         appointment_date,
         start_time_local,
@@ -296,14 +298,14 @@ def create_appointment(
     )
 
     appt = Appointment(
-        practice_id=current_user.practice_id,
-        booked_by=current_user.id,
+        practice_id=practice_id,
+        booked_by=booked_by,
         **values,
     )
     db.add(appt)
     db.commit()
     db.refresh(appt)
-    return _get_appointment(appt.id, current_user.practice_id, db)
+    return _get_appointment(appt.id, practice_id, db)
 
 
 @router.get("/waiting-room", response_model=list[AppointmentOut])
@@ -355,8 +357,9 @@ def update_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
-    appt = _get_appointment(appointment_id, current_user.practice_id, db)
+    practice_id = current_user.practice_id
+    practice_tz = _practice_zoneinfo(db, practice_id)
+    appt = _get_appointment(appointment_id, practice_id, db)
     values = body.model_dump(exclude_unset=True)
 
     practitioner_id = values.get("practitioner_id", appt.practitioner_id)
@@ -382,13 +385,13 @@ def update_appointment(
         values["start_time_local"] = start_time_local
         values["start_time"] = start_time
 
-    _ensure_practitioner(practitioner_id, current_user.practice_id, db)
-    _ensure_appointment_type(appointment_type_id, current_user.practice_id, db)
-    _ensure_location(location_id, current_user.practice_id, db)
+    _ensure_practitioner(practitioner_id, practice_id, db)
+    _ensure_appointment_type(appointment_type_id, practice_id, db)
+    _ensure_location(location_id, practice_id, db)
     if {"practitioner_id", "start_time", "appointment_date", "start_time_local", "duration_minutes"} & values.keys():
         _raise_if_conflict(
             db,
-            current_user.practice_id,
+            practice_id,
             practitioner_id,
             appointment_date,
             start_time_local,
@@ -399,7 +402,7 @@ def update_appointment(
     for field, value in values.items():
         setattr(appt, field, value)
     db.commit()
-    return _get_appointment(appointment_id, current_user.practice_id, db)
+    return _get_appointment(appointment_id, practice_id, db)
 
 
 @router.patch("/{appointment_id}/status", response_model=AppointmentOut)
@@ -409,10 +412,11 @@ def update_appointment_status(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    appt = _get_appointment(appointment_id, current_user.practice_id, db)
+    practice_id = current_user.practice_id
+    appt = _get_appointment(appointment_id, practice_id, db)
     appt.status = body.status
     db.commit()
-    return _get_appointment(appointment_id, current_user.practice_id, db)
+    return _get_appointment(appointment_id, practice_id, db)
 
 
 @router.delete("/{appointment_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -421,7 +425,8 @@ def cancel_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    appt = _get_appointment(appointment_id, current_user.practice_id, db)
+    practice_id = current_user.practice_id
+    appt = _get_appointment(appointment_id, practice_id, db)
     appt.status = AppointmentStatus.Cancelled
     db.commit()
 
