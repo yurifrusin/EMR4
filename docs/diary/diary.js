@@ -404,7 +404,7 @@ function shouldAutoScrollToNow(template) {
 }
 
 function scrollToTime(mins, template) {
-  const body = document.getElementById("diary-body");
+  const body = document.getElementById("diary-grid-container") || document.getElementById("diary-body");
   if (!body) return;
   const top = Math.max(0, markerTopPx(mins, template) - SLOT_HEIGHT_PX * 2);
   body.scrollTo({ top, behavior: "smooth" });
@@ -838,53 +838,10 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         statusSelect.appendChild(opt);
       });
 
-      let updatingStatus = false;
       statusSelect.addEventListener("change", async (e) => {
-        if (updatingStatus) return;
         const newStatus = e.target.value;
         if (newStatus === a.status) return;
-
-        updatingStatus = true;
-        statusSelect.disabled = true;
-        setStatus("Updating status...");
-
-        try {
-          if (isSmokeMode()) {
-            a.status = newStatus;
-            setStatus("Status updated (Mock)");
-            await loadDiary(true);
-            const el = document.querySelector(`.appt[data-id="${a.id}"]`);
-            if (el) el.classList.add("appt-active");
-          } else {
-            const res = await apiFetch(`/appointments/${a.id}/status`, {
-              method: "PATCH",
-              body: JSON.stringify({ status: newStatus })
-            });
-            if (!res.ok) {
-              const text = await res.text();
-              throw new Error(`Failed to update status: ${res.status} ${text}`);
-            }
-            const updatedAppt = await res.json();
-            a.status = updatedAppt.status;
-            setStatus("Status updated successfully.");
-            await loadDiary(true);
-            const el = document.querySelector(`.appt[data-id="${a.id}"]`);
-            if (el) el.classList.add("appt-active");
-          }
-        } catch (err) {
-          console.error("Error updating status:", err);
-          if (err.message === "401 Unauthorized") {
-            showError("Session expired. Please reopen the taskpane to sign in again.");
-            setStatus("Session expired.");
-          } else {
-            showError(err.message || "Failed to update appointment status.");
-            setStatus("Error updating status.");
-          }
-          statusSelect.value = a.status;
-        } finally {
-          updatingStatus = false;
-          statusSelect.disabled = false;
-        }
+        await setAppointmentStatus(a, newStatus, statusSelect);
       });
 
       statusChanger.appendChild(statusSelect);
@@ -922,7 +879,8 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
     grid.appendChild(column);
   });
 
-  document.getElementById("diary-grid").classList.remove("hidden");
+  const container = document.getElementById("diary-grid-container") || document.getElementById("diary-grid");
+  container.classList.remove("hidden");
   showLoading(false);
   showError("");
 }
@@ -1018,7 +976,8 @@ async function loadDiary(silent = false, options = {}) {
   }
   if (!silent) {
     showLoading(true);
-    document.getElementById("diary-grid").classList.add("hidden");
+    const container = document.getElementById("diary-grid-container") || document.getElementById("diary-grid");
+    container.classList.add("hidden");
   }
   showError("");
 
@@ -1204,9 +1163,22 @@ async function loadDiary(silent = false, options = {}) {
 
     const autoScroll = shouldAutoScrollToNow(activeTemplate);
     renderGrid(activeTemplate, slots, apptLookup, typeMap, occupied);
-    if (options.scrollToNow || autoScroll) {
+
+    // Load today's appointments for flow sidebar in background
+    await loadTodayAppointments();
+
+    if (options.scrollToApptId) {
+      setTimeout(() => scrollToAppointment(options.scrollToApptId), 100);
+    } else if (options.scrollToNow || autoScroll) {
       scrollToTime(nowMins(), activeTemplate);
       autoScrolledDateKey = diaryDate.toISOString().slice(0, 10);
+    }
+
+    // Refresh flow panel if it's currently open, else update badge count
+    if (localStorage.getItem("emr4_diary_flow_open") === "true") {
+      await updateFlowPanel();
+    } else {
+      updateFlowBadgeCount();
     }
 
     const total = visibleAppointments.length;
@@ -1355,6 +1327,18 @@ Office.onReady(() => {
   document.getElementById("break-modal").addEventListener("click", e => {
     if (e.target === e.currentTarget) closeBreakModal();
   });
+
+  // Patient Flow toggle hooks
+  const btnToggleFlow = document.getElementById("btn-toggle-flow");
+  if (btnToggleFlow) btnToggleFlow.onclick = toggleFlowPanel;
+  
+  const btnCloseFlow = document.getElementById("btn-close-flow");
+  if (btnCloseFlow) btnCloseFlow.onclick = toggleFlowPanel;
+  
+  const flowOpen = localStorage.getItem("emr4_diary_flow_open");
+  if (flowOpen === "true") {
+    document.getElementById("diary-flow-panel")?.classList.remove("hidden");
+  }
 
   updateDateLabel();
 
@@ -1738,5 +1722,266 @@ async function deleteBooking() {
     errorEl.classList.remove("hidden");
   } finally {
     deleteBtn.disabled = false;
+  }
+}
+
+// ─── PATIENT FLOW WORKBENCH & WAITING ROOM LOGIC ───────────
+let todayAppointments = [];
+
+async function setAppointmentStatus(appt, newStatus, selectEl = null) {
+  if (selectEl) selectEl.disabled = true;
+  setStatus("Updating status...");
+  
+  try {
+    if (isSmokeMode()) {
+      appt.status = newStatus;
+      setStatus("Status updated (Mock)");
+      await loadDiary(true);
+      const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
+      if (el) el.classList.add("appt-active");
+    } else {
+      const res = await apiFetch(`/appointments/${appt.id}/status`, {
+        method: "PATCH",
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Failed to update status: ${res.status} ${text}`);
+      }
+      const updatedAppt = await res.json();
+      appt.status = updatedAppt.status;
+      setStatus("Status updated successfully.");
+      await loadDiary(true);
+      const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
+      if (el) el.classList.add("appt-active");
+    }
+    await updateFlowPanel();
+  } catch (err) {
+    console.error("Error updating status:", err);
+    if (err.message === "401 Unauthorized") {
+      showError("Session expired. Please reopen the taskpane to sign in again.");
+      setStatus("Session expired.");
+    } else {
+      showError(err.message || "Failed to update appointment status.");
+      setStatus("Error updating status.");
+    }
+    if (selectEl) selectEl.value = appt.status;
+  } finally {
+    if (selectEl) selectEl.disabled = false;
+  }
+}
+
+function toggleFlowPanel() {
+  const panel = document.getElementById("diary-flow-panel");
+  if (!panel) return;
+  const isHidden = panel.classList.contains("hidden");
+  if (isHidden) {
+    panel.classList.remove("hidden");
+    localStorage.setItem("emr4_diary_flow_open", "true");
+    updateFlowPanel();
+  } else {
+    panel.classList.add("hidden");
+    localStorage.setItem("emr4_diary_flow_open", "false");
+  }
+}
+
+function updateFlowBadgeCount() {
+  const arrivedCount = todayAppointments.filter(a => a.status === "Arrived").length;
+  const countEl = document.getElementById("flow-waiting-count");
+  if (countEl) {
+    countEl.textContent = arrivedCount;
+  }
+}
+
+async function loadTodayAppointments() {
+  if (isSameClinicDay(diaryDate, new Date())) {
+    todayAppointments = activeAppointments;
+    return;
+  }
+  
+  if (isSmokeMode()) {
+    todayAppointments = getMockAppointments().filter(a => {
+      let dateStr = a.appointment_date;
+      if (dateStr && dateStr.includes("T")) dateStr = dateStr.split("T")[0];
+      const todayStr = new Date().toISOString().slice(0, 10);
+      return dateStr === todayStr;
+    });
+    return;
+  }
+  
+  try {
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const todayEnd = new Date(todayStart);
+    todayEnd.setHours(23, 59, 59, 999);
+    const params = `date_from=${todayStart.toISOString()}&date_to=${todayEnd.toISOString()}`;
+    const res = await apiFetch(`/appointments?${params}`);
+    if (res.ok) {
+      todayAppointments = await res.json();
+    }
+  } catch (err) {
+    console.warn("Failed to fetch today's appointments for flow badge:", err);
+  }
+}
+
+async function updateFlowPanel() {
+  const panel = document.getElementById("diary-flow-panel");
+  if (!panel || panel.classList.contains("hidden")) return;
+  
+  const waiting = [];
+  const consult = [];
+  const expected = [];
+  const finished = [];
+  
+  todayAppointments.forEach(a => {
+    if (a.status === "Cancelled") return;
+    
+    if (a.status === "Arrived") {
+      waiting.push(a);
+    } else if (a.status === "InConsult") {
+      consult.push(a);
+    } else if (a.status === "Booked" || a.status === "Confirmed") {
+      expected.push(a);
+    } else if (["Completed", "NoShow", "DNA"].includes(a.status)) {
+      finished.push(a);
+    }
+  });
+  
+  const sortByTime = (x, y) => {
+    const tX = apptTimeKey(x) || "00:00";
+    const tY = apptTimeKey(y) || "00:00";
+    return tX.localeCompare(tY);
+  };
+  
+  waiting.sort(sortByTime);
+  consult.sort(sortByTime);
+  expected.sort(sortByTime);
+  finished.sort(sortByTime);
+  
+  const secWaiting = document.querySelector("#flow-sec-waiting .flow-sec-count");
+  if (secWaiting) secWaiting.textContent = waiting.length;
+  
+  const secConsult = document.querySelector("#flow-sec-consult .flow-sec-count");
+  if (secConsult) secConsult.textContent = consult.length;
+  
+  const secExpected = document.querySelector("#flow-sec-expected .flow-sec-count");
+  if (secExpected) secExpected.textContent = expected.length;
+  
+  const secFinished = document.querySelector("#flow-sec-finished .flow-sec-count");
+  if (secFinished) secFinished.textContent = finished.length;
+  
+  renderFlowList("flow-list-waiting", waiting, "Start Consult", "InConsult");
+  renderFlowList("flow-list-consult", consult, "Complete", "Completed");
+  renderFlowList("flow-list-expected", expected, "Check In", "Arrived");
+  renderFlowList("flow-list-finished", finished, null, null);
+  
+  updateFlowBadgeCount();
+}
+
+function renderFlowList(containerId, appts, actionLabel, targetStatus) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = "";
+  
+  if (appts.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "flow-empty";
+    empty.textContent = "No patients";
+    container.appendChild(empty);
+    return;
+  }
+  
+  appts.forEach(a => {
+    const card = document.createElement("div");
+    card.className = `flow-card flow-card-${(a.status || "booked").toLowerCase()}`;
+    
+    const header = document.createElement("div");
+    header.className = "flow-card-header";
+    
+    const name = document.createElement("span");
+    name.className = "flow-card-name";
+    name.textContent = `${a.patient.first_name} ${a.patient.last_name}`;
+    header.appendChild(name);
+    
+    const editBtn = document.createElement("button");
+    editBtn.className = "flow-card-edit-btn";
+    editBtn.type = "button";
+    editBtn.innerHTML = "✎";
+    editBtn.title = "Edit appointment";
+    editBtn.onclick = (e) => {
+      e.stopPropagation();
+      openBookingModalForEdit(a);
+    };
+    header.appendChild(editBtn);
+    card.appendChild(header);
+    
+    const details = document.createElement("div");
+    details.className = "flow-card-details";
+    const timeStr = apptTimeKey(a) || "09:00";
+    const roomStr = a.practitioner ? `${a.practitioner.first_name} ${a.practitioner.last_name}` : "Room";
+    details.textContent = `${timeStr} — ${roomStr}`;
+    card.appendChild(details);
+    
+    if (a.reason) {
+      const reason = document.createElement("div");
+      reason.className = "flow-card-reason";
+      reason.textContent = a.reason;
+      card.appendChild(reason);
+    }
+    
+    const footer = document.createElement("div");
+    footer.className = "flow-card-footer";
+    
+    const statusBadge = document.createElement("span");
+    statusBadge.className = `flow-status-badge badge-${(a.status || "booked").toLowerCase()}`;
+    statusBadge.textContent = getStatusLabel(a.status);
+    footer.appendChild(statusBadge);
+    
+    if (actionLabel && targetStatus) {
+      const actionBtn = document.createElement("button");
+      actionBtn.className = "flow-card-action-btn btn-primary-xs";
+      actionBtn.type = "button";
+      actionBtn.textContent = actionLabel;
+      
+      let updatingCardStatus = false;
+      actionBtn.onclick = async (e) => {
+        e.stopPropagation();
+        if (updatingCardStatus) return;
+        updatingCardStatus = true;
+        actionBtn.disabled = true;
+        await setAppointmentStatus(a, targetStatus);
+        updatingCardStatus = false;
+      };
+      footer.appendChild(actionBtn);
+    }
+    
+    card.appendChild(footer);
+    
+    card.onclick = (e) => {
+      if (e.target.closest("button") || e.target.closest("select")) return;
+      
+      const apptDate = new Date(a.appointment_date);
+      if (!isSameClinicDay(diaryDate, apptDate)) {
+        diaryDate = apptDate;
+        updateDateLabel();
+        loadDiary(false, { scrollToApptId: a.id });
+      } else {
+        scrollToAppointment(a.id);
+      }
+    };
+    
+    container.appendChild(card);
+  });
+}
+
+function scrollToAppointment(apptId) {
+  const el = document.querySelector(`.appt[data-id="${apptId}"]`);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    el.classList.add("appt-highlight");
+    setTimeout(() => el.classList.remove("appt-highlight"), 2000);
+    
+    document.querySelectorAll(".appt-active").forEach(x => x.classList.remove("appt-active"));
+    el.classList.add("appt-active");
   }
 }

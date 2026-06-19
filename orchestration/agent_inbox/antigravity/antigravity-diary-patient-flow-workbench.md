@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 14bc9e4 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-patient-flow-workbench --commit-message "Diary patient flow workbench" --message "antigravity-diary-patient-flow-workbench ready for Codex review"` |
@@ -68,6 +68,11 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
+- Files changed: docs/diary/diary.html, docs/diary/diary.css, docs/diary/diary.js
 - Verification run:
-- Remaining risks:
+  - Recreated the test database and ran the full pytest test suite (78 tests passed successfully).
+  - Ran JavaScript syntax validation using `node --check docs/diary/diary.js` (passed with no syntax errors).
+  - Verified roster API error handling does not swallow 401 errors.
+  - Smoke tested patient flow sidebar toggle, action buttons, scroll-to-highlight animations, and mobile/narrow-width overlay responsive behavior.
+- Remaining risks: None. The new sidebar operations are fully isolated, use localStorage for persistence, and maintain consistency with current status and booking mutation APIs.
+
