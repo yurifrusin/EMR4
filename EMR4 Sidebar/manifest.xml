@@ -5,9 +5,9 @@
   <ProviderName>EMR4</ProviderName>
   <DefaultLocale>en-AU</DefaultLocale>
   <DisplayName DefaultValue="EMR"/>
-  <Description DefaultValue="GP-AI Centaur: intelligent clinical coding, scribe, and letter writing for Australian general practice."/>
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
+  <Description DefaultValue="EMR: intelligent clinical coding, scribe, and letter writing for Australian general practice."/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/emr_cube1.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/emr_cube1.png"/>
   <SupportUrl DefaultValue="https://github.com/emr4/emr4"/>
   <AppDomains>
     <AppDomain>http://localhost:8001</AppDomain>
@@ -62,9 +62,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/emr_cube1.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/emr_cube1.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/emr_cube1.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
