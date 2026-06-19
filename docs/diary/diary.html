@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=39" />
-  <script src="diary.js?v=39" defer></script>
+  <link rel="stylesheet" href="diary.css?v=40" />
+  <script src="diary.js?v=40" defer></script>
 </head>
 <body>
 
@@ -25,8 +25,8 @@
     <button id="btn-prev-day" title="Previous day">&#8249;</button>
     <div class="date-picker-wrapper">
       <span id="diary-date-label" title="Select date">—</span>
-      <input type="date" id="diary-date-picker" style="position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0;" />
-      <button id="btn-calendar" title="Select date" style="background: none; border: none; cursor: pointer; color: #d0e4f7; padding: 2px; display: inline-flex; align-items: center; justify-content: center;">📅</button>
+      <input type="date" id="diary-date-picker" aria-label="Select diary date" />
+      <button id="btn-calendar" title="Select date" aria-label="Select date">&#128197;</button>
     </div>
     <button id="btn-next-day" title="Next day">&#8250;</button>
     <button id="btn-today" title="Go to today">Today</button>
