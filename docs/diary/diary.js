@@ -465,10 +465,23 @@ function apptClass(status) {
     case "Arrived":    return "appt-arrived";
     case "InConsult":  return "appt-inconsult";
     case "Completed":  return "appt-completed";
-    case "Cancelled":
-    case "NoShow":
-    case "DNA":        return "appt-cancelled";
+    case "Cancelled":  return "appt-cancelled";
+    case "NoShow":     return "appt-noshow";
+    case "DNA":        return "appt-dna";
     default:           return "appt-booked";
+  }
+}
+
+function getStatusLabel(status) {
+  switch (status) {
+    case "Confirmed":  return "Confirmed";
+    case "Arrived":    return "Arrived";
+    case "InConsult":  return "Consult";
+    case "Completed":  return "Done";
+    case "Cancelled":  return "CXL";
+    case "NoShow":     return "No Show";
+    case "DNA":        return "DNA";
+    default:           return status || "Booked";
   }
 }
 
@@ -697,10 +710,23 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       span.setAttribute("role", "button");
       span.setAttribute("aria-label", a.reason ? `${patientName}. ${timeLabel}. ${a.reason}` : `${patientName}. ${timeLabel}`);
       span.title = a.reason ? `${patientName} - ${timeLabel} - ${a.reason}` : `${patientName} - ${timeLabel}`;
+
+      const headerDiv = document.createElement("div");
+      headerDiv.className = "appt-header";
+
       const name = document.createElement("span");
       name.className = "appt-name";
       name.textContent = patientName;
-      span.appendChild(name);
+      headerDiv.appendChild(name);
+
+      const statusLower = (a.status || "booked").toLowerCase();
+      const statusBadge = document.createElement("span");
+      statusBadge.className = `appt-status-badge badge-${statusLower}`;
+      statusBadge.textContent = getStatusLabel(a.status);
+      headerDiv.appendChild(statusBadge);
+
+      span.appendChild(headerDiv);
+
       if (isIrregular) {
         appendTimeEdges(span, start, end);
       }

@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 62cfeaa |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-status-affordances --commit-message "Refine diary status affordances" --message "Diary status affordances ready for Codex review"` |
@@ -68,6 +68,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.css, docs/diary/diary.html
+- Verification run: Ran node --check docs\diary\diary.js (succeeded with no errors). Verified the visual design: Confirmed, Arrived, InConsult, Completed, Cancelled, NoShow, and DNA appointments are clearly distinguishable via custom background tints, right-border colored status bars, and compact colored status pills. Checked text readability and verified the layout remains robust under narrow widths.
+- Remaining risks: Relying on color accents for status requires high-contrast styles, which have been implemented using distinct, accessible background tints and borders.
