@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-booking-create-edit-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -62,5 +62,5 @@ claude-booking-create-edit-contract ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated in Sprint 8 local review branch. Production code unchanged; new create/edit contract tests passed and existing appointment/status/waiting-room/slot regressions passed.
+- Follow-up required: Consider adding an `AppointmentUpdate` validator for partial local date/time pairs if the UI ever exposes date-only or time-only edits.

@@ -52,8 +52,8 @@ python seed.py
 2. Verify the new appointment appears in the correct date, room/practitioner
    column, time position, duration height, status styling, and appointment-type
    accent.
-3. Edit the same appointment's time, duration, reason, and notes; verify the
-   card updates only after a successful save.
+3. Edit the same appointment's time, duration, reason, appointment type, and
+   status; verify the card updates only after a successful save.
 4. Attempt a booking that overlaps an existing active appointment; verify the UI
    keeps the old grid state and presents the conflict clearly.
 5. Narrow the diary window and confirm create/edit controls do not crowd patient
@@ -64,7 +64,7 @@ python seed.py
 ## Optional User Review
 
 - Try creating a booking with no appointment type if the modal allows it.
-- Try editing only reason/notes without changing time or duration.
+- Try editing only the reason without changing time or duration.
 - Try creating a booking on a different date and verify date navigation fetches
   it without a stale modal state.
 - Try smoke mode for visual affordances, but do not treat smoke mode as proof of
@@ -145,7 +145,6 @@ $CreateBody = @{
   start_time_local = "14:10:00"
   duration_minutes = 20
   reason = "Sprint 8 create review"
-  notes = "Created from PowerShell review checklist"
   booked_via = "Receptionist"
 } | ConvertTo-Json
 
@@ -170,7 +169,6 @@ $EditBody = @{
   start_time_local = "14:35:00"
   duration_minutes = 25
   reason = "Sprint 8 edit review"
-  notes = "Edited from PowerShell review checklist"
 } | ConvertTo-Json
 
 $Edited = Invoke-RestMethod `
@@ -180,7 +178,7 @@ $Edited = Invoke-RestMethod `
   -ContentType "application/json" `
   -Body $EditBody
 
-$Edited | Select-Object id, appointment_date, start_time_local, duration_minutes, status, reason, notes
+$Edited | Select-Object id, appointment_date, start_time_local, duration_minutes, status, reason, appointment_type_id
 ```
 
 Expected: HTTP `200`; patient, practitioner, practice, status, and booked channel
@@ -275,7 +273,7 @@ manual review if you want the dev diary tidy.
 
 ## Explicitly Out Of Scope
 
-- Drag/drop, resize, delete UI, and recurring appointments.
+- Drag/drop, resize, hard-delete UI, and recurring appointments.
 - Roster admin UI or room assignment management.
 - Waiting-room display app, kiosk check-in, SMS reminder behavior, and online
   booking portal behavior.

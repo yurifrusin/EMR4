@@ -8,55 +8,54 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 7: Controlled Status Mutation |
-| Integrated through | `aa594a5` on `master` / `handoff/current` |
-| Status | User review passed |
+| Batch | Sprint 8: Booking Create/Edit First Slice |
+| Integrated through | Sprint 8 local review branch; pending push to `master` |
+| Status | Integrated locally, pending deploy/user review |
 | Last updated | 2026-06-19 |
 
 ## What Changed
 
-- Added `tests/test_appointment_status_mutations.py` covering status PATCH auth,
-  role guard, not-found/cross-practice isolation, valid/invalid statuses,
-  response shape, and waiting-room inclusion/exclusion after mutation.
-- Diary appointment cards now expose a compact status selector only when an
-  appointment is active/expanded.
-- The diary PATCHes `/appointments/{id}/status`, refreshes after success, handles
-  smoke mode locally, and shows clear errors for failed updates/session expiry.
-- Diary asset cache-bust moved to `v=43` after the smoke-mode status-change hotfix.
-- Added `orchestration/status_mutation_review.md` for Sprint 7 manual review.
+- Added `tests/test_booking_create_edit.py` with 31 backend tests covering
+  booking create/edit auth, role/scope gates, local time pair handling,
+  UTC fallback, response shape, conflict behavior, adjacent bookings,
+  non-blocking terminal statuses, duration changes, practitioner changes,
+  and appointment type updates.
+- Added a diary create/edit modal for practical staff booking work:
+  click an empty slot to create, open an appointment and use Edit to modify.
+- The modal supports patient search, practitioner/room selection where a
+  practitioner ID is known, appointment type, date, time, duration, status,
+  and reason.
+- Existing status controls remain separate and available on expanded cards.
+- The former "delete" action is represented as cancellation because the current
+  backend `DELETE` route status-cancels an appointment rather than hard-deleting
+  it.
+- Diary asset cache-bust moved to `v=44`.
+- Added `orchestration/booking_create_edit_review.md` for the Sprint 8 API/UI
+  review path, including exact PowerShell snippets.
 
 ## Recommended User Review
 
-User review result: passed.
+After the final push has deployed:
 
-1. Open the live diary from the taskpane and click an appointment card; confirm
-   the status selector appears only on the active/expanded card. **Passed.**
-2. Change one appointment through `Booked`, `Confirmed`, `Arrived`, `InConsult`,
-   and `Completed`; confirm the visible badge/colour/status updates after each
-   successful change. **Passed.**
-3. Set an appointment to `Cancelled`, `NoShow`, and `DNA`; confirm the card is
-   visually de-emphasised and no longer appears in `/appointments/waiting-room`.
-   **Passed; 10:00 Margaret set to `DNA`, excluded from waiting room.**
-4. Narrow the diary window and confirm the selector does not crowd patient names,
-   booking notes, break labels, date controls, Refresh, or Now. **Passed.**
-5. Confirm long, overlapping, off-grid, and note-heavy appointments still render
-   and can still be inspected. **Passed.**
-6. Force or observe an expired session and confirm the diary shows a clear
-   session-expired path rather than pretending the update succeeded. **Passed;
-   invalid token produced 401 and did not silently update.**
-7. Optionally use `orchestration/status_mutation_review.md` for the full manual
-   API/UI/failure checklist. **Completed enough for Sprint 7 closeout.**
-
-Waiting-room API confirmation:
-
-```text
-Waiting room count: 1
-81cbe4e4-159e-4cf4-b749-a342f1bc77af  Arrived  2026-06-19  09:00:00
-```
+1. Open the live diary from the taskpane and create one booking from an empty
+   slot in a practitioner-backed room.
+2. Confirm patient search works, the created card appears in the correct
+   date/room/time/duration position, and the grid refreshes after save.
+3. Edit the same booking's time, duration, reason, appointment type, and status;
+   confirm changes appear only after a successful save.
+4. Try an overlapping booking and confirm the UI shows a readable conflict
+   without silently changing the grid.
+5. Use Cancel Booking on the test appointment and confirm it becomes visually
+   terminal/non-active rather than disappearing as a hard delete.
+6. Narrow the diary window and confirm the create/edit modal and expanded card
+   controls remain usable without crowding patient names, notes, status controls,
+   breaks, Refresh, Now, or date navigation.
+7. Optionally run the PowerShell API snippets in
+   `orchestration/booking_create_edit_review.md` for direct API confirmation.
 
 ## Not Required Before Moving On
 
-- Booking create/edit/drag/drop/resize is still intentionally out of scope.
+- Drag/drop and resize are still intentionally out of scope.
 - Roster admin UI is not built yet.
 - Online booking portal behaviour is not applicable yet.
 - A full live waiting-room display app is not built yet.
@@ -72,11 +71,24 @@ Waiting room count: 1
   running two pytest processes against the same `gp_pms_test` database in parallel.
 - Dirty stale disposable worktree `codex/time-model` remains visible and should be
   reviewed before retirement.
+- `AppointmentUpdate` now supports appointment type updates, but partial date-only
+  or time-only update requests remain router-tolerant rather than schema-rejected.
+- Practitioner mapping in the diary modal depends on AHPRA-to-ID data discoverable
+  from roster or appointments. Non-practitioner/label-only rooms should not be
+  treated as fully bookable yet.
 
 ## Verification
 
 These are Codex/orchestrator verification notes, not commands the user is expected
 to run.
+
+- `node --check docs\diary\diary.js` -> passed
+- `git diff --check` -> passed
+- `.venv\Scripts\python.exe -m pytest tests/test_booking_create_edit.py -q` -> 31 passed
+- `.venv\Scripts\python.exe -m pytest tests/test_appointment_conflicts.py tests/test_appointment_status_mutations.py tests/test_waiting_room.py tests/test_slots.py -q` -> 54 passed
+- `.venv\Scripts\python.exe -m pytest tests/test_diary_roster.py -q` -> 11 passed
+
+Historical Sprint 7 verification:
 
 - `node --check docs\diary\diary.js` -> passed
 - `git diff --check` -> passed
@@ -87,45 +99,7 @@ to run.
 
 ## Recommended Next Direction
 
-If user review passes, the next sprint can start booking create/edit planning in
-a narrow way. Recommended order: simple create/edit form or modal first, then
-drag/drop/resize later once mutation semantics and conflict handling feel solid.
-
-## Sprint 8 Closeout Draft: Booking Create/Edit First Slice
-
-This draft is for Codex integration after the active Sprint 8 submissions land.
-Do not replace the current Sprint 7 closeout until Claude's backend contract,
-Antigravity's diary modal, and Codex's review plan are submitted, reviewed,
-integrated, verified, pushed, and audited.
-
-### Draft What Changed
-
-- Backend appointment create/edit contract hardened for diary use.
-- Diary create/edit modal added for practical receptionist booking work.
-- Booking create/edit review checklist added at
-  `orchestration/booking_create_edit_review.md`.
-
-### Draft Recommended User Review
-
-- Run the required PowerShell API snippets in
-  `orchestration/booking_create_edit_review.md`.
-- Open the live diary, create one booking, edit its time/duration/reason/notes,
-  and verify the card refreshes only after successful API saves.
-- Attempt an overlapping booking and verify the UI shows a clear conflict without
-  silently mutating the grid.
-- Narrow the diary window and confirm create/edit controls coexist with patient
-  names, notes, status controls, breaks, Refresh, Now, and date navigation.
-
-### Draft Not Required Before Moving On
-
-- Drag/drop, resize, recurring appointments, delete UI, roster admin UI,
-  waiting-room display app, SMS, kiosk, online booking, taskpane consultation,
-  Command Centre, and Gemini review remain intentionally out of scope.
-
-### Draft Known Follow-Up
-
-- Decide whether delete should remain status-only cancellation or expose a
-  distinct UI action later.
-- Drag/drop/resize should wait until this manual create/edit path is reviewed.
-- Any patient-facing online booking rules should be handled in a separate portal
-  contract, not inferred from staff diary behavior.
+If user review passes, the next sprint should refine booking ergonomics before
+drag/drop: conflict messaging, practitioner/room availability, and whether staff
+need an explicit hard-delete/archive distinction separate from cancellation.
+Drag/drop/resize should wait until the form-based create/edit path feels solid.

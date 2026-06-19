@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 9ccd838 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent claude --task claude-booking-create-edit-contract --commit-message "Booking create/edit contract" --message "claude-booking-create-edit-contract ready for Codex review"` |

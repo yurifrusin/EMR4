@@ -1061,6 +1061,7 @@ async function loadDiary(silent = false, options = {}) {
     // Update global cache variables
     activeAppointments = appointments;
     activeTypes = types;
+    ahpraToPractitionerMap = {};
 
     // Scan appointments to populate practitioner AHPRA -> ID map
     appointments.forEach(a => {
@@ -1620,7 +1621,7 @@ async function saveBooking() {
 async function deleteBooking() {
   if (!editingAppointmentId) return;
   
-  if (!confirm("Are you sure you want to delete this appointment?")) {
+  if (!confirm("Are you sure you want to cancel this appointment?")) {
     return;
   }
   
@@ -1634,7 +1635,7 @@ async function deleteBooking() {
     const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
     if (isSmokeMode) {
       mockAppointmentsCache = mockAppointmentsCache.filter(x => x.id !== editingAppointmentId);
-      setStatus("Booking deleted (Mock).");
+      setStatus("Booking cancelled (Mock).");
     } else {
       const res = await apiFetch(`/appointments/${editingAppointmentId}`, {
         method: "DELETE"
@@ -1643,13 +1644,13 @@ async function deleteBooking() {
         const text = await res.text();
         throw new Error(`Delete failed: ${res.status} ${text}`);
       }
-      setStatus("Booking deleted successfully.");
+      setStatus("Booking cancelled successfully.");
     }
     closeBookingModal();
     await loadDiary(true);
   } catch (err) {
     console.error(err);
-    errorEl.textContent = err.message || "An error occurred while deleting the booking.";
+    errorEl.textContent = err.message || "An error occurred while cancelling the booking.";
     errorEl.classList.remove("hidden");
   } finally {
     deleteBtn.disabled = false;

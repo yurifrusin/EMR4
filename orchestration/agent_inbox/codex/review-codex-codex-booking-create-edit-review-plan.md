@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/booking-create-edit-review-plan` |
 | Source Task | `codex-booking-create-edit-review-plan` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -37,5 +37,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated in Sprint 8 local review branch. Review checklist accepted with small wording updates to match the actual UI and cancellation semantics.
+- Follow-up required: Reconcile checklist again if user review exposes API/UI contract differences.

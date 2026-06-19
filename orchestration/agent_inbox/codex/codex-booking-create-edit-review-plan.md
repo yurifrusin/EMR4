@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/booking-create-edit-review-plan` |
-| Status | submitted |
+| Status | integrated |
 | Created | 9ccd838 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-booking-create-edit-review-plan --commit-message "Booking create/edit review plan" --message "codex-booking-create-edit-review-plan ready for Codex review"` |

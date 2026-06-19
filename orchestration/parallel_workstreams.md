@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
+| Status | Integrated, pending user review |
 | Launch Gate | Complete |
-| Integration Gate | Pending |
+| Integration Gate | Complete |
 | Theme | Add a practical create/edit booking path without starting drag/drop/resize |
 
 ### Workstream W - Booking Create/Edit Contract
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Appointment models/schemas/router, focused create/edit/conflict/auth/scope tests, minimal seed/test helper changes if needed |
 | Out of Scope | Diary frontend, drag/drop/resize UI, roster admin UI, waiting-room display app, taskpane/Command Centre/Gemini, online booking portal |
 | Verification | Focused appointment conflict/status/waiting-room/slots pytest suites plus any new booking create/edit tests |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream X - Diary Create/Edit Modal
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` |
 | Out of Scope | Backend routes/models/tests, drag/drop/resize, recurring appointments, roster admin UI, waiting-room display app, taskpane/Command Centre/Gemini, online booking portal |
 | Verification | JS syntax plus live/smoke/narrow create/edit/failure visual checks |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream Y - Booking Create/Edit Review Plan
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Orchestration/review documentation, including exact PowerShell API snippets for user review |
 | Out of Scope | Production backend/frontend code, migrations, drag/drop/resize, roster admin UI, taskpane/Command Centre/Gemini |
 | Verification | `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 7: Controlled Status Mutation
 

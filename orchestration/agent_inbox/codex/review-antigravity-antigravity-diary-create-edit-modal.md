@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-create-edit-modal` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated in Sprint 8 local review branch with small Codex repairs: reset the AHPRA/practitioner lookup cache on each diary reload, relabel destructive action as cancellation, and bump diary assets to `v=44`.
+- Follow-up required: User review should confirm live patient search, create/edit/cancel flows, conflict handling, and narrow modal layout.

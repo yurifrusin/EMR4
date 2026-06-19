@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 9ccd838 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-create-edit-modal --commit-message "Diary create/edit modal" --message "antigravity-diary-create-edit-modal ready for Codex review"` |
