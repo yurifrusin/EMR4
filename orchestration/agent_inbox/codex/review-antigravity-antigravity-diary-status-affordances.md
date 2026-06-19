@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-status-affordances` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. Status classes/badges are scoped to the
+  diary UI and `node --check docs\diary\diary.js` passed.
+- Follow-up required: User should review whether compact status badges are helpful
+  or visually noisy before status mutation controls are added.

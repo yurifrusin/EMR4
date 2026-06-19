@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-waiting-room-status-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -36,5 +36,7 @@ Waiting room status contract ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. The branch is test-only and validates
+  the existing waiting-room contract without production code changes.
+- Follow-up required: The test module's import-time `date.today()` can be fragile
+  around timezone midnight; fix later if it becomes noisy in CI.

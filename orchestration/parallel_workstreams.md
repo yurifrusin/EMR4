@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
-| Launch Gate | Preparing handin |
-| Integration Gate | Pending all submits and Codex review |
+| Status | Integrated, pending user review |
+| Launch Gate | Complete |
+| Integration Gate | Complete |
 | Theme | Make appointment status and waiting-room/patient-flow state reviewable before booking or status mutation UI |
 
 ### Workstream Q - Waiting Room Status Contract
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Appointment models/schemas/router and appointment/waiting-room tests |
 | Out of Scope | Diary frontend, taskpane/Command Centre/Gemini, booking/status mutation UI |
 | Verification | Focused appointment/waiting-room pytest suites |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream R - Diary Status Affordances
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` |
 | Out of Scope | Backend, taskpane/Command Centre/Gemini, booking/status mutation controls |
 | Verification | JS syntax plus live/smoke/narrow visual checks |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream S - Patient Flow Review Notes
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Small orchestration/checklist documentation only |
 | Out of Scope | Production backend/frontend implementation, tests, migrations, booking/status mutations |
 | Verification | `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 5: Diary Polish and Test Infrastructure
 
