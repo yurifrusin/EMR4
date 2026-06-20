@@ -1110,6 +1110,78 @@ html, body {
   background-color: #fef0ef;
 }
 
+.identity-confirm-overlay {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.32);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  padding: 18px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 400;
+}
+
+.identity-confirm-panel {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+  max-width: 420px;
+  padding: 18px;
+  width: min(420px, 100%);
+}
+
+.identity-confirm-title {
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.identity-confirm-body {
+  color: var(--grey-4);
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 0 0 16px;
+}
+
+.identity-confirm-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.identity-confirm-actions button {
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 12px;
+}
+
+.identity-confirm-actions .btn-secondary {
+  background: var(--white);
+  border: 1px solid var(--grey-2);
+  color: var(--grey-4);
+}
+
+.identity-confirm-actions .btn-secondary:hover {
+  background: var(--grey-1);
+}
+
+.identity-confirm-actions .btn-danger {
+  background: #b91c1c;
+  border: 1px solid #b91c1c;
+  color: var(--white);
+}
+
+.identity-confirm-actions .btn-danger:hover {
+  background: #991b1b;
+}
+
 .btn-edit-appt {
   font-size: 9px;
   background: none;

@@ -950,29 +950,41 @@ async function approveAndFinalize() {
 // ═══════════════════════════════════════════════════════════
 
 const DIARY_URL = "https://yurifrusin.github.io/EMR4/diary/diary.html";
+let diaryDialogRef = null;
 
 // NOTE: synchronous within the click gesture — same rule as openCommandCentre.
 // No patient guard — the diary is practice/day-scoped, not patient-scoped.
 function openDiary() {
+  if (diaryDialogRef) {
+    try {
+      diaryDialogRef.messageChild(JSON.stringify({ type: "focus" }));
+      setStatus("Diary window already open.");
+      return;
+    } catch (_) {
+      diaryDialogRef = null;
+    }
+  }
+
   Office.context.ui.displayDialogAsync(DIARY_URL, { height: 90, width: 90 }, result => {
     if (result.status === Office.AsyncResultStatus.Failed) {
       setStatus("Could not open Diary: " + result.error.message);
       return;
     }
-    const diaryDialog = result.value;
+    diaryDialogRef = result.value;
 
-    diaryDialog.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
+    diaryDialogRef.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
       try {
         const msg = JSON.parse(arg.message);
         if (msg.type === "ready") {
           // Deliver the auth token so the diary can call the API
-          diaryDialog.messageChild(JSON.stringify({ type: "auth", token }));
+          diaryDialogRef.messageChild(JSON.stringify({ type: "auth", token }));
         }
       } catch (_) {}
     });
 
-    // Nothing to clean up in the taskpane when the diary window closes
-    diaryDialog.addEventHandler(Office.EventType.DialogEventReceived, () => {});
+    diaryDialogRef.addEventHandler(Office.EventType.DialogEventReceived, () => {
+      diaryDialogRef = null;
+    });
   });
 }
 
@@ -1468,24 +1480,24 @@ function showDuplicateWarning(candidates, body) {
   const createBtn = document.getElementById("btn-np-create");
   const hardBlocked = hasHardDuplicateMatch(candidates);
   pendingNewPatientPayload = hardBlocked ? null : body;
-  setNewPatientFieldsDisabled(true);
+  setNewPatientFieldsDisabled(!hardBlocked);
   setNewPatientResult(`
     <div class="alert ${hardBlocked ? "alert-error" : "alert-warning"}">
       <strong>${hardBlocked ? "Duplicate patient blocked" : "Possible duplicate patient"}</strong><br>
       ${hardBlocked
-        ? "A strong identifier matches an existing patient record. A duplicate file cannot be created."
+        ? "A strong identifier matches an existing patient record. Change the details and check again before creating a file."
         : "Review the existing record before creating a new file."}
       <div class="new-patient-duplicate-list">
         ${candidates.map(renderDuplicateCandidate).join("")}
       </div>
       <div class="new-patient-inline-actions">
-        <button type="button" class="btn btn-ghost btn-sm" onclick="reviewNewPatientDetails()">Review Details</button>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="reviewNewPatientDetails()">${hardBlocked ? "Change Details" : "Review Details"}</button>
       </div>
     </div>`);
   if (createBtn) {
-    createBtn.disabled = hardBlocked;
-    createBtn.textContent = hardBlocked ? "Blocked" : "Create Anyway";
-    createBtn.onclick = hardBlocked ? null : confirmCreateNewPatient;
+    createBtn.disabled = false;
+    createBtn.textContent = hardBlocked ? "Check Again" : "Create Anyway";
+    createBtn.onclick = hardBlocked ? createNewPatient : confirmCreateNewPatient;
   }
 }
 

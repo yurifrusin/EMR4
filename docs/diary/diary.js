@@ -550,18 +550,89 @@ function isClinicalProgressStatus(status) {
   return ["Arrived", "InConsult", "Completed"].includes(status);
 }
 
-function confirmUnidentifiedProgress(appt, newStatus) {
+function showIdentityProgressDialog(appt, newStatus) {
+  return new Promise(resolve => {
+    const patientName = provisionalPatientName(appt) || "this provisional patient";
+    const targetLabel = getStatusLabel(newStatus);
+    let step = 1;
+
+    const overlay = document.createElement("div");
+    overlay.className = "identity-confirm-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-labelledby", "identity-confirm-title");
+
+    const panel = document.createElement("div");
+    panel.className = "identity-confirm-panel";
+
+    const title = document.createElement("h2");
+    title.id = "identity-confirm-title";
+    title.className = "identity-confirm-title";
+
+    const body = document.createElement("p");
+    body.className = "identity-confirm-body";
+
+    const actions = document.createElement("div");
+    actions.className = "identity-confirm-actions";
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.type = "button";
+    cancelBtn.className = "btn-secondary";
+
+    const continueBtn = document.createElement("button");
+    continueBtn.type = "button";
+    continueBtn.className = "btn-danger";
+
+    const close = result => {
+      document.removeEventListener("keydown", onKeyDown);
+      overlay.remove();
+      resolve(result);
+    };
+
+    const renderStep = () => {
+      actions.innerHTML = "";
+      if (step === 1) {
+        title.textContent = "Unconfirmed patient identity";
+        body.textContent = `This booking is not linked to a confirmed patient record. Continue changing ${patientName} to ${targetLabel}?`;
+        cancelBtn.textContent = "Cancel";
+        continueBtn.textContent = "Continue";
+        cancelBtn.onclick = () => close(false);
+        continueBtn.onclick = () => {
+          step = 2;
+          renderStep();
+        };
+      } else {
+        title.textContent = "Identity not confirmed in EMR";
+        body.textContent = "The patient has not been identified in our records. If you continue, the booking will be marked IDENTITY UNCONFIRMED.";
+        cancelBtn.textContent = "Go Back";
+        continueBtn.textContent = "Mark Identity Unconfirmed";
+        cancelBtn.onclick = () => {
+          step = 1;
+          renderStep();
+        };
+        continueBtn.onclick = () => close(true);
+      }
+      actions.append(cancelBtn, continueBtn);
+      setTimeout(() => cancelBtn.focus(), 0);
+    };
+
+    const onKeyDown = event => {
+      if (event.key === "Escape") close(false);
+    };
+
+    panel.append(title, body, actions);
+    overlay.appendChild(panel);
+    document.body.appendChild(overlay);
+    document.addEventListener("keydown", onKeyDown);
+    renderStep();
+  });
+}
+
+async function confirmUnidentifiedProgress(appt, newStatus) {
   if (!isPatientIdentityUnconfirmed(appt) || !isClinicalProgressStatus(newStatus)) {
     return true;
   }
-  const patientName = provisionalPatientName(appt) || "this provisional patient";
-  const first = window.confirm(
-    `This booking is not linked to a confirmed patient record. Continue changing ${patientName} to ${getStatusLabel(newStatus)}?`
-  );
-  if (!first) return false;
-  return window.confirm(
-    "The patient has not been identified in EMR records. If you continue, the booking will be marked IDENTITY UNCONFIRMED."
-  );
+  return await showIdentityProgressDialog(appt, newStatus);
 }
 
 function appendNowMarker(container, template, showLabel = false) {
@@ -1345,6 +1416,16 @@ function scheduleRefresh() {
 }
 function doRefresh() { loadDiary(); scheduleRefresh(); }
 
+function focusDiaryWindow() {
+  try { window.focus(); } catch (_) {}
+  try {
+    if (window.screen?.availWidth && window.screen?.availHeight) {
+      window.moveTo(0, 0);
+      window.resizeTo(window.screen.availWidth, window.screen.availHeight);
+    }
+  } catch (_) {}
+}
+
 // ─── INIT ──────────────────────────────────────────────────
 Office.onReady(() => {
   loadBreakOverrides();
@@ -1492,6 +1573,8 @@ Office.onReady(() => {
             localStorage.setItem("emr4_token", token);
             loadDiary();
             scheduleRefresh();
+          } else if (msg.type === "focus") {
+            focusDiaryWindow();
           }
         } catch (_) {}
       }
@@ -1949,9 +2032,9 @@ async function deleteBooking() {
 let todayAppointments = [];
 
 async function setAppointmentStatus(appt, newStatus, selectEl = null) {
-  if (!confirmUnidentifiedProgress(appt, newStatus)) {
+  if (!await confirmUnidentifiedProgress(appt, newStatus)) {
     if (selectEl) selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
-    return;
+    return false;
   }
   if (selectEl) selectEl.disabled = true;
   setStatus("Updating status...");
@@ -1980,6 +2063,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null) {
       if (el) el.classList.add("appt-active");
     }
     await updateFlowPanel();
+    return true;
   } catch (err) {
     console.error("Error updating status:", err);
     if (err.message === "401 Unauthorized") {
@@ -1990,6 +2074,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null) {
       setStatus("Error updating status.");
     }
     if (selectEl) selectEl.value = appt.status;
+    return false;
   } finally {
     if (selectEl) selectEl.disabled = false;
   }
@@ -2195,8 +2280,13 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
         if (updatingCardStatus) return;
         updatingCardStatus = true;
         actionBtn.disabled = true;
-        await setAppointmentStatus(a, targetStatus);
-        updatingCardStatus = false;
+        try {
+          const changed = await setAppointmentStatus(a, targetStatus);
+          if (!changed) actionBtn.disabled = false;
+        } finally {
+          updatingCardStatus = false;
+          if (document.body.contains(actionBtn)) actionBtn.disabled = false;
+        }
       };
       footer.appendChild(actionBtn);
     }
