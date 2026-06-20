@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/patient-identity-duplicates` |
-| Status | queued |
+| Status | in_progress |
 | Created | a095401 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-patient-identity-duplicates --commit-message "Patient identity duplicate foundation" --message "codex-patient-identity-duplicates ready for Codex review"` |
