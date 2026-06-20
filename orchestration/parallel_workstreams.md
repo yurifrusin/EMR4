@@ -116,6 +116,54 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 13: Waiting Areas, Patient Editing, and Bernie Prerequisites
+
+| Item | Value |
+|---|---|
+| Status | Queued |
+| Launch Gate | Pending orchestrator commit and HANDIN READY |
+| Integration Gate | Pending all active sprint agents submitting or being explicitly stood down |
+| Theme | Build the room/waiting-area and patient-edit foundations Bernie will need later, without starting autonomous copilot work yet |
+
+### Workstream AL - Waiting Area Resource Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-waiting-area-resource-contract.md` |
+| Goal | Add the minimal backend contract for named physical waiting areas linked to rooms/resources and waiting-room filtering/grouping |
+| In Scope | `app/models/tenancy.py`, `app/models/diary.py`, `app/schemas/diary.py`, `app/schemas/appointments.py`, `app/routers/diary.py`, `app/routers/appointments.py`, Alembic migration if needed, `seed.py`, focused tests |
+| Out of Scope | Diary frontend, taskpane/Command Centre, Bernie implementation, patient-edit UI, drag/drop/resize, SMS, billing/completion, ADHA/IHI live integration |
+| Verification | Focused waiting-room/diary/appointment pytest, migration checks if needed, backend compile check, `git diff --check` |
+| Status | Queued |
+
+### Workstream AM - Diary Waiting Area Tabs
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-waiting-area-tabs.md` |
+| Goal | Make the diary patient-flow panel support physical waiting-area tabs/groups while preserving simple fallback behaviour |
+| In Scope | `docs/diary/diary.{html,css,js}` and diary cache-bust only |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre, Bernie implementation, patient edit details UI, drag/drop/resize, SMS, billing/completion |
+| Verification | `node --check docs\diary\diary.js`, `git diff --check`, live/smoke checks for no-area fallback, multiple areas, linked/provisional action, narrow layout, and status changes |
+| Status | Queued |
+
+### Workstream AN - Patient Edit Details Foundation
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/patient-edit-details-foundation` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-patient-edit-details-foundation.md` |
+| Goal | Add safe patient-detail editing for the loaded patient while preserving hard duplicate protections |
+| In Scope | `app/routers/patients.py`, `app/schemas/patients.py`, `tests/test_patients.py`, `EMR4 Sidebar/src/taskpane/taskpane.{html,css,js}`, synced `docs/taskpane/*`, taskpane cache-bust if assets change |
+| Out of Scope | Diary frontend, waiting-area backend contract, appointment routes/models, Command Centre clinical coding, generated Word document rewrite, OneDrive import tooling, ADHA/IHI live verification, OCR, Bernie implementation |
+| Verification | Focused patient pytest, taskpane JS syntax checks on source/docs, `sync_taskpane.py` if source changes, `git diff --check`, edit/cancel/save/duplicate-block smoke notes |
+| Status | Queued |
+
 ## Sprint 12: Provisional Booking Link and State Model
 
 | Item | Value |

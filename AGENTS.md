@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Phase 2 - diary operations foundation integrated |
-| **Next recommended work** | User-review Sprint 12, then continue Phase 2 resource/waiting-area/patient-identity semantics; start Bernie only after booking/resource rules are stable |
+| **Current active track** | Sprint 13 - waiting-area/resource and patient-edit foundations queued |
+| **Next recommended work** | Run Sprint 13 handins; integrate waiting-area contract, diary waiting-area tabs, and patient edit details before starting Bernie |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
