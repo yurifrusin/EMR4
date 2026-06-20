@@ -1025,6 +1025,18 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
 
       statusChanger.appendChild(statusSelect);
 
+      if (isProvisional) {
+        const linkBtn = document.createElement("button");
+        linkBtn.type = "button";
+        linkBtn.className = "btn-link-appt";
+        linkBtn.textContent = "Link patient";
+        linkBtn.onclick = (e) => {
+          e.stopPropagation();
+          openBookingModalForPatientLink(a);
+        };
+        statusChanger.appendChild(linkBtn);
+      }
+
       const editBtn = document.createElement("button");
       editBtn.type = "button";
       editBtn.className = "btn-edit-appt";
@@ -1758,6 +1770,16 @@ function openBookingModalForEdit(appt) {
   document.getElementById("booking-modal").classList.remove("hidden");
 }
 
+function openBookingModalForPatientLink(appt) {
+  openBookingModalForEdit(appt);
+  const search = document.getElementById("booking-patient-search");
+  search.value = "";
+  search.classList.remove("hidden");
+  document.getElementById("patient-search-results").classList.add("hidden");
+  document.getElementById("btn-link-patient").classList.remove("hidden");
+  search.focus();
+}
+
 function closeBookingModal() {
   document.getElementById("booking-modal").classList.add("hidden");
   editingAppointmentId = null;
@@ -2307,6 +2329,19 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
     }
 
     header.appendChild(name);
+
+    if (isProvisional) {
+      const linkBtn = document.createElement("button");
+      linkBtn.className = "flow-card-link-btn";
+      linkBtn.type = "button";
+      linkBtn.textContent = "Link";
+      linkBtn.title = "Link to an existing patient record";
+      linkBtn.onclick = (e) => {
+        e.stopPropagation();
+        openBookingModalForPatientLink(a);
+      };
+      header.appendChild(linkBtn);
+    }
 
     const editBtn = document.createElement("button");
     editBtn.className = "flow-card-edit-btn";
