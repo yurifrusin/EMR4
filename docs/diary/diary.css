@@ -1411,3 +1411,47 @@ html, body {
 .col-non-bookable .slot-bg:hover {
   background-color: rgba(241, 243, 245, 0.4);
 }
+
+/* ─── PATIENT LINK / PROVISIONAL SEMANTICS ───── */
+.appt-link-icon {
+  color: var(--blue-mid);
+  margin-right: 3px;
+  font-size: 9px;
+  vertical-align: middle;
+}
+
+.appt-prov-icon {
+  color: var(--grey-3);
+  margin-right: 3px;
+  font-size: 9px;
+  vertical-align: middle;
+}
+
+.appt.appt-provisional {
+  border-style: dashed;
+}
+
+.appt-confirmed-badge {
+  font-size: 9px;
+  font-weight: 700;
+  color: #10b981;
+  background-color: #d1fae5;
+  border: 0.5px solid #10b981;
+  padding: 1px 3.5px;
+  border-radius: 50%;
+  margin-left: 4px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-result-provisional {
+  background-color: #f8fafc;
+}
+
+.search-result-provisional:hover {
+  background-color: var(--blue-light) !important;
+  color: var(--blue-dark) !important;
+}
