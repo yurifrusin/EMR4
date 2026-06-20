@@ -1061,7 +1061,7 @@ html, body {
 .selected-item-display {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
   background-color: var(--blue-light);
   border: 1px solid #c2dbf5;
   border-radius: 4px;
@@ -1069,6 +1069,27 @@ html, body {
   font-size: 11px;
   font-weight: 600;
   color: var(--blue-dark);
+}
+
+.selected-item-display #selected-patient-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.btn-link-patient {
+  background-color: var(--white);
+  border: 1px solid #93c5fd;
+  border-radius: 4px;
+  color: var(--blue-dark);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.btn-link-patient:hover {
+  background-color: #f4f9ff;
 }
 
 .btn-clear {

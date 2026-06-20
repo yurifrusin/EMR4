@@ -1532,9 +1532,21 @@ Office.onReady(() => {
       selectedPatient = null;
       provisionalName = null;
       document.getElementById("selected-patient-display").classList.add("hidden");
+      document.getElementById("btn-link-patient").classList.add("hidden");
       document.getElementById("booking-patient-search").value = "";
       document.getElementById("booking-patient-search").classList.remove("hidden");
       document.getElementById("booking-patient-search").focus();
+    };
+  }
+
+  const btnLinkPatient = document.getElementById("btn-link-patient");
+  if (btnLinkPatient) {
+    btnLinkPatient.onclick = () => {
+      const search = document.getElementById("booking-patient-search");
+      search.value = "";
+      search.classList.remove("hidden");
+      document.getElementById("patient-search-results").classList.add("hidden");
+      search.focus();
     };
   }
 
@@ -1662,6 +1674,7 @@ function openBookingModalForCreate(col, slotTime) {
   document.getElementById("patient-search-results").innerHTML = "";
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.add("hidden");
+  document.getElementById("btn-link-patient").classList.add("hidden");
 
   populatePractitionerDropdown(col.practitioner_ahpra);
   populateTypeDropdown();
@@ -1713,6 +1726,8 @@ function openBookingModalForEdit(appt) {
   } else {
     textEl.innerHTML = `<span class="appt-link-icon">🔗</span> ${escHtml(selectedPatient.first_name + " " + selectedPatient.last_name)} (DOB: ${selectedPatient.date_of_birth || 'N/A'})`;
   }
+
+  document.getElementById("btn-link-patient").classList.toggle("hidden", !isProvisional);
 
   if (isProvisional) {
     document.getElementById("btn-clear-patient").classList.remove("hidden");
@@ -1809,7 +1824,7 @@ function renderSearchResults(results) {
     dropdown.appendChild(item);
   }
 
-  if (typedVal.length >= 2) {
+  if (!editingAppointmentId && typedVal.length >= 2) {
     const provItem = document.createElement("div");
     provItem.className = "search-result-item search-result-provisional";
     provItem.style.borderTop = "1px dashed var(--grey-2)";
@@ -1829,6 +1844,7 @@ function selectPatientForBooking(patient) {
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.remove("hidden");
+  document.getElementById("btn-link-patient").classList.add("hidden");
   document.getElementById("selected-patient-text").innerHTML =
     `<span class="appt-link-icon">🔗</span> ${escHtml(patient.first_name + " " + patient.last_name)} (DOB: ${patient.date_of_birth})`;
   document.getElementById("btn-clear-patient").classList.remove("hidden");
@@ -1840,6 +1856,7 @@ function selectProvisionalPatient(name) {
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.remove("hidden");
+  document.getElementById("btn-link-patient").classList.add("hidden");
   document.getElementById("selected-patient-text").innerHTML =
     `<span class="appt-prov-icon">📝</span> ${escHtml(name)} <span style="font-size:10px; color:var(--grey-3); font-style:italic;">(Provisional)</span>`;
   document.getElementById("btn-clear-patient").classList.remove("hidden");
