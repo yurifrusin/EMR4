@@ -116,6 +116,54 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 11: Patient-Link Semantics and New Patient Safety
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Launch Gate | In progress |
+| Integration Gate | Pending |
+| Theme | Split patient identity/linkage from appointment attendance while hardening New Patient duplicate handling |
+
+### Workstream AF - Appointment Patient-Link Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-patient-link-contract.md` |
+| Goal | Make the backend distinguish linked patient records from provisional free-text diary names, without treating Confirmed as an attendance state |
+| In Scope | Appointment model/schema/router/tests, migration if needed, focused appointment create/edit/status/waiting-room/conflict tests |
+| Out of Scope | Diary frontend, taskpane/Command Centre UI, drag/drop/resize, SMS reminder confirmation, billing/completion guard design beyond noting risks |
+| Verification | Focused appointment pytest, migration check if a migration is added, `git diff --check` |
+| Status | Queued |
+
+### Workstream AG - Diary Patient-Link UI Semantics
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-patient-link-ui.md` |
+| Goal | Make linked versus provisional patient identity legible in the diary and remove Confirmed from routine attendance-status treatment |
+| In Scope | `docs/diary/diary.{html,css,js}` and cache-bust if assets change |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre, drag/drop/resize, SMS reminder workflow, billing/completion workflow |
+| Verification | `node --check docs\diary\diary.js`, live/smoke visual checks where possible, `git diff --check` |
+| Status | Queued |
+
+### Workstream AH - New Patient Duplicate Workflow
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/new-patient-duplicate-workflow` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-new-patient-duplicate-workflow.md` |
+| Goal | Harden New Patient creation with cancel/escape/success paths and duplicate-candidate warning before record/file creation |
+| In Scope | `EMR4 Sidebar/src/taskpane/taskpane.{html,css,js}`, mirrored `docs/taskpane/*` via `sync_taskpane.py`, focused checks/tests if available |
+| Out of Scope | Diary frontend, appointment patient-link backend, Command Centre clinical coding, OneDrive import tooling, ADHA/IHI live integration, OCR |
+| Verification | `node --check` on taskpane JS source and docs copy, `git diff --check`, `sync_taskpane.py` if source changes, focused patient tests if backend is touched |
+| Status | Queued |
+
 ## Sprint 10: Nurse Bookability and Patient Identity Foundation
 
 | Item | Value |
