@@ -39,6 +39,16 @@ A single custom tab with one button: **"Toggle EMR4 Copilot"**. All complex work
 ### 2.3 SPA Tabbed Interface
 Persistent navigation bar (e.g., `[ Consult ] [ History ] [ Results ] [ Meds ] [ DDx ] [ Rx ]`). Tab switching is instant DOM-swap via JS — no dialogs, no popups.
 
+**Current interpretation:** keep the tabbed taskpane and continue observing how usable
+each tab remains inside Word's constrained taskpane sizes. Do not prematurely move
+every workflow out of it. The taskpane should remain the quick patient
+summary/navigation surface, with lightweight job controls and tabbed reference panels.
+The separate Command Centre window should grow in stages into the larger work surface
+for workflows that need space, microphone access, review panes, or sustained focus
+such as Scribe, clinical coding, results review, billing review, and later clinical
+operations. Add Command Centre tabs only when a workflow has proven it needs that
+larger surface.
+
 ### 2.4 Document-Aware Routing
 The taskpane reads a hidden `<emr4:document-type>` Custom XML Part from the active Word document:
 - **Patient File → "Patient Mode"**: Consult, Scribe, DDx, Meds, Demographics, Results
@@ -55,6 +65,11 @@ The daily `Diary_[Date].docx` is hosted on **SharePoint/OneDrive** with native c
 - **Parse & Lock** (`Ctrl+Shift+B`): Receptionist types `»09:00 Jane Doe` → add-in parses the chevron-prefixed line, registers the appointment in the database, converts it to a hyperlinked block **[09:00 - Jane Doe]**, and wraps it in a Content Control with `cannotEdit = true`, `cannotDelete = true`.
 - **Unlock & Amend** (`Ctrl+Shift+U`): Removes locks for amendment or deletion.
 - **Free-Text Spaces**: Lock only applies to the appointment paragraph. Blank lines between appointments remain unprotected for notes and messages.
+
+**Superseded implementation note:** the diary is now a native HTML/JS grid backed by
+Postgres, not a Word diary. The Word diary concept remains useful historical context
+for why the product needs fast receptionist text entry, confirmation affordances, and
+co-authoring-like visibility, but new diary work should target the native grid.
 
 ---
 
@@ -410,6 +425,17 @@ flowchart TD
 | Consent forms | Digital capture; signature data; stored per patient + encounter |
 | Allergies & History | CRUD for allergies, immunisation history, medical/surgical/family/social history |
 
+#### Patient entry workflow backlog
+
+- Treat New Patient as a proper modal workflow: cancel/escape path, validation,
+  duplicate warning, successful file creation, and clear "open this file" guidance.
+- Integrate patient entry with a fuller patient-details form rather than a minimal
+  shortcut form. The same data model should support receptionist entry from a printed
+  form, tablet/waiting-area entry, and eventual patient mobile/PWA self-entry.
+- Consider AI-assisted OCR later for paper forms, but keep that separate from the
+  initial patient-entry contract: the canonical outcome is structured patient data
+  plus a generated Word patient file.
+
 ---
 
 ### PHASE 2 — Appointments & The Living Diary
@@ -439,9 +465,20 @@ flowchart TD
   click-to-expand note inspection over overlapping bookings.
 - **Notes model**: keep urgent booking reason text visible when space allows; later add
   a lower-priority bubble/private-note option to avoid visual overload.
-- **Lifecycle affordance**: experiment with the appointment left accent bar as a status
-  indicator for Confirmed/Arrived/InConsult/Completed while preserving appointment-type
-  meaning if useful.
+- **Patient identity/linkage confirmation vs appointment workflow**: do not treat
+  "Confirmed" as a simple attendance colour. The original EMR meaning was closer to
+  "this diary name is linked to/confirmed as a patient record". That should become a
+  patient/booking-link property, visually distinct from attendance workflow state.
+  Attendance workflow should cover `Booked`, `Arrived`, `InConsult`, `Completed`,
+  `Cancelled`, `NoShow`/`DNA`, etc. A later SMS/reminder "patient confirmed they will
+  attend" signal is a third concept and should not reuse the same field.
+- **Free-text provisional bookings**: allow a booking to be created with a free-text
+  patient name before the person is registered or linked to a patient record. The
+  diary must then support a later "confirm/link patient identity" step before normal
+  arrival/consult/completion flow.
+- **Lifecycle affordance**: use visual state carefully. Patient-record confirmation
+  may be bold/link styling or another non-colour cue; attendance state can use
+  colour/badge/accent changes.
 - **Now navigation**: add a header control and open-time auto-scroll to position the
   diary just before the current time.
 
@@ -496,6 +533,38 @@ flowchart TD
 | Mode 2 — Active | On-demand ranked differential with evidence + suggested investigations |
 | Mode 3 — Interrogative | Clinical chat grounded in patient's full record |
 | Drug interactions | Cross-reference new Rx against allergies + current meds + active diagnoses |
+
+#### Evidence provider / clinical safety backlog
+
+- Build DDx/CDS as clinician-controlled evidence assistance, not replacement
+  diagnosis. It should explain, cite, and prompt the doctor to consider gaps,
+  red flags, and evidence, while preserving clinician judgment and accountability.
+- Use an evidence-provider abstraction with citation/audit support before
+  committing to any single corpus. The core clinical decision-support pipeline
+  should ask a provider-neutral service for evidence, not call Cochrane, Wiley,
+  RACGP, Therapeutic Guidelines, MBS/PBS, TGA, or any future corpus directly from
+  the UI or reasoning prompt.
+- Treat each provider as a plug-in behind a common contract:
+  - input: clinician-controlled clinical question, optional de-identified PICO,
+    specialty/context, patient safety flags, and source preference
+  - output: answerable evidence items with title, source, date/version, citation,
+    URL/DOI, evidence type, confidence/strength where supplied, permitted snippet
+    text, and retrieval/audit metadata
+  - constraints: PHI handling, caching rights, licence scope, region/data
+    residency, rate limits, and whether snippets can be stored in the patient
+    audit trail
+- Keep the reasoning layer citation-first: Gemini or any later model should reason
+  over retrieved evidence packets and produce an explicitly cited assistance note,
+  not answer from model memory when the claim depends on external medical
+  evidence.
+- Store an audit trail for clinical-safety review: clinician, patient/encounter,
+  source ids, provider, prompt category, model/version, evidence versions, output
+  shown, clinician edits/override, and final action.
+- Cochrane/Wiley is a high-value future spike, but licensing, Australian privacy,
+  data residency, and TGA/CDSS posture must be resolved before production use.
+- See `orchestration/research/cochrane_cds_pipeline.md` for the initial research
+  note on Wiley Agent Knowledge Base: Cochrane Library and broader Australian CDS
+  pipeline considerations.
 
 ---
 

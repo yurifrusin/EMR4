@@ -105,13 +105,6 @@ Historical Sprint 9 changes:
 
 - The `pytest_asyncio` loop-scope deprecation warning remains and should be
   addressed before it becomes a default-behaviour change.
-- The PostgreSQL test DB can retain enum types after interrupted/parallel pytest
-  runs. Resetting the public schema fixed the issue during integration; avoid
-  running two pytest processes against the same `gp_pms_test` database in parallel.
-- Dirty stale disposable worktree `codex/time-model` remains visible and should be
-  reviewed before retirement.
-- The `pytest_asyncio` loop-scope deprecation warning remains and should be
-  addressed before it becomes a default-behaviour change.
 - The PostgreSQL test DB can retain enum types after interrupted or parallel
   pytest runs. Do not run two pytest processes against `gp_pms_test` in parallel.
 - Dirty stale disposable worktree `codex/time-model` remains visible and should be
@@ -136,16 +129,39 @@ Historical Sprint 9 changes:
   edit-patient-details workflow, duplicate-patient detection before file/record
   creation, Medicare card reference number, IHI number, and a fuller demographic
   and identifier model before relying on patient creation in routine use.
+- New Patient workflow follow-up: make the form a proper modal workflow with
+  cancel/escape, validation, duplicate warning, successful file creation, and clear
+  open-file guidance. Design it to share a patient-details model with later printed
+  forms, waiting-area tablet entry, and patient mobile/PWA self-entry. AI-assisted
+  OCR for paper forms is a later optional intake helper, not the canonical record.
 - Booking-over-break policy follow-up: keep appointments allowed to overlap
   break blocks, because breaks are soft operational blocks rather than absolute
   booking constraints, but warn the user before saving when a booking crosses a
-  room/practitioner break.
+  room/practitioner break. Starting a new booking inside a break can remain
+  blocked/not offered for now.
+- Appointment-state model follow-up: split patient identity/linkage confirmation
+  from appointment attendance workflow. The old EMR "confirmed" concept meant the
+  diary name was confirmed/linked to a patient record, not that the patient had
+  replied to a reminder or reached an attendance stage. Future booking flow should
+  allow provisional free-text patient-name bookings, then a later confirm/link
+  patient step before Arrived/InConsult/Completed.
+- Appointment attendance follow-up: allow staff correction/backtracking between
+  most attendance statuses, but design guards carefully around completion and
+  future billing so accidental double-billing is not enabled.
 - Add taskpane New Patient/Edit Patient fields for Medicare IRN and IHI, then
   surface duplicate candidates as a warning/confirm step rather than a hard
   block.
 - Revisit room/resource modelling so future rooms can be linked to physical
   waiting areas and non-practitioner resources without pretending every bookable
   resource is a login-capable GP.
+- Waiting-room panel follow-up: appointment cards can be stacked/condensed,
+  especially in high-volume sections such as Finished.
+- Taskpane/Command Centre follow-up: preserve the tabbed taskpane as a real
+  patient summary/navigation surface and continue observing its usability in the
+  constrained Word pane. Grow Command Centre gradually as the larger work surface
+  for workflows that prove they need space, microphone access, review panes, or
+  sustained focus; do not add Command Centre tabs before the workflow boundary is
+  clear.
 
 ## Verification
 
@@ -202,6 +218,7 @@ Historical Sprint 7 verification:
 
 Sprint 11 should make the booking workflow safer around operational exceptions:
 warn before saving a booking across a break, continue to refine waiting-area
-semantics, and decide whether the next slice is drag/drop/resize or patient
-identity UI. Drag/drop/resize should still wait if room/resource-only booking
-semantics remain unclear.
+semantics, and start splitting patient identity confirmation from appointment
+attendance workflow. Drag/drop/resize should remain deferred until bookable
+resources and patient-flow semantics are settled enough that we are not smoothing
+over the wrong rules.
