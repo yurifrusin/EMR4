@@ -37,7 +37,8 @@ class PractitionerBrief(BaseModel):
 
 
 class AppointmentCreate(BaseModel):
-    patient_id: uuid.UUID
+    patient_id: Optional[uuid.UUID] = None
+    patient_name_provisional: Optional[str] = None
     practitioner_id: uuid.UUID
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
@@ -50,7 +51,11 @@ class AppointmentCreate(BaseModel):
     booked_via: BookingChannel = BookingChannel.Receptionist
 
     @model_validator(mode="after")
-    def require_time_input(self):
+    def require_patient_identity_and_time(self):
+        if self.patient_id is None and not self.patient_name_provisional:
+            raise ValueError(
+                "patient_id or patient_name_provisional is required"
+            )
         has_local_pair = self.appointment_date is not None and self.start_time_local is not None
         has_partial_local_pair = (self.appointment_date is None) != (self.start_time_local is None)
         if has_partial_local_pair:
@@ -61,6 +66,8 @@ class AppointmentCreate(BaseModel):
 
 
 class AppointmentUpdate(BaseModel):
+    patient_id: Optional[uuid.UUID] = None
+    patient_name_provisional: Optional[str] = None
     practitioner_id: Optional[uuid.UUID] = None
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
@@ -88,7 +95,8 @@ class AppointmentStatusUpdate(BaseModel):
 class AppointmentOut(BaseModel):
     id: uuid.UUID
     practice_id: uuid.UUID
-    patient_id: uuid.UUID
+    patient_id: Optional[uuid.UUID] = None
+    patient_name_provisional: Optional[str] = None
     practitioner_id: uuid.UUID
     appointment_type_id: Optional[uuid.UUID] = None
     location_id: Optional[uuid.UUID] = None
@@ -104,7 +112,7 @@ class AppointmentOut(BaseModel):
     waiting_room: Optional[str] = None
     queue_position: Optional[int] = None
     created_at: datetime
-    patient: PatientBrief
+    patient: Optional[PatientBrief] = None
     practitioner: PractitionerBrief
     appointment_type: Optional[AppointmentTypeOut] = None
 
