@@ -476,6 +476,11 @@ flowchart TD
   patient name before the person is registered or linked to a patient record. The
   diary must then support a later "confirm/link patient identity" step before normal
   arrival/consult/completion flow.
+- **Waiting-area model**: keep appointment attendance state separate from physical
+  waiting area assignment. `appointments.waiting_room` is a temporary string field;
+  later, practice locations and rooms/resources should expose named waiting areas
+  so the waiting-room panel can filter by area without treating rooms, queues, or
+  attendance statuses as the same thing.
 - **Lifecycle affordance**: use visual state carefully. Patient-record confirmation
   may be bold/link styling or another non-colour cue; attendance state can use
   colour/badge/accent changes.
