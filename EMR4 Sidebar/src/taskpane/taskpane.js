@@ -957,12 +957,12 @@ let diaryDialogRef = null;
 function openDiary() {
   if (diaryDialogRef) {
     try {
-      diaryDialogRef.messageChild(JSON.stringify({ type: "focus" }));
-      setStatus("Diary window already open.");
-      return;
+      diaryDialogRef.close();
     } catch (_) {
-      diaryDialogRef = null;
+      // If Office already considers the handle closed, just open a fresh dialog.
     }
+    diaryDialogRef = null;
+    setStatus("Reopening Diary window...");
   }
 
   Office.context.ui.displayDialogAsync(DIARY_URL, { height: 90, width: 90 }, result => {
