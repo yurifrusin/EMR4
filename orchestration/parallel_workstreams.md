@@ -116,6 +116,54 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 12: Provisional Booking Link and State Model
+
+| Item | Value |
+|---|---|
+| Status | Queued |
+| Launch Gate | Pending orchestrator commit and HANDIN READY |
+| Integration Gate | Pending all active sprint agents submitting or being explicitly stood down |
+| Theme | Finish the practical provisional-to-linked-patient booking workflow while clarifying appointment state and waiting-area semantics before drag/drop/resize |
+
+### Workstream AI - Provisional Booking Link Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-provisional-link-contract.md` |
+| Goal | Finish the backend contract for linking provisional appointments to existing patient records while preserving patient identity/linkage versus attendance status separation |
+| In Scope | Appointment/diary backend models, schemas, routers, focused tests, migration only if needed, seed/test helpers only if needed |
+| Out of Scope | Diary frontend, taskpane/Command Centre, drag/drop/resize, SMS confirmation, billing/completion workflow, full waiting-area model, real ADHA/IHI integration |
+| Verification | Focused appointment patient-link/create-edit/status/conflict tests, touched diary break/roster tests, migration check if needed, `git diff --check` |
+| Status | Queued |
+
+### Workstream AJ - Diary Provisional Patient Linking
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-link-provisional-patient.md` |
+| Goal | Add diary UI to link a provisional/free-text booking to an existing patient record and warn before saving bookings that cross break blocks |
+| In Scope | `docs/diary/diary.{html,css,js}` and diary cache-bust if assets change |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre, drag/drop/resize, SMS workflow, billing/completion workflow, full waiting-area model |
+| Verification | `node --check docs\diary\diary.js`, `git diff --check`, smoke/live checks for provisional create, link, status warning, break-crossing warning, narrow layout, and failures |
+| Status | Queued |
+
+### Workstream AK - Appointment State and Waiting-Area Model
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/appointment-state-waiting-area-model` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-appointment-state-and-waiting-area-model.md` |
+| Goal | Produce the design note and review harness for appointment identity/status/waiting-area semantics before drag/drop/resize |
+| In Scope | Orchestration/design docs, implementation-plan notes if appropriate, Sprint 12 review checklist, exact PowerShell API snippets for user review |
+| Out of Scope | Production backend/frontend implementation, migrations, diary/taskpane feature work, Gemini/AI, billing implementation, real ADHA/IHI integration |
+| Verification | `git diff --check`; focused syntax/check only if any helper script is added |
+| Status | Queued |
+
 ## Sprint 11: Patient-Link Semantics and New Patient Safety
 
 | Item | Value |
