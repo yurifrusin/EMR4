@@ -284,7 +284,8 @@ def create_appointment(
     values["start_time_local"] = start_time_local
     values["start_time"] = start_time
 
-    _ensure_patient(body.patient_id, practice_id, db)
+    if body.patient_id is not None:
+        _ensure_patient(body.patient_id, practice_id, db)
     _ensure_practitioner(body.practitioner_id, practice_id, db)
     _ensure_appointment_type(body.appointment_type_id, practice_id, db)
     _ensure_location(body.location_id, practice_id, db)
@@ -384,6 +385,18 @@ def update_appointment(
         values["start_time_local"] = start_time_local
         values["start_time"] = start_time
 
+    if "patient_id" in values and values["patient_id"] is not None:
+        _ensure_patient(values["patient_id"], practice_id, db)
+    next_patient_id = values.get("patient_id", appt.patient_id)
+    next_provisional_name = values.get(
+        "patient_name_provisional",
+        appt.patient_name_provisional,
+    )
+    if next_patient_id is None and not next_provisional_name:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="patient_id or patient_name_provisional is required",
+        )
     _ensure_practitioner(practitioner_id, practice_id, db)
     _ensure_appointment_type(appointment_type_id, practice_id, db)
     _ensure_location(location_id, practice_id, db)

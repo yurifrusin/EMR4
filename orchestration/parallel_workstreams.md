@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
-| Launch Gate | In progress |
-| Integration Gate | Pending |
+| Status | Integrated locally |
+| Launch Gate | Complete |
+| Integration Gate | Complete |
 | Theme | Split patient identity/linkage from appointment attendance while hardening New Patient duplicate handling |
 
 ### Workstream AF - Appointment Patient-Link Contract
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Appointment model/schema/router/tests, migration if needed, focused appointment create/edit/status/waiting-room/conflict tests |
 | Out of Scope | Diary frontend, taskpane/Command Centre UI, drag/drop/resize, SMS reminder confirmation, billing/completion guard design beyond noting risks |
 | Verification | Focused appointment pytest, migration check if a migration is added, `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AG - Diary Patient-Link UI Semantics
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` and cache-bust if assets change |
 | Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre, drag/drop/resize, SMS reminder workflow, billing/completion workflow |
 | Verification | `node --check docs\diary\diary.js`, live/smoke visual checks where possible, `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AH - New Patient Duplicate Workflow
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `EMR4 Sidebar/src/taskpane/taskpane.{html,css,js}`, mirrored `docs/taskpane/*` via `sync_taskpane.py`, focused checks/tests if available |
 | Out of Scope | Diary frontend, appointment patient-link backend, Command Centre clinical coding, OneDrive import tooling, ADHA/IHI live integration, OCR |
 | Verification | `node --check` on taskpane JS source and docs copy, `git diff --check`, `sync_taskpane.py` if source changes, focused patient tests if backend is touched |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 10: Nurse Bookability and Patient Identity Foundation
 

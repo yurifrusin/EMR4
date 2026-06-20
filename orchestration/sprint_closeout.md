@@ -8,97 +8,67 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 10: Nurse Bookability and Patient Identity Foundation |
-| Integrated through | `0b94c23` |
+| Batch | Sprint 11: Patient-Link Semantics and New Patient Safety |
+| Integrated through | Pending final commit |
 | Status | Integrated locally and verified |
 | Last updated | 2026-06-20 |
 
 ## What Changed
 
-- Made Room 2/Nurse practitioner-backed in dev data by adding Nurse Sarah Chen
-  with AHPRA `NMW0001234567`, weekday schedules, Room 2 template/roster wiring,
-  and a sample nurse appointment.
-- Added focused nurse practitioner tests for diary template/roster wiring,
-  nurse appointment creation/conflict behaviour, and nurse slot availability.
-- Removed a redundant appointment-create `db.refresh(appt)` round trip before the
-  existing fresh appointment reload.
-- Updated the diary frontend so practitioner-backed columns remain bookable,
-  while label-only/non-practitioner columns get a restrained non-bookable visual
-  treatment and no empty chevrons.
-- Added backend patient identity foundations: `medicare_irn`, IHI search/index
-  support, and `GET /api/v1/patients/duplicate-candidates` for warning-only
-  duplicate-patient checks.
-- Added patient tests for Medicare IRN validation, IHI/IRN search, duplicate
-  candidate matching, practice scoping, and formatted identifier normalisation.
-- Updated diary assets to `v=55`.
-
-Historical Sprint 9 changes:
-
-- Added backend patient-flow contract coverage in
-  `tests/test_booking_patient_flow.py`: partial date/time update validation,
-  Cancelled recoverability, DNA/NoShow visibility/non-blocking behaviour,
-  appointment type updates, status filtering, queue position updates, and
-  waiting-room ordering.
-- Hardened appointment mutating routes by caching `practice_id` and `booked_by`
-  before commits, avoiding expired ORM access after SQLAlchemy commits.
-- Added a diary patient-flow workbench sidebar with Waiting Room, In Consult,
-  Expected Today, and Finished sections, plus quick actions such as Check In,
-  Start Consult, and Complete.
-- Updated diary assets to `v=49`.
-- Added focused patient API coverage in `tests/test_patients.py` for patient
-  creation, DB-backed search by name/Medicare/phone, practice scoping, and
-  `/patients/with-file`.
-- Changed `/patients/with-file` so new generated-file patients always start
-  with `document_url = null`; the Word/taskpane auto-detect flow can backfill
-  the document URL later.
-- Integration cleanup: removed trailing whitespace from the diary workbench
-  submit before final verification.
-- User-review hotfix: moved the diary footer inside the scrollable grid
-  container so it no longer competes with the grid as a horizontal flex item,
-  and tightened the Waiting Room count display.
-- User-review hotfix 2: exposed `practitioner_id` through the diary template
-  API and preserved it in the diary frontend, so Dr Shera's column remains
-  bookable even on days with zero existing appointments.
-- User-review hotfix 3: template columns now resolve missing practitioner IDs
-  from matching AHPRA numbers at response time, covering older DB rows where
-  `diary_columns.practitioner_id` is null. The booking form now submits on
-  Enter via the normal form submit path.
-- User-review hotfix 4: bookable free-space hover now shows a custom 5-minute
-  start-time preview chip and faint line before the booking modal opens, with
-  gentle snapping near visible gridlines.
+- Added provisional booking support to appointments: `patient_id` is now nullable
+  and `patient_name_provisional` stores free-text names for phone/walk-in bookings
+  before a patient record is linked.
+- Added Alembic migration `e5f6a7b8c9d0_add_provisional_patient_to_appointments.py`.
+- Kept the existing linked-patient appointment API backward compatible while
+  allowing provisional bookings and later patient linking via appointment update.
+- Added focused `tests/test_appointment_patient_link.py` coverage for provisional
+  create, missing-identity validation, linked-patient create, patient-link update,
+  cross-practice protection, status changes on provisional bookings, and the
+  integration guard that prevents clearing all patient identity from an appointment.
+- Updated the diary UI to distinguish linked patient records from provisional
+  names, tolerate `patient: null`, and treat legacy `Confirmed` status as booked
+  for attendance display rather than as a routine status option.
+- Removed the submitted SMS/phone confirmation checkbox during integration because
+  it conflicted with the project decision that patient-record linkage and future
+  reminder/SMS confirmation are separate concepts.
+- Updated diary assets to `v=56`.
+- Hardened the New Patient taskpane flow: duplicate candidates are checked before
+  `/patients/with-file`, possible duplicates show a warning list, and users can
+  review details, create anyway, cancel, escape, close, or create another after
+  success.
+- Updated taskpane assets to `v=38` and synced `docs/taskpane/*`.
 
 ## Recommended User Review
 
-1. After pulling the new code locally, run migrations and seed data if your dev
-   DB is not already current: `alembic upgrade head`, then `python seed.py`, then
-   restart the backend.
-2. Open the live diary from the taskpane and confirm Room 2 shows Nurse Sarah
-   Chen or an equivalent nurse-backed label, not a purely label-only Nurse.
-3. Click an empty Room 2/Nurse slot and confirm the booking modal opens with the
-   nurse-backed room selected; save a test nurse appointment and confirm it
-   appears in Room 2.
-4. Confirm Room 3 remains visually non-bookable and does not show empty chevrons
-   or silently open an invalid booking modal.
-5. Confirm Room 1 booking create/edit/status behaviour still works, including a
-   quick 5-minute booking and the waiting-room status actions.
-6. Optional API check: call `/api/v1/patients/duplicate-candidates` with an
-   existing patient's DOB plus formatted Medicare or phone values and confirm it
-   returns warning candidates without blocking patient creation.
-7. Narrow the diary window and confirm the non-bookable Room 3 treatment and
-   nurse booking affordances stay readable without crowding the header or cards.
+1. After pulling the new code locally, run migrations and restart the backend:
+   `alembic upgrade head`, then `python seed.py` if seed data is stale.
+2. Open the live diary and confirm existing linked-patient bookings still render,
+   open, edit, save, and change attendance status.
+3. Create a booking by typing a name that is not in patient search and choosing
+   the provisional booking option. Confirm it saves and displays as provisional
+   rather than crashing because `patient` is null.
+4. Edit that provisional booking and confirm its name, reason, time, duration,
+   and status remain stable.
+5. Search/select an existing patient in the booking modal and confirm linked
+   bookings still show as linked records, visually distinct from provisional
+   bookings.
+6. Confirm the status dropdown no longer offers `Confirmed` as a normal attendance
+   status for new bookings.
+7. In the taskpane New Patient form, create a clearly non-duplicate patient and
+   confirm success gives usable `Close` and `Create Another` actions.
+8. Try creating a likely duplicate patient and confirm the warning list appears
+   before creation, with `Review Details`, `Create Anyway`, cancel, close, and
+   Escape paths all behaving sensibly.
+9. Confirm the New Patient form no longer traps you over the taskpane after close,
+   cancel, success, or Escape.
 
 ## Not Required Before Moving On
 
-- Drag/drop and resize are still intentionally out of scope.
-- Roster admin UI is not built yet.
-- Online booking portal behaviour is not applicable yet.
-- A separate wallboard-style waiting-room display app is not built yet.
-- Room/resource-only bookings are still intentionally deferred; booking creation
-  still requires a practitioner-backed column.
-- No state-machine guard exists yet; any valid status can currently be corrected
-  to any other valid status by mutating staff roles.
-- The duplicate-candidate API is backend-only for now; no taskpane patient-entry
-  duplicate warning is required before the next sprint.
+- No drag/drop/resize testing is required yet.
+- No Command Centre, Scribe, Gemini, billing, results, letters, or medication
+  review is required for this sprint.
+- No live SMS/reminder confirmation review is required; that is intentionally not
+  implemented and should remain separate from patient-record linkage.
 - Real IHI/Medicare verification is not implemented yet.
 
 ## Known Follow-Up
@@ -168,6 +138,29 @@ Historical Sprint 9 changes:
 These are Codex/orchestrator verification notes, not commands the user is expected
 to run.
 
+- Sprint 11 verification:
+  - `node --check docs\diary\diary.js` -> passed
+  - `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` and
+    `node --check docs\taskpane\taskpane.js` -> passed
+  - `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\schemas\appointments.py app\models\appointments.py`
+    -> passed
+  - `.venv\Scripts\python.exe -m alembic upgrade head` and
+    `.venv\Scripts\python.exe -m alembic current` -> current at
+    `e5f6a7b8c9d0`
+  - `git diff --check` -> passed
+  - After resetting stale `gp_pms_test` public schema:
+    `.venv\Scripts\python.exe -m pytest tests\test_appointment_patient_link.py -q`
+    -> 9 passed
+  - After per-file schema resets:
+    `tests\test_patients.py` -> 14 passed;
+    `tests\test_booking_create_edit.py` -> 31 passed;
+    `tests\test_nurse_practitioner.py` -> 6 passed;
+    `tests\test_appointment_status_mutations.py` -> 23 passed;
+    `tests\test_waiting_room.py` -> 18 passed
+  - A larger combined focused pytest bundle timed out or hit the known stale
+    PostgreSQL enum state; this remains a test-infrastructure issue rather than
+    an observed product assertion failure.
+
 - Sprint 10 verification:
   - `node --check docs\diary\diary.js` -> passed
   - `git diff --check` -> passed
@@ -216,9 +209,9 @@ Historical Sprint 7 verification:
 
 ## Recommended Next Direction
 
-Sprint 11 should make the booking workflow safer around operational exceptions:
-warn before saving a booking across a break, continue to refine waiting-area
-semantics, and start splitting patient identity confirmation from appointment
-attendance workflow. Drag/drop/resize should remain deferred until bookable
-resources and patient-flow semantics are settled enough that we are not smoothing
-over the wrong rules.
+Sprint 12 should finish the practical patient-link workflow: link a provisional
+diary booking to an existing/new patient record from the booking modal, keep
+booking-over-break warning on the near-term list, and continue refining
+waiting-area semantics. Drag/drop/resize should remain deferred until
+bookable-resource and patient-flow rules are stable enough that we are not
+smoothing over the wrong rules.

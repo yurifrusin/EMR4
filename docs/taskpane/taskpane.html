@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=37" />
-  <script src="taskpane.js?v=37" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=38" />
+  <script src="taskpane.js?v=38" defer></script>
 </head>
 <body>
 
@@ -58,13 +58,13 @@
   </div>
 
   <!-- New Patient Overlay -->
-  <div id="new-patient-panel" class="new-patient-panel hidden">
+  <div id="new-patient-panel" class="new-patient-panel hidden" role="dialog" aria-modal="true" aria-labelledby="new-patient-title">
     <div class="new-patient-inner">
       <div class="new-patient-header">
-        <span>New Patient</span>
+        <span id="new-patient-title">New Patient</span>
         <button class="icon-btn" onclick="closeNewPatientForm()" title="Close">✕</button>
       </div>
-      <div id="new-patient-result"></div>
+      <div id="new-patient-result" aria-live="polite"></div>
       <div class="field-row">
         <div class="field-group" style="flex:1">
           <label class="field-label">First name *</label>

@@ -114,9 +114,9 @@ function getMockAppointments() {
       id: "smoke-appt-1",
       start_time_local: "09:00",
       duration_minutes: 30,
-      status: "Confirmed",
+      status: "Booked",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Margaret", last_name: "Thompson" },
+      patient: { first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
       reason: "Hypertension follow-up",
       appointment_type_id: "smoke-type-1"
     },
@@ -126,7 +126,7 @@ function getMockAppointments() {
       duration_minutes: 15,
       status: "Booked",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Billy", last_name: "Frusin" },
+      patient: { first_name: "Billy", last_name: "Frusin", date_of_birth: "1988-11-12" },
       reason: "Ear ache",
       appointment_type_id: "smoke-type-2"
     },
@@ -136,7 +136,7 @@ function getMockAppointments() {
       duration_minutes: 45,
       status: "Booked",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Margaret", last_name: "Thompson" },
+      patient: { first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
       reason: "Care Plan review",
       appointment_type_id: "smoke-type-1"
     },
@@ -144,9 +144,9 @@ function getMockAppointments() {
       id: "smoke-appt-4",
       start_time_local: "11:30",
       duration_minutes: 30,
-      status: "Confirmed",
+      status: "Booked",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Jane", last_name: "Doe" },
+      patient: { first_name: "Jane", last_name: "Doe", date_of_birth: "1990-05-15" },
       reason: "Flu vaccine",
       appointment_type_id: "smoke-type-2"
     },
@@ -156,7 +156,7 @@ function getMockAppointments() {
       duration_minutes: 15,
       status: "Arrived",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "John", last_name: "Smith" },
+      patient: { first_name: "John", last_name: "Smith", date_of_birth: "1978-08-20" },
       reason: "Script renewal",
       appointment_type_id: "smoke-type-1"
     },
@@ -166,7 +166,8 @@ function getMockAppointments() {
       duration_minutes: 20,
       status: "Booked",
       practitioner: { ahpra_number: "MED999" },
-      patient: { first_name: "Nora", last_name: "Patel" },
+      patient_name_provisional: "Nora Patel",
+      patient: null,
       reason: "Dressing change",
       appointment_type_id: "smoke-type-2"
     }
@@ -510,7 +511,8 @@ function buildApptLookup(appointments) {
 
 // ─── LIFECYCLE CLASS ───────────────────────────────────────
 function apptClass(status) {
-  switch (status) {
+  const mappedStatus = status === "Confirmed" ? "Booked" : status;
+  switch (mappedStatus) {
     case "Confirmed":  return "appt-confirmed";
     case "Arrived":    return "appt-arrived";
     case "InConsult":  return "appt-inconsult";
@@ -523,7 +525,8 @@ function apptClass(status) {
 }
 
 function getStatusLabel(status) {
-  switch (status) {
+  const mappedStatus = status === "Confirmed" ? "Booked" : status;
+  switch (mappedStatus) {
     case "Confirmed":  return "Confirmed";
     case "Arrived":    return "Arrived";
     case "InConsult":  return "Consult";
@@ -531,7 +534,7 @@ function getStatusLabel(status) {
     case "Cancelled":  return "CXL";
     case "NoShow":     return "No Show";
     case "DNA":        return "DNA";
-    default:           return status || "Booked";
+    default:           return mappedStatus || "Booked";
   }
 }
 
@@ -781,6 +784,11 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         span.classList.add("appt-short");
       }
       span.dataset.id = a.id;
+
+      const provisionalPatientName = a.patient_name_provisional || a.provisional_name || "";
+      const isProvisional = !!provisionalPatientName || !a.patient_id || !a.patient;
+      span.classList.add(isProvisional ? "appt-provisional" : "appt-linked");
+
       if (color) {
         span.dataset.color = color;
         span.style.setProperty("--appt-color", color);
@@ -795,7 +803,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       span.style.setProperty("--appt-height", visualHeightPx + "px");
       span.tabIndex = 0;
 
-      const patientName = `${a.patient.first_name} ${a.patient.last_name}`;
+      const patientName = provisionalPatientName || (a.patient ? `${a.patient.first_name} ${a.patient.last_name}`.trim() : "") || "Unknown Patient";
       const timeLabel = timeRangeLabel(start, end);
       span.setAttribute("role", "button");
       span.setAttribute("aria-label", a.reason ? `${patientName}. ${timeLabel}. ${a.reason}` : `${patientName}. ${timeLabel}`);
@@ -806,14 +814,27 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
 
       const name = document.createElement("span");
       name.className = "appt-name";
-      name.textContent = patientName;
+      if (isProvisional) {
+        name.innerHTML = `<span class="appt-prov-icon" title="Provisional Patient">📝</span> ${escHtml(patientName)}`;
+      } else {
+        name.innerHTML = `<span class="appt-link-icon" title="Linked Patient Record">🔗</span> ${escHtml(patientName)}`;
+      }
       headerDiv.appendChild(name);
 
-      const statusLower = (a.status || "booked").toLowerCase();
+      const displayStatus = a.status === "Confirmed" ? "Booked" : a.status;
+      const statusLower = (displayStatus || "booked").toLowerCase();
       const statusBadge = document.createElement("span");
       statusBadge.className = `appt-status-badge badge-${statusLower}`;
-      statusBadge.textContent = getStatusLabel(a.status);
+      statusBadge.textContent = getStatusLabel(displayStatus);
       headerDiv.appendChild(statusBadge);
+
+      if (!isProvisional) {
+        const linkedBadge = document.createElement("span");
+        linkedBadge.className = "appt-linked-badge";
+        linkedBadge.title = "Linked patient record";
+        linkedBadge.textContent = "✓";
+        headerDiv.appendChild(linkedBadge);
+      }
 
       span.appendChild(headerDiv);
 
@@ -848,7 +869,6 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
 
       const selectOptions = [
         { value: "Booked", label: "Booked" },
-        { value: "Confirmed", label: "Confirmed" },
         { value: "Arrived", label: "Arrived" },
         { value: "InConsult", label: "In Consult" },
         { value: "Completed", label: "Done" },
@@ -857,11 +877,16 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         { value: "DNA", label: "DNA" }
       ];
 
+      if (a.status === "Confirmed") {
+        selectOptions.splice(1, 0, { value: "Confirmed", label: "Confirmed" });
+      }
+
       selectOptions.forEach(optData => {
         const opt = document.createElement("option");
         opt.value = optData.value;
         opt.textContent = optData.label;
-        if (a.status === optData.value) {
+        const currentMappedStatus = a.status === "Confirmed" ? "Booked" : a.status;
+        if (currentMappedStatus === optData.value) {
           opt.selected = true;
         }
         statusSelect.appendChild(opt);
@@ -1370,6 +1395,7 @@ Office.onReady(() => {
   if (btnClearPatient) {
     btnClearPatient.onclick = () => {
       selectedPatient = null;
+      provisionalName = null;
       document.getElementById("selected-patient-display").classList.add("hidden");
       document.getElementById("booking-patient-search").value = "";
       document.getElementById("booking-patient-search").classList.remove("hidden");
@@ -1446,6 +1472,7 @@ Office.onReady(() => {
 
 // ─── BOOKING MODAL LOGIC ───────────────────────────────────
 let selectedPatient = null;
+let provisionalName = null;
 let editingAppointmentId = null;
 
 function searchMockPatients(q) {
@@ -1464,9 +1491,32 @@ function searchMockPatients(q) {
   );
 }
 
+function prepareStatusDropdown(currentStatus) {
+  const select = document.getElementById("booking-status");
+  select.innerHTML = "";
+
+  const options = [
+    { value: "Booked", label: "Booked" },
+    { value: "Arrived", label: "Arrived" },
+    { value: "InConsult", label: "In Consult" },
+    { value: "Completed", label: "Done" },
+    { value: "Cancelled", label: "Cancelled" },
+    { value: "NoShow", label: "No Show" },
+    { value: "DNA", label: "DNA" }
+  ];
+
+  options.forEach(opt => {
+    const el = document.createElement("option");
+    el.value = opt.value;
+    el.textContent = opt.label;
+    select.appendChild(el);
+  });
+}
+
 function openBookingModalForCreate(col, slotTime) {
   editingAppointmentId = null;
   selectedPatient = null;
+  provisionalName = null;
   document.getElementById("booking-modal-title").textContent = "New Appointment";
   document.getElementById("btn-booking-delete").classList.add("hidden");
 
@@ -1488,6 +1538,7 @@ function openBookingModalForCreate(col, slotTime) {
   const defaultDuration = col.slot_interval_minutes || activeTemplate.slot_defaults.interval_minutes || 15;
   document.getElementById("booking-duration").value = defaultDuration;
 
+  prepareStatusDropdown("Booked");
   document.getElementById("booking-status").value = "Booked";
   document.getElementById("booking-reason").value = "";
   document.getElementById("booking-error").classList.add("hidden");
@@ -1497,7 +1548,18 @@ function openBookingModalForCreate(col, slotTime) {
 
 function openBookingModalForEdit(appt) {
   editingAppointmentId = appt.id;
-  selectedPatient = appt.patient;
+
+  const provisionalPatientName = appt.patient_name_provisional || appt.provisional_name || "";
+  const isProvisional = !!provisionalPatientName || !appt.patient_id || !appt.patient;
+
+  if (isProvisional) {
+    selectedPatient = null;
+    provisionalName = provisionalPatientName || (appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : "") || "Provisional Patient";
+  } else {
+    selectedPatient = appt.patient;
+    provisionalName = null;
+  }
+
   document.getElementById("booking-modal-title").textContent = "Edit Appointment";
   const cancelBtn = document.getElementById("btn-booking-delete");
   cancelBtn.classList.remove("hidden");
@@ -1507,8 +1569,14 @@ function openBookingModalForEdit(appt) {
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.remove("hidden");
-  document.getElementById("selected-patient-text").textContent =
-    `${appt.patient.first_name} ${appt.patient.last_name} (DOB: ${appt.patient.date_of_birth})`;
+
+  const textEl = document.getElementById("selected-patient-text");
+  if (isProvisional) {
+    textEl.innerHTML = `<span class="appt-prov-icon">📝</span> ${escHtml(provisionalName)} <span style="font-size:10px; color:var(--grey-3); font-style:italic;">(Provisional)</span>`;
+  } else {
+    textEl.innerHTML = `<span class="appt-link-icon">🔗</span> ${escHtml(selectedPatient.first_name + " " + selectedPatient.last_name)} (DOB: ${selectedPatient.date_of_birth || 'N/A'})`;
+  }
+
   document.getElementById("btn-clear-patient").classList.add("hidden");
 
   populatePractitionerDropdown(appt.practitioner?.ahpra_number);
@@ -1523,7 +1591,11 @@ function openBookingModalForEdit(appt) {
   document.getElementById("booking-time").value = timeStr;
 
   document.getElementById("booking-duration").value = appt.duration_minutes || 15;
-  document.getElementById("booking-status").value = appt.status || "Booked";
+
+  const displayStatus = appt.status === "Confirmed" ? "Booked" : (appt.status || "Booked");
+  prepareStatusDropdown(appt.status);
+  document.getElementById("booking-status").value = displayStatus;
+
   document.getElementById("booking-reason").value = appt.reason || "";
   document.getElementById("booking-error").classList.add("hidden");
 
@@ -1534,6 +1606,7 @@ function closeBookingModal() {
   document.getElementById("booking-modal").classList.add("hidden");
   editingAppointmentId = null;
   selectedPatient = null;
+  provisionalName = null;
 }
 
 function populatePractitionerDropdown(selectedAhpra) {
@@ -1577,34 +1650,57 @@ function renderSearchResults(results) {
   const dropdown = document.getElementById("patient-search-results");
   dropdown.innerHTML = "";
 
-  if (results.length === 0) {
+  const typedVal = document.getElementById("booking-patient-search").value.trim();
+
+  if (results.length > 0) {
+    results.forEach(p => {
+      const item = document.createElement("div");
+      item.className = "search-result-item";
+      item.textContent = `${p.first_name} ${p.last_name} (DOB: ${p.date_of_birth})`;
+      item.onclick = () => selectPatientForBooking(p);
+      dropdown.appendChild(item);
+    });
+  } else {
     const item = document.createElement("div");
     item.className = "search-result-item";
     item.style.color = "var(--grey-3)";
-    item.textContent = "No patients found.";
+    item.textContent = "No registered patients found.";
     dropdown.appendChild(item);
-    dropdown.classList.remove("hidden");
-    return;
   }
 
-  results.forEach(p => {
-    const item = document.createElement("div");
-    item.className = "search-result-item";
-    item.textContent = `${p.first_name} ${p.last_name} (DOB: ${p.date_of_birth})`;
-    item.onclick = () => selectPatientForBooking(p);
-    dropdown.appendChild(item);
-  });
+  if (typedVal.length >= 2) {
+    const provItem = document.createElement("div");
+    provItem.className = "search-result-item search-result-provisional";
+    provItem.style.borderTop = "1px dashed var(--grey-2)";
+    provItem.style.fontWeight = "600";
+    provItem.style.color = "var(--blue-mid)";
+    provItem.innerHTML = `<span class="appt-prov-icon">📝</span> Book as provisional: "${escHtml(typedVal)}"`;
+    provItem.onclick = () => selectProvisionalPatient(typedVal);
+    dropdown.appendChild(provItem);
+  }
 
   dropdown.classList.remove("hidden");
 }
 
 function selectPatientForBooking(patient) {
   selectedPatient = patient;
+  provisionalName = null;
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.remove("hidden");
-  document.getElementById("selected-patient-text").textContent =
-    `${patient.first_name} ${patient.last_name} (DOB: ${patient.date_of_birth})`;
+  document.getElementById("selected-patient-text").innerHTML =
+    `<span class="appt-link-icon">🔗</span> ${escHtml(patient.first_name + " " + patient.last_name)} (DOB: ${patient.date_of_birth})`;
+  document.getElementById("btn-clear-patient").classList.remove("hidden");
+}
+
+function selectProvisionalPatient(name) {
+  selectedPatient = null;
+  provisionalName = name;
+  document.getElementById("booking-patient-search").classList.add("hidden");
+  document.getElementById("patient-search-results").classList.add("hidden");
+  document.getElementById("selected-patient-display").classList.remove("hidden");
+  document.getElementById("selected-patient-text").innerHTML =
+    `<span class="appt-prov-icon">📝</span> ${escHtml(name)} <span style="font-size:10px; color:var(--grey-3); font-style:italic;">(Provisional)</span>`;
   document.getElementById("btn-clear-patient").classList.remove("hidden");
 }
 
@@ -1634,8 +1730,8 @@ async function saveBooking() {
   errorEl.classList.add("hidden");
   errorEl.textContent = "";
 
-  if (!selectedPatient) {
-    errorEl.textContent = "Please select a patient.";
+  if (!selectedPatient && !provisionalName) {
+    errorEl.textContent = "Please select a patient or book as provisional.";
     errorEl.classList.remove("hidden");
     return;
   }
@@ -1666,13 +1762,15 @@ async function saveBooking() {
 
   try {
     const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
+    const statusToSend = statusVal;
+
     if (editingAppointmentId) {
       if (isSmokeMode) {
         const appt = mockAppointmentsCache.find(x => x.id === editingAppointmentId);
         if (appt) {
           appt.start_time_local = timeVal;
           appt.duration_minutes = duration;
-          appt.status = statusVal;
+          appt.status = statusToSend;
           appt.practitioner.ahpra_number = ahpra;
           appt.reason = reason;
           appt.appointment_type_id = typeId;
@@ -1680,16 +1778,17 @@ async function saveBooking() {
           appt.appointment_type = foundType || null;
         }
       } else {
+        const updatePayload = {
+          practitioner_id: practitioner.id,
+          appointment_type_id: typeId,
+          appointment_date: dateVal,
+          start_time_local: timeVal,
+          duration_minutes: duration,
+          reason: reason,
+        };
         const updateRes = await apiFetch(`/appointments/${editingAppointmentId}`, {
           method: "PUT",
-          body: JSON.stringify({
-            practitioner_id: practitioner.id,
-            appointment_type_id: typeId,
-            appointment_date: dateVal,
-            start_time_local: timeVal,
-            duration_minutes: duration,
-            reason: reason
-          })
+          body: JSON.stringify(updatePayload)
         });
         if (!updateRes.ok) {
           throw new Error(await apiErrorMessage(updateRes, "Update"));
@@ -1697,7 +1796,7 @@ async function saveBooking() {
 
         const statusRes = await apiFetch(`/appointments/${editingAppointmentId}/status`, {
           method: "PATCH",
-          body: JSON.stringify({ status: statusVal })
+          body: JSON.stringify({ status: statusToSend })
         });
         if (!statusRes.ok) {
           throw new Error(await apiErrorMessage(statusRes, "Status update"));
@@ -1711,36 +1810,44 @@ async function saveBooking() {
           appointment_date: dateVal,
           start_time_local: timeVal,
           duration_minutes: duration,
-          status: statusVal,
+          status: statusToSend,
           practitioner: { ahpra_number: ahpra, id: practitioner.id, first_name: practitioner.first_name, last_name: practitioner.last_name },
           patient: selectedPatient,
+          patient_name_provisional: provisionalName,
           reason: reason,
           appointment_type_id: typeId,
           appointment_type: activeTypes.find(t => t.id === typeId) || null
         };
         mockAppointmentsCache.push(newAppt);
       } else {
+        const createPayload = {
+          practitioner_id: practitioner.id,
+          appointment_type_id: typeId,
+          appointment_date: dateVal,
+          start_time_local: timeVal,
+          duration_minutes: duration,
+          reason: reason,
+        };
+        if (selectedPatient) {
+          createPayload.patient_id = selectedPatient.id;
+        } else {
+          createPayload.patient_id = null;
+          createPayload.patient_name_provisional = provisionalName;
+        }
+
         const createRes = await apiFetch(`/appointments`, {
           method: "POST",
-          body: JSON.stringify({
-            patient_id: selectedPatient.id,
-            practitioner_id: practitioner.id,
-            appointment_type_id: typeId,
-            appointment_date: dateVal,
-            start_time_local: timeVal,
-            duration_minutes: duration,
-            reason: reason
-          })
+          body: JSON.stringify(createPayload)
         });
         if (!createRes.ok) {
           throw new Error(await apiErrorMessage(createRes, "Create"));
         }
         const newApptObj = await createRes.json();
 
-        if (statusVal !== "Booked") {
+        if (statusToSend !== "Booked") {
           const statusRes = await apiFetch(`/appointments/${newApptObj.id}/status`, {
             method: "PATCH",
-            body: JSON.stringify({ status: statusVal })
+            body: JSON.stringify({ status: statusToSend })
           });
           if (!statusRes.ok) {
             throw new Error(await apiErrorMessage(statusRes, "Set status"));
@@ -1978,7 +2085,25 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
 
     const name = document.createElement("span");
     name.className = "flow-card-name";
-    name.textContent = `${a.patient.first_name} ${a.patient.last_name}`;
+
+    const provisionalPatientName = a.patient_name_provisional || a.provisional_name || "";
+    const isProvisional = !!provisionalPatientName || !a.patient_id || !a.patient;
+    const patientName = provisionalPatientName || (a.patient ? `${a.patient.first_name} ${a.patient.last_name}`.trim() : "") || "Unknown Patient";
+
+    if (isProvisional) {
+      name.innerHTML = `<span class="appt-prov-icon" title="Provisional Patient">📝</span> ${escHtml(patientName)}`;
+    } else {
+      name.innerHTML = `<span class="appt-link-icon" title="Linked Patient Record">🔗</span> ${escHtml(patientName)}`;
+    }
+
+    if (!isProvisional) {
+      const linkedBadge = document.createElement("span");
+      linkedBadge.className = "appt-linked-badge";
+      linkedBadge.title = "Linked patient record";
+      linkedBadge.textContent = "✓";
+      name.appendChild(linkedBadge);
+    }
+
     header.appendChild(name);
 
     const editBtn = document.createElement("button");
