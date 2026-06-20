@@ -118,6 +118,11 @@ reviewed, integrated, verified, pushed, and audited.
 - Appointment attendance follow-up: allow staff correction/backtracking between
   most attendance statuses, but design guards carefully around completion and
   future billing so accidental double-billing is not enabled.
+- Sprint 12 review harness follow-up: use
+  `orchestration/appointment_state_waiting_area_review.md` when integrating the
+  provisional-to-linked patient workflow. It records the intended separation
+  between patient identity linkage, attendance state, future SMS confirmation,
+  and physical waiting-area assignment.
 - Add taskpane New Patient/Edit Patient fields for Medicare IRN and IHI, then
   surface duplicate candidates as a warning/confirm step rather than a hard
   block.
@@ -212,6 +217,8 @@ Historical Sprint 7 verification:
 Sprint 12 should finish the practical patient-link workflow: link a provisional
 diary booking to an existing/new patient record from the booking modal, keep
 booking-over-break warning on the near-term list, and continue refining
-waiting-area semantics. Drag/drop/resize should remain deferred until
-bookable-resource and patient-flow rules are stable enough that we are not
-smoothing over the wrong rules.
+waiting-area semantics. Use
+`orchestration/appointment_state_waiting_area_review.md` as the integration and
+user-review checklist for that state model. Drag/drop/resize should remain
+deferred until bookable-resource and patient-flow rules are stable enough that
+we are not smoothing over the wrong rules.
