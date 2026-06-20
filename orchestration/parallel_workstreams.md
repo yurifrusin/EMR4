@@ -116,11 +116,59 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 10: Nurse Bookability and Patient Identity Foundation
+
+| Item | Value |
+|---|---|
+| Status | Queued |
+| Launch Gate | Pending |
+| Integration Gate | Not started |
+| Theme | Make Nurse/Room 2 deliberately bookable via a practitioner-backed resource while starting the safer patient-identity foundation in a separate lane |
+
+### Workstream AC - Nurse Practitioner Dev-Data Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-nurse-practitioner-dev-data-contract.md` |
+| Goal | Make Room 2/Nurse deliberately bookable by representing Nurse as a real practitioner/staff resource in dev data and tests |
+| In Scope | `seed.py`, focused diary roster/template tests, focused appointment create/edit/slots tests, minimal backend fixes only if the current contract blocks safe nurse representation |
+| Out of Scope | Diary frontend, taskpane/Command Centre, patient identity/duplicate work, waiting-area UI, room/resource-only bookings without `practitioner_id`, drag/drop/resize |
+| Verification | Focused diary roster/template and appointment/slots pytest suites plus `git diff --check` |
+| Status | Queued |
+
+### Workstream AD - Diary Nurse Bookability Affordance
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-nurse-bookability-affordance.md` |
+| Goal | Make practitioner-backed Nurse/Room 2 columns clearly bookable while label-only/non-practitioner columns remain visibly non-bookable |
+| In Scope | `docs/diary/diary.{html,css,js}` and cache-bust bump |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre, patient identity/duplicate work, waiting-area data model, drag/drop/resize |
+| Verification | `node --check docs\diary\diary.js`, live/smoke/narrow visual checks, `git diff --check` |
+| Status | Queued |
+
+### Workstream AE - Patient Identity Duplicate Foundation
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/patient-identity-duplicates` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-patient-identity-duplicates.md` |
+| Goal | Start the backend foundation for safer patient creation with focused tests and minimal API/model support for identity fields and duplicate-candidate handling |
+| In Scope | `app/models/patients.py`, `app/schemas/patients.py`, `app/routers/patients.py`, patient tests, Alembic migration if needed, `create_patient_file.py` only for minimal generated-file mapping |
+| Out of Scope | Diary frontend, appointment/roster/nurse booking work, taskpane UI implementation, OneDrive import tooling, ADHA/IHI service integration, Medicare claiming integration |
+| Verification | Focused patient pytest, migration check if needed, `git diff --check`, generator smoke if touched |
+| Status | Queued |
+
 ## Sprint 9: Patient Flow and Patient Entry Hardening
 
 | Item | Value |
 |---|---|
-| Status | Integrated, pending user review |
+| Status | Integrated and user-reviewed |
 | Launch Gate | Complete |
 | Integration Gate | Complete |
 | Theme | Harden the practical patient-flow layer before drag/drop/resize and roster-admin work |

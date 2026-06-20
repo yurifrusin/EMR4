@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 9: Patient Flow and Patient Entry Hardening |
 | Integrated through | current Sprint 9 closeout tip on `master` / `handoff/current` |
-| Status | Integrated locally, pending user review |
+| Status | Integrated, user-reviewed, and passed |
 | Last updated | 2026-06-20 |
 
 ## What Changed
@@ -152,8 +152,9 @@ Historical Sprint 7 verification:
 
 ## Recommended Next Direction
 
-After user review, Codex recommends deciding how Room 2/Nurse should become
-bookable: either seed a real nurse/staff practitioner resource for the room, or
-design room/resource-only bookings. The first path is smaller and probably right
-for the next sprint. Drag/drop/resize should still wait until practitioner versus
-resource booking semantics are clear.
+Sprint 10 should make Room 2/Nurse deliberately bookable by using a real
+practitioner/staff resource first, while keeping room/resource-only bookings as
+a later design decision. In parallel, a separate Codex worker can start the
+patient-identity foundation for duplicate-patient handling and identifier fields
+without touching diary booking code. Drag/drop/resize should still wait until
+practitioner-backed versus resource-only booking semantics are clearer.
