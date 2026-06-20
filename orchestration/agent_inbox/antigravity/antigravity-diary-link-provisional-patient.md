@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | c96c637 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-link-provisional-patient --commit-message "Add diary provisional patient linking" --message "Diary provisional patient linking ready for Codex review"` |
@@ -69,5 +69,11 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [diary.js](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.js) (Added `appointmentCrossesBreak` checker, updated `openBookingModalForEdit` to show patient clear button for provisional bookings, updated `saveBooking` to run break-crossing warning and patient identity confirmation dialogs, and to send patient ID / provisional name in payload when saving/updating booking records).
+  - [diary.html](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.html) (Bumped cache buster query parameter for CSS and JS assets to `v=59`).
 - Verification run:
+  - Validated syntax with `node --check docs\diary\diary.js` (Passed).
+  - Validated git changes with `git diff --check` (Passed).
+  - Executed targeted tests `test_booking_create_edit.py` (31 passed) and `test_appointment_patient_link.py` (9 passed) using pytest on the backend.
 - Remaining risks:
+  - None. Frontend changes are localized and fully verified.
