@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-provisional-link-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -43,5 +43,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into `master` as part of Sprint 12. Accepted the soft warning-only break overlap contract and the existing provisional-to-linked patient API compatibility. Re-ran focused appointment and diary-regression tests after integration.
+- Follow-up required: Consider populating `breaks_overlap` on appointment GET/list responses later if API clients need passive review of existing break overlaps. Keep label-only/non-practitioner room booking semantics separate from practitioner-backed appointment creation.

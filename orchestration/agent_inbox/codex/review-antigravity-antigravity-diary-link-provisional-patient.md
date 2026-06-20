@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-link-provisional-patient` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -36,5 +36,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into `master` as part of Sprint 12. Accepted the diary provisional-patient linking flow, break-crossing warning before save, and cache-bust to `v=59`; static JS verification and focused backend regression suites passed after integration.
+- Follow-up required: User should live-test provisional booking creation, linking a provisional booking to an existing patient, and the warning path for a booking that crosses Morning Tea or Lunch.

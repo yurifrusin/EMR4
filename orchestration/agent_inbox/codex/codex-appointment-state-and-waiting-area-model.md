@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/appointment-state-waiting-area-model` |
-| Status | submitted |
+| Status | integrated |
 | Created | c96c637 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-appointment-state-and-waiting-area-model --commit-message "Document appointment state and waiting area model" --message "Appointment state and waiting-area model ready for Codex review"` |

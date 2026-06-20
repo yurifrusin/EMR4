@@ -260,7 +260,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `e886afe` — "Integrate independent diary grid" |
+| **Latest integration commit** | this closeout commit — "Record Sprint 12 integration closeout" |
 
 ### Tag map (all tags pushed to remote)
 

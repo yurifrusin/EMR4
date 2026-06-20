@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Queued |
-| Launch Gate | Pending orchestrator commit and HANDIN READY |
-| Integration Gate | Pending all active sprint agents submitting or being explicitly stood down |
+| Status | Integrated locally |
+| Launch Gate | Complete |
+| Integration Gate | Complete |
 | Theme | Finish the practical provisional-to-linked-patient booking workflow while clarifying appointment state and waiting-area semantics before drag/drop/resize |
 
 ### Workstream AI - Provisional Booking Link Contract
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Appointment/diary backend models, schemas, routers, focused tests, migration only if needed, seed/test helpers only if needed |
 | Out of Scope | Diary frontend, taskpane/Command Centre, drag/drop/resize, SMS confirmation, billing/completion workflow, full waiting-area model, real ADHA/IHI integration |
 | Verification | Focused appointment patient-link/create-edit/status/conflict tests, touched diary break/roster tests, migration check if needed, `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AJ - Diary Provisional Patient Linking
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` and diary cache-bust if assets change |
 | Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre, drag/drop/resize, SMS workflow, billing/completion workflow, full waiting-area model |
 | Verification | `node --check docs\diary\diary.js`, `git diff --check`, smoke/live checks for provisional create, link, status warning, break-crossing warning, narrow layout, and failures |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AK - Appointment State and Waiting-Area Model
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Orchestration/design docs, implementation-plan notes if appropriate, Sprint 12 review checklist, exact PowerShell API snippets for user review |
 | Out of Scope | Production backend/frontend implementation, migrations, diary/taskpane feature work, Gemini/AI, billing implementation, real ADHA/IHI integration |
 | Verification | `git diff --check`; focused syntax/check only if any helper script is added |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 11: Patient-Link Semantics and New Patient Safety
 

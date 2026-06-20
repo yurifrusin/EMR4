@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/appointment-state-waiting-area-model` |
 | Source Task | `codex-appointment-state-and-waiting-area-model` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -48,5 +48,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into `master` as part of Sprint 12. Accepted the appointment-state/waiting-area design harness as the guide for user review and next-step design boundaries.
+- Follow-up required: Use the harness when separating linked patient identity, attendance state, future SMS confirmation, and physical waiting-area assignment in the next implementation slices.

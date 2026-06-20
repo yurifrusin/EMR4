@@ -8,59 +8,44 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 11: Patient-Link Semantics and New Patient Safety |
-| Integrated through | `a58e98a` |
+| Batch | Sprint 12: Provisional Booking Link and State Model |
+| Integrated through | this closeout commit |
 | Status | Integrated locally and verified |
-| Last updated | 2026-06-20 |
+| Last updated | 2026-06-21 |
 
 ## What Changed
 
-- Added provisional booking support to appointments: `patient_id` is now nullable
-  and `patient_name_provisional` stores free-text names for phone/walk-in bookings
-  before a patient record is linked.
-- Added Alembic migration `e5f6a7b8c9d0_add_provisional_patient_to_appointments.py`.
-- Kept the existing linked-patient appointment API backward compatible while
-  allowing provisional bookings and later patient linking via appointment update.
-- Added focused `tests/test_appointment_patient_link.py` coverage for provisional
-  create, missing-identity validation, linked-patient create, patient-link update,
-  cross-practice protection, status changes on provisional bookings, and the
-  integration guard that prevents clearing all patient identity from an appointment.
-- Updated the diary UI to distinguish linked patient records from provisional
-  names, tolerate `patient: null`, and treat legacy `Confirmed` status as booked
-  for attendance display rather than as a routine status option.
-- Removed the submitted SMS/phone confirmation checkbox during integration because
-  it conflicted with the project decision that patient-record linkage and future
-  reminder/SMS confirmation are separate concepts.
-- Updated diary assets to `v=56`.
-- Hardened the New Patient taskpane flow: duplicate candidates are checked before
-  `/patients/with-file`, possible duplicates show a warning list, and users can
-  review details, create anyway, cancel, escape, close, or create another after
-  success.
-- Updated taskpane assets to `v=38` and synced `docs/taskpane/*`.
+- Added a warning-only backend contract for appointments that cross configured
+  break blocks: create/update responses now include `breaks_overlap` without
+  blocking the booking.
+- Added focused `tests/test_break_overlap_contract.py` coverage for create,
+  update, outside-break, and no-template cases.
+- Updated the diary booking modal so provisional/free-text bookings can be linked
+  to an existing patient record without losing time, duration, status, or reason.
+- Added a diary-side warning before saving a booking that crosses Morning Tea,
+  Lunch, or another configured break block.
+- Preserved the project distinction between linked patient identity, provisional
+  diary identity, attendance status, and future SMS/reminder confirmation.
+- Added `orchestration/appointment_state_waiting_area_review.md` as the Sprint 12
+  design and API-review harness for identity/status/waiting-area semantics.
+- Updated diary assets to `v=59`.
 
 ## Recommended User Review
 
-1. After pulling the new code locally, run migrations and restart the backend:
-   `alembic upgrade head`, then `python seed.py` if seed data is stale.
-2. Open the live diary and confirm existing linked-patient bookings still render,
-   open, edit, save, and change attendance status.
-3. Create a booking by typing a name that is not in patient search and choosing
-   the provisional booking option. Confirm it saves and displays as provisional
-   rather than crashing because `patient` is null.
-4. Edit that provisional booking and confirm its name, reason, time, duration,
-   and status remain stable.
-5. Search/select an existing patient in the booking modal and confirm linked
-   bookings still show as linked records, visually distinct from provisional
-   bookings.
-6. Confirm the status dropdown no longer offers `Confirmed` as a normal attendance
-   status for new bookings.
-7. In the taskpane New Patient form, create a clearly non-duplicate patient and
-   confirm success gives usable `Close` and `Create Another` actions.
-8. Try creating a likely duplicate patient and confirm the warning list appears
-   before creation, with `Review Details`, `Create Anyway`, cancel, close, and
-   Escape paths all behaving sensibly.
-9. Confirm the New Patient form no longer traps you over the taskpane after close,
-   cancel, success, or Escape.
+1. Hard refresh the live diary and confirm it loads `diary.js?v=59`.
+2. Create a provisional/free-text booking and confirm it saves and remains
+   visually provisional.
+3. Edit that provisional booking, search for an existing patient, select/link the
+   patient, and confirm the same booking keeps its time, duration, status, and
+   reason while becoming linked.
+4. Create or edit a booking so its end time crosses Morning Tea or Lunch. Confirm
+   the warning appears, cancelling keeps the modal open, and proceeding saves.
+5. Confirm existing linked-patient bookings can still be edited and status-changed.
+6. Try the identity-warning/status path for provisional patients again: the
+   patient should not quietly progress into attendance states without warning.
+7. Optional API review: use the snippets in
+   `orchestration/appointment_state_waiting_area_review.md` to inspect
+   provisional create, link, status mutation, and waiting-room inclusion.
 
 ## Not Required Before Moving On
 
@@ -118,10 +103,15 @@ reviewed, integrated, verified, pushed, and audited.
 - Appointment attendance follow-up: allow staff correction/backtracking between
   most attendance statuses, but design guards carefully around completion and
   future billing so accidental double-billing is not enabled.
-- Sprint 12 review harness follow-up: use
-  `orchestration/appointment_state_waiting_area_review.md` when integrating the
-  provisional-to-linked patient workflow. It records the intended separation
-  between patient identity linkage, attendance state, future SMS confirmation,
+- Break-overlap follow-up: `breaks_overlap` is populated on create/update
+  responses, not on appointment list/detail GET responses. Add passive GET
+  annotation later only if an API client needs it.
+- Diary warning follow-up: the current break-crossing warning is intentionally
+  soft. Starting inside a break remains discouraged by the diary surface, while
+  ending over a break is allowed after warning.
+- Sprint 12 review harness follow-up: continue using
+  `orchestration/appointment_state_waiting_area_review.md` as the source for
+  separating patient identity linkage, attendance state, future SMS confirmation,
   and physical waiting-area assignment.
 - Add taskpane New Patient/Edit Patient fields for Medicare IRN and IHI, then
   surface duplicate candidates as a warning/confirm step rather than a hard
@@ -137,11 +127,29 @@ reviewed, integrated, verified, pushed, and audited.
   for workflows that prove they need space, microphone access, review panes, or
   sustained focus; do not add Command Centre tabs before the workflow boundary is
   clear.
+- Browser-window follow-up: the taskpane can now avoid building up multiple diary
+  windows by closing/reopening the existing dialog, but Office still shows its
+  own window-open prompt each time.
 
 ## Verification
 
 These are Codex/orchestrator verification notes, not commands the user is expected
 to run.
+
+- Sprint 12 verification:
+  - `node --check docs\diary\diary.js` -> passed
+  - `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\schemas\appointments.py`
+    -> passed
+  - `git diff --check origin/master..HEAD` -> passed
+  - After resetting `gp_pms_test` public schema and ensuring `vector` extension:
+    `.venv\Scripts\python.exe -m pytest tests\test_break_overlap_contract.py -q -vv`
+    -> 4 passed
+  - `.venv\Scripts\python.exe -m pytest tests\test_appointment_patient_link.py tests\test_appointment_conflicts.py tests\test_appointment_status_mutations.py -q`
+    -> 40 passed
+  - `.venv\Scripts\python.exe -m pytest tests\test_diary_template.py tests\test_diary_roster.py tests\test_slots.py tests\test_booking_patient_flow.py tests\test_nurse_practitioner.py -q`
+    -> 50 passed
+  - A larger combined focused pytest bundle timed out before useful output; the
+    same files passed in smaller sequential groups.
 
 - Sprint 11 verification:
   - `node --check docs\diary\diary.js` -> passed
@@ -214,11 +222,9 @@ Historical Sprint 7 verification:
 
 ## Recommended Next Direction
 
-Sprint 12 should finish the practical patient-link workflow: link a provisional
-diary booking to an existing/new patient record from the booking modal, keep
-booking-over-break warning on the near-term list, and continue refining
-waiting-area semantics. Use
-`orchestration/appointment_state_waiting_area_review.md` as the integration and
-user-review checklist for that state model. Drag/drop/resize should remain
-deferred until bookable-resource and patient-flow rules are stable enough that
+After user review, the next sprint should continue the patient-flow/resource model
+rather than jumping straight to drag/drop. Recommended slices: physical waiting
+areas linked to rooms/resources, a clearer linked-versus-provisional patient
+confirmation action, and a small edit-patient-details foundation for the taskpane.
+Drag/drop/resize should remain deferred until those rules are stable enough that
 we are not smoothing over the wrong rules.
