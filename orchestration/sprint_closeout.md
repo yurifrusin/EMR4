@@ -109,6 +109,10 @@ reviewed, integrated, verified, pushed, and audited.
   a short idle period, approximately 3 seconds, unless the user starts interacting
   with that booking. Preserve this selection/expansion state as local-only UI
   behaviour if live multi-user diary updates are added later.
+- Patient-record follow-up: New Patient creation is only the first slice. Add an
+  edit-patient-details workflow, duplicate-patient detection before file/record
+  creation, Medicare card reference number, IHI number, and a fuller demographic
+  and identifier model before relying on patient creation in routine use.
 
 ## Verification
 
@@ -131,6 +135,8 @@ to run.
   and `git diff --check` -> passed
 - Booking hover-preview hotfix verification: `node --check docs\diary\diary.js`
   and `git diff --check` -> passed
+- New Patient modal escape hotfix verification: `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"`,
+  `node --check docs\taskpane\taskpane.js`, and `git diff --check` -> passed
 - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 8 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_patient_flow.py -q` -> 20 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_booking_create_edit.py tests\test_booking_patient_flow.py tests\test_appointment_conflicts.py tests\test_appointment_status_mutations.py tests\test_waiting_room.py tests\test_slots.py tests\test_patients.py -q` -> 113 passed

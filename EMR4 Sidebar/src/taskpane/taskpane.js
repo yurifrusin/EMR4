@@ -1339,18 +1339,46 @@ async function detectDocumentType() {
 // ═══════════════════════════════════════════════════════════
 
 window.showNewPatientForm = function showNewPatientForm() {
+  const createBtn = document.getElementById("btn-np-create");
+  const cancelBtn = document.getElementById("btn-np-cancel");
+  if (createBtn) {
+    createBtn.disabled = false;
+    createBtn.textContent = "Create Patient File";
+    createBtn.onclick = createNewPatient;
+  }
+  if (cancelBtn) {
+    cancelBtn.textContent = "Cancel";
+    cancelBtn.onclick = closeNewPatientForm;
+  }
+  document.getElementById("new-patient-result").innerHTML = "";
   document.getElementById("new-patient-panel").classList.remove("hidden");
   document.getElementById("np-first-name").focus();
 }
 
 window.closeNewPatientForm = function closeNewPatientForm() {
   document.getElementById("new-patient-panel").classList.add("hidden");
+  const createBtn = document.getElementById("btn-np-create");
+  const cancelBtn = document.getElementById("btn-np-cancel");
+  if (createBtn) {
+    createBtn.disabled = false;
+    createBtn.textContent = "Create Patient File";
+    createBtn.onclick = createNewPatient;
+  }
+  if (cancelBtn) {
+    cancelBtn.textContent = "Cancel";
+    cancelBtn.onclick = closeNewPatientForm;
+  }
   ["np-first-name","np-last-name","np-dob","np-sex","np-medicare",
    "np-phone","np-address","np-suburb","np-state","np-postcode"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = "";
   });
   document.getElementById("new-patient-result").innerHTML = "";
+}
+
+window.resetNewPatientFormForAnother = function resetNewPatientFormForAnother() {
+  closeNewPatientForm();
+  showNewPatientForm();
 }
 
 window.createNewPatient = async function () {
@@ -1360,6 +1388,8 @@ window.createNewPatient = async function () {
   if (!fn || !ln || !dob) { alert("First name, last name, and date of birth are required."); return; }
 
   const btn = document.getElementById("btn-np-create");
+  const cancelBtn = document.getElementById("btn-np-cancel");
+  let created = false;
   btn.disabled = true;
   btn.textContent = "Creating…";
   try {
@@ -1384,18 +1414,28 @@ window.createNewPatient = async function () {
       throw new Error(d.detail || `Server error ${res.status}`);
     }
     const data = await res.json();
+    created = true;
     document.getElementById("new-patient-result").innerHTML = `
       <div class="alert alert-success">
         <strong>&#x2713; Patient created!</strong><br>
         File: <code>${escHtml(data.generated_filename)}</code><br>
         Open it from your OneDrive folder — the taskpane will auto-load the record.
       </div>`;
+    btn.textContent = "Close";
+    btn.onclick = closeNewPatientForm;
+    if (cancelBtn) {
+      cancelBtn.textContent = "Create Another";
+      cancelBtn.onclick = resetNewPatientFormForAnother;
+    }
   } catch (e) {
     document.getElementById("new-patient-result").innerHTML =
       `<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`;
   } finally {
     btn.disabled = false;
-    btn.textContent = "Create Patient File";
+    if (!created) {
+      btn.textContent = "Create Patient File";
+      btn.onclick = createNewPatient;
+    }
   }
 };
 
@@ -1652,6 +1692,11 @@ Office.onReady(info => {
 
   // Escape closes the search panel
   document.addEventListener("keydown", e => {
+    const newPatientPanel = document.getElementById("new-patient-panel");
+    if (e.key === "Escape" && newPatientPanel && !newPatientPanel.classList.contains("hidden")) {
+      closeNewPatientForm();
+      return;
+    }
     if (e.key === "Escape" && !searchPanel.classList.contains("hidden")) closeSearch();
   });
 

@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=36" />
-  <script src="taskpane.js?v=36" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=37" />
+  <script src="taskpane.js?v=37" defer></script>
 </head>
 <body>
 
@@ -116,9 +116,12 @@
           <input id="np-postcode" type="text" class="input" placeholder="2000" />
         </div>
       </div>
-      <button id="btn-np-create" class="btn btn-primary btn-full" onclick="createNewPatient()">
-        Create Patient File
-      </button>
+      <div class="new-patient-actions">
+        <button id="btn-np-cancel" type="button" class="btn btn-ghost" onclick="closeNewPatientForm()">Cancel</button>
+        <button id="btn-np-create" type="button" class="btn btn-primary" onclick="createNewPatient()">
+          Create Patient File
+        </button>
+      </div>
     </div>
   </div>
 

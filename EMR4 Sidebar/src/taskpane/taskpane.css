@@ -607,6 +607,17 @@ select.input { cursor: pointer; }
   color: var(--blue-dark);
 }
 
+.new-patient-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.new-patient-actions .btn {
+  min-width: 120px;
+}
+
 /* ── DIARY MODE ─────────────────────────────────────────── */
 
 /* Appointment status badges (extend .card-badge) */
