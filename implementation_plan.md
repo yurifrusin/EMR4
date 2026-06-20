@@ -71,6 +71,25 @@ Postgres, not a Word diary. The Word diary concept remains useful historical con
 for why the product needs fast receptionist text entry, confirmation affordances, and
 co-authoring-like visibility, but new diary work should target the native grid.
 
+### 2.7 Bernie Receptionist Copilot
+Bernie is the internal receptionist copilot: a supervised staff assistant embedded
+in the diary/waiting-room surface. Bernie should help reception staff find suitable
+appointment times, interpret scheduling constraints, draft admin messages, and prepare
+safe actions for human confirmation.
+
+Bernie is deliberately not the first patient-facing autonomous agent. The first
+implementation should be an internal copilot that acts through controlled backend
+tools, such as `search_patient`, `find_slots`, `create_booking`,
+`link_patient_to_booking`, `arrive_patient`, `take_message`, and
+`handoff_to_receptionist`. The UI should show proposed actions and require staff
+confirmation for mutations until the safety/audit model is mature.
+
+Build timing: start Bernie after the Phase 2 diary foundations are stable enough
+that appointments, bookable resources, provisional patient identity, linked patient
+identity, breaks, and waiting-area semantics are clear. Later patient chat, kiosk
+assistance, and phone voice automation should reuse the same tool layer rather than
+creating separate bots.
+
 ---
 
 ## 3. Resolved Design Decisions
@@ -128,6 +147,7 @@ graph TB
     subgraph "Reception Workstation"
         RD["Living Diary<br/>(Word + Co-authoring)"]
         RTP["EMR4 Command Center<br/>(Diary Mode)"]
+        BERN["Bernie Reception Copilot<br/>(supervised staff assistant)"]
         VOIP["3CX Screen Pop"]
     end
 
@@ -160,7 +180,7 @@ graph TB
 
     WPF --> TP
     RD --> RTP
-    TP & RTP & RAY & PWA --> API
+    TP & RTP & BERN & RAY & PWA --> API
     RELAY --> API
     CX --> API
     API --> DB & GEM & VAS & HIVE
@@ -182,6 +202,7 @@ graph TB
 | **Database** | Cloud SQL (PostgreSQL 16 + pgvector) | Managed; vector search; multi-tenant |
 | **Migrations** | Alembic | Version-controlled schema evolution |
 | **AI — Clinical** | Gemini 2.5 Flash (Vertex AI) | Multimodal; fast; already integrated |
+| **AI — Reception Copilot** | Gemini + controlled backend tools | Bernie; supervised appointment/admin assistant embedded in the diary |
 | **AI — Search** | Vertex AI Discovery Engine | MBS rules RAG |
 | **AI — De-ID** | Microsoft Presidio | PHI/PII scrubbing for Hive Mind |
 | **AI — Face** | Azure Face API | 1:1 verification; liveness detection |
@@ -489,6 +510,32 @@ flowchart TD
 
 ---
 
+### PHASE 2B — Bernie Receptionist Copilot
+*Internal supervised receptionist copilot embedded in the diary/waiting-room workflow.*
+
+| Item | Details |
+|:---|:---|
+| Reception chat panel | Text-first copilot surface inside the diary; voice can be added later after text workflows are safe |
+| Slot finding | "Find an appropriate time next week for this patient" using practitioner, room, appointment type, duration, breaks, waiting list, and patient constraints |
+| Action proposals | Bernie proposes booking/status/message actions; receptionist confirms before mutation |
+| Controlled tools | Backend tool endpoints for patient search, slot search, booking create/edit, provisional patient linking, waiting-room status, and message taking |
+| Audit trail | Every Bernie suggestion and confirmed action records actor, tool, inputs, result, timestamp, and human confirmer |
+| Escalation | Ambiguous identity, clinical content, impossible scheduling, or conflicting policy routes back to the human receptionist |
+
+#### Bernie build gates
+
+- Do not start Bernie until Phase 2 has stable booking create/edit, resource/room
+  modelling, provisional-to-linked patient flow, break warning semantics, and
+  waiting-area semantics.
+- Start with a non-autonomous "suggest and confirm" mode. Bernie may retrieve and
+  propose; human staff confirm writes.
+- No patient-facing web chat, kiosk autonomy, or phone voice automation until the
+  same tools have been proven internally and audit/permission controls are robust.
+- Treat every model response as advisory. Only typed tool calls with validated
+  arguments may mutate appointment, patient, message, or waiting-room state.
+
+---
+
 ### PHASE 3 — Online Booking Portal
 *Public-facing web app + embeddable widget.*
 
@@ -710,6 +757,7 @@ flowchart TD
 | **0** | Foundation | 2–3 |
 | **1** | Patient File + SPA + Care Plans + Letters | 4–5 |
 | **2** | Living Diary + Messaging + SMS Reminders | 3–4 |
+| **2B** | Bernie Receptionist Copilot | 2–3 |
 | **3** | Online Booking Portal | 2–3 |
 | **3B** | Patient PWA App | 1–2 |
 | **4** | Rayleen Kiosk + Waiting Room Display | 3–4 |
@@ -723,7 +771,7 @@ flowchart TD
 | **10** | ADHA (IHI/MHR/AIR) | 2–3 |
 | **11** | Enhanced Scribe | 1–2 |
 | **12** | Polish & Launch | 3–4 |
-| | **Total** | **~36–50 sessions** |
+| | **Total** | **~38–53 sessions** |
 
 **"Session"** = one focused Antigravity conversation (~2–4 hours of real work).
 
@@ -830,6 +878,7 @@ booking portal, PWA, kiosk, and the Hive Mind boundary. Update it as each phase 
 ### Per-phase security gates
 | Phase | Gate — must be designed/reviewed before build |
 |:---|:---|
+| **2B** (Bernie receptionist copilot) | Internal agent tool safety. Require explicit tool schemas, permission checks, audit log, human confirmation for writes, anti-prompt-injection review, and no direct model-to-database mutation. |
 | **3 / 3B / 4** (booking, PWA, kiosk) | Public unauthenticated surfaces. Strengthen identity proofing (name+DOB+Medicare is weak/enumerable); rate-limit + anti-enumeration; biometric PIA, liveness, encryption, deletion-on-revocation. |
 | **5 / 11** (DDx, scribe) | Prompt-injection defence: treat all document-sourced text as hostile; output validation; no model output triggers action without GP confirmation. SaMD assessment of red-flag scanner. |
 | **5B** (Centaur Brain) | Untrusted legacy-document ingest at scale; de-ID before fine-tuning; verify fine-tuned model can't regurgitate cross-practice training data. |

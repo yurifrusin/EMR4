@@ -130,6 +130,10 @@ reviewed, integrated, verified, pushed, and audited.
 - Browser-window follow-up: the taskpane can now avoid building up multiple diary
   windows by closing/reopening the existing dialog, but Office still shows its
   own window-open prompt each time.
+- Bernie follow-up: add the internal receptionist copilot after the booking/resource
+  and patient-identity rules are stable. Start with a supervised diary copilot that
+  proposes slot-finding, booking, linking, waiting-room, and message-taking actions
+  for receptionist confirmation.
 
 ## Verification
 
@@ -226,5 +230,6 @@ After user review, the next sprint should continue the patient-flow/resource mod
 rather than jumping straight to drag/drop. Recommended slices: physical waiting
 areas linked to rooms/resources, a clearer linked-versus-provisional patient
 confirmation action, and a small edit-patient-details foundation for the taskpane.
-Drag/drop/resize should remain deferred until those rules are stable enough that
-we are not smoothing over the wrong rules.
+Bernie should start after those rules are stable enough to expose as safe backend
+tools. Drag/drop/resize should remain deferred until we are not smoothing over the
+wrong rules.

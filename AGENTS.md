@@ -29,7 +29,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
 | **Current active track** | Phase 2 - diary operations foundation integrated |
-| **Next recommended work** | Review live diary time-ruler UX, then wire frontend to Room/DiaryRoster data before booking mutations |
+| **Next recommended work** | User-review Sprint 12, then continue Phase 2 resource/waiting-area/patient-identity semantics; start Bernie only after booking/resource rules are stable |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -399,6 +399,23 @@ The staff diary grid and a future patient booking portal are just two clients of
 - **Fallback**: if the practice has no `DiaryTemplate` DB row, the endpoint reads and returns `diary_template.json` — so the existing diary grid continues working without any frontend change until a practice configures their DB template.
 - **Seed**: `seed.py` populates the dev clinic's 3-column template (Room 1 / Dr Shera, Room 2 / Nurse, Room 3 / Available) with MORNING TEA + LUNCH breaks, matching `diary_template.json`.
 - **Tests**: 4 tests in `tests/test_diary_template.py` — 401 without auth, DB record returned, JSON fallback, cross-practice isolation. 26/26 total pass.
+
+#### 🧭 Planned Phase 2B — Bernie Receptionist Copilot
+- **Bernie** is the planned internal receptionist copilot: a supervised assistant
+  embedded in the diary/waiting-room surface, named after Dr Shera's former head
+  receptionist.
+- First build should be **staff-facing and confirm-before-write**, not autonomous
+  patient-facing chat or phone voice. Bernie should propose actions such as finding
+  an appropriate slot next week, linking a provisional patient, taking a message,
+  or preparing a booking; reception staff confirm mutations.
+- Bernie should act through controlled backend tools/API contracts, not by clicking
+  around the UI: `search_patient`, `find_slots`, `create_booking`,
+  `link_patient_to_booking`, `arrive_patient`, `take_message`,
+  `handoff_to_receptionist`, etc.
+- Build timing: after Phase 2 diary foundations settle around appointment create/edit,
+  bookable resources, provisional vs linked patient identity, breaks, and physical
+  waiting-area semantics. Later online chat, kiosk assistance, and phone voice can
+  reuse the same tool layer.
 
 ---
 
