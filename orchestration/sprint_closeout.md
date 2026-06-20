@@ -9,7 +9,7 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 10: Nurse Bookability and Patient Identity Foundation |
-| Integrated through | pending Sprint 10 integration commit |
+| Integrated through | `0b94c23` |
 | Status | Integrated locally and verified |
 | Last updated | 2026-06-20 |
 
