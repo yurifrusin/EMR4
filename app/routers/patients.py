@@ -83,12 +83,69 @@ def _duplicate_match_reasons(
     return reasons
 
 
+def _raise_if_hard_duplicate(
+    db: Session,
+    current_user: User,
+    body: PatientCreate,
+) -> None:
+    ihi_norm = _norm_identifier(body.ihi_number)
+    medicare_norm = _norm_identifier(body.medicare_number)
+    medicare_irn_norm = _norm_identifier(body.medicare_irn)
+
+    conditions = []
+    if ihi_norm:
+        conditions.append(_normalized_column(Patient.ihi_number) == ihi_norm)
+    if medicare_norm and medicare_irn_norm:
+        conditions.append(and_(
+            _normalized_column(Patient.medicare_number) == medicare_norm,
+            _normalized_column(Patient.medicare_irn) == medicare_irn_norm,
+        ))
+
+    if not conditions:
+        return
+
+    existing = db.query(Patient).filter(
+        Patient.practice_id == current_user.practice_id,
+        or_(*conditions),
+    ).order_by(Patient.last_name, Patient.first_name).first()
+
+    if not existing:
+        return
+
+    reasons = _duplicate_match_reasons(
+        existing,
+        first_name=body.first_name,
+        last_name=body.last_name,
+        date_of_birth=body.date_of_birth,
+        medicare_number=body.medicare_number,
+        medicare_irn=body.medicare_irn,
+        ihi_number=body.ihi_number,
+        phone_mobile=body.phone_mobile,
+        phone_home=body.phone_home,
+    )
+    hard_reasons = [
+        reason
+        for reason in reasons
+        if reason in {"same_ihi", "same_medicare_card_and_irn"}
+    ]
+    if hard_reasons:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "message": "Duplicate patient creation blocked by strong identifier match.",
+                "existing_patient_id": str(existing.id),
+                "match_reasons": hard_reasons,
+            },
+        )
+
+
 @router.post("", response_model=PatientOut, status_code=status.HTTP_201_CREATED)
 def create_patient(
     body: PatientCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    _raise_if_hard_duplicate(db, current_user, body)
     patient = Patient(practice_id=current_user.practice_id, **body.model_dump())
     db.add(patient)
     db.flush()
@@ -114,6 +171,8 @@ def create_patient_with_file(
     if "" not in sys.path:
         sys.path.insert(0, "")
     from create_patient_file import create_patient_docx, PatientData  # noqa: E402
+
+    _raise_if_hard_duplicate(db, current_user, body)
 
     doc_path = None
     try:

@@ -509,6 +509,29 @@ html, body {
   color: var(--grey-3);
 }
 
+.appt-identity-unconfirmed {
+  background-color: #fff7ed;
+  border-color: #ef4444;
+  border-style: dashed;
+  border-right: 4px solid #dc2626;
+}
+
+.appt-identity-unconfirmed .appt-name {
+  color: #b91c1c;
+  font-weight: 800;
+}
+
+.appt-identity-warning {
+  color: #b91c1c;
+  display: block;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  line-height: 1;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
 .appt-cancelled .appt-name,
 .appt-noshow .appt-name,
 .appt-dna .appt-name {
@@ -1312,6 +1335,15 @@ html, body {
 .flow-card-completed { border-left: 4px solid #059669; }
 .flow-card-noshow { border-left: 4px solid var(--grey-3); }
 .flow-card-dna { border-left: 4px solid var(--grey-3); }
+
+.flow-card-identity-unconfirmed {
+  border-color: #ef4444;
+  border-style: dashed;
+}
+
+.flow-card-identity-unconfirmed .flow-card-name {
+  color: #b91c1c;
+}
 
 /* Finished Outcomes in Workbench (Names are line-through and greyed out) */
 .flow-card-completed .flow-card-name,

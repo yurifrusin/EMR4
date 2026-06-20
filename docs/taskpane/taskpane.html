@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=38" />
-  <script src="taskpane.js?v=38" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=39" />
+  <script src="taskpane.js?v=39" defer></script>
 </head>
 <body>
 
@@ -90,9 +90,19 @@
           </select>
         </div>
       </div>
+      <div class="field-row">
+        <div class="field-group" style="flex:2">
+          <label class="field-label">Medicare number</label>
+          <input id="np-medicare" type="text" class="input" placeholder="1234 56789 0" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">IRN</label>
+          <input id="np-medicare-irn" type="text" class="input" placeholder="1" maxlength="2" />
+        </div>
+      </div>
       <div class="field-group">
-        <label class="field-label">Medicare number</label>
-        <input id="np-medicare" type="text" class="input" placeholder="1234 56789 0" />
+        <label class="field-label">IHI number</label>
+        <input id="np-ihi" type="text" class="input" placeholder="8003 6088 3335 7361" />
       </div>
       <div class="field-group">
         <label class="field-label">Mobile phone</label>

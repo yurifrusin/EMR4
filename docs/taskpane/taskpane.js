@@ -1342,8 +1342,11 @@ async function detectDocumentType() {
 
 const NEW_PATIENT_FIELD_IDS = [
   "np-first-name", "np-last-name", "np-dob", "np-sex", "np-medicare",
-  "np-phone", "np-address", "np-suburb", "np-state", "np-postcode",
+  "np-medicare-irn", "np-ihi", "np-phone", "np-address", "np-suburb",
+  "np-state", "np-postcode",
 ];
+
+const HARD_DUPLICATE_REASONS = new Set(["same_ihi", "same_medicare_card_and_irn"]);
 
 let pendingNewPatientPayload = null;
 
@@ -1397,6 +1400,8 @@ function collectNewPatientPayload() {
     date_of_birth:    dob,
     sex:              document.getElementById("np-sex").value || null,
     medicare_number:  document.getElementById("np-medicare").value.trim() || null,
+    medicare_irn:     document.getElementById("np-medicare-irn").value.trim() || null,
+    ihi_number:       document.getElementById("np-ihi").value.trim() || null,
     phone_mobile:     document.getElementById("np-phone").value.trim() || null,
     address_line1:    document.getElementById("np-address").value.trim() || null,
     address_suburb:   document.getElementById("np-suburb").value.trim() || null,
@@ -1408,7 +1413,8 @@ function collectNewPatientPayload() {
 async function findNewPatientDuplicateCandidates(body) {
   const params = new URLSearchParams();
   [
-    "first_name", "last_name", "date_of_birth", "medicare_number", "phone_mobile",
+    "first_name", "last_name", "date_of_birth", "medicare_number",
+    "medicare_irn", "ihi_number", "phone_mobile",
   ].forEach(key => {
     if (body[key]) params.set(key, body[key]);
   });
@@ -1422,6 +1428,24 @@ async function findNewPatientDuplicateCandidates(body) {
     throw new Error(detail.detail || `Duplicate check failed (${res.status})`);
   }
   return await res.json();
+}
+
+function hasHardDuplicateMatch(candidates) {
+  return candidates.some(candidate =>
+    (candidate.match_reasons || []).some(reason => HARD_DUPLICATE_REASONS.has(reason))
+  );
+}
+
+function describeApiError(detail, fallback) {
+  if (!detail) return fallback;
+  if (typeof detail === "string") return detail;
+  if (detail.message) return detail.message;
+  if (detail.detail) return describeApiError(detail.detail, fallback);
+  try {
+    return JSON.stringify(detail);
+  } catch (_) {
+    return fallback;
+  }
 }
 
 function renderDuplicateCandidate(candidate) {
@@ -1444,12 +1468,15 @@ function renderDuplicateCandidate(candidate) {
 
 function showDuplicateWarning(candidates, body) {
   const createBtn = document.getElementById("btn-np-create");
-  pendingNewPatientPayload = body;
+  const hardBlocked = hasHardDuplicateMatch(candidates);
+  pendingNewPatientPayload = hardBlocked ? null : body;
   setNewPatientFieldsDisabled(true);
   setNewPatientResult(`
-    <div class="alert alert-warning">
-      <strong>Possible duplicate patient</strong><br>
-      Review the existing record before creating a new file.
+    <div class="alert ${hardBlocked ? "alert-error" : "alert-warning"}">
+      <strong>${hardBlocked ? "Duplicate patient blocked" : "Possible duplicate patient"}</strong><br>
+      ${hardBlocked
+        ? "A strong identifier matches an existing patient record. A duplicate file cannot be created."
+        : "Review the existing record before creating a new file."}
       <div class="new-patient-duplicate-list">
         ${candidates.map(renderDuplicateCandidate).join("")}
       </div>
@@ -1458,9 +1485,9 @@ function showDuplicateWarning(candidates, body) {
       </div>
     </div>`);
   if (createBtn) {
-    createBtn.disabled = false;
-    createBtn.textContent = "Create Anyway";
-    createBtn.onclick = confirmCreateNewPatient;
+    createBtn.disabled = hardBlocked;
+    createBtn.textContent = hardBlocked ? "Blocked" : "Create Anyway";
+    createBtn.onclick = hardBlocked ? null : confirmCreateNewPatient;
   }
 }
 
@@ -1546,7 +1573,7 @@ async function submitNewPatient(body) {
     });
     if (!res || !res.ok) {
       const d = await res.json().catch(() => ({}));
-      throw new Error(d.detail || `Server error ${res.status}`);
+      throw new Error(describeApiError(d.detail || d, `Server error ${res.status}`));
     }
     const data = await res.json();
     created = true;

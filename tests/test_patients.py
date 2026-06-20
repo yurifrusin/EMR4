@@ -177,7 +177,7 @@ def test_update_patient_accepts_identity_fields(client, db, practice, gp_user):
     assert patient.ihi_number == "8003608833357361"
 
 
-def test_duplicate_candidates_report_identity_reasons_without_blocking_creation(
+def test_duplicate_candidates_report_identity_reasons_and_hard_block_creation(
     client,
     db,
     practice,
@@ -225,6 +225,41 @@ def test_duplicate_candidates_report_identity_reasons_without_blocking_creation(
         json=_patient_payload(),
         headers=_auth(gp_user),
     )
+    assert create_resp.status_code == 409, create_resp.text
+    assert create_resp.json()["detail"]["match_reasons"] == [
+        "same_ihi",
+        "same_medicare_card_and_irn",
+    ]
+
+
+def test_create_patient_allows_warning_only_duplicate_signals(
+    client,
+    db,
+    practice,
+    gp_user,
+):
+    _add_patient(
+        db,
+        practice,
+        first_name="Tilly",
+        last_name="Tester",
+        date_of_birth=date(1990, 1, 2),
+        medicare_number="2950123456",
+        medicare_irn="1",
+        phone_mobile="0400 123 456",
+        address_line1="12 Test Street",
+    )
+
+    create_resp = client.post(
+        "/api/v1/patients",
+        json=_patient_payload(
+            medicare_number="2950123456",
+            medicare_irn="2",
+            ihi_number=None,
+        ),
+        headers=_auth(gp_user),
+    )
+
     assert create_resp.status_code == 201, create_resp.text
 
 
@@ -328,6 +363,41 @@ def test_create_patient_with_file_returns_filename_and_leaves_document_url_null(
     saved = db.query(Patient).filter(Patient.id == data["id"]).one()
     assert str(saved.practice_id) == practice_id
     assert saved.document_url is None
+
+
+def test_create_patient_with_file_blocks_hard_duplicate_before_file_generation(
+    client,
+    db,
+    practice,
+    gp_user,
+    monkeypatch,
+    tmp_path,
+):
+    monkeypatch.setattr(settings, "patient_files_dir", str(tmp_path))
+    _add_patient(
+        db,
+        practice,
+        first_name="Existing",
+        last_name="Patient",
+        date_of_birth=date(1980, 1, 1),
+        medicare_number="2950123456",
+        medicare_irn="1",
+    )
+
+    resp = client.post(
+        "/api/v1/patients/with-file",
+        json=_patient_payload(
+            first_name="Other",
+            last_name="Person",
+            date_of_birth="1985-02-03",
+            ihi_number=None,
+        ),
+        headers=_auth(gp_user),
+    )
+
+    assert resp.status_code == 409, resp.text
+    assert resp.json()["detail"]["match_reasons"] == ["same_medicare_card_and_irn"]
+    assert list(tmp_path.glob("*.docx")) == []
 
 
 def test_create_patient_with_file_is_practice_scoped(client, gp_user_b, monkeypatch, tmp_path):

@@ -538,6 +538,32 @@ function getStatusLabel(status) {
   }
 }
 
+function provisionalPatientName(appt) {
+  return appt.patient_name_provisional || appt.provisional_name || "";
+}
+
+function isPatientIdentityUnconfirmed(appt) {
+  return !!provisionalPatientName(appt) || !appt.patient_id || !appt.patient;
+}
+
+function isClinicalProgressStatus(status) {
+  return ["Arrived", "InConsult", "Completed"].includes(status);
+}
+
+function confirmUnidentifiedProgress(appt, newStatus) {
+  if (!isPatientIdentityUnconfirmed(appt) || !isClinicalProgressStatus(newStatus)) {
+    return true;
+  }
+  const patientName = provisionalPatientName(appt) || "this provisional patient";
+  const first = window.confirm(
+    `This booking is not linked to a confirmed patient record. Continue changing ${patientName} to ${getStatusLabel(newStatus)}?`
+  );
+  if (!first) return false;
+  return window.confirm(
+    "The patient has not been identified in EMR records. If you continue, the booking will be marked IDENTITY UNCONFIRMED."
+  );
+}
+
 function appendNowMarker(container, template, showLabel = false) {
   if (!isSameClinicDay(diaryDate, new Date())) return;
   const mins = nowMins();
@@ -785,9 +811,12 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       }
       span.dataset.id = a.id;
 
-      const provisionalPatientName = a.patient_name_provisional || a.provisional_name || "";
-      const isProvisional = !!provisionalPatientName || !a.patient_id || !a.patient;
+      const provisionalName = provisionalPatientName(a);
+      const isProvisional = isPatientIdentityUnconfirmed(a);
       span.classList.add(isProvisional ? "appt-provisional" : "appt-linked");
+      if (isProvisional && isClinicalProgressStatus(a.status)) {
+        span.classList.add("appt-identity-unconfirmed");
+      }
 
       if (color) {
         span.dataset.color = color;
@@ -803,7 +832,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       span.style.setProperty("--appt-height", visualHeightPx + "px");
       span.tabIndex = 0;
 
-      const patientName = provisionalPatientName || (a.patient ? `${a.patient.first_name} ${a.patient.last_name}`.trim() : "") || "Unknown Patient";
+      const patientName = provisionalName || (a.patient ? `${a.patient.first_name} ${a.patient.last_name}`.trim() : "") || "Unknown Patient";
       const timeLabel = timeRangeLabel(start, end);
       span.setAttribute("role", "button");
       span.setAttribute("aria-label", a.reason ? `${patientName}. ${timeLabel}. ${a.reason}` : `${patientName}. ${timeLabel}`);
@@ -846,6 +875,12 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         reason.className = "appt-reason";
         reason.textContent = a.reason;
         span.appendChild(reason);
+      }
+      if (isProvisional && isClinicalProgressStatus(a.status) && heightPx >= 32) {
+        const warning = document.createElement("span");
+        warning.className = "appt-identity-warning";
+        warning.textContent = "IDENTITY UNCONFIRMED";
+        span.appendChild(warning);
       }
 
       // Inline compact status changer
@@ -1914,6 +1949,10 @@ async function deleteBooking() {
 let todayAppointments = [];
 
 async function setAppointmentStatus(appt, newStatus, selectEl = null) {
+  if (!confirmUnidentifiedProgress(appt, newStatus)) {
+    if (selectEl) selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
+    return;
+  }
   if (selectEl) selectEl.disabled = true;
   setStatus("Updating status...");
 
@@ -2086,14 +2125,18 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
     const name = document.createElement("span");
     name.className = "flow-card-name";
 
-    const provisionalPatientName = a.patient_name_provisional || a.provisional_name || "";
-    const isProvisional = !!provisionalPatientName || !a.patient_id || !a.patient;
-    const patientName = provisionalPatientName || (a.patient ? `${a.patient.first_name} ${a.patient.last_name}`.trim() : "") || "Unknown Patient";
+    const provisionalName = provisionalPatientName(a);
+    const isProvisional = isPatientIdentityUnconfirmed(a);
+    const patientName = provisionalName || (a.patient ? `${a.patient.first_name} ${a.patient.last_name}`.trim() : "") || "Unknown Patient";
 
     if (isProvisional) {
       name.innerHTML = `<span class="appt-prov-icon" title="Provisional Patient">📝</span> ${escHtml(patientName)}`;
     } else {
       name.innerHTML = `<span class="appt-link-icon" title="Linked Patient Record">🔗</span> ${escHtml(patientName)}`;
+    }
+
+    if (isProvisional && isClinicalProgressStatus(a.status)) {
+      card.classList.add("flow-card-identity-unconfirmed");
     }
 
     if (!isProvisional) {
