@@ -113,6 +113,10 @@ reviewed, integrated, verified, pushed, and audited.
   edit-patient-details workflow, duplicate-patient detection before file/record
   creation, Medicare card reference number, IHI number, and a fuller demographic
   and identifier model before relying on patient creation in routine use.
+- Booking-over-break policy follow-up: keep appointments allowed to overlap
+  break blocks, because breaks are soft operational blocks rather than absolute
+  booking constraints, but warn the user before saving when a booking crosses a
+  room/practitioner break.
 
 ## Verification
 
