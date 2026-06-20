@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | a095401 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-nurse-bookability-affordance --commit-message "Diary nurse bookability affordance" --message "antigravity-diary-nurse-bookability-affordance ready for Codex review"` |
@@ -68,6 +68,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.css, docs/diary/diary.html
+- Verification run: Checked JavaScript syntax using `node --check docs/diary/diary.js` (successful). Checked git diff check using `git diff --check` (successful).
+- Remaining risks: None. The changes are strictly client-side presentation layers and do not modify any backend API schemas or mutations.

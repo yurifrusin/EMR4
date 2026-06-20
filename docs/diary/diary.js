@@ -602,7 +602,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
   // ── 2. Create Practitioner/Room Columns ─────────────────────
   columns.forEach((col, colIdx) => {
     const column = document.createElement("div");
-    column.className = "diary-column";
+    column.className = "diary-column" + (col.practitioner_ahpra ? "" : " col-non-bookable");
 
     // Header
     const th = document.createElement("div");
@@ -651,7 +651,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       );
       const hasAppt = col.practitioner_ahpra && occupied[col.practitioner_ahpra]?.has(slotTime);
 
-      if (!hasBreak && !hasAppt) {
+      if (!hasBreak && !hasAppt && col.practitioner_ahpra) {
         const empty = document.createElement("span");
         empty.className = "slot-empty";
         empty.textContent = "»";

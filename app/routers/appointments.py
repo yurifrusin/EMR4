@@ -304,7 +304,6 @@ def create_appointment(
     )
     db.add(appt)
     db.commit()
-    db.refresh(appt)
     return _get_appointment(appt.id, practice_id, db)
 
 

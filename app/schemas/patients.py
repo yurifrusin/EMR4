@@ -1,6 +1,6 @@
 import uuid
 from datetime import date, datetime
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 
 
@@ -9,6 +9,7 @@ class PatientCreate(BaseModel):
     last_name: str
     date_of_birth: date
     medicare_number: Optional[str] = None
+    medicare_irn: Optional[str] = Field(default=None, max_length=2)
     ihi_number: Optional[str] = None
     dva_number: Optional[str] = None
     sex: Optional[str] = None
@@ -42,6 +43,7 @@ class PatientOut(BaseModel):
     last_name: str
     date_of_birth: date
     medicare_number: Optional[str] = None
+    medicare_irn: Optional[str] = None
     ihi_number: Optional[str] = None
     dva_number: Optional[str] = None
     sex: Optional[str] = None
@@ -111,6 +113,11 @@ class PatientWithFileOut(PatientOut):
     """Returned by POST /patients/with-file — extends PatientOut with the
     generated .docx filename so the caller can display it / copy it to OneDrive."""
     generated_filename: str
+
+
+class PatientDuplicateCandidate(BaseModel):
+    patient: PatientOut
+    match_reasons: list[str]
 
 
 class PatientSummary(BaseModel):

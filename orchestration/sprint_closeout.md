@@ -8,12 +8,31 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 9: Patient Flow and Patient Entry Hardening |
-| Integrated through | current Sprint 9 closeout tip on `master` / `handoff/current` |
-| Status | Integrated, user-reviewed, and passed |
+| Batch | Sprint 10: Nurse Bookability and Patient Identity Foundation |
+| Integrated through | pending Sprint 10 integration commit |
+| Status | Integrated locally and verified |
 | Last updated | 2026-06-20 |
 
 ## What Changed
+
+- Made Room 2/Nurse practitioner-backed in dev data by adding Nurse Sarah Chen
+  with AHPRA `NMW0001234567`, weekday schedules, Room 2 template/roster wiring,
+  and a sample nurse appointment.
+- Added focused nurse practitioner tests for diary template/roster wiring,
+  nurse appointment creation/conflict behaviour, and nurse slot availability.
+- Removed a redundant appointment-create `db.refresh(appt)` round trip before the
+  existing fresh appointment reload.
+- Updated the diary frontend so practitioner-backed columns remain bookable,
+  while label-only/non-practitioner columns get a restrained non-bookable visual
+  treatment and no empty chevrons.
+- Added backend patient identity foundations: `medicare_irn`, IHI search/index
+  support, and `GET /api/v1/patients/duplicate-candidates` for warning-only
+  duplicate-patient checks.
+- Added patient tests for Medicare IRN validation, IHI/IRN search, duplicate
+  candidate matching, practice scoping, and formatted identifier normalisation.
+- Updated diary assets to `v=55`.
+
+Historical Sprint 9 changes:
 
 - Added backend patient-flow contract coverage in
   `tests/test_booking_patient_flow.py`: partial date/time update validation,
@@ -50,22 +69,23 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-1. Open the live diary from the taskpane and confirm the new Waiting Room button
-   opens/closes a right-side patient-flow panel.
-2. Change an appointment through Booked/Confirmed -> Arrived and confirm it
-   appears in the Waiting Room section and the header count updates.
-3. From the panel, use Start Consult and Complete on a test appointment; confirm
-   the main diary card updates and the appointment moves between panel sections.
-4. Confirm Cancelled appointments stay hidden from the working diary layer, while
-   DNA/NoShow remain visible as greyed attendance outcomes.
-5. Confirm create/edit booking still works, including 5-minute bookings and
-   human-readable conflict errors.
-6. Narrow the diary window and confirm the patient-flow panel behaves as an
-   overlay without making booking cards, the date controls, Refresh, or Now
-   unusable.
-7. Create a New Patient from the taskpane and confirm patient search can find the
-   patient by name and phone/Medicare-style identifiers. The generated file
-   should still open through the normal Word/taskpane flow.
+1. After pulling the new code locally, run migrations and seed data if your dev
+   DB is not already current: `alembic upgrade head`, then `python seed.py`, then
+   restart the backend.
+2. Open the live diary from the taskpane and confirm Room 2 shows Nurse Sarah
+   Chen or an equivalent nurse-backed label, not a purely label-only Nurse.
+3. Click an empty Room 2/Nurse slot and confirm the booking modal opens with the
+   nurse-backed room selected; save a test nurse appointment and confirm it
+   appears in Room 2.
+4. Confirm Room 3 remains visually non-bookable and does not show empty chevrons
+   or silently open an invalid booking modal.
+5. Confirm Room 1 booking create/edit/status behaviour still works, including a
+   quick 5-minute booking and the waiting-room status actions.
+6. Optional API check: call `/api/v1/patients/duplicate-candidates` with an
+   existing patient's DOB plus formatted Medicare or phone values and confirm it
+   returns warning candidates without blocking patient creation.
+7. Narrow the diary window and confirm the non-bookable Room 3 treatment and
+   nurse booking affordances stay readable without crowding the header or cards.
 
 ## Not Required Before Moving On
 
@@ -73,10 +93,13 @@ reviewed, integrated, verified, pushed, and audited.
 - Roster admin UI is not built yet.
 - Online booking portal behaviour is not applicable yet.
 - A separate wallboard-style waiting-room display app is not built yet.
-- Nurse/Room 2 remains label-only unless a real practitioner/staff resource is
-  rostered there; booking creation still requires a practitioner-backed column.
+- Room/resource-only bookings are still intentionally deferred; booking creation
+  still requires a practitioner-backed column.
 - No state-machine guard exists yet; any valid status can currently be corrected
   to any other valid status by mutating staff roles.
+- The duplicate-candidate API is backend-only for now; no taskpane patient-entry
+  duplicate warning is required before the next sprint.
+- Real IHI/Medicare verification is not implemented yet.
 
 ## Known Follow-Up
 
@@ -117,11 +140,32 @@ reviewed, integrated, verified, pushed, and audited.
   break blocks, because breaks are soft operational blocks rather than absolute
   booking constraints, but warn the user before saving when a booking crosses a
   room/practitioner break.
+- Add taskpane New Patient/Edit Patient fields for Medicare IRN and IHI, then
+  surface duplicate candidates as a warning/confirm step rather than a hard
+  block.
+- Revisit room/resource modelling so future rooms can be linked to physical
+  waiting areas and non-practitioner resources without pretending every bookable
+  resource is a login-capable GP.
 
 ## Verification
 
 These are Codex/orchestrator verification notes, not commands the user is expected
 to run.
+
+- Sprint 10 verification:
+  - `node --check docs\diary\diary.js` -> passed
+  - `git diff --check` -> passed
+  - `.venv\Scripts\python.exe -m pytest tests\test_nurse_practitioner.py -q`
+    -> 6 passed
+  - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q`
+    -> 14 passed after resetting stale `gp_pms_test` enum state
+  - `.venv\Scripts\python.exe -m pytest tests\test_nurse_practitioner.py tests\test_diary_template.py tests\test_diary_roster.py tests\test_booking_create_edit.py tests\test_slots.py tests\test_patients.py -q`
+    -> 75 passed
+  - `.venv\Scripts\python.exe -m alembic upgrade head` and
+    `.venv\Scripts\python.exe -m alembic current` -> current at
+    `d4e5f6a7b8c9`
+  - `.venv\Scripts\python.exe seed.py` -> created Nurse Sarah Chen locally and
+    backfilled Room 2 to the nurse practitioner in the dev DB
 
 - `node --check docs\diary\diary.js` -> passed
 - `git diff --check` -> passed after integration whitespace cleanup
@@ -156,9 +200,8 @@ Historical Sprint 7 verification:
 
 ## Recommended Next Direction
 
-Sprint 10 should make Room 2/Nurse deliberately bookable by using a real
-practitioner/staff resource first, while keeping room/resource-only bookings as
-a later design decision. In parallel, a separate Codex worker can start the
-patient-identity foundation for duplicate-patient handling and identifier fields
-without touching diary booking code. Drag/drop/resize should still wait until
-practitioner-backed versus resource-only booking semantics are clearer.
+Sprint 11 should make the booking workflow safer around operational exceptions:
+warn before saving a booking across a break, continue to refine waiting-area
+semantics, and decide whether the next slice is drag/drop/resize or patient
+identity UI. Drag/drop/resize should still wait if room/resource-only booking
+semantics remain unclear.

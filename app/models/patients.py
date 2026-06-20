@@ -17,6 +17,7 @@ class Patient(Base):
     last_name = Column(String(100), nullable=False)
     date_of_birth = Column(Date, nullable=False)
     medicare_number = Column(String(20))
+    medicare_irn = Column(String(2))
     ihi_number = Column(String(20))
     dva_number = Column(String(20))
     sex = Column(String(10))
@@ -48,4 +49,5 @@ class Patient(Base):
         Index("ix_patients_practice_id", "practice_id"),
         Index("ix_patients_last_name", "last_name"),
         Index("ix_patients_medicare_number", "medicare_number"),
+        Index("ix_patients_ihi_number", "ihi_number"),
     )

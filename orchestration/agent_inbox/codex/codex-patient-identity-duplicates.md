@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/patient-identity-duplicates` |
-| Status | in_progress |
+| Status | integrated |
 | Created | a095401 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-patient-identity-duplicates --commit-message "Patient identity duplicate foundation" --message "codex-patient-identity-duplicates ready for Codex review"` |
@@ -75,5 +75,19 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `app/models/patients.py`, `app/schemas/patients.py`, `app/routers/patients.py`
+    added Medicare IRN/IHI support and a warning-only duplicate-candidate API.
+  - `alembic/versions/d4e5f6a7b8c9_add_patient_medicare_irn.py` adds
+    `patients.medicare_irn` and an IHI index.
+  - `tests/test_patients.py` adds focused patient identity, search, and duplicate
+    candidate coverage.
 - Verification run:
+  - Codex worker: focused patient tests passed in an isolated throwaway test DB;
+    Alembic upgrade/current check passed; `git diff --check` passed.
+  - Orchestrator added a formatted-identifier regression test and re-ran the
+    integration verification before committing.
 - Remaining risks:
+  - Duplicate detection is warning-only and heuristic; it does not replace formal
+    IHI/Medicare validation.
+  - Patient identifier fields are backend/schema foundations only until the
+    taskpane New Patient/Edit Patient UI exposes them.

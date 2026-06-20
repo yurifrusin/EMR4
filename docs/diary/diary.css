@@ -1385,3 +1385,29 @@ html, body {
     box-shadow: -4px 0 16px rgba(0,0,0,0.15);
   }
 }
+
+/* ─── NON-BOOKABLE COLUMN STYLING ──────────────── */
+.diary-column.col-non-bookable {
+  background-color: var(--grey-1);
+}
+
+.col-non-bookable .diary-column-header {
+  opacity: 0.85;
+  color: var(--grey-4);
+  border-bottom: 1px solid var(--grey-2);
+}
+
+.col-non-bookable .slot-bg {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(225, 228, 232, 0.25),
+    rgba(225, 228, 232, 0.25) 8px,
+    rgba(244, 245, 247, 0.35) 8px,
+    rgba(244, 245, 247, 0.35) 16px
+  );
+  cursor: default;
+}
+
+.col-non-bookable .slot-bg:hover {
+  background-color: rgba(241, 243, 245, 0.4);
+}

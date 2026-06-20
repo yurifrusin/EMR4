@@ -120,9 +120,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Launched |
+| Status | Integrated locally |
 | Launch Gate | Complete |
-| Integration Gate | Not started |
+| Integration Gate | Complete |
 | Theme | Make Nurse/Room 2 deliberately bookable via a practitioner-backed resource while starting the safer patient-identity foundation in a separate lane |
 
 ### Workstream AC - Nurse Practitioner Dev-Data Contract
@@ -136,7 +136,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `seed.py`, focused diary roster/template tests, focused appointment create/edit/slots tests, minimal backend fixes only if the current contract blocks safe nurse representation |
 | Out of Scope | Diary frontend, taskpane/Command Centre, patient identity/duplicate work, waiting-area UI, room/resource-only bookings without `practitioner_id`, drag/drop/resize |
 | Verification | Focused diary roster/template and appointment/slots pytest suites plus `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AD - Diary Nurse Bookability Affordance
 
@@ -149,7 +149,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}` and cache-bust bump |
 | Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre, patient identity/duplicate work, waiting-area data model, drag/drop/resize |
 | Verification | `node --check docs\diary\diary.js`, live/smoke/narrow visual checks, `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AE - Patient Identity Duplicate Foundation
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `app/models/patients.py`, `app/schemas/patients.py`, `app/routers/patients.py`, patient tests, Alembic migration if needed, `create_patient_file.py` only for minimal generated-file mapping |
 | Out of Scope | Diary frontend, appointment/roster/nurse booking work, taskpane UI implementation, OneDrive import tooling, ADHA/IHI service integration, Medicare claiming integration |
 | Verification | Focused patient pytest, migration check if needed, `git diff --check`, generator smoke if touched |
-| Status | In progress |
+| Status | Integrated |
 
 ## Sprint 9: Patient Flow and Patient Entry Hardening
 

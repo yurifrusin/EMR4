@@ -66,6 +66,27 @@ def seed():
         else:
             print(f"  GP already exists: {gp.id}")
 
+        # --- Nurse Practitioner ---
+        # Nurses are real Practitioner records so Room 2 is genuinely bookable
+        # (appointment contract requires practitioner_id — no resource-only rows).
+        nurse = db.query(Practitioner).filter_by(
+            practice_id=practice.id, ahpra_number="NMW0001234567"
+        ).first()
+        if not nurse:
+            nurse = Practitioner(
+                practice_id=practice.id,
+                first_name="Sarah",
+                last_name="Chen",
+                ahpra_number="NMW0001234567",
+                specialty="Nursing",
+                is_active=True,
+            )
+            db.add(nurse)
+            db.flush()
+            print(f"  Created Nurse: {nurse.first_name} {nurse.last_name} ({nurse.id})")
+        else:
+            print(f"  Nurse already exists: {nurse.id}")
+
         # --- Admin User ---
         admin = db.query(User).filter_by(email="admin@emr4dev.local").first()
         if not admin:
@@ -234,20 +255,21 @@ def seed():
             practice_id=practice.id, name="Standard Consult"
         ).first()
 
-        # --- Practitioner Schedule (Mon-Fri 09:00-17:00, 15-min slots) ---
-        for day in range(5):   # 0=Mon .. 4=Fri
-            if not db.query(PractitionerSchedule).filter_by(
-                practitioner_id=gp.id, day_of_week=day
-            ).first():
-                db.add(PractitionerSchedule(
-                    practitioner_id=gp.id,
-                    day_of_week=day,
-                    start_time=time(9, 0),
-                    end_time=time(17, 0),
-                    slot_duration_minutes=15,
-                ))
+        # --- Practitioner Schedules (Mon-Fri 09:00-17:00, 15-min slots) ---
+        for prac, label in [(gp, "GP"), (nurse, "Nurse")]:
+            for day in range(5):
+                if not db.query(PractitionerSchedule).filter_by(
+                    practitioner_id=prac.id, day_of_week=day
+                ).first():
+                    db.add(PractitionerSchedule(
+                        practitioner_id=prac.id,
+                        day_of_week=day,
+                        start_time=time(9, 0),
+                        end_time=time(17, 0),
+                        slot_duration_minutes=15,
+                    ))
         db.flush()
-        print("  Practitioner schedule seeded (Mon-Fri 09:00-17:00)")
+        print("  Practitioner schedules seeded (GP + Nurse, Mon-Fri 09:00-17:00)")
 
         # --- Sample appointments for today (so the Schedule tab is non-empty) ---
         today = date.today()
@@ -261,16 +283,19 @@ def seed():
 
         # Margaret 09:00 is seeded as Confirmed so the diary's lifecycle
         # colour rendering (ALL-CAPS + blue) is demonstrated out of the box.
+        # The nurse appointment demonstrates Room 2 is genuinely bookable.
         sample_appts = [
-            (patient, _appt_dt(9, 0),  "Hypertension review",   AppointmentStatus.Confirmed, 30),
-            (billy,   _appt_dt(9, 15), "Paediatric check-up",    AppointmentStatus.Booked,    15),
-            (patient, _appt_dt(10, 0), "Care plan review",       AppointmentStatus.Booked,    45),
+            (patient, gp,    _appt_dt(9, 0),  "Hypertension review",   AppointmentStatus.Confirmed, 30),
+            (billy,   gp,    _appt_dt(9, 15), "Paediatric check-up",    AppointmentStatus.Booked,    15),
+            (patient, gp,    _appt_dt(10, 0), "Care plan review",       AppointmentStatus.Booked,    45),
+            (patient, nurse, _appt_dt(9, 30), "Wound dressing",         AppointmentStatus.Booked,    15),
         ]
-        for pt, start, reason, init_status, duration_minutes in sample_appts:
+        for pt, prac, start, reason, init_status, duration_minutes in sample_appts:
             local_start = start.astimezone(practice_tz).time().replace(tzinfo=None)
             exists = db.query(Appointment).filter_by(
                 practice_id=practice.id,
                 patient_id=pt.id,
+                practitioner_id=prac.id,
                 appointment_date=today,
                 start_time_local=local_start,
             ).first()
@@ -278,7 +303,7 @@ def seed():
                 db.add(Appointment(
                     practice_id=practice.id,
                     patient_id=pt.id,
-                    practitioner_id=gp.id,
+                    practitioner_id=prac.id,
                     appointment_type_id=std_type.id if std_type else None,
                     booked_by=gp_user.id,
                     start_time=start,
@@ -329,9 +354,9 @@ def seed():
                 },
                 {
                     "room_label": "Room 2",
-                    "assignment": "Nurse",
-                    "practitioner_id": None,
-                    "practitioner_ahpra": None,
+                    "assignment": f"Nurse {nurse.first_name} {nurse.last_name}",
+                    "practitioner_id": nurse.id,
+                    "practitioner_ahpra": nurse.ahpra_number,
                     "tint_hex": "FFFF99",
                     "breaks": [
                         ("MORNING TEA", time(10, 45), time(11, 0)),
@@ -375,6 +400,18 @@ def seed():
             print(f"  Diary template seeded ({len(columns_data)} columns)")
         else:
             print(f"  Diary template already exists: {tmpl.id}")
+            # Idempotent backfill: wire Room 2 column to nurse if it was seeded
+            # before the nurse Practitioner row existed (practitioner_id=None).
+            from app.models.diary import DiaryColumn as _DC
+            room2_col = db.query(_DC).filter_by(
+                template_id=tmpl.id, room_label="Room 2"
+            ).first()
+            if room2_col and room2_col.practitioner_id is None and nurse:
+                room2_col.practitioner_id = nurse.id
+                room2_col.practitioner_ahpra = nurse.ahpra_number
+                room2_col.assignment = f"Nurse {nurse.first_name} {nurse.last_name}"
+                db.flush()
+                print(f"  Updated Room 2 column -> nurse ({nurse.id})")
 
         # --- Rooms (mirror the 3 diary template columns) ---
         rooms_data = [
@@ -401,9 +438,9 @@ def seed():
 
         # --- DiaryRoster for today ---
         roster_entries = [
-            (rooms["Room 1"], gp.id, "MED0001234567", None),
-            (rooms["Room 2"], None, None, "Nurse"),
-            (rooms["Room 3"], None, None, "[Available]"),
+            (rooms["Room 1"], gp.id,    "MED0001234567",          None),
+            (rooms["Room 2"], nurse.id,  nurse.ahpra_number,       None),
+            (rooms["Room 3"], None,      None,                     "[Available]"),
         ]
         for room, prac_id, ahpra, label in roster_entries:
             exists = db.query(DiaryRoster).filter_by(
@@ -420,6 +457,11 @@ def seed():
                     practitioner_ahpra=ahpra,
                     label=label,
                 ))
+            elif exists.practitioner_id is None and prac_id is not None:
+                # Backfill: roster was created before nurse existed
+                exists.practitioner_id = prac_id
+                exists.practitioner_ahpra = ahpra
+                exists.label = label
         db.flush()
         print(f"  Diary roster seeded for today ({today})")
 
