@@ -9,7 +9,7 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 11: Patient-Link Semantics and New Patient Safety |
-| Integrated through | Pending final commit |
+| Integrated through | `a58e98a` |
 | Status | Integrated locally and verified |
 | Last updated | 2026-06-20 |
 
