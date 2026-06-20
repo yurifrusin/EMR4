@@ -115,6 +115,7 @@ class AppointmentOut(BaseModel):
     patient: Optional[PatientBrief] = None
     practitioner: PractitionerBrief
     appointment_type: Optional[AppointmentTypeOut] = None
+    breaks_overlap: list[str] = Field(default_factory=list)
 
     model_config = {"from_attributes": True}
 

@@ -12,6 +12,7 @@ from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     PractitionerSchedule, ScheduleOverride,
 )
+from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate
 from app.schemas.appointments import (
     AppointmentCreate, AppointmentUpdate, AppointmentStatusUpdate,
     AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
@@ -210,6 +211,36 @@ def _raise_if_conflict(
         )
 
 
+def _get_break_overlaps(
+    db: Session,
+    practice_id: uuid.UUID,
+    practitioner_id: uuid.UUID,
+    appointment_date: date_type,
+    start_time_local: time,
+    duration_minutes: int,
+) -> list[str]:
+    """Return labels of DiaryBreak blocks that overlap the appointment (soft-block check)."""
+    appt_start = _local_datetime(appointment_date, start_time_local)
+    appt_end = appt_start + timedelta(minutes=duration_minutes)
+    breaks = (
+        db.query(DiaryBreak)
+        .join(DiaryColumn, DiaryBreak.column_id == DiaryColumn.id)
+        .join(DiaryTemplate, DiaryColumn.template_id == DiaryTemplate.id)
+        .filter(
+            DiaryTemplate.practice_id == practice_id,
+            DiaryColumn.practitioner_id == practitioner_id,
+        )
+        .all()
+    )
+    overlapping = []
+    for brk in breaks:
+        brk_start = datetime.combine(appointment_date, brk.from_time)
+        brk_end = datetime.combine(appointment_date, brk.to_time)
+        if appt_start < brk_end and appt_end > brk_start:
+            overlapping.append(brk.label)
+    return overlapping
+
+
 # ── Appointment Types ─────────────────────────────────────────────────────────
 
 @router.get("/types", response_model=list[AppointmentTypeOut])
@@ -304,9 +335,15 @@ def create_appointment(
         **values,
     )
     db.add(appt)
+    db.flush()           # generate PK in Python before commit expires the instance
+    appt_id = appt.id   # capture UUID while still in pre-commit state
     db.commit()
-    return _get_appointment(appt.id, practice_id, db)
-
+    out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
+    out.breaks_overlap = _get_break_overlaps(
+        db, practice_id, body.practitioner_id,
+        appointment_date, start_time_local, values["duration_minutes"],
+    )
+    return out
 
 @router.get("/waiting-room", response_model=list[AppointmentOut])
 def get_waiting_room(
@@ -414,7 +451,12 @@ def update_appointment(
     for field, value in values.items():
         setattr(appt, field, value)
     db.commit()
-    return _get_appointment(appointment_id, practice_id, db)
+    out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
+    out.breaks_overlap = _get_break_overlaps(
+        db, practice_id, practitioner_id,
+        appointment_date, start_time_local, duration_minutes,
+    )
+    return out
 
 
 @router.patch("/{appointment_id}/status", response_model=AppointmentOut)
