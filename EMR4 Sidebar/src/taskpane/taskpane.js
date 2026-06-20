@@ -1338,42 +1338,152 @@ async function detectDocumentType() {
 // NEW PATIENT FORM
 // ═══════════════════════════════════════════════════════════
 
-window.showNewPatientForm = function showNewPatientForm() {
+const NEW_PATIENT_FIELD_IDS = [
+  "np-first-name", "np-last-name", "np-dob", "np-sex", "np-medicare",
+  "np-phone", "np-address", "np-suburb", "np-state", "np-postcode",
+];
+
+let pendingNewPatientPayload = null;
+
+function setNewPatientResult(html) {
+  const result = document.getElementById("new-patient-result");
+  if (result) result.innerHTML = html || "";
+}
+
+function setNewPatientFieldsDisabled(disabled) {
+  NEW_PATIENT_FIELD_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = disabled;
+  });
+}
+
+function resetNewPatientActions() {
   const createBtn = document.getElementById("btn-np-create");
   const cancelBtn = document.getElementById("btn-np-cancel");
+  pendingNewPatientPayload = null;
+  setNewPatientFieldsDisabled(false);
   if (createBtn) {
     createBtn.disabled = false;
     createBtn.textContent = "Create Patient File";
     createBtn.onclick = createNewPatient;
   }
   if (cancelBtn) {
+    cancelBtn.disabled = false;
     cancelBtn.textContent = "Cancel";
     cancelBtn.onclick = closeNewPatientForm;
   }
-  document.getElementById("new-patient-result").innerHTML = "";
+}
+
+function clearNewPatientFields() {
+  NEW_PATIENT_FIELD_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+}
+
+function collectNewPatientPayload() {
+  const fn  = document.getElementById("np-first-name").value.trim();
+  const ln  = document.getElementById("np-last-name").value.trim();
+  const dob = document.getElementById("np-dob").value;
+  if (!fn || !ln || !dob) {
+    throw new Error("First name, last name, and date of birth are required.");
+  }
+
+  return {
+    first_name:       fn,
+    last_name:        ln,
+    date_of_birth:    dob,
+    sex:              document.getElementById("np-sex").value || null,
+    medicare_number:  document.getElementById("np-medicare").value.trim() || null,
+    phone_mobile:     document.getElementById("np-phone").value.trim() || null,
+    address_line1:    document.getElementById("np-address").value.trim() || null,
+    address_suburb:   document.getElementById("np-suburb").value.trim() || null,
+    address_state:    document.getElementById("np-state").value.trim() || null,
+    address_postcode: document.getElementById("np-postcode").value.trim() || null,
+  };
+}
+
+async function findNewPatientDuplicateCandidates(body) {
+  const params = new URLSearchParams();
+  [
+    "first_name", "last_name", "date_of_birth", "medicare_number", "phone_mobile",
+  ].forEach(key => {
+    if (body[key]) params.set(key, body[key]);
+  });
+  params.set("limit", "5");
+
+  const res = await apiFetch(`/patients/duplicate-candidates?${params.toString()}`);
+  if (!res) return [];
+  if (!res.ok) {
+    const detail = await res.json().catch(() => ({}));
+    if (res.status === 422) return [];
+    throw new Error(detail.detail || `Duplicate check failed (${res.status})`);
+  }
+  return await res.json();
+}
+
+function renderDuplicateCandidate(candidate) {
+  const p = candidate.patient || {};
+  const name = `${p.last_name || ""}, ${p.first_name || ""}`.replace(/^,\s*/, "").trim() || "Unnamed patient";
+  const meta = [
+    p.date_of_birth ? `DOB: ${formatDate(p.date_of_birth)}` : "",
+    p.medicare_number ? `Medicare: ${p.medicare_number}` : "",
+    p.phone_mobile ? `Mobile: ${p.phone_mobile}` : "",
+  ].filter(Boolean).join(" · ");
+  const reasons = (candidate.match_reasons || []).join(", ");
+
+  return `
+    <div class="new-patient-duplicate-item">
+      <div class="new-patient-duplicate-name">${escHtml(name)}</div>
+      ${meta ? `<div class="new-patient-duplicate-meta">${escHtml(meta)}</div>` : ""}
+      ${reasons ? `<div class="new-patient-duplicate-reasons">Matched on: ${escHtml(reasons)}</div>` : ""}
+    </div>`;
+}
+
+function showDuplicateWarning(candidates, body) {
+  const createBtn = document.getElementById("btn-np-create");
+  pendingNewPatientPayload = body;
+  setNewPatientFieldsDisabled(true);
+  setNewPatientResult(`
+    <div class="alert alert-warning">
+      <strong>Possible duplicate patient</strong><br>
+      Review the existing record before creating a new file.
+      <div class="new-patient-duplicate-list">
+        ${candidates.map(renderDuplicateCandidate).join("")}
+      </div>
+      <div class="new-patient-inline-actions">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="reviewNewPatientDetails()">Review Details</button>
+      </div>
+    </div>`);
+  if (createBtn) {
+    createBtn.disabled = false;
+    createBtn.textContent = "Create Anyway";
+    createBtn.onclick = confirmCreateNewPatient;
+  }
+}
+
+window.reviewNewPatientDetails = function reviewNewPatientDetails() {
+  resetNewPatientActions();
+  setNewPatientResult(`
+    <div class="alert alert-warning">
+      Duplicate warning cleared. Edit the details and create again to re-check for matches.
+    </div>`);
+  const firstName = document.getElementById("np-first-name");
+  if (firstName) firstName.focus();
+};
+
+window.showNewPatientForm = function showNewPatientForm() {
+  resetNewPatientActions();
+  setNewPatientResult("");
   document.getElementById("new-patient-panel").classList.remove("hidden");
   document.getElementById("np-first-name").focus();
 }
 
 window.closeNewPatientForm = function closeNewPatientForm() {
   document.getElementById("new-patient-panel").classList.add("hidden");
-  const createBtn = document.getElementById("btn-np-create");
-  const cancelBtn = document.getElementById("btn-np-cancel");
-  if (createBtn) {
-    createBtn.disabled = false;
-    createBtn.textContent = "Create Patient File";
-    createBtn.onclick = createNewPatient;
-  }
-  if (cancelBtn) {
-    cancelBtn.textContent = "Cancel";
-    cancelBtn.onclick = closeNewPatientForm;
-  }
-  ["np-first-name","np-last-name","np-dob","np-sex","np-medicare",
-   "np-phone","np-address","np-suburb","np-state","np-postcode"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = "";
-  });
-  document.getElementById("new-patient-result").innerHTML = "";
+  resetNewPatientActions();
+  clearNewPatientFields();
+  setNewPatientResult("");
 }
 
 window.resetNewPatientFormForAnother = function resetNewPatientFormForAnother() {
@@ -1381,30 +1491,53 @@ window.resetNewPatientFormForAnother = function resetNewPatientFormForAnother() 
   showNewPatientForm();
 }
 
-window.createNewPatient = async function () {
-  const fn  = document.getElementById("np-first-name").value.trim();
-  const ln  = document.getElementById("np-last-name").value.trim();
-  const dob = document.getElementById("np-dob").value;
-  if (!fn || !ln || !dob) { alert("First name, last name, and date of birth are required."); return; }
+// ═══════════════════════════════════════════════════════════
+// CREATE PATIENT
+// ═══════════════════════════════════════════════════════════
 
+window.createNewPatient = async function createNewPatientWithDuplicateCheck() {
+  let body;
+  try {
+    body = collectNewPatientPayload();
+  } catch (e) {
+    setNewPatientResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
+    return;
+  }
+
+  const btn = document.getElementById("btn-np-create");
+  btn.disabled = true;
+  btn.textContent = "Checking...";
+  try {
+    const candidates = await findNewPatientDuplicateCandidates(body);
+    if (candidates.length) {
+      showDuplicateWarning(candidates, body);
+      return;
+    }
+    await submitNewPatient(body);
+  } catch (e) {
+    setNewPatientResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
+    btn.disabled = false;
+    btn.textContent = "Create Patient File";
+    btn.onclick = createNewPatient;
+  }
+};
+
+window.confirmCreateNewPatient = async function confirmCreateNewPatient() {
+  if (!pendingNewPatientPayload) {
+    setNewPatientResult(`<div class="alert alert-error">Review the patient details and try again.</div>`);
+    resetNewPatientActions();
+    return;
+  }
+  await submitNewPatient(pendingNewPatientPayload);
+};
+
+async function submitNewPatient(body) {
   const btn = document.getElementById("btn-np-create");
   const cancelBtn = document.getElementById("btn-np-cancel");
   let created = false;
   btn.disabled = true;
-  btn.textContent = "Creating…";
+  btn.textContent = "Creating...";
   try {
-    const body = {
-      first_name:      fn,
-      last_name:       ln,
-      date_of_birth:   dob,
-      sex:             document.getElementById("np-sex").value || null,
-      medicare_number: document.getElementById("np-medicare").value.trim() || null,
-      phone_mobile:    document.getElementById("np-phone").value.trim() || null,
-      address_line1:   document.getElementById("np-address").value.trim() || null,
-      address_suburb:  document.getElementById("np-suburb").value.trim() || null,
-      address_state:   document.getElementById("np-state").value.trim() || null,
-      address_postcode:document.getElementById("np-postcode").value.trim() || null,
-    };
     const res = await apiFetch("/patients/with-file", {
       method: "POST",
       body: JSON.stringify(body),
@@ -1415,12 +1548,14 @@ window.createNewPatient = async function () {
     }
     const data = await res.json();
     created = true;
-    document.getElementById("new-patient-result").innerHTML = `
+    pendingNewPatientPayload = null;
+    setNewPatientFieldsDisabled(true);
+    setNewPatientResult(`
       <div class="alert alert-success">
         <strong>&#x2713; Patient created!</strong><br>
         File: <code>${escHtml(data.generated_filename)}</code><br>
-        Open it from your OneDrive folder — the taskpane will auto-load the record.
-      </div>`;
+        Open it from your OneDrive folder. The taskpane will auto-load the record when the file opens.
+      </div>`);
     btn.textContent = "Close";
     btn.onclick = closeNewPatientForm;
     if (cancelBtn) {
@@ -1428,20 +1563,20 @@ window.createNewPatient = async function () {
       cancelBtn.onclick = resetNewPatientFormForAnother;
     }
   } catch (e) {
-    document.getElementById("new-patient-result").innerHTML =
-      `<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`;
+    pendingNewPatientPayload = null;
+    setNewPatientFieldsDisabled(false);
+    setNewPatientResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
   } finally {
     btn.disabled = false;
     if (!created) {
-      btn.textContent = "Create Patient File";
-      btn.onclick = createNewPatient;
+      btn.textContent = pendingNewPatientPayload ? "Create Anyway" : "Create Patient File";
+      btn.onclick = pendingNewPatientPayload ? confirmCreateNewPatient : createNewPatient;
     }
   }
-};
+}
 
-// ═══════════════════════════════════════════════════════════
 // DIARY MODE
-// ═══════════════════════════════════════════════════════════
+// -----------------------------------------------------------
 
 function _enterDiaryMode() {
   // Swap tab nav: hide patient tabs, show diary tabs.
