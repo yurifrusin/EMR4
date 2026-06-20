@@ -120,8 +120,8 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Queued |
-| Launch Gate | Pending |
+| Status | Launched |
+| Launch Gate | Complete |
 | Integration Gate | Not started |
 | Theme | Make Nurse/Room 2 deliberately bookable via a practitioner-backed resource while starting the safer patient-identity foundation in a separate lane |
 
@@ -162,7 +162,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `app/models/patients.py`, `app/schemas/patients.py`, `app/routers/patients.py`, patient tests, Alembic migration if needed, `create_patient_file.py` only for minimal generated-file mapping |
 | Out of Scope | Diary frontend, appointment/roster/nurse booking work, taskpane UI implementation, OneDrive import tooling, ADHA/IHI service integration, Medicare claiming integration |
 | Verification | Focused patient pytest, migration check if needed, `git diff --check`, generator smoke if touched |
-| Status | Queued |
+| Status | In progress |
 
 ## Sprint 9: Patient Flow and Patient Entry Hardening
 
