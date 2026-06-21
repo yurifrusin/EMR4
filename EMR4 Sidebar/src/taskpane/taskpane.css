@@ -582,7 +582,7 @@ select.input { cursor: pointer; }
 
 .new-patient-panel {
   position: absolute;
-  top: 52px;           /* below the patient banner */
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
