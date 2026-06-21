@@ -120,8 +120,8 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Queued |
-| Launch Gate | Pending orchestrator commit and HANDIN READY |
+| Status | In progress |
+| Launch Gate | Complete |
 | Integration Gate | Pending all active sprint agents submitting or being explicitly stood down |
 | Theme | Build the room/waiting-area and patient-edit foundations Bernie will need later, without starting autonomous copilot work yet |
 
@@ -133,9 +133,9 @@ at medium/high once the plan is stable, then think hard again before integration
 | Branch | `claude/current` |
 | Task Packet | `orchestration/agent_inbox/claude/claude-waiting-area-resource-contract.md` |
 | Goal | Add the minimal backend contract for named physical waiting areas linked to rooms/resources and waiting-room filtering/grouping |
-| In Scope | `app/models/tenancy.py`, `app/models/diary.py`, `app/schemas/diary.py`, `app/schemas/appointments.py`, `app/routers/diary.py`, `app/routers/appointments.py`, Alembic migration if needed, `seed.py`, focused tests |
+| In Scope | `app/models/tenancy.py`, `app/models/diary.py`, `app/schemas/diary.py`, `app/schemas/appointments.py`, `app/routers/diary.py`, `app/routers/appointments.py`, Alembic migration if needed, `seed.py`, focused tests, plus `tests/conftest.py` only for pgvector test fixture hardening |
 | Out of Scope | Diary frontend, taskpane/Command Centre, Bernie implementation, patient-edit UI, drag/drop/resize, SMS, billing/completion, ADHA/IHI live integration |
-| Verification | Focused waiting-room/diary/appointment pytest, migration checks if needed, backend compile check, `git diff --check` |
+| Verification | Focused waiting-room/diary/appointment pytest, fresh-DB pgvector fixture check if `tests/conftest.py` changes, migration checks if needed, backend compile check, `git diff --check` |
 | Status | Queued |
 
 ### Workstream AM - Diary Waiting Area Tabs

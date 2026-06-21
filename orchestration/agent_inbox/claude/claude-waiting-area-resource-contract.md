@@ -19,6 +19,8 @@ Add the backend contract needed to model named physical waiting areas and connec
 
 app/models/tenancy.py, app/models/diary.py, app/schemas/diary.py, app/schemas/appointments.py, app/routers/diary.py, app/routers/appointments.py, Alembic migration if needed, seed.py, focused waiting-room/diary roster/template tests. Recommended shape: expose room/default waiting area metadata and allow GET /appointments/waiting-room to filter/group by waiting_room while preserving existing behaviour when no filter is supplied.
 
+Test-infrastructure addendum: `tests/conftest.py` is also in scope for the narrow pgvector fixture hardening identified before this sprint. If a fresh `gp_pms_test` database fails at `Base.metadata.create_all(eng)` because `type "vector" does not exist`, update the `engine` fixture to run `CREATE EXTENSION IF NOT EXISTS vector` before `create_all`, importing `text` from SQLAlchemy if needed. This is test infrastructure only, not production behaviour.
+
 ### Out of Scope
 
 docs/diary frontend, taskpane/Command Centre, Bernie copilot implementation, patient-edit UI, drag/drop/resize, SMS reminders, billing/completion workflow, ADHA/IHI live integration.
@@ -54,11 +56,11 @@ docs/diary frontend, taskpane/Command Centre, Bernie copilot implementation, pat
 
 ## Verification
 
-Run focused pytest for waiting-room, diary roster/template, appointment status/booking patient-flow if touched; run alembic upgrade/current if a migration is added; run py_compile on touched backend modules and git diff --check.
+Run focused pytest for waiting-room, diary roster/template, appointment status/booking patient-flow if touched; run `pytest tests/test_break_overlap_contract.py -q` on a freshly reset test DB if `tests/conftest.py` is changed for pgvector; run alembic upgrade/current if a migration is added; run py_compile on touched backend modules and git diff --check.
 
 ## Merge Criteria
 
-Named physical waiting-area metadata is available to clients in a practice-scoped way; waiting-room endpoint remains backward compatible and can filter/group by waiting area; existing status/attendance semantics are not conflated with physical waiting area assignment; tests cover practice scoping and fallback/no-waiting-area behaviour.
+Named physical waiting-area metadata is available to clients in a practice-scoped way; waiting-room endpoint remains backward compatible and can filter/group by waiting area; existing status/attendance semantics are not conflated with physical waiting area assignment; tests cover practice scoping and fallback/no-waiting-area behaviour. If the pgvector fixture fix is included, fresh test DB setup must no longer require a manual pre-create extension step.
 
 ## Dissent / Risks
 
