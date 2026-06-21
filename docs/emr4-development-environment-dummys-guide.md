@@ -269,6 +269,34 @@ to finish starting, then run:
 
 If the script says ngrok is not found, install ngrok or add it to PATH.
 
+### Using Two PCs With One ngrok Domain
+
+The reserved ngrok URL is public, so either PC can access it:
+
+```text
+https://property-cinch-backfield.ngrok-free.dev
+```
+
+However, the URL can point to only one running backend at a time. If PC A is
+running ngrok, then Word Online / GitHub Pages on PC B will still talk to PC A's
+backend through that URL.
+
+`run_dev.ps1` checks this before starting ngrok. If the reserved domain is
+already online from another PC, the script skips starting local ngrok and prints
+a warning. This is fine when the second PC is only doing coding, tests, or agent
+work. To make the second PC the active Word/diary test backend, stop ngrok on
+the first PC, then rerun:
+
+```powershell
+.\run_dev.ps1
+```
+
+You can also deliberately skip ngrok on the second PC:
+
+```powershell
+.\run_dev.ps1 -NoNgrok
+```
+
 ---
 
 ## 9. Run Migrations And Seed Data

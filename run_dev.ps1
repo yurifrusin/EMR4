@@ -90,6 +90,16 @@ function Wait-ForHttp([string]$Url, [int]$TimeoutSec = 30) {
     return $false
 }
 
+function Test-RemoteNgrokDomain([string]$Domain) {
+    try {
+        $headers = @{ "ngrok-skip-browser-warning" = "1" }
+        $r = Invoke-WebRequest -Uri "https://$Domain/health" -Headers $headers -UseBasicParsing -TimeoutSec 4 -ErrorAction Stop
+        return ($r -and $r.StatusCode -ge 200 -and $r.StatusCode -lt 500)
+    } catch {
+        return $false
+    }
+}
+
 function Show-StatusRow([string]$Name, [bool]$Up, [string]$Detail) {
     $icon  = if ($Up) { "[OK]  " } else { "[WARN]" }
     $color = if ($Up) { "Green" } else { "Yellow" }
@@ -267,30 +277,37 @@ if (-not $NoNgrok) {
             Write-Warn "Could not query ngrok API -- assuming domain is correct"
         }
     } else {
-        $ngCmd = "ngrok http --url=$NgrokDomain $BackendPort"
-        Start-Process powershell -ArgumentList "-NoProfile", "-NoExit", "-Command", $ngCmd `
-            -WindowStyle Normal
-
-        Write-Host "  Waiting for ngrok API on :$NgrokApiPort..." -ForegroundColor Gray
-        if (Wait-ForPort $NgrokApiPort 20) {
-            Start-Sleep -Milliseconds 1500   # let the tunnel register before querying
-            try {
-                $j   = Invoke-RestMethod "http://127.0.0.1:$NgrokApiPort/api/tunnels" -ErrorAction Stop
-                $url = ($j.tunnels | Where-Object { $_.proto -eq "https" } | Select-Object -First 1).public_url
-                if ($url -eq "https://$NgrokDomain") {
-                    Write-Ok "Tunnel confirmed: $url"
-                } else {
-                    Write-Err "ngrok started but tunnel URL is '$url'"
-                    Write-Err "Expected: https://$NgrokDomain"
-                    Write-Host "  Check that this authtoken owns the reserved domain:" -ForegroundColor Gray
-                    Write-Host "  https://dashboard.ngrok.com/domains" -ForegroundColor Gray
-                    exit 1
-                }
-            } catch {
-                Write-Warn "ngrok API appeared but domain could not be verified -- check its window"
-            }
+        Write-Host "  No local ngrok API found -- checking whether the reserved domain is already online..." -ForegroundColor Gray
+        if (Test-RemoteNgrokDomain $NgrokDomain) {
+            Write-Warn "https://$NgrokDomain is already online, probably from another PC."
+            Write-Host "  Skipping local ngrok start. GitHub Pages / Word Online will use that remote backend." -ForegroundColor Gray
+            Write-Host "  To expose this PC instead, stop ngrok on the other PC and rerun .\run_dev.ps1 here." -ForegroundColor Gray
         } else {
-            Write-Warn "ngrok API did not appear on :$NgrokApiPort within 20 s -- check its window"
+            $ngCmd = "ngrok http --url=$NgrokDomain $BackendPort"
+            Start-Process powershell -ArgumentList "-NoProfile", "-NoExit", "-Command", $ngCmd `
+                -WindowStyle Normal
+
+            Write-Host "  Waiting for ngrok API on :$NgrokApiPort..." -ForegroundColor Gray
+            if (Wait-ForPort $NgrokApiPort 20) {
+                Start-Sleep -Milliseconds 1500   # let the tunnel register before querying
+                try {
+                    $j   = Invoke-RestMethod "http://127.0.0.1:$NgrokApiPort/api/tunnels" -ErrorAction Stop
+                    $url = ($j.tunnels | Where-Object { $_.proto -eq "https" } | Select-Object -First 1).public_url
+                    if ($url -eq "https://$NgrokDomain") {
+                        Write-Ok "Tunnel confirmed: $url"
+                    } else {
+                        Write-Err "ngrok started but tunnel URL is '$url'"
+                        Write-Err "Expected: https://$NgrokDomain"
+                        Write-Host "  Check that this authtoken owns the reserved domain:" -ForegroundColor Gray
+                        Write-Host "  https://dashboard.ngrok.com/domains" -ForegroundColor Gray
+                        exit 1
+                    }
+                } catch {
+                    Write-Warn "ngrok API appeared but domain could not be verified -- check its window"
+                }
+            } else {
+                Write-Warn "ngrok API did not appear on :$NgrokApiPort within 20 s -- check its window"
+            }
         }
     }
 } else {
