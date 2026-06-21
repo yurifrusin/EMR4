@@ -31,14 +31,17 @@ reviewed, integrated, verified, pushed, and audited.
   is blocked inside the same practice.
 - Hardened appointment timezone fallback so missing timezone data cannot crash
   the waiting-room path.
-- Updated diary assets to `v=63` and taskpane assets to `v=42`.
+- User-review hotfix: removed unintended lane/cascade offsets from diary
+  appointment cards. Waiting Room card stacking remains a separate future UI
+  idea.
+- Updated diary assets to `v=64` and taskpane assets to `v=42`.
 
 ## Recommended User Review
 
 1. Run migrations if your local DB is not current:
    `.venv\Scripts\python.exe -m alembic upgrade head`.
 2. Restart the backend and hard refresh the taskpane/diary.
-3. Confirm the live diary loads `diary.js?v=63`.
+3. Confirm the live diary loads `diary.js?v=64`.
 4. Open the Waiting Room panel and check that area tabs appear sensibly when
    waiting-area data or assigned appointments exist.
 5. Move an appointment into Arrived/InConsult/Completed and confirm the waiting

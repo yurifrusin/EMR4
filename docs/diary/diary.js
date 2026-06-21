@@ -819,7 +819,7 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       columnBody.appendChild(breakEl);
     });
 
-    // 2c. Appointments (absolute positioned with lane-based cascading)
+    // 2c. Appointments (absolute positioned by actual time/duration)
     const colAppts = [];
     if (col.practitioner_ahpra && apptLookup[col.practitioner_ahpra]) {
       const practitionerApptObj = apptLookup[col.practitioner_ahpra];
@@ -838,20 +838,6 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       const dX = apptDurationMins(x, intervalMins);
       const dY = apptDurationMins(y, intervalMins);
       return dY - dX;
-    });
-
-    // Assign lanes to handle overlaps
-    const lanes = [];
-    colAppts.forEach(a => {
-      const start = toMins(apptTimeKey(a));
-      const duration = Math.max(apptDurationMins(a, intervalMins), MIN_TIME_INCREMENT_MINS);
-
-      let laneIdx = 0;
-      while (laneIdx < lanes.length && lanes[laneIdx] > start) {
-        laneIdx++;
-      }
-      lanes[laneIdx] = start + duration;
-      a._laneIdx = laneIdx;
     });
 
     // Transparent hit targets make small free gaps bookable even inside a
@@ -915,10 +901,10 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       }
 
       span.style.position = "absolute";
-      span.style.top = (topPx + 1 + a._laneIdx * 4) + "px";
-      span.style.left = (1 + a._laneIdx * 8) + "px";
+      span.style.top = (topPx + 1) + "px";
+      span.style.left = "1px";
       span.style.right = "1px";
-      span.style.zIndex = String(10 + a._laneIdx);
+      span.style.zIndex = "10";
       span.style.height = visualHeightPx + "px";
       span.style.setProperty("--appt-height", visualHeightPx + "px");
       span.tabIndex = 0;
