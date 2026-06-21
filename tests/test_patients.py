@@ -314,6 +314,46 @@ def test_update_patient_blocks_duplicate_medicare_card_and_irn_from_full_edit(
     assert target.medicare_irn == "2"
 
 
+def test_update_patient_rejects_incomplete_medicare_identity(
+    client,
+    db,
+    practice,
+    gp_user,
+):
+    patient = _add_patient(
+        db,
+        practice,
+        first_name="Target",
+        last_name="Patient",
+        medicare_number="1876543210",
+        medicare_irn="2",
+    )
+
+    resp = client.put(
+        f"/api/v1/patients/{patient.id}",
+        json={"medicare_irn": None},
+        headers=_auth(gp_user),
+    )
+
+    assert resp.status_code == 422, resp.text
+    assert resp.json()["detail"] == "Medicare number and IRN must be entered together."
+
+    db.refresh(patient)
+    assert patient.medicare_number == "1876543210"
+    assert patient.medicare_irn == "2"
+
+
+def test_create_patient_rejects_incomplete_medicare_identity(client, gp_user):
+    resp = client.post(
+        "/api/v1/patients",
+        json=_patient_payload(medicare_irn=None),
+        headers=_auth(gp_user),
+    )
+
+    assert resp.status_code == 422, resp.text
+    assert resp.json()["detail"] == "Medicare number and IRN must be entered together."
+
+
 def test_update_patient_duplicate_check_is_practice_scoped(
     client,
     db,

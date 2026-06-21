@@ -41,6 +41,20 @@ def _same_identifier(left: str | None, right: str | None) -> bool:
     return bool(left_norm and right_norm and left_norm == right_norm)
 
 
+def _raise_if_incomplete_medicare_identity(
+    *,
+    medicare_number: str | None,
+    medicare_irn: str | None,
+) -> None:
+    has_medicare = bool(_norm_identifier(medicare_number))
+    has_irn = bool(_norm_identifier(medicare_irn))
+    if has_medicare != has_irn:
+        raise HTTPException(
+            status_code=422,
+            detail="Medicare number and IRN must be entered together.",
+        )
+
+
 def _duplicate_match_reasons(
     patient: Patient,
     *,
@@ -158,6 +172,10 @@ def _raise_if_create_hard_duplicate(
     current_user: User,
     body: PatientCreate,
 ) -> None:
+    _raise_if_incomplete_medicare_identity(
+        medicare_number=body.medicare_number,
+        medicare_irn=body.medicare_irn,
+    )
     _raise_if_hard_duplicate(
         db,
         current_user,
@@ -388,6 +406,10 @@ def update_patient(
             "medicare_irn", "ihi_number", "phone_mobile", "phone_home",
         )
     }
+    _raise_if_incomplete_medicare_identity(
+        medicare_number=effective_identity["medicare_number"],
+        medicare_irn=effective_identity["medicare_irn"],
+    )
     _raise_if_hard_duplicate(
         db,
         current_user,

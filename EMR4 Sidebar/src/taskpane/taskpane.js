@@ -1417,14 +1417,19 @@ function collectNewPatientPayload() {
   if (!fn || !ln || !dob) {
     throw new Error("First name, last name, and date of birth are required.");
   }
+  const medicareNumber = document.getElementById("np-medicare").value.trim() || null;
+  const medicareIrn = document.getElementById("np-medicare-irn").value.trim() || null;
+  if (Boolean(medicareNumber) !== Boolean(medicareIrn)) {
+    throw new Error("Medicare number and IRN must be entered together.");
+  }
 
   return {
     first_name:       fn,
     last_name:        ln,
     date_of_birth:    dob,
     sex:              document.getElementById("np-sex").value || null,
-    medicare_number:  document.getElementById("np-medicare").value.trim() || null,
-    medicare_irn:     document.getElementById("np-medicare-irn").value.trim() || null,
+    medicare_number:  medicareNumber,
+    medicare_irn:     medicareIrn,
     ihi_number:       document.getElementById("np-ihi").value.trim() || null,
     phone_mobile:     document.getElementById("np-phone").value.trim() || null,
     address_line1:    document.getElementById("np-address").value.trim() || null,
@@ -1604,14 +1609,19 @@ function collectPatientEditPayload() {
     const el = document.getElementById(id);
     return el ? (el.value.trim() || null) : null;
   };
+  const medicareNumber = value("pe-medicare");
+  const medicareIrn = value("pe-medicare-irn");
+  if (Boolean(medicareNumber) !== Boolean(medicareIrn)) {
+    throw new Error("Medicare number and IRN must be entered together.");
+  }
 
   return {
     first_name: firstName,
     last_name: lastName,
     date_of_birth: dob,
     sex: value("pe-sex"),
-    medicare_number: value("pe-medicare"),
-    medicare_irn: value("pe-medicare-irn"),
+    medicare_number: medicareNumber,
+    medicare_irn: medicareIrn,
     ihi_number: value("pe-ihi"),
     dva_number: value("pe-dva"),
     phone_mobile: value("pe-phone-mobile"),
