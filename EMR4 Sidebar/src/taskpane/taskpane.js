@@ -115,7 +115,7 @@ function updateStartConsultButton() {
 function setTaskpaneLocked(locked) {
   const ids = [
     "btn-command-center", "btn-start-consult", "btn-lock",
-    "btn-search-patient", "btn-open-file",
+    "btn-search-patient", "btn-open-file", "btn-edit-patient",
     "btn-add-mbs", "btn-add-snomed", "btn-add-rx",
     "btn-finalize", "consult-type",
   ];
@@ -243,6 +243,8 @@ function logout() {
     backgroundSyncTimer = null;
   }
   document.getElementById("btn-command-center").disabled = true;
+  updateOpenFileButton();
+  updatePatientEditButton();
   updateStartConsultButton();
   showView("view-login");
 }
@@ -300,6 +302,7 @@ async function loadPatient(patientId) {
   currentPatient = data.patient;
   setBanner(currentPatient);
   updateOpenFileButton();
+  updatePatientEditButton();
   consultStarted = false;   // new patient = new session
   document.getElementById("btn-command-center").disabled = false;
   updateStartConsultButton();
@@ -1512,6 +1515,7 @@ window.reviewNewPatientDetails = function reviewNewPatientDetails() {
 };
 
 window.showNewPatientForm = function showNewPatientForm() {
+  document.getElementById("patient-edit-panel")?.classList.add("hidden");
   resetNewPatientActions();
   setNewPatientResult("");
   document.getElementById("new-patient-panel").classList.remove("hidden");
@@ -1529,6 +1533,168 @@ window.resetNewPatientFormForAnother = function resetNewPatientFormForAnother() 
   closeNewPatientForm();
   showNewPatientForm();
 }
+
+// ═══════════════════════════════════════════════════════════
+// EDIT PATIENT DETAILS
+// ═══════════════════════════════════════════════════════════
+
+const PATIENT_EDIT_FIELDS = [
+  ["pe-first-name", "first_name"],
+  ["pe-last-name", "last_name"],
+  ["pe-dob", "date_of_birth"],
+  ["pe-sex", "sex"],
+  ["pe-medicare", "medicare_number"],
+  ["pe-medicare-irn", "medicare_irn"],
+  ["pe-ihi", "ihi_number"],
+  ["pe-dva", "dva_number"],
+  ["pe-phone-mobile", "phone_mobile"],
+  ["pe-phone-home", "phone_home"],
+  ["pe-email", "email"],
+  ["pe-address", "address_line1"],
+  ["pe-suburb", "address_suburb"],
+  ["pe-state", "address_state"],
+  ["pe-postcode", "address_postcode"],
+];
+
+function setPatientEditResult(html) {
+  const result = document.getElementById("patient-edit-result");
+  if (result) result.innerHTML = html || "";
+}
+
+function setPatientEditFieldsDisabled(disabled) {
+  PATIENT_EDIT_FIELDS.forEach(([id]) => {
+    const el = document.getElementById(id);
+    if (el) el.disabled = disabled;
+  });
+}
+
+function populatePatientEditForm(patient) {
+  PATIENT_EDIT_FIELDS.forEach(([id, field]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = patient?.[field] || "";
+  });
+}
+
+function collectPatientEditPayload() {
+  const firstName = document.getElementById("pe-first-name").value.trim();
+  const lastName  = document.getElementById("pe-last-name").value.trim();
+  const dob       = document.getElementById("pe-dob").value;
+  if (!firstName || !lastName || !dob) {
+    throw new Error("First name, last name, and date of birth are required.");
+  }
+
+  const value = id => {
+    const el = document.getElementById(id);
+    return el ? (el.value.trim() || null) : null;
+  };
+
+  return {
+    first_name: firstName,
+    last_name: lastName,
+    date_of_birth: dob,
+    sex: value("pe-sex"),
+    medicare_number: value("pe-medicare"),
+    medicare_irn: value("pe-medicare-irn"),
+    ihi_number: value("pe-ihi"),
+    dva_number: value("pe-dva"),
+    phone_mobile: value("pe-phone-mobile"),
+    phone_home: value("pe-phone-home"),
+    email: value("pe-email"),
+    address_line1: value("pe-address"),
+    address_suburb: value("pe-suburb"),
+    address_state: value("pe-state"),
+    address_postcode: value("pe-postcode"),
+  };
+}
+
+function describePatientEditError(payload, fallback) {
+  const detail = payload && payload.detail ? payload.detail : payload;
+  if (detail && Array.isArray(detail.match_reasons)) {
+    const reasons = detail.match_reasons.join(", ");
+    return `${detail.message || fallback} Matched on: ${reasons}.`;
+  }
+  return describeApiError(detail, fallback);
+}
+
+window.showPatientEditForm = function showPatientEditForm() {
+  if (!currentPatient) {
+    setStatus("Load a patient before editing details.");
+    return;
+  }
+  document.getElementById("new-patient-panel")?.classList.add("hidden");
+  document.getElementById("search-panel")?.classList.add("hidden");
+  setPatientEditResult("");
+  setPatientEditFieldsDisabled(false);
+  populatePatientEditForm(currentPatient);
+  const panel = document.getElementById("patient-edit-panel");
+  panel.classList.remove("hidden");
+  document.getElementById("pe-first-name").focus();
+};
+
+window.closePatientEditForm = function closePatientEditForm() {
+  document.getElementById("patient-edit-panel").classList.add("hidden");
+  setPatientEditFieldsDisabled(false);
+  setPatientEditResult("");
+  const btn = document.getElementById("btn-pe-save");
+  const cancelBtn = document.getElementById("btn-pe-cancel");
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = "Save Details";
+  }
+  if (cancelBtn) cancelBtn.disabled = false;
+};
+
+window.savePatientDetails = async function savePatientDetails() {
+  if (!currentPatient) {
+    setPatientEditResult(`<div class="alert alert-error">Load a patient before editing details.</div>`);
+    return;
+  }
+
+  let body;
+  try {
+    body = collectPatientEditPayload();
+  } catch (e) {
+    setPatientEditResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
+    return;
+  }
+
+  const patientId = currentPatient.id;
+  const btn = document.getElementById("btn-pe-save");
+  const cancelBtn = document.getElementById("btn-pe-cancel");
+  btn.disabled = true;
+  btn.textContent = "Saving...";
+  if (cancelBtn) cancelBtn.disabled = true;
+  setPatientEditFieldsDisabled(true);
+  setPatientEditResult("");
+
+  try {
+    const res = await apiFetch(`/patients/${patientId}`, {
+      method: "PUT",
+      body: JSON.stringify(body),
+    });
+    if (!res) return;
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(describePatientEditError(data, `Server error ${res.status}`));
+    }
+
+    const data = await res.json();
+    currentPatient = data;
+    setBanner(currentPatient);
+    updateOpenFileButton();
+    updatePatientEditButton();
+    populatePatientEditForm(currentPatient);
+    setPatientEditResult(`<div class="alert alert-success">Patient details saved.</div>`);
+    setStatus("Patient details saved.");
+  } catch (e) {
+    setPatientEditResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
+  } finally {
+    setPatientEditFieldsDisabled(false);
+    btn.disabled = false;
+    btn.textContent = "Save Details";
+    if (cancelBtn) cancelBtn.disabled = false;
+  }
+};
 
 // ═══════════════════════════════════════════════════════════
 // CREATE PATIENT
@@ -1633,6 +1799,8 @@ function _enterDiaryMode() {
   if (ccBar) ccBar.classList.add("hidden");
   const sidebar = document.getElementById("patient-sidebar");
   if (sidebar) sidebar.classList.add("hidden");
+  updateOpenFileButton();
+  updatePatientEditButton();
 
   showTab("diary-schedule");
   setStatus("Diary Mode — loading schedule…");
@@ -1702,6 +1870,8 @@ function _apptStatusClass(status) {
 
 function initApp() {
   setBanner(null);
+  updateOpenFileButton();
+  updatePatientEditButton();
   setStatus("Detecting document…");
 
   // Detect patient vs diary, then branch into the appropriate mode.
@@ -1801,12 +1971,20 @@ async function autoDetectPatient() {
 function updateOpenFileButton() {
   const btn = document.getElementById("btn-open-file");
   if (!btn) return;
-  if (currentPatient && currentPatient.document_url) {
+  if (currentPatient && currentPatient.document_url && docMode === "patient") {
     btn.classList.remove("hidden");
     btn.onclick = () => window.open(currentPatient.document_url, "_blank");
   } else {
     btn.classList.add("hidden");
   }
+}
+
+function updatePatientEditButton() {
+  const btn = document.getElementById("btn-edit-patient");
+  if (!btn) return;
+  const canEdit = Boolean(currentPatient) && docMode === "patient";
+  btn.classList.toggle("hidden", !canEdit);
+  btn.disabled = !canEdit;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1856,6 +2034,7 @@ Office.onReady(info => {
   }
 
   document.getElementById("btn-new-patient").onclick = showNewPatientForm;
+  document.getElementById("btn-edit-patient").onclick = showPatientEditForm;
   document.getElementById("btn-diary").onclick = openDiary;
 
   document.getElementById("btn-search-patient").onclick = () => {
@@ -1867,6 +2046,11 @@ Office.onReady(info => {
   // Escape closes the search panel
   document.addEventListener("keydown", e => {
     const newPatientPanel = document.getElementById("new-patient-panel");
+    const patientEditPanel = document.getElementById("patient-edit-panel");
+    if (e.key === "Escape" && patientEditPanel && !patientEditPanel.classList.contains("hidden")) {
+      closePatientEditForm();
+      return;
+    }
     if (e.key === "Escape" && newPatientPanel && !newPatientPanel.classList.contains("hidden")) {
       closeNewPatientForm();
       return;

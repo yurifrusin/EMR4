@@ -177,6 +177,127 @@ def test_update_patient_accepts_identity_fields(client, db, practice, gp_user):
     assert patient.ihi_number == "8003608833357361"
 
 
+def test_update_patient_allows_resaving_own_strong_identifiers(client, db, practice, gp_user):
+    patient = _add_patient(
+        db,
+        practice,
+        medicare_number="2950123456",
+        medicare_irn="1",
+        ihi_number="8003608833357361",
+    )
+
+    resp = client.put(
+        f"/api/v1/patients/{patient.id}",
+        json={
+            "medicare_number": "2950 123 456",
+            "medicare_irn": "1",
+            "ihi_number": "8003 6088 3335 7361",
+        },
+        headers=_auth(gp_user),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["medicare_number"] == "2950 123 456"
+    assert data["medicare_irn"] == "1"
+    assert data["ihi_number"] == "8003 6088 3335 7361"
+
+
+def test_update_patient_blocks_duplicate_ihi_from_other_patient(client, db, practice, gp_user):
+    existing = _add_patient(
+        db,
+        practice,
+        first_name="Existing",
+        last_name="Strong",
+        ihi_number="8003608833357361",
+    )
+    target = _add_patient(
+        db,
+        practice,
+        first_name="Target",
+        last_name="Patient",
+        ihi_number="8003608833357362",
+    )
+
+    resp = client.put(
+        f"/api/v1/patients/{target.id}",
+        json={"ihi_number": "8003 6088 3335 7361"},
+        headers=_auth(gp_user),
+    )
+
+    assert resp.status_code == 409, resp.text
+    detail = resp.json()["detail"]
+    assert detail["existing_patient_id"] == str(existing.id)
+    assert detail["match_reasons"] == ["same_ihi"]
+
+    db.refresh(target)
+    assert target.ihi_number == "8003608833357362"
+
+
+def test_update_patient_blocks_duplicate_medicare_card_and_irn_from_partial_edit(
+    client,
+    db,
+    practice,
+    gp_user,
+):
+    existing = _add_patient(
+        db,
+        practice,
+        first_name="Existing",
+        last_name="Strong",
+        medicare_number="2950123456",
+        medicare_irn="1",
+    )
+    target = _add_patient(
+        db,
+        practice,
+        first_name="Target",
+        last_name="Patient",
+        medicare_number="2950123456",
+        medicare_irn="2",
+    )
+
+    resp = client.put(
+        f"/api/v1/patients/{target.id}",
+        json={"medicare_irn": "1"},
+        headers=_auth(gp_user),
+    )
+
+    assert resp.status_code == 409, resp.text
+    detail = resp.json()["detail"]
+    assert detail["existing_patient_id"] == str(existing.id)
+    assert detail["match_reasons"] == ["same_medicare_card_and_irn"]
+
+    db.refresh(target)
+    assert target.medicare_irn == "2"
+
+
+def test_update_patient_duplicate_check_is_practice_scoped(
+    client,
+    db,
+    practice,
+    practice_b,
+    gp_user,
+):
+    target = _add_patient(db, practice, first_name="Visible", last_name="Patient")
+    _add_patient(
+        db,
+        practice_b,
+        first_name="Hidden",
+        last_name="Patient",
+        ihi_number="8003608833357361",
+    )
+
+    resp = client.put(
+        f"/api/v1/patients/{target.id}",
+        json={"ihi_number": "8003608833357361"},
+        headers=_auth(gp_user),
+    )
+
+    assert resp.status_code == 200, resp.text
+    assert resp.json()["ihi_number"] == "8003608833357361"
+
+
 def test_duplicate_candidates_report_identity_reasons_and_hard_block_creation(
     client,
     db,

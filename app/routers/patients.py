@@ -86,11 +86,20 @@ def _duplicate_match_reasons(
 def _raise_if_hard_duplicate(
     db: Session,
     current_user: User,
-    body: PatientCreate,
+    *,
+    first_name: str | None,
+    last_name: str | None,
+    date_of_birth: date | None,
+    medicare_number: str | None,
+    medicare_irn: str | None,
+    ihi_number: str | None,
+    phone_mobile: str | None,
+    phone_home: str | None,
+    exclude_patient_id: uuid.UUID | None = None,
 ) -> None:
-    ihi_norm = _norm_identifier(body.ihi_number)
-    medicare_norm = _norm_identifier(body.medicare_number)
-    medicare_irn_norm = _norm_identifier(body.medicare_irn)
+    ihi_norm = _norm_identifier(ihi_number)
+    medicare_norm = _norm_identifier(medicare_number)
+    medicare_irn_norm = _norm_identifier(medicare_irn)
 
     conditions = []
     if ihi_norm:
@@ -104,16 +113,54 @@ def _raise_if_hard_duplicate(
     if not conditions:
         return
 
-    existing = db.query(Patient).filter(
+    query = db.query(Patient).filter(
         Patient.practice_id == current_user.practice_id,
         or_(*conditions),
-    ).order_by(Patient.last_name, Patient.first_name).first()
+    )
+    if exclude_patient_id is not None:
+        query = query.filter(Patient.id != exclude_patient_id)
+
+    existing = query.order_by(Patient.last_name, Patient.first_name).first()
 
     if not existing:
         return
 
     reasons = _duplicate_match_reasons(
         existing,
+        first_name=first_name,
+        last_name=last_name,
+        date_of_birth=date_of_birth,
+        medicare_number=medicare_number,
+        medicare_irn=medicare_irn,
+        ihi_number=ihi_number,
+        phone_mobile=phone_mobile,
+        phone_home=phone_home,
+    )
+    hard_reasons = [
+        reason
+        for reason in reasons
+        if reason in {"same_ihi", "same_medicare_card_and_irn"}
+    ]
+    if hard_reasons:
+        action = "update" if exclude_patient_id is not None else "creation"
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "message": f"Duplicate patient {action} blocked by strong identifier match.",
+                "existing_patient_id": str(existing.id),
+                "match_reasons": hard_reasons,
+            },
+        )
+
+
+def _raise_if_create_hard_duplicate(
+    db: Session,
+    current_user: User,
+    body: PatientCreate,
+) -> None:
+    _raise_if_hard_duplicate(
+        db,
+        current_user,
         first_name=body.first_name,
         last_name=body.last_name,
         date_of_birth=body.date_of_birth,
@@ -123,20 +170,6 @@ def _raise_if_hard_duplicate(
         phone_mobile=body.phone_mobile,
         phone_home=body.phone_home,
     )
-    hard_reasons = [
-        reason
-        for reason in reasons
-        if reason in {"same_ihi", "same_medicare_card_and_irn"}
-    ]
-    if hard_reasons:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail={
-                "message": "Duplicate patient creation blocked by strong identifier match.",
-                "existing_patient_id": str(existing.id),
-                "match_reasons": hard_reasons,
-            },
-        )
 
 
 @router.post("", response_model=PatientOut, status_code=status.HTTP_201_CREATED)
@@ -145,7 +178,7 @@ def create_patient(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    _raise_if_hard_duplicate(db, current_user, body)
+    _raise_if_create_hard_duplicate(db, current_user, body)
     patient = Patient(practice_id=current_user.practice_id, **body.model_dump())
     db.add(patient)
     db.flush()
@@ -172,7 +205,7 @@ def create_patient_with_file(
         sys.path.insert(0, "")
     from create_patient_file import create_patient_docx, PatientData  # noqa: E402
 
-    _raise_if_hard_duplicate(db, current_user, body)
+    _raise_if_create_hard_duplicate(db, current_user, body)
 
     doc_path = None
     try:
@@ -346,7 +379,23 @@ def update_patient(
     ).first()
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")
-    for field, value in body.model_dump(exclude_unset=True).items():
+
+    updates = body.model_dump(exclude_unset=True)
+    effective_identity = {
+        field: updates[field] if field in updates else getattr(patient, field)
+        for field in (
+            "first_name", "last_name", "date_of_birth", "medicare_number",
+            "medicare_irn", "ihi_number", "phone_mobile", "phone_home",
+        )
+    }
+    _raise_if_hard_duplicate(
+        db,
+        current_user,
+        **effective_identity,
+        exclude_patient_id=patient.id,
+    )
+
+    for field, value in updates.items():
         setattr(patient, field, value)
     db.flush()
     response = PatientOut.model_validate(patient)

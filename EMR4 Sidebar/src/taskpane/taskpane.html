@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=41" />
-  <script src="taskpane.js?v=41" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=42" />
+  <script src="taskpane.js?v=42" defer></script>
 </head>
 <body>
 
@@ -42,6 +42,7 @@
     </div>
     <div id="banner-controls">
       <button id="btn-open-file" class="icon-btn hidden" title="Open patient file in Word Online">📄</button>
+      <button id="btn-edit-patient" class="icon-btn hidden" title="Edit patient details">&#x270E;</button>
       <button id="btn-new-patient" class="icon-btn" title="New patient">➕</button>
       <button id="btn-search-patient" class="icon-btn" title="Search patient">🔍</button>
       <button id="btn-diary" class="icon-btn" title="Open Diary">📅</button>
@@ -131,6 +132,98 @@
         <button id="btn-np-create" type="button" class="btn btn-primary" onclick="createNewPatient()">
           Create Patient File
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient Details Overlay -->
+  <div id="patient-edit-panel" class="new-patient-panel hidden" role="dialog" aria-modal="true" aria-labelledby="patient-edit-title">
+    <div class="new-patient-inner patient-edit-inner">
+      <div class="new-patient-header">
+        <span id="patient-edit-title">Patient Details</span>
+        <button class="icon-btn" onclick="closePatientEditForm()" title="Close">&times;</button>
+      </div>
+      <div id="patient-edit-result" aria-live="polite"></div>
+      <div class="field-row">
+        <div class="field-group" style="flex:1">
+          <label class="field-label">First name *</label>
+          <input id="pe-first-name" type="text" class="input" autocomplete="given-name" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Last name *</label>
+          <input id="pe-last-name" type="text" class="input" autocomplete="family-name" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Date of birth *</label>
+          <input id="pe-dob" type="date" class="input" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Sex</label>
+          <select id="pe-sex" class="input">
+            <option value="">&mdash; select &mdash;</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="flex:2">
+          <label class="field-label">Medicare number</label>
+          <input id="pe-medicare" type="text" class="input" placeholder="1234 56789 0" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">IRN</label>
+          <input id="pe-medicare-irn" type="text" class="input" placeholder="1" maxlength="2" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="flex:2">
+          <label class="field-label">IHI number</label>
+          <input id="pe-ihi" type="text" class="input" placeholder="8003 6088 3335 7361" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">DVA</label>
+          <input id="pe-dva" type="text" class="input" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Mobile phone</label>
+          <input id="pe-phone-mobile" type="tel" class="input" autocomplete="tel" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Home phone</label>
+          <input id="pe-phone-home" type="tel" class="input" />
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Email</label>
+        <input id="pe-email" type="email" class="input" autocomplete="email" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Address</label>
+        <input id="pe-address" type="text" class="input" autocomplete="street-address" />
+      </div>
+      <div class="field-row">
+        <div class="field-group" style="flex:2">
+          <label class="field-label">Suburb</label>
+          <input id="pe-suburb" type="text" class="input" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">State</label>
+          <input id="pe-state" type="text" class="input" />
+        </div>
+        <div class="field-group" style="flex:1">
+          <label class="field-label">Postcode</label>
+          <input id="pe-postcode" type="text" class="input" />
+        </div>
+      </div>
+      <div class="new-patient-actions patient-edit-actions">
+        <button id="btn-pe-cancel" type="button" class="btn btn-ghost" onclick="closePatientEditForm()">Cancel</button>
+        <button id="btn-pe-save" type="button" class="btn btn-primary" onclick="savePatientDetails()">Save Details</button>
       </div>
     </div>
   </div>
