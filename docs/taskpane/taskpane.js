@@ -1394,6 +1394,17 @@ function resetNewPatientActions() {
   }
 }
 
+function updatePatientOverlayOffset() {
+  const view = document.getElementById("view-app");
+  const banner = document.getElementById("patient-banner");
+  if (!view || !banner) return;
+
+  const viewTop = view.getBoundingClientRect().top;
+  const bannerBottom = banner.getBoundingClientRect().bottom;
+  const top = Math.max(52, Math.round(bannerBottom - viewTop));
+  view.style.setProperty("--patient-overlay-top", `${top}px`);
+}
+
 function clearNewPatientFields() {
   NEW_PATIENT_FIELD_IDS.forEach(id => {
     const el = document.getElementById(id);
@@ -1518,6 +1529,7 @@ window.reviewNewPatientDetails = function reviewNewPatientDetails() {
 
 window.showNewPatientForm = function showNewPatientForm() {
   document.getElementById("patient-edit-panel")?.classList.add("hidden");
+  updatePatientOverlayOffset();
   resetNewPatientActions();
   setNewPatientResult("");
   document.getElementById("new-patient-panel").classList.remove("hidden");
@@ -1670,6 +1682,7 @@ window.showPatientEditForm = function showPatientEditForm() {
   setPatientEditFieldsDisabled(false);
   setPatientEditCancelLabel(false);
   populatePatientEditForm(currentPatient);
+  updatePatientOverlayOffset();
   const panel = document.getElementById("patient-edit-panel");
   panel.classList.remove("hidden");
   document.getElementById("pe-first-name").focus();
@@ -2090,6 +2103,7 @@ Office.onReady(info => {
   document.getElementById("btn-new-patient").onclick = showNewPatientForm;
   document.getElementById("btn-edit-patient").onclick = showPatientEditForm;
   document.getElementById("btn-diary").onclick = openDiary;
+  window.addEventListener("resize", updatePatientOverlayOffset);
 
   document.getElementById("btn-search-patient").onclick = () => {
     searchPanel.classList.toggle("hidden");

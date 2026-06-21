@@ -582,7 +582,7 @@ select.input { cursor: pointer; }
 
 .new-patient-panel {
   position: absolute;
-  top: 0;
+  top: var(--patient-overlay-top, 52px);
   left: 0;
   right: 0;
   bottom: 0;
