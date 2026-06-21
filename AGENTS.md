@@ -168,6 +168,17 @@ When an agent starts a packet, it may mark it:
 python scripts\agent_worktrees.py claim --agent claude --task claude-short-title --status in_progress
 ```
 
+If an agent notices a worthwhile follow-up that is outside its current packet,
+it should capture the idea for Codex instead of leaving it only in the app chat:
+
+```powershell
+python scripts\agent_worktrees.py suggest-task --agent claude --title "Short suggested task" --rationale "Why this matters" --scope "Likely files or boundary" --verification "How Codex should verify it"
+```
+
+A suggested task is not permission to implement the work. Codex/orchestrator
+triages `suggested` packets from `orchestration/agent_inbox/codex/`, then either
+dispatches the work, folds it into an active sprint, defers it, or rejects it.
+
 The packet itself contains the required `handin` and `submit` commands. Inbox
 packets are coordination artifacts; agents may update their packet's completion
 notes, but should not edit other agents' packets.

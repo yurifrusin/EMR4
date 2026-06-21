@@ -354,7 +354,7 @@ def read_status_from_text(text: str) -> str:
 
 
 def is_actionable_status(status_value: str) -> bool:
-    return status_value in {"queued", "pending_review", "in_progress", "blocked"}
+    return status_value in {"queued", "pending_review", "in_progress", "blocked", "suggested"}
 
 
 def update_task_status(path: Path, status_value: str) -> None:
@@ -734,6 +734,60 @@ def dispatch(args: argparse.Namespace) -> None:
     print(f"[next] {args.agent} should run: python scripts\\agent_worktrees.py brief --agent {args.agent}")
 
 
+def suggest_task(args: argparse.Namespace) -> None:
+    repo = repo_root_for_cwd(Path.cwd().resolve())
+    created = local_timestamp()
+    head = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
+    branch = git_stdout(["branch", "--show-current"], cwd=repo, check=False) or "(detached)"
+    task_id = args.task_id or f"suggestion-{args.agent}-{slugify(args.title)}"
+
+    target_dir = inbox_dir("codex", repo)
+    target_dir.mkdir(parents=True, exist_ok=True)
+    path = target_dir / f"{task_id}.md"
+    if path.exists() and not args.force:
+        raise SystemExit(f"Suggestion already exists: {path}. Use --force to overwrite.")
+
+    suggestion_text = f"""# {task_id}
+
+| Item | Value |
+|---|---|
+| To | codex |
+| From | {args.agent} |
+| Branch | `{branch}` |
+| Status | suggested |
+| Created | {created} |
+| Source HEAD | `{head}` |
+
+## Suggested Task
+
+{args.title.strip()}
+
+## Rationale / Evidence
+
+{args.rationale.strip() or "Not supplied."}
+
+## Proposed Scope
+
+{args.scope.strip() or "Not supplied."}
+
+## Suggested Verification
+
+{args.verification.strip() or "Not supplied."}
+
+## Notes / Risks
+
+{args.notes.strip() or "Not supplied."}
+
+## Codex Triage Notes
+
+_Codex/orchestrator to fill in: accepted, deferred, merged into an active sprint, or rejected._
+"""
+    path.write_text(suggestion_text, encoding="utf-8")
+    print(f"[ok] wrote Codex suggested-task packet: {path.relative_to(repo)}")
+    print("[next] Submit or push this packet through the normal protocol so Codex can poll it.")
+    print("[note] A suggestion is not authorization to implement; Codex/orchestrator must triage it.")
+
+
 def inbox(args: argparse.Namespace) -> None:
     files = task_files(args.agent)
     if not files:
@@ -1088,6 +1142,17 @@ def build_parser() -> argparse.ArgumentParser:
     dispatch_parser.add_argument("--submit-message", default="")
     dispatch_parser.add_argument("--force", action="store_true")
     dispatch_parser.set_defaults(func=dispatch)
+
+    suggest_parser = subparsers.add_parser("suggest-task", help="Write a Codex inbox packet for a worker-suggested follow-up")
+    suggest_parser.add_argument("--agent", choices=sorted(AGENTS), required=True)
+    suggest_parser.add_argument("--title", required=True)
+    suggest_parser.add_argument("--rationale", default="")
+    suggest_parser.add_argument("--scope", default="")
+    suggest_parser.add_argument("--verification", default="")
+    suggest_parser.add_argument("--notes", default="")
+    suggest_parser.add_argument("--task-id", default="")
+    suggest_parser.add_argument("--force", action="store_true")
+    suggest_parser.set_defaults(func=suggest_task)
 
     inbox_parser = subparsers.add_parser("inbox", help="List agent inbox task packets")
     inbox_parser.add_argument("--agent", choices=sorted(AGENTS))

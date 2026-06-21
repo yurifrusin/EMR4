@@ -12,6 +12,11 @@ Read these before acting on remembered process details.
   files changed, verification run, and remaining risks. `submit` copies those notes
   into the Codex review packet automatically; do not leave Codex with a boilerplate
   review packet.
+- If an agent identifies a useful follow-up outside its current packet, it must
+  not leave that suggestion only in the app chat. Capture it for Codex with
+  `python scripts\agent_worktrees.py suggest-task --agent <agent> --title "..."`.
+  A suggestion is not authorization to implement; Codex/orchestrator triages it
+  into a future sprint or folds it into current scope.
 - If any protocol command (`handin`, `sync`, `submit`, `realign`, `poll`, or task
   packet command) fails or refuses to run, stop and report the exact command,
   working directory, branch, `git status --short --branch`, and error output to

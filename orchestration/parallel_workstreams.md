@@ -25,6 +25,10 @@ single source of truth for durable project state; this file tracks active branch
   the orchestrator before their work is considered part of the project.
 - Codex dispatches concrete task packets to `orchestration/agent_inbox/<agent>/`.
 - Agents read their next packet with `python scripts\agent_worktrees.py brief --agent <agent>`.
+- Agents capture off-scope follow-up ideas with
+  `python scripts\agent_worktrees.py suggest-task --agent <agent> --title "..."`
+  so Codex can triage them from `orchestration/agent_inbox/codex/`.
+  Suggested packets are not permission to implement the work.
 - Codex polls submissions with `python scripts\agent_worktrees.py poll --fetch`.
   This includes Claude/Antigravity branches and submitted `codex/*` worker branches,
   excluding the durable `codex/current` mirror.
