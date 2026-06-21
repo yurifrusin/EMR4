@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/patient-edit-details-foundation` |
-| Status | queued |
+| Status | submitted |
 | Created | faf779b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-patient-edit-details-foundation --commit-message "Add patient edit details foundation" --message "Patient edit details foundation ready for Codex review"` |
@@ -68,6 +68,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/routers/patients.py`; `tests/test_patients.py`; `EMR4 Sidebar/src/taskpane/taskpane.html`; `EMR4 Sidebar/src/taskpane/taskpane.css`; `EMR4 Sidebar/src/taskpane/taskpane.js`; synced `docs/taskpane/taskpane.html`; synced `docs/taskpane/taskpane.css`; synced `docs/taskpane/taskpane.js`.
+- Verification run: `python sync_taskpane.py` (succeeded; existing docstring `\S` SyntaxWarning); `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"`; `node --check docs\taskpane\taskpane.js`; `git diff --check` (exit 0; Git line-ending warning for synced docs JS); focused patient pytest passed with isolated DB: `$env:TEST_DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5434/gp_pms_test_patient_edit'; C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 20 passed. Earlier attempts against the default shared `gp_pms_test` collided with a concurrent pytest process from another workstream and produced fixture duplicate-user/teardown errors; no patient-edit assertion failed there before the shared-DB collision.
+- Remaining risks: Taskpane edit/cancel/save/duplicate-block paths were code-reviewed and syntax-checked but not manually exercised inside Word/Office; saving patient demographics updates the DB and in-memory taskpane banner only, and intentionally does not rewrite the generated Word document header/file name.

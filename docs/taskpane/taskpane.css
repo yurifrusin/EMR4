@@ -143,7 +143,8 @@ html, body {
   align-items: center;
   justify-content: center;
 }
-.icon-btn:hover { background: rgba(255,255,255,0.25); }
+.icon-btn:hover:not(:disabled) { background: rgba(255,255,255,0.25); }
+.icon-btn:disabled { opacity: 0.45; cursor: default; }
 
 .status-dot {
   width: 8px;
@@ -597,6 +598,8 @@ select.input { cursor: pointer; }
   gap: 8px;
   max-width: 480px;
 }
+
+.patient-edit-inner { max-width: 520px; }
 
 .new-patient-header {
   display: flex;
