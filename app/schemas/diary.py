@@ -42,6 +42,15 @@ class DiaryTemplateOut(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class WaitingAreaOut(BaseModel):
+    id: UUID
+    name: str
+    display_order: int
+    is_active: bool
+
+    model_config = {"from_attributes": True}
+
+
 class RoomOut(BaseModel):
     id: UUID
     name: str

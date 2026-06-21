@@ -17,7 +17,7 @@ from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     BookingChannel, PractitionerSchedule,
 )
-from app.models.diary import DiaryTemplate, DiaryColumn, DiaryBreak, Room, DiaryRoster
+from app.models.diary import DiaryTemplate, DiaryColumn, DiaryBreak, Room, DiaryRoster, WaitingArea
 from app.services.auth_service import hash_password
 
 
@@ -464,6 +464,25 @@ def seed():
                 exists.label = label
         db.flush()
         print(f"  Diary roster seeded for today ({today})")
+
+        # --- Waiting Areas ---
+        waiting_areas_data = [
+            ("Main Waiting Room", 0),
+            ("Children's Area", 1),
+        ]
+        for area_name, order in waiting_areas_data:
+            area = db.query(WaitingArea).filter_by(
+                practice_id=practice.id, name=area_name
+            ).first()
+            if not area:
+                db.add(WaitingArea(
+                    practice_id=practice.id,
+                    name=area_name,
+                    display_order=order,
+                    is_active=True,
+                ))
+        db.flush()
+        print(f"  Waiting areas seeded ({len(waiting_areas_data)} areas)")
 
         db.commit()
         print("\nSeed complete.")

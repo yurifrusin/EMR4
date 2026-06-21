@@ -63,6 +63,7 @@ class Appointment(Base):
     notes = Column(String(1000))
     booked_via = Column(Enum(BookingChannel), default=BookingChannel.Receptionist)
     waiting_room = Column(String(50))
+    waiting_area_id = Column(UUID(as_uuid=True), ForeignKey("waiting_areas.id"), nullable=True)
     queue_position = Column(Integer)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

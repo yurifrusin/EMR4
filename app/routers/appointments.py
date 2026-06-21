@@ -12,7 +12,7 @@ from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     PractitionerSchedule, ScheduleOverride,
 )
-from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate
+from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea
 from app.schemas.appointments import (
     AppointmentCreate, AppointmentUpdate, AppointmentStatusUpdate,
     AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
@@ -144,6 +144,18 @@ def _ensure_location(location_id: Optional[uuid.UUID], practice_id: uuid.UUID, d
     ).first()
     if not exists:
         raise HTTPException(status_code=404, detail="Practice location not found")
+
+
+def _ensure_waiting_area(waiting_area_id: Optional[uuid.UUID], practice_id: uuid.UUID, db: Session) -> None:
+    if not waiting_area_id:
+        return
+    exists = db.query(WaitingArea.id).filter(
+        WaitingArea.id == waiting_area_id,
+        WaitingArea.practice_id == practice_id,
+        WaitingArea.is_active == True,
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Waiting area not found")
 
 
 def _overlaps(start_a: datetime, duration_a: int, start_b: datetime, duration_b: int) -> bool:
@@ -348,10 +360,14 @@ def create_appointment(
 @router.get("/waiting-room", response_model=list[AppointmentOut])
 def get_waiting_room(
     practitioner_id: Optional[uuid.UUID] = Query(None),
+    waiting_area_id: Optional[uuid.UUID] = Query(None),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """Today's booked/arrived/in-consult appointments — the live waiting room queue."""
+    """Today's booked/arrived/in-consult appointments — the live waiting room queue.
+
+    Optional filters: practitioner_id, waiting_area_id. Omit both for the full queue.
+    """
     practice_tz = _practice_zoneinfo(db, current_user.practice_id)
     today = datetime.now(practice_tz).date()
 
@@ -375,6 +391,8 @@ def get_waiting_room(
     )
     if practitioner_id:
         q = q.filter(Appointment.practitioner_id == practitioner_id)
+    if waiting_area_id:
+        q = q.filter(Appointment.waiting_area_id == waiting_area_id)
     return q.order_by(Appointment.queue_position.nullslast(), Appointment.start_time_local).all()
 
 
@@ -437,6 +455,7 @@ def update_appointment(
     _ensure_practitioner(practitioner_id, practice_id, db)
     _ensure_appointment_type(appointment_type_id, practice_id, db)
     _ensure_location(location_id, practice_id, db)
+    _ensure_waiting_area(values.get("waiting_area_id"), practice_id, db)
     if {"practitioner_id", "start_time", "appointment_date", "start_time_local", "duration_minutes"} & values.keys():
         _raise_if_conflict(
             db,
