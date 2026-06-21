@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | faf779b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-waiting-area-tabs --commit-message "Add diary waiting area tabs" --message "Diary waiting area tabs ready for Codex review"` |
@@ -69,5 +69,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `docs/diary/diary.html`
+  - `docs/diary/diary.css`
+  - `docs/diary/diary.js`
 - Verification run:
+  - Syntax check: `node --check docs\diary\diary.js` passed.
+  - Lint: `git diff --check` passed.
+  - Backend integration tests run: `pytest tests/test_appointment_patient_link.py` and `pytest tests/test_booking_create_edit.py` passed 100% (40/40 tests).
+  - Smoke verified: tabs render dynamically based on template & appointment waiting rooms, fallback hides tabs when empty, unassigned filtering works, patient linking toggles visible button correctly when provisional patient selected.
 - Remaining risks:
+  - Frontend-only: waiting room tab filtering happens entirely in-memory on the client; if the list is extremely large, performance might degrade, but typical daily clinic volumes (under 100 patients per clinic) will be unaffected.

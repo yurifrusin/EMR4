@@ -1878,7 +1878,7 @@ function selectProvisionalPatient(name) {
   document.getElementById("booking-patient-search").classList.add("hidden");
   document.getElementById("patient-search-results").classList.add("hidden");
   document.getElementById("selected-patient-display").classList.remove("hidden");
-  document.getElementById("btn-link-patient").classList.add("hidden");
+  document.getElementById("btn-link-patient").classList.remove("hidden");
   document.getElementById("selected-patient-text").innerHTML =
     `<span class="appt-prov-icon">📝</span> ${escHtml(name)} <span style="font-size:10px; color:var(--grey-3); font-style:italic;">(Provisional)</span>`;
   document.getElementById("btn-clear-patient").classList.remove("hidden");
@@ -2126,6 +2126,7 @@ async function deleteBooking() {
 
 // ─── PATIENT FLOW WORKBENCH & WAITING ROOM LOGIC ───────────
 let todayAppointments = [];
+let selectedWaitingAreaTab = "All";
 
 async function setAppointmentStatus(appt, newStatus, selectEl = null) {
   if (!await confirmUnidentifiedProgress(appt, newStatus)) {
@@ -2229,9 +2230,91 @@ async function loadTodayAppointments() {
   }
 }
 
+function getAppointmentWaitingRoom(a) {
+  if (a.waiting_room) return a.waiting_room;
+  if (a.practitioner && a.practitioner.ahpra_number && activeTemplate && activeTemplate.columns) {
+    const col = activeTemplate.columns.find(c => c.practitioner_ahpra === a.practitioner.ahpra_number);
+    if (col && (col.default_waiting_room || col.waiting_room)) {
+      return col.default_waiting_room || col.waiting_room;
+    }
+  }
+  return null;
+}
+
+function getUniqueWaitingAreas() {
+  const areas = new Set();
+  if (activeTemplate && activeTemplate.columns) {
+    activeTemplate.columns.forEach(col => {
+      const room = col.default_waiting_room || col.waiting_room;
+      if (room && room.trim()) {
+        areas.add(room.trim());
+      }
+    });
+  }
+  todayAppointments.forEach(a => {
+    const room = getAppointmentWaitingRoom(a);
+    if (room && room.trim()) {
+      areas.add(room.trim());
+    }
+  });
+  return Array.from(areas).sort();
+}
+
+function renderWaitingAreaTabs(areas) {
+  const container = document.getElementById("flow-waiting-area-tabs");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const hasUnassigned = todayAppointments.some(a => {
+    if (a.status === "Cancelled") return false;
+    const room = getAppointmentWaitingRoom(a);
+    return !room || !room.trim();
+  });
+
+  const allTabs = ["All", ...areas];
+  if (hasUnassigned) {
+    allTabs.push("Unassigned");
+  }
+
+  if (!allTabs.includes(selectedWaitingAreaTab)) {
+    selectedWaitingAreaTab = "All";
+  }
+
+  allTabs.forEach(tab => {
+    const tabEl = document.createElement("button");
+    tabEl.className = "flow-tab-btn";
+    if (tab === selectedWaitingAreaTab) {
+      tabEl.classList.add("active");
+    }
+    tabEl.textContent = tab;
+    tabEl.type = "button";
+    tabEl.onclick = () => {
+      if (selectedWaitingAreaTab === tab) return;
+      selectedWaitingAreaTab = tab;
+      updateFlowPanel();
+    };
+    container.appendChild(tabEl);
+  });
+}
+
 async function updateFlowPanel() {
   const panel = document.getElementById("diary-flow-panel");
   if (!panel || panel.classList.contains("hidden")) return;
+
+  const areas = getUniqueWaitingAreas();
+  const hasAreas = areas.length > 0;
+  const tabsContainer = document.getElementById("flow-waiting-area-tabs");
+  if (tabsContainer) {
+    if (hasAreas) {
+      tabsContainer.classList.remove("hidden");
+      renderWaitingAreaTabs(areas);
+    } else {
+      tabsContainer.classList.add("hidden");
+      tabsContainer.innerHTML = "";
+      selectedWaitingAreaTab = "All";
+    }
+  }
 
   const waiting = [];
   const consult = [];
@@ -2263,22 +2346,41 @@ async function updateFlowPanel() {
   expected.sort(sortByTime);
   finished.sort(sortByTime);
 
+  let filteredWaiting = waiting;
+  let filteredConsult = consult;
+  let filteredExpected = expected;
+  let filteredFinished = finished;
+
+  if (hasAreas && selectedWaitingAreaTab !== "All") {
+    const filterFn = (a) => {
+      const room = getAppointmentWaitingRoom(a);
+      if (selectedWaitingAreaTab === "Unassigned") {
+        return !room || !room.trim();
+      }
+      return room === selectedWaitingAreaTab;
+    };
+    filteredWaiting = waiting.filter(filterFn);
+    filteredConsult = consult.filter(filterFn);
+    filteredExpected = expected.filter(filterFn);
+    filteredFinished = finished.filter(filterFn);
+  }
+
   const secWaiting = document.querySelector("#flow-sec-waiting .flow-sec-count");
-  if (secWaiting) secWaiting.textContent = waiting.length;
+  if (secWaiting) secWaiting.textContent = filteredWaiting.length;
 
   const secConsult = document.querySelector("#flow-sec-consult .flow-sec-count");
-  if (secConsult) secConsult.textContent = consult.length;
+  if (secConsult) secConsult.textContent = filteredConsult.length;
 
   const secExpected = document.querySelector("#flow-sec-expected .flow-sec-count");
-  if (secExpected) secExpected.textContent = expected.length;
+  if (secExpected) secExpected.textContent = filteredExpected.length;
 
   const secFinished = document.querySelector("#flow-sec-finished .flow-sec-count");
-  if (secFinished) secFinished.textContent = finished.length;
+  if (secFinished) secFinished.textContent = filteredFinished.length;
 
-  renderFlowList("flow-list-waiting", waiting, "Start Consult", "InConsult");
-  renderFlowList("flow-list-consult", consult, "Complete", "Completed");
-  renderFlowList("flow-list-expected", expected, "Check In", "Arrived");
-  renderFlowList("flow-list-finished", finished, null, null);
+  renderFlowList("flow-list-waiting", filteredWaiting, "Start Consult", "InConsult");
+  renderFlowList("flow-list-consult", filteredConsult, "Complete", "Completed");
+  renderFlowList("flow-list-expected", filteredExpected, "Check In", "Arrived");
+  renderFlowList("flow-list-finished", filteredFinished, null, null);
 
   updateFlowBadgeCount();
 }
