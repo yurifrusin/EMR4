@@ -6,8 +6,8 @@ from sqlalchemy.orm import Session, joinedload
 
 from app.dependencies import get_db, get_current_user
 from app.models.tenancy import Practitioner, User
-from app.models.diary import DiaryTemplate, Room, DiaryRoster
-from app.schemas.diary import DiaryTemplateOut, DiaryRosterOut, DiaryRosterEntryOut
+from app.models.diary import DiaryTemplate, Room, DiaryRoster, WaitingArea
+from app.schemas.diary import DiaryTemplateOut, DiaryRosterOut, DiaryRosterEntryOut, WaitingAreaOut
 
 router = APIRouter(prefix="/api/v1/diary", tags=["diary"])
 
@@ -52,6 +52,23 @@ def _db_template_to_out(tmpl: DiaryTemplate, db: Session) -> DiaryTemplateOut:
             for c in tmpl.columns
             if c.is_active
         ],
+    )
+
+
+@router.get("/waiting-areas", response_model=list[WaitingAreaOut])
+def get_waiting_areas(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """List named physical waiting areas for the practice, ordered by display_order."""
+    return (
+        db.query(WaitingArea)
+        .filter(
+            WaitingArea.practice_id == current_user.practice_id,
+            WaitingArea.is_active == True,
+        )
+        .order_by(WaitingArea.display_order)
+        .all()
     )
 
 

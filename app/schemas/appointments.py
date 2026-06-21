@@ -78,6 +78,7 @@ class AppointmentUpdate(BaseModel):
     reason: Optional[str] = None
     notes: Optional[str] = None
     waiting_room: Optional[str] = None
+    waiting_area_id: Optional[uuid.UUID] = None
     queue_position: Optional[int] = None
 
     @model_validator(mode="after")
@@ -110,6 +111,7 @@ class AppointmentOut(BaseModel):
     notes: Optional[str] = None
     booked_via: BookingChannel
     waiting_room: Optional[str] = None
+    waiting_area_id: Optional[uuid.UUID] = None
     queue_position: Optional[int] = None
     created_at: datetime
     patient: Optional[PatientBrief] = None

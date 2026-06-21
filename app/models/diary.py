@@ -70,6 +70,19 @@ class DiaryBreak(Base):
     __table_args__ = (Index("ix_diary_breaks_column_id", "column_id"),)
 
 
+class WaitingArea(Base):
+    """Named physical waiting area within a practice (e.g. 'Main Waiting Room')."""
+    __tablename__ = "waiting_areas"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
+    name = Column(String(100), nullable=False)
+    display_order = Column(Integer, nullable=False, default=0)
+    is_active = Column(Boolean, default=True)
+
+    __table_args__ = (Index("ix_waiting_areas_practice_id", "practice_id"),)
+
+
 class Room(Base):
     """A physical room in the practice, used for date-specific diary roster assignment."""
     __tablename__ = "rooms"
@@ -79,6 +92,7 @@ class Room(Base):
     name = Column(String(100), nullable=False)
     display_order = Column(Integer, nullable=False)
     is_active = Column(Boolean, default=True)
+    default_waiting_area_id = Column(UUID(as_uuid=True), ForeignKey("waiting_areas.id"), nullable=True)
 
     roster_entries = relationship("DiaryRoster", back_populates="room",
                                   cascade="all, delete-orphan")
