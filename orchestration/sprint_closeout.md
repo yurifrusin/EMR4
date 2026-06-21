@@ -34,7 +34,10 @@ reviewed, integrated, verified, pushed, and audited.
 - User-review hotfix: removed unintended lane/cascade offsets from diary
   appointment cards. Waiting Room card stacking remains a separate future UI
   idea.
-- Updated diary assets to `v=64` and taskpane assets to `v=42`.
+- User-review hotfix: Patient Details now changes the secondary action from
+  Cancel to Close after a successful save, returns it to Cancel after further
+  edits, and preflights hard duplicate identifiers before saving.
+- Updated diary assets to `v=64` and taskpane assets to `v=43`.
 
 ## Recommended User Review
 
@@ -96,6 +99,12 @@ Codex/orchestrator verification for Sprint 13:
 - `git diff --check` -> passed
 - `.venv\Scripts\python.exe -m pytest tests\test_patients.py tests\test_waiting_area_contract.py -q` -> 29 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_contract.py tests\test_break_overlap_contract.py tests\test_appointment_patient_link.py tests\test_appointment_conflicts.py tests\test_appointment_status_mutations.py tests\test_diary_template.py tests\test_diary_roster.py tests\test_slots.py tests\test_booking_patient_flow.py tests\test_nurse_practitioner.py tests\test_patients.py -q -p no:randomly` -> 123 passed, 1 warning
+- Sprint 13 user-review hotfix:
+  - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 21 passed, 1 warning
+  - `.venv\Scripts\python.exe -m py_compile app\routers\patients.py` -> passed
+  - `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` -> passed
+  - `node --check docs\taskpane\taskpane.js` -> passed
+  - `git diff --check` -> passed
 
 ## Recommended Next Direction
 

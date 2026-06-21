@@ -272,6 +272,48 @@ def test_update_patient_blocks_duplicate_medicare_card_and_irn_from_partial_edit
     assert target.medicare_irn == "2"
 
 
+def test_update_patient_blocks_duplicate_medicare_card_and_irn_from_full_edit(
+    client,
+    db,
+    practice,
+    gp_user,
+):
+    existing = _add_patient(
+        db,
+        practice,
+        first_name="Existing",
+        last_name="Strong",
+        medicare_number="2950123456",
+        medicare_irn="1",
+    )
+    target = _add_patient(
+        db,
+        practice,
+        first_name="Target",
+        last_name="Patient",
+        medicare_number="1876543210",
+        medicare_irn="2",
+    )
+
+    resp = client.put(
+        f"/api/v1/patients/{target.id}",
+        json={
+            "medicare_number": "2950 123 456",
+            "medicare_irn": "1",
+        },
+        headers=_auth(gp_user),
+    )
+
+    assert resp.status_code == 409, resp.text
+    detail = resp.json()["detail"]
+    assert detail["existing_patient_id"] == str(existing.id)
+    assert detail["match_reasons"] == ["same_medicare_card_and_irn"]
+
+    db.refresh(target)
+    assert target.medicare_number == "1876543210"
+    assert target.medicare_irn == "2"
+
+
 def test_update_patient_duplicate_check_is_practice_scoped(
     client,
     db,

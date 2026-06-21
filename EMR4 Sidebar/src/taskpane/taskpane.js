@@ -1568,6 +1568,11 @@ function setPatientEditFieldsDisabled(disabled) {
   });
 }
 
+function setPatientEditCancelLabel(saved) {
+  const cancelBtn = document.getElementById("btn-pe-cancel");
+  if (cancelBtn) cancelBtn.textContent = saved ? "Close" : "Cancel";
+}
+
 function populatePatientEditForm(patient) {
   PATIENT_EDIT_FIELDS.forEach(([id, field]) => {
     const el = document.getElementById(id);
@@ -1616,6 +1621,42 @@ function describePatientEditError(payload, fallback) {
   return describeApiError(detail, fallback);
 }
 
+async function findPatientEditHardDuplicates(body) {
+  const params = new URLSearchParams();
+  [
+    "first_name", "last_name", "date_of_birth", "medicare_number",
+    "medicare_irn", "ihi_number", "phone_mobile",
+  ].forEach(field => {
+    if (body[field]) params.set(field, body[field]);
+  });
+
+  if (!params.toString()) return [];
+
+  const res = await apiFetch(`/patients/duplicate-candidates?${params.toString()}`);
+  if (!res) return [];
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(describeApiError(data, `Duplicate check failed (${res.status})`));
+  }
+
+  const candidates = await res.json();
+  return (Array.isArray(candidates) ? candidates : []).filter(candidate => {
+    const patient = candidate.patient || {};
+    if (currentPatient && patient.id === currentPatient.id) return false;
+    return (candidate.match_reasons || []).some(reason => HARD_DUPLICATE_REASONS.has(reason));
+  });
+}
+
+function describePatientEditHardDuplicate(candidates) {
+  const first = candidates[0] || {};
+  const patient = first.patient || {};
+  const name = [patient.first_name, patient.last_name].filter(Boolean).join(" ") || "another patient";
+  const reasons = (first.match_reasons || [])
+    .filter(reason => HARD_DUPLICATE_REASONS.has(reason))
+    .join(", ");
+  return `Duplicate patient update blocked. ${name} already has the same strong identifier${reasons ? ` (${reasons})` : ""}. Change the details before saving.`;
+}
+
 window.showPatientEditForm = function showPatientEditForm() {
   if (!currentPatient) {
     setStatus("Load a patient before editing details.");
@@ -1625,6 +1666,7 @@ window.showPatientEditForm = function showPatientEditForm() {
   document.getElementById("search-panel")?.classList.add("hidden");
   setPatientEditResult("");
   setPatientEditFieldsDisabled(false);
+  setPatientEditCancelLabel(false);
   populatePatientEditForm(currentPatient);
   const panel = document.getElementById("patient-edit-panel");
   panel.classList.remove("hidden");
@@ -1641,7 +1683,10 @@ window.closePatientEditForm = function closePatientEditForm() {
     btn.disabled = false;
     btn.textContent = "Save Details";
   }
-  if (cancelBtn) cancelBtn.disabled = false;
+  if (cancelBtn) {
+    cancelBtn.disabled = false;
+    cancelBtn.textContent = "Cancel";
+  }
 };
 
 window.savePatientDetails = async function savePatientDetails() {
@@ -1668,6 +1713,11 @@ window.savePatientDetails = async function savePatientDetails() {
   setPatientEditResult("");
 
   try {
+    const hardDuplicates = await findPatientEditHardDuplicates(body);
+    if (hardDuplicates.length) {
+      throw new Error(describePatientEditHardDuplicate(hardDuplicates));
+    }
+
     const res = await apiFetch(`/patients/${patientId}`, {
       method: "PUT",
       body: JSON.stringify(body),
@@ -1685,8 +1735,10 @@ window.savePatientDetails = async function savePatientDetails() {
     updatePatientEditButton();
     populatePatientEditForm(currentPatient);
     setPatientEditResult(`<div class="alert alert-success">Patient details saved.</div>`);
+    setPatientEditCancelLabel(true);
     setStatus("Patient details saved.");
   } catch (e) {
+    setPatientEditCancelLabel(false);
     setPatientEditResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
   } finally {
     setPatientEditFieldsDisabled(false);
@@ -2090,6 +2142,7 @@ Office.onReady(info => {
   // Auto-lock when the GP types in the consult panel
   document.addEventListener("input", e => {
     if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
+    if (e.target.closest("#patient-edit-panel")) setPatientEditCancelLabel(false);
   });
 
   // ── Resume session or show login ─────────────────────────
