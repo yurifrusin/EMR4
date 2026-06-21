@@ -1403,6 +1403,22 @@ function updatePatientOverlayOffset() {
   view.style.setProperty("--patient-overlay-top", `${top}px`);
 }
 
+function closePatientSearchPanel() {
+  const searchPanel = document.getElementById("search-panel");
+  const searchInput = document.getElementById("patient-search-input");
+  const searchResults = document.getElementById("patient-search-results");
+  if (searchPanel) searchPanel.classList.add("hidden");
+  if (searchInput) searchInput.value = "";
+  if (searchResults) searchResults.innerHTML = "";
+}
+
+function patientWorkflowOverlayOpen() {
+  return ["new-patient-panel", "patient-edit-panel"].some(id => {
+    const panel = document.getElementById(id);
+    return panel && !panel.classList.contains("hidden");
+  });
+}
+
 function clearNewPatientFields() {
   NEW_PATIENT_FIELD_IDS.forEach(id => {
     const el = document.getElementById(id);
@@ -1532,6 +1548,7 @@ window.reviewNewPatientDetails = function reviewNewPatientDetails() {
 
 window.showNewPatientForm = function showNewPatientForm() {
   document.getElementById("patient-edit-panel")?.classList.add("hidden");
+  closePatientSearchPanel();
   updatePatientOverlayOffset();
   resetNewPatientActions();
   setNewPatientResult("");
@@ -1685,7 +1702,7 @@ window.showPatientEditForm = function showPatientEditForm() {
     return;
   }
   document.getElementById("new-patient-panel")?.classList.add("hidden");
-  document.getElementById("search-panel")?.classList.add("hidden");
+  closePatientSearchPanel();
   setPatientEditResult("");
   setPatientEditFieldsDisabled(false);
   setPatientEditCancelLabel(false);
@@ -2103,9 +2120,7 @@ Office.onReady(info => {
   const searchInput = document.getElementById("patient-search-input");
 
   function closeSearch() {
-    searchPanel.classList.add("hidden");
-    searchInput.value = "";
-    document.getElementById("patient-search-results").innerHTML = "";
+    closePatientSearchPanel();
   }
 
   document.getElementById("btn-new-patient").onclick = showNewPatientForm;
@@ -2114,6 +2129,10 @@ Office.onReady(info => {
   window.addEventListener("resize", updatePatientOverlayOffset);
 
   document.getElementById("btn-search-patient").onclick = () => {
+    if (patientWorkflowOverlayOpen()) {
+      closeSearch();
+      return;
+    }
     searchPanel.classList.toggle("hidden");
     if (!searchPanel.classList.contains("hidden")) searchInput.focus();
     else closeSearch();

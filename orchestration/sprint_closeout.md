@@ -40,7 +40,9 @@ reviewed, integrated, verified, pushed, and audited.
 - User-review hotfix: Patient create/edit now requires Medicare number and IRN
   to be entered as a pair, preventing partial blanking during failed duplicate
   edits.
-- Updated diary assets to `v=64` and taskpane assets to `v=47`.
+- User-review hotfix: New Patient, Patient Details, and Search are now mutually
+  exclusive taskpane workflows, so stale search UI cannot sit above an open form.
+- Updated diary assets to `v=64` and taskpane assets to `v=48`.
 
 ## Recommended User Review
 
