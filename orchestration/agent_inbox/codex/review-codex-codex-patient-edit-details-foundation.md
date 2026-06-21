@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/patient-edit-details-foundation` |
 | Source Task | `codex-patient-edit-details-foundation` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

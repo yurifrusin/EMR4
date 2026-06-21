@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 13 - waiting-area/resource and patient-edit foundations queued |
-| **Next recommended work** | Run Sprint 13 handins; integrate waiting-area contract, diary waiting-area tabs, and patient edit details before starting Bernie |
+| **Current active track** | Sprint 13 - waiting-area/resource and patient-edit foundations integrated locally |
+| **Next recommended work** | Push Sprint 13 closeout, run user review for waiting-area tabs and Patient Details, then continue receptionist workflow foundations before Bernie |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -271,7 +271,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | this closeout commit — "Record Sprint 12 integration closeout" |
+| **Latest integration commit** | this closeout commit — "Integrate Sprint 13 waiting area and patient details" |
 
 ### Tag map (all tags pushed to remote)
 

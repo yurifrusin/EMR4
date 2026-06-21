@@ -22,6 +22,7 @@ const GRIDLINE_SNAP_TOLERANCE_MINS = 3;
 let activeAppointments = [];
 let activeTypes = [];
 let ahpraToPractitionerMap = {};
+let waitingAreas = [];
 
 function isSmokeMode() {
   return new URLSearchParams(window.location.search).get("smoke") === "true";
@@ -1208,14 +1209,15 @@ async function loadDiary(silent = false, options = {}) {
   const apptParams = `date_from=${dayStart.toISOString()}&date_to=${dayEnd.toISOString()}`;
 
   try {
-    let template, appointments, types, rosterEntries = [];
+    let template, appointments, types, rosterEntries = [], fetchedWaitingAreas = [];
 
     if (isSmokeMode) {
       template = normalizeTemplate(getMockTemplate());
       appointments = getMockAppointments();
       types = getMockTypes();
+      waitingAreas = [];
     } else {
-      const [templateRes, apptRes, typeRes, rosterRes] = await Promise.all([
+      const [templateRes, apptRes, typeRes, rosterRes, waitingAreasRes] = await Promise.all([
         loadDiaryTemplate(),
         apiFetch(`/appointments?${apptParams}`),
         apiFetch(`/appointments/types`),
@@ -1225,6 +1227,13 @@ async function loadDiary(silent = false, options = {}) {
           }
           console.warn("Roster fetch failed:", err);
           return null;
+        }),
+        apiFetch(`/diary/waiting-areas`).catch(err => {
+          if (err && err.message === "401 Unauthorized") {
+            throw err;
+          }
+          console.warn("Waiting areas fetch failed:", err);
+          return null;
         })
       ]);
       template = templateRes;
@@ -1232,6 +1241,10 @@ async function loadDiary(silent = false, options = {}) {
       if (!typeRes.ok) throw new Error(`Types: ${typeRes.status} ${await typeRes.text()}`);
       appointments = await apptRes.json();
       types        = await typeRes.json();
+      if (waitingAreasRes && waitingAreasRes.ok) {
+        fetchedWaitingAreas = await waitingAreasRes.json();
+      }
+      waitingAreas = Array.isArray(fetchedWaitingAreas) ? fetchedWaitingAreas : [];
 
       rosterEntries = [];
       if (rosterRes && rosterRes.ok) {
@@ -2126,7 +2139,7 @@ async function deleteBooking() {
 
 // ─── PATIENT FLOW WORKBENCH & WAITING ROOM LOGIC ───────────
 let todayAppointments = [];
-let selectedWaitingAreaTab = "All";
+let selectedWaitingAreaTab = "all";
 
 async function setAppointmentStatus(appt, newStatus, selectEl = null) {
   if (!await confirmUnidentifiedProgress(appt, newStatus)) {
@@ -2231,33 +2244,49 @@ async function loadTodayAppointments() {
 }
 
 function getAppointmentWaitingRoom(a) {
-  if (a.waiting_room) return a.waiting_room;
+  if (a.waiting_area_id && waitingAreas.length) {
+    const area = waitingAreas.find(item => item.id === a.waiting_area_id);
+    if (area) return { key: `area:${area.id}`, label: area.name };
+  }
+  if (a.waiting_room) {
+    const room = a.waiting_room.trim();
+    if (room) return { key: `legacy:${room.toLowerCase()}`, label: room };
+  }
   if (a.practitioner && a.practitioner.ahpra_number && activeTemplate && activeTemplate.columns) {
     const col = activeTemplate.columns.find(c => c.practitioner_ahpra === a.practitioner.ahpra_number);
     if (col && (col.default_waiting_room || col.waiting_room)) {
-      return col.default_waiting_room || col.waiting_room;
+      const room = String(col.default_waiting_room || col.waiting_room).trim();
+      if (room) return { key: `legacy:${room.toLowerCase()}`, label: room };
     }
   }
   return null;
 }
 
 function getUniqueWaitingAreas() {
-  const areas = new Set();
+  const areas = new Map();
+  waitingAreas.forEach(area => {
+    if (area && area.id && area.name) {
+      areas.set(`area:${area.id}`, { key: `area:${area.id}`, label: area.name });
+    }
+  });
   if (activeTemplate && activeTemplate.columns) {
     activeTemplate.columns.forEach(col => {
       const room = col.default_waiting_room || col.waiting_room;
       if (room && room.trim()) {
-        areas.add(room.trim());
+        areas.set(`legacy:${room.trim().toLowerCase()}`, {
+          key: `legacy:${room.trim().toLowerCase()}`,
+          label: room.trim(),
+        });
       }
     });
   }
   todayAppointments.forEach(a => {
     const room = getAppointmentWaitingRoom(a);
-    if (room && room.trim()) {
-      areas.add(room.trim());
+    if (room) {
+      areas.set(room.key, room);
     }
   });
-  return Array.from(areas).sort();
+  return Array.from(areas.values()).sort((a, b) => a.label.localeCompare(b.label));
 }
 
 function renderWaitingAreaTabs(areas) {
@@ -2269,29 +2298,29 @@ function renderWaitingAreaTabs(areas) {
   const hasUnassigned = todayAppointments.some(a => {
     if (a.status === "Cancelled") return false;
     const room = getAppointmentWaitingRoom(a);
-    return !room || !room.trim();
+    return !room;
   });
 
-  const allTabs = ["All", ...areas];
+  const allTabs = [{ key: "all", label: "All" }, ...areas];
   if (hasUnassigned) {
-    allTabs.push("Unassigned");
+    allTabs.push({ key: "unassigned", label: "Unassigned" });
   }
 
-  if (!allTabs.includes(selectedWaitingAreaTab)) {
-    selectedWaitingAreaTab = "All";
+  if (!allTabs.some(tab => tab.key === selectedWaitingAreaTab)) {
+    selectedWaitingAreaTab = "all";
   }
 
   allTabs.forEach(tab => {
     const tabEl = document.createElement("button");
     tabEl.className = "flow-tab-btn";
-    if (tab === selectedWaitingAreaTab) {
+    if (tab.key === selectedWaitingAreaTab) {
       tabEl.classList.add("active");
     }
-    tabEl.textContent = tab;
+    tabEl.textContent = tab.label;
     tabEl.type = "button";
     tabEl.onclick = () => {
-      if (selectedWaitingAreaTab === tab) return;
-      selectedWaitingAreaTab = tab;
+      if (selectedWaitingAreaTab === tab.key) return;
+      selectedWaitingAreaTab = tab.key;
       updateFlowPanel();
     };
     container.appendChild(tabEl);
@@ -2312,7 +2341,7 @@ async function updateFlowPanel() {
     } else {
       tabsContainer.classList.add("hidden");
       tabsContainer.innerHTML = "";
-      selectedWaitingAreaTab = "All";
+      selectedWaitingAreaTab = "all";
     }
   }
 
@@ -2351,13 +2380,13 @@ async function updateFlowPanel() {
   let filteredExpected = expected;
   let filteredFinished = finished;
 
-  if (hasAreas && selectedWaitingAreaTab !== "All") {
+  if (hasAreas && selectedWaitingAreaTab !== "all") {
     const filterFn = (a) => {
       const room = getAppointmentWaitingRoom(a);
-      if (selectedWaitingAreaTab === "Unassigned") {
-        return !room || !room.trim();
+      if (selectedWaitingAreaTab === "unassigned") {
+        return !room;
       }
-      return room === selectedWaitingAreaTab;
+      return room && room.key === selectedWaitingAreaTab;
     };
     filteredWaiting = waiting.filter(filterFn);
     filteredConsult = consult.filter(filterFn);

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/patient-edit-details-foundation` |
-| Status | submitted |
+| Status | integrated |
 | Created | faf779b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-patient-edit-details-foundation --commit-message "Add patient edit details foundation" --message "Patient edit details foundation ready for Codex review"` |

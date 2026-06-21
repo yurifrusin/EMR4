@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-waiting-area-resource-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

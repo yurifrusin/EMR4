@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-waiting-area-tabs` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

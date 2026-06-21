@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | faf779b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-diary-waiting-area-tabs --commit-message "Add diary waiting area tabs" --message "Diary waiting area tabs ready for Codex review"` |

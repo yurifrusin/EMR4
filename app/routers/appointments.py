@@ -46,7 +46,10 @@ def _practice_zoneinfo(db: Session, practice_id: uuid.UUID) -> ZoneInfo:
     try:
         return ZoneInfo(timezone_name)
     except ZoneInfoNotFoundError:
-        return ZoneInfo(DEFAULT_PRACTICE_TIMEZONE)
+        try:
+            return ZoneInfo(DEFAULT_PRACTICE_TIMEZONE)
+        except ZoneInfoNotFoundError:
+            return timezone.utc
 
 
 def _as_practice_local(start_time: datetime, practice_tz: ZoneInfo) -> datetime:

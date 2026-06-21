@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | faf779b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Submit Command | `python scripts\agent_worktrees.py submit --agent claude --task claude-waiting-area-resource-contract --commit-message "Add waiting area resource contract" --message "Waiting area resource contract ready for Codex review"` |
