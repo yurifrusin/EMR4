@@ -111,7 +111,16 @@ def test_patient_search_matches_name_medicare_and_phone(client, db, practice, gp
         phone_mobile="0411 222 333",
     )
 
-    for query in ("lovelace", "295012", "4", "8003608833357361", "123 456", "3000"):
+    for query in (
+        "lovelace",
+        "ada lovelace",
+        "lovelace ada",
+        "295012",
+        "4",
+        "8003608833357361",
+        "123 456",
+        "3000",
+    ):
         resp = client.get(
             "/api/v1/patients/search",
             params={"q": query},

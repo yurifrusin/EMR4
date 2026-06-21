@@ -453,6 +453,12 @@ flowchart TD
 - Integrate patient entry with a fuller patient-details form rather than a minimal
   shortcut form. The same data model should support receptionist entry from a printed
   form, tablet/waiting-area entry, and eventual patient mobile/PWA self-entry.
+- Demographic edits made through the taskpane must eventually reconcile back into
+  the Word patient-file header and document metadata, not only the database/taskpane
+  state. The generated header should include Medicare IRN alongside Medicare number
+  once the patient-file template is revised. Treat this as a document lifecycle task
+  tied to reliable SharePoint/OneDrive document URL storage, document activation, and
+  conflict-safe header rewriting.
 - Consider AI-assisted OCR later for paper forms, but keep that separate from the
   initial patient-entry contract: the canonical outcome is structured patient data
   plus a generated Word patient file.

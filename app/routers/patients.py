@@ -279,10 +279,22 @@ def search_patients(
     current_user: User = Depends(get_current_user),
 ):
     base = db.query(Patient).filter(Patient.practice_id == current_user.practice_id)
+    first_last = func.concat(
+        func.coalesce(Patient.first_name, ""),
+        " ",
+        func.coalesce(Patient.last_name, ""),
+    )
+    last_first = func.concat(
+        func.coalesce(Patient.last_name, ""),
+        " ",
+        func.coalesce(Patient.first_name, ""),
+    )
     results = base.filter(
         or_(
             Patient.first_name.ilike(f"%{q}%"),
             Patient.last_name.ilike(f"%{q}%"),
+            first_last.ilike(f"%{q}%"),
+            last_first.ilike(f"%{q}%"),
             Patient.medicare_number.ilike(f"%{q}%"),
             Patient.medicare_irn.ilike(f"%{q}%"),
             Patient.ihi_number.ilike(f"%{q}%"),
