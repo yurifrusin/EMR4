@@ -9,7 +9,7 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 13: Waiting Areas and Patient Details Foundation |
-| Integrated through | local integration, pending push |
+| Integrated through | `1c5cfe8` |
 | Status | Integrated locally and verified |
 | Last updated | 2026-06-21 |
 

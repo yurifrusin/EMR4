@@ -271,7 +271,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | this closeout commit — "Integrate Sprint 13 waiting area and patient details" |
+| **Latest integration commit** | `1c5cfe8` — "Integrate Sprint 13 waiting area and patient details" |
 
 ### Tag map (all tags pushed to remote)
 
