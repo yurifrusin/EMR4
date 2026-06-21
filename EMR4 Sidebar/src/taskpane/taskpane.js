@@ -1543,7 +1543,16 @@ function renderDuplicateCandidate(candidate) {
     p.medicare_number ? `Medicare: ${p.medicare_number}` : "",
     p.phone_mobile ? `Mobile: ${p.phone_mobile}` : "",
   ].filter(Boolean).join(" · ");
-  const reasons = (candidate.match_reasons || []).join(", ");
+  const reasonLabels = {
+    same_ihi: "same IHI",
+    same_medicare_card_and_irn: "same Medicare number and IRN",
+    same_medicare_card: "same Medicare number",
+    same_name_and_dob: "same name and date of birth",
+    same_phone_and_dob: "same phone and date of birth",
+  };
+  const reasons = (candidate.match_reasons || [])
+    .map(reason => reasonLabels[reason] || reason.replace(/_/g, " "))
+    .join(", ");
 
   return `
     <div class="new-patient-duplicate-item">
@@ -1562,7 +1571,7 @@ function showDuplicateWarning(candidates, body) {
     <div class="alert ${hardBlocked ? "alert-error" : "alert-warning"}">
       <strong>${hardBlocked ? "Duplicate patient blocked" : "Possible duplicate patient"}</strong><br>
       ${hardBlocked
-        ? "A strong identifier matches an existing patient record. Change the details and check again before creating a file."
+        ? "These details already appear to belong to an existing patient. Please check the Medicare/IRN or IHI before creating a new file."
         : "Review the existing record before creating a new file."}
       <div class="new-patient-duplicate-list">
         ${candidates.map(renderDuplicateCandidate).join("")}
@@ -1685,7 +1694,8 @@ function resetPatientEditSaveAction() {
 function populatePatientEditForm(patient) {
   PATIENT_EDIT_FIELDS.forEach(([id, field]) => {
     const el = document.getElementById(id);
-    if (el) el.value = patient?.[field] || "";
+    if (!el) return;
+    el.value = field === "ihi_number" ? formatIhi(patient?.[field]) : (patient?.[field] || "");
   });
 }
 
@@ -1771,10 +1781,17 @@ function describePatientEditHardDuplicate(candidates) {
   const first = candidates[0] || {};
   const patient = first.patient || {};
   const name = [patient.first_name, patient.last_name].filter(Boolean).join(" ") || "another patient";
-  const reasons = (first.match_reasons || [])
-    .filter(reason => HARD_DUPLICATE_REASONS.has(reason))
-    .join(", ");
-  return `Duplicate patient update blocked. ${name} already has the same strong identifier${reasons ? ` (${reasons})` : ""}. Change the details before saving.`;
+  const reasons = first.match_reasons || [];
+  if (reasons.includes("same_ihi")) {
+    return `This IHI is already used by ${name}. Please check the IHI before saving.`;
+  }
+  if (reasons.includes("same_medicare_card_and_irn")) {
+    return `This Medicare number and IRN are already used by ${name}. Please check the card number and IRN before saving.`;
+  }
+  if (reasons.includes("same_medicare_card")) {
+    return `This Medicare card is already used by ${name}. Family members can share a card, but each person should have their own IRN. Please check this patient's IRN before saving.`;
+  }
+  return `These details look like they already belong to ${name}. Please check them before saving.`;
 }
 
 function classifyPatientEditDuplicateCandidates(candidates, body) {
@@ -1803,14 +1820,12 @@ function describeSharedMedicareWarning(candidates) {
   const first = candidates[0] || {};
   const patient = first.patient || {};
   const name = [patient.first_name, patient.last_name].filter(Boolean).join(" ") || "another patient";
-  const sameSurname = currentPatient && patient.last_name
-    && String(patient.last_name).toLowerCase() === String(currentPatient.last_name || "").toLowerCase();
   const sameAddress = currentPatient && patient.address_line1 && currentPatient.address_line1
     && String(patient.address_line1).trim().toLowerCase() === String(currentPatient.address_line1).trim().toLowerCase();
-  const familyHint = sameSurname || sameAddress
-    ? " The surname/address suggests this may be a family Medicare card, so confirm the IRN is correct."
-    : " This may still be legitimate, but confirm the Medicare card and IRN before saving.";
-  return `${name} already has this Medicare card.${familyHint}`;
+  const familyHint = sameAddress
+    ? " This may be a family or household card, so please check this patient's IRN."
+    : " This can be correct for family members, but please check this patient's IRN before saving.";
+  return `${name} already uses this Medicare card.${familyHint}`;
 }
 
 function showPatientEditSharedMedicareWarning(candidates, body) {
@@ -1829,7 +1844,7 @@ function showPatientEditSharedMedicareWarning(candidates, body) {
   if (btn) {
     btn.disabled = false;
     btn.classList.remove("btn-error-state");
-    btn.textContent = "Save Anyway";
+    btn.textContent = "Save with this IRN";
     btn.onclick = confirmSavePatientDetails;
   }
 }

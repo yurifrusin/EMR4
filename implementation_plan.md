@@ -459,6 +459,11 @@ flowchart TD
   once the patient-file template is revised. Treat this as a document lifecycle task
   tied to reliable SharePoint/OneDrive document URL storage, document activation, and
   conflict-safe header rewriting.
+- Add a "possible family members" action to patient search/details. Use shared
+  Medicare card number and shared home address as the main signals; surname can be
+  displayed as context but should not be treated as a strong family signal. Shared
+  Medicare cards are expected in families, so the safety prompt should ask staff to
+  check the patient's IRN rather than treating every shared card as an error.
 - Consider AI-assisted OCR later for paper forms, but keep that separate from the
   initial patient-entry contract: the canonical outcome is structured patient data
   plus a generated Word patient file.
