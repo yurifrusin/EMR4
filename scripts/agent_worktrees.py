@@ -34,6 +34,7 @@ TASK_TEMPLATE = """# {task_id}
 | Status | queued |
 | Created | {created} |
 | Start Command | `python scripts\\agent_worktrees.py handin --agent {agent}` |
+| Plan Command | `python scripts\\agent_worktrees.py plan --agent {agent} --task {task_id} --summary "Short plan summary"` |
 | Submit Command | `python scripts\\agent_worktrees.py submit --agent {agent} --task {task_id} --commit-message "{commit_message}" --message "{submit_message}"` |
 
 ## Mission
@@ -55,14 +56,34 @@ TASK_TEMPLATE = """# {task_id}
 1. Run the start command above.
 2. Read the protocol alerts printed by `handin`.
 3. Read `AGENTS.md` and `orchestration/parallel_workstreams.md`.
-4. Work only inside the stated scope unless the user or Codex expands it.
-5. Do not merge to `master`.
-6. Do not move `handoff/current`.
-7. Run the verification listed below.
-8. Fill in the Completion Notes section below with files changed, verification run,
+4. Before editing project code, write an implementation plan and stop. The plan
+   must be shown in the agent GUI and captured for Codex with the plan command
+   above. Do not code until the user/Codex says `complete sprint task`.
+5. After plan approval, work only inside the stated scope unless the user or Codex
+   expands it.
+6. Do not merge to `master`.
+7. Do not move `handoff/current`.
+8. Run the verification listed below.
+9. Fill in the Completion Notes section below with files changed, verification run,
    and remaining risks. The submit command copies those notes into Codex's review
    packet automatically.
-9. Finish with the submit command above.
+10. Finish with the submit command above.
+
+## Implementation Plan Requirements
+
+Before coding, the implementation plan must include:
+
+- My Understanding
+- Intended Surface / Boundary
+- Out of Scope
+- Files I Expect To Edit
+- Implementation Steps
+- Visual / Behavioural Acceptance Checks
+- Risks / Ambiguities
+
+Pay special attention to visually loaded words such as cards, slots, stacking,
+panels, waiting room, diary grid, booking slot, and status. State exactly which
+surface is affected and which nearby surfaces must not change.
 
 ## Hard Stop Rules
 
@@ -98,6 +119,58 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+"""
+
+
+PLAN_TEMPLATE = """# plan-{agent}-{task}
+
+| Item | Value |
+|---|---|
+| To | codex |
+| From | {agent} |
+| Branch | `{branch}` |
+| Source Task | `{task}` |
+| Status | pending_plan_review |
+| Created | {created} |
+| Source HEAD | `{head}` |
+
+## Plan Summary
+
+{summary}
+
+## My Understanding
+
+{understanding}
+
+## Intended Surface / Boundary
+
+{surface}
+
+## Out Of Scope
+
+{out_of_scope}
+
+## Files I Expect To Edit
+
+{files}
+
+## Implementation Steps
+
+{steps}
+
+## Visual / Behavioural Acceptance Checks
+
+{acceptance}
+
+## Risks / Ambiguities
+
+{risks}
+
+## Codex Plan Review
+
+- Review result:
+- Required changes before implementation:
+- Approved to proceed: no
 """
 
 
@@ -354,7 +427,14 @@ def read_status_from_text(text: str) -> str:
 
 
 def is_actionable_status(status_value: str) -> bool:
-    return status_value in {"queued", "pending_review", "in_progress", "blocked", "suggested"}
+    return status_value in {
+        "queued",
+        "pending_review",
+        "pending_plan_review",
+        "in_progress",
+        "blocked",
+        "suggested",
+    }
 
 
 def update_task_status(path: Path, status_value: str) -> None:
@@ -788,6 +868,46 @@ _Codex/orchestrator to fill in: accepted, deferred, merged into an active sprint
     print("[note] A suggestion is not authorization to implement; Codex/orchestrator must triage it.")
 
 
+def submit_plan(args: argparse.Namespace) -> None:
+    repo = repo_root_for_cwd(Path.cwd().resolve())
+    created = local_timestamp()
+    head = git_stdout(["rev-parse", "--short", "HEAD"], cwd=repo)
+    branch = git_stdout(["branch", "--show-current"], cwd=repo, check=False) or "(detached)"
+    task_id = args.task
+    plan_id = args.plan_id or f"plan-{args.agent}-{task_id}"
+
+    source_task = inbox_dir(args.agent, repo) / f"{task_id}.md"
+    if not source_task.exists():
+        raise SystemExit(f"Source task not found: {source_task.relative_to(repo)}")
+
+    target_dir = inbox_dir("codex", repo)
+    target_dir.mkdir(parents=True, exist_ok=True)
+    path = target_dir / f"{plan_id}.md"
+    if path.exists() and not args.force:
+        raise SystemExit(f"Plan already exists: {path.relative_to(repo)}. Use --force to overwrite.")
+
+    plan_text = PLAN_TEMPLATE.format(
+        agent=args.agent,
+        task=task_id,
+        branch=branch,
+        created=created,
+        head=head,
+        summary=args.summary.strip() or "Not supplied.",
+        understanding=args.understanding.strip() or "Not supplied.",
+        surface=args.surface.strip() or "Not supplied.",
+        out_of_scope=args.out_of_scope.strip() or "Not supplied.",
+        files=args.files.strip() or "Not supplied.",
+        steps=args.steps.strip() or "Not supplied.",
+        acceptance=args.acceptance.strip() or "Not supplied.",
+        risks=args.risks.strip() or "Not supplied.",
+    )
+    path.write_text(plan_text, encoding="utf-8")
+    update_task_status(source_task, "pending_plan_review")
+    print(f"[ok] wrote Codex implementation-plan packet: {path.relative_to(repo)}")
+    print(f"[ok] {source_task.relative_to(repo)} -> pending_plan_review")
+    print("[next] Stop coding. Show the same plan in the GUI and wait for 'complete sprint task'.")
+
+
 def inbox(args: argparse.Namespace) -> None:
     files = task_files(args.agent)
     if not files:
@@ -1153,6 +1273,21 @@ def build_parser() -> argparse.ArgumentParser:
     suggest_parser.add_argument("--task-id", default="")
     suggest_parser.add_argument("--force", action="store_true")
     suggest_parser.set_defaults(func=suggest_task)
+
+    plan_parser = subparsers.add_parser("plan", help="Write a Codex inbox implementation plan before coding a task")
+    plan_parser.add_argument("--agent", choices=sorted(AGENTS), required=True)
+    plan_parser.add_argument("--task", required=True)
+    plan_parser.add_argument("--summary", default="")
+    plan_parser.add_argument("--understanding", default="")
+    plan_parser.add_argument("--surface", default="")
+    plan_parser.add_argument("--out-of-scope", default="")
+    plan_parser.add_argument("--files", default="")
+    plan_parser.add_argument("--steps", default="")
+    plan_parser.add_argument("--acceptance", default="")
+    plan_parser.add_argument("--risks", default="")
+    plan_parser.add_argument("--plan-id", default="")
+    plan_parser.add_argument("--force", action="store_true")
+    plan_parser.set_defaults(func=submit_plan)
 
     inbox_parser = subparsers.add_parser("inbox", help="List agent inbox task packets")
     inbox_parser.add_argument("--agent", choices=sorted(AGENTS))

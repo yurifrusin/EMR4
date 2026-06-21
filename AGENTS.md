@@ -168,6 +168,18 @@ When an agent starts a packet, it may mark it:
 python scripts\agent_worktrees.py claim --agent claude --task claude-short-title --status in_progress
 ```
 
+For non-trivial sprint work, workers must pass the implementation-plan gate
+before editing project code. After `handin`, write the plan, show it in the GUI,
+and capture it for Codex:
+
+```powershell
+python scripts\agent_worktrees.py plan --agent claude --task claude-short-title --summary "Short plan summary" --understanding "..." --surface "..." --out-of-scope "..." --files "..." --steps "..." --acceptance "..." --risks "..."
+```
+
+Then stop. Do not code until the user/Codex says **"complete sprint task"**.
+Plans must name the intended surface/boundary and any visually adjacent surfaces
+that must not change.
+
 If an agent notices a worthwhile follow-up that is outside its current packet,
 it should capture the idea for Codex instead of leaving it only in the app chat:
 

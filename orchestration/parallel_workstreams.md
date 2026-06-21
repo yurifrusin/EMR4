@@ -25,6 +25,10 @@ single source of truth for durable project state; this file tracks active branch
   the orchestrator before their work is considered part of the project.
 - Codex dispatches concrete task packets to `orchestration/agent_inbox/<agent>/`.
 - Agents read their next packet with `python scripts\agent_worktrees.py brief --agent <agent>`.
+- Non-trivial sprint work is plan-gated. After `handin`, workers create a Codex
+  plan packet with `python scripts\agent_worktrees.py plan --agent <agent>
+  --task <task> ...`, show the same plan in their GUI, then stop. Coding starts
+  only after the user/Codex says `complete sprint task`.
 - Agents capture off-scope follow-up ideas with
   `python scripts\agent_worktrees.py suggest-task --agent <agent> --title "..."`
   so Codex can triage them from `orchestration/agent_inbox/codex/`.

@@ -12,6 +12,11 @@ Read these before acting on remembered process details.
   files changed, verification run, and remaining risks. `submit` copies those notes
   into the Codex review packet automatically; do not leave Codex with a boilerplate
   review packet.
+- Plan-gated sprint rule: for non-trivial sprint packets, workers must write an
+  implementation plan before editing project code. Capture it with
+  `python scripts\agent_worktrees.py plan --agent <agent> --task <task> ...`,
+  show the same plan in the GUI, then stop. Do not code until the user/Codex says
+  `complete sprint task`.
 - If an agent identifies a useful follow-up outside its current packet, it must
   not leave that suggestion only in the app chat. Capture it for Codex with
   `python scripts\agent_worktrees.py suggest-task --agent <agent> --title "..."`.
