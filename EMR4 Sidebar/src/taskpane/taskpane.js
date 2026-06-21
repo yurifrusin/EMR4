@@ -1434,10 +1434,15 @@ function collectNewPatientPayload() {
     throw new Error("First name, last name, and date of birth are required.");
   }
   const medicareNumber = document.getElementById("np-medicare").value.trim() || null;
-  const medicareIrn = document.getElementById("np-medicare-irn").value.trim() || null;
+  let medicareIrn = document.getElementById("np-medicare-irn").value.trim() || null;
+  if (medicareNumber && !medicareIrn) {
+    medicareIrn = "1";
+    document.getElementById("np-medicare-irn").value = medicareIrn;
+  }
   if (Boolean(medicareNumber) !== Boolean(medicareIrn)) {
     throw new Error("Medicare number and IRN must be entered together.");
   }
+  const ihiNumber = normalizeIhiOrThrow(document.getElementById("np-ihi").value);
 
   return {
     first_name:       fn,
@@ -1446,7 +1451,7 @@ function collectNewPatientPayload() {
     sex:              document.getElementById("np-sex").value || null,
     medicare_number:  medicareNumber,
     medicare_irn:     medicareIrn,
-    ihi_number:       document.getElementById("np-ihi").value.trim() || null,
+    ihi_number:       ihiNumber,
     phone_mobile:     document.getElementById("np-phone").value.trim() || null,
     address_line1:    document.getElementById("np-address").value.trim() || null,
     address_suburb:   document.getElementById("np-suburb").value.trim() || null,
@@ -1491,6 +1496,43 @@ function describeApiError(detail, fallback) {
   } catch (_) {
     return fallback;
   }
+}
+
+function digitsOnly(value) {
+  return String(value || "").replace(/\D/g, "");
+}
+
+function formatIhi(value) {
+  const digits = digitsOnly(value).slice(0, 16);
+  return digits.replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+}
+
+function normalizeIhiOrThrow(value) {
+  const digits = digitsOnly(value);
+  if (!digits) return null;
+  if (digits.length !== 16) {
+    throw new Error("IHI number must contain exactly 16 digits.");
+  }
+  return digits;
+}
+
+function configureIdentityInputHelpers() {
+  ["np-ihi", "pe-ihi"].forEach(id => {
+    const input = document.getElementById(id);
+    if (!input) return;
+    input.addEventListener("input", () => {
+      input.classList.remove("input-warning");
+      const start = input.selectionStart;
+      input.value = formatIhi(input.value);
+      try { input.setSelectionRange(input.value.length, input.value.length); }
+      catch (_) { if (start !== null) input.setSelectionRange(start, start); }
+    });
+    input.addEventListener("blur", () => {
+      const digits = digitsOnly(input.value);
+      const invalid = Boolean(digits && digits.length !== 16);
+      input.classList.toggle("input-warning", invalid);
+    });
+  });
 }
 
 function renderDuplicateCandidate(candidate) {
@@ -1590,6 +1632,8 @@ const PATIENT_EDIT_FIELDS = [
   ["pe-postcode", "address_postcode"],
 ];
 
+let pendingPatientEditPayload = null;
+
 function setPatientEditResult(html) {
   const result = document.getElementById("patient-edit-result");
   if (result) result.innerHTML = html || "";
@@ -1628,6 +1672,16 @@ function setPatientEditCancelLabel(saved) {
   if (cancelBtn) cancelBtn.textContent = saved ? "Close" : "Cancel";
 }
 
+function resetPatientEditSaveAction() {
+  pendingPatientEditPayload = null;
+  const btn = document.getElementById("btn-pe-save");
+  if (!btn) return;
+  btn.disabled = false;
+  btn.classList.remove("btn-error-state");
+  btn.textContent = "Save Details";
+  btn.onclick = savePatientDetails;
+}
+
 function populatePatientEditForm(patient) {
   PATIENT_EDIT_FIELDS.forEach(([id, field]) => {
     const el = document.getElementById(id);
@@ -1648,10 +1702,16 @@ function collectPatientEditPayload() {
     return el ? (el.value.trim() || null) : null;
   };
   const medicareNumber = value("pe-medicare");
-  const medicareIrn = value("pe-medicare-irn");
+  let medicareIrn = value("pe-medicare-irn");
+  if (medicareNumber && !medicareIrn) {
+    medicareIrn = "1";
+    const irnInput = document.getElementById("pe-medicare-irn");
+    if (irnInput) irnInput.value = medicareIrn;
+  }
   if (Boolean(medicareNumber) !== Boolean(medicareIrn)) {
     throw new Error("Medicare number and IRN must be entered together.");
   }
+  const ihiNumber = normalizeIhiOrThrow(value("pe-ihi"));
 
   return {
     first_name: firstName,
@@ -1660,7 +1720,7 @@ function collectPatientEditPayload() {
     sex: value("pe-sex"),
     medicare_number: medicareNumber,
     medicare_irn: medicareIrn,
-    ihi_number: value("pe-ihi"),
+    ihi_number: ihiNumber,
     dva_number: value("pe-dva"),
     phone_mobile: value("pe-phone-mobile"),
     phone_home: value("pe-phone-home"),
@@ -1681,7 +1741,7 @@ function describePatientEditError(payload, fallback) {
   return describeApiError(detail, fallback);
 }
 
-async function findPatientEditHardDuplicates(body) {
+async function findPatientEditDuplicateCandidates(body) {
   const params = new URLSearchParams();
   [
     "first_name", "last_name", "date_of_birth", "medicare_number",
@@ -1717,6 +1777,63 @@ function describePatientEditHardDuplicate(candidates) {
   return `Duplicate patient update blocked. ${name} already has the same strong identifier${reasons ? ` (${reasons})` : ""}. Change the details before saving.`;
 }
 
+function classifyPatientEditDuplicateCandidates(candidates, body) {
+  const hard = [];
+  const sharedMedicare = [];
+  (Array.isArray(candidates) ? candidates : []).forEach(candidate => {
+    const patient = candidate.patient || {};
+    if (currentPatient && patient.id === currentPatient.id) return;
+    const reasons = candidate.match_reasons || [];
+    if (reasons.some(reason => HARD_DUPLICATE_REASONS.has(reason))) {
+      hard.push(candidate);
+    } else if (reasons.includes("same_medicare_card")) {
+      const existingIrn = String(patient.medicare_irn || "").trim();
+      const requestedIrn = String(body.medicare_irn || "").trim();
+      if (!existingIrn || !requestedIrn || existingIrn === requestedIrn) {
+        hard.push(candidate);
+      } else {
+        sharedMedicare.push(candidate);
+      }
+    }
+  });
+  return { hard, sharedMedicare };
+}
+
+function describeSharedMedicareWarning(candidates) {
+  const first = candidates[0] || {};
+  const patient = first.patient || {};
+  const name = [patient.first_name, patient.last_name].filter(Boolean).join(" ") || "another patient";
+  const sameSurname = currentPatient && patient.last_name
+    && String(patient.last_name).toLowerCase() === String(currentPatient.last_name || "").toLowerCase();
+  const sameAddress = currentPatient && patient.address_line1 && currentPatient.address_line1
+    && String(patient.address_line1).trim().toLowerCase() === String(currentPatient.address_line1).trim().toLowerCase();
+  const familyHint = sameSurname || sameAddress
+    ? " The surname/address suggests this may be a family Medicare card, so confirm the IRN is correct."
+    : " This may still be legitimate, but confirm the Medicare card and IRN before saving.";
+  return `${name} already has this Medicare card.${familyHint}`;
+}
+
+function showPatientEditSharedMedicareWarning(candidates, body) {
+  const message = describeSharedMedicareWarning(candidates);
+  pendingPatientEditPayload = body;
+  setPatientEditResult(`
+    <div class="alert alert-warning">
+      <strong>Shared Medicare card detected</strong><br>
+      ${escHtml(message)}
+      <div class="new-patient-duplicate-list">
+        ${candidates.map(renderDuplicateCandidate).join("")}
+      </div>
+    </div>`);
+  setPatientEditActionStatus("Shared Medicare card. Confirm IRN, then save again if correct.", "error");
+  const btn = document.getElementById("btn-pe-save");
+  if (btn) {
+    btn.disabled = false;
+    btn.classList.remove("btn-error-state");
+    btn.textContent = "Save Anyway";
+    btn.onclick = confirmSavePatientDetails;
+  }
+}
+
 window.showPatientEditForm = function showPatientEditForm() {
   if (!currentPatient) {
     setStatus("Load a patient before editing details.");
@@ -1728,6 +1845,7 @@ window.showPatientEditForm = function showPatientEditForm() {
   setPatientEditActionStatus("");
   setPatientEditFieldsDisabled(false);
   setPatientEditCancelLabel(false);
+  resetPatientEditSaveAction();
   populatePatientEditForm(currentPatient);
   updatePatientOverlayOffset();
   const panel = document.getElementById("patient-edit-panel");
@@ -1743,14 +1861,68 @@ window.closePatientEditForm = function closePatientEditForm() {
   const btn = document.getElementById("btn-pe-save");
   const cancelBtn = document.getElementById("btn-pe-cancel");
   if (btn) {
-    btn.disabled = false;
-    btn.classList.remove("btn-error-state");
-    btn.textContent = "Save Details";
+    resetPatientEditSaveAction();
   }
   if (cancelBtn) {
     cancelBtn.disabled = false;
     cancelBtn.textContent = "Cancel";
   }
+};
+
+async function performPatientDetailsSave(body) {
+  const patientId = currentPatient.id;
+  const btn = document.getElementById("btn-pe-save");
+  const cancelBtn = document.getElementById("btn-pe-cancel");
+  btn.disabled = true;
+  btn.classList.remove("btn-error-state");
+  btn.textContent = "Saving...";
+  if (cancelBtn) cancelBtn.disabled = true;
+  setPatientEditFieldsDisabled(true);
+  setPatientEditResult("");
+  setPatientEditActionStatus("");
+
+  try {
+    const res = await apiFetch(`/patients/${patientId}`, {
+      method: "PUT",
+      body: JSON.stringify(body),
+    });
+    if (!res) return;
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(describePatientEditError(data, `Server error ${res.status}`));
+    }
+
+    const data = await res.json();
+    currentPatient = data;
+    pendingPatientEditPayload = null;
+    setBanner(currentPatient);
+    updateOpenFileButton();
+    updatePatientEditButton();
+    populatePatientEditForm(currentPatient);
+    setPatientEditResult(`<div class="alert alert-success">Patient details saved.</div>`);
+    setPatientEditActionStatus("Saved.", "success");
+    setPatientEditCancelLabel(true);
+    setStatus("Patient details saved.");
+  } catch (e) {
+    const message = String(e.message || e);
+    setPatientEditCancelLabel(false);
+    setPatientEditResult(`<div class="alert alert-error">${escHtml(message)}</div>`);
+    markPatientEditSaveFailed(message);
+  } finally {
+    setPatientEditFieldsDisabled(false);
+    if (!btn.classList.contains("btn-error-state")) {
+      resetPatientEditSaveAction();
+    }
+    if (cancelBtn) cancelBtn.disabled = false;
+  }
+}
+
+window.confirmSavePatientDetails = async function confirmSavePatientDetails() {
+  if (!pendingPatientEditPayload) {
+    savePatientDetails();
+    return;
+  }
+  await performPatientDetailsSave(pendingPatientEditPayload);
 };
 
 window.savePatientDetails = async function savePatientDetails() {
@@ -1771,55 +1943,20 @@ window.savePatientDetails = async function savePatientDetails() {
     return;
   }
 
-  const patientId = currentPatient.id;
-  const btn = document.getElementById("btn-pe-save");
-  const cancelBtn = document.getElementById("btn-pe-cancel");
-  btn.disabled = true;
-  btn.classList.remove("btn-error-state");
-  btn.textContent = "Saving...";
-  if (cancelBtn) cancelBtn.disabled = true;
-  setPatientEditFieldsDisabled(true);
-  setPatientEditResult("");
-  setPatientEditActionStatus("");
-
   try {
-    const hardDuplicates = await findPatientEditHardDuplicates(body);
-    if (hardDuplicates.length) {
-      throw new Error(describePatientEditHardDuplicate(hardDuplicates));
+    const candidates = await findPatientEditDuplicateCandidates(body);
+    const { hard, sharedMedicare } = classifyPatientEditDuplicateCandidates(candidates, body);
+    if (hard.length) throw new Error(describePatientEditHardDuplicate(hard));
+    if (sharedMedicare.length) {
+      showPatientEditSharedMedicareWarning(sharedMedicare, body);
+      return;
     }
-
-    const res = await apiFetch(`/patients/${patientId}`, {
-      method: "PUT",
-      body: JSON.stringify(body),
-    });
-    if (!res) return;
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      throw new Error(describePatientEditError(data, `Server error ${res.status}`));
-    }
-
-    const data = await res.json();
-    currentPatient = data;
-    setBanner(currentPatient);
-    updateOpenFileButton();
-    updatePatientEditButton();
-    populatePatientEditForm(currentPatient);
-    setPatientEditResult(`<div class="alert alert-success">Patient details saved.</div>`);
-    setPatientEditActionStatus("Saved.", "success");
-    setPatientEditCancelLabel(true);
-    setStatus("Patient details saved.");
+    await performPatientDetailsSave(body);
   } catch (e) {
     const message = String(e.message || e);
     setPatientEditCancelLabel(false);
     setPatientEditResult(`<div class="alert alert-error">${escHtml(message)}</div>`);
     markPatientEditSaveFailed(message);
-  } finally {
-    setPatientEditFieldsDisabled(false);
-    if (!btn.classList.contains("btn-error-state")) {
-      btn.disabled = false;
-      btn.textContent = "Save Details";
-    }
-    if (cancelBtn) cancelBtn.disabled = false;
   }
 };
 
@@ -2161,6 +2298,7 @@ Office.onReady(info => {
   document.getElementById("btn-new-patient").onclick = showNewPatientForm;
   document.getElementById("btn-edit-patient").onclick = showPatientEditForm;
   document.getElementById("btn-diary").onclick = openDiary;
+  configureIdentityInputHelpers();
   window.addEventListener("resize", updatePatientOverlayOffset);
 
   document.getElementById("btn-search-patient").onclick = () => {

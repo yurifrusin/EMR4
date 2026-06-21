@@ -249,6 +249,8 @@ html, body {
   outline: none;
   transition: border-color 0.15s;
 }
+.input::placeholder { color: #c4c9d1; opacity: 1; }
+.input.input-warning { border-color: var(--orange); background: #fff7e6; }
 .input:focus { border-color: var(--blue-mid); box-shadow: 0 0 0 2px rgba(0,80,160,0.12); }
 
 textarea.input { resize: vertical; line-height: 1.5; }

@@ -45,7 +45,11 @@ reviewed, integrated, verified, pushed, and audited.
 - User-review hotfix: Patient Details save failures now show feedback at the
   action bar as well as above the form, and the Save Details button briefly
   enters a red Not Saved state.
-- Updated diary assets to `v=64` and taskpane assets to `v=49`.
+- User-review hotfix: Patient Details now distinguishes exact duplicate strong
+  identifiers from shared Medicare-card warnings, requires explicit confirmation
+  for same-card/different-IRN saves, defaults blank IRN to `1` when a Medicare
+  number is entered, formats IHI entry, and warns on non-16-digit IHI values.
+- Updated diary assets to `v=64` and taskpane assets to `v=50`.
 
 ## Recommended User Review
 
