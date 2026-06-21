@@ -1597,6 +1597,27 @@ function setPatientEditResult(html) {
   if (result) result.innerHTML = html || "";
 }
 
+function setPatientEditActionStatus(message, tone = "") {
+  const statusEl = document.getElementById("patient-edit-action-status");
+  if (!statusEl) return;
+  statusEl.textContent = message || "";
+  statusEl.className = message ? `action-status ${tone}` : "action-status hidden";
+}
+
+function markPatientEditSaveFailed(message) {
+  const btn = document.getElementById("btn-pe-save");
+  setPatientEditActionStatus(message || "Not saved. Review the message above.", "error");
+  if (!btn) return;
+  btn.disabled = true;
+  btn.classList.add("btn-error-state");
+  btn.textContent = "Not Saved";
+  window.setTimeout(() => {
+    btn.disabled = false;
+    btn.classList.remove("btn-error-state");
+    btn.textContent = "Save Details";
+  }, 1600);
+}
+
 function setPatientEditFieldsDisabled(disabled) {
   PATIENT_EDIT_FIELDS.forEach(([id]) => {
     const el = document.getElementById(id);
@@ -1706,6 +1727,7 @@ window.showPatientEditForm = function showPatientEditForm() {
   document.getElementById("new-patient-panel")?.classList.add("hidden");
   closePatientSearchPanel();
   setPatientEditResult("");
+  setPatientEditActionStatus("");
   setPatientEditFieldsDisabled(false);
   setPatientEditCancelLabel(false);
   populatePatientEditForm(currentPatient);
@@ -1719,10 +1741,12 @@ window.closePatientEditForm = function closePatientEditForm() {
   document.getElementById("patient-edit-panel").classList.add("hidden");
   setPatientEditFieldsDisabled(false);
   setPatientEditResult("");
+  setPatientEditActionStatus("");
   const btn = document.getElementById("btn-pe-save");
   const cancelBtn = document.getElementById("btn-pe-cancel");
   if (btn) {
     btn.disabled = false;
+    btn.classList.remove("btn-error-state");
     btn.textContent = "Save Details";
   }
   if (cancelBtn) {
@@ -1733,7 +1757,9 @@ window.closePatientEditForm = function closePatientEditForm() {
 
 window.savePatientDetails = async function savePatientDetails() {
   if (!currentPatient) {
-    setPatientEditResult(`<div class="alert alert-error">Load a patient before editing details.</div>`);
+    const message = "Load a patient before editing details.";
+    setPatientEditResult(`<div class="alert alert-error">${message}</div>`);
+    markPatientEditSaveFailed(message);
     return;
   }
 
@@ -1741,7 +1767,9 @@ window.savePatientDetails = async function savePatientDetails() {
   try {
     body = collectPatientEditPayload();
   } catch (e) {
-    setPatientEditResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
+    const message = String(e.message || e);
+    setPatientEditResult(`<div class="alert alert-error">${escHtml(message)}</div>`);
+    markPatientEditSaveFailed(message);
     return;
   }
 
@@ -1749,10 +1777,12 @@ window.savePatientDetails = async function savePatientDetails() {
   const btn = document.getElementById("btn-pe-save");
   const cancelBtn = document.getElementById("btn-pe-cancel");
   btn.disabled = true;
+  btn.classList.remove("btn-error-state");
   btn.textContent = "Saving...";
   if (cancelBtn) cancelBtn.disabled = true;
   setPatientEditFieldsDisabled(true);
   setPatientEditResult("");
+  setPatientEditActionStatus("");
 
   try {
     const hardDuplicates = await findPatientEditHardDuplicates(body);
@@ -1777,15 +1807,20 @@ window.savePatientDetails = async function savePatientDetails() {
     updatePatientEditButton();
     populatePatientEditForm(currentPatient);
     setPatientEditResult(`<div class="alert alert-success">Patient details saved.</div>`);
+    setPatientEditActionStatus("Saved.", "success");
     setPatientEditCancelLabel(true);
     setStatus("Patient details saved.");
   } catch (e) {
+    const message = String(e.message || e);
     setPatientEditCancelLabel(false);
-    setPatientEditResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
+    setPatientEditResult(`<div class="alert alert-error">${escHtml(message)}</div>`);
+    markPatientEditSaveFailed(message);
   } finally {
     setPatientEditFieldsDisabled(false);
-    btn.disabled = false;
-    btn.textContent = "Save Details";
+    if (!btn.classList.contains("btn-error-state")) {
+      btn.disabled = false;
+      btn.textContent = "Save Details";
+    }
     if (cancelBtn) cancelBtn.disabled = false;
   }
 };
@@ -2187,7 +2222,16 @@ Office.onReady(info => {
   // Auto-lock when the GP types in the consult panel
   document.addEventListener("input", e => {
     if (e.target.tagName === "INPUT" && e.target.closest("#panel-consult")) autoLock();
-    if (e.target.closest("#patient-edit-panel")) setPatientEditCancelLabel(false);
+    if (e.target.closest("#patient-edit-panel")) {
+      setPatientEditCancelLabel(false);
+      setPatientEditActionStatus("");
+      const saveBtn = document.getElementById("btn-pe-save");
+      if (saveBtn) {
+        saveBtn.classList.remove("btn-error-state");
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Save Details";
+      }
+    }
   });
 
   // ── Resume session or show login ─────────────────────────

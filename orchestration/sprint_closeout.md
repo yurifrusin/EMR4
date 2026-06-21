@@ -42,7 +42,10 @@ reviewed, integrated, verified, pushed, and audited.
   edits.
 - User-review hotfix: New Patient, Patient Details, and Search are now mutually
   exclusive taskpane workflows, so stale search UI cannot sit above an open form.
-- Updated diary assets to `v=64` and taskpane assets to `v=48`.
+- User-review hotfix: Patient Details save failures now show feedback at the
+  action bar as well as above the form, and the Save Details button briefly
+  enters a red Not Saved state.
+- Updated diary assets to `v=64` and taskpane assets to `v=49`.
 
 ## Recommended User Review
 
