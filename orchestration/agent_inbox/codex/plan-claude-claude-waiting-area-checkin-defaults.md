@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-waiting-area-checkin-defaults` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-22 15:58 +1000 |
 | Source HEAD | `d8f3672` |
 
@@ -44,6 +44,6 @@ app/schemas/appointments.py (add AppointmentCheckinDefaults with suggested_waiti
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Approved and implemented by Claude; integrated as part of Sprint 15.
+- Required changes before implementation: none
+- Approved to proceed: yes

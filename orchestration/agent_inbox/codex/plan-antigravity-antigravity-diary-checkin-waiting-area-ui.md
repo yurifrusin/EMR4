@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-checkin-waiting-area-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-22 15:58 +1000 |
 | Source HEAD | `d8f3672` |
 
@@ -44,6 +44,6 @@ docs/diary/diary.html, docs/diary/diary.css, docs/diary/diary.js
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Implemented by Antigravity and integrated as part of Sprint 15. Note: Antigravity auto-proceeded after plan; protocol alerts were tightened afterward so auto-proceed is explicitly not approval.
+- Required changes before implementation: none after diff review; future agents must still wait for explicit approval
+- Approved to proceed: yes
