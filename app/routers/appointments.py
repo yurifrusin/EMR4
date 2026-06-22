@@ -3,6 +3,7 @@ from datetime import date as date_type, datetime, time, timedelta, timezone
 from typing import Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from fastapi import APIRouter, Depends, HTTPException, Query, status
+from sqlalchemy import or_
 from sqlalchemy.orm import Session, joinedload
 
 from app.dependencies import get_db, get_current_user, require_role
@@ -157,6 +158,26 @@ def _ensure_location(location_id: Optional[uuid.UUID], practice_id: uuid.UUID, d
         raise HTTPException(status_code=404, detail="Practice location not found")
 
 
+def _single_active_location(practice_id: uuid.UUID, db: Session) -> bool:
+    return (
+        db.query(PracticeLocation.id)
+        .filter(
+            PracticeLocation.practice_id == practice_id,
+            PracticeLocation.is_active == True,
+        )
+        .count()
+        <= 1
+    )
+
+
+def _filter_by_location(q, location_id: Optional[uuid.UUID], practice_id: uuid.UUID, db: Session):
+    if not location_id:
+        return q
+    if _single_active_location(practice_id, db):
+        return q.filter(or_(Appointment.location_id == location_id, Appointment.location_id.is_(None)))
+    return q.filter(Appointment.location_id == location_id)
+
+
 def _ensure_waiting_area(waiting_area_id: Optional[uuid.UUID], practice_id: uuid.UUID, db: Session) -> None:
     if not waiting_area_id:
         return
@@ -187,6 +208,7 @@ def _find_conflicting_appointment(
     appointment_date: date_type,
     start_time_local: time,
     duration_minutes: int,
+    location_id: Optional[uuid.UUID] = None,
     exclude_id: Optional[uuid.UUID] = None,
 ) -> Optional[Appointment]:
     q = db.query(Appointment).filter(
@@ -195,6 +217,7 @@ def _find_conflicting_appointment(
         Appointment.appointment_date == appointment_date,
         Appointment.status.notin_(NON_BLOCKING_STATUSES),
     )
+    q = _filter_by_location(q, location_id, practice_id, db)
     if exclude_id:
         q = q.filter(Appointment.id != exclude_id)
 
@@ -217,10 +240,18 @@ def _raise_if_conflict(
     appointment_date: date_type,
     start_time_local: time,
     duration_minutes: int,
+    location_id: Optional[uuid.UUID] = None,
     exclude_id: Optional[uuid.UUID] = None,
 ) -> None:
     conflict = _find_conflicting_appointment(
-        db, practice_id, practitioner_id, appointment_date, start_time_local, duration_minutes, exclude_id
+        db,
+        practice_id,
+        practitioner_id,
+        appointment_date,
+        start_time_local,
+        duration_minutes,
+        location_id=location_id,
+        exclude_id=exclude_id,
     )
     if conflict:
         raise HTTPException(
@@ -319,8 +350,7 @@ def list_appointments(
         q = q.filter(Appointment.patient_id == patient_id)
     if status_filter:
         q = q.filter(Appointment.status == status_filter)
-    if location_id:
-        q = q.filter(Appointment.location_id == location_id)
+    q = _filter_by_location(q, location_id, practice_id, db)
     return q.order_by(Appointment.appointment_date, Appointment.start_time_local).all()
 
 
@@ -356,6 +386,7 @@ def create_appointment(
         appointment_date,
         start_time_local,
         values["duration_minutes"],
+        location_id=body.location_id,
     )
 
     appt = Appointment(
@@ -415,8 +446,7 @@ def get_waiting_room(
         q = q.filter(Appointment.practitioner_id == practitioner_id)
     if waiting_area_id:
         q = q.filter(Appointment.waiting_area_id == waiting_area_id)
-    if location_id:
-        q = q.filter(Appointment.location_id == location_id)
+    q = _filter_by_location(q, location_id, practice_id, db)
     return q.order_by(Appointment.queue_position.nullslast(), Appointment.start_time_local).all()
 
 
@@ -488,6 +518,7 @@ def update_appointment(
             appointment_date,
             start_time_local,
             duration_minutes,
+            location_id=location_id,
             exclude_id=appointment_id,
         )
 

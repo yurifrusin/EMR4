@@ -27,6 +27,10 @@ reviewed, integrated, verified, pushed, and audited.
 - The live diary location selector now consumes `/diary/locations`, persists the
   active physical location, and passes `location_id` to live diary reads and new
   booking creation. Smoke mode still offers Main/North/East mock locations.
+- Hotfix: appointment location filtering and conflict detection now agree for
+  legacy appointments with no `location_id`. In a one-location practice, those
+  older appointments are treated as belonging to the only active location so
+  they are visible in the diary instead of becoming hidden conflicts.
 - Added `orchestration/location_diary_view_review.md` to keep practice,
   physical location, room/resource, waiting area, diary view/page group,
   booking slot, appointment status, patient identity, and booking confirmation
@@ -45,12 +49,15 @@ After this is pushed/deployed, review the live diary:
    still loads today's appointments, roster, and Waiting Room data.
 3. Create one new booking in Room 1. Confirm it saves and remains visible after
    refresh. This checks that new bookings inherit the active `location_id`.
-4. In smoke mode (`?smoke=true`), switch between Main Clinic, North Branch, and
+4. If a conflict warning names an unexpected appointment time, check that the
+   conflicting appointment is visible in the filtered diary. Legacy unscoped
+   dev bookings should no longer be hidden in a one-location practice.
+5. In smoke mode (`?smoke=true`), switch between Main Clinic, North Branch, and
    East Specialty Suite. Confirm grid appointments and Waiting Room side-panel
    cards filter by the selected mock location.
-5. Confirm the one-location live case does not feel like a new admin workflow:
+6. Confirm the one-location live case does not feel like a new admin workflow:
    the location should be visible context, not a busy multi-site control.
-6. Confirm existing Waiting Room area tabs and sections still behave as before.
+7. Confirm existing Waiting Room area tabs and sections still behave as before.
 
 ## Not Required Before Moving On
 
@@ -102,6 +109,8 @@ After this is pushed/deployed, review the live diary:
 - The `pytest_asyncio` loop-scope deprecation warning remains.
 - Do not run two pytest processes against the same `gp_pms_test` database in
   parallel; concurrent runs can collide during fixture setup/teardown.
+- Future data cleanup should explicitly backfill or review old appointments
+  where `location_id` is null before multi-location production use.
 
 ## Verification
 
@@ -113,6 +122,11 @@ Codex/orchestrator verification for Sprint 16:
 - `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_waiting_area_checkin_defaults.py tests\test_waiting_area_checkin_contract.py tests\test_waiting_area_contract.py tests\test_appointment_status_mutations.py tests\test_diary_template.py tests\test_diary_roster.py -q --tb=short -p no:randomly` -> 82 passed, 1 warning
 - `.venv\Scripts\alembic.exe upgrade head` -> applied `g7h8i9j0k1l2`
 - `.venv\Scripts\python.exe seed.py` -> created/linked the dev practice location
+- `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py` -> passed
+- `.venv\Scripts\python.exe -m pytest tests\test_booking_create_edit.py -q --tb=short -p no:randomly` -> 31 passed, 1 warning
+- `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py -q --tb=short -p no:randomly` -> 18 passed, 1 warning
+- Live API spot-check: `GET /appointments?...&location_id=<Main Street Surgery>`
+  now includes legacy null-location bookings such as the `11:35` dev booking.
 
 ## Recommended Next Direction
 

@@ -272,6 +272,47 @@ def test_appointments_location_filter(
     assert len(locs) == 1
 
 
+def test_appointments_single_location_includes_legacy_unscoped(
+    client, db, practice, practitioner, patient, appt_type, gp_user, schedule
+):
+    loc = _make_location(db, practice, name="Main Clinic")
+    legacy = _make_appt(
+        db, practice, practitioner, patient, appt_type, gp_user,
+        hour=11, minute=35, location=None,
+    )
+    db.flush()
+
+    token = make_token(gp_user)
+    r = client.get(
+        f"/api/v1/appointments?location_id={loc.id}",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert r.status_code == 200
+    ids = [a["id"] for a in r.json()]
+    assert str(legacy.id) in ids
+
+
+def test_appointments_multi_location_hides_legacy_unscoped(
+    client, db, practice, practitioner, patient, appt_type, gp_user, schedule
+):
+    loc_a = _make_location(db, practice, name="Clinic A")
+    _make_location(db, practice, name="Clinic B")
+    legacy = _make_appt(
+        db, practice, practitioner, patient, appt_type, gp_user,
+        hour=11, minute=35, location=None,
+    )
+    db.flush()
+
+    token = make_token(gp_user)
+    r = client.get(
+        f"/api/v1/appointments?location_id={loc_a.id}",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert r.status_code == 200
+    ids = [a["id"] for a in r.json()]
+    assert str(legacy.id) not in ids
+
+
 def test_appointments_cross_practice_location(
     client, db, practice, practice_b, practitioner, patient, appt_type, gp_user, schedule
 ):
@@ -287,6 +328,61 @@ def test_appointments_cross_practice_location(
 
 
 # ─── GET /appointments/waiting-room ───────────────────────────────────────────
+
+def test_create_single_location_conflicts_with_legacy_unscoped(
+    client, db, practice, practitioner, patient, appt_type, gp_user, schedule
+):
+    loc = _make_location(db, practice, name="Main Clinic")
+    _make_appt(
+        db, practice, practitioner, patient, appt_type, gp_user,
+        hour=11, minute=35, location=None,
+    )
+    db.flush()
+
+    token = make_token(gp_user)
+    r = client.post(
+        "/api/v1/appointments",
+        json={
+            "patient_id": str(patient.id),
+            "practitioner_id": str(practitioner.id),
+            "appointment_type_id": str(appt_type.id),
+            "appointment_date": TUESDAY.isoformat(),
+            "start_time_local": "11:45:00",
+            "duration_minutes": 30,
+            "location_id": str(loc.id),
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert r.status_code == 409
+
+
+def test_create_allows_same_practitioner_at_different_locations(
+    client, db, practice, practitioner, patient, appt_type, gp_user, schedule
+):
+    loc_a = _make_location(db, practice, name="Clinic A")
+    loc_b = _make_location(db, practice, name="Clinic B")
+    _make_appt(
+        db, practice, practitioner, patient, appt_type, gp_user,
+        hour=11, minute=35, location=loc_b,
+    )
+    db.flush()
+
+    token = make_token(gp_user)
+    r = client.post(
+        "/api/v1/appointments",
+        json={
+            "patient_id": str(patient.id),
+            "practitioner_id": str(practitioner.id),
+            "appointment_type_id": str(appt_type.id),
+            "appointment_date": TUESDAY.isoformat(),
+            "start_time_local": "11:45:00",
+            "duration_minutes": 30,
+            "location_id": str(loc_a.id),
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert r.status_code == 201
+
 
 def test_waiting_room_location_filter(
     client, db, practice, practitioner, patient, appt_type, gp_user, schedule
