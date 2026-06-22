@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 13 - waiting-area/resource and patient-edit foundations integrated locally |
-| **Next recommended work** | Push Sprint 13 closeout, run user review for waiting-area tabs and Patient Details, then continue receptionist workflow foundations before Bernie |
+| **Current active track** | Sprint 14 - plan-gated receptionist workflow foundations dispatched |
+| **Next recommended work** | Launch Sprint 14 plan gate: external workers may `handin`; review plans before authorising `complete sprint task` |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -50,6 +50,11 @@ before realigning `master`, `handoff/current`, and the durable mirrors.
   manually push to `master` or `handoff/current`.
 - Only Codex acting as orchestrator advances `master` and `handoff/current` in
   parallel mode unless the user explicitly says otherwise.
+- GitHub Pages deployment is part of the integration surface. Deploy Pages from
+  canonical `master` only. Do not manually deploy worker mirror branches
+  (`codex/current`, `claude/current`, `antigravity/current`) unless Codex has
+  just confirmed they are aligned to `master`; a later worker-branch Pages
+  deployment can overwrite the live artifact with stale taskpane/diary assets.
 
 ### One-time setup
 
@@ -283,7 +288,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `1c5cfe8` — "Integrate Sprint 13 waiting area and patient details" |
+| **Latest integration commit** | `9618dc4` — "Document taskpane version checks" |
 
 ### Tag map (all tags pushed to remote)
 
@@ -346,6 +351,11 @@ agent session state.
 
 ### Phase 1.5 ✅ Command Centre & Scribe + document anchoring (this work)
 - **Hosting**: taskpane static files served from **GitHub Pages** (`docs/`), API calls go to **ngrok** (`property-cinch-backfield.ngrok-free.dev`). `sync_taskpane.py` copies `EMR4 Sidebar/src/taskpane/*` → `docs/taskpane/` and patches BACKEND_URL/NGROK_URL. Run it after every taskpane edit, then push. Cache-bust via `?v=N` on css/js in taskpane.html / command-centre.html — increment on every deploy.
+- **GitHub Pages deployment discipline**: Pages must deploy canonical `master`.
+  Worker mirror branches can trigger Pages deployments from stale artifacts if
+  manually selected; deploy them only immediately after Codex realigns mirrors to
+  `master`, then redeploy `master` last. Verify the live taskpane version with the
+  console checks in `docs/emr4-development-environment-dummys-guide.md`.
 - **Command Centre** (`docs/command-centre/`): separate **window** via `displayDialogAsync` (NOT iframe — iframe denies microphone). Hosts the AI Scribe (record → Gemini transcribe → SOAP note review → insert). Token + patient delivered via `?pid=` URL param and `messageChild` handshake. This is the screen-real-estate surface for future Billing/Results Review — see memory `project_two_surface_architecture`.
 - **Document anchoring (Dr Shera method)** — patient `.docx` has Heading 1 section titles (Contemporaneous Notes, Vaccinations, …); consult entries are Normal+bold lines `DD-MM-YYYY  Name  H[:MM] AM/PM  N years old.` under Contemporaneous Notes (newest on top). `getCurrentConsultText()` scopes AI to ONLY the current consult (planted header → previous consult header / next Heading 1). See memory `project_document_anchoring`.
 - **Start Consultation** button + **Ctrl+Alt+N** (shared runtime, ExtendedOverrides/shortcuts.json, manifest v1.1.0.0) plants the dated header under Contemporaneous Notes and bookmarks it (`EMR4_NOTE_POINT`); notes/SOAP insert right after it. **Was Ctrl+Shift+N — changed because Chrome reserves that for Incognito and swallows it before Word sees it.** Avoid Chrome-reserved combos for any future shortcut (e.g. the planned Parse & Lock Ctrl+Shift+B toggles Chrome's bookmarks bar — pick a Ctrl+Alt / Alt+Shift combo instead).

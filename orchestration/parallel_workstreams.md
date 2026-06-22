@@ -124,13 +124,64 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 14: Plan-Gated Receptionist Workflow Foundations
+
+| Item | Value |
+|---|---|
+| Status | Plan gate dispatched |
+| Launch Gate | Pending worker `handin` and implementation-plan packets |
+| Implementation Gate | Workers must stop after plan submission until user/Codex says `complete sprint task` |
+| Theme | Clarify receptionist workflow semantics before further diary/Waiting Room coding or Bernie tools |
+
+### Workstream AO - Waiting Area Check-In Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-waiting-area-checkin-contract.md` |
+| Goal | Plan, then after approval implement, the backend contract for assigning waiting areas during check-in and status transitions |
+| In Scope | Appointment status/update semantics, waiting-area assignment, practice scoping, patient identity/status separation, focused backend tests |
+| Out of Scope | Diary frontend, taskpane, room admin UI, Bernie implementation, SMS/reminder confirmation, billing/finalisation locking |
+| Verification | Plan packet first; after approval, focused pytest and backend py_compile |
+| Plan Gate | Required before coding |
+| Status | queued |
+
+### Workstream AP - Diary Waiting Room UX Clarity
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-waiting-room-ux-clarity.md` |
+| Goal | Plan, then after approval implement, Waiting Room side-panel clarity improvements for receptionist workflow |
+| In Scope | `docs/diary/` Waiting Room panel only: area tabs, panel counts, card density/stacking inside the side panel, action wording |
+| Out of Scope | Diary grid appointment positioning, booking slot geometry, booking modal semantics, backend, taskpane, drag/drop/resize, Bernie |
+| Verification | Plan packet first; after approval, `node --check docs\diary\diary.js`, `git diff --check`, visual acceptance notes |
+| Plan Gate | Required before coding |
+| Status | queued |
+
+### Workstream AQ - Resource Admin and Bernie Tool Design
+
+| Item | Value |
+|---|---|
+| Owner | Codex |
+| Branch | `codex/resource-admin-bernie-tool-design` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-resource-admin-bernie-tool-design.md` |
+| Goal | Plan the resource/admin foundation and safe Bernie tool boundaries needed before supervised receptionist assistance |
+| In Scope | Design docs, implementation-plan notes, future endpoint/tool boundaries, room/resource/waiting-area terminology |
+| Out of Scope | Production UI, autonomous Bernie actions, LLM agent runtime, schema migration unless plan-approved, drag/drop/resize |
+| Verification | Plan packet first; after approval, docs diff check or explicit code checks if implementation is approved |
+| Plan Gate | Required before coding |
+| Status | queued |
+
 ## Sprint 13: Waiting Areas, Patient Editing, and Bernie Prerequisites
 
 | Item | Value |
 |---|---|
-| Status | In progress |
+| Status | Integrated |
 | Launch Gate | Complete |
-| Integration Gate | Pending all active sprint agents submitting or being explicitly stood down |
+| Integration Gate | Complete |
 | Theme | Build the room/waiting-area and patient-edit foundations Bernie will need later, without starting autonomous copilot work yet |
 
 ### Workstream AL - Waiting Area Resource Contract

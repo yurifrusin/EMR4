@@ -9,9 +9,9 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 13: Waiting Areas and Patient Details Foundation |
-| Integrated through | `1c5cfe8` |
-| Status | Integrated locally and verified |
-| Last updated | 2026-06-21 |
+| Integrated through | `9618dc4` |
+| Status | Integrated, pushed, user-reviewed, and verified |
+| Last updated | 2026-06-22 |
 
 ## What Changed
 
@@ -49,7 +49,15 @@ reviewed, integrated, verified, pushed, and audited.
   identifiers from shared Medicare-card warnings, requires explicit confirmation
   for same-card/different-IRN saves, defaults blank IRN to `1` when a Medicare
   number is entered, formats IHI entry, and warns on non-16-digit IHI values.
-- Updated diary assets to `v=64` and taskpane assets to `v=50`.
+- User-review hotfix: duplicate patient messages now use plain receptionist-facing
+  language across both frontend preflight and backend API conflict paths.
+- User-review hotfix: Patient Details keeps IHI numbers grouped when reopening,
+  and the dev database was cleaned to one record per duplicate name/DOB group with
+  plausible shared-card IRNs for family-style testing.
+- User-review hotfix: documented live taskpane version checks in the development
+  guide and added a minimal `docs/index.html`/`.nojekyll` so the GitHub Pages root
+  URL is less confusing.
+- Updated diary assets to `v=64` and taskpane assets to `v=53`.
 
 ## Recommended User Review
 
@@ -70,6 +78,9 @@ reviewed, integrated, verified, pushed, and audited.
 9. Confirm New Patient and Search overlays still open and close normally after
    using Patient Details.
 
+User review result: passed after GitHub Pages was redeployed to the current
+taskpane asset version.
+
 ## Not Required Before Moving On
 
 - No drag/drop/resize appointment testing is required yet.
@@ -85,6 +96,10 @@ reviewed, integrated, verified, pushed, and audited.
 - Patient Details is a foundation slice. Add stronger validation, Medicare IRN
   polish, IHI/Medicare verification hooks, duplicate-candidate review, and a
   proper shared demographic model before relying on it in routine use.
+- GitHub Pages deployment should be kept to canonical `master`. During this
+  sprint, manual worker-branch deployments briefly served stale taskpane asset
+  versions. Worker mirrors should be aligned before any emergency Pages deploy
+  from those branches, and `master` should be deployed last.
 - Physical waiting areas now exist in the backend, but room/resource admin and
   per-room default waiting-area editing are still future work.
 - The diary waiting-area UI should eventually auto-focus the area associated with
@@ -117,6 +132,13 @@ Codex/orchestrator verification for Sprint 13:
   - `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` -> passed
   - `node --check docs\taskpane\taskpane.js` -> passed
   - `git diff --check` -> passed
+- Final user-review/deployment hotfix:
+  - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 23 passed, 1 warning
+  - `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` -> passed
+  - `node --check docs\taskpane\taskpane.js` -> passed
+  - `git diff --check docs\emr4-development-environment-dummys-guide.md` -> passed
+  - User confirmed the duplicate Medicare+IRN block now displays acceptable
+    wording after Pages reached `taskpane.js?v=53`.
 
 ## Recommended Next Direction
 

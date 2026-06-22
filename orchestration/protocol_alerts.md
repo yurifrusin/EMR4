@@ -31,6 +31,11 @@ Read these before acting on remembered process details.
   report the output; Codex can then poll/reconcile the alert branch.
 - Only the Codex orchestrator advances `master` and `handoff/current` in parallel
   mode unless the user explicitly says otherwise.
+- GitHub Pages must deploy from canonical `master` only. Do not manually deploy
+  `codex/current`, `claude/current`, or `antigravity/current` unless Codex has just
+  confirmed those mirror branches are aligned to `master`. A later Pages deployment
+  from a stale worker mirror can overwrite the live artifact with older taskpane or
+  diary assets.
 - Sprint launch rule: Codex/orchestrator must announce `HANDIN READY` before the
   user prompts external worker agents to run `handin`.
 - Sprint integration rule: Codex/orchestrator must not push sprint work through
