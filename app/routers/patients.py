@@ -156,11 +156,22 @@ def _raise_if_hard_duplicate(
         if reason in {"same_ihi", "same_medicare_card_and_irn"}
     ]
     if hard_reasons:
-        action = "update" if exclude_patient_id is not None else "creation"
+        name = " ".join(
+            part for part in (existing.first_name, existing.last_name) if part
+        ) or "another patient"
+        if "same_ihi" in hard_reasons:
+            message = f"This IHI is already used by {name}. Please check the IHI before saving."
+        elif "same_medicare_card_and_irn" in hard_reasons:
+            message = (
+                f"This Medicare number and IRN are already used by {name}. "
+                "Please check the card number and IRN before saving."
+            )
+        else:
+            message = f"These details look like they already belong to {name}. Please check them before saving."
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail={
-                "message": f"Duplicate patient {action} blocked by strong identifier match.",
+                "message": message,
                 "existing_patient_id": str(existing.id),
                 "match_reasons": hard_reasons,
             },

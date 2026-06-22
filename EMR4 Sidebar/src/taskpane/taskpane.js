@@ -1745,8 +1745,15 @@ function collectPatientEditPayload() {
 function describePatientEditError(payload, fallback) {
   const detail = payload && payload.detail ? payload.detail : payload;
   if (detail && Array.isArray(detail.match_reasons)) {
-    const reasons = detail.match_reasons.join(", ");
-    return `${detail.message || fallback} Matched on: ${reasons}.`;
+    const message = detail.message || fallback;
+    if (message && !/strong identifier|matched on|same_/i.test(message)) return message;
+    if (detail.match_reasons.includes("same_ihi")) {
+      return "This IHI is already used by another patient. Please check the IHI before saving.";
+    }
+    if (detail.match_reasons.includes("same_medicare_card_and_irn")) {
+      return "This Medicare number and IRN are already used by another patient. Please check the card number and IRN before saving.";
+    }
+    return "These details look like they already belong to another patient. Please check them before saving.";
   }
   return describeApiError(detail, fallback);
 }
