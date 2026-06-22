@@ -9,7 +9,7 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 14: Receptionist Workflow Foundations |
-| Integrated through | pending commit |
+| Integrated through | `97228be` plus integration-log bookkeeping |
 | Status | Integrated locally and verified; push/audit pending |
 | Last updated | 2026-06-22 |
 
