@@ -182,6 +182,11 @@ python scripts\agent_worktrees.py plan --agent claude --task claude-short-title 
 ```
 
 Then stop. Do not code until the user/Codex says **"complete sprint task"**.
+If the agent platform offers or displays an "auto-proceed", "auto-approved", or
+similar continuation after the implementation plan, treat that as **not approved**
+for EMR4 sprint packets. The worker must stop even if the app would otherwise
+continue, and wait for an explicit `complete sprint task` message from the user
+or Codex/orchestrator.
 Plans must name the intended surface/boundary and any visually adjacent surfaces
 that must not change.
 

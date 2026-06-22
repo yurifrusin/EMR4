@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | completed |
 | Created | 4d8d1c7 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-waiting-room-review-harness --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/sprint_closeout.md`; `orchestration/agent_inbox/codex/codex-waiting-room-review-harness.md`
+- Verification run: `git diff --check`
+- Remaining risks: This is a review harness only. It assumes the integrated Sprint 15 backend/UI work will expose clear behaviour for room default waiting-area assignment, explicit area override, and terminal-status clearing/filtering. Codex/orchestrator still needs to compare the checklist against Claude/Antigravity's final implementation details before declaring Sprint 15 ready for user review.

@@ -17,6 +17,11 @@ Read these before acting on remembered process details.
   `python scripts\agent_worktrees.py plan --agent <agent> --task <task> ...`,
   show the same plan in the GUI, then stop. Do not code until the user/Codex says
   `complete sprint task`.
+- Plan-gate auto-proceed warning: if an agent app offers, displays, or executes an
+  "auto-proceed", "auto-approved", or similar continuation after the plan, that is
+  not EMR4 approval. Stop anyway and wait for the explicit `complete sprint task`
+  instruction. Report any accidental auto-proceed to Codex with the files touched
+  and verification run.
 - If an agent identifies a useful follow-up outside its current packet, it must
   not leave that suggestion only in the app chat. Capture it for Codex with
   `python scripts\agent_worktrees.py suggest-task --agent <agent> --title "..."`.
