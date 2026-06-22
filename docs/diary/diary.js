@@ -1201,7 +1201,10 @@ async function loadDiary(silent = false, options = {}) {
       template = normalizeTemplate(getMockTemplate());
       appointments = getMockAppointments();
       types = getMockTypes();
-      waitingAreas = [];
+      waitingAreas = [
+        { id: "mock-area-1", name: "Main Waiting Room" },
+        { id: "mock-area-2", name: "Sub-waiting Room B" }
+      ];
     } else {
       const [templateRes, apptRes, typeRes, rosterRes, waitingAreasRes] = await Promise.all([
         loadDiaryTemplate(),
@@ -2139,7 +2142,7 @@ async function deleteBooking() {
 let todayAppointments = [];
 let selectedWaitingAreaTab = "all";
 
-async function setAppointmentStatus(appt, newStatus, selectEl = null) {
+async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null) {
   if (!await confirmUnidentifiedProgress(appt, newStatus)) {
     if (selectEl) selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
     return false;
@@ -2150,14 +2153,21 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null) {
   try {
     if (isSmokeMode()) {
       appt.status = newStatus;
+      if (waitingAreaId !== null) {
+        appt.waiting_area_id = waitingAreaId || null;
+      }
       setStatus("Status updated (Mock)");
       await loadDiary(true);
       const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
       if (el) el.classList.add("appt-active");
     } else {
+      const bodyPayload = { status: newStatus };
+      if (waitingAreaId !== null) {
+        bodyPayload.waiting_area_id = waitingAreaId || null;
+      }
       const res = await apiFetch(`/appointments/${appt.id}/status`, {
         method: "PATCH",
-        body: JSON.stringify({ status: newStatus })
+        body: JSON.stringify(bodyPayload)
       });
       if (!res.ok) {
         const text = await res.text();
@@ -2165,6 +2175,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null) {
       }
       const updatedAppt = await res.json();
       appt.status = updatedAppt.status;
+      appt.waiting_area_id = updatedAppt.waiting_area_id;
       setStatus("Status updated successfully.");
       await loadDiary(true);
       const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
@@ -2241,6 +2252,32 @@ async function loadTodayAppointments() {
   }
 }
 
+function getDefaultWaitingArea(appt) {
+  if (!appt) return null;
+  // 1. If the appt already has a waiting_area_id, use it
+  if (appt.waiting_area_id && waitingAreas.length) {
+    const area = waitingAreas.find(item => item.id === appt.waiting_area_id);
+    if (area) return area;
+  }
+
+  // 2. Try to match the practitioner's column default waiting room name
+  if (appt.practitioner && appt.practitioner.ahpra_number && activeTemplate && activeTemplate.columns) {
+    const col = activeTemplate.columns.find(c => c.practitioner_ahpra === appt.practitioner.ahpra_number);
+    if (col && (col.default_waiting_room || col.waiting_room)) {
+      const roomName = String(col.default_waiting_room || col.waiting_room).trim().toLowerCase();
+      const area = waitingAreas.find(item => item.name.trim().toLowerCase() === roomName);
+      if (area) return area;
+    }
+  }
+
+  // 3. Fall back to the first waiting area in the list
+  if (waitingAreas.length) {
+    return waitingAreas[0];
+  }
+
+  return null;
+}
+
 function getAppointmentWaitingRoom(a) {
   if (a.waiting_area_id && waitingAreas.length) {
     const area = waitingAreas.find(item => item.id === a.waiting_area_id);
@@ -2304,7 +2341,7 @@ function renderWaitingAreaTabs(areas) {
     allTabs.push({ key: "unassigned", label: "Unassigned" });
   }
 
-  if (allTabs.length <= 1) {
+  if (areas.length <= 1) {
     selectedWaitingAreaTab = "all";
     return false;
   }
@@ -2512,6 +2549,43 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
     statusBadge.textContent = getStatusLabel(a.status);
     footer.appendChild(statusBadge);
 
+    // Dropdown for waiting areas when there are multiple waiting areas and status is Expected or Arrived
+    if (waitingAreas.length > 1 && (targetStatus === "Arrived" || a.status === "Arrived")) {
+      const areaSelect = document.createElement("select");
+      areaSelect.className = "flow-card-area-select";
+      areaSelect.title = targetStatus === "Arrived" ? "Select waiting area for check-in" : "Reassign waiting area";
+
+      const currentArea = getDefaultWaitingArea(a);
+
+      waitingAreas.forEach(area => {
+        const opt = document.createElement("option");
+        opt.value = area.id;
+        opt.textContent = area.name;
+        if (currentArea && area.id === currentArea.id) {
+          opt.selected = true;
+        }
+        areaSelect.appendChild(opt);
+      });
+
+      if (a.status === "Arrived") {
+        // Live reassignment on selection change
+        let updatingArea = false;
+        areaSelect.onchange = async () => {
+          if (updatingArea) return;
+          updatingArea = true;
+          areaSelect.disabled = true;
+          try {
+            await setAppointmentStatus(a, "Arrived", null, areaSelect.value);
+          } finally {
+            updatingArea = false;
+            areaSelect.disabled = false;
+          }
+        };
+      }
+
+      footer.appendChild(areaSelect);
+    }
+
     if (actionLabel && targetStatus) {
       const actionBtn = document.createElement("button");
       actionBtn.className = "flow-card-action-btn btn-primary-xs";
@@ -2525,7 +2599,20 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
         updatingCardStatus = true;
         actionBtn.disabled = true;
         try {
-          const changed = await setAppointmentStatus(a, targetStatus);
+          let waitingAreaId = null;
+          if (targetStatus === "Arrived") {
+            const selectEl = footer.querySelector(".flow-card-area-select");
+            if (selectEl) {
+              waitingAreaId = selectEl.value;
+            } else {
+              // If only one waiting area exists, default to its ID automatically
+              const defaultArea = getDefaultWaitingArea(a);
+              if (defaultArea) {
+                waitingAreaId = defaultArea.id;
+              }
+            }
+          }
+          const changed = await setAppointmentStatus(a, targetStatus, null, waitingAreaId);
           if (!changed) actionBtn.disabled = false;
         } finally {
           updatingCardStatus = false;

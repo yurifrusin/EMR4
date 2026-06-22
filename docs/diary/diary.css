@@ -1561,6 +1561,52 @@ html, body {
   text-transform: uppercase;
 }
 
+.flow-card-area-select {
+  font-size: 9.5px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: 1px solid var(--grey-2);
+  background-color: var(--white);
+  color: var(--text);
+  max-width: 130px;
+  cursor: pointer;
+  height: 20px;
+  line-height: 1.2;
+}
+.flow-card-area-select:hover {
+  border-color: var(--blue-mid);
+}
+.flow-card-area-select:focus {
+  outline: none;
+  border-color: var(--blue-mid);
+}
+
+/* Expected Today Density Improvements */
+#flow-list-expected .flow-card {
+  padding: 5px 8px;
+  gap: 3px;
+  border-left-width: 2px;
+}
+#flow-list-expected .flow-card-reason {
+  display: none;
+}
+#flow-list-expected .flow-status-badge {
+  display: none;
+}
+#flow-list-expected .flow-card-details {
+  font-size: 9.5px;
+}
+#flow-list-expected .flow-card-footer {
+  margin-top: 2px;
+  justify-content: flex-start;
+  gap: 6px;
+}
+#flow-list-expected .flow-card-action-btn {
+  margin-left: auto;
+  padding: 2px 6px;
+  font-size: 8.5px;
+}
+
 /* Card border accents based on status */
 .flow-card-booked { border-left: 3px solid var(--grey-3); }
 .flow-card-confirmed { border-left: 3px solid var(--blue-light); }

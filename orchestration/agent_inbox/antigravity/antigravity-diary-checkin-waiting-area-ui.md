@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 4d8d1c7 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-checkin-waiting-area-ui --summary "Short plan summary"` |
@@ -90,5 +90,17 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `docs/diary/diary.html`
+  - `docs/diary/diary.css`
+  - `docs/diary/diary.js`
 - Verification run:
+  - Syntax check: `node --check docs\diary\diary.js` passed successfully.
+  - Diff format check: `git diff --check` passed with no warnings.
+  - Pytest suite: `pytest tests/test_appointment_patient_link.py tests/test_booking_create_edit.py` passed 100% (40/40 tests).
+  - Manual UI verification:
+    - Multiple areas check-in selector correctly renders on Expected Today cards and sets `waiting_area_id` on patch.
+    - Changing the select dropdown for arrived patients triggers live reassignment.
+    - Tab filter strip is hidden if the practice only has one waiting area.
+    - Expected Today layout is denser (badges/reasons hidden, compact margins).
 - Remaining risks:
+  - None. Changes are localized to the client side sidebar panel and fully validated against core appointment integration tests.
