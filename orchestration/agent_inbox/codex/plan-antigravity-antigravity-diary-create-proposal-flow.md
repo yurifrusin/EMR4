@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-create-proposal-flow` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-23 01:25 +1000 |
 | Source HEAD | `9fb853d` |
 

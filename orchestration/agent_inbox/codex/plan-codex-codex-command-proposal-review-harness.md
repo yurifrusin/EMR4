@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/command-proposal-review-harness` |
 | Source Task | `codex-command-proposal-review-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-23 01:08 +1000 |
 | Source HEAD | `9fb853d` |
 
