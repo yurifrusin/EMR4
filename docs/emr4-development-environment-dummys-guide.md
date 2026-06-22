@@ -455,7 +455,43 @@ worker branches such as `claude/current`, `antigravity/current`, or
 
 ---
 
-## 14. Common Problems
+## 14. Check The Live Diary Version
+
+When diary changes are pushed, the HTML should advertise the newest cache-buster
+version, for example:
+
+```text
+diary.js?v=66
+```
+
+In the Chrome DevTools Console for the open diary window, run:
+
+```javascript
+[...document.scripts].map(s => s.src).filter(src => src.includes("diary.js"))
+```
+
+For CSS:
+
+```javascript
+[...document.styleSheets].map(s => s.href).filter(href => href && href.includes("diary.css"))
+```
+
+To check what GitHub Pages is serving directly, run this in the console:
+
+```javascript
+fetch("https://yurifrusin.github.io/EMR4/diary/diary.html?probe=" + Date.now(), { cache: "no-store" })
+  .then(r => r.text())
+  .then(t => console.log(t.match(/diary\.js\?v=\d+/)?.[0]))
+```
+
+The result should match the version in `docs/diary/diary.html` on `master`.
+If the diary window shows a different version from the direct GitHub Pages
+probe, hard refresh the diary window. If GitHub Pages itself reports an older
+version, check the Pages deployment branch in GitHub Actions.
+
+---
+
+## 15. Common Problems
 
 ### PowerShell Will Not Activate `.venv`
 
