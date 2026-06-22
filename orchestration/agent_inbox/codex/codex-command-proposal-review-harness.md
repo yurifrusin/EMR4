@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/command-proposal-review-harness` |
-| Status | queued |
+| Status | submitted |
 | Created | 7a8d07d |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-command-proposal-review-harness --summary "Short plan summary"` |
@@ -90,5 +90,25 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - Added `orchestration/command_proposal_review.md` with a reusable Sprint 17
+    command/proposal review harness, response-shape checklist, expected
+    safe/warning/blocked classes, and PowerShell snippets for the create
+    proposal endpoint.
+  - Updated `orchestration/sprint_closeout.md` with a concise Sprint 17 pointer
+    to the new harness and the integration questions Codex should report.
+  - Added the plan artifact
+    `orchestration/agent_inbox/codex/plan-codex-codex-command-proposal-review-harness.md`
+    via the required plan-gate command.
 - Verification run:
+  - `git diff --check` -> passed; PowerShell reported only a CRLF-to-LF warning
+    for the task packet touched by the plan/completion update.
+  - `.venv\Scripts\python.exe -m pytest tests\test_appointment_proposals.py -q --tb=short -p no:randomly` was not runnable inside this disposable worktree because it has no local `.venv`.
+  - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_appointment_proposals.py -q --tb=short -p no:randomly` from this worker checkout -> 5 passed, with the existing pytest-asyncio loop-scope deprecation warning.
 - Remaining risks:
+  - The PowerShell snippets are review aids and were not live-run against a
+    seeded dev API in this docs-only workstream.
+  - Break-warning review depends on the selected practitioner/date having a
+    configured break at the chosen time; the harness calls that out.
+  - AX/AY may evolve proposal fields during integration, so Codex should
+    reconcile final field names before treating snippets as the long-term
+    developer contract.

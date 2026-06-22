@@ -289,3 +289,29 @@ Codex/orchestrator should specifically report whether:
   status controls remain separate review surfaces.
 - Bernie tool language requires explicit location/resource context before any
   future write proposal.
+
+---
+
+## Sprint 17 Review Harness - Command/Proposal Workflow Retrofit
+
+Use `orchestration/command_proposal_review.md` after the Sprint 17 backend and
+diary UI worker branches are reviewed and integrated. This closeout pointer is
+intentionally brief; the harness file owns the command/proposal vocabulary,
+integration checklist, expected response classes, and PowerShell snippets.
+
+Codex/orchestrator should specifically report whether:
+
+- Proposal endpoints are non-mutating and return typed commands for staff
+  confirmation.
+- Safe create proposals still require staff confirmation before the diary is
+  written.
+- Conflict proposals return `safe=false`, `autonomy_tier=blocked`, and a stable
+  `appointment_conflict` block without creating an appointment.
+- Break overlaps and provisional patients return warnings, not blocks, and stay
+  confirmable by staff.
+- The diary UI treats blocked proposals as hard stops and warning proposals as
+  explicit confirmation paths.
+- Booking slots, diary grid cells, Waiting Room cards, appointment status, and
+  patient identity are described as separate surfaces.
+- No Sprint 17 work starts a Bernie runtime, bypasses normal appointment route
+  validation, or creates a privileged agent-only write path.
