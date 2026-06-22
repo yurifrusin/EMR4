@@ -124,6 +124,57 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 16: Location-Aware Diary Foundations
+
+| Item | Value |
+|---|---|
+| Status | Queued |
+| Launch Gate | Pending |
+| Implementation Gate | Required |
+| Theme | Make the diary/resource model explicitly location-aware while separating physical sites from diary screen/page views |
+
+### Workstream AU - Location-Scoped Diary Backend Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-location-scoped-diary-contract.md` |
+| Goal | Plan, then after approval implement, the smallest backend changes needed so diary templates, rooms, waiting areas, rosters, and appointments do not assume one physical location per practice |
+| In Scope | Backend models/schemas/routers/tests around `PracticeLocation`, `Room`, `WaitingArea`, `DiaryTemplate`, `DiaryRoster`, `Appointment.location_id`, seed/test data, migrations only if needed |
+| Out of Scope | Diary frontend, taskpane, Command Centre, full practice/location admin UI, drag/drop/resize, online booking portal, Bernie runtime |
+| Verification | Plan packet first; after approval, focused location/diary/appointment pytest, backend py_compile, migration check if changed, `git diff --check` |
+| Plan Gate | Required before coding |
+| Status | Queued |
+
+### Workstream AV - Diary Location Selector and View Boundary
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-location-selector-view-boundary.md` |
+| Goal | Plan, then after approval implement, a restrained diary UI path for choosing/indicating the active physical location and preserving the distinction from diary page/column-group views |
+| In Scope | `docs/diary/diary.{html,css,js}` and cache-bust; frontend consumption of existing/new location-aware diary APIs if available; no broad redesign |
+| Out of Scope | Backend schema/routes/tests, taskpane, Command Centre, drag/drop/resize, full admin UI, Bernie runtime, appointment-card geometry changes |
+| Verification | Plan packet first; after approval, `node --check docs\diary\diary.js`, `git diff --check`, live/smoke visual notes for one-location fallback and multi-location affordance |
+| Plan Gate | Required before coding |
+| Status | Queued |
+
+### Workstream AW - Location and Diary View Design Harness
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/location-diary-view-design-harness` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-location-diary-view-design-harness.md` |
+| Goal | Plan, then after approval prepare the design guardrails, user-review checklist, and future Bernie tool vocabulary for practice vs location vs room/resource vs waiting area vs diary page/view group |
+| In Scope | Orchestration docs, implementation-plan notes, review harness, API/user-test snippets if useful |
+| Out of Scope | Production backend/frontend implementation, migrations, taskpane/Command Centre, autonomous Bernie runtime, drag/drop/resize |
+| Verification | Plan packet first; after approval, `git diff --check` |
+| Plan Gate | Required before coding |
+| Status | Queued |
+
 ## Sprint 15: Plan-Gated Waiting Room Check-In Operations
 
 | Item | Value |

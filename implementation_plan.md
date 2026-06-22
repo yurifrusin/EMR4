@@ -513,6 +513,18 @@ flowchart TD
   later, practice locations and rooms/resources should expose named waiting areas
   so the waiting-room panel can filter by area without treating rooms, queues, or
   attendance statuses as the same thing.
+- **Multi-location practice model**: a single practice/reception team may service
+  multiple physical locations while sharing one patient database. Diary, room,
+  waiting-area, roster, appointment, and Bernie tooling must therefore be
+  location-aware. The "practice" is the tenant and administrative/reception
+  unit; the "location" is the physical site whose diary is being viewed or
+  operated. Reception users may need to switch between, monitor, and act across
+  multiple location diaries in one working session.
+- **Diary view groups vs locations**: a large single location may still need its
+  diary spread across multiple screen views, pages, or column groups because of
+  screen real estate. That is a view-layer concern within one location, not a
+  separate practice location. Do not solve screen width by incorrectly modelling
+  one physical site as multiple locations.
 - **Resource/admin contract**: keep rooms, bookable practitioner-backed resources,
   diary columns, and waiting areas distinct. The Sprint 14 design note in
   `orchestration/resource_admin_bernie_tool_design.md` is the current reference
