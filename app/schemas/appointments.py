@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime, date, time
-from typing import Optional
+from typing import Literal, Optional
 from pydantic import BaseModel, Field, model_validator
 from app.models.appointments import AppointmentStatus, BookingChannel
 
@@ -126,6 +126,51 @@ class AppointmentOut(BaseModel):
 class AppointmentCheckinDefaults(BaseModel):
     suggested_waiting_area_id: Optional[uuid.UUID] = None
     room_name: Optional[str] = None
+
+
+class AppointmentConflictBrief(BaseModel):
+    appointment_id: uuid.UUID
+    start_time: datetime
+    end_time: datetime
+    start_time_local: time
+    duration_minutes: int
+    status: AppointmentStatus
+    patient_name: Optional[str] = None
+
+
+class AppointmentProposalIssue(BaseModel):
+    code: str
+    severity: Literal["warning", "blocked"]
+    message: str
+
+
+class AppointmentCreateCommand(BaseModel):
+    patient_id: Optional[uuid.UUID] = None
+    patient_name_provisional: Optional[str] = None
+    practitioner_id: uuid.UUID
+    appointment_type_id: Optional[uuid.UUID] = None
+    location_id: Optional[uuid.UUID] = None
+    appointment_date: date
+    start_time_local: time
+    start_time: datetime
+    duration_minutes: int
+    reason: Optional[str] = None
+    notes: Optional[str] = None
+    booked_via: BookingChannel = BookingChannel.Receptionist
+
+
+class AppointmentCreateProposalOut(BaseModel):
+    intent: Literal["create_appointment"] = "create_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["execute_with_report", "proposal", "blocked"]
+    summary: str
+    command: AppointmentCreateCommand
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    conflict: Optional[AppointmentConflictBrief] = None
+    breaks_overlap: list[str] = Field(default_factory=list)
+    patient_identity: Literal["linked", "provisional"]
 
 
 class ScheduleSlot(BaseModel):

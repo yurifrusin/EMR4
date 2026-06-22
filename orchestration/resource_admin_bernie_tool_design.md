@@ -163,6 +163,39 @@ Tool response shape should be consistent:
 - `audit_context`: user, practice, appointment/patient IDs, model request ID,
   tool name, proposed/executed arguments, and confirmation or execution timestamp.
 
+## Formal Command / Proposal Layer
+
+This is now a project pattern, not only a Bernie concept. From 2026-06-23, new
+workflow mutations should be built so a human UI, Bernie, or a future agent can
+all use the same safe path:
+
+1. `intent`: what the user or agent is trying to do.
+2. `proposal`: a typed, validated, non-mutating representation of the action.
+3. `warnings`: soft issues such as break overlaps or provisional identity.
+4. `blocks`: hard issues such as appointment conflicts or unsafe identifiers.
+5. `command`: the exact validated arguments that would be executed.
+6. `requires_confirmation`: whether staff must explicitly approve the action.
+7. `result_report`: what happened, what was skipped, and what needs attention.
+8. `audit_context`: who/what proposed or executed the action and when.
+
+The first implemented slice is:
+
+- `POST /api/v1/appointments/proposals/create`
+
+It accepts the same appointment-create payload as `POST /api/v1/appointments`,
+but does not write to the diary. It returns a typed create command, conflict
+block, break-overlap warnings, provisional-patient warnings, and a confirmation
+requirement. Booking creation is deliberately proposal-first because choosing a
+slot has judgement and patient-negotiation consequences.
+
+Retrofit priority for existing direct mutations:
+
+1. Booking create/edit/reschedule/cancel.
+2. Attendance status changes and waiting-area assignment.
+3. Provisional-patient linking.
+4. Patient demographic edits with duplicate/identifier warnings.
+5. Message creation and SMS/email/voice actions.
+
 ## Safety And Audit Requirements
 
 - Bernie must not call database sessions, ORM models, or raw SQL directly.

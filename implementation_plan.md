@@ -84,6 +84,15 @@ tools, such as `search_patient`, `find_slots`, `create_booking`,
 `handoff_to_receptionist`. The UI should show proposed actions and require staff
 confirmation for mutations until the safety/audit model is mature.
 
+From 2026-06-23 onward, new workflow mutations should be designed around a
+formal command/proposal layer rather than direct UI-only actions: capture the
+user intent, validate it into a typed proposal, report warnings/blocks, require
+confirmation where the workflow is judgement-heavy, then execute through the
+normal backend route/service path with audit. The first concrete slice is the
+non-mutating `POST /api/v1/appointments/proposals/create` contract, which
+prepares an appointment-create command and reports conflicts, break overlaps,
+and provisional-patient warnings without writing to the diary.
+
 Build timing: start Bernie after the Phase 2 diary foundations are stable enough
 that appointments, bookable resources, provisional patient identity, linked patient
 identity, breaks, and waiting-area semantics are clear. Later patient chat, kiosk
@@ -562,6 +571,11 @@ flowchart TD
   waiting-area semantics.
 - Start with a non-autonomous "suggest and confirm" mode. Bernie may retrieve and
   propose; human staff confirm writes.
+- Use the formal command/proposal pattern for new mutating workflows: intent,
+  typed command, warnings, blocks, confirmation requirement, result report, and
+  audit context. Existing direct UI mutations should be retrofitted in risk
+  order, starting with booking create/edit, status changes, provisional linking,
+  check-in/waiting-area assignment, and cancellation/rescheduling.
 - No patient-facing web chat, kiosk autonomy, or phone voice automation until the
   same tools have been proven internally and audit/permission controls are robust.
 - Treat every model response as advisory. Only typed tool calls with validated

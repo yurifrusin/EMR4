@@ -17,7 +17,8 @@ from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea
 from app.schemas.appointments import (
     AppointmentCreate, AppointmentUpdate, AppointmentStatusUpdate,
     AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
-    AppointmentCheckinDefaults,
+    AppointmentCheckinDefaults, AppointmentConflictBrief, AppointmentCreateCommand,
+    AppointmentCreateProposalOut, AppointmentProposalIssue,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -233,6 +234,23 @@ def _find_conflicting_appointment(
     return None
 
 
+def _conflict_brief(conflict: Appointment) -> AppointmentConflictBrief:
+    patient_name = None
+    if conflict.patient:
+        patient_name = f"{conflict.patient.first_name} {conflict.patient.last_name}".strip()
+    elif conflict.patient_name_provisional:
+        patient_name = conflict.patient_name_provisional
+    return AppointmentConflictBrief(
+        appointment_id=conflict.id,
+        start_time=conflict.start_time,
+        end_time=conflict.end_time,
+        start_time_local=conflict.start_time_local,
+        duration_minutes=conflict.duration_minutes,
+        status=conflict.status,
+        patient_name=patient_name,
+    )
+
+
 def _raise_if_conflict(
     db: Session,
     practice_id: uuid.UUID,
@@ -265,6 +283,23 @@ def _raise_if_conflict(
         )
 
 
+def _canonical_create_values(
+    body: AppointmentCreate,
+    practice_tz: ZoneInfo,
+) -> tuple[dict, date_type, time, datetime]:
+    values = body.model_dump()
+    appointment_date, start_time_local, start_time = _canonical_time_values(
+        practice_tz,
+        start_time=values.get("start_time"),
+        appointment_date=values.get("appointment_date"),
+        start_time_local=values.get("start_time_local"),
+    )
+    values["appointment_date"] = appointment_date
+    values["start_time_local"] = start_time_local
+    values["start_time"] = start_time
+    return values, appointment_date, start_time_local, start_time
+
+
 def _get_break_overlaps(
     db: Session,
     practice_id: uuid.UUID,
@@ -293,6 +328,26 @@ def _get_break_overlaps(
         if appt_start < brk_end and appt_end > brk_start:
             overlapping.append(brk.label)
     return overlapping
+
+
+def _appointment_create_command(
+    body: AppointmentCreate,
+    values: dict,
+) -> AppointmentCreateCommand:
+    return AppointmentCreateCommand(
+        patient_id=body.patient_id,
+        patient_name_provisional=body.patient_name_provisional,
+        practitioner_id=body.practitioner_id,
+        appointment_type_id=body.appointment_type_id,
+        location_id=body.location_id,
+        appointment_date=values["appointment_date"],
+        start_time_local=values["start_time_local"],
+        start_time=values["start_time"],
+        duration_minutes=values["duration_minutes"],
+        reason=body.reason,
+        notes=body.notes,
+        booked_via=body.booked_via,
+    )
 
 
 # ── Appointment Types ─────────────────────────────────────────────────────────
@@ -363,16 +418,7 @@ def create_appointment(
     practice_id = current_user.practice_id
     booked_by = current_user.id
     practice_tz = _practice_zoneinfo(db, practice_id)
-    values = body.model_dump()
-    appointment_date, start_time_local, start_time = _canonical_time_values(
-        practice_tz,
-        start_time=values.get("start_time"),
-        appointment_date=values.get("appointment_date"),
-        start_time_local=values.get("start_time_local"),
-    )
-    values["appointment_date"] = appointment_date
-    values["start_time_local"] = start_time_local
-    values["start_time"] = start_time
+    values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
 
     if body.patient_id is not None:
         _ensure_patient(body.patient_id, practice_id, db)
@@ -404,6 +450,99 @@ def create_appointment(
         appointment_date, start_time_local, values["duration_minutes"],
     )
     return out
+
+
+@router.post("/proposals/create", response_model=AppointmentCreateProposalOut)
+def propose_create_appointment(
+    body: AppointmentCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    practice_id = current_user.practice_id
+    practice_tz = _practice_zoneinfo(db, practice_id)
+    values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
+
+    if body.patient_id is not None:
+        _ensure_patient(body.patient_id, practice_id, db)
+    _ensure_practitioner(body.practitioner_id, practice_id, db)
+    _ensure_appointment_type(body.appointment_type_id, practice_id, db)
+    _ensure_location(body.location_id, practice_id, db)
+
+    warnings: list[AppointmentProposalIssue] = []
+    blocks: list[AppointmentProposalIssue] = []
+    conflict = _find_conflicting_appointment(
+        db,
+        practice_id,
+        body.practitioner_id,
+        appointment_date,
+        start_time_local,
+        values["duration_minutes"],
+        location_id=body.location_id,
+    )
+    conflict_brief = _conflict_brief(conflict) if conflict else None
+    if conflict:
+        blocks.append(AppointmentProposalIssue(
+            code="appointment_conflict",
+            severity="blocked",
+            message="This appointment overlaps an existing booking.",
+        ))
+
+    breaks_overlap = _get_break_overlaps(
+        db,
+        practice_id,
+        body.practitioner_id,
+        appointment_date,
+        start_time_local,
+        values["duration_minutes"],
+    )
+    for label in breaks_overlap:
+        warnings.append(AppointmentProposalIssue(
+            code="break_overlap",
+            severity="warning",
+            message=f"This appointment overlaps {label}.",
+        ))
+
+    patient_identity = "linked" if body.patient_id else "provisional"
+    if patient_identity == "provisional":
+        warnings.append(AppointmentProposalIssue(
+            code="provisional_patient",
+            severity="warning",
+            message="This booking is not linked to a verified patient record yet.",
+        ))
+
+    safe = not blocks
+    # Creating a diary booking reserves clinical time, so this proposal always
+    # needs staff confirmation even when there are no warnings.
+    requires_confirmation = True
+    if not safe:
+        autonomy_tier = "blocked"
+    else:
+        autonomy_tier = "proposal"
+
+    patient_label = "linked patient" if body.patient_id else body.patient_name_provisional or "provisional patient"
+    summary = (
+        f"Create {values['duration_minutes']} minute booking for {patient_label} "
+        f"on {appointment_date.isoformat()} at {start_time_local.strftime('%H:%M')}."
+    )
+    if conflict_brief:
+        summary += " Blocked by an existing booking."
+    elif warnings:
+        summary += " Confirmation recommended because warnings are present."
+    else:
+        summary += " Staff confirmation is required before creating the booking."
+
+    return AppointmentCreateProposalOut(
+        safe=safe,
+        requires_confirmation=requires_confirmation,
+        autonomy_tier=autonomy_tier,
+        summary=summary,
+        command=_appointment_create_command(body, values),
+        warnings=warnings,
+        blocks=blocks,
+        conflict=conflict_brief,
+        breaks_overlap=breaks_overlap,
+        patient_identity=patient_identity,
+    )
 
 @router.get("/waiting-room", response_model=list[AppointmentOut])
 def get_waiting_room(
