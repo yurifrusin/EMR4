@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-location-scoped-diary-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-22 18:39 +1000 |
 | Source HEAD | `1e9444c` |
 

@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/location-diary-view-design-harness` |
 | Source Task | `codex-location-diary-view-design-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-22 18:06 +1000 |
 | Source HEAD | `1e9444c` |
 

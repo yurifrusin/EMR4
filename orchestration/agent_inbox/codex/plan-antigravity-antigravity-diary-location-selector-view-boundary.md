@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-location-selector-view-boundary` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-22 18:38 +1000 |
 | Source HEAD | `1e9444c` |
 
