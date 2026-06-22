@@ -520,6 +520,24 @@ If the diary window shows a different version from the direct GitHub Pages
 probe, hard refresh the diary window. If GitHub Pages itself reports an older
 version, check the Pages deployment branch in GitHub Actions.
 
+### Open Diary Smoke Mode
+
+Smoke mode is an auth-free visual fixture for quick diary layout checks. It uses
+mock appointments, mock patients, and mock locations, so it is useful for UI
+review but does not prove live backend/auth behaviour.
+
+Deployed smoke URL:
+
+```text
+https://yurifrusin.github.io/EMR4/diary/diary.html?smoke=true
+```
+
+Local file path if you are opening the static file directly:
+
+```text
+docs/diary/diary.html?smoke=true
+```
+
 ---
 
 ## 16. Common Problems
