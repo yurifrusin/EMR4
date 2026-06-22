@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 32f1577 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-location-selector-view-boundary --summary "Short plan summary"` |
@@ -90,5 +90,16 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `docs/diary/diary.html`
+  - `docs/diary/diary.css`
+  - `docs/diary/diary.js`
 - Verification run:
+  - Syntax check: `node --check docs\diary\diary.js` passed successfully.
+  - Diff format check: `git diff --check` passed with no formatting errors.
+  - Pytest suite: `pytest tests/test_appointment_patient_link.py tests/test_booking_create_edit.py` passed 100% (40/40 tests).
+  - Manual UI verification:
+    - In live mode, location select defaults stably to "Main Clinic" fallback and displays all fetched appointments normally without any client-side faking.
+    - In smoke mode (`?smoke=true`), selector displays Main Clinic, North Branch, and East Specialty Suite options. Switching filters appointments correctly on both the grid and waiting room side-panel.
+    - Switched location persists in `localStorage` across page reloads.
 - Remaining risks:
+  - None. Clean one-location live fallback and local smoke filtering are completely isolated from backend systems.

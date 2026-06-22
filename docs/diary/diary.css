@@ -67,6 +67,47 @@ html, body {
   margin-top: 1px;
 }
 
+.diary-logo-sub-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 1px;
+}
+
+.diary-location-divider {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 10px;
+  user-select: none;
+}
+
+.diary-location-select {
+  background: transparent;
+  border: none;
+  color: #a8c4e0;
+  font-size: 10px;
+  font-family: var(--font);
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.diary-location-select::-ms-expand {
+  display: none;
+}
+.diary-location-select:hover {
+  color: #ffffff;
+}
+.diary-location-select option {
+  background-color: var(--blue-dark);
+  color: #ffffff;
+  font-size: 11px;
+}
+
 .diary-date-nav {
   display: flex;
   align-items: center;
