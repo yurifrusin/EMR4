@@ -4,6 +4,14 @@ from uuid import UUID
 from pydantic import BaseModel, Field, field_validator
 
 
+class PracticeLocationOut(BaseModel):
+    id: UUID
+    name: str
+    is_active: bool
+
+    model_config = {"from_attributes": True}
+
+
 class DiaryBreakOut(BaseModel):
     label: str
     from_time: time
@@ -33,6 +41,7 @@ class DiaryColumnOut(BaseModel):
 
 class DiaryTemplateOut(BaseModel):
     practice_name: Optional[str] = None
+    location_id: Optional[UUID] = None
     slot_start: time
     slot_end: time
     slot_interval_minutes: int
@@ -47,6 +56,7 @@ class WaitingAreaOut(BaseModel):
     name: str
     display_order: int
     is_active: bool
+    location_id: Optional[UUID] = None
 
     model_config = {"from_attributes": True}
 
@@ -56,6 +66,7 @@ class RoomOut(BaseModel):
     name: str
     display_order: int
     is_active: bool
+    location_id: Optional[UUID] = None
 
     model_config = {"from_attributes": True}
 
@@ -67,6 +78,7 @@ class DiaryRosterEntryOut(BaseModel):
     practitioner_id: Optional[UUID] = None
     practitioner_ahpra: Optional[str] = None
     label: Optional[str] = None
+    location_id: Optional[UUID] = None
 
     model_config = {"from_attributes": True}
 

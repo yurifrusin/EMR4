@@ -9,7 +9,7 @@ import sys
 from app.database import SessionLocal
 from datetime import date, datetime, time, timedelta, timezone
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
-from app.models.tenancy import Practice, User, Practitioner, UserRole
+from app.models.tenancy import Practice, User, Practitioner, UserRole, PracticeLocation
 from app.models.patients import Patient
 from app.models.clinical import Allergy
 from app.models.billing import MbsDirectory, SnomedDirectory
@@ -44,6 +44,27 @@ def seed():
             print(f"  Created practice: {practice.name} ({practice.id})")
         else:
             print(f"  Practice already exists: {practice.id}")
+
+        # --- Practice Location ---
+        location = db.query(PracticeLocation).filter_by(
+            practice_id=practice.id, name="Main Street Surgery"
+        ).first()
+        if not location:
+            location = PracticeLocation(
+                practice_id=practice.id,
+                name="Main Street Surgery",
+                address_line1=practice.address_line1,
+                address_suburb=practice.address_suburb,
+                address_state=practice.address_state,
+                address_postcode=practice.address_postcode,
+                phone=practice.phone,
+                is_active=True,
+            )
+            db.add(location)
+            db.flush()
+            print(f"  Created location: {location.name} ({location.id})")
+        else:
+            print(f"  Location already exists: {location.id}")
 
         # --- Practitioner ---
         gp = db.query(Practitioner).filter_by(
@@ -313,6 +334,7 @@ def seed():
                     status=init_status,
                     reason=reason,
                     booked_via=BookingChannel.Receptionist,
+                    location_id=location.id,
                 ))
             elif exists.status == AppointmentStatus.Booked and init_status != AppointmentStatus.Booked:
                 # Idempotent upgrade: apply the demo status if user hasn't changed it
@@ -323,6 +345,8 @@ def seed():
                 and exists.duration_minutes != duration_minutes
             ):
                 exists.duration_minutes = duration_minutes
+            if exists and exists.location_id is None:
+                exists.location_id = location.id
         db.flush()
         print(f"  Sample appointments seeded for today ({today})")
 
@@ -430,9 +454,12 @@ def seed():
                     name=room_name,
                     display_order=order,
                     is_active=True,
+                    location_id=location.id,
                 )
                 db.add(room)
                 db.flush()
+            elif room.location_id is None:
+                room.location_id = location.id
             rooms[room_name] = room
         print(f"  Rooms seeded ({len(rooms)} rooms)")
 
@@ -481,9 +508,12 @@ def seed():
                     name=area_name,
                     display_order=order,
                     is_active=True,
+                    location_id=location.id,
                 )
                 db.add(area)
                 db.flush()
+            elif area.location_id is None:
+                area.location_id = location.id
             waiting_areas[area_name] = area
 
         room_default_areas = {

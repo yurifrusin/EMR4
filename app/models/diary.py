@@ -1,6 +1,6 @@
 import uuid
 from sqlalchemy import (
-    Column, Date, String, Boolean, Integer, Time, ForeignKey, Index, UniqueConstraint,
+    Column, Date, String, Boolean, Integer, Time, ForeignKey, Index, UniqueConstraint, text,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship
@@ -12,7 +12,8 @@ class DiaryTemplate(Base):
     __tablename__ = "diary_templates"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False, unique=True)
+    practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
+    location_id = Column(UUID(as_uuid=True), ForeignKey("practice_locations.id"), nullable=True)
     practice_name = Column(String(255))
     slot_start = Column(Time, nullable=False)
     slot_end = Column(Time, nullable=False)
@@ -23,7 +24,15 @@ class DiaryTemplate(Base):
                            order_by="DiaryColumn.display_order",
                            cascade="all, delete-orphan")
 
-    __table_args__ = (Index("ix_diary_templates_practice_id", "practice_id"),)
+    __table_args__ = (
+        Index("ix_diary_templates_practice_id", "practice_id"),
+        # One practice-wide template per practice (location_id NULL)
+        Index("uq_diary_templates_practice_no_loc", "practice_id", unique=True,
+              postgresql_where=text("location_id IS NULL")),
+        # One template per (practice, location) when location is set
+        Index("uq_diary_templates_practice_loc", "practice_id", "location_id", unique=True,
+              postgresql_where=text("location_id IS NOT NULL")),
+    )
 
 
 class DiaryColumn(Base):
@@ -76,11 +85,15 @@ class WaitingArea(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
+    location_id = Column(UUID(as_uuid=True), ForeignKey("practice_locations.id"), nullable=True)
     name = Column(String(100), nullable=False)
     display_order = Column(Integer, nullable=False, default=0)
     is_active = Column(Boolean, default=True)
 
-    __table_args__ = (Index("ix_waiting_areas_practice_id", "practice_id"),)
+    __table_args__ = (
+        Index("ix_waiting_areas_practice_id", "practice_id"),
+        Index("ix_waiting_areas_location_id", "location_id"),
+    )
 
 
 class Room(Base):
@@ -89,6 +102,7 @@ class Room(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
+    location_id = Column(UUID(as_uuid=True), ForeignKey("practice_locations.id"), nullable=True)
     name = Column(String(100), nullable=False)
     display_order = Column(Integer, nullable=False)
     is_active = Column(Boolean, default=True)
@@ -99,6 +113,7 @@ class Room(Base):
 
     __table_args__ = (
         Index("ix_rooms_practice_id", "practice_id"),
+        Index("ix_rooms_location_id", "location_id"),
         UniqueConstraint("practice_id", "display_order", name="uq_rooms_practice_order"),
     )
 
