@@ -309,18 +309,35 @@ def _get_break_overlaps(
     appointment_date: date_type,
     start_time_local: time,
     duration_minutes: int,
+    location_id: Optional[uuid.UUID] = None,
 ) -> list[str]:
     """Return labels of DiaryBreak blocks that overlap the appointment (soft-block check)."""
     appt_start = _local_datetime(appointment_date, start_time_local)
     appt_end = appt_start + timedelta(minutes=duration_minutes)
+    practitioner_ahpra = (
+        db.query(Practitioner.ahpra_number)
+        .filter(
+            Practitioner.id == practitioner_id,
+            Practitioner.practice_id == practice_id,
+        )
+        .scalar()
+    )
+    column_filters = [DiaryColumn.practitioner_id == practitioner_id]
+    if practitioner_ahpra:
+        column_filters.append(DiaryColumn.practitioner_ahpra == practitioner_ahpra)
+
+    template_filters = [DiaryTemplate.practice_id == practice_id]
+    if location_id:
+        template_filters.append(or_(
+            DiaryTemplate.location_id == location_id,
+            DiaryTemplate.location_id.is_(None),
+        ))
+
     breaks = (
         db.query(DiaryBreak)
         .join(DiaryColumn, DiaryBreak.column_id == DiaryColumn.id)
         .join(DiaryTemplate, DiaryColumn.template_id == DiaryTemplate.id)
-        .filter(
-            DiaryTemplate.practice_id == practice_id,
-            DiaryColumn.practitioner_id == practitioner_id,
-        )
+        .filter(*template_filters, or_(*column_filters))
         .all()
     )
     overlapping = []
@@ -450,6 +467,7 @@ def create_appointment(
     out.breaks_overlap = _get_break_overlaps(
         db, practice_id, body.practitioner_id,
         appointment_date, start_time_local, values["duration_minutes"],
+        location_id=body.location_id,
     )
     return out
 
@@ -496,6 +514,7 @@ def propose_create_appointment(
         appointment_date,
         start_time_local,
         values["duration_minutes"],
+        location_id=body.location_id,
     )
     for label in breaks_overlap:
         warnings.append(AppointmentProposalIssue(
@@ -620,6 +639,7 @@ def propose_update_appointment(
     breaks_overlap = _get_break_overlaps(
         db, practice_id, practitioner_id,
         appointment_date, start_time_local, duration_minutes,
+        location_id=location_id,
     )
     for label in breaks_overlap:
         warnings.append(AppointmentProposalIssue(
@@ -899,6 +919,7 @@ def update_appointment(
     out.breaks_overlap = _get_break_overlaps(
         db, practice_id, practitioner_id,
         appointment_date, start_time_local, duration_minutes,
+        location_id=location_id,
     )
     return out
 

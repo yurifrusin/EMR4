@@ -389,12 +389,13 @@ function timeRangeLabel(startMins, endMins) {
 function appointmentCrossesBreak(ahpra, timeVal, duration) {
   if (!activeTemplate || !activeTemplate.columns) return false;
   const col = activeTemplate.columns.find(c => c.practitioner_ahpra === ahpra);
-  if (!col || !col.breaks || col.breaks.length === 0) return false;
+  const colBreaks = col ? getColumnBreaks(col) : [];
+  if (!colBreaks || colBreaks.length === 0) return false;
 
   const apptStartMins = toMins(timeVal);
   const apptEndMins = apptStartMins + duration;
 
-  for (const b of col.breaks) {
+  for (const b of colBreaks) {
     if (!b.from || !b.to) continue;
     const breakStart = toMins(b.from);
     const breakEnd = toMins(b.to);

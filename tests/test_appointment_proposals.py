@@ -155,6 +155,53 @@ def test_create_proposal_warns_for_break_overlap(
     assert data["warnings"][0]["code"] == "break_overlap"
 
 
+def test_create_proposal_warns_for_break_overlap_when_column_matches_ahpra_only(
+        client, db, gp_user, patient, practitioner):
+    tmpl = DiaryTemplate(
+        practice_id=gp_user.practice_id,
+        slot_start=time(9, 0),
+        slot_end=time(17, 0),
+        slot_interval_minutes=15,
+        footer=[],
+    )
+    db.add(tmpl)
+    db.flush()
+    col = DiaryColumn(
+        template_id=tmpl.id,
+        practice_id=gp_user.practice_id,
+        display_order=0,
+        room_label="Room 1",
+        assignment=f"Dr {practitioner.last_name}",
+        practitioner_id=None,
+        practitioner_ahpra=practitioner.ahpra_number,
+    )
+    db.add(col)
+    db.flush()
+    db.add(DiaryBreak(
+        column_id=col.id,
+        display_order=0,
+        label="MORNING TEA",
+        from_time=time(10, 45),
+        to_time=time(11, 0),
+    ))
+    db.flush()
+
+    token = make_token(gp_user)
+    resp = _post_proposal(client, token, {
+        "patient_id": str(patient.id),
+        "practitioner_id": str(practitioner.id),
+        "appointment_date": THURSDAY.isoformat(),
+        "start_time_local": "10:40:00",
+        "duration_minutes": 30,
+    })
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert "MORNING TEA" in data["breaks_overlap"]
+    assert any(w["code"] == "break_overlap" for w in data["warnings"])
+
+
 def test_create_proposal_warns_for_provisional_patient(
         client, gp_user, practitioner):
     token = make_token(gp_user)
