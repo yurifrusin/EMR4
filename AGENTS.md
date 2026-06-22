@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 14 - receptionist workflow foundations integrated locally; user review pending |
-| **Next recommended work** | User-review Sprint 14 Waiting Room panel UX and optional waiting-area check-in API path, then choose the next receptionist workflow slice |
+| **Current active track** | Sprint 15 - plan-gated Waiting Room check-in operations dispatched |
+| **Next recommended work** | External workers may `handin`; review implementation plans before authorising `complete sprint task` |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

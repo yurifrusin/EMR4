@@ -124,6 +124,57 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 15: Plan-Gated Waiting Room Check-In Operations
+
+| Item | Value |
+|---|---|
+| Status | Plan gate dispatched |
+| Launch Gate | Pending worker `handin` and implementation-plan packets |
+| Implementation Gate | Workers must stop after plan submission until user/Codex says `complete sprint task` |
+| Theme | Make Waiting Room check-in operational while preserving room/resource/waiting-area terminology and avoiding diary-grid churn |
+
+### Workstream AR - Waiting Area Check-In Defaults
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-waiting-area-checkin-defaults.md` |
+| Goal | Plan, then after approval implement, backend defaults/clearing semantics for waiting-area assignment during check-in/status transitions |
+| In Scope | Appointment status/update semantics, waiting-area assignment/defaulting/clearing tests, practice scoping, inactive/cross-practice guards, terminal status policy |
+| Out of Scope | Diary frontend, taskpane, room/admin UI, Bernie runtime, SMS/email/voice reminder confirmation, billing/finalisation locking, drag/drop/resize |
+| Verification | Plan packet first; after approval, focused pytest, backend py_compile, `git diff --check` |
+| Plan Gate | Required before coding |
+| Status | queued |
+
+### Workstream AS - Diary Check-In Waiting-Area UI
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-checkin-waiting-area-ui.md` |
+| Goal | Plan, then after approval implement, Waiting Room side-panel check-in with visible/default waiting-area assignment and denser Expected Today display |
+| In Scope | `docs/diary/diary.{html,css,js}` and diary cache-bust; Waiting Room side-panel only |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane, Command Centre, booking modal semantics beyond existing status/check-in API, main diary grid appointment positioning, drag/drop/resize, Bernie runtime |
+| Verification | Plan packet first; after approval, `node --check docs\diary\diary.js`, `git diff --check`, visual acceptance notes |
+| Plan Gate | Required before coding |
+| Status | queued |
+
+### Workstream AT - Waiting Room Review Harness
+
+| Item | Value |
+|---|---|
+| Owner | Codex |
+| Branch | `codex/current` or disposable Codex worker branch |
+| Task Packet | `orchestration/agent_inbox/codex/codex-waiting-room-review-harness.md` |
+| Goal | Plan, then after approval prepare review scripts/checklists and guardrails for room-to-waiting-area defaults and Waiting Room user review |
+| In Scope | Orchestration docs, sprint closeout draft/checklist, PowerShell API snippets, design guardrails |
+| Out of Scope | Production backend/frontend code, migrations, taskpane/Command Centre, Bernie runtime, drag/drop/resize, duplicating Claude/Antigravity scopes |
+| Verification | Plan packet first; after approval, `git diff --check` |
+| Plan Gate | Required before coding |
+| Status | queued |
+
 ## Sprint 14: Plan-Gated Receptionist Workflow Foundations
 
 | Item | Value |
