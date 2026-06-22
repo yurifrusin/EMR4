@@ -123,6 +123,11 @@ class AppointmentOut(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class AppointmentCheckinDefaults(BaseModel):
+    suggested_waiting_area_id: Optional[uuid.UUID] = None
+    room_name: Optional[str] = None
+
+
 class ScheduleSlot(BaseModel):
     start_time: datetime
     end_time: datetime
