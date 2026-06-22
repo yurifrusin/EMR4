@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 7a8d07d |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-create-proposal-flow --summary "Short plan summary"` |
@@ -90,5 +90,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - docs/diary/diary.html
+  - docs/diary/diary.css
+  - docs/diary/diary.js
 - Verification run:
+  - JavaScript Syntax Verification (node --check docs/diary/diary.js) - Passed successfully.
+  - Whitespace check (git diff --check) - Clean.
+  - Backend pytest suite (python -m pytest tests/test_appointment_patient_link.py tests/test_booking_create_edit.py) - 40 passed.
 - Remaining risks:
+  - Mock proposal checking runs locally in smoke mode; live mode depends on the correctness and availability of the backend proposals/create route.
