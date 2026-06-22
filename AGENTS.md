@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 16 - location-aware diary foundations integrated, pushed, and audited |
-| **Next recommended work** | User review live location-aware diary after deploy, then plan the next diary/resource slice |
+| **Current active track** | Agentic command/proposal layer first slice implemented on top of Sprint 16 |
+| **Next recommended work** | Retrofit proposal contracts in risk order: booking edit/reschedule/cancel, status/waiting-area changes, provisional linking, then patient demographics |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -293,7 +293,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `0298a12` — Sprint 16 location-aware diary foundations plus location-conflict hotfix |
+| **Latest integration commit** | `56b333f` — Add appointment proposal command contract |
 
 ### Tag map (all tags pushed to remote)
 
@@ -450,6 +450,11 @@ The staff diary grid and a future patient booking portal are just two clients of
   around the UI: `search_patient`, `find_slots`, `create_booking`,
   `link_patient_to_booking`, `arrive_patient`, `take_message`,
   `handoff_to_receptionist`, etc.
+- From 2026-06-23, new mutating workflows should use the formal
+  command/proposal pattern: intent, typed non-mutating proposal, warnings/blocks,
+  command payload, confirmation requirement, result report, and audit context.
+  The first concrete slice is `POST /api/v1/appointments/proposals/create`,
+  which prepares a booking command without writing to the diary.
 - Build timing: after Phase 2 diary foundations settle around appointment create/edit,
   bookable resources, provisional vs linked patient identity, breaks, and physical
   waiting-area semantics. Later online chat, kiosk assistance, and phone voice can
