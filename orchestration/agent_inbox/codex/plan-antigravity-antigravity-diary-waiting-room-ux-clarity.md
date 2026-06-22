@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-waiting-room-ux-clarity` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-22 12:54 +1000 |
 | Source HEAD | `e551706` |
 
