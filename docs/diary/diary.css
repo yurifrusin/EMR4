@@ -1808,3 +1808,32 @@ html, body {
   background-color: var(--blue-light) !important;
   color: var(--blue-dark) !important;
 }
+
+.form-warning {
+  color: #8a6d3b;
+  font-size: 11px;
+  margin-top: 8px;
+  background-color: #fcf8e3;
+  border: 1px solid #faebcc;
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.form-warning ul {
+  margin-left: 15px;
+  margin-top: 4px;
+  padding-left: 0;
+}
+
+.form-warning li {
+  margin-bottom: 2px;
+}
+
+.btn-warning-action {
+  background-color: #f0ad4e !important;
+  color: white !important;
+}
+
+.btn-warning-action:hover {
+  background-color: #ec971f !important;
+}
