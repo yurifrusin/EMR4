@@ -124,11 +124,62 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 17: Command/Proposal Workflow Retrofit
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Implementation Gate | Pending worker plans and Codex approval |
+| Theme | Retrofit high-risk receptionist workflows onto the formal command/proposal layer before adding Bernie runtime |
+
+### Workstream AX - Appointment Update Proposal Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-update-proposal-contract.md` |
+| Goal | Plan, then after approval implement backend proposal contract(s) for editing, rescheduling, cancelling, and/or status-changing an existing appointment without mutating until staff confirmation |
+| In Scope | Appointment schemas/router/tests; non-mutating proposal endpoint(s); typed command payloads; conflict, break, provisional-identity, terminal/cancellation, and waiting-area/status warnings if touched |
+| Out of Scope | Diary frontend, taskpane, Command Centre, Bernie runtime, migrations unless necessary, patient demographics, room/location admin, drag/drop/resize, SMS/reminder confirmation, billing/finalisation |
+| Verification | Plan packet first; after approval backend py_compile, focused pytest, adjacent booking/status/break tests, `git diff --check` |
+| Plan Gate | Required before coding |
+| Status | Dispatched |
+
+### Workstream AY - Diary Create Proposal Flow
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-create-proposal-flow.md` |
+| Goal | Plan, then after approval make the diary booking modal call `POST /api/v1/appointments/proposals/create` before writing a new booking |
+| In Scope | `docs/diary/diary.{html,css,js}`; cache-bust if diary assets change; booking-create modal proposal, block, warning, and confirmation flow only |
+| Out of Scope | Backend route/schema changes, taskpane, Command Centre, Waiting Room panel layout, main diary appointment geometry, location selector redesign, patient demographics, Bernie runtime, drag/drop/resize |
+| Verification | Plan packet first; after approval `node --check docs\diary\diary.js`, `git diff --check`, visual/manual notes for safe create, conflict block, break warning, and provisional warning if supported |
+| Plan Gate | Required before coding |
+| Status | Dispatched |
+
+### Workstream AZ - Command Proposal Review Harness
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/command-proposal-review-harness` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-command-proposal-review-harness.md` |
+| Goal | Plan, then after approval create the review harness and developer-facing API snippets for the formal command/proposal layer |
+| In Scope | Orchestration docs, sprint closeout/review harness updates, developer guide snippets where useful, PowerShell/API examples for proposal safe/warning/blocked paths |
+| Out of Scope | Production backend/frontend changes, migrations, diary UI, taskpane, Command Centre, Bernie runtime, modifying Claude/Antigravity packets after dispatch |
+| Verification | Plan packet first; after approval `git diff --check` plus executable snippet/schema verification if practical |
+| Plan Gate | Required before coding |
+| Status | Dispatched |
+
 ## Sprint 16: Location-Aware Diary Foundations
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; pending push/audit |
+| Status | Integrated |
 | Launch Gate | Complete |
 | Implementation Gate | Complete |
 | Theme | Make the diary/resource model explicitly location-aware while separating physical sites from diary screen/page views |
