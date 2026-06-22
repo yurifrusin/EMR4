@@ -128,9 +128,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Plan gate dispatched |
-| Launch Gate | Pending worker `handin` and implementation-plan packets |
-| Implementation Gate | Workers must stop after plan submission until user/Codex says `complete sprint task` |
+| Status | Integrated |
+| Launch Gate | Complete |
+| Implementation Gate | Complete |
 | Theme | Make Waiting Room check-in operational while preserving room/resource/waiting-area terminology and avoiding diary-grid churn |
 
 ### Workstream AR - Waiting Area Check-In Defaults
@@ -145,7 +145,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Diary frontend, taskpane, room/admin UI, Bernie runtime, SMS/email/voice reminder confirmation, billing/finalisation locking, drag/drop/resize |
 | Verification | Plan packet first; after approval, focused pytest, backend py_compile, `git diff --check` |
 | Plan Gate | Required before coding |
-| Status | queued |
+| Status | Integrated |
 
 ### Workstream AS - Diary Check-In Waiting-Area UI
 
@@ -159,7 +159,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Backend routes/models/tests/migrations, taskpane, Command Centre, booking modal semantics beyond existing status/check-in API, main diary grid appointment positioning, drag/drop/resize, Bernie runtime |
 | Verification | Plan packet first; after approval, `node --check docs\diary\diary.js`, `git diff --check`, visual acceptance notes |
 | Plan Gate | Required before coding |
-| Status | queued |
+| Status | Integrated |
 
 ### Workstream AT - Waiting Room Review Harness
 
@@ -173,7 +173,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Production backend/frontend code, migrations, taskpane/Command Centre, Bernie runtime, drag/drop/resize, duplicating Claude/Antigravity scopes |
 | Verification | Plan packet first; after approval, `git diff --check` |
 | Plan Gate | Required before coding |
-| Status | queued |
+| Status | Integrated |
 
 ## Sprint 14: Plan-Gated Receptionist Workflow Foundations
 

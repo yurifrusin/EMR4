@@ -8,52 +8,42 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 14: Receptionist Workflow Foundations |
-| Integrated through | `97228be` plus integration-log bookkeeping |
-| Status | Integrated, pushed, audited, and ready for user review |
+| Batch | Sprint 15: Waiting Room Check-In Operations |
+| Integrated through | `847eb01` plus integration-log bookkeeping |
+| Status | Integrated locally, verification passed, pending push/audit |
 | Last updated | 2026-06-22 |
 
 ## What Changed
 
-- Added an atomic backend check-in/status contract: `PATCH
-  /api/v1/appointments/{id}/status` now accepts optional `waiting_area_id`.
-  If omitted, the current waiting area is preserved; if set to a UUID, the
-  appointment is assigned to that active practice-scoped waiting area; if set to
-  `null`, the waiting area is cleared.
-- Added focused backend regression tests for waiting-area assignment during
-  status transitions, including auth, assign, clear, reassign, inactive-area,
-  cross-practice, and no-area-loss behaviour.
-- Improved the diary Waiting Room side panel only:
-  collapsible sections, cleaner count badges, segmented waiting-area tabs,
-  compact cards, and lower-noise edit/link controls.
+- Added read-only `GET /api/v1/appointments/{id}/checkin-defaults` so the diary
+  or Bernie can ask the backend for the room/default waiting-area suggestion for
+  a booked appointment without mutating state.
+- Made terminal attendance statuses deliberately clear `waiting_area_id` when
+  the PATCH body omits `waiting_area_id`. Explicit UUID and explicit `null`
+  values still win over the automatic policy.
+- Added focused backend regression tests for default suggestion, inactive/cross-
+  practice waiting-area guards, terminal auto-clear, active-status preservation,
+  and explicit waiting-area override.
+- Improved the diary Waiting Room side panel only: Expected Today cards are
+  denser, check-in can send a selected waiting area, arrived patients can be
+  reassigned between waiting areas, and the tab strip is hidden when only one
+  waiting area is available.
 - Kept the main diary grid appointment positioning unchanged. The prior
   accidental appointment-card stacking/cascade behaviour was not reintroduced.
-- Added `orchestration/resource_admin_bernie_tool_design.md`, the Sprint 14
-  design reference for rooms, bookable resources, diary columns, waiting areas,
-  provisional vs linked patient identity, attendance status, SMS/reminder
-  confirmation, and future Bernie supervised tool boundaries.
-- Updated `implementation_plan.md`, `parallel_workstreams.md`, and task/review
-  packets to point future room/resource/waiting-area and Bernie work at that
-  design boundary.
-- Updated diary assets to `v=65`.
+- Added a Sprint 15 review harness with manual checks, API spot checks, and a
+  guardrail that future "stacking" requests must say whether they mean Waiting
+  Room cards or diary appointment blocks.
+- Updated diary assets to `v=66`.
 
 ## Recommended User Review
 
 1. Restart the backend and hard refresh the diary.
-2. Confirm the live diary loads `diary.js?v=65`.
-3. Open the Waiting Room panel and check that:
-   - the section counts no longer show widely spaced parentheses
-   - Waiting Room / In Consult / Expected Today / Finished sections can collapse
-     and expand
-   - collapsed/open section state persists after refresh
-   - area tabs still behave sensibly when waiting-area data exists
-   - cards are more compact and edit/link affordances are less visually noisy
-4. Confirm ordinary appointment cards in the main diary grid are not stacked or
-   cascaded on top of each other unless their times genuinely overlap.
-5. Optional direct API check: choose an appointment and a waiting-area ID, then
-   call `PATCH /appointments/{id}/status` with both `status` and
-   `waiting_area_id`; confirm the returned appointment includes that
-   `waiting_area_id`.
+2. Confirm the live diary loads `diary.js?v=66`.
+3. Use the detailed "Sprint 15 Review Harness - Waiting Room Check-In
+   Operations" section below.
+4. Pay particular attention to waiting-area defaulting/reassignment, terminal
+   status clearing/filtering, and the difference between Waiting Room card
+   density and main diary grid appointment geometry.
 
 User review result: pending.
 
@@ -76,9 +66,9 @@ User review result: pending.
 - Physical waiting areas now exist in the backend, but room/resource admin and
   per-room default waiting-area editing are still future work. The Sprint 14
   design reference is `orchestration/resource_admin_bernie_tool_design.md`.
-- Decide whether terminal appointment statuses such as Completed, Cancelled,
-  NoShow, and DNA should automatically clear `waiting_area_id` or merely become
-  invisible through waiting-room filters.
+- Terminal appointment statuses now auto-clear `waiting_area_id` when omitted
+  from PATCH. Continue watching whether this feels right in practice, especially
+  when status changes are corrected after accidental completion/cancellation.
 - The diary waiting-area UI should eventually auto-focus the area associated with
   the active room/column and support true stacked/condensed cards inside
   high-volume Waiting Room sections such as Finished.

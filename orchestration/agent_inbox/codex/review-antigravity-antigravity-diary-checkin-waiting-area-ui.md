@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-checkin-waiting-area-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -42,5 +42,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into master as part of Sprint 15. Scope stayed inside the diary Waiting Room side-panel files; no main diary grid geometry changes were introduced.
+- Follow-up required: User review should check Expected Today density, area selectors, live reassignment, single-area tab hiding, and no diary-grid appointment stacking regression.

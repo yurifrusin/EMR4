@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-waiting-area-checkin-defaults` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -81,5 +81,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into master as part of Sprint 15. Scope stayed backend-only; focused verification passed with 120 tests and 1 warning.
+- Follow-up required: User review should confirm the diary UI handles terminal auto-clear and explicit waiting-area reassignment ergonomically.
