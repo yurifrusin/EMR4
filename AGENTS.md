@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 17 - command/proposal workflow retrofit integrated; pending user review |
-| **Next recommended work** | User-review the create-proposal diary flow, then dispatch the next command/proposal retrofit slice |
+| **Current active track** | Sprint 17 - command/proposal workflow retrofit closed after user review |
+| **Next recommended work** | Dispatch Sprint 18 command/proposal retrofit and patient-admin safety work |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -293,7 +293,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Current closeout commit — Close sprint 17 proposal workflow integration |
+| **Latest integration commit** | Current closeout commit — Document dev data querying and close sprint 17 |
 
 ### Tag map (all tags pushed to remote)
 

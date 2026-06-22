@@ -540,7 +540,147 @@ docs/diary/diary.html?smoke=true
 
 ---
 
-## 16. Common Problems
+## 16. Query The API And Database Safely
+
+Use this section when you want to inspect dev data, check whether a record exists,
+or confirm what the backend is returning. Prefer the API first because it uses the
+same practice scoping and permissions as the real app. Use direct database queries
+when you need to diagnose seeded/dev data.
+
+### API Login
+
+Start from the EMR4 folder with the backend running:
+
+```powershell
+cd C:\Users\YOUR_WINDOWS_USERNAME\Documents\EMR4
+
+$base = "http://localhost:8001/api/v1"
+$login = Invoke-RestMethod `
+  -Method Post `
+  -Uri "$base/auth/login" `
+  -ContentType "application/x-www-form-urlencoded" `
+  -Body "username=dr.shera%40emr4dev.local&password=Password1!"
+
+$token = $login.access_token
+$headers = @{ Authorization = "Bearer $token" }
+```
+
+If `$token` is empty, the login failed. Do not continue until login works.
+
+### Search Patients Through The API
+
+```powershell
+Invoke-RestMethod `
+  -Uri "$base/patients/search?q=billy" `
+  -Headers $headers |
+  Select-Object id,first_name,last_name,date_of_birth,medicare_number,medicare_irn
+```
+
+Try a fuller query if needed:
+
+```powershell
+Invoke-RestMethod `
+  -Uri "$base/patients/search?q=Billy%20Frusin" `
+  -Headers $headers |
+  Select-Object id,first_name,last_name,date_of_birth,medicare_number,medicare_irn
+```
+
+### Find Likely Duplicate Patients In The Database
+
+Direct database reads are fine in the dev database. Do not run delete/update
+commands unless you are certain which record should be changed.
+
+```powershell
+docker exec -it gp-pms-postgres psql -U postgres -d gp_pms_dev
+```
+
+Inside `psql`, list same-name/date-of-birth duplicates:
+
+```sql
+SELECT lower(first_name) AS first_name,
+       lower(last_name) AS last_name,
+       date_of_birth,
+       count(*) AS copies
+FROM patients
+GROUP BY lower(first_name), lower(last_name), date_of_birth
+HAVING count(*) > 1
+ORDER BY copies DESC, last_name, first_name;
+```
+
+Inspect a specific patient name:
+
+```sql
+SELECT id,
+       first_name,
+       last_name,
+       date_of_birth,
+       medicare_number,
+       medicare_irn,
+       ihi_number,
+       phone_mobile,
+       created_at
+FROM patients
+WHERE lower(first_name) = lower('Billy')
+  AND lower(last_name) = lower('Frusin')
+ORDER BY created_at;
+```
+
+Find duplicate Medicare + IRN combinations:
+
+```sql
+SELECT medicare_number,
+       medicare_irn,
+       count(*) AS copies
+FROM patients
+WHERE medicare_number IS NOT NULL
+  AND medicare_number <> ''
+  AND medicare_irn IS NOT NULL
+  AND medicare_irn <> ''
+GROUP BY medicare_number, medicare_irn
+HAVING count(*) > 1
+ORDER BY copies DESC;
+```
+
+Quit `psql`:
+
+```sql
+\q
+```
+
+### Before Deleting A Duplicate
+
+For now, do not delete duplicate patient rows manually unless you have checked
+linked appointments, encounters, documents, and generated files. A duplicate may
+already be referenced by another table.
+
+Use these read-only checks first, replacing `PATIENT_ID_HERE` with the exact ID:
+
+```sql
+SELECT id, appointment_date, start_time_local, status, reason
+FROM appointments
+WHERE patient_id = 'PATIENT_ID_HERE'
+ORDER BY appointment_date, start_time_local;
+
+SELECT id, encounter_date, status
+FROM encounters
+WHERE patient_id = 'PATIENT_ID_HERE'
+ORDER BY encounter_date DESC;
+```
+
+Safer short-term workflow:
+
+1. Use the API or SQL queries above to list duplicates.
+2. Decide which record is the keeper.
+3. Ask Codex to merge/delete the exact duplicate IDs, or wait until EMR4 has a
+   proper admin merge-patient tool.
+
+Longer term, EMR4 should have a receptionist/admin duplicate-resolution workflow
+that merges references, preserves audit history, and never silently destroys a
+clinical record.
+
+---
+
+## 17. Common Problems
 
 ### PowerShell Will Not Activate `.venv`
 
@@ -631,7 +771,7 @@ Restart backend:
 
 ---
 
-## 17. Minimal Command Checklist
+## 18. Minimal Command Checklist
 
 First-time setup after installing Git/Python/Docker/Node/ngrok:
 

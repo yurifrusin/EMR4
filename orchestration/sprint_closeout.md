@@ -337,9 +337,11 @@ Result: `75 passed`; JS syntax and whitespace checks clean.
 
 Manual user review:
 
-- Confirm diary assets load at `diary.js?v=71`.
+- Confirm diary assets load at `diary.js?v=72`.
 - Create a normal non-conflicting booking and confirm it saves.
 - Try an overlapping booking and confirm the modal blocks the save before writing.
 - Create a booking that crosses a break and confirm the warning appears, then `Confirm & Save` writes it.
 - Create a provisional-patient booking and confirm the warning appears, then `Confirm & Save` writes it.
 - Confirm the proposal warning/error copy is readable in the booking modal and does not disturb the main diary grid or Waiting Room panel.
+
+User review result: positive after hotfix `d081834`; break-crossing warning now appears for the visible break path.
