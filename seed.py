@@ -470,17 +470,32 @@ def seed():
             ("Main Waiting Room", 0),
             ("Children's Area", 1),
         ]
+        waiting_areas = {}
         for area_name, order in waiting_areas_data:
             area = db.query(WaitingArea).filter_by(
                 practice_id=practice.id, name=area_name
             ).first()
             if not area:
-                db.add(WaitingArea(
+                area = WaitingArea(
                     practice_id=practice.id,
                     name=area_name,
                     display_order=order,
                     is_active=True,
-                ))
+                )
+                db.add(area)
+                db.flush()
+            waiting_areas[area_name] = area
+
+        room_default_areas = {
+            "Room 1": "Main Waiting Room",
+            "Room 2": "Children's Area",
+            "Room 3": "Main Waiting Room",
+        }
+        for room_name, area_name in room_default_areas.items():
+            room = rooms.get(room_name)
+            area = waiting_areas.get(area_name)
+            if room and area and room.default_waiting_area_id != area.id:
+                room.default_waiting_area_id = area.id
         db.flush()
         print(f"  Waiting areas seeded ({len(waiting_areas_data)} areas)")
 

@@ -9,8 +9,8 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 15: Waiting Room Check-In Operations |
-| Integrated through | `847eb01` plus integration-log bookkeeping |
-| Status | Integrated locally, verification passed, pending push/audit |
+| Integrated through | `b4926ba` plus hotfix pending |
+| Status | Hotfix verification passed locally; pending push/audit |
 | Last updated | 2026-06-22 |
 
 ## What Changed
@@ -28,17 +28,22 @@ reviewed, integrated, verified, pushed, and audited.
   denser, check-in can send a selected waiting area, arrived patients can be
   reassigned between waiting areas, and the tab strip is hidden when only one
   waiting area is available.
+- Hotfix: seeded default waiting areas for rooms and made the diary prefer the
+  backend `checkin-defaults` suggestion before falling back to a local guess.
+  Dev defaults are Room 1 -> Main Waiting Room, Room 2 -> Children's Area,
+  Room 3 -> Main Waiting Room.
 - Kept the main diary grid appointment positioning unchanged. The prior
   accidental appointment-card stacking/cascade behaviour was not reintroduced.
 - Added a Sprint 15 review harness with manual checks, API spot checks, and a
   guardrail that future "stacking" requests must say whether they mean Waiting
   Room cards or diary appointment blocks.
-- Updated diary assets to `v=66`.
+- Updated diary assets to `v=67`.
 
 ## Recommended User Review
 
-1. Restart the backend and hard refresh the diary.
-2. Confirm the live diary loads `diary.js?v=66`.
+1. Pull latest, restart the backend, and rerun `python seed.py` once so the
+   dev rooms receive default waiting areas.
+2. Hard refresh the diary and confirm the live diary loads `diary.js?v=67`.
 3. Use the detailed "Sprint 15 Review Harness - Waiting Room Check-In
    Operations" section below.
 4. Pay particular attention to waiting-area defaulting/reassignment, terminal
@@ -133,9 +138,8 @@ implementation has already landed.
 
 ### Manual User Review Checklist
 
-1. Restart the backend and hard refresh the deployed/local diary surface after
-   integration. Confirm the expected diary asset version if the UI branch
-   changed `docs/diary/diary.html`.
+1. Pull latest, restart the backend, rerun `python seed.py`, and hard refresh
+   the deployed/local diary surface. Confirm the diary loads `diary.js?v=67`.
 2. Open today's diary and the Waiting Room panel. Confirm Expected Today cards
    are compact, chronological by appointment time, and readable without looking
    like the main diary grid's overlapping appointment blocks.

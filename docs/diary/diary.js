@@ -23,6 +23,7 @@ let activeAppointments = [];
 let activeTypes = [];
 let ahpraToPractitionerMap = {};
 let waitingAreas = [];
+const checkinDefaultCache = new Map();
 
 function isSmokeMode() {
   return new URLSearchParams(window.location.search).get("smoke") === "true";
@@ -2252,6 +2253,32 @@ async function loadTodayAppointments() {
   }
 }
 
+async function hydrateCheckinDefaults(appts) {
+  if (isSmokeMode() || !token || !Array.isArray(appts) || !waitingAreas.length) return;
+
+  const pending = appts.filter(appt => appt?.id && !checkinDefaultCache.has(appt.id));
+  if (!pending.length) return;
+
+  await Promise.all(pending.map(async appt => {
+    try {
+      const res = await apiFetch(`/appointments/${appt.id}/checkin-defaults`);
+      if (!res.ok) {
+        checkinDefaultCache.set(appt.id, { waitingAreaId: null, roomName: null });
+        return;
+      }
+      const data = await res.json();
+      checkinDefaultCache.set(appt.id, {
+        waitingAreaId: data?.suggested_waiting_area_id || null,
+        roomName: data?.room_name || null,
+      });
+    } catch (err) {
+      if (err && err.message === "401 Unauthorized") throw err;
+      console.warn("Check-in default fetch failed:", err);
+      checkinDefaultCache.set(appt.id, { waitingAreaId: null, roomName: null });
+    }
+  }));
+}
+
 function getDefaultWaitingArea(appt) {
   if (!appt) return null;
   // 1. If the appt already has a waiting_area_id, use it
@@ -2260,7 +2287,14 @@ function getDefaultWaitingArea(appt) {
     if (area) return area;
   }
 
-  // 2. Try to match the practitioner's column default waiting room name
+  // 2. Prefer the backend's DiaryRoster -> Room.default_waiting_area_id suggestion
+  const cachedDefault = appt.id ? checkinDefaultCache.get(appt.id) : null;
+  if (cachedDefault?.waitingAreaId && waitingAreas.length) {
+    const area = waitingAreas.find(item => item.id === cachedDefault.waitingAreaId);
+    if (area) return area;
+  }
+
+  // 3. Try to match the practitioner's column default waiting room name
   if (appt.practitioner && appt.practitioner.ahpra_number && activeTemplate && activeTemplate.columns) {
     const col = activeTemplate.columns.find(c => c.practitioner_ahpra === appt.practitioner.ahpra_number);
     if (col && (col.default_waiting_room || col.waiting_room)) {
@@ -2270,7 +2304,7 @@ function getDefaultWaitingArea(appt) {
     }
   }
 
-  // 3. Fall back to the first waiting area in the list
+  // 4. Fall back to the first waiting area in the list
   if (waitingAreas.length) {
     return waitingAreas[0];
   }
@@ -2433,6 +2467,12 @@ async function updateFlowPanel() {
     filteredConsult = consult.filter(filterFn);
     filteredExpected = expected.filter(filterFn);
     filteredFinished = finished.filter(filterFn);
+  }
+
+  try {
+    await hydrateCheckinDefaults([...filteredExpected, ...filteredWaiting]);
+  } catch (err) {
+    console.warn("Waiting room default hydration failed:", err);
   }
 
   const secWaiting = document.querySelector("#flow-sec-waiting .flow-sec-count");

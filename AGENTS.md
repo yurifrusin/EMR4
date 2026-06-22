@@ -293,7 +293,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `847eb01` — "Integrate diary waiting area check-in UI" |
+| **Latest integration commit** | Current `master` HEAD — Sprint 15 waiting-area defaults hotfix |
 
 ### Tag map (all tags pushed to remote)
 
