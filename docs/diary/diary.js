@@ -25,6 +25,13 @@ let ahpraToPractitionerMap = {};
 let waitingAreas = [];
 const checkinDefaultCache = new Map();
 
+let activeLocationId = localStorage.getItem("emr4_diary_active_location") || "loc-1";
+const mockLocations = [
+  { id: "loc-1", name: "Main Clinic" },
+  { id: "loc-2", name: "North Branch" },
+  { id: "loc-3", name: "East Specialty Suite" }
+];
+
 function isSmokeMode() {
   return new URLSearchParams(window.location.search).get("smoke") === "true";
 }
@@ -120,7 +127,8 @@ function getMockAppointments() {
       practitioner: { ahpra_number: "MED0001234567" },
       patient: { first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
       reason: "Hypertension follow-up",
-      appointment_type_id: "smoke-type-1"
+      appointment_type_id: "smoke-type-1",
+      location_id: "loc-1"
     },
     {
       id: "smoke-appt-2",
@@ -130,7 +138,8 @@ function getMockAppointments() {
       practitioner: { ahpra_number: "MED0001234567" },
       patient: { first_name: "Billy", last_name: "Frusin", date_of_birth: "1988-11-12" },
       reason: "Ear ache",
-      appointment_type_id: "smoke-type-2"
+      appointment_type_id: "smoke-type-2",
+      location_id: "loc-1"
     },
     {
       id: "smoke-appt-3",
@@ -140,7 +149,8 @@ function getMockAppointments() {
       practitioner: { ahpra_number: "MED0001234567" },
       patient: { first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
       reason: "Care Plan review",
-      appointment_type_id: "smoke-type-1"
+      appointment_type_id: "smoke-type-1",
+      location_id: "loc-2"
     },
     {
       id: "smoke-appt-4",
@@ -150,7 +160,8 @@ function getMockAppointments() {
       practitioner: { ahpra_number: "MED0001234567" },
       patient: { first_name: "Jane", last_name: "Doe", date_of_birth: "1990-05-15" },
       reason: "Flu vaccine",
-      appointment_type_id: "smoke-type-2"
+      appointment_type_id: "smoke-type-2",
+      location_id: "loc-2"
     },
     {
       id: "smoke-appt-5",
@@ -160,7 +171,8 @@ function getMockAppointments() {
       practitioner: { ahpra_number: "MED0001234567" },
       patient: { first_name: "John", last_name: "Smith", date_of_birth: "1978-08-20" },
       reason: "Script renewal",
-      appointment_type_id: "smoke-type-1"
+      appointment_type_id: "smoke-type-1",
+      location_id: "loc-1"
     },
     {
       id: "smoke-appt-6",
@@ -171,7 +183,8 @@ function getMockAppointments() {
       patient_name_provisional: "Nora Patel",
       patient: null,
       reason: "Dressing change",
-      appointment_type_id: "smoke-type-2"
+      appointment_type_id: "smoke-type-2",
+      location_id: "loc-1"
     }
   ];
   }
@@ -1200,7 +1213,10 @@ async function loadDiary(silent = false, options = {}) {
 
     if (isSmokeMode) {
       template = normalizeTemplate(getMockTemplate());
-      appointments = getMockAppointments();
+      appointments = getMockAppointments().filter(a => {
+        const apptLocId = a.location_id || "loc-1";
+        return apptLocId === activeLocationId;
+      });
       types = getMockTypes();
       waitingAreas = [
         { id: "mock-area-1", name: "Main Waiting Room" },
@@ -1617,6 +1633,8 @@ Office.onReady(() => {
   });
 
   restoreSectionCollapseStates();
+
+  initLocationSelector();
 
   updateDateLabel();
 
@@ -2233,7 +2251,8 @@ async function loadTodayAppointments() {
       let dateStr = a.appointment_date;
       if (dateStr && dateStr.includes("T")) dateStr = dateStr.split("T")[0];
       const todayStr = new Date().toISOString().slice(0, 10);
-      return dateStr === todayStr;
+      const apptLocId = a.location_id || "loc-1";
+      return dateStr === todayStr && apptLocId === activeLocationId;
     });
     return;
   }
@@ -2737,4 +2756,41 @@ function restoreSectionCollapseStates() {
     }
     updateSectionChevron(sectionEl, isCollapsed);
   });
+}
+
+// ─── PHYSICAL LOCATION SELECTOR ────────────────────────────
+function initLocationSelector() {
+  const selectEl = document.getElementById("diary-location-select");
+  if (!selectEl) return;
+
+  selectEl.innerHTML = "";
+
+  const isSmoke = isSmokeMode();
+  const list = isSmoke ? mockLocations : [{ id: "loc-1", name: "Main Clinic" }];
+
+  list.forEach(loc => {
+    const opt = document.createElement("option");
+    opt.value = loc.id;
+    opt.textContent = loc.name;
+    if (loc.id === activeLocationId) {
+      opt.selected = true;
+    }
+    selectEl.appendChild(opt);
+  });
+
+  // If the saved activeLocationId is no longer in the list (e.g. switching modes), reset it
+  if (!list.some(loc => loc.id === activeLocationId)) {
+    activeLocationId = list[0].id;
+    localStorage.setItem("emr4_diary_active_location", activeLocationId);
+  }
+
+  selectEl.onchange = () => {
+    activeLocationId = selectEl.value;
+    localStorage.setItem("emr4_diary_active_location", activeLocationId);
+    setStatus(`Location changed to ${selectEl.options[selectEl.selectedIndex].text}`);
+
+    // Changing location triggers loadDiary. In smoke mode it applies local filtering,
+    // in live mode it maintains a stable one-location fallback by loading all.
+    loadDiary(true);
+  };
 }
