@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/command-proposal-review-harness` |
 | Source Task | `codex-command-proposal-review-harness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -50,5 +50,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Review harness gives reusable command/proposal vocabulary, PowerShell snippets, response-shape checks, and merge gates for future agent-safe workflows.
+- Follow-up required: Keep harness field names aligned as update/status proposal contracts evolve.

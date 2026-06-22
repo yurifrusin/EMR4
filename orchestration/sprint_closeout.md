@@ -315,3 +315,31 @@ Codex/orchestrator should specifically report whether:
   patient identity are described as separate surfaces.
 - No Sprint 17 work starts a Bernie runtime, bypasses normal appointment route
   validation, or creates a privileged agent-only write path.
+
+### Sprint 17 Integrated Outcome
+
+Integrated submissions:
+
+- Claude: existing-appointment update/status proposal contracts.
+- Antigravity: diary new-booking modal create-proposal preflight.
+- Codex/Banach: command proposal review harness and API snippets.
+
+Verification run after integration:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\schemas\appointments.py tests\test_appointment_update_proposal.py tests\test_appointment_proposals.py
+node --check docs\diary\diary.js
+.venv\Scripts\python.exe -m pytest tests\test_appointment_update_proposal.py tests\test_appointment_proposals.py tests\test_appointment_status_mutations.py tests\test_booking_create_edit.py tests\test_break_overlap_contract.py -q --tb=short -p no:randomly
+git diff --check
+```
+
+Result: `75 passed`; JS syntax and whitespace checks clean.
+
+Manual user review:
+
+- Confirm diary assets load at `diary.js?v=71`.
+- Create a normal non-conflicting booking and confirm it saves.
+- Try an overlapping booking and confirm the modal blocks the save before writing.
+- Create a booking that crosses a break and confirm the warning appears, then `Confirm & Save` writes it.
+- Create a provisional-patient booking and confirm the warning appears, then `Confirm & Save` writes it.
+- Confirm the proposal warning/error copy is readable in the booking modal and does not disturb the main diary grid or Waiting Room panel.

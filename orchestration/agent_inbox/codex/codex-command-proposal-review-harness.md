@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/command-proposal-review-harness` |
-| Status | submitted |
+| Status | integrated |
 | Created | 7a8d07d |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-command-proposal-review-harness --summary "Short plan summary"` |

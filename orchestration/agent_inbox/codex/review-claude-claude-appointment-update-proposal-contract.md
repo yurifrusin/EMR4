@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-update-proposal-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -42,5 +42,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Focused tests passed after merge; proposal endpoints are non-mutating, route ordering is safe, and update/status proposal semantics are documented as proposal metadata rather than execution.
+- Follow-up required: Decide later whether clearing a linked patient should be proposal-supported or remain direct-edit only.

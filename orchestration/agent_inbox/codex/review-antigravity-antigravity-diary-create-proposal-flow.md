@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-create-proposal-flow` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -37,5 +37,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Diary create modal now checks the create proposal endpoint before writing; blocked proposals stop, warning proposals require explicit Confirm & Save, and smoke mode is clearly local/mock.
+- Follow-up required: User review should verify live safe booking, conflict block, break-warning confirmation, and provisional-patient warning.
