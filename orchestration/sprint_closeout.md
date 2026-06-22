@@ -9,8 +9,8 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 16: Location-Aware Diary Foundations |
-| Integrated through | `b2d8b78` plus handover closeout commit |
-| Status | Integrated locally; pending push/audit |
+| Integrated through | `0298a12` plus audited closeout status update |
+| Status | Pushed, mirrors realigned, audited; ready for user review |
 | Last updated | 2026-06-22 |
 
 ## What Changed
