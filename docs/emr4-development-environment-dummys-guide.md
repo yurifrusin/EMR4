@@ -348,7 +348,38 @@ dev data.
 
 ---
 
-## 11. Stopping The Dev Stack
+## 11. Restart Only The Backend
+
+If the diary/taskpane is already open and you only need the FastAPI backend to
+pick up Python changes, stop the current backend terminal with:
+
+```text
+Ctrl+C
+```
+
+Then restart it from the EMR4 folder:
+
+```powershell
+cd C:\Users\YOUR_WINDOWS_USERNAME\Documents\EMR4
+.venv\Scripts\Activate.ps1
+uvicorn app.main:app --reload --port 8001
+```
+
+If you started everything through `run_dev.ps1` and want the launcher to stop
+and restart the whole dev stack, use:
+
+```powershell
+.\run_dev.ps1 -Down
+.\run_dev.ps1
+```
+
+Use the full launcher restart when ngrok, the npm dev server, or the terminal
+windows themselves are confused. Use the direct `uvicorn` restart when only
+backend Python code has changed.
+
+---
+
+## 12. Stopping The Dev Stack
 
 To stop uvicorn, ngrok, and the npm dev server:
 
@@ -372,7 +403,7 @@ docker start gp-pms-postgres
 
 ---
 
-## 12. Agent Worktrees On A New PC
+## 13. Agent Worktrees On A New PC
 
 After cloning the repo and setting up the environment, create the agent worktrees:
 
@@ -413,7 +444,7 @@ It is OK to split a sprint across computers if each worker has its own branch.
 
 ---
 
-## 13. Check The Live Taskpane Version
+## 14. Check The Live Taskpane Version
 
 When taskpane changes are pushed, the HTML should advertise the newest
 cache-buster version, for example:
@@ -455,7 +486,7 @@ worker branches such as `claude/current`, `antigravity/current`, or
 
 ---
 
-## 14. Check The Live Diary Version
+## 15. Check The Live Diary Version
 
 When diary changes are pushed, the HTML should advertise the newest cache-buster
 version, for example:
@@ -491,7 +522,7 @@ version, check the Pages deployment branch in GitHub Actions.
 
 ---
 
-## 15. Common Problems
+## 16. Common Problems
 
 ### PowerShell Will Not Activate `.venv`
 
@@ -582,7 +613,7 @@ Restart backend:
 
 ---
 
-## 14. Minimal Command Checklist
+## 17. Minimal Command Checklist
 
 First-time setup after installing Git/Python/Docker/Node/ngrok:
 
