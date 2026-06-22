@@ -173,6 +173,72 @@ class AppointmentCreateProposalOut(BaseModel):
     patient_identity: Literal["linked", "provisional"]
 
 
+class AppointmentUpdateProposalIn(BaseModel):
+    """All fields optional — unset fields keep the appointment's current values."""
+    patient_id: Optional[uuid.UUID] = None
+    patient_name_provisional: Optional[str] = None
+    practitioner_id: Optional[uuid.UUID] = None
+    appointment_type_id: Optional[uuid.UUID] = None
+    location_id: Optional[uuid.UUID] = None
+    appointment_date: Optional[date] = None
+    start_time_local: Optional[time] = None
+    duration_minutes: Optional[int] = Field(default=None, gt=0, le=480)
+    reason: Optional[str] = None
+    notes: Optional[str] = None
+
+
+class AppointmentUpdateCommand(BaseModel):
+    appointment_id: uuid.UUID
+    patient_id: Optional[uuid.UUID] = None
+    patient_name_provisional: Optional[str] = None
+    practitioner_id: uuid.UUID
+    appointment_type_id: Optional[uuid.UUID] = None
+    location_id: Optional[uuid.UUID] = None
+    appointment_date: date
+    start_time_local: time
+    start_time: datetime
+    duration_minutes: int
+    reason: Optional[str] = None
+    notes: Optional[str] = None
+
+
+class AppointmentUpdateProposalOut(BaseModel):
+    intent: Literal["update_appointment"] = "update_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["execute_with_report", "proposal", "blocked"]
+    summary: str
+    command: AppointmentUpdateCommand
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    conflict: Optional[AppointmentConflictBrief] = None
+    breaks_overlap: list[str] = Field(default_factory=list)
+    patient_identity: Literal["linked", "provisional"]
+
+
+class AppointmentStatusProposalIn(BaseModel):
+    status: AppointmentStatus
+    waiting_area_id: Optional[uuid.UUID] = None
+
+
+class AppointmentStatusCommand(BaseModel):
+    appointment_id: uuid.UUID
+    status: AppointmentStatus
+    waiting_area_id: Optional[uuid.UUID] = None
+    clears_waiting_area: bool
+
+
+class AppointmentStatusProposalOut(BaseModel):
+    intent: Literal["update_appointment_status"] = "update_appointment_status"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["execute_with_report", "proposal", "blocked"]
+    summary: str
+    command: AppointmentStatusCommand
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
 class ScheduleSlot(BaseModel):
     start_time: datetime
     end_time: datetime

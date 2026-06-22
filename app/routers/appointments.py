@@ -19,6 +19,8 @@ from app.schemas.appointments import (
     AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
     AppointmentCheckinDefaults, AppointmentConflictBrief, AppointmentCreateCommand,
     AppointmentCreateProposalOut, AppointmentProposalIssue,
+    AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
+    AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -543,6 +545,235 @@ def propose_create_appointment(
         breaks_overlap=breaks_overlap,
         patient_identity=patient_identity,
     )
+
+
+@router.post("/proposals/update/{appointment_id}", response_model=AppointmentUpdateProposalOut)
+def propose_update_appointment(
+    appointment_id: uuid.UUID,
+    body: AppointmentUpdateProposalIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Non-mutating proposal for editing/rescheduling an existing appointment.
+
+    Merges supplied fields over the appointment's current values and evaluates
+    conflicts, break overlaps, and patient-identity state without writing anything.
+    The returned command payload is ready to pass to PUT /{id} after staff confirmation.
+    """
+    practice_id = current_user.practice_id
+    practice_tz = _practice_zoneinfo(db, practice_id)
+    appt = _get_appointment(appointment_id, practice_id, db)
+    incoming = body.model_dump(exclude_unset=True)
+
+    practitioner_id = incoming.get("practitioner_id", appt.practitioner_id)
+    appointment_type_id = incoming.get("appointment_type_id", appt.appointment_type_id)
+    location_id = incoming.get("location_id", appt.location_id)
+    duration_minutes = incoming.get("duration_minutes", appt.duration_minutes)
+    patient_id = incoming.get("patient_id", appt.patient_id)
+    patient_name_provisional = incoming.get("patient_name_provisional", appt.patient_name_provisional)
+    reason = incoming.get("reason", appt.reason)
+    notes = incoming.get("notes", appt.notes)
+
+    if "appointment_date" in incoming or "start_time_local" in incoming:
+        new_date = incoming.get("appointment_date", appt.appointment_date)
+        new_time_local = incoming.get("start_time_local", appt.start_time_local)
+        appointment_date, start_time_local, start_time = _canonical_time_values(
+            practice_tz,
+            appointment_date=new_date,
+            start_time_local=new_time_local,
+        )
+    else:
+        appointment_date = appt.appointment_date
+        start_time_local = appt.start_time_local
+        start_time = appt.start_time
+
+    if patient_id is not None:
+        _ensure_patient(patient_id, practice_id, db)
+    _ensure_practitioner(practitioner_id, practice_id, db)
+    _ensure_appointment_type(appointment_type_id, practice_id, db)
+    _ensure_location(location_id, practice_id, db)
+
+    warnings: list[AppointmentProposalIssue] = []
+    blocks: list[AppointmentProposalIssue] = []
+
+    if appt.status in TERMINAL_STATUSES:
+        blocks.append(AppointmentProposalIssue(
+            code="terminal_status",
+            severity="blocked",
+            message=f"This appointment is already {appt.status.value} and cannot be rescheduled.",
+        ))
+
+    conflict = _find_conflicting_appointment(
+        db, practice_id, practitioner_id,
+        appointment_date, start_time_local, duration_minutes,
+        location_id=location_id,
+        exclude_id=appointment_id,
+    )
+    conflict_brief = _conflict_brief(conflict) if conflict else None
+    if conflict:
+        blocks.append(AppointmentProposalIssue(
+            code="appointment_conflict",
+            severity="blocked",
+            message="The proposed time overlaps an existing booking.",
+        ))
+
+    breaks_overlap = _get_break_overlaps(
+        db, practice_id, practitioner_id,
+        appointment_date, start_time_local, duration_minutes,
+    )
+    for label in breaks_overlap:
+        warnings.append(AppointmentProposalIssue(
+            code="break_overlap",
+            severity="warning",
+            message=f"This appointment overlaps {label}.",
+        ))
+
+    patient_identity = "linked" if patient_id else "provisional"
+    if patient_identity == "provisional":
+        warnings.append(AppointmentProposalIssue(
+            code="provisional_patient",
+            severity="warning",
+            message="This booking is not linked to a verified patient record yet.",
+        ))
+
+    safe = not blocks
+    requires_confirmation = True
+    autonomy_tier = "blocked" if not safe else "proposal"
+
+    patient_label = "linked patient" if patient_id else (patient_name_provisional or "provisional patient")
+    summary = (
+        f"Update booking for {patient_label} to "
+        f"{appointment_date.isoformat()} at {start_time_local.strftime('%H:%M')}, "
+        f"{duration_minutes} min."
+    )
+    if not safe:
+        summary += " Blocked — see issues."
+    elif warnings:
+        summary += " Confirmation recommended."
+    else:
+        summary += " Staff confirmation required."
+
+    return AppointmentUpdateProposalOut(
+        safe=safe,
+        requires_confirmation=requires_confirmation,
+        autonomy_tier=autonomy_tier,
+        summary=summary,
+        command=AppointmentUpdateCommand(
+            appointment_id=appointment_id,
+            patient_id=patient_id,
+            patient_name_provisional=patient_name_provisional,
+            practitioner_id=practitioner_id,
+            appointment_type_id=appointment_type_id,
+            location_id=location_id,
+            appointment_date=appointment_date,
+            start_time_local=start_time_local,
+            start_time=start_time,
+            duration_minutes=duration_minutes,
+            reason=reason,
+            notes=notes,
+        ),
+        warnings=warnings,
+        blocks=blocks,
+        conflict=conflict_brief,
+        breaks_overlap=breaks_overlap,
+        patient_identity=patient_identity,
+    )
+
+
+@router.post("/proposals/status/{appointment_id}", response_model=AppointmentStatusProposalOut)
+def propose_status_update(
+    appointment_id: uuid.UUID,
+    body: AppointmentStatusProposalIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Non-mutating proposal for changing an appointment's status (including cancellation).
+
+    Surfaces waiting-area side-effects and unusual transitions without writing anything.
+    The returned command payload is ready to pass to PATCH /{id}/status after confirmation.
+    autonomy_tier is metadata for Bernie/tool policy — this endpoint never executes.
+    """
+    practice_id = current_user.practice_id
+    appt = _get_appointment(appointment_id, practice_id, db)
+
+    if body.waiting_area_id is not None:
+        _ensure_waiting_area(body.waiting_area_id, practice_id, db)
+
+    warnings: list[AppointmentProposalIssue] = []
+    blocks: list[AppointmentProposalIssue] = []
+
+    if body.status == appt.status:
+        blocks.append(AppointmentProposalIssue(
+            code="already_in_status",
+            severity="blocked",
+            message=f"This appointment is already {appt.status.value}.",
+        ))
+
+    if appt.status in TERMINAL_STATUSES and body.status != appt.status:
+        warnings.append(AppointmentProposalIssue(
+            code="already_terminal",
+            severity="warning",
+            message=f"This appointment is already {appt.status.value}. Re-transitioning is unusual.",
+        ))
+
+    clears_waiting_area = (
+        body.status in TERMINAL_STATUSES
+        and appt.waiting_area_id is not None
+        and body.waiting_area_id is None
+    )
+    if clears_waiting_area:
+        warnings.append(AppointmentProposalIssue(
+            code="waiting_area_cleared",
+            severity="warning",
+            message="This status change will remove the patient from the waiting area.",
+        ))
+
+    safe = not blocks
+    requires_confirmation = True
+
+    if not safe:
+        autonomy_tier = "blocked"
+    elif warnings or body.status in TERMINAL_STATUSES:
+        # Terminal status changes (Completed, Cancelled, NoShow, DNA) are irreversible
+        # clinical decisions — always require proposal/confirmation regardless of warnings.
+        autonomy_tier = "proposal"
+    else:
+        # Routine non-terminal transitions (e.g. Booked→Confirmed, Confirmed→Arrived).
+        # execute_with_report is policy metadata for Bernie tooling; this endpoint
+        # still does not execute anything.
+        autonomy_tier = "execute_with_report"
+
+    if appt.patient:
+        patient_label = f"{appt.patient.first_name} {appt.patient.last_name}".strip()
+    elif appt.patient_name_provisional:
+        patient_label = appt.patient_name_provisional
+    else:
+        patient_label = "appointment"
+
+    summary = (
+        f"Change {patient_label}'s appointment status "
+        f"from {appt.status.value} to {body.status.value}."
+    )
+    if not safe:
+        summary += " Blocked — see issues."
+    elif warnings:
+        summary += " Confirmation recommended."
+
+    return AppointmentStatusProposalOut(
+        safe=safe,
+        requires_confirmation=requires_confirmation,
+        autonomy_tier=autonomy_tier,
+        summary=summary,
+        command=AppointmentStatusCommand(
+            appointment_id=appointment_id,
+            status=body.status,
+            waiting_area_id=body.waiting_area_id,
+            clears_waiting_area=clears_waiting_area,
+        ),
+        warnings=warnings,
+        blocks=blocks,
+    )
+
 
 @router.get("/waiting-room", response_model=list[AppointmentOut])
 def get_waiting_room(
