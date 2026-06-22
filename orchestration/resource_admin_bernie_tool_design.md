@@ -22,14 +22,15 @@ take messages, but every write remains a staff-confirmed action with audit.
 | Diary column | The visual day column shown to reception. | `DiaryColumn` plus date-specific roster merge. | The durable resource model by itself. |
 | Waiting area | A named physical place where arrived patients wait. | `WaitingArea`; `Appointment.waiting_area_id`; `Room.default_waiting_area_id`. | Attendance state, queue position, room, or diary column. |
 | Booking slot | A candidate time interval for a bookable resource. | Existing `/appointments/slots/{practitioner_id}` plus future slot-search contract. | A rendered diary cell or a guarantee until booked. |
-| Linked patient identity | Appointment is attached to a real EMR patient. | `Appointment.patient_id` plus embedded patient. | Arrival, SMS confirmation, or IHI/Medicare verification. |
+| Verified patient identity | Appointment is attached to a real EMR patient record and the provisional/free-text identity has been resolved. | `Appointment.patient_id` plus embedded patient; future identity-verification metadata if needed. | Arrival, SMS confirmation, or booking confirmation. |
 | Provisional patient identity | Reception has a free-text name before linking/creating the patient record. | `Appointment.patient_name_provisional` with no `patient_id`. | A duplicate patient record or verified identity. |
-| Attendance status | Same-day operational flow. | `Appointment.status`: `Booked`, `Arrived`, `InConsult`, `Completed`, `Cancelled`, `NoShow`, `DNA`; legacy `Confirmed` tolerated. | Linked identity or SMS/reminder confirmation. |
-| SMS/reminder confirmation | A patient reply or delivery state from communication workflow. | Future reminder/SMS metadata, likely tied to `sms_log` and appointment reminders. | Attendance, identity linkage, or legacy `Confirmed`. |
+| Attendance status | Same-day operational flow. | `Appointment.status`: `Booked`, `Arrived`, `InConsult`, `Completed`, `Cancelled`, `NoShow`, `DNA`; legacy `Confirmed` tolerated until renamed/deprecated. | Verified identity or SMS/reminder confirmation. |
+| Booking confirmation | Whether the patient has indicated they intend to attend, or whether the practice requires confirmation to keep the slot. | Future reminder/SMS/email/voice-call metadata and practice policy. | Patient identity verification or physical arrival. |
 
-Policy: when a user or tool says "confirmed", require a qualifier. It can mean
-linked patient record, patient replied to reminder, or legacy appointment status.
-It must not be stored by guessing.
+Policy: prefer "verified" for patient identity and "confirmed" for booking
+attendance intent. When a user or tool says "confirmed", require a qualifier. It
+can mean booking confirmation, legacy appointment status, or a patient replied to
+a reminder. It must not be stored by guessing.
 
 ## Admin Contract Shape
 
@@ -121,13 +122,32 @@ Recommended tool classes:
 | `search_patient` | Read | Find candidate patients by name, DOB, phone, Medicare/IHI hints. | No write. Return ambiguity warnings. |
 | `get_patient_booking_context` | Read | Show upcoming/past appointment context for a selected patient. | No write. Practice-scoped. |
 | `find_slots` | Read | Return candidate intervals using practitioner/resource, appointment type, duration, roster, breaks, and conflicts. | No write. Mark soft break overlaps. |
-| `prepare_booking` | Proposal | Build a booking proposal for a linked or provisional patient. | Staff confirms before `POST /appointments`. |
-| `prepare_booking_update` | Proposal | Build reschedule/type/duration/note changes. | Staff confirms before `PUT /appointments/{id}`. |
-| `prepare_patient_link` | Proposal | Link a provisional appointment to a selected patient record. | Staff confirms; preserve unrelated fields. |
-| `prepare_check_in` | Proposal | Move to `Arrived` and optionally assign `waiting_area_id`. | Staff confirms; warn on provisional identity. |
-| `prepare_status_change` | Proposal | Move between attendance states. | Staff confirms; no SMS or identity side effects. |
-| `take_message` | Proposal/Write | Draft or create an internal message. | Prefer staff confirmation; urgent/clinical content escalates. |
+| `prepare_booking` | Proposal | Build a booking proposal for a linked or provisional patient. | Confirmation required before `POST /appointments`. |
+| `prepare_booking_update` | Proposal | Build reschedule/type/duration/note changes. | Confirmation required before `PUT /appointments/{id}` unless the change is a narrow deterministic correction policy later allows. |
+| `link_provisional_patients` | Execute / Report | Attempt to link one or many provisional appointments to existing patient records using deterministic match rules. | Can execute when there is exactly one strong match; report failures/ambiguities for staff review. |
+| `check_in_patient` | Execute / Report | Move a clearly identified appointment to `Arrived` and optionally assign `waiting_area_id`. | Can execute for a named/specified appointment; warn/report if identity or waiting area is ambiguous. |
+| `change_attendance_status` | Execute / Report | Move between routine attendance states. | Can execute for low-risk operational state changes; no SMS, identity, billing, or clinical side effects. |
+| `take_message` | Proposal/Write | Draft or create an internal message. | Prefer confirmation for clinical/urgent content; low-risk administrative message capture may be direct with audit. |
 | `handoff_to_receptionist` | Control | Stop automation and surface ambiguity or policy conflict. | No mutation. |
+
+Bernie actions should use an autonomy tier, not a blanket confirmation rule:
+
+- `read`: no mutation, returns facts/candidates.
+- `proposal`: prepares a change for staff confirmation.
+- `execute_with_report`: runs a deterministic, reversible, low-risk operational
+  action and reports success/failure/ambiguity.
+- `blocked`: refuses to act because identity, policy, permissions, or clinical
+  safety are uncertain.
+
+Examples:
+
+- "Bernie, link all provisional patients" may run matching logic and link only
+  exact strong matches. Ambiguous or failed links return as a worklist.
+- "Bernie, check in Billy Frusin's appointment today" may execute if Billy and
+  the appointment are unambiguous. If several Billy Frusin appointments/patients
+  match, Bernie must ask or add it to a confirmation list.
+- "Find a time next week for Margaret" remains proposal-first because slot choice
+  is judgement-heavy and may need staff/patient negotiation.
 
 Tool response shape should be consistent:
 
@@ -135,36 +155,98 @@ Tool response shape should be consistent:
 - `typed_action`: the exact endpoint/action and validated arguments.
 - `warnings`: identity ambiguity, break overlap, inactive resource, provisional
   patient, SMS consent, or policy warnings.
-- `requires_confirmation`: always `true` for writes in the first Bernie release.
+- `autonomy_tier`: `read`, `proposal`, `execute_with_report`, or `blocked`.
+- `requires_confirmation`: true for proposal actions; false only when the
+  deterministic execution policy allows immediate action.
+- `result_report`: successful mutations, skipped items, failed items, and
+  ambiguities requiring staff review.
 - `audit_context`: user, practice, appointment/patient IDs, model request ID,
-  tool name, proposed arguments, confirmation timestamp once accepted.
+  tool name, proposed/executed arguments, and confirmation or execution timestamp.
 
 ## Safety And Audit Requirements
 
 - Bernie must not call database sessions, ORM models, or raw SQL directly.
 - Write tools require existing route/service validation and RBAC, not a parallel
   privileged path.
-- Human confirmation is required for appointment, patient-link, waiting-area,
-  status, message, and SMS actions.
-- Every confirmed Bernie write needs audit. The project still lacks a general
-  `audit_log`; until that lands, Bernie implementation should not move beyond
-  proposal-only or should add a focused audited-action table as part of an
-  approved security slice.
+- Human confirmation is required for booking creation/rescheduling choices,
+  externally consequential actions, destructive actions, billing/clinical
+  finalisation, SMS sends, and any ambiguous patient identity. Deterministic
+  operational actions such as exact-match provisional linking, unambiguous
+  check-in, and low-risk attendance status correction may execute immediately
+  with audit and exception reporting once their algorithms and permissions are
+  tested.
+- Every Bernie write needs audit, whether confirmed first or executed directly.
+  The project still lacks a general `audit_log`; until that lands, Bernie
+  implementation should not move beyond proposal-only for higher-risk writes and
+  should add a focused audited-action table before direct execution tools are
+  enabled.
 - Treat diary text, appointment notes, and patient-supplied text as untrusted
   prompt input. Model output is advisory until validated by typed schemas.
 - Patient-facing Bernie variants are explicitly deferred until the internal tool
   layer, audit model, rate limiting, and identity proofing are proven.
 
+## Voice And Multi-User Runtime
+
+Text chat is the development and fallback surface. It is useful for debugging,
+audit review, and staff who prefer typing, but the production value of Bernie is
+voice-first reception assistance.
+
+Target production shape:
+
+- Reception staff can speak to Bernie through a headset while continuing to deal
+  with a patient at the counter or another task.
+- Bernie can be "always available" when the receptionist is not on a phone call,
+  but must be easy to mute, pause, or hand off.
+- During a phone call, Bernie may either listen as a quiet assistant if consent
+  and policy allow it, or be invoked on demand for internal actions such as
+  finding slots, preparing a booking, or checking a patient in.
+- The UI should keep a visible transcript/action ledger even if the primary
+  interaction is voice, so staff can see what Bernie heard, did, skipped, or is
+  waiting for.
+
+Phone-system implication:
+
+- Bernie may eventually behave like a phone-system participant or internal
+  extension, but that should be treated as a telephony integration layer, not the
+  core product assumption.
+- The first production-grade internal voice path can be headset/browser audio
+  inside the staff workstation. Later, PBX/VoIP integration could let Bernie join
+  or receive transferred calls as an extension, subject to consent, recording,
+  audit, and practice policy.
+
+Multi-user model:
+
+- Plan for one Bernie session per active staff user, not one global Bernie for
+  the whole practice.
+- Each session has its own audio context, transcript, pending confirmations,
+  task queue, and audit identity tied to the logged-in staff member.
+- Multiple Bernie sessions can use the same backend tools concurrently, relying
+  on RBAC, optimistic concurrency, server-side validation, and audit logs to keep
+  state safe.
+- Practice-level dashboards may aggregate Bernie activity, but individual voice
+  sessions should remain isolated so one receptionist's prompts do not appear in
+  another receptionist's workflow.
+- If a user asks Bernie to perform a batch task, Bernie should execute safe
+  deterministic items and maintain a per-user exception/confirmation queue for
+  ambiguous, high-risk, or failed items.
+
+Design consequence: "Bernie" is a persona and tool layer, but the runtime should
+support multiple concurrent Bernie instances. Each instance acts for one
+authenticated staff user unless a deliberately designed shared/reassigned task
+workflow is introduced.
+
 ## SMS / Reminder Boundary
 
-SMS confirmation should be modelled as communication state, not appointment
-attendance or patient identity.
+SMS/email/voice-call confirmation should be modelled as booking-confirmation
+communication state, not appointment attendance or patient identity.
 
 Near-term rules:
 
 - `sms_log` can record outbound/inbound delivery and reply state.
 - A future reminder response may annotate an appointment with "patient replied
-  yes/no", but it must not set `patient_id` or `Appointment.status`.
+  yes/no", but it must not set `patient_id` or same-day attendance state.
+- Whether booking confirmation is merely advisory or required to keep the
+  appointment's place in the diary should be practice-configurable.
 - "Patient replied YES" can help reception decide, but `Arrived` still means the
   patient is physically present or staff have explicitly marked arrival.
 - SMS consent belongs to patient demographics/communication policy and should be
@@ -182,7 +264,7 @@ Recommended order after Sprint 14 plans are accepted:
    practitioner-backed bookability.
 4. Add a tool-schema-only Bernie design harness or service layer with no LLM
    runtime, proving typed arguments and proposal responses.
-5. Add audit logging before enabling any staff-confirmed Bernie write path.
+5. Add audit logging before enabling any confirmed or direct Bernie write path.
 
 ## Acceptance Checklist
 
@@ -195,7 +277,9 @@ Recommended order after Sprint 14 plans are accepted:
 - SMS/reminder reply can exist without changing attendance or identity.
 - Bernie slot finding can explain practitioner, room, duration, break, and
   conflict reasoning.
-- Bernie write proposals name the exact action and require human confirmation.
+- Bernie writes name the exact action, autonomy tier, confirmation requirement,
+  and result report. Direct execution is limited to deterministic, reversible,
+  low-risk operational work.
 - Nearby surfaces remain separate: no diary grid geometry changes, no Waiting
   Room panel card changes, no taskpane or Command Centre changes.
 
