@@ -413,7 +413,49 @@ It is OK to split a sprint across computers if each worker has its own branch.
 
 ---
 
-## 13. Common Problems
+## 13. Check The Live Taskpane Version
+
+When taskpane changes are pushed, the HTML should advertise the newest
+cache-buster version, for example:
+
+```text
+taskpane.js?v=53
+```
+
+In the Chrome DevTools Console for the Word taskpane frame, run:
+
+```javascript
+[...document.scripts].map(s => s.src).filter(src => src.includes("taskpane.js"))
+```
+
+For CSS:
+
+```javascript
+[...document.styleSheets].map(s => s.href).filter(href => href && href.includes("taskpane.css"))
+```
+
+If either command returns an empty array, DevTools is probably inspecting the
+Word document page rather than the taskpane iframe. Use the Console frame
+dropdown near the top-left and choose the taskpane frame, then run the command
+again.
+
+To check what GitHub Pages is serving directly, run this in the console:
+
+```javascript
+fetch("https://yurifrusin.github.io/EMR4/taskpane/taskpane.html?probe=" + Date.now(), { cache: "no-store" })
+  .then(r => r.text())
+  .then(t => console.log(t.match(/taskpane\.js\?v=\d+/)?.[0]))
+```
+
+The result should match the version in `docs/taskpane/taskpane.html` on
+`master`. If GitHub Pages reports an older version, check GitHub Actions /
+Pages deployments. Pages should deploy only the canonical `master` branch; stale
+worker branches such as `claude/current`, `antigravity/current`, or
+`codex/current` can overwrite the live Pages artifact if manually deployed.
+
+---
+
+## 14. Common Problems
 
 ### PowerShell Will Not Activate `.venv`
 
