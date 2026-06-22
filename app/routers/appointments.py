@@ -288,10 +288,14 @@ def list_appointments(
     practitioner_id: Optional[uuid.UUID] = Query(None),
     patient_id: Optional[uuid.UUID] = Query(None),
     status_filter: Optional[AppointmentStatus] = Query(None, alias="status"),
+    location_id: Optional[uuid.UUID] = Query(None),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
+    practice_id = current_user.practice_id
+    if location_id:
+        _ensure_location(location_id, practice_id, db)
+    practice_tz = _practice_zoneinfo(db, practice_id)
     q = (
         db.query(Appointment)
         .options(
@@ -299,7 +303,7 @@ def list_appointments(
             joinedload(Appointment.practitioner),
             joinedload(Appointment.appointment_type),
         )
-        .filter(Appointment.practice_id == current_user.practice_id)
+        .filter(Appointment.practice_id == practice_id)
     )
     if date_from:
         q = q.filter(
@@ -315,6 +319,8 @@ def list_appointments(
         q = q.filter(Appointment.patient_id == patient_id)
     if status_filter:
         q = q.filter(Appointment.status == status_filter)
+    if location_id:
+        q = q.filter(Appointment.location_id == location_id)
     return q.order_by(Appointment.appointment_date, Appointment.start_time_local).all()
 
 
@@ -372,14 +378,19 @@ def create_appointment(
 def get_waiting_room(
     practitioner_id: Optional[uuid.UUID] = Query(None),
     waiting_area_id: Optional[uuid.UUID] = Query(None),
+    location_id: Optional[uuid.UUID] = Query(None),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     """Today's booked/arrived/in-consult appointments — the live waiting room queue.
 
-    Optional filters: practitioner_id, waiting_area_id. Omit both for the full queue.
+    Optional filters: practitioner_id, waiting_area_id, location_id.
+    Omit all for the full queue.
     """
-    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
+    practice_id = current_user.practice_id
+    if location_id:
+        _ensure_location(location_id, practice_id, db)
+    practice_tz = _practice_zoneinfo(db, practice_id)
     today = datetime.now(practice_tz).date()
 
     q = (
@@ -390,7 +401,7 @@ def get_waiting_room(
             joinedload(Appointment.appointment_type),
         )
         .filter(
-            Appointment.practice_id == current_user.practice_id,
+            Appointment.practice_id == practice_id,
             Appointment.appointment_date == today,
             Appointment.status.in_([
                 AppointmentStatus.Booked,
@@ -404,6 +415,8 @@ def get_waiting_room(
         q = q.filter(Appointment.practitioner_id == practitioner_id)
     if waiting_area_id:
         q = q.filter(Appointment.waiting_area_id == waiting_area_id)
+    if location_id:
+        q = q.filter(Appointment.location_id == location_id)
     return q.order_by(Appointment.queue_position.nullslast(), Appointment.start_time_local).all()
 
 
@@ -502,15 +515,18 @@ def get_checkin_defaults(
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
 
-    roster = (
-        db.query(DiaryRoster)
-        .filter(
-            DiaryRoster.practice_id == practice_id,
-            DiaryRoster.practitioner_id == appt.practitioner_id,
-            DiaryRoster.roster_date == appt.appointment_date,
-        )
-        .first()
+    roster_q = db.query(DiaryRoster).filter(
+        DiaryRoster.practice_id == practice_id,
+        DiaryRoster.practitioner_id == appt.practitioner_id,
+        DiaryRoster.roster_date == appt.appointment_date,
     )
+    if appt.location_id is not None:
+        # Disambiguate when the same practitioner is rostered at multiple locations
+        # on the same date: match only roster entries whose room is at this location.
+        roster_q = roster_q.join(Room, DiaryRoster.room_id == Room.id).filter(
+            Room.location_id == appt.location_id
+        )
+    roster = roster_q.first()
     if roster is None:
         return AppointmentCheckinDefaults()
 
