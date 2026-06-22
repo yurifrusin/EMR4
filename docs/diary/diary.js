@@ -2317,6 +2317,11 @@ function getAppointmentWaitingRoom(a) {
     const area = waitingAreas.find(item => item.id === a.waiting_area_id);
     if (area) return { key: `area:${area.id}`, label: area.name };
   }
+  const cachedDefault = a.id ? checkinDefaultCache.get(a.id) : null;
+  if (cachedDefault?.waitingAreaId && waitingAreas.length) {
+    const area = waitingAreas.find(item => item.id === cachedDefault.waitingAreaId);
+    if (area) return { key: `area:${area.id}`, label: area.name };
+  }
   if (a.waiting_room) {
     const room = a.waiting_room.trim();
     if (room) return { key: `legacy:${room.toLowerCase()}`, label: room };
@@ -2406,20 +2411,6 @@ async function updateFlowPanel() {
   const panel = document.getElementById("diary-flow-panel");
   if (!panel || panel.classList.contains("hidden")) return;
 
-  const areas = getUniqueWaitingAreas();
-  const hasAreas = areas.length > 0;
-  const tabsContainer = document.getElementById("flow-waiting-area-tabs");
-  if (tabsContainer) {
-    if (hasAreas) {
-      const hasTabs = renderWaitingAreaTabs(areas);
-      tabsContainer.classList.toggle("hidden", !hasTabs);
-    } else {
-      tabsContainer.classList.add("hidden");
-      tabsContainer.innerHTML = "";
-      selectedWaitingAreaTab = "all";
-    }
-  }
-
   const waiting = [];
   const consult = [];
   const expected = [];
@@ -2450,6 +2441,26 @@ async function updateFlowPanel() {
   expected.sort(sortByTime);
   finished.sort(sortByTime);
 
+  try {
+    await hydrateCheckinDefaults([...waiting, ...consult, ...expected, ...finished]);
+  } catch (err) {
+    console.warn("Waiting room default hydration failed:", err);
+  }
+
+  const areas = getUniqueWaitingAreas();
+  const hasAreas = areas.length > 0;
+  const tabsContainer = document.getElementById("flow-waiting-area-tabs");
+  if (tabsContainer) {
+    if (hasAreas) {
+      const hasTabs = renderWaitingAreaTabs(areas);
+      tabsContainer.classList.toggle("hidden", !hasTabs);
+    } else {
+      tabsContainer.classList.add("hidden");
+      tabsContainer.innerHTML = "";
+      selectedWaitingAreaTab = "all";
+    }
+  }
+
   let filteredWaiting = waiting;
   let filteredConsult = consult;
   let filteredExpected = expected;
@@ -2467,12 +2478,6 @@ async function updateFlowPanel() {
     filteredConsult = consult.filter(filterFn);
     filteredExpected = expected.filter(filterFn);
     filteredFinished = finished.filter(filterFn);
-  }
-
-  try {
-    await hydrateCheckinDefaults([...filteredExpected, ...filteredWaiting]);
-  } catch (err) {
-    console.warn("Waiting room default hydration failed:", err);
   }
 
   const secWaiting = document.querySelector("#flow-sec-waiting .flow-sec-count");
