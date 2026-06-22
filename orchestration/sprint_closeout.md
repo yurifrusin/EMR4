@@ -79,6 +79,10 @@ working. No further Sprint 15 user review is required before planning Sprint 16.
 - One location may still need multiple diary page views or column groups because
   of screen real estate. Treat this as a view/pagination problem within a
   location, separate from choosing a practice location/site.
+- Sprint 16 review should use `orchestration/location_diary_view_review.md` to
+  keep practice, physical location, room/resource, waiting area, diary view/page
+  group, booking slot, appointment status, patient identity, and booking
+  confirmation language separate.
 - Appointment state still needs the planned distinction between patient identity
   linkage, attendance workflow, and future SMS/reminder confirmation.
 - Bernie should continue to follow
@@ -237,3 +241,28 @@ API review expectations:
 - Are there audit hooks yet for Bernie-style direct check-in/status execution?
   If not, keep Bernie write tools at proposal/report level or limit execution to
   the already validated route behaviour.
+
+---
+
+## Sprint 16 Review Harness - Location-Aware Diary Foundations
+
+Use `orchestration/location_diary_view_review.md` after the Sprint 16 backend
+and diary UI worker branches are reviewed and integrated. This closeout pointer
+is intentionally brief; the harness file owns the vocabulary table, backend
+integration review, diary UI review, Bernie tool vocabulary, manual user review,
+API spot checks, and merge gate.
+
+Codex/orchestrator should specifically report whether:
+
+- Backend location scoping keeps practice tenancy separate from physical
+  location scoping.
+- Rooms, waiting areas, diary templates, rosters, and appointments are
+  associated with a physical location or have a deliberate safe fallback.
+- The diary UI exposes the active physical location when there is more than one
+  site, while the one-location case stays uncluttered.
+- Diary page/view groups are treated as screen layout inside a location, not as
+  extra locations.
+- Waiting Room panels/cards, main diary appointment blocks, booking slots, and
+  status controls remain separate review surfaces.
+- Bernie tool language requires explicit location/resource context before any
+  future write proposal.

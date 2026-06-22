@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/location-diary-view-design-harness` |
-| Status | queued |
+| Status | submitted |
 | Created | 32f1577 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-location-diary-view-design-harness --summary "Short plan summary"` |
@@ -89,6 +89,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/location_diary_view_review.md` added;
+  `orchestration/sprint_closeout.md` updated with a Sprint 16 harness pointer;
+  `implementation_plan.md` updated with the Sprint 16 location review harness
+  guardrail; `orchestration/agent_inbox/codex/plan-codex-codex-location-diary-view-design-harness.md`
+  captured the approved plan; source task packet updated with completion notes.
+- Verification run: `git diff --check` passed.
+- Remaining risks: API spot-check snippets are review aids only because final
+  route and payload names depend on the submitted backend/UI branches. The
+  harness deliberately avoids production code and does not prove runtime
+  location scoping by itself.

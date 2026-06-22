@@ -525,6 +525,12 @@ flowchart TD
   screen real estate. That is a view-layer concern within one location, not a
   separate practice location. Do not solve screen width by incorrectly modelling
   one physical site as multiple locations.
+- **Location review harness**: use
+  `orchestration/location_diary_view_review.md` during Sprint 16 integration and
+  later diary/resource work. It keeps "practice", "location", "room",
+  "waiting area", "diary column", "diary page/view group", "booking slot",
+  "appointment status", "patient identity", and "booking confirmation" separate
+  before those terms reach API contracts or Bernie tool schemas.
 - **Resource/admin contract**: keep rooms, bookable practitioner-backed resources,
   diary columns, and waiting areas distinct. The Sprint 14 design note in
   `orchestration/resource_admin_bernie_tool_design.md` is the current reference
