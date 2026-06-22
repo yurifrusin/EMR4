@@ -128,9 +128,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Plan gate dispatched |
-| Launch Gate | Pending worker `handin` and implementation-plan packets |
-| Implementation Gate | Workers must stop after plan submission until user/Codex says `complete sprint task` |
+| Status | Integrated |
+| Launch Gate | Complete |
+| Implementation Gate | Complete |
 | Theme | Clarify receptionist workflow semantics before further diary/Waiting Room coding or Bernie tools |
 
 ### Workstream AO - Waiting Area Check-In Contract
@@ -145,7 +145,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Diary frontend, taskpane, room admin UI, Bernie implementation, SMS/reminder confirmation, billing/finalisation locking |
 | Verification | Plan packet first; after approval, focused pytest and backend py_compile |
 | Plan Gate | Required before coding |
-| Status | queued |
+| Status | Integrated |
 
 ### Workstream AP - Diary Waiting Room UX Clarity
 
@@ -159,7 +159,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Diary grid appointment positioning, booking slot geometry, booking modal semantics, backend, taskpane, drag/drop/resize, Bernie |
 | Verification | Plan packet first; after approval, `node --check docs\diary\diary.js`, `git diff --check`, visual acceptance notes |
 | Plan Gate | Required before coding |
-| Status | queued |
+| Status | Integrated |
 
 ### Workstream AQ - Resource Admin and Bernie Tool Design
 
@@ -173,7 +173,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Production UI, autonomous Bernie actions, LLM agent runtime, schema migration unless plan-approved, drag/drop/resize |
 | Verification | Plan packet first; after approval, docs diff check or explicit code checks if implementation is approved |
 | Plan Gate | Required before coding |
-| Status | queued |
+| Status | Integrated |
 
 ## Sprint 13: Waiting Areas, Patient Editing, and Bernie Prerequisites
 

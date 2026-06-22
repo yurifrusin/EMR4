@@ -91,6 +91,7 @@ class AppointmentUpdate(BaseModel):
 
 class AppointmentStatusUpdate(BaseModel):
     status: AppointmentStatus
+    waiting_area_id: Optional[uuid.UUID] = None
 
 
 class AppointmentOut(BaseModel):

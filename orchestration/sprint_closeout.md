@@ -8,107 +8,85 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 13: Waiting Areas and Patient Details Foundation |
-| Integrated through | `9618dc4` |
-| Status | Integrated, pushed, user-reviewed, and verified |
+| Batch | Sprint 14: Receptionist Workflow Foundations |
+| Integrated through | pending commit |
+| Status | Integrated locally and verified; push/audit pending |
 | Last updated | 2026-06-22 |
 
 ## What Changed
 
-- Added first-class `WaitingArea` backend resources for physical waiting areas,
-  with practice scoping, active/ordered listing, and room default linkage.
-- Added appointment `waiting_area_id` and `queue_position` support, including
-  waiting-room filtering by area and same-day waiting-room query behaviour.
-- Added `GET /api/v1/diary/waiting-areas` for diary clients.
-- Added migration `f6a7b8c9d0e1_add_waiting_area.py` and dev seed data for
-  Main Waiting Room and Children's Area.
-- Added diary patient-flow tabs for waiting areas and reconciled them with the
-  new backend waiting-area IDs while preserving legacy string fallback.
-- Added taskpane Patient Details editing for the loaded patient, including
-  save/cancel/error/duplicate-block handling.
-- Hardened patient update duplicate checks so re-saving a patient's own strong
-  identifiers is allowed, but duplicate IHI or Medicare+IRN from another patient
-  is blocked inside the same practice.
-- Hardened appointment timezone fallback so missing timezone data cannot crash
-  the waiting-room path.
-- User-review hotfix: removed unintended lane/cascade offsets from diary
-  appointment cards. Waiting Room card stacking remains a separate future UI
-  idea.
-- User-review hotfix: Patient Details now changes the secondary action from
-  Cancel to Close after a successful save, returns it to Cancel after further
-  edits, and preflights hard duplicate identifiers before saving.
-- User-review hotfix: Patient create/edit now requires Medicare number and IRN
-  to be entered as a pair, preventing partial blanking during failed duplicate
-  edits.
-- User-review hotfix: New Patient, Patient Details, and Search are now mutually
-  exclusive taskpane workflows, so stale search UI cannot sit above an open form.
-- User-review hotfix: Patient Details save failures now show feedback at the
-  action bar as well as above the form, and the Save Details button briefly
-  enters a red Not Saved state.
-- User-review hotfix: Patient Details now distinguishes exact duplicate strong
-  identifiers from shared Medicare-card warnings, requires explicit confirmation
-  for same-card/different-IRN saves, defaults blank IRN to `1` when a Medicare
-  number is entered, formats IHI entry, and warns on non-16-digit IHI values.
-- User-review hotfix: duplicate patient messages now use plain receptionist-facing
-  language across both frontend preflight and backend API conflict paths.
-- User-review hotfix: Patient Details keeps IHI numbers grouped when reopening,
-  and the dev database was cleaned to one record per duplicate name/DOB group with
-  plausible shared-card IRNs for family-style testing.
-- User-review hotfix: documented live taskpane version checks in the development
-  guide and added a minimal `docs/index.html`/`.nojekyll` so the GitHub Pages root
-  URL is less confusing.
-- Updated diary assets to `v=64` and taskpane assets to `v=53`.
+- Added an atomic backend check-in/status contract: `PATCH
+  /api/v1/appointments/{id}/status` now accepts optional `waiting_area_id`.
+  If omitted, the current waiting area is preserved; if set to a UUID, the
+  appointment is assigned to that active practice-scoped waiting area; if set to
+  `null`, the waiting area is cleared.
+- Added focused backend regression tests for waiting-area assignment during
+  status transitions, including auth, assign, clear, reassign, inactive-area,
+  cross-practice, and no-area-loss behaviour.
+- Improved the diary Waiting Room side panel only:
+  collapsible sections, cleaner count badges, segmented waiting-area tabs,
+  compact cards, and lower-noise edit/link controls.
+- Kept the main diary grid appointment positioning unchanged. The prior
+  accidental appointment-card stacking/cascade behaviour was not reintroduced.
+- Added `orchestration/resource_admin_bernie_tool_design.md`, the Sprint 14
+  design reference for rooms, bookable resources, diary columns, waiting areas,
+  provisional vs linked patient identity, attendance status, SMS/reminder
+  confirmation, and future Bernie supervised tool boundaries.
+- Updated `implementation_plan.md`, `parallel_workstreams.md`, and task/review
+  packets to point future room/resource/waiting-area and Bernie work at that
+  design boundary.
+- Updated diary assets to `v=65`.
 
 ## Recommended User Review
 
-1. Run migrations if your local DB is not current:
-   `.venv\Scripts\python.exe -m alembic upgrade head`.
-2. Restart the backend and hard refresh the taskpane/diary.
-3. Confirm the live diary loads `diary.js?v=64`.
-4. Open the Waiting Room panel and check that area tabs appear sensibly when
-   waiting-area data or assigned appointments exist.
-5. Move an appointment into Arrived/InConsult/Completed and confirm the waiting
-   panel sections still update correctly.
-6. Open a patient file in the taskpane and use the pencil button to edit patient
-   details.
-7. Confirm Save Details updates the taskpane banner and cancel/Escape exits the
-   Patient Details overlay cleanly.
-8. Try changing a patient to duplicate another patient's IHI or Medicare+IRN and
-   confirm the duplicate is blocked with a readable error.
-9. Confirm New Patient and Search overlays still open and close normally after
-   using Patient Details.
+1. Restart the backend and hard refresh the diary.
+2. Confirm the live diary loads `diary.js?v=65`.
+3. Open the Waiting Room panel and check that:
+   - the section counts no longer show widely spaced parentheses
+   - Waiting Room / In Consult / Expected Today / Finished sections can collapse
+     and expand
+   - collapsed/open section state persists after refresh
+   - area tabs still behave sensibly when waiting-area data exists
+   - cards are more compact and edit/link affordances are less visually noisy
+4. Confirm ordinary appointment cards in the main diary grid are not stacked or
+   cascaded on top of each other unless their times genuinely overlap.
+5. Optional direct API check: choose an appointment and a waiting-area ID, then
+   call `PATCH /appointments/{id}/status` with both `status` and
+   `waiting_area_id`; confirm the returned appointment includes that
+   `waiting_area_id`.
 
-User review result: passed after GitHub Pages was redeployed to the current
-taskpane asset version.
+User review result: pending.
 
 ## Not Required Before Moving On
 
 - No drag/drop/resize appointment testing is required yet.
+- No taskpane Patient Details duplicate testing is required for Sprint 14; that
+  was Sprint 13.
 - No Command Centre, Scribe, Gemini, billing, results, letters, medications, or
   clinical-note regression is required for this sprint.
-- No patient document rewrite testing is required; editing demographics updates
-  the DB/taskpane state only and intentionally does not rewrite existing Word
-  document headings or file names yet.
-- No public online-booking or kiosk testing is required.
+- No patient document rewrite, public online-booking, kiosk, SMS/reminder, or
+  Bernie runtime testing is required.
 
 ## Known Follow-Up
 
-- Patient Details is a foundation slice. Add stronger validation, Medicare IRN
-  polish, IHI/Medicare verification hooks, duplicate-candidate review, and a
+- Patient Details is still a foundation slice. Add stronger validation, Medicare
+  IRN polish, IHI/Medicare verification hooks, duplicate-candidate review, and a
   proper shared demographic model before relying on it in routine use.
-- GitHub Pages deployment should be kept to canonical `master`. During this
-  sprint, manual worker-branch deployments briefly served stale taskpane asset
-  versions. Worker mirrors should be aligned before any emergency Pages deploy
-  from those branches, and `master` should be deployed last.
+- GitHub Pages deployment should be kept to canonical `master`.
 - Physical waiting areas now exist in the backend, but room/resource admin and
-  per-room default waiting-area editing are still future work.
+  per-room default waiting-area editing are still future work. The Sprint 14
+  design reference is `orchestration/resource_admin_bernie_tool_design.md`.
+- Decide whether terminal appointment statuses such as Completed, Cancelled,
+  NoShow, and DNA should automatically clear `waiting_area_id` or merely become
+  invisible through waiting-room filters.
 - The diary waiting-area UI should eventually auto-focus the area associated with
-  the active room/column and support stacked/condensed cards for high-volume
-  sections such as Finished.
+  the active room/column and support true stacked/condensed cards inside
+  high-volume Waiting Room sections such as Finished.
 - Appointment state still needs the planned distinction between patient identity
   linkage, attendance workflow, and future SMS/reminder confirmation.
-- Bernie should wait until the booking/resource and patient-identity rules are
-  stable enough to expose as supervised backend tools.
+- Bernie should continue to follow
+  `orchestration/resource_admin_bernie_tool_design.md`: typed proposals,
+  human-confirmed writes, and audit.
 - Drag/drop/resize should remain deferred until the resource model and patient
   flow semantics are settled.
 - The `pytest_asyncio` loop-scope deprecation warning remains.
@@ -117,33 +95,18 @@ taskpane asset version.
 
 ## Verification
 
-Codex/orchestrator verification for Sprint 13:
+Codex/orchestrator verification for Sprint 14:
 
-- `python -m py_compile app\routers\appointments.py app\routers\patients.py app\routers\diary.py app\schemas\appointments.py app\schemas\diary.py app\models\appointments.py app\models\diary.py` -> passed
 - `node --check docs\diary\diary.js` -> passed
-- `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` -> passed
-- `node --check docs\taskpane\taskpane.js` -> passed
-- `git diff --check` -> passed
-- `.venv\Scripts\python.exe -m pytest tests\test_patients.py tests\test_waiting_area_contract.py -q` -> 29 passed
-- `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_contract.py tests\test_break_overlap_contract.py tests\test_appointment_patient_link.py tests\test_appointment_conflicts.py tests\test_appointment_status_mutations.py tests\test_diary_template.py tests\test_diary_roster.py tests\test_slots.py tests\test_booking_patient_flow.py tests\test_nurse_practitioner.py tests\test_patients.py -q -p no:randomly` -> 123 passed, 1 warning
-- Sprint 13 user-review hotfix:
-  - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 23 passed, 1 warning
-  - `.venv\Scripts\python.exe -m py_compile app\routers\patients.py` -> passed
-  - `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` -> passed
-  - `node --check docs\taskpane\taskpane.js` -> passed
-  - `git diff --check` -> passed
-- Final user-review/deployment hotfix:
-  - `.venv\Scripts\python.exe -m pytest tests\test_patients.py -q` -> 23 passed, 1 warning
-  - `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` -> passed
-  - `node --check docs\taskpane\taskpane.js` -> passed
-  - `git diff --check docs\emr4-development-environment-dummys-guide.md` -> passed
-  - User confirmed the duplicate Medicare+IRN block now displays acceptable
-    wording after Pages reached `taskpane.js?v=53`.
+- `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_waiting_area_checkin_contract.py` -> passed
+- `git diff --check` -> passed, with only CRLF/LF warnings on Markdown files
+- `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_checkin_contract.py -q -p no:randomly` -> 8 passed
+- `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_checkin_contract.py tests\test_waiting_area_contract.py tests\test_appointment_status_mutations.py tests\test_break_overlap_contract.py tests\test_appointment_patient_link.py tests\test_appointment_conflicts.py tests\test_diary_template.py tests\test_diary_roster.py tests\test_slots.py tests\test_booking_patient_flow.py tests\test_nurse_practitioner.py -q --tb=short -p no:randomly` -> 111 passed, 1 warning
 
 ## Recommended Next Direction
 
-The next sprint should keep consolidating the receptionist workflow rather than
-jumping to drag/drop. Recommended slices: assign waiting areas during check-in,
-make diary/Waiting Room state transitions clearer, add room/resource admin
-foundations, and continue preparing the safe backend tools Bernie will later use
-for supervised slot-finding and booking suggestions.
+The next sprint should build on the clarified receptionist workflow without yet
+jumping to drag/drop. Recommended slices: expose waiting-area assignment in the
+diary check-in UI, add small room/waiting-area admin endpoints or admin UI
+foundation, and begin a tool-schema-only Bernie proof path after audit/write
+confirmation rules are explicit.

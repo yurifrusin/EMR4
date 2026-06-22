@@ -491,6 +491,10 @@ def update_appointment_status(
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
     appt.status = body.status
+    if "waiting_area_id" in body.model_fields_set:
+        if body.waiting_area_id is not None:
+            _ensure_waiting_area(body.waiting_area_id, practice_id, db)
+        appt.waiting_area_id = body.waiting_area_id
     db.commit()
     return _get_appointment(appointment_id, practice_id, db)
 

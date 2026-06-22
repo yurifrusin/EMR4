@@ -513,6 +513,10 @@ flowchart TD
   later, practice locations and rooms/resources should expose named waiting areas
   so the waiting-room panel can filter by area without treating rooms, queues, or
   attendance statuses as the same thing.
+- **Resource/admin contract**: keep rooms, bookable practitioner-backed resources,
+  diary columns, and waiting areas distinct. The Sprint 14 design note in
+  `orchestration/resource_admin_bernie_tool_design.md` is the current reference
+  for room/resource/waiting-area admin and future Bernie tool boundaries.
 - **Lifecycle affordance**: use visual state carefully. Patient-record confirmation
   may be bold/link styling or another non-colour cue; attendance state can use
   colour/badge/accent changes.
@@ -544,6 +548,10 @@ flowchart TD
   same tools have been proven internally and audit/permission controls are robust.
 - Treat every model response as advisory. Only typed tool calls with validated
   arguments may mutate appointment, patient, message, or waiting-room state.
+- Bernie tool schemas should preserve the resource/admin vocabulary in
+  `orchestration/resource_admin_bernie_tool_design.md`: every write is a proposed
+  typed action, confirmed by staff, audited, and kept separate from SMS/reminder
+  confirmation and patient identity linkage.
 
 ---
 

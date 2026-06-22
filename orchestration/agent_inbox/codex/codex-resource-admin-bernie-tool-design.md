@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/resource-admin-bernie-tool-design` |
-| Status | queued |
+| Status | integrated |
 | Created | 7fd03d0 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-resource-admin-bernie-tool-design --summary "Short plan summary"` |
@@ -90,5 +90,16 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - Added `orchestration/resource_admin_bernie_tool_design.md`, a Sprint 14 design note separating rooms, bookable resources, diary columns, waiting areas, patient identity, attendance status, SMS/reminder confirmation, and future Bernie supervised tool calls.
+  - Updated `implementation_plan.md` with concise references to the resource/admin and Bernie tool-boundary design note.
+  - Updated `orchestration/sprint_closeout.md` Known Follow-Up references so future sprint planning points at the design note.
+  - Updated the Codex plan packet review fields to show the GUI approval.
+  - Updated this task packet status/completion notes.
 - Verification run:
+  - `git diff --check` -> passed.
+  - No production code, frontend assets, migrations, or tests were changed, so no runtime/backend/frontend test was required.
 - Remaining risks:
+  - Documentation/design only; no admin endpoint, audit table, Bernie runtime, SMS reminder metadata, or production UI exists yet.
+  - Legacy `Confirmed` remains an enum value and can still confuse patient identity, attendance, and SMS/reminder wording until a later deprecation plan.
+  - Current bookings are still practitioner-backed; non-person resources need a future schema decision before resource-only booking.
+  - Claude's check-in contract and Antigravity's Waiting Room panel UX may add details that should be reconciled into this design during Sprint 14 integration.

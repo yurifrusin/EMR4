@@ -1303,10 +1303,20 @@ html, body {
 
 .flow-tabs-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 4px 0 10px 0;
-  border-bottom: 1px solid var(--grey-2);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  background-color: var(--grey-1);
+  border-radius: 6px;
+  padding: 3px;
+  border: 1px solid var(--grey-2);
+  gap: 2px;
+  margin-bottom: 12px;
+  /* Hide scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.flow-tabs-container::-webkit-scrollbar {
+  display: none;
 }
 
 .flow-tabs-container.hidden {
@@ -1314,28 +1324,31 @@ html, body {
 }
 
 .flow-tab-btn {
-  background-color: var(--white);
-  border: 1px solid var(--grey-2);
+  flex: 1;
+  background: none;
+  border: none;
   border-radius: 4px;
   color: var(--grey-4);
   font-size: 10px;
   font-weight: 600;
-  padding: 4px 8px;
+  padding: 5px 8px;
   cursor: pointer;
   transition: all 0.15s ease;
   line-height: 1.2;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .flow-tab-btn:hover {
-  border-color: var(--blue-mid);
+  background-color: rgba(0, 0, 0, 0.04);
   color: var(--blue-dark);
 }
 
 .flow-tab-btn.active {
-  background-color: var(--blue-mid);
-  border-color: var(--blue-mid);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--blue-dark);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-weight: 700;
 }
 
 .flow-section-title {
@@ -1349,14 +1362,43 @@ html, body {
   align-items: center;
   justify-content: flex-start;
   gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+.flow-section-title:hover {
+  opacity: 0.85;
+}
+
+.flow-section-chevron {
+  display: inline-block;
+  font-size: 8px;
+  margin-right: 4px;
+  color: var(--grey-3);
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.flow-sec-count {
+  margin-left: auto;
+  background-color: var(--grey-2);
+  color: var(--grey-4);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
 }
 
 .flow-sec-count::before {
-  content: "(";
+  content: none !important;
 }
 
 .flow-sec-count::after {
-  content: ")";
+  content: none !important;
 }
 
 .flow-count-pill {
@@ -1380,6 +1422,15 @@ html, body {
   color: #10b981; /* green */
 }
 
+/* Collapsible behavior */
+.flow-section.collapsed .flow-list,
+.flow-section.collapsed .flow-empty {
+  display: none !important;
+}
+.flow-section.collapsed .flow-section-chevron {
+  transform: rotate(-90deg);
+}
+
 .flow-list {
   display: flex;
   flex-direction: column;
@@ -1401,7 +1452,7 @@ html, body {
   background-color: var(--white);
   border: 1px solid var(--grey-2);
   border-radius: 6px;
-  padding: 10px 12px;
+  padding: 7px 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1462,16 +1513,27 @@ html, body {
   border-color: var(--blue-mid);
 }
 
+/* Edit/link buttons default opacity transition */
+.flow-card-edit-btn,
+.flow-card-link-btn {
+  opacity: 0.3;
+  transition: opacity 0.2s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.flow-card:hover .flow-card-edit-btn,
+.flow-card:hover .flow-card-link-btn {
+  opacity: 1.0;
+}
+
 .flow-card-details {
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--grey-4);
 }
 
 .flow-card-reason {
-  font-size: 10px;
+  font-size: 9.5px;
   color: var(--grey-3);
   background-color: var(--grey-1);
-  padding: 4px 6px;
+  padding: 3px 5px;
   border-radius: 4px;
 }
 
@@ -1493,13 +1555,13 @@ html, body {
 }
 
 /* Card border accents based on status */
-.flow-card-booked { border-left: 4px solid var(--grey-3); }
-.flow-card-confirmed { border-left: 4px solid var(--blue-light); }
-.flow-card-arrived { border-left: 4px solid var(--blue-mid); }
-.flow-card-inconsult { border-left: 4px solid #10b981; }
-.flow-card-completed { border-left: 4px solid #059669; }
-.flow-card-noshow { border-left: 4px solid var(--grey-3); }
-.flow-card-dna { border-left: 4px solid var(--grey-3); }
+.flow-card-booked { border-left: 3px solid var(--grey-3); }
+.flow-card-confirmed { border-left: 3px solid var(--blue-light); }
+.flow-card-arrived { border-left: 3px solid var(--blue-mid); }
+.flow-card-inconsult { border-left: 3px solid #10b981; }
+.flow-card-completed { border-left: 3px solid #059669; }
+.flow-card-noshow { border-left: 3px solid var(--grey-3); }
+.flow-card-dna { border-left: 3px solid var(--grey-3); }
 
 .flow-card-identity-unconfirmed {
   border-color: #ef4444;

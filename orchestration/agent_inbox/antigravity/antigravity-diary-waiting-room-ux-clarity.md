@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 7fd03d0 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-waiting-room-ux-clarity --summary "Short plan summary"` |
@@ -90,5 +90,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `docs/diary/diary.html`
+  - `docs/diary/diary.css`
+  - `docs/diary/diary.js`
 - Verification run:
+  - Syntax check: `node --check docs\diary\diary.js` passed.
+  - Diff check: `git diff --check` passed.
+  - Test suite: `pytest tests/test_appointment_patient_link.py tests/test_booking_create_edit.py` passed 100% (40/40 tests).
+  - Manual checklist: Collapsible sections expand/collapse correctly, chevrons adjust dynamically, tab layout behaves as a segmented control, count badges render on the right, and hover action buttons reduce visual noise.
 - Remaining risks:
+  - None. Changes are purely cosmetic and structural within the Waiting Room panel layout, fully isolated from core appointment positioning or billing flows.

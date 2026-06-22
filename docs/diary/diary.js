@@ -1602,6 +1602,18 @@ Office.onReady(() => {
     document.getElementById("diary-flow-panel")?.classList.remove("hidden");
   }
 
+  // Collapsible section title listeners
+  document.querySelectorAll(".flow-section-title").forEach(titleEl => {
+    titleEl.addEventListener("click", () => {
+      const sectionEl = titleEl.closest(".flow-section");
+      if (sectionEl) {
+        toggleSectionCollapse(sectionEl.id);
+      }
+    });
+  });
+
+  restoreSectionCollapseStates();
+
   updateDateLabel();
 
   if (Office.context?.ui?.addHandlerAsync) {
@@ -2546,4 +2558,45 @@ function scrollToAppointment(apptId) {
     document.querySelectorAll(".appt-active").forEach(x => x.classList.remove("appt-active"));
     el.classList.add("appt-active");
   }
+}
+
+// ─── COLLAPSIBLE WAITING ROOM SECTIONS ─────────────────────
+const COLLAPSE_KEY = "emr4_diary_collapsed_sections_v1";
+
+function toggleSectionCollapse(sectionId) {
+  const sectionEl = document.getElementById(sectionId);
+  if (!sectionEl) return;
+  const isCollapsed = sectionEl.classList.toggle("collapsed");
+  updateSectionChevron(sectionEl, isCollapsed);
+
+  let states = {};
+  try {
+    states = JSON.parse(localStorage.getItem(COLLAPSE_KEY) || "{}");
+  } catch (_) {}
+  states[sectionId] = isCollapsed;
+  localStorage.setItem(COLLAPSE_KEY, JSON.stringify(states));
+}
+
+function updateSectionChevron(sectionEl, isCollapsed) {
+  const chevron = sectionEl.querySelector(".flow-section-chevron");
+  if (chevron) {
+    chevron.textContent = isCollapsed ? "▶" : "▼";
+  }
+}
+
+function restoreSectionCollapseStates() {
+  let states = {};
+  try {
+    states = JSON.parse(localStorage.getItem(COLLAPSE_KEY) || "{}");
+  } catch (_) {}
+
+  document.querySelectorAll(".flow-section").forEach(sectionEl => {
+    const isCollapsed = !!states[sectionEl.id];
+    if (isCollapsed) {
+      sectionEl.classList.add("collapsed");
+    } else {
+      sectionEl.classList.remove("collapsed");
+    }
+    updateSectionChevron(sectionEl, isCollapsed);
+  });
 }
