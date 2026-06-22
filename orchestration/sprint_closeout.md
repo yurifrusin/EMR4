@@ -8,50 +8,54 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 15: Waiting Room Check-In Operations |
-| Integrated through | `32f1577` |
-| Status | User-reviewed and complete |
+| Batch | Sprint 16: Location-Aware Diary Foundations |
+| Integrated through | pending final commit |
+| Status | Integrated locally; pending push/audit |
 | Last updated | 2026-06-22 |
 
 ## What Changed
 
-- Added read-only `GET /api/v1/appointments/{id}/checkin-defaults` so the diary
-  or Bernie can ask the backend for the room/default waiting-area suggestion for
-  a booked appointment without mutating state.
-- Made terminal attendance statuses deliberately clear `waiting_area_id` when
-  the PATCH body omits `waiting_area_id`. Explicit UUID and explicit `null`
-  values still win over the automatic policy.
-- Added focused backend regression tests for default suggestion, inactive/cross-
-  practice waiting-area guards, terminal auto-clear, active-status preservation,
-  and explicit waiting-area override.
-- Improved the diary Waiting Room side panel only: Expected Today cards are
-  denser, check-in can send a selected waiting area, arrived patients can be
-  reassigned between waiting areas, and the tab strip is hidden when only one
-  waiting area is available.
-- Hotfix: seeded default waiting areas for rooms and made the diary prefer the
-  backend `checkin-defaults` suggestion before falling back to a local guess.
-  Dev defaults are Room 1 -> Main Waiting Room, Room 2 -> Children's Area,
-  Room 3 -> Main Waiting Room.
-- Hotfix: waiting-area tabs now filter Expected Today, Waiting Room, In Consult,
-  and Finished using the same backend-derived room/default-area logic.
-- Kept the main diary grid appointment positioning unchanged. The prior
-  accidental appointment-card stacking/cascade behaviour was not reintroduced.
-- Added a Sprint 15 review harness with manual checks, API spot checks, and a
-  guardrail that future "stacking" requests must say whether they mean Waiting
-  Room cards or diary appointment blocks.
-- Updated diary assets to `v=68`.
+- Added location scoping to diary resources: `Room`, `WaitingArea`, and
+  `DiaryTemplate` now carry nullable `location_id` links to `PracticeLocation`.
+- Added `GET /api/v1/diary/locations` and optional `location_id` filters for
+  diary template, roster, waiting-area, appointment-list, and waiting-room reads.
+- Seed now creates the dev `Main Street Surgery` location and attaches seeded
+  rooms, waiting areas, roster, and sample appointments to it.
+- Added a Codex integration repair so room display order is unique within each
+  physical location, not across the whole practice. This allows each site to
+  have its own first room.
+- The live diary location selector now consumes `/diary/locations`, persists the
+  active physical location, and passes `location_id` to live diary reads and new
+  booking creation. Smoke mode still offers Main/North/East mock locations.
+- Added `orchestration/location_diary_view_review.md` to keep practice,
+  physical location, room/resource, waiting area, diary view/page group,
+  booking slot, appointment status, patient identity, and booking confirmation
+  separate for future diary and Bernie work.
+- Updated diary assets to `v=70`.
 
 ## Recommended User Review
 
-User review result: passed. The user confirmed room default waiting areas,
-Expected Today density, Waiting Room filtering, and terminal-state flow are
-working. No further Sprint 15 user review is required before planning Sprint 16.
+After this is pushed/deployed, review the live diary:
+
+1. Restart backend if needed, run migrations if not already current, run
+   `python seed.py`, and hard refresh the diary. Confirm it loads
+   `diary.js?v=70`.
+2. Open the diary from the taskpane. Confirm the location selector shows the
+   seeded `Main Street Surgery` (or the current dev location name) and the diary
+   still loads today's appointments, roster, and Waiting Room data.
+3. Create one new booking in Room 1. Confirm it saves and remains visible after
+   refresh. This checks that new bookings inherit the active `location_id`.
+4. In smoke mode (`?smoke=true`), switch between Main Clinic, North Branch, and
+   East Specialty Suite. Confirm grid appointments and Waiting Room side-panel
+   cards filter by the selected mock location.
+5. Confirm the one-location live case does not feel like a new admin workflow:
+   the location should be visible context, not a busy multi-site control.
+6. Confirm existing Waiting Room area tabs and sections still behave as before.
 
 ## Not Required Before Moving On
 
 - No drag/drop/resize appointment testing is required yet.
-- No taskpane Patient Details duplicate testing is required for Sprint 14; that
-  was Sprint 13.
+- No taskpane Patient Details duplicate testing is required for Sprint 16.
 - No Command Centre, Scribe, Gemini, billing, results, letters, medications, or
   clinical-note regression is required for this sprint.
 - No patient document rewrite, public online-booking, kiosk, SMS/reminder, or
@@ -63,6 +67,11 @@ working. No further Sprint 15 user review is required before planning Sprint 16.
   IRN polish, IHI/Medicare verification hooks, duplicate-candidate review, and a
   proper shared demographic model before relying on it in routine use.
 - GitHub Pages deployment should be kept to canonical `master`.
+- Multi-location admin UI does not exist yet. For now, location data is seeded
+  and API-backed; proper practice/location/room/waiting-area administration is a
+  future slice.
+- The diary still needs a future page/view-group model for wide locations with
+  too many columns. That is a screen-layout concern inside one physical location.
 - Physical waiting areas now exist in the backend, but room/resource admin and
   per-room default waiting-area editing are still future work. The Sprint 14
   design reference is `orchestration/resource_admin_bernie_tool_design.md`.
@@ -96,23 +105,23 @@ working. No further Sprint 15 user review is required before planning Sprint 16.
 
 ## Verification
 
-Codex/orchestrator verification for Sprint 15:
+Codex/orchestrator verification for Sprint 16:
 
 - `node --check docs\diary\diary.js` -> passed
-- `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_waiting_area_checkin_contract.py` -> passed
-- `git diff --check` -> passed, with only CRLF/LF warnings on Markdown files
-- `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_checkin_contract.py -q -p no:randomly` -> 8 passed
-- `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_checkin_contract.py tests\test_waiting_area_contract.py tests\test_appointment_status_mutations.py tests\test_break_overlap_contract.py tests\test_appointment_patient_link.py tests\test_appointment_conflicts.py tests\test_diary_template.py tests\test_diary_roster.py tests\test_slots.py tests\test_booking_patient_flow.py tests\test_nurse_practitioner.py -q --tb=short -p no:randomly` -> 111 passed, 1 warning
-- `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_checkin_defaults.py tests\test_waiting_area_checkin_contract.py tests\test_waiting_area_contract.py -q --tb=short -p no:randomly` -> 26 passed, 1 warning
+- `.venv\Scripts\python.exe -m py_compile app\models\diary.py app\routers\diary.py app\routers\appointments.py app\schemas\diary.py seed.py` -> passed
+- `git diff --check` -> passed
+- `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_waiting_area_checkin_defaults.py tests\test_waiting_area_checkin_contract.py tests\test_waiting_area_contract.py tests\test_appointment_status_mutations.py tests\test_diary_template.py tests\test_diary_roster.py -q --tb=short -p no:randomly` -> 82 passed, 1 warning
+- `.venv\Scripts\alembic.exe upgrade head` -> applied `g7h8i9j0k1l2`
+- `.venv\Scripts\python.exe seed.py` -> created/linked the dev practice location
 
 ## Recommended Next Direction
 
-The next sprint should make the diary/resource layer location-aware without yet
-building a full multi-site admin system or drag/drop. Recommended slices:
-audit/fix backend location scoping for diary templates, rooms, waiting areas,
-rosters, and appointments; add a restrained diary location/view selector if the
-API supports it; and document the distinction between practice, location,
-room/resource, waiting area, and diary page/column group for future Bernie tools.
+The next sprint should stay on the diary/resource track and make the new
+location boundary operationally useful without building a full admin console.
+Recommended options: add a small location/room/waiting-area seed/review harness
+for multi-site smoke testing; improve booking modal location context; or start
+the room/resource admin foundation that will eventually let a practice manager
+edit locations, rooms, default waiting areas, and diary templates.
 
 ---
 

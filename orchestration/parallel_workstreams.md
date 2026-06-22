@@ -128,9 +128,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Queued |
-| Launch Gate | Pending |
-| Implementation Gate | Required |
+| Status | Integrated locally; pending push/audit |
+| Launch Gate | Complete |
+| Implementation Gate | Complete |
 | Theme | Make the diary/resource model explicitly location-aware while separating physical sites from diary screen/page views |
 
 ### Workstream AU - Location-Scoped Diary Backend Contract
@@ -145,7 +145,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Diary frontend, taskpane, Command Centre, full practice/location admin UI, drag/drop/resize, online booking portal, Bernie runtime |
 | Verification | Plan packet first; after approval, focused location/diary/appointment pytest, backend py_compile, migration check if changed, `git diff --check` |
 | Plan Gate | Required before coding |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AV - Diary Location Selector and View Boundary
 
@@ -159,7 +159,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Backend schema/routes/tests, taskpane, Command Centre, drag/drop/resize, full admin UI, Bernie runtime, appointment-card geometry changes |
 | Verification | Plan packet first; after approval, `node --check docs\diary\diary.js`, `git diff --check`, live/smoke visual notes for one-location fallback and multi-location affordance |
 | Plan Gate | Required before coding |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream AW - Location and Diary View Design Harness
 
@@ -173,7 +173,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Production backend/frontend implementation, migrations, taskpane/Command Centre, autonomous Bernie runtime, drag/drop/resize |
 | Verification | Plan packet first; after approval, `git diff --check` |
 | Plan Gate | Required before coding |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 15: Plan-Gated Waiting Room Check-In Operations
 

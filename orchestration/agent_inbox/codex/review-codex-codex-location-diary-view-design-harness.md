@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/location-diary-view-design-harness` |
 | Source Task | `codex-location-diary-view-design-harness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

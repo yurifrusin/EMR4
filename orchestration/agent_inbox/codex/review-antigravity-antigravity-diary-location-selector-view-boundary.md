@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-location-selector-view-boundary` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

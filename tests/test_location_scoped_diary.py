@@ -220,6 +220,15 @@ def test_roster_filtered_by_location(client, db, practice, practitioner, gp_user
     assert "Room B" not in room_names
 
 
+def test_room_display_order_is_location_scoped(db, practice):
+    loc_a = _make_location(db, practice, name="Clinic A")
+    loc_b = _make_location(db, practice, name="Clinic B")
+    _make_room(db, practice, loc_a, name="Room 1A", order=0)
+    _make_room(db, practice, loc_b, name="Room 1B", order=0)
+
+    db.flush()
+
+
 # ─── GET /diary/waiting-areas ─────────────────────────────────────────────────
 
 def test_waiting_areas_filtered_by_location(client, db, practice, gp_user):

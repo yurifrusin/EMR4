@@ -27,6 +27,15 @@ def upgrade() -> None:
         sa.ForeignKey("practice_locations.id"), nullable=True,
     ))
     op.create_index("ix_rooms_location_id", "rooms", ["location_id"])
+    op.drop_constraint("uq_rooms_practice_order", "rooms", type_="unique")
+    op.execute(
+        "CREATE UNIQUE INDEX uq_rooms_practice_order_no_loc "
+        "ON rooms (practice_id, display_order) WHERE location_id IS NULL"
+    )
+    op.execute(
+        "CREATE UNIQUE INDEX uq_rooms_practice_location_order "
+        "ON rooms (practice_id, location_id, display_order) WHERE location_id IS NOT NULL"
+    )
 
     # waiting_areas: nullable location_id FK
     op.add_column("waiting_areas", sa.Column(
@@ -65,5 +74,10 @@ def downgrade() -> None:
     op.drop_index("ix_waiting_areas_location_id", table_name="waiting_areas")
     op.drop_column("waiting_areas", "location_id")
 
+    op.execute("DROP INDEX IF EXISTS uq_rooms_practice_location_order")
+    op.execute("DROP INDEX IF EXISTS uq_rooms_practice_order_no_loc")
+    op.create_unique_constraint(
+        "uq_rooms_practice_order", "rooms", ["practice_id", "display_order"]
+    )
     op.drop_index("ix_rooms_location_id", table_name="rooms")
     op.drop_column("rooms", "location_id")

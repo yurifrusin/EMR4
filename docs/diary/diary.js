@@ -25,7 +25,9 @@ let ahpraToPractitionerMap = {};
 let waitingAreas = [];
 const checkinDefaultCache = new Map();
 
-let activeLocationId = localStorage.getItem("emr4_diary_active_location") || "loc-1";
+const LOCATION_STORAGE_KEY = "emr4_diary_active_location";
+let activeLocationId = localStorage.getItem(LOCATION_STORAGE_KEY) || null;
+let locationOptionsLoaded = false;
 const mockLocations = [
   { id: "loc-1", name: "Main Clinic" },
   { id: "loc-2", name: "North Branch" },
@@ -339,7 +341,8 @@ async function loadDiaryTemplate() {
     return normalizeTemplate(getMockTemplate());
   }
   try {
-    const res = await apiFetch("/diary/template");
+    const locationQuery = activeLocationId ? `?location_id=${encodeURIComponent(activeLocationId)}` : "";
+    const res = await apiFetch(`/diary/template${locationQuery}`);
     if (!res.ok) throw new Error(`Template: ${res.status} ${await res.text()}`);
     return normalizeTemplate(await res.json());
   } catch (e) {
@@ -1206,7 +1209,18 @@ async function loadDiary(silent = false, options = {}) {
   const dd = String(diaryDate.getDate()).padStart(2, "0");
   const dateStr = `${yyyy}-${mm}-${dd}`;
 
-  const apptParams = `date_from=${dayStart.toISOString()}&date_to=${dayEnd.toISOString()}`;
+  await initLocationSelector();
+
+  const apptParams = new URLSearchParams({
+    date_from: dayStart.toISOString(),
+    date_to: dayEnd.toISOString(),
+  });
+  if (!isSmokeMode && activeLocationId) {
+    apptParams.set("location_id", activeLocationId);
+  }
+  const locationQuery = !isSmokeMode && activeLocationId
+    ? `&location_id=${encodeURIComponent(activeLocationId)}`
+    : "";
 
   try {
     let template, appointments, types, rosterEntries = [], fetchedWaitingAreas = [];
@@ -1225,16 +1239,16 @@ async function loadDiary(silent = false, options = {}) {
     } else {
       const [templateRes, apptRes, typeRes, rosterRes, waitingAreasRes] = await Promise.all([
         loadDiaryTemplate(),
-        apiFetch(`/appointments?${apptParams}`),
+        apiFetch(`/appointments?${apptParams.toString()}`),
         apiFetch(`/appointments/types`),
-        apiFetch(`/diary/roster?date=${dateStr}`).catch(err => {
+        apiFetch(`/diary/roster?date=${dateStr}${locationQuery}`).catch(err => {
           if (err && err.message === "401 Unauthorized") {
             throw err;
           }
           console.warn("Roster fetch failed:", err);
           return null;
         }),
-        apiFetch(`/diary/waiting-areas`).catch(err => {
+        apiFetch(`/diary/waiting-areas${activeLocationId ? `?location_id=${encodeURIComponent(activeLocationId)}` : ""}`).catch(err => {
           if (err && err.message === "401 Unauthorized") {
             throw err;
           }
@@ -2063,7 +2077,8 @@ async function saveBooking() {
           patient_name_provisional: provisionalName,
           reason: reason,
           appointment_type_id: typeId,
-          appointment_type: activeTypes.find(t => t.id === typeId) || null
+          appointment_type: activeTypes.find(t => t.id === typeId) || null,
+          location_id: activeLocationId || "loc-1"
         };
         mockAppointmentsCache.push(newAppt);
       } else {
@@ -2075,6 +2090,9 @@ async function saveBooking() {
           duration_minutes: duration,
           reason: reason,
         };
+        if (activeLocationId) {
+          createPayload.location_id = activeLocationId;
+        }
         if (selectedPatient) {
           createPayload.patient_id = selectedPatient.id;
         } else {
@@ -2262,11 +2280,17 @@ async function loadTodayAppointments() {
     todayStart.setHours(0, 0, 0, 0);
     const todayEnd = new Date(todayStart);
     todayEnd.setHours(23, 59, 59, 999);
-    const params = `date_from=${todayStart.toISOString()}&date_to=${todayEnd.toISOString()}`;
-    const res = await apiFetch(`/appointments?${params}`);
-    if (res.ok) {
-      todayAppointments = await res.json();
-    }
+      const params = new URLSearchParams({
+        date_from: todayStart.toISOString(),
+        date_to: todayEnd.toISOString(),
+      });
+      if (activeLocationId) {
+        params.set("location_id", activeLocationId);
+      }
+      const res = await apiFetch(`/appointments?${params.toString()}`);
+      if (res.ok) {
+        todayAppointments = await res.json();
+      }
   } catch (err) {
     console.warn("Failed to fetch today's appointments for flow badge:", err);
   }
@@ -2759,16 +2783,38 @@ function restoreSectionCollapseStates() {
 }
 
 // ─── PHYSICAL LOCATION SELECTOR ────────────────────────────
-function initLocationSelector() {
+async function getLocationOptions() {
+  if (isSmokeMode()) return mockLocations;
+  if (!token) return activeLocationId ? [{ id: activeLocationId, name: "Main Clinic" }] : [];
+  try {
+    const res = await apiFetch("/diary/locations");
+    if (!res.ok) throw new Error(`Locations: ${res.status}`);
+    const locations = await res.json();
+    return Array.isArray(locations)
+      ? locations.map(loc => ({ id: loc.id, name: loc.name })).filter(loc => loc.id && loc.name)
+      : [];
+  } catch (err) {
+    if (err && err.message === "401 Unauthorized") throw err;
+    console.warn("Location fetch failed; using single-location fallback:", err);
+    return activeLocationId ? [{ id: activeLocationId, name: "Main Clinic" }] : [];
+  }
+}
+
+async function initLocationSelector() {
   const selectEl = document.getElementById("diary-location-select");
   if (!selectEl) return;
 
   selectEl.innerHTML = "";
 
-  const isSmoke = isSmokeMode();
-  const list = isSmoke ? mockLocations : [{ id: "loc-1", name: "Main Clinic" }];
+  const list = await getLocationOptions();
+  const visibleList = list.length ? list : [{ id: "", name: "Main Clinic" }];
 
-  list.forEach(loc => {
+  if (!activeLocationId && visibleList[0].id) {
+    activeLocationId = visibleList[0].id;
+    localStorage.setItem(LOCATION_STORAGE_KEY, activeLocationId);
+  }
+
+  visibleList.forEach(loc => {
     const opt = document.createElement("option");
     opt.value = loc.id;
     opt.textContent = loc.name;
@@ -2779,18 +2825,28 @@ function initLocationSelector() {
   });
 
   // If the saved activeLocationId is no longer in the list (e.g. switching modes), reset it
-  if (!list.some(loc => loc.id === activeLocationId)) {
-    activeLocationId = list[0].id;
-    localStorage.setItem("emr4_diary_active_location", activeLocationId);
+  if (visibleList.length && !visibleList.some(loc => loc.id === activeLocationId)) {
+    activeLocationId = visibleList[0].id || null;
+    if (activeLocationId) {
+      localStorage.setItem(LOCATION_STORAGE_KEY, activeLocationId);
+    } else {
+      localStorage.removeItem(LOCATION_STORAGE_KEY);
+    }
+    selectEl.value = activeLocationId || "";
   }
 
+  selectEl.disabled = visibleList.length <= 1;
+  locationOptionsLoaded = true;
+
   selectEl.onchange = () => {
-    activeLocationId = selectEl.value;
-    localStorage.setItem("emr4_diary_active_location", activeLocationId);
+    activeLocationId = selectEl.value || null;
+    if (activeLocationId) {
+      localStorage.setItem(LOCATION_STORAGE_KEY, activeLocationId);
+    } else {
+      localStorage.removeItem(LOCATION_STORAGE_KEY);
+    }
     setStatus(`Location changed to ${selectEl.options[selectEl.selectedIndex].text}`);
 
-    // Changing location triggers loadDiary. In smoke mode it applies local filtering,
-    // in live mode it maintains a stable one-location fallback by loading all.
     loadDiary(true);
   };
 }

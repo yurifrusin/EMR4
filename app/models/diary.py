@@ -114,7 +114,10 @@ class Room(Base):
     __table_args__ = (
         Index("ix_rooms_practice_id", "practice_id"),
         Index("ix_rooms_location_id", "location_id"),
-        UniqueConstraint("practice_id", "display_order", name="uq_rooms_practice_order"),
+        Index("uq_rooms_practice_order_no_loc", "practice_id", "display_order", unique=True,
+              postgresql_where=text("location_id IS NULL")),
+        Index("uq_rooms_practice_location_order", "practice_id", "location_id", "display_order", unique=True,
+              postgresql_where=text("location_id IS NOT NULL")),
     )
 
 
