@@ -196,19 +196,20 @@ def test_status_patch_can_reassign_to_different_area(
 
 def test_status_change_without_area_field_does_not_clear_existing_area(
         client, db, gp_user, practice, practitioner, patient):
-    """Multiple status transitions without touching area field keep the area intact."""
+    """Active-status transitions without area field preserve the area.
+    Terminal transitions auto-clear it (policy introduced in checkin-defaults task)."""
     area = _make_area(db, practice)
     appt = _make_appt(db, practice, practitioner, patient,
                       status=AppointmentStatus.Arrived,
                       waiting_area_id=area.id)
     token = make_token(gp_user)
 
-    # Move to InConsult without specifying area
+    # Active transition: InConsult without specifying area → area preserved
     resp = _patch_status(client, token, appt.id, {"status": "InConsult"})
     assert resp.status_code == 200
     assert resp.json()["waiting_area_id"] == str(area.id)
 
-    # Move to Completed without specifying area
+    # Terminal transition: Completed without specifying area → area auto-cleared
     resp = _patch_status(client, token, appt.id, {"status": "Completed"})
     assert resp.status_code == 200
-    assert resp.json()["waiting_area_id"] == str(area.id)
+    assert resp.json()["waiting_area_id"] is None

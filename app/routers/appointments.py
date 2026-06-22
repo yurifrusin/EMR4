@@ -12,10 +12,11 @@ from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     PractitionerSchedule, ScheduleOverride,
 )
-from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea
+from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea, Room, DiaryRoster
 from app.schemas.appointments import (
     AppointmentCreate, AppointmentUpdate, AppointmentStatusUpdate,
     AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
+    AppointmentCheckinDefaults,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -29,6 +30,13 @@ MUTATING_APPOINTMENT_ROLES = (
 )
 
 NON_BLOCKING_STATUSES = (
+    AppointmentStatus.Cancelled,
+    AppointmentStatus.NoShow,
+    AppointmentStatus.DNA,
+)
+
+TERMINAL_STATUSES = (
+    AppointmentStatus.Completed,
     AppointmentStatus.Cancelled,
     AppointmentStatus.NoShow,
     AppointmentStatus.DNA,
@@ -481,6 +489,48 @@ def update_appointment(
     return out
 
 
+@router.get("/{appointment_id}/checkin-defaults", response_model=AppointmentCheckinDefaults)
+def get_checkin_defaults(
+    appointment_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Return the suggested waiting area for check-in based on the practitioner's
+    DiaryRoster entry for the appointment date.  Returns nulls when no safe
+    default can be inferred (no roster entry, room has no default, or area
+    is inactive)."""
+    practice_id = current_user.practice_id
+    appt = _get_appointment(appointment_id, practice_id, db)
+
+    roster = (
+        db.query(DiaryRoster)
+        .filter(
+            DiaryRoster.practice_id == practice_id,
+            DiaryRoster.practitioner_id == appt.practitioner_id,
+            DiaryRoster.roster_date == appt.appointment_date,
+        )
+        .first()
+    )
+    if roster is None:
+        return AppointmentCheckinDefaults()
+
+    room = db.query(Room).filter(Room.id == roster.room_id).first()
+    if room is None or room.default_waiting_area_id is None:
+        return AppointmentCheckinDefaults(room_name=room.name if room else None)
+
+    area = db.query(WaitingArea).filter(
+        WaitingArea.id == room.default_waiting_area_id,
+        WaitingArea.is_active == True,
+    ).first()
+    if area is None:
+        return AppointmentCheckinDefaults(room_name=room.name)
+
+    return AppointmentCheckinDefaults(
+        suggested_waiting_area_id=area.id,
+        room_name=room.name,
+    )
+
+
 @router.patch("/{appointment_id}/status", response_model=AppointmentOut)
 def update_appointment_status(
     appointment_id: uuid.UUID,
@@ -495,6 +545,8 @@ def update_appointment_status(
         if body.waiting_area_id is not None:
             _ensure_waiting_area(body.waiting_area_id, practice_id, db)
         appt.waiting_area_id = body.waiting_area_id
+    elif body.status in TERMINAL_STATUSES:
+        appt.waiting_area_id = None
     db.commit()
     return _get_appointment(appointment_id, practice_id, db)
 
