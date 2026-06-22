@@ -2289,7 +2289,7 @@ function getUniqueWaitingAreas() {
 
 function renderWaitingAreaTabs(areas) {
   const container = document.getElementById("flow-waiting-area-tabs");
-  if (!container) return;
+  if (!container) return false;
 
   container.innerHTML = "";
 
@@ -2302,6 +2302,11 @@ function renderWaitingAreaTabs(areas) {
   const allTabs = [{ key: "all", label: "All" }, ...areas];
   if (hasUnassigned) {
     allTabs.push({ key: "unassigned", label: "Unassigned" });
+  }
+
+  if (allTabs.length <= 1) {
+    selectedWaitingAreaTab = "all";
+    return false;
   }
 
   if (!allTabs.some(tab => tab.key === selectedWaitingAreaTab)) {
@@ -2323,6 +2328,7 @@ function renderWaitingAreaTabs(areas) {
     };
     container.appendChild(tabEl);
   });
+  return true;
 }
 
 async function updateFlowPanel() {
@@ -2334,8 +2340,8 @@ async function updateFlowPanel() {
   const tabsContainer = document.getElementById("flow-waiting-area-tabs");
   if (tabsContainer) {
     if (hasAreas) {
-      tabsContainer.classList.remove("hidden");
-      renderWaitingAreaTabs(areas);
+      const hasTabs = renderWaitingAreaTabs(areas);
+      tabsContainer.classList.toggle("hidden", !hasTabs);
     } else {
       tabsContainer.classList.add("hidden");
       tabsContainer.innerHTML = "";
