@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-patient-duplicate-review-api` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-23 10:15 +1000 |
 | Source HEAD | `0456387` |
 

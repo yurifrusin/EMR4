@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-taskpane-patient-search-and-alerts` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

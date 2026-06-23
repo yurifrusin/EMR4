@@ -8,71 +8,71 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 16: Location-Aware Diary Foundations |
-| Integrated through | `0298a12` plus audited closeout status update |
-| Status | Pushed, mirrors realigned, audited; ready for user review |
-| Last updated | 2026-06-22 |
+| Batch | Sprint 18: Patient Admin Safety and Duplicate Visibility |
+| Integrated through | Sprint 18 integration batch |
+| Status | Integrated and verified locally; push/realign pending |
+| Last updated | 2026-06-23 |
 
 ## What Changed
 
-- Added location scoping to diary resources: `Room`, `WaitingArea`, and
-  `DiaryTemplate` now carry nullable `location_id` links to `PracticeLocation`.
-- Added `GET /api/v1/diary/locations` and optional `location_id` filters for
-  diary template, roster, waiting-area, appointment-list, and waiting-room reads.
-- Seed now creates the dev `Main Street Surgery` location and attaches seeded
-  rooms, waiting areas, roster, and sample appointments to it.
-- Added a Codex integration repair so room display order is unique within each
-  physical location, not across the whole practice. This allows each site to
-  have its own first room.
-- The live diary location selector now consumes `/diary/locations`, persists the
-  active physical location, and passes `location_id` to live diary reads and new
-  booking creation. Smoke mode still offers Main/North/East mock locations.
-- Hotfix: appointment location filtering and conflict detection now agree for
-  legacy appointments with no `location_id`. In a one-location practice, those
-  older appointments are treated as belonging to the only active location so
-  they are visible in the diary instead of becoming hidden conflicts.
-- Added `orchestration/location_diary_view_review.md` to keep practice,
-  physical location, room/resource, waiting area, diary view/page group,
-  booking slot, appointment status, patient identity, and booking confirmation
-  separate for future diary and Bernie work.
-- Updated diary assets to `v=70`.
+- Added a read-only `GET /api/v1/patients/duplicate-groups` endpoint for
+  practice-scoped duplicate review. It groups likely duplicates by strong IHI,
+  strong Medicare+IRN, and softer same-name-plus-DOB matches, and includes
+  appointment/encounter reference counts for safe review.
+- Added `scripts/audit_patient_duplicates.py`, a read-only developer helper for
+  inspecting likely duplicate patient records before any manual cleanup. It
+  prints evidence and reference counts only; it never deletes, merges, or
+  updates records.
+- Improved taskpane patient search so full-name searches such as
+  `alice alston` search broadly and then filter locally instead of failing when
+  the backend only matches one term.
+- Moved New Patient and Patient Details error/status messages close to the
+  action buttons and added visible action-status feedback so failed saves are
+  harder to miss in the narrow Word taskpane.
+- Updated taskpane assets to `v=54`.
 
 ## Recommended User Review
 
-After this is pushed/deployed, review the live diary:
+After this is pushed/deployed:
 
-1. Restart backend if needed, run migrations if not already current, run
-   `python seed.py`, and hard refresh the diary. Confirm it loads
-   `diary.js?v=70`.
-2. Open the diary from the taskpane. Confirm the location selector shows the
-   seeded `Main Street Surgery` (or the current dev location name) and the diary
-   still loads today's appointments, roster, and Waiting Room data.
-3. Create one new booking in Room 1. Confirm it saves and remains visible after
-   refresh. This checks that new bookings inherit the active `location_id`.
-4. If a conflict warning names an unexpected appointment time, check that the
-   conflicting appointment is visible in the filtered diary. Legacy unscoped
-   dev bookings should no longer be hidden in a one-location practice.
-5. In smoke mode (`?smoke=true`), switch between Main Clinic, North Branch, and
-   East Specialty Suite. Confirm grid appointments and Waiting Room side-panel
-   cards filter by the selected mock location.
-6. Confirm the one-location live case does not feel like a new admin workflow:
-   the location should be visible context, not a busy multi-site control.
-7. Confirm existing Waiting Room area tabs and sections still behave as before.
+1. Hard refresh the Word taskpane and confirm it loads `taskpane.js?v=54`.
+2. Search patients by a full name, for example `alice alston`. Confirm the
+   expected patient appears, not "No results found".
+3. Try a normal Patient Details edit and confirm the success/failure message is
+   visible near the action buttons, not only at the top of the scroll area.
+4. Try to save a duplicate Medicare+IRN combination. Confirm the save is blocked
+   and the feedback is visible near `Save Details`.
+5. Try a New Patient validation failure and confirm the bottom action area
+   shows a clear failure state without needing to scroll back to the top.
+6. Optional API check: call `GET /api/v1/patients/duplicate-groups` with a staff
+   JWT and confirm duplicate groups include match reasons and reference counts.
+7. Optional dev-data check: run
+   `.venv\Scripts\python.exe scripts\audit_patient_duplicates.py` and confirm it
+   reports likely duplicates without changing data.
 
 ## Not Required Before Moving On
 
-- No drag/drop/resize appointment testing is required yet.
-- No taskpane Patient Details duplicate testing is required for Sprint 16.
+- No diary, Waiting Room, booking modal, appointment proposal, or location
+  selector testing is required for Sprint 18.
 - No Command Centre, Scribe, Gemini, billing, results, letters, medications, or
   clinical-note regression is required for this sprint.
-- No patient document rewrite, public online-booking, kiosk, SMS/reminder, or
-  Bernie runtime testing is required.
+- No manual duplicate cleanup is required before moving on. The audit helper is
+  read-only and exists to make cleanup safer later.
 
 ## Known Follow-Up
 
-- Patient Details is still a foundation slice. Add stronger validation, Medicare
-  IRN polish, IHI/Medicare verification hooks, duplicate-candidate review, and a
-  proper shared demographic model before relying on it in routine use.
+- Patient Details duplicate handling is safer, but still not a full patient
+  merge workflow. We still need a deliberate review/merge/archive design before
+  deleting or consolidating real records.
+- The read-only duplicate endpoint uses in-Python bucketing for now. That is fine
+  for dev and small practices, but large production datasets will need indexed
+  query paths or a stored duplicate-review table.
+- Same-phone-plus-DOB is intentionally not a duplicate key yet. It may become a
+  separate soft review signal later.
+- The taskpane still needs broader "operation result" design so all important
+  success/failure messages remain visible in narrow Word layouts.
+- Demographic edits should eventually update the patient document header, add
+  IRN/IHI where appropriate, and use the future SharePoint/document URL model.
 - GitHub Pages deployment should be kept to canonical `master`.
 - Multi-location admin UI does not exist yet. For now, location data is seeded
   and API-backed; proper practice/location/room/waiting-area administration is a
@@ -114,28 +114,24 @@ After this is pushed/deployed, review the live diary:
 
 ## Verification
 
-Codex/orchestrator verification for Sprint 16:
+Codex/orchestrator verification for Sprint 18:
 
-- `node --check docs\diary\diary.js` -> passed
-- `.venv\Scripts\python.exe -m py_compile app\models\diary.py app\routers\diary.py app\routers\appointments.py app\schemas\diary.py seed.py` -> passed
-- `git diff --check` -> passed
-- `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_waiting_area_checkin_defaults.py tests\test_waiting_area_checkin_contract.py tests\test_waiting_area_contract.py tests\test_appointment_status_mutations.py tests\test_diary_template.py tests\test_diary_roster.py -q --tb=short -p no:randomly` -> 82 passed, 1 warning
-- `.venv\Scripts\alembic.exe upgrade head` -> applied `g7h8i9j0k1l2`
-- `.venv\Scripts\python.exe seed.py` -> created/linked the dev practice location
-- `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py` -> passed
-- `.venv\Scripts\python.exe -m pytest tests\test_booking_create_edit.py -q --tb=short -p no:randomly` -> 31 passed, 1 warning
-- `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py -q --tb=short -p no:randomly` -> 18 passed, 1 warning
-- Live API spot-check: `GET /appointments?...&location_id=<Main Street Surgery>`
-  now includes legacy null-location bookings such as the `11:35` dev booking.
+- `.venv\Scripts\python.exe -m py_compile app\schemas\patients.py app\routers\patients.py tests\test_patient_duplicate_review.py scripts\audit_patient_duplicates.py tests\test_audit_patient_duplicates.py` -> passed
+- `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` -> passed
+- `node --check docs\taskpane\taskpane.js` -> passed
+- `git diff --check` -> passed, with a CRLF/LF warning on
+  `orchestration/integration_log.md`
+- `.venv\Scripts\python.exe -m pytest tests\test_patient_duplicate_review.py tests\test_audit_patient_duplicates.py tests\test_patients.py -q --tb=short -p no:randomly` -> 38 passed, 1 pytest-asyncio warning
+- `.venv\Scripts\python.exe scripts\audit_patient_duplicates.py` -> read-only run
+  completed and reported the current Billy Frusin duplicate group.
 
 ## Recommended Next Direction
 
-The next sprint should stay on the diary/resource track and make the new
-location boundary operationally useful without building a full admin console.
-Recommended options: add a small location/room/waiting-area seed/review harness
-for multi-site smoke testing; improve booking modal location context; or start
-the room/resource admin foundation that will eventually let a practice manager
-edit locations, rooms, default waiting areas, and diary templates.
+After Sprint 18 user review, the next sprint can return to diary/resource work
+or continue patient-admin safety. Recommended options are: a proper duplicate
+review/merge workflow design, a taskpane operation-result pattern for narrow
+layouts, or the next diary/resource admin slice for locations, rooms, and
+waiting areas.
 
 ---
 

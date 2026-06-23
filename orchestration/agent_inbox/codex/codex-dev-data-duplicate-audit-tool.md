@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 1c7ad58 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-dev-data-duplicate-audit-tool --summary "Short plan summary"` |

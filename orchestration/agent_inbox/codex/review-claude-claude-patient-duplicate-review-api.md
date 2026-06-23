@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-patient-duplicate-review-api` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

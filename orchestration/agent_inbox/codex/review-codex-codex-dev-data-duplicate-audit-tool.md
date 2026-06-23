@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/current` |
 | Source Task | `codex-dev-data-duplicate-audit-tool` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

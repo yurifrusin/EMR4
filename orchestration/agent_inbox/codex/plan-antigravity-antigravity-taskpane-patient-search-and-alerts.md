@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-taskpane-patient-search-and-alerts` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-23 10:17 +1000 |
 | Source HEAD | `0456387` |
 

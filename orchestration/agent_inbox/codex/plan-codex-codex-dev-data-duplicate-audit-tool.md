@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/current` |
 | Source Task | `codex-dev-data-duplicate-audit-tool` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-23 10:11 +1000 |
 | Source HEAD | `0456387` |
 
