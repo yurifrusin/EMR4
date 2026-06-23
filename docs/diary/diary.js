@@ -280,7 +280,7 @@ function isAdminRole(role) {
 function updateAdminButtonVisibility() {
   const adminBtn = document.getElementById("btn-admin-panel");
   if (!adminBtn) return;
-  adminBtn.classList.toggle("hidden", !isUserAdminOrOwner());
+  adminBtn.classList.remove("hidden");
 }
 
 async function ensureCurrentUserRole() {
@@ -3240,7 +3240,8 @@ function initAdminPanel() {
 
   if (!adminBtn || !adminModal) return;
 
-  adminBtn.onclick = () => {
+  adminBtn.onclick = async () => {
+    await ensureCurrentUserRole();
     const isAllowed = isUserAdminOrOwner();
     const deniedEl = document.getElementById("admin-access-denied");
     const allowedEl = document.getElementById("admin-allowed-content");
