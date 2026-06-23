@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=53" />
-  <script src="taskpane.js?v=53" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=54" />
+  <script src="taskpane.js?v=54" defer></script>
 </head>
 <body>
 
@@ -63,8 +63,7 @@
     <div class="new-patient-inner">
       <div class="new-patient-header">
         <span id="new-patient-title">New Patient</span>
-      </div>
-      <div id="new-patient-result" aria-live="polite"></div>
+      <!-- Result div moved to the bottom of the form -->
       <div class="field-row">
         <div class="field-group" style="flex:1">
           <label class="field-label">First name *</label>
@@ -125,7 +124,8 @@
           <label class="field-label">Postcode</label>
           <input id="np-postcode" type="text" class="input" placeholder="2000" />
         </div>
-      </div>
+      <div id="new-patient-result" aria-live="polite"></div>
+      <div id="new-patient-action-status" class="action-status hidden" aria-live="polite"></div>
       <div class="new-patient-actions">
         <button id="btn-np-cancel" type="button" class="btn btn-ghost" onclick="closeNewPatientForm()">Cancel</button>
         <button id="btn-np-create" type="button" class="btn btn-primary" onclick="createNewPatient()">
@@ -140,8 +140,7 @@
     <div class="new-patient-inner patient-edit-inner">
       <div class="new-patient-header">
         <span id="patient-edit-title">Patient Details</span>
-      </div>
-      <div id="patient-edit-result" aria-live="polite"></div>
+      <!-- Result div moved to the bottom of the form -->
       <div class="field-row">
         <div class="field-group" style="flex:1">
           <label class="field-label">First name *</label>
@@ -218,7 +217,7 @@
           <label class="field-label">Postcode</label>
           <input id="pe-postcode" type="text" class="input" />
         </div>
-      </div>
+      <div id="patient-edit-result" aria-live="polite"></div>
       <div id="patient-edit-action-status" class="action-status hidden" aria-live="polite"></div>
       <div class="new-patient-actions patient-edit-actions">
         <button id="btn-pe-cancel" type="button" class="btn btn-ghost" onclick="closePatientEditForm()">Cancel</button>

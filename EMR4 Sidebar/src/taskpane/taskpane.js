@@ -262,20 +262,85 @@ function setBanner(patient) {
     : "";
 }
 
+function matchPatient(p, terms) {
+  const firstName = (p.first_name || "").toLowerCase();
+  const lastName = (p.last_name || "").toLowerCase();
+  const fullName = `${firstName} ${lastName}`;
+  const reverseName = `${lastName} ${firstName}`;
+  const dobStr = formatDate(p.date_of_birth).toLowerCase();
+
+  const medicare = (p.medicare_number || "").toLowerCase();
+  const medicareNorm = medicare.replace(/[^a-z0-9]/g, "");
+  const medicareIrn = (p.medicare_irn || "").toLowerCase();
+
+  const ihi = (p.ihi_number || "").toLowerCase();
+  const ihiNorm = ihi.replace(/[^a-z0-9]/g, "");
+
+  const phoneMobile = (p.phone_mobile || "").toLowerCase();
+  const phoneMobileNorm = phoneMobile.replace(/[^a-z0-9]/g, "");
+  const phoneHome = (p.phone_home || "").toLowerCase();
+  const phoneHomeNorm = phoneHome.replace(/[^a-z0-9]/g, "");
+
+  const fields = [
+    firstName,
+    lastName,
+    fullName,
+    reverseName,
+    dobStr,
+    medicare,
+    medicareNorm,
+    medicareIrn,
+    ihi,
+    ihiNorm,
+    phoneMobile,
+    phoneMobileNorm,
+    phoneHome,
+    phoneHomeNorm
+  ];
+
+  return terms.every(term => {
+    const termLower = term.toLowerCase();
+    const termNorm = termLower.replace(/[^a-z0-9]/g, "");
+
+    return fields.some(field => {
+      if (!field) return false;
+      if (termNorm && field.replace(/[^a-z0-9]/g, "").includes(termNorm)) {
+        return true;
+      }
+      return field.includes(termLower);
+    });
+  });
+}
+
 async function searchPatients(query) {
   if (!query) return;
   const container = document.getElementById("patient-search-results");
+
+  const terms = query.trim().split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return;
+
+  let longestTerm = "";
+  terms.forEach(term => {
+    if (term.length > longestTerm.length) {
+      longestTerm = term;
+    }
+  });
+
   try {
-    const res = await apiFetch(`/patients/search?q=${encodeURIComponent(query)}&limit=10`);
+    const res = await apiFetch(`/patients/search?q=${encodeURIComponent(longestTerm)}&limit=50`);
     if (!res) return;
     const data = await res.json();
     const patients = Array.isArray(data) ? data : [];
+
+    const filteredPatients = patients.filter(p => matchPatient(p, terms));
+    const displayPatients = filteredPatients.slice(0, 10);
+
     container.innerHTML = "";
-    if (!patients.length) {
+    if (!displayPatients.length) {
       container.innerHTML = '<div class="search-result-item"><span class="search-result-meta">No results found.</span></div>';
       return;
     }
-    patients.forEach(p => {
+    displayPatients.forEach(p => {
       const div = document.createElement("div");
       div.className = "search-result-item";
       const fileIcon = p.document_url ? ' <span title="Patient file available">📄</span>' : "";
@@ -1365,7 +1430,15 @@ let pendingNewPatientPayload = null;
 
 function setNewPatientResult(html) {
   const result = document.getElementById("new-patient-result");
-  if (result) result.innerHTML = html || "";
+  if (result) {
+    result.innerHTML = html || "";
+    const panel = document.getElementById("new-patient-panel");
+    if (panel && html) {
+      window.setTimeout(() => {
+        panel.scrollTop = panel.scrollHeight;
+      }, 50);
+    }
+  }
 }
 
 function setNewPatientFieldsDisabled(disabled) {
@@ -1580,6 +1653,13 @@ function showDuplicateWarning(candidates, body) {
         <button type="button" class="btn btn-ghost btn-sm" onclick="reviewNewPatientDetails()">${hardBlocked ? "Change Details" : "Review Details"}</button>
       </div>
     </div>`);
+
+  if (hardBlocked) {
+    setNewPatientActionStatus("Duplicate patient blocked.", "error");
+  } else {
+    setNewPatientActionStatus("Possible duplicate patient.", "error");
+  }
+
   if (createBtn) {
     createBtn.disabled = false;
     createBtn.textContent = hardBlocked ? "Check Again" : "Create Anyway";
@@ -1593,6 +1673,7 @@ window.reviewNewPatientDetails = function reviewNewPatientDetails() {
     <div class="alert alert-warning">
       Duplicate warning cleared. Edit the details and create again to re-check for matches.
     </div>`);
+  setNewPatientActionStatus("");
   const firstName = document.getElementById("np-first-name");
   if (firstName) firstName.focus();
 };
@@ -1603,6 +1684,7 @@ window.showNewPatientForm = function showNewPatientForm() {
   updatePatientOverlayOffset();
   resetNewPatientActions();
   setNewPatientResult("");
+  setNewPatientActionStatus("");
   document.getElementById("new-patient-panel").classList.remove("hidden");
   document.getElementById("np-first-name").focus();
 }
@@ -1612,6 +1694,7 @@ window.closeNewPatientForm = function closeNewPatientForm() {
   resetNewPatientActions();
   clearNewPatientFields();
   setNewPatientResult("");
+  setNewPatientActionStatus("");
 }
 
 window.resetNewPatientFormForAnother = function resetNewPatientFormForAnother() {
@@ -1645,7 +1728,15 @@ let pendingPatientEditPayload = null;
 
 function setPatientEditResult(html) {
   const result = document.getElementById("patient-edit-result");
-  if (result) result.innerHTML = html || "";
+  if (result) {
+    result.innerHTML = html || "";
+    const panel = document.getElementById("patient-edit-panel");
+    if (panel && html) {
+      window.setTimeout(() => {
+        panel.scrollTop = panel.scrollHeight;
+      }, 50);
+    }
+  }
 }
 
 function setPatientEditActionStatus(message, tone = "") {
@@ -1666,6 +1757,27 @@ function markPatientEditSaveFailed(message) {
     btn.disabled = false;
     btn.classList.remove("btn-error-state");
     btn.textContent = "Save Details";
+  }, 1600);
+}
+
+function setNewPatientActionStatus(message, tone = "") {
+  const statusEl = document.getElementById("new-patient-action-status");
+  if (!statusEl) return;
+  statusEl.textContent = message || "";
+  statusEl.className = message ? `action-status ${tone}` : "action-status hidden";
+}
+
+function markNewPatientSaveFailed(message) {
+  const btn = document.getElementById("btn-np-create");
+  setNewPatientActionStatus(message || "Not saved. Review the message above.", "error");
+  if (!btn) return;
+  btn.disabled = true;
+  btn.classList.add("btn-error-state");
+  btn.textContent = "Not Saved";
+  window.setTimeout(() => {
+    btn.disabled = false;
+    btn.classList.remove("btn-error-state");
+    btn.textContent = pendingNewPatientPayload ? "Create Anyway" : "Create Patient File";
   }, 1600);
 }
 
@@ -1991,31 +2103,40 @@ window.createNewPatient = async function createNewPatientWithDuplicateCheck() {
   try {
     body = collectNewPatientPayload();
   } catch (e) {
-    setNewPatientResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
+    const message = String(e.message || e);
+    setNewPatientResult(`<div class="alert alert-error">${escHtml(message)}</div>`);
+    markNewPatientSaveFailed(message);
     return;
   }
 
   const btn = document.getElementById("btn-np-create");
+  const cancelBtn = document.getElementById("btn-np-cancel");
   btn.disabled = true;
+  btn.classList.remove("btn-error-state");
   btn.textContent = "Checking...";
+  if (cancelBtn) cancelBtn.disabled = true;
+  setNewPatientActionStatus("Checking duplicates...");
   try {
     const candidates = await findNewPatientDuplicateCandidates(body);
     if (candidates.length) {
       showDuplicateWarning(candidates, body);
+      if (cancelBtn) cancelBtn.disabled = false;
       return;
     }
     await submitNewPatient(body);
   } catch (e) {
-    setNewPatientResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
-    btn.disabled = false;
-    btn.textContent = "Create Patient File";
-    btn.onclick = createNewPatient;
+    const message = String(e.message || e);
+    setNewPatientResult(`<div class="alert alert-error">${escHtml(message)}</div>`);
+    markNewPatientSaveFailed(message);
+    if (cancelBtn) cancelBtn.disabled = false;
   }
 };
 
 window.confirmCreateNewPatient = async function confirmCreateNewPatient() {
   if (!pendingNewPatientPayload) {
-    setNewPatientResult(`<div class="alert alert-error">Review the patient details and try again.</div>`);
+    const message = "Review the patient details and try again.";
+    setNewPatientResult(`<div class="alert alert-error">${message}</div>`);
+    markNewPatientSaveFailed(message);
     resetNewPatientActions();
     return;
   }
@@ -2027,13 +2148,21 @@ async function submitNewPatient(body) {
   const cancelBtn = document.getElementById("btn-np-cancel");
   let created = false;
   btn.disabled = true;
+  btn.classList.remove("btn-error-state");
   btn.textContent = "Creating...";
+  if (cancelBtn) cancelBtn.disabled = true;
+  setNewPatientActionStatus("Creating patient file...");
+  setNewPatientResult("");
   try {
     const res = await apiFetch("/patients/with-file", {
       method: "POST",
       body: JSON.stringify(body),
     });
-    if (!res || !res.ok) {
+    if (!res) {
+      if (cancelBtn) cancelBtn.disabled = false;
+      return;
+    }
+    if (!res.ok) {
       const d = await res.json().catch(() => ({}));
       throw new Error(describeApiError(d.detail || d, `Server error ${res.status}`));
     }
@@ -2047,6 +2176,7 @@ async function submitNewPatient(body) {
         File: <code>${escHtml(data.generated_filename)}</code><br>
         Open it from your OneDrive folder. The taskpane will auto-load the record when the file opens.
       </div>`);
+    setNewPatientActionStatus("Saved.", "success");
     btn.textContent = "Close";
     btn.onclick = closeNewPatientForm;
     if (cancelBtn) {
@@ -2054,14 +2184,19 @@ async function submitNewPatient(body) {
       cancelBtn.onclick = resetNewPatientFormForAnother;
     }
   } catch (e) {
+    const message = String(e.message || e);
     pendingNewPatientPayload = null;
     setNewPatientFieldsDisabled(false);
-    setNewPatientResult(`<div class="alert alert-error">${escHtml(String(e.message || e))}</div>`);
+    setNewPatientResult(`<div class="alert alert-error">${escHtml(message)}</div>`);
+    markNewPatientSaveFailed(message);
   } finally {
     btn.disabled = false;
+    if (cancelBtn) cancelBtn.disabled = false;
     if (!created) {
-      btn.textContent = pendingNewPatientPayload ? "Create Anyway" : "Create Patient File";
-      btn.onclick = pendingNewPatientPayload ? confirmCreateNewPatient : createNewPatient;
+      if (!btn.classList.contains("btn-error-state")) {
+        btn.textContent = pendingNewPatientPayload ? "Create Anyway" : "Create Patient File";
+        btn.onclick = pendingNewPatientPayload ? confirmCreateNewPatient : createNewPatient;
+      }
     }
   }
 }
@@ -2389,6 +2524,45 @@ Office.onReady(info => {
         saveBtn.disabled = false;
         saveBtn.textContent = "Save Details";
       }
+    }
+    if (e.target.closest("#new-patient-panel")) {
+      setNewPatientActionStatus("");
+      const createBtn = document.getElementById("btn-np-create");
+      if (createBtn) {
+        createBtn.classList.remove("btn-error-state");
+        createBtn.disabled = false;
+        createBtn.textContent = "Create Patient File";
+        createBtn.onclick = createNewPatient;
+      }
+      pendingNewPatientPayload = null;
+      setNewPatientFieldsDisabled(false);
+      setNewPatientResult("");
+    }
+  });
+
+  document.addEventListener("change", e => {
+    if (e.target.closest("#patient-edit-panel")) {
+      setPatientEditCancelLabel(false);
+      setPatientEditActionStatus("");
+      const saveBtn = document.getElementById("btn-pe-save");
+      if (saveBtn) {
+        saveBtn.classList.remove("btn-error-state");
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Save Details";
+      }
+    }
+    if (e.target.closest("#new-patient-panel")) {
+      setNewPatientActionStatus("");
+      const createBtn = document.getElementById("btn-np-create");
+      if (createBtn) {
+        createBtn.classList.remove("btn-error-state");
+        createBtn.disabled = false;
+        createBtn.textContent = "Create Patient File";
+        createBtn.onclick = createNewPatient;
+      }
+      pendingNewPatientPayload = null;
+      setNewPatientFieldsDisabled(false);
+      setNewPatientResult("");
     }
   });
 
