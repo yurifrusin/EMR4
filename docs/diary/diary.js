@@ -3180,6 +3180,7 @@ async function getErrorMessage(res) {
 
 // ─── ADMIN MODAL CONTROLLER ────────────────────────────────────
 let adminActiveTab = "rooms";
+let pendingAdminArchiveKey = null;
 
 function initAdminPanel() {
   const adminBtn = document.getElementById("btn-admin-panel");
@@ -3286,6 +3287,26 @@ function setAdminInfo(msg) {
   } else {
     infoEl.classList.add("hidden");
   }
+}
+
+function confirmAdminArchive(key, message) {
+  try {
+    if (typeof window.confirm === "function") {
+      return window.confirm(message);
+    }
+  } catch (err) {
+    console.warn("Native confirmation dialog unavailable for admin archive:", err);
+  }
+
+  if (pendingAdminArchiveKey === key) {
+    pendingAdminArchiveKey = null;
+    clearAdminAlerts();
+    return true;
+  }
+
+  pendingAdminArchiveKey = key;
+  setAdminError("Confirmation dialog unavailable here. Click Archive again to confirm.");
+  return false;
 }
 
 async function loadAdminTabContent() {
@@ -3469,7 +3490,7 @@ async function handleSaveRoom() {
 }
 
 async function handleArchiveRoom(room) {
-  if (!confirm(`Are you sure you want to archive "${room.name}"? Historical booking references will be preserved.`)) {
+  if (!confirmAdminArchive(`room:${room.id}`, `Are you sure you want to archive "${room.name}"? Historical booking references will be preserved.`)) {
     return;
   }
   try {
@@ -3539,7 +3560,7 @@ async function handleSaveArea() {
 }
 
 async function handleArchiveArea(area) {
-  if (!confirm(`Are you sure you want to archive "${area.name}"? Historical booking references will be preserved.`)) {
+  if (!confirmAdminArchive(`area:${area.id}`, `Are you sure you want to archive "${area.name}"? Historical booking references will be preserved.`)) {
     return;
   }
   try {
