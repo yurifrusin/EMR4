@@ -360,7 +360,9 @@ agent session state.
   Worker mirror branches can trigger Pages deployments from stale artifacts if
   manually selected; deploy them only immediately after Codex realigns mirrors to
   `master`, then redeploy `master` last. Verify the live taskpane version with the
-  console checks in `docs/emr4-development-environment-dummys-guide.md`.
+  console checks in `docs/emr4-development-environment-dummys-guide.md`. The repo
+  now has `.github/workflows/pages.yml`; GitHub Pages should use **GitHub Actions**
+  as its source so pushes to `master` deploy `docs/` automatically.
 - **Command Centre** (`docs/command-centre/`): separate **window** via `displayDialogAsync` (NOT iframe — iframe denies microphone). Hosts the AI Scribe (record → Gemini transcribe → SOAP note review → insert). Token + patient delivered via `?pid=` URL param and `messageChild` handshake. This is the screen-real-estate surface for future Billing/Results Review — see memory `project_two_surface_architecture`.
 - **Document anchoring (Dr Shera method)** — patient `.docx` has Heading 1 section titles (Contemporaneous Notes, Vaccinations, …); consult entries are Normal+bold lines `DD-MM-YYYY  Name  H[:MM] AM/PM  N years old.` under Contemporaneous Notes (newest on top). `getCurrentConsultText()` scopes AI to ONLY the current consult (planted header → previous consult header / next Heading 1). See memory `project_document_anchoring`.
 - **Start Consultation** button + **Ctrl+Alt+N** (shared runtime, ExtendedOverrides/shortcuts.json, manifest v1.1.0.0) plants the dated header under Contemporaneous Notes and bookmarks it (`EMR4_NOTE_POINT`); notes/SOAP insert right after it. **Was Ctrl+Shift+N — changed because Chrome reserves that for Incognito and swallows it before Word sees it.** Avoid Chrome-reserved combos for any future shortcut (e.g. the planned Parse & Lock Ctrl+Shift+B toggles Chrome's bookmarks bar — pick a Ctrl+Alt / Alt+Shift combo instead).

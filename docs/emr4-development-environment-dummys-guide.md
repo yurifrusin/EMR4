@@ -484,6 +484,21 @@ Pages deployments. Pages should deploy only the canonical `master` branch; stale
 worker branches such as `claude/current`, `antigravity/current`, or
 `codex/current` can overwrite the live Pages artifact if manually deployed.
 
+### GitHub Pages Auto-Deploy
+
+The repository includes `.github/workflows/pages.yml`, which deploys the `docs/`
+folder whenever `master` changes deployed static files. To use it reliably:
+
+1. Open GitHub: `https://github.com/yurifrusin/EMR4/settings/pages`.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. After Codex pushes `master`, open
+   `https://github.com/yurifrusin/EMR4/actions/workflows/pages.yml`.
+4. Confirm the newest **Deploy GitHub Pages** run completed successfully.
+
+If the live taskpane or diary still serves an old `?v=N`, use the workflow page's
+**Run workflow** button on `master`. Avoid changing the Pages source branch to a
+worker mirror; that was the cause of stale deployments after parallel-agent work.
+
 ---
 
 ## 15. Check The Live Diary Version

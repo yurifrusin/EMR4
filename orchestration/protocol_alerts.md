@@ -40,7 +40,8 @@ Read these before acting on remembered process details.
   `codex/current`, `claude/current`, or `antigravity/current` unless Codex has just
   confirmed those mirror branches are aligned to `master`. A later Pages deployment
   from a stale worker mirror can overwrite the live artifact with older taskpane or
-  diary assets.
+  diary assets. Prefer the `.github/workflows/pages.yml` GitHub Actions deployment
+  from `master`; set Pages source to GitHub Actions in repository settings.
 - Sprint launch rule: Codex/orchestrator must announce `HANDIN READY` before the
   user prompts external worker agents to run `handin`.
 - Sprint integration rule: Codex/orchestrator must not push sprint work through
