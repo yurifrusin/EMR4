@@ -217,6 +217,8 @@ function getColumnBreaks(col) {
 
 // ─── STATE ────────────────────────────────────────────────
 let token      = localStorage.getItem("emr4_token");
+let currentUserRole = null;
+let currentUserRoleToken = null;
 let diaryDate  = new Date();
 let refreshTimer = null;
 const REFRESH_INTERVAL_MS = 60_000;
@@ -256,6 +258,69 @@ async function apiFetch(path, opts = {}) {
     throw new Error("401 Unauthorized");
   }
   return res;
+}
+
+function getRoleFromToken(authToken = token) {
+  if (!authToken) return null;
+  try {
+    const parts = authToken.split(".");
+    if (parts.length !== 3) return null;
+    const payload = JSON.parse(atob(parts[1]));
+    return payload.role || payload.user_role || null;
+  } catch (_) {
+    return null;
+  }
+}
+
+function isAdminRole(role) {
+  return role === "Admin" || role === "PracticeOwner";
+}
+
+function updateAdminButtonVisibility() {
+  const adminBtn = document.getElementById("btn-admin-panel");
+  if (!adminBtn) return;
+  adminBtn.classList.toggle("hidden", !isUserAdminOrOwner());
+}
+
+async function ensureCurrentUserRole() {
+  if (isSmokeMode()) {
+    currentUserRole = "Admin";
+    currentUserRoleToken = token;
+    updateAdminButtonVisibility();
+    return;
+  }
+  if (!token) {
+    currentUserRole = null;
+    currentUserRoleToken = null;
+    updateAdminButtonVisibility();
+    return;
+  }
+
+  const decodedRole = getRoleFromToken(token);
+  if (decodedRole) {
+    currentUserRole = decodedRole;
+    currentUserRoleToken = token;
+    updateAdminButtonVisibility();
+    return;
+  }
+
+  if (currentUserRoleToken === token && currentUserRole) {
+    updateAdminButtonVisibility();
+    return;
+  }
+
+  try {
+    const res = await apiFetch("/auth/me");
+    if (res.ok) {
+      const user = await res.json();
+      currentUserRole = user.role || null;
+      currentUserRoleToken = token;
+    }
+  } catch (_) {
+    currentUserRole = null;
+    currentUserRoleToken = null;
+  }
+  updateAdminButtonVisibility();
 }
 
 function cloneTemplate(template) {
@@ -1194,15 +1259,7 @@ async function loadDiary(silent = false, options = {}) {
     return;
   }
 
-  // Update admin button visibility based on permissions
-  const adminBtn = document.getElementById("btn-admin-panel");
-  if (adminBtn) {
-    if (isUserAdminOrOwner()) {
-      adminBtn.classList.remove("hidden");
-    } else {
-      adminBtn.classList.add("hidden");
-    }
-  }
+  await ensureCurrentUserRole();
 
   if (!silent) {
     showLoading(true);
@@ -1681,7 +1738,10 @@ Office.onReady(() => {
           const msg = JSON.parse(arg.message);
           if (msg.type === "auth" && msg.token) {
             token = msg.token;
+            currentUserRole = getRoleFromToken(token);
+            currentUserRoleToken = currentUserRole ? token : null;
             localStorage.setItem("emr4_token", token);
+            updateAdminButtonVisibility();
             loadDiary();
             scheduleRefresh();
           } else if (msg.type === "focus") {
@@ -3058,17 +3118,7 @@ function getMockWaitingAreas() {
 
 function isUserAdminOrOwner() {
   if (isSmokeMode()) return true;
-  if (!token) return false;
-  try {
-    const parts = token.split('.');
-    if (parts.length === 3) {
-      const payload = JSON.parse(atob(parts[1]));
-      return payload.role === "Admin" || payload.role === "PracticeOwner";
-    }
-  } catch (e) {
-    console.error("Failed to parse JWT role:", e);
-  }
-  return false;
+  return isAdminRole(currentUserRole || getRoleFromToken(token));
 }
 
 // ─── API WRAPPERS FOR CRUD ─────────────────────────────────────
