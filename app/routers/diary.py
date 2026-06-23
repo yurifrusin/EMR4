@@ -4,7 +4,6 @@ from datetime import date
 from pathlib import Path
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload
 
 from app.dependencies import get_db, get_current_user, require_role
@@ -72,6 +71,95 @@ def _ensure_waiting_area(
             status_code=400,
             detail="default_waiting_area_id must be at the same location as the room or practice-wide",
         )
+
+
+def _resource_sort_key(resource) -> tuple[int, str, str]:
+    return (
+        int(resource.display_order or 0),
+        str(resource.name or "").lower(),
+        str(resource.id),
+    )
+
+
+def _scoped_resource_query(model, db: Session, practice_id: uuid.UUID, location_id: Optional[uuid.UUID]):
+    query = db.query(model).filter(model.practice_id == practice_id)
+    if location_id is None:
+        return query.filter(model.location_id.is_(None))
+    return query.filter(model.location_id == location_id)
+
+
+def _resource_scope_locations(model, db: Session, practice_id: uuid.UUID) -> list[Optional[uuid.UUID]]:
+    rows = db.query(model.location_id).filter(model.practice_id == practice_id).distinct().all()
+    return [row[0] for row in rows]
+
+
+def _assign_display_orders(resources: list, db: Session) -> bool:
+    desired_orders = {resource.id: index for index, resource in enumerate(resources)}
+    if all(int(resource.display_order or 0) == desired_orders[resource.id] for resource in resources):
+        return False
+
+    temp_base = max([int(resource.display_order or 0) for resource in resources] + [0]) + len(resources) + 1000
+    for index, resource in enumerate(resources):
+        resource.display_order = temp_base + index
+    db.flush()
+
+    for resource in resources:
+        resource.display_order = desired_orders[resource.id]
+    db.flush()
+    return True
+
+
+def _normalize_resource_order(
+    model,
+    db: Session,
+    practice_id: uuid.UUID,
+    location_id: Optional[uuid.UUID],
+    moved_resource=None,
+    requested_order: Optional[int] = None,
+) -> bool:
+    resources = _scoped_resource_query(model, db, practice_id, location_id).all()
+    if not resources:
+        return False
+
+    active_resources = sorted(
+        [
+            resource
+            for resource in resources
+            if resource.is_active and (not moved_resource or resource.id != moved_resource.id)
+        ],
+        key=_resource_sort_key,
+    )
+    inactive_resources = sorted(
+        [
+            resource
+            for resource in resources
+            if not resource.is_active and (not moved_resource or resource.id != moved_resource.id)
+        ],
+        key=_resource_sort_key,
+    )
+
+    if moved_resource:
+        if moved_resource.is_active:
+            target_order = int(requested_order if requested_order is not None else moved_resource.display_order or 0)
+            target_order = max(0, min(target_order, len(active_resources)))
+            active_resources.insert(target_order, moved_resource)
+        else:
+            inactive_resources.append(moved_resource)
+            inactive_resources.sort(key=_resource_sort_key)
+
+    return _assign_display_orders(active_resources + inactive_resources, db)
+
+
+def _normalize_all_resource_orders(model, db: Session, practice_id: uuid.UUID) -> bool:
+    changed = False
+    for location_id in _resource_scope_locations(model, db, practice_id):
+        changed = _normalize_resource_order(model, db, practice_id, location_id) or changed
+    return changed
+
+
+def _next_temp_display_order(model, db: Session, practice_id: uuid.UUID, location_id: Optional[uuid.UUID]) -> int:
+    resources = _scoped_resource_query(model, db, practice_id, location_id).all()
+    return max([int(resource.display_order or 0) for resource in resources] + [0]) + len(resources) + 1000
 
 
 def _practitioner_ids_by_ahpra(db: Session, practice_id) -> dict[str, str]:
@@ -144,6 +232,13 @@ def get_waiting_areas(
     If location_id is supplied, only waiting areas at that location are returned.
     """
     _ensure_location(location_id, current_user.practice_id, db)
+    changed = (
+        _normalize_resource_order(WaitingArea, db, current_user.practice_id, location_id)
+        if location_id
+        else _normalize_all_resource_orders(WaitingArea, db, current_user.practice_id)
+    )
+    if changed:
+        db.commit()
     q = (
         db.query(WaitingArea)
         .filter(
@@ -153,7 +248,7 @@ def get_waiting_areas(
     )
     if location_id:
         q = q.filter(WaitingArea.location_id == location_id)
-    return q.order_by(WaitingArea.display_order).all()
+    return q.order_by(WaitingArea.display_order, WaitingArea.name).all()
 
 
 @router.post("/waiting-areas", response_model=WaitingAreaOut, status_code=status.HTTP_201_CREATED)
@@ -168,10 +263,19 @@ def create_waiting_area(
         practice_id=current_user.practice_id,
         location_id=body.location_id,
         name=body.name,
-        display_order=body.display_order,
+        display_order=_next_temp_display_order(WaitingArea, db, current_user.practice_id, body.location_id),
         is_active=True,
     )
     db.add(area)
+    db.flush()
+    _normalize_resource_order(
+        WaitingArea,
+        db,
+        current_user.practice_id,
+        body.location_id,
+        moved_resource=area,
+        requested_order=body.display_order,
+    )
     db.commit()
     db.refresh(area)
     return area
@@ -193,10 +297,16 @@ def update_waiting_area(
         raise HTTPException(status_code=404, detail="Waiting area not found")
     if body.name is not None:
         area.name = body.name
-    if body.display_order is not None:
-        area.display_order = body.display_order
     if body.is_active is not None:
         area.is_active = body.is_active
+    _normalize_resource_order(
+        WaitingArea,
+        db,
+        current_user.practice_id,
+        area.location_id,
+        moved_resource=area,
+        requested_order=body.display_order,
+    )
     db.commit()
     db.refresh(area)
     return area
@@ -215,12 +325,19 @@ def get_rooms(
     If location_id is supplied, only rooms at that location are returned.
     """
     _ensure_location(location_id, current_user.practice_id, db)
+    changed = (
+        _normalize_resource_order(Room, db, current_user.practice_id, location_id)
+        if location_id
+        else _normalize_all_resource_orders(Room, db, current_user.practice_id)
+    )
+    if changed:
+        db.commit()
     q = db.query(Room).filter(Room.practice_id == current_user.practice_id)
     if not include_inactive:
         q = q.filter(Room.is_active == True)
     if location_id:
         q = q.filter(Room.location_id == location_id)
-    return q.order_by(Room.display_order).all()
+    return q.order_by(Room.display_order, Room.name).all()
 
 
 @router.post("/rooms", response_model=RoomOut, status_code=status.HTTP_201_CREATED)
@@ -236,16 +353,21 @@ def create_room(
         practice_id=current_user.practice_id,
         location_id=body.location_id,
         name=body.name,
-        display_order=body.display_order,
+        display_order=_next_temp_display_order(Room, db, current_user.practice_id, body.location_id),
         default_waiting_area_id=body.default_waiting_area_id,
         is_active=True,
     )
     db.add(room)
-    try:
-        db.commit()
-    except IntegrityError:
-        db.rollback()
-        raise HTTPException(status_code=409, detail="A room with that display_order already exists for this practice/location")
+    db.flush()
+    _normalize_resource_order(
+        Room,
+        db,
+        current_user.practice_id,
+        body.location_id,
+        moved_resource=room,
+        requested_order=body.display_order,
+    )
+    db.commit()
     db.refresh(room)
     return room
 
@@ -266,8 +388,6 @@ def update_room(
         raise HTTPException(status_code=404, detail="Room not found")
     if body.name is not None:
         room.name = body.name
-    if body.display_order is not None:
-        room.display_order = body.display_order
     if body.is_active is not None:
         room.is_active = body.is_active
     # default_waiting_area_id: explicit None in JSON clears it; omitted field is left unchanged
@@ -275,11 +395,15 @@ def update_room(
         new_area_id = body.default_waiting_area_id
         _ensure_waiting_area(new_area_id, current_user.practice_id, room.location_id, db)
         room.default_waiting_area_id = new_area_id
-    try:
-        db.commit()
-    except IntegrityError:
-        db.rollback()
-        raise HTTPException(status_code=409, detail="A room with that display_order already exists for this practice/location")
+    _normalize_resource_order(
+        Room,
+        db,
+        current_user.practice_id,
+        room.location_id,
+        moved_resource=room,
+        requested_order=body.display_order,
+    )
+    db.commit()
     db.refresh(room)
     return room
 

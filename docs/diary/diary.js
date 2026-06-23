@@ -3159,15 +3159,15 @@ async function initLocationSelector() {
 
 // ─── RESOURCE ADMIN MOCK DATABASES (Smoke Mode) ────────────────
 let mockRooms = [
-  { id: "mock-room-1", name: "Room 1", display_order: 1, location_id: "loc-1", default_waiting_area_id: "mock-area-1" },
-  { id: "mock-room-2", name: "Room 2", display_order: 2, location_id: "loc-1", default_waiting_area_id: "mock-area-2" },
-  { id: "mock-room-3", name: "Room 3", display_order: 3, location_id: "loc-1", default_waiting_area_id: null },
-  { id: "mock-room-4", name: "Procedure Room 1", display_order: 1, location_id: "loc-2", default_waiting_area_id: null },
+  { id: "mock-room-1", name: "Room 1", display_order: 0, location_id: "loc-1", default_waiting_area_id: "mock-area-1" },
+  { id: "mock-room-2", name: "Room 2", display_order: 1, location_id: "loc-1", default_waiting_area_id: "mock-area-2" },
+  { id: "mock-room-3", name: "Room 3", display_order: 2, location_id: "loc-1", default_waiting_area_id: null },
+  { id: "mock-room-4", name: "Procedure Room 1", display_order: 0, location_id: "loc-2", default_waiting_area_id: null },
 ];
 
 let mockWaitingAreas = [
-  { id: "mock-area-1", name: "Main Waiting Room", display_order: 1, location_id: "loc-1" },
-  { id: "mock-area-2", name: "Sub-waiting Room B", display_order: 2, location_id: "loc-1" },
+  { id: "mock-area-1", name: "Main Waiting Room", display_order: 0, location_id: "loc-1" },
+  { id: "mock-area-2", name: "Sub-waiting Room B", display_order: 1, location_id: "loc-1" },
 ];
 
 function getMockWaitingAreas() {
@@ -3202,14 +3202,20 @@ async function fetchWaitingAreas(locationId) {
 
 async function saveRoom(room) {
   if (isSmokeMode()) {
+    let savedRoom;
     if (room.id) {
       const idx = mockRooms.findIndex(r => r.id === room.id);
-      if (idx !== -1) mockRooms[idx] = { ...mockRooms[idx], ...room };
+      if (idx !== -1) {
+        mockRooms[idx] = { ...mockRooms[idx], ...room };
+        savedRoom = mockRooms[idx];
+      }
     } else {
       room.id = `mock-room-${Date.now()}`;
-      mockRooms.push(room);
+      savedRoom = { ...room };
+      mockRooms.push(savedRoom);
     }
-    return room;
+    compactMockResourceOrders(mockRooms, savedRoom, room.display_order);
+    return savedRoom || room;
   }
   const method = room.id ? "PATCH" : "POST";
   const url = room.id ? `/diary/rooms/${room.id}` : "/diary/rooms";
@@ -3226,6 +3232,7 @@ async function archiveRoom(roomId) {
   if (isSmokeMode()) {
     const idx = mockRooms.findIndex(r => r.id === roomId);
     if (idx !== -1) mockRooms[idx] = { ...mockRooms[idx], is_active: false };
+    compactMockResourceOrders(mockRooms, idx !== -1 ? mockRooms[idx] : null);
     return true;
   }
   const res = await apiFetch(`/diary/rooms/${roomId}`, {
@@ -3239,14 +3246,20 @@ async function archiveRoom(roomId) {
 
 async function saveWaitingArea(area) {
   if (isSmokeMode()) {
+    let savedArea;
     if (area.id) {
       const idx = mockWaitingAreas.findIndex(wa => wa.id === area.id);
-      if (idx !== -1) mockWaitingAreas[idx] = { ...mockWaitingAreas[idx], ...area };
+      if (idx !== -1) {
+        mockWaitingAreas[idx] = { ...mockWaitingAreas[idx], ...area };
+        savedArea = mockWaitingAreas[idx];
+      }
     } else {
       area.id = `mock-area-${Date.now()}`;
-      mockWaitingAreas.push(area);
+      savedArea = { ...area };
+      mockWaitingAreas.push(savedArea);
     }
-    return area;
+    compactMockResourceOrders(mockWaitingAreas, savedArea, area.display_order);
+    return savedArea || area;
   }
   const method = area.id ? "PATCH" : "POST";
   const url = area.id ? `/diary/waiting-areas/${area.id}` : "/diary/waiting-areas";
@@ -3266,6 +3279,7 @@ async function archiveWaitingArea(areaId) {
     mockRooms.forEach(r => {
       if (r.default_waiting_area_id === areaId) r.default_waiting_area_id = null;
     });
+    compactMockResourceOrders(mockWaitingAreas, idx !== -1 ? mockWaitingAreas[idx] : null);
     return true;
   }
   const res = await apiFetch(`/diary/waiting-areas/${areaId}`, {
@@ -3580,12 +3594,42 @@ function sortAdminResourceItems(a, b) {
   return String(a.name || "").localeCompare(String(b.name || ""));
 }
 
+function compactMockResourceOrders(items, movedItem = null, requestedOrder = null) {
+  if (!Array.isArray(items)) return;
+
+  const scopeKey = item => item && item.location_id ? item.location_id : "__practice__";
+  const scopes = Array.from(new Set(items.map(scopeKey)));
+
+  scopes.forEach(scope => {
+    const scoped = items.filter(item => scopeKey(item) === scope);
+    const movedInScope = movedItem && scopeKey(movedItem) === scope ? movedItem : null;
+    const activeItems = scoped
+      .filter(item => item.is_active !== false && (!movedInScope || item.id !== movedInScope.id))
+      .sort(sortAdminResourceItems);
+    const inactiveItems = scoped
+      .filter(item => item.is_active === false && (!movedInScope || item.id !== movedInScope.id))
+      .sort(sortAdminResourceItems);
+
+    if (movedInScope) {
+      if (movedInScope.is_active !== false) {
+        const targetOrder = Number.isFinite(Number(requestedOrder))
+          ? Math.max(0, Math.min(Number(requestedOrder), activeItems.length))
+          : Math.max(0, Math.min(Number(movedInScope.display_order) || 0, activeItems.length));
+        activeItems.splice(targetOrder, 0, movedInScope);
+      } else {
+        inactiveItems.push(movedInScope);
+      }
+    }
+
+    [...activeItems, ...inactiveItems].forEach((item, index) => {
+      item.display_order = index;
+    });
+  });
+}
+
 function getNextAdminDisplayOrder(items) {
-  const maxOrder = (Array.isArray(items) ? items : []).reduce((max, item) => {
-    const order = Number(item && item.display_order);
-    return Number.isFinite(order) ? Math.max(max, order) : max;
-  }, -1);
-  return String(maxOrder + 1);
+  const activeCount = (Array.isArray(items) ? items : []).filter(item => item && item.is_active !== false).length;
+  return String(activeCount);
 }
 
 function showRoomForm(room) {

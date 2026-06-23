@@ -4,9 +4,9 @@ Diary resource admin contract tests.
 Covers:
 - GET /api/v1/diary/rooms: auth, active-only default, include_inactive, location filter, isolation
 - POST /api/v1/diary/rooms: role gate (403), create (201), cross-practice location 404,
-  invalid default_waiting_area_id 400, duplicate display_order 409
+  invalid default_waiting_area_id 400, display_order insertion/resequencing
 - PATCH /api/v1/diary/rooms/{id}: role gate, cross-practice 404, partial update,
-  archive (is_active=False), default_waiting_area_id validation
+  archive (is_active=False), reordering, default_waiting_area_id validation
 - POST /api/v1/diary/waiting-areas: role gate, create, cross-practice location 404
 - PATCH /api/v1/diary/waiting-areas/{id}: role gate, cross-practice 404, partial update, archive
 - Archive semantics: archived room excluded from active list; DiaryRoster reads unaffected
@@ -189,14 +189,19 @@ def test_rooms_create_inactive_default_area_rejected(client, db, admin_user, pra
     assert r.status_code == 400
 
 
-def test_rooms_create_duplicate_display_order_409(client, db, admin_user, practice):
+def test_rooms_create_inserts_at_display_order_and_resequences(client, db, admin_user, practice):
     _room(db, practice, "Room 1", order=0)
     r = client.post(
         "/api/v1/diary/rooms",
         json={"name": "Room 2", "display_order": 0},
         headers={"Authorization": f"Bearer {make_token(admin_user)}"},
     )
-    assert r.status_code == 409
+    assert r.status_code == 201
+    assert r.json()["display_order"] == 0
+
+    list_r = client.get("/api/v1/diary/rooms", headers={"Authorization": f"Bearer {make_token(admin_user)}"})
+    rooms = [(room["name"], room["display_order"]) for room in list_r.json()]
+    assert rooms == [("Room 2", 0), ("Room 1", 1)]
 
 
 # ─── PATCH /api/v1/diary/rooms/{id} ───────────────────────────────────────────
@@ -230,6 +235,51 @@ def test_rooms_update_name(client, db, admin_user, practice):
     )
     assert r.status_code == 200
     assert r.json()["name"] == "Renamed Room"
+
+
+def test_rooms_update_display_order_moves_and_resequences(client, db, admin_user, practice):
+    _room(db, practice, "Room 1", order=0)
+    _room(db, practice, "Room 2", order=1)
+    room_3 = _room(db, practice, "Room 3", order=2)
+
+    r = client.patch(
+        f"/api/v1/diary/rooms/{room_3.id}",
+        json={"display_order": 1},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    assert r.json()["display_order"] == 1
+
+    list_r = client.get("/api/v1/diary/rooms", headers={"Authorization": f"Bearer {make_token(admin_user)}"})
+    rooms = [(room["name"], room["display_order"]) for room in list_r.json()]
+    assert rooms == [("Room 1", 0), ("Room 3", 1), ("Room 2", 2)]
+
+
+def test_rooms_archived_order_no_longer_blocks_visible_reorder(client, db, admin_user, practice):
+    _room(db, practice, "Room 1", order=0)
+    _room(db, practice, "Room 2", order=1)
+    _room(db, practice, "Archived Room", order=2, is_active=False)
+    room_3 = _room(db, practice, "Room 3", order=3)
+
+    r = client.patch(
+        f"/api/v1/diary/rooms/{room_3.id}",
+        json={"display_order": 2},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    assert r.json()["display_order"] == 2
+
+    list_r = client.get(
+        "/api/v1/diary/rooms?include_inactive=true",
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    rooms = [(room["name"], room["display_order"], room["is_active"]) for room in list_r.json()]
+    assert rooms == [
+        ("Room 1", 0, True),
+        ("Room 2", 1, True),
+        ("Room 3", 2, True),
+        ("Archived Room", 3, False),
+    ]
 
 
 def test_rooms_archive(client, db, admin_user, practice):
@@ -317,6 +367,24 @@ def test_waiting_areas_create_admin(client, admin_user):
     assert data["is_active"] is True
 
 
+def test_waiting_areas_create_inserts_and_resequences(client, db, admin_user, practice):
+    _area(db, practice, "Main Waiting Room", order=0)
+    r = client.post(
+        "/api/v1/diary/waiting-areas",
+        json={"name": "Kids Play Area", "display_order": 0},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 201
+    assert r.json()["display_order"] == 0
+
+    list_r = client.get(
+        "/api/v1/diary/waiting-areas",
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    areas = [(area["name"], area["display_order"]) for area in list_r.json()]
+    assert areas == [("Kids Play Area", 0), ("Main Waiting Room", 1)]
+
+
 # ─── PATCH /api/v1/diary/waiting-areas/{id} ───────────────────────────────────
 
 def test_waiting_areas_update_requires_admin(client, db, gp_user, practice):
@@ -348,6 +416,46 @@ def test_waiting_areas_update_name(client, db, admin_user, practice):
     )
     assert r.status_code == 200
     assert r.json()["name"] == "Kids Corner"
+
+
+def test_waiting_areas_update_display_order_moves_and_resequences(client, db, admin_user, practice):
+    _area(db, practice, "Main Waiting Room", order=0)
+    area_2 = _area(db, practice, "Kids Play Area", order=1)
+    _area(db, practice, "TV Lounge", order=2)
+
+    r = client.patch(
+        f"/api/v1/diary/waiting-areas/{area_2.id}",
+        json={"display_order": 2},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    assert r.json()["display_order"] == 2
+
+    list_r = client.get(
+        "/api/v1/diary/waiting-areas",
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    areas = [(area["name"], area["display_order"]) for area in list_r.json()]
+    assert areas == [("Main Waiting Room", 0), ("TV Lounge", 1), ("Kids Play Area", 2)]
+
+
+def test_waiting_areas_get_compacts_gaps_after_archive(client, db, admin_user, practice):
+    _area(db, practice, "Main Waiting Room", order=0)
+    archived = _area(db, practice, "Archived Area", order=1, is_active=False)
+    active = _area(db, practice, "Kids Play Area", order=4)
+
+    r = client.get(
+        "/api/v1/diary/waiting-areas",
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    areas = [(area["name"], area["display_order"]) for area in r.json()]
+    assert areas == [("Main Waiting Room", 0), ("Kids Play Area", 1)]
+
+    db.refresh(archived)
+    db.refresh(active)
+    assert archived.display_order == 2
+    assert active.display_order == 1
 
 
 def test_waiting_areas_archive(client, db, admin_user, practice):
