@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 19: Resource Admin Foundations |
 | Integrated through | Sprint 19 resource-admin ordering hotfix |
-| Status | Integrated locally; diary asset v83 and backend ordering hotfix pending push/deploy/restart |
+| Status | Integrated and pushed; diary asset v83 deployed, backend restart and user review pending |
 | Last updated | 2026-06-24 |
 
 ## What Changed
@@ -149,6 +149,8 @@ manual review:
   2; Room 3 moved to order 1 and Room 2 shifted to order 2; first Archive click
   showed the inline fallback warning and the second click archived/compacted the
   waiting-area list.
+- GitHub Pages deployed check -> live `diary.html` served `diary.js?v=83` /
+  `diary.css?v=83`.
 
 ## Recommended Next Direction
 
