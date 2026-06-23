@@ -1665,6 +1665,7 @@ function showDuplicateWarning(candidates, body) {
     createBtn.textContent = hardBlocked ? "Check Again" : "Create Anyway";
     createBtn.onclick = hardBlocked ? createNewPatient : confirmCreateNewPatient;
   }
+  markNewPatientSaveFailed(hardBlocked ? "Not saved. Check the duplicate warning above." : "Review possible duplicate before saving.");
 }
 
 window.reviewNewPatientDetails = function reviewNewPatientDetails() {
@@ -1771,13 +1772,14 @@ function markNewPatientSaveFailed(message) {
   const btn = document.getElementById("btn-np-create");
   setNewPatientActionStatus(message || "Not saved. Review the message above.", "error");
   if (!btn) return;
+  const restoreText = btn.textContent || (pendingNewPatientPayload ? "Create Anyway" : "Create Patient File");
   btn.disabled = true;
   btn.classList.add("btn-error-state");
   btn.textContent = "Not Saved";
   window.setTimeout(() => {
     btn.disabled = false;
     btn.classList.remove("btn-error-state");
-    btn.textContent = pendingNewPatientPayload ? "Create Anyway" : "Create Patient File";
+    btn.textContent = restoreText;
   }, 1600);
 }
 
