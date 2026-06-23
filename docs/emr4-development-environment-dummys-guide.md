@@ -585,94 +585,54 @@ Invoke-RestMethod `
   Select-Object id,first_name,last_name,date_of_birth,medicare_number,medicare_irn
 ```
 
-### Find Likely Duplicate Patients In The Database
+### Find Likely Duplicate Patients In The Dev Database
 
-Direct database reads are fine in the dev database. Do not run delete/update
-commands unless you are certain which record should be changed.
+Use the read-only helper first. It lists likely duplicate patient groups and shows
+how many linked records each patient has, so you do not need to write ad hoc SQL
+before deciding what to inspect next.
+
+```powershell
+python scripts\audit_patient_duplicates.py
+```
+
+To limit the check to one practice:
+
+```powershell
+python scripts\audit_patient_duplicates.py --practice-id PRACTICE_ID_HERE
+```
+
+To inspect the full reference-count table for every duplicate patient:
+
+```powershell
+python scripts\audit_patient_duplicates.py --show-zero
+```
+
+The helper is evidence-only. It does not delete, merge, relink, or update any
+records. If the database is unavailable or misconfigured, it should fail with a
+plain error and confirm that no records were changed.
+
+### Before Deleting A Duplicate
+
+Do not delete duplicate patient rows manually. A duplicate may already be linked
+to appointments, encounters, documents, billing, reminders, messages, kiosk
+check-ins, or generated patient files.
+
+Safer short-term workflow:
+
+1. Run `python scripts\audit_patient_duplicates.py`.
+2. Decide which record appears to be the keeper based on identifiers, document
+   URL presence, creation dates, and linked reference counts.
+3. Ask Codex to design or review the exact merge/delete plan, or wait until EMR4
+   has a proper admin merge-patient workflow.
+
+Manual `psql` reads are a fallback only:
 
 ```powershell
 docker exec -it gp-pms-postgres psql -U postgres -d gp_pms_dev
 ```
 
-Inside `psql`, list same-name/date-of-birth duplicates:
-
-```sql
-SELECT lower(first_name) AS first_name,
-       lower(last_name) AS last_name,
-       date_of_birth,
-       count(*) AS copies
-FROM patients
-GROUP BY lower(first_name), lower(last_name), date_of_birth
-HAVING count(*) > 1
-ORDER BY copies DESC, last_name, first_name;
-```
-
-Inspect a specific patient name:
-
-```sql
-SELECT id,
-       first_name,
-       last_name,
-       date_of_birth,
-       medicare_number,
-       medicare_irn,
-       ihi_number,
-       phone_mobile,
-       created_at
-FROM patients
-WHERE lower(first_name) = lower('Billy')
-  AND lower(last_name) = lower('Frusin')
-ORDER BY created_at;
-```
-
-Find duplicate Medicare + IRN combinations:
-
-```sql
-SELECT medicare_number,
-       medicare_irn,
-       count(*) AS copies
-FROM patients
-WHERE medicare_number IS NOT NULL
-  AND medicare_number <> ''
-  AND medicare_irn IS NOT NULL
-  AND medicare_irn <> ''
-GROUP BY medicare_number, medicare_irn
-HAVING count(*) > 1
-ORDER BY copies DESC;
-```
-
-Quit `psql`:
-
-```sql
-\q
-```
-
-### Before Deleting A Duplicate
-
-For now, do not delete duplicate patient rows manually unless you have checked
-linked appointments, encounters, documents, and generated files. A duplicate may
-already be referenced by another table.
-
-Use these read-only checks first, replacing `PATIENT_ID_HERE` with the exact ID:
-
-```sql
-SELECT id, appointment_date, start_time_local, status, reason
-FROM appointments
-WHERE patient_id = 'PATIENT_ID_HERE'
-ORDER BY appointment_date, start_time_local;
-
-SELECT id, encounter_date, status
-FROM encounters
-WHERE patient_id = 'PATIENT_ID_HERE'
-ORDER BY encounter_date DESC;
-```
-
-Safer short-term workflow:
-
-1. Use the API or SQL queries above to list duplicates.
-2. Decide which record is the keeper.
-3. Ask Codex to merge/delete the exact duplicate IDs, or wait until EMR4 has a
-   proper admin merge-patient tool.
+Do not run `DELETE`, `UPDATE`, or manual foreign-key rewrites in the dev database
+unless the exact record-level merge plan has been reviewed.
 
 Longer term, EMR4 should have a receptionist/admin duplicate-resolution workflow
 that merges references, preserves audit history, and never silently destroys a
