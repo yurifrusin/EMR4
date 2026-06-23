@@ -815,7 +815,14 @@ Read AGENTS.md, orchestration/protocol_alerts.md, orchestration/parallel_workstr
 
 You are Antigravity working in the EMR4 multi-agent protocol. Do not move master or handoff/current. Follow the plan-gated workflow: if this is a new sprint task, produce and submit an implementation plan first, then stop until I say "complete sprint task".
 
-Important: do not auto-proceed from the plan artifact into code changes unless explicitly approved.
+Important: during the plan gate, you may create, commit, and push the
+implementation-plan packet and minimum coordination-file status changes required
+to submit that plan to Codex's inbox. This is not approval to change production
+code. Do not edit app code, diary UI code, taskpane code, migrations, tests, or
+runtime docs unless the task explicitly says the plan itself belongs in docs.
+If artifact review asks for approval, treat approval as permission to submit the
+plan packet only, not permission to implement. Do not auto-proceed from the plan
+artifact into code changes unless I explicitly say "complete sprint task".
 ```
 
 Notes:
@@ -823,6 +830,10 @@ Notes:
 - `AGENTS.md` is the shared source of truth for all agents.
 - `CLAUDE.md` is additional Claude-specific guidance, not a replacement for `AGENTS.md`.
 - For worker agents, run `handin` after the chat starts so they read the current task packet.
+- Keep Ariadne/orchestrator Codex separate from Codex worker/subagents. Ariadne
+  runs on the integration worktree; Codex workers use explicit task branches,
+  never `master`, and Codex plan packets should mark `Role` as `orchestrator`
+  or `codex-worker`.
 
 ---
 

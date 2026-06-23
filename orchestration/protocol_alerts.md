@@ -26,6 +26,15 @@ Read these before acting on remembered process details.
   `python scripts\agent_worktrees.py plan --agent <agent> --task <task> ...`,
   show the same plan in the GUI, then stop. Do not code until the user/Codex says
   `complete sprint task`.
+- Plan-packet submission allowance: during a plan-gated sprint, workers may
+  create, commit, and push the implementation-plan packet and minimum
+  coordination-file status changes required to submit that plan to Codex's
+  inbox. This allowance does not permit production code changes. Do not edit
+  `app/`, diary UI, taskpane, migrations, tests, or runtime docs unless the
+  task explicitly says the plan itself belongs in a documentation file.
+- Antigravity artifact warning: if artifact review asks for approval during the
+  plan gate, treat approval as permission to submit the implementation-plan
+  packet only, not permission to implement the sprint task.
 - Plan-gate auto-proceed warning: if an agent app offers, displays, or executes an
   "auto-proceed", "auto-approved", or similar continuation after the plan, that is
   not EMR4 approval. Stop anyway and wait for the explicit `complete sprint task`
@@ -62,6 +71,13 @@ Read these before acting on remembered process details.
 - Codex-app worker threads are disposable worker checkouts. They must use unique
   branches such as `codex/<task-name>` and submit back for review; they are not
   the durable `codex/current` mirror.
+- Codex role separation: Ariadne/orchestrator Codex runs from the integration
+  worktree and owns final integration. A Codex worker/subagent must use an
+  explicit task branch, never `master`. Future Codex plan packets should include
+  `| Role | orchestrator |` for Ariadne-owned plans or `| Role | codex-worker |`,
+  `| Worker Name | ... |`, and `| Worker Branch | codex/<short-task-name> |`
+  for separate Codex workers. Ariadne must not treat an orchestrator-created
+  Codex plan as proof that a separate worker submitted.
 - Codex records integrated submits in `orchestration/integration_log.md` and runs
   `audit` / `retire-stale` after integrations so stale disposable worktrees are
   visible instead of surprising the next session.

@@ -37,6 +37,20 @@ Use unique branches for those workers, e.g. `codex/time-model` or
 `codex/<short-task-name>`, then review/integrate them through the orchestrator
 before realigning `master`, `handoff/current`, and the durable mirrors.
 
+Codex role separation:
+
+- Ariadne/orchestrator Codex runs on the integration worktree unless explicitly
+  stated otherwise and owns final review/integration.
+- Codex worker/subagents use disposable or task-specific branches, never
+  `master`; use clear task branches such as `codex/<short-task-name>`.
+- Future Codex plan packets should include `| Role | orchestrator |` for
+  Ariadne-owned orchestration/review work, or `| Role | codex-worker |` plus
+  `| Worker Name | ... |` and `| Worker Branch | codex/<short-task-name> |`
+  for separate Codex workers.
+- Codex workers may submit plans/reviews to Codex's inbox, but Ariadne remains
+  responsible for final integration. Ariadne must not treat an
+  orchestrator-created Codex plan as proof that a separate worker has submitted.
+
 ### Orchestration changelog / protocol alerts
 
 - Protocol changes are part of the handover state. Worker agents may remember
@@ -182,6 +196,13 @@ python scripts\agent_worktrees.py plan --agent claude --task claude-short-title 
 ```
 
 Then stop. Do not code until the user/Codex says **"complete sprint task"**.
+During the plan gate, workers may create, commit, and push the
+implementation-plan packet and minimum coordination-file status changes needed
+to submit that plan to Codex's inbox. This permission does **not** allow
+production code changes: no `app/`, diary UI, taskpane, migrations, tests, or
+runtime docs beyond files explicitly required for the plan itself. For
+Antigravity, artifact approval during this phase means "submit the plan packet
+only", not "implement the task".
 If the agent platform offers or displays an "auto-proceed", "auto-approved", or
 similar continuation after the implementation plan, treat that as **not approved**
 for EMR4 sprint packets. The worker must stop even if the app would otherwise
