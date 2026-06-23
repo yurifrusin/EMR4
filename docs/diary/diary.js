@@ -273,7 +273,8 @@ function getRoleFromToken(authToken = token) {
 }
 
 function isAdminRole(role) {
-  return role === "Admin" || role === "PracticeOwner";
+  const normalized = String(role || "").replace(/[\s_-]/g, "").toLowerCase();
+  return normalized === "admin" || normalized === "practiceowner";
 }
 
 function updateAdminButtonVisibility() {
