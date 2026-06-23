@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 19: Resource Admin Foundations |
 | Integrated through | Sprint 19 integration batch |
-| Status | Integrated and verified locally; pending push/deploy and user review |
+| Status | Integrated and pushed; diary asset v77 pushed, pending Pages refresh/user review |
 | Last updated | 2026-06-23 |
 
 ## What Changed
@@ -32,14 +32,18 @@ reviewed, integrated, verified, pushed, and audited.
   and clarified the post-poll review/integration rule in protocol docs.
 - During Codex integration, repaired the diary UI adapter to use the final
   backend `PATCH` soft-archive contract instead of `PUT`/`DELETE`.
+- During Ariadne self-testing, found and hotfixed two live UI issues before
+  handing user tests back: Office.js blocks native `window.confirm`, so archive
+  now uses a safe second-click fallback; and Admin affordance visibility now uses
+  a more robust role check with `/auth/me` fallback and tolerant role spelling.
 
 ## Recommended User Review
 
 Use `orchestration/resource_admin_review.md` for the detailed checklist. Minimum
 manual review:
 
-1. Hard-refresh the diary after deploy and confirm the diary asset version is
-   current.
+1. Hard-refresh the diary after GitHub Pages refreshes and confirm the diary
+   loads `diary.js?v=77` / `diary.css?v=77`.
 2. Log in as an Admin/PracticeOwner, open the diary, and confirm the Admin
    button appears without cluttering the one-location diary.
 3. Create a waiting area, then create a room using that waiting area as the
@@ -75,11 +79,14 @@ manual review:
 
 ## Verification
 
-- `.venv\Scripts\python.exe -m py_compile app\schemas\diary.py appouters\diary.py tests	est_diary_resource_admin.py` -> passed
-- `.venv\Scripts\python.exe -m pytest tests	est_diary_resource_admin.py -q --tb=short -p no:randomly` -> 25 passed
-- `.venv\Scripts\python.exe -m pytest tests	est_location_scoped_diary.py tests	est_diary_roster.py tests	est_diary_template.py tests	est_waiting_area_contract.py -q --tb=short -p no:randomly` -> 46 passed
-- `node --check docs\diary\diary.js` -> passed
+- `.venv\Scripts\python.exe -m py_compile app\schemas\diary.py app\routers\diary.py tests\test_diary_resource_admin.py` -> passed
+- `.venv\Scripts\python.exe -m pytest tests\test_diary_resource_admin.py -q --tb=short -p no:randomly` -> 25 passed
+- `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_diary_roster.py tests\test_diary_template.py tests\test_waiting_area_contract.py -q --tb=short -p no:randomly` -> 46 passed
+- `node --check docs\diary\diary.js` -> passed after v77 role-affordance hotfix
 - `git diff --check` -> passed, with CRLF/LF warnings only
+- Chrome deployed smoke check: `diary.js?v=75` archive bug reproduced, hotfixed,
+  and v75 smoke archive passed; v77 role-affordance code is pushed but GitHub
+  Pages was still serving v75 at the last automated deployment poll.
 
 ## Recommended Next Direction
 
