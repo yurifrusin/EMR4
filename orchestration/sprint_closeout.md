@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 19: Resource Admin Foundations |
 | Integrated through | Sprint 19 integration batch |
-| Status | Integrated and pushed; diary asset v82 hotfix pending Pages refresh/user review |
+| Status | Integrated and pushed; diary asset v82 deployed, pending user review |
 | Last updated | 2026-06-23 |
 
 ## What Changed
@@ -122,6 +122,10 @@ manual review:
   Administration added it to the open Waiting Room pane tabs immediately; the
   first archive click showed the inline confirm fallback; the second archive
   removed it from the admin list and the Waiting Room pane tabs without reload.
+- Chrome deployed smoke check after v82: creating `Deployed Pane Sync Smoke`
+  added it to the open Waiting Room pane tabs immediately; archiving it removed
+  it from both the admin list and pane tabs without reload; GitHub Pages served
+  `diary.js?v=82` / `diary.css?v=82`.
 
 ## Recommended Next Direction
 
