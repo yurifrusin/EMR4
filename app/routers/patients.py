@@ -10,10 +10,12 @@ from app.dependencies import get_db, get_current_user
 from app.models.tenancy import User
 from app.models.patients import Patient
 from app.models.clinical import ClinicalDiagnosis, Prescription, Encounter, Allergy
+from app.models.appointments import Appointment
 from app.schemas.patients import (
     PatientCreate, PatientUpdate, PatientOut, PatientWithFileOut,
     PatientSummary, AllergyOut, EncounterSummary, MedicationSummary, DiagnosisSummary,
     PatientDuplicateCandidate,
+    PatientRefCounts, PatientWithRefCounts, PatientDuplicateGroup,
 )
 
 router = APIRouter(prefix="/api/v1/patients", tags=["patients"])
@@ -390,6 +392,127 @@ def duplicate_candidates(
                 match_reasons=reasons,
             ))
     return response
+
+
+@router.get("/duplicate-groups", response_model=list[PatientDuplicateGroup])
+def duplicate_groups(
+    limit: int = Query(50, ge=1, le=200),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Practice-wide scan returning all groups of 2+ patients that share a strong
+    or soft identifier.  Read-only — no mutations.
+
+    Criteria checked:
+      same_ihi                  — identical IHI numbers (strong)
+      same_medicare_card_and_irn — identical Medicare number + IRN (strong)
+      same_name_and_dob         — identical normalised first+last name and DOB (soft)
+
+    A patient pair/set matching multiple criteria appears in exactly one group
+    with all matching reasons listed.  Reference counts (appointments, encounters)
+    are fetched in two batch queries across the full result set.
+    """
+    practice_id = current_user.practice_id
+
+    # ── 1. Load all practice patients (key fields only) ──────────────────────
+    patients = (
+        db.query(Patient)
+        .filter(Patient.practice_id == practice_id)
+        .order_by(Patient.last_name, Patient.first_name)
+        .all()
+    )
+
+    # ── 2. Bucket by each criterion ──────────────────────────────────────────
+    ihi_buckets: dict[str, list[Patient]] = {}
+    medicare_buckets: dict[tuple, list[Patient]] = {}
+    name_dob_buckets: dict[tuple, list[Patient]] = {}
+
+    for p in patients:
+        ihi_norm = _norm_identifier(p.ihi_number)
+        if ihi_norm:
+            ihi_buckets.setdefault(ihi_norm, []).append(p)
+
+        med_norm = _norm_identifier(p.medicare_number)
+        irn_norm = _norm_identifier(p.medicare_irn)
+        if med_norm and irn_norm:
+            medicare_buckets.setdefault((med_norm, irn_norm), []).append(p)
+
+        first_norm = _norm_text(p.first_name)
+        last_norm = _norm_text(p.last_name)
+        if first_norm and last_norm and p.date_of_birth:
+            name_dob_buckets.setdefault(
+                (first_norm, last_norm, p.date_of_birth), []
+            ).append(p)
+
+    # ── 3. Collect duplicate buckets, merge by patient-set ───────────────────
+    # Key: frozenset of patient UUIDs → list of match reasons
+    groups: dict[frozenset, list[str]] = {}
+
+    def _add_bucket(bucket_patients: list[Patient], reason: str) -> None:
+        if len(bucket_patients) < 2:
+            return
+        key = frozenset(p.id for p in bucket_patients)
+        groups.setdefault(key, [])
+        if reason not in groups[key]:
+            groups[key].append(reason)
+
+    for bucket in ihi_buckets.values():
+        _add_bucket(bucket, "same_ihi")
+    for bucket in medicare_buckets.values():
+        _add_bucket(bucket, "same_medicare_card_and_irn")
+    for bucket in name_dob_buckets.values():
+        _add_bucket(bucket, "same_name_and_dob")
+
+    if not groups:
+        return []
+
+    # Apply limit before fetching ref counts
+    limited_groups = list(groups.items())[:limit]
+
+    # ── 4. Batch ref counts for all patients across limited groups ────────────
+    all_patient_ids = {pid for key, _ in limited_groups for pid in key}
+
+    appt_counts: dict = dict(
+        db.query(Appointment.patient_id, func.count(Appointment.id))
+        .filter(
+            Appointment.practice_id == practice_id,
+            Appointment.patient_id.in_(list(all_patient_ids)),
+        )
+        .group_by(Appointment.patient_id)
+        .all()
+    )
+    encounter_counts: dict = dict(
+        db.query(Encounter.patient_id, func.count(Encounter.id))
+        .filter(
+            Encounter.practice_id == practice_id,
+            Encounter.patient_id.in_(list(all_patient_ids)),
+        )
+        .group_by(Encounter.patient_id)
+        .all()
+    )
+
+    # ── 5. Build a lookup: patient_id → Patient ORM object ───────────────────
+    patient_map: dict = {p.id: p for p in patients}
+
+    # ── 6. Assemble response ─────────────────────────────────────────────────
+    result: list[PatientDuplicateGroup] = []
+    for patient_ids, reasons in limited_groups:
+        members = [
+            PatientWithRefCounts(
+                patient=PatientOut.model_validate(patient_map[pid]),
+                ref_counts=PatientRefCounts(
+                    appointment_count=appt_counts.get(pid, 0),
+                    encounter_count=encounter_counts.get(pid, 0),
+                ),
+            )
+            for pid in sorted(patient_ids, key=lambda pid: (
+                patient_map[pid].last_name or "",
+                patient_map[pid].first_name or "",
+            ))
+        ]
+        result.append(PatientDuplicateGroup(match_reasons=reasons, patients=members))
+
+    return result
 
 
 @router.get("/{patient_id}", response_model=PatientOut)

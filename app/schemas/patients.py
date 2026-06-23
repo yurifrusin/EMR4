@@ -120,6 +120,21 @@ class PatientDuplicateCandidate(BaseModel):
     match_reasons: list[str]
 
 
+class PatientRefCounts(BaseModel):
+    appointment_count: int = 0
+    encounter_count: int = 0
+
+
+class PatientWithRefCounts(BaseModel):
+    patient: PatientOut
+    ref_counts: PatientRefCounts
+
+
+class PatientDuplicateGroup(BaseModel):
+    match_reasons: list[str]
+    patients: list[PatientWithRefCounts]
+
+
 class PatientSummary(BaseModel):
     patient: PatientOut
     active_diagnoses: list[DiagnosisSummary] = []
