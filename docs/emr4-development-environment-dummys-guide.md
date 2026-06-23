@@ -751,11 +751,46 @@ Restart backend:
 Use these prompts when starting a new chat/thread so the agent rehydrates the
 project state from the repository rather than from memory.
 
+### Codex Skills
+
+Codex has local EMR4 skills installed under `C:\Users\YuriFrusin\.codex\skills`.
+After adding or editing skills, restart Codex so the new skill list is loaded.
+
+Use a skill name explicitly in the first prompt of a fresh Codex chat. This is
+not required for every prompt, but it helps a new chat load the right operating
+ritual immediately.
+
+Available EMR4 skills:
+
+- `$emr4-orchestrator` — use for Ariadne/orchestrator work: repo audit, polling,
+  sprint planning, plan review, integration, mirror realignment, and closeout.
+- `$emr4-dev-environment` — use for dev-stack work: `run_dev.ps1`, Docker,
+  ngrok, GitHub Pages deployment, taskpane/diary version checks, API snippets,
+  migrations, seed data, and duplicate-audit commands.
+
+Example fresh Codex prompt:
+
+```text
+Use $emr4-orchestrator.
+
+Read AGENTS.md, orchestration/protocol_alerts.md, orchestration/parallel_workstreams.md, orchestration/integration_log.md, and orchestration/sprint_closeout.md.
+
+You are Ariadne, the Codex orchestrator for EMR4. Audit the current repo/worktree state before acting. Do not dispatch or integrate until you understand the current sprint state.
+```
+
+Example dev-stack prompt:
+
+```text
+Use $emr4-dev-environment to help me restart the EMR4 stack and verify the deployed taskpane and diary versions.
+```
+
 ### Codex Orchestrator
 
 Use this when starting a new Codex/Ariadne orchestration chat:
 
 ```text
+Use $emr4-orchestrator.
+
 Read AGENTS.md, orchestration/protocol_alerts.md, orchestration/parallel_workstreams.md, orchestration/integration_log.md, and orchestration/sprint_closeout.md.
 
 You are Ariadne, the Codex orchestrator for EMR4. Audit the current repo/worktree state before acting. Do not dispatch or integrate until you understand the current sprint state.
