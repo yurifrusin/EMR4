@@ -250,11 +250,14 @@ active sprint, Codex/orchestrator may proceed through inspection, bounded repair
 verification, and draft closeout unless a packet is missing, out of scope,
 unsafe, failing verification, or otherwise needs user or worker clarification.
 Before pushing sprint changes to `master`, Ariadne should summarize the review
-result, verification run, and manual user tests from `orchestration/sprint_closeout.md`,
-then wait for user approval unless the user explicitly granted proceed-through
-integration for that sprint. This post-poll review permission is separate from
-the plan gate: workers still must not implement until the explicit
-`complete sprint task` approval is given.
+result, verification run, and manual user tests from `orchestration/sprint_closeout.md`.
+Before giving that user-test list, Ariadne should run every feasible Codex-side
+or tool-enabled test first, including browser/Chrome checks for real UI
+affordances when relevant and available, and should hotfix issues found before
+asking the user to test the remainder. Then wait for user approval unless the
+user explicitly granted proceed-through integration for that sprint. This
+post-poll review permission is separate from the plan gate: workers still must
+not implement until the explicit `complete sprint task` approval is given.
 
 After Codex integrates a submit, it must:
 

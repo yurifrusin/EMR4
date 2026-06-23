@@ -70,11 +70,14 @@ Read these before acting on remembered process details.
   local inspection, bounded repair, verification, and draft closeout unless a
   submission is missing, out of scope, unsafe, failing verification, or otherwise
   needs user or worker clarification. Before pushing sprint changes to `master`,
-  Ariadne should summarize the inspection result, verification run, and manual
-  user tests from `orchestration/sprint_closeout.md`, then wait for user approval
-  unless the user explicitly granted proceed-through integration for that sprint.
-  Plan-gated approval still requires explicit `complete sprint task` before
-  workers begin implementation.
+  Ariadne should run every feasible Codex-side/tool-enabled test first, including
+  browser/Chrome checks for real UI affordances when relevant and available, then
+  apply hotfixes for issues found. Only after that should Ariadne summarize the
+  inspection result, verification run, hotfixes, and remaining manual user tests
+  from `orchestration/sprint_closeout.md`. Then wait for user approval unless the
+  user explicitly granted proceed-through integration for that sprint. Plan-gated
+  approval still requires explicit `complete sprint task` before workers begin
+  implementation.
 - Protocol amendment rule: prefer batching non-urgent orchestration protocol edits
   until the discussion settles. Codex should remind the user before launch if
   agreed protocol edits are still pending.
