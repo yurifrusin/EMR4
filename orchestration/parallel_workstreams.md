@@ -124,6 +124,59 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 18: Patient-Admin Safety and Duplicate Visibility
+
+| Item | Value |
+|---|---|
+| Sprint Goal | Make duplicate patient records visible and safer to reason about, while tightening the taskpane patient search/save feedback that led to confusion during review |
+| Dispatch Mode | Plan-gated parallel sprint |
+| Start State | `master`, `handoff/current`, and durable worker mirrors aligned at Sprint 17 closeout |
+| User Review Dependency | None before planning; implementation plans must be reviewed before coding |
+| Integration Rule | Do not push sprint work to `master` until Claude, Antigravity, and the Codex worker have submitted or been explicitly stood down |
+| Status | Dispatched for implementation plans |
+
+### Workstream A — Backend Duplicate Review Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-patient-duplicate-review-api.md` |
+| Goal | Plan, then after approval implement a read-only backend duplicate-patient review contract |
+| In Scope | Patient duplicate review schemas/router/tests; same-name+DOB groups; Medicare+IRN and IHI strong-identifier groups; reference counts where practical; practice isolation |
+| Out of Scope | Frontend UI, patient merge/delete mutation, manual DB deletion, production data migrations |
+| Verification | Plan packet first; after approval focused pytest for duplicate review API and relevant patient tests |
+| Plan Gate | Required before coding |
+| Status | Dispatched |
+
+### Workstream B — Taskpane Patient Search and Alert Clarity
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-taskpane-patient-search-and-alerts.md` |
+| Goal | Plan, then after approval improve full-name patient search and make patient-details save failures obvious without scrolling |
+| In Scope | Taskpane HTML/JS/CSS only; cache bust; patient search and patient-details save feedback |
+| Out of Scope | Backend changes, diary changes, Command Centre redesign, patient merge/delete implementation |
+| Verification | Plan packet first; after approval JS syntax check plus manual taskpane verification notes |
+| Plan Gate | Required before coding |
+| Status | Dispatched |
+
+### Workstream C — Dev Duplicate Audit Helper
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | unique `codex/<short-task-name>` worker branch |
+| Task Packet | `orchestration/agent_inbox/codex/codex-dev-data-duplicate-audit-tool.md` |
+| Goal | Plan, then after approval add a read-only developer helper for inspecting duplicate patients and references |
+| In Scope | `scripts/` helper or equivalent command path; dummy-guide update; read-only output by default |
+| Out of Scope | Automatic deletion, patient merge mutation, production admin UI, app runtime behaviour changes |
+| Verification | Plan packet first; after approval run helper against dev DB if available and confirm safe failure without DB settings |
+| Plan Gate | Required before coding |
+| Status | Dispatched |
+
 ## Sprint 17: Command/Proposal Workflow Retrofit
 
 | Item | Value |
