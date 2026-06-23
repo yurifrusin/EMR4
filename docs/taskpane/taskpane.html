@@ -7,7 +7,7 @@
   <title>EMR</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
   <link rel="stylesheet" href="taskpane.css?v=54" />
-  <script src="taskpane.js?v=55" defer></script>
+  <script src="taskpane.js?v=56" defer></script>
 </head>
 <body>
 
@@ -63,6 +63,7 @@
     <div class="new-patient-inner">
       <div class="new-patient-header">
         <span id="new-patient-title">New Patient</span>
+      </div>
       <!-- Result div moved to the bottom of the form -->
       <div class="field-row">
         <div class="field-group" style="flex:1">
@@ -124,6 +125,7 @@
           <label class="field-label">Postcode</label>
           <input id="np-postcode" type="text" class="input" placeholder="2000" />
         </div>
+      </div>
       <div id="new-patient-result" aria-live="polite"></div>
       <div id="new-patient-action-status" class="action-status hidden" aria-live="polite"></div>
       <div class="new-patient-actions">
@@ -140,6 +142,7 @@
     <div class="new-patient-inner patient-edit-inner">
       <div class="new-patient-header">
         <span id="patient-edit-title">Patient Details</span>
+      </div>
       <!-- Result div moved to the bottom of the form -->
       <div class="field-row">
         <div class="field-group" style="flex:1">
@@ -217,6 +220,7 @@
           <label class="field-label">Postcode</label>
           <input id="pe-postcode" type="text" class="input" />
         </div>
+      </div>
       <div id="patient-edit-result" aria-live="polite"></div>
       <div id="patient-edit-action-status" class="action-status hidden" aria-live="polite"></div>
       <div class="new-patient-actions patient-edit-actions">
