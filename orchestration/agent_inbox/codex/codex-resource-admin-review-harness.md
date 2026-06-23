@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/resource-admin-review-harness` |
-| Status | queued |
+| Status | pending_plan_review |
 | Created | d78659a |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-resource-admin-review-harness --summary "Short plan summary"` |
