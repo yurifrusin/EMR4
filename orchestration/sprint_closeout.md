@@ -9,9 +9,9 @@ reviewed, integrated, verified, pushed, and audited.
 | Item | Value |
 |---|---|
 | Batch | Sprint 19: Resource Admin Foundations |
-| Integrated through | Sprint 19 integration batch |
-| Status | Integrated and pushed; diary asset v82 deployed, pending user review |
-| Last updated | 2026-06-23 |
+| Integrated through | Sprint 19 resource-admin ordering hotfix |
+| Status | Integrated locally; diary asset v83 and backend ordering hotfix pending push/deploy/restart |
+| Last updated | 2026-06-24 |
 
 ## What Changed
 
@@ -23,8 +23,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Added practice and location scoping plus active-resource validation for room
   `default_waiting_area_id`.
 - Added focused `tests/test_diary_resource_admin.py` coverage for auth gates,
-  role gates, practice isolation, CRUD, soft archive, duplicate room order
-  conflict handling, and roster preservation after archive.
+  role gates, practice isolation, CRUD, soft archive, order insertion/
+  resequencing, and roster preservation after archive.
 - Added a restrained diary Resource Administration modal for rooms and waiting
   areas under the active location context, with smoke-mode mock CRUD and visible
   success/failure feedback.
@@ -55,6 +55,12 @@ reviewed, integrated, verified, pushed, and audited.
   Waiting Room pane refreshes its active waiting-area cache immediately, clears
   stale check-in default cache entries, and resets the selected tab if the
   selected area was archived.
+- During user review, hotfixed resource ordering semantics so room and waiting
+  area create/update actions insert at the requested 0-based position and shift
+  active siblings rather than failing on duplicate raw `display_order` values.
+  Active resources are compacted ahead of archived resources, archived room rows
+  no longer block visible order slots, and diary smoke mode/form controls now
+  match the same 0-based ordering model.
 
 ## Recommended User Review
 
@@ -62,17 +68,21 @@ Use `orchestration/resource_admin_review.md` for the detailed checklist. Minimum
 manual review:
 
 1. Hard-refresh the diary after GitHub Pages refreshes and confirm the diary
-   loads `diary.js?v=82` / `diary.css?v=82`.
+   loads `diary.js?v=83` / `diary.css?v=83`. Restart the backend/dev server
+   first so the API reorder semantics are active.
 2. Log in as an Admin/PracticeOwner, open the diary, and confirm the Admin
    button appears without cluttering the one-location diary.
-3. Create a waiting area, then create a room using that waiting area as the
-   default.
-4. Edit the room and waiting area, confirming visible success feedback.
-5. Archive the room and waiting area, confirming they disappear from active lists
-   without breaking existing diary/roster display.
-6. Log in as a GP or Receptionist and confirm admin controls are unavailable and
+3. Open Resource Administration and confirm rooms/waiting areas display dense
+   0-based order values with no gaps such as `0,1,3` or `0,4`.
+4. Create a waiting area and confirm it receives the next visible order; edit an
+   existing waiting area to another visible position and confirm siblings shift.
+5. Edit a room such as Room 3 to an occupied/previously archived visible order
+   and confirm it saves/reorders instead of showing a duplicate-order error.
+6. Archive the room and waiting area, confirming they disappear from active lists
+   and the remaining visible order compacts without breaking diary/roster display.
+7. Log in as a GP or Receptionist and confirm admin controls are unavailable and
    backend writes are forbidden.
-7. Confirm main diary appointment blocks, Waiting Room cards, appointment status
+8. Confirm main diary appointment blocks, Waiting Room cards, appointment status
    controls, booking proposals, taskpane, and Command Centre are unchanged.
 
 ## Not Required Before Moving On
@@ -86,8 +96,9 @@ manual review:
 
 ## Known Follow-Up
 
-- Waiting-area `display_order` duplicates are not currently constrained like room
-  order; decide later whether that should become a DB/indexed uniqueness rule.
+- Waiting-area order is now normalized by the API/UI, but there is still no
+  waiting-area DB uniqueness index; decide later whether that becomes useful
+  once broader practice-admin tooling exists.
 - General audit logging remains a future platform need before Bernie or higher
   autonomy write paths expand.
 - Non-person bookable resources remain deliberately deferred; rooms are physical
@@ -126,6 +137,18 @@ manual review:
   added it to the open Waiting Room pane tabs immediately; archiving it removed
   it from both the admin list and pane tabs without reload; GitHub Pages served
   `diary.js?v=82` / `diary.css?v=82`.
+- `.venv\Scripts\python.exe -m py_compile app\schemas\diary.py app\routers\diary.py tests\test_diary_resource_admin.py` -> passed after v83 ordering hotfix
+- `.venv\Scripts\python.exe -m pytest tests\test_diary_resource_admin.py -q --tb=short -p no:randomly` -> 30 passed
+- `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_diary_roster.py -q --tb=short -p no:randomly` -> 29 passed
+- `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_contract.py tests\test_waiting_area_checkin_defaults.py -q --tb=short -p no:randomly` -> 18 passed
+- `node --check docs\diary\diary.js` and `git diff --check` -> passed, with
+  CRLF/LF warnings only
+- Rendered Chrome smoke check against
+  `http://127.0.0.1:8765/diary/diary.html?smoke=true` after v83: room and
+  waiting-area order inputs have `min=0`; a new waiting area defaulted to order
+  2; Room 3 moved to order 1 and Room 2 shifted to order 2; first Archive click
+  showed the inline fallback warning and the second click archived/compacted the
+  waiting-area list.
 
 ## Recommended Next Direction
 
