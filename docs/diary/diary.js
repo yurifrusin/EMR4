@@ -2616,25 +2616,58 @@ function getAppointmentWaitingRoom(a) {
   }
   if (a.waiting_room) {
     const room = a.waiting_room.trim();
-    if (room) return { key: `legacy:${room.toLowerCase()}`, label: room };
+    if (room) {
+      const area = findWaitingAreaByLabel(room);
+      if (area) return { key: `area:${area.id}`, label: area.name };
+      if (!waitingAreas.length) return { key: `legacy:${normalizeWaitingAreaLabel(room)}`, label: room };
+    }
   }
   if (a.practitioner && a.practitioner.ahpra_number && activeTemplate && activeTemplate.columns) {
     const col = activeTemplate.columns.find(c => c.practitioner_ahpra === a.practitioner.ahpra_number);
     if (col && (col.default_waiting_room || col.waiting_room)) {
       const room = String(col.default_waiting_room || col.waiting_room).trim();
-      if (room) return { key: `legacy:${room.toLowerCase()}`, label: room };
+      if (room) {
+        const area = findWaitingAreaByLabel(room);
+        if (area) return { key: `area:${area.id}`, label: area.name };
+        if (!waitingAreas.length) return { key: `legacy:${normalizeWaitingAreaLabel(room)}`, label: room };
+      }
     }
   }
   return null;
 }
 
+function normalizeWaitingAreaLabel(label) {
+  return String(label || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^main\s+/, "")
+    .replace(/\s+/g, " ");
+}
+
+function findWaitingAreaByLabel(label) {
+  const normalizedLabel = normalizeWaitingAreaLabel(label);
+  if (!normalizedLabel || !waitingAreas.length) return null;
+  return waitingAreas.find(area => normalizeWaitingAreaLabel(area.name) === normalizedLabel) || null;
+}
+
+function sortWaitingAreaResources(a, b) {
+  const orderDelta = (Number(a.display_order) || 0) - (Number(b.display_order) || 0);
+  if (orderDelta !== 0) return orderDelta;
+  return String(a.name || "").localeCompare(String(b.name || ""));
+}
+
 function getUniqueWaitingAreas() {
   const areas = new Map();
-  waitingAreas.forEach(area => {
+  waitingAreas.slice().sort(sortWaitingAreaResources).forEach(area => {
     if (area && area.id && area.name) {
       areas.set(`area:${area.id}`, { key: `area:${area.id}`, label: area.name });
     }
   });
+
+  if (areas.size) {
+    return Array.from(areas.values());
+  }
+
   if (activeTemplate && activeTemplate.columns) {
     activeTemplate.columns.forEach(col => {
       const room = col.default_waiting_room || col.waiting_room;
@@ -2661,7 +2694,7 @@ function renderWaitingAreaTabs(areas) {
 
   container.innerHTML = "";
 
-  const hasUnassigned = todayAppointments.some(a => {
+  const hasUnassigned = !waitingAreas.length && todayAppointments.some(a => {
     if (a.status === "Cancelled") return false;
     const room = getAppointmentWaitingRoom(a);
     return !room;

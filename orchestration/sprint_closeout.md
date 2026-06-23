@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 19: Resource Admin Foundations |
 | Integrated through | Sprint 19 integration batch |
-| Status | Integrated and pushed; diary asset v79 hotfix pending Pages refresh/user review |
+| Status | Integrated and pushed; diary asset v80 hotfix pending Pages refresh/user review |
 | Last updated | 2026-06-23 |
 
 ## What Changed
@@ -43,6 +43,10 @@ reviewed, integrated, verified, pushed, and audited.
   default to the next display order, refresh into view with a highlight, and the
   Waiting Room waiting-area tabs use a visible horizontal scrollbar when the
   tab set overflows.
+- During user review, hotfixed the Waiting Room filter tabs so configured
+  waiting areas are the canonical source, ordered by admin `display_order`, old
+  legacy/template labels are mapped to configured areas when possible, and the
+  `Unassigned` tab is suppressed when configured waiting areas exist.
 
 ## Recommended User Review
 
@@ -50,7 +54,7 @@ Use `orchestration/resource_admin_review.md` for the detailed checklist. Minimum
 manual review:
 
 1. Hard-refresh the diary after GitHub Pages refreshes and confirm the diary
-   loads `diary.js?v=79` / `diary.css?v=79`.
+   loads `diary.js?v=80` / `diary.css?v=80`.
 2. Log in as an Admin/PracticeOwner, open the diary, and confirm the Admin
    button appears without cluttering the one-location diary.
 3. Create a waiting area, then create a room using that waiting area as the
@@ -89,7 +93,7 @@ manual review:
 - `.venv\Scripts\python.exe -m py_compile app\schemas\diary.py app\routers\diary.py tests\test_diary_resource_admin.py` -> passed
 - `.venv\Scripts\python.exe -m pytest tests\test_diary_resource_admin.py -q --tb=short -p no:randomly` -> 25 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_diary_roster.py tests\test_diary_template.py tests\test_waiting_area_contract.py -q --tb=short -p no:randomly` -> 46 passed
-- `node --check docs\diary\diary.js` -> passed after v79 resource-admin clarity hotfix
+- `node --check docs\diary\diary.js` -> passed after v80 waiting-area tab ordering hotfix
 - `git diff --check` -> passed, with CRLF/LF warnings only
 - Chrome deployed smoke check: `diary.js?v=75` archive bug reproduced, hotfixed,
   and v75 smoke archive passed; v77 role-affordance code is pushed but GitHub
@@ -99,6 +103,10 @@ manual review:
   Save/Cancel controls; new waiting area appeared immediately with order 3 and a
   highlight; edit/cancel returned to the list; first archive click showed the
   inline fallback warning; second click archived successfully.
+- Chrome local smoke check after v80: Waiting Room panel loaded `diary.js?v=80`
+  and rendered waiting-area tabs as `All`, `Main Waiting Room`,
+  `Sub-waiting Room B` with no `Unassigned` tab while configured waiting areas
+  existed.
 
 ## Recommended Next Direction
 
