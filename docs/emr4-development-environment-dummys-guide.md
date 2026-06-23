@@ -746,7 +746,52 @@ Restart backend:
 
 ---
 
-## 18. Minimal Command Checklist
+## 18. Starting A Fresh Agent Chat
+
+Use these prompts when starting a new chat/thread so the agent rehydrates the
+project state from the repository rather than from memory.
+
+### Codex Orchestrator
+
+Use this when starting a new Codex/Ariadne orchestration chat:
+
+```text
+Read AGENTS.md, orchestration/protocol_alerts.md, orchestration/parallel_workstreams.md, orchestration/integration_log.md, and orchestration/sprint_closeout.md.
+
+You are Ariadne, the Codex orchestrator for EMR4. Audit the current repo/worktree state before acting. Do not dispatch or integrate until you understand the current sprint state.
+```
+
+### Claude Code
+
+Use this when starting a new Claude Code chat:
+
+```text
+Read AGENTS.md, CLAUDE.md, orchestration/protocol_alerts.md, orchestration/parallel_workstreams.md, and your current task packet from handin.
+
+You are Claude Code working in the EMR4 multi-agent protocol. Do not move master or handoff/current. Follow the plan-gated workflow: if this is a new sprint task, produce and submit an implementation plan first, then stop until I say "complete sprint task".
+```
+
+### Antigravity
+
+Use this when starting a new Antigravity chat:
+
+```text
+Read AGENTS.md, orchestration/protocol_alerts.md, orchestration/parallel_workstreams.md, and your current task packet from handin.
+
+You are Antigravity working in the EMR4 multi-agent protocol. Do not move master or handoff/current. Follow the plan-gated workflow: if this is a new sprint task, produce and submit an implementation plan first, then stop until I say "complete sprint task".
+
+Important: do not auto-proceed from the plan artifact into code changes unless explicitly approved.
+```
+
+Notes:
+
+- `AGENTS.md` is the shared source of truth for all agents.
+- `CLAUDE.md` is additional Claude-specific guidance, not a replacement for `AGENTS.md`.
+- For worker agents, run `handin` after the chat starts so they read the current task packet.
+
+---
+
+## 19. Minimal Command Checklist
 
 First-time setup after installing Git/Python/Docker/Node/ngrok:
 

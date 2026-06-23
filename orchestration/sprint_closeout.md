@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 18: Patient Admin Safety and Duplicate Visibility |
 | Integrated through | Sprint 18 integration batch |
-| Status | Integrated and verified locally; push/realign pending |
+| Status | Integrated, deployed, and user-reviewed; ready to plan the next sprint |
 | Last updated | 2026-06-23 |
 
 ## What Changed
@@ -29,26 +29,32 @@ reviewed, integrated, verified, pushed, and audited.
 - Moved New Patient and Patient Details error/status messages close to the
   action buttons and added visible action-status feedback so failed saves are
   harder to miss in the narrow Word taskpane.
-- Updated taskpane assets to `v=54`.
+- Updated taskpane assets through `v=56` after post-review save-feedback and
+  taskpane overlay structure hotfixes.
 
 ## Recommended User Review
 
-After this is pushed/deployed:
+Completed user review:
 
-1. Hard refresh the Word taskpane and confirm it loads `taskpane.js?v=54`.
-2. Search patients by a full name, for example `alice alston`. Confirm the
+1. Hard refreshed the Word taskpane and confirmed the current deployed taskpane
+   version path.
+2. Searched patients by a full name, for example `alice alston`. Confirmed the
    expected patient appears, not "No results found".
-3. Try a normal Patient Details edit and confirm the success/failure message is
+3. Tried normal Patient Details edit paths and confirmed the success/failure message is
    visible near the action buttons, not only at the top of the scroll area.
-4. Try to save a duplicate Medicare+IRN combination. Confirm the save is blocked
+4. Tried saving a duplicate Medicare+IRN combination. Confirmed the save is blocked
    and the feedback is visible near `Save Details`.
-5. Try a New Patient validation failure and confirm the bottom action area
+5. Tried a New Patient validation failure and confirmed the bottom action area
    shows a clear failure state without needing to scroll back to the top.
 6. Optional API check: call `GET /api/v1/patients/duplicate-groups` with a staff
    JWT and confirm duplicate groups include match reasons and reference counts.
 7. Optional dev-data check: run
    `.venv\Scripts\python.exe scripts\audit_patient_duplicates.py` and confirm it
    reports likely duplicates without changing data.
+
+Manual result: passed. The final reviewed taskpane shows duplicate-patient
+blocking copy near the action buttons, the duplicate candidates are visible, and
+the `Not saved` bottom warning is visible without scrolling back to the top.
 
 ## Not Required Before Moving On
 
