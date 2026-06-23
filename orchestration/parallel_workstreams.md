@@ -147,7 +147,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Start State | `master`, `handoff/current`, and durable worker mirrors aligned at `d78659a` after Sprint 18 closeout |
 | User Review Dependency | None before planning; implementation plans must be reviewed before coding |
 | Integration Rule | Do not push Sprint 19 work to `master` until Claude, Antigravity, and any Codex worker have submitted or been explicitly stood down |
-| Status | Dispatched for implementation plans |
+| Status | Integrated; pending push/deploy and user review |
 
 ### Workstream A - Backend Room and Waiting-Area Admin Contract
 
@@ -163,7 +163,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Plan Gate | Required before coding |
 | Merge Criteria | Admin writes cannot leak cross-practice data; inactive/archive preserves historical references; room defaults cannot point at cross-location/cross-practice waiting areas; existing diary read endpoints keep working |
 | Dissent / Risks | Display-order uniqueness and archive behaviour may expose existing dev-data assumptions; do not introduce non-person bookable resources in this slice |
-| Status | Dispatched |
+| Status | Integrated |
 
 ### Workstream B - Diary Resource Admin First Slice
 
@@ -179,7 +179,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Plan Gate | Required before coding |
 | Merge Criteria | One-location diary remains uncluttered; multi-location context remains explicit; admin controls do not mutate appointments or waiting-room attendance state; API errors are visible and recoverable |
 | Dissent / Risks | This depends on Workstream A's final route/payload shape; if backend scope changes, UI should stop at a plan or adapter shell rather than guessing |
-| Status | Dispatched |
+| Status | Integrated |
 
 ### Workstream C - Resource Admin Review Harness
 
@@ -195,7 +195,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Plan Gate | Required before coding if launched as worker |
 | Merge Criteria | Review harness names the exact surfaces to test and not test; keeps room/resource/waiting-area/location language separate; preserves agent dissent/risks from submitted plans |
 | Dissent / Risks | If Codex keeps this direct, no external worker handin is needed for Workstream C; if launched as a subagent, use normal submit and include it in the integration gate |
-| Status | Dispatched |
+| Status | Integrated |
 
 ## Sprint 18: Patient-Admin Safety and Duplicate Visibility
 

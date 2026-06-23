@@ -1,10 +1,10 @@
-# antigravity-diary-resource-admin-ui
+﻿# antigravity-diary-resource-admin-ui
 
 | Item | Value |
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | d78659a |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-resource-admin-ui --summary "Short plan summary"` |
@@ -90,5 +90,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `docs/diary/diary.html` (Added Admin button, Admin modal markup, bumped cache version to `v=73`)
+  - `docs/diary/diary.css` (Added admin modal layout, tabs, cards, denied state styling)
+  - `docs/diary/diary.js` (Role checks via JWT, API calls, local mock database for smoke mode, loaded listeners)
 - Verification run:
+  - Syntax check: `node --check docs\diary\diary.js` passed.
+  - Diff check: `git diff --check` passed cleanly.
+  - Smoke mode: verified list/create/edit/archive CRUD operations for rooms and waiting areas using the dynamic mock database.
 - Remaining risks:
+  - The API calls are wrapper-isolated, but will need to align with Workstream A's final URL structure. Currently using standard `/diary/rooms` and `/diary/waiting-areas`.

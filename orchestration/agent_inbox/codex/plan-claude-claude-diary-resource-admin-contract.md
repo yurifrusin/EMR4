@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `master` |
 | Source Task | `claude-diary-resource-admin-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-23 15:22 +1000 |
 | Source HEAD | `3ec4604` |
 

@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=72" />
-  <script src="diary.js?v=72" defer></script>
+  <link rel="stylesheet" href="diary.css?v=73" />
+  <script src="diary.js?v=73" defer></script>
 </head>
 <body>
 
@@ -46,6 +46,7 @@
       <span class="flow-count-pill" id="flow-waiting-count">0</span>
     </button>
     <button id="btn-refresh" title="Refresh appointments">&#8635; Refresh</button>
+    <button id="btn-admin-panel" class="hidden" title="Resource Administration">⚙️ Admin</button>
     <span id="diary-status">Connecting…</span>
   </div>
 </div>
@@ -184,6 +185,96 @@
       <button id="btn-booking-delete" type="button" class="btn-danger-sm hidden" title="Cancel this whole appointment">Cancel Appointment</button>
       <div style="flex-grow: 1;"></div>
       <button id="btn-booking-save" type="button" class="btn-primary-sm">Save Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESOURCE ADMIN MODAL ════════════════════════════ -->
+<div id="admin-modal" class="break-modal hidden" role="dialog" aria-modal="true">
+  <div class="break-modal-inner" style="width: 500px;">
+    <div class="break-modal-header">
+      <span class="break-modal-title">⚙️ Resource Administration</span>
+      <button id="btn-admin-close" class="break-modal-close" title="Close">✕</button>
+    </div>
+
+    <div class="admin-tabs">
+      <button id="tab-btn-rooms" class="admin-tab-btn active">Rooms</button>
+      <button id="tab-btn-areas" class="admin-tab-btn">Waiting Areas</button>
+    </div>
+
+    <div id="admin-modal-body" class="break-modal-body">
+      <div id="admin-alert" class="form-error hidden"></div>
+      <div id="admin-info" class="form-warning hidden"></div>
+
+      <div id="admin-access-denied" class="hidden">
+        <div class="admin-denied-icon">🔒</div>
+        <h3>Access Denied</h3>
+        <p>Resource administration is restricted to Practice Admins and Owners.</p>
+      </div>
+
+      <div id="admin-allowed-content">
+        <!-- Rooms Tab Content -->
+        <div id="tab-panel-rooms" class="admin-tab-panel">
+          <div id="room-list-view">
+            <div id="rooms-list-container" class="admin-list-container"></div>
+            <button id="btn-add-room-trigger" class="btn-primary-sm" style="width: 100%; margin-top: 10px;">+ Add Room</button>
+          </div>
+
+          <div id="room-form-view" class="hidden">
+            <h4 id="room-form-title" style="margin-bottom: 12px; font-weight: 600;">Add Room</h4>
+            <form id="room-form" onsubmit="return false;">
+              <input type="hidden" id="room-edit-id" />
+              <div class="form-group">
+                <label for="room-input-name">Room Name:</label>
+                <input type="text" id="room-input-name" required placeholder="e.g. Room 4" />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="room-input-order">Display Order:</label>
+                  <input type="number" id="room-input-order" required min="1" value="1" />
+                </div>
+                <div class="form-group">
+                  <label for="room-input-waiting">Default Waiting Area:</label>
+                  <select id="room-input-waiting">
+                    <option value="">[None]</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-actions-row" style="margin-top: 12px; display: flex; gap: 8px; justify-content: flex-end;">
+                <button id="btn-cancel-room-form" type="button" class="btn-ghost-sm">Cancel</button>
+                <button id="btn-save-room" type="submit" class="btn-primary-sm">Save Room</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Waiting Areas Tab Content -->
+        <div id="tab-panel-areas" class="admin-tab-panel hidden">
+          <div id="area-list-view">
+            <div id="areas-list-container" class="admin-list-container"></div>
+            <button id="btn-add-area-trigger" class="btn-primary-sm" style="width: 100%; margin-top: 10px;">+ Add Waiting Area</button>
+          </div>
+
+          <div id="area-form-view" class="hidden">
+            <h4 id="area-form-title" style="margin-bottom: 12px; font-weight: 600;">Add Waiting Area</h4>
+            <form id="area-form" onsubmit="return false;">
+              <input type="hidden" id="area-edit-id" />
+              <div class="form-group">
+                <label for="area-input-name">Waiting Area Name:</label>
+                <input type="text" id="area-input-name" required placeholder="e.g. Kids Play Area" />
+              </div>
+              <div class="form-group">
+                <label for="area-input-order">Display Order:</label>
+                <input type="number" id="area-input-order" required min="1" value="1" />
+              </div>
+              <div class="form-actions-row" style="margin-top: 12px; display: flex; gap: 8px; justify-content: flex-end;">
+                <button id="btn-cancel-area-form" type="button" class="btn-ghost-sm">Cancel</button>
+                <button id="btn-save-area" type="submit" class="btn-primary-sm">Save Area</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

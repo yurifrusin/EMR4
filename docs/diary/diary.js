@@ -1193,6 +1193,17 @@ async function loadDiary(silent = false, options = {}) {
     setStatus("Waiting for auth token…");
     return;
   }
+
+  // Update admin button visibility based on permissions
+  const adminBtn = document.getElementById("btn-admin-panel");
+  if (adminBtn) {
+    if (isUserAdminOrOwner()) {
+      adminBtn.classList.remove("hidden");
+    } else {
+      adminBtn.classList.add("hidden");
+    }
+  }
+
   if (!silent) {
     showLoading(true);
     const container = document.getElementById("diary-grid-container") || document.getElementById("diary-grid");
@@ -1233,10 +1244,7 @@ async function loadDiary(silent = false, options = {}) {
         return apptLocId === activeLocationId;
       });
       types = getMockTypes();
-      waitingAreas = [
-        { id: "mock-area-1", name: "Main Waiting Room" },
-        { id: "mock-area-2", name: "Sub-waiting Room B" }
-      ];
+      waitingAreas = getMockWaitingAreas().filter(wa => !activeLocationId || wa.location_id === activeLocationId);
     } else {
       const [templateRes, apptRes, typeRes, rosterRes, waitingAreasRes] = await Promise.all([
         loadDiaryTemplate(),
@@ -1684,6 +1692,7 @@ Office.onReady(() => {
     );
   }
 
+  initAdminPanel();
   try { Office.context?.ui?.messageParent(JSON.stringify({ type: "ready" })); } catch (_) {}
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -3028,4 +3037,516 @@ async function initLocationSelector() {
 
     loadDiary(true);
   };
+}
+
+// ─── RESOURCE ADMIN MOCK DATABASES (Smoke Mode) ────────────────
+let mockRooms = [
+  { id: "mock-room-1", name: "Room 1", display_order: 1, location_id: "loc-1", default_waiting_area_id: "mock-area-1" },
+  { id: "mock-room-2", name: "Room 2", display_order: 2, location_id: "loc-1", default_waiting_area_id: "mock-area-2" },
+  { id: "mock-room-3", name: "Room 3", display_order: 3, location_id: "loc-1", default_waiting_area_id: null },
+  { id: "mock-room-4", name: "Procedure Room 1", display_order: 1, location_id: "loc-2", default_waiting_area_id: null },
+];
+
+let mockWaitingAreas = [
+  { id: "mock-area-1", name: "Main Waiting Room", display_order: 1, location_id: "loc-1" },
+  { id: "mock-area-2", name: "Sub-waiting Room B", display_order: 2, location_id: "loc-1" },
+];
+
+function getMockWaitingAreas() {
+  return mockWaitingAreas;
+}
+
+function isUserAdminOrOwner() {
+  if (isSmokeMode()) return true;
+  if (!token) return false;
+  try {
+    const parts = token.split('.');
+    if (parts.length === 3) {
+      const payload = JSON.parse(atob(parts[1]));
+      return payload.role === "Admin" || payload.role === "PracticeOwner";
+    }
+  } catch (e) {
+    console.error("Failed to parse JWT role:", e);
+  }
+  return false;
+}
+
+// ─── API WRAPPERS FOR CRUD ─────────────────────────────────────
+async function fetchRooms(locationId) {
+  if (isSmokeMode()) {
+    return mockRooms.filter(r => r.is_active !== false && (!locationId || r.location_id === locationId));
+  }
+  const query = locationId ? `?location_id=${encodeURIComponent(locationId)}` : "";
+  const res = await apiFetch(`/diary/rooms${query}`);
+  if (!res.ok) throw new Error(await getErrorMessage(res));
+  return await res.json();
+}
+
+async function fetchWaitingAreas(locationId) {
+  if (isSmokeMode()) {
+    return mockWaitingAreas.filter(wa => wa.is_active !== false && (!locationId || wa.location_id === locationId));
+  }
+  const query = locationId ? `?location_id=${encodeURIComponent(locationId)}` : "";
+  const res = await apiFetch(`/diary/waiting-areas${query}`);
+  if (!res.ok) throw new Error(await getErrorMessage(res));
+  return await res.json();
+}
+
+async function saveRoom(room) {
+  if (isSmokeMode()) {
+    if (room.id) {
+      const idx = mockRooms.findIndex(r => r.id === room.id);
+      if (idx !== -1) mockRooms[idx] = { ...mockRooms[idx], ...room };
+    } else {
+      room.id = `mock-room-${Date.now()}`;
+      mockRooms.push(room);
+    }
+    return room;
+  }
+  const method = room.id ? "PATCH" : "POST";
+  const url = room.id ? `/diary/rooms/${room.id}` : "/diary/rooms";
+  const res = await apiFetch(url, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(room)
+  });
+  if (!res.ok) throw new Error(await getErrorMessage(res));
+  return await res.json();
+}
+
+async function archiveRoom(roomId) {
+  if (isSmokeMode()) {
+    const idx = mockRooms.findIndex(r => r.id === roomId);
+    if (idx !== -1) mockRooms[idx] = { ...mockRooms[idx], is_active: false };
+    return true;
+  }
+  const res = await apiFetch(`/diary/rooms/${roomId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ is_active: false })
+  });
+  if (!res.ok) throw new Error(await getErrorMessage(res));
+  return true;
+}
+
+async function saveWaitingArea(area) {
+  if (isSmokeMode()) {
+    if (area.id) {
+      const idx = mockWaitingAreas.findIndex(wa => wa.id === area.id);
+      if (idx !== -1) mockWaitingAreas[idx] = { ...mockWaitingAreas[idx], ...area };
+    } else {
+      area.id = `mock-area-${Date.now()}`;
+      mockWaitingAreas.push(area);
+    }
+    return area;
+  }
+  const method = area.id ? "PATCH" : "POST";
+  const url = area.id ? `/diary/waiting-areas/${area.id}` : "/diary/waiting-areas";
+  const res = await apiFetch(url, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(area)
+  });
+  if (!res.ok) throw new Error(await getErrorMessage(res));
+  return await res.json();
+}
+
+async function archiveWaitingArea(areaId) {
+  if (isSmokeMode()) {
+    const idx = mockWaitingAreas.findIndex(wa => wa.id === areaId);
+    if (idx !== -1) mockWaitingAreas[idx] = { ...mockWaitingAreas[idx], is_active: false };
+    mockRooms.forEach(r => {
+      if (r.default_waiting_area_id === areaId) r.default_waiting_area_id = null;
+    });
+    return true;
+  }
+  const res = await apiFetch(`/diary/waiting-areas/${areaId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ is_active: false })
+  });
+  if (!res.ok) throw new Error(await getErrorMessage(res));
+  return true;
+}
+
+async function getErrorMessage(res) {
+  try {
+    const data = await res.json();
+    return data.detail || `Server error: ${res.status}`;
+  } catch (e) {
+    return `HTTP error ${res.status}`;
+  }
+}
+
+// ─── ADMIN MODAL CONTROLLER ────────────────────────────────────
+let adminActiveTab = "rooms";
+
+function initAdminPanel() {
+  const adminBtn = document.getElementById("btn-admin-panel");
+  const adminModal = document.getElementById("admin-modal");
+  const closeBtn = document.getElementById("btn-admin-close");
+
+  if (!adminBtn || !adminModal) return;
+
+  adminBtn.onclick = () => {
+    const isAllowed = isUserAdminOrOwner();
+    const deniedEl = document.getElementById("admin-access-denied");
+    const allowedEl = document.getElementById("admin-allowed-content");
+
+    if (isAllowed) {
+      deniedEl.classList.add("hidden");
+      allowedEl.classList.remove("hidden");
+      loadAdminTabContent();
+    } else {
+      deniedEl.classList.remove("hidden");
+      allowedEl.classList.add("hidden");
+    }
+
+    adminModal.classList.remove("hidden");
+    clearAdminAlerts();
+  };
+
+  closeBtn.onclick = () => {
+    adminModal.classList.add("hidden");
+    loadDiary(true);
+  };
+
+  adminModal.onclick = (e) => {
+    if (e.target === adminModal) {
+      adminModal.classList.add("hidden");
+      loadDiary(true);
+    }
+  };
+
+  const tabRooms = document.getElementById("tab-btn-rooms");
+  const tabAreas = document.getElementById("tab-btn-areas");
+  const panelRooms = document.getElementById("tab-panel-rooms");
+  const panelAreas = document.getElementById("tab-panel-areas");
+
+  tabRooms.onclick = () => {
+    tabRooms.classList.add("active");
+    tabAreas.classList.remove("active");
+    panelRooms.classList.remove("hidden");
+    panelAreas.classList.add("hidden");
+    adminActiveTab = "rooms";
+    loadAdminTabContent();
+  };
+
+  tabAreas.onclick = () => {
+    tabAreas.classList.add("active");
+    tabRooms.classList.remove("active");
+    panelAreas.classList.remove("hidden");
+    panelRooms.classList.add("hidden");
+    adminActiveTab = "areas";
+    loadAdminTabContent();
+  };
+
+  document.getElementById("btn-add-room-trigger").onclick = () => showRoomForm(null);
+  document.getElementById("btn-cancel-room-form").onclick = () => hideRoomForm();
+  document.getElementById("room-form").onsubmit = async (e) => {
+    e.preventDefault();
+    await handleSaveRoom();
+  };
+
+  document.getElementById("btn-add-area-trigger").onclick = () => showAreaForm(null);
+  document.getElementById("btn-cancel-area-form").onclick = () => hideAreaForm();
+  document.getElementById("area-form").onsubmit = async (e) => {
+    e.preventDefault();
+    await handleSaveArea();
+  };
+}
+
+function clearAdminAlerts() {
+  const alertEl = document.getElementById("admin-alert");
+  const infoEl = document.getElementById("admin-info");
+  alertEl.textContent = "";
+  alertEl.classList.add("hidden");
+  infoEl.textContent = "";
+  infoEl.classList.add("hidden");
+}
+
+function setAdminError(msg) {
+  const alertEl = document.getElementById("admin-alert");
+  alertEl.textContent = msg;
+  if (msg) {
+    alertEl.classList.remove("hidden");
+  } else {
+    alertEl.classList.add("hidden");
+  }
+}
+
+function setAdminInfo(msg) {
+  const infoEl = document.getElementById("admin-info");
+  infoEl.textContent = msg;
+  if (msg) {
+    infoEl.classList.remove("hidden");
+    setTimeout(() => {
+      infoEl.classList.add("hidden");
+    }, 4000);
+  } else {
+    infoEl.classList.add("hidden");
+  }
+}
+
+async function loadAdminTabContent() {
+  clearAdminAlerts();
+  if (adminActiveTab === "rooms") {
+    await renderRoomsTab();
+  } else {
+    await renderAreasTab();
+  }
+}
+
+async function renderRoomsTab() {
+  const container = document.getElementById("rooms-list-container");
+  if (!container) return;
+  container.innerHTML = `<div style="text-align:center; padding: 12px; color: var(--grey-3);">Loading rooms…</div>`;
+  hideRoomForm();
+
+  try {
+    const [roomsList, areasList] = await Promise.all([
+      fetchRooms(activeLocationId),
+      fetchWaitingAreas(activeLocationId)
+    ]);
+
+    const waitingSelect = document.getElementById("room-input-waiting");
+    waitingSelect.innerHTML = `<option value="">[None]</option>`;
+    areasList.forEach(area => {
+      const opt = document.createElement("option");
+      opt.value = area.id;
+      opt.textContent = area.name;
+      waitingSelect.appendChild(opt);
+    });
+
+    container.innerHTML = "";
+    if (!roomsList.length) {
+      container.innerHTML = `<div style="text-align:center; padding: 20px; color: var(--grey-3);">No rooms configured for this location.</div>`;
+      return;
+    }
+
+    roomsList.sort((a, b) => a.display_order - b.display_order);
+
+    roomsList.forEach(room => {
+      const card = document.createElement("div");
+      card.className = "admin-item-card";
+
+      const defaultArea = areasList.find(a => a.id === room.default_waiting_area_id);
+      const areaLabel = defaultArea ? defaultArea.name : "[None]";
+
+      card.innerHTML = `
+        <div class="admin-item-info">
+          <span class="admin-item-title">${escapeHTML(room.name)}</span>
+          <span class="admin-item-meta">Order: ${room.display_order} | Default Area: ${escapeHTML(areaLabel)}</span>
+        </div>
+        <div class="admin-item-actions">
+          <button class="btn-ghost-sm btn-edit-room" style="padding: 2px 6px;">Edit</button>
+          <button class="btn-ghost-sm btn-archive-room" style="padding: 2px 6px; color: var(--red);">Archive</button>
+        </div>
+      `;
+
+      card.querySelector(".btn-edit-room").onclick = () => showRoomForm(room);
+      card.querySelector(".btn-archive-room").onclick = () => handleArchiveRoom(room);
+
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    setAdminError(`Failed to load rooms: ${err.message}`);
+    container.innerHTML = "";
+  }
+}
+
+async function renderAreasTab() {
+  const container = document.getElementById("areas-list-container");
+  if (!container) return;
+  container.innerHTML = `<div style="text-align:center; padding: 12px; color: var(--grey-3);">Loading waiting areas…</div>`;
+  hideAreaForm();
+
+  try {
+    const areasList = await fetchWaitingAreas(activeLocationId);
+    container.innerHTML = "";
+    if (!areasList.length) {
+      container.innerHTML = `<div style="text-align:center; padding: 20px; color: var(--grey-3);">No waiting areas configured for this location.</div>`;
+      return;
+    }
+
+    areasList.sort((a, b) => a.display_order - b.display_order);
+
+    areasList.forEach(area => {
+      const card = document.createElement("div");
+      card.className = "admin-item-card";
+
+      card.innerHTML = `
+        <div class="admin-item-info">
+          <span class="admin-item-title">${escapeHTML(area.name)}</span>
+          <span class="admin-item-meta">Order: ${area.display_order}</span>
+        </div>
+        <div class="admin-item-actions">
+          <button class="btn-ghost-sm btn-edit-area" style="padding: 2px 6px;">Edit</button>
+          <button class="btn-ghost-sm btn-archive-area" style="padding: 2px 6px; color: var(--red);">Archive</button>
+        </div>
+      `;
+
+      card.querySelector(".btn-edit-area").onclick = () => showAreaForm(area);
+      card.querySelector(".btn-archive-area").onclick = () => handleArchiveArea(area);
+
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    setAdminError(`Failed to load waiting areas: ${err.message}`);
+    container.innerHTML = "";
+  }
+}
+
+function escapeHTML(str) {
+  if (!str) return "";
+  return str.replace(/[&<>'"]/g,
+    tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+  );
+}
+
+function showRoomForm(room) {
+  document.getElementById("room-list-view").classList.add("hidden");
+  document.getElementById("room-form-view").classList.remove("hidden");
+  clearAdminAlerts();
+
+  const titleEl = document.getElementById("room-form-title");
+  const editIdEl = document.getElementById("room-edit-id");
+  const nameEl = document.getElementById("room-input-name");
+  const orderEl = document.getElementById("room-input-order");
+  const waitingEl = document.getElementById("room-input-waiting");
+
+  if (room) {
+    titleEl.textContent = "Edit Room";
+    editIdEl.value = room.id;
+    nameEl.value = room.name;
+    orderEl.value = room.display_order;
+    waitingEl.value = room.default_waiting_area_id || "";
+  } else {
+    titleEl.textContent = "Add Room";
+    editIdEl.value = "";
+    nameEl.value = "";
+    orderEl.value = "1";
+    waitingEl.value = "";
+  }
+}
+
+function hideRoomForm() {
+  document.getElementById("room-list-view").classList.remove("hidden");
+  document.getElementById("room-form-view").classList.add("hidden");
+}
+
+async function handleSaveRoom() {
+  const editId = document.getElementById("room-edit-id").value;
+  const name = document.getElementById("room-input-name").value.trim();
+  const order = parseInt(document.getElementById("room-input-order").value, 10);
+  const waitingId = document.getElementById("room-input-waiting").value || null;
+
+  if (!name) {
+    setAdminError("Room name is required.");
+    return;
+  }
+
+  const roomPayload = {
+    name,
+    display_order: order,
+    default_waiting_area_id: waitingId,
+    location_id: activeLocationId || null
+  };
+
+  if (editId) {
+    roomPayload.id = editId;
+  }
+
+  try {
+    await saveRoom(roomPayload);
+    setAdminInfo(editId ? "Room updated successfully." : "Room created successfully.");
+    await renderRoomsTab();
+  } catch (err) {
+    setAdminError(`Failed to save room: ${err.message}`);
+  }
+}
+
+async function handleArchiveRoom(room) {
+  if (!confirm(`Are you sure you want to archive "${room.name}"? Historical booking references will be preserved.`)) {
+    return;
+  }
+  try {
+    await archiveRoom(room.id);
+    setAdminInfo("Room archived successfully.");
+    await renderRoomsTab();
+  } catch (err) {
+    setAdminError(`Failed to archive room: ${err.message}`);
+  }
+}
+
+function showAreaForm(area) {
+  document.getElementById("area-list-view").classList.add("hidden");
+  document.getElementById("area-form-view").classList.remove("hidden");
+  clearAdminAlerts();
+
+  const titleEl = document.getElementById("area-form-title");
+  const editIdEl = document.getElementById("area-edit-id");
+  const nameEl = document.getElementById("area-input-name");
+  const orderEl = document.getElementById("area-input-order");
+
+  if (area) {
+    titleEl.textContent = "Edit Waiting Area";
+    editIdEl.value = area.id;
+    nameEl.value = area.name;
+    orderEl.value = area.display_order;
+  } else {
+    titleEl.textContent = "Add Waiting Area";
+    editIdEl.value = "";
+    nameEl.value = "";
+    orderEl.value = "1";
+  }
+}
+
+function hideAreaForm() {
+  document.getElementById("area-list-view").classList.remove("hidden");
+  document.getElementById("area-form-view").classList.add("hidden");
+}
+
+async function handleSaveArea() {
+  const editId = document.getElementById("area-edit-id").value;
+  const name = document.getElementById("area-input-name").value.trim();
+  const order = parseInt(document.getElementById("area-input-order").value, 10);
+
+  if (!name) {
+    setAdminError("Waiting area name is required.");
+    return;
+  }
+
+  const areaPayload = {
+    name,
+    display_order: order,
+    location_id: activeLocationId || null
+  };
+
+  if (editId) {
+    areaPayload.id = editId;
+  }
+
+  try {
+    await saveWaitingArea(areaPayload);
+    setAdminInfo(editId ? "Waiting area updated successfully." : "Waiting area created successfully.");
+    await renderAreasTab();
+  } catch (err) {
+    setAdminError(`Failed to save waiting area: ${err.message}`);
+  }
+}
+
+async function handleArchiveArea(area) {
+  if (!confirm(`Are you sure you want to archive "${area.name}"? Historical booking references will be preserved.`)) {
+    return;
+  }
+  try {
+    await archiveWaitingArea(area.id);
+    setAdminInfo("Waiting area archived successfully.");
+    await renderAreasTab();
+  } catch (err) {
+    setAdminError(`Failed to archive waiting area: ${err.message}`);
+  }
 }

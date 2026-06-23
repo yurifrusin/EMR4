@@ -7,7 +7,7 @@
 | Role | orchestrator |
 | Branch | `master` |
 | Source Task | `codex-resource-admin-review-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-23 15:12 +1000 |
 | Source HEAD | `1a2ab12` |
 

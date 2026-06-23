@@ -1837,3 +1837,133 @@ html, body {
 .btn-warning-action:hover {
   background-color: #ec971f !important;
 }
+
+/* ─── DIARY RESOURCE ADMIN STYLES ─────────────────── */
+
+#btn-admin-panel {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+#btn-admin-panel:hover {
+  background: rgba(255,255,255,0.28);
+}
+
+.admin-tabs {
+  display: flex;
+  background: var(--grey-1);
+  border-bottom: 1px solid var(--grey-2);
+  padding: 6px 16px 0;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.admin-tab-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--grey-3);
+  padding: 6px 12px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+  font-family: var(--font);
+}
+.admin-tab-btn:hover {
+  color: var(--text);
+}
+.admin-tab-btn.active {
+  color: var(--blue-mid);
+  border-bottom: 2px solid var(--blue-mid);
+}
+
+.admin-tab-panel {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.admin-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.admin-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: 1px solid var(--grey-2);
+  border-radius: 6px;
+  background: var(--white);
+  transition: all 0.15s ease;
+}
+.admin-item-card:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  border-color: var(--grey-3);
+}
+
+.admin-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.admin-item-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-item-meta {
+  font-size: 9px;
+  color: var(--grey-3);
+}
+
+.admin-item-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+#admin-access-denied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 10px;
+  text-align: center;
+}
+
+.admin-denied-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  user-select: none;
+}
+
+#admin-access-denied h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+#admin-access-denied p {
+  font-size: 10px;
+  color: var(--grey-3);
+}

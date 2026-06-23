@@ -65,6 +65,13 @@ Read these before acting on remembered process details.
 - Sprint integration rule: Codex/orchestrator must not push sprint work through
   to `master` until all active sprint agents, including any Codex subagent worker,
   have submitted or been explicitly stood down.
+- Post-poll review rule: once `poll --fetch` shows the expected implementation
+  review packets for the active sprint, Codex/orchestrator may proceed through
+  local inspection, bounded repair, verification, integration, closeout, and
+  mirror realignment without asking for another approval, unless a submission is
+  missing, out of scope, unsafe, failing verification, or otherwise needs user or
+  worker clarification. Plan-gated approval still requires explicit
+  `complete sprint task` before workers begin implementation.
 - Protocol amendment rule: prefer batching non-urgent orchestration protocol edits
   until the discussion settles. Codex should remind the user before launch if
   agreed protocol edits are still pending.

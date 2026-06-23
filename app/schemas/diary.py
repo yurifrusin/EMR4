@@ -61,14 +61,41 @@ class WaitingAreaOut(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class WaitingAreaCreate(BaseModel):
+    name: str = Field(..., min_length=1, max_length=100)
+    display_order: int = Field(default=0, ge=0)
+    location_id: Optional[UUID] = None
+
+
+class WaitingAreaUpdate(BaseModel):
+    name: Optional[str] = Field(default=None, min_length=1, max_length=100)
+    display_order: Optional[int] = Field(default=None, ge=0)
+    is_active: Optional[bool] = None
+
+
 class RoomOut(BaseModel):
     id: UUID
     name: str
     display_order: int
     is_active: bool
     location_id: Optional[UUID] = None
+    default_waiting_area_id: Optional[UUID] = None
 
     model_config = {"from_attributes": True}
+
+
+class RoomCreate(BaseModel):
+    name: str = Field(..., min_length=1, max_length=100)
+    display_order: int = Field(..., ge=0)
+    location_id: Optional[UUID] = None
+    default_waiting_area_id: Optional[UUID] = None
+
+
+class RoomUpdate(BaseModel):
+    name: Optional[str] = Field(default=None, min_length=1, max_length=100)
+    display_order: Optional[int] = Field(default=None, ge=0)
+    default_waiting_area_id: Optional[UUID] = None
+    is_active: Optional[bool] = None
 
 
 class DiaryRosterEntryOut(BaseModel):

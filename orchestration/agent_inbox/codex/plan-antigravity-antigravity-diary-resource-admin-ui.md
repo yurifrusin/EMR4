@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-resource-admin-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-23 15:20 +1000 |
 | Source HEAD | `1a2ab12` |
 

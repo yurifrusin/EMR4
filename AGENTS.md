@@ -245,6 +245,14 @@ have submitted on a `codex/<task>` branch, use:
 python scripts\agent_worktrees.py poll --fetch --include-codex-workers
 ```
 
+After `poll --fetch` shows the expected implementation review packets for the
+active sprint, Codex/orchestrator may proceed through inspection, bounded repair,
+verification, integration, closeout, and mirror realignment unless a packet is
+missing, out of scope, unsafe, failing verification, or otherwise needs user or
+worker clarification. This post-poll integration permission is separate from the
+plan gate: workers still must not implement until the explicit
+`complete sprint task` approval is given.
+
 After Codex integrates a submit, it must:
 
 1. Mark the source task packet and Codex review packet `integrated` or `superseded`.

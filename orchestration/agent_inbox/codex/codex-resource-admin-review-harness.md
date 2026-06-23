@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/resource-admin-review-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | d78659a |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-resource-admin-review-harness --summary "Short plan summary"` |
@@ -90,5 +90,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/resource_admin_review.md`
+  - `orchestration/sprint_closeout.md`
+  - `orchestration/protocol_alerts.md`
+  - `AGENTS.md`
+  - `orchestration/parallel_workstreams.md`
 - Verification run:
+  - `git diff --check` passed after integration whitespace cleanup.
+  - Backend and diary UI verification are recorded in Sprint 19 closeout.
 - Remaining risks:
+  - Manual user review still needs live Admin/PracticeOwner and non-admin diary checks after deploy.

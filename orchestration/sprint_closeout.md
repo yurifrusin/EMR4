@@ -8,139 +8,89 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 18: Patient Admin Safety and Duplicate Visibility |
-| Integrated through | Sprint 18 integration batch |
-| Status | Integrated, deployed, and user-reviewed; ready to plan the next sprint |
+| Batch | Sprint 19: Resource Admin Foundations |
+| Integrated through | Sprint 19 integration batch |
+| Status | Integrated and verified locally; pending push/deploy and user review |
 | Last updated | 2026-06-23 |
 
 ## What Changed
 
-- Added a read-only `GET /api/v1/patients/duplicate-groups` endpoint for
-  practice-scoped duplicate review. It groups likely duplicates by strong IHI,
-  strong Medicare+IRN, and softer same-name-plus-DOB matches, and includes
-  appointment/encounter reference counts for safe review.
-- Added `scripts/audit_patient_duplicates.py`, a read-only developer helper for
-  inspecting likely duplicate patient records before any manual cleanup. It
-  prints evidence and reference counts only; it never deletes, merges, or
-  updates records.
-- Improved taskpane patient search so full-name searches such as
-  `alice alston` search broadly and then filter locally instead of failing when
-  the backend only matches one term.
-- Moved New Patient and Patient Details error/status messages close to the
-  action buttons and added visible action-status feedback so failed saves are
-  harder to miss in the narrow Word taskpane.
-- Updated taskpane assets through `v=56` after post-review save-feedback and
-  taskpane overlay structure hotfixes.
+- Added the first backend admin contract for diary physical rooms and waiting
+  areas: list rooms, create/update/soft-archive rooms, and create/update/
+  soft-archive waiting areas.
+- Added Admin/PracticeOwner RBAC for resource mutations while preserving normal
+  authenticated read paths for diary resource data.
+- Added practice and location scoping plus active-resource validation for room
+  `default_waiting_area_id`.
+- Added focused `tests/test_diary_resource_admin.py` coverage for auth gates,
+  role gates, practice isolation, CRUD, soft archive, duplicate room order
+  conflict handling, and roster preservation after archive.
+- Added a restrained diary Resource Administration modal for rooms and waiting
+  areas under the active location context, with smoke-mode mock CRUD and visible
+  success/failure feedback.
+- Added `orchestration/resource_admin_review.md` as the Sprint 19 review harness
+  and clarified the post-poll review/integration rule in protocol docs.
+- During Codex integration, repaired the diary UI adapter to use the final
+  backend `PATCH` soft-archive contract instead of `PUT`/`DELETE`.
 
 ## Recommended User Review
 
-Completed user review:
+Use `orchestration/resource_admin_review.md` for the detailed checklist. Minimum
+manual review:
 
-1. Hard refreshed the Word taskpane and confirmed the current deployed taskpane
-   version path.
-2. Searched patients by a full name, for example `alice alston`. Confirmed the
-   expected patient appears, not "No results found".
-3. Tried normal Patient Details edit paths and confirmed the success/failure message is
-   visible near the action buttons, not only at the top of the scroll area.
-4. Tried saving a duplicate Medicare+IRN combination. Confirmed the save is blocked
-   and the feedback is visible near `Save Details`.
-5. Tried a New Patient validation failure and confirmed the bottom action area
-   shows a clear failure state without needing to scroll back to the top.
-6. Optional API check: call `GET /api/v1/patients/duplicate-groups` with a staff
-   JWT and confirm duplicate groups include match reasons and reference counts.
-7. Optional dev-data check: run
-   `.venv\Scripts\python.exe scripts\audit_patient_duplicates.py` and confirm it
-   reports likely duplicates without changing data.
-
-Manual result: passed. The final reviewed taskpane shows duplicate-patient
-blocking copy near the action buttons, the duplicate candidates are visible, and
-the `Not saved` bottom warning is visible without scrolling back to the top.
+1. Hard-refresh the diary after deploy and confirm the diary asset version is
+   current.
+2. Log in as an Admin/PracticeOwner, open the diary, and confirm the Admin
+   button appears without cluttering the one-location diary.
+3. Create a waiting area, then create a room using that waiting area as the
+   default.
+4. Edit the room and waiting area, confirming visible success feedback.
+5. Archive the room and waiting area, confirming they disappear from active lists
+   without breaking existing diary/roster display.
+6. Log in as a GP or Receptionist and confirm admin controls are unavailable and
+   backend writes are forbidden.
+7. Confirm main diary appointment blocks, Waiting Room cards, appointment status
+   controls, booking proposals, taskpane, and Command Centre are unchanged.
 
 ## Not Required Before Moving On
 
-- No diary, Waiting Room, booking modal, appointment proposal, or location
-  selector testing is required for Sprint 18.
-- No Command Centre, Scribe, Gemini, billing, results, letters, medications, or
-  clinical-note regression is required for this sprint.
-- No manual duplicate cleanup is required before moving on. The audit helper is
-  read-only and exists to make cleanup safer later.
+- No roster editor, diary template editor, drag/drop, resize, appointment
+  geometry redesign, booking/status semantics, patient duplicate merge, taskpane,
+  Command Centre, or Bernie runtime testing is required for Sprint 19.
+- No migration was added for this sprint; the rooms and waiting-area tables
+  already existed.
+- No non-person bookable-resource schema is required yet.
 
 ## Known Follow-Up
 
-- Patient Details duplicate handling is safer, but still not a full patient
-  merge workflow. We still need a deliberate review/merge/archive design before
-  deleting or consolidating real records.
-- The read-only duplicate endpoint uses in-Python bucketing for now. That is fine
-  for dev and small practices, but large production datasets will need indexed
-  query paths or a stored duplicate-review table.
-- Same-phone-plus-DOB is intentionally not a duplicate key yet. It may become a
-  separate soft review signal later.
-- The taskpane still needs broader "operation result" design so all important
-  success/failure messages remain visible in narrow Word layouts.
-- Demographic edits should eventually update the patient document header, add
-  IRN/IHI where appropriate, and use the future SharePoint/document URL model.
-- GitHub Pages deployment should be kept to canonical `master`.
-- Multi-location admin UI does not exist yet. For now, location data is seeded
-  and API-backed; proper practice/location/room/waiting-area administration is a
-  future slice.
-- The diary still needs a future page/view-group model for wide locations with
-  too many columns. That is a screen-layout concern inside one physical location.
-- Physical waiting areas now exist in the backend, but room/resource admin and
-  per-room default waiting-area editing are still future work. The Sprint 14
-  design reference is `orchestration/resource_admin_bernie_tool_design.md`.
-- Terminal appointment statuses now auto-clear `waiting_area_id` when omitted
-  from PATCH. Continue watching whether this feels right in practice, especially
-  when status changes are corrected after accidental completion/cancellation.
-- The diary waiting-area UI should eventually auto-focus the area associated with
-  the active room/column and support true stacked/condensed cards inside
-  high-volume Waiting Room sections such as Finished.
-- The project must support practices with multiple physical locations served by
-  one reception/practice-management team and one patient database. The next
-  diary/resource work should make the location boundary explicit before more
-  diary features assume a single physical site.
-- One location may still need multiple diary page views or column groups because
-  of screen real estate. Treat this as a view/pagination problem within a
-  location, separate from choosing a practice location/site.
-- Sprint 16 review should use `orchestration/location_diary_view_review.md` to
-  keep practice, physical location, room/resource, waiting area, diary view/page
-  group, booking slot, appointment status, patient identity, and booking
-  confirmation language separate.
-- Appointment state still needs the planned distinction between patient identity
-  linkage, attendance workflow, and future SMS/reminder confirmation.
-- Bernie should continue to follow
-  `orchestration/resource_admin_bernie_tool_design.md`: typed proposals,
-  human-confirmed writes, and audit.
-- Drag/drop/resize should remain deferred until the resource model and patient
-  flow semantics are settled.
-- The `pytest_asyncio` loop-scope deprecation warning remains.
-- Do not run two pytest processes against the same `gp_pms_test` database in
-  parallel; concurrent runs can collide during fixture setup/teardown.
-- Future data cleanup should explicitly backfill or review old appointments
-  where `location_id` is null before multi-location production use.
+- Waiting-area `display_order` duplicates are not currently constrained like room
+  order; decide later whether that should become a DB/indexed uniqueness rule.
+- General audit logging remains a future platform need before Bernie or higher
+  autonomy write paths expand.
+- Non-person bookable resources remain deliberately deferred; rooms are physical
+  rooms, not bookable entities by themselves.
+- A broader practice-admin area may eventually absorb this diary modal once
+  resource, roster, template, appointment type, and practitioner schedule admin
+  all exist.
 
 ## Verification
 
-Codex/orchestrator verification for Sprint 18:
-
-- `.venv\Scripts\python.exe -m py_compile app\schemas\patients.py app\routers\patients.py tests\test_patient_duplicate_review.py scripts\audit_patient_duplicates.py tests\test_audit_patient_duplicates.py` -> passed
-- `node --check "EMR4 Sidebar\src\taskpane\taskpane.js"` -> passed
-- `node --check docs\taskpane\taskpane.js` -> passed
-- `git diff --check` -> passed, with a CRLF/LF warning on
-  `orchestration/integration_log.md`
-- `.venv\Scripts\python.exe -m pytest tests\test_patient_duplicate_review.py tests\test_audit_patient_duplicates.py tests\test_patients.py -q --tb=short -p no:randomly` -> 38 passed, 1 pytest-asyncio warning
-- `.venv\Scripts\python.exe scripts\audit_patient_duplicates.py` -> read-only run
-  completed and reported the current Billy Frusin duplicate group.
+- `.venv\Scripts\python.exe -m py_compile app\schemas\diary.py appouters\diary.py tests	est_diary_resource_admin.py` -> passed
+- `.venv\Scripts\python.exe -m pytest tests	est_diary_resource_admin.py -q --tb=short -p no:randomly` -> 25 passed
+- `.venv\Scripts\python.exe -m pytest tests	est_location_scoped_diary.py tests	est_diary_roster.py tests	est_diary_template.py tests	est_waiting_area_contract.py -q --tb=short -p no:randomly` -> 46 passed
+- `node --check docs\diary\diary.js` -> passed
+- `git diff --check` -> passed, with CRLF/LF warnings only
 
 ## Recommended Next Direction
 
-After Sprint 18 user review, Codex recommends Sprint 19 focus on the next
-diary/resource admin slice: role-gated room and waiting-area admin contracts,
-a restrained diary admin surface, and a review harness. Duplicate merge workflow
-design and broader taskpane operation-result handling remain valuable follow-up
-options, but resource admin best advances Phase 2 diary foundations before
-drag/drop, roster editing, or Bernie write tools.
+After Sprint 19 user review, the strongest next candidates are:
 
----
+1. Roster admin writes for date-specific room/practitioner assignments.
+2. Appointment type/schedule admin foundations.
+3. A small operation-result pattern for diary/admin surfaces so success/failure
+   feedback stays visible and consistent.
+4. Duplicate merge workflow design/implementation, if patient-admin safety should
+   take priority over diary admin depth.
 
 ## Sprint 15 Review Harness - Waiting Room Check-In Operations
 
