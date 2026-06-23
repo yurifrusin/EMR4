@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 19: Resource Admin Foundations |
 | Integrated through | Sprint 19 integration batch |
-| Status | Integrated and pushed; diary asset v81 hotfix pending Pages refresh/user review |
+| Status | Integrated and pushed; diary asset v82 hotfix pending Pages refresh/user review |
 | Last updated | 2026-06-23 |
 
 ## What Changed
@@ -51,6 +51,10 @@ reviewed, integrated, verified, pushed, and audited.
   open state explicitly removes the hidden class after diary reloads/admin
   refreshes, the close button always closes rather than toggles, and the header
   button exposes an active/expanded state.
+- During user review, hotfixed waiting-area admin save/archive sync so the
+  Waiting Room pane refreshes its active waiting-area cache immediately, clears
+  stale check-in default cache entries, and resets the selected tab if the
+  selected area was archived.
 
 ## Recommended User Review
 
@@ -58,7 +62,7 @@ Use `orchestration/resource_admin_review.md` for the detailed checklist. Minimum
 manual review:
 
 1. Hard-refresh the diary after GitHub Pages refreshes and confirm the diary
-   loads `diary.js?v=81` / `diary.css?v=81`.
+   loads `diary.js?v=82` / `diary.css?v=82`.
 2. Log in as an Admin/PracticeOwner, open the diary, and confirm the Admin
    button appears without cluttering the one-location diary.
 3. Create a waiting area, then create a room using that waiting area as the
@@ -97,7 +101,7 @@ manual review:
 - `.venv\Scripts\python.exe -m py_compile app\schemas\diary.py app\routers\diary.py tests\test_diary_resource_admin.py` -> passed
 - `.venv\Scripts\python.exe -m pytest tests\test_diary_resource_admin.py -q --tb=short -p no:randomly` -> 25 passed
 - `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_diary_roster.py tests\test_diary_template.py tests\test_waiting_area_contract.py -q --tb=short -p no:randomly` -> 46 passed
-- `node --check docs\diary\diary.js` -> passed after v81 Waiting Room pane state hotfix
+- `node --check docs\diary\diary.js` -> passed after v82 waiting-area pane sync hotfix
 - `git diff --check` -> passed, with CRLF/LF warnings only
 - Chrome deployed smoke check: `diary.js?v=75` archive bug reproduced, hotfixed,
   and v75 smoke archive passed; v77 role-affordance code is pushed but GitHub
@@ -114,6 +118,10 @@ manual review:
 - Chrome local smoke check after v81: Waiting Room pane opened from the header
   button, restored open after reload with `aria-expanded="true"` and active
   button styling, and the close button hid the pane with `aria-expanded="false"`.
+- Chrome local smoke check after v82: creating `Pane Sync Smoke` in Resource
+  Administration added it to the open Waiting Room pane tabs immediately; the
+  first archive click showed the inline confirm fallback; the second archive
+  removed it from the admin list and the Waiting Room pane tabs without reload.
 
 ## Recommended Next Direction
 

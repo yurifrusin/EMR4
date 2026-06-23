@@ -3506,6 +3506,7 @@ async function renderAreasTab() {
   try {
     const areasList = await fetchWaitingAreas(activeLocationId);
     adminAreaCache = Array.isArray(areasList) ? areasList : [];
+    waitingAreas = adminAreaCache;
     container.innerHTML = "";
     if (!areasList.length) {
       container.innerHTML = `<div style="text-align:center; padding: 20px; color: var(--grey-3);">No waiting areas configured for this location.</div>`;
@@ -3543,6 +3544,27 @@ async function renderAreasTab() {
     setAdminError(`Failed to load waiting areas: ${err.message}`);
     container.innerHTML = "";
   }
+}
+
+async function refreshWaitingAreaState() {
+  const refreshedAreas = await fetchWaitingAreas(activeLocationId);
+  waitingAreas = Array.isArray(refreshedAreas) ? refreshedAreas : [];
+  adminAreaCache = waitingAreas;
+  checkinDefaultCache.clear();
+
+  const validTabs = new Set(["all", ...getUniqueWaitingAreas().map(area => area.key)]);
+  if (!validTabs.has(selectedWaitingAreaTab)) {
+    selectedWaitingAreaTab = "all";
+  }
+
+  const panel = document.getElementById("diary-flow-panel");
+  if (panel && !panel.classList.contains("hidden")) {
+    await updateFlowPanel();
+  } else {
+    updateFlowBadgeCount();
+  }
+
+  return waitingAreas;
 }
 
 function escapeHTML(str) {
@@ -3695,8 +3717,10 @@ async function handleSaveArea() {
   try {
     const savedArea = await saveWaitingArea(areaPayload);
     adminLastSavedAreaId = savedArea && savedArea.id ? savedArea.id : editId || null;
-    setAdminInfo(editId ? "Waiting area updated successfully." : "Waiting area created successfully.");
+    const message = editId ? "Waiting area updated successfully." : "Waiting area created successfully.";
+    await refreshWaitingAreaState();
     await renderAreasTab();
+    setAdminInfo(message);
   } catch (err) {
     setAdminError(`Failed to save waiting area: ${err.message}`);
   }
@@ -3708,8 +3732,9 @@ async function handleArchiveArea(area) {
   }
   try {
     await archiveWaitingArea(area.id);
-    setAdminInfo("Waiting area archived successfully.");
+    await refreshWaitingAreaState();
     await renderAreasTab();
+    setAdminInfo("Waiting area archived successfully.");
   } catch (err) {
     setAdminError(`Failed to archive waiting area: ${err.message}`);
   }
