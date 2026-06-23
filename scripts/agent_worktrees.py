@@ -1144,18 +1144,19 @@ def poll(args: argparse.Namespace) -> None:
         if agent != "codex"
     ]
 
-    codex_worker_refs = git_stdout(
-        [
-            "for-each-ref",
-            f"refs/remotes/{args.remote}/codex",
-            "--format=%(refname:short)",
-        ],
-        check=False,
-    )
-    for remote_branch in codex_worker_refs.splitlines():
-        branch = remote_branch.removeprefix(f"{args.remote}/")
-        if branch and branch != AGENTS["codex"]:
-            branch_checks.append(("codex", branch))
+    if args.include_codex_workers:
+        codex_worker_refs = git_stdout(
+            [
+                "for-each-ref",
+                f"refs/remotes/{args.remote}/codex",
+                "--format=%(refname:short)",
+            ],
+            check=False,
+        )
+        for remote_branch in codex_worker_refs.splitlines():
+            branch = remote_branch.removeprefix(f"{args.remote}/")
+            if branch and branch != AGENTS["codex"]:
+                branch_checks.append(("codex", branch))
 
     alert_refs = git_stdout(
         [
@@ -1219,6 +1220,8 @@ def poll(args: argparse.Namespace) -> None:
         print("[note] stale disposable worktrees detected; run:")
         print("  python scripts\\agent_worktrees.py audit")
         print("  python scripts\\agent_worktrees.py retire-stale")
+        if not args.include_codex_workers:
+            print("[note] remote codex/* worker branches were skipped; use --include-codex-workers when expecting a Codex worker submit")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -1331,6 +1334,11 @@ def build_parser() -> argparse.ArgumentParser:
     poll_parser = subparsers.add_parser("poll", help="Fetch and report submitted worker branches / Codex review packets")
     poll_parser.add_argument("--remote", default="origin")
     poll_parser.add_argument("--fetch", action="store_true")
+    poll_parser.add_argument(
+        "--include-codex-workers",
+        action="store_true",
+        help="Also scan remote codex/* disposable worker branches; slower and noisy if old worker refs remain",
+    )
     poll_parser.set_defaults(func=poll)
 
     audit_parser = subparsers.add_parser("audit", help="Show orchestration refs, tasks, integration log, and stale worker worktrees")

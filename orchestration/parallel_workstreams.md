@@ -33,9 +33,15 @@ single source of truth for durable project state; this file tracks active branch
   `python scripts\agent_worktrees.py suggest-task --agent <agent> --title "..."`
   so Codex can triage them from `orchestration/agent_inbox/codex/`.
   Suggested packets are not permission to implement the work.
-- Codex polls submissions with `python scripts\agent_worktrees.py poll --fetch`.
-  This includes Claude/Antigravity branches and submitted `codex/*` worker branches,
-  excluding the durable `codex/current` mirror.
+- Codex polls durable worker submissions with
+  `python scripts\agent_worktrees.py poll --fetch`.
+- Use `python scripts\agent_worktrees.py poll --fetch --include-codex-workers`
+  only when a current Codex subagent worker is expected to have submitted on a
+  `codex/<task>` branch. The default fast poll skips historic remote
+  `codex/*` disposable worker refs.
+  The default path includes Claude/Antigravity branches, submit-alert branches,
+  and local Codex inbox packets, excluding remote disposable `codex/*` branches
+  and the durable `codex/current` mirror.
 - Codex records every reviewed submit/integration in `orchestration/integration_log.md`
   via `python scripts\agent_worktrees.py record-integration ...`.
 - After each integration, Codex runs `python scripts\agent_worktrees.py audit --fetch`

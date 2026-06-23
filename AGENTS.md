@@ -208,10 +208,20 @@ notes, but should not edit other agents' packets.
 When a worker uses the packet's `submit` command with `--task`, the helper marks
 the source packet `submitted`, creates a Codex review packet under
 `orchestration/agent_inbox/codex/`, commits it with the branch, and pushes the
-worker branch. Codex can check submitted work with:
+worker branch. Codex can check submitted durable-worker work with:
 
 ```powershell
 python scripts\agent_worktrees.py poll --fetch
+```
+
+By default `poll` checks Claude/Antigravity durable submits, submit-alert
+branches, and the local Codex inbox. It intentionally skips old remote
+`codex/*` disposable worker branches because historic Codex worker refs can make
+the command slow and noisy. When a current Codex subagent worker is expected to
+have submitted on a `codex/<task>` branch, use:
+
+```powershell
+python scripts\agent_worktrees.py poll --fetch --include-codex-workers
 ```
 
 After Codex integrates a submit, it must:
