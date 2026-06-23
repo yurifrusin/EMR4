@@ -133,11 +133,12 @@ Codex/orchestrator verification for Sprint 18:
 
 ## Recommended Next Direction
 
-After Sprint 18 user review, the next sprint can return to diary/resource work
-or continue patient-admin safety. Recommended options are: a proper duplicate
-review/merge workflow design, a taskpane operation-result pattern for narrow
-layouts, or the next diary/resource admin slice for locations, rooms, and
-waiting areas.
+After Sprint 18 user review, Codex recommends Sprint 19 focus on the next
+diary/resource admin slice: role-gated room and waiting-area admin contracts,
+a restrained diary admin surface, and a review harness. Duplicate merge workflow
+design and broader taskpane operation-result handling remain valuable follow-up
+options, but resource admin best advances Phase 2 diary foundations before
+drag/drop, roster editing, or Bernie write tools.
 
 ---
 

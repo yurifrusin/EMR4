@@ -130,6 +130,65 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 19: Resource Admin Foundations
+
+| Item | Value |
+|---|---|
+| Sprint Goal | Add the first safe admin path for physical rooms and waiting areas so reception/admin can maintain Phase 2 diary resources without confusing locations, rooms, diary views, waiting areas, appointment status, or patient identity |
+| Dispatch Mode | Plan-gated parallel sprint |
+| Start State | `master`, `handoff/current`, and durable worker mirrors aligned at `d78659a` after Sprint 18 closeout |
+| User Review Dependency | None before planning; implementation plans must be reviewed before coding |
+| Integration Rule | Do not push Sprint 19 work to `master` until Claude, Antigravity, and any Codex worker have submitted or been explicitly stood down |
+| Status | Dispatched for implementation plans |
+
+### Workstream A - Backend Room and Waiting-Area Admin Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-diary-resource-admin-contract.md` |
+| Goal | Plan, then after approval implement the smallest role-gated backend admin contract for rooms and waiting areas |
+| In Scope | `app/schemas/diary.py`, `app/routers/diary.py`, focused `tests/test_diary_resource_admin.py`; `GET /diary/rooms`; create/update/archive for `Room` and `WaitingArea`; Admin/PracticeOwner RBAC; practice and location scoping; archive semantics; room `default_waiting_area_id` validation |
+| Out of Scope | Diary frontend, roster writes, diary template editing, appointment mutation semantics, migrations unless the approved plan proves one is needed, full practice admin UI, patient merge, Bernie runtime, audit-log platform |
+| Verification | Plan packet first; after approval backend py_compile plus focused resource-admin tests and adjacent `test_location_scoped_diary.py`, `test_diary_roster.py`, and `test_waiting_area_contract.py` coverage |
+| Plan Gate | Required before coding |
+| Merge Criteria | Admin writes cannot leak cross-practice data; inactive/archive preserves historical references; room defaults cannot point at cross-location/cross-practice waiting areas; existing diary read endpoints keep working |
+| Dissent / Risks | Display-order uniqueness and archive behaviour may expose existing dev-data assumptions; do not introduce non-person bookable resources in this slice |
+| Status | Dispatched |
+
+### Workstream B - Diary Resource Admin First Slice
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-resource-admin-ui.md` |
+| Goal | Plan, then after approval add a restrained diary-admin surface for rooms and waiting areas using the Workstream A API contract |
+| In Scope | `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`; active-location context; list/create/edit/archive controls for rooms and waiting areas; default waiting-area selection for rooms; clear success/failure feedback; cache bust if assets change |
+| Out of Scope | Backend changes, roster editor, diary template editor, appointment create/edit/status logic, main diary appointment geometry, Waiting Room card layout, taskpane, Command Centre, duplicate merge, Bernie runtime |
+| Verification | Plan packet first; after approval `node --check docs\diary\diary.js`, `git diff --check`, and manual visual notes for one-location and multi-location resource admin flows |
+| Plan Gate | Required before coding |
+| Merge Criteria | One-location diary remains uncluttered; multi-location context remains explicit; admin controls do not mutate appointments or waiting-room attendance state; API errors are visible and recoverable |
+| Dissent / Risks | This depends on Workstream A's final route/payload shape; if backend scope changes, UI should stop at a plan or adapter shell rather than guessing |
+| Status | Dispatched |
+
+### Workstream C - Resource Admin Review Harness
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker or orchestrator |
+| Branch | Unique `codex/<short-task-name>` worker branch, or direct orchestrator docs if no worker is launched |
+| Task Packet | `orchestration/agent_inbox/codex/codex-resource-admin-review-harness.md` |
+| Goal | Prepare the integration and user-review harness for resource admin without duplicating backend or frontend implementation scopes |
+| In Scope | Orchestration review docs, API spot-check snippets, user review checklist, closeout scaffolding, and vocabulary guardrails tying back to `orchestration/resource_admin_bernie_tool_design.md` |
+| Out of Scope | Production backend/frontend code, migrations, taskpane, Command Centre, appointment mutations, patient merge, autonomous Bernie runtime |
+| Verification | Plan packet first if launched as a worker; after approval `git diff --check` and snippet sanity review against the final submitted backend API |
+| Plan Gate | Required before coding if launched as worker |
+| Merge Criteria | Review harness names the exact surfaces to test and not test; keeps room/resource/waiting-area/location language separate; preserves agent dissent/risks from submitted plans |
+| Dissent / Risks | If Codex keeps this direct, no external worker handin is needed for Workstream C; if launched as a subagent, use normal submit and include it in the integration gate |
+| Status | Dispatched |
+
 ## Sprint 18: Patient-Admin Safety and Duplicate Visibility
 
 | Item | Value |
@@ -139,7 +198,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Start State | `master`, `handoff/current`, and durable worker mirrors aligned at Sprint 17 closeout |
 | User Review Dependency | None before planning; implementation plans must be reviewed before coding |
 | Integration Rule | Do not push sprint work to `master` until Claude, Antigravity, and the Codex worker have submitted or been explicitly stood down |
-| Status | Dispatched for implementation plans |
+| Status | Integrated, deployed, and user-reviewed; see `orchestration/sprint_closeout.md` |
 
 ### Workstream A — Backend Duplicate Review Contract
 
@@ -153,7 +212,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Frontend UI, patient merge/delete mutation, manual DB deletion, production data migrations |
 | Verification | Plan packet first; after approval focused pytest for duplicate review API and relevant patient tests |
 | Plan Gate | Required before coding |
-| Status | Dispatched |
+| Status | Integrated |
 
 ### Workstream B — Taskpane Patient Search and Alert Clarity
 
@@ -167,7 +226,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Backend changes, diary changes, Command Centre redesign, patient merge/delete implementation |
 | Verification | Plan packet first; after approval JS syntax check plus manual taskpane verification notes |
 | Plan Gate | Required before coding |
-| Status | Dispatched |
+| Status | Integrated |
 
 ### Workstream C — Dev Duplicate Audit Helper
 
@@ -181,7 +240,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | Out of Scope | Automatic deletion, patient merge mutation, production admin UI, app runtime behaviour changes |
 | Verification | Plan packet first; after approval run helper against dev DB if available and confirm safe failure without DB settings |
 | Plan Gate | Required before coding |
-| Status | Dispatched |
+| Status | Integrated |
 
 ## Sprint 17: Command/Proposal Workflow Retrofit
 

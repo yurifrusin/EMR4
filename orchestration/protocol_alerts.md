@@ -2,6 +2,15 @@
 
 Read these before acting on remembered process details.
 
+- 2026-06-23: For current project state, trust refs/audit first, then
+  `orchestration/sprint_closeout.md`, `orchestration/integration_log.md`,
+  `orchestration/protocol_alerts.md`, and `AGENTS.md`. Historical sections in
+  `orchestration/parallel_workstreams.md` help with context but must not
+  override closeout/log/audit state.
+- 2026-06-23: Normal polling is now fast and skips old remote `codex/*`
+  disposable worker refs. Use `python scripts\agent_worktrees.py poll --fetch`
+  by default. Use `--include-codex-workers` only when a current Codex subagent
+  submit is expected.
 - 2026-06-17: `submit` has been fixed to resolve the active worktree root. Use
   the task packet's `submit` command. Do not manually push to `master`.
 - Standing orchestration rule: every protocol-followed command should be reported
