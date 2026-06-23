@@ -247,10 +247,13 @@ python scripts\agent_worktrees.py poll --fetch --include-codex-workers
 
 After `poll --fetch` shows the expected implementation review packets for the
 active sprint, Codex/orchestrator may proceed through inspection, bounded repair,
-verification, integration, closeout, and mirror realignment unless a packet is
-missing, out of scope, unsafe, failing verification, or otherwise needs user or
-worker clarification. This post-poll integration permission is separate from the
-plan gate: workers still must not implement until the explicit
+verification, and draft closeout unless a packet is missing, out of scope,
+unsafe, failing verification, or otherwise needs user or worker clarification.
+Before pushing sprint changes to `master`, Ariadne should summarize the review
+result, verification run, and manual user tests from `orchestration/sprint_closeout.md`,
+then wait for user approval unless the user explicitly granted proceed-through
+integration for that sprint. This post-poll review permission is separate from
+the plan gate: workers still must not implement until the explicit
 `complete sprint task` approval is given.
 
 After Codex integrates a submit, it must:
@@ -262,8 +265,11 @@ After Codex integrates a submit, it must:
 python scripts\agent_worktrees.py record-integration --agent antigravity --task antigravity-example --branch antigravity/current --review "Reviewed and integrated" --integration-commit HEAD --result integrated --follow-up "Mirrors realigned"
 ```
 
-3. Push `master` and `handoff/current`.
-4. Realign each clean durable worker mirror to the integrated baton from that
+3. Update or finalize `orchestration/sprint_closeout.md`.
+4. Report the closeout summary to the user before pushing unless the user has
+   explicitly granted proceed-through integration for that sprint.
+5. Push `master` and `handoff/current`.
+6. Realign each clean durable worker mirror to the integrated baton from that
    worker worktree:
 
 ```powershell
@@ -278,13 +284,13 @@ mirror branch with `--force-with-lease`, so the next worker submit starts from a
 clean remote baseline. Use `--no-push` only for a deliberate local-only repair.
 Dirty mirrors must be reviewed before realign.
 
-5. Run the orchestration audit:
+7. Run the orchestration audit:
 
 ```powershell
 python scripts\agent_worktrees.py audit --fetch
 ```
 
-6. Retire stale disposable worker worktrees only after audit confirms they are clean:
+8. Retire stale disposable worker worktrees only after audit confirms they are clean:
 
 ```powershell
 python scripts\agent_worktrees.py retire-stale
@@ -294,7 +300,7 @@ python scripts\agent_worktrees.py retire-stale --apply
 `retire-stale` is a dry run by default. Dirty worktrees are never removed by the
 routine; they must be reviewed or explicitly abandoned first.
 
-7. Update `orchestration/sprint_closeout.md` and report to the user:
+9. Report final post-push closeout status to the user:
    - what they should manually test before the next dispatch
    - what does not need manual testing yet
    - where Codex recommends taking the project next

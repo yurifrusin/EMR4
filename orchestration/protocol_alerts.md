@@ -67,11 +67,14 @@ Read these before acting on remembered process details.
   have submitted or been explicitly stood down.
 - Post-poll review rule: once `poll --fetch` shows the expected implementation
   review packets for the active sprint, Codex/orchestrator may proceed through
-  local inspection, bounded repair, verification, integration, closeout, and
-  mirror realignment without asking for another approval, unless a submission is
-  missing, out of scope, unsafe, failing verification, or otherwise needs user or
-  worker clarification. Plan-gated approval still requires explicit
-  `complete sprint task` before workers begin implementation.
+  local inspection, bounded repair, verification, and draft closeout unless a
+  submission is missing, out of scope, unsafe, failing verification, or otherwise
+  needs user or worker clarification. Before pushing sprint changes to `master`,
+  Ariadne should summarize the inspection result, verification run, and manual
+  user tests from `orchestration/sprint_closeout.md`, then wait for user approval
+  unless the user explicitly granted proceed-through integration for that sprint.
+  Plan-gated approval still requires explicit `complete sprint task` before
+  workers begin implementation.
 - Protocol amendment rule: prefer batching non-urgent orchestration protocol edits
   until the discussion settles. Codex should remind the user before launch if
   agreed protocol edits are still pending.
