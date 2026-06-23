@@ -3232,6 +3232,10 @@ async function getErrorMessage(res) {
 // ─── ADMIN MODAL CONTROLLER ────────────────────────────────────
 let adminActiveTab = "rooms";
 let pendingAdminArchiveKey = null;
+let adminRoomCache = [];
+let adminAreaCache = [];
+let adminLastSavedRoomId = null;
+let adminLastSavedAreaId = null;
 
 function initAdminPanel() {
   const adminBtn = document.getElementById("btn-admin-panel");
@@ -3296,6 +3300,7 @@ function initAdminPanel() {
 
   document.getElementById("btn-add-room-trigger").onclick = () => showRoomForm(null);
   document.getElementById("btn-cancel-room-form").onclick = () => hideRoomForm();
+  document.getElementById("btn-cancel-room-form-top").onclick = () => hideRoomForm();
   document.getElementById("room-form").onsubmit = async (e) => {
     e.preventDefault();
     await handleSaveRoom();
@@ -3303,6 +3308,7 @@ function initAdminPanel() {
 
   document.getElementById("btn-add-area-trigger").onclick = () => showAreaForm(null);
   document.getElementById("btn-cancel-area-form").onclick = () => hideAreaForm();
+  document.getElementById("btn-cancel-area-form-top").onclick = () => hideAreaForm();
   document.getElementById("area-form").onsubmit = async (e) => {
     e.preventDefault();
     await handleSaveArea();
@@ -3380,6 +3386,8 @@ async function renderRoomsTab() {
       fetchRooms(activeLocationId),
       fetchWaitingAreas(activeLocationId)
     ]);
+    adminRoomCache = Array.isArray(roomsList) ? roomsList : [];
+    adminAreaCache = Array.isArray(areasList) ? areasList : [];
 
     const waitingSelect = document.getElementById("room-input-waiting");
     waitingSelect.innerHTML = `<option value="">[None]</option>`;
@@ -3396,11 +3404,15 @@ async function renderRoomsTab() {
       return;
     }
 
-    roomsList.sort((a, b) => a.display_order - b.display_order);
+    roomsList.sort(sortAdminResourceItems);
 
     roomsList.forEach(room => {
       const card = document.createElement("div");
       card.className = "admin-item-card";
+      if (room.id === adminLastSavedRoomId) {
+        card.classList.add("admin-item-card--highlight");
+        setTimeout(() => card.scrollIntoView({ block: "nearest", inline: "nearest" }), 0);
+      }
 
       const defaultArea = areasList.find(a => a.id === room.default_waiting_area_id);
       const areaLabel = defaultArea ? defaultArea.name : "[None]";
@@ -3436,17 +3448,22 @@ async function renderAreasTab() {
 
   try {
     const areasList = await fetchWaitingAreas(activeLocationId);
+    adminAreaCache = Array.isArray(areasList) ? areasList : [];
     container.innerHTML = "";
     if (!areasList.length) {
       container.innerHTML = `<div style="text-align:center; padding: 20px; color: var(--grey-3);">No waiting areas configured for this location.</div>`;
       return;
     }
 
-    areasList.sort((a, b) => a.display_order - b.display_order);
+    areasList.sort(sortAdminResourceItems);
 
     areasList.forEach(area => {
       const card = document.createElement("div");
       card.className = "admin-item-card";
+      if (area.id === adminLastSavedAreaId) {
+        card.classList.add("admin-item-card--highlight");
+        setTimeout(() => card.scrollIntoView({ block: "nearest", inline: "nearest" }), 0);
+      }
 
       card.innerHTML = `
         <div class="admin-item-info">
@@ -3478,6 +3495,20 @@ function escapeHTML(str) {
   );
 }
 
+function sortAdminResourceItems(a, b) {
+  const orderDelta = (Number(a.display_order) || 0) - (Number(b.display_order) || 0);
+  if (orderDelta !== 0) return orderDelta;
+  return String(a.name || "").localeCompare(String(b.name || ""));
+}
+
+function getNextAdminDisplayOrder(items) {
+  const maxOrder = (Array.isArray(items) ? items : []).reduce((max, item) => {
+    const order = Number(item && item.display_order);
+    return Number.isFinite(order) ? Math.max(max, order) : max;
+  }, -1);
+  return String(maxOrder + 1);
+}
+
 function showRoomForm(room) {
   document.getElementById("room-list-view").classList.add("hidden");
   document.getElementById("room-form-view").classList.remove("hidden");
@@ -3499,9 +3530,10 @@ function showRoomForm(room) {
     titleEl.textContent = "Add Room";
     editIdEl.value = "";
     nameEl.value = "";
-    orderEl.value = "1";
+    orderEl.value = getNextAdminDisplayOrder(adminRoomCache);
     waitingEl.value = "";
   }
+  nameEl.focus();
 }
 
 function hideRoomForm() {
@@ -3532,7 +3564,8 @@ async function handleSaveRoom() {
   }
 
   try {
-    await saveRoom(roomPayload);
+    const savedRoom = await saveRoom(roomPayload);
+    adminLastSavedRoomId = savedRoom && savedRoom.id ? savedRoom.id : editId || null;
     setAdminInfo(editId ? "Room updated successfully." : "Room created successfully.");
     await renderRoomsTab();
   } catch (err) {
@@ -3572,8 +3605,9 @@ function showAreaForm(area) {
     titleEl.textContent = "Add Waiting Area";
     editIdEl.value = "";
     nameEl.value = "";
-    orderEl.value = "1";
+    orderEl.value = getNextAdminDisplayOrder(adminAreaCache);
   }
+  nameEl.focus();
 }
 
 function hideAreaForm() {
@@ -3602,7 +3636,8 @@ async function handleSaveArea() {
   }
 
   try {
-    await saveWaitingArea(areaPayload);
+    const savedArea = await saveWaitingArea(areaPayload);
+    adminLastSavedAreaId = savedArea && savedArea.id ? savedArea.id : editId || null;
     setAdminInfo(editId ? "Waiting area updated successfully." : "Waiting area created successfully.");
     await renderAreasTab();
   } catch (err) {

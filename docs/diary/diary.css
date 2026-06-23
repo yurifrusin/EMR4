@@ -1354,12 +1354,15 @@ html, body {
   gap: 3px;
   margin-bottom: 12px;
   min-height: 34px;
-  /* Hide scrollbar */
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--grey-3) transparent;
 }
 .flow-tabs-container::-webkit-scrollbar {
-  display: none;
+  height: 6px;
+}
+.flow-tabs-container::-webkit-scrollbar-thumb {
+  background: var(--grey-3);
+  border-radius: 999px;
 }
 
 .flow-tabs-container.hidden {
@@ -1914,6 +1917,12 @@ html, body {
   border-color: var(--grey-3);
 }
 
+.admin-item-card.admin-item-card--highlight {
+  border-color: var(--blue-mid);
+  box-shadow: 0 0 0 2px rgba(0, 84, 164, 0.12);
+  background: rgba(0, 84, 164, 0.04);
+}
+
 .admin-item-info {
   display: flex;
   flex-direction: column;
@@ -1939,6 +1948,33 @@ html, body {
   display: flex;
   gap: 4px;
   flex-shrink: 0;
+}
+
+.admin-form-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.admin-form-heading h4 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.admin-form-heading-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.admin-form-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
 }
 
 #admin-access-denied {

@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=78" />
-  <script src="diary.js?v=78" defer></script>
+  <link rel="stylesheet" href="diary.css?v=79" />
+  <script src="diary.js?v=79" defer></script>
 </head>
 <body>
 
@@ -221,7 +221,13 @@
           </div>
 
           <div id="room-form-view" class="hidden">
-            <h4 id="room-form-title" style="margin-bottom: 12px; font-weight: 600;">Add Room</h4>
+            <div class="admin-form-heading">
+              <h4 id="room-form-title">Add Room</h4>
+              <div class="admin-form-heading-actions">
+                <button id="btn-cancel-room-form-top" type="button" class="btn-ghost-sm">Cancel</button>
+                <button type="submit" form="room-form" class="btn-primary-sm">Save Room</button>
+              </div>
+            </div>
             <form id="room-form" onsubmit="return false;">
               <input type="hidden" id="room-edit-id" />
               <div class="form-group">
@@ -240,7 +246,7 @@
                   </select>
                 </div>
               </div>
-              <div class="form-actions-row" style="margin-top: 12px; display: flex; gap: 8px; justify-content: flex-end;">
+              <div class="form-actions-row admin-form-actions">
                 <button id="btn-cancel-room-form" type="button" class="btn-ghost-sm">Cancel</button>
                 <button id="btn-save-room" type="submit" class="btn-primary-sm">Save Room</button>
               </div>
@@ -256,7 +262,13 @@
           </div>
 
           <div id="area-form-view" class="hidden">
-            <h4 id="area-form-title" style="margin-bottom: 12px; font-weight: 600;">Add Waiting Area</h4>
+            <div class="admin-form-heading">
+              <h4 id="area-form-title">Add Waiting Area</h4>
+              <div class="admin-form-heading-actions">
+                <button id="btn-cancel-area-form-top" type="button" class="btn-ghost-sm">Cancel</button>
+                <button type="submit" form="area-form" class="btn-primary-sm">Save Waiting Area</button>
+              </div>
+            </div>
             <form id="area-form" onsubmit="return false;">
               <input type="hidden" id="area-edit-id" />
               <div class="form-group">
@@ -267,9 +279,9 @@
                 <label for="area-input-order">Display Order:</label>
                 <input type="number" id="area-input-order" required min="1" value="1" />
               </div>
-              <div class="form-actions-row" style="margin-top: 12px; display: flex; gap: 8px; justify-content: flex-end;">
+              <div class="form-actions-row admin-form-actions">
                 <button id="btn-cancel-area-form" type="button" class="btn-ghost-sm">Cancel</button>
-                <button id="btn-save-area" type="submit" class="btn-primary-sm">Save Area</button>
+                <button id="btn-save-area" type="submit" class="btn-primary-sm">Save Waiting Area</button>
               </div>
             </form>
           </div>
