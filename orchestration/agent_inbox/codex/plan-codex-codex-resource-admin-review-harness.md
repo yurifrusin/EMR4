@@ -4,6 +4,7 @@
 |---|---|
 | To | codex |
 | From | codex |
+| Role | orchestrator |
 | Branch | `master` |
 | Source Task | `codex-resource-admin-review-harness` |
 | Status | pending_plan_review |
@@ -44,6 +45,6 @@ Backend route names or payloads may differ from the initial Sprint 19 packet, so
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Approved. This is Ariadne/orchestrator review scaffolding, not a Codex worker implementation branch.
+- Required changes before implementation: Keep edits to orchestration/review docs only; label API snippets as review aids until Claude's final contract lands; preserve the vocabulary guardrails around location, room, waiting area, diary view, status, patient identity, booking confirmation, and Bernie proposal-only boundaries.
+- Approved to proceed: yes
