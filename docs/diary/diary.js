@@ -3294,8 +3294,7 @@ function confirmAdminArchive(key, message) {
     if (typeof window.confirm === "function") {
       return window.confirm(message);
     }
-  } catch (err) {
-    console.warn("Native confirmation dialog unavailable for admin archive:", err);
+  } catch (_) {
   }
 
   if (pendingAdminArchiveKey === key) {
