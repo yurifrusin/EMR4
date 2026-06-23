@@ -26,6 +26,7 @@ let waitingAreas = [];
 const checkinDefaultCache = new Map();
 
 const LOCATION_STORAGE_KEY = "emr4_diary_active_location";
+const FLOW_PANEL_OPEN_KEY = "emr4_diary_flow_open";
 let activeLocationId = localStorage.getItem(LOCATION_STORAGE_KEY) || null;
 let locationOptionsLoaded = false;
 const mockLocations = [
@@ -1502,9 +1503,11 @@ async function loadDiary(silent = false, options = {}) {
     }
 
     // Refresh flow panel if it's currently open, else update badge count
-    if (localStorage.getItem("emr4_diary_flow_open") === "true") {
+    if (localStorage.getItem(FLOW_PANEL_OPEN_KEY) === "true") {
+      setFlowPanelVisibility(true, false);
       await updateFlowPanel();
     } else {
+      setFlowPanelVisibility(false, false);
       updateFlowBadgeCount();
     }
 
@@ -1708,11 +1711,13 @@ Office.onReady(() => {
   if (btnToggleFlow) btnToggleFlow.onclick = toggleFlowPanel;
 
   const btnCloseFlow = document.getElementById("btn-close-flow");
-  if (btnCloseFlow) btnCloseFlow.onclick = toggleFlowPanel;
+  if (btnCloseFlow) btnCloseFlow.onclick = closeFlowPanel;
 
-  const flowOpen = localStorage.getItem("emr4_diary_flow_open");
+  const flowOpen = localStorage.getItem(FLOW_PANEL_OPEN_KEY);
   if (flowOpen === "true") {
-    document.getElementById("diary-flow-panel")?.classList.remove("hidden");
+    setFlowPanelVisibility(true, false);
+  } else {
+    setFlowPanelVisibility(false, false);
   }
 
   // Collapsible section title listeners
@@ -2428,6 +2433,21 @@ async function deleteBooking() {
 let todayAppointments = [];
 let selectedWaitingAreaTab = "all";
 
+function setFlowPanelVisibility(isOpen, persist = true) {
+  const panel = document.getElementById("diary-flow-panel");
+  const toggleBtn = document.getElementById("btn-toggle-flow");
+  if (panel) {
+    panel.classList.toggle("hidden", !isOpen);
+  }
+  if (toggleBtn) {
+    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    toggleBtn.classList.toggle("active", isOpen);
+  }
+  if (persist) {
+    localStorage.setItem(FLOW_PANEL_OPEN_KEY, isOpen ? "true" : "false");
+  }
+}
+
 async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null) {
   if (!await confirmUnidentifiedProgress(appt, newStatus)) {
     if (selectEl) selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
@@ -2490,13 +2510,17 @@ function toggleFlowPanel() {
   if (!panel) return;
   const isHidden = panel.classList.contains("hidden");
   if (isHidden) {
-    panel.classList.remove("hidden");
-    localStorage.setItem("emr4_diary_flow_open", "true");
+    setFlowPanelVisibility(true);
     updateFlowPanel();
   } else {
-    panel.classList.add("hidden");
-    localStorage.setItem("emr4_diary_flow_open", "false");
+    setFlowPanelVisibility(false);
+    updateFlowBadgeCount();
   }
+}
+
+function closeFlowPanel() {
+  setFlowPanelVisibility(false);
+  updateFlowBadgeCount();
 }
 
 function updateFlowBadgeCount() {
