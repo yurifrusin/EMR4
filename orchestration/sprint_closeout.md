@@ -75,9 +75,8 @@ Completed Ariadne smoke steps:
 
 ## Recommended Next Direction
 
-1. Continue Programme 2B with the next safe appointment mutation slice: likely
-   drag/drop/resize proposal preflight or another narrow receptionist mutation
-   path, depending on current board priority.
+1. Sprint 26 is dispatched for the next Programme 2B safe appointment mutation
+   slice: move/resize proposal flow.
 2. Keep using Chrome/CDP smoke checks before leaving any UI review to Yuri.
 
 ## Previous Closeout - Sprint 23

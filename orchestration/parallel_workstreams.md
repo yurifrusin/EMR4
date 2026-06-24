@@ -153,6 +153,55 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 26: Move/Resize Proposal Flow
+
+| Item | Value |
+|---|---|
+| Programme | Phase 2 Programme 2B - Safe Appointment Mutation Workbench |
+| Status | Dispatched and plan-gated |
+| Launch Gate | Awaiting Claude and Antigravity implementation-plan packets |
+| Integration Gate | Closed until plans are accepted and implementation is released with `complete sprint task` |
+| Theme | Bring appointment move/resize interactions under the same proposal-first safety rail as create/edit/status/waiting-area changes |
+
+### Workstream S26-A - Backend Move/Resize Proposal Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-move-resize-proposal-contract.md` |
+| Goal | Plan and then harden the backend update-proposal contract for drag/drop-like date/time/resource moves and duration resize changes before any write |
+| In Scope | Backend appointment update proposal route/schema/tests as needed; conflict blocks, break warnings, terminal-status blocks, practice isolation, and non-mutating proof |
+| Out of Scope | Diary frontend implementation, drag/drop/resize UI, taskpane, Command Centre, Gemini, migrations unless the plan proves a schema issue, broad appointment redesign |
+| Verification | Plan packet first; after approval focused appointment update proposal pytest checks, py_compile/check_backend as needed, and row-unchanged assertions |
+| Status | Queued |
+
+### Workstream S26-B - Diary Move/Resize Proposal Flow
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-move-resize-proposal-flow.md` |
+| Goal | Plan and then add or prepare the smallest diary UI path for appointment move/resize interactions to use proposal preflight before mutation |
+| In Scope | `docs/diary/diary.html`, `docs/diary/diary.js`, smoke helpers, and minimal CSS only if required and documented; assess current absence/presence of drag/drop/resize affordances |
+| Out of Scope | Backend route/schema changes, taskpane, Command Centre, Gemini, Resource Administration, Waiting Room layout, recurrence, broad visual redesign |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, `npm run validate-all`, smoke-mode proposal checks, and Ariadne Chrome/CDP checks where feasible |
+| Status | Queued |
+
+### Workstream S26-C - Ariadne Integration and Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex/Ariadne |
+| Branch | `master` integration worktree |
+| Role | orchestrator |
+| Goal | Review Sprint 26 plans together, release implementation only after plan approval, inspect diffs, run feasible verification, integrate, close out, push, realign, audit, and notify Yuri |
+| In Scope | `poll --fetch`, plan/review inspection, focused backend/frontend checks, Chrome/CDP/live diary smoke where relevant, bounded safe repairs |
+| Out of Scope | Acting as proof of a separate Codex worker submission or bypassing worker plan gates |
+| Verification | `poll --fetch`, exact diff review, focused tests, browser/Chrome checks if runtime UI changes land, `git diff --check` |
+| Status | Ariadne-owned |
+
 ## Sprint 25: Status/Waiting-Area Proposal Retrofit
 
 | Item | Value |
