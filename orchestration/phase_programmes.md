@@ -53,7 +53,7 @@ tracks that actual architecture.
 | Status | In progress |
 | Outcome | Reception can create, edit, link, and status-change appointments through proposal-first flows with clear conflict/break/provisional warnings |
 | Representative Sprints | Command proposal layer, create proposal flow, appointment update/status proposal contract, provisional patient linking, duplicate review API, patient search alerts |
-| Next Candidate Sprints | Sprint 24 appointment edit proposal flow dispatched; then reschedule/move flow, cancel/no-show/DNA confirmation semantics, recurrence/reason-note polish |
+| Next Candidate Sprints | Sprint 25 status/waiting-area proposal retrofit dispatched; then drag/reschedule design groundwork, cancel/no-show/DNA confirmation semantics, recurrence/reason-note polish |
 | Done Signals | All high-risk receptionist appointment writes pass through deterministic proposal/confirmation contracts before mutation |
 
 ### Programme 2C - Ariadne Tooling and Review Automation
@@ -90,12 +90,12 @@ tracks that actual architecture.
 Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
-1. If product flow is the priority: continue **Programme 2B** with appointment
-   edit/reschedule proposal UI.
+1. If product flow is the priority: continue **Programme 2B** with the active
+   Sprint 25 status/waiting-area proposal retrofit, then drag/reschedule design.
 2. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
 3. If Bernie is becoming tempting: keep it in **Programme 2D** design/tool-schema
    preparation until Programme 2B's mutation contracts are mature.
 
-The default recommendation after Sprint 23 is **Programme 2B** unless Yuri wants
+The default recommendation after Sprint 24 is **Programme 2B** unless Yuri wants
 one more tooling sprint first.

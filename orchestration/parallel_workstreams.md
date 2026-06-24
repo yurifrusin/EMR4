@@ -153,14 +153,63 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 25: Status/Waiting-Area Proposal Retrofit
+
+| Item | Value |
+|---|---|
+| Programme | Phase 2 Programme 2B - Safe Appointment Mutation Workbench |
+| Status | Dispatched and plan-gated |
+| Launch Gate | Awaiting Claude and Antigravity implementation-plan packets |
+| Integration Gate | Closed until plans are accepted and implementation is released with `complete sprint task` |
+| Theme | Bring receptionist-facing status, check-in, and waiting-area changes under the same proposal-first safety rail as create/edit |
+
+### Workstream S25-A - Backend Status/Waiting-Area Proposal Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-status-waiting-area-proposal-contract.md` |
+| Goal | Plan and then extend appointment proposal contracts so status and waiting-area mutations can be preflighted before any write |
+| In Scope | Backend appointment proposal schemas/routes/tests; deterministic block/warning/allow responses; practice/location/resource safety; no-write proposal behavior |
+| Out of Scope | Diary frontend implementation, drag/drop/resize, recurrence, taskpane/Command Centre/Gemini, Resource Administration UI, patient duplicate workflow |
+| Verification | Plan packet first; after approval focused appointment status/waiting-area/proposal pytest checks, import/check_backend as needed, and proof that proposal calls do not mutate appointments |
+| Status | Queued |
+
+### Workstream S25-B - Diary Status/Waiting-Area Proposal Flow
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-status-waiting-area-proposal-flow.md` |
+| Goal | Plan and then route diary status/check-in/waiting-area changes through proposal preflight before mutation, matching the create/edit Confirm & Save pattern |
+| In Scope | `docs/diary/diary.{html,css,js}`, status controls, waiting-room/check-in affordances, proposal handling, smoke/live-test helpers, cache-busting |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre/Gemini, drag/drop/resize, recurrence, Resource Administration, patient duplicate review, broad visual redesign |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, smoke-mode allowed/blocked/warning/reset/API-failure checks, and Ariadne live Chrome/CDP checks after integration |
+| Status | Queued |
+
+### Workstream S25-C - Ariadne Integration and Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex/Ariadne |
+| Role | orchestrator |
+| Branch | `master` only for orchestration docs and final integration |
+| Goal | Review plans together, ensure backend/UI proposal semantics match, run all feasible tool-enabled tests including live browser checks, and leave only genuine Yuri-only checks if any |
+| In Scope | Plan review, polling, integration sequencing, bounded repairs, closeout/user-test summary, next-sprint recommendation |
+| Out of Scope | Acting as proof of a separate Codex worker submission or bypassing worker plan gates |
+| Verification | `poll --fetch`, plan/review inspection, focused backend/frontend checks, Chrome/CDP/live diary smoke where relevant, `git diff --check` |
+| Status | Ariadne-owned |
+
 ## Sprint 24: Appointment Edit Proposal Flow
 
 | Item | Value |
 |---|---|
 | Programme | Phase 2 Programme 2B - Safe Appointment Mutation Workbench |
-| Status | Integrated locally; closeout in progress |
+| Status | Integrated, pushed, mirrored, audited, and Ariadne live Chrome/CDP smoke passed |
 | Launch Gate | Complete; plans accepted and implementation released with `complete sprint task` |
-| Integration Gate | Complete locally; push, mirror realignment, audit, and residual live review pending |
+| Integration Gate | Complete |
 | Theme | Route receptionist-facing appointment edit/reschedule through the formal non-mutating proposal layer before writing changes |
 
 ### Workstream S24-A - Backend Edit Proposal Contract Hardening

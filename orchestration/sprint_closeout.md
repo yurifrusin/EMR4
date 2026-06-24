@@ -85,7 +85,7 @@ Completed Ariadne live-smoke steps:
 
 ## Recommended Next Direction
 
-1. Continue Programme 2B toward the next safe appointment mutation slice: likely status/waiting-area proposal retrofit or drag/reschedule design groundwork.
+1. Sprint 25 has been dispatched for the next safe appointment mutation slice: status/waiting-area proposal retrofit.
 2. Use the dedicated Chrome automation profile / Chrome DevTools Protocol path for future live diary smoke tests whenever available.
 3. Keep sprints grouped under Programme 2B so the project advances by coherent appointment-mutation capability rather than isolated micro-tasks.
 
