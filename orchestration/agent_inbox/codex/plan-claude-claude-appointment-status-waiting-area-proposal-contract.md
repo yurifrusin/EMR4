@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-status-waiting-area-proposal-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 08:24 +1000 |
 | Source HEAD | `f16251d` |
 
@@ -44,6 +44,6 @@ waiting_area_assigned_on_terminal warning could affect existing test that sends 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted with backend-only boundary; implementation was released with `complete sprint task`, reviewed, verified, and integrated in Sprint 25.
+- Required changes before implementation: None.
+- Approved to proceed: yes

@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 25: Status/Waiting-Area Proposal Retrofit |
 | Integrated through | Sprint 25 backend status/waiting-area proposal contract and diary proposal preflight flow |
-| Status | Integrated locally with focused backend/frontend and Chrome/CDP smoke verification passing |
+| Status | Integrated, pushed, mirrored, audited, deployed v86 observed, and Ariadne Chrome/CDP smoke passed |
 | Last updated | 2026-06-25 |
 
 ## What Changed
@@ -27,9 +27,8 @@ reviewed, integrated, verified, pushed, and audited.
 
 Residual user review/testing after push/deploy: none required before continuing.
 Ariadne ran the feasible backend, frontend, and Chrome/CDP smoke checks locally.
-After GitHub Pages publishes v86, Ariadne or a later heartbeat can perform the
-usual deployed asset-version observation; no Yuri-only judgment or manual UI
-review is needed for this sprint.
+GitHub Pages v86 deployment has been observed; no Yuri-only judgment or manual
+UI review is needed for this sprint.
 
 Completed Ariadne smoke steps:
 
@@ -58,8 +57,8 @@ Completed Ariadne smoke steps:
 ## Known Follow-Up
 
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
-- Deployed GitHub Pages was still v85 during local validation; v86 deployment
-  observation is useful after push but not a Yuri-only blocker.
+- The existing GitHub Dependabot moderate alert remains visible on push; it is
+  the already-known security queue item and not a Sprint 25 blocker.
 
 ## Verification
 
@@ -68,6 +67,7 @@ Completed Ariadne smoke steps:
 - `.\.venv\Scripts\python.exe -m pytest tests/test_appointment_update_proposal.py -q --tb=short -p no:randomly` -> passed; 27 passed, 1 existing pytest-asyncio deprecation warning.
 - `node --check docs\diary\diary.js` -> passed.
 - `npm run validate-all` in `EMR4 Sidebar` -> passed; manifest valid, production npm audit clean, frontend asset/version check passed. Local/HEAD diary assets are v86; deployed Pages was still v85 before push.
+- `npm run check-assets` in `EMR4 Sidebar` after push -> passed; deployed GitHub Pages diary assets now report `diary.js?v=86` and `diary.css?v=86`.
 - `git diff --check` -> passed.
 - Chrome/CDP local smoke assertions passed for proposal logic and dialog
   affordances: terminal-plus-area warning, waiting-area clear warning,
@@ -75,12 +75,10 @@ Completed Ariadne smoke steps:
 
 ## Recommended Next Direction
 
-1. Push Sprint 25, realign worker mirrors, audit, and observe deployed v86 when
-   GitHub Pages catches up.
-2. Continue Programme 2B with the next safe appointment mutation slice: likely
+1. Continue Programme 2B with the next safe appointment mutation slice: likely
    drag/drop/resize proposal preflight or another narrow receptionist mutation
    path, depending on current board priority.
-3. Keep using Chrome/CDP smoke checks before leaving any UI review to Yuri.
+2. Keep using Chrome/CDP smoke checks before leaving any UI review to Yuri.
 
 ## Previous Closeout - Sprint 23
 

@@ -158,9 +158,9 @@ at medium/high once the plan is stable, then think hard again before integration
 | Item | Value |
 |---|---|
 | Programme | Phase 2 Programme 2B - Safe Appointment Mutation Workbench |
-| Status | Integrated locally with focused backend/frontend and Chrome/CDP smoke verification passing |
+| Status | Integrated, pushed, mirrored, audited, and deployed v86 observed |
 | Launch Gate | Complete; Claude and Antigravity plans accepted and implementation released with `complete sprint task` |
-| Integration Gate | Complete locally; push, mirror realignment, and audit pending |
+| Integration Gate | Complete |
 | Theme | Bring receptionist-facing status, check-in, and waiting-area changes under the same proposal-first safety rail as create/edit |
 
 ### Workstream S25-A - Backend Status/Waiting-Area Proposal Contract
@@ -174,7 +174,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Backend appointment proposal schemas/routes/tests; deterministic block/warning/allow responses; practice/location/resource safety; no-write proposal behavior |
 | Out of Scope | Diary frontend implementation, drag/drop/resize, recurrence, taskpane/Command Centre/Gemini, Resource Administration UI, patient duplicate workflow |
 | Verification | Plan packet first; after approval focused appointment status/waiting-area/proposal pytest checks, import/check_backend as needed, and proof that proposal calls do not mutate appointments |
-| Status | Integrated locally |
+| Status | Integrated |
 
 ### Workstream S25-B - Diary Status/Waiting-Area Proposal Flow
 
@@ -187,7 +187,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}`, status controls, waiting-room/check-in affordances, proposal handling, smoke/live-test helpers, cache-busting |
 | Out of Scope | Backend routes/models/tests/migrations, taskpane/Command Centre/Gemini, drag/drop/resize, recurrence, Resource Administration, patient duplicate review, broad visual redesign |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, smoke-mode allowed/blocked/warning/reset/API-failure checks, and Ariadne live Chrome/CDP checks after integration |
-| Status | Integrated locally |
+| Status | Integrated |
 
 ### Workstream S25-C - Ariadne Integration and Review
 
@@ -200,7 +200,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Plan review, polling, integration sequencing, bounded repairs, closeout/user-test summary, next-sprint recommendation |
 | Out of Scope | Acting as proof of a separate Codex worker submission or bypassing worker plan gates |
 | Verification | `poll --fetch`, plan/review inspection, focused backend/frontend checks, Chrome/CDP/live diary smoke where relevant, `git diff --check` |
-| Status | Integrated locally |
+| Status | Integrated |
 
 ## Sprint 24: Appointment Edit Proposal Flow
 

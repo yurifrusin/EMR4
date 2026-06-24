@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-status-waiting-area-proposal-flow` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 08:22 +1000 |
 | Source HEAD | `f16251d` |
 
@@ -44,6 +44,6 @@ None.
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted with diary-only boundary; implementation was released with `complete sprint task`, reviewed, verified, and integrated in Sprint 25.
+- Required changes before implementation: None.
+- Approved to proceed: yes
