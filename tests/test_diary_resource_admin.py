@@ -331,9 +331,26 @@ def test_rooms_archive_preserves_roster(client, db, admin_user, practice, practi
     assert entry is not None  # roster entry still exists (not cascade-deleted)
 
 
-def test_rooms_clear_default_waiting_area(client, db, admin_user, practice):
+def test_rooms_clear_default_waiting_area_resolves_to_fallback_when_area_exists(
+        client, db, admin_user, practice):
+    # Invariant: active rooms cannot be left without a default if one is available.
+    # Explicit null is treated as a fallback-request, not an unconditional clear.
     area = _area(db, practice)
     room = _room(db, practice, default_area=area.id)
+    r = client.patch(
+        f"/api/v1/diary/rooms/{room.id}",
+        json={"default_waiting_area_id": None},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    assert r.json()["default_waiting_area_id"] == str(area.id)
+
+
+def test_rooms_clear_default_waiting_area_stays_null_when_no_active_area(
+        client, db, admin_user, practice):
+    # When no active area exists, a null request results in null (no area to resolve to).
+    area = _area(db, practice, is_active=False)
+    room = _room(db, practice, default_area=None)
     r = client.patch(
         f"/api/v1/diary/rooms/{room.id}",
         json={"default_waiting_area_id": None},
@@ -485,3 +502,220 @@ def test_waiting_areas_archived_rejected_as_room_default(client, db, admin_user,
         headers={"Authorization": f"Bearer {make_token(admin_user)}"},
     )
     assert r.status_code == 400
+
+
+# ─── Default waiting-area invariant: create_room ──────────────────────────────
+
+def test_rooms_create_no_default_auto_assigns_lowest_display_order_area(
+        client, db, admin_user, practice):
+    area = _area(db, practice, "Main Waiting Room", order=0)
+    r = client.post(
+        "/api/v1/diary/rooms",
+        json={"name": "Room 1", "display_order": 0},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 201
+    assert r.json()["default_waiting_area_id"] == str(area.id)
+
+
+def test_rooms_create_no_default_stays_null_when_no_active_area(
+        client, admin_user):
+    r = client.post(
+        "/api/v1/diary/rooms",
+        json={"name": "Room 1", "display_order": 0},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 201
+    assert r.json()["default_waiting_area_id"] is None
+
+
+def test_rooms_create_auto_assigns_display_order_0_among_multiple_areas(
+        client, db, admin_user, practice):
+    area_b = _area(db, practice, "Secondary Area", order=1)
+    area_a = _area(db, practice, "Primary Area", order=0)
+    r = client.post(
+        "/api/v1/diary/rooms",
+        json={"name": "Room 1", "display_order": 0},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 201
+    assert r.json()["default_waiting_area_id"] == str(area_a.id)
+
+
+# ─── Default waiting-area invariant: archive waiting area ─────────────────────
+
+def test_waiting_area_archive_reassigns_room_default_to_next_active_area(
+        client, db, admin_user, practice):
+    area_a = _area(db, practice, "Area A", order=0)
+    area_b = _area(db, practice, "Area B", order=1)
+    room = _room(db, practice, default_area=area_a.id)
+
+    r = client.patch(
+        f"/api/v1/diary/waiting-areas/{area_a.id}",
+        json={"is_active": False},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+
+    db.expire(room)
+    db.refresh(room)
+    assert room.default_waiting_area_id == area_b.id
+
+
+def test_waiting_area_archive_clears_room_default_when_no_alternative(
+        client, db, admin_user, practice):
+    area = _area(db, practice, "Only Area", order=0)
+    room = _room(db, practice, default_area=area.id)
+
+    r = client.patch(
+        f"/api/v1/diary/waiting-areas/{area.id}",
+        json={"is_active": False},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+
+    db.expire(room)
+    db.refresh(room)
+    assert room.default_waiting_area_id is None
+
+
+def test_waiting_area_archive_only_affects_active_rooms(
+        client, db, admin_user, practice):
+    area_a = _area(db, practice, "Area A", order=0)
+    area_b = _area(db, practice, "Area B", order=1)
+    active_room = _room(db, practice, "Active Room", order=0, default_area=area_a.id)
+    inactive_room = _room(db, practice, "Inactive Room", order=1, is_active=False, default_area=area_a.id)
+
+    r = client.patch(
+        f"/api/v1/diary/waiting-areas/{area_a.id}",
+        json={"is_active": False},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+
+    db.expire(active_room)
+    db.expire(inactive_room)
+    db.refresh(active_room)
+    db.refresh(inactive_room)
+    assert active_room.default_waiting_area_id == area_b.id
+    assert inactive_room.default_waiting_area_id == area_a.id
+
+
+def test_waiting_area_archive_location_scoped_does_not_affect_incompatible_rooms(
+        client, db, admin_user, practice):
+    from app.models.tenancy import PracticeLocation
+    loc_x = PracticeLocation(practice_id=practice.id, name="Clinic X", is_active=True)
+    loc_y = PracticeLocation(practice_id=practice.id, name="Clinic Y", is_active=True)
+    db.add(loc_x)
+    db.add(loc_y)
+    db.flush()
+
+    area_x = WaitingArea(practice_id=practice.id, location_id=loc_x.id,
+                         name="Area X", display_order=0, is_active=True)
+    area_y = WaitingArea(practice_id=practice.id, location_id=loc_y.id,
+                         name="Area Y", display_order=0, is_active=True)
+    db.add(area_x)
+    db.add(area_y)
+    db.flush()
+
+    room_x = Room(practice_id=practice.id, location_id=loc_x.id,
+                  name="Room X", display_order=0, is_active=True,
+                  default_waiting_area_id=area_x.id)
+    room_y = Room(practice_id=practice.id, location_id=loc_y.id,
+                  name="Room Y", display_order=0, is_active=True,
+                  default_waiting_area_id=area_y.id)
+    db.add(room_x)
+    db.add(room_y)
+    db.flush()
+
+    r = client.patch(
+        f"/api/v1/diary/waiting-areas/{area_x.id}",
+        json={"is_active": False},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+
+    db.expire(room_x)
+    db.expire(room_y)
+    db.refresh(room_x)
+    db.refresh(room_y)
+    assert room_x.default_waiting_area_id is None
+    assert room_y.default_waiting_area_id == area_y.id
+
+
+# ─── Default waiting-area invariant: update_room ──────────────────────────────
+
+def test_rooms_update_explicit_null_resolves_to_fallback(
+        client, db, admin_user, practice):
+    area = _area(db, practice, "Main Area", order=0)
+    room = _room(db, practice, default_area=area.id)
+    other_area = _area(db, practice, "Secondary Area", order=1)
+
+    r = client.patch(
+        f"/api/v1/diary/rooms/{room.id}",
+        json={"default_waiting_area_id": None},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    assert r.json()["default_waiting_area_id"] == str(area.id)
+
+
+def test_rooms_update_omitted_field_resolves_null_default(
+        client, db, admin_user, practice):
+    area = _area(db, practice, "Main Area", order=0)
+    room = _room(db, practice, "Room 1", default_area=None)
+
+    r = client.patch(
+        f"/api/v1/diary/rooms/{room.id}",
+        json={"name": "Room 1 Renamed"},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    assert r.json()["default_waiting_area_id"] == str(area.id)
+
+
+def test_rooms_update_explicit_valid_uuid_preserved(
+        client, db, admin_user, practice):
+    area_a = _area(db, practice, "Area A", order=0)
+    area_b = _area(db, practice, "Area B", order=1)
+    room = _room(db, practice, default_area=area_a.id)
+
+    r = client.patch(
+        f"/api/v1/diary/rooms/{room.id}",
+        json={"default_waiting_area_id": str(area_b.id)},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    assert r.json()["default_waiting_area_id"] == str(area_b.id)
+
+
+def test_rooms_update_archive_does_not_auto_resolve(
+        client, db, admin_user, practice):
+    _area(db, practice, "Main Area", order=0)
+    room = _room(db, practice, default_area=None)
+
+    r = client.patch(
+        f"/api/v1/diary/rooms/{room.id}",
+        json={"is_active": False},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    data = r.json()
+    assert data["is_active"] is False
+    assert data["default_waiting_area_id"] is None
+
+
+def test_rooms_update_reactivate_null_default_resolves(
+        client, db, admin_user, practice):
+    area = _area(db, practice, "Main Area", order=0)
+    room = _room(db, practice, is_active=False, default_area=None)
+
+    r = client.patch(
+        f"/api/v1/diary/rooms/{room.id}",
+        json={"is_active": True},
+        headers={"Authorization": f"Bearer {make_token(admin_user)}"},
+    )
+    assert r.status_code == 200
+    data = r.json()
+    assert data["is_active"] is True
+    assert data["default_waiting_area_id"] == str(area.id)

@@ -4,6 +4,7 @@ from datetime import date
 from pathlib import Path
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
+from sqlalchemy import or_
 from sqlalchemy.orm import Session, joinedload
 
 from app.dependencies import get_db, get_current_user, require_role
@@ -71,6 +72,38 @@ def _ensure_waiting_area(
             status_code=400,
             detail="default_waiting_area_id must be at the same location as the room or practice-wide",
         )
+
+
+def _resolve_default_waiting_area(
+    practice_id: uuid.UUID,
+    room_location_id: Optional[uuid.UUID],
+    db: Session,
+    exclude_id: Optional[uuid.UUID] = None,
+) -> Optional[uuid.UUID]:
+    """Return the id of the best active waiting area compatible with this room's location.
+
+    Compatibility mirrors _ensure_waiting_area:
+    - Room at location X → areas at location X or practice-wide (location_id IS NULL)
+    - Practice-wide room (location_id IS NULL) → any practice area
+
+    Tie-breaking is deterministic: display_order ASC, name ASC, id ASC.
+    Returns None if no compatible active area exists.
+    """
+    q = db.query(WaitingArea).filter(
+        WaitingArea.practice_id == practice_id,
+        WaitingArea.is_active == True,
+    )
+    if exclude_id is not None:
+        q = q.filter(WaitingArea.id != exclude_id)
+    if room_location_id is not None:
+        q = q.filter(
+            or_(
+                WaitingArea.location_id == room_location_id,
+                WaitingArea.location_id.is_(None),
+            )
+        )
+    areas = q.order_by(WaitingArea.display_order, WaitingArea.name, WaitingArea.id).all()
+    return areas[0].id if areas else None
 
 
 def _resource_sort_key(resource) -> tuple[int, str, str]:
@@ -295,6 +328,18 @@ def update_waiting_area(
     ).first()
     if not area:
         raise HTTPException(status_code=404, detail="Waiting area not found")
+    if body.is_active is False and area.is_active:
+        affected_rooms = db.query(Room).filter(
+            Room.practice_id == current_user.practice_id,
+            Room.is_active == True,
+            Room.default_waiting_area_id == area_id,
+        ).all()
+        for room in affected_rooms:
+            room.default_waiting_area_id = _resolve_default_waiting_area(
+                current_user.practice_id, room.location_id, db, exclude_id=area_id
+            )
+        if affected_rooms:
+            db.flush()
     if body.name is not None:
         area.name = body.name
     if body.is_active is not None:
@@ -349,12 +394,17 @@ def create_room(
     """Create a new room. Requires Admin or PracticeOwner role."""
     _ensure_location(body.location_id, current_user.practice_id, db)
     _ensure_waiting_area(body.default_waiting_area_id, current_user.practice_id, body.location_id, db)
+    default_area_id = body.default_waiting_area_id
+    if default_area_id is None:
+        default_area_id = _resolve_default_waiting_area(
+            current_user.practice_id, body.location_id, db
+        )
     room = Room(
         practice_id=current_user.practice_id,
         location_id=body.location_id,
         name=body.name,
         display_order=_next_temp_display_order(Room, db, current_user.practice_id, body.location_id),
-        default_waiting_area_id=body.default_waiting_area_id,
+        default_waiting_area_id=default_area_id,
         is_active=True,
     )
     db.add(room)
@@ -388,13 +438,35 @@ def update_room(
         raise HTTPException(status_code=404, detail="Room not found")
     if body.name is not None:
         room.name = body.name
+    # Apply is_active first so the final active state is known before the default logic runs
     if body.is_active is not None:
         room.is_active = body.is_active
-    # default_waiting_area_id: explicit None in JSON clears it; omitted field is left unchanged
-    if "default_waiting_area_id" in body.model_fields_set:
-        new_area_id = body.default_waiting_area_id
-        _ensure_waiting_area(new_area_id, current_user.practice_id, room.location_id, db)
-        room.default_waiting_area_id = new_area_id
+    if room.is_active:
+        # Active-room invariant: ensure a valid active default waiting area where possible.
+        if "default_waiting_area_id" in body.model_fields_set:
+            new_area_id = body.default_waiting_area_id
+            if new_area_id is not None:
+                # Explicit valid UUID: validate and accept (unchanged behaviour).
+                _ensure_waiting_area(new_area_id, current_user.practice_id, room.location_id, db)
+                room.default_waiting_area_id = new_area_id
+            else:
+                # Explicit null: resolve a fallback rather than clearing.
+                room.default_waiting_area_id = _resolve_default_waiting_area(
+                    current_user.practice_id, room.location_id, db
+                )
+        elif room.default_waiting_area_id is None:
+            # Field omitted but existing default is null: opportunistically fill it.
+            room.default_waiting_area_id = _resolve_default_waiting_area(
+                current_user.practice_id, room.location_id, db
+            )
+        # else: field omitted, existing non-null default retained unchanged.
+    else:
+        # Inactive room: invariant does not apply; honour explicit field changes only.
+        if "default_waiting_area_id" in body.model_fields_set:
+            new_area_id = body.default_waiting_area_id
+            if new_area_id is not None:
+                _ensure_waiting_area(new_area_id, current_user.practice_id, room.location_id, db)
+            room.default_waiting_area_id = new_area_id
     _normalize_resource_order(
         Room,
         db,
