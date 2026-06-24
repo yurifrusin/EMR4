@@ -1128,10 +1128,28 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         if (!wasActive) span.classList.add("appt-active");
       });
 
-      span.addEventListener("keydown", e => {
-        if (e.key !== "Enter" && e.key !== " ") return;
-        e.preventDefault();
-        span.click();
+      span.addEventListener("keydown", async e => {
+        if (e.altKey && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+          e.preventDefault();
+          e.stopPropagation();
+          let deltaStart = 0;
+          let deltaDuration = 0;
+          if (e.key === "ArrowUp") {
+            deltaStart = -15;
+          } else if (e.key === "ArrowDown") {
+            deltaStart = 15;
+          } else if (e.key === "ArrowLeft") {
+            deltaDuration = -15;
+          } else if (e.key === "ArrowRight") {
+            deltaDuration = 15;
+          }
+          await handleMoveResize(a, deltaStart, deltaDuration);
+          return;
+        }
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          span.click();
+        }
       });
 
       columnBody.appendChild(span);
@@ -2651,6 +2669,103 @@ function setFlowPanelVisibility(isOpen, persist = true) {
   }
   if (persist) {
     localStorage.setItem(FLOW_PANEL_OPEN_KEY, isOpen ? "true" : "false");
+  }
+}
+
+async function handleMoveResize(appt, deltaStart, deltaDuration) {
+  const currentStartMins = toMins(appt.start_time_local);
+  const newStartMins = Math.max(0, Math.min(1425, currentStartMins + deltaStart));
+  const newDuration = Math.max(15, (appt.duration_minutes || 15) + deltaDuration);
+
+  if (newStartMins === currentStartMins && newDuration === (appt.duration_minutes || 15)) {
+    return;
+  }
+
+  const newStartTimeString = fromMins(newStartMins);
+  const provisionalPatientName = appt.patient_name_provisional || appt.provisional_name || "";
+  const isProvisional = !!provisionalPatientName || !appt.patient_id || !appt.patient;
+
+  const payload = {
+    practitioner_id: appt.practitioner?.id || appt.practitioner_id,
+    appointment_type_id: appt.appointment_type_id || appt.appointment_type?.id || null,
+    appointment_date: appt.appointment_date,
+    start_time_local: newStartTimeString,
+    duration_minutes: newDuration,
+    reason: appt.reason || "",
+  };
+
+  if (appt.location_id) {
+    payload.location_id = appt.location_id;
+  } else if (activeLocationId) {
+    payload.location_id = activeLocationId;
+  }
+
+  if (!isProvisional) {
+    payload.patient_id = appt.patient_id || appt.patient?.id;
+    payload.patient_name_provisional = null;
+  } else {
+    payload.patient_id = null;
+    payload.patient_name_provisional = provisionalPatientName || (appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : "") || "Provisional Patient";
+  }
+
+  try {
+    let proposal;
+    if (isSmokeMode()) {
+      const origEditingId = editingAppointmentId;
+      editingAppointmentId = appt.id;
+      try {
+        proposal = simulateProposal(payload);
+      } finally {
+        editingAppointmentId = origEditingId;
+      }
+    } else {
+      const propRes = await apiFetch(`/appointments/proposals/update/${appt.id}`, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+      if (!propRes.ok) {
+        throw new Error(await apiErrorMessage(propRes, "Proposal check"));
+      }
+      proposal = await propRes.json();
+    }
+
+    if (!proposal.safe || (proposal.warnings && proposal.warnings.length > 0) || proposal.autonomy_tier === "proposal") {
+      const confirmed = await showStatusProposalDialog(proposal);
+      if (!confirmed) {
+        return;
+      }
+    }
+
+    if (isSmokeMode()) {
+      appt.start_time_local = newStartTimeString;
+      appt.duration_minutes = newDuration;
+      setStatus("Booking moved/resized (Mock)");
+      await loadDiary(true);
+      const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
+      if (el) {
+        el.classList.add("appt-active");
+        el.focus();
+      }
+    } else {
+      setStatus("Updating appointment...");
+      const updateRes = await apiFetch(`/appointments/${appt.id}`, {
+        method: "PUT",
+        body: JSON.stringify(payload)
+      });
+      if (!updateRes.ok) {
+        throw new Error(await apiErrorMessage(updateRes, "Update"));
+      }
+      setStatus("Booking updated successfully.");
+      await loadDiary(true);
+      const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
+      if (el) {
+        el.classList.add("appt-active");
+        el.focus();
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message || "An error occurred while rescheduling the appointment.");
   }
 }
 
