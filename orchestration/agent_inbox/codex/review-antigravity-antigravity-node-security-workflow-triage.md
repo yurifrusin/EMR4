@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-node-security-workflow-triage` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -37,5 +37,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated safe non-breaking package-lock updates.
+- Follow-up required: Keep remaining devDependency/build-tool vulnerabilities deferred for a dedicated modernization sprint.

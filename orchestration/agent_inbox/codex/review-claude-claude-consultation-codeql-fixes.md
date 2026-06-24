@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-consultation-codeql-fixes` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -51,5 +51,5 @@ claude-consultation-codeql-fixes ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated with Ariadne repair to avoid raw exception logging.
+- Follow-up required: Re-run GitHub CodeQL after push and confirm the consultation alerts close.

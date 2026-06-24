@@ -190,9 +190,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Plan-gated packets dispatched |
-| Launch Gate | Awaiting worker plan packets |
-| Integration Gate | Hold until Claude, Antigravity, and Codex worker have submitted or been explicitly stood down |
+| Status | Integrated locally with verification passing |
+| Launch Gate | Complete |
+| Integration Gate | Complete; Codex worker stood down after repeated local tooling blockers and Ariadne completed the triage harness |
 | Theme | Turn Sprint 20 security signals into bounded fixes and an Ariadne-facing alert triage harness |
 
 ### Workstream S21-A - Consultation CodeQL Fixes
@@ -206,7 +206,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Path cleanup validation, sensitive-content logging reduction, bounded error responses, focused tests if adjacent |
 | Out of Scope | UI, diary/taskpane assets, migrations, RBAC redesign, Gemini prompt redesign |
 | Verification | Focused py_compile/pytest/Bandit commands recorded in Completion Notes |
-| Status | Dispatched |
+| Status | Integrated |
 
 ### Workstream S21-B - Node Security Workflow Triage
 
@@ -219,7 +219,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `.github/workflows/node-security.yml`, `EMR4 Sidebar/package*.json` only if the plan proves a safe metadata/update change |
 | Out of Scope | Runtime diary/taskpane UI, backend, forced major build-tool upgrades |
 | Verification | `npm run validate`, `npm audit --omit=dev`, and non-blocking full `npm audit` where feasible |
-| Status | Dispatched |
+| Status | Integrated |
 
 ### Workstream S21-C - Security Alert Triage Harness
 
@@ -232,7 +232,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `orchestration/security_alert_triage.md`, read-only `gh` security queries, links to existing security baseline notes |
 | Out of Scope | Production code changes, alert dismissal, cloud/key rotation, master/handoff integration |
 | Verification | `gh auth status`, CodeQL/secret/Dependabot/workflow queries, secret-safe report review |
-| Status | Dispatched |
+| Status | Superseded by Ariadne-owned `orchestration/security_alert_triage.md` |
 
 ### Deferred Product Follow-Up
 

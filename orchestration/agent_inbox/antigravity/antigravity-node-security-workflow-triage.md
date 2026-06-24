@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | fca99d2 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-node-security-workflow-triage --summary "Short plan summary"` |
@@ -99,4 +99,3 @@ Required before submit. These notes are copied into Codex's review packet automa
   - Git check: `git diff --check` (exit code: 0, no whitespace errors).
 - Remaining risks:
   - Build-time vulnerabilities (13 vulnerabilities: 12 moderate, 1 high) in `serialize-javascript` and `uuid` are devDependencies-only and do not compile into runtime client assets. Upgrading them requires major version changes of `copy-webpack-plugin` and `office-addin-*` dependencies which is high risk and not worth it yet.
-

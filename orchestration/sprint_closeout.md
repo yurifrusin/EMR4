@@ -8,103 +8,59 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 20: Security Baseline |
-| Integrated through | Sprint 20 security baseline integration |
-| Status | Integrated locally with verification passing; ready for push/deploy audit |
+| Batch | Sprint 21: Security Alert Triage and Focused Remediation |
+| Integrated through | Sprint 21 security alert triage integration |
+| Status | Integrated locally with verification passing; ready for push and GitHub security workflow observation |
 | Last updated | 2026-06-24 |
 
 ## What Changed
 
-- Added `.github/workflows/python-security.yml` for `pip-audit` and Bandit.
-- Added `.github/workflows/node-security.yml` for Office manifest validation,
-  blocking production `npm audit --omit=dev`, and non-blocking full npm audit
-  visibility for build-tool/devDependency risks.
-- Added `.github/workflows/codeql.yml` for GitHub CodeQL analysis across Python
-  and JavaScript/TypeScript plus `.github/dependabot.yml` for GitHub Actions,
-  pip, and npm update tracking.
-- Added `pyproject.toml` with Bandit configuration only; no runtime Python
-  package configuration was introduced there.
-- Added `orchestration/security_baseline_review.md`, the Ariadne-facing review
-  harness for collecting local audit output, GitHub security signals, and future
-  Codex Security scan results.
-- During integration, Ariadne applied the small security dependency bumps surfaced
-  by Claude's `pip-audit`: `cryptography==48.0.1` and
-  `pydantic-settings==2.14.2`, clearing the blocking Python CVE gate.
+- Hardened `app/routers/consultation.py` against CodeQL findings: bounded audio temp-file cleanup, non-PHI logging, generic client-facing error text, and non-silent malformed JSON handling.
+- Added two focused regression tests in `tests/test_finalize_scoping.py` for traversal-safe audio cleanup and valid in-bounds audio cleanup.
+- Updated `EMR4 Sidebar/package-lock.json` with safe non-breaking devDependency fixes for `form-data`, `hono`, and `http-proxy-middleware`.
+- Added `orchestration/security_alert_triage.md`, a redacted Ariadne security alert triage harness.
+- Ariadne repaired Claude's implementation during integration so server logs record exception classes rather than raw exception strings that might contain clinical payloads.
+- The Codex worker/security-manager plan was accepted but its implementation was superseded after repeated local tooling blockers; Ariadne completed the report directly.
 
 ## Recommended User Review
 
-No clinical UI smoke test is required for Sprint 20 because no app, diary,
-taskpane, Command Centre, migration, or patient-flow runtime code changed. The
-manual review is GitHub/security-signal oriented:
+No clinical UI smoke test is required for Sprint 21 because no diary, taskpane, Command Centre, booking, waiting-room, resource-admin, migration, or patient-flow runtime UI changed. The manual review is GitHub/security-signal oriented:
 
-1. After the push, open GitHub Actions and confirm `Python Security`,
-   `Node & Office Add-in Security Baseline`, `CodeQL`, and `Deploy GitHub Pages`
-   appear as expected.
-2. Confirm `Python Security` passes on `master`; it should now report no known
-   vulnerabilities after the dependency bumps.
-3. Confirm `Node & Office Add-in Security Baseline` passes even though the full
-   npm audit step logs the known devDependency/build-tool vulnerabilities.
-4. Confirm GitHub's Security tab shows CodeQL/Dependabot signals beginning to
-   populate after their first scheduled/manual runs.
-5. Optional but recommended: start a Codex Security diff scan against the Sprint
-   20 integration diff and record any validated findings before the next runtime
-   feature sprint.
+1. After push, confirm GitHub Actions run for `Python Security`, `Node & Office Add-in Security Baseline`, `CodeQL`, and Pages/deploy workflows.
+2. Confirm `Python Security` passes on `master`.
+3. Confirm `Node & Office Add-in Security Baseline` passes: production audit should be clean, while full npm audit may still log known devDependency/build-tool issues.
+4. After CodeQL completes on the new `master`, confirm consultation alerts 7, 8, 12, 13, 14, 15, and 16 close or are replaced by materially lower/noise findings.
+5. Confirm secret scanning still has no open alerts and Dependabot remains at zero open alerts.
 
 ## Not Required Before Moving On
 
-- No diary, waiting-room, resource-admin, taskpane, Command Centre, Word add-in,
-  booking/status, patient-admin, migration, seed-data, or GitHub Pages visual
-  deployment testing is required for Sprint 20.
-- No forced npm devDependency upgrade is required yet; the full npm audit is
-  deliberately non-blocking until those build-tool updates can be tested as their
-  own slice.
+- No Word add-in, diary, Waiting Room, resource-admin, patient search, booking, status, roster, migration, or browser visual smoke test is required for this sprint.
+- No forced `npm audit fix --force` is required; remaining full-audit findings are devDependency/build-tool risks and are intentionally deferred.
 
 ## Known Follow-Up
 
-- `npm audit` still reports 16 devDependency/build-tool vulnerabilities
-  (13 moderate, 3 high). Production dependency audit is clean; the remaining
-  build-tool supply-chain work should be planned separately if it starts to
-  affect CI runner or developer-machine risk tolerance.
-- Bandit's full low-severity output includes a silent `try/except/pass` in
-  `app/routers/consultation.py`; consider replacing it with bounded logging in a
-  later backend hygiene sprint.
-- CodeQL build/language settings may need tuning after the first GitHub Actions
-  run; keep the workflow minimal unless GitHub reports a concrete setup problem.
-- Dependabot labels may need to be created in GitHub if PR labels are desired;
-  missing labels should not block dependency update PRs.
-- Future auth, RBAC, clinical-data route, or AI-tooling changes should use the
-  Codex Security plugin and/or Claude `/security-review` as an on-demand deep
-  review complement to the always-on CI gates.
+- CodeQL still reports high clear-text logging findings in `scripts/audit_patient_duplicates.py`; plan a small dev/admin-script redaction task.
+- CodeQL note-level JavaScript automatic-semicolon-insertion alerts remain in taskpane source/deployed copies; plan a frontend hygiene slice that keeps `EMR4 Sidebar/src/taskpane/` and `docs/taskpane/` in sync.
+- Full `npm audit` still reports 13 devDependency/build-tool vulnerabilities: 12 moderate and 1 high, through `serialize-javascript` and `uuid`. Forced fixes require major build-tool upgrades and should be handled separately.
+- GitHub CodeQL alerts may remain open until GitHub re-runs analysis on the pushed integration commit.
 
 ## Verification
 
-- `.venv\Scripts\pip-audit.exe -r requirements.txt --desc` -> passed after
-  bumping `cryptography` and `pydantic-settings`; no known vulnerabilities.
-- `.venv\Scripts\bandit.exe -r app/ scripts/ -ll -ii -c pyproject.toml` ->
-  passed; no medium+ severity/confidence issues.
+- `.venv\Scripts\python.exe -m py_compile app\routers\consultation.py` -> passed.
+- `.venv\Scripts\python.exe -m bandit -r app\routers\consultation.py -ll -ii -c pyproject.toml` -> passed; no medium+/high findings.
+- `.venv\Scripts\python.exe -m pytest tests\test_finalize_scoping.py -q --tb=short` -> passed; 5 passed.
 - `npm run validate` in `EMR4 Sidebar` -> passed; manifest valid.
-- `npm audit --omit=dev` in `EMR4 Sidebar` -> passed; 0 production
-  vulnerabilities.
-- `npm audit` in `EMR4 Sidebar` -> non-blocking visibility check reported the
-  known 16 devDependency/build-tool vulnerabilities.
-- Python/PyYAML parsed `.github/workflows/python-security.yml`,
-  `.github/workflows/node-security.yml`, `.github/workflows/codeql.yml`, and
-  `.github/dependabot.yml` successfully.
-- `git diff --check` -> passed, with existing line-ending warnings only.
-- Codex Security app-mediated scan was not run during the automated heartbeat
-  integration because it requires an interactive workspace start; the review path
-  is documented in `orchestration/security_baseline_review.md`.
+- `npm audit --omit=dev` in `EMR4 Sidebar` -> passed; 0 production vulnerabilities.
+- `npm run build` in `EMR4 Sidebar` -> passed with existing asset-size/performance warnings only.
+- `npm audit` in `EMR4 Sidebar` -> non-blocking visibility check reported 13 devDependency/build-tool vulnerabilities.
+- `git diff --check` -> passed.
 
 ## Recommended Next Direction
 
-After Sprint 20 GitHub Actions are observed, the strongest next candidates are:
-
-1. Build-tool/devDependency remediation plan for the Node/Office toolchain.
-2. Roster admin writes for date-specific room/practitioner assignments.
-3. Appointment type/schedule admin foundations.
-4. A small operation-result pattern for diary/admin surfaces.
-5. Duplicate merge workflow design/implementation if patient-admin safety should
-   take priority over diary admin depth.
+1. Small dev/admin-script logging hardening for `scripts/audit_patient_duplicates.py`.
+2. Frontend CodeQL-note hygiene for automatic semicolon insertion in taskpane source and deployed copies.
+3. Dedicated build-tool modernization sprint for remaining `npm audit` devDependency issues, if CI/developer-machine risk tolerance warrants it.
+4. Return to product work: roster admin writes, appointment type/schedule admin, operation-result pattern, or duplicate merge workflow.
 
 ## Sprint 15 Review Harness - Waiting Room Check-In Operations
 
