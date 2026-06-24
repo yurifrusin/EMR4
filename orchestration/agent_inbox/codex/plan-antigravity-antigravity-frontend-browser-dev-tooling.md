@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-frontend-browser-dev-tooling` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-24 17:14 +1000 |
 | Source HEAD | `3780969` |
 
@@ -44,6 +44,6 @@ Low risk of build issues. Mitigated by keeping check script simple and dependent
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted during Sprint 22 plan review.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation was released with `complete sprint task`.

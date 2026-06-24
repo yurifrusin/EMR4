@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-backend-dev-loop-tooling` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-24 17:16 +1000 |
 | Source HEAD | `3780969` |
 
@@ -44,6 +44,6 @@ python -m pytest (no args) runs full suite with -q --tb=short -p no:randomly; sc
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted during Sprint 22 plan review.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation was released with `complete sprint task`.

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-frontend-browser-dev-tooling` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -38,5 +38,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Scope was limited to frontend version-check tooling, npm script ergonomics, and QA documentation; no runtime UI assets changed.
+- Follow-up required: Consider adding automated browser-smoke assertions in a future UI-focused sprint.

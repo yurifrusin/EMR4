@@ -144,9 +144,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan-gated |
-| Launch Gate | Packets queued for Claude and Antigravity; Ariadne owns review harness |
-| Integration Gate | Do not integrate until required plan packets are visible, reviewed, and explicitly released with `complete sprint task` |
+| Status | Integrated locally with verification passing |
+| Launch Gate | Complete |
+| Integration Gate | Complete; push, mirror realignment, and audit pending |
 | Theme | Improve EMR4's AI-assisted development feedback loops before the next product-growth sprint |
 
 ### Workstream S22-A - Backend Dev Loop Tooling
@@ -160,7 +160,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Backend/dev-environment tooling, pytest/static-check ergonomics, startup verification, backend check-tier documentation, small scripts/config that reduce false starts |
 | Out of Scope | Product behaviour, diary/taskpane UI, migrations, schema changes, WhatsApp production send behaviour, security alert dismissal, broad dependency upgrades |
 | Verification | Plan packet first; after approval app import/startup check, proposed focused checks, `run_dev` or equivalent non-destructive probe where feasible, `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream S22-B - Frontend Browser Dev Tooling
 
@@ -173,7 +173,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Diary/taskpane smoke commands, browser/check scripts, local/deployed asset version checks, npm script ergonomics, Antigravity/Gemini-assisted UI QA notes |
 | Out of Scope | Product UI behaviour changes, visual redesign, backend API contracts, migrations, patient/clinical flows, production WhatsApp sending, forced broad dependency upgrades |
 | Verification | Plan packet first; after approval JS/build/validate or smoke commands, local/deployed asset URL checks where feasible, `git diff --check`, browser/visual observations |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream S22-C - Ariadne Architecture and Tooling Harness
 
@@ -186,7 +186,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Plan review, integration checklist, closeout wording, and next-sprint architecture/tooling recommendations |
 | Out of Scope | Acting as proof of a separate Codex worker submission, production feature implementation, or bypassing worker plan gates |
 | Verification | `poll --fetch`, plan/review inspection, feasible local/browser checks before closeout, `git diff --check` for orchestration updates |
-| Status | Ariadne-owned |
+| Status | Integrated |
 
 ## Sprint 20: Security Baseline
 

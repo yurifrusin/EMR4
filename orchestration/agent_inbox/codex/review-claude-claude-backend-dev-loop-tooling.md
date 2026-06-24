@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-backend-dev-loop-tooling` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -42,5 +42,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Scope was limited to backend/dev-loop tooling; no product API, migration, diary, taskpane, or Command Centre runtime changes.
+- Follow-up required: Consider adding a CI mode once the desired GitHub workflow cadence is settled.

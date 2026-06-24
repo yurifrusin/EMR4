@@ -8,84 +8,56 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 21: Security Alert Triage and Focused Remediation |
-| Integrated through | Sprint 21 security alert triage integration |
-| Status | Integrated, pushed, mirrored, and GitHub security workflow review completed |
+| Batch | Sprint 22: Development Tooling Optimisation |
+| Integrated through | Sprint 22 dev tooling integration |
+| Status | Integrated locally with verification passing; push/audit pending |
 | Last updated | 2026-06-24 |
 
 ## What Changed
 
-- Hardened `app/routers/consultation.py` against CodeQL findings: bounded audio temp-file cleanup, non-PHI logging, generic client-facing error text, and non-silent malformed JSON handling.
-- Added two focused regression tests in `tests/test_finalize_scoping.py` for traversal-safe audio cleanup and valid in-bounds audio cleanup.
-- Updated `EMR4 Sidebar/package-lock.json` with safe non-breaking devDependency fixes for `form-data`, `hono`, and `http-proxy-middleware`.
-- Added `orchestration/security_alert_triage.md`, a redacted Ariadne security alert triage harness.
-- Ariadne repaired Claude's implementation during integration so server logs record exception classes rather than raw exception strings that might contain clinical payloads.
-- The Codex worker/security-manager plan was accepted but its implementation was superseded after repeated local tooling blockers; Ariadne completed the report directly.
-
-## Post-Closeout Security Follow-Up
-
-- Redacted `scripts/audit_patient_duplicates.py` default output so the read-only developer audit reports only aggregate duplicate group counts by kind instead of names, DOBs, UUIDs, Medicare/IHI values, phone numbers, file URLs, per-patient reference counts, or raw exception text.
-- Fixed taskpane automatic-semicolon-insertion CodeQL notes in both source and deployed copies, and bumped deployed taskpane JS cache-bust to `v=57`.
-- Applied the safe Dependabot/npm package update path for `copy-webpack-plugin` and `webpack-dev-server`, plus non-forced `npm audit fix`.
+- Added `scripts/check_backend.ps1`, a Tier-1 backend fast-check command that runs syntax compilation, Bandit at the medium+/high threshold, and `git diff --check`, with a clear Tier-2 pytest hint.
+- Added pytest defaults to `pyproject.toml` so `python -m pytest` consistently uses the project standard quiet/short-traceback configuration and test discovery path.
+- Added `scripts/check_frontend_versions.py`, a frontend asset/cache-buster integrity check for diary, taskpane, and Command Centre HTML references.
+- Added `check-assets` and `validate-all` npm scripts to `EMR4 Sidebar/package.json`, combining manifest validation, production npm audit, and frontend asset/version checking.
+- Added `docs/frontend-ui-qa-guide.md` with the expected frontend smoke-mode, console, deployed-asset, and visual-QA discipline.
+- No product backend routes, migrations, diary runtime behaviour, taskpane runtime behaviour, or Command Centre runtime behaviour changed.
 
 ## Recommended User Review
 
-No clinical UI smoke test is required for Sprint 21 because no diary, taskpane,
-Command Centre, booking, waiting-room, resource-admin, migration, or patient-flow
-runtime UI changed.
-
-Ariadne completed the GitHub/security-signal review after push:
-
-1. `Python Security` passed on the Sprint 21 `master` commit.
-2. `Node & Office Add-in Security Baseline` passed on the Sprint 21 `master` commit.
-3. `CodeQL` passed on the Sprint 21 `master` commit.
-4. The targeted consultation CodeQL alerts 7, 8, 12, 13, 14, 15, and 16 are no longer open.
-5. Secret scanning has no open alerts.
-6. GitHub Pages is built from `master` `/docs`; no Pages UI deployment changed in this sprint.
-
-Residual user review/testing: none required before the next dispatch. The
-remaining security items are follow-up development tasks Ariadne can plan and
-run; they do not need Yuri to manually test the application.
+Residual user review/testing: none required before the next dispatch. Ariadne
+ran the backend, frontend, full pytest, and dev-server reachability checks that
+matter for this tooling-only sprint. Because Sprint 22 did not alter live
+product UI, clinical flows, API contracts, migrations, or deployed asset
+versions, there is no meaningful manual browser/Word/phone review left for Yuri.
 
 ## Not Required Before Moving On
 
 - No Word add-in, diary, Waiting Room, resource-admin, patient search, booking, status, roster, migration, or browser visual smoke test is required for this sprint.
-- No forced `npm audit fix --force` is required; remaining full-audit findings are devDependency/build-tool risks and are intentionally deferred.
+- No GitHub Pages visual regression review is required because no diary/taskpane/Command Centre runtime assets changed.
+- No forced `npm audit fix --force` is required; `npm audit --omit=dev` remains clean and broader devDependency modernization stays a separate decision.
 
 ## Known Follow-Up
 
-- The duplicate-audit clear-text logging findings and taskpane automatic-semicolon-insertion notes have been addressed locally; GitHub CodeQL will confirm after the pushed follow-up commit is analyzed.
-- Full `npm audit` now reports 11 moderate devDependency/build-tool vulnerabilities through `uuid` in Office add-in tooling. Production audit remains clean. `npm audit fix --force` would install a breaking `office-addin-manifest@1.0.0` path, so the forced fix remains deferred.
-- CodeQL still reports note-level unused import/local/global findings; these are hygiene items, not Sprint 21 blockers.
+- `scripts/check_frontend_versions.py` currently checks working-tree changes against `HEAD`, which is ideal for pre-submit local use. If CI later runs it after commits are already on `HEAD`, add a base-ref mode such as `--base origin/master`.
+- The frontend QA guide is deliberately procedural, not a Playwright harness. A future sprint can automate selected smoke-mode/browser assertions once product UI changes resume.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification
 
-- `.venv\Scripts\python.exe -m py_compile app\routers\consultation.py` -> passed.
-- `.venv\Scripts\python.exe -m bandit -r app\routers\consultation.py -ll -ii -c pyproject.toml` -> passed; no medium+/high findings.
-- `.venv\Scripts\python.exe -m pytest tests\test_finalize_scoping.py -q --tb=short` -> passed; 5 passed.
-- `npm run validate` in `EMR4 Sidebar` -> passed; manifest valid.
-- `npm audit --omit=dev` in `EMR4 Sidebar` -> passed; 0 production vulnerabilities.
-- `npm run build` in `EMR4 Sidebar` -> passed with existing asset-size/performance warnings only.
-- `npm audit` in `EMR4 Sidebar` -> non-blocking visibility check reported 13 devDependency/build-tool vulnerabilities.
+- `.\scripts\check_backend.ps1` -> passed; compileall, Bandit medium+/high scan, and whitespace check all green.
+- `.venv\Scripts\python.exe -m pytest --co -q` -> passed; all 24 test files collected.
+- `.venv\Scripts\python.exe -m pytest` -> passed; 288 passed, 1 existing deprecation warning.
+- `npm run validate-all` in `EMR4 Sidebar` -> passed; manifest valid, production npm audit clean, frontend asset/version check passed.
 - `git diff --check` -> passed.
-
-Post-closeout follow-up verification:
-
-- `.venv\Scripts\python.exe -m py_compile scripts\audit_patient_duplicates.py` -> passed.
-- `scripts\audit_patient_duplicates.py --database-url postgresql://invalid:...` -> failed safely with exception class only and "No records were changed."
-- `.venv\Scripts\python.exe -m bandit -r scripts\audit_patient_duplicates.py -ll -ii -c pyproject.toml` -> passed; no medium+/high findings.
-- `npm run validate` in `EMR4 Sidebar` -> passed; manifest valid.
-- `npm run build` in `EMR4 Sidebar` -> passed with existing asset-size/performance warnings only.
-- `npm audit --omit=dev` in `EMR4 Sidebar` -> passed; 0 production vulnerabilities.
-- `npm audit` in `EMR4 Sidebar` -> non-blocking visibility check now reports 11 moderate devDependency/build-tool vulnerabilities.
-- `git diff --check` -> passed.
+- `.venv\Scripts\python.exe -m compileall app scripts -q` -> passed.
+- `Invoke-WebRequest http://127.0.0.1:8001/health` -> passed; backend returned `{"status":"ok","service":"EMR4 Centaur API"}`.
+- `Invoke-WebRequest https://localhost:3000/taskpane.html` -> passed; local dev server returned HTTP 200.
 
 ## Recommended Next Direction
 
-1. Small dev/admin-script logging hardening for `scripts/audit_patient_duplicates.py`.
-2. Frontend CodeQL-note hygiene for automatic semicolon insertion in taskpane source and deployed copies.
-3. Dedicated build-tool modernization sprint for remaining `npm audit` devDependency issues, if CI/developer-machine risk tolerance warrants it.
-4. Return to product work: roster admin writes, appointment type/schedule admin, operation-result pattern, or duplicate merge workflow.
+1. Add CI/base-ref modes for the new backend/frontend checks once GitHub workflow cadence is settled.
+2. Consider a browser-smoke harness for the diary/taskpane smoke-mode paths before the next substantial UI sprint.
+3. Return to product work: roster admin writes, appointment type/schedule admin, default waiting-area enforcement for every room, operation-result pattern, or duplicate merge workflow.
 
 ## Sprint 15 Review Harness - Waiting Room Check-In Operations
 
