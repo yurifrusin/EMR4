@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Plan submitted for Codex review
+Plan amended with details and submitted
 
 ## Worker Completion Notes
 
