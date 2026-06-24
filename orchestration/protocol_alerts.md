@@ -84,6 +84,14 @@ Read these before acting on remembered process details.
   not be confirmed with available tools. If no manual testing remains, say so
   explicitly and why. UI work should include browser/Chrome/Office-dialog checks
   where available before asking Yuri to test.
+- WhatsApp notification rule: when local WhatsApp Cloud API credentials are
+  configured, Ariadne should send a short non-PHI WhatsApp alert for sprint
+  closeout, blockers, security findings needing judgment, or user decision
+  points using `scripts/notify_yuri_whatsapp.py`. Do not put PHI, patient
+  identifiers, secrets, raw errors, or detailed clinical/project context in
+  WhatsApp; link the user back to Codex/repo docs for details. If WhatsApp is
+  unavailable, keep using the in-thread closeout notification and say WhatsApp
+  was not sent.
 - Protocol amendment rule: prefer batching non-urgent orchestration protocol edits
   until the discussion settles. Codex should remind the user before launch if
   agreed protocol edits are still pending.

@@ -317,7 +317,11 @@ Ariadne's closeout ping is the user's final sprint notification. It must not
 hand off avoidable review work: run all feasible tool-enabled checks first, then
 state only the residual human checks that require Yuri's logged-in browser,
 clinical judgment, external service console, phone/device, or other unavailable
-real-world context.
+real-world context. If WhatsApp notification variables are configured locally,
+also send a short non-PHI WhatsApp alert with
+`python scripts\notify_yuri_whatsapp.py`; keep the full details in Codex/repo
+docs, not WhatsApp. If WhatsApp is not configured or fails, report that in the
+Codex closeout summary and continue with the in-thread notification.
 
 ### Parallel ownership rule
 
