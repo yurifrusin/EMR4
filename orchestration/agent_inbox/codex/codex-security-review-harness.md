@@ -7,7 +7,7 @@
 | Worker Name | security-review-harness |
 | Worker Branch | `codex/security-review-harness` |
 | Branch | `codex/security-review-harness` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | 72396f8 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-security-review-harness --summary "Short plan summary"` |
@@ -92,6 +92,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `.github/workflows/codeql.yml`, `.github/dependabot.yml`, `orchestration/security_baseline_review.md`, `orchestration/agent_inbox/codex/codex-security-review-harness.md`.
+- Verification run: `git diff --check` passed; PowerShell/Python YAML parse validation passed for `.github/workflows/codeql.yml` and `.github/dependabot.yml`; Codex Security scan path and worker fallback documented in `orchestration/security_baseline_review.md`.
+- Remaining risks: CodeQL build/language behaviour may need tuning after the first GitHub Actions run; Dependabot labels may need repository label creation or GitHub will create PRs without labels; Ariadne still needs to run the Codex Security diff scan after collecting all Sprint 20 submissions.
