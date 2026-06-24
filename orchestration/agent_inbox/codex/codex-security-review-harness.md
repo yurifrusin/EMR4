@@ -7,7 +7,7 @@
 | Worker Name | security-review-harness |
 | Worker Branch | `codex/security-review-harness` |
 | Branch | `codex/security-review-harness` |
-| Status | queued |
+| Status | pending_plan_review |
 | Created | 72396f8 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-security-review-harness --summary "Short plan summary"` |
