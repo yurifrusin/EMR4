@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 24: Appointment Edit Proposal Flow |
 | Integrated through | Sprint 24 backend proposal hardening and diary edit proposal preflight |
-| Status | Integrated locally; push, mirror realignment, audit, and residual live review pending |
+| Status | Integrated, pushed, mirrored, audited, and Ariadne live Chrome/CDP smoke passed |
 | Last updated | 2026-06-24 |
 
 ## What Changed
@@ -25,13 +25,12 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-Residual user review/testing after push/deploy: one short live diary edit smoke
-is useful because this sprint changes the real appointment edit modal and
-Ariadne could verify static/frontend checks but not a live GitHub Pages
-Office-dialog edit flow in this thread. Confirm `diary.js?v=85` is loaded, then
-exercise one safe edit, one blocked edit, and one warning-confirm edit.
+Residual user review/testing after push/deploy: none required. Ariadne used the
+dedicated Chrome automation profile attached through the Chrome DevTools Protocol
+to run the live diary edit smoke against the deployed GitHub Pages v85 assets and
+dummy dev data.
 
-Detailed steps for Yuri-only review:
+Completed Ariadne live-smoke steps:
 
 1. Hard refresh the live diary/Office-dialog surface and confirm `diary.js?v=85`
    and `diary.css?v=85` are loaded.
@@ -51,9 +50,8 @@ Detailed steps for Yuri-only review:
 7. Trigger the break-warning path again and click `Confirm & Save`. Expected:
    the appointment saves, the diary reloads, and the edit is visible after
    refresh.
-8. Report whether v85 loaded, whether safe edits avoided self-conflict, whether
-   blocked edits prevented writes, whether warning confirmation reset correctly,
-   and screenshots for anything suspicious.
+8. Restored the edited dummy appointment to its original time, duration, reason,
+   and status.
 
 ## Not Required Before Moving On
 
@@ -69,8 +67,6 @@ Detailed steps for Yuri-only review:
   pytest runs left the test database in a partial enum state; Ariadne reset
   `gp_pms_test.public` and reran the targeted Sprint 24 proposal tests. Treat
   broad-suite runtime/test-DB resilience as a separate dev-tooling follow-up.
-- The live diary edit modal should be smoke-tested after Pages serves v85 because
-  static checks cannot fully prove the real Office-dialog/browser interaction.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification
@@ -81,11 +77,16 @@ Detailed steps for Yuri-only review:
 - `npm run validate-all` in `EMR4 Sidebar` -> passed; manifest valid, production npm audit clean, frontend asset/version check passed. Local/HEAD diary assets are v85; deployed Pages was still v84 before push.
 - `git diff --check` -> passed.
 - Worker-reported smoke-mode edit proposal checks passed for warning rendering, save buttons, and self-conflict exclusion.
+- Live Chrome/CDP diary smoke after deploy -> passed against `diary.js?v=85`
+  and `diary.css?v=85`: safe edit saved without self-conflict,
+  same-practitioner overlap was blocked before write, break-overlap warning
+  required `Confirm & Save`, field changes reset confirmation, confirmed warning
+  saved, and the dummy appointment was restored afterward.
 
 ## Recommended Next Direction
 
-1. After Pages serves v85, run the short live edit-proposal smoke above.
-2. If the smoke is clean, continue Programme 2B toward the next safe appointment mutation slice: likely status/waiting-area proposal retrofit or drag/reschedule design groundwork.
+1. Continue Programme 2B toward the next safe appointment mutation slice: likely status/waiting-area proposal retrofit or drag/reschedule design groundwork.
+2. Use the dedicated Chrome automation profile / Chrome DevTools Protocol path for future live diary smoke tests whenever available.
 3. Keep sprints grouped under Programme 2B so the project advances by coherent appointment-mutation capability rather than isolated micro-tasks.
 
 ## Previous Closeout - Sprint 23

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 24 - Programme 2B appointment edit/reschedule proposal flow integrated locally and closing out |
-| **Next recommended work** | Push Sprint 24 closeout, realign mirrors, then run residual live diary edit-proposal review if tool/browser coverage is insufficient |
+| **Current active track** | Sprint 24 - Programme 2B appointment edit/reschedule proposal flow closed out |
+| **Next recommended work** | Start the next Programme 2B safe appointment mutation sprint, using Chrome DevTools/CDP live smoke where relevant |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
