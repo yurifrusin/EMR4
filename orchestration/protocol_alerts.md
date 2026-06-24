@@ -106,6 +106,12 @@ Read these before acting on remembered process details.
   not be confirmed with available tools. If no manual testing remains, say so
   explicitly and why. UI work should include browser/Chrome/Office-dialog checks
   where available before asking Yuri to test.
+- Forward-progress rule: if a sprint closes cleanly and Ariadne's review leaves
+  no Yuri-only manual tests, approvals, risk calls, or priority decisions, Ariadne
+  should continue into the next recommended sprint from the current programme
+  rather than waiting idly. Dispatch the next sprint, announce `HANDIN READY`,
+  and use Computer Use for Claude/Antigravity prompts when available. Stop and
+  notify Yuri only when human input is genuinely needed.
 - Residual user-test detail rule: when any closeout leaves manual checks for
   Yuri, Ariadne must provide concrete, step-by-step user review instructions,
   not just a terse checklist. Include setup/preconditions, exact UI path,

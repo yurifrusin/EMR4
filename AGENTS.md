@@ -348,6 +348,12 @@ are configured, also send a short non-PHI alert with
 `python scripts\notify_yuri.py`; keep the full details in Codex/repo docs, not
 push notifications. If notification delivery is not configured or fails, report
 that in the Codex closeout summary and continue with the in-thread notification.
+If a sprint closes cleanly and Ariadne's tool-enabled review leaves no
+Yuri-only tests, decisions, or approvals, Ariadne should keep the project moving:
+choose the next recommended sprint from the current programme/closeout state,
+dispatch it, announce `HANDIN READY`, and use Computer Use to prompt
+Claude/Antigravity where available. Stop and notify Yuri only when user input,
+manual review, unusual risk, or a priority decision is genuinely needed.
 
 ### Parallel ownership rule
 
