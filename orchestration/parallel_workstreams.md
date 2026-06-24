@@ -149,6 +149,55 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 24: Appointment Edit Proposal Flow
+
+| Item | Value |
+|---|---|
+| Programme | Phase 2 Programme 2B - Safe Appointment Mutation Workbench |
+| Status | Dispatched; plan-gated |
+| Launch Gate | Packets queued for Claude and Antigravity; no Codex worker expected initially |
+| Integration Gate | Do not integrate until required plan packets are visible, reviewed, and explicitly released with `complete sprint task` |
+| Theme | Route receptionist-facing appointment edit/reschedule through the formal non-mutating proposal layer before writing changes |
+
+### Workstream S24-A - Backend Edit Proposal Contract Hardening
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-edit-proposal-contract-hardening.md` |
+| Goal | Plan and then harden the backend `POST /appointments/proposals/update/{appointment_id}` contract only where needed for safe diary edit/reschedule preflight |
+| In Scope | `app/routers/appointments.py`, `app/schemas/appointments.py`, focused update-proposal and adjacent appointment update tests, contract notes if needed |
+| Out of Scope | Diary frontend implementation, taskpane/Command Centre, patient demographics, resource admin, migrations unless the plan proves a schema issue, Bernie runtime |
+| Verification | Plan packet first; after approval `scripts/check_backend.ps1`, `tests/test_appointment_update_proposal.py`, adjacent booking/break tests if touched, `git diff --check` |
+| Status | Queued |
+
+### Workstream S24-B - Diary Edit Proposal UI Flow
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-edit-proposal-flow.md` |
+| Goal | Plan and then make appointment edit/reschedule saves call the update proposal endpoint before the actual `PUT`, mirroring the existing create-proposal Confirm & Save flow |
+| In Scope | `docs/diary/diary.{html,css,js}`, edit modal proposal call, safe/warning/blocked copy, Confirm & Save state reset, smoke-mode simulation, cache-bust |
+| Out of Scope | Backend route/schema changes, create-proposal behaviour except shared helper reuse, taskpane/Command Centre, Waiting Room panel layout, Resource Administration, drag/drop/resize, Bernie runtime |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, `npm run validate-all`, smoke/browser notes for edit safe/warning/blocked flows where feasible, `git diff --check` |
+| Status | Queued |
+
+### Workstream S24-C - Ariadne Integration and Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex/Ariadne |
+| Role | orchestrator |
+| Branch | `master` only for orchestration docs after worker plans are accepted or during closeout |
+| Goal | Review proposal-contract and UI plans together, verify create/edit proposal compatibility, run feasible backend/frontend/browser checks, and produce detailed Yuri-only residual review steps if any |
+| In Scope | Plan review, integration sequencing, bounded repairs, closeout/user-test summary, next-sprint recommendation |
+| Out of Scope | Acting as proof of a separate Codex worker submission or bypassing worker plan gates |
+| Verification | `poll --fetch`, plan/review inspection, backend/frontend checks, browser/Chrome checks if available, `git diff --check` |
+| Status | Ariadne-owned |
+
 ## Sprint 23: Room Default Waiting-Area Invariant
 
 | Item | Value |

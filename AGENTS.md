@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Phase 2 programme planning after Sprint 23 room default waiting-area invariant |
-| **Next recommended work** | Use `orchestration/phase_programmes.md` to choose the next coherent Programme 2B or 2C sprint rather than launching micro-sprints reactively |
+| **Current active track** | Sprint 24 - Programme 2B appointment edit/reschedule proposal flow dispatched and plan-gated |
+| **Next recommended work** | Poll Sprint 24 plan packets, review backend/UI compatibility, then release implementation only with `complete sprint task` |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

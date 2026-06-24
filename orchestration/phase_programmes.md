@@ -53,7 +53,7 @@ tracks that actual architecture.
 | Status | In progress |
 | Outcome | Reception can create, edit, link, and status-change appointments through proposal-first flows with clear conflict/break/provisional warnings |
 | Representative Sprints | Command proposal layer, create proposal flow, appointment update/status proposal contract, provisional patient linking, duplicate review API, patient search alerts |
-| Next Candidate Sprints | Appointment edit proposal UI, reschedule/move flow, cancel/no-show/DNA confirmation semantics, recurrence/reason-note polish |
+| Next Candidate Sprints | Sprint 24 appointment edit proposal flow dispatched; then reschedule/move flow, cancel/no-show/DNA confirmation semantics, recurrence/reason-note polish |
 | Done Signals | All high-risk receptionist appointment writes pass through deterministic proposal/confirmation contracts before mutation |
 
 ### Programme 2C - Ariadne Tooling and Review Automation
