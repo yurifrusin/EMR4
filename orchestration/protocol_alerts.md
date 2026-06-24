@@ -94,7 +94,13 @@ Read these before acting on remembered process details.
   needs user or worker clarification. Before pushing sprint changes to `master`,
   Ariadne should run every feasible Codex-side/tool-enabled test first, including
   browser/Chrome checks for real UI affordances when relevant and available, then
-  apply hotfixes for issues found. Only after that should Ariadne summarize the
+  apply hotfixes for issues found. If a residual user test appears blocked by
+  tooling rather than truly human judgment, Ariadne should research local and
+  online options, then install/configure safe tools as needed to complete the
+  test independently. Ariadne may log into EMR4 with dummy dev user/dev admin
+  credentials for non-PHI dev verification. Flag Yuri only for material cost,
+  security/privacy risk, external-console action, or manual intervention such as
+  restarting Codex. Only after that should Ariadne summarize the
   inspection result, verification run, hotfixes, and remaining manual user tests
   from `orchestration/sprint_closeout.md`. Then wait for user approval unless the
   user explicitly granted proceed-through integration for that sprint. Plan-gated
@@ -115,9 +121,10 @@ Read these before acting on remembered process details.
 - Residual user-test detail rule: when any closeout leaves manual checks for
   Yuri, Ariadne must provide concrete, step-by-step user review instructions,
   not just a terse checklist. Include setup/preconditions, exact UI path,
-  expected result, suspicious/failure signs, what can be skipped, and what
-  evidence or screenshots to report back. These steps should cover only checks
-  Ariadne could not run herself with available tools.
+  goal of the check, expected result, suspicious/failure signs, what can be
+  skipped, and what evidence or screenshots to report back. These steps should
+  cover only checks Ariadne could not run herself after researching and applying
+  appropriate tooling.
 - Notification rule: when local notification credentials are configured,
   Ariadne should send a short non-PHI alert for sprint closeout, blockers,
   security findings needing judgment, or user decision points using

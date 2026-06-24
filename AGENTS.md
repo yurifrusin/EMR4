@@ -274,7 +274,13 @@ result, verification run, and manual user tests from `orchestration/sprint_close
 Before giving that user-test list, Ariadne should run every feasible Codex-side
 or tool-enabled test first, including browser/Chrome checks for real UI
 affordances when relevant and available, and should hotfix issues found before
-asking the user to test the remainder. Then wait for user approval unless the
+asking the user to test the remainder. If a user-review item appears blocked by
+missing tooling, Ariadne should first research and use suitable local or online
+tools to complete the review independently where safe. Ariadne may install or
+configure such tooling and may log into EMR4 with dummy dev user/dev admin
+credentials for non-PHI dev verification; flag Yuri only for material risks,
+cost/security implications, or genuine manual intervention such as restarting
+Codex or approving an external console action. Then wait for user approval unless the
 user explicitly granted proceed-through integration for that sprint. This
 post-poll review permission is separate from the plan gate: workers still must
 not implement until the explicit `complete sprint task` approval is given.
@@ -339,12 +345,14 @@ routine; they must be reviewed or explicitly abandoned first.
 
 Ariadne's closeout ping is the user's final sprint notification. It must not
 hand off avoidable review work: run all feasible tool-enabled checks first, then
-state only the residual human checks that require Yuri's logged-in browser,
-clinical judgment, external service console, phone/device, or other unavailable
-real-world context. When residual human checks remain, explain them as practical
-test steps rather than abstract acceptance criteria, and keep them limited to
-what Ariadne genuinely could not verify herself. If local notification variables
-are configured, also send a short non-PHI alert with
+state only the residual human checks that still require Yuri's clinical
+judgment, external service console, phone/device, real-world account ownership,
+or another context Ariadne cannot safely reproduce after tool research. When
+residual human checks remain, explain them as practical, detailed test steps
+rather than abstract acceptance criteria, including the goal of each check,
+setup/preconditions, exact UI path, expected result, suspicious/failure signs,
+what can be skipped, and what evidence or screenshots to report back. If local
+notification variables are configured, also send a short non-PHI alert with
 `python scripts\notify_yuri.py`; keep the full details in Codex/repo docs, not
 push notifications. If notification delivery is not configured or fails, report
 that in the Codex closeout summary and continue with the in-thread notification.
