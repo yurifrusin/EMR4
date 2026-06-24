@@ -138,6 +138,60 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 20: Security Baseline
+
+| Item | Value |
+|---|---|
+| Status | Plan-gated; packets dispatched |
+| Launch Gate | HANDIN READY after this dispatch commit is pushed |
+| Integration Gate | Pending plan packets from Claude, Antigravity, and Codex worker |
+| Theme | Add a small repeatable security baseline before deeper product work |
+
+### Workstream S20-A - Python Security Baseline
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-python-security-baseline.md` |
+| Goal | Add fast backend/Python dependency and static-analysis security checks |
+| In Scope | Python security workflow/tooling notes, likely `pip-audit` and Bandit, deterministic commands Ariadne can rerun, plus Claude Code tool/plugin recommendations |
+| Out of Scope | Runtime app behavior, migrations, diary/taskpane UI, Node/Office audit |
+| Verification | New local security commands where feasible; YAML validation/diff checks; exact command output in completion notes |
+| Status | Queued; plan-gated |
+
+### Workstream S20-B - Node Office Security Baseline
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-node-security-baseline.md` |
+| Goal | Add repeatable Office add-in dependency audit and validation checks |
+| In Scope | Node/Office audit workflow or metadata, `EMR4 Sidebar` package audit reproducibility, concise local command notes, plus Antigravity/Gemini tool/plugin recommendations |
+| Out of Scope | Runtime frontend behavior, diary/taskpane asset changes, backend/Python security checks |
+| Verification | `npm audit`/Office validation where feasible; `git diff --check`; exact command output in completion notes |
+| Status | Queued; plan-gated |
+
+### Workstream S20-C - Security Review Harness
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/security-review-harness` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-security-review-harness.md` |
+| Goal | Configure CodeQL/Dependabot coordination and create Ariadne's Sprint 20 security review checklist |
+| In Scope | CodeQL/Dependabot config, `orchestration/security_baseline_review.md`, Codex Security review path, installed Codex tool/skill inventory |
+| Out of Scope | Production code, migrations, runtime frontend/backend behavior, duplicating Claude/Antigravity workflows |
+| Verification | `git diff --check`, YAML validation where feasible, documented Codex Security scan/review path |
+| Status | Queued; plan-gated |
+
+### Deferred Product Follow-Up
+
+- Future resource-admin work should ensure every active room always has a
+  default waiting area. A sensible default is the active waiting area with
+  display order `0` when no room-specific default has been selected.
+
 ## Sprint 19: Resource Admin Foundations
 
 | Item | Value |

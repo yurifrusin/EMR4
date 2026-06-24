@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 19 - diary/resource admin foundations dispatched for implementation plans |
-| **Next recommended work** | Workers run `handin`, capture implementation plans, and stop until Codex/user says `complete sprint task` |
+| **Current active track** | Sprint 20 - plan-gated security baseline queued after Sprint 19 resource-admin user review |
+| **Next recommended work** | Collect Sprint 20 plan packets, then approve implementation only after reviewing Claude, Antigravity, and Codex-worker plans |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

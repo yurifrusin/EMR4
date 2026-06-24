@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 19: Resource Admin Foundations |
 | Integrated through | Sprint 19 resource-admin ordering hotfix |
-| Status | Integrated and pushed; diary asset v83 deployed, backend restart and user review pending |
+| Status | Integrated, pushed, deployed, and user-reviewed; Sprint 20 security baseline queued |
 | Last updated | 2026-06-24 |
 
 ## What Changed
@@ -106,6 +106,9 @@ manual review:
 - A broader practice-admin area may eventually absorb this diary modal once
   resource, roster, template, appointment type, and practitioner schedule admin
   all exist.
+- Future resource-admin work should guarantee every active room has a default
+  waiting area, defaulting to the active waiting area with display order `0`
+  when no room-specific default is set.
 
 ## Verification
 
