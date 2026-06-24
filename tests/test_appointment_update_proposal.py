@@ -9,6 +9,7 @@ import pytest
 
 from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
 from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea
+from app.models.tenancy import Practitioner
 from tests.conftest import make_token
 
 THURSDAY = date(2026, 6, 26)   # a fixed future Thursday, guaranteed no conflict seeds
@@ -384,3 +385,172 @@ def test_status_proposal_warns_already_terminal(
     # Row unchanged
     db.refresh(appt)
     assert appt.status == AppointmentStatus.Cancelled
+
+
+# ─── Update proposal hardening tests ─────────────────────────────────────────
+
+def test_update_proposal_blocked_explicit_null_practitioner(
+        client, db, gp_user, practice, practitioner, patient):
+    """Explicit {practitioner_id: null} → clean BLOCK, not a 404."""
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"practitioner_id": None},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert any(b["code"] == "practitioner_required" for b in data["blocks"])
+    # Row unchanged
+    db.refresh(appt)
+    assert appt.practitioner_id == practitioner.id
+
+
+def test_update_proposal_blocked_clear_patient_id_with_no_provisional(
+        client, db, gp_user, practice, practitioner, patient):
+    """Clearing patient_id on a linked appointment (no provisional name) → BLOCK."""
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"patient_id": None},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert any(b["code"] == "patient_identity_required" for b in data["blocks"])
+    # Row unchanged
+    db.refresh(appt)
+    assert appt.patient_id == patient.id
+
+
+def test_update_proposal_null_patient_id_with_provisional_is_safe(
+        client, db, gp_user, practice, practitioner, patient):
+    """Downgrading to provisional by sending patient_id=null + provisional name is safe."""
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"patient_id": None, "patient_name_provisional": "Walk-in"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["patient_identity"] == "provisional"
+    assert any(w["code"] == "provisional_patient" for w in data["warnings"])
+    # Row unchanged
+    db.refresh(appt)
+    assert appt.patient_id == patient.id
+
+
+def test_update_proposal_cross_practice_returns_404(
+        client, db, gp_user, practice_b, patient_b):
+    """Proposing an update for another practice's appointment returns 404."""
+    import uuid as _uuid
+    pr_b = Practitioner(
+        practice_id=practice_b.id,
+        first_name="Other",
+        last_name="Doctor",
+        ahpra_number="MED9999999999",
+    )
+    db.add(pr_b)
+    db.flush()
+    appt_b = Appointment(
+        practice_id=practice_b.id,
+        patient_id=patient_b.id,
+        practitioner_id=pr_b.id,
+        start_time=datetime.combine(THURSDAY, time(10, 0), tzinfo=timezone.utc),
+        appointment_date=THURSDAY,
+        start_time_local=time(10, 0),
+        duration_minutes=15,
+        status=AppointmentStatus.Booked,
+        booked_via=BookingChannel.Receptionist,
+    )
+    db.add(appt_b)
+    db.flush()
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt_b.id),
+        json={"duration_minutes": 30},
+        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+    )
+    assert resp.status_code == 404
+
+
+def test_update_proposal_nonexistent_appointment_returns_404(
+        client, db, gp_user):
+    """Random UUID → 404."""
+    import uuid as _uuid
+    resp = client.post(
+        UPDATE_URL.format(appt_id=_uuid.uuid4()),
+        json={},
+        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+    )
+    assert resp.status_code == 404
+
+
+def test_update_proposal_empty_body_reflects_current_values(
+        client, db, gp_user, practice, practitioner, patient):
+    """Empty body → safe proposal whose command mirrors the existing appointment."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=11, duration=30)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    cmd = data["command"]
+    assert cmd["appointment_id"] == str(appt.id)
+    assert cmd["appointment_date"] == appt.appointment_date.isoformat()
+    assert cmd["start_time_local"] == "11:00:00"
+    assert cmd["duration_minutes"] == 30
+    assert cmd["practitioner_id"] == str(practitioner.id)
+    # Row unchanged
+    db.refresh(appt)
+    assert appt.duration_minutes == 30
+
+
+def test_update_proposal_valid_practitioner_change(
+        client, db, gp_user, practice, practitioner, patient):
+    """Changing to a different valid practitioner → safe, command has new practitioner."""
+    pr2 = Practitioner(
+        practice_id=practice.id,
+        first_name="Sam",
+        last_name="Jones",
+        ahpra_number="MED0007654321",
+    )
+    db.add(pr2)
+    db.flush()
+    appt = _make_appt(db, practice, practitioner, patient, start_h=14)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"practitioner_id": str(pr2.id)},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["command"]["practitioner_id"] == str(pr2.id)
+    # Row unchanged — proposal is non-mutating
+    db.refresh(appt)
+    assert appt.practitioner_id == practitioner.id
