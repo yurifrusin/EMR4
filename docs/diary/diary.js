@@ -3276,10 +3276,19 @@ async function archiveWaitingArea(areaId) {
   if (isSmokeMode()) {
     const idx = mockWaitingAreas.findIndex(wa => wa.id === areaId);
     if (idx !== -1) mockWaitingAreas[idx] = { ...mockWaitingAreas[idx], is_active: false };
+    const archivedArea = idx !== -1 ? mockWaitingAreas[idx] : null;
+    const locId = archivedArea ? archivedArea.location_id : null;
+    compactMockResourceOrders(mockWaitingAreas, archivedArea);
+
+    const activeAreas = mockWaitingAreas.filter(wa => wa.location_id === locId && wa.is_active);
+    activeAreas.sort((a, b) => a.display_order - b.display_order);
+    const fallbackId = activeAreas.length > 0 ? activeAreas[0].id : null;
+
     mockRooms.forEach(r => {
-      if (r.default_waiting_area_id === areaId) r.default_waiting_area_id = null;
+      if (r.default_waiting_area_id === areaId) {
+        r.default_waiting_area_id = fallbackId;
+      }
     });
-    compactMockResourceOrders(mockWaitingAreas, idx !== -1 ? mockWaitingAreas[idx] : null);
     return true;
   }
   const res = await apiFetch(`/diary/waiting-areas/${areaId}`, {
@@ -3446,6 +3455,14 @@ async function loadAdminTabContent() {
   }
 }
 
+function getFallbackWaitingArea(locationId, areasList) {
+  if (!Array.isArray(areasList)) return null;
+  const activeAreas = areasList.filter(a => a.location_id === locationId && a.is_active);
+  if (activeAreas.length === 0) return null;
+  activeAreas.sort((a, b) => a.display_order - b.display_order);
+  return activeAreas[0];
+}
+
 async function renderRoomsTab() {
   const container = document.getElementById("rooms-list-container");
   if (!container) return;
@@ -3461,13 +3478,19 @@ async function renderRoomsTab() {
     adminAreaCache = Array.isArray(areasList) ? areasList : [];
 
     const waitingSelect = document.getElementById("room-input-waiting");
-    waitingSelect.innerHTML = `<option value="">[None]</option>`;
-    areasList.forEach(area => {
-      const opt = document.createElement("option");
-      opt.value = area.id;
-      opt.textContent = area.name;
-      waitingSelect.appendChild(opt);
-    });
+    waitingSelect.innerHTML = "";
+    const activeAreas = adminAreaCache.filter(a => a.is_active);
+    if (activeAreas.length === 0) {
+      waitingSelect.innerHTML = `<option value="">[None]</option>`;
+    } else {
+      activeAreas.sort((a, b) => a.display_order - b.display_order);
+      activeAreas.forEach(area => {
+        const opt = document.createElement("option");
+        opt.value = area.id;
+        opt.textContent = area.name;
+        waitingSelect.appendChild(opt);
+      });
+    }
 
     container.innerHTML = "";
     if (!roomsList.length) {
@@ -3485,8 +3508,14 @@ async function renderRoomsTab() {
         setTimeout(() => card.scrollIntoView({ block: "nearest", inline: "nearest" }), 0);
       }
 
-      const defaultArea = areasList.find(a => a.id === room.default_waiting_area_id);
-      const areaLabel = defaultArea ? defaultArea.name : "[None]";
+      const defaultArea = areasList.find(a => a.id === room.default_waiting_area_id && a.is_active);
+      let areaLabel = "";
+      if (defaultArea) {
+        areaLabel = defaultArea.name;
+      } else {
+        const fallback = getFallbackWaitingArea(room.location_id, areasList);
+        areaLabel = fallback ? `${fallback.name} (Fallback)` : "[None]";
+      }
 
       card.innerHTML = `
         <div class="admin-item-info">
@@ -3648,13 +3677,28 @@ function showRoomForm(room) {
     editIdEl.value = room.id;
     nameEl.value = room.name;
     orderEl.value = room.display_order;
-    waitingEl.value = room.default_waiting_area_id || "";
+
+    let defaultVal = "";
+    if (room.default_waiting_area_id) {
+      const isConfiguredActive = adminAreaCache.some(a => a.id === room.default_waiting_area_id && a.is_active);
+      if (isConfiguredActive) {
+        defaultVal = room.default_waiting_area_id;
+      }
+    }
+    if (!defaultVal) {
+      const locId = room.location_id || activeLocationId;
+      const fallback = getFallbackWaitingArea(locId, adminAreaCache);
+      defaultVal = fallback ? fallback.id : "";
+    }
+    waitingEl.value = defaultVal;
   } else {
     titleEl.textContent = "Add Room";
     editIdEl.value = "";
     nameEl.value = "";
     orderEl.value = getNextAdminDisplayOrder(adminRoomCache);
-    waitingEl.value = "";
+
+    const fallback = getFallbackWaitingArea(activeLocationId, adminAreaCache);
+    waitingEl.value = fallback ? fallback.id : "";
   }
   nameEl.focus();
 }
