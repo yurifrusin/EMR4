@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | 3665aef |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-room-default-waiting-area-ui --summary "Short plan summary"` |
@@ -90,5 +90,11 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [docs/diary/diary.js](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.js)
+  - [docs/diary/diary.html](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.html)
 - Verification run:
+  - Checked frontend assets and cache-busters with `npm run validate-all` (passed: manifest validation, production audit, check-assets).
+  - Clean `git diff --check` checked (passed).
+  - Verified pre-selection logic and mock archiving reassignment in `diary.js`.
 - Remaining risks:
+  - None. UI modifications are self-contained and isolated within the resource administration tab code.
