@@ -2130,6 +2130,208 @@ function simulateProposal(payload) {
   };
 }
 
+function simulateStatusProposal(appt, payload) {
+  const blocks = [];
+  const warnings = [];
+
+  const TERMINAL_STATUSES = ["Completed", "Cancelled", "NoShow", "DNA"];
+
+  if (payload.status === appt.status) {
+    blocks.push({
+      code: "already_in_status",
+      severity: "blocked",
+      message: `This appointment is already ${appt.status}.`
+    });
+  }
+
+  if (TERMINAL_STATUSES.includes(appt.status) && payload.status !== appt.status) {
+    warnings.push({
+      code: "already_terminal",
+      severity: "warning",
+      message: `This appointment is already ${appt.status}. Re-transitioning is unusual.`
+    });
+  }
+
+  const clearsWaitingArea = (
+    TERMINAL_STATUSES.includes(payload.status) &&
+    appt.waiting_area_id !== null &&
+    payload.waiting_area_id === null
+  );
+  if (clearsWaitingArea) {
+    warnings.push({
+      code: "waiting_area_cleared",
+      severity: "warning",
+      message: "This status change will remove the patient from the waiting area."
+    });
+  }
+
+  if (TERMINAL_STATUSES.includes(payload.status) && payload.waiting_area_id !== null) {
+    warnings.push({
+      code: "waiting_area_assigned_on_terminal",
+      severity: "warning",
+      message: `Assigning a waiting area while marking the appointment as ${payload.status} is contradictory; the area will be set but the appointment will be closed.`
+    });
+  }
+
+  const safe = blocks.length === 0;
+  let autonomy_tier = "execute_with_report";
+  if (!safe) {
+    autonomy_tier = "blocked";
+  } else if (warnings.length > 0 || TERMINAL_STATUSES.includes(payload.status)) {
+    autonomy_tier = "proposal";
+  }
+
+  const patientName = provisionalPatientName(appt) || (appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : "") || "patient";
+  let summary = `Change ${patientName}'s appointment status from ${appt.status} to ${payload.status}.`;
+  if (!safe) {
+    summary += " Blocked — see issues.";
+  } else if (warnings.length > 0) {
+    summary += " Confirmation recommended.";
+  }
+
+  return {
+    safe,
+    requires_confirmation: true,
+    autonomy_tier,
+    summary,
+    warnings,
+    blocks
+  };
+}
+
+function simulateWaitingAreaProposal(appt, payload) {
+  const blocks = [];
+  const warnings = [];
+
+  if (payload.waiting_area_id === appt.waiting_area_id) {
+    blocks.push({
+      code: "already_in_area",
+      severity: "blocked",
+      message: payload.waiting_area_id !== null
+        ? "The appointment is already in this waiting area."
+        : "The appointment is not currently in any waiting area."
+    });
+  }
+
+  const clearsWaitingArea = (payload.waiting_area_id === null && appt.waiting_area_id !== null);
+  if (clearsWaitingArea) {
+    warnings.push({
+      code: "waiting_area_cleared",
+      severity: "warning",
+      message: "This will remove the patient from the waiting area."
+    });
+  }
+
+  const safe = blocks.length === 0;
+  let autonomy_tier = "execute_with_report";
+  if (!safe) {
+    autonomy_tier = "blocked";
+  } else if (warnings.length > 0) {
+    autonomy_tier = "proposal";
+  }
+
+  const patientName = provisionalPatientName(appt) || (appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : "") || "patient";
+  let summary = "";
+  if (payload.waiting_area_id !== null) {
+    summary = `Move ${patientName} to a different waiting area.`;
+  } else if (clearsWaitingArea) {
+    summary = `Remove ${patientName} from the waiting area.`;
+  } else {
+    summary = `No waiting-area change for ${patientName}.`;
+  }
+
+  if (!safe) {
+    summary += " Blocked — see issues.";
+  } else if (warnings.length > 0) {
+    summary += " Confirmation recommended.";
+  }
+
+  return {
+    safe,
+    requires_confirmation: true,
+    autonomy_tier,
+    summary,
+    warnings,
+    blocks
+  };
+}
+
+function showStatusProposalDialog(proposal) {
+  return new Promise(resolve => {
+    const overlay = document.createElement("div");
+    overlay.className = "identity-confirm-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+
+    const panel = document.createElement("div");
+    panel.className = "identity-confirm-panel";
+
+    const title = document.createElement("h2");
+    title.className = "identity-confirm-title";
+
+    const body = document.createElement("div");
+    body.className = "identity-confirm-body";
+    body.style.whiteSpace = "pre-wrap";
+    body.style.marginBottom = "15px";
+
+    const actions = document.createElement("div");
+    actions.className = "identity-confirm-actions";
+
+    const close = result => {
+      document.removeEventListener("keydown", onKeyDown);
+      overlay.remove();
+      resolve(result);
+    };
+
+    const onKeyDown = event => {
+      if (event.key === "Escape") close(false);
+    };
+
+    if (proposal.blocks && proposal.blocks.length > 0) {
+      title.textContent = "Action Blocked";
+      
+      const msgList = proposal.blocks.map(b => b.message).join("\n\n");
+      body.textContent = msgList;
+
+      const okBtn = document.createElement("button");
+      okBtn.type = "button";
+      okBtn.className = "btn-secondary";
+      okBtn.textContent = "Close";
+      okBtn.onclick = () => close(false);
+      actions.appendChild(okBtn);
+      setTimeout(() => okBtn.focus(), 0);
+    } else {
+      title.textContent = "Confirm Status Change";
+      
+      let text = proposal.summary || "Are you sure you want to change the status?";
+      if (proposal.warnings && proposal.warnings.length > 0) {
+        text += "\n\nWarnings:\n" + proposal.warnings.map(w => `• ${w.message}`).join("\n");
+      }
+      body.textContent = text;
+
+      const cancelBtn = document.createElement("button");
+      cancelBtn.type = "button";
+      cancelBtn.className = "btn-secondary";
+      cancelBtn.textContent = "Cancel";
+      cancelBtn.onclick = () => close(false);
+
+      const confirmBtn = document.createElement("button");
+      confirmBtn.type = "button";
+      confirmBtn.className = proposal.warnings && proposal.warnings.length > 0 ? "btn-danger" : "btn-primary";
+      confirmBtn.textContent = "Confirm & Save";
+      confirmBtn.onclick = () => close(true);
+
+      actions.append(cancelBtn, confirmBtn);
+      setTimeout(() => cancelBtn.focus(), 0);
+    }
+
+    panel.append(title, body, actions);
+    overlay.appendChild(panel);
+    document.body.appendChild(overlay);
+    document.addEventListener("keydown", onKeyDown);
+  });
+}
+
 async function saveBooking() {
   const errorEl = document.getElementById("booking-error");
   errorEl.classList.add("hidden");
@@ -2453,14 +2655,88 @@ function setFlowPanelVisibility(isOpen, persist = true) {
 }
 
 async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null) {
-  if (!await confirmUnidentifiedProgress(appt, newStatus)) {
-    if (selectEl) selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
-    return false;
+  const isStatusChange = (newStatus !== appt.status);
+  const isWaitingAreaChangeOnly = (!isStatusChange && waitingAreaId !== null && waitingAreaId !== appt.waiting_area_id);
+
+  if (!isStatusChange && !isWaitingAreaChangeOnly) {
+    return true;
   }
+
   if (selectEl) selectEl.disabled = true;
-  setStatus("Updating status...");
 
   try {
+    // 1. Proposal check
+    const payload = {
+      status: newStatus,
+      waiting_area_id: waitingAreaId !== null ? (waitingAreaId || null) : (appt.waiting_area_id || null)
+    };
+
+    let proposal;
+    if (isSmokeMode()) {
+      if (isWaitingAreaChangeOnly) {
+        proposal = simulateWaitingAreaProposal(appt, payload);
+      } else {
+        proposal = simulateStatusProposal(appt, payload);
+      }
+    } else {
+      if (isWaitingAreaChangeOnly) {
+        const propRes = await apiFetch(`/appointments/proposals/waiting-area/${appt.id}`, {
+          method: "POST",
+          body: JSON.stringify({ waiting_area_id: payload.waiting_area_id })
+        });
+        if (!propRes.ok) {
+          throw new Error(await apiErrorMessage(propRes, "Waiting-area proposal check"));
+        }
+        proposal = await propRes.json();
+      } else {
+        const propRes = await apiFetch(`/appointments/proposals/status/${appt.id}`, {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        if (!propRes.ok) {
+          throw new Error(await apiErrorMessage(propRes, "Status proposal check"));
+        }
+        proposal = await propRes.json();
+      }
+    }
+
+    // 2. Proposal confirmation check
+    const TERMINAL_STATUSES = ["Completed", "Cancelled", "NoShow", "DNA"];
+    const needsConfirm = (
+      !proposal.safe ||
+      (proposal.warnings && proposal.warnings.length > 0) ||
+      proposal.autonomy_tier === "proposal" ||
+      (isStatusChange && TERMINAL_STATUSES.includes(newStatus))
+    );
+
+    if (needsConfirm) {
+      const confirmed = await showStatusProposalDialog(proposal);
+      if (!confirmed) {
+        if (selectEl) {
+          if (isWaitingAreaChangeOnly) {
+            selectEl.value = appt.waiting_area_id || "";
+          } else {
+            selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
+          }
+        }
+        return false;
+      }
+    }
+
+    // 3. Keep original patient identity confirmation check
+    if (!await confirmUnidentifiedProgress(appt, newStatus)) {
+      if (selectEl) {
+        if (isWaitingAreaChangeOnly) {
+          selectEl.value = appt.waiting_area_id || "";
+        } else {
+          selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
+        }
+      }
+      return false;
+    }
+
+    // 4. Actual save operation (mutation)
+    setStatus("Updating status...");
     if (isSmokeMode()) {
       appt.status = newStatus;
       if (waitingAreaId !== null) {
@@ -2502,7 +2778,13 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       showError(err.message || "Failed to update appointment status.");
       setStatus("Error updating status.");
     }
-    if (selectEl) selectEl.value = appt.status;
+    if (selectEl) {
+      if (isWaitingAreaChangeOnly) {
+        selectEl.value = appt.waiting_area_id || "";
+      } else {
+        selectEl.value = appt.status === "Confirmed" ? "Booked" : appt.status;
+      }
+    }
     return false;
   } finally {
     if (selectEl) selectEl.disabled = false;
@@ -2973,7 +3255,7 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
           updatingArea = true;
           areaSelect.disabled = true;
           try {
-            await setAppointmentStatus(a, "Arrived", null, areaSelect.value);
+            await setAppointmentStatus(a, "Arrived", areaSelect, areaSelect.value);
           } finally {
             updatingArea = false;
             areaSelect.disabled = false;

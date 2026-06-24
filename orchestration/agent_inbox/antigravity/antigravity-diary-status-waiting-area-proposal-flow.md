@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 3124a28 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-status-waiting-area-proposal-flow --summary "Short plan summary"` |
@@ -90,5 +90,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [docs/diary/diary.js](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.js)
+  - [docs/diary/diary.html](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.html)
 - Verification run:
+  - Checked JavaScript syntax: `node --check docs/diary/diary.js` (Passed)
+  - Executed dev validation: `npm run validate-all` (Passed manifest validation, 0 vulnerabilities dependency audit, check-assets v=86 version checks)
+  - Diff checks: `git diff --check` (Passed cleanly)
+  - Smoke Mode: Tested redundant status block, terminal warning modal, waiting area clear warning, and safe non-conflicting check-in transitions.
 - Remaining risks:
+  - None. Both status and waiting-area-only proposals are fully isolated in `diary.js` and consume the exact backend proposal contract shapes.
