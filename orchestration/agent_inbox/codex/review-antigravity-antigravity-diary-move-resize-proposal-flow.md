@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-move-resize-proposal-flow` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -42,5 +42,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated with Ariadne hotfixes for smoke/practitioner/date fallback, cache persistence, and nested status-control key routing.
+- Follow-up required: Yuri should run the residual physical-keyboard `Alt+Arrow` smoke documented in `orchestration/sprint_closeout.md` after Pages serves v92.

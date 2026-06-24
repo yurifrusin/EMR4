@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-move-resize-proposal-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -36,5 +36,5 @@ claude-appointment-move-resize-proposal-contract ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Focused proposal tests passed and no production backend code changed.
+- Follow-up required: None for backend; Sprint 26 residual live shortcut smoke is tracked in `orchestration/sprint_closeout.md`.

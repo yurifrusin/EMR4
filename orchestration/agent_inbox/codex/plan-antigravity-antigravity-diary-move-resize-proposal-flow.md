@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-move-resize-proposal-flow` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 09:03 +1000 |
 | Source HEAD | `8729ebe` |
 
@@ -86,6 +86,6 @@ Provide keyboard-based rescheduling (Alt+ArrowUp/Down to shift start times by +/
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; keyboard move/resize slice matched the requested minimal diary surface.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation released with `complete sprint task`.

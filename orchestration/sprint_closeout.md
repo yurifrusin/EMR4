@@ -8,49 +8,62 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 25: Status/Waiting-Area Proposal Retrofit |
-| Integrated through | Sprint 25 backend status/waiting-area proposal contract and diary proposal preflight flow |
-| Status | Integrated, pushed, mirrored, audited, deployed v86 observed, and Ariadne Chrome/CDP smoke passed |
+| Batch | Sprint 26: Move/Resize Proposal Flow |
+| Integrated through | Sprint 26 backend move/resize proposal tests and diary keyboard move/resize proposal flow |
+| Status | Integrated locally with Ariadne hotfixes; verification passed; push/deploy/audit pending |
 | Last updated | 2026-06-25 |
 
 ## What Changed
 
-- Backend status proposals now warn when a request tries to assign a waiting area while also marking an appointment terminal (`waiting_area_assigned_on_terminal`).
-- Backend adds `POST /appointments/proposals/waiting-area/{appointment_id}` for non-mutating waiting-area-only preflight, including `already_in_area` blocks and `waiting_area_cleared` warnings.
-- Focused backend tests cover status proposal cross-practice/nonexistent isolation, terminal-plus-area warnings, waiting-area assign/clear/already-in-area, and waiting-area isolation/nonexistent paths.
-- Diary status/check-in/waiting-area controls now run proposal preflight before mutation and show the same blocked/warning/`Confirm & Save` pattern used by create/edit proposals.
-- Diary smoke proposal helpers cover terminal warnings, waiting-area clear warnings, and already-in-area blocks.
-- Diary frontend asset cache-bust moved to `diary.js?v=86` / `diary.css?v=86`.
-- No schema migration, taskpane, Command Centre, patient demographics, Resource Administration, drag/drop, resize, recurrence, or Bernie runtime changes were made.
+- Backend proposal coverage now includes four diary move/resize scenarios for `POST /appointments/proposals/update/{appointment_id}`: resize into next booking blocked, move across practitioner columns into a conflict blocked, adjacent slots safe, and resize-shrink safe.
+- The backend proposal route itself was unchanged; the sprint hardens tests around the existing non-mutating contract.
+- Diary appointment cards now support proposal-gated keyboard move/resize intent: `Alt+ArrowUp/Down` shifts start time by 15 minutes and `Alt+ArrowLeft/Right` adjusts duration by 15 minutes with a 15-minute floor.
+- Move/resize proposal handling uses the existing blocked/warning dialog path before any write, then applies safe/confirmed updates through the normal appointment update path.
+- Ariadne hotfixed smoke/runtime gaps found during tool-enabled review: practitioner ID fallback for visible resource columns, diary-date fallback for smoke appointments without `appointment_date`, smoke-cache persistence before reload, existing active-card restoration helper reuse, and capture/nested status-control key routing.
+- Diary frontend asset cache-bust moved to `diary.js?v=92` / `diary.css?v=92`.
+- No schema migration, taskpane, Command Centre, patient demographics, Resource Administration, Waiting Room layout, recurrence, or visual drag-handle work was included.
 
 ## Recommended User Review
 
-Residual user review/testing after push/deploy: none required before continuing.
-Ariadne ran the feasible backend, frontend, and Chrome/CDP smoke checks locally.
-GitHub Pages v86 deployment has been observed; no Yuri-only judgment or manual
-UI review is needed for this sprint.
+Residual user review/testing after push/deploy: one short live shortcut smoke is
+recommended. Ariadne verified the backend contract, frontend syntax/assets, and
+local smoke rendering, but the available browser automation helpers could not
+reliably synthesize a real OS/browser `Alt+Arrow` chord without it being treated
+as a plain status-select arrow. This is a tooling limitation, so Yuri should
+perform the final physical-keyboard shortcut check after Pages serves v92.
 
-Completed Ariadne smoke steps:
+Detailed Yuri-only check:
 
-1. Loaded the diary smoke page through the Chrome DevTools Protocol from a local
-   static server using `?smoke=true`.
-2. Confirmed status-proposal smoke logic returns a proposal-tier warning for
-   terminal status plus non-null waiting area.
-3. Confirmed waiting-area smoke logic returns a proposal-tier
-   `waiting_area_cleared` warning when clearing an existing area.
-4. Confirmed waiting-area smoke logic returns a blocked `already_in_area`
-   result when selecting the current area.
-5. Rendered the warning dialog and confirmed it shows `Confirm Status Change`,
-   warning copy, `Cancel`, and `Confirm & Save`.
-6. Rendered the blocked dialog and confirmed it shows `Action Blocked`, the
-   already-in-area message, and a close-only path.
+1. Setup: open the live diary after deployment and hard refresh. Confirm the
+   live page serves `diary.js?v=92` and `diary.css?v=92`.
+2. Exact UI path: sign in as a normal dev user or admin, open the Diary, click
+   once on an appointment card body/name area rather than the status dropdown.
+3. Expected move result: press `Alt+ArrowDown`; if the target slot is safe or
+   warning-only, the existing proposal dialog should appear before mutation.
+   Cancel should leave the card unchanged; Confirm should move it down by 15
+   minutes and keep the card selected/highlighted after reload.
+4. Expected block result: choose or create an appointment where a 15-minute move
+   or duration increase would overlap another booking, then press the relevant
+   shortcut. The dialog should say `Action Blocked`; closing it should leave the
+   appointment unchanged.
+5. Expected resize result: press `Alt+ArrowRight` on a safe appointment to
+   increase duration by 15 minutes, and `Alt+ArrowLeft` to shrink duration. It
+   should never shrink below 15 minutes.
+6. Suspicious signs: the browser navigates back/forward, the inline status
+   dropdown changes instead of move/resize, no proposal dialog appears before a
+   risky write, the card moves without confirmation when warnings/blocks exist,
+   or the active highlight is lost after reload.
+7. Skippable parts: do not test Resource Administration, taskpane, Command
+   Centre, patient-file generation, recurrence, or drag-handle UX for Sprint 26.
+8. Evidence to report: screenshot of any unexpected dialog/state plus the exact
+   card, shortcut pressed, and before/after time/duration.
 
 ## Not Required Before Moving On
 
 - No database migration or manual data repair is required.
 - No Word taskpane, Command Centre, patient-file, Resource Administration,
-  drag/drop, resize, recurrence, duplicate-audit, or clinical workflow review is
-  required for this sprint.
+  recurrence, duplicate-audit, or clinical workflow review is required for this
+  sprint.
 - No security or dependency remediation is required; production
   `npm audit --omit=dev` remains clean and Bandit medium+/high checks passed.
 
@@ -58,26 +71,31 @@ Completed Ariadne smoke steps:
 
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 - The existing GitHub Dependabot moderate alert remains visible on push; it is
-  the already-known security queue item and not a Sprint 25 blocker.
+  the already-known security queue item and not a Sprint 26 blocker.
+- A future UX sprint should consider visible move/resize affordances or a help
+  hint for keyboard shortcuts; Sprint 26 intentionally kept the UI slice small.
 
 ## Verification
 
 - `.\scripts\check_backend.ps1` -> passed; compileall, Bandit medium+/high scan, and whitespace check all green.
 - `.\.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\schemas\appointments.py` -> passed.
-- `.\.venv\Scripts\python.exe -m pytest tests/test_appointment_update_proposal.py -q --tb=short -p no:randomly` -> passed; 27 passed, 1 existing pytest-asyncio deprecation warning.
+- `.\.venv\Scripts\python.exe -m pytest tests/test_appointment_update_proposal.py -q --tb=short -p no:randomly` -> passed; 31 passed, 1 existing pytest-asyncio deprecation warning.
 - `node --check docs\diary\diary.js` -> passed.
-- `npm run validate-all` in `EMR4 Sidebar` -> passed; manifest valid, production npm audit clean, frontend asset/version check passed. Local/HEAD diary assets are v86; deployed Pages was still v85 before push.
-- `npm run check-assets` in `EMR4 Sidebar` after push -> passed; deployed GitHub Pages diary assets now report `diary.js?v=86` and `diary.css?v=86`.
+- `npm run validate-all` before Ariadne hotfixes -> passed; manifest valid, production npm audit clean, frontend asset/version check passed. Worker-local diary assets were v87 and deployed Pages was still v86 before push.
+- `npm run validate-all` after Ariadne hotfixes -> passed; local diary assets are v92, HEAD before closeout was v87, deployed Pages before push was still v86.
 - `git diff --check` -> passed.
-- Chrome/CDP local smoke assertions passed for proposal logic and dialog
-  affordances: terminal-plus-area warning, waiting-area clear warning,
-  already-in-area block, warning modal `Confirm & Save`, and blocked modal close.
+- Local browser smoke page loaded via `http://127.0.0.1:8787/diary/diary.html?smoke=true` and confirmed `diary.js?v=92` is requested.
+- Browser smoke found and Ariadne fixed two move/resize smoke data issues and one nested status-control key-routing issue before final verification.
+- Browser automation could not conclusively synthesize a physical `Alt+Arrow`
+  chord; the residual Yuri-only test above covers that specific real-keyboard path.
 
 ## Recommended Next Direction
 
-1. Sprint 26 is dispatched for the next Programme 2B safe appointment mutation
-   slice: move/resize proposal flow.
-2. Keep using Chrome/CDP smoke checks before leaving any UI review to Yuri.
+1. Complete the short v92 physical-keyboard live diary smoke above.
+2. If it passes, continue Programme 2B with the next appointment mutation affordance slice: a clearer visible move/resize UX or a proposal review/history surface, depending on which feels most useful after the keyboard smoke.
+3. Keep using browser/Chrome smoke checks before leaving any UI review to Yuri.
+
+## Previous Closeout - Sprint 25
 
 ## Previous Closeout - Sprint 23
 

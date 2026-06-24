@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-move-resize-proposal-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 09:04 +1000 |
 | Source HEAD | `8729ebe` |
 
@@ -44,6 +44,6 @@ All scenarios rely on existing _find_conflicting_appointment and _overlaps logic
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; tests-only backend hardening matched the Sprint 26 boundary.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation released with `complete sprint task`.

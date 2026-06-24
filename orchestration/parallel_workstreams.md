@@ -158,9 +158,9 @@ at medium/high once the plan is stable, then think hard again before integration
 | Item | Value |
 |---|---|
 | Programme | Phase 2 Programme 2B - Safe Appointment Mutation Workbench |
-| Status | Dispatched and plan-gated |
-| Launch Gate | Awaiting Claude and Antigravity implementation-plan packets |
-| Integration Gate | Closed until plans are accepted and implementation is released with `complete sprint task` |
+| Status | Integrated locally; closeout verification complete; pending push/audit |
+| Launch Gate | Closed; Claude and Antigravity plans were reviewed and implementation was released |
+| Integration Gate | Closed; implementation submissions reviewed, integrated, and hotfixed by Ariadne |
 | Theme | Bring appointment move/resize interactions under the same proposal-first safety rail as create/edit/status/waiting-area changes |
 
 ### Workstream S26-A - Backend Move/Resize Proposal Contract
@@ -174,7 +174,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Backend appointment update proposal route/schema/tests as needed; conflict blocks, break warnings, terminal-status blocks, practice isolation, and non-mutating proof |
 | Out of Scope | Diary frontend implementation, drag/drop/resize UI, taskpane, Command Centre, Gemini, migrations unless the plan proves a schema issue, broad appointment redesign |
 | Verification | Plan packet first; after approval focused appointment update proposal pytest checks, py_compile/check_backend as needed, and row-unchanged assertions |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream S26-B - Diary Move/Resize Proposal Flow
 
@@ -187,7 +187,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.html`, `docs/diary/diary.js`, smoke helpers, and minimal CSS only if required and documented; assess current absence/presence of drag/drop/resize affordances |
 | Out of Scope | Backend route/schema changes, taskpane, Command Centre, Gemini, Resource Administration, Waiting Room layout, recurrence, broad visual redesign |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, `npm run validate-all`, smoke-mode proposal checks, and Ariadne Chrome/CDP checks where feasible |
-| Status | Queued |
+| Status | Integrated with Ariadne hotfix |
 
 ### Workstream S26-C - Ariadne Integration and Review
 
@@ -200,7 +200,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `poll --fetch`, plan/review inspection, focused backend/frontend checks, Chrome/CDP/live diary smoke where relevant, bounded safe repairs |
 | Out of Scope | Acting as proof of a separate Codex worker submission or bypassing worker plan gates |
 | Verification | `poll --fetch`, exact diff review, focused tests, browser/Chrome checks if runtime UI changes land, `git diff --check` |
-| Status | Ariadne-owned |
+| Status | Closeout in progress |
 
 ## Sprint 25: Status/Waiting-Area Proposal Retrofit
 

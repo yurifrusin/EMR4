@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 26 - Programme 2B move/resize proposal flow dispatched and plan-gated |
-| **Next recommended work** | Poll Sprint 26 plan packets, review backend/UI compatibility, then release implementation only with `complete sprint task` |
+| **Current active track** | Sprint 26 - Programme 2B move/resize proposal flow integrated; pending push/deploy/audit and one physical-keyboard shortcut smoke |
+| **Next recommended work** | Push Sprint 26 closeout, verify deployed v92 diary assets, then Yuri should run the residual Alt+Arrow live diary smoke before the next sprint |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -395,7 +395,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Current Sprint 25 status/waiting-area proposal retrofit integration |
+| **Latest integration commit** | Current Sprint 26 move/resize proposal flow integration in progress |
 
 ### Tag map (all tags pushed to remote)
 

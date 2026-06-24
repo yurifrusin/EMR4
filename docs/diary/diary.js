@@ -449,6 +449,13 @@ function fromMins(m) {
   return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 }
 
+function localDateKey(dateValue) {
+  const yyyy = dateValue.getFullYear();
+  const mm = String(dateValue.getMonth() + 1).padStart(2, "0");
+  const dd = String(dateValue.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
 function timeRangeLabel(startMins, endMins) {
   return `${fromMins(startMins)}-${fromMins(endMins)}`;
 }
@@ -1095,6 +1102,24 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         await setAppointmentStatus(a, newStatus, statusSelect);
       });
 
+      statusSelect.addEventListener("keydown", async e => {
+        if (!e.altKey || !["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) return;
+        e.preventDefault();
+        e.stopPropagation();
+        let deltaStart = 0;
+        let deltaDuration = 0;
+        if (e.key === "ArrowUp") {
+          deltaStart = -15;
+        } else if (e.key === "ArrowDown") {
+          deltaStart = 15;
+        } else if (e.key === "ArrowLeft") {
+          deltaDuration = -15;
+        } else if (e.key === "ArrowRight") {
+          deltaDuration = 15;
+        }
+        await handleMoveResize(a, deltaStart, deltaDuration, col);
+      }, true);
+
       statusChanger.appendChild(statusSelect);
 
       if (isProvisional) {
@@ -1143,14 +1168,14 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
           } else if (e.key === "ArrowRight") {
             deltaDuration = 15;
           }
-          await handleMoveResize(a, deltaStart, deltaDuration);
+          await handleMoveResize(a, deltaStart, deltaDuration, col);
           return;
         }
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           span.click();
         }
-      });
+      }, true);
 
       columnBody.appendChild(span);
     });
@@ -2672,7 +2697,7 @@ function setFlowPanelVisibility(isOpen, persist = true) {
   }
 }
 
-async function handleMoveResize(appt, deltaStart, deltaDuration) {
+async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) {
   const currentStartMins = toMins(appt.start_time_local);
   const newStartMins = Math.max(0, Math.min(1425, currentStartMins + deltaStart));
   const newDuration = Math.max(15, (appt.duration_minutes || 15) + deltaDuration);
@@ -2684,11 +2709,17 @@ async function handleMoveResize(appt, deltaStart, deltaDuration) {
   const newStartTimeString = fromMins(newStartMins);
   const provisionalPatientName = appt.patient_name_provisional || appt.provisional_name || "";
   const isProvisional = !!provisionalPatientName || !appt.patient_id || !appt.patient;
+  const practitionerId = appt.practitioner?.id
+    || appt.practitioner_id
+    || column?.practitioner_id
+    || (appt.practitioner?.ahpra_number
+      ? ahpraToPractitionerMap[appt.practitioner.ahpra_number]?.id
+      : null);
 
   const payload = {
-    practitioner_id: appt.practitioner?.id || appt.practitioner_id,
+    practitioner_id: practitionerId,
     appointment_type_id: appt.appointment_type_id || appt.appointment_type?.id || null,
-    appointment_date: appt.appointment_date,
+    appointment_date: appt.appointment_date || localDateKey(diaryDate),
     start_time_local: newStartTimeString,
     duration_minutes: newDuration,
     reason: appt.reason || "",
@@ -2737,15 +2768,14 @@ async function handleMoveResize(appt, deltaStart, deltaDuration) {
     }
 
     if (isSmokeMode()) {
+      const cachedAppt = mockAppointmentsCache?.find(item => item.id === appt.id) || appt;
+      cachedAppt.start_time_local = newStartTimeString;
+      cachedAppt.duration_minutes = newDuration;
       appt.start_time_local = newStartTimeString;
       appt.duration_minutes = newDuration;
       setStatus("Booking moved/resized (Mock)");
       await loadDiary(true);
-      const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
-      if (el) {
-        el.classList.add("appt-active");
-        el.focus();
-      }
+      scrollToAppointment(appt.id);
     } else {
       setStatus("Updating appointment...");
       const updateRes = await apiFetch(`/appointments/${appt.id}`, {
@@ -2757,11 +2787,7 @@ async function handleMoveResize(appt, deltaStart, deltaDuration) {
       }
       setStatus("Booking updated successfully.");
       await loadDiary(true);
-      const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
-      if (el) {
-        el.classList.add("appt-active");
-        el.focus();
-      }
+      scrollToAppointment(appt.id);
     }
   } catch (err) {
     console.error(err);
