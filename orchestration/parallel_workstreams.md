@@ -140,6 +140,54 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 22: Development Tooling Optimisation
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan-gated |
+| Launch Gate | Packets queued for Claude and Antigravity; Ariadne owns review harness |
+| Integration Gate | Do not integrate until required plan packets are visible, reviewed, and explicitly released with `complete sprint task` |
+| Theme | Improve EMR4's AI-assisted development feedback loops before the next product-growth sprint |
+
+### Workstream S22-A - Backend Dev Loop Tooling
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-backend-dev-loop-tooling.md` |
+| Goal | Plan and then improve backend development feedback loops so Ariadne and workers can run fast, reliable checks before residual user review |
+| In Scope | Backend/dev-environment tooling, pytest/static-check ergonomics, startup verification, backend check-tier documentation, small scripts/config that reduce false starts |
+| Out of Scope | Product behaviour, diary/taskpane UI, migrations, schema changes, WhatsApp production send behaviour, security alert dismissal, broad dependency upgrades |
+| Verification | Plan packet first; after approval app import/startup check, proposed focused checks, `run_dev` or equivalent non-destructive probe where feasible, `git diff --check` |
+| Status | Queued |
+
+### Workstream S22-B - Frontend Browser Dev Tooling
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-frontend-browser-dev-tooling.md` |
+| Goal | Plan and then improve diary/taskpane frontend and browser-feedback loops so UI affordance regressions are caught by tools before Yuri is asked to test |
+| In Scope | Diary/taskpane smoke commands, browser/check scripts, local/deployed asset version checks, npm script ergonomics, Antigravity/Gemini-assisted UI QA notes |
+| Out of Scope | Product UI behaviour changes, visual redesign, backend API contracts, migrations, patient/clinical flows, production WhatsApp sending, forced broad dependency upgrades |
+| Verification | Plan packet first; after approval JS/build/validate or smoke commands, local/deployed asset URL checks where feasible, `git diff --check`, browser/visual observations |
+| Status | Queued |
+
+### Workstream S22-C - Ariadne Architecture and Tooling Harness
+
+| Item | Value |
+|---|---|
+| Owner | Ariadne/orchestrator Codex |
+| Role | orchestrator |
+| Branch | `master` only for orchestration docs after worker plans are accepted or during closeout |
+| Goal | Review Sprint 22 plans against the software-fundamentals architecture frame: shared design language, fast feedback loops, TDD-sized increments, deep-module boundaries, and residual user-test discipline |
+| In Scope | Plan review, integration checklist, closeout wording, and next-sprint architecture/tooling recommendations |
+| Out of Scope | Acting as proof of a separate Codex worker submission, production feature implementation, or bypassing worker plan gates |
+| Verification | `poll --fetch`, plan/review inspection, feasible local/browser checks before closeout, `git diff --check` for orchestration updates |
+| Status | Ariadne-owned |
+
 ## Sprint 20: Security Baseline
 
 | Item | Value |
