@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 72396f8 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-node-security-baseline --summary "Short plan summary"` |
@@ -90,5 +90,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `NEW`: `.github/workflows/node-security.yml`
 - Verification run:
+  - Local manifest validation: `npm run validate` inside `EMR4 Sidebar` (exit code: 0, manifest is valid).
+  - Local production security audit: `npm audit --omit=dev` inside `EMR4 Sidebar` (exit code: 0, found 0 vulnerabilities).
+  - Local full npm audit: `npm audit` (exit code: 1, reported 16 vulnerabilities: 13 moderate, 3 high, in build tools / devDependencies).
+  - Git check: `git diff --check` (exit code: 0, no whitespace errors).
 - Remaining risks:
+  - Build-tool vulnerabilities (16 vulnerabilities, 13 moderate, 3 high) in devDependencies remain unpatched to avoid local dev-server and debugging breaking changes. These represent developer/CI runner compromise risks. They are mitigated by running a non-blocking full audit check in CI to track remediation.
+

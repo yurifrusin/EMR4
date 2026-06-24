@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 20 - plan-gated security baseline queued after Sprint 19 resource-admin user review |
-| **Next recommended work** | Collect Sprint 20 plan packets, then approve implementation only after reviewing Claude, Antigravity, and Codex-worker plans |
+| **Current active track** | Sprint 20 - security baseline integrated locally after plan-gated Claude, Antigravity, and Codex-worker submissions |
+| **Next recommended work** | Observe Sprint 20 GitHub Actions/security signals, then choose build-tool remediation or the next diary/admin feature sprint |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -341,7 +341,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Current closeout commit — Document dev data querying and close sprint 17 |
+| **Latest integration commit** | Current Sprint 20 security baseline integration commit |
 
 ### Tag map (all tags pushed to remote)
 

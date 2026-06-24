@@ -1,0 +1,46 @@
+name: Node & Office Add-in Security Baseline
+
+on:
+  push:
+    paths:
+      - "EMR4 Sidebar/**"
+      - ".github/workflows/node-security.yml"
+  pull_request:
+    paths:
+      - "EMR4 Sidebar/**"
+      - ".github/workflows/node-security.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  security-check:
+    name: Run Manifest Validation & Security Audits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: "EMR4 Sidebar/package-lock.json"
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: "./EMR4 Sidebar"
+
+      - name: Run Manifest Validation (Blocking)
+        run: npm run validate
+        working-directory: "./EMR4 Sidebar"
+
+      - name: Run Production Dependency Security Audit (Blocking)
+        run: npm audit --omit=dev
+        working-directory: "./EMR4 Sidebar"
+
+      - name: Run Build-Tool / DevDependency Security Audit (Non-Blocking)
+        run: npm audit || true
+        working-directory: "./EMR4 Sidebar"

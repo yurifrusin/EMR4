@@ -8,162 +8,102 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 19: Resource Admin Foundations |
-| Integrated through | Sprint 19 resource-admin ordering hotfix |
-| Status | Integrated, pushed, deployed, and user-reviewed; Sprint 20 security baseline queued |
+| Batch | Sprint 20: Security Baseline |
+| Integrated through | Sprint 20 security baseline integration |
+| Status | Integrated locally with verification passing; ready for push/deploy audit |
 | Last updated | 2026-06-24 |
 
 ## What Changed
 
-- Added the first backend admin contract for diary physical rooms and waiting
-  areas: list rooms, create/update/soft-archive rooms, and create/update/
-  soft-archive waiting areas.
-- Added Admin/PracticeOwner RBAC for resource mutations while preserving normal
-  authenticated read paths for diary resource data.
-- Added practice and location scoping plus active-resource validation for room
-  `default_waiting_area_id`.
-- Added focused `tests/test_diary_resource_admin.py` coverage for auth gates,
-  role gates, practice isolation, CRUD, soft archive, order insertion/
-  resequencing, and roster preservation after archive.
-- Added a restrained diary Resource Administration modal for rooms and waiting
-  areas under the active location context, with smoke-mode mock CRUD and visible
-  success/failure feedback.
-- Added `orchestration/resource_admin_review.md` as the Sprint 19 review harness
-  and clarified the post-poll review/integration rule in protocol docs.
-- During Codex integration, repaired the diary UI adapter to use the final
-  backend `PATCH` soft-archive contract instead of `PUT`/`DELETE`.
-- During Ariadne self-testing, found and hotfixed two live UI issues before
-  handing user tests back: Office.js blocks native `window.confirm`, so archive
-  now uses a safe second-click fallback; Admin affordance visibility now uses
-  a more robust role check with `/auth/me` fallback and tolerant role spelling;
-  and the Admin entry point is visible/discoverable with access denied inside
-  the modal for non-admin users while backend RBAC still protects writes.
-- During user review, hotfixed the resource-admin modal so create/edit forms
-  show explicit Save/Cancel actions at the top and bottom, newly saved resources
-  default to the next display order, refresh into view with a highlight, and the
-  Waiting Room waiting-area tabs use a visible horizontal scrollbar when the
-  tab set overflows.
-- During user review, hotfixed the Waiting Room filter tabs so configured
-  waiting areas are the canonical source, ordered by admin `display_order`, old
-  legacy/template labels are mapped to configured areas when possible, and the
-  `Unassigned` tab is suppressed when configured waiting areas exist.
-- During user review, hotfixed Waiting Room pane state restoration so the saved
-  open state explicitly removes the hidden class after diary reloads/admin
-  refreshes, the close button always closes rather than toggles, and the header
-  button exposes an active/expanded state.
-- During user review, hotfixed waiting-area admin save/archive sync so the
-  Waiting Room pane refreshes its active waiting-area cache immediately, clears
-  stale check-in default cache entries, and resets the selected tab if the
-  selected area was archived.
-- During user review, hotfixed resource ordering semantics so room and waiting
-  area create/update actions insert at the requested 0-based position and shift
-  active siblings rather than failing on duplicate raw `display_order` values.
-  Active resources are compacted ahead of archived resources, archived room rows
-  no longer block visible order slots, and diary smoke mode/form controls now
-  match the same 0-based ordering model.
+- Added `.github/workflows/python-security.yml` for `pip-audit` and Bandit.
+- Added `.github/workflows/node-security.yml` for Office manifest validation,
+  blocking production `npm audit --omit=dev`, and non-blocking full npm audit
+  visibility for build-tool/devDependency risks.
+- Added `.github/workflows/codeql.yml` for GitHub CodeQL analysis across Python
+  and JavaScript/TypeScript plus `.github/dependabot.yml` for GitHub Actions,
+  pip, and npm update tracking.
+- Added `pyproject.toml` with Bandit configuration only; no runtime Python
+  package configuration was introduced there.
+- Added `orchestration/security_baseline_review.md`, the Ariadne-facing review
+  harness for collecting local audit output, GitHub security signals, and future
+  Codex Security scan results.
+- During integration, Ariadne applied the small security dependency bumps surfaced
+  by Claude's `pip-audit`: `cryptography==48.0.1` and
+  `pydantic-settings==2.14.2`, clearing the blocking Python CVE gate.
 
 ## Recommended User Review
 
-Use `orchestration/resource_admin_review.md` for the detailed checklist. Minimum
-manual review:
+No clinical UI smoke test is required for Sprint 20 because no app, diary,
+taskpane, Command Centre, migration, or patient-flow runtime code changed. The
+manual review is GitHub/security-signal oriented:
 
-1. Hard-refresh the diary after GitHub Pages refreshes and confirm the diary
-   loads `diary.js?v=83` / `diary.css?v=83`. Restart the backend/dev server
-   first so the API reorder semantics are active.
-2. Log in as an Admin/PracticeOwner, open the diary, and confirm the Admin
-   button appears without cluttering the one-location diary.
-3. Open Resource Administration and confirm rooms/waiting areas display dense
-   0-based order values with no gaps such as `0,1,3` or `0,4`.
-4. Create a waiting area and confirm it receives the next visible order; edit an
-   existing waiting area to another visible position and confirm siblings shift.
-5. Edit a room such as Room 3 to an occupied/previously archived visible order
-   and confirm it saves/reorders instead of showing a duplicate-order error.
-6. Archive the room and waiting area, confirming they disappear from active lists
-   and the remaining visible order compacts without breaking diary/roster display.
-7. Log in as a GP or Receptionist and confirm admin controls are unavailable and
-   backend writes are forbidden.
-8. Confirm main diary appointment blocks, Waiting Room cards, appointment status
-   controls, booking proposals, taskpane, and Command Centre are unchanged.
+1. After the push, open GitHub Actions and confirm `Python Security`,
+   `Node & Office Add-in Security Baseline`, `CodeQL`, and `Deploy GitHub Pages`
+   appear as expected.
+2. Confirm `Python Security` passes on `master`; it should now report no known
+   vulnerabilities after the dependency bumps.
+3. Confirm `Node & Office Add-in Security Baseline` passes even though the full
+   npm audit step logs the known devDependency/build-tool vulnerabilities.
+4. Confirm GitHub's Security tab shows CodeQL/Dependabot signals beginning to
+   populate after their first scheduled/manual runs.
+5. Optional but recommended: start a Codex Security diff scan against the Sprint
+   20 integration diff and record any validated findings before the next runtime
+   feature sprint.
 
 ## Not Required Before Moving On
 
-- No roster editor, diary template editor, drag/drop, resize, appointment
-  geometry redesign, booking/status semantics, patient duplicate merge, taskpane,
-  Command Centre, or Bernie runtime testing is required for Sprint 19.
-- No migration was added for this sprint; the rooms and waiting-area tables
-  already existed.
-- No non-person bookable-resource schema is required yet.
+- No diary, waiting-room, resource-admin, taskpane, Command Centre, Word add-in,
+  booking/status, patient-admin, migration, seed-data, or GitHub Pages visual
+  deployment testing is required for Sprint 20.
+- No forced npm devDependency upgrade is required yet; the full npm audit is
+  deliberately non-blocking until those build-tool updates can be tested as their
+  own slice.
 
 ## Known Follow-Up
 
-- Waiting-area order is now normalized by the API/UI, but there is still no
-  waiting-area DB uniqueness index; decide later whether that becomes useful
-  once broader practice-admin tooling exists.
-- General audit logging remains a future platform need before Bernie or higher
-  autonomy write paths expand.
-- Non-person bookable resources remain deliberately deferred; rooms are physical
-  rooms, not bookable entities by themselves.
-- A broader practice-admin area may eventually absorb this diary modal once
-  resource, roster, template, appointment type, and practitioner schedule admin
-  all exist.
-- Future resource-admin work should guarantee every active room has a default
-  waiting area, defaulting to the active waiting area with display order `0`
-  when no room-specific default is set.
+- `npm audit` still reports 16 devDependency/build-tool vulnerabilities
+  (13 moderate, 3 high). Production dependency audit is clean; the remaining
+  build-tool supply-chain work should be planned separately if it starts to
+  affect CI runner or developer-machine risk tolerance.
+- Bandit's full low-severity output includes a silent `try/except/pass` in
+  `app/routers/consultation.py`; consider replacing it with bounded logging in a
+  later backend hygiene sprint.
+- CodeQL build/language settings may need tuning after the first GitHub Actions
+  run; keep the workflow minimal unless GitHub reports a concrete setup problem.
+- Dependabot labels may need to be created in GitHub if PR labels are desired;
+  missing labels should not block dependency update PRs.
+- Future auth, RBAC, clinical-data route, or AI-tooling changes should use the
+  Codex Security plugin and/or Claude `/security-review` as an on-demand deep
+  review complement to the always-on CI gates.
 
 ## Verification
 
-- `.venv\Scripts\python.exe -m py_compile app\schemas\diary.py app\routers\diary.py tests\test_diary_resource_admin.py` -> passed
-- `.venv\Scripts\python.exe -m pytest tests\test_diary_resource_admin.py -q --tb=short -p no:randomly` -> 25 passed
-- `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_diary_roster.py tests\test_diary_template.py tests\test_waiting_area_contract.py -q --tb=short -p no:randomly` -> 46 passed
-- `node --check docs\diary\diary.js` -> passed after v82 waiting-area pane sync hotfix
-- `git diff --check` -> passed, with CRLF/LF warnings only
-- Chrome deployed smoke check: `diary.js?v=75` archive bug reproduced, hotfixed,
-  and v75 smoke archive passed; v77 role-affordance code is pushed but GitHub
-  Pages was serving v77 at the last automated deployment poll after the v78 push.
-- Chrome local smoke check against `http://127.0.0.1:8765/diary/diary.html?smoke=true`
-  after v79: Admin modal opened; Waiting Areas add form showed top and bottom
-  Save/Cancel controls; new waiting area appeared immediately with order 3 and a
-  highlight; edit/cancel returned to the list; first archive click showed the
-  inline fallback warning; second click archived successfully.
-- Chrome local smoke check after v80: Waiting Room panel loaded `diary.js?v=80`
-  and rendered waiting-area tabs as `All`, `Main Waiting Room`,
-  `Sub-waiting Room B` with no `Unassigned` tab while configured waiting areas
-  existed.
-- Chrome local smoke check after v81: Waiting Room pane opened from the header
-  button, restored open after reload with `aria-expanded="true"` and active
-  button styling, and the close button hid the pane with `aria-expanded="false"`.
-- Chrome local smoke check after v82: creating `Pane Sync Smoke` in Resource
-  Administration added it to the open Waiting Room pane tabs immediately; the
-  first archive click showed the inline confirm fallback; the second archive
-  removed it from the admin list and the Waiting Room pane tabs without reload.
-- Chrome deployed smoke check after v82: creating `Deployed Pane Sync Smoke`
-  added it to the open Waiting Room pane tabs immediately; archiving it removed
-  it from both the admin list and pane tabs without reload; GitHub Pages served
-  `diary.js?v=82` / `diary.css?v=82`.
-- `.venv\Scripts\python.exe -m py_compile app\schemas\diary.py app\routers\diary.py tests\test_diary_resource_admin.py` -> passed after v83 ordering hotfix
-- `.venv\Scripts\python.exe -m pytest tests\test_diary_resource_admin.py -q --tb=short -p no:randomly` -> 30 passed
-- `.venv\Scripts\python.exe -m pytest tests\test_location_scoped_diary.py tests\test_diary_roster.py -q --tb=short -p no:randomly` -> 29 passed
-- `.venv\Scripts\python.exe -m pytest tests\test_waiting_area_contract.py tests\test_waiting_area_checkin_defaults.py -q --tb=short -p no:randomly` -> 18 passed
-- `node --check docs\diary\diary.js` and `git diff --check` -> passed, with
-  CRLF/LF warnings only
-- Rendered Chrome smoke check against
-  `http://127.0.0.1:8765/diary/diary.html?smoke=true` after v83: room and
-  waiting-area order inputs have `min=0`; a new waiting area defaulted to order
-  2; Room 3 moved to order 1 and Room 2 shifted to order 2; first Archive click
-  showed the inline fallback warning and the second click archived/compacted the
-  waiting-area list.
-- GitHub Pages deployed check -> live `diary.html` served `diary.js?v=83` /
-  `diary.css?v=83`.
+- `.venv\Scripts\pip-audit.exe -r requirements.txt --desc` -> passed after
+  bumping `cryptography` and `pydantic-settings`; no known vulnerabilities.
+- `.venv\Scripts\bandit.exe -r app/ scripts/ -ll -ii -c pyproject.toml` ->
+  passed; no medium+ severity/confidence issues.
+- `npm run validate` in `EMR4 Sidebar` -> passed; manifest valid.
+- `npm audit --omit=dev` in `EMR4 Sidebar` -> passed; 0 production
+  vulnerabilities.
+- `npm audit` in `EMR4 Sidebar` -> non-blocking visibility check reported the
+  known 16 devDependency/build-tool vulnerabilities.
+- Python/PyYAML parsed `.github/workflows/python-security.yml`,
+  `.github/workflows/node-security.yml`, `.github/workflows/codeql.yml`, and
+  `.github/dependabot.yml` successfully.
+- `git diff --check` -> passed, with existing line-ending warnings only.
+- Codex Security app-mediated scan was not run during the automated heartbeat
+  integration because it requires an interactive workspace start; the review path
+  is documented in `orchestration/security_baseline_review.md`.
 
 ## Recommended Next Direction
 
-After Sprint 19 user review, the strongest next candidates are:
+After Sprint 20 GitHub Actions are observed, the strongest next candidates are:
 
-1. Roster admin writes for date-specific room/practitioner assignments.
-2. Appointment type/schedule admin foundations.
-3. A small operation-result pattern for diary/admin surfaces so success/failure
-   feedback stays visible and consistent.
-4. Duplicate merge workflow design/implementation, if patient-admin safety should
+1. Build-tool/devDependency remediation plan for the Node/Office toolchain.
+2. Roster admin writes for date-specific room/practitioner assignments.
+3. Appointment type/schedule admin foundations.
+4. A small operation-result pattern for diary/admin surfaces.
+5. Duplicate merge workflow design/implementation if patient-admin safety should
    take priority over diary admin depth.
 
 ## Sprint 15 Review Harness - Waiting Room Check-In Operations

@@ -1,0 +1,31 @@
+name: Python Security
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install security tools
+        run: pip install pip-audit bandit
+
+      - name: Dependency CVE scan (pip-audit)
+        # Fails when known CVEs are found in requirements.txt.
+        # To clear a finding after verifying it is not reachable or after
+        # upgrading the dep, use: pip-audit -r requirements.txt --ignore-vuln <GHSA-ID>
+        run: pip-audit -r requirements.txt --desc
+
+      - name: Static security analysis (Bandit)
+        # Scans app/ and scripts/ at medium+ severity AND medium+ confidence (-ll -ii).
+        # Low-severity or low-confidence findings are intentionally suppressed.
+        # Configuration lives in pyproject.toml [tool.bandit].
+        run: bandit -r app/ scripts/ -ll -ii -c pyproject.toml

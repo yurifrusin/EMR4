@@ -1,0 +1,9 @@
+[tool.bandit]
+# Paths excluded from static security scanning.
+# .venv and alembic/ (generated migrations) are always excluded.
+# tests/ is excluded because assert statements (B101) are expected there.
+exclude_dirs = [".venv", "tests", "alembic"]
+
+# No rules are skipped at this time. Add BXXX codes here only with a written
+# justification comment if a specific check produces confirmed false positives.
+skips = []

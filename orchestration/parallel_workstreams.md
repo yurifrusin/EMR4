@@ -142,9 +142,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Plan-gated; packets dispatched |
-| Launch Gate | HANDIN READY after this dispatch commit is pushed |
-| Integration Gate | Pending plan packets from Claude, Antigravity, and Codex worker |
+| Status | Integrated locally after plan-gated review |
+| Launch Gate | Complete |
+| Integration Gate | Complete; observe GitHub Actions after push |
 | Theme | Add a small repeatable security baseline before deeper product work |
 
 ### Workstream S20-A - Python Security Baseline
@@ -158,7 +158,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Python security workflow/tooling notes, likely `pip-audit` and Bandit, deterministic commands Ariadne can rerun, plus Claude Code tool/plugin recommendations |
 | Out of Scope | Runtime app behavior, migrations, diary/taskpane UI, Node/Office audit |
 | Verification | New local security commands where feasible; YAML validation/diff checks; exact command output in completion notes |
-| Status | Queued; plan-gated |
+| Status | Integrated |
 
 ### Workstream S20-B - Node Office Security Baseline
 
@@ -171,7 +171,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Node/Office audit workflow or metadata, `EMR4 Sidebar` package audit reproducibility, concise local command notes, plus Antigravity/Gemini tool/plugin recommendations |
 | Out of Scope | Runtime frontend behavior, diary/taskpane asset changes, backend/Python security checks |
 | Verification | `npm audit`/Office validation where feasible; `git diff --check`; exact command output in completion notes |
-| Status | Queued; plan-gated |
+| Status | Integrated |
 
 ### Workstream S20-C - Security Review Harness
 
@@ -184,7 +184,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | CodeQL/Dependabot config, `orchestration/security_baseline_review.md`, Codex Security review path, installed Codex tool/skill inventory |
 | Out of Scope | Production code, migrations, runtime frontend/backend behavior, duplicating Claude/Antigravity workflows |
 | Verification | `git diff --check`, YAML validation where feasible, documented Codex Security scan/review path |
-| Status | Queued; plan-gated |
+| Status | Integrated |
 
 ### Deferred Product Follow-Up
 
