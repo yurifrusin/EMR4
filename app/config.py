@@ -39,7 +39,15 @@ class Settings(BaseSettings):
     # a cloud-storage mount. Dev: a local path the OneDrive client syncs.
     patient_files_dir: str = "./patient_files"
 
-    model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "case_sensitive": False}
+    # The repo-level .env is shared by the backend and local helper scripts
+    # such as WhatsApp operational notifications. Ignore helper-only keys here
+    # so adding a local tool secret does not prevent the API from starting.
+    model_config = {
+        "env_file": ".env",
+        "env_file_encoding": "utf-8",
+        "case_sensitive": False,
+        "extra": "ignore",
+    }
 
     @model_validator(mode="after")
     def _fail_closed_on_insecure_secret(self):
