@@ -304,10 +304,20 @@ python scripts\agent_worktrees.py retire-stale --apply
 routine; they must be reviewed or explicitly abandoned first.
 
 9. Report final post-push closeout status to the user:
-   - what they should manually test before the next dispatch
+   - every Codex-side/tool-enabled review and test already run, including
+     browser/Chrome/Office-dialog checks for UI work when relevant and available
+   - any bounded hotfixes applied after those checks
+   - what remains for the user to manually review or test because Ariadne could
+     not confirm it with available tools, or "none required" with the reason
    - what does not need manual testing yet
    - where Codex recommends taking the project next
    - any project-level concern raised by the integrated submissions
+
+Ariadne's closeout ping is the user's final sprint notification. It must not
+hand off avoidable review work: run all feasible tool-enabled checks first, then
+state only the residual human checks that require Yuri's logged-in browser,
+clinical judgment, external service console, phone/device, or other unavailable
+real-world context.
 
 ### Parallel ownership rule
 

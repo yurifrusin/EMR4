@@ -10,10 +10,10 @@ hit local tooling issues after plan approval; no secrets are committed here.
 |---|---|
 | Captured | 2026-06-24 |
 | Source | GitHub Security APIs via `gh` |
-| CodeQL open alerts | 50 |
-| CodeQL high alerts | 7 |
-| CodeQL medium alerts | 2 |
-| Dependabot open alerts | 0 |
+| CodeQL open alerts | 43 after Sprint 21 CodeQL rerun |
+| CodeQL high alerts | 3 after Sprint 21 CodeQL rerun |
+| CodeQL medium alerts | 0 after Sprint 21 CodeQL rerun |
+| Dependabot open alerts | 7 npm devDependency/build-tool alerts after GitHub advisory refresh |
 | Secret scanning open alerts | 0 |
 | Secret scanning resolved alerts | 1 |
 
@@ -27,8 +27,8 @@ hit local tooling issues after plan approval; no secrets are committed here.
 | 16 | `py/empty-except` | `app/routers/consultation.py` | Claude | Addressed by bounded malformed-JSON logging |
 | Node dev audit | `form-data`, `hono`, `http-proxy-middleware` | `EMR4 Sidebar/package-lock.json` | Antigravity | Addressed by non-breaking lockfile updates |
 
-These CodeQL alerts will remain visible until GitHub re-runs analysis on the
-integrated `master` commit. Re-check after the CodeQL workflow completes.
+GitHub re-ran CodeQL on the integrated `master` commit and the targeted
+consultation alerts are no longer open.
 
 ## Defer
 
@@ -44,6 +44,8 @@ integrated `master` commit. Re-check after the CodeQL workflow completes.
 - `npm audit --omit=dev` remains clean after Antigravity's package-lock update.
 - Full `npm audit` still reports devDependency/build-tool issues in
   `serialize-javascript` and `uuid` through older build tooling.
+- GitHub Dependabot now also reports open devDependency/build-tool advisories,
+  including `webpack-dev-server`.
 - Those remaining issues are not production runtime dependencies and require
   higher-risk major upgrades, so they are deferred.
 
@@ -55,12 +57,10 @@ integrated `master` commit. Re-check after the CodeQL workflow completes.
 
 ## Recommended Follow-Up
 
-1. Re-run/observe GitHub CodeQL after Sprint 21 lands; confirm consultation
-   alerts 7, 8, 12, 13, 14, 15, and 16 close.
-2. Plan a small dev-script hygiene task for `scripts/audit_patient_duplicates.py`
+1. Plan a small dev-script hygiene task for `scripts/audit_patient_duplicates.py`
    to remove clear-text patient duplicate logging or gate it behind explicit
    redaction/output options.
-3. Plan a frontend hygiene task to resolve JavaScript automatic-semicolon
+2. Plan a frontend hygiene task to resolve JavaScript automatic-semicolon
    insertion notes in both source and deployed taskpane copies.
-4. Keep forced Office/webpack major devDependency upgrades deferred until they
+3. Keep forced Office/webpack major devDependency upgrades deferred until they
    can be tested as a dedicated build-tool modernization sprint.

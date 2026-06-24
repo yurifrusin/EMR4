@@ -78,6 +78,12 @@ Read these before acting on remembered process details.
   user explicitly granted proceed-through integration for that sprint. Plan-gated
   approval still requires explicit `complete sprint task` before workers begin
   implementation.
+- Closeout ping rule: Ariadne's sprint-closeout notification must include the
+  Codex-side/tool-enabled reviews and tests already run, any bounded hotfixes
+  made from those checks, and only the residual user review/testing that could
+  not be confirmed with available tools. If no manual testing remains, say so
+  explicitly and why. UI work should include browser/Chrome/Office-dialog checks
+  where available before asking Yuri to test.
 - Protocol amendment rule: prefer batching non-urgent orchestration protocol edits
   until the discussion settles. Codex should remind the user before launch if
   agreed protocol edits are still pending.

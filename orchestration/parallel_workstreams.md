@@ -97,8 +97,10 @@ When reporting progress to the user, Codex should use this shape:
   repos/yurifrusin/EMR4/pages/builds` and re-check the live URL.
 - **Aligned:** which refs were pushed/realigned.
 - **Retirement:** stale disposable worktrees removed or left for review.
-- **User Review:** what the user should manually test before the next dispatch,
-  or "none required" with the reason.
+- **User Review:** all feasible Codex-side/tool-enabled checks already run, any
+  hotfixes made from those checks, and only the residual user review/testing
+  Ariadne could not confirm with available tools; use "none required" with the
+  reason when no manual testing remains.
 - **Next Direction:** Codex's recommendation for the next project slice and any
   project-level concerns raised by the integrated agent work.
 
@@ -106,7 +108,7 @@ After every fully integrated batch, Codex updates
 `orchestration/sprint_closeout.md` with:
 
 - what changed
-- recommended user review
+- Codex-run reviews/tests, residual user review, and anything not required
 - what is not required before moving on
 - known follow-up
 - recommended next direction

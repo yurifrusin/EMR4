@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 21: Security Alert Triage and Focused Remediation |
 | Integrated through | Sprint 21 security alert triage integration |
-| Status | Integrated locally with verification passing; ready for push and GitHub security workflow observation |
+| Status | Integrated, pushed, mirrored, and GitHub security workflow review completed |
 | Last updated | 2026-06-24 |
 
 ## What Changed
@@ -24,13 +24,22 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-No clinical UI smoke test is required for Sprint 21 because no diary, taskpane, Command Centre, booking, waiting-room, resource-admin, migration, or patient-flow runtime UI changed. The manual review is GitHub/security-signal oriented:
+No clinical UI smoke test is required for Sprint 21 because no diary, taskpane,
+Command Centre, booking, waiting-room, resource-admin, migration, or patient-flow
+runtime UI changed.
 
-1. After push, confirm GitHub Actions run for `Python Security`, `Node & Office Add-in Security Baseline`, `CodeQL`, and Pages/deploy workflows.
-2. Confirm `Python Security` passes on `master`.
-3. Confirm `Node & Office Add-in Security Baseline` passes: production audit should be clean, while full npm audit may still log known devDependency/build-tool issues.
-4. After CodeQL completes on the new `master`, confirm consultation alerts 7, 8, 12, 13, 14, 15, and 16 close or are replaced by materially lower/noise findings.
-5. Confirm secret scanning still has no open alerts and Dependabot remains at zero open alerts.
+Ariadne completed the GitHub/security-signal review after push:
+
+1. `Python Security` passed on the Sprint 21 `master` commit.
+2. `Node & Office Add-in Security Baseline` passed on the Sprint 21 `master` commit.
+3. `CodeQL` passed on the Sprint 21 `master` commit.
+4. The targeted consultation CodeQL alerts 7, 8, 12, 13, 14, 15, and 16 are no longer open.
+5. Secret scanning has no open alerts.
+6. GitHub Pages is built from `master` `/docs`; no Pages UI deployment changed in this sprint.
+
+Residual user review/testing: none required before the next dispatch. The
+remaining security items are follow-up development tasks Ariadne can plan and
+run; they do not need Yuri to manually test the application.
 
 ## Not Required Before Moving On
 
@@ -41,8 +50,8 @@ No clinical UI smoke test is required for Sprint 21 because no diary, taskpane, 
 
 - CodeQL still reports high clear-text logging findings in `scripts/audit_patient_duplicates.py`; plan a small dev/admin-script redaction task.
 - CodeQL note-level JavaScript automatic-semicolon-insertion alerts remain in taskpane source/deployed copies; plan a frontend hygiene slice that keeps `EMR4 Sidebar/src/taskpane/` and `docs/taskpane/` in sync.
-- Full `npm audit` still reports 13 devDependency/build-tool vulnerabilities: 12 moderate and 1 high, through `serialize-javascript` and `uuid`. Forced fixes require major build-tool upgrades and should be handled separately.
-- GitHub CodeQL alerts may remain open until GitHub re-runs analysis on the pushed integration commit.
+- Full `npm audit` and GitHub Dependabot now report devDependency/build-tool vulnerabilities through `serialize-javascript`, `uuid`, and `webpack-dev-server`. Production audit remains clean. Forced fixes require major build-tool upgrades and should be handled separately.
+- CodeQL still reports note-level unused import/local/global findings; these are hygiene items, not Sprint 21 blockers.
 
 ## Verification
 
