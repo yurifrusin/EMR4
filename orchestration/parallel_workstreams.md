@@ -2,6 +2,8 @@
 
 This is the live board for Codex-orchestrated parallel work. `AGENTS.md` remains the
 single source of truth for durable project state; this file tracks active branch work.
+For the layer between long phases and tactical sprints, use
+`orchestration/phase_programmes.md`.
 
 ## Operating Rules
 
@@ -70,6 +72,10 @@ single source of truth for durable project state; this file tracks active branch
 - Every workstream must state files in scope, files out of scope, verification, and
   merge criteria.
 - Agents should record concerns or disagreement in the "Dissent / Risks" field.
+- Prefer grouping tactical sprints under a coherent phase programme. Sprints
+  should be sized by product outcome rather than file count: backend, frontend,
+  tests, and docs can share a sprint when they serve one clear user-visible or
+  operational outcome.
 
 ## Transparency Routine
 

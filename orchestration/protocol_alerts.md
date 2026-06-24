@@ -11,6 +11,9 @@ Read these before acting on remembered process details.
   disposable worker refs. Use `python scripts\agent_worktrees.py poll --fetch`
   by default. Use `--include-codex-workers` only when a current Codex subagent
   submit is expected.
+- 2026-06-24: Use `orchestration/phase_programmes.md` as the planning layer
+  between implementation phases and tactical sprints. Prefer coherent
+  outcome-sized sprints inside a programme over reactive micro-sprints.
 - 2026-06-17: `submit` has been fixed to resolve the active worktree root. Use
   the task packet's `submit` command. Do not manually push to `master`.
 - Standing orchestration rule: every protocol-followed command should be reported
