@@ -187,6 +187,12 @@ corrective nudges, and `complete sprint task`. Yuri should not need to
 explicitly invoke Computer Use for routine sprint orchestration. If Computer Use
 is unavailable in the current Codex thread, Ariadne should say so and ask Yuri
 for the smallest manual prompt needed.
+After a Codex app or Windows restart, Computer Use may not appear as separate
+desktop `click`/`type` tools even when the plugin is installed. Ariadne should
+first run the Computer Use skill's JS bootstrap path through the Node REPL and
+verify `sky.list_apps()` before declaring it unavailable. Old explicit
+plugin-cache paths can become stale after an app update; use the current
+available skill path and do not rely on tool-search results alone.
 
 When an agent starts a packet, it may mark it:
 
@@ -251,6 +257,13 @@ have submitted on a `codex/<task>` branch, use:
 ```powershell
 python scripts\agent_worktrees.py poll --fetch --include-codex-workers
 ```
+
+If a worker app says it submitted but `poll --fetch` does not show the expected
+plan or review packet, Ariadne should inspect that worker's durable worktree for
+uncommitted `orchestration/agent_inbox/codex/...` files and task-packet status
+changes. A local-only plan is not a submission. Nudge the worker to run the
+packet/protocol `submit --task ...` path so the plan/review packet is committed
+and pushed to its durable branch; do not treat the GUI message as sufficient.
 
 After `poll --fetch` shows the expected implementation review packets for the
 active sprint, Codex/orchestrator may proceed through inspection, bounded repair,

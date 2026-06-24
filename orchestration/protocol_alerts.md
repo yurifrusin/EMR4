@@ -71,6 +71,19 @@ Read these before acting on remembered process details.
   explicitly invoke Computer Use each time. If Computer Use is unavailable in
   the current thread, Ariadne should say so and ask Yuri for only the specific
   manual prompt that cannot be sent.
+- Computer Use restart rule: after a Windows/Codex restart, Computer Use may be
+  available through the skill's JS bootstrap path even when no standalone
+  desktop-control tool appears in tool discovery. Ariadne should read/use the
+  current `computer-use` skill, bootstrap via the Node REPL, and verify
+  `sky.list_apps()` before reporting Computer Use unavailable. Old plugin-cache
+  paths can become stale after Codex updates.
+- Submission visibility rule: if Claude/Antigravity says a plan or review was
+  submitted but `poll --fetch` does not show it, inspect the worker worktree for
+  uncommitted `orchestration/agent_inbox/codex/...` packets and task status
+  edits. Local-only packets are not submitted. Nudge the worker to use the
+  packet/protocol `submit --task ...` path so the files are committed and pushed
+  to the durable worker branch; do not approve implementation from GUI text
+  alone.
 - Sprint integration rule: Codex/orchestrator must not push sprint work through
   to `master` until all active sprint agents, including any Codex subagent worker,
   have submitted or been explicitly stood down.
