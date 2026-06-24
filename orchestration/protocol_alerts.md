@@ -65,6 +65,12 @@ Read these before acting on remembered process details.
   from `master`; set Pages source to GitHub Actions in repository settings.
 - Sprint launch rule: Codex/orchestrator must announce `HANDIN READY` before the
   user prompts external worker agents to run `handin`.
+- External-agent control rule: after `HANDIN READY`, Ariadne should automatically
+  use Computer Use, when available, to send `handin`, corrective nudges, and
+  `complete sprint task` prompts to Claude/Antigravity. Yuri does not need to
+  explicitly invoke Computer Use each time. If Computer Use is unavailable in
+  the current thread, Ariadne should say so and ask Yuri for only the specific
+  manual prompt that cannot be sent.
 - Sprint integration rule: Codex/orchestrator must not push sprint work through
   to `master` until all active sprint agents, including any Codex subagent worker,
   have submitted or been explicitly stood down.

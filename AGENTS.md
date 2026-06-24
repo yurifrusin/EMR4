@@ -181,6 +181,13 @@ python scripts\agent_worktrees.py inbox --agent claude
 python scripts\agent_worktrees.py brief --agent claude
 ```
 
+After Ariadne announces `HANDIN READY`, Ariadne should use Computer Use
+automatically, when available, to prompt Claude/Antigravity with `handin`,
+corrective nudges, and `complete sprint task`. Yuri should not need to
+explicitly invoke Computer Use for routine sprint orchestration. If Computer Use
+is unavailable in the current Codex thread, Ariadne should say so and ask Yuri
+for the smallest manual prompt needed.
+
 When an agent starts a packet, it may mark it:
 
 ```powershell

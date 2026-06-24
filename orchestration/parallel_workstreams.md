@@ -63,6 +63,10 @@ For the layer between long phases and tactical sprints, use
   parallel mode unless the user explicitly instructs otherwise.
 - Codex must announce `HANDIN READY` before the user prompts external workers to
   run `handin`.
+- After `HANDIN READY`, Ariadne should use Computer Use automatically when
+  available to send external-worker `handin`, corrective nudge, and
+  `complete sprint task` prompts. If Computer Use is unavailable, Ariadne asks
+  Yuri for only the specific manual prompt needed.
 - During a sprint, Codex must not push sprint work through to `master` until all
   active sprint agents, including any Codex subagent worker, have submitted or
   been explicitly stood down.
