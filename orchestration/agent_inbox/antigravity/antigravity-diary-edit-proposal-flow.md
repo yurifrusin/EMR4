@@ -92,5 +92,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [docs/diary/diary.js](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.js)
+  - [docs/diary/diary.html](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.html)
 - Verification run:
+  - Syntax check: `node --check docs/diary/diary.js` (Passed)
+  - Layout & Integrity validations: `npm run validate-all` (Passed manifest, 0 vulnerabilities audit, check-assets version bump `v=85` verification)
+  - Diff formatting: `git diff --check` (Passed)
+  - Tested proposal warning rendering, save buttons, and self-conflict exclusions in Smoke Mode.
 - Remaining risks:
+  - None. Changes are fully covered by smoke mode logic and run cleanly.

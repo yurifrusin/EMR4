@@ -1845,6 +1845,7 @@ function openBookingModalForCreate(col, slotTime) {
 }
 
 function openBookingModalForEdit(appt) {
+  resetProposalConfirmation();
   editingAppointmentId = appt.id;
 
   const provisionalPatientName = appt.patient_name_provisional || appt.provisional_name || "";
@@ -2081,6 +2082,7 @@ function simulateProposal(payload) {
     const payloadEnd = payloadStart + payload.duration_minutes;
 
     const hasConflict = mockAppointmentsCache.some(appt => {
+      if (editingAppointmentId && appt.id === editingAppointmentId) return false;
       if (appt.practitioner.ahpra_number !== targetAhpra) return false;
       if (["Cancelled", "NoShow", "DNA"].includes(appt.status)) return false;
 
@@ -2173,75 +2175,77 @@ async function saveBooking() {
     const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
     const statusToSend = statusVal;
 
-    if (!editingAppointmentId) {
-      const isConfirmed = saveBtn.dataset.confirmed === "true";
-      if (!isConfirmed) {
-        const createPayload = {
-          practitioner_id: practitioner.id,
-          appointment_type_id: typeId,
-          appointment_date: dateVal,
-          start_time_local: timeVal,
-          duration_minutes: duration,
-          reason: reason,
-        };
-        if (activeLocationId) {
-          createPayload.location_id = activeLocationId;
-        }
-        if (selectedPatient) {
-          createPayload.patient_id = selectedPatient.id;
-        } else {
-          createPayload.patient_id = null;
-          createPayload.patient_name_provisional = provisionalName;
-        }
+    const isConfirmed = saveBtn.dataset.confirmed === "true";
+    if (!isConfirmed) {
+      const payload = {
+        practitioner_id: practitioner.id,
+        appointment_type_id: typeId,
+        appointment_date: dateVal,
+        start_time_local: timeVal,
+        duration_minutes: duration,
+        reason: reason,
+      };
+      if (activeLocationId) {
+        payload.location_id = activeLocationId;
+      }
+      if (selectedPatient) {
+        payload.patient_id = selectedPatient.id;
+        payload.patient_name_provisional = null;
+      } else {
+        payload.patient_id = null;
+        payload.patient_name_provisional = provisionalName;
+      }
 
-        let proposal;
-        if (isSmokeMode) {
-          proposal = simulateProposal(createPayload);
-        } else {
-          const propRes = await apiFetch("/appointments/proposals/create", {
-            method: "POST",
-            body: JSON.stringify(createPayload)
+      let proposal;
+      if (isSmokeMode) {
+        proposal = simulateProposal(payload);
+      } else {
+        const url = editingAppointmentId
+          ? `/appointments/proposals/update/${editingAppointmentId}`
+          : "/appointments/proposals/create";
+        const propRes = await apiFetch(url, {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        if (!propRes.ok) {
+          throw new Error(await apiErrorMessage(propRes, "Proposal check"));
+        }
+        proposal = await propRes.json();
+      }
+
+      if (proposal.blocks && proposal.blocks.length > 0) {
+        errorEl.textContent = proposal.blocks.map(b => b.message).join(" ");
+        errorEl.classList.remove("hidden");
+        saveBtn.disabled = false;
+        return;
+      }
+
+      if (proposal.warnings && proposal.warnings.length > 0) {
+        if (warningEl) {
+          const warningTitle = document.createElement("div");
+          warningTitle.style.fontWeight = "bold";
+          warningTitle.textContent = "Warning: Please review before saving:";
+          warningEl.appendChild(warningTitle);
+
+          const list = document.createElement("ul");
+          proposal.warnings.forEach(w => {
+            const item = document.createElement("li");
+            item.textContent = w.message;
+            list.appendChild(item);
           });
-          if (!propRes.ok) {
-            throw new Error(await apiErrorMessage(propRes, "Proposal check"));
-          }
-          proposal = await propRes.json();
+          warningEl.appendChild(list);
+          warningEl.classList.remove("hidden");
         }
 
-        if (proposal.blocks && proposal.blocks.length > 0) {
-          errorEl.textContent = proposal.blocks.map(b => b.message).join(" ");
-          errorEl.classList.remove("hidden");
-          saveBtn.disabled = false;
-          return;
-        }
-
-        if (proposal.warnings && proposal.warnings.length > 0) {
-          if (warningEl) {
-            const warningTitle = document.createElement("div");
-            warningTitle.style.fontWeight = "bold";
-            warningTitle.textContent = "Warning: Please review before saving:";
-            warningEl.appendChild(warningTitle);
-
-            const list = document.createElement("ul");
-            proposal.warnings.forEach(w => {
-              const item = document.createElement("li");
-              item.textContent = w.message;
-              list.appendChild(item);
-            });
-            warningEl.appendChild(list);
-            warningEl.classList.remove("hidden");
-          }
-
-          saveBtn.textContent = "Confirm & Save";
-          saveBtn.classList.add("btn-warning-action");
-          saveBtn.dataset.confirmed = "true";
-          saveBtn.disabled = false;
-          return;
-        }
+        saveBtn.textContent = "Confirm & Save";
+        saveBtn.classList.add("btn-warning-action");
+        saveBtn.dataset.confirmed = "true";
+        saveBtn.disabled = false;
+        return;
       }
     }
 
-    const skipLocalWarnings = !editingAppointmentId && saveBtn.dataset.confirmed === "true";
+    const skipLocalWarnings = saveBtn.dataset.confirmed === "true";
 
     if (!skipLocalWarnings) {
       if (appointmentCrossesBreak(ahpra, timeVal, duration)) {
