@@ -288,7 +288,7 @@ async def analyze_consultation(
             _save_encounter(db, patient, payload.document_id, payload.text_delta, consult_type, mbs_items, diagnoses, medications)
         except Exception as e:
             db.rollback()
-            print(f"[analyze] save error: {e}")
+            print(f"[analyze] save error: {type(e).__name__}")
             save_error = "Encounter save failed. Please contact support."
 
     if payload.is_finalized:
@@ -357,7 +357,7 @@ Return strict JSON only, no markdown:
         result["audio_url"] = f"/static/audio/{audio_filename}"
         return result
     except Exception as e:
-        print(f"[scribe] Gemini error: {e}")
+        print(f"[scribe] Gemini error: {type(e).__name__}")
         return {"error": "Transcription failed. Please try again."}
 
 
@@ -412,5 +412,5 @@ async def finalize_consultation(
         })
     except Exception as e:
         db.rollback()
-        print(f"[finalize] exception: {e}")
+        print(f"[finalize] exception: {type(e).__name__}")
         return JSONResponse(content={"_saved": False, "_save_error": "Encounter save failed. Please contact support."})

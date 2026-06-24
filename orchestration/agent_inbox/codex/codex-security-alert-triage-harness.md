@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/security-alert-triage` |
-| Status | queued |
+| Status | superseded |
 | Created | fca99d2 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-security-alert-triage-harness --summary "Short plan summary"` |
@@ -90,5 +90,10 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Verification run:
-- Remaining risks:
+- `orchestration/security_alert_triage.md`
+- Verification run: Ariadne directly ran `gh` metadata queries for CodeQL,
+  Dependabot, secret scanning, and recent workflow state after the Codex worker
+  repeatedly stopped on local tooling issues. No secret values were committed.
+- Remaining risks: The worker branch remains plan-only; Ariadne-owned report
+  supersedes that worker implementation for Sprint 21. GitHub CodeQL alerts
+  will not close until analysis re-runs on integrated `master`.
