@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | fca99d2 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-node-security-workflow-triage --summary "Short plan summary"` |
@@ -90,5 +90,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `MODIFY`: `EMR4 Sidebar/package-lock.json`
 - Verification run:
+  - Local manifest validation: `npm run validate` (exit code: 0, manifest is valid).
+  - Local production security audit: `npm audit --omit=dev` (exit code: 0, found 0 vulnerabilities).
+  - Local full npm audit: `npm audit` (exit code: 1, resolved 3 vulnerabilities; remaining: 13 vulnerabilities - 12 moderate, 1 high).
+  - Webpack compile validation: `npm run build` (compiled successfully with 0 errors).
+  - Git check: `git diff --check` (exit code: 0, no whitespace errors).
 - Remaining risks:
+  - Build-time vulnerabilities (13 vulnerabilities: 12 moderate, 1 high) in `serialize-javascript` and `uuid` are devDependencies-only and do not compile into runtime client assets. Upgrading them requires major version changes of `copy-webpack-plugin` and `office-addin-*` dependencies which is high risk and not worth it yet.
+
