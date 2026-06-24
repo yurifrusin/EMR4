@@ -606,14 +606,32 @@ def propose_update_appointment(
         start_time_local = appt.start_time_local
         start_time = appt.start_time
 
+    warnings: list[AppointmentProposalIssue] = []
+    blocks: list[AppointmentProposalIssue] = []
+
+    # Block explicit clearance of required fields before hitting the DB.
+    # Restoring practitioner_id lets subsequent conflict/break checks use a
+    # valid practitioner even when the request itself is blocked.
+    if "practitioner_id" in incoming and practitioner_id is None:
+        blocks.append(AppointmentProposalIssue(
+            code="practitioner_required",
+            severity="blocked",
+            message="Practitioner cannot be removed from an appointment.",
+        ))
+        practitioner_id = appt.practitioner_id
+
+    if patient_id is None and not patient_name_provisional:
+        blocks.append(AppointmentProposalIssue(
+            code="patient_identity_required",
+            severity="blocked",
+            message="Appointment must retain a linked patient or a provisional patient name.",
+        ))
+
     if patient_id is not None:
         _ensure_patient(patient_id, practice_id, db)
     _ensure_practitioner(practitioner_id, practice_id, db)
     _ensure_appointment_type(appointment_type_id, practice_id, db)
     _ensure_location(location_id, practice_id, db)
-
-    warnings: list[AppointmentProposalIssue] = []
-    blocks: list[AppointmentProposalIssue] = []
 
     if appt.status in TERMINAL_STATUSES:
         blocks.append(AppointmentProposalIssue(
