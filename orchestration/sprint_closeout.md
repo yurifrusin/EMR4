@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 26: Move/Resize Proposal Flow |
 | Integrated through | Sprint 26 backend move/resize proposal tests and diary keyboard move/resize proposal flow |
-| Status | Integrated locally with Ariadne hotfixes; verification passed; push/deploy/audit pending |
+| Status | Integrated, pushed, mirrored, audited, deployed v92 observed, and residual Yuri-only physical-keyboard smoke documented |
 | Last updated | 2026-06-25 |
 
 ## What Changed
@@ -83,6 +83,7 @@ Detailed Yuri-only check:
 - `node --check docs\diary\diary.js` -> passed.
 - `npm run validate-all` before Ariadne hotfixes -> passed; manifest valid, production npm audit clean, frontend asset/version check passed. Worker-local diary assets were v87 and deployed Pages was still v86 before push.
 - `npm run validate-all` after Ariadne hotfixes -> passed; local diary assets are v92, HEAD before closeout was v87, deployed Pages before push was still v86.
+- `npm run check-assets` after push/mirror realignment -> passed; deployed GitHub Pages diary assets now report `diary.js?v=92` and `diary.css?v=92`.
 - `git diff --check` -> passed.
 - Local browser smoke page loaded via `http://127.0.0.1:8787/diary/diary.html?smoke=true` and confirmed `diary.js?v=92` is requested.
 - Browser smoke found and Ariadne fixed two move/resize smoke data issues and one nested status-control key-routing issue before final verification.
