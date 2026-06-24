@@ -17,8 +17,20 @@ antigravity-diary-move-resize-proposal-flow ready for Codex review
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `docs/diary/diary.js`
+  - `docs/diary/diary.html`
 - Verification run:
+  - Syntax validation: `node --check docs/diary/diary.js` (passed).
+  - Validation suite: `npm run validate-all` executed successfully in `EMR4 Sidebar` (passed Office manifest validation, npm audit, and asset version integrity checks).
+  - Diff check: `git diff --check` passed cleanly.
+  - Manual checks in smoke mode (?smoke=true):
+    - Moving card: `Alt + ArrowDown/Up` reschedules start time by +/- 15 mins.
+    - Resizing card: `Alt + ArrowRight/Left` updates duration by +/- 15 mins (clamped to minimum 15 mins).
+    - Conflict blocking: Moving card to overlapping slot triggers "Action Blocked" modal and reverts.
+    - Warning confirmation: Overlapping card with Break block triggers break overlap warnings, requiring confirmation before applying.
+    - Active state: Retains `.appt-active` class and returns focus to card after grid reload.
 - Remaining risks:
+  - Keyboard combos (Alt + ArrowLeft/Right) might conflict with default browser navigation shortcut on some platforms, mitigated by calling `e.preventDefault()` and `e.stopPropagation()` immediately on match.
 
 ## Required Review Steps
 
