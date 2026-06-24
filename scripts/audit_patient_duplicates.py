@@ -204,29 +204,14 @@ def count_references(
     return counts
 
 
-def _patient_payload(patient: PatientSnapshot, counts: dict[str, int], show_zero: bool) -> dict[str, Any]:
+def _patient_payload(patient_index: int, counts: dict[str, int], show_zero: bool) -> dict[str, Any]:
     references = {
         label: count
         for label, count in sorted(counts.items())
         if show_zero or count
     }
     return {
-        "id": str(patient.id),
-        "practice_id": str(patient.practice_id),
-        "patient_fingerprint": _fingerprint(
-            (
-                patient.practice_id,
-                _clean_text(patient.first_name),
-                _clean_text(patient.last_name),
-                patient.date_of_birth,
-                _clean_identifier(patient.medicare_number),
-                _clean_identifier(patient.medicare_irn),
-                _clean_identifier(patient.ihi_number),
-            )
-        ),
-        "document_url_present": bool(patient.document_url),
-        "created_at": _format_dt(patient.created_at),
-        "updated_at": _format_dt(patient.updated_at),
+        "patient_index": patient_index,
         "reference_total": sum(counts.values()),
         "references": references,
     }
@@ -245,9 +230,9 @@ def build_json_payload(
                 "kind": group.kind,
                 "label": group.label,
                 "patient_count": len(group.patients),
-                "patients": [
-                    _patient_payload(patient, reference_counts.get(patient.id, {}), show_zero)
-                    for patient in group.patients
+                "patient_reference_summaries": [
+                    _patient_payload(patient_index, reference_counts.get(patient.id, {}), show_zero)
+                    for patient_index, patient in enumerate(group.patients, start=1)
                 ],
             }
             for group in duplicate_groups
@@ -271,7 +256,7 @@ def print_human_report(
     for group_index, group in enumerate(duplicate_groups, start=1):
         print(f"[{group_index}] {group.kind}: {group.label}")
         print(f"    Patients in group: {len(group.patients)}")
-        for patient in group.patients:
+        for patient_index, patient in enumerate(group.patients, start=1):
             counts = reference_counts.get(patient.id, {})
             visible_counts = {label: count for label, count in sorted(counts.items()) if show_zero or count}
             total = sum(counts.values())
@@ -279,12 +264,7 @@ def print_human_report(
             if not references:
                 references = "none"
 
-            print(f"    - patient_fingerprint: {_patient_payload(patient, counts, show_zero)['patient_fingerprint']}")
-            print(f"      id: {patient.id}")
-            print(f"      practice_id: {patient.practice_id}")
-            print(f"      document_url: {'yes' if patient.document_url else 'no'}")
-            print(f"      created_at: {_format_dt(patient.created_at)}")
-            print(f"      reference counts: {total} total ({references})")
+            print(f"    - patient #{patient_index}: {total} total references ({references})")
         print()
 
     print("Next step: inspect the evidence, then use a proper merge/delete workflow. This helper does not prove deletion is safe.")
@@ -327,7 +307,7 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as exc:
         if args.debug:
             raise
-        print(f"Patient duplicate audit failed safely: {type(exc).__name__}", file=sys.stderr)
+        print("Patient duplicate audit failed safely.", file=sys.stderr)
         print("No records were changed.", file=sys.stderr)
         return 2
 

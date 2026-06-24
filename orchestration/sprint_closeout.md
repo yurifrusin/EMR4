@@ -24,7 +24,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Post-Closeout Security Follow-Up
 
-- Redacted `scripts/audit_patient_duplicates.py` default output so the read-only developer audit reports stable fingerprints, UUIDs, reference counts, and file-presence flags instead of names, DOBs, Medicare/IHI values, phone numbers, or raw exception text.
+- Redacted `scripts/audit_patient_duplicates.py` default output so the read-only developer audit reports duplicate group fingerprints and aggregate per-group/patient-index reference counts instead of names, DOBs, UUIDs, Medicare/IHI values, phone numbers, file URLs, or raw exception text.
 - Fixed taskpane automatic-semicolon-insertion CodeQL notes in both source and deployed copies, and bumped deployed taskpane JS cache-bust to `v=57`.
 - Applied the safe Dependabot/npm package update path for `copy-webpack-plugin` and `webpack-dev-server`, plus non-forced `npm audit fix`.
 
