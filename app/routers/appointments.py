@@ -21,6 +21,7 @@ from app.schemas.appointments import (
     AppointmentCreateProposalOut, AppointmentProposalIssue,
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
+    AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -763,6 +764,17 @@ def propose_status_update(
             message="This status change will remove the patient from the waiting area.",
         ))
 
+    if body.status in TERMINAL_STATUSES and body.waiting_area_id is not None:
+        warnings.append(AppointmentProposalIssue(
+            code="waiting_area_assigned_on_terminal",
+            severity="warning",
+            message=(
+                "Assigning a waiting area while marking the appointment as "
+                f"{body.status.value} is contradictory; the area will be set but "
+                "the appointment will be closed."
+            ),
+        ))
+
     safe = not blocks
     requires_confirmation = True
 
@@ -802,6 +814,91 @@ def propose_status_update(
         command=AppointmentStatusCommand(
             appointment_id=appointment_id,
             status=body.status,
+            waiting_area_id=body.waiting_area_id,
+            clears_waiting_area=clears_waiting_area,
+        ),
+        warnings=warnings,
+        blocks=blocks,
+    )
+
+
+@router.post("/proposals/waiting-area/{appointment_id}", response_model=AppointmentWaitingAreaProposalOut)
+def propose_waiting_area_update(
+    appointment_id: uuid.UUID,
+    body: AppointmentWaitingAreaProposalIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Non-mutating proposal for changing an appointment's waiting area without a status change.
+
+    Covers the reception workflow of moving a patient between areas (or removing them).
+    The returned command payload is ready to pass to PUT /{id} after confirmation.
+    autonomy_tier is policy metadata for Bernie tooling; this endpoint never executes.
+    """
+    practice_id = current_user.practice_id
+    appt = _get_appointment(appointment_id, practice_id, db)
+
+    if body.waiting_area_id is not None:
+        _ensure_waiting_area(body.waiting_area_id, practice_id, db)
+
+    warnings: list[AppointmentProposalIssue] = []
+    blocks: list[AppointmentProposalIssue] = []
+
+    if body.waiting_area_id == appt.waiting_area_id:
+        blocks.append(AppointmentProposalIssue(
+            code="already_in_area",
+            severity="blocked",
+            message=(
+                "The appointment is already in this waiting area."
+                if body.waiting_area_id is not None
+                else "The appointment is not currently in any waiting area."
+            ),
+        ))
+
+    clears_waiting_area = body.waiting_area_id is None and appt.waiting_area_id is not None
+    if clears_waiting_area:
+        warnings.append(AppointmentProposalIssue(
+            code="waiting_area_cleared",
+            severity="warning",
+            message="This will remove the patient from the waiting area.",
+        ))
+
+    safe = not blocks
+    requires_confirmation = True
+
+    if not safe:
+        autonomy_tier = "blocked"
+    elif warnings:
+        autonomy_tier = "proposal"
+    else:
+        autonomy_tier = "execute_with_report"
+
+    if appt.patient:
+        patient_label = f"{appt.patient.first_name} {appt.patient.last_name}".strip()
+    elif appt.patient_name_provisional:
+        patient_label = appt.patient_name_provisional
+    else:
+        patient_label = "appointment"
+
+    if body.waiting_area_id is not None:
+        summary = f"Move {patient_label} to a different waiting area."
+    elif clears_waiting_area:
+        summary = f"Remove {patient_label} from the waiting area."
+    else:
+        summary = f"No waiting-area change for {patient_label}."
+
+    if not safe:
+        summary += " Blocked — see issues."
+    elif warnings:
+        summary += " Confirmation recommended."
+
+    return AppointmentWaitingAreaProposalOut(
+        safe=safe,
+        requires_confirmation=requires_confirmation,
+        autonomy_tier=autonomy_tier,
+        summary=summary,
+        command=AppointmentWaitingAreaCommand(
+            appointment_id=appointment_id,
             waiting_area_id=body.waiting_area_id,
             clears_waiting_area=clears_waiting_area,
         ),

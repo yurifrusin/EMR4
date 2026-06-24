@@ -239,6 +239,27 @@ class AppointmentStatusProposalOut(BaseModel):
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
 
 
+class AppointmentWaitingAreaProposalIn(BaseModel):
+    waiting_area_id: Optional[uuid.UUID] = None
+
+
+class AppointmentWaitingAreaCommand(BaseModel):
+    appointment_id: uuid.UUID
+    waiting_area_id: Optional[uuid.UUID] = None
+    clears_waiting_area: bool
+
+
+class AppointmentWaitingAreaProposalOut(BaseModel):
+    intent: Literal["update_appointment_waiting_area"] = "update_appointment_waiting_area"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["execute_with_report", "proposal", "blocked"]
+    summary: str
+    command: AppointmentWaitingAreaCommand
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
 class ScheduleSlot(BaseModel):
     start_time: datetime
     end_time: datetime
