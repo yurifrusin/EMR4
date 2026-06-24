@@ -23,6 +23,8 @@
     "start": "office-addin-debugging start manifest.xml",
     "stop": "office-addin-debugging stop manifest.xml",
     "validate": "office-addin-manifest validate manifest.xml",
+    "check-assets": "python ../scripts/check_frontend_versions.py",
+    "validate-all": "npm run validate && npm audit --omit=dev && npm run check-assets",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {

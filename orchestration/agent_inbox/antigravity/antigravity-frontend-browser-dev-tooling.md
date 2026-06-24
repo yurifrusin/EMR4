@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | bd13038 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-frontend-browser-dev-tooling --summary "Short plan summary"` |
@@ -90,5 +90,14 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `NEW`: `scripts/check_frontend_versions.py`
+  - `NEW`: `docs/frontend-ui-qa-guide.md`
+  - `MODIFY`: `EMR4 Sidebar/package.json`
 - Verification run:
+  - Run validation: Executed `npm run validate-all` which runs manifest validation, production npm audit, and the new version check script (exit code: 0).
+  - Version bump test: Added a local modification to `docs/diary/diary.js` without updating the version query parameter in `docs/diary/diary.html`. Verified that `npm run check-assets` successfully caught the mismatch and exited with code 1.
+  - Discarded the test modification to restore a clean tree.
+  - Git diff check: Ran `git diff --check` (exit code: 0).
 - Remaining risks:
+  - Visual layout regressions that do not throw console errors still require manual visual review. This is mitigated by the detailed QA protocols outlined in `docs/frontend-ui-qa-guide.md`.
+
