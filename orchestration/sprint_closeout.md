@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 23: Room Default Waiting-Area Invariant |
 | Integrated through | Sprint 23 waiting-area invariant integration |
-| Status | Integrated locally with focused verification passing; push/mirror/audit pending |
+| Status | Integrated, pushed, mirrored, audited, and awaiting optional live Admin smoke |
 | Last updated | 2026-06-24 |
 
 ## What Changed
@@ -30,6 +30,30 @@ that static checks cannot. Confirm `diary.js?v=84` is loaded, open Admin ->
 Resource Administration, and check that room default waiting areas are visible,
 preselected in the room form, and remain coherent after archiving a waiting area.
 
+Detailed steps for Yuri-only review:
+
+1. Hard refresh the live diary/Office-dialog surface and confirm `diary.js?v=84`
+   and `diary.css?v=84` are loaded.
+2. Sign in as an Admin or PracticeOwner-capable user.
+3. Open `⚙️ Admin` -> `Resource Administration` -> `Rooms`.
+4. Confirm every active room card displays an explicit or fallback default
+   waiting area when active waiting areas exist.
+5. Edit one room, confirm the default waiting-area dropdown is preselected, then
+   cancel and confirm no state changed.
+6. Edit the same room again, change the default waiting area, save, close and
+   reopen Resource Administration, and confirm the saved default persists.
+7. Open `Waiting Areas`, archive a non-critical active waiting area, and confirm
+   affected rooms now show another compatible active fallback or no default only
+   when no active fallback exists.
+8. Reopen the right-side Waiting Room pane and confirm its tabs match active
+   waiting areas and exclude archived areas.
+9. Skip non-admin denial if the taskpane cannot be resized or logged out safely;
+   report that as an accessibility blocker rather than spending time fighting
+   the UI.
+10. Report whether v84 loaded, whether defaults displayed/preselected correctly,
+   whether archive reassignment looked coherent, and screenshots for anything
+   suspicious.
+
 ## Not Required Before Moving On
 
 - No database migration or manual data repair is required for dev data; existing null active-room defaults are repaired on create/update/archive paths where compatible active areas exist.
@@ -40,6 +64,11 @@ preselected in the room form, and remain coherent after archiving a waiting area
 
 - The frontend fallback helper operates over the waiting areas currently loaded for the active location. The backend invariant is authoritative and includes compatible practice-wide areas; consider a later UI/API refinement if practice-wide waiting areas become a real configuration path.
 - The broad `python -m pytest tests/` run timed out during Ariadne verification without a failure report. Sprint-targeted resource-admin/waiting-room tests passed; investigate broad-suite runtime/hanging separately rather than blocking this narrow integration.
+- Taskpane logout is currently hard to reach when the pane cannot be widened:
+  Yuri could not test non-admin Resource Administration denial because the
+  logout button sits at the extreme right and the resize affordance was blocked
+  by an hourglass cursor. Add a future UI/accessibility task to make logout and
+  role-switching reachable without relying on taskpane width.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification

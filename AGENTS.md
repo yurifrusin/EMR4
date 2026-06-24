@@ -309,6 +309,10 @@ routine; they must be reviewed or explicitly abandoned first.
    - any bounded hotfixes applied after those checks
    - what remains for the user to manually review or test because Ariadne could
      not confirm it with available tools, or "none required" with the reason
+   - detailed step-by-step user review instructions for each remaining
+     Yuri-only check, including setup/preconditions, exact UI path, expected
+     result, suspicious/failure signs, what can be skipped, and what evidence or
+     screenshots to report back
    - what does not need manual testing yet
    - where Codex recommends taking the project next
    - any project-level concern raised by the integrated submissions
@@ -317,7 +321,10 @@ Ariadne's closeout ping is the user's final sprint notification. It must not
 hand off avoidable review work: run all feasible tool-enabled checks first, then
 state only the residual human checks that require Yuri's logged-in browser,
 clinical judgment, external service console, phone/device, or other unavailable
-real-world context. If WhatsApp notification variables are configured locally,
+real-world context. When residual human checks remain, explain them as practical
+test steps rather than abstract acceptance criteria, and keep them limited to
+what Ariadne genuinely could not verify herself. If WhatsApp notification
+variables are configured locally,
 also send a short non-PHI WhatsApp alert with
 `python scripts\notify_yuri_whatsapp.py`; keep the full details in Codex/repo
 docs, not WhatsApp. If WhatsApp is not configured or fails, report that in the

@@ -100,7 +100,9 @@ When reporting progress to the user, Codex should use this shape:
 - **User Review:** all feasible Codex-side/tool-enabled checks already run, any
   hotfixes made from those checks, and only the residual user review/testing
   Ariadne could not confirm with available tools; use "none required" with the
-  reason when no manual testing remains.
+  reason when no manual testing remains. If residual user checks remain, provide
+  concrete steps: setup, exact UI path, expected result, suspicious/failure
+  signs, skippable items, and what evidence to report back.
 - **Next Direction:** Codex's recommendation for the next project slice and any
   project-level concerns raised by the integrated agent work.
 
@@ -109,6 +111,7 @@ After every fully integrated batch, Codex updates
 
 - what changed
 - Codex-run reviews/tests, residual user review, and anything not required
+- detailed step-by-step instructions for residual Yuri-only checks
 - what is not required before moving on
 - known follow-up
 - recommended next direction

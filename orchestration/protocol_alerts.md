@@ -84,6 +84,12 @@ Read these before acting on remembered process details.
   not be confirmed with available tools. If no manual testing remains, say so
   explicitly and why. UI work should include browser/Chrome/Office-dialog checks
   where available before asking Yuri to test.
+- Residual user-test detail rule: when any closeout leaves manual checks for
+  Yuri, Ariadne must provide concrete, step-by-step user review instructions,
+  not just a terse checklist. Include setup/preconditions, exact UI path,
+  expected result, suspicious/failure signs, what can be skipped, and what
+  evidence or screenshots to report back. These steps should cover only checks
+  Ariadne could not run herself with available tools.
 - WhatsApp notification rule: when local WhatsApp Cloud API credentials are
   configured, Ariadne should send a short non-PHI WhatsApp alert for sprint
   closeout, blockers, security findings needing judgment, or user decision
