@@ -323,12 +323,11 @@ state only the residual human checks that require Yuri's logged-in browser,
 clinical judgment, external service console, phone/device, or other unavailable
 real-world context. When residual human checks remain, explain them as practical
 test steps rather than abstract acceptance criteria, and keep them limited to
-what Ariadne genuinely could not verify herself. If WhatsApp notification
-variables are configured locally,
-also send a short non-PHI WhatsApp alert with
-`python scripts\notify_yuri_whatsapp.py`; keep the full details in Codex/repo
-docs, not WhatsApp. If WhatsApp is not configured or fails, report that in the
-Codex closeout summary and continue with the in-thread notification.
+what Ariadne genuinely could not verify herself. If local notification variables
+are configured, also send a short non-PHI alert with
+`python scripts\notify_yuri.py`; keep the full details in Codex/repo docs, not
+push notifications. If notification delivery is not configured or fails, report
+that in the Codex closeout summary and continue with the in-thread notification.
 
 ### Parallel ownership rule
 

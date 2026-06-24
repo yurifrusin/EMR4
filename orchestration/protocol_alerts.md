@@ -90,14 +90,15 @@ Read these before acting on remembered process details.
   expected result, suspicious/failure signs, what can be skipped, and what
   evidence or screenshots to report back. These steps should cover only checks
   Ariadne could not run herself with available tools.
-- WhatsApp notification rule: when local WhatsApp Cloud API credentials are
-  configured, Ariadne should send a short non-PHI WhatsApp alert for sprint
-  closeout, blockers, security findings needing judgment, or user decision
-  points using `scripts/notify_yuri_whatsapp.py`. Do not put PHI, patient
-  identifiers, secrets, raw errors, or detailed clinical/project context in
-  WhatsApp; link the user back to Codex/repo docs for details. If WhatsApp is
-  unavailable, keep using the in-thread closeout notification and say WhatsApp
-  was not sent.
+- Notification rule: when local notification credentials are configured,
+  Ariadne should send a short non-PHI alert for sprint closeout, blockers,
+  security findings needing judgment, or user decision points using
+  `scripts/notify_yuri.py`. Prefer `NOTIFY_PROVIDER=pushover` when available;
+  WhatsApp remains a fallback path. Do not put PHI, patient identifiers,
+  secrets, raw errors, or detailed clinical/project context in push messages;
+  link Yuri back to Codex/repo docs for details. If notification delivery is
+  unavailable, keep using the in-thread closeout notification and say the push
+  alert was not sent.
 - Protocol amendment rule: prefer batching non-urgent orchestration protocol edits
   until the discussion settles. Codex should remind the user before launch if
   agreed protocol edits are still pending.
