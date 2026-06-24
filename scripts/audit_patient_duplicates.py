@@ -204,46 +204,19 @@ def count_references(
     return counts
 
 
-def _patient_payload(patient_index: int, counts: dict[str, int], show_zero: bool) -> dict[str, Any]:
-    references = {
-        label: count
-        for label, count in sorted(counts.items())
-        if show_zero or count
-    }
-    return {
-        "patient_index": patient_index,
-        "reference_total": sum(counts.values()),
-        "references": references,
-    }
-
-
-def build_json_payload(
-    duplicate_groups: list[DuplicateGroup],
-    reference_counts: dict[uuid.UUID, dict[str, int]],
-    show_zero: bool,
-) -> dict[str, Any]:
+def build_json_payload(duplicate_groups: list[DuplicateGroup]) -> dict[str, Any]:
+    groups_by_kind: dict[str, int] = defaultdict(int)
+    for group in duplicate_groups:
+        groups_by_kind[group.kind] += 1
     return {
         "read_only": True,
         "duplicate_group_count": len(duplicate_groups),
-        "groups": [
-            {
-                "kind": group.kind,
-                "label": group.label,
-                "patient_count": len(group.patients),
-                "patient_reference_summaries": [
-                    _patient_payload(patient_index, reference_counts.get(patient.id, {}), show_zero)
-                    for patient_index, patient in enumerate(group.patients, start=1)
-                ],
-            }
-            for group in duplicate_groups
-        ],
+        "groups_by_kind": dict(sorted(groups_by_kind.items())),
     }
 
 
 def print_human_report(
     duplicate_groups: list[DuplicateGroup],
-    reference_counts: dict[uuid.UUID, dict[str, int]],
-    show_zero: bool,
 ) -> None:
     print("EMR4 duplicate patient audit")
     print("Mode: read-only. No records were changed.\n")
@@ -253,19 +226,11 @@ def print_human_report(
         return
 
     print(f"Likely duplicate groups found: {len(duplicate_groups)}\n")
-    for group_index, group in enumerate(duplicate_groups, start=1):
-        print(f"[{group_index}] {group.kind}: {group.label}")
-        print(f"    Patients in group: {len(group.patients)}")
-        for patient_index, patient in enumerate(group.patients, start=1):
-            counts = reference_counts.get(patient.id, {})
-            visible_counts = {label: count for label, count in sorted(counts.items()) if show_zero or count}
-            total = sum(counts.values())
-            references = ", ".join(f"{label}={count}" for label, count in visible_counts.items())
-            if not references:
-                references = "none"
-
-            print(f"    - patient #{patient_index}: {total} total references ({references})")
-        print()
+    groups_by_kind: dict[str, int] = defaultdict(int)
+    for group in duplicate_groups:
+        groups_by_kind[group.kind] += 1
+    for kind, count in sorted(groups_by_kind.items()):
+        print(f"- {kind}: {count} group(s)")
 
     print("Next step: inspect the evidence, then use a proper merge/delete workflow. This helper does not prove deletion is safe.")
 
@@ -276,8 +241,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     parser.add_argument("--database-url", help="Override DATABASE_URL for this read-only audit.")
     parser.add_argument("--practice-id", type=uuid.UUID, help="Limit audit to one practice UUID.")
-    parser.add_argument("--json", action="store_true", help="Emit JSON instead of the human report.")
-    parser.add_argument("--show-zero", action="store_true", help="Show zero-count patient reference tables.")
+    parser.add_argument("--json", action="store_true", help="Emit aggregate JSON instead of the human report.")
+    parser.add_argument("--show-zero", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--debug", action="store_true", help="Show full Python tracebacks on errors.")
     return parser.parse_args(argv)
 
@@ -292,17 +257,11 @@ def main(argv: list[str] | None = None) -> int:
             with Session(connection) as session:
                 patients = load_patients(session, Patient, args.practice_id)
                 groups = find_duplicate_groups(patients)
-                reference_patient_ids = sorted(
-                    {patient.id for group in groups for patient in group.patients},
-                    key=str,
-                )
-                references = discover_patient_reference_columns(Base.metadata)
-                reference_counts = count_references(session, references, reference_patient_ids)
 
         if args.json:
-            print(json.dumps(build_json_payload(groups, reference_counts, args.show_zero), indent=2, sort_keys=True))
+            print(json.dumps(build_json_payload(groups), indent=2, sort_keys=True))
         else:
-            print_human_report(groups, reference_counts, args.show_zero)
+            print_human_report(groups)
         return 0
     except Exception as exc:
         if args.debug:
