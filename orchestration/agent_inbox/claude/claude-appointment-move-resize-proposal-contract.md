@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 2839fab |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-appointment-move-resize-proposal-contract --summary "Short plan summary"` |
@@ -87,8 +87,14 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
-
 - Files changed:
+  - `tests/test_appointment_update_proposal.py` — 4 new tests in a new "Diary move/resize scenario tests" section. No production code changes.
+
 - Verification run:
+  - `pytest tests/test_appointment_update_proposal.py -v --tb=short -p no:randomly` — **31 passed, 0 failed** (27 pre-Sprint-26 + 4 new)
+  - All new tests assert the appointment row is unchanged after the proposal call (non-mutating invariant held).
+  - Covers: resize-extend blocked by next booking; cross-practitioner drag blocked by target column conflict; adjacent-slot boundary is safe (open-interval semantics); resize-shrink clears an otherwise-overlapping conflict.
+
 - Remaining risks:
+  - No implementation changes — zero blast radius on existing endpoints or schemas.
+  - The adjacent-slot test encodes the `_overlaps` half-open interval contract as an assertion. If `_overlaps` is ever changed to closed-interval semantics, this test will catch the regression before it reaches production.

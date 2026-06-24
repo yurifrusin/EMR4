@@ -747,3 +747,172 @@ def test_waiting_area_proposal_nonexistent_appointment_returns_404(
         headers={"Authorization": f"Bearer {make_token(gp_user)}"},
     )
     assert resp.status_code == 404
+
+
+# ─── Diary move/resize scenario tests ────────────────────────────────────────
+
+def test_update_proposal_resize_blocked_into_next_booking(
+        client, db, gp_user, practice, practitioner, patient):
+    """Extending duration into the next booking's slot → appointment_conflict block.
+
+    This is the canonical diary resize-down gesture: drag the bottom edge of a
+    card to make it longer, bumping the card below it.
+    """
+    # Existing booking starts exactly where subject would end after the resize.
+    next_booking = _make_appt(
+        db, practice, practitioner, patient,
+        start_h=9, start_m=15, duration=15,
+    )
+    subject = _make_appt(
+        db, practice, practitioner, patient,
+        start_h=9, start_m=0, duration=15,
+    )
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=subject.id),
+        json={
+            "appointment_date": THURSDAY.isoformat(),
+            "start_time_local": "09:00:00",
+            "duration_minutes": 30,   # 09:00–09:30 overlaps next_booking at 09:15
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert any(b["code"] == "appointment_conflict" for b in data["blocks"])
+    assert data["conflict"]["appointment_id"] == str(next_booking.id)
+    # Subject row unchanged — proposal is non-mutating
+    db.refresh(subject)
+    assert subject.duration_minutes == 15
+    assert subject.start_time_local == time(9, 0)
+
+
+def test_update_proposal_drag_to_practitioner_with_conflict(
+        client, db, gp_user, practice, practitioner, patient):
+    """Dragging to a different practitioner column where they're already booked → conflict block.
+
+    This is the canonical diary drag-across-columns gesture.
+    """
+    pr2 = Practitioner(
+        practice_id=practice.id,
+        first_name="Second",
+        last_name="Doctor",
+        ahpra_number="MED0005551234",
+    )
+    db.add(pr2)
+    db.flush()
+    # pr2 already has an appointment at 10:00
+    pr2_existing = _make_appt(
+        db, practice, pr2, patient,
+        start_h=10, start_m=0, duration=15,
+    )
+    # Subject is currently booked with practitioner (different column), no conflict there
+    subject = _make_appt(
+        db, practice, practitioner, patient,
+        start_h=10, start_m=0, duration=15,
+    )
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=subject.id),
+        json={
+            "practitioner_id": str(pr2.id),
+            "appointment_date": THURSDAY.isoformat(),
+            "start_time_local": "10:00:00",
+            "duration_minutes": 15,
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert any(b["code"] == "appointment_conflict" for b in data["blocks"])
+    assert data["conflict"]["appointment_id"] == str(pr2_existing.id)
+    # Subject row unchanged — proposal is non-mutating
+    db.refresh(subject)
+    assert subject.practitioner_id == practitioner.id
+
+
+def test_update_proposal_adjacent_slot_is_safe(
+        client, db, gp_user, practice, practitioner, patient):
+    """An appointment ending exactly where another starts is NOT a conflict.
+
+    _overlaps uses strict open-interval semantics: end_a > start_b.
+    When end_a == start_b the condition is False, so adjacency is safe.
+    This is important for back-to-back diary scheduling.
+    """
+    # Booking at 09:15; subject ends at exactly 09:15 → adjacent, not overlapping
+    adjacent = _make_appt(
+        db, practice, practitioner, patient,
+        start_h=9, start_m=15, duration=15,
+    )
+    subject = _make_appt(
+        db, practice, practitioner, patient,
+        start_h=9, start_m=0, duration=15,
+    )
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=subject.id),
+        json={
+            "appointment_date": THURSDAY.isoformat(),
+            "start_time_local": "09:00:00",
+            "duration_minutes": 15,   # ends at 09:15 — exactly when adjacent starts
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["blocks"] == []
+    assert data["conflict"] is None
+    # Both rows unchanged
+    db.refresh(subject)
+    db.refresh(adjacent)
+    assert subject.start_time_local == time(9, 0)
+    assert adjacent.start_time_local == time(9, 15)
+
+
+def test_update_proposal_resize_shrink_is_safe(
+        client, db, gp_user, practice, practitioner, patient):
+    """Shrinking a booking that would otherwise conflict with the next appointment → safe.
+
+    Resize-up may be blocked; resize-down should clear the conflict.
+    """
+    # Booking at 09:20 — close enough that a 30-min subject at 09:00 would overlap,
+    # but a 15-min subject at 09:00 (ends 09:15) clears it.
+    next_booking = _make_appt(
+        db, practice, practitioner, patient,
+        start_h=9, start_m=20, duration=15,
+    )
+    subject = _make_appt(
+        db, practice, practitioner, patient,
+        start_h=9, start_m=0, duration=30,   # currently ends at 09:30, overlaps next
+    )
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=subject.id),
+        json={
+            "appointment_date": THURSDAY.isoformat(),
+            "start_time_local": "09:00:00",
+            "duration_minutes": 15,   # shrink to end at 09:15 — clears 09:20 booking
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["blocks"] == []
+    assert data["conflict"] is None
+    # Subject row unchanged — proposal is non-mutating
+    db.refresh(subject)
+    assert subject.duration_minutes == 30
