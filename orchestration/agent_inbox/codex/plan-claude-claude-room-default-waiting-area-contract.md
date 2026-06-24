@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-room-default-waiting-area-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-24 18:56 +1000 |
 | Source HEAD | `79f2b32` |
 
@@ -126,6 +126,6 @@ Backend only: app/routers/diary.py (create_room, update_room, update_waiting_are
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted and integrated in Sprint 23.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation completed and merged.

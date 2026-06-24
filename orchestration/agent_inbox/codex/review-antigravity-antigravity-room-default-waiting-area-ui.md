@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-room-default-waiting-area-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -36,5 +36,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. JS syntax, frontend validation, production npm audit, asset-version check, and diff check passed after merge.
+- Follow-up required: Confirm GitHub Pages serves diary v84 before or during the short live Admin smoke.

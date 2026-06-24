@@ -144,9 +144,9 @@ at medium/high once the plan is stable, then think hard again before integration
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan-gated |
-| Launch Gate | Packets queued for Claude and Antigravity; no Codex worker expected initially |
-| Integration Gate | Do not integrate until required plan packets are visible, reviewed, and explicitly released with `complete sprint task` |
+| Status | Integrated locally with focused verification passing |
+| Launch Gate | Complete; packets submitted by Claude and Antigravity; no Codex worker expected |
+| Integration Gate | Complete; push, mirror realignment, audit, and live Pages v84 review pending |
 | Theme | Ensure every active room has a valid default waiting area so reception/admin state stays coherent after room or waiting-area changes |
 
 ### Workstream S23-A - Backend Default Waiting-Area Contract
@@ -160,7 +160,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Room/WaitingArea backend models, schemas, resource-admin routes/services, seed/dev-data repair, migrations only if required, focused pytest coverage |
 | Out of Scope | Diary frontend UI, taskpane/Command Centre, appointment booking/status semantics beyond preserving existing consumers, broad roster redesign |
 | Verification | Plan packet first; after approval focused resource-admin/default-waiting-area pytest coverage, backend Tier-1 check, full pytest if shared fixtures are touched, `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream S23-B - Resource Admin Default Waiting-Area UI
 
@@ -173,7 +173,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}`, source/deployed asset sync and cache-bust if needed, default/fallback UI messaging, smoke/browser checks |
 | Out of Scope | Backend contract changes, migrations, taskpane/Command Centre, appointment booking/status UI, roster admin redesign, drag/drop/resize |
 | Verification | Plan packet first; after approval JS syntax, `npm run validate-all`, local/deployed asset version checks, smoke/live browser checks, `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream S23-C - Ariadne Integration and Review Harness
 
@@ -186,7 +186,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Plan review, integration sequencing, bounded repairs, closeout/user-test summary, and next-sprint recommendation |
 | Out of Scope | Acting as proof of a separate Codex worker submission or bypassing worker plan gates |
 | Verification | `poll --fetch`, plan/review inspection, backend/frontend checks, browser/Chrome checks if runtime UI changes land, `git diff --check` |
-| Status | Ariadne-owned |
+| Status | Integrated locally; closeout/push/audit pending |
 
 ## Sprint 22: Development Tooling Optimisation
 

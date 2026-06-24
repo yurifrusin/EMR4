@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-room-default-waiting-area-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-24 18:48 +1000 |
 | Source HEAD | `761e39d` |
 
@@ -44,6 +44,6 @@ Low risk. Mitigated by keeping updates confined to docs/diary/ files and verifyi
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted and integrated in Sprint 23.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation completed and merged.

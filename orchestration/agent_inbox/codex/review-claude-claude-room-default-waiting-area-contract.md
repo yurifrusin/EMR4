@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-room-default-waiting-area-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -54,5 +54,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. Focused resource-admin and waiting-room tests passed after merge; broad full-suite retry timed out without a failure report.
+- Follow-up required: Investigate broad-suite runtime separately; live Pages v84 admin smoke remains useful after deployment.

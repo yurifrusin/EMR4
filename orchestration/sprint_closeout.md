@@ -8,56 +8,54 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 22: Development Tooling Optimisation |
-| Integrated through | Sprint 22 dev tooling integration |
-| Status | Integrated, pushed, mirrored, audited, and superseded by Sprint 23 dispatch |
+| Batch | Sprint 23: Room Default Waiting-Area Invariant |
+| Integrated through | Sprint 23 waiting-area invariant integration |
+| Status | Integrated locally with focused verification passing; push/mirror/audit pending |
 | Last updated | 2026-06-24 |
 
 ## What Changed
 
-- Added `scripts/check_backend.ps1`, a Tier-1 backend fast-check command that runs syntax compilation, Bandit at the medium+/high threshold, and `git diff --check`, with a clear Tier-2 pytest hint.
-- Added pytest defaults to `pyproject.toml` so `python -m pytest` consistently uses the project standard quiet/short-traceback configuration and test discovery path.
-- Added `scripts/check_frontend_versions.py`, a frontend asset/cache-buster integrity check for diary, taskpane, and Command Centre HTML references.
-- Added `check-assets` and `validate-all` npm scripts to `EMR4 Sidebar/package.json`, combining manifest validation, production npm audit, and frontend asset/version checking.
-- Added `docs/frontend-ui-qa-guide.md` with the expected frontend smoke-mode, console, deployed-asset, and visual-QA discipline.
-- No product backend routes, migrations, diary runtime behaviour, taskpane runtime behaviour, or Command Centre runtime behaviour changed.
+- Backend resource-admin room writes now enforce the active-room default waiting-area invariant where possible: room creation auto-selects the lowest-order compatible active waiting area, explicit null on active rooms resolves to a fallback, and reactivating a room fills a fallback.
+- Archiving a waiting area now reassigns active rooms that used it to the next compatible active fallback, or clears the default only when no compatible active waiting area remains.
+- Resource Administration room cards now show explicit/fallback default waiting-area labels, room forms preselect active defaults/fallbacks, and smoke-mode waiting-area archive behavior mirrors reassignment.
+- Diary frontend asset cache-bust moved to `diary.js?v=84` / `diary.css?v=84`.
+- No schema migration, taskpane, Command Centre, patient, appointment booking, or clinical-document changes were made.
 
 ## Recommended User Review
 
-Residual user review/testing: none required before the next dispatch. Ariadne
-ran the backend, frontend, full pytest, and dev-server reachability checks that
-matter for this tooling-only sprint. Because Sprint 22 did not alter live
-product UI, clinical flows, API contracts, migrations, or deployed asset
-versions, there is no meaningful manual browser/Word/phone review left for Yuri.
+Residual user review/testing after push/deploy: one short live diary smoke is
+useful because this sprint changes the Resource Administration UI and the real
+Office dialog/GitHub Pages surface can reveal deployment or browser-state issues
+that static checks cannot. Confirm `diary.js?v=84` is loaded, open Admin ->
+Resource Administration, and check that room default waiting areas are visible,
+preselected in the room form, and remain coherent after archiving a waiting area.
 
 ## Not Required Before Moving On
 
-- No Word add-in, diary, Waiting Room, resource-admin, patient search, booking, status, roster, migration, or browser visual smoke test is required for this sprint.
-- No GitHub Pages visual regression review is required because no diary/taskpane/Command Centre runtime assets changed.
-- No forced `npm audit fix --force` is required; `npm audit --omit=dev` remains clean and broader devDependency modernization stays a separate decision.
+- No database migration or manual data repair is required for dev data; existing null active-room defaults are repaired on create/update/archive paths where compatible active areas exist.
+- No Word taskpane, Command Centre, patient-file, appointment create/edit, status, duplicate-audit, or clinical workflow review is required for this sprint.
+- No security or dependency remediation is required; production `npm audit --omit=dev` remains clean and Bandit medium+/high checks passed.
 
 ## Known Follow-Up
 
-- `scripts/check_frontend_versions.py` currently checks working-tree changes against `HEAD`, which is ideal for pre-submit local use. If CI later runs it after commits are already on `HEAD`, add a base-ref mode such as `--base origin/master`.
-- The frontend QA guide is deliberately procedural, not a Playwright harness. A future sprint can automate selected smoke-mode/browser assertions once product UI changes resume.
+- The frontend fallback helper operates over the waiting areas currently loaded for the active location. The backend invariant is authoritative and includes compatible practice-wide areas; consider a later UI/API refinement if practice-wide waiting areas become a real configuration path.
+- The broad `python -m pytest tests/` run timed out during Ariadne verification without a failure report. Sprint-targeted resource-admin/waiting-room tests passed; investigate broad-suite runtime/hanging separately rather than blocking this narrow integration.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification
 
 - `.\scripts\check_backend.ps1` -> passed; compileall, Bandit medium+/high scan, and whitespace check all green.
-- `.venv\Scripts\python.exe -m pytest --co -q` -> passed; all 24 test files collected.
-- `.venv\Scripts\python.exe -m pytest` -> passed; 288 passed, 1 existing deprecation warning.
-- `npm run validate-all` in `EMR4 Sidebar` -> passed; manifest valid, production npm audit clean, frontend asset/version check passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_diary_resource_admin.py tests\test_waiting_room.py -q --tb=short -p no:randomly` -> passed; 61 passed, 1 existing pytest-asyncio deprecation warning.
+- `node --check docs\diary\diary.js` -> passed.
+- `npm run validate-all` in `EMR4 Sidebar` -> passed; manifest valid, production npm audit clean, frontend asset/version check passed. Local/HEAD diary assets are v84; deployed Pages was still v83 before push.
 - `git diff --check` -> passed.
-- `.venv\Scripts\python.exe -m compileall app scripts -q` -> passed.
-- `Invoke-WebRequest http://127.0.0.1:8001/health` -> passed; backend returned `{"status":"ok","service":"EMR4 Centaur API"}`.
-- `Invoke-WebRequest https://localhost:3000/taskpane.html` -> passed; local dev server returned HTTP 200.
+- Worker-reported full backend suite on Claude branch passed before integration; Ariadne's post-merge broad full-suite attempt timed out without a failure report and is recorded as a follow-up rather than a blocker.
 
 ## Recommended Next Direction
 
-1. Sprint 23 is now the active recommended product slice: enforce a room default waiting-area invariant and make that default legible/editable in Resource Administration.
-2. Add CI/base-ref modes for the new backend/frontend checks once GitHub workflow cadence is settled.
-3. Consider a browser-smoke harness for the diary/taskpane smoke-mode paths before the next substantial UI sprint.
+1. After Pages serves v84, run the short live Admin smoke above; if clean, proceed to the next product-growth sprint.
+2. Plan the next architecture/dev-tooling optimisation sprint around automating the browser smoke checks Ariadne has been doing manually.
+3. Keep the room/waiting-area model steady: every active room should have an active default area where possible, with display-order-zero as the natural fallback.
 
 ## Sprint 15 Review Harness - Waiting Room Check-In Operations
 
