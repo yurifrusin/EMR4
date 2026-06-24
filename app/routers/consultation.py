@@ -21,7 +21,21 @@ import datetime
 
 router = APIRouter(prefix="/api/v1", tags=["consultation"])
 
+# Absolute path of the only directory we may delete audio temp files from.
+# Computed once at import using the process CWD (the project root when uvicorn
+# is started normally). os.remove is refused for paths outside this boundary.
+_AUDIO_DIR = os.path.abspath(os.path.join("static", "audio"))
+
 _ai_client = None
+
+
+def _safe_audio_cleanup(audio_url: str) -> None:
+    """Delete a temp audio file only if it resolves inside _AUDIO_DIR."""
+    resolved = os.path.abspath(audio_url.lstrip("/"))
+    if not resolved.startswith(_AUDIO_DIR + os.sep):
+        return
+    if os.path.exists(resolved):
+        os.remove(resolved)
 
 
 def get_ai_client():
@@ -100,8 +114,8 @@ def _search_mbs_rules(query: str, db: Session) -> str:
             if json_str and not struct_data:
                 try:
                     struct_data = json.loads(json_str)
-                except Exception:
-                    pass
+                except Exception as json_err:
+                    print(f"[mbs-rules] skipped malformed JSON result: {type(json_err).__name__}")
             if struct_data:
                 results.append(
                     f"- MBS Item: {struct_data.get('item_number', '?')} "
@@ -252,9 +266,9 @@ async def analyze_consultation(
         )
         extracted = json.loads(response.text)
         mbs  = [m.get("item_number") for m in extracted.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
-        dx   = [d.get("term") for d in extracted.get("clinical_diagnoses", [])]
-        rx   = [m.get("drug_name") for m in extracted.get("medications_and_prescriptions", [])]
-        print(f"[analyze] type={extracted.get('encounter_metadata',{}).get('consultation_type','?')} | MBS={mbs} | Dx={dx} | Rx={rx}")
+        dx   = extracted.get("clinical_diagnoses", [])
+        rx   = extracted.get("medications_and_prescriptions", [])
+        print(f"[analyze] type={extracted.get('encounter_metadata',{}).get('consultation_type','?')} | MBS={mbs} | dx_count={len(dx)} | rx_count={len(rx)}")
     except Exception as e:
         print(f"Vertex AI error: {e}")
         extracted["encounter_metadata"]["consultation_type"] = "AI Processing Error"
@@ -274,7 +288,8 @@ async def analyze_consultation(
             _save_encounter(db, patient, payload.document_id, payload.text_delta, consult_type, mbs_items, diagnoses, medications)
         except Exception as e:
             db.rollback()
-            save_error = str(e)
+            print(f"[analyze] save error: {e}")
+            save_error = "Encounter save failed. Please contact support."
 
     if payload.is_finalized:
         extracted["_saved"] = save_error is None
@@ -336,13 +351,14 @@ Return strict JSON only, no markdown:
         )
         result = json.loads(response.text)
         mbs  = [m.get("item_number") for m in result.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
-        dx   = [d.get("term") for d in result.get("clinical_diagnoses", [])]
-        rx   = [m.get("drug_name") for m in result.get("medications_and_prescriptions", [])]
-        print(f"[scribe] type={result.get('encounter_metadata',{}).get('consultation_type','?')} | MBS={mbs} | Dx={dx} | Rx={rx}")
+        dx   = result.get("clinical_diagnoses", [])
+        rx   = result.get("medications_and_prescriptions", [])
+        print(f"[scribe] type={result.get('encounter_metadata',{}).get('consultation_type','?')} | MBS={mbs} | dx_count={len(dx)} | rx_count={len(rx)}")
         result["audio_url"] = f"/static/audio/{audio_filename}"
         return result
     except Exception as e:
-        return {"error": str(e)}
+        print(f"[scribe] Gemini error: {e}")
+        return {"error": "Transcription failed. Please try again."}
 
 
 @router.post("/finalize")
@@ -371,9 +387,7 @@ async def finalize_consultation(
             payload.clinician_overrides.medications,
         )
         if payload.audio_url:
-            path = payload.audio_url.lstrip("/")
-            if os.path.exists(path):
-                os.remove(path)
+            _safe_audio_cleanup(payload.audio_url)
 
         # Build a brief clinical note from the saved data to insert into Word
         lines = [f"Consultation: {consult_type}"]
@@ -398,4 +412,5 @@ async def finalize_consultation(
         })
     except Exception as e:
         db.rollback()
-        return JSONResponse(content={"_saved": False, "_save_error": str(e)})
+        print(f"[finalize] exception: {e}")
+        return JSONResponse(content={"_saved": False, "_save_error": "Encounter save failed. Please contact support."})
