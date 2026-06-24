@@ -158,9 +158,9 @@ at medium/high once the plan is stable, then think hard again before integration
 | Item | Value |
 |---|---|
 | Programme | Phase 2 Programme 2B - Safe Appointment Mutation Workbench |
-| Status | Dispatched; plan-gated |
-| Launch Gate | Packets queued for Claude and Antigravity; no Codex worker expected initially |
-| Integration Gate | Do not integrate until required plan packets are visible, reviewed, and explicitly released with `complete sprint task` |
+| Status | Integrated locally; closeout in progress |
+| Launch Gate | Complete; plans accepted and implementation released with `complete sprint task` |
+| Integration Gate | Complete locally; push, mirror realignment, audit, and residual live review pending |
 | Theme | Route receptionist-facing appointment edit/reschedule through the formal non-mutating proposal layer before writing changes |
 
 ### Workstream S24-A - Backend Edit Proposal Contract Hardening
@@ -174,7 +174,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `app/routers/appointments.py`, `app/schemas/appointments.py`, focused update-proposal and adjacent appointment update tests, contract notes if needed |
 | Out of Scope | Diary frontend implementation, taskpane/Command Centre, patient demographics, resource admin, migrations unless the plan proves a schema issue, Bernie runtime |
 | Verification | Plan packet first; after approval `scripts/check_backend.ps1`, `tests/test_appointment_update_proposal.py`, adjacent booking/break tests if touched, `git diff --check` |
-| Status | Queued |
+| Status | Integrated locally |
 
 ### Workstream S24-B - Diary Edit Proposal UI Flow
 
@@ -187,7 +187,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | `docs/diary/diary.{html,css,js}`, edit modal proposal call, safe/warning/blocked copy, Confirm & Save state reset, smoke-mode simulation, cache-bust |
 | Out of Scope | Backend route/schema changes, create-proposal behaviour except shared helper reuse, taskpane/Command Centre, Waiting Room panel layout, Resource Administration, drag/drop/resize, Bernie runtime |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, `npm run validate-all`, smoke/browser notes for edit safe/warning/blocked flows where feasible, `git diff --check` |
-| Status | Queued |
+| Status | Integrated locally |
 
 ### Workstream S24-C - Ariadne Integration and Review
 

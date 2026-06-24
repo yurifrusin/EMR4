@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-edit-proposal-flow` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -37,5 +37,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into `master`. Ariadne inspected the diary edit-proposal flow, verified JavaScript syntax, asset/cache-bust validation, and frontend validation.
+- Follow-up required: Confirm the live deployed diary edit modal at `diary.js?v=85` once GitHub Pages serves the new asset; no production code follow-up is known.

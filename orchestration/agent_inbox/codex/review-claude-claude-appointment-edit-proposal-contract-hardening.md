@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-edit-proposal-contract-hardening` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -50,5 +50,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into `master`. Ariadne inspected the scoped backend diff, removed unnecessary inline comments during closeout, and verified the update-proposal contract with targeted tests plus backend tier-1 checks.
+- Follow-up required: Broad full-suite runtime/test-DB hygiene remains separate; Sprint 24 targeted proposal coverage passed after resetting the interrupted `gp_pms_test` schema.

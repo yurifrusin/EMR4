@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-edit-proposal-flow` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-24 22:55 +1000 |
 | Source HEAD | `bb006db` |
 
@@ -53,6 +53,6 @@ None. The proposal format is identical to create proposals.
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted after amendment. Scope stayed within diary edit-proposal UI flow and preserved create-proposal behaviour.
+- Required changes before implementation: None after the amended plan clarified update-proposal endpoint use, warning confirmation reset, smoke-mode self-conflict handling, and cache-bust.
+- Approved to proceed: yes; implementation was later reviewed and integrated by Ariadne.

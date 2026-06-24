@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-edit-proposal-contract-hardening` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-24 22:59 +1000 |
 | Source HEAD | `bb006db` |
 
@@ -44,6 +44,6 @@ Restoring practitioner_id on null-block means the command in the blocked respons
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted. Scope was backend-only, matched Sprint 24, and provided typed blocks for update-proposal states that must not be executable.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation was later reviewed and integrated by Ariadne.

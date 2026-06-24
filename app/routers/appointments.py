@@ -609,9 +609,6 @@ def propose_update_appointment(
     warnings: list[AppointmentProposalIssue] = []
     blocks: list[AppointmentProposalIssue] = []
 
-    # Block explicit clearance of required fields before hitting the DB.
-    # Restoring practitioner_id lets subsequent conflict/break checks use a
-    # valid practitioner even when the request itself is blocked.
     if "practitioner_id" in incoming and practitioner_id is None:
         blocks.append(AppointmentProposalIssue(
             code="practitioner_required",

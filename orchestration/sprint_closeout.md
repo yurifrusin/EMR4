@@ -8,6 +8,90 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 24: Appointment Edit Proposal Flow |
+| Integrated through | Sprint 24 backend proposal hardening and diary edit proposal preflight |
+| Status | Integrated locally; push, mirror realignment, audit, and residual live review pending |
+| Last updated | 2026-06-24 |
+
+## What Changed
+
+- Backend `POST /appointments/proposals/update/{appointment_id}` now blocks explicit practitioner removal with `practitioner_required` instead of letting a safe proposal produce a later failing write.
+- Backend update proposals now block loss of all patient identity with `patient_identity_required`, while still allowing a linked appointment to become a provisional-name booking when the provisional name is supplied.
+- Seven focused backend tests cover null practitioner, null patient identity, null-plus-provisional downgrade, cross-practice/nonexistent appointments, empty-body reflection, and valid practitioner reassignment.
+- Diary edit/reschedule saves now preflight `POST /appointments/proposals/update/{id}` before the real `PUT`, matching the existing create-proposal block/warning/Confirm & Save flow.
+- Diary smoke-mode conflict checks exclude the appointment currently being edited, so saving without changing slot no longer self-conflicts.
+- Diary frontend asset cache-bust moved to `diary.js?v=85` / `diary.css?v=85`.
+- No schema migration, taskpane, Command Centre, patient demographics, Resource Administration, Waiting Room layout, drag/drop, resize, or Bernie runtime changes were made.
+
+## Recommended User Review
+
+Residual user review/testing after push/deploy: one short live diary edit smoke
+is useful because this sprint changes the real appointment edit modal and
+Ariadne could verify static/frontend checks but not a live GitHub Pages
+Office-dialog edit flow in this thread. Confirm `diary.js?v=85` is loaded, then
+exercise one safe edit, one blocked edit, and one warning-confirm edit.
+
+Detailed steps for Yuri-only review:
+
+1. Hard refresh the live diary/Office-dialog surface and confirm `diary.js?v=85`
+   and `diary.css?v=85` are loaded.
+2. Sign in as a normal staff/admin-capable user who can edit diary appointments.
+3. Pick an existing appointment, open its edit modal, make a harmless edit such
+   as changing notes/details without moving the time, then save. Expected: no
+   self-conflict block appears, the appointment saves, and the diary reloads.
+4. Reopen the same appointment and move it to overlap another appointment for
+   the same practitioner/resource. Expected: save is blocked before write with
+   readable overlap/error copy; after closing/reloading, the original
+   appointment time remains unchanged.
+5. Reopen or create an edit scenario that crosses a configured break such as
+   morning tea or lunch. Expected: warning copy appears, the primary button
+   changes to `Confirm & Save`, and no write occurs on the first click.
+6. While the warning is visible, change a field such as time/duration/patient.
+   Expected: the confirmation state resets to ordinary `Save Booking`.
+7. Trigger the break-warning path again and click `Confirm & Save`. Expected:
+   the appointment saves, the diary reloads, and the edit is visible after
+   refresh.
+8. Report whether v85 loaded, whether safe edits avoided self-conflict, whether
+   blocked edits prevented writes, whether warning confirmation reset correctly,
+   and screenshots for anything suspicious.
+
+## Not Required Before Moving On
+
+- No database migration or manual data repair is required.
+- No Word taskpane, Command Centre, patient-file, Resource Administration,
+  Waiting Room pane layout, drag/drop, resize, status mutation, duplicate-audit,
+  or clinical workflow review is required for this sprint.
+- No security or dependency remediation is required; production `npm audit --omit=dev` remains clean and Bandit medium+/high checks passed.
+
+## Known Follow-Up
+
+- The broad backend suite was not rerun after integration because interrupted
+  pytest runs left the test database in a partial enum state; Ariadne reset
+  `gp_pms_test.public` and reran the targeted Sprint 24 proposal tests. Treat
+  broad-suite runtime/test-DB resilience as a separate dev-tooling follow-up.
+- The live diary edit modal should be smoke-tested after Pages serves v85 because
+  static checks cannot fully prove the real Office-dialog/browser interaction.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+
+## Verification
+
+- `.\scripts\check_backend.ps1` -> passed; compileall, Bandit medium+/high scan, and whitespace check all green.
+- `.\.venv\Scripts\python.exe -m pytest tests/test_appointment_update_proposal.py -q --tb=short -p no:randomly` -> passed; 19 passed, 1 existing pytest-asyncio deprecation warning, after resetting an interrupted `gp_pms_test` schema.
+- `node --check docs\diary\diary.js` -> passed.
+- `npm run validate-all` in `EMR4 Sidebar` -> passed; manifest valid, production npm audit clean, frontend asset/version check passed. Local/HEAD diary assets are v85; deployed Pages was still v84 before push.
+- `git diff --check` -> passed.
+- Worker-reported smoke-mode edit proposal checks passed for warning rendering, save buttons, and self-conflict exclusion.
+
+## Recommended Next Direction
+
+1. After Pages serves v85, run the short live edit-proposal smoke above.
+2. If the smoke is clean, continue Programme 2B toward the next safe appointment mutation slice: likely status/waiting-area proposal retrofit or drag/reschedule design groundwork.
+3. Keep sprints grouped under Programme 2B so the project advances by coherent appointment-mutation capability rather than isolated micro-tasks.
+
+## Previous Closeout - Sprint 23
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 23: Room Default Waiting-Area Invariant |
 | Integrated through | Sprint 23 waiting-area invariant integration |
 | Status | Integrated, pushed, mirrored, audited, and awaiting optional live Admin smoke |
