@@ -17,6 +17,7 @@ TODAY = date.today()
 
 UPDATE_URL = "/api/v1/appointments/proposals/update/{appt_id}"
 STATUS_URL = "/api/v1/appointments/proposals/status/{appt_id}"
+WAITING_AREA_URL = "/api/v1/appointments/proposals/waiting-area/{appt_id}"
 
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -554,3 +555,195 @@ def test_update_proposal_valid_practitioner_change(
     # Row unchanged — proposal is non-mutating
     db.refresh(appt)
     assert appt.practitioner_id == practitioner.id
+
+
+# ─── Status proposal coverage gaps ───────────────────────────────────────────
+
+def test_status_proposal_cross_practice_returns_404(
+        client, db, gp_user, practice_b, patient_b):
+    """Status proposal on another practice's appointment returns 404."""
+    pr_b = Practitioner(
+        practice_id=practice_b.id,
+        first_name="Other",
+        last_name="Doctor",
+        ahpra_number="MED8888888888",
+    )
+    db.add(pr_b)
+    db.flush()
+    appt_b = Appointment(
+        practice_id=practice_b.id,
+        patient_id=patient_b.id,
+        practitioner_id=pr_b.id,
+        start_time=datetime.combine(THURSDAY, time(11, 0), tzinfo=timezone.utc),
+        appointment_date=THURSDAY,
+        start_time_local=time(11, 0),
+        duration_minutes=15,
+        status=AppointmentStatus.Booked,
+        booked_via=BookingChannel.Receptionist,
+    )
+    db.add(appt_b)
+    db.flush()
+
+    resp = client.post(
+        STATUS_URL.format(appt_id=appt_b.id),
+        json={"status": "Confirmed"},
+        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+    )
+    assert resp.status_code == 404
+
+
+def test_status_proposal_nonexistent_appointment_returns_404(
+        client, db, gp_user):
+    """Status proposal on a random UUID returns 404."""
+    import uuid as _uuid
+    resp = client.post(
+        STATUS_URL.format(appt_id=_uuid.uuid4()),
+        json={"status": "Confirmed"},
+        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+    )
+    assert resp.status_code == 404
+
+
+def test_status_proposal_warns_waiting_area_assigned_on_terminal(
+        client, db, gp_user, practice, practitioner, patient):
+    """Terminal status + non-null waiting_area_id → waiting_area_assigned_on_terminal warning."""
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient, status=AppointmentStatus.Arrived)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        STATUS_URL.format(appt_id=appt.id),
+        json={"status": "Completed", "waiting_area_id": str(area.id)},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "proposal"
+    assert any(w["code"] == "waiting_area_assigned_on_terminal" for w in data["warnings"])
+    # Row unchanged
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Arrived
+
+
+# ─── Waiting-area proposal tests ──────────────────────────────────────────────
+
+def test_waiting_area_proposal_assign_new_area(
+        client, db, gp_user, practice, practitioner, patient):
+    """Assigning a patient to a waiting area (not currently in one) → safe, execute_with_report."""
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        WAITING_AREA_URL.format(appt_id=appt.id),
+        json={"waiting_area_id": str(area.id)},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["intent"] == "update_appointment_waiting_area"
+    assert data["safe"] is True
+    assert data["requires_confirmation"] is True
+    assert data["autonomy_tier"] == "execute_with_report"
+    assert data["warnings"] == []
+    assert data["blocks"] == []
+    assert data["command"]["waiting_area_id"] == str(area.id)
+    assert data["command"]["clears_waiting_area"] is False
+    # Row unchanged
+    db.refresh(appt)
+    assert appt.waiting_area_id is None
+
+
+def test_waiting_area_proposal_clear_area(
+        client, db, gp_user, practice, practitioner, patient):
+    """Clearing the waiting area (waiting_area_id=null) warns waiting_area_cleared."""
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient, waiting_area_id=area.id)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        WAITING_AREA_URL.format(appt_id=appt.id),
+        json={"waiting_area_id": None},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "proposal"
+    assert data["command"]["clears_waiting_area"] is True
+    assert any(w["code"] == "waiting_area_cleared" for w in data["warnings"])
+    # Row unchanged
+    db.refresh(appt)
+    assert appt.waiting_area_id == area.id
+
+
+def test_waiting_area_proposal_blocked_already_in_area(
+        client, db, gp_user, practice, practitioner, patient):
+    """Proposing the same waiting area the appointment is already in → blocked."""
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient, waiting_area_id=area.id)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        WAITING_AREA_URL.format(appt_id=appt.id),
+        json={"waiting_area_id": str(area.id)},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert any(b["code"] == "already_in_area" for b in data["blocks"])
+    # Row unchanged
+    db.refresh(appt)
+    assert appt.waiting_area_id == area.id
+
+
+def test_waiting_area_proposal_cross_practice_returns_404(
+        client, db, gp_user, practice_b, patient_b):
+    """Waiting-area proposal on another practice's appointment returns 404."""
+    pr_b = Practitioner(
+        practice_id=practice_b.id,
+        first_name="Other",
+        last_name="Doctor",
+        ahpra_number="MED7777777777",
+    )
+    db.add(pr_b)
+    db.flush()
+    appt_b = Appointment(
+        practice_id=practice_b.id,
+        patient_id=patient_b.id,
+        practitioner_id=pr_b.id,
+        start_time=datetime.combine(THURSDAY, time(12, 0), tzinfo=timezone.utc),
+        appointment_date=THURSDAY,
+        start_time_local=time(12, 0),
+        duration_minutes=15,
+        status=AppointmentStatus.Booked,
+        booked_via=BookingChannel.Receptionist,
+    )
+    db.add(appt_b)
+    db.flush()
+
+    resp = client.post(
+        WAITING_AREA_URL.format(appt_id=appt_b.id),
+        json={"waiting_area_id": None},
+        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+    )
+    assert resp.status_code == 404
+
+
+def test_waiting_area_proposal_nonexistent_appointment_returns_404(
+        client, db, gp_user):
+    """Waiting-area proposal on a random UUID returns 404."""
+    import uuid as _uuid
+    resp = client.post(
+        WAITING_AREA_URL.format(appt_id=_uuid.uuid4()),
+        json={"waiting_area_id": None},
+        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+    )
+    assert resp.status_code == 404
