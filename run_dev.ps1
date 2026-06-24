@@ -325,10 +325,10 @@ if (-not $NoDevServer) {
         Start-Process powershell -ArgumentList "-NoProfile", "-NoExit", "-Command", $npmCmd `
             -WindowStyle Normal
         Write-Host "  Webpack bundling (first run may take 10-20 s)..." -ForegroundColor Gray
-        if (Wait-ForPort $DevServerPort 90) {
-            Write-Ok "Dev-server ready at http://localhost:$DevServerPort"
+        if (Wait-ForHttp "https://localhost:$DevServerPort/taskpane.html" 90) {
+            Write-Ok "Dev-server ready at https://localhost:$DevServerPort/taskpane.html"
         } else {
-            Write-Warn "Dev-server window opened but :$DevServerPort did not appear in 90 s -- check its window"
+            Write-Warn "Dev-server window opened but taskpane.html did not respond in 90 s -- check its window"
         }
     }
 } else {
@@ -350,7 +350,7 @@ if (-not $NoNgrok) {
     Show-StatusRow "ngrok tunnel"    (Test-PortListening $NgrokApiPort)  "https://$NgrokDomain"
 }
 if (-not $NoDevServer) {
-    Show-StatusRow "npm dev-server"  (Test-PortListening $DevServerPort) "http://localhost:$DevServerPort/taskpane/taskpane.html"
+    Show-StatusRow "npm dev-server"  (Wait-ForHttp "https://localhost:$DevServerPort/taskpane.html" 2) "https://localhost:$DevServerPort/taskpane.html"
 }
 
 Write-Host ""
