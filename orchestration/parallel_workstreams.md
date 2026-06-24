@@ -140,6 +140,54 @@ Use lower reasoning only for:
 The default pattern should be: think hard at planning and review boundaries, execute
 at medium/high once the plan is stable, then think hard again before integration.
 
+## Sprint 23: Room Default Waiting-Area Invariant
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan-gated |
+| Launch Gate | Packets queued for Claude and Antigravity; no Codex worker expected initially |
+| Integration Gate | Do not integrate until required plan packets are visible, reviewed, and explicitly released with `complete sprint task` |
+| Theme | Ensure every active room has a valid default waiting area so reception/admin state stays coherent after room or waiting-area changes |
+
+### Workstream S23-A - Backend Default Waiting-Area Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-room-default-waiting-area-contract.md` |
+| Goal | Plan and then enforce a safe backend invariant that every active room has a valid active default waiting area where possible |
+| In Scope | Room/WaitingArea backend models, schemas, resource-admin routes/services, seed/dev-data repair, migrations only if required, focused pytest coverage |
+| Out of Scope | Diary frontend UI, taskpane/Command Centre, appointment booking/status semantics beyond preserving existing consumers, broad roster redesign |
+| Verification | Plan packet first; after approval focused resource-admin/default-waiting-area pytest coverage, backend Tier-1 check, full pytest if shared fixtures are touched, `git diff --check` |
+| Status | Queued |
+
+### Workstream S23-B - Resource Admin Default Waiting-Area UI
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-room-default-waiting-area-ui.md` |
+| Goal | Plan and then make room default waiting areas visible/editable in Resource Administration without regressing existing room/waiting-area flows |
+| In Scope | `docs/diary/diary.{html,css,js}`, source/deployed asset sync and cache-bust if needed, default/fallback UI messaging, smoke/browser checks |
+| Out of Scope | Backend contract changes, migrations, taskpane/Command Centre, appointment booking/status UI, roster admin redesign, drag/drop/resize |
+| Verification | Plan packet first; after approval JS syntax, `npm run validate-all`, local/deployed asset version checks, smoke/live browser checks, `git diff --check` |
+| Status | Queued |
+
+### Workstream S23-C - Ariadne Integration and Review Harness
+
+| Item | Value |
+|---|---|
+| Owner | Codex/Ariadne |
+| Role | orchestrator |
+| Branch | `master` only for orchestration docs after worker plans are accepted or during closeout |
+| Goal | Review both plans for invariant/UI compatibility, then run all feasible backend/frontend/browser checks before asking Yuri for any residual user review |
+| In Scope | Plan review, integration sequencing, bounded repairs, closeout/user-test summary, and next-sprint recommendation |
+| Out of Scope | Acting as proof of a separate Codex worker submission or bypassing worker plan gates |
+| Verification | `poll --fetch`, plan/review inspection, backend/frontend checks, browser/Chrome checks if runtime UI changes land, `git diff --check` |
+| Status | Ariadne-owned |
+
 ## Sprint 22: Development Tooling Optimisation
 
 | Item | Value |

@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 22: Development Tooling Optimisation |
 | Integrated through | Sprint 22 dev tooling integration |
-| Status | Integrated locally with verification passing; push/audit pending |
+| Status | Integrated, pushed, mirrored, audited, and superseded by Sprint 23 dispatch |
 | Last updated | 2026-06-24 |
 
 ## What Changed
@@ -55,9 +55,9 @@ versions, there is no meaningful manual browser/Word/phone review left for Yuri.
 
 ## Recommended Next Direction
 
-1. Add CI/base-ref modes for the new backend/frontend checks once GitHub workflow cadence is settled.
-2. Consider a browser-smoke harness for the diary/taskpane smoke-mode paths before the next substantial UI sprint.
-3. Return to product work: roster admin writes, appointment type/schedule admin, default waiting-area enforcement for every room, operation-result pattern, or duplicate merge workflow.
+1. Sprint 23 is now the active recommended product slice: enforce a room default waiting-area invariant and make that default legible/editable in Resource Administration.
+2. Add CI/base-ref modes for the new backend/frontend checks once GitHub workflow cadence is settled.
+3. Consider a browser-smoke harness for the diary/taskpane smoke-mode paths before the next substantial UI sprint.
 
 ## Sprint 15 Review Harness - Waiting Room Check-In Operations
 
