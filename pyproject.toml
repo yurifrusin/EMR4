@@ -1,3 +1,10 @@
+[tool.pytest.ini_options]
+# Standard flags used by every sprint verification and CI run.
+# Encodes them here so agents can run: python -m pytest
+# instead of typing the full flag string by hand.
+addopts = "-q --tb=short -p no:randomly"
+testpaths = ["tests"]
+
 [tool.bandit]
 # Paths excluded from static security scanning.
 # .venv and alembic/ (generated migrations) are always excluded.
