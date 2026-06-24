@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Plan submitted for Codex review
+antigravity-diary-move-resize-proposal-flow ready for Codex review
 
 ## Worker Completion Notes
 
