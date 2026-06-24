@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-status-waiting-area-proposal-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -38,5 +38,5 @@ claude-appointment-status-waiting-area-proposal-contract ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into Sprint 25 after diff inspection and focused verification.
+- Follow-up required: None before push; continue with Programme 2B after closeout if no Yuri-only review remains.

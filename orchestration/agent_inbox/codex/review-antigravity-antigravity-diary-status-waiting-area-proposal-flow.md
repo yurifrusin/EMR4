@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-status-waiting-area-proposal-flow` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -37,5 +37,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into Sprint 25 after diff inspection, frontend validation, and Chrome/CDP smoke assertions.
+- Follow-up required: None before push; deployed Pages asset version should be observed after GitHub Actions publishes v86.
