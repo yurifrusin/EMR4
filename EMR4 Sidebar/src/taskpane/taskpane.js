@@ -1688,7 +1688,7 @@ window.showNewPatientForm = function showNewPatientForm() {
   setNewPatientActionStatus("");
   document.getElementById("new-patient-panel").classList.remove("hidden");
   document.getElementById("np-first-name").focus();
-}
+};
 
 window.closeNewPatientForm = function closeNewPatientForm() {
   document.getElementById("new-patient-panel").classList.add("hidden");
@@ -1696,12 +1696,12 @@ window.closeNewPatientForm = function closeNewPatientForm() {
   clearNewPatientFields();
   setNewPatientResult("");
   setNewPatientActionStatus("");
-}
+};
 
 window.resetNewPatientFormForAnother = function resetNewPatientFormForAnother() {
   closeNewPatientForm();
   showNewPatientForm();
-}
+};
 
 // ═══════════════════════════════════════════════════════════
 // EDIT PATIENT DETAILS

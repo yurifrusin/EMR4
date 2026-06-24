@@ -7,6 +7,7 @@ updates patient records.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 import uuid
@@ -74,6 +75,11 @@ def _format_dt(value: datetime | None) -> str:
     return value.isoformat(timespec="seconds")
 
 
+def _fingerprint(parts: tuple[Any, ...]) -> str:
+    normalized = "|".join(str(part or "") for part in parts)
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:12]
+
+
 def _snapshot_patient(patient: Any) -> PatientSnapshot:
     return PatientSnapshot(
         id=patient.id,
@@ -135,15 +141,12 @@ def find_duplicate_groups(patients: list[PatientSnapshot]) -> list[DuplicateGrou
 
 def _group_label(kind: str, key: tuple[Any, ...]) -> str:
     if kind == "same-name-dob":
-        _, first_name, last_name, dob = key
-        return f"{first_name or '?'} {last_name or '?'} born {dob}"
+        return f"same-name-dob:{_fingerprint(key)}"
     if kind == "medicare-irn":
-        _, medicare, irn = key
-        return f"Medicare {medicare} IRN {irn}"
+        return f"medicare-irn:{_fingerprint(key)}"
     if kind == "ihi":
-        _, ihi = key
-        return f"IHI {ihi}"
-    return " ".join(str(part) for part in key)
+        return f"ihi:{_fingerprint(key)}"
+    return f"{kind}:{_fingerprint(key)}"
 
 
 def load_database_context(database_url: str | None):
@@ -210,13 +213,17 @@ def _patient_payload(patient: PatientSnapshot, counts: dict[str, int], show_zero
     return {
         "id": str(patient.id),
         "practice_id": str(patient.practice_id),
-        "name": f"{patient.first_name} {patient.last_name}",
-        "date_of_birth": patient.date_of_birth.isoformat(),
-        "medicare_number": patient.medicare_number,
-        "medicare_irn": patient.medicare_irn,
-        "ihi_number": patient.ihi_number,
-        "phone_mobile": patient.phone_mobile,
-        "phone_home": patient.phone_home,
+        "patient_fingerprint": _fingerprint(
+            (
+                patient.practice_id,
+                _clean_text(patient.first_name),
+                _clean_text(patient.last_name),
+                patient.date_of_birth,
+                _clean_identifier(patient.medicare_number),
+                _clean_identifier(patient.medicare_irn),
+                _clean_identifier(patient.ihi_number),
+            )
+        ),
         "document_url_present": bool(patient.document_url),
         "created_at": _format_dt(patient.created_at),
         "updated_at": _format_dt(patient.updated_at),
@@ -272,21 +279,10 @@ def print_human_report(
             if not references:
                 references = "none"
 
-            print(f"    - {patient.first_name} {patient.last_name} ({patient.date_of_birth})")
+            print(f"    - patient_fingerprint: {_patient_payload(patient, counts, show_zero)['patient_fingerprint']}")
             print(f"      id: {patient.id}")
             print(f"      practice_id: {patient.practice_id}")
-            print(
-                "      identifiers: "
-                f"Medicare={patient.medicare_number or '-'} "
-                f"IRN={patient.medicare_irn or '-'} "
-                f"IHI={patient.ihi_number or '-'}"
-            )
-            print(
-                "      contact/file: "
-                f"mobile={patient.phone_mobile or '-'} "
-                f"home={patient.phone_home or '-'} "
-                f"document_url={'yes' if patient.document_url else 'no'}"
-            )
+            print(f"      document_url: {'yes' if patient.document_url else 'no'}")
             print(f"      created_at: {_format_dt(patient.created_at)}")
             print(f"      reference counts: {total} total ({references})")
         print()
@@ -331,7 +327,7 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as exc:
         if args.debug:
             raise
-        print(f"Patient duplicate audit failed safely: {exc}", file=sys.stderr)
+        print(f"Patient duplicate audit failed safely: {type(exc).__name__}", file=sys.stderr)
         print("No records were changed.", file=sys.stderr)
         return 2
 

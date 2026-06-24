@@ -22,6 +22,12 @@ reviewed, integrated, verified, pushed, and audited.
 - Ariadne repaired Claude's implementation during integration so server logs record exception classes rather than raw exception strings that might contain clinical payloads.
 - The Codex worker/security-manager plan was accepted but its implementation was superseded after repeated local tooling blockers; Ariadne completed the report directly.
 
+## Post-Closeout Security Follow-Up
+
+- Redacted `scripts/audit_patient_duplicates.py` default output so the read-only developer audit reports stable fingerprints, UUIDs, reference counts, and file-presence flags instead of names, DOBs, Medicare/IHI values, phone numbers, or raw exception text.
+- Fixed taskpane automatic-semicolon-insertion CodeQL notes in both source and deployed copies, and bumped deployed taskpane JS cache-bust to `v=57`.
+- Applied the safe Dependabot/npm package update path for `copy-webpack-plugin` and `webpack-dev-server`, plus non-forced `npm audit fix`.
+
 ## Recommended User Review
 
 No clinical UI smoke test is required for Sprint 21 because no diary, taskpane,
@@ -48,9 +54,8 @@ run; they do not need Yuri to manually test the application.
 
 ## Known Follow-Up
 
-- CodeQL still reports high clear-text logging findings in `scripts/audit_patient_duplicates.py`; plan a small dev/admin-script redaction task.
-- CodeQL note-level JavaScript automatic-semicolon-insertion alerts remain in taskpane source/deployed copies; plan a frontend hygiene slice that keeps `EMR4 Sidebar/src/taskpane/` and `docs/taskpane/` in sync.
-- Full `npm audit` and GitHub Dependabot now report devDependency/build-tool vulnerabilities through `serialize-javascript`, `uuid`, and `webpack-dev-server`. Production audit remains clean. Forced fixes require major build-tool upgrades and should be handled separately.
+- The duplicate-audit clear-text logging findings and taskpane automatic-semicolon-insertion notes have been addressed locally; GitHub CodeQL will confirm after the pushed follow-up commit is analyzed.
+- Full `npm audit` now reports 11 moderate devDependency/build-tool vulnerabilities through `uuid` in Office add-in tooling. Production audit remains clean. `npm audit fix --force` would install a breaking `office-addin-manifest@1.0.0` path, so the forced fix remains deferred.
 - CodeQL still reports note-level unused import/local/global findings; these are hygiene items, not Sprint 21 blockers.
 
 ## Verification
@@ -62,6 +67,17 @@ run; they do not need Yuri to manually test the application.
 - `npm audit --omit=dev` in `EMR4 Sidebar` -> passed; 0 production vulnerabilities.
 - `npm run build` in `EMR4 Sidebar` -> passed with existing asset-size/performance warnings only.
 - `npm audit` in `EMR4 Sidebar` -> non-blocking visibility check reported 13 devDependency/build-tool vulnerabilities.
+- `git diff --check` -> passed.
+
+Post-closeout follow-up verification:
+
+- `.venv\Scripts\python.exe -m py_compile scripts\audit_patient_duplicates.py` -> passed.
+- `scripts\audit_patient_duplicates.py --database-url postgresql://invalid:...` -> failed safely with exception class only and "No records were changed."
+- `.venv\Scripts\python.exe -m bandit -r scripts\audit_patient_duplicates.py -ll -ii -c pyproject.toml` -> passed; no medium+/high findings.
+- `npm run validate` in `EMR4 Sidebar` -> passed; manifest valid.
+- `npm run build` in `EMR4 Sidebar` -> passed with existing asset-size/performance warnings only.
+- `npm audit --omit=dev` in `EMR4 Sidebar` -> passed; 0 production vulnerabilities.
+- `npm audit` in `EMR4 Sidebar` -> non-blocking visibility check now reports 11 moderate devDependency/build-tool vulnerabilities.
 - `git diff --check` -> passed.
 
 ## Recommended Next Direction
