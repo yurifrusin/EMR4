@@ -29,6 +29,7 @@ const LOCATION_STORAGE_KEY = "emr4_diary_active_location";
 const FLOW_PANEL_OPEN_KEY = "emr4_diary_flow_open";
 let activeLocationId = localStorage.getItem(LOCATION_STORAGE_KEY) || null;
 let locationOptionsLoaded = false;
+let activeDragState = null;
 const mockLocations = [
   { id: "loc-1", name: "Main Clinic" },
   { id: "loc-2", name: "North Branch" },
@@ -847,6 +848,8 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
     // Body
     const columnBody = document.createElement("div");
     columnBody.className = "diary-column-body";
+    columnBody.dataset.practitionerAhpra = col.practitioner_ahpra || "";
+    columnBody.dataset.colIdx = colIdx;
     if (col.tint) {
       columnBody.style.backgroundColor = `#${col.tint}11`;
     }
@@ -1145,6 +1148,27 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
       statusChanger.appendChild(editBtn);
 
       span.appendChild(statusChanger);
+
+      // Create top/bottom resize handles
+      const topHandle = document.createElement("div");
+      topHandle.className = "appt-resize-handle appt-resize-handle-top";
+      const bottomHandle = document.createElement("div");
+      bottomHandle.className = "appt-resize-handle appt-resize-handle-bottom";
+      span.appendChild(topHandle);
+      span.appendChild(bottomHandle);
+
+      span.addEventListener("mousedown", e => {
+        if (e.target.closest(".appt-status-changer, button, select, a, input, textarea")) {
+          return;
+        }
+        if (e.target === topHandle) {
+          initDragOrResize(e, a, span, "resize-top", col);
+        } else if (e.target === bottomHandle) {
+          initDragOrResize(e, a, span, "resize-bottom", col);
+        } else {
+          initDragOrResize(e, a, span, "drag", col);
+        }
+      });
 
       span.addEventListener("click", e => {
         e.stopPropagation();
@@ -2697,27 +2721,161 @@ function setFlowPanelVisibility(isOpen, persist = true) {
   }
 }
 
+function initDragOrResize(e, appt, span, type, col) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const rect = span.getBoundingClientRect();
+  const columnBody = span.closest(".diary-column-body");
+  const columnBodyRect = columnBody.getBoundingClientRect();
+
+  const startTopPx = parseFloat(span.style.top) || 0;
+  const startHeightPx = parseFloat(span.style.height) || rect.height;
+
+  const startStartMins = toMins(appt.start_time_local);
+  const startDuration = appt.duration_minutes || 15;
+  const startColIdx = parseInt(columnBody.dataset.colIdx, 10);
+
+  const mouseOffsetY = e.clientY - rect.top;
+
+  activeDragState = {
+    appt,
+    span,
+    type,
+    col,
+    startTopPx,
+    startHeightPx,
+    startStartMins,
+    startDuration,
+    startColIdx,
+    mouseOffsetY,
+    currentColIdx: startColIdx,
+    currentStartMins: startStartMins,
+    currentDuration: startDuration,
+    ghostEl: null,
+    columnBodyRect
+  };
+
+  const ghost = document.createElement("div");
+  ghost.className = "appt-ghost-preview";
+  ghost.style.position = "absolute";
+  ghost.style.left = "1px";
+  ghost.style.right = "1px";
+  ghost.style.top = span.style.top;
+  ghost.style.height = span.style.height;
+
+  columnBody.appendChild(ghost);
+  activeDragState.ghostEl = ghost;
+
+  document.addEventListener("mousemove", handleGlobalMouseMove);
+  document.addEventListener("mouseup", handleGlobalMouseUp);
+}
+
+function handleGlobalMouseMove(e) {
+  if (!activeDragState) return;
+
+  const template = activeTemplate;
+  const intervalMins = template?.slot_defaults?.interval_minutes || 15;
+  const dayStartMins = toMins(template.slot_defaults.start);
+
+  const columnBody = activeDragState.ghostEl.closest(".diary-column-body");
+  const columnBodyRect = columnBody.getBoundingClientRect();
+
+  let newStartMins = activeDragState.startStartMins;
+  let newDuration = activeDragState.startDuration;
+
+  if (activeDragState.type === "drag") {
+    const hoverEl = document.elementFromPoint(e.clientX, e.clientY);
+    const colBody = hoverEl?.closest(".diary-column-body");
+    if (colBody && colBody.dataset.colIdx !== undefined) {
+      const colIdx = parseInt(colBody.dataset.colIdx, 10);
+      const col = template.columns[colIdx];
+      if (col && col.practitioner_ahpra) {
+        if (activeDragState.currentColIdx !== colIdx) {
+          activeDragState.currentColIdx = colIdx;
+          colBody.appendChild(activeDragState.ghostEl);
+        }
+      }
+    }
+
+    const currentColumnBody = activeDragState.ghostEl.closest(".diary-column-body");
+    const currentColumnBodyRect = currentColumnBody.getBoundingClientRect();
+    const relativeY = e.clientY - currentColumnBodyRect.top;
+    const topPx = relativeY - activeDragState.mouseOffsetY;
+    const rawMins = dayStartMins + (topPx * intervalMins / SLOT_HEIGHT_PX);
+    newStartMins = Math.max(0, Math.min(1425, Math.round(rawMins / intervalMins) * intervalMins));
+
+  } else if (activeDragState.type === "resize-top") {
+    const relativeY = e.clientY - columnBodyRect.top;
+    const rawStartMins = dayStartMins + (relativeY * intervalMins / SLOT_HEIGHT_PX);
+    const maxStartMins = activeDragState.startStartMins + activeDragState.startDuration - 15;
+    newStartMins = Math.max(0, Math.min(maxStartMins, Math.round(rawStartMins / intervalMins) * intervalMins));
+    newDuration = (activeDragState.startStartMins + activeDragState.startDuration) - newStartMins;
+
+  } else if (activeDragState.type === "resize-bottom") {
+    const relativeY = e.clientY - columnBodyRect.top;
+    const heightPx = relativeY - activeDragState.startTopPx;
+    const duration = heightPx * intervalMins / SLOT_HEIGHT_PX;
+    newDuration = Math.max(15, Math.round(duration / intervalMins) * intervalMins);
+  }
+
+  activeDragState.currentStartMins = newStartMins;
+  activeDragState.currentDuration = newDuration;
+
+  const finalTopPx = (newStartMins - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
+  const finalHeightPx = newDuration * (SLOT_HEIGHT_PX / intervalMins);
+
+  activeDragState.ghostEl.style.top = `${finalTopPx + 1}px`;
+  activeDragState.ghostEl.style.height = `${Math.max(finalHeightPx - APPT_BLOCK_GAP_PX, 10)}px`;
+}
+
+async function handleGlobalMouseUp(e) {
+  if (!activeDragState) return;
+
+  document.removeEventListener("mousemove", handleGlobalMouseMove);
+  document.removeEventListener("mouseup", handleGlobalMouseUp);
+
+  const state = activeDragState;
+  activeDragState = null;
+
+  if (state.ghostEl) {
+    state.ghostEl.remove();
+  }
+
+  const appt = state.appt;
+  const hasStartTimeChange = (state.currentStartMins !== state.startStartMins);
+  const hasDurationChange = (state.currentDuration !== state.startDuration);
+  const hasColumnChange = (state.currentColIdx !== state.startColIdx);
+
+  if (!hasStartTimeChange && !hasDurationChange && !hasColumnChange) {
+    return;
+  }
+
+  const targetCol = activeTemplate.columns[state.currentColIdx];
+  const deltaStart = state.currentStartMins - state.startStartMins;
+  const deltaDuration = state.currentDuration - state.startDuration;
+
+  await handleMoveResize(appt, deltaStart, deltaDuration, targetCol);
+}
+
 async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) {
   const currentStartMins = toMins(appt.start_time_local);
   const newStartMins = Math.max(0, Math.min(1425, currentStartMins + deltaStart));
   const newDuration = Math.max(15, (appt.duration_minutes || 15) + deltaDuration);
 
-  if (newStartMins === currentStartMins && newDuration === (appt.duration_minutes || 15)) {
+  const targetPractitioner = column ? ahpraToPractitionerMap[column.practitioner_ahpra] : null;
+  const newPractitionerId = targetPractitioner ? targetPractitioner.id : (appt.practitioner?.id || appt.practitioner_id);
+
+  if (newStartMins === currentStartMins && newDuration === (appt.duration_minutes || 15) && (!column || newPractitionerId === (appt.practitioner?.id || appt.practitioner_id))) {
     return;
   }
 
   const newStartTimeString = fromMins(newStartMins);
   const provisionalPatientName = appt.patient_name_provisional || appt.provisional_name || "";
   const isProvisional = !!provisionalPatientName || !appt.patient_id || !appt.patient;
-  const practitionerId = appt.practitioner?.id
-    || appt.practitioner_id
-    || column?.practitioner_id
-    || (appt.practitioner?.ahpra_number
-      ? ahpraToPractitionerMap[appt.practitioner.ahpra_number]?.id
-      : null);
 
   const payload = {
-    practitioner_id: practitionerId,
+    practitioner_id: newPractitionerId,
     appointment_type_id: appt.appointment_type_id || appt.appointment_type?.id || null,
     appointment_date: appt.appointment_date || localDateKey(diaryDate),
     start_time_local: newStartTimeString,
@@ -2763,6 +2921,7 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
     if (!proposal.safe || (proposal.warnings && proposal.warnings.length > 0) || proposal.autonomy_tier === "proposal") {
       const confirmed = await showStatusProposalDialog(proposal);
       if (!confirmed) {
+        await loadDiary(true);
         return;
       }
     }
@@ -2771,6 +2930,15 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
       const cachedAppt = mockAppointmentsCache?.find(item => item.id === appt.id) || appt;
       cachedAppt.start_time_local = newStartTimeString;
       cachedAppt.duration_minutes = newDuration;
+      if (column && targetPractitioner) {
+        cachedAppt.practitioner = {
+          id: targetPractitioner.id,
+          ahpra_number: column.practitioner_ahpra,
+          first_name: targetPractitioner.first_name,
+          last_name: targetPractitioner.last_name
+        };
+        appt.practitioner = cachedAppt.practitioner;
+      }
       appt.start_time_local = newStartTimeString;
       appt.duration_minutes = newDuration;
       setStatus("Booking moved/resized (Mock)");
@@ -2792,6 +2960,7 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
   } catch (err) {
     console.error(err);
     alert(err.message || "An error occurred while rescheduling the appointment.");
+    await loadDiary(true);
   }
 }
 
