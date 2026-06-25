@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-mouse-drag-proposal-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 10:55 +1000 |
 | Source HEAD | `90d0d15` |
 

@@ -2006,6 +2006,7 @@ html, body {
 }
 
 #admin-access-denied p {
+  font-size: 10px;
   color: var(--grey-3);
 }
 

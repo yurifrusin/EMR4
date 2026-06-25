@@ -16,6 +16,7 @@ const BACKEND_URL = (window.location.port === "3000")
 const API_BASE = BACKEND_URL + "/api/v1";
 const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
+const DRAG_START_THRESHOLD_PX = 3;
 const MIN_TIME_INCREMENT_MINS = 5;
 const GRIDLINE_SNAP_TOLERANCE_MINS = 3;
 
@@ -2748,24 +2749,16 @@ function initDragOrResize(e, appt, span, type, col) {
     startStartMins,
     startDuration,
     startColIdx,
+    startClientX: e.clientX,
+    startClientY: e.clientY,
     mouseOffsetY,
+    hasMoved: false,
     currentColIdx: startColIdx,
     currentStartMins: startStartMins,
     currentDuration: startDuration,
     ghostEl: null,
     columnBodyRect
   };
-
-  const ghost = document.createElement("div");
-  ghost.className = "appt-ghost-preview";
-  ghost.style.position = "absolute";
-  ghost.style.left = "1px";
-  ghost.style.right = "1px";
-  ghost.style.top = span.style.top;
-  ghost.style.height = span.style.height;
-
-  columnBody.appendChild(ghost);
-  activeDragState.ghostEl = ghost;
 
   document.addEventListener("mousemove", handleGlobalMouseMove);
   document.addEventListener("mouseup", handleGlobalMouseUp);
@@ -2775,8 +2768,30 @@ function handleGlobalMouseMove(e) {
   if (!activeDragState) return;
 
   const template = activeTemplate;
+  const slotDefaults = template?.slot_defaults;
+  if (!slotDefaults) return;
+  const pointerDelta = Math.max(
+    Math.abs(e.clientX - activeDragState.startClientX),
+    Math.abs(e.clientY - activeDragState.startClientY)
+  );
+  if (!activeDragState.hasMoved && pointerDelta < DRAG_START_THRESHOLD_PX) return;
+  activeDragState.hasMoved = true;
+
   const intervalMins = template?.slot_defaults?.interval_minutes || 15;
-  const dayStartMins = toMins(template.slot_defaults.start);
+  const dayStartMins = toMins(slotDefaults.start);
+
+  if (!activeDragState.ghostEl) {
+    const initialColumnBody = activeDragState.span.closest(".diary-column-body");
+    const ghost = document.createElement("div");
+    ghost.className = "appt-ghost-preview";
+    ghost.style.position = "absolute";
+    ghost.style.left = "1px";
+    ghost.style.right = "1px";
+    ghost.style.top = activeDragState.span.style.top;
+    ghost.style.height = activeDragState.span.style.height;
+    initialColumnBody.appendChild(ghost);
+    activeDragState.ghostEl = ghost;
+  }
 
   const columnBody = activeDragState.ghostEl.closest(".diary-column-body");
   const columnBodyRect = columnBody.getBoundingClientRect();
@@ -2840,6 +2855,10 @@ async function handleGlobalMouseUp(e) {
 
   if (state.ghostEl) {
     state.ghostEl.remove();
+  }
+
+  if (!state.hasMoved) {
+    return;
   }
 
   const appt = state.appt;

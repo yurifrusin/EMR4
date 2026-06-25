@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-mouse-drag-resize-affordances` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 10:54 +1000 |
 | Source HEAD | `90d0d15` |
 

@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-mouse-drag-proposal-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

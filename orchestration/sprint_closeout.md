@@ -8,6 +8,89 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 27: Visible Diary Mouse Drag/Resize Affordances |
+| Integrated through | Sprint 27 backend mouse-equivalent update conflict tests and diary mouse drag/resize proposal flow |
+| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Last updated | 2026-06-25 |
+
+## What Changed
+
+- Backend conflict coverage now proves confirmed `PUT /appointments/{id}` rejects mouse-equivalent drag move, resize into a next booking, and cross-practitioner conflict writes while allowing adjacent moves.
+- Diary appointment cards now expose visible mouse affordances: grab cursor on cards, top/bottom resize handles, dashed ghost preview, 15-minute snapping, cross-column drag target detection, and proposal-gated drop handling.
+- Mouse move/resize reuses the same non-mutating update-proposal preflight path as keyboard move/resize: blocked proposals stop writes, warning proposals require `Confirm & Save`, and confirmed changes then use the normal appointment update path.
+- Ariadne applied two bounded integration hotfixes from tool-enabled review: delayed ghost creation until the pointer moves beyond a 3px threshold, and restored the Resource Administration access-denied paragraph font size accidentally dropped in the worker CSS diff.
+- Diary frontend asset cache-bust moved to `diary.js?v=94` / `diary.css?v=94`.
+- No schema migration, taskpane, Command Centre, patient workflow, Waiting Room, Resource Administration behaviour, recurrence, or direct-write bypass was included.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before the next sprint.
+Ariadne verified the mouse interaction paths locally with browser/CDP against the
+smoke diary fixture, including real browser mouse events for drag preview,
+warning proposal, confirm-save, resize preview, and confirm-save. Backend conflict
+coverage provides the blocked-conflict safety check for the confirmed write path.
+
+Optional confidence check only, if Yuri happens to be in the live diary:
+
+1. Setup: after GitHub Pages deploys, hard refresh the live diary and confirm
+   `diary.js?v=94` and `diary.css?v=94` are loaded.
+2. Exact UI path: sign in as a dev Admin or normal dev user, open the Diary,
+   and hover over an appointment card body/name area.
+3. Expected drag affordance: the cursor should read as draggable/grabbable, a
+   dashed preview should appear while dragging more than a tiny click movement,
+   and releasing on a warning-only move should show the existing proposal
+   warning before any save.
+4. Expected resize affordance: drag the bottom edge of a card; a dashed preview
+   should resize in 15-minute increments and the proposal warning/confirm path
+   should appear before the duration changes.
+5. Suspicious signs: card moves without a proposal check, a click opens a drag
+   preview without meaningful movement, resize shrinks below 15 minutes, the
+   status dropdown changes when dragging the card body, or the browser console
+   shows errors.
+6. Skippable parts: do not retest taskpane, Command Centre, Resource
+   Administration, Waiting Room, recurrence, or patient search for Sprint 27.
+7. Evidence to report: screenshot or short note with the appointment, action
+   attempted, expected time/duration, and any unexpected dialog or console error.
+
+## Not Required Before Moving On
+
+- No database migration or manual data repair is required.
+- No Word taskpane, Command Centre, patient-file, Resource Administration,
+  Waiting Room, recurrence, duplicate-audit, or clinical workflow review is
+  required for this sprint.
+- No additional Yuri-only test is required because browser/CDP covered the
+  real mouse-input paths that were previously hard for Ariadne to synthesize.
+
+## Known Follow-Up
+
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The live GitHub Pages deployment must still be observed after push to confirm
+  Pages serves v94; this is a deployment observation, not a manual product test.
+- Future UX polish may add a short in-product hint for mouse/keyboard move and
+  resize controls once staff workflow feedback accumulates.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 27 review packets.
+- Claude worker verification: `pytest tests/test_appointment_conflicts.py -q --tb=short -p no:randomly` on `claude/current` -> 12 passed.
+- Antigravity worker verification: `node --check docs\diary\diary.js`, `git diff --check origin/master...HEAD`, and `npm run validate-all` -> passed.
+- Integrated-tree backend verification: `.\.venv\Scripts\python.exe -m pytest tests\test_appointment_conflicts.py tests\test_appointment_update_proposal.py -q --tb=short -p no:randomly` -> 43 passed, with the existing pytest-asyncio deprecation warning.
+- Integrated-tree frontend verification: `node --check docs\diary\diary.js`, `git diff --check`, and `npm run validate-all` -> passed; manifest valid, production npm audit clean, and asset check accepted v94.
+- Browser smoke: local diary served at `http://127.0.0.1:8765/diary/diary.html?smoke=true`; page identity `EMR — Diary`, grid rendered 4 smoke appointments, no console warnings/errors.
+- Browser/CDP drag smoke: real mouse events on a visible appointment created one dashed ghost preview, snapped the preview down by one slot, opened the proposal warning dialog, and `Confirm & Save` moved the card from `top: 331px` to `top: 361px`.
+- Browser/CDP resize smoke: real mouse events on the bottom resize handle created one dashed ghost preview with increased height, opened the proposal warning dialog, and `Confirm & Save` persisted the card height to `88px`.
+- Browser smoke confirmed status controls were ignored as drag targets and that ghost previews were removed after drop.
+
+## Recommended Next Direction
+
+1. Push Sprint 27, observe GitHub Pages serving v94, realign mirrors, and audit.
+2. Continue Programme 2B with the next receptionist-visible appointment mutation slice: likely cancellation/reschedule reason capture or an appointment proposal/review history surface.
+3. Keep running browser/CDP smoke before leaving any UI review to Yuri; this sprint proved the tool path can cover real mouse-input affordances.
+
+## Previous Closeout - Sprint 26
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 26: Move/Resize Proposal Flow |
 | Integrated through | Sprint 26 backend move/resize proposal tests and diary keyboard move/resize proposal flow |
 | Status | Integrated, pushed, mirrored, audited, deployed v92 observed, and Yuri physical-keyboard smoke passed |

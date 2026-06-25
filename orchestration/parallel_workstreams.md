@@ -130,9 +130,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched and plan-gated |
-| Launch Gate | Awaiting Claude and Antigravity plan packets |
-| Integration Gate | Not started |
+| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Launch Gate | Closed; Claude and Antigravity plans were reviewed and implementation was released |
+| Integration Gate | Closed; implementation submissions reviewed, integrated, and hotfixed by Ariadne |
 | Product Goal | Give staff discoverable mouse affordances for moving and resizing appointments while preserving proposal-gated safety semantics |
 
 ### Workstream S27-A - Appointment Mouse Proposal Contract
@@ -146,7 +146,7 @@ After every fully integrated batch, Codex updates
 | In Scope | `app/routers/appointments.py`, `app/schemas/appointments.py`, `tests/test_appointment_update_proposal.py` or adjacent proposal tests; minimal fixes only if a real contract gap is found |
 | Out of Scope | Diary frontend, pointer UI, migrations/schema redesign, recurrence, patient identity, taskpane/Command Centre, direct writes that bypass proposals |
 | Verification | `py_compile` for appointment router/schema, focused proposal pytest, `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream S27-B - Diary Mouse Drag/Resize UX
 
@@ -159,7 +159,7 @@ After every fully integrated batch, Codex updates
 | In Scope | `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, and frontend smoke tooling if needed |
 | Out of Scope | Backend route redesign, schema/migration, recurrence, patient search/linking, Waiting Room, Resource Administration, taskpane/Command Centre, direct mutation before confirmation |
 | Verification | JS syntax, asset check, browser/Chrome smoke for preview/cancel/confirm/blocked conflict, `git diff --check` |
-| Status | Queued |
+| Status | Integrated with Ariadne hotfix |
 
 ## Reasoning Budget Guidance
 
