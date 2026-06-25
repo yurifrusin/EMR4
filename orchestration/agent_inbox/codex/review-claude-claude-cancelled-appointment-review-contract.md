@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Plan packet submitted for Codex review
+Sprint 30 cancelled appointment review contract ready for Codex review
 
 ## Worker Completion Notes
 
