@@ -61,6 +61,7 @@ class Appointment(Base):
     status = Column(Enum(AppointmentStatus), default=AppointmentStatus.Booked)
     reason = Column(String(500))
     notes = Column(String(1000))
+    cancellation_reason = Column(String(500), nullable=True)
     booked_via = Column(Enum(BookingChannel), default=BookingChannel.Receptionist)
     waiting_room = Column(String(50))
     waiting_area_id = Column(UUID(as_uuid=True), ForeignKey("waiting_areas.id"), nullable=True)

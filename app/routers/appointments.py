@@ -2,7 +2,7 @@ import uuid
 from datetime import date as date_type, datetime, time, timedelta, timezone
 from typing import Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Body, Depends, HTTPException, Query, status
 from sqlalchemy import or_
 from sqlalchemy.orm import Session, joinedload
 
@@ -22,7 +22,7 @@ from app.schemas.appointments import (
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
-    AppointmentDeleteCommand, AppointmentDeleteProposalOut,
+    AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -1105,6 +1105,7 @@ def update_appointment_status(
 @router.delete("/{appointment_id}", status_code=status.HTTP_204_NO_CONTENT)
 def cancel_appointment(
     appointment_id: uuid.UUID,
+    body: Optional[AppointmentDeleteIn] = Body(default=None),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
@@ -1112,12 +1113,14 @@ def cancel_appointment(
     appt = _get_appointment(appointment_id, practice_id, db)
     appt.status = AppointmentStatus.Cancelled
     appt.waiting_area_id = None
+    appt.cancellation_reason = body.cancellation_reason if body else None
     db.commit()
 
 
 @router.post("/proposals/delete/{appointment_id}", response_model=AppointmentDeleteProposalOut)
 def propose_delete_appointment(
     appointment_id: uuid.UUID,
+    body: Optional[AppointmentDeleteIn] = Body(default=None),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
@@ -1165,6 +1168,8 @@ def propose_delete_appointment(
     elif warnings:
         summary += " Confirmation recommended."
 
+    cancellation_reason = body.cancellation_reason if body else None
+
     return AppointmentDeleteProposalOut(
         safe=safe,
         requires_confirmation=requires_confirmation,
@@ -1173,6 +1178,7 @@ def propose_delete_appointment(
         command=AppointmentDeleteCommand(
             appointment_id=appointment_id,
             clears_waiting_area=clears_waiting_area,
+            cancellation_reason=cancellation_reason,
         ),
         warnings=warnings,
         blocks=blocks,
