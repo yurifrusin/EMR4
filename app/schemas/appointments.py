@@ -260,6 +260,22 @@ class AppointmentWaitingAreaProposalOut(BaseModel):
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
 
 
+class AppointmentDeleteCommand(BaseModel):
+    appointment_id: uuid.UUID
+    clears_waiting_area: bool
+
+
+class AppointmentDeleteProposalOut(BaseModel):
+    intent: Literal["delete_appointment"] = "delete_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["proposal", "blocked"]
+    summary: str
+    command: AppointmentDeleteCommand
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
 class ScheduleSlot(BaseModel):
     start_time: datetime
     end_time: datetime

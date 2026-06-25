@@ -1,5 +1,7 @@
 """
 PATCH /api/v1/appointments/{appointment_id}/status
+DELETE /api/v1/appointments/{appointment_id}
+POST /api/v1/appointments/proposals/delete/{appointment_id}
 
 Covers:
 - Auth gate (401 without token)
@@ -9,12 +11,16 @@ Covers:
 - Invalid status value → 422
 - Waiting-room inclusion/exclusion after mutation
 - Response embeds patient, practitioner, appointment_type
+- DELETE soft-cancels, clears waiting_area_id, row remains in DB
+- proposals/delete surfaces waiting_area side-effects before the write
 """
 from datetime import date, datetime, time, timezone
 
 import pytest
 
 from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
+from app.models.diary import WaitingArea
+from app.models.tenancy import Practitioner
 from tests.conftest import make_token
 
 TODAY = date.today()
@@ -192,3 +198,116 @@ def test_mutation_to_terminal_status_disappears_from_waiting_room(
                     headers={"Authorization": f"Bearer {token}"})
     ids = [e["id"] for e in wr.json()]
     assert str(appt.id) not in ids
+
+
+# ─── DELETE soft-cancel ────────────────────────────────────────────────────────
+
+def _make_area(db, practice):
+    area = WaitingArea(practice_id=practice.id, name="Main Waiting Room")
+    db.add(area)
+    db.flush()
+    return area
+
+
+def _delete(client, token, appt_id):
+    return client.delete(
+        f"/api/v1/appointments/{appt_id}",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+
+DELETE_PROPOSAL_URL = "/api/v1/appointments/proposals/delete/{}"
+
+
+def test_delete_requires_auth(client, db, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient)
+    resp = client.delete(f"/api/v1/appointments/{appt.id}")
+    assert resp.status_code == 401
+
+
+def test_delete_soft_cancels_appointment(client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+    resp = _delete(client, token, appt.id)
+    assert resp.status_code == 204
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Cancelled
+
+
+def test_delete_clears_waiting_area_on_cancel(
+        client, db, gp_user, practice, practitioner, patient):
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient)
+    appt.waiting_area_id = area.id
+    db.flush()
+
+    token = make_token(gp_user)
+    resp = _delete(client, token, appt.id)
+    assert resp.status_code == 204
+    db.refresh(appt)
+    assert appt.waiting_area_id is None
+
+
+def test_delete_cross_practice_returns_404(
+        client, db, gp_user, practice_b, patient_b):
+    prac_b = Practitioner(
+        practice_id=practice_b.id,
+        first_name="Bob", last_name="Other",
+        ahpra_number="MED0009999999",
+    )
+    db.add(prac_b)
+    db.flush()
+    appt_b = _make_appt(db, practice_b, prac_b, patient_b)
+    token = make_token(gp_user)  # belongs to practice A
+    resp = _delete(client, token, appt_b.id)
+    assert resp.status_code == 404
+
+
+def test_delete_proposal_requires_auth(client, db, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient)
+    resp = client.post(DELETE_PROPOSAL_URL.format(appt.id))
+    assert resp.status_code == 401
+
+
+def test_delete_proposal_warns_waiting_area_cleared(
+        client, db, gp_user, practice, practitioner, patient):
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient)
+    appt.waiting_area_id = area.id
+    db.flush()
+
+    token = make_token(gp_user)
+    resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "proposal"
+    assert data["requires_confirmation"] is True
+    assert data["command"]["clears_waiting_area"] is True
+    assert any(w["code"] == "waiting_area_cleared" for w in data["warnings"])
+    assert data["blocks"] == []
+    # Row must not be mutated by the proposal
+    db.refresh(appt)
+    assert appt.waiting_area_id == area.id
+
+
+def test_delete_proposal_blocked_already_cancelled(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(
+        db, practice, practitioner, patient,
+        status=AppointmentStatus.Cancelled,
+    )
+    token = make_token(gp_user)
+    resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert len(data["blocks"]) >= 1
+    assert data["blocks"][0]["code"] == "already_in_status"
