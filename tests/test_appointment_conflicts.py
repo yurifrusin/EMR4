@@ -3,12 +3,14 @@ Appointment conflict validation:
 - Overlapping bookings for the same practitioner are rejected with 409.
 - Adjacent bookings (back-to-back, no gap) are allowed.
 - Cancelled / NoShow / DNA appointments do not block the slot.
+- PUT /{id} enforces the same conflict rules as POST for drag/resize writes.
 """
 
 from datetime import datetime
 
 import pytest
 
+from app.models.tenancy import Practitioner
 from tests.conftest import make_token
 
 # Fixed Monday for deterministic day-of-week (schedule fixture covers Mon = 0)
@@ -27,6 +29,14 @@ def _appt_body(practitioner_id, patient_id, start: datetime, duration: int = 15)
 def _post(client, token, body):
     return client.post(
         "/api/v1/appointments",
+        json=body,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+
+def _put(client, token, appt_id, body):
+    return client.put(
+        f"/api/v1/appointments/{appt_id}",
         json=body,
         headers={"Authorization": f"Bearer {token}"},
     )
@@ -146,3 +156,135 @@ def test_read_only_role_cannot_create_appointment(client, db, practice, practiti
     )
     # 401 because user lookup fails (UUID not in DB) — either 401 or 403 is correct
     assert r.status_code in (401, 403)
+
+
+# ─── PUT /{id} conflict enforcement (drag / resize confirmed write path) ───────
+
+def test_put_drag_move_to_conflicting_time_rejected(
+        client, db, receptionist_user, practitioner, patient):
+    """Drag-move confirmed write: PUT to a slot occupied by another booking → 409.
+
+    The proposal path returns a BLOCK; the write path must enforce the same
+    constraint so a race between proposal and write cannot produce a double-booking.
+    """
+    token = make_token(receptionist_user)
+    # Blocking booking occupies 10:00–10:15
+    blocking = _post(client, token, _appt_body(
+        practitioner.id, patient.id,
+        datetime(2026, 6, 22, 10, 0, 0), duration=15,
+    ))
+    assert blocking.status_code == 201
+    blocking_id = blocking.json()["id"]
+
+    # Subject starts at 09:00; drag it into the blocking slot
+    subject = _post(client, token, _appt_body(
+        practitioner.id, patient.id, MONDAY, duration=15,
+    ))
+    assert subject.status_code == 201
+    subject_id = subject.json()["id"]
+
+    r = _put(client, token, subject_id, {
+        "appointment_date": "2026-06-22",
+        "start_time_local": "10:05:00",  # inside the 10:00–10:15 block
+        "duration_minutes": 15,
+    })
+
+    assert r.status_code == 409, r.text
+    detail = r.json()["detail"]
+    assert "conflicting_appointment_id" in detail
+    assert detail["conflicting_appointment_id"] == blocking_id
+
+
+def test_put_resize_into_next_booking_rejected(
+        client, db, receptionist_user, practitioner, patient):
+    """Resize confirmed write: extending duration to overlap the next booking → 409.
+
+    This is the bottom-edge drag gesture: the card grows down and bumps the card below.
+    """
+    token = make_token(receptionist_user)
+    # Next booking at 09:15 for 15 min
+    _post(client, token, _appt_body(
+        practitioner.id, patient.id,
+        datetime(2026, 6, 22, 9, 15, 0), duration=15,
+    ))
+    # Subject at 09:00 for 15 min — currently fits without conflict
+    subject = _post(client, token, _appt_body(
+        practitioner.id, patient.id, MONDAY, duration=15,
+    ))
+    assert subject.status_code == 201
+    subject_id = subject.json()["id"]
+
+    # Resize subject to 30 min — would now span 09:00–09:30, overlapping 09:15 booking
+    r = _put(client, token, subject_id, {"duration_minutes": 30})
+
+    assert r.status_code == 409, r.text
+    assert "conflicting_appointment_id" in r.json()["detail"]
+
+
+def test_put_drag_to_practitioner_with_conflict_rejected(
+        client, db, receptionist_user, practitioner, patient):
+    """Column-drag confirmed write: moving to a practitioner who is already booked → 409.
+
+    This is the cross-column drag gesture in the diary grid.
+    """
+    token = make_token(receptionist_user)
+    pr2 = Practitioner(
+        practice_id=practitioner.practice_id,
+        first_name="Second",
+        last_name="Doctor",
+        ahpra_number="MED0006661234",
+    )
+    db.add(pr2)
+    db.flush()
+
+    # pr2 has a booking at 10:00
+    _post(client, token, _appt_body(
+        pr2.id, patient.id,
+        datetime(2026, 6, 22, 10, 0, 0), duration=15,
+    ))
+    # Subject is currently with practitioner at 10:00 (no conflict on that column)
+    subject = _post(client, token, _appt_body(
+        practitioner.id, patient.id,
+        datetime(2026, 6, 22, 10, 0, 0), duration=15,
+    ))
+    assert subject.status_code == 201
+    subject_id = subject.json()["id"]
+
+    # Drag subject to pr2's column — pr2 is booked at 10:00
+    r = _put(client, token, subject_id, {"practitioner_id": str(pr2.id)})
+
+    assert r.status_code == 409, r.text
+    assert "conflicting_appointment_id" in r.json()["detail"]
+
+
+def test_put_adjacent_drag_allowed(
+        client, db, receptionist_user, practitioner, patient):
+    """Drag confirmed write: moving to a slot that ends exactly where another starts → 200.
+
+    PUT enforces the same open-interval adjacency semantics as the conflict checker:
+    end_a > start_b is False when they are equal, so adjacency is not a conflict.
+    """
+    token = make_token(receptionist_user)
+    # Blocker at 09:30; subject will be moved to end at exactly 09:30
+    _post(client, token, _appt_body(
+        practitioner.id, patient.id,
+        datetime(2026, 6, 22, 9, 30, 0), duration=15,
+    ))
+    # Subject currently at 09:00 for 30 min (ends 09:30 — already adjacent to blocker)
+    subject = _post(client, token, _appt_body(
+        practitioner.id, patient.id, MONDAY, duration=30,
+    ))
+    assert subject.status_code == 201
+    subject_id = subject.json()["id"]
+
+    # Move subject to 09:15 for 15 min — ends at 09:30, exactly where blocker starts
+    r = _put(client, token, subject_id, {
+        "appointment_date": "2026-06-22",
+        "start_time_local": "09:15:00",
+        "duration_minutes": 15,
+    })
+
+    assert r.status_code == 200, r.text
+    data = r.json()
+    assert data["start_time_local"] == "09:15:00"
+    assert data["duration_minutes"] == 15

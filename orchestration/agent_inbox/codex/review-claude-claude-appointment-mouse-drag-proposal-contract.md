@@ -14,11 +14,16 @@ claude-appointment-mouse-drag-proposal-contract ready for Codex review
 
 ## Worker Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
-
 - Files changed:
+  - `tests/test_appointment_conflicts.py` — added `_put` helper function and 4 new tests in a "PUT /{id} conflict enforcement" section. No production code changes.
+
 - Verification run:
+  - `pytest tests/test_appointment_conflicts.py -v --tb=short -p no:randomly` — **12 passed, 0 failed** (8 pre-Sprint-27 + 4 new)
+  - New tests confirm the PUT /{id} write path rejects conflicting drag-move (409), resize-into-next (409), and cross-column practitioner drag (409), and allows adjacency (200).
+
 - Remaining risks:
+  - No implementation changes — zero blast radius on existing endpoints or schemas.
+  - The adjacency test (`test_put_adjacent_drag_allowed`) encodes the same open-interval semantics on the write path that Sprint 26 proved on the proposal path. If `_overlaps` ever changes to closed-interval, both test suites catch it.
 
 ## Required Review Steps
 
