@@ -10,7 +10,7 @@
 
 ## Review Request
 
-antigravity-diary-cancel-proposal-flow plan ready for Codex review
+Amended plan ready for Codex review
 
 ## Worker Completion Notes
 
