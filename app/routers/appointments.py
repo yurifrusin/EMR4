@@ -22,6 +22,7 @@ from app.schemas.appointments import (
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
+    AppointmentDeleteCommand, AppointmentDeleteProposalOut,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -1110,7 +1111,72 @@ def cancel_appointment(
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
     appt.status = AppointmentStatus.Cancelled
+    appt.waiting_area_id = None
     db.commit()
+
+
+@router.post("/proposals/delete/{appointment_id}", response_model=AppointmentDeleteProposalOut)
+def propose_delete_appointment(
+    appointment_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Non-mutating proposal for deleting (soft-cancelling) an appointment.
+
+    Surfaces waiting-area side-effects before the destructive write.
+    Always returns autonomy_tier='proposal' — deletion is irreversible.
+    The returned command payload is ready to pass to DELETE /{id} after confirmation.
+    """
+    practice_id = current_user.practice_id
+    appt = _get_appointment(appointment_id, practice_id, db)
+
+    warnings: list[AppointmentProposalIssue] = []
+    blocks: list[AppointmentProposalIssue] = []
+
+    if appt.status == AppointmentStatus.Cancelled:
+        blocks.append(AppointmentProposalIssue(
+            code="already_in_status",
+            severity="blocked",
+            message="This appointment is already Cancelled.",
+        ))
+
+    clears_waiting_area = appt.waiting_area_id is not None
+    if clears_waiting_area:
+        warnings.append(AppointmentProposalIssue(
+            code="waiting_area_cleared",
+            severity="warning",
+            message="Deleting this appointment will remove the patient from the waiting area.",
+        ))
+
+    safe = not blocks
+    requires_confirmation = True
+    autonomy_tier = "blocked" if not safe else "proposal"
+
+    if appt.patient:
+        patient_label = f"{appt.patient.first_name} {appt.patient.last_name}".strip()
+    elif appt.patient_name_provisional:
+        patient_label = appt.patient_name_provisional
+    else:
+        patient_label = "appointment"
+
+    summary = f"Cancel and remove {patient_label}'s appointment."
+    if not safe:
+        summary += " Blocked — see issues."
+    elif warnings:
+        summary += " Confirmation recommended."
+
+    return AppointmentDeleteProposalOut(
+        safe=safe,
+        requires_confirmation=requires_confirmation,
+        autonomy_tier=autonomy_tier,
+        summary=summary,
+        command=AppointmentDeleteCommand(
+            appointment_id=appointment_id,
+            clears_waiting_area=clears_waiting_area,
+        ),
+        warnings=warnings,
+        blocks=blocks,
+    )
 
 
 # ── Availability / Slot Generation ───────────────────────────────────────────
