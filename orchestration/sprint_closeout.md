@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 28: Cancellation/Delete Proposal Safety |
 | Integrated through | Sprint 28 backend cancel/delete proposal contract and diary cancel proposal preflight flow |
-| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Status | Integrated, pushed, mirrored, audited, and deployed v95 observed |
 | Last updated | 2026-06-25 |
 
 ## What Changed
@@ -73,8 +73,7 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 ## Known Follow-Up
 
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
-- Observe GitHub Pages serving v95 after push; this is a deployment propagation
-  check, not a product blocker.
+- GitHub Pages is serving v95; no deployment propagation follow-up remains for Sprint 28.
 - A later cancellation-polish sprint may add cancellation reason capture or a
   proposal/review history surface.
 
@@ -90,9 +89,8 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 
 ## Recommended Next Direction
 
-1. Push Sprint 28, observe GitHub Pages serving v95, realign mirrors, and audit.
-2. Continue Programme 2B with the next receptionist-visible appointment mutation slice if no Yuri-only checks remain.
-3. Keep using Chrome/CDP smoke before leaving any UI review to Yuri; this sprint confirms cancellation safety can be verified tool-first.
+1. Continue Programme 2B with the next receptionist-visible appointment mutation slice if no Yuri-only checks remain.
+2. Keep using Chrome/CDP smoke before leaving any UI review to Yuri; this sprint confirms cancellation safety can be verified tool-first.
 
 ## Previous Closeout - Sprint 27
 
