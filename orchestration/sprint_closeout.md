@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 29: Appointment Cancellation Reason/Note Capture |
 | Integrated through | Sprint 29 backend cancellation reason contract and diary cancellation reason capture flow |
-| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Status | Integrated, pushed, mirrored, audited, and deployed v96 observed |
 | Last updated | 2026-06-25 |
 
 ## What Changed
@@ -32,9 +32,8 @@ Residual user review/testing after closeout: none required before the next sprin
 Ariadne verified the backend contract, frontend syntax/assets, and local
 browser smoke paths covering first-click warning, reason reveal/focus, entered
 reason, proposal dialog, abort/reset, confirm/save, and appointment removal.
-The live GitHub Pages deployment still needs normal v96 asset observation after
-push, but that is an Ariadne deployment check rather than a Yuri-only product
-test.
+The live GitHub Pages deployment is serving v96 assets; no Yuri-only product
+test is required before the next sprint.
 
 Optional confidence check only, if Yuri happens to be in the live diary:
 
@@ -81,7 +80,7 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 ## Known Follow-Up
 
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
-- GitHub Pages deployment propagation for v96 remains an Ariadne post-push check.
+- GitHub Pages is serving v96; no deployment propagation follow-up remains for Sprint 29.
 - A later cancellation-polish sprint may add a proposal/review history surface
   that displays stored cancellation reasons to supervisors or audit users.
 
