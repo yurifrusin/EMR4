@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 24c76b4 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-cancellation-reason-flow --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.html
+- Verification run: node --check docs/diary/diary.js, npm run validate-all, git diff --check, and interactive smoke checks for cancel reason dynamic capture, abort unhiding, confirm DELETE JSON body transmission, and preservation of Alt+Arrow/mouse drag-drop.
+- Remaining risks: None. Built-in 404 handler provides clean compatibility path if dedicated backend endpoint is not yet present.
