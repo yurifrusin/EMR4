@@ -60,13 +60,17 @@ def get_git_file_content_at_head(rel_path):
 def fetch_deployed_html(rel_path):
     """Fetches the deployed HTML content from GitHub Pages."""
     url = f"{DEPLOYED_BASE_URL}/{rel_path.replace('docs/', '')}"
+    parsed_url = urllib.parse.urlparse(url)
+    if parsed_url.scheme != "https" or parsed_url.netloc != "yurifrusin.github.io":
+        raise ValueError(f"Refusing to fetch unexpected deployed URL: {url}")
     try:
         # Add a cache buster query parameter to ensure we fetch fresh content
         req = urllib.request.Request(
             f"{url}?probe={urllib.parse.quote(str(sys.float_info))}",
             headers={'User-Agent': 'Mozilla/5.0'}
         )
-        with urllib.request.urlopen(req, timeout=5) as response:
+        # URL is constrained to GitHub Pages HTTPS above.
+        with urllib.request.urlopen(req, timeout=5) as response:  # nosec B310
             return response.read().decode('utf-8', errors='ignore')
     except Exception as e:
         print(f"Warning: Could not fetch deployed version of {url}: {e}")
