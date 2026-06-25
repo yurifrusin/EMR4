@@ -2679,6 +2679,58 @@ async function deleteBooking() {
 
   try {
     const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
+    const appt = isSmokeMode
+      ? mockAppointmentsCache.find(x => x.id === editingAppointmentId)
+      : todayAppointments.find(x => x.id === editingAppointmentId);
+
+    if (!appt) {
+      throw new Error("Target appointment not found.");
+    }
+
+    let proposal;
+    if (isSmokeMode) {
+      proposal = simulateStatusProposal(appt, { status: "Cancelled", waiting_area_id: null });
+    } else {
+      try {
+        const propRes = await apiFetch(`/appointments/proposals/delete/${editingAppointmentId}`, {
+          method: "POST",
+          body: JSON.stringify({ intent: "delete_appointment" })
+        });
+        if (propRes.status === 404) {
+          throw new Error("404");
+        }
+        if (!propRes.ok) {
+          throw new Error(await apiErrorMessage(propRes, "Delete proposal check"));
+        }
+        proposal = await propRes.json();
+      } catch (err) {
+        if (err.message === "404" || (err.message && err.message.includes("404"))) {
+          // Fallback to status proposal
+          const propRes = await apiFetch(`/appointments/proposals/status/${editingAppointmentId}`, {
+            method: "POST",
+            body: JSON.stringify({ status: "Cancelled", waiting_area_id: null })
+          });
+          if (!propRes.ok) {
+            throw new Error(await apiErrorMessage(propRes, "Status proposal check"));
+          }
+          proposal = await propRes.json();
+        } else {
+          throw err;
+        }
+      }
+    }
+
+    if (!proposal.safe || (proposal.warnings && proposal.warnings.length > 0) || proposal.autonomy_tier === "proposal") {
+      const confirmed = await showStatusProposalDialog(proposal);
+      if (!confirmed) {
+        deleteBtn.dataset.confirming = "";
+        deleteBtn.textContent = "Cancel Appointment";
+        errorEl.classList.add("hidden");
+        deleteBtn.disabled = false;
+        return;
+      }
+    }
+
     if (isSmokeMode) {
       mockAppointmentsCache = mockAppointmentsCache.filter(x => x.id !== editingAppointmentId);
       setStatus("Booking cancelled (Mock).");
@@ -2698,6 +2750,8 @@ async function deleteBooking() {
     console.error(err);
     errorEl.textContent = err.message || "An error occurred while cancelling the booking.";
     errorEl.classList.remove("hidden");
+    deleteBtn.dataset.confirming = "";
+    deleteBtn.textContent = "Cancel Appointment";
   } finally {
     deleteBtn.disabled = false;
   }
