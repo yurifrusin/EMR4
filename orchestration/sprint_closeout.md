@@ -8,89 +8,108 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 28: Cancellation/Delete Proposal Safety |
-| Integrated through | Sprint 28 backend cancel/delete proposal contract and diary cancel proposal preflight flow |
-| Status | Integrated, pushed, mirrored, audited, and deployed v95 observed |
+| Batch | Sprint 29: Appointment Cancellation Reason/Note Capture |
+| Integrated through | Sprint 29 backend cancellation reason contract and diary cancellation reason capture flow |
+| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
 | Last updated | 2026-06-25 |
 
 ## What Changed
 
-- Backend `DELETE /appointments/{id}` soft-cancel now clears `waiting_area_id`, preventing cancelled patients from remaining stranded in waiting-room state.
-- Backend added a dedicated non-mutating `POST /appointments/proposals/delete/{appointment_id}` preflight endpoint with typed delete command payload, warning/blocked semantics, role checks, practice scoping, and "already cancelled" blocking.
-- Backend regression coverage now exercises delete proposal auth, soft-cancel waiting-area clearing, cross-practice isolation, warning generation, and blocked already-cancelled behaviour.
-- Diary `Cancel Appointment` now has two layers of safety before mutation: first-click inline warning, then proposal preflight dialog before any live delete/write occurs.
-- Diary live mode prefers the new delete proposal endpoint and falls back to the existing status proposal endpoint only if the backend endpoint is unavailable; smoke mode mirrors the proposal flow through the existing simulator.
-- Abort/cancel paths reset the cancel button and leave the appointment intact; only `Confirm & Save` proceeds to the final cancel/delete path.
-- Diary frontend asset cache-bust moved to `diary.js?v=95` / `diary.css?v=95`.
-- No schema migration, taskpane, Command Centre, patient workflow, Resource Administration, recurrence, or drag/resize behaviour was included.
+- Backend appointments now persist optional `cancellation_reason` on soft-cancelled appointments through a new nullable migration.
+- `DELETE /appointments/{id}` accepts an optional JSON body with `cancellation_reason` capped at 500 characters.
+- `POST /appointments/proposals/delete/{appointment_id}` accepts the same body and echoes the reason in the non-mutating delete command payload.
+- Appointment output/command schemas include `cancellation_reason`, preserving proposal-first safety while retaining receptionist notes for audit/review surfaces.
+- Backend regression coverage now exercises persisted reason, null/no-body reason, proposal echo, and too-long reason validation.
+- Diary cancel flow now reveals an optional `CANCELLATION REASON` field after the first `Cancel Appointment` click, focuses it, and keeps the first-click whole-appointment warning.
+- The reason is included in both the proposal preflight request and final delete request when live mode is active; smoke mode mirrors the same interaction path.
+- Abort/cancel paths hide and clear the reason field, reset the button, and leave the appointment intact.
+- Diary frontend asset cache-bust moved to `diary.js?v=96` / `diary.css?v=96`.
+- No taskpane, Command Centre, patient workflow, Resource Administration, recurrence, drag/resize, or cancellation-review history surface was included.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required before the next sprint.
-Ariadne verified the backend contract, frontend syntax/assets, and a local
-Chrome/CDP smoke path covering warning, abort, proposal dialog, confirm, and
-appointment removal. The live GitHub Pages deployment still needs normal v95
-asset observation after push, but that is an Ariadne deployment check rather
-than a Yuri-only product test.
+Ariadne verified the backend contract, frontend syntax/assets, and local
+browser smoke paths covering first-click warning, reason reveal/focus, entered
+reason, proposal dialog, abort/reset, confirm/save, and appointment removal.
+The live GitHub Pages deployment still needs normal v96 asset observation after
+push, but that is an Ariadne deployment check rather than a Yuri-only product
+test.
 
 Optional confidence check only, if Yuri happens to be in the live diary:
 
 1. Setup: after GitHub Pages deploys, hard refresh the live diary and confirm
-   `diary.js?v=95` and `diary.css?v=95` are loaded.
+   `diary.js?v=96` and `diary.css?v=96` are loaded.
 2. Exact UI path: sign in as a dev Admin or normal dev user, open the Diary,
-   and choose an appointment that is currently visible in the Waiting Room pane
-   or has a waiting-area/status relationship.
+   and choose a cancellable appointment.
 3. First-click guard: open the appointment editor, click `Cancel Appointment`,
-   and confirm the button changes to `Confirm Cancel` with an inline warning
-   that the whole appointment will be cancelled.
-4. Proposal guard: click `Confirm Cancel` and confirm a proposal dialog appears
+   and confirm the button changes to `Confirm Cancel`, the inline warning says
+   the whole appointment will be cancelled, and a `Cancellation reason
+   (optional)` field appears with focus.
+4. Reason entry: type a short reason such as `Patient rang to cancel`.
+5. Proposal guard: click `Confirm Cancel` and confirm a proposal dialog appears
    before any mutation; for waiting-room appointments it should warn that the
    patient will be removed from the waiting area.
-5. Abort result: click `Cancel` in the proposal dialog; the appointment should
-   remain present, the modal should stay usable, and the cancel button should
-   reset rather than leaving a stuck confirmation state.
-6. Confirm result: repeat the cancel path and click `Confirm & Save`; the modal
-   should close, the appointment should be cancelled/removed from active diary
-   display, and the Waiting Room pane should not retain a stranded patient.
-7. Suspicious signs: appointment disappears before the proposal dialog, warning
-   text is missing for waiting-room patients, `Cancel` still mutates data, the
-   confirm button stays stuck after abort, or the console shows errors.
-8. Skippable parts: do not retest taskpane, Command Centre, Resource
+6. Abort result: click `Cancel` in the proposal dialog; the appointment should
+   remain present, the modal should stay usable, and the cancel button/reason
+   field should reset rather than leaving a stuck confirmation state.
+7. Confirm result: repeat the cancel path with a reason and click
+   `Confirm & Save`; the modal should close, the appointment should be
+   cancelled/removed from active diary display, and the Waiting Room pane should
+   not retain a stranded patient.
+8. Suspicious signs: appointment disappears before the proposal dialog, reason
+   field does not appear/focus, abort leaves stale reason text, `Cancel` still
+   mutates data, the confirm button stays stuck after abort, or the console
+   shows errors.
+9. Skippable parts: do not retest taskpane, Command Centre, Resource
    Administration, room/waiting-area admin, drag/resize, recurrence, or patient
-   search for Sprint 28.
-9. Evidence to report: screenshot or short note with the appointment, status,
-   waiting area, action attempted, and any unexpected dialog or console error.
+   search for Sprint 29.
+10. Evidence to report: screenshot or short note with the appointment, status,
+    cancellation reason text, action attempted, and any unexpected dialog or
+    console error.
 
 ## Not Required Before Moving On
 
-- No database migration or manual data repair is required.
+- No manual database repair is required; the Sprint 29 migration is additive and nullable.
 - No Word taskpane, Command Centre, patient-file, Resource Administration,
   room/waiting-area admin, recurrence, duplicate-audit, or clinical workflow
   review is required for this sprint.
 - No additional Yuri-only test is required because Ariadne's Chrome/CDP smoke
-  covered the warning, abort, proposal, confirm, and removal path.
+  covered the warning, reason reveal/focus, abort/reset, proposal, confirm, and
+  removal path.
 
 ## Known Follow-Up
 
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
-- GitHub Pages is serving v95; no deployment propagation follow-up remains for Sprint 28.
-- A later cancellation-polish sprint may add cancellation reason capture or a
-  proposal/review history surface.
+- GitHub Pages deployment propagation for v96 remains an Ariadne post-push check.
+- A later cancellation-polish sprint may add a proposal/review history surface
+  that displays stored cancellation reasons to supervisors or audit users.
 
 ## Verification
 
-- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 28 review packets.
-- Claude worker verification: `python -m py_compile app\routers\appointments.py app\schemas\appointments.py` and `python -m pytest tests\test_appointment_status_mutations.py -q --tb=short -p no:randomly` -> 30 passed.
-- Antigravity worker verification: `node --check docs\diary\diary.js` and `npm run validate-all` in `EMR4 Sidebar` -> passed; manifest valid, production npm audit clean, and asset check accepted local/head v95 against deployed v94.
-- Integrated-tree backend verification: `python -m py_compile app\routers\appointments.py app\schemas\appointments.py` and focused pytest for status mutations, update proposals, and appointment conflicts -> 73 passed, with the existing pytest-asyncio deprecation warning.
-- Integrated-tree frontend verification: `node --check docs\diary\diary.js`, `git diff --check`, and `npm run validate-all` in `EMR4 Sidebar` -> passed.
-- Browser/CDP smoke: local diary served at `http://127.0.0.1:8768/diary/diary.html?smoke=true`; page identity `EMR - Diary`, 4 smoke appointments, no runtime errors beyond a harmless missing favicon.
-- Browser/CDP cancel smoke: first click showed inline whole-appointment warning; second click opened the proposal dialog with waiting-area removal warning; proposal `Cancel` left the appointment intact and reset the button; `Confirm & Save` closed the modal and removed the target appointment from the active smoke diary.
+- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 29 review packets.
+- Claude worker verification, rerun by Ariadne with the integration venv: `alembic upgrade head`; `py_compile app\models\appointments.py app\schemas\appointments.py app\routers\appointments.py`; `pytest tests\test_appointment_status_mutations.py -q --tb=short -p no:randomly`; `git diff --check` -> 34 passed.
+- Antigravity worker verification, rerun by Ariadne: `node --check docs\diary\diary.js`; `git diff --check` -> passed.
+- Integrated-tree backend verification: `alembic upgrade head`, `py_compile app\models\appointments.py app\schemas\appointments.py app\routers\appointments.py`, and `pytest tests\test_appointment_status_mutations.py -q --tb=short -p no:randomly` -> 34 passed, with the existing pytest-asyncio deprecation warning.
+- Integrated-tree frontend verification: `node --check docs\diary\diary.js`, `python scripts\check_frontend_versions.py`, and `git diff --check` -> passed; local/head diary v96 and deployed v95 before push.
+- Browser smoke: local diary served at `http://127.0.0.1:8765/diary/diary.html?smoke=true`; page identity `EMR - Diary`, 4 smoke appointments, booking modal opened from a visible appointment.
+- Browser cancellation-reason smoke: first click revealed the reason field, focused it, changed the button to `Confirm Cancel`, and showed the whole-appointment warning.
+- Browser confirm smoke: entering `Patient rang to cancel`, then confirming through the proposal dialog, closed the modal and removed the appointment from the active smoke diary.
+- Browser abort smoke: entering a reason, opening the proposal dialog, then clicking dialog `Cancel` left the appointment intact, reset `Cancel Appointment`, hid the reason field, and cleared the stale reason text.
 
 ## Recommended Next Direction
 
 1. Continue Programme 2B with the next receptionist-visible appointment mutation slice if no Yuri-only checks remain.
-2. Keep using Chrome/CDP smoke before leaving any UI review to Yuri; this sprint confirms cancellation safety can be verified tool-first.
+2. Keep using browser/CDP smoke before leaving any UI review to Yuri; Sprint 29 confirms cancellation reason capture can be verified tool-first.
+
+## Previous Closeout - Sprint 28
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 28: Cancellation/Delete Proposal Safety |
+| Integrated through | Sprint 28 backend cancel/delete proposal contract and diary cancel proposal preflight flow |
+| Status | Integrated, pushed, mirrored, audited, and deployed v95 observed |
+| Last updated | 2026-06-25 |
 
 ## Previous Closeout - Sprint 27
 

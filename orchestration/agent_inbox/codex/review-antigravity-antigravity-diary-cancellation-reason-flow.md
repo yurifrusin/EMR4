@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-cancellation-reason-flow` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

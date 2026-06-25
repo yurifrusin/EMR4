@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-cancellation-reason-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 12:32 +1000 |
 | Source HEAD | `7c9c7f5` |
 

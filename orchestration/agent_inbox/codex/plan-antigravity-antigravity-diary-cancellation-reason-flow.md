@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-cancellation-reason-flow` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 12:31 +1000 |
 | Source HEAD | `7c9c7f5` |
 
