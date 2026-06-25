@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 26: Move/Resize Proposal Flow |
 | Integrated through | Sprint 26 backend move/resize proposal tests and diary keyboard move/resize proposal flow |
-| Status | Integrated, pushed, mirrored, audited, deployed v92 observed, and residual Yuri-only physical-keyboard smoke documented |
+| Status | Integrated, pushed, mirrored, audited, deployed v92 observed, and Yuri physical-keyboard smoke passed |
 | Last updated | 2026-06-25 |
 
 ## What Changed
@@ -25,14 +25,12 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-Residual user review/testing after push/deploy: one short live shortcut smoke is
-recommended. Ariadne verified the backend contract, frontend syntax/assets, and
-local smoke rendering, but the available browser automation helpers could not
-reliably synthesize a real OS/browser `Alt+Arrow` chord without it being treated
-as a plain status-select arrow. This is a tooling limitation, so Yuri should
-perform the final physical-keyboard shortcut check after Pages serves v92.
+Residual user review/testing after push/deploy: complete. Yuri confirmed the
+live physical-keyboard shortcut smoke passed after Pages served v92. Ariadne
+verified the backend contract, frontend syntax/assets, and local smoke rendering;
+the remaining real OS/browser `Alt+Arrow` path was confirmed manually.
 
-Detailed Yuri-only check:
+Completed Yuri-only check:
 
 1. Setup: open the live diary after deployment and hard refresh. Confirm the
    live page serves `diary.js?v=92` and `diary.css?v=92`.
