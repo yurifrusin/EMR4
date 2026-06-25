@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 1f26087 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-appointment-cancel-proposal-contract --summary "Short plan summary"` |
