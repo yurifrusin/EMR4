@@ -190,6 +190,18 @@ function getMockAppointments() {
       reason: "Dressing change",
       appointment_type_id: "smoke-type-2",
       location_id: "loc-1"
+    },
+    {
+      id: "smoke-appt-7",
+      start_time_local: "12:15",
+      duration_minutes: 15,
+      status: "Cancelled",
+      practitioner: { ahpra_number: "MED0001234567" },
+      patient: { first_name: "Alice", last_name: "Wonderland", date_of_birth: "1995-07-04" },
+      reason: "Blood test check",
+      cancellation_reason: "Patient had transport issues",
+      appointment_type_id: "smoke-type-1",
+      location_id: "loc-1"
     }
   ];
   }
@@ -3465,11 +3477,12 @@ async function updateFlowPanel() {
   const consult = [];
   const expected = [];
   const finished = [];
+  const cancelled = [];
 
   todayAppointments.forEach(a => {
-    if (a.status === "Cancelled") return;
-
-    if (a.status === "Arrived") {
+    if (a.status === "Cancelled") {
+      cancelled.push(a);
+    } else if (a.status === "Arrived") {
       waiting.push(a);
     } else if (a.status === "InConsult") {
       consult.push(a);
@@ -3490,6 +3503,7 @@ async function updateFlowPanel() {
   consult.sort(sortByTime);
   expected.sort(sortByTime);
   finished.sort(sortByTime);
+  cancelled.sort(sortByTime);
 
   try {
     await hydrateCheckinDefaults([...waiting, ...consult, ...expected, ...finished]);
@@ -3515,6 +3529,7 @@ async function updateFlowPanel() {
   let filteredConsult = consult;
   let filteredExpected = expected;
   let filteredFinished = finished;
+  let filteredCancelled = cancelled;
 
   if (hasAreas && selectedWaitingAreaTab !== "all") {
     const filterFn = (a) => {
@@ -3528,6 +3543,7 @@ async function updateFlowPanel() {
     filteredConsult = consult.filter(filterFn);
     filteredExpected = expected.filter(filterFn);
     filteredFinished = finished.filter(filterFn);
+    filteredCancelled = cancelled.filter(filterFn);
   }
 
   const secWaiting = document.querySelector("#flow-sec-waiting .flow-sec-count");
@@ -3542,10 +3558,14 @@ async function updateFlowPanel() {
   const secFinished = document.querySelector("#flow-sec-finished .flow-sec-count");
   if (secFinished) secFinished.textContent = filteredFinished.length;
 
+  const secCancelled = document.querySelector("#flow-sec-cancelled .flow-sec-count");
+  if (secCancelled) secCancelled.textContent = filteredCancelled.length;
+
   renderFlowList("flow-list-waiting", filteredWaiting, "Start Consult", "InConsult");
   renderFlowList("flow-list-consult", filteredConsult, "Complete", "Completed");
   renderFlowList("flow-list-expected", filteredExpected, "Check In", "Arrived");
   renderFlowList("flow-list-finished", filteredFinished, null, null);
+  renderFlowList("flow-list-cancelled", filteredCancelled, null, null);
 
   updateFlowBadgeCount();
 }
@@ -3597,29 +3617,31 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
 
     header.appendChild(name);
 
-    if (isProvisional) {
-      const linkBtn = document.createElement("button");
-      linkBtn.className = "flow-card-link-btn";
-      linkBtn.type = "button";
-      linkBtn.textContent = "Link";
-      linkBtn.title = "Link to an existing patient record";
-      linkBtn.onclick = (e) => {
-        e.stopPropagation();
-        openBookingModalForPatientLink(a);
-      };
-      header.appendChild(linkBtn);
-    }
+    if (a.status !== "Cancelled") {
+      if (isProvisional) {
+        const linkBtn = document.createElement("button");
+        linkBtn.className = "flow-card-link-btn";
+        linkBtn.type = "button";
+        linkBtn.textContent = "Link";
+        linkBtn.title = "Link to an existing patient record";
+        linkBtn.onclick = (e) => {
+          e.stopPropagation();
+          openBookingModalForPatientLink(a);
+        };
+        header.appendChild(linkBtn);
+      }
 
-    const editBtn = document.createElement("button");
-    editBtn.className = "flow-card-edit-btn";
-    editBtn.type = "button";
-    editBtn.innerHTML = "✎";
-    editBtn.title = "Edit appointment";
-    editBtn.onclick = (e) => {
-      e.stopPropagation();
-      openBookingModalForEdit(a);
-    };
-    header.appendChild(editBtn);
+      const editBtn = document.createElement("button");
+      editBtn.className = "flow-card-edit-btn";
+      editBtn.type = "button";
+      editBtn.innerHTML = "✎";
+      editBtn.title = "Edit appointment";
+      editBtn.onclick = (e) => {
+        e.stopPropagation();
+        openBookingModalForEdit(a);
+      };
+      header.appendChild(editBtn);
+    }
     card.appendChild(header);
 
     const details = document.createElement("div");
@@ -3633,6 +3655,13 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
       const reason = document.createElement("div");
       reason.className = "flow-card-reason";
       reason.textContent = a.reason;
+      card.appendChild(reason);
+    }
+
+    if (a.status === "Cancelled" && a.cancellation_reason) {
+      const reason = document.createElement("div");
+      reason.className = "flow-card-cancellation-reason";
+      reason.textContent = `Reason: ${a.cancellation_reason}`;
       card.appendChild(reason);
     }
 

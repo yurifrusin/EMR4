@@ -1659,6 +1659,9 @@ html, body {
 .flow-card-completed { border-left: 3px solid #059669; }
 .flow-card-noshow { border-left: 3px solid var(--grey-3); }
 .flow-card-dna { border-left: 3px solid var(--grey-3); }
+.flow-card-cancelled { border-left: 3px solid var(--grey-3); opacity: 0.85; }
+.flow-card-cancelled .flow-card-name { text-decoration: line-through; color: var(--grey-3); }
+.flow-card-cancellation-reason { margin-top: 5px; font-size: 11px; color: var(--grey-4); font-style: italic; }
 
 .flow-card-identity-unconfirmed {
   border-color: #ef4444;
