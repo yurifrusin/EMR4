@@ -130,9 +130,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched and plan-gated |
-| Launch Gate | Awaiting Claude and Antigravity plan packets |
-| Integration Gate | Not started |
+| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Launch Gate | Closed; Claude and Antigravity plans were reviewed and implementation was released |
+| Integration Gate | Complete; worker submissions reviewed and merged |
 | Product Goal | Ensure destructive appointment cancellation/delete actions follow proposal-first safety semantics before any write |
 
 ### Workstream S28-A - Backend Cancel Proposal Contract
@@ -146,7 +146,7 @@ After every fully integrated batch, Codex updates
 | In Scope | `app/routers/appointments.py`, `app/schemas/appointments.py`, focused appointment proposal/cancel/delete tests, minimal production fixes only if a real gap is found |
 | Out of Scope | Diary frontend, taskpane, Command Centre, patient workflows, Resource Administration, migrations unless a schema issue is proven, direct writes that bypass proposal semantics |
 | Verification | Plan packet first; after approval py_compile touched appointment router/schema, focused cancellation/delete proposal pytest, adjacent update/status proposal tests, `git diff --check` |
-| Status | Queued |
+| Status | Integrated locally |
 
 ### Workstream S28-B - Diary Cancel Proposal Flow
 
@@ -159,7 +159,7 @@ After every fully integrated batch, Codex updates
 | In Scope | `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke-mode cancellation proposal simulation, asset cache-bust, minimal cancellation confirmation copy |
 | Out of Scope | Backend routes/models/tests/migrations, taskpane, Command Centre, patient search/linking, Waiting Room layout, Resource Administration, recurrence, broad visual redesign, direct delete before proposal confirmation |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, `npm run validate-all`, smoke/browser checks for cancel proposal safe/warning/blocked/cancel-confirm/revert paths, `git diff --check` |
-| Status | Queued |
+| Status | Integrated locally |
 
 ## Sprint 27: Diary Mouse Move/Resize Affordances
 

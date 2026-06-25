@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-cancel-proposal-flow` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 11:40 +1000 |
 | Source HEAD | `e1e0f9e` |
 
@@ -16,7 +16,7 @@ Gate diary appointment cancellation behind status proposal preflight check befor
 
 ## My Understanding
 
-Currently, clicking "Confirm Cancel" inside the booking editor modal directly triggers the delete mutation (`DELETE /appointments/{editingAppointmentId}` or cache filtering) without preflighting safety checks. 
+Currently, clicking "Confirm Cancel" inside the booking editor modal directly triggers the delete mutation (`DELETE /appointments/{editingAppointmentId}` or cache filtering) without preflighting safety checks.
 The new flow will intercept the cancellation and preflight it:
 - **Preflight Check**:
   - Prefer querying the dedicated delete proposal endpoint `POST /appointments/proposals/delete/{appointment_id}` (using `{ intent: "delete_appointment" }` payload) if available.

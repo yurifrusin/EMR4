@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 28 - Programme 2B appointment cancellation/delete proposal safety dispatched and plan-gated |
-| **Next recommended work** | Prompt Claude and Antigravity to handin for Sprint 28, then review plan packets before releasing implementation |
+| **Current active track** | Sprint 28 - Programme 2B appointment cancellation/delete proposal safety integrated locally and pending push/audit |
+| **Next recommended work** | Push Sprint 28, observe Pages serving diary v95, realign mirrors, audit, then continue Programme 2B if no Yuri-only checks remain |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -395,7 +395,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Current Sprint 27 visible diary mouse drag/resize affordances closeout commit |
+| **Latest integration commit** | Current Sprint 28 appointment cancellation/delete proposal safety closeout commit |
 
 ### Tag map (all tags pushed to remote)
 
