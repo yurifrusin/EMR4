@@ -1882,6 +1882,10 @@ function openBookingModalForCreate(col, slotTime) {
   editingAppointmentId = null;
   selectedPatient = null;
   provisionalName = null;
+  const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
+  if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+  const cancelReasonInput = document.getElementById("booking-cancel-reason");
+  if (cancelReasonInput) cancelReasonInput.value = "";
   document.getElementById("booking-modal-title").textContent = "New Appointment";
   document.getElementById("btn-booking-delete").classList.add("hidden");
 
@@ -1915,6 +1919,10 @@ function openBookingModalForCreate(col, slotTime) {
 function openBookingModalForEdit(appt) {
   resetProposalConfirmation();
   editingAppointmentId = appt.id;
+  const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
+  if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+  const cancelReasonInput = document.getElementById("booking-cancel-reason");
+  if (cancelReasonInput) cancelReasonInput.value = "";
 
   const provisionalPatientName = appt.patient_name_provisional || appt.provisional_name || "";
   const isProvisional = !!provisionalPatientName || !appt.patient_id || !appt.patient;
@@ -1990,6 +1998,10 @@ function closeBookingModal() {
   editingAppointmentId = null;
   selectedPatient = null;
   provisionalName = null;
+  const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
+  if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+  const cancelReasonInput = document.getElementById("booking-cancel-reason");
+  if (cancelReasonInput) cancelReasonInput.value = "";
   resetProposalConfirmation();
 }
 
@@ -2671,6 +2683,13 @@ async function deleteBooking() {
     deleteBtn.textContent = "Confirm Cancel";
     errorEl.textContent = "This will cancel the whole appointment, not just close the editor. Click Confirm Cancel to continue.";
     errorEl.classList.remove("hidden");
+    const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
+    if (cancelReasonContainer) cancelReasonContainer.classList.remove("hidden");
+    const cancelReasonInput = document.getElementById("booking-cancel-reason");
+    if (cancelReasonInput) {
+      cancelReasonInput.value = "";
+      cancelReasonInput.focus();
+    }
     return;
   }
 
@@ -2687,6 +2706,9 @@ async function deleteBooking() {
       throw new Error("Target appointment not found.");
     }
 
+    const cancelReasonInput = document.getElementById("booking-cancel-reason");
+    const cancellation_reason = cancelReasonInput ? cancelReasonInput.value.trim() : "";
+
     let proposal;
     if (isSmokeMode) {
       proposal = simulateStatusProposal(appt, { status: "Cancelled", waiting_area_id: null });
@@ -2694,7 +2716,7 @@ async function deleteBooking() {
       try {
         const propRes = await apiFetch(`/appointments/proposals/delete/${editingAppointmentId}`, {
           method: "POST",
-          body: JSON.stringify({ intent: "delete_appointment" })
+          body: JSON.stringify({ intent: "delete_appointment", cancellation_reason })
         });
         if (propRes.status === 404) {
           throw new Error("404");
@@ -2705,7 +2727,7 @@ async function deleteBooking() {
         proposal = await propRes.json();
       } catch (err) {
         if (err.message === "404" || (err.message && err.message.includes("404"))) {
-          // Fallback to status proposal
+          // Fallback to status proposal (omitting cancellation_reason)
           const propRes = await apiFetch(`/appointments/proposals/status/${editingAppointmentId}`, {
             method: "POST",
             body: JSON.stringify({ status: "Cancelled", waiting_area_id: null })
@@ -2726,6 +2748,9 @@ async function deleteBooking() {
         deleteBtn.dataset.confirming = "";
         deleteBtn.textContent = "Cancel Appointment";
         errorEl.classList.add("hidden");
+        const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
+        if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+        if (cancelReasonInput) cancelReasonInput.value = "";
         deleteBtn.disabled = false;
         return;
       }
@@ -2736,7 +2761,8 @@ async function deleteBooking() {
       setStatus("Booking cancelled (Mock).");
     } else {
       const res = await apiFetch(`/appointments/${editingAppointmentId}`, {
-        method: "DELETE"
+        method: "DELETE",
+        body: JSON.stringify({ cancellation_reason })
       });
       if (!res.ok) {
         const text = await res.text();
@@ -2744,6 +2770,9 @@ async function deleteBooking() {
       }
       setStatus("Booking cancelled successfully.");
     }
+    const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
+    if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+    if (cancelReasonInput) cancelReasonInput.value = "";
     closeBookingModal();
     await loadDiary(true);
   } catch (err) {
@@ -2752,6 +2781,9 @@ async function deleteBooking() {
     errorEl.classList.remove("hidden");
     deleteBtn.dataset.confirming = "";
     deleteBtn.textContent = "Cancel Appointment";
+    const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
+    if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+    if (cancelReasonInput) cancelReasonInput.value = "";
   } finally {
     deleteBtn.disabled = false;
   }

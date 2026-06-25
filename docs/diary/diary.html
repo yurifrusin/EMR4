@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=95" />
-  <script src="diary.js?v=95" defer></script>
+  <link rel="stylesheet" href="diary.css?v=96" />
+  <script src="diary.js?v=96" defer></script>
 </head>
 <body>
 
@@ -175,6 +175,11 @@
         <div class="form-group">
           <label for="booking-reason">Reason for Visit / Note for Doctor:</label>
           <input type="text" id="booking-reason" placeholder="e.g. Script, checkup" />
+        </div>
+
+        <div id="booking-cancel-reason-container" class="form-group hidden">
+          <label for="booking-cancel-reason">Cancellation Reason (Optional):</label>
+          <input type="text" id="booking-cancel-reason" placeholder="e.g. Patient cancelled, rescheduled" />
         </div>
 
         <div id="booking-error" class="form-error hidden"></div>
