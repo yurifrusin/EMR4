@@ -126,6 +126,41 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 29: Cancellation Reason Capture
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending worker plans and Codex approval |
+| Product Goal | Let reception capture a short cancellation reason or note without weakening proposal-first cancellation safety |
+
+### Workstream S29-A - Backend Cancellation Reason Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-cancellation-reason-contract.md` |
+| Goal | Plan, then after approval add a minimal backend contract for cancellation reason/note capture |
+| In Scope | `app/routers/appointments.py`, `app/schemas/appointments.py`, `app/models/appointments.py` only if a separate persisted cancellation field is justified, Alembic migration only if a new field is chosen, focused cancellation/proposal tests |
+| Out of Scope | Diary frontend, taskpane, Command Centre, patient demographics, billing, SMS/reminders, broad audit logging, proposal review history |
+| Verification | Plan packet first; after approval py_compile touched appointment modules, focused cancellation/delete proposal pytest, migration checks if added, adjacent proposal tests if touched, `git diff --check` |
+| Status | Dispatched |
+
+### Workstream S29-B - Diary Cancellation Reason Flow
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-cancellation-reason-flow.md` |
+| Goal | Plan, then after approval add a small diary UI flow for optional cancellation reason/note capture |
+| In Scope | `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke-mode cancellation reason simulation, asset cache-bust, minimal copy |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane, Command Centre, patient search/linking, Waiting Room layout redesign, Resource Administration, recurrence, broad modal redesign, direct delete before proposal confirmation |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, `npm run validate-all`, smoke/browser checks for empty reason, entered reason, abort, confirm, blocked proposal, waiting-area warning, `git diff --check` |
+| Status | Dispatched |
+
 ## Sprint 28: Cancellation Proposal Safety
 
 | Item | Value |
