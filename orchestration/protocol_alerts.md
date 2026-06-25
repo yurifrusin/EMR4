@@ -106,6 +106,15 @@ Read these before acting on remembered process details.
   user explicitly granted proceed-through integration for that sprint. Plan-gated
   approval still requires explicit `complete sprint task` before workers begin
   implementation.
+- Cost-conscious UI review rule: conserve model/tool credits during sprint
+  verification. Use the cheapest reliable signal first: backend/API tests,
+  static frontend checks, direct Playwright/CDP/JavaScript assertions against
+  known URLs/selectors, and scoped accessibility/DOM summaries before any
+  screenshot-heavy or step-by-step Computer Use browsing. Avoid full DOM dumps,
+  broad screenshots, and repeated visual polling loops. Escalate to real
+  Chrome/Computer Use interaction only for behaviours that need real browser
+  input or Office/dialog state, and use cropped/small visual checks when
+  structural assertions cannot prove the result.
 - Closeout ping rule: Ariadne's sprint-closeout notification must include the
   Codex-side/tool-enabled reviews and tests already run, any bounded hotfixes
   made from those checks, and only the residual user review/testing that could

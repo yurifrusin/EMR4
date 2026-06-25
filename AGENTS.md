@@ -285,6 +285,30 @@ user explicitly granted proceed-through integration for that sprint. This
 post-poll review permission is separate from the plan gate: workers still must
 not implement until the explicit `complete sprint task` approval is given.
 
+Cost-conscious UI review rule: Ariadne should conserve model/tool credits during
+user-review automation. Use the cheapest reliable signal first and escalate only
+when needed:
+
+1. Backend/API tests and direct HTTP probes.
+2. Static frontend checks (`node --check`, asset/version checks, lint-like
+   project checks where configured).
+3. Headless or in-app browser scripts with narrow assertions against known URLs,
+   selectors, state, and console logs.
+4. Scoped accessibility/DOM summaries for only the relevant pane/modal/control.
+5. Targeted browser/Chrome interaction for behaviours that require real input
+   events, such as mouse drag/resize or Office dialog behaviour.
+6. Cropped/small screenshots only when visual layout or affordance cannot be
+   verified structurally.
+7. Yuri-only manual tests only when the remaining check genuinely needs Yuri's
+   account, device, clinical judgment, external console, or real-world context.
+
+Avoid broad screenshots, full DOM dumps, repeated polling loops, and exploratory
+mouse-click navigation unless they are the only practical way to verify the
+behaviour. Prefer small Playwright/CDP/JavaScript assertions such as "open this
+URL, click this known control, assert this section count/text/classes/buttons"
+over step-by-step Computer Use browsing. If a visual check is necessary, reduce
+the viewport or crop to the relevant application region where possible.
+
 After Codex integrates a submit, it must:
 
 1. Mark the source task packet and Codex review packet `integrated` or `superseded`.
