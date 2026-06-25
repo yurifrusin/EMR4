@@ -311,3 +311,63 @@ def test_delete_proposal_blocked_already_cancelled(
     assert data["autonomy_tier"] == "blocked"
     assert len(data["blocks"]) >= 1
     assert data["blocks"][0]["code"] == "already_in_status"
+
+
+# ─── Cancellation reason ───────────────────────────────────────────────────────
+
+def test_delete_with_reason_persists(client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+    resp = _delete(client, token, appt.id)  # no body first; then repeat with reason
+    # Use a fresh appointment for the reason test
+    appt2 = _make_appt(db, practice, practitioner, patient, start_h=10)
+    resp = client.request(
+        "DELETE",
+        f"/api/v1/appointments/{appt2.id}",
+        json={"cancellation_reason": "Patient called to cancel"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert resp.status_code == 204
+    db.refresh(appt2)
+    assert appt2.cancellation_reason == "Patient called to cancel"
+    assert appt2.status == AppointmentStatus.Cancelled
+
+
+def test_delete_without_reason_is_null(client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, start_h=11)
+    token = make_token(gp_user)
+    resp = _delete(client, token, appt.id)
+    assert resp.status_code == 204
+    db.refresh(appt)
+    assert appt.cancellation_reason is None
+
+
+def test_delete_proposal_echoes_reason_in_command(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, start_h=12)
+    token = make_token(gp_user)
+    resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Practitioner unavailable"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["command"]["cancellation_reason"] == "Practitioner unavailable"
+    # Row must not be mutated by the proposal
+    db.refresh(appt)
+    assert appt.cancellation_reason is None
+    assert appt.status == AppointmentStatus.Booked
+
+
+def test_delete_reason_too_long_returns_422(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, start_h=13)
+    token = make_token(gp_user)
+    resp = client.request(
+        "DELETE",
+        f"/api/v1/appointments/{appt.id}",
+        json={"cancellation_reason": "x" * 501},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert resp.status_code == 422

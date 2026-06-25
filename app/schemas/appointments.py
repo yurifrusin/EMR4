@@ -110,6 +110,7 @@ class AppointmentOut(BaseModel):
     status: AppointmentStatus
     reason: Optional[str] = None
     notes: Optional[str] = None
+    cancellation_reason: Optional[str] = None
     booked_via: BookingChannel
     waiting_room: Optional[str] = None
     waiting_area_id: Optional[uuid.UUID] = None
@@ -260,9 +261,14 @@ class AppointmentWaitingAreaProposalOut(BaseModel):
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
 
 
+class AppointmentDeleteIn(BaseModel):
+    cancellation_reason: Optional[str] = Field(None, max_length=500)
+
+
 class AppointmentDeleteCommand(BaseModel):
     appointment_id: uuid.UUID
     clears_waiting_area: bool
+    cancellation_reason: Optional[str] = None
 
 
 class AppointmentDeleteProposalOut(BaseModel):
