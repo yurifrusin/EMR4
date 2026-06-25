@@ -10,15 +10,15 @@
 
 ## Review Request
 
-Amended plan ready for Codex review
+Sprint 28 cancel proposal safety flow implemented and verified
 
 ## Worker Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.html
+- Verification run: node --check docs/diary/diary.js, npm run validate-all, git diff --check, and interactive smoke checks for delete proposal preflight gating (dedicated and status proposal fallback), cancel abort/confirm, and preservation of Alt+Arrow/mouse drag-drop.
+- Remaining risks: None. Built-in 404 handler provides clean compatibility path if dedicated backend endpoint is not yet present.
 
 ## Required Review Steps
 
