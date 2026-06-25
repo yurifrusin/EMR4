@@ -126,6 +126,41 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 28: Cancellation Proposal Safety
+
+| Item | Value |
+|---|---|
+| Status | Dispatched and plan-gated |
+| Launch Gate | Awaiting Claude and Antigravity plan packets |
+| Integration Gate | Not started |
+| Product Goal | Ensure destructive appointment cancellation/delete actions follow proposal-first safety semantics before any write |
+
+### Workstream S28-A - Backend Cancel Proposal Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-cancel-proposal-contract.md` |
+| Goal | Harden or prove the backend contract for cancellation/delete preflight before destructive appointment writes |
+| In Scope | `app/routers/appointments.py`, `app/schemas/appointments.py`, focused appointment proposal/cancel/delete tests, minimal production fixes only if a real gap is found |
+| Out of Scope | Diary frontend, taskpane, Command Centre, patient workflows, Resource Administration, migrations unless a schema issue is proven, direct writes that bypass proposal semantics |
+| Verification | Plan packet first; after approval py_compile touched appointment router/schema, focused cancellation/delete proposal pytest, adjacent update/status proposal tests, `git diff --check` |
+| Status | Queued |
+
+### Workstream S28-B - Diary Cancel Proposal Flow
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-cancel-proposal-flow.md` |
+| Goal | Route the diary `Cancel Appointment` action through proposal-first safety semantics before destructive writes |
+| In Scope | `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke-mode cancellation proposal simulation, asset cache-bust, minimal cancellation confirmation copy |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane, Command Centre, patient search/linking, Waiting Room layout, Resource Administration, recurrence, broad visual redesign, direct delete before proposal confirmation |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, `npm run validate-all`, smoke/browser checks for cancel proposal safe/warning/blocked/cancel-confirm/revert paths, `git diff --check` |
+| Status | Queued |
+
 ## Sprint 27: Diary Mouse Move/Resize Affordances
 
 | Item | Value |
