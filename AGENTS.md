@@ -292,14 +292,18 @@ when needed:
 1. Backend/API tests and direct HTTP probes.
 2. Static frontend checks (`node --check`, asset/version checks, lint-like
    project checks where configured).
-3. Headless or in-app browser scripts with narrow assertions against known URLs,
+3. Version-controlled review harnesses and reusable parameterized check
+   primitives, such as `assert_text_in(selector, text)`,
+   `assert_count(selector, n)`, `assert_api_field(url, field)`, and
+   `assert_version(html, v)`.
+4. Headless or in-app browser scripts with narrow assertions against known URLs,
    selectors, state, and console logs.
-4. Scoped accessibility/DOM summaries for only the relevant pane/modal/control.
-5. Targeted browser/Chrome interaction for behaviours that require real input
+5. Scoped accessibility/DOM summaries for only the relevant pane/modal/control.
+6. Targeted browser/Chrome interaction for behaviours that require real input
    events, such as mouse drag/resize or Office dialog behaviour.
-6. Cropped/small screenshots only when visual layout or affordance cannot be
+7. Cropped/small screenshots only when visual layout or affordance cannot be
    verified structurally.
-7. Yuri-only manual tests only when the remaining check genuinely needs Yuri's
+8. Yuri-only manual tests only when the remaining check genuinely needs Yuri's
    account, device, clinical judgment, external console, or real-world context.
 
 Avoid broad screenshots, full DOM dumps, repeated polling loops, and exploratory
@@ -308,6 +312,16 @@ behaviour. Prefer small Playwright/CDP/JavaScript assertions such as "open this
 URL, click this known control, assert this section count/text/classes/buttons"
 over step-by-step Computer Use browsing. If a visual check is necessary, reduce
 the viewport or crop to the relevant application region where possible.
+
+The main cost win is removing the model from deterministic execution loops, not
+swapping one model for another. For recurring review checks, Ariadne should
+prefer the pattern "explore once, crystallize into a script, run free forever":
+after any paid/exploratory UI review discovers a stable check, convert it into a
+stored Playwright/pytest/script primitive or spec that emits compact structured
+output (`passed`, `failed`, `evidence`). On future sprints, run the harness and
+let Codex interpret only failures or genuinely ambiguous results. Local models
+such as Gemma should not be added to the sprint loop unless measured residual
+interactive/visual review cost remains high after this scripting approach.
 
 After Codex integrates a submit, it must:
 

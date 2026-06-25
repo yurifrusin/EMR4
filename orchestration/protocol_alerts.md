@@ -108,13 +108,19 @@ Read these before acting on remembered process details.
   implementation.
 - Cost-conscious UI review rule: conserve model/tool credits during sprint
   verification. Use the cheapest reliable signal first: backend/API tests,
-  static frontend checks, direct Playwright/CDP/JavaScript assertions against
-  known URLs/selectors, and scoped accessibility/DOM summaries before any
-  screenshot-heavy or step-by-step Computer Use browsing. Avoid full DOM dumps,
-  broad screenshots, and repeated visual polling loops. Escalate to real
-  Chrome/Computer Use interaction only for behaviours that need real browser
-  input or Office/dialog state, and use cropped/small visual checks when
-  structural assertions cannot prove the result.
+  static frontend checks, reusable parameterized review primitives
+  (`assert_text_in`, `assert_count`, `assert_api_field`, `assert_version`),
+  direct Playwright/CDP/JavaScript assertions against known URLs/selectors, and
+  scoped accessibility/DOM summaries before any screenshot-heavy or step-by-step
+  Computer Use browsing. Avoid full DOM dumps, broad screenshots, and repeated
+  visual polling loops. The goal is to remove the model from deterministic
+  execution loops: explore once, crystallize into a stored script/harness, then
+  run that harness with compact structured output on future sprints. Escalate to
+  real Chrome/Computer Use interaction only for behaviours that need real
+  browser input or Office/dialog state, and use cropped/small visual checks when
+  structural assertions cannot prove the result. Do not add a local model such
+  as Gemma to the sprint loop unless measured residual interactive/visual review
+  cost remains high after scriptable checks have been harvested.
 - Closeout ping rule: Ariadne's sprint-closeout notification must include the
   Codex-side/tool-enabled reviews and tests already run, any bounded hotfixes
   made from those checks, and only the residual user review/testing that could
