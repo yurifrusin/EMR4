@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 30 - Programme 2B cancelled appointment review surface dispatched and plan-gated |
-| **Next recommended work** | Prompt Claude and Antigravity to handin, review Sprint 30 plans, then release implementation only with `complete sprint task` |
+| **Current active track** | Sprint 30 - Programme 2B cancelled appointment review surface integrated; pause requested after closeout |
+| **Next recommended work** | Pause sprint automation after Sprint 30 closeout; wait for Yuri before dispatching Sprint 31 |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -395,7 +395,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Current Sprint 29 appointment cancellation reason/note capture closeout commit |
+| **Latest integration commit** | Current Sprint 30 cancelled appointment review surface closeout commit |
 
 ### Tag map (all tags pushed to remote)
 

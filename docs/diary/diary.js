@@ -3647,7 +3647,10 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
     const details = document.createElement("div");
     details.className = "flow-card-details";
     const timeStr = apptTimeKey(a) || "09:00";
-    const roomStr = a.practitioner ? `${a.practitioner.first_name} ${a.practitioner.last_name}` : "Room";
+    const practitionerName = a.practitioner
+      ? [a.practitioner.first_name, a.practitioner.last_name].filter(Boolean).join(" ").trim()
+      : "";
+    const roomStr = practitionerName || a.practitioner?.ahpra_number || "Room";
     details.textContent = `${timeStr} — ${roomStr}`;
     card.appendChild(details);
 

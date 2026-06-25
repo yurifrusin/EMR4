@@ -8,6 +8,69 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 30: Cancelled Appointment Review Surface |
+| Integrated through | Sprint 30 backend cancelled-appointment review tests and diary cancelled-appointments review UI |
+| Status | Integrated locally, verified, and pending push/audit/deploy observation |
+| Last updated | 2026-06-25 |
+
+## What Changed
+
+- Backend contract coverage now proves `GET /appointments?status=Cancelled` is authenticated, practice-scoped, excludes active appointments, and returns `cancellation_reason` as either the captured note or `null`.
+- Diary patient-flow panel now includes a read-only `Cancelled` section with a count badge.
+- Cancelled cards show the appointment reason plus `Reason: <cancellation_reason>` when present.
+- Cancelled cards are visually distinct with muted/struck styling and a `CXL` badge.
+- Cancelled cards intentionally omit edit buttons, link buttons, status/action buttons, links, and selects, so the review surface cannot mutate appointments.
+- Smoke mode includes a cancelled fixture with a cancellation reason for tool-enabled browser review.
+- Ariadne applied one bounded integration hotfix after browser smoke: cancelled-card details no longer render `undefined undefined` when a practitioner object lacks first/last names, falling back to AHPRA/Room instead.
+- Diary cache bust moved to `diary.css?v=97` and `diary.js?v=98`.
+- No restore/reactivation, cancellation editing, audit-history table, taskpane, Command Centre, Resource Administration, drag/resize, recurrence, SMS, or billing work was included.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before pausing.
+Ariadne verified the backend contract, frontend syntax/assets, and local browser
+smoke path covering cancelled-section visibility, reason display, read-only card
+controls, asset versions, and console cleanliness.
+
+Optional confidence check only, if Yuri happens to be in the live diary after deployment:
+
+1. Setup: hard refresh the live diary and confirm `diary.js?v=98` and `diary.css?v=97` are loaded.
+2. Exact UI path: sign in as a dev Admin or normal dev user, open the Diary, cancel an appointment with a reason if no cancelled appointment already exists, then open the Waiting Room/patient-flow pane.
+3. Expected review surface: a `Cancelled` section appears in the right pane with a count matching the currently selected waiting-area tab.
+4. Expected card content: the cancelled appointment shows patient name, time/practitioner or AHPRA fallback, appointment reason, `Reason: <your cancellation reason>`, and a `CXL` badge.
+5. Expected read-only behaviour: the cancelled card has no edit pencil, no link button, no check-in/start/complete action, no waiting-area select, and clicking it must not open mutation controls.
+6. Suspicious signs: missing `Cancelled` section, missing cancellation reason, `undefined undefined` text, any mutation control on a cancelled card, cancelled rows showing in active diary grid slots, or browser console errors.
+7. Skippable parts: do not retest taskpane, Command Centre, Resource Administration, booking create/edit, drag/resize, recurrence, SMS, billing, or patient search for Sprint 30.
+8. Evidence to report: screenshot or short note showing the cancelled card, selected waiting-area tab, cancellation reason, and any unexpected control or console error.
+
+## Not Required Before Moving On
+
+- No manual database repair or migration is required; Sprint 30 added tests/UI only.
+- No Word taskpane, Command Centre, patient-file, Resource Administration, recurrence, duplicate-audit, billing, or clinical workflow review is required.
+- No additional Yuri-only test is required because Ariadne's browser smoke verified the read-only cancelled review surface.
+- Per Yuri's instruction, sprint automation should pause after Sprint 30 rather than dispatch Sprint 31 automatically.
+
+## Known Follow-Up
+
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- GitHub Pages deployment should be observed after push until live diary assets serve `diary.js?v=98` and `diary.css?v=97`.
+- Future cancellation review work may add restore/reactivation or supervisor audit history, but Sprint 30 intentionally stayed read-only.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 30 review packets.
+- Claude worker verification rerun by Ariadne: `pytest tests\test_cancelled_appointment_review.py tests\test_appointment_status_mutations.py -q --tb=short -p no:randomly` -> 39 passed, with the existing pytest-asyncio deprecation warning.
+- Antigravity worker verification rerun by Ariadne: `node --check docs\diary\diary.js`; `python scripts\check_frontend_versions.py`; `git diff --check` -> passed after Ariadne's cache-bust hotfix.
+- Browser smoke: local diary served at `http://127.0.0.1:8765/diary/diary.html?smoke=true`; page loaded `diary.css?v=97` and `diary.js?v=98`, opened Waiting Room/patient-flow pane, showed `Cancelled 1`, rendered `Reason: Patient had transport issues`, rendered no buttons/selects/links inside the cancelled card, and logged no browser console errors.
+
+## Recommended Next Direction
+
+Pause after Sprint 30 as requested. When Yuri resumes, choose the next Programme 2B slice deliberately rather than continuing on heartbeat autopilot.
+
+## Previous Closeout - Sprint 29
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 29: Appointment Cancellation Reason/Note Capture |
 | Integrated through | Sprint 29 backend cancellation reason contract and diary cancellation reason capture flow |
 | Status | Integrated, pushed, mirrored, audited, and deployed v96 observed |

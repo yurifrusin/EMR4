@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-cancelled-appointment-review-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 13:29 +1000 |
 | Source HEAD | `63f427b` |
 
@@ -46,4 +46,4 @@ Zero blast radius: no production code changes. Test isolation is handled by the 
 
 - Review result:
 - Required changes before implementation:
-- Approved to proceed: no
+- Approved to proceed: yes

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-cancelled-appointment-review-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-25 13:31 +1000 |
 | Source HEAD | `63f427b` |
 
@@ -80,4 +80,4 @@ To implement this cleanly without obscuring the grid or existing workflows:
 
 - Review result:
 - Required changes before implementation:
-- Approved to proceed: no
+- Approved to proceed: yes
