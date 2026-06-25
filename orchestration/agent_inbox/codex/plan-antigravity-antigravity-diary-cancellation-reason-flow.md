@@ -12,7 +12,7 @@
 
 ## Plan Summary
 
-Introduce a dynamic cancellation reason text input inside the booking modal when the user initiates cancellation, and pass this reason in both preflight check payloads and the final DELETE mutation query string.
+Introduce a dynamic cancellation reason text input inside the booking modal when the user initiates cancellation, and pass this reason in preflight check payloads and the final DELETE mutation JSON body.
 
 ## My Understanding
 
@@ -21,9 +21,9 @@ To preserve a clean layout, we will:
 1. Show an optional "Cancellation Reason" text field dynamically inside the booking editor modal once the user clicks "Cancel Appointment" (when the button changes to "Confirm Cancel").
 2. Focus the input immediately so the user can easily type.
 3. Pass the reason as `cancellation_reason` in the preflight proposal payload:
-   - For the dedicated proposal endpoint: `POST /appointments/proposals/delete/{id}` with `{ intent: "delete_appointment", cancellation_reason }`.
-   - For the fallback status proposal: `POST /appointments/proposals/status/{id}` with `{ status: "Cancelled", waiting_area_id: null, cancellation_reason }`.
-4. Pass the reason as a query parameter `?cancellation_reason=encodeURIComponent(reason)` on the final delete mutation `DELETE /appointments/{id}` in live mode.
+   - For the dedicated delete proposal endpoint: `POST /appointments/proposals/delete/{id}` with `{ intent: "delete_appointment", cancellation_reason }`.
+   - For the fallback status proposal: `POST /appointments/proposals/status/{id}` with `{ status: "Cancelled", waiting_area_id: null }` (we will omit the `cancellation_reason` from this fallback check unless the backend is verified to support it).
+4. Pass the reason inside the JSON request body `{ cancellation_reason }` on the final delete mutation `DELETE /appointments/{id}` in live mode (we will NOT append it as a query parameter).
 5. In Smoke Mode, log/simulate the proposal and cache the cancellation reason on the mock appointment object.
 6. Reset the cancellation reason field (clear value and hide container) when the user aborts, closes, or reopens the modal.
 
@@ -56,8 +56,9 @@ To preserve a clean layout, we will:
    - On second click ("Confirm Cancel"):
      - Extract `cancellation_reason` from `#booking-cancel-reason`.
      - In **Smoke Mode**, call `simulateStatusProposal(appt, { status: "Cancelled", waiting_area_id: null })` and check.
-     - In **Live Mode**, pass `cancellation_reason` in the JSON body of `/appointments/proposals/delete/${editingAppointmentId}` (fallback to `/appointments/proposals/status/${editingAppointmentId}`).
-     - If confirmed/safe, execute `DELETE /appointments/${editingAppointmentId}?cancellation_reason=${encodeURIComponent(reason)}` (or filter cache and store simulated reason in smoke mode).
+     - In **Live Mode**, attempt to query the dedicated delete proposal endpoint `POST /appointments/proposals/delete/${editingAppointmentId}` with JSON body `{ intent: "delete_appointment", cancellation_reason }`.
+     - Fallback / Compatibility Path: If the dedicated delete proposal endpoint returns a `404`, catch that and call the status proposal endpoint `POST /appointments/proposals/status/${editingAppointmentId}` with JSON body `{ status: "Cancelled", waiting_area_id: null }` (omitting the `cancellation_reason` field).
+     - If confirmed/safe, execute `DELETE /appointments/${editingAppointmentId}` with JSON body `{ cancellation_reason }` (or filter cache and store simulated reason in smoke mode).
      - Hide `#booking-cancel-reason-container` and clear `#booking-cancel-reason` input.
    - On abort (user rejects warning overlay):
      - Hide `#booking-cancel-reason-container`, clear its input value, and reset the delete button's confirming state.
@@ -73,14 +74,14 @@ To preserve a clean layout, we will:
 - **Cancellation reason capture**: Clicking "Cancel Appointment" dynamically displays the "Cancellation Reason (Optional)" input field.
 - **Reversion on Cancel**: Aborting the confirmation overlay correctly resets the button state and hides the cancellation reason text input.
 - **Data Transmission**:
-  - Verification that the reason is sent in the JSON body of the proposal requests.
-  - Verification that the reason is appended to the query parameter string of the final DELETE mutation request.
+  - Verification that the reason is sent in the JSON body of the delete proposal request.
+  - Verification that the reason is sent in the JSON request body of the final DELETE mutation request (no query parameters appended).
 - **Asset bump**: Asset versions are validated as `v=96`.
 - **Smoke Mode simulation**: Deleting an appointment in smoke mode functions smoothly, reflecting cancellation warning constraints, and resets states cleanly on close/cancel.
 
 ## Risks / Ambiguities
 
-- Backend contract updates: Managed by maintaining query parameter fallback on the delete mutation and body fallback on the proposal checks.
+- Backend contract updates: Addressed by routing the reason as a JSON body payload in the final DELETE mutation and delete proposal checks, and omitting it on the status-proposal check fallback.
 
 ## Codex Plan Review
 
