@@ -2006,6 +2006,46 @@ html, body {
 }
 
 #admin-access-denied p {
-  font-size: 10px;
   color: var(--grey-3);
+}
+
+/* ─── APPOINTMENT DRAG & RESIZE STYLING (Sprint 27) ─────────── */
+.appt {
+  cursor: grab;
+}
+
+.appt:active {
+  cursor: grabbing;
+}
+
+.appt-resize-handle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  z-index: 15;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.appt-resize-handle-top {
+  top: 0;
+  cursor: ns-resize;
+}
+
+.appt-resize-handle-bottom {
+  bottom: 0;
+  cursor: ns-resize;
+}
+
+.appt:hover .appt-resize-handle {
+  background-color: rgba(79, 70, 229, 0.2);
+}
+
+.appt-ghost-preview {
+  border: 2px dashed var(--primary-color, #4f46e5);
+  background-color: rgba(79, 70, 229, 0.15);
+  border-radius: 3px;
+  z-index: 100;
+  pointer-events: none;
 }
