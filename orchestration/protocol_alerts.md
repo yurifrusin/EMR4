@@ -65,12 +65,33 @@ Read these before acting on remembered process details.
   from `master`; set Pages source to GitHub Actions in repository settings.
 - Sprint launch rule: Codex/orchestrator must announce `HANDIN READY` before the
   user prompts external worker agents to run `handin`.
-- External-agent control rule: after `HANDIN READY`, Ariadne should automatically
-  use Computer Use, when available, to send `handin`, corrective nudges, and
-  `complete sprint task` prompts to Claude/Antigravity. Yuri does not need to
-  explicitly invoke Computer Use each time. If Computer Use is unavailable in
-  the current thread, Ariadne should say so and ask Yuri for only the specific
-  manual prompt that cannot be sent.
+- External-agent control rule: after `HANDIN READY`, Ariadne should use the
+  lowest-cost text channel available for external workers before considering
+  GUI automation. Antigravity should be prompted with:
+  `C:\Users\YuriFrusin\AppData\Local\agy\bin\agy.exe --conversation e959487d-4cc5-4528-bc81-8b637702d006 --print "<prompt>"`.
+  Claude should be prompted with `scripts\drive_agent_headless.py` from a clean
+  shell and the Claude worker worktree, using `--phase plan` for plan-gated
+  handin and `--phase implement` only after plan approval. Yuri does not need to
+  explicitly invoke these routine worker prompts. If a CLI is unavailable,
+  Ariadne should fall back to Computer Use where appropriate, then ask Yuri for
+  only the smallest manual prompt still needed.
+- Claude headless plan-gate rule: do not `--resume` across a plan gate. The plan
+  and implementation turns use different default models (`plan` = Opus/medium,
+  `implement` = Sonnet/medium), so use a fresh session per phase. Re-run
+  `handin` in the implementation prompt so Claude reloads the persisted task
+  packet and approved plan from git. `--resume` is only for multi-turn recovery
+  inside the same phase/model.
+- Claude headless permission rule: use the driver default posture of
+  `acceptEdits` plus the scoped allowed tools (`Bash`, `Edit`, `Write`, `Read`,
+  `Grep`, `Glob`) on Claude worker branches only. Do not use
+  `bypassPermissions` or run from `master`/the integration worktree unless Yuri
+  explicitly approves a debugging exception. Poll/git remains the authoritative
+  verification channel; do not treat a CLI success JSON as proof of submission.
+- Claude headless auth rule: run the driver from Ariadne's clean shell, not from
+  inside a nested Claude Code tool call, because nested Claude sessions can
+  inherit auth/routing overrides and 401. Do not use `--bare` for EMR4 routine
+  prompts; it is incompatible with the current subscription/setup-token auth
+  path.
 - Computer Use restart rule: after a Windows/Codex restart, Computer Use may be
   available through the skill's JS bootstrap path even when no standalone
   desktop-control tool appears in tool discovery. Ariadne should read/use the
@@ -131,8 +152,10 @@ Read these before acting on remembered process details.
   no Yuri-only manual tests, approvals, risk calls, or priority decisions, Ariadne
   should continue into the next recommended sprint from the current programme
   rather than waiting idly. Dispatch the next sprint, announce `HANDIN READY`,
-  and use Computer Use for Claude/Antigravity prompts when available. Stop and
-  notify Yuri only when human input is genuinely needed.
+  and use external-agent CLIs for Claude/Antigravity prompts when available,
+  falling back to Computer Use only when text channels are unavailable or a GUI
+  interaction is genuinely required. Stop and notify Yuri only when human input
+  is genuinely needed.
 - Residual user-test detail rule: when any closeout leaves manual checks for
   Yuri, Ariadne must provide concrete, step-by-step user review instructions,
   not just a terse checklist. Include setup/preconditions, exact UI path,

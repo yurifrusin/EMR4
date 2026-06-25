@@ -181,12 +181,37 @@ python scripts\agent_worktrees.py inbox --agent claude
 python scripts\agent_worktrees.py brief --agent claude
 ```
 
-After Ariadne announces `HANDIN READY`, Ariadne should use Computer Use
-automatically, when available, to prompt Claude/Antigravity with `handin`,
-corrective nudges, and `complete sprint task`. Yuri should not need to
-explicitly invoke Computer Use for routine sprint orchestration. If Computer Use
-is unavailable in the current Codex thread, Ariadne should say so and ask Yuri
-for the smallest manual prompt needed.
+After Ariadne announces `HANDIN READY`, Ariadne should prompt external workers
+through cheap headless text channels before using GUI automation. Yuri should
+not need to explicitly invoke routine sprint prompts.
+
+Antigravity uses its CLI conversation:
+
+```powershell
+C:\Users\YuriFrusin\AppData\Local\agy\bin\agy.exe --conversation e959487d-4cc5-4528-bc81-8b637702d006 --print "<prompt>"
+```
+
+Claude uses the standalone headless driver from a clean Ariadne shell and the
+Claude worker worktree:
+
+```powershell
+python scripts\drive_agent_headless.py --cwd C:\Users\YuriFrusin\Documents\EMR4-worktrees\claude --phase plan --mint-session --prompt "handin, write the implementation plan, submit the plan packet, then stop"
+python scripts\drive_agent_headless.py --cwd C:\Users\YuriFrusin\Documents\EMR4-worktrees\claude --phase implement --prompt "handin, then complete sprint task"
+```
+
+Use `--phase plan` for plan-gated handin and `--phase implement` only after the
+plan is approved. Do not `--resume` across the plan gate because the phase
+defaults intentionally use different models (`plan` = Opus/medium,
+`implement` = Sonnet/medium); `--resume` is only for recovery within the same
+phase/model. Keep the default Claude permission posture (`acceptEdits` plus
+`Bash`, `Edit`, `Write`, `Read`, `Grep`, `Glob`) on Claude worker branches only.
+Do not use `bypassPermissions`, `--bare`, or run from `master`/the integration
+worktree unless Yuri explicitly approves a debugging exception. Poll/git remains
+the authoritative proof of submission, not the CLI result JSON.
+
+If a CLI is unavailable in the current Codex thread/session, Ariadne should
+fall back to Computer Use where appropriate and ask Yuri only for the smallest
+manual prompt still needed.
 After a Codex app or Windows restart, Computer Use may not appear as separate
 desktop `click`/`type` tools even when the plugin is installed. Ariadne should
 first run the Computer Use skill's JS bootstrap path through the Node REPL and
@@ -397,9 +422,11 @@ that in the Codex closeout summary and continue with the in-thread notification.
 If a sprint closes cleanly and Ariadne's tool-enabled review leaves no
 Yuri-only tests, decisions, or approvals, Ariadne should keep the project moving:
 choose the next recommended sprint from the current programme/closeout state,
-dispatch it, announce `HANDIN READY`, and use Computer Use to prompt
-Claude/Antigravity where available. Stop and notify Yuri only when user input,
-manual review, unusual risk, or a priority decision is genuinely needed.
+dispatch it, announce `HANDIN READY`, and use external-agent CLIs to prompt
+Claude/Antigravity where available, falling back to Computer Use only when text
+channels are unavailable or a GUI interaction is genuinely required. Stop and
+notify Yuri only when user input, manual review, unusual risk, or a priority
+decision is genuinely needed.
 
 ### Parallel ownership rule
 
