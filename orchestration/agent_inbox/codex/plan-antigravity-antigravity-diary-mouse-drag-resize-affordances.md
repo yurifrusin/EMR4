@@ -21,6 +21,7 @@ Implement visible and discoverable mouse-based interactions on EMR4 diary appoin
 - **Duration (Resize)**: Dragging top or bottom edges vertically to change the duration in 15-minute increments (with a floor of 15 minutes).
 - **Validation**: On mouseup (drop), the new time/practitioner state is validated against the proposals update endpoint. If blocked (conflict), the action is reverted and blocked modal is shown; if warnings (break overlap), a confirmation dialog is shown; if safe, the update is saved and the grid is reloaded.
 - **Ghost Preview**: Display a semi-transparent dashed ghost element that snaps to the grid lines (30px = 15 mins) during drag/resize.
+- **Coexistence**: The existing `Alt+Arrow` keyboard move/resize behavior remains fully supported and unchanged. All mouse drops still route through the proposal preflight path before any write.
 
 ## Intended Surface / Boundary
 
@@ -67,7 +68,7 @@ Implement visible and discoverable mouse-based interactions on EMR4 diary appoin
    - If aborted or blocked, the card resets to its initial grid position automatically.
 
 6. **Cache-Buster Bump (`diary.html`)**:
-   - Bump script/css version parameters to `v=88`.
+   - Bump script/css version parameters to `v=93` (preserving monotonic cache-busting above Sprint 26's `v=92`).
 
 ## Visual / Behavioural Acceptance Checks
 

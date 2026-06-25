@@ -10,7 +10,7 @@
 
 ## Review Request
 
-antigravity-diary-mouse-drag-resize-affordances plan ready for Codex review
+Amended plan ready for Codex review
 
 ## Worker Completion Notes
 
