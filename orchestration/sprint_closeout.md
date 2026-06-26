@@ -69,7 +69,7 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 
 ## Recommended Next Direction
 
-Continue with the next Programme 2D diary safety/readability slice after Sprint 34 is pushed, mirrored, and audited. Prefer a small deterministic-review-friendly sprint while Claude's headless session limit recovers.
+Sprint 35 has been dispatched as a small deterministic-review-friendly slice while Claude's headless session limit recovers: add stable audit-history test hooks and smoke assertions without changing runtime behaviour.
 
 
 ## Previous Closeout - Sprint 33

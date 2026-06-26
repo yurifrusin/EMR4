@@ -130,6 +130,29 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+
+## Sprint 35: Diary Audit History Test-Hook Hardening
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; Antigravity plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Antigravity plan and Ariadne review |
+| Product Goal | Keep audit-history UI review cheap and robust by adding stable test hooks and deterministic assertions for the read-only audit-history section |
+
+### Workstream S35-A - Diary Audit History Stable Selectors
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-audit-history-testid-hardening.md` |
+| Goal | Plan, then after approval add stable data-testid hooks and smoke assertions for the audit-history section without changing mutation behaviour |
+| In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.js`, and `review/test_diary_smoke.py` only unless a directly required adjacent frontend file is unavoidable |
+| Out of Scope | Backend code, appointment mutation/proposal flows, taskpane, Command Centre, billing, SMS, AI provider code, resource administration, cancelled appointment review, broad booking modal redesign |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary smoke, frontend version check if assets change, and `git diff --check` |
+| Status | Plan gate pending |
+
 ## Sprint 34: Appointment Audit History Readability
 
 | Item | Value |
