@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 55: Bernie Dev Review Fixture Route |
 | Integrated through | Backend-only deterministic non-PHI Bernie review fixture route for dev tooling |
-| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -49,6 +49,7 @@ Ariadne verified this as a backend-only deterministic dev fixture route with foc
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\routers\bernie_dev.py app\main.py tests\test_bernie_dev_fixtures.py` -> passed.
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_dev_fixtures.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_wrapper_confirmation_review_harness.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_confirmed_flow_review_harness.py -q --tb=short -p no:randomly` -> 41 passed.
 - `git diff --check master..origin/claude/current` -> passed.
+- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `4fff9fc`; only the known dirty stale `codex/time-model` disposable worktree remains for manual review.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
