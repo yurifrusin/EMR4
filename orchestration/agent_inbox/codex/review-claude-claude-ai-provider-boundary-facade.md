@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-ai-provider-boundary-facade` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -45,5 +45,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Diff is scoped to the AI service boundary, consultation/letter router wiring, and fake-provider tests.
+- Follow-up required: Future provider work should add capability-specific evals before switching away from Gemini.

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-review-harness-hardening` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 15:20 +1000 |
 | Source HEAD | `f5ea0e7` |
 
@@ -77,6 +77,6 @@ We want to:
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; scope is deterministic diary smoke-review hardening with stable selectors.
+- Required changes before implementation: None.
+- Approved to proceed: yes

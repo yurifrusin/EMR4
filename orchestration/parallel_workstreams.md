@@ -63,10 +63,14 @@ For the layer between long phases and tactical sprints, use
   parallel mode unless the user explicitly instructs otherwise.
 - Codex must announce `HANDIN READY` before the user prompts external workers to
   run `handin`.
-- After `HANDIN READY`, Ariadne should use Computer Use automatically when
-  available to send external-worker `handin`, corrective nudge, and
-  `complete sprint task` prompts. If Computer Use is unavailable, Ariadne asks
-  Yuri for only the specific manual prompt needed.
+- After `HANDIN READY`, Ariadne should use the cheapest available text channel
+  first for external-worker `handin`, corrective nudge, and `complete sprint
+  task` prompts. Claude uses `scripts\drive_agent_headless.py`; Antigravity uses
+  its project-scoped CLI. Computer Use is a fallback for GUI-only situations, not
+  the routine path.
+- After all plan packets are accepted, Ariadne should release independent
+  implementation workstreams in parallel unless worker channels are unproven,
+  broken, security-sensitive, or likely to mutate overlapping files.
 - During a sprint, Codex must not push sprint work through to `master` until all
   active sprint agents, including any Codex subagent worker, have submitted or
   been explicitly stood down.
@@ -130,9 +134,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated locally; closeout in progress |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending worker plans and Codex approval |
+| Integration Gate | Claude and Antigravity submissions reviewed and accepted |
 | Product Goal | Formalize the first practical AI provider boundary and expand deterministic diary review so the sprint loop uses CLI/text and Playwright/pytest before GUI automation |
 
 ### Workstream S31-A - AI Provider Boundary Facade
@@ -146,7 +150,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval a small backend-only scaffold around existing Gemini consultation/letter usage, likely `app/services/ai/contracts.py`, `app/services/ai/service.py`, `app/services/ai/providers/gemini.py`, and focused tests/fixtures if justified |
 | Out of Scope | Provider switch, LiteLLM integration, prompt rewrite, live Gemini credential work, diary frontend, taskpane UI, Command Centre UI, Bernie runtime, migrations, broad consultation/letter behaviour changes |
 | Verification | Plan packet first; after approval py_compile touched Python modules, focused pytest for new AI contracts/tests, existing consultation/letter tests if touched and available, no live provider calls required, `git diff --check` |
-| Status | Dispatched |
+| Status | Integrated locally |
 
 ### Workstream S31-B - Diary Review Harness Hardening
 
@@ -159,7 +163,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `review/checks_diary.json`, `review/harness.py`, `review/test_diary_smoke.py`, `review/README.md`, and minimal `docs/diary` test hooks/data-testid attributes if justified |
 | Out of Scope | Backend API changes, migrations, production diary behaviour redesign, appointment mutation semantics, taskpane/Command Centre, Bernie runtime, broad visual restyle, Computer Use dependency |
 | Verification | Plan packet first; after approval `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`, `node --check docs/diary/diary.js` if touched, `npm run validate-all` if relevant, `git diff --check`; capture screenshots/traces only on failure |
-| Status | Dispatched |
+| Status | Integrated locally |
 
 ## Sprint 29: Cancellation Reason Capture
 

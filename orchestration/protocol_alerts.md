@@ -67,14 +67,28 @@ Read these before acting on remembered process details.
   user prompts external worker agents to run `handin`.
 - External-agent control rule: after `HANDIN READY`, Ariadne should use the
   lowest-cost text channel available for external workers before considering
-  GUI automation. Antigravity should be prompted with:
-  `C:\Users\YuriFrusin\AppData\Local\agy\bin\agy.exe --conversation e959487d-4cc5-4528-bc81-8b637702d006 --print "<prompt>"`.
+  GUI automation. Antigravity should normally be prompted from a fresh
+  project-scoped CLI session:
+  `C:\Users\YuriFrusin\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\YuriFrusin\Documents\EMR4-worktrees\antigravity --print "<prompt>"`.
+  Do not rely on stale `--conversation` IDs after app/CLI restarts unless the
+  conversation ID has just been verified. If stdout is blank, inspect the
+  Antigravity transcript/log and then trust poll/git, not chat text, as proof of
+  submission. Keep
+  `C:\Users\YuriFrusin\.gemini\antigravity-cli\settings.json` as UTF-8 without
+  BOM; a BOM makes the CLI ignore settings and fall back to defaults.
   Claude should be prompted with `scripts\drive_agent_headless.py` from a clean
   shell and the Claude worker worktree, using `--phase plan` for plan-gated
   handin and `--phase implement` only after plan approval. Yuri does not need to
   explicitly invoke these routine worker prompts. If a CLI is unavailable,
   Ariadne should fall back to Computer Use where appropriate, then ask Yuri for
   only the smallest manual prompt still needed.
+- Parallel implementation release rule: once all plan packets for a sprint have
+  been reviewed and accepted, Ariadne should release independent Claude,
+  Antigravity, and Codex-worker implementation tasks in parallel using their
+  lowest-cost text channels. Serial release is reserved for unusual conditions:
+  unproven/broken worker CLI channels, overlapping mutable file surfaces,
+  security-sensitive manual approval points, or active recovery from a protocol
+  violation. If Ariadne serializes a release, record why.
 - Claude headless plan-gate rule: do not `--resume` across a plan gate. The plan
   and implementation turns use different default models (`plan` = Opus/medium,
   `implement` = Sonnet/medium), so use a fresh session per phase. Re-run

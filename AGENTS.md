@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 31 - AI provider boundary + deterministic review-harness hardening dispatched; plan gate pending |
-| **Next recommended work** | Review Sprint 31 plans, then use CLI-first worker prompts and Playwright/pytest review checks before any GUI testing |
+| **Current active track** | Sprint 31 - AI provider boundary + deterministic review-harness hardening integrated locally; closeout in progress |
+| **Next recommended work** | Push/audit Sprint 31, then choose the next programme slice only if no Yuri-only review remains |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -185,11 +185,21 @@ After Ariadne announces `HANDIN READY`, Ariadne should prompt external workers
 through cheap headless text channels before using GUI automation. Yuri should
 not need to explicitly invoke routine sprint prompts.
 
-Antigravity uses its CLI conversation:
+Antigravity uses the CLI from a fresh project-scoped session unless a current
+conversation ID has been verified. Old conversation IDs can disappear after app
+or CLI restarts, and `--print` may return no stdout even when the transcript
+records progress; poll/git remains the authoritative proof of submission.
 
 ```powershell
-C:\Users\YuriFrusin\AppData\Local\agy\bin\agy.exe --conversation e959487d-4cc5-4528-bc81-8b637702d006 --print "<prompt>"
+C:\Users\YuriFrusin\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\YuriFrusin\Documents\EMR4-worktrees\antigravity --print "<prompt>"
 ```
+
+Antigravity CLI settings live in
+`C:\Users\YuriFrusin\.gemini\antigravity-cli\settings.json`; keep this file
+valid JSON encoded as UTF-8 without BOM, otherwise the CLI silently falls back
+to defaults. The EMR4 routine posture is `toolPermission=always-proceed`,
+`artifactReviewPolicy=always-proceed`, `allowNonWorkspaceAccess=false`, and
+`trustedWorkspaces` limited to the Antigravity worker worktree.
 
 Claude uses the standalone headless driver from a clean Ariadne shell and the
 Claude worker worktree:
@@ -212,6 +222,12 @@ the authoritative proof of submission, not the CLI result JSON.
 If a CLI is unavailable in the current Codex thread/session, Ariadne should
 fall back to Computer Use where appropriate and ask Yuri only for the smallest
 manual prompt still needed.
+After all plan packets for a sprint are reviewed and accepted, Ariadne should
+release implementation to independent workers in parallel where their scopes do
+not overlap. Use separate CLI processes for Claude and Antigravity rather than
+serial release, unless a worker channel is currently unproven, failing, or likely
+to mutate overlapping files. If release is intentionally serialized for safety,
+record the reason in the closeout or protocol notes.
 After a Codex app or Windows restart, Computer Use may not appear as separate
 desktop `click`/`type` tools even when the plugin is installed. Ariadne should
 first run the Computer Use skill's JS bootstrap path through the Node REPL and

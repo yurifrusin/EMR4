@@ -8,6 +8,74 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 31: AI Provider Boundary and Deterministic Diary Review Harness |
+| Integrated through | Sprint 31 backend AI service facade and diary cancelled-flow review harness hardening |
+| Status | Integrated locally, verified, and pending push/audit/deploy observation |
+| Last updated | 2026-06-26 |
+
+## What Changed
+
+- Added a thin EMR4-owned AI service boundary under `app/services/ai/`, with provider contracts, a Gemini adapter, and an `AiService` facade.
+- Moved direct `google.genai` use out of consultation and letter routers; `app/services/ai/providers/gemini.py` is now the only application module importing the provider SDK.
+- Preserved existing consultation analysis, audio scribe, and letter draft HTTP response shapes by returning provider raw JSON through the facade.
+- Wrapped letter drafting through the async facade so the previous blocking provider call now follows the same `asyncio.to_thread` pattern as consultation/scribe work.
+- Added fake-provider tests and de-identified eval fixtures for clinical extraction, audio scribe, and letter drafting contracts.
+- Hardened the deterministic diary review harness with stable `data-testid` hooks for patient-flow cards, counts, names, reasons, cancellation reasons, and status badges.
+- Extended `review/checks_diary.json` so cancelled appointments are asserted in the flow panel rather than relying on visual/manual review.
+- Diary cache bust moved to `diary.js?v=99`; CSS remains `diary.css?v=97`.
+- Documented the implementation-release protocol correction: after all plan packets are accepted, independent worker implementation tasks should be released in parallel via the lowest-cost CLI/text channels unless there is a concrete safety reason to serialize.
+- Fixed local Antigravity CLI settings encoding: `settings.json` is now UTF-8 without BOM so the CLI can read the intended low-cost/auto-proceed settings.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before the next sprint.
+Ariadne verified the backend AI boundary tests, import boundary, frontend syntax,
+and deterministic Playwright diary smoke harness. Sprint 31 is an architecture
+and review-infrastructure sprint; it intentionally does not add visible diary,
+taskpane, Command Centre, or clinical workflow behaviour.
+
+Optional confidence check only, if Yuri happens to be reviewing the repo:
+
+1. Setup: inspect the Sprint 31 diff or open the repo after pull.
+2. Exact path: confirm `app/services/ai/providers/gemini.py` is the only app module importing `google.genai`.
+3. Expected backend shape: consultation and letter routes call `AiService` rather than provider SDKs directly.
+4. Exact review-harness path: run `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`.
+5. Expected harness result: all 14 diary smoke checks pass, including cancelled flow count, patient name, cancellation reason, and `CXL` badge.
+6. Suspicious signs: provider imports reappearing in routers, review harness failures, or visible diary behaviour changing despite the sprint being test-hook-only on the frontend.
+7. Skippable parts: do not manually retest live diary booking, waiting room mutations, Resource Administration, Word taskpane, Command Centre, scribe audio, real Gemini calls, or clinical letter generation for Sprint 31.
+8. Evidence to report: command output from the failed check and any diff hunk showing unexpected provider coupling or visible UI behaviour change.
+
+## Not Required Before Moving On
+
+- No manual live EMR4 UI test is required; frontend changes are nonvisual `data-testid` hooks plus deterministic smoke checks.
+- No real Gemini, audio, GCP, Word, Office dialog, or patient-file test is required; the new AI boundary is covered by fake-provider tests and preserves raw response shapes.
+- No database migration, data repair, or GitHub security-console action is required.
+
+## Known Follow-Up
+
+- Add capability-specific AI evals before any future provider/model switch, especially for Bernie and medical scribe behaviours.
+- Continue harvesting deterministic review checks into `review/` after exploratory UI work discovers a stable assertion.
+- Add backend-backed canonical diary-template checks in a future review-harness sprint if the smoke fixture and production template need cross-file invariant coverage.
+- Future worker releases should use true parallel implementation prompts after plan approval; Sprint 31 was serialized only because Antigravity CLI behaviour was being validated and repaired in real time.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found Sprint 31 Claude and Antigravity review packets.
+- Claude worker verification rerun by Ariadne: `py_compile app\services\ai\contracts.py app\services\ai\service.py app\services\ai\providers\gemini.py app\routers\consultation.py app\routers\letters.py`; `pytest tests\test_ai_service_boundary.py --noconftest -q`; `rg "google\.genai|from google import genai" app`; `git diff --check origin/master...HEAD` -> 14 passed, import boundary limited to `app/services/ai/providers/gemini.py`, diff check clean.
+- Antigravity worker verification rerun by Ariadne: `pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`; `node --check docs\diary\diary.js`; `git diff --check origin/master...HEAD` -> 14 passed, JS syntax clean, diff check clean.
+- Integrated-tree frontend verification: `pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`; `node --check docs\diary\diary.js`; `python scripts\check_frontend_versions.py`; `git diff --check` -> passed after Ariadne's `diary.js?v=99` cache-bust hotfix.
+- Antigravity CLI settings verification: first bytes of `C:\Users\YuriFrusin\.gemini\antigravity-cli\settings.json` are `123,13,10,32,32`, confirming UTF-8 without BOM rather than the invalid BOM-prefixed JSON that made the CLI ignore settings.
+
+## Recommended Next Direction
+
+1. Push Sprint 31, realign mirrors, audit, and observe GitHub Pages/CI if relevant.
+2. Continue the current programme with the next appointment/diary operational slice, using parallel CLI implementation release after plan approval.
+3. Keep expanding deterministic Playwright/pytest checks before spending tokens on GUI/Chrome interaction.
+
+## Previous Closeout - Sprint 30
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 30: Cancelled Appointment Review Surface |
 | Integrated through | Sprint 30 backend cancelled-appointment review tests and diary cancelled-appointments review UI |
 | Status | Integrated locally, verified, and pending push/audit/deploy observation |

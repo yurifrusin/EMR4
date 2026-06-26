@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-ai-provider-boundary-facade` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 15:06 +1000 |
 | Source HEAD | `f5ea0e7` |
 
@@ -44,6 +44,6 @@ Strict validation could change behaviour -> mitigated by permissive contracts (e
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; scope is backend-only and matches the AI boundary strategy.
+- Required changes before implementation: None.
+- Approved to proceed: yes

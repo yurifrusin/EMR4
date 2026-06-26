@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-review-harness-hardening` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Diff adds stable flow-panel test IDs and data-driven cancelled-section smoke assertions without product behaviour changes.
+- Follow-up required: Keep adding `review/` checks whenever exploratory UI review discovers a stable assertion.
