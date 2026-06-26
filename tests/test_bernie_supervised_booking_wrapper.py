@@ -97,6 +97,14 @@ def test_blocked_normalization_does_not_execute_slot_search(client, gp_user, mon
     assert data["autonomy_tier"] == "blocked"
     assert data["search_proposal"] is None
     assert data["selection_proposal"] is None
+    assert data["staff_review"]["status"] == "blocked"
+    assert data["staff_review"]["confirmation_ready"] is False
+    assert data["staff_review"]["selected_slot"] is None
+    assert data["staff_review"]["candidate_slots"] == []
+    assert data["staff_review"]["warning_summary"] == "0 warning(s), 1 blocked issue(s)."
+    assert data["staff_review"]["evidence_summary"] == "Blocked review payload; no confirm evidence is available."
+    assert data["staff_review"]["confirm_payload"] is None
+    assert data["staff_review"]["blocks"][0]["code"] == "missing_practitioner_id"
     assert data["normalization"]["safe"] is False
     assert data["blocks"][0]["code"] == "missing_practitioner_id"
 
@@ -125,6 +133,20 @@ def test_safe_command_returns_candidate_selection_response_without_mutating(
     assert data["search_proposal"]["intent"] == "search_slots"
     assert data["search_proposal"]["candidates"][0]["start_time_local"] == "09:00:00"
     assert data["selection_proposal"] is None
+    review = data["staff_review"]
+    assert review["status"] == "candidate_selection_required"
+    assert review["confirmation_ready"] is False
+    assert review["selected_slot"] is None
+    assert review["candidate_slots"][0] == {
+        "appointment_date": REFERENCE_DATE,
+        "start_time_local": "09:00:00",
+        "duration_minutes": 15,
+        "warnings": [],
+    }
+    assert review["warning_summary"] == "No warnings or blocked issues."
+    assert review["evidence_summary"] == "Candidate slot summaries are review-only until staff selects one slot."
+    assert review["confirm_endpoint"] is None
+    assert review["confirm_payload"] is None
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
 
@@ -163,6 +185,27 @@ def test_selected_candidate_returns_confirmation_ready_evidence_without_mutating
     assert command["appointment_date"] == REFERENCE_DATE
     assert command["start_time_local"] == "09:00:00"
     assert command["reason"] == "Follow-up"
+    review = data["staff_review"]
+    assert review["status"] == "confirmation_ready"
+    assert review["confirmation_ready"] is True
+    assert review["selected_slot"] == {
+        "appointment_date": REFERENCE_DATE,
+        "start_time_local": "09:00:00",
+        "duration_minutes": 15,
+        "warnings": [],
+    }
+    assert review["candidate_slots"] == []
+    assert review["warning_summary"] == "No warnings or blocked issues."
+    assert review["evidence_summary"] == "Confirm payload carries slot-selection and create-proposal evidence for explicit staff approval."
+    assert review["confirm_endpoint"] == "/api/v1/appointments/proposals/create/confirm-bernie"
+    assert review["confirm_evidence"] == [
+        "bernie_confirm_create_proposal",
+        "source_slot_selection_proposal",
+        "source_create_proposal",
+    ]
+    assert review["confirm_payload"]["confirmed"] is False
+    assert review["confirm_payload"]["confirmed_warnings"] == []
+    assert review["confirm_payload"]["selection_proposal"] == data["selection_proposal"]
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
 
@@ -204,6 +247,10 @@ def test_selected_candidate_conflict_revalidation_blocks_without_mutating(
     assert data["selection_proposal"]["safe"] is False
     assert data["selection_proposal"]["create_proposal"]["blocks"][0]["code"] == "appointment_conflict"
     assert data["blocks"][0]["code"] == "appointment_conflict"
+    assert data["staff_review"]["status"] == "blocked"
+    assert data["staff_review"]["confirmation_ready"] is False
+    assert data["staff_review"]["selected_slot"]["start_time_local"] == "09:00:00"
+    assert data["staff_review"]["confirm_payload"] is None
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
 

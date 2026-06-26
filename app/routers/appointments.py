@@ -28,6 +28,7 @@ from app.schemas.appointments import (
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
     SlotSearchCommandIn, SlotSearchCommandResult, SlotSearchCommandExecutionOut,
     SlotSelectionProposalIn, SlotSelectionProposalOut,
+    BernieStaffReviewPayload, BernieStaffReviewSlotSummary,
     BernieSupervisedBookingIn, BernieSupervisedBookingOut,
     BernieCreateProposalConfirmationIn,
 )
@@ -1753,6 +1754,86 @@ def _block_slot_selection(
     )
 
 
+def _bernie_staff_review_slot_summary(candidate: SlotCandidate) -> BernieStaffReviewSlotSummary:
+    return BernieStaffReviewSlotSummary(
+        appointment_date=candidate.appointment_date,
+        start_time_local=candidate.start_time_local,
+        duration_minutes=candidate.duration_minutes,
+        warnings=candidate.warnings,
+    )
+
+
+def _bernie_staff_review_payload(
+    result: str,
+    summary: str,
+    warnings: list[AppointmentProposalIssue],
+    blocks: list[AppointmentProposalIssue],
+    search_proposal: Optional[SlotSearchProposalOut] = None,
+    selection_proposal: Optional[SlotSelectionProposalOut] = None,
+) -> BernieStaffReviewPayload:
+    selected_slot = None
+    if selection_proposal is not None and selection_proposal.selected_candidate is not None:
+        selected_slot = _bernie_staff_review_slot_summary(
+            selection_proposal.selected_candidate
+        )
+
+    candidate_slots = []
+    if result == "candidate_selection_required" and search_proposal is not None:
+        candidate_slots = [
+            _bernie_staff_review_slot_summary(candidate)
+            for candidate in search_proposal.candidates
+        ]
+
+    confirmation_ready = (
+        result == "confirmation_ready"
+        and selection_proposal is not None
+        and selection_proposal.safe
+        and selection_proposal.create_proposal is not None
+    )
+    confirm_payload = None
+    confirm_endpoint = None
+    confirm_evidence: list[str] = []
+    if confirmation_ready:
+        confirm_endpoint = "/api/v1/appointments/proposals/create/confirm-bernie"
+        confirm_payload = BernieCreateProposalConfirmationIn(
+            confirmed=False,
+            selection_proposal=selection_proposal,
+            confirmed_warnings=[],
+        ).model_dump(mode="json")
+        confirm_evidence = list(BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE)
+
+    warning_summary = "No warnings or blocked issues."
+    if warnings or blocks:
+        warning_summary = (
+            f"{len(warnings)} warning(s), {len(blocks)} blocked issue(s)."
+        )
+    evidence_summaries = {
+        "blocked": "Blocked review payload; no confirm evidence is available.",
+        "candidate_selection_required": "Candidate slot summaries are review-only until staff selects one slot.",
+        "confirmation_ready": "Confirm payload carries slot-selection and create-proposal evidence for explicit staff approval.",
+    }
+    staff_actions = {
+        "blocked": "Review blocked issues before retrying; no booking can be confirmed from this payload.",
+        "candidate_selection_required": "Select one candidate slot before preparing confirmation evidence.",
+        "confirmation_ready": "Review the selected slot and submit the confirm payload only after explicit staff confirmation.",
+    }
+    return BernieStaffReviewPayload(
+        headline=summary,
+        status=result,
+        staff_action_required=staff_actions[result],
+        confirmation_ready=confirmation_ready,
+        selected_slot=selected_slot,
+        candidate_slots=candidate_slots,
+        warning_summary=warning_summary,
+        evidence_summary=evidence_summaries[result],
+        warnings=warnings,
+        blocks=blocks,
+        confirm_endpoint=confirm_endpoint,
+        confirm_payload=confirm_payload,
+        confirm_evidence=confirm_evidence,
+    )
+
+
 def _resolve_selected_candidate(
     body: SlotSelectionProposalIn,
     blocks: list[AppointmentProposalIssue],
@@ -1954,6 +2035,7 @@ def _bernie_supervised_blocked(
     selection_proposal: Optional[SlotSelectionProposalOut] = None,
     warnings: Optional[list[AppointmentProposalIssue]] = None,
 ) -> BernieSupervisedBookingOut:
+    effective_warnings = warnings or []
     return BernieSupervisedBookingOut(
         result="blocked",
         safe=False,
@@ -1963,7 +2045,15 @@ def _bernie_supervised_blocked(
         normalization=normalization,
         search_proposal=search_proposal,
         selection_proposal=selection_proposal,
-        warnings=warnings or [],
+        staff_review=_bernie_staff_review_payload(
+            result="blocked",
+            summary=summary,
+            warnings=effective_warnings,
+            blocks=blocks,
+            search_proposal=search_proposal,
+            selection_proposal=selection_proposal,
+        ),
+        warnings=effective_warnings,
         blocks=blocks,
     )
 
@@ -2027,17 +2117,25 @@ def propose_bernie_supervised_booking(
         or body.selected_candidate is not None
     )
     if not has_selection:
+        summary = (
+            f"{search_execution.summary} Select one candidate before "
+            "preparing create-proposal evidence."
+        )
         return BernieSupervisedBookingOut(
             result="candidate_selection_required",
             safe=True,
             requires_confirmation=False,
             autonomy_tier="execute_with_report",
-            summary=(
-                f"{search_execution.summary} Select one candidate before "
-                "preparing create-proposal evidence."
-            ),
+            summary=summary,
             normalization=normalization,
             search_proposal=search_proposal,
+            staff_review=_bernie_staff_review_payload(
+                result="candidate_selection_required",
+                summary=summary,
+                warnings=warnings,
+                blocks=blocks,
+                search_proposal=search_proposal,
+            ),
             warnings=warnings,
             blocks=blocks,
         )
@@ -2133,18 +2231,27 @@ def propose_bernie_supervised_booking(
             warnings=combined_warnings,
         )
 
+    summary = (
+        f"{search_execution.summary} {selection_proposal.summary} "
+        "Submit selection_proposal to confirm-bernie only after explicit staff confirmation."
+    )
     return BernieSupervisedBookingOut(
         result="confirmation_ready",
         safe=True,
         requires_confirmation=True,
         autonomy_tier="proposal",
-        summary=(
-            f"{search_execution.summary} {selection_proposal.summary} "
-            "Submit selection_proposal to confirm-bernie only after explicit staff confirmation."
-        ),
+        summary=summary,
         normalization=normalization,
         search_proposal=search_proposal,
         selection_proposal=selection_proposal,
+        staff_review=_bernie_staff_review_payload(
+            result="confirmation_ready",
+            summary=summary,
+            warnings=combined_warnings,
+            blocks=combined_blocks,
+            search_proposal=search_proposal,
+            selection_proposal=selection_proposal,
+        ),
         warnings=combined_warnings,
         blocks=combined_blocks,
     )

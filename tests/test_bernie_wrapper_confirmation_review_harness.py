@@ -214,6 +214,55 @@ def test_wrapper_confirmation_ready_evidence_confirms_exactly_one_write(
     assert audit.confirmed_warnings == EXPECTED_AUDIT_EVIDENCE
 
 
+def test_wrapper_staff_review_confirm_payload_confirms_after_explicit_approval(
+    client,
+    db,
+    gp_user,
+    practitioner,
+    patient,
+    schedule,
+    monkeypatch,
+):
+    _install_forbidden_ai_provider_guard(monkeypatch)
+    token = make_token(gp_user)
+    wrapper_resp = _post_wrapper(
+        client,
+        token,
+        _wrapper_body(
+            practitioner,
+            selected_candidate_index=0,
+            patient_id=str(patient.id),
+            reason="Sprint 48 staff review payload harness",
+        ),
+    )
+    assert wrapper_resp.status_code == 200, wrapper_resp.text
+    wrapper = wrapper_resp.json()
+    review = wrapper["staff_review"]
+    assert review["status"] == "confirmation_ready"
+    assert review["confirmation_ready"] is True
+    assert review["confirm_endpoint"] == CONFIRM_URL
+    assert review["confirm_evidence"] == EXPECTED_AUDIT_EVIDENCE
+    confirm_payload = review["confirm_payload"]
+    assert confirm_payload["confirmed"] is False
+    assert confirm_payload["selection_proposal"] == wrapper["selection_proposal"]
+    appointment_before, audit_before = _row_counts(db)
+
+    confirm_payload["confirmed"] = True
+    confirm_resp = client.post(
+        CONFIRM_URL,
+        json=confirm_payload,
+        headers=_auth(token),
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "confirmed_write"
+    assert data["audit_evidence"] == EXPECTED_AUDIT_EVIDENCE
+    assert db.query(Appointment).count() == appointment_before + 1
+    assert db.query(AppointmentAuditLog).count() == audit_before + 1
+
+
 def test_wrapper_confirmation_ready_but_confirmed_false_writes_nothing(
     client,
     db,

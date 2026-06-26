@@ -469,6 +469,29 @@ class SlotSelectionProposalOut(BaseModel):
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
 
 
+class BernieStaffReviewSlotSummary(BaseModel):
+    appointment_date: date
+    start_time_local: time
+    duration_minutes: int
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
+class BernieStaffReviewPayload(BaseModel):
+    headline: str
+    status: Literal["blocked", "candidate_selection_required", "confirmation_ready"]
+    staff_action_required: str
+    confirmation_ready: bool
+    selected_slot: Optional[BernieStaffReviewSlotSummary] = None
+    candidate_slots: list[BernieStaffReviewSlotSummary] = Field(default_factory=list)
+    warning_summary: str
+    evidence_summary: str
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    confirm_endpoint: Optional[str] = None
+    confirm_payload: Optional[dict[str, Any]] = None
+    confirm_evidence: list[str] = Field(default_factory=list)
+
+
 class BernieSupervisedBookingIn(BaseModel):
     """Typed deterministic intake for supervised Bernie booking proposals."""
     command: SlotSearchCommandIn
@@ -496,6 +519,7 @@ class BernieSupervisedBookingOut(BaseModel):
     normalization: SlotSearchCommandResult
     search_proposal: Optional[SlotSearchProposalOut] = None
     selection_proposal: Optional[SlotSelectionProposalOut] = None
+    staff_review: BernieStaffReviewPayload
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
 
