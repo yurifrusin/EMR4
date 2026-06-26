@@ -26,7 +26,9 @@ from app.schemas.appointments import (
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
     AppointmentAuditLogOut,
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
+    SlotSearchCommandIn, SlotSearchCommandResult,
 )
+from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
 
@@ -1585,6 +1587,7 @@ def propose_slot_search(
         if body.date_from == effective_to
         else f"{body.date_from.isoformat()} to {effective_to.isoformat()}"
     )
+
     summary = (
         f"Found {len(candidates)} candidate slot{'s' if len(candidates) != 1 else ''} "
         f"for {resolved_duration} min with {practitioner.first_name} {practitioner.last_name} "
@@ -1600,3 +1603,20 @@ def propose_slot_search(
         resolved_duration_minutes=resolved_duration,
         candidates=candidates,
     )
+
+
+@router.post("/proposals/slot-search/normalize", response_model=SlotSearchCommandResult)
+def normalize_slot_search_proposal_command(
+    body: SlotSearchCommandIn,
+    reference_date: date_type = Query(...),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Deterministically normalize a Bernie slot-search command without side effects.
+
+    The caller must supply reference_date explicitly so relative command tokens
+    such as "today" and "tomorrow" never depend on server wall-clock time. This
+    endpoint intentionally performs no DB lookup, slot search, LLM call, audit
+    write, or appointment mutation.
+    """
+    _ = current_user
+    return normalize_slot_search_command(body, reference_date=reference_date)
