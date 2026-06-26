@@ -130,6 +130,28 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 54: Bernie Dev Review Launch Affordance
+
+| Item | Value |
+|---|---|
+| Status | Queued; waiting for Antigravity plan |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Antigravity plan review |
+| Product Goal | Make the dev-gated Bernie review path easier to launch without hand-crafted full query URLs, while preserving hidden/no-call defaults |
+
+### Workstream DH - Bernie Dev Review Launch Affordance
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-bernie-dev-review-launch-affordance.md` |
+| Goal | Plan, then after approval add a tiny dev-only affordance for entering the existing Bernie live review path |
+| In Scope | Plan packet first; after approval `docs/diary` UI assets and `review/` harness checks as needed; affordance visible only with an explicit dev flag, route-intercepted launcher/review/confirm checks, default hidden/no-call proof, explicit approval gating, and asset version bump if runtime assets change |
+| Out of Scope | Backend routes/schemas, live autonomous booking, production default exposure, natural-language LLM parsing, real API writes in tests, taskpane, Command Centre, migrations, patient/resource admin, billing, SMS, broad diary redesign, and unrelated refactors |
+| Verification | Plan packet first; after approval JS syntax checks, deterministic Playwright route-intercepted checks, default-mode no-call/no-exposure checks, frontend version integrity if assets change, existing diary review harness where relevant, and `git diff --check` |
+| Status | Queued |
+
 ## Sprint 53: Bernie Dev-Mode Review Feature Flag
 
 | Item | Value |
