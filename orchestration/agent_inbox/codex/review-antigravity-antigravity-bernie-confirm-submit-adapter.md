@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-confirm-submit-adapter` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Reviewed, verified, and integrated. Scope stayed within diary smoke UI and deterministic review harness; Ariadne applied one bounded whitespace cleanup before protocol submit because Antigravity left the implementation dirty and unsubmitted.
+- Follow-up required: Future sprint can decide when to expose Bernie supervised review outside smoke/feature-gated mode; no live write path was enabled by this sprint.

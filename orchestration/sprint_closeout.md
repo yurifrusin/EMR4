@@ -8,58 +8,72 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 50: Bernie Supervised Review Live Adapter |
-| Integrated through | Smoke/feature-gated adapter from supervised-booking `staff_review` response into the diary Bernie review panel |
-| Status | Integrated, pushed, mirrored, audited, and closed |
+| Batch | Sprint 51: Bernie Supervised Confirm Submit Adapter |
+| Integrated through | Smoke/feature-gated explicit staff approval submit adapter for Bernie review confirmation payloads |
+| Status | Integrated locally; pending push, mirror realignment, and final audit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Extended the smoke-gated diary Bernie review panel with `bernie_review=live` adapter mode.
-- In smoke/live-adapter mode, the diary client posts deterministic dev input to `/api/v1/appointments/proposals/bernie/supervised-booking` and renders the returned `staff_review` payload.
-- Preserved all Sprint 49 fixture modes for `blocked`, `candidate_selection_required`, and `confirmation_ready`.
-- Kept real confirmation out of scope: the confirm button still simulates local approval only and does not post to confirm-Bernie.
-- Added route-intercepted Playwright checks for live-adapter blocked, candidate-selection, and confirmation-ready responses.
-- Added a deterministic guard that fails if the UI tries to call `/api/v1/appointments/proposals/create/confirm-bernie` during this sprint.
-- Bumped diary JS to `diary.js?v=106`; diary CSS remains `v=100`.
-- Antigravity implemented the live adapter on `antigravity/current`.
+- Added a smoke/feature-gated Bernie confirmation submit adapter behind `smoke=true&bernie_confirm_adapter=true`.
+- In the gated mode only, the confirmation-ready Bernie review panel posts the existing `staff_review.confirm_payload` to `staff_review.confirm_endpoint` after the staff approval checkbox is ticked and the confirm button is clicked.
+- The submitted payload is cloned with `confirmed: true`; the source payload remains a review payload until explicit staff action.
+- Preserved the existing simulated approval behaviour for ordinary smoke review modes that do not opt into the confirm adapter.
+- Added success and error display handling, including retry after a route-intercepted failure.
+- Added deterministic Playwright checks for successful submit payload shape, no submit before approval, error/retry behaviour, blocked/candidate states, and existing non-write review paths.
+- Bumped diary assets to `diary.css?v=101` and `diary.js?v=107`.
+- Antigravity implemented the UI adapter on `antigravity/current`; Ariadne applied a bounded whitespace cleanup after Antigravity left the implementation dirty and unsubmitted.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required before continuing.
-Ariadne verified this as a smoke/feature-gated UI adapter with route-intercepted deterministic Playwright tests. It is not active in the normal live diary without `smoke=true&bernie_review=live`, so there is no live staff workflow for Yuri to manually review yet.
+Ariadne verified this as a smoke/feature-gated UI adapter with route-intercepted deterministic Playwright tests. It is not active in the normal live diary without `smoke=true&bernie_confirm_adapter=true`, so there is no ordinary staff workflow or live database write for Yuri to manually review yet.
 
 ## Not Required Before Moving On
 
-- No manual live API test is required; tests intercept the supervised-booking endpoint and prove the UI consumes the expected response shape.
+- No manual live API test is required; tests intercept the confirm-Bernie endpoint and prove the UI sends the expected explicit-confirm payload only after approval.
 - No manual live UI review is required; the adapter is smoke/feature-gated and covered by deterministic Playwright checks.
 - No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, live diary booking workflow, resource admin, billing, SMS, or security-console action is required.
 - No user decision is needed before the next narrow Bernie slice.
 
 ## Known Follow-Up
 
-- The next Bernie slice can introduce a deliberately gated staff confirmation submit path, but it must keep `confirmed=false` until explicit approval and should use route-intercepted tests before any live manual review.
 - A later product decision is still needed before enabling the Bernie review adapter in ordinary non-smoke diary mode.
+- A later live-adapter sprint can connect the supervised booking response and explicit confirmation submit path end-to-end in normal dev mode, but only after preserving visible staff approval and route/audit safety.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 - The known moderate Dependabot alert remains outside this sprint.
 
 ## Verification
 
-- Ariadne inspected the Antigravity diff against `origin/master`; scope was limited to diary smoke/live-adapter JavaScript, deterministic review harness tests, and orchestration packets.
+- Ariadne inspected the Antigravity diff against `origin/master`; scope was limited to diary smoke confirm-adapter JavaScript/CSS/HTML, deterministic review harness tests, and orchestration packets.
 - `node --check docs\diary\diary.js` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; local/HEAD diary assets are `diary.css?v=100` and `diary.js?v=106`, deployed Pages still showed `diary.js?v=105` before push.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 26 passed.
-- Source/diff review confirmed the adapter posts only to supervised-booking under `smoke=true&bernie_review=live`.
-- Route-intercepted Playwright checks prove live-adapter rendering for blocked, candidate-selection, and confirmation-ready payloads.
-- The confirmation-ready test registers a failing route for `/api/v1/appointments/proposals/create/confirm-bernie`, proving the smoke adapter does not call the write endpoint.
-- `git diff --check origin/master...origin/antigravity/current` -> passed.
-- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at Sprint 50 closeout commit `d8cc5b9`; only the known dirty stale `codex/time-model` disposable worktree remains.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; local/HEAD diary assets are `diary.css?v=101` and `diary.js?v=107`, deployed Pages still showed the previous versions before push.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 29 passed.
+- Source/diff review confirmed the adapter posts to confirm-Bernie only under `smoke=true&bernie_confirm_adapter=true`.
+- Existing route-intercepted tests still prove the prior Bernie review and live-adapter paths do not call confirm-Bernie when the confirm adapter flag is absent.
+- New route-intercepted Playwright checks prove no submit before approval, exact payload shape with `confirmed: true`, success state, error/retry state, and no confirm controls in blocked/candidate states.
+- `git diff --check` -> first reported one blank line at EOF in `review/test_diary_smoke.py`; Ariadne removed it and reran `git diff --check` successfully.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-After push/mirror/audit, the next useful slice is a supervised confirmation-submit adapter behind the same gate, still with route-intercepted tests and no normal-mode exposure until explicitly approved.
+After push/mirror/audit, the next useful slice is a normal-dev-mode Bernie supervised review wiring decision: either expose the live review/confirm adapter to dev staff behind a deliberate feature flag, or add a final deterministic end-to-end UI harness proving supervised booking -> review -> explicit confirmation remains safe before ordinary-mode exposure.
 
+
+## Previous Closeout - Sprint 50
+
+Sprint 50 added the smoke-gated diary Bernie review live adapter.
+
+- Extended the smoke-gated diary Bernie review panel with `bernie_review=live` adapter mode.
+- In smoke/live-adapter mode, the diary client posts deterministic dev input to `/api/v1/appointments/proposals/bernie/supervised-booking` and renders the returned `staff_review` payload.
+- Preserved all Sprint 49 fixture modes for `blocked`, `candidate_selection_required`, and `confirmation_ready`.
+- Kept real confirmation out of scope: the confirm button still simulated local approval only and did not post to confirm-Bernie.
+- Added route-intercepted Playwright checks for live-adapter blocked, candidate-selection, and confirmation-ready responses.
+- Added a deterministic guard that fails if the UI tries to call `/api/v1/appointments/proposals/create/confirm-bernie` during Sprint 50.
+- Bumped diary JS to `diary.js?v=106`; diary CSS remained `v=100`.
+- Antigravity implemented the live adapter on `antigravity/current`.
+
+Residual user review/testing after Sprint 50 closeout: none required. Ariadne verified it as a smoke/feature-gated UI adapter with route-intercepted deterministic Playwright tests.
 
 ## Previous Closeout - Sprint 49
 

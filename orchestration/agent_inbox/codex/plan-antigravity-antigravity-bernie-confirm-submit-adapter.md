@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-confirm-submit-adapter` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 03:37 +1000 |
 | Source HEAD | `7ae4f07` |
 
@@ -56,6 +56,6 @@ Backend routes, schema changes, database migrations, LLM parsing, normal non-smo
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted. Plan was narrow, smoke/feature-gated, and limited to diary review UI plus deterministic Playwright checks.
+- Required changes before implementation: None.
+- Approved to proceed: yes
