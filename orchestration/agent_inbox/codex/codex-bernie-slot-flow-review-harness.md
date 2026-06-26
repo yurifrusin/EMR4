@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-slot-flow-review-harness` |
 | Branch | `codex/bernie-slot-flow-review-harness` |
-| Status | queued |
+| Status | submitted |
 | Created | 442f81f |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-slot-flow-review-harness --summary "Short plan summary"` |
@@ -92,6 +92,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/plan-codex-codex-bernie-slot-flow-review-harness.md`; `orchestration/agent_inbox/codex/codex-bernie-slot-flow-review-harness.md`.
+- Verification run: Plan-gate only; no production code or tests touched. Ran packet intake via `python scripts\agent_worktrees.py handin --agent codex` and inspected required coordination files.
+- Remaining risks: Implementation not started; awaiting explicit `complete sprint task` approval. Future implementation must prove no appointment/audit writes and no LLM/provider calls.
