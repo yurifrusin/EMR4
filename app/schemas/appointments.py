@@ -469,6 +469,37 @@ class SlotSelectionProposalOut(BaseModel):
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
 
 
+class BernieSupervisedBookingIn(BaseModel):
+    """Typed deterministic intake for supervised Bernie booking proposals."""
+    command: SlotSearchCommandIn
+    reference_date: date
+    selected_candidate_index: Optional[int] = Field(default=None, ge=0)
+    selected_candidate: Optional[SlotCandidate] = None
+    practitioner_id: Optional[uuid.UUID] = None
+    appointment_type_id: Optional[uuid.UUID] = None
+    location_id: Optional[uuid.UUID] = None
+    patient_id: Optional[uuid.UUID] = None
+    patient_name_provisional: Optional[str] = None
+    reason: Optional[str] = None
+    notes: Optional[str] = None
+    booked_via: BookingChannel = BookingChannel.Receptionist
+
+
+class BernieSupervisedBookingOut(BaseModel):
+    """Discriminated non-mutating response for supervised Bernie booking intake."""
+    intent: Literal["bernie_supervised_booking"] = "bernie_supervised_booking"
+    result: Literal["blocked", "candidate_selection_required", "confirmation_ready"]
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["execute_with_report", "proposal", "blocked"]
+    summary: str
+    normalization: SlotSearchCommandResult
+    search_proposal: Optional[SlotSearchProposalOut] = None
+    selection_proposal: Optional[SlotSelectionProposalOut] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
 class BernieCreateProposalConfirmationIn(BaseModel):
     """Explicit staff confirmation for supervised Bernie create-proposal evidence."""
     confirmed: bool = False

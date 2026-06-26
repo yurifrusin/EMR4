@@ -28,6 +28,7 @@ from app.schemas.appointments import (
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
     SlotSearchCommandIn, SlotSearchCommandResult, SlotSearchCommandExecutionOut,
     SlotSelectionProposalIn, SlotSelectionProposalOut,
+    BernieSupervisedBookingIn, BernieSupervisedBookingOut,
     BernieCreateProposalConfirmationIn,
 )
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
@@ -1942,6 +1943,210 @@ def propose_slot_selection_for_create(
         create_proposal=create_proposal,
         warnings=warnings,
         blocks=blocks,
+    )
+
+
+def _bernie_supervised_blocked(
+    normalization: SlotSearchCommandResult,
+    summary: str,
+    blocks: list[AppointmentProposalIssue],
+    search_proposal: Optional[SlotSearchProposalOut] = None,
+    selection_proposal: Optional[SlotSelectionProposalOut] = None,
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+) -> BernieSupervisedBookingOut:
+    return BernieSupervisedBookingOut(
+        result="blocked",
+        safe=False,
+        requires_confirmation=True,
+        autonomy_tier="blocked",
+        summary=summary,
+        normalization=normalization,
+        search_proposal=search_proposal,
+        selection_proposal=selection_proposal,
+        warnings=warnings or [],
+        blocks=blocks,
+    )
+
+
+@router.post(
+    "/proposals/bernie/supervised-booking",
+    response_model=BernieSupervisedBookingOut,
+)
+def propose_bernie_supervised_booking(
+    body: BernieSupervisedBookingIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Compose deterministic Bernie booking proposal steps without side effects.
+
+    This wrapper is a typed intake/proposal surface for future Bernie UI/runtime
+    callers. It normalizes a command, searches slots only when normalization is
+    safe, and optionally converts a supervised selected candidate into existing
+    create-proposal evidence. It never confirms, creates, audits, calls LLMs, or
+    invokes provider integrations.
+    """
+    normalization = normalize_slot_search_command(
+        body.command,
+        reference_date=body.reference_date,
+    )
+    if not normalization.safe or normalization.constraint is None:
+        return _bernie_supervised_blocked(
+            normalization=normalization,
+            summary=normalization.summary,
+            blocks=normalization.blocks,
+            warnings=normalization.warnings,
+        )
+
+    search_proposal = _build_slot_search_proposal(
+        normalization.constraint,
+        db,
+        current_user.practice_id,
+    )
+    warnings = [*normalization.warnings, *search_proposal.warnings]
+    blocks = [*normalization.blocks, *search_proposal.blocks]
+
+    if not search_proposal.safe:
+        return _bernie_supervised_blocked(
+            normalization=normalization,
+            summary=f"{normalization.summary} {search_proposal.summary}",
+            blocks=blocks,
+            search_proposal=search_proposal,
+            warnings=warnings,
+        )
+
+    search_execution = SlotSearchCommandExecutionOut(
+        safe=True,
+        normalization=normalization,
+        proposal=search_proposal,
+        warnings=warnings,
+        blocks=blocks,
+        summary=f"{normalization.summary} {search_proposal.summary}",
+    )
+    has_selection = (
+        body.selected_candidate_index is not None
+        or body.selected_candidate is not None
+    )
+    if not has_selection:
+        return BernieSupervisedBookingOut(
+            result="candidate_selection_required",
+            safe=True,
+            requires_confirmation=False,
+            autonomy_tier="execute_with_report",
+            summary=(
+                f"{search_execution.summary} Select one candidate before "
+                "preparing create-proposal evidence."
+            ),
+            normalization=normalization,
+            search_proposal=search_proposal,
+            warnings=warnings,
+            blocks=blocks,
+        )
+
+    if (
+        body.patient_id is None
+        and not body.patient_name_provisional
+        and normalization.constraint.patient_id is None
+    ):
+        patient_block = _selection_block(
+            "patient_identity_required",
+            "patient_id or patient_name_provisional is required before preparing create-proposal evidence.",
+        )
+        return _bernie_supervised_blocked(
+            normalization=normalization,
+            summary="Cannot prepare create proposal from selected slot. See blocked issues.",
+            blocks=[*blocks, patient_block],
+            search_proposal=search_proposal,
+            warnings=warnings,
+        )
+
+    selection_body = SlotSelectionProposalIn(
+        search_execution=search_execution,
+        selected_candidate_index=body.selected_candidate_index,
+        selected_candidate=body.selected_candidate,
+        practitioner_id=body.practitioner_id,
+        appointment_type_id=body.appointment_type_id,
+        location_id=body.location_id,
+        patient_id=body.patient_id,
+        patient_name_provisional=body.patient_name_provisional,
+        reason=body.reason,
+        notes=body.notes,
+        booked_via=body.booked_via,
+    )
+    selection_blocks: list[AppointmentProposalIssue] = []
+    selected_candidate = _resolve_selected_candidate(selection_body, selection_blocks)
+    practitioner_id, appointment_type_id, location_id, patient_id = _resolve_selection_context(
+        selection_body,
+        selection_blocks,
+    )
+
+    if selected_candidate is None or selection_blocks:
+        selection_proposal = _block_slot_selection(selection_blocks, selected_candidate)
+        return _bernie_supervised_blocked(
+            normalization=normalization,
+            summary=selection_proposal.summary,
+            blocks=[*blocks, *selection_proposal.blocks],
+            search_proposal=search_proposal,
+            selection_proposal=selection_proposal,
+            warnings=[*warnings, *selection_proposal.warnings],
+        )
+
+    create_body = AppointmentCreate(
+        patient_id=patient_id,
+        patient_name_provisional=body.patient_name_provisional,
+        practitioner_id=practitioner_id,
+        appointment_type_id=appointment_type_id,
+        location_id=location_id,
+        appointment_date=selected_candidate.appointment_date,
+        start_time_local=selected_candidate.start_time_local,
+        duration_minutes=selected_candidate.duration_minutes,
+        reason=body.reason,
+        notes=body.notes,
+        booked_via=body.booked_via,
+    )
+    create_proposal = _build_create_appointment_proposal(
+        create_body,
+        db,
+        current_user.practice_id,
+    )
+    selection_proposal_warnings = [*selected_candidate.warnings, *create_proposal.warnings]
+    selection_proposal_blocks = [*create_proposal.blocks]
+    selection_proposal = SlotSelectionProposalOut(
+        safe=create_proposal.safe,
+        requires_confirmation=True,
+        autonomy_tier="proposal" if create_proposal.safe else "blocked",
+        summary=f"Prepared create proposal from selected slot. {create_proposal.summary}",
+        selected_candidate=selected_candidate,
+        create_proposal=create_proposal,
+        warnings=selection_proposal_warnings,
+        blocks=selection_proposal_blocks,
+    )
+    combined_warnings = [*warnings, *selection_proposal.warnings]
+    combined_blocks = [*blocks, *selection_proposal.blocks]
+
+    if not selection_proposal.safe:
+        return _bernie_supervised_blocked(
+            normalization=normalization,
+            summary=selection_proposal.summary,
+            blocks=combined_blocks,
+            search_proposal=search_proposal,
+            selection_proposal=selection_proposal,
+            warnings=combined_warnings,
+        )
+
+    return BernieSupervisedBookingOut(
+        result="confirmation_ready",
+        safe=True,
+        requires_confirmation=True,
+        autonomy_tier="proposal",
+        summary=(
+            f"{search_execution.summary} {selection_proposal.summary} "
+            "Submit selection_proposal to confirm-bernie only after explicit staff confirmation."
+        ),
+        normalization=normalization,
+        search_proposal=search_proposal,
+        selection_proposal=selection_proposal,
+        warnings=combined_warnings,
+        blocks=combined_blocks,
     )
 
 
