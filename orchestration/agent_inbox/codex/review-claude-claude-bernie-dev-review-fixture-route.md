@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-dev-review-fixture-route` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -70,5 +70,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: integrated. Ariadne inspected the diff, required a recovery correction for route path/helper alignment before submission, then verified the final backend-only fixture route and focused/adjacent Bernie tests.
+- Follow-up required: wire the diary dev launcher/review panel to consume this backend fixture route in a later frontend sprint; no Yuri-only review is required for this backend fixture source.

@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-dev-review-fixture-route` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 04:47 +1000 |
 | Source HEAD | `de46e27` |
 
@@ -44,6 +44,6 @@ In dev, GET /api/v1/appointments/dev/bernie-review-fixtures returns three determ
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: accepted after Ariadne specified the keyed-by-state response shape and exact helper-aligned confirmation semantics.
+- Required changes before implementation: default response keyed by `blocked`, `candidate_selection_required`, and `confirmation_ready`; optional `?state=` returns one keyed payload; use the live confirm-Bernie route and keep `confirm_payload.confirmed` false.
+- Approved to proceed: yes; implemented and integrated in Sprint 55.
