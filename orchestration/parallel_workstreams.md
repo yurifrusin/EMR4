@@ -131,6 +131,28 @@ After every fully integrated batch, Codex updates
 - recommended next direction
 
 
+## Sprint 44: Bernie Confirm Create-Proposal Contract
+
+| Item | Value |
+|---|---|
+| Status | Queued; waiting for Codex worker plan |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Codex worker plan review |
+| Product Goal | Add the explicit supervised backend bridge that turns approved Bernie create-proposal evidence into exactly one appointment write with bounded audit evidence |
+
+### Workstream CA - Bernie Confirm Create-Proposal Contract
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker/subagent |
+| Branch | `codex/bernie-confirm-create-proposal` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-bernie-confirm-create-proposal-contract.md` |
+| Goal | Plan, then after approval add a narrow backend confirmation/write contract for supervised Bernie slot-selection/create-proposal evidence |
+| In Scope | Plan packet first; after approval appointment router/schema/tests as needed; explicit confirmation, practice/auth/conflict checks, exactly-one appointment write on success, bounded audit evidence, no LLM/provider calls, and reuse of Sprint 43 harness as regression protection |
+| Out of Scope | Diary UI, taskpane, Command Centre, Gemini/LLM parsing, autonomous Bernie runtime, direct natural-language execution, SMS, billing, resource admin, migrations unless strictly unavoidable, broad appointment redesign, broad audit redesign, and unrelated test hygiene |
+| Verification | Plan packet first; after approval py_compile touched Python, focused confirmation/write pytest, Sprint 43 flow harness, adjacent slot-selection/create-proposal tests, no-write proof for failed confirmations, exactly-one-write/audit proof for success, no-LLM proof, and `git diff --check` |
+| Status | Queued |
+
 ## Sprint 43: Bernie Slot Flow Review Harness
 
 | Item | Value |
