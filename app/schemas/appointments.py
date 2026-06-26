@@ -318,3 +318,49 @@ class PractitionerScheduleOut(BaseModel):
     slot_duration_minutes: int
 
     model_config = {"from_attributes": True}
+
+
+# ── Bernie slot-search proposal ───────────────────────────────────────────────
+
+class SlotSearchProposalIn(BaseModel):
+    practitioner_id: uuid.UUID
+    date_from: date
+    date_to: Optional[date] = None
+    duration_minutes: Optional[int] = Field(default=None, gt=0, le=480)
+    appointment_type_id: Optional[uuid.UUID] = None
+    location_id: Optional[uuid.UUID] = None
+    earliest_time: Optional[time] = None
+    latest_time: Optional[time] = None
+    patient_id: Optional[uuid.UUID] = None
+    limit: int = Field(default=20, gt=0, le=100)
+
+    @model_validator(mode="after")
+    def validate_date_range(self):
+        effective_to = self.date_to if self.date_to is not None else self.date_from
+        if effective_to < self.date_from:
+            raise ValueError("date_to must not be before date_from")
+        delta = (effective_to - self.date_from).days
+        if delta > 13:
+            raise ValueError("date range must not exceed 14 days")
+        return self
+
+
+class SlotCandidate(BaseModel):
+    appointment_date: date
+    start_time: datetime
+    end_time: datetime
+    start_time_local: time
+    duration_minutes: int
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
+class SlotSearchProposalOut(BaseModel):
+    intent: Literal["search_slots"] = "search_slots"
+    safe: bool
+    requires_confirmation: bool = False
+    autonomy_tier: Literal["execute_with_report", "blocked"]
+    summary: str
+    resolved_duration_minutes: Optional[int] = None
+    candidates: list[SlotCandidate] = Field(default_factory=list)
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
