@@ -130,6 +130,28 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 53: Bernie Dev-Mode Review Feature Flag
+
+| Item | Value |
+|---|---|
+| Status | Queued; waiting for Antigravity plan |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Antigravity plan review |
+| Product Goal | Expose the supervised Bernie review/confirm path in ordinary diary dev mode behind an explicit opt-in flag without changing production default behaviour |
+
+### Workstream DG - Bernie Dev-Mode Review Feature Flag
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-bernie-dev-review-feature-flag.md` |
+| Goal | Plan, then after approval add a narrow dev-only opt-in path for the existing supervised Bernie review/confirm flow outside smoke mode |
+| In Scope | Plan packet first; after approval `docs/diary` UI assets and `review/` harness checks as needed; explicit query/feature flag gate, default non-smoke no-exposure/no-call proof, route-intercepted supervised-booking and confirm-Bernie proof, explicit staff approval gating, and asset version bump if runtime assets change |
+| Out of Scope | Backend routes/schemas, live autonomous booking, production default exposure, natural-language LLM parsing, real API writes in tests, taskpane, Command Centre, migrations, patient/resource admin, billing, SMS, broad diary redesign, and unrelated refactors |
+| Verification | Plan packet first; after approval JS syntax checks, deterministic Playwright route-intercepted checks, default-mode no-call/no-exposure checks, frontend version integrity if assets change, existing diary review harness where relevant, and `git diff --check` |
+| Status | Queued |
+
 ## Sprint 47: Bernie Wrapper Confirmation Review Harness
 
 | Item | Value |

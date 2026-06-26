@@ -52,7 +52,7 @@ Ariadne verified this as a deterministic review-harness-only sprint. It changes 
 
 ## Recommended Next Direction
 
-The next useful slice is to expose the supervised Bernie review/confirm path in ordinary dev mode behind a deliberate feature flag, still preserving explicit staff approval, route/audit safety, and deterministic tests before any live manual review.
+Sprint 53 is dispatched to Antigravity: expose the supervised Bernie review/confirm path in ordinary dev mode behind a deliberate feature flag, still preserving explicit staff approval, route/audit safety, and deterministic tests before any live manual review.
 
 
 ## Previous Closeout - Sprint 51
