@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-confirmed-flow-review-harness` |
 | Branch | `codex/bernie-confirmed-flow-review-harness` |
-| Status | queued |
+| Status | submitted |
 | Created | 08fe298 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-confirmed-flow-review-harness --summary "Short plan summary"` |
@@ -93,5 +93,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/codex-bernie-confirmed-flow-review-harness.md` (status/completion notes only)
+  - `orchestration/agent_inbox/codex/plan-codex-codex-bernie-confirmed-flow-review-harness.md`
 - Verification run:
+  - `python scripts\agent_worktrees.py handin` from `C:\Users\YuriFrusin\Documents\EMR4-worktrees\codex-bernie-confirmed-flow-review-harness` synced to `54314fa` but could not infer agent from branch; followed explicit packet.
+  - `python scripts\agent_worktrees.py claim --agent codex --task codex-bernie-confirmed-flow-review-harness --status in_progress` succeeded.
+  - `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-confirmed-flow-review-harness ...` succeeded and wrote the plan packet.
+  - No production/test verification run yet; plan-only gate forbids implementation before `complete sprint task`.
 - Remaining risks:
+  - Awaiting Ariadne plan review and explicit `complete sprint task` before editing tests or production code.
