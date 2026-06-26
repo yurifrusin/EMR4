@@ -66,7 +66,7 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 
 ## Recommended Next Direction
 
-Continue with the next narrow Programme 2D audit/review slice after push/mirror/audit if no Yuri-only tests remain.
+Sprint 38 has been dispatched as the next Programme 2D slice: a Bernie-safe slot-search proposal contract plus deterministic read-only preview harness. Plan gate is pending.
 
 
 ## Previous Closeout - Sprint 36
