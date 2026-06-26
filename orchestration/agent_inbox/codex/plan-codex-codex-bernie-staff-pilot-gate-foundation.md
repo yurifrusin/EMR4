@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-staff-pilot-gate-foundation` |
 | Source Task | `codex-bernie-staff-pilot-gate-foundation` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 08:46 +1000 |
 | Source HEAD | `fc4e6c3` |
 
@@ -44,6 +44,6 @@ Main ambiguity is whether Ariadne prefers the eligibility signal as a standalone
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne; implementation released to Codex worker.
+- Required changes before implementation: None.
+- Approved to proceed: yes

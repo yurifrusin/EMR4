@@ -8,6 +8,54 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 59: Bernie Staff Pilot Gate Foundation |
+| Integrated through | Default-off authenticated backend eligibility gate for future staff-visible Bernie pilot |
+| Status | Integrated locally and verified; pending push/mirror/audit |
+| Last updated | 2026-06-27 |
+
+## What Changed
+
+- Added default-off non-PHI config settings for a Bernie staff pilot gate: `bernie_staff_pilot_enabled`, `bernie_staff_pilot_practice_ids`, and `bernie_staff_pilot_user_ids`.
+- Added `app/services/bernie_pilot_gate.py`, a pure deterministic eligibility helper for the `bernie_staff_review` surface.
+- Added authenticated `GET /api/v1/appointments/bernie/pilot-eligibility` under existing appointment staff roles.
+- Added `BerniePilotEligibilityOut` response schema with explicit `enabled`, `eligible`, `reason`, `practice_allowed`, and `user_allowed` fields.
+- Added focused tests proving default-off behavior, allowlist scoping, malformed allowlist fail-closed behavior, auth requirement, no appointment/audit writes, and no provider/LLM/mutation calls.
+- No frontend UI exposure, dev query behavior change, appointment mutation, audit write, migration, or LLM/provider call was added.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified this as a backend/config-only safety gate with focused deterministic tests. There is no visible UI change yet and no live write path to manually exercise.
+
+## Not Required Before Moving On
+
+- No manual live UI test is required; no diary/taskpane/Command Centre assets changed.
+- No manual API write test is required; the new endpoint is read-only and tests prove no appointment/audit writes.
+- No database migration or data repair is required.
+- No GCP/Gemini, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
+
+## Known Follow-Up
+
+- Next frontend sprint should consume `/api/v1/appointments/bernie/pilot-eligibility` before showing Bernie review outside explicit dev/query mode.
+- The known moderate Dependabot alert remains outside this sprint.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+
+## Verification
+
+- Ariadne reviewed Copernicus's Codex-worker plan and implementation packets and inspected the final branch diff against `master`.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\config.py app\services\bernie_pilot_gate.py app\routers\appointments.py app\schemas\appointments.py` -> passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_staff_pilot_gate.py tests\test_bernie_dev_fixtures.py tests\test_bernie_supervised_booking_wrapper.py -q --tb=short -p no:randomly` -> 31 passed.
+- `git diff --check` -> passed.
+- `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
+
+## Recommended Next Direction
+
+Proceed with a narrow frontend pilot-gating sprint: consume the backend eligibility endpoint and show Bernie review outside dev/query mode only for eligible staff/practices, still non-default and explicitly labelled as a pilot.
+
+
+## Previous Closeout - Sprint 58
+| Item | Value |
+|---|---|
 | Batch | Sprint 58: Bernie Dev Selector Help Affordance |
 | Integrated through | Dev-only explanatory help for Bernie fixture-state selector |
 | Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
@@ -54,7 +102,6 @@ Ariadne verified this as an explicit dev/query-gated explanatory affordance with
 ## Recommended Next Direction
 
 Next sprint should likely shift from dev-only review tooling back toward product behavior: decide whether Bernie review should remain dev/query-only for a little longer, or start a narrow staff-visible non-default pilot surface with explicit safety gating.
-
 
 ## Previous Closeout - Sprint 55
 

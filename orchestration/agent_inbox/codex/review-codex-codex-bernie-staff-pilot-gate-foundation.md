@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-staff-pilot-gate-foundation` |
 | Source Task | `codex-bernie-staff-pilot-gate-foundation` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated by Ariadne after code inspection and focused verification.
+- Follow-up required: Later frontend sprint should consume `/api/v1/appointments/bernie/pilot-eligibility` before showing Bernie review outside explicit dev/query mode.
