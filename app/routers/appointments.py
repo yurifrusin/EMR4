@@ -25,6 +25,7 @@ from app.schemas.appointments import (
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
     AppointmentAuditLogOut,
+    SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -1353,6 +1354,37 @@ def propose_delete_appointment(
 
 # ── Availability / Slot Generation ───────────────────────────────────────────
 
+def _resolve_day_schedule(
+    db: Session,
+    practitioner_id: uuid.UUID,
+    target_date: date_type,
+) -> Optional[tuple[time, time, int]]:
+    """Return (start_time, end_time, slot_minutes) for practitioner on target_date.
+
+    Returns None when the practitioner has no schedule or an unavailability override.
+    """
+    override = db.query(ScheduleOverride).filter(
+        ScheduleOverride.practitioner_id == practitioner_id,
+        ScheduleOverride.date == target_date,
+    ).first()
+
+    if override and override.is_unavailable:
+        return None
+
+    day_of_week = target_date.weekday()
+    schedule = db.query(PractitionerSchedule).filter(
+        PractitionerSchedule.practitioner_id == practitioner_id,
+        PractitionerSchedule.day_of_week == day_of_week,
+    ).first()
+
+    if not schedule:
+        return None
+
+    start_t = override.override_start if (override and override.override_start) else schedule.start_time
+    end_t = override.override_end if (override and override.override_end) else schedule.end_time
+    return start_t, end_t, schedule.slot_duration_minutes
+
+
 @router.get("/slots/{practitioner_id}", response_model=list[ScheduleSlot])
 def get_available_slots(
     practitioner_id: uuid.UUID,
@@ -1370,30 +1402,12 @@ def get_available_slots(
 
     practice_tz = _practice_zoneinfo(db, current_user.practice_id)
     target_date = _as_practice_local(date, practice_tz).date()
-    day_of_week = target_date.weekday()  # 0=Mon
 
-    # Check for override on this date
-    override = db.query(ScheduleOverride).filter(
-        ScheduleOverride.practitioner_id == practitioner_id,
-        ScheduleOverride.date == target_date,
-    ).first()
-
-    if override and override.is_unavailable:
+    day_schedule = _resolve_day_schedule(db, practitioner_id, target_date)
+    if day_schedule is None:
         return []
 
-    # Get base schedule for this day
-    schedule = db.query(PractitionerSchedule).filter(
-        PractitionerSchedule.practitioner_id == practitioner_id,
-        PractitionerSchedule.day_of_week == day_of_week,
-    ).first()
-
-    if not schedule:
-        return []
-
-    start_t = override.override_start if (override and override.override_start) else schedule.start_time
-    end_t = override.override_end if (override and override.override_end) else schedule.end_time
-    slot_mins = schedule.slot_duration_minutes
-
+    start_t, end_t, slot_mins = day_schedule
     day_start = datetime.combine(target_date, start_t)
     day_end = datetime.combine(target_date, end_t)
 
@@ -1425,3 +1439,164 @@ def get_available_slots(
         current += timedelta(minutes=slot_mins)
 
     return slots
+
+
+@router.post("/proposals/slot-search", response_model=SlotSearchProposalOut)
+def propose_slot_search(
+    body: SlotSearchProposalIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Non-mutating candidate slot search for future Bernie/reception use.
+
+    Evaluates practitioner schedule, existing bookings, break overlaps, and
+    optional time-of-day and location constraints without writing appointments
+    or audit rows. Returns ranked candidate slots for staff review.
+    autonomy_tier='execute_with_report' means the search result may be presented
+    directly; a booking still requires POST /proposals/create + confirmation.
+    """
+    practice_id = current_user.practice_id
+
+    practitioner = db.query(Practitioner).filter(
+        Practitioner.id == body.practitioner_id,
+        Practitioner.practice_id == practice_id,
+    ).first()
+    if not practitioner:
+        raise HTTPException(status_code=404, detail="Practitioner not found")
+
+    if body.appointment_type_id is not None:
+        _ensure_appointment_type(body.appointment_type_id, practice_id, db)
+
+    if body.location_id is not None:
+        _ensure_location(body.location_id, practice_id, db)
+
+    if body.patient_id is not None:
+        _ensure_patient(body.patient_id, practice_id, db)
+
+    blocks: list[AppointmentProposalIssue] = []
+
+    # Resolve duration: explicit > appointment type default
+    resolved_duration: Optional[int] = body.duration_minutes
+    if resolved_duration is None and body.appointment_type_id is not None:
+        resolved_duration = (
+            db.query(AppointmentType.default_duration)
+            .filter(AppointmentType.id == body.appointment_type_id)
+            .scalar()
+        )
+
+    if resolved_duration is None:
+        blocks.append(AppointmentProposalIssue(
+            code="missing_duration",
+            severity="blocked",
+            message=(
+                "duration_minutes is required when no appointment_type_id is supplied "
+                "or the type has no default duration."
+            ),
+        ))
+
+    effective_to = body.date_to if body.date_to is not None else body.date_from
+
+    if blocks:
+        return SlotSearchProposalOut(
+            safe=False,
+            autonomy_tier="blocked",
+            summary="Cannot search: missing required constraints.",
+            resolved_duration_minutes=resolved_duration,
+            blocks=blocks,
+        )
+
+    practice_tz = _practice_zoneinfo(db, practice_id)
+    candidates: list[SlotCandidate] = []
+    current_date = body.date_from
+
+    while current_date <= effective_to and len(candidates) < body.limit:
+        day_schedule = _resolve_day_schedule(db, body.practitioner_id, current_date)
+        if day_schedule is None:
+            current_date += timedelta(days=1)
+            continue
+
+        sched_start, sched_end, slot_mins = day_schedule
+        day_start = datetime.combine(current_date, sched_start)
+        day_end = datetime.combine(current_date, sched_end)
+
+        slot_start = day_start
+        while slot_start + timedelta(minutes=resolved_duration) <= day_end:
+            slot_time_local = slot_start.time()
+
+            # Apply optional time-of-day window
+            if body.earliest_time is not None and slot_time_local < body.earliest_time:
+                slot_start += timedelta(minutes=slot_mins)
+                continue
+            if body.latest_time is not None and slot_time_local >= body.latest_time:
+                break
+
+            conflict = _find_conflicting_appointment(
+                db,
+                practice_id,
+                body.practitioner_id,
+                current_date,
+                slot_time_local,
+                resolved_duration,
+                location_id=body.location_id,
+            )
+
+            if conflict is None:
+                # Slot is free — check for break overlaps (soft warning)
+                break_labels = _get_break_overlaps(
+                    db,
+                    practice_id,
+                    body.practitioner_id,
+                    current_date,
+                    slot_time_local,
+                    resolved_duration,
+                    location_id=body.location_id,
+                )
+                per_candidate_warnings = [
+                    AppointmentProposalIssue(
+                        code="break_overlap",
+                        severity="warning",
+                        message=f"This slot overlaps {label}.",
+                    )
+                    for label in break_labels
+                ]
+
+                slot_end_local = slot_start + timedelta(minutes=resolved_duration)
+                start_utc = _utc_from_local(current_date, slot_time_local, practice_tz)
+                end_utc = start_utc + timedelta(minutes=resolved_duration)
+
+                candidates.append(SlotCandidate(
+                    appointment_date=current_date,
+                    start_time=start_utc,
+                    end_time=end_utc,
+                    start_time_local=slot_time_local,
+                    duration_minutes=resolved_duration,
+                    warnings=per_candidate_warnings,
+                ))
+
+                if len(candidates) >= body.limit:
+                    break
+
+            slot_start += timedelta(minutes=slot_mins)
+
+        current_date += timedelta(days=1)
+
+    date_range_str = (
+        body.date_from.isoformat()
+        if body.date_from == effective_to
+        else f"{body.date_from.isoformat()} to {effective_to.isoformat()}"
+    )
+    summary = (
+        f"Found {len(candidates)} candidate slot{'s' if len(candidates) != 1 else ''} "
+        f"for {resolved_duration} min with {practitioner.first_name} {practitioner.last_name} "
+        f"on {date_range_str}."
+    )
+    if not candidates:
+        summary += " No free slots found in the requested window."
+
+    return SlotSearchProposalOut(
+        safe=True,
+        autonomy_tier="execute_with_report",
+        summary=summary,
+        resolved_duration_minutes=resolved_duration,
+        candidates=candidates,
+    )
