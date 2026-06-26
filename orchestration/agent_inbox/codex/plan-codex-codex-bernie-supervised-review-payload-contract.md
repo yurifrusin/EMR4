@@ -9,7 +9,7 @@
 | Worker Branch | `codex/bernie-supervised-review-payload` |
 | Branch | `codex/bernie-supervised-review-payload` |
 | Source Task | `codex-bernie-supervised-review-payload-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 02:33 +1000 |
 | Source HEAD | `89096d6` |
 
@@ -55,6 +55,6 @@ Main ambiguity is whether to place the review payload as an additive field on ev
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne after metadata correction. The plan was backend-only, deterministic, additive, and kept the explicit confirmation boundary intact.
+- Required changes before implementation: None after adding the required top-table worker metadata rows.
+- Approved to proceed: yes; implementation was released with the exact phrase `complete sprint task`.

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-supervised-review-payload` |
-| Status | submitted |
+| Status | integrated |
 | Created | ec601fc |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-supervised-review-payload-contract --summary "Short plan summary"` |

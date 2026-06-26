@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-supervised-review-payload` |
 | Source Task | `codex-bernie-supervised-review-payload-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne inspected the branch diff, confirmed backend-only scope, reran py_compile plus focused wrapper, wrapper-confirmation, confirm-create, and full-flow harness tests, and accepted the additive `staff_review` payload contract.
+- Follow-up required: None for Yuri. Future UI must keep `staff_review.confirm_payload.confirmed` false until explicit staff approval.
