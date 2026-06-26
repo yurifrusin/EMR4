@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-slot-selection-proposal` |
 | Branch | `codex/bernie-slot-selection-proposal` |
-| Status | queued |
+| Status | submitted |
 | Created | 8f4153e |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-slot-selection-proposal-contract --summary "Short plan summary"` |
@@ -92,6 +92,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-slot-selection-proposal-contract.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-slot-selection-proposal-contract.md`
+- Verification run: plan gate only; `python scripts\agent_worktrees.py handin --agent codex`; `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-slot-selection-proposal-contract ...`; `git status --short --branch`; no production code/tests edited or run.
+- Remaining risks: implementation remains blocked pending exact `complete sprint task`; future coding must preserve backend-only, supervised, non-mutating semantics and prove no appointment/audit writes and no LLM calls.
