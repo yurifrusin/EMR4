@@ -221,46 +221,55 @@ function getMockAuditEvents(apptId) {
     return [
       {
         created_at: new Date(baseDate.getTime() - 1000 * 60 * 30).toISOString(),
-        action: "Confirm Proposal",
-        status_target: "Booked",
-        confirmed_by: "Dr. Practice Owner",
-        warning_codes: ["OVERBOOK_WARNING"],
-        confirmed_with_warnings: true
+        action: "status_change",
+        status_before: "Booked",
+        status_after: "Confirmed",
+        confirmed_by_user_id: "Dr. Practice Owner"
       },
       {
         created_at: new Date(baseDate.getTime() - 1000 * 60 * 60).toISOString(),
-        action: "Create Proposal",
-        status_target: "Booked",
-        confirmed_by: "Receptionist Sally",
-        warning_codes: []
+        action: "create",
+        status_after: "Booked",
+        confirmed_by_user_id: "Receptionist Sally"
       }
     ];
   } else if (apptId === "smoke-appt-7") {
     return [
       {
         created_at: new Date(baseDate.getTime() - 1000 * 60 * 15).toISOString(),
-        action: "Cancel Appointment",
-        status_target: "Cancelled",
+        action: "delete",
+        status_before: "Booked",
+        status_after: "Cancelled",
         cancellation_reason: "Patient had transport issues",
-        confirmed_by: "Receptionist Sally"
+        confirmed_by_user_id: "Receptionist Sally"
       },
       {
         created_at: new Date(baseDate.getTime() - 1000 * 60 * 120).toISOString(),
-        action: "Create Proposal",
-        status_target: "Booked",
-        confirmed_by: "Receptionist Sally"
+        action: "create",
+        status_after: "Booked",
+        confirmed_by_user_id: "Receptionist Sally"
       }
     ];
   } else {
     return [
       {
         created_at: new Date(baseDate.getTime() - 1000 * 60 * 10).toISOString(),
-        action: "Create Proposal",
-        status_target: "Booked",
-        confirmed_by: "Receptionist Sally"
+        action: "create",
+        status_after: "Booked",
+        confirmed_by_user_id: "Receptionist Sally"
       }
     ];
   }
+}
+
+function formatAuditAction(action) {
+  const labels = {
+    create: "Create",
+    update: "Update",
+    status_change: "Status Change",
+    delete: "Cancel Appointment"
+  };
+  return labels[action] || String(action || "Event");
 }
 
 // ─── BREAK OVERRIDES (per-column, persisted to localStorage) ──────────────────
@@ -362,12 +371,17 @@ async function loadAuditHistory(apptId) {
       li.className = "booking-audit-item";
 
       const timeStr = evt.created_at ? new Date(evt.created_at).toLocaleString() : "Unknown Time";
-      const actionStr = evt.action || "Event";
-      const userStr = evt.confirmed_by || evt.confirmed_by_user_id ? `by ${evt.confirmed_by || evt.confirmed_by_user_id}` : "";
+      const actionStr = formatAuditAction(evt.action);
+      const user = evt.confirmed_by || evt.confirmed_by_user_id;
+      const userStr = user ? `by ${user}` : "";
       
       let details = [];
-      if (evt.status_target) {
-        details.push(`Status set to: <strong>${escHtml(evt.status_target)}</strong>`);
+      const statusTarget = evt.status_target || evt.status_after;
+      if (statusTarget) {
+        details.push(`Status set to: <strong>${escHtml(statusTarget)}</strong>`);
+      }
+      if (evt.status_before && evt.status_after && evt.status_before !== evt.status_after) {
+        details.push(`Changed from <strong>${escHtml(evt.status_before)}</strong>`);
       }
       if (evt.cancellation_reason) {
         details.push(`Cancellation Reason: <strong>${escHtml(evt.cancellation_reason)}</strong>`);

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-proposal-history-review-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated with Claude backend after Ariadne adapter/version hotfix. Deterministic diary smoke passed.
+- Follow-up required: None for this sprint; richer audit fields can be added with a future backend contract if needed.

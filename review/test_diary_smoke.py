@@ -87,8 +87,8 @@ def test_booking_audit_history(diary_page):
     diary_page.wait_for_selector("#booking-audit-content:not(.hidden)", state="visible", timeout=2000)
     
     # Check that mock events are rendered
-    assert diary_page.locator(".booking-audit-item", has_text="Confirm Proposal").count() == 1
-    assert diary_page.locator(".booking-audit-item", has_text="Create Proposal").count() == 1
+    assert diary_page.locator(".booking-audit-item", has_text="Status Change").count() == 1
+    assert diary_page.locator(".booking-audit-item", has_text="Create").count() == 1
     
     # Close the modal
     diary_page.click("#btn-booking-close")

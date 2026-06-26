@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-proposal-audit-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 17:18 +1000 |
 | Source HEAD | `662e61e` |
 

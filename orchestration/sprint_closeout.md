@@ -8,6 +8,81 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 33: Appointment Proposal Audit/History Foundation |
+| Integrated through | Sprint 33 backend confirmed-mutation audit contract and diary read-only audit-history review UI |
+| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Last updated | 2026-06-26 |
+
+## What Changed
+
+- Added an `appointment_audit_log` table and SQLAlchemy model for confirmed appointment mutation history.
+- Added `AppointmentAuditAction` plus `AppointmentAuditLogOut` so audit rows are returned through a typed API response.
+- Added `GET /api/v1/appointments/{appointment_id}/audit`, practice-scoped and authenticated, returning the confirmed mutation history for one appointment.
+- Confirmed appointment create, update, status-change, and soft-cancel/delete paths now write audit rows in the same transaction as the mutation.
+- Proposal endpoints remain non-mutating and do not write audit rows; blocked or aborted proposals leave no audit residue.
+- Cancellation audit rows preserve `cancellation_reason`; status audit rows preserve before/after status.
+- Added `tests/test_appointment_audit.py` with focused coverage for non-mutating proposals, confirmed writes, empty audit history, auth, cross-practice denial, and ordering.
+- Added a read-only collapsed `Audit History` section to the diary booking edit modal; it is hidden for new bookings and visible only when editing an existing appointment.
+- The diary calls `/appointments/{id}/audit` in live mode, shows loading/empty/unsupported/error states, and simulates backend-shaped audit events in `?smoke=true`.
+- Ariadne applied a bounded integration hotfix so the diary UI renders the backend's actual `status_after`, `status_before`, `confirmed_by_user_id`, and lower-case action enum shape; diary assets moved to `diary.css?v=98` and `diary.js?v=100`.
+- No taskpane, Command Centre, Gemini/AI provider, billing, SMS, restore/reactivation, broad supervisor dashboard, or direct Bernie execution work was included.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified the backend audit contract, adjacent appointment proposal/status
+regression suites, frontend syntax/assets, and deterministic diary Playwright
+smoke for the new audit-history affordance. This is mostly infrastructure and a
+read-only review surface, with no new direct mutation affordance.
+
+Optional confidence check only, if Yuri happens to be in the live diary after deployment:
+
+1. Setup: hard refresh the live diary and confirm `diary.js?v=100` and `diary.css?v=98` are loaded.
+2. Exact UI path: sign in as a dev Admin or normal dev user, open the Diary, and open an existing appointment for editing.
+3. Expected collapsed state: the booking modal shows an `Audit History` row, collapsed by default, below the booking form fields.
+4. Expected expansion: click `Audit History`; audit rows, `No audit history found`, or an unavailable/error fallback should appear without enabling any write control.
+5. Expected create behaviour: open an empty slot to create a new booking; the `Audit History` section should be hidden.
+6. Expected safety: expanding audit history must not change appointment status, waiting-area state, cancellation state, booking details, or proposal confirmation state.
+7. Suspicious signs: audit history appears on create, edit modal crashes, audit rows show raw `undefined`, the section enables mutation controls, existing save/cancel/delete flow changes, or browser console errors appear.
+8. Skippable parts: do not retest taskpane, Command Centre, patient file generation, resource administration, drag/resize, recurrence, SMS, billing, AI provider facade, or security workflows for Sprint 33.
+9. Evidence to report: screenshot or short note showing the edit modal audit section, expanded contents/fallback, loaded diary asset versions, and any console error or unexpected mutation.
+
+## Not Required Before Moving On
+
+- No manual live UI review is required; the deterministic diary smoke opens the edit modal, expands audit history, and checks rendered audit items.
+- No manual database repair is required; the migration is additive and the audit table is empty until confirmed mutations occur.
+- No Word taskpane, Command Centre, GCP/Gemini, Office dialog, resource admin, recurrence, billing, SMS, or security-console action is required for this sprint.
+
+## Known Follow-Up
+
+- Warning-code or warning-summary persistence was intentionally not completed in Sprint 33 because current confirmed mutation endpoints do not receive the prior proposal warning payload. A later richer audit sprint can add explicit `warning_codes`/`confirmed_with_warnings` capture if supervisor review needs it.
+- The diary currently displays `confirmed_by_user_id` when no friendly user name is available; a future user-directory join or backend display field can improve readability.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert still appears on GitHub pushes and remains outside Sprint 33.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 33 implementation review packets.
+- Backend compile check: `python -m py_compile app\models\appointments.py app\schemas\appointments.py app\routers\appointments.py tests\test_appointment_audit.py` -> passed.
+- Focused audit contract: `.\.venv\Scripts\python.exe -m pytest tests\test_appointment_audit.py -q --tb=short -p no:randomly` -> 14 passed.
+- Adjacent appointment regressions: `.\.venv\Scripts\python.exe -m pytest tests\test_appointment_status_mutations.py tests\test_appointment_update_proposal.py tests\test_appointment_proposals.py -q --tb=short -p no:randomly` -> 71 passed when rerun serially. A prior parallel pytest launch hit the known Postgres enum creation race and was disregarded.
+- Frontend static check: `node --check docs\diary\diary.js` -> passed.
+- Deterministic diary review: `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 17 passed.
+- Frontend asset version check: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed for modified assets.
+- Diff hygiene: `git diff --check` -> passed.
+
+## Recommended Next Direction
+
+Continue to the next Programme 2D receptionist-safety slice after push/audit,
+unless Yuri interrupts. Recommended next sprint: build on the audit foundation
+with a narrow supervisor/ops review improvement or the next appointment safety
+surface that benefits from proposal-first history.
+
+
+## Previous Closeout - Sprint 32
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 32: No-show/DNA Attendance Outcome Semantics |
 | Integrated through | Sprint 32 backend NoShow/DNA status proposal proof suite; diary frontend stood down after existing semantics were verified |
 | Status | Integrated, pushed, mirrored, audited, and closed |
@@ -64,7 +139,8 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 - `python scriptsgent_worktrees.py poll --fetch` -> found Claude's Sprint 32 implementation review packet and Antigravity's corrected plan packet.
 - Antigravity CLI diagnosis: `tasklist /FI "IMAGENAME eq agy.exe"` showed no running CLI process; `git status --short --branch` in `EMR4-worktreesntigravity` was clean; latest Antigravity CLI log ended with `Print mode: timed out`, not a crash.
 - Backend verification: `python -m pytest tests	est_noshow_dna_status_contract.py -q --tb=short -p no:randomly` -> 14 passed.
-- Backend compile check: `python -m py_compile appoutersppointments.py app\schemasppointments.py` -> passed.
+- Backend compile check: `python -m py_compile app
+outersppointments.py app\schemasppointments.py` -> passed.
 - Frontend static check: `node --check docs\diary\diary.js` -> passed.
 - Deterministic diary review: `python -m pytest review	est_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 14 passed.
 - Diff hygiene: `git diff --check` -> passed, with only existing CRLF normalization warnings.

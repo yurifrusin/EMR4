@@ -134,9 +134,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated locally; closeout/push/audit pending |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending worker plans and Ariadne review |
+| Integration Gate | Claude and Antigravity submissions reviewed, integrated, and hotfixed by Ariadne |
 | Product Goal | Give high-risk appointment proposal decisions a deterministic audit/history foundation so future supervisors and Bernie tooling can review what was confirmed without adding direct model-to-database autonomy |
 
 ### Workstream S33-A - Backend Proposal Audit Contract
@@ -150,7 +150,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval backend appointment audit/proposal-history model/API and focused pytest coverage for confirmed create/update/status/waiting-area/delete writes, scoped history reads, cross-practice denial, and no audit rows for blocked/aborted proposals |
 | Out of Scope | Diary UI, taskpane, Command Centre, Gemini/AI provider code, receptionist messaging, restore/reactivation, billing, SMS, broad audit framework, and direct Bernie execution |
 | Verification | Plan packet first; after approval py_compile touched backend modules, focused pytest for audit/proposal-history contracts plus existing appointment mutation suites affected by touched code, and `git diff --check` |
-| Status | Plan gate pending |
+| Status | Integrated |
 
 ### Workstream S33-B - Diary Proposal History Review UI
 
@@ -163,7 +163,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke-mode fixture/hooks if needed, and cheap review assertions for the read-only history affordance |
 | Out of Scope | Backend implementation, taskpane, Command Centre, Gemini/AI provider code, write actions from the history surface, restore/reactivation, broad supervisor dashboard, billing/SMS, and visual redesign of unrelated diary panels |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary review smoke, any new cheap Playwright/review assertion, frontend version check if assets change, and targeted browser checks only if structural checks cannot verify the behaviour |
-| Status | Plan gate pending |
+| Status | Integrated |
 
 ## Sprint 32: No-show/DNA Attendance Outcome Semantics
 

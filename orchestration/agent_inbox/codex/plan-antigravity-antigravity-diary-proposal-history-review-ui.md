@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-proposal-history-review-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 17:17 +1000 |
 | Source HEAD | `662e61e` |
 

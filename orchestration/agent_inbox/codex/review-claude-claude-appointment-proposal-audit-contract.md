@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-proposal-audit-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -41,5 +41,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated with Antigravity UI after Ariadne adapter/version hotfix. Focused audit tests passed.
+- Follow-up required: Consider warning-code capture in a later richer audit sprint if proposal warning summaries need to be persisted.
