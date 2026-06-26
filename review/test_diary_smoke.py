@@ -779,3 +779,295 @@ def test_bernie_confirm_submit_adapter_disabled_for_non_confirmable_states(diary
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def _bernie_live_confirmation_response():
+    return {
+        "intent": "bernie_supervised_booking",
+        "result": "confirmation_ready",
+        "safe": True,
+        "requires_confirmation": True,
+        "autonomy_tier": "proposal",
+        "summary": "Confirmation ready.",
+        "staff_review": {
+            "headline": "Proposal Confirmation Ready",
+            "status": "confirmation_ready",
+            "staff_action_required": "Review the selected slot and submit the confirm payload only after explicit staff confirmation.",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "end_time_local": "09:15:00",
+                "practitioner_name": "Dr Alex Shera",
+                "room_name": "Room 1"
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings or blocked issues.",
+            "evidence_summary": "Confirm payload carries slot-selection and create-proposal evidence for explicit staff approval.",
+            "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+            "confirm_payload": {
+                "confirmed": False,
+                "selection_proposal": {
+                    "intent": "select_slot_for_create_proposal",
+                    "selected_candidate_index": 0,
+                    "selected_candidate": {
+                        "appointment_date": "2026-06-27",
+                        "start_time_local": "09:00:00",
+                        "end_time_local": "09:15:00",
+                        "duration_minutes": 15,
+                        "practitioner_id": "prac-1",
+                        "location_id": "loc-main"
+                    }
+                },
+                "create_proposal": {
+                    "intent": "create_appointment",
+                    "patient_id": "smoke-pat-1",
+                    "practitioner_id": "prac-1",
+                    "appointment_date": "2026-06-27",
+                    "start_time": "09:00:00",
+                    "duration_minutes": 15,
+                    "reason": "Follow-up"
+                }
+            },
+            "confirm_evidence": [
+                "bernie_confirm_create_proposal",
+                "source_slot_selection_proposal",
+                "source_create_proposal"
+            ],
+            "blocks": []
+        }
+    }
+
+
+def _bernie_live_blocked_response():
+    return {
+        "intent": "bernie_supervised_booking",
+        "result": "blocked",
+        "safe": False,
+        "requires_confirmation": False,
+        "autonomy_tier": "blocked",
+        "summary": "Practitioner ID is required.",
+        "staff_review": {
+            "headline": "Practitioner ID is required.",
+            "status": "blocked",
+            "staff_action_required": "Review blocked issues before retrying; no booking can be confirmed from this payload.",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [],
+            "warning_summary": "Blocked issues require staff correction.",
+            "evidence_summary": "No confirmation evidence was produced.",
+            "confirm_endpoint": None,
+            "confirm_payload": None,
+            "confirm_evidence": [],
+            "blocks": [
+                {"code": "missing_practitioner_id", "message": "Practitioner ID is required."}
+            ]
+        }
+    }
+
+
+def _bernie_live_candidate_response():
+    return {
+        "intent": "bernie_supervised_booking",
+        "result": "candidate_selection_required",
+        "safe": True,
+        "requires_confirmation": False,
+        "autonomy_tier": "execute_with_report",
+        "summary": "Candidate selection required.",
+        "staff_review": {
+            "headline": "Candidate selection required.",
+            "status": "candidate_selection_required",
+            "staff_action_required": "Select one candidate slot before preparing confirmation evidence.",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [
+                {
+                    "appointment_date": "2026-06-27",
+                    "start_time_local": "09:00:00",
+                    "end_time_local": "09:15:00",
+                    "practitioner_name": "Dr Alex Shera",
+                    "room_name": "Room 1"
+                }
+            ],
+            "warning_summary": "Select a candidate before confirming.",
+            "evidence_summary": "Candidate selection is required.",
+            "confirm_endpoint": None,
+            "confirm_payload": None,
+            "confirm_evidence": [],
+            "blocks": []
+        }
+    }
+
+
+def test_bernie_live_confirm_flow_harness_success(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    supervised_requests = []
+    confirm_payloads = []
+
+    def handle_supervised_booking(route):
+        supervised_requests.append(json.loads(route.request.post_data))
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(_bernie_live_confirmation_response())
+        )
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_confirm_adapter=true&practitioner_id=prac-1&selected_candidate_index=0")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        assert len(supervised_requests) == 1
+        assert supervised_requests[0]["selected_candidate_index"] == 0
+
+        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
+        error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
+
+        assert checkbox.is_visible()
+        assert confirm_btn.is_disabled()
+        assert success_msg.is_hidden()
+        assert error_msg.is_hidden()
+        assert len(confirm_payloads) == 0
+
+        checkbox.check()
+        assert confirm_btn.is_disabled() is False
+        assert len(confirm_payloads) == 0
+
+        confirm_btn.click()
+
+        assert len(confirm_payloads) == 1
+        assert confirm_payloads[0]["confirmed"] is True
+        assert confirm_payloads[0]["selection_proposal"]["intent"] == "select_slot_for_create_proposal"
+        assert confirm_payloads[0]["create_proposal"]["reason"] == "Follow-up"
+        assert success_msg.is_visible()
+        assert error_msg.is_hidden()
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+@pytest.mark.parametrize(
+    ("review_response", "expected_status"),
+    [
+        (_bernie_live_blocked_response, "blocked"),
+        (_bernie_live_candidate_response, "candidate selection required"),
+    ],
+)
+def test_bernie_live_confirm_flow_harness_non_confirmable_states(diary_page, review_response, expected_status):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    supervised_requests = []
+    confirm_payloads = []
+
+    def handle_supervised_booking(route):
+        supervised_requests.append(json.loads(route.request.post_data))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(review_response()))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected write"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_confirm_adapter=true&practitioner_id=prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        assert len(supervised_requests) == 1
+        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == expected_status
+        assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert len(confirm_payloads) == 0
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_live_confirm_flow_harness_supervised_booking_error_no_write(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    supervised_requests = []
+    confirm_payloads = []
+
+    def handle_supervised_booking(route):
+        supervised_requests.append(json.loads(route.request.post_data))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "backend unavailable"}))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected write"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_confirm_adapter=true&practitioner_id=prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        assert len(supervised_requests) == 1
+        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "blocked"
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="HTTP status 500").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert len(confirm_payloads) == 0
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_live_confirm_flow_harness_no_normal_mode_exposure(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    supervised_requests = []
+    confirm_payloads = []
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: (
+            supervised_requests.append(json.loads(route.request.post_data)),
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected supervised call"}))
+        )
+    )
+    diary_page.route(
+        "**/api/v1/appointments/proposals/create/confirm-bernie",
+        lambda route: (
+            confirm_payloads.append(json.loads(route.request.post_data)),
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected confirm call"}))
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?bernie_review=live&bernie_confirm_adapter=true&practitioner_id=prac-1")
+        diary_page.wait_for_load_state("domcontentloaded")
+
+        assert diary_page.locator("[data-testid='bernie-review-panel']:not(.hidden)").count() == 0
+        assert len(supervised_requests) == 0
+        assert len(confirm_payloads) == 0
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
