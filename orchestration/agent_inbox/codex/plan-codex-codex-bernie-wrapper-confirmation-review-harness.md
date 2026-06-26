@@ -9,7 +9,7 @@
 | Worker Branch | `codex/bernie-wrapper-confirmation-review-harness` |
 | Branch | `codex/bernie-wrapper-confirmation-review-harness` |
 | Source Task | `codex-bernie-wrapper-confirmation-review-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 02:13 +1000 |
 | Source HEAD | `a1844f6` |
 
@@ -52,6 +52,6 @@ The main ambiguity is whether existing confirm-Bernie accepts the wrapper eviden
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne. The plan was backend-only, deterministic, and scoped to wrapper-to-confirm safety without UI/runtime/autonomous booking changes.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation was released with the exact phrase `complete sprint task`.

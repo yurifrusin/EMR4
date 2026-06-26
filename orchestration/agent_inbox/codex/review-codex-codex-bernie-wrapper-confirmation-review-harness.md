@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-wrapper-confirmation-review-harness` |
 | Source Task | `codex-bernie-wrapper-confirmation-review-harness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne inspected the branch diff, confirmed test-only scope, reran serial focused and adjacent backend verification, and accepted the known parallel PostgreSQL enum-create race as a test-infrastructure issue rather than a Sprint 47 defect.
+- Follow-up required: None for Yuri. Keep the existing `pytest_asyncio` warning and broad parallel test database DDL contention as future test-hygiene follow-ups.
