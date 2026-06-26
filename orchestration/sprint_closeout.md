@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 32: No-show/DNA Attendance Outcome Semantics |
 | Integrated through | Sprint 32 backend NoShow/DNA status proposal proof suite; diary frontend stood down after existing semantics were verified |
-| Status | Integrated locally, verified, and pending push/audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-26 |
 
 ## What Changed
@@ -29,7 +29,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-Residual user review/testing after closeout: none required before pausing.
+Residual user review/testing after closeout: none required.
 Ariadne verified the backend contract, frontend syntax, deterministic diary smoke
 harness, and existing NoShow/DNA diary semantics using cheap tool-enabled checks.
 Sprint 32 is primarily a contract-proof sprint and intentionally does not add a
@@ -71,8 +71,9 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 
 ## Recommended Next Direction
 
-Pause sprint automation after Sprint 32 closeout per Yuri's instruction. Do not
-dispatch Sprint 33 until Yuri explicitly resumes.
+Yuri resumed sprint automation after Sprint 32. Sprint 33 has been dispatched as
+the next Programme 2D readiness slice: appointment proposal audit/history
+foundation.
 
 ## Previous Closeout - Sprint 30
 

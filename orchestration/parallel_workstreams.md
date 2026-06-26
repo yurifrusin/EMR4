@@ -130,11 +130,46 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 33: Appointment Proposal Audit/History Foundation
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending worker plans and Ariadne review |
+| Product Goal | Give high-risk appointment proposal decisions a deterministic audit/history foundation so future supervisors and Bernie tooling can review what was confirmed without adding direct model-to-database autonomy |
+
+### Workstream S33-A - Backend Proposal Audit Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-proposal-audit-contract.md` |
+| Goal | Plan, then after approval add or prove a backend contract for recording confirmed high-risk appointment proposal decisions |
+| In Scope | Plan packet first; after approval backend appointment audit/proposal-history model/API and focused pytest coverage for confirmed create/update/status/waiting-area/delete writes, scoped history reads, cross-practice denial, and no audit rows for blocked/aborted proposals |
+| Out of Scope | Diary UI, taskpane, Command Centre, Gemini/AI provider code, receptionist messaging, restore/reactivation, billing, SMS, broad audit framework, and direct Bernie execution |
+| Verification | Plan packet first; after approval py_compile touched backend modules, focused pytest for audit/proposal-history contracts plus existing appointment mutation suites affected by touched code, and `git diff --check` |
+| Status | Plan gate pending |
+
+### Workstream S33-B - Diary Proposal History Review UI
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-proposal-history-review-ui.md` |
+| Goal | Plan, then after approval add or scaffold a lightweight read-only diary review surface for proposal/audit history when the backend contract exists |
+| In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke-mode fixture/hooks if needed, and cheap review assertions for the read-only history affordance |
+| Out of Scope | Backend implementation, taskpane, Command Centre, Gemini/AI provider code, write actions from the history surface, restore/reactivation, broad supervisor dashboard, billing/SMS, and visual redesign of unrelated diary panels |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary review smoke, any new cheap Playwright/review assertion, frontend version check if assets change, and targeted browser checks only if structural checks cannot verify the behaviour |
+| Status | Plan gate pending |
+
 ## Sprint 32: No-show/DNA Attendance Outcome Semantics
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; closeout/push pending |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
 | Integration Gate | Claude implemented a focused backend proof suite; Antigravity frontend workstream superseded after existing diary semantics and cheap checks were verified |
 | Product Goal | Make No Show and DNA appointment outcomes explicit, proposal-first, terminal, non-blocking, and cheap to review without confusing them with cancellation or active waiting-room state |
