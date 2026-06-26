@@ -135,9 +135,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
-| Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending plan packets from Claude and Antigravity |
+| Status | Integrated; closeout pending push/mirror/audit |
+| Launch Gate | Complete |
+| Integration Gate | Passed; implementation review packets polled and verified |
 | Product Goal | Give future Bernie/reception workflows a non-mutating, typed slot-search proposal contract and deterministic read-only preview harness |
 
 ### Workstream S38-A - Backend Slot Search Proposal Contract
@@ -151,7 +151,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval backend appointment/slots/proposal surfaces only as needed, likely `app/schemas/appointments.py`, `app/routers/appointments.py`, and focused tests; endpoint must be practice-scoped, auth/role-gated, location-aware where current slot logic supports it, return typed candidate slots plus warnings/blocks/summary, and never write appointments or audit rows |
 | Out of Scope | Diary UI implementation, autonomous Bernie runtime, LLM calls, taskpane, Command Centre, SMS, billing, patient demographics, resource admin, mutation of appointments, and broad scheduling redesign |
 | Verification | Plan packet first; after approval py_compile touched backend modules/tests, focused pytest proving role/practice scoping, no appointment/audit writes, expected candidate slot output, conflict/break/location handling where applicable, and `git diff --check` |
-| Status | Queued for plan |
+| Status | Integrated after Claude review packet and Ariadne verification |
 
 ### Workstream S38-B - Diary Slot Search Preview Harness
 
@@ -164,7 +164,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval docs/diary smoke fixtures and review harness files only unless a minimal diary helper is unavoidable; add deterministic checks for a read-only slot-search proposal preview shape from mock data using stable selectors/compact assertions |
 | Out of Scope | Backend implementation, live API integration unless Claude's contract is already integrated and trivially callable, autonomous Bernie runtime, appointment create/edit/status/cancel mutations, taskpane, Command Centre, resource admin, SMS, billing, and broad diary layout changes |
 | Verification | Plan packet first; after approval `node --check` if diary JS changes, deterministic review pytest for slot-search preview, frontend version check if assets change, and `git diff --check` |
-| Status | Queued for plan |
+| Status | Integrated after Antigravity review packet and Ariadne verification |
 
 
 ## Sprint 37: Appointment Audit Warning Summary

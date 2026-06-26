@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-claude-bernie-slot-search-proposal-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -40,5 +40,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Reviewed and integrated in Sprint 38.
+- Follow-up required: None before next sprint; future Bernie command UI can consume the new read-only slot-search proposal contract.

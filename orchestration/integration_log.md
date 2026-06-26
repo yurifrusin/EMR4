@@ -112,3 +112,5 @@ and worker-worktree retirement decisions. It complements the task packets under
 | 2026-06-26 20:37 +1000 | antigravity | antigravity-antigravity-diary-audit-warning-summary-ui | `antigravity/current` | Reviewed and integrated read-only diary Audit History confirmed_warnings rendering and smoke assertion | `9f345d2` | integrated | No user-only review required; keep audit UI read-only |
 
 
+| 2026-06-26 21:30 +1000 | claude | claude-claude-bernie-slot-search-proposal-contract | `claude/current` | Reviewed non-mutating Bernie slot-search proposal contract and integrated with focused verification | `641556f` | integrated | Mirrors realign after closeout |
+| 2026-06-26 21:30 +1000 | antigravity | antigravity-antigravity-diary-slot-search-preview-harness | `antigravity/current` | Reviewed smoke-only diary slot-search preview harness and integrated with deterministic checks | `641556f` | integrated | Mirrors realign after closeout |

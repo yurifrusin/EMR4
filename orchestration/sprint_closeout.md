@@ -8,65 +8,66 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 37: Appointment Audit Warning Summary |
-| Integrated through | Sprint 37 backend confirmed-warning audit persistence and diary read-only warning display |
-| Status | Integrated, pushed, mirrored, audited, and closed |
+| Batch | Sprint 38: Bernie-Safe Slot Search Proposal Foundation |
+| Integrated through | Sprint 38 backend non-mutating slot-search proposal contract and smoke-only diary preview harness |
+| Status | Integrated, verified, pending push/mirror/audit closeout |
 | Last updated | 2026-06-26 |
 
 ## What Changed
 
-- Added `confirmed_warnings` persistence to appointment audit rows via a nullable JSONB column on `appointment_audit_log`.
-- Added `confirmed_warnings` to appointment create, update, status-change, and delete/cancel confirmation bodies, while excluding it from appointment row mutation values.
-- Exposed canonical `confirmed_warnings` from `GET /api/v1/appointments/{appointment_id}/audit` as a bounded list of warning code strings.
-- Ariadne applied a bounded integration repair so only known warning codes are stored: `already_terminal`, `break_overlap`, `provisional_patient`, `waiting_area_assigned_on_terminal`, and `waiting_area_cleared`; unknown/free-text/HTML-like strings are dropped and duplicate codes are de-duplicated.
-- Ariadne repaired the new migration to merge the two pre-existing Alembic heads while adding the nullable audit column.
-- Added focused backend tests covering warning persistence across create/update/status/delete, empty-list-to-null behaviour, audit API output, unknown-code filtering, and non-mutating proposal behaviour.
-- Updated diary Audit History to render `confirmed_warnings` read-only, with defensive support for older alias shapes, and added deterministic smoke assertions for warning rendering.
-- Bumped the diary JS cache-bust to `diary.js?v=103` in `docs/diary/diary.html`.
-- No taskpane, Command Centre, SMS, billing, patient demographics, resource administration, appointment grid placement, waiting-room flow, or mutation controls were changed.
+- Added a read-only `POST /api/v1/appointments/proposals/slot-search` endpoint that accepts typed slot-search constraints and returns ranked candidate slots, warnings, blocks, and a human-readable summary.
+- Added `SlotSearchProposalIn`, `SlotCandidate`, and `SlotSearchProposalOut` schemas for future Bernie/reception scheduling workflows.
+- Extracted `_resolve_day_schedule(...)` from existing slot-generation code so `/slots/{practitioner_id}` and slot-search proposal logic share the same day schedule/override resolution.
+- Kept the new backend endpoint role-gated, practice-scoped, practitioner-scoped, optional patient/location constrained, and explicitly non-mutating: no appointment rows and no appointment audit rows are written.
+- Added focused backend tests for auth, practice scoping, candidate ordering/duration/timezone fields, duration derivation, date-range validation, conflict filtering, non-blocking terminal statuses, break warnings, location-specific conflict handling, no-schedule days, limit caps, and non-mutation proof.
+- Added a deterministic smoke-only diary slot-search preview harness behind `?smoke=true&slot_preview=true`; live diary rendering remains inert unless that explicit smoke/review flag is present.
+- Added dashed, read-only slot-preview candidate styling and deterministic Playwright checks proving preview count, labels, and no booking-modal opening on preview click.
+- Bumped diary assets to `diary.css?v=99` and `diary.js?v=104`.
+- No live Bernie runtime, LLM/Gemini parsing, taskpane, Command Centre, real appointment mutation, waiting-room flow, billing, SMS, resource administration, or live diary slot-search UI was added.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required before continuing.
-Ariadne verified the backend contract, migration head shape, frontend syntax/assets, and deterministic diary smoke checks. The UI change is read-only and the backend persistence is covered by focused tests.
+Ariadne verified the backend contract, non-mutation behaviour, frontend syntax/assets, and deterministic diary smoke checks. The visible diary preview is smoke/review-harness gated and is not a live user-facing workflow.
 
 Optional confidence check only, if Yuri happens to be in the live diary after deployment:
 
-1. Setup: hard refresh the live diary and confirm `diary.js?v=103` and `diary.css?v=98` are loaded.
-2. Exact UI path: open an existing appointment for editing and expand `Audit History`.
-3. Expected result: any audit row with confirmed warnings shows a restrained read-only `Warnings: [...]` line using code-like values, while ordinary rows remain visually clean.
-4. Expected safety: audit history must not add buttons, mutate appointment fields, change status, alter waiting-area state, or confirm/cancel proposals.
-5. Suspicious signs: raw `undefined`, free-text patient details in warning metadata, new mutation controls inside audit history, audit history failing to expand, or console errors.
-6. Skippable parts: do not retest taskpane, Command Centre, patient files, resource administration, drag/resize, recurrence, SMS, billing, AI provider facade, security workflows, or cancelled appointment review for Sprint 37.
-7. Evidence to report: only report a screenshot/console error if warning rows render incorrectly or any mutation affordance appears in audit history.
+1. Setup: hard refresh the live diary and confirm `diary.js?v=104` and `diary.css?v=99` are loaded.
+2. Exact UI path: open the normal live diary without `smoke=true&slot_preview=true`.
+3. Expected result: no dashed slot-search preview candidates should appear anywhere in the live diary.
+4. Expected safety: normal appointment cards, booking modal open/edit flows, click-to-create/edit behaviour, waiting-room panel, audit history, status controls, and drag/resize affordances should behave as before.
+5. Suspicious signs: dashed preview cards visible in the live diary, clicking empty diary space no longer opens the expected booking workflow, slot previews create/edit appointments, console errors, or asset versions failing to update.
+6. Skippable parts: do not manually retest backend slot-search API, taskpane, Command Centre, resource admin, billing, SMS, AI provider facade, security workflows, or cancelled appointment review for Sprint 38.
+7. Evidence to report: only report a screenshot/console error if smoke preview artifacts leak into the live diary or booking click behaviour regresses.
 
 ## Not Required Before Moving On
 
-- No manual live UI review is required; deterministic smoke verifies warning rendering in the audit-history panel.
-- No manual database repair is required; the migration is additive and nullable.
+- No manual live API test is required; focused pytest covers the slot-search proposal contract and non-mutation proof.
+- No manual live UI review is required; deterministic smoke verifies the slot-preview harness and live/default absence condition.
+- No database migration or data repair is required.
 - No Word taskpane, Command Centre, GCP/Gemini, Office dialog, resource admin, billing, SMS, or security-console action is required.
 
 ## Known Follow-Up
 
-- Future UI polish may translate known warning codes into friendlier labels, but only if the backend remains code-only for audit storage.
-- Consider tying confirmed warning codes to a prior server proposal token if stronger non-repudiation is needed later.
+- Future Bernie work can feed LLM-parsed constraints into the typed slot-search endpoint, then present candidates for human confirmation through a separate create-proposal path.
+- Future UI work can replace the smoke fixture with real API-backed preview data, but only after an explicit live UI task and confirmation workflow are planned.
+- Consider making slot-search warnings code-only plus friendly-label mapping if/when they become user-facing outside the smoke harness.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
-- The known moderate Dependabot alert remains outside Sprint 37.
+- The known moderate Dependabot alert remains outside Sprint 38.
 
 ## Verification
 
-- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 37 plan packets and implementation review packets.
-- Backend compile check: `python -m py_compile app\models\appointments.py app\schemas\appointments.py app\routers\appointments.py alembic\versions\i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py tests\test_appointment_audit_warning_summary.py` -> passed.
-- Alembic heads check: `python -m alembic heads` -> single head `i9j0k1l2m3n4`.
-- Focused backend audit tests: `python -m pytest tests\test_appointment_audit_warning_summary.py tests\test_appointment_audit.py -q --tb=short -p no:randomly` -> 28 passed.
+- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 38 plan packets and implementation review packets.
+- Backend compile check: `python -m py_compile app\routers\appointments.py app\schemas\appointments.py tests\test_slot_search_proposal.py` -> passed.
+- Focused backend slot-search tests: `python -m pytest tests\test_slot_search_proposal.py -q --tb=short -p no:randomly` -> 20 passed.
 - Frontend static check: `node --check docs\diary\diary.js` -> passed.
-- Deterministic diary review: `python -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 17 passed.
-- Frontend asset version check: `python scripts\check_frontend_versions.py` -> passed; `diary.js` moved to `v=103` while live deployed HTML still served `v=102` before push.
+- Deterministic diary review: `python -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 19 passed.
+- Frontend asset version check: `python scripts\check_frontend_versions.py` -> passed; diary CSS moved to `v=99` and diary JS moved to `v=104` while deployed pages still served previous versions before push.
 - Diff hygiene: `git diff --check` -> passed.
 
 ## Recommended Next Direction
 
-Sprint 38 has been dispatched as the next Programme 2D slice: a Bernie-safe slot-search proposal contract plus deterministic read-only preview harness. Plan gate is pending.
+Recommended next narrow slice: Sprint 39, add a deterministic Bernie slot-search command parsing/normalization contract that turns structured or LLM-like text output into the `slot-search` constraint object without executing searches or creating appointments.
 
 
 ## Previous Closeout - Sprint 36
