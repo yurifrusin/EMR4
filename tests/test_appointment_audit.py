@@ -293,8 +293,32 @@ def test_get_audit_returns_entries_in_order(
     assert entries[0]["action"] == "status_change"
     assert entries[0]["status_before"] == "Booked"
     assert entries[0]["status_after"] == "Confirmed"
+    assert entries[0]["confirmed_by_display"] == "rec"
+    assert entries[0]["confirmed_by_role"] == "Receptionist"
     assert entries[1]["status_before"] == "Confirmed"
     assert entries[1]["status_after"] == "Arrived"
+    assert entries[1]["confirmed_by_display"] == "rec"
+    assert entries[1]["confirmed_by_role"] == "Receptionist"
+
+
+def test_get_audit_uses_practitioner_name_for_clinician_actor(
+    client, db, practice, practitioner, patient, gp_user
+):
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+    client.patch(
+        f"{APPT_URL}/{appt.id}/status",
+        json={"status": "Confirmed"},
+        headers=_auth(token),
+    )
+
+    resp = client.get(f"{APPT_URL}/{appt.id}/audit", headers=_auth(token))
+    assert resp.status_code == 200
+    entries = resp.json()
+    assert len(entries) == 1
+    assert entries[0]["confirmed_by_user_id"] == str(gp_user.id)
+    assert entries[0]["confirmed_by_display"] == "Alex Shera"
+    assert entries[0]["confirmed_by_role"] == "GP"
 
 
 def test_get_audit_cross_practice_returns_404(

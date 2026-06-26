@@ -287,6 +287,8 @@ class AppointmentAuditLogOut(BaseModel):
     appointment_id: uuid.UUID
     practice_id: uuid.UUID
     confirmed_by_user_id: uuid.UUID
+    confirmed_by_display: str
+    confirmed_by_role: Optional[str] = None
     action: AppointmentAuditAction
     status_before: Optional[AppointmentStatus] = None
     status_after: Optional[AppointmentStatus] = None

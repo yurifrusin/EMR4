@@ -395,6 +395,27 @@ def _write_audit(
     ))
 
 
+def _audit_actor_display(user: Optional[User]) -> tuple[str, Optional[str]]:
+    if user is None:
+        return "Unknown", None
+
+    role = user.role.value if user.role else None
+    practitioner = user.practitioner
+    if practitioner:
+        display = " ".join(
+            part for part in (practitioner.first_name, practitioner.last_name) if part
+        ).strip()
+        if display:
+            return display, role
+
+    if user.email:
+        display = user.email.split("@", 1)[0].strip()
+        if display:
+            return display, role
+
+    return "Unknown", role
+
+
 # ── Appointment Types ─────────────────────────────────────────────────────────
 
 @router.get("/types", response_model=list[AppointmentTypeOut])
@@ -1136,7 +1157,7 @@ def get_appointment_audit(
     """
     practice_id = current_user.practice_id
     _get_appointment(appointment_id, practice_id, db)  # 404 if not in practice
-    return (
+    entries = (
         db.query(AppointmentAuditLog)
         .filter(
             AppointmentAuditLog.practice_id == practice_id,
@@ -1145,6 +1166,36 @@ def get_appointment_audit(
         .order_by(AppointmentAuditLog.created_at)
         .all()
     )
+    actor_ids = {entry.confirmed_by_user_id for entry in entries}
+    actors = {}
+    if actor_ids:
+        actors = {
+            user.id: user
+            for user in (
+                db.query(User)
+                .options(joinedload(User.practitioner))
+                .filter(User.practice_id == practice_id, User.id.in_(actor_ids))
+                .all()
+            )
+        }
+
+    response = []
+    for entry in entries:
+        actor_display, actor_role = _audit_actor_display(actors.get(entry.confirmed_by_user_id))
+        response.append(AppointmentAuditLogOut(
+            id=entry.id,
+            appointment_id=entry.appointment_id,
+            practice_id=entry.practice_id,
+            confirmed_by_user_id=entry.confirmed_by_user_id,
+            confirmed_by_display=actor_display,
+            confirmed_by_role=actor_role,
+            action=entry.action,
+            status_before=entry.status_before,
+            status_after=entry.status_after,
+            cancellation_reason=entry.cancellation_reason,
+            created_at=entry.created_at,
+        ))
+    return response
 
 
 @router.patch("/{appointment_id}/status", response_model=AppointmentOut)
