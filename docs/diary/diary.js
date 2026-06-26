@@ -2088,12 +2088,26 @@ function renderBernieReview(payload) {
     confirmBtn.disabled = true;
     confirmBox.appendChild(confirmBtn);
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const isSmoke = urlParams.get("smoke") === "true";
+    const isConfirmAdapter = isSmoke && urlParams.get("bernie_confirm_adapter") === "true";
+
     const successMsg = document.createElement("div");
     successMsg.className = "bernie-success-alert hidden";
     successMsg.setAttribute("data-testid", "bernie-review-success-message");
     successMsg.id = "bernie-success-message";
-    successMsg.textContent = "Booking proposal approved successfully! (Simulated)";
+    if (isConfirmAdapter) {
+      successMsg.textContent = "Booking proposal approved successfully!";
+    } else {
+      successMsg.textContent = "Booking proposal approved successfully! (Simulated)";
+    }
     confirmBox.appendChild(successMsg);
+
+    const errorMsg = document.createElement("div");
+    errorMsg.className = "bernie-error-alert hidden";
+    errorMsg.setAttribute("data-testid", "bernie-review-error-message");
+    errorMsg.id = "bernie-error-message";
+    confirmBox.appendChild(errorMsg);
 
     contentEl.appendChild(confirmBox);
 
@@ -2102,12 +2116,50 @@ function renderBernieReview(payload) {
       confirmBtn.disabled = !e.target.checked;
     });
 
-    // Event listener to simulate confirmation
-    confirmBtn.addEventListener("click", () => {
-      payload.confirm_payload.confirmed = true;
+    // Event listener to simulate or execute confirmation
+    confirmBtn.addEventListener("click", async () => {
       confirmBtn.disabled = true;
       checkbox.disabled = true;
-      successMsg.classList.remove("hidden");
+      successMsg.classList.add("hidden");
+      errorMsg.classList.add("hidden");
+
+      if (isConfirmAdapter && payload.confirm_endpoint && payload.confirm_payload) {
+        const body = {
+          ...payload.confirm_payload,
+          confirmed: true
+        };
+        try {
+          const response = await apiFetch(payload.confirm_endpoint, {
+            method: "POST",
+            body: JSON.stringify(body)
+          });
+          if (response.ok) {
+            successMsg.classList.remove("hidden");
+          } else {
+            let detail = "";
+            try {
+              const errData = await response.json();
+              detail = errData.detail || response.statusText || `Status ${response.status}`;
+            } catch (e) {
+              detail = `Status ${response.status}`;
+            }
+            errorMsg.textContent = `Booking proposal confirmation failed: ${detail}`;
+            errorMsg.classList.remove("hidden");
+            confirmBtn.disabled = false;
+            checkbox.disabled = false;
+          }
+        } catch (err) {
+          errorMsg.textContent = `Booking proposal confirmation failed: ${err.message || err}`;
+          errorMsg.classList.remove("hidden");
+          confirmBtn.disabled = false;
+          checkbox.disabled = false;
+        }
+      } else {
+        if (payload.confirm_payload) {
+          payload.confirm_payload.confirmed = true;
+        }
+        successMsg.classList.remove("hidden");
+      }
     });
   }
 }

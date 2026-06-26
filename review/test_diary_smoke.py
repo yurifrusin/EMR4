@@ -202,7 +202,6 @@ def test_bernie_review_blocked(diary_page):
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
-
 def test_bernie_review_candidate_selection(diary_page):
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
@@ -635,5 +634,148 @@ def test_bernie_review_live_confirmation_ready(diary_page):
         # Clean up routes
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
         diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_confirm_submit_adapter_success(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    payload_received = []
+
+    def handle_confirm(route):
+        req = route.request
+        assert req.method == "POST"
+        payload_received.append(json.loads(req.post_data))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        # Load with bernie_confirm_adapter=true
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=confirmation_ready&bernie_confirm_adapter=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
+        error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
+
+        assert checkbox.is_visible()
+        assert checkbox.is_checked() is False
+        assert confirm_btn.is_visible()
+        assert confirm_btn.is_disabled()
+        assert success_msg.is_hidden()
+        assert error_msg.is_hidden()
+
+        # No submit before approval
+        assert len(payload_received) == 0
+
+        # Check box, button enabled
+        checkbox.check()
+        assert confirm_btn.is_disabled() is False
+
+        # Click confirm
+        confirm_btn.click()
+
+        # UI state after click
+        assert confirm_btn.is_disabled()
+        assert checkbox.is_disabled()
+        assert success_msg.is_visible()
+        assert error_msg.is_hidden()
+        assert "Booking proposal approved successfully" in success_msg.text_content()
+
+        # Verify POST payload
+        assert len(payload_received) == 1
+        assert payload_received[0]["confirmed"] is True
+        assert payload_received[0]["selection_proposal"]["intent"] == "select_slot_for_create_proposal"
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_confirm_submit_adapter_error_and_retry(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    request_count = 0
+
+    def handle_confirm(route):
+        nonlocal request_count
+        request_count += 1
+        if request_count == 1:
+            # First attempt fails with 500
+            route.fulfill(
+                status=500,
+                content_type="application/json",
+                body=json.dumps({"detail": "Database connection lost"})
+            )
+        else:
+            # Second attempt succeeds
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        # Load with bernie_confirm_adapter=true
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=confirmation_ready&bernie_confirm_adapter=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
+        error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
+
+        checkbox.check()
+        confirm_btn.click()
+
+        # First attempt (fails)
+        assert error_msg.is_visible()
+        assert "Database connection lost" in error_msg.text_content()
+        assert success_msg.is_hidden()
+
+        # Checkbox and button re-enabled for retry
+        assert checkbox.is_disabled() is False
+        assert confirm_btn.is_disabled() is False
+
+        # Retry
+        confirm_btn.click()
+
+        # Second attempt (succeeds)
+        assert success_msg.is_visible()
+        assert error_msg.is_hidden()
+        assert checkbox.is_disabled()
+        assert confirm_btn.is_disabled()
+        assert request_count == 2
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_confirm_submit_adapter_disabled_for_non_confirmable_states(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        # Blocked state with bernie_confirm_adapter=true
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=blocked&bernie_confirm_adapter=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+
+        # Candidate selection state with bernie_confirm_adapter=true
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=candidate_selection_required&bernie_confirm_adapter=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+    finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, `review/test_diary_smoke.py`.
+- Verification run: `node --check docs\diary\diary.js`; `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py`; `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`; `git diff --check`. Ariadne applied a bounded whitespace cleanup after the first `git diff --check` reported one blank line at EOF, then reran all checks successfully.
+- Remaining risks: Smoke/feature-gated only; the adapter is not enabled in normal diary mode and tests route-intercept the confirm endpoint rather than performing a live write.
