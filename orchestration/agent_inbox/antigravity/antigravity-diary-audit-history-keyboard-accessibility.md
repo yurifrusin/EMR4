@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | f584c4a |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-audit-history-keyboard-accessibility --summary "Short plan summary"` |
@@ -87,8 +87,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
-
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.html, docs/diary/diary.js, review/test_diary_smoke.py
+- Verification run: node --check docs/diary/diary.js, pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q, python scripts/check_frontend_versions.py, and git diff --check (all passed).
+- Remaining risks: Low. Minimal localized changes to improve keyboard accessibility and ARIA semantics of the audit history toggle.

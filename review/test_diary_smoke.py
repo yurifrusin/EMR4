@@ -80,19 +80,51 @@ def test_booking_audit_history(diary_page):
     diary_page.wait_for_selector("[data-testid='booking-audit-section']:not(.hidden)", state="visible", timeout=2000)
     diary_page.wait_for_selector("[data-testid='booking-audit-content'].hidden", state="attached", timeout=2000)
     
-    # Click the audit header to expand it
-    diary_page.click("[data-testid='booking-audit-header']")
+    # Check accessibility/ARIA attributes
+    header = diary_page.locator("[data-testid='booking-audit-header']")
+    assert header.get_attribute("role") == "button"
+    assert header.get_attribute("tabindex") == "0"
+    assert header.get_attribute("aria-controls") == "booking-audit-content"
+    assert header.get_attribute("aria-expanded") == "false"
     
-    # Now the content should not be hidden
+    # Test keyboard toggle with Enter
+    header.focus()
+    diary_page.keyboard.press("Enter")
     diary_page.wait_for_selector("[data-testid='booking-audit-content']:not(.hidden)", state="visible", timeout=2000)
-    
+    assert header.get_attribute("aria-expanded") == "true"
+
+    # Test keyboard toggle with Space
+    diary_page.keyboard.press("Space")
+    diary_page.wait_for_selector("[data-testid='booking-audit-content'].hidden", state="attached", timeout=2000)
+    assert header.get_attribute("aria-expanded") == "false"
+
+    # Click the audit header to expand it again and verify standard click
+    header.click()
+    diary_page.wait_for_selector("[data-testid='booking-audit-content']:not(.hidden)", state="visible", timeout=2000)
+    assert header.get_attribute("aria-expanded") == "true"
+
     # Check that mock events are rendered
     assert diary_page.locator("[data-testid='booking-audit-item']", has_text="Status Changed by Dr. Practice Owner").count() == 1
     assert diary_page.locator("[data-testid='booking-audit-item']", has_text="Created by Staff (11111111)").count() == 1
 
     # Check status transitions and formatting
     assert diary_page.locator("[data-testid='booking-audit-item']", has_text="Changed from Booked to Confirmed").count() == 1
-    
+
     # Close the modal
+    diary_page.click("#btn-booking-close")
+    diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)
+
+    # Open again to verify reset of aria-expanded
+    # Click to deactivate the active appointment
+    diary_page.click(".appt:has-text('Margaret Thompson')")
+    # Click again to activate it
+    diary_page.click(".appt:has-text('Margaret Thompson')")
+    diary_page.wait_for_selector(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt", state="visible", timeout=3000)
+    diary_page.click(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt")
+    diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
+
+    header = diary_page.locator("[data-testid='booking-audit-header']")
+    assert header.get_attribute("aria-expanded") == "false"
+
     diary_page.click("#btn-booking-close")
     diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)
