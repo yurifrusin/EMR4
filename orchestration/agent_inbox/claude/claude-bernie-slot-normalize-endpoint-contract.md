@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | f2e94f7 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-bernie-slot-normalize-endpoint-contract --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: None by Claude for this sprint.
+- Verification run: Not run by Claude. Claude hit a session/quota limit before plan submission.
+- Remaining risks: Superseded by the Codex worker fallback on `codex/bernie-slot-normalize-endpoint`, integrated in Sprint 40.
