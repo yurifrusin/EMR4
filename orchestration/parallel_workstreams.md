@@ -131,6 +131,41 @@ After every fully integrated batch, Codex updates
 - recommended next direction
 
 
+## Sprint 37: Appointment Audit Warning Summary
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending plan packets from Claude and Antigravity |
+| Product Goal | Persist and display bounded warning metadata for confirmed appointment proposal mutations so audit history can prove when staff confirmed warnings |
+
+### Workstream S37-A - Backend Audit Warning Summary Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-claude-appointment-audit-warning-summary-contract.md` |
+| Goal | Plan, then after approval persist safe warning metadata for confirmed appointment proposal mutations |
+| In Scope | Plan packet first; after approval appointment proposal/confirmation and audit-log backend surfaces only as needed, likely `app/models/appointments.py`, `app/schemas/appointments.py`, `app/routers/appointments.py`, Alembic migration if persistence requires one, and focused appointment audit/proposal tests |
+| Out of Scope | Diary UI implementation, broad supervisor dashboard, Bernie runtime/tool execution, taskpane, Command Centre, SMS, billing, patient demographics, unrelated appointment flows, broad audit framework beyond appointment mutation warning metadata |
+| Verification | Plan packet first; after approval py_compile touched backend modules, focused pytest for appointment proposal/audit warning-summary persistence, adjacent audit/proposal tests if touched, Alembic upgrade head if migration added, and `git diff --check` |
+| Status | Queued for plan |
+
+### Workstream S37-B - Diary Audit Warning Summary UI
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-antigravity-diary-audit-warning-summary-ui.md` |
+| Goal | Plan, then after approval display persisted appointment audit warning metadata in the read-only diary Audit History section |
+| In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke fixtures, and `review/test_diary_smoke.py` or `review/checks_diary.json` as needed for deterministic warning-summary assertions |
+| Out of Scope | Backend implementation, appointment mutation/proposal logic, broad booking modal redesign, supervisor dashboard, Bernie runtime/tool execution, taskpane, Command Centre, SMS, billing, resource administration, cancelled appointment restore/reactivation |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary review smoke with compact assertions for warning summary rendering, frontend version check if assets change, `git diff --check`, targeted browser checks only if structural assertions cannot prove behaviour |
+| Status | Queued for plan |
+
 
 ## Sprint 36: Diary Audit History Keyboard Accessibility
 
