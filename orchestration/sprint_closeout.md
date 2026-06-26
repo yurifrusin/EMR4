@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 59: Bernie Staff Pilot Gate Foundation |
 | Integrated through | Default-off authenticated backend eligibility gate for future staff-visible Bernie pilot |
-| Status | Integrated locally and verified; pending push/mirror/audit |
+| Status | Integrated, verified, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
