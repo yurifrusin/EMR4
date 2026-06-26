@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-dev-review-selector-help` |
-| Status | queued |
+| Status | submitted |
 | Created | ae57b2a |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-dev-review-selector-help --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Coordination only: created `orchestration/agent_inbox/codex/plan-codex-codex-bernie-dev-review-selector-help.md` and updated this task packet status/notes. No runtime, docs, or test files changed.
+- Verification run: `python scripts\agent_worktrees.py handin`; `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-dev-review-selector-help ...`; `git status --short --branch`.
+- Remaining risks: Implementation not started by design; runtime verification remains pending until Ariadne sends exactly `complete sprint task`.
