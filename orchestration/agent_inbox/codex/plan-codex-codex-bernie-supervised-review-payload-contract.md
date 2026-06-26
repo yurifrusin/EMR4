@@ -4,6 +4,9 @@
 |---|---|
 | To | codex |
 | From | codex |
+| Role | codex-worker |
+| Worker Name | Cicero |
+| Worker Branch | `codex/bernie-supervised-review-payload` |
 | Branch | `codex/bernie-supervised-review-payload` |
 | Source Task | `codex-bernie-supervised-review-payload-contract` |
 | Status | pending_plan_review |

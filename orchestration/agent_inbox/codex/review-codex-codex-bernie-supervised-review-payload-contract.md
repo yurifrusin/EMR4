@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Sprint 48 dispatched to Codex worker
+Corrected Sprint 48 Codex worker plan metadata
 
 ## Worker Completion Notes
 
