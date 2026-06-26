@@ -6,6 +6,7 @@ from fastapi import APIRouter, Body, Depends, HTTPException, Query, status
 from sqlalchemy import or_
 from sqlalchemy.orm import Session, joinedload
 
+from app.config import settings
 from app.dependencies import get_db, get_current_user, require_role
 from app.models.patients import Patient
 from app.models.tenancy import User, UserRole, Practitioner, Practice, PracticeLocation
@@ -30,8 +31,9 @@ from app.schemas.appointments import (
     SlotSelectionProposalIn, SlotSelectionProposalOut,
     BernieStaffReviewPayload, BernieStaffReviewSlotSummary,
     BernieSupervisedBookingIn, BernieSupervisedBookingOut,
-    BernieCreateProposalConfirmationIn,
+    BernieCreateProposalConfirmationIn, BerniePilotEligibilityOut,
 )
+from app.services.bernie_pilot_gate import evaluate_bernie_pilot_eligibility
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -1079,6 +1081,18 @@ def get_waiting_room(
         q = q.filter(Appointment.waiting_area_id == waiting_area_id)
     q = _filter_by_location(q, location_id, practice_id, db)
     return q.order_by(Appointment.queue_position.nullslast(), Appointment.start_time_local).all()
+
+
+@router.get("/bernie/pilot-eligibility", response_model=BerniePilotEligibilityOut)
+def get_bernie_pilot_eligibility(
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    return evaluate_bernie_pilot_eligibility(
+        enabled=settings.bernie_staff_pilot_enabled,
+        practice_allowlist=settings.bernie_staff_pilot_practice_ids,
+        user_allowlist=settings.bernie_staff_pilot_user_ids,
+        current_user=current_user,
+    )
 
 
 @router.get("/{appointment_id}", response_model=AppointmentOut)

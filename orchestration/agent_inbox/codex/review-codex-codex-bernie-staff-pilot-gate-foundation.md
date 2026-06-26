@@ -16,9 +16,9 @@ Sprint 59 dispatched: Bernie staff pilot gate foundation
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed: `orchestration/agent_inbox/codex/codex-bernie-staff-pilot-gate-foundation.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-staff-pilot-gate-foundation.md`
-- Verification run: Plan-gate only. Ran `python scripts\agent_worktrees.py handin --agent codex`, read `AGENTS.md` and `orchestration/parallel_workstreams.md`, inspected Bernie backend/config/test surfaces, and captured the implementation plan with `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-staff-pilot-gate-foundation ...`. No production code or tests changed/run yet.
-- Remaining risks: Awaiting Ariadne/Codex plan review and explicit `complete sprint task` before implementation. Main design ambiguity is standalone eligibility endpoint versus additive field on existing Bernie payloads; the submitted plan recommends a standalone non-mutating endpoint to avoid invoking proposal routes just to decide UI eligibility.
+- Files changed: `app/config.py`; `app/services/bernie_pilot_gate.py`; `app/schemas/appointments.py`; `app/routers/appointments.py`; `tests/test_bernie_staff_pilot_gate.py`; `orchestration/agent_inbox/codex/codex-bernie-staff-pilot-gate-foundation.md`
+- Verification run: `python -m py_compile app\config.py app\services\bernie_pilot_gate.py app\routers\appointments.py app\schemas\appointments.py` passed; `python -m pytest ...` could not run under system Python because pytest is not installed; `.venv\Scripts\python.exe -m py_compile app\config.py app\services\bernie_pilot_gate.py app\routers\appointments.py app\schemas\appointments.py` passed; `.venv\Scripts\python.exe -m pytest tests\test_bernie_staff_pilot_gate.py tests\test_bernie_dev_fixtures.py tests\test_bernie_supervised_booking_wrapper.py -q` passed with 31 tests; `git diff --check` passed. Focused tests cover default-off, enabled-without-allowlist fail-closed, practice/user allowlist scoping, malformed allowlist fail-closed, auth requirement, no appointment/audit writes, and no provider/LLM/mutation calls in the new route/service source.
+- Remaining risks: The gate is intentionally standalone and backend-only; later frontend work still needs to consume `/api/v1/appointments/bernie/pilot-eligibility` before showing Bernie review outside explicit dev/query paths. No frontend exposure, appointment mutation, audit write, provider call, or migration was added.
 
 ## Required Review Steps
 

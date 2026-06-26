@@ -33,6 +33,10 @@ class Settings(BaseSettings):
     clicksend_username: Optional[str] = None
     clicksend_api_key: Optional[str] = None
 
+    bernie_staff_pilot_enabled: bool = False
+    bernie_staff_pilot_practice_ids: str = ""
+    bernie_staff_pilot_user_ids: str = ""
+
     # Patient file storage. Point this at a OneDrive-synced folder so generated
     # .docx files are immediately accessible via Word Online. The backend creates
     # the directory if it doesn't exist. Production: a SharePoint/Graph path or

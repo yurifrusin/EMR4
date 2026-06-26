@@ -492,6 +492,15 @@ class BernieStaffReviewPayload(BaseModel):
     confirm_evidence: list[str] = Field(default_factory=list)
 
 
+class BerniePilotEligibilityOut(BaseModel):
+    surface: Literal["bernie_staff_review"]
+    enabled: bool
+    eligible: bool
+    reason: Literal["pilot_disabled", "allowlist_match", "no_allowlist_match"]
+    practice_allowed: bool
+    user_allowed: bool
+
+
 class BernieSupervisedBookingIn(BaseModel):
     """Typed deterministic intake for supervised Bernie booking proposals."""
     command: SlotSearchCommandIn
