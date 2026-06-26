@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-audit-history-testid-hardening` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 18:29 +1000 |
 | Source HEAD | `49cc096` |
 
@@ -44,6 +44,6 @@ None expected.
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; implementation submitted and merged after verification.
+- Required changes before implementation: None.
+- Approved to proceed: yes.

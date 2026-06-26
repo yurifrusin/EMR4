@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-audit-history-testid-hardening` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -39,5 +39,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated; diff was limited to audit-history test hooks, smoke assertions, and asset cache-bust.
+- Follow-up required: None for Sprint 35.

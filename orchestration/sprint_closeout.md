@@ -8,6 +8,63 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 35: Diary Audit History Test-Hook Hardening |
+| Integrated through | Sprint 35 stable diary audit-history test hooks and deterministic smoke assertions |
+| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Last updated | 2026-06-26 |
+
+## What Changed
+
+- Added stable `data-testid` hooks to the diary booking audit-history section, header, title, content, list, fallback rows, audit items, metadata, timestamps, and details.
+- Updated rendered audit-history list items in `docs/diary/diary.js` to set test hooks without changing visual copy or runtime behaviour.
+- Updated `review/test_diary_smoke.py` to use the stable audit-history test hooks instead of brittle CSS class selectors.
+- Updated `review/checks_diary.json` to assert the audit header/title through `data-testid` selectors.
+- Bumped the diary JS cache-bust to `diary.js?v=101` in `docs/diary/diary.html`.
+- No backend code, mutation/proposal flow, taskpane, Command Centre, billing, SMS, AI provider, resource administration, cancelled-appointment review, or broad booking modal redesign was included.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified the deterministic diary smoke harness and asset-version checks. This sprint intentionally adds non-functional test hooks and stronger automated assertions only.
+
+Optional confidence check only, if Yuri happens to be in the live diary after deployment:
+
+1. Setup: hard refresh the live diary and confirm `diary.js?v=101` and `diary.css?v=98` are loaded.
+2. Exact UI path: open an existing appointment for editing, then expand `Audit History`.
+3. Expected result: the visible audit-history copy should look unchanged from Sprint 34, but automated tests now target stable hooks under the hood.
+4. Expected safety: no new buttons, edits, status changes, waiting-area changes, cancellation changes, or proposal confirmations should appear from the audit section.
+5. Suspicious signs: audit history no longer expands, visible text changes unexpectedly, console errors appear, or booking save/cancel/status flows change.
+6. Skippable parts: do not retest backend audit actor fields, taskpane, Command Centre, patient files, resource administration, drag/resize, recurrence, SMS, billing, AI provider facade, security workflows, or cancelled-appointment review for Sprint 35.
+7. Evidence to report: only report a screenshot/console error if the audit section visually regressed or created a new mutation affordance.
+
+## Not Required Before Moving On
+
+- No manual live UI review is required; the deterministic diary smoke passed using the new hooks.
+- No database migration, data repair, Word taskpane, Command Centre, GCP/Gemini, Office dialog, resource admin, billing, SMS, or security-console action is required.
+
+## Known Follow-Up
+
+- Keep moving stable UI review checks from visual/class selectors to `data-testid` hooks when touching a surface.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert still appears on GitHub pushes and remains outside Sprint 35.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found the Sprint 35 Antigravity plan and review packets.
+- Frontend static check: `node --check docs\diary\diary.js` -> passed.
+- Deterministic diary review: `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 17 passed.
+- Frontend asset version check: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; `diary.js` moved to `v=101` while live deployed HTML still served `v=100` before push.
+- Diff hygiene: `git diff --check` -> passed.
+
+## Recommended Next Direction
+
+Continue with another small Programme 2D slice once Sprint 35 is pushed, mirrored, and audited, or wait for Claude's headless limit to recover before backend-heavy audit/proposal work.
+
+
+## Previous Closeout - Sprint 34
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 34: Appointment Audit History Readability |
 | Integrated through | Sprint 34 backend audit actor-display contract and diary readable audit-history UI |
 | Status | Integrated locally, verified, and pending push/mirror/audit |
@@ -70,7 +127,6 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 ## Recommended Next Direction
 
 Sprint 35 has been dispatched as a small deterministic-review-friendly slice while Claude's headless session limit recovers: add stable audit-history test hooks and smoke assertions without changing runtime behaviour.
-
 
 ## Previous Closeout - Sprint 33
 

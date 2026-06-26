@@ -135,9 +135,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; Antigravity plan gate pending |
+| Status | Integrated locally; closeout verification passed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Antigravity plan and Ariadne review |
+| Integration Gate | Passed; pending final push/mirror/audit |
 | Product Goal | Keep audit-history UI review cheap and robust by adding stable test hooks and deterministic assertions for the read-only audit-history section |
 
 ### Workstream S35-A - Diary Audit History Stable Selectors
@@ -151,7 +151,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.js`, and `review/test_diary_smoke.py` only unless a directly required adjacent frontend file is unavoidable |
 | Out of Scope | Backend code, appointment mutation/proposal flows, taskpane, Command Centre, billing, SMS, AI provider code, resource administration, cancelled appointment review, broad booking modal redesign |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary smoke, frontend version check if assets change, and `git diff --check` |
-| Status | Plan gate pending |
+| Status | Integrated after Antigravity review packet and Ariadne verification |
 
 ## Sprint 34: Appointment Audit History Readability
 
