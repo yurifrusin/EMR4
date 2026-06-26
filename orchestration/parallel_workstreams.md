@@ -126,6 +126,41 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 31: AI Boundary And Cheap Review Harness
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending worker plans and Codex approval |
+| Product Goal | Formalize the first practical AI provider boundary and expand deterministic diary review so the sprint loop uses CLI/text and Playwright/pytest before GUI automation |
+
+### Workstream S31-A - AI Provider Boundary Facade
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-ai-provider-boundary-facade.md` |
+| Goal | Plan, then after approval add the first thin EMR4-owned AI service boundary for clinical/Bernie-facing AI contracts |
+| In Scope | Plan packet first; after approval a small backend-only scaffold around existing Gemini consultation/letter usage, likely `app/services/ai/contracts.py`, `app/services/ai/service.py`, `app/services/ai/providers/gemini.py`, and focused tests/fixtures if justified |
+| Out of Scope | Provider switch, LiteLLM integration, prompt rewrite, live Gemini credential work, diary frontend, taskpane UI, Command Centre UI, Bernie runtime, migrations, broad consultation/letter behaviour changes |
+| Verification | Plan packet first; after approval py_compile touched Python modules, focused pytest for new AI contracts/tests, existing consultation/letter tests if touched and available, no live provider calls required, `git diff --check` |
+| Status | Dispatched |
+
+### Workstream S31-B - Diary Review Harness Hardening
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-review-harness-hardening.md` |
+| Goal | Plan, then after approval extend deterministic diary review checks so more user-review work runs through cheap Playwright/pytest assertions |
+| In Scope | Plan packet first; after approval `review/checks_diary.json`, `review/harness.py`, `review/test_diary_smoke.py`, `review/README.md`, and minimal `docs/diary` test hooks/data-testid attributes if justified |
+| Out of Scope | Backend API changes, migrations, production diary behaviour redesign, appointment mutation semantics, taskpane/Command Centre, Bernie runtime, broad visual restyle, Computer Use dependency |
+| Verification | Plan packet first; after approval `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`, `node --check docs/diary/diary.js` if touched, `npm run validate-all` if relevant, `git diff --check`; capture screenshots/traces only on failure |
+| Status | Dispatched |
+
 ## Sprint 29: Cancellation Reason Capture
 
 | Item | Value |
