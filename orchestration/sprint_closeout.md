@@ -8,12 +8,58 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 42: Bernie Slot Selection Proposal Contract |
-| Integrated through | Non-mutating backend endpoint that converts one supervised slot-search candidate selection into create-proposal evidence |
-| Status | Integrated, verified, pushed, mirrored, audited, and closed |
+| Batch | Sprint 43: Bernie Slot Flow Review Harness |
+| Integrated through | Deterministic backend harness proving the Bernie normalize -> normalized search -> slot selection chain remains no-write/no-LLM before final booking confirmation work |
+| Status | Integrated locally; push/mirror/audit pending |
 | Last updated | 2026-06-27 |
 
 ## What Changed
+
+- Added `tests/test_bernie_slot_flow_review_harness.py`.
+- The harness exercises the backend-only Bernie chain across command normalization, normalized slot search, and supervised slot selection proposal.
+- It proves a successful normalize -> search -> select path can prepare create-proposal evidence without writing appointment rows or appointment audit rows.
+- It covers no-match selection blocking and conflict selection blocking without new writes.
+- It adds runtime and source-level guards that fail if the flow instantiates/calls the AI provider surface or performs final booking/audit writes inside the three Bernie proposal routes.
+- Cicero/Plato implemented the sprint on `codex/bernie-slot-flow-review-harness`.
+- No production route, schema, model, migration, diary UI, taskpane, Command Centre, Gemini parsing, autonomous Bernie runtime, final booking write bridge, audit mutation, billing, SMS, resource admin, or visible workflow changed.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified this as a deterministic backend test-harness sprint. There is no visible UI, deployed asset, appointment mutation, LLM call, Office/Word surface, or clinical workflow for Yuri to review.
+
+## Not Required Before Moving On
+
+- No manual live API test is required; the new harness and adjacent suites cover the chain structurally.
+- No manual live UI review is required; no frontend or deployed static assets changed.
+- No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, diary grid, resource admin, billing, SMS, or security-console action is required.
+- No user decision is needed before the next narrow Bernie backend slice.
+
+## Known Follow-Up
+
+- The next useful sprint is the final supervised Bernie create-proposal confirmation/write bridge with explicit appointment write and audit semantics.
+- Keep the bridge narrowly scoped: it should consume already-supervised proposal evidence, require confirmation, write exactly one appointment when safe, and create bounded audit evidence.
+- Preserve the no-LLM/no-autonomous-write boundary: deterministic parsing/search/selection remains separate from any future natural-language Bernie runtime.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert remains outside this sprint.
+
+## Verification
+
+- `git diff --check master..origin/codex/bernie-slot-flow-review-harness` -> passed.
+- Ariadne reran compile check from the worker checkout with the project venv: `python -m py_compile tests\test_bernie_slot_flow_review_harness.py` -> passed.
+- Ariadne reran focused harness tests: `python -m pytest tests\test_bernie_slot_flow_review_harness.py -q --tb=short -p no:randomly` -> 4 passed.
+- Ariadne reran adjacent Bernie endpoint tests serially: `python -m pytest tests\test_slot_search_normalize_endpoint.py tests\test_slot_search_normalized_execution.py tests\test_slot_selection_proposal.py tests\test_slot_search_proposal.py -q --tb=short -p no:randomly` -> 40 passed.
+- A first adjacent-suite attempt was invalid because multiple DB-creating pytest jobs were launched in parallel and collided on PostgreSQL enum creation; rerunning serially passed.
+- `python scripts\agent_worktrees.py audit --fetch` -> integration worktree clean before merge; final push/mirror/audit still pending.
+
+## Recommended Next Direction
+
+Sprint 44 should add the final supervised Bernie create-proposal confirmation/write bridge, keeping write/audit semantics explicit and using the new Sprint 43 harness as regression protection.
+
+
+## Previous Closeout - Sprint 42
+
+Sprint 42 added the non-mutating `POST /api/v1/appointments/proposals/slot-search/selection` endpoint that converts one supervised slot-search candidate selection into create-proposal evidence.
 
 - Added authenticated `POST /api/v1/appointments/proposals/slot-search/selection`.
 - The endpoint accepts supervised slot-selection evidence, either from a normalized slot-search execution payload plus selected index/candidate or an explicit selected candidate plus required booking context.

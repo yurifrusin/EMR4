@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-slot-flow-review-harness` |
 | Source Task | `codex-bernie-slot-flow-review-harness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated after Ariadne review. The branch added a deterministic backend review harness only; focused compile, focused pytest, serial adjacent Bernie endpoint pytest, and diff hygiene checks passed.
+- Follow-up required: Next Bernie slice can add the final supervised confirmation/write bridge, using this harness as regression protection.

@@ -9,7 +9,7 @@
 | Worker Branch | `codex/bernie-slot-flow-review-harness` |
 | Branch | `codex/bernie-slot-flow-review-harness` |
 | Source Task | `codex-bernie-slot-flow-review-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 00:20 +1000 |
 | Source HEAD | `7ef4713` |
 
@@ -47,6 +47,6 @@ Existing endpoint boundaries may already require DB fixture setup or dependency 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted. Scope was backend/test-harness only, with no UI, mutation bridge, LLM, or production refactor drift.
+- Required changes before implementation: Use a separate worker checkout rather than the integration worktree.
+- Approved to proceed: yes

@@ -135,9 +135,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Queued; waiting for Codex worker plan |
+| Status | Integrated locally; closeout verification passed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Codex worker plan review |
+| Integration Gate | Codex worker plan accepted and implementation integrated |
 | Product Goal | Prove the deterministic Bernie normalize-search-select flow through compact backend tests before adding final appointment write semantics |
 
 ### Workstream BZ - Bernie Slot Flow Review Harness
@@ -151,7 +151,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval focused backend tests/review helpers only, likely `tests/test_bernie_slot_flow_review_harness.py` or adjacent helpers; small testability extraction only if justified |
 | Out of Scope | Diary UI, taskpane, Command Centre, Gemini/LLM parsing, autonomous Bernie runtime, final appointment write/confirmation bridge, audit mutation, migrations, billing, SMS, resource admin, broad refactors, and unrelated test hygiene |
 | Verification | Plan packet first; after approval py_compile touched Python, focused pytest for the harness, adjacent Bernie slot endpoint tests if production code changes, no-mutation/no-LLM proof, and `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 42: Bernie Slot Selection Proposal Contract
 
