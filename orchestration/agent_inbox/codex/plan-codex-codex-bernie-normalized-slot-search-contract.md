@@ -9,7 +9,7 @@
 | Worker Branch | codex/bernie-normalized-slot-search |
 | Branch | `codex/bernie-normalized-slot-search` |
 | Source Task | `codex-bernie-normalized-slot-search-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 23:05 +1000 |
 | Source HEAD | `508a7f7` |
 
@@ -48,5 +48,5 @@ Main design risk is accidentally duplicating propose_slot_search logic or callin
 ## Codex Plan Review
 
 - Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Required changes before implementation: none; plan accepted as backend-only, non-mutating, and correctly plan-gated.
+- Approved to proceed: yes; implementation integrated in Sprint 41.

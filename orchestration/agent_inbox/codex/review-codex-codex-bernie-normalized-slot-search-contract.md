@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-normalized-slot-search` |
 | Source Task | `codex-bernie-normalized-slot-search-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Diff stayed scoped to `app/routers/appointments.py`, `app/schemas/appointments.py`, focused tests, and coordination packets.
+- Follow-up required: none for user review. Next Bernie slice can build on this endpoint without adding autonomous booking.

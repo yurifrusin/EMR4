@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-normalized-slot-search` |
 | Branch | `codex/bernie-normalized-slot-search` |
-| Status | submitted |
+| Status | integrated |
 | Created | 5ddd104 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-normalized-slot-search-contract --summary "Short plan summary"` |
@@ -94,4 +94,10 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 - Files changed: `app/routers/appointments.py`, `app/schemas/appointments.py`, `tests/test_slot_search_normalized_execution.py`, `orchestration/agent_inbox/codex/codex-bernie-normalized-slot-search-contract.md`.
 - Verification run: `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\schemas\appointments.py tests\test_slot_search_normalized_execution.py tests\test_bernie_slot_normalizer.py tests\test_slot_search_normalize_endpoint.py tests\test_slot_search_proposal.py`; `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_slot_search_normalized_execution.py tests\test_bernie_slot_normalizer.py tests\test_slot_search_normalize_endpoint.py tests\test_slot_search_proposal.py -q --tb=short -p no:randomly` (65 passed); `git diff --check`.
-- Remaining risks: New route name is `/api/v1/appointments/proposals/slot-search/normalized`; Ariadne may prefer a different final naming convention. Explicit no-mutation/no-LLM proof: new endpoint test asserts safe search leaves `Appointment` and `AppointmentAuditLog` row counts unchanged; unsafe command monkeypatches `_build_slot_search_proposal` to raise if called and confirms blocked normalization returns no proposal; source inspection test asserts the endpoint contains no `generate_content`, `Gemini`, `db.add`, `db.commit`, or `_write_audit` calls. Existing proposal/no-mutation and normalize/no-LLM tests also passed.
+- Remaining risks: New route name `/api/v1/appointments/proposals/slot-search/normalized` accepted for this adjacent contract. Explicit no-mutation/no-LLM proof: new endpoint test asserts safe search leaves `Appointment` and `AppointmentAuditLog` row counts unchanged; unsafe command monkeypatches `_build_slot_search_proposal` to raise if called and confirms blocked normalization returns no proposal; source inspection test asserts the endpoint contains no `generate_content`, `Gemini`, `db.add`, `db.commit`, or `_write_audit` calls. Existing proposal/no-mutation and normalize/no-LLM tests also passed.
+
+## Codex Integration Review
+
+- Review result: Integrated in Sprint 41.
+- Verification rerun by Ariadne: project venv `py_compile` for touched backend/test modules passed; focused pytest for normalized execution, normalizer, normalize endpoint, and slot-search proposal passed with 65 tests.
+- User review required: none; backend-only non-mutating contract with no visible UI or external console action.
