@@ -5,6 +5,9 @@
 | To | codex |
 | From | codex |
 | Branch | `codex/bernie-confirmed-flow-review-harness` |
+| Role | codex-worker |
+| Worker Name | Cicero |
+| Worker Branch | `codex/bernie-confirmed-flow-review-harness` |
 | Source Task | `codex-bernie-confirmed-flow-review-harness` |
 | Status | pending_plan_review |
 | Created | 2026-06-27 01:12 +1000 |
