@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-staff-pilot-eligibility-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -38,5 +38,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated after Ariadne review, deterministic verification, and whitespace hygiene fix.
+- Follow-up required: Antigravity must continue to stop after plan submission; this sprint breached the plan gate by implementing before release.

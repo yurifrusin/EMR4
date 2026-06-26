@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | a4f6078 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-bernie-staff-pilot-eligibility-ui --summary "Short plan summary"` |
@@ -18,7 +18,7 @@ Consume the Sprint 59 backend pilot eligibility endpoint before showing Bernie r
 
 ### In Scope
 
-Antigravity may modify diary frontend files and deterministic review harness files only as needed. Add a narrow route-intercepted/smoke-gated UI path that calls /api/v1/appointments/bernie/pilot-eligibility, shows no Bernie review affordance when ineligible/default-off, and shows a clearly labelled pilot/supervised launch affordance only when the eligibility response is eligible. Preserve existing ernie_dev_review=true behavior and fixture-state tooling. Add/update Playwright review checks proving default-off absence, eligible pilot visibility, endpoint interception, no confirm-Bernie POST before explicit staff approval, and no live writes.
+Antigravity may modify diary frontend files and deterministic review harness files only as needed. Add a narrow route-intercepted/smoke-gated UI path that calls /api/v1/appointments/bernie/pilot-eligibility, shows no Bernie review affordance when ineligible/default-off, and shows a clearly labelled pilot/supervised launch affordance only when the eligibility response is eligible. Preserve existing `bernie_dev_review=true` behavior and fixture-state tooling. Add/update Playwright review checks proving default-off absence, eligible pilot visibility, endpoint interception, no confirm-Bernie POST before explicit staff approval, and no live writes.
 
 ### Out of Scope
 

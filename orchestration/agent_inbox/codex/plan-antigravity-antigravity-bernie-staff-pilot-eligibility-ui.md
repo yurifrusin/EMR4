@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-staff-pilot-eligibility-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 09:16 +1000 |
 | Source HEAD | `af39ff9` |
 
@@ -44,6 +44,6 @@ Network errors/failures fail-closed (button stays hidden). Preserving existing d
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Plan scope was acceptable, but Antigravity implemented before explicit plan approval.
+- Required changes before implementation: Plan gate was breached; Ariadne performed full post-hoc review and bounded hygiene repair before integration.
+- Approved to proceed: accepted post-hoc after review

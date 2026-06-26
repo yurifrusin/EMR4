@@ -1643,7 +1643,7 @@ def test_bernie_pilot_eligibility_confirm_gated(diary_page):
         assert confirm_btn.is_disabled() is False
         confirm_btn.click()
         diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
-        
+
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["proposal_id"] == "prop-123"
         assert confirm_payloads[0]["confirmed"] is True
