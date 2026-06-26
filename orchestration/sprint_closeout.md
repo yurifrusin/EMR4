@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 53: Bernie Dev-Mode Review Feature Flag |
 | Integrated through | Explicit `bernie_dev_review=true` gate for the Bernie live review/confirm path, with deterministic route-intercepted proof |
-| Status | Integrated locally; pending push, mirror realignment, and final audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -48,11 +48,12 @@ Ariadne verified this with deterministic route-intercepted Playwright checks. Th
 - `node --check docs\diary\diary.js` -> passed.
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 35 passed.
 - `git diff --check` -> passed.
+- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `7cd26ea`; only the known dirty stale `codex/time-model` disposable worktree remains for manual review.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-After push/mirror/audit, the next useful slice is either a staff/dev affordance for launching this dev-gated Bernie review panel with realistic non-PHI data, or a small backend-backed dev fixture route that supplies deterministic review payloads without hand-crafted query URLs.
+The next useful slice is either a staff/dev affordance for launching this dev-gated Bernie review panel with realistic non-PHI data, or a small backend-backed dev fixture route that supplies deterministic review payloads without hand-crafted query URLs.
 
 
 ## Previous Closeout - Sprint 52
