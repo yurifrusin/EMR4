@@ -11,6 +11,11 @@
     {"name": "room1_label_present", "type": "text_count", "selector": ".col-room-label", "text": "Room 1", "expected": 1},
     {"name": "shera_assignment_present", "type": "text_count", "selector": ".col-assignment", "text": "Shera", "expected": 1},
     {"name": "booked_lifecycle_class_renders", "type": "min_count", "selector": ".appt.appt-booked", "expected": 1},
-    {"name": "arrived_lifecycle_class_renders", "type": "min_count", "selector": ".appt.appt-arrived", "expected": 1}
+    {"name": "arrived_lifecycle_class_renders", "type": "min_count", "selector": ".appt.appt-arrived", "expected": 1},
+    {"name": "cancelled_flow_sec_count_badge", "type": "text_count", "selector": "[data-testid=\"flow-count-cancelled\"]", "text": "1", "expected": 1},
+    {"name": "cancelled_flow_card_count", "type": "count", "selector": "[data-testid=\"flow-card\"][data-status=\"cancelled\"]", "expected": 1},
+    {"name": "cancelled_patient_name", "type": "text_count", "selector": "#flow-list-cancelled [data-testid=\"flow-card-name\"]", "text": "Alice Wonderland", "expected": 1},
+    {"name": "cancelled_cancellation_reason", "type": "text_count", "selector": "#flow-list-cancelled [data-testid=\"flow-card-cancellation-reason\"]", "text": "Reason: Patient had transport issues", "expected": 1},
+    {"name": "cancelled_status_badge", "type": "text_count", "selector": "#flow-list-cancelled [data-testid=\"flow-card-status\"]", "text": "CXL", "expected": 1}
   ]
 }

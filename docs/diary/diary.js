@@ -3586,12 +3586,15 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
   appts.forEach(a => {
     const card = document.createElement("div");
     card.className = `flow-card flow-card-${(a.status || "booked").toLowerCase()}`;
+    card.setAttribute("data-testid", "flow-card");
+    card.setAttribute("data-status", (a.status || "booked").toLowerCase());
 
     const header = document.createElement("div");
     header.className = "flow-card-header";
 
     const name = document.createElement("span");
     name.className = "flow-card-name";
+    name.setAttribute("data-testid", "flow-card-name");
 
     const provisionalName = provisionalPatientName(a);
     const isProvisional = isPatientIdentityUnconfirmed(a);
@@ -3657,6 +3660,7 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
     if (a.reason) {
       const reason = document.createElement("div");
       reason.className = "flow-card-reason";
+      reason.setAttribute("data-testid", "flow-card-reason");
       reason.textContent = a.reason;
       card.appendChild(reason);
     }
@@ -3664,6 +3668,7 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
     if (a.status === "Cancelled" && a.cancellation_reason) {
       const reason = document.createElement("div");
       reason.className = "flow-card-cancellation-reason";
+      reason.setAttribute("data-testid", "flow-card-cancellation-reason");
       reason.textContent = `Reason: ${a.cancellation_reason}`;
       card.appendChild(reason);
     }
@@ -3673,6 +3678,7 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
 
     const statusBadge = document.createElement("span");
     statusBadge.className = `flow-status-badge badge-${(a.status || "booked").toLowerCase()}`;
+    statusBadge.setAttribute("data-testid", "flow-card-status");
     statusBadge.textContent = getStatusLabel(a.status);
     footer.appendChild(statusBadge);
 

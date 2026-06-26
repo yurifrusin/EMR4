@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | b22a794 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-review-harness-hardening --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.html, docs/diary/diary.js, review/README.md, review/checks_diary.json, review/test_diary_smoke.py
+- Verification run: pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q, node --check docs/diary/diary.js, git diff --check
+- Remaining risks: None. The stable `data-testid` attributes are non-visual and only added to DOM elements, ensuring zero visual/functional regression.

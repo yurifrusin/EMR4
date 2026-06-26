@@ -5,7 +5,7 @@ of Ariadne driving a browser step-by-step (each step a paid model round-trip wit
 screenshots), the deterministic checks live here as code, run free under `pytest`,
 and emit a JUnit report Ariadne reads only when something fails.
 
-> Status: Initial diary smoke harness ratified by Ariadne and wired into CI.
+> Status: Diary smoke harness hardened with stable data-testid attributes and Cancelled flow panel assertions.
 
 ## What's here
 
@@ -13,7 +13,7 @@ and emit a JUnit report Ariadne reads only when something fails.
 |---|---|
 | `harness.py` | Reusable Playwright primitives (`count`, `min_count`, `text_count`) + a static-file server and an `office.js` stub. Model-agnostic library code. |
 | `checks_diary.json` | Data-driven check table for the diary grid. **Add a check = add a row** — no Playwright code to write. |
-| `test_diary_smoke.py` | Pytest spec: serves `docs/`, loads `diary.html?smoke=true`, parametrizes over the table so every check is a named case in the report. |
+| `test_diary_smoke.py` | Pytest spec: serves `docs/`, loads `diary.html?smoke=true` (with flow panel toggled open), parametrizes over the table so every check is a named case in the report. |
 
 ## Why it's deterministic
 
@@ -42,9 +42,13 @@ per-column breaks/intervals) and differ from `diary_template.json`:
 - **LUNCH** appears in all 3 columns; **MORNING TEA** in 2 (Room 3 has none); **BRUNCH**
   only in Room 2 — locking the per-column break shape.
 - Room 1 / Dr Alex Shera column header renders.
-- Lifecycle classes `appt-booked` and `appt-arrived` render. **Cancelled** appointments
-  are deliberately excluded from the grid (`shouldRenderAppointment`) — they belong in
-  the flow panel's Cancelled section, so there is no grid `appt-cancelled` to assert.
+- Lifecycle classes `appt-booked` and `appt-arrived` render.
+- **Cancelled** appointments are excluded from the grid by design (`shouldRenderAppointment`) but are verified in the flow panel's Cancelled section using stable `data-testid` selectors:
+  - Count badge on the section header matches `1`.
+  - Exactly `1` flow card with status `cancelled` exists.
+  - The patient name matches `Alice Wonderland`.
+  - The cancellation reason matches `Reason: Patient had transport issues`.
+  - The status badge shows `CXL`.
 
 > Note: asserting "breaks in *all* columns" per the canonical `diary_template.json`
 > (the real product rule that was once buggy) needs a **backend-backed** check — the

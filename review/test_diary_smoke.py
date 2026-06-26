@@ -52,6 +52,9 @@ def diary_page():
         harness.stub_office(page)
         page.goto(base_url + CHECKS["target"])
         page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        # Open flow panel to ensure the flow lists render
+        page.click("#btn-toggle-flow")
+        page.wait_for_selector("#diary-flow-panel:not(.hidden)", state="visible", timeout=5000)
         yield page
         browser.close()
 
