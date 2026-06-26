@@ -200,6 +200,21 @@ html, body {
 }
 #btn-refresh:hover { background: rgba(255,255,255,0.28); }
 
+.bernie-dev-state-select {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  max-width: 210px;
+}
+
+.bernie-dev-state-select option {
+  color: var(--text);
+}
+
 #diary-status {
   font-size: 10px;
   color: #a8c4e0;
@@ -1865,22 +1880,6 @@ html, body {
 }
 #btn-admin-panel:hover {
   background: rgba(255,255,255,0.28);
-}
-
-#btn-bernie-dev-launch {
-  background: rgba(255, 100, 100, 0.25);
-  border: 1px dashed rgba(255, 100, 100, 0.6);
-  color: #ff9999;
-  cursor: pointer;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 11px;
-  white-space: nowrap;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-#btn-bernie-dev-launch:hover {
-  background: rgba(255, 100, 100, 0.4);
-  border-color: #ff9999;
 }
 
 .admin-tabs {

@@ -8,28 +8,29 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 56: Bernie Dev Review Fixture Route UI Adapter |
-| Integrated through | Dev-only diary review adapter fetching backend deterministic Bernie fixtures |
-| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Batch | Sprint 57: Bernie Dev Fixture State Selector |
+| Integrated through | Dev-only diary toolbar selector for deterministic Bernie review fixture states |
+| Status | Integrated locally and verified; pending push/mirror/audit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- The dev-only Bernie review fixture path now fetches `GET /api/v1/appointments/dev/bernie-review-fixtures?state=<state>` for `blocked`, `candidate_selection_required`, and `confirmation_ready` states.
-- Default diary mode, `bernie_dev_review=true` without a review state, and offline smoke fixtures without the dev flag make no backend fixture calls.
-- Existing smoke/local mock behaviour remains available when the explicit dev fixture flag is absent.
-- Confirmation-ready review still requires staff checkbox approval before any confirm-Bernie POST, and tests route-intercept the confirm call.
-- Ariadne applied a bounded safety cleanup so dev-fixture fetch failures render a visible blocked `dev_fixture_unavailable` state instead of silently falling back to local mocks.
-- Bumped diary JS cache busting to `diary.js?v=111`.
+- Replaced the dev-only Bernie launch button with a compact fixture-state selector visible only when `bernie_dev_review=true`.
+- The selector offers exactly three deterministic backend fixture states: `blocked`, `candidate_selection_required`, and `confirmation_ready`.
+- Selecting a state preserves safe query parameters, sets `bernie_dev_review=true`, sets `bernie_review=<state>`, and loads the existing backend fixture-route adapter for that state.
+- Normal/default diary mode still exposes no Bernie review selector and makes no backend fixture or confirm-Bernie calls.
+- Confirmation-ready review still requires explicit staff checkbox approval before any confirm-Bernie POST.
+- Bumped diary asset cache busting to `diary.css?v=103` and `diary.js?v=112`.
+- Antigravity produced the initial plan but hit an Antigravity CLI quota block during implementation release; Ariadne used the agreed Codex-worker fallback, and Banach implemented the narrow UI/test slice.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required before continuing.
-Ariadne verified this as an explicit dev/query-gated UI adapter with deterministic route-intercepted Playwright checks. No production/default diary exposure or live write path changed.
+Ariadne verified this as an explicit dev/query-gated UI affordance with deterministic route-intercepted Playwright checks. No production/default diary exposure or live write path changed.
 
 ## Not Required Before Moving On
 
-- No manual live UI test is required; route-intercepted Playwright verifies fixture fetch, no-call defaults, visible failure handling, and explicit approval before confirm POST.
+- No manual live UI test is required; route-intercepted Playwright verifies selector visibility/gating, URL parameter preservation, fixture fetches, no-call defaults, and explicit approval before confirm POST.
 - No manual live API write test is required; confirm-Bernie remains intercepted in the harness and no live writes are performed.
 - No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
 - No user decision is needed before the next narrow Bernie slice.
@@ -39,19 +40,21 @@ Ariadne verified this as an explicit dev/query-gated UI adapter with determinist
 - A later product decision remains before exposing Bernie review in ordinary production mode without explicit dev/query gating.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 - The known moderate Dependabot alert remains outside this sprint.
+- Antigravity CLI quota was exhausted during Sprint 57 implementation release; Codex fallback handled this sprint without waiting.
 
 ## Verification
 
-- Ariadne reviewed the Antigravity plan and implementation packets and inspected the final branch diff against `master`.
+- Ariadne reviewed the Antigravity plan, detected an unapproved plan-gate runtime edit, restored it, then used the agreed Codex-worker fallback after Antigravity hit quota.
+- Ariadne inspected Banach's fallback implementation diff against `master`.
 - `node --check docs\diary\diary.js` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed with `diary.js` bumped from `v=110` to `v=111`.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed with `diary.css` bumped from `v=102` to `v=103` and `diary.js` bumped from `v=111` to `v=112`.
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 37 passed.
 - `git diff --check` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-Next sprint should stay narrow around Bernie dev-review hardening or UX polish: either add a visible dev-only fixture-state selector for staff/demo review, or pause for a product decision on when Bernie review should move beyond explicit dev/query gating.
+Next sprint can stay in the Bernie dev-review lane: either add a small staff-facing explanatory label/help affordance around the dev selector, or move toward a product decision on when Bernie review should progress beyond explicit dev/query gating.
 
 
 ## Previous Closeout - Sprint 55

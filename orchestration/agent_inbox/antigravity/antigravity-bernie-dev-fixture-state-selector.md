@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | superseded |
 | Created | a84e43c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-bernie-dev-fixture-state-selector --summary "Short plan summary"` |
@@ -87,8 +87,15 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
+Superseded by Ariadne/Codex fallback after Antigravity submitted a plan but hit
+an Antigravity CLI quota block during implementation release.
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed by Codex fallback: `docs/diary/diary.html`,
+  `docs/diary/diary.css`, `docs/diary/diary.js`,
+  `review/test_diary_smoke.py`.
+- Verification run by Codex fallback: `node --check docs\diary\diary.js`;
+  `.venv\Scripts\python.exe scripts\check_frontend_versions.py`;
+  `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py
+  --junitxml=review\diary-review.xml -q`; `git diff --check`.
+- Remaining risks: none known; the selector remains explicit-dev-query gated and
+  route-intercepted tests prove no confirm-Bernie POST before staff approval.

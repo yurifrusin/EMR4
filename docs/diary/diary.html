@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=102" />
-  <script src="diary.js?v=111" defer></script>
+  <link rel="stylesheet" href="diary.css?v=103" />
+  <script src="diary.js?v=112" defer></script>
 </head>
 <body>
 
@@ -46,7 +46,11 @@
       <span class="flow-count-pill" id="flow-waiting-count">0</span>
     </button>
     <button id="btn-refresh" title="Refresh appointments">&#8635; Refresh</button>
-    <button id="btn-bernie-dev-launch" class="hidden" data-testid="bernie-review-dev-launch-button" title="Dev Bernie Review">🤖 Dev Bernie Review</button>
+    <select id="bernie-dev-state-select" class="bernie-dev-state-select hidden" data-testid="bernie-review-dev-state-select" aria-label="Dev Bernie review fixture state" title="Dev Bernie Review">
+      <option value="blocked">blocked</option>
+      <option value="candidate_selection_required">candidate_selection_required</option>
+      <option value="confirmation_ready">confirmation_ready</option>
+    </select>
     <button id="btn-admin-panel" class="hidden" title="Resource Administration">⚙️ Admin</button>
     <span id="diary-status">Connecting…</span>
   </div>

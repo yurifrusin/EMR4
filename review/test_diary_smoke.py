@@ -1158,20 +1158,26 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
 
-    supervised_requests = []
+    dev_fixtures_requests = []
     confirm_payloads = []
 
-    diary_page.route(
-        "**/api/v1/appointments/proposals/bernie/supervised-booking",
-        lambda route: (
-            supervised_requests.append(json.loads(route.request.post_data)),
-            route.fulfill(
-                status=200,
-                content_type="application/json",
-                body=json.dumps(_bernie_live_confirmation_response())
-            )
+    def handle_dev_fixtures(route):
+        dev_fixtures_requests.append(route.request.url)
+        parsed_url = urllib.parse.urlparse(route.request.url)
+        params = urllib.parse.parse_qs(parsed_url.query)
+        state = params.get("state", [None])[0]
+        fixtures = {
+            "blocked": _bernie_live_blocked_response(),
+            "candidate_selection_required": _bernie_live_candidate_response(),
+            "confirmation_ready": _bernie_live_confirmation_response()
+        }
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps({state: fixtures[state]})
         )
-    )
+
+    diary_page.route("**/api/v1/appointments/dev/bernie-review-fixtures*", handle_dev_fixtures)
     diary_page.route(
         "**/api/v1/appointments/proposals/create/confirm-bernie",
         lambda route: (
@@ -1183,21 +1189,41 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
     try:
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_load_state("domcontentloaded")
-        launcher = diary_page.locator("[data-testid='bernie-review-dev-launch-button']")
-        assert launcher.is_hidden()
-        assert len(supervised_requests) == 0
+        selector = diary_page.locator("[data-testid='bernie-review-dev-state-select']")
+        assert selector.is_hidden()
+        assert len(dev_fixtures_requests) == 0
         assert len(confirm_payloads) == 0
 
-        diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true")
+        diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&smoke=true&bernie_confirm_adapter=true&practitioner_id=prac-1&selected_candidate_index=0")
         diary_page.wait_for_load_state("domcontentloaded")
-        assert launcher.is_visible()
-        assert len(supervised_requests) == 0
+        assert selector.is_visible()
+        assert selector.locator("option").evaluate_all("(options) => options.map((option) => option.value)") == [
+            "blocked",
+            "candidate_selection_required",
+            "confirmation_ready"
+        ]
+        assert len(dev_fixtures_requests) == 0
         assert len(confirm_payloads) == 0
 
-        launcher.click()
+        selector.select_option("candidate_selection_required")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
-        assert launcher.is_hidden()
-        assert len(supervised_requests) == 1
+        current_params = urllib.parse.parse_qs(urllib.parse.urlparse(diary_page.url).query)
+        assert current_params["bernie_dev_review"] == ["true"]
+        assert current_params["bernie_review"] == ["candidate_selection_required"]
+        assert current_params["smoke"] == ["true"]
+        assert current_params["bernie_confirm_adapter"] == ["true"]
+        assert current_params["practitioner_id"] == ["prac-1"]
+        assert current_params["selected_candidate_index"] == ["0"]
+        assert len(dev_fixtures_requests) == 1
+        assert "state=candidate_selection_required" in dev_fixtures_requests[-1]
+        assert len(confirm_payloads) == 0
+
+        selector = diary_page.locator("[data-testid='bernie-review-dev-state-select']")
+        assert selector.is_visible()
+        selector.select_option("confirmation_ready")
+        diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
+        assert len(dev_fixtures_requests) == 2
+        assert "state=confirmation_ready" in dev_fixtures_requests[-1]
         assert len(confirm_payloads) == 0
 
         checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
@@ -1220,7 +1246,7 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
         assert confirm_payloads[0]["confirmed"] is True
 
     finally:
-        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/dev/bernie-review-fixtures*")
         diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

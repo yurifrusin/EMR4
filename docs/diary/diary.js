@@ -19,6 +19,17 @@ const APPT_BLOCK_GAP_PX = 2;
 const DRAG_START_THRESHOLD_PX = 3;
 const MIN_TIME_INCREMENT_MINS = 5;
 const GRIDLINE_SNAP_TOLERANCE_MINS = 3;
+const BERNIE_DEV_FIXTURE_STATES = [
+  "blocked",
+  "candidate_selection_required",
+  "confirmation_ready"
+];
+const BERNIE_DEV_QUERY_PARAM_ALLOWLIST = [
+  "smoke",
+  "bernie_confirm_adapter",
+  "practitioner_id",
+  "selected_candidate_index"
+];
 
 let activeAppointments = [];
 let activeTypes = [];
@@ -43,6 +54,23 @@ function isSmokeMode() {
 
 function hasSlotPreviewParam() {
   return new URLSearchParams(window.location.search).get("slot_preview") === "true";
+}
+
+function isBernieDevFixtureState(state) {
+  return BERNIE_DEV_FIXTURE_STATES.includes(state);
+}
+
+function buildBernieDevFixtureSearch(state) {
+  const currentParams = new URLSearchParams(window.location.search);
+  const nextParams = new URLSearchParams();
+  BERNIE_DEV_QUERY_PARAM_ALLOWLIST.forEach(param => {
+    if (currentParams.has(param)) {
+      nextParams.set(param, currentParams.get(param));
+    }
+  });
+  nextParams.set("bernie_dev_review", "true");
+  nextParams.set("bernie_review", state);
+  return nextParams.toString();
 }
 
 function getMockSlotSearchCandidates() {
@@ -2177,8 +2205,7 @@ async function initBernieReview() {
     return;
   }
 
-  const isDevFixture = devReviewParam === "true" &&
-    (reviewParam === "blocked" || reviewParam === "candidate_selection_required" || reviewParam === "confirmation_ready");
+  const isDevFixture = devReviewParam === "true" && isBernieDevFixtureState(reviewParam);
 
   if (reviewParam === "live") {
     if (devReviewParam !== "true") {
@@ -2543,20 +2570,21 @@ Office.onReady(() => {
   const reviewParam = urlParams.get("bernie_review");
   const devReviewParam = urlParams.get("bernie_dev_review");
   const hasLiveDevReview = reviewParam === "live" && devReviewParam === "true";
-  const isDevFixture = devReviewParam === "true" &&
-    (reviewParam === "blocked" || reviewParam === "candidate_selection_required" || reviewParam === "confirmation_ready");
+  const isDevFixture = devReviewParam === "true" && isBernieDevFixtureState(reviewParam);
 
-  const btnDevLaunch = document.getElementById("btn-bernie-dev-launch");
-  if (btnDevLaunch) {
-    if (devReviewParam === "true" && reviewParam !== "live") {
-      btnDevLaunch.classList.remove("hidden");
-      btnDevLaunch.onclick = () => {
-        const nextParams = new URLSearchParams(window.location.search);
-        nextParams.set("bernie_review", "live");
-        window.location.search = nextParams.toString();
+  const devStateSelect = document.getElementById("bernie-dev-state-select");
+  if (devStateSelect) {
+    if (devReviewParam === "true") {
+      devStateSelect.classList.remove("hidden");
+      devStateSelect.value = isBernieDevFixtureState(reviewParam) ? reviewParam : "blocked";
+      devStateSelect.onchange = () => {
+        if (isBernieDevFixtureState(devStateSelect.value)) {
+          window.location.search = buildBernieDevFixtureSearch(devStateSelect.value);
+        }
       };
     } else {
-      btnDevLaunch.classList.add("hidden");
+      devStateSelect.classList.add("hidden");
+      devStateSelect.onchange = null;
     }
   }
 
