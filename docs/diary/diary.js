@@ -1881,6 +1881,264 @@ function focusDiaryWindow() {
     }
   } catch (_) {}
 }
+// ─── BERNIE SUPERVISED REVIEW HARNESS FIXTURES (Sprint 49) ──
+const mockBernieReviewBlocked = {
+  status: "blocked",
+  confirmation_ready: false,
+  selected_slot: null,
+  candidate_slots: [],
+  warning_summary: "0 warning(s), 1 blocked issue(s).",
+  evidence_summary: "Blocked review payload; no confirm evidence is available.",
+  confirm_payload: null,
+  blocks: [
+    { code: "missing_practitioner_id", message: "Practitioner ID is required." }
+  ]
+};
+
+const mockBernieReviewCandidateSelection = {
+  status: "candidate_selection_required",
+  confirmation_ready: false,
+  selected_slot: null,
+  candidate_slots: [
+    {
+      appointment_date: "2026-06-27",
+      start_time_local: "09:00:00",
+      duration_minutes: 15,
+      warnings: []
+    }
+  ],
+  warning_summary: "No warnings or blocked issues.",
+  evidence_summary: "Candidate slot summaries are review-only until staff selects one slot.",
+  confirm_endpoint: null,
+  confirm_payload: null
+};
+
+const mockBernieReviewConfirmationReady = {
+  status: "confirmation_ready",
+  confirmation_ready: true,
+  selected_slot: {
+    appointment_date: "2026-06-27",
+    start_time_local: "09:00:00",
+    duration_minutes: 15,
+    warnings: []
+  },
+  candidate_slots: [],
+  warning_summary: "No warnings or blocked issues.",
+  evidence_summary: "Confirm payload carries slot-selection and create-proposal evidence for explicit staff approval.",
+  confirm_endpoint: "/api/v1/appointments/proposals/create/confirm-bernie",
+  confirm_evidence: [
+    "bernie_confirm_create_proposal",
+    "source_slot_selection_proposal",
+    "source_create_proposal"
+  ],
+  confirm_payload: {
+    confirmed: false,
+    confirmed_warnings: [],
+    selection_proposal: {
+      intent: "select_slot_for_create_proposal",
+      safe: true,
+      create_proposal: {
+        intent: "create_appointment",
+        command: {
+          patient_id: "smoke-pat-1",
+          practitioner_id: "prac-1",
+          appointment_date: "2026-06-27",
+          start_time_local: "09:00:00",
+          reason: "Follow-up"
+        }
+      }
+    }
+  }
+};
+
+function renderBernieReview(payload) {
+  const contentEl = document.getElementById("bernie-review-content");
+  if (!contentEl) return;
+  contentEl.innerHTML = "";
+
+  // 1. Status Badge
+  const statusBadge = document.createElement("div");
+  statusBadge.className = `bernie-status-badge ${payload.status}`;
+  statusBadge.setAttribute("data-testid", "bernie-review-status");
+  statusBadge.textContent = payload.status.replace(/_/g, " ");
+  contentEl.appendChild(statusBadge);
+
+  // 2. Headline
+  const headline = document.createElement("h3");
+  headline.className = "bernie-review-headline";
+  headline.setAttribute("data-testid", "bernie-review-headline");
+  if (payload.status === "blocked") {
+    headline.textContent = "Booking Blocked";
+  } else if (payload.status === "candidate_selection_required") {
+    headline.textContent = "Candidate Selection Required";
+  } else {
+    headline.textContent = "Proposal Confirmation Ready";
+  }
+  contentEl.appendChild(headline);
+
+  // 3. Action Required
+  const actionEl = document.createElement("div");
+  actionEl.className = "bernie-review-action";
+  actionEl.setAttribute("data-testid", "bernie-review-action");
+  actionEl.textContent = payload.evidence_summary || "Action Required";
+  contentEl.appendChild(actionEl);
+
+  // 4. Content Section depending on Status
+  if (payload.status === "blocked") {
+    const blocksContainer = document.createElement("div");
+    blocksContainer.className = "bernie-blocks-container";
+
+    const title = document.createElement("span");
+    title.className = "bernie-section-title";
+    title.textContent = "Block Issues";
+    blocksContainer.appendChild(title);
+
+    const list = document.createElement("div");
+    list.setAttribute("data-testid", "bernie-review-blocks-list");
+
+    payload.blocks.forEach(block => {
+      const item = document.createElement("div");
+      item.className = "bernie-block-item";
+      item.setAttribute("data-testid", "bernie-review-block-item");
+      item.textContent = `${block.code}: ${block.message}`;
+      list.appendChild(item);
+    });
+
+    blocksContainer.appendChild(list);
+    contentEl.appendChild(blocksContainer);
+  }
+  else if (payload.status === "candidate_selection_required") {
+    const candidatesContainer = document.createElement("div");
+    candidatesContainer.className = "bernie-candidates-container";
+
+    const title = document.createElement("span");
+    title.className = "bernie-section-title";
+    title.textContent = "Candidate Slots";
+    candidatesContainer.appendChild(title);
+
+    const list = document.createElement("div");
+    list.setAttribute("data-testid", "bernie-review-candidates-list");
+
+    payload.candidate_slots.forEach(slot => {
+      const item = document.createElement("div");
+      item.className = "bernie-candidate-item";
+      item.setAttribute("data-testid", "bernie-review-candidate-item");
+
+      const timeSpan = document.createElement("strong");
+      timeSpan.textContent = `${slot.appointment_date} @ ${slot.start_time_local}`;
+      item.appendChild(timeSpan);
+
+      const durationSpan = document.createElement("span");
+      durationSpan.textContent = `Duration: ${slot.duration_minutes} mins`;
+      item.appendChild(durationSpan);
+
+      list.appendChild(item);
+    });
+
+    candidatesContainer.appendChild(list);
+    contentEl.appendChild(candidatesContainer);
+  }
+  else if (payload.status === "confirmation_ready") {
+    const selectionContainer = document.createElement("div");
+    selectionContainer.className = "bernie-selection-container";
+
+    const title = document.createElement("span");
+    title.className = "bernie-section-title";
+    title.textContent = "Selected Slot";
+    selectionContainer.appendChild(title);
+
+    const card = document.createElement("div");
+    card.className = "bernie-selected-slot-card";
+    card.setAttribute("data-testid", "bernie-review-selected-slot");
+
+    const timeSpan = document.createElement("div");
+    timeSpan.className = "bernie-selected-slot-time";
+    timeSpan.textContent = `${payload.selected_slot.appointment_date} @ ${payload.selected_slot.start_time_local}`;
+    card.appendChild(timeSpan);
+
+    const durationSpan = document.createElement("div");
+    durationSpan.textContent = `Duration: ${payload.selected_slot.duration_minutes} mins`;
+    card.appendChild(durationSpan);
+
+    selectionContainer.appendChild(card);
+    contentEl.appendChild(selectionContainer);
+
+    // Confirmation Form Elements
+    const confirmBox = document.createElement("div");
+    confirmBox.className = "bernie-confirmation-box";
+
+    const checkboxLabel = document.createElement("label");
+    checkboxLabel.className = "bernie-checkbox-label";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.setAttribute("data-testid", "bernie-review-approval-checkbox");
+    checkbox.id = "bernie-approval-checkbox";
+
+    const labelText = document.createTextNode(" I explicitly approve this booking proposal and confirm the selected slot details are correct.");
+    checkboxLabel.appendChild(checkbox);
+    checkboxLabel.appendChild(labelText);
+    confirmBox.appendChild(checkboxLabel);
+
+    const confirmBtn = document.createElement("button");
+    confirmBtn.className = "btn-bernie-confirm";
+    confirmBtn.setAttribute("data-testid", "bernie-review-confirm-button");
+    confirmBtn.id = "btn-bernie-confirm";
+    confirmBtn.textContent = "Confirm Booking";
+    confirmBtn.disabled = true;
+    confirmBox.appendChild(confirmBtn);
+
+    const successMsg = document.createElement("div");
+    successMsg.className = "bernie-success-alert hidden";
+    successMsg.setAttribute("data-testid", "bernie-review-success-message");
+    successMsg.id = "bernie-success-message";
+    successMsg.textContent = "Booking proposal approved successfully! (Simulated)";
+    confirmBox.appendChild(successMsg);
+
+    contentEl.appendChild(confirmBox);
+
+    // Event listener to enable/disable button
+    checkbox.addEventListener("change", (e) => {
+      confirmBtn.disabled = !e.target.checked;
+    });
+
+    // Event listener to simulate confirmation
+    confirmBtn.addEventListener("click", () => {
+      payload.confirm_payload.confirmed = true;
+      confirmBtn.disabled = true;
+      checkbox.disabled = true;
+      successMsg.classList.remove("hidden");
+    });
+  }
+}
+
+function initBernieReview() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isSmoke = urlParams.get("smoke") === "true";
+  const reviewParam = urlParams.get("bernie_review");
+
+  if (!isSmoke || !reviewParam) {
+    return;
+  }
+
+  const panel = document.getElementById("bernie-review-panel");
+  if (panel) {
+    panel.classList.remove("hidden");
+  }
+
+  let payload = null;
+  if (reviewParam === "blocked") {
+    payload = mockBernieReviewBlocked;
+  } else if (reviewParam === "candidate_selection_required") {
+    payload = mockBernieReviewCandidateSelection;
+  } else if (reviewParam === "confirmation_ready") {
+    payload = mockBernieReviewConfirmationReady;
+  }
+
+  if (payload) {
+    renderBernieReview(payload);
+  }
+}
 
 // ─── INIT ──────────────────────────────────────────────────
 Office.onReady(() => {
@@ -2115,6 +2373,7 @@ Office.onReady(() => {
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = urlParams.get("smoke") === "true";
   if (token || isSmoke) { loadDiary(); scheduleRefresh(); }
+  if (isSmoke) { initBernieReview(); }
 });
 
 // ─── BOOKING MODAL LOGIC ───────────────────────────────────

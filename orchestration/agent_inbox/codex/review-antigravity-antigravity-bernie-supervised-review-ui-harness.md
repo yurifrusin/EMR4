@@ -10,15 +10,15 @@
 
 ## Review Request
 
-Sprint 49 plan submitted by Antigravity
+Sprint 49 Bernie review UI harness implemented and verified
 
 ## Worker Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.html, docs/diary/diary.css, docs/diary/diary.js, review/checks_diary.json, review/test_diary_smoke.py
+- Verification run: node --check docs/diary/diary.js, python scripts/check_frontend_versions.py, .venv/Scripts/pytest review/test_diary_smoke.py, and git diff --check.
+- Remaining risks: None. The Bernie Booking Review panel operates strictly under smoke-gated parameters, renders the deterministic payloads from Sprint 48 contract cleanly, and has no backend or mutation write side-effects.
 
 ## Required Review Steps
 

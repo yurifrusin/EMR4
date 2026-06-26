@@ -2177,3 +2177,183 @@ html, body {
   pointer-events: none;
   user-select: none;
 }
+
+/* ─── BERNIE SUPERVISED REVIEW HARNESS STYLING (Sprint 49) ─── */
+#bernie-review-panel {
+  width: 320px;
+  min-width: 320px;
+  background-color: var(--white);
+  border-left: 1px solid var(--grey-2);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.05);
+  z-index: 50;
+}
+
+#bernie-review-panel.hidden {
+  display: none !important;
+}
+
+.bernie-review-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--grey-2);
+  background-color: var(--grey-1);
+}
+
+.bernie-review-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--blue-dark);
+}
+
+.bernie-review-content {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bernie-status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.bernie-status-badge.blocked {
+  background-color: #fde8e8;
+  color: var(--red);
+}
+
+.bernie-status-badge.candidate_selection_required {
+  background-color: #fef08a;
+  color: #854d0e;
+}
+
+.bernie-status-badge.confirmation_ready {
+  background-color: var(--blue-light);
+  color: var(--blue-mid);
+}
+
+.bernie-review-headline {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.bernie-review-action {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--grey-4);
+  background: var(--grey-1);
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 3px solid var(--blue-mid);
+}
+
+.bernie-blocks-container, .bernie-candidates-container, .bernie-selection-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bernie-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bernie-block-item {
+  background-color: #fff5f5;
+  border: 1px solid #feb2b2;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: #c53030;
+  font-size: 11px;
+}
+
+.bernie-candidate-item {
+  background-color: var(--grey-1);
+  border: 1px solid var(--grey-2);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bernie-selected-slot-card {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 12px;
+  border-radius: 6px;
+  color: #166534;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bernie-selected-slot-time {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bernie-confirmation-box {
+  margin-top: auto;
+  border-top: 1px solid var(--grey-2);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bernie-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.bernie-checkbox-label input {
+  margin-top: 2px;
+}
+
+.btn-bernie-confirm {
+  background-color: var(--blue-mid);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-bernie-confirm:disabled {
+  background-color: var(--grey-3);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.bernie-success-alert {
+  background-color: #ecfdf5;
+  border: 1px solid #10b981;
+  color: #065f46;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 8px;
+}
