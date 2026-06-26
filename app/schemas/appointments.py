@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime, date, time
 from typing import Literal, Optional
 from pydantic import BaseModel, Field, model_validator
-from app.models.appointments import AppointmentStatus, BookingChannel
+from app.models.appointments import AppointmentStatus, BookingChannel, AppointmentAuditAction
 
 
 class AppointmentTypeOut(BaseModel):
@@ -280,6 +280,20 @@ class AppointmentDeleteProposalOut(BaseModel):
     command: AppointmentDeleteCommand
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
+class AppointmentAuditLogOut(BaseModel):
+    id: uuid.UUID
+    appointment_id: uuid.UUID
+    practice_id: uuid.UUID
+    confirmed_by_user_id: uuid.UUID
+    action: AppointmentAuditAction
+    status_before: Optional[AppointmentStatus] = None
+    status_after: Optional[AppointmentStatus] = None
+    cancellation_reason: Optional[str] = None
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
 
 
 class ScheduleSlot(BaseModel):
