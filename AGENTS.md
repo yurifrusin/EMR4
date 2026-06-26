@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 31 - AI provider boundary + deterministic review-harness hardening integrated, pushed, mirrored, audited, and deployed |
-| **Next recommended work** | Continue the current programme with the next appointment/diary operational slice, using parallel CLI implementation release after plan approval |
+| **Current active track** | Sprint 32 - no-show/DNA attendance outcome semantics dispatched; plan gate pending |
+| **Next recommended work** | Review Sprint 32 worker plans, release approved implementation in parallel, then verify with backend tests and deterministic diary review harnesses before any manual review |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -479,7 +479,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Current Sprint 30 cancelled appointment review surface closeout commit |
+| **Latest integration commit** | Current Sprint 31 AI provider boundary + deterministic diary review harness closeout commit |
 
 ### Tag map (all tags pushed to remote)
 

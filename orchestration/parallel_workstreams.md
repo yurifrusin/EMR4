@@ -130,11 +130,46 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 32: No-show/DNA Attendance Outcome Semantics
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending worker plans and Codex approval |
+| Product Goal | Make No Show and DNA appointment outcomes explicit, proposal-first, terminal, non-blocking, and cheap to review without confusing them with cancellation or active waiting-room state |
+
+### Workstream S32-A - Backend No-show/DNA Status Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-noshow-dna-status-contract.md` |
+| Goal | Plan, then after approval harden or prove the backend appointment status proposal contract for NoShow and DNA attendance outcomes |
+| In Scope | Plan packet first; after approval `app/routers/appointments.py`, `app/schemas/appointments.py` only if needed, focused appointment status/proposal/waiting-area tests for NoShow/DNA terminal transitions, non-blocking slot behaviour, and no direct mutation before proposal confirmation |
+| Out of Scope | Diary frontend, taskpane, Command Centre, cancellation reason/note capture, cancelled appointment review UI, recurrence, SMS/reminders, billing, broad audit logging, migrations unless a verified backend contract gap requires one |
+| Verification | Plan packet first; after approval py_compile touched appointment modules, focused pytest for appointment status/proposal/waiting-area/no-show-DNA coverage, adjacent conflict tests if touched, and `git diff --check` |
+| Status | Dispatched |
+
+### Workstream S32-B - Diary No-show/DNA Flow
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-noshow-dna-flow.md` |
+| Goal | Plan, then after approval make the diary no-show/DNA user flow clear and reviewable |
+| In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js` only if needed, deterministic review checks in `review/`, smoke-mode fixtures/test hooks, and asset cache-bust if diary assets change |
+| Out of Scope | Backend routes/models/tests/migrations, taskpane, Command Centre, resource administration, cancellation reason/note capture, cancelled appointment review redesign, recurrence, broad visual restyle, direct mutation before proposal confirmation |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js` if touched, `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`, `python scripts/check_frontend_versions.py` if assets change, targeted Playwright/DOM assertions where useful, and `git diff --check` |
+| Status | Dispatched |
+
 ## Sprint 31: AI Boundary And Cheap Review Harness
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; closeout in progress |
+| Status | Integrated, pushed, mirrored, audited, deployed, and closed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
 | Integration Gate | Claude and Antigravity submissions reviewed and accepted |
 | Product Goal | Formalize the first practical AI provider boundary and expand deterministic diary review so the sprint loop uses CLI/text and Playwright/pytest before GUI automation |
