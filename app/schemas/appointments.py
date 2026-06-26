@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, date, time
-from typing import Literal, Optional
-from pydantic import BaseModel, Field, model_validator
+from typing import Any, Literal, Optional
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.models.appointments import AppointmentStatus, BookingChannel, AppointmentAuditAction
 
 
@@ -364,3 +364,41 @@ class SlotSearchProposalOut(BaseModel):
     candidates: list[SlotCandidate] = Field(default_factory=list)
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
+# ── Bernie slot-search command normalizer ─────────────────────────────────────
+
+class SlotSearchCommandIn(BaseModel):
+    """Permissive input for a Bernie/LLM slot-search command.
+
+    All fields accept raw strings, native Python types, or None.
+    Unknown keys from LLM output are silently ignored.
+    The normalizer (bernie_slot_normalizer.normalize_slot_search_command)
+    validates and coerces these into a SlotSearchProposalIn constraint.
+    """
+    model_config = ConfigDict(extra="ignore")
+
+    practitioner_id: Optional[Any] = None
+    date_from: Optional[Any] = None
+    date_to: Optional[Any] = None
+    duration_minutes: Optional[Any] = None
+    appointment_type_id: Optional[Any] = None
+    location_id: Optional[Any] = None
+    earliest_time: Optional[Any] = None
+    latest_time: Optional[Any] = None
+    patient_id: Optional[Any] = None
+    limit: Optional[Any] = None
+
+
+class SlotSearchCommandResult(BaseModel):
+    """Result of deterministic Bernie slot-search command normalization.
+
+    safe=True means constraint is populated and ready to pass to /proposals/slot-search.
+    safe=False means blocks contains the reason(s); constraint is None.
+    No DB, no LLM, no slot-search, no appointment mutation involved in producing this.
+    """
+    safe: bool
+    constraint: Optional[SlotSearchProposalIn] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    summary: str
