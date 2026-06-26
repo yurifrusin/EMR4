@@ -9,7 +9,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-confirmed-flow-review-harness` |
 | Source Task | `codex-bernie-confirmed-flow-review-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 01:12 +1000 |
 | Source HEAD | `54314fa` |
 
@@ -56,6 +56,6 @@ The main risk is duplicating existing Sprint 43/44 tests instead of adding a coh
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted after metadata correction; deterministic backend-test scope and no-UI/no-runtime boundaries were appropriate.
+- Required changes before implementation: Move required worker metadata rows into the top packet metadata table; completed in `e02156a`.
+- Approved to proceed: yes

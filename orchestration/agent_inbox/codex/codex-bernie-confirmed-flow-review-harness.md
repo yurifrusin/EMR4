@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-confirmed-flow-review-harness` |
 | Branch | `codex/bernie-confirmed-flow-review-harness` |
-| Status | submitted |
+| Status | integrated |
 | Created | 08fe298 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-confirmed-flow-review-harness --summary "Short plan summary"` |

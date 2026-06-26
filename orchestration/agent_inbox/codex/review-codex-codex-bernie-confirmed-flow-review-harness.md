@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-confirmed-flow-review-harness` |
 | Source Task | `codex-bernie-confirmed-flow-review-harness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -41,5 +41,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne reviewed the test-only harness, reran py_compile, new harness tests, adjacent Sprint 40-44 backend tests, and diff hygiene; all passed.
+- Follow-up required: Existing `pytest_asyncio` fixture-loop-scope deprecation warning remains a future test-hygiene item.
