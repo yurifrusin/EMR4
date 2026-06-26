@@ -54,7 +54,7 @@ Ariadne verified this as a backend-only deterministic dev fixture route with foc
 
 ## Recommended Next Direction
 
-Sprint 56 should be a narrow Antigravity/frontend dev-tooling slice: wire the dev-only Bernie review launcher to fetch `GET /api/v1/appointments/dev/bernie-review-fixtures` under the existing explicit dev flag, while preserving route-intercepted deterministic tests and no production/default exposure.
+Sprint 56 is dispatched to Antigravity: wire the dev-only Bernie review launcher to fetch `GET /api/v1/appointments/dev/bernie-review-fixtures` under the existing explicit dev flag, while preserving route-intercepted deterministic tests and no production/default exposure.
 
 
 ## Previous Closeout - Sprint 54
