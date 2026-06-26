@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 47: Bernie Wrapper Confirmation Review Harness |
 | Integrated through | Deterministic wrapper-to-confirm backend safety harness |
-| Status | Integrated locally; pending push, mirror realignment, and final audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -54,6 +54,8 @@ Ariadne verified this as a backend-only deterministic review harness with focuse
 - `git diff --check origin/master...origin/codex/bernie-wrapper-confirmation-review-harness` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 - Worker-reported parallel adjacent-suite verification hit the known PostgreSQL enum-create race; Ariadne accepted the serial passing reruns because no production code changed.
+- `python scripts\agent_worktrees.py audit --fetch` after push/mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at the Sprint 47 closeout commit.
+- `python scripts\agent_worktrees.py retire-stale --apply` removed the clean Sprint 47 disposable worker worktree; the old dirty `codex/time-model` worktree remains for separate review.
 
 ## Recommended Next Direction
 
