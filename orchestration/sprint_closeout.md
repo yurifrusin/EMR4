@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 50: Bernie Supervised Review Live Adapter |
 | Integrated through | Smoke/feature-gated adapter from supervised-booking `staff_review` response into the diary Bernie review panel |
-| Status | Integrated locally; pending push, mirror realignment, and final audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -53,6 +53,7 @@ Ariadne verified this as a smoke/feature-gated UI adapter with route-intercepted
 - Route-intercepted Playwright checks prove live-adapter rendering for blocked, candidate-selection, and confirmation-ready payloads.
 - The confirmation-ready test registers a failing route for `/api/v1/appointments/proposals/create/confirm-bernie`, proving the smoke adapter does not call the write endpoint.
 - `git diff --check origin/master...origin/antigravity/current` -> passed.
+- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at Sprint 50 closeout commit `d8cc5b9`; only the known dirty stale `codex/time-model` disposable worktree remains.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
