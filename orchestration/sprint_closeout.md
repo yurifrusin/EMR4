@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 58: Bernie Dev Selector Help Affordance |
 | Integrated through | Dev-only explanatory help for Bernie fixture-state selector |
-| Status | Integrated locally and verified; pending push/mirror/audit |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -33,7 +33,7 @@ Ariadne verified this as an explicit dev/query-gated explanatory affordance with
 - No manual live UI test is required; route-intercepted Playwright verifies help visibility/gating, static no-call behavior, selector behavior, and explicit approval before confirm POST.
 - No manual live API write test is required; confirm-Bernie remains intercepted in the harness and no live writes are performed.
 - No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
-- No user decision is needed before the next narrow Bernie slice.
+- No manual review is needed for Sprint 58 itself; a product direction decision is still needed before moving Bernie review from dev/query-gated tooling toward ordinary staff-visible exposure.
 
 ## Known Follow-Up
 
