@@ -8,20 +8,20 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 53: Bernie Dev-Mode Review Feature Flag |
-| Integrated through | Explicit `bernie_dev_review=true` gate for the Bernie live review/confirm path, with deterministic route-intercepted proof |
-| Status | Integrated, pushed, mirrored, audited, and closed |
+| Batch | Sprint 54: Bernie Dev Review Launch Affordance |
+| Integrated through | Dev-only toolbar launcher for the gated Bernie live review path, with deterministic route-intercepted proof |
+| Status | Integrated locally; pending push, mirror realignment, and final audit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added an explicit `bernie_dev_review=true` query gate for the Bernie supervised live review/confirm path.
-- `bernie_review=live` alone now remains hidden and makes no supervised-booking or confirm-Bernie calls in ordinary mode.
-- Smoke live-review tests now also include `bernie_dev_review=true`, keeping the live backend-like path deliberate even in the harness.
-- Ordinary dev-mode `?bernie_review=live&bernie_dev_review=true` loads the diary/review panel and can exercise supervised-booking plus explicit confirm through route-intercepted Playwright tests.
-- Confirm-Bernie still requires the approval checkbox before any POST, and the deterministic test proves no confirm POST happens before approval.
-- Bumped diary JS cache busting to `diary.js?v=108`.
-- Antigravity implemented the UI/test slice; Ariadne required the extra dev-flag safety constraint and applied a bounded cleanup removing nonessential inline comments.
+- Added a dev-only `🤖 Dev Bernie Review` toolbar button behind `bernie_dev_review=true`.
+- Default diary mode shows no launcher, no Bernie review panel, and makes no supervised-booking or confirm-Bernie calls.
+- `?bernie_dev_review=true` shows only the launcher and still makes no endpoint calls until clicked.
+- Clicking the launcher preserves existing query parameters and adds `bernie_review=live`, entering the existing dev-gated live review path.
+- Confirm-Bernie still requires the approval checkbox before any POST, and the route-intercepted harness proves no confirm call happens before staff approval.
+- Bumped diary assets to `diary.css?v=102` and `diary.js?v=109`.
+- Antigravity implemented the UI/test slice; Ariadne applied bounded cleanup to the review harness comments and packet statuses.
 
 ## Recommended User Review
 
@@ -31,29 +31,44 @@ Ariadne verified this with deterministic route-intercepted Playwright checks. Th
 ## Not Required Before Moving On
 
 - No manual live API test is required; tests intercept both supervised-booking and confirm-Bernie endpoints.
-- No manual production UI review is required; default non-flag diary mode remains hidden/no-call.
+- No manual production UI review is required; default non-flag diary mode remains hidden/no-call and the launcher appears only with the explicit dev flag.
 - No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, live diary booking workflow, resource admin, billing, SMS, or security-console action is required.
 - No user decision is needed before the next narrow Bernie slice.
 
 ## Known Follow-Up
 
 - A later product decision is still needed before exposing Bernie review in ordinary production mode without explicit dev/query gating.
-- The next useful slice is to make the dev-gated Bernie review affordance easier to discover for staff/dev testing, or to add an authenticated backend-backed dev smoke route that feeds realistic non-PHI test data into the same review panel.
+- The next useful slice is a small backend-backed non-PHI dev fixture route or fixture payload source so the launcher can exercise realistic deterministic review payloads without relying on hand-authored route-intercept payloads.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 - The known moderate Dependabot alert remains outside this sprint.
 
 ## Verification
 
-- Ariadne reviewed the Antigravity plan packet and required an extra `bernie_dev_review=true` flag so `bernie_review=live` alone stays inert.
+- Ariadne reviewed the Antigravity plan and implementation packets and verified the launcher remains dev-flag-only.
 - `node --check docs\diary\diary.js` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 35 passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; modified diary assets have version bumps, deployed Pages still shows the previous versions until GitHub Pages catches up.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 36 passed.
 - `git diff --check` -> passed.
-- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `7cd26ea`; only the known dirty stale `codex/time-model` disposable worktree remains for manual review.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-Sprint 54 is dispatched to Antigravity: add a small dev-only affordance for launching this dev-gated Bernie review panel without hand-crafted full query URLs.
+After push/mirror/audit, the next useful slice is a small backend-backed non-PHI dev fixture route or fixture payload source for the Bernie launcher/review panel.
+
+
+## Previous Closeout - Sprint 53
+
+Sprint 53 added the explicit dev-mode gate for the Bernie live review/confirm path.
+
+- Added an explicit `bernie_dev_review=true` query gate for the Bernie supervised live review/confirm path.
+- `bernie_review=live` alone now remains hidden and makes no supervised-booking or confirm-Bernie calls in ordinary mode.
+- Smoke live-review tests now also include `bernie_dev_review=true`, keeping the live backend-like path deliberate even in the harness.
+- Ordinary dev-mode `?bernie_review=live&bernie_dev_review=true` loads the diary/review panel and can exercise supervised-booking plus explicit confirm through route-intercepted Playwright tests.
+- Confirm-Bernie still requires the approval checkbox before any POST, and the deterministic test proves no confirm POST happens before approval.
+- Bumped diary JS cache busting to `diary.js?v=108`.
+- Antigravity implemented the UI/test slice; Ariadne required the extra dev-flag safety constraint and applied a bounded cleanup removing nonessential inline comments.
+
+Residual user review/testing after Sprint 53 closeout: none required. Ariadne verified it with deterministic route-intercepted Playwright checks.
 
 
 ## Previous Closeout - Sprint 52

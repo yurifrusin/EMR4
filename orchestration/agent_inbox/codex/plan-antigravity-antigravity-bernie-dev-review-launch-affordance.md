@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-dev-review-launch-affordance` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 04:32 +1000 |
 | Source HEAD | `0172804` |
 
@@ -77,4 +77,4 @@ The goal is to implement a developer-only convenience affordance (a button) in t
 
 - Review result:
 - Required changes before implementation:
-- Approved to proceed: no
+- Approved to proceed: yes.
