@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | pending_plan_review |
 | Created | 8e36c52 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-appointment-audit-actor-contract --summary "Short plan summary"` |
