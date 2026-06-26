@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 48: Bernie Supervised Review Payload Contract |
 | Integrated through | Additive deterministic `staff_review` payload for supervised Bernie wrapper outcomes |
-| Status | Integrated locally; pending push, mirror realignment, and final audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -52,6 +52,8 @@ Ariadne verified this as a backend-only additive API contract with focused and a
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_wrapper_confirmation_review_harness.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_confirmed_flow_review_harness.py -q` -> 25 passed.
 - `git diff --check origin/master...origin/codex/bernie-supervised-review-payload` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
+- `python scripts\agent_worktrees.py audit --fetch` after push/mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at the Sprint 48 closeout commit.
+- `python scripts\agent_worktrees.py retire-stale --apply` removed the clean Sprint 48 disposable worker worktree; the old dirty `codex/time-model` worktree remains for separate review.
 
 ## Recommended Next Direction
 
