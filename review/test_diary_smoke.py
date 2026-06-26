@@ -1189,19 +1189,34 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
     try:
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_load_state("domcontentloaded")
+        tools = diary_page.locator("[data-testid='bernie-review-dev-tools']")
         selector = diary_page.locator("[data-testid='bernie-review-dev-state-select']")
+        help_panel = diary_page.locator("[data-testid='bernie-review-dev-state-help']")
+        assert tools.is_hidden()
         assert selector.is_hidden()
+        assert help_panel.is_hidden()
         assert len(dev_fixtures_requests) == 0
         assert len(confirm_payloads) == 0
 
         diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&smoke=true&bernie_confirm_adapter=true&practitioner_id=prac-1&selected_candidate_index=0")
         diary_page.wait_for_load_state("domcontentloaded")
+        assert tools.is_visible()
         assert selector.is_visible()
+        assert help_panel.is_visible()
+        assert help_panel.text_content().count("blocked") >= 1
+        assert "candidate_selection_required" in help_panel.text_content()
+        assert "confirmation_ready" in help_panel.text_content()
         assert selector.locator("option").evaluate_all("(options) => options.map((option) => option.value)") == [
             "blocked",
             "candidate_selection_required",
             "confirmation_ready"
         ]
+        assert len(dev_fixtures_requests) == 0
+        assert len(confirm_payloads) == 0
+        help_panel.locator("summary").click()
+        assert help_panel.locator("dd", has_text="Bernie cannot safely propose or continue yet.").is_visible()
+        assert help_panel.locator("dd", has_text="Staff must choose one candidate slot before review can continue.").is_visible()
+        assert help_panel.locator("dd", has_text="explicit confirm-Bernie approval").is_visible()
         assert len(dev_fixtures_requests) == 0
         assert len(confirm_payloads) == 0
 

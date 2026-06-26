@@ -2572,10 +2572,13 @@ Office.onReady(() => {
   const hasLiveDevReview = reviewParam === "live" && devReviewParam === "true";
   const isDevFixture = devReviewParam === "true" && isBernieDevFixtureState(reviewParam);
 
+  const devReviewTools = document.getElementById("bernie-dev-review-tools");
   const devStateSelect = document.getElementById("bernie-dev-state-select");
+  if (devReviewTools) {
+    devReviewTools.classList.toggle("hidden", devReviewParam !== "true");
+  }
   if (devStateSelect) {
     if (devReviewParam === "true") {
-      devStateSelect.classList.remove("hidden");
       devStateSelect.value = isBernieDevFixtureState(reviewParam) ? reviewParam : "blocked";
       devStateSelect.onchange = () => {
         if (isBernieDevFixtureState(devStateSelect.value)) {
@@ -2583,7 +2586,6 @@ Office.onReady(() => {
         }
       };
     } else {
-      devStateSelect.classList.add("hidden");
       devStateSelect.onchange = null;
     }
   }

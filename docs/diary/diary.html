@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=103" />
-  <script src="diary.js?v=112" defer></script>
+  <link rel="stylesheet" href="diary.css?v=104" />
+  <script src="diary.js?v=113" defer></script>
 </head>
 <body>
 
@@ -46,11 +46,24 @@
       <span class="flow-count-pill" id="flow-waiting-count">0</span>
     </button>
     <button id="btn-refresh" title="Refresh appointments">&#8635; Refresh</button>
-    <select id="bernie-dev-state-select" class="bernie-dev-state-select hidden" data-testid="bernie-review-dev-state-select" aria-label="Dev Bernie review fixture state" title="Dev Bernie Review">
-      <option value="blocked">blocked</option>
-      <option value="candidate_selection_required">candidate_selection_required</option>
-      <option value="confirmation_ready">confirmation_ready</option>
-    </select>
+    <div id="bernie-dev-review-tools" class="bernie-dev-review-tools hidden" data-testid="bernie-review-dev-tools">
+      <select id="bernie-dev-state-select" class="bernie-dev-state-select" data-testid="bernie-review-dev-state-select" aria-label="Dev Bernie review fixture state" title="Dev Bernie Review">
+        <option value="blocked">blocked</option>
+        <option value="candidate_selection_required">candidate_selection_required</option>
+        <option value="confirmation_ready">confirmation_ready</option>
+      </select>
+      <details id="bernie-dev-state-help" class="bernie-dev-state-help" data-testid="bernie-review-dev-state-help">
+        <summary>State help</summary>
+        <dl>
+          <dt>blocked</dt>
+          <dd>Bernie cannot safely propose or continue yet.</dd>
+          <dt>candidate_selection_required</dt>
+          <dd>Staff must choose one candidate slot before review can continue.</dd>
+          <dt>confirmation_ready</dt>
+          <dd>A proposal is ready, but still needs explicit confirm-Bernie approval.</dd>
+        </dl>
+      </details>
+    </div>
     <button id="btn-admin-panel" class="hidden" title="Resource Administration">⚙️ Admin</button>
     <span id="diary-status">Connecting…</span>
   </div>

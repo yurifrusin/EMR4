@@ -2210,6 +2210,62 @@ html, body {
   display: none !important;
 }
 
+.bernie-dev-review-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bernie-dev-review-tools.hidden {
+  display: none !important;
+}
+
+.bernie-dev-state-help {
+  position: relative;
+  font-size: 11px;
+  color: var(--grey-4);
+}
+
+.bernie-dev-state-help summary {
+  cursor: pointer;
+  color: var(--blue-dark);
+  font-weight: 600;
+  list-style: none;
+}
+
+.bernie-dev-state-help summary::-webkit-details-marker {
+  display: none;
+}
+
+.bernie-dev-state-help dl {
+  position: absolute;
+  right: 0;
+  top: 22px;
+  width: 280px;
+  margin: 0;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid var(--grey-2);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index: 80;
+}
+
+.bernie-dev-state-help dt {
+  margin-top: 6px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.bernie-dev-state-help dt:first-child {
+  margin-top: 0;
+}
+
+.bernie-dev-state-help dd {
+  margin: 2px 0 0;
+  line-height: 1.35;
+}
+
 .bernie-review-header {
   padding: 12px 16px;
   border-bottom: 1px solid var(--grey-2);

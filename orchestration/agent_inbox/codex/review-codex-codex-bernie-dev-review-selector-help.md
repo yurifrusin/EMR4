@@ -10,15 +10,15 @@
 
 ## Review Request
 
-codex-bernie-dev-review-selector-help ready for Codex review
+codex-bernie-dev-review-selector-help implementation ready for Codex review
 
 ## Worker Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed: Coordination only: created `orchestration/agent_inbox/codex/plan-codex-codex-bernie-dev-review-selector-help.md` and updated this task packet status/notes. No runtime, docs, or test files changed.
-- Verification run: `python scripts\agent_worktrees.py handin`; `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-dev-review-selector-help ...`; `git status --short --branch`.
-- Remaining risks: Implementation not started by design; runtime verification remains pending until Ariadne sends exactly `complete sprint task`.
+- Files changed: `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, `review/test_diary_smoke.py`, plus coordination packets. Added a dev-only Bernie fixture selector help affordance hidden unless `bernie_dev_review=true`; bumped diary assets to `diary.css?v=104` and `diary.js?v=113`.
+- Verification run: `node --check docs\diary\diary.js`; `.venv\Scripts\python.exe scripts\check_frontend_versions.py`; `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`; `git diff --check` — all passed.
+- Remaining risks: None known. The help text is static and route-intercepted tests assert no fixture or confirm endpoint calls from help visibility/opening; confirm-Bernie remains blocked until explicit staff approval.
 
 ## Required Review Steps
 
