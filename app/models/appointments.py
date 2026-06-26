@@ -3,7 +3,7 @@ import enum
 from datetime import timedelta
 from sqlalchemy import (
     Column, String, Boolean, DateTime, Integer, Enum, ForeignKey, Date,
-    Time, Index,
+    Time, Index, Text,
 )
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
@@ -103,6 +103,32 @@ class PractitionerSchedule(Base):
     slot_duration_minutes = Column(Integer, default=15)
 
     __table_args__ = (Index("ix_practitioner_schedules_practitioner_id", "practitioner_id"),)
+
+
+class AppointmentAuditAction(str, enum.Enum):
+    create = "create"
+    update = "update"
+    status_change = "status_change"
+    delete = "delete"
+
+
+class AppointmentAuditLog(Base):
+    __tablename__ = "appointment_audit_log"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
+    appointment_id = Column(UUID(as_uuid=True), ForeignKey("appointments.id"), nullable=False)
+    confirmed_by_user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    action = Column(Enum(AppointmentAuditAction), nullable=False)
+    status_before = Column(Enum(AppointmentStatus), nullable=True)
+    status_after = Column(Enum(AppointmentStatus), nullable=True)
+    cancellation_reason = Column(String(500), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("ix_appt_audit_log_practice_appt", "practice_id", "appointment_id"),
+        Index("ix_appt_audit_log_appointment_id", "appointment_id"),
+    )
 
 
 class ScheduleOverride(Base):

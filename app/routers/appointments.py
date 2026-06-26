@@ -12,6 +12,7 @@ from app.models.tenancy import User, UserRole, Practitioner, Practice, PracticeL
 from app.models.appointments import (
     Appointment, AppointmentType, AppointmentStatus,
     PractitionerSchedule, ScheduleOverride,
+    AppointmentAuditLog, AppointmentAuditAction,
 )
 from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea, Room, DiaryRoster
 from app.schemas.appointments import (
@@ -23,6 +24,7 @@ from app.schemas.appointments import (
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
+    AppointmentAuditLogOut,
 )
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
@@ -371,6 +373,28 @@ def _appointment_create_command(
     )
 
 
+def _write_audit(
+    db: Session,
+    *,
+    practice_id: uuid.UUID,
+    appointment_id: uuid.UUID,
+    confirmed_by_user_id: uuid.UUID,
+    action: AppointmentAuditAction,
+    status_before: Optional[AppointmentStatus] = None,
+    status_after: Optional[AppointmentStatus] = None,
+    cancellation_reason: Optional[str] = None,
+) -> None:
+    db.add(AppointmentAuditLog(
+        practice_id=practice_id,
+        appointment_id=appointment_id,
+        confirmed_by_user_id=confirmed_by_user_id,
+        action=action,
+        status_before=status_before,
+        status_after=status_after,
+        cancellation_reason=cancellation_reason,
+    ))
+
+
 # ── Appointment Types ─────────────────────────────────────────────────────────
 
 @router.get("/types", response_model=list[AppointmentTypeOut])
@@ -464,6 +488,14 @@ def create_appointment(
     db.add(appt)
     db.flush()           # generate PK in Python before commit expires the instance
     appt_id = appt.id   # capture UUID while still in pre-commit state
+    _write_audit(
+        db,
+        practice_id=practice_id,
+        appointment_id=appt_id,
+        confirmed_by_user_id=current_user.id,
+        action=AppointmentAuditAction.create,
+        status_after=AppointmentStatus.Booked,
+    )
     db.commit()
     out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
     out.breaks_overlap = _get_break_overlaps(
@@ -972,6 +1004,7 @@ def update_appointment(
     practice_id = current_user.practice_id
     practice_tz = _practice_zoneinfo(db, practice_id)
     appt = _get_appointment(appointment_id, practice_id, db)
+    status_before_update = appt.status
     values = body.model_dump(exclude_unset=True)
 
     practitioner_id = values.get("practitioner_id", appt.practitioner_id)
@@ -1027,6 +1060,14 @@ def update_appointment(
 
     for field, value in values.items():
         setattr(appt, field, value)
+    _write_audit(
+        db,
+        practice_id=practice_id,
+        appointment_id=appointment_id,
+        confirmed_by_user_id=current_user.id,
+        action=AppointmentAuditAction.update,
+        status_before=status_before_update,
+    )
     db.commit()
     out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
     out.breaks_overlap = _get_break_overlaps(
@@ -1082,6 +1123,30 @@ def get_checkin_defaults(
     )
 
 
+@router.get("/{appointment_id}/audit", response_model=list[AppointmentAuditLogOut])
+def get_appointment_audit(
+    appointment_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Return the confirmed-mutation audit trail for a single appointment.
+
+    Practice-scoped: only entries belonging to the caller's practice are returned.
+    The appointment itself must also belong to the caller's practice (404 otherwise).
+    """
+    practice_id = current_user.practice_id
+    _get_appointment(appointment_id, practice_id, db)  # 404 if not in practice
+    return (
+        db.query(AppointmentAuditLog)
+        .filter(
+            AppointmentAuditLog.practice_id == practice_id,
+            AppointmentAuditLog.appointment_id == appointment_id,
+        )
+        .order_by(AppointmentAuditLog.created_at)
+        .all()
+    )
+
+
 @router.patch("/{appointment_id}/status", response_model=AppointmentOut)
 def update_appointment_status(
     appointment_id: uuid.UUID,
@@ -1091,6 +1156,7 @@ def update_appointment_status(
 ):
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
+    status_before_patch = appt.status
     appt.status = body.status
     if "waiting_area_id" in body.model_fields_set:
         if body.waiting_area_id is not None:
@@ -1098,6 +1164,15 @@ def update_appointment_status(
         appt.waiting_area_id = body.waiting_area_id
     elif body.status in TERMINAL_STATUSES:
         appt.waiting_area_id = None
+    _write_audit(
+        db,
+        practice_id=practice_id,
+        appointment_id=appointment_id,
+        confirmed_by_user_id=current_user.id,
+        action=AppointmentAuditAction.status_change,
+        status_before=status_before_patch,
+        status_after=body.status,
+    )
     db.commit()
     return _get_appointment(appointment_id, practice_id, db)
 
@@ -1111,9 +1186,21 @@ def cancel_appointment(
 ):
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
+    status_before_delete = appt.status
+    cancellation_reason = body.cancellation_reason if body else None
     appt.status = AppointmentStatus.Cancelled
     appt.waiting_area_id = None
-    appt.cancellation_reason = body.cancellation_reason if body else None
+    appt.cancellation_reason = cancellation_reason
+    _write_audit(
+        db,
+        practice_id=practice_id,
+        appointment_id=appointment_id,
+        confirmed_by_user_id=current_user.id,
+        action=AppointmentAuditAction.delete,
+        status_before=status_before_delete,
+        status_after=AppointmentStatus.Cancelled,
+        cancellation_reason=cancellation_reason,
+    )
     db.commit()
 
 
