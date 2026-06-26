@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 36: Diary Audit History Keyboard Accessibility |
 | Integrated through | Sprint 36 audit-history toggle keyboard and ARIA semantics |
-| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-26 |
 
 ## What Changed
@@ -60,7 +60,7 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 
 ## Recommended Next Direction
 
-After Sprint 36 is pushed, mirrored, and audited, pause Antigravity-only polishing unless Yuri wants more; prefer waiting for Claude's headless limit to recover before backend-heavy audit/proposal work.
+Pause Antigravity-only polishing unless Yuri wants more; prefer waiting for Claude's headless limit to recover before backend-heavy audit/proposal work.
 
 
 ## Previous Closeout - Sprint 35

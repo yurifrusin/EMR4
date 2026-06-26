@@ -136,9 +136,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; closeout verification passed |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Passed; pending final push/mirror/audit |
+| Integration Gate | Passed; pushed/mirrored/audited |
 | Product Goal | Make the read-only audit-history toggle keyboard-accessible and semantically clearer without changing visible layout or mutation behaviour |
 
 ### Workstream S36-A - Audit History Toggle Semantics
