@@ -35,6 +35,8 @@ let activeAppointments = [];
 let activeTypes = [];
 let ahpraToPractitionerMap = {};
 let waitingAreas = [];
+let isBerniePilotEligible = false;
+let isBerniePilotActive = false;
 const checkinDefaultCache = new Map();
 
 const LOCATION_STORAGE_KEY = "emr4_diary_active_location";
@@ -2121,7 +2123,8 @@ function renderBernieReview(payload) {
     const reviewParam = urlParams.get("bernie_review");
     const devReviewParam = urlParams.get("bernie_dev_review");
     const isConfirmAdapter = (isSmoke && urlParams.get("bernie_confirm_adapter") === "true" && (reviewParam !== "live" || devReviewParam === "true")) ||
-                             (!isSmoke && reviewParam === "live" && devReviewParam === "true");
+                             (!isSmoke && reviewParam === "live" && devReviewParam === "true") ||
+                             isBerniePilotActive;
 
     const successMsg = document.createElement("div");
     successMsg.className = "bernie-success-alert hidden";
@@ -2192,6 +2195,136 @@ function renderBernieReview(payload) {
         successMsg.classList.remove("hidden");
       }
     });
+  }
+}
+
+async function checkBerniePilotEligibility() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isSmoke = urlParams.get("smoke") === "true";
+  const devReviewParam = urlParams.get("bernie_dev_review");
+
+  // If explicit devReviewParam is true, we preserve dev/query behavior
+  if (devReviewParam === "true") {
+    return;
+  }
+
+  if (!token && !isSmoke) {
+    return;
+  }
+
+  try {
+    const res = await apiFetch("/appointments/bernie/pilot-eligibility");
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.eligible) {
+        isBerniePilotEligible = true;
+        const launchBtn = document.getElementById("btn-bernie-pilot-launch");
+        if (launchBtn) {
+          launchBtn.classList.remove("hidden");
+          launchBtn.onclick = () => {
+            const panel = document.getElementById("bernie-review-panel");
+            if (panel) {
+              if (panel.classList.contains("hidden")) {
+                isBerniePilotActive = true;
+                loadBernieLiveReview();
+              } else {
+                isBerniePilotActive = false;
+                panel.classList.add("hidden");
+              }
+            }
+          };
+        }
+      }
+    }
+  } catch (err) {
+    console.error("Failed to check Bernie pilot eligibility:", err);
+  }
+}
+
+async function loadBernieLiveReview() {
+  const panel = document.getElementById("bernie-review-panel");
+  if (panel) {
+    panel.classList.remove("hidden");
+  }
+
+  const contentEl = document.getElementById("bernie-review-content");
+  if (contentEl) {
+    contentEl.innerHTML = '<div class="bernie-loading">Loading live pilot review...</div>';
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const practitionerId = urlParams.get("practitioner_id") || "prac-1";
+  const patientId = urlParams.get("patient_id") || "smoke-pat-1";
+  const referenceDate = urlParams.get("reference_date") || "2026-06-27";
+  const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
+
+  const body = {
+    reference_date: referenceDate,
+    command: {
+      practitioner_id: practitionerId,
+      date_from: "today",
+      duration_minutes: "15"
+    }
+  };
+
+  if (selectedIndex !== null && !isNaN(selectedIndex)) {
+    body.selected_candidate_index = selectedIndex;
+    body.patient_id = patientId;
+    body.reason = "Follow-up";
+  }
+
+  let payload = null;
+  try {
+    const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
+      method: "POST",
+      body: JSON.stringify(body)
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      payload = data.staff_review;
+    } else {
+      const errText = await res.text();
+      console.error("Bernie live review error", res.status, errText);
+      payload = {
+        status: "blocked",
+        confirmation_ready: false,
+        selected_slot: null,
+        candidate_slots: [],
+        warning_summary: `Error response from backend: ${res.status}`,
+        evidence_summary: "Live backend review failed.",
+        confirm_payload: null,
+        blocks: [
+          { code: "live_error", message: `HTTP status ${res.status}` }
+        ]
+      };
+    }
+  } catch (e) {
+    console.error("Failed to fetch live Bernie review", e);
+    payload = {
+      status: "blocked",
+      confirmation_ready: false,
+      selected_slot: null,
+      candidate_slots: [],
+      warning_summary: "Network error fetching live review.",
+      evidence_summary: "Live backend review failed.",
+      confirm_payload: null,
+      blocks: [
+        { code: "network_error", message: e.message }
+      ]
+    };
+  }
+
+  if (payload) {
+    renderBernieReview(payload);
+    // Add the pilot banner if we are in pilot mode
+    if (contentEl) {
+      const banner = document.createElement("div");
+      banner.className = "bernie-pilot-banner";
+      banner.setAttribute("data-testid", "bernie-pilot-banner");
+      banner.innerHTML = "⚠️ <strong>Supervised Pilot Mode:</strong> Verify all details before confirming.";
+      contentEl.insertBefore(banner, contentEl.firstChild);
+    }
   }
 }
 
@@ -2592,6 +2725,7 @@ Office.onReady(() => {
 
   if (token || isSmoke || hasLiveDevReview || isDevFixture) { loadDiary(); scheduleRefresh(); }
   if (isSmoke || hasLiveDevReview || isDevFixture) { initBernieReview(); }
+  checkBerniePilotEligibility();
 });
 
 // ─── BOOKING MODAL LOGIC ───────────────────────────────────

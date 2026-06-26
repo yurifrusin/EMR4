@@ -1393,3 +1393,264 @@ def test_bernie_dev_review_fixture_route(diary_page):
         diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_pilot_eligibility_default_off(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": False,
+        "eligible": False,
+        "reason": "pilot_disabled",
+        "practice_allowed": False,
+        "user_allowed": False
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/bernie/pilot-eligibility",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_eligibility)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+
+        launch_btn = diary_page.locator("[data-testid='bernie-pilot-launch-button']")
+        assert launch_btn.count() == 1
+        assert "hidden" in launch_btn.get_attribute("class")
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_pilot_eligibility_eligible(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+
+    mock_live_review = {
+        "intent": "bernie_supervised_booking",
+        "result": "confirmation_ready",
+        "safe": True,
+        "requires_confirmation": True,
+        "autonomy_tier": "supervised",
+        "summary": "Proposal confirmation ready",
+        "normalization": {
+            "safe": True,
+            "constraint": { "practitioner_id": "prac-1" },
+            "warnings": [],
+            "blocks": [],
+            "summary": "Normalized successfully"
+        },
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Proposal Confirmation Ready",
+            "status": "confirmation_ready",
+            "staff_action_required": "Review and confirm booking.",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "id": "slot-1",
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Verification details look correct.",
+            "warnings": [],
+            "blocks": [],
+            "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+            "confirm_payload": { "proposal_id": "prop-123" },
+            "confirm_evidence": []
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/bernie/pilot-eligibility",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_eligibility)
+        )
+    )
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_live_review)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+
+        launch_btn = diary_page.locator("[data-testid='bernie-pilot-launch-button']")
+        assert launch_btn.count() == 1
+        assert "hidden" not in launch_btn.get_attribute("class")
+
+        panel = diary_page.locator("[data-testid='bernie-review-panel']")
+        assert "hidden" in panel.get_attribute("class")
+
+        launch_btn.click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
+
+        banner = diary_page.locator("[data-testid='bernie-pilot-banner']")
+        assert banner.is_visible()
+        assert "Supervised Pilot Mode" in banner.text_content()
+
+        headline = diary_page.locator("[data-testid='bernie-review-headline']")
+        assert headline.text_content().strip() == "Proposal Confirmation Ready"
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_pilot_eligibility_confirm_gated(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+
+    mock_live_review = {
+        "intent": "bernie_supervised_booking",
+        "result": "confirmation_ready",
+        "safe": True,
+        "requires_confirmation": True,
+        "autonomy_tier": "supervised",
+        "summary": "Proposal confirmation ready",
+        "normalization": {
+            "safe": True,
+            "constraint": { "practitioner_id": "prac-1" },
+            "warnings": [],
+            "blocks": [],
+            "summary": "Normalized successfully"
+        },
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Proposal Confirmation Ready",
+            "status": "confirmation_ready",
+            "staff_action_required": "Review and confirm booking.",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "id": "slot-1",
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Verification details look correct.",
+            "warnings": [],
+            "blocks": [],
+            "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+            "confirm_payload": { "proposal_id": "prop-123" },
+            "confirm_evidence": []
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    confirm_payloads = []
+
+    def handle_confirm(route):
+        req = route.request
+        confirm_payloads.append(json.loads(req.post_data))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+
+    diary_page.route(
+        "**/api/v1/appointments/bernie/pilot-eligibility",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_eligibility)
+        )
+    )
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_live_review)
+        )
+    )
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/create/confirm-bernie",
+        handle_confirm
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+
+        diary_page.click("[data-testid='bernie-pilot-launch-button']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
+
+        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        assert checkbox.is_visible()
+        assert checkbox.is_checked() is False
+        assert confirm_btn.is_visible()
+        assert confirm_btn.is_disabled()
+
+        try:
+            confirm_btn.click(timeout=1000, force=True)
+        except Exception:
+            pass
+        assert len(confirm_payloads) == 0
+
+        checkbox.check()
+        assert confirm_btn.is_disabled() is False
+        confirm_btn.click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
+        
+        assert len(confirm_payloads) == 1
+        assert confirm_payloads[0]["proposal_id"] == "prop-123"
+        assert confirm_payloads[0]["confirmed"] is True
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
