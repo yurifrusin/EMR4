@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-claude-bernie-slot-command-normalizer-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -42,5 +42,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Reviewed and integrated. Diff matched approved Sprint 39 plan: `SlotSearchCommandIn`, `SlotSearchCommandResult`, pure `normalize_slot_search_command(...)`, and focused unit tests only.
+- Follow-up required: Future sprint may expose this pure normalizer through a Bernie command endpoint or combine it with slot-search proposal execution, but no live route/UI was added here.

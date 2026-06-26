@@ -114,3 +114,4 @@ and worker-worktree retirement decisions. It complements the task packets under
 
 | 2026-06-26 21:30 +1000 | claude | claude-claude-bernie-slot-search-proposal-contract | `claude/current` | Reviewed non-mutating Bernie slot-search proposal contract and integrated with focused verification | `641556f` | integrated | Mirrors realign after closeout |
 | 2026-06-26 21:30 +1000 | antigravity | antigravity-antigravity-diary-slot-search-preview-harness | `antigravity/current` | Reviewed smoke-only diary slot-search preview harness and integrated with deterministic checks | `641556f` | integrated | Mirrors realign after closeout |
+| 2026-06-26 21:55 +1000 | claude | claude-claude-bernie-slot-command-normalizer-contract | `claude/current` | Reviewed and integrated Sprint 39 deterministic Bernie slot command normalizer contract | `e417e19` | integrated | No Yuri-only tests; mirrors realign after closeout |

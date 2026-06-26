@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-claude-bernie-slot-command-normalizer-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 21:38 +1000 |
 | Source HEAD | `5f7e62f` |
 
@@ -44,6 +44,6 @@ a) 'Normalize identifiers where possible' read as deterministic UUID/format pars
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted. Scope is pure backend schema/service/test normalization only, with no route, DB, LLM, slot-search execution, appointment mutation, audit mutation, or UI surface.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation released by Ariadne via Claude headless driver.

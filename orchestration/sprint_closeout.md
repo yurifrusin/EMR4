@@ -8,9 +8,61 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 39: Bernie Slot Command Normalizer Contract |
+| Integrated through | Pure deterministic Bernie slot-search command normalization schemas/service/tests |
+| Status | Integrated, verified, pending push/mirror/audit closeout |
+| Last updated | 2026-06-26 |
+
+## What Changed
+
+- Added `SlotSearchCommandIn`, a permissive structured-command schema for future Bernie/LLM slot-search commands.
+- Added `SlotSearchCommandResult`, returning `safe`, optional typed `SlotSearchProposalIn` constraint, warnings, blocks, and a summary.
+- Added pure service helper `normalize_slot_search_command(payload, *, reference_date=None)` in `app/services/bernie_slot_normalizer.py`.
+- The normalizer performs deterministic UUID parsing, ISO date/time parsing, positive integer coercion, limit clamping, required-field checks, relative `today`/`tomorrow` only when `reference_date` is injected, and delegates final date-range validation to `SlotSearchProposalIn`.
+- Added 30 focused pure unit tests covering successful coercion, malformed/missing constraints, limit warnings, relative-date behavior, idempotence, no DB/session parameter, and no DB/LLM import usage.
+- No route, database session, LLM/Gemini call, slot-search execution, appointment creation, audit mutation, diary UI, taskpane, Command Centre, billing, SMS, or live Bernie runtime was added.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified this as a pure backend/unit-test slice. There is no visible UI, deployed asset, live API route, or manual clinical workflow to review.
+
+## Not Required Before Moving On
+
+- No manual live API test is required; no route was added.
+- No manual live UI review is required; no frontend files or deployed assets changed.
+- No database migration or data repair is required.
+- No Word taskpane, Command Centre, GCP/Gemini, Office dialog, diary grid, resource admin, billing, SMS, or security-console action is required.
+
+## Known Follow-Up
+
+- Future Bernie work can expose this normalizer through a narrow endpoint/tool boundary, then feed safe constraints into the Sprint 38 slot-search proposal endpoint.
+- A later sprint can decide where DB-backed name-to-UUID resolution belongs; this sprint intentionally treats identifier normalization as UUID/format parsing only.
+- Natural language date phrases beyond deterministic `today`/`tomorrow` remain the upstream parser/LLM's responsibility.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert remains outside Sprint 39.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found Sprint 39 Claude plan/review packets.
+- Claude implementation release via `python scripts\drive_agent_headless.py --phase implement --mint-session` -> submitted `origin/claude/current` at `e417e19`.
+- Backend compile check from Claude worktree: `python -m py_compile app\schemas\appointments.py app\services\bernie_slot_normalizer.py tests\test_bernie_slot_normalizer.py` -> passed.
+- Focused normalizer tests from Claude worktree: `python -m pytest tests\test_bernie_slot_normalizer.py -q --tb=short -p no:randomly` -> 30 passed.
+- Adjacent slot-search proposal regression from Claude worktree: `python -m pytest tests\test_slot_search_proposal.py -q --tb=short -p no:randomly` -> 20 passed.
+- Diff hygiene: `git diff --check` -> passed.
+
+## Recommended Next Direction
+
+Continue the Bernie command pipeline with a narrow route/tool-binding slice that exposes the pure normalizer safely and still does not create appointments without a later explicit confirmation path.
+
+
+## Previous Closeout - Sprint 38
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 38: Bernie-Safe Slot Search Proposal Foundation |
 | Integrated through | Sprint 38 backend non-mutating slot-search proposal contract and smoke-only diary preview harness |
-| Status | Integrated, verified, pending push/mirror/audit closeout |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-26 |
 
 ## What Changed
@@ -67,7 +119,7 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 
 ## Recommended Next Direction
 
-Sprint 39 has been dispatched as the next narrow Bernie slice: deterministic slot-search command parsing/normalization into the existing `SlotSearchProposalIn` constraint shape, without executing searches or creating appointments. Plan gate is pending.
+Sprint 39 was dispatched as the next narrow Bernie slice: deterministic slot-search command parsing/normalization into the existing `SlotSearchProposalIn` constraint shape, without executing searches or creating appointments.
 
 
 ## Previous Closeout - Sprint 36
