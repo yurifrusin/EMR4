@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-supervised-review-payload` |
-| Status | queued |
+| Status | submitted |
 | Created | ec601fc |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-supervised-review-payload-contract --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-supervised-review-payload-contract.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-supervised-review-payload-contract.md`.
+- Verification run: Plan-gate only; ran `python scripts\agent_worktrees.py handin --agent codex`, read `AGENTS.md`, `orchestration/parallel_workstreams.md`, and the task packet, then captured the implementation plan with `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-supervised-review-payload-contract ...`.
+- Remaining risks: Implementation not started by design; backend code/tests still require explicit `complete sprint task` approval before any production or test edits.
