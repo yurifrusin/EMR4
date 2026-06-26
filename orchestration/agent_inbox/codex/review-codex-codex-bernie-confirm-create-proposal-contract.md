@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-confirm-create-proposal` |
 | Source Task | `codex-bernie-confirm-create-proposal-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne reviewed the backend-only diff, reran compile and focused/adjacent pytest suites, and confirmed failed paths preserve no-write/no-audit semantics while success writes exactly one appointment plus bounded audit evidence.
+- Follow-up required: Consider a later audit-model refinement if Bernie/source evidence grows beyond bounded internal codes in `appointment_audit_log.confirmed_warnings`.

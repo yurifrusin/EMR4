@@ -9,7 +9,7 @@
 | Worker Branch | `codex/bernie-confirm-create-proposal` |
 | Branch | `codex/bernie-confirm-create-proposal` |
 | Source Task | `codex-bernie-confirm-create-proposal-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 00:39 +1000 |
 | Source HEAD | `07218d0` |
 
@@ -47,6 +47,6 @@ Need to avoid treating proposal evidence as authorization by itself; confirmatio
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted after metadata correction; scope, verification, and no-LLM/no-autonomous-write boundaries were appropriate.
+- Required changes before implementation: Add required plan metadata rows for Role, Worker Name, and Worker Branch; completed in `80026bc`.
+- Approved to proceed: yes
