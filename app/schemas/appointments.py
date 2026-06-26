@@ -402,3 +402,14 @@ class SlotSearchCommandResult(BaseModel):
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
     summary: str
+
+
+class SlotSearchCommandExecutionOut(BaseModel):
+    """Result of normalizing a Bernie slot-search command and, when safe, searching slots."""
+    intent: Literal["search_slots_from_command"] = "search_slots_from_command"
+    safe: bool
+    normalization: SlotSearchCommandResult
+    proposal: Optional[SlotSearchProposalOut] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    summary: str

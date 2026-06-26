@@ -26,7 +26,7 @@ from app.schemas.appointments import (
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
     AppointmentAuditLogOut,
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
-    SlotSearchCommandIn, SlotSearchCommandResult,
+    SlotSearchCommandIn, SlotSearchCommandResult, SlotSearchCommandExecutionOut,
 )
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
@@ -1443,22 +1443,11 @@ def get_available_slots(
     return slots
 
 
-@router.post("/proposals/slot-search", response_model=SlotSearchProposalOut)
-def propose_slot_search(
+def _build_slot_search_proposal(
     body: SlotSearchProposalIn,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
-):
-    """Non-mutating candidate slot search for future Bernie/reception use.
-
-    Evaluates practitioner schedule, existing bookings, break overlaps, and
-    optional time-of-day and location constraints without writing appointments
-    or audit rows. Returns ranked candidate slots for staff review.
-    autonomy_tier='execute_with_report' means the search result may be presented
-    directly; a booking still requires POST /proposals/create + confirmation.
-    """
-    practice_id = current_user.practice_id
-
+    db: Session,
+    practice_id: uuid.UUID,
+) -> SlotSearchProposalOut:
     practitioner = db.query(Practitioner).filter(
         Practitioner.id == body.practitioner_id,
         Practitioner.practice_id == practice_id,
@@ -1605,6 +1594,23 @@ def propose_slot_search(
     )
 
 
+@router.post("/proposals/slot-search", response_model=SlotSearchProposalOut)
+def propose_slot_search(
+    body: SlotSearchProposalIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Non-mutating candidate slot search for future Bernie/reception use.
+
+    Evaluates practitioner schedule, existing bookings, break overlaps, and
+    optional time-of-day and location constraints without writing appointments
+    or audit rows. Returns ranked candidate slots for staff review.
+    autonomy_tier='execute_with_report' means the search result may be presented
+    directly; a booking still requires POST /proposals/create + confirmation.
+    """
+    return _build_slot_search_proposal(body, db, current_user.practice_id)
+
+
 @router.post("/proposals/slot-search/normalize", response_model=SlotSearchCommandResult)
 def normalize_slot_search_proposal_command(
     body: SlotSearchCommandIn,
@@ -1620,3 +1626,48 @@ def normalize_slot_search_proposal_command(
     """
     _ = current_user
     return normalize_slot_search_command(body, reference_date=reference_date)
+
+
+@router.post(
+    "/proposals/slot-search/normalized",
+    response_model=SlotSearchCommandExecutionOut,
+)
+def propose_normalized_slot_search(
+    body: SlotSearchCommandIn,
+    reference_date: date_type = Query(...),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Normalize a Bernie slot-search command and search only when safe.
+
+    The normalization step is deterministic and requires an explicit reference
+    date. Blocked normalization returns context without evaluating schedules or
+    conflicts. Safe normalization reuses the same non-mutating proposal path as
+    /proposals/slot-search.
+    """
+    normalization = normalize_slot_search_command(body, reference_date=reference_date)
+    if not normalization.safe or normalization.constraint is None:
+        return SlotSearchCommandExecutionOut(
+            safe=False,
+            normalization=normalization,
+            proposal=None,
+            warnings=normalization.warnings,
+            blocks=normalization.blocks,
+            summary=normalization.summary,
+        )
+
+    proposal = _build_slot_search_proposal(
+        normalization.constraint,
+        db,
+        current_user.practice_id,
+    )
+    warnings = [*normalization.warnings, *proposal.warnings]
+    blocks = [*normalization.blocks, *proposal.blocks]
+    return SlotSearchCommandExecutionOut(
+        safe=proposal.safe,
+        normalization=normalization,
+        proposal=proposal,
+        warnings=warnings,
+        blocks=blocks,
+        summary=f"{normalization.summary} {proposal.summary}",
+    )
