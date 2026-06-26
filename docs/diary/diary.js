@@ -28,6 +28,8 @@ const BERNIE_DEV_QUERY_PARAM_ALLOWLIST = [
   "smoke",
   "bernie_confirm_adapter",
   "practitioner_id",
+  "patient_id",
+  "reference_date",
   "selected_candidate_index"
 ];
 
@@ -73,6 +75,75 @@ function buildBernieDevFixtureSearch(state) {
   nextParams.set("bernie_dev_review", "true");
   nextParams.set("bernie_review", state);
   return nextParams.toString();
+}
+
+function buildBerniePilotReadinessPayload(blocks) {
+  return {
+    status: "blocked",
+    confirmation_ready: false,
+    selected_slot: null,
+    candidate_slots: [],
+    warning_summary: "Bernie pilot is not ready for this diary context.",
+    evidence_summary: "Bernie needs real diary context before it can prepare a supervised booking review.",
+    confirm_payload: null,
+    blocks
+  };
+}
+
+function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
+  const queryPractitionerId = urlParams.get("practitioner_id");
+  const queryPatientId = urlParams.get("patient_id");
+  const queryReferenceDate = urlParams.get("reference_date");
+
+  const practitionerId = allowHarnessDefaults ? (queryPractitionerId || "prac-1") : queryPractitionerId;
+  const patientId = allowHarnessDefaults ? (queryPatientId || "smoke-pat-1") : queryPatientId;
+  const referenceDate = allowHarnessDefaults ? (queryReferenceDate || "2026-06-27") : (queryReferenceDate || localDateKey(diaryDate));
+
+  const blocks = [];
+  if (!practitionerId) {
+    blocks.push({
+      code: "missing_practitioner_context",
+      message: "Select or load a real practitioner diary context before launching Bernie Pilot."
+    });
+  }
+  if (!patientId && (!allowHarnessDefaults || (selectedIndex !== null && !isNaN(selectedIndex)))) {
+    blocks.push({
+      code: "missing_patient_context",
+      message: "Select or load a real patient context before asking Bernie to prepare a booking confirmation."
+    });
+  }
+  if (!referenceDate) {
+    blocks.push({
+      code: "missing_reference_date",
+      message: "Select a diary date before launching Bernie Pilot."
+    });
+  }
+
+  if (blocks.length > 0) {
+    return {
+      ready: false,
+      payload: buildBerniePilotReadinessPayload(blocks)
+    };
+  }
+
+  const body = {
+    reference_date: referenceDate,
+    command: {
+      practitioner_id: practitionerId,
+      date_from: "today",
+      duration_minutes: "15"
+    }
+  };
+
+  if (selectedIndex !== null && !isNaN(selectedIndex)) {
+    body.selected_candidate_index = selectedIndex;
+    body.patient_id = patientId;
+    body.reason = "Follow-up";
+  }
+
+  return { ready: true, body };
 }
 
 function getMockSlotSearchCandidates() {
@@ -2253,31 +2324,21 @@ async function loadBernieLiveReview() {
   }
 
   const urlParams = new URLSearchParams(window.location.search);
-  const practitionerId = urlParams.get("practitioner_id") || "prac-1";
-  const patientId = urlParams.get("patient_id") || "smoke-pat-1";
-  const referenceDate = urlParams.get("reference_date") || "2026-06-27";
-  const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
+  const isSmoke = urlParams.get("smoke") === "true";
+  const devReviewParam = urlParams.get("bernie_dev_review");
+  const allowHarnessDefaults = isSmoke || devReviewParam === "true";
+  const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
 
-  const body = {
-    reference_date: referenceDate,
-    command: {
-      practitioner_id: practitionerId,
-      date_from: "today",
-      duration_minutes: "15"
-    }
-  };
-
-  if (selectedIndex !== null && !isNaN(selectedIndex)) {
-    body.selected_candidate_index = selectedIndex;
-    body.patient_id = patientId;
-    body.reason = "Follow-up";
+  if (!request.ready) {
+    renderBernieReview(request.payload);
+    return;
   }
 
   let payload = null;
   try {
     const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
       method: "POST",
-      body: JSON.stringify(body)
+      body: JSON.stringify(request.body)
     });
 
     if (res.ok) {
@@ -2401,49 +2462,34 @@ async function initBernieReview() {
       payload = mockBernieReviewConfirmationReady;
     } else if (reviewParam === "live") {
       try {
-        const practitionerId = urlParams.get("practitioner_id") || "prac-1";
-        const patientId = urlParams.get("patient_id") || "smoke-pat-1";
-        const referenceDate = urlParams.get("reference_date") || "2026-06-27";
-        const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
-
-        const body = {
-          reference_date: referenceDate,
-          command: {
-            practitioner_id: practitionerId,
-            date_from: "today",
-            duration_minutes: "15"
-          }
-        };
-
-        if (selectedIndex !== null && !isNaN(selectedIndex)) {
-          body.selected_candidate_index = selectedIndex;
-          body.patient_id = patientId;
-          body.reason = "Follow-up";
-        }
-
-        const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
-          method: "POST",
-          body: JSON.stringify(body)
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          payload = data.staff_review;
+        const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults: true });
+        if (!request.ready) {
+          payload = request.payload;
         } else {
-          const errText = await res.text();
-          console.error("Bernie live review error", res.status, errText);
-          payload = {
-            status: "blocked",
-            confirmation_ready: false,
-            selected_slot: null,
-            candidate_slots: [],
-            warning_summary: `Error response from backend: ${res.status}`,
-            evidence_summary: "Live backend review failed.",
-            confirm_payload: null,
-            blocks: [
-              { code: "live_error", message: `HTTP status ${res.status}` }
-            ]
-          };
+          const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
+            method: "POST",
+            body: JSON.stringify(request.body)
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            payload = data.staff_review;
+          } else {
+            const errText = await res.text();
+            console.error("Bernie live review error", res.status, errText);
+            payload = {
+              status: "blocked",
+              confirmation_ready: false,
+              selected_slot: null,
+              candidate_slots: [],
+              warning_summary: `Error response from backend: ${res.status}`,
+              evidence_summary: "Live backend review failed.",
+              confirm_payload: null,
+              blocks: [
+                { code: "live_error", message: `HTTP status ${res.status}` }
+              ]
+            };
+          }
         }
       } catch (e) {
         console.error("Failed to fetch live Bernie review", e);

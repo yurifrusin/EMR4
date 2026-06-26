@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed: `orchestration/agent_inbox/codex/codex-bernie-pilot-launch-context-guard.md` status/completion notes; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-pilot-launch-context-guard.md` implementation plan packet.
-- Verification run: Plan gate only; inspected packet/protocol and relevant Bernie diary/review harness surfaces. No production/test verification run because no implementation files were changed.
-- Remaining risks: Implementation still needs Ariadne plan approval and explicit `complete sprint task`; ordinary pilot context may need to fail closed until a real selected practitioner/patient context is available.
+- Files changed: `docs/diary/diary.js` adds the Bernie pilot context resolver/readiness guard and isolates smoke/dev defaults; `docs/diary/diary.html` bumps `diary.js` to `v=115`; `review/test_diary_smoke.py` adds ordinary-mode no-POST coverage and preserves explicit smoke/dev harness coverage; coordination plan/review packets updated.
+- Verification run: `node --check docs/diary/diary.js`; focused `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -q -k "bernie_pilot or bernie_live_confirm_flow_harness or bernie_dev_mode_review_feature_flag_success"`; `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py`; full `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`; `git diff --check`.
+- Remaining risks: Ordinary staff-visible pilot launch now deliberately fails closed until real practitioner and patient context are available; a later sprint may need to define the real UI context-selection path before live staff use.
