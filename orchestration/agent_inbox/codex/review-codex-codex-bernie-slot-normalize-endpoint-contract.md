@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-slot-normalize-endpoint` |
 | Source Task | `codex-bernie-slot-normalize-endpoint-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. The route is a thin authenticated adapter from `SlotSearchCommandIn` to `SlotSearchCommandResult`, requires explicit `reference_date`, invokes only `normalize_slot_search_command`, and adds focused tests for auth, shape, deterministic reference-date handling, invalid command blocks, no slot search/LLM execution, and no appointment/audit writes.
+- Follow-up required: None for Sprint 40. Later Bernie slices can wire this endpoint into UI/tool flows and decide whether non-mutating normalization should be available to a broader authenticated role set.

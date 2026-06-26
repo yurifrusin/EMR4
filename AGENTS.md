@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 40 - Bernie slot command normalization endpoint reassigned to Codex worker while Claude recharges; plan gate pending |
-| **Next recommended work** | Review Sprint 40 Codex worker plan once submitted, then release implementation only if accepted |
+| **Current active track** | Sprint 40 - Bernie slot command normalization endpoint integrated; closeout verification pending push/mirror/audit |
+| **Next recommended work** | After Sprint 40 closeout, continue with the next narrow Bernie backend/tool-contract slice if no Yuri-only review remains |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -479,7 +479,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 38 slot-search proposal foundation closeout commit `3da4e2b` |
+| **Latest integration commit** | Sprint 40 Bernie slot normalize endpoint contract implementation commit `16a606b` |
 
 ### Tag map (all tags pushed to remote)
 

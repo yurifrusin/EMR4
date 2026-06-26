@@ -9,7 +9,7 @@
 | Worker Branch | codex/bernie-slot-normalize-endpoint |
 | Branch | `codex/bernie-slot-normalize-endpoint` |
 | Source Task | `codex-bernie-slot-normalize-endpoint-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 22:20 +1000 |
 | Source HEAD | `6b15b84` |
 
@@ -47,6 +47,6 @@ Main ambiguity is exact route placement/name; I will follow existing Bernie prop
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne; scope is backend-only, deterministic, non-mutating, and compatible with Sprint 39 normalizer plus Sprint 38 slot-search proposal contract.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation completed and integrated.

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-slot-normalize-endpoint` |
-| Status | submitted |
+| Status | integrated |
 | Created | 73f6bf0 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-slot-normalize-endpoint-contract --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/routers/appointments.py`, `tests/test_slot_search_normalize_endpoint.py`, Sprint 40 Codex plan/review packets, and orchestration closeout/log/board records.
+- Verification run: `python -m py_compile app\routers\appointments.py app\schemas\appointments.py app\services\bernie_slot_normalizer.py tests\test_slot_search_normalize_endpoint.py`; `python -m pytest tests\test_slot_search_normalize_endpoint.py tests\test_bernie_slot_normalizer.py tests\test_slot_search_proposal.py -q --tb=short -p no:randomly` -> 58 passed; `git diff --check` -> passed.
+- Remaining risks: None for Sprint 40. Later Bernie slices still need supervised UI/tool wiring and a product decision on whether non-mutating normalization should be available to any authenticated staff role or only appointment-mutating staff roles.

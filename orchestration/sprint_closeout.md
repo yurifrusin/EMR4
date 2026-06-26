@@ -8,35 +8,35 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 39: Bernie Slot Command Normalizer Contract |
-| Integrated through | Pure deterministic Bernie slot-search command normalization schemas/service/tests |
-| Status | Integrated, verified, pending push/mirror/audit closeout |
+| Batch | Sprint 40: Bernie Slot Normalize Endpoint Contract |
+| Integrated through | Non-mutating backend endpoint exposing Bernie slot command normalization |
+| Status | Integrated locally, verified, pending push/mirror/audit closeout |
 | Last updated | 2026-06-26 |
 
 ## What Changed
 
-- Added `SlotSearchCommandIn`, a permissive structured-command schema for future Bernie/LLM slot-search commands.
-- Added `SlotSearchCommandResult`, returning `safe`, optional typed `SlotSearchProposalIn` constraint, warnings, blocks, and a summary.
-- Added pure service helper `normalize_slot_search_command(payload, *, reference_date=None)` in `app/services/bernie_slot_normalizer.py`.
-- The normalizer performs deterministic UUID parsing, ISO date/time parsing, positive integer coercion, limit clamping, required-field checks, relative `today`/`tomorrow` only when `reference_date` is injected, and delegates final date-range validation to `SlotSearchProposalIn`.
-- Added 30 focused pure unit tests covering successful coercion, malformed/missing constraints, limit warnings, relative-date behavior, idempotence, no DB/session parameter, and no DB/LLM import usage.
-- No route, database session, LLM/Gemini call, slot-search execution, appointment creation, audit mutation, diary UI, taskpane, Command Centre, billing, SMS, or live Bernie runtime was added.
+- Added authenticated `POST /api/v1/appointments/proposals/slot-search/normalize`.
+- The endpoint accepts `SlotSearchCommandIn`, requires an explicit `reference_date` query parameter, calls `normalize_slot_search_command(...)`, and returns `SlotSearchCommandResult`.
+- The route is intentionally a thin deterministic adapter: it does not execute slot search, create appointments, write audit rows, call Gemini/LLM tooling, or depend on server wall-clock time.
+- Added focused endpoint tests covering authentication, required reference date, response shape, compatibility with `SlotSearchProposalIn`, invalid command blocks, deterministic reference-date handling, no slot-search/LLM execution, and no appointment/audit writes.
+- Claude was stood down for this sprint after a session limit; Cicero/Ohm implemented the backend-only fallback on `codex/bernie-slot-normalize-endpoint`.
+- No diary UI, taskpane, Command Centre, booking mutation, billing, SMS, migrations, patient demographics, resource admin, or live Bernie autonomous runtime was added.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required before continuing.
-Ariadne verified this as a pure backend/unit-test slice. There is no visible UI, deployed asset, live API route, or manual clinical workflow to review.
+Ariadne verified this as a backend-only API contract with focused pytest and compile checks. There is no visible UI, deployed asset, appointment mutation, LLM call, or manual clinical workflow to review.
 
 ## Not Required Before Moving On
 
-- No manual live API test is required; no route was added.
+- No manual live API test is required; focused tests cover the route contract and non-mutation proof.
 - No manual live UI review is required; no frontend files or deployed assets changed.
 - No database migration or data repair is required.
 - No Word taskpane, Command Centre, GCP/Gemini, Office dialog, diary grid, resource admin, billing, SMS, or security-console action is required.
 
 ## Known Follow-Up
 
-- Future Bernie work can expose this normalizer through a narrow endpoint/tool boundary, then feed safe constraints into the Sprint 38 slot-search proposal endpoint.
+- Future Bernie work can feed safe normalized constraints into the Sprint 38 slot-search proposal endpoint and then into a supervised UI/tool flow.
 - A later sprint can decide where DB-backed name-to-UUID resolution belongs; this sprint intentionally treats identifier normalization as UUID/format parsing only.
 - Natural language date phrases beyond deterministic `today`/`tomorrow` remain the upstream parser/LLM's responsibility.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
@@ -44,16 +44,20 @@ Ariadne verified this as a pure backend/unit-test slice. There is no visible UI,
 
 ## Verification
 
-- `python scripts\agent_worktrees.py poll --fetch` -> found Sprint 39 Claude plan/review packets.
-- Claude implementation release via `python scripts\drive_agent_headless.py --phase implement --mint-session` -> submitted `origin/claude/current` at `e417e19`.
-- Backend compile check from Claude worktree: `python -m py_compile app\schemas\appointments.py app\services\bernie_slot_normalizer.py tests\test_bernie_slot_normalizer.py` -> passed.
-- Focused normalizer tests from Claude worktree: `python -m pytest tests\test_bernie_slot_normalizer.py -q --tb=short -p no:randomly` -> 30 passed.
-- Adjacent slot-search proposal regression from Claude worktree: `python -m pytest tests\test_slot_search_proposal.py -q --tb=short -p no:randomly` -> 20 passed.
-- Diff hygiene: `git diff --check` -> passed.
+- `python scripts\agent_worktrees.py poll --fetch --include-codex-workers` -> found Sprint 40 Codex worker plan/review branch.
+- Worker plan accepted and implementation released to Cicero/Ohm; worker stopped on system Python lacking pytest, after which Ariadne re-ran verification with the project venv and submitted the durable review packet.
+- Backend compile check: `python -m py_compile app\routers\appointments.py app\schemas\appointments.py app\services\bernie_slot_normalizer.py tests\test_slot_search_normalize_endpoint.py` -> passed.
+- Focused endpoint/normalizer/proposal tests: `python -m pytest tests\test_slot_search_normalize_endpoint.py tests\test_bernie_slot_normalizer.py tests\test_slot_search_proposal.py -q --tb=short -p no:randomly` -> 58 passed.
+- Diff hygiene: `git diff --check 6b15b84..HEAD` and `git diff --check` -> passed.
 
 ## Recommended Next Direction
 
-Sprint 40 has been dispatched as the next narrow Bernie slice: expose the pure slot-command normalizer through a non-mutating backend route/tool contract, without executing searches or creating appointments. Claude hit a session limit before plan submission, so the sprint has been reassigned to a Codex worker on `codex/bernie-slot-normalize-endpoint`. Plan gate is pending.
+Sprint 40 closes cleanly once push/mirror/audit succeeds. The next recommended slice is another narrow Bernie backend/tool-contract step that consumes normalized slot constraints without introducing autonomous booking or UI mutation.
+
+
+## Previous Closeout - Sprint 39
+
+Sprint 39 added the pure deterministic Bernie slot-search command normalizer and its unit tests. It remains the foundation used by the Sprint 40 endpoint.
 
 
 ## Previous Closeout - Sprint 38
