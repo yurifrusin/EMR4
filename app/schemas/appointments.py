@@ -177,6 +177,18 @@ class AppointmentCreateProposalOut(BaseModel):
     patient_identity: Literal["linked", "provisional"]
 
 
+class AppointmentConfirmCreateProposalOut(BaseModel):
+    intent: Literal["confirm_create_appointment"] = "confirm_create_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["confirmed_write", "blocked"]
+    summary: str
+    appointment: Optional[AppointmentOut] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    audit_evidence: list[str] = Field(default_factory=list)
+
+
 class AppointmentUpdateProposalIn(BaseModel):
     """All fields optional — unset fields keep the appointment's current values."""
     patient_id: Optional[uuid.UUID] = None
@@ -455,3 +467,10 @@ class SlotSelectionProposalOut(BaseModel):
     create_proposal: Optional[AppointmentCreateProposalOut] = None
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
+class BernieCreateProposalConfirmationIn(BaseModel):
+    """Explicit staff confirmation for supervised Bernie create-proposal evidence."""
+    confirmed: bool = False
+    selection_proposal: SlotSelectionProposalOut
+    confirmed_warnings: list[str] = Field(default_factory=list)

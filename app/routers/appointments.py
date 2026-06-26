@@ -19,7 +19,7 @@ from app.schemas.appointments import (
     AppointmentCreate, AppointmentUpdate, AppointmentStatusUpdate,
     AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
     AppointmentCheckinDefaults, AppointmentConflictBrief, AppointmentCreateCommand,
-    AppointmentCreateProposalOut, AppointmentProposalIssue,
+    AppointmentCreateProposalOut, AppointmentConfirmCreateProposalOut, AppointmentProposalIssue,
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
@@ -28,6 +28,7 @@ from app.schemas.appointments import (
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
     SlotSearchCommandIn, SlotSearchCommandResult, SlotSearchCommandExecutionOut,
     SlotSelectionProposalIn, SlotSelectionProposalOut,
+    BernieCreateProposalConfirmationIn,
 )
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
@@ -49,6 +50,12 @@ KNOWN_APPOINTMENT_WARNING_CODES = {
     "waiting_area_cleared",
 }
 
+BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
+    "bernie_confirm_create_proposal",
+    "source_slot_selection_proposal",
+    "source_create_proposal",
+]
+
 
 def _sanitize_confirmed_warnings(codes: Optional[list[str]]) -> Optional[list[str]]:
     if not codes:
@@ -61,6 +68,16 @@ def _sanitize_confirmed_warnings(codes: Optional[list[str]]) -> Optional[list[st
         if normalized in KNOWN_APPOINTMENT_WARNING_CODES and normalized not in confirmed_warnings:
             confirmed_warnings.append(normalized)
     return confirmed_warnings or None
+
+
+def _sanitize_audit_evidence(codes: Optional[list[str]]) -> list[str]:
+    if not codes:
+        return []
+    evidence: list[str] = []
+    for code in codes:
+        if code in BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE and code not in evidence:
+            evidence.append(code)
+    return evidence
 
 NON_BLOCKING_STATUSES = (
     AppointmentStatus.Cancelled,
@@ -409,7 +426,12 @@ def _write_audit(
     status_after: Optional[AppointmentStatus] = None,
     cancellation_reason: Optional[str] = None,
     confirmed_warnings: Optional[list[str]] = None,
+    audit_evidence: Optional[list[str]] = None,
 ) -> None:
+    bounded_codes = [
+        *_sanitize_audit_evidence(audit_evidence),
+        *(_sanitize_confirmed_warnings(confirmed_warnings) or []),
+    ]
     db.add(AppointmentAuditLog(
         practice_id=practice_id,
         appointment_id=appointment_id,
@@ -418,7 +440,7 @@ def _write_audit(
         status_before=status_before,
         status_after=status_after,
         cancellation_reason=cancellation_reason,
-        confirmed_warnings=_sanitize_confirmed_warnings(confirmed_warnings),
+        confirmed_warnings=bounded_codes or None,
     ))
 
 
@@ -441,6 +463,61 @@ def _audit_actor_display(user: Optional[User]) -> tuple[str, Optional[str]]:
             return display, role
 
     return "Unknown", role
+
+
+def _create_appointment_from_body(
+    body: AppointmentCreate,
+    db: Session,
+    current_user: User,
+    confirmed_warnings: Optional[list[str]] = None,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentOut:
+    practice_id = current_user.practice_id
+    booked_by = current_user.id
+    practice_tz = _practice_zoneinfo(db, practice_id)
+    values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
+
+    if body.patient_id is not None:
+        _ensure_patient(body.patient_id, practice_id, db)
+    _ensure_practitioner(body.practitioner_id, practice_id, db)
+    _ensure_appointment_type(body.appointment_type_id, practice_id, db)
+    _ensure_location(body.location_id, practice_id, db)
+    _raise_if_conflict(
+        db,
+        practice_id,
+        body.practitioner_id,
+        appointment_date,
+        start_time_local,
+        values["duration_minutes"],
+        location_id=body.location_id,
+    )
+
+    appt = Appointment(
+        practice_id=practice_id,
+        booked_by=booked_by,
+        **values,
+    )
+    db.add(appt)
+    db.flush()
+    appt_id = appt.id
+    _write_audit(
+        db,
+        practice_id=practice_id,
+        appointment_id=appt_id,
+        confirmed_by_user_id=current_user.id,
+        action=AppointmentAuditAction.create,
+        status_after=AppointmentStatus.Booked,
+        confirmed_warnings=confirmed_warnings,
+        audit_evidence=audit_evidence,
+    )
+    db.commit()
+    out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
+    out.breaks_overlap = _get_break_overlaps(
+        db, practice_id, body.practitioner_id,
+        appointment_date, start_time_local, values["duration_minutes"],
+        location_id=body.location_id,
+    )
+    return out
 
 
 # ── Appointment Types ─────────────────────────────────────────────────────────
@@ -508,51 +585,12 @@ def create_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    practice_id = current_user.practice_id
-    booked_by = current_user.id
-    practice_tz = _practice_zoneinfo(db, practice_id)
-    values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
-
-    if body.patient_id is not None:
-        _ensure_patient(body.patient_id, practice_id, db)
-    _ensure_practitioner(body.practitioner_id, practice_id, db)
-    _ensure_appointment_type(body.appointment_type_id, practice_id, db)
-    _ensure_location(body.location_id, practice_id, db)
-    _raise_if_conflict(
+    return _create_appointment_from_body(
+        body,
         db,
-        practice_id,
-        body.practitioner_id,
-        appointment_date,
-        start_time_local,
-        values["duration_minutes"],
-        location_id=body.location_id,
-    )
-
-    appt = Appointment(
-        practice_id=practice_id,
-        booked_by=booked_by,
-        **values,
-    )
-    db.add(appt)
-    db.flush()           # generate PK in Python before commit expires the instance
-    appt_id = appt.id   # capture UUID while still in pre-commit state
-    _write_audit(
-        db,
-        practice_id=practice_id,
-        appointment_id=appt_id,
-        confirmed_by_user_id=current_user.id,
-        action=AppointmentAuditAction.create,
-        status_after=AppointmentStatus.Booked,
+        current_user,
         confirmed_warnings=body.confirmed_warnings,
     )
-    db.commit()
-    out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
-    out.breaks_overlap = _get_break_overlaps(
-        db, practice_id, body.practitioner_id,
-        appointment_date, start_time_local, values["duration_minutes"],
-        location_id=body.location_id,
-    )
-    return out
 
 
 @router.post("/proposals/create", response_model=AppointmentCreateProposalOut)
@@ -1904,4 +1942,196 @@ def propose_slot_selection_for_create(
         create_proposal=create_proposal,
         warnings=warnings,
         blocks=blocks,
+    )
+
+
+def _confirm_create_block(code: str, message: str) -> AppointmentProposalIssue:
+    return AppointmentProposalIssue(
+        code=code,
+        severity="blocked",
+        message=message,
+    )
+
+
+def _block_bernie_create_confirmation(
+    blocks: list[AppointmentProposalIssue],
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentConfirmCreateProposalOut:
+    return AppointmentConfirmCreateProposalOut(
+        safe=False,
+        requires_confirmation=True,
+        autonomy_tier="blocked",
+        summary="Cannot confirm Bernie create proposal. See blocked issues.",
+        appointment=None,
+        warnings=warnings or [],
+        blocks=blocks,
+        audit_evidence=audit_evidence or [],
+    )
+
+
+def _same_create_command(
+    left: AppointmentCreateCommand,
+    right: AppointmentCreateCommand,
+) -> bool:
+    return left.model_dump() == right.model_dump()
+
+
+def _create_body_from_command(command: AppointmentCreateCommand) -> AppointmentCreate:
+    return AppointmentCreate(
+        patient_id=command.patient_id,
+        patient_name_provisional=command.patient_name_provisional,
+        practitioner_id=command.practitioner_id,
+        appointment_type_id=command.appointment_type_id,
+        location_id=command.location_id,
+        appointment_date=command.appointment_date,
+        start_time_local=command.start_time_local,
+        duration_minutes=command.duration_minutes,
+        reason=command.reason,
+        notes=command.notes,
+        booked_via=command.booked_via,
+    )
+
+
+def _create_command_matches_selected_candidate(
+    command: AppointmentCreateCommand,
+    selected_candidate: SlotCandidate,
+) -> bool:
+    return (
+        command.appointment_date == selected_candidate.appointment_date
+        and command.start_time_local == selected_candidate.start_time_local
+        and command.duration_minutes == selected_candidate.duration_minutes
+        and command.start_time == selected_candidate.start_time
+    )
+
+
+@router.post(
+    "/proposals/create/confirm-bernie",
+    response_model=AppointmentConfirmCreateProposalOut,
+)
+def confirm_bernie_create_proposal(
+    body: BernieCreateProposalConfirmationIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Explicitly confirm supervised Bernie create-proposal evidence.
+
+    This is the first Bernie slot flow endpoint that writes an appointment. The
+    caller must send an already-supervised slot-selection/create-proposal result
+    plus explicit confirmation. The route revalidates the create command against
+    current practice/auth/conflict state before writing exactly one appointment
+    and one bounded audit evidence trail.
+    """
+    audit_evidence = list(BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE)
+    blocks: list[AppointmentProposalIssue] = []
+    selection = body.selection_proposal
+    create_proposal = selection.create_proposal
+
+    if body.confirmed is not True:
+        blocks.append(_confirm_create_block(
+            "explicit_confirmation_required",
+            "confirmed=true is required before creating an appointment.",
+        ))
+
+    if selection.intent != "select_slot_for_create_proposal":
+        blocks.append(_confirm_create_block(
+            "invalid_selection_source",
+            "The supplied evidence is not a slot-selection create proposal.",
+        ))
+    if not selection.safe or selection.autonomy_tier != "proposal":
+        blocks.append(_confirm_create_block(
+            "slot_selection_not_safe",
+            "The slot-selection proposal is not safe to confirm.",
+        ))
+    if selection.selected_candidate is None:
+        blocks.append(_confirm_create_block(
+            "selected_candidate_required",
+            "The slot-selection evidence must include the selected candidate.",
+        ))
+    if create_proposal is None:
+        blocks.append(_confirm_create_block(
+            "create_proposal_required",
+            "The slot-selection evidence must include a create proposal.",
+        ))
+    elif (
+        not create_proposal.safe
+        or create_proposal.autonomy_tier != "proposal"
+        or not create_proposal.requires_confirmation
+    ):
+        blocks.append(_confirm_create_block(
+            "create_proposal_not_safe",
+            "The create proposal is not safe to confirm.",
+        ))
+
+    if create_proposal is not None and selection.selected_candidate is not None:
+        if not _create_command_matches_selected_candidate(
+            create_proposal.command,
+            selection.selected_candidate,
+        ):
+            blocks.append(_confirm_create_block(
+                "selection_create_proposal_mismatch",
+                "The create proposal command no longer matches the selected slot evidence.",
+            ))
+
+    if blocks:
+        return _block_bernie_create_confirmation(
+            blocks,
+            warnings=selection.warnings,
+            audit_evidence=audit_evidence,
+        )
+
+    create_body = _create_body_from_command(create_proposal.command)
+    revalidated = _build_create_appointment_proposal(
+        create_body,
+        db,
+        current_user.practice_id,
+    )
+    if (
+        not revalidated.safe
+        or revalidated.autonomy_tier != "proposal"
+        or not revalidated.requires_confirmation
+    ):
+        return _block_bernie_create_confirmation(
+            [
+                _confirm_create_block(
+                    "create_proposal_revalidation_blocked",
+                    "The create proposal is no longer safe to confirm.",
+                ),
+                *revalidated.blocks,
+            ],
+            warnings=[*selection.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
+
+    if not _same_create_command(create_proposal.command, revalidated.command):
+        return _block_bernie_create_confirmation(
+            [_confirm_create_block(
+                "create_proposal_revalidation_mismatch",
+                "The revalidated create command does not match the supplied proposal evidence.",
+            )],
+            warnings=[*selection.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
+
+    confirmed_warnings = [
+        *[issue.code for issue in selection.warnings],
+        *[issue.code for issue in revalidated.warnings],
+        *body.confirmed_warnings,
+    ]
+    appointment = _create_appointment_from_body(
+        create_body,
+        db,
+        current_user,
+        confirmed_warnings=confirmed_warnings,
+        audit_evidence=audit_evidence,
+    )
+    return AppointmentConfirmCreateProposalOut(
+        safe=True,
+        requires_confirmation=False,
+        autonomy_tier="confirmed_write",
+        summary="Confirmed supervised Bernie create proposal and created one appointment.",
+        appointment=appointment,
+        warnings=[*selection.warnings, *revalidated.warnings],
+        blocks=[],
+        audit_evidence=audit_evidence,
     )
