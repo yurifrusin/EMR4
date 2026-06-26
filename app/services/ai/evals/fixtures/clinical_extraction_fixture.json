@@ -1,0 +1,14 @@
+{
+    "encounter_metadata": {
+        "consultation_type": "Level B GP consultation",
+        "mbs_item_candidates": [
+            {"item_number": "23", "description": "Level B consultation", "justification": "Approximately 10 minutes"}
+        ]
+    },
+    "clinical_diagnoses": [
+        {"term": "Essential hypertension", "snomed_ct_au_code": "38341003"}
+    ],
+    "medications_and_prescriptions": [
+        {"drug_name": "Ramipril", "dosage_text": "5mg once daily"}
+    ]
+}

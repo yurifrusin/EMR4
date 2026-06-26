@@ -1,0 +1,16 @@
+{
+    "raw_transcript": "Doctor: How are you feeling today? Patient: I have had a headache since yesterday.",
+    "generated_clinical_note": "S: Headache since yesterday, moderate severity.\nO: Alert and oriented, no focal neurology.\nA: Tension headache.\nP: Paracetamol 500mg PRN, review if not settled in 48 hours.",
+    "encounter_metadata": {
+        "consultation_type": "Level B GP consultation",
+        "mbs_item_candidates": [
+            {"item_number": "23", "description": "Level B consultation", "justification": "Approximately 10 minutes"}
+        ]
+    },
+    "clinical_diagnoses": [
+        {"term": "Tension headache", "snomed_ct_au_code": "398057008"}
+    ],
+    "medications_and_prescriptions": [
+        {"drug_name": "Paracetamol", "dosage_text": "500mg as needed"}
+    ]
+}

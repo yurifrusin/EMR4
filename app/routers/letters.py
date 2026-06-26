@@ -2,29 +2,16 @@ import uuid
 import json
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from google import genai
-from google.genai import types
-from app.config import settings
 from app.dependencies import get_db, get_current_user
 from app.models.tenancy import User, Practitioner
 from app.models.patients import Patient
 from app.models.clinical import Encounter, Prescription, ClinicalDiagnosis, Allergy
 from app.schemas.clinical import LetterDraftRequest, LetterDraftResponse
+from app.services.ai.service import AiService
 
 router = APIRouter(prefix="/api/v1/patients/{patient_id}/letters", tags=["letters"])
 
-_ai_client = None
-
-
-def get_ai_client():
-    global _ai_client
-    if _ai_client is None:
-        _ai_client = genai.Client(
-            vertexai=True,
-            project=settings.gcp_project,
-            location=settings.gcp_location,
-        )
-    return _ai_client
+_ai_service = AiService()
 
 LETTER_TYPES = {
     "Referral": "a specialist referral letter",
@@ -109,12 +96,8 @@ Australian conventions:
 """
 
     try:
-        response = get_ai_client().models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
-            config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.3)
-        )
-        data = json.loads(response.text)
+        ai_result = await _ai_service.draft_letter(prompt)
+        data = ai_result.raw
         return LetterDraftResponse(
             letter_text=data.get("letter_text", ""),
             subject_line=data.get("subject_line", ""),

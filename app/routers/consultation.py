@@ -1,4 +1,3 @@
-import asyncio
 import json
 import os
 import uuid
@@ -8,8 +7,6 @@ from sqlalchemy import or_, and_
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
-from google import genai
-from google.genai import types
 from google.cloud import discoveryengine_v1 as discoveryengine
 from app.config import settings
 from app.dependencies import get_db, get_current_user
@@ -17,6 +14,8 @@ from app.models.patients import Patient
 from app.models.tenancy import User
 from app.models.clinical import Encounter, EncounterStatus, ClinicalDiagnosis, Prescription
 from app.models.billing import MbsClaim, MbsDirectory, ClaimStatus
+from app.services.ai.service import AiService
+from app.services.ai.contracts import AiCapability
 import datetime
 
 router = APIRouter(prefix="/api/v1", tags=["consultation"])
@@ -26,7 +25,7 @@ router = APIRouter(prefix="/api/v1", tags=["consultation"])
 # is started normally). os.remove is refused for paths outside this boundary.
 _AUDIO_DIR = os.path.abspath(os.path.join("static", "audio"))
 
-_ai_client = None
+_ai_service = AiService()
 
 
 def _safe_audio_cleanup(audio_url: str) -> None:
@@ -36,17 +35,6 @@ def _safe_audio_cleanup(audio_url: str) -> None:
         return
     if os.path.exists(resolved):
         os.remove(resolved)
-
-
-def get_ai_client():
-    global _ai_client
-    if _ai_client is None:
-        _ai_client = genai.Client(
-            vertexai=True,
-            project=settings.gcp_project,
-            location=settings.gcp_location,
-        )
-    return _ai_client
 
 
 # --- Request schemas ---
@@ -258,13 +246,8 @@ async def analyze_consultation(
 
     extracted = {"encounter_metadata": {}, "clinical_diagnoses": [], "medications_and_prescriptions": []}
     try:
-        response = await asyncio.to_thread(
-            get_ai_client().models.generate_content,
-            model="gemini-2.5-flash",
-            contents=prompt,
-            config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.1)
-        )
-        extracted = json.loads(response.text)
+        ai_result = await _ai_service.analyze_consultation_text(prompt)
+        extracted = ai_result.raw
         mbs  = [m.get("item_number") for m in extracted.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
         dx   = extracted.get("clinical_diagnoses", [])
         rx   = extracted.get("medications_and_prescriptions", [])
@@ -342,14 +325,8 @@ Return strict JSON only, no markdown:
 }
 """
     try:
-        audio_part = types.Part.from_bytes(data=audio_bytes, mime_type=audio_file.content_type)
-        response = await asyncio.to_thread(
-            get_ai_client().models.generate_content,
-            model="gemini-2.5-flash",
-            contents=[audio_part, prompt],
-            config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.1),
-        )
-        result = json.loads(response.text)
+        ai_result = await _ai_service.scribe_audio(audio_bytes, audio_file.content_type, prompt)
+        result = ai_result.raw
         mbs  = [m.get("item_number") for m in result.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
         dx   = result.get("clinical_diagnoses", [])
         rx   = result.get("medications_and_prescriptions", [])
