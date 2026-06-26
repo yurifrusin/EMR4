@@ -2177,13 +2177,11 @@ async function initBernieReview() {
     return;
   }
 
-  // Live review path requires bernie_dev_review=true regardless of smoke mode.
   if (reviewParam === "live") {
     if (devReviewParam !== "true") {
       return;
     }
   } else {
-    // Non-live mock review parameters are only exposed in smoke mode.
     if (!isSmoke) {
       return;
     }

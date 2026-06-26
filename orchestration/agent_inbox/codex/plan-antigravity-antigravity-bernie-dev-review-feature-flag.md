@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-dev-review-feature-flag` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 04:14 +1000 |
 | Source HEAD | `a40cf97` |
 
@@ -45,5 +45,5 @@ Playwright tests require accurate route interception to ensure no live backend c
 ## Codex Plan Review
 
 - Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Required changes before implementation: require `bernie_dev_review=true` in addition to `bernie_review=live`; `bernie_review=live` alone must remain hidden and make no endpoint calls.
+- Approved to proceed: yes, with the additional dev-flag safety constraint above.
