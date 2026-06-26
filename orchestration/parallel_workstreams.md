@@ -137,21 +137,21 @@ After every fully integrated batch, Codex updates
 |---|---|
 | Status | Dispatched; plan gate pending |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Claude plan packet |
+| Integration Gate | Pending Codex worker plan packet; Claude stood down until quota reset |
 | Product Goal | Expose the deterministic Sprint 39 Bernie slot-command normalizer through a narrow backend route/tool contract without executing searches or creating appointments |
 
 ### Workstream BW - Bernie Slot Normalize Endpoint Contract
 
 | Item | Value |
 |---|---|
-| Owner | Claude Code |
-| Branch | `claude/current` |
-| Task Packet | `orchestration/agent_inbox/claude/claude-bernie-slot-normalize-endpoint-contract.md` |
+| Owner | Codex worker/subagent |
+| Branch | `codex/bernie-slot-normalize-endpoint` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-bernie-slot-normalize-endpoint-contract.md` |
 | Goal | Plan, then after approval add a non-mutating backend endpoint or route helper for `SlotSearchCommandIn` -> `SlotSearchCommandResult` |
 | In Scope | Plan packet first; after approval role-gated/practice-scoped backend route/tool contract, explicit deterministic reference-date handling, focused tests for auth/shape/invalid input/non-mutation/no LLM/search execution, and compatibility with `SlotSearchProposalIn` |
 | Out of Scope | Diary UI, taskpane, Command Centre, Gemini/LLM parsing, autonomous tool execution, appointment creation, slot-search execution beyond normalizer invocation, audit mutation, SMS, billing, patient demographics, resource admin, migrations unless strictly unavoidable, and DB-backed name-to-UUID resolution |
 | Verification | Plan packet first; after approval py_compile touched backend modules/tests, focused endpoint/route pytest, existing normalizer tests, adjacent slot-search proposal tests if schemas/routes are touched, non-mutation/no LLM proof, and `git diff --check` |
-| Status | Queued for plan |
+| Status | Queued for Codex worker plan |
 
 ## Sprint 39: Bernie Slot Command Normalizer Contract
 
