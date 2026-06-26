@@ -18,6 +18,7 @@
     {"name": "cancelled_cancellation_reason", "type": "text_count", "selector": "#flow-list-cancelled [data-testid=\"flow-card-cancellation-reason\"]", "text": "Reason: Patient had transport issues", "expected": 1},
     {"name": "cancelled_status_badge", "type": "text_count", "selector": "#flow-list-cancelled [data-testid=\"flow-card-status\"]", "text": "CXL", "expected": 1},
     {"name": "booking_audit_header_present", "type": "count", "selector": "[data-testid=\"booking-audit-header\"]", "expected": 1},
-    {"name": "booking_audit_title_renders", "type": "text_count", "selector": "[data-testid=\"booking-audit-title\"]", "text": "Audit History", "expected": 1}
+    {"name": "booking_audit_title_renders", "type": "text_count", "selector": "[data-testid=\"booking-audit-title\"]", "text": "Audit History", "expected": 1},
+    {"name": "slot_search_previews_absent_by_default", "type": "count", "selector": ".slot-preview-candidate", "expected": 0}
   ]
 }

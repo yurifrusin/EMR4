@@ -41,6 +41,29 @@ function isSmokeMode() {
   return new URLSearchParams(window.location.search).get("smoke") === "true";
 }
 
+function hasSlotPreviewParam() {
+  return new URLSearchParams(window.location.search).get("slot_preview") === "true";
+}
+
+function getMockSlotSearchCandidates() {
+  return [
+    {
+      id: "slot-preview-1",
+      start_time_local: "14:00",
+      duration_minutes: 30,
+      practitioner: { ahpra_number: "MED0001234567" },
+      reason: "Available Slot Preview 1"
+    },
+    {
+      id: "slot-preview-2",
+      start_time_local: "15:00",
+      duration_minutes: 15,
+      practitioner: { ahpra_number: "MED999" },
+      reason: "Available Slot Preview 2"
+    }
+  ];
+}
+
 // ─── DIARY TEMPLATE FALLBACK (embedded — mirrors diary_template.json at repo root)
 // Breaks are per-column so each room can have different break windows.
 const FALLBACK_TEMPLATE = {
@@ -1396,6 +1419,45 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
 
       columnBody.appendChild(span);
     });
+
+    // Render slot search preview candidates if in smoke mode and slot_preview param is true
+    if (isSmokeMode() && hasSlotPreviewParam()) {
+      const candidates = getMockSlotSearchCandidates().filter(
+        c => c.practitioner?.ahpra_number === col.practitioner_ahpra
+      );
+      candidates.forEach(c => {
+        const start = toMins(c.start_time_local);
+        const duration = c.duration_minutes;
+        const end = start + duration;
+
+        const topPx = (start - dayStartMins) * (SLOT_HEIGHT_PX / intervalMins);
+        const heightPx = duration * (SLOT_HEIGHT_PX / intervalMins);
+        const visualHeightPx = Math.max(heightPx - APPT_BLOCK_GAP_PX, 10);
+
+        const span = document.createElement("div");
+        span.className = "slot-preview-candidate";
+        span.dataset.id = c.id;
+        span.style.position = "absolute";
+        span.style.top = (topPx + 1) + "px";
+        span.style.left = "1px";
+        span.style.right = "1px";
+        span.style.zIndex = "10";
+        span.style.height = visualHeightPx + "px";
+
+        // Click handler to prevent opening modal
+        span.onclick = (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+        };
+
+        const label = document.createElement("span");
+        label.className = "slot-preview-label";
+        label.textContent = `${c.reason} (${c.start_time_local})`;
+        span.appendChild(label);
+
+        columnBody.appendChild(span);
+      });
+    }
 
     appendNowMarker(columnBody, template);
     column.appendChild(columnBody);

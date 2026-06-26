@@ -132,3 +132,39 @@ def test_booking_audit_history(diary_page):
 
     diary_page.click("#btn-booking-close")
     diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)
+
+
+def test_slot_search_preview_harness_active(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        # Navigate with both smoke=true and slot_preview=true parameters
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&slot_preview=true")
+        diary_page.wait_for_selector(".diary-column", state="visible", timeout=15000)
+
+        # Assert count of preview slots matches the expected mock count (2 slots)
+        assert diary_page.locator(".slot-preview-candidate").count() == 2
+
+        # Assert correct room rendering/positions by verifying data-id attributes exist
+        assert diary_page.locator(".slot-preview-candidate[data-id='slot-preview-1']").count() == 1
+        assert diary_page.locator(".slot-preview-candidate[data-id='slot-preview-2']").count() == 1
+
+        # Verify visual labels contain candidate information
+        assert "Available Slot Preview 1" in diary_page.locator(".slot-preview-candidate[data-id='slot-preview-1']").text_content()
+        assert "Available Slot Preview 2" in diary_page.locator(".slot-preview-candidate[data-id='slot-preview-2']").text_content()
+
+        # Verify non-interactivity: click the slot-preview block and assert booking modal does not open
+        diary_page.click(".slot-preview-candidate[data-id='slot-preview-1']")
+        diary_page.wait_for_timeout(500)  # Wait briefly to ensure no modal opens asynchronously
+        assert diary_page.locator("#booking-modal").is_hidden()
+
+    finally:
+        # Restore page to original smoke target for other tests
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        # Ensure flow panel is open
+        if diary_page.locator("#diary-flow-panel.hidden").count() > 0:
+            diary_page.click("#btn-toggle-flow")
+            diary_page.wait_for_selector("#diary-flow-panel:not(.hidden)", state="visible", timeout=5000)
