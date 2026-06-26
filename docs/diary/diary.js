@@ -230,7 +230,7 @@ function getMockAuditEvents(apptId) {
         created_at: new Date(baseDate.getTime() - 1000 * 60 * 60).toISOString(),
         action: "create",
         status_after: "Booked",
-        confirmed_by_user_id: "Receptionist Sally"
+        confirmed_by_user_id: "11111111-1111-1111-1111-111111111111"
       }
     ];
   } else if (apptId === "smoke-appt-7") {
@@ -264,12 +264,42 @@ function getMockAuditEvents(apptId) {
 
 function formatAuditAction(action) {
   const labels = {
-    create: "Create",
-    update: "Update",
-    status_change: "Status Change",
-    delete: "Cancel Appointment"
+    create: "Created",
+    update: "Updated",
+    status_change: "Status Changed",
+    delete: "Cancelled"
   };
   return labels[action] || String(action || "Event");
+}
+
+function formatAuditStatus(status) {
+  if (!status) return "";
+  const mapping = {
+    "Booked": "Booked",
+    "Confirmed": "Confirmed",
+    "Arrived": "Arrived",
+    "InConsult": "In Consult",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled",
+    "NoShow": "Did Not Attend (DNA)",
+    "DNA": "Did Not Attend (DNA)"
+  };
+  return mapping[status] || String(status);
+}
+
+function formatAuditActor(evt) {
+  const candidate = evt.confirmed_by_display ||
+                    evt.confirmed_by_name ||
+                    evt.confirmed_by_role ||
+                    evt.confirmed_by ||
+                    evt.confirmed_by_user_id;
+  if (!candidate) return "";
+
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (uuidRegex.test(candidate)) {
+    return `Staff (${candidate.substring(0, 8)})`;
+  }
+  return candidate;
 }
 
 // ─── BREAK OVERRIDES (per-column, persisted to localStorage) ──────────────────
@@ -372,16 +402,22 @@ async function loadAuditHistory(apptId) {
 
       const timeStr = evt.created_at ? new Date(evt.created_at).toLocaleString() : "Unknown Time";
       const actionStr = formatAuditAction(evt.action);
-      const user = evt.confirmed_by || evt.confirmed_by_user_id;
-      const userStr = user ? `by ${user}` : "";
+      const actor = formatAuditActor(evt);
+      let userStr = "";
+      if (actor) {
+        if (actor.toLowerCase().startsWith("by ")) {
+          userStr = actor;
+        } else {
+          userStr = `by ${actor}`;
+        }
+      }
       
       let details = [];
       const statusTarget = evt.status_target || evt.status_after;
-      if (statusTarget) {
-        details.push(`Status set to: <strong>${escHtml(statusTarget)}</strong>`);
-      }
       if (evt.status_before && evt.status_after && evt.status_before !== evt.status_after) {
-        details.push(`Changed from <strong>${escHtml(evt.status_before)}</strong>`);
+        details.push(`Changed from <strong>${escHtml(formatAuditStatus(evt.status_before))}</strong> to <strong>${escHtml(formatAuditStatus(evt.status_after))}</strong>`);
+      } else if (statusTarget) {
+        details.push(`Status set to: <strong>${escHtml(formatAuditStatus(statusTarget))}</strong>`);
       }
       if (evt.cancellation_reason) {
         details.push(`Cancellation Reason: <strong>${escHtml(evt.cancellation_reason)}</strong>`);

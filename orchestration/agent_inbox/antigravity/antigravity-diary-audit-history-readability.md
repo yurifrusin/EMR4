@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | 8e36c52 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-audit-history-readability --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, review/test_diary_smoke.py
+- Verification run: node --check docs/diary/diary.js (syntax check), git diff --check (no trailing whitespace), and .venv\Scripts\pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q (all 17 checks passing, including new readability assertions for friendly names, status changes, UUID fallbacks, and transition sentences)
+- Remaining risks: None. The implementation uses local mock configurations and robust fallback logic for formatting display names and UUIDs. The audit layout collapsed-by-default behavior and unrelated booking modal structures remain untouched.
