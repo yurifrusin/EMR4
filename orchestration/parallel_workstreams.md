@@ -130,6 +130,28 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 47: Bernie Wrapper Confirmation Review Harness
+
+| Item | Value |
+|---|---|
+| Status | Queued; waiting for Codex worker plan |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Codex worker plan review |
+| Product Goal | Prove the supervised Bernie wrapper can hand confirmation-ready evidence to explicit confirm-Bernie without autonomous writes |
+
+### Workstream CC - Bernie Wrapper Confirmation Review Harness
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker/subagent |
+| Branch | `codex/bernie-wrapper-confirmation-review-harness` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-bernie-wrapper-confirmation-review-harness.md` |
+| Goal | Plan, then after approval add a deterministic backend review harness proving wrapper output can be explicitly confirmed and blocked/candidate-only paths remain non-mutating |
+| In Scope | Plan packet first; after approval focused backend tests/review harness only unless a tiny production fix is required by a real contract gap; wrapper -> confirm-Bernie success, confirmed=false block, stale-conflict block, candidate-only no-write, blocked normalization no-write, exactly-one appointment/audit write on success, and no LLM/provider calls |
+| Out of Scope | Diary UI, taskpane, Command Centre, natural-language parsing, autonomous runtime execution, new write routes, schema redesign, migrations, SMS, billing, resource admin, broad appointment/audit redesign, and changing Sprint 40-46 semantics unless a verified bug is exposed |
+| Verification | Plan packet first; after approval py_compile touched tests/Python, focused harness pytest, wrapper and confirm tests, Sprint 45 full-flow harness, adjacent slot-search/selection/create-proposal tests if production code changes, no-write/no-LLM/exactly-one-write proof, and `git diff --check` |
+| Status | Queued |
+
 
 ## Sprint 44: Bernie Confirm Create-Proposal Contract
 
