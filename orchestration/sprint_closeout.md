@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 51: Bernie Supervised Confirm Submit Adapter |
 | Integrated through | Smoke/feature-gated explicit staff approval submit adapter for Bernie review confirmation payloads |
-| Status | Integrated locally; pending push, mirror realignment, and final audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -53,6 +53,7 @@ Ariadne verified this as a smoke/feature-gated UI adapter with route-intercepted
 - Existing route-intercepted tests still prove the prior Bernie review and live-adapter paths do not call confirm-Bernie when the confirm adapter flag is absent.
 - New route-intercepted Playwright checks prove no submit before approval, exact payload shape with `confirmed: true`, success state, error/retry state, and no confirm controls in blocked/candidate states.
 - `git diff --check` -> first reported one blank line at EOF in `review/test_diary_smoke.py`; Ariadne removed it and reran `git diff --check` successfully.
+- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at Sprint 51 closeout commit `e121b0c`; only the known dirty stale `codex/time-model` disposable worktree remains.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
