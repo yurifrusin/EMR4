@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-normalized-slot-search` |
 | Branch | `codex/bernie-normalized-slot-search` |
-| Status | queued |
+| Status | submitted |
 | Created | 5ddd104 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-normalized-slot-search-contract --summary "Short plan summary"` |
@@ -92,6 +92,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/plan-codex-codex-bernie-normalized-slot-search-contract.md`; coordination status update in `orchestration/agent_inbox/codex/codex-bernie-normalized-slot-search-contract.md`.
+- Verification run: Plan gate only. Ran `python scripts\agent_worktrees.py handin --agent codex`; read printed protocol alerts and task packet; read `AGENTS.md` and `orchestration/parallel_workstreams.md`; inspected existing slot-search normalizer/proposal contracts for planning context. No production code tests run because no production code was changed.
+- Remaining risks: Implementation still requires Ariadne approval before coding. Proposed route/helper naming and response wrapper shape should be confirmed during review; implementation must keep unsafe normalization from executing slot search and must reuse existing non-mutating proposal logic for safe requests.
