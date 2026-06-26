@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-supervised-review-live-adapter` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne inspected the diff, confirmed the adapter is gated by `smoke=true&bernie_review=live`, reran node syntax, frontend version integrity, route-intercepted Playwright smoke checks, no confirm-Bernie write proof, and diff hygiene.
+- Follow-up required: None for Yuri. Future sprint can decide when to expose the live adapter behind an operator-facing feature flag and wire real staff confirmation.

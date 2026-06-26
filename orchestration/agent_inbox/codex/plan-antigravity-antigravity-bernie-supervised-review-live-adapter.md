@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-supervised-review-live-adapter` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 03:16 +1000 |
 | Source HEAD | `97d7a33` |
 
@@ -44,6 +44,6 @@ Backend requires auth, solved by intercepting network calls in Playwright tests.
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne. The plan was narrowly scoped to a smoke/feature-gated adapter, preserved all write boundaries, and used route-intercepted deterministic checks.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation was released via Antigravity CLI with the exact phrase `complete sprint task`.
