@@ -365,7 +365,7 @@ async function apiFetch(path, opts = {}) {
 async function loadAuditHistory(apptId) {
   const listEl = document.getElementById("booking-audit-list");
   if (!listEl) return;
-  listEl.innerHTML = '<li class="booking-audit-fallback">Loading audit history...</li>';
+  listEl.innerHTML = '<li class="booking-audit-fallback" data-testid="booking-audit-fallback">Loading audit history...</li>';
 
   try {
     let auditEvents = [];
@@ -376,16 +376,16 @@ async function loadAuditHistory(apptId) {
       if (res.status === 200) {
         auditEvents = await res.json();
       } else if (res.status === 404 || res.status === 501) {
-        listEl.innerHTML = '<li class="booking-audit-fallback">Audit history not supported by backend</li>';
+        listEl.innerHTML = '<li class="booking-audit-fallback" data-testid="booking-audit-fallback">Audit history not supported by backend</li>';
         return;
       } else {
-        listEl.innerHTML = `<li class="booking-audit-fallback">Error loading audit history (${res.status})</li>`;
+        listEl.innerHTML = `<li class="booking-audit-fallback" data-testid="booking-audit-fallback">Error loading audit history (${res.status})</li>`;
         return;
       }
     }
 
     if (!auditEvents || auditEvents.length === 0) {
-      listEl.innerHTML = '<li class="booking-audit-fallback">No audit history found</li>';
+      listEl.innerHTML = '<li class="booking-audit-fallback" data-testid="booking-audit-fallback">No audit history found</li>';
       return;
     }
 
@@ -399,6 +399,7 @@ async function loadAuditHistory(apptId) {
     sorted.forEach(evt => {
       const li = document.createElement("li");
       li.className = "booking-audit-item";
+      li.setAttribute("data-testid", "booking-audit-item");
 
       const timeStr = evt.created_at ? new Date(evt.created_at).toLocaleString() : "Unknown Time";
       const actionStr = formatAuditAction(evt.action);
@@ -433,17 +434,17 @@ async function loadAuditHistory(apptId) {
       }
 
       li.innerHTML = `
-        <div class="booking-audit-meta">
+        <div class="booking-audit-meta" data-testid="booking-audit-meta">
           <span>${escHtml(actionStr)} ${escHtml(userStr)}</span>
-          <span class="booking-audit-timestamp">${escHtml(timeStr)}</span>
+          <span class="booking-audit-timestamp" data-testid="booking-audit-timestamp">${escHtml(timeStr)}</span>
         </div>
-        ${details.length > 0 ? `<div class="booking-audit-details">${details.join(" | ")}</div>` : ""}
+        ${details.length > 0 ? `<div class="booking-audit-details" data-testid="booking-audit-details">${details.join(" | ")}</div>` : ""}
       `;
       listEl.appendChild(li);
     });
   } catch (err) {
     console.error("Error loading audit history", err);
-    listEl.innerHTML = '<li class="booking-audit-fallback">Audit history not available</li>';
+    listEl.innerHTML = '<li class="booking-audit-fallback" data-testid="booking-audit-fallback">Audit history not available</li>';
   }
 }
 

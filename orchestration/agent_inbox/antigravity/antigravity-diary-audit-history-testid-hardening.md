@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 0f4bc7b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-audit-history-testid-hardening --summary "Short plan summary"` |
@@ -90,5 +90,14 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [docs/diary/diary.html](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.html)
+  - [docs/diary/diary.js](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.js)
+  - [review/checks_diary.json](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/review/checks_diary.json)
+  - [review/test_diary_smoke.py](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/review/test_diary_smoke.py)
 - Verification run:
+  - `node --check docs\diary\diary.js` (succeeded)
+  - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` (passed, 17/17 tests)
+  - `git diff --check` (succeeded, no whitespace issues)
+  - `scripts\check_frontend_versions.py` (passed after bumping diary.js version query param in diary.html to 101)
 - Remaining risks:
+  - None. Changes are limited to non-functional test hooks and test assertions.
