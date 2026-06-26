@@ -4,6 +4,9 @@
 |---|---|
 | To | codex |
 | From | codex |
+| Role | codex-worker |
+| Worker Name | Cicero |
+| Worker Branch | `codex/bernie-confirm-create-proposal` |
 | Branch | `codex/bernie-confirm-create-proposal` |
 | Source Task | `codex-bernie-confirm-create-proposal-contract` |
 | Status | pending_plan_review |
