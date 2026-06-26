@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 52: Bernie Live-Review Confirm Flow Harness |
 | Integrated through | Deterministic smoke harness for supervised-booking live review through explicit confirm submit under route interception |
-| Status | Integrated locally; pending push, mirror realignment, and final audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -47,11 +47,12 @@ Ariadne verified this as a deterministic review-harness-only sprint. It changes 
 - Ariadne reviewed the Antigravity plan packet and verified the implementation scope stayed test-only.
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 34 passed after one harness correction to avoid waiting for the smoke grid in normal non-smoke mode.
 - `git diff --check` -> passed.
+- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `416df37`; only the known dirty stale `codex/time-model` disposable worktree remains for manual review.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-After push/mirror/audit, the next useful slice is to expose the supervised Bernie review/confirm path in ordinary dev mode behind a deliberate feature flag, still preserving explicit staff approval, route/audit safety, and deterministic tests before any live manual review.
+The next useful slice is to expose the supervised Bernie review/confirm path in ordinary dev mode behind a deliberate feature flag, still preserving explicit staff approval, route/audit safety, and deterministic tests before any live manual review.
 
 
 ## Previous Closeout - Sprint 51
