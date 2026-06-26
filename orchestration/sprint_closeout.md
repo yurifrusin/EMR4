@@ -8,57 +8,69 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 48: Bernie Supervised Review Payload Contract |
-| Integrated through | Additive deterministic `staff_review` payload for supervised Bernie wrapper outcomes |
-| Status | Integrated, pushed, mirrored, audited, and closed |
+| Batch | Sprint 49: Bernie Supervised Review UI Harness |
+| Integrated through | Smoke-gated diary Bernie Booking Review panel and deterministic Playwright checks |
+| Status | Integrated locally; pending push, mirror realignment, and final audit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added `BernieStaffReviewPayload` and `BernieStaffReviewSlotSummary` response schemas.
-- Added an additive `staff_review` payload to the existing supervised Bernie booking wrapper response.
-- The payload gives future staff UI a stable review contract: headline/status, staff action required, confirmation readiness, selected slot summary, candidate slot summaries, warning/block summaries, confirm endpoint, confirm payload, and bounded confirm evidence.
-- Existing wrapper `result` discriminators remain unchanged: `blocked`, `candidate_selection_required`, and `confirmation_ready`.
-- `blocked` outcomes expose no confirm payload and remain non-mutating.
-- `candidate_selection_required` outcomes expose review-only candidate summaries and remain non-mutating.
-- `confirmation_ready` outcomes expose selected-slot summary plus a confirm payload whose `confirmed` field is intentionally `false`, preserving explicit staff approval before any appointment write.
-- No diary UI, taskpane, Command Centre, live autonomous Bernie runtime, Gemini/LLM provider call, migration, billing, SMS, or resource-admin surface changed.
-- Cicero/Boole implemented the backend contract sprint on `codex/bernie-supervised-review-payload`.
+- Added a smoke-gated Bernie Booking Review panel to `docs/diary/diary.html`.
+- Added `docs/diary/diary.js` fixture/rendering logic for Sprint 48-style `staff_review` payloads behind `?smoke=true&bernie_review=...`.
+- Covered all three review states: `blocked`, `candidate_selection_required`, and `confirmation_ready`.
+- Confirmation-ready smoke rendering shows a selected slot, an explicit approval checkbox, and a disabled confirm button that only enables after simulated staff approval.
+- The smoke confirmation path stays local to the browser fixture; no live API request or appointment write path is called.
+- Added stable `data-testid` selectors for deterministic review checks.
+- Extended `review/test_diary_smoke.py` with Playwright assertions for the Bernie review panel states and interaction.
+- Added a default smoke check proving the Bernie panel is hidden unless the explicit smoke review parameter is present.
+- Bumped diary assets to `diary.css?v=100` and `diary.js?v=105`.
+- Antigravity implemented the UI harness on `antigravity/current`.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required before continuing.
-Ariadne verified this as a backend-only additive API contract with focused and adjacent pytest coverage. There is no visible UI, deployed asset, Office/Word surface, diary interaction, or live clinical workflow for Yuri to manually review.
+Ariadne verified this as a smoke-only UI review harness with deterministic Playwright tests. It is not active in the normal live diary without `smoke=true&bernie_review=...`, so there is no live staff workflow for Yuri to manually review yet.
 
 ## Not Required Before Moving On
 
-- No manual live API test is required; focused wrapper and wrapper-to-confirm tests cover the response contract structurally.
-- No manual live UI review is required; no frontend, GitHub Pages, taskpane, diary, or deployed static assets changed.
-- No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, diary grid, resource admin, billing, SMS, or security-console action is required.
+- No manual live API test is required; this sprint added no backend route/schema/model changes.
+- No manual live UI review is required; the new panel is smoke/review-harness gated and covered by deterministic Playwright checks.
+- No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, live diary booking workflow, resource admin, billing, SMS, or security-console action is required.
 - No user decision is needed before the next narrow Bernie slice.
 
 ## Known Follow-Up
 
-- Future Bernie UI must not post the included confirm payload blindly; `staff_review.confirm_payload.confirmed` is deliberately false until explicit staff approval.
-- The next useful slice can now be a small staff-facing supervised Bernie review surface, ideally using this payload directly and keeping the explicit confirmation boundary intact.
+- Future live Bernie UI should replace the smoke fixture with real backend `staff_review` payloads while preserving the same explicit staff confirmation boundary.
+- A later live integration should post to confirm-Bernie only after staff explicitly approves, and should add deterministic tests around the live API adapter before any manual user review.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
-- The broad/parallel pytest database setup can still hit a PostgreSQL enum-create race in adjacent suites; serial focused verification passed and this remains a test-infrastructure follow-up.
 - The known moderate Dependabot alert remains outside this sprint.
 
 ## Verification
 
-- Ariadne inspected the worker branch diff against `origin/master`; scope was limited to appointment schemas/router, focused backend tests, and orchestration packets.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_wrapper_confirmation_review_harness.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_confirmed_flow_review_harness.py` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_wrapper_confirmation_review_harness.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_confirmed_flow_review_harness.py -q` -> 25 passed.
-- `git diff --check origin/master...origin/codex/bernie-supervised-review-payload` -> passed.
+- Ariadne inspected the Antigravity diff against `origin/master`; scope was limited to diary smoke UI, CSS, deterministic review harness, and orchestration packets.
+- `node --check docs\diary\diary.js` -> passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; local/HEAD diary assets are `diary.css?v=100` and `diary.js?v=105`, deployed Pages still showed the previous versions before push.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 23 passed.
+- Source check of the added smoke handler found no `fetch`, `XMLHttpRequest`, `sendBeacon`, or live confirm-Bernie call; the only confirm endpoint reference is fixture text and the click handler only mutates the local fixture object for simulation.
+- `git diff --check origin/master...origin/antigravity/current` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
-- `python scripts\agent_worktrees.py audit --fetch` after push/mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at the Sprint 48 closeout commit.
-- `python scripts\agent_worktrees.py retire-stale --apply` removed the clean Sprint 48 disposable worker worktree; the old dirty `codex/time-model` worktree remains for separate review.
 
 ## Recommended Next Direction
 
-After push/mirror/audit, the backend contract is ready for a small staff-facing supervised Bernie review UI slice, using the deterministic `staff_review` payload and stored/structural Playwright checks rather than screenshot-heavy review.
+After push/mirror/audit, the next useful Bernie slice is a narrow live adapter from the backend `staff_review` response into this review panel, still smoke/feature-gated first and still requiring explicit staff confirmation before any write.
 
+
+## Previous Closeout - Sprint 48
+
+Sprint 48 added the additive deterministic `staff_review` payload to the supervised Bernie wrapper response.
+
+- Added `BernieStaffReviewPayload` and `BernieStaffReviewSlotSummary` response schemas.
+- Added stable review fields for headline/status, staff action required, confirmation readiness, selected slot summary, candidate slot summaries, warning/block summaries, confirm endpoint, confirm payload, and bounded confirm evidence.
+- Preserved existing wrapper `result` discriminators: `blocked`, `candidate_selection_required`, and `confirmation_ready`.
+- Kept `staff_review.confirm_payload.confirmed` intentionally false so later UI must require explicit staff approval before posting it.
+- Cicero/Boole implemented the backend contract sprint on `codex/bernie-supervised-review-payload`.
+
+Residual user review/testing after Sprint 48 closeout: none required. Ariadne verified it as a backend-only additive API contract with focused and adjacent pytest coverage.
 
 ## Previous Closeout - Sprint 47
 

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-supervised-review-ui-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 03:03 +1000 |
 | Source HEAD | `b2c6bee` |
 
@@ -44,6 +44,6 @@ Selector drift mitigated by using stable data-testid attributes for all assertio
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne. The plan was smoke-gated, selector-driven, and explicitly preserved adjacent diary, waiting-room, and booking-modal surfaces.
+- Required changes before implementation: None.
+- Approved to proceed: yes; implementation was released via Antigravity CLI with the exact phrase `complete sprint task`.

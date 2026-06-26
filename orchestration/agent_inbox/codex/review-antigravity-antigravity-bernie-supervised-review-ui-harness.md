@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-supervised-review-ui-harness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne inspected the diff, confirmed the panel is smoke/query gated, reran node syntax, frontend version integrity, deterministic Playwright diary review tests, no-live-write source check, and diff hygiene.
+- Follow-up required: None for Yuri. Future live Bernie UI should replace the smoke fixture with the backend `staff_review` payload while preserving explicit staff confirmation before any write.
