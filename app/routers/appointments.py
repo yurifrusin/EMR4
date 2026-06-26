@@ -27,6 +27,7 @@ from app.schemas.appointments import (
     AppointmentAuditLogOut,
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
     SlotSearchCommandIn, SlotSearchCommandResult, SlotSearchCommandExecutionOut,
+    SlotSelectionProposalIn, SlotSelectionProposalOut,
 )
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
@@ -560,7 +561,14 @@ def propose_create_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    practice_id = current_user.practice_id
+    return _build_create_appointment_proposal(body, db, current_user.practice_id)
+
+
+def _build_create_appointment_proposal(
+    body: AppointmentCreate,
+    db: Session,
+    practice_id: uuid.UUID,
+) -> AppointmentCreateProposalOut:
     practice_tz = _practice_zoneinfo(db, practice_id)
     values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
 
@@ -1670,4 +1678,230 @@ def propose_normalized_slot_search(
         warnings=warnings,
         blocks=blocks,
         summary=f"{normalization.summary} {proposal.summary}",
+    )
+
+
+def _same_slot_candidate(left: SlotCandidate, right: SlotCandidate) -> bool:
+    return (
+        left.appointment_date == right.appointment_date
+        and left.start_time_local == right.start_time_local
+        and left.duration_minutes == right.duration_minutes
+        and left.start_time == right.start_time
+        and left.end_time == right.end_time
+    )
+
+
+def _selection_block(code: str, message: str) -> AppointmentProposalIssue:
+    return AppointmentProposalIssue(
+        code=code,
+        severity="blocked",
+        message=message,
+    )
+
+
+def _block_slot_selection(
+    blocks: list[AppointmentProposalIssue],
+    selected_candidate: Optional[SlotCandidate] = None,
+) -> SlotSelectionProposalOut:
+    return SlotSelectionProposalOut(
+        safe=False,
+        requires_confirmation=True,
+        autonomy_tier="blocked",
+        summary="Cannot prepare create proposal from selected slot. See blocked issues.",
+        selected_candidate=selected_candidate,
+        create_proposal=None,
+        blocks=blocks,
+    )
+
+
+def _resolve_selected_candidate(
+    body: SlotSelectionProposalIn,
+    blocks: list[AppointmentProposalIssue],
+) -> Optional[SlotCandidate]:
+    if body.search_execution is None:
+        return body.selected_candidate
+
+    execution = body.search_execution
+    if not execution.safe or execution.proposal is None or not execution.proposal.safe:
+        blocks.append(_selection_block(
+            "slot_search_not_safe",
+            "The slot-search result is not safe to select from.",
+        ))
+        return None
+
+    candidates = execution.proposal.candidates
+    if not candidates:
+        blocks.append(_selection_block(
+            "no_slot_candidates",
+            "The slot-search result contains no selectable candidates.",
+        ))
+        return None
+
+    indexed_candidate = None
+    if body.selected_candidate_index is not None:
+        if body.selected_candidate_index >= len(candidates):
+            blocks.append(_selection_block(
+                "selected_candidate_index_out_of_range",
+                "The selected candidate index is outside the slot-search results.",
+            ))
+            return None
+        indexed_candidate = candidates[body.selected_candidate_index]
+
+    if body.selected_candidate is None:
+        if indexed_candidate is None:
+            blocks.append(_selection_block(
+                "selected_candidate_required",
+                "Select a candidate by index or supply the selected candidate evidence.",
+            ))
+            return None
+        return indexed_candidate
+
+    if indexed_candidate is not None:
+        if not _same_slot_candidate(indexed_candidate, body.selected_candidate):
+            blocks.append(_selection_block(
+                "selected_candidate_mismatch",
+                "The selected candidate evidence does not match the candidate at the selected index.",
+            ))
+            return None
+        return indexed_candidate
+
+    for candidate in candidates:
+        if _same_slot_candidate(candidate, body.selected_candidate):
+            return candidate
+
+    blocks.append(_selection_block(
+        "selected_candidate_not_in_results",
+        "The selected candidate was not found in the slot-search results.",
+    ))
+    return None
+
+
+def _resolve_selection_context(
+    body: SlotSelectionProposalIn,
+    blocks: list[AppointmentProposalIssue],
+) -> tuple[
+    Optional[uuid.UUID],
+    Optional[uuid.UUID],
+    Optional[uuid.UUID],
+    Optional[uuid.UUID],
+]:
+    constraint = None
+    if (
+        body.search_execution is not None
+        and body.search_execution.normalization.constraint is not None
+    ):
+        constraint = body.search_execution.normalization.constraint
+
+    practitioner_id = body.practitioner_id
+    appointment_type_id = body.appointment_type_id
+    location_id = body.location_id
+    patient_id = body.patient_id
+
+    if constraint is not None:
+        if practitioner_id is None:
+            practitioner_id = constraint.practitioner_id
+        elif practitioner_id != constraint.practitioner_id:
+            blocks.append(_selection_block(
+                "practitioner_mismatch",
+                "The requested practitioner does not match the normalized slot-search constraint.",
+            ))
+
+        if appointment_type_id is None:
+            appointment_type_id = constraint.appointment_type_id
+        elif (
+            constraint.appointment_type_id is not None
+            and appointment_type_id != constraint.appointment_type_id
+        ):
+            blocks.append(_selection_block(
+                "appointment_type_mismatch",
+                "The requested appointment type does not match the normalized slot-search constraint.",
+            ))
+
+        if location_id is None:
+            location_id = constraint.location_id
+        elif constraint.location_id is not None and location_id != constraint.location_id:
+            blocks.append(_selection_block(
+                "location_mismatch",
+                "The requested location does not match the normalized slot-search constraint.",
+            ))
+
+        if patient_id is None:
+            patient_id = constraint.patient_id
+        elif constraint.patient_id is not None and patient_id != constraint.patient_id:
+            blocks.append(_selection_block(
+                "patient_mismatch",
+                "The requested patient does not match the normalized slot-search constraint.",
+            ))
+
+    if practitioner_id is None:
+        blocks.append(_selection_block(
+            "missing_practitioner",
+            "practitioner_id is required when no normalized slot-search constraint supplies it.",
+        ))
+
+    return practitioner_id, appointment_type_id, location_id, patient_id
+
+
+@router.post(
+    "/proposals/slot-search/selection",
+    response_model=SlotSelectionProposalOut,
+)
+def propose_slot_selection_for_create(
+    body: SlotSelectionProposalIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Convert one supervised slot-search candidate into create-proposal evidence.
+
+    This route does not create, confirm, edit, or audit appointments. It only
+    validates that the selected slot is consistent with supplied slot-search
+    evidence and then reuses the existing non-mutating create-proposal contract
+    so staff can review the final booking command before any write.
+    """
+    blocks: list[AppointmentProposalIssue] = []
+    selected_candidate = _resolve_selected_candidate(body, blocks)
+    practitioner_id, appointment_type_id, location_id, patient_id = _resolve_selection_context(
+        body,
+        blocks,
+    )
+
+    if selected_candidate is None or blocks:
+        return _block_slot_selection(blocks, selected_candidate)
+
+    create_body = AppointmentCreate(
+        patient_id=patient_id,
+        patient_name_provisional=body.patient_name_provisional,
+        practitioner_id=practitioner_id,
+        appointment_type_id=appointment_type_id,
+        location_id=location_id,
+        appointment_date=selected_candidate.appointment_date,
+        start_time_local=selected_candidate.start_time_local,
+        duration_minutes=selected_candidate.duration_minutes,
+        reason=body.reason,
+        notes=body.notes,
+        booked_via=body.booked_via,
+    )
+    create_proposal = _build_create_appointment_proposal(
+        create_body,
+        db,
+        current_user.practice_id,
+    )
+
+    warnings = [*selected_candidate.warnings, *create_proposal.warnings]
+    blocks = [*create_proposal.blocks]
+    safe = create_proposal.safe
+    summary = (
+        "Prepared create proposal from selected slot. "
+        f"{create_proposal.summary}"
+    )
+
+    return SlotSelectionProposalOut(
+        safe=safe,
+        requires_confirmation=True,
+        autonomy_tier="proposal" if safe else "blocked",
+        summary=summary,
+        selected_candidate=selected_candidate,
+        create_proposal=create_proposal,
+        warnings=warnings,
+        blocks=blocks,
     )

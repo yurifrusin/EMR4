@@ -413,3 +413,45 @@ class SlotSearchCommandExecutionOut(BaseModel):
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
     summary: str
+
+
+class SlotSelectionProposalIn(BaseModel):
+    """Supervised selection of one slot-search candidate for create-proposal review."""
+    search_execution: Optional[SlotSearchCommandExecutionOut] = None
+    selected_candidate_index: Optional[int] = Field(default=None, ge=0)
+    selected_candidate: Optional[SlotCandidate] = None
+    practitioner_id: Optional[uuid.UUID] = None
+    appointment_type_id: Optional[uuid.UUID] = None
+    location_id: Optional[uuid.UUID] = None
+    patient_id: Optional[uuid.UUID] = None
+    patient_name_provisional: Optional[str] = None
+    reason: Optional[str] = None
+    notes: Optional[str] = None
+    booked_via: BookingChannel = BookingChannel.Receptionist
+
+    @model_validator(mode="after")
+    def require_candidate_and_patient_context(self):
+        if self.search_execution is None and self.selected_candidate is None:
+            raise ValueError("search_execution or selected_candidate is required")
+        if self.patient_id is None and not self.patient_name_provisional:
+            execution_patient_id = None
+            if (
+                self.search_execution is not None
+                and self.search_execution.normalization.constraint is not None
+            ):
+                execution_patient_id = self.search_execution.normalization.constraint.patient_id
+            if execution_patient_id is None:
+                raise ValueError("patient_id or patient_name_provisional is required")
+        return self
+
+
+class SlotSelectionProposalOut(BaseModel):
+    intent: Literal["select_slot_for_create_proposal"] = "select_slot_for_create_proposal"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["proposal", "blocked"]
+    summary: str
+    selected_candidate: Optional[SlotCandidate] = None
+    create_proposal: Optional[AppointmentCreateProposalOut] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
