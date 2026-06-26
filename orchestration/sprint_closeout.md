@@ -58,7 +58,7 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 
 ## Recommended Next Direction
 
-Continue with another small Programme 2D slice once Sprint 35 is pushed, mirrored, and audited, or wait for Claude's headless limit to recover before backend-heavy audit/proposal work.
+Sprint 36 has been dispatched as another small Programme 2D slice while Claude's headless limit recovers: keyboard/ARIA semantics for the read-only audit-history toggle.
 
 
 ## Previous Closeout - Sprint 34

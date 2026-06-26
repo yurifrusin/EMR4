@@ -131,6 +131,29 @@ After every fully integrated batch, Codex updates
 - recommended next direction
 
 
+
+## Sprint 36: Diary Audit History Keyboard Accessibility
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; Antigravity plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Antigravity plan and Ariadne review |
+| Product Goal | Make the read-only audit-history toggle keyboard-accessible and semantically clearer without changing visible layout or mutation behaviour |
+
+### Workstream S36-A - Audit History Toggle Semantics
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-audit-history-keyboard-accessibility.md` |
+| Goal | Plan, then after approval add focused keyboard/ARIA semantics for the audit-history toggle and deterministic assertions |
+| In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.js`, and `review/test_diary_smoke.py` only unless a directly required adjacent frontend file is unavoidable |
+| Out of Scope | Backend code, appointment mutation/proposal flows, broad booking modal redesign, taskpane, Command Centre, billing, SMS, AI provider code, resource administration, cancelled appointment review, non-audit-history controls |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary smoke, frontend version check if assets change, and `git diff --check` |
+| Status | Plan gate pending |
+
 ## Sprint 35: Diary Audit History Test-Hook Hardening
 
 | Item | Value |
