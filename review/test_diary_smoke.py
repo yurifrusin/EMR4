@@ -1287,7 +1287,19 @@ def test_bernie_dev_review_fixture_route(diary_page):
         status = diary_page.locator("[data-testid='bernie-review-status']")
         assert status.text_content().strip() == "blocked"
 
-        # 4. Proves dev-review = blocked fetches and renders
+        # 4. Proves dev-review fixture failures are visible and do not silently fall back to mocks
+        diary_page.unroute("**/api/v1/appointments/dev/bernie-review-fixtures*")
+        diary_page.route(
+            "**/api/v1/appointments/dev/bernie-review-fixtures*",
+            lambda route: route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "fixture unavailable"}))
+        )
+        diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&bernie_review=blocked")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="dev_fixture_unavailable").count() == 1
+        diary_page.unroute("**/api/v1/appointments/dev/bernie-review-fixtures*")
+        diary_page.route("**/api/v1/appointments/dev/bernie-review-fixtures*", handle_dev_fixtures)
+
+        # 5. Proves dev-review = blocked fetches and renders
         diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&bernie_review=blocked")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
         assert len(dev_fixtures_requests) == 1
@@ -1297,7 +1309,7 @@ def test_bernie_dev_review_fixture_route(diary_page):
         assert headline.text_content().strip() == "Booking Blocked"
         assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_id").count() == 1
 
-        # 5. Proves dev-review = candidate_selection_required fetches and renders
+        # 6. Proves dev-review = candidate_selection_required fetches and renders
         diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&bernie_review=candidate_selection_required")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
         assert len(dev_fixtures_requests) == 2
@@ -1306,7 +1318,7 @@ def test_bernie_dev_review_fixture_route(diary_page):
         status = diary_page.locator("[data-testid='bernie-review-status']")
         assert status.text_content().strip() == "candidate selection required"
 
-        # 6. Proves dev-review = confirmation_ready fetches, renders and can confirm (route-intercepted)
+        # 7. Proves dev-review = confirmation_ready fetches, renders and can confirm (route-intercepted)
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_dev_review=true&bernie_review=confirmation_ready&bernie_confirm_adapter=true")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
         assert len(dev_fixtures_requests) == 3

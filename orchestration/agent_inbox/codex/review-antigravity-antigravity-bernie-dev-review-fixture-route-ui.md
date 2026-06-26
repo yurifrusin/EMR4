@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-dev-review-fixture-route-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -37,5 +37,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: integrated. Ariadne inspected the diff, ran deterministic UI checks, and applied a bounded safety cleanup so dev-fixture fetch failures render a visible blocked state rather than silently falling back to local mocks.
+- Follow-up required: none for this sprint; future work can decide when, if ever, Bernie review moves beyond explicit dev/query gating.

@@ -2214,9 +2214,25 @@ async function initBernieReview() {
     } catch (e) {
       console.error("Error fetching Bernie dev review fixture:", e);
     }
+
+    if (!payload) {
+      payload = {
+        headline: "Backend fixture unavailable",
+        status: "blocked",
+        confirmation_ready: false,
+        selected_slot: null,
+        candidate_slots: [],
+        warning_summary: "Backend fixture route did not return a usable payload.",
+        evidence_summary: "Dev fixture review failed before rendering live contract data.",
+        confirm_payload: null,
+        blocks: [
+          { code: "dev_fixture_unavailable", message: "Backend dev fixture route did not return the requested state." }
+        ]
+      };
+    }
   }
 
-  if (!payload) {
+  if (!payload && !isDevFixture) {
     if (reviewParam === "blocked") {
       payload = mockBernieReviewBlocked;
     } else if (reviewParam === "candidate_selection_required") {

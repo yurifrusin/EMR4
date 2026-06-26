@@ -8,12 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 55: Bernie Dev Review Fixture Route |
-| Integrated through | Backend-only deterministic non-PHI Bernie review fixture route for dev tooling |
-| Status | Integrated, pushed, mirrored, audited, and closed |
+| Batch | Sprint 56: Bernie Dev Review Fixture Route UI Adapter |
+| Integrated through | Dev-only diary review adapter fetching backend deterministic Bernie fixtures |
+| Status | Integrated locally, verified, and pending push/mirror/audit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
+
+- The dev-only Bernie review fixture path now fetches `GET /api/v1/appointments/dev/bernie-review-fixtures?state=<state>` for `blocked`, `candidate_selection_required`, and `confirmation_ready` states.
+- Default diary mode, `bernie_dev_review=true` without a review state, and offline smoke fixtures without the dev flag make no backend fixture calls.
+- Existing smoke/local mock behaviour remains available when the explicit dev fixture flag is absent.
+- Confirmation-ready review still requires staff checkbox approval before any confirm-Bernie POST, and tests route-intercept the confirm call.
+- Ariadne applied a bounded safety cleanup so dev-fixture fetch failures render a visible blocked `dev_fixture_unavailable` state instead of silently falling back to local mocks.
+- Bumped diary JS cache busting to `diary.js?v=111`.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified this as an explicit dev/query-gated UI adapter with deterministic route-intercepted Playwright checks. No production/default diary exposure or live write path changed.
+
+## Not Required Before Moving On
+
+- No manual live UI test is required; route-intercepted Playwright verifies fixture fetch, no-call defaults, visible failure handling, and explicit approval before confirm POST.
+- No manual live API write test is required; confirm-Bernie remains intercepted in the harness and no live writes are performed.
+- No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
+- No user decision is needed before the next narrow Bernie slice.
+
+## Known Follow-Up
+
+- A later product decision remains before exposing Bernie review in ordinary production mode without explicit dev/query gating.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert remains outside this sprint.
+
+## Verification
+
+- Ariadne reviewed the Antigravity plan and implementation packets and inspected the final branch diff against `master`.
+- `node --check docs\diary\diary.js` -> passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed with `diary.js` bumped from `v=110` to `v=111`.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 37 passed.
+- `git diff --check` -> passed.
+- `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
+
+## Recommended Next Direction
+
+Next sprint should stay narrow around Bernie dev-review hardening or UX polish: either add a visible dev-only fixture-state selector for staff/demo review, or pause for a product decision on when Bernie review should move beyond explicit dev/query gating.
+
+
+## Previous Closeout - Sprint 55
+
+Sprint 55 added the backend-only deterministic non-PHI Bernie review fixture route for dev tooling.
 
 - Added authenticated `GET /api/v1/appointments/dev/bernie-review-fixtures`, gated to `ENVIRONMENT=dev`.
 - The route returns deterministic `BernieSupervisedBookingOut` fixtures keyed by `blocked`, `candidate_selection_required`, and `confirmation_ready`.
@@ -23,38 +66,7 @@ reviewed, integrated, verified, pushed, and audited.
 - Added focused tests proving auth/dev gating, deterministic shape, no appointment writes, no audit writes, no LLM/provider imports, and non-PHI fixture content.
 - Claude implemented the backend slice; Ariadne caught and corrected route/helper drift via a recovery nudge before final integration.
 
-## Recommended User Review
-
-Residual user review/testing after closeout: none required before continuing.
-Ariadne verified this as a backend-only deterministic dev fixture route with focused and adjacent pytest coverage. No visible diary, Word, Office, live booking, or production surface changed.
-
-## Not Required Before Moving On
-
-- No manual live API test is required; pytest covers the route contract, state filtering, auth gate, dev-only gate, determinism, no-write proof, and no-provider proof.
-- No manual UI review is required; no diary/taskpane/Command Centre assets changed in this sprint.
-- No database migration, data repair, GCP/Gemini, Office dialog, resource admin, billing, SMS, or security-console action is required.
-- No user decision is needed before the next narrow Bernie slice.
-
-## Known Follow-Up
-
-- The next useful slice is a frontend/dev-tooling sprint to have the Bernie dev review launcher consume this backend fixture route instead of hand-authored route-intercept payloads.
-- A later product decision remains before exposing Bernie review in ordinary production mode without explicit dev/query gating.
-- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
-- The known moderate Dependabot alert remains outside this sprint.
-
-## Verification
-
-- Ariadne reviewed the Claude plan and implementation packets and inspected the final branch diff against `master`.
-- Ariadne required a bounded recovery correction before submission: exact route path, live helper alignment, correct confirm endpoint, and `confirm_payload.confirmed=false`.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\routers\bernie_dev.py app\main.py tests\test_bernie_dev_fixtures.py` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_dev_fixtures.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_wrapper_confirmation_review_harness.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_confirmed_flow_review_harness.py -q --tb=short -p no:randomly` -> 41 passed.
-- `git diff --check master..origin/claude/current` -> passed.
-- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned; only the known dirty stale `codex/time-model` disposable worktree remains for manual review.
-- `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
-
-## Recommended Next Direction
-
-Sprint 56 is dispatched to Antigravity: wire the dev-only Bernie review launcher to fetch `GET /api/v1/appointments/dev/bernie-review-fixtures` under the existing explicit dev flag, while preserving route-intercepted deterministic tests and no production/default exposure.
+Residual user review/testing after Sprint 55 closeout: none required. Ariadne verified this as a backend-only deterministic dev fixture route with focused and adjacent pytest coverage.
 
 
 ## Previous Closeout - Sprint 54
