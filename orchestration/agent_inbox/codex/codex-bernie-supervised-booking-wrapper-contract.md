@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-supervised-booking-wrapper` |
 | Branch | `codex/bernie-supervised-booking-wrapper` |
-| Status | queued |
+| Status | submitted |
 | Created | 9ede142 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-supervised-booking-wrapper-contract --summary "Short plan summary"` |
@@ -92,6 +92,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-supervised-booking-wrapper-contract.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-supervised-booking-wrapper-contract.md`
+- Verification run: Plan gate only; no production/test code changed. Protocol commands run successfully: `python scripts\agent_worktrees.py handin --agent codex` from `C:\Users\YuriFrusin\Documents\EMR4-worktrees\codex-bernie-supervised-booking-wrapper` on branch `codex/bernie-supervised-booking-wrapper` synced to `6b92ee9` and printed the queued packet; `python scripts\agent_worktrees.py claim --agent codex --task codex-bernie-supervised-booking-wrapper-contract --status in_progress` marked the packet in progress; `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-supervised-booking-wrapper-contract --summary "Thin backend-only supervised Bernie wrapper plan" ...` wrote the plan packet and set status to `pending_plan_review`.
+- Remaining risks: Implementation has not started. Ariadne should review the proposed wrapper response discriminator/name before approving `complete sprint task`.
