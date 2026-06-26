@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 46: Bernie Supervised Booking Wrapper Contract |
 | Integrated through | Backend-only supervised wrapper for normalize -> search -> selection proposal evidence |
-| Status | Integrated locally; push, mirror realignment, and final audit pending |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -51,6 +51,8 @@ Ariadne verified this as a backend-only API contract with focused and adjacent p
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirmed_flow_review_harness.py tests\test_bernie_confirm_create_proposal.py tests\test_slot_search_normalized_execution.py tests\test_slot_selection_proposal.py tests\test_appointment_proposals.py -q` -> 35 passed.
 - `git diff --check origin/master...origin/codex/bernie-supervised-booking-wrapper` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
+- `python scripts\agent_worktrees.py audit --fetch` after push/mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at the Sprint 46 closeout commit.
+- `python scripts\agent_worktrees.py retire-stale --apply` removed the clean Sprint 46 disposable worker worktree; the old dirty `codex/time-model` worktree remains for separate review.
 
 ## Recommended Next Direction
 
