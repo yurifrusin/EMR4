@@ -9,7 +9,7 @@
 | Worker Branch | codex/bernie-slot-selection-proposal |
 | Branch | `codex/bernie-slot-selection-proposal` |
 | Source Task | `codex-bernie-slot-selection-proposal-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 23:40 +1000 |
 | Source HEAD | `ec1e5ae` |
 
@@ -48,5 +48,5 @@ Need to avoid duplicating create-proposal validation logic or silently bypassing
 ## Codex Plan Review
 
 - Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Required changes before implementation: initial metadata rows were missing and were corrected before release.
+- Approved to proceed: yes; implementation integrated in Sprint 42.

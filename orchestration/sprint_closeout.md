@@ -8,21 +8,21 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 41: Bernie Normalized Slot Search Execution Contract |
-| Integrated through | Non-mutating backend endpoint that normalizes a Bernie slot command and, only when safe, returns slot-search candidates |
+| Batch | Sprint 42: Bernie Slot Selection Proposal Contract |
+| Integrated through | Non-mutating backend endpoint that converts one supervised slot-search candidate selection into create-proposal evidence |
 | Status | Integrated, verified, pushed, mirrored, audited, and closed |
-| Last updated | 2026-06-26 |
+| Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added authenticated `POST /api/v1/appointments/proposals/slot-search/normalized`.
-- The endpoint accepts `SlotSearchCommandIn`, requires an explicit `reference_date` query parameter, calls the deterministic normalizer, and returns both normalization context and a slot-search proposal when safe.
-- Unsafe normalization short-circuits before schedule/conflict evaluation and returns blocks with no proposal.
-- Safe normalization reuses the existing non-mutating `_build_slot_search_proposal(...)` path so candidate search, schedule rules, break warnings, practice scoping, and conflict logic remain single-sourced.
-- Added `SlotSearchCommandExecutionOut` for the combined normalization-plus-proposal response.
-- Added focused endpoint tests covering auth, required reference date, response shape, existing helper reuse, unsafe no-search short-circuit, no appointment/audit writes, and source-level no-LLM/no-mutation proof.
-- Claude remained stood down while rate-limited; Cicero/Ramanujan implemented the backend-only fallback on `codex/bernie-normalized-slot-search`.
-- No diary UI, taskpane, Command Centre, booking mutation, audit mutation, billing, SMS, migrations, patient demographics, resource admin, or live Bernie autonomous runtime was added.
+- Added authenticated `POST /api/v1/appointments/proposals/slot-search/selection`.
+- The endpoint accepts supervised slot-selection evidence, either from a normalized slot-search execution payload plus selected index/candidate or an explicit selected candidate plus required booking context.
+- Selected candidates are validated against the search result when evidence is supplied, including index/candidate mismatch and not-in-results blocking.
+- The route reuses the existing non-mutating create-proposal path through `_build_create_appointment_proposal(...)`, preserving conflict, break, provisional-patient, practice-scope, and confirmation semantics.
+- Added `SlotSelectionProposalIn` and `SlotSelectionProposalOut` schemas for the supervised select-slot-for-create-proposal response.
+- Added focused tests for auth, happy-path index selection, no appointment/audit writes, selected-candidate mismatch blocking, create-proposal conflict semantics, and source-level no-LLM/no-mutation proof.
+- Cicero/Hegel implemented the backend-only fallback on `codex/bernie-slot-selection-proposal`.
+- No diary UI, taskpane, Command Centre, booking write, audit mutation, billing, SMS, migrations, patient demographics, resource admin, or live Bernie autonomous runtime was added.
 
 ## Recommended User Review
 
@@ -31,15 +31,16 @@ Ariadne verified this as a backend-only API contract with focused pytest and com
 
 ## Not Required Before Moving On
 
-- No manual live API test is required; focused tests cover the route contract, unsafe short-circuit, helper reuse, and non-mutation proof.
+- No manual live API test is required; focused tests cover the route contract, selected-candidate validation, create-proposal reuse, conflict semantics, and non-mutation proof.
 - No manual live UI review is required; no frontend files or deployed assets changed.
 - No database migration or data repair is required.
 - No Word taskpane, Command Centre, GCP/Gemini, Office dialog, diary grid, resource admin, billing, SMS, or security-console action is required.
 
 ## Known Follow-Up
 
-- Future Bernie work can now use the combined normalized slot-search endpoint to present candidate slots for supervised review.
-- The next useful slice is a supervised result-review/selection contract that still stops before appointment creation.
+- Future Bernie work can now chain command normalization, safe slot search, supervised candidate selection, and create-proposal evidence without writing appointments.
+- The endpoint accepts client-supplied normalized search evidence and validates candidate consistency, but the evidence is not server-persisted. Future UI/runtime should still treat it as supervised review evidence and require create-proposal confirmation before any write.
+- The next useful slice is either a supervised confirmation bridge that makes the final write semantics explicit or a lightweight deterministic review harness around the Bernie flow.
 - A later sprint can decide where DB-backed name-to-UUID resolution belongs; this sprint intentionally treats identifier normalization as UUID/format parsing only.
 - Natural language date phrases beyond deterministic `today`/`tomorrow` remain the upstream parser/LLM's responsibility.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
@@ -47,15 +48,21 @@ Ariadne verified this as a backend-only API contract with focused pytest and com
 
 ## Verification
 
-- `python scripts\agent_worktrees.py poll --fetch --include-codex-workers` -> found Sprint 41 Codex worker plan/review branch, though historical Codex branches made the command noisy.
-- Worker plan accepted and implementation released to Cicero/Ramanujan; review packet reported 65 passing focused tests.
-- Ariadne reran backend compile check with the project venv: `python -m py_compile app\routers\appointments.py app\schemas\appointments.py tests\test_slot_search_normalized_execution.py tests\test_bernie_slot_normalizer.py tests\test_slot_search_normalize_endpoint.py tests\test_slot_search_proposal.py` -> passed.
-- Ariadne reran focused endpoint/normalizer/proposal tests: `python -m pytest tests\test_slot_search_normalized_execution.py tests\test_bernie_slot_normalizer.py tests\test_slot_search_normalize_endpoint.py tests\test_slot_search_proposal.py -q --tb=short -p no:randomly` -> 65 passed.
-- Diff hygiene: `git diff --check origin/master..origin/codex/bernie-normalized-slot-search` -> passed.
+- `python scripts\agent_worktrees.py audit --fetch` -> Sprint 42 Codex worker branch submitted and integration worktree clean.
+- Worker plan accepted after metadata correction and implementation released to Cicero/Hegel.
+- Ariadne reran backend compile check with the project venv: `python -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_slot_selection_proposal.py` -> passed.
+- Ariadne reran focused slot-selection tests: `python -m pytest tests\test_slot_selection_proposal.py -q --tb=short -p no:randomly` -> 5 passed.
+- Ariadne reran adjacent regression tests: `python -m pytest tests\test_slot_search_normalized_execution.py tests\test_slot_search_proposal.py tests\test_slot_search_normalize_endpoint.py tests\test_appointment_proposals.py -q --tb=short -p no:randomly` -> 41 passed.
+- Diff hygiene: `git diff --check origin/master..origin/codex/bernie-slot-selection-proposal` -> passed.
 
 ## Recommended Next Direction
 
-Sprint 42 should build the next supervised Bernie/reception slice on top of this contract: preserve non-autonomous behaviour while letting a caller review or select a returned candidate slot for a later booking-proposal step. Appointment creation, audit mutation, live diary UI, and autonomous tool execution should remain out of scope unless deliberately dispatched.
+Sprint 43 should either add the final supervised confirmation bridge from create-proposal evidence to the existing appointment write path, with explicit audit/write semantics, or add a small deterministic review harness for the Bernie command-normalize-search-select chain before moving to UI/runtime surfaces.
+
+
+## Previous Closeout - Sprint 41
+
+Sprint 41 added the non-mutating `POST /api/v1/appointments/proposals/slot-search/normalized` endpoint that normalizes a Bernie slot-search command and, only when safe, returns candidate slots. It remains the normalize-and-search foundation used by Sprint 42 selection.
 
 
 ## Previous Closeout - Sprint 40

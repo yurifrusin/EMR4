@@ -135,9 +135,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated, verified, pushed, mirrored, audited, and closed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Codex worker plan packet |
+| Integration Gate | Codex worker plan accepted and implementation integrated |
 | Product Goal | Let future Bernie/reception workflows choose one candidate from normalized slot-search results and receive a supervised create-proposal-compatible payload without creating an appointment |
 
 ### Workstream BY - Bernie Slot Selection Proposal Contract
@@ -151,7 +151,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval a narrow appointment-router/helper/schema/test slice, candidate/date/time/duration/practitioner/location/patient validation, create-proposal-compatible output or blocks/warnings, no-LLM/no-write proof, and compatibility with existing normalized slot-search and create-proposal contracts |
 | Out of Scope | Diary UI, taskpane, Command Centre, Gemini/LLM parsing, autonomous tool execution, actual appointment creation/edit/status/cancel, audit mutation, SMS, billing, patient demographics, resource admin, migrations unless strictly unavoidable, DB-backed natural-language name resolution, and broad scheduling redesign |
 | Verification | Plan packet first; after approval py_compile touched backend modules/tests, focused pytest for the new selection contract, adjacent normalized slot-search/proposal/create-proposal tests if shared code changes, explicit no-mutation/no LLM proof, and `git diff --check` |
-| Status | Queued for Codex worker plan |
+| Status | Integrated |
 
 ## Sprint 41: Bernie Normalized Slot Search Execution Contract
 

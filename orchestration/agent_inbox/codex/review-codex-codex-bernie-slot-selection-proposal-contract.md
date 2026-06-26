@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-slot-selection-proposal` |
 | Source Task | `codex-bernie-slot-selection-proposal-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Diff stayed scoped to `app/routers/appointments.py`, `app/schemas/appointments.py`, focused tests, and coordination packets.
+- Follow-up required: none for user review. Future UI/runtime must continue treating client-supplied search evidence as supervised review evidence, not persisted authority.

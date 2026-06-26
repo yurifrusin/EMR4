@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-slot-selection-proposal` |
 | Branch | `codex/bernie-slot-selection-proposal` |
-| Status | submitted |
+| Status | integrated |
 | Created | 8f4153e |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-slot-selection-proposal-contract --summary "Short plan summary"` |
@@ -95,3 +95,9 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed: `app/schemas/appointments.py`; `app/routers/appointments.py`; `tests/test_slot_selection_proposal.py`; `orchestration/agent_inbox/codex/codex-bernie-slot-selection-proposal-contract.md`
 - Verification run: `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_slot_selection_proposal.py`; `.venv\Scripts\python.exe -m pytest tests\test_slot_selection_proposal.py -q`; `.venv\Scripts\python.exe -m pytest tests\test_slot_search_normalized_execution.py tests\test_slot_search_proposal.py tests\test_slot_search_normalize_endpoint.py tests\test_appointment_proposals.py -q`; source-level inspect proof that `propose_slot_selection_for_create` contains no `generate_content`, `Gemini`, `db.add`, `db.commit`, or `_write_audit` and reuses `_build_create_appointment_proposal`; `git diff --check`.
 - Remaining risks: route accepts client-supplied normalized search execution evidence and validates candidate membership/constraint consistency, but the evidence is not server-persisted; future UI/runtime should treat this as supervised review evidence only and still require create-proposal confirmation before any write.
+
+## Codex Integration Review
+
+- Review result: Integrated in Sprint 42.
+- Verification rerun by Ariadne: project venv `py_compile` for touched backend/test modules passed; focused slot-selection pytest passed with 5 tests; adjacent normalized slot-search, slot-search proposal, normalize endpoint, and appointment proposal pytest passed with 41 tests; diff hygiene passed.
+- User review required: none; backend-only non-mutating contract with no visible UI, no appointment write, no audit write, and no external console action.
