@@ -54,7 +54,7 @@ Ariadne verified this with deterministic route-intercepted Playwright checks. Th
 
 ## Recommended Next Direction
 
-The next useful slice is a small backend-backed non-PHI dev fixture route or fixture payload source for the Bernie launcher/review panel.
+Sprint 55 is dispatched to Claude: add a backend-backed non-PHI dev fixture route or fixture payload source for the Bernie launcher/review panel.
 
 
 ## Previous Closeout - Sprint 53

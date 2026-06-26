@@ -130,6 +130,28 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 55: Bernie Dev Review Fixture Route
+
+| Item | Value |
+|---|---|
+| Status | Queued; waiting for Claude plan |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Claude plan review |
+| Product Goal | Provide deterministic non-PHI backend fixture payloads for the dev-gated Bernie review panel without hand-authored Playwright payloads |
+
+### Workstream DI - Bernie Dev Review Fixture Route
+
+| Item | Value |
+|---|---|
+| Owner | Claude |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-bernie-dev-review-fixture-route.md` |
+| Goal | Plan, then after approval add a narrow backend-only dev/test fixture source for Bernie review payloads |
+| In Scope | Plan packet first; after approval backend dev/test-only route or fixture helper, deterministic non-PHI blocked/candidate/confirmation-ready payloads, auth/practice/default gating if route-exposed, no appointment/audit writes, no LLM/provider calls, and focused pytest coverage |
+| Out of Scope | Diary UI, taskpane, Command Centre, live autonomous booking, production default exposure, real patient data, Gemini/LLM parsing, migrations unless strictly unavoidable, appointment write semantics, SMS, billing, resource admin, broad router redesign, and unrelated test hygiene |
+| Verification | Plan packet first; after approval py_compile touched Python, focused fixture tests, adjacent Bernie supervised-booking/review payload tests where relevant, no-write/no-audit/no-LLM proof, auth/practice/default-gating checks if route-exposed, and `git diff --check` |
+| Status | Queued |
+
 ## Sprint 54: Bernie Dev Review Launch Affordance
 
 | Item | Value |
