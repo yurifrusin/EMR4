@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 3645361 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-antigravity-diary-slot-search-preview-harness --summary "Short plan summary"` |
@@ -89,6 +89,7 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.css, docs/diary/diary.html, review/checks_diary.json, review/test_diary_smoke.py
+- Verification run: syntax check (`node --check`), deterministic smoke assertions (`pytest` on module-scoped `diary_page` fixture), frontend asset version check (`check_frontend_versions.py`), and `git diff --check`.
+- Remaining risks: None. The preview features are fully gated by `smoke=true` and `slot_preview=true` parameters and do not affect live production workflows. Clicking slot-preview candidates behaves as a no-op via event propagation blockages, protecting booking creations.
+
