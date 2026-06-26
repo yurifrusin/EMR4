@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 44: Bernie Confirmation Create-Proposal Bridge |
 | Integrated through | Backend-only supervised Bernie confirmation route that writes exactly one appointment only after explicit staff confirmation |
-| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -54,6 +54,7 @@ Ariadne verified this as a backend-only API contract with deterministic pytest c
 - `git diff --check origin/master...origin/codex/bernie-confirm-create-proposal` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 - `python scripts\agent_worktrees.py poll --fetch --include-codex-workers` timed out due noisy historical Codex worker refs, so Ariadne used direct branch/review-packet inspection for this active worker.
+- `python scripts\agent_worktrees.py audit --fetch` after push/mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all at `9e39106`; Sprint 44 task, plan, and review packets integrated. Known stale dirty `codex/time-model` remains intentionally unretired.
 
 ## Recommended Next Direction
 
