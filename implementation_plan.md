@@ -225,6 +225,12 @@ graph TB
 | **Hosting** | GCP Cloud Run + Cloud SQL + Cloud Storage | Fully managed; `australia-southeast1` |
 | **License** | AGPL-3.0 | Open-source; SaaS-protective |
 
+AI-provider portability is handled through a thin EMR4-owned capability boundary,
+not a provider-first abstraction. Gemini/Vertex remains the first production
+provider, especially for direct audio scribe, but new AI surfaces should depend
+on EMR4 clinical/reception contracts and provider adapters. See
+`orchestration/ai_provider_boundary.md`.
+
 ---
 
 ## 7. Database Schema (30+ Tables)
