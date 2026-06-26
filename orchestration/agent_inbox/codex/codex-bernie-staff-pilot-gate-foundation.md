@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-staff-pilot-gate-foundation` |
-| Status | queued |
+| Status | submitted |
 | Created | af5f897 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-staff-pilot-gate-foundation --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-staff-pilot-gate-foundation.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-staff-pilot-gate-foundation.md`
+- Verification run: Plan-gate only. Ran `python scripts\agent_worktrees.py handin --agent codex`, read `AGENTS.md` and `orchestration/parallel_workstreams.md`, inspected Bernie backend/config/test surfaces, and captured the implementation plan with `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-staff-pilot-gate-foundation ...`. No production code or tests changed/run yet.
+- Remaining risks: Awaiting Ariadne/Codex plan review and explicit `complete sprint task` before implementation. Main design ambiguity is standalone eligibility endpoint versus additive field on existing Bernie payloads; the submitted plan recommends a standalone non-mutating endpoint to avoid invoking proposal routes just to decide UI eligibility.
