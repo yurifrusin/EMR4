@@ -1150,3 +1150,83 @@ def test_bernie_dev_mode_review_feature_flag_success(diary_page):
         diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_dev_review_launcher_and_gating(diary_page):
+    import urllib.parse
+    import json
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    supervised_requests = []
+    confirm_payloads = []
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: (
+            supervised_requests.append(json.loads(route.request.post_data)),
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps(_bernie_live_confirmation_response())
+            )
+        )
+    )
+    diary_page.route(
+        "**/api/v1/appointments/proposals/create/confirm-bernie",
+        lambda route: (
+            confirm_payloads.append(json.loads(route.request.post_data)),
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        )
+    )
+
+    try:
+        # 1. Default page load (no parameters): launcher must be hidden, no endpoint calls
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_load_state("domcontentloaded")
+        launcher = diary_page.locator("[data-testid='bernie-review-dev-launch-button']")
+        assert launcher.is_hidden()
+        assert len(supervised_requests) == 0
+        assert len(confirm_payloads) == 0
+
+        # 2. Dev-flag-only page load (bernie_dev_review=true): launcher must be visible, no endpoint calls
+        diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true")
+        diary_page.wait_for_load_state("domcontentloaded")
+        assert launcher.is_visible()
+        assert len(supervised_requests) == 0
+        assert len(confirm_payloads) == 0
+
+        # 3. Clicking launcher button: should reload page with bernie_review=live, loading panel
+        launcher.click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        assert launcher.is_hidden()
+        assert len(supervised_requests) == 1
+        assert len(confirm_payloads) == 0
+
+        # 4. Prove confirm-Bernie still requires checkbox approval
+        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        assert checkbox.is_visible()
+        assert checkbox.is_checked() is False
+        assert confirm_btn.is_visible()
+        assert confirm_btn.is_disabled()
+
+        # Try clicking disabled button (should not trigger any API calls)
+        try:
+            confirm_btn.click(timeout=1000, force=True)
+        except Exception:
+            pass
+        assert len(confirm_payloads) == 0
+
+        # Check it, button should enable and click should send confirmation request
+        checkbox.check()
+        assert confirm_btn.is_disabled() is False
+        confirm_btn.click()
+        assert len(confirm_payloads) == 1
+        assert confirm_payloads[0]["confirmed"] is True
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | e473bfb |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-bernie-dev-review-launch-affordance --summary "Short plan summary"` |
@@ -90,5 +90,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [docs/diary/diary.html](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.html)
+  - [docs/diary/diary.css](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.css)
+  - [docs/diary/diary.js](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.js)
+  - [review/test_diary_smoke.py](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/review/test_diary_smoke.py)
 - Verification run:
-- Remaining risks:
+  - Ran full Playwright test suite using `.venv\Scripts\pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q` (all tests passed, including the new `test_bernie_dev_review_launcher_and_gating` test verifying launcher button visibility/behavior, default/dev-flag-only page load calls, and checkbox confirmation gating).
+  - Validated syntax of modified JavaScript via `node --check docs/diary/diary.js`.
+  - Ran `git diff --check` and ensured clean output.
+  - Verified version bumps for css and js assets via `.venv\Scripts\python scripts\check_frontend_versions.py`.
+- Remaining risks: None. The button and logic are strictly hidden and disabled behind explicit feature flags (`bernie_dev_review=true`), preserving default non-call and non-smoke behavior. The confirm action remains locked until the checkbox is checked, and endpoint calls in tests are route-intercepted.

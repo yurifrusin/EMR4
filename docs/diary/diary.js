@@ -2503,6 +2503,20 @@ Office.onReady(() => {
   const devReviewParam = urlParams.get("bernie_dev_review");
   const hasLiveDevReview = reviewParam === "live" && devReviewParam === "true";
 
+  const btnDevLaunch = document.getElementById("btn-bernie-dev-launch");
+  if (btnDevLaunch) {
+    if (devReviewParam === "true" && reviewParam !== "live") {
+      btnDevLaunch.classList.remove("hidden");
+      btnDevLaunch.onclick = () => {
+        const nextParams = new URLSearchParams(window.location.search);
+        nextParams.set("bernie_review", "live");
+        window.location.search = nextParams.toString();
+      };
+    } else {
+      btnDevLaunch.classList.add("hidden");
+    }
+  }
+
   if (token || isSmoke || hasLiveDevReview) { loadDiary(); scheduleRefresh(); }
   if (isSmoke || hasLiveDevReview) { initBernieReview(); }
 });
