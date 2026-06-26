@@ -1886,11 +1886,20 @@ Office.onReady(() => {
           content.classList.remove("hidden");
           icon.classList.add("expanded");
           icon.textContent = "▼";
+          auditHeader.setAttribute("aria-expanded", "true");
         } else {
           content.classList.add("hidden");
           icon.classList.remove("expanded");
           icon.textContent = "▶";
+          auditHeader.setAttribute("aria-expanded", "false");
         }
+      }
+    });
+
+    auditHeader.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        auditHeader.click();
       }
     });
   }
@@ -2197,6 +2206,10 @@ function openBookingModalForEdit(appt) {
     if (icon) {
       icon.classList.remove("expanded");
       icon.textContent = "▶";
+    }
+    const auditHeader = document.getElementById("booking-audit-header");
+    if (auditHeader) {
+      auditHeader.setAttribute("aria-expanded", "false");
     }
     loadAuditHistory(appt.id);
   }
