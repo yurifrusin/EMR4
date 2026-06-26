@@ -10,7 +10,7 @@
 
 ## Review Request
 
-codex-bernie-slot-selection-proposal-contract ready for Codex review
+codex-bernie-slot-selection-proposal-contract corrected plan metadata ready for Codex review
 
 ## Worker Completion Notes
 

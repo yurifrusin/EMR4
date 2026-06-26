@@ -4,6 +4,9 @@
 |---|---|
 | To | codex |
 | From | codex |
+| Role | codex-worker |
+| Worker Name | Cicero |
+| Worker Branch | codex/bernie-slot-selection-proposal |
 | Branch | `codex/bernie-slot-selection-proposal` |
 | Source Task | `codex-bernie-slot-selection-proposal-contract` |
 | Status | pending_plan_review |
