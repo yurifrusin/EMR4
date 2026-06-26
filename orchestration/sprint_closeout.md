@@ -67,7 +67,7 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 
 ## Recommended Next Direction
 
-Recommended next narrow slice: Sprint 39, add a deterministic Bernie slot-search command parsing/normalization contract that turns structured or LLM-like text output into the `slot-search` constraint object without executing searches or creating appointments.
+Sprint 39 has been dispatched as the next narrow Bernie slice: deterministic slot-search command parsing/normalization into the existing `SlotSearchProposalIn` constraint shape, without executing searches or creating appointments. Plan gate is pending.
 
 
 ## Previous Closeout - Sprint 36

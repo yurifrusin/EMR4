@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 38 - Bernie-safe slot-search proposal foundation integrated; closeout pending push/mirror/audit |
-| **Next recommended work** | Sprint 39 - deterministic Bernie slot-search command parsing/normalization contract |
+| **Current active track** | Sprint 39 - deterministic Bernie slot-search command normalizer dispatched; plan gate pending |
+| **Next recommended work** | Review Sprint 39 Claude plan once submitted, then release implementation only if accepted |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -479,7 +479,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 38 slot-search proposal foundation integration commit `641556f` |
+| **Latest integration commit** | Sprint 38 slot-search proposal foundation closeout commit `3da4e2b` |
 
 ### Tag map (all tags pushed to remote)
 

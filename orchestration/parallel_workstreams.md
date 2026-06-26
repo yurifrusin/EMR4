@@ -131,6 +131,28 @@ After every fully integrated batch, Codex updates
 - recommended next direction
 
 
+## Sprint 39: Bernie Slot Command Normalizer Contract
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Claude plan packet |
+| Product Goal | Normalize future Bernie/reception slot-search command input into the typed slot-search constraint object without executing searches or creating appointments |
+
+### Workstream S39-A - Backend Slot Command Normalizer Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-claude-bernie-slot-command-normalizer-contract.md` |
+| Goal | Plan, then after approval add a deterministic backend command-normalization contract for future Bernie/reception slot-search commands |
+| In Scope | Plan packet first; after approval backend command-normalization schemas/service/tests only as needed, likely `app/schemas/appointments.py` or a small appointments/Bernie helper plus focused tests; accept structured or LLM-like JSON/dict input, validate/normalize dates, times, practitioner/patient/location/type identifiers where possible, and output a `SlotSearchProposalIn`-compatible constraint object plus warnings/blocks/summary |
+| Out of Scope | Diary UI, live Bernie runtime, Gemini/LLM calls, autonomous tool execution, appointment creation/search execution, taskpane, Command Centre, SMS, billing, patient demographics, resource admin, database migrations unless strictly unavoidable, and broad scheduling redesign |
+| Verification | Plan packet first; after approval py_compile touched backend modules/tests, focused pytest covering accepted input shapes, invalid/missing constraints, date/time normalization, non-mutation proof, no LLM/search execution, and `git diff --check` |
+| Status | Queued for plan |
+
 ## Sprint 38: Bernie-Safe Slot Search Proposal Foundation
 
 | Item | Value |
