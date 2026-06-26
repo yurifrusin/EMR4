@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | a448194 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-antigravity-diary-audit-warning-summary-ui --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.html, review/test_diary_smoke.py
+- Verification run: static syntax check (`node --check`), deterministic smoke assertions (`pytest`), frontend asset version checking (`check_frontend_versions.py`), and `git diff --check`.
+- Remaining risks: None. Rendering is fully read-only, handles canonical `confirmed_warnings` list and defensive aliases/summaries, and preserves clean rows.

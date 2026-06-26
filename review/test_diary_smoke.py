@@ -110,6 +110,10 @@ def test_booking_audit_history(diary_page):
     # Check status transitions and formatting
     assert diary_page.locator("[data-testid='booking-audit-item']", has_text="Changed from Booked to Confirmed").count() == 1
 
+    # Check warnings and warning summary
+    assert diary_page.locator("[data-testid='booking-audit-warnings']", has_text="Warnings: [DOUBLE_BOOKING]").count() == 1
+    assert diary_page.locator("[data-testid='booking-audit-warning-summary']", has_text="Warning Summary: Double-booked with another appointment").count() == 1
+
     # Close the modal
     diary_page.click("#btn-booking-close")
     diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)

@@ -224,7 +224,9 @@ function getMockAuditEvents(apptId) {
         action: "status_change",
         status_before: "Booked",
         status_after: "Confirmed",
-        confirmed_by_user_id: "Dr. Practice Owner"
+        confirmed_by_user_id: "Dr. Practice Owner",
+        confirmed_warnings: ["DOUBLE_BOOKING"],
+        warning_summary: "Double-booked with another appointment"
       },
       {
         created_at: new Date(baseDate.getTime() - 1000 * 60 * 60).toISOString(),
@@ -423,14 +425,19 @@ async function loadAuditHistory(apptId) {
       if (evt.cancellation_reason) {
         details.push(`Cancellation Reason: <strong>${escHtml(evt.cancellation_reason)}</strong>`);
       }
-      if (evt.confirmed_with_warnings) {
-        details.push(`Confirmed with warnings`);
-      }
-      if (evt.warning_codes) {
-        const warnings = Array.isArray(evt.warning_codes) ? evt.warning_codes : [evt.warning_codes];
-        if (warnings.length > 0) {
-          details.push(`<span class="booking-audit-warnings">Warnings: [${warnings.map(w => escHtml(String(w))).join(", ")}]</span>`);
+      const warningsList = evt.confirmed_warnings || evt.warning_codes;
+      if (warningsList) {
+        const warnings = Array.isArray(warningsList) ? warningsList : [warningsList];
+        const nonNullWarnings = warnings.filter(w => w !== null && w !== undefined && String(w).trim() !== "");
+        if (nonNullWarnings.length > 0) {
+          details.push(`<span class="booking-audit-warnings" data-testid="booking-audit-warnings">Warnings: [${nonNullWarnings.map(w => escHtml(String(w))).join(", ")}]</span>`);
         }
+      } else if (evt.confirmed_with_warnings) {
+        details.push(`<span class="booking-audit-warnings" data-testid="booking-audit-warnings">Confirmed with warnings</span>`);
+      }
+
+      if (evt.warning_summary) {
+        details.push(`<span class="booking-audit-warnings" data-testid="booking-audit-warning-summary">Warning Summary: ${escHtml(evt.warning_summary)}</span>`);
       }
 
       li.innerHTML = `
