@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 45 - Bernie confirmed flow deterministic review harness integrated locally; push/mirror/audit pending |
-| **Next recommended work** | Close Sprint 45, then choose the next narrow Bernie/runtime or review-harness sprint if no Yuri-only checks remain |
+| **Current active track** | Sprint 45 - Bernie confirmed flow deterministic review harness integrated, pushed, mirrored, audited, and closed |
+| **Next recommended work** | Choose the next narrow Bernie/runtime sprint if no Yuri-only checks remain |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -479,7 +479,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 45 Bernie confirmed flow harness integration commit pending final closeout commit |
+| **Latest integration commit** | Sprint 45 Bernie confirmed flow harness closeout commit `6a300e0` |
 
 ### Tag map (all tags pushed to remote)
 

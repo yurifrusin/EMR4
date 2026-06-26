@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 45: Bernie Confirmed Flow Review Harness |
 | Integrated through | Deterministic backend harness for normalize -> normalized search -> slot selection -> explicit confirmation |
-| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -52,6 +52,7 @@ Ariadne verified this as a deterministic backend review-harness sprint. There is
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_confirm_create_proposal.py tests\test_bernie_slot_flow_review_harness.py tests\test_slot_selection_proposal.py tests\test_slot_search_normalized_execution.py tests\test_appointment_proposals.py -q` -> 28 passed.
 - `git diff --check origin/master...origin/codex/bernie-confirmed-flow-review-harness` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
+- `python scripts\agent_worktrees.py audit --fetch` after push/mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at the Sprint 45 closeout commit.
 
 ## Recommended Next Direction
 
