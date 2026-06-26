@@ -215,6 +215,54 @@ function getMockTypes() {
   ];
 }
 
+function getMockAuditEvents(apptId) {
+  const baseDate = new Date();
+  if (apptId === "smoke-appt-1") {
+    return [
+      {
+        created_at: new Date(baseDate.getTime() - 1000 * 60 * 30).toISOString(),
+        action: "Confirm Proposal",
+        status_target: "Booked",
+        confirmed_by: "Dr. Practice Owner",
+        warning_codes: ["OVERBOOK_WARNING"],
+        confirmed_with_warnings: true
+      },
+      {
+        created_at: new Date(baseDate.getTime() - 1000 * 60 * 60).toISOString(),
+        action: "Create Proposal",
+        status_target: "Booked",
+        confirmed_by: "Receptionist Sally",
+        warning_codes: []
+      }
+    ];
+  } else if (apptId === "smoke-appt-7") {
+    return [
+      {
+        created_at: new Date(baseDate.getTime() - 1000 * 60 * 15).toISOString(),
+        action: "Cancel Appointment",
+        status_target: "Cancelled",
+        cancellation_reason: "Patient had transport issues",
+        confirmed_by: "Receptionist Sally"
+      },
+      {
+        created_at: new Date(baseDate.getTime() - 1000 * 60 * 120).toISOString(),
+        action: "Create Proposal",
+        status_target: "Booked",
+        confirmed_by: "Receptionist Sally"
+      }
+    ];
+  } else {
+    return [
+      {
+        created_at: new Date(baseDate.getTime() - 1000 * 60 * 10).toISOString(),
+        action: "Create Proposal",
+        status_target: "Booked",
+        confirmed_by: "Receptionist Sally"
+      }
+    ];
+  }
+}
+
 // ─── BREAK OVERRIDES (per-column, persisted to localStorage) ──────────────────
 const BREAKS_KEY = "emr4_diary_breaks_v1";
 let breakOverrides = {};   // { room_label: [{label, from, to}, ...] }
@@ -273,6 +321,80 @@ async function apiFetch(path, opts = {}) {
     throw new Error("401 Unauthorized");
   }
   return res;
+}
+
+async function loadAuditHistory(apptId) {
+  const listEl = document.getElementById("booking-audit-list");
+  if (!listEl) return;
+  listEl.innerHTML = '<li class="booking-audit-fallback">Loading audit history...</li>';
+
+  try {
+    let auditEvents = [];
+    if (isSmokeMode()) {
+      auditEvents = getMockAuditEvents(apptId);
+    } else {
+      const res = await apiFetch(`/appointments/${apptId}/audit`);
+      if (res.status === 200) {
+        auditEvents = await res.json();
+      } else if (res.status === 404 || res.status === 501) {
+        listEl.innerHTML = '<li class="booking-audit-fallback">Audit history not supported by backend</li>';
+        return;
+      } else {
+        listEl.innerHTML = `<li class="booking-audit-fallback">Error loading audit history (${res.status})</li>`;
+        return;
+      }
+    }
+
+    if (!auditEvents || auditEvents.length === 0) {
+      listEl.innerHTML = '<li class="booking-audit-fallback">No audit history found</li>';
+      return;
+    }
+
+    listEl.innerHTML = "";
+    const sorted = [...auditEvents].sort((a, b) => {
+      const dateA = new Date(a.created_at || 0);
+      const dateB = new Date(b.created_at || 0);
+      return dateB - dateA;
+    });
+
+    sorted.forEach(evt => {
+      const li = document.createElement("li");
+      li.className = "booking-audit-item";
+
+      const timeStr = evt.created_at ? new Date(evt.created_at).toLocaleString() : "Unknown Time";
+      const actionStr = evt.action || "Event";
+      const userStr = evt.confirmed_by || evt.confirmed_by_user_id ? `by ${evt.confirmed_by || evt.confirmed_by_user_id}` : "";
+      
+      let details = [];
+      if (evt.status_target) {
+        details.push(`Status set to: <strong>${escHtml(evt.status_target)}</strong>`);
+      }
+      if (evt.cancellation_reason) {
+        details.push(`Cancellation Reason: <strong>${escHtml(evt.cancellation_reason)}</strong>`);
+      }
+      if (evt.confirmed_with_warnings) {
+        details.push(`Confirmed with warnings`);
+      }
+      if (evt.warning_codes) {
+        const warnings = Array.isArray(evt.warning_codes) ? evt.warning_codes : [evt.warning_codes];
+        if (warnings.length > 0) {
+          details.push(`<span class="booking-audit-warnings">Warnings: [${warnings.map(w => escHtml(String(w))).join(", ")}]</span>`);
+        }
+      }
+
+      li.innerHTML = `
+        <div class="booking-audit-meta">
+          <span>${escHtml(actionStr)} ${escHtml(userStr)}</span>
+          <span class="booking-audit-timestamp">${escHtml(timeStr)}</span>
+        </div>
+        ${details.length > 0 ? `<div class="booking-audit-details">${details.join(" | ")}</div>` : ""}
+      `;
+      listEl.appendChild(li);
+    });
+  } catch (err) {
+    console.error("Error loading audit history", err);
+    listEl.innerHTML = '<li class="booking-audit-fallback">Audit history not available</li>';
+  }
 }
 
 function getRoleFromToken(authToken = token) {
@@ -1702,6 +1824,26 @@ Office.onReady(() => {
     if (e.target === e.currentTarget) closeBookingModal();
   });
 
+  const auditHeader = document.getElementById("booking-audit-header");
+  if (auditHeader) {
+    auditHeader.addEventListener("click", () => {
+      const content = document.getElementById("booking-audit-content");
+      const icon = document.getElementById("booking-audit-toggle-icon");
+      if (content && icon) {
+        const isCollapsed = content.classList.contains("hidden");
+        if (isCollapsed) {
+          content.classList.remove("hidden");
+          icon.classList.add("expanded");
+          icon.textContent = "▼";
+        } else {
+          content.classList.add("hidden");
+          icon.classList.remove("expanded");
+          icon.textContent = "▶";
+        }
+      }
+    });
+  }
+
   let searchTimeout = null;
   const patientSearchInput = document.getElementById("booking-patient-search");
   if (patientSearchInput) {
@@ -1925,6 +2067,9 @@ function openBookingModalForCreate(col, slotTime) {
   document.getElementById("booking-reason").value = "";
   document.getElementById("booking-error").classList.add("hidden");
 
+  const auditSection = document.getElementById("booking-audit-section");
+  if (auditSection) auditSection.classList.add("hidden");
+
   document.getElementById("booking-modal").classList.remove("hidden");
 }
 
@@ -1991,6 +2136,19 @@ function openBookingModalForEdit(appt) {
 
   document.getElementById("booking-reason").value = appt.reason || "";
   document.getElementById("booking-error").classList.add("hidden");
+
+  const auditSection = document.getElementById("booking-audit-section");
+  if (auditSection) {
+    auditSection.classList.remove("hidden");
+    const content = document.getElementById("booking-audit-content");
+    const icon = document.getElementById("booking-audit-toggle-icon");
+    if (content) content.classList.add("hidden");
+    if (icon) {
+      icon.classList.remove("expanded");
+      icon.textContent = "▶";
+    }
+    loadAuditHistory(appt.id);
+  }
 
   document.getElementById("booking-modal").classList.remove("hidden");
 }
