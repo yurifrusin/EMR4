@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | c830b28 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-bernie-dev-review-fixture-route-ui --summary "Short plan summary"` |
@@ -90,5 +90,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [docs/diary/diary.html](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.html)
+  - [docs/diary/diary.js](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.js)
+  - [review/test_diary_smoke.py](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/review/test_diary_smoke.py)
 - Verification run:
+  - Syntax check: `node --check docs/diary/diary.js` passed successfully.
+  - Formatting / Quality check: `git diff --check` passed with no issues.
+  - Automated tests: Running `.venv\Scripts\pytest review/test_diary_smoke.py` successfully completed all 37 tests (including the new `test_bernie_dev_review_fixture_route`).
 - Remaining risks:
+  - Query parameter structure updates in the backend API could theoretically require updates to the UI routing. However, this is minimized by strict route-interception unit tests that verify dev fixture responses.

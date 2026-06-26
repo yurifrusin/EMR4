@@ -2177,12 +2177,15 @@ async function initBernieReview() {
     return;
   }
 
+  const isDevFixture = devReviewParam === "true" &&
+    (reviewParam === "blocked" || reviewParam === "candidate_selection_required" || reviewParam === "confirmation_ready");
+
   if (reviewParam === "live") {
     if (devReviewParam !== "true") {
       return;
     }
   } else {
-    if (!isSmoke) {
+    if (!isSmoke && !isDevFixture) {
       return;
     }
   }
@@ -2193,72 +2196,94 @@ async function initBernieReview() {
   }
 
   let payload = null;
-  if (reviewParam === "blocked") {
-    payload = mockBernieReviewBlocked;
-  } else if (reviewParam === "candidate_selection_required") {
-    payload = mockBernieReviewCandidateSelection;
-  } else if (reviewParam === "confirmation_ready") {
-    payload = mockBernieReviewConfirmationReady;
-  } else if (reviewParam === "live") {
+
+  if (isDevFixture) {
     try {
-      const practitionerId = urlParams.get("practitioner_id") || "prac-1";
-      const patientId = urlParams.get("patient_id") || "smoke-pat-1";
-      const referenceDate = urlParams.get("reference_date") || "2026-06-27";
-      const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
-
-      const body = {
-        reference_date: referenceDate,
-        command: {
-          practitioner_id: practitionerId,
-          date_from: "today",
-          duration_minutes: "15"
-        }
-      };
-
-      if (selectedIndex !== null && !isNaN(selectedIndex)) {
-        body.selected_candidate_index = selectedIndex;
-        body.patient_id = patientId;
-        body.reason = "Follow-up";
-      }
-
-      const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
-        method: "POST",
-        body: JSON.stringify(body)
-      });
-
+      const res = await apiFetch(`/appointments/dev/bernie-review-fixtures?state=${reviewParam}`);
       if (res.ok) {
         const data = await res.json();
-        payload = data.staff_review;
+        if (data && data[reviewParam]) {
+          payload = data[reviewParam].staff_review;
+        } else {
+          console.error("Invalid response format from /bernie-review-fixtures:", data);
+        }
       } else {
         const errText = await res.text();
-        console.error("Bernie live review error", res.status, errText);
+        console.error("Failed to fetch Bernie dev review fixture:", res.status, errText);
+      }
+    } catch (e) {
+      console.error("Error fetching Bernie dev review fixture:", e);
+    }
+  }
+
+  if (!payload) {
+    if (reviewParam === "blocked") {
+      payload = mockBernieReviewBlocked;
+    } else if (reviewParam === "candidate_selection_required") {
+      payload = mockBernieReviewCandidateSelection;
+    } else if (reviewParam === "confirmation_ready") {
+      payload = mockBernieReviewConfirmationReady;
+    } else if (reviewParam === "live") {
+      try {
+        const practitionerId = urlParams.get("practitioner_id") || "prac-1";
+        const patientId = urlParams.get("patient_id") || "smoke-pat-1";
+        const referenceDate = urlParams.get("reference_date") || "2026-06-27";
+        const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
+
+        const body = {
+          reference_date: referenceDate,
+          command: {
+            practitioner_id: practitionerId,
+            date_from: "today",
+            duration_minutes: "15"
+          }
+        };
+
+        if (selectedIndex !== null && !isNaN(selectedIndex)) {
+          body.selected_candidate_index = selectedIndex;
+          body.patient_id = patientId;
+          body.reason = "Follow-up";
+        }
+
+        const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
+          method: "POST",
+          body: JSON.stringify(body)
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          payload = data.staff_review;
+        } else {
+          const errText = await res.text();
+          console.error("Bernie live review error", res.status, errText);
+          payload = {
+            status: "blocked",
+            confirmation_ready: false,
+            selected_slot: null,
+            candidate_slots: [],
+            warning_summary: `Error response from backend: ${res.status}`,
+            evidence_summary: "Live backend review failed.",
+            confirm_payload: null,
+            blocks: [
+              { code: "live_error", message: `HTTP status ${res.status}` }
+            ]
+          };
+        }
+      } catch (e) {
+        console.error("Failed to fetch live Bernie review", e);
         payload = {
           status: "blocked",
           confirmation_ready: false,
           selected_slot: null,
           candidate_slots: [],
-          warning_summary: `Error response from backend: ${res.status}`,
+          warning_summary: "Network error fetching live review.",
           evidence_summary: "Live backend review failed.",
           confirm_payload: null,
           blocks: [
-            { code: "live_error", message: `HTTP status ${res.status}` }
+            { code: "network_error", message: e.message }
           ]
         };
       }
-    } catch (e) {
-      console.error("Failed to fetch live Bernie review", e);
-      payload = {
-        status: "blocked",
-        confirmation_ready: false,
-        selected_slot: null,
-        candidate_slots: [],
-        warning_summary: "Network error fetching live review.",
-        evidence_summary: "Live backend review failed.",
-        confirm_payload: null,
-        blocks: [
-          { code: "network_error", message: e.message }
-        ]
-      };
     }
   }
 
@@ -2502,6 +2527,8 @@ Office.onReady(() => {
   const reviewParam = urlParams.get("bernie_review");
   const devReviewParam = urlParams.get("bernie_dev_review");
   const hasLiveDevReview = reviewParam === "live" && devReviewParam === "true";
+  const isDevFixture = devReviewParam === "true" &&
+    (reviewParam === "blocked" || reviewParam === "candidate_selection_required" || reviewParam === "confirmation_ready");
 
   const btnDevLaunch = document.getElementById("btn-bernie-dev-launch");
   if (btnDevLaunch) {
@@ -2517,8 +2544,8 @@ Office.onReady(() => {
     }
   }
 
-  if (token || isSmoke || hasLiveDevReview) { loadDiary(); scheduleRefresh(); }
-  if (isSmoke || hasLiveDevReview) { initBernieReview(); }
+  if (token || isSmoke || hasLiveDevReview || isDevFixture) { loadDiary(); scheduleRefresh(); }
+  if (isSmoke || hasLiveDevReview || isDevFixture) { initBernieReview(); }
 });
 
 // ─── BOOKING MODAL LOGIC ───────────────────────────────────

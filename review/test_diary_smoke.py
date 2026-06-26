@@ -1224,3 +1224,119 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
         diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_dev_review_fixture_route(diary_page):
+    import urllib.parse
+    import json
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    dev_fixtures_requests = []
+    confirm_payloads = []
+
+    def handle_dev_fixtures(route):
+        url = route.request.url
+        dev_fixtures_requests.append(url)
+        parsed_url = urllib.parse.urlparse(url)
+        params = urllib.parse.parse_qs(parsed_url.query)
+        state = params.get("state", [None])[0]
+
+        fixtures = {
+            "blocked": _bernie_live_blocked_response(),
+            "candidate_selection_required": _bernie_live_candidate_response(),
+            "confirmation_ready": _bernie_live_confirmation_response()
+        }
+
+        if state in fixtures:
+            body_dict = {state: fixtures[state]}
+        else:
+            body_dict = fixtures
+
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(body_dict)
+        )
+
+    diary_page.route("**/api/v1/appointments/dev/bernie-review-fixtures*", handle_dev_fixtures)
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/create/confirm-bernie",
+        lambda route: (
+            confirm_payloads.append(json.loads(route.request.post_data)),
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        )
+    )
+
+    try:
+        # 1. Proves default mode makes no calls
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_load_state("domcontentloaded")
+        assert len(dev_fixtures_requests) == 0
+
+        # 2. Proves dev flag without bernie_review makes no calls
+        diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true")
+        diary_page.wait_for_load_state("domcontentloaded")
+        assert len(dev_fixtures_requests) == 0
+
+        # 3. Proves offline smoke without dev flag makes no calls
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=blocked")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        assert len(dev_fixtures_requests) == 0
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        assert status.text_content().strip() == "blocked"
+
+        # 4. Proves dev-review = blocked fetches and renders
+        diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&bernie_review=blocked")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        assert len(dev_fixtures_requests) == 1
+        assert "state=blocked" in dev_fixtures_requests[-1]
+
+        headline = diary_page.locator("[data-testid='bernie-review-headline']")
+        assert headline.text_content().strip() == "Booking Blocked"
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_id").count() == 1
+
+        # 5. Proves dev-review = candidate_selection_required fetches and renders
+        diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&bernie_review=candidate_selection_required")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        assert len(dev_fixtures_requests) == 2
+        assert "state=candidate_selection_required" in dev_fixtures_requests[-1]
+
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        assert status.text_content().strip() == "candidate selection required"
+
+        # 6. Proves dev-review = confirmation_ready fetches, renders and can confirm (route-intercepted)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_dev_review=true&bernie_review=confirmation_ready&bernie_confirm_adapter=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        assert len(dev_fixtures_requests) == 3
+        assert "state=confirmation_ready" in dev_fixtures_requests[-1]
+
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        assert status.text_content().strip() == "confirmation ready"
+
+        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        assert checkbox.is_visible()
+        assert checkbox.is_checked() is False
+        assert confirm_btn.is_visible()
+        assert confirm_btn.is_disabled()
+
+        try:
+            confirm_btn.click(timeout=1000, force=True)
+        except Exception:
+            pass
+        assert len(confirm_payloads) == 0
+
+        checkbox.check()
+        assert confirm_btn.is_disabled() is False
+        confirm_btn.click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
+        assert len(confirm_payloads) == 1
+        assert confirm_payloads[0]["confirmed"] is True
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/dev/bernie-review-fixtures*")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
