@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 31: AI Provider Boundary and Deterministic Diary Review Harness |
 | Integrated through | Sprint 31 backend AI service facade and diary cancelled-flow review harness hardening |
-| Status | Integrated locally, verified, and pending push/audit/deploy observation |
+| Status | Integrated, pushed, mirrored, audited, and deployed v99 observed |
 | Last updated | 2026-06-26 |
 
 ## What Changed

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 31 - AI provider boundary + deterministic review-harness hardening integrated locally; closeout in progress |
-| **Next recommended work** | Push/audit Sprint 31, then choose the next programme slice only if no Yuri-only review remains |
+| **Current active track** | Sprint 31 - AI provider boundary + deterministic review-harness hardening integrated, pushed, mirrored, audited, and deployed |
+| **Next recommended work** | Continue the current programme with the next appointment/diary operational slice, using parallel CLI implementation release after plan approval |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
