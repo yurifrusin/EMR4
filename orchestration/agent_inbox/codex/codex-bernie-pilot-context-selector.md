@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-pilot-context-selector` |
-| Status | queued |
+| Status | submitted |
 | Created | 313e363 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-pilot-context-selector --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/plan-codex-codex-bernie-pilot-context-selector.md`; this source packet status/completion notes only.
+- Verification run: Plan gate only; no production code or review harness changes made. Intake command `python scripts\agent_worktrees.py handin --agent codex` succeeded from `C:\Users\YuriFrusin\Documents\EMR4` on branch `master`, then worker branch `codex/bernie-pilot-context-selector` was created. Plan command `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-pilot-context-selector --summary "Sprint 62 plan: Bernie pilot explicit context selector" ...` succeeded on `codex/bernie-pilot-context-selector`. `git diff --check` passed with the existing CRLF normalization warning for this packet.
+- Remaining risks: Implementation still needs Ariadne approval with `complete sprint task`; ordinary-mode context validation must avoid smoke/default fallback without blocking future legitimate IDs, and route-intercepted tests must prove zero real writes.
