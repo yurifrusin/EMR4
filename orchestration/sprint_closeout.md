@@ -8,6 +8,65 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 36: Diary Audit History Keyboard Accessibility |
+| Integrated through | Sprint 36 audit-history toggle keyboard and ARIA semantics |
+| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Last updated | 2026-06-26 |
+
+## What Changed
+
+- Added `role="button"`, `tabindex="0"`, `aria-controls="booking-audit-content"`, and `aria-expanded="false"` to the booking audit-history header.
+- Updated the audit-history click handler to keep `aria-expanded` synchronized with the collapsed/expanded state.
+- Added keyboard support for Enter and Space on the audit-history header, with Space default scrolling prevented.
+- Reset `aria-expanded` to `false` whenever the booking edit modal opens.
+- Added deterministic diary smoke assertions for role, tabindex, `aria-controls`, `aria-expanded`, Enter toggle, Space toggle, click toggle, and reset-on-reopen behaviour.
+- Bumped the diary JS cache-bust to `diary.js?v=102` in `docs/diary/diary.html`.
+- No backend code, appointment mutation/proposal flow, taskpane, Command Centre, billing, SMS, AI provider, resource administration, cancelled appointment review, or non-audit-history controls were changed.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified the keyboard behaviour through deterministic Playwright smoke tests and did not need visual/Computer Use review.
+
+Optional confidence check only, if Yuri happens to be in the live diary after deployment:
+
+1. Setup: hard refresh the live diary and confirm `diary.js?v=102` and `diary.css?v=98` are loaded.
+2. Exact UI path: open an existing appointment for editing and tab to the `Audit History` header.
+3. Expected keyboard behaviour: pressing Enter expands the section, pressing Space collapses it, and clicking still works normally.
+4. Expected accessibility state: the section starts collapsed and `aria-expanded` tracks the visible state, though this is mainly for assistive technology and automated checks.
+5. Expected safety: no appointment status, waiting-area state, cancellation state, booking details, or proposal confirmation changes occur from toggling audit history.
+6. Suspicious signs: focus cannot reach the audit header, Enter/Space do nothing, the page scrolls unexpectedly on Space, visible layout changes, audit rows disappear, console errors appear, or mutation controls appear in audit history.
+7. Skippable parts: do not retest backend audit actor fields, test hooks, taskpane, Command Centre, patient files, resource administration, drag/resize, recurrence, SMS, billing, AI provider facade, security workflows, or cancelled-appointment review for Sprint 36.
+8. Evidence to report: only report a screenshot/console error if keyboard toggling or visible layout regressed.
+
+## Not Required Before Moving On
+
+- No manual live UI review is required; the deterministic diary smoke passed keyboard and ARIA assertions.
+- No database migration, data repair, Word taskpane, Command Centre, GCP/Gemini, Office dialog, resource admin, billing, SMS, or security-console action is required.
+
+## Known Follow-Up
+
+- Continue adding keyboard/ARIA assertions opportunistically when a visible control is touched.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert still appears on GitHub pushes and remains outside Sprint 36.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found the Sprint 36 Antigravity plan and review packets.
+- Frontend static check: `node --check docs\diary\diary.js` -> passed.
+- Deterministic diary review: `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 17 passed.
+- Frontend asset version check: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; `diary.js` moved to `v=102` while live deployed HTML still served `v=101` before push.
+- Diff hygiene: `git diff --check` -> passed.
+
+## Recommended Next Direction
+
+After Sprint 36 is pushed, mirrored, and audited, pause Antigravity-only polishing unless Yuri wants more; prefer waiting for Claude's headless limit to recover before backend-heavy audit/proposal work.
+
+
+## Previous Closeout - Sprint 35
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 35: Diary Audit History Test-Hook Hardening |
 | Integrated through | Sprint 35 stable diary audit-history test hooks and deterministic smoke assertions |
 | Status | Integrated locally, verified, and pending push/mirror/audit |
@@ -59,7 +118,6 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 ## Recommended Next Direction
 
 Sprint 36 has been dispatched as another small Programme 2D slice while Claude's headless limit recovers: keyboard/ARIA semantics for the read-only audit-history toggle.
-
 
 ## Previous Closeout - Sprint 34
 

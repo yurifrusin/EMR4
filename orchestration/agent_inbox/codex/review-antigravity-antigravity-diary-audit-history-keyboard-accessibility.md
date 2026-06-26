@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-diary-audit-history-keyboard-accessibility` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -28,5 +28,5 @@ antigravity-diary-audit-history-keyboard-accessibility ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated; diff was limited to audit-history keyboard/ARIA semantics, smoke assertions, and asset cache-bust.
+- Follow-up required: None for Sprint 36.
