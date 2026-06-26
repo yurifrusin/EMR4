@@ -2439,3 +2439,37 @@ html, body {
   text-align: center;
   margin-top: 8px;
 }
+
+/* ─── BERNIE STAFF PILOT GATE STYLING (Sprint 60) ─── */
+#btn-bernie-pilot-launch {
+  background: #6a1b9a; /* deep purple for AI/Bernie */
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+#btn-bernie-pilot-launch:hover {
+  background: #8e24aa;
+}
+#btn-bernie-pilot-launch.hidden {
+  display: none !important;
+}
+
+.bernie-pilot-banner {
+  background-color: #fffbeb;
+  border: 1px solid #d97706;
+  color: #b45309;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

@@ -17,8 +17,16 @@ Sprint 60 dispatched: Bernie staff pilot eligibility UI gate
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [docs/diary/diary.html](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.html)
+  - [docs/diary/diary.css](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.css)
+  - [docs/diary/diary.js](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/docs/diary/diary.js)
+  - [review/test_diary_smoke.py](file:///C:/Users/YuriFrusin/Documents/EMR4-worktrees/antigravity/review/test_diary_smoke.py)
 - Verification run:
-- Remaining risks:
+  - `node --check docs/diary/diary.js` -> passed.
+  - `python scripts/check_frontend_versions.py` -> passed.
+  - `.venv\Scripts\pytest review/test_diary_smoke.py -q` -> 40 passed.
+  - `git diff --check` -> passed.
+- Remaining risks: None. The implementation consumes the backend's pilot eligibility gate cleanly, shows a supervised pilot mode banner, enforces explicit approval, and has comprehensive tests.
 
 ## Required Review Steps
 
