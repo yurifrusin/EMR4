@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-wrapper-confirmation-review-harness` |
 | Branch | `codex/bernie-wrapper-confirmation-review-harness` |
-| Status | queued |
+| Status | submitted |
 | Created | 5a2be9a |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-wrapper-confirmation-review-harness --summary "Short plan summary"` |
@@ -92,6 +92,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-wrapper-confirmation-review-harness.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-wrapper-confirmation-review-harness.md`
+- Verification run: `python scripts\agent_worktrees.py handin --agent codex`; read `AGENTS.md` and `orchestration/parallel_workstreams.md`; `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-wrapper-confirmation-review-harness ...`; plan packet metadata checked manually. No production tests run at plan gate.
+- Remaining risks: Implementation remains gated until Ariadne/Codex sends `complete sprint task`; no production code or tests changed yet.
