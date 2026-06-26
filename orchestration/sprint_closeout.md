@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 57: Bernie Dev Fixture State Selector |
 | Integrated through | Dev-only diary toolbar selector for deterministic Bernie review fixture states |
-| Status | Integrated locally and verified; pending push/mirror/audit |
+| Status | Integrated, verified, pushed, mirrored, deployed, and audited |
 | Last updated | 2026-06-27 |
 
 ## What Changed
