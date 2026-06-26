@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-dev-review-selector-help` |
 | Source Task | `codex-bernie-dev-review-selector-help` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne inspected the diff, reran deterministic UI verification, and confirmed the help affordance is dev-gated, static, and non-mutating.
+- Follow-up required: None for this sprint.

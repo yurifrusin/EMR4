@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-dev-review-selector-help` |
 | Source Task | `codex-bernie-dev-review-selector-help` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 06:11 +1000 |
 | Source HEAD | `3a02b3f` |
 
@@ -44,6 +44,6 @@ The current selector may already share layout with other dev controls, so the im
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted and implementation released.
+- Required changes before implementation: None.
+- Approved to proceed: yes
