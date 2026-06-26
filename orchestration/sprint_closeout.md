@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 33: Appointment Proposal Audit/History Foundation |
 | Integrated through | Sprint 33 backend confirmed-mutation audit contract and diary read-only audit-history review UI |
-| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-26 |
 
 ## What Changed
@@ -326,7 +326,7 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 |---|---|
 | Batch | Sprint 27: Visible Diary Mouse Drag/Resize Affordances |
 | Integrated through | Sprint 27 backend mouse-equivalent update conflict tests and diary mouse drag/resize proposal flow |
-| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-25 |
 
 ## What Changed

@@ -134,7 +134,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; closeout/push/audit pending |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
 | Integration Gate | Claude and Antigravity submissions reviewed, integrated, and hotfixed by Ariadne |
 | Product Goal | Give high-risk appointment proposal decisions a deterministic audit/history foundation so future supervisors and Bernie tooling can review what was confirmed without adding direct model-to-database autonomy |
@@ -309,7 +309,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; verification complete; pending push/audit/deploy observation |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Launch Gate | Closed; Claude and Antigravity plans were reviewed and implementation was released |
 | Integration Gate | Closed; implementation submissions reviewed, integrated, and hotfixed by Ariadne |
 | Product Goal | Give staff discoverable mouse affordances for moving and resizing appointments while preserving proposal-gated safety semantics |
@@ -560,7 +560,7 @@ at medium/high once the plan is stable, then think hard again before integration
 | In Scope | Plan review, integration sequencing, bounded repairs, closeout/user-test summary, and next-sprint recommendation |
 | Out of Scope | Acting as proof of a separate Codex worker submission or bypassing worker plan gates |
 | Verification | `poll --fetch`, plan/review inspection, backend/frontend checks, browser/Chrome checks if runtime UI changes land, `git diff --check` |
-| Status | Integrated locally; closeout/push/audit pending |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 
 ## Sprint 22: Development Tooling Optimisation
 
