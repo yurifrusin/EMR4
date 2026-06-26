@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-appointment-audit-actor-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 18:03 +1000 |
 | Source HEAD | `38067fb` |
 
@@ -44,6 +44,6 @@ Display-format choice (email local-part fallback) may need Codex preference adju
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; Ariadne implemented the bounded backend read-path directly because Claude hit a 429/session limit after plan submission.
+- Required changes before implementation: None.
+- Approved to proceed: yes; integrated by Ariadne.

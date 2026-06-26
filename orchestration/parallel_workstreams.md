@@ -134,9 +134,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated locally; closeout verification passed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending worker plans and Ariadne review |
+| Integration Gate | Passed; pending final push/mirror/audit |
 | Product Goal | Make confirmed appointment audit history understandable to staff by replacing raw actor/action/status details with safe, readable metadata while preserving proposal-first and read-only boundaries |
 
 ### Workstream S34-A - Backend Audit Actor Contract
@@ -150,7 +150,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval appointment audit endpoint/schema/router tests for a non-PHI staff actor display field, preserving existing audit writes and practice scoping |
 | Out of Scope | Diary UI, broad user-directory API, PHI in audit rows, warning-code persistence, supervisor dashboard, Bernie execution, taskpane, Command Centre, billing, SMS |
 | Verification | Plan packet first; after approval py_compile touched backend modules, focused audit actor tests plus existing audit tests, adjacent mutation tests if touched, and `git diff --check` |
-| Status | Plan gate pending |
+| Status | Integrated by Ariadne from accepted Claude plan after Claude 429/session limit |
 
 ### Workstream S34-B - Diary Audit Readability UI
 
@@ -163,7 +163,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke fixtures, and deterministic review checks for audit readability if useful |
 | Out of Scope | Backend implementation, write actions from audit history, unrelated booking modal redesign, taskpane, Command Centre, AI provider code, restore/reactivation, billing, SMS, Bernie execution |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary review smoke, frontend version check if assets change, `git diff --check`, targeted browser checks only if structural checks cannot verify behaviour |
-| Status | Plan gate pending |
+| Status | Integrated after Antigravity review packet and Ariadne verification |
 
 ## Sprint 33: Appointment Proposal Audit/History Foundation
 

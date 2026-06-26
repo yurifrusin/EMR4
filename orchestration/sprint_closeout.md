@@ -8,6 +8,74 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 34: Appointment Audit History Readability |
+| Integrated through | Sprint 34 backend audit actor-display contract and diary readable audit-history UI |
+| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Last updated | 2026-06-26 |
+
+## What Changed
+
+- Added read-time `confirmed_by_display` and `confirmed_by_role` fields to `AppointmentAuditLogOut`.
+- Updated `GET /api/v1/appointments/{appointment_id}/audit` to batch-load confirming users with practitioners, preserve practice scoping, and derive a safe staff display label without adding a migration.
+- Actor display falls back from practitioner first/last name to email local-part to `Unknown`; `confirmed_by_user_id` remains in the response for stable machine identity.
+- Added audit contract tests proving receptionist fallback (`rec`), clinician practitioner display (`Alex Shera`), actor roles, auth, cross-practice denial, ordering, and empty history.
+- Claude's accepted backend plan was recovered by Ariadne because Claude hit a session-limit/429 after committing the plan packet; no production code came from Claude after the plan gate.
+- Diary audit history now renders friendly action labels (`Created`, `Updated`, `Status Changed`, `Cancelled`) and friendly status text such as `In Consult` and `Did Not Attend (DNA)`.
+- Diary audit actor rendering now uses backend display names when present and restrained UUID fallback text such as `Staff (11111111)` when only a raw UUID is available.
+- Diary audit transition copy now reads as `Changed from X to Y` and avoids duplicated `by` wording.
+- Deterministic diary smoke checks now assert readable audit names, status transitions, and UUID fallback copy.
+- No appointment mutation, proposal safety, taskpane, Command Centre, Gemini/AI provider, billing, SMS, restore/reactivation, or supervisor-dashboard work was included.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified the backend audit actor contract, frontend syntax/assets, and deterministic diary Playwright smoke for the readable audit-history section. The change is read-only and does not add a new mutation workflow.
+
+Optional confidence check only, if Yuri happens to be in the live diary after deployment:
+
+1. Setup: hard refresh the live diary and confirm `diary.js?v=100` and `diary.css?v=98` are loaded.
+2. Exact UI path: sign in as a dev Admin or normal dev user, open the Diary, and open an existing appointment for editing.
+3. Expected collapsed state: the booking modal shows `Audit History`, collapsed by default, below the booking form fields.
+4. Expected expansion: click `Audit History`; rows should use readable action/status text and staff labels, or show a clear empty/unavailable/error fallback.
+5. Expected actor copy: if backend actor metadata exists, staff names/roles should display instead of raw UUIDs; if only a UUID is available, it should be shortened as `Staff (<first 8 chars>)`.
+6. Expected create behaviour: opening an empty slot for a new booking hides `Audit History`.
+7. Expected safety: expanding audit history must not change appointment status, waiting-area state, cancellation state, booking details, or proposal confirmation state.
+8. Suspicious signs: raw `undefined`, full raw UUIDs in normal rows, confusing action labels, duplicated `by by`, audit history visible on create, edit modal crashes, new mutation controls in audit history, existing save/cancel/delete flow changes, or console errors.
+9. Skippable parts: do not retest taskpane, Command Centre, patient file generation, resource administration, drag/resize, recurrence, SMS, billing, AI provider facade, security workflows, or cancelled-appointment review for Sprint 34.
+10. Evidence to report: screenshot or short note showing the expanded audit section, readable row text/fallback, loaded asset versions, and any console error or unexpected mutation.
+
+## Not Required Before Moving On
+
+- No manual live UI review is required; the deterministic diary smoke opens the edit modal, expands audit history, and checks readable audit items.
+- No database migration or data repair is required; actor display is derived at read time.
+- No Word taskpane, Command Centre, GCP/Gemini, Office dialog, resource admin, recurrence, billing, SMS, or security-console action is required for this sprint.
+
+## Known Follow-Up
+
+- Add warning-code or warning-summary persistence later if supervisor review needs proof of warnings confirmed by staff.
+- Consider actor display on future proposal-context previews if those become user-facing.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert still appears on GitHub pushes and remains outside Sprint 34.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 34 plan packets and Antigravity's implementation review packet.
+- Backend compile check: `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_appointment_audit.py` -> passed.
+- Focused audit contract: `.\.venv\Scripts\python.exe -m pytest tests\test_appointment_audit.py -q --tb=short -p no:randomly` -> 15 passed.
+- Frontend static check: `node --check docs\diary\diary.js` -> passed.
+- Deterministic diary review: `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 17 passed.
+- Frontend asset version check: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed.
+- Diff hygiene: `git diff --check` -> passed.
+
+## Recommended Next Direction
+
+Continue with the next Programme 2D diary safety/readability slice after Sprint 34 is pushed, mirrored, and audited. Prefer a small deterministic-review-friendly sprint while Claude's headless session limit recovers.
+
+
+## Previous Closeout - Sprint 33
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 33: Appointment Proposal Audit/History Foundation |
 | Integrated through | Sprint 33 backend confirmed-mutation audit contract and diary read-only audit-history review UI |
 | Status | Integrated, pushed, mirrored, audited, and closed |
@@ -74,7 +142,6 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 ## Recommended Next Direction
 
 Sprint 34 has been dispatched as the next Programme 2D readiness slice: appointment audit history readability, focused on safe backend actor-display metadata and diary read-only audit copy. Workers are plan-gated.
-
 
 ## Previous Closeout - Sprint 32
 

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 34 - appointment audit history readability dispatched; plan gate pending |
-| **Next recommended work** | Poll Sprint 34 plan packets, review together, then release implementation only after plans are accepted |
+| **Current active track** | Sprint 34 - appointment audit history readability integrated locally; final push/mirror/audit pending |
+| **Next recommended work** | Push and audit Sprint 34 closeout, then continue with a small Programme 2D slice if no user input is needed |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -479,7 +479,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Current Sprint 31 AI provider boundary + deterministic diary review harness closeout commit |
+| **Latest integration commit** | Current Sprint 34 appointment audit history readability closeout commit |
 
 ### Tag map (all tags pushed to remote)
 

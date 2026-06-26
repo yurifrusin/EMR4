@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 8e36c52 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-appointment-audit-actor-contract --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: app/schemas/appointments.py, app/routers/appointments.py, tests/test_appointment_audit.py
+- Verification run: Ariadne recovered implementation from the accepted plan after Claude hit a 429/session limit; py_compile and tests/test_appointment_audit.py passed.
+- Remaining risks: None identified; actor display is derived read-time only and preserves confirmed_by_user_id.
