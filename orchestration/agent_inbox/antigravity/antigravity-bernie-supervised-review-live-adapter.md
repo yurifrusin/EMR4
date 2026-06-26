@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | 317173c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-bernie-supervised-review-live-adapter --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.html, review/test_diary_smoke.py
+- Verification run: Executed `node --check docs/diary/diary.js`, verified frontend version asset integrity with `check_frontend_versions.py`, checked for formatting warnings with `git diff --check`, and successfully ran all 26 Playwright smoke tests via `pytest` including three new deterministic live adapter tests intercepting `/api/v1/appointments/proposals/bernie/supervised-booking` and proving no confirm-Bernie POST write calls exist.
+- Remaining risks: None. The adapter is gated by `bernie_review=live` under `smoke=true` and is entirely non-mutating in this sprint.

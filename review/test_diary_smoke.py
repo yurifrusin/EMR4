@@ -292,3 +292,348 @@ def test_bernie_review_confirmation_ready(diary_page):
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_review_live_blocked(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "intent": "bernie_supervised_booking",
+        "result": "blocked",
+        "safe": False,
+        "requires_confirmation": False,
+        "autonomy_tier": "blocked",
+        "summary": "Practitioner ID is required.",
+        "normalization": {
+            "safe": False,
+            "constraint": None,
+            "warnings": [],
+            "blocks": [
+                { "code": "missing_practitioner_id", "severity": "blocked", "message": "Practitioner ID is required." }
+            ],
+            "summary": "Normalization failed."
+        },
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Practitioner ID is required.",
+            "status": "blocked",
+            "staff_action_required": "Review blocked issues before retrying; no booking can be confirmed from this payload.",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [],
+            "warning_summary": "0 warning(s), 1 blocked issue(s).",
+            "evidence_summary": "Blocked review payload; no confirm evidence is available.",
+            "warnings": [],
+            "blocks": [
+                { "code": "missing_practitioner_id", "severity": "blocked", "message": "Practitioner ID is required." }
+            ],
+            "confirm_endpoint": None,
+            "confirm_payload": None,
+            "confirm_evidence": []
+        },
+        "warnings": [],
+        "blocks": [
+            { "code": "missing_practitioner_id", "severity": "blocked", "message": "Practitioner ID is required." }
+        ]
+    }
+
+    # Intercept route
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&practitioner_id=prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        # Verify status is rendered
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        assert status.text_content().strip() == "blocked"
+
+        # Verify headline
+        headline = diary_page.locator("[data-testid='bernie-review-headline']")
+        assert headline.text_content().strip() == "Booking Blocked"
+
+        # Verify action description
+        action = diary_page.locator("[data-testid='bernie-review-action']")
+        assert "Blocked review payload" in action.text_content()
+
+        # Verify block issues list
+        assert diary_page.locator("[data-testid='bernie-review-blocks-list']").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_id").count() == 1
+
+        # Verify confirmation sections/elements are hidden
+        assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+    finally:
+        # Clean up route
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_review_live_candidate_selection(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "intent": "bernie_supervised_booking",
+        "result": "candidate_selection_required",
+        "safe": True,
+        "requires_confirmation": False,
+        "autonomy_tier": "execute_with_report",
+        "summary": "Candidate selection required.",
+        "normalization": {
+            "safe": True,
+            "constraint": {
+                "practitioner_id": "prac-1",
+                "date_from": "2026-06-27",
+                "duration_minutes": 15
+            },
+            "warnings": [],
+            "blocks": [],
+            "summary": "Normalization success."
+        },
+        "search_proposal": {
+            "intent": "search_slots",
+            "candidates": [
+                {
+                    "appointment_date": "2026-06-27",
+                    "start_time_local": "09:00:00",
+                    "duration_minutes": 15,
+                    "warnings": []
+                }
+            ]
+        },
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Candidate selection required.",
+            "status": "candidate_selection_required",
+            "staff_action_required": "Select one candidate slot before preparing confirmation evidence.",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [
+                {
+                    "appointment_date": "2026-06-27",
+                    "start_time_local": "09:00:00",
+                    "duration_minutes": 15,
+                    "warnings": []
+                }
+            ],
+            "warning_summary": "No warnings or blocked issues.",
+            "evidence_summary": "Candidate slot summaries are review-only until staff selects one slot.",
+            "confirm_endpoint": None,
+            "confirm_payload": None,
+            "confirm_evidence": []
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    # Intercept route
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&practitioner_id=prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        # Verify status is rendered
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        assert status.text_content().strip() == "candidate selection required"
+
+        # Verify headline
+        headline = diary_page.locator("[data-testid='bernie-review-headline']")
+        assert headline.text_content().strip() == "Candidate Selection Required"
+
+        # Verify action description
+        action = diary_page.locator("[data-testid='bernie-review-action']")
+        assert "Candidate slot summaries are review-only" in action.text_content()
+
+        # Verify candidates list
+        assert diary_page.locator("[data-testid='bernie-review-candidates-list']").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-candidate-item']").count() == 1
+        assert "09:00:00" in diary_page.locator("[data-testid='bernie-review-candidate-item']").text_content()
+
+        # Verify confirmation/selected sections/elements are hidden
+        assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+    finally:
+        # Clean up route
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_review_live_confirmation_ready(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "intent": "bernie_supervised_booking",
+        "result": "confirmation_ready",
+        "safe": True,
+        "requires_confirmation": True,
+        "autonomy_tier": "proposal",
+        "summary": "Confirmation ready.",
+        "normalization": {
+            "safe": True,
+            "constraint": {
+                "practitioner_id": "prac-1",
+                "date_from": "2026-06-27",
+                "duration_minutes": 15
+            },
+            "warnings": [],
+            "blocks": [],
+            "summary": "Normalization success."
+        },
+        "search_proposal": {
+            "intent": "search_slots",
+            "candidates": []
+        },
+        "selection_proposal": {
+            "intent": "select_slot_for_create_proposal",
+            "safe": True,
+            "requires_confirmation": True,
+            "autonomy_tier": "proposal",
+            "selected_candidate": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "create_proposal": {
+                "intent": "create_appointment",
+                "command": {
+                    "patient_id": "smoke-pat-1",
+                    "practitioner_id": "prac-1",
+                    "appointment_date": "2026-06-27",
+                    "start_time_local": "09:00:00",
+                    "reason": "Follow-up"
+                }
+            }
+        },
+        "staff_review": {
+            "headline": "Proposal Confirmation Ready",
+            "status": "confirmation_ready",
+            "staff_action_required": "Review the selected slot and submit the confirm payload only after explicit staff confirmation.",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings or blocked issues.",
+            "evidence_summary": "Confirm payload carries slot-selection and create-proposal evidence for explicit staff approval.",
+            "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+            "confirm_payload": {
+                "confirmed": False,
+                "selection_proposal": {
+                    "intent": "select_slot_for_create_proposal",
+                    "safe": True,
+                    "create_proposal": {
+                        "intent": "create_appointment",
+                        "command": {
+                            "patient_id": "smoke-pat-1",
+                            "practitioner_id": "prac-1",
+                            "appointment_date": "2026-06-27",
+                            "start_time_local": "09:00:00",
+                            "reason": "Follow-up"
+                        }
+                    }
+                }
+            },
+            "confirm_evidence": [
+                "bernie_confirm_create_proposal",
+                "source_slot_selection_proposal",
+                "source_create_proposal"
+            ]
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    # Intercept route
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    # Fail on confirm-bernie write attempts
+    def fail_on_confirm(route):
+        raise AssertionError("Write path to confirm-bernie must not be called")
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/create/confirm-bernie",
+        fail_on_confirm
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&practitioner_id=prac-1&selected_candidate_index=0")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        # Verify status is rendered
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        assert status.text_content().strip() == "confirmation ready"
+
+        # Verify headline
+        headline = diary_page.locator("[data-testid='bernie-review-headline']")
+        assert headline.text_content().strip() == "Proposal Confirmation Ready"
+
+        # Verify selected slot
+        assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 1
+        assert "09:00:00" in diary_page.locator("[data-testid='bernie-review-selected-slot']").text_content()
+
+        # Verify approval elements
+        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
+
+        assert checkbox.is_visible()
+        assert checkbox.is_checked() is False
+        assert confirm_btn.is_visible()
+        assert confirm_btn.is_disabled()
+        assert success_msg.is_hidden()
+
+        # Checking checkbox enables button
+        checkbox.check()
+        assert confirm_btn.is_disabled() is False
+
+        # Click confirm simulates booking
+        confirm_btn.click()
+
+        assert confirm_btn.is_disabled()
+        assert checkbox.is_disabled()
+        assert success_msg.is_visible()
+        assert "Booking proposal approved successfully" in success_msg.text_content()
+    finally:
+        # Clean up routes
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

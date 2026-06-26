@@ -2112,7 +2112,7 @@ function renderBernieReview(payload) {
   }
 }
 
-function initBernieReview() {
+async function initBernieReview() {
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = urlParams.get("smoke") === "true";
   const reviewParam = urlParams.get("bernie_review");
@@ -2133,6 +2133,67 @@ function initBernieReview() {
     payload = mockBernieReviewCandidateSelection;
   } else if (reviewParam === "confirmation_ready") {
     payload = mockBernieReviewConfirmationReady;
+  } else if (reviewParam === "live") {
+    try {
+      const practitionerId = urlParams.get("practitioner_id") || "prac-1";
+      const patientId = urlParams.get("patient_id") || "smoke-pat-1";
+      const referenceDate = urlParams.get("reference_date") || "2026-06-27";
+      const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
+
+      const body = {
+        reference_date: referenceDate,
+        command: {
+          practitioner_id: practitionerId,
+          date_from: "today",
+          duration_minutes: "15"
+        }
+      };
+
+      if (selectedIndex !== null && !isNaN(selectedIndex)) {
+        body.selected_candidate_index = selectedIndex;
+        body.patient_id = patientId;
+        body.reason = "Follow-up";
+      }
+
+      const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
+        method: "POST",
+        body: JSON.stringify(body)
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        payload = data.staff_review;
+      } else {
+        const errText = await res.text();
+        console.error("Bernie live review error", res.status, errText);
+        payload = {
+          status: "blocked",
+          confirmation_ready: false,
+          selected_slot: null,
+          candidate_slots: [],
+          warning_summary: `Error response from backend: ${res.status}`,
+          evidence_summary: "Live backend review failed.",
+          confirm_payload: null,
+          blocks: [
+            { code: "live_error", message: `HTTP status ${res.status}` }
+          ]
+        };
+      }
+    } catch (e) {
+      console.error("Failed to fetch live Bernie review", e);
+      payload = {
+        status: "blocked",
+        confirmation_ready: false,
+        selected_slot: null,
+        candidate_slots: [],
+        warning_summary: "Network error fetching live review.",
+        evidence_summary: "Live backend review failed.",
+        confirm_payload: null,
+        blocks: [
+          { code: "network_error", message: e.message }
+        ]
+      };
+    }
   }
 
   if (payload) {
