@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 37: Appointment Audit Warning Summary |
 | Integrated through | Sprint 37 backend confirmed-warning audit persistence and diary read-only warning display |
-| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-26 |
 
 ## What Changed
@@ -136,7 +136,7 @@ Pause Antigravity-only polishing unless Yuri wants more; prefer waiting for Clau
 |---|---|
 | Batch | Sprint 35: Diary Audit History Test-Hook Hardening |
 | Integrated through | Sprint 35 stable diary audit-history test hooks and deterministic smoke assertions |
-| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-26 |
 
 ## What Changed
@@ -192,7 +192,7 @@ Sprint 36 has been dispatched as another small Programme 2D slice while Claude's
 |---|---|
 | Batch | Sprint 34: Appointment Audit History Readability |
 | Integrated through | Sprint 34 backend audit actor-display contract and diary readable audit-history UI |
-| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-26 |
 
 ## What Changed

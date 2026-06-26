@@ -135,7 +135,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; verified and closing out |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
 | Integration Gate | Passed; implementation review packets polled and verified |
 | Product Goal | Persist and display bounded warning metadata for confirmed appointment proposal mutations so audit history can prove when staff confirmed warnings |
