@@ -2090,7 +2090,10 @@ function renderBernieReview(payload) {
 
     const urlParams = new URLSearchParams(window.location.search);
     const isSmoke = urlParams.get("smoke") === "true";
-    const isConfirmAdapter = isSmoke && urlParams.get("bernie_confirm_adapter") === "true";
+    const reviewParam = urlParams.get("bernie_review");
+    const devReviewParam = urlParams.get("bernie_dev_review");
+    const isConfirmAdapter = (isSmoke && urlParams.get("bernie_confirm_adapter") === "true" && (reviewParam !== "live" || devReviewParam === "true")) ||
+                             (!isSmoke && reviewParam === "live" && devReviewParam === "true");
 
     const successMsg = document.createElement("div");
     successMsg.className = "bernie-success-alert hidden";
@@ -2168,9 +2171,22 @@ async function initBernieReview() {
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = urlParams.get("smoke") === "true";
   const reviewParam = urlParams.get("bernie_review");
+  const devReviewParam = urlParams.get("bernie_dev_review");
 
-  if (!isSmoke || !reviewParam) {
+  if (!reviewParam) {
     return;
+  }
+
+  // Live review path requires bernie_dev_review=true regardless of smoke mode.
+  if (reviewParam === "live") {
+    if (devReviewParam !== "true") {
+      return;
+    }
+  } else {
+    // Non-live mock review parameters are only exposed in smoke mode.
+    if (!isSmoke) {
+      return;
+    }
   }
 
   const panel = document.getElementById("bernie-review-panel");
@@ -2485,8 +2501,12 @@ Office.onReady(() => {
 
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = urlParams.get("smoke") === "true";
-  if (token || isSmoke) { loadDiary(); scheduleRefresh(); }
-  if (isSmoke) { initBernieReview(); }
+  const reviewParam = urlParams.get("bernie_review");
+  const devReviewParam = urlParams.get("bernie_dev_review");
+  const hasLiveDevReview = reviewParam === "live" && devReviewParam === "true";
+
+  if (token || isSmoke || hasLiveDevReview) { loadDiary(); scheduleRefresh(); }
+  if (isSmoke || hasLiveDevReview) { initBernieReview(); }
 });
 
 // ─── BOOKING MODAL LOGIC ───────────────────────────────────
