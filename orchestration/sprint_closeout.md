@@ -73,10 +73,7 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 
 ## Recommended Next Direction
 
-Continue to the next Programme 2D receptionist-safety slice after push/audit,
-unless Yuri interrupts. Recommended next sprint: build on the audit foundation
-with a narrow supervisor/ops review improvement or the next appointment safety
-surface that benefits from proposal-first history.
+Sprint 34 has been dispatched as the next Programme 2D readiness slice: appointment audit history readability, focused on safe backend actor-display metadata and diary read-only audit copy. Workers are plan-gated.
 
 
 ## Previous Closeout - Sprint 32

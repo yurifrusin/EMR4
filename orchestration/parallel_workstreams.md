@@ -130,6 +130,41 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 34: Appointment Audit History Readability
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending worker plans and Ariadne review |
+| Product Goal | Make confirmed appointment audit history understandable to staff by replacing raw actor/action/status details with safe, readable metadata while preserving proposal-first and read-only boundaries |
+
+### Workstream S34-A - Backend Audit Actor Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-appointment-audit-actor-contract.md` |
+| Goal | Plan, then after approval add or prove a backend contract for safe confirmed-by actor display metadata on appointment audit rows |
+| In Scope | Plan packet first; after approval appointment audit endpoint/schema/router tests for a non-PHI staff actor display field, preserving existing audit writes and practice scoping |
+| Out of Scope | Diary UI, broad user-directory API, PHI in audit rows, warning-code persistence, supervisor dashboard, Bernie execution, taskpane, Command Centre, billing, SMS |
+| Verification | Plan packet first; after approval py_compile touched backend modules, focused audit actor tests plus existing audit tests, adjacent mutation tests if touched, and `git diff --check` |
+| Status | Plan gate pending |
+
+### Workstream S34-B - Diary Audit Readability UI
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-diary-audit-history-readability.md` |
+| Goal | Plan, then after approval polish the read-only diary audit history copy so staff see friendly actor/action/status text without new mutation affordances |
+| In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke fixtures, and deterministic review checks for audit readability if useful |
+| Out of Scope | Backend implementation, write actions from audit history, unrelated booking modal redesign, taskpane, Command Centre, AI provider code, restore/reactivation, billing, SMS, Bernie execution |
+| Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary review smoke, frontend version check if assets change, `git diff --check`, targeted browser checks only if structural checks cannot verify behaviour |
+| Status | Plan gate pending |
+
 ## Sprint 33: Appointment Proposal Audit/History Foundation
 
 | Item | Value |
