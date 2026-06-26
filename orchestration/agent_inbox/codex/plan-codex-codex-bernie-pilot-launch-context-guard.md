@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-pilot-launch-context-guard` |
 | Source Task | `codex-bernie-pilot-launch-context-guard` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 09:29 +1000 |
 | Source HEAD | `bf987c8` |
 
@@ -53,6 +53,6 @@ Risk: the current diary may not yet expose a stable real selected patient/practi
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; scope is appropriately fail-closed and limited to diary pilot launch readiness plus deterministic harness checks.
+- Required changes before implementation: None.
+- Approved to proceed: yes

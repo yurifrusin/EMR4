@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-pilot-launch-context-guard` |
 | Source Task | `codex-bernie-pilot-launch-context-guard` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated after Ariadne diff review and deterministic verification.
+- Follow-up required: A later sprint should define the real diary practitioner/patient context selection path before enabling ordinary staff pilot use beyond a fail-closed readiness message.

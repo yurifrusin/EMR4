@@ -8,49 +8,50 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 60: Bernie Staff Pilot Eligibility UI Gate |
-| Integrated through | Staff-visible Bernie pilot launch affordance gated by backend eligibility |
+| Batch | Sprint 61: Bernie Pilot Launch Context Guard |
+| Integrated through | Fail-closed staff pilot launch when real diary context is missing |
 | Status | Integrated and locally verified; push/mirror/audit pending this closeout commit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added a hidden-by-default `Bernie Pilot (Supervised)` diary header button that only appears after `/api/v1/appointments/bernie/pilot-eligibility` returns `eligible: true`.
-- Preserved the existing explicit dev/query Bernie review paths, including `bernie_dev_review=true` fixture-state tooling.
-- Added a clearly labelled supervised pilot banner when the staff pilot review panel is launched.
-- Reused the supervised booking review and confirm-Bernie flow, keeping the confirm POST behind the existing explicit staff approval checkbox.
-- Added route-intercepted Playwright/pytest coverage proving eligible pilot visibility, no confirm-Bernie POST before approval, successful intercepted confirm after approval, and existing dev/query review behavior.
-- Bumped diary asset cache busting to `diary.css?v=105` and `diary.js?v=114`.
+- Added a Bernie pilot launch context resolver in the diary frontend.
+- Ordinary staff-visible pilot mode no longer falls back to smoke/default identifiers such as `prac-1`, `smoke-pat-1`, or a hard-coded smoke date.
+- If real practitioner/patient/reference context is missing, the Bernie review panel renders a blocked/readiness message and sends no supervised-booking request.
+- Explicit smoke/dev/query harness paths remain supported for deterministic review testing.
+- Bumped diary JS cache busting to `diary.js?v=115`.
+- Added deterministic Playwright coverage proving ordinary eligible pilot launch does not POST supervised-booking with default smoke identifiers and still requires explicit approval before confirm-Bernie in valid harness paths.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required before continuing.
-Ariadne verified the new staff pilot UI gate with deterministic route-intercepted review harness checks. The live backend pilot remains default-off unless configuration allowlists a practice/user, and the test harness intercepts all supervised-booking/confirm calls so no live write is performed.
+Ariadne verified the safety behavior with route-intercepted deterministic UI checks. The current ordinary staff pilot exposure is intentionally conservative: it can show the eligible launch affordance, but without real diary context it fails closed with a readiness message rather than preparing or confirming a booking.
 
 ## Not Required Before Moving On
 
-- No manual live UI test is required; the route-intercepted harness proves ineligible/default-off absence, eligible launch visibility, pilot banner rendering, and explicit approval before confirm POST.
-- No manual live API write test is required; confirm-Bernie remains intercepted in the Sprint 60 harness and no live write is performed.
+- No manual live UI test is required; deterministic harness coverage proves the no-POST readiness behavior and existing dev/query review behavior.
+- No manual live API write test is required; confirm-Bernie remains route-intercepted in the harness and no live write is performed.
 - No backend, auth/config, database migration, GCP/Gemini, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
 
 ## Known Follow-Up
 
-- Antigravity breached the plan gate: after the second CLI nudge it submitted both plan and implementation before Ariadne released `complete sprint task`. Ariadne accepted the work post-hoc only after full diff review, deterministic verification, and bounded hygiene cleanup. Future Antigravity prompts should keep stressing `submit plan only, then stop` and fall back sooner if the CLI continues to skip the gate.
+- A future sprint should define the real diary practitioner/patient context-selection path for staff-visible Bernie pilot use. Until then, the ordinary pilot launch is safely readiness-blocked when context is missing.
 - The known moderate Dependabot alert remains outside this sprint.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification
 
-- Ariadne audited refs/worktrees, polled durable submissions, inspected Antigravity's plan/review packets, and reviewed the branch diff against `master`.
+- Ariadne reviewed Cicero's plan and implementation packets, inspected the branch diff against `master`, and reran the worker's verification locally using the shared project venv.
 - `node --check docs\diary\diary.js` -> passed.
-- `python scripts\check_frontend_versions.py` -> passed with diary CSS/JS version bumps.
-- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q --tb=short -p no:randomly` -> 40 passed.
-- `git diff --check` -> passed after Ariadne removed one trailing whitespace line.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_pilot or bernie_live_confirm_flow_harness or bernie_dev_mode_review_feature_flag_success" --tb=short -p no:randomly` -> 10 passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed with diary JS bumped to `v=115`.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q --tb=short -p no:randomly` -> 41 passed.
+- `git diff --check` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-Continue Bernie pilot hardening with a narrow safety/usability sprint: either improve the staff pilot launch payload source so it derives practitioner/patient context from real diary state instead of query/default smoke parameters, or add stronger pilot-state/readiness messaging before staff can launch the live review.
+Continue with a narrow context-selection/readiness sprint: add a deterministic staff pilot context source or selector so Bernie can receive real practitioner/patient context without relying on query defaults, while staying supervised and default-off.
 
 ## Previous Closeout - Sprint 58
 | Item | Value |
@@ -986,7 +987,7 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 - Antigravity worker verification: `node --check docs\diary\diary.js`, `git diff --check origin/master...HEAD`, and `npm run validate-all` -> passed.
 - Integrated-tree backend verification: `.\.venv\Scripts\python.exe -m pytest tests\test_appointment_conflicts.py tests\test_appointment_update_proposal.py -q --tb=short -p no:randomly` -> 43 passed, with the existing pytest-asyncio deprecation warning.
 - Integrated-tree frontend verification: `node --check docs\diary\diary.js`, `git diff --check`, and `npm run validate-all` -> passed; manifest valid, production npm audit clean, and asset check accepted v94.
-- Browser smoke: local diary served at `http://127.0.0.1:8765/diary/diary.html?smoke=true`; page identity `EMR â€” Diary`, grid rendered 4 smoke appointments, no console warnings/errors.
+- Browser smoke: local diary served at `http://127.0.0.1:8765/diary/diary.html?smoke=true`; page identity `EMR Ã¢â‚¬â€ Diary`, grid rendered 4 smoke appointments, no console warnings/errors.
 - Browser/CDP drag smoke: real mouse events on a visible appointment created one dashed ghost preview, snapped the preview down by one slot, opened the proposal warning dialog, and `Confirm & Save` moved the card from `top: 331px` to `top: 361px`.
 - Browser/CDP resize smoke: real mouse events on the bottom resize handle created one dashed ghost preview with increased height, opened the proposal warning dialog, and `Confirm & Save` persisted the card height to `88px`.
 - Browser smoke confirmed status controls were ignored as drag targets and that ghost previews were removed after drop.
@@ -1120,7 +1121,7 @@ Detailed steps for Yuri-only review:
 1. Hard refresh the live diary/Office-dialog surface and confirm `diary.js?v=84`
    and `diary.css?v=84` are loaded.
 2. Sign in as an Admin or PracticeOwner-capable user.
-3. Open `âš™ï¸ Admin` -> `Resource Administration` -> `Rooms`.
+3. Open `Ã¢Å¡â„¢Ã¯Â¸Â Admin` -> `Resource Administration` -> `Rooms`.
 4. Confirm every active room card displays an explicit or fallback default
    waiting area when active waiting areas exist.
 5. Edit one room, confirm the default waiting-area dropdown is preselected, then
