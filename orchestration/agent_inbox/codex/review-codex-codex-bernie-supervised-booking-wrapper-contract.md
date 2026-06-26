@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-supervised-booking-wrapper` |
 | Source Task | `codex-bernie-supervised-booking-wrapper-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne inspected the branch diff, confirmed backend-only non-mutating scope, reran focused and adjacent backend verification, and accepted the stable `result` discriminator values `blocked`, `candidate_selection_required`, and `confirmation_ready`.
+- Follow-up required: Future Bernie UI/runtime should treat the wrapper as proposal/intake-only evidence and must still require explicit staff confirmation through the existing confirm-Bernie endpoint before any write.

@@ -8,12 +8,58 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 45: Bernie Confirmed Flow Review Harness |
-| Integrated through | Deterministic backend harness for normalize -> normalized search -> slot selection -> explicit confirmation |
-| Status | Integrated, pushed, mirrored, audited, and closed |
+| Batch | Sprint 46: Bernie Supervised Booking Wrapper Contract |
+| Integrated through | Backend-only supervised wrapper for normalize -> search -> selection proposal evidence |
+| Status | Integrated locally; push, mirror realignment, and final audit pending |
 | Last updated | 2026-06-27 |
 
 ## What Changed
+
+- Added authenticated `POST /api/v1/appointments/proposals/bernie/supervised-booking`.
+- Added `BernieSupervisedBookingIn` and `BernieSupervisedBookingOut` schemas.
+- The wrapper accepts typed deterministic Bernie booking command input plus optional supervised selected-slot context.
+- It returns a stable `result` discriminator with `blocked`, `candidate_selection_required`, or `confirmation_ready`.
+- It composes existing deterministic command normalization, slot-search proposal, slot-selection, and create-proposal evidence paths.
+- It remains proposal/intake-only: no appointment writes, no audit writes, no confirmation call, no Gemini/LLM/provider call, and no UI/runtime change.
+- Added `tests/test_bernie_supervised_booking_wrapper.py` covering auth, practice scoping, blocked normalization, candidate-selection response, selected-slot confirmation-ready evidence, conflict revalidation, non-mutation row counts, and no-LLM/no-write source proof.
+- Cicero/Archimedes implemented the backend-only sprint on `codex/bernie-supervised-booking-wrapper`.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified this as a backend-only API contract with focused and adjacent pytest coverage. There is no visible UI, deployed asset, Office/Word surface, diary interaction, or live clinical workflow for Yuri to manually review.
+
+## Not Required Before Moving On
+
+- No manual live API test is required; focused wrapper tests and adjacent Bernie backend suites cover the contract structurally.
+- No manual live UI review is required; no frontend, GitHub Pages, taskpane, diary, or deployed static assets changed.
+- No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, diary grid, resource admin, billing, SMS, or security-console action is required.
+- No user decision is needed before the next narrow Bernie slice.
+
+## Known Follow-Up
+
+- Future Bernie UI/runtime should treat `result` as the stable supervised wrapper branch field.
+- `confirmation_ready` remains non-persisted evidence and still requires explicit staff confirmation through the existing confirm-Bernie endpoint before any write.
+- The next useful slice can now start shaping a staff-facing Bernie intake/review UI or a deterministic runtime adapter, while preserving the explicit confirmation boundary.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert remains outside this sprint.
+
+## Verification
+
+- Ariadne inspected the worker branch diff against `origin/master`; scope was limited to appointment router/schema/tests and orchestration packets.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_bernie_supervised_booking_wrapper.py` -> passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirmed_flow_review_harness.py tests\test_bernie_confirm_create_proposal.py tests\test_slot_search_normalized_execution.py tests\test_slot_selection_proposal.py tests\test_appointment_proposals.py -q` -> 35 passed.
+- `git diff --check origin/master...origin/codex/bernie-supervised-booking-wrapper` -> passed.
+- `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
+
+## Recommended Next Direction
+
+After push/mirror/audit, choose the next narrow Bernie slice. My preference is either a staff-facing supervised Bernie intake/review UI surface or a deterministic runtime adapter that calls this wrapper, still without autonomous writes.
+
+
+## Previous Closeout - Sprint 45
+
+Sprint 45 added the deterministic backend harness proving the full supervised Bernie normalize -> normalized search -> slot selection -> explicit confirmation chain remains no-write/no-LLM until explicit confirmation, then writes exactly one appointment and bounded audit evidence on success.
 
 - Added `tests/test_bernie_confirmed_flow_review_harness.py`.
 - The harness exercises the full supervised Bernie backend chain: deterministic command normalization, normalized slot search, supervised slot selection/create-proposal evidence, and explicit confirm-write.
@@ -24,39 +70,7 @@ reviewed, integrated, verified, pushed, and audited.
 - Cicero/Euclid implemented the test-only sprint on `codex/bernie-confirmed-flow-review-harness`.
 - No production code, diary UI, taskpane, Command Centre, live Bernie runtime, Gemini parsing, autonomous booking behavior, billing, SMS, resource admin, or migration changed.
 
-## Recommended User Review
-
-Residual user review/testing after closeout: none required before continuing.
-Ariadne verified this as a deterministic backend review-harness sprint. There is no visible UI, deployed asset, Office/Word surface, diary interaction, or live clinical workflow for Yuri to manually review.
-
-## Not Required Before Moving On
-
-- No manual live API test is required; the harness and adjacent backend suites cover the full supervised Bernie chain structurally.
-- No manual live UI review is required; no frontend, GitHub Pages, taskpane, diary, or deployed static assets changed.
-- No database migration, data repair, GCP/Gemini, Word taskpane, Command Centre, diary grid, resource admin, billing, SMS, or security-console action is required.
-- No user decision is needed before the next narrow Bernie slice.
-
-## Known Follow-Up
-
-- The next useful slice can now move from backend contract hardening toward a thin supervised Bernie runtime/API wrapper or UI-facing contract, while preserving explicit confirmation boundaries.
-- Keep live Bernie natural-language/runtime work separate from deterministic backend command contracts and review harnesses.
-- Audit source evidence is still stored as bounded internal codes in the existing `appointment_audit_log.confirmed_warnings` JSONB field to avoid a migration. Consider a dedicated audit-evidence field only if Bernie/source evidence broadens.
-- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
-- The known moderate Dependabot alert remains outside this sprint.
-
-## Verification
-
-- Ariadne inspected the worker branch diff against `origin/master`; scope was limited to one new test harness and orchestration packets.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile tests\test_bernie_confirmed_flow_review_harness.py` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_confirmed_flow_review_harness.py -q` -> 4 passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_confirm_create_proposal.py tests\test_bernie_slot_flow_review_harness.py tests\test_slot_selection_proposal.py tests\test_slot_search_normalized_execution.py tests\test_appointment_proposals.py -q` -> 28 passed.
-- `git diff --check origin/master...origin/codex/bernie-confirmed-flow-review-harness` -> passed.
-- `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
-- `python scripts\agent_worktrees.py audit --fetch` after push/mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at the Sprint 45 closeout commit.
-
-## Recommended Next Direction
-
-Choose the next narrow Bernie slice after push/audit. My preference is a thin supervised Bernie runtime/API wrapper that consumes deterministic command outputs and returns proposal/confirmation-ready responses without autonomous writes.
+Residual user review/testing after Sprint 45 closeout: none required. Ariadne verified it as a deterministic backend review-harness sprint with no visible UI, deployed asset, Office/Word surface, diary interaction, or live clinical workflow for Yuri to manually review.
 
 
 ## Previous Closeout - Sprint 44

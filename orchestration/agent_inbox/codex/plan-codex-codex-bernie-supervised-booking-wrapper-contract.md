@@ -9,7 +9,7 @@
 | Worker Branch | `codex/bernie-supervised-booking-wrapper` |
 | Branch | `codex/bernie-supervised-booking-wrapper` |
 | Source Task | `codex-bernie-supervised-booking-wrapper-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 01:49 +1000 |
 | Source HEAD | `6b92ee9` |
 
@@ -47,6 +47,6 @@ Response-shape naming needs Ariadne approval so future Bernie UI/runtime can dep
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne; backend-only non-mutating scope, response discriminator, auth/practice scoping, and verification plan were appropriate.
+- Required changes before implementation: none.
+- Approved to proceed: yes; implementation released with exact `complete sprint task`.

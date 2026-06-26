@@ -7,7 +7,7 @@
 | Worker Name | Cicero |
 | Worker Branch | `codex/bernie-supervised-booking-wrapper` |
 | Branch | `codex/bernie-supervised-booking-wrapper` |
-| Status | submitted |
+| Status | integrated |
 | Created | 9ede142 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-supervised-booking-wrapper-contract --summary "Short plan summary"` |
