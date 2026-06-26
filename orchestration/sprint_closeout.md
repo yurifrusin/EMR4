@@ -8,6 +8,71 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 37: Appointment Audit Warning Summary |
+| Integrated through | Sprint 37 backend confirmed-warning audit persistence and diary read-only warning display |
+| Status | Integrated locally, verified, and pending push/mirror/audit |
+| Last updated | 2026-06-26 |
+
+## What Changed
+
+- Added `confirmed_warnings` persistence to appointment audit rows via a nullable JSONB column on `appointment_audit_log`.
+- Added `confirmed_warnings` to appointment create, update, status-change, and delete/cancel confirmation bodies, while excluding it from appointment row mutation values.
+- Exposed canonical `confirmed_warnings` from `GET /api/v1/appointments/{appointment_id}/audit` as a bounded list of warning code strings.
+- Ariadne applied a bounded integration repair so only known warning codes are stored: `already_terminal`, `break_overlap`, `provisional_patient`, `waiting_area_assigned_on_terminal`, and `waiting_area_cleared`; unknown/free-text/HTML-like strings are dropped and duplicate codes are de-duplicated.
+- Ariadne repaired the new migration to merge the two pre-existing Alembic heads while adding the nullable audit column.
+- Added focused backend tests covering warning persistence across create/update/status/delete, empty-list-to-null behaviour, audit API output, unknown-code filtering, and non-mutating proposal behaviour.
+- Updated diary Audit History to render `confirmed_warnings` read-only, with defensive support for older alias shapes, and added deterministic smoke assertions for warning rendering.
+- Bumped the diary JS cache-bust to `diary.js?v=103` in `docs/diary/diary.html`.
+- No taskpane, Command Centre, SMS, billing, patient demographics, resource administration, appointment grid placement, waiting-room flow, or mutation controls were changed.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required before continuing.
+Ariadne verified the backend contract, migration head shape, frontend syntax/assets, and deterministic diary smoke checks. The UI change is read-only and the backend persistence is covered by focused tests.
+
+Optional confidence check only, if Yuri happens to be in the live diary after deployment:
+
+1. Setup: hard refresh the live diary and confirm `diary.js?v=103` and `diary.css?v=98` are loaded.
+2. Exact UI path: open an existing appointment for editing and expand `Audit History`.
+3. Expected result: any audit row with confirmed warnings shows a restrained read-only `Warnings: [...]` line using code-like values, while ordinary rows remain visually clean.
+4. Expected safety: audit history must not add buttons, mutate appointment fields, change status, alter waiting-area state, or confirm/cancel proposals.
+5. Suspicious signs: raw `undefined`, free-text patient details in warning metadata, new mutation controls inside audit history, audit history failing to expand, or console errors.
+6. Skippable parts: do not retest taskpane, Command Centre, patient files, resource administration, drag/resize, recurrence, SMS, billing, AI provider facade, security workflows, or cancelled appointment review for Sprint 37.
+7. Evidence to report: only report a screenshot/console error if warning rows render incorrectly or any mutation affordance appears in audit history.
+
+## Not Required Before Moving On
+
+- No manual live UI review is required; deterministic smoke verifies warning rendering in the audit-history panel.
+- No manual database repair is required; the migration is additive and nullable.
+- No Word taskpane, Command Centre, GCP/Gemini, Office dialog, resource admin, billing, SMS, or security-console action is required.
+
+## Known Follow-Up
+
+- Future UI polish may translate known warning codes into friendlier labels, but only if the backend remains code-only for audit storage.
+- Consider tying confirmed warning codes to a prior server proposal token if stronger non-repudiation is needed later.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert remains outside Sprint 37.
+
+## Verification
+
+- `python scripts\agent_worktrees.py poll --fetch` -> found both Sprint 37 plan packets and implementation review packets.
+- Backend compile check: `python -m py_compile app\models\appointments.py app\schemas\appointments.py app\routers\appointments.py alembic\versions\i9j0k1l2m3n4_add_confirmed_warnings_to_audit.py tests\test_appointment_audit_warning_summary.py` -> passed.
+- Alembic heads check: `python -m alembic heads` -> single head `i9j0k1l2m3n4`.
+- Focused backend audit tests: `python -m pytest tests\test_appointment_audit_warning_summary.py tests\test_appointment_audit.py -q --tb=short -p no:randomly` -> 28 passed.
+- Frontend static check: `node --check docs\diary\diary.js` -> passed.
+- Deterministic diary review: `python -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 17 passed.
+- Frontend asset version check: `python scripts\check_frontend_versions.py` -> passed; `diary.js` moved to `v=103` while live deployed HTML still served `v=102` before push.
+- Diff hygiene: `git diff --check` -> passed.
+
+## Recommended Next Direction
+
+Continue with the next narrow Programme 2D audit/review slice after push/mirror/audit if no Yuri-only tests remain.
+
+
+## Previous Closeout - Sprint 36
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 36: Diary Audit History Keyboard Accessibility |
 | Integrated through | Sprint 36 audit-history toggle keyboard and ARIA semantics |
 | Status | Integrated, pushed, mirrored, audited, and closed |
@@ -61,6 +126,8 @@ Optional confidence check only, if Yuri happens to be in the live diary after de
 ## Recommended Next Direction
 
 Pause Antigravity-only polishing unless Yuri wants more; prefer waiting for Claude's headless limit to recover before backend-heavy audit/proposal work.
+
+
 
 
 ## Previous Closeout - Sprint 35

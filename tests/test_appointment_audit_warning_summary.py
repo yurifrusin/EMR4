@@ -63,7 +63,7 @@ def test_create_stores_confirmed_warnings(
     token = make_token(receptionist_user)
     resp = client.post(
         f"{APPT_URL}",
-        json=_create_body(practitioner, patient, confirmed_warnings=["outside_schedule", "conflict_warning"]),
+        json=_create_body(practitioner, patient, confirmed_warnings=["break_overlap", "provisional_patient"]),
         headers=_auth(token),
     )
     assert resp.status_code == 201
@@ -72,7 +72,7 @@ def test_create_stores_confirmed_warnings(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt_id
     ).one()
-    assert entry.confirmed_warnings == ["outside_schedule", "conflict_warning"]
+    assert entry.confirmed_warnings == ["break_overlap", "provisional_patient"]
 
 
 def test_create_without_warnings_stores_null(
@@ -126,7 +126,7 @@ def test_update_stores_confirmed_warnings(
             "appointment_date": TODAY.isoformat(),
             "start_time_local": "09:00:00",
             "duration_minutes": 30,
-            "confirmed_warnings": ["noshow_history"],
+            "confirmed_warnings": ["provisional_patient"],
         },
         headers=_auth(token),
     )
@@ -135,7 +135,7 @@ def test_update_stores_confirmed_warnings(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
     ).one()
-    assert entry.confirmed_warnings == ["noshow_history"]
+    assert entry.confirmed_warnings == ["provisional_patient"]
 
 
 # ─── confirmed_warnings persisted on status change ───────────────────────────
@@ -147,7 +147,7 @@ def test_status_change_stores_confirmed_warnings(
     token = make_token(receptionist_user)
     resp = client.patch(
         f"{APPT_URL}/{appt.id}/status",
-        json={"status": "Confirmed", "confirmed_warnings": ["late_arrival_risk"]},
+        json={"status": "Confirmed", "confirmed_warnings": ["waiting_area_cleared"]},
         headers=_auth(token),
     )
     assert resp.status_code == 200
@@ -155,7 +155,7 @@ def test_status_change_stores_confirmed_warnings(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
     ).one()
-    assert entry.confirmed_warnings == ["late_arrival_risk"]
+    assert entry.confirmed_warnings == ["waiting_area_cleared"]
 
 
 def test_status_change_without_warnings_stores_null(
@@ -184,7 +184,7 @@ def test_delete_stores_confirmed_warnings(
     resp = client.request(
         "DELETE",
         f"{APPT_URL}/{appt.id}",
-        json={"cancellation_reason": "Patient request", "confirmed_warnings": ["active_referral"]},
+        json={"cancellation_reason": "Patient request", "confirmed_warnings": ["waiting_area_cleared"]},
         headers=_auth(token),
     )
     assert resp.status_code == 204
@@ -192,7 +192,7 @@ def test_delete_stores_confirmed_warnings(
     entry = db.query(AppointmentAuditLog).filter(
         AppointmentAuditLog.appointment_id == appt.id
     ).one()
-    assert entry.confirmed_warnings == ["active_referral"]
+    assert entry.confirmed_warnings == ["waiting_area_cleared"]
 
 
 def test_delete_without_body_stores_null(
@@ -217,7 +217,7 @@ def test_audit_endpoint_returns_confirmed_warnings(
     token = make_token(receptionist_user)
     resp = client.post(
         f"{APPT_URL}",
-        json=_create_body(practitioner, patient, confirmed_warnings=["outside_schedule"]),
+        json=_create_body(practitioner, patient, confirmed_warnings=["break_overlap"]),
         headers=_auth(token),
     )
     assert resp.status_code == 201
@@ -227,7 +227,7 @@ def test_audit_endpoint_returns_confirmed_warnings(
     assert audit_resp.status_code == 200
     entries = audit_resp.json()
     assert len(entries) == 1
-    assert entries[0]["confirmed_warnings"] == ["outside_schedule"]
+    assert entries[0]["confirmed_warnings"] == ["break_overlap"]
 
 
 def test_audit_endpoint_returns_empty_list_when_no_warnings(
@@ -256,7 +256,7 @@ def test_confirmed_warnings_are_string_codes_only(
 ):
     """Codes must be short identifiers, not human-readable sentences or PHI."""
     token = make_token(receptionist_user)
-    codes = ["outside_schedule", "conflict_warning", "noshow_history"]
+    codes = ["break_overlap", "provisional_patient", "waiting_area_cleared"]
     resp = client.post(
         f"{APPT_URL}",
         json=_create_body(practitioner, patient, confirmed_warnings=codes),
@@ -273,6 +273,33 @@ def test_confirmed_warnings_are_string_codes_only(
         # Codes should not be long human-readable messages
         assert len(code) < 100
         assert " " not in code or "_" in code  # snake_case or single word
+
+
+def test_unknown_warning_codes_are_not_persisted(
+    client, db, practice, practitioner, patient, receptionist_user
+):
+    token = make_token(receptionist_user)
+    resp = client.post(
+        f"{APPT_URL}",
+        json=_create_body(
+            practitioner,
+            patient,
+            confirmed_warnings=[
+                "break_overlap",
+                "Margaret Thompson has transport trouble",
+                "<script>alert(1)</script>",
+                "break_overlap",
+            ],
+        ),
+        headers=_auth(token),
+    )
+    assert resp.status_code == 201
+    appt_id = resp.json()["id"]
+
+    entry = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.appointment_id == appt_id
+    ).one()
+    assert entry.confirmed_warnings == ["break_overlap"]
 
 
 # ─── Proposal endpoints never write confirmed_warnings ───────────────────────

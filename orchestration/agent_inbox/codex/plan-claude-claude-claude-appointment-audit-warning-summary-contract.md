@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-claude-appointment-audit-warning-summary-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 20:07 +1000 |
 | Source HEAD | `d61b791` |
 
@@ -47,3 +47,7 @@ Pre-existing TWO alembic heads (274919209522 + h8i9j0k1l2m3 both off g7h8i9j0k1l
 - Review result:
 - Required changes before implementation:
 - Approved to proceed: no
+
+## Codex Integration Result
+
+Integrated in Sprint 37 after Ariadne review, bounded warning-code sanitization, Alembic head repair, and verification.

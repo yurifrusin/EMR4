@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-claude-appointment-audit-warning-summary-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -42,3 +42,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 - Review result:
 - Follow-up required:
+
+## Codex Integration Result
+
+Integrated in Sprint 37 after Ariadne review, bounded warning-code sanitization, Alembic head repair, and verification.

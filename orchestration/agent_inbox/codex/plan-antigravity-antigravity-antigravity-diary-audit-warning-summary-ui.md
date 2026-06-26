@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-antigravity-diary-audit-warning-summary-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-26 19:01 +1000 |
 | Source HEAD | `d61b791` |
 
@@ -16,7 +16,7 @@ Display persisted appointment audit warning metadata in the read-only diary Audi
 
 ## My Understanding
 
-We need to display the warning codes or summary associated with confirmed appointment proposals in the read-only Audit History panel of the diary. Currently, the UI has placeholders for confirmed_with_warnings and warning_codes in loadAuditHistory in docs/diary/diary.js, but these are not yet populated from the backend or verified. We will display both warning summaries (e.g. from a warning_summary field) and lists of codes (from warning_codes or warnings fields). We will also extend the smoke data to verify warning rendering and add a deterministic assertion in eview/test_diary_smoke.py.
+We need to display the warning codes or summary associated with confirmed appointment proposals in the read-only Audit History panel of the diary. Currently, the UI has placeholders for confirmed_with_warnings and warning_codes in loadAuditHistory in docs/diary/diary.js, but these are not yet populated from the backend or verified. We will display both warning summaries (e.g. from a warning_summary field) and lists of codes (from warning_codes or warnings fields). We will also extend the smoke data to verify warning rendering and add a deterministic assertion in review/test_diary_smoke.py.
 
 ## Intended Surface / Boundary
 
@@ -47,3 +47,7 @@ Backend contract mismatch if Claude uses a different JSON structure (mitigated b
 - Review result:
 - Required changes before implementation:
 - Approved to proceed: no
+
+## Codex Integration Result
+
+Integrated in Sprint 37 after Ariadne review, bounded warning-code sanitization, Alembic head repair, and verification.

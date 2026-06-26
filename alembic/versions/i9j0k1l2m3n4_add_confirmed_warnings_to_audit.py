@@ -1,7 +1,7 @@
 """Add confirmed_warnings to appointment_audit_log.
 
 Revision ID: i9j0k1l2m3n4
-Revises: h8i9j0k1l2m3
+Revises: 274919209522, h8i9j0k1l2m3
 Create Date: 2026-06-26
 """
 from typing import Sequence, Union
@@ -11,7 +11,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from alembic import op
 
 revision: str = "i9j0k1l2m3n4"
-down_revision: Union[str, Sequence[str], None] = "h8i9j0k1l2m3"
+down_revision: Union[str, Sequence[str], None] = ("274919209522", "h8i9j0k1l2m3")
 branch_labels = None
 depends_on = None
 

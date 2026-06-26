@@ -92,3 +92,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed: docs/diary/diary.js, docs/diary/diary.html, review/test_diary_smoke.py
 - Verification run: static syntax check (`node --check`), deterministic smoke assertions (`pytest`), frontend asset version checking (`check_frontend_versions.py`), and `git diff --check`.
 - Remaining risks: None. Rendering is fully read-only, handles canonical `confirmed_warnings` list and defensive aliases/summaries, and preserves clean rows.
+
+## Codex Integration Result
+
+Integrated in Sprint 37 after Ariadne review, bounded warning-code sanitization, Alembic head repair, and verification.

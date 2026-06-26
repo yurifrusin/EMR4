@@ -37,6 +37,27 @@ MUTATING_APPOINTMENT_ROLES = (
     UserRole.PracticeOwner,
 )
 
+KNOWN_APPOINTMENT_WARNING_CODES = {
+    "already_terminal",
+    "break_overlap",
+    "provisional_patient",
+    "waiting_area_assigned_on_terminal",
+    "waiting_area_cleared",
+}
+
+
+def _sanitize_confirmed_warnings(codes: Optional[list[str]]) -> Optional[list[str]]:
+    if not codes:
+        return None
+    confirmed_warnings: list[str] = []
+    for code in codes:
+        if not isinstance(code, str):
+            continue
+        normalized = code.strip()
+        if normalized in KNOWN_APPOINTMENT_WARNING_CODES and normalized not in confirmed_warnings:
+            confirmed_warnings.append(normalized)
+    return confirmed_warnings or None
+
 NON_BLOCKING_STATUSES = (
     AppointmentStatus.Cancelled,
     AppointmentStatus.NoShow,
@@ -393,7 +414,7 @@ def _write_audit(
         status_before=status_before,
         status_after=status_after,
         cancellation_reason=cancellation_reason,
-        confirmed_warnings=confirmed_warnings if confirmed_warnings else None,
+        confirmed_warnings=_sanitize_confirmed_warnings(confirmed_warnings),
     ))
 
 
@@ -518,7 +539,7 @@ def create_appointment(
         confirmed_by_user_id=current_user.id,
         action=AppointmentAuditAction.create,
         status_after=AppointmentStatus.Booked,
-        confirmed_warnings=body.confirmed_warnings or None,
+        confirmed_warnings=body.confirmed_warnings,
     )
     db.commit()
     out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
@@ -1091,7 +1112,7 @@ def update_appointment(
         confirmed_by_user_id=current_user.id,
         action=AppointmentAuditAction.update,
         status_before=status_before_update,
-        confirmed_warnings=body.confirmed_warnings or None,
+        confirmed_warnings=body.confirmed_warnings,
     )
     db.commit()
     out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
@@ -1228,7 +1249,7 @@ def update_appointment_status(
         action=AppointmentAuditAction.status_change,
         status_before=status_before_patch,
         status_after=body.status,
-        confirmed_warnings=body.confirmed_warnings or None,
+        confirmed_warnings=body.confirmed_warnings,
     )
     db.commit()
     return _get_appointment(appointment_id, practice_id, db)

@@ -135,9 +135,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated locally; verified and closing out |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending plan packets from Claude and Antigravity |
+| Integration Gate | Passed; implementation review packets polled and verified |
 | Product Goal | Persist and display bounded warning metadata for confirmed appointment proposal mutations so audit history can prove when staff confirmed warnings |
 
 ### Workstream S37-A - Backend Audit Warning Summary Contract
@@ -151,7 +151,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval appointment proposal/confirmation and audit-log backend surfaces only as needed, likely `app/models/appointments.py`, `app/schemas/appointments.py`, `app/routers/appointments.py`, Alembic migration if persistence requires one, and focused appointment audit/proposal tests |
 | Out of Scope | Diary UI implementation, broad supervisor dashboard, Bernie runtime/tool execution, taskpane, Command Centre, SMS, billing, patient demographics, unrelated appointment flows, broad audit framework beyond appointment mutation warning metadata |
 | Verification | Plan packet first; after approval py_compile touched backend modules, focused pytest for appointment proposal/audit warning-summary persistence, adjacent audit/proposal tests if touched, Alembic upgrade head if migration added, and `git diff --check` |
-| Status | Queued for plan |
+| Status | Integrated after Claude review packet and Ariadne bounded sanitizer/migration repair |
 
 ### Workstream S37-B - Diary Audit Warning Summary UI
 
@@ -164,7 +164,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, smoke fixtures, and `review/test_diary_smoke.py` or `review/checks_diary.json` as needed for deterministic warning-summary assertions |
 | Out of Scope | Backend implementation, appointment mutation/proposal logic, broad booking modal redesign, supervisor dashboard, Bernie runtime/tool execution, taskpane, Command Centre, SMS, billing, resource administration, cancelled appointment restore/reactivation |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, deterministic diary review smoke with compact assertions for warning summary rendering, frontend version check if assets change, `git diff --check`, targeted browser checks only if structural assertions cannot prove behaviour |
-| Status | Queued for plan |
+| Status | Integrated after Antigravity review packet and Ariadne verification |
 
 
 ## Sprint 36: Diary Audit History Keyboard Accessibility

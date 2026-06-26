@@ -102,3 +102,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Remaining risks:
   - Migration adds nullable JSONB column — safe for existing table. Downgrade is destructive if confirmed_warnings data exists in production.
   - No allow-list validation on warning code strings; caller supplies any strings. A future sprint could enforce a `ConfirmedWarningCode` enum if canonical codes need locking down.
+
+## Codex Integration Result
+
+Integrated in Sprint 37 after Ariadne review, bounded warning-code sanitization, Alembic head repair, and verification.
