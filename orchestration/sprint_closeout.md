@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 54: Bernie Dev Review Launch Affordance |
 | Integrated through | Dev-only toolbar launcher for the gated Bernie live review path, with deterministic route-intercepted proof |
-| Status | Integrated locally; pending push, mirror realignment, and final audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -49,11 +49,12 @@ Ariadne verified this with deterministic route-intercepted Playwright checks. Th
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; modified diary assets have version bumps, deployed Pages still shows the previous versions until GitHub Pages catches up.
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 36 passed.
 - `git diff --check` -> passed.
+- `python scripts\agent_worktrees.py audit --fetch` after push and mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `f3be4bc`; only the known dirty stale `codex/time-model` disposable worktree remains for manual review.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-After push/mirror/audit, the next useful slice is a small backend-backed non-PHI dev fixture route or fixture payload source for the Bernie launcher/review panel.
+The next useful slice is a small backend-backed non-PHI dev fixture route or fixture payload source for the Bernie launcher/review panel.
 
 
 ## Previous Closeout - Sprint 53
