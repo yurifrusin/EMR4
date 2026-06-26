@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-pilot-launch-context-guard` |
-| Status | queued |
+| Status | submitted |
 | Created | 4c6d9b0 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-pilot-launch-context-guard --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-pilot-launch-context-guard.md` status/completion notes; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-pilot-launch-context-guard.md` implementation plan packet.
+- Verification run: Plan gate only; inspected packet/protocol and relevant Bernie diary/review harness surfaces. No production/test verification run because no implementation files were changed.
+- Remaining risks: Implementation still needs Ariadne plan approval and explicit `complete sprint task`; ordinary pilot context may need to fail closed until a real selected practitioner/patient context is available.
