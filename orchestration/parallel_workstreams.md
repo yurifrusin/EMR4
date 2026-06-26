@@ -131,11 +131,33 @@ After every fully integrated batch, Codex updates
 - recommended next direction
 
 
+## Sprint 41: Bernie Normalized Slot Search Execution Contract
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Codex worker plan packet |
+| Product Goal | Let future Bernie/reception workflows submit one structured slot-search command and receive both normalization evidence and non-mutating candidate slots, without creating appointments or adding autonomous booking |
+
+### Workstream BX - Bernie Normalize-And-Search Contract
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker/subagent |
+| Branch | `codex/bernie-normalized-slot-search` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-bernie-normalized-slot-search-contract.md` |
+| Goal | Plan, then after approval add a backend-only non-mutating endpoint/helper that accepts `SlotSearchCommandIn`, requires explicit `reference_date`, normalizes it, and if safe runs the existing slot-search proposal logic to return candidate slots plus normalization context |
+| In Scope | Plan packet first; after approval narrow appointment-router/helper refactor if needed, response schema/tests as needed, authentication/role behaviour consistent with adjacent slot-search endpoints, deterministic reference-date handling, invalid-command blocked response without slot-search execution, safe-command candidate search through existing non-mutating proposal path, and no-LLM/no-write proof |
+| Out of Scope | Diary UI, taskpane, Command Centre, Gemini/LLM parsing, autonomous tool execution, appointment creation/edit/status/cancel, audit mutation, SMS, billing, patient demographics, resource admin, migrations unless strictly unavoidable, DB-backed name-to-UUID resolution, and broad scheduling redesign |
+| Verification | Plan packet first; after approval py_compile touched backend modules/tests, focused pytest for the new endpoint/helper, existing normalizer tests, adjacent slot-search proposal tests, explicit no-mutation/no LLM proof, and `git diff --check` |
+| Status | Queued for Codex worker plan |
+
 ## Sprint 40: Bernie Slot Normalize Endpoint Contract
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; closeout verification/push pending |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
 | Integration Gate | Codex worker plan accepted and implementation integrated |
 | Product Goal | Expose the deterministic Sprint 39 Bernie slot-command normalizer through a narrow backend route/tool contract without executing searches or creating appointments |
@@ -151,7 +173,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval role-gated/practice-scoped backend route/tool contract, explicit deterministic reference-date handling, focused tests for auth/shape/invalid input/non-mutation/no LLM/search execution, and compatibility with `SlotSearchProposalIn` |
 | Out of Scope | Diary UI, taskpane, Command Centre, Gemini/LLM parsing, autonomous tool execution, appointment creation, slot-search execution beyond normalizer invocation, audit mutation, SMS, billing, patient demographics, resource admin, migrations unless strictly unavoidable, and DB-backed name-to-UUID resolution |
 | Verification | Plan packet first; after approval py_compile touched backend modules/tests, focused endpoint/route pytest, existing normalizer tests, adjacent slot-search proposal tests if schemas/routes are touched, non-mutation/no LLM proof, and `git diff --check` |
-| Status | Integrated locally; closeout verification/push pending |
+| Status | Integrated |
 
 ## Sprint 39: Bernie Slot Command Normalizer Contract
 

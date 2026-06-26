@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 40: Bernie Slot Normalize Endpoint Contract |
 | Integrated through | Non-mutating backend endpoint exposing Bernie slot command normalization |
-| Status | Integrated locally, verified, pending push/mirror/audit closeout |
+| Status | Integrated, verified, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-26 |
 
 ## What Changed
@@ -52,7 +52,7 @@ Ariadne verified this as a backend-only API contract with focused pytest and com
 
 ## Recommended Next Direction
 
-Sprint 40 closes cleanly once push/mirror/audit succeeds. The next recommended slice is another narrow Bernie backend/tool-contract step that consumes normalized slot constraints without introducing autonomous booking or UI mutation.
+Sprint 41 has been selected as the next narrow Bernie backend/tool-contract slice: accept a structured Bernie slot command, normalize it, and if safe run the existing non-mutating slot-search proposal logic in one supervised API contract. This must not create or update appointments, write audit rows, call LLMs, or change any diary/taskpane UI.
 
 
 ## Previous Closeout - Sprint 39

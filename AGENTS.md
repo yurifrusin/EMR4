@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 40 - Bernie slot command normalization endpoint integrated; closeout verification pending push/mirror/audit |
-| **Next recommended work** | After Sprint 40 closeout, continue with the next narrow Bernie backend/tool-contract slice if no Yuri-only review remains |
+| **Current active track** | Sprint 41 - Bernie normalized slot-search execution contract dispatched to Codex fallback worker |
+| **Next recommended work** | Review Sprint 41 Codex worker plan, then release implementation only if scope remains non-mutating and backend-only |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
