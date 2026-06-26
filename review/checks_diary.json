@@ -1,0 +1,16 @@
+{
+  "_comment": "Data-driven diary-grid review against ?smoke=true. Expectations are derived from the smoke-mode mock template and fixtures in docs/diary/diary.js (NOT diary_template.json — the smoke template is intentionally heterogeneous to exercise per-column breaks/intervals: Room 2 adds BRUNCH, Room 3 has no MORNING TEA). Cancelled appts are excluded from the grid by design (shouldRenderAppointment). Add a check = add a row.",
+  "target": "/diary/diary.html?smoke=true",
+  "wait_for": ".diary-column",
+  "checks": [
+    {"name": "three_room_columns", "type": "count", "selector": ".diary-column", "expected": 3},
+    {"name": "one_time_column", "type": "count", "selector": ".diary-time-column", "expected": 1},
+    {"name": "morning_tea_in_two_smoke_columns", "type": "text_count", "selector": ".break-block-label", "text": "MORNING TEA", "expected": 2},
+    {"name": "lunch_in_all_three_columns", "type": "text_count", "selector": ".break-block-label", "text": "LUNCH", "expected": 3},
+    {"name": "brunch_break_in_room2", "type": "text_count", "selector": ".break-block-label", "text": "BRUNCH", "expected": 1},
+    {"name": "room1_label_present", "type": "text_count", "selector": ".col-room-label", "text": "Room 1", "expected": 1},
+    {"name": "shera_assignment_present", "type": "text_count", "selector": ".col-assignment", "text": "Shera", "expected": 1},
+    {"name": "booked_lifecycle_class_renders", "type": "min_count", "selector": ".appt.appt-booked", "expected": 1},
+    {"name": "arrived_lifecycle_class_renders", "type": "min_count", "selector": ".appt.appt-arrived", "expected": 1}
+  ]
+}

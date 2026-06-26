@@ -1,0 +1,55 @@
+name: UI Review Harness
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "docs/diary/**"
+      - "review/**"
+      - ".github/workflows/ui-review.yml"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "docs/diary/**"
+      - "review/**"
+      - ".github/workflows/ui-review.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diary-smoke:
+    name: Diary smoke review
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: "review/requirements.txt"
+
+      - name: Install review dependencies
+        run: pip install -r review/requirements.txt
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Run diary smoke review
+        run: pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q
+
+      - name: Upload JUnit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diary-review-junit
+          path: review/diary-review.xml
+          if-no-files-found: ignore

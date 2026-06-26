@@ -142,6 +142,13 @@ Read these before acting on remembered process details.
   structural assertions cannot prove the result. Do not add a local model such
   as Gemma to the sprint loop unless measured residual interactive/visual review
   cost remains high after scriptable checks have been harvested.
+- UI review harness rule: run the deterministic `review/` harness before
+  interactive browser review when diary smoke coverage is relevant:
+  `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`.
+  The CI workflow `.github/workflows/ui-review.yml` runs the same checks on
+  diary/review changes. Add new stable checks here rather than repeating
+  screenshot-driven inspections when a structural assertion can prove the end
+  state.
 - Closeout ping rule: Ariadne's sprint-closeout notification must include the
   Codex-side/tool-enabled reviews and tests already run, any bounded hotfixes
   made from those checks, and only the residual user review/testing that could

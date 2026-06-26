@@ -347,6 +347,9 @@ output (`passed`, `failed`, `evidence`). On future sprints, run the harness and
 let Codex interpret only failures or genuinely ambiguous results. Local models
 such as Gemma should not be added to the sprint loop unless measured residual
 interactive/visual review cost remains high after this scripting approach.
+The first ratified deterministic UI harness lives in `review/` and is run with
+`pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`; CI
+also runs it via `.github/workflows/ui-review.yml` for diary/review changes.
 
 After Codex integrates a submit, it must:
 
