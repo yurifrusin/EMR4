@@ -53,7 +53,7 @@ Ariadne verified this as a pure backend/unit-test slice. There is no visible UI,
 
 ## Recommended Next Direction
 
-Continue the Bernie command pipeline with a narrow route/tool-binding slice that exposes the pure normalizer safely and still does not create appointments without a later explicit confirmation path.
+Sprint 40 has been dispatched as the next narrow Bernie slice: expose the pure slot-command normalizer through a non-mutating backend route/tool contract, without executing searches or creating appointments. Plan gate is pending.
 
 
 ## Previous Closeout - Sprint 38
