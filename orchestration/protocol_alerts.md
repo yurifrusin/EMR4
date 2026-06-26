@@ -215,6 +215,27 @@ Read these before acting on remembered process details.
   `| Worker Name | ... |`, and `| Worker Branch | codex/<short-task-name> |`
   for separate Codex workers. Ariadne must not treat an orchestrator-created
   Codex plan as proof that a separate worker submitted.
+- Codex worker polling refinement: for active Codex app subagents, Ariadne
+  should not routinely use broad `poll --fetch --include-codex-workers`.
+  Prefer the direct subagent channel/status, the recorded worker id/branch, and
+  exact branch/packet inspection (`git fetch origin codex/<task>` plus the
+  expected plan/review packet). Reserve `--include-codex-workers` for recovery
+  cases where the worker branch is unknown, the direct subagent link is lost, or
+  a historical remote Codex worker submission must be discovered. Broad Codex
+  worker polling is intentionally slower/noisier because old `codex/*` refs may
+  remain on the remote.
+- Antigravity CLI model policy: normal Antigravity UI sprint work should use
+  the current default Gemini 3.5 Flash / Medium reasoning posture unless plan or
+  implementation quality indicates escalation is needed; Medium is the expected
+  cost/quality sweet spot for narrow sprint packets. If Claude is quota-blocked
+  or a task needs Claude-style reasoning, Ariadne may try Antigravity CLI
+  `--model` overrides with GUI-available Claude models after a no-edit probe
+  confirms the exact CLI model identifier. Prefer Claude Sonnet 4.6 for
+  implementation/recovery work and Claude Opus 4.6 for high-leverage planning,
+  architecture, or repeated failure recovery. Treat GPT-OSS 120B as
+  experimental until it has passed low-risk EMR4 tasks. Do not hardcode
+  unverified `settings.json` reasoning/model keys; prefer per-run CLI overrides
+  or verified settings values.
 - Codex records integrated submits in `orchestration/integration_log.md` and runs
   `audit` / `retire-stale` after integrations so stale disposable worktrees are
   visible instead of surprising the next session.
