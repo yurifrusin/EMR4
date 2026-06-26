@@ -49,6 +49,7 @@ class AppointmentCreate(BaseModel):
     reason: Optional[str] = None
     notes: Optional[str] = None
     booked_via: BookingChannel = BookingChannel.Receptionist
+    confirmed_warnings: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def require_patient_identity_and_time(self):
@@ -80,6 +81,7 @@ class AppointmentUpdate(BaseModel):
     waiting_room: Optional[str] = None
     waiting_area_id: Optional[uuid.UUID] = None
     queue_position: Optional[int] = None
+    confirmed_warnings: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def reject_partial_local_pair(self):
@@ -92,6 +94,7 @@ class AppointmentUpdate(BaseModel):
 class AppointmentStatusUpdate(BaseModel):
     status: AppointmentStatus
     waiting_area_id: Optional[uuid.UUID] = None
+    confirmed_warnings: list[str] = Field(default_factory=list)
 
 
 class AppointmentOut(BaseModel):
@@ -263,6 +266,7 @@ class AppointmentWaitingAreaProposalOut(BaseModel):
 
 class AppointmentDeleteIn(BaseModel):
     cancellation_reason: Optional[str] = Field(None, max_length=500)
+    confirmed_warnings: list[str] = Field(default_factory=list)
 
 
 class AppointmentDeleteCommand(BaseModel):
@@ -293,6 +297,7 @@ class AppointmentAuditLogOut(BaseModel):
     status_before: Optional[AppointmentStatus] = None
     status_after: Optional[AppointmentStatus] = None
     cancellation_reason: Optional[str] = None
+    confirmed_warnings: list[str] = Field(default_factory=list)
     created_at: datetime
 
     model_config = {"from_attributes": True}

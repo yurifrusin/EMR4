@@ -5,7 +5,7 @@ from sqlalchemy import (
     Column, String, Boolean, DateTime, Integer, Enum, ForeignKey, Date,
     Time, Index, Text,
 )
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.models.base import Base
@@ -123,6 +123,7 @@ class AppointmentAuditLog(Base):
     status_before = Column(Enum(AppointmentStatus), nullable=True)
     status_after = Column(Enum(AppointmentStatus), nullable=True)
     cancellation_reason = Column(String(500), nullable=True)
+    confirmed_warnings = Column(JSONB, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     __table_args__ = (
