@@ -293,7 +293,7 @@ def _canonical_create_values(
     body: AppointmentCreate,
     practice_tz: ZoneInfo,
 ) -> tuple[dict, date_type, time, datetime]:
-    values = body.model_dump()
+    values = body.model_dump(exclude={"confirmed_warnings"})
     appointment_date, start_time_local, start_time = _canonical_time_values(
         practice_tz,
         start_time=values.get("start_time"),
@@ -383,6 +383,7 @@ def _write_audit(
     status_before: Optional[AppointmentStatus] = None,
     status_after: Optional[AppointmentStatus] = None,
     cancellation_reason: Optional[str] = None,
+    confirmed_warnings: Optional[list[str]] = None,
 ) -> None:
     db.add(AppointmentAuditLog(
         practice_id=practice_id,
@@ -392,6 +393,7 @@ def _write_audit(
         status_before=status_before,
         status_after=status_after,
         cancellation_reason=cancellation_reason,
+        confirmed_warnings=confirmed_warnings if confirmed_warnings else None,
     ))
 
 
@@ -516,6 +518,7 @@ def create_appointment(
         confirmed_by_user_id=current_user.id,
         action=AppointmentAuditAction.create,
         status_after=AppointmentStatus.Booked,
+        confirmed_warnings=body.confirmed_warnings or None,
     )
     db.commit()
     out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
@@ -1026,7 +1029,7 @@ def update_appointment(
     practice_tz = _practice_zoneinfo(db, practice_id)
     appt = _get_appointment(appointment_id, practice_id, db)
     status_before_update = appt.status
-    values = body.model_dump(exclude_unset=True)
+    values = body.model_dump(exclude_unset=True, exclude={"confirmed_warnings"})
 
     practitioner_id = values.get("practitioner_id", appt.practitioner_id)
     appointment_type_id = values.get("appointment_type_id", appt.appointment_type_id)
@@ -1088,6 +1091,7 @@ def update_appointment(
         confirmed_by_user_id=current_user.id,
         action=AppointmentAuditAction.update,
         status_before=status_before_update,
+        confirmed_warnings=body.confirmed_warnings or None,
     )
     db.commit()
     out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
@@ -1193,6 +1197,7 @@ def get_appointment_audit(
             status_before=entry.status_before,
             status_after=entry.status_after,
             cancellation_reason=entry.cancellation_reason,
+            confirmed_warnings=entry.confirmed_warnings or [],
             created_at=entry.created_at,
         ))
     return response
@@ -1223,6 +1228,7 @@ def update_appointment_status(
         action=AppointmentAuditAction.status_change,
         status_before=status_before_patch,
         status_after=body.status,
+        confirmed_warnings=body.confirmed_warnings or None,
     )
     db.commit()
     return _get_appointment(appointment_id, practice_id, db)
@@ -1251,6 +1257,7 @@ def cancel_appointment(
         status_before=status_before_delete,
         status_after=AppointmentStatus.Cancelled,
         cancellation_reason=cancellation_reason,
+        confirmed_warnings=body.confirmed_warnings if body else None,
     )
     db.commit()
 
