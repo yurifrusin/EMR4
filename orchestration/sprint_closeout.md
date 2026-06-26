@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 49: Bernie Supervised Review UI Harness |
 | Integrated through | Smoke-gated diary Bernie Booking Review panel and deterministic Playwright checks |
-| Status | Integrated locally; pending push, mirror realignment, and final audit |
+| Status | Integrated, pushed, mirrored, audited, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -54,6 +54,7 @@ Ariadne verified this as a smoke-only UI review harness with deterministic Playw
 - Source check of the added smoke handler found no `fetch`, `XMLHttpRequest`, `sendBeacon`, or live confirm-Bernie call; the only confirm endpoint reference is fixture text and the click handler only mutates the local fixture object for simulation.
 - `git diff --check origin/master...origin/antigravity/current` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
+- `python scripts\agent_worktrees.py audit --fetch` after push/mirror realignment -> `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at the Sprint 49 closeout commit.
 
 ## Recommended Next Direction
 
