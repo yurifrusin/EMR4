@@ -2053,3 +2053,104 @@ html, body {
   z-index: 100;
   pointer-events: none;
 }
+
+/* ─── AUDIT HISTORY PANEL ───────────────────────── */
+.booking-audit-section {
+  border-top: 1px solid var(--grey-2);
+  margin-top: 12px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-audit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 4px;
+  user-select: none;
+  background-color: var(--grey-1);
+  border: 1px solid var(--grey-2);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.booking-audit-header:hover {
+  background-color: var(--grey-2);
+}
+
+.booking-audit-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.booking-audit-toggle-icon {
+  font-size: 9px;
+  color: var(--grey-4);
+  transition: transform 0.2s ease;
+}
+
+.booking-audit-toggle-icon.expanded {
+  transform: rotate(90deg);
+}
+
+.booking-audit-content {
+  margin-top: 6px;
+  border: 1px solid var(--grey-2);
+  border-radius: 4px;
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+.booking-audit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.booking-audit-item {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--grey-1);
+  font-size: 11px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.booking-audit-item:last-child {
+  border-bottom: none;
+}
+
+.booking-audit-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  font-weight: 600;
+  color: var(--blue-dark);
+}
+
+.booking-audit-timestamp {
+  color: var(--grey-3);
+  font-weight: normal;
+}
+
+.booking-audit-details {
+  margin-top: 2px;
+  color: var(--grey-4);
+}
+
+.booking-audit-warnings {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.booking-audit-fallback {
+  padding: 8px 10px;
+  text-align: center;
+  font-style: italic;
+  color: var(--grey-3);
+  font-size: 11px;
+}

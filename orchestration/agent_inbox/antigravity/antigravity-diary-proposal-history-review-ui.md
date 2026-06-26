@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | 4aaf8e7 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-proposal-history-review-ui --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.html, docs/diary/diary.css, docs/diary/diary.js, review/checks_diary.json, review/test_diary_smoke.py
+- Verification run: node --check docs/diary/diary.js (syntax check passed), .venv\Scripts\pytest.exe review/test_diary_smoke.py (all 17 tests passed including new Playwright test for click active appt -> open edit modal -> expand collapsible audit history -> verify mock events rendering)
+- Remaining risks: None. Audits degrade gracefully on 404/501/network errors.
