@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 90ef76b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-diary-noshow-dna-flow --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none. Ariadne stood this workstream down after plan review and implementation release because Antigravity CLI produced no implementation submit, `agy.exe` was no longer running, the worktree remained clean, and the current diary code already handles NoShow/DNA terminal labels, edit-modal status options, waiting-area clearing proposals, non-rendering on the active grid, and Finished-section classification.
+- Verification run: Ariadne ran `node --check docs\diary\diary.js` and `python -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` from the integration worktree; both passed.
+- Remaining risks: no frontend code delta was integrated for this workstream. If future user review finds unclear NoShow/DNA copy or a missing deterministic assertion, dispatch a fresh frontend-only follow-up rather than reviving this packet.

@@ -76,6 +76,15 @@ Read these before acting on remembered process details.
   submission. Keep
   `C:\Users\YuriFrusin\.gemini\antigravity-cli\settings.json` as UTF-8 without
   BOM; a BOM makes the CLI ignore settings and fall back to defaults.
+  For non-trivial Antigravity plan or implementation prompts, pass an explicit
+  `--print-timeout 15m`; Codex's shell timeout does not extend Antigravity's
+  internal print-mode timeout. Before calling a silent Antigravity return a
+  crash, check `tasklist /FI "IMAGENAME eq agy.exe"`,
+  `git -C C:\Users\YuriFrusin\Documents\EMR4-worktrees\antigravity status
+  --short`, and the latest
+  `C:\Users\YuriFrusin\.gemini\antigravity-cli\log\cli-*.log`. A clean worktree,
+  no `agy.exe`, and a log line such as `Print mode: timed out` means the CLI
+  timed out while streaming rather than crashing.
   Claude should be prompted with `scripts\drive_agent_headless.py` from a clean
   shell and the Claude worker worktree, using `--phase plan` for plan-gated
   handin and `--phase implement` only after plan approval. Yuri does not need to

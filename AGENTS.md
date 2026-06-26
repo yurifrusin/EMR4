@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 32 - no-show/DNA attendance outcome semantics dispatched; plan gate pending |
-| **Next recommended work** | Review Sprint 32 worker plans, release approved implementation in parallel, then verify with backend tests and deterministic diary review harnesses before any manual review |
+| **Current active track** | Sprint 32 - no-show/DNA attendance outcome semantics integrated locally; closeout/push pending |
+| **Next recommended work** | Pause after Sprint 32 closeout per Yuri's instruction; do not dispatch Sprint 33 until Yuri resumes sprint automation |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

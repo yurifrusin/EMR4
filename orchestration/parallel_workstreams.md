@@ -134,9 +134,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated locally; closeout/push pending |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending worker plans and Codex approval |
+| Integration Gate | Claude implemented a focused backend proof suite; Antigravity frontend workstream superseded after existing diary semantics and cheap checks were verified |
 | Product Goal | Make No Show and DNA appointment outcomes explicit, proposal-first, terminal, non-blocking, and cheap to review without confusing them with cancellation or active waiting-room state |
 
 ### Workstream S32-A - Backend No-show/DNA Status Contract
@@ -150,7 +150,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `app/routers/appointments.py`, `app/schemas/appointments.py` only if needed, focused appointment status/proposal/waiting-area tests for NoShow/DNA terminal transitions, non-blocking slot behaviour, and no direct mutation before proposal confirmation |
 | Out of Scope | Diary frontend, taskpane, Command Centre, cancellation reason/note capture, cancelled appointment review UI, recurrence, SMS/reminders, billing, broad audit logging, migrations unless a verified backend contract gap requires one |
 | Verification | Plan packet first; after approval py_compile touched appointment modules, focused pytest for appointment status/proposal/waiting-area/no-show-DNA coverage, adjacent conflict tests if touched, and `git diff --check` |
-| Status | Dispatched |
+| Status | Integrated locally |
 
 ### Workstream S32-B - Diary No-show/DNA Flow
 
@@ -163,7 +163,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js` only if needed, deterministic review checks in `review/`, smoke-mode fixtures/test hooks, and asset cache-bust if diary assets change |
 | Out of Scope | Backend routes/models/tests/migrations, taskpane, Command Centre, resource administration, cancellation reason/note capture, cancelled appointment review redesign, recurrence, broad visual restyle, direct mutation before proposal confirmation |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js` if touched, `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`, `python scripts/check_frontend_versions.py` if assets change, targeted Playwright/DOM assertions where useful, and `git diff --check` |
-| Status | Dispatched |
+| Status | Superseded; no frontend code delta integrated |
 
 ## Sprint 31: AI Boundary And Cheap Review Harness
 

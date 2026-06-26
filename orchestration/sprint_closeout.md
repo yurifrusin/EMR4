@@ -8,69 +8,71 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 31: AI Provider Boundary and Deterministic Diary Review Harness |
-| Integrated through | Sprint 31 backend AI service facade and diary cancelled-flow review harness hardening |
-| Status | Integrated, pushed, mirrored, audited, and deployed v99 observed |
+| Batch | Sprint 32: No-show/DNA Attendance Outcome Semantics |
+| Integrated through | Sprint 32 backend NoShow/DNA status proposal proof suite; diary frontend stood down after existing semantics were verified |
+| Status | Integrated locally, verified, and pending push/audit |
 | Last updated | 2026-06-26 |
 
 ## What Changed
 
-- Added a thin EMR4-owned AI service boundary under `app/services/ai/`, with provider contracts, a Gemini adapter, and an `AiService` facade.
-- Moved direct `google.genai` use out of consultation and letter routers; `app/services/ai/providers/gemini.py` is now the only application module importing the provider SDK.
-- Preserved existing consultation analysis, audio scribe, and letter draft HTTP response shapes by returning provider raw JSON through the facade.
-- Wrapped letter drafting through the async facade so the previous blocking provider call now follows the same `asyncio.to_thread` pattern as consultation/scribe work.
-- Added fake-provider tests and de-identified eval fixtures for clinical extraction, audio scribe, and letter drafting contracts.
-- Hardened the deterministic diary review harness with stable `data-testid` hooks for patient-flow cards, counts, names, reasons, cancellation reasons, and status badges.
-- Extended `review/checks_diary.json` so cancelled appointments are asserted in the flow panel rather than relying on visual/manual review.
-- Diary cache bust moved to `diary.js?v=99`; CSS remains `diary.css?v=97`.
-- Documented the implementation-release protocol correction: after all plan packets are accepted, independent worker implementation tasks should be released in parallel via the lowest-cost CLI/text channels unless there is a concrete safety reason to serialize.
-- Fixed local Antigravity CLI settings encoding: `settings.json` is now UTF-8 without BOM so the CLI can read the intended low-cost/auto-proceed settings.
+- Added `tests/test_noshow_dna_status_contract.py`, a focused 14-test backend proof suite for NoShow and DNA attendance outcomes.
+- Proved `POST /appointments/proposals/status/{id}` for both `NoShow` and `DNA` is non-mutating, safe, confirmation-required, and uses the terminal `proposal` autonomy tier.
+- Proved same-status NoShow/DNA proposals block with `already_in_status`.
+- Proved re-transitioning away from terminal NoShow/DNA warns with `already_terminal` while leaving the row unchanged.
+- Proved NoShow/DNA proposals from a waiting area surface `clears_waiting_area` plus a `waiting_area_cleared` warning without mutating before confirmation.
+- Proved confirmed `PATCH /appointments/{id}/status` to NoShow/DNA clears `waiting_area_id` in the database.
+- Proved NoShow/DNA appointments do not block the public `/slots` availability API.
+- Proved cross-practice NoShow/DNA status proposals return 404.
+- No production backend code changed; the existing contract was correct and is now pinned explicitly.
+- Antigravity frontend workstream was superseded: its corrected plan was accepted, but the CLI timed out in print mode before submitting implementation. Ariadne verified the current diary already handles NoShow/DNA labels, status options, waiting-area clearing proposals, active-grid exclusion, and Finished-section classification, so no frontend code delta was integrated.
+- Added protocol guidance that Antigravity CLI prompts need an explicit `--print-timeout 15m` and that silent returns should be diagnosed with process, worktree, and CLI-log checks before being treated as crashes.
 
 ## Recommended User Review
 
-Residual user review/testing after closeout: none required before the next sprint.
-Ariadne verified the backend AI boundary tests, import boundary, frontend syntax,
-and deterministic Playwright diary smoke harness. Sprint 31 is an architecture
-and review-infrastructure sprint; it intentionally does not add visible diary,
-taskpane, Command Centre, or clinical workflow behaviour.
+Residual user review/testing after closeout: none required before pausing.
+Ariadne verified the backend contract, frontend syntax, deterministic diary smoke
+harness, and existing NoShow/DNA diary semantics using cheap tool-enabled checks.
+Sprint 32 is primarily a contract-proof sprint and intentionally does not add a
+new visible user workflow.
 
-Optional confidence check only, if Yuri happens to be reviewing the repo:
+Optional confidence check only, if Yuri happens to be in the live diary:
 
-1. Setup: inspect the Sprint 31 diff or open the repo after pull.
-2. Exact path: confirm `app/services/ai/providers/gemini.py` is the only app module importing `google.genai`.
-3. Expected backend shape: consultation and letter routes call `AiService` rather than provider SDKs directly.
-4. Exact review-harness path: run `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`.
-5. Expected harness result: all 14 diary smoke checks pass, including cancelled flow count, patient name, cancellation reason, and `CXL` badge.
-6. Suspicious signs: provider imports reappearing in routers, review harness failures, or visible diary behaviour changing despite the sprint being test-hook-only on the frontend.
-7. Skippable parts: do not manually retest live diary booking, waiting room mutations, Resource Administration, Word taskpane, Command Centre, scribe audio, real Gemini calls, or clinical letter generation for Sprint 31.
-8. Evidence to report: command output from the failed check and any diff hunk showing unexpected provider coupling or visible UI behaviour change.
+1. Setup: hard refresh the live diary and sign in as a dev Admin or normal dev user.
+2. Exact UI path: open an existing appointment, use the status selector, and choose `No Show` or `DNA`.
+3. Expected proposal guard: a confirmation/proposal dialog appears before the appointment is mutated.
+4. Expected terminal result: after confirming, the appointment should leave the active diary grid and should not remain in Waiting Room or In Consult.
+5. Expected review location: the appointment can appear in the Finished section with a clear `No Show` or `DNA` label, depending on the current selected waiting-area tab/filter.
+6. Suspicious signs: the appointment mutates before confirmation, remains in active Waiting Room/In Consult, blocks its old slot, shows as an active grid card, or has unclear status text.
+7. Skippable parts: do not retest cancellation reasons, cancelled appointment review, resource administration, drag/resize, recurrence, taskpane, Command Centre, billing, SMS, or patient search for Sprint 32.
+8. Evidence to report: a screenshot or short note showing the selected status, proposal dialog, final section/filter, and any unexpected active waiting-room/grid residue.
 
 ## Not Required Before Moving On
 
-- No manual live EMR4 UI test is required; frontend changes are nonvisual `data-testid` hooks plus deterministic smoke checks.
-- No real Gemini, audio, GCP, Word, Office dialog, or patient-file test is required; the new AI boundary is covered by fake-provider tests and preserves raw response shapes.
-- No database migration, data repair, or GitHub security-console action is required.
+- No manual live UI test is required; the backend proof suite and existing deterministic diary checks cover Sprint 32's intended safety boundary.
+- No database migration, data repair, Word taskpane, Command Centre, GCP, Gemini, Office dialog, security-console, or GitHub Pages manual action is required.
+- No Antigravity implementation retry is required for Sprint 32; if future user review finds unclear NoShow/DNA copy or missing assertions, dispatch a fresh frontend-only follow-up.
 
 ## Known Follow-Up
 
-- Add capability-specific AI evals before any future provider/model switch, especially for Bernie and medical scribe behaviours.
-- Continue harvesting deterministic review checks into `review/` after exploratory UI work discovers a stable assertion.
-- Add backend-backed canonical diary-template checks in a future review-harness sprint if the smoke fixture and production template need cross-file invariant coverage.
-- Future worker releases should use true parallel implementation prompts after plan approval; Sprint 31 was serialized only because Antigravity CLI behaviour was being validated and repaired in real time.
+- Use `--print-timeout 15m` for future Antigravity CLI plan/implementation prompts, and prefer running from the Antigravity worktree/project context.
+- Consider a future lightweight frontend assertion specifically for NoShow/DNA terminal labels in the Finished section if those states become more visible in the review surface.
+- The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- The known moderate Dependabot alert still appears on GitHub pushes and remains outside Sprint 32.
 
 ## Verification
 
-- `python scripts\agent_worktrees.py poll --fetch` -> found Sprint 31 Claude and Antigravity review packets.
-- Claude worker verification rerun by Ariadne: `py_compile app\services\ai\contracts.py app\services\ai\service.py app\services\ai\providers\gemini.py app\routers\consultation.py app\routers\letters.py`; `pytest tests\test_ai_service_boundary.py --noconftest -q`; `rg "google\.genai|from google import genai" app`; `git diff --check origin/master...HEAD` -> 14 passed, import boundary limited to `app/services/ai/providers/gemini.py`, diff check clean.
-- Antigravity worker verification rerun by Ariadne: `pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`; `node --check docs\diary\diary.js`; `git diff --check origin/master...HEAD` -> 14 passed, JS syntax clean, diff check clean.
-- Integrated-tree frontend verification: `pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`; `node --check docs\diary\diary.js`; `python scripts\check_frontend_versions.py`; `git diff --check` -> passed after Ariadne's `diary.js?v=99` cache-bust hotfix.
-- Antigravity CLI settings verification: first bytes of `C:\Users\YuriFrusin\.gemini\antigravity-cli\settings.json` are `123,13,10,32,32`, confirming UTF-8 without BOM rather than the invalid BOM-prefixed JSON that made the CLI ignore settings.
+- `python scriptsgent_worktrees.py poll --fetch` -> found Claude's Sprint 32 implementation review packet and Antigravity's corrected plan packet.
+- Antigravity CLI diagnosis: `tasklist /FI "IMAGENAME eq agy.exe"` showed no running CLI process; `git status --short --branch` in `EMR4-worktreesntigravity` was clean; latest Antigravity CLI log ended with `Print mode: timed out`, not a crash.
+- Backend verification: `python -m pytest tests	est_noshow_dna_status_contract.py -q --tb=short -p no:randomly` -> 14 passed.
+- Backend compile check: `python -m py_compile appoutersppointments.py app\schemasppointments.py` -> passed.
+- Frontend static check: `node --check docs\diary\diary.js` -> passed.
+- Deterministic diary review: `python -m pytest review	est_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 14 passed.
+- Diff hygiene: `git diff --check` -> passed, with only existing CRLF normalization warnings.
 
 ## Recommended Next Direction
 
-1. Push Sprint 31, realign mirrors, audit, and observe GitHub Pages/CI if relevant.
-2. Continue the current programme with the next appointment/diary operational slice, using parallel CLI implementation release after plan approval.
-3. Keep expanding deterministic Playwright/pytest checks before spending tokens on GUI/Chrome interaction.
+Pause sprint automation after Sprint 32 closeout per Yuri's instruction. Do not
+dispatch Sprint 33 until Yuri explicitly resumes.
 
 ## Previous Closeout - Sprint 30
 

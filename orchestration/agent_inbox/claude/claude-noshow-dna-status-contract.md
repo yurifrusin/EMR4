@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 90ef76b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-noshow-dna-status-contract --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: tests/test_noshow_dna_status_contract.py (new, 14 tests). No production code changed — the backend contract was already correct.
+- Verification run: Ariadne stopped a timed-out overlapping headless Claude/pytest process, then reran `python -m pytest tests/test_noshow_dna_status_contract.py -q --tb=short -p no:randomly` with the repo `.venv`: 14/14 passed. `python -m py_compile app/routers/appointments.py app/schemas/appointments.py` passed. `git diff --check` passed.
+- Remaining risks: None. The contract is proven unchanged. No migrations, no schema changes, no UI surface touched. The earlier full-suite run was interrupted by the orchestration timeout and concurrent pytest sessions, so it is not counted as verification.
