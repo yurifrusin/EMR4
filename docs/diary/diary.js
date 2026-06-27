@@ -42,7 +42,8 @@ let isBerniePilotEligible = false;
 let isBerniePilotActive = false;
 let berniePilotContext = {
   practitionerId: "",
-  patientId: ""
+  patientId: "",
+  sourceAppointmentId: ""
 };
 let bernieInstructionText = "";
 let bernieInterpretResult = null;
@@ -119,15 +120,24 @@ function getBerniePilotContextValues() {
   const patientInput = document.getElementById("bernie-pilot-patient-id");
   return {
     practitionerId: normalizeBernieContextId(practitionerInput?.value || berniePilotContext.practitionerId),
-    patientId: normalizeBernieContextId(patientInput?.value || berniePilotContext.patientId)
+    patientId: normalizeBernieContextId(patientInput?.value || berniePilotContext.patientId),
+    sourceAppointmentId: normalizeBernieContextId(berniePilotContext.sourceAppointmentId)
   };
 }
 
 function setBerniePilotContextValues(values) {
   berniePilotContext = {
     practitionerId: normalizeBernieContextId(values?.practitionerId),
-    patientId: normalizeBernieContextId(values?.patientId)
+    patientId: normalizeBernieContextId(values?.patientId),
+    sourceAppointmentId: normalizeBernieContextId(values?.sourceAppointmentId)
   };
+}
+
+function getActiveBernieSelectedAppointment() {
+  const activeEl = document.querySelector(".appt-active");
+  const apptId = activeEl ? activeEl.getAttribute("data-id") : null;
+  const appt = apptId ? activeAppointments.find(a => a.id === apptId) : null;
+  return { apptId, appt };
 }
 
 function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) {
@@ -139,6 +149,7 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
   const queryPatientId = allowManualContext ? urlParams.get("patient_id") : "";
   const queryReferenceDate = urlParams.get("reference_date");
   const explicitContext = getBerniePilotContextValues();
+  const selectedContext = getActiveBernieSelectedAppointment();
 
   const practitionerId = allowHarnessDefaults ? (queryPractitionerId || "prac-1") : (explicitContext.practitionerId || queryPractitionerId);
   const patientId = allowHarnessDefaults ? (queryPatientId || "smoke-pat-1") : (explicitContext.patientId || queryPatientId);
@@ -165,6 +176,12 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
     blocks.push({
       code: "default_patient_context",
       message: "Use an explicit non-smoke patient context before asking Bernie to prepare a booking confirmation."
+    });
+  }
+  if (!allowManualContext && explicitContext.sourceAppointmentId && selectedContext.apptId !== explicitContext.sourceAppointmentId) {
+    blocks.push({
+      code: "stale_selected_appointment_context",
+      message: "The selected diary appointment has changed. Import the current selected appointment before asking Bernie to prepare a booking confirmation."
     });
   }
   if (!referenceDate) {
@@ -2641,7 +2658,8 @@ function renderBerniePilotContextForm(blocks = []) {
         if (patientInput) patientInput.value = appt.patient_id || (appt.patient ? appt.patient.id : "");
         setBerniePilotContextValues({
           practitionerId: apptPracId,
-          patientId: appt.patient_id || (appt.patient ? appt.patient.id : "")
+          patientId: appt.patient_id || (appt.patient ? appt.patient.id : ""),
+          sourceAppointmentId: appt.id || ""
         });
         loadBernieLiveReview();
       });
@@ -2658,7 +2676,8 @@ function renderBerniePilotContextForm(blocks = []) {
     }
     setBerniePilotContextValues({
       practitionerId: practitionerInput.value,
-      patientId: patientInput.value
+      patientId: patientInput.value,
+      sourceAppointmentId: ""
     });
     loadBernieLiveReview();
   });
@@ -2730,9 +2749,7 @@ function renderBernieInstructionInput(contentEl) {
     summaryContainer.setAttribute("data-testid", "bernie-context-summary");
 
     // Fetch active appointment context if available and matches
-    const activeEl = document.querySelector(".appt-active");
-    const apptId = activeEl ? activeEl.getAttribute("data-id") : null;
-    const appt = apptId ? activeAppointments.find(a => a.id === apptId) : null;
+    const { appt } = getActiveBernieSelectedAppointment();
 
     let showSelectedAppt = false;
     const activePracId = berniePilotContext.practitionerId || (allowHarnessDefaults ? "prac-1" : "");
@@ -2807,7 +2824,7 @@ function renderBernieInstructionInput(contentEl) {
     changeBtn.setAttribute("data-testid", "bernie-pilot-context-change");
     changeBtn.textContent = "Change";
     changeBtn.addEventListener("click", () => {
-      setBerniePilotContextValues({ practitionerId: "", patientId: "" });
+      setBerniePilotContextValues({ practitionerId: "", patientId: "", sourceAppointmentId: "" });
       bernieInstructionText = "";
       bernieInterpretResult = null;
       const practitionerInput = document.getElementById("bernie-pilot-practitioner-id");

@@ -8,6 +8,45 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 72: Bernie Imported Context Stale-Selection Guard |
+| Integrated through | Staff-visible Bernie pilot now blocks imported appointment context when the active diary selection changes |
+| Status | Integrated locally, verified; pending push/mirror/audit |
+| Last updated | 2026-06-27 |
+
+## What Changed
+
+- Imported Bernie pilot context now records the selected appointment it came from.
+- If staff import context from one appointment and then select another appointment or clear selection, Bernie fails closed with `stale_selected_appointment_context`.
+- The stale state disables instruction submission and prevents interpretation/supervised-booking POSTs until staff import the current selected appointment.
+- Manual smoke/dev context remains available only in smoke/dev paths and is not affected by the staff-visible stale-selection guard.
+- Diary JS cache-bust bumped to `diary.js?v=125`.
+
+## Verification
+
+- `C:\Users\sarashera\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_pilot_imported_context_stales_when_selection_changes or bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated" --tb=short` passed: `2 passed`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `50 passed`.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed locally with `diary.js?v=125` bumped from `v=124`.
+- `git diff --check` passed.
+
+## Not Required Before Moving On
+
+- No manual live UI test is required; the deterministic review harness verifies the stale-selection block, no-write behavior, re-import path, and existing staff-visible confirm gate.
+- No backend, provider, schema, migration, taskpane, Command Centre, billing, SMS, resource admin, or live Gemini action is required.
+
+## Known Follow-Up
+
+- Antigravity CLI still exits with no stdout and no worktree changes in this Codex session; Ariadne should treat that channel as suspect until it is separately repaired.
+- GitHub still reports Dependabot alert 5 on push; Sprint 71 triaged it as not product-runtime-actionable.
+
+## Recommended Next Direction
+
+Next recommended sprint: continue Bernie pilot refinement; either improve selected-appointment instruction ergonomics or run a narrow live staff-pilot smoke once Yuri wants to exercise the deployed surface.
+
+## Previous Closeout - Sprint 71
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 71: Dependabot uuid Alert Triage |
 | Integrated through | GitHub REST and local static triage of Dependabot alert 5 (`npm uuid`, GHSA-w5hq-g745-h8pq / CVE-2026-41907) |
 | Status | Triaged, documented, no runtime code changes |

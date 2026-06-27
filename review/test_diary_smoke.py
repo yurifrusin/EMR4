@@ -2225,6 +2225,166 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_pilot_imported_context_stales_when_selection_changes(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+
+    supervised_requests = []
+    appointments = [
+        {
+            "id": "appt-margaret-72",
+            "appointment_date": "2026-06-27",
+            "start_time_local": "09:00",
+            "start_time": "09:00",
+            "duration_minutes": 15,
+            "status": "Booked",
+            "appointment_type_id": None,
+            "patient_id": "patient-margaret-72",
+            "patient": {"id": "patient-margaret-72", "first_name": "Margaret", "last_name": "Thompson"},
+            "practitioner_id": "prac-72",
+            "practitioner": {"id": "prac-72", "first_name": "Alex", "last_name": "Shera", "ahpra_number": "MED0001234567"},
+            "room_id": None,
+            "location_id": "loc-1",
+            "notes": ""
+        },
+        {
+            "id": "appt-samuel-72",
+            "appointment_date": "2026-06-27",
+            "start_time_local": "09:30",
+            "start_time": "09:30",
+            "duration_minutes": 15,
+            "status": "Booked",
+            "appointment_type_id": None,
+            "patient_id": "patient-samuel-72",
+            "patient": {"id": "patient-samuel-72", "first_name": "Samuel", "last_name": "Lee"},
+            "practitioner_id": "prac-72",
+            "practitioner": {"id": "prac-72", "first_name": "Alex", "last_name": "Shera", "ahpra_number": "MED0001234567"},
+            "room_id": None,
+            "location_id": "loc-1",
+            "notes": ""
+        }
+    ]
+
+    def handle_api(route):
+        url = route.request.url
+        if "/api/v1/appointments/bernie/pilot-eligibility" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_eligibility))
+        elif "/api/v1/appointments/proposals/bernie/interpret-booking-instruction" in url:
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "safe": True,
+                    "result": "interpreted",
+                    "command_candidate": {
+                        "practitioner_id": "prac-72",
+                        "patient_id": "patient-samuel-72"
+                    }
+                })
+            )
+        elif "/api/v1/appointments/proposals/bernie/supervised-booking" in url:
+            supervised_requests.append(json.loads(route.request.post_data or "{}"))
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "bernie_supervised_booking",
+                    "result": "blocked",
+                    "safe": False,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "blocked",
+                    "staff_review": {
+                        "headline": "Blocked",
+                        "status": "blocked",
+                        "staff_action_required": "No booking action prepared.",
+                        "confirmation_ready": False,
+                        "selected_slot": None,
+                        "candidate_slots": [],
+                        "warning_summary": "Blocked.",
+                        "evidence_summary": "Harness response.",
+                        "warnings": [],
+                        "blocks": [{"code": "harness_block", "message": "Harness block"}],
+                        "confirm_payload": None
+                    },
+                    "warnings": [],
+                    "blocks": [{"code": "harness_block", "message": "Harness block"}]
+                })
+            )
+        elif "/api/v1/auth/me" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
+        elif "/api/v1/diary/template" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "practice_name": "Smoke Practice",
+                "slot_defaults": {"start": "09:00", "end": "17:00", "interval_minutes": 15},
+                "columns": [{
+                    "room_label": "Room 1",
+                    "assignment": "Dr Alex Shera",
+                    "practitioner_id": "prac-72",
+                    "practitioner_ahpra": "MED0001234567"
+                }]
+            }))
+        elif "/api/v1/appointments/types" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/appointments" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(appointments))
+        elif "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([
+                {"id": "loc-1", "name": "Main Clinic", "is_active": True}
+            ]))
+        elif "/api/v1/diary/roster" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"entries": []}))
+        elif "/api/v1/diary/waiting-areas" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        else:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
+
+    diary_page.route("**/api/v1/**", handle_api)
+
+    try:
+        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-launch-button']:not(.hidden)", state="visible", timeout=5000)
+        diary_page.wait_for_selector(".appt:has-text('Margaret Thompson')", state="visible", timeout=5000)
+
+        diary_page.click(".appt:has-text('Margaret Thompson')")
+        diary_page.click("[data-testid='bernie-pilot-launch-button']")
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-use-selected']", state="visible", timeout=5000)
+        diary_page.click("[data-testid='bernie-pilot-use-selected']")
+        diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
+
+        diary_page.click(".appt:has-text('Samuel Lee')")
+        diary_page.wait_for_selector("[data-testid='bernie-review-block-item']:has-text('stale_selected_appointment_context')", state="visible", timeout=5000)
+        assert diary_page.locator("[data-testid='bernie-instruction-input']").is_disabled()
+        assert diary_page.locator("[data-testid='btn-bernie-instruction-submit']").is_disabled()
+        assert len(supervised_requests) == 0
+
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-use-selected']:has-text('Samuel Lee')", state="visible", timeout=5000)
+        diary_page.click("[data-testid='bernie-pilot-use-selected']")
+        diary_page.wait_for_selector("[data-testid='bernie-context-summary-details']:has-text('Samuel Lee')", state="visible", timeout=5000)
+
+        trigger_live_bernie(diary_page, instruction="Please find an appointment for Samuel", register_default_mock=False)
+        diary_page.wait_for_selector("[data-testid='bernie-review-block-item']:has-text('harness_block')", state="visible", timeout=5000)
+        assert len(supervised_requests) == 1
+        assert supervised_requests[0]["command"]["patient_id"] == "patient-samuel-72"
+        assert supervised_requests[0]["command"]["practitioner_id"] == "prac-72"
+    finally:
+        diary_page.evaluate("localStorage.removeItem('emr4_token')")
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_pilot_eligibility_confirm_gated(diary_page):
     import json
     import urllib.parse
