@@ -2751,3 +2751,50 @@ html, body {
   border: 1px solid #feb2b2;
   color: #c53030;
 }
+
+/* Bernie context summary panel styling (Sprint 69) */
+.bernie-context-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--grey-1);
+  border: 1px solid var(--grey-2);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  gap: 8px;
+}
+
+.bernie-context-summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: var(--text);
+}
+
+.bernie-context-summary-item {
+  font-weight: 500;
+}
+
+.btn-bernie-context-change {
+  background-color: transparent;
+  color: #6a1b9a;
+  border: 1px solid #6a1b9a;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-bernie-context-change:hover {
+  background-color: #6a1b9a;
+  color: white;
+}
+
+.btn-bernie-context-change:active {
+  transform: scale(0.98);
+}

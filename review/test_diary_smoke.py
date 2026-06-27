@@ -2430,3 +2430,144 @@ def test_bernie_pilot_selected_appointment_context(diary_page):
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_context_readiness_and_summary_flow(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/bernie/pilot-eligibility",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_eligibility)
+        )
+    )
+
+    try:
+        # Load with bernie_context_form=true so it starts context-blocked
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+
+        # Launch Bernie Pilot sidebar
+        diary_page.click("[data-testid='bernie-pilot-launch-button']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
+
+        # Verify context form is shown
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-context-form']", state="visible", timeout=5000)
+
+        # The instruction input textarea and submit button must be disabled
+        textarea = diary_page.locator("[data-testid='bernie-instruction-input']")
+        submit_btn = diary_page.locator("[data-testid='btn-bernie-instruction-submit']")
+
+        assert textarea.is_disabled()
+        assert submit_btn.is_disabled()
+
+        # Verify no context summary is shown
+        assert diary_page.locator("[data-testid='bernie-context-summary']").count() == 0
+
+        # Let's fill valid manual context
+        # In smoke mode: practitionerId: "smoke-prac-1", patientId: "smoke-pat-1"
+        diary_page.fill("[data-testid='bernie-pilot-practitioner-id']", "smoke-prac-1")
+        diary_page.fill("[data-testid='bernie-pilot-patient-id']", "smoke-pat-1")
+        diary_page.click("[data-testid='bernie-pilot-context-submit']")
+
+        # The context summary should appear
+        diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
+
+        # The instruction input textarea and submit button should now be enabled
+        assert textarea.is_disabled() is False
+        assert submit_btn.is_disabled() is False
+
+        # Verify summary details are correct
+        details = diary_page.locator("[data-testid='bernie-context-summary-details']")
+        assert "Patient: smoke-pat-1" in details.text_content()
+        assert "Practitioner: Alex Shera" in details.text_content() # resolved from ahpraToPractitionerMap
+
+        # Test the Change action
+        diary_page.click("[data-testid='bernie-pilot-context-change']")
+
+        # It should return to context-blocked state: form shown, input disabled
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-context-form']", state="visible", timeout=5000)
+        assert textarea.is_disabled()
+        assert submit_btn.is_disabled()
+        assert diary_page.locator("[data-testid='bernie-context-summary']").count() == 0
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_context_summary_import_from_selected(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/bernie/pilot-eligibility",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_eligibility)
+        )
+    )
+
+    try:
+        # Load with bernie_context_form=true
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+
+        # Launch Bernie Pilot sidebar
+        diary_page.click("[data-testid='bernie-pilot-launch-button']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
+
+        # Click Margaret Thompson's appointment on the grid to make it active.
+        diary_page.click(".appt:has-text('Margaret Thompson')")
+        diary_page.wait_for_selector(".appt.appt-active:has-text('Margaret Thompson')", state="visible", timeout=3000)
+
+        # The import button should now appear in the apptPanel
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-use-selected']", state="visible", timeout=3000)
+
+        # Click the import button
+        diary_page.click("[data-testid='bernie-pilot-use-selected']")
+
+        # The context summary should appear
+        diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
+
+        # The instruction input textarea and submit button should now be enabled
+        textarea = diary_page.locator("[data-testid='bernie-instruction-input']")
+        submit_btn = diary_page.locator("[data-testid='btn-bernie-instruction-submit']")
+        assert textarea.is_disabled() is False
+        assert submit_btn.is_disabled() is False
+
+        # Verify summary details contain the appointment's details (patient name/time, practitioner label)
+        details = diary_page.locator("[data-testid='bernie-context-summary-details']")
+        assert "Patient: Margaret Thompson" in details.text_content()
+        assert "Time: 2026-06-27 @ 09:00" in details.text_content()
+        assert "Practitioner: Alex Shera" in details.text_content()
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

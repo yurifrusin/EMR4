@@ -780,7 +780,7 @@ async function loadAuditHistory(apptId) {
           userStr = `by ${actor}`;
         }
       }
-      
+
       let details = [];
       const statusTarget = evt.status_target || evt.status_after;
       if (evt.status_before && evt.status_after && evt.status_before !== evt.status_after) {
@@ -2692,21 +2692,133 @@ async function checkBerniePilotEligibility() {
 function renderBernieInstructionInput(contentEl) {
   if (!contentEl) return;
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const isSmoke = urlParams.get("smoke") === "true";
+  const devReviewParam = urlParams.get("bernie_dev_review");
+  const allowHarnessDefaults = (isSmoke || devReviewParam === "true") && urlParams.get("bernie_context_form") !== "true";
+  const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
+  const contextReady = request.ready;
+
   const container = document.createElement("div");
   container.id = "bernie-instruction-container";
   container.className = "bernie-instruction-container";
+
+  if (contextReady) {
+    const summaryContainer = document.createElement("div");
+    summaryContainer.id = "bernie-context-summary";
+    summaryContainer.className = "bernie-context-summary";
+    summaryContainer.setAttribute("data-testid", "bernie-context-summary");
+
+    // Fetch active appointment context if available and matches
+    const activeEl = document.querySelector(".appt-active");
+    const apptId = activeEl ? activeEl.getAttribute("data-id") : null;
+    const appt = apptId ? activeAppointments.find(a => a.id === apptId) : null;
+
+    let showSelectedAppt = false;
+    const activePracId = berniePilotContext.practitionerId || (allowHarnessDefaults ? "prac-1" : "");
+    const activePatId = berniePilotContext.patientId || (allowHarnessDefaults ? "smoke-pat-1" : "");
+
+    if (appt) {
+      const apptPracId = appt.practitioner_id || appt.practitioner?.id || (appt.practitioner?.ahpra_number ? ahpraToPractitionerMap[appt.practitioner.ahpra_number]?.id : null);
+      const apptPatId = appt.patient_id || appt.patient?.id;
+      if (apptPracId === activePracId && apptPatId === activePatId) {
+        showSelectedAppt = true;
+      }
+    }
+
+    let patientText = "";
+    let timeText = "";
+    let practitionerText = "";
+
+    if (showSelectedAppt && appt) {
+      const patientName = appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : (provisionalPatientName(appt) || "Unknown Patient");
+      patientText = `Patient: ${patientName}`;
+      const appointmentDate = appt.appointment_date || localDateKey(diaryDate);
+      const appointmentTime = appt.start_time_local || appt.start_time || "";
+      timeText = appointmentTime ? `Time: ${appointmentDate} @ ${appointmentTime}` : `Date: ${appointmentDate}`;
+
+      let pracLabel = "";
+      const ahpra = appt.practitioner?.ahpra_number;
+      if (ahpra && ahpraToPractitionerMap[ahpra]) {
+        const p = ahpraToPractitionerMap[ahpra];
+        pracLabel = `${p.first_name} ${p.last_name}`.trim();
+      }
+      if (!pracLabel && appt.practitioner) {
+        pracLabel = `${appt.practitioner.first_name} ${appt.practitioner.last_name}`.trim();
+      }
+      practitionerText = `Practitioner: ${pracLabel || activePracId}`;
+    } else {
+      patientText = `Patient: ${activePatId}`;
+      let pracLabel = "";
+      for (const ahpra in ahpraToPractitionerMap) {
+        if (ahpraToPractitionerMap[ahpra].id === activePracId) {
+          const p = ahpraToPractitionerMap[ahpra];
+          pracLabel = `${p.first_name} ${p.last_name}`.trim();
+          break;
+        }
+      }
+      practitionerText = `Practitioner: ${pracLabel || activePracId}`;
+    }
+
+    const summaryDetails = document.createElement("div");
+    summaryDetails.className = "bernie-context-summary-details";
+    summaryDetails.setAttribute("data-testid", "bernie-context-summary-details");
+
+    const patSpan = document.createElement("span");
+    patSpan.className = "bernie-context-summary-item";
+    patSpan.textContent = patientText;
+    summaryDetails.appendChild(patSpan);
+
+    if (timeText) {
+      const timeSpan = document.createElement("span");
+      timeSpan.className = "bernie-context-summary-item";
+      timeSpan.textContent = timeText;
+      summaryDetails.appendChild(timeSpan);
+    }
+
+    const pracSpan = document.createElement("span");
+    pracSpan.className = "bernie-context-summary-item";
+    pracSpan.textContent = practitionerText;
+    summaryDetails.appendChild(pracSpan);
+
+    const changeBtn = document.createElement("button");
+    changeBtn.type = "button";
+    changeBtn.className = "btn-bernie-context-change";
+    changeBtn.setAttribute("data-testid", "bernie-pilot-context-change");
+    changeBtn.textContent = "Change";
+    changeBtn.addEventListener("click", () => {
+      setBerniePilotContextValues({ practitionerId: "", patientId: "" });
+      bernieInstructionText = "";
+      bernieInterpretResult = null;
+      const practitionerInput = document.getElementById("bernie-pilot-practitioner-id");
+      if (practitionerInput) practitionerInput.value = "";
+      const patientInput = document.getElementById("bernie-pilot-patient-id");
+      if (patientInput) patientInput.value = "";
+      loadBernieLiveReview();
+    });
+
+    summaryContainer.appendChild(summaryDetails);
+    summaryContainer.appendChild(changeBtn);
+    container.appendChild(summaryContainer);
+  }
 
   const textarea = document.createElement("textarea");
   textarea.id = "bernie-instruction-input";
   textarea.setAttribute("data-testid", "bernie-instruction-input");
   textarea.placeholder = "Type booking instructions for staff-supervised analysis (non-PHI)...";
   textarea.value = bernieInstructionText || "";
+  if (!contextReady) {
+    textarea.disabled = true;
+  }
 
   const button = document.createElement("button");
   button.id = "btn-bernie-instruction-submit";
   button.className = "btn-bernie-instruction-submit";
   button.setAttribute("data-testid", "btn-bernie-instruction-submit");
   button.textContent = "Submit Instruction for Review";
+  if (!contextReady) {
+    button.disabled = true;
+  }
 
   container.appendChild(textarea);
   container.appendChild(button);

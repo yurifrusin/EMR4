@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.js`, `docs/diary/diary.css`, `docs/diary/diary.html`, `review/test_diary_smoke.py`.
+- Verification run: bundled Node syntax check for `docs/diary/diary.js`; `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q` with 49 passed; `scripts/check_frontend_versions.py`; `git diff --check`.
+- Remaining risks: none identified. Codex repaired an uncommitted worker bug where smoke appointment summaries could render `undefined` for date, then reran verification.
