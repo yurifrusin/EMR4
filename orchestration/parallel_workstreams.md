@@ -130,6 +130,28 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 70: Bernie Staff-Visible Pilot Entry Path
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; waiting for Antigravity plan |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Antigravity plan review |
+| Product Goal | Expose the supervised Bernie booking-assistant panel through a staff-visible, non-default, allowlisted diary entry path without manual ID exposure |
+
+### Workstream DN - Bernie Staff-Visible Pilot Entry Path
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-bernie-staff-visible-pilot-entry-path.md` |
+| Goal | Plan, then after approval expose the existing supervised Bernie booking-assistant panel through a staff-visible non-default diary entry path for allowlisted pilot use |
+| In Scope | Plan packet first; after approval diary UI assets and review harness updates as needed; visible entry only when existing pilot/eligibility gate allows it; launcher uses real selected linked appointment context or another explicit non-manual context source; no manual patient/practitioner ID fields in staff-visible mode; dev/manual fallback hidden behind explicit dev flags; instruction readiness, compact context summary, supervised confirmation, no default production exposure, no autonomous writes, and asset version bumps preserved |
+| Out of Scope | Backend/provider/schema/migration changes unless the accepted plan proves a tiny contract-only adjustment is unavoidable; autonomous booking, default production exposure, query-string free-text intake, URL/browser-storage context persistence, PHI-heavy logging, patient/practitioner search redesign, taskpane, Command Centre, billing, SMS, resource admin, broad diary redesign, and unrelated CSS cleanup |
+| Verification | Plan packet first; after approval bundled Node syntax check, route-intercepted default-hidden/allowlisted-visible/context/no-manual-ID/readiness/confirmation checks, full diary review harness if diary runtime assets change, frontend version integrity, and `git diff --check` |
+| Status | Dispatched |
+
 ## Sprint 69: Bernie Context Readiness Summary
 
 | Item | Value |
