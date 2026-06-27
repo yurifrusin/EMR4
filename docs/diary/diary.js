@@ -27,6 +27,8 @@ const BERNIE_DEV_FIXTURE_STATES = [
 const BERNIE_DEV_QUERY_PARAM_ALLOWLIST = [
   "smoke",
   "bernie_confirm_adapter",
+  "bernie_interpret",
+  "bernie_instruction",
   "practitioner_id",
   "patient_id",
   "reference_date",
@@ -184,6 +186,197 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
   }
 
   return { ready: true, body };
+}
+
+function shouldRequestBernieInterpretation({ isSmoke = false, devReviewParam = null } = {}) {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("bernie_interpret") !== "true") {
+    return false;
+  }
+  return isSmoke || devReviewParam === "true" || isBerniePilotActive;
+}
+
+function buildBernieInterpretInstruction(requestBody) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const explicitInstruction = (urlParams.get("bernie_instruction") || "").trim();
+  if (explicitInstruction) {
+    return explicitInstruction.slice(0, 1000);
+  }
+
+  const command = requestBody?.command || {};
+  const parts = [
+    command.practitioner_id ? `practitioner_id:${command.practitioner_id}` : "",
+    requestBody?.patient_id ? `patient_id:${requestBody.patient_id}` : "",
+    command.date_from ? `date_from:${command.date_from}` : "date_from:today",
+    command.duration_minutes ? `duration:${command.duration_minutes}` : "duration:15"
+  ].filter(Boolean);
+
+  return `Please find ${parts.join(" ")} earliest_time:09:00 latest_time:11:00`.slice(0, 1000);
+}
+
+async function fetchBernieInterpretation(requestBody) {
+  const instruction = buildBernieInterpretInstruction(requestBody);
+  const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
+    method: "POST",
+    body: JSON.stringify({
+      instruction,
+      reference_date: requestBody?.reference_date || localDateKey(diaryDate)
+    })
+  });
+
+  if (!response.ok) {
+    let detail = "";
+    try {
+      const errData = await response.json();
+      detail = errData.detail || response.statusText || `Status ${response.status}`;
+    } catch (_) {
+      detail = `Status ${response.status}`;
+    }
+    return {
+      safe: false,
+      result: "blocked",
+      summary: "Booking instruction interpretation failed closed.",
+      confidence: 0,
+      missing_fields: [],
+      safety_flags: ["interpret_request_failed"],
+      clarifying_question: null,
+      command_candidate: null,
+      normalization: null,
+      blocks: [
+        { code: "interpret_request_failed", message: detail }
+      ],
+      provider_metadata: {
+        provider: "disabled",
+        mode: "disabled",
+        live_provider: false
+      }
+    };
+  }
+
+  return await response.json();
+}
+
+async function maybeFetchBernieInterpretation(requestBody, options = {}) {
+  if (!shouldRequestBernieInterpretation(options)) {
+    return null;
+  }
+  try {
+    return await fetchBernieInterpretation(requestBody);
+  } catch (err) {
+    return {
+      safe: false,
+      result: "blocked",
+      summary: "Booking instruction interpretation failed closed.",
+      confidence: 0,
+      missing_fields: [],
+      safety_flags: ["interpret_network_error"],
+      clarifying_question: null,
+      command_candidate: null,
+      normalization: null,
+      blocks: [
+        { code: "interpret_network_error", message: err.message || String(err) }
+      ],
+      provider_metadata: {
+        provider: "disabled",
+        mode: "disabled",
+        live_provider: false
+      }
+    };
+  }
+}
+
+function renderBernieInterpretPreview(contentEl, envelope) {
+  if (!contentEl || !envelope) {
+    return;
+  }
+
+  const preview = document.createElement("div");
+  preview.className = `bernie-interpret-preview ${envelope.result}`;
+  preview.setAttribute("data-testid", "bernie-interpret-preview");
+
+  const header = document.createElement("div");
+  header.className = "bernie-interpret-header";
+  const title = document.createElement("span");
+  title.className = "bernie-interpret-title";
+  title.textContent = "Interpreted Intent";
+  const status = document.createElement("span");
+  status.className = `bernie-interpret-status ${envelope.result}`;
+  status.setAttribute("data-testid", "bernie-interpret-status");
+  status.textContent = (envelope.result || "blocked").replace(/_/g, " ");
+  header.append(title, status);
+  preview.appendChild(header);
+
+  const summary = document.createElement("div");
+  summary.className = "bernie-interpret-summary";
+  summary.setAttribute("data-testid", "bernie-interpret-summary");
+  summary.textContent = envelope.summary || "Bernie interpreted the booking instruction.";
+  preview.appendChild(summary);
+
+  const command = envelope.normalization?.constraint || envelope.command_candidate;
+  if (command) {
+    const commandEl = document.createElement("div");
+    commandEl.className = "bernie-interpret-command";
+    commandEl.setAttribute("data-testid", "bernie-interpret-command");
+    const commandParts = [
+      command.practitioner_id ? `Practitioner: ${command.practitioner_id}` : "",
+      command.patient_id ? `Patient: ${command.patient_id}` : "",
+      command.date_from ? `Date: ${command.date_from}` : "",
+      command.duration_minutes ? `Duration: ${command.duration_minutes} mins` : "",
+      command.earliest_time ? `Earliest: ${command.earliest_time}` : "",
+      command.latest_time ? `Latest: ${command.latest_time}` : ""
+    ].filter(Boolean);
+    commandEl.textContent = commandParts.join(" • ");
+    preview.appendChild(commandEl);
+  }
+
+  if (envelope.clarifying_question) {
+    const question = document.createElement("div");
+    question.className = "bernie-interpret-question";
+    question.setAttribute("data-testid", "bernie-interpret-question");
+    question.textContent = envelope.clarifying_question;
+    preview.appendChild(question);
+  }
+
+  const issues = [...(envelope.blocks || []), ...(envelope.warnings || [])];
+  if (issues.length > 0) {
+    const issueList = document.createElement("div");
+    issueList.className = "bernie-interpret-issues";
+    issueList.setAttribute("data-testid", "bernie-interpret-issues");
+    issues.forEach(issue => {
+      const item = document.createElement("div");
+      item.className = "bernie-interpret-issue";
+      item.setAttribute("data-testid", "bernie-interpret-issue");
+      item.textContent = `${issue.code || "issue"}: ${issue.message || ""}`;
+      issueList.appendChild(item);
+    });
+    preview.appendChild(issueList);
+  }
+
+  const metadata = envelope.provider_metadata;
+  if (metadata) {
+    const provider = document.createElement("div");
+    provider.className = "bernie-interpret-provider";
+    provider.setAttribute("data-testid", "bernie-interpret-provider");
+    provider.textContent = `Provider: ${metadata.mode || "mocked"}${metadata.live_provider ? " live" : " non-live"}`;
+    preview.appendChild(provider);
+  }
+
+  contentEl.appendChild(preview);
+}
+
+function renderBernieInterpretOnly(envelope) {
+  const contentEl = document.getElementById("bernie-review-content");
+  if (!contentEl) return;
+  contentEl.innerHTML = "";
+  renderBernieInterpretPreview(contentEl, envelope);
+
+  const hold = document.createElement("div");
+  hold.className = "bernie-interpret-hold";
+  hold.setAttribute("data-testid", "bernie-interpret-hold");
+  hold.textContent = envelope?.result === "clarification_required"
+    ? "Clarification is required before supervised booking review can continue."
+    : "Bernie blocked this instruction before supervised booking review. No booking action was prepared.";
+  contentEl.appendChild(hold);
 }
 
 function getMockSlotSearchCandidates() {
@@ -2092,10 +2285,11 @@ const mockBernieReviewConfirmationReady = {
   }
 };
 
-function renderBernieReview(payload) {
+function renderBernieReview(payload, interpretEnvelope = null) {
   const contentEl = document.getElementById("bernie-review-content");
   if (!contentEl) return;
   contentEl.innerHTML = "";
+  renderBernieInterpretPreview(contentEl, interpretEnvelope);
 
   // 1. Status Badge
   const statusBadge = document.createElement("div");
@@ -2450,6 +2644,11 @@ async function loadBernieLiveReview() {
   }
 
   let payload = null;
+  const interpretEnvelope = await maybeFetchBernieInterpretation(request.body, { isSmoke, devReviewParam });
+  if (interpretEnvelope && interpretEnvelope.result !== "interpreted") {
+    renderBernieInterpretOnly(interpretEnvelope);
+    return;
+  }
   try {
     const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
       method: "POST",
@@ -2492,7 +2691,7 @@ async function loadBernieLiveReview() {
   }
 
   if (payload) {
-    renderBernieReview(payload);
+    renderBernieReview(payload, interpretEnvelope);
     // Add the pilot banner if we are in pilot mode
     if (contentEl) {
       const banner = document.createElement("div");
@@ -2581,6 +2780,11 @@ async function initBernieReview() {
         if (!request.ready) {
           payload = request.payload;
         } else {
+          const interpretEnvelope = await maybeFetchBernieInterpretation(request.body, { isSmoke, devReviewParam });
+          if (interpretEnvelope && interpretEnvelope.result !== "interpreted") {
+            renderBernieInterpretOnly(interpretEnvelope);
+            return;
+          }
           const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
             method: "POST",
             body: JSON.stringify(request.body)
@@ -2589,6 +2793,9 @@ async function initBernieReview() {
           if (res.ok) {
             const data = await res.json();
             payload = data.staff_review;
+            if (interpretEnvelope) {
+              payload.interpretEnvelope = interpretEnvelope;
+            }
           } else {
             const errText = await res.text();
             console.error("Bernie live review error", res.status, errText);
@@ -2625,7 +2832,7 @@ async function initBernieReview() {
   }
 
   if (payload) {
-    renderBernieReview(payload);
+    renderBernieReview(payload, payload.interpretEnvelope || null);
   }
 }
 

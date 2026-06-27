@@ -638,6 +638,274 @@ def test_bernie_review_live_confirmation_ready(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_interpret_preview_renders_before_supervised_review(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    interpret_requests = []
+    supervised_requests = []
+    confirm_payloads = []
+
+    mock_interpret = {
+        "intent": "interpret_booking_instruction",
+        "safe": True,
+        "result": "interpreted",
+        "autonomy_tier": "execute_with_report",
+        "summary": "Find a 15 minute follow-up for this patient with prac-1 today.",
+        "confidence": 0.9,
+        "command_candidate": {
+            "practitioner_id": "prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "today",
+            "duration_minutes": "15",
+            "earliest_time": "09:00",
+            "latest_time": "11:00"
+        },
+        "missing_fields": [],
+        "safety_flags": [],
+        "clarifying_question": None,
+        "normalization": {
+            "safe": True,
+            "constraint": {
+                "practitioner_id": "prac-1",
+                "patient_id": "smoke-pat-1",
+                "date_from": "2026-06-27",
+                "duration_minutes": 15,
+                "earliest_time": "09:00:00",
+                "latest_time": "11:00:00"
+            },
+            "warnings": [],
+            "blocks": [],
+            "summary": "Normalized successfully."
+        },
+        "warnings": [],
+        "blocks": [],
+        "provider_metadata": {
+            "provider": "fake",
+            "mode": "mocked",
+            "live_provider": False
+        }
+    }
+    mock_review = {
+        "intent": "bernie_supervised_booking",
+        "result": "confirmation_ready",
+        "safe": True,
+        "requires_confirmation": True,
+        "autonomy_tier": "supervised",
+        "summary": "Proposal confirmation ready",
+        "normalization": mock_interpret["normalization"],
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Proposal Confirmation Ready",
+            "status": "confirmation_ready",
+            "staff_action_required": "Review and confirm booking.",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "id": "slot-65",
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:30:00",
+                "duration_minutes": 15
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Supervised review prepared from interpreted intent.",
+            "warnings": [],
+            "blocks": [],
+            "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+            "confirm_payload": { "proposal_id": "prop-65" },
+            "confirm_evidence": []
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    def handle_interpret(route):
+        interpret_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_interpret))
+
+    def handle_supervised(route):
+        supervised_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_review))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected confirm"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction", handle_interpret)
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_interpret=true&practitioner_id=prac-1&patient_id=smoke-pat-1&selected_candidate_index=0")
+        diary_page.wait_for_selector("[data-testid='bernie-interpret-preview']", state="visible", timeout=5000)
+        diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
+
+        assert len(interpret_requests) == 1
+        assert interpret_requests[0]["reference_date"] == "2026-06-27"
+        assert "practitioner_id:prac-1" in interpret_requests[0]["instruction"]
+        assert len(supervised_requests) == 1
+        assert len(confirm_payloads) == 0
+
+        assert diary_page.locator("[data-testid='bernie-interpret-status']").text_content().strip() == "interpreted"
+        assert "Find a 15 minute follow-up" in diary_page.locator("[data-testid='bernie-interpret-summary']").text_content()
+        assert "Practitioner: prac-1" in diary_page.locator("[data-testid='bernie-interpret-command']").text_content()
+        assert "Provider: mocked non-live" in diary_page.locator("[data-testid='bernie-interpret-provider']").text_content()
+        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "confirmation ready"
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").is_disabled()
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+@pytest.mark.parametrize(
+    "result,expected_status,expected_detail",
+    [
+        ("clarification_required", "clarification required", "Please provide practitioner_id before Bernie searches for slots."),
+        ("blocked", "blocked", "Autonomous booking language is blocked."),
+    ],
+)
+def test_bernie_interpret_preview_holds_supervised_review_until_safe(diary_page, result, expected_status, expected_detail):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    interpret_requests = []
+    supervised_requests = []
+    confirm_payloads = []
+    mock_interpret = {
+        "intent": "interpret_booking_instruction",
+        "safe": False,
+        "result": result,
+        "autonomy_tier": "blocked",
+        "summary": "Bernie needs more review before supervised booking.",
+        "confidence": 0.2,
+        "command_candidate": None,
+        "missing_fields": ["practitioner_id"] if result == "clarification_required" else [],
+        "safety_flags": ["autonomous_booking_language"] if result == "blocked" else [],
+        "clarifying_question": expected_detail if result == "clarification_required" else None,
+        "normalization": None,
+        "warnings": [],
+        "blocks": [
+            {
+                "code": "booking_interpreter_blocked" if result == "blocked" else "missing_practitioner_id",
+                "severity": "blocked",
+                "message": expected_detail
+            }
+        ],
+        "provider_metadata": {
+            "provider": "fake",
+            "mode": "mocked",
+            "live_provider": False
+        }
+    }
+
+    def handle_interpret(route):
+        interpret_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_interpret))
+
+    def handle_supervised(route):
+        supervised_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected supervised call"}))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected confirm call"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction", handle_interpret)
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_interpret=true&practitioner_id=prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-interpret-preview']", state="visible", timeout=5000)
+
+        assert len(interpret_requests) == 1
+        assert len(supervised_requests) == 0
+        assert len(confirm_payloads) == 0
+        assert diary_page.locator("[data-testid='bernie-interpret-status']").text_content().strip() == expected_status
+        assert diary_page.locator("[data-testid='bernie-interpret-issue']", has_text=expected_detail).count() == 1
+        assert diary_page.locator("[data-testid='bernie-interpret-hold']").is_visible()
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_interpret_request_requires_explicit_gate(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    interpret_requests = []
+    supervised_requests = []
+    mock_review = {
+        "intent": "bernie_supervised_booking",
+        "result": "blocked",
+        "safe": False,
+        "requires_confirmation": False,
+        "autonomy_tier": "blocked",
+        "summary": "Blocked review payload",
+        "normalization": None,
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Blocked",
+            "status": "blocked",
+            "staff_action_required": "Review blocked issues.",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [],
+            "warning_summary": "Blocked.",
+            "evidence_summary": "Existing review path still works without interpretation.",
+            "warnings": [],
+            "blocks": [
+                { "code": "existing_review_gate", "severity": "blocked", "message": "Existing review route." }
+            ],
+            "confirm_endpoint": None,
+            "confirm_payload": None,
+            "confirm_evidence": []
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    def handle_interpret(route):
+        interpret_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected interpret call"}))
+
+    def handle_supervised(route):
+        supervised_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_review))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction", handle_interpret)
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&practitioner_id=prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        assert len(interpret_requests) == 0
+        assert len(supervised_requests) == 1
+        assert diary_page.locator("[data-testid='bernie-interpret-preview']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="existing_review_gate").count() == 1
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_confirm_submit_adapter_success(diary_page):
     import json
     import urllib.parse

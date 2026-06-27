@@ -2393,6 +2393,104 @@ html, body {
   border-left: 3px solid var(--blue-mid);
 }
 
+.bernie-interpret-preview {
+  border: 1px solid #d8b4fe;
+  border-left: 4px solid #6a1b9a;
+  background: #faf5ff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.bernie-interpret-preview.clarification_required {
+  border-color: #fde68a;
+  border-left-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.bernie-interpret-preview.blocked {
+  border-color: #fecaca;
+  border-left-color: #dc2626;
+  background: #fff5f5;
+}
+
+.bernie-interpret-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.bernie-interpret-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #581c87;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.bernie-interpret-status {
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #ede9fe;
+  color: #5b21b6;
+  white-space: nowrap;
+}
+
+.bernie-interpret-status.clarification_required {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.bernie-interpret-status.blocked {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.bernie-interpret-summary,
+.bernie-interpret-command,
+.bernie-interpret-question,
+.bernie-interpret-provider,
+.bernie-interpret-hold {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.bernie-interpret-command {
+  margin-top: 6px;
+  color: var(--text);
+}
+
+.bernie-interpret-question {
+  margin-top: 6px;
+  font-weight: 700;
+  color: #92400e;
+}
+
+.bernie-interpret-issues {
+  margin-top: 6px;
+}
+
+.bernie-interpret-issue {
+  font-size: 11px;
+  color: #991b1b;
+}
+
+.bernie-interpret-provider {
+  margin-top: 6px;
+  color: var(--grey-4);
+}
+
+.bernie-interpret-hold {
+  border: 1px dashed var(--grey-2);
+  border-radius: 6px;
+  color: var(--grey-4);
+  padding: 8px;
+}
+
 .bernie-blocks-container, .bernie-candidates-container, .bernie-selection-container {
   display: flex;
   flex-direction: column;

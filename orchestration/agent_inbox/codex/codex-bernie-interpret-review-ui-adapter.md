@@ -90,6 +90,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Files changed: `orchestration/agent_inbox/codex/codex-bernie-interpret-review-ui-adapter.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-interpret-review-ui-adapter.md`
-- Verification run: Plan gate only; no production code changed; inspected scoped diary/review surfaces and `git diff`.
-- Remaining risks: Awaiting Ariadne plan review; no implementation, runtime asset, test, or backend changes made.
+- Files changed: `docs/diary/diary.js`; `docs/diary/diary.css`; `docs/diary/diary.html`; `review/test_diary_smoke.py`; `orchestration/agent_inbox/codex/codex-bernie-interpret-review-ui-adapter.md`.
+- Verification run: `python scripts\agent_worktrees.py handin --agent codex`; `node --check docs\diary\diary.js`; `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_interpret or bernie_pilot_ordinary_mode or bernie_review_live_confirmation_ready" --tb=short` -> 7 passed; `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 46 passed; `rg -n "diary\.css\?v=107|diary\.js\?v=117" docs\diary\diary.html`; `git diff --check`.
+- Remaining risks: Interpretation preview is gated by explicit `bernie_interpret=true` and existing smoke/dev/pilot launch/context gates; live-provider behaviour remains backend/config controlled and was not enabled or exercised. Tests route-intercept the interpretation and supervised review calls, and confirm no confirm-Bernie POST occurs before approval.
