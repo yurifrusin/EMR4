@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-interpret-live-provider-runway` |
-| Status | queued |
+| Status | submitted |
 | Created | 6ed087e |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-live-provider-runway --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-interpret-live-provider-runway.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-interpret-live-provider-runway.md`
+- Verification run: Plan gate only; no production code edited and no runtime tests run. Intake/read commands completed; plan captured with `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-live-provider-runway ...`; git diff hygiene checked before submit.
+- Remaining risks: Implementation not started. Ariadne must review/approve the plan and send exact `complete sprint task` before any backend/config/test edits.
