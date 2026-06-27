@@ -10,15 +10,15 @@
 
 ## Review Request
 
-Sprint 62 dispatched: Bernie pilot context selector
+Sprint 62 implemented: Bernie pilot context selector
 
 ## Worker Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed: `orchestration/agent_inbox/codex/plan-codex-codex-bernie-pilot-context-selector.md`; this source packet status/completion notes only.
-- Verification run: Plan gate only; no production code or review harness changes made. Intake command `python scripts\agent_worktrees.py handin --agent codex` succeeded from `C:\Users\YuriFrusin\Documents\EMR4` on branch `master`, then worker branch `codex/bernie-pilot-context-selector` was created. Plan command `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-pilot-context-selector --summary "Sprint 62 plan: Bernie pilot explicit context selector" ...` succeeded on `codex/bernie-pilot-context-selector`. `git diff --check` passed with the existing CRLF normalization warning for this packet.
-- Remaining risks: Implementation still needs Ariadne approval with `complete sprint task`; ordinary-mode context validation must avoid smoke/default fallback without blocking future legitimate IDs, and route-intercepted tests must prove zero real writes.
+- Files changed: `docs/diary/diary.js`, `docs/diary/diary.css`, `docs/diary/diary.html`, `review/test_diary_smoke.py`, and this coordination packet's completion notes. The prior plan/review packets remain on the branch from the accepted plan gate.
+- Verification run: `node --check docs\diary\diary.js`; `python scripts\check_frontend_versions.py`; initial `pytest review/test_diary_smoke.py -q -k "bernie_pilot_ordinary_mode"` failed because `pytest` was not on PATH; `& C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -q -k "bernie_pilot_ordinary_mode"` passed `2 passed`; `& C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -q -k "bernie"` passed `23 passed`; `& C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q` passed `42 passed`; `git diff --check` passed.
+- Remaining risks: Context IDs are currently explicit typed non-PHI identifiers because no backend patient search/autocomplete is in scope. The ordinary-mode guard blocks empty, `smoke-*`, `prac-1`, and `smoke-pat-1` values, while preserving smoke/dev/query harness defaults; future real patient/practitioner pickers should feed these fields rather than loosening the readiness gate.
 
 ## Required Review Steps
 

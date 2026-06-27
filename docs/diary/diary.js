@@ -39,6 +39,10 @@ let ahpraToPractitionerMap = {};
 let waitingAreas = [];
 let isBerniePilotEligible = false;
 let isBerniePilotActive = false;
+let berniePilotContext = {
+  practitionerId: "",
+  patientId: ""
+};
 const checkinDefaultCache = new Map();
 
 const LOCATION_STORAGE_KEY = "emr4_diary_active_location";
@@ -90,15 +94,41 @@ function buildBerniePilotReadinessPayload(blocks) {
   };
 }
 
+function normalizeBernieContextId(value) {
+  return (value || "").trim();
+}
+
+function isBerniePilotDefaultContextId(value) {
+  const normalized = normalizeBernieContextId(value).toLowerCase();
+  return !normalized || normalized.startsWith("smoke-") || normalized === "prac-1" || normalized === "smoke-pat-1";
+}
+
+function getBerniePilotContextValues() {
+  const practitionerInput = document.getElementById("bernie-pilot-practitioner-id");
+  const patientInput = document.getElementById("bernie-pilot-patient-id");
+  return {
+    practitionerId: normalizeBernieContextId(practitionerInput?.value || berniePilotContext.practitionerId),
+    patientId: normalizeBernieContextId(patientInput?.value || berniePilotContext.patientId)
+  };
+}
+
+function setBerniePilotContextValues(values) {
+  berniePilotContext = {
+    practitionerId: normalizeBernieContextId(values?.practitionerId),
+    patientId: normalizeBernieContextId(values?.patientId)
+  };
+}
+
 function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) {
   const urlParams = new URLSearchParams(window.location.search);
   const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
   const queryPractitionerId = urlParams.get("practitioner_id");
   const queryPatientId = urlParams.get("patient_id");
   const queryReferenceDate = urlParams.get("reference_date");
+  const explicitContext = getBerniePilotContextValues();
 
-  const practitionerId = allowHarnessDefaults ? (queryPractitionerId || "prac-1") : queryPractitionerId;
-  const patientId = allowHarnessDefaults ? (queryPatientId || "smoke-pat-1") : queryPatientId;
+  const practitionerId = allowHarnessDefaults ? (queryPractitionerId || "prac-1") : (explicitContext.practitionerId || queryPractitionerId);
+  const patientId = allowHarnessDefaults ? (queryPatientId || "smoke-pat-1") : (explicitContext.patientId || queryPatientId);
   const referenceDate = allowHarnessDefaults ? (queryReferenceDate || "2026-06-27") : (queryReferenceDate || localDateKey(diaryDate));
 
   const blocks = [];
@@ -107,11 +137,21 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
       code: "missing_practitioner_context",
       message: "Select or load a real practitioner diary context before launching Bernie Pilot."
     });
+  } else if (!allowHarnessDefaults && isBerniePilotDefaultContextId(practitionerId)) {
+    blocks.push({
+      code: "default_practitioner_context",
+      message: "Use an explicit non-default practitioner context before launching Bernie Pilot."
+    });
   }
   if (!patientId && (!allowHarnessDefaults || (selectedIndex !== null && !isNaN(selectedIndex)))) {
     blocks.push({
       code: "missing_patient_context",
       message: "Select or load a real patient context before asking Bernie to prepare a booking confirmation."
+    });
+  } else if (!allowHarnessDefaults && isBerniePilotDefaultContextId(patientId)) {
+    blocks.push({
+      code: "default_patient_context",
+      message: "Use an explicit non-smoke patient context before asking Bernie to prepare a booking confirmation."
     });
   }
   if (!referenceDate) {
@@ -134,12 +174,12 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
       practitioner_id: practitionerId,
       date_from: "today",
       duration_minutes: "15"
-    }
+    },
+    patient_id: patientId
   };
 
   if (selectedIndex !== null && !isNaN(selectedIndex)) {
     body.selected_candidate_index = selectedIndex;
-    body.patient_id = patientId;
     body.reason = "Follow-up";
   }
 
@@ -2269,6 +2309,78 @@ function renderBernieReview(payload) {
   }
 }
 
+function renderBerniePilotContextForm(blocks = []) {
+  const contentEl = document.getElementById("bernie-review-content");
+  if (!contentEl) return;
+
+  const currentContext = getBerniePilotContextValues();
+  const form = document.createElement("form");
+  form.className = "bernie-pilot-context-form";
+  form.setAttribute("data-testid", "bernie-pilot-context-form");
+
+  const title = document.createElement("div");
+  title.className = "bernie-pilot-context-title";
+  title.textContent = "Pilot context required";
+  form.appendChild(title);
+
+  const hint = document.createElement("p");
+  hint.className = "bernie-pilot-context-hint";
+  hint.textContent = "Enter explicit non-default practitioner and patient context before Bernie prepares a supervised booking review.";
+  form.appendChild(hint);
+
+  const practitionerLabel = document.createElement("label");
+  practitionerLabel.className = "bernie-pilot-context-label";
+  practitionerLabel.textContent = "Practitioner context ID";
+  const practitionerInput = document.createElement("input");
+  practitionerInput.id = "bernie-pilot-practitioner-id";
+  practitionerInput.setAttribute("data-testid", "bernie-pilot-practitioner-id");
+  practitionerInput.type = "text";
+  practitionerInput.autocomplete = "off";
+  practitionerInput.placeholder = "e.g. practitioner UUID";
+  practitionerInput.value = currentContext.practitionerId;
+  practitionerLabel.appendChild(practitionerInput);
+  form.appendChild(practitionerLabel);
+
+  const patientLabel = document.createElement("label");
+  patientLabel.className = "bernie-pilot-context-label";
+  patientLabel.textContent = "Patient context ID";
+  const patientInput = document.createElement("input");
+  patientInput.id = "bernie-pilot-patient-id";
+  patientInput.setAttribute("data-testid", "bernie-pilot-patient-id");
+  patientInput.type = "text";
+  patientInput.autocomplete = "off";
+  patientInput.placeholder = "explicit non-PHI patient ID";
+  patientInput.value = currentContext.patientId;
+  patientLabel.appendChild(patientInput);
+  form.appendChild(patientLabel);
+
+  if (blocks.length > 0) {
+    const summary = document.createElement("div");
+    summary.className = "bernie-pilot-context-warning";
+    summary.setAttribute("data-testid", "bernie-pilot-context-warning");
+    summary.textContent = "Bernie will stay blocked until both context fields are explicit and non-default.";
+    form.appendChild(summary);
+  }
+
+  const submitBtn = document.createElement("button");
+  submitBtn.type = "submit";
+  submitBtn.className = "btn-bernie-context-submit";
+  submitBtn.setAttribute("data-testid", "bernie-pilot-context-submit");
+  submitBtn.textContent = "Prepare supervised review";
+  form.appendChild(submitBtn);
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    setBerniePilotContextValues({
+      practitionerId: practitionerInput.value,
+      patientId: patientInput.value
+    });
+    loadBernieLiveReview();
+  });
+
+  contentEl.insertBefore(form, contentEl.firstChild);
+}
+
 async function checkBerniePilotEligibility() {
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = urlParams.get("smoke") === "true";
@@ -2331,6 +2443,9 @@ async function loadBernieLiveReview() {
 
   if (!request.ready) {
     renderBernieReview(request.payload);
+    if (!allowHarnessDefaults) {
+      renderBerniePilotContextForm(request.payload.blocks);
+    }
     return;
   }
 

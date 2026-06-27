@@ -1596,12 +1596,150 @@ def test_bernie_pilot_ordinary_mode_requires_real_context(diary_page):
 
         assert len(supervised_requests) == 0
         assert len(confirm_payloads) == 0
+        assert diary_page.locator("[data-testid='bernie-pilot-context-form']").is_visible()
+        assert diary_page.locator("[data-testid='bernie-pilot-context-warning']").is_visible()
         assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "blocked"
         assert diary_page.locator("[data-testid='bernie-review-action']", has_text="real diary context").count() == 1
         assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_context").count() == 1
         assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_patient_context").count() == 1
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
+
+        diary_page.fill("[data-testid='bernie-pilot-practitioner-id']", "prac-1")
+        diary_page.fill("[data-testid='bernie-pilot-patient-id']", "smoke-pat-1")
+        diary_page.click("[data-testid='bernie-pilot-context-submit']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-block-item']:has-text('default_practitioner_context')", state="visible", timeout=5000)
+
+        assert len(supervised_requests) == 0
+        assert len(confirm_payloads) == 0
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="default_patient_context").count() == 1
+    finally:
+        diary_page.evaluate("localStorage.removeItem('emr4_token')")
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+
+    mock_live_review = {
+        "intent": "bernie_supervised_booking",
+        "result": "confirmation_ready",
+        "safe": True,
+        "requires_confirmation": True,
+        "autonomy_tier": "supervised",
+        "summary": "Proposal confirmation ready",
+        "normalization": {
+            "safe": True,
+            "constraint": { "practitioner_id": "real-prac-62" },
+            "warnings": [],
+            "blocks": [],
+            "summary": "Normalized successfully"
+        },
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Proposal Confirmation Ready",
+            "status": "confirmation_ready",
+            "staff_action_required": "Review and confirm booking.",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "id": "slot-62",
+                "appointment_date": "2026-06-27",
+                "start_time_local": "10:15:00",
+                "duration_minutes": 15
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Explicit pilot context accepted.",
+            "warnings": [],
+            "blocks": [],
+            "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+            "confirm_payload": { "proposal_id": "prop-62" },
+            "confirm_evidence": []
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    supervised_requests = []
+    confirm_payloads = []
+
+    def handle_api(route):
+        url = route.request.url
+        if "/api/v1/appointments/bernie/pilot-eligibility" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_eligibility))
+        elif "/api/v1/appointments/proposals/bernie/supervised-booking" in url:
+            supervised_requests.append(json.loads(route.request.post_data or "{}"))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_live_review))
+        elif "/api/v1/appointments/proposals/create/confirm-bernie" in url:
+            confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        elif "/api/v1/auth/me" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
+        elif "/api/v1/diary/template" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"slot_defaults": {"start": "09:00", "end": "17:00", "interval_minutes": 15}, "columns": []}))
+        elif "/api/v1/appointments/types" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/appointments" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/diary/roster" in url or "/api/v1/diary/waiting-areas" in url or "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        else:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
+
+    diary_page.route("**/api/v1/**", handle_api)
+
+    try:
+        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-launch-button']:not(.hidden)", state="visible", timeout=5000)
+
+        diary_page.click("[data-testid='bernie-pilot-launch-button']")
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-context-form']", state="visible", timeout=5000)
+        assert len(supervised_requests) == 0
+        assert len(confirm_payloads) == 0
+
+        diary_page.fill("[data-testid='bernie-pilot-practitioner-id']", "real-prac-62")
+        diary_page.fill("[data-testid='bernie-pilot-patient-id']", "real-patient-62")
+        diary_page.click("[data-testid='bernie-pilot-context-submit']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
+
+        assert len(supervised_requests) == 1
+        assert supervised_requests[0]["command"]["practitioner_id"] == "real-prac-62"
+        assert supervised_requests[0]["patient_id"] == "real-patient-62"
+        assert supervised_requests[0]["reference_date"]
+        assert len(confirm_payloads) == 0
+
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        assert confirm_btn.is_disabled()
+        try:
+            confirm_btn.click(timeout=1000, force=True)
+        except Exception:
+            pass
+        assert len(confirm_payloads) == 0
+
+        checkbox.check()
+        assert confirm_btn.is_disabled() is False
+        confirm_btn.click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
+        assert len(confirm_payloads) == 1
+        assert confirm_payloads[0]["proposal_id"] == "prop-62"
+        assert confirm_payloads[0]["confirmed"] is True
     finally:
         diary_page.evaluate("localStorage.removeItem('emr4_token')")
         diary_page.unroute("**/api/v1/**")
