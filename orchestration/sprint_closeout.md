@@ -8,6 +8,51 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 71: Dependabot uuid Alert Triage |
+| Integrated through | GitHub REST and local static triage of Dependabot alert 5 (`npm uuid`, GHSA-w5hq-g745-h8pq / CVE-2026-41907) |
+| Status | Triaged, documented, no runtime code changes |
+| Last updated | 2026-06-27 |
+
+## What Changed
+
+- No production/runtime code changed.
+- Ariadne verified GitHub CLI auth from Codex through `C:\Program Files\GitHub CLI\gh.exe`.
+- Dependabot alert 5 targets `EMR4 Sidebar/package-lock.json`, `uuid` `8.3.2`, development scope, transitive relationship.
+- Static lockfile review shows the vulnerable package is dev-only, pulled by Office/Microsoft build tooling (`@azure/msal-node`, `@microsoft/teamsfx-core`, `office-addin-manifest`, `sockjs`); the only nested modern `uuid` copy is `13.0.2` under `@microsoft/kiota`.
+- Static source search found no EMR4 JavaScript/TypeScript imports or calls to the npm `uuid` APIs named in the advisory (`v3`, `v5`, `v6` with caller-provided buffers/offsets).
+
+## Verification
+
+- GitHub REST intake: `gh api /repos/yurifrusin/EMR4/dependabot/alerts?classification=general&state=open&per_page=100`.
+- Local static package-lock parse with bundled Node confirmed `node_modules/uuid` is `8.3.2` and `dev: true`.
+- Local static source search over non-`node_modules` JS/TS found no npm `uuid` use.
+- No repo-root `SECURITY.md` was found; this remains a security-policy documentation gap, not evidence of exploitability.
+- `python scripts\agent_worktrees.py audit --fetch` showed `master`, `handoff/current`, and all durable worker mirrors aligned and clean at `bb3e86b`.
+- `git status --short --branch` showed a clean `master` before documentation edits.
+
+## Triage Verdict
+
+`not_actionable` for EMR4 product runtime security. The alert is worth clearing as dependency housekeeping later, but the advisory's exploit path requires application use of affected npm `uuid` APIs with caller-controlled buffers or offsets. EMR4 has no such JS/TS call path, and the dependency is dev-only build tooling.
+
+## Not Required Before Moving On
+
+- No emergency production fix, backend restart, GitHub Pages deploy, or user live test is required.
+- Do not dismiss the GitHub alert without an explicit housekeeping decision; it is still useful as a reminder to modernise or override the Office add-in build dependency tree when safe.
+
+## Known Follow-Up
+
+- Consider a later dependency-maintenance sprint to trial safe `uuid` override/lockfile updates in the Office add-in tooling and run `npm run validate-all`.
+- Add a repo-root `SECURITY.md` when the public/open-source security intake process is ready.
+- Antigravity CLI still exits with no stdout and no worktree changes in this Codex session; Ariadne should treat that channel as suspect until it is separately repaired.
+
+## Recommended Next Direction
+
+Next recommended sprint: continue Bernie pilot refinement with a narrow staff-visible usability/safety slice now that the open dependency alert has been triaged.
+
+## Previous Closeout - Sprint 70
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 70: Bernie Staff-Visible Pilot Entry Path |
 | Integrated through | Allowlisted non-default staff launcher that requires selected linked appointment context and hides manual ID entry outside smoke/dev |
 | Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
@@ -35,7 +80,7 @@ reviewed, integrated, verified, pushed, and audited.
 ## Known Follow-Up
 
 - Antigravity CLI still exits with no stdout and no worktree changes in this Codex session; Ariadne should treat that channel as suspect until it is separately repaired.
-- The known moderate Dependabot alert remains outside this sprint.
+- The moderate Dependabot alert was triaged after this sprint as Sprint 71.
 
 ## Recommended Next Direction
 
