@@ -28,7 +28,6 @@ const BERNIE_DEV_QUERY_PARAM_ALLOWLIST = [
   "smoke",
   "bernie_confirm_adapter",
   "bernie_interpret",
-  "bernie_instruction",
   "practitioner_id",
   "patient_id",
   "reference_date",
@@ -197,12 +196,6 @@ function shouldRequestBernieInterpretation({ isSmoke = false, devReviewParam = n
 }
 
 function buildBernieInterpretInstruction(requestBody) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const explicitInstruction = (urlParams.get("bernie_instruction") || "").trim();
-  if (explicitInstruction) {
-    return explicitInstruction.slice(0, 1000);
-  }
-
   const command = requestBody?.command || {};
   const parts = [
     command.practitioner_id ? `practitioner_id:${command.practitioner_id}` : "",
