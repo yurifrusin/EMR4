@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-interpret-review-ui-adapter` |
-| Status | queued |
+| Status | submitted |
 | Created | c312cea |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-review-ui-adapter --summary "Short plan summary"` |
@@ -90,5 +90,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-interpret-review-ui-adapter.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-interpret-review-ui-adapter.md`
+- Verification run: Plan gate only; no production code changed; inspected scoped diary/review surfaces and `git diff`.
+- Remaining risks: Awaiting Ariadne plan review; no implementation, runtime asset, test, or backend changes made.
