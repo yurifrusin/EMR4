@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-interpret-booking-instruction` |
-| Status | queued |
+| Status | submitted |
 | Created | 558734e |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-booking-instruction --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/config.py`; `app/schemas/appointments.py`; `app/services/bernie_booking_interpreter.py`; `app/routers/appointments.py`; `tests/test_bernie_interpret_booking_instruction.py`; `orchestration/agent_inbox/codex/codex-bernie-interpret-booking-instruction.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-interpret-booking-instruction.md`; `orchestration/agent_inbox/codex/review-codex-codex-bernie-interpret-booking-instruction.md`.
+- Verification run: `python scripts\agent_worktrees.py handin --agent codex`; `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\routers\appointments.py app\services\bernie_booking_interpreter.py tests\test_bernie_interpret_booking_instruction.py`; `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_slot_search_normalized_execution.py tests\test_bernie_wrapper_confirmation_review_harness.py -q` -> 28 passed; `git diff --check`.
+- Remaining risks: Fake parser is intentionally narrow and only proves the provider/schema boundary; future live provider integration still needs separate prompt, PHI, logging, credential, and safety review before enabling outside fake/default-disabled posture.
