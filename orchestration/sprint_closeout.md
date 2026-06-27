@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 66: Bernie Staff Instruction Input Surface |
 | Integrated through | Pilot-gated staff-entered booking instruction input for Bernie review |
-| Status | Integrated locally, verified, and awaiting push/mirror/audit closeout |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
