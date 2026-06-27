@@ -10,9 +10,11 @@
 const NGROK_URL   = "https://property-cinch-backfield.ngrok-free.dev";
 const BACKEND_URL = (window.location.port === "3000")
   ? "http://localhost:8001"
-  : window.location.hostname.includes("ngrok")
+  : (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")
     ? window.location.origin
-    : NGROK_URL;
+    : window.location.hostname.includes("ngrok")
+      ? window.location.origin
+      : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
 const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
@@ -44,6 +46,8 @@ let berniePilotContext = {
   practitionerId: "",
   patientId: ""
 };
+let bernieInstructionText = "";
+let bernieInterpretResult = null;
 const checkinDefaultCache = new Map();
 
 const LOCATION_STORAGE_KEY = "emr4_diary_active_location";
@@ -361,6 +365,9 @@ function renderBernieInterpretOnly(envelope) {
   const contentEl = document.getElementById("bernie-review-content");
   if (!contentEl) return;
   contentEl.innerHTML = "";
+  if (isBerniePilotActive) {
+    renderBernieInstructionInput(contentEl);
+  }
   renderBernieInterpretPreview(contentEl, envelope);
 
   const hold = document.createElement("div");
@@ -2282,7 +2289,12 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   const contentEl = document.getElementById("bernie-review-content");
   if (!contentEl) return;
   contentEl.innerHTML = "";
-  renderBernieInterpretPreview(contentEl, interpretEnvelope);
+  if (isBerniePilotActive) {
+    renderBernieInstructionInput(contentEl);
+  }
+  if (interpretEnvelope) {
+    renderBernieInterpretPreview(contentEl, interpretEnvelope);
+  }
 
   // 1. Status Badge
   const statusBadge = document.createElement("div");
@@ -2420,9 +2432,10 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     const isSmoke = urlParams.get("smoke") === "true";
     const reviewParam = urlParams.get("bernie_review");
     const devReviewParam = urlParams.get("bernie_dev_review");
-    const isConfirmAdapter = (isSmoke && urlParams.get("bernie_confirm_adapter") === "true" && (reviewParam !== "live" || devReviewParam === "true")) ||
-                             (!isSmoke && reviewParam === "live" && devReviewParam === "true") ||
-                             isBerniePilotActive;
+    const isConfirmAdapter = isBerniePilotActive
+      ? (!isSmoke || urlParams.get("bernie_confirm_adapter") === "true" || reviewParam !== "live")
+      : ((isSmoke && urlParams.get("bernie_confirm_adapter") === "true" && (reviewParam !== "live" || devReviewParam === "true")) ||
+         (!isSmoke && reviewParam === "live" && devReviewParam === "true"));
 
     const successMsg = document.createElement("div");
     successMsg.className = "bernie-success-alert hidden";
@@ -2450,6 +2463,8 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
     // Event listener to simulate or execute confirmation
     confirmBtn.addEventListener("click", async () => {
+      if (confirmBtn.disabled) return;
+      console.log("Confirm click triggered. isConfirmAdapter =", isConfirmAdapter, "endpoint =", payload.confirm_endpoint, "payload =", payload.confirm_payload);
       confirmBtn.disabled = true;
       checkbox.disabled = true;
       successMsg.classList.add("hidden");
@@ -2465,6 +2480,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             method: "POST",
             body: JSON.stringify(body)
           });
+          console.log("apiFetch returned status:", response.status, "ok:", response.ok);
           if (response.ok) {
             successMsg.classList.remove("hidden");
           } else {
@@ -2475,12 +2491,14 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             } catch (e) {
               detail = `Status ${response.status}`;
             }
+            console.log("apiFetch error detail:", detail);
             errorMsg.textContent = `Booking proposal confirmation failed: ${detail}`;
             errorMsg.classList.remove("hidden");
             confirmBtn.disabled = false;
             checkbox.disabled = false;
           }
         } catch (err) {
+          console.log("apiFetch exception caught:", err);
           errorMsg.textContent = `Booking proposal confirmation failed: ${err.message || err}`;
           errorMsg.classList.remove("hidden");
           confirmBtn.disabled = false;
@@ -2611,6 +2629,77 @@ async function checkBerniePilotEligibility() {
   }
 }
 
+function renderBernieInstructionInput(contentEl) {
+  if (!contentEl) return;
+
+  const container = document.createElement("div");
+  container.id = "bernie-instruction-container";
+  container.className = "bernie-instruction-container";
+
+  const textarea = document.createElement("textarea");
+  textarea.id = "bernie-instruction-input";
+  textarea.setAttribute("data-testid", "bernie-instruction-input");
+  textarea.placeholder = "Type a non-PHI booking instruction...";
+  textarea.value = bernieInstructionText || "";
+
+  const button = document.createElement("button");
+  button.id = "btn-bernie-instruction-submit";
+  button.className = "btn-bernie-instruction-submit";
+  button.setAttribute("data-testid", "btn-bernie-instruction-submit");
+  button.textContent = "Submit to Bernie";
+
+  container.appendChild(textarea);
+  container.appendChild(button);
+  contentEl.appendChild(container);
+
+  button.addEventListener("click", async () => {
+    const text = textarea.value.trim();
+    if (!text) return;
+
+    bernieInstructionText = text;
+    button.disabled = true;
+    textarea.disabled = true;
+    button.textContent = "Interpreting...";
+
+    try {
+      const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
+        method: "POST",
+        body: JSON.stringify({
+          instruction: bernieInstructionText,
+          reference_date: localDateKey(diaryDate)
+        })
+      });
+
+      if (response.ok) {
+        bernieInterpretResult = await response.json();
+      } else {
+        let detail = "";
+        try {
+          const errData = await response.json();
+          detail = errData.detail || response.statusText || `Status ${response.status}`;
+        } catch (_) {
+          detail = `Status ${response.status}`;
+        }
+        bernieInterpretResult = {
+          safe: false,
+          result: "blocked",
+          summary: "Booking instruction interpretation failed closed.",
+          blocks: [{ code: "interpret_request_failed", message: detail }]
+        };
+      }
+    } catch (err) {
+      bernieInterpretResult = {
+        safe: false,
+        result: "blocked",
+        summary: "Booking instruction interpretation failed closed.",
+        blocks: [{ code: "interpret_network_error", message: err.message || String(err) }]
+      };
+    }
+
+    loadBernieLiveReview();
+  });
+}
+
 async function loadBernieLiveReview() {
   const panel = document.getElementById("bernie-review-panel");
   if (panel) {
@@ -2618,9 +2707,6 @@ async function loadBernieLiveReview() {
   }
 
   const contentEl = document.getElementById("bernie-review-content");
-  if (contentEl) {
-    contentEl.innerHTML = '<div class="bernie-loading">Loading live pilot review...</div>';
-  }
 
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = urlParams.get("smoke") === "true";
@@ -2636,16 +2722,55 @@ async function loadBernieLiveReview() {
     return;
   }
 
-  let payload = null;
-  const interpretEnvelope = await maybeFetchBernieInterpretation(request.body, { isSmoke, devReviewParam });
-  if (interpretEnvelope && interpretEnvelope.result !== "interpreted") {
-    renderBernieInterpretOnly(interpretEnvelope);
+  // If there is no instruction text, render the empty input state
+  if (!bernieInstructionText) {
+    if (contentEl) {
+      contentEl.innerHTML = "";
+      renderBernieInstructionInput(contentEl);
+    }
     return;
   }
+
+  // If instruction text is entered, but we haven't interpreted it yet
+  if (!bernieInterpretResult) {
+    if (contentEl) {
+      contentEl.innerHTML = "";
+      renderBernieInstructionInput(contentEl);
+    }
+    return;
+  }
+
+  // Render based on interpretation result
+  if (bernieInterpretResult.result !== "interpreted") {
+    renderBernieInterpretOnly(bernieInterpretResult);
+    return;
+  }
+
+  // If interpreted, load supervised booking
+  if (contentEl) {
+    // Clear and keep instruction form at the top, then show loading underneath
+    contentEl.innerHTML = "";
+    renderBernieInstructionInput(contentEl);
+    const loader = document.createElement("div");
+    loader.className = "bernie-loading";
+    loader.textContent = "Loading live pilot review...";
+    contentEl.appendChild(loader);
+  }
+
+  let payload = null;
+  const supervisedBody = {
+    reference_date: request.body.reference_date,
+    command: bernieInterpretResult.command_candidate
+  };
+  if (request.body.selected_candidate_index !== undefined) {
+    supervisedBody.selected_candidate_index = request.body.selected_candidate_index;
+    supervisedBody.reason = request.body.reason;
+  }
+
   try {
     const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
       method: "POST",
-      body: JSON.stringify(request.body)
+      body: JSON.stringify(supervisedBody)
     });
 
     if (res.ok) {
@@ -2684,14 +2809,20 @@ async function loadBernieLiveReview() {
   }
 
   if (payload) {
-    renderBernieReview(payload, interpretEnvelope);
+    renderBernieReview(payload, bernieInterpretResult);
     // Add the pilot banner if we are in pilot mode
     if (contentEl) {
       const banner = document.createElement("div");
       banner.className = "bernie-pilot-banner";
       banner.setAttribute("data-testid", "bernie-pilot-banner");
       banner.innerHTML = "⚠️ <strong>Supervised Pilot Mode:</strong> Verify all details before confirming.";
-      contentEl.insertBefore(banner, contentEl.firstChild);
+      // Insert right after the instruction container
+      const container = document.getElementById("bernie-instruction-container");
+      if (container && container.nextSibling) {
+        contentEl.insertBefore(banner, container.nextSibling);
+      } else {
+        contentEl.insertBefore(banner, contentEl.firstChild);
+      }
     }
   }
 }
@@ -2709,13 +2840,11 @@ async function initBernieReview() {
   const isDevFixture = devReviewParam === "true" && isBernieDevFixtureState(reviewParam);
 
   if (reviewParam === "live") {
-    if (devReviewParam !== "true") {
-      return;
+    if (devReviewParam === "true") {
+      isBerniePilotActive = true;
+      loadBernieLiveReview();
     }
-  } else {
-    if (!isSmoke && !isDevFixture) {
-      return;
-    }
+    return;
   }
 
   const panel = document.getElementById("bernie-review-panel");
@@ -2767,60 +2896,6 @@ async function initBernieReview() {
       payload = mockBernieReviewCandidateSelection;
     } else if (reviewParam === "confirmation_ready") {
       payload = mockBernieReviewConfirmationReady;
-    } else if (reviewParam === "live") {
-      try {
-        const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults: true });
-        if (!request.ready) {
-          payload = request.payload;
-        } else {
-          const interpretEnvelope = await maybeFetchBernieInterpretation(request.body, { isSmoke, devReviewParam });
-          if (interpretEnvelope && interpretEnvelope.result !== "interpreted") {
-            renderBernieInterpretOnly(interpretEnvelope);
-            return;
-          }
-          const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
-            method: "POST",
-            body: JSON.stringify(request.body)
-          });
-
-          if (res.ok) {
-            const data = await res.json();
-            payload = data.staff_review;
-            if (interpretEnvelope) {
-              payload.interpretEnvelope = interpretEnvelope;
-            }
-          } else {
-            const errText = await res.text();
-            console.error("Bernie live review error", res.status, errText);
-            payload = {
-              status: "blocked",
-              confirmation_ready: false,
-              selected_slot: null,
-              candidate_slots: [],
-              warning_summary: `Error response from backend: ${res.status}`,
-              evidence_summary: "Live backend review failed.",
-              confirm_payload: null,
-              blocks: [
-                { code: "live_error", message: `HTTP status ${res.status}` }
-              ]
-            };
-          }
-        }
-      } catch (e) {
-        console.error("Failed to fetch live Bernie review", e);
-        payload = {
-          status: "blocked",
-          confirmation_ready: false,
-          selected_slot: null,
-          candidate_slots: [],
-          warning_summary: "Network error fetching live review.",
-          evidence_summary: "Live backend review failed.",
-          confirm_payload: null,
-          blocks: [
-            { code: "network_error", message: e.message }
-          ]
-        };
-      }
     }
   }
 
