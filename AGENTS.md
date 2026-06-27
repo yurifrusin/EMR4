@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 46 - Bernie supervised booking wrapper contract queued for Codex worker |
-| **Next recommended work** | Spawn Codex worker for Sprint 46 plan, then review the plan before implementation |
+| **Current active track** | Sprint 64 - Bernie interpret live provider runway integrated; closeout in progress |
+| **Next recommended work** | Push Sprint 64 closeout, realign mirrors, audit, notify Yuri, then choose between mocked UI consumption or explicit live-provider smoke |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -479,7 +479,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 45 Bernie confirmed flow harness closeout commit `9ede142` |
+| **Latest integration commit** | Sprint 64 Bernie interpret live provider runway closeout commit |
 
 ### Tag map (all tags pushed to remote)
 

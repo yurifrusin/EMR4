@@ -9,7 +9,7 @@
 | Worker Branch | `codex/bernie-interpret-live-provider-runway` |
 | Branch | `codex/bernie-interpret-live-provider-runway` |
 | Source Task | `codex-bernie-interpret-live-provider-runway` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 12:22 +1000 |
 | Source HEAD | `42e8bf8` |
 
@@ -47,6 +47,6 @@ Main ambiguity is the repo's existing Gemini/Vertex client pattern: if there is 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; backend-only/default-off provider runway plan was scoped and safe.
+- Required changes before implementation: None.
+- Approved to proceed: yes

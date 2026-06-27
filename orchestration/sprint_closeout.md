@@ -8,49 +8,62 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 63: Bernie Interpret Booking Instruction Endpoint |
-| Integrated through | Read-only mocked/default-disabled Bernie booking-instruction interpreter |
+| Batch | Sprint 64: Bernie Interpret Live Provider Runway |
+| Integrated through | Default-off Gemini/Vertex provider seam for Bernie booking-instruction interpretation |
 | Status | Integrated and locally verified; push/mirror/audit pending this closeout commit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added `POST /api/v1/appointments/proposals/bernie/interpret-booking-instruction` as the first read-only Bernie AI runway endpoint.
-- Added strict request/response schemas for raw staff instruction intake, structured booking intent, command candidate, confidence, missing fields, safety flags, clarifying question, normalization result, and provider metadata.
-- Added `app/services/bernie_booking_interpreter.py` with a provider boundary, disabled provider, and deterministic fake provider; no live Gemini/Vertex provider is wired in this sprint.
-- Added config `bernie_booking_interpreter_provider`, defaulting to `disabled`.
-- The endpoint is authenticated but non-mutating: it does not create appointments, create proposals, confirm bookings, write audit rows, search slots, or call live LLM/provider services.
-- Added focused backend tests for auth, disabled/default-safe response, fake structured interpretation, missing-field clarification, autonomous-booking-language blocking, and source-level no-write/no-LLM proof.
+- Added an explicit `gemini_vertex` live-provider path behind the existing `bernie_booking_interpreter_provider` config; the default remains `disabled`.
+- Reused the existing EMR4 AI provider boundary instead of importing Gemini/Vertex SDKs directly into the Bernie interpreter.
+- Added `bernie_booking_interpreter_live_temperature`, defaulting to `0.0`, for the live provider call.
+- Extended Bernie interpreter provider metadata to represent `gemini_vertex` / `live` while preserving existing `disabled` and `fake` responses.
+- Added prompt/output parsing that requests strict JSON, validates through the existing slot-search command schema and normalizer, and fails closed on invalid/malformed provider output.
+- Preserved non-mutating behaviour: the interpreter still does not create appointments, proposals, confirmations, audit rows, or slot-search executions.
+- Added mocked-live tests proving explicit-config live behaviour without making cloud calls in ordinary tests.
 
 ## Recommended User Review
 
-Residual user review/testing after closeout: none required before pausing.
-Ariadne verified this backend-only slice with deterministic tests. The new endpoint is disabled by default, returns structured blocked/clarifying output in safe states, and uses only a deterministic fake provider when explicitly configured in tests.
+Residual user review/testing after closeout: none required.
+Ariadne verified this backend-only runway with deterministic tests. The live provider is reachable only by explicit configuration, ordinary tests mock the provider, and no live GCP/Gemini credential or browser/API smoke is required before moving on.
 
 ## Not Required Before Moving On
 
 - No manual live UI test is required; there are no frontend changes.
-- No manual live API write test is required; the endpoint is read-only and tests prove no appointment/audit/proposal/confirm writes.
-- No database migration, GCP/Gemini credential, service-account key, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required for this sprint.
+- No manual live API write test is required; the endpoint remains read-only and tests prove no appointment/audit/proposal/confirm writes.
+- No real Gemini/Vertex smoke is required yet; live cloud execution should wait until the Bernie service-account/ADC setup is intentionally exercised.
+- No database migration, service-account key, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required for this sprint.
 
 ## Known Follow-Up
 
-- A future sprint can wire a real Gemini/Vertex provider behind explicit config and the separate Bernie service account, after prompt/PHI/logging/credential safety review.
-- A future sprint can connect the structured interpret envelope to the supervised booking review UI when the live provider path is ready.
+- Run a future explicit live Gemini/Vertex smoke using the Bernie service account or ADC/service-account impersonation once Yuri wants to validate real provider behaviour.
+- A future sprint can connect the interpreted live/fake envelope into the supervised booking review UI path.
 - The known moderate Dependabot alert remains outside this sprint.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification
 
 - Ariadne reviewed Cicero's plan and implementation packets, inspected the branch diff against `master`, and reran the worker's verification locally using the shared project venv before integration.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\routers\appointments.py app\services\bernie_booking_interpreter.py tests\test_bernie_interpret_booking_instruction.py` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_slot_search_normalized_execution.py tests\test_bernie_wrapper_confirmation_review_harness.py -q --tb=short -p no:randomly` -> 28 passed.
+- Ariadne applied a bounded docstring repair so the interpreter module accurately states that only the explicitly configured live provider path can call the AI provider.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\services\bernie_booking_interpreter.py tests\test_bernie_interpret_booking_instruction.py` -> passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_slot_search_normalized_execution.py tests\test_bernie_wrapper_confirmation_review_harness.py -q --tb=short -p no:randomly` -> 33 passed.
 - `git diff --check` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-Pause sprint automation as requested. When resuming, choose between (1) live Gemini/Vertex provider wiring for the interpret endpoint behind explicit config and the new Bernie service account, or (2) UI consumption of the structured interpret envelope using the fake provider for deterministic review.
+Next recommended sprint: connect the structured Bernie interpret envelope into the supervised booking review UI using fake/mocked data first, or run a narrow explicit live-provider smoke once Yuri has completed ADC/service-account impersonation setup.
+
+## Previous Closeout - Sprint 63
+| Item | Value |
+|---|---|
+| Batch | Sprint 63: Bernie Interpret Booking Instruction Endpoint |
+| Integrated through | Read-only mocked/default-disabled Bernie booking-instruction interpreter |
+| Status | Integrated, verified, pushed, mirrored, audited, and closed |
+| Last updated | 2026-06-27 |
+
+Sprint 63 added the first read-only Bernie booking-instruction interpreter endpoint with disabled/default-safe and deterministic fake-provider behaviour. No manual user review was required.
 
 ## Previous Closeout - Sprint 58
 | Item | Value |

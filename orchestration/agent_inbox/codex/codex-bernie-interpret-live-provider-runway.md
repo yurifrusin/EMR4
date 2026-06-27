@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-interpret-live-provider-runway` |
-| Status | submitted |
+| Status | integrated |
 | Created | 6ed087e |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-live-provider-runway --summary "Short plan summary"` |

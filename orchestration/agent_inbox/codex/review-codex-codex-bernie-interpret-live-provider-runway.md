@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-interpret-live-provider-runway` |
 | Source Task | `codex-bernie-interpret-live-provider-runway` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated after Ariadne review and one bounded docstring repair clarifying that only the explicitly configured live provider path may call the AI provider.
+- Follow-up required: Future explicit live Gemini/Vertex smoke with Bernie service-account/ADC setup; no Yuri-only test required for this backend default-off sprint.
