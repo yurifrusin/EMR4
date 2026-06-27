@@ -55,7 +55,7 @@ Ariadne verified this as a gated, route-intercepted diary UI change. The tests p
 
 ## Recommended Next Direction
 
-Next recommended sprint: refine Bernie pilot staff wording/review ergonomics around the selected appointment plus instruction flow, or move toward a real staff-visible non-default pilot entry path.
+Next recommended sprint: Sprint 68 has been dispatched to refine Bernie pilot staff wording/review ergonomics around the selected appointment plus instruction flow while preserving all current safety gates.
 
 ## Previous Closeout - Sprint 66
 

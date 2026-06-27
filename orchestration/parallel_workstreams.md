@@ -130,6 +130,28 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 68: Bernie Pilot Review Ergonomics
+
+| Item | Value |
+|---|---|
+| Status | Queued; waiting for Antigravity plan |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Antigravity plan review |
+| Product Goal | Make the existing Bernie pilot context/instruction/review panel read more clearly as a supervised, explicit staff workflow |
+
+### Workstream DL - Bernie Pilot Review Ergonomics
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-bernie-pilot-review-ergonomics.md` |
+| Goal | Plan, then after approval refine staff-facing wording and compact status hierarchy inside the existing Bernie pilot panel |
+| In Scope | Plan packet first; after approval diary UI copy/style and review harness updates as needed; selected appointment context wording; manual fallback wording; staff instruction input wording; blocked/provisional/no-selection messages; supervised confirmation reminders; existing safety gates preserved |
+| Out of Scope | Backend/provider/schema/migration changes, appointment mutation semantics, patient/practitioner search, production/default exposure changes, autonomous booking, taskpane, Command Centre, billing, SMS, resource admin, broad redesign, PHI-heavy logging, and URL/browser-storage persistence |
+| Verification | Plan packet first; after approval bundled Node syntax check, focused route-intercepted review checks as needed, full diary review harness if diary runtime assets change, frontend version integrity, and `git diff --check` |
+| Status | Queued |
+
 ## Sprint 67: Bernie Selected Appointment Context
 
 | Item | Value |
