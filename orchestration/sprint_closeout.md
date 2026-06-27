@@ -54,7 +54,7 @@ Ariadne verified this as a gated, route-intercepted diary UI copy/style change. 
 
 ## Recommended Next Direction
 
-Next recommended sprint: continue Bernie pilot progression toward a staff-visible non-default entry path, or pause for a product wording review if Yuri wants to see the current copy before broader exposure.
+Next recommended sprint: Sprint 69 has been dispatched to fix the product-review gap before staff-visible exposure: instruction entry should not look actionable before context is ready, and imported context should remain visible through instruction/confirmation states.
 
 ## Previous Closeout - Sprint 67
 
