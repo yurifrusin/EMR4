@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 72: Bernie Imported Context Stale-Selection Guard |
 | Integrated through | Staff-visible Bernie pilot now blocks imported appointment context when the active diary selection changes |
-| Status | Integrated locally, verified; pending push/mirror/audit |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -27,6 +27,7 @@ reviewed, integrated, verified, pushed, and audited.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_pilot_imported_context_stales_when_selection_changes or bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated" --tb=short` passed: `2 passed`.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `50 passed`.
 - `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed locally with `diary.js?v=125` bumped from `v=124`.
+- Live GitHub Pages check confirmed `https://yurifrusin.github.io/EMR4/diary/diary.html` serves `diary.js?v=125`.
 - `git diff --check` passed.
 
 ## Not Required Before Moving On
