@@ -2636,3 +2636,46 @@ html, body {
   align-items: center;
   gap: 6px;
 }
+
+/* ─── BERNIE STAFF INSTRUCTION INPUT STYLING (Sprint 66) ─── */
+.bernie-instruction-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+#bernie-instruction-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  border: 1px solid var(--grey-2);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  resize: vertical;
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+.btn-bernie-instruction-submit {
+  background: #6a1b9a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: background 0.2s ease;
+}
+
+.btn-bernie-instruction-submit:hover {
+  background: #8e24aa;
+}
+
+.btn-bernie-instruction-submit:disabled {
+  background: var(--grey-2);
+  cursor: not-allowed;
+}
