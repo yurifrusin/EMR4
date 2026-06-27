@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-selected-instruction-safety-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -104,5 +104,5 @@ affordance work should layer on top of the existing resolver rather than around 
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated as read-only safety criteria for Sprint 73. Codex incorporated the explicit-submit, stale-selection, no-manual-ID, no-storage, and confirmation-gating criteria into the accepted Antigravity implementation guardrails.
+- Follow-up required: Antigravity implementation must include a production-path harness check for chip click/no-auto-call/no-storage plus explicit submit with imported context IDs.
