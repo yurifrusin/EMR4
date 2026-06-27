@@ -134,7 +134,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; closeout verification passed |
+| Status | Integrated, verified, pushed, mirrored, audited, and deployed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
 | Integration Gate | Antigravity plan accepted; implementation integrated with Codex bugfix and rendered product review |
 | Product Goal | Ensure the Bernie pilot panel only presents instruction entry as actionable once context is ready, and keeps a compact context summary visible |

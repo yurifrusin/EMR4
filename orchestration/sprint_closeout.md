@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 69: Bernie Context Readiness Summary |
 | Integrated through | Context-ready instruction gating and persistent selected-context summary in Bernie pilot review |
-| Status | Integrated locally; verification passed; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
