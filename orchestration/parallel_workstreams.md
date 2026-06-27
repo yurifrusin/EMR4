@@ -130,6 +130,28 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 73: Bernie Selected Appointment Instruction Affordance
+
+| Item | Value |
+|---|---|
+| Status | Dispatched to Antigravity for plan packet |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Antigravity plan review |
+| Product Goal | Make the staff-visible Bernie pilot instruction surface easier and safer to use from imported selected-appointment context |
+
+### Workstream DO - Bernie Selected Appointment Instruction Affordance
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-bernie-selected-instruction-affordance.md` |
+| Goal | Plan, then after approval add safe selected-context instruction affordances without bypassing explicit staff submit or confirmation gates |
+| In Scope | Plan packet first; after approval `docs/diary/diary.{html,css,js}` and `review/test_diary_smoke.py` as needed; selected linked appointment context only; bounded suggested instruction buttons/chips or concise context-aware placeholder/copy; no automatic provider call before explicit staff submit; no PHI-heavy persistence/logging; preserve stale-selection guard, allowlist gate, no manual IDs in ordinary mode, explicit approval checkbox, and asset version bump if runtime assets change |
+| Out of Scope | Backend routes/schemas/models, migrations, provider/Gemini changes, autonomous booking, default production exposure beyond existing allowlisted launcher, query-string free-text intake, browser storage for instructions/context, patient/practitioner search redesign, taskpane, Command Centre, billing, SMS, resource admin, broad diary redesign, dependency/security work, and unrelated CSS cleanup |
+| Verification | Plan packet first; after approval JS syntax, focused route-intercepted Bernie UI checks for suggested instruction affordance/no-auto-call/stale-context preservation/confirm gating, full diary review harness if runtime assets change, frontend version integrity, and `git diff --check` |
+| Status | Queued |
+
 ## Sprint 70: Bernie Staff-Visible Pilot Entry Path
 
 | Item | Value |
