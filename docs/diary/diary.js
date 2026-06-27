@@ -65,9 +65,6 @@ function isSmokeMode() {
 }
 
 function isBernieManualContextAllowed() {
-  if (window.isBernieManualContextAllowedOverride !== undefined) {
-    return window.isBernieManualContextAllowedOverride;
-  }
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get("smoke") === "true" || urlParams.get("bernie_dev_review") === "true";
 }

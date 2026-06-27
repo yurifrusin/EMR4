@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-selected-instruction-affordance` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-06-28 00:31 +1000 |
 | Source HEAD | `472dde6` |
 

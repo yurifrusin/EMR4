@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 87015ae |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-bernie-selected-instruction-affordance --summary "Short plan summary"` |
@@ -101,3 +101,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Remaining risks:
   - Minimal layout shift when suggestion chips wrap on extremely narrow screens, mitigated by flex wrap style rules.
   - Test suite date dependence has been resolved for the modified tests.
+
+Codex integration note: Ariadne removed the production `window.isBernieManualContextAllowedOverride` test hook, moved the affordance coverage onto an ordinary staff route-intercepted path, added stale-selection chip disappearance coverage, bumped diary assets again to `diary.css?v=115` and `diary.js?v=127`, and reran verification locally.

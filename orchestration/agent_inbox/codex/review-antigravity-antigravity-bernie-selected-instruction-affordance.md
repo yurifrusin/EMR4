@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-selected-instruction-affordance` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -39,5 +39,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated with bounded Ariadne repair. The worker's chip affordance was accepted, but Codex removed a production test override hook, converted the new coverage to the ordinary staff path, added stale-selection chip disappearance coverage, and bumped repaired assets to `diary.css?v=115` / `diary.js?v=127`.
+- Follow-up required: None for this sprint. Continue to treat real Bernie writes as supervised only; live staff pilot smoke remains a future product check.
