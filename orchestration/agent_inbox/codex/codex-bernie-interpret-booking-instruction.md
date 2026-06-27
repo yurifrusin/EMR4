@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-interpret-booking-instruction` |
-| Status | queued |
+| Status | submitted |
 | Created | 558734e |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-booking-instruction --summary "Short plan summary"` |
@@ -90,5 +90,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-bernie-interpret-booking-instruction.md`; `orchestration/agent_inbox/codex/plan-codex-codex-bernie-interpret-booking-instruction.md`
+- Verification run: Plan gate only; no production code, tests, docs, migrations, or runtime files edited. Ran `python scripts\agent_worktrees.py handin --agent codex` and `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-booking-instruction ...`.
+- Remaining risks: Implementation not started; Ariadne still needs to approve endpoint placement, response naming, and disabled-default response semantics before sending `complete sprint task`.
