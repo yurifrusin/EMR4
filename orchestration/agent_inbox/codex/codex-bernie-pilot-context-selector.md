@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-pilot-context-selector` |
-| Status | submitted |
+| Status | integrated |
 | Created | 313e363 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-pilot-context-selector --summary "Short plan summary"` |

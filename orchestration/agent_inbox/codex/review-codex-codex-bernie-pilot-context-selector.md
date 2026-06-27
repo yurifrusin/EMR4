@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-pilot-context-selector` |
 | Source Task | `codex-bernie-pilot-context-selector` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne inspected the diff, verified the ordinary pilot path blocks empty/default context without POSTing supervised-booking, verified explicit non-default context posts exactly once, and verified confirm-Bernie remains gated behind explicit staff approval.
+- Follow-up required: Replace the temporary typed non-PHI IDs with a real practitioner/patient context source or selector in a later sprint.

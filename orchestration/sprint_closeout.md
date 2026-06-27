@@ -8,50 +8,51 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 61: Bernie Pilot Launch Context Guard |
-| Integrated through | Fail-closed staff pilot launch when real diary context is missing |
+| Batch | Sprint 62: Bernie Pilot Context Selector |
+| Integrated through | Staff pilot context selector before supervised Bernie review |
 | Status | Integrated and locally verified; push/mirror/audit pending this closeout commit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added a Bernie pilot launch context resolver in the diary frontend.
-- Ordinary staff-visible pilot mode no longer falls back to smoke/default identifiers such as `prac-1`, `smoke-pat-1`, or a hard-coded smoke date.
-- If real practitioner/patient/reference context is missing, the Bernie review panel renders a blocked/readiness message and sends no supervised-booking request.
-- Explicit smoke/dev/query harness paths remain supported for deterministic review testing.
-- Bumped diary JS cache busting to `diary.js?v=115`.
-- Added deterministic Playwright coverage proving ordinary eligible pilot launch does not POST supervised-booking with default smoke identifiers and still requires explicit approval before confirm-Bernie in valid harness paths.
+- Added a compact Bernie pilot context form inside the Booking Review sidebar when ordinary staff pilot mode is eligible but real context is missing.
+- Ordinary pilot mode now requires explicit non-default practitioner and patient identifiers before it POSTs to `/appointments/proposals/bernie/supervised-booking`.
+- Empty, `smoke-*`, `prac-1`, and `smoke-pat-1` context values render a blocked readiness state and make no supervised-booking or confirm-Bernie calls.
+- Once explicit non-default context is supplied, the supervised-booking request carries those identifiers and still requires the existing staff approval checkbox before any confirm-Bernie POST.
+- Explicit smoke/dev/query harness behaviour remains available for deterministic tests and dev review paths.
+- Bumped diary assets to `diary.css?v=106` and `diary.js?v=116`.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required before continuing.
-Ariadne verified the safety behavior with route-intercepted deterministic UI checks. The current ordinary staff pilot exposure is intentionally conservative: it can show the eligible launch affordance, but without real diary context it fails closed with a readiness message rather than preparing or confirming a booking.
+Ariadne verified the selector and no-write safety behaviour with route-intercepted deterministic UI checks. The current ordinary staff pilot exposure remains conservative: it can show the eligible launch affordance, then requires explicit non-default context before preparing a supervised review and still requires explicit staff approval before any confirm route.
 
 ## Not Required Before Moving On
 
-- No manual live UI test is required; deterministic harness coverage proves the no-POST readiness behavior and existing dev/query review behavior.
+- No manual live UI test is required; deterministic harness coverage proves the context selector, no-POST blocked states, explicit-context POST, and existing dev/query review behaviour.
 - No manual live API write test is required; confirm-Bernie remains route-intercepted in the harness and no live write is performed.
 - No backend, auth/config, database migration, GCP/Gemini, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
 
 ## Known Follow-Up
 
-- A future sprint should define the real diary practitioner/patient context-selection path for staff-visible Bernie pilot use. Until then, the ordinary pilot launch is safely readiness-blocked when context is missing.
+- A future sprint should replace the temporary typed non-PHI context IDs with a real diary practitioner/patient context source or selector.
 - The known moderate Dependabot alert remains outside this sprint.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification
 
-- Ariadne reviewed Cicero's plan and implementation packets, inspected the branch diff against `master`, and reran the worker's verification locally using the shared project venv.
+- Ariadne reviewed Cicero's plan and implementation packets, inspected the branch diff against `master`, and reran the worker's verification locally using the shared project venv before integration.
 - `node --check docs\diary\diary.js` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_pilot or bernie_live_confirm_flow_harness or bernie_dev_mode_review_feature_flag_success" --tb=short -p no:randomly` -> 10 passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed with diary JS bumped to `v=115`.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q --tb=short -p no:randomly` -> 41 passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed with diary CSS/JS bumped to `v=106`/`v=116`.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_pilot_ordinary_mode" --tb=short -p no:randomly` -> 2 passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie" --tb=short -p no:randomly` -> 23 passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q --tb=short -p no:randomly` -> 42 passed.
 - `git diff --check` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-Continue with a narrow context-selection/readiness sprint: add a deterministic staff pilot context source or selector so Bernie can receive real practitioner/patient context without relying on query defaults, while staying supervised and default-off.
+Continue with the Bernie AI endpoint runway: add a default-off, mocked-first provider boundary and read-only `/bernie/interpret`-style endpoint so staff text can become validated structured intent without writes, audits, PHI logging, or hard coupling Bernie to one LLM provider.
 
 ## Previous Closeout - Sprint 58
 | Item | Value |

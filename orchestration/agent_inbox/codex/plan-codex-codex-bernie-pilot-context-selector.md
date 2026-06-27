@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-pilot-context-selector` |
 | Source Task | `codex-bernie-pilot-context-selector` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 09:57 +1000 |
 | Source HEAD | `6befea1` |
 
@@ -54,6 +54,6 @@ Risks / ambiguities: the repo already has partial ordinary-mode missing-context 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted. The plan stayed inside the Bernie pilot review/sidebar boundary, preserved smoke/dev/query harness behaviour, and included the required no-write/no-confirm verification.
+- Required changes before implementation: None.
+- Approved to proceed: yes
