@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-instruction-readiness-reset-polish` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-06-28 08:10 +1000 |
 | Source HEAD | `9a80bfb` |
 
@@ -44,6 +44,13 @@ Stale detection resetting instruction text while user is in the middle of typing
 
 ## Codex Plan Review
 
-- Review result:
+- Review result: Approved with guardrails. The surface and product goal are correct: staff should understand a chip/typed instruction is ready for explicit supervised analysis, not booked or submitted.
 - Required changes before implementation:
-- Approved to proceed: no
+  - Keep the runtime surface in `docs/diary/diary.js` and `docs/diary/diary.css`; touch `docs/diary/diary.html` only for required asset version bumps.
+  - The readiness copy must avoid autonomous or completed-action language. Use wording like: "Instruction ready for supervised analysis. Submit to prepare a booking proposal for staff review. Nothing is booked until you approve it."
+  - Reset `bernieInstructionText` and `bernieInterpretResult` when staff click Change, when staff import/re-import the current selected appointment context, and when the imported context becomes stale. Do not introduce reset behavior that clears an active typed instruction merely because `resolveBerniePilotLaunchRequest()` is called repeatedly while the context is still valid.
+  - Preserve the existing stale-selection block and no-call behavior. When stale, chips/readiness copy should be absent and interpretation/supervised/confirm request counts must remain zero.
+  - Add focused ordinary-mode route-intercepted harness coverage for chip readiness copy, typed readiness copy, Change reset, re-import reset, stale reset/no chips/no call, and unchanged confirmation gating where feasible.
+  - Preserve no manual ID inputs in ordinary mode and no URL/localStorage/sessionStorage instruction persistence.
+  - Bump runtime asset versions for changed diary assets and run the full diary review harness if runtime assets change.
+- Approved to proceed: yes
