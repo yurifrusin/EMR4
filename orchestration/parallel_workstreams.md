@@ -134,7 +134,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally by Ariadne after Antigravity CLI no-op; closeout verification passed |
+| Status | Integrated by Ariadne; pushed, mirrored, audited, and deployed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
 | Integration Gate | Antigravity worker packet superseded; Ariadne implemented bounded diary/review-harness change |
 | Product Goal | Expose the supervised Bernie booking-assistant panel through a staff-visible, non-default, allowlisted diary entry path without manual ID exposure |

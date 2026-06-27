@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 70: Bernie Staff-Visible Pilot Entry Path |
 | Integrated through | Allowlisted non-default staff launcher that requires selected linked appointment context and hides manual ID entry outside smoke/dev |
-| Status | Integrated locally; verification passed; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -39,7 +39,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended Next Direction
 
-After push/mirror/audit, either continue Bernie pilot refinement with live staff workflow polish or triage the moderate Dependabot alert before more production exposure.
+Next recommended sprint: triage the moderate Dependabot alert before further production-facing Bernie exposure.
 
 ## Previous Closeout - Sprint 69
 
