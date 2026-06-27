@@ -2679,3 +2679,51 @@ html, body {
   background: var(--grey-2);
   cursor: not-allowed;
 }
+
+/* ─── BERNIE SELECTED APPOINTMENT CONTEXT STYLING (Sprint 67) ─── */
+.bernie-pilot-selected-appt-panel {
+  margin-top: 12px;
+  border-top: 1px dashed var(--grey-2);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-bernie-use-selected {
+  background: #6a1b9a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.btn-bernie-use-selected:hover {
+  background: #8e24aa;
+}
+
+.bernie-pilot-selected-status {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.bernie-pilot-selected-status.info {
+  background-color: var(--grey-1);
+  border: 1px solid var(--grey-2);
+  color: var(--text-muted);
+}
+
+.bernie-pilot-selected-status.error {
+  background-color: #fff5f5;
+  border: 1px solid #feb2b2;
+  color: #c53030;
+}

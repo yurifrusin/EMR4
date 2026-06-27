@@ -102,6 +102,9 @@ function normalizeBernieContextId(value) {
 }
 
 function isBerniePilotDefaultContextId(value) {
+  if (isSmokeMode()) {
+    return false;
+  }
   const normalized = normalizeBernieContextId(value).toLowerCase();
   return !normalized || normalized.startsWith("smoke-") || normalized === "prac-1" || normalized === "smoke-pat-1";
 }
@@ -485,7 +488,8 @@ function getMockAppointments() {
       duration_minutes: 30,
       status: "Booked",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
+      patient: { id: "smoke-pat-1", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
+      patient_id: "smoke-pat-1",
       reason: "Hypertension follow-up",
       appointment_type_id: "smoke-type-1",
       location_id: "loc-1"
@@ -496,7 +500,8 @@ function getMockAppointments() {
       duration_minutes: 15,
       status: "Booked",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Billy", last_name: "Frusin", date_of_birth: "1988-11-12" },
+      patient: { id: "smoke-pat-2", first_name: "Billy", last_name: "Frusin", date_of_birth: "1988-11-12" },
+      patient_id: "smoke-pat-2",
       reason: "Ear ache",
       appointment_type_id: "smoke-type-2",
       location_id: "loc-1"
@@ -507,7 +512,8 @@ function getMockAppointments() {
       duration_minutes: 45,
       status: "Booked",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
+      patient: { id: "smoke-pat-1", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
+      patient_id: "smoke-pat-1",
       reason: "Care Plan review",
       appointment_type_id: "smoke-type-1",
       location_id: "loc-2"
@@ -518,7 +524,8 @@ function getMockAppointments() {
       duration_minutes: 30,
       status: "Booked",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Jane", last_name: "Doe", date_of_birth: "1990-05-15" },
+      patient: { id: "smoke-pat-3", first_name: "Jane", last_name: "Doe", date_of_birth: "1990-05-15" },
+      patient_id: "smoke-pat-3",
       reason: "Flu vaccine",
       appointment_type_id: "smoke-type-2",
       location_id: "loc-2"
@@ -529,7 +536,8 @@ function getMockAppointments() {
       duration_minutes: 15,
       status: "Arrived",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "John", last_name: "Smith", date_of_birth: "1978-08-20" },
+      patient: { id: "smoke-pat-4", first_name: "John", last_name: "Smith", date_of_birth: "1978-08-20" },
+      patient_id: "smoke-pat-4",
       reason: "Script renewal",
       appointment_type_id: "smoke-type-1",
       location_id: "loc-1"
@@ -542,6 +550,7 @@ function getMockAppointments() {
       practitioner: { ahpra_number: "MED999" },
       patient_name_provisional: "Nora Patel",
       patient: null,
+      patient_id: null,
       reason: "Dressing change",
       appointment_type_id: "smoke-type-2",
       location_id: "loc-1"
@@ -552,7 +561,8 @@ function getMockAppointments() {
       duration_minutes: 15,
       status: "Cancelled",
       practitioner: { ahpra_number: "MED0001234567" },
-      patient: { first_name: "Alice", last_name: "Wonderland", date_of_birth: "1995-07-04" },
+      patient: { id: "smoke-pat-6", first_name: "Alice", last_name: "Wonderland", date_of_birth: "1995-07-04" },
+      patient_id: "smoke-pat-6",
       reason: "Blood test check",
       cancellation_reason: "Patient had transport issues",
       appointment_type_id: "smoke-type-1",
@@ -1723,6 +1733,9 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         const wasActive = span.classList.contains("appt-active");
         document.querySelectorAll(".appt-active").forEach(el => el.classList.remove("appt-active"));
         if (!wasActive) span.classList.add("appt-active");
+        if (isBerniePilotActive) {
+          loadBernieLiveReview();
+        }
       });
 
       span.addEventListener("keydown", async e => {
@@ -2568,6 +2581,58 @@ function renderBerniePilotContextForm(blocks = []) {
   submitBtn.textContent = "Prepare supervised review";
   form.appendChild(submitBtn);
 
+  // Selected appointment context sub-panel (Sprint 67)
+  const apptPanel = document.createElement("div");
+  apptPanel.className = "bernie-pilot-selected-appt-panel";
+
+  const activeEl = document.querySelector(".appt-active");
+  const apptId = activeEl ? activeEl.getAttribute("data-id") : null;
+  const appt = apptId ? activeAppointments.find(a => a.id === apptId) : null;
+
+  if (!appt) {
+    const infoDiv = document.createElement("div");
+    infoDiv.className = "bernie-pilot-selected-status info";
+    infoDiv.setAttribute("data-testid", "bernie-pilot-selected-status-info");
+    infoDiv.textContent = "No appointment selected in the diary.";
+    apptPanel.appendChild(infoDiv);
+  } else {
+    const apptPracId = appt.practitioner_id || appt.practitioner?.id || (appt.practitioner?.ahpra_number ? ahpraToPractitionerMap[appt.practitioner.ahpra_number]?.id : null);
+    const isProvisional = isPatientIdentityUnconfirmed(appt);
+
+    if (!apptPracId) {
+      const errorDiv = document.createElement("div");
+      errorDiv.className = "bernie-pilot-selected-status error";
+      errorDiv.setAttribute("data-testid", "bernie-pilot-selected-status-error");
+      errorDiv.textContent = "Selected appointment has no practitioner context.";
+      apptPanel.appendChild(errorDiv);
+    } else if (isProvisional) {
+      const errorDiv = document.createElement("div");
+      errorDiv.className = "bernie-pilot-selected-status error";
+      errorDiv.setAttribute("data-testid", "bernie-pilot-selected-status-error");
+      errorDiv.textContent = "Selected appointment is provisional (unlinked patient record).";
+      apptPanel.appendChild(errorDiv);
+    } else {
+      const useSelectedBtn = document.createElement("button");
+      useSelectedBtn.type = "button";
+      useSelectedBtn.className = "btn-bernie-use-selected";
+      useSelectedBtn.setAttribute("data-testid", "bernie-pilot-use-selected");
+      const patientName = appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : (provisionalPatientName(appt) || "Unknown Patient");
+      useSelectedBtn.textContent = `Use selected appointment: ${patientName}`;
+      useSelectedBtn.addEventListener("click", () => {
+        practitionerInput.value = apptPracId;
+        patientInput.value = appt.patient_id || (appt.patient ? appt.patient.id : "");
+        setBerniePilotContextValues({
+          practitionerId: practitionerInput.value,
+          patientId: patientInput.value
+        });
+        loadBernieLiveReview();
+      });
+      apptPanel.appendChild(useSelectedBtn);
+    }
+  }
+
+  form.appendChild(apptPanel);
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     setBerniePilotContextValues({
@@ -2705,7 +2770,7 @@ async function loadBernieLiveReview() {
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = urlParams.get("smoke") === "true";
   const devReviewParam = urlParams.get("bernie_dev_review");
-  const allowHarnessDefaults = isSmoke || devReviewParam === "true";
+  const allowHarnessDefaults = (isSmoke || devReviewParam === "true") && urlParams.get("bernie_context_form") !== "true";
   const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
 
   if (!request.ready) {
@@ -3065,7 +3130,11 @@ Office.onReady(() => {
   }
 
   document.getElementById("diary-grid").addEventListener("click", () => {
+    const wasActive = document.querySelector(".appt-active") !== null;
     document.querySelectorAll(".appt-active").forEach(el => el.classList.remove("appt-active"));
+    if (wasActive && isBerniePilotActive) {
+      loadBernieLiveReview();
+    }
   });
 
   // Close modal on backdrop click

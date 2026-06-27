@@ -10,15 +10,11 @@
 
 ## Review Request
 
-Plan for Bernie selected appointment context
+Completed selected appointment context for Bernie pilot, all tests pass
 
 ## Worker Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
-
-- Files changed: None (Plan phase - no production code changed)
-- Verification run: None (Plan phase - no implementation executed)
-- Remaining risks: None (Plan phase - implementation details outlined in plan document)
+_No completion notes were supplied in the source task packet. Reviewer should inspect the branch and may ask the worker for a concise summary before integration._
 
 ## Required Review Steps
 

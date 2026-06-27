@@ -85,10 +85,6 @@ Codex can merge when the plan is accepted, implementation stays within diary/rev
 
 Record concerns, alternative designs, or reasons this task should not be merged as-is.
 
-## Completion Notes
-
-Required before submit. These notes are copied into Codex's review packet automatically:
-
-- Files changed: None (Plan phase - no production code changed)
-- Verification run: None (Plan phase - no implementation executed)
-- Remaining risks: None (Plan phase - implementation details outlined in plan document)
+- Files changed: docs/diary/diary.js, docs/diary/diary.css, docs/diary/diary.html, review/test_diary_smoke.py
+- Verification run: Ran deterministic smoke tests via pytest (all 47 tests passed), checked git diff --check, and verified local CSS/JS version bumps.
+- Remaining risks: None. Selected appointment context resides purely in-memory, fails closed for missing or provisional/unlinked context, and maintains manual entry as a developer escape hatch without query string or storage persistence.
