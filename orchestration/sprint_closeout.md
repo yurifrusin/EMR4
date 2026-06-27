@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 68: Bernie Pilot Review Ergonomics |
 | Integrated through | Staff-supervised wording and compact ergonomics for the Bernie pilot review panel |
-| Status | Integrated locally; verification passed; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
