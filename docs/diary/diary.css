@@ -2835,3 +2835,16 @@ html, body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* ─── BERNIE INSTRUCTION STATUS COPY (Sprint 74) ─── */
+.bernie-instruction-status-copy {
+  font-size: 11px;
+  color: #6a1b9a;
+  background-color: #f3e5f5;
+  border-left: 3px solid #8e24aa;
+  padding: 6px 10px;
+  border-radius: 4px;
+  line-height: 1.4;
+  margin: 4px 0;
+  box-sizing: border-box;
+}

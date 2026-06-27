@@ -179,6 +179,8 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
     });
   }
   if (!allowManualContext && explicitContext.sourceAppointmentId && selectedContext.apptId !== explicitContext.sourceAppointmentId) {
+    bernieInstructionText = "";
+    bernieInterpretResult = null;
     blocks.push({
       code: "stale_selected_appointment_context",
       message: "The selected diary appointment has changed. Import the current selected appointment before asking Bernie to prepare a booking confirmation."
@@ -2656,6 +2658,8 @@ function renderBerniePilotContextForm(blocks = []) {
       useSelectedBtn.addEventListener("click", () => {
         if (practitionerInput) practitionerInput.value = apptPracId;
         if (patientInput) patientInput.value = appt.patient_id || (appt.patient ? appt.patient.id : "");
+        bernieInstructionText = "";
+        bernieInterpretResult = null;
         setBerniePilotContextValues({
           practitionerId: apptPracId,
           patientId: appt.patient_id || (appt.patient ? appt.patient.id : ""),
@@ -2674,6 +2678,8 @@ function renderBerniePilotContextForm(blocks = []) {
     if (!allowManualContext || !practitionerInput || !patientInput) {
       return;
     }
+    bernieInstructionText = "";
+    bernieInterpretResult = null;
     setBerniePilotContextValues({
       practitionerId: practitionerInput.value,
       patientId: patientInput.value,
@@ -2860,6 +2866,25 @@ function renderBernieInstructionInput(contentEl) {
 
   container.appendChild(textarea);
 
+  const statusCopy = document.createElement("div");
+  statusCopy.id = "bernie-instruction-status-copy";
+  statusCopy.className = "bernie-instruction-status-copy";
+  statusCopy.setAttribute("data-testid", "bernie-instruction-status-copy");
+  statusCopy.style.display = "none";
+
+  const updateInstructionStatusCopy = () => {
+    const text = textarea.value.trim();
+    if (contextReady && text.length > 0) {
+      statusCopy.textContent = "Instruction ready for supervised analysis. Submit to prepare a booking proposal for staff review. Nothing is booked until you approve it.";
+      statusCopy.style.display = "block";
+    } else {
+      statusCopy.textContent = "";
+      statusCopy.style.display = "none";
+    }
+  };
+
+  textarea.addEventListener("input", updateInstructionStatusCopy);
+
   // Suggestion chips when linked/selected context imported
   const explicitContext = getBerniePilotContextValues();
   const selectedContext = getActiveBernieSelectedAppointment();
@@ -2889,6 +2914,7 @@ function renderBernieInstructionInput(contentEl) {
       chip.addEventListener("click", () => {
         textarea.value = text;
         bernieInstructionText = text;
+        updateInstructionStatusCopy();
       });
       suggestionsContainer.appendChild(chip);
     });
@@ -2896,7 +2922,10 @@ function renderBernieInstructionInput(contentEl) {
     container.appendChild(suggestionsContainer);
   }
 
+  container.appendChild(statusCopy);
   container.appendChild(button);
+
+  updateInstructionStatusCopy();
   contentEl.appendChild(container);
 
   button.addEventListener("click", async () => {
