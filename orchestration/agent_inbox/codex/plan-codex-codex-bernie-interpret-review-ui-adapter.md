@@ -9,7 +9,7 @@
 | Worker Branch | `codex/bernie-interpret-review-ui-adapter` |
 | Branch | `codex/bernie-interpret-review-ui-adapter` |
 | Source Task | `codex-bernie-interpret-review-ui-adapter` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 12:49 +1000 |
 | Source HEAD | `ad6f8f0` |
 
@@ -47,6 +47,6 @@ Ambiguity: the exact frontend URL/endpoint name for the interpretation envelope 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted; scoped to gated diary Bernie review UI and deterministic route-intercepted tests.
+- Required changes before implementation: None.
+- Approved to proceed: yes

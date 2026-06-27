@@ -8,52 +8,65 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 64: Bernie Interpret Live Provider Runway |
-| Integrated through | Default-off Gemini/Vertex provider seam for Bernie booking-instruction interpretation |
+| Batch | Sprint 65: Bernie Interpret Review UI Adapter |
+| Integrated through | Gated diary Bernie review preview for interpreted booking instructions |
 | Status | Integrated and locally verified; push/mirror/audit pending this closeout commit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added an explicit `gemini_vertex` live-provider path behind the existing `bernie_booking_interpreter_provider` config; the default remains `disabled`.
-- Reused the existing EMR4 AI provider boundary instead of importing Gemini/Vertex SDKs directly into the Bernie interpreter.
-- Added `bernie_booking_interpreter_live_temperature`, defaulting to `0.0`, for the live provider call.
-- Extended Bernie interpreter provider metadata to represent `gemini_vertex` / `live` while preserving existing `disabled` and `fake` responses.
-- Added prompt/output parsing that requests strict JSON, validates through the existing slot-search command schema and normalizer, and fails closed on invalid/malformed provider output.
-- Preserved non-mutating behaviour: the interpreter still does not create appointments, proposals, confirmations, audit rows, or slot-search executions.
-- Added mocked-live tests proving explicit-config live behaviour without making cloud calls in ordinary tests.
+- Added a compact `Interpreted Intent` preview inside the existing Bernie Booking Review panel.
+- The preview appears only behind explicit `bernie_interpret=true` plus the existing smoke/dev/pilot launch/context gates.
+- The preview renders interpreted, clarification-required, and blocked interpretation envelopes before supervised booking review proceeds.
+- Clarification/blocked interpretation states hold the supervised review path and do not call confirm-Bernie.
+- Existing confirmation-ready supervised review and approval checkbox behaviour remain unchanged.
+- Added route-intercepted Playwright/pytest coverage for interpreted, clarification, blocked, and no-explicit-gate states.
+- Ariadne removed the proposed `bernie_instruction` URL query intake so free-text booking instructions are not encouraged into browser history; the preview builds a bounded structured instruction from explicit non-PHI context instead.
+- Bumped diary assets to `diary.css?v=107` and `diary.js?v=117`.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required.
-Ariadne verified this backend-only runway with deterministic tests. The live provider is reachable only by explicit configuration, ordinary tests mock the provider, and no live GCP/Gemini credential or browser/API smoke is required before moving on.
+Ariadne verified this frontend-only, gated UI adapter with deterministic route-intercepted Playwright checks. The tests prove no live provider call or confirm-Bernie write occurs before explicit approval, and ordinary diary loads do not request interpretation.
 
 ## Not Required Before Moving On
 
-- No manual live UI test is required; there are no frontend changes.
-- No manual live API write test is required; the endpoint remains read-only and tests prove no appointment/audit/proposal/confirm writes.
+- No manual live UI test is required; the route-intercepted review harness covers the new preview states and existing review regression path.
+- No manual live API write test is required; confirm-Bernie remains gated and intercepted in tests.
 - No real Gemini/Vertex smoke is required yet; live cloud execution should wait until the Bernie service-account/ADC setup is intentionally exercised.
 - No database migration, service-account key, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required for this sprint.
 
 ## Known Follow-Up
 
 - Run a future explicit live Gemini/Vertex smoke using the Bernie service account or ADC/service-account impersonation once Yuri wants to validate real provider behaviour.
-- A future sprint can connect the interpreted live/fake envelope into the supervised booking review UI path.
+- A future sprint can replace the temporary structured-context instruction builder with a proper staff-entered instruction source that avoids query strings and PHI-heavy logs.
 - The known moderate Dependabot alert remains outside this sprint.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification
 
 - Ariadne reviewed Cicero's plan and implementation packets, inspected the branch diff against `master`, and reran the worker's verification locally using the shared project venv before integration.
-- Ariadne applied a bounded docstring repair so the interpreter module accurately states that only the explicitly configured live provider path can call the AI provider.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\services\bernie_booking_interpreter.py tests\test_bernie_interpret_booking_instruction.py` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_slot_search_normalized_execution.py tests\test_bernie_wrapper_confirmation_review_harness.py -q --tb=short -p no:randomly` -> 33 passed.
+- Ariadne applied a bounded privacy hardening repair to remove URL free-text instruction intake before integration.
+- `node --check docs\diary\diary.js` -> passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_interpret or bernie_pilot_ordinary_mode or bernie_review_live_confirmation_ready" --tb=short` -> 7 passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 46 passed.
+- `rg -n "diary\.css\?v=107|diary\.js\?v=117" docs\diary\diary.html` -> passed.
 - `git diff --check` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-Next recommended sprint: connect the structured Bernie interpret envelope into the supervised booking review UI using fake/mocked data first, or run a narrow explicit live-provider smoke once Yuri has completed ADC/service-account impersonation setup.
+Next recommended sprint: either run a narrow explicit live-provider smoke once Yuri has completed ADC/service-account impersonation setup, or add a proper staff instruction input surface that avoids query strings and keeps the flow pilot-gated.
+
+## Previous Closeout - Sprint 64
+| Item | Value |
+|---|---|
+| Batch | Sprint 64: Bernie Interpret Live Provider Runway |
+| Integrated through | Default-off Gemini/Vertex provider seam for Bernie booking-instruction interpretation |
+| Status | Integrated, verified, pushed, mirrored, audited, and closed |
+| Last updated | 2026-06-27 |
+
+Sprint 64 added an explicit default-off `gemini_vertex` provider path behind the existing Bernie booking-instruction interpreter seam, with mocked-live backend tests and no live cloud calls in ordinary verification.
 
 ## Previous Closeout - Sprint 63
 | Item | Value |

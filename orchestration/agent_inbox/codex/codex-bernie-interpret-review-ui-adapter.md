@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-interpret-review-ui-adapter` |
-| Status | submitted |
+| Status | integrated |
 | Created | c312cea |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-review-ui-adapter --summary "Short plan summary"` |

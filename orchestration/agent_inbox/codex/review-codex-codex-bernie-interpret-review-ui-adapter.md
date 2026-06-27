@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-interpret-review-ui-adapter` |
 | Source Task | `codex-bernie-interpret-review-ui-adapter` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -31,5 +31,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated after Ariadne review and one bounded privacy hardening repair that removed URL free-text instruction intake from the preview adapter.
+- Follow-up required: No Yuri-only test required; future explicit live-provider smoke can be run after ADC/service-account impersonation is ready.
