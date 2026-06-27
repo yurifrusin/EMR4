@@ -189,6 +189,13 @@ Antigravity uses the CLI from a fresh project-scoped session unless a current
 conversation ID has been verified. Old conversation IDs can disappear after app
 or CLI restarts, and `--print` may return no stdout even when the transcript
 records progress; poll/git remains the authoritative proof of submission.
+As of 2026-06-28 this matches upstream issue
+`https://github.com/google-antigravity/antigravity-cli/issues/115` and a local
+probe: `agy` can perform requested file writes while non-TTY stdout capture is
+blank. Therefore Antigravity prompts must ask for a tangible repo artifact
+(plan packet, review packet, completion notes, or explicit proof file), and
+Codex verifies via `git status`, file inspection, and `poll --fetch` rather than
+stdout alone.
 
 ```powershell
 C:\Users\sarashera\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\sarashera\EMR4-worktrees\antigravity --print "<prompt>"

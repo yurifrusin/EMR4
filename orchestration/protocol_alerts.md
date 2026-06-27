@@ -73,7 +73,17 @@ Read these before acting on remembered process details.
   Do not rely on stale `--conversation` IDs after app/CLI restarts unless the
   conversation ID has just been verified. If stdout is blank, inspect the
   Antigravity transcript/log and then trust poll/git, not chat text, as proof of
-  submission. Keep
+  submission. 2026-06-28 local probe confirmed the upstream Windows stdout
+  capture issue described in
+  `https://github.com/google-antigravity/antigravity-cli/issues/115`: `agy`
+  may return no useful captured transcript from a non-TTY Codex shell, while
+  still performing requested filesystem writes. For routine EMR4 automation,
+  prompts to Antigravity must request a tangible repo artifact such as a plan
+  packet, review packet, task-packet completion notes, or an explicit temporary
+  proof file in the Antigravity worktree. Codex should verify success with
+  `git status`, `poll --fetch`, and file inspection. Do not treat blank stdout
+  alone as failure when the expected artifact was created, and do not treat
+  stdout text alone as success without a committed/pushed packet. Keep
   `C:\Users\sarashera\.gemini\antigravity-cli\settings.json` as UTF-8 without
   BOM; a BOM makes the CLI ignore settings and fall back to defaults.
   For non-trivial Antigravity plan or implementation prompts, pass an explicit
