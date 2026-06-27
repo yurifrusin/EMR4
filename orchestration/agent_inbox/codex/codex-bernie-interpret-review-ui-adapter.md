@@ -1,14 +1,14 @@
-# antigravity-bernie-interpret-review-ui-adapter
+# codex-bernie-interpret-review-ui-adapter
 
 | Item | Value |
 |---|---|
-| To | antigravity |
-| Branch | `antigravity/current` |
-| Status | superseded |
-| Created | 5acf9e9 |
-| Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
-| Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-bernie-interpret-review-ui-adapter --summary "Short plan summary"` |
-| Submit Command | `python scripts\agent_worktrees.py submit --agent antigravity --task antigravity-bernie-interpret-review-ui-adapter --commit-message "Dispatch Sprint 65 Bernie interpret UI adapter" --message "Sprint 65 dispatched for Antigravity plan gate"` |
+| To | codex |
+| Branch | `codex/bernie-interpret-review-ui-adapter` |
+| Status | queued |
+| Created | c312cea |
+| Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
+| Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-review-ui-adapter --summary "Short plan summary"` |
+| Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-bernie-interpret-review-ui-adapter --commit-message "Dispatch Sprint 65 Codex fallback UI adapter" --message "Sprint 65 reassigned to Codex worker after Antigravity CLI no-op"` |
 
 ## Mission
 
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed: None.
-- Verification run: Antigravity CLI prompt returned blank; `tasklist` showed no running `agy.exe`, the Antigravity worktree was clean, and `poll --fetch` showed no submitted packet.
-- Remaining risks: Superseded and reassigned to Codex worker packet `codex-bernie-interpret-review-ui-adapter` to avoid burning time/credits on a silent CLI no-op.
+- Files changed:
+- Verification run:
+- Remaining risks:
