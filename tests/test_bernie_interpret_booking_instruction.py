@@ -19,6 +19,16 @@ INTERPRET_URL = "/api/v1/appointments/proposals/bernie/interpret-booking-instruc
 REFERENCE_DATE = "2026-06-22"
 
 
+class MockLiveProvider:
+    def __init__(self, response):
+        self.response = response
+        self.calls = []
+
+    def generate_json(self, contents, temperature: float) -> dict:
+        self.calls.append((contents, temperature))
+        return self.response
+
+
 def _post_interpret(client, token, instruction: str, **overrides):
     body = {
         "instruction": instruction,
@@ -184,6 +194,167 @@ def test_fake_provider_autonomous_booking_language_is_blocked(
     assert data["normalization"]["safe"] is True
 
 
+def test_disabled_and_fake_providers_do_not_call_live_provider(
+    client,
+    gp_user,
+    practitioner,
+    monkeypatch,
+):
+    def fail_if_called():
+        raise AssertionError("live provider should not be constructed")
+
+    interpreter_service.set_live_provider_factory(fail_if_called)
+    token = make_token(gp_user)
+    try:
+        monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "disabled")
+        disabled = _post_interpret(
+            client,
+            token,
+            f"practitioner_id:{practitioner.id} date_from:today duration:15",
+        )
+        assert disabled.status_code == 200, disabled.text
+        assert disabled.json()["provider_metadata"]["provider"] == "disabled"
+
+        monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+        fake = _post_interpret(
+            client,
+            token,
+            f"practitioner_id:{practitioner.id} date_from:today duration:15",
+        )
+        assert fake.status_code == 200, fake.text
+        assert fake.json()["provider_metadata"]["provider"] == "fake"
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+
+def test_mocked_live_provider_returns_validated_structured_intent_without_mutating(
+    client,
+    db,
+    gp_user,
+    practitioner,
+    patient,
+    monkeypatch,
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_live_temperature", 0.0)
+    provider = MockLiveProvider({
+        "command_candidate": {
+            "practitioner_id": str(practitioner.id),
+            "patient_id": str(patient.id),
+            "date_from": "today",
+            "duration_minutes": 15,
+            "earliest_time": "09:00",
+            "latest_time": "11:00",
+        },
+        "confidence": 0.82,
+        "summary": "Structured request for a 15 minute appointment search.",
+        "missing_fields": [],
+        "safety_flags": [],
+        "clarifying_question": None,
+    })
+    interpreter_service.set_live_provider_factory(lambda: provider)
+    token = make_token(gp_user)
+    appointment_before = db.query(Appointment).count()
+    audit_before = db.query(AppointmentAuditLog).count()
+
+    try:
+        resp = _post_interpret(
+            client,
+            token,
+            "Patient asks for a short GP booking today between 9 and 11.",
+        )
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["result"] == "interpreted"
+    assert data["confidence"] == 0.82
+    assert data["provider_metadata"] == {
+        "provider": "gemini_vertex",
+        "mode": "live",
+        "live_provider": True,
+    }
+    assert data["command_candidate"]["practitioner_id"] == str(practitioner.id)
+    assert data["command_candidate"]["patient_id"] == str(patient.id)
+    assert data["normalization"]["safe"] is True
+    assert data["normalization"]["constraint"]["date_from"] == REFERENCE_DATE
+    assert len(provider.calls) == 1
+    prompt, temperature = provider.calls[0]
+    assert "Do not book, confirm, create appointments, search slots" in prompt
+    assert "Return only JSON" in prompt
+    assert temperature == 0.0
+    assert "Patient asks for a short GP booking" not in data["summary"]
+    assert "instruction" not in data
+    assert db.query(Appointment).count() == appointment_before
+    assert db.query(AppointmentAuditLog).count() == audit_before
+
+
+def test_mocked_live_provider_invalid_response_fails_closed(
+    client,
+    gp_user,
+    monkeypatch,
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
+    provider = MockLiveProvider({"command_candidate": "not-a-dict", "confidence": 0.9})
+    interpreter_service.set_live_provider_factory(lambda: provider)
+    token = make_token(gp_user)
+
+    try:
+        resp = _post_interpret(client, token, "Please find a booking today")
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["result"] == "blocked"
+    assert data["confidence"] == 0
+    assert data["safety_flags"] == ["provider_response_unusable"]
+    assert data["blocks"][0]["code"] == "booking_interpreter_invalid_command"
+    assert data["provider_metadata"]["live_provider"] is True
+
+
+def test_mocked_live_provider_autonomous_booking_language_is_blocked(
+    client,
+    gp_user,
+    practitioner,
+    monkeypatch,
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
+    provider = MockLiveProvider({
+        "command_candidate": {
+            "practitioner_id": str(practitioner.id),
+            "date_from": "today",
+            "duration_minutes": 15,
+        },
+        "confidence": 0.92,
+        "summary": "Structured appointment search request.",
+        "missing_fields": [],
+        "safety_flags": [],
+    })
+    interpreter_service.set_live_provider_factory(lambda: provider)
+    token = make_token(gp_user)
+
+    try:
+        resp = _post_interpret(
+            client,
+            token,
+            f"practitioner_id:{practitioner.id} date_from:today duration:15 book it",
+        )
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["result"] == "blocked"
+    assert data["safety_flags"] == ["autonomous_booking_language"]
+    assert data["blocks"][0]["code"] == "staff_confirmation_required"
+    assert data["normalization"]["safe"] is True
+
+
 def test_interpret_booking_instruction_does_not_search_create_confirm_or_mutate():
     route_source = inspect.getsource(appointments_router.interpret_bernie_booking_instruction)
     service_source = inspect.getsource(interpreter_service)
@@ -203,8 +374,12 @@ def test_interpret_booking_instruction_does_not_search_create_confirm_or_mutate(
     assert "confirm_bernie_create_proposal" not in service_source
     assert "_create_appointment_from_body" not in service_source
     assert "generate_content" not in service_source
-    assert "Gemini" not in service_source
-    assert "vertexai" not in service_source
+    assert "google.genai" not in service_source
+    assert "vertexai=True" not in service_source
     assert "db.add" not in service_source
     assert "db.commit" not in service_source
     assert "_write_audit" not in service_source
+
+
+def test_live_provider_factory_reset_after_tests():
+    assert interpreter_service._live_provider_factory is None

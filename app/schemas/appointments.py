@@ -508,8 +508,8 @@ class BernieBookingInstructionInterpretIn(BaseModel):
 
 
 class BernieBookingInterpreterMetadata(BaseModel):
-    provider: Literal["disabled", "fake"]
-    mode: Literal["disabled", "mocked"]
+    provider: Literal["disabled", "fake", "gemini_vertex"]
+    mode: Literal["disabled", "mocked", "live"]
     live_provider: bool = False
 
 

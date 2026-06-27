@@ -7,8 +7,11 @@ appointment mutations, audit writes, or raw-instruction logging.
 from __future__ import annotations
 
 import re
-from typing import Protocol
+from typing import Any, Callable, Protocol
 
+from pydantic import ValidationError
+
+from app.config import settings
 from app.schemas.appointments import (
     AppointmentProposalIssue,
     BernieBookingInstructionInterpretIn,
@@ -16,6 +19,8 @@ from app.schemas.appointments import (
     BernieBookingInterpreterMetadata,
     SlotSearchCommandIn,
 )
+from app.services.ai.contracts import AiProvider
+from app.services.ai.service import _get_default_provider
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
 
@@ -33,6 +38,9 @@ DATE_RE = re.compile(r"\b(?:today|tomorrow|\d{4}-\d{2}-\d{2})\b", re.IGNORECASE)
 TIME_RE = re.compile(r"\b(?:[01]?\d|2[0-3]):[0-5]\d(?::[0-5]\d)?\b")
 UNSAFE_TERMS = ("book it", "create it", "confirm it", "make the booking", "write it")
 
+LiveProviderFactory = Callable[[], AiProvider]
+_live_provider_factory: LiveProviderFactory | None = None
+
 
 class BookingInstructionInterpreter(Protocol):
     metadata: BernieBookingInterpreterMetadata
@@ -46,6 +54,12 @@ class BookingInstructionInterpreter(Protocol):
 
 def _issue(code: str, severity: str, message: str) -> AppointmentProposalIssue:
     return AppointmentProposalIssue(code=code, severity=severity, message=message)
+
+
+def set_live_provider_factory(factory: LiveProviderFactory | None) -> None:
+    """Inject a live-provider factory for tests without touching cloud clients."""
+    global _live_provider_factory
+    _live_provider_factory = factory
 
 
 def _disabled_response() -> BernieBookingInstructionInterpretOut:
@@ -230,10 +244,225 @@ def _clarifying_question(
     return None
 
 
+class GeminiVertexBookingInstructionInterpreter:
+    metadata = BernieBookingInterpreterMetadata(
+        provider="gemini_vertex",
+        mode="live",
+        live_provider=True,
+    )
+
+    def __init__(self, provider_factory: LiveProviderFactory | None = None) -> None:
+        self._provider_factory = provider_factory
+
+    def interpret(
+        self,
+        body: BernieBookingInstructionInterpretIn,
+    ) -> BernieBookingInstructionInterpretOut:
+        try:
+            raw = self._generate(body)
+        except Exception:
+            return _live_blocked_response(
+                "booking_interpreter_provider_unavailable",
+                "Live booking-instruction interpreter provider is unavailable.",
+            )
+
+        if not isinstance(raw, dict):
+            return _live_blocked_response(
+                "booking_interpreter_invalid_response",
+                "Live booking-instruction interpreter returned an invalid response.",
+            )
+
+        command, command_error = _command_from_live_response(raw)
+        if command_error:
+            return _live_blocked_response(
+                "booking_interpreter_invalid_command",
+                "Live booking-instruction interpreter returned an invalid command candidate.",
+            )
+
+        safety_flags = _dedupe_strings([
+            *_coerce_string_list(raw.get("safety_flags")),
+            *_safety_flags(body.instruction),
+        ])
+        missing_fields = _dedupe_strings([
+            *_coerce_string_list(raw.get("missing_fields")),
+            *_missing_fields(command),
+        ])
+        confidence = _coerce_confidence(raw.get("confidence"))
+        summary = _safe_summary(raw.get("summary"), body.instruction)
+        clarifying_question = _safe_optional_string(raw.get("clarifying_question"))
+        normalization = normalize_slot_search_command(
+            command,
+            reference_date=body.reference_date,
+        )
+        warnings = [
+            _issue(
+                "autonomous_booking_language",
+                "warning",
+                "Instruction contains booking/confirmation language; staff confirmation is still required.",
+            )
+            for flag in safety_flags
+            if flag == "autonomous_booking_language"
+        ]
+        blocks = list(normalization.blocks)
+        if safety_flags:
+            blocks.append(_issue(
+                "staff_confirmation_required",
+                "blocked",
+                "Free-text interpretation is read-only and cannot book or confirm appointments.",
+            ))
+
+        if blocks:
+            result = "clarification_required" if missing_fields else "blocked"
+            return BernieBookingInstructionInterpretOut(
+                safe=False,
+                result=result,
+                autonomy_tier="blocked",
+                summary=summary or "Booking instruction needs staff clarification before slot search.",
+                confidence=min(confidence, 0.65),
+                command_candidate=command,
+                missing_fields=missing_fields,
+                safety_flags=safety_flags,
+                clarifying_question=(
+                    clarifying_question
+                    or _clarifying_question(missing_fields, safety_flags)
+                ),
+                normalization=normalization,
+                warnings=[*normalization.warnings, *warnings],
+                blocks=blocks,
+                provider_metadata=self.metadata,
+            )
+
+        return BernieBookingInstructionInterpretOut(
+            safe=True,
+            result="interpreted",
+            autonomy_tier="execute_with_report",
+            summary=summary or "Booking instruction interpreted into a validated slot-search command candidate.",
+            confidence=confidence,
+            command_candidate=command,
+            missing_fields=[],
+            safety_flags=[],
+            clarifying_question=None,
+            normalization=normalization,
+            warnings=normalization.warnings,
+            blocks=[],
+            provider_metadata=self.metadata,
+        )
+
+    def _generate(self, body: BernieBookingInstructionInterpretIn) -> dict:
+        provider_factory = self._provider_factory or _live_provider_factory
+        provider = provider_factory() if provider_factory is not None else None
+        if provider is None:
+            provider = _get_default_provider()
+        return provider.generate_json(
+            _build_live_provider_prompt(body),
+            settings.bernie_booking_interpreter_live_temperature,
+        )
+
+
+def _live_blocked_response(code: str, message: str) -> BernieBookingInstructionInterpretOut:
+    return BernieBookingInstructionInterpretOut(
+        safe=False,
+        result="blocked",
+        autonomy_tier="blocked",
+        summary="Live booking-instruction interpretation failed closed.",
+        confidence=0,
+        missing_fields=[],
+        safety_flags=["provider_response_unusable"],
+        clarifying_question="Please use structured booking fields or the deterministic interpreter path.",
+        blocks=[_issue(code, "blocked", message)],
+        provider_metadata=GeminiVertexBookingInstructionInterpreter.metadata,
+    )
+
+
+def _build_live_provider_prompt(
+    body: BernieBookingInstructionInterpretIn,
+) -> str:
+    reference_date = body.reference_date.isoformat() if body.reference_date else "not provided"
+    return (
+        "You are Bernie, EMR4's read-only booking-instruction interpreter. "
+        "Return only JSON. Do not book, confirm, create appointments, search slots, "
+        "write audit rows, or claim that an appointment has been made. "
+        "Extract only structured slot-search command fields from the staff instruction. "
+        "If the instruction asks you to book/confirm/create/write, include "
+        "autonomous_booking_language in safety_flags. Do not include raw patient notes "
+        "or repeat the full instruction in summary. "
+        "JSON shape: {"
+        "\"command_candidate\":{\"practitioner_id\":null,\"patient_id\":null,"
+        "\"appointment_type_id\":null,\"location_id\":null,\"date_from\":null,"
+        "\"date_to\":null,\"duration_minutes\":null,\"earliest_time\":null,"
+        "\"latest_time\":null,\"limit\":null},"
+        "\"confidence\":0.0,"
+        "\"summary\":\"brief non-PHI structured interpretation summary\","
+        "\"missing_fields\":[],"
+        "\"safety_flags\":[],"
+        "\"clarifying_question\":null"
+        "}. "
+        f"Reference date: {reference_date}. "
+        f"Instruction: {body.instruction}"
+    )
+
+
+def _command_from_live_response(
+    raw: dict[str, Any],
+) -> tuple[SlotSearchCommandIn, bool]:
+    candidate = raw.get("command_candidate", raw.get("command", {}))
+    if not isinstance(candidate, dict):
+        return SlotSearchCommandIn(), True
+    try:
+        return SlotSearchCommandIn.model_validate(candidate), False
+    except ValidationError:
+        return SlotSearchCommandIn(), True
+
+
+def _coerce_string_list(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [item.strip() for item in value if isinstance(item, str) and item.strip()]
+
+
+def _dedupe_strings(values: list[str]) -> list[str]:
+    seen = set()
+    deduped = []
+    for value in values:
+        if value not in seen:
+            seen.add(value)
+            deduped.append(value)
+    return deduped
+
+
+def _coerce_confidence(value: Any) -> float:
+    try:
+        confidence = float(value)
+    except (TypeError, ValueError):
+        return 0.5
+    return max(0, min(confidence, 1))
+
+
+def _safe_summary(value: Any, raw_instruction: str | None = None) -> str:
+    if not isinstance(value, str):
+        return ""
+    cleaned = value.strip()
+    if not cleaned:
+        return ""
+    instruction = (raw_instruction or "").strip()
+    if instruction and instruction.lower() in cleaned.lower():
+        return ""
+    return cleaned[:200]
+
+
+def _safe_optional_string(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    cleaned = value.strip()
+    return cleaned[:200] if cleaned else None
+
+
 def get_booking_instruction_interpreter(
     provider_name: str,
 ) -> BookingInstructionInterpreter:
     normalized = (provider_name or "disabled").strip().lower()
     if normalized == "fake":
         return FakeBookingInstructionInterpreter()
+    if normalized in {"gemini_vertex", "vertex_gemini", "gemini", "vertex"}:
+        return GeminiVertexBookingInstructionInterpreter()
     return DisabledBookingInstructionInterpreter()

@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     bernie_staff_pilot_practice_ids: str = ""
     bernie_staff_pilot_user_ids: str = ""
     bernie_booking_interpreter_provider: str = "disabled"
+    bernie_booking_interpreter_live_temperature: float = 0.0
 
     # Patient file storage. Point this at a OneDrive-synced folder so generated
     # .docx files are immediately accessible via Word Online. The backend creates
