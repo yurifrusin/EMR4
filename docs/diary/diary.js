@@ -63,6 +63,11 @@ function isSmokeMode() {
   return new URLSearchParams(window.location.search).get("smoke") === "true";
 }
 
+function isBernieManualContextAllowed() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("smoke") === "true" || urlParams.get("bernie_dev_review") === "true";
+}
+
 function hasSlotPreviewParam() {
   return new URLSearchParams(window.location.search).get("slot_preview") === "true";
 }
@@ -128,9 +133,10 @@ function setBerniePilotContextValues(values) {
 function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) {
   const urlParams = new URLSearchParams(window.location.search);
   const allowSmokeSelectedContext = isSmokeMode() && urlParams.get("bernie_context_form") === "true";
+  const allowManualContext = isBernieManualContextAllowed();
   const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
-  const queryPractitionerId = urlParams.get("practitioner_id");
-  const queryPatientId = urlParams.get("patient_id");
+  const queryPractitionerId = allowManualContext ? urlParams.get("practitioner_id") : "";
+  const queryPatientId = allowManualContext ? urlParams.get("patient_id") : "";
   const queryReferenceDate = urlParams.get("reference_date");
   const explicitContext = getBerniePilotContextValues();
 
@@ -2527,6 +2533,7 @@ function renderBerniePilotContextForm(blocks = []) {
   if (!contentEl) return;
 
   const currentContext = getBerniePilotContextValues();
+  const allowManualContext = isBernieManualContextAllowed();
   const form = document.createElement("form");
   form.className = "bernie-pilot-context-form";
   form.setAttribute("data-testid", "bernie-pilot-context-form");
@@ -2538,49 +2545,59 @@ function renderBerniePilotContextForm(blocks = []) {
 
   const hint = document.createElement("p");
   hint.className = "bernie-pilot-context-hint";
-  hint.textContent = "Provide practitioner and patient IDs to load clinical context. All scheduling actions require explicit staff review and confirmation.";
+  hint.textContent = allowManualContext
+    ? "Provide practitioner and patient IDs to load clinical context. All scheduling actions require explicit staff review and confirmation."
+    : "Select a linked diary appointment and import its context. All scheduling actions require explicit staff review and confirmation.";
   form.appendChild(hint);
 
-  const practitionerLabel = document.createElement("label");
-  practitionerLabel.className = "bernie-pilot-context-label";
-  practitionerLabel.textContent = "Supervising Practitioner ID";
-  const practitionerInput = document.createElement("input");
-  practitionerInput.id = "bernie-pilot-practitioner-id";
-  practitionerInput.setAttribute("data-testid", "bernie-pilot-practitioner-id");
-  practitionerInput.type = "text";
-  practitionerInput.autocomplete = "off";
-  practitionerInput.placeholder = "Enter practitioner ID (UUID)";
-  practitionerInput.value = currentContext.practitionerId;
-  practitionerLabel.appendChild(practitionerInput);
-  form.appendChild(practitionerLabel);
+  let practitionerInput = null;
+  let patientInput = null;
+  if (allowManualContext) {
+    const practitionerLabel = document.createElement("label");
+    practitionerLabel.className = "bernie-pilot-context-label";
+    practitionerLabel.textContent = "Supervising Practitioner ID";
+    practitionerInput = document.createElement("input");
+    practitionerInput.id = "bernie-pilot-practitioner-id";
+    practitionerInput.setAttribute("data-testid", "bernie-pilot-practitioner-id");
+    practitionerInput.type = "text";
+    practitionerInput.autocomplete = "off";
+    practitionerInput.placeholder = "Enter practitioner ID (UUID)";
+    practitionerInput.value = currentContext.practitionerId;
+    practitionerLabel.appendChild(practitionerInput);
+    form.appendChild(practitionerLabel);
 
-  const patientLabel = document.createElement("label");
-  patientLabel.className = "bernie-pilot-context-label";
-  patientLabel.textContent = "Subject Patient ID";
-  const patientInput = document.createElement("input");
-  patientInput.id = "bernie-pilot-patient-id";
-  patientInput.setAttribute("data-testid", "bernie-pilot-patient-id");
-  patientInput.type = "text";
-  patientInput.autocomplete = "off";
-  patientInput.placeholder = "Enter patient ID (non-PHI)";
-  patientInput.value = currentContext.patientId;
-  patientLabel.appendChild(patientInput);
-  form.appendChild(patientLabel);
+    const patientLabel = document.createElement("label");
+    patientLabel.className = "bernie-pilot-context-label";
+    patientLabel.textContent = "Subject Patient ID";
+    patientInput = document.createElement("input");
+    patientInput.id = "bernie-pilot-patient-id";
+    patientInput.setAttribute("data-testid", "bernie-pilot-patient-id");
+    patientInput.type = "text";
+    patientInput.autocomplete = "off";
+    patientInput.placeholder = "Enter patient ID (non-PHI)";
+    patientInput.value = currentContext.patientId;
+    patientLabel.appendChild(patientInput);
+    form.appendChild(patientLabel);
+  }
 
   if (blocks.length > 0) {
     const summary = document.createElement("div");
     summary.className = "bernie-pilot-context-warning";
     summary.setAttribute("data-testid", "bernie-pilot-context-warning");
-    summary.textContent = "Supervised review is blocked until both practitioner and patient IDs are explicitly provided.";
+    summary.textContent = allowManualContext
+      ? "Supervised review is blocked until both practitioner and patient IDs are explicitly provided."
+      : "Supervised review is blocked until a linked selected appointment supplies practitioner and patient context.";
     form.appendChild(summary);
   }
 
-  const submitBtn = document.createElement("button");
-  submitBtn.type = "submit";
-  submitBtn.className = "btn-bernie-context-submit";
-  submitBtn.setAttribute("data-testid", "bernie-pilot-context-submit");
-  submitBtn.textContent = "Prepare Supervised Review";
-  form.appendChild(submitBtn);
+  if (allowManualContext) {
+    const submitBtn = document.createElement("button");
+    submitBtn.type = "submit";
+    submitBtn.className = "btn-bernie-context-submit";
+    submitBtn.setAttribute("data-testid", "bernie-pilot-context-submit");
+    submitBtn.textContent = "Prepare Supervised Review";
+    form.appendChild(submitBtn);
+  }
 
   // Selected appointment context sub-panel (Sprint 67)
   const apptPanel = document.createElement("div");
@@ -2620,11 +2637,11 @@ function renderBerniePilotContextForm(blocks = []) {
       const patientName = appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : (provisionalPatientName(appt) || "Unknown Patient");
       useSelectedBtn.textContent = `Import context from selected: ${patientName}`;
       useSelectedBtn.addEventListener("click", () => {
-        practitionerInput.value = apptPracId;
-        patientInput.value = appt.patient_id || (appt.patient ? appt.patient.id : "");
+        if (practitionerInput) practitionerInput.value = apptPracId;
+        if (patientInput) patientInput.value = appt.patient_id || (appt.patient ? appt.patient.id : "");
         setBerniePilotContextValues({
-          practitionerId: practitionerInput.value,
-          patientId: patientInput.value
+          practitionerId: apptPracId,
+          patientId: appt.patient_id || (appt.patient ? appt.patient.id : "")
         });
         loadBernieLiveReview();
       });
@@ -2636,6 +2653,9 @@ function renderBerniePilotContextForm(blocks = []) {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    if (!allowManualContext || !practitionerInput || !patientInput) {
+      return;
+    }
     setBerniePilotContextValues({
       practitionerId: practitionerInput.value,
       patientId: patientInput.value

@@ -8,6 +8,43 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 70: Bernie Staff-Visible Pilot Entry Path |
+| Integrated through | Allowlisted non-default staff launcher that requires selected linked appointment context and hides manual ID entry outside smoke/dev |
+| Status | Integrated locally; verification passed; push/mirror/audit pending |
+| Last updated | 2026-06-27 |
+
+## What Changed
+
+- Ordinary allowlisted staff mode no longer accepts `practitioner_id` or `patient_id` query-string context.
+- Manual practitioner/patient ID fields and the manual context submit button now render only in smoke/dev review modes.
+- Staff-visible Bernie launch now requires importing context from a selected linked diary appointment before instruction entry becomes usable.
+- The existing smoke/dev manual context path remains available for deterministic harness coverage.
+
+## Verification
+
+- `C:\Users\sarashera\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `49 passed`.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed locally with `diary.js?v=124` bumped from `v=123`.
+- `git diff --check` passed.
+
+## Not Required Before Moving On
+
+- No manual live UI test is required before push; deterministic Playwright coverage now proves default hidden/no-call, allowlisted launcher, no manual ID exposure in staff-visible mode, selected linked appointment import, instruction readiness, summary persistence, and confirmation gating.
+- No backend, provider, schema, migration, taskpane, Command Centre, billing, SMS, resource admin, or live Gemini action is required.
+
+## Known Follow-Up
+
+- Antigravity CLI still exits with no stdout and no worktree changes in this Codex session; Ariadne should treat that channel as suspect until it is separately repaired.
+- The known moderate Dependabot alert remains outside this sprint.
+
+## Recommended Next Direction
+
+After push/mirror/audit, either continue Bernie pilot refinement with live staff workflow polish or triage the moderate Dependabot alert before more production exposure.
+
+## Previous Closeout - Sprint 69
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 69: Bernie Context Readiness Summary |
 | Integrated through | Context-ready instruction gating and persistent selected-context summary in Bernie pilot review |
 | Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |

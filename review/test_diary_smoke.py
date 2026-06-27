@@ -1424,7 +1424,7 @@ def test_bernie_live_confirm_flow_harness_no_normal_mode_exposure(diary_page):
 
     try:
         # Case 1: Pure ordinary mode (no query parameters)
-        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.goto(base_url + "/diary/diary.html?practitioner_id=real-prac-query&patient_id=real-patient-query")
         diary_page.wait_for_load_state("domcontentloaded")
         assert diary_page.locator("[data-testid='bernie-review-panel']:not(.hidden)").count() == 0
         assert len(supervised_requests) == 0
@@ -1948,12 +1948,54 @@ def test_bernie_pilot_ordinary_mode_requires_real_context(diary_page):
         elif "/api/v1/auth/me" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
         elif "/api/v1/diary/template" in url:
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"slot_defaults": {"start": "09:00", "end": "17:00", "interval_minutes": 15}, "columns": []}))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "practice_name": "Smoke Practice",
+                "slot_defaults": {"start": "09:00", "end": "17:00", "interval_minutes": 15},
+                "columns": [{
+                    "room_label": "Room 1",
+                    "assignment": "Dr Alex Shera",
+                    "practitioner_id": "real-prac-70",
+                    "practitioner_ahpra": "MED0001234567"
+                }]
+            }))
         elif "/api/v1/appointments/types" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
         elif "/api/v1/appointments" in url:
-            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
-        elif "/api/v1/diary/roster" in url or "/api/v1/diary/waiting-areas" in url or "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([
+                {
+                    "id": "staff-visible-appt-70",
+                    "appointment_date": "2026-06-27",
+                    "start_time_local": "09:00",
+                    "start_time": "09:00",
+                    "duration_minutes": 15,
+                    "status": "Booked",
+                    "appointment_type_id": None,
+                    "patient_id": "real-patient-70",
+                    "patient": {
+                        "id": "real-patient-70",
+                        "first_name": "Margaret",
+                        "last_name": "Thompson",
+                        "date_of_birth": "1955-03-24"
+                    },
+                    "practitioner_id": "real-prac-70",
+                    "practitioner": {
+                        "id": "real-prac-70",
+                        "first_name": "Alex",
+                        "last_name": "Shera",
+                        "ahpra_number": "MED0001234567"
+                    },
+                    "room_id": None,
+                    "location_id": "loc-1",
+                    "notes": ""
+                }
+            ]))
+        elif "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([
+                {"id": "loc-1", "name": "Main Clinic", "is_active": True}
+            ]))
+        elif "/api/v1/diary/roster" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"entries": []}))
+        elif "/api/v1/diary/waiting-areas" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
         else:
             route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
@@ -1972,21 +2014,15 @@ def test_bernie_pilot_ordinary_mode_requires_real_context(diary_page):
         assert len(confirm_payloads) == 0
         assert diary_page.locator("[data-testid='bernie-pilot-context-form']").is_visible()
         assert diary_page.locator("[data-testid='bernie-pilot-context-warning']").is_visible()
+        assert diary_page.locator("[data-testid='bernie-pilot-practitioner-id']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-pilot-patient-id']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-pilot-context-submit']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "blocked"
         assert diary_page.locator("[data-testid='bernie-review-action']", has_text="real diary context").count() == 1
         assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_context").count() == 1
         assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_patient_context").count() == 1
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
-
-        diary_page.fill("[data-testid='bernie-pilot-practitioner-id']", "prac-1")
-        diary_page.fill("[data-testid='bernie-pilot-patient-id']", "smoke-pat-1")
-        diary_page.click("[data-testid='bernie-pilot-context-submit']")
-        diary_page.wait_for_selector("[data-testid='bernie-review-block-item']:has-text('default_practitioner_context')", state="visible", timeout=5000)
-
-        assert len(supervised_requests) == 0
-        assert len(confirm_payloads) == 0
-        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="default_patient_context").count() == 1
     finally:
         diary_page.evaluate("localStorage.removeItem('emr4_token')")
         diary_page.unroute("**/api/v1/**")
@@ -2018,7 +2054,7 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         "summary": "Proposal confirmation ready",
         "normalization": {
             "safe": True,
-            "constraint": { "practitioner_id": "real-prac-62" },
+            "constraint": { "practitioner_id": "real-prac-70" },
             "warnings": [],
             "blocks": [],
             "summary": "Normalized successfully"
@@ -2031,18 +2067,18 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
             "staff_action_required": "Review and confirm booking.",
             "confirmation_ready": True,
             "selected_slot": {
-                "id": "slot-62",
+                "id": "slot-70",
                 "appointment_date": "2026-06-27",
                 "start_time_local": "10:15:00",
                 "duration_minutes": 15
             },
             "candidate_slots": [],
             "warning_summary": "No warnings.",
-            "evidence_summary": "Explicit pilot context accepted.",
+            "evidence_summary": "Selected appointment context accepted.",
             "warnings": [],
             "blocks": [],
             "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
-            "confirm_payload": { "proposal_id": "prop-62" },
+            "confirm_payload": { "proposal_id": "prop-70" },
             "confirm_evidence": []
         },
         "warnings": [],
@@ -2064,8 +2100,8 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
                     "safe": True,
                     "result": "interpreted",
                     "command_candidate": {
-                        "practitioner_id": "real-prac-62",
-                        "patient_id": "real-patient-62"
+                        "practitioner_id": "real-prac-70",
+                        "patient_id": "real-patient-70"
                     }
                 })
             )
@@ -2078,12 +2114,54 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         elif "/api/v1/auth/me" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
         elif "/api/v1/diary/template" in url:
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"slot_defaults": {"start": "09:00", "end": "17:00", "interval_minutes": 15}, "columns": []}))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "practice_name": "Smoke Practice",
+                "slot_defaults": {"start": "09:00", "end": "17:00", "interval_minutes": 15},
+                "columns": [{
+                    "room_label": "Room 1",
+                    "assignment": "Dr Alex Shera",
+                    "practitioner_id": "real-prac-70",
+                    "practitioner_ahpra": "MED0001234567"
+                }]
+            }))
         elif "/api/v1/appointments/types" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
         elif "/api/v1/appointments" in url:
-            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
-        elif "/api/v1/diary/roster" in url or "/api/v1/diary/waiting-areas" in url or "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([
+                {
+                    "id": "staff-visible-appt-70",
+                    "appointment_date": "2026-06-27",
+                    "start_time_local": "09:00",
+                    "start_time": "09:00",
+                    "duration_minutes": 15,
+                    "status": "Booked",
+                    "appointment_type_id": None,
+                    "patient_id": "real-patient-70",
+                    "patient": {
+                        "id": "real-patient-70",
+                        "first_name": "Margaret",
+                        "last_name": "Thompson",
+                        "date_of_birth": "1955-03-24"
+                    },
+                    "practitioner_id": "real-prac-70",
+                    "practitioner": {
+                        "id": "real-prac-70",
+                        "first_name": "Alex",
+                        "last_name": "Shera",
+                        "ahpra_number": "MED0001234567"
+                    },
+                    "room_id": None,
+                    "location_id": "loc-1",
+                    "notes": ""
+                }
+            ]))
+        elif "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([
+                {"id": "loc-1", "name": "Main Clinic", "is_active": True}
+            ]))
+        elif "/api/v1/diary/roster" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"entries": []}))
+        elif "/api/v1/diary/waiting-areas" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
         else:
             route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
@@ -2094,15 +2172,24 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_selector("[data-testid='bernie-pilot-launch-button']:not(.hidden)", state="visible", timeout=5000)
+        diary_page.wait_for_selector(".appt:has-text('Margaret Thompson')", state="visible", timeout=5000)
 
+        diary_page.click(".appt:has-text('Margaret Thompson')")
+        diary_page.wait_for_selector(".appt.appt-active:has-text('Margaret Thompson')", state="visible", timeout=5000)
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
         diary_page.wait_for_selector("[data-testid='bernie-pilot-context-form']", state="visible", timeout=5000)
+        assert diary_page.locator("[data-testid='bernie-pilot-practitioner-id']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-pilot-patient-id']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-pilot-context-submit']").count() == 0
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-use-selected']", state="visible", timeout=5000)
         assert len(supervised_requests) == 0
         assert len(confirm_payloads) == 0
 
-        diary_page.fill("[data-testid='bernie-pilot-practitioner-id']", "real-prac-62")
-        diary_page.fill("[data-testid='bernie-pilot-patient-id']", "real-patient-62")
-        diary_page.click("[data-testid='bernie-pilot-context-submit']")
+        diary_page.click("[data-testid='bernie-pilot-use-selected']")
+        diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
+        details = diary_page.locator("[data-testid='bernie-context-summary-details']")
+        assert "Patient: Margaret Thompson" in details.text_content()
+        assert "Practitioner: Alex Shera" in details.text_content()
 
         # Trigger staff instruction submit
         trigger_live_bernie(diary_page, register_default_mock=False)
@@ -2110,8 +2197,8 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
 
         assert len(supervised_requests) == 1
-        assert supervised_requests[0]["command"]["practitioner_id"] == "real-prac-62"
-        assert supervised_requests[0]["command"]["patient_id"] == "real-patient-62"
+        assert supervised_requests[0]["command"]["practitioner_id"] == "real-prac-70"
+        assert supervised_requests[0]["command"]["patient_id"] == "real-patient-70"
         assert supervised_requests[0]["reference_date"]
         assert len(confirm_payloads) == 0
 
@@ -2129,7 +2216,7 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         confirm_btn.click()
         diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
         assert len(confirm_payloads) == 1
-        assert confirm_payloads[0]["proposal_id"] == "prop-62"
+        assert confirm_payloads[0]["proposal_id"] == "prop-70"
         assert confirm_payloads[0]["confirmed"] is True
     finally:
         diary_page.evaluate("localStorage.removeItem('emr4_token')")
