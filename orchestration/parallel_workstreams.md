@@ -138,9 +138,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated by Ariadne with bounded post-worker repair; closeout verification passed locally |
+| Status | Integrated by Ariadne with bounded post-worker repair; pushed, mirrored, audited, deployed, and closed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Complete locally; pending push, mirror realign, audit, and Pages verification |
+| Integration Gate | Complete |
 | Product Goal | Make the staff-visible Bernie pilot instruction surface easier and safer to use from imported selected-appointment context |
 
 ### Workstream DO - Bernie Selected Appointment Instruction Affordance

@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 73: Bernie Selected Appointment Instruction Affordance |
 | Integrated through | Staff-safe suggested instruction chips for imported selected-appointment Bernie context |
-| Status | Integrated locally, verified, pending push/mirror/audit/deploy closeout |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-28 |
 
 ## What Changed
@@ -33,6 +33,9 @@ reviewed, integrated, verified, pushed, and audited.
 - `python scripts\check_frontend_versions.py` passed locally with `diary.css?v=115` and `diary.js?v=127`.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_affordances review\test_diary_smoke.py::test_bernie_pilot_imported_context_stales_when_selection_changes -q --tb=short` passed: `2 passed`.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `51 passed`.
+- GitHub Pages workflow run `28303109145` completed successfully, and live `https://yurifrusin.github.io/EMR4/diary/diary.html` serves `diary.js?v=127` and `diary.css?v=115`.
+- `python scripts\agent_worktrees.py audit --fetch` showed `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned and clean at `10a9f6a`.
+- `python scripts\agent_worktrees.py retire-stale` found no stale disposable worktrees.
 - `git diff --check` passed.
 
 ## Not Required Before Moving On
@@ -44,6 +47,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 - Antigravity CLI still returns blank stdout in Codex non-TTY shells, but this sprint proved the tangible-artifact workflow works: poll/git showed the submitted branch and review packet.
 - GitHub still reports Dependabot alert 5 on push; Sprint 71 triaged it as not product-runtime-actionable.
+- GitHub Pages emitted a non-blocking warning that several Pages actions target Node.js 20 while GitHub forced Node.js 24; deployment still succeeded.
 
 ## Recommended Next Direction
 
