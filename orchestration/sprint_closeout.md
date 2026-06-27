@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 74: Bernie Instruction Readiness Reset Polish |
 | Integrated through | Staff-safe readiness copy and clean reset behaviour for selected-appointment Bernie instructions |
-| Status | Integrated and verified locally; push, Pages deploy, mirror realign, and audit pending |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-28 |
 
 ## What Changed
@@ -30,6 +30,9 @@ reviewed, integrated, verified, pushed, and audited.
 - `python scripts\check_frontend_versions.py` passed locally with `diary.css?v=116` and `diary.js?v=129`.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_readiness_and_resets review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_affordances review\test_diary_smoke.py::test_bernie_pilot_imported_context_stales_when_selection_changes -q --tb=short` passed: `3 passed`.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `52 passed`.
+- GitHub Pages workflow run `28303547625` completed successfully, and live `https://yurifrusin.github.io/EMR4/diary/diary.html` serves `diary.js?v=129` and `diary.css?v=116`.
+- `python scripts\agent_worktrees.py audit --fetch` showed `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned and clean at `d6d286e`.
+- `python scripts\agent_worktrees.py retire-stale` found no stale disposable worktrees.
 - `git diff --check` passed.
 
 ## Not Required Before Moving On
@@ -41,7 +44,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 - Antigravity CLI still returns blank stdout in Codex non-TTY shells, but this sprint proved the tangible-artifact workflow works: poll/git showed the submitted branch and review packet.
 - GitHub still reports Dependabot alert 5 on push; Sprint 71 triaged it as not product-runtime-actionable.
-- GitHub Pages deployment and final audit are still pending for this closeout until the integration commit is pushed.
+- GitHub still reports the known moderate Dependabot alert on push; Sprint 71 triaged it as not product-runtime-actionable.
 
 ## Recommended Next Direction
 
