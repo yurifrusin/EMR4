@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 75: Bernie Interpreted Context Guard |
 | Integrated through | Interpreted-practitioner mismatch block and empty-candidate explanatory message |
-| Status | Integrated and verified locally; push/deploy/audit pending |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-28 |
 
 ## What Changed
@@ -27,6 +27,10 @@ reviewed, integrated, verified, pushed, and audited.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised_call review\test_diary_smoke.py::test_bernie_review_candidate_selection_empty_state review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_affordances review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_readiness_and_resets -q --tb=short` passed: `4 passed`.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `54 passed`.
 - `git diff --check` passed.
+- GitHub Pages deployment for `ef677b8` completed successfully: run `28305009904`, `Deploy GitHub Pages`, `master`, `success`.
+- Live Pages served `diary.css?v=117` and `diary.js?v=130` from `https://yurifrusin.github.io/EMR4/diary/diary.html`.
+- `python scripts\agent_worktrees.py audit --fetch` showed `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned and clean at `f2cc857`.
+- `python scripts\agent_worktrees.py retire-stale` reported no stale disposable worktrees.
 
 ## Not Required Before Moving On
 
@@ -40,7 +44,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended Next Direction
 
-Next recommended step: after Pages serves `diary.js?v=130` and `diary.css?v=117`, rerun the live fake-interpreter staff-pilot smoke that previously exposed the practitioner mismatch and empty-candidate states. If clean, choose whether to enable a live Gemini interpreter smoke behind the same gates.
+Next recommended step: rerun the live fake-interpreter staff-pilot smoke that previously exposed the practitioner mismatch and empty-candidate states. If clean, choose whether to enable a live Gemini interpreter smoke behind the same gates.
 
 ## Previous Closeout - Sprint 74
 
