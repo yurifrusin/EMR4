@@ -78,6 +78,13 @@ It must also preserve the stale-selection guard, keep the allowlist gate, have n
 
 ## Codex Plan Review
 
-- Review result:
+- Review result: Approved with guardrails. The selected-appointment affordance is the right next product slice, and the proposed file boundary is appropriate.
 - Required changes before implementation:
-- Approved to proceed: no
+  - Use staff-supervised, non-PHI chip copy. Avoid autonomous wording such as "Book follow-up" or "Reschedule appointment". Prefer prompts like "Find earlier options for this patient", "Find later options for this patient", "Find next available with this practitioner", and "Check another day for this practitioner".
+  - Chips must only populate the textarea and update the in-memory instruction text. They must not call interpret, supervised review, confirmation, storage, navigation, or submit handlers.
+  - Render chips only while a valid imported selected-appointment context is current. If the active selected appointment changes after import, the stale-selection guard must hide/disable the affordance and continue to block submit through the existing `stale_selected_appointment_context` path.
+  - Keep ordinary mode free of manual patient/practitioner/source appointment IDs and do not expose those IDs in chip labels, placeholders, URLs, localStorage, sessionStorage, or staff-facing ordinary-mode copy.
+  - Add a production-path review-harness check, not only smoke-only coverage: import a selected appointment context, click a suggested instruction chip, assert no API call occurs before explicit submit, assert no URL/browser-storage instruction persistence, then explicitly submit and verify the supervised request uses the imported context IDs.
+  - Preserve the explicit approval checkbox and confirmation gating unchanged.
+  - Bump runtime asset versions for every changed diary asset and run the full diary review harness plus `git diff --check`.
+- Approved to proceed: yes

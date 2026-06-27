@@ -161,6 +161,10 @@ Codex is the default orchestration agent for EMR4. This means:
   agent hierarchy.
 - No non-orchestrator agent should merge to `master` or move `handoff/current`
   during parallel mode unless the user explicitly says so.
+- Worker count is risk-based, not ritualized: use the right number of agents for
+  the risk and separable surfaces, not "always three agents". Ariadne may keep a
+  narrow sprint single-track, use one specialist reviewer, or spawn extra
+  workers when independent ownership boundaries make the extra coverage worth it.
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).

@@ -74,6 +74,10 @@ For the layer between long phases and tactical sprints, use
 - During a sprint, Codex must not push sprint work through to `master` until all
   active sprint agents, including any Codex subagent worker, have submitted or
   been explicitly stood down.
+- Worker count is risk-based, not ritualized: use the right number of agents for
+  the risk and separable surfaces, not "always three agents". Ariadne may keep a
+  narrow sprint single-track, use one specialist reviewer, or spawn extra agents
+  when independent ownership boundaries make the extra coverage worth it.
 - Prefer batching non-urgent orchestration protocol edits until discussion
   settles. Codex should remind the user before launch when agreed protocol edits
   are pending.
@@ -134,9 +138,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched to Antigravity for plan packet; Claude safety review queued; Codex subagent reviewing acceptance criteria |
+| Status | Plan and safety-review packets received; Antigravity implementation approved with Codex guardrails |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Antigravity plan review and Claude/Codex safety-review inputs |
+| Integration Gate | Pending Antigravity implementation submit, Codex inspection, verification, and closeout |
 | Product Goal | Make the staff-visible Bernie pilot instruction surface easier and safer to use from imported selected-appointment context |
 
 ### Workstream DO - Bernie Selected Appointment Instruction Affordance
@@ -150,7 +154,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary/diary.{html,css,js}` and `review/test_diary_smoke.py` as needed; selected linked appointment context only; bounded suggested instruction buttons/chips or concise context-aware placeholder/copy; no automatic provider call before explicit staff submit; no PHI-heavy persistence/logging; preserve stale-selection guard, allowlist gate, no manual IDs in ordinary mode, explicit approval checkbox, and asset version bump if runtime assets change |
 | Out of Scope | Backend routes/schemas/models, migrations, provider/Gemini changes, autonomous booking, default production exposure beyond existing allowlisted launcher, query-string free-text intake, browser storage for instructions/context, patient/practitioner search redesign, taskpane, Command Centre, billing, SMS, resource admin, broad diary redesign, dependency/security work, and unrelated CSS cleanup |
 | Verification | Plan packet first; after approval JS syntax, focused route-intercepted Bernie UI checks for suggested instruction affordance/no-auto-call/stale-context preservation/confirm gating, full diary review harness if runtime assets change, frontend version integrity, and `git diff --check` |
-| Status | Queued |
+| Status | Plan submitted; approved with Codex guardrails |
 
 ### Workstream DP - Bernie Selected Instruction Safety Review
 
@@ -163,7 +167,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Read-only review of `docs/diary/diary.js`, `review/test_diary_smoke.py`, and relevant orchestration context; submit concrete acceptance criteria, edge cases, and safety concerns to Codex |
 | Out of Scope | Production code edits, backend/provider/schema/migration changes, frontend implementation, dependency work, taskpane, Command Centre, billing, SMS, resource admin, and broad diary redesign |
 | Verification | `git status --short --branch` before submit; `git diff --check` only if the worker unexpectedly edits a file |
-| Status | Queued |
+| Status | Submitted for Codex review |
 
 ### Workstream DQ - Codex Acceptance Criteria Review
 
@@ -176,7 +180,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Read-only inspection of Bernie pilot code and diary smoke harness; return concise acceptance and edge-case review to Ariadne |
 | Out of Scope | File edits, implementation, integration decisions |
 | Verification | Ariadne reviews the returned subagent notes before approving implementation |
-| Status | In progress |
+| Status | Complete; acceptance notes reviewed by Ariadne |
 
 ## Sprint 70: Bernie Staff-Visible Pilot Entry Path
 

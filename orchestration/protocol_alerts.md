@@ -141,6 +141,11 @@ Read these before acting on remembered process details.
 - Sprint integration rule: Codex/orchestrator must not push sprint work through
   to `master` until all active sprint agents, including any Codex subagent worker,
   have submitted or been explicitly stood down.
+- Worker-count rule: use the right number of agents for the risk and separable
+  surfaces, not "always three agents". Ariadne may keep a narrow sprint
+  single-track, add one specialist reviewer, or spawn extra Claude,
+  Antigravity, or Codex workers when independent ownership boundaries make the
+  extra review/parallelism worth it.
 - Post-poll review rule: once `poll --fetch` shows the expected implementation
   review packets for the active sprint, Codex/orchestrator may proceed through
   local inspection, bounded repair, verification, and draft closeout unless a
