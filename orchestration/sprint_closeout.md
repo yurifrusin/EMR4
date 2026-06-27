@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 65: Bernie Interpret Review UI Adapter |
 | Integrated through | Gated diary Bernie review preview for interpreted booking instructions |
-| Status | Integrated and locally verified; push/mirror/audit pending this closeout commit |
+| Status | Integrated, verified, pushed, mirrored, audited, and live-smoke hardened |
 | Last updated | 2026-06-27 |
 
 ## What Changed
@@ -42,6 +42,7 @@ Ariadne verified this frontend-only, gated UI adapter with deterministic route-i
 - A future sprint can replace the temporary structured-context instruction builder with a proper staff-entered instruction source that avoids query strings and PHI-heavy logs.
 - The known moderate Dependabot alert remains outside this sprint.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
+- Post-closeout live smoke with Bernie service-account impersonation succeeded using dummy/non-PHI IDs only. The smoke caught a provider-summary UUID echo, so Ariadne added summary redaction and a regression assertion before treating the live path as safe.
 
 ## Verification
 
@@ -51,6 +52,8 @@ Ariadne verified this frontend-only, gated UI adapter with deterministic route-i
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_interpret or bernie_pilot_ordinary_mode or bernie_review_live_confirmation_ready" --tb=short` -> 7 passed.
 - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 46 passed.
 - `rg -n "diary\.css\?v=107|diary\.js\?v=117" docs\diary\diary.html` -> passed.
+- Post-closeout live provider smoke with `GCP_PROJECT=project-2893b749-f3af-4449-a61` and `BERNIE_BOOKING_INTERPRETER_PROVIDER=gemini_vertex` -> succeeded with dummy data; autonomous booking language blocked and provider summary redacted IDs.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py -q --tb=short -p no:randomly` after redaction hardening -> 11 passed.
 - `git diff --check` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 

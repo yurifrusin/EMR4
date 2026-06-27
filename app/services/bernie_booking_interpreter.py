@@ -448,6 +448,14 @@ def _safe_summary(value: Any, raw_instruction: str | None = None) -> str:
     instruction = (raw_instruction or "").strip()
     if instruction and instruction.lower() in cleaned.lower():
         return ""
+    cleaned = re.sub(
+        r"\b(patient_id|practitioner_id|appointment_type_id|location_id):"
+        + UUID_RE.pattern,
+        r"\1:[redacted]",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    cleaned = UUID_RE.sub("[redacted-id]", cleaned)
     return cleaned[:200]
 
 

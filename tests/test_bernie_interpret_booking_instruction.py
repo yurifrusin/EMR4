@@ -247,7 +247,10 @@ def test_mocked_live_provider_returns_validated_structured_intent_without_mutati
             "latest_time": "11:00",
         },
         "confidence": 0.82,
-        "summary": "Structured request for a 15 minute appointment search.",
+        "summary": (
+            f"Structured request for patient_id:{patient.id} "
+            f"with practitioner_id:{practitioner.id}."
+        ),
         "missing_fields": [],
         "safety_flags": [],
         "clarifying_question": None,
@@ -286,6 +289,10 @@ def test_mocked_live_provider_returns_validated_structured_intent_without_mutati
     assert "Return only JSON" in prompt
     assert temperature == 0.0
     assert "Patient asks for a short GP booking" not in data["summary"]
+    assert str(patient.id) not in data["summary"]
+    assert str(practitioner.id) not in data["summary"]
+    assert "patient_id:[redacted]" in data["summary"]
+    assert "practitioner_id:[redacted]" in data["summary"]
     assert "instruction" not in data
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
