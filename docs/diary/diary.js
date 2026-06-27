@@ -2320,11 +2320,11 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   headline.className = "bernie-review-headline";
   headline.setAttribute("data-testid", "bernie-review-headline");
   if (payload.status === "blocked") {
-    headline.textContent = "Booking Blocked";
+    headline.textContent = "Supervised Booking Blocked";
   } else if (payload.status === "candidate_selection_required") {
-    headline.textContent = "Candidate Selection Required";
+    headline.textContent = "Supervised Candidate Selection Required";
   } else {
-    headline.textContent = "Proposal Confirmation Ready";
+    headline.textContent = "Supervised Proposal Ready";
   }
   contentEl.appendChild(headline);
 
@@ -2427,7 +2427,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     checkbox.setAttribute("data-testid", "bernie-review-approval-checkbox");
     checkbox.id = "bernie-approval-checkbox";
 
-    const labelText = document.createTextNode(" I explicitly approve this booking proposal and confirm the selected slot details are correct.");
+    const labelText = document.createTextNode(" I have clinically verified the proposed slot and explicitly authorize confirming this booking.");
     checkboxLabel.appendChild(checkbox);
     checkboxLabel.appendChild(labelText);
     confirmBox.appendChild(checkboxLabel);
@@ -2436,7 +2436,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     confirmBtn.className = "btn-bernie-confirm";
     confirmBtn.setAttribute("data-testid", "bernie-review-confirm-button");
     confirmBtn.id = "btn-bernie-confirm";
-    confirmBtn.textContent = "Confirm Booking";
+    confirmBtn.textContent = "Confirm and Process Booking";
     confirmBtn.disabled = true;
     confirmBox.appendChild(confirmBtn);
 
@@ -2454,9 +2454,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     successMsg.setAttribute("data-testid", "bernie-review-success-message");
     successMsg.id = "bernie-success-message";
     if (isConfirmAdapter) {
-      successMsg.textContent = "Booking proposal approved successfully!";
+      successMsg.textContent = "Booking proposal approved successfully and confirmed by staff!";
     } else {
-      successMsg.textContent = "Booking proposal approved successfully! (Simulated)";
+      successMsg.textContent = "Booking proposal approved successfully! (Simulated by staff)";
     }
     confirmBox.appendChild(successMsg);
 
@@ -2533,36 +2533,36 @@ function renderBerniePilotContextForm(blocks = []) {
 
   const title = document.createElement("div");
   title.className = "bernie-pilot-context-title";
-  title.textContent = "Pilot context required";
+  title.textContent = "Supervised pilot context required";
   form.appendChild(title);
 
   const hint = document.createElement("p");
   hint.className = "bernie-pilot-context-hint";
-  hint.textContent = "Enter explicit non-default practitioner and patient context before Bernie prepares a supervised booking review.";
+  hint.textContent = "Provide practitioner and patient IDs to load clinical context. All scheduling actions require explicit staff review and confirmation.";
   form.appendChild(hint);
 
   const practitionerLabel = document.createElement("label");
   practitionerLabel.className = "bernie-pilot-context-label";
-  practitionerLabel.textContent = "Practitioner context ID";
+  practitionerLabel.textContent = "Supervising Practitioner ID";
   const practitionerInput = document.createElement("input");
   practitionerInput.id = "bernie-pilot-practitioner-id";
   practitionerInput.setAttribute("data-testid", "bernie-pilot-practitioner-id");
   practitionerInput.type = "text";
   practitionerInput.autocomplete = "off";
-  practitionerInput.placeholder = "e.g. practitioner UUID";
+  practitionerInput.placeholder = "Enter practitioner ID (UUID)";
   practitionerInput.value = currentContext.practitionerId;
   practitionerLabel.appendChild(practitionerInput);
   form.appendChild(practitionerLabel);
 
   const patientLabel = document.createElement("label");
   patientLabel.className = "bernie-pilot-context-label";
-  patientLabel.textContent = "Patient context ID";
+  patientLabel.textContent = "Subject Patient ID";
   const patientInput = document.createElement("input");
   patientInput.id = "bernie-pilot-patient-id";
   patientInput.setAttribute("data-testid", "bernie-pilot-patient-id");
   patientInput.type = "text";
   patientInput.autocomplete = "off";
-  patientInput.placeholder = "explicit non-PHI patient ID";
+  patientInput.placeholder = "Enter patient ID (non-PHI)";
   patientInput.value = currentContext.patientId;
   patientLabel.appendChild(patientInput);
   form.appendChild(patientLabel);
@@ -2571,7 +2571,7 @@ function renderBerniePilotContextForm(blocks = []) {
     const summary = document.createElement("div");
     summary.className = "bernie-pilot-context-warning";
     summary.setAttribute("data-testid", "bernie-pilot-context-warning");
-    summary.textContent = "Bernie will stay blocked until both context fields are explicit and non-default.";
+    summary.textContent = "Supervised review is blocked until both practitioner and patient IDs are explicitly provided.";
     form.appendChild(summary);
   }
 
@@ -2579,7 +2579,7 @@ function renderBerniePilotContextForm(blocks = []) {
   submitBtn.type = "submit";
   submitBtn.className = "btn-bernie-context-submit";
   submitBtn.setAttribute("data-testid", "bernie-pilot-context-submit");
-  submitBtn.textContent = "Prepare supervised review";
+  submitBtn.textContent = "Prepare Supervised Review";
   form.appendChild(submitBtn);
 
   // Selected appointment context sub-panel (Sprint 67)
@@ -2594,7 +2594,7 @@ function renderBerniePilotContextForm(blocks = []) {
     const infoDiv = document.createElement("div");
     infoDiv.className = "bernie-pilot-selected-status info";
     infoDiv.setAttribute("data-testid", "bernie-pilot-selected-status-info");
-    infoDiv.textContent = "No appointment selected in the diary.";
+    infoDiv.textContent = "No appointment selected: please select a diary appointment to import context.";
     apptPanel.appendChild(infoDiv);
   } else {
     const apptPracId = appt.practitioner_id || appt.practitioner?.id || (appt.practitioner?.ahpra_number ? ahpraToPractitionerMap[appt.practitioner.ahpra_number]?.id : null);
@@ -2604,13 +2604,13 @@ function renderBerniePilotContextForm(blocks = []) {
       const errorDiv = document.createElement("div");
       errorDiv.className = "bernie-pilot-selected-status error";
       errorDiv.setAttribute("data-testid", "bernie-pilot-selected-status-error");
-      errorDiv.textContent = "Selected appointment has no practitioner context.";
+      errorDiv.textContent = "Staff action required: Selected appointment lacks practitioner context.";
       apptPanel.appendChild(errorDiv);
     } else if (isProvisional) {
       const errorDiv = document.createElement("div");
       errorDiv.className = "bernie-pilot-selected-status error";
       errorDiv.setAttribute("data-testid", "bernie-pilot-selected-status-error");
-      errorDiv.textContent = "Selected appointment is provisional (unlinked patient record).";
+      errorDiv.textContent = "Selected appointment is provisional (requires manual linking of patient record).";
       apptPanel.appendChild(errorDiv);
     } else {
       const useSelectedBtn = document.createElement("button");
@@ -2618,7 +2618,7 @@ function renderBerniePilotContextForm(blocks = []) {
       useSelectedBtn.className = "btn-bernie-use-selected";
       useSelectedBtn.setAttribute("data-testid", "bernie-pilot-use-selected");
       const patientName = appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : (provisionalPatientName(appt) || "Unknown Patient");
-      useSelectedBtn.textContent = `Use selected appointment: ${patientName}`;
+      useSelectedBtn.textContent = `Import context from selected: ${patientName}`;
       useSelectedBtn.addEventListener("click", () => {
         practitionerInput.value = apptPracId;
         patientInput.value = appt.patient_id || (appt.patient ? appt.patient.id : "");
@@ -2699,14 +2699,14 @@ function renderBernieInstructionInput(contentEl) {
   const textarea = document.createElement("textarea");
   textarea.id = "bernie-instruction-input";
   textarea.setAttribute("data-testid", "bernie-instruction-input");
-  textarea.placeholder = "Type a non-PHI booking instruction...";
+  textarea.placeholder = "Type booking instructions for staff-supervised analysis (non-PHI)...";
   textarea.value = bernieInstructionText || "";
 
   const button = document.createElement("button");
   button.id = "btn-bernie-instruction-submit";
   button.className = "btn-bernie-instruction-submit";
   button.setAttribute("data-testid", "btn-bernie-instruction-submit");
-  button.textContent = "Submit to Bernie";
+  button.textContent = "Submit Instruction for Review";
 
   container.appendChild(textarea);
   container.appendChild(button);
@@ -2875,7 +2875,7 @@ async function loadBernieLiveReview() {
       const banner = document.createElement("div");
       banner.className = "bernie-pilot-banner";
       banner.setAttribute("data-testid", "bernie-pilot-banner");
-      banner.innerHTML = "⚠️ <strong>Supervised Pilot Mode:</strong> Verify all details before confirming.";
+      banner.innerHTML = "⚠️ <strong>Supervised Pilot Mode:</strong> Verify all details. Booking requires explicit clinical staff authorization.";
       // Insert right after the instruction container
       const container = document.getElementById("bernie-instruction-container");
       if (container && container.nextSibling) {

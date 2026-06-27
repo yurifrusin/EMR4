@@ -232,7 +232,7 @@ def test_bernie_review_blocked(diary_page):
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Booking Blocked"
+        assert headline.text_content().strip() == "Supervised Booking Blocked"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
@@ -264,7 +264,7 @@ def test_bernie_review_candidate_selection(diary_page):
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Candidate Selection Required"
+        assert headline.text_content().strip() == "Supervised Candidate Selection Required"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
@@ -298,7 +298,7 @@ def test_bernie_review_confirmation_ready(diary_page):
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Proposal Confirmation Ready"
+        assert headline.text_content().strip() == "Supervised Proposal Ready"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
@@ -410,7 +410,7 @@ def test_bernie_review_live_blocked(diary_page):
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Booking Blocked"
+        assert headline.text_content().strip() == "Supervised Booking Blocked"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
@@ -513,7 +513,7 @@ def test_bernie_review_live_candidate_selection(diary_page):
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Candidate Selection Required"
+        assert headline.text_content().strip() == "Supervised Candidate Selection Required"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
@@ -658,7 +658,7 @@ def test_bernie_review_live_confirmation_ready(diary_page):
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Proposal Confirmation Ready"
+        assert headline.text_content().strip() == "Supervised Proposal Ready"
 
         # Verify selected slot
         assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 1
@@ -1716,7 +1716,7 @@ def test_bernie_dev_review_fixture_route(diary_page):
         assert "state=blocked" in dev_fixtures_requests[-1]
 
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Booking Blocked"
+        assert headline.text_content().strip() == "Supervised Booking Blocked"
         assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_id").count() == 1
 
         # 6. Proves dev-review = candidate_selection_required fetches and renders
@@ -1909,7 +1909,7 @@ def test_bernie_pilot_eligibility_eligible(diary_page):
         assert "Supervised Pilot Mode" in banner.text_content()
 
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Proposal Confirmation Ready"
+        assert headline.text_content().strip() == "Supervised Proposal Ready"
 
     finally:
         diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")

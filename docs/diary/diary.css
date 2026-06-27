@@ -2341,24 +2341,30 @@ html, body {
   background: #6a1b9a;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 12px;
   font-weight: 700;
-  padding: 9px 10px;
+  padding: 9px 12px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .btn-bernie-context-submit:hover {
-  background: #4a136b;
+  background: #501275;
+}
+
+.btn-bernie-context-submit:active {
+  transform: scale(0.98);
 }
 
 .bernie-status-badge {
   display: inline-block;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   font-weight: 600;
   font-size: 11px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
   width: fit-content;
 }
 
@@ -2568,11 +2574,19 @@ html, body {
   background-color: var(--blue-mid);
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 4px;
+  padding: 10px 14px;
+  border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.2s;
+}
+
+.btn-bernie-confirm:hover:not(:disabled) {
+  background-color: var(--blue-dark);
+}
+
+.btn-bernie-confirm:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .btn-bernie-confirm:disabled {
@@ -2625,16 +2639,18 @@ html, body {
 
 .bernie-pilot-banner {
   background-color: #fffbeb;
-  border: 1px solid #d97706;
+  border: 1px solid #f59e0b;
+  border-left: 4px solid #d97706;
   color: #b45309;
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 10px 14px;
+  border-radius: 6px;
   font-size: 11px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   display: flex;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 /* ─── BERNIE STAFF INSTRUCTION INPUT STYLING (Sprint 66) ─── */
@@ -2662,17 +2678,21 @@ html, body {
   background: #6a1b9a;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 8px 12px;
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
   align-self: flex-end;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.btn-bernie-instruction-submit:hover {
-  background: #8e24aa;
+.btn-bernie-instruction-submit:hover:not(:disabled) {
+  background: #501275;
+}
+
+.btn-bernie-instruction-submit:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .btn-bernie-instruction-submit:disabled {
@@ -2694,18 +2714,22 @@ html, body {
   background: #6a1b9a;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 8px 12px;
   font-size: 11px;
   font-weight: bold;
   cursor: pointer;
   width: 100%;
   text-align: center;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .btn-bernie-use-selected:hover {
-  background: #8e24aa;
+  background: #501275;
+}
+
+.btn-bernie-use-selected:active {
+  transform: scale(0.98);
 }
 
 .bernie-pilot-selected-status {

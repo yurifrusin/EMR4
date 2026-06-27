@@ -10,15 +10,15 @@
 
 ## Review Request
 
-Plan for Bernie pilot review ergonomics
+Refined Bernie pilot ergonomics and supervised copy
 
 ## Worker Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.css, docs/diary/diary.html, review/test_diary_smoke.py
+- Verification run: check_frontend_versions.py, git diff --check, pytest review/test_diary_smoke.py (all 47 passed)
+- Remaining risks: None. The changes are strictly scoped to UI labels, microcopy, styling, and test assertions. All confirmation safety checkbox/button gates remain untouched and active.
 
 ## Required Review Steps
 
