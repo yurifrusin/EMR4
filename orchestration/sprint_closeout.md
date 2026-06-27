@@ -8,6 +8,41 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 76: Bernie Interpreter Smoke Tooling |
+| Integrated through | Repeatable fake/live booking-instruction interpreter smoke command with explicit live-provider guard |
+| Status | Integrated and verified locally; push/audit pending |
+| Last updated | 2026-06-28 |
+
+## What Changed
+
+- Added `scripts/smoke_bernie_interpreter.py`, a non-mutating Bernie interpreter smoke command.
+- The command defaults to the deterministic fake provider and prints a compact redacted result summary.
+- Live Gemini/Vertex smoke now requires both `--provider gemini_vertex` and `--allow-live`, making accidental live calls harder.
+- Added pytest coverage for fake-provider compact output, live-provider refusal without `--allow-live`, and non-zero expectation failure output.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m py_compile scripts\smoke_bernie_interpreter.py tests\test_smoke_bernie_interpreter_script.py` passed.
+- `.venv\Scripts\python.exe scripts\smoke_bernie_interpreter.py --provider fake --reference-date 2026-06-28 --expect-result interpreted` passed with a redacted `interpreted` payload.
+- `.venv\Scripts\python.exe scripts\smoke_bernie_interpreter.py --provider gemini_vertex` refused live use without `--allow-live`, as intended.
+- `.venv\Scripts\python.exe -m pytest tests\test_smoke_bernie_interpreter_script.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed: `14 passed`.
+- Live non-PHI Gemini interpreter smoke passed with `--provider gemini_vertex --allow-live`: ordinary dummy instruction returned `interpreted`.
+- Live non-PHI Gemini safety smoke passed with `--expect-result blocked`: dummy instruction ending in `book it` returned `staff_confirmation_required` and `autonomous_booking_language`.
+
+## Known Follow-Up
+
+- Google auth emitted the ADC warning that local Cloud SDK end-user credentials have no quota project. Live calls worked, but a later setup pass should set an ADC quota project or move Bernie smoke to the intended service-account posture.
+- The diary UI remains deliberately diagnostic; conversational clarification polish is deferred until the basics are firmer.
+- GitHub still reports the known moderate Dependabot alert on push; Sprint 71 triaged it as not product-runtime-actionable.
+
+## Recommended Next Direction
+
+Next recommended step: keep the strict diagnostic Bernie UI and harden the selected-context-to-live-interpreter path, or first tidy Google ADC quota-project setup if live-provider warnings become noisy.
+
+## Previous Closeout - Sprint 75
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 75: Bernie Interpreted Context Guard |
 | Integrated through | Interpreted-practitioner mismatch block and empty-candidate explanatory message |
 | Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |

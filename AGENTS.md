@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 75 - Bernie interpreted-context mismatch guard and empty-candidate message integrated and verified |
-| **Next recommended work** | Re-run the live fake-interpreter staff-pilot smoke after Pages serves the new diary assets, then decide whether to enable a live Gemini interpreter smoke |
+| **Current active track** | Sprint 76 - Bernie interpreter smoke tooling and live Gemini provider proof integrated and verified |
+| **Next recommended work** | Keep the diagnostic Bernie UI for now; next harden the selected-context-to-live-interpreter path or set the Google ADC quota project for cleaner live provider auth |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 75 Bernie mismatch/empty-candidate closeout commit |
+| **Latest integration commit** | Sprint 76 Bernie interpreter smoke tooling closeout commit |
 
 ### Tag map (all tags pushed to remote)
 
