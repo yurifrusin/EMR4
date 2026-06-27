@@ -23,13 +23,13 @@ true parallel Codex + Claude Code + Antigravity work later.
 |---|---|
 | **Mode** | Parallel-capable with Codex orchestration; single-track baton remains the integration path |
 | **Baton ref** | `handoff/current` |
-| **Integration worktree** | `C:\Users\YuriFrusin\Documents\EMR4` on `master` |
-| **Agent worktree root** | `C:\Users\YuriFrusin\Documents\EMR4-worktrees\` |
+| **Integration worktree** | `C:\Users\sarashera\emr4` on `master` |
+| **Agent worktree root** | `C:\Users\sarashera\EMR4-worktrees\` |
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 65 - Bernie interpret review UI adapter closed; post-closeout live provider smoke succeeded with redaction hardening |
-| **Next recommended work** | Choose between proper staff instruction input surface or continuing Bernie pilot refinement; avoid query-string free-text instruction intake |
+| **Current active track** | Sprint 66 - Bernie staff instruction input surface dispatched to Antigravity; waiting for plan |
+| **Next recommended work** | Run Antigravity handin/plan for Sprint 66; keep free-text instructions out of URL query strings and browser history |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -191,11 +191,11 @@ or CLI restarts, and `--print` may return no stdout even when the transcript
 records progress; poll/git remains the authoritative proof of submission.
 
 ```powershell
-C:\Users\YuriFrusin\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\YuriFrusin\Documents\EMR4-worktrees\antigravity --print "<prompt>"
+C:\Users\sarashera\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\sarashera\EMR4-worktrees\antigravity --print "<prompt>"
 ```
 
 Antigravity CLI settings live in
-`C:\Users\YuriFrusin\.gemini\antigravity-cli\settings.json`; keep this file
+`C:\Users\sarashera\.gemini\antigravity-cli\settings.json`; keep this file
 valid JSON encoded as UTF-8 without BOM, otherwise the CLI silently falls back
 to defaults. The EMR4 routine posture is `toolPermission=always-proceed`,
 `artifactReviewPolicy=always-proceed`, `allowNonWorkspaceAccess=false`, and
@@ -205,8 +205,8 @@ Claude uses the standalone headless driver from a clean Ariadne shell and the
 Claude worker worktree:
 
 ```powershell
-python scripts\drive_agent_headless.py --cwd C:\Users\YuriFrusin\Documents\EMR4-worktrees\claude --phase plan --mint-session --prompt "handin, write the implementation plan, submit the plan packet, then stop"
-python scripts\drive_agent_headless.py --cwd C:\Users\YuriFrusin\Documents\EMR4-worktrees\claude --phase implement --prompt "handin, then complete sprint task"
+python scripts\drive_agent_headless.py --cwd C:\Users\sarashera\EMR4-worktrees\claude --phase plan --mint-session --prompt "handin, write the implementation plan, submit the plan packet, then stop"
+python scripts\drive_agent_headless.py --cwd C:\Users\sarashera\EMR4-worktrees\claude --phase implement --prompt "handin, then complete sprint task"
 ```
 
 Use `--phase plan` for plan-gated handin and `--phase implement` only after the
@@ -689,7 +689,7 @@ Original analysis retained below for reference.
 
 ### Backend
 ```
-cd c:\Users\YuriFrusin\Documents\EMR4
+cd C:\Users\sarashera\emr4
 .venv\Scripts\activate
 uvicorn app.main:app --reload --port 8001
 ```

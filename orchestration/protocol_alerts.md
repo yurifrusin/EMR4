@@ -69,20 +69,20 @@ Read these before acting on remembered process details.
   lowest-cost text channel available for external workers before considering
   GUI automation. Antigravity should normally be prompted from a fresh
   project-scoped CLI session:
-  `C:\Users\YuriFrusin\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\YuriFrusin\Documents\EMR4-worktrees\antigravity --print "<prompt>"`.
+  `C:\Users\sarashera\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\sarashera\EMR4-worktrees\antigravity --print "<prompt>"`.
   Do not rely on stale `--conversation` IDs after app/CLI restarts unless the
   conversation ID has just been verified. If stdout is blank, inspect the
   Antigravity transcript/log and then trust poll/git, not chat text, as proof of
   submission. Keep
-  `C:\Users\YuriFrusin\.gemini\antigravity-cli\settings.json` as UTF-8 without
+  `C:\Users\sarashera\.gemini\antigravity-cli\settings.json` as UTF-8 without
   BOM; a BOM makes the CLI ignore settings and fall back to defaults.
   For non-trivial Antigravity plan or implementation prompts, pass an explicit
   `--print-timeout 15m`; Codex's shell timeout does not extend Antigravity's
   internal print-mode timeout. Before calling a silent Antigravity return a
   crash, check `tasklist /FI "IMAGENAME eq agy.exe"`,
-  `git -C C:\Users\YuriFrusin\Documents\EMR4-worktrees\antigravity status
+  `git -C C:\Users\sarashera\EMR4-worktrees\antigravity status
   --short`, and the latest
-  `C:\Users\YuriFrusin\.gemini\antigravity-cli\log\cli-*.log`. A clean worktree,
+  `C:\Users\sarashera\.gemini\antigravity-cli\log\cli-*.log`. A clean worktree,
   no `agy.exe`, and a log line such as `Print mode: timed out` means the CLI
   timed out while streaming rather than crashing.
   Claude should be prompted with `scripts\drive_agent_headless.py` from a clean
