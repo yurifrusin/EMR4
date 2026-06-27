@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 67: Bernie Selected Appointment Context |
 | Integrated through | Pilot-gated use-selected-appointment context for Bernie review |
-| Status | Integrated locally; verification passed; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
 | Last updated | 2026-06-27 |
 
 ## What Changed
