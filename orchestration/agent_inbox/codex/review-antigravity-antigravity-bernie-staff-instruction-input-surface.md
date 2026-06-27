@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-staff-instruction-input-surface` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -37,5 +37,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated with bounded Codex cleanup for asset version bump, restored API-base behavior, removed debug logging/test console spam, and fixed one async route-intercept race in the review harness.
+- Follow-up required: None for this sprint; future UX can refine real staff instruction wording and context selection after pilot use.

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-staff-instruction-input-surface` |
-| Status | blocked |
+| Status | superseded |
 
 ## Submit Failure
 
@@ -39,3 +39,9 @@ fatal: unable to access 'https://github.com/yurifrusin/emr4/': Recv failure: Con
 2. Inspect the worker branch and this failure packet.
 3. Reconcile with the remote branch from the Codex/orchestrator side.
 4. Do not ask the worker to manually pull/rebase unless Codex explicitly chooses that path.
+
+## Codex Resolution
+
+Codex retried the durable worker branch push successfully from the orchestrator
+side, reviewed the submitted implementation, and integrated the sprint. The
+network-reset alert is retained as historical evidence only.

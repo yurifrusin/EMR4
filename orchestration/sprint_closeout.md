@@ -8,6 +8,62 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 66: Bernie Staff Instruction Input Surface |
+| Integrated through | Pilot-gated staff-entered booking instruction input for Bernie review |
+| Status | Integrated locally, verified, and awaiting push/mirror/audit closeout |
+| Last updated | 2026-06-27 |
+
+## What Changed
+
+- Added a compact staff instruction textarea and submit button inside the existing Bernie Booking Review panel.
+- The instruction UI appears only inside the already gated Bernie pilot/live review path.
+- Bernie interpretation is no longer automatic on pilot review load; staff must explicitly submit the instruction first.
+- Staff-entered instruction text is sent only in the authenticated POST body to the existing interpret endpoint.
+- No instruction text is read from or written to URL query strings, `localStorage`, or `sessionStorage`.
+- Clarification-required and blocked interpreter results show the existing preview/hold state and do not render confirmation controls.
+- Interpreted results continue into the existing supervised booking review and existing explicit approval checkbox/button path.
+- Existing candidate display and confirmation-ready approval semantics are preserved; no new candidate-selection or clarification-response UX was added.
+- Bumped diary assets to `diary.css?v=108` and `diary.js?v=118`.
+- Ariadne applied bounded cleanup after Antigravity implementation: restored existing API-base selection, removed debug logging/test console spam, added the missed asset bump, and fixed one async route-intercept race in the review harness.
+
+## Recommended User Review
+
+Residual user review/testing after closeout: none required.
+Ariadne verified this as a gated, route-intercepted diary UI change. The tests prove ordinary/default modes do not call Bernie interpretation or confirmation paths, staff instruction submission is explicit, and confirmation still requires the existing approval checkbox.
+
+## Not Required Before Moving On
+
+- No manual live UI test is required; the deterministic Playwright harness covers the input, clarification/blocked holds, existing confirmation path, and default hidden/no-call behaviour.
+- No live API write test is required; confirm-Bernie remains route-intercepted in review checks.
+- No real Gemini/Vertex smoke is required for this UI sprint.
+- No database migration, backend schema change, taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
+
+## Known Follow-Up
+
+- Future Bernie pilot refinement should replace typed dummy context IDs with a real staff/context source.
+- A later UX sprint can refine staff-facing instruction wording after practical pilot use.
+- The known moderate Dependabot alert remains outside this sprint.
+- The existing Python/Starlette and Google GenAI deprecation warnings remain future test-hygiene items.
+
+## Verification
+
+- Ariadne reviewed Antigravity's initial plan, required scope narrowing, then accepted the revised plan before implementation release.
+- Antigravity's first implementation push failed with a transient network reset; Ariadne retried the durable branch push from the orchestrator side and reconciled the submit-alert branch.
+- Ariadne reviewed the implementation diff against `master` and applied bounded integration cleanup.
+- `C:\Users\sarashera\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe --check docs\diary\diary.js` -> passed.
+- `C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 46 passed.
+- `C:\Users\sarashera\emr4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; diary assets bumped to `diary.css?v=108` and `diary.js?v=118`.
+- `C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py -q --tb=short -p no:randomly` -> 11 passed with existing deprecation warnings only.
+- `rg -n "bernie_instruction|instruction=.*window\.location|localStorage.*instruction|sessionStorage.*instruction|setItem\(.*instruction|getItem\(.*instruction|console\.log" docs\diary\diary.js docs\diary\diary.html review\test_diary_smoke.py` -> no matches.
+- `git diff --check` -> passed.
+
+## Recommended Next Direction
+
+Next recommended sprint: continue Bernie pilot refinement by replacing dummy typed practitioner/patient IDs with a real staff/context source, or run an explicit live-provider smoke if the priority is validating Gemini/Vertex behaviour end to end.
+
+## Previous Closeout - Sprint 65
+| Item | Value |
+|---|---|
 | Batch | Sprint 65: Bernie Interpret Review UI Adapter |
 | Integrated through | Gated diary Bernie review preview for interpreted booking instructions |
 | Status | Integrated, verified, pushed, mirrored, audited, and live-smoke hardened |

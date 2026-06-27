@@ -49,12 +49,9 @@ def diary_page():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page()
-        page.on("console", lambda msg: print(f"BROWSER CONSOLE: {msg.text}", file=sys.stderr))
-        page.on("pageerror", lambda err: print(f"BROWSER ERROR: {err}", file=sys.stderr))
         harness.stub_office(page)
-        
+
         # Default mock for interpret-booking-instruction
-        import json
         mock_default_interpret = {
             "safe": True,
             "result": "interpreted",
@@ -1628,6 +1625,7 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
         checkbox.check()
         assert confirm_btn.is_disabled() is False
         confirm_btn.click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["confirmed"] is True
 

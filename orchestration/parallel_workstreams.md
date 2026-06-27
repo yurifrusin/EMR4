@@ -134,9 +134,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Queued; waiting for Antigravity plan |
+| Status | Integrated locally; closeout verification passed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Antigravity plan review |
+| Integration Gate | Antigravity plan accepted after scope narrowing; implementation integrated with Codex cleanup |
 | Product Goal | Replace temporary structured-context instruction construction with a proper staff-entered, pilot-gated instruction surface that avoids query-string free text |
 
 ### Workstream DJ - Bernie Staff Instruction Input Surface
@@ -150,7 +150,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary` UI assets and `review/` harness checks as needed; body-only staff instruction submission; no query-string or localStorage free-text intake; no automatic provider call before explicit staff action; empty/clarification/blocked states; existing pilot/context/approval gates; frontend asset version bump if runtime assets change |
 | Out of Scope | Backend routes/schemas/provider changes, autonomous booking, production default exposure, PHI-heavy logging or persistence, patient/practitioner selector redesign, taskpane, Command Centre, migrations, billing, SMS, resource admin, broad diary redesign, and unrelated refactors |
 | Verification | Plan packet first; after approval `node --check docs/diary/diary.js`, focused route-intercepted review harness checks, full diary review harness if diary runtime assets change, frontend version integrity checks, and `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 55: Bernie Dev Review Fixture Route
 

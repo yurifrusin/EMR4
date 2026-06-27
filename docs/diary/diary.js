@@ -10,11 +10,9 @@
 const NGROK_URL   = "https://property-cinch-backfield.ngrok-free.dev";
 const BACKEND_URL = (window.location.port === "3000")
   ? "http://localhost:8001"
-  : (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")
+  : window.location.hostname.includes("ngrok")
     ? window.location.origin
-    : window.location.hostname.includes("ngrok")
-      ? window.location.origin
-      : NGROK_URL;
+    : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
 const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
@@ -2464,7 +2462,6 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     // Event listener to simulate or execute confirmation
     confirmBtn.addEventListener("click", async () => {
       if (confirmBtn.disabled) return;
-      console.log("Confirm click triggered. isConfirmAdapter =", isConfirmAdapter, "endpoint =", payload.confirm_endpoint, "payload =", payload.confirm_payload);
       confirmBtn.disabled = true;
       checkbox.disabled = true;
       successMsg.classList.add("hidden");
@@ -2480,7 +2477,6 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             method: "POST",
             body: JSON.stringify(body)
           });
-          console.log("apiFetch returned status:", response.status, "ok:", response.ok);
           if (response.ok) {
             successMsg.classList.remove("hidden");
           } else {
@@ -2491,14 +2487,12 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             } catch (e) {
               detail = `Status ${response.status}`;
             }
-            console.log("apiFetch error detail:", detail);
             errorMsg.textContent = `Booking proposal confirmation failed: ${detail}`;
             errorMsg.classList.remove("hidden");
             confirmBtn.disabled = false;
             checkbox.disabled = false;
           }
         } catch (err) {
-          console.log("apiFetch exception caught:", err);
           errorMsg.textContent = `Booking proposal confirmation failed: ${err.message || err}`;
           errorMsg.classList.remove("hidden");
           confirmBtn.disabled = false;

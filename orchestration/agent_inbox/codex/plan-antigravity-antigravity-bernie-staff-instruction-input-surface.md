@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-staff-instruction-input-surface` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 19:10 +1000 |
 | Source HEAD | `bf0a14d` |
 
@@ -78,6 +78,6 @@ Only the Bernie review sidebar panel (`#bernie-review-panel` / `#bernie-review-c
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Revised plan accepted after Codex narrowed scope back to staff instruction input only.
+- Required changes before implementation: Do not add clarification-response submission UX, candidate-selection buttons, backend/schema changes, or query/localStorage instruction intake.
+- Approved to proceed: yes
