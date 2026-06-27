@@ -3193,6 +3193,10 @@ def test_bernie_pilot_selected_appointment_instruction_readiness_and_resets(diar
         textarea.fill("Book next Friday")
         assert status_copy.is_visible() is True
         assert status_copy.text_content() == "Instruction ready for supervised analysis. Submit to prepare a booking proposal for staff review. Nothing is booked until you approve it."
+        diary_page.evaluate("loadBernieLiveReview()")
+        diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
+        assert textarea.input_value() == "Book next Friday"
+        assert status_copy.is_visible() is True
 
         # 5. Click "Change" and verify reset behavior (clears context, inputs, instructions)
         diary_page.click("[data-testid='bernie-pilot-context-change']")

@@ -138,9 +138,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Antigravity plan received; approved with Codex guardrails |
+| Status | Integrated by Ariadne with bounded post-worker repair; verification passed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Antigravity implementation submit, Codex inspection, verification, and closeout |
+| Integration Gate | Complete |
 | Product Goal | Make selected-context Bernie instruction readiness clearer and reset pending instruction state cleanly before live staff-pilot smoke |
 
 ### Workstream DR - Bernie Instruction Readiness Reset Polish
@@ -154,7 +154,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary/diary.{html,css,js}` and `review/test_diary_smoke.py` as needed; selected linked appointment context only; clear staff-supervised ready-to-submit copy after chip selection or typed instruction; reset instruction/interpreter state when Change is clicked, the current appointment is re-imported, or imported context becomes stale; no automatic provider call before explicit staff submit; preserve stale-selection guard, allowlist gate, no manual IDs in ordinary mode, no URL/browser-storage instruction persistence, explicit approval checkbox, and asset version bump if runtime assets change |
 | Out of Scope | Backend routes/schemas/models, migrations, provider/Gemini changes, autonomous booking, default production exposure changes, query-string free-text intake, browser storage for instructions/context, patient/practitioner search redesign, taskpane, Command Centre, billing, SMS, resource admin, broad diary redesign, dependency/security work, and unrelated CSS cleanup |
 | Verification | Plan packet first; after approval bundled Node syntax check, focused route-intercepted Bernie UI checks for chip/typed readiness copy, Change reset, re-import reset, stale-context reset/no chips/no call, confirmation gating, full diary review harness if diary runtime assets change, frontend version integrity, and `git diff --check` |
-| Status | Plan submitted; approved with Codex guardrails |
+| Status | Integrated |
 
 ## Sprint 73: Bernie Selected Appointment Instruction Affordance
 

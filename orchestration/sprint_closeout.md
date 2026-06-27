@@ -8,50 +8,48 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 73: Bernie Selected Appointment Instruction Affordance |
-| Integrated through | Staff-safe suggested instruction chips for imported selected-appointment Bernie context |
-| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
+| Batch | Sprint 74: Bernie Instruction Readiness Reset Polish |
+| Integrated through | Staff-safe readiness copy and clean reset behaviour for selected-appointment Bernie instructions |
+| Status | Integrated and verified locally; push, Pages deploy, mirror realign, and audit pending |
 | Last updated | 2026-06-28 |
 
 ## What Changed
 
-- When staff import a valid selected diary appointment into the supervised Bernie pilot, the instruction box now shows four small suggestion chips:
-  - "Find earlier options for this patient"
-  - "Find later options for this patient"
-  - "Find next available with this practitioner"
-  - "Check another day for this practitioner"
-- Clicking a chip only fills the instruction textarea. It does not call the interpret endpoint, supervised-review endpoint, confirmation endpoint, navigation, URL params, localStorage, or sessionStorage.
-- Chips render only while the imported selected-appointment context still matches the active diary selection.
-- If staff change the active appointment after import, the existing `stale_selected_appointment_context` block still disables submission and now also removes the suggestion chips until the current selection is re-imported.
+- After staff type or choose a selected-appointment Bernie instruction, the panel now shows explicit readiness copy: "Instruction ready for supervised analysis. Submit to prepare a booking proposal for staff review. Nothing is booked until you approve it."
+- Clicking `Change`, re-importing the current selected appointment, or making the imported appointment context stale clears pending instruction text and any previous interpretation result.
+- Manually typed instruction text is preserved across harmless valid rerenders while the selected appointment context remains current.
+- Changing instruction text invalidates any previous interpretation result so old proposals are not reused after staff edits.
+- The stale-selection block remains fail-closed: chips/readiness copy are absent and interpretation/supervised/confirm calls remain blocked until staff re-import the current selected appointment.
 - Ordinary staff mode still hides manual practitioner/patient ID fields and still requires explicit selected-appointment import, explicit instruction submit, and explicit approval-checkbox confirmation.
-- Diary assets were cache-busted to `diary.css?v=115` and `diary.js?v=127`.
-- Ariadne applied a bounded post-worker repair: removed a production test override hook from `diary.js`, moved the new affordance coverage onto an ordinary staff route-intercepted path, and reran verification.
+- Diary assets were cache-busted to `diary.css?v=116` and `diary.js?v=129`.
+- Ariadne applied a bounded post-worker repair to preserve typed instruction state across valid rerenders and strengthened the deterministic review harness for that case.
 
 ## Verification
 
 - `C:\Users\sarashera\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe --check docs\diary\diary.js` passed.
-- `python scripts\check_frontend_versions.py` passed locally with `diary.css?v=115` and `diary.js?v=127`.
-- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_affordances review\test_diary_smoke.py::test_bernie_pilot_imported_context_stales_when_selection_changes -q --tb=short` passed: `2 passed`.
-- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `51 passed`.
-- GitHub Pages workflow run `28303109145` completed successfully, and live `https://yurifrusin.github.io/EMR4/diary/diary.html` serves `diary.js?v=127` and `diary.css?v=115`.
-- `python scripts\agent_worktrees.py audit --fetch` showed `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned and clean at `7fbacf6`.
-- `python scripts\agent_worktrees.py retire-stale` found no stale disposable worktrees.
+- `python scripts\check_frontend_versions.py` passed locally with `diary.css?v=116` and `diary.js?v=129`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_readiness_and_resets review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_affordances review\test_diary_smoke.py::test_bernie_pilot_imported_context_stales_when_selection_changes -q --tb=short` passed: `3 passed`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `52 passed`.
 - `git diff --check` passed.
 
 ## Not Required Before Moving On
 
-- No manual live UI test is required before push; the deterministic review harness verifies selected-appointment import, suggestion chip rendering, chip click as fill-only, no pre-submit API calls, no browser/URL instruction persistence, explicit submit, stale-selection chip removal, and unchanged confirmation gating.
+- No manual live UI test is required before push; the deterministic review harness verifies selected-appointment import, suggestion chip rendering, readiness copy for chip and typed instructions, typed-text preservation across valid rerender, Change reset, re-import reset, stale-selection reset/no chips/no call, no browser/URL instruction persistence, explicit submit, and unchanged confirmation gating.
 - No backend, provider, schema, migration, taskpane, Command Centre, billing, SMS, resource admin, or live Gemini action is required.
 
 ## Known Follow-Up
 
 - Antigravity CLI still returns blank stdout in Codex non-TTY shells, but this sprint proved the tangible-artifact workflow works: poll/git showed the submitted branch and review packet.
 - GitHub still reports Dependabot alert 5 on push; Sprint 71 triaged it as not product-runtime-actionable.
-- GitHub Pages emitted a non-blocking warning that several Pages actions target Node.js 20 while GitHub forced Node.js 24; deployment still succeeded.
+- GitHub Pages deployment and final audit are still pending for this closeout until the integration commit is pushed.
 
 ## Recommended Next Direction
 
-Next recommended sprint: continue Bernie pilot refinement with a narrow live staff-pilot smoke when Yuri wants to exercise the deployed surface, or continue another small supervised booking ergonomics slice if we want more deterministic hardening first.
+Next recommended step: run a narrow live staff-pilot smoke when Yuri is ready to exercise the deployed surface, or continue another small supervised booking ergonomics slice if we want more deterministic hardening first.
+
+## Previous Closeout - Sprint 73
+
+Sprint 73 integrated staff-safe suggested instruction chips for imported selected-appointment Bernie context. The deterministic harness verified selected-appointment import, chip rendering, chip click as fill-only, no pre-submit API calls, no URL/browser-storage instruction persistence, explicit submit, stale-selection chip removal, and unchanged confirmation gating. Live GitHub Pages served `diary.js?v=127` and `diary.css?v=115` after push.
 
 ## Previous Closeout - Sprint 72
 

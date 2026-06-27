@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-instruction-readiness-reset-polish` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-06-28 08:10 +1000 |
 | Source HEAD | `9a80bfb` |
 

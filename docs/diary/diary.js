@@ -2883,7 +2883,13 @@ function renderBernieInstructionInput(contentEl) {
     }
   };
 
-  textarea.addEventListener("input", updateInstructionStatusCopy);
+  textarea.addEventListener("input", () => {
+    bernieInstructionText = textarea.value;
+    if (bernieInterpretResult) {
+      bernieInterpretResult = null;
+    }
+    updateInstructionStatusCopy();
+  });
 
   // Suggestion chips when linked/selected context imported
   const explicitContext = getBerniePilotContextValues();
@@ -2911,11 +2917,12 @@ function renderBernieInstructionInput(contentEl) {
       chip.className = "bernie-suggestion-chip";
       chip.setAttribute("data-testid", `bernie-suggestion-chip-${index}`);
       chip.textContent = text;
-      chip.addEventListener("click", () => {
-        textarea.value = text;
-        bernieInstructionText = text;
-        updateInstructionStatusCopy();
-      });
+        chip.addEventListener("click", () => {
+          textarea.value = text;
+          bernieInstructionText = text;
+          bernieInterpretResult = null;
+          updateInstructionStatusCopy();
+        });
       suggestionsContainer.appendChild(chip);
     });
 

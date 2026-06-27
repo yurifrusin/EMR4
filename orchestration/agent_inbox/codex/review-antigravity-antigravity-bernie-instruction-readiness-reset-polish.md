@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-instruction-readiness-reset-polish` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -39,5 +39,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated with a bounded Ariadne repair to preserve manually typed instruction text across valid rerenders and clear stale interpretation state when instruction text changes.
+- Follow-up required: Live staff-pilot smoke remains the next product check when Yuri wants to exercise the deployed surface.
