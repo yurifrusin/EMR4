@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-pilot-context-selector` |
-| Status | queued |
+| Status | submitted |
 | Created | 313e363 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-pilot-context-selector --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.js`, `docs/diary/diary.css`, `docs/diary/diary.html`, `review/test_diary_smoke.py`, and this coordination packet's completion notes. The prior plan/review packets remain on the branch from the accepted plan gate.
+- Verification run: `node --check docs\diary\diary.js`; `python scripts\check_frontend_versions.py`; initial `pytest review/test_diary_smoke.py -q -k "bernie_pilot_ordinary_mode"` failed because `pytest` was not on PATH; `& C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -q -k "bernie_pilot_ordinary_mode"` passed `2 passed`; `& C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -q -k "bernie"` passed `23 passed`; `& C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q` passed `42 passed`; `git diff --check` passed.
+- Remaining risks: Context IDs are currently explicit typed non-PHI identifiers because no backend patient search/autocomplete is in scope. The ordinary-mode guard blocks empty, `smoke-*`, `prac-1`, and `smoke-pat-1` values, while preserving smoke/dev/query harness defaults; future real patient/practitioner pickers should feed these fields rather than loosening the readiness gate.
