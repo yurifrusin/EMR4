@@ -75,6 +75,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -100,6 +101,50 @@ PHASE_DEFAULTS = {
 }
 
 ALLOWED_BRANCH_PREFIXES = ("claude/",)
+
+
+def find_claude_bin() -> str | None:
+    """Find Claude Code even when Codex Desktop launches with a curated PATH."""
+    found = shutil.which("claude")
+    if found:
+        return found
+
+    path_entries: list[str] = []
+    if os.name == "nt":
+        try:
+            ps = (
+                "[Environment]::GetEnvironmentVariable('Path','User') + ';' + "
+                "[Environment]::GetEnvironmentVariable('Path','Machine')"
+            )
+            completed = subprocess.run(
+                ["powershell", "-NoProfile", "-Command", ps],
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+            if completed.returncode == 0:
+                path_entries.extend(completed.stdout.strip().split(";"))
+        except Exception:
+            pass
+
+        local_appdata = os.environ.get("LOCALAPPDATA")
+        if local_appdata:
+            packages = Path(local_appdata) / "Packages"
+            if packages.exists():
+                path_entries.extend(
+                    str(path.parent)
+                    for path in packages.glob(
+                        "Claude_*/*/Roaming/Claude/claude-code/*/claude.exe"
+                    )
+                )
+
+    for entry in path_entries:
+        if not entry:
+            continue
+        candidate = Path(entry.strip().strip('"')) / ("claude.exe" if os.name == "nt" else "claude")
+        if candidate.is_file():
+            return str(candidate)
+    return None
 
 
 def run_git(cwd: Path, *git_args: str) -> subprocess.CompletedProcess[str]:
@@ -268,7 +313,7 @@ def main() -> int:
     if worktree_check != 0:
         return worktree_check
 
-    claude_bin = shutil.which("claude")
+    claude_bin = find_claude_bin()
     if not claude_bin and not args.dry_run:
         print(json.dumps({"error": "claude CLI not found on PATH"}), file=sys.stderr)
         return 2
