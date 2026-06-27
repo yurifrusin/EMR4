@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-pilot-review-ergonomics` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 21:14 +1000 |
 | Source HEAD | `1a1601d` |
 
@@ -44,6 +44,6 @@ Text wrapping in 320px panel; test selector / assertion breakage.
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: accepted; implementation released to Antigravity.
+- Required changes before implementation: keep copy supervised/staff-confirmed, avoid implying autonomous booking, and preserve selectors unless tests are updated.
+- Approved to proceed: yes

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 68 - Bernie pilot review ergonomics dispatched to Antigravity for plan gate |
-| **Next recommended work** | Review Antigravity Sprint 68 plan; keep scope to copy/ergonomics and preserve Bernie pilot safety gates |
+| **Current active track** | Sprint 68 - Bernie pilot review ergonomics integrated; closeout verification passed pending push/mirror/audit |
+| **Next recommended work** | Continue Bernie pilot progression toward a staff-visible non-default entry path, or pause for product wording review if desired |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

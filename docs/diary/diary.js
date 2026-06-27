@@ -2427,7 +2427,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     checkbox.setAttribute("data-testid", "bernie-review-approval-checkbox");
     checkbox.id = "bernie-approval-checkbox";
 
-    const labelText = document.createTextNode(" I have clinically verified the proposed slot and explicitly authorize confirming this booking.");
+    const labelText = document.createTextNode(" I have verified the proposed slot and explicitly authorize confirming this booking.");
     checkboxLabel.appendChild(checkbox);
     checkboxLabel.appendChild(labelText);
     confirmBox.appendChild(checkboxLabel);
@@ -2875,7 +2875,7 @@ async function loadBernieLiveReview() {
       const banner = document.createElement("div");
       banner.className = "bernie-pilot-banner";
       banner.setAttribute("data-testid", "bernie-pilot-banner");
-      banner.innerHTML = "⚠️ <strong>Supervised Pilot Mode:</strong> Verify all details. Booking requires explicit clinical staff authorization.";
+      banner.innerHTML = "⚠️ <strong>Supervised Pilot Mode:</strong> Verify all details. Booking requires explicit staff authorization.";
       // Insert right after the instruction container
       const container = document.getElementById("bernie-instruction-container");
       if (container && container.nextSibling) {

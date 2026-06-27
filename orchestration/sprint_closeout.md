@@ -8,54 +8,64 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 67: Bernie Selected Appointment Context |
-| Integrated through | Pilot-gated use-selected-appointment context for Bernie review |
-| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
+| Batch | Sprint 68: Bernie Pilot Review Ergonomics |
+| Integrated through | Staff-supervised wording and compact ergonomics for the Bernie pilot review panel |
+| Status | Integrated locally; verification passed; push/mirror/audit pending |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added a compact "Use selected appointment" affordance to the existing Bernie pilot context form.
-- When a linked diary appointment is selected, staff can explicitly use its practitioner and patient context before entering the Bernie booking instruction.
-- No selected appointment, missing practitioner context, and provisional/unlinked patients fail closed with clear status text.
-- Manual practitioner/patient ID fields remain as a dev fallback.
-- Context remains in memory only; the sprint adds no URL, `localStorage`, `sessionStorage`, cookie, or log persistence for patient/practitioner context.
-- Staff instruction explicit-submit flow and the existing confirmation checkbox/button gate are preserved.
-- Bumped diary assets to `diary.css?v=110` and `diary.js?v=120`.
-- Ariadne applied bounded cleanup after Antigravity implementation: narrowed the smoke-only default-ID exception and removed a non-ASCII CSS banner comment.
+- Renamed the Bernie pilot launch/review surface toward "Supervised Booking Review" language.
+- Tightened panel headings, context labels, no-selection/provisional/missing-context messages, instruction placeholder, approval checkbox text, and pilot warning banner.
+- Kept all Bernie safety mechanics unchanged: explicit selected-context import, explicit instruction submit, and explicit approval checkbox/button before confirmation.
+- Kept the change in the existing pilot/dev-gated diary panel only; no backend or exposure changes.
+- Bumped diary assets to `diary.css?v=112` and `diary.js?v=122`.
+- Ariadne applied bounded cleanup after Antigravity implementation: replaced two "clinical" staff phrases with neutral staff authorization wording and restored zero letter spacing in the touched Bernie panel styles.
 
 ## Recommended User Review
 
 Residual user review/testing after closeout: none required.
-Ariadne verified this as a gated, route-intercepted diary UI change. The tests prove selected linked appointments populate Bernie context, provisional appointments remain blocked, staff instruction submission stays explicit, and confirmation still requires the existing approval checkbox.
+Ariadne verified this as a gated, route-intercepted diary UI copy/style change. The tests prove the review states still render, staff instruction submission stays explicit, and confirmation still requires the existing approval checkbox.
 
 ## Not Required Before Moving On
 
-- No manual live UI test is required; the deterministic Playwright harness covers selected appointment context, provisional blocking, the instruction input path, and the existing confirmation path.
+- No manual live UI test is required; the deterministic Playwright harness covers blocked, candidate-selection, confirmation-ready, pilot eligibility, selected appointment context, and instruction paths.
 - No live API write test is required; confirm-Bernie remains route-intercepted in review checks.
 - No real Gemini/Vertex smoke is required for this UI sprint.
 - No database migration, backend schema change, taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
 
 ## Known Follow-Up
 
-- Future Bernie pilot refinement can improve the staff-facing wording and panel ergonomics around selected appointment context and instruction entry.
 - A later product sprint should decide when this pilot path becomes staff-visible without dev/query gates.
+- The known moderate Dependabot alert remains outside this sprint.
+- Existing unrelated diary CSS letter-spacing rules remain future visual hygiene; this sprint only corrected touched Bernie panel rules.
 - The known moderate Dependabot alert remains outside this sprint.
 - The existing Python/Starlette and Google GenAI deprecation warnings remain future test-hygiene items.
 
 ## Verification
 
-- Ariadne reviewed Antigravity's plan packet and accepted it before implementation release.
-- Ariadne reviewed the implementation diff against `master` and applied bounded integration cleanup.
+- Ariadne reviewed Antigravity's plan packet and accepted it with guardrails against autonomous-booking wording and selector churn.
+- Ariadne reviewed the implementation diff against `master` and applied bounded wording/style cleanup.
 - `C:\Users\sarashera\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe --check docs\diary\diary.js` -> passed.
 - `C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 47 passed.
-- `C:\Users\sarashera\emr4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; diary assets bumped to `diary.css?v=110` and `diary.js?v=120`.
-- `rg -n "localStorage|sessionStorage|console\.log|patient_id.*URLSearchParams|practitioner_id.*URLSearchParams|bernie-pilot-selected" docs\diary\diary.js docs\diary\diary.css review\test_diary_smoke.py` -> only existing storage preferences/auth and new selected-appointment selectors; no new context persistence/logging path.
+- `C:\Users\sarashera\emr4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed; diary assets bumped to `diary.css?v=112` and `diary.js?v=122`.
+- Wording scan for autonomous/clinical phrasing -> no new unsafe phrasing after cleanup.
 - `git diff --check` -> passed.
 
 ## Recommended Next Direction
 
-Next recommended sprint: Sprint 68 has been dispatched to refine Bernie pilot staff wording/review ergonomics around the selected appointment plus instruction flow while preserving all current safety gates.
+Next recommended sprint: continue Bernie pilot progression toward a staff-visible non-default entry path, or pause for a product wording review if Yuri wants to see the current copy before broader exposure.
+
+## Previous Closeout - Sprint 67
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 67: Bernie Selected Appointment Context |
+| Integrated through | Pilot-gated use-selected-appointment context for Bernie review |
+| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
+| Last updated | 2026-06-27 |
+
+Sprint 67 added the explicit "use selected appointment" context path for linked diary appointments while preserving manual ID fallback, in-memory-only context, staff instruction submit, and confirmation gating.
 
 ## Previous Closeout - Sprint 66
 

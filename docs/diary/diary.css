@@ -1423,7 +1423,7 @@ html, body {
   text-transform: uppercase;
   color: var(--grey-4);
   margin-bottom: 8px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2364,7 +2364,7 @@ html, body {
   font-weight: 600;
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   width: fit-content;
 }
 
@@ -2508,7 +2508,7 @@ html, body {
   font-weight: 700;
   color: var(--blue-dark);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
 }
 
 .bernie-block-item {
