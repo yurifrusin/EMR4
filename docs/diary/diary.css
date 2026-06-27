@@ -2798,3 +2798,40 @@ html, body {
 .btn-bernie-context-change:active {
   transform: scale(0.98);
 }
+
+/* ─── SUGGESTED INSTRUCTIONS CHIPS (Sprint 72) ─── */
+.bernie-suggested-instructions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.bernie-suggestion-chip {
+  background: var(--grey-1);
+  border: 1px solid var(--grey-2);
+  color: #5f6368;
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.bernie-suggestion-chip:hover:not(:disabled) {
+  background: #f3e5f5; /* Subtle purple light theme */
+  border-color: #d1c4e9;
+  color: #6a1b9a;
+}
+
+.bernie-suggestion-chip:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.bernie-suggestion-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
