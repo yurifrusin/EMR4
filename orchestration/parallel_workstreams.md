@@ -134,9 +134,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Dispatched to Antigravity for plan packet |
+| Status | Dispatched to Antigravity for plan packet; Claude safety review queued; Codex subagent reviewing acceptance criteria |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Antigravity plan review |
+| Integration Gate | Pending Antigravity plan review and Claude/Codex safety-review inputs |
 | Product Goal | Make the staff-visible Bernie pilot instruction surface easier and safer to use from imported selected-appointment context |
 
 ### Workstream DO - Bernie Selected Appointment Instruction Affordance
@@ -151,6 +151,32 @@ After every fully integrated batch, Codex updates
 | Out of Scope | Backend routes/schemas/models, migrations, provider/Gemini changes, autonomous booking, default production exposure beyond existing allowlisted launcher, query-string free-text intake, browser storage for instructions/context, patient/practitioner search redesign, taskpane, Command Centre, billing, SMS, resource admin, broad diary redesign, dependency/security work, and unrelated CSS cleanup |
 | Verification | Plan packet first; after approval JS syntax, focused route-intercepted Bernie UI checks for suggested instruction affordance/no-auto-call/stale-context preservation/confirm gating, full diary review harness if runtime assets change, frontend version integrity, and `git diff --check` |
 | Status | Queued |
+
+### Workstream DP - Bernie Selected Instruction Safety Review
+
+| Item | Value |
+|---|---|
+| Owner | Claude |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-bernie-selected-instruction-safety-review.md` |
+| Goal | Provide independent read-only safety/contract review for selected-appointment instruction affordances |
+| In Scope | Read-only review of `docs/diary/diary.js`, `review/test_diary_smoke.py`, and relevant orchestration context; submit concrete acceptance criteria, edge cases, and safety concerns to Codex |
+| Out of Scope | Production code edits, backend/provider/schema/migration changes, frontend implementation, dependency work, taskpane, Command Centre, billing, SMS, resource admin, and broad diary redesign |
+| Verification | `git status --short --branch` before submit; `git diff --check` only if the worker unexpectedly edits a file |
+| Status | Queued |
+
+### Workstream DQ - Codex Acceptance Criteria Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex subagent Mencius |
+| Branch | N/A read-only subagent |
+| Task Packet | Direct subagent prompt |
+| Goal | Independently identify existing functions/tests and acceptance risks for Sprint 73 |
+| In Scope | Read-only inspection of Bernie pilot code and diary smoke harness; return concise acceptance and edge-case review to Ariadne |
+| Out of Scope | File edits, implementation, integration decisions |
+| Verification | Ariadne reviews the returned subagent notes before approving implementation |
+| Status | In progress |
 
 ## Sprint 70: Bernie Staff-Visible Pilot Entry Path
 
