@@ -501,6 +501,36 @@ class BerniePilotEligibilityOut(BaseModel):
     user_allowed: bool
 
 
+class BernieBookingInstructionInterpretIn(BaseModel):
+    """Raw staff text intake for read-only Bernie booking interpretation."""
+    instruction: str = Field(min_length=1, max_length=1000)
+    reference_date: Optional[date] = None
+
+
+class BernieBookingInterpreterMetadata(BaseModel):
+    provider: Literal["disabled", "fake"]
+    mode: Literal["disabled", "mocked"]
+    live_provider: bool = False
+
+
+class BernieBookingInstructionInterpretOut(BaseModel):
+    """Structured, non-mutating intent envelope for a booking instruction."""
+    intent: Literal["interpret_booking_instruction"] = "interpret_booking_instruction"
+    safe: bool
+    result: Literal["blocked", "clarification_required", "interpreted"]
+    autonomy_tier: Literal["execute_with_report", "blocked"]
+    summary: str
+    confidence: float = Field(ge=0, le=1)
+    command_candidate: Optional[SlotSearchCommandIn] = None
+    missing_fields: list[str] = Field(default_factory=list)
+    safety_flags: list[str] = Field(default_factory=list)
+    clarifying_question: Optional[str] = None
+    normalization: Optional[SlotSearchCommandResult] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    provider_metadata: BernieBookingInterpreterMetadata
+
+
 class BernieSupervisedBookingIn(BaseModel):
     """Typed deterministic intake for supervised Bernie booking proposals."""
     command: SlotSearchCommandIn

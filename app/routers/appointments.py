@@ -32,7 +32,9 @@ from app.schemas.appointments import (
     BernieStaffReviewPayload, BernieStaffReviewSlotSummary,
     BernieSupervisedBookingIn, BernieSupervisedBookingOut,
     BernieCreateProposalConfirmationIn, BerniePilotEligibilityOut,
+    BernieBookingInstructionInterpretIn, BernieBookingInstructionInterpretOut,
 )
+from app.services.bernie_booking_interpreter import get_booking_instruction_interpreter
 from app.services.bernie_pilot_gate import evaluate_bernie_pilot_eligibility
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
@@ -1093,6 +1095,27 @@ def get_bernie_pilot_eligibility(
         user_allowlist=settings.bernie_staff_pilot_user_ids,
         current_user=current_user,
     )
+
+
+@router.post(
+    "/proposals/bernie/interpret-booking-instruction",
+    response_model=BernieBookingInstructionInterpretOut,
+)
+def interpret_bernie_booking_instruction(
+    body: BernieBookingInstructionInterpretIn,
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Interpret staff booking text into structured intent without side effects.
+
+    The interpreter provider is disabled by default. This endpoint never creates
+    proposals, searches slots, confirms bookings, writes audit rows, or invokes a
+    live model provider in the default/test posture.
+    """
+    _ = current_user
+    provider = get_booking_instruction_interpreter(
+        settings.bernie_booking_interpreter_provider,
+    )
+    return provider.interpret(body)
 
 
 @router.get("/{appointment_id}", response_model=AppointmentOut)
