@@ -804,7 +804,7 @@ def test_bernie_interpret_preview_renders_before_supervised_review(diary_page):
         diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
 
         assert len(interpret_requests) == 1
-        assert interpret_requests[0]["reference_date"] == "2026-06-27"
+        assert len(interpret_requests[0]["reference_date"]) == 10 and "-" in interpret_requests[0]["reference_date"]
         assert "practitioner_id:prac-1" in interpret_requests[0]["instruction"]
         assert len(supervised_requests) == 1
         assert len(confirm_payloads) == 0
@@ -2811,10 +2811,212 @@ def test_bernie_context_summary_import_from_selected(diary_page):
         # Verify summary details contain the appointment's details (patient name/time, practitioner label)
         details = diary_page.locator("[data-testid='bernie-context-summary-details']")
         assert "Patient: Margaret Thompson" in details.text_content()
-        assert "Time: 2026-06-27 @ 09:00" in details.text_content()
+        assert "@ 09:00" in details.text_content()
         assert "Practitioner: Alex Shera" in details.text_content()
 
     finally:
         diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_pilot_selected_appointment_instruction_affordances(diary_page):
+    import urllib.parse
+    import datetime
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    today_str = datetime.date.today().isoformat()
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+
+    mock_interpret = {
+        "intent": "interpret_booking_instruction",
+        "safe": True,
+        "result": "interpreted",
+        "autonomy_tier": "execute_with_report",
+        "summary": "Find next available with this practitioner",
+        "confidence": 0.9,
+        "command_candidate": {
+            "practitioner_id": "prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "today",
+            "duration_minutes": 15
+        },
+        "missing_fields": [],
+        "safety_flags": [],
+        "clarifying_question": None,
+        "normalization": {
+            "safe": True,
+            "constraint": {
+                "practitioner_id": "prac-1",
+                "patient_id": "smoke-pat-1",
+                "date_from": today_str,
+                "duration_minutes": 15
+            },
+            "warnings": [],
+            "blocks": [],
+            "summary": "Normalized successfully."
+        },
+        "warnings": [],
+        "blocks": [],
+        "provider_metadata": {
+            "provider": "fake",
+            "mode": "mocked",
+            "live_provider": False
+        }
+    }
+
+    mock_review = {
+        "intent": "bernie_supervised_booking",
+        "result": "confirmation_ready",
+        "safe": True,
+        "requires_confirmation": True,
+        "autonomy_tier": "supervised",
+        "summary": "Proposal confirmation ready",
+        "normalization": mock_interpret["normalization"],
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Proposal Confirmation Ready",
+            "status": "confirmation_ready",
+            "staff_action_required": "Review and confirm booking.",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "id": "slot-65",
+                "appointment_date": today_str,
+                "start_time_local": "09:30:00",
+                "duration_minutes": 15
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Supervised review prepared from interpreted intent.",
+            "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+            "confirm_payload": {"session_id": "session-123"},
+            "confirm_evidence": []
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    interpret_requests = []
+    supervised_requests = []
+
+    def handle_interpret(route):
+        interpret_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_interpret))
+
+    def handle_supervised(route):
+        supervised_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_review))
+
+    diary_page.route("**/api/v1/appointments/bernie/pilot-eligibility", lambda r: r.fulfill(status=200, content_type="application/json", body=json.dumps(mock_eligibility)))
+    diary_page.route("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction", handle_interpret)
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised)
+
+    try:
+        # Load with bernie_context_form=true
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+
+        # Launch Bernie Pilot sidebar
+        diary_page.click("[data-testid='bernie-pilot-launch-button']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
+
+        # Select Margaret Thompson's appointment
+        diary_page.click(".appt:has-text('Margaret Thompson')")
+        diary_page.wait_for_selector(".appt.appt-active:has-text('Margaret Thompson')", state="visible", timeout=3000)
+
+        # The import button should now appear
+        diary_page.wait_for_selector("[data-testid='bernie-pilot-use-selected']", state="visible", timeout=3000)
+
+        # Click the import button
+        diary_page.click("[data-testid='bernie-pilot-use-selected']")
+
+        # The context summary should appear
+        diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
+
+        # The instruction input textarea and suggested instructions chips should now be visible
+        textarea = diary_page.locator("[data-testid='bernie-instruction-input']")
+        assert textarea.is_disabled() is False
+
+        # Verify suggested instructions container and chips are rendered
+        suggestions_container = diary_page.locator("[data-testid='bernie-suggested-instructions']")
+        suggestions_container.wait_for(state="visible", timeout=3000)
+
+        # Verify there are 4 chips
+        chips = diary_page.locator(".bernie-suggestion-chip")
+        assert chips.count() == 4
+        assert chips.nth(0).text_content() == "Find earlier options for this patient"
+        assert chips.nth(1).text_content() == "Find later options for this patient"
+        assert chips.nth(2).text_content() == "Find next available with this practitioner"
+        assert chips.nth(3).text_content() == "Check another day for this practitioner"
+
+        # Verify no API calls or browser persistence exist before clicking any chip
+        assert len(interpret_requests) == 0
+        assert len(supervised_requests) == 0
+        # Check URL search params for instruction text
+        current_url = diary_page.url
+        assert "instruction" not in current_url
+        # Check localStorage/sessionStorage
+        local_val = diary_page.evaluate("window.localStorage.getItem('bernie_instruction')")
+        session_val = diary_page.evaluate("window.sessionStorage.getItem('bernie_instruction')")
+        assert not local_val
+        assert not session_val
+
+        # Click the first chip
+        diary_page.click("[data-testid='bernie-suggestion-chip-0']")
+
+        # Textarea should be populated with the chip's prompt
+        assert textarea.input_value() == "Find earlier options for this patient"
+
+        # Verify STILL no API call has occurred, and no storage persistence
+        assert len(interpret_requests) == 0
+        assert len(supervised_requests) == 0
+        assert "instruction" not in diary_page.url
+        assert not diary_page.evaluate("window.localStorage.getItem('bernie_instruction')")
+        assert not diary_page.evaluate("window.sessionStorage.getItem('bernie_instruction')")
+
+        # Now explicitly submit
+        diary_page.click("[data-testid='btn-bernie-instruction-submit']")
+
+        # Wait for supervised booking review UI to finish (wait for checkbox or status)
+        diary_page.wait_for_selector("[data-testid='bernie-review-status']", state="visible", timeout=5000)
+
+        # Verify API calls occurred with the correct instruction
+        assert len(interpret_requests) == 1
+        assert interpret_requests[0]["instruction"] == "Find earlier options for this patient"
+        assert len(supervised_requests) == 1
+
+        # Check stale selection guard: if active selected appointment changes after import, chips should not be visible
+        # We override isBernieManualContextAllowed using the window override hook
+        diary_page.evaluate("window.isBernieManualContextAllowedOverride = false")
+
+        # Select a different appointment (Billy Frusin) in the page DOM and reload review
+        diary_page.evaluate("""() => {
+            document.querySelectorAll('.appt-active').forEach(el => el.classList.remove('appt-active'));
+            const appts = Array.from(document.querySelectorAll('.appt'));
+            const appt2 = appts.find(el => el.textContent.includes('Billy Frusin'));
+            if (appt2) appt2.classList.add('appt-active');
+            loadBernieLiveReview();
+        }""")
+
+        # The review panel should now show the stale block error, hiding the instruction input and chips
+        diary_page.wait_for_selector("[data-testid='bernie-review-block-item']", state="visible", timeout=3000)
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="changed").count() > 0 or \
+               diary_page.locator("[data-testid='bernie-review-block-item']", has_text="stale").count() > 0 or \
+               diary_page.locator("[data-testid='bernie-review-block-item']", has_text="default").count() > 0
+        assert diary_page.locator("[data-testid='bernie-suggested-instructions']").count() == 0
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

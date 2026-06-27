@@ -65,6 +65,9 @@ function isSmokeMode() {
 }
 
 function isBernieManualContextAllowed() {
+  if (window.isBernieManualContextAllowedOverride !== undefined) {
+    return window.isBernieManualContextAllowedOverride;
+  }
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get("smoke") === "true" || urlParams.get("bernie_dev_review") === "true";
 }
@@ -2742,6 +2745,8 @@ function renderBernieInstructionInput(contentEl) {
   container.id = "bernie-instruction-container";
   container.className = "bernie-instruction-container";
 
+  let showSelectedAppt = false;
+
   if (contextReady) {
     const summaryContainer = document.createElement("div");
     summaryContainer.id = "bernie-context-summary";
@@ -2751,7 +2756,6 @@ function renderBernieInstructionInput(contentEl) {
     // Fetch active appointment context if available and matches
     const { appt } = getActiveBernieSelectedAppointment();
 
-    let showSelectedAppt = false;
     const activePracId = berniePilotContext.practitionerId || (allowHarnessDefaults ? "prac-1" : "");
     const activePatId = berniePilotContext.patientId || (allowHarnessDefaults ? "smoke-pat-1" : "");
 
@@ -2858,6 +2862,43 @@ function renderBernieInstructionInput(contentEl) {
   }
 
   container.appendChild(textarea);
+
+  // Suggestion chips when linked/selected context imported
+  const explicitContext = getBerniePilotContextValues();
+  const selectedContext = getActiveBernieSelectedAppointment();
+  const hasValidImportedContext = showSelectedAppt &&
+                                  !!explicitContext.sourceAppointmentId &&
+                                  explicitContext.sourceAppointmentId === selectedContext.apptId;
+
+  if (hasValidImportedContext) {
+    const suggestionsContainer = document.createElement("div");
+    suggestionsContainer.id = "bernie-suggested-instructions";
+    suggestionsContainer.className = "bernie-suggested-instructions";
+    suggestionsContainer.setAttribute("data-testid", "bernie-suggested-instructions");
+
+    const suggestions = [
+      "Find earlier options for this patient",
+      "Find later options for this patient",
+      "Find next available with this practitioner",
+      "Check another day for this practitioner"
+    ];
+
+    suggestions.forEach((text, index) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "bernie-suggestion-chip";
+      chip.setAttribute("data-testid", `bernie-suggestion-chip-${index}`);
+      chip.textContent = text;
+      chip.addEventListener("click", () => {
+        textarea.value = text;
+        bernieInstructionText = text;
+      });
+      suggestionsContainer.appendChild(chip);
+    });
+
+    container.appendChild(suggestionsContainer);
+  }
+
   container.appendChild(button);
   contentEl.appendChild(container);
 
