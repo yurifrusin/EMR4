@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-context-readiness-summary` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: integrated after Codex reconciled uncommitted worker changes, repaired smoke appointment date fallback, reran deterministic checks, and completed rendered review.
+- Follow-up required: none for this sprint; next step can be staff-visible non-default pilot entry.

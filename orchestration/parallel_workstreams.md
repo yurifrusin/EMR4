@@ -134,9 +134,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Queued; waiting for Antigravity plan |
+| Status | Integrated locally; closeout verification passed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Antigravity plan review |
+| Integration Gate | Antigravity plan accepted; implementation integrated with Codex bugfix and rendered product review |
 | Product Goal | Ensure the Bernie pilot panel only presents instruction entry as actionable once context is ready, and keeps a compact context summary visible |
 
 ### Workstream DM - Bernie Context Readiness Summary
@@ -150,7 +150,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval diary UI/readiness code and review harness updates as needed; no-context state should not show an actionable instruction submit; valid imported/manual context should show a compact non-PHI context summary through instruction and confirmation states; existing explicit gates preserved |
 | Out of Scope | Backend/provider/schema/migration changes, appointment mutation semantics, patient/practitioner search, production/default exposure changes, autonomous booking, taskpane, Command Centre, billing, SMS, resource admin, broad redesign, PHI-heavy logging, URL/browser-storage persistence, and unrelated CSS cleanup |
 | Verification | Plan packet first; after approval bundled Node syntax check, route-intercepted checks for no-context and selected-context summary states, full diary review harness if diary runtime assets change, frontend version integrity, and `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 68: Bernie Pilot Review Ergonomics
 

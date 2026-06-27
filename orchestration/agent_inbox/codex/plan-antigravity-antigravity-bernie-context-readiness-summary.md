@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-context-readiness-summary` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 22:45 +1000 |
 | Source HEAD | `2e4cd6a` |
 
@@ -44,6 +44,6 @@ Ensure checking context readiness doesn't break smoke/dev default mock values in
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: accepted; implementation released to Antigravity.
+- Required changes before implementation: `Change` may only clear in-memory context and return to the existing context-required state.
+- Approved to proceed: yes
