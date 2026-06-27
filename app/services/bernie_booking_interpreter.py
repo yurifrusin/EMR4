@@ -1,7 +1,8 @@
 """Read-only provider boundary for Bernie booking-instruction interpretation.
 
-This module intentionally performs no DB access, network calls, LLM calls,
-appointment mutations, audit writes, or raw-instruction logging.
+This module intentionally performs no DB access, appointment mutations, audit
+writes, or raw-instruction logging. The live provider path can call an injected
+AI provider only when explicitly configured; disabled/fake paths remain local.
 """
 
 from __future__ import annotations
