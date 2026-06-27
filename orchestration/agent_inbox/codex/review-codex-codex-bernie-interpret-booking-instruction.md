@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/bernie-interpret-booking-instruction` |
 | Source Task | `codex-bernie-interpret-booking-instruction` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne inspected the service/router/schema/test diff and reran the focused py_compile and pytest suite; the endpoint remains read-only, fake/default-disabled, and does not call slot search, proposal creation, confirmation, audit writes, DB writes, Gemini, or Vertex.
+- Follow-up required: Next AI runway sprint should add real Gemini/Vertex provider wiring behind explicit config/credentials and safety review, or add UI consumption of the structured interpret envelope, depending on priority.

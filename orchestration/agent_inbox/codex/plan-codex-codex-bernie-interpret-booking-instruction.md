@@ -9,7 +9,7 @@
 | Worker Branch | `codex/bernie-interpret-booking-instruction` |
 | Branch | `codex/bernie-interpret-booking-instruction` |
 | Source Task | `codex-bernie-interpret-booking-instruction` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 10:32 +1000 |
 | Source HEAD | `1008341` |
 
@@ -47,6 +47,6 @@ Main ambiguity is exact response naming and whether the output should be directl
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted. The plan stayed backend-only, default-disabled, mocked-first, and explicitly preserved the no-write/no-audit/no-live-provider boundary.
+- Required changes before implementation: Use HTTP 200 blocked/clarifying envelopes for disabled or incomplete interpretation states, keep provider metadata prompt/PHI-free, and keep any live Gemini/Vertex wiring out of this sprint.
+- Approved to proceed: yes

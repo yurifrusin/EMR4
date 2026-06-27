@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-interpret-booking-instruction` |
-| Status | submitted |
+| Status | integrated |
 | Created | 558734e |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-interpret-booking-instruction --summary "Short plan summary"` |

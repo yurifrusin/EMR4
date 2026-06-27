@@ -8,51 +8,49 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 62: Bernie Pilot Context Selector |
-| Integrated through | Staff pilot context selector before supervised Bernie review |
+| Batch | Sprint 63: Bernie Interpret Booking Instruction Endpoint |
+| Integrated through | Read-only mocked/default-disabled Bernie booking-instruction interpreter |
 | Status | Integrated and locally verified; push/mirror/audit pending this closeout commit |
 | Last updated | 2026-06-27 |
 
 ## What Changed
 
-- Added a compact Bernie pilot context form inside the Booking Review sidebar when ordinary staff pilot mode is eligible but real context is missing.
-- Ordinary pilot mode now requires explicit non-default practitioner and patient identifiers before it POSTs to `/appointments/proposals/bernie/supervised-booking`.
-- Empty, `smoke-*`, `prac-1`, and `smoke-pat-1` context values render a blocked readiness state and make no supervised-booking or confirm-Bernie calls.
-- Once explicit non-default context is supplied, the supervised-booking request carries those identifiers and still requires the existing staff approval checkbox before any confirm-Bernie POST.
-- Explicit smoke/dev/query harness behaviour remains available for deterministic tests and dev review paths.
-- Bumped diary assets to `diary.css?v=106` and `diary.js?v=116`.
+- Added `POST /api/v1/appointments/proposals/bernie/interpret-booking-instruction` as the first read-only Bernie AI runway endpoint.
+- Added strict request/response schemas for raw staff instruction intake, structured booking intent, command candidate, confidence, missing fields, safety flags, clarifying question, normalization result, and provider metadata.
+- Added `app/services/bernie_booking_interpreter.py` with a provider boundary, disabled provider, and deterministic fake provider; no live Gemini/Vertex provider is wired in this sprint.
+- Added config `bernie_booking_interpreter_provider`, defaulting to `disabled`.
+- The endpoint is authenticated but non-mutating: it does not create appointments, create proposals, confirm bookings, write audit rows, search slots, or call live LLM/provider services.
+- Added focused backend tests for auth, disabled/default-safe response, fake structured interpretation, missing-field clarification, autonomous-booking-language blocking, and source-level no-write/no-LLM proof.
 
 ## Recommended User Review
 
-Residual user review/testing after closeout: none required before continuing.
-Ariadne verified the selector and no-write safety behaviour with route-intercepted deterministic UI checks. The current ordinary staff pilot exposure remains conservative: it can show the eligible launch affordance, then requires explicit non-default context before preparing a supervised review and still requires explicit staff approval before any confirm route.
+Residual user review/testing after closeout: none required before pausing.
+Ariadne verified this backend-only slice with deterministic tests. The new endpoint is disabled by default, returns structured blocked/clarifying output in safe states, and uses only a deterministic fake provider when explicitly configured in tests.
 
 ## Not Required Before Moving On
 
-- No manual live UI test is required; deterministic harness coverage proves the context selector, no-POST blocked states, explicit-context POST, and existing dev/query review behaviour.
-- No manual live API write test is required; confirm-Bernie remains route-intercepted in the harness and no live write is performed.
-- No backend, auth/config, database migration, GCP/Gemini, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required.
+- No manual live UI test is required; there are no frontend changes.
+- No manual live API write test is required; the endpoint is read-only and tests prove no appointment/audit/proposal/confirm writes.
+- No database migration, GCP/Gemini credential, service-account key, Word taskpane, Command Centre, Office dialog, resource admin, billing, SMS, or security-console action is required for this sprint.
 
 ## Known Follow-Up
 
-- A future sprint should replace the temporary typed non-PHI context IDs with a real diary practitioner/patient context source or selector.
+- A future sprint can wire a real Gemini/Vertex provider behind explicit config and the separate Bernie service account, after prompt/PHI/logging/credential safety review.
+- A future sprint can connect the structured interpret envelope to the supervised booking review UI when the live provider path is ready.
 - The known moderate Dependabot alert remains outside this sprint.
 - The existing `pytest_asyncio` fixture-loop-scope warning remains a future test-hygiene item.
 
 ## Verification
 
 - Ariadne reviewed Cicero's plan and implementation packets, inspected the branch diff against `master`, and reran the worker's verification locally using the shared project venv before integration.
-- `node --check docs\diary\diary.js` -> passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe scripts\check_frontend_versions.py` -> passed with diary CSS/JS bumped to `v=106`/`v=116`.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_pilot_ordinary_mode" --tb=short -p no:randomly` -> 2 passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie" --tb=short -p no:randomly` -> 23 passed.
-- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q --tb=short -p no:randomly` -> 42 passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\routers\appointments.py app\services\bernie_booking_interpreter.py tests\test_bernie_interpret_booking_instruction.py` -> passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_slot_search_normalized_execution.py tests\test_bernie_wrapper_confirmation_review_harness.py -q --tb=short -p no:randomly` -> 28 passed.
 - `git diff --check` -> passed.
 - `pytest_asyncio` emitted the existing fixture-loop-scope deprecation warning only.
 
 ## Recommended Next Direction
 
-Continue with the Bernie AI endpoint runway: add a default-off, mocked-first provider boundary and read-only `/bernie/interpret`-style endpoint so staff text can become validated structured intent without writes, audits, PHI logging, or hard coupling Bernie to one LLM provider.
+Pause sprint automation as requested. When resuming, choose between (1) live Gemini/Vertex provider wiring for the interpret endpoint behind explicit config and the new Bernie service account, or (2) UI consumption of the structured interpret envelope using the fake provider for deterministic review.
 
 ## Previous Closeout - Sprint 58
 | Item | Value |
