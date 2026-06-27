@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-selected-appointment-context` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -26,5 +26,5 @@ _No completion notes were supplied in the source task packet. Reviewer should in
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: integrated with bounded Codex cleanup to narrow smoke default-ID handling and bump diary assets after repair.
+- Follow-up required: none for this sprint; next Bernie refinement can focus on staff-facing wording or staff-visible pilot entry.

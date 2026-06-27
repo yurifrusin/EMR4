@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-bernie-selected-appointment-context` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-06-27 20:24 +1000 |
 | Source HEAD | `0697941` |
 
@@ -93,6 +93,6 @@ Plan for Bernie selected appointment context
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: accepted; implementation released to Antigravity.
+- Required changes before implementation: keep selected context in memory only and keep smoke-only context mapping narrow.
+- Approved to proceed: yes

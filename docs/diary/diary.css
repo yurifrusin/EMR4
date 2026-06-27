@@ -2680,7 +2680,7 @@ html, body {
   cursor: not-allowed;
 }
 
-/* ─── BERNIE SELECTED APPOINTMENT CONTEXT STYLING (Sprint 67) ─── */
+/* Bernie selected appointment context styling. */
 .bernie-pilot-selected-appt-panel {
   margin-top: 12px;
   border-top: 1px dashed var(--grey-2);

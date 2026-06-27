@@ -101,11 +101,11 @@ function normalizeBernieContextId(value) {
   return (value || "").trim();
 }
 
-function isBerniePilotDefaultContextId(value) {
-  if (isSmokeMode()) {
+function isBerniePilotDefaultContextId(value, { allowSmokeIds = false } = {}) {
+  const normalized = normalizeBernieContextId(value).toLowerCase();
+  if (allowSmokeIds && normalized.startsWith("smoke-")) {
     return false;
   }
-  const normalized = normalizeBernieContextId(value).toLowerCase();
   return !normalized || normalized.startsWith("smoke-") || normalized === "prac-1" || normalized === "smoke-pat-1";
 }
 
@@ -127,6 +127,7 @@ function setBerniePilotContextValues(values) {
 
 function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) {
   const urlParams = new URLSearchParams(window.location.search);
+  const allowSmokeSelectedContext = isSmokeMode() && urlParams.get("bernie_context_form") === "true";
   const selectedIndex = urlParams.get("selected_candidate_index") !== null ? parseInt(urlParams.get("selected_candidate_index")) : null;
   const queryPractitionerId = urlParams.get("practitioner_id");
   const queryPatientId = urlParams.get("patient_id");
@@ -143,7 +144,7 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
       code: "missing_practitioner_context",
       message: "Select or load a real practitioner diary context before launching Bernie Pilot."
     });
-  } else if (!allowHarnessDefaults && isBerniePilotDefaultContextId(practitionerId)) {
+  } else if (!allowHarnessDefaults && isBerniePilotDefaultContextId(practitionerId, { allowSmokeIds: allowSmokeSelectedContext })) {
     blocks.push({
       code: "default_practitioner_context",
       message: "Use an explicit non-default practitioner context before launching Bernie Pilot."
@@ -154,7 +155,7 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
       code: "missing_patient_context",
       message: "Select or load a real patient context before asking Bernie to prepare a booking confirmation."
     });
-  } else if (!allowHarnessDefaults && isBerniePilotDefaultContextId(patientId)) {
+  } else if (!allowHarnessDefaults && isBerniePilotDefaultContextId(patientId, { allowSmokeIds: allowSmokeSelectedContext })) {
     blocks.push({
       code: "default_patient_context",
       message: "Use an explicit non-smoke patient context before asking Bernie to prepare a booking confirmation."

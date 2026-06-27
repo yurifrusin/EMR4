@@ -134,9 +134,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Queued; waiting for Antigravity plan |
+| Status | Integrated locally; closeout verification passed |
 | Launch Gate | HANDIN READY after dispatch commit/push/audit |
-| Integration Gate | Pending Antigravity plan review |
+| Integration Gate | Antigravity plan accepted; implementation integrated with Codex safety cleanup |
 | Product Goal | Replace the temporary typed-only Bernie pilot context path with a real diary-selected appointment context source |
 
 ### Workstream DK - Bernie Selected Appointment Context
@@ -150,7 +150,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first; after approval `docs/diary` UI assets and `review/` harness checks as needed; active appointment detection; explicit use-selected-appointment affordance; practitioner/patient context from linked appointments; blocked state for no selection, missing practitioner, provisional, or unlinked patient; manual ID fallback retained; no URL/localStorage/sessionStorage context persistence; diary asset version bump if runtime assets change |
 | Out of Scope | Backend routes/schemas/models, migrations, autonomous booking, broad patient/practitioner search, patient lookup UI, taskpane, Command Centre, billing, SMS, resource admin, appointment mutation behavior, PHI-heavy logging, broad diary redesign, and unrelated refactors |
 | Verification | Plan packet first; after approval bundled Node syntax check, focused route-intercepted Playwright checks for linked/blocked contexts and no persistence, full review harness if diary runtime assets change, frontend version integrity, and `git diff --check` |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 66: Bernie Staff Instruction Input Surface
 
