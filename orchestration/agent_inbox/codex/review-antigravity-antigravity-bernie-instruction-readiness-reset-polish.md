@@ -17,8 +17,17 @@ antigravity-bernie-instruction-readiness-reset-polish ready for Codex review
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - docs/diary/diary.js
+  - docs/diary/diary.css
+  - docs/diary/diary.html
+  - review/test_diary_smoke.py
 - Verification run:
+  - Run check_frontend_versions.py (passed).
+  - Run git diff --check (passed).
+  - Run focused pytest test_bernie_pilot_selected_appointment_instruction_readiness_and_resets (passed).
+  - Run full review/test_diary_smoke.py test suite (all 52 tests passed).
 - Remaining risks:
+  - None. Reset and readiness behaviors are deterministic and fully verified by smoke tests.
 
 ## Required Review Steps
 
