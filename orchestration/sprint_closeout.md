@@ -8,47 +8,43 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 74: Bernie Instruction Readiness Reset Polish |
-| Integrated through | Staff-safe readiness copy and clean reset behaviour for selected-appointment Bernie instructions |
-| Status | Integrated, verified, pushed, mirrored, audited, deployed, and closed |
+| Batch | Sprint 75: Bernie Interpreted Context Guard |
+| Integrated through | Interpreted-practitioner mismatch block and empty-candidate explanatory message |
+| Status | Integrated and verified locally; push/deploy/audit pending |
 | Last updated | 2026-06-28 |
 
 ## What Changed
 
-- After staff type or choose a selected-appointment Bernie instruction, the panel now shows explicit readiness copy: "Instruction ready for supervised analysis. Submit to prepare a booking proposal for staff review. Nothing is booked until you approve it."
-- Clicking `Change`, re-importing the current selected appointment, or making the imported appointment context stale clears pending instruction text and any previous interpretation result.
-- Manually typed instruction text is preserved across harmless valid rerenders while the selected appointment context remains current.
-- Changing instruction text invalidates any previous interpretation result so old proposals are not reused after staff edits.
-- The stale-selection block remains fail-closed: chips/readiness copy are absent and interpretation/supervised/confirm calls remain blocked until staff re-import the current selected appointment.
-- Ordinary staff mode still hides manual practitioner/patient ID fields and still requires explicit selected-appointment import, explicit instruction submit, and explicit approval-checkbox confirmation.
-- Diary assets were cache-busted to `diary.css?v=116` and `diary.js?v=129`.
-- Ariadne applied a bounded post-worker repair to preserve typed instruction state across valid rerenders and strengthened the deterministic review harness for that case.
+- If the interpreted booking instruction returns a practitioner that differs from the imported selected appointment context, the diary now blocks before calling supervised booking and shows `interpreted_practitioner_context_mismatch`.
+- Candidate-selection review with zero candidate slots now shows a clear empty-state message instead of a blank `Candidate Slots` section.
+- Existing selected-appointment import, readiness copy, explicit staff submit, and approval-gated confirmation behaviour remain unchanged.
+- Diary assets were cache-busted to `diary.css?v=117` and `diary.js?v=130`.
 
 ## Verification
 
 - `C:\Users\sarashera\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe --check docs\diary\diary.js` passed.
-- `python scripts\check_frontend_versions.py` passed locally with `diary.css?v=116` and `diary.js?v=129`.
-- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_readiness_and_resets review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_affordances review\test_diary_smoke.py::test_bernie_pilot_imported_context_stales_when_selection_changes -q --tb=short` passed: `3 passed`.
-- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `52 passed`.
-- GitHub Pages workflow run `28303547625` completed successfully, and live `https://yurifrusin.github.io/EMR4/diary/diary.html` serves `diary.js?v=129` and `diary.css?v=116`.
-- `python scripts\agent_worktrees.py audit --fetch` showed `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned and clean at `d6d286e`.
-- `python scripts\agent_worktrees.py retire-stale` found no stale disposable worktrees.
+- `python scripts\check_frontend_versions.py` passed locally with `diary.css?v=117` and `diary.js?v=130`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised_call review\test_diary_smoke.py::test_bernie_review_candidate_selection_empty_state review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_affordances review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_readiness_and_resets -q --tb=short` passed: `4 passed`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `54 passed`.
 - `git diff --check` passed.
 
 ## Not Required Before Moving On
 
-- No manual live UI test is required before push; the deterministic review harness verifies selected-appointment import, suggestion chip rendering, readiness copy for chip and typed instructions, typed-text preservation across valid rerender, Change reset, re-import reset, stale-selection reset/no chips/no call, no browser/URL instruction persistence, explicit submit, and unchanged confirmation gating.
-- No backend, provider, schema, migration, taskpane, Command Centre, billing, SMS, resource admin, or live Gemini action is required.
+- No backend, provider, schema, migration, taskpane, Command Centre, billing, SMS, resource admin, or live Gemini action is required for this UI hardening slice.
+- No manual live test is required before push; deterministic route-intercepted checks cover the mismatch guard, no-supervised-call behaviour, empty-candidate copy, and adjacent selected-appointment instruction flows.
 
 ## Known Follow-Up
 
-- Antigravity CLI still returns blank stdout in Codex non-TTY shells, but this sprint proved the tangible-artifact workflow works: poll/git showed the submitted branch and review packet.
-- GitHub still reports Dependabot alert 5 on push; Sprint 71 triaged it as not product-runtime-actionable.
+- The local dev smoke has `BERNIE_BOOKING_INTERPRETER_PROVIDER=fake` in `.env`; keep this as fake/non-live until the live Gemini interpreter smoke is explicitly chosen.
 - GitHub still reports the known moderate Dependabot alert on push; Sprint 71 triaged it as not product-runtime-actionable.
 
 ## Recommended Next Direction
 
-Next recommended step: run a narrow live staff-pilot smoke when Yuri is ready to exercise the deployed surface, or continue another small supervised booking ergonomics slice if we want more deterministic hardening first.
+Next recommended step: after Pages serves `diary.js?v=130` and `diary.css?v=117`, rerun the live fake-interpreter staff-pilot smoke that previously exposed the practitioner mismatch and empty-candidate states. If clean, choose whether to enable a live Gemini interpreter smoke behind the same gates.
+
+## Previous Closeout - Sprint 74
+
+Sprint 74 integrated safe readiness copy and clean reset behaviour for selected-appointment Bernie instructions. The deterministic harness verified selected-appointment import, readiness copy for chip and typed instructions, typed-text preservation across valid rerender, Change reset, re-import reset, stale-selection reset/no chips/no call, no browser/URL instruction persistence, explicit submit, and unchanged confirmation gating. Live GitHub Pages served `diary.js?v=129` and `diary.css?v=116` after push.
 
 ## Previous Closeout - Sprint 73
 

@@ -2543,6 +2543,16 @@ html, body {
   gap: 4px;
 }
 
+.bernie-candidate-empty {
+  background-color: var(--grey-1);
+  border-left: 3px solid var(--blue);
+  border-radius: 4px;
+  color: var(--grey-4);
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 10px 12px;
+}
+
 .bernie-selected-slot-time {
   font-size: 14px;
   font-weight: 700;

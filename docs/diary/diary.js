@@ -2396,7 +2396,16 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     const list = document.createElement("div");
     list.setAttribute("data-testid", "bernie-review-candidates-list");
 
-    payload.candidate_slots.forEach(slot => {
+    const candidateSlots = Array.isArray(payload.candidate_slots) ? payload.candidate_slots : [];
+    if (candidateSlots.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "bernie-candidate-empty";
+      empty.setAttribute("data-testid", "bernie-review-candidates-empty");
+      empty.textContent = "No free slots were found for the requested practitioner, date, and time window. Adjust the instruction or choose a wider search window.";
+      list.appendChild(empty);
+    }
+
+    candidateSlots.forEach(slot => {
       const item = document.createElement("div");
       item.className = "bernie-candidate-item";
       item.setAttribute("data-testid", "bernie-review-candidate-item");
@@ -2545,6 +2554,27 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       }
     });
   }
+}
+
+function buildBernieContextMismatchPayload(interpretedCommand, expectedCommand) {
+  const interpretedPractitioner = normalizeBernieContextId(interpretedCommand?.practitioner_id);
+  const expectedPractitioner = normalizeBernieContextId(expectedCommand?.practitioner_id);
+  return {
+    status: "blocked",
+    confirmation_ready: false,
+    selected_slot: null,
+    candidate_slots: [],
+    warning_summary: "Bernie interpreted a practitioner that does not match the imported appointment context.",
+    evidence_summary: "Review the selected appointment context and instruction before asking Bernie to search slots.",
+    confirm_payload: null,
+    blocks: [
+      {
+        code: "interpreted_practitioner_context_mismatch",
+        severity: "blocked",
+        message: `Interpreted practitioner ${interpretedPractitioner || "unknown"} does not match imported appointment practitioner ${expectedPractitioner || "unknown"}.`
+      }
+    ]
+  };
 }
 
 function renderBerniePilotContextForm(blocks = []) {
@@ -3030,6 +3060,16 @@ async function loadBernieLiveReview() {
   }
 
   // If interpreted, load supervised booking
+  const interpretedPractitioner = normalizeBernieContextId(bernieInterpretResult.command_candidate?.practitioner_id);
+  const contextPractitioner = normalizeBernieContextId(request.body.command?.practitioner_id);
+  if (interpretedPractitioner && contextPractitioner && interpretedPractitioner !== contextPractitioner) {
+    renderBernieReview(
+      buildBernieContextMismatchPayload(bernieInterpretResult.command_candidate, request.body.command),
+      bernieInterpretResult
+    );
+    return;
+  }
+
   if (contentEl) {
     // Clear and keep instruction form at the top, then show loading underneath
     contentEl.innerHTML = "";
