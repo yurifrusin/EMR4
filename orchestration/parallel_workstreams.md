@@ -134,6 +134,28 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 74: Bernie Instruction Readiness Reset Polish
+
+| Item | Value |
+|---|---|
+| Status | Dispatched to Antigravity for plan packet |
+| Launch Gate | HANDIN READY after dispatch commit/push/audit |
+| Integration Gate | Pending Antigravity plan review |
+| Product Goal | Make selected-context Bernie instruction readiness clearer and reset pending instruction state cleanly before live staff-pilot smoke |
+
+### Workstream DR - Bernie Instruction Readiness Reset Polish
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-bernie-instruction-readiness-reset-polish.md` |
+| Goal | Plan, then after approval refine chip/typed instruction readiness copy and reset behaviour without weakening explicit submit or confirmation gates |
+| In Scope | Plan packet first; after approval `docs/diary/diary.{html,css,js}` and `review/test_diary_smoke.py` as needed; selected linked appointment context only; clear staff-supervised ready-to-submit copy after chip selection or typed instruction; reset instruction/interpreter state when Change is clicked, the current appointment is re-imported, or imported context becomes stale; no automatic provider call before explicit staff submit; preserve stale-selection guard, allowlist gate, no manual IDs in ordinary mode, no URL/browser-storage instruction persistence, explicit approval checkbox, and asset version bump if runtime assets change |
+| Out of Scope | Backend routes/schemas/models, migrations, provider/Gemini changes, autonomous booking, default production exposure changes, query-string free-text intake, browser storage for instructions/context, patient/practitioner search redesign, taskpane, Command Centre, billing, SMS, resource admin, broad diary redesign, dependency/security work, and unrelated CSS cleanup |
+| Verification | Plan packet first; after approval bundled Node syntax check, focused route-intercepted Bernie UI checks for chip/typed readiness copy, Change reset, re-import reset, stale-context reset/no chips/no call, confirmation gating, full diary review harness if diary runtime assets change, frontend version integrity, and `git diff --check` |
+| Status | Queued |
+
 ## Sprint 73: Bernie Selected Appointment Instruction Affordance
 
 | Item | Value |
