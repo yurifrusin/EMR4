@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 91: Multi-Provider Knowledge-Base Adapter Groundwork |
 | Integrated through | Provider-neutral knowledge-base query/citation contracts behind Access AI with fake-provider tests only |
-| Status | Implemented and verified locally; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-06-29 |
 
 ## What Changed
