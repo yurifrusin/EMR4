@@ -17,16 +17,30 @@
 .PARAMETER NoDevServer
     Skip starting the webpack dev-server on port 3000.
 
+.PARAMETER LiveAiSurface
+    Select keyless live-AI ADC/env for the surface being tested.
+    Taskpane = Scribe/Copilot project. Diary = Bernie project. None = no live
+    ADC switch.
+
+.PARAMETER SkipAdcLogin
+    With -LiveAiSurface, set project/env only and do not recreate ADC. Use when
+    ADC is already known to point at the matching service account.
+
 .EXAMPLE
     .\run_dev.ps1                        # Start everything
     .\run_dev.ps1 -Down                  # Stop app processes (leave Postgres)
     .\run_dev.ps1 -NoDevServer -NoNgrok  # Backend only
+    .\run_dev.ps1 -LiveAiSurface Taskpane # Live Scribe/Copilot test
+    .\run_dev.ps1 -LiveAiSurface Diary    # Live Bernie/diary test
 #>
 
 param(
     [switch]$Down,
     [switch]$NoDevServer,
-    [switch]$NoNgrok
+    [switch]$NoNgrok,
+    [ValidateSet("None", "Taskpane", "Diary")]
+    [string]$LiveAiSurface = "None",
+    [switch]$SkipAdcLogin
 )
 
 Set-StrictMode -Version Latest
@@ -44,9 +58,10 @@ $NgrokDomain   = "property-cinch-backfield.ngrok-free.dev"
 
 $DbContainer   = "gp-pms-postgres"
 $Root          = $PSScriptRoot
-$Gcp           = Join-Path $Root "gcp-key.json"
 $Venv          = Join-Path $Root ".venv\Scripts\Activate.ps1"
 $SidebarPath   = Join-Path $Root "EMR4 Sidebar"
+$ScribeAdcScript = Join-Path $Root "scripts\use_scribe_adc.ps1"
+$BernieAdcScript = Join-Path $Root "scripts\use_bernie_adc.ps1"
 
 # -- Helpers -------------------------------------------------------------------
 
@@ -106,6 +121,60 @@ function Show-StatusRow([string]$Name, [bool]$Up, [string]$Detail) {
     Write-Host ("  {0} {1,-24} {2}" -f $icon, $Name, $Detail) -ForegroundColor $color
 }
 
+function Invoke-LiveAiSetup([string]$Surface) {
+    if ($Surface -eq "None") {
+        Write-Warn "No live AI ADC selected. Scribe/Bernie live provider calls may fail unless configured separately."
+        return
+    }
+
+    $script = if ($Surface -eq "Taskpane") { $ScribeAdcScript } else { $BernieAdcScript }
+    if (-not (Test-Path $script)) {
+        Write-Err "Live AI setup script not found: $script"
+        exit 1
+    }
+
+    $scriptArgs = @()
+    if ($SkipAdcLogin) {
+        $scriptArgs += "-SkipAdcLogin"
+    }
+
+    try {
+        & $script @scriptArgs
+        if ($LASTEXITCODE -ne 0) {
+            Write-Err "Live AI setup script exited with code $LASTEXITCODE"
+            exit 1
+        }
+    } catch {
+        Write-Err "Live AI setup failed: $($_.Exception.Message)"
+        exit 1
+    }
+}
+
+function Get-UvicornEnvCommand([string]$Surface) {
+    $common = "Remove-Item Env:GOOGLE_APPLICATION_CREDENTIALS -ErrorAction SilentlyContinue; "
+    if ($Surface -eq "Taskpane") {
+        return $common +
+            "`$env:GCP_PROJECT='scribe-emr4-dev'; " +
+            "`$env:GOOGLE_CLOUD_PROJECT='scribe-emr4-dev'; " +
+            "`$env:GCP_LOCATION='australia-southeast1'; " +
+            "`$env:VERTEX_AI_LOCATION='australia-southeast1'; " +
+            "Remove-Item Env:BERNIE_AI_PROJECT -ErrorAction SilentlyContinue; " +
+            "Remove-Item Env:BERNIE_AI_LOCATION -ErrorAction SilentlyContinue; " +
+            "Remove-Item Env:BERNIE_BOOKING_INTERPRETER_PROVIDER -ErrorAction SilentlyContinue; "
+    }
+    if ($Surface -eq "Diary") {
+        return $common +
+            "`$env:GCP_PROJECT='bernie-emr4-dev'; " +
+            "`$env:GOOGLE_CLOUD_PROJECT='bernie-emr4-dev'; " +
+            "`$env:GCP_LOCATION='australia-southeast1'; " +
+            "`$env:VERTEX_AI_LOCATION='australia-southeast1'; " +
+            "`$env:BERNIE_AI_PROJECT='bernie-emr4-dev'; " +
+            "`$env:BERNIE_AI_LOCATION='australia-southeast1'; " +
+            "`$env:BERNIE_BOOKING_INTERPRETER_PROVIDER='gemini_vertex'; "
+    }
+    return $common
+}
+
 # ==============================================================================
 # TEARDOWN (-Down)
 # ==============================================================================
@@ -160,7 +229,7 @@ Write-Host "  =======================================================" -Foregrou
 
 # -- 1. Pre-flight -------------------------------------------------------------
 
-Write-Step "1/5  Pre-flight checks..."
+Write-Step "1/6  Pre-flight checks..."
 
 # venv
 if (-not (Test-Path $Venv)) {
@@ -194,11 +263,11 @@ if (-not (Test-Path (Join-Path $Root ".env"))) {
     Write-Ok ".env present"
 }
 
-# gcp-key.json (AI endpoints fail without it)
-if (-not (Test-Path $Gcp)) {
-    Write-Warn "gcp-key.json absent -- AI endpoints (scribe, analyse) will return 500"
+# AI auth posture
+if (Test-Path (Join-Path $Root "gcp-key.json")) {
+    Write-Warn "gcp-key.json exists but run_dev no longer uses JSON keys for live AI."
 } else {
-    Write-Ok "gcp-key.json present"
+    Write-Ok "No local gcp-key.json dependency"
 }
 
 # npm (only if dev-server requested)
@@ -211,9 +280,14 @@ if (-not $NoDevServer) {
     }
 }
 
-# -- 2. Postgres ---------------------------------------------------------------
+# -- 2. Live AI ADC/env --------------------------------------------------------
 
-Write-Step "2/5  Postgres ($DbContainer on port $DbPort)..."
+Write-Step "2/6  Live AI ADC/env selection..."
+Invoke-LiveAiSetup $LiveAiSurface
+
+# -- 3. Postgres ---------------------------------------------------------------
+
+Write-Step "3/6  Postgres ($DbContainer on port $DbPort)..."
 
 $running = docker ps --filter "name=$DbContainer" --filter "status=running" --format "{{.Names}}"
 if ($running -match $DbContainer) {
@@ -233,16 +307,17 @@ if ($running -match $DbContainer) {
     }
 }
 
-# -- 3. uvicorn ----------------------------------------------------------------
+# -- 4. uvicorn ----------------------------------------------------------------
 
-Write-Step "3/5  FastAPI / uvicorn (port $BackendPort)..."
+Write-Step "4/6  FastAPI / uvicorn (port $BackendPort)..."
 
 if (Test-PortListening $BackendPort) {
     Write-Warn "Port $BackendPort already in use -- skipping (uvicorn may already be running)"
 } else {
     # Build the command string. Single-quote path literals so spaces in $Root
     # are handled correctly when the string is evaluated in the new window.
-    $uvCmd = "Set-Location '$Root'; . '$Venv'; `$env:GOOGLE_APPLICATION_CREDENTIALS = '$Gcp'; uvicorn app.main:app --reload --port $BackendPort"
+    $uvEnvCmd = Get-UvicornEnvCommand $LiveAiSurface
+    $uvCmd = "Set-Location '$Root'; . '$Venv'; $uvEnvCmd uvicorn app.main:app --reload --port $BackendPort"
     Start-Process powershell -ArgumentList "-NoProfile", "-NoExit", "-Command", $uvCmd `
         -WindowStyle Normal
 
@@ -254,10 +329,10 @@ if (Test-PortListening $BackendPort) {
     }
 }
 
-# -- 4. ngrok ------------------------------------------------------------------
+# -- 5. ngrok ------------------------------------------------------------------
 
 if (-not $NoNgrok) {
-    Write-Step "4/5  ngrok -> https://$NgrokDomain..."
+    Write-Step "5/6  ngrok -> https://$NgrokDomain..."
 
     if (Test-PortListening $NgrokApiPort) {
         # ngrok already up -- verify the tunnel URL matches (catches the random-domain mistake)
@@ -311,13 +386,13 @@ if (-not $NoNgrok) {
         }
     }
 } else {
-    Write-Step "4/5  ngrok -- skipped (-NoNgrok)"
+    Write-Step "5/6  ngrok -- skipped (-NoNgrok)"
 }
 
-# -- 5. npm dev-server ---------------------------------------------------------
+# -- 6. npm dev-server ---------------------------------------------------------
 
 if (-not $NoDevServer) {
-    Write-Step "5/5  npm dev-server (localhost:$DevServerPort)..."
+    Write-Step "6/6  npm dev-server (localhost:$DevServerPort)..."
     if (Test-PortListening $DevServerPort) {
         Write-Ok "Port $DevServerPort already in use -- skipping"
     } else {
@@ -332,7 +407,7 @@ if (-not $NoDevServer) {
         }
     }
 } else {
-    Write-Step "5/5  npm dev-server -- skipped (-NoDevServer)"
+    Write-Step "6/6  npm dev-server -- skipped (-NoDevServer)"
 }
 
 # -- Summary -------------------------------------------------------------------
@@ -345,6 +420,7 @@ Write-Host ""
 
 Show-StatusRow "Postgres"            (Test-PortListening $DbPort)        "postgresql://127.0.0.1:$DbPort/gp_pms_dev"
 Show-StatusRow "FastAPI (uvicorn)"   (Test-PortListening $BackendPort)   "http://127.0.0.1:$BackendPort/docs"
+Show-StatusRow "Live AI surface"     ($LiveAiSurface -ne "None")          $LiveAiSurface
 
 if (-not $NoNgrok) {
     Show-StatusRow "ngrok tunnel"    (Test-PortListening $NgrokApiPort)  "https://$NgrokDomain"

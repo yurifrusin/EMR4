@@ -132,10 +132,7 @@ The short version is:
 
 ```powershell
 gcloud auth login yuri@littlestardigital.com
-gcloud config set project bernie-emr4-dev
-gcloud auth application-default login `
-  --impersonate-service-account=emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com `
-  --scopes=https://www.googleapis.com/auth/cloud-platform
+.\scripts\use_bernie_adc.ps1
 ```
 
 For Bernie and Scribe/Copilot, separate service accounts are preferred because they

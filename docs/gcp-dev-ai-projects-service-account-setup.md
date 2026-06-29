@@ -18,6 +18,18 @@ human Google account -> service account impersonation -> narrow AI service accou
 
 Do not create or download JSON API keys for these service accounts.
 
+This runbook is for local Windows development only. Production should run the
+same EMR4 code with deployment-provided environment variables and attached
+runtime identities, not by running these PowerShell ADC scripts on a server.
+The smooth dev-to-prod path is:
+
+```text
+same code -> environment-specific project/service-account config -> platform-managed identity
+```
+
+The local scripts are a developer convenience for imitating that identity
+boundary without JSON keys.
+
 ## Accounts And Projects
 
 Recommended human accounts:
@@ -44,6 +56,11 @@ for local app/library calls.
 ADC is a single local active credential. If you create ADC for Scribe and then
 create ADC for Bernie, the Bernie ADC replaces the Scribe ADC. Switch ADC only
 when you switch the thing you are testing.
+
+The browser taskpane and diary do not run these scripts themselves. The backend
+must be launched with the correct live-AI surface selected. Use `run_dev.ps1`
+with `-LiveAiSurface Taskpane` for the doctor's taskpane/Command Centre scribe
+path, or `-LiveAiSurface Diary` for Bernie diary testing.
 
 In PowerShell, environment variables use this syntax:
 
@@ -196,13 +213,7 @@ Run only one of these sets at a time.
 Use this when testing Scribe/Copilot:
 
 ```powershell
-gcloud config set project scribe-emr4-dev
-
-gcloud auth application-default revoke
-
-gcloud auth application-default login `
-  --impersonate-service-account=emr4-scribe-ai-dev@scribe-emr4-dev.iam.gserviceaccount.com `
-  --scopes=https://www.googleapis.com/auth/cloud-platform
+.\scripts\use_scribe_adc.ps1
 ```
 
 Set PowerShell environment variables for the current terminal:
@@ -217,13 +228,7 @@ $env:VERTEX_AI_LOCATION = "australia-southeast1"
 Use this when testing Bernie:
 
 ```powershell
-gcloud config set project bernie-emr4-dev
-
-gcloud auth application-default revoke
-
-gcloud auth application-default login `
-  --impersonate-service-account=emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com `
-  --scopes=https://www.googleapis.com/auth/cloud-platform
+.\scripts\use_bernie_adc.ps1
 ```
 
 Set PowerShell environment variables for the current terminal:
@@ -237,6 +242,50 @@ $env:BERNIE_AI_LOCATION = "australia-southeast1"
 
 Do not run both Scribe and Bernie ADC commands back-to-back unless you are
 intentionally switching. The later command replaces the earlier ADC.
+
+If ADC is already known to point at the correct service account and you only
+want to refresh environment variables:
+
+```powershell
+.\scripts\use_scribe_adc.ps1 -SkipAdcLogin
+.\scripts\use_bernie_adc.ps1 -SkipAdcLogin
+```
+
+## 5A. Launch EMR4 With The Correct Live AI Surface
+
+Doctor taskpane / Command Centre / scribe live test:
+
+```powershell
+.\run_dev.ps1 -LiveAiSurface Taskpane
+```
+
+Diary / Bernie live test:
+
+```powershell
+.\run_dev.ps1 -LiveAiSurface Diary
+```
+
+If you already ran the matching `use_*_adc.ps1` script and do not want a browser
+reauthorization flow:
+
+```powershell
+.\run_dev.ps1 -LiveAiSurface Taskpane -SkipAdcLogin
+.\run_dev.ps1 -LiveAiSurface Diary -SkipAdcLogin
+```
+
+Ordinary fake-provider/local development can still use:
+
+```powershell
+.\run_dev.ps1
+```
+
+True per-request runtime switching, where a single running backend calls Scribe
+with one service account and Bernie with another service account at the same
+time, requires backend-level service-account impersonation per Access AI
+capability. That is a separate implementation from these local ADC scripts.
+That future implementation is also the production-friendly shape: Access AI
+selects the capability, provider project, and service account from configuration
+or policy rather than relying on whichever ADC file is active on a developer PC.
 
 ## 6. Verify ADC
 
@@ -370,7 +419,8 @@ When rebuilding from scratch:
 3. create service accounts in both projects
 4. grant each service account `roles/aiplatform.user`
 5. grant `yuri@littlestardigital.com` Token Creator on each service account
-6. create ADC for either Scribe or Bernie, not both at once
-7. set PowerShell `$env:` variables for that terminal
+6. create ADC for either Scribe or Bernie with `scripts\use_scribe_adc.ps1` or
+   `scripts\use_bernie_adc.ps1`, not both at once
+7. launch EMR4 with `run_dev.ps1 -LiveAiSurface Taskpane` or
+   `run_dev.ps1 -LiveAiSurface Diary`
 8. run non-PHI live smoke only after fake tests pass
-

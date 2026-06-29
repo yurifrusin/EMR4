@@ -87,6 +87,20 @@ For the exact Windows/PowerShell command sequence for the current
 `scribe-emr4-dev` and `bernie-emr4-dev` projects, use
 [`gcp-dev-ai-projects-service-account-setup.md`](gcp-dev-ai-projects-service-account-setup.md).
 
+Day-to-day shortcut scripts:
+
+```powershell
+.\scripts\use_scribe_adc.ps1
+.\scripts\use_bernie_adc.ps1
+```
+
+The local launcher can call the matching script before starting the backend:
+
+```powershell
+.\run_dev.ps1 -LiveAiSurface Taskpane
+.\run_dev.ps1 -LiveAiSurface Diary
+```
+
 ## Local Dev Authentication
 
 Install or update the Google Cloud CLI, then authenticate as the daily user:

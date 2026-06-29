@@ -254,6 +254,21 @@ From the EMR4 folder:
 .\run_dev.ps1
 ```
 
+For live AI testing, select the surface before the backend starts:
+
+```powershell
+.\run_dev.ps1 -LiveAiSurface Taskpane
+```
+
+uses the Scribe/Copilot dev project for the doctor's taskpane and Command
+Centre. For Bernie diary testing:
+
+```powershell
+.\run_dev.ps1 -LiveAiSurface Diary
+```
+
+uses the Bernie dev project and enables the live Bernie interpreter provider.
+
 This script starts:
 
 - Docker Postgres container: `gp-pms-postgres`
