@@ -8,8 +8,8 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprints 79-80: AI Capability Registry and Entitlement Gate |
-| Integrated through | Static Access AI capability registry plus fail-closed actor/role/method/environment entitlement decisions |
+| Batch | Sprints 79-81: AI Capability Registry, Entitlement Gate, and Typed Audit Events |
+| Integrated through | Static Access AI capability registry, fail-closed entitlement decisions, and typed PHI-averse audit event contracts |
 | Status | Implemented and verified locally; not yet pushed |
 | Last updated | 2026-06-29 |
 
@@ -24,23 +24,27 @@ reviewed, integrated, verified, pushed, and audited.
 - Added role separation for clinical AI users, reception AI users, reception supervisors, dev operators, platform admins, and disabled actors.
 - Added entitlement decisions for unknown capabilities, unknown methods, disabled actors, registry method allowlists, environment allowlists, and role/capability mismatches.
 - Added tests proving GP, receptionist, admin, dev-operator, disabled, unknown, and method-denial behaviours.
+- Added `app/services/ai/audit_events.py`, a typed Access AI audit event catalog for invocation, entitlement, Bernie proposal, caller identity, and knowledge-query events.
+- Added audit event validation for timezone-aware timestamps, compact reason codes, required capability/method on AI events, blocked/failed reason codes, correlation ids, and PHI-averse bounded metadata.
+- Added tests proving allowed/blocked event shape, missing required fields, raw prompt/patient identifier metadata rejection, non-AI identity events, and timestamp validation.
 - Kept runtime provider invocation behavior unchanged.
 
 ## Verification
 
-- `.venv\Scripts\python.exe -m py_compile app\services\ai\contracts.py app\services\ai\registry.py app\services\ai\entitlements.py` passed.
-- `.venv\Scripts\python.exe -m pytest tests\test_ai_capability_registry.py tests\test_ai_entitlements.py tests\test_ai_service_boundary.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed: `39 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe -m py_compile app\services\ai\contracts.py app\services\ai\registry.py app\services\ai\entitlements.py app\services\ai\audit_events.py` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_ai_audit_events.py tests\test_ai_capability_registry.py tests\test_ai_entitlements.py tests\test_ai_service_boundary.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed: `50 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
 
 ## Known Follow-Up
 
-- Sprint 81 should add typed audit event contracts for Access AI decisions, invocations, denials, provider calls, and human confirmations.
+- Sprint 82 should add the first fake-provider-only Access AI invocation service using the registry, entitlement gate, and audit event contracts.
 - The static project/provider metadata should be wired to environment/config only after entitlement and invocation service boundaries exist.
 - The entitlement role mapping is intentionally static for now; later Cloud Identity groups, WorkOS-style org roles, or database-backed practice entitlements should feed the same contract rather than bypass it.
+- Access AI audit events are storage-agnostic for now; persistence should be added after the invocation service proves the event lifecycle.
 - GitHub still reports the known moderate Dependabot alert on push; Sprint 71 triaged it as not product-runtime-actionable.
 
 ## Recommended Next Direction
 
-Next recommended step: Sprint 81 typed audit event catalog, followed by Sprint 82 Access AI invocation service and Sprint 83 audit/cost envelope. Do not route Bernie, Copilot, caller-ID booking proposals, or Wiley/Cochrane knowledge-base calls through Access AI runtime until capability policy, entitlement, audit, and keyless dev auth are stable.
+Next recommended step: Sprint 82 Access AI invocation service, followed by Sprint 83 audit/cost envelope. Do not route Bernie, Copilot, caller-ID booking proposals, or Wiley/Cochrane knowledge-base calls through Access AI runtime until capability policy, entitlement, audit, and keyless dev auth are stable.
 
 ## Previous Closeout - Sprints 77-78
 

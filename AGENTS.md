@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Programme 2F / Sprints 79-80 - AI capability registry and entitlement gate implemented and verified locally |
-| **Next recommended work** | Continue Access AI API with Sprint 81 typed audit event catalog, then Sprint 82 invocation service before routing Bernie/Copilot live provider calls through it |
+| **Current active track** | Programme 2F / Sprints 79-81 - AI capability registry, entitlement gate, and typed audit events implemented and verified locally |
+| **Next recommended work** | Continue Access AI API with Sprint 82 invocation service, then Sprint 83 audit/cost envelope before routing Bernie/Copilot live provider calls through it |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
