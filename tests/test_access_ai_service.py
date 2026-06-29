@@ -69,6 +69,8 @@ async def test_invocation_denies_before_provider_call_when_role_not_allowed():
     assert result.allowed is False
     assert result.raw is None
     assert result.denial_reason == "role_not_allowed"
+    assert result.cost_envelope.request_units > 0
+    assert result.latency_ms is None
     assert provider.calls == 0
     assert result.audit_events[0].event_type == AiAuditEventType.INVOCATION_BLOCKED
     assert result.audit_events[0].reason_code == "role_not_allowed"
@@ -96,8 +98,13 @@ async def test_successful_invocation_calls_provider_and_records_allowed_event():
     assert provider.calls == 1
     assert provider.last_contents == {"input": "non-phi fixture"}
     assert provider.last_temperature == 0.2
+    assert result.cost_envelope.default_provider == "gemini_vertex"
+    assert result.cost_envelope.response_units > 0
+    assert result.latency_ms is not None
     assert result.audit_events[0].event_type == AiAuditEventType.INVOCATION_ALLOWED
     assert result.audit_events[0].correlation_id == correlation_id
+    assert result.audit_events[0].metadata["latency_ms"] == result.latency_ms
+    assert result.audit_events[0].metadata["estimated_cost_usd"] >= 0
 
 
 @pytest.mark.asyncio
@@ -115,6 +122,8 @@ async def test_dry_run_records_allowed_event_without_provider_call():
 
     assert result.allowed is True
     assert result.raw == {}
+    assert result.cost_envelope.response_units == 0
+    assert result.latency_ms == 0
     assert provider.calls == 0
     assert result.audit_events[0].event_type == AiAuditEventType.INVOCATION_ALLOWED
 
@@ -136,11 +145,15 @@ async def test_provider_failure_records_failure_event_without_raw_payload():
     assert result.raw is None
     assert result.denial_reason == "RuntimeError"
     assert provider.calls == 1
+    assert result.cost_envelope.response_units == 0
+    assert result.latency_ms is not None
     assert [event.event_type for event in result.audit_events] == [
         AiAuditEventType.INVOCATION_ALLOWED,
         AiAuditEventType.INVOCATION_FAILED,
     ]
     assert result.audit_events[1].reason_code == "RuntimeError"
+    assert result.audit_events[0].correlation_id == result.audit_events[1].correlation_id
+    assert result.audit_events[1].metadata["latency_ms"] == result.latency_ms
 
 
 @pytest.mark.asyncio
