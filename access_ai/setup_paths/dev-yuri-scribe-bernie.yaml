@@ -1,0 +1,153 @@
+goal: setup_access_ai_dev_user_for_scribe_and_bernie
+
+context:
+  environment: dev
+  region: australia-southeast1
+  user_email: yuri@littlestardigital.com
+  dev_practice_id: d92314e3-aa1d-441e-81a5-f5db5ec22ca0
+
+projects:
+  scribe:
+    project_id: scribe-emr4-dev
+    service_account: emr4-scribe-ai-dev@scribe-emr4-dev.iam.gserviceaccount.com
+    services:
+      - aiplatform.googleapis.com
+      - discoveryengine.googleapis.com
+  bernie:
+    project_id: bernie-emr4-dev
+    service_account: emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com
+    services:
+      - aiplatform.googleapis.com
+
+capabilities:
+  - clinical.note.extract
+  - clinical.scribe.transcribe
+  - admin.booking.interpret
+  - admin.booking.suggest_slots
+  - admin.booking.prepare_proposal
+
+steps:
+  - id: enable_scribe_vertex_ai
+    executable: gcloud
+    args:
+      - services
+      - enable
+      - aiplatform.googleapis.com
+      - --project
+      - ${projects.scribe.project_id}
+    verify:
+      executable: gcloud
+      args:
+        - services
+        - list
+        - --enabled
+        - --project
+        - ${projects.scribe.project_id}
+        - --filter=config.name:aiplatform.googleapis.com
+        - --format=value(config.name)
+      expect_contains: aiplatform.googleapis.com
+
+  - id: enable_scribe_discovery_engine
+    executable: gcloud
+    args:
+      - services
+      - enable
+      - discoveryengine.googleapis.com
+      - --project
+      - ${projects.scribe.project_id}
+    verify:
+      executable: gcloud
+      args:
+        - services
+        - list
+        - --enabled
+        - --project
+        - ${projects.scribe.project_id}
+        - --filter=config.name:discoveryengine.googleapis.com
+        - --format=value(config.name)
+      expect_contains: discoveryengine.googleapis.com
+
+  - id: enable_bernie_vertex_ai
+    executable: gcloud
+    args:
+      - services
+      - enable
+      - aiplatform.googleapis.com
+      - --project
+      - ${projects.bernie.project_id}
+    verify:
+      executable: gcloud
+      args:
+        - services
+        - list
+        - --enabled
+        - --project
+        - ${projects.bernie.project_id}
+        - --filter=config.name:aiplatform.googleapis.com
+        - --format=value(config.name)
+      expect_contains: aiplatform.googleapis.com
+
+  - id: grant_yuri_scribe_impersonation
+    executable: gcloud
+    args:
+      - iam
+      - service-accounts
+      - add-iam-policy-binding
+      - ${projects.scribe.service_account}
+      - --member
+      - user:${context.user_email}
+      - --role
+      - roles/iam.serviceAccountTokenCreator
+      - --project
+      - ${projects.scribe.project_id}
+
+  - id: grant_yuri_bernie_impersonation
+    executable: gcloud
+    args:
+      - iam
+      - service-accounts
+      - add-iam-policy-binding
+      - ${projects.bernie.service_account}
+      - --member
+      - user:${context.user_email}
+      - --role
+      - roles/iam.serviceAccountTokenCreator
+      - --project
+      - ${projects.bernie.project_id}
+
+  - id: verify_scribe_adc_script_shape
+    executable: powershell
+    args:
+      - -NoProfile
+      - -ExecutionPolicy
+      - Bypass
+      - -Command
+      - if (-not (Test-Path 'scripts/use_scribe_adc.ps1')) { exit 1 }; 'scripts/use_scribe_adc.ps1'
+    verify:
+      executable: powershell
+      args:
+        - -NoProfile
+        - -ExecutionPolicy
+        - Bypass
+        - -Command
+        - if (Test-Path 'scripts/use_scribe_adc.ps1') { 'present' } else { exit 1 }
+      expect_contains: present
+
+  - id: verify_bernie_adc_script_shape
+    executable: powershell
+    args:
+      - -NoProfile
+      - -ExecutionPolicy
+      - Bypass
+      - -Command
+      - if (-not (Test-Path 'scripts/use_bernie_adc.ps1')) { exit 1 }; 'scripts/use_bernie_adc.ps1'
+    verify:
+      executable: powershell
+      args:
+        - -NoProfile
+        - -ExecutionPolicy
+        - Bypass
+        - -Command
+        - if (Test-Path 'scripts/use_bernie_adc.ps1') { 'present' } else { exit 1 }
+      expect_contains: present
+

@@ -833,6 +833,13 @@ edit src → `python sync_taskpane.py` → bump `?v=N` in taskpane.html → comm
 `deploy_taskpane.ps1` that does sync + version-bump + commit in one command.
 Not urgent for Phase 2 but worth adding during heavier frontend work.
 
+### Access AI setup paths
+Goal-directed Access AI/GCP setup plans now live under `access_ai/setup_paths/`
+and run through `python -m access_ai.runner.run_setup_path`. The runner is
+dry-run by default; use `--execute` only after reviewing the generated commands.
+The current dev path is `access_ai/setup_paths/dev-yuri-scribe-bernie.yaml`.
+See `docs/access-ai-setup-paths.md`.
+
 ### ✅ New Patient bridge — RESOLVED
 `POST /api/v1/patients/with-file` creates DB row + `.docx` atomically. `document_url`
 is left null at creation and backfilled by `autoDetectPatient()` on first open. See §3 Phase 2.

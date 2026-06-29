@@ -1,0 +1,68 @@
+goal: setup_access_ai_prod_runtime_template
+
+context:
+  environment: prod
+  region: australia-southeast1
+  clinic_slug: replace-me
+
+projects:
+  scribe:
+    project_id: replace-with-prod-scribe-project-id
+    service_account: replace-with-prod-scribe-runtime-sa
+  bernie:
+    project_id: replace-with-prod-bernie-project-id
+    service_account: replace-with-prod-bernie-runtime-sa
+
+runtime:
+  auth_mode: platform_managed_identity
+  json_keys_allowed: false
+  local_adc_allowed: false
+  audit_required: true
+
+capabilities:
+  - clinical.note.extract
+  - clinical.scribe.transcribe
+  - admin.booking.interpret
+  - admin.booking.suggest_slots
+  - admin.booking.prepare_proposal
+
+steps:
+  - id: enable_prod_scribe_vertex_ai
+    executable: gcloud
+    args:
+      - services
+      - enable
+      - aiplatform.googleapis.com
+      - --project
+      - ${projects.scribe.project_id}
+
+  - id: enable_prod_scribe_discovery_engine
+    executable: gcloud
+    args:
+      - services
+      - enable
+      - discoveryengine.googleapis.com
+      - --project
+      - ${projects.scribe.project_id}
+
+  - id: enable_prod_bernie_vertex_ai
+    executable: gcloud
+    args:
+      - services
+      - enable
+      - aiplatform.googleapis.com
+      - --project
+      - ${projects.bernie.project_id}
+
+  - id: verify_no_json_key_runtime_posture
+    executable: python
+    args:
+      - -c
+      - "import os; assert not os.getenv('GOOGLE_APPLICATION_CREDENTIALS'); print('json-key-free')"
+    verify:
+      executable: python
+      args:
+        - -c
+        - "import os; assert not os.getenv('GOOGLE_APPLICATION_CREDENTIALS'); print('json-key-free')"
+      expect_contains: json-key-free
+
