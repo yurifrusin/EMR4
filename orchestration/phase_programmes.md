@@ -89,10 +89,10 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Started |
+| Status | In progress |
 | Outcome | EMR4 has one identity-aware, role-aware, keyless internal API for invoking AI capabilities across clinical copilot, Bernie, and later modalities |
 | Representative Sprints | Access AI architecture record, keyless GCP dev auth runbook, AI capability registry, entitlement model, typed audit event catalog, invocation service, audit/cost envelope, enterprise-auth seam, Bernie/Copilot migrations, caller-context pending booking proposals, multi-provider knowledge-base adapter |
-| Next Candidate Sprints | Push and realign local Access AI batch; then caller-context booking proposal groundwork or multi-provider knowledge-base adapter |
+| Next Candidate Sprints | Caller-context booking proposal groundwork or Wiley/Cochrane licensed knowledge-base integration spike |
 | Done Signals | No frontend or router calls model providers directly; dev uses service-account impersonation rather than JSON keys; every AI call passes through capability policy, product entitlement, provider adapter, and bounded audit metadata; external knowledge bases such as future Wiley/Cochrane integrations route through the same Access AI policy and citation envelope; EMR4's internal org/role/resource model can later map to enterprise SSO/SCIM/FGA without a rewrite |
 | Design Record | `orchestration/access_ai_api_design.md` |
 
@@ -101,9 +101,8 @@ tracks that actual architecture.
 Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
-1. If AI platform safety is the priority: push and realign the local Access AI
-   batch, then choose caller-context booking proposal groundwork or a
-   multi-provider knowledge-base adapter.
+1. If AI platform safety is the priority: choose caller-context booking proposal
+   groundwork or a Wiley/Cochrane licensed knowledge-base integration spike.
 2. If product flow is the priority: continue **Programme 2B** with the active
    Sprint 25 status/waiting-area proposal retrofit, then drag/reschedule design.
 3. If orchestration confidence is the priority: continue **Programme 2C** with a
@@ -111,9 +110,9 @@ the next sprint from the active programme that best advances the phase:
 4. If Bernie is becoming tempting: keep it in **Programme 2D** design/tool-schema
    preparation until Programme 2B's mutation contracts are mature.
 
-The default recommendation after Sprint 76 is **Programme 2F** until keyless GCP
-auth, Access AI capability policy, and invocation audit are stable enough for
-Bernie and Copilot live-provider work.
+The default recommendation after Sprint 91 remains **Programme 2F** until
+caller-context booking proposals and licensed knowledge-base retrieval are safe
+enough to expose through product surfaces.
 
 ## Deployment Readiness Pattern
 

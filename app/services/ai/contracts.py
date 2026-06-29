@@ -20,6 +20,7 @@ class AiCapability(str, Enum):
     CLINICAL_EXTRACTION = "clinical.note.extract"
     AUDIO_SCRIBE = "clinical.scribe.transcribe"
     LETTER_DRAFTING = "clinical.letter.draft"
+    CLINICAL_KNOWLEDGE_QUERY = "clinical.knowledge.query"
     BERNIE_BOOKING_INTERPRET = "admin.booking.interpret"
     BERNIE_BOOKING_SUGGEST_SLOTS = "admin.booking.suggest_slots"
     BERNIE_BOOKING_PREPARE_PROPOSAL = "admin.booking.prepare_proposal"

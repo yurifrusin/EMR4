@@ -155,6 +155,7 @@ Capability names should be stable EMR4 identifiers, not provider model names.
 | `clinical.scribe.transcribe` | audio | EMR4 Copilot |
 | `clinical.note.extract` | text | EMR4 Copilot |
 | `clinical.letter.draft` | text | EMR4 Copilot |
+| `clinical.knowledge.query` | document/retrieval | EMR4 Copilot evidence support |
 | `admin.booking.interpret` | text/tool_intent | Bernie |
 | `admin.booking.suggest_slots` | tool_intent | Bernie |
 | `admin.booking.prepare_proposal` | tool_intent | Bernie |
@@ -554,6 +555,18 @@ confirmation, then collapse the slot back to normal diary rendering.
 Add provider contract support for retrieval-generation capabilities, including
 AWS Bedrock Knowledge Bases or equivalent knowledge-base adapters. Keep this
 behind fake/provider-mocked tests at first.
+
+Implemented groundwork:
+
+- `clinical.knowledge.query` is registered as a retrieval-generation capability.
+- Clinicians can invoke it through the existing `ai.clinical_user` entitlement.
+- `app/services/ai/knowledge_base.py` defines provider-neutral query, answer,
+  citation, adapter, and Access AI service contracts.
+- PHI-bearing queries fail closed before any provider call.
+- Citations are required by default and missing citations produce a provider
+  failure audit envelope.
+- Knowledge-base audit metadata records only safe fields such as knowledge-base
+  id, provider, citation count, citation ids, and transient-storage posture.
 
 ### Sprint 92 - Wiley/Cochrane Knowledge Base Spike
 

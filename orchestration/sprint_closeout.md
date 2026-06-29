@@ -8,6 +8,56 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 91: Multi-Provider Knowledge-Base Adapter Groundwork |
+| Integrated through | Provider-neutral knowledge-base query/citation contracts behind Access AI with fake-provider tests only |
+| Status | Implemented and verified locally; push/mirror/audit pending |
+| Last updated | 2026-06-29 |
+
+## What Changed
+
+- Added `clinical.knowledge.query` to the Access AI capability contract.
+- Registered the capability as retrieval-generation, clinician-facing,
+  non-PHI, metadata-only, and backed by the Copilot dev project namespace.
+- Allowed `ai.clinical_user` actors to invoke knowledge queries while reception
+  roles still fail closed.
+- Added `app/services/ai/knowledge_base.py` with provider-neutral
+  `KnowledgeBaseQuery`, `KnowledgeBaseCitation`, `KnowledgeBaseAnswer`,
+  `KnowledgeBaseAdapter`, and `AccessAiKnowledgeBaseService` contracts.
+- Routed knowledge-base retrieval through `AccessAiService` via a small provider
+  shim, so future AWS/Wiley/Cochrane-style adapters do not bypass product
+  entitlement or invocation audit.
+- Required transient-only retrieved text posture and citations by default.
+- Added PHI refusal before adapter invocation, because this groundwork does not
+  yet include a licensed patient-specific retrieval policy.
+- Added knowledge-query audit events that record safe metadata such as
+  knowledge-base id, adapter provider, citation count, citation ids, and
+  transient-storage posture without storing query text or retrieved passages.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\services\ai\contracts.py app\services\ai\registry.py app\services\ai\entitlements.py app\services\ai\knowledge_base.py` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_ai_knowledge_base_adapter.py tests\test_ai_capability_registry.py tests\test_ai_entitlements.py tests\test_access_ai_service.py tests\test_ai_audit_events.py -q --tb=short` passed: `36 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+
+## Known Follow-Up
+
+- No live AWS, Wiley, Cochrane, Bedrock, Vertex Search, or external licensed
+  provider integration was added in this sprint.
+- Before real licensed content is connected, define licence scope, provider
+  identity, PHI query policy, citation display contract, retention/caching
+  policy, and clinician-facing safety wording.
+- Persisted Access AI audit storage already exists, but no runtime route calls
+  the knowledge-base service yet.
+
+## Recommended Next Direction
+
+Next recommended step: choose between caller-context booking proposal groundwork
+for Bernie, or a Wiley/Cochrane licensed knowledge-base spike that maps the real
+provider contract into this adapter boundary.
+
+## Previous Closeout - Sprints 79-89
+
+| Item | Value |
+|---|---|
 | Batch | Sprints 79-89: Access AI Foundation and AI Route Migration |
 | Integrated through | Bernie booking-instruction, clinical extraction, audio scribe, and letter drafting paths routed through Access AI with persisted metadata audit events |
 | Status | Integrated, verified, pushed, mirrored, and audited |

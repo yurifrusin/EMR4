@@ -47,6 +47,7 @@ _CLINICAL_CAPABILITIES = frozenset(
         AiCapability.CLINICAL_EXTRACTION,
         AiCapability.AUDIO_SCRIBE,
         AiCapability.LETTER_DRAFTING,
+        AiCapability.CLINICAL_KNOWLEDGE_QUERY,
     }
 )
 

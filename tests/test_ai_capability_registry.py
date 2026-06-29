@@ -19,6 +19,7 @@ def test_registry_contains_expected_initial_capabilities():
     assert AiCapability.CLINICAL_EXTRACTION in capabilities
     assert AiCapability.AUDIO_SCRIBE in capabilities
     assert AiCapability.LETTER_DRAFTING in capabilities
+    assert AiCapability.CLINICAL_KNOWLEDGE_QUERY in capabilities
     assert AiCapability.BERNIE_BOOKING_INTERPRET in capabilities
     assert AiCapability.PROVIDER_LIVE_SMOKE in capabilities
 
@@ -43,6 +44,15 @@ def test_prepare_proposal_requires_human_confirmation():
     metadata = get_capability_metadata(AiCapability.BERNIE_BOOKING_PREPARE_PROPOSAL)
     assert metadata.human_confirmation_required is True
     assert metadata.risk_tier is AiRiskTier.HUMAN_CONFIRMED_WRITE
+
+
+def test_clinical_knowledge_query_is_retrieval_generation_and_non_phi():
+    metadata = get_capability_metadata(AiCapability.CLINICAL_KNOWLEDGE_QUERY)
+    assert metadata.phi_allowed is False
+    assert metadata.provider_class is AiProviderClass.RETRIEVAL_GENERATION
+    assert metadata.default_provider == "licensed_clinical_kb"
+    assert metadata.default_project == "emr4-copilot-dev"
+    assert metadata.risk_tier is AiRiskTier.CLINICAL_READ
 
 
 def test_live_smoke_is_dev_only_low_cost_and_non_phi():

@@ -99,6 +99,18 @@ CAPABILITY_REGISTRY: dict[AiCapability, AiCapabilityMetadata] = {
         risk_tier=AiRiskTier.CLINICAL_DRAFT,
         phi_allowed=True,
     ),
+    AiCapability.CLINICAL_KNOWLEDGE_QUERY: _metadata(
+        capability=AiCapability.CLINICAL_KNOWLEDGE_QUERY,
+        modality=AiModality.DOCUMENT,
+        allowed_methods=(AiMethod.INVOKE, AiMethod.DRY_RUN, AiMethod.EVALUATE_FIXTURE),
+        provider_class=AiProviderClass.RETRIEVAL_GENERATION,
+        default_provider="licensed_clinical_kb",
+        default_project="emr4-copilot-dev",
+        default_location="multi-region",
+        model_name=None,
+        risk_tier=AiRiskTier.CLINICAL_READ,
+        phi_allowed=False,
+    ),
     AiCapability.BERNIE_BOOKING_INTERPRET: _metadata(
         capability=AiCapability.BERNIE_BOOKING_INTERPRET,
         modality=AiModality.TOOL_INTENT,

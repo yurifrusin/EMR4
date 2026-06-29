@@ -35,6 +35,11 @@ def test_gp_practice_role_maps_to_clinical_access_only():
         AiCapability.AUDIO_SCRIBE,
         AiMethod.INVOKE,
     )
+    knowledge = decide_ai_entitlement(
+        context,
+        AiCapability.CLINICAL_KNOWLEDGE_QUERY,
+        AiMethod.INVOKE,
+    )
     reception = decide_ai_entitlement(
         context,
         AiCapability.BERNIE_BOOKING_INTERPRET,
@@ -42,6 +47,8 @@ def test_gp_practice_role_maps_to_clinical_access_only():
     )
 
     assert clinical.allowed is True
+    assert knowledge.allowed is True
+    assert knowledge.matched_role == AiAccessRole.CLINICAL_USER
     assert clinical.matched_role == AiAccessRole.CLINICAL_USER
     assert reception.allowed is False
     assert reception.reason == "role_not_allowed"
