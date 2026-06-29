@@ -29,6 +29,7 @@ $Project = "bernie-emr4-dev"
 $Location = "australia-southeast1"
 $ServiceAccount = "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
 $Scope = "https://www.googleapis.com/auth/cloud-platform"
+$DevPracticeId = "d92314e3-aa1d-441e-81a5-f5db5ec22ca0"
 
 function Write-Step([string]$Message) {
     Write-Host "  $Message" -ForegroundColor Cyan
@@ -69,11 +70,14 @@ $env:GCP_LOCATION = $Location
 $env:VERTEX_AI_LOCATION = $Location
 $env:BERNIE_AI_PROJECT = $Project
 $env:BERNIE_AI_LOCATION = $Location
+$env:BERNIE_STAFF_PILOT_ENABLED = "true"
+$env:BERNIE_STAFF_PILOT_PRACTICE_IDS = $DevPracticeId
+Remove-Item Env:BERNIE_STAFF_PILOT_USER_IDS -ErrorAction SilentlyContinue
 $env:BERNIE_BOOKING_INTERPRETER_PROVIDER = "gemini_vertex"
 
 Write-Host ""
 Write-Host "  [OK] Bernie ADC/env selected" -ForegroundColor Green
 Write-Host "       GCP_PROJECT=$env:GCP_PROJECT" -ForegroundColor Gray
+Write-Host "       BERNIE_STAFF_PILOT_ENABLED=$env:BERNIE_STAFF_PILOT_ENABLED" -ForegroundColor Gray
 Write-Host "       BERNIE_BOOKING_INTERPRETER_PROVIDER=$env:BERNIE_BOOKING_INTERPRETER_PROVIDER" -ForegroundColor Gray
 Write-Host "       Service account: $ServiceAccount" -ForegroundColor Gray
-

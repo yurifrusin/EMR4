@@ -278,7 +278,7 @@ backend starts; it is not switched dynamically inside a running backend process.
 |---|---|
 | `.\run_dev.ps1` | Normal local development. Starts the full stack without changing local ADC impersonation. Good for fake-provider or non-AI work. |
 | `.\run_dev.ps1 -LiveAiSurface Taskpane` | Live doctor taskpane / Command Centre testing. Switches ADC and environment to `scribe-emr4-dev`. |
-| `.\run_dev.ps1 -LiveAiSurface Diary` | Live Bernie diary testing. Switches ADC and environment to `bernie-emr4-dev` and enables the live Gemini Vertex interpreter. |
+| `.\run_dev.ps1 -LiveAiSurface Diary` | Live Bernie diary testing. Switches ADC and environment to `bernie-emr4-dev`, enables the Bernie staff pilot gate for the dev practice, and enables the live Gemini Vertex interpreter. |
 | `.\run_dev.ps1 -LiveAiSurface Taskpane -SkipAdcLogin` | Taskpane live AI when ADC is already impersonating the Scribe service account. Avoids opening the browser login flow again. |
 | `.\run_dev.ps1 -LiveAiSurface Diary -SkipAdcLogin` | Bernie live AI when ADC is already impersonating the Bernie service account. Avoids opening the browser login flow again. |
 | `.\run_dev.ps1 -NoNgrok` | Start Docker, backend, and npm dev server only. Useful on a second PC or when another machine owns the reserved ngrok domain. |

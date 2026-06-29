@@ -265,6 +265,10 @@ Diary / Bernie live test:
 .\run_dev.ps1 -LiveAiSurface Diary
 ```
 
+This also enables the Bernie staff pilot gate for the seeded dev practice, so
+the diary should show the Supervised Booking Review entry point when the current
+dev user is signed in.
+
 If you already ran the matching `use_*_adc.ps1` script and do not want a browser
 reauthorization flow:
 

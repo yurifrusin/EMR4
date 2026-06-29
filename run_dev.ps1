@@ -160,6 +160,9 @@ function Get-UvicornEnvCommand([string]$Surface) {
             "`$env:VERTEX_AI_LOCATION='australia-southeast1'; " +
             "Remove-Item Env:BERNIE_AI_PROJECT -ErrorAction SilentlyContinue; " +
             "Remove-Item Env:BERNIE_AI_LOCATION -ErrorAction SilentlyContinue; " +
+            "Remove-Item Env:BERNIE_STAFF_PILOT_ENABLED -ErrorAction SilentlyContinue; " +
+            "Remove-Item Env:BERNIE_STAFF_PILOT_PRACTICE_IDS -ErrorAction SilentlyContinue; " +
+            "Remove-Item Env:BERNIE_STAFF_PILOT_USER_IDS -ErrorAction SilentlyContinue; " +
             "Remove-Item Env:BERNIE_BOOKING_INTERPRETER_PROVIDER -ErrorAction SilentlyContinue; "
     }
     if ($Surface -eq "Diary") {
@@ -170,6 +173,9 @@ function Get-UvicornEnvCommand([string]$Surface) {
             "`$env:VERTEX_AI_LOCATION='australia-southeast1'; " +
             "`$env:BERNIE_AI_PROJECT='bernie-emr4-dev'; " +
             "`$env:BERNIE_AI_LOCATION='australia-southeast1'; " +
+            "`$env:BERNIE_STAFF_PILOT_ENABLED='true'; " +
+            "`$env:BERNIE_STAFF_PILOT_PRACTICE_IDS='d92314e3-aa1d-441e-81a5-f5db5ec22ca0'; " +
+            "Remove-Item Env:BERNIE_STAFF_PILOT_USER_IDS -ErrorAction SilentlyContinue; " +
             "`$env:BERNIE_BOOKING_INTERPRETER_PROVIDER='gemini_vertex'; "
     }
     return $common

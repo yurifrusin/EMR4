@@ -70,6 +70,9 @@ $env:VERTEX_AI_LOCATION = $Location
 
 Remove-Item Env:BERNIE_AI_PROJECT -ErrorAction SilentlyContinue
 Remove-Item Env:BERNIE_AI_LOCATION -ErrorAction SilentlyContinue
+Remove-Item Env:BERNIE_STAFF_PILOT_ENABLED -ErrorAction SilentlyContinue
+Remove-Item Env:BERNIE_STAFF_PILOT_PRACTICE_IDS -ErrorAction SilentlyContinue
+Remove-Item Env:BERNIE_STAFF_PILOT_USER_IDS -ErrorAction SilentlyContinue
 Remove-Item Env:BERNIE_BOOKING_INTERPRETER_PROVIDER -ErrorAction SilentlyContinue
 
 Write-Host ""
@@ -77,4 +80,3 @@ Write-Host "  [OK] Scribe ADC/env selected" -ForegroundColor Green
 Write-Host "       GCP_PROJECT=$env:GCP_PROJECT" -ForegroundColor Gray
 Write-Host "       VERTEX_AI_LOCATION=$env:VERTEX_AI_LOCATION" -ForegroundColor Gray
 Write-Host "       Service account: $ServiceAccount" -ForegroundColor Gray
-
