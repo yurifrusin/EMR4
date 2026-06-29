@@ -295,6 +295,7 @@ async def analyze_consultation(
 @router.post("/scribe-consultation")
 async def scribe_consultation(
     audio_file: UploadFile = File(...),
+    db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     audio_bytes = await audio_file.read()
@@ -335,7 +336,18 @@ Return strict JSON only, no markdown:
 }
 """
     try:
-        ai_result = await _ai_service.scribe_audio(audio_bytes, audio_file.content_type, prompt)
+        ai_result = await _ai_service.scribe_audio(
+            audio_bytes,
+            audio_file.content_type,
+            prompt,
+            actor_context_from_user(
+                current_user,
+                environment=settings.environment.lower(),
+            ),
+        )
+        if ai_result.audit_events:
+            persist_access_ai_audit_events(db, ai_result.audit_events)
+            db.commit()
         result = ai_result.raw
         mbs  = [m.get("item_number") for m in result.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
         dx   = result.get("clinical_diagnoses", [])

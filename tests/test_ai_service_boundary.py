@@ -108,7 +108,8 @@ def test_scribe_audio_returns_aresult():
     assert isinstance(result, AiResult)
     assert result.raw == fixture
     assert isinstance(result.data, AudioScribeData)
-    assert result.audit_events == ()
+    assert result.audit_events[0].event_type == AiAuditEventType.INVOCATION_ALLOWED
+    assert result.audit_events[0].capability == AiCapability.AUDIO_SCRIBE
 
 
 def test_scribe_audio_data_fields():
@@ -138,6 +139,8 @@ def test_draft_letter_returns_aresult():
     assert isinstance(result, AiResult)
     assert result.raw == fixture
     assert isinstance(result.data, LetterDraftingData)
+    assert result.audit_events[0].event_type == AiAuditEventType.INVOCATION_ALLOWED
+    assert result.audit_events[0].capability == AiCapability.LETTER_DRAFTING
 
 
 def test_draft_letter_data_fields():

@@ -8,7 +8,6 @@ time to allow fake providers in tests (no network required).
 asyncio.to_thread wraps every blocking provider call to preserve the
 event-loop-freeze fix established in consultation.py and letters.py.
 """
-import asyncio
 from typing import Optional
 
 from app.services.ai.contracts import (
@@ -66,19 +65,63 @@ class AiService:
         )
 
     async def scribe_audio(
-        self, audio_bytes: bytes, mime_type: str, prompt_text: str
+        self,
+        audio_bytes: bytes,
+        mime_type: str,
+        prompt_text: str,
+        actor_context: AiActorContext | None = None,
     ) -> AiResult:
         contents = {
             "audio_bytes": audio_bytes,
             "mime_type": mime_type,
             "prompt": prompt_text,
         }
-        raw = await asyncio.to_thread(self._provider.generate_json, contents, 0.1)
-        return AiResult(raw=raw, data=AudioScribeData.model_validate(raw))
+        result = await AccessAiService(self._provider).invoke(
+            AccessAiRequest(
+                actor=actor_context or _fallback_clinical_actor_context(),
+                capability=AiCapability.AUDIO_SCRIBE,
+                method=AiMethod.INVOKE,
+                contents=contents,
+                source_surface=AiAuditSourceSurface.COMMAND_CENTRE,
+                temperature=0.1,
+                metadata={"clinical_surface": "scribe_consultation"},
+            )
+        )
+        if not result.allowed or result.raw is None:
+            raise RuntimeError(result.denial_reason or "access_ai_audio_scribe_blocked")
+        return AiResult(
+            raw=result.raw,
+            data=AudioScribeData.model_validate(result.raw),
+            audit_events=result.audit_events,
+            cost_envelope=result.cost_envelope,
+            latency_ms=result.latency_ms,
+        )
 
-    async def draft_letter(self, prompt: str) -> AiResult:
-        raw = await asyncio.to_thread(self._provider.generate_json, prompt, 0.3)
-        return AiResult(raw=raw, data=LetterDraftingData.model_validate(raw))
+    async def draft_letter(
+        self,
+        prompt: str,
+        actor_context: AiActorContext | None = None,
+    ) -> AiResult:
+        result = await AccessAiService(self._provider).invoke(
+            AccessAiRequest(
+                actor=actor_context or _fallback_clinical_actor_context(),
+                capability=AiCapability.LETTER_DRAFTING,
+                method=AiMethod.INVOKE,
+                contents=prompt,
+                source_surface=AiAuditSourceSurface.TASKPANE,
+                temperature=0.3,
+                metadata={"clinical_surface": "draft_letter"},
+            )
+        )
+        if not result.allowed or result.raw is None:
+            raise RuntimeError(result.denial_reason or "access_ai_letter_drafting_blocked")
+        return AiResult(
+            raw=result.raw,
+            data=LetterDraftingData.model_validate(result.raw),
+            audit_events=result.audit_events,
+            cost_envelope=result.cost_envelope,
+            latency_ms=result.latency_ms,
+        )
 
 
 def _fallback_clinical_actor_context() -> AiActorContext:

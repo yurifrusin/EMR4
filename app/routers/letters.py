@@ -7,7 +7,10 @@ from app.models.tenancy import User, Practitioner
 from app.models.patients import Patient
 from app.models.clinical import Encounter, Prescription, ClinicalDiagnosis, Allergy
 from app.schemas.clinical import LetterDraftRequest, LetterDraftResponse
+from app.services.ai.audit_store import persist_access_ai_audit_events
+from app.services.ai.entitlements import actor_context_from_user
 from app.services.ai.service import AiService
+from app.config import settings
 
 router = APIRouter(prefix="/api/v1/patients/{patient_id}/letters", tags=["letters"])
 
@@ -96,7 +99,16 @@ Australian conventions:
 """
 
     try:
-        ai_result = await _ai_service.draft_letter(prompt)
+        ai_result = await _ai_service.draft_letter(
+            prompt,
+            actor_context_from_user(
+                current_user,
+                environment=settings.environment.lower(),
+            ),
+        )
+        if ai_result.audit_events:
+            persist_access_ai_audit_events(db, ai_result.audit_events)
+            db.commit()
         data = ai_result.raw
         return LetterDraftResponse(
             letter_text=data.get("letter_text", ""),
