@@ -38,6 +38,7 @@ from app.services.bernie_booking_interpreter import (
     actor_context_for_interpreter_user,
     get_booking_instruction_interpreter,
 )
+from app.services.ai.audit_store import persist_access_ai_audit_events
 from app.services.bernie_pilot_gate import evaluate_bernie_pilot_eligibility
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
@@ -1106,18 +1107,28 @@ def get_bernie_pilot_eligibility(
 )
 def interpret_bernie_booking_instruction(
     body: BernieBookingInstructionInterpretIn,
+    db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
     """Interpret staff booking text into structured intent without side effects.
 
     The interpreter provider is disabled by default. This endpoint never creates
-    proposals, searches slots, confirms bookings, writes audit rows, or invokes a
-    live model provider in the default/test posture.
+    proposals, searches slots, confirms bookings, or writes appointment audit
+    rows. Live provider mode writes bounded Access AI audit metadata only.
     """
     provider = get_booking_instruction_interpreter(
         settings.bernie_booking_interpreter_provider,
     )
-    return provider.interpret(body, actor_context_for_interpreter_user(current_user))
+    access_ai_audit_events = []
+    result = provider.interpret(
+        body,
+        actor_context_for_interpreter_user(current_user),
+        access_ai_audit_events,
+    )
+    if access_ai_audit_events:
+        persist_access_ai_audit_events(db, access_ai_audit_events)
+        db.commit()
+    return result
 
 
 @router.get("/{appointment_id}", response_model=AppointmentOut)

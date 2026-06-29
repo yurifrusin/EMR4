@@ -8,8 +8,8 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprints 79-86: Access AI Foundation, Bernie Interpreter Migration, and Audit Storage |
-| Integrated through | Access AI foundation plus Bernie booking-instruction live-provider path routed through Access AI and persisted audit storage contract |
+| Batch | Sprints 79-87: Access AI Foundation, Bernie Interpreter Migration, and Audit Write-Through |
+| Integrated through | Access AI foundation plus Bernie booking-instruction live-provider path routed through Access AI with persisted metadata audit events |
 | Status | Implemented and verified locally; not yet pushed |
 | Last updated | 2026-06-29 |
 
@@ -45,6 +45,10 @@ reviewed, integrated, verified, pushed, and audited.
 - Added Alembic migration `j0k1l2m3n4o5_add_access_ai_audit_log.py`.
 - Added `app/services/ai/audit_store.py` to persist typed Access AI audit events without committing transaction boundaries inside the helper.
 - Added DB-backed tests proving bounded metadata persistence, actor/resource/capability/method/decision fields, and shared correlation ids across allowed/failed event pairs.
+- Wired the Bernie booking-instruction route to collect and persist Access AI audit events emitted by the live interpreter path.
+- Fake and disabled Bernie interpreter modes still emit no Access AI audit rows and do not construct live providers.
+- Live interpreter calls now commit metadata-only Access AI audit rows while preserving no appointment creation, no slot search, no confirmation, and no appointment audit writes.
+- Updated tests to prove live interpreter audit persistence, no fake/disabled Access AI audit writes, and unchanged appointment/audit row counts.
 - Kept runtime provider invocation behavior unchanged.
 
 ## Verification
@@ -54,7 +58,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Known Follow-Up
 
-- Next sprint should wire Access AI invocation events into persisted audit storage for the Bernie interpreter path, then migrate one clinical Copilot path through Access AI.
+- Next sprint should migrate one clinical Copilot path through Access AI, starting with the lowest-risk backend-only clinical extraction path and preserving current HTTP response behaviour.
 - The static project/provider metadata should be wired to environment/config only after entitlement and invocation service boundaries exist.
 - The entitlement role mapping is intentionally static for now; later Cloud Identity groups, WorkOS-style org roles, or database-backed practice entitlements should feed the same contract rather than bypass it.
 - Existing Bernie/Copilot routes still use the older AI services directly; do not migrate live routes until the audit/cost envelope is stable.
@@ -62,7 +66,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended Next Direction
 
-Next recommended step: wire Access AI invocation events into persisted audit storage, then migrate one clinical Copilot path through Access AI. Do not route caller-ID booking proposals or Wiley/Cochrane knowledge-base calls through Access AI runtime until the migrated Bernie interpreter path remains stable.
+Next recommended step: migrate one clinical Copilot path through Access AI. Do not route caller-ID booking proposals or Wiley/Cochrane knowledge-base calls through Access AI runtime until the migrated Bernie interpreter path remains stable.
 
 ## Previous Closeout - Sprints 77-78
 

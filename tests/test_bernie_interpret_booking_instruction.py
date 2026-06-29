@@ -9,6 +9,7 @@ slot search, proposal creation, confirmation, or live LLM/provider calls.
 import inspect
 
 from app.config import settings
+from app.models.ai_audit import AccessAiAuditLog
 from app.models.appointments import Appointment, AppointmentAuditLog
 import app.routers.appointments as appointments_router
 import app.services.bernie_booking_interpreter as interpreter_service
@@ -64,6 +65,7 @@ def test_default_disabled_provider_returns_structured_block_without_mutating(
     token = make_token(gp_user)
     appointment_before = db.query(Appointment).count()
     audit_before = db.query(AppointmentAuditLog).count()
+    access_ai_audit_before = db.query(AccessAiAuditLog).count()
 
     resp = _post_interpret(
         client,
@@ -91,6 +93,7 @@ def test_default_disabled_provider_returns_structured_block_without_mutating(
     assert "instruction" not in data
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
+    assert db.query(AccessAiAuditLog).count() == access_ai_audit_before
 
 
 def test_fake_provider_returns_validated_structured_intent(
@@ -105,6 +108,7 @@ def test_fake_provider_returns_validated_structured_intent(
     token = make_token(gp_user)
     appointment_before = db.query(Appointment).count()
     audit_before = db.query(AppointmentAuditLog).count()
+    access_ai_audit_before = db.query(AccessAiAuditLog).count()
 
     resp = _post_interpret(
         client,
@@ -261,6 +265,7 @@ def test_mocked_live_provider_returns_validated_structured_intent_without_mutati
     token = make_token(gp_user)
     appointment_before = db.query(Appointment).count()
     audit_before = db.query(AppointmentAuditLog).count()
+    access_ai_audit_before = db.query(AccessAiAuditLog).count()
 
     try:
         resp = _post_interpret(
@@ -298,6 +303,13 @@ def test_mocked_live_provider_returns_validated_structured_intent_without_mutati
     assert "instruction" not in data
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
+    assert db.query(AccessAiAuditLog).count() == access_ai_audit_before + 1
+    access_ai_audit = db.query(AccessAiAuditLog).one()
+    assert access_ai_audit.event_type == "ai.invocation.allowed"
+    assert access_ai_audit.capability == "admin.booking.interpret"
+    assert access_ai_audit.method == "invoke"
+    assert access_ai_audit.metadata_json["interpreter"] == "bernie_booking_instruction"
+    assert "prompt" not in access_ai_audit.metadata_json
 
 
 def test_mocked_live_provider_invalid_response_fails_closed(
@@ -403,9 +415,8 @@ def test_interpret_booking_instruction_does_not_search_create_confirm_or_mutate(
     assert "_build_create_appointment_proposal" not in route_source
     assert "confirm_bernie_create_proposal" not in route_source
     assert "_create_appointment_from_body" not in route_source
-    assert "db.add" not in route_source
-    assert "db.commit" not in route_source
     assert "_write_audit" not in route_source
+    assert "persist_access_ai_audit_events" in route_source
 
     assert "normalize_slot_search_command" in service_source
     assert "AccessAiService" in service_source

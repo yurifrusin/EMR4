@@ -23,7 +23,7 @@ from app.schemas.appointments import (
 )
 from app.models.tenancy import User
 from app.services.ai.access_service import AccessAiRequest, AccessAiService
-from app.services.ai.audit_events import AiAuditSourceSurface
+from app.services.ai.audit_events import AccessAiAuditEvent, AiAuditSourceSurface
 from app.services.ai.contracts import AiCapability, AiMethod, AiProvider
 from app.services.ai.entitlements import AiAccessRole, AiActorContext, actor_context_from_user
 from app.services.ai.service import _get_default_provider
@@ -55,6 +55,7 @@ class BookingInstructionInterpreter(Protocol):
         self,
         body: BernieBookingInstructionInterpretIn,
         actor_context: AiActorContext | None = None,
+        audit_events: list[AccessAiAuditEvent] | None = None,
     ) -> BernieBookingInstructionInterpretOut:
         pass
 
@@ -116,8 +117,9 @@ class DisabledBookingInstructionInterpreter:
         self,
         body: BernieBookingInstructionInterpretIn,
         actor_context: AiActorContext | None = None,
+        audit_events: list[AccessAiAuditEvent] | None = None,
     ) -> BernieBookingInstructionInterpretOut:
-        _ = body, actor_context
+        _ = body, actor_context, audit_events
         return _disabled_response()
 
 
@@ -132,8 +134,9 @@ class FakeBookingInstructionInterpreter:
         self,
         body: BernieBookingInstructionInterpretIn,
         actor_context: AiActorContext | None = None,
+        audit_events: list[AccessAiAuditEvent] | None = None,
     ) -> BernieBookingInstructionInterpretOut:
-        _ = actor_context
+        _ = actor_context, audit_events
         command = _extract_fake_command(body.instruction)
         safety_flags = _safety_flags(body.instruction)
         missing_fields = _missing_fields(command)
@@ -276,9 +279,10 @@ class GeminiVertexBookingInstructionInterpreter:
         self,
         body: BernieBookingInstructionInterpretIn,
         actor_context: AiActorContext | None = None,
+        audit_events: list[AccessAiAuditEvent] | None = None,
     ) -> BernieBookingInstructionInterpretOut:
         try:
-            raw = self._generate(body, actor_context)
+            raw = self._generate(body, actor_context, audit_events)
         except Exception:
             return _live_blocked_response(
                 "booking_interpreter_provider_unavailable",
@@ -371,6 +375,7 @@ class GeminiVertexBookingInstructionInterpreter:
         self,
         body: BernieBookingInstructionInterpretIn,
         actor_context: AiActorContext | None,
+        audit_events: list[AccessAiAuditEvent] | None,
     ) -> dict:
         provider_factory = self._provider_factory or _live_provider_factory
         provider = provider_factory() if provider_factory is not None else None
@@ -390,6 +395,8 @@ class GeminiVertexBookingInstructionInterpreter:
                 )
             )
         )
+        if audit_events is not None:
+            audit_events.extend(result.audit_events)
         if not result.allowed or result.raw is None:
             raise RuntimeError(result.denial_reason or "access_ai_interpreter_blocked")
         return result.raw
