@@ -195,9 +195,9 @@ Initial EMR4 roles for AI access:
 |---|---|
 | `ai.platform_admin` | Configure providers, projects, capabilities, and policy |
 | `ai.dev_operator` | Run dev live smokes and diagnostics in dev projects |
-| `ai.clinical_scribe_user` | Use clinical scribe/copilot capabilities |
-| `ai.reception_copilot_user` | Use Bernie read-only/proposal capabilities |
-| `ai.reception_copilot_supervisor` | Approve higher-risk Bernie proposals |
+| `ai.clinical_user` | Use clinical scribe/copilot capabilities |
+| `ai.reception_user` | Use Bernie read-only/proposal capabilities |
+| `ai.reception_supervisor` | Approve higher-risk Bernie proposals |
 | `ai.audit_reviewer` | Review AI invocation metadata and safety decisions |
 | `ai.disabled` | Explicit deny; overrides grants |
 
@@ -239,6 +239,20 @@ Resource-scoped authorization should answer questions like:
 Do not let an AI agent inherit the full authority of the signed-in human. Access
 AI should mint a narrower action context: user + product surface + capability +
 method + resource scope + risk tier.
+
+Initial external identity seam:
+
+- `access-ai-clinical@littlestardigital.com` -> `ai.clinical_user`
+- `access-ai-reception@littlestardigital.com` -> `ai.reception_user`
+- `access-ai-reception-supervisors@littlestardigital.com` -> `ai.reception_supervisor`
+- `access-ai-dev-operators@littlestardigital.com` -> `ai.dev_operator`
+- `access-ai-platform-admins@littlestardigital.com` -> `ai.platform_admin`
+- `access-ai-disabled@littlestardigital.com` -> `ai.disabled`
+
+WorkOS-style org roles can feed the same role vocabulary with names such as
+`access_ai:clinical` and `access_ai:reception`. Unknown external groups grant no
+Access AI role. External identity must never call providers directly or bypass
+EMR4's entitlement decision.
 
 ## Capability Policy Fields
 

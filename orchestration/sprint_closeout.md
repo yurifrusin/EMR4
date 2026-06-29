@@ -8,8 +8,8 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprints 79-83: Access AI Policy, Audit Contracts, Invocation Service, and Cost Envelope |
-| Integrated through | Static Access AI capability registry, fail-closed entitlement decisions, typed PHI-averse audit event contracts, fake-provider invocation service, and bounded cost/latency metadata |
+| Batch | Sprints 79-84: Access AI Foundation and Enterprise-Auth Seam |
+| Integrated through | Static Access AI capability registry, fail-closed entitlement decisions, typed PHI-averse audit event contracts, fake-provider invocation service, bounded cost/latency metadata, and external identity role mapping |
 | Status | Implemented and verified locally; not yet pushed |
 | Last updated | 2026-06-29 |
 
@@ -34,16 +34,19 @@ reviewed, integrated, verified, pushed, and audited.
 - Access AI invocation results now carry `cost_envelope` and `latency_ms`.
 - Invocation audit metadata now includes provider/project/location/model, request units, response units, estimated cost, optional max-estimated-cost, and latency.
 - Added tests proving numeric-only cost metadata, zero-cost local deterministic provider estimates, success/failure/blocked envelope behaviour, shared failure correlation ids, and no provider call when audit metadata is unsafe.
+- Added `app/services/ai/external_identity.py`, a small seam mapping external Cloud Identity/WorkOS-style groups into EMR4-owned Access AI roles.
+- Updated the Access AI design record to use the implemented role names and document initial Little Star Digital group names.
+- Added tests proving Cloud Identity group mapping, unknown-group fail-closed behaviour, WorkOS-style role mapping into the same entitlement contract, and disabled-group override.
 - Kept runtime provider invocation behavior unchanged.
 
 ## Verification
 
-- `.venv\Scripts\python.exe -m py_compile app\services\ai\contracts.py app\services\ai\registry.py app\services\ai\entitlements.py app\services\ai\audit_events.py app\services\ai\access_service.py app\services\ai\costing.py` passed.
-- `.venv\Scripts\python.exe -m pytest tests\test_ai_costing.py tests\test_access_ai_service.py tests\test_ai_audit_events.py tests\test_ai_capability_registry.py tests\test_ai_entitlements.py tests\test_ai_service_boundary.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed: `57 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe -m py_compile app\services\ai\contracts.py app\services\ai\registry.py app\services\ai\entitlements.py app\services\ai\audit_events.py app\services\ai\access_service.py app\services\ai\costing.py app\services\ai\external_identity.py` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_ai_external_identity.py tests\test_ai_costing.py tests\test_access_ai_service.py tests\test_ai_audit_events.py tests\test_ai_capability_registry.py tests\test_ai_entitlements.py tests\test_ai_service_boundary.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed: `61 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
 
 ## Known Follow-Up
 
-- Sprint 84 should document and lightly codify the enterprise-auth seam: how Cloud Identity groups, WorkOS-style org roles, or future FGA providers map into the Access AI role vocabulary without bypassing EMR4 policy.
+- Next sprint should migrate the lowest-risk live AI surface first: Bernie booking-instruction interpretation through Access AI, preserving fake-provider defaults, dev-only live guards, no appointment writes, and existing tests.
 - The static project/provider metadata should be wired to environment/config only after entitlement and invocation service boundaries exist.
 - The entitlement role mapping is intentionally static for now; later Cloud Identity groups, WorkOS-style org roles, or database-backed practice entitlements should feed the same contract rather than bypass it.
 - Existing Bernie/Copilot routes still use the older AI services directly; do not migrate live routes until the audit/cost envelope is stable.
@@ -51,7 +54,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended Next Direction
 
-Next recommended step: Sprint 84 enterprise-auth seam design, then a narrow Bernie interpreter migration through Access AI. Do not route Copilot, caller-ID booking proposals, or Wiley/Cochrane knowledge-base calls through Access AI runtime until one low-risk live surface has been migrated and verified.
+Next recommended step: a narrow Bernie interpreter migration through Access AI. Do not route Copilot, caller-ID booking proposals, or Wiley/Cochrane knowledge-base calls through Access AI runtime until one low-risk live surface has been migrated and verified.
 
 ## Previous Closeout - Sprints 77-78
 
