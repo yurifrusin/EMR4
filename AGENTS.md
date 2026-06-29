@@ -815,6 +815,11 @@ clean child order; new injections should do the same.
 `.\run_dev.ps1` brings up the full local stack (Postgres + uvicorn + ngrok on the
 reserved domain + npm dev-server) with pre-flight checks, readiness waits, and
 idempotent re-run. `start_emr.bat` is a double-click shim. Use `-Down` to stop.
+For live AI testing, use `-LiveAiSurface Taskpane` for the Scribe/Copilot GCP
+project or `-LiveAiSurface Diary` for the Bernie GCP project; add
+`-SkipAdcLogin` only when local ADC is already impersonating the correct service
+account. The full switch reference lives in
+`docs/emr4-development-environment-dummys-guide.md`.
 
 **⚠️ Cross-file invariant:** `$NgrokDomain` in `run_dev.ps1` must match `NGROK_URL`
 in `sync_taskpane.py`. The reserved domain is `property-cinch-backfield.ngrok-free.dev`;

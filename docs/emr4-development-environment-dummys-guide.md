@@ -269,6 +269,31 @@ Centre. For Bernie diary testing:
 
 uses the Bernie dev project and enables the live Bernie interpreter provider.
 
+### `run_dev.ps1` Switch Reference
+
+Use one command per dev session. The live AI surface is selected when the
+backend starts; it is not switched dynamically inside a running backend process.
+
+| Command | Use this when |
+|---|---|
+| `.\run_dev.ps1` | Normal local development. Starts the full stack without changing local ADC impersonation. Good for fake-provider or non-AI work. |
+| `.\run_dev.ps1 -LiveAiSurface Taskpane` | Live doctor taskpane / Command Centre testing. Switches ADC and environment to `scribe-emr4-dev`. |
+| `.\run_dev.ps1 -LiveAiSurface Diary` | Live Bernie diary testing. Switches ADC and environment to `bernie-emr4-dev` and enables the live Gemini Vertex interpreter. |
+| `.\run_dev.ps1 -LiveAiSurface Taskpane -SkipAdcLogin` | Taskpane live AI when ADC is already impersonating the Scribe service account. Avoids opening the browser login flow again. |
+| `.\run_dev.ps1 -LiveAiSurface Diary -SkipAdcLogin` | Bernie live AI when ADC is already impersonating the Bernie service account. Avoids opening the browser login flow again. |
+| `.\run_dev.ps1 -NoNgrok` | Start Docker, backend, and npm dev server only. Useful on a second PC or when another machine owns the reserved ngrok domain. |
+| `.\run_dev.ps1 -NoDevServer` | Start Docker, backend, and ngrok only. Useful when the npm static server is already running or not needed. |
+| `.\run_dev.ps1 -NoNgrok -NoDevServer` | Backend-only local work with Docker Postgres. |
+| `.\run_dev.ps1 -Down` | Stop the local dev stack. |
+
+In PowerShell, environment variables use `$env:NAME = "value"`. Do not run
+Linux/macOS style assignments such as `GOOGLE_CLOUD_PROJECT=scribe-emr4-dev`;
+PowerShell treats that as a command name and fails.
+
+Production should not run these local ADC helper scripts. Production deployment
+should use the same application code with environment-specific project IDs and
+platform-managed service identities.
+
 This script starts:
 
 - Docker Postgres container: `gp-pms-postgres`
