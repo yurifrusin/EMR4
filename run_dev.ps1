@@ -84,6 +84,52 @@ function Get-PidOnPort([int]$Port) {
     return $null
 }
 
+function Stop-ProcessTree([int]$ProcessId) {
+    $children = Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
+        Where-Object { $_.ParentProcessId -eq $ProcessId }
+    foreach ($child in $children) {
+        Stop-ProcessTree ([int]$child.ProcessId)
+    }
+
+    try {
+        Stop-Process -Id $ProcessId -Force -ErrorAction Stop
+        return $true
+    } catch {
+        return $false
+    }
+}
+
+function Stop-BackendProcesses() {
+    $stopped = New-Object System.Collections.Generic.HashSet[int]
+
+    $pidOnPort = Get-PidOnPort $BackendPort
+    if ($pidOnPort) {
+        if (Stop-ProcessTree ([int]$pidOnPort)) {
+            [void]$stopped.Add([int]$pidOnPort)
+        }
+    }
+
+    $uvicornProcesses = Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
+        Where-Object {
+            $_.CommandLine -and
+            $_.CommandLine -match "uvicorn" -and
+            $_.CommandLine -match "app\.main:app" -and
+            $_.CommandLine -match "--port $BackendPort"
+        }
+
+    foreach ($process in $uvicornProcesses) {
+        $pid = [int]$process.ProcessId
+        if (-not $stopped.Contains($pid)) {
+            if (Stop-ProcessTree $pid) {
+                [void]$stopped.Add($pid)
+            }
+        }
+    }
+
+    Start-Sleep -Seconds 1
+    return $stopped.Count
+}
+
 function Wait-ForPort([int]$Port, [int]$TimeoutSec = 30) {
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     while ($sw.Elapsed.TotalSeconds -lt $TimeoutSec) {
@@ -190,11 +236,15 @@ if ($Down) {
     Write-Host "  EMR4 -- Stopping dev services" -ForegroundColor DarkCyan
     Write-Host "  --------------------------------" -ForegroundColor DarkCyan
 
-    # uvicorn on port 8001
-    $pid8001 = Get-PidOnPort $BackendPort
-    if ($pid8001) {
-        try { Stop-Process -Id $pid8001 -Force -ErrorAction Stop; Write-Ok "uvicorn (PID $pid8001) stopped" }
-        catch { Write-Warn "Could not stop PID $pid8001 on :$BackendPort -- $($_.Exception.Message)" }
+    # uvicorn on port 8001. Reload mode can leave child processes behind, so
+    # stop both the port owner and matching uvicorn process trees.
+    $backendStopped = Stop-BackendProcesses
+    if ($backendStopped -gt 0) {
+        if (Test-PortListening $BackendPort) {
+            Write-Warn "uvicorn stop attempted ($backendStopped process(es)), but :$BackendPort is still listening"
+        } else {
+            Write-Ok "uvicorn stopped ($backendStopped process tree root(s))"
+        }
     } else {
         Write-Ok "uvicorn -- not running"
     }
