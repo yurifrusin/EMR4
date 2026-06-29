@@ -61,11 +61,22 @@ class AiProviderClass(str, Enum):
 
 
 class AiResult:
-    __slots__ = ("raw", "data")
+    __slots__ = ("raw", "data", "audit_events", "cost_envelope", "latency_ms")
 
-    def __init__(self, raw: dict, data: Any) -> None:
+    def __init__(
+        self,
+        raw: dict,
+        data: Any,
+        *,
+        audit_events: tuple = (),
+        cost_envelope: Any = None,
+        latency_ms: int | None = None,
+    ) -> None:
         self.raw = raw
         self.data = data
+        self.audit_events = audit_events
+        self.cost_envelope = cost_envelope
+        self.latency_ms = latency_ms
 
 
 class ClinicalExtractionData(BaseModel):

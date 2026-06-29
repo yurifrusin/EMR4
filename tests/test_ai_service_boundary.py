@@ -17,10 +17,13 @@ import pathlib
 from app.services.ai.contracts import (
     AiProvider,
     AiResult,
+    AiCapability,
     AudioScribeData,
     ClinicalExtractionData,
     LetterDraftingData,
 )
+from app.services.ai.audit_events import AiAuditEventType
+from app.services.ai.entitlements import AiActorContext
 from app.services.ai.service import AiService
 
 FIXTURES = (
@@ -56,6 +59,9 @@ def test_analyze_consultation_returns_aresult():
     assert isinstance(result, AiResult)
     assert result.raw == fixture
     assert isinstance(result.data, ClinicalExtractionData)
+    assert result.audit_events[0].event_type == AiAuditEventType.INVOCATION_ALLOWED
+    assert result.audit_events[0].capability == AiCapability.CLINICAL_EXTRACTION
+    assert result.cost_envelope is not None
 
 
 def test_analyze_consultation_data_fields():
@@ -72,6 +78,25 @@ def test_analyze_consultation_temperature():
     assert provider.last_temperature == 0.1
 
 
+def test_analyze_consultation_denied_actor_fails_before_provider_call():
+    provider = FakeProvider({})
+    denied_actor = AiActorContext(
+        user_id=None,
+        practice_id=None,
+        roles=(),
+        environment="dev",
+    )
+
+    try:
+        asyncio.run(AiService(provider).analyze_consultation_text("x", denied_actor))
+    except RuntimeError as exc:
+        assert "role_not_allowed" in str(exc)
+    else:
+        raise AssertionError("Access AI denial should raise")
+
+    assert provider.last_contents is None
+
+
 # ── audio scribe ─────────────────────────────────────────────────────────────
 
 def test_scribe_audio_returns_aresult():
@@ -83,6 +108,7 @@ def test_scribe_audio_returns_aresult():
     assert isinstance(result, AiResult)
     assert result.raw == fixture
     assert isinstance(result.data, AudioScribeData)
+    assert result.audit_events == ()
 
 
 def test_scribe_audio_data_fields():

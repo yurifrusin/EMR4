@@ -15,7 +15,8 @@ from app.models.tenancy import User
 from app.models.clinical import Encounter, EncounterStatus, ClinicalDiagnosis, Prescription
 from app.models.billing import MbsClaim, MbsDirectory, ClaimStatus
 from app.services.ai.service import AiService
-from app.services.ai.contracts import AiCapability
+from app.services.ai.audit_store import persist_access_ai_audit_events
+from app.services.ai.entitlements import actor_context_from_user
 import datetime
 
 router = APIRouter(prefix="/api/v1", tags=["consultation"])
@@ -246,7 +247,16 @@ async def analyze_consultation(
 
     extracted = {"encounter_metadata": {}, "clinical_diagnoses": [], "medications_and_prescriptions": []}
     try:
-        ai_result = await _ai_service.analyze_consultation_text(prompt)
+        ai_result = await _ai_service.analyze_consultation_text(
+            prompt,
+            actor_context_from_user(
+                current_user,
+                environment=settings.environment.lower(),
+            ),
+        )
+        if ai_result.audit_events:
+            persist_access_ai_audit_events(db, ai_result.audit_events)
+            db.commit()
         extracted = ai_result.raw
         mbs  = [m.get("item_number") for m in extracted.get("encounter_metadata", {}).get("mbs_item_candidates", [])]
         dx   = extracted.get("clinical_diagnoses", [])
