@@ -12,6 +12,8 @@ from app.config import settings
 from app.models.appointments import Appointment, AppointmentAuditLog
 import app.routers.appointments as appointments_router
 import app.services.bernie_booking_interpreter as interpreter_service
+from app.services.ai.entitlements import AiActorContext
+from app.services.bernie_booking_interpreter import GeminiVertexBookingInstructionInterpreter
 from tests.conftest import make_token
 
 
@@ -362,11 +364,41 @@ def test_mocked_live_provider_autonomous_booking_language_is_blocked(
     assert data["normalization"]["safe"] is True
 
 
+def test_live_interpreter_access_ai_denial_fails_closed_before_provider_call(monkeypatch):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_live_temperature", 0.0)
+    provider = MockLiveProvider({
+        "command_candidate": {
+            "date_from": "today",
+        },
+    })
+    interpreter = GeminiVertexBookingInstructionInterpreter(lambda: provider)
+    denied_actor = AiActorContext(
+        user_id=None,
+        practice_id=None,
+        roles=(),
+        environment="dev",
+    )
+
+    result = interpreter.interpret(
+        interpreter_service.BernieBookingInstructionInterpretIn(
+            instruction="Please find a booking today",
+            reference_date=REFERENCE_DATE,
+        ),
+        denied_actor,
+    )
+
+    assert result.safe is False
+    assert result.result == "blocked"
+    assert result.blocks[0].code == "booking_interpreter_provider_unavailable"
+    assert provider.calls == []
+
+
 def test_interpret_booking_instruction_does_not_search_create_confirm_or_mutate():
     route_source = inspect.getsource(appointments_router.interpret_bernie_booking_instruction)
     service_source = inspect.getsource(interpreter_service)
 
     assert "get_booking_instruction_interpreter" in route_source
+    assert "actor_context_for_interpreter_user" in route_source
     assert "_build_slot_search_proposal" not in route_source
     assert "_build_create_appointment_proposal" not in route_source
     assert "confirm_bernie_create_proposal" not in route_source
@@ -376,6 +408,7 @@ def test_interpret_booking_instruction_does_not_search_create_confirm_or_mutate(
     assert "_write_audit" not in route_source
 
     assert "normalize_slot_search_command" in service_source
+    assert "AccessAiService" in service_source
     assert "_build_slot_search_proposal" not in service_source
     assert "_build_create_appointment_proposal" not in service_source
     assert "confirm_bernie_create_proposal" not in service_source

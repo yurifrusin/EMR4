@@ -8,6 +8,7 @@ AI provider only when explicitly configured; disabled/fake paths remain local.
 from __future__ import annotations
 
 import re
+import asyncio
 from typing import Any, Callable, Protocol
 
 from pydantic import ValidationError
@@ -20,7 +21,11 @@ from app.schemas.appointments import (
     BernieBookingInterpreterMetadata,
     SlotSearchCommandIn,
 )
-from app.services.ai.contracts import AiProvider
+from app.models.tenancy import User
+from app.services.ai.access_service import AccessAiRequest, AccessAiService
+from app.services.ai.audit_events import AiAuditSourceSurface
+from app.services.ai.contracts import AiCapability, AiMethod, AiProvider
+from app.services.ai.entitlements import AiAccessRole, AiActorContext, actor_context_from_user
 from app.services.ai.service import _get_default_provider
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
@@ -49,6 +54,7 @@ class BookingInstructionInterpreter(Protocol):
     def interpret(
         self,
         body: BernieBookingInstructionInterpretIn,
+        actor_context: AiActorContext | None = None,
     ) -> BernieBookingInstructionInterpretOut:
         pass
 
@@ -61,6 +67,14 @@ def set_live_provider_factory(factory: LiveProviderFactory | None) -> None:
     """Inject a live-provider factory for tests without touching cloud clients."""
     global _live_provider_factory
     _live_provider_factory = factory
+
+
+def actor_context_for_interpreter_user(user: User) -> AiActorContext:
+    return actor_context_from_user(
+        user,
+        extra_roles=(AiAccessRole.RECEPTION_USER,),
+        environment=settings.environment.lower(),
+    )
 
 
 def _disabled_response() -> BernieBookingInstructionInterpretOut:
@@ -101,8 +115,9 @@ class DisabledBookingInstructionInterpreter:
     def interpret(
         self,
         body: BernieBookingInstructionInterpretIn,
+        actor_context: AiActorContext | None = None,
     ) -> BernieBookingInstructionInterpretOut:
-        _ = body
+        _ = body, actor_context
         return _disabled_response()
 
 
@@ -116,7 +131,9 @@ class FakeBookingInstructionInterpreter:
     def interpret(
         self,
         body: BernieBookingInstructionInterpretIn,
+        actor_context: AiActorContext | None = None,
     ) -> BernieBookingInstructionInterpretOut:
+        _ = actor_context
         command = _extract_fake_command(body.instruction)
         safety_flags = _safety_flags(body.instruction)
         missing_fields = _missing_fields(command)
@@ -258,9 +275,10 @@ class GeminiVertexBookingInstructionInterpreter:
     def interpret(
         self,
         body: BernieBookingInstructionInterpretIn,
+        actor_context: AiActorContext | None = None,
     ) -> BernieBookingInstructionInterpretOut:
         try:
-            raw = self._generate(body)
+            raw = self._generate(body, actor_context)
         except Exception:
             return _live_blocked_response(
                 "booking_interpreter_provider_unavailable",
@@ -349,15 +367,32 @@ class GeminiVertexBookingInstructionInterpreter:
             provider_metadata=self.metadata,
         )
 
-    def _generate(self, body: BernieBookingInstructionInterpretIn) -> dict:
+    def _generate(
+        self,
+        body: BernieBookingInstructionInterpretIn,
+        actor_context: AiActorContext | None,
+    ) -> dict:
         provider_factory = self._provider_factory or _live_provider_factory
         provider = provider_factory() if provider_factory is not None else None
         if provider is None:
             provider = _get_default_provider()
-        return provider.generate_json(
-            _build_live_provider_prompt(body),
-            settings.bernie_booking_interpreter_live_temperature,
+        access_ai = AccessAiService(provider)
+        result = _run_access_ai_invocation(
+            access_ai.invoke(
+                AccessAiRequest(
+                    actor=actor_context or _fallback_interpreter_actor_context(),
+                    capability=AiCapability.BERNIE_BOOKING_INTERPRET,
+                    method=AiMethod.INVOKE,
+                    contents=_build_live_provider_prompt(body),
+                    source_surface=AiAuditSourceSurface.DIARY,
+                    temperature=settings.bernie_booking_interpreter_live_temperature,
+                    metadata={"interpreter": "bernie_booking_instruction"},
+                )
+            )
         )
+        if not result.allowed or result.raw is None:
+            raise RuntimeError(result.denial_reason or "access_ai_interpreter_blocked")
+        return result.raw
 
 
 def _live_blocked_response(code: str, message: str) -> BernieBookingInstructionInterpretOut:
@@ -373,6 +408,23 @@ def _live_blocked_response(code: str, message: str) -> BernieBookingInstructionI
         blocks=[_issue(code, "blocked", message)],
         provider_metadata=GeminiVertexBookingInstructionInterpreter.metadata,
     )
+
+
+def _fallback_interpreter_actor_context() -> AiActorContext:
+    return AiActorContext(
+        user_id=None,
+        practice_id=None,
+        roles=("ai.reception_user",),
+        environment=settings.environment.lower(),
+    )
+
+
+def _run_access_ai_invocation(coro):
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return asyncio.run(coro)
+    raise RuntimeError("bernie_interpreter_requires_sync_context")
 
 
 def _build_live_provider_prompt(

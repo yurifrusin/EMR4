@@ -34,7 +34,10 @@ from app.schemas.appointments import (
     BernieCreateProposalConfirmationIn, BerniePilotEligibilityOut,
     BernieBookingInstructionInterpretIn, BernieBookingInstructionInterpretOut,
 )
-from app.services.bernie_booking_interpreter import get_booking_instruction_interpreter
+from app.services.bernie_booking_interpreter import (
+    actor_context_for_interpreter_user,
+    get_booking_instruction_interpreter,
+)
 from app.services.bernie_pilot_gate import evaluate_bernie_pilot_eligibility
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
@@ -1111,11 +1114,10 @@ def interpret_bernie_booking_instruction(
     proposals, searches slots, confirms bookings, writes audit rows, or invokes a
     live model provider in the default/test posture.
     """
-    _ = current_user
     provider = get_booking_instruction_interpreter(
         settings.bernie_booking_interpreter_provider,
     )
-    return provider.interpret(body)
+    return provider.interpret(body, actor_context_for_interpreter_user(current_user))
 
 
 @router.get("/{appointment_id}", response_model=AppointmentOut)
