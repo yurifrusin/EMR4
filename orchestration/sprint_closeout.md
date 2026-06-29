@@ -8,6 +8,46 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprints 77-78: Access AI API Architecture and Keyless GCP Dev Auth |
+| Integrated through | Programme 2F design record, keyless GCP AI setup runbook, and removal of default JSON-key guidance |
+| Status | Drafted and verified locally; not yet pushed |
+| Last updated | 2026-06-29 |
+
+## What Changed
+
+- Added `orchestration/access_ai_api_design.md` for Programme 2F.
+- Defined Access AI as the internal role/identity/capability gate for AI modalities, with LLMs treated as one substrate behind EMR4-owned contracts.
+- Added `docs/gcp-keyless-ai-setup.md` covering Little Star Digital Cloud Identity, dev project layout, service-account impersonation, ADC quota project setup, smoke order, and JSON-key retirement.
+- Added Bernie caller-ID context and pending booking proposal workflow to the Access AI design.
+- Added multi-provider retrieval/knowledge-base posture for future Wiley/Cochrane-style AWS integrations.
+- Updated dev/new-PC docs away from `GOOGLE_APPLICATION_CREDENTIALS=gcp-key.json`.
+- Changed the default `google_application_credentials` setting to `None` so normal local dev follows ADC/keyless auth unless explicitly overridden.
+- Updated the phase programme map with Programme 2F and its sprint roadmap.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\config.py app\services\ai\contracts.py app\services\bernie_booking_interpreter.py scripts\drive_agent_headless.py` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_ai_service_boundary.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed: `25 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `git diff --check` passed.
+- Stale credential scan found no active setup docs still instructing normal local dev to use `GOOGLE_APPLICATION_CREDENTIALS=gcp-key.json`; remaining mentions are historical, retirement, or "do not commit" references.
+
+## Known Follow-Up
+
+- Configure actual Little Star Digital dev projects and service accounts in GCP: `emr4-copilot-dev` and `emr4-bernie-dev`.
+- Replace any remaining legacy local `.env` values that point to old projects or JSON key paths.
+- Decide whether `emr4-copilot-dev` and `emr4-bernie-dev` need separate billing/quota handling immediately or can share the current billing account while trust history builds.
+- Future phone-system integration should feed caller context as candidate identity evidence, not verified identity.
+- Future Wiley/Cochrane knowledge-base integration should be treated as licensed clinical decision support with citations and separate retrieval/provider policy, not as a generic chat model.
+- GitHub still reports the known moderate Dependabot alert on push; Sprint 71 triaged it as not product-runtime-actionable.
+
+## Recommended Next Direction
+
+Next recommended step: Sprint 79 AI capability registry, followed by Sprint 80 entitlement model. Do not route Bernie, Copilot, caller-ID booking proposals, or Wiley/Cochrane knowledge-base calls through the new Access AI concept until capability policy and keyless dev auth are stable.
+
+## Previous Closeout - Sprint 76
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 76: Bernie Interpreter Smoke Tooling |
 | Integrated through | Repeatable fake/live booking-instruction interpreter smoke command with explicit live-provider guard |
 | Status | Integrated and verified locally; push/audit pending |

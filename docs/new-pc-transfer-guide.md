@@ -94,7 +94,6 @@ Do not copy `node_modules` from the old PC.
 Copy these only through a secure channel, not through Git:
 
 - `.env`
-- Google service-account JSON files, if used
 - ngrok auth/config
 - Pushover notification environment values
 - GitHub CLI authentication
@@ -120,26 +119,27 @@ gcloud config set project YOUR_GCP_PROJECT_ID
 gcloud auth application-default print-access-token
 ```
 
-If EMR4 uses a service-account JSON key through `GOOGLE_APPLICATION_CREDENTIALS`,
-you usually do not need browser reauthorisation for that service account. You do
-need to ensure the key file exists on the new PC, the `.env` path points to it,
-and the service account still has the required IAM permissions.
+EMR4 AI development now prefers keyless Google Cloud authentication. Do not copy
+service-account JSON keys to a new PC for normal development.
 
-Example local environment setting:
-
-```powershell
-$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\YuriFrusin\Documents\secrets\emr4-bernie-dev.json"
-```
-
-If the project uses `.env`, set the equivalent path there:
+Use the runbook:
 
 ```text
-GOOGLE_APPLICATION_CREDENTIALS=C:\Users\YuriFrusin\Documents\secrets\emr4-bernie-dev.json
+docs/gcp-keyless-ai-setup.md
 ```
 
-For Bernie, a separate service account is preferred long-term because it makes
-permissions, audit trails, and future key rotation cleaner. It can still use the
-same GCP project and Vertex AI APIs as the medical scribe.
+The short version is:
+
+```powershell
+gcloud auth login yuri@littlestardigital.com
+gcloud auth application-default login
+gcloud auth application-default set-quota-project emr4-bernie-dev
+gcloud config set auth/impersonate_service_account emr4-bernie-dev-runner@emr4-bernie-dev.iam.gserviceaccount.com
+```
+
+For Bernie and Copilot, separate service accounts are preferred because they
+make permissions, audit trails, quota attribution, and future production
+separation clearer.
 
 ## 7. GitHub CLI auth
 

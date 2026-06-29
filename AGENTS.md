@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 76 - Bernie interpreter smoke tooling and live Gemini provider proof integrated and verified |
-| **Next recommended work** | Keep the diagnostic Bernie UI for now; next harden the selected-context-to-live-interpreter path or set the Google ADC quota project for cleaner live provider auth |
+| **Current active track** | Programme 2F / Sprints 77-78 - Access AI API architecture and keyless GCP dev-auth foundation |
+| **Next recommended work** | Continue Access AI API with Sprint 79 capability registry, then Sprint 80 entitlement model before routing Bernie/Copilot live provider calls through it |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

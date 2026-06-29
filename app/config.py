@@ -23,9 +23,9 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
     ]
 
-    gcp_project: str = "emr4-copilot"
-    gcp_location: str = "us-central1"
-    google_application_credentials: Optional[str] = "gcp-key.json"
+    gcp_project: str = "emr4-copilot-dev"
+    gcp_location: str = "australia-southeast1"
+    google_application_credentials: Optional[str] = None
 
     data_store_id: str = "mbs-search-app_1780903132373"
     data_store_location: str = "global"

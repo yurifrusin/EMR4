@@ -85,17 +85,31 @@ tracks that actual architecture.
 | Candidate Sprints | Internal message model/API, diary message panel, billing review queue, operational notification semantics |
 | Start Gate | Appointment/status/resource foundations are steady enough that new queues will not obscure core diary workflow |
 
+### Programme 2F - Access AI API
+
+| Item | Value |
+|---|---|
+| Status | Started |
+| Outcome | EMR4 has one identity-aware, role-aware, keyless internal API for invoking AI capabilities across clinical copilot, Bernie, and later modalities |
+| Representative Sprints | Access AI architecture record, keyless GCP dev auth runbook, AI capability registry, entitlement model, invocation service, audit/cost envelope, Bernie migration, Copilot/Scribe migration, caller-context pending booking proposals, multi-provider knowledge-base adapter |
+| Next Candidate Sprints | Sprint 79 AI capability registry, then Sprint 80 entitlement model, then caller-context and pending-proposal design after Access AI foundations are stable |
+| Done Signals | No frontend or router calls model providers directly; dev uses service-account impersonation rather than JSON keys; every AI call passes through capability policy, product entitlement, provider adapter, and bounded audit metadata; external knowledge bases such as future Wiley/Cochrane integrations route through the same Access AI policy and citation envelope |
+| Design Record | `orchestration/access_ai_api_design.md` |
+
 ## Recommended Next Planning Move
 
 Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
-1. If product flow is the priority: continue **Programme 2B** with the active
+1. If AI platform safety is the priority: continue **Programme 2F** with the AI
+   capability registry and entitlement model.
+2. If product flow is the priority: continue **Programme 2B** with the active
    Sprint 25 status/waiting-area proposal retrofit, then drag/reschedule design.
-2. If orchestration confidence is the priority: continue **Programme 2C** with a
+3. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
-3. If Bernie is becoming tempting: keep it in **Programme 2D** design/tool-schema
+4. If Bernie is becoming tempting: keep it in **Programme 2D** design/tool-schema
    preparation until Programme 2B's mutation contracts are mature.
 
-The default recommendation after Sprint 24 is **Programme 2B** unless Yuri wants
-one more tooling sprint first.
+The default recommendation after Sprint 76 is **Programme 2F** until keyless GCP
+auth, Access AI capability policy, and invocation audit are stable enough for
+Bernie and Copilot live-provider work.

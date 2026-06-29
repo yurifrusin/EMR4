@@ -55,4 +55,5 @@ class LetterDraftingData(BaseModel):
 @runtime_checkable
 class AiProvider(Protocol):
     """Sync callable: build provider request, return json.loads result."""
-    def generate_json(self, contents: Any, temperature: float) -> dict: ...
+    def generate_json(self, contents: Any, temperature: float) -> dict:
+        pass

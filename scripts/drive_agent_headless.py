@@ -124,7 +124,7 @@ def find_claude_bin() -> str | None:
             )
             if completed.returncode == 0:
                 path_entries.extend(completed.stdout.strip().split(";"))
-        except Exception:
+        except (OSError, subprocess.SubprocessError):
             pass
 
         local_appdata = os.environ.get("LOCALAPPDATA")

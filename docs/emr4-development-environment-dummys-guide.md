@@ -161,9 +161,8 @@ SECRET_KEY=change-me-to-a-long-random-string-in-production
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=480
 
-GCP_PROJECT=emr4-copilot
-GCP_LOCATION=us-central1
-GOOGLE_APPLICATION_CREDENTIALS=gcp-key.json
+GCP_PROJECT=emr4-bernie-dev
+GCP_LOCATION=australia-southeast1
 
 DATA_STORE_ID=mbs-search-app_1780903132373
 DATA_STORE_LOCATION=global
@@ -186,26 +185,28 @@ That matches the Docker Postgres container in `docker-compose.yml`.
 
 ## 6. Google Cloud Credentials
 
-AI features need a local Google credentials file called:
+EMR4 AI development should use keyless Google Cloud authentication, not a local
+service-account JSON key.
+
+The current posture is:
+
+- Cloud Identity organization: `littlestardigital.com`
+- dev projects: `emr4-copilot-dev` and `emr4-bernie-dev`
+- local dev account: `yuri@littlestardigital.com`
+- local auth: Application Default Credentials plus service-account
+  impersonation
+- quota project: explicitly set with `gcloud auth application-default
+  set-quota-project`
+
+Do not set `GOOGLE_APPLICATION_CREDENTIALS` for normal local AI development.
+Use the keyless runbook instead:
 
 ```text
-gcp-key.json
+docs/gcp-keyless-ai-setup.md
 ```
 
-Place it in the EMR4 repo root:
-
-```text
-C:\Users\YOUR_WINDOWS_USERNAME\Documents\EMR4\gcp-key.json
-```
-
-The `.env` line should then be:
-
-```env
-GOOGLE_APPLICATION_CREDENTIALS=gcp-key.json
-```
-
-If `gcp-key.json` is missing, the app can still run for diary, patient, and
-database development, but AI endpoints such as scribe/analyse may fail.
+If keyless auth is not configured, the app can still run for diary, patient, and
+database development, but live AI endpoints such as scribe/analyse may fail.
 
 ---
 
@@ -725,17 +726,23 @@ Then rerun migrations:
 
 ### AI Features Fail
 
-Check that this file exists:
+Check keyless Google Cloud auth first:
 
-```text
-C:\Users\YOUR_WINDOWS_USERNAME\Documents\EMR4\gcp-key.json
+```powershell
+gcloud auth list
+gcloud config list account project auth/impersonate_service_account
+gcloud auth application-default print-access-token
 ```
 
-Check `.env`:
+Confirm `.env` uses the intended project and location:
 
 ```env
-GOOGLE_APPLICATION_CREDENTIALS=gcp-key.json
+GCP_PROJECT=emr4-bernie-dev
+GCP_LOCATION=australia-southeast1
 ```
+
+Then follow `docs/gcp-keyless-ai-setup.md` if ADC, impersonation, or quota
+project setup is missing.
 
 Restart backend:
 

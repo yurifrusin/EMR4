@@ -50,7 +50,7 @@ class BookingInstructionInterpreter(Protocol):
         self,
         body: BernieBookingInstructionInterpretIn,
     ) -> BernieBookingInstructionInterpretOut:
-        ...
+        pass
 
 
 def _issue(code: str, severity: str, message: str) -> AppointmentProposalIssue:
