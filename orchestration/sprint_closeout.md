@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprints 79-89: Access AI Foundation and AI Route Migration |
 | Integrated through | Bernie booking-instruction, clinical extraction, audio scribe, and letter drafting paths routed through Access AI with persisted metadata audit events |
-| Status | Implemented and verified locally; not yet pushed |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-06-29 |
 
 ## What Changed
@@ -62,6 +62,11 @@ reviewed, integrated, verified, pushed, and audited.
 
 - `.venv\Scripts\python.exe -m py_compile app\services\ai\service.py app\routers\consultation.py app\routers\letters.py` passed.
 - `.venv\Scripts\python.exe -m pytest tests\test_letter_access_ai_audit.py tests\test_analyze_consultation_access_ai_audit.py tests\test_access_ai_audit_store.py tests\test_bernie_interpret_booking_instruction.py tests\test_ai_external_identity.py tests\test_ai_costing.py tests\test_access_ai_service.py tests\test_ai_audit_events.py tests\test_ai_capability_registry.py tests\test_ai_entitlements.py tests\test_ai_service_boundary.py -q --tb=short` passed: `67 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `git push origin master handoff/current` succeeded at `00fcdd5`.
+- `python scripts\agent_worktrees.py realign --agent claude --apply`, `--agent antigravity --apply`, and `--agent codex --apply` succeeded from their worker worktrees.
+- `python scripts\agent_worktrees.py audit --fetch` showed `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned and clean at `00fcdd5`.
+- `python scripts\agent_worktrees.py retire-stale` reported no stale disposable worktrees.
+- Pushover closeout pings were sent for each sprint after the user requested them.
 
 ## Known Follow-Up
 
