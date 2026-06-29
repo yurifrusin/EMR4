@@ -7,7 +7,7 @@ Create Date: 2026-06-26
 from typing import Sequence, Union
 
 import sqlalchemy as sa
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import ENUM, UUID
 from alembic import op
 
 revision: str = "h8i9j0k1l2m3"
@@ -40,7 +40,7 @@ def upgrade() -> None:
         ),
         sa.Column(
             "status_before",
-            sa.Enum(
+            ENUM(
                 "Booked", "Confirmed", "Arrived", "InConsult",
                 "Completed", "Cancelled", "NoShow", "DNA",
                 name="appointmentstatus", create_type=False,
@@ -49,7 +49,7 @@ def upgrade() -> None:
         ),
         sa.Column(
             "status_after",
-            sa.Enum(
+            ENUM(
                 "Booked", "Confirmed", "Arrived", "InConsult",
                 "Completed", "Cancelled", "NoShow", "DNA",
                 name="appointmentstatus", create_type=False,
