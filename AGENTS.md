@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Programme 2F / Sprints 77-78 - Access AI API architecture and keyless GCP dev-auth foundation |
+| **Current active track** | Programme 2F / Sprints 77-78 - Access AI API architecture and keyless GCP dev-auth foundation integrated |
 | **Next recommended work** | Continue Access AI API with Sprint 79 capability registry, then Sprint 80 entitlement model before routing Bernie/Copilot live provider calls through it |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 76 Bernie interpreter smoke tooling closeout commit |
+| **Latest integration commit** | Sprint 77-78 Access AI keyless provider roadmap closeout commit |
 
 ### Tag map (all tags pushed to remote)
 

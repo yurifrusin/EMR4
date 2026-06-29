@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprints 77-78: Access AI API Architecture and Keyless GCP Dev Auth |
 | Integrated through | Programme 2F design record, keyless GCP AI setup runbook, and removal of default JSON-key guidance |
-| Status | Drafted and verified locally; not yet pushed |
+| Status | Integrated, verified locally, pushed to master; baton/mirror realignment in progress |
 | Last updated | 2026-06-29 |
 
 ## What Changed
