@@ -61,10 +61,10 @@ tracks that actual architecture.
 | Item | Value |
 |---|---|
 | Status | In progress |
-| Outcome | Ariadne can run most sprint verification herself before asking Yuri for only genuinely human checks |
-| Representative Sprints | Security baseline, security alert triage, backend/frontend dev-loop tooling, provider-neutral Pushover notifications |
-| Next Candidate Sprints | Browser/Chrome smoke automation harness, broad pytest timeout segmentation, GitHub security alert automation, CI/base-ref frontend asset checks |
-| Done Signals | Sprint closeouts routinely include tool-run browser/API/security evidence and a very short Yuri-only residual review list |
+| Outcome | Ariadne can run most sprint verification herself before asking Yuri for only genuinely human checks, and frontend/backend deploys carry preview, smoke, promotion, rollback, and version evidence |
+| Representative Sprints | Security baseline, security alert triage, backend/frontend dev-loop tooling, provider-neutral Pushover notifications, deterministic UI review harness, Vercel-style preview deployment harness |
+| Next Candidate Sprints | Browser/Chrome smoke automation harness, broad pytest timeout segmentation, GitHub security alert automation, CI/base-ref frontend asset checks, protected preview deployment harness |
+| Done Signals | Sprint closeouts routinely include tool-run browser/API/security evidence and a very short Yuri-only residual review list; frontend-affecting changes can be reviewed at immutable preview URLs with smoke results before promotion |
 
 ### Programme 2D - Reception Copilot Readiness
 
@@ -91,9 +91,9 @@ tracks that actual architecture.
 |---|---|
 | Status | Started |
 | Outcome | EMR4 has one identity-aware, role-aware, keyless internal API for invoking AI capabilities across clinical copilot, Bernie, and later modalities |
-| Representative Sprints | Access AI architecture record, keyless GCP dev auth runbook, AI capability registry, entitlement model, invocation service, audit/cost envelope, Bernie migration, Copilot/Scribe migration, caller-context pending booking proposals, multi-provider knowledge-base adapter |
-| Next Candidate Sprints | Sprint 79 AI capability registry, then Sprint 80 entitlement model, then caller-context and pending-proposal design after Access AI foundations are stable |
-| Done Signals | No frontend or router calls model providers directly; dev uses service-account impersonation rather than JSON keys; every AI call passes through capability policy, product entitlement, provider adapter, and bounded audit metadata; external knowledge bases such as future Wiley/Cochrane integrations route through the same Access AI policy and citation envelope |
+| Representative Sprints | Access AI architecture record, keyless GCP dev auth runbook, AI capability registry, entitlement model, typed audit event catalog, invocation service, audit/cost envelope, enterprise-auth seam, Bernie/Copilot migrations, caller-context pending booking proposals, multi-provider knowledge-base adapter |
+| Next Candidate Sprints | Sprint 81 typed audit event catalog, Sprint 82 invocation service, then Sprint 83 audit/cost envelope |
+| Done Signals | No frontend or router calls model providers directly; dev uses service-account impersonation rather than JSON keys; every AI call passes through capability policy, product entitlement, provider adapter, and bounded audit metadata; external knowledge bases such as future Wiley/Cochrane integrations route through the same Access AI policy and citation envelope; EMR4's internal org/role/resource model can later map to enterprise SSO/SCIM/FGA without a rewrite |
 | Design Record | `orchestration/access_ai_api_design.md` |
 
 ## Recommended Next Planning Move
@@ -101,8 +101,8 @@ tracks that actual architecture.
 Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
-1. If AI platform safety is the priority: continue **Programme 2F** with the AI
-   capability registry and entitlement model.
+1. If AI platform safety is the priority: continue **Programme 2F** with the
+   typed AI audit event catalog and invocation service.
 2. If product flow is the priority: continue **Programme 2B** with the active
    Sprint 25 status/waiting-area proposal retrofit, then drag/reschedule design.
 3. If orchestration confidence is the priority: continue **Programme 2C** with a
@@ -113,3 +113,30 @@ the next sprint from the active programme that best advances the phase:
 The default recommendation after Sprint 76 is **Programme 2F** until keyless GCP
 auth, Access AI capability policy, and invocation audit are stable enough for
 Bernie and Copilot live-provider work.
+
+## Deployment Readiness Pattern
+
+Vercel is a useful deployment benchmark, especially for frontend/product review
+workflows. EMR4 is not moving its FastAPI/Postgres clinical backend to Vercel by
+default, but should borrow these deployment primitives:
+
+- immutable deploy artifacts and versioned URLs
+- automatic preview deployments for branch/PR changes
+- protected previews when realistic or sensitive data is available
+- build once, then promote the same artifact through preview/staging/production
+- fast rollback to a known-good deployed artifact
+- deployment metadata: commit, asset versions, environment, smoke result, and
+  reviewer notes
+- deploy-attached observability: logs, errors, traces, and request/version
+  correlation
+
+Near-term sprint candidate:
+
+### Sprint 84 - Preview Deployment Harness
+
+Goal: every frontend-affecting branch can produce a protected preview URL with
+version metadata, deterministic diary/taskpane smoke checks, and a clear
+promotion/rollback record. Keep GitHub Pages for the current live static assets
+unless the sprint proves a better preview host is needed. Do not move the
+FastAPI backend, database, PHI processing, Office integration, or Access AI
+runtime to Vercel as part of this sprint.

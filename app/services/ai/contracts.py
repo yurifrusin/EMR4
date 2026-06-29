@@ -17,9 +17,47 @@ from typing import Protocol, runtime_checkable
 
 
 class AiCapability(str, Enum):
-    CLINICAL_EXTRACTION = "clinical_extraction"
-    AUDIO_SCRIBE = "audio_scribe"
-    LETTER_DRAFTING = "letter_drafting"
+    CLINICAL_EXTRACTION = "clinical.note.extract"
+    AUDIO_SCRIBE = "clinical.scribe.transcribe"
+    LETTER_DRAFTING = "clinical.letter.draft"
+    BERNIE_BOOKING_INTERPRET = "admin.booking.interpret"
+    BERNIE_BOOKING_SUGGEST_SLOTS = "admin.booking.suggest_slots"
+    BERNIE_BOOKING_PREPARE_PROPOSAL = "admin.booking.prepare_proposal"
+    PROVIDER_LIVE_SMOKE = "ai.provider.live_smoke"
+
+
+class AiModality(str, Enum):
+    TEXT = "text"
+    AUDIO = "audio"
+    DOCUMENT = "document"
+    IMAGE = "image"
+    TOOL_INTENT = "tool_intent"
+    MULTIMODAL = "multimodal"
+
+
+class AiMethod(str, Enum):
+    INVOKE = "invoke"
+    DRY_RUN = "dry_run"
+    EVALUATE_FIXTURE = "evaluate_fixture"
+    LIVE_SMOKE = "live_smoke"
+    ESTIMATE_COST = "estimate_cost"
+
+
+class AiRiskTier(str, Enum):
+    LOW_READ_ONLY = "low_read_only"
+    CLINICAL_READ = "clinical_read"
+    CLINICAL_DRAFT = "clinical_draft"
+    ADMIN_PROPOSAL = "admin_proposal"
+    HUMAN_CONFIRMED_WRITE = "human_confirmed_write"
+    BLOCKED = "blocked"
+
+
+class AiProviderClass(str, Enum):
+    MODEL_GENERATION = "model_generation"
+    RETRIEVAL_GENERATION = "retrieval_generation"
+    EMBEDDING_RETRIEVAL = "embedding_retrieval"
+    TOOL_INTENT = "tool_intent"
+    LOCAL_OR_TEST = "local_or_test"
 
 
 class AiResult:

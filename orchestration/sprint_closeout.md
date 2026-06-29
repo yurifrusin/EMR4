@@ -8,9 +8,47 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprints 79-80: AI Capability Registry and Entitlement Gate |
+| Integrated through | Static Access AI capability registry plus fail-closed actor/role/method/environment entitlement decisions |
+| Status | Implemented and verified locally; not yet pushed |
+| Last updated | 2026-06-29 |
+
+## What Changed
+
+- Added Access AI enum contracts for modality, method, risk tier, and provider class.
+- Changed `AiCapability` values to stable dotted capability ids such as `clinical.scribe.transcribe` and `admin.booking.interpret`.
+- Added `app/services/ai/registry.py`, a static fail-closed capability registry for initial Access AI metadata.
+- Captured initial metadata for clinical extraction, audio scribe, letter drafting, Bernie booking interpretation, Bernie slot/proposal capabilities, and live provider smoke.
+- Added tests proving expected registry contents, PHI policy, project selection, risk tiers, human-confirmation metadata, live-smoke constraints, explicit method allowlists, and unknown-capability fail-closed behavior.
+- Added `app/services/ai/entitlements.py`, a static Access AI entitlement gate that maps today's practice roles onto future-oriented AI access roles.
+- Added role separation for clinical AI users, reception AI users, reception supervisors, dev operators, platform admins, and disabled actors.
+- Added entitlement decisions for unknown capabilities, unknown methods, disabled actors, registry method allowlists, environment allowlists, and role/capability mismatches.
+- Added tests proving GP, receptionist, admin, dev-operator, disabled, unknown, and method-denial behaviours.
+- Kept runtime provider invocation behavior unchanged.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\services\ai\contracts.py app\services\ai\registry.py app\services\ai\entitlements.py` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_ai_capability_registry.py tests\test_ai_entitlements.py tests\test_ai_service_boundary.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed: `39 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+
+## Known Follow-Up
+
+- Sprint 81 should add typed audit event contracts for Access AI decisions, invocations, denials, provider calls, and human confirmations.
+- The static project/provider metadata should be wired to environment/config only after entitlement and invocation service boundaries exist.
+- The entitlement role mapping is intentionally static for now; later Cloud Identity groups, WorkOS-style org roles, or database-backed practice entitlements should feed the same contract rather than bypass it.
+- GitHub still reports the known moderate Dependabot alert on push; Sprint 71 triaged it as not product-runtime-actionable.
+
+## Recommended Next Direction
+
+Next recommended step: Sprint 81 typed audit event catalog, followed by Sprint 82 Access AI invocation service and Sprint 83 audit/cost envelope. Do not route Bernie, Copilot, caller-ID booking proposals, or Wiley/Cochrane knowledge-base calls through Access AI runtime until capability policy, entitlement, audit, and keyless dev auth are stable.
+
+## Previous Closeout - Sprints 77-78
+
+| Item | Value |
+|---|---|
 | Batch | Sprints 77-78: Access AI API Architecture and Keyless GCP Dev Auth |
 | Integrated through | Programme 2F design record, keyless GCP AI setup runbook, and removal of default JSON-key guidance |
-| Status | Integrated, verified locally, pushed to master; baton/mirror realignment in progress |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-06-29 |
 
 ## What Changed
@@ -20,6 +58,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Added `docs/gcp-keyless-ai-setup.md` covering Little Star Digital Cloud Identity, dev project layout, service-account impersonation, ADC quota project setup, smoke order, and JSON-key retirement.
 - Added Bernie caller-ID context and pending booking proposal workflow to the Access AI design.
 - Added multi-provider retrieval/knowledge-base posture for future Wiley/Cochrane-style AWS integrations.
+- Folded in WorkOS-inspired enterprise-readiness primitives: organization-scoped roles, resource-scoped authorization, typed audit events, self-service admin seams, and future SSO/SCIM/FGA compatibility without adopting WorkOS as a dependency.
+- Folded in Vercel-inspired deployment-readiness primitives: immutable preview URLs, protected preview deployments, promotion/rollback discipline, deploy metadata, and smoke evidence attached to deploys without committing EMR4 to Vercel hosting.
 - Updated dev/new-PC docs away from `GOOGLE_APPLICATION_CREDENTIALS=gcp-key.json`.
 - Changed the default `google_application_credentials` setting to `None` so normal local dev follows ADC/keyless auth unless explicitly overridden.
 - Updated the phase programme map with Programme 2F and its sprint roadmap.
@@ -38,11 +78,12 @@ reviewed, integrated, verified, pushed, and audited.
 - Decide whether `emr4-copilot-dev` and `emr4-bernie-dev` need separate billing/quota handling immediately or can share the current billing account while trust history builds.
 - Future phone-system integration should feed caller context as candidate identity evidence, not verified identity.
 - Future Wiley/Cochrane knowledge-base integration should be treated as licensed clinical decision support with citations and separate retrieval/provider policy, not as a generic chat model.
+- Future deployment work should copy Vercel's preview/promotion ergonomics while keeping clinical backend/runtime placement on GCP unless a separate architecture review decides otherwise.
 - GitHub still reports the known moderate Dependabot alert on push; Sprint 71 triaged it as not product-runtime-actionable.
 
 ## Recommended Next Direction
 
-Next recommended step: Sprint 79 AI capability registry, followed by Sprint 80 entitlement model. Do not route Bernie, Copilot, caller-ID booking proposals, or Wiley/Cochrane knowledge-base calls through the new Access AI concept until capability policy and keyless dev auth are stable.
+Next recommended step: Sprint 79 AI capability registry, followed by Sprint 80 entitlement model, Sprint 81 typed audit event catalog, and Sprint 82 Access AI invocation service. A deployment-readiness Sprint 84 preview deployment harness is also queued under Programme 2C; schedule it when frontend review friction becomes the priority.
 
 ## Previous Closeout - Sprint 76
 

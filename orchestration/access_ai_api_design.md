@@ -29,6 +29,13 @@ Wiley/Cochrane knowledge base may live behind AWS services. EMR4 should route
 that through the same capability, entitlement, audit, and citation policy rather
 than creating a parallel "AWS-only" AI path.
 
+WorkOS is a useful design benchmark for the enterprise-readiness layer:
+organization-scoped identity, SSO/SCIM seams, RBAC plus fine-grained
+authorization, typed audit logs, and self-service admin workflows. EMR4 should
+borrow those product primitives without depending on WorkOS yet. The immediate
+goal is to keep EMR4's own tenant, role, audit, and Access AI model compatible
+with that style of enterprise integration.
+
 ## Core Decision
 
 Frontend surfaces, Office add-ins, diary UI, and staff clients must not call
@@ -197,6 +204,42 @@ Initial EMR4 roles for AI access:
 These roles can map to existing EMR4 user roles, but should remain explicit so
 AI access is reviewable independently from general appointment access.
 
+## Enterprise Identity And Authorization Posture
+
+EMR4 should preserve a future seam for enterprise identity providers without
+making SSO mandatory for early practices.
+
+Borrowed WorkOS-style primitives:
+
+- organization/practice membership as the root of access
+- roles assigned within an organization, not just globally
+- resource-scoped permissions over practice, location, diary, patient,
+  appointment, proposal, AI capability, and knowledge base
+- typed audit events for access, configuration, AI, and booking actions
+- self-service administration for practice owners where safe
+- future SSO/OIDC/SAML and SCIM/directory-sync support
+- domain verification if practices later need to claim/manage their own domain
+
+Near-term EMR4 stays internally managed:
+
+- keep existing JWT/session/auth flow
+- add Access AI roles and entitlements inside EMR4 first
+- avoid introducing a third-party identity dependency before workflows stabilize
+- model permissions in a way that can later map to WorkOS, Auth0 FGA, OpenFGA,
+  Google/Azure groups, or another enterprise auth layer
+
+Resource-scoped authorization should answer questions like:
+
+- Can this receptionist prepare a Bernie booking proposal for this practice?
+- Can this user confirm a pending proposal into a real appointment?
+- Can this GP invoke clinical scribe for this patient encounter?
+- Can this clinician query a licensed Cochrane knowledge base?
+- Can this admin enable live provider access for a capability?
+
+Do not let an AI agent inherit the full authority of the signed-in human. Access
+AI should mint a narrower action context: user + product surface + capability +
+method + resource scope + risk tier.
+
 ## Capability Policy Fields
 
 The capability registry should eventually include:
@@ -283,6 +326,45 @@ For knowledge-base calls, audit should also record:
 - retrieval timestamp
 - citation ids returned
 - whether retrieved text was stored, cached, or transient only
+
+## Typed Audit Event Catalog
+
+Audit events should be strongly typed and queryable as product data, not just
+free-text logs. Initial event families:
+
+| Event | Purpose |
+|---|---|
+| `ai.invocation.allowed` | Access AI request passed entitlement and provider policy |
+| `ai.invocation.blocked` | Access AI request failed policy, role, risk, PHI, or environment checks |
+| `ai.invocation.failed` | Provider call or schema validation failed after authorization |
+| `ai.capability.enabled` | Admin enabled a capability for a scope |
+| `ai.capability.disabled` | Admin disabled a capability for a scope |
+| `ai.entitlement.granted` | User/role/practice gained capability access |
+| `ai.entitlement.revoked` | User/role/practice lost capability access |
+| `bernie.proposal.created` | Pending Bernie proposal/hold was created |
+| `bernie.proposal.confirmed` | Human confirmed a pending proposal into a final write |
+| `bernie.proposal.cancelled` | Pending proposal was cancelled or expired |
+| `identity.caller_candidate_matched` | Caller ID produced patient candidates |
+| `identity.patient_verified_by_staff` | Staff verified patient identity for an action |
+| `knowledge.query.allowed` | Licensed knowledge-base query was allowed |
+| `knowledge.query.blocked` | Licensed knowledge-base query was blocked |
+
+Minimum common fields:
+
+- event id
+- event type
+- timestamp
+- actor user id
+- actor role/context
+- practice id
+- target resource type/id
+- capability/method, when applicable
+- decision and reason code
+- correlation id
+- source surface
+
+These events should be exportable later for enterprise customers or compliance
+review, but the first implementation can remain in EMR4's database.
 
 ## Bernie Caller Context And Pending Booking Proposal
 
@@ -399,55 +481,67 @@ needed.
 Add product-level access checks for capability/method invocation. Prove default
 fail-closed behavior and dev-only grants with tests.
 
-### Sprint 81 - Access AI Invocation Service
+### Sprint 81 - Typed AI Audit Event Catalog
+
+Define the first typed audit event enum/schema and add tests for event shape,
+redaction posture, and correlation ids. Keep it storage-light if needed, but
+make the event contract explicit before live invocation expands.
+
+### Sprint 82 - Access AI Invocation Service
 
 Add `AccessAiService.invoke(context, request)` as the single backend entry point
 for model calls. Keep tests fake-provider only.
 
-### Sprint 82 - Invocation Audit And Cost Envelope
+### Sprint 83 - Invocation Audit And Cost Envelope
 
 Record bounded invocation metadata, blocked reasons, latency, and cost/token
 estimates without raw PHI logging by default.
 
-### Sprint 83 - Bernie Interpreter Migration
+### Sprint 84 - Enterprise Auth Seam Design
+
+Document how EMR4's internal org/role/FGA-style model could later map to SSO,
+SCIM/directory sync, domain verification, and external FGA providers without
+replacing the current auth stack now.
+
+### Sprint 85 - Bernie Interpreter Migration
 
 Route Bernie live booking-instruction interpretation through Access AI. Preserve
 existing default-disabled, fake-provider, no-write, and staff-confirmation
 guards.
 
-### Sprint 84 - Copilot/Scribe Migration
+### Sprint 86 - Copilot/Scribe Migration
 
 Route clinical extraction, audio scribe, and letter drafting through Access AI
 without changing user-visible behavior.
 
-### Sprint 85 - Caller Context Identity Source
+### Sprint 87 - Caller Context Identity Source
 
 Add the phone/caller ID context model and patient-candidate matching contract.
 No appointment write changes.
 
-### Sprint 86 - Pending Bernie Booking Proposal
+### Sprint 88 - Pending Bernie Booking Proposal
 
 Add a backend pending proposal/temporary-hold object with expiry, candidate
 identity evidence, and no final appointment write before confirmation.
 
-### Sprint 87 - Diary Pending Proposal Highlight UI
+### Sprint 89 - Diary Pending Proposal Highlight UI
 
 Render Bernie's pending proposal as an expanded highlighted diary slot with
 bounded identity verification details, Confirm/Edit/Cancel controls, and an
 optional accessible chime.
 
-### Sprint 88 - Confirm-To-Appointment Bridge
+### Sprint 90 - Confirm-To-Appointment Bridge
 
 Turn a pending Bernie proposal into a final appointment only after receptionist
 confirmation, then collapse the slot back to normal diary rendering.
 
-### Sprint 89 - Multi-Provider Knowledge Base Adapter
+### Sprint 91 - Multi-Provider Knowledge Base Adapter
 
 Add provider contract support for retrieval-generation capabilities, including
 AWS Bedrock Knowledge Bases or equivalent knowledge-base adapters. Keep this
 behind fake/provider-mocked tests at first.
 
-### Sprint 90 - Wiley/Cochrane Knowledge Base Spike
+### Sprint 92 - Wiley/Cochrane Knowledge Base Spike
 
 Design the licensed clinical knowledge integration boundary: licence scope,
 provider/API path, citation handling, PHI query rules, audit metadata, and
