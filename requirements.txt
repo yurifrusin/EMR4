@@ -7,7 +7,7 @@ pydantic-settings==2.14.2
 python-dotenv==1.2.2
 psycopg2-binary==2.9.12
 pgvector==0.4.2
-google-cloud-aiplatform==1.156.0
+google-cloud-aiplatform==1.158.0
 google-cloud-discoveryengine==0.20.0
 google-auth==2.53.0
 python-jose==3.5.0
