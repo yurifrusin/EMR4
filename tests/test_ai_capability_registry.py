@@ -27,7 +27,7 @@ def test_registry_contains_expected_initial_capabilities():
 def test_clinical_scribe_metadata_allows_phi_and_uses_copilot_project():
     metadata = get_capability_metadata(AiCapability.AUDIO_SCRIBE)
     assert metadata.phi_allowed is True
-    assert metadata.default_project == "emr4-copilot-dev"
+    assert metadata.default_project == "scribe-emr4-dev"
     assert metadata.provider_class is AiProviderClass.MODEL_GENERATION
     assert metadata.risk_tier is AiRiskTier.CLINICAL_DRAFT
 
@@ -35,7 +35,7 @@ def test_clinical_scribe_metadata_allows_phi_and_uses_copilot_project():
 def test_bernie_interpret_metadata_is_admin_proposal_and_non_phi():
     metadata = get_capability_metadata("admin.booking.interpret")
     assert metadata.phi_allowed is False
-    assert metadata.default_project == "emr4-bernie-dev"
+    assert metadata.default_project == "bernie-emr4-dev"
     assert metadata.provider_class is AiProviderClass.TOOL_INTENT
     assert metadata.risk_tier is AiRiskTier.ADMIN_PROPOSAL
 
@@ -51,7 +51,7 @@ def test_clinical_knowledge_query_is_retrieval_generation_and_non_phi():
     assert metadata.phi_allowed is False
     assert metadata.provider_class is AiProviderClass.RETRIEVAL_GENERATION
     assert metadata.default_provider == "licensed_clinical_kb"
-    assert metadata.default_project == "emr4-copilot-dev"
+    assert metadata.default_project == "scribe-emr4-dev"
     assert metadata.risk_tier is AiRiskTier.CLINICAL_READ
 
 

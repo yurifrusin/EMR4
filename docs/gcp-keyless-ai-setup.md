@@ -36,8 +36,8 @@ EMR4/
 Initial dev projects:
 
 ```text
-emr4-copilot-dev
-emr4-bernie-dev
+scribe-emr4-dev
+bernie-emr4-dev
 ```
 
 Later production projects:
@@ -71,8 +71,8 @@ GCP, but enabling it early is reasonable.
 Create one runtime service account per product/project:
 
 ```text
-emr4-copilot-dev-runner@emr4-copilot-dev.iam.gserviceaccount.com
-emr4-bernie-dev-runner@emr4-bernie-dev.iam.gserviceaccount.com
+emr4-scribe-ai-dev@scribe-emr4-dev.iam.gserviceaccount.com
+emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com
 ```
 
 Grant each runner only the minimum provider role needed to call Vertex AI. Start
@@ -82,6 +82,10 @@ exact permissions are measured.
 Grant `yuri@littlestardigital.com` service-account impersonation rights on each
 dev runner. Do not grant this broadly at organization level unless there is a
 clear reason.
+
+For the exact Windows/PowerShell command sequence for the current
+`scribe-emr4-dev` and `bernie-emr4-dev` projects, use
+[`gcp-dev-ai-projects-service-account-setup.md`](gcp-dev-ai-projects-service-account-setup.md).
 
 ## Local Dev Authentication
 
@@ -95,7 +99,7 @@ gcloud config set account yuri@littlestardigital.com
 Set the working project for the capability you are testing:
 
 ```powershell
-gcloud config set project emr4-bernie-dev
+gcloud config set project bernie-emr4-dev
 ```
 
 Create Application Default Credentials:
@@ -107,13 +111,13 @@ gcloud auth application-default login
 Set the ADC quota project explicitly:
 
 ```powershell
-gcloud auth application-default set-quota-project emr4-bernie-dev
+gcloud auth application-default set-quota-project bernie-emr4-dev
 ```
 
 For local commands that need to run as the service account, use impersonation:
 
 ```powershell
-gcloud config set auth/impersonate_service_account emr4-bernie-dev-runner@emr4-bernie-dev.iam.gserviceaccount.com
+gcloud config set auth/impersonate_service_account emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com
 ```
 
 To stop impersonating:
@@ -130,7 +134,7 @@ Use project/location/provider settings. Do not set
 Example Bernie dev settings:
 
 ```env
-GCP_PROJECT=emr4-bernie-dev
+GCP_PROJECT=bernie-emr4-dev
 GCP_LOCATION=australia-southeast1
 BERNIE_BOOKING_INTERPRETER_PROVIDER=fake
 ```
@@ -181,4 +185,3 @@ If old service-account keys exist:
 6. Remove old IAM bindings for retired accounts.
 
 Do not commit JSON keys, `.env` secrets, or local ADC files to the repository.
-

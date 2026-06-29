@@ -132,12 +132,13 @@ The short version is:
 
 ```powershell
 gcloud auth login yuri@littlestardigital.com
-gcloud auth application-default login
-gcloud auth application-default set-quota-project emr4-bernie-dev
-gcloud config set auth/impersonate_service_account emr4-bernie-dev-runner@emr4-bernie-dev.iam.gserviceaccount.com
+gcloud config set project bernie-emr4-dev
+gcloud auth application-default login `
+  --impersonate-service-account=emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com `
+  --scopes=https://www.googleapis.com/auth/cloud-platform
 ```
 
-For Bernie and Copilot, separate service accounts are preferred because they
+For Bernie and Scribe/Copilot, separate service accounts are preferred because they
 make permissions, audit trails, quota attribution, and future production
 separation clearer.
 

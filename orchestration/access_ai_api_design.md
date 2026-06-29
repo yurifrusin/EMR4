@@ -60,7 +60,7 @@ flowchart LR
 
 | Layer | Owner | Purpose | Example |
 |---|---|---|---|
-| Cloud subscription | Google Cloud billing/project | Project can consume Vertex AI and quota | `emr4-bernie-dev` has billing and Vertex AI enabled |
+| Cloud subscription | Google Cloud billing/project | Project can consume Vertex AI and quota | `bernie-emr4-dev` has billing and Vertex AI enabled |
 | Infrastructure entitlement | Google IAM | Runtime identity can call a provider/project | service account has Vertex AI permission |
 | Product entitlement | EMR4 database/config | User/practice/role may invoke an AI capability | receptionist can interpret booking text but not run clinical scribe |
 
@@ -74,8 +74,8 @@ Initial project layout:
 
 | Project | Environment | Purpose |
 |---|---|---|
-| `emr4-copilot-dev` | dev | Medical scribe, clinical extraction, letters |
-| `emr4-bernie-dev` | dev | Receptionist copilot and booking interpretation |
+| `scribe-emr4-dev` | dev | Medical scribe, clinical extraction, letters |
+| `bernie-emr4-dev` | dev | Receptionist copilot and booking interpretation |
 | `emr4-copilot-prod` | prod later | Production clinical copilot |
 | `emr4-bernie-prod` | prod later | Production Bernie |
 

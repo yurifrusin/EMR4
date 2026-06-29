@@ -23,7 +23,7 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
     ]
 
-    gcp_project: str = "emr4-copilot-dev"
+    gcp_project: str = "scribe-emr4-dev"
     gcp_location: str = "australia-southeast1"
     google_application_credentials: Optional[str] = None
 

@@ -161,7 +161,7 @@ SECRET_KEY=change-me-to-a-long-random-string-in-production
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=480
 
-GCP_PROJECT=emr4-bernie-dev
+GCP_PROJECT=bernie-emr4-dev
 GCP_LOCATION=australia-southeast1
 
 DATA_STORE_ID=mbs-search-app_1780903132373
@@ -191,7 +191,7 @@ service-account JSON key.
 The current posture is:
 
 - Cloud Identity organization: `littlestardigital.com`
-- dev projects: `emr4-copilot-dev` and `emr4-bernie-dev`
+- dev projects: `scribe-emr4-dev` and `bernie-emr4-dev`
 - local dev account: `yuri@littlestardigital.com`
 - local auth: Application Default Credentials plus service-account
   impersonation
@@ -737,12 +737,12 @@ gcloud auth application-default print-access-token
 Confirm `.env` uses the intended project and location:
 
 ```env
-GCP_PROJECT=emr4-bernie-dev
+GCP_PROJECT=bernie-emr4-dev
 GCP_LOCATION=australia-southeast1
 ```
 
-Then follow `docs/gcp-keyless-ai-setup.md` if ADC, impersonation, or quota
-project setup is missing.
+Then follow `docs/gcp-dev-ai-projects-service-account-setup.md` if ADC,
+impersonation, or quota project setup is missing.
 
 Restart backend:
 

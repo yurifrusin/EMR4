@@ -161,9 +161,9 @@ Next recommended step: push and realign the local Access AI sprint batch. Do not
 
 ## Known Follow-Up
 
-- Configure actual Little Star Digital dev projects and service accounts in GCP: `emr4-copilot-dev` and `emr4-bernie-dev`.
+- Configure actual Little Star Digital dev projects and service accounts in GCP: `scribe-emr4-dev` and `bernie-emr4-dev`.
 - Replace any remaining legacy local `.env` values that point to old projects or JSON key paths.
-- Decide whether `emr4-copilot-dev` and `emr4-bernie-dev` need separate billing/quota handling immediately or can share the current billing account while trust history builds.
+- Decide whether `scribe-emr4-dev` and `bernie-emr4-dev` need separate billing/quota handling immediately or can share the current billing account while trust history builds.
 - Future phone-system integration should feed caller context as candidate identity evidence, not verified identity.
 - Future Wiley/Cochrane knowledge-base integration should be treated as licensed clinical decision support with citations and separate retrieval/provider policy, not as a generic chat model.
 - Future deployment work should copy Vercel's preview/promotion ergonomics while keeping clinical backend/runtime placement on GCP unless a separate architecture review decides otherwise.
