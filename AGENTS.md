@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Programme 2F / Sprints 79-85 - Access AI foundation plus Bernie interpreter live path migrated and verified locally |
-| **Next recommended work** | Continue Access AI API by migrating one clinical Copilot path through Access AI, or first add persisted Access AI audit storage if reviewability is the priority |
+| **Current active track** | Programme 2F / Sprints 79-86 - Access AI foundation, Bernie interpreter migration, and persisted audit storage implemented and verified locally |
+| **Next recommended work** | Continue Access AI API by wiring Access AI invocation events into persisted audit storage, then migrate one clinical Copilot path through Access AI |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

@@ -17,6 +17,7 @@ from app.models.diary import DiaryTemplate, DiaryColumn, DiaryBreak, Room, Diary
 from app.models.messaging import InternalMessage, SmsLog
 from app.models.kiosk import CheckinEvent, PatientQrToken, CallLog
 from app.models.rag import CommunityEncounter, RagFeedback, IhiRecord, MhrUpload
+from app.models.ai_audit import AccessAiAuditLog
 
 __all__ = [
     "Base",
@@ -32,4 +33,5 @@ __all__ = [
     "InternalMessage", "SmsLog",
     "CheckinEvent", "PatientQrToken", "CallLog",
     "CommunityEncounter", "RagFeedback", "IhiRecord", "MhrUpload",
+    "AccessAiAuditLog",
 ]

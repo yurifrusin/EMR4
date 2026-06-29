@@ -92,7 +92,7 @@ tracks that actual architecture.
 | Status | Started |
 | Outcome | EMR4 has one identity-aware, role-aware, keyless internal API for invoking AI capabilities across clinical copilot, Bernie, and later modalities |
 | Representative Sprints | Access AI architecture record, keyless GCP dev auth runbook, AI capability registry, entitlement model, typed audit event catalog, invocation service, audit/cost envelope, enterprise-auth seam, Bernie/Copilot migrations, caller-context pending booking proposals, multi-provider knowledge-base adapter |
-| Next Candidate Sprints | Copilot clinical extraction migration through Access AI, or persisted Access AI audit storage |
+| Next Candidate Sprints | Wire Access AI invocation events to persisted audit storage, then Copilot clinical extraction migration |
 | Done Signals | No frontend or router calls model providers directly; dev uses service-account impersonation rather than JSON keys; every AI call passes through capability policy, product entitlement, provider adapter, and bounded audit metadata; external knowledge bases such as future Wiley/Cochrane integrations route through the same Access AI policy and citation envelope; EMR4's internal org/role/resource model can later map to enterprise SSO/SCIM/FGA without a rewrite |
 | Design Record | `orchestration/access_ai_api_design.md` |
 
@@ -101,9 +101,9 @@ tracks that actual architecture.
 Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
-1. If AI platform safety is the priority: continue **Programme 2F** by routing
-   one clinical Copilot path through Access AI, or add persisted Access AI audit
-   storage before broader route migration.
+1. If AI platform safety is the priority: continue **Programme 2F** by wiring
+   Access AI invocation events into persisted audit storage, then route one
+   clinical Copilot path through Access AI.
 2. If product flow is the priority: continue **Programme 2B** with the active
    Sprint 25 status/waiting-area proposal retrofit, then drag/reschedule design.
 3. If orchestration confidence is the priority: continue **Programme 2C** with a
