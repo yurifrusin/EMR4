@@ -2369,18 +2369,18 @@ html, body {
 }
 
 .bernie-status-badge.blocked {
-  background-color: #fde8e8;
-  color: var(--red);
+  background-color: #f1f5f9;
+  color: #334155;
 }
 
 .bernie-status-badge.candidate_selection_required {
-  background-color: #fef08a;
-  color: #854d0e;
+  background-color: #e0f2fe;
+  color: #075985;
 }
 
 .bernie-status-badge.confirmation_ready {
-  background-color: var(--blue-light);
-  color: var(--blue-mid);
+  background-color: #dcfce7;
+  color: #166534;
 }
 
 .bernie-review-headline {
@@ -2414,9 +2414,9 @@ html, body {
 }
 
 .bernie-interpret-preview.blocked {
-  border-color: #fecaca;
-  border-left-color: #dc2626;
-  background: #fff5f5;
+  border-color: #cbd5e1;
+  border-left-color: #64748b;
+  background: #f8fafc;
 }
 
 .bernie-interpret-header {
@@ -2452,8 +2452,8 @@ html, body {
 }
 
 .bernie-interpret-status.blocked {
-  background: #fee2e2;
-  color: #991b1b;
+  background: #e2e8f0;
+  color: #334155;
 }
 
 .bernie-interpret-summary,
@@ -2482,7 +2482,7 @@ html, body {
 
 .bernie-interpret-issue {
   font-size: 11px;
-  color: #991b1b;
+  color: #475569;
 }
 
 .bernie-interpret-provider {
@@ -2540,6 +2540,26 @@ html, body {
   font-size: 11px;
 }
 
+.bernie-detail-row {
+  display: grid;
+  grid-template-columns: minmax(72px, 0.7fr) 1fr;
+  gap: 8px;
+  color: var(--grey-6);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.bernie-detail-label {
+  color: var(--grey-4);
+  font-weight: 700;
+}
+
+.bernie-detail-value {
+  color: var(--text);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .bernie-identity-warning {
   color: #9a3412;
   font-size: 11px;
@@ -2570,11 +2590,11 @@ html, body {
 }
 
 .bernie-block-item {
-  background-color: #fff5f5;
-  border: 1px solid #feb2b2;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
   padding: 8px 12px;
   border-radius: 4px;
-  color: #c53030;
+  color: #334155;
   font-size: 11px;
 }
 
@@ -2598,6 +2618,12 @@ html, body {
   background: #f3e8ff;
   border-color: #7e22ce;
   outline: none;
+}
+
+.bernie-candidate-item.selected {
+  background: #f3e8ff;
+  border-color: #7e22ce;
+  box-shadow: inset 3px 0 0 #7e22ce;
 }
 
 .bernie-candidate-action {
@@ -2634,7 +2660,7 @@ html, body {
 }
 
 .bernie-staged-booking-card {
-  background: #fdf4ff;
+  background: #fbf7ff;
   border: 2px solid #7e22ce;
   border-radius: 6px;
   box-shadow: 0 8px 22px rgba(88, 28, 135, 0.28);
@@ -2644,6 +2670,28 @@ html, body {
   gap: 3px;
   overflow: hidden;
   padding: 7px 8px;
+}
+
+.bernie-staged-booking-card.is-fresh {
+  animation: bernie-staged-pulse 2.4s ease-out 1;
+}
+
+@keyframes bernie-staged-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(126, 34, 206, 0.45), 0 8px 22px rgba(88, 28, 135, 0.22);
+  }
+  45% {
+    box-shadow: 0 0 0 8px rgba(126, 34, 206, 0.12), 0 8px 22px rgba(88, 28, 135, 0.24);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(126, 34, 206, 0), 0 8px 22px rgba(88, 28, 135, 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bernie-staged-booking-card.is-fresh {
+    animation: none;
+  }
 }
 
 .bernie-staged-title {
@@ -2678,17 +2726,15 @@ html, body {
   gap: 12px;
 }
 
-.bernie-checkbox-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
+.bernie-confirm-hint,
+.bernie-shortcut-hint {
+  color: var(--grey-5);
   font-size: 11px;
-  cursor: pointer;
-  user-select: none;
+  line-height: 1.35;
 }
 
-.bernie-checkbox-label input {
-  margin-top: 2px;
+.bernie-shortcut-hint {
+  color: var(--grey-4);
 }
 
 .btn-bernie-confirm {

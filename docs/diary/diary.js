@@ -49,8 +49,83 @@ let bernieInstructionText = "";
 let bernieInterpretResult = null;
 let bernieSelectedCandidateIndex = null;
 let bernieStagedBookingPreview = null;
+let bernieStagedBookingFresh = false;
 let bernieLatestIdentityEvidence = null;
+let bernieLatestReviewPayload = null;
 const checkinDefaultCache = new Map();
+
+const BERNIE_STATUS_COPY = {
+  blocked: "Needs details",
+  candidate_selection_required: "Choose a time",
+  confirmation_ready: "Ready to book"
+};
+
+const BERNIE_HEADLINE_COPY = {
+  blocked: "Add the missing details",
+  candidate_selection_required: "Bernie found these times",
+  confirmation_ready: "Ready to book this appointment"
+};
+
+function formatBernieCode(value) {
+  return String(value || "")
+    .replace(/_/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, letter => letter.toUpperCase());
+}
+
+function bernieStatusCopy(status) {
+  return BERNIE_STATUS_COPY[status] || formatBernieCode(status || "needs details");
+}
+
+function bernieHeadlineCopy(status) {
+  return BERNIE_HEADLINE_COPY[status] || "Review this appointment";
+}
+
+function bernieReviewActionCopy(payload) {
+  if (!payload) {
+    return "Nothing is booked until you confirm.";
+  }
+  if (payload.status === "candidate_selection_required") {
+    return "Choose a time to show it on the diary. Nothing is booked until you confirm.";
+  }
+  if (payload.status === "confirmation_ready") {
+    return "Review the details before confirming.";
+  }
+  return "Add the missing details and ask Bernie to search again. Nothing is booked yet.";
+}
+
+function appendBernieDetailRow(container, label, value, testId) {
+  if (!container || value === undefined || value === null || value === "") {
+    return;
+  }
+  const row = document.createElement("div");
+  row.className = "bernie-detail-row";
+  if (testId) {
+    row.setAttribute("data-testid", testId);
+  }
+  const key = document.createElement("span");
+  key.className = "bernie-detail-label";
+  key.textContent = label;
+  const val = document.createElement("span");
+  val.className = "bernie-detail-value";
+  val.textContent = value;
+  row.append(key, val);
+  container.appendChild(row);
+}
+
+function berniePatientLabelFromPayload(payload) {
+  return payload?.patient_evidence?.patient_label ||
+         payload?.identity_evidence?.patient_label ||
+         payload?.confirm_payload?.selection_proposal?.create_proposal?.command?.patient_name_provisional ||
+         "Patient details to confirm";
+}
+
+function berniePractitionerLabelFromPayload(payload) {
+  return payload?.practitioner_evidence?.display_name ||
+         payload?.confirm_payload?.selection_proposal?.create_proposal?.command?.practitioner_label ||
+         "Practitioner selected";
+}
 
 const LOCATION_STORAGE_KEY = "emr4_diary_active_location";
 const FLOW_PANEL_OPEN_KEY = "emr4_diary_flow_open";
@@ -327,11 +402,13 @@ function renderBernieInterpretPreview(contentEl, envelope) {
   header.className = "bernie-interpret-header";
   const title = document.createElement("span");
   title.className = "bernie-interpret-title";
-  title.textContent = "Interpreted Intent";
+  title.textContent = "Request";
   const status = document.createElement("span");
   status.className = `bernie-interpret-status ${envelope.result}`;
   status.setAttribute("data-testid", "bernie-interpret-status");
-  status.textContent = (envelope.result || "blocked").replace(/_/g, " ");
+  status.textContent = envelope.result === "interpreted"
+    ? "Understood"
+    : bernieStatusCopy(envelope.result || "blocked");
   header.append(title, status);
   preview.appendChild(header);
 
@@ -347,8 +424,8 @@ function renderBernieInterpretPreview(contentEl, envelope) {
     commandEl.className = "bernie-interpret-command";
     commandEl.setAttribute("data-testid", "bernie-interpret-command");
     const commandParts = [
-      command.practitioner_id ? `Practitioner: ${command.practitioner_id}` : "",
-      command.patient_id ? `Patient: ${command.patient_id}` : "",
+      command.practitioner_label ? `Practitioner: ${command.practitioner_label}` : "",
+      command.patient_label || command.patient_name_provisional ? `Patient: ${command.patient_label || command.patient_name_provisional}` : "",
       command.date_from ? `Date: ${command.date_from}` : "",
       command.duration_minutes ? `Duration: ${command.duration_minutes} mins` : "",
       command.earliest_time ? `Earliest: ${command.earliest_time}` : "",
@@ -375,14 +452,15 @@ function renderBernieInterpretPreview(contentEl, envelope) {
       const item = document.createElement("div");
       item.className = "bernie-interpret-issue";
       item.setAttribute("data-testid", "bernie-interpret-issue");
-      item.textContent = `${issue.code || "issue"}: ${issue.message || ""}`;
+      item.textContent = `${formatBernieCode(issue.code || "issue")}: ${issue.message || ""}`;
       issueList.appendChild(item);
     });
     preview.appendChild(issueList);
   }
 
   const metadata = envelope.provider_metadata;
-  if (metadata) {
+  const showDebugMetadata = new URLSearchParams(window.location.search).get("bernie_debug") === "true";
+  if (metadata && showDebugMetadata) {
     const provider = document.createElement("div");
     provider.className = "bernie-interpret-provider";
     provider.setAttribute("data-testid", "bernie-interpret-provider");
@@ -406,8 +484,8 @@ function renderBernieInterpretOnly(envelope) {
   hold.className = "bernie-interpret-hold";
   hold.setAttribute("data-testid", "bernie-interpret-hold");
   hold.textContent = envelope?.result === "clarification_required"
-    ? "Clarification is required before supervised booking review can continue."
-    : "Bernie blocked this instruction before supervised booking review. No booking action was prepared.";
+    ? "Bernie needs one more detail before it can search."
+    : "Bernie needs the details above before it can search. No booking was made.";
   contentEl.appendChild(hold);
 }
 
@@ -1175,6 +1253,9 @@ function renderBernieStagedBookingPreview(columnBody, col, dayStartMins, interva
 
   const card = document.createElement("div");
   card.className = "bernie-staged-booking-card";
+  if (bernieStagedBookingFresh) {
+    card.classList.add("is-fresh");
+  }
   card.setAttribute("data-testid", "bernie-staged-booking-card");
   card.style.position = "absolute";
   card.style.top = (topPx + 1) + "px";
@@ -1185,23 +1266,35 @@ function renderBernieStagedBookingPreview(columnBody, col, dayStartMins, interva
 
   const title = document.createElement("div");
   title.className = "bernie-staged-title";
-  title.textContent = "Bernie provisional booking";
+  title.textContent = "Proposed appointment";
   card.appendChild(title);
-
-  const time = document.createElement("div");
-  time.className = "bernie-staged-line";
-  time.textContent = `${preview.appointment_date} @ ${preview.start_time_local}`;
-  card.appendChild(time);
 
   const patient = document.createElement("div");
   patient.className = "bernie-staged-line";
   patient.textContent = preview.patient_label || "Patient identity requires staff verification";
   card.appendChild(patient);
 
+  const time = document.createElement("div");
+  time.className = "bernie-staged-line";
+  time.textContent = `${preview.appointment_date} @ ${preview.start_time_local} (${duration} mins)`;
+  card.appendChild(time);
+
+  if (preview.practitioner_label) {
+    const practitioner = document.createElement("div");
+    practitioner.className = "bernie-staged-line";
+    practitioner.textContent = preview.practitioner_label;
+    card.appendChild(practitioner);
+  }
+
   const identity = document.createElement("div");
   identity.className = "bernie-staged-identity";
   identity.textContent = preview.identity_message || "Verify DOB and Medicare/card details before confirming.";
   card.appendChild(identity);
+
+  card.addEventListener("animationend", () => {
+    card.classList.remove("is-fresh");
+    bernieStagedBookingFresh = false;
+  }, { once: true });
 
   columnBody.appendChild(card);
   setTimeout(() => {
@@ -1213,15 +1306,18 @@ async function stageBernieCandidateForReview(slot, index) {
   if (!slot) return;
   const command = bernieInterpretResult?.command_candidate || {};
   const identity = bernieLatestIdentityEvidence || {};
+  const reviewPayload = bernieLatestReviewPayload || {};
   const targetDate = dateFromLocalKey(slot.appointment_date);
   bernieSelectedCandidateIndex = index;
+  bernieStagedBookingFresh = true;
   bernieStagedBookingPreview = {
     appointment_date: slot.appointment_date,
     start_time_local: slot.start_time_local,
     duration_minutes: slot.duration_minutes || command.duration_minutes || 15,
     practitioner_id: command.practitioner_id || "",
+    practitioner_label: berniePractitionerLabelFromPayload(reviewPayload),
     patient_id: command.patient_id || "",
-    patient_label: identity.patient_label || (
+    patient_label: berniePatientLabelFromPayload(reviewPayload) || identity.patient_label || (
       command.patient_id
         ? "Linked patient candidate - verify identity before confirming"
         : "Provisional patient - identity not linked yet"
@@ -2437,8 +2533,9 @@ const mockBernieReviewConfirmationReady = {
   }
 };
 
-function renderBernieIdentityEvidence(contentEl, evidence) {
-  if (!contentEl || !evidence) return;
+function renderBernieIdentityEvidence(contentEl, evidence, patientEvidence = null) {
+  if (!contentEl || (!evidence && !patientEvidence)) return;
+  evidence = evidence || {};
 
   const card = document.createElement("div");
   card.className = `bernie-identity-evidence ${evidence.confidence || "low"}`;
@@ -2446,35 +2543,29 @@ function renderBernieIdentityEvidence(contentEl, evidence) {
 
   const title = document.createElement("div");
   title.className = "bernie-identity-title";
-  title.textContent = "Patient Identity Check";
+  title.textContent = "Patient details";
   card.appendChild(title);
 
-  const summary = document.createElement("div");
-  summary.className = "bernie-identity-summary";
-  summary.textContent = `${evidence.patient_label || "Unlinked patient"} - ${evidence.confidence || "low"} confidence`;
-  card.appendChild(summary);
+  appendBernieDetailRow(card, "Patient", patientEvidence?.patient_label || evidence.patient_label || "Unlinked patient", "bernie-patient-evidence-label");
+  appendBernieDetailRow(card, "DOB", patientEvidence?.date_of_birth || "");
+  appendBernieDetailRow(card, "Phone", patientEvidence?.masked_phone || "");
+  appendBernieDetailRow(card, "Identity evidence", `${formatBernieCode(patientEvidence?.confidence || evidence.confidence || "low")} confidence`);
 
   const fields = Array.isArray(evidence.matched_fields) ? evidence.matched_fields : [];
   if (fields.length > 0) {
-    const matched = document.createElement("div");
-    matched.className = "bernie-identity-line";
-    matched.textContent = `Matched: ${fields.join(", ")}`;
-    card.appendChild(matched);
+    appendBernieDetailRow(card, "Matched", fields.map(formatBernieCode).join(", "));
   }
 
   const context = Array.isArray(evidence.supporting_context) ? evidence.supporting_context : [];
   if (context.length > 0) {
-    const contextLine = document.createElement("div");
-    contextLine.className = "bernie-identity-line";
-    contextLine.textContent = `Context: ${context.join(", ")}`;
-    card.appendChild(contextLine);
+    appendBernieDetailRow(card, "Context", context.map(formatBernieCode).join(", "));
   }
 
   const warnings = Array.isArray(evidence.warnings) ? evidence.warnings : [];
   if (warnings.length > 0) {
     const warningLine = document.createElement("div");
     warningLine.className = "bernie-identity-warning";
-    warningLine.textContent = `Check: ${warnings.join(", ")}`;
+    warningLine.textContent = `Check: ${warnings.map(formatBernieCode).join(", ")}`;
     card.appendChild(warningLine);
   }
 
@@ -2491,6 +2582,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   if (!contentEl) return;
   contentEl.innerHTML = "";
   bernieLatestIdentityEvidence = payload.identity_evidence || null;
+  bernieLatestReviewPayload = payload || null;
   if (isBerniePilotActive) {
     renderBernieInstructionInput(contentEl);
   }
@@ -2502,30 +2594,24 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   const statusBadge = document.createElement("div");
   statusBadge.className = `bernie-status-badge ${payload.status}`;
   statusBadge.setAttribute("data-testid", "bernie-review-status");
-  statusBadge.textContent = payload.status.replace(/_/g, " ");
+  statusBadge.textContent = bernieStatusCopy(payload.status);
   contentEl.appendChild(statusBadge);
 
   // 2. Headline
   const headline = document.createElement("h3");
   headline.className = "bernie-review-headline";
   headline.setAttribute("data-testid", "bernie-review-headline");
-  if (payload.status === "blocked") {
-    headline.textContent = "Supervised Booking Blocked";
-  } else if (payload.status === "candidate_selection_required") {
-    headline.textContent = "Supervised Candidate Selection Required";
-  } else {
-    headline.textContent = "Supervised Proposal Ready";
-  }
+  headline.textContent = bernieHeadlineCopy(payload.status);
   contentEl.appendChild(headline);
 
   // 3. Action Required
   const actionEl = document.createElement("div");
   actionEl.className = "bernie-review-action";
   actionEl.setAttribute("data-testid", "bernie-review-action");
-  actionEl.textContent = payload.evidence_summary || "Action Required";
+  actionEl.textContent = bernieReviewActionCopy(payload);
   contentEl.appendChild(actionEl);
 
-  renderBernieIdentityEvidence(contentEl, payload.identity_evidence);
+  renderBernieIdentityEvidence(contentEl, payload.identity_evidence, payload.patient_evidence);
 
   // 4. Content Section depending on Status
   if (payload.status === "blocked") {
@@ -2534,7 +2620,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
     const title = document.createElement("span");
     title.className = "bernie-section-title";
-    title.textContent = "Block Issues";
+    title.textContent = "Needs";
     blocksContainer.appendChild(title);
 
     const list = document.createElement("div");
@@ -2544,7 +2630,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       const item = document.createElement("div");
       item.className = "bernie-block-item";
       item.setAttribute("data-testid", "bernie-review-block-item");
-      item.textContent = `${block.code}: ${block.message}`;
+      item.textContent = `${formatBernieCode(block.code)}: ${block.message}`;
       list.appendChild(item);
     });
 
@@ -2557,7 +2643,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
     const title = document.createElement("span");
     title.className = "bernie-section-title";
-    title.textContent = "Candidate Slots";
+    title.textContent = "Available times";
     candidatesContainer.appendChild(title);
 
     const list = document.createElement("div");
@@ -2576,7 +2662,11 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       const item = document.createElement("button");
       item.type = "button";
       item.className = "bernie-candidate-item";
+      if (index === bernieSelectedCandidateIndex) {
+        item.classList.add("selected");
+      }
       item.setAttribute("data-testid", "bernie-review-candidate-item");
+      item.setAttribute("aria-pressed", index === bernieSelectedCandidateIndex ? "true" : "false");
       item.setAttribute("aria-label", `Preview candidate slot ${slot.appointment_date} at ${slot.start_time_local}`);
       item.addEventListener("click", () => {
         stageBernieCandidateForReview(slot, index);
@@ -2592,7 +2682,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
       const actionSpan = document.createElement("span");
       actionSpan.className = "bernie-candidate-action";
-      actionSpan.textContent = "Preview on diary";
+      actionSpan.textContent = "Show on diary";
       item.appendChild(actionSpan);
 
       list.appendChild(item);
@@ -2607,7 +2697,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
     const title = document.createElement("span");
     title.className = "bernie-section-title";
-    title.textContent = "Selected Slot";
+    title.textContent = "Appointment details";
     selectionContainer.appendChild(title);
 
     const card = document.createElement("div");
@@ -2619,6 +2709,10 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     timeSpan.textContent = `${payload.selected_slot.appointment_date} @ ${payload.selected_slot.start_time_local}`;
     card.appendChild(timeSpan);
 
+    appendBernieDetailRow(card, "Patient", berniePatientLabelFromPayload(payload));
+    appendBernieDetailRow(card, "Practitioner", berniePractitionerLabelFromPayload(payload));
+    appendBernieDetailRow(card, "DOB", payload.patient_evidence?.date_of_birth || "");
+
     const durationSpan = document.createElement("div");
     durationSpan.textContent = `Duration: ${payload.selected_slot.duration_minutes} mins`;
     card.appendChild(durationSpan);
@@ -2626,30 +2720,28 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     selectionContainer.appendChild(card);
     contentEl.appendChild(selectionContainer);
 
-    // Confirmation Form Elements
     const confirmBox = document.createElement("div");
     confirmBox.className = "bernie-confirmation-box";
 
-    const checkboxLabel = document.createElement("label");
-    checkboxLabel.className = "bernie-checkbox-label";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.setAttribute("data-testid", "bernie-review-approval-checkbox");
-    checkbox.id = "bernie-approval-checkbox";
-
-    const labelText = document.createTextNode(" I have verified the proposed slot and explicitly authorize confirming this booking.");
-    checkboxLabel.appendChild(checkbox);
-    checkboxLabel.appendChild(labelText);
-    confirmBox.appendChild(checkboxLabel);
+    const confirmHint = document.createElement("div");
+    confirmHint.className = "bernie-confirm-hint";
+    confirmHint.textContent = "Review the details before confirming.";
+    confirmBox.appendChild(confirmHint);
 
     const confirmBtn = document.createElement("button");
     confirmBtn.className = "btn-bernie-confirm";
     confirmBtn.setAttribute("data-testid", "bernie-review-confirm-button");
+    confirmBtn.setAttribute("aria-keyshortcuts", "Control+Alt+Enter");
+    confirmBtn.title = "Confirm booking (Ctrl+Alt+Enter)";
     confirmBtn.id = "btn-bernie-confirm";
-    confirmBtn.textContent = "Confirm and Process Booking";
-    confirmBtn.disabled = true;
+    confirmBtn.textContent = "Confirm booking";
+    confirmBtn.disabled = false;
     confirmBox.appendChild(confirmBtn);
+
+    const shortcutHint = document.createElement("div");
+    shortcutHint.className = "bernie-shortcut-hint";
+    shortcutHint.textContent = "Shortcut: Ctrl+Alt+Enter";
+    confirmBox.appendChild(shortcutHint);
 
     const urlParams = new URLSearchParams(window.location.search);
     const isSmoke = urlParams.get("smoke") === "true";
@@ -2665,9 +2757,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     successMsg.setAttribute("data-testid", "bernie-review-success-message");
     successMsg.id = "bernie-success-message";
     if (isConfirmAdapter) {
-      successMsg.textContent = "Booking proposal approved successfully and confirmed by staff!";
+      successMsg.textContent = "Booking confirmed.";
     } else {
-      successMsg.textContent = "Booking proposal approved successfully! (Simulated by staff)";
+      successMsg.textContent = "Booking confirmed. (Simulated)";
     }
     confirmBox.appendChild(successMsg);
 
@@ -2679,16 +2771,10 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
     contentEl.appendChild(confirmBox);
 
-    // Event listener to enable/disable button
-    checkbox.addEventListener("change", (e) => {
-      confirmBtn.disabled = !e.target.checked;
-    });
-
     // Event listener to simulate or execute confirmation
     confirmBtn.addEventListener("click", async () => {
       if (confirmBtn.disabled) return;
       confirmBtn.disabled = true;
-      checkbox.disabled = true;
       successMsg.classList.add("hidden");
       errorMsg.classList.add("hidden");
 
@@ -2705,6 +2791,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
           if (response.ok) {
             successMsg.classList.remove("hidden");
             bernieStagedBookingPreview = null;
+            bernieStagedBookingFresh = false;
             bernieSelectedCandidateIndex = null;
             await loadDiary(true);
           } else {
@@ -2715,16 +2802,14 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             } catch (e) {
               detail = `Status ${response.status}`;
             }
-            errorMsg.textContent = `Booking proposal confirmation failed: ${detail}`;
+            errorMsg.textContent = `Booking could not be confirmed: ${detail}`;
             errorMsg.classList.remove("hidden");
             confirmBtn.disabled = false;
-            checkbox.disabled = false;
           }
         } catch (err) {
-          errorMsg.textContent = `Booking proposal confirmation failed: ${err.message || err}`;
+          errorMsg.textContent = `Booking could not be confirmed: ${err.message || err}`;
           errorMsg.classList.remove("hidden");
           confirmBtn.disabled = false;
-          checkbox.disabled = false;
         }
       } else {
         if (payload.confirm_payload) {
@@ -2732,11 +2817,33 @@ function renderBernieReview(payload, interpretEnvelope = null) {
         }
         successMsg.classList.remove("hidden");
         bernieStagedBookingPreview = null;
+        bernieStagedBookingFresh = false;
         bernieSelectedCandidateIndex = null;
         await loadDiary(true);
       }
     });
   }
+}
+
+function handleBernieConfirmShortcut(event) {
+  if (!event.ctrlKey || !event.altKey || event.shiftKey || event.metaKey || event.key !== "Enter") {
+    return;
+  }
+  const active = document.activeElement;
+  if (active && (active.tagName === "TEXTAREA" || active.tagName === "INPUT" || active.isContentEditable)) {
+    return;
+  }
+  const panel = document.getElementById("bernie-review-panel");
+  const button = document.getElementById("btn-bernie-confirm");
+  if (!panel || panel.classList.contains("hidden") || !button || button.disabled) {
+    return;
+  }
+  const isVisible = button.offsetParent !== null;
+  if (!isVisible) {
+    return;
+  }
+  event.preventDefault();
+  button.click();
 }
 
 function buildBernieContextMismatchPayload(interpretedCommand, expectedCommand) {
@@ -2772,14 +2879,14 @@ function renderBerniePilotContextForm(blocks = []) {
 
   const title = document.createElement("div");
   title.className = "bernie-pilot-context-title";
-  title.textContent = "Supervised pilot context required";
+  title.textContent = "Choose appointment context";
   form.appendChild(title);
 
   const hint = document.createElement("p");
   hint.className = "bernie-pilot-context-hint";
   hint.textContent = allowManualContext
-    ? "Provide practitioner and patient IDs to load clinical context. All scheduling actions require explicit staff review and confirmation."
-    : "Select a linked diary appointment and import its context. All scheduling actions require explicit staff review and confirmation.";
+    ? "Provide practitioner and patient IDs to load booking context. Nothing is booked until staff confirm."
+    : "Select a linked diary appointment and import its context. Nothing is booked until staff confirm.";
   form.appendChild(hint);
 
   let practitionerInput = null;
@@ -2817,8 +2924,8 @@ function renderBerniePilotContextForm(blocks = []) {
     summary.className = "bernie-pilot-context-warning";
     summary.setAttribute("data-testid", "bernie-pilot-context-warning");
     summary.textContent = allowManualContext
-      ? "Supervised review is blocked until both practitioner and patient IDs are explicitly provided."
-      : "Supervised review is blocked until a linked selected appointment supplies practitioner and patient context.";
+      ? "Bernie needs both practitioner and patient IDs before it can search."
+      : "Bernie needs a linked selected appointment before it can import context.";
     form.appendChild(summary);
   }
 
@@ -2827,7 +2934,7 @@ function renderBerniePilotContextForm(blocks = []) {
     submitBtn.type = "submit";
     submitBtn.className = "btn-bernie-context-submit";
     submitBtn.setAttribute("data-testid", "bernie-pilot-context-submit");
-    submitBtn.textContent = "Prepare Supervised Review";
+    submitBtn.textContent = "Use this context";
     form.appendChild(submitBtn);
   }
 
@@ -3086,7 +3193,7 @@ function renderBernieInstructionInput(contentEl) {
   const textarea = document.createElement("textarea");
   textarea.id = "bernie-instruction-input";
   textarea.setAttribute("data-testid", "bernie-instruction-input");
-  textarea.placeholder = "Type booking instructions for staff-supervised analysis (non-PHI)...";
+  textarea.placeholder = "Tell Bernie what appointment to find...";
   textarea.value = bernieInstructionText || "";
   if (!contextReady) {
     textarea.disabled = true;
@@ -3096,7 +3203,7 @@ function renderBernieInstructionInput(contentEl) {
   button.id = "btn-bernie-instruction-submit";
   button.className = "btn-bernie-instruction-submit";
   button.setAttribute("data-testid", "btn-bernie-instruction-submit");
-  button.textContent = "Submit Instruction for Review";
+  button.textContent = "Find times";
   if (!contextReady) {
     button.disabled = true;
   }
@@ -3112,7 +3219,7 @@ function renderBernieInstructionInput(contentEl) {
   const updateInstructionStatusCopy = () => {
     const text = textarea.value.trim();
     if (contextReady && text.length > 0) {
-      statusCopy.textContent = "Instruction ready for supervised analysis. Submit to prepare a booking proposal for staff review. Nothing is booked until you approve it.";
+      statusCopy.textContent = "Ready to search. Nothing is booked until you confirm.";
       statusCopy.style.display = "block";
     } else {
       statusCopy.textContent = "";
@@ -3179,7 +3286,7 @@ function renderBernieInstructionInput(contentEl) {
     bernieInstructionText = text;
     button.disabled = true;
     textarea.disabled = true;
-    button.textContent = "Interpreting...";
+    button.textContent = "Finding times...";
 
     try {
       const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
@@ -3284,7 +3391,7 @@ async function loadBernieLiveReview() {
     renderBernieInstructionInput(contentEl);
     const loader = document.createElement("div");
     loader.className = "bernie-loading";
-    loader.textContent = "Loading live pilot review...";
+    loader.textContent = "Finding times...";
     contentEl.appendChild(loader);
   }
 
@@ -3347,7 +3454,7 @@ async function loadBernieLiveReview() {
       const banner = document.createElement("div");
       banner.className = "bernie-pilot-banner";
       banner.setAttribute("data-testid", "bernie-pilot-banner");
-      banner.innerHTML = "⚠️ <strong>Supervised Pilot Mode:</strong> Verify all details. Booking requires explicit staff authorization.";
+      banner.textContent = "Review the details before confirming.";
       // Insert right after the instruction container
       const container = document.getElementById("bernie-instruction-container");
       if (container && container.nextSibling) {
@@ -3439,6 +3546,7 @@ async function initBernieReview() {
 // ─── INIT ──────────────────────────────────────────────────
 Office.onReady(() => {
   loadBreakOverrides();
+  document.addEventListener("keydown", handleBernieConfirmShortcut);
 
   setActiveTemplate(activeTemplate);
 

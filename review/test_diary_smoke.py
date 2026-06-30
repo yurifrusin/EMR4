@@ -228,19 +228,19 @@ def test_bernie_review_blocked(diary_page):
 
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
-        assert status.text_content().strip() == "blocked"
+        assert status.text_content().strip() == "Needs details"
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Supervised Booking Blocked"
+        assert headline.text_content().strip() == "Add the missing details"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
-        assert "Blocked review payload" in action.text_content()
+        assert "Nothing is booked yet" in action.text_content()
 
         # Verify block issues list
         assert diary_page.locator("[data-testid='bernie-review-blocks-list']").count() == 1
-        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_id").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="Missing Practitioner Id").count() == 1
 
         # Verify confirmation sections/elements are hidden
         assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 0
@@ -260,15 +260,15 @@ def test_bernie_review_candidate_selection(diary_page):
 
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
-        assert status.text_content().strip() == "candidate selection required"
+        assert status.text_content().strip() == "Choose a time"
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Supervised Candidate Selection Required"
+        assert headline.text_content().strip() == "Bernie found these times"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
-        assert "Candidate slot summaries are review-only" in action.text_content()
+        assert "Nothing is booked until you confirm" in action.text_content()
 
         # Verify candidates list
         assert diary_page.locator("[data-testid='bernie-review-candidates-list']").count() == 1
@@ -294,47 +294,33 @@ def test_bernie_review_confirmation_ready(diary_page):
 
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
-        assert status.text_content().strip() == "confirmation ready"
+        assert status.text_content().strip() == "Ready to book"
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Supervised Proposal Ready"
+        assert headline.text_content().strip() == "Ready to book this appointment"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
-        assert "Confirm payload carries slot-selection" in action.text_content()
+        assert "Review the details before confirming" in action.text_content()
 
         # Verify selected slot
         assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 1
         assert "09:00:00" in diary_page.locator("[data-testid='bernie-review-selected-slot']").text_content()
 
-        # Verify approval elements
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        # Verify explicit confirm action
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
 
-        assert checkbox.is_visible()
-        assert checkbox.is_checked() is False
         assert confirm_btn.is_visible()
-        assert confirm_btn.is_disabled()
+        assert confirm_btn.is_disabled() is False
         assert success_msg.is_hidden()
 
-        # Checking checkbox enables button
-        checkbox.check()
-        assert confirm_btn.is_disabled() is False
-
-        # Unchecking checkbox disables button
-        checkbox.uncheck()
-        assert confirm_btn.is_disabled()
-
-        # Re-checking checkbox and clicking confirm simulates booking
-        checkbox.check()
         confirm_btn.click()
 
         assert confirm_btn.is_disabled()
-        assert checkbox.is_disabled()
         assert success_msg.is_visible()
-        assert "Booking proposal approved successfully" in success_msg.text_content()
+        assert "Booking confirmed" in success_msg.text_content()
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
@@ -406,19 +392,19 @@ def test_bernie_review_live_blocked(diary_page):
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
         status.wait_for(state="visible", timeout=5000)
-        assert status.text_content().strip() == "blocked"
+        assert status.text_content().strip() == "Needs details"
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Supervised Booking Blocked"
+        assert headline.text_content().strip() == "Add the missing details"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
-        assert "Blocked review payload" in action.text_content()
+        assert "Nothing is booked yet" in action.text_content()
 
         # Verify block issues list
         assert diary_page.locator("[data-testid='bernie-review-blocks-list']").count() == 1
-        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_id").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="Missing Practitioner Id").count() == 1
 
         # Verify confirmation sections/elements are hidden
         assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 0
@@ -509,15 +495,15 @@ def test_bernie_review_live_candidate_selection(diary_page):
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
         status.wait_for(state="visible", timeout=5000)
-        assert status.text_content().strip() == "candidate selection required"
+        assert status.text_content().strip() == "Choose a time"
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Supervised Candidate Selection Required"
+        assert headline.text_content().strip() == "Bernie found these times"
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
-        assert "Candidate slot summaries are review-only" in action.text_content()
+        assert "Choose a time to show it on the diary" in action.text_content()
 
         # Verify candidates list
         assert diary_page.locator("[data-testid='bernie-review-candidates-list']").count() == 1
@@ -654,38 +640,30 @@ def test_bernie_review_live_confirmation_ready(diary_page):
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
         status.wait_for(state="visible", timeout=5000)
-        assert status.text_content().strip() == "confirmation ready"
+        assert status.text_content().strip() == "Ready to book"
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Supervised Proposal Ready"
+        assert headline.text_content().strip() == "Ready to book this appointment"
 
         # Verify selected slot
         assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 1
         assert "09:00:00" in diary_page.locator("[data-testid='bernie-review-selected-slot']").text_content()
 
-        # Verify approval elements
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
+        # Verify explicit confirm action
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
 
-        assert checkbox.is_visible()
-        assert checkbox.is_checked() is False
         assert confirm_btn.is_visible()
-        assert confirm_btn.is_disabled()
-        assert success_msg.is_hidden()
-
-        # Checking checkbox enables button
-        checkbox.check()
         assert confirm_btn.is_disabled() is False
+        assert success_msg.is_hidden()
 
         # Click confirm simulates booking
         confirm_btn.click()
 
         assert confirm_btn.is_disabled()
-        assert checkbox.is_disabled()
         assert success_msg.is_visible()
-        assert "Booking proposal approved successfully" in success_msg.text_content()
+        assert "Booking confirmed" in success_msg.text_content()
     finally:
         # Clean up routes
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
@@ -809,12 +787,12 @@ def test_bernie_interpret_preview_renders_before_supervised_review(diary_page):
         assert len(supervised_requests) == 1
         assert len(confirm_payloads) == 0
 
-        assert diary_page.locator("[data-testid='bernie-interpret-status']").text_content().strip() == "interpreted"
+        assert diary_page.locator("[data-testid='bernie-interpret-status']").text_content().strip() == "Understood"
         assert "Find a 15 minute follow-up" in diary_page.locator("[data-testid='bernie-interpret-summary']").text_content()
-        assert "Practitioner: prac-1" in diary_page.locator("[data-testid='bernie-interpret-command']").text_content()
-        assert "Provider: mocked non-live" in diary_page.locator("[data-testid='bernie-interpret-provider']").text_content()
-        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "confirmation ready"
-        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").is_disabled()
+        assert "Date:" in diary_page.locator("[data-testid='bernie-interpret-command']").text_content()
+        assert diary_page.locator("[data-testid='bernie-interpret-provider']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "Ready to book"
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").is_disabled() is False
     finally:
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
@@ -826,8 +804,8 @@ def test_bernie_interpret_preview_renders_before_supervised_review(diary_page):
 @pytest.mark.parametrize(
     "result,expected_status,expected_detail",
     [
-        ("clarification_required", "clarification required", "Please provide practitioner_id before Bernie searches for slots."),
-        ("blocked", "blocked", "Autonomous booking language is blocked."),
+        ("clarification_required", "Clarification Required", "Please provide practitioner_id before Bernie searches for slots."),
+        ("blocked", "Needs details", "Autonomous booking language is blocked."),
     ],
 )
 def test_bernie_interpret_preview_holds_supervised_review_until_safe(diary_page, result, expected_status, expected_detail):
@@ -1000,24 +978,17 @@ def test_bernie_confirm_submit_adapter_success(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=confirmation_ready&bernie_confirm_adapter=true")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
         error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
 
-        assert checkbox.is_visible()
-        assert checkbox.is_checked() is False
         assert confirm_btn.is_visible()
-        assert confirm_btn.is_disabled()
+        assert confirm_btn.is_disabled() is False
         assert success_msg.is_hidden()
         assert error_msg.is_hidden()
 
         # No submit before approval
         assert len(payload_received) == 0
-
-        # Check box, button enabled
-        checkbox.check()
-        assert confirm_btn.is_disabled() is False
 
         # Click confirm
         confirm_btn.click()
@@ -1027,10 +998,9 @@ def test_bernie_confirm_submit_adapter_success(diary_page):
 
         # UI state after click
         assert confirm_btn.is_disabled()
-        assert checkbox.is_disabled()
         assert success_msg.is_visible()
         assert error_msg.is_hidden()
-        assert "Booking proposal approved successfully" in success_msg.text_content()
+        assert "Booking confirmed" in success_msg.text_content()
 
         # Verify POST payload
         assert len(payload_received) == 1
@@ -1071,12 +1041,10 @@ def test_bernie_confirm_submit_adapter_error_and_retry(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=confirmation_ready&bernie_confirm_adapter=true")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
         error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
 
-        checkbox.check()
         confirm_btn.click()
 
          # First attempt (fails)
@@ -1085,8 +1053,7 @@ def test_bernie_confirm_submit_adapter_error_and_retry(diary_page):
         assert "Database connection lost" in error_msg.text_content()
         assert success_msg.is_hidden()
 
-        # Checkbox and button re-enabled for retry
-        assert checkbox.is_disabled() is False
+        # Button re-enabled for retry
         assert confirm_btn.is_disabled() is False
 
         # Retry
@@ -1096,7 +1063,6 @@ def test_bernie_confirm_submit_adapter_error_and_retry(diary_page):
         success_msg.wait_for(state="visible", timeout=5000)
         assert success_msg.is_visible()
         assert error_msg.is_hidden()
-        assert checkbox.is_disabled()
         assert confirm_btn.is_disabled()
         assert request_count == 2
     finally:
@@ -1114,13 +1080,11 @@ def test_bernie_confirm_submit_adapter_disabled_for_non_confirmable_states(diary
         # Blocked state with bernie_confirm_adapter=true
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=blocked&bernie_confirm_adapter=true")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
-        assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
 
         # Candidate selection state with bernie_confirm_adapter=true
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=candidate_selection_required&bernie_confirm_adapter=true")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
-        assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
     finally:
         diary_page.goto(base_url + CHECKS["target"])
@@ -1274,23 +1238,17 @@ def test_bernie_live_confirm_flow_harness_success(diary_page):
 
         trigger_live_bernie(diary_page)
 
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
         error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
 
-        checkbox.wait_for(state="visible", timeout=5000)
+        confirm_btn.wait_for(state="visible", timeout=5000)
         assert len(supervised_requests) == 1
         assert supervised_requests[0]["selected_candidate_index"] == 0
 
-        assert checkbox.is_visible()
-        assert confirm_btn.is_disabled()
+        assert confirm_btn.is_disabled() is False
         assert success_msg.is_hidden()
         assert error_msg.is_hidden()
-        assert len(confirm_payloads) == 0
-
-        checkbox.check()
-        assert confirm_btn.is_disabled() is False
         assert len(confirm_payloads) == 0
 
         confirm_btn.click()
@@ -1314,8 +1272,8 @@ def test_bernie_live_confirm_flow_harness_success(diary_page):
 @pytest.mark.parametrize(
     ("review_response", "expected_status"),
     [
-        (_bernie_live_blocked_response, "blocked"),
-        (_bernie_live_candidate_response, "candidate selection required"),
+        (_bernie_live_blocked_response, "Needs details"),
+        (_bernie_live_candidate_response, "Choose a time"),
     ],
 )
 def test_bernie_live_confirm_flow_harness_non_confirmable_states(diary_page, review_response, expected_status):
@@ -1348,7 +1306,6 @@ def test_bernie_live_confirm_flow_harness_non_confirmable_states(diary_page, rev
 
         assert len(supervised_requests) == 1
         assert status_locator.text_content().strip() == expected_status
-        assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
         assert len(confirm_payloads) == 0
     finally:
@@ -1387,7 +1344,7 @@ def test_bernie_live_confirm_flow_harness_supervised_booking_error_no_write(diar
         status_locator.wait_for(state="visible", timeout=5000)
 
         assert len(supervised_requests) == 1
-        assert status_locator.text_content().strip() == "blocked"
+        assert status_locator.text_content().strip() == "Needs details"
         assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="HTTP status 500").count() == 1
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
         assert len(confirm_payloads) == 0
@@ -1481,26 +1438,21 @@ def test_bernie_dev_mode_review_feature_flag_success(diary_page):
 
         trigger_live_bernie(diary_page)
 
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
         error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
 
-        checkbox.wait_for(state="visible", timeout=5000)
+        confirm_btn.wait_for(state="visible", timeout=5000)
         assert len(supervised_requests) == 1
         assert supervised_requests[0]["selected_candidate_index"] == 0
 
-        assert checkbox.is_visible()
-        assert checkbox.is_checked() is False
         assert confirm_btn.is_visible()
-        assert confirm_btn.is_disabled()
+        assert confirm_btn.is_disabled() is False
         assert success_msg.is_hidden()
         assert error_msg.is_hidden()
         assert len(confirm_payloads) == 0
 
-        # Verify explicit approval gating
-        checkbox.check()
-        assert confirm_btn.is_disabled() is False
+        # Verify explicit staff confirmation is the only write trigger.
         assert len(confirm_payloads) == 0
 
         confirm_btn.click()
@@ -1609,21 +1561,10 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
         assert "state=confirmation_ready" in dev_fixtures_requests[-1]
         assert len(confirm_payloads) == 0
 
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
-        assert checkbox.is_visible()
-        assert checkbox.is_checked() is False
         assert confirm_btn.is_visible()
-        assert confirm_btn.is_disabled()
-
-        try:
-            confirm_btn.click(timeout=1000, force=True)
-        except Exception:
-            pass
-        assert len(confirm_payloads) == 0
-
-        checkbox.check()
         assert confirm_btn.is_disabled() is False
+        assert len(confirm_payloads) == 0
         confirm_btn.click()
         diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
         assert len(confirm_payloads) == 1
@@ -1695,7 +1636,7 @@ def test_bernie_dev_review_fixture_route(diary_page):
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
         assert len(dev_fixtures_requests) == 0
         status = diary_page.locator("[data-testid='bernie-review-status']")
-        assert status.text_content().strip() == "blocked"
+        assert status.text_content().strip() == "Needs details"
 
         # 4. Proves dev-review fixture failures are visible and do not silently fall back to mocks
         diary_page.unroute("**/api/v1/appointments/dev/bernie-review-fixtures*")
@@ -1705,7 +1646,7 @@ def test_bernie_dev_review_fixture_route(diary_page):
         )
         diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&bernie_review=blocked")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
-        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="dev_fixture_unavailable").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="Dev Fixture Unavailable").count() == 1
         diary_page.unroute("**/api/v1/appointments/dev/bernie-review-fixtures*")
         diary_page.route("**/api/v1/appointments/dev/bernie-review-fixtures*", handle_dev_fixtures)
 
@@ -1716,8 +1657,8 @@ def test_bernie_dev_review_fixture_route(diary_page):
         assert "state=blocked" in dev_fixtures_requests[-1]
 
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Supervised Booking Blocked"
-        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="missing_practitioner_id").count() == 1
+        assert headline.text_content().strip() == "Add the missing details"
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="Missing Practitioner Id").count() == 1
 
         # 6. Proves dev-review = candidate_selection_required fetches and renders
         diary_page.goto(base_url + "/diary/diary.html?bernie_dev_review=true&bernie_review=candidate_selection_required")
@@ -1726,7 +1667,7 @@ def test_bernie_dev_review_fixture_route(diary_page):
         assert "state=candidate_selection_required" in dev_fixtures_requests[-1]
 
         status = diary_page.locator("[data-testid='bernie-review-status']")
-        assert status.text_content().strip() == "candidate selection required"
+        assert status.text_content().strip() == "Choose a time"
 
         # 7. Proves dev-review = confirmation_ready fetches, renders and can confirm (route-intercepted)
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_dev_review=true&bernie_review=confirmation_ready&bernie_confirm_adapter=true")
@@ -1735,23 +1676,12 @@ def test_bernie_dev_review_fixture_route(diary_page):
         assert "state=confirmation_ready" in dev_fixtures_requests[-1]
 
         status = diary_page.locator("[data-testid='bernie-review-status']")
-        assert status.text_content().strip() == "confirmation ready"
+        assert status.text_content().strip() == "Ready to book"
 
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
-        assert checkbox.is_visible()
-        assert checkbox.is_checked() is False
         assert confirm_btn.is_visible()
-        assert confirm_btn.is_disabled()
-
-        try:
-            confirm_btn.click(timeout=1000, force=True)
-        except Exception:
-            pass
-        assert len(confirm_payloads) == 0
-
-        checkbox.check()
         assert confirm_btn.is_disabled() is False
+        assert len(confirm_payloads) == 0
         confirm_btn.click()
         diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
         assert len(confirm_payloads) == 1
@@ -1906,10 +1836,10 @@ def test_bernie_pilot_eligibility_eligible(diary_page):
 
         banner = diary_page.locator("[data-testid='bernie-pilot-banner']")
         assert banner.is_visible()
-        assert "Supervised Pilot Mode" in banner.text_content()
+        assert "Review the details before confirming." in banner.text_content()
 
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Supervised Proposal Ready"
+        assert headline.text_content().strip() == "Ready to book this appointment"
 
     finally:
         diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
@@ -2021,7 +1951,6 @@ def test_bernie_pilot_ordinary_mode_requires_real_context(diary_page):
         assert diary_page.locator("[data-testid='bernie-review-status']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-block-item']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
-        assert diary_page.locator("[data-testid='bernie-review-approval-checkbox']").count() == 0
     finally:
         diary_page.evaluate("localStorage.removeItem('emr4_token')")
         diary_page.unroute("**/api/v1/**")
@@ -2202,16 +2131,10 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         assert len(confirm_payloads) == 0
 
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
-        assert confirm_btn.is_disabled()
-        try:
-            confirm_btn.click(timeout=1000, force=True)
-        except Exception:
-            pass
+        assert confirm_btn.is_visible()
+        assert confirm_btn.is_disabled() is False
         assert len(confirm_payloads) == 0
 
-        checkbox.check()
-        assert confirm_btn.is_disabled() is False
         confirm_btn.click()
         diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
         assert len(confirm_payloads) == 1
@@ -2374,7 +2297,7 @@ def test_bernie_pilot_imported_context_stales_when_selection_changes(diary_page)
         diary_page.wait_for_selector("[data-testid='bernie-context-summary-details']:has-text('Samuel Lee')", state="visible", timeout=5000)
 
         trigger_live_bernie(diary_page, instruction="Please find an appointment for Samuel", register_default_mock=False)
-        diary_page.wait_for_selector("[data-testid='bernie-review-block-item']:has-text('harness_block')", state="visible", timeout=5000)
+        diary_page.wait_for_selector("[data-testid='bernie-review-block-item']:has-text('Harness Block')", state="visible", timeout=5000)
         assert len(supervised_requests) == 1
         assert supervised_requests[0]["command"]["patient_id"] == "patient-samuel-72"
         assert supervised_requests[0]["command"]["practitioner_id"] == "prac-72"
@@ -2485,27 +2408,17 @@ def test_bernie_pilot_eligibility_confirm_gated(diary_page):
 
         trigger_live_bernie(diary_page)
 
-        checkbox = diary_page.locator("[data-testid='bernie-review-approval-checkbox']")
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
-        checkbox.wait_for(state="visible", timeout=5000)
+        confirm_btn.wait_for(state="visible", timeout=5000)
 
         assert len(supervised_requests) == 1
         assert supervised_requests[0]["command"]["practitioner_id"] == "prac-1"
         assert supervised_requests[0]["reference_date"] == "2026-06-27"
 
-        assert checkbox.is_visible()
-        assert checkbox.is_checked() is False
         assert confirm_btn.is_visible()
-        assert confirm_btn.is_disabled()
-
-        try:
-            confirm_btn.click(timeout=1000, force=True)
-        except Exception:
-            pass
+        assert confirm_btn.is_disabled() is False
         assert len(confirm_payloads) == 0
 
-        checkbox.check()
-        assert confirm_btn.is_disabled() is False
         confirm_btn.click()
         diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
 
@@ -3132,7 +3045,7 @@ def test_bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised
         diary_page.fill("[data-testid='bernie-instruction-input']", "Use the typed other practitioner")
         diary_page.click("[data-testid='btn-bernie-instruction-submit']")
         diary_page.wait_for_selector(
-            "[data-testid='bernie-review-block-item']:has-text('interpreted_practitioner_context_mismatch')",
+            "[data-testid='bernie-review-block-item']:has-text('Interpreted Practitioner Context Mismatch')",
             state="visible",
             timeout=5000,
         )
@@ -3427,21 +3340,28 @@ def test_bernie_candidate_click_stages_provisional_diary_preview(diary_page):
         diary_page.wait_for_selector("[data-testid='bernie-review-candidate-item']", state="visible", timeout=5000)
         identity_text = diary_page.locator("[data-testid='bernie-identity-evidence']").text_content()
         assert "Margaret Thompson" in identity_text
-        assert "medium confidence" in identity_text
-        assert "medicare_not_on_record" in identity_text
+        assert "Medium confidence" in identity_text
+        assert "Medicare Not On Record" in identity_text
 
         diary_page.click("[data-testid='bernie-review-candidate-item']")
         diary_page.wait_for_selector("[data-testid='bernie-staged-booking-card']", state="visible", timeout=5000)
         diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
 
-        staged_text = diary_page.locator("[data-testid='bernie-staged-booking-card']").text_content()
-        assert "Bernie provisional booking" in staged_text
+        staged_card = diary_page.locator("[data-testid='bernie-staged-booking-card']")
+        staged_text = staged_card.text_content()
+        assert "Proposed appointment" in staged_text
         assert "Margaret Thompson" in staged_text
         assert "14:30:00" in staged_text
         assert "medicare/card" in staged_text.lower()
+        assert "is-fresh" in (staged_card.get_attribute("class") or "")
+        assert staged_card.evaluate("el => getComputedStyle(el).animationName") == "bernie-staged-pulse"
+        diary_page.emulate_media(reduced_motion="reduce")
+        assert staged_card.evaluate("el => getComputedStyle(el).animationName") == "none"
+        diary_page.emulate_media(reduced_motion="no-preference")
         assert supervised_requests[0].get("selected_candidate_index") is None
         assert supervised_requests[1]["selected_candidate_index"] == 0
     finally:
+        diary_page.emulate_media(reduced_motion="no-preference")
         diary_page.evaluate("localStorage.removeItem('emr4_token')")
         diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
@@ -3581,7 +3501,7 @@ def test_bernie_pilot_selected_appointment_instruction_readiness_and_resets(diar
         diary_page.click("[data-testid='bernie-suggestion-chip-0']")
         assert textarea.input_value() == "Find earlier options for this patient"
         assert status_copy.is_visible() is True
-        assert status_copy.text_content() == "Instruction ready for supervised analysis. Submit to prepare a booking proposal for staff review. Nothing is booked until you approve it."
+        assert status_copy.text_content() == "Ready to search. Nothing is booked until you confirm."
 
         # 3. Clear textarea and verify status copy is hidden
         textarea.fill("")
@@ -3590,7 +3510,7 @@ def test_bernie_pilot_selected_appointment_instruction_readiness_and_resets(diar
         # 4. Type instruction and verify typed readiness copy
         textarea.fill("Book next Friday")
         assert status_copy.is_visible() is True
-        assert status_copy.text_content() == "Instruction ready for supervised analysis. Submit to prepare a booking proposal for staff review. Nothing is booked until you approve it."
+        assert status_copy.text_content() == "Ready to search. Nothing is booked until you confirm."
         diary_page.evaluate("loadBernieLiveReview()")
         diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
         assert textarea.input_value() == "Book next Friday"
