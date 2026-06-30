@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 89fb530 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint97-bernie-ui-readiness --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: orchestration/agent_inbox/codex/plan-antigravity-antigravity-sprint97-bernie-ui-readiness.md
+- Verification run: Generated implementation plan packet with python scripts/agent_worktrees.py plan.
+- Remaining risks: None for this plan-gated submission. Core implementation risks are outlined in the plan.
