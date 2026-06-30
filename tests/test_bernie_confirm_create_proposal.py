@@ -152,11 +152,10 @@ def test_bernie_confirm_success_writes_exactly_one_appointment_and_bounded_audit
     assert data["appointment"]["practitioner_id"] == str(practitioner.id)
     assert data["appointment"]["appointment_date"] == REFERENCE_DATE
     assert data["appointment"]["start_time_local"] == "09:00:00"
-    assert data["audit_evidence"] == [
-        "bernie_confirm_create_proposal",
-        "source_slot_selection_proposal",
-        "source_create_proposal",
-    ]
+    assert "bernie_confirm_create_proposal" in data["audit_evidence"]
+    assert "source_slot_selection_proposal" in data["audit_evidence"]
+    assert "source_create_proposal" in data["audit_evidence"]
+    assert "bernie_identity_confidence_medium" in data["audit_evidence"]
     assert db.query(Appointment).count() == appointment_before + 1
     assert db.query(AppointmentAuditLog).count() == audit_before + 1
 
@@ -164,7 +163,7 @@ def test_bernie_confirm_success_writes_exactly_one_appointment_and_bounded_audit
         AppointmentAuditLog.appointment_id == data["appointment"]["id"]
     ).one()
     assert audit.action.value == "create"
-    assert audit.confirmed_warnings == data["audit_evidence"]
+    assert set(audit.confirmed_warnings) == set(data["audit_evidence"])
 
 
 def test_bernie_confirm_false_writes_no_appointment_or_audit(

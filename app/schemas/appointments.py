@@ -476,6 +476,24 @@ class BernieStaffReviewSlotSummary(BaseModel):
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
 
 
+class BerniePractitionerEvidence(BaseModel):
+    """Structured practitioner evidence for a supervised Bernie booking proposal."""
+    practitioner_id: uuid.UUID
+    display_name: str
+    provider_number: Optional[str] = None
+    location_label: Optional[str] = None
+
+
+class BerniePatientEvidence(BaseModel):
+    """Structured patient evidence for a supervised Bernie booking proposal."""
+    patient_id: Optional[uuid.UUID] = None
+    patient_label: str
+    date_of_birth: Optional[date] = None
+    masked_phone: Optional[str] = None
+    confidence: Literal["unlinked", "low", "medium", "high", "ambiguous"]
+    is_provisional: bool = False
+
+
 class BernieIdentityEvidence(BaseModel):
     """Staff-facing identity evidence for a supervised Bernie booking proposal."""
     patient_id: Optional[uuid.UUID] = None
@@ -500,6 +518,8 @@ class BernieStaffReviewPayload(BaseModel):
     selected_slot: Optional[BernieStaffReviewSlotSummary] = None
     candidate_slots: list[BernieStaffReviewSlotSummary] = Field(default_factory=list)
     identity_evidence: Optional[BernieIdentityEvidence] = None
+    practitioner_evidence: Optional[BerniePractitionerEvidence] = None
+    patient_evidence: Optional[BerniePatientEvidence] = None
     warning_summary: str
     evidence_summary: str
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)

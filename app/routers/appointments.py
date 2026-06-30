@@ -30,7 +30,8 @@ from app.schemas.appointments import (
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
     SlotSearchCommandIn, SlotSearchCommandResult, SlotSearchCommandExecutionOut,
     SlotSelectionProposalIn, SlotSelectionProposalOut,
-    BernieIdentityEvidence, BernieStaffReviewPayload, BernieStaffReviewSlotSummary,
+    BernieIdentityEvidence, BerniePractitionerEvidence, BerniePatientEvidence,
+    BernieStaffReviewPayload, BernieStaffReviewSlotSummary,
     BernieSupervisedBookingIn, BernieSupervisedBookingOut,
     BernieCreateProposalConfirmationIn, BerniePilotEligibilityOut,
     BernieBookingInstructionInterpretIn, BernieBookingInstructionInterpretOut,
@@ -61,10 +62,23 @@ KNOWN_APPOINTMENT_WARNING_CODES = {
     "waiting_area_cleared",
 }
 
-BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
+BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES: dict[str, str] = {
+    "unlinked": "bernie_identity_confidence_unlinked",
+    "low": "bernie_identity_confidence_low",
+    "medium": "bernie_identity_confidence_medium",
+    "high": "bernie_identity_confidence_high",
+    "ambiguous": "bernie_identity_confidence_ambiguous",
+}
+
+_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE = [
     "bernie_confirm_create_proposal",
     "source_slot_selection_proposal",
     "source_create_proposal",
+]
+
+BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
+    *_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE,
+    *BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES.values(),
 ]
 
 BERNIE_AUTONOMOUS_BOOKING_TERMS = (
@@ -2098,7 +2112,7 @@ def _build_bernie_identity_evidence(
     db: Session,
     practice_id: uuid.UUID,
     context_frames: Optional[list[dict]] = None,
-) -> BernieIdentityEvidence:
+) -> tuple[BernieIdentityEvidence, Optional[Patient]]:
     frames = context_frames or []
     supporting_context = _bernie_context_frame_types(frames)
     if patient_id is None:
@@ -2114,7 +2128,7 @@ def _build_bernie_identity_evidence(
                 "after staff confirm surname/name, DOB, and another identifier "
                 "where available."
             ),
-        )
+        ), None
 
     patient = db.query(Patient).filter(
         Patient.practice_id == practice_id,
@@ -2128,7 +2142,7 @@ def _build_bernie_identity_evidence(
             supporting_context=supporting_context,
             warnings=["linked_patient_not_found"],
             staff_prompt="The linked patient record was not found in this practice; do not confirm until resolved.",
-        )
+        ), None
 
     matched_fields = ["patient_id", "name", "date_of_birth"]
     warnings: list[str] = []
@@ -2206,6 +2220,68 @@ def _build_bernie_identity_evidence(
         supporting_context=supporting_context,
         warnings=warnings,
         staff_prompt=staff_prompt,
+    ), patient
+
+
+def _mask_phone(phone: Optional[str]) -> Optional[str]:
+    if not phone:
+        return None
+    digits = re.sub(r"\D", "", phone)
+    if len(digits) < 4:
+        return "****"
+    return "*" * (len(digits) - 4) + digits[-4:]
+
+
+def _build_bernie_patient_evidence(
+    identity_evidence: BernieIdentityEvidence,
+    patient: Optional[Patient],
+) -> Optional[BerniePatientEvidence]:
+    if patient is None:
+        if identity_evidence.confidence == "unlinked":
+            return BerniePatientEvidence(
+                patient_label=identity_evidence.patient_label or "No linked patient",
+                confidence="unlinked",
+                is_provisional=True,
+            )
+        return None
+    return BerniePatientEvidence(
+        patient_id=patient.id,
+        patient_label=f"{patient.first_name} {patient.last_name}",
+        date_of_birth=patient.date_of_birth,
+        masked_phone=_mask_phone(patient.phone_mobile),
+        confidence=identity_evidence.confidence,
+        is_provisional=False,
+    )
+
+
+def _build_bernie_practitioner_evidence(
+    practitioner_id: Optional[uuid.UUID],
+    location_id: Optional[uuid.UUID],
+    db: Session,
+    practice_id: uuid.UUID,
+) -> Optional[BerniePractitionerEvidence]:
+    if practitioner_id is None:
+        return None
+    prac = db.query(Practitioner).filter(
+        Practitioner.id == practitioner_id,
+        Practitioner.practice_id == practice_id,
+    ).first()
+    if prac is None:
+        return None
+    location_label: Optional[str] = None
+    loc_id = location_id or prac.default_location_id
+    if loc_id is not None:
+        loc = db.query(PracticeLocation).filter(
+            PracticeLocation.id == loc_id,
+            PracticeLocation.practice_id == practice_id,
+        ).first()
+        if loc is not None:
+            location_label = loc.name
+    return BerniePractitionerEvidence(
+        practitioner_id=prac.id,
+        display_name=f"{prac.first_name} {prac.last_name}",
+        provider_number=prac.provider_number,
+        location_label=location_label,
     )
 
 
@@ -2217,6 +2293,8 @@ def _bernie_staff_review_payload(
     search_proposal: Optional[SlotSearchProposalOut] = None,
     selection_proposal: Optional[SlotSelectionProposalOut] = None,
     identity_evidence: Optional[BernieIdentityEvidence] = None,
+    practitioner_evidence: Optional[BerniePractitionerEvidence] = None,
+    patient_evidence: Optional[BerniePatientEvidence] = None,
 ) -> BernieStaffReviewPayload:
     selected_slot = None
     if selection_proposal is not None and selection_proposal.selected_candidate is not None:
@@ -2247,7 +2325,7 @@ def _bernie_staff_review_payload(
             selection_proposal=selection_proposal,
             confirmed_warnings=[],
         ).model_dump(mode="json")
-        confirm_evidence = list(BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE)
+        confirm_evidence = list(_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE)
 
     warning_summary = "No warnings or blocked issues."
     if warnings or blocks:
@@ -2272,6 +2350,8 @@ def _bernie_staff_review_payload(
         selected_slot=selected_slot,
         candidate_slots=candidate_slots,
         identity_evidence=identity_evidence,
+        practitioner_evidence=practitioner_evidence,
+        patient_evidence=patient_evidence,
         warning_summary=warning_summary,
         evidence_summary=evidence_summaries[result],
         warnings=warnings,
@@ -2483,6 +2563,8 @@ def _bernie_supervised_blocked(
     selection_proposal: Optional[SlotSelectionProposalOut] = None,
     warnings: Optional[list[AppointmentProposalIssue]] = None,
     identity_evidence: Optional[BernieIdentityEvidence] = None,
+    practitioner_evidence: Optional[BerniePractitionerEvidence] = None,
+    patient_evidence: Optional[BerniePatientEvidence] = None,
 ) -> BernieSupervisedBookingOut:
     effective_warnings = warnings or []
     return BernieSupervisedBookingOut(
@@ -2502,6 +2584,8 @@ def _bernie_supervised_blocked(
             search_proposal=search_proposal,
             selection_proposal=selection_proposal,
             identity_evidence=identity_evidence,
+            practitioner_evidence=practitioner_evidence,
+            patient_evidence=patient_evidence,
         ),
         warnings=effective_warnings,
         blocks=blocks,
@@ -2532,13 +2616,14 @@ def propose_bernie_supervised_booking(
     normalized_patient_id = None
     if normalization.constraint is not None:
         normalized_patient_id = normalization.constraint.patient_id
-    review_identity_evidence = _build_bernie_identity_evidence(
+    review_identity_evidence, _review_patient = _build_bernie_identity_evidence(
         body.patient_id or normalized_patient_id,
         body.patient_name_provisional,
         db,
         current_user.practice_id,
         body.context_frames,
     )
+    review_patient_evidence = _build_bernie_patient_evidence(review_identity_evidence, _review_patient)
     if not normalization.safe or normalization.constraint is None:
         return _bernie_supervised_blocked(
             normalization=normalization,
@@ -2546,6 +2631,7 @@ def propose_bernie_supervised_booking(
             blocks=normalization.blocks,
             warnings=normalization.warnings,
             identity_evidence=review_identity_evidence,
+            patient_evidence=review_patient_evidence,
         )
 
     search_proposal = _build_slot_search_proposal(
@@ -2564,6 +2650,7 @@ def propose_bernie_supervised_booking(
             search_proposal=search_proposal,
             warnings=warnings,
             identity_evidence=review_identity_evidence,
+            patient_evidence=review_patient_evidence,
         )
 
     search_execution = SlotSearchCommandExecutionOut(
@@ -2598,6 +2685,7 @@ def propose_bernie_supervised_booking(
                 blocks=blocks,
                 search_proposal=search_proposal,
                 identity_evidence=review_identity_evidence,
+                patient_evidence=review_patient_evidence,
             ),
             warnings=warnings,
             blocks=blocks,
@@ -2619,6 +2707,7 @@ def propose_bernie_supervised_booking(
             search_proposal=search_proposal,
             warnings=warnings,
             identity_evidence=review_identity_evidence,
+            patient_evidence=review_patient_evidence,
         )
 
     selection_body = SlotSelectionProposalIn(
@@ -2651,7 +2740,15 @@ def propose_bernie_supervised_booking(
             selection_proposal=selection_proposal,
             warnings=[*warnings, *selection_proposal.warnings],
             identity_evidence=review_identity_evidence,
+            patient_evidence=review_patient_evidence,
         )
+
+    practitioner_evidence = _build_bernie_practitioner_evidence(
+        practitioner_id,
+        location_id,
+        db,
+        current_user.practice_id,
+    )
 
     create_body = AppointmentCreate(
         patient_id=patient_id,
@@ -2695,6 +2792,8 @@ def propose_bernie_supervised_booking(
             selection_proposal=selection_proposal,
             warnings=combined_warnings,
             identity_evidence=review_identity_evidence,
+            practitioner_evidence=practitioner_evidence,
+            patient_evidence=review_patient_evidence,
         )
 
     summary = (
@@ -2718,6 +2817,8 @@ def propose_bernie_supervised_booking(
             search_proposal=search_proposal,
             selection_proposal=selection_proposal,
             identity_evidence=review_identity_evidence,
+            practitioner_evidence=practitioner_evidence,
+            patient_evidence=review_patient_evidence,
         ),
         warnings=combined_warnings,
         blocks=combined_blocks,
@@ -2801,7 +2902,7 @@ def confirm_bernie_create_proposal(
     current practice/auth/conflict state before writing exactly one appointment
     and one bounded audit evidence trail.
     """
-    audit_evidence = list(BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE)
+    audit_evidence = list(_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE)
     blocks: list[AppointmentProposalIssue] = []
     selection = body.selection_proposal
     create_proposal = selection.create_proposal
@@ -2891,6 +2992,17 @@ def confirm_bernie_create_proposal(
             warnings=[*selection.warnings, *revalidated.warnings],
             audit_evidence=audit_evidence,
         )
+
+    if create_body.patient_id is not None:
+        _identity_evidence, _ = _build_bernie_identity_evidence(
+            create_body.patient_id,
+            None,
+            db,
+            current_user.practice_id,
+        )
+        confidence_code = BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES.get(_identity_evidence.confidence)
+        if confidence_code and confidence_code not in audit_evidence:
+            audit_evidence.append(confidence_code)
 
     confirmed_warnings = [
         *[issue.code for issue in selection.warnings],
