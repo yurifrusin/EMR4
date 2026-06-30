@@ -1173,6 +1173,16 @@ def _context_frame_value(
     return None
 
 
+def _valid_uuid_text(value: object) -> bool:
+    if value in (None, ""):
+        return False
+    try:
+        uuid.UUID(str(value))
+    except (TypeError, ValueError):
+        return False
+    return True
+
+
 def _resolve_practitioner_from_instruction(
     instruction_tokens: set[str],
     db: Session,
@@ -1266,9 +1276,11 @@ def _resolve_bernie_interpretation_context(
     resolver_warnings: list[AppointmentProposalIssue] = []
     instruction_tokens = set(_text_tokens(body.instruction))
 
+    if command_values.get("practitioner_id") and not _valid_uuid_text(command_values.get("practitioner_id")):
+        command_values["practitioner_id"] = None
     if not command_values.get("practitioner_id"):
         frame_practitioner_id = _context_frame_value(body, "practitioner_id")
-        if frame_practitioner_id:
+        if _valid_uuid_text(frame_practitioner_id):
             command_values["practitioner_id"] = frame_practitioner_id
         else:
             practitioner_id, warnings = _resolve_practitioner_from_instruction(
@@ -1280,9 +1292,11 @@ def _resolve_bernie_interpretation_context(
             if practitioner_id:
                 command_values["practitioner_id"] = str(practitioner_id)
 
+    if command_values.get("patient_id") and not _valid_uuid_text(command_values.get("patient_id")):
+        command_values["patient_id"] = None
     if not command_values.get("patient_id"):
         frame_patient_id = _context_frame_value(body, "patient_id")
-        if frame_patient_id:
+        if _valid_uuid_text(frame_patient_id):
             command_values["patient_id"] = frame_patient_id
         else:
             patient_id, warnings = _resolve_patient_from_instruction(
@@ -1293,6 +1307,17 @@ def _resolve_bernie_interpretation_context(
             resolver_warnings.extend(warnings)
             if patient_id:
                 command_values["patient_id"] = str(patient_id)
+
+    if not command_values.get("duration_minutes") and not command_values.get("appointment_type_id"):
+        command_values["duration_minutes"] = 15
+        resolver_warnings.append(AppointmentProposalIssue(
+            code="appointment_duration_defaulted",
+            severity="warning",
+            message=(
+                "Bernie defaulted this generic appointment request to 15 minutes. "
+                "Staff should change it if a longer appointment type is needed."
+            ),
+        ))
 
     command = SlotSearchCommandIn(**command_values)
     normalization = normalize_slot_search_command(

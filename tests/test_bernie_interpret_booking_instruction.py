@@ -353,6 +353,59 @@ def test_mocked_live_provider_returns_validated_structured_intent_without_mutati
     assert "prompt" not in access_ai_audit.metadata_json
 
 
+def test_live_provider_name_values_in_id_fields_are_resolved_before_normalization(
+    client,
+    db,
+    gp_user,
+    practitioner,
+    patient,
+    monkeypatch,
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
+    provider = MockLiveProvider({
+        "command_candidate": {
+            "practitioner_id": "Dr Shera",
+            "patient_id": "Margaret Thompson",
+            "date_from": "today",
+            "earliest_time": "14:00",
+            "latest_time": "15:45",
+        },
+        "confidence": 0.78,
+        "summary": "Search for an appointment for Margaret Thompson with Dr Shera.",
+        "missing_fields": [],
+        "safety_flags": ["autonomous_booking_language"],
+        "clarifying_question": "What type of appointment is this and how long should it be?",
+    })
+    interpreter_service.set_live_provider_factory(lambda: provider)
+    token = make_token(gp_user)
+
+    try:
+        resp = _post_interpret(
+            client,
+            token,
+            (
+                "Make an appointment for Margaret Thompson with Dr Shera today "
+                "after 2 pm but before 3.45."
+            ),
+        )
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["result"] == "interpreted"
+    assert data["command_candidate"]["practitioner_id"] == str(practitioner.id)
+    assert data["command_candidate"]["patient_id"] == str(patient.id)
+    assert data["command_candidate"]["duration_minutes"] == 15
+    assert data["normalization"]["safe"] is True
+    assert data["blocks"] == []
+    warning_codes = {warning["code"] for warning in data["warnings"]}
+    assert "practitioner_name_resolved" in warning_codes
+    assert "patient_name_resolved_verify_identity" in warning_codes
+    assert "appointment_duration_defaulted" in warning_codes
+
+
 def test_mocked_live_provider_invalid_response_fails_closed(
     client,
     gp_user,
