@@ -99,6 +99,60 @@ identity, breaks, and waiting-area semantics are clear. Later patient chat, kios
 assistance, and phone voice automation should reuse the same tool layer rather than
 creating separate bots.
 
+### 2.8 Davida Practice Management Copilot and Agent-First UX
+
+Davida is the proposed EMR4 general practice management copilot. Her first
+serious skill should be setup and onboarding, but her identity is broader:
+Davida should help practice managers, owners, and implementation leads configure,
+operate, audit, and improve the practice-management system over time.
+
+For setup, Davida should be built over the same declarative setup-path YAML
+files, schemas, helper scripts, dry-run output, and verification steps that
+technical operators and external agents can inspect directly.
+
+This reflects an emerging product principle: many computer workflows are not
+truly user-friendly for humans because they force people to manipulate brittle
+menus, hidden settings, cloud-console pages, and finely grained UI controls.
+EMR4 should avoid this reverse-centaur posture. Where appropriate, the human
+should command, review, and confirm while the agent handles the intricate
+mechanical interaction.
+
+The diary is the same pattern at clinical-operations scale. A visual diary grid
+remains essential for transparency, review, and manual override, but the natural
+future interaction is receptionist intent plus agent proposal plus staff
+confirmation. Bernie should handle the fiddly slot mechanics; the receptionist
+should decide whether the proposed booking is correct.
+
+Davida applies the same idea to practice management. Her first operating domain
+is setup:
+
+- collect practice, practitioner, staff, location, billing, AI-provider, and
+  policy details
+- accept CSV imports for practitioners, staff, rooms, and locations
+- explain setup steps and likely pitfalls before execution
+- open helper documents or relevant GCP console pages when human action is
+  unavoidable
+- run setup paths in dry-run first
+- request explicit confirmation before IAM, billing, API, identity, or PHI
+  policy changes
+- verify the resulting dev/prod environment and report exact residual gaps
+
+Later Davida domains may include:
+
+- practice/resource configuration and change review
+- onboarding staff and assigning Access AI roles
+- importing practitioner, location, room, and roster data
+- explaining audit trails and operational exceptions
+- monitoring setup drift between dev, staging, and production
+- preparing safe administrative changes for owner confirmation
+
+Davida should not become a separate source of truth. The source of truth is the
+relevant manifest, policy, API contract, and runner/verifier. Davida is the
+human/agent interface over that deterministic substrate. External copilots
+should also be able to ingest the same manifests and dry-run JSON output, so
+practices can bring their own agent or IT workflow without bypassing EMR4's
+safety model.
+
 ---
 
 ## 3. Resolved Design Decisions
@@ -590,6 +644,41 @@ flowchart TD
   `orchestration/resource_admin_bernie_tool_design.md`: every write is a proposed
   typed action, confirmed by staff, audited, and kept separate from SMS/reminder
   confirmation and patient identity linkage.
+
+---
+
+### PHASE 2C - Davida Practice Management Copilot and Setup Paths
+*General practice management copilot, starting with declarative dev/prod setup.*
+
+| Item | Details |
+|:---|:---|
+| Davida copilot | First-party general practice management copilot for configuration, operations, audit, onboarding, and safe administrative change |
+| First skill: setup | Conversational setup guide that asks for missing values, ingests CSVs, opens helper docs, explains risks, and drives setup-path dry-runs/execution |
+| Setup-path schema | YAML manifests define goal, environment, property values, required services, identities, IAM bindings, helper links, verification, and rollback/disable hints |
+| Runner | Deterministic dry-run-first executor; `--execute` only after review; machine-readable JSON output for agents |
+| Helper metadata | Each step can expose summary, why, pitfalls, docs, console links, preconditions, expected state, and remediation hints |
+| External-agent support | Outside copilots can ingest the same YAML and dry-run JSON without a separate privileged path |
+| Production posture | Dev-to-prod continuity: same EMR4 application code, different declared values, managed identity, policies, project IDs, and provider configuration |
+| Safety | Confirmation required before billing, IAM, API enablement, identity, PHI, or production policy side effects |
+
+#### Davida build gates
+
+- The YAML setup path and runner remain the canonical source of truth for setup.
+  Davida is an interface over them, not a second setup rules engine.
+- As Davida expands beyond setup, each domain needs the same structure:
+  manifests or typed API contracts, dry-run/proposal output, explicit
+  confirmation for material changes, and verification after execution.
+- Dry-run output must be understandable to both humans and agents before any
+  execute path is allowed.
+- Helper metadata must cover common GCP pitfalls: billing attachment, API
+  enablement, IAM role propagation, organization policies, quota, service
+  account impersonation, and keyless production identity.
+- CSV ingestion must validate practice, practitioner, staff, room, location,
+  waiting-area, and role data before any database or cloud changes.
+- Production setup must be keyless by default. JSON service-account keys are not
+  a normal production path.
+- Davida must make side effects explicit and ask for confirmation at the moment
+  an irreversible, billable, or security-relevant action is about to occur.
 
 ---
 

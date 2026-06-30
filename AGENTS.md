@@ -838,7 +838,9 @@ Goal-directed Access AI/GCP setup plans now live under `access_ai/setup_paths/`
 and run through `python -m access_ai.runner.run_setup_path`. The runner is
 dry-run by default; use `--execute` only after reviewing the generated commands.
 The current dev path is `access_ai/setup_paths/dev-yuri-scribe-bernie.yaml`.
-See `docs/access-ai-setup-paths.md`.
+See `docs/access-ai-setup-paths.md`. Davida is now the planned general practice
+management copilot; setup/onboarding is her first serious skill, not her whole
+identity.
 
 ### ✅ New Patient bridge — RESOLVED
 `POST /api/v1/patients/with-file` creates DB row + `.docx` atomically. `document_url`
