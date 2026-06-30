@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 94: Bernie Identity-Confidence Frames |
 | Integrated through | Supervised Bernie booking reviews now carry typed patient identity evidence for staff verification |
-| Status | Integrated locally and verified; pending push/mirror/audit |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-06-30 |
 
 ## What Changed
