@@ -8,6 +8,43 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 93: Bernie Candidate Click-Through Diary Preview |
+| Integrated through | Clickable Bernie candidate slots now stage a highlighted provisional diary preview before staff confirmation |
+| Status | Integrated locally and verified; pending push/mirror/audit |
+| Last updated | 2026-06-30 |
+
+## What Changed
+
+- Bernie candidate slot cards in the supervised review panel are now clickable buttons.
+- Clicking a candidate records the selected candidate index, reloads the relevant diary date when necessary, scrolls to the proposed time, and renders a highlighted provisional booking card in the matching practitioner column.
+- The staged card is local review state only: it does not write an appointment or audit row before the existing staff-confirmed Bernie confirmation endpoint succeeds.
+- After a successful staff confirmation, the staged preview is cleared and the diary refreshes back to the normal appointment view.
+- Existing selected-appointment context remains optional evidence. Tests now assert that changing selected appointment context does not submit a supervised booking request by itself.
+- Diary assets were cache-busted to `diary.js?v=132` and `diary.css?v=118`.
+
+## Verification
+
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q --tb=short` passed: `56 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `git diff --check` passed.
+
+## Known Follow-Up
+
+- The provisional card currently displays conservative identity-warning copy rather than structured DOB/Medicare/caller-ID confidence evidence.
+- Patient identity matching is still based on the interpreter/resolver output, not a full receptionist-grade identity-confidence decision.
+- Caller ID should become an optional context frame that can raise confidence but does not prove identity by itself.
+- ONLYNAME handling needs verification against the exact Medicare Online / Services Australia claim format before EMR4 canonicalises one-name patient matching.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Recommended Next Direction
+
+Next recommended step: Sprint 94 Bernie identity-confidence frames. Add a typed identity-evidence contract for booking proposals, covering registered-patient self-identification, surname/full-name plus DOB, duplicate-name ambiguity, Medicare/card check prompts, caller-ID as supporting context, and an explicit ONLYNAME verification spike before production mapping.
+
+## Previous Closeout - Sprint 92
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 92: Bernie Instruction-First Context Frames |
 | Integrated through | Free-text Bernie booking instructions no longer require selected appointment context; selected appointment context is now optional evidence |
 | Status | Integrated, verified, pushed, mirrored, and audited |

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Programme 2F / Sprint 92 - Bernie instruction-first context frames implemented and verified locally |
-| **Next recommended work** | Sprint 93 Bernie candidate click-through and provisional diary highlight, then identity confidence tiers including DOB/caller-ID/Medicare and verified ONLYNAME claim mapping |
+| **Current active track** | Programme 2F / Sprint 93 - Bernie candidate click-through and provisional diary preview implemented and verified locally |
+| **Next recommended work** | Sprint 94 Bernie identity-confidence frames: DOB/caller-ID/Medicare evidence, duplicate-name handling, and verified ONLYNAME claim mapping |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
