@@ -656,6 +656,11 @@ Medicare/DVA/IHI/MRN, or reception-counter verification. Ambiguous matches,
 same-name/same-DOB cases, conflicting identifiers, or missing DOB should remain
 provisional or blocked for staff resolution.
 
+Medicare Online / OPV / PVM-style checks should sit behind a non-mutating
+identity-verification adapter. Bernie may consume the typed result as supporting
+evidence, but should not treat an LLM statement, Caller ID, or a selected diary
+slot as verified identity on its own.
+
 ONLYNAME must be supported without inventing a false surname. Services Australia
 ECLIPSE guidance indicates one-name patients may require the actual one-part
 name in `PatientFamilyName` and literal `Onlyname` in `PatientFirstName`; verify

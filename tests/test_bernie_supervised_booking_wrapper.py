@@ -10,6 +10,7 @@ from datetime import date, datetime, time, timezone
 import inspect
 
 from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
+from app.models.patients import Patient
 from app.models.tenancy import Practitioner
 from app.schemas.appointments import SlotCandidate, SlotSearchProposalOut
 import app.routers.appointments as appointments_router
@@ -208,6 +209,69 @@ def test_selected_candidate_returns_confirmation_ready_evidence_without_mutating
     assert review["confirm_payload"]["selection_proposal"] == data["selection_proposal"]
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
+
+
+def test_identity_evidence_reports_linked_patient_and_caller_id_context(
+    client,
+    db,
+    gp_user,
+    practitioner,
+    patient,
+    schedule,
+):
+    patient.medicare_number = "2958303372"
+    patient.phone_mobile = "0412 345 678"
+    db.flush()
+    token = make_token(gp_user)
+
+    resp = _post_wrapper(client, token, _base_body(
+        practitioner,
+        patient_id=str(patient.id),
+        context_frames=[{"type": "caller_id", "phone_number": "0412345678"}],
+    ))
+
+    assert resp.status_code == 200, resp.text
+    evidence = resp.json()["staff_review"]["identity_evidence"]
+    assert evidence["patient_id"] == str(patient.id)
+    assert evidence["patient_label"] == "Margaret Thompson"
+    assert evidence["confidence"] == "high"
+    assert evidence["verification_status"] == "requires_staff_verification"
+    assert "date_of_birth" in evidence["matched_fields"]
+    assert "medicare_on_record" in evidence["matched_fields"]
+    assert "caller_id_phone_match" in evidence["matched_fields"]
+    assert evidence["supporting_context"] == ["caller_id"]
+    assert "confirm dob" in evidence["staff_prompt"].lower()
+
+
+def test_identity_evidence_flags_same_name_same_dob_duplicates(
+    client,
+    db,
+    gp_user,
+    practice,
+    practitioner,
+    patient,
+    schedule,
+):
+    duplicate = Patient(
+        practice_id=practice.id,
+        first_name=patient.first_name,
+        last_name=patient.last_name,
+        date_of_birth=patient.date_of_birth,
+    )
+    db.add(duplicate)
+    db.flush()
+    token = make_token(gp_user)
+
+    resp = _post_wrapper(client, token, _base_body(
+        practitioner,
+        patient_id=str(patient.id),
+    ))
+
+    assert resp.status_code == 200, resp.text
+    evidence = resp.json()["staff_review"]["identity_evidence"]
+    assert evidence["confidence"] == "ambiguous"
+    assert "same_name_and_dob_duplicate" in evidence["warnings"]
+    assert "Medicare/card" in evidence["staff_prompt"]
 
 
 def test_selected_candidate_conflict_revalidation_blocks_without_mutating(

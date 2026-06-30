@@ -1,7 +1,7 @@
 import uuid
 import re
 from datetime import date as date_type, datetime, time, timedelta, timezone
-from typing import Optional
+from typing import Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from fastapi import APIRouter, Body, Depends, HTTPException, Query, status
 from sqlalchemy import or_
@@ -30,7 +30,7 @@ from app.schemas.appointments import (
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
     SlotSearchCommandIn, SlotSearchCommandResult, SlotSearchCommandExecutionOut,
     SlotSelectionProposalIn, SlotSelectionProposalOut,
-    BernieStaffReviewPayload, BernieStaffReviewSlotSummary,
+    BernieIdentityEvidence, BernieStaffReviewPayload, BernieStaffReviewSlotSummary,
     BernieSupervisedBookingIn, BernieSupervisedBookingOut,
     BernieCreateProposalConfirmationIn, BerniePilotEligibilityOut,
     BernieBookingInstructionInterpretIn, BernieBookingInstructionInterpretOut,
@@ -2024,6 +2024,143 @@ def _bernie_staff_review_slot_summary(candidate: SlotCandidate) -> BernieStaffRe
     )
 
 
+def _digits_only(value: Optional[str]) -> str:
+    return "".join(ch for ch in (value or "") if ch.isdigit())
+
+
+def _bernie_context_frame_types(context_frames: list[dict]) -> list[str]:
+    frame_types: list[str] = []
+    for frame in context_frames:
+        if not isinstance(frame, dict):
+            continue
+        frame_type = str(frame.get("type") or "").strip()
+        if frame_type and frame_type not in frame_types:
+            frame_types.append(frame_type)
+    return frame_types
+
+
+def _caller_id_matches_patient(context_frames: list[dict], patient: Patient) -> bool:
+    patient_numbers = {
+        _digits_only(patient.phone_mobile),
+        _digits_only(patient.phone_home),
+    }
+    patient_numbers.discard("")
+    if not patient_numbers:
+        return False
+    for frame in context_frames:
+        if not isinstance(frame, dict) or frame.get("type") != "caller_id":
+            continue
+        caller_number = _digits_only(
+            frame.get("phone_number")
+            or frame.get("caller_number")
+            or frame.get("from")
+        )
+        if caller_number and caller_number in patient_numbers:
+            return True
+    return False
+
+
+def _build_bernie_identity_evidence(
+    patient_id: Optional[uuid.UUID],
+    patient_name_provisional: Optional[str],
+    db: Session,
+    practice_id: uuid.UUID,
+    context_frames: Optional[list[dict]] = None,
+) -> BernieIdentityEvidence:
+    frames = context_frames or []
+    supporting_context = _bernie_context_frame_types(frames)
+    if patient_id is None:
+        label = patient_name_provisional or "No linked patient"
+        return BernieIdentityEvidence(
+            patient_label=label,
+            confidence="unlinked",
+            verification_status="requires_staff_verification",
+            supporting_context=supporting_context,
+            warnings=["patient_not_linked"],
+            staff_prompt=(
+                "Link the patient record or create a provisional booking only "
+                "after staff confirm surname/name, DOB, and another identifier "
+                "where available."
+            ),
+        )
+
+    patient = db.query(Patient).filter(
+        Patient.practice_id == practice_id,
+        Patient.id == patient_id,
+    ).first()
+    if patient is None:
+        return BernieIdentityEvidence(
+            patient_id=patient_id,
+            confidence="low",
+            verification_status="requires_staff_verification",
+            supporting_context=supporting_context,
+            warnings=["linked_patient_not_found"],
+            staff_prompt="The linked patient record was not found in this practice; do not confirm until resolved.",
+        )
+
+    matched_fields = ["patient_id", "name", "date_of_birth"]
+    warnings: list[str] = []
+    if patient.medicare_number:
+        matched_fields.append("medicare_on_record")
+    else:
+        warnings.append("medicare_not_on_record")
+
+    caller_match = _caller_id_matches_patient(frames, patient)
+    if caller_match:
+        matched_fields.append("caller_id_phone_match")
+
+    duplicate_count = db.query(Patient).filter(
+        Patient.practice_id == practice_id,
+        Patient.first_name == patient.first_name,
+        Patient.last_name == patient.last_name,
+        Patient.date_of_birth == patient.date_of_birth,
+    ).count()
+    if duplicate_count > 1:
+        warnings.append("same_name_and_dob_duplicate")
+
+    if (
+        patient.first_name.strip().lower() == "onlyname"
+        or patient.last_name.strip().lower() == "onlyname"
+    ):
+        warnings.append("onlyname_mapping_requires_claim_contract_verification")
+
+    confidence: Literal["low", "medium", "high", "ambiguous"] = "medium"
+    if duplicate_count > 1:
+        confidence = "ambiguous"
+    elif caller_match and patient.medicare_number:
+        confidence = "high"
+    elif not patient.medicare_number:
+        confidence = "medium"
+
+    staff_prompt = (
+        "Confirm DOB with the patient before booking. If identity evidence is "
+        "incomplete, the patient is not on the phone/counter, or there is any "
+        "duplicate-name doubt, check Medicare/card details before confirming."
+    )
+    if duplicate_count > 1:
+        staff_prompt = (
+            "Same name and DOB exists more than once in this practice. Treat "
+            "the booking as provisional until Medicare/card or another strong "
+            "identifier distinguishes the patient."
+        )
+    elif caller_match:
+        staff_prompt = (
+            "Caller ID matches a phone number on the linked record. Still ask "
+            "the patient to confirm DOB before staff confirmation."
+        )
+
+    return BernieIdentityEvidence(
+        patient_id=patient.id,
+        patient_label=f"{patient.first_name} {patient.last_name}",
+        confidence=confidence,
+        verification_status="requires_staff_verification",
+        matched_fields=matched_fields,
+        supporting_context=supporting_context,
+        warnings=warnings,
+        staff_prompt=staff_prompt,
+    )
+
+
 def _bernie_staff_review_payload(
     result: str,
     summary: str,
@@ -2031,6 +2168,7 @@ def _bernie_staff_review_payload(
     blocks: list[AppointmentProposalIssue],
     search_proposal: Optional[SlotSearchProposalOut] = None,
     selection_proposal: Optional[SlotSelectionProposalOut] = None,
+    identity_evidence: Optional[BernieIdentityEvidence] = None,
 ) -> BernieStaffReviewPayload:
     selected_slot = None
     if selection_proposal is not None and selection_proposal.selected_candidate is not None:
@@ -2085,6 +2223,7 @@ def _bernie_staff_review_payload(
         confirmation_ready=confirmation_ready,
         selected_slot=selected_slot,
         candidate_slots=candidate_slots,
+        identity_evidence=identity_evidence,
         warning_summary=warning_summary,
         evidence_summary=evidence_summaries[result],
         warnings=warnings,
@@ -2295,6 +2434,7 @@ def _bernie_supervised_blocked(
     search_proposal: Optional[SlotSearchProposalOut] = None,
     selection_proposal: Optional[SlotSelectionProposalOut] = None,
     warnings: Optional[list[AppointmentProposalIssue]] = None,
+    identity_evidence: Optional[BernieIdentityEvidence] = None,
 ) -> BernieSupervisedBookingOut:
     effective_warnings = warnings or []
     return BernieSupervisedBookingOut(
@@ -2313,6 +2453,7 @@ def _bernie_supervised_blocked(
             blocks=blocks,
             search_proposal=search_proposal,
             selection_proposal=selection_proposal,
+            identity_evidence=identity_evidence,
         ),
         warnings=effective_warnings,
         blocks=blocks,
@@ -2340,12 +2481,23 @@ def propose_bernie_supervised_booking(
         body.command,
         reference_date=body.reference_date,
     )
+    normalized_patient_id = None
+    if normalization.constraint is not None:
+        normalized_patient_id = normalization.constraint.patient_id
+    review_identity_evidence = _build_bernie_identity_evidence(
+        body.patient_id or normalized_patient_id,
+        body.patient_name_provisional,
+        db,
+        current_user.practice_id,
+        body.context_frames,
+    )
     if not normalization.safe or normalization.constraint is None:
         return _bernie_supervised_blocked(
             normalization=normalization,
             summary=normalization.summary,
             blocks=normalization.blocks,
             warnings=normalization.warnings,
+            identity_evidence=review_identity_evidence,
         )
 
     search_proposal = _build_slot_search_proposal(
@@ -2363,6 +2515,7 @@ def propose_bernie_supervised_booking(
             blocks=blocks,
             search_proposal=search_proposal,
             warnings=warnings,
+            identity_evidence=review_identity_evidence,
         )
 
     search_execution = SlotSearchCommandExecutionOut(
@@ -2396,6 +2549,7 @@ def propose_bernie_supervised_booking(
                 warnings=warnings,
                 blocks=blocks,
                 search_proposal=search_proposal,
+                identity_evidence=review_identity_evidence,
             ),
             warnings=warnings,
             blocks=blocks,
@@ -2416,6 +2570,7 @@ def propose_bernie_supervised_booking(
             blocks=[*blocks, patient_block],
             search_proposal=search_proposal,
             warnings=warnings,
+            identity_evidence=review_identity_evidence,
         )
 
     selection_body = SlotSelectionProposalIn(
@@ -2447,6 +2602,7 @@ def propose_bernie_supervised_booking(
             search_proposal=search_proposal,
             selection_proposal=selection_proposal,
             warnings=[*warnings, *selection_proposal.warnings],
+            identity_evidence=review_identity_evidence,
         )
 
     create_body = AppointmentCreate(
@@ -2490,6 +2646,7 @@ def propose_bernie_supervised_booking(
             search_proposal=search_proposal,
             selection_proposal=selection_proposal,
             warnings=combined_warnings,
+            identity_evidence=review_identity_evidence,
         )
 
     summary = (
@@ -2512,6 +2669,7 @@ def propose_bernie_supervised_booking(
             blocks=combined_blocks,
             search_proposal=search_proposal,
             selection_proposal=selection_proposal,
+            identity_evidence=review_identity_evidence,
         ),
         warnings=combined_warnings,
         blocks=combined_blocks,

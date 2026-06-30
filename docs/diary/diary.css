@@ -2497,6 +2497,64 @@ html, body {
   padding: 8px;
 }
 
+.bernie-identity-evidence {
+  background: #f8fafc;
+  border: 1px solid var(--grey-2);
+  border-left: 4px solid #64748b;
+  border-radius: 6px;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0;
+  padding: 10px 12px;
+}
+
+.bernie-identity-evidence.high {
+  border-left-color: #059669;
+}
+
+.bernie-identity-evidence.medium {
+  border-left-color: #2563eb;
+}
+
+.bernie-identity-evidence.low,
+.bernie-identity-evidence.unlinked,
+.bernie-identity-evidence.ambiguous {
+  border-left-color: #d97706;
+}
+
+.bernie-identity-title {
+  color: var(--brand-blue);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.bernie-identity-summary {
+  font-weight: 800;
+}
+
+.bernie-identity-line {
+  color: var(--grey-6);
+  font-size: 11px;
+}
+
+.bernie-identity-warning {
+  color: #9a3412;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.bernie-identity-prompt {
+  background: rgba(255,255,255,0.8);
+  border-radius: 4px;
+  color: #334155;
+  font-size: 11px;
+  line-height: 1.35;
+  padding: 5px 7px;
+}
+
 .bernie-blocks-container, .bernie-candidates-container, .bernie-selection-container {
   display: flex;
   flex-direction: column;

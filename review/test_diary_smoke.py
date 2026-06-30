@@ -3332,6 +3332,16 @@ def test_bernie_candidate_click_stages_provisional_diary_preview(diary_page):
                 "duration_minutes": 15,
                 "warnings": []
             }],
+            "identity_evidence": {
+                "patient_id": "real-patient-93",
+                "patient_label": "Margaret Thompson",
+                "confidence": "medium",
+                "verification_status": "requires_staff_verification",
+                "matched_fields": ["patient_id", "name", "date_of_birth"],
+                "supporting_context": ["selected_diary_appointment"],
+                "warnings": ["medicare_not_on_record"],
+                "staff_prompt": "Confirm DOB and check Medicare/card details before confirming."
+            },
             "warning_summary": "No warnings.",
             "evidence_summary": "Candidate slot summaries are review-only until staff selects one slot.",
             "confirm_endpoint": None,
@@ -3415,6 +3425,10 @@ def test_bernie_candidate_click_stages_provisional_diary_preview(diary_page):
         diary_page.fill("[data-testid='bernie-instruction-input']", "Make appointment for Margaret Thompson with Dr Shera at 2:30")
         diary_page.click("[data-testid='btn-bernie-instruction-submit']")
         diary_page.wait_for_selector("[data-testid='bernie-review-candidate-item']", state="visible", timeout=5000)
+        identity_text = diary_page.locator("[data-testid='bernie-identity-evidence']").text_content()
+        assert "Margaret Thompson" in identity_text
+        assert "medium confidence" in identity_text
+        assert "medicare_not_on_record" in identity_text
 
         diary_page.click("[data-testid='bernie-review-candidate-item']")
         diary_page.wait_for_selector("[data-testid='bernie-staged-booking-card']", state="visible", timeout=5000)
@@ -3422,8 +3436,9 @@ def test_bernie_candidate_click_stages_provisional_diary_preview(diary_page):
 
         staged_text = diary_page.locator("[data-testid='bernie-staged-booking-card']").text_content()
         assert "Bernie provisional booking" in staged_text
+        assert "Margaret Thompson" in staged_text
         assert "14:30:00" in staged_text
-        assert "verify" in staged_text.lower()
+        assert "medicare/card" in staged_text.lower()
         assert supervised_requests[0].get("selected_candidate_index") is None
         assert supervised_requests[1]["selected_candidate_index"] == 0
     finally:

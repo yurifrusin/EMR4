@@ -8,6 +8,46 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 94: Bernie Identity-Confidence Frames |
+| Integrated through | Supervised Bernie booking reviews now carry typed patient identity evidence for staff verification |
+| Status | Integrated locally and verified; pending push/mirror/audit |
+| Last updated | 2026-06-30 |
+
+## What Changed
+
+- Added `BernieIdentityEvidence` to the supervised Bernie staff-review payload.
+- Added optional `context_frames` to the supervised booking wrapper so selected-appointment and future caller-ID evidence can travel into the deterministic proposal stage.
+- The backend now produces conservative identity evidence for linked, unlinked, duplicate, caller-ID-supported, and ONLYNAME-like patient records.
+- Linked patient evidence includes matched fields such as patient id, name, DOB, Medicare-on-record, and caller-ID phone match where available.
+- Same-name/same-DOB duplicates are flagged as ambiguous and prompt Medicare/card verification before staff confirmation.
+- ONLYNAME-like records are flagged for claim-contract verification rather than treated as a final billing rule.
+- The Diary now renders a Patient Identity Check panel in Bernie review and carries the same staff prompt into the highlighted provisional diary card.
+- Diary assets were cache-busted to `diary.js?v=133` and `diary.css?v=119`.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py` passed.
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py -q --tb=short` passed: `9 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q --tb=short` passed: `56 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed.
+- `git diff --check` passed.
+
+## Known Follow-Up
+
+- No live phone-system Caller ID source is integrated yet; `caller_id` is a supported context-frame shape only.
+- No Medicare Online / OPV / PVM adapter was implemented in this sprint. The evidence frame is ready to receive those results later.
+- ONLYNAME remains a verified-research item before EMR4 should canonicalise Medicare claim export mapping.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Recommended Next Direction
+
+Next recommended step: Sprint 95 caller-ID/OPV readiness. Add the inbound caller-ID context source for Bernie where available, design the Medicare/OPV verification adapter boundary as a non-mutating identity check, and finalize the ONLYNAME claim-mapping evidence before production booking identity rules rely on it.
+
+## Previous Closeout - Sprint 93
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 93: Bernie Candidate Click-Through Diary Preview |
 | Integrated through | Clickable Bernie candidate slots now stage a highlighted provisional diary preview before staff confirmation |
 | Status | Integrated, verified, pushed, mirrored, and audited |

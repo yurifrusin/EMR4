@@ -476,6 +476,22 @@ class BernieStaffReviewSlotSummary(BaseModel):
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
 
 
+class BernieIdentityEvidence(BaseModel):
+    """Staff-facing identity evidence for a supervised Bernie booking proposal."""
+    patient_id: Optional[uuid.UUID] = None
+    patient_label: Optional[str] = None
+    confidence: Literal["unlinked", "low", "medium", "high", "ambiguous"]
+    verification_status: Literal[
+        "not_applicable",
+        "requires_staff_verification",
+        "verified_by_staff",
+    ] = "requires_staff_verification"
+    matched_fields: list[str] = Field(default_factory=list)
+    supporting_context: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+    staff_prompt: str
+
+
 class BernieStaffReviewPayload(BaseModel):
     headline: str
     status: Literal["blocked", "candidate_selection_required", "confirmation_ready"]
@@ -483,6 +499,7 @@ class BernieStaffReviewPayload(BaseModel):
     confirmation_ready: bool
     selected_slot: Optional[BernieStaffReviewSlotSummary] = None
     candidate_slots: list[BernieStaffReviewSlotSummary] = Field(default_factory=list)
+    identity_evidence: Optional[BernieIdentityEvidence] = None
     warning_summary: str
     evidence_summary: str
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
@@ -536,6 +553,7 @@ class BernieSupervisedBookingIn(BaseModel):
     """Typed deterministic intake for supervised Bernie booking proposals."""
     command: SlotSearchCommandIn
     reference_date: date
+    context_frames: list[dict[str, Any]] = Field(default_factory=list)
     selected_candidate_index: Optional[int] = Field(default=None, ge=0)
     selected_candidate: Optional[SlotCandidate] = None
     practitioner_id: Optional[uuid.UUID] = None
