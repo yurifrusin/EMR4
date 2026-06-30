@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 92: Bernie Instruction-First Context Frames |
 | Integrated through | Free-text Bernie booking instructions no longer require selected appointment context; selected appointment context is now optional evidence |
-| Status | Integrated locally; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-06-30 |
 
 ## What Changed
