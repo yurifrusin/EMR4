@@ -2060,6 +2060,13 @@ def _caller_id_matches_patient(context_frames: list[dict], patient: Patient) -> 
     return False
 
 
+def _identity_verification_frame(context_frames: list[dict]) -> Optional[dict]:
+    for frame in context_frames:
+        if isinstance(frame, dict) and frame.get("type") == "identity_verification":
+            return frame
+    return None
+
+
 def _build_bernie_identity_evidence(
     patient_id: Optional[uuid.UUID],
     patient_name_provisional: Optional[str],
@@ -2109,6 +2116,20 @@ def _build_bernie_identity_evidence(
     if caller_match:
         matched_fields.append("caller_id_phone_match")
 
+    verification_frame = _identity_verification_frame(frames)
+    verification_verified = False
+    if verification_frame:
+        method = str(verification_frame.get("method") or "identity_verification")
+        supporting_label = f"identity_verification:{method}"
+        if supporting_label not in supporting_context:
+            supporting_context.append(supporting_label)
+        if verification_frame.get("verified") is True or verification_frame.get("status") == "verified":
+            verification_verified = True
+            matched_fields.append(f"{method}_verified")
+        else:
+            reason_code = verification_frame.get("reason_code") or "not_verified"
+            warnings.append(f"identity_verification_{reason_code}")
+
     duplicate_count = db.query(Patient).filter(
         Patient.practice_id == practice_id,
         Patient.first_name == patient.first_name,
@@ -2127,6 +2148,8 @@ def _build_bernie_identity_evidence(
     confidence: Literal["low", "medium", "high", "ambiguous"] = "medium"
     if duplicate_count > 1:
         confidence = "ambiguous"
+    elif verification_verified:
+        confidence = "high"
     elif caller_match and patient.medicare_number:
         confidence = "high"
     elif not patient.medicare_number:

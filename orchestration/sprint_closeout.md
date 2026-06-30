@@ -8,6 +8,43 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 95: Caller-ID / OPV Readiness Contracts |
+| Integrated through | Provider-neutral non-mutating identity-verification adapter contract and Bernie OPV context-frame consumption |
+| Status | Integrated locally and verified; pending push/mirror/audit |
+| Last updated | 2026-06-30 |
+
+## What Changed
+
+- Added `app/services/identity_verification.py`, a provider-neutral non-mutating identity verification boundary.
+- Added method/status enums for OPV, PVM, PVF, OVV, and IHI-style checks.
+- Added `IdentityVerificationRequest` and `IdentityVerificationResult` contracts with PHI-minimised result metadata and `raw_response_stored=false` by default.
+- Added a disabled adapter that fails closed and performs no network access.
+- Added a deterministic dev/test adapter that verifies only when required identity fields and consent are present.
+- Added `IdentityVerificationResult.to_context_frame()` so verified checks can be passed into Bernie as an `identity_verification` context frame.
+- Taught Bernie identity evidence to consume verified identity context frames, raising confidence to high and recording method-specific matched evidence such as `opv_verified`.
+- Documented the boundary in `docs/bernie-identity-verification-readiness.md`.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\services\identity_verification.py app\routers\appointments.py` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_identity_verification_adapter.py tests\test_bernie_supervised_booking_wrapper.py -q --tb=short` passed: `13 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `git diff --check` passed.
+
+## Known Follow-Up
+
+- No live phone-system Caller ID provider is integrated yet.
+- No live Medicare Online / OPV / PVM / DVA / IHI provider call is integrated yet.
+- Live verification needs practice credentials, consent workflow, provider error-code mapping, logging policy, and exact ONLYNAME contract confirmation before implementation.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Recommended Next Direction
+
+Pause for product/integration input: identify the real phone system that can provide Caller ID to EMR4, and identify the intended Medicare/OPV/PVM integration route or test environment. After that, Sprint 96 can implement the first live or mocked-provider connector behind the adapter boundary.
+
+## Previous Closeout - Sprint 94
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 94: Bernie Identity-Confidence Frames |
 | Integrated through | Supervised Bernie booking reviews now carry typed patient identity evidence for staff verification |
 | Status | Integrated, verified, pushed, mirrored, and audited |

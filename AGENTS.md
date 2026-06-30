@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Programme 2F / Sprint 94 - Bernie identity-confidence frames implemented and verified locally |
-| **Next recommended work** | Sprint 95 caller-ID/OPV readiness: ingest real phone-system caller context, design Medicare/OPV verification adapter boundary, and finalize ONLYNAME claim-mapping research |
+| **Current active track** | Programme 2F / Sprint 95 - caller-ID/OPV readiness adapter contracts implemented and verified locally |
+| **Next recommended work** | Choose the real phone-system Caller ID source and Medicare/OPV/PVM integration pathway before implementing live identity verification |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

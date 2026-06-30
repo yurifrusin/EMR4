@@ -274,6 +274,35 @@ def test_identity_evidence_flags_same_name_same_dob_duplicates(
     assert "Medicare/card" in evidence["staff_prompt"]
 
 
+def test_identity_evidence_consumes_verified_opv_context_frame(
+    client,
+    db,
+    gp_user,
+    practitioner,
+    patient,
+    schedule,
+):
+    token = make_token(gp_user)
+
+    resp = _post_wrapper(client, token, _base_body(
+        practitioner,
+        patient_id=str(patient.id),
+        context_frames=[{
+            "type": "identity_verification",
+            "method": "opv",
+            "status": "verified",
+            "verified": True,
+            "reason_code": "deterministic_identity_match",
+        }],
+    ))
+
+    assert resp.status_code == 200, resp.text
+    evidence = resp.json()["staff_review"]["identity_evidence"]
+    assert evidence["confidence"] == "high"
+    assert "opv_verified" in evidence["matched_fields"]
+    assert "identity_verification:opv" in evidence["supporting_context"]
+
+
 def test_selected_candidate_conflict_revalidation_blocks_without_mutating(
     client,
     db,
