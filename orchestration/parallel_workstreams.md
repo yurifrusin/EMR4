@@ -134,6 +134,54 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 96: Bernie Reception Assistant UX And API Evidence Contract
+
+| Item | Value |
+|---|---|
+| Status | Dispatching plan-gated workstreams |
+| Launch Gate | Pending dispatch commit/push/audit, then HANDIN READY |
+| Integration Gate | Blocked until Claude, Antigravity/Gemini, and Codex worker plans are reviewed and accepted |
+| Product Goal | Turn Bernie from a scary supervised-review prototype into a calm reception assistant backed by rigorous non-mutating proposal APIs, explicit staff confirmation, and auditability |
+
+### Workstream EA - Bernie API Evidence Contract Plan
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-bernie-api-evidence-contract-plan.md` |
+| Goal | Plan the backend/API adjustments needed for receptionist-grade Bernie booking proposals, auditability, and future context-frame placeholders |
+| In Scope | Plan packet first only; review `app/schemas/appointments.py`, `app/routers/appointments.py`, `app/models/appointments.py`, `app/models/ai_audit.py`, existing Bernie/appointment/audit tests; propose any minimal schema/router/test changes needed so Bernie returns structured slot, patient, identity, practitioner, confirmation, keyboard/action, and audit evidence while confirmed writes remain the only appointment mutations; identify whether existing `AppointmentAuditLog` and Access AI audit are sufficient or what focused audit event is missing; keep Caller ID, OPV/PVM, and phone-system integrations as optional empty context-frame/provider placeholders only |
+| Out of Scope | Production code edits before plan approval, diary frontend implementation, live Caller ID/phone-system integration, live Medicare/OPV/PVM/IHI calls, GCP/provider/auth changes, clinical/taskpane/Command Centre work, broad implementation-plan rewrite, and broad security/dependency work |
+| Verification | Plan packet must name exact backend files/tests to touch, no-write/no-mutation assertions, audit assertions, focused pytest targets, and migration/no-migration rationale |
+| Status | Queued |
+
+### Workstream EB - Bernie Reception UX Plan
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity/Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-bernie-reception-ux-plan.md` |
+| Goal | Plan a calmer, practice-usable diary experience for Bernie-assisted booking without weakening confirmation gates |
+| In Scope | Plan packet first only; review `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, and `review/test_diary_smoke.py`; propose staff-facing copy/visual hierarchy replacing "Supervised Booking Review", robot/masked iconography, red/blocked theatre, and `BERNIE PROVISIONAL BOOKING`; include candidate-slot click-through, visible provisional slot focus, patient details and identity evidence where available, clear Confirm button and keyboard shortcut, calm warning language, and deterministic smoke checks |
+| Out of Scope | Production code edits before plan approval, backend/schema changes except documented requested contracts, live phone/Medicare/provider integrations, broad diary redesign, taskpane/Command Centre/billing/SMS/resource-admin work, and any bypass of staff confirmation |
+| Verification | Plan packet must name exact diary files/tests to touch, copy/UX acceptance criteria, keyboard path checks, confirmation-gate checks, asset cache-bust/version checks, and deployed/local smoke strategy |
+| Status | Queued |
+
+### Workstream EC - Bernie Product/API Acceptance Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex subagent |
+| Branch | `codex/bernie-reception-acceptance-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-bernie-reception-acceptance-review.md` |
+| Goal | Independently analyse the screenshots, current Bernie code, and implementation-plan fit, then submit acceptance criteria and risks for Ariadne to use when judging worker plans |
+| In Scope | Plan packet / review notes first only; read-only inspection of Bernie backend contracts, diary UI, review harness, Access AI/audit seams, `orchestration/resource_admin_bernie_tool_design.md`, and `orchestration/phase_programmes.md`; recommend what should be fixed in Sprint 96 versus deferred; explicitly challenge overreach into Caller ID/OPV/phone integration |
+| Out of Scope | Production code edits before plan approval, integrating other workers, live service setup, broad implementation-plan rewrite, and implementation release |
+| Verification | Subagent plan/review must include what is working, what is not working, proposed acceptance gates, likely hidden risks, and suggested resubmission criteria for Claude/Antigravity plans |
+| Status | Queued |
+
 ## Sprint 74: Bernie Instruction Readiness Reset Polish
 
 | Item | Value |

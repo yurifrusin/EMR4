@@ -14,6 +14,14 @@ Read these before acting on remembered process details.
 - 2026-06-24: Use `orchestration/phase_programmes.md` as the planning layer
   between implementation phases and tactical sprints. Prefer coherent
   outcome-sized sprints inside a programme over reactive micro-sprints.
+- 2026-06-30: Substantial Bernie / agentic-reception work defaults to the full
+  three-way plan-gated loop: Claude, Antigravity/Gemini, and a Codex subagent
+  each submit plans first; Ariadne reviews, accepts or requests resubmission,
+  and only then releases implementation with `complete sprint task`. Depart from
+  this only for narrow hotfixes, tooling failures, or explicitly documented
+  scope/risk reasons. Keep visible receptionist UX calm and helpful; safety
+  belongs primarily in typed API contracts, confirmation endpoints, RBAC, and
+  audit trails rather than alarming staff-facing copy.
 - 2026-06-17: `submit` has been fixed to resolve the active worktree root. Use
   the task packet's `submit` command. Do not manually push to `master`.
 - Standing orchestration rule: every protocol-followed command should be reported
