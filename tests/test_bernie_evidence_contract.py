@@ -8,15 +8,9 @@ audit-evidence code on the AppointmentAuditLog row, and that provisional /
 unlinked / ambiguous patient paths emit appropriate evidence without PHI leaks.
 """
 
-from datetime import date, datetime, time, timezone
-
-import pytest
-
 from app.models.appointments import (
     Appointment,
     AppointmentAuditLog,
-    AppointmentStatus,
-    BookingChannel,
 )
 from app.models.patients import Patient
 from tests.conftest import make_token
