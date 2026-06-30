@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| Status | Plan gate blocked |
+| Status | Plan gate closed; implementation released |
 | Reviewed by | Ariadne |
 | Reviewed at | 2026-06-30 23:30 +1000 |
 | Dispatch commit | `68d3728` |
@@ -46,6 +46,15 @@ North star:
   visible safety theatre.
 - Caller ID, phone-system integration, OPV/PVM/IHI, and live Medicare checks
   remain placeholder/context-frame vocabulary only in this sprint.
+
+User pulse decision:
+
+- Yuri approved trying a restrained pulse effect on the provisional diary slot
+  card.
+- Ariadne accepts this only as a temporary attention cue: subtle, short-lived,
+  disabled under `prefers-reduced-motion`, and never a substitute for the
+  visible patient/practitioner/time/identity evidence or the explicit staff
+  Confirm action.
 
 ## Plan Results
 
@@ -111,22 +120,21 @@ Reason:
 
 ## Gate Decision
 
-Implementation is not released.
+Implementation is released after acceptance of:
 
-Required before implementation:
+- Claude's backend/API evidence contract plan.
+- Codex/Hypatia's acceptance review.
+- The replacement Codex/Ariadne UX plan in
+  `orchestration/sprint_96_replacement_ux_plan.md`.
 
-- Accept a replacement UX plan, either from a successful Antigravity
-  resubmission, a replacement Codex UI worker, or an Ariadne-authored UI plan
-  explicitly standing down Antigravity for this sprint.
-- Then release accepted plans with the exact implementation phrase
-  `complete sprint task`.
+Antigravity/Gemini is explicitly stood down for Sprint 96 implementation because
+its submitted UX plan was rejected and its resubmission channel stalled. This is
+a documented tooling/quality exception to the usual three-worker release.
 
 ## Recommended Next Move
 
-Preferred: have Ariadne replace the blocked Antigravity plan with a focused
-Codex UI worker or Ariadne-authored UX plan, while documenting that the
-Antigravity/Gemini channel was attempted and rejected for this sprint.
+Proceed with implementation:
 
-Alternative: Yuri manually opens/prompts Antigravity GUI later with the
-resubmission criteria from this file, then Ariadne reviews the resulting plan
-before implementation release.
+- Claude owns backend/API evidence fields and focused backend tests.
+- Codex owns diary UX/copy/pulse/shortcut and deterministic smoke checks.
+- Ariadne integrates, repairs, verifies, and closes Sprint 96 before pushing.

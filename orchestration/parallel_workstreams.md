@@ -138,9 +138,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Plan gate blocked after Antigravity/Gemini UX plan rejection |
+| Status | Plan gate closed; implementation released after replacement UX plan acceptance |
 | Launch Gate | Complete: dispatch committed, pushed, audited, and HANDIN READY announced |
-| Integration Gate | Blocked until an acceptable UX plan replaces or repairs the rejected Antigravity/Gemini plan |
+| Integration Gate | Implementation in progress |
 | Product Goal | Turn Bernie from a scary supervised-review prototype into a calm reception assistant backed by rigorous non-mutating proposal APIs, explicit staff confirmation, and auditability |
 
 ### Workstream EA - Bernie API Evidence Contract Plan
@@ -168,6 +168,19 @@ After every fully integrated batch, Codex updates
 | Out of Scope | Production code edits before plan approval, backend/schema changes except documented requested contracts, live phone/Medicare/provider integrations, broad diary redesign, taskpane/Command Centre/billing/SMS/resource-admin work, and any bypass of staff confirmation |
 | Verification | Plan packet must name exact diary files/tests to touch, copy/UX acceptance criteria, keyboard path checks, confirmation-gate checks, asset cache-bust/version checks, and deployed/local smoke strategy |
 | Status | Plan submitted, rejected, and resubmission blocked by Antigravity CLI loop |
+
+### Workstream ED - Replacement Bernie Reception UX Plan
+
+| Item | Value |
+|---|---|
+| Owner | Codex UX worker with Ariadne review |
+| Branch | Direct subagent plan; implementation branch TBD |
+| Task Packet | Replacement for rejected `antigravity-bernie-reception-ux-plan` |
+| Goal | Produce an implementation-ready UX plan that makes Bernie feel like a calm reception assistant while preserving staff-confirmed API guardrails |
+| In Scope | Plan only; `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, and `review/test_diary_smoke.py`; replacement copy, panel/card hierarchy, candidate selection, provisional diary card information density, visible Confirm action, keyboard shortcut, route-intercepted no-write checks, and a restrained provisional-card pulse approved by Yuri |
+| Out of Scope | Backend schema, live Caller ID/phone integration, live OPV/PVM/Medicare/IHI checks, taskpane, Command Centre, broad diary redesign, and weakening staff confirmation |
+| Verification | Plan must specify exact copy changes, card hierarchy, pulse/accessibility guardrails, deterministic smoke checks, asset version checks, and failure signs before implementation release |
+| Status | Accepted; Antigravity/Gemini stood down for Sprint 96 implementation |
 
 ### Workstream EC - Bernie Product/API Acceptance Review
 
