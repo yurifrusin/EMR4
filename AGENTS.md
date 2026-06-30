@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Programme 2F / Sprint 96 - Bernie reception assistant UX and API evidence contract integrated and verified locally |
+| **Current active track** | Programme 2F / Sprint 96 - Bernie reception assistant UX and API evidence contract integrated, pushed, deployed, mirrored, and audited |
 | **Next recommended work** | Step back and review the broader implementation plan, then run a small API/UX tightening sprint before live phone-system or Medicare/OPV/PVM integration |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are

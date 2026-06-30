@@ -138,9 +138,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally and verified; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Launch Gate | Complete: dispatch committed, pushed, audited, and HANDIN READY announced |
-| Integration Gate | Complete locally; final push and mirror realign pending |
+| Integration Gate | Complete |
 | Product Goal | Turn Bernie from a scary supervised-review prototype into a calm reception assistant backed by rigorous non-mutating proposal APIs, explicit staff confirmation, and auditability |
 
 ### Workstream EA - Bernie API Evidence Contract Plan

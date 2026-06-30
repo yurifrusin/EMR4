@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 96: Bernie Reception Assistant UX and API Evidence Contract |
 | Integrated through | Calm Bernie reception UI, explicit Confirm booking path, staged diary pulse, structured practitioner/patient evidence, and bounded identity-confidence audit |
-| Status | Integrated locally, verified, pending push/mirror/audit |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Last updated | 2026-07-01 |
 
 ## What Changed
