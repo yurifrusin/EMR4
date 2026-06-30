@@ -155,12 +155,6 @@ class FakeBookingInstructionInterpreter:
             reference_date=body.reference_date,
         )
         blocks = list(normalization.blocks)
-        if safety_flags:
-            blocks.append(_issue(
-                "staff_confirmation_required",
-                "blocked",
-                "Free-text interpretation is read-only and cannot book or confirm appointments.",
-            ))
 
         if blocks:
             result = "clarification_required" if missing_fields else "blocked"
@@ -327,12 +321,6 @@ class GeminiVertexBookingInstructionInterpreter:
             if flag == "autonomous_booking_language"
         ]
         blocks = list(normalization.blocks)
-        if safety_flags:
-            blocks.append(_issue(
-                "staff_confirmation_required",
-                "blocked",
-                "Free-text interpretation is read-only and cannot book or confirm appointments.",
-            ))
 
         if blocks:
             result = "clarification_required" if missing_fields else "blocked"
@@ -444,8 +432,9 @@ def _build_live_provider_prompt(
         "write audit rows, or claim that an appointment has been made. "
         "Extract only structured slot-search command fields from the staff instruction. "
         "If the instruction asks you to book/confirm/create/write, include "
-        "autonomous_booking_language in safety_flags. Do not include raw patient notes "
-        "or repeat the full instruction in summary. "
+        "autonomous_booking_language in safety_flags. That language is a warning "
+        "for staff confirmation, not a reason to block a supervised proposal. "
+        "Do not include raw patient notes or repeat the full instruction in summary. "
         "JSON shape: {"
         "\"command_candidate\":{\"practitioner_id\":null,\"patient_id\":null,"
         "\"appointment_type_id\":null,\"location_id\":null,\"date_from\":null,"

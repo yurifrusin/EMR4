@@ -505,6 +505,7 @@ class BernieBookingInstructionInterpretIn(BaseModel):
     """Raw staff text intake for read-only Bernie booking interpretation."""
     instruction: str = Field(min_length=1, max_length=1000)
     reference_date: Optional[date] = None
+    context_frames: list[dict[str, Any]] = Field(default_factory=list)
 
 
 class BernieBookingInterpreterMetadata(BaseModel):

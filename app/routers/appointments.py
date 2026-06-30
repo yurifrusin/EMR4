@@ -1,4 +1,5 @@
 import uuid
+import re
 from datetime import date as date_type, datetime, time, timedelta, timezone
 from typing import Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
@@ -65,6 +66,14 @@ BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
     "source_slot_selection_proposal",
     "source_create_proposal",
 ]
+
+BERNIE_AUTONOMOUS_BOOKING_TERMS = (
+    "book it",
+    "create it",
+    "confirm it",
+    "make the booking",
+    "write it",
+)
 
 
 def _sanitize_confirmed_warnings(codes: Optional[list[str]]) -> Optional[list[str]]:
@@ -1125,10 +1134,212 @@ def interpret_bernie_booking_instruction(
         actor_context_for_interpreter_user(current_user),
         access_ai_audit_events,
     )
+    result = _resolve_bernie_interpretation_context(
+        result,
+        body,
+        db,
+        current_user.practice_id,
+    )
     if access_ai_audit_events:
         persist_access_ai_audit_events(db, access_ai_audit_events)
         db.commit()
     return result
+
+
+def _text_tokens(value: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+", (value or "").lower())
+
+
+def _text_contains_name(instruction_tokens: set[str], *name_parts: str) -> bool:
+    parts = [
+        token
+        for part in name_parts
+        for token in _text_tokens(part)
+        if token not in {"dr", "doctor", "nurse", "mr", "mrs", "ms", "miss"}
+    ]
+    return bool(parts) and all(part in instruction_tokens for part in parts)
+
+
+def _context_frame_value(
+    body: BernieBookingInstructionInterpretIn,
+    key: str,
+) -> Optional[str]:
+    for frame in body.context_frames:
+        if not isinstance(frame, dict):
+            continue
+        value = frame.get(key)
+        if value:
+            return str(value)
+    return None
+
+
+def _resolve_practitioner_from_instruction(
+    instruction_tokens: set[str],
+    db: Session,
+    practice_id: uuid.UUID,
+) -> tuple[Optional[uuid.UUID], list[AppointmentProposalIssue]]:
+    matches: list[Practitioner] = []
+    practitioners = db.query(Practitioner).filter(
+        Practitioner.practice_id == practice_id,
+        Practitioner.is_active == True,
+    ).all()
+    for practitioner in practitioners:
+        full_name_match = _text_contains_name(
+            instruction_tokens,
+            practitioner.first_name,
+            practitioner.last_name,
+        )
+        surname_match = _text_contains_name(instruction_tokens, practitioner.last_name)
+        if full_name_match or surname_match:
+            matches.append(practitioner)
+
+    if len(matches) == 1:
+        practitioner = matches[0]
+        return practitioner.id, [
+            AppointmentProposalIssue(
+                code="practitioner_name_resolved",
+                severity="warning",
+                message=(
+                    "Bernie resolved the practitioner name in the instruction "
+                    f"to {practitioner.first_name} {practitioner.last_name}."
+                ),
+            )
+        ]
+    if len(matches) > 1:
+        return None, [
+            AppointmentProposalIssue(
+                code="ambiguous_practitioner_name",
+                severity="warning",
+                message="Multiple active practitioners match the name in the instruction.",
+            )
+        ]
+    return None, []
+
+
+def _resolve_patient_from_instruction(
+    instruction_tokens: set[str],
+    db: Session,
+    practice_id: uuid.UUID,
+) -> tuple[Optional[uuid.UUID], list[AppointmentProposalIssue]]:
+    matches: list[Patient] = []
+    patients = db.query(Patient).filter(Patient.practice_id == practice_id).all()
+    for patient in patients:
+        if _text_contains_name(instruction_tokens, patient.first_name, patient.last_name):
+            matches.append(patient)
+
+    if len(matches) == 1:
+        patient = matches[0]
+        return patient.id, [
+            AppointmentProposalIssue(
+                code="patient_name_resolved_verify_identity",
+                severity="warning",
+                message=(
+                    "Bernie resolved a unique patient name match. Staff should "
+                    "still verify patient identity before confirming the booking."
+                ),
+            )
+        ]
+    if len(matches) > 1:
+        return None, [
+            AppointmentProposalIssue(
+                code="ambiguous_patient_name",
+                severity="warning",
+                message=(
+                    "Multiple patients match the name in the instruction. Ask for "
+                    "DOB and another identifier before confirming the booking."
+                ),
+            )
+        ]
+    return None, []
+
+
+def _resolve_bernie_interpretation_context(
+    result: BernieBookingInstructionInterpretOut,
+    body: BernieBookingInstructionInterpretIn,
+    db: Session,
+    practice_id: uuid.UUID,
+) -> BernieBookingInstructionInterpretOut:
+    if result.command_candidate is None:
+        return result
+
+    command_values = result.command_candidate.model_dump()
+    resolver_warnings: list[AppointmentProposalIssue] = []
+    instruction_tokens = set(_text_tokens(body.instruction))
+
+    if not command_values.get("practitioner_id"):
+        frame_practitioner_id = _context_frame_value(body, "practitioner_id")
+        if frame_practitioner_id:
+            command_values["practitioner_id"] = frame_practitioner_id
+        else:
+            practitioner_id, warnings = _resolve_practitioner_from_instruction(
+                instruction_tokens,
+                db,
+                practice_id,
+            )
+            resolver_warnings.extend(warnings)
+            if practitioner_id:
+                command_values["practitioner_id"] = str(practitioner_id)
+
+    if not command_values.get("patient_id"):
+        frame_patient_id = _context_frame_value(body, "patient_id")
+        if frame_patient_id:
+            command_values["patient_id"] = frame_patient_id
+        else:
+            patient_id, warnings = _resolve_patient_from_instruction(
+                instruction_tokens,
+                db,
+                practice_id,
+            )
+            resolver_warnings.extend(warnings)
+            if patient_id:
+                command_values["patient_id"] = str(patient_id)
+
+    command = SlotSearchCommandIn(**command_values)
+    normalization = normalize_slot_search_command(
+        command,
+        reference_date=body.reference_date,
+    )
+    missing_fields: list[str] = []
+    if command.practitioner_id is None:
+        missing_fields.append("practitioner_id")
+    if command.date_from is None:
+        missing_fields.append("date_from")
+
+    safety_flags = list(result.safety_flags)
+    if (
+        any(term in body.instruction.lower() for term in BERNIE_AUTONOMOUS_BOOKING_TERMS)
+        and "autonomous_booking_language" not in safety_flags
+    ):
+        safety_flags.append("autonomous_booking_language")
+
+    warnings = [*result.warnings, *resolver_warnings, *normalization.warnings]
+    if (
+        "autonomous_booking_language" in safety_flags
+        and not any(warning.code == "autonomous_booking_language" for warning in warnings)
+    ):
+        warnings.append(AppointmentProposalIssue(
+            code="autonomous_booking_language",
+            severity="warning",
+            message=(
+                "Instruction contains booking/confirmation language; staff "
+                "confirmation is still required."
+            ),
+        ))
+    blocks = list(normalization.blocks)
+    safe = normalization.safe
+    interpreted = safe and not blocks
+    return result.model_copy(update={
+        "safe": interpreted,
+        "result": "interpreted" if interpreted else ("clarification_required" if missing_fields else "blocked"),
+        "autonomy_tier": "execute_with_report" if interpreted else "blocked",
+        "summary": result.summary,
+        "command_candidate": command,
+        "missing_fields": missing_fields,
+        "safety_flags": safety_flags,
+        "normalization": normalization,
+        "warnings": warnings,
+        "blocks": blocks,
+    })
 
 
 @router.get("/{appointment_id}", response_model=AppointmentOut)

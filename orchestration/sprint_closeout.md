@@ -8,6 +8,48 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 92: Bernie Instruction-First Context Frames |
+| Integrated through | Free-text Bernie booking instructions no longer require selected appointment context; selected appointment context is now optional evidence |
+| Status | Integrated locally; push/mirror/audit pending |
+| Last updated | 2026-06-30 |
+
+## What Changed
+
+- Added optional `context_frames` to the Bernie booking-instruction interpreter request.
+- The Diary now opens Bernie to an instruction-first panel even when no appointment is selected.
+- Selected diary appointment context remains useful: when an appointment is active, staff can import it as optional evidence rather than as a prerequisite.
+- Stale selected-appointment context now clears back to instruction-first mode instead of blocking Bernie with `stale_selected_appointment_context`.
+- The backend interpreter route now resolves simple practice-local names before slot search:
+  - unique practitioner surname/full-name matches such as `Dr Shera` resolve to `practitioner_id`
+  - unique patient full-name matches such as `Margaret Thompson` resolve to `patient_id`
+  - ambiguous patient/practitioner names produce warnings/clarification rather than silent selection
+- Booking/confirmation language such as "book it" is now treated as a supervised-confirmation warning, not as a hard block, because Bernie still only prepares a proposal and the final write remains staff-confirmed.
+- Diary assets were cache-busted to `diary.js?v=131`.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\services\bernie_booking_interpreter.py app\schemas\appointments.py` passed.
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py -q --tb=short` passed: `20 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_pilot_instruction_first_without_selected_appointment review\test_diary_smoke.py::test_bernie_pilot_selected_appointment_instruction_readiness_and_resets review\test_diary_smoke.py::test_bernie_review_candidate_selection_empty_state -q --tb=short` passed: `3 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+
+## Known Follow-Up
+
+- This sprint does not yet create a highlighted provisional diary card from a clicked Bernie candidate slot.
+- This sprint does not yet navigate the diary to a candidate date/time/practitioner column after staff clicks a candidate option.
+- Patient identity is still a first-pass unique full-name resolver. Add DOB, phone/caller-ID, Medicare/DVA/IHI/MRN/address confidence tiers before production use.
+- Services Australia ECLIPSE guidance says one-name patients should place the actual one-part name in `PatientFamilyName` and `Onlyname` in `PatientFirstName`; verify this against the exact Medicare Online / billing integration EMR4 implements before canonical database or claim-export mapping.
+- Caller ID should be added as an optional context frame, not as verified identity.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Recommended Next Direction
+
+Next recommended step: Sprint 93 Bernie candidate click-through and provisional diary highlight. Candidate options should be clickable, navigate the diary to the proposed date/time/practitioner column, stage an enlarged highlighted provisional booking card with identity-confidence details, and require receptionist confirmation before the normal appointment write/appearance.
+
+## Previous Closeout - Sprint 91
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 91: Multi-Provider Knowledge-Base Adapter Groundwork |
 | Integrated through | Provider-neutral knowledge-base query/citation contracts behind Access AI with fake-provider tests only |
 | Status | Integrated, verified, pushed, mirrored, and audited |

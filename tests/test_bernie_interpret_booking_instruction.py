@@ -175,10 +175,48 @@ def test_fake_provider_missing_fields_returns_clarifying_intent(
     assert data["blocks"][0]["code"] == "missing_practitioner_id"
 
 
-def test_fake_provider_autonomous_booking_language_is_blocked(
+def test_fake_provider_resolves_practice_names_as_optional_context(
+    client,
+    db,
+    gp_user,
+    practitioner,
+    patient,
+    monkeypatch,
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+    appointment_before = db.query(Appointment).count()
+    audit_before = db.query(AppointmentAuditLog).count()
+
+    resp = _post_interpret(
+        client,
+        token,
+        (
+            "Make an appointment for Margaret Thompson with Dr Shera "
+            "today duration:15 earliest_time:14:00 latest_time:15:30"
+        ),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["result"] == "interpreted"
+    assert data["command_candidate"]["practitioner_id"] == str(practitioner.id)
+    assert data["command_candidate"]["patient_id"] == str(patient.id)
+    assert data["normalization"]["constraint"]["practitioner_id"] == str(practitioner.id)
+    assert data["normalization"]["constraint"]["patient_id"] == str(patient.id)
+    warning_codes = {warning["code"] for warning in data["warnings"]}
+    assert "practitioner_name_resolved" in warning_codes
+    assert "patient_name_resolved_verify_identity" in warning_codes
+    assert db.query(Appointment).count() == appointment_before
+    assert db.query(AppointmentAuditLog).count() == audit_before
+
+
+def test_fake_provider_autonomous_booking_language_is_warning_only(
     client,
     gp_user,
     practitioner,
+    patient,
     monkeypatch,
 ):
     monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
@@ -187,16 +225,19 @@ def test_fake_provider_autonomous_booking_language_is_blocked(
     resp = _post_interpret(
         client,
         token,
-        f"practitioner_id:{practitioner.id} date_from:today duration:15 book it",
+        (
+            f"practitioner_id:{practitioner.id} patient_id:{patient.id} "
+            "date_from:today duration:15 book it"
+        ),
     )
 
     assert resp.status_code == 200, resp.text
     data = resp.json()
-    assert data["safe"] is False
-    assert data["result"] == "blocked"
+    assert data["safe"] is True
+    assert data["result"] == "interpreted"
     assert data["safety_flags"] == ["autonomous_booking_language"]
     assert data["warnings"][0]["code"] == "autonomous_booking_language"
-    assert data["blocks"][0]["code"] == "staff_confirmation_required"
+    assert data["blocks"] == []
     assert data["normalization"]["safe"] is True
 
 
@@ -337,7 +378,7 @@ def test_mocked_live_provider_invalid_response_fails_closed(
     assert data["provider_metadata"]["live_provider"] is True
 
 
-def test_mocked_live_provider_autonomous_booking_language_is_blocked(
+def test_mocked_live_provider_autonomous_booking_language_is_warning_only(
     client,
     gp_user,
     practitioner,
@@ -369,10 +410,11 @@ def test_mocked_live_provider_autonomous_booking_language_is_blocked(
 
     assert resp.status_code == 200, resp.text
     data = resp.json()
-    assert data["safe"] is False
-    assert data["result"] == "blocked"
+    assert data["safe"] is True
+    assert data["result"] == "interpreted"
     assert data["safety_flags"] == ["autonomous_booking_language"]
-    assert data["blocks"][0]["code"] == "staff_confirmation_required"
+    assert data["warnings"][0]["code"] == "autonomous_booking_language"
+    assert data["blocks"] == []
     assert data["normalization"]["safe"] is True
 
 

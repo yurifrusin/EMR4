@@ -624,6 +624,44 @@ flowchart TD
 | Audit trail | Every Bernie suggestion and confirmed action records actor, tool, inputs, result, timestamp, and human confirmer |
 | Escalation | Ambiguous identity, clinical content, impossible scheduling, or conflicting policy routes back to the human receptionist |
 
+#### Bernie instruction-first context frames
+
+Bernie's ordinary booking input should be a staff instruction, not internal IDs.
+The API should treat selected diary appointments, Caller ID, visible diary state,
+current location, and future phone-system metadata as optional **context frames**:
+helpful evidence, never mandatory gates. A receptionist should be able to type
+"Make an appointment for Billy Frusin with Dr Shera at 4:30 this arvo" or
+"Make an appointment for Billy Frusin with Nurse Chen earliest time after 2 but
+before 3.30" without first selecting an existing booking slot.
+
+Context frames should be merged into a typed proposal envelope:
+
+- resolve practitioner names into candidate practitioner ids
+- resolve patient names into candidate patient ids with identity-confidence
+  metadata
+- resolve relative date/time language against the active diary date and practice
+  timezone
+- return candidate booking slots that staff can click
+- on click, navigate the diary to the proposed date/time/practitioner column and
+  stage an enlarged highlighted provisional booking card
+- show patient identity evidence, DOB, Medicare/DVA/IHI/MRN/address/caller-ID
+  hints where available, and a clear "verify before confirming" message where
+  confidence is not high
+- write the normal appointment only after explicit receptionist confirmation
+
+Patient identity tiers should be conservative. A unique name + DOB match can be
+operationally useful, but production confirmation should prefer at least one
+additional identifier when available, such as caller-ID phone match, address,
+Medicare/DVA/IHI/MRN, or reception-counter verification. Ambiguous matches,
+same-name/same-DOB cases, conflicting identifiers, or missing DOB should remain
+provisional or blocked for staff resolution.
+
+ONLYNAME must be supported without inventing a false surname. Services Australia
+ECLIPSE guidance indicates one-name patients may require the actual one-part
+name in `PatientFamilyName` and literal `Onlyname` in `PatientFirstName`; verify
+the exact Medicare Online / billing integration contract before making claim
+export mapping canonical.
+
 #### Bernie build gates
 
 - Do not start Bernie until Phase 2 has stable booking create/edit, resource/room

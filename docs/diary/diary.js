@@ -156,35 +156,10 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
   const referenceDate = allowHarnessDefaults ? (queryReferenceDate || "2026-06-27") : (queryReferenceDate || localDateKey(diaryDate));
 
   const blocks = [];
-  if (!practitionerId) {
-    blocks.push({
-      code: "missing_practitioner_context",
-      message: "Select or load a real practitioner diary context before launching Bernie Pilot."
-    });
-  } else if (!allowHarnessDefaults && isBerniePilotDefaultContextId(practitionerId, { allowSmokeIds: allowSmokeSelectedContext })) {
-    blocks.push({
-      code: "default_practitioner_context",
-      message: "Use an explicit non-default practitioner context before launching Bernie Pilot."
-    });
-  }
-  if (!patientId && (!allowHarnessDefaults || (selectedIndex !== null && !isNaN(selectedIndex)))) {
-    blocks.push({
-      code: "missing_patient_context",
-      message: "Select or load a real patient context before asking Bernie to prepare a booking confirmation."
-    });
-  } else if (!allowHarnessDefaults && isBerniePilotDefaultContextId(patientId, { allowSmokeIds: allowSmokeSelectedContext })) {
-    blocks.push({
-      code: "default_patient_context",
-      message: "Use an explicit non-smoke patient context before asking Bernie to prepare a booking confirmation."
-    });
-  }
   if (!allowManualContext && explicitContext.sourceAppointmentId && selectedContext.apptId !== explicitContext.sourceAppointmentId) {
     bernieInstructionText = "";
     bernieInterpretResult = null;
-    blocks.push({
-      code: "stale_selected_appointment_context",
-      message: "The selected diary appointment has changed. Import the current selected appointment before asking Bernie to prepare a booking confirmation."
-    });
+    setBerniePilotContextValues({ practitionerId: "", patientId: "", sourceAppointmentId: "" });
   }
   if (!referenceDate) {
     blocks.push({
@@ -200,14 +175,21 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
     };
   }
 
+  const command = {
+    date_from: "today",
+    duration_minutes: "15"
+  };
+  if (practitionerId && !isBerniePilotDefaultContextId(practitionerId, { allowSmokeIds: allowSmokeSelectedContext })) {
+    command.practitioner_id = practitionerId;
+  }
+  if (patientId && !isBerniePilotDefaultContextId(patientId, { allowSmokeIds: allowSmokeSelectedContext })) {
+    command.patient_id = patientId;
+  }
+
   const body = {
     reference_date: referenceDate,
-    command: {
-      practitioner_id: practitionerId,
-      date_from: "today",
-      duration_minutes: "15"
-    },
-    patient_id: patientId
+    command,
+    patient_id: command.patient_id || ""
   };
 
   if (selectedIndex !== null && !isNaN(selectedIndex)) {
@@ -2781,11 +2763,6 @@ function renderBernieInstructionInput(contentEl) {
   let showSelectedAppt = false;
 
   if (contextReady) {
-    const summaryContainer = document.createElement("div");
-    summaryContainer.id = "bernie-context-summary";
-    summaryContainer.className = "bernie-context-summary";
-    summaryContainer.setAttribute("data-testid", "bernie-context-summary");
-
     // Fetch active appointment context if available and matches
     const { appt } = getActiveBernieSelectedAppointment();
 
@@ -2798,7 +2775,35 @@ function renderBernieInstructionInput(contentEl) {
       if (apptPracId === activePracId && apptPatId === activePatId) {
         showSelectedAppt = true;
       }
+      if (!activePracId && !activePatId && apptPracId && apptPatId && !isPatientIdentityUnconfirmed(appt)) {
+        const apptPanel = document.createElement("div");
+        apptPanel.className = "bernie-pilot-selected-appt-panel";
+        const useSelectedBtn = document.createElement("button");
+        useSelectedBtn.type = "button";
+        useSelectedBtn.className = "btn-bernie-use-selected";
+        useSelectedBtn.setAttribute("data-testid", "bernie-pilot-use-selected");
+        const patientName = appt.patient ? `${appt.patient.first_name} ${appt.patient.last_name}`.trim() : (provisionalPatientName(appt) || "Unknown Patient");
+        useSelectedBtn.textContent = `Use selected appointment context: ${patientName}`;
+        useSelectedBtn.addEventListener("click", () => {
+          bernieInstructionText = "";
+          bernieInterpretResult = null;
+          setBerniePilotContextValues({
+            practitionerId: apptPracId,
+            patientId: apptPatId,
+            sourceAppointmentId: appt.id || ""
+          });
+          loadBernieLiveReview();
+        });
+        apptPanel.appendChild(useSelectedBtn);
+        container.appendChild(apptPanel);
+      }
     }
+
+    if (activePracId || activePatId || showSelectedAppt) {
+    const summaryContainer = document.createElement("div");
+    summaryContainer.id = "bernie-context-summary";
+    summaryContainer.className = "bernie-context-summary";
+    summaryContainer.setAttribute("data-testid", "bernie-context-summary");
 
     let patientText = "";
     let timeText = "";
@@ -2874,6 +2879,7 @@ function renderBernieInstructionInput(contentEl) {
     summaryContainer.appendChild(summaryDetails);
     summaryContainer.appendChild(changeBtn);
     container.appendChild(summaryContainer);
+    }
   }
 
   const textarea = document.createElement("textarea");
@@ -2979,7 +2985,15 @@ function renderBernieInstructionInput(contentEl) {
         method: "POST",
         body: JSON.stringify({
           instruction: bernieInstructionText,
-          reference_date: localDateKey(diaryDate)
+          reference_date: localDateKey(diaryDate),
+          context_frames: [
+            {
+              type: "selected_diary_appointment",
+              practitioner_id: request.body.command?.practitioner_id || null,
+              patient_id: request.body.command?.patient_id || null,
+              source_appointment_id: berniePilotContext.sourceAppointmentId || null
+            }
+          ].filter(frame => frame.practitioner_id || frame.patient_id || frame.source_appointment_id)
         })
       });
 
