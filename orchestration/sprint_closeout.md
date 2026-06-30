@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 93: Bernie Candidate Click-Through Diary Preview |
 | Integrated through | Clickable Bernie candidate slots now stage a highlighted provisional diary preview before staff confirmation |
-| Status | Integrated locally and verified; pending push/mirror/audit |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-06-30 |
 
 ## What Changed
