@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 95: Caller-ID / OPV Readiness Contracts |
 | Integrated through | Provider-neutral non-mutating identity-verification adapter contract and Bernie OPV context-frame consumption |
-| Status | Integrated locally and verified; pending push/mirror/audit |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-06-30 |
 
 ## What Changed
