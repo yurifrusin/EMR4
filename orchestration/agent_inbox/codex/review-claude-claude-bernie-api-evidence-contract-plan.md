@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-api-evidence-contract-plan` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -39,5 +39,6 @@ claude-bernie-api-evidence-contract-plan ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into `master` at `9f57ebb` after Ariadne review.
+- Verification: `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py` passed; `.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py -q --tb=short` passed (`27 passed`).
+- Follow-up required: None for Sprint 96; live Caller ID / OPV / Medicare evidence remains placeholder-only.

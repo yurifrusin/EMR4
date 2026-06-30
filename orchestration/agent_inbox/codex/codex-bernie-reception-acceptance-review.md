@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/bernie-reception-acceptance-review` |
-| Status | queued |
+| Status | integrated |
 | Created | 67f1c02 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-bernie-reception-acceptance-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Read-only acceptance criteria used as Ariadne input; no production files integrated from this packet.
+- Verification run: Acceptance criteria were reconciled into `orchestration/sprint_96_plan_review.md` and the replacement UX implementation.
+- Remaining risks: None for this packet; live phone and external identity-provider work remains deferred.

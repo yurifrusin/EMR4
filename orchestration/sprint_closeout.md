@@ -8,6 +8,72 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 96: Bernie Reception Assistant UX and API Evidence Contract |
+| Integrated through | Calm Bernie reception UI, explicit Confirm booking path, staged diary pulse, structured practitioner/patient evidence, and bounded identity-confidence audit |
+| Status | Integrated locally, verified, pending push/mirror/audit |
+| Last updated | 2026-07-01 |
+
+## What Changed
+
+- Replaced scary staff-facing Bernie language with calm reception copy: `Bernie`, `Find times`, `Choose a time`, `Ready to book`, `Confirm booking`, and `Booking confirmed`.
+- Removed robot/masked-supervision framing from the diary Bernie panel and launch affordance.
+- Mapped internal API states such as `blocked`, `candidate_selection_required`, and `confirmation_ready` to receptionist-friendly labels while keeping the backend contract unchanged.
+- Changed candidate actions to `Show on diary`, marked selected candidates with `aria-pressed`, and preserved the non-mutating candidate-selection flow.
+- Changed the staged diary card from `Bernie provisional booking` to `Proposed appointment` and made it information-first: patient, time, duration, practitioner, and identity prompt.
+- Added the restrained staged-card pulse Yuri approved: finite shadow/border pulse only, no scale/layout shift, and disabled under `prefers-reduced-motion: reduce`.
+- Removed the extra approval checkbox. The explicit staff confirmation action is now the visible `Confirm booking` button, with `Ctrl+Alt+Enter` supported only when the confirm button is visible/enabled and focus is not in an input.
+- Hid live-provider/debug metadata from normal receptionist flow unless `bernie_debug=true`.
+- Added structured backend evidence fields to Bernie staff-review payloads:
+  - `practitioner_evidence` with display name, provider number where set, and optional location label.
+  - `patient_evidence` with patient label, DOB where linked, masked phone where available, confidence, and provisional flag.
+- Kept supervised Bernie review non-mutating; confirmed writes still go only through the confirm endpoint.
+- Added bounded identity-confidence audit codes to confirmed Bernie writes, derived again server-side at confirmation rather than trusted from client payload.
+- Marked the rejected Antigravity/Gemini UX plan as superseded; Sprint 96 UX implementation followed the accepted Codex/Ariadne replacement plan.
+
+## Verification
+
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed; local/HEAD diary assets are `diary.js?v=134` and `diary.css?v=120`, deployed Pages was still on the previous versions before push.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q --tb=short` passed: `56 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py -q --tb=short` passed: `27 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `git diff --check HEAD` passed.
+
+## Recommended User Review
+
+Residual user review is useful because this sprint changes the live receptionist surface and the exact visual feel of Bernie.
+
+1. Hard refresh the live Diary/Office dialog and confirm the page loads `diary.js?v=134` and `diary.css?v=120`.
+2. Open the Diary and confirm the top-bar button says `Bernie`, not `Supervised Booking Review`.
+3. Open Bernie and type a simple request such as `Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45`.
+4. Confirm the panel says `Find times`, `Bernie found these times`, and `Available times`, with no robot/masked-supervision framing.
+5. Click one suggested time and confirm the diary scrolls to the proposed slot.
+6. Confirm the staged diary card says `Proposed appointment`, gently pulses once, and shows useful details rather than raw UUIDs or scary internal warnings.
+7. In the Bernie panel, confirm the selected appointment details and patient details are readable, then click `Confirm booking` only when the details look right.
+8. Suspicious signs: raw UUIDs or snake_case codes visible to reception, red safety-theatre blocks in normal candidate/confirm states, confirm write before clicking `Confirm booking`, pulse looping forever, card resize/layout jump, or `Ctrl+Alt+Enter` confirming while typing in the instruction field.
+9. Evidence to report: screenshots of any suspicious state plus the instruction entered and whether the appointment was actually created.
+
+## Not Required Before Moving On
+
+- No live Caller ID, phone-system, OPV/PVM/IHI, Medicare Online, or GCP provider setup was added or needs review in this sprint.
+- No taskpane, Command Centre, clinical scribe, billing, SMS, resource admin, or knowledge-base workflow review is required.
+- No database migration or manual data repair is required.
+
+## Known Follow-Up
+
+- Live phone-system Caller ID and Medicare/OPV/PVM verification remain placeholder/context-frame work only.
+- ONLYNAME Medicare mapping still needs exact integration confirmation before production identity rules rely on it.
+- Confirm-time identity-confidence audit currently records baseline EMR4 evidence, not caller-session or future external-verification evidence.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Recommended Next Direction
+
+Step back and review the broader implementation plan in light of the last Bernie sprints. The next technical slice should be a small API/UX tightening sprint rather than live phone/Medicare integration: make the structured `patient_evidence` and `practitioner_evidence` fields the primary source for the diary panel/card and add any missing keyboard shortcut harness coverage before expanding Bernie’s operational scope.
+
+## Previous Closeout - Sprint 95
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 95: Caller-ID / OPV Readiness Contracts |
 | Integrated through | Provider-neutral non-mutating identity-verification adapter contract and Bernie OPV context-frame consumption |
 | Status | Integrated, verified, pushed, mirrored, and audited |

@@ -138,9 +138,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Plan gate closed; implementation released after replacement UX plan acceptance |
+| Status | Integrated locally and verified; push/mirror/audit pending |
 | Launch Gate | Complete: dispatch committed, pushed, audited, and HANDIN READY announced |
-| Integration Gate | Implementation in progress |
+| Integration Gate | Complete locally; final push and mirror realign pending |
 | Product Goal | Turn Bernie from a scary supervised-review prototype into a calm reception assistant backed by rigorous non-mutating proposal APIs, explicit staff confirmation, and auditability |
 
 ### Workstream EA - Bernie API Evidence Contract Plan
@@ -154,7 +154,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first only; review `app/schemas/appointments.py`, `app/routers/appointments.py`, `app/models/appointments.py`, `app/models/ai_audit.py`, existing Bernie/appointment/audit tests; propose any minimal schema/router/test changes needed so Bernie returns structured slot, patient, identity, practitioner, confirmation, keyboard/action, and audit evidence while confirmed writes remain the only appointment mutations; identify whether existing `AppointmentAuditLog` and Access AI audit are sufficient or what focused audit event is missing; keep Caller ID, OPV/PVM, and phone-system integrations as optional empty context-frame/provider placeholders only |
 | Out of Scope | Production code edits before plan approval, diary frontend implementation, live Caller ID/phone-system integration, live Medicare/OPV/PVM/IHI calls, GCP/provider/auth changes, clinical/taskpane/Command Centre work, broad implementation-plan rewrite, and broad security/dependency work |
 | Verification | Plan packet must name exact backend files/tests to touch, no-write/no-mutation assertions, audit assertions, focused pytest targets, and migration/no-migration rationale |
-| Status | Plan submitted and provisionally accepted |
+| Status | Integrated |
 
 ### Workstream EB - Bernie Reception UX Plan
 
@@ -167,7 +167,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first only; review `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, and `review/test_diary_smoke.py`; propose staff-facing copy/visual hierarchy replacing "Supervised Booking Review", robot/masked iconography, red/blocked theatre, and `BERNIE PROVISIONAL BOOKING`; include candidate-slot click-through, visible provisional slot focus, patient details and identity evidence where available, clear Confirm button and keyboard shortcut, calm warning language, and deterministic smoke checks |
 | Out of Scope | Production code edits before plan approval, backend/schema changes except documented requested contracts, live phone/Medicare/provider integrations, broad diary redesign, taskpane/Command Centre/billing/SMS/resource-admin work, and any bypass of staff confirmation |
 | Verification | Plan packet must name exact diary files/tests to touch, copy/UX acceptance criteria, keyboard path checks, confirmation-gate checks, asset cache-bust/version checks, and deployed/local smoke strategy |
-| Status | Plan submitted, rejected, and resubmission blocked by Antigravity CLI loop |
+| Status | Superseded |
 
 ### Workstream ED - Replacement Bernie Reception UX Plan
 
@@ -180,7 +180,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan only; `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, and `review/test_diary_smoke.py`; replacement copy, panel/card hierarchy, candidate selection, provisional diary card information density, visible Confirm action, keyboard shortcut, route-intercepted no-write checks, and a restrained provisional-card pulse approved by Yuri |
 | Out of Scope | Backend schema, live Caller ID/phone integration, live OPV/PVM/Medicare/IHI checks, taskpane, Command Centre, broad diary redesign, and weakening staff confirmation |
 | Verification | Plan must specify exact copy changes, card hierarchy, pulse/accessibility guardrails, deterministic smoke checks, asset version checks, and failure signs before implementation release |
-| Status | Accepted; Antigravity/Gemini stood down for Sprint 96 implementation |
+| Status | Integrated |
 
 ### Workstream EC - Bernie Product/API Acceptance Review
 
@@ -193,7 +193,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet / review notes first only; read-only inspection of Bernie backend contracts, diary UI, review harness, Access AI/audit seams, `orchestration/resource_admin_bernie_tool_design.md`, and `orchestration/phase_programmes.md`; recommend what should be fixed in Sprint 96 versus deferred; explicitly challenge overreach into Caller ID/OPV/phone integration |
 | Out of Scope | Production code edits before plan approval, integrating other workers, live service setup, broad implementation-plan rewrite, and implementation release |
 | Verification | Subagent plan/review must include what is working, what is not working, proposed acceptance gates, likely hidden risks, and suggested resubmission criteria for Claude/Antigravity plans |
-| Status | Review submitted and accepted |
+| Status | Integrated |
 
 ## Sprint 74: Bernie Instruction Readiness Reset Polish
 

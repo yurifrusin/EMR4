@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 67f1c02 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-bernie-reception-ux-plan --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: None integrated. Initial plan was rejected; resubmission stalled in the Antigravity/Gemini channel.
+- Verification run: Superseded by accepted Codex/Ariadne replacement UX implementation and deterministic diary harness.
+- Remaining risks: None from Antigravity code, because no Antigravity Sprint 96 code was integrated.

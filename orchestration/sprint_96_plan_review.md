@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| Status | Plan gate closed; implementation released |
+| Status | Plan gate closed; implementation integrated and verified locally |
 | Reviewed by | Ariadne |
 | Reviewed at | 2026-06-30 23:30 +1000 |
 | Dispatch commit | `68d3728` |
@@ -133,8 +133,8 @@ a documented tooling/quality exception to the usual three-worker release.
 
 ## Recommended Next Move
 
-Proceed with implementation:
+Implementation completed:
 
-- Claude owns backend/API evidence fields and focused backend tests.
-- Codex owns diary UX/copy/pulse/shortcut and deterministic smoke checks.
-- Ariadne integrates, repairs, verifies, and closes Sprint 96 before pushing.
+- Claude's backend/API evidence fields and focused backend tests were integrated.
+- Codex/Ariadne's diary UX/copy/pulse/shortcut and deterministic smoke checks were integrated.
+- Ariadne verified the focused backend and diary harnesses before closing Sprint 96.
