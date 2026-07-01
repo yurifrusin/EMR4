@@ -46,6 +46,45 @@ Bernie booking interpretation and documented as such.
   with available tools, such as Yuri's clinical judgment, real-world phone/device
   context, external account ownership, or production service-console decisions.
 
+## Sprint 98 Screenshot Blockers
+
+Sprint 98 release gates must also block the exact regression classes reported
+from Yuri's live screenshots:
+
+1. **Resolved practitioner must not become raw missing ID copy.** If the ordinary
+   prompt resolves `Dr Shera` to a practitioner, the backend/UI release surface
+   must not show `missing_practitioner_id`, `practitioner_id`, raw UUIDs, or
+   `Practitioner ID is required` to ordinary reception staff. Developer/debug
+   diagnostics may show typed codes only behind the existing debug gates.
+2. **Selected booking slot must have a path back.** After staff choose one Bernie
+   candidate booking slot and a proposed appointment is staged, the Bernie panel
+   must provide a visible path back to the candidate list so staff can choose a
+   different slot without closing/reloading the diary.
+3. **Confirm failures must be typed, not generic Not Found.** Clicking
+   `Confirm booking` must call the configured Bernie confirm endpoint and render
+   success or a typed, receptionist-safe failure. A bare `Not Found` / 404 detail,
+   raw route error, raw UUID, or snake_case implementation detail in ordinary
+   mode blocks closeout.
+
+Recommended blocking evidence:
+
+- Backend/API: focused pytest for the ordinary prompt interpretation ->
+  supervised booking contract, confirmation-ready practitioner evidence, and
+  invalid/stale confirm payloads returning the typed Bernie confirmation
+  envelope with no appointment/audit write.
+- Smoke script: deterministic `scripts/smoke_bernie_interpreter.py` run proving
+  the ordinary prompt parses `14:00` to `15:45` and carries resolved
+  practitioner/patient IDs while compact output remains redacted.
+- Route-intercepted UI: `review/test_diary_smoke.py` coverage proving candidate
+  slots render, selected-slot state has a visible choose-another-slot path,
+  confirming calls `/api/v1/appointments/proposals/create/confirm-bernie`, and
+  ordinary panel/card text excludes raw IDs, `missing_practitioner_id`, and
+  generic `Not Found`.
+- Live/deployed Diary: only a non-intercepted browser/backend/provider run may
+  be called live. If not run or not proven, closeout must explicitly say live
+  Diary readiness is deferred; route-intercepted checks are not a substitute for
+  live evidence.
+
 ## Minimum Sprint 97 Evidence
 
 Before Sprint 97 closes, Ariadne should be able to point to all of:
