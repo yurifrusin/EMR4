@@ -2880,9 +2880,11 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       btn.type = "button";
       btn.className = "bernie-patient-candidate-item";
       btn.setAttribute("data-testid", "bernie-patient-candidate-item");
-      btn.textContent = `${pat.first_name} ${pat.last_name} (DOB: ${pat.date_of_birth || 'N/A'})`;
+      const displayName = pat.display_name || [pat.first_name, pat.last_name].filter(Boolean).join(" ") || "Patient candidate";
+      const dob = pat.dob_masked || pat.date_of_birth || "DOB not shown";
+      btn.textContent = `${displayName} (DOB: ${dob})`;
       btn.addEventListener("click", () => {
-        console.log("Selected patient candidate:", pat.id);
+        console.log("Selected patient candidate:", pat.candidate_key || pat.id);
       });
       pctContainer.appendChild(btn);
     });
@@ -2908,9 +2910,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     list.setAttribute("data-testid", "bernie-review-blocks-list");
 
     let renderedFriendlyBlock = false;
-    payload.blocks.forEach(block => {
-      if (PROVIDER_UNAVAILABLE_CODES.includes(block.code) && !isDevOrDebug) {
-        if (!renderedFriendlyBlock) {
+      payload.blocks.forEach(block => {
+        if (PROVIDER_UNAVAILABLE_CODES.includes(block.code) && !isDevOrDebug) {
+          if (!renderedFriendlyBlock) {
           const item = document.createElement("div");
           item.className = "bernie-block-item";
           item.setAttribute("data-testid", "bernie-review-block-item");
@@ -2926,24 +2928,24 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       item.setAttribute("data-testid", "bernie-review-block-item");
 
       let message = block.message || "";
-      if (!isDevOrDebug) {
-        let friendlyReason = "";
-        if (block.code === "interpreted_practitioner_context_mismatch") {
-          friendlyReason = "the practitioner found does not match the diary context";
-        } else if (block.code === "missing_practitioner_id") {
-          friendlyReason = "please select a practitioner";
-        } else if (block.code === "missing_patient_id") {
-          friendlyReason = "please select a patient";
-        } else if (block.code === "missing_reference_date") {
-          friendlyReason = "please select a date";
-        } else {
-          friendlyReason = message.replace(/\(UUID\)/gi, "").replace(/ID/g, "").replace(/uuid/gi, "").replace(/supervised booking/gi, "booking").trim();
-          if (friendlyReason && friendlyReason[0] === friendlyReason[0].toUpperCase() && friendlyReason[1] === friendlyReason[1].toLowerCase()) {
-            friendlyReason = friendlyReason[0].toLowerCase() + friendlyReason.slice(1);
+        if (!isDevOrDebug) {
+          let friendlyReason = "";
+          if (block.code === "interpreted_practitioner_context_mismatch") {
+            message = "I found a different practitioner from the diary context. Please check the practitioner before continuing.";
+          } else if (block.code === "missing_practitioner_id") {
+            message = "I need a practitioner before I can search.";
+          } else if (block.code === "missing_patient_id") {
+            message = "I need a patient before I can prepare this booking.";
+          } else if (block.code === "missing_reference_date") {
+            message = "I need a date before I can search.";
+          } else {
+            friendlyReason = message.replace(/\(UUID\)/gi, "").replace(/ID/g, "").replace(/uuid/gi, "").replace(/supervised booking/gi, "booking").trim();
+            if (friendlyReason && friendlyReason[0] === friendlyReason[0].toUpperCase() && friendlyReason[1] === friendlyReason[1].toLowerCase()) {
+              friendlyReason = friendlyReason[0].toLowerCase() + friendlyReason.slice(1);
+            }
+            message = `I can't proceed with this booking because ${friendlyReason}.`;
           }
         }
-        message = `I can't proceed with this booking because ${friendlyReason}.`;
-      }
       if (isDevOrDebug) {
         item.textContent = `${formatBernieCode(block.code)}: ${message}`;
       } else {

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint99-bernie-first-person-confidence-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -65,5 +65,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. Ariadne repaired backend/frontend patient-candidate shape alignment, improved ordinary block copy, and bumped diary.js to v139 after post-merge edits.
+- Follow-up required: Live Diary review should confirm ordinary *bernie* copy, Details disclosure, and auto-preview behaviour after Pages deploys.

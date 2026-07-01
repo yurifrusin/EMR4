@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint99-bernie-confidence-policy-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -104,5 +104,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated. Ariadne added an extra open-ended same-day temporal clamp regression after review so `after 3 today` searches forward from clinic-now instead of asking or offering past slots.
+- Follow-up required: Later API-spine work should formalize patient candidate selection/linking; Sprint 99 keeps fuzzy candidates proposal-only.

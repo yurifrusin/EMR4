@@ -1835,11 +1835,18 @@ def _resolve_bernie_interpretation_context(
                         "(original time had partly passed)."
                     )
             elif _earliest is not None and _earliest <= now_time:
-                # Only earliest provided and it is past — check if latest is also implicitly past
-                temporal_band = "ask"
-                temporal_basis = "Same-day request: the requested start time has already passed today."
-                temporal_clarifying = (
-                    "That time has already passed today — would you like a later time or another day?"
+                # Open-ended "after X today" requests remain useful after X has passed:
+                # clamp forward so Bernie never offers past slots, but does not block.
+                clamp_hhmm = now_time.strftime("%H:%M")
+                if command_values.get("earliest_time"):
+                    command_values["earliest_time"] = clamp_hhmm
+                command = SlotSearchCommandIn(**command_values)
+                normalization = normalize_slot_search_command(
+                    command, reference_date=body.reference_date
+                )
+                temporal_basis = (
+                    f"Same-day request: earliest time clamped to {clamp_hhmm} "
+                    "(open-ended start time had already passed)."
                 )
 
     temporal_axis = BernieConfidenceAxis(

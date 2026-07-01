@@ -240,7 +240,7 @@ def test_bernie_review_blocked(diary_page):
 
         # Verify block issues list
         assert diary_page.locator("[data-testid='bernie-review-blocks-list']").count() == 1
-        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="Please select a practitioner.").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="I need a practitioner before I can search.").count() == 1
         assert diary_page.locator("[data-testid='bernie-review-block-item']", has_text="Missing Practitioner Id").count() == 0
 
         # Verify confirmation sections/elements are hidden
@@ -3050,7 +3050,7 @@ def test_bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised
         diary_page.fill("[data-testid='bernie-instruction-input']", "Use the typed other practitioner")
         diary_page.click("[data-testid='btn-bernie-instruction-submit']")
         diary_page.wait_for_selector(
-            "[data-testid='bernie-review-block-item']:has-text('The practitioner found does not match the diary context.')",
+            "[data-testid='bernie-review-block-item']:has-text('I found a different practitioner from the diary context. Please check the practitioner before continuing.')",
             state="visible",
             timeout=5000,
         )
@@ -4009,7 +4009,7 @@ def test_bernie_ordinary_mode_no_raw_codes(diary_page):
         # Check block message
         block_items = diary_page.locator("[data-testid='bernie-review-block-item']")
         assert block_items.count() == 1
-        assert block_items.first.text_content().strip() == "I can't proceed with this booking because please select a practitioner."
+        assert block_items.first.text_content().strip() == "I need a practitioner before I can search."
 
         # Verify developer diagnostic container is ABSENT
         assert diary_page.locator("[data-testid='bernie-dev-diagnostic']").count() == 0
@@ -4718,7 +4718,7 @@ def test_sprint99_bernie_no_reference_date_clarification(diary_page):
         block_item = diary_page.locator("[data-testid='bernie-review-block-item']")
         block_item.wait_for(state="visible", timeout=5000)
         assert block_item.count() == 1
-        assert "I can't proceed with this booking because please select a date." in block_item.text_content()
+        assert "I need a date before I can search." in block_item.text_content()
 
     finally:
         diary_page.unroute("**/api/v1/**")
@@ -4804,8 +4804,8 @@ def test_sprint99_bernie_patient_candidate_ambiguity(diary_page):
                 "staff_prompt": "Multiple patients matching Margaret."
             },
             "patient_candidates": [
-                { "id": "11111111-1111-1111-1111-111111111111", "first_name": "Margaret", "last_name": "Thompson", "date_of_birth": "1960-01-01" },
-                { "id": "22222222-2222-2222-2222-222222222222", "first_name": "Margaret", "last_name": "Smith", "date_of_birth": "1975-05-10" }
+                { "candidate_key": "11111111-1111-1111-1111-111111111111", "display_name": "Margaret Thompson", "dob_masked": "1960-**-**", "match_kind": "fuzzy", "requires_identifier": True },
+                { "candidate_key": "22222222-2222-2222-2222-222222222222", "display_name": "Margaret Smith", "dob_masked": "1975-**-**", "match_kind": "fuzzy", "requires_identifier": True }
             ]
         }
     }

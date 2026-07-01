@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint99-confidence-acceptance-review` |
-| Status | submitted |
+| Status | integrated |
 | Created | 76e00f9 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint99-confidence-acceptance-review --summary "Short plan summary"` |

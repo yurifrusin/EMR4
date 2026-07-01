@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint99-confidence-acceptance-review` |
 | Source Task | `codex-sprint99-confidence-acceptance-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted and integrated as read-only acceptance criteria. Its risk gates were used during Ariadne review.
+- Follow-up required: Keep the same confidence-axis acceptance gate for the next *bernie* refinement sprint.

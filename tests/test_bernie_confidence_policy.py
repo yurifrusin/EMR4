@@ -271,6 +271,29 @@ def test_same_day_partly_past_window_clamped(
             assert h >= 10, f"earliest_time should have been clamped to >= 10:00, got {earliest}"
 
 
+def test_same_day_open_ended_after_past_start_clamps_forward(
+    client, db, gp_user, practitioner, patient, monkeypatch
+):
+    """Today request like 'after 3' at 15:55 should search forward from now, not ask or offer past slots."""
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    monkeypatch.setattr(
+        appointments_router, "_clinic_local_now",
+        lambda tz: datetime(2026, 7, 15, 15, 55, 0, tzinfo=tz),
+    )
+    token = make_token(gp_user)
+    data = _post(
+        client, token,
+        f"practitioner_id:{practitioner.id} patient_id:{patient.id} "
+        "today after 3 pm duration:15",
+        reference_date=REFERENCE_DATE,
+    )
+    axes = _axes_by_name(data)
+    assert axes["temporal"]["band"] in ("assume", "proceed_with_check")
+    constraint = data["normalization"]["constraint"]
+    assert constraint["earliest_time"] == "15:55:00"
+    assert data["result"] == "interpreted"
+
+
 # ─── Practitioner axis ────────────────────────────────────────────────────────
 
 def test_practitioner_axis_assume_on_exact_name_match(

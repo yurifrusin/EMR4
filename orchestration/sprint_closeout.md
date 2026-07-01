@@ -8,6 +8,70 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 99: Bernie Confidence And Response Policy |
+| Integrated through | Typed confidence axes, first-person receptionist responses, compact Details disclosure, same-day temporal validity, and confidence-aware provisional diary preview |
+| Status | Integrated locally, verified, and ready for push/deploy/mirror/audit |
+| Last updated | 2026-07-01 |
+
+## What Changed
+
+- Added a typed *bernie* confidence contract with separate axes for intent, temporal meaning, practitioner match, patient identity, slot validity, and a future speech/transcription placeholder.
+- Made the categorical axis band the API guardrail: `assume`, `proceed_with_check`, `ask`, or `block`; the old scalar `confidence` remains advisory/display-only and is not used for gating.
+- Added first-person clarification and assumption copy so ordinary staff see language such as `I've assumed...`, `I think you mean...`, and `I need...` rather than raw internal field names.
+- Added same-day temporal validity:
+  - explicit or inferred today never proposes past slots.
+  - fully-past same-day windows ask for a later time or another day.
+  - partly-past windows clamp forward.
+  - open-ended requests such as `after 3 today` at 15:55 clamp forward to now rather than offering past times or blocking unnecessarily.
+- Added fuzzy patient handling as candidate proposal only. Exact unique patient names can proceed with staff DOB/identity verification; fuzzy/ambiguous names ask the receptionist to choose or supply another identifier and never silently link.
+- Updated the Diary *bernie* panel:
+  - ordinary mode is titled `Bernie`.
+  - routine high/medium confidence evidence is compact, with a `Details` disclosure for full evidence.
+  - low/ambiguous or ask/block states expand supporting evidence.
+  - confidence-permitting selected slots auto-preview as proposed diary cards, unless staff choose another time or manually interact with the diary.
+  - block copy is calm and action-oriented, for example `I need a practitioner before I can search.`
+- Updated diary assets to `diary.css?v=123` and `diary.js?v=139`.
+
+## Verification
+
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_sprint98_release_gates.py tests\test_bernie_confidence_policy.py -q` passed: `45 passed`.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\services\bernie_booking_interpreter.py app\routers\appointments.py tests\test_bernie_confidence_policy.py tests\test_bernie_sprint98_release_gates.py` passed.
+- `node --check docs\diary\diary.js` passed.
+- `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q` passed: `72 passed`.
+- `python scripts\check_frontend_versions.py` passed; local asset versions are `diary.css?v=123` and `diary.js?v=139`.
+- `git diff --check` passed.
+
+## Recommended User Review
+
+After GitHub Pages deploys, one live Diary check is useful because this sprint changes *bernie*'s ordinary receptionist interaction:
+
+1. Hard refresh the live Diary/Office dialog and confirm it loads `diary.js?v=139` and `diary.css?v=123`.
+2. Open `Bernie`.
+3. Try `Make an appointment for Margaret Thompson for after 3 today with Dr Shera.`
+4. Expected result: if it is already after 3 pm, *bernie* should search from the current time onward, not show earlier slots and not ask for `practitioner_id`.
+5. Try `Make an appointment for Margaret Thompson with Dr Shera for after 3pm but before 4.30pm.`
+6. Expected result: if the date is omitted, *bernie* should either assume today with clear `I've assumed today...` copy when confidence is adequate, or ask a human-like clarification if the time/date context is too weak.
+7. Check that routine patient details are compact with a `Details` control, and that ambiguous or low-confidence identity information expands enough for the receptionist to decide.
+8. Suspicious signs: raw UUIDs, snake_case codes, `Please provide practitioner_id`, past slots for today, no proposed diary preview when a confident slot is selected, or any appointment created before `Confirm booking`.
+
+## Not Required Before Moving On
+
+- No Caller ID, OPV/PVM, Medicare Online, phone-system integration, voice/headset input, or production GCP change is required for Sprint 99.
+- No database migration or manual data repair is required.
+- No taskpane, Command Centre, billing, SMS, resource-admin, Cochrane/RACGP, *davida*, or *consultant* implementation is included here.
+
+## Known Follow-Up
+
+- Add the receptionist toggle for automatic best-guess diary preview versus list-only suggestions.
+- Add real patient-candidate selection/linking flow; Sprint 99 only renders candidates and preserves the no-silent-link rule.
+- Add voice/transcription confidence when headset input exists.
+- Begin the root-to-branch API-spine design sprint next: GraphQL read/context graph, command mutation contracts, YAML capability/policy layer, agent capability manifests, audit/evidence spine, cybersecurity model, and dev/prod profile strategy.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Previous Closeout - Sprint 98
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 98: Bernie Booking Loop Integrity and API Release Gates |
 | Integrated through | Typed backend confirm failure contract, calm Diary confirmation recovery, Choose another time loop, and blocking release gates for the simplest booking prompt path |
 | Status | Integrated, verified, pushed, deployed, mirrored, and audited; live hotfix for confirm endpoint and ordinary copy applied |
