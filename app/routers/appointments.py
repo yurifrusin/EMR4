@@ -272,6 +272,62 @@ def _ensure_waiting_area(waiting_area_id: Optional[uuid.UUID], practice_id: uuid
         raise HTTPException(status_code=404, detail="Waiting area not found")
 
 
+def _check_create_command_entities(
+    command: "AppointmentCreateCommand",
+    practice_id: uuid.UUID,
+    db: Session,
+) -> list["AppointmentProposalIssue"]:
+    """Non-raising entity check for the Bernie confirm path.
+
+    Returns structured AppointmentProposalIssue blocks for any missing or
+    out-of-scope patient/practitioner/appointment_type/location. Never raises.
+    The raising _ensure_* helpers remain for the direct create/edit routes.
+    """
+    blocks: list[AppointmentProposalIssue] = []
+    if command.patient_id is not None:
+        exists = db.query(Patient.id).filter(
+            Patient.id == command.patient_id,
+            Patient.practice_id == practice_id,
+        ).first()
+        if not exists:
+            blocks.append(AppointmentProposalIssue(
+                code="patient_not_found",
+                severity="blocked",
+                message="The patient linked to this proposal no longer exists or is not accessible.",
+            ))
+    if not db.query(Practitioner.id).filter(
+        Practitioner.id == command.practitioner_id,
+        Practitioner.practice_id == practice_id,
+    ).first():
+        blocks.append(AppointmentProposalIssue(
+            code="practitioner_not_found",
+            severity="blocked",
+            message="The practitioner linked to this proposal no longer exists or is not accessible.",
+        ))
+    if command.appointment_type_id is not None:
+        if not db.query(AppointmentType.id).filter(
+            AppointmentType.id == command.appointment_type_id,
+            AppointmentType.practice_id == practice_id,
+        ).first():
+            blocks.append(AppointmentProposalIssue(
+                code="appointment_type_not_found",
+                severity="blocked",
+                message="The appointment type linked to this proposal no longer exists or is not accessible.",
+            ))
+    if command.location_id is not None:
+        if not db.query(PracticeLocation.id).filter(
+            PracticeLocation.id == command.location_id,
+            PracticeLocation.practice_id == practice_id,
+            PracticeLocation.is_active == True,
+        ).first():
+            blocks.append(AppointmentProposalIssue(
+                code="location_not_found",
+                severity="blocked",
+                message="The location linked to this proposal no longer exists or is no longer active.",
+            ))
+    return blocks
+
+
 def _overlaps(start_a: datetime, duration_a: int, start_b: datetime, duration_b: int) -> bool:
     # Strip timezone info so naive (request) and aware (DB TIMESTAMPTZ) datetimes compare safely.
     if start_a.tzinfo is not None:
@@ -2956,6 +3012,18 @@ def confirm_bernie_create_proposal(
     if blocks:
         return _block_bernie_create_confirmation(
             blocks,
+            warnings=selection.warnings,
+            audit_evidence=audit_evidence,
+        )
+
+    entity_blocks = _check_create_command_entities(
+        create_proposal.command,
+        current_user.practice_id,
+        db,
+    )
+    if entity_blocks:
+        return _block_bernie_create_confirmation(
+            entity_blocks,
             warnings=selection.warnings,
             audit_evidence=audit_evidence,
         )

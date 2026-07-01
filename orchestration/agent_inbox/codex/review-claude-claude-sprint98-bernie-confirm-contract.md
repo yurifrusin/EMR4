@@ -10,7 +10,7 @@
 
 ## Review Request
 
-claude-sprint98-bernie-confirm-contract plan ready for Codex review
+Backend confirm path now returns structured Bernie review blocks for missing/out-of-scope entities instead of raw HTTP 404s; added focused contract tests.
 
 ## Worker Completion Notes
 
