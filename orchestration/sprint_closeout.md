@@ -8,6 +8,67 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 101: Bernie Recognition Context And Statechart Practice |
+| Integrated through | Patient recognition vs details verification split, compact recognition UI, current-day diary context practitioner inference, refresh-state cleanup, and patient-specific context-frame design rule |
+| Status | Integrated and verified; awaiting GitHub Pages deployment after push |
+| Last updated | 2026-07-02 |
+
+## What Changed
+
+- Split booking workflow language into **patient recognition** and **patient details verification**:
+  - recognition is enough to prepare/confirm ordinary bookings when the patient is uniquely recognised in the practice register;
+  - Medicare/HI/OPV/PVM-style verification remains a separate later workflow and is not mandatory before every booking.
+- Updated the *bernie* backend confidence policy so unique current-register patient matches can proceed as recognised, without routine DOB-check copy blocking the reception flow.
+- Added same-day diary context frames from the visible diary so *bernie* can infer a likely practitioner from a named patient's earlier appointment when the instruction omits the doctor/nurse.
+- Kept that inference reversible and visible as a confidence assumption rather than a silent hard fact.
+- Updated the Diary *bernie* panel so ordinary recognised-patient evidence is compact, while low/ambiguous recognition still expands the details needed by staff.
+- Made the top `Refresh` action keep the *bernie* panel open but clear stale response/proposal state.
+- Documented the next state-machine design practice:
+  - context enrichment is its own nested subchart;
+  - patient-specific appointment context should be fetched after recognition;
+  - avoid broad diary dumps into the model context window;
+  - keep patient appointment history context separate from deterministic availability context.
+- Updated diary assets to `diary.js?v=141`; `diary.css` remains `v=124`.
+
+## Verification
+
+- `python -m py_compile app\routers\appointments.py app\schemas\appointments.py` passed.
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_confidence_policy.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py review\test_diary_smoke.py -q -k "patient_unique_exact_match or patient_exact_match_can or practitioner_can_be_inferred or complete_interpreter_policy or mocked_live_provider_returns_validated or mocked_live_provider_invalid or mocked_live_provider_autonomous or identity_evidence_reports_linked_patient_and_caller_id_context or sprint101_bernie_details_toggle_and_recognition_prompt or sprint99_bernie_raw_code_exclusion"` passed: `9 passed`.
+- `python scripts\check_frontend_versions.py` passed; local diary JS is correctly bumped from `v=140` to `v=141`.
+- `git diff --check` passed.
+- One earlier parallel pytest attempt hit the known PostgreSQL enum create race; the same wrapper test passed immediately when rerun by itself and in the sequential targeted sweep.
+
+## Recommended User Review
+
+After GitHub Pages deploys:
+
+1. Hard refresh the live Diary/Office dialog and confirm it loads `diary.js?v=141` and `diary.css?v=124`.
+2. Open `Bernie`.
+3. Try a normal recognised-patient booking such as `Find an appointment for Margaret Thompson with Dr Shera after 3 tomorrow and before 4.30.`
+4. Expected result: routine recognised-patient evidence should be compact. It should not ask you to confirm DOB as a mandatory step before booking.
+5. Try an omitted-practitioner case for a patient who has an appointment visible on the current diary day, such as `Find an appointment for Billy Frusin after 2 today`.
+6. Expected result: *bernie* may infer the same practitioner from the diary context and explain that assumption calmly, or ask for the doctor/nurse if the context is not unique.
+7. Click `Refresh` while the *bernie* panel is open. Expected result: the panel stays open, stale response/proposal content clears, and the instruction text remains available.
+8. Suspicious signs: mandatory DOB prompt for a uniquely recognised patient, raw `patient_id`/`practitioner_id` copy in ordinary mode, stale candidate/proposal content after Refresh, or a practitioner inferred from unrelated diary context.
+
+## Not Required Before Moving On
+
+- No Medicare Online, HI/IHI, OPV/PVM, phone-system Caller ID, or voice/headset integration is implemented in Sprint 101.
+- The new patient-specific appointment-history context frame is documented as the next backend/API contract. Sprint 101 only adds current-day diary context frames and statechart/API design rules.
+- No database migration or production GCP change is required.
+
+## Known Follow-Up
+
+- Add a deterministic backend `patient_booking_context` provider: after patient recognition, fetch that patient's recent bookings and future bookings, derive usual practitioner/existing follow-up signals, and pass the compact frame into *bernie*.
+- Continue the API-spine design sprint with GraphQL/context graph, command mutations, event contracts, YAML capability manifests, cybersecurity, and statechart modelling.
+- Keep refining the *bernie* session chart so UI element state, context snapshot freshness, and proposal confirmation are explicit states rather than ad hoc flags.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Previous Closeout - Sprint 100
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 100: Bernie Booking Session State Machine |
 | Integrated through | Immutable request reference dates, same-day clinic exhaustion, explicit Bernie UI session state, candidate snapshot reuse, post-confirm cleanup, and regression harness for tomorrow navigation |
 | Status | Integrated, verified, pushed, deployed, mirrored, and audited |

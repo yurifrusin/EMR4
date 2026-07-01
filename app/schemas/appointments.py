@@ -499,11 +499,23 @@ class BernieIdentityEvidence(BaseModel):
     patient_id: Optional[uuid.UUID] = None
     patient_label: Optional[str] = None
     confidence: Literal["unlinked", "low", "medium", "high", "ambiguous"]
+    recognition_status: Literal[
+        "not_recognized",
+        "recognized",
+        "ambiguous",
+        "provisional",
+    ] = "not_recognized"
+    details_verification_status: Literal[
+        "not_checked",
+        "verified",
+        "requires_follow_up",
+        "not_required_for_booking",
+    ] = "not_checked"
     verification_status: Literal[
         "not_applicable",
         "requires_staff_verification",
         "verified_by_staff",
-    ] = "requires_staff_verification"
+    ] = "not_applicable"
     matched_fields: list[str] = Field(default_factory=list)
     supporting_context: list[str] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)

@@ -40,10 +40,20 @@ def _auth(token: str) -> dict:
     return {"Authorization": f"Bearer {token}"}
 
 
-def _post(client, token: str, instruction: str, reference_date: str = REFERENCE_DATE) -> dict:
+def _post(
+    client,
+    token: str,
+    instruction: str,
+    reference_date: str = REFERENCE_DATE,
+    context_frames: list[dict] | None = None,
+) -> dict:
     resp = client.post(
         INTERPRET_URL,
-        json={"instruction": instruction, "reference_date": reference_date},
+        json={
+            "instruction": instruction,
+            "reference_date": reference_date,
+            "context_frames": context_frames or [],
+        },
         headers=_auth(token),
     )
     assert resp.status_code == 200, resp.text
@@ -352,7 +362,37 @@ def test_ambiguous_practitioner_asks(client, db, gp_user, practitioner, monkeypa
 
 # ─── Patient identity axis ─────────────────────────────────────────────────────
 
-def test_patient_unique_exact_match_proceed_with_check_plus_dob_check(
+
+def test_practitioner_can_be_inferred_from_today_diary_context_for_named_patient(
+    client, db, gp_user, practitioner, patient, monkeypatch
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+    data = _post(
+        client,
+        token,
+        "Make an appointment for Margaret Thompson today after 2 pm duration:15",
+        reference_date=REFERENCE_DATE,
+        context_frames=[{
+            "type": "diary_day_booking",
+            "appointment_date": REFERENCE_DATE,
+            "start_time_local": "09:15",
+            "patient_label": "Margaret Thompson",
+            "booking_patient_id": str(patient.id),
+            "booking_practitioner_id": str(practitioner.id),
+            "practitioner_label": f"{practitioner.first_name} {practitioner.last_name}",
+        }],
+    )
+    axes = _axes_by_name(data)
+    assert data["result"] == "interpreted"
+    assert data["command_candidate"]["practitioner_id"] == str(practitioner.id)
+    assert axes["practitioner"]["band"] == "proceed_with_check"
+    warning_codes = {warning["code"] for warning in data["warnings"]}
+    assert "practitioner_inferred_from_diary_context" in warning_codes
+    assumptions = {a["field"]: a for a in data.get("assumptions", [])}
+    assert assumptions["practitioner_id"]["assumed_value"] == str(practitioner.id)
+
+def test_patient_unique_exact_match_is_recognized_for_booking(
     client, db, gp_user, practitioner, patient, monkeypatch
 ):
     """Unique exact patient name match → patient_identity=proceed_with_check + staff DOB check."""
@@ -364,19 +404,13 @@ def test_patient_unique_exact_match_proceed_with_check_plus_dob_check(
         reference_date=REFERENCE_DATE,
     )
     axes = _axes_by_name(data)
-    assert axes["patient_identity"]["band"] == "proceed_with_check"
-    # Staff check for DOB verification must be present
+    assert axes["patient_identity"]["band"] == "assume"
     staff_check_codes = {c["code"] for c in data.get("staff_checks", [])}
-    assert "verify_patient_dob" in staff_check_codes, (
-        "unique exact patient match must include a DOB verification staff check"
-    )
-    # Patient must NOT be assumed (identity never reaches assume)
-    assert axes["patient_identity"]["band"] != "assume"
-    # patient_id must be populated in command_candidate
+    assert "verify_patient_dob" not in staff_check_codes
     assert data["command_candidate"]["patient_id"] == str(patient.id)
 
 
-def test_patient_exact_match_never_reaches_assume(
+def test_patient_exact_match_can_reach_assume_when_unique(
     client, db, gp_user, practitioner, patient, monkeypatch
 ):
     """Even for a perfect name match, patient_identity must not be 'assume'."""
@@ -387,9 +421,7 @@ def test_patient_exact_match_never_reaches_assume(
         f"Margaret Thompson with {practitioner.first_name} {practitioner.last_name} {REFERENCE_DATE} duration:15",
     )
     axes = _axes_by_name(data)
-    assert axes["patient_identity"]["band"] != "assume", (
-        "patient_identity must never reach band=assume (identity always requires staff check)"
-    )
+    assert axes["patient_identity"]["band"] == "assume"
 
 
 def test_patient_duplicate_name_asks(
@@ -656,12 +688,10 @@ def test_ordinary_release_gate_prompt_confidence_axes(
     # Practitioner must resolve Dr Shera
     assert axes["practitioner"]["band"] in ("assume", "proceed_with_check")
     assert data["command_candidate"]["practitioner_id"] == str(practitioner.id)
-    # Patient identity must be proceed_with_check (never assume)
-    assert axes["patient_identity"]["band"] == "proceed_with_check"
-    assert axes["patient_identity"]["band"] != "assume"
-    # Staff DOB check required
+    # Patient identity is recognised by unique register match.
+    assert axes["patient_identity"]["band"] == "assume"
     staff_check_codes = {c["code"] for c in data.get("staff_checks", [])}
-    assert "verify_patient_dob" in staff_check_codes
+    assert "verify_patient_dob" not in staff_check_codes
     # requires_staff_confirmation must be True
     assert decision["requires_staff_confirmation"] is True
     # No appointment/audit writes

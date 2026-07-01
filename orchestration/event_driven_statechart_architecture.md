@@ -161,6 +161,9 @@ Examples:
 - Agent confidence has separate axes. Do not collapse patient identity,
   temporal meaning, practitioner matching, intent, speech quality, and slot
   validity into a single scalar gate.
+- Agent context should be precise and staged. Prefer deterministic, typed
+  context frames fetched after the relevant entity is recognised over broad
+  "dump the system state into the prompt" context.
 - Audit records should capture the event, actor, agent/session, confidence
   axes, proposal evidence, and final transition.
 
@@ -174,3 +177,55 @@ The same modelling discipline should later guide the root-to-branch EMR4 API
 review: bounded contexts first, events second, statecharts for workflows, API
 contracts for executable boundaries, policy for authorization, and YAML for
 declarative operating plans.
+
+## Bernie Context-Enrichment Subchart
+
+The *bernie* booking session should treat context gathering as its own nested
+statechart, not as incidental prompt assembly. This keeps natural-language
+interpretation, diary navigation, patient recognition, and slot search from
+bleeding into each other.
+
+```mermaid
+stateDiagram-v2
+    [*] --> instruction_entry
+    instruction_entry --> recognition: BookingInstructionSubmitted
+    recognition --> needs_clarification: low confidence or ambiguous entity
+    recognition --> context_enrichment: patient recognised or provisional entity accepted
+    needs_clarification --> recognition: StaffClarificationProvided
+
+    state context_enrichment {
+        [*] --> patient_context_pending
+        patient_context_pending --> patient_context_ready: PatientBookingContextFetched
+        patient_context_ready --> availability_context_pending: SlotSearchRequested
+        availability_context_pending --> availability_context_ready: AvailabilitySnapshotFetched
+        availability_context_ready --> [*]
+        patient_context_ready --> context_stale: DiaryOrPatientStateChanged
+        availability_context_ready --> context_stale: DiaryOrRosterStateChanged
+        context_stale --> patient_context_pending: RefreshContext
+    }
+
+    context_enrichment --> interpreted: ContextReady
+    interpreted --> slot_search
+    slot_search --> candidate_selection
+    candidate_selection --> proposal_preview
+    proposal_preview --> confirmation
+    confirmation --> confirmed: StaffConfirmed
+    confirmation --> candidate_selection: ChooseAnotherTime
+```
+
+Context-enrichment rules:
+
+- Patient recognition comes before patient appointment-history enrichment.
+- Once a patient is recognised, fetch a compact deterministic appointment
+  context for that patient, such as the previous 2 months and next 2 years of
+  bookings, plus derived signals like usual practitioner and existing future
+  follow-up.
+- Do not feed the LLM every appointment in the diary merely because the context
+  window is large. Feed it the small, relevant appointment context that a strong
+  receptionist would actually use.
+- Day availability is a separate context frame from patient appointment history.
+  Availability answers "what slots exist"; patient appointment history answers
+  "what should *bernie* know about this patient and this request?"
+- Refreshing the diary keeps the *bernie* panel open but clears stale response,
+  candidate, and proposal state. Any visible candidate or proposal is tied to
+  the context snapshot that produced it.

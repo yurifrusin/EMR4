@@ -95,6 +95,66 @@ Output is a typed constraint object — a validated schema, not free text.
 The LLM is NOT allowed to invent field values. Missing required fields →
 `blocked` tier; ambiguous fields → surfaced as warnings.
 
+### Patient Recognition vs Details Verification
+
+Use two separate concepts:
+
+- **Patient recognition** means the practice can recognise which patient record
+  the receptionist is talking about for the purpose of preparing or confirming a
+  booking. A unique current-register name match can be enough for ordinary
+  booking flow, especially when supported by diary context, caller context, or
+  other practice-local evidence.
+- **Patient details verification** means Medicare Online, HI/IHI, OPV/PVM, or
+  staff checking details such as Medicare/card data. This is important, but it
+  is a separate workflow. It may occur at booking time when available, but it is
+  not a mandatory precondition for every ordinary appointment booking.
+
+The old rule "never guess at a patient's identity from a name alone" is now too
+coarse. The better rule is:
+
+- do not silently link ambiguous or low-confidence patient identity;
+- do recognise a unique current patient record when the evidence is strong
+  enough for reception workflow;
+- keep details verification as a separate statechart and audit concern;
+- reserve "confirmation" for confirming the booking itself.
+
+### Patient-Specific Context Frame
+
+After patient recognition, *bernie* should receive a compact deterministic
+context frame for that patient rather than a broad diary dump. The first
+production shape should be equivalent to:
+
+```yaml
+type: patient_booking_context
+patient_id: "<uuid>"
+generated_at: "2026-07-02T10:00:00+10:00"
+lookback_days: 60
+lookahead_days: 730
+recent_bookings:
+  - appointment_id: "<uuid>"
+    date: "2026-07-02"
+    start_time_local: "09:30"
+    practitioner_id: "<uuid>"
+    practitioner_label: "Alex Shera"
+    status: "Booked"
+future_bookings:
+  - appointment_id: "<uuid>"
+    date: "2026-07-13"
+    start_time_local: "14:45"
+    practitioner_id: "<uuid>"
+    practitioner_label: "Alex Shera"
+    status: "Booked"
+derived_signals:
+  usual_practitioner_id: "<uuid>"
+  usual_practitioner_label: "Alex Shera"
+  existing_future_follow_up: true
+  existing_future_follow_up_summary: "Billy already has a follow-up with Dr Alex Shera on 2026-07-13 at 14:45."
+```
+
+This is the useful middle path: richer than a single selected appointment, much
+smaller than dumping the whole diary, and easier to test. Availability is still
+resolved by deterministic slot-search APIs, not by the LLM.
+
 ### Stage 2 — Deterministic Slot Search (no LLM)
 
 Given a constraint object, `find_slots` runs against the backend using real
@@ -149,7 +209,8 @@ the conflict check, the break avoidance, the roster lookup — all deterministic
 The LLM adds nothing to those; it would only add noise and unpredictability.
 
 This framing also defines what Bernie should never do:
-- Never guess at a patient's identity from a name alone (use `search_patient`)
+- Never silently link ambiguous, low-confidence, or duplicate patient identity
+  (use recognition/search flow and staff selection)
 - Never infer availability from context clues (use `find_slots`)
 - Never assume a clinical or billing field (pass `blocked` or ask)
 

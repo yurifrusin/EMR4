@@ -1327,6 +1327,55 @@ def _context_frame_value(
     return None
 
 
+def _booking_context_practitioner_for_patient(
+    body: BernieBookingInstructionInterpretIn,
+    instruction_tokens: set[str],
+    db: Session,
+    practice_id: uuid.UUID,
+) -> tuple[Optional[uuid.UUID], Optional[str], Optional[str]]:
+    """Infer practitioner from same-day diary context for a named patient."""
+    matches: list[tuple[uuid.UUID, str, str]] = []
+    for frame in body.context_frames:
+        if not isinstance(frame, dict) or frame.get("type") != "diary_day_booking":
+            continue
+        practitioner_id = frame.get("booking_practitioner_id")
+        if not _valid_uuid_text(practitioner_id):
+            continue
+        patient_label = str(frame.get("patient_label") or "").strip()
+        label_tokens = [
+            token
+            for token in _text_tokens(patient_label)
+            if token not in {"dr", "doctor", "nurse", "mr", "mrs", "ms", "miss"}
+        ]
+        if not label_tokens or not all(token in instruction_tokens for token in label_tokens):
+            continue
+        try:
+            parsed_practitioner_id = uuid.UUID(str(practitioner_id))
+        except (TypeError, ValueError):
+            continue
+        matches.append((
+            parsed_practitioner_id,
+            str(frame.get("practitioner_label") or "").strip(),
+            str(frame.get("start_time_local") or frame.get("appointment_time") or "").strip(),
+        ))
+
+    unique_ids = {item[0] for item in matches}
+    if len(unique_ids) != 1:
+        return None, None, None
+
+    practitioner_id = next(iter(unique_ids))
+    label = next((item[1] for item in matches if item[1]), "")
+    if not label:
+        practitioner = db.query(Practitioner).filter(
+            Practitioner.practice_id == practice_id,
+            Practitioner.id == practitioner_id,
+        ).first()
+        if practitioner:
+            label = f"{practitioner.first_name} {practitioner.last_name}".strip()
+    time_hint = next((item[2] for item in matches if item[2]), None)
+    return practitioner_id, label or None, time_hint
+
+
 def _valid_uuid_text(value: object) -> bool:
     if value in (None, ""):
         return False
@@ -1468,29 +1517,19 @@ def _resolve_patient_from_instruction(
 
     if len(exact_matches) == 1:
         pat = exact_matches[0]
-        # Unique exact match — proceed_with_check (never assume for patient identity)
         axis = BernieConfidenceAxis(
             axis="patient_identity",
-            band="proceed_with_check",
-            basis="Unique exact name match — staff DOB/identity verification required.",
-            staff_detail="Please verify patient date of birth and identity before confirming.",
+            band="assume",
+            basis="Unique patient register match.",
+            staff_detail="I found one current patient with that name in the practice register.",
         )
-        staff_checks = [
-            BernieStaffCheck(
-                code="verify_patient_dob",
-                staff_prompt="Please verify the patient's date of birth before confirming.",
-            )
-        ]
         return pat.id, [
             AppointmentProposalIssue(
-                code="patient_name_resolved_verify_identity",
+                code="patient_recognized_by_register",
                 severity="warning",
-                message=(
-                    "Bernie resolved a unique patient name match. Staff should "
-                    "still verify patient identity before confirming the booking."
-                ),
+                message="I found one current patient with that name in the practice register.",
             )
-        ], axis, staff_checks, []
+        ], axis, [], []
 
     if len(exact_matches) > 1:
         axis = BernieConfidenceAxis(
@@ -1608,16 +1647,20 @@ def _bernie_clarifying_question(missing_fields: list[str]) -> Optional[str]:
     labels = []
     for field in missing_fields:
         if field == "practitioner_id":
-            labels.append("which practitioner")
+            labels.append("the doctor or nurse")
         elif field == "date_from":
-            labels.append("which day")
+            labels.append("the day")
         else:
             labels.append(field.replace("_", " "))
     if not labels:
         return None
     if len(labels) == 1:
-        return f"Please tell Bernie {labels[0]} before searching for times."
-    return f"Please tell Bernie {', '.join(labels[:-1])}, and {labels[-1]} before searching for times."
+        if missing_fields[0] == "practitioner_id":
+            return "Did you forget to mention the doctor or nurse?"
+        if missing_fields[0] == "date_from":
+            return "Which day would you like me to check?"
+        return f"Please tell me {labels[0]} before I search."
+    return f"I need {', '.join(labels[:-1])}, and {labels[-1]} before I search."
 
 
 def _resolve_bernie_interpretation_context(
@@ -1662,6 +1705,41 @@ def _resolve_bernie_interpretation_context(
             all_assumptions.extend(pr_assumptions)
             if practitioner_id:
                 command_values["practitioner_id"] = str(practitioner_id)
+            else:
+                inferred_practitioner_id, inferred_label, inferred_time = (
+                    _booking_context_practitioner_for_patient(
+                        body,
+                        instruction_tokens,
+                        db,
+                        practice_id,
+                    )
+                )
+                if inferred_practitioner_id:
+                    command_values["practitioner_id"] = str(inferred_practitioner_id)
+                    hint = f" from the earlier diary booking at {inferred_time}" if inferred_time else ""
+                    practitioner_axis = BernieConfidenceAxis(
+                        axis="practitioner",
+                        band="proceed_with_check",
+                        basis="Practitioner inferred from today's diary context for the named patient.",
+                        staff_detail=(
+                            f"I used today's diary context{hint} and assumed "
+                            f"{inferred_label or 'the same practitioner'}."
+                        ),
+                    )
+                    resolver_warnings.append(AppointmentProposalIssue(
+                        code="practitioner_inferred_from_diary_context",
+                        severity="warning",
+                        message=(
+                            f"I used today's diary context{hint} and assumed "
+                            f"{inferred_label or 'the same practitioner'}."
+                        ),
+                    ))
+                    all_assumptions.append(BernieAssumption(
+                        field="practitioner_id",
+                        assumed_value=str(inferred_practitioner_id),
+                        basis="Named patient had a unique practitioner in today's diary context.",
+                        reversible_copy="Tell me the practitioner if that assumption is wrong.",
+                    ))
     else:
         practitioner_axis = BernieConfidenceAxis(
             axis="practitioner",
@@ -1679,14 +1757,10 @@ def _resolve_bernie_interpretation_context(
             command_values["patient_id"] = frame_patient_id
             patient_axis = BernieConfidenceAxis(
                 axis="patient_identity",
-                band="proceed_with_check",
-                basis="Patient resolved from context frame UUID — staff identity check required.",
-                staff_detail="Please verify patient identity before confirming.",
+                band="assume",
+                basis="Patient resolved from trusted diary context.",
+                staff_detail="I used the selected diary context for patient recognition.",
             )
-            all_staff_checks.append(BernieStaffCheck(
-                code="verify_patient_dob",
-                staff_prompt="Please verify the patient's identity before confirming.",
-            ))
         else:
             patient_id, warnings, patient_axis, pat_checks, pat_candidates = (
                 _resolve_patient_from_instruction(
@@ -1704,8 +1778,9 @@ def _resolve_bernie_interpretation_context(
     else:
         patient_axis = BernieConfidenceAxis(
             axis="patient_identity",
-            band="proceed_with_check",
-            basis="Patient UUID provided directly — staff identity check required.",
+            band="assume",
+            basis="Patient UUID provided directly.",
+            staff_detail="Patient record supplied by the calling workflow.",
         )
 
     # ── Duration default ──────────────────────────────────────────────────────
@@ -2738,13 +2813,15 @@ def _build_bernie_identity_evidence(
         return BernieIdentityEvidence(
             patient_label=label,
             confidence="unlinked",
+            recognition_status="not_recognized",
+            details_verification_status="not_checked",
             verification_status="requires_staff_verification",
             supporting_context=supporting_context,
             warnings=["patient_not_linked"],
             staff_prompt=(
                 "Link the patient record or create a provisional booking only "
-                "after staff confirm surname/name, DOB, and another identifier "
-                "where available."
+                "after staff recognise the patient from the practice register "
+                "or another reliable identifier."
             ),
         ), None
 
@@ -2756,6 +2833,8 @@ def _build_bernie_identity_evidence(
         return BernieIdentityEvidence(
             patient_id=patient_id,
             confidence="low",
+            recognition_status="not_recognized",
+            details_verification_status="requires_follow_up",
             verification_status="requires_staff_verification",
             supporting_context=supporting_context,
             warnings=["linked_patient_not_found"],
@@ -2812,12 +2891,18 @@ def _build_bernie_identity_evidence(
     elif not patient.medicare_number:
         confidence = "medium"
 
+    recognition_status = "recognized"
+    details_verification_status = "not_required_for_booking"
+    verification_status = "not_applicable"
     staff_prompt = (
-        "Confirm DOB with the patient before booking. If identity evidence is "
-        "incomplete, the patient is not on the phone/counter, or there is any "
-        "duplicate-name doubt, check Medicare/card details before confirming."
+        "Patient recognised from the practice register. Medicare/HI details "
+        "can be verified separately before billing if they have not already "
+        "been checked."
     )
     if duplicate_count > 1:
+        recognition_status = "ambiguous"
+        details_verification_status = "requires_follow_up"
+        verification_status = "requires_staff_verification"
         staff_prompt = (
             "Same name and DOB exists more than once in this practice. Treat "
             "the booking as provisional until Medicare/card or another strong "
@@ -2825,15 +2910,17 @@ def _build_bernie_identity_evidence(
         )
     elif caller_match:
         staff_prompt = (
-            "Caller ID matches a phone number on the linked record. Still ask "
-            "the patient to confirm DOB before staff confirmation."
+            "Caller ID matches a phone number on the linked record. Patient "
+            "recognition is stronger for booking purposes."
         )
 
     return BernieIdentityEvidence(
         patient_id=patient.id,
         patient_label=f"{patient.first_name} {patient.last_name}",
         confidence=confidence,
-        verification_status="requires_staff_verification",
+        recognition_status=recognition_status,
+        details_verification_status=details_verification_status,
+        verification_status=verification_status,
         matched_fields=matched_fields,
         supporting_context=supporting_context,
         warnings=warnings,

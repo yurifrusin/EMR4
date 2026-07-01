@@ -45,6 +45,42 @@ Primary YAML uses:
 Complex branching, safety enforcement, and clinical or billing logic belong in
 typed code and database-backed policy, with YAML supplying validated inputs.
 
+## Context Frame Rule
+
+Agents should receive typed, minimal, relevant context frames. The goal is not
+to fill a frontier model's context window just because it is available. The goal
+is to give each agent the same precise operational context that a strong human
+user would bring to the task.
+
+For *bernie*, the preferred booking-context sequence is:
+
+1. Interpret enough of the request to identify likely patient, practitioner,
+   date/time, and task intent.
+2. Recognise the patient where the evidence is strong enough for reception
+   workflow.
+3. Fetch deterministic patient-specific booking context, such as 60 days back
+   and 2 years forward for that patient only.
+4. Fetch deterministic availability context for the requested date/time window.
+5. Let the LLM use those typed frames to explain, warn, or ask follow-up
+   questions, while all availability and writes remain API-enforced.
+
+The patient-specific booking context frame should include recent bookings,
+future bookings, and derived signals such as usual practitioner or an existing
+future follow-up. It should not include the entire practice diary.
+
+This creates a reusable design practice for other agents:
+
+- *consultant* should receive a curated patient-context and cited
+  knowledge-source frame, not a raw database dump.
+- *davida* should receive setup/profile/capability frames, not unrestricted
+  admin state.
+- Library agents should receive their real source-specific search results and
+  citations, not unbounded clinical context.
+
+YAML may define which context frames an agent is allowed to request or receive.
+The runtime API still owns authorization, freshness, audit, and schema
+validation.
+
 ## Agent Naming And Role Rule
 
 Agentic names should be lower-case and italicised in project documentation:
@@ -155,4 +191,3 @@ Add non-invasive schema artifacts and validation:
 Create a permanent API steward skill/subagent profile that advises Ariadne on
 API consistency, schema drift, authorization, and manifest design during future
 implementation sprints.
-

@@ -209,7 +209,7 @@ def test_fake_provider_resolves_practice_names_as_optional_context(
     assert data["normalization"]["constraint"]["patient_id"] == str(patient.id)
     warning_codes = {warning["code"] for warning in data["warnings"]}
     assert "practitioner_name_resolved" in warning_codes
-    assert "patient_name_resolved_verify_identity" in warning_codes
+    assert "patient_recognized_by_register" in warning_codes
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
 
@@ -404,7 +404,7 @@ def test_live_provider_name_values_in_id_fields_are_resolved_before_normalizatio
     assert data["blocks"] == []
     warning_codes = {warning["code"] for warning in data["warnings"]}
     assert "practitioner_name_resolved" in warning_codes
-    assert "patient_name_resolved_verify_identity" in warning_codes
+    assert "patient_recognized_by_register" in warning_codes
     assert "appointment_duration_defaulted" in warning_codes
 
 

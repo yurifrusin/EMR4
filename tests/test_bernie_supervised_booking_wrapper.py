@@ -235,12 +235,14 @@ def test_identity_evidence_reports_linked_patient_and_caller_id_context(
     assert evidence["patient_id"] == str(patient.id)
     assert evidence["patient_label"] == "Margaret Thompson"
     assert evidence["confidence"] == "high"
-    assert evidence["verification_status"] == "requires_staff_verification"
+    assert evidence["recognition_status"] == "recognized"
+    assert evidence["details_verification_status"] == "not_required_for_booking"
+    assert evidence["verification_status"] == "not_applicable"
     assert "date_of_birth" in evidence["matched_fields"]
     assert "medicare_on_record" in evidence["matched_fields"]
     assert "caller_id_phone_match" in evidence["matched_fields"]
     assert evidence["supporting_context"] == ["caller_id"]
-    assert "confirm dob" in evidence["staff_prompt"].lower()
+    assert "recognition is stronger" in evidence["staff_prompt"].lower()
 
 
 def test_identity_evidence_flags_same_name_same_dob_duplicates(

@@ -4950,13 +4950,13 @@ def test_sprint99_bernie_patient_candidate_ambiguity(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
-def test_sprint99_bernie_details_toggle_and_dob(diary_page):
+def test_sprint101_bernie_details_toggle_and_recognition_prompt(diary_page):
     import json
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
 
-    # 1. High/medium confidence - details collapsed, DOB compact prompts render
+    # 1. High/medium confidence recognised patient - details collapsed, no routine DOB prompt
     mock_high_conf = {
         "staff_review": {
             "status": "confirmation_ready",
@@ -4968,20 +4968,22 @@ def test_sprint99_bernie_details_toggle_and_dob(diary_page):
                 "warnings": []
             },
             "candidate_slots": [],
-            "warning_summary": "DOB verification required.",
-            "evidence_summary": "High confidence but DOB verification required.",
+            "warning_summary": "Patient recognised.",
+            "evidence_summary": "High confidence recognised patient.",
             "warnings": [],
             "blocks": [],
             "identity_evidence": {
                 "patient_label": "Margaret Thompson",
                 "confidence": "high",
-                "verification_status": "requires_staff_verification",
-                "staff_prompt": "Please confirm Date of Birth"
+                "recognition_status": "recognized",
+                "details_verification_status": "not_required_for_booking",
+                "verification_status": "not_applicable",
+                "staff_prompt": "Patient recognised from the practice register."
             }
         }
     }
 
-    # 2. Low confidence - details expanded
+    # 2. Low confidence / not recognised - details expanded and prompt visible
     mock_low_conf = {
         "staff_review": {
             "status": "confirmation_ready",
@@ -5000,14 +5002,16 @@ def test_sprint99_bernie_details_toggle_and_dob(diary_page):
             "identity_evidence": {
                 "patient_label": "Margaret Thompson",
                 "confidence": "low",
+                "recognition_status": "not_recognized",
+                "details_verification_status": "requires_follow_up",
                 "verification_status": "requires_staff_verification",
-                "staff_prompt": "Verify patient details."
+                "staff_prompt": "Recognise the patient before booking."
             }
         }
     }
 
     try:
-        # Check High Confidence Case (Collapsed details, compact DOB prompt visible)
+        # Check high-confidence recognised case: collapsed details, no routine prompt.
         diary_page.route(
             "**/api/v1/appointments/proposals/bernie/supervised-booking",
             lambda route: route.fulfill(
@@ -5024,11 +5028,9 @@ def test_sprint99_bernie_details_toggle_and_dob(diary_page):
         details.wait_for(state="visible", timeout=5000)
         assert details.evaluate("el => el.open") is False
 
-        dob_prompt = diary_page.locator("[data-testid='bernie-compact-dob-prompt']")
-        dob_prompt.wait_for(state="visible", timeout=5000)
-        assert "Please confirm the patient's date of birth before booking." in dob_prompt.text_content()
+        assert diary_page.locator("[data-testid='bernie-compact-recognition-prompt']").count() == 0
 
-        # Check Low Confidence Case (Expanded details)
+        # Check low-confidence case: expanded details and recognition prompt visible.
         diary_page.route(
             "**/api/v1/appointments/proposals/bernie/supervised-booking",
             lambda route: route.fulfill(
@@ -5044,6 +5046,10 @@ def test_sprint99_bernie_details_toggle_and_dob(diary_page):
         details_low = diary_page.locator("[data-testid='bernie-evidence-details']")
         details_low.wait_for(state="visible", timeout=5000)
         assert details_low.evaluate("el => el.open") is True
+
+        recognition_prompt = diary_page.locator("[data-testid='bernie-compact-recognition-prompt']")
+        recognition_prompt.wait_for(state="visible", timeout=5000)
+        assert "Recognise the patient before booking." in recognition_prompt.text_content()
 
     finally:
         diary_page.unroute("**/api/v1/**")
