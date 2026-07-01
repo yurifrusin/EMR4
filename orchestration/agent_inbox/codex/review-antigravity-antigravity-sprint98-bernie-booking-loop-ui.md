@@ -10,7 +10,7 @@
 
 ## Review Request
 
-antigravity-sprint98-bernie-booking-loop-ui ready for Codex review
+antigravity-sprint98-bernie-booking-loop-ui revised plan ready for Codex review
 
 ## Worker Completion Notes
 
