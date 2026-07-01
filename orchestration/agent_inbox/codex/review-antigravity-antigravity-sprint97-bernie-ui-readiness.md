@@ -10,7 +10,7 @@
 
 ## Review Request
 
-antigravity-sprint97-bernie-ui-readiness ready for Codex review
+Removed manual booking messages for ordinary staff mode and updated tests
 
 ## Worker Completion Notes
 

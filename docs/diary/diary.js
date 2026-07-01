@@ -110,7 +110,7 @@ function bernieReviewActionCopy(payload) {
   }
   const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
   if (hasProviderUnavailable && !isBernieDevOrDebug()) {
-    return "Please book this appointment manually on the diary grid.";
+    return "Bernie could not search just now. Nothing was booked. Try again in a moment.";
   }
   if (payload.status === "candidate_selection_required") {
     return "Choose a time to show it on the diary. Nothing is booked until you confirm.";
@@ -513,7 +513,7 @@ function renderBernieInterpretOnly(envelope) {
   hold.className = "bernie-interpret-hold";
   hold.setAttribute("data-testid", "bernie-interpret-hold");
   if (hasProviderUnavailable && !isDevOrDebug) {
-    hold.textContent = "Bernie is temporarily unavailable. Please book this appointment manually on the diary grid.";
+    hold.textContent = "Bernie could not search just now. Nothing was booked. Try again in a moment.";
   } else {
     hold.textContent = envelope?.result === "clarification_required"
       ? "Bernie needs one more detail before it can search."
@@ -2689,7 +2689,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
           const item = document.createElement("div");
           item.className = "bernie-block-item";
           item.setAttribute("data-testid", "bernie-review-block-item");
-          item.textContent = "Bernie is temporarily unavailable. Please book this appointment manually on the diary grid.";
+          item.textContent = "Bernie could not search just now. Nothing was booked. Try again in a moment.";
           list.appendChild(item);
           renderedFriendlyBlock = true;
         }
@@ -2722,7 +2722,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       const item = document.createElement("div");
       item.className = "bernie-block-item";
       item.setAttribute("data-testid", "bernie-review-block-item");
-      item.textContent = "Bernie is temporarily unavailable. Please book this appointment manually on the diary grid.";
+      item.textContent = "Bernie could not search just now. Nothing was booked. Try again in a moment.";
       list.appendChild(item);
     }
 

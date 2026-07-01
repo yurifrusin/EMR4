@@ -3658,12 +3658,12 @@ def test_bernie_ordinary_mode_readiness_and_diagnostics(diary_page):
 
         # Check action
         action = diary_page.locator("[data-testid='bernie-review-action']")
-        assert action.text_content().strip() == "Please book this appointment manually on the diary grid."
+        assert action.text_content().strip() == "Bernie could not search just now. Nothing was booked. Try again in a moment."
 
         # Check block message
         block_items = diary_page.locator("[data-testid='bernie-review-block-item']")
         assert block_items.count() == 1
-        assert block_items.first.text_content().strip() == "Bernie is temporarily unavailable. Please book this appointment manually on the diary grid."
+        assert block_items.first.text_content().strip() == "Bernie could not search just now. Nothing was booked. Try again in a moment."
 
         # Verify developer diagnostic container is ABSENT
         assert diary_page.locator("[data-testid='bernie-dev-diagnostic']").count() == 0
