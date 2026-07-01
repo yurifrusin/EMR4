@@ -13,6 +13,7 @@ from app.models.ai_audit import AccessAiAuditLog
 from app.models.appointments import Appointment, AppointmentAuditLog
 import app.services.bernie_booking_interpreter as interpreter_service
 from app.services.bernie_booking_interpreter import (
+    InterpreterReadinessStatus,
     interpreter_is_ready,
     _parse_time_fragment,
     _extract_natural_time_constraints,
@@ -108,15 +109,85 @@ def test_extract_natural_time_no_phrase_returns_none():
 # ── Readiness gate ────────────────────────────────────────────────────────────
 
 def test_interpreter_readiness_false_for_disabled():
-    assert not interpreter_is_ready("disabled")
-    assert not interpreter_is_ready("")
-    assert not interpreter_is_ready("DISABLED")
+    for name in ("disabled", "", "DISABLED"):
+        status = interpreter_is_ready(name)
+        assert isinstance(status, InterpreterReadinessStatus)
+        assert not status, f"expected not-ready for {name!r}"
+        assert status.mode == "disabled"
+        assert not status.live_provider_ok
+        assert not status.fallback_active
 
 
-def test_interpreter_readiness_true_for_active_providers():
-    assert interpreter_is_ready("fake")
-    assert interpreter_is_ready("gemini_vertex")
-    assert interpreter_is_ready("vertex")
+def test_interpreter_readiness_fake_is_deterministic_only():
+    status = interpreter_is_ready("fake")
+    assert isinstance(status, InterpreterReadinessStatus)
+    assert status  # truthy: requests will be served
+    assert status.ready
+    assert status.live_provider_ok
+    assert status.mode == "deterministic_only"
+    assert not status.fallback_active
+    assert status.warning is None
+
+
+def test_interpreter_readiness_gemini_vertex_reports_construction_status():
+    """gemini_vertex must not simply return True by name — it checks construction.
+
+    With fallback_to_deterministic=True (new default) the provider is always
+    ready from a request-serving perspective, but live_provider_ok and mode
+    tell the release gate whether live calls are actually set up.
+    """
+    status = interpreter_is_ready("gemini_vertex")
+    assert isinstance(status, InterpreterReadinessStatus)
+    assert status.provider == "gemini_vertex"
+    # ready must reflect actual ability to serve requests (live OR fallback)
+    assert status.ready == (status.live_provider_ok or status.fallback_active)
+    if status.live_provider_ok:
+        assert status.mode == "live"
+    else:
+        # import failed — fallback must be active for ready to be True
+        assert status.fallback_active
+        assert status.mode == "deterministic_fallback"
+        assert status.warning is not None
+
+
+def test_interpreter_readiness_gemini_vertex_fallback_off_fails_closed_when_import_unavailable(
+    monkeypatch,
+):
+    """With fallback disabled and provider import broken, ready must be False."""
+    import app.services.bernie_booking_interpreter as svc
+
+    original = svc._check_live_provider_import
+
+    def _broken():
+        return False, "provider_import_failed: simulated import error"
+
+    monkeypatch.setattr(svc, "_check_live_provider_import", _broken)
+
+    status = interpreter_is_ready("gemini_vertex", fallback_override=False)
+    assert not status
+    assert not status.live_provider_ok
+    assert not status.fallback_active
+    assert status.mode == "disabled"
+    assert status.warning is not None
+
+
+def test_interpreter_readiness_gemini_vertex_fallback_on_ready_when_import_unavailable(
+    monkeypatch,
+):
+    """With fallback enabled and provider import broken, ready must still be True."""
+    import app.services.bernie_booking_interpreter as svc
+
+    def _broken():
+        return False, "provider_import_failed: simulated import error"
+
+    monkeypatch.setattr(svc, "_check_live_provider_import", _broken)
+
+    status = interpreter_is_ready("gemini_vertex", fallback_override=True)
+    assert status  # truthy: fallback covers the gap
+    assert not status.live_provider_ok
+    assert status.fallback_active
+    assert status.mode == "deterministic_fallback"
+    assert status.warning is not None
 
 
 # ── Ordinary receptionist prompt (fake/deterministic provider) ────────────────
@@ -199,7 +270,7 @@ def test_live_provider_unavailable_uses_deterministic_fallback(
 def test_live_provider_unavailable_fallback_off_fails_closed(
     client, gp_user, practitioner, monkeypatch
 ):
-    """When fallback=False (default) and live provider fails, return blocked."""
+    """When fallback=False (explicitly disabled) and live provider fails, return blocked."""
     monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
     monkeypatch.setattr(
         settings, "bernie_booking_interpreter_fallback_to_deterministic", False
