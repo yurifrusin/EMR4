@@ -47,3 +47,59 @@ def test_smoke_script_expect_result_failure_is_nonzero(capsys):
     payload = json.loads(captured.out)
     assert payload["provider"] == "disabled"
     assert payload["block_codes"] == ["booking_interpreter_disabled"]
+
+
+def test_smoke_script_readiness_gate_reports_fallback_ready(capsys):
+    exit_code = smoke_bernie_interpreter.main([
+        "--provider",
+        "gemini_vertex",
+        "--allow-live",
+        "--check-readiness",
+        "--expect-ready",
+        "true",
+    ])
+
+    assert exit_code == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["provider"] == "gemini_vertex"
+    assert payload["ready"] is True
+    assert payload["mode"] in {"live", "deterministic_fallback"}
+
+
+def test_smoke_script_ordinary_time_gate_parses_receptionist_phrase(capsys):
+    exit_code = smoke_bernie_interpreter.main([
+        "--provider",
+        "fake",
+        "--instruction",
+        "Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45",
+        "--reference-date",
+        "2026-07-01",
+        "--expect-result",
+        "clarification_required",
+        "--expect-earliest-time",
+        "14:00",
+        "--expect-latest-time",
+        "15:45",
+        "--expect-mode",
+        "mocked",
+    ])
+
+    assert exit_code == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["command_candidate"]["earliest_time"] == "14:00"
+    assert payload["command_candidate"]["latest_time"] == "15:45"
+
+
+def test_smoke_script_time_expectation_failure_is_nonzero(capsys):
+    exit_code = smoke_bernie_interpreter.main([
+        "--provider",
+        "fake",
+        "--instruction",
+        "appointment today after 2 pm",
+        "--expect-earliest-time",
+        "15:00",
+    ])
+
+    captured = capsys.readouterr()
+    assert exit_code == 1
+    assert "Expected earliest_time '15:00', got '14:00'." in captured.err

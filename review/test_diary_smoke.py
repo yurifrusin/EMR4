@@ -80,7 +80,7 @@ def diary_page():
         browser.close()
 
 
-def trigger_live_bernie(page, instruction="Please find practitioner_id:prac-1 patient_id:smoke-pat-1", register_default_mock=True):
+def trigger_route_intercepted_bernie(page, instruction="Please find practitioner_id:prac-1 patient_id:smoke-pat-1", register_default_mock=True):
     if register_default_mock:
         import json
         mock_default_interpret = {
@@ -326,7 +326,7 @@ def test_bernie_review_confirmation_ready(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
-def test_bernie_review_live_blocked(diary_page):
+def test_bernie_review_route_intercepted_blocked(diary_page):
     import json
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
@@ -387,7 +387,7 @@ def test_bernie_review_live_blocked(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&practitioner_id=prac-1")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
@@ -416,7 +416,7 @@ def test_bernie_review_live_blocked(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
-def test_bernie_review_live_candidate_selection(diary_page):
+def test_bernie_review_route_intercepted_candidate_selection(diary_page):
     import json
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
@@ -490,7 +490,7 @@ def test_bernie_review_live_candidate_selection(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&practitioner_id=prac-1")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
@@ -520,7 +520,7 @@ def test_bernie_review_live_candidate_selection(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
-def test_bernie_review_live_confirmation_ready(diary_page):
+def test_bernie_review_route_intercepted_confirmation_ready(diary_page):
     import json
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
@@ -635,7 +635,7 @@ def test_bernie_review_live_confirmation_ready(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&practitioner_id=prac-1&selected_candidate_index=0")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         # Verify status is rendered
         status = diary_page.locator("[data-testid='bernie-review-status']")
@@ -776,7 +776,7 @@ def test_bernie_interpret_preview_renders_before_supervised_review(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_interpret=true&practitioner_id=prac-1&patient_id=smoke-pat-1&selected_candidate_index=0")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page, "Please find practitioner_id:prac-1 patient_id:smoke-pat-1 date_from:today duration:15 earliest_time:09:00 latest_time:11:00", register_default_mock=False)
+        trigger_route_intercepted_bernie(diary_page, "Please find practitioner_id:prac-1 patient_id:smoke-pat-1 date_from:today duration:15 earliest_time:09:00 latest_time:11:00", register_default_mock=False)
 
         diary_page.wait_for_selector("[data-testid='bernie-interpret-preview']", state="visible", timeout=5000)
         diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
@@ -864,7 +864,7 @@ def test_bernie_interpret_preview_holds_supervised_review_until_safe(diary_page,
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_interpret=true&practitioner_id=prac-1")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page, register_default_mock=False)
+        trigger_route_intercepted_bernie(diary_page, register_default_mock=False)
 
         diary_page.wait_for_selector("[data-testid='bernie-interpret-preview']", state="visible", timeout=5000)
 
@@ -1209,7 +1209,7 @@ def _bernie_live_candidate_response():
     }
 
 
-def test_bernie_live_confirm_flow_harness_success(diary_page):
+def test_bernie_route_intercepted_confirm_flow_harness_success(diary_page):
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
@@ -1236,7 +1236,7 @@ def test_bernie_live_confirm_flow_harness_success(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1&selected_candidate_index=0")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
@@ -1276,7 +1276,7 @@ def test_bernie_live_confirm_flow_harness_success(diary_page):
         (_bernie_live_candidate_response, "Choose a time"),
     ],
 )
-def test_bernie_live_confirm_flow_harness_non_confirmable_states(diary_page, review_response, expected_status):
+def test_bernie_route_intercepted_confirm_flow_harness_non_confirmable_states(diary_page, review_response, expected_status):
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
@@ -1299,7 +1299,7 @@ def test_bernie_live_confirm_flow_harness_non_confirmable_states(diary_page, rev
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         status_locator = diary_page.locator("[data-testid='bernie-review-status']")
         status_locator.wait_for(state="visible", timeout=5000)
@@ -1315,7 +1315,7 @@ def test_bernie_live_confirm_flow_harness_non_confirmable_states(diary_page, rev
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
-def test_bernie_live_confirm_flow_harness_supervised_booking_error_no_write(diary_page):
+def test_bernie_route_intercepted_confirm_flow_harness_supervised_booking_error_no_write(diary_page):
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
@@ -1338,7 +1338,7 @@ def test_bernie_live_confirm_flow_harness_supervised_booking_error_no_write(diar
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         status_locator = diary_page.locator("[data-testid='bernie-review-status']")
         status_locator.wait_for(state="visible", timeout=5000)
@@ -1355,7 +1355,7 @@ def test_bernie_live_confirm_flow_harness_supervised_booking_error_no_write(diar
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
-def test_bernie_live_confirm_flow_harness_no_normal_mode_exposure(diary_page):
+def test_bernie_route_intercepted_confirm_flow_harness_no_normal_mode_exposure(diary_page):
     import urllib.parse
     import json
     parsed = urllib.parse.urlparse(diary_page.url)
@@ -1436,7 +1436,7 @@ def test_bernie_dev_mode_review_feature_flag_success(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?bernie_review=live&bernie_dev_review=true&practitioner_id=prac-1&selected_candidate_index=0")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         success_msg = diary_page.locator("[data-testid='bernie-review-success-message']")
@@ -1825,7 +1825,7 @@ def test_bernie_pilot_eligibility_eligible(diary_page):
         launch_btn.click()
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         banner = diary_page.locator("[data-testid='bernie-pilot-banner']")
         banner.wait_for(state="visible", timeout=5000)
@@ -2120,7 +2120,7 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         assert "Practitioner: Alex Shera" in details.text_content()
 
         # Trigger staff instruction submit
-        trigger_live_bernie(diary_page, register_default_mock=False)
+        trigger_route_intercepted_bernie(diary_page, register_default_mock=False)
 
         diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
 
@@ -2296,7 +2296,7 @@ def test_bernie_pilot_imported_context_stales_when_selection_changes(diary_page)
         diary_page.click("[data-testid='bernie-pilot-use-selected']")
         diary_page.wait_for_selector("[data-testid='bernie-context-summary-details']:has-text('Samuel Lee')", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page, instruction="Please find an appointment for Samuel", register_default_mock=False)
+        trigger_route_intercepted_bernie(diary_page, instruction="Please find an appointment for Samuel", register_default_mock=False)
         diary_page.wait_for_selector("[data-testid='bernie-review-block-item']:has-text('Harness Block')", state="visible", timeout=5000)
         assert len(supervised_requests) == 1
         assert supervised_requests[0]["command"]["patient_id"] == "patient-samuel-72"
@@ -2406,7 +2406,7 @@ def test_bernie_pilot_eligibility_confirm_gated(diary_page):
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
 
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
 
         confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
         confirm_btn.wait_for(state="visible", timeout=5000)
@@ -2571,7 +2571,7 @@ def test_bernie_pilot_selected_appointment_context(diary_page):
         diary_page.wait_for_selector("[data-testid='bernie-instruction-input']", state="visible", timeout=5000)
 
         # Submit the instruction text
-        trigger_live_bernie(diary_page, instruction="Please find earliest_time:09:00", register_default_mock=False)
+        trigger_route_intercepted_bernie(diary_page, instruction="Please find earliest_time:09:00", register_default_mock=False)
 
         # Wait for confirm button to show
         diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
@@ -3103,7 +3103,7 @@ def test_bernie_review_candidate_selection_empty_state(diary_page):
 
     try:
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true")
-        trigger_live_bernie(diary_page)
+        trigger_route_intercepted_bernie(diary_page)
         diary_page.wait_for_selector("[data-testid='bernie-review-candidates-empty']", state="visible", timeout=5000)
 
         empty_text = diary_page.locator("[data-testid='bernie-review-candidates-empty']").text_content()
@@ -3645,7 +3645,7 @@ def test_bernie_ordinary_mode_readiness_and_diagnostics(diary_page):
         diary_page.click("[data-testid='bernie-pilot-use-selected']")
 
         # Enter instruction and submit
-        trigger_live_bernie(diary_page, instruction="Find slot", register_default_mock=False)
+        trigger_route_intercepted_bernie(diary_page, instruction="Find slot", register_default_mock=False)
 
         # Wait for the status badge
         status = diary_page.locator("[data-testid='bernie-review-status']")
@@ -3678,7 +3678,7 @@ def test_bernie_ordinary_mode_readiness_and_diagnostics(diary_page):
         diary_page.click("[data-testid='bernie-pilot-use-selected']")
 
         # Enter instruction and submit
-        trigger_live_bernie(diary_page, instruction="Find slot", register_default_mock=False)
+        trigger_route_intercepted_bernie(diary_page, instruction="Find slot", register_default_mock=False)
 
         # Wait for status badge
         status = diary_page.locator("[data-testid='bernie-review-status']")

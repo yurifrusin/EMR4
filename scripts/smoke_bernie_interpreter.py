@@ -19,7 +19,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.schemas.appointments import BernieBookingInstructionInterpretIn
-from app.services.bernie_booking_interpreter import get_booking_instruction_interpreter
+from app.services.bernie_booking_interpreter import (
+    get_booking_instruction_interpreter,
+    interpreter_is_ready,
+)
 
 
 DEFAULT_INSTRUCTION = (
@@ -65,6 +68,32 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Exit non-zero unless Bernie returns this result.",
     )
     parser.add_argument(
+        "--check-readiness",
+        action="store_true",
+        help="Print provider readiness instead of interpreting an instruction.",
+    )
+    parser.add_argument(
+        "--expect-ready",
+        choices=("true", "false"),
+        default=None,
+        help="With --check-readiness, exit non-zero unless readiness matches.",
+    )
+    parser.add_argument(
+        "--expect-earliest-time",
+        default=None,
+        help="Exit non-zero unless command_candidate.earliest_time matches HH:MM.",
+    )
+    parser.add_argument(
+        "--expect-latest-time",
+        default=None,
+        help="Exit non-zero unless command_candidate.latest_time matches HH:MM.",
+    )
+    parser.add_argument(
+        "--expect-mode",
+        default=None,
+        help="Exit non-zero unless provider_metadata.mode matches.",
+    )
+    parser.add_argument(
         "--json",
         action="store_true",
         help="Print the full structured envelope as JSON.",
@@ -100,6 +129,26 @@ def _compact_payload(envelope: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _readiness_payload(provider: str) -> dict[str, Any]:
+    status = interpreter_is_ready(provider)
+    return {
+        "provider": status.provider,
+        "ready": status.ready,
+        "live_provider_ok": status.live_provider_ok,
+        "fallback_active": status.fallback_active,
+        "mode": status.mode,
+        "warning": status.warning,
+    }
+
+
+def _command_value(envelope: dict[str, Any], key: str) -> Any:
+    command = envelope.get("command_candidate") or {}
+    value = command.get(key)
+    if isinstance(value, str) and len(value) == 8 and value.endswith(":00"):
+        return value[:5]
+    return value
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     if args.provider == "gemini_vertex" and not args.allow_live:
@@ -109,6 +158,20 @@ def main(argv: list[str] | None = None) -> int:
             file=sys.stderr,
         )
         return 2
+
+    if args.check_readiness:
+        payload = _readiness_payload(args.provider)
+        if args.expect_ready is not None:
+            expected = args.expect_ready == "true"
+            if payload["ready"] is not expected:
+                print(
+                    f"Expected readiness {expected!r}, got {payload['ready']!r}.",
+                    file=sys.stderr,
+                )
+                print(json.dumps(payload, indent=2, sort_keys=True))
+                return 1
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        return 0
 
     body = BernieBookingInstructionInterpretIn(
         instruction=args.instruction,
@@ -124,6 +187,26 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(json.dumps(_compact_payload(envelope), indent=2, sort_keys=True))
         return 1
+
+    if args.expect_mode and envelope["provider_metadata"]["mode"] != args.expect_mode:
+        print(
+            f"Expected mode {args.expect_mode!r}, got {envelope['provider_metadata']['mode']!r}.",
+            file=sys.stderr,
+        )
+        print(json.dumps(_compact_payload(envelope), indent=2, sort_keys=True))
+        return 1
+
+    for key, expected in (
+        ("earliest_time", args.expect_earliest_time),
+        ("latest_time", args.expect_latest_time),
+    ):
+        if expected is not None and _command_value(envelope, key) != expected:
+            print(
+                f"Expected {key} {expected!r}, got {_command_value(envelope, key)!r}.",
+                file=sys.stderr,
+            )
+            print(json.dumps(_compact_payload(envelope), indent=2, sort_keys=True))
+            return 1
 
     payload = envelope if args.json else _compact_payload(envelope)
     print(json.dumps(payload, indent=2, sort_keys=True))
