@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint99-bernie-first-person-confidence-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-01 17:08:53+10:00 |
 | Source HEAD | `0ffeb20` |
 

@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint99-confidence-acceptance-review` |
 | Source Task | `codex-sprint99-confidence-acceptance-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-01 17:02 +1000 |
 | Source HEAD | `0ffeb20` |
 

@@ -138,7 +138,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally and verified; push/deploy/mirror/audit pending |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Launch Gate | Complete: dispatch committed, pushed, audited, and HANDIN READY announced |
 | Integration Gate | Complete: worker plans reviewed, implementation submitted, Ariadne repaired cross-branch issues, and focused verification passed |
 | Product Goal | Give *bernie* a typed confidence and response policy so it assumes only when confidence is adequate, asks human-like clarification when uncertainty is meaningful, blocks only when confidence/safety gates require it, and exposes technical details on demand rather than in ordinary receptionist copy |

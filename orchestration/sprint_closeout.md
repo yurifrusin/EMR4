@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 99: Bernie Confidence And Response Policy |
 | Integrated through | Typed confidence axes, first-person receptionist responses, compact Details disclosure, same-day temporal validity, and confidence-aware provisional diary preview |
-| Status | Integrated locally, verified, and ready for push/deploy/mirror/audit |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Last updated | 2026-07-01 |
 
 ## What Changed

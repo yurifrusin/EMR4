@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint99-bernie-confidence-policy-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-01 16:59 +1000 |
 | Revised | 2026-07-01 (v2 - patient fuzzy-candidate policy + same-day temporal validity per Ariadne/Yuri) |
 | Source HEAD | `9bad3ae` |
