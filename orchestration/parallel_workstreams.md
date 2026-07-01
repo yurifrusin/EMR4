@@ -134,6 +134,55 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 100: Bernie Booking Session State Machine
+
+| Item | Value |
+|---|---|
+| Status | Launching - plan gate |
+| Launch Gate | Pending dispatch commit, push, audit, and HANDIN READY announcement |
+| Integration Gate | Not started |
+| Product Goal | Replace the current loosely coupled *bernie* booking flow with an explicit session state machine so relative dates, diary navigation, candidate selection, clarification, preview, and confirmation remain logically separated |
+| Design Guide | `orchestration/event_driven_statechart_architecture.md` |
+
+### Workstream GA - Bernie Backend Session And Temporal Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-sprint100-bernie-backend-state-contract.md` |
+| Goal | Plan backend/API changes for immutable request reference dates, clinic-day exhaustion handling, session/candidate evidence, and no-reinterpretation confirmation contracts |
+| In Scope | Plan packet first only; `app/schemas/appointments.py`, `app/routers/appointments.py`, `app/services/bernie_booking_interpreter.py`, `app/services/bernie_slot_normalizer.py`, and focused backend tests; same-day after-hours behaviour; immutable `request_reference_date`; candidate snapshot/evidence fields; no-write invariants |
+| Out of Scope | Production code before plan approval, diary UI implementation, broad GraphQL/API-spine redesign, phone/Caller ID/OPV/PVM/Medicare integrations, live voice, and weakening staff confirmation |
+| Verification | Plan must specify tests for after-hours same-day requests, partly-past in-hours clamping, relative tomorrow immutability, selected-candidate confirmation using absolute slot fields, no mutation before confirm, and no live-provider dependency |
+| Status | Queued |
+
+### Workstream GB - Bernie Diary State Machine UI
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity/Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint100-bernie-ui-state-machine.md` |
+| Goal | Plan a diary-side *bernie* session state machine that keeps instruction, interpretation, candidate snapshot, selected slot, diary preview, choose-another-time, and confirmed states separate |
+| In Scope | Plan packet first only; `docs/diary/diary.js`, `docs/diary/diary.css`, `docs/diary/diary.html`, and `review/test_diary_smoke.py`; explicit UI state object; immutable session reference date; candidate snapshot reuse; post-confirm panel cleanup; compact Details behaviour; auto-preview toggle boundary |
+| Out of Scope | Production code before plan approval, backend schema implementation except requested contract fields, broad diary redesign, phone/voice integrations, and bypassing staff confirmation |
+| Verification | Plan must specify deterministic UI tests for `today after 3` after clinic hours, `tomorrow` candidate selection without jumping two days, `Choose another time` returning to the same candidate snapshot, confirm success cleanup, stale confirm recovery, and asset version checks |
+| Status | Queued |
+
+### Workstream GC - Bernie State Invariant Review Harness
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/sprint100-bernie-state-invariants` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint100-bernie-state-invariants.md` |
+| Goal | Independently plan the acceptance/invariant harness for the *bernie* state machine, using Yuri's live screenshots as failure fixtures |
+| In Scope | Read-only plan/review packet first only; inspect current *bernie* backend/UI/tests and propose model-based or transition-table tests; define invariants for reference-date immutability, candidate snapshot reuse, UI state cleanup, confirmation gating, and after-hours temporal logic |
+| Out of Scope | Production code edits before plan approval, integration, live provider/browser manual testing, and broad API-spine implementation beyond noting reusable modelling lessons |
+| Verification | Plan must include concrete acceptance gates, transition table, failure fixtures, required backend/UI test names, and resubmission criteria for the worker plans |
+| Status | Queued |
+
 ## Sprint 99: Bernie Confidence And Response Policy
 
 | Item | Value |
