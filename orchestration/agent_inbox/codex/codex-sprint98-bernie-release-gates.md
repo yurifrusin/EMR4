@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint98-bernie-release-gates` |
-| Status | queued |
+| Status | submitted |
 | Created | 7c05164 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint98-bernie-release-gates --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/plan-codex-codex-sprint98-bernie-release-gates.md`; source packet status/notes only.
+- Verification run: `python scripts\agent_worktrees.py handin --agent codex`; inspected `orchestration/bernie_release_gates.md`, `review/test_diary_smoke.py`, `scripts/smoke_bernie_interpreter.py`, existing Bernie backend tests, `orchestration/sprint_closeout.md`, `orchestration/parallel_workstreams.md`, and protocol alerts. No production tests run because this is plan-only.
+- Remaining risks: Implementation workers may touch the same review harness; Ariadne should reconcile selector/test naming after backend/UI plans are accepted.
