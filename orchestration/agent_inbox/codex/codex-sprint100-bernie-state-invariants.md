@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint100-bernie-state-invariants` |
-| Status | queued |
+| Status | integrated |
 | Created | 00f54e6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint100-bernie-state-invariants --summary "Short plan summary"` |

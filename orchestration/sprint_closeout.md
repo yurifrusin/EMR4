@@ -8,6 +8,66 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 100: Bernie Booking Session State Machine |
+| Integrated through | Immutable request reference dates, same-day clinic exhaustion, explicit Bernie UI session state, candidate snapshot reuse, post-confirm cleanup, and regression harness for tomorrow navigation |
+| Status | Integrated and verified locally; push/deploy/mirror/audit pending at closeout write time |
+| Last updated | 2026-07-01 |
+
+## What Changed
+
+- Added a design guide for the coming API-spine revision: `orchestration/event_driven_statechart_architecture.md`.
+- Added backend `request_reference_date` echoing to Bernie interpretation and supervised booking responses so relative dates are resolved against one immutable intake date.
+- Added backend `clinic_day_exhausted` handling for same-day requests whose requested or clamped time window has already passed the clinic day.
+- Preserved useful in-hours clamping: partly-past same-day requests can still search from now when slots remain.
+- Added a diary-side Bernie session object separating instruction entry, interpretation, candidate selection, slot preview, confirming, and confirmed states.
+- Changed `Choose another time` to reuse the existing candidate snapshot rather than reinterpreting the original prompt or re-resolving relative dates.
+- Preserved selected booking details through confirmation, then clears stale confirm controls into a compact terminal confirmed state.
+- Updated review harness expectations so confirmation success is a terminal state, not a hidden success message beside stale controls.
+- Added a focused diary regression test proving a `tomorrow` candidate remains anchored to the original reference date after the diary jumps to the candidate day.
+- Updated diary assets to `diary.css?v=124` and `diary.js?v=140`.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\schemas\appointments.py tests\test_bernie_sprint100_state_contract.py` passed.
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_sprint100_state_contract.py -q` passed: `10 passed`.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_sprint100_state_contract.py tests\test_bernie_confidence_policy.py -q` passed: `38 passed`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_sprint100_bernie_tomorrow_reference_date_survives_diary_navigation -q` passed.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q` passed: `73 passed`.
+- Existing `pytest_asyncio` loop-scope deprecation warning remains unrelated.
+
+## Recommended User Review
+
+After GitHub Pages deploys, one live Diary check is still useful because this sprint fixes the exact temporal/session behaviour Yuri saw:
+
+1. Hard refresh the live Diary/Office dialog and confirm it loads `diary.js?v=140` and `diary.css?v=124`.
+2. Open `Bernie`.
+3. Try `Make an appointment for Margaret Thompson for after 3 today with Dr Shera.` when the current clinic time is already after the useful booking window.
+4. Expected result: Bernie should not show past slots or silently advance to tomorrow. It should ask for another day/later window with calm copy.
+5. Try `Make an appointment for Margaret Thompson for after 3 tomorrow with Dr Shera.`
+6. Choose a suggested time. Expected result: the diary jumps to the proposed date and shows the proposed appointment, but the underlying request remains anchored to the original reference date.
+7. Click `Choose another time`. Expected result: the same candidate list returns without reinterpreting the original prompt or jumping another day forward.
+8. Choose a time and click `Confirm booking` only if you are happy to create a dev booking. Expected result: after confirmation, old verbose request/details and confirm controls are cleared into a compact confirmed state.
+9. Suspicious signs: tomorrow jumps forward two days, `Choose another time` calls a new interpretation/search unexpectedly, past slots appear for today, raw `clinic_day_exhausted`/UUID/snake_case copy appears in ordinary mode, or a booking is created before explicit confirmation.
+
+## Not Required Before Moving On
+
+- No Caller ID, OPV/PVM, Medicare Online, phone-system integration, voice/headset input, GraphQL API-spine implementation, or production GCP change is required for Sprint 100.
+- No database migration or manual data repair is required.
+- No taskpane, Command Centre, billing, SMS, resource-admin, Cochrane/RACGP, *davida*, or *consultant* implementation is included here.
+
+## Known Follow-Up
+
+- The next major programme remains the root-to-branch API-spine design sprint: GraphQL read/context graph, command mutation contracts, YAML capability/policy layer, statechart/event modelling, audit/evidence spine, cybersecurity model, and dev/prod profile strategy.
+- Add a visible receptionist toggle for automatic best-guess diary preview versus list-only suggestions.
+- Add more explicit model/state documentation for nested clarification submachines and cross-agent workflows.
+- Add live/browser verification after deploy if the local harness passes but the Office/GitHub Pages surface behaves differently.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Previous Closeout - Sprint 99
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 99: Bernie Confidence And Response Policy |
 | Integrated through | Typed confidence axes, first-person receptionist responses, compact Details disclosure, same-day temporal validity, and confidence-aware provisional diary preview |
 | Status | Integrated, verified, pushed, deployed, mirrored, and audited |

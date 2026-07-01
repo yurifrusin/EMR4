@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 00f54e6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint100-bernie-backend-state-contract --summary "Short plan summary"` |
@@ -101,4 +101,4 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 - Remaining risks:
   1. **Stateless enforcement**: `request_reference_date` immutability is client-side-carried (echoed in response, validated on confirm via `selection_create_proposal_mismatch`). No server-side session. Plan Risk 1 flagged this — if Codex prefers a persisted statechart table, that remains a separate sprint.
   2. **Clamp in supervised-booking is additive**: the open-ended clamp-to-now now happens in the supervised-booking endpoint too (not only in `_resolve_bernie_interpretation_context`). This is intentional — without it, slot search returns past slots and exhaustion never triggers. The existing interpret-endpoint clamp is preserved unchanged.
-  3. **Full test suite**: background run in progress at submit time. All 10 new Sprint 100 tests pass in two clean runs; no existing tests were modified.
+  3. **Ariadne verification**: after integration, `tests/test_bernie_sprint100_state_contract.py` passed cleanly, and the combined `tests/test_bernie_sprint100_state_contract.py tests/test_bernie_confidence_policy.py` run passed `38 passed`.

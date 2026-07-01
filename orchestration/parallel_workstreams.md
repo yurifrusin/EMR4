@@ -138,9 +138,9 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Launching - plan gate |
-| Launch Gate | Pending dispatch commit, push, audit, and HANDIN READY announcement |
-| Integration Gate | Not started |
+| Status | Integrated locally; verification passed; pending push/deploy/mirror/audit |
+| Launch Gate | Complete: design guide, dispatch packets, worker plan review, and implementation release completed |
+| Integration Gate | Complete locally: worker commits cherry-picked, Ariadne repaired harness expectations, and focused verification passed |
 | Product Goal | Replace the current loosely coupled *bernie* booking flow with an explicit session state machine so relative dates, diary navigation, candidate selection, clarification, preview, and confirmation remain logically separated |
 | Design Guide | `orchestration/event_driven_statechart_architecture.md` |
 
@@ -155,7 +155,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first only; `app/schemas/appointments.py`, `app/routers/appointments.py`, `app/services/bernie_booking_interpreter.py`, `app/services/bernie_slot_normalizer.py`, and focused backend tests; same-day after-hours behaviour; immutable `request_reference_date`; candidate snapshot/evidence fields; no-write invariants |
 | Out of Scope | Production code before plan approval, diary UI implementation, broad GraphQL/API-spine redesign, phone/Caller ID/OPV/PVM/Medicare integrations, live voice, and weakening staff confirmation |
 | Verification | Plan must specify tests for after-hours same-day requests, partly-past in-hours clamping, relative tomorrow immutability, selected-candidate confirmation using absolute slot fields, no mutation before confirm, and no live-provider dependency |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream GB - Bernie Diary State Machine UI
 
@@ -168,7 +168,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Plan packet first only; `docs/diary/diary.js`, `docs/diary/diary.css`, `docs/diary/diary.html`, and `review/test_diary_smoke.py`; explicit UI state object; immutable session reference date; candidate snapshot reuse; post-confirm panel cleanup; compact Details behaviour; auto-preview toggle boundary |
 | Out of Scope | Production code before plan approval, backend schema implementation except requested contract fields, broad diary redesign, phone/voice integrations, and bypassing staff confirmation |
 | Verification | Plan must specify deterministic UI tests for `today after 3` after clinic hours, `tomorrow` candidate selection without jumping two days, `Choose another time` returning to the same candidate snapshot, confirm success cleanup, stale confirm recovery, and asset version checks |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream GC - Bernie State Invariant Review Harness
 
@@ -181,7 +181,7 @@ After every fully integrated batch, Codex updates
 | In Scope | Read-only plan/review packet first only; inspect current *bernie* backend/UI/tests and propose model-based or transition-table tests; define invariants for reference-date immutability, candidate snapshot reuse, UI state cleanup, confirmation gating, and after-hours temporal logic |
 | Out of Scope | Production code edits before plan approval, integration, live provider/browser manual testing, and broad API-spine implementation beyond noting reusable modelling lessons |
 | Verification | Plan must include concrete acceptance gates, transition table, failure fixtures, required backend/UI test names, and resubmission criteria for the worker plans |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint 99: Bernie Confidence And Response Policy
 

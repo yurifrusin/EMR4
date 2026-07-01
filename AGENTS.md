@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Programme 2F / Sprint 96 - Bernie reception assistant UX and API evidence contract integrated, pushed, deployed, mirrored, and audited |
-| **Next recommended work** | Step back and review the broader implementation plan, then run a small API/UX tightening sprint before live phone-system or Medicare/OPV/PVM integration |
+| **Current active track** | Programme 2F / Sprint 100 - Bernie booking session state machine integrated locally and verified; push/deploy/mirror/audit closeout in progress |
+| **Next recommended work** | Complete Sprint 100 live Diary check, then start the root-to-branch API-spine design sprint using GraphQL/read-context contracts, command mutations, YAML capability/policy documents, statecharts, audit/evidence, cybersecurity, and dev/prod profiles |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 96 Bernie reception assistant UX/API evidence closeout commit |
+| **Latest integration commit** | Sprint 100 Bernie booking session state machine closeout commit |
 
 ### Tag map (all tags pushed to remote)
 
