@@ -213,7 +213,7 @@ def main(argv: list[str] | None = None) -> int:
     ):
         if enabled and not command.get(key):
             print(
-                f"Expected command_candidate.{key} to be present.",
+                "Expected required command_candidate identifier to be present.",
                 file=sys.stderr,
             )
             print(json.dumps(_compact_payload(envelope), indent=2, sort_keys=True))
