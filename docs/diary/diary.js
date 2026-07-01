@@ -52,6 +52,7 @@ let bernieStagedBookingPreview = null;
 let bernieStagedBookingFresh = false;
 let bernieLatestIdentityEvidence = null;
 let bernieLatestReviewPayload = null;
+let bernieLatestCandidatePayload = null;
 const checkinDefaultCache = new Map();
 
 const BERNIE_STATUS_COPY = {
@@ -2636,6 +2637,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   contentEl.innerHTML = "";
   bernieLatestIdentityEvidence = payload.identity_evidence || null;
   bernieLatestReviewPayload = payload || null;
+  if (payload && payload.status === "candidate_selection_required") {
+    bernieLatestCandidatePayload = payload;
+  }
   if (isBerniePilotActive) {
     renderBernieInstructionInput(contentEl);
   }
@@ -2714,7 +2718,11 @@ function renderBernieReview(payload, interpretEnvelope = null) {
           message = message.replace(/\(UUID\)/gi, "").replace(/ID/g, "").replace(/uuid/gi, "").replace(/supervised booking/gi, "booking").trim();
         }
       }
-      item.textContent = `${formatBernieCode(block.code)}: ${message}`;
+      if (isDevOrDebug) {
+        item.textContent = `${formatBernieCode(block.code)}: ${message}`;
+      } else {
+        item.textContent = message;
+      }
       list.appendChild(item);
     });
 
@@ -2835,6 +2843,20 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     shortcutHint.textContent = "Shortcut: Ctrl+Alt+Enter";
     confirmBox.appendChild(shortcutHint);
 
+    const changeTimeBtn = document.createElement("button");
+    changeTimeBtn.type = "button";
+    changeTimeBtn.className = "btn-bernie-change-time";
+    changeTimeBtn.setAttribute("data-testid", "bernie-review-change-time-button");
+    changeTimeBtn.textContent = "Choose different time";
+    changeTimeBtn.addEventListener("click", async () => {
+      bernieSelectedCandidateIndex = null;
+      bernieStagedBookingPreview = null;
+      bernieStagedBookingFresh = false;
+      renderBernieReview(bernieLatestCandidatePayload || { status: 'candidate_selection_required', candidate_slots: [] }, bernieInterpretResult);
+      await loadDiary(true);
+    });
+    confirmBox.appendChild(changeTimeBtn);
+
     const urlParams = new URLSearchParams(window.location.search);
     const isSmoke = urlParams.get("smoke") === "true";
     const reviewParam = urlParams.get("bernie_review");
@@ -2887,6 +2909,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             bernieSelectedCandidateIndex = null;
             await loadDiary(true);
           } else {
+            const isDevOrDebug = isBernieDevOrDebug();
             let detail = "";
             try {
               const errData = await response.json();
@@ -2894,12 +2917,30 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             } catch (e) {
               detail = `Status ${response.status}`;
             }
-            errorMsg.textContent = `Booking could not be confirmed: ${detail}`;
+            if (!isDevOrDebug) {
+              if (response.status === 404 || (detail && detail.includes("Not Found"))) {
+                errorMsg.textContent = "This slot is no longer available. Please choose a different time.";
+              } else {
+                errorMsg.textContent = "We couldn't confirm this booking. Please try again or select another time.";
+              }
+            } else {
+              errorMsg.textContent = `Booking could not be confirmed: ${detail}`;
+            }
             errorMsg.classList.remove("hidden");
             confirmBtn.disabled = false;
           }
         } catch (err) {
-          errorMsg.textContent = `Booking could not be confirmed: ${err.message || err}`;
+          const isDevOrDebug = isBernieDevOrDebug();
+          const errMsg = err.message || String(err);
+          if (!isDevOrDebug) {
+            if (errMsg.includes("Not Found")) {
+              errorMsg.textContent = "This slot is no longer available. Please choose a different time.";
+            } else {
+              errorMsg.textContent = "We couldn't confirm this booking. Please try again or select another time.";
+            }
+          } else {
+            errorMsg.textContent = `Booking could not be confirmed: ${errMsg}`;
+          }
           errorMsg.classList.remove("hidden");
           confirmBtn.disabled = false;
         }
