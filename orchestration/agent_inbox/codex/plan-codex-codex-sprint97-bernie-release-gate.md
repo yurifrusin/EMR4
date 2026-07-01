@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint97-bernie-release-gate` |
 | Source Task | `codex-sprint97-bernie-release-gate` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-01 09:50 +1000 |
 | Source HEAD | `028e2a0` |
 

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint97-bernie-ui-readiness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-01 09:43 +1000 |
 | Source HEAD | `028e2a0` |
 

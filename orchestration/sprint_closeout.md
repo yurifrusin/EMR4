@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 97: Bernie Basic Prompt Reliability and Release Gates |
 | Integrated through | Deterministic fallback for live interpreter outages, receptionist-friendly provider-unavailable UI, route-intercepted test labeling, and blocking Bernie release gates |
-| Status | Integrated locally and verified; push, deployment observation, mirror realignment, and audit pending |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Last updated | 2026-07-01 |
 
 ## What Changed
@@ -34,6 +34,8 @@ reviewed, integrated, verified, pushed, and audited.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `57 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
 - `.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\services\bernie_booking_interpreter.py scripts\smoke_bernie_interpreter.py tests\test_bernie_sprint97_interpreter_readiness.py` passed.
 - `git diff --check origin/master...HEAD` passed.
+- GitHub Pages deploy for commit `55f63c1` completed successfully, and `.venv\Scripts\python.exe scripts\check_frontend_versions.py` confirmed the deployed Diary is serving `diary.js?v=135` and `diary.css?v=121`.
+- `python scripts\agent_worktrees.py audit --fetch` confirmed `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` all aligned at `55f63c1` with clean worktrees.
 
 ## Recommended User Review
 
