@@ -44,8 +44,84 @@ DATE_RE = re.compile(r"\b(?:today|tomorrow|\d{4}-\d{2}-\d{2})\b", re.IGNORECASE)
 TIME_RE = re.compile(r"\b(?:[01]?\d|2[0-3]):[0-5]\d(?::[0-5]\d)?\b")
 UNSAFE_TERMS = ("book it", "create it", "confirm it", "make the booking", "write it")
 
+# Natural language time phrase patterns (no DB, no network).
+# Business-hours assumption: bare hour 1–11 without am/pm → pm.
+_NAT_TIME_PAT = r"(?:1?[0-9]|2[0-3])(?:[.:][0-5]\d)?(?:\s*(?:am|pm))?"
+_BETWEEN_TIME_RE = re.compile(
+    r"\bbetween\s+(" + _NAT_TIME_PAT + r")\s+and\s+(" + _NAT_TIME_PAT + r")\b",
+    re.IGNORECASE,
+)
+_AFTER_TIME_RE = re.compile(r"\bafter\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
+_BEFORE_TIME_RE = re.compile(r"\bbefore\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
+_TIME_FRAGMENT_RE = re.compile(
+    r"^(1?[0-9]|2[0-3])(?:[.:]([0-5]\d))?(?:\s*(am|pm))?$",
+    re.IGNORECASE,
+)
+
 LiveProviderFactory = Callable[[], AiProvider]
 _live_provider_factory: LiveProviderFactory | None = None
+
+
+def _parse_time_fragment(raw: str) -> str | None:
+    """Convert a natural time fragment (e.g. '3', '3:45', '3.45', '3 pm') to HH:MM.
+
+    Business-hours assumption: bare hours 1–11 without am/pm are treated as pm.
+    Returns None when the fragment cannot be parsed.
+    """
+    m = _TIME_FRAGMENT_RE.match(raw.strip())
+    if not m:
+        return None
+    hour = int(m.group(1))
+    minute = int(m.group(2) or 0)
+    meridiem = (m.group(3) or "").lower()
+    if meridiem == "pm" and hour < 12:
+        hour += 12
+    elif meridiem == "am" and hour == 12:
+        hour = 0
+    elif not meridiem and 1 <= hour <= 11:
+        hour += 12
+    if hour > 23 or minute > 59:
+        return None
+    return f"{hour:02d}:{minute:02d}"
+
+
+def _extract_natural_time_constraints(
+    instruction: str,
+) -> tuple[str | None, str | None]:
+    """Extract earliest/latest times from receptionist phrases.
+
+    Handles: 'after 3', 'after 3 pm', 'before 3:45', 'before 3.45',
+    'between 2 pm and 3:45'.  Returns (earliest_time, latest_time) as HH:MM
+    strings or None when not found.  Pure function — no DB, no network.
+    """
+    earliest: str | None = None
+    latest: str | None = None
+
+    between_m = _BETWEEN_TIME_RE.search(instruction)
+    if between_m:
+        earliest = _parse_time_fragment(between_m.group(1))
+        latest = _parse_time_fragment(between_m.group(2))
+        return earliest, latest
+
+    after_m = _AFTER_TIME_RE.search(instruction)
+    if after_m:
+        earliest = _parse_time_fragment(after_m.group(1))
+
+    before_m = _BEFORE_TIME_RE.search(instruction)
+    if before_m:
+        latest = _parse_time_fragment(before_m.group(1))
+
+    return earliest, latest
+
+
+def interpreter_is_ready(provider_name: str) -> bool:
+    """Return True when the provider is configured (not disabled).
+
+    Disabled is the safe default.  'fake' is the deterministic path; live
+    providers are ready when named.  Use this in readiness checks and
+    release gates — do not call the provider.
+    """
+    return (provider_name or "disabled").strip().lower() != "disabled"
 
 
 class BookingInstructionInterpreter(Protocol):
@@ -213,6 +289,16 @@ def _extract_fake_command(instruction: str) -> SlotSearchCommandIn:
         if date_match:
             values["date_from"] = date_match.group(0).lower()
 
+    # Natural time phrases take precedence over positional HH:MM scanning so
+    # that 'after 3' and 'before 3:45' produce correct earlier/later semantics.
+    if "earliest_time" not in values or "latest_time" not in values:
+        nat_earliest, nat_latest = _extract_natural_time_constraints(instruction)
+        if "earliest_time" not in values and nat_earliest:
+            values["earliest_time"] = nat_earliest
+        if "latest_time" not in values and nat_latest:
+            values["latest_time"] = nat_latest
+
+    # HH:MM positional fallback for any still-missing time fields.
     times = TIME_RE.findall(instruction)
     if "earliest_time" not in values and times:
         values["earliest_time"] = times[0]
@@ -278,6 +364,17 @@ class GeminiVertexBookingInstructionInterpreter:
         try:
             raw = self._generate(body, actor_context, audit_events)
         except Exception:
+            if settings.bernie_booking_interpreter_fallback_to_deterministic:
+                result = FakeBookingInstructionInterpreter().interpret(
+                    body, actor_context, audit_events
+                )
+                return result.model_copy(update={
+                    "provider_metadata": BernieBookingInterpreterMetadata(
+                        provider="gemini_vertex",
+                        mode="deterministic_fallback",
+                        live_provider=False,
+                    )
+                })
             return _live_blocked_response(
                 "booking_interpreter_provider_unavailable",
                 "Live booking-instruction interpreter provider is unavailable.",
