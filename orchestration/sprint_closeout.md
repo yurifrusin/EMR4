@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 98: Bernie Booking Loop Integrity and API Release Gates |
 | Integrated through | Typed backend confirm failure contract, calm Diary confirmation recovery, Choose another time loop, and blocking release gates for the simplest booking prompt path |
-| Status | Integrated locally on sprint branch, verified; pending master/handoff push and live Diary review |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited; live hotfix for confirm endpoint and ordinary copy pending push |
 | Last updated | 2026-07-01 |
 
 ## What Changed
@@ -25,6 +25,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Added a `Choose another time` action from confirmation-ready review state back to candidate selection without making a confirm call.
 - Kept developer diagnostics behind debug/dev mode; ordinary mode continues to avoid raw snake_case setup codes.
 - Preserved the staged provisional diary-card pulse in the dedicated visual smoke path, with reduced-motion coverage.
+- Hotfix after live review: normalized backend-provided confirm endpoints before calling `apiFetch`, preventing `/api/v1/api/v1/...` confirm requests from being misreported as stale slots.
+- Hotfix after live review: changed ordinary *bernie* clarification copy from internal `practitioner_id` wording to receptionist-facing language and hid interpret warning-code prefixes outside debug mode.
 
 ## Verification
 
@@ -33,12 +35,17 @@ reviewed, integrated, verified, pushed, and audited.
 - `node --check docs\diary\diary.js` passed.
 - `.venv\Scripts\python.exe -m py_compile scripts\smoke_bernie_interpreter.py tests\test_smoke_bernie_interpreter_script.py tests\test_bernie_sprint98_release_gates.py tests\test_bernie_sprint98_confirm_contract.py app\routers\appointments.py` passed.
 - `git diff --check` passed.
+- Hotfix verification:
+  - `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_sprint98_confirm_contract.py tests\test_bernie_sprint98_release_gates.py -q` passed: `28 passed`.
+  - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q` passed: `63 passed`.
+  - `node --check docs\diary\diary.js` passed.
+  - `git diff --check` passed.
 
 ## Recommended User Review
 
 One live Diary check remains useful after deployment because Sprint 98 deliberately targets the screenshot-level failure Yuri reported:
 
-1. Hard refresh the live Diary/Office dialog after GitHub Pages deploys and confirm the page loads `diary.js?v=136` and `diary.css?v=122`.
+1. Hard refresh the live Diary/Office dialog after GitHub Pages deploys and confirm the page loads `diary.js?v=137` and `diary.css?v=122`.
 2. Open `Bernie`.
 3. Type `Make an appointment for Margaret Thompson for after 3 today with Dr Shera.`
 4. Click `Find times`.
@@ -56,6 +63,9 @@ One live Diary check remains useful after deployment because Sprint 98 deliberat
 ## Known Follow-Up
 
 - After Yuri's live check, the next recommended sprint is the root-to-branch API-spine design sprint: GraphQL read/context graph, command mutation contracts, agent capability manifests, audit/evidence spine, and dev/prod profile strategy.
+- Add a temporal-validity layer for same-day *bernie* searches: if the request is for today, clamp earliest candidate search to the next valid future slot; if the requested window has already passed, ask for a later time/day instead of offering past slots. Future-date requests should preserve the stated window.
+- Add a receptionist preview policy for *bernie*: default behaviour should show *bernie*'s best-guess candidate automatically on the Diary as a proposed appointment, but the panel needs a clear toggle to keep suggestions in-list only before the receptionist prompts *bernie*.
+- Add confidence-based evidence density to the *bernie* panel: above a configurable confidence threshold, keep REQUEST/PATIENT DETAILS supporting text compact and expose the full evidence through a `Details`/`See more` control; below that threshold, expand the evidence by default so the receptionist has enough information to resolve uncertainty.
 - The known moderate Dependabot alert remains unrelated to this sprint.
 
 ## Previous Closeout - Sprint 97

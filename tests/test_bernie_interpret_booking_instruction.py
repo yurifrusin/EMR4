@@ -169,7 +169,7 @@ def test_fake_provider_missing_fields_returns_clarifying_intent(
     assert data["result"] == "clarification_required"
     assert data["missing_fields"] == ["practitioner_id"]
     assert data["clarifying_question"] == (
-        "Please provide practitioner_id before Bernie searches for slots."
+        "Please tell Bernie which practitioner before searching for times."
     )
     assert data["normalization"]["safe"] is False
     assert data["blocks"][0]["code"] == "missing_practitioner_id"
@@ -201,6 +201,8 @@ def test_fake_provider_resolves_practice_names_as_optional_context(
     data = resp.json()
     assert data["safe"] is True
     assert data["result"] == "interpreted"
+    assert data["missing_fields"] == []
+    assert data["clarifying_question"] is None
     assert data["command_candidate"]["practitioner_id"] == str(practitioner.id)
     assert data["command_candidate"]["patient_id"] == str(patient.id)
     assert data["normalization"]["constraint"]["practitioner_id"] == str(practitioner.id)

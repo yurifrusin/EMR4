@@ -479,7 +479,9 @@ function renderBernieInterpretPreview(contentEl, envelope) {
       const item = document.createElement("div");
       item.className = "bernie-interpret-issue";
       item.setAttribute("data-testid", "bernie-interpret-issue");
-      item.textContent = `${formatBernieCode(issue.code || "issue")}: ${issue.message || ""}`;
+      item.textContent = isBernieDevOrDebug()
+        ? `${formatBernieCode(issue.code || "issue")}: ${issue.message || ""}`
+        : (issue.message || "");
       issueList.appendChild(item);
     });
     preview.appendChild(issueList);
@@ -890,6 +892,14 @@ async function apiFetch(path, opts = {}) {
     throw new Error("401 Unauthorized");
   }
   return res;
+}
+
+function normalizeApiPath(path) {
+  const value = String(path || "");
+  if (value.startsWith("/api/v1/")) {
+    return value.slice("/api/v1".length);
+  }
+  return value;
 }
 
 async function loadAuditHistory(apptId) {
@@ -2898,7 +2908,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
           confirmed: true
         };
         try {
-          const response = await apiFetch(payload.confirm_endpoint, {
+          const response = await apiFetch(normalizeApiPath(payload.confirm_endpoint), {
             method: "POST",
             body: JSON.stringify(body)
           });

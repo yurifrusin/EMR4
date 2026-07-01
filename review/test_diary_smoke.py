@@ -805,7 +805,7 @@ def test_bernie_interpret_preview_renders_before_supervised_review(diary_page):
 @pytest.mark.parametrize(
     "result,expected_status,expected_detail",
     [
-        ("clarification_required", "Clarification Required", "Please provide practitioner_id before Bernie searches for slots."),
+        ("clarification_required", "Clarification Required", "Please tell Bernie which practitioner before searching for times."),
         ("blocked", "Needs details", "Autonomous booking language is blocked."),
     ],
 )
@@ -962,6 +962,7 @@ def test_bernie_confirm_submit_adapter_success(diary_page):
             req = route.request
             print(f"ROUTE INTERCEPT: method={req.method}, url={req.url}", file=sys.stderr)
             assert req.method == "POST"
+            assert "/api/v1/api/v1/" not in req.url
             post_data = req.post_data or "{}"
             print(f"ROUTE INTERCEPT: post_data={post_data}", file=sys.stderr)
             payload_received.append(json.loads(post_data))
@@ -1480,6 +1481,7 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
     base_url = f"{parsed.scheme}://{parsed.netloc}"
 
     dev_fixtures_requests = []
+    confirm_requests = []
     confirm_payloads = []
 
     def handle_dev_fixtures(route):
@@ -1502,6 +1504,7 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
     diary_page.route(
         "**/api/v1/appointments/proposals/create/confirm-bernie",
         lambda route: (
+            confirm_requests.append(route.request.url),
             confirm_payloads.append(json.loads(route.request.post_data)),
             route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
         )
@@ -1570,6 +1573,7 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
         diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["confirmed"] is True
+        assert "/api/v1/api/v1/" not in confirm_requests[-1]
 
     finally:
         diary_page.unroute("**/api/v1/appointments/dev/bernie-review-fixtures*")

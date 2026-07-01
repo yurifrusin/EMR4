@@ -1333,6 +1333,22 @@ def _resolve_patient_from_instruction(
     return None, []
 
 
+def _bernie_clarifying_question(missing_fields: list[str]) -> Optional[str]:
+    labels = []
+    for field in missing_fields:
+        if field == "practitioner_id":
+            labels.append("which practitioner")
+        elif field == "date_from":
+            labels.append("which day")
+        else:
+            labels.append(field.replace("_", " "))
+    if not labels:
+        return None
+    if len(labels) == 1:
+        return f"Please tell Bernie {labels[0]} before searching for times."
+    return f"Please tell Bernie {', '.join(labels[:-1])}, and {labels[-1]} before searching for times."
+
+
 def _resolve_bernie_interpretation_context(
     result: BernieBookingInstructionInterpretOut,
     body: BernieBookingInstructionInterpretIn,
@@ -1430,6 +1446,7 @@ def _resolve_bernie_interpretation_context(
         "summary": result.summary,
         "command_candidate": command,
         "missing_fields": missing_fields,
+        "clarifying_question": _bernie_clarifying_question(missing_fields),
         "safety_flags": safety_flags,
         "normalization": normalization,
         "warnings": warnings,
