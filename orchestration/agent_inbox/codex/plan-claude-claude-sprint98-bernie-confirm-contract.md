@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint98-bernie-confirm-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-01 12:14 +1000 |
 | Source HEAD | `ca8b293` |
 

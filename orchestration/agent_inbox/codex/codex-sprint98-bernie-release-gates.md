@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint98-bernie-release-gates` |
-| Status | submitted |
+| Status | integrated |
 | Created | 7c05164 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint98-bernie-release-gates --summary "Short plan summary"` |

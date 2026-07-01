@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint98-bernie-booking-loop-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

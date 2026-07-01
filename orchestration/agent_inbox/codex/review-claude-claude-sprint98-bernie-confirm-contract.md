@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint98-bernie-confirm-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

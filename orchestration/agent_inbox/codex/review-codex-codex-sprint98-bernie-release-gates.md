@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint98-bernie-release-gates` |
 | Source Task | `codex-sprint98-bernie-release-gates` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

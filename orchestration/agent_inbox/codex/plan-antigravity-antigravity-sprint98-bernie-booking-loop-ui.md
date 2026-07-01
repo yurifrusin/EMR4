@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint98-bernie-booking-loop-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-01 12:21 +1000 |
 | Source HEAD | `b3c4f76` |
 
