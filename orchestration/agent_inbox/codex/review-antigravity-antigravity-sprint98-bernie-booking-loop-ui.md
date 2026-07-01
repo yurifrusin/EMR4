@@ -10,7 +10,7 @@
 
 ## Review Request
 
-antigravity-sprint98-bernie-booking-loop-ui revised plan ready for Codex review
+Diary review UI now keeps ordinary copy calm, adds Choose different time from confirmation review, and covers ordinary confirm failures with review harness tests.
 
 ## Worker Completion Notes
 
