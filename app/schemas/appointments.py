@@ -547,7 +547,7 @@ class BernieBookingInstructionInterpretIn(BaseModel):
 
 class BernieBookingInterpreterMetadata(BaseModel):
     provider: Literal["disabled", "fake", "gemini_vertex"]
-    mode: Literal["disabled", "mocked", "live"]
+    mode: Literal["disabled", "mocked", "live", "deterministic_fallback"]
     live_provider: bool = False
 
 
