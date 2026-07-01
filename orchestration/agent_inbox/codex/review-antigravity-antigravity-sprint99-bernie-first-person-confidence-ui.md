@@ -10,7 +10,7 @@
 
 ## Review Request
 
-antigravity-sprint99-bernie-first-person-confidence-ui ready for Codex review
+antigravity-sprint99-bernie-first-person-confidence-ui plan ready for Codex review
 
 ## Worker Completion Notes
 
