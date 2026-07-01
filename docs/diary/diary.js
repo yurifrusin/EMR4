@@ -54,18 +54,132 @@ let bernieLatestIdentityEvidence = null;
 let bernieLatestReviewPayload = null;
 let bernieLatestCandidatePayload = null;
 let suppressAutoPreview = false;
+
+// ─── Sprint 100 Bernie State Machine Definition ───
+class BernieSession {
+  constructor() {
+    this.state = "INACTIVE"; // INACTIVE, CONTEXT_SELECTION, INSTRUCTION_ENTRY, INTERPRETING, CANDIDATE_SELECTION, SLOT_PREVIEW, CONFIRMING, CONFIRMED
+    this.referenceDate = null;
+    this.practitionerId = "";
+    this.patientId = "";
+    this.instructionText = "";
+    this.candidateSnapshot = null;
+    this.selectedCandidateIndex = null;
+    this.stagedBookingPreview = null;
+    this.confirmedBookingPreview = null;
+    this.confirmPayload = null;
+    this.confirmEndpoint = null;
+    this.interpretEnvelope = null;
+    this.latestReviewPayload = null;
+  }
+
+  init(practitionerId, patientId) {
+    this.state = (practitionerId && patientId) ? "INSTRUCTION_ENTRY" : "CONTEXT_SELECTION";
+    if (!this.referenceDate) {
+      const urlParams = new URLSearchParams(window.location.search);
+      this.referenceDate = urlParams.get("reference_date") || localDateKey(diaryDate);
+    }
+    this.practitionerId = practitionerId;
+    this.patientId = patientId;
+    this.syncToLegacy();
+  }
+
+  reset() {
+    this.state = "INACTIVE";
+    this.referenceDate = null;
+    this.practitionerId = "";
+    this.patientId = "";
+    this.instructionText = "";
+    this.candidateSnapshot = null;
+    this.selectedCandidateIndex = null;
+    this.stagedBookingPreview = null;
+    this.confirmedBookingPreview = null;
+    this.confirmPayload = null;
+    this.confirmEndpoint = null;
+    this.interpretEnvelope = null;
+    this.latestReviewPayload = null;
+    
+    // Sync with legacy globals
+    bernieInstructionText = "";
+    bernieInterpretResult = null;
+    bernieSelectedCandidateIndex = null;
+    bernieStagedBookingPreview = null;
+    bernieStagedBookingFresh = false;
+    bernieLatestIdentityEvidence = null;
+    bernieLatestReviewPayload = null;
+    bernieLatestCandidatePayload = null;
+  }
+
+  transitionTo(nextState) {
+    const validTransitions = {
+      INACTIVE: ["CONTEXT_SELECTION", "INSTRUCTION_ENTRY"],
+      CONTEXT_SELECTION: ["INSTRUCTION_ENTRY", "INACTIVE"],
+      INSTRUCTION_ENTRY: ["INTERPRETING", "CONTEXT_SELECTION", "INACTIVE"],
+      INTERPRETING: ["CANDIDATE_SELECTION", "SLOT_PREVIEW", "INSTRUCTION_ENTRY", "CONTEXT_SELECTION", "INACTIVE"],
+      CANDIDATE_SELECTION: ["SLOT_PREVIEW", "CONTEXT_SELECTION", "INSTRUCTION_ENTRY", "INACTIVE"],
+      SLOT_PREVIEW: ["CANDIDATE_SELECTION", "CONFIRMING", "CONTEXT_SELECTION", "INACTIVE"],
+      CONFIRMING: ["CONFIRMED", "SLOT_PREVIEW"],
+      CONFIRMED: ["INACTIVE", "INSTRUCTION_ENTRY", "CONTEXT_SELECTION"]
+    };
+
+    if (validTransitions[this.state] && !validTransitions[this.state].includes(nextState)) {
+      console.warn(`Invalid transition from ${this.state} to ${nextState}`);
+    }
+    this.state = nextState;
+  }
+
+  syncToLegacy() {
+    bernieInstructionText = this.instructionText;
+    bernieInterpretResult = this.interpretEnvelope;
+    bernieSelectedCandidateIndex = this.selectedCandidateIndex;
+    bernieStagedBookingPreview = this.stagedBookingPreview;
+    bernieLatestReviewPayload = this.latestReviewPayload;
+    bernieLatestCandidatePayload = this.candidateSnapshot;
+    if (this.latestReviewPayload) {
+      bernieLatestIdentityEvidence = this.latestReviewPayload.identity_evidence || null;
+    }
+  }
+
+  syncFromLegacy() {
+    this.instructionText = bernieInstructionText;
+    this.interpretEnvelope = bernieInterpretResult;
+    this.selectedCandidateIndex = bernieSelectedCandidateIndex;
+    this.stagedBookingPreview = bernieStagedBookingPreview;
+    this.latestReviewPayload = bernieLatestReviewPayload;
+    this.candidateSnapshot = bernieLatestCandidatePayload;
+  }
+
+  handleContextChanged(newApptId) {
+    this.reset();
+    const { appt } = getActiveBernieSelectedAppointment();
+    if (appt) {
+      const apptPracId = appt.practitioner_id || appt.practitioner?.id || (appt.practitioner?.ahpra_number ? ahpraToPractitionerMap[appt.practitioner.ahpra_number]?.id : null);
+      const apptPatId = appt.patient_id || appt.patient?.id;
+      if (apptPracId && apptPatId && !isPatientIdentityUnconfirmed(appt)) {
+        this.init(apptPracId, apptPatId);
+        return;
+      }
+    }
+    this.init("", "");
+  }
+}
+const bernieSession = new BernieSession();
+let lastActiveAppointmentId = null;
+
 const checkinDefaultCache = new Map();
 
 const BERNIE_STATUS_COPY = {
   blocked: "Needs details",
   candidate_selection_required: "Choose a time",
-  confirmation_ready: "Ready to book"
+  confirmation_ready: "Ready to book",
+  clinic_day_exhausted: "Choose another day"
 };
 
 const BERNIE_HEADLINE_COPY = {
   blocked: "Add the missing details",
   candidate_selection_required: "Bernie found these times",
-  confirmation_ready: "Ready to book this appointment"
+  confirmation_ready: "Ready to book this appointment",
+  clinic_day_exhausted: "No times left today"
 };
 
 function formatBernieCode(value) {
@@ -119,6 +233,9 @@ function bernieReviewActionCopy(payload) {
   }
   if (payload.status === "confirmation_ready") {
     return "Review the details before confirming.";
+  }
+  if (payload.status === "clinic_day_exhausted") {
+    return "That time window has passed for today. Tell me another day or a later time.";
   }
   return "Add the missing details and ask Bernie to search again. Nothing is booked yet.";
 }
@@ -259,14 +376,20 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
 
   const practitionerId = allowHarnessDefaults ? (queryPractitionerId || "prac-1") : (explicitContext.practitionerId || queryPractitionerId);
   const patientId = allowHarnessDefaults ? (queryPatientId || "smoke-pat-1") : (explicitContext.patientId || queryPatientId);
-  const referenceDate = allowHarnessDefaults ? (queryReferenceDate || "2026-06-27") : (queryReferenceDate || localDateKey(diaryDate));
+  
+  if (isBerniePilotActive) {
+    if (!bernieSession.referenceDate) {
+      bernieSession.referenceDate = allowHarnessDefaults ? (queryReferenceDate || "2026-06-27") : (queryReferenceDate || localDateKey(diaryDate));
+    }
+    if (bernieSession.state === "INACTIVE") {
+      bernieSession.init(practitionerId, patientId);
+    }
+  }
+  const referenceDate = bernieSession.referenceDate || (allowHarnessDefaults ? (queryReferenceDate || "2026-06-27") : (queryReferenceDate || localDateKey(diaryDate)));
 
   const blocks = [];
   if (!allowManualContext && explicitContext.sourceAppointmentId && selectedContext.apptId !== explicitContext.sourceAppointmentId) {
-    bernieInstructionText = "";
-    bernieInterpretResult = null;
-    bernieSelectedCandidateIndex = null;
-    bernieStagedBookingPreview = null;
+    bernieSession.reset();
     setBerniePilotContextValues({ practitionerId: "", patientId: "", sourceAppointmentId: "" });
   }
   if (!referenceDate) {
@@ -1367,42 +1490,146 @@ function renderBernieStagedBookingPreview(columnBody, col, dayStartMins, interva
   }, 50);
 }
 
-async function stageBernieCandidateForReview(slot, index) {
-  if (!slot) return;
-  suppressAutoPreview = false;
-  const command = bernieInterpretResult?.command_candidate || {};
-  const identity = bernieLatestIdentityEvidence || {};
-  const reviewPayload = bernieLatestReviewPayload || {};
-  const targetDate = dateFromLocalKey(slot.appointment_date);
+function renderBernieConfirmedState(contentEl) {
+  contentEl.innerHTML = "";
+  
+  const container = document.createElement("div");
+  container.className = "bernie-confirmed-container";
+  container.setAttribute("data-testid", "bernie-confirmed-container");
+  
+  const successBadge = document.createElement("div");
+  successBadge.className = "bernie-status-badge confirmed";
+  successBadge.setAttribute("data-testid", "bernie-review-status");
+  successBadge.textContent = "Confirmed";
+  container.appendChild(successBadge);
+  
+  const headline = document.createElement("h3");
+  headline.className = "bernie-review-headline confirmed";
+  headline.setAttribute("data-testid", "bernie-review-headline");
+  
+  const preview = bernieSession.confirmedBookingPreview || bernieSession.stagedBookingPreview || {};
+  const patient = preview.patient_label || "Patient";
+  const date = preview.appointment_date || "";
+  const rawTime = preview.start_time_local || "";
+  const time = rawTime.slice(0, 5);
+  const practitioner = preview.practitioner_label || "Practitioner";
+  
+  headline.textContent = `Booking confirmed successfully for ${patient} on ${date} at ${time} with ${practitioner}.`;
+  container.appendChild(headline);
+  
+  const resetBtn = document.createElement("button");
+  resetBtn.className = "btn-bernie-reset";
+  resetBtn.setAttribute("data-testid", "bernie-review-reset-button");
+  resetBtn.textContent = "Start new booking";
+  resetBtn.addEventListener("click", () => {
+    bernieSession.reset();
+    isBerniePilotActive = true;
+    loadBernieLiveReview();
+  });
+  container.appendChild(resetBtn);
+  
+  contentEl.appendChild(container);
+}
+
+async function chooseAnotherTime() {
+  bernieSession.transitionTo("CANDIDATE_SELECTION");
+  bernieSession.selectedCandidateIndex = null;
+  bernieSession.stagedBookingPreview = null;
+  
+  bernieSelectedCandidateIndex = null;
+  bernieStagedBookingPreview = null;
+  bernieStagedBookingFresh = false;
+  suppressAutoPreview = true;
+  
+  await loadDiary(true);
+  
+  if (bernieSession.candidateSnapshot) {
+    renderBernieReview(bernieSession.candidateSnapshot, bernieSession.interpretEnvelope);
+  } else {
+    renderBernieReview({ status: 'candidate_selection_required', candidate_slots: [] }, bernieSession.interpretEnvelope);
+  }
+}
+
+async function selectCandidate(slot, index) {
+  bernieSession.transitionTo("SLOT_PREVIEW");
+  bernieSession.selectedCandidateIndex = index;
   bernieSelectedCandidateIndex = index;
-  bernieStagedBookingFresh = true;
-  bernieStagedBookingPreview = {
-    appointment_date: slot.appointment_date,
-    start_time_local: slot.start_time_local,
-    duration_minutes: slot.duration_minutes || command.duration_minutes || 15,
-    practitioner_id: command.practitioner_id || "",
-    practitioner_label: berniePractitionerLabelFromPayload(reviewPayload),
-    patient_id: command.patient_id || "",
-    patient_label: berniePatientLabelFromPayload(reviewPayload) || identity.patient_label || (
-      command.patient_id
-        ? "Linked patient candidate - verify identity before confirming"
-        : "Provisional patient - identity not linked yet"
-    ),
-    identity_message: identity.staff_prompt || (
-      command.patient_id
-        ? "Verify DOB and Medicare/card details if identity evidence is incomplete."
-        : "Select or verify the patient record before confirming this booking."
-    )
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const isSmoke = urlParams.get("smoke") === "true";
+  const devReviewParam = urlParams.get("bernie_dev_review");
+  const allowHarnessDefaults = (isSmoke || devReviewParam === "true") && urlParams.get("bernie_context_form") !== "true";
+  const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
+
+  const contentEl = document.getElementById("bernie-review-content");
+  if (contentEl) {
+    contentEl.innerHTML = "";
+    renderBernieInstructionInput(contentEl);
+    if (bernieSession.interpretEnvelope) {
+      renderBernieInterpretPreview(contentEl, bernieSession.interpretEnvelope);
+    }
+    const loader = document.createElement("div");
+    loader.className = "bernie-loading";
+    loader.textContent = "Preparing preview...";
+    contentEl.appendChild(loader);
+  }
+
+  const command = bernieSession.candidateSnapshot?.command_candidate || bernieInterpretResult?.command_candidate || request.body.command;
+  const supervisedBody = {
+    reference_date: bernieSession.referenceDate,
+    command: command,
+    context_frames: buildBernieContextFrames(request.body),
+    selected_candidate_index: index,
+    reason: "Bernie supervised booking"
   };
 
-  if (targetDate && !isSameClinicDay(diaryDate, targetDate)) {
-    diaryDate = targetDate;
-    updateDateLabel();
-    await loadDiary(false, { scrollToBerniePreview: true });
-  } else {
-    await loadDiary(true, { scrollToBerniePreview: true });
+  try {
+    const res = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
+      method: "POST",
+      body: JSON.stringify(supervisedBody)
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      const payload = data.staff_review;
+      
+      const identity = payload.identity_evidence || {};
+      
+      bernieSession.stagedBookingPreview = {
+        appointment_date: payload.selected_slot.appointment_date,
+        start_time_local: payload.selected_slot.start_time_local,
+        duration_minutes: payload.selected_slot.duration_minutes || command.duration_minutes || 15,
+        practitioner_id: command.practitioner_id || payload.selected_slot.practitioner_id || "",
+        practitioner_label: berniePractitionerLabelFromPayload(payload),
+        patient_id: command.patient_id || payload.selected_slot.patient_id || "",
+        patient_label: berniePatientLabelFromPayload(payload) || identity.patient_label || "Patient details to confirm",
+        identity_message: identity.staff_prompt || "Verify patient details before confirming."
+      };
+      
+      bernieSession.latestReviewPayload = payload;
+      bernieSession.syncToLegacy();
+      bernieStagedBookingFresh = true;
+
+      const targetDate = dateFromLocalKey(payload.selected_slot.appointment_date);
+      if (targetDate && !isSameClinicDay(diaryDate, targetDate)) {
+        diaryDate = targetDate;
+        updateDateLabel();
+        await loadDiary(false, { scrollToBerniePreview: true });
+      } else {
+        await loadDiary(true, { scrollToBerniePreview: true });
+      }
+
+      renderBernieReview(payload, bernieInterpretResult);
+    } else {
+      console.error("Supervised booking failed");
+    }
+  } catch (err) {
+    console.error("Supervised booking network error", err);
   }
-  await loadBernieLiveReview();
+}
+
+async function stageBernieCandidateForReview(slot, index) {
+  await selectCandidate(slot, index);
 }
 
 function jumpToNow() {
@@ -2715,6 +2942,12 @@ function renderBernieIdentityEvidence(contentEl, evidence, patientEvidence = nul
 function renderBernieReview(payload, interpretEnvelope = null) {
   const contentEl = document.getElementById("bernie-review-content");
   if (!contentEl) return;
+
+  if (bernieSession.state === "CONFIRMED") {
+    renderBernieConfirmedState(contentEl);
+    return;
+  }
+
   contentEl.innerHTML = "";
   bernieLatestIdentityEvidence = payload.identity_evidence || null;
   bernieLatestReviewPayload = payload || null;
@@ -2752,6 +2985,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
       if (isDifferent) {
         bernieStagedBookingPreview = newPreview;
+        bernieSession.stagedBookingPreview = newPreview;
         autoStaged = true;
 
         const targetDate = dateFromLocalKey(newPreview.appointment_date);
@@ -2770,6 +3004,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       (payload.patient_candidates && payload.patient_candidates.length > 0)) {
     if (bernieStagedBookingPreview && bernieStagedBookingPreview.isProvisional) {
       bernieStagedBookingPreview = null;
+      bernieSession.stagedBookingPreview = null;
       autoStaged = true;
     }
   }
@@ -2894,7 +3129,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   renderBernieIdentityEvidence(contentEl, payload.identity_evidence, payload.patient_evidence, payload);
 
   // 4. Content Section depending on Status
-  if (payload.status === "blocked") {
+  if (payload.status === "blocked" || payload.status === "clinic_day_exhausted") {
     const isDevOrDebug = isBernieDevOrDebug();
     const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
 
@@ -2910,9 +3145,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     list.setAttribute("data-testid", "bernie-review-blocks-list");
 
     let renderedFriendlyBlock = false;
-      payload.blocks.forEach(block => {
-        if (PROVIDER_UNAVAILABLE_CODES.includes(block.code) && !isDevOrDebug) {
-          if (!renderedFriendlyBlock) {
+    payload.blocks.forEach(block => {
+      if (PROVIDER_UNAVAILABLE_CODES.includes(block.code) && !isDevOrDebug) {
+        if (!renderedFriendlyBlock) {
           const item = document.createElement("div");
           item.className = "bernie-block-item";
           item.setAttribute("data-testid", "bernie-review-block-item");
@@ -2928,24 +3163,26 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       item.setAttribute("data-testid", "bernie-review-block-item");
 
       let message = block.message || "";
-        if (!isDevOrDebug) {
-          let friendlyReason = "";
-          if (block.code === "interpreted_practitioner_context_mismatch") {
-            message = "I found a different practitioner from the diary context. Please check the practitioner before continuing.";
-          } else if (block.code === "missing_practitioner_id") {
-            message = "I need a practitioner before I can search.";
-          } else if (block.code === "missing_patient_id") {
-            message = "I need a patient before I can prepare this booking.";
-          } else if (block.code === "missing_reference_date") {
-            message = "I need a date before I can search.";
-          } else {
-            friendlyReason = message.replace(/\(UUID\)/gi, "").replace(/ID/g, "").replace(/uuid/gi, "").replace(/supervised booking/gi, "booking").trim();
-            if (friendlyReason && friendlyReason[0] === friendlyReason[0].toUpperCase() && friendlyReason[1] === friendlyReason[1].toLowerCase()) {
-              friendlyReason = friendlyReason[0].toLowerCase() + friendlyReason.slice(1);
-            }
-            message = `I can't proceed with this booking because ${friendlyReason}.`;
+      if (!isDevOrDebug) {
+        let friendlyReason = "";
+        if (block.code === "interpreted_practitioner_context_mismatch") {
+          message = "I found a different practitioner from the diary context. Please check the practitioner before continuing.";
+        } else if (block.code === "missing_practitioner_id") {
+          message = "I need a practitioner before I can search.";
+        } else if (block.code === "missing_patient_id") {
+          message = "I need a patient before I can prepare this booking.";
+        } else if (block.code === "missing_reference_date") {
+          message = "I need a date before I can search.";
+        } else if (block.code === "clinic_day_exhausted") {
+          message = "There are no suitable times left today. Tell me another day or a later time window.";
+        } else {
+          friendlyReason = message.replace(/\(UUID\)/gi, "").replace(/ID/g, "").replace(/uuid/gi, "").replace(/supervised booking/gi, "booking").trim();
+          if (friendlyReason && friendlyReason[0] === friendlyReason[0].toUpperCase() && friendlyReason[1] === friendlyReason[1].toLowerCase()) {
+            friendlyReason = friendlyReason[0].toLowerCase() + friendlyReason.slice(1);
           }
+          message = `I can't proceed with this booking because ${friendlyReason}.`;
         }
+      }
       if (isDevOrDebug) {
         item.textContent = `${formatBernieCode(block.code)}: ${message}`;
       } else {
@@ -2997,7 +3234,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       item.setAttribute("aria-pressed", index === bernieSelectedCandidateIndex ? "true" : "false");
       item.setAttribute("aria-label", `Preview candidate slot ${slot.appointment_date} at ${slot.start_time_local}`);
       item.addEventListener("click", () => {
-        stageBernieCandidateForReview(slot, index);
+        selectCandidate(slot, index);
       });
 
       const timeSpan = document.createElement("strong");
@@ -3076,13 +3313,8 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     changeTimeBtn.className = "btn-bernie-change-time";
     changeTimeBtn.setAttribute("data-testid", "bernie-review-change-slot-button");
     changeTimeBtn.textContent = "Choose another time";
-    changeTimeBtn.addEventListener("click", async () => {
-      bernieSelectedCandidateIndex = null;
-      bernieStagedBookingPreview = null;
-      bernieStagedBookingFresh = false;
-      suppressAutoPreview = true;
-      renderBernieReview(bernieLatestCandidatePayload || { status: 'candidate_selection_required', candidate_slots: [] }, bernieInterpretResult);
-      await loadDiary(true);
+    changeTimeBtn.addEventListener("click", () => {
+      chooseAnotherTime();
     });
     confirmBox.appendChild(changeTimeBtn);
 
@@ -3117,7 +3349,10 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     // Event listener to simulate or execute confirmation
     confirmBtn.addEventListener("click", async () => {
       if (confirmBtn.disabled) return;
+      
+      bernieSession.transitionTo("CONFIRMING");
       confirmBtn.disabled = true;
+      changeTimeBtn.disabled = true;
       successMsg.classList.add("hidden");
       errorMsg.classList.add("hidden");
 
@@ -3132,12 +3367,19 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             body: JSON.stringify(body)
           });
           if (response.ok) {
-            successMsg.classList.remove("hidden");
+            bernieSession.transitionTo("CONFIRMED");
+            bernieSession.confirmedBookingPreview = bernieSession.stagedBookingPreview;
+            bernieSession.stagedBookingPreview = null;
             bernieStagedBookingPreview = null;
             bernieStagedBookingFresh = false;
             bernieSelectedCandidateIndex = null;
             await loadDiary(true);
+            renderBernieConfirmedState(contentEl);
           } else {
+            bernieSession.transitionTo("SLOT_PREVIEW");
+            confirmBtn.disabled = false;
+            changeTimeBtn.disabled = false;
+            
             const isDevOrDebug = isBernieDevOrDebug();
             let detail = "";
             try {
@@ -3156,9 +3398,12 @@ function renderBernieReview(payload, interpretEnvelope = null) {
               errorMsg.textContent = `Booking could not be confirmed: ${detail}`;
             }
             errorMsg.classList.remove("hidden");
-            confirmBtn.disabled = false;
           }
         } catch (err) {
+          bernieSession.transitionTo("SLOT_PREVIEW");
+          confirmBtn.disabled = false;
+          changeTimeBtn.disabled = false;
+          
           const isDevOrDebug = isBernieDevOrDebug();
           const errMsg = err.message || String(err);
           if (!isDevOrDebug) {
@@ -3171,22 +3416,33 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             errorMsg.textContent = `Booking could not be confirmed: ${errMsg}`;
           }
           errorMsg.classList.remove("hidden");
-          confirmBtn.disabled = false;
         }
       } else {
         if (payload.confirm_payload) {
           payload.confirm_payload.confirmed = true;
         }
-        successMsg.classList.remove("hidden");
+        bernieSession.transitionTo("CONFIRMED");
+        bernieSession.confirmedBookingPreview = bernieSession.stagedBookingPreview;
+        bernieSession.stagedBookingPreview = null;
         bernieStagedBookingPreview = null;
         bernieStagedBookingFresh = false;
         bernieSelectedCandidateIndex = null;
         await loadDiary(true);
+        renderBernieConfirmedState(contentEl);
       }
     });
   }
 
   if (isBernieDevOrDebug()) {
+    const detailsDiag = document.createElement("details");
+    detailsDiag.className = "bernie-dev-diagnostic-details";
+    detailsDiag.setAttribute("data-testid", "bernie-dev-diagnostic-details");
+    
+    const summaryDiag = document.createElement("summary");
+    summaryDiag.className = "bernie-dev-diagnostic-summary";
+    summaryDiag.textContent = "Developer setup details";
+    detailsDiag.appendChild(summaryDiag);
+
     const diag = document.createElement("div");
     diag.className = "bernie-dev-diagnostic";
     diag.setAttribute("data-testid", "bernie-dev-diagnostic");
@@ -3203,7 +3459,8 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       diagList.appendChild(item);
     });
     diag.appendChild(diagList);
-    contentEl.appendChild(diag);
+    detailsDiag.appendChild(diag);
+    contentEl.appendChild(detailsDiag);
   }
 }
 
@@ -3666,6 +3923,8 @@ function renderBernieInstructionInput(contentEl) {
     if (!text) return;
 
     bernieInstructionText = text;
+    bernieSession.instructionText = text;
+    bernieSession.transitionTo("INTERPRETING");
     suppressAutoPreview = false;
     button.disabled = true;
     textarea.disabled = true;
@@ -3676,7 +3935,7 @@ function renderBernieInstructionInput(contentEl) {
         method: "POST",
         body: JSON.stringify({
           instruction: bernieInstructionText,
-          reference_date: localDateKey(diaryDate),
+          reference_date: bernieSession.referenceDate || localDateKey(diaryDate),
           context_frames: buildBernieContextFrames(request.body)
         })
       });
@@ -3707,6 +3966,7 @@ function renderBernieInstructionInput(contentEl) {
       };
     }
 
+    bernieSession.interpretEnvelope = bernieInterpretResult;
     loadBernieLiveReview();
   });
 }
@@ -3719,6 +3979,47 @@ async function loadBernieLiveReview() {
 
   const contentEl = document.getElementById("bernie-review-content");
 
+  const activeEl = document.querySelector(".appt-active");
+  const currentActiveId = activeEl ? activeEl.getAttribute("data-id") : null;
+  if (currentActiveId !== lastActiveAppointmentId) {
+    lastActiveAppointmentId = currentActiveId;
+    bernieSession.handleContextChanged(currentActiveId);
+  }
+
+  // If in CONFIRMED state, render the confirmed screen
+  if (bernieSession.state === "CONFIRMED") {
+    if (contentEl) {
+      renderBernieConfirmedState(contentEl);
+    }
+    return;
+  }
+
+  // If in CANDIDATE_SELECTION and already have candidateSnapshot, render without fetching
+  if (bernieSession.state === "CANDIDATE_SELECTION" && bernieSession.candidateSnapshot) {
+    if (contentEl) {
+      contentEl.innerHTML = "";
+      renderBernieInstructionInput(contentEl);
+      if (bernieSession.interpretEnvelope) {
+        renderBernieInterpretPreview(contentEl, bernieSession.interpretEnvelope);
+      }
+    }
+    renderBernieReview(bernieSession.candidateSnapshot, bernieSession.interpretEnvelope);
+    return;
+  }
+
+  // If in SLOT_PREVIEW and already have a staged preview and review payload, render without fetching
+  if (bernieSession.state === "SLOT_PREVIEW" && bernieSession.stagedBookingPreview && bernieSession.latestReviewPayload) {
+    if (contentEl) {
+      contentEl.innerHTML = "";
+      renderBernieInstructionInput(contentEl);
+      if (bernieSession.interpretEnvelope) {
+        renderBernieInterpretPreview(contentEl, bernieSession.interpretEnvelope);
+      }
+    }
+    renderBernieReview(bernieSession.latestReviewPayload, bernieSession.interpretEnvelope);
+    return;
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = urlParams.get("smoke") === "true";
   const devReviewParam = urlParams.get("bernie_dev_review");
@@ -3726,6 +4027,7 @@ async function loadBernieLiveReview() {
   const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
 
   if (!request.ready) {
+    bernieSession.transitionTo("CONTEXT_SELECTION");
     renderBernieReview(request.payload);
     if (!allowHarnessDefaults) {
       renderBerniePilotContextForm(request.payload.blocks);
@@ -3735,6 +4037,7 @@ async function loadBernieLiveReview() {
 
   // If there is no instruction text, render the empty input state
   if (!bernieInstructionText) {
+    bernieSession.transitionTo("INSTRUCTION_ENTRY");
     if (contentEl) {
       contentEl.innerHTML = "";
       renderBernieInstructionInput(contentEl);
@@ -3780,11 +4083,14 @@ async function loadBernieLiveReview() {
 
   let payload = null;
   const supervisedBody = {
-    reference_date: request.body.reference_date,
+    reference_date: bernieSession.referenceDate || request.body.reference_date,
     command: bernieInterpretResult.command_candidate,
     context_frames: buildBernieContextFrames(request.body)
   };
-  if (request.body.selected_candidate_index !== undefined) {
+  if (bernieSession.selectedCandidateIndex !== null && !isNaN(bernieSession.selectedCandidateIndex)) {
+    supervisedBody.selected_candidate_index = bernieSession.selectedCandidateIndex;
+    supervisedBody.reason = "Bernie supervised booking";
+  } else if (request.body.selected_candidate_index !== undefined) {
     supervisedBody.selected_candidate_index = request.body.selected_candidate_index;
     supervisedBody.reason = request.body.reason;
   }
@@ -3798,6 +4104,16 @@ async function loadBernieLiveReview() {
     if (res.ok) {
       const data = await res.json();
       payload = data.staff_review;
+      
+      // Update state machine and snapshot
+      if (payload.status === "candidate_selection_required") {
+        bernieSession.candidateSnapshot = payload;
+        bernieSession.transitionTo("CANDIDATE_SELECTION");
+      } else if (payload.status === "confirmation_ready") {
+        bernieSession.transitionTo("SLOT_PREVIEW");
+        bernieSession.latestReviewPayload = payload;
+      }
+      bernieSession.syncToLegacy();
     } else {
       const errText = await res.text();
       console.error("Bernie live review error", res.status, errText);
