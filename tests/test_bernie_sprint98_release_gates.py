@@ -197,7 +197,7 @@ def test_confirm_bernie_invalid_practitioner_returns_typed_failure_not_not_found
     assert data["autonomy_tier"] == "blocked"
     assert "Not Found" not in resp.text
     assert "not found" in resp.text.lower()
-    assert data["blocks"][0]["code"] == "create_proposal_revalidation_blocked"
     block_codes = {block["code"] for block in data["blocks"]}
     assert "practitioner_not_found" in block_codes
+    assert "create_proposal_revalidation_blocked" not in block_codes
     assert _row_counts(db) == before

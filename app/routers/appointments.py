@@ -293,7 +293,7 @@ def _check_create_command_entities(
             blocks.append(AppointmentProposalIssue(
                 code="patient_not_found",
                 severity="blocked",
-                message="The patient linked to this proposal no longer exists or is not accessible.",
+                message="The patient linked to this proposal was not found or is not accessible.",
             ))
     if not db.query(Practitioner.id).filter(
         Practitioner.id == command.practitioner_id,
@@ -302,7 +302,7 @@ def _check_create_command_entities(
         blocks.append(AppointmentProposalIssue(
             code="practitioner_not_found",
             severity="blocked",
-            message="The practitioner linked to this proposal no longer exists or is not accessible.",
+            message="The practitioner linked to this proposal was not found or is not accessible.",
         ))
     if command.appointment_type_id is not None:
         if not db.query(AppointmentType.id).filter(
@@ -312,7 +312,7 @@ def _check_create_command_entities(
             blocks.append(AppointmentProposalIssue(
                 code="appointment_type_not_found",
                 severity="blocked",
-                message="The appointment type linked to this proposal no longer exists or is not accessible.",
+                message="The appointment type linked to this proposal was not found or is not accessible.",
             ))
     if command.location_id is not None:
         if not db.query(PracticeLocation.id).filter(
@@ -323,7 +323,7 @@ def _check_create_command_entities(
             blocks.append(AppointmentProposalIssue(
                 code="location_not_found",
                 severity="blocked",
-                message="The location linked to this proposal no longer exists or is no longer active.",
+                message="The location linked to this proposal was not found or is no longer active.",
             ))
     return blocks
 

@@ -8,6 +8,60 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 98: Bernie Booking Loop Integrity and API Release Gates |
+| Integrated through | Typed backend confirm failure contract, calm Diary confirmation recovery, Choose another time loop, and blocking release gates for the simplest booking prompt path |
+| Status | Integrated locally on sprint branch, verified; pending master/handoff push and live Diary review |
+| Last updated | 2026-07-01 |
+
+## What Changed
+
+- Incorporated the API/YAML design direction into the API-spine programme: YAML remains a declarative operating layer for capability manifests, setup plans, agent charters, evidence-source policies, and deployment/profile values, while GraphQL/REST/event contracts remain the executable API spine.
+- Added Sprint 98 release gates so *bernie* booking work cannot close if the simple Margaret Thompson / Dr Shera prompt path fails, if backend confirm leaks raw `Not Found`, or if the selected-slot state gives reception no route back to candidate times.
+- Updated the backend confirm path for *bernie* create proposals so stale or out-of-scope patient, practitioner, appointment type, and location references return structured blocked review payloads instead of surfacing raw HTTP 404 exceptions.
+- Kept those backend failures precise: for example an invalid practitioner now returns `practitioner_not_found`, not a generic wrapper code.
+- Updated the Diary review UI so ordinary reception mode shows calm confirm-failure copy:
+  - `This slot is no longer available. Please choose a different time.`
+  - `We couldn't confirm this booking. Please try again or select another time.`
+- Added a `Choose another time` action from confirmation-ready review state back to candidate selection without making a confirm call.
+- Kept developer diagnostics behind debug/dev mode; ordinary mode continues to avoid raw snake_case setup codes.
+- Preserved the staged provisional diary-card pulse in the dedicated visual smoke path, with reduced-motion coverage.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_smoke_bernie_interpreter_script.py tests\test_bernie_sprint98_release_gates.py tests\test_bernie_sprint98_confirm_contract.py -q` passed: `16 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q` passed: `63 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m py_compile scripts\smoke_bernie_interpreter.py tests\test_smoke_bernie_interpreter_script.py tests\test_bernie_sprint98_release_gates.py tests\test_bernie_sprint98_confirm_contract.py app\routers\appointments.py` passed.
+- `git diff --check` passed.
+
+## Recommended User Review
+
+One live Diary check remains useful after deployment because Sprint 98 deliberately targets the screenshot-level failure Yuri reported:
+
+1. Hard refresh the live Diary/Office dialog after GitHub Pages deploys and confirm the page loads `diary.js?v=136` and `diary.css?v=122`.
+2. Open `Bernie`.
+3. Type `Make an appointment for Margaret Thompson for after 3 today with Dr Shera.`
+4. Click `Find times`.
+5. Expected result: *bernie* should understand the patient/practitioner names, search available times, and avoid showing `Please provide practitioner_id`, raw UUID language, or `Live booking-instruction interpretation failed closed`.
+6. Click one candidate time.
+7. Expected result: the selected slot appears clearly in the Diary as a proposed appointment, the review pane shows patient and appointment details, and there is both a `Confirm booking` button and a `Choose another time` button.
+8. Click `Choose another time` and confirm the candidate list returns and no booking is created.
+9. Repeat if desired and click `Confirm booking` only when you are happy to create a dev booking. Expected result: either the booking is confirmed or, if the slot has gone stale, reception sees calm retry/select-another-time copy rather than raw backend text.
+
+## Not Required Before Moving On
+
+- No Caller ID, OPV/PVM, Medicare Online, phone-system integration, or production GCP setup is required for Sprint 98.
+- No practice-manager *davida*, *consultant*, Cochrane, RACGP, or broader API-spine implementation is included in this sprint beyond programme documentation and release-gate framing.
+
+## Known Follow-Up
+
+- After Yuri's live check, the next recommended sprint is the root-to-branch API-spine design sprint: GraphQL read/context graph, command mutation contracts, agent capability manifests, audit/evidence spine, and dev/prod profile strategy.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Previous Closeout - Sprint 97
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 97: Bernie Basic Prompt Reliability and Release Gates |
 | Integrated through | Deterministic fallback for live interpreter outages, receptionist-friendly provider-unavailable UI, route-intercepted test labeling, and blocking Bernie release gates |
 | Status | Integrated, verified, pushed, deployed, mirrored, and audited |

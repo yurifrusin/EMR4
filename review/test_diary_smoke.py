@@ -4311,8 +4311,8 @@ def test_bernie_choose_different_time_restores_candidates(diary_page):
         # choose another time, with no confirm call.
         assert len(calls) == 2
 
-        # Click "Choose different time"
-        diary_page.click("[data-testid='bernie-review-change-time-button']")
+        # Click "Choose another time"
+        diary_page.click("[data-testid='bernie-review-change-slot-button']")
 
         # Wait for candidates list to be restored
         diary_page.wait_for_selector("[data-testid='bernie-review-candidates-list']", state="visible", timeout=5000)

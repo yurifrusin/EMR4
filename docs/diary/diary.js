@@ -2846,8 +2846,8 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     const changeTimeBtn = document.createElement("button");
     changeTimeBtn.type = "button";
     changeTimeBtn.className = "btn-bernie-change-time";
-    changeTimeBtn.setAttribute("data-testid", "bernie-review-change-time-button");
-    changeTimeBtn.textContent = "Choose different time";
+    changeTimeBtn.setAttribute("data-testid", "bernie-review-change-slot-button");
+    changeTimeBtn.textContent = "Choose another time";
     changeTimeBtn.addEventListener("click", async () => {
       bernieSelectedCandidateIndex = null;
       bernieStagedBookingPreview = null;
