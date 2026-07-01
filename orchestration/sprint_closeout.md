@@ -8,6 +8,65 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 97: Bernie Basic Prompt Reliability and Release Gates |
+| Integrated through | Deterministic fallback for live interpreter outages, receptionist-friendly provider-unavailable UI, route-intercepted test labeling, and blocking Bernie release gates |
+| Status | Integrated locally and verified; push, deployment observation, mirror realignment, and audit pending |
+| Last updated | 2026-07-01 |
+
+## What Changed
+
+- Added deterministic fallback for the `gemini_vertex` Bernie booking interpreter when the live provider path is unavailable, with strict fail-closed still available by explicitly disabling fallback.
+- Added natural receptionist time parsing for phrases such as `after 3`, `after 2 pm`, `before 3:45`, `before 3.45`, and `between 2 pm and 3:45`, normalizing to `HH:MM` before slot-search validation.
+- Kept the interpreter route non-mutating: it still does not search slots, create proposals, confirm bookings, or write appointment audit rows.
+- Added provider readiness metadata so release checks can distinguish live-provider availability from deterministic fallback readiness.
+- Updated Bernie ordinary-mode UI so provider-unavailable/setup failures do not expose raw internal codes, structured-field instructions, or manual-ID language to reception staff.
+- Kept developer diagnostics visible only behind `bernie_debug=true` or `bernie_dev_review=true`.
+- Renamed route-intercepted Bernie diary smoke helpers/tests so they are no longer described as live checks.
+- Added `orchestration/bernie_release_gates.md` and a protocol alert making the Margaret Thompson / Dr Shera ordinary prompt a blocking release gate for Bernie booking work.
+- Added smoke-script assertions for provider readiness, interpreter mode, and parsed earliest/latest times.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_smoke_bernie_interpreter_script.py tests\test_bernie_sprint97_interpreter_readiness.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_slot_normalizer.py -q` passed: `71 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe scripts\smoke_bernie_interpreter.py --provider fake --instruction "Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45" --reference-date 2026-07-01 --expect-result clarification_required --expect-earliest-time 14:00 --expect-latest-time 15:45 --expect-mode mocked` passed.
+- `.venv\Scripts\python.exe scripts\smoke_bernie_interpreter.py --provider gemini_vertex --allow-live --check-readiness --expect-ready true` passed and reported `live_provider_ok: true`, `fallback_active: true`, `mode: live`.
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: `57 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
+- `.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\services\bernie_booking_interpreter.py scripts\smoke_bernie_interpreter.py tests\test_bernie_sprint97_interpreter_readiness.py` passed.
+- `git diff --check origin/master...HEAD` passed.
+
+## Recommended User Review
+
+One live Diary check remains useful after deployment because this sprint targets the exact browser failure Yuri reported:
+
+1. Hard refresh the live Diary/Office dialog after GitHub Pages deploys and confirm the page loads `diary.js?v=135` and `diary.css?v=121`.
+2. Open `Bernie`.
+3. Type `Make an appointment for Margaret Thompson for after 3 today with Dr Shera.`
+4. Click `Find times`.
+5. Expected result: Bernie should search and show available times, not `Live booking-instruction interpretation failed closed`, not `Please use structured booking fields`, and not raw provider/setup codes.
+6. Click one time and confirm the proposed slot is shown on the diary with calm provisional styling. Do not click `Confirm booking` unless you genuinely want the dev booking created.
+7. Suspicious signs: `Booking Interpreter Provider Unavailable`, raw snake_case codes in ordinary mode, no available times when Dr Shera has free slots, proposed slot not visible after choosing a time, or any booking created before clicking `Confirm booking`.
+
+## Not Required Before Moving On
+
+- No live Caller ID, phone-system, OPV/PVM/IHI, Medicare Online, taskpane, Command Centre, billing, SMS, or resource-admin review is required for Sprint 97.
+- No database migration or manual data repair is required.
+- No production GCP console action is required by this sprint; provider readiness is now checked locally and fallback is deterministic.
+
+## Known Follow-Up
+
+- True provider invocation can still fail for quota, credentials, or API enablement despite readiness import/construction passing; deterministic fallback keeps basic booking interpretation usable while that is repaired.
+- The Bernie panel still needs a later product pass around patient identity evidence and appointment-type duration selection once the basic prompt path is stable.
+- The known moderate Dependabot alert remains unrelated to this sprint.
+
+## Recommended Next Direction
+
+After Yuri confirms the live Diary no longer reproduces the screenshot failure, step back to the broader implementation plan and tighten the Bernie API surface around patient/practitioner evidence display and appointment-type/duration choice before expanding to Caller ID or Medicare/OPV/PVM integrations.
+
+## Previous Closeout - Sprint 96
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 96: Bernie Reception Assistant UX and API Evidence Contract |
 | Integrated through | Calm Bernie reception UI, explicit Confirm booking path, staged diary pulse, structured practitioner/patient evidence, and bounded identity-confidence audit |
 | Status | Integrated, verified, pushed, deployed, mirrored, and audited |
@@ -38,6 +97,16 @@ reviewed, integrated, verified, pushed, and audited.
 - `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py` passed.
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py -q --tb=short` passed: `27 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
 - `git diff --check HEAD` passed.
+
+## Sprint 97 Release-Gate Correction
+
+The Sprint 96 closeout below left the simplest receptionist happy path as
+residual user review. Treat that as a process bug, not a precedent. For Sprint
+97 and later Bernie booking work, the ordinary Margaret Thompson / Dr Shera
+prompt is a blocking release gate, route-intercepted checks must be labelled as
+route-intercepted rather than live, and any reproducible screenshot/visual
+failure blocks closeout. The standing rule lives in
+`orchestration/bernie_release_gates.md`.
 
 ## Recommended User Review
 

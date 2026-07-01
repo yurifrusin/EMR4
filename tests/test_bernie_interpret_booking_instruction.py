@@ -473,6 +473,8 @@ def test_mocked_live_provider_autonomous_booking_language_is_warning_only(
 
 def test_live_interpreter_access_ai_denial_fails_closed_before_provider_call(monkeypatch):
     monkeypatch.setattr(settings, "bernie_booking_interpreter_live_temperature", 0.0)
+    # Explicitly disable fallback: this test verifies the strict fail-closed path.
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_fallback_to_deterministic", False)
     provider = MockLiveProvider({
         "command_candidate": {
             "date_from": "today",

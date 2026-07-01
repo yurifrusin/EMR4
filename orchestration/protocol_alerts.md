@@ -22,6 +22,15 @@ Read these before acting on remembered process details.
   scope/risk reasons. Keep visible receptionist UX calm and helpful; safety
   belongs primarily in typed API contracts, confirmation endpoints, RBAC, and
   audit trails rather than alarming staff-facing copy.
+- 2026-07-01: Bernie release gates are recorded in
+  `orchestration/bernie_release_gates.md`. A basic Bernie booking happy path,
+  including the Margaret Thompson / Dr Shera ordinary receptionist prompt, is a
+  blocking release gate for Bernie booking work, not optional residual user
+  review. Do not call route-intercepted, fake-provider, mocked-provider, or
+  `?smoke=true` Playwright checks "live"; a true live-provider check must reach
+  the configured provider path and include evidence such as
+  `live_provider: true`. If a reported screenshot/visual failure remains
+  reproducible, Sprint 97-style Bernie work cannot close as verified.
 - 2026-06-17: `submit` has been fixed to resolve the active worktree root. Use
   the task packet's `submit` command. Do not manually push to `master`.
 - Standing orchestration rule: every protocol-followed command should be reported

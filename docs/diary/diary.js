@@ -74,17 +74,43 @@ function formatBernieCode(value) {
     .replace(/\b\w/g, letter => letter.toUpperCase());
 }
 
-function bernieStatusCopy(status) {
+function isBernieDevOrDebug() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("bernie_debug") === "true" || urlParams.get("bernie_dev_review") === "true";
+}
+
+const PROVIDER_UNAVAILABLE_CODES = [
+  "booking_interpreter_provider_unavailable",
+  "provider_unavailable",
+  "interpret_request_failed",
+  "interpret_network_error",
+  "live_error",
+  "network_error"
+];
+
+function bernieStatusCopy(status, blocks = []) {
+  const hasProviderUnavailable = Array.isArray(blocks) && blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
+  if (hasProviderUnavailable && !isBernieDevOrDebug()) {
+    return "Unavailable";
+  }
   return BERNIE_STATUS_COPY[status] || formatBernieCode(status || "needs details");
 }
 
-function bernieHeadlineCopy(status) {
+function bernieHeadlineCopy(status, blocks = []) {
+  const hasProviderUnavailable = Array.isArray(blocks) && blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
+  if (hasProviderUnavailable && !isBernieDevOrDebug()) {
+    return "Bernie is temporarily unavailable";
+  }
   return BERNIE_HEADLINE_COPY[status] || "Review this appointment";
 }
 
 function bernieReviewActionCopy(payload) {
   if (!payload) {
     return "Nothing is booked until you confirm.";
+  }
+  const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
+  if (hasProviderUnavailable && !isBernieDevOrDebug()) {
+    return "Bernie could not search just now. Nothing was booked. Try again in a moment.";
   }
   if (payload.status === "candidate_selection_required") {
     return "Choose a time to show it on the diary. Nothing is booked until you confirm.";
@@ -408,7 +434,7 @@ function renderBernieInterpretPreview(contentEl, envelope) {
   status.setAttribute("data-testid", "bernie-interpret-status");
   status.textContent = envelope.result === "interpreted"
     ? "Understood"
-    : bernieStatusCopy(envelope.result || "blocked");
+    : bernieStatusCopy(envelope.result || "blocked", envelope.blocks);
   header.append(title, status);
   preview.appendChild(header);
 
@@ -480,13 +506,40 @@ function renderBernieInterpretOnly(envelope) {
   }
   renderBernieInterpretPreview(contentEl, envelope);
 
+  const isDevOrDebug = isBernieDevOrDebug();
+  const hasProviderUnavailable = Array.isArray(envelope?.blocks) && envelope.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
+
   const hold = document.createElement("div");
   hold.className = "bernie-interpret-hold";
   hold.setAttribute("data-testid", "bernie-interpret-hold");
-  hold.textContent = envelope?.result === "clarification_required"
-    ? "Bernie needs one more detail before it can search."
-    : "Bernie needs the details above before it can search. No booking was made.";
+  if (hasProviderUnavailable && !isDevOrDebug) {
+    hold.textContent = "Bernie could not search just now. Nothing was booked. Try again in a moment.";
+  } else {
+    hold.textContent = envelope?.result === "clarification_required"
+      ? "Bernie needs one more detail before it can search."
+      : "Bernie needs the details above before it can search. No booking was made.";
+  }
   contentEl.appendChild(hold);
+
+  if (isDevOrDebug && envelope?.blocks && envelope.blocks.length > 0) {
+    const diag = document.createElement("div");
+    diag.className = "bernie-dev-diagnostic";
+    diag.setAttribute("data-testid", "bernie-dev-diagnostic");
+    const diagTitle = document.createElement("h4");
+    diagTitle.textContent = "Developer Setup Diagnostics";
+    diag.appendChild(diagTitle);
+    const diagList = document.createElement("div");
+    diagList.className = "bernie-dev-diagnostic-list";
+    envelope.blocks.forEach(block => {
+      const item = document.createElement("div");
+      item.className = "bernie-dev-diagnostic-item";
+      item.setAttribute("data-testid", "bernie-dev-diagnostic-item");
+      item.textContent = `Block [${block.code}]: ${block.message}`;
+      diagList.appendChild(item);
+    });
+    diag.appendChild(diagList);
+    contentEl.appendChild(diag);
+  }
 }
 
 function getMockSlotSearchCandidates() {
@@ -2594,14 +2647,14 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   const statusBadge = document.createElement("div");
   statusBadge.className = `bernie-status-badge ${payload.status}`;
   statusBadge.setAttribute("data-testid", "bernie-review-status");
-  statusBadge.textContent = bernieStatusCopy(payload.status);
+  statusBadge.textContent = bernieStatusCopy(payload.status, payload.blocks);
   contentEl.appendChild(statusBadge);
 
   // 2. Headline
   const headline = document.createElement("h3");
   headline.className = "bernie-review-headline";
   headline.setAttribute("data-testid", "bernie-review-headline");
-  headline.textContent = bernieHeadlineCopy(payload.status);
+  headline.textContent = bernieHeadlineCopy(payload.status, payload.blocks);
   contentEl.appendChild(headline);
 
   // 3. Action Required
@@ -2615,6 +2668,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
   // 4. Content Section depending on Status
   if (payload.status === "blocked") {
+    const isDevOrDebug = isBernieDevOrDebug();
+    const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
+
     const blocksContainer = document.createElement("div");
     blocksContainer.className = "bernie-blocks-container";
 
@@ -2626,13 +2682,49 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     const list = document.createElement("div");
     list.setAttribute("data-testid", "bernie-review-blocks-list");
 
+    let renderedFriendlyBlock = false;
     payload.blocks.forEach(block => {
+      if (PROVIDER_UNAVAILABLE_CODES.includes(block.code) && !isDevOrDebug) {
+        if (!renderedFriendlyBlock) {
+          const item = document.createElement("div");
+          item.className = "bernie-block-item";
+          item.setAttribute("data-testid", "bernie-review-block-item");
+          item.textContent = "Bernie could not search just now. Nothing was booked. Try again in a moment.";
+          list.appendChild(item);
+          renderedFriendlyBlock = true;
+        }
+        return; // Skip technical block for ordinary mode
+      }
+
       const item = document.createElement("div");
       item.className = "bernie-block-item";
       item.setAttribute("data-testid", "bernie-review-block-item");
-      item.textContent = `${formatBernieCode(block.code)}: ${block.message}`;
+
+      let message = block.message || "";
+      if (!isDevOrDebug) {
+        if (block.code === "interpreted_practitioner_context_mismatch") {
+          message = "The practitioner found does not match the diary context.";
+        } else if (block.code === "missing_practitioner_id") {
+          message = "Please select a practitioner.";
+        } else if (block.code === "missing_patient_id") {
+          message = "Please select a patient.";
+        } else if (block.code === "missing_reference_date") {
+          message = "Please select a date.";
+        } else {
+          message = message.replace(/\(UUID\)/gi, "").replace(/ID/g, "").replace(/uuid/gi, "").replace(/supervised booking/gi, "booking").trim();
+        }
+      }
+      item.textContent = `${formatBernieCode(block.code)}: ${message}`;
       list.appendChild(item);
     });
+
+    if (list.children.length === 0 && hasProviderUnavailable && !isDevOrDebug) {
+      const item = document.createElement("div");
+      item.className = "bernie-block-item";
+      item.setAttribute("data-testid", "bernie-review-block-item");
+      item.textContent = "Bernie could not search just now. Nothing was booked. Try again in a moment.";
+      list.appendChild(item);
+    }
 
     blocksContainer.appendChild(list);
     contentEl.appendChild(blocksContainer);
@@ -2822,6 +2914,26 @@ function renderBernieReview(payload, interpretEnvelope = null) {
         await loadDiary(true);
       }
     });
+  }
+
+  if (isBernieDevOrDebug()) {
+    const diag = document.createElement("div");
+    diag.className = "bernie-dev-diagnostic";
+    diag.setAttribute("data-testid", "bernie-dev-diagnostic");
+    const diagTitle = document.createElement("h4");
+    diagTitle.textContent = "Developer Setup Diagnostics";
+    diag.appendChild(diagTitle);
+    const diagList = document.createElement("div");
+    diagList.className = "bernie-dev-diagnostic-list";
+    (payload.blocks || []).forEach(block => {
+      const item = document.createElement("div");
+      item.className = "bernie-dev-diagnostic-item";
+      item.setAttribute("data-testid", "bernie-dev-diagnostic-item");
+      item.textContent = `Block [${block.code}]: ${block.message}`;
+      diagList.appendChild(item);
+    });
+    diag.appendChild(diagList);
+    contentEl.appendChild(diag);
   }
 }
 
