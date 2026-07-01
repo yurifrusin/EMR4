@@ -134,6 +134,54 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 99: Bernie Confidence And Response Policy
+
+| Item | Value |
+|---|---|
+| Status | Plan-gated dispatch in progress |
+| Launch Gate | Dispatch packets created; commit/push/audit/HANDIN READY pending |
+| Integration Gate | Pending plan review |
+| Product Goal | Give *bernie* a typed confidence and response policy so it assumes only when confidence is adequate, asks human-like clarification when uncertainty is meaningful, blocks only when confidence/safety gates require it, and exposes technical details on demand rather than in ordinary receptionist copy |
+
+### Workstream FA - Bernie Confidence Policy Contract
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-sprint99-bernie-confidence-policy-contract.md` |
+| Goal | Plan backend/API confidence axes, decision bands, assumptions, staff checks, and non-mutating release gates for *bernie* booking interpretation |
+| In Scope | Plan packet first only; `app/schemas/appointments.py`, `app/routers/appointments.py`, `app/services/bernie_booking_interpreter.py`, focused *bernie* tests, and release-gate docs; separate intent, temporal, practitioner, patient-identity, slot-validity, and future speech/transcription confidence axes; omitted-date inference; practitioner typo matching; large-database patient ambiguity handling |
+| Out of Scope | Production code before plan approval, diary UI implementation, live phone/voice/Caller ID/Medicare/OPV/PVM integrations, broad GraphQL/API-spine redesign, weakening staff confirmation, and unrelated refactors |
+| Verification | Plan must specify exact backend files/tests, confidence thresholds/gates, no-write assertions, ordinary prompt release gates, omitted-date test, practitioner typo test, patient ambiguity/duplicate test, and migration/no-migration rationale |
+| Status | Queued |
+
+### Workstream FB - Bernie First-Person Confidence UI
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity/Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint99-bernie-first-person-confidence-ui.md` |
+| Goal | Plan the receptionist-facing response layer for first-person *bernie* copy, compact evidence, Details disclosure, inferred-date messages, and candidate/preview states |
+| In Scope | Plan packet first only; `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, and `review/test_diary_smoke.py`; copy such as `I've assumed...` and `Do you mean...`; high-confidence compact state; low-confidence expanded evidence; most-likely diary preview when allowed; future voice/chat parity |
+| Out of Scope | Production code before plan approval, backend schema implementation except requested contract fields, live voice/headset work, phone-system/Caller ID/Medicare integrations, broad diary redesign, removing staff confirmation, and raw debug details in ordinary mode |
+| Verification | Plan must specify exact diary files/tests, route-intercepted smoke cases for inferred today, typo-resolved practitioner, ambiguous patient candidates, Details toggle, no raw snake_case in ordinary mode, no write before confirm, asset version checks, and deployed/local review strategy |
+| Status | Queued |
+
+### Workstream FC - Confidence Acceptance Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex worker |
+| Branch | `codex/sprint99-confidence-acceptance-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint99-confidence-acceptance-review.md` |
+| Goal | Independently review the current *bernie* confidence problem and submit acceptance criteria, edge cases, and API/UI risk notes for Ariadne before implementation release |
+| In Scope | Read-only plan/review packet first only; current *bernie* backend, diary UI, smoke harness, release gates, and latest closeout; focus on confidence axes, fuzzy matching, omitted-date inference, first-person copy, Details disclosure, and release-gate coverage |
+| Out of Scope | Production code edits, integration, live provider/browser testing, and broad API-spine design beyond capturing follow-up boundaries |
+| Verification | Review packet must include concrete acceptance gates, hidden risks, recommended tests, Sprint 99 versus deferred boundaries, and resubmission criteria for worker plans |
+| Status | Queued |
+
 ## Sprint 96: Bernie Reception Assistant UX And API Evidence Contract
 
 | Item | Value |
