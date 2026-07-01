@@ -96,23 +96,36 @@ tracks that actual architecture.
 | Done Signals | No frontend or router calls model providers directly; dev uses service-account impersonation rather than JSON keys; every AI call passes through capability policy, product entitlement, provider adapter, and bounded audit metadata; external knowledge bases such as future Wiley/Cochrane integrations route through the same Access AI policy and citation envelope; EMR4's internal org/role/resource model can later map to enterprise SSO/SCIM/FGA without a rewrite |
 | Design Record | `orchestration/access_ai_api_design.md` |
 
+### Programme 2G - EMR4 API Spine
+
+| Item | Value |
+|---|---|
+| Status | Starting |
+| Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
+| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill |
+| Design Record | `orchestration/api_spine_programme.md` |
+| Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
+
 ## Recommended Next Planning Move
 
 Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
-1. If AI platform safety is the priority: choose caller-context booking proposal
-   groundwork or a Wiley/Cochrane licensed knowledge-base integration spike.
-2. If product flow is the priority: continue **Programme 2B** with the active
-   Sprint 25 status/waiting-area proposal retrofit, then drag/reschedule design.
-3. If orchestration confidence is the priority: continue **Programme 2C** with a
+1. If Bernie is the immediate product surface: complete Sprint 98 in
+   **Programme 2G** to stabilise the current booking loop before adding more
+   features.
+2. If architecture is the priority: continue **Programme 2G** with Sprint 99 API
+   root-to-branch plan review.
+3. If AI platform safety is the priority: continue **Programme 2F** with
+   caller-context booking proposal groundwork or a Wiley/Cochrane licensed
+   knowledge-base integration spike.
+4. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
-4. If Bernie is becoming tempting: keep it in **Programme 2D** design/tool-schema
-   preparation until Programme 2B's mutation contracts are mature.
 
-The default recommendation after Sprint 91 remains **Programme 2F** until
-caller-context booking proposals and licensed knowledge-base retrieval are safe
-enough to expose through product surfaces.
+The default recommendation after Sprint 97 is **Programme 2G**: first stabilise
+the visible *bernie* booking loop, then run the deliberate API-spine design
+programme before expanding Caller ID, Medicare/OPV/PVM, or clinical-library
+agent integrations.
 
 ## Deployment Readiness Pattern
 
