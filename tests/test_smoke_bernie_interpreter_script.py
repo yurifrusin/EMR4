@@ -90,6 +90,46 @@ def test_smoke_script_ordinary_time_gate_parses_receptionist_phrase(capsys):
     assert payload["command_candidate"]["latest_time"] == "15:45"
 
 
+def test_smoke_script_id_presence_expectations_keep_compact_output_redacted(capsys):
+    exit_code = smoke_bernie_interpreter.main([
+        "--provider",
+        "fake",
+        "--instruction",
+        (
+            "practitioner_id:420fb926-750b-4914-910b-e9d3f804e0f0 "
+            "patient_id:11111111-1111-1111-1111-111111111111 today 15 minutes"
+        ),
+        "--reference-date",
+        "2026-07-01",
+        "--expect-result",
+        "interpreted",
+        "--expect-practitioner-id-present",
+        "--expect-patient-id-present",
+    ])
+
+    assert exit_code == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["command_candidate"]["practitioner_id"] == "[id-present]"
+    assert payload["command_candidate"]["patient_id"] == "[id-present]"
+
+
+def test_smoke_script_id_presence_expectation_failure_is_nonzero(capsys):
+    exit_code = smoke_bernie_interpreter.main([
+        "--provider",
+        "fake",
+        "--instruction",
+        "appointment today after 2 pm",
+        "--expect-practitioner-id-present",
+    ])
+
+    captured = capsys.readouterr()
+    assert exit_code == 1
+    assert "Expected command_candidate.practitioner_id to be present." in captured.err
+    payload = json.loads(captured.out)
+    assert payload["command_candidate"].get("practitioner_id") is None
+    assert "420fb926-750b-4914-910b-e9d3f804e0f0" not in captured.out
+
+
 def test_smoke_script_time_expectation_failure_is_nonzero(capsys):
     exit_code = smoke_bernie_interpreter.main([
         "--provider",

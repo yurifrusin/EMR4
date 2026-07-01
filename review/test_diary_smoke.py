@@ -3368,6 +3368,236 @@ def test_bernie_candidate_click_stages_provisional_diary_preview(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_route_intercepted_selected_slot_can_return_to_candidates(diary_page):
+    import urllib.parse
+    import datetime
+    import json
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    today_str = datetime.date.today().isoformat()
+
+    candidate_slots = [
+        {
+            "appointment_date": today_str,
+            "start_time_local": "14:30:00",
+            "duration_minutes": 15,
+            "warnings": []
+        },
+        {
+            "appointment_date": today_str,
+            "start_time_local": "15:00:00",
+            "duration_minutes": 15,
+            "warnings": []
+        }
+    ]
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+    mock_interpret = {
+        "intent": "interpret_booking_instruction",
+        "safe": True,
+        "result": "interpreted",
+        "autonomy_tier": "execute_with_report",
+        "summary": "Resolved Margaret Thompson with Dr Shera.",
+        "confidence": 0.9,
+        "command_candidate": {
+            "practitioner_id": "real-prac-98",
+            "patient_id": "real-patient-98",
+            "date_from": "today",
+            "duration_minutes": 15,
+            "earliest_time": "14:00",
+            "latest_time": "15:45"
+        },
+        "missing_fields": [],
+        "safety_flags": [],
+        "clarifying_question": None,
+        "warnings": [
+            {"code": "practitioner_name_resolved", "message": "Dr Shera resolved."},
+            {"code": "patient_name_resolved_verify_identity", "message": "Margaret Thompson resolved; verify identity."}
+        ],
+        "blocks": [],
+        "provider_metadata": {"provider": "fake", "mode": "mocked", "live_provider": False}
+    }
+    candidate_review = {
+        "intent": "bernie_supervised_booking",
+        "result": "candidate_selection_required",
+        "safe": True,
+        "requires_confirmation": False,
+        "autonomy_tier": "execute_with_report",
+        "summary": "Select one candidate.",
+        "normalization": {"safe": True, "constraint": mock_interpret["command_candidate"], "warnings": [], "blocks": [], "summary": "ok"},
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "status": "candidate_selection_required",
+            "staff_action_required": "Select a candidate.",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": candidate_slots,
+            "identity_evidence": {
+                "patient_id": "real-patient-98",
+                "patient_label": "Margaret Thompson",
+                "confidence": "medium",
+                "verification_status": "requires_staff_verification",
+                "matched_fields": ["patient_id", "name", "date_of_birth"],
+                "supporting_context": [],
+                "warnings": ["medicare_not_on_record"],
+                "staff_prompt": "Confirm DOB and check Medicare/card details before confirming."
+            },
+            "patient_evidence": {
+                "patient_id": "real-patient-98",
+                "patient_label": "Margaret Thompson",
+                "date_of_birth": "1955-03-24",
+                "masked_phone": None,
+                "confidence": "medium",
+                "is_provisional": False
+            },
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Candidate slot summaries are review-only until staff selects one slot.",
+            "confirm_endpoint": None,
+            "confirm_payload": None,
+            "confirm_evidence": [],
+            "blocks": []
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    def confirmation_review_for(index):
+        return {
+            **candidate_review,
+            "result": "confirmation_ready",
+            "requires_confirmation": True,
+            "autonomy_tier": "proposal",
+            "staff_review": {
+                **candidate_review["staff_review"],
+                "status": "confirmation_ready",
+                "staff_action_required": "Review and confirm booking.",
+                "confirmation_ready": True,
+                "selected_slot": candidate_slots[index],
+                "candidate_slots": [],
+                "practitioner_evidence": {
+                    "practitioner_id": "real-prac-98",
+                    "display_name": "Alex Shera",
+                    "provider_number": "2345678A",
+                    "location_label": "Main Clinic"
+                },
+                "evidence_summary": "Confirm payload carries slot-selection and create-proposal evidence for explicit staff approval.",
+                "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+                "confirm_payload": {"proposal_id": f"prop-98-{index}", "confirmed": False},
+                "confirm_evidence": []
+            }
+        }
+
+    supervised_requests = []
+    confirm_payloads = []
+
+    def handle_api(route):
+        url = route.request.url
+        if "/api/v1/appointments/bernie/pilot-eligibility" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_eligibility))
+        elif "/api/v1/appointments/proposals/bernie/interpret-booking-instruction" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_interpret))
+        elif "/api/v1/appointments/proposals/bernie/supervised-booking" in url:
+            body = json.loads(route.request.post_data or "{}")
+            supervised_requests.append(body)
+            selected = body.get("selected_candidate_index")
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps(candidate_review if selected is None else confirmation_review_for(selected))
+            )
+        elif "/api/v1/appointments/proposals/create/confirm-bernie" in url:
+            confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        elif "/api/v1/auth/me" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
+        elif "/api/v1/diary/template" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "practice_name": "Smoke Practice",
+                "slot_defaults": {"start": "09:00", "end": "17:00", "interval_minutes": 15},
+                "columns": [{
+                    "room_label": "Room 1",
+                    "assignment": "Dr Alex Shera",
+                    "practitioner_id": "real-prac-98",
+                    "practitioner_ahpra": "MED0001234567"
+                }]
+            }))
+        elif "/api/v1/appointments/types" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/appointments" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([
+                {"id": "loc-1", "name": "Main Clinic", "is_active": True}
+            ]))
+        elif "/api/v1/diary/roster" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"entries": []}))
+        elif "/api/v1/diary/waiting-areas" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        else:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
+
+    diary_page.route("**/api/v1/**", handle_api)
+
+    try:
+        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+        diary_page.click("[data-testid='bernie-pilot-launch-button']")
+        diary_page.fill(
+            "[data-testid='bernie-instruction-input']",
+            "Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45"
+        )
+        diary_page.click("[data-testid='btn-bernie-instruction-submit']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-candidate-item']", state="visible", timeout=5000)
+
+        assert diary_page.locator("[data-testid='bernie-review-candidate-item']").count() == 2
+        panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
+        assert "Margaret Thompson" in panel_text
+        assert "missing_practitioner_id" not in panel_text
+        assert "practitioner_id" not in panel_text
+        assert "Not Found" not in panel_text
+
+        diary_page.locator("[data-testid='bernie-review-candidate-item']").first.click()
+        diary_page.wait_for_selector("[data-testid='bernie-staged-booking-card']", state="visible", timeout=5000)
+        diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
+        assert supervised_requests[-1]["selected_candidate_index"] == 0
+        assert "14:30:00" in diary_page.locator("[data-testid='bernie-staged-booking-card']").text_content()
+
+        change_slot = diary_page.locator(
+            "[data-testid='bernie-review-change-slot-button'], "
+            "button:has-text('Choose another time'), "
+            "button:has-text('Change time'), "
+            "button:has-text('Back to times')"
+        )
+        assert change_slot.count() > 0, (
+            "Selected Bernie slot state must provide a path back to the "
+            "candidate booking slots before release closeout."
+        )
+        change_slot.first.click()
+
+        diary_page.wait_for_selector("[data-testid='bernie-review-candidate-item']", state="visible", timeout=5000)
+        assert diary_page.locator("[data-testid='bernie-review-candidate-item']").count() == 2
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+
+        diary_page.locator("[data-testid='bernie-review-candidate-item']").nth(1).click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
+        assert supervised_requests[-1]["selected_candidate_index"] == 1
+        assert "15:00:00" in diary_page.locator("[data-testid='bernie-staged-booking-card']").text_content()
+        assert len(confirm_payloads) == 0
+    finally:
+        diary_page.evaluate("localStorage.removeItem('emr4_token')")
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_pilot_selected_appointment_instruction_readiness_and_resets(diary_page):
     import urllib.parse
     import datetime

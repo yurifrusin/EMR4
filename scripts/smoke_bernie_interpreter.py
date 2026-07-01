@@ -94,6 +94,16 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Exit non-zero unless provider_metadata.mode matches.",
     )
     parser.add_argument(
+        "--expect-practitioner-id-present",
+        action="store_true",
+        help="Exit non-zero unless command_candidate.practitioner_id is present. Compact output remains redacted.",
+    )
+    parser.add_argument(
+        "--expect-patient-id-present",
+        action="store_true",
+        help="Exit non-zero unless command_candidate.patient_id is present. Compact output remains redacted.",
+    )
+    parser.add_argument(
         "--json",
         action="store_true",
         help="Print the full structured envelope as JSON.",
@@ -195,6 +205,19 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(json.dumps(_compact_payload(envelope), indent=2, sort_keys=True))
         return 1
+
+    command = envelope.get("command_candidate") or {}
+    for key, enabled in (
+        ("practitioner_id", args.expect_practitioner_id_present),
+        ("patient_id", args.expect_patient_id_present),
+    ):
+        if enabled and not command.get(key):
+            print(
+                f"Expected command_candidate.{key} to be present.",
+                file=sys.stderr,
+            )
+            print(json.dumps(_compact_payload(envelope), indent=2, sort_keys=True))
+            return 1
 
     for key, expected in (
         ("earliest_time", args.expect_earliest_time),
