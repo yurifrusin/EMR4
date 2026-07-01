@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint97-bernie-ui-readiness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

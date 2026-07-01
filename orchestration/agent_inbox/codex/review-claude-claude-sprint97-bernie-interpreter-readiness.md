@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint97-bernie-interpreter-readiness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
