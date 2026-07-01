@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 98: Bernie Booking Loop Integrity and API Release Gates |
 | Integrated through | Typed backend confirm failure contract, calm Diary confirmation recovery, Choose another time loop, and blocking release gates for the simplest booking prompt path |
-| Status | Integrated, verified, pushed, deployed, mirrored, and audited; live hotfix for confirm endpoint and ordinary copy pending push |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited; live hotfix for confirm endpoint and ordinary copy applied |
 | Last updated | 2026-07-01 |
 
 ## What Changed
