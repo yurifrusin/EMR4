@@ -538,6 +538,55 @@ class BerniePilotEligibilityOut(BaseModel):
     user_allowed: bool
 
 
+# ── Bernie confidence/decision-policy contract ────────────────────────────────
+
+BernieConfidenceBand = Literal["assume", "proceed_with_check", "ask", "block"]
+# Lattice order (most permissive → most restrictive): assume < proceed_with_check < ask < block
+
+
+class BernieConfidenceAxis(BaseModel):
+    """Per-axis confidence/decision result for the Bernie interpreter."""
+    axis: str  # intent | temporal | practitioner | patient_identity | slot_validity | speech_transcription
+    band: BernieConfidenceBand
+    basis: str  # human-readable explanation; no raw field names / UUIDs
+    staff_detail: Optional[str] = None  # additional context shown to staff
+    debug_score: Optional[float] = None  # only present when bernie_interpreter_debug_disclosure=True
+
+
+class BernieAssumption(BaseModel):
+    """A deterministic assumption Bernie made that can be reversed by staff."""
+    field: str  # e.g. "date_from"
+    assumed_value: str  # e.g. "today"
+    basis: str  # why
+    reversible_copy: str  # first-person reversal instruction, e.g. "Tell me the date if today is wrong."
+
+
+class BernieStaffCheck(BaseModel):
+    """A check Bernie is asking staff to perform before confirming."""
+    code: str
+    staff_prompt: str  # first-person prompt, e.g. "Please verify the patient's date of birth."
+
+
+class BernieDecisionPolicy(BaseModel):
+    """Aggregated decision-policy result — the sole authoritative gate."""
+    overall_band: BernieConfidenceBand  # lattice-min over all axes
+    rationale: str
+    requires_staff_confirmation: bool = True  # always True; never set False by the interpreter
+
+
+class BerniePatientCandidate(BaseModel):
+    """A fuzzy or ambiguous patient candidate surfaced as a 'Do you mean...?' choice.
+
+    candidate_key holds the patient UUID as a string. Staff MUST verify DOB/identity
+    before using this key to link a patient. It is never auto-selected or confirmed.
+    """
+    candidate_key: str
+    display_name: str
+    dob_masked: Optional[str] = None  # e.g. "1955-**-**"
+    match_kind: Literal["exact", "fuzzy"]
+    requires_identifier: bool = True
+
+
 class BernieBookingInstructionInterpretIn(BaseModel):
     """Raw staff text intake for read-only Bernie booking interpretation."""
     instruction: str = Field(min_length=1, max_length=1000)
@@ -558,7 +607,7 @@ class BernieBookingInstructionInterpretOut(BaseModel):
     result: Literal["blocked", "clarification_required", "interpreted"]
     autonomy_tier: Literal["execute_with_report", "blocked"]
     summary: str
-    confidence: float = Field(ge=0, le=1)
+    confidence: float = Field(ge=0, le=1)  # advisory/display-only; NOT a gating signal
     command_candidate: Optional[SlotSearchCommandIn] = None
     missing_fields: list[str] = Field(default_factory=list)
     safety_flags: list[str] = Field(default_factory=list)
@@ -567,6 +616,13 @@ class BernieBookingInstructionInterpretOut(BaseModel):
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
     provider_metadata: BernieBookingInterpreterMetadata
+    # ── Confidence/decision-policy axes (additive; default-empty for backward compat) ──
+    confidence_axes: list[BernieConfidenceAxis] = Field(default_factory=list)
+    decision: Optional[BernieDecisionPolicy] = None
+    assumptions: list[BernieAssumption] = Field(default_factory=list)
+    staff_checks: list[BernieStaffCheck] = Field(default_factory=list)
+    patient_candidates: list[BerniePatientCandidate] = Field(default_factory=list)
+    debug: Optional[dict[str, Any]] = None  # only populated when bernie_interpreter_debug_disclosure=True
 
 
 class BernieSupervisedBookingIn(BaseModel):

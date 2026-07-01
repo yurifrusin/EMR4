@@ -10,9 +10,40 @@
 
 ## Review Request
 
-claude-sprint99-bernie-confidence-policy-contract plan v2 revised and resubmitted for Codex review
+claude-sprint99-bernie-confidence-policy-contract ready for Codex review
 
 ## Worker Completion Notes
+
+Implementation completion update - supersedes the earlier plan-gate notes below.
+
+- Files changed:
+  - `app/config.py`
+  - `app/routers/appointments.py`
+  - `app/schemas/appointments.py`
+  - `app/services/bernie_booking_interpreter.py`
+  - `tests/test_bernie_sprint98_release_gates.py`
+  - `tests/test_bernie_confidence_policy.py`
+- Implementation summary:
+  - Added confidence axes and banded decisioning for *bernie*: intent, temporal,
+    practitioner, patient identity, slot validity, and a speech placeholder.
+  - Kept the scalar confidence value advisory/display-only; API gating uses the
+    most conservative axis band.
+  - Added first-person clarification text for assumptions, typo resolution, and
+    blocked/ask states.
+  - Added deterministic same-day temporal handling so "today" never proposes
+    slots in the past and partly-past windows clamp forward.
+  - Added patient candidate handling for fuzzy/ambiguous patient names without
+    silently linking a fuzzy match.
+  - Preserved the no-write-before-confirm guardrail; no migration required.
+- Verification run:
+  - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m py_compile app\config.py app\schemas\appointments.py app\services\bernie_booking_interpreter.py app\routers\appointments.py tests\test_bernie_confidence_policy.py tests\test_bernie_sprint98_release_gates.py`
+  - `C:\Users\YuriFrusin\Documents\EMR4\.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_sprint98_release_gates.py tests\test_bernie_confidence_policy.py -q` -> 44 passed.
+  - `git diff --check`
+- Remaining risks:
+  - The UI must consume the new axes and candidate/clarification fields without
+    exposing raw debug detail in ordinary receptionist mode.
+  - Voice input is still placeholder-only; no speech transcription confidence is
+    calculated yet.
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 

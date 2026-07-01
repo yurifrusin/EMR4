@@ -35,6 +35,8 @@ from app.schemas.appointments import (
     BernieSupervisedBookingIn, BernieSupervisedBookingOut,
     BernieCreateProposalConfirmationIn, BerniePilotEligibilityOut,
     BernieBookingInstructionInterpretIn, BernieBookingInstructionInterpretOut,
+    BernieConfidenceAxis, BernieConfidenceBand, BernieDecisionPolicy,
+    BernieAssumption, BernieStaffCheck, BerniePatientCandidate,
 )
 from app.services.bernie_booking_interpreter import (
     actor_context_for_interpreter_user,
@@ -88,6 +90,88 @@ BERNIE_AUTONOMOUS_BOOKING_TERMS = (
     "make the booking",
     "write it",
 )
+
+# ── Bernie confidence-policy helpers ─────────────────────────────────────────
+
+# Lattice order: assume=0 (most permissive) < proceed_with_check=1 < ask=2 < block=3
+_BAND_ORDER: dict[str, int] = {
+    "assume": 0,
+    "proceed_with_check": 1,
+    "ask": 2,
+    "block": 3,
+}
+
+
+def _lattice_min(bands: list[BernieConfidenceBand]) -> BernieConfidenceBand:
+    """Return the most restrictive band (highest order) across a list of bands."""
+    if not bands:
+        return "assume"
+    return max(bands, key=lambda b: _BAND_ORDER[b])  # type: ignore[arg-type]
+
+
+def _levenshtein(a: str, b: str) -> int:
+    """Simple Wagner-Fischer edit distance for short name tokens."""
+    if len(a) < len(b):
+        return _levenshtein(b, a)
+    if not b:
+        return len(a)
+    prev = list(range(len(b) + 1))
+    for ca in a:
+        curr = [prev[0] + 1]
+        for j, cb in enumerate(b):
+            curr.append(min(prev[j + 1] + 1, curr[j] + 1, prev[j] + (ca != cb)))
+        prev = curr
+    return prev[-1]
+
+
+def _tokens_near_match(name_tokens: list[str], instruction_tokens: set[str]) -> bool:
+    """True when at least one name token has Levenshtein ≤ 2 to any instruction token."""
+    for nt in name_tokens:
+        if len(nt) < 3:
+            continue
+        for it in instruction_tokens:
+            if len(it) < 3:
+                continue
+            if _levenshtein(nt, it) <= 2:
+                return True
+    return False
+
+
+def _second_identifier_present(instruction: str) -> bool:
+    """Return True when the instruction appears to carry a patient DOB, Medicare number, or phone.
+
+    Uses past-year-only DOB patterns to avoid matching booking dates (which are present
+    or future). A 'second identifier' must be clearly patient-specific, not a slot date.
+    """
+    # DOB in DMY format: day/month/year or day-month-year
+    dob_dmy = re.compile(r"\b\d{1,2}[/\-]\d{1,2}[/\-]\d{4}\b")
+    # ISO DOB: only years clearly in the past (1900–2015) to avoid matching booking dates
+    dob_iso = re.compile(r"\b(?:19\d{2}|200\d|201[0-5])-\d{2}-\d{2}\b")
+    # Medicare: 10-digit number optionally followed by a reference digit
+    medicare_pat = re.compile(r"\b\d{10}(?:[/\s]\d)?\b")
+    # Australian phone: mobile (04xx) or landline (0[2-9]xxxxxxxx) or +61
+    phone_pat = re.compile(r"\b0[24-9]\d{8}\b|\b\+61\d{9}\b")
+    return bool(
+        dob_dmy.search(instruction)
+        or dob_iso.search(instruction)
+        or medicare_pat.search(instruction)
+        or phone_pat.search(instruction)
+    )
+
+
+def _mask_dob(dob: object) -> Optional[str]:
+    """Return a masked DOB string like '1955-**-**' for candidate display."""
+    if dob is None:
+        return None
+    try:
+        return str(dob)[:4] + "-**-**"
+    except Exception:
+        return None
+
+
+def _clinic_local_now(practice_tz: ZoneInfo) -> datetime:
+    """Return the current datetime in clinic-local timezone. Monkeypatchable in tests."""
+    return datetime.now(tz=practice_tz)
 
 
 def _sanitize_confirmed_warnings(codes: Optional[list[str]]) -> Optional[list[str]]:
@@ -1255,61 +1339,149 @@ def _valid_uuid_text(value: object) -> bool:
 
 def _resolve_practitioner_from_instruction(
     instruction_tokens: set[str],
+    instruction: str,
     db: Session,
     practice_id: uuid.UUID,
-) -> tuple[Optional[uuid.UUID], list[AppointmentProposalIssue]]:
-    matches: list[Practitioner] = []
+) -> tuple[Optional[uuid.UUID], list[AppointmentProposalIssue], BernieConfidenceAxis, list[BernieAssumption]]:
+    """Resolve a practitioner from free-text.
+
+    Practitioner set is small and closed → typo-tolerant matching (Levenshtein ≤ 2
+    on surname) produces a proceed_with_check assumption rather than a hard block.
+    """
+    exact_matches: list[Practitioner] = []
+    near_matches: list[Practitioner] = []
     practitioners = db.query(Practitioner).filter(
         Practitioner.practice_id == practice_id,
         Practitioner.is_active == True,
     ).all()
-    for practitioner in practitioners:
-        full_name_match = _text_contains_name(
-            instruction_tokens,
-            practitioner.first_name,
-            practitioner.last_name,
-        )
-        surname_match = _text_contains_name(instruction_tokens, practitioner.last_name)
-        if full_name_match or surname_match:
-            matches.append(practitioner)
+    for pr in practitioners:
+        full_name_exact = _text_contains_name(instruction_tokens, pr.first_name, pr.last_name)
+        surname_exact = _text_contains_name(instruction_tokens, pr.last_name)
+        if full_name_exact or surname_exact:
+            exact_matches.append(pr)
+            continue
+        # Typo-tolerant: check surname token Levenshtein ≤ 2
+        surname_tokens = [t for t in _text_tokens(pr.last_name) if t not in {"dr", "doctor", "nurse"}]
+        if _tokens_near_match(surname_tokens, instruction_tokens):
+            near_matches.append(pr)
 
-    if len(matches) == 1:
-        practitioner = matches[0]
-        return practitioner.id, [
+    if len(exact_matches) == 1:
+        pr = exact_matches[0]
+        axis = BernieConfidenceAxis(
+            axis="practitioner",
+            band="assume",
+            basis=f"Unique exact name match: {pr.first_name} {pr.last_name}.",
+        )
+        return pr.id, [
             AppointmentProposalIssue(
                 code="practitioner_name_resolved",
                 severity="warning",
                 message=(
                     "Bernie resolved the practitioner name in the instruction "
-                    f"to {practitioner.first_name} {practitioner.last_name}."
+                    f"to {pr.first_name} {pr.last_name}."
                 ),
             )
-        ]
-    if len(matches) > 1:
+        ], axis, []
+
+    if len(exact_matches) > 1:
+        axis = BernieConfidenceAxis(
+            axis="practitioner",
+            band="ask",
+            basis="Multiple practitioners match the name — needs clarification.",
+        )
         return None, [
             AppointmentProposalIssue(
                 code="ambiguous_practitioner_name",
                 severity="warning",
                 message="Multiple active practitioners match the name in the instruction.",
             )
-        ]
-    return None, []
+        ], axis, []
+
+    # No exact match — try unique near-match (typo-tolerant, proceed_with_check)
+    if len(near_matches) == 1:
+        pr = near_matches[0]
+        display = f"{pr.first_name} {pr.last_name}"
+        axis = BernieConfidenceAxis(
+            axis="practitioner",
+            band="proceed_with_check",
+            basis=f"Near-match: instruction appears to mean {display} (possible typo).",
+            staff_detail=f"I think you mean {display} — please confirm.",
+        )
+        assumption = BernieAssumption(
+            field="practitioner",
+            assumed_value=display,
+            basis="Name in instruction is a close match (possible typo).",
+            reversible_copy=f"Tell me if {display} is not the right practitioner.",
+        )
+        return pr.id, [
+            AppointmentProposalIssue(
+                code="practitioner_name_near_match",
+                severity="warning",
+                message=(
+                    f"I think you mean {display} — please confirm before searching."
+                ),
+            )
+        ], axis, [assumption]
+
+    if len(near_matches) > 1:
+        axis = BernieConfidenceAxis(
+            axis="practitioner",
+            band="ask",
+            basis="Multiple practitioners are close matches — needs clarification.",
+        )
+        return None, [
+            AppointmentProposalIssue(
+                code="ambiguous_practitioner_name",
+                severity="warning",
+                message="Multiple active practitioners match the name in the instruction.",
+            )
+        ], axis, []
+
+    # No match at all — practitioner axis unresolved (normalizer will produce block if required)
+    axis = BernieConfidenceAxis(
+        axis="practitioner",
+        band="ask",
+        basis="No practitioner matched the name in the instruction.",
+    )
+    return None, [], axis, []
 
 
 def _resolve_patient_from_instruction(
     instruction_tokens: set[str],
+    instruction: str,
     db: Session,
     practice_id: uuid.UUID,
-) -> tuple[Optional[uuid.UUID], list[AppointmentProposalIssue]]:
-    matches: list[Patient] = []
-    patients = db.query(Patient).filter(Patient.practice_id == practice_id).all()
-    for patient in patients:
-        if _text_contains_name(instruction_tokens, patient.first_name, patient.last_name):
-            matches.append(patient)
+) -> tuple[Optional[uuid.UUID], list[AppointmentProposalIssue], BernieConfidenceAxis, list[BernieStaffCheck], list[BerniePatientCandidate]]:
+    """Resolve a patient from free-text instruction.
 
-    if len(matches) == 1:
-        patient = matches[0]
-        return patient.id, [
+    Patient table is large and identity-critical (PHI) → exact-match only can proceed.
+    Fuzzy matches are surfaced as 'Do you mean...?' candidates (band=ask); they never
+    silently link, auto-select, or reach band=assume/proceed_with_check on their own.
+    A unique fuzzy match backed by a second identifier (DOB/Medicare/phone) may rise
+    to proceed_with_check with a staff DOB/identity check.
+    """
+    exact_matches: list[Patient] = []
+    patients = db.query(Patient).filter(Patient.practice_id == practice_id).all()
+    for pat in patients:
+        if _text_contains_name(instruction_tokens, pat.first_name, pat.last_name):
+            exact_matches.append(pat)
+
+    if len(exact_matches) == 1:
+        pat = exact_matches[0]
+        # Unique exact match — proceed_with_check (never assume for patient identity)
+        axis = BernieConfidenceAxis(
+            axis="patient_identity",
+            band="proceed_with_check",
+            basis="Unique exact name match — staff DOB/identity verification required.",
+            staff_detail="Please verify patient date of birth and identity before confirming.",
+        )
+        staff_checks = [
+            BernieStaffCheck(
+                code="verify_patient_dob",
+                staff_prompt="Please verify the patient's date of birth before confirming.",
+            )
+        ]
+        return pat.id, [
             AppointmentProposalIssue(
                 code="patient_name_resolved_verify_identity",
                 severity="warning",
@@ -1318,19 +1490,118 @@ def _resolve_patient_from_instruction(
                     "still verify patient identity before confirming the booking."
                 ),
             )
-        ]
-    if len(matches) > 1:
+        ], axis, staff_checks, []
+
+    if len(exact_matches) > 1:
+        axis = BernieConfidenceAxis(
+            axis="patient_identity",
+            band="ask",
+            basis="Multiple patients share this name — need DOB or another identifier.",
+        )
         return None, [
             AppointmentProposalIssue(
                 code="ambiguous_patient_name",
                 severity="warning",
                 message=(
-                    "Multiple patients match the name in the instruction. Ask for "
-                    "DOB and another identifier before confirming the booking."
+                    "I found more than one patient with that name. "
+                    "Can you give me a date of birth?"
                 ),
             )
-        ]
-    return None, []
+        ], axis, [], []
+
+    # No exact match — try fuzzy (near-match) for candidate proposal only
+    _MAX_FUZZY_CANDIDATES = 5
+    fuzzy_candidates: list[Patient] = []
+    for pat in patients:
+        first_tokens = [t for t in _text_tokens(pat.first_name) if len(t) >= 3]
+        last_tokens = [t for t in _text_tokens(pat.last_name) if len(t) >= 3]
+        name_tokens = first_tokens + last_tokens
+        if not name_tokens:
+            continue
+        if _tokens_near_match(name_tokens, instruction_tokens):
+            fuzzy_candidates.append(pat)
+        if len(fuzzy_candidates) > _MAX_FUZZY_CANDIDATES:
+            break
+
+    # Cap and rank (alphabetical for determinism)
+    fuzzy_candidates = sorted(fuzzy_candidates[:_MAX_FUZZY_CANDIDATES], key=lambda p: (p.last_name, p.first_name))
+
+    if fuzzy_candidates:
+        has_second_id = _second_identifier_present(instruction)
+        if len(fuzzy_candidates) == 1 and has_second_id:
+            # Unique fuzzy + corroborating identifier → proceed_with_check
+            pat = fuzzy_candidates[0]
+            display = f"{pat.first_name} {pat.last_name}"
+            axis = BernieConfidenceAxis(
+                axis="patient_identity",
+                band="proceed_with_check",
+                basis=(
+                    f"Near-match for {display} corroborated by a second identifier. "
+                    "Staff DOB/identity verification still required."
+                ),
+                staff_detail="Please confirm patient identity and date of birth.",
+            )
+            candidates = [
+                BerniePatientCandidate(
+                    candidate_key=str(pat.id),
+                    display_name=display,
+                    dob_masked=_mask_dob(pat.date_of_birth),
+                    match_kind="fuzzy",
+                    requires_identifier=True,
+                )
+            ]
+            staff_checks = [
+                BernieStaffCheck(
+                    code="verify_patient_dob",
+                    staff_prompt="Please confirm the patient's identity and date of birth before confirming.",
+                )
+            ]
+            return None, [
+                AppointmentProposalIssue(
+                    code="patient_fuzzy_corroborated",
+                    severity="warning",
+                    message=(
+                        f"I found a close match: {display}. "
+                        "Please confirm patient identity before proceeding."
+                    ),
+                )
+            ], axis, staff_checks, candidates
+        else:
+            # Fuzzy without corroboration (or multiple fuzzy) → ask + candidate list
+            candidates = [
+                BerniePatientCandidate(
+                    candidate_key=str(p.id),
+                    display_name=f"{p.first_name} {p.last_name}",
+                    dob_masked=_mask_dob(p.date_of_birth),
+                    match_kind="fuzzy",
+                    requires_identifier=True,
+                )
+                for p in fuzzy_candidates
+            ]
+            axis = BernieConfidenceAxis(
+                axis="patient_identity",
+                band="ask",
+                basis="No exact patient match — fuzzy candidates surfaced for staff selection.",
+                staff_detail="I could not find an exact match. Did you mean one of these patients?",
+            )
+            return None, [
+                AppointmentProposalIssue(
+                    code="patient_fuzzy_candidates",
+                    severity="warning",
+                    message=(
+                        "I could not find an exact match. "
+                        "Did you mean one of these patients?"
+                    ),
+                )
+            ], axis, [], candidates
+
+    # No match at all — patient was not mentioned or not needed; do not block slot search
+    axis = BernieConfidenceAxis(
+        axis="patient_identity",
+        band="assume",
+        basis="No patient name detected in instruction — patient context is optional for slot search.",
+    )
+    return None, [], axis, [], []
 
 
 def _bernie_clarifying_question(missing_fields: list[str]) -> Optional[str]:
@@ -1361,39 +1632,83 @@ def _resolve_bernie_interpretation_context(
     command_values = result.command_candidate.model_dump()
     resolver_warnings: list[AppointmentProposalIssue] = []
     instruction_tokens = set(_text_tokens(body.instruction))
+    all_assumptions: list[BernieAssumption] = []
+    all_staff_checks: list[BernieStaffCheck] = []
+    all_patient_candidates: list[BerniePatientCandidate] = []
 
+    # ── Practitioner resolution ───────────────────────────────────────────────
+    practitioner_axis: Optional[BernieConfidenceAxis] = None
     if command_values.get("practitioner_id") and not _valid_uuid_text(command_values.get("practitioner_id")):
         command_values["practitioner_id"] = None
     if not command_values.get("practitioner_id"):
         frame_practitioner_id = _context_frame_value(body, "practitioner_id")
         if _valid_uuid_text(frame_practitioner_id):
             command_values["practitioner_id"] = frame_practitioner_id
+            practitioner_axis = BernieConfidenceAxis(
+                axis="practitioner",
+                band="assume",
+                basis="Practitioner resolved from context frame UUID.",
+            )
         else:
-            practitioner_id, warnings = _resolve_practitioner_from_instruction(
-                instruction_tokens,
-                db,
-                practice_id,
+            practitioner_id, warnings, practitioner_axis, pr_assumptions = (
+                _resolve_practitioner_from_instruction(
+                    instruction_tokens,
+                    body.instruction,
+                    db,
+                    practice_id,
+                )
             )
             resolver_warnings.extend(warnings)
+            all_assumptions.extend(pr_assumptions)
             if practitioner_id:
                 command_values["practitioner_id"] = str(practitioner_id)
+    else:
+        practitioner_axis = BernieConfidenceAxis(
+            axis="practitioner",
+            band="assume",
+            basis="Practitioner UUID provided directly.",
+        )
 
+    # ── Patient resolution ────────────────────────────────────────────────────
+    patient_axis: Optional[BernieConfidenceAxis] = None
     if command_values.get("patient_id") and not _valid_uuid_text(command_values.get("patient_id")):
         command_values["patient_id"] = None
     if not command_values.get("patient_id"):
         frame_patient_id = _context_frame_value(body, "patient_id")
         if _valid_uuid_text(frame_patient_id):
             command_values["patient_id"] = frame_patient_id
+            patient_axis = BernieConfidenceAxis(
+                axis="patient_identity",
+                band="proceed_with_check",
+                basis="Patient resolved from context frame UUID — staff identity check required.",
+                staff_detail="Please verify patient identity before confirming.",
+            )
+            all_staff_checks.append(BernieStaffCheck(
+                code="verify_patient_dob",
+                staff_prompt="Please verify the patient's identity before confirming.",
+            ))
         else:
-            patient_id, warnings = _resolve_patient_from_instruction(
-                instruction_tokens,
-                db,
-                practice_id,
+            patient_id, warnings, patient_axis, pat_checks, pat_candidates = (
+                _resolve_patient_from_instruction(
+                    instruction_tokens,
+                    body.instruction,
+                    db,
+                    practice_id,
+                )
             )
             resolver_warnings.extend(warnings)
+            all_staff_checks.extend(pat_checks)
+            all_patient_candidates.extend(pat_candidates)
             if patient_id:
                 command_values["patient_id"] = str(patient_id)
+    else:
+        patient_axis = BernieConfidenceAxis(
+            axis="patient_identity",
+            band="proceed_with_check",
+            basis="Patient UUID provided directly — staff identity check required.",
+        )
 
+    # ── Duration default ──────────────────────────────────────────────────────
     if not command_values.get("duration_minutes") and not command_values.get("appointment_type_id"):
         command_values["duration_minutes"] = 15
         resolver_warnings.append(AppointmentProposalIssue(
@@ -1404,29 +1719,230 @@ def _resolve_bernie_interpretation_context(
                 "Staff should change it if a longer appointment type is needed."
             ),
         ))
+        all_assumptions.append(BernieAssumption(
+            field="duration_minutes",
+            assumed_value="15",
+            basis="No duration or appointment type supplied.",
+            reversible_copy="Tell me the appointment duration or type if 15 minutes is wrong.",
+        ))
 
+    # ── Normalization ─────────────────────────────────────────────────────────
     command = SlotSearchCommandIn(**command_values)
     normalization = normalize_slot_search_command(
         command,
         reference_date=body.reference_date,
     )
+
+    # ── Intent axis ───────────────────────────────────────────────────────────
+    safety_flags = list(result.safety_flags)
+    has_autonomous_language = any(
+        term in body.instruction.lower() for term in BERNIE_AUTONOMOUS_BOOKING_TERMS
+    )
+    if has_autonomous_language and "autonomous_booking_language" not in safety_flags:
+        safety_flags.append("autonomous_booking_language")
+
+    if "autonomous_booking_language" in safety_flags:
+        intent_axis = BernieConfidenceAxis(
+            axis="intent",
+            band="proceed_with_check",
+            basis="Instruction contains booking/confirmation language — staff confirmation still required.",
+        )
+    else:
+        intent_axis = BernieConfidenceAxis(
+            axis="intent",
+            band="assume",
+            basis="Instruction appears to be a read-only slot-search request.",
+        )
+
+    # ── Temporal axis (including same-day validity) ───────────────────────────
+    date_from_raw = command_values.get("date_from")
+    has_explicit_date = (
+        bool(date_from_raw) and str(date_from_raw).lower() in ("today", "tomorrow")
+    ) or bool(
+        date_from_raw and re.match(r"^\d{4}-\d{2}-\d{2}$", str(date_from_raw))
+    )
+    has_time_constraint = bool(
+        command_values.get("earliest_time") or command_values.get("latest_time")
+    )
+    # Only truly contradictory/invalid dates (not missing-field) warrant a temporal block.
+    # missing_date_from / relative_date_no_reference are clarification signals handled below.
+    has_invalid_date_block = any(
+        b.code == "invalid_date_from"
+        for b in normalization.blocks
+    )
+
+    temporal_band: BernieConfidenceBand
+    temporal_basis: str
+    temporal_clarifying: Optional[str] = None
+
+    if has_invalid_date_block:
+        temporal_band = "block"
+        temporal_basis = "Date provided is invalid or contradictory."
+    elif has_explicit_date:
+        temporal_band = "assume"
+        temporal_basis = "Explicit date provided."
+    elif has_time_constraint:
+        # Time constraint present but no explicit date — assume today
+        temporal_band = "proceed_with_check"
+        temporal_basis = "No explicit date — assumed today based on time constraint."
+        all_assumptions.append(BernieAssumption(
+            field="date_from",
+            assumed_value="today",
+            basis="Instruction has a time constraint but no explicit date.",
+            reversible_copy="Tell me the date if you did not mean today.",
+        ))
+    else:
+        # No date, no time constraint — must ask
+        temporal_band = "ask"
+        temporal_basis = "No date and no time constraint — I need to know which day."
+        temporal_clarifying = "I need to know which day you would like the appointment."
+
+    # Same-day validity: if resolved date == today (clinic-local), check that time is not past.
+    # The normalizer resolves "today" → reference_date; we check if that equals actual today.
+    resolved_date = (
+        normalization.constraint.date_from
+        if normalization.constraint is not None
+        else None
+    )
+    if resolved_date is not None and temporal_band in ("assume", "proceed_with_check"):
+        practice_tz = _practice_zoneinfo(db, practice_id)
+        clinic_now = _clinic_local_now(practice_tz)
+        if resolved_date == clinic_now.date():
+            # Same-day request: check earliest_time (or latest_time) against now
+            _earliest = normalization.constraint.earliest_time if normalization.constraint else None
+            _latest = normalization.constraint.latest_time if normalization.constraint else None
+            now_time = clinic_now.time().replace(second=0, microsecond=0)
+            if _earliest is not None and _latest is not None:
+                # Window defined: check if it is fully past
+                if _latest <= now_time:
+                    temporal_band = "ask"
+                    temporal_basis = "Same-day request: the requested time window has already passed today."
+                    temporal_clarifying = (
+                        "That time has already passed today — would you like a later time or another day?"
+                    )
+                elif _earliest < now_time:
+                    # Partly past — clamp earliest_time forward to now
+                    clamp_hhmm = now_time.strftime("%H:%M")
+                    if command_values.get("earliest_time"):
+                        command_values["earliest_time"] = clamp_hhmm
+                    # Re-normalize with clamped time
+                    command = SlotSearchCommandIn(**command_values)
+                    normalization = normalize_slot_search_command(
+                        command, reference_date=body.reference_date
+                    )
+                    temporal_basis = (
+                        f"Same-day request: earliest time clamped to {clamp_hhmm} "
+                        "(original time had partly passed)."
+                    )
+            elif _earliest is not None and _earliest <= now_time:
+                # Only earliest provided and it is past — check if latest is also implicitly past
+                temporal_band = "ask"
+                temporal_basis = "Same-day request: the requested start time has already passed today."
+                temporal_clarifying = (
+                    "That time has already passed today — would you like a later time or another day?"
+                )
+
+    temporal_axis = BernieConfidenceAxis(
+        axis="temporal",
+        band=temporal_band,
+        basis=temporal_basis,
+    )
+
+    # ── Slot-validity axis (mirrors normalization, excluding missing-field blocks) ──
+    # missing_practitioner_id / missing_date_from are handled by practitioner/temporal
+    # axes as "ask"; do not double-count them as hard blocks in slot_validity.
+    _FIELD_BLOCK_CODES = frozenset({
+        "missing_practitioner_id",
+        "missing_date_from",
+        "relative_date_no_reference",
+    })
+    non_field_blocks = [b for b in normalization.blocks if b.code not in _FIELD_BLOCK_CODES]
+    if non_field_blocks:
+        slot_validity_band: BernieConfidenceBand = "block"
+        slot_basis = "Normalization blocked: " + "; ".join(b.code for b in non_field_blocks)
+    elif not normalization.safe:
+        slot_validity_band = "ask"
+        slot_basis = "Normalization has warnings that require clarification."
+    else:
+        slot_validity_band = "assume"
+        slot_basis = "Slot-search constraint is valid."
+    slot_validity_axis = BernieConfidenceAxis(
+        axis="slot_validity",
+        band=slot_validity_band,
+        basis=slot_basis,
+    )
+
+    # ── Aggregate axes ────────────────────────────────────────────────────────
+    # Preserve speech_transcription placeholder from the service if present
+    speech_axis = next(
+        (a for a in result.confidence_axes if a.axis == "speech_transcription"),
+        BernieConfidenceAxis(
+            axis="speech_transcription",
+            band="assume",
+            basis="No transcription input — reserved placeholder.",
+        ),
+    )
+    computed_axes = [
+        intent_axis,
+        temporal_axis,
+        practitioner_axis or BernieConfidenceAxis(axis="practitioner", band="ask", basis="Unresolved"),
+        patient_axis or BernieConfidenceAxis(axis="patient_identity", band="ask", basis="Unresolved"),
+        slot_validity_axis,
+        speech_axis,
+    ]
+    overall_band = _lattice_min([a.band for a in computed_axes])  # type: ignore[arg-type]
+
+    # ── Map overall band to result/autonomy_tier ──────────────────────────────
     missing_fields: list[str] = []
     if command.practitioner_id is None:
         missing_fields.append("practitioner_id")
     if command.date_from is None:
         missing_fields.append("date_from")
 
-    safety_flags = list(result.safety_flags)
-    if (
-        any(term in body.instruction.lower() for term in BERNIE_AUTONOMOUS_BOOKING_TERMS)
-        and "autonomous_booking_language" not in safety_flags
-    ):
-        safety_flags.append("autonomous_booking_language")
+    if overall_band == "block":
+        final_result = "blocked"
+        final_autonomy = "blocked"
+        final_safe = False
+    elif overall_band == "ask":
+        final_result = "clarification_required"
+        final_autonomy = "blocked"
+        final_safe = False
+    else:
+        # assume or proceed_with_check — interpreted if required fields are present
+        if missing_fields or not normalization.safe:
+            final_result = "clarification_required"
+            final_autonomy = "blocked"
+            final_safe = False
+        else:
+            final_result = "interpreted"
+            final_autonomy = "execute_with_report"
+            final_safe = True
 
+    # ── Build BernieDecisionPolicy ────────────────────────────────────────────
+    decision = BernieDecisionPolicy(
+        overall_band=overall_band,
+        rationale=(
+            f"Axes: {', '.join(f'{a.axis}={a.band}' for a in computed_axes)}. "
+            f"Result: {final_result}."
+        ),
+        requires_staff_confirmation=True,
+    )
+
+    # ── First-person clarifying copy ──────────────────────────────────────────
+    clarifying: Optional[str] = temporal_clarifying
+    if not clarifying:
+        clarifying = _bernie_clarifying_question(missing_fields)
+    # Add patient-specific clarifying copy if needed
+    if not clarifying and all_patient_candidates:
+        clarifying = "I could not find an exact patient match — did you mean one of these patients?"
+    if not clarifying and any(a.axis == "practitioner" and a.band == "ask" for a in computed_axes):
+        clarifying = "Which practitioner would you like the appointment with?"
+
+    # ── Autonomous language warning (de-duped) ────────────────────────────────
     warnings = [*result.warnings, *resolver_warnings, *normalization.warnings]
     if (
         "autonomous_booking_language" in safety_flags
-        and not any(warning.code == "autonomous_booking_language" for warning in warnings)
+        and not any(w.code == "autonomous_booking_language" for w in warnings)
     ):
         warnings.append(AppointmentProposalIssue(
             code="autonomous_booking_language",
@@ -1437,20 +1953,34 @@ def _resolve_bernie_interpretation_context(
             ),
         ))
     blocks = list(normalization.blocks)
-    safe = normalization.safe
-    interpreted = safe and not blocks
+
+    # ── Debug field (gated by config flag) ───────────────────────────────────
+    debug_payload: Optional[dict] = None
+    if settings.bernie_interpreter_debug_disclosure:
+        debug_payload = {
+            "axes": {a.axis: {"band": a.band, "basis": a.basis} for a in computed_axes},
+            "scalar_confidence_advisory": result.confidence,
+            "normalization_safe": normalization.safe,
+        }
+
     return result.model_copy(update={
-        "safe": interpreted,
-        "result": "interpreted" if interpreted else ("clarification_required" if missing_fields else "blocked"),
-        "autonomy_tier": "execute_with_report" if interpreted else "blocked",
+        "safe": final_safe,
+        "result": final_result,
+        "autonomy_tier": final_autonomy,
         "summary": result.summary,
         "command_candidate": command,
         "missing_fields": missing_fields,
-        "clarifying_question": _bernie_clarifying_question(missing_fields),
+        "clarifying_question": clarifying,
         "safety_flags": safety_flags,
         "normalization": normalization,
         "warnings": warnings,
         "blocks": blocks,
+        "confidence_axes": computed_axes,
+        "decision": decision,
+        "assumptions": all_assumptions,
+        "staff_checks": all_staff_checks,
+        "patient_candidates": all_patient_candidates,
+        "debug": debug_payload,
     })
 
 

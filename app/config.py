@@ -39,6 +39,9 @@ class Settings(BaseSettings):
     bernie_booking_interpreter_provider: str = "disabled"
     bernie_booking_interpreter_live_temperature: float = 0.0
     bernie_booking_interpreter_fallback_to_deterministic: bool = True
+    # Emit raw debug_score and internal codes in the 'debug' field only when True.
+    # Ordinary reception staff should never see raw scores or snake_case codes.
+    bernie_interpreter_debug_disclosure: bool = False
 
     # Patient file storage. Point this at a OneDrive-synced folder so generated
     # .docx files are immediately accessible via Word Online. The backend creates

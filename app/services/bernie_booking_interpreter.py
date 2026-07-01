@@ -21,6 +21,8 @@ from app.schemas.appointments import (
     BernieBookingInstructionInterpretIn,
     BernieBookingInstructionInterpretOut,
     BernieBookingInterpreterMetadata,
+    BernieConfidenceAxis,
+    BernieDecisionPolicy,
     SlotSearchCommandIn,
 )
 from app.models.tenancy import User
@@ -246,6 +248,26 @@ def _issue(code: str, severity: str, message: str) -> AppointmentProposalIssue:
     return AppointmentProposalIssue(code=code, severity=severity, message=message)
 
 
+def _speech_transcription_placeholder_axis() -> BernieConfidenceAxis:
+    """Reserved axis — non-gating placeholder until voice/transcription input is wired."""
+    return BernieConfidenceAxis(
+        axis="speech_transcription",
+        band="assume",
+        basis="No transcription input — axis reserved for future voice integration.",
+    )
+
+
+def _all_block_axes(reason: str) -> list[BernieConfidenceAxis]:
+    """All axes set to block — used by the disabled path."""
+    return [
+        BernieConfidenceAxis(axis=a, band="block", basis=reason)
+        for a in (
+            "intent", "temporal", "practitioner",
+            "patient_identity", "slot_validity", "speech_transcription",
+        )
+    ]
+
+
 def set_live_provider_factory(factory: LiveProviderFactory | None) -> None:
     """Inject a live-provider factory for tests without touching cloud clients."""
     global _live_provider_factory
@@ -261,6 +283,7 @@ def actor_context_for_interpreter_user(user: User) -> AiActorContext:
 
 
 def _disabled_response() -> BernieBookingInstructionInterpretOut:
+    block_reason = "Booking-instruction interpreter is disabled."
     return BernieBookingInstructionInterpretOut(
         safe=False,
         result="blocked",
@@ -284,6 +307,12 @@ def _disabled_response() -> BernieBookingInstructionInterpretOut:
             provider="disabled",
             mode="disabled",
             live_provider=False,
+        ),
+        confidence_axes=_all_block_axes(block_reason),
+        decision=BernieDecisionPolicy(
+            overall_band="block",
+            rationale=block_reason,
+            requires_staff_confirmation=True,
         ),
     )
 
@@ -338,6 +367,7 @@ class FakeBookingInstructionInterpreter:
         )
         blocks = list(normalization.blocks)
 
+        speech_axis = _speech_transcription_placeholder_axis()
         if blocks:
             result = "clarification_required" if missing_fields else "blocked"
             return BernieBookingInstructionInterpretOut(
@@ -354,6 +384,7 @@ class FakeBookingInstructionInterpreter:
                 warnings=[*normalization.warnings, *warnings],
                 blocks=blocks,
                 provider_metadata=self.metadata,
+                confidence_axes=[speech_axis],
             )
 
         return BernieBookingInstructionInterpretOut(
@@ -370,6 +401,7 @@ class FakeBookingInstructionInterpreter:
             warnings=normalization.warnings,
             blocks=[],
             provider_metadata=self.metadata,
+            confidence_axes=[speech_axis],
         )
 
 
@@ -525,6 +557,7 @@ class GeminiVertexBookingInstructionInterpreter:
         ]
         blocks = list(normalization.blocks)
 
+        speech_axis = _speech_transcription_placeholder_axis()
         if blocks:
             result = "clarification_required" if missing_fields else "blocked"
             return BernieBookingInstructionInterpretOut(
@@ -544,6 +577,7 @@ class GeminiVertexBookingInstructionInterpreter:
                 warnings=[*normalization.warnings, *warnings],
                 blocks=blocks,
                 provider_metadata=self.metadata,
+                confidence_axes=[speech_axis],
             )
 
         return BernieBookingInstructionInterpretOut(
@@ -560,6 +594,7 @@ class GeminiVertexBookingInstructionInterpreter:
             warnings=normalization.warnings,
             blocks=[],
             provider_metadata=self.metadata,
+            confidence_axes=[speech_axis],
         )
 
     def _generate(
