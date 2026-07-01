@@ -44,6 +44,16 @@ DOCS_DIR = REPO_ROOT / "docs"
 CHECKS = json.loads((Path(__file__).parent / "checks_diary.json").read_text(encoding="utf-8"))
 
 
+def assert_bernie_confirmed_state(page):
+    """Sprint 100: confirmation clears the action controls and renders a compact terminal state."""
+    page.wait_for_selector("[data-testid='bernie-confirmed-container']", state="visible", timeout=5000)
+    status = page.locator("[data-testid='bernie-review-status']")
+    assert "Confirmed" in status.text_content()
+    headline = page.locator("[data-testid='bernie-review-headline']")
+    assert "Booking confirmed successfully" in headline.text_content()
+    assert page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+
+
 @pytest.fixture(scope="module")
 def diary_page():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
@@ -319,9 +329,7 @@ def test_bernie_review_confirmation_ready(diary_page):
 
         confirm_btn.click()
 
-        assert confirm_btn.is_disabled()
-        assert success_msg.is_visible()
-        assert "Booking confirmed" in success_msg.text_content()
+        assert_bernie_confirmed_state(diary_page)
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
@@ -662,9 +670,7 @@ def test_bernie_review_route_intercepted_confirmation_ready(diary_page):
         # Click confirm simulates booking
         confirm_btn.click()
 
-        assert confirm_btn.is_disabled()
-        assert success_msg.is_visible()
-        assert "Booking confirmed" in success_msg.text_content()
+        assert_bernie_confirmed_state(diary_page)
     finally:
         # Clean up routes
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
@@ -995,14 +1001,9 @@ def test_bernie_confirm_submit_adapter_success(diary_page):
         # Click confirm
         confirm_btn.click()
 
-        # Wait for success message
-        success_msg.wait_for(state="visible", timeout=5000)
-
         # UI state after click
-        assert confirm_btn.is_disabled()
-        assert success_msg.is_visible()
+        assert_bernie_confirmed_state(diary_page)
         assert error_msg.is_hidden()
-        assert "Booking confirmed" in success_msg.text_content()
 
         # Verify POST payload
         assert len(payload_received) == 1
@@ -1062,10 +1063,8 @@ def test_bernie_confirm_submit_adapter_error_and_retry(diary_page):
         confirm_btn.click()
 
         # Second attempt (succeeds)
-        success_msg.wait_for(state="visible", timeout=5000)
-        assert success_msg.is_visible()
+        assert_bernie_confirmed_state(diary_page)
         assert error_msg.is_hidden()
-        assert confirm_btn.is_disabled()
         assert request_count == 2
     finally:
         diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
@@ -1256,13 +1255,12 @@ def test_bernie_route_intercepted_confirm_flow_harness_success(diary_page):
         confirm_btn.click()
 
         # Wait for success message
-        success_msg.wait_for(state="visible", timeout=5000)
+        assert_bernie_confirmed_state(diary_page)
 
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["confirmed"] is True
         assert confirm_payloads[0]["selection_proposal"]["intent"] == "select_slot_for_create_proposal"
         assert confirm_payloads[0]["create_proposal"]["reason"] == "Follow-up"
-        assert success_msg.is_visible()
         assert error_msg.is_hidden()
     finally:
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
@@ -1460,12 +1458,11 @@ def test_bernie_dev_mode_review_feature_flag_success(diary_page):
         confirm_btn.click()
 
         # Wait for success message
-        success_msg.wait_for(state="visible", timeout=5000)
+        assert_bernie_confirmed_state(diary_page)
 
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["confirmed"] is True
         assert confirm_payloads[0]["selection_proposal"]["intent"] == "select_slot_for_create_proposal"
-        assert success_msg.is_visible()
         assert error_msg.is_hidden()
     finally:
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
@@ -1570,7 +1567,7 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
         assert confirm_btn.is_disabled() is False
         assert len(confirm_payloads) == 0
         confirm_btn.click()
-        diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
+        assert_bernie_confirmed_state(diary_page)
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["confirmed"] is True
         assert "/api/v1/api/v1/" not in confirm_requests[-1]
@@ -1688,7 +1685,7 @@ def test_bernie_dev_review_fixture_route(diary_page):
         assert confirm_btn.is_disabled() is False
         assert len(confirm_payloads) == 0
         confirm_btn.click()
-        diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
+        assert_bernie_confirmed_state(diary_page)
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["confirmed"] is True
 
@@ -2141,7 +2138,7 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
         assert len(confirm_payloads) == 0
 
         confirm_btn.click()
-        diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
+        assert_bernie_confirmed_state(diary_page)
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["proposal_id"] == "prop-70"
         assert confirm_payloads[0]["confirmed"] is True
@@ -2425,7 +2422,7 @@ def test_bernie_pilot_eligibility_confirm_gated(diary_page):
         assert len(confirm_payloads) == 0
 
         confirm_btn.click()
-        diary_page.wait_for_selector("[data-testid='bernie-review-success-message']:not(.hidden)", state="visible", timeout=5000)
+        assert_bernie_confirmed_state(diary_page)
 
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["proposal_id"] == "prop-123"
@@ -3598,6 +3595,115 @@ def test_bernie_route_intercepted_selected_slot_can_return_to_candidates(diary_p
         assert len(confirm_payloads) == 0
     finally:
         diary_page.evaluate("localStorage.removeItem('emr4_token')")
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint100_bernie_tomorrow_reference_date_survives_diary_navigation(diary_page):
+    """Selecting a tomorrow candidate must not re-resolve tomorrow after the diary jumps."""
+    import json
+    import urllib.parse
+
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    supervised_requests = []
+
+    mock_interpret = {
+        "safe": True,
+        "result": "interpreted",
+        "request_reference_date": "2026-07-01",
+        "command_candidate": {
+            "practitioner_id": "smoke-prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "tomorrow",
+            "duration_minutes": "15",
+            "earliest_time": "15:00"
+        },
+        "warnings": [],
+        "blocks": []
+    }
+    candidate_payload = {
+        "staff_review": {
+            "status": "candidate_selection_required",
+            "confirmation_ready": False,
+            "candidate_slots": [
+                {"appointment_date": "2026-07-02", "start_time_local": "15:00:00", "duration_minutes": 15},
+                {"appointment_date": "2026-07-02", "start_time_local": "15:15:00", "duration_minutes": 15}
+            ],
+            "selected_slot": None,
+            "identity_evidence": {"confidence": "medium", "patient_label": "Margaret Thompson", "staff_prompt": "Confirm DOB."},
+            "patient_evidence": {"confidence": "medium", "patient_label": "Margaret Thompson", "date_of_birth": "1952-03-14"},
+            "warnings": [],
+            "blocks": []
+        }
+    }
+
+    def confirmation_payload(index):
+        slot = candidate_payload["staff_review"]["candidate_slots"][index]
+        return {
+            "staff_review": {
+                **candidate_payload["staff_review"],
+                "status": "confirmation_ready",
+                "confirmation_ready": True,
+                "candidate_slots": [],
+                "selected_slot": slot,
+                "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+                "confirm_payload": {"confirmed": False, "selection_proposal": {"intent": "select_slot_for_create_proposal"}}
+            }
+        }
+
+    def handle_api(route):
+        url = route.request.url
+        if "/api/v1/appointments/bernie/pilot-eligibility" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"eligible": True, "reasons": []}))
+        elif "/api/v1/appointments/proposals/bernie/interpret-booking-instruction" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_interpret))
+        elif "/api/v1/appointments/proposals/bernie/supervised-booking" in url:
+            body = json.loads(route.request.post_data or "{}")
+            supervised_requests.append(body)
+            selected = body.get("selected_candidate_index")
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps(candidate_payload if selected is None else confirmation_payload(int(selected)))
+            )
+        elif "/api/v1/auth/me" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
+        else:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
+
+    diary_page.route("**/api/v1/**", handle_api)
+
+    try:
+        diary_page.goto(
+            base_url
+            + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true"
+            + "&practitioner_id=smoke-prac-1&patient_id=smoke-pat-1&reference_date=2026-07-01"
+        )
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        diary_page.fill("[data-testid='bernie-instruction-input']", "Make an appointment tomorrow after 3 with Dr Shera")
+        diary_page.click("[data-testid='btn-bernie-instruction-submit']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-candidate-item']", state="visible", timeout=5000)
+
+        assert supervised_requests[0]["reference_date"] == "2026-07-01"
+        diary_page.locator("[data-testid='bernie-review-candidate-item']").first.click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
+        assert supervised_requests[-1]["reference_date"] == "2026-07-01"
+        assert supervised_requests[-1]["selected_candidate_index"] == 0
+        assert "2026-07-02" in diary_page.locator("[data-testid='bernie-staged-booking-card']").text_content()
+
+        before_choose_again = len(supervised_requests)
+        diary_page.click("[data-testid='bernie-review-change-slot-button']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-candidate-item']", state="visible", timeout=5000)
+        assert len(supervised_requests) == before_choose_again
+
+        diary_page.locator("[data-testid='bernie-review-candidate-item']").nth(1).click()
+        diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
+        assert supervised_requests[-1]["reference_date"] == "2026-07-01"
+        assert supervised_requests[-1]["selected_candidate_index"] == 1
+        assert "2026-07-02" in diary_page.locator("[data-testid='bernie-staged-booking-card']").text_content()
+    finally:
         diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
