@@ -2552,7 +2552,7 @@ def test_bernie_pilot_selected_appointment_context(diary_page):
         assert "Margaret Thompson" in use_selected_btn.text_content()
 
         # 3. Clear the selection
-        diary_page.click("#diary-grid")
+        diary_page.locator(".col-room-label").first.click()
         assert diary_page.locator("[data-testid='bernie-pilot-selected-status-info']").count() == 0
 
         # 4. Select a provisional appointment (Nora Patel)
@@ -3543,6 +3543,157 @@ def test_bernie_pilot_selected_appointment_instruction_readiness_and_resets(diar
         diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
         assert textarea.input_value() == ""
         assert status_copy.is_visible() is False or status_copy.text_content().strip() == ""
+
+    finally:
+        diary_page.evaluate("localStorage.removeItem('emr4_token')")
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_ordinary_mode_readiness_and_diagnostics(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_eligibility = {
+        "surface": "bernie_staff_review",
+        "enabled": True,
+        "eligible": True,
+        "reason": "allowlist_match",
+        "practice_allowed": True,
+        "user_allowed": True
+    }
+
+    mock_provider_unavailable = {
+        "intent": "bernie_supervised_booking",
+        "result": "blocked",
+        "safe": False,
+        "requires_confirmation": False,
+        "autonomy_tier": "blocked",
+        "summary": "Interpretation failed closed",
+        "normalization": None,
+        "search_proposal": None,
+        "selection_proposal": None,
+        "staff_review": {
+            "headline": "Interpretation failed closed",
+            "status": "blocked",
+            "staff_action_required": "Please use structured booking fields.",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [],
+            "warning_summary": "Provider unavailable",
+            "evidence_summary": "Live interpreter is unavailable",
+            "confirm_payload": None,
+            "blocks": [
+                { "code": "booking_interpreter_provider_unavailable", "message": "Live booking-instruction interpreter provider is unavailable." }
+            ]
+        },
+        "warnings": [],
+        "blocks": []
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/bernie/pilot-eligibility",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_eligibility)
+        )
+    )
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_provider_unavailable)
+        )
+    )
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps({
+                "safe": True,
+                "result": "interpreted",
+                "command_candidate": {
+                    "practitioner_id": "smoke-prac-1",
+                    "patient_id": "smoke-pat-1",
+                    "date_from": "today",
+                    "duration_minutes": "15"
+                }
+            })
+        )
+    )
+
+    try:
+        # 1. Test ordinary mode (stay calm, useful, and show friendly error without diagnostics)
+        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+
+        # Launch panel
+        diary_page.click("[data-testid='bernie-pilot-launch-button']")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
+
+        # Click Margaret Thompson to import context
+        diary_page.click(".appt:has-text('Margaret Thompson')")
+        diary_page.click("[data-testid='bernie-pilot-use-selected']")
+
+        # Enter instruction and submit
+        trigger_live_bernie(diary_page, instruction="Find slot", register_default_mock=False)
+
+        # Wait for the status badge
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        status.wait_for(state="visible", timeout=5000)
+        assert status.text_content().strip() == "Unavailable"
+
+        # Check headline
+        headline = diary_page.locator("[data-testid='bernie-review-headline']")
+        assert headline.text_content().strip() == "Bernie is temporarily unavailable"
+
+        # Check action
+        action = diary_page.locator("[data-testid='bernie-review-action']")
+        assert action.text_content().strip() == "Bernie could not search just now. Nothing was booked. Try again in a moment."
+
+        # Check block message
+        block_items = diary_page.locator("[data-testid='bernie-review-block-item']")
+        assert block_items.count() == 1
+        assert block_items.first.text_content().strip() == "Bernie could not search just now. Nothing was booked. Try again in a moment."
+
+        # Verify developer diagnostic container is ABSENT
+        assert diary_page.locator("[data-testid='bernie-dev-diagnostic']").count() == 0
+
+        # 2. Test Developer / Debug mode (show setup diagnostics)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_dev_review=true&bernie_context_form=true&bernie_review=live")
+        diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']:not(.hidden)", state="visible", timeout=5000)
+
+        # Click Margaret Thompson
+        diary_page.click(".appt:has-text('Margaret Thompson')")
+        diary_page.click("[data-testid='bernie-pilot-use-selected']")
+
+        # Enter instruction and submit
+        trigger_live_bernie(diary_page, instruction="Find slot", register_default_mock=False)
+
+        # Wait for status badge
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        status.wait_for(state="visible", timeout=5000)
+
+        # In dev mode, block item shows technical details
+        block_items = diary_page.locator("[data-testid='bernie-review-block-item']")
+        assert block_items.count() == 1
+        assert "Booking Interpreter Provider Unavailable" in block_items.first.text_content()
+
+        # Verify developer diagnostic container IS visible
+        diag = diary_page.locator("[data-testid='bernie-dev-diagnostic']")
+        assert diag.count() == 1
+        assert "Developer Setup Diagnostics" in diag.text_content()
+        assert "Block [booking_interpreter_provider_unavailable]" in diag.text_content()
 
     finally:
         diary_page.evaluate("localStorage.removeItem('emr4_token')")
