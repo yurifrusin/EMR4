@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Programme 2F / Sprint 100 - Bernie booking session state machine integrated locally and verified; push/deploy/mirror/audit closeout in progress |
+| **Current active track** | Programme 2F / Sprint 100 - Bernie booking session state machine integrated, verified, pushed, deployed, mirrored, and audited |
 | **Next recommended work** | Complete Sprint 100 live Diary check, then start the root-to-branch API-spine design sprint using GraphQL/read-context contracts, command mutations, YAML capability/policy documents, statecharts, audit/evidence, cybersecurity, and dev/prod profiles |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are

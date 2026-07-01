@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 100: Bernie Booking Session State Machine |
 | Integrated through | Immutable request reference dates, same-day clinic exhaustion, explicit Bernie UI session state, candidate snapshot reuse, post-confirm cleanup, and regression harness for tomorrow navigation |
-| Status | Integrated and verified locally; push/deploy/mirror/audit pending at closeout write time |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Last updated | 2026-07-01 |
 
 ## What Changed

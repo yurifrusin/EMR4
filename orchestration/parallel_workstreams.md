@@ -138,7 +138,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; verification passed; pending push/deploy/mirror/audit |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Launch Gate | Complete: design guide, dispatch packets, worker plan review, and implementation release completed |
 | Integration Gate | Complete locally: worker commits cherry-picked, Ariadne repaired harness expectations, and focused verification passed |
 | Product Goal | Replace the current loosely coupled *bernie* booking flow with an explicit session state machine so relative dates, diary navigation, candidate selection, clarification, preview, and confirmation remain logically separated |
