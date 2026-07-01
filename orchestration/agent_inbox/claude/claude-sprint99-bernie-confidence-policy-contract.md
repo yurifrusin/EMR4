@@ -89,12 +89,27 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed: Plan-only packet — no production code changed. Wrote the Codex
-  implementation-plan packet
+- Files changed: Plan-only packet — no production code changed. REVISED (v2) the
+  Codex implementation-plan packet
   `orchestration/agent_inbox/codex/plan-claude-claude-sprint99-bernie-confidence-policy-contract.md`
-  and set this task packet status to `pending_plan_review`. No `app/`, tests,
-  migrations, diary UI, or taskpane files were edited. Temporary compose files
-  were removed; `git status` shows only the plan/coordination artifacts.
+  per Ariadne/Yuri feedback and kept this task packet status `pending_plan_review`.
+  No `app/`, tests, migrations, diary UI, or taskpane files were edited.
+  `git status` shows only the plan/coordination artifacts.
+- v2 revisions (this resubmission): (1) Patient matching policy changed — fuzzy
+  search is now ALLOWED but only to propose candidate choices / ask "Do you
+  mean...?" (band=ask, new `patient_candidates` list), never to silently link
+  identity, auto-select, or confirm. A unique EXACT name match may proceed subject
+  to a staff DOB/identity check; a unique FUZZY match stays candidate-selection
+  (ask) unless backed by a second identifier (DOB/Medicare/phone), which may raise
+  it to proceed_with_check. Fuzzy never reaches assume and never yields a linked
+  patient_id. Candidate list is capped/ranked so it cannot dump the patient table.
+  (2) Added explicit same-day temporal validity — when the date resolves to today
+  (explicit or inferred), Bernie never offers past slots; a fully-past same-day
+  window => temporal band=ask ("that time has already passed today — later time or
+  another day?"); a partly-past window is clamped forward to clinic-local now
+  (never backward). Reuse the existing clinic-local time model. New tests named for
+  both. The strong per-axis/lattice-min approach and staff-confirmation gate are
+  unchanged.
 - Verification run: None executed (plan gate — no code to test yet). The plan
   names exact backend files (`app/schemas/appointments.py`,
   `app/services/bernie_booking_interpreter.py`, `app/routers/appointments.py`,
@@ -103,16 +118,20 @@ Required before submit. These notes are copied into Codex's review packet automa
   `tests/test_bernie_confidence_policy.py`), the confidence bands/gates to test
   (assume/proceed_with_check/ask/block lattice-min), appointment/audit no-write
   assertions, the ordinary Margaret Thompson / Dr Shera release-gate prompt,
-  omitted-date test, practitioner-typo test, patient ambiguity/duplicate test,
-  debug-disclosure gating, and a no-migration rationale (response-shape + service
-  logic only; one additive config flag, nothing persisted).
-- Remaining risks: Highest risk is preventing fuzzy matching from ever reaching
-  the patient DB (PHI false-positives) — enforced by exact-only patient matching
-  plus an explicit test; practitioner typo tolerance is deliberately asymmetric
-  (small closed set, unique-near-match only). Bands must remain the sole decision
-  source so the advisory scalar cannot re-introduce an unsafe gating path.
-  Backward-compat: existing scalar-confidence assertions are preserved by keeping
-  `confidence` as display-only. Open question flagged for Codex: whether the new
-  axes should also surface on `BernieStaffReviewPayload` now or in a follow-up
-  (plan defers it to keep scope narrow). Awaiting explicit `complete sprint task`
-  before any implementation.
+  omitted-date test, same-day passed/partly-past temporal tests, practitioner-typo
+  test, patient exact/duplicate/fuzzy-candidate tests, fuzzy+identifier
+  corroboration test, debug-disclosure gating, and a no-migration rationale
+  (response-shape + service logic only; one additive config flag, nothing
+  persisted).
+- Remaining risks: Highest risk is a fuzzy patient candidate leaking into a linked
+  `patient_id` or an auto-selected identity — enforced by making `patient_candidates`
+  a display-only choice list, keeping exact-match as the only proceeding path (with
+  a staff DOB/identity check), capping/ranking candidates, and covering both with
+  explicit tests. Same-day validity depends on a correct clinic-local "now"
+  (naive/UTC would misjudge); mitigated by reusing the existing clinic-local time
+  model and pinning now in tests, with forward-only clamping. Bands remain the sole
+  decision source so the advisory scalar cannot re-introduce an unsafe gating path;
+  `confidence` stays display-only for backward-compat. Open question flagged for
+  Codex: whether the new axes/candidates should also surface on
+  `BernieStaffReviewPayload` now or in a follow-up (plan defers to keep scope
+  narrow). Awaiting explicit `complete sprint task` before any implementation.
