@@ -1970,11 +1970,19 @@ def _resolve_bernie_interpretation_context(
             "normalization_safe": normalization.safe,
         }
 
+    # ── Immutable request reference date ─────────────────────────────────────
+    # Echo the inbound reference_date, or resolve clinic-local today when omitted.
+    request_ref_date = body.reference_date
+    if request_ref_date is None:
+        _ref_tz = _practice_zoneinfo(db, practice_id)
+        request_ref_date = _clinic_local_now(_ref_tz).date()
+
     return result.model_copy(update={
         "safe": final_safe,
         "result": final_result,
         "autonomy_tier": final_autonomy,
         "summary": result.summary,
+        "request_reference_date": request_ref_date,
         "command_candidate": command,
         "missing_fields": missing_fields,
         "clarifying_question": clarifying,
@@ -2946,11 +2954,13 @@ def _bernie_staff_review_payload(
         "blocked": "Blocked review payload; no confirm evidence is available.",
         "candidate_selection_required": "Candidate slot summaries are review-only until staff selects one slot.",
         "confirmation_ready": "Confirm payload carries slot-selection and create-proposal evidence for explicit staff approval.",
+        "clinic_day_exhausted": "No bookable slots remain today - restate the date to continue.",
     }
     staff_actions = {
         "blocked": "Review blocked issues before retrying; no booking can be confirmed from this payload.",
         "candidate_selection_required": "Select one candidate slot before preparing confirmation evidence.",
         "confirmation_ready": "Review the selected slot and submit the confirm payload only after explicit staff confirmation.",
+        "clinic_day_exhausted": "Please restate the date - no slots remain today after the requested time.",
     }
     return BernieStaffReviewPayload(
         headline=summary,
@@ -3202,6 +3212,45 @@ def _bernie_supervised_blocked(
     )
 
 
+def _bernie_clinic_day_exhausted(
+    normalization: SlotSearchCommandResult,
+    summary: str,
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+    search_proposal: Optional[SlotSearchProposalOut] = None,
+    identity_evidence: Optional[BernieIdentityEvidence] = None,
+    patient_evidence: Optional[BerniePatientEvidence] = None,
+    request_reference_date: Optional[date_type] = None,
+) -> BernieSupervisedBookingOut:
+    """Return a clinic_day_exhausted response when no bookable slots remain today."""
+    effective_warnings = warnings or []
+    exhaustion_block = AppointmentProposalIssue(
+        code="clinic_day_exhausted",
+        severity="blocked",
+        message=summary,
+    )
+    return BernieSupervisedBookingOut(
+        result="clinic_day_exhausted",
+        request_reference_date=request_reference_date,
+        safe=False,
+        requires_confirmation=False,
+        autonomy_tier="blocked",
+        summary=summary,
+        normalization=normalization,
+        search_proposal=search_proposal,
+        staff_review=_bernie_staff_review_payload(
+            result="clinic_day_exhausted",
+            summary=summary,
+            warnings=effective_warnings,
+            blocks=[exhaustion_block],
+            search_proposal=search_proposal,
+            identity_evidence=identity_evidence,
+            patient_evidence=patient_evidence,
+        ),
+        warnings=effective_warnings,
+        blocks=[exhaustion_block],
+    )
+
+
 @router.post(
     "/proposals/bernie/supervised-booking",
     response_model=BernieSupervisedBookingOut,
@@ -3219,6 +3268,9 @@ def propose_bernie_supervised_booking(
     create-proposal evidence. It never confirms, creates, audits, calls LLMs, or
     invokes provider integrations.
     """
+    # Capture the immutable reference date once; echoed in every response branch.
+    request_reference_date = body.reference_date
+
     normalization = normalize_slot_search_command(
         body.command,
         reference_date=body.reference_date,
@@ -3244,8 +3296,53 @@ def propose_bernie_supervised_booking(
             patient_evidence=review_patient_evidence,
         )
 
+    # Schedule-aware clinic-day exhaustion checks.
+    constraint = normalization.constraint
+    practice_tz = _practice_zoneinfo(db, current_user.practice_id)
+    clinic_now = _clinic_local_now(practice_tz)
+    clinic_today = clinic_now.date()
+    now_time = clinic_now.time().replace(second=0, microsecond=0)
+
+    # Before-search bounded-window pre-check: if the window's upper bound is entirely
+    # in the past, short-circuit without running a slot query.
+    if (
+        constraint.date_from == clinic_today
+        and constraint.latest_time is not None
+        and constraint.latest_time <= now_time
+    ):
+        return _bernie_clinic_day_exhausted(
+            normalization=normalization,
+            summary=(
+                "That time window has already passed today - "
+                "would you like a later time today or a different day?"
+            ),
+            warnings=normalization.warnings,
+            identity_evidence=review_identity_evidence,
+            patient_evidence=review_patient_evidence,
+            request_reference_date=request_reference_date,
+        )
+
+    # Open-ended same-day clamp: if earliest_time is in the past, clamp it to now
+    # so the slot search only looks at remaining bookable slots (not past ones).
+    if (
+        constraint.date_from == clinic_today
+        and constraint.earliest_time is not None
+        and constraint.latest_time is None
+        and constraint.earliest_time < now_time
+    ):
+        # Re-normalize with the clamped earliest_time so the constraint reflects reality.
+        clamped_command_values = body.command.model_dump()
+        clamped_command_values["earliest_time"] = now_time.strftime("%H:%M")
+        clamped_command = SlotSearchCommandIn(**clamped_command_values)
+        normalization = normalize_slot_search_command(
+            clamped_command,
+            reference_date=body.reference_date,
+        )
+        if normalization.safe and normalization.constraint is not None:
+            constraint = normalization.constraint
+
     search_proposal = _build_slot_search_proposal(
-        normalization.constraint,
+        constraint,
         db,
         current_user.practice_id,
     )
@@ -3261,6 +3358,29 @@ def propose_bernie_supervised_booking(
             warnings=warnings,
             identity_evidence=review_identity_evidence,
             patient_evidence=review_patient_evidence,
+        )
+
+    # Schedule-aware clinic-day exhaustion after open-ended slot search.
+    # For open-ended same-day requests (earliest_time set, no latest_time), clamp-to-now
+    # may leave zero bookable slots. Return clinic_day_exhausted instead of an empty
+    # candidate_selection_required, so the UI prompts for a new day rather than an empty picker.
+    if (
+        constraint.date_from == clinic_today
+        and constraint.earliest_time is not None
+        and constraint.latest_time is None
+        and len(search_proposal.candidates) == 0
+    ):
+        return _bernie_clinic_day_exhausted(
+            normalization=normalization,
+            summary=(
+                "No bookable slots remain today after that time - "
+                "would you like to book for another day?"
+            ),
+            warnings=warnings,
+            search_proposal=search_proposal,
+            identity_evidence=review_identity_evidence,
+            patient_evidence=review_patient_evidence,
+            request_reference_date=request_reference_date,
         )
 
     search_execution = SlotSearchCommandExecutionOut(
@@ -3282,6 +3402,7 @@ def propose_bernie_supervised_booking(
         )
         return BernieSupervisedBookingOut(
             result="candidate_selection_required",
+            request_reference_date=request_reference_date,
             safe=True,
             requires_confirmation=False,
             autonomy_tier="execute_with_report",
@@ -3412,6 +3533,7 @@ def propose_bernie_supervised_booking(
     )
     return BernieSupervisedBookingOut(
         result="confirmation_ready",
+        request_reference_date=request_reference_date,
         safe=True,
         requires_confirmation=True,
         autonomy_tier="proposal",

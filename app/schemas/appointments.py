@@ -512,7 +512,7 @@ class BernieIdentityEvidence(BaseModel):
 
 class BernieStaffReviewPayload(BaseModel):
     headline: str
-    status: Literal["blocked", "candidate_selection_required", "confirmation_ready"]
+    status: Literal["blocked", "candidate_selection_required", "confirmation_ready", "clinic_day_exhausted"]
     staff_action_required: str
     confirmation_ready: bool
     selected_slot: Optional[BernieStaffReviewSlotSummary] = None
@@ -608,6 +608,10 @@ class BernieBookingInstructionInterpretOut(BaseModel):
     autonomy_tier: Literal["execute_with_report", "blocked"]
     summary: str
     confidence: float = Field(ge=0, le=1)  # advisory/display-only; NOT a gating signal
+    # Immutable reference date captured once from intake; echoed in every response so the
+    # client never needs to re-derive it. All relative tokens (today/tomorrow) are resolved
+    # against this value and it is never overwritten by downstream steps.
+    request_reference_date: Optional[date] = None
     command_candidate: Optional[SlotSearchCommandIn] = None
     missing_fields: list[str] = Field(default_factory=list)
     safety_flags: list[str] = Field(default_factory=list)
@@ -645,7 +649,11 @@ class BernieSupervisedBookingIn(BaseModel):
 class BernieSupervisedBookingOut(BaseModel):
     """Discriminated non-mutating response for supervised Bernie booking intake."""
     intent: Literal["bernie_supervised_booking"] = "bernie_supervised_booking"
-    result: Literal["blocked", "candidate_selection_required", "confirmation_ready"]
+    # clinic_day_exhausted: same-day request whose clamped slot search yielded zero
+    # remaining bookable slots; staff should restate the date. Never auto-advances date.
+    result: Literal["blocked", "candidate_selection_required", "confirmation_ready", "clinic_day_exhausted"]
+    # Immutable reference date echoed from intake; never overwritten by downstream steps.
+    request_reference_date: Optional[date] = None
     safe: bool
     requires_confirmation: bool
     autonomy_tier: Literal["execute_with_report", "proposal", "blocked"]
