@@ -7,6 +7,10 @@ fall through to a generic ``Not Found`` response instead of the typed Bernie
 confirmation contract.
 """
 
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+import app.routers.appointments as appointments_router
 from app.config import settings
 from app.models.appointments import Appointment, AppointmentAuditLog
 from tests.conftest import make_token
@@ -83,6 +87,14 @@ def test_ordinary_prompt_resolves_practitioner_before_supervised_booking_gate(
     monkeypatch,
 ):
     monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    # Pin clinic-local time to 09:00 on the reference date so same-day validity
+    # does not reject the "today after 2 pm" window (which would be in the past
+    # when this test runs after 15:45 AEST).
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda tz: datetime(2026, 7, 1, 9, 0, 0, tzinfo=tz),
+    )
     token = make_token(gp_user)
     before = _row_counts(db)
 
