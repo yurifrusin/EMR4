@@ -3057,3 +3057,95 @@ html, body {
   padding-top: 6px;
   margin-top: 4px;
 }
+
+/* ─── SPRINT 99: BERNIE CONFIDENCE UI STYLES ─── */
+.bernie-staged-booking-card.provisional {
+  border-style: dashed;
+  background: #fbf7ff;
+  border-color: #a855f7;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
+}
+
+.bernie-evidence-details {
+  margin-top: 8px;
+  background: #fdfdfd;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.bernie-details-summary {
+  padding: 8px 12px;
+  font-weight: 600;
+  font-size: 11px;
+  color: #4b5563;
+  cursor: pointer;
+  background: #f3f4f6;
+  user-select: none;
+  outline: none;
+}
+
+.bernie-details-summary:hover {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+.bernie-compact-prompt {
+  font-size: 11px;
+  color: #7e22ce;
+  background-color: #faf5ff;
+  border: 1px solid #e9d5ff;
+  border-left: 3px solid #a855f7;
+  padding: 6px 10px;
+  border-radius: 4px;
+  line-height: 1.4;
+  margin: 6px 0;
+  font-weight: 600;
+}
+
+.bernie-notice-alert {
+  font-size: 11px;
+  color: #b45309;
+  background-color: #fffbeb;
+  border: 1px solid #fde68a;
+  border-left: 3px solid #f59e0b;
+  padding: 6px 10px;
+  border-radius: 4px;
+  line-height: 1.4;
+  margin: 6px 0;
+  font-weight: 650;
+}
+
+.bernie-patient-candidates-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 8px;
+  background: #f9fafb;
+  border: 1px solid #f3f4f6;
+  border-radius: 6px;
+}
+
+.bernie-patient-candidate-item {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #374151;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.bernie-patient-candidate-item:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+  color: #111827;
+}
+
+.bernie-patient-candidate-item:active {
+  transform: scale(0.98);
+}

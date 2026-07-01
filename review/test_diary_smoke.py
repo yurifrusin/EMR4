@@ -299,7 +299,7 @@ def test_bernie_review_confirmation_ready(diary_page):
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Ready to book this appointment"
+        assert "Would you like to confirm?" in headline.text_content()
 
         # Verify action description
         action = diary_page.locator("[data-testid='bernie-review-action']")
@@ -645,7 +645,7 @@ def test_bernie_review_route_intercepted_confirmation_ready(diary_page):
 
         # Verify headline
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Ready to book this appointment"
+        assert "Would you like to confirm?" in headline.text_content()
 
         # Verify selected slot
         assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 1
@@ -1844,7 +1844,7 @@ def test_bernie_pilot_eligibility_eligible(diary_page):
         assert "Review the details before confirming." in banner.text_content()
 
         headline = diary_page.locator("[data-testid='bernie-review-headline']")
-        assert headline.text_content().strip() == "Ready to book this appointment"
+        assert "Would you like to confirm?" in headline.text_content()
 
     finally:
         diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
@@ -4009,7 +4009,7 @@ def test_bernie_ordinary_mode_no_raw_codes(diary_page):
         # Check block message
         block_items = diary_page.locator("[data-testid='bernie-review-block-item']")
         assert block_items.count() == 1
-        assert block_items.first.text_content().strip() == "Please select a practitioner."
+        assert block_items.first.text_content().strip() == "I can't proceed with this booking because please select a practitioner."
 
         # Verify developer diagnostic container is ABSENT
         assert diary_page.locator("[data-testid='bernie-dev-diagnostic']").count() == 0
@@ -4598,3 +4598,552 @@ def test_bernie_generic_confirm_other_error_calm_copy(diary_page):
         diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_inferred_today(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "staff_review": {
+            "status": "confirmation_ready",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "Inferred date warning.",
+            "evidence_summary": "Date was inferred as today.",
+            "warnings": [
+                { "code": "date_inferred_today", "severity": "warning", "message": "Inferred date is today." }
+            ],
+            "blocks": [],
+            "patient_evidence": {
+                "patient_label": "Margaret Thompson",
+                "confidence": "high"
+            }
+        }
+    }
+
+    mock_interpret = {
+        "safe": True,
+        "result": "interpreted",
+        "command_candidate": {
+            "practitioner_id": "smoke-prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "today",
+            "duration_minutes": "15"
+        }
+    }
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret)
+        )
+    )
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&practitioner_id=smoke-prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page, instruction="Please find practitioner_id:smoke-prac-1 patient_id:smoke-pat-1", register_default_mock=False)
+
+        # 1. Inferred Today warning notice renders
+        notice = diary_page.locator("[data-testid='bernie-notice-alert']")
+        notice.wait_for(state="visible", timeout=5000)
+        assert "I've assumed today for the booking date since you didn't mention a date." in notice.text_content()
+
+        # 2. Provisional slot card renders on the grid
+        grid_card = diary_page.locator("[data-testid='bernie-staged-booking-card']")
+        grid_card.wait_for(state="visible", timeout=5000)
+        assert grid_card.count() == 1
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_no_reference_date_clarification(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "staff_review": {
+            "status": "blocked",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [],
+            "warning_summary": "Missing date.",
+            "evidence_summary": "Blocked by missing reference date.",
+            "warnings": [],
+            "blocks": [
+                { "code": "missing_reference_date", "severity": "blocked", "message": "Reference date is missing." }
+            ]
+        }
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page)
+
+        # Verify first-person date prompt displays
+        block_item = diary_page.locator("[data-testid='bernie-review-block-item']")
+        block_item.wait_for(state="visible", timeout=5000)
+        assert block_item.count() == 1
+        assert "I can't proceed with this booking because please select a date." in block_item.text_content()
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_practitioner_typo(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "staff_review": {
+            "status": "confirmation_ready",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "Typo warning.",
+            "evidence_summary": "Resolved practitioner typo.",
+            "warnings": [
+                { "code": "practitioner_typo_resolved", "severity": "warning", "message": "Resolved practitioner typo for entry Sheraa" }
+            ],
+            "blocks": [],
+            "practitioner_evidence": {
+                "practitioner_id": "8b5f3964-b52b-42fa-90f7-b4d21e8e2fa5",
+                "display_name": "Shera"
+            }
+        }
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page)
+
+        # Verify notice matches Dr. Shera and entry Sheraa
+        notice = diary_page.locator("[data-testid='bernie-notice-alert']")
+        notice.wait_for(state="visible", timeout=5000)
+        assert "Do you mean Dr Shera (for your entry 'Sheraa')?" in notice.text_content()
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_patient_candidate_ambiguity(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "staff_review": {
+            "status": "blocked",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [],
+            "warning_summary": "Ambiguous patient.",
+            "evidence_summary": "Multiple patient candidates.",
+            "warnings": [],
+            "blocks": [],
+            "identity_evidence": {
+                "patient_label": "Margaret",
+                "confidence": "ambiguous",
+                "verification_status": "requires_staff_verification",
+                "staff_prompt": "Multiple patients matching Margaret."
+            },
+            "patient_candidates": [
+                { "id": "11111111-1111-1111-1111-111111111111", "first_name": "Margaret", "last_name": "Thompson", "date_of_birth": "1960-01-01" },
+                { "id": "22222222-2222-2222-2222-222222222222", "first_name": "Margaret", "last_name": "Smith", "date_of_birth": "1975-05-10" }
+            ]
+        }
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page)
+
+        # Verify first-person choice prompt
+        notice = diary_page.locator("[data-testid='bernie-notice-alert']")
+        notice.wait_for(state="visible", timeout=5000)
+        assert "I found multiple patients matching 'Margaret'. Please select the correct patient." in notice.text_content()
+
+        # Verify candidate items render
+        candidates = diary_page.locator("[data-testid='bernie-patient-candidate-item']")
+        assert candidates.count() == 2
+        assert "Margaret Thompson" in candidates.nth(0).text_content()
+        assert "Margaret Smith" in candidates.nth(1).text_content()
+
+        # Verify that the auto-preview slot is NOT rendered on the grid
+        assert diary_page.locator("[data-testid='bernie-staged-booking-card']").count() == 0
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_details_toggle_and_dob(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    # 1. High/medium confidence - details collapsed, DOB compact prompts render
+    mock_high_conf = {
+        "staff_review": {
+            "status": "confirmation_ready",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "DOB verification required.",
+            "evidence_summary": "High confidence but DOB verification required.",
+            "warnings": [],
+            "blocks": [],
+            "identity_evidence": {
+                "patient_label": "Margaret Thompson",
+                "confidence": "high",
+                "verification_status": "requires_staff_verification",
+                "staff_prompt": "Please confirm Date of Birth"
+            }
+        }
+    }
+
+    # 2. Low confidence - details expanded
+    mock_low_conf = {
+        "staff_review": {
+            "status": "confirmation_ready",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "Low confidence details.",
+            "evidence_summary": "Low confidence detail.",
+            "warnings": [],
+            "blocks": [],
+            "identity_evidence": {
+                "patient_label": "Margaret Thompson",
+                "confidence": "low",
+                "verification_status": "requires_staff_verification",
+                "staff_prompt": "Verify patient details."
+            }
+        }
+    }
+
+    try:
+        # Check High Confidence Case (Collapsed details, compact DOB prompt visible)
+        diary_page.route(
+            "**/api/v1/appointments/proposals/bernie/supervised-booking",
+            lambda route: route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps(mock_high_conf)
+            )
+        )
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page)
+
+        details = diary_page.locator("[data-testid='bernie-evidence-details']")
+        details.wait_for(state="visible", timeout=5000)
+        assert details.evaluate("el => el.open") is False
+
+        dob_prompt = diary_page.locator("[data-testid='bernie-compact-dob-prompt']")
+        dob_prompt.wait_for(state="visible", timeout=5000)
+        assert "Please confirm the patient's date of birth before booking." in dob_prompt.text_content()
+
+        # Check Low Confidence Case (Expanded details)
+        diary_page.route(
+            "**/api/v1/appointments/proposals/bernie/supervised-booking",
+            lambda route: route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps(mock_low_conf)
+            )
+        )
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page)
+
+        details_low = diary_page.locator("[data-testid='bernie-evidence-details']")
+        details_low.wait_for(state="visible", timeout=5000)
+        assert details_low.evaluate("el => el.open") is True
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_raw_code_exclusion(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "staff_review": {
+            "status": "blocked",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [],
+            "warning_summary": "Blocked by practitioner.",
+            "evidence_summary": "Technical code checks.",
+            "warnings": [],
+            "blocks": [
+                { "code": "missing_practitioner_id", "severity": "blocked", "message": "Practitioner ID is required." }
+            ]
+        }
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page)
+
+        # Assert no snake_case or raw technical codes rendered in ordinary mode
+        review_panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
+        assert "missing_practitioner_id" not in review_panel_text
+        assert "UUID" not in review_panel_text
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_no_write_before_confirm(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "staff_review": {
+            "status": "confirmation_ready",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Ready to confirm.",
+            "warnings": [],
+            "blocks": []
+        }
+    }
+
+    confirm_hits = []
+    mock_interpret = {
+        "safe": True,
+        "result": "interpreted",
+        "command_candidate": {
+            "practitioner_id": "smoke-prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "today",
+            "duration_minutes": "15"
+        }
+    }
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret)
+        )
+    )
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+    diary_page.route(
+        "**/confirm-bernie",
+        lambda route: (confirm_hits.append(True), route.fulfill(status=200, body=b"{}"))
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&practitioner_id=smoke-prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page, instruction="Please find practitioner_id:smoke-prac-1 patient_id:smoke-pat-1", register_default_mock=False)
+
+        # Staged preview is rendered, but confirm endpoint is never hit until Confirm is clicked
+        diary_page.wait_for_selector("[data-testid='bernie-staged-booking-card']", state="visible", timeout=5000)
+        assert len(confirm_hits) == 0
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_choose_another_time_suppression(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_response = {
+        "staff_review": {
+            "status": "confirmation_ready",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-06-27",
+                "start_time_local": "09:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Staged candidate.",
+            "warnings": [],
+            "blocks": []
+        }
+    }
+
+    mock_interpret = {
+        "safe": True,
+        "result": "interpreted",
+        "command_candidate": {
+            "practitioner_id": "smoke-prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "today",
+            "duration_minutes": "15"
+        }
+    }
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret)
+        )
+    )
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&practitioner_id=smoke-prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page, instruction="Please find practitioner_id:smoke-prac-1 patient_id:smoke-pat-1", register_default_mock=False)
+
+        # Assert staged provisional card is rendered
+        grid_card = diary_page.locator("[data-testid='bernie-staged-booking-card']")
+        grid_card.wait_for(state="visible", timeout=5000)
+        assert grid_card.count() == 1
+
+        # Click Choose another time
+        diary_page.click("[data-testid='bernie-review-change-slot-button']")
+
+        # Assert staged card is removed from the grid
+        assert diary_page.locator("[data-testid='bernie-staged-booking-card']").count() == 0
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint99_bernie_asset_version_checks():
+    import re
+    from pathlib import Path
+    repo_root = Path(__file__).resolve().parents[1]
+    html_path = repo_root / "docs" / "diary" / "diary.html"
+    html_content = html_path.read_text(encoding="utf-8")
+
+    # Assert that scripts and style assets are loaded with cache-busting version query parameters
+    assert re.search(r'diary\.css\?v=\d+', html_content) is not None
+    assert re.search(r'diary\.js\?v=\d+', html_content) is not None
