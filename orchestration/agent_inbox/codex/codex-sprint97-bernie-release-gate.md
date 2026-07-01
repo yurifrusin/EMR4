@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint97-bernie-release-gate` |
-| Status | pending_plan_review |
+| Status | completed |
 | Created | 89fb530 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint97-bernie-release-gate --summary "Short plan summary"` |
@@ -90,5 +90,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Verification run:
-- Remaining risks:
+- `orchestration/bernie_release_gates.md`
+- `orchestration/protocol_alerts.md`
+- `orchestration/sprint_closeout.md`
+- `orchestration/agent_inbox/codex/codex-sprint97-bernie-release-gate.md`
+- Verification run: `git diff --check`; `Select-String -Path orchestration\bernie_release_gates.md,orchestration\protocol_alerts.md,orchestration\sprint_closeout.md -Pattern "route-intercepted|live_provider|screenshot|Margaret Thompson|Dr Shera"`.
+- Remaining risks: This worker deliberately did not edit the owned implementation surfaces (`app/`, `docs/diary/`, `review/test_diary_smoke.py`, `scripts/smoke_bernie_interpreter.py`). Claude/Antigravity/Ariadne still need to implement the actual automated gates and resolve the reproducible screenshot failure before Sprint 97 can close.

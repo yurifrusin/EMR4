@@ -39,6 +39,16 @@ reviewed, integrated, verified, pushed, and audited.
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py -q --tb=short` passed: `27 passed`; existing pytest-asyncio loop-scope deprecation warning remains.
 - `git diff --check HEAD` passed.
 
+## Sprint 97 Release-Gate Correction
+
+The Sprint 96 closeout below left the simplest receptionist happy path as
+residual user review. Treat that as a process bug, not a precedent. For Sprint
+97 and later Bernie booking work, the ordinary Margaret Thompson / Dr Shera
+prompt is a blocking release gate, route-intercepted checks must be labelled as
+route-intercepted rather than live, and any reproducible screenshot/visual
+failure blocks closeout. The standing rule lives in
+`orchestration/bernie_release_gates.md`.
+
 ## Recommended User Review
 
 Residual user review is useful because this sprint changes the live receptionist surface and the exact visual feel of Bernie.
