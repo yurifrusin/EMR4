@@ -3169,7 +3169,7 @@ def test_bernie_pilot_instruction_first_without_selected_appointment(diary_page)
 
     try:
         diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
-        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.goto(base_url + "/diary/diary.html?bernie_auto_preview=false")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
         diary_page.wait_for_selector("[data-testid='bernie-instruction-input']", state="visible", timeout=5000)
@@ -3334,7 +3334,7 @@ def test_bernie_candidate_click_stages_provisional_diary_preview(diary_page):
 
     try:
         diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
-        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.goto(base_url + "/diary/diary.html?bernie_auto_preview=false")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
         diary_page.fill("[data-testid='bernie-instruction-input']", "Make appointment for Margaret Thompson with Dr Shera at 2:30")
@@ -3354,7 +3354,7 @@ def test_bernie_candidate_click_stages_provisional_diary_preview(diary_page):
         assert "Proposed appointment" in staged_text
         assert "Margaret Thompson" in staged_text
         assert "14:30:00" in staged_text
-        assert "medicare/card" in staged_text.lower()
+        assert "medicare/card" not in staged_text.lower()
         assert "is-fresh" in (staged_card.get_attribute("class") or "")
         assert staged_card.evaluate("el => getComputedStyle(el).animationName") == "bernie-staged-pulse"
         diary_page.emulate_media(reduced_motion="reduce")
@@ -3549,7 +3549,7 @@ def test_bernie_route_intercepted_selected_slot_can_return_to_candidates(diary_p
 
     try:
         diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
-        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.goto(base_url + "/diary/diary.html?bernie_auto_preview=false")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
         diary_page.fill(
@@ -3679,7 +3679,7 @@ def test_sprint100_bernie_tomorrow_reference_date_survives_diary_navigation(diar
         diary_page.goto(
             base_url
             + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true"
-            + "&practitioner_id=smoke-prac-1&patient_id=smoke-pat-1&reference_date=2026-07-01"
+            + "&bernie_dev_review=true&practitioner_id=smoke-prac-1&patient_id=smoke-pat-1&reference_date=2026-07-01"
         )
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
         diary_page.fill("[data-testid='bernie-instruction-input']", "Make an appointment tomorrow after 3 with Dr Shera")
@@ -5168,6 +5168,214 @@ def test_sprint99_bernie_no_write_before_confirm(diary_page):
         # Staged preview is rendered, but confirm endpoint is never hit until Confirm is clicked
         diary_page.wait_for_selector("[data-testid='bernie-staged-booking-card']", state="visible", timeout=5000)
         assert len(confirm_hits) == 0
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint103_bernie_compact_request_card_and_sensitive_details(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_interpret = {
+        "safe": True,
+        "result": "interpreted",
+        "summary": "Booking instruction needs staff clarification before slot search.",
+        "command_candidate": {
+            "practitioner_id": "smoke-prac-1",
+            "practitioner_label": "Alex Shera",
+            "patient_id": "smoke-pat-1",
+            "patient_label": "Margaret Thompson",
+            "date_from": "2026-07-03",
+            "duration_minutes": 15,
+            "earliest_time": "15:00:00",
+            "latest_time": "16:30:00"
+        },
+        "warnings": [
+            {"code": "date_assumed_from_visible_diary", "message": "Date assumed from the open diary page."}
+        ],
+        "blocks": []
+    }
+
+    mock_response = {
+        "staff_review": {
+            "status": "confirmation_ready",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-07-03",
+                "start_time_local": "15:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Ready to confirm.",
+            "warnings": [],
+            "blocks": [],
+            "identity_evidence": {
+                "patient_id": "smoke-pat-1",
+                "patient_label": "Margaret Thompson",
+                "confidence": "high",
+                "recognition_status": "recognized",
+                "medicare_number": "12345678901",
+                "ihi_number": "8003608333333333"
+            },
+            "patient_evidence": {
+                "patient_label": "Margaret Thompson",
+                "date_of_birth": "1952-03-14",
+                "masked_phone": "******5678",
+                "confidence": "high"
+            }
+        }
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret)
+        )
+    )
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&practitioner_id=smoke-prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page, instruction="Make an appointment for Margaret Thompson with Dr Shera after 3 tomorrow and before 4.30.", register_default_mock=False)
+
+        diary_page.wait_for_selector("[data-testid='bernie-review-selected-slot']", state="visible", timeout=5000)
+        assert diary_page.locator("[data-testid='bernie-interpret-status']").text_content().strip() == "Understood"
+        assert diary_page.locator("[data-testid='bernie-interpret-summary']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-interpret-command']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-interpret-details'] summary").text_content().strip() == "Need to clarify anything?"
+
+        sensitive = diary_page.locator("[data-testid='bernie-appointment-sensitive-details']")
+        sensitive.wait_for(state="visible", timeout=5000)
+        assert sensitive.evaluate("el => el.open") is False
+        assert "12345678901" not in diary_page.locator("[data-testid='bernie-review-panel']").inner_text()
+        sensitive.locator("summary").click()
+        assert "12345678901" in sensitive.inner_text()
+        assert "8003608333333333" in sensitive.inner_text()
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint103_bernie_auto_stages_best_candidate_in_ordinary_mode(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_interpret = {
+        "safe": True,
+        "result": "interpreted",
+        "summary": "Find appointment slots.",
+        "command_candidate": {
+            "practitioner_id": "smoke-prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "2026-07-03",
+            "duration_minutes": 15,
+            "earliest_time": "15:00:00",
+            "latest_time": "16:30:00"
+        },
+        "warnings": [],
+        "blocks": []
+    }
+    mock_candidate_response = {
+        "staff_review": {
+            "status": "candidate_selection_required",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [
+                {
+                    "appointment_date": "2026-07-03",
+                    "start_time_local": "15:00:00",
+                    "duration_minutes": 15,
+                    "warnings": []
+                },
+                {
+                    "appointment_date": "2026-07-03",
+                    "start_time_local": "15:15:00",
+                    "duration_minutes": 15,
+                    "warnings": []
+                }
+            ],
+            "warning_summary": "Choose a time.",
+            "evidence_summary": "Candidates only.",
+            "warnings": [],
+            "blocks": []
+        }
+    }
+    mock_confirmation_response = {
+        "staff_review": {
+            "status": "confirmation_ready",
+            "confirmation_ready": True,
+            "selected_slot": {
+                "appointment_date": "2026-07-03",
+                "start_time_local": "15:00:00",
+                "duration_minutes": 15,
+                "warnings": []
+            },
+            "candidate_slots": [],
+            "warning_summary": "No warnings.",
+            "evidence_summary": "Ready.",
+            "warnings": [],
+            "blocks": [],
+            "identity_evidence": {
+                "patient_id": "smoke-pat-1",
+                "patient_label": "Margaret Thompson",
+                "confidence": "high",
+                "recognition_status": "recognized"
+            },
+            "patient_evidence": {
+                "patient_label": "Margaret Thompson",
+                "date_of_birth": "1952-03-14",
+                "confidence": "high"
+            }
+        }
+    }
+
+    calls = []
+
+    def handle_supervised(route):
+        body = json.loads(route.request.post_data)
+        calls.append(body)
+        if "selected_candidate_index" in body:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_confirmation_response))
+        else:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_candidate_response))
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        lambda route: route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_interpret))
+    )
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&practitioner_id=smoke-prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(diary_page, instruction="Find Margaret Thompson after 3 tomorrow.", register_default_mock=False)
+
+        diary_page.wait_for_selector("[data-testid='bernie-review-selected-slot']", state="visible", timeout=5000)
+        diary_page.wait_for_selector("[data-testid='bernie-staged-booking-card']", state="visible", timeout=5000)
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").is_visible()
+        assert len(calls) == 2
+        assert calls[1]["selected_candidate_index"] == 0
 
     finally:
         diary_page.unroute("**/api/v1/**")

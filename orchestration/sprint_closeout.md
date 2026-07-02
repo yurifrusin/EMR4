@@ -8,9 +8,90 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 103: Bernie Compact Request And Auto Preview |
+| Integrated through | Compact understood-request card, ordinary-mode best-candidate auto-preview, sensitive appointment details disclosure, and review harness updates |
+| Status | Integrated locally and verified; awaiting push/deploy |
+| Last updated | 2026-07-02 |
+
+## What Changed
+
+- Changed the ordinary *bernie* `UNDERSTOOD` request card so it no longer shows
+  the verbose summary/date/window line on the main reception surface.
+- Renamed the request disclosure from `Details` to `Need to clarify anything?`.
+  The full interpreted command, assumptions, warnings, and technical detail remain
+  available inside that disclosure.
+- Added ordinary-mode best-candidate auto-preview: after *bernie* finds candidate
+  times, the first/best candidate is immediately staged on the diary and the
+  confirmation panel is prepared.
+- Kept manual candidate selection available through an explicit
+  `bernie_auto_preview=false` harness/manual mode so the list-selection branch is
+  still testable.
+- Added a closed-by-default `See more` disclosure under appointment details for
+  sensitive patient identifiers such as Medicare, IHI, and phone details when the
+  API supplies them.
+- Updated the diary smoke harness so it tests both the new ordinary-mode
+  auto-preview behaviour and the retained manual candidate path.
+- Updated diary assets to `diary.js?v=143`; `diary.css` remains `v=124`.
+
+## Verification
+
+- `node --check docs\diary\diary.js` passed.
+- `python scripts\check_frontend_versions.py` passed; local diary JS is correctly
+  bumped from `v=142` to `v=143`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "sprint103 or bernie_pilot_ordinary_mode_requires_real_context or bernie_pilot_instruction_first_without_selected_appointment or bernie_candidate_click_stages_provisional_diary_preview or bernie_route_intercepted_selected_slot_can_return_to_candidates"` passed: `6 passed`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q` passed:
+  full diary review harness green.
+- `git diff --check` passed with only the existing `review/test_diary_smoke.py`
+  CRLF normalization warning.
+
+## Recommended User Review
+
+After GitHub Pages deploys:
+
+1. Hard refresh the live Diary/Office dialog and confirm it loads
+   `diary.js?v=143` and `diary.css?v=124`.
+2. Open `Bernie` and try `Make an appointment for Margaret Thompson with Dr
+   Shera after 3 tomorrow and before 4.30`.
+3. Expected result: the `REQUEST` card should only show `UNDERSTOOD` plus the
+   `Need to clarify anything?` disclosure, not the verbose date/window line.
+4. Expected result: the first suitable candidate should automatically appear on
+   the diary as a proposed appointment, with the confirmation panel ready.
+5. Open `See more` under appointment details. Expected result: any extra patient
+   identifiers supplied by the API are visible there, but not on the main card.
+6. Click `Choose another time`. Expected result: the candidate list returns
+   without changing the intended date.
+7. Confirm a booking. Expected result: the confirmed appointment replaces the
+   proposed diary card and the compact green confirmation state appears.
+8. Suspicious signs: the old verbose `Booking instruction needs staff
+   clarification...` copy appears outside disclosure, the diary does not
+   auto-stage a first candidate, sensitive identifiers are visible by default,
+   or `Choose another time` reintroduces the extra-day jump.
+
+## Not Required Before Moving On
+
+- No backend API contract was changed in this sprint.
+- No new state-machine library dependency was added.
+- No Medicare Online, HI/IHI, OPV/PVM, Caller ID, voice/headset integration, or
+  production GCP change is included.
+
+## Known Follow-Up
+
+- Add the receptionist-facing auto-preview toggle promised in the UX model.
+- Implement backend `patient_booking_context` so *bernie* can warn about existing
+  future appointments for the same patient.
+- Decide whether the compact request disclosure should become a tabbed details
+  panel once the details payload grows.
+- Continue the root-to-branch API-spine design sprint with GraphQL/context graph,
+  command mutations, event contracts, YAML capability manifests, cybersecurity,
+  and statechart modelling.
+
+## Previous Closeout - Sprint 102
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 102: Bernie Date Context Transition Table |
 | Integrated through | Deterministic date-resolution transition table, visible diary page context frame, compact clarification preview, and future follow-up seed fixtures |
-| Status | Integrated locally and verified; awaiting push/deploy |
+| Status | Integrated and verified |
 | Last updated | 2026-07-02 |
 
 ## What Changed

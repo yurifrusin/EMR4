@@ -71,6 +71,7 @@ class BernieSession {
     this.confirmEndpoint = null;
     this.interpretEnvelope = null;
     this.latestReviewPayload = null;
+    this.autoPreviewCandidateKey = null;
   }
 
   init(practitionerId, patientId) {
@@ -98,6 +99,7 @@ class BernieSession {
     this.confirmEndpoint = null;
     this.interpretEnvelope = null;
     this.latestReviewPayload = null;
+    this.autoPreviewCandidateKey = null;
     
     // Sync with legacy globals
     bernieInstructionText = "";
@@ -127,6 +129,7 @@ class BernieSession {
     this.confirmEndpoint = null;
     this.interpretEnvelope = null;
     this.latestReviewPayload = null;
+    this.autoPreviewCandidateKey = null;
     this.state = "INSTRUCTION_ENTRY";
 
     bernieInstructionText = currentInstruction;
@@ -627,20 +630,23 @@ function renderBernieInterpretPreview(contentEl, envelope) {
   header.append(title, status);
   preview.appendChild(header);
 
-  const summary = document.createElement("div");
-  summary.className = "bernie-interpret-summary";
-  summary.setAttribute("data-testid", "bernie-interpret-summary");
   const clarificationShownAsSummary = envelope.result === "clarification_required" && !!envelope.clarifying_question;
-  summary.textContent = clarificationShownAsSummary
-    ? envelope.clarifying_question
-    : envelope.result === "clarification_required"
-      ? "I need one more detail before I search."
-      : (envelope.summary || "I understood the booking request.");
-  preview.appendChild(summary);
+  const compactUnderstoodRequest = envelope.result === "interpreted" && !isBernieDevOrDebug();
+  if (!compactUnderstoodRequest) {
+    const summary = document.createElement("div");
+    summary.className = "bernie-interpret-summary";
+    summary.setAttribute("data-testid", "bernie-interpret-summary");
+    summary.textContent = clarificationShownAsSummary
+      ? envelope.clarifying_question
+      : envelope.result === "clarification_required"
+        ? "I need one more detail before I search."
+        : (envelope.summary || "I understood the booking request.");
+    preview.appendChild(summary);
+  }
 
   const command = envelope.normalization?.constraint || envelope.command_candidate;
   const compactClarification = envelope.result === "clarification_required" && !isBernieDevOrDebug();
-  if (command && !compactClarification) {
+  if (command && !compactClarification && !compactUnderstoodRequest) {
     const commandEl = document.createElement("div");
     commandEl.className = "bernie-interpret-command";
     commandEl.setAttribute("data-testid", "bernie-interpret-command");
@@ -668,6 +674,17 @@ function renderBernieInterpretPreview(contentEl, envelope) {
   }
 
   const issues = [...(envelope.blocks || []), ...(envelope.warnings || [])];
+  const defaultedDuration = (envelope.assumptions || []).some(assumption => (
+    assumption.field === "duration_minutes" && String(assumption.assumed_value) === "15"
+  ));
+  const commandParts = command ? [
+    command.practitioner_label ? `Practitioner: ${command.practitioner_label}` : "",
+    command.patient_label || command.patient_name_provisional ? `Patient: ${command.patient_label || command.patient_name_provisional}` : "",
+    command.date_from ? `Date: ${command.date_from}` : "",
+    command.duration_minutes && (isBernieDevOrDebug() || !defaultedDuration) ? `Duration: ${command.duration_minutes} mins` : "",
+    command.earliest_time ? `Earliest: ${command.earliest_time}` : "",
+    command.latest_time ? `Latest: ${command.latest_time}` : ""
+  ].filter(Boolean) : [];
   if (issues.length > 0) {
     const routineCodes = new Set([
       "patient_recognized_by_register",
@@ -696,12 +713,12 @@ function renderBernieInterpretPreview(contentEl, envelope) {
     if (visibleIssues.length > 0) {
       preview.appendChild(issueList);
     }
-    if (!isBernieDevOrDebug() && technicalIssues.length > 0) {
+    if (!isBernieDevOrDebug() && !compactUnderstoodRequest && technicalIssues.length > 0) {
       const details = document.createElement("details");
       details.className = "bernie-interpret-details";
       details.setAttribute("data-testid", "bernie-interpret-details");
       const detailsSummary = document.createElement("summary");
-      detailsSummary.textContent = "Details";
+      detailsSummary.textContent = "Need to clarify anything?";
       details.appendChild(detailsSummary);
       technicalIssues.forEach(issue => {
         const item = document.createElement("div");
@@ -711,6 +728,35 @@ function renderBernieInterpretPreview(contentEl, envelope) {
       });
       preview.appendChild(details);
     }
+  }
+
+  if (compactUnderstoodRequest && (commandParts.length > 0 || envelope.summary || issues.length > 0)) {
+    const details = document.createElement("details");
+    details.className = "bernie-interpret-details";
+    details.setAttribute("data-testid", "bernie-interpret-details");
+    const detailsSummary = document.createElement("summary");
+    detailsSummary.textContent = "Need to clarify anything?";
+    details.appendChild(detailsSummary);
+
+    if (envelope.summary) {
+      const summaryDetail = document.createElement("div");
+      summaryDetail.className = "bernie-interpret-issue";
+      summaryDetail.textContent = envelope.summary;
+      details.appendChild(summaryDetail);
+    }
+    if (commandParts.length > 0) {
+      const commandDetail = document.createElement("div");
+      commandDetail.className = "bernie-interpret-issue";
+      commandDetail.textContent = commandParts.join(" - ");
+      details.appendChild(commandDetail);
+    }
+    issues.forEach(issue => {
+      const item = document.createElement("div");
+      item.className = "bernie-interpret-issue";
+      item.textContent = issue.message || formatBernieCode(issue.code || "detail");
+      details.appendChild(item);
+    });
+    preview.appendChild(details);
   }
 
   const metadata = envelope.provider_metadata;
@@ -3072,6 +3118,47 @@ function renderBernieIdentityEvidence(contentEl, evidence, patientEvidence = nul
   contentEl.appendChild(detailsEl);
 }
 
+function firstBerniePatientDetailValue(...values) {
+  return values.find(value => value !== undefined && value !== null && String(value).trim() !== "") || "";
+}
+
+function renderBernieAppointmentSensitiveDetails(container, payload) {
+  if (!container || !payload) return;
+  const patientEvidence = payload.patient_evidence || {};
+  const identityEvidence = payload.identity_evidence || {};
+  const patient = payload.patient || {};
+  const rows = [
+    ["Phone", firstBerniePatientDetailValue(patientEvidence.masked_phone, identityEvidence.masked_phone, patient.masked_phone, patient.phone_mobile, patient.phone_home)],
+    ["Medicare", firstBerniePatientDetailValue(patientEvidence.medicare_number, identityEvidence.medicare_number, patient.medicare_number)],
+    ["Medicare IRN", firstBerniePatientDetailValue(patientEvidence.medicare_irn, identityEvidence.medicare_irn, patient.medicare_irn)],
+    ["IHI", firstBerniePatientDetailValue(patientEvidence.ihi_number, identityEvidence.ihi_number, patient.ihi_number)],
+    ["Recognition", formatBernieCode(identityEvidence.recognition_status || (identityEvidence.patient_id ? "recognized" : ""))],
+    ["Confidence", patientEvidence.confidence || identityEvidence.confidence ? `${formatBernieCode(patientEvidence.confidence || identityEvidence.confidence)} confidence` : ""]
+  ].filter(([, value]) => value);
+
+  const warnings = Array.isArray(identityEvidence.warnings) ? identityEvidence.warnings : [];
+  if (warnings.length > 0) {
+    rows.push(["Notes", warnings.map(formatBernieCode).join(", ")]);
+  }
+
+  if (rows.length === 0) return;
+
+  const details = document.createElement("details");
+  details.className = "bernie-appointment-sensitive-details";
+  details.setAttribute("data-testid", "bernie-appointment-sensitive-details");
+
+  const summary = document.createElement("summary");
+  summary.className = "bernie-details-summary";
+  summary.textContent = "See more";
+  details.appendChild(summary);
+
+  const card = document.createElement("div");
+  card.className = "bernie-identity-evidence";
+  rows.forEach(([label, value]) => appendBernieDetailRow(card, label, value));
+  details.appendChild(card);
+  container.appendChild(details);
+}
+
 function renderBernieReview(payload, interpretEnvelope = null) {
   const contentEl = document.getElementById("bernie-review-content");
   if (!contentEl) return;
@@ -3388,6 +3475,32 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
     candidatesContainer.appendChild(list);
     contentEl.appendChild(candidatesContainer);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const reviewParam = urlParams.get("bernie_review");
+    const autoPreviewDisabled = urlParams.get("bernie_auto_preview") === "false";
+    if (reviewParam === "live" && !autoPreviewDisabled && !isBernieDevOrDebug() && !suppressAutoPreview && bernieSession.selectedCandidateIndex === null && candidateSlots.length > 0) {
+      const firstSlot = candidateSlots[0];
+      const previewKey = [
+        firstSlot.appointment_date || "",
+        firstSlot.start_time_local || "",
+        firstSlot.practitioner_id || "",
+        firstSlot.duration_minutes || ""
+      ].join("|");
+      if (bernieSession.autoPreviewCandidateKey !== previewKey) {
+        bernieSession.autoPreviewCandidateKey = previewKey;
+        setTimeout(() => {
+          if (
+            !suppressAutoPreview &&
+            bernieSession.selectedCandidateIndex === null &&
+            bernieSession.state !== "SLOT_PREVIEW" &&
+            bernieSession.state !== "CONFIRMED"
+          ) {
+            stageBernieCandidateForReview(firstSlot, 0);
+          }
+        }, 0);
+      }
+    }
   }
   else if (payload.status === "confirmation_ready") {
     const selectionContainer = document.createElement("div");
@@ -3416,6 +3529,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     card.appendChild(durationSpan);
 
     selectionContainer.appendChild(card);
+    renderBernieAppointmentSensitiveDetails(selectionContainer, payload);
     contentEl.appendChild(selectionContainer);
 
     const confirmBox = document.createElement("div");
@@ -4059,6 +4173,7 @@ function renderBernieInstructionInput(contentEl) {
     bernieSession.instructionText = text;
     bernieSession.transitionTo("INTERPRETING");
     suppressAutoPreview = false;
+    bernieSession.autoPreviewCandidateKey = null;
     button.disabled = true;
     textarea.disabled = true;
     button.textContent = "Finding times...";
