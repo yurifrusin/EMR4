@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint104-bernie-chat-state-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

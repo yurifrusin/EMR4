@@ -138,12 +138,12 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Launched to plan gate; workers must submit plans only and stop until Ariadne/Yuri approves implementation |
+| Status | Integrated and verified locally; push, Pages deploy check, mirror realignment, and audit pending |
 | Product Goal | Turn *bernie* from a single-prompt panel into an explicit conversational workflow with state machine memory, fresh clarification turns, no-slot suggestions, stale-state rules, and patient-specific booking context |
 | Worker Shape | Plan-gated Claude backend/API workstream, Antigravity/Gemini Diary UI workstream, and Codex worker invariant/review-harness workstream |
 | Out Of Scope | Broad root-to-branch API rewrite, XState dependency, voice/headset integration, Medicare/HI/PVM/OPV implementation, Caller ID integration, and limited auto-mode implementation |
 
-Active plan-gated workstreams:
+Integrated workstreams:
 
 - Claude: `orchestration/agent_inbox/claude/claude-sprint104-bernie-patient-context-contract.md`
   for backend/API `patient_booking_context`, no-slot suggestion contract,
@@ -155,6 +155,19 @@ Active plan-gated workstreams:
 - Codex worker: `orchestration/agent_inbox/codex/codex-sprint104-bernie-state-invariants.md`
   for transition-table/statechart invariants, fixture design from Yuri's live
   tests, and acceptance harness planning.
+
+Integration notes:
+
+- Claude backend/API work was accepted with Ariadne test repairs for current
+  clarification copy and deterministic no-slot fixture time.
+- Antigravity Diary UI work was accepted after Ariadne repaired interrupted CLI
+  output, restored compatibility with legacy auto-preview state, and verified
+  the full diary smoke harness.
+- Codex worker invariant-harness work was integrated as executable Sprint 104
+  acceptance evidence.
+- Remaining design follow-up: make UI `session_id`/turn metadata an explicit
+  backend-owned input contract and use typed no-slot suggestion payloads end to
+  end in the next sprint.
 
 ## Sprint 100: Bernie Booking Session State Machine
 

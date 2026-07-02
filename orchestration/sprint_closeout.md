@@ -8,9 +8,107 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 104: Bernie Conversational State Memory And Patient Context |
+| Integrated through | Backend patient_booking_context/no-slot contract, Diary chat-turn state surface, stale-state clearing, no-slot suggestions, and executable state-memory invariant harness |
+| Status | Integrated and verified locally; push, Pages deploy check, mirror realignment, and audit pending |
+| Last updated | 2026-07-02 |
+
+## What Changed
+
+- Added a compact deterministic `patient_booking_context` response that is only
+  populated after patient recognition, with freshness metadata for the active
+  request reference date.
+- Added typed no-slot suggestions for supervised Bernie booking responses so the
+  UI can offer useful alternatives instead of rendering an empty candidate list.
+- Changed the Diary Bernie panel from a stale single prompt into a chat-style
+  turn surface with a New Session action and visible staff/Bernie transcript.
+- Added a positive auto-preview toggle while preserving the review path for
+  manual candidate selection.
+- Made Today, date navigation, date picker changes, and Refresh clear stale
+  candidate/proposal state while preserving the open Bernie session transcript.
+- Updated no-slot UI copy to say that no free times are available and to render
+  clickable suggestion chips.
+- Added `tests/test_bernie_sprint104_state_memory.py` as an executable invariant
+  harness for reference-date memory, stale proposal ownership, patient
+  recognition/context separation, no-slot suggestions, and confirmation evidence.
+- Updated diary assets to `diary.js?v=144` and `diary.css?v=125`.
+
+## Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_patient_context.py tests\test_bernie_no_slot_suggestions.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_sprint104_state_memory.py tests\test_bernie_transition_table.py -q --tb=short` passed: `66 passed`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: full diary review harness green.
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed; local/HEAD diary assets are bumped to JS `v=144` and CSS `v=125`. Deployed Pages still showed JS `v=143` and CSS `v=124` before push.
+- `git diff --check` passed.
+
+## Recommended User Review
+
+After GitHub Pages deploys:
+
+1. Hard refresh the live Diary/Office dialog and confirm it loads
+   `diary.js?v=144` and `diary.css?v=125`.
+2. Open Bernie and enter `Make an appointment for Margaret Thompson with Dr
+   Shera after 3 today`.
+3. Expected result: the staff request appears as a chat turn, Bernie responds as
+   a separate turn, and the prompt is ready for a fresh clarification or next
+   instruction.
+4. Navigate Today/Prev/Next or press Refresh after a proposed slot is staged.
+   Expected result: the transcript remains visible, but stale proposal/confirm
+   controls are cleared.
+5. Try an after-hours/no-slot request such as `Make an appointment for Margaret
+   Thompson with Dr Shera after 8 today`.
+6. Expected result: Bernie says no free times are available and shows useful
+   clickable alternatives instead of an empty candidate-selection state.
+7. For a recognised Margaret Thompson request, open the technical disclosure and
+   confirm the response includes compact `patient_booking_context` detail rather
+   than broad diary context.
+8. Suspicious signs: a previous prompt is silently reused, diary navigation
+   changes the semantic request date, no-slot copy says only that candidates
+   were found/missing without alternatives, or broad diary rows appear in the
+   patient context payload.
+
+## Not Required Before Moving On
+
+- No auto-confirm or limited Bernie auto-mode was implemented.
+- No broad root-to-branch API review or GraphQL/context-graph redesign was
+  started.
+- No XState/runtime state-machine dependency was added.
+- No Medicare Online, HI/IHI, OPV/PVM, Caller ID, voice/headset, or production
+  GCP change is included.
+
+## Known Follow-Up
+
+- Promote `session_id` and `turns` from tolerated UI request metadata into an
+  explicit backend input contract when the next state-memory sprint needs
+  server-owned turn ids or confirmation evidence.
+- Convert no-slot suggestion clicks from prompt-summary reuse into fully typed
+  event payloads end to end.
+- Add backend-owned proposal/candidate freshness ids or hashes before any future
+  auto-mode branch.
+- Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
+  broad root-to-branch API-spine review.
+
+## Next Sprint Candidate - Sprint 105
+
+| Item | Value |
+|---|---|
+| Name | Bernie Typed Turn Contract And Confirmation Evidence |
+| Status | Recommended, not launched |
+| Recommended agents | Claude for backend/API turn contract and evidence ids, Antigravity/Gemini for typed suggestion/clarification events, Codex worker for confirmation-staleness review harness |
+
+Sprint 105 should close the remaining gap between client-side chat memory and a
+server-visible event contract: explicit turn ids, typed no-slot suggestion
+events, backend-owned candidate/proposal freshness evidence, and confirmation
+staleness checks. Limited auto-mode remains a future architecture branch, not
+Sprint 105 implementation.
+
+## Previous Closeout - Sprint 103
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 103: Bernie Compact Request And Auto Preview |
 | Integrated through | Compact understood-request card, ordinary-mode best-candidate auto-preview, sensitive appointment details disclosure, and review harness updates |
-| Status | Integrated, verified, pushed, mirrored, audited, and user-tested; follow-up Sprint 104 not launched |
+| Status | Integrated, verified, pushed, mirrored, audited, and user-tested |
 | Last updated | 2026-07-02 |
 
 ## What Changed

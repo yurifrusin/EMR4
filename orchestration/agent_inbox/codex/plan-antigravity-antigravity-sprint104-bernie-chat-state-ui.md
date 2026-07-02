@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint104-bernie-chat-state-ui` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-02 15:30 +1000 |
 | Source HEAD | `e6031d7` |
 

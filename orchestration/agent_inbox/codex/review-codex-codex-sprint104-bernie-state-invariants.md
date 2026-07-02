@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint104-bernie-state-invariants` |
 | Source Task | `codex-sprint104-bernie-state-invariants` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

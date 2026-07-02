@@ -3109,7 +3109,7 @@ def test_bernie_review_candidate_selection_empty_state(diary_page):
         diary_page.wait_for_selector("[data-testid='bernie-review-candidates-empty']", state="visible", timeout=5000)
 
         empty_text = diary_page.locator("[data-testid='bernie-review-candidates-empty']").text_content()
-        assert "No free slots were found" in empty_text
+        assert "free times" in empty_text.lower()
         assert diary_page.locator("[data-testid='bernie-review-candidate-item']").count() == 0
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
     finally:

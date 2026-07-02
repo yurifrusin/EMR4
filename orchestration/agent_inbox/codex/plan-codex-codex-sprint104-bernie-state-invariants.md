@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint104-bernie-state-invariants` |
 | Source Task | `codex-sprint104-bernie-state-invariants` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-02 15:37 +1000 |
 | Source HEAD | `e6031d7` |
 

@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint104-bernie-patient-context-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

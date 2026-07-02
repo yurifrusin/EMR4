@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint104-bernie-patient-context-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-02 15:31 +1000 |
 | Source HEAD | `e6031d7` |
 
