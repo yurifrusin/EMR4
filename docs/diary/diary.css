@@ -3218,3 +3218,98 @@ html, body {
   color: #1e293b;
 }
 
+/* ─── SPRINT 104: BERNIE STATEFUL CHAT UI ─── */
+.btn-bernie-new-session {
+  float: right;
+  background-color: var(--grey-2);
+  border: 1px solid var(--grey-4);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 11px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.btn-bernie-new-session:hover {
+  background-color: var(--grey-3);
+}
+
+.bernie-auto-preview-toggle-container {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bernie-auto-preview-toggle-container label {
+  font-size: 11px;
+  color: var(--grey-4);
+  cursor: pointer;
+  user-select: none;
+}
+
+.bernie-transcript-container {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--grey-2);
+  border-radius: 6px;
+  background: var(--grey-1);
+  padding: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bernie-chat-bubble {
+  max-width: 85%;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.bernie-chat-bubble.staff {
+  align-self: flex-end;
+  background-color: var(--brand-blue);
+  color: white;
+  border-bottom-right-radius: 2px;
+}
+
+.bernie-chat-bubble.bernie {
+  align-self: flex-start;
+  background-color: var(--grey-2);
+  color: var(--ink);
+  border-bottom-left-radius: 2px;
+}
+
+.bernie-recommendations-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.bernie-suggestion-chip {
+  background-color: var(--grey-1);
+  border: 1px solid var(--grey-3);
+  color: var(--brand-blue);
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.bernie-suggestion-chip:hover {
+  background-color: var(--grey-2);
+  border-color: var(--brand-blue);
+}
+
+.bernie-provisional-text-helper {
+  color: var(--grey-4);
+  font-weight: normal;
+  font-size: 10px;
+}
+

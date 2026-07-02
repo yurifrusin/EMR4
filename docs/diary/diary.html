@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=124" />
-  <script src="diary.js?v=143" defer></script>
+  <link rel="stylesheet" href="diary.css?v=125" />
+  <script src="diary.js?v=144" defer></script>
 </head>
 <body>
 
@@ -130,7 +130,13 @@
   <div id="bernie-review-panel" class="hidden" data-testid="bernie-review-panel">
     <div class="bernie-review-header">
       <span class="bernie-review-title" data-testid="bernie-review-title">Bernie</span>
+      <button id="btn-bernie-new-session" class="btn-bernie-new-session hidden" data-testid="btn-bernie-new-session">New Session</button>
+      <div class="bernie-auto-preview-toggle-container">
+        <input type="checkbox" id="bernie-auto-preview-toggle" data-testid="bernie-auto-preview-toggle" checked />
+        <label for="bernie-auto-preview-toggle">Auto-preview best candidate</label>
+      </div>
     </div>
+    <div id="bernie-chat-transcript" class="bernie-transcript-container hidden" data-testid="bernie-chat-transcript"></div>
     <div class="bernie-review-content" id="bernie-review-content"></div>
   </div>
 </div>
