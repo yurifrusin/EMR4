@@ -10,7 +10,7 @@
 
 ## Review Request
 
-antigravity-sprint104-bernie-chat-state-ui ready for Codex review
+Revised Sprint 104 Bernie Chat State UI plan ready for Codex review
 
 ## Worker Completion Notes
 
