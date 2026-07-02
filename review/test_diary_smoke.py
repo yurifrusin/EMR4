@@ -3854,7 +3854,7 @@ def test_bernie_pilot_selected_appointment_instruction_readiness_and_resets(diar
         diary_page.click("[data-testid='bernie-suggestion-chip-0']")
         assert textarea.input_value() == "Find earlier options for this patient"
         assert status_copy.is_visible() is True
-        assert status_copy.text_content() == "Ready to search. Nothing is booked until you confirm."
+        assert status_copy.text_content() == "Ready to ask. Nothing is booked or changed until you confirm."
 
         # 3. Clear textarea and verify status copy is hidden
         textarea.fill("")
@@ -3863,7 +3863,7 @@ def test_bernie_pilot_selected_appointment_instruction_readiness_and_resets(diar
         # 4. Type instruction and verify typed readiness copy
         textarea.fill("Book next Friday")
         assert status_copy.is_visible() is True
-        assert status_copy.text_content() == "Ready to search. Nothing is booked until you confirm."
+        assert status_copy.text_content() == "Ready to ask. Nothing is booked or changed until you confirm."
         diary_page.evaluate("loadBernieLiveReview()")
         diary_page.wait_for_selector("[data-testid='bernie-context-summary']", state="visible", timeout=5000)
         assert textarea.input_value() == "Book next Friday"
@@ -5799,6 +5799,94 @@ def test_bernie_stale_navigation_clearing(diary_page):
         today_event = next(t for t in reversed(turns_today) if t["kind"] == "date_navigation_clear")
         assert today_event["payload"]["reason"] == "today_click"
 
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_render_guard_prevents_false_found_or_no_slot_copy(diary_page):
+    """Informational notes must not masquerade as candidate or no-slot truth."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "candidate_selection_required",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [],
+                warnings: [{
+                  code: "existing_future_follow_up",
+                  severity: "warning",
+                  message: "This patient already has a future appointment booked. Check whether a new booking is still needed."
+                }],
+                blocks: [],
+                suggestions: [],
+                warning_summary: "Patient recognised.",
+                evidence_summary: "Review-only payload.",
+                confirm_payload: null
+              }, {
+                result: "interpreted",
+                safe: true,
+                summary: "Request understood.",
+                warnings: [{
+                  code: "existing_future_follow_up",
+                  severity: "warning",
+                  message: "This patient already has a future appointment booked. Check whether a new booking is still needed."
+                }],
+                blocks: [],
+                assumptions: [],
+                provider_metadata: { mode: "mocked", live_provider: false }
+              });
+            }"""
+        )
+
+        panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
+        assert "Bernie found these times" not in panel_text
+        assert "I could not find any free times for that request" not in panel_text
+        assert "By the way, this patient already has another appointment" in panel_text
+        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "Needs review"
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_composer_general_and_history_latest_visible(diary_page):
+    """Composer stays generic/empty while latest chat remains visible and older turns collapse."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              bernieSession.startNewSession();
+              bernieSession.addEvent("staff_instruction", { instruction: "Make an appointment for Margaret Thompson." });
+              bernieSession.addEvent("bernie_clarification", { text: "Which day should I check?", type: "clarification_question" });
+              updateBernieChatTranscriptUI();
+              const contentEl = document.getElementById("bernie-review-content");
+              contentEl.innerHTML = "";
+              renderBernieInstructionInput(contentEl);
+            }"""
+        )
+
+        textarea = diary_page.locator("[data-testid='bernie-instruction-input']")
+        assert textarea.input_value() == ""
+        assert textarea.get_attribute("placeholder") == "Reply to Bernie..."
+        assert diary_page.locator("[data-testid='btn-bernie-instruction-submit']").text_content().strip() == "Ask Bernie"
+        assert diary_page.locator("[data-testid='bernie-chat-history']").count() == 1
+        assert "Which day should I check?" in diary_page.locator("[data-testid='bernie-chat-transcript']").text_content()
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

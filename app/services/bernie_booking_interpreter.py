@@ -690,6 +690,12 @@ def _build_live_provider_prompt(
     reference_date = body.reference_date.isoformat() if body.reference_date else "not provided"
     return (
         "You are Bernie, EMR4's read-only booking-instruction interpreter. "
+        "Think like an expert GP receptionist: be helpful about what staff need "
+        "to know, but distinguish advice from booking eligibility. Existing "
+        "appointments for the patient on a different day are informational only; "
+        "they must not become a block, a no-slot conclusion, or a reason to say "
+        "a requested different-day slot is unavailable. Same-day or overlapping "
+        "appointments may be flagged for staff review. "
         "Return only JSON. Do not book, confirm, create appointments, search slots, "
         "write audit rows, or claim that an appointment has been made. "
         "Extract only structured slot-search command fields from the staff instruction. "

@@ -312,6 +312,16 @@ const BERNIE_HEADLINE_COPY = {
   clinic_day_exhausted: "No times left today"
 };
 
+const BERNIE_INFORMATIONAL_CODES = new Set([
+  "existing_future_follow_up",
+  "patient_recognized_by_register",
+  "practitioner_name_resolved",
+  "appointment_duration_defaulted",
+  "autonomous_booking_language",
+  "date_assumed_from_visible_diary",
+  "date_assumed_from_selected_context"
+]);
+
 function formatBernieCode(value) {
   return String(value || "")
     .replace(/_/g, " ")
@@ -350,16 +360,80 @@ function bernieHeadlineCopy(status, blocks = []) {
   return BERNIE_HEADLINE_COPY[status] || "Review this appointment";
 }
 
+function bernieReviewTransition(payload) {
+  const candidateSlots = Array.isArray(payload?.candidate_slots) ? payload.candidate_slots : [];
+  const blocks = Array.isArray(payload?.blocks) ? payload.blocks : [];
+  const warnings = Array.isArray(payload?.warnings) ? payload.warnings : [];
+  const suggestions = Array.isArray(payload?.suggestions) ? payload.suggestions : [];
+  if (!payload) {
+    return {
+      state: "empty",
+      canShowCandidates: false,
+      canShowNoSlots: false,
+      candidateSlots,
+      suggestions
+    };
+  }
+  const hasBlockingIssue = blocks.length > 0;
+  const canShowCandidates = payload.status === "candidate_selection_required" && candidateSlots.length > 0;
+  const canShowNoSlots = (
+    payload.status === "clinic_day_exhausted" ||
+    (
+      payload.status === "candidate_selection_required" &&
+      candidateSlots.length === 0 &&
+      !hasBlockingIssue &&
+      (suggestions.length > 0 || warnings.length === 0)
+    )
+  );
+  let state = payload.status || "blocked";
+  if (canShowCandidates) {
+    state = "candidate_selection_required";
+  } else if (canShowNoSlots) {
+    state = "no_slots";
+  } else if (payload.status === "candidate_selection_required" && candidateSlots.length === 0) {
+    state = hasBlockingIssue ? "blocked" : "no_selectable_candidates";
+  }
+  return {
+    state,
+    canShowCandidates,
+    canShowNoSlots,
+    candidateSlots,
+    suggestions
+  };
+}
+
+function bernieStatusCopyForPayload(payload) {
+  const transition = bernieReviewTransition(payload);
+  if (transition.state === "no_slots") return "Try another time";
+  if (transition.state === "no_selectable_candidates") return "Needs review";
+  return bernieStatusCopy(payload?.status, payload?.blocks);
+}
+
+function bernieHeadlineCopyForPayload(payload) {
+  const transition = bernieReviewTransition(payload);
+  if (transition.state === "no_slots") return "No matching times found";
+  if (transition.state === "no_selectable_candidates") return "I could not show a time for this request";
+  if (payload?.status === "confirmation_ready") return BERNIE_HEADLINE_COPY.confirmation_ready;
+  return bernieHeadlineCopy(payload?.status, payload?.blocks);
+}
+
 function bernieReviewActionCopy(payload) {
   if (!payload) {
     return "Nothing is booked until you confirm.";
   }
+  const transition = bernieReviewTransition(payload);
   const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
   if (hasProviderUnavailable && !isBernieDevOrDebug()) {
     return "Bernie could not search just now. Nothing was booked. Try again in a moment.";
   }
-  if (payload.status === "candidate_selection_required") {
+  if (transition.canShowCandidates) {
     return "Choose a time to show it on the diary. Nothing is booked until you confirm.";
+  }
+  if (transition.state === "no_slots") {
+    return "I could not find matching free times in that window. Tell me another day or time to try.";
+  }
+  if (transition.state === "no_selectable_candidates") {
+    return "I need staff review before I can show a time. Nothing is booked yet.";
   }
   if (payload.status === "confirmation_ready") {
     return "Review the details before confirming.";
@@ -368,6 +442,14 @@ function bernieReviewActionCopy(payload) {
     return "That time window has passed for today. Tell me another day or a later time.";
   }
   return "Add the missing details and ask Bernie to search again. Nothing is booked yet.";
+}
+
+function bernieIssueDisplayText(issue) {
+  if (!issue) return "";
+  if (issue.code === "existing_future_follow_up") {
+    return "By the way, this patient already has another appointment. Check whether a new booking is still intended.";
+  }
+  return issue.message || "";
 }
 
 function appendBernieDetailRow(container, label, value, testId) {
@@ -484,6 +566,20 @@ function getVisibleTurn(event) {
   return null;
 }
 
+function bernieComposerPlaceholder() {
+  if (!bernieSession.turns || bernieSession.turns.length === 0) {
+    return "Ask Bernie...";
+  }
+  const lastBernieEvent = [...bernieSession.turns].reverse().find(t => t.kind === "bernie_clarification");
+  if (lastBernieEvent && lastBernieEvent.payload?.type === "clarification_question") {
+    return "Reply to Bernie...";
+  }
+  if (bernieSession.state === "SLOT_PREVIEW" || bernieSession.state === "CONFIRMED") {
+    return "Ask Bernie another thing...";
+  }
+  return "Ask Bernie...";
+}
+
 async function handleNoSlotSuggestionClick(suggestionText, originalTurnId) {
   bernieSession.clearResponse({ preserveInstruction: false });
   const textarea = document.getElementById("bernie-instruction-input");
@@ -506,7 +602,7 @@ async function handleNoSlotSuggestionClick(suggestionText, originalTurnId) {
     renderBernieInstructionInput(contentEl);
     const loader = document.createElement("div");
     loader.className = "bernie-loading";
-    loader.textContent = "Finding times...";
+    loader.textContent = "Asking Bernie...";
     contentEl.appendChild(loader);
   }
   updateBernieChatTranscriptUI();
@@ -925,7 +1021,7 @@ function renderBernieInterpretPreview(contentEl, envelope) {
       item.setAttribute("data-testid", "bernie-interpret-issue");
       item.textContent = isBernieDevOrDebug()
         ? `${formatBernieCode(issue.code || "issue")}: ${issue.message || ""}`
-        : (issue.message || "");
+        : bernieIssueDisplayText(issue);
       issueList.appendChild(item);
     });
     if (visibleIssues.length > 0) {
@@ -941,7 +1037,7 @@ function renderBernieInterpretPreview(contentEl, envelope) {
       technicalIssues.forEach(issue => {
         const item = document.createElement("div");
         item.className = "bernie-interpret-issue";
-        item.textContent = issue.message || formatBernieCode(issue.code || "detail");
+        item.textContent = bernieIssueDisplayText(issue) || formatBernieCode(issue.code || "detail");
         details.appendChild(item);
       });
       preview.appendChild(details);
@@ -971,7 +1067,7 @@ function renderBernieInterpretPreview(contentEl, envelope) {
     issues.forEach(issue => {
       const item = document.createElement("div");
       item.className = "bernie-interpret-issue";
-      item.textContent = issue.message || formatBernieCode(issue.code || "detail");
+      item.textContent = bernieIssueDisplayText(issue) || formatBernieCode(issue.code || "detail");
       details.appendChild(item);
     });
     preview.appendChild(details);
@@ -3468,6 +3564,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   }
 
   contentEl.innerHTML = "";
+  const transition = bernieReviewTransition(payload);
   bernieLatestIdentityEvidence = payload.identity_evidence || null;
   bernieLatestReviewPayload = payload || null;
   if (payload && payload.status === "candidate_selection_required") {
@@ -3543,7 +3640,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   const statusBadge = document.createElement("div");
   statusBadge.className = `bernie-status-badge ${payload.status}`;
   statusBadge.setAttribute("data-testid", "bernie-review-status");
-  statusBadge.textContent = bernieStatusCopy(payload.status, payload.blocks);
+  statusBadge.textContent = bernieStatusCopyForPayload(payload);
   contentEl.appendChild(statusBadge);
 
   // 2. Headline
@@ -3558,7 +3655,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     const time = rawTime.slice(0, 5);
     headline.textContent = `I've prepared the booking for ${patientName} with ${berniePractitionerDisplayName(practitionerName)} at ${time} on ${date}. Would you like to confirm?`;
   } else {
-    headline.textContent = bernieHeadlineCopy(payload.status, payload.blocks);
+    headline.textContent = bernieHeadlineCopyForPayload(payload);
   }
   contentEl.appendChild(headline);
 
@@ -3727,21 +3824,23 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
     const title = document.createElement("span");
     title.className = "bernie-section-title";
-    title.textContent = "Available times";
+    title.textContent = transition.canShowCandidates ? "Available times" : "Next options";
     candidatesContainer.appendChild(title);
 
     const list = document.createElement("div");
     list.setAttribute("data-testid", "bernie-review-candidates-list");
 
-    const candidateSlots = Array.isArray(payload.candidate_slots) ? payload.candidate_slots : [];
+    const candidateSlots = transition.candidateSlots;
     if (candidateSlots.length === 0) {
       const empty = document.createElement("div");
       empty.className = "bernie-candidate-empty";
       empty.setAttribute("data-testid", "bernie-review-candidates-empty");
-      empty.textContent = "I could not find any free times for that request.";
+      empty.textContent = transition.canShowNoSlots
+        ? "I could not find matching free times in that window."
+        : "I cannot show a time from this result. Check the notes above or ask Bernie another question.";
       list.appendChild(empty);
 
-      const suggestions = Array.isArray(payload.suggestions) ? payload.suggestions : [];
+      const suggestions = transition.canShowNoSlots ? transition.suggestions : [];
       if (suggestions.length > 0) {
         const suggestionsContainer = document.createElement("div");
         suggestionsContainer.className = "bernie-suggested-instructions";
@@ -4398,7 +4497,7 @@ function renderBernieInstructionInput(contentEl) {
   const textarea = document.createElement("textarea");
   textarea.id = "bernie-instruction-input";
   textarea.setAttribute("data-testid", "bernie-instruction-input");
-  textarea.placeholder = "Tell Bernie what appointment to find...";
+  textarea.placeholder = bernieComposerPlaceholder();
   textarea.value = bernieInstructionText || "";
   if (!contextReady) {
     textarea.disabled = true;
@@ -4415,7 +4514,7 @@ function renderBernieInstructionInput(contentEl) {
   button.id = "btn-bernie-instruction-submit";
   button.className = "btn-bernie-instruction-submit";
   button.setAttribute("data-testid", "btn-bernie-instruction-submit");
-  button.textContent = "Find times";
+  button.textContent = "Ask Bernie";
   if (!contextReady) {
     button.disabled = true;
   }
@@ -4431,7 +4530,7 @@ function renderBernieInstructionInput(contentEl) {
   const updateInstructionStatusCopy = () => {
     const text = textarea.value.trim();
     if (contextReady && text.length > 0) {
-      statusCopy.textContent = "Ready to search. Nothing is booked until you confirm.";
+      statusCopy.textContent = "Ready to ask. Nothing is booked or changed until you confirm.";
       statusCopy.style.display = "block";
     } else {
       statusCopy.textContent = "";
@@ -4512,7 +4611,7 @@ function renderBernieInstructionInput(contentEl) {
     bernieSession.autoPreviewCandidateKey = null;
     button.disabled = true;
     textarea.disabled = true;
-    button.textContent = "Finding times...";
+    button.textContent = "Asking...";
 
     try {
       const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
@@ -4581,17 +4680,35 @@ function updateBernieChatTranscriptUI() {
 
   if (bernieSession.turns && bernieSession.turns.length > 0) {
     transcriptEl.innerHTML = "";
+    const visibleTurns = bernieSession.turns.map(getVisibleTurn).filter(Boolean);
     let hasVisible = false;
-    bernieSession.turns.forEach(event => {
-      const turn = getVisibleTurn(event);
-      if (turn) {
-        hasVisible = true;
+    if (visibleTurns.length > 1) {
+      const historyDetails = document.createElement("details");
+      historyDetails.className = "bernie-chat-history";
+      historyDetails.setAttribute("data-testid", "bernie-chat-history");
+      const summary = document.createElement("summary");
+      summary.textContent = "Show earlier conversation";
+      historyDetails.appendChild(summary);
+      visibleTurns.slice(0, -1).forEach(turn => {
         const bubble = document.createElement("div");
         bubble.className = `bernie-chat-bubble ${turn.actor}`;
         bubble.textContent = turn.text;
-        transcriptEl.appendChild(bubble);
-      }
-    });
+        historyDetails.appendChild(bubble);
+      });
+      transcriptEl.appendChild(historyDetails);
+    }
+    const latestTurn = visibleTurns[visibleTurns.length - 1];
+    if (latestTurn) {
+      hasVisible = true;
+      const latestLabel = document.createElement("div");
+      latestLabel.className = "bernie-chat-latest-label";
+      latestLabel.textContent = "Latest";
+      transcriptEl.appendChild(latestLabel);
+      const bubble = document.createElement("div");
+      bubble.className = `bernie-chat-bubble ${latestTurn.actor}`;
+      bubble.textContent = latestTurn.text;
+      transcriptEl.appendChild(bubble);
+    }
     if (hasVisible) {
       transcriptEl.classList.remove("hidden");
       transcriptEl.scrollTop = transcriptEl.scrollHeight;
@@ -4715,7 +4832,7 @@ async function loadBernieLiveReview() {
     renderBernieInstructionInput(contentEl);
     const loader = document.createElement("div");
     loader.className = "bernie-loading";
-    loader.textContent = "Finding times...";
+    loader.textContent = "Asking Bernie...";
     contentEl.appendChild(loader);
   }
 

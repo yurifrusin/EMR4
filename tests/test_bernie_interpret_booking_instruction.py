@@ -334,6 +334,8 @@ def test_mocked_live_provider_returns_validated_structured_intent_without_mutati
     assert len(provider.calls) == 1
     prompt, temperature = provider.calls[0]
     assert "Do not book, confirm, create appointments, search slots" in prompt
+    assert "Think like an expert GP receptionist" in prompt
+    assert "Existing appointments for the patient on a different day are informational only" in prompt
     assert "Return only JSON" in prompt
     assert temperature == 0.0
     assert "Patient asks for a short GP booking" not in data["summary"]

@@ -3284,6 +3284,26 @@ html, body {
   border-bottom-left-radius: 2px;
 }
 
+.bernie-chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bernie-chat-history summary {
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--grey-4);
+}
+
+.bernie-chat-latest-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--grey-4);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
 .bernie-recommendations-container {
   display: flex;
   flex-wrap: wrap;
@@ -3312,4 +3332,3 @@ html, body {
   font-weight: normal;
   font-size: 10px;
 }
-
