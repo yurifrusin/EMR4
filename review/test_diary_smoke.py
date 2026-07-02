@@ -5249,6 +5249,62 @@ def test_sprint99_bernie_choose_another_time_suppression(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_sprint102_bernie_interpret_request_includes_visible_diary_context(diary_page):
+    import re
+    import urllib.parse
+
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_requests = []
+    mock_interpret = {
+        "safe": False,
+        "result": "clarification_required",
+        "summary": "Which day would you like me to check?",
+        "clarifying_question": "Which day would you like me to check?",
+        "command_candidate": None,
+        "normalization": None,
+        "blocks": [],
+        "warnings": [],
+        "assumptions": [],
+        "provider_metadata": {"mode": "mocked", "live_provider": False},
+    }
+
+    def capture_interpret(route):
+        captured_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret),
+        )
+
+    diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        capture_interpret,
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(
+            diary_page,
+            instruction="Make an appointment for Junior Atkinson at 11:15 with Dr Shera.",
+            register_default_mock=False,
+        )
+        diary_page.wait_for_selector("[data-testid='bernie-interpret-preview']", state="visible", timeout=5000)
+
+        assert captured_requests, "expected a Bernie interpret request"
+        frames = captured_requests[0].get("context_frames", [])
+        visible_frames = [frame for frame in frames if frame.get("type") == "visible_diary_page"]
+        assert len(visible_frames) == 1
+        assert re.match(r"^\d{4}-\d{2}-\d{2}$", visible_frames[0].get("visible_date", ""))
+        assert visible_frames[0]["visible_date"] == visible_frames[0]["diary_date"]
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_sprint99_bernie_asset_version_checks():
     import re
     from pathlib import Path

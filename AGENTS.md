@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 101 - Bernie recognition context and statechart practice integrated and verified; awaiting GitHub Pages deployment after push |
-| **Next recommended work** | Add deterministic `patient_booking_context` backend/API contract for Bernie, then resume the root-to-branch API-spine design sprint |
+| **Current active track** | Sprint 102 - Bernie date-context transition table implemented and verified locally; awaiting push/deploy |
+| **Next recommended work** | Add deterministic `patient_booking_context` backend/API contract for Bernie so it can notice existing future follow-ups, then resume the root-to-branch API-spine design sprint |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

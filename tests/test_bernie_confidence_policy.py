@@ -171,10 +171,10 @@ def test_temporal_axis_assume_with_explicit_date(
     assert axes["temporal"]["band"] == "assume"
 
 
-def test_omitted_date_with_time_constraint_assumes_today(
+def test_omitted_date_with_time_constraint_without_diary_context_asks(
     client, db, gp_user, practitioner, patient, monkeypatch
 ):
-    """No explicit date but time constraint present → temporal=proceed_with_check + 'assumed today' assumption."""
+    """No explicit date and no UI date context -> ask, even when a time is present."""
     monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
     monkeypatch.setattr(
         appointments_router, "_clinic_local_now",
@@ -188,13 +188,40 @@ def test_omitted_date_with_time_constraint_assumes_today(
         reference_date=REFERENCE_DATE,
     )
     axes = _axes_by_name(data)
-    assert axes["temporal"]["band"] == "proceed_with_check", (
-        "time present but no date → should assume today (proceed_with_check)"
-    )
-    # An explicit "assumed today" assumption must be present
+    assert axes["temporal"]["band"] == "ask"
+    assert data["result"] == "clarification_required"
+    assert data["clarifying_question"] == "Which day would you like me to check?"
     assumptions = {a["field"]: a for a in data.get("assumptions", [])}
-    assert "date_from" in assumptions, "expected an assumption for the omitted date"
-    assert assumptions["date_from"]["assumed_value"] == "today"
+    assert "date_from" not in assumptions, "must not silently assume today"
+
+
+def test_omitted_date_uses_visible_diary_page_context(
+    client, db, gp_user, practitioner, patient, monkeypatch
+):
+    """No explicit date -> use the open diary page date supplied by the UI."""
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    monkeypatch.setattr(
+        appointments_router, "_clinic_local_now",
+        lambda tz: datetime(2026, 7, 15, 9, 0, 0, tzinfo=tz),
+    )
+    token = make_token(gp_user)
+    data = _post(
+        client, token,
+        f"practitioner_id:{practitioner.id} patient_id:{patient.id} after 11:15 duration:15",
+        reference_date=REFERENCE_DATE,
+        context_frames=[{
+            "type": "visible_diary_page",
+            "visible_date": "2026-07-22",
+        }],
+    )
+    axes = _axes_by_name(data)
+    assert data["result"] == "interpreted"
+    assert axes["temporal"]["band"] == "assume"
+    assert data["command_candidate"]["date_from"] == "2026-07-22"
+    warning_codes = {warning["code"] for warning in data.get("warnings", [])}
+    assert "date_assumed_from_visible_diary" in warning_codes
+    assumptions = {a["field"]: a for a in data.get("assumptions", [])}
+    assert assumptions["date_from"]["assumed_value"] == "2026-07-22"
 
 
 def test_omitted_date_without_time_cue_asks(

@@ -8,6 +8,82 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 102: Bernie Date Context Transition Table |
+| Integrated through | Deterministic date-resolution transition table, visible diary page context frame, compact clarification preview, and future follow-up seed fixtures |
+| Status | Integrated locally and verified; awaiting push/deploy |
+| Last updated | 2026-07-02 |
+
+## What Changed
+
+- Added `app/services/bernie_transition_table.py` as the first explicit *bernie*
+  transition-table helper.
+- Changed omitted-date handling:
+  - explicit dates are preserved;
+  - selected proposal/appointment dates are preferred where available;
+  - otherwise the visible diary page date is assumed;
+  - if no date context exists, *bernie* asks `Which day would you like me to check?`.
+- Removed the old rule where a time constraint without a date silently assumed today.
+- Updated the Diary client to send a `visible_diary_page` context frame with every
+  *bernie* interpretation/supervised-booking request.
+- Compact ordinary clarification UI so the clarifying question is the main text,
+  while routine assumptions such as 15-minute default and diary-date assumption
+  sit behind Details.
+- Seeded future dev appointments for `2026-07-09`:
+  - Billy Frusin with Dr Alex Shera at 14:30;
+  - Margaret Thompson with Dr Alex Shera at 15:00.
+- Documented the reusable rule: LLM extracts intent, transition tables resolve
+  world-state assumptions, API contracts enforce writes.
+- Updated diary assets to `diary.js?v=142`; `diary.css` remains `v=124`.
+
+## Verification
+
+- `python -m py_compile app\routers\appointments.py app\schemas\appointments.py app\services\bernie_transition_table.py seed.py` passed. Existing seed docstring escape warning remains unrelated.
+- `node --check docs\diary\diary.js` passed.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_transition_table.py tests\test_bernie_confidence_policy.py -q -k "date_transition or omitted_date or same_day or ordinary_release_gate"` passed: `12 passed`.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_sprint102_bernie_interpret_request_includes_visible_diary_context -q` passed.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "sprint102_bernie_interpret_request or sprint101_bernie_details_toggle or sprint99_bernie_raw_code_exclusion or sprint99_bernie_no_write_before_confirm or sprint99_bernie_choose_another_time_suppression or sprint99_bernie_asset_version_checks"` passed: `6 passed`.
+- `python scripts\check_frontend_versions.py` passed; local diary JS is correctly bumped from `v=141` to `v=142`.
+- `.venv\Scripts\python.exe seed.py` passed and seeded the future follow-up fixtures locally.
+- `git diff --check` passed; Git reported only existing CRLF normalization warnings on touched files.
+
+## Recommended User Review
+
+After GitHub Pages deploys:
+
+1. Hard refresh the live Diary/Office dialog and confirm it loads `diary.js?v=142` and `diary.css?v=124`.
+2. Open `Bernie` on the diary page for today, `2026-07-02`.
+3. Try `Make an appointment for Junior Atkinson at 11:15 with Dr Shera.`
+4. Expected result: *bernie* should assume the visible diary page date rather than ask which day. It may still ask if the patient is not recognised, which is fine.
+5. Navigate to another diary date, then try the same omitted-date request. Expected result: *bernie* should use the visible page date for that new request.
+6. Try a genuinely context-free/backend-only omitted-date case only if you are calling the API directly. Expected result: it should ask `Which day would you like me to check?`.
+7. Try `Make an appointment for Margaret Thompson with Dr Shera after 3 tomorrow and before 4.30`. Expected result: normal candidate/confirm behaviour, no extra jump forward when choosing another time.
+8. For the seeded future-context fixture, inspect `2026-07-09`: Billy Frusin should have a 14:30 appointment and Margaret Thompson a 15:00 appointment. *Bernie* does not yet warn about those existing appointments; that is the next patient-booking-context sprint.
+9. Suspicious signs: omitted date defaults to today instead of the visible page, `Duration: 15 mins` dominates ordinary clarification copy, raw `date_assumed_from_visible_diary` appears outside Details, or choosing another time mutates the date again.
+
+## Not Required Before Moving On
+
+- No XState dependency was added. This sprint deliberately proves the plain
+  transition-table pattern first.
+- No patient appointment-history context provider is implemented yet; the seed
+  data prepares the next sprint's deterministic `patient_booking_context` work.
+- No Medicare Online, HI/IHI, OPV/PVM, Caller ID, voice/headset integration, or
+  production GCP change is included.
+
+## Known Follow-Up
+
+- Implement the backend `patient_booking_context` provider so *bernie* can notice
+  existing future follow-ups such as the new `2026-07-09` seed fixtures.
+- Add a visible receptionist toggle for automatic best-guess diary preview versus list-only suggestions.
+- Continue the root-to-branch API-spine design sprint with GraphQL/context graph,
+  command mutations, event contracts, YAML capability manifests, cybersecurity,
+  and statechart modelling.
+- Reassess XState only after the plain transition-table/session-state approach
+  has exposed enough repeated nested workflow complexity to justify it.
+
+## Previous Closeout - Sprint 101
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 101: Bernie Recognition Context And Statechart Practice |
 | Integrated through | Patient recognition vs details verification split, compact recognition UI, current-day diary context practitioner inference, refresh-state cleanup, and patient-specific context-frame design rule |
 | Status | Integrated and verified; awaiting GitHub Pages deployment after push |

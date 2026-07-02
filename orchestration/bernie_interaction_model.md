@@ -155,6 +155,26 @@ This is the useful middle path: richer than a single selected appointment, much
 smaller than dumping the whole diary, and easier to test. Availability is still
 resolved by deterministic slot-search APIs, not by the LLM.
 
+### Date Context Resolution
+
+If the receptionist omits an explicit date, *bernie* should not default to
+today merely because a time is present. Date resolution is a deterministic
+state transition over typed context frames:
+
+1. use the selected proposal/provisional booking date if one exists;
+2. otherwise use the selected diary appointment date if one exists;
+3. otherwise use the visible diary page date;
+4. otherwise ask, in everyday language, which day to check.
+
+This supports natural reception flow. If the diary is open on Thursday and the
+receptionist says "book Junior Atkinson at 11:15 with Dr Shera", *bernie* can
+assume Thursday and proceed. If no diary/page context is available, *bernie*
+asks instead of guessing.
+
+This rule belongs to deterministic workflow code, not the LLM prompt. The LLM
+may extract the time, patient, practitioner, and explicit date words; the
+transition table decides how omitted world-state details are supplied.
+
 ### Stage 2 — Deterministic Slot Search (no LLM)
 
 Given a constraint object, `find_slots` runs against the backend using real

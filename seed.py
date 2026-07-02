@@ -302,6 +302,9 @@ def seed():
         def _appt_dt(h: int, m: int) -> datetime:
             return datetime.combine(today, time(h, m)).replace(tzinfo=practice_tz).astimezone(timezone.utc)
 
+        def _appt_dt_on(day: date, h: int, m: int) -> datetime:
+            return datetime.combine(day, time(h, m)).replace(tzinfo=practice_tz).astimezone(timezone.utc)
+
         # Margaret 09:00 is seeded as Confirmed so the diary's lifecycle
         # colour rendering (ALL-CAPS + blue) is demonstrated out of the box.
         # The nurse appointment demonstrates Room 2 is genuinely bookable.
@@ -349,6 +352,60 @@ def seed():
                 exists.location_id = location.id
         db.flush()
         print(f"  Sample appointments seeded for today ({today})")
+
+        # Future fixtures for Bernie state-machine testing. These are intentionally
+        # ordinary booked appointments so later context retrieval can notice
+        # "Billy/Margaret already has a follow-up in a week" without needing
+        # synthetic test-only records.
+        followup_day = today + timedelta(days=7)
+        future_appts = [
+            (
+                billy,
+                gp,
+                _appt_dt_on(followup_day, 14, 30),
+                "Follow-up already booked",
+                AppointmentStatus.Booked,
+                15,
+            ),
+            (
+                patient,
+                gp,
+                _appt_dt_on(followup_day, 15, 0),
+                "Review already booked",
+                AppointmentStatus.Booked,
+                15,
+            ),
+        ]
+        for pt, prac, start, reason, init_status, duration_minutes in future_appts:
+            local_start = start.astimezone(practice_tz).time().replace(tzinfo=None)
+            appointment_date = start.astimezone(practice_tz).date()
+            exists = db.query(Appointment).filter_by(
+                practice_id=practice.id,
+                patient_id=pt.id,
+                practitioner_id=prac.id,
+                appointment_date=appointment_date,
+                start_time_local=local_start,
+            ).first()
+            if not exists:
+                db.add(Appointment(
+                    practice_id=practice.id,
+                    patient_id=pt.id,
+                    practitioner_id=prac.id,
+                    appointment_type_id=std_type.id if std_type else None,
+                    booked_by=gp_user.id,
+                    start_time=start,
+                    appointment_date=appointment_date,
+                    start_time_local=local_start,
+                    duration_minutes=duration_minutes,
+                    status=init_status,
+                    reason=reason,
+                    booked_via=BookingChannel.Receptionist,
+                    location_id=location.id,
+                ))
+            elif exists.location_id is None:
+                exists.location_id = location.id
+        db.flush()
+        print(f"  Future Bernie test appointments seeded for {followup_day}")
 
         # --- Diary Template ---
         tmpl = db.query(DiaryTemplate).filter_by(practice_id=practice.id).first()

@@ -486,14 +486,22 @@ function buildBernieInterpretInstruction(requestBody) {
 }
 
 function buildBernieContextFrames(requestBody) {
+  const visibleDate = localDateKey(diaryDate);
+  const { appt: selectedAppt } = getActiveBernieSelectedAppointment();
+  const visibleDateFrame = {
+    type: "visible_diary_page",
+    visible_date: visibleDate,
+    diary_date: visibleDate
+  };
   const selectedFrame = {
     type: "selected_diary_appointment",
     practitioner_id: requestBody?.command?.practitioner_id || null,
     patient_id: requestBody?.command?.patient_id || null,
-    source_appointment_id: berniePilotContext.sourceAppointmentId || null
+    source_appointment_id: berniePilotContext.sourceAppointmentId || null,
+    appointment_date: selectedAppt?.appointment_date || null
   };
   const selectedFrames = [selectedFrame].filter(frame => (
-    frame.practitioner_id || frame.patient_id || frame.source_appointment_id
+    frame.practitioner_id || frame.patient_id || frame.source_appointment_id || frame.appointment_date
   ));
   const dayBookingFrames = (activeAppointments || [])
     .filter(appt => shouldRenderAppointment(appt))
@@ -521,7 +529,7 @@ function buildBernieContextFrames(requestBody) {
       };
     })
     .filter(frame => frame.patient_label && frame.booking_practitioner_id);
-  return [...selectedFrames, ...dayBookingFrames];
+  return [visibleDateFrame, ...selectedFrames, ...dayBookingFrames];
 }
 
 async function fetchBernieInterpretation(requestBody) {
@@ -622,21 +630,28 @@ function renderBernieInterpretPreview(contentEl, envelope) {
   const summary = document.createElement("div");
   summary.className = "bernie-interpret-summary";
   summary.setAttribute("data-testid", "bernie-interpret-summary");
-  summary.textContent = envelope.result === "clarification_required"
-    ? "I need one more detail before I search."
-    : (envelope.summary || "I understood the booking request.");
+  const clarificationShownAsSummary = envelope.result === "clarification_required" && !!envelope.clarifying_question;
+  summary.textContent = clarificationShownAsSummary
+    ? envelope.clarifying_question
+    : envelope.result === "clarification_required"
+      ? "I need one more detail before I search."
+      : (envelope.summary || "I understood the booking request.");
   preview.appendChild(summary);
 
   const command = envelope.normalization?.constraint || envelope.command_candidate;
-  if (command) {
+  const compactClarification = envelope.result === "clarification_required" && !isBernieDevOrDebug();
+  if (command && !compactClarification) {
     const commandEl = document.createElement("div");
     commandEl.className = "bernie-interpret-command";
     commandEl.setAttribute("data-testid", "bernie-interpret-command");
+    const defaultedDuration = (envelope.assumptions || []).some(assumption => (
+      assumption.field === "duration_minutes" && String(assumption.assumed_value) === "15"
+    ));
     const commandParts = [
       command.practitioner_label ? `Practitioner: ${command.practitioner_label}` : "",
       command.patient_label || command.patient_name_provisional ? `Patient: ${command.patient_label || command.patient_name_provisional}` : "",
       command.date_from ? `Date: ${command.date_from}` : "",
-      command.duration_minutes ? `Duration: ${command.duration_minutes} mins` : "",
+      command.duration_minutes && (isBernieDevOrDebug() || !defaultedDuration) ? `Duration: ${command.duration_minutes} mins` : "",
       command.earliest_time ? `Earliest: ${command.earliest_time}` : "",
       command.latest_time ? `Latest: ${command.latest_time}` : ""
     ].filter(Boolean);
@@ -644,7 +659,7 @@ function renderBernieInterpretPreview(contentEl, envelope) {
     preview.appendChild(commandEl);
   }
 
-  if (envelope.clarifying_question) {
+  if (envelope.clarifying_question && !clarificationShownAsSummary) {
     const question = document.createElement("div");
     question.className = "bernie-interpret-question";
     question.setAttribute("data-testid", "bernie-interpret-question");
@@ -658,7 +673,9 @@ function renderBernieInterpretPreview(contentEl, envelope) {
       "patient_recognized_by_register",
       "practitioner_name_resolved",
       "appointment_duration_defaulted",
-      "autonomous_booking_language"
+      "autonomous_booking_language",
+      "date_assumed_from_visible_diary",
+      "date_assumed_from_selected_context"
     ]);
     const visibleIssues = isBernieDevOrDebug()
       ? issues

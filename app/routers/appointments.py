@@ -45,6 +45,7 @@ from app.services.bernie_booking_interpreter import (
 from app.services.ai.audit_store import persist_access_ai_audit_events
 from app.services.bernie_pilot_gate import evaluate_bernie_pilot_eligibility
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
+from app.services.bernie_transition_table import resolve_booking_date_transition
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
 
@@ -1802,6 +1803,24 @@ def _resolve_bernie_interpretation_context(
         ))
 
     # ── Normalization ─────────────────────────────────────────────────────────
+    date_transition = resolve_booking_date_transition(
+        date_from=command_values.get("date_from"),
+        context_frames=body.context_frames,
+    )
+    if date_transition.action == "assume" and date_transition.date_from:
+        command_values["date_from"] = date_transition.date_from
+        resolver_warnings.append(AppointmentProposalIssue(
+            code=date_transition.warning_code or "date_assumed_from_context",
+            severity="warning",
+            message=date_transition.basis,
+        ))
+        all_assumptions.append(BernieAssumption(
+            field="date_from",
+            assumed_value=date_transition.date_from,
+            basis=date_transition.basis,
+            reversible_copy="Tell me the date if this diary page is not what you meant.",
+        ))
+
     command = SlotSearchCommandIn(**command_values)
     normalization = normalize_slot_search_command(
         command,
@@ -1836,9 +1855,6 @@ def _resolve_bernie_interpretation_context(
     ) or bool(
         date_from_raw and re.match(r"^\d{4}-\d{2}-\d{2}$", str(date_from_raw))
     )
-    has_time_constraint = bool(
-        command_values.get("earliest_time") or command_values.get("latest_time")
-    )
     # Only truly contradictory/invalid dates (not missing-field) warrant a temporal block.
     # missing_date_from / relative_date_no_reference are clarification signals handled below.
     has_invalid_date_block = any(
@@ -1855,22 +1871,19 @@ def _resolve_bernie_interpretation_context(
         temporal_basis = "Date provided is invalid or contradictory."
     elif has_explicit_date:
         temporal_band = "assume"
-        temporal_basis = "Explicit date provided."
-    elif has_time_constraint:
-        # Time constraint present but no explicit date — assume today
-        temporal_band = "proceed_with_check"
-        temporal_basis = "No explicit date — assumed today based on time constraint."
-        all_assumptions.append(BernieAssumption(
-            field="date_from",
-            assumed_value="today",
-            basis="Instruction has a time constraint but no explicit date.",
-            reversible_copy="Tell me the date if you did not mean today.",
-        ))
+        temporal_basis = (
+            date_transition.basis
+            if date_transition.action == "assume"
+            else "Explicit date provided."
+        )
     else:
-        # No date, no time constraint — must ask
+        # No explicit or UI-derived date: must ask.
         temporal_band = "ask"
-        temporal_basis = "No date and no time constraint — I need to know which day."
-        temporal_clarifying = "I need to know which day you would like the appointment."
+        temporal_basis = date_transition.basis
+        temporal_clarifying = (
+            date_transition.clarifying_question
+            or "Which day would you like me to check?"
+        )
 
     # Same-day validity: if resolved date == today (clinic-local), check that time is not past.
     # The normalizer resolves "today" → reference_date; we check if that equals actual today.

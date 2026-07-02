@@ -166,6 +166,10 @@ Examples:
   "dump the system state into the prompt" context.
 - Audit records should capture the event, actor, agent/session, confidence
   axes, proposal evidence, and final transition.
+- Omitted booking dates are resolved by an explicit transition table:
+  selected proposal context first, selected diary appointment context second,
+  visible diary page third, and ask if none exists. The old "time present means
+  today" rule is deliberately invalid.
 
 ## Immediate Application: Bernie
 
@@ -229,3 +233,8 @@ Context-enrichment rules:
 - Refreshing the diary keeps the *bernie* panel open but clears stale response,
   candidate, and proposal state. Any visible candidate or proposal is tied to
   the context snapshot that produced it.
+- Date resolution is now the first concrete transition-table implementation.
+  The LLM may extract an explicit date, but if it omits the date, deterministic
+  workflow code decides whether the current UI state is strong enough to supply
+  it. This pattern should be reused for practitioner inference, patient booking
+  history, voice confidence, and proposal freshness.
