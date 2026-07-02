@@ -134,6 +134,35 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 105: Bernie Typed Turn Contract And Confirmation Evidence
+
+| Item | Value |
+|---|---|
+| Status | Plan-gated; dispatched for plan packets |
+| Product Goal | Promote Bernie chat/session metadata into typed backend-visible turns and confirmation evidence so no-slot suggestions, candidate selection, proposal preview, and confirmation are explicit events with stale-proposal protection |
+| Worker Shape | Claude backend/API turn contract plan, Antigravity/Gemini Diary typed-turn UI plan, and Codex worker invariant/review-harness plan |
+| Out Of Scope | Broad root-to-branch API redesign, statechart runtime dependency, limited Bernie auto-mode, voice/headset/wake-word work, Caller ID, Medicare/HI/PVM/OPV verification, and any agent-only write path |
+
+Plan-gated workstreams:
+
+- Claude: `orchestration/agent_inbox/claude/claude-sprint105-bernie-turn-contract.md`
+  for backend/API typed turn schemas, event vocabulary, candidate/proposal
+  freshness ids or hashes, and confirmation staleness checks.
+- Antigravity/Gemini: `orchestration/agent_inbox/antigravity/antigravity-sprint105-bernie-typed-turn-ui.md`
+  for Diary typed staff/Bernie turn events, typed no-slot suggestion clicks,
+  candidate/proposal evidence wiring, and stale composer/proposal cleanup.
+- Codex worker: `orchestration/agent_inbox/codex/codex-sprint105-bernie-turn-invariants.md`
+  for executable acceptance invariants, stale-confirmation failure fixtures,
+  and review gates for the backend and UI submissions.
+
+Launch notes:
+
+- Workers must submit plan packets only, then stop.
+- Production code starts only after Ariadne reviews the plans and sends the
+  explicit implementation release.
+- Sprint 105 continues the concrete agentic Diary/API-pattern programme before
+  the broad root-to-branch API-spine review.
+
 ## Sprint 104: Bernie Conversational State Memory
 
 | Item | Value |
