@@ -138,14 +138,26 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Queued, plan-gated, Claude-only consulting sprint |
+| Status | Consulting plan integrated; first execution slice queued as Sprint 106A |
 | Product Goal | Bring Claude Fable 5 in as a consulting reviewer for Bernie's reception-domain copilot architecture before further implementation |
 | Worker Shape | Claude/Fable 5 plan-only review, overseen by Ariadne; no Antigravity or Codex worker branch for this sprint |
 | Task Packet | `orchestration/agent_inbox/claude/claude-bernie-reception-domain-copilot-architecture-consult.md` |
 | Model Policy | Planning should use Claude CLI `--model claude-fable-5` with high effort if available; fall back only with explicit Ariadne/Yuri awareness |
-| Pause Gate | Hard stop after Claude submits the plan. Ariadne reviews it first, then reviews it with Yuri. Implementation starts only after explicit Yuri approval and a separate `complete sprint task` release |
+| Pause Gate | Completed: Yuri approved executing the first bounded extraction slice after Ariadne review |
 | In Scope | Current Bernie interpreter, patient booking context, slot search, roster/schedule diagnostics, diary UI state machine, chat turns, transition/render guards, tests, and the proposed domain-specific receptionist-agent architecture |
 | Out Of Scope | Production code edits during planning, autonomous booking, live PHI, broad API-spine rewrite, provider migration, and any direct booking mutation without staff confirmation |
+
+## Sprint 106A: Bernie Bounded Domain Extraction Foundation
+
+| Item | Value |
+|---|---|
+| Status | Queued for Claude/Fable implementation |
+| Product Goal | Start standing Bernie on the long-run reception-domain foundation without prematurely adding the persisted session table |
+| Worker Shape | Claude/Fable 5 implementation slice, Ariadne review/integration |
+| Task Packet | `orchestration/agent_inbox/claude/claude-bernie-bounded-domain-extraction-foundation.md` |
+| In Scope | `app/services/bernie/` bounded package, low-risk wrappers/extraction, persistence-shaped session/event contracts, capability registry skeleton, focused backend tests |
+| Out Of Scope | Persisted session DB table, migrations, frontend render-from-server-state migration, typed context-frame enforcement, API-breaking response changes, autonomous booking, broad router rewrite |
+| Verification | Focused Bernie backend suites and `git diff --check`; stop if extraction pressure expands beyond the packet |
 
 ## Sprint 105: Bernie Typed Turn Contract And Confirmation Evidence
 
