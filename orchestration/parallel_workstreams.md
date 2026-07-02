@@ -138,7 +138,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; push/deploy/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited; GitHub Pages deploy queued |
 | Product Goal | Promote Bernie chat/session metadata into typed backend-visible turns and confirmation evidence so no-slot suggestions, candidate selection, proposal preview, and confirmation are explicit events with stale-proposal protection |
 | Worker Shape | Claude backend/API turn contract plan, Antigravity/Gemini Diary typed-turn UI plan, and Codex worker invariant/review-harness plan |
 | Out Of Scope | Broad root-to-branch API redesign, statechart runtime dependency, limited Bernie auto-mode, voice/headset/wake-word work, Caller ID, Medicare/HI/PVM/OPV verification, and any agent-only write path |

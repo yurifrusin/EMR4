@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 105: Bernie Typed Turn Contract And Confirmation Evidence |
 | Integrated through | Backend typed turn refs/freshness evidence, Diary typed turn events, confirmation evidence echo, and deterministic backend/UI harness coverage |
-| Status | Integrated locally; push/deploy/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited; GitHub Pages deploy queued |
 | Last updated | 2026-07-03 |
 
 ## What Changed
@@ -41,7 +41,7 @@ reviewed, integrated, verified, pushed, and audited.
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_turn_contract.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_no_slot_suggestions.py tests\test_bernie_sprint104_state_memory.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: full diary review harness green.
 - `node --check docs\diary\diary.js` passed.
-- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed locally; diary JS is correctly bumped to `v=148` and CSS is metadata-bumped to `v=126`.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed locally; diary JS is correctly bumped to `v=148` and CSS is metadata-bumped to `v=126`. Live Pages was still serving diary JS `v=145` / CSS `v=125` while GitHub Actions run `28598193722` remained queued.
 - `git diff --check` passed.
 
 ## Recommended User Review
