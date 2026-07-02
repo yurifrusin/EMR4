@@ -407,6 +407,48 @@ def seed():
         db.flush()
         print(f"  Future Bernie test appointments seeded for {followup_day}")
 
+        # Past fixtures for Bernie patient_booking_context testing.
+        # A Completed appointment 14 days ago so context retrieval can surface recent history.
+        past_day = today - timedelta(days=14)
+        past_appts = [
+            (
+                patient,
+                gp,
+                _appt_dt_on(past_day, 10, 0),
+                "Previous consult",
+                AppointmentStatus.Completed,
+                15,
+            ),
+        ]
+        for pt, prac, start, reason, init_status, duration_minutes in past_appts:
+            local_start = start.astimezone(practice_tz).time().replace(tzinfo=None)
+            appointment_date = start.astimezone(practice_tz).date()
+            exists = db.query(Appointment).filter_by(
+                practice_id=practice.id,
+                patient_id=pt.id,
+                practitioner_id=prac.id,
+                appointment_date=appointment_date,
+                start_time_local=local_start,
+            ).first()
+            if not exists:
+                db.add(Appointment(
+                    practice_id=practice.id,
+                    patient_id=pt.id,
+                    practitioner_id=prac.id,
+                    appointment_type_id=std_type.id if std_type else None,
+                    booked_by=gp_user.id,
+                    start_time=start,
+                    appointment_date=appointment_date,
+                    start_time_local=local_start,
+                    duration_minutes=duration_minutes,
+                    status=init_status,
+                    reason=reason,
+                    booked_via=BookingChannel.Receptionist,
+                    location_id=location.id,
+                ))
+        db.flush()
+        print(f"  Past Bernie context test appointment seeded for {past_day}")
+
         # --- Diary Template ---
         tmpl = db.query(DiaryTemplate).filter_by(practice_id=practice.id).first()
         if not tmpl:

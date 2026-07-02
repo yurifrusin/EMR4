@@ -599,6 +599,45 @@ class BerniePatientCandidate(BaseModel):
     requires_identifier: bool = True
 
 
+class BernieBookingContextEntry(BaseModel):
+    """Compact, PHI-safe appointment entry for staff-facing booking context."""
+    appointment_date: date
+    relative_label: str  # e.g. "3 days ago", "in 7 days", "today"
+    status: str  # AppointmentStatus.value
+    practitioner_display: str
+    appointment_type_name: Optional[str] = None
+    duration_minutes: int
+
+
+class BerniePatientBookingContext(BaseModel):
+    """Compact read-only context returned only for a recognized (exact-match) patient."""
+    patient_key: str  # patient UUID as string
+    recent_bookings: list[BernieBookingContextEntry] = Field(default_factory=list)
+    future_bookings: list[BernieBookingContextEntry] = Field(default_factory=list)
+    has_future_booking: bool
+    existing_future_follow_up: bool
+    recent_count: int
+    future_count: int
+    reference_date: date
+    generated_at: datetime
+
+
+class BernieContextFreshness(BaseModel):
+    """Freshness signal so the UI can detect and clear stale Bernie context."""
+    reference_date: date
+    generated_at: datetime
+    stale: bool
+    basis: str
+
+
+class BernieSlotSuggestion(BaseModel):
+    """A typed, non-mutating next-step suggestion when no slots are found."""
+    kind: Literal["next_available_day", "widen_time_window", "alternate_practitioner"]
+    summary: str
+    params: Optional[dict[str, Any]] = None
+    requires_confirmation: bool = True
+
+
 class BernieBookingInstructionInterpretIn(BaseModel):
     """Raw staff text intake for read-only Bernie booking interpretation."""
     instruction: str = Field(min_length=1, max_length=1000)
@@ -639,6 +678,9 @@ class BernieBookingInstructionInterpretOut(BaseModel):
     staff_checks: list[BernieStaffCheck] = Field(default_factory=list)
     patient_candidates: list[BerniePatientCandidate] = Field(default_factory=list)
     debug: Optional[dict[str, Any]] = None  # only populated when bernie_interpreter_debug_disclosure=True
+    # ── Patient booking context (additive; only populated for recognized patients) ──
+    patient_booking_context: Optional[BerniePatientBookingContext] = None
+    context_freshness: Optional[BernieContextFreshness] = None
 
 
 class BernieSupervisedBookingIn(BaseModel):
@@ -676,6 +718,10 @@ class BernieSupervisedBookingOut(BaseModel):
     staff_review: BernieStaffReviewPayload
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    # ── Additive context fields (default None/empty for backward compat) ──
+    patient_booking_context: Optional[BerniePatientBookingContext] = None
+    context_freshness: Optional[BernieContextFreshness] = None
+    suggestions: list[BernieSlotSuggestion] = Field(default_factory=list)
 
 
 class BernieCreateProposalConfirmationIn(BaseModel):

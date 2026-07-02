@@ -37,6 +37,11 @@ from app.schemas.appointments import (
     BernieBookingInstructionInterpretIn, BernieBookingInstructionInterpretOut,
     BernieConfidenceAxis, BernieConfidenceBand, BernieDecisionPolicy,
     BernieAssumption, BernieStaffCheck, BerniePatientCandidate,
+    BerniePatientBookingContext, BernieContextFreshness, BernieSlotSuggestion,
+)
+from app.services.bernie_patient_context import (
+    build_patient_booking_context,
+    build_existing_future_follow_up_warning,
 )
 from app.services.bernie_booking_interpreter import (
     actor_context_for_interpreter_user,
@@ -2065,6 +2070,39 @@ def _resolve_bernie_interpretation_context(
         _ref_tz = _practice_zoneinfo(db, practice_id)
         request_ref_date = _clinic_local_now(_ref_tz).date()
 
+    # ── Patient booking context (recognized-patient only, band=assume) ───────────
+    # Fetch context only for exact-match recognized patients; fuzzy/ambiguous
+    # candidates stay at band=ask with patient_id unset — no context for them.
+    patient_booking_ctx: Optional[BerniePatientBookingContext] = None
+    context_freshness_val: Optional[BernieContextFreshness] = None
+    if (
+        patient_axis is not None
+        and patient_axis.band == "assume"
+        and command_values.get("patient_id")
+    ):
+        try:
+            _pid = uuid.UUID(str(command_values["patient_id"]))
+            patient_booking_ctx = build_patient_booking_context(
+                db, practice_id, _pid, request_ref_date
+            )
+            if patient_booking_ctx.existing_future_follow_up:
+                if not any(w.code == "existing_future_follow_up" for w in warnings):
+                    warnings.append(build_existing_future_follow_up_warning())
+            _ref_tz2 = _practice_zoneinfo(db, practice_id)
+            _clinic_today = _clinic_local_now(_ref_tz2).date()
+            context_freshness_val = BernieContextFreshness(
+                reference_date=request_ref_date,
+                generated_at=patient_booking_ctx.generated_at,
+                stale=request_ref_date != _clinic_today,
+                basis=(
+                    "reference_date matches clinic-local today"
+                    if request_ref_date == _clinic_today
+                    else "reference_date differs from clinic-local today; context may be stale"
+                ),
+            )
+        except (TypeError, ValueError):
+            pass
+
     return result.model_copy(update={
         "safe": final_safe,
         "result": final_result,
@@ -2084,6 +2122,8 @@ def _resolve_bernie_interpretation_context(
         "staff_checks": all_staff_checks,
         "patient_candidates": all_patient_candidates,
         "debug": debug_payload,
+        "patient_booking_context": patient_booking_ctx,
+        "context_freshness": context_freshness_val,
     })
 
 
@@ -3275,6 +3315,30 @@ def propose_slot_selection_for_create(
     )
 
 
+def _build_no_slot_suggestions(constraint: SlotSearchProposalIn) -> list[BernieSlotSuggestion]:
+    """Build typed non-mutating next-step suggestions when a slot search yields zero candidates.
+
+    Called only when the search returned no candidates AND the clinic day is not exhausted.
+    Each suggestion carries requires_confirmation=True — the UI must never auto-apply them.
+    """
+    suggestions: list[BernieSlotSuggestion] = [
+        BernieSlotSuggestion(
+            kind="next_available_day",
+            summary="Search the next day for available slots.",
+            params={"date_from": (constraint.date_from + timedelta(days=1)).isoformat()},
+            requires_confirmation=True,
+        ),
+    ]
+    if constraint.earliest_time is not None or constraint.latest_time is not None:
+        suggestions.append(BernieSlotSuggestion(
+            kind="widen_time_window",
+            summary="Remove the time-window filter to find more available slots.",
+            params={"earliest_time": None, "latest_time": None},
+            requires_confirmation=True,
+        ))
+    return suggestions
+
+
 def _bernie_supervised_blocked(
     normalization: SlotSearchCommandResult,
     summary: str,
@@ -3403,6 +3467,45 @@ def propose_bernie_supervised_booking(
     clinic_today = clinic_now.date()
     now_time = clinic_now.time().replace(second=0, microsecond=0)
 
+    # ── Patient booking context (recognized-patient only) ────────────────────
+    # Build once after normalization succeeds; attach to all subsequent returns.
+    _sb_patient_ctx: Optional[BerniePatientBookingContext] = None
+    _sb_context_freshness: Optional[BernieContextFreshness] = None
+    if (
+        review_identity_evidence.recognition_status == "recognized"
+        and review_identity_evidence.patient_id is not None
+    ):
+        _sb_patient_ctx = build_patient_booking_context(
+            db,
+            current_user.practice_id,
+            review_identity_evidence.patient_id,
+            request_reference_date,
+        )
+        _sb_context_freshness = BernieContextFreshness(
+            reference_date=request_reference_date,
+            generated_at=_sb_patient_ctx.generated_at,
+            stale=request_reference_date != clinic_today,
+            basis=(
+                "reference_date matches clinic-local today"
+                if request_reference_date == clinic_today
+                else "reference_date differs from clinic-local today; context may be stale"
+            ),
+        )
+        if _sb_patient_ctx.existing_future_follow_up:
+            warnings_for_ctx = list(normalization.warnings)
+            if not any(w.code == "existing_future_follow_up" for w in warnings_for_ctx):
+                warnings_for_ctx.append(build_existing_future_follow_up_warning())
+            normalization = normalization.model_copy(update={"warnings": warnings_for_ctx})
+
+    def _with_ctx(out: BernieSupervisedBookingOut) -> BernieSupervisedBookingOut:
+        """Attach patient booking context and freshness to any supervised-booking response."""
+        if _sb_patient_ctx is None and _sb_context_freshness is None:
+            return out
+        return out.model_copy(update={
+            "patient_booking_context": _sb_patient_ctx,
+            "context_freshness": _sb_context_freshness,
+        })
+
     # Before-search bounded-window pre-check: if the window's upper bound is entirely
     # in the past, short-circuit without running a slot query.
     if (
@@ -3410,7 +3513,7 @@ def propose_bernie_supervised_booking(
         and constraint.latest_time is not None
         and constraint.latest_time <= now_time
     ):
-        return _bernie_clinic_day_exhausted(
+        return _with_ctx(_bernie_clinic_day_exhausted(
             normalization=normalization,
             summary=(
                 "That time window has already passed today - "
@@ -3420,7 +3523,7 @@ def propose_bernie_supervised_booking(
             identity_evidence=review_identity_evidence,
             patient_evidence=review_patient_evidence,
             request_reference_date=request_reference_date,
-        )
+        ))
 
     # Open-ended same-day clamp: if earliest_time is in the past, clamp it to now
     # so the slot search only looks at remaining bookable slots (not past ones).
@@ -3450,7 +3553,7 @@ def propose_bernie_supervised_booking(
     blocks = [*normalization.blocks, *search_proposal.blocks]
 
     if not search_proposal.safe:
-        return _bernie_supervised_blocked(
+        return _with_ctx(_bernie_supervised_blocked(
             normalization=normalization,
             summary=f"{normalization.summary} {search_proposal.summary}",
             blocks=blocks,
@@ -3458,7 +3561,7 @@ def propose_bernie_supervised_booking(
             warnings=warnings,
             identity_evidence=review_identity_evidence,
             patient_evidence=review_patient_evidence,
-        )
+        ))
 
     # Schedule-aware clinic-day exhaustion after open-ended slot search.
     # For open-ended same-day requests (earliest_time set, no latest_time), clamp-to-now
@@ -3470,7 +3573,7 @@ def propose_bernie_supervised_booking(
         and constraint.latest_time is None
         and len(search_proposal.candidates) == 0
     ):
-        return _bernie_clinic_day_exhausted(
+        return _with_ctx(_bernie_clinic_day_exhausted(
             normalization=normalization,
             summary=(
                 "No bookable slots remain today after that time - "
@@ -3481,7 +3584,7 @@ def propose_bernie_supervised_booking(
             identity_evidence=review_identity_evidence,
             patient_evidence=review_patient_evidence,
             request_reference_date=request_reference_date,
-        )
+        ))
 
     search_execution = SlotSearchCommandExecutionOut(
         safe=True,
@@ -3500,7 +3603,11 @@ def propose_bernie_supervised_booking(
             f"{search_execution.summary} Select one candidate before "
             "preparing create-proposal evidence."
         )
-        return BernieSupervisedBookingOut(
+        # No-slot suggestions: when zero candidates but not clinic_day_exhausted
+        no_slot_suggestions: list[BernieSlotSuggestion] = []
+        if len(search_proposal.candidates) == 0 and normalization.constraint is not None:
+            no_slot_suggestions = _build_no_slot_suggestions(normalization.constraint)
+        return _with_ctx(BernieSupervisedBookingOut(
             result="candidate_selection_required",
             request_reference_date=request_reference_date,
             safe=True,
@@ -3520,7 +3627,8 @@ def propose_bernie_supervised_booking(
             ),
             warnings=warnings,
             blocks=blocks,
-        )
+            suggestions=no_slot_suggestions,
+        ))
 
     if (
         body.patient_id is None
@@ -3531,7 +3639,7 @@ def propose_bernie_supervised_booking(
             "patient_identity_required",
             "patient_id or patient_name_provisional is required before preparing create-proposal evidence.",
         )
-        return _bernie_supervised_blocked(
+        return _with_ctx(_bernie_supervised_blocked(
             normalization=normalization,
             summary="Cannot prepare create proposal from selected slot. See blocked issues.",
             blocks=[*blocks, patient_block],
@@ -3539,7 +3647,7 @@ def propose_bernie_supervised_booking(
             warnings=warnings,
             identity_evidence=review_identity_evidence,
             patient_evidence=review_patient_evidence,
-        )
+        ))
 
     selection_body = SlotSelectionProposalIn(
         search_execution=search_execution,
@@ -3563,7 +3671,7 @@ def propose_bernie_supervised_booking(
 
     if selected_candidate is None or selection_blocks:
         selection_proposal = _block_slot_selection(selection_blocks, selected_candidate)
-        return _bernie_supervised_blocked(
+        return _with_ctx(_bernie_supervised_blocked(
             normalization=normalization,
             summary=selection_proposal.summary,
             blocks=[*blocks, *selection_proposal.blocks],
@@ -3572,7 +3680,7 @@ def propose_bernie_supervised_booking(
             warnings=[*warnings, *selection_proposal.warnings],
             identity_evidence=review_identity_evidence,
             patient_evidence=review_patient_evidence,
-        )
+        ))
 
     practitioner_evidence = _build_bernie_practitioner_evidence(
         practitioner_id,
@@ -3615,7 +3723,7 @@ def propose_bernie_supervised_booking(
     combined_blocks = [*blocks, *selection_proposal.blocks]
 
     if not selection_proposal.safe:
-        return _bernie_supervised_blocked(
+        return _with_ctx(_bernie_supervised_blocked(
             normalization=normalization,
             summary=selection_proposal.summary,
             blocks=combined_blocks,
@@ -3625,13 +3733,13 @@ def propose_bernie_supervised_booking(
             identity_evidence=review_identity_evidence,
             practitioner_evidence=practitioner_evidence,
             patient_evidence=review_patient_evidence,
-        )
+        ))
 
     summary = (
         f"{search_execution.summary} {selection_proposal.summary} "
         "Submit selection_proposal to confirm-bernie only after explicit staff confirmation."
     )
-    return BernieSupervisedBookingOut(
+    return _with_ctx(BernieSupervisedBookingOut(
         result="confirmation_ready",
         request_reference_date=request_reference_date,
         safe=True,
@@ -3654,7 +3762,7 @@ def propose_bernie_supervised_booking(
         ),
         warnings=combined_warnings,
         blocks=combined_blocks,
-    )
+    ))
 
 
 def _confirm_create_block(code: str, message: str) -> AppointmentProposalIssue:

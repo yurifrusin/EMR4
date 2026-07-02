@@ -168,9 +168,7 @@ def test_fake_provider_missing_fields_returns_clarifying_intent(
     assert data["safe"] is False
     assert data["result"] == "clarification_required"
     assert data["missing_fields"] == ["practitioner_id"]
-    assert data["clarifying_question"] == (
-        "Please tell Bernie which practitioner before searching for times."
-    )
+    assert data["clarifying_question"] == "Did you forget to mention the doctor or nurse?"
     assert data["normalization"]["safe"] is False
     assert data["blocks"][0]["code"] == "missing_practitioner_id"
 
@@ -533,3 +531,143 @@ def test_interpret_booking_instruction_does_not_search_create_confirm_or_mutate(
 
 def test_live_provider_factory_reset_after_tests():
     assert interpreter_service._live_provider_factory is None
+
+
+# ── Sprint 104: patient_booking_context and context_freshness fields ──────────
+
+from datetime import date as date_type, datetime, time, timezone, timedelta
+from app.models.appointments import AppointmentStatus, BookingChannel
+
+
+def _make_appt(db, practice, practitioner, patient, appt_date, h, m, status, duration=15):
+    appt = appointments_router.Appointment(
+        practice_id=practice.id,
+        patient_id=patient.id,
+        practitioner_id=practitioner.id,
+        start_time=datetime(appt_date.year, appt_date.month, appt_date.day, h, m, tzinfo=timezone.utc),
+        appointment_date=appt_date,
+        start_time_local=time(h, m),
+        duration_minutes=duration,
+        status=status,
+        booked_via=BookingChannel.Receptionist,
+    )
+    db.add(appt)
+    db.flush()
+    return appt
+
+
+SPRINT104_REFERENCE_DATE = "2026-07-02"
+
+
+def _post_interpret_s104(client, token, instruction: str, reference_date: str = SPRINT104_REFERENCE_DATE):
+    return client.post(
+        INTERPRET_URL,
+        json={"instruction": instruction, "reference_date": reference_date},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+
+def test_recognized_patient_interpret_returns_booking_context(
+    client, db, gp_user, patient, practitioner, monkeypatch
+):
+    """Exact-match recognized patient returns patient_booking_context in interpret response."""
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    fixed_now = datetime(2026, 7, 2, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+    token = make_token(gp_user)
+
+    _make_appt(
+        db, gp_user.practice, practitioner, patient,
+        date_type(2026, 6, 18), 10, 0, AppointmentStatus.Completed,
+    )
+    _make_appt(
+        db, gp_user.practice, practitioner, patient,
+        date_type(2026, 7, 9), 9, 0, AppointmentStatus.Booked,
+    )
+
+    resp = _post_interpret_s104(
+        client, token,
+        f"Book {patient.first_name} {patient.last_name} with "
+        f"{practitioner.first_name} {practitioner.last_name} next week",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    ctx = data.get("patient_booking_context")
+    assert ctx is not None, "Expected patient_booking_context for a recognized patient"
+    assert ctx["patient_key"] == str(patient.id)
+    assert ctx["has_future_booking"] is True
+    assert ctx["existing_future_follow_up"] is True
+    assert len(ctx["future_bookings"]) >= 1
+
+
+def test_fuzzy_candidate_has_no_booking_context(
+    client, db, gp_user, patient, practitioner, monkeypatch
+):
+    """Fuzzy/ambiguous patient candidates (band=ask) must NOT receive patient_booking_context."""
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+
+    # Use a slightly misspelled name to trigger fuzzy (no exact match)
+    resp = _post_interpret_s104(
+        client, token,
+        f"Book Margret Tompson with {practitioner.first_name} {practitioner.last_name} next week",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data.get("patient_booking_context") is None, (
+        "Fuzzy candidates must not receive patient_booking_context"
+    )
+
+
+def test_existing_future_follow_up_warning_in_interpret(
+    client, db, gp_user, patient, practitioner, monkeypatch
+):
+    """Recognized patient with a future appointment triggers existing_future_follow_up warning."""
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    fixed_now = datetime(2026, 7, 2, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+    token = make_token(gp_user)
+
+    _make_appt(
+        db, gp_user.practice, practitioner, patient,
+        date_type(2026, 7, 9), 9, 0, AppointmentStatus.Booked,
+    )
+
+    resp = _post_interpret_s104(
+        client, token,
+        f"Book {patient.first_name} {patient.last_name} with "
+        f"{practitioner.first_name} {practitioner.last_name} next week",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    ctx = data.get("patient_booking_context")
+    if ctx is not None and ctx.get("existing_future_follow_up"):
+        warning_codes = [w["code"] for w in data.get("warnings", [])]
+        assert "existing_future_follow_up" in warning_codes, (
+            "existing_future_follow_up warning expected in response warnings"
+        )
+
+
+def test_interpret_booking_context_no_db_writes(
+    client, db, gp_user, patient, practitioner, monkeypatch
+):
+    """patient_booking_context fetch on interpret path never writes any DB rows."""
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    fixed_now = datetime(2026, 7, 2, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+    token = make_token(gp_user)
+
+    appt_before = db.query(Appointment).count()
+    audit_before = db.query(AppointmentAuditLog).count()
+
+    _post_interpret_s104(
+        client, token,
+        f"Book {patient.first_name} {patient.last_name} with "
+        f"{practitioner.first_name} {practitioner.last_name} next week",
+    )
+
+    assert db.query(Appointment).count() == appt_before
+    assert db.query(AppointmentAuditLog).count() == audit_before

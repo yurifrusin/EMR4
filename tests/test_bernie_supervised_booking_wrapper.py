@@ -374,3 +374,80 @@ def test_supervised_booking_source_has_no_llm_confirmation_or_mutation_calls():
     assert "db.add" not in source
     assert "db.commit" not in source
     assert "_write_audit" not in source
+
+
+# ── Sprint 104: context fields on supervised-booking responses ────────────────
+
+from datetime import timezone as _timezone
+
+
+def test_supervised_booking_recognized_patient_returns_context(
+    client, db, gp_user, practitioner, patient, monkeypatch
+):
+    """Supervised-booking with a recognized patient_id returns patient_booking_context."""
+    token = make_token(gp_user)
+    fixed_now = datetime(2026, 6, 22, 9, 0, tzinfo=_timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+
+    # Create a future appointment so existing_future_follow_up fires
+    future_appt = Appointment(
+        practice_id=gp_user.practice_id,
+        patient_id=patient.id,
+        practitioner_id=practitioner.id,
+        start_time=datetime(2026, 6, 29, 0, 0, tzinfo=_timezone.utc),
+        appointment_date=date(2026, 6, 29),
+        start_time_local=time(10, 0),
+        duration_minutes=15,
+        status=AppointmentStatus.Booked,
+        booked_via=BookingChannel.Receptionist,
+    )
+    db.add(future_appt)
+    db.flush()
+
+    body = _base_body(practitioner)
+    body["patient_id"] = str(patient.id)
+
+    resp = _post_wrapper(client, token, body)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    ctx = data.get("patient_booking_context")
+    assert ctx is not None, "Expected patient_booking_context for a recognized patient_id"
+    assert ctx["patient_key"] == str(patient.id)
+    assert ctx["has_future_booking"] is True
+    assert ctx["existing_future_follow_up"] is True
+
+
+def test_supervised_booking_without_patient_has_no_context(
+    client, db, gp_user, practitioner, monkeypatch
+):
+    """Supervised-booking without patient_id returns no patient_booking_context."""
+    token = make_token(gp_user)
+    fixed_now = datetime(2026, 6, 22, 9, 0, tzinfo=_timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+
+    body = _base_body(practitioner)
+    # No patient_id supplied
+
+    resp = _post_wrapper(client, token, body)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data.get("patient_booking_context") is None
+
+
+def test_supervised_booking_suggestions_field_always_present(
+    client, db, gp_user, practitioner, monkeypatch
+):
+    """suggestions field is always present in supervised-booking response (may be empty)."""
+    token = make_token(gp_user)
+    fixed_now = datetime(2026, 6, 22, 9, 0, tzinfo=_timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+
+    body = _base_body(practitioner)
+    resp = _post_wrapper(client, token, body)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert "suggestions" in data
+    assert isinstance(data["suggestions"], list)
