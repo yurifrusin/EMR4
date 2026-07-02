@@ -5,6 +5,36 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.models.appointments import AppointmentStatus, BookingChannel, AppointmentAuditAction
 
 
+# ── Bernie typed turn contract ────────────────────────────────────────────────
+
+BernieTurnEventKind = Literal[
+    "staff_instruction",
+    "bernie_clarification",
+    "no_slot_suggestion_selection",
+    "candidate_selection",
+    "proposal_preview",
+    "confirmation",
+]
+
+
+class BernieTurnRef(BaseModel):
+    """Typed turn identity for a Bernie session step.
+
+    session_id is minted by the server on the first interpret call and must be
+    echoed unchanged by the client on every subsequent turn in the same session.
+    turn_id is minted per server response and is unique within a session.
+    turn_index is a monotonically increasing integer (0-based, minted by server).
+    reference_date is the immutable clinic-local date captured at session start
+    and echoed on every turn; the server rejects turns that supply a different
+    reference_date than the one established on turn-0.
+    """
+    session_id: str
+    turn_id: str
+    turn_index: int = Field(ge=0)
+    event_kind: BernieTurnEventKind
+    reference_date: date
+
+
 class AppointmentTypeOut(BaseModel):
     id: uuid.UUID
     name: str
@@ -364,6 +394,10 @@ class SlotCandidate(BaseModel):
     start_time_local: time
     duration_minutes: int
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    # Deterministic freshness id stamped by the server on candidate issuance.
+    # Clients echo it back in the confirmation body; the server recomputes and
+    # compares to detect stale or tampered candidates.  Optional for backward compat.
+    candidate_freshness_id: Optional[str] = None
 
 
 class SlotSearchProposalOut(BaseModel):
@@ -467,6 +501,11 @@ class SlotSelectionProposalOut(BaseModel):
     create_proposal: Optional[AppointmentCreateProposalOut] = None
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    # Additive turn tracking (default None for backward compat with Sprint 104).
+    turn_ref: Optional["BernieTurnRef"] = None
+    # Deterministic freshness id for the create proposal. Stamped by server;
+    # clients echo back in confirmation; server recomputes and compares.
+    proposal_freshness_id: Optional[str] = None
 
 
 class BernieStaffReviewSlotSummary(BaseModel):
@@ -638,11 +677,42 @@ class BernieSlotSuggestion(BaseModel):
     requires_confirmation: bool = True
 
 
+class BernieNoSlotSuggestionSelectionIn(BaseModel):
+    """Typed event for staff selecting one of Bernie's no-slot suggestions.
+
+    Carries the originating turn_ref (so the server can verify the suggestion
+    came from a known turn in the same session) and the selected suggestion kind.
+    This is a non-mutating read-only event — it produces a new supervised-booking
+    request pre-populated with the suggestion's adjusted params, not a booking.
+    """
+    turn_ref: "BernieTurnRef"
+    suggestion: BernieSlotSuggestion
+    # Original supervised-booking request that yielded the no-slot suggestions;
+    # the server uses this to build the next slot-search command.
+    original_request: "BernieSupervisedBookingIn"
+
+
+class BernieNoSlotSuggestionSelectionOut(BaseModel):
+    """Result of a no-slot suggestion selection."""
+    intent: Literal["no_slot_suggestion_selection"] = "no_slot_suggestion_selection"
+    accepted: bool
+    turn_ref: "BernieTurnRef"
+    next_request: Optional["BernieSupervisedBookingIn"] = None
+    summary: str
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+
+
 class BernieBookingInstructionInterpretIn(BaseModel):
     """Raw staff text intake for read-only Bernie booking interpretation."""
     instruction: str = Field(min_length=1, max_length=1000)
     reference_date: Optional[date] = None
     context_frames: list[dict[str, Any]] = Field(default_factory=list)
+    # Additive turn tracking (Optional for backward compat).
+    # Clients may supply session_id to continue a session; the server mints a
+    # new turn_ref on the response with the next turn_index.  On the first call
+    # (session_id absent) the server mints a fresh session_id.
+    turn_ref: Optional["BernieTurnRef"] = None
 
 
 class BernieBookingInterpreterMetadata(BaseModel):
@@ -681,6 +751,8 @@ class BernieBookingInstructionInterpretOut(BaseModel):
     # ── Patient booking context (additive; only populated for recognized patients) ──
     patient_booking_context: Optional[BerniePatientBookingContext] = None
     context_freshness: Optional[BernieContextFreshness] = None
+    # Additive turn tracking (default None for backward compat).
+    turn_ref: Optional["BernieTurnRef"] = None
 
 
 class BernieSupervisedBookingIn(BaseModel):
@@ -698,6 +770,10 @@ class BernieSupervisedBookingIn(BaseModel):
     reason: Optional[str] = None
     notes: Optional[str] = None
     booked_via: BookingChannel = BookingChannel.Receptionist
+    # Additive turn tracking (Optional for backward compat with Sprint 104).
+    # Clients may supply a session_id to continue an existing session;
+    # turn_ref is then stamped on the response with the next turn_index.
+    turn_ref: Optional["BernieTurnRef"] = None
 
 
 class BernieSupervisedBookingOut(BaseModel):
@@ -722,6 +798,8 @@ class BernieSupervisedBookingOut(BaseModel):
     patient_booking_context: Optional[BerniePatientBookingContext] = None
     context_freshness: Optional[BernieContextFreshness] = None
     suggestions: list[BernieSlotSuggestion] = Field(default_factory=list)
+    # ── Additive turn tracking (default None for backward compat) ──
+    turn_ref: Optional["BernieTurnRef"] = None
 
 
 class BernieCreateProposalConfirmationIn(BaseModel):
@@ -729,3 +807,24 @@ class BernieCreateProposalConfirmationIn(BaseModel):
     confirmed: bool = False
     selection_proposal: SlotSelectionProposalOut
     confirmed_warnings: list[str] = Field(default_factory=list)
+    # Additive turn tracking (Optional for backward compat).
+    # When turn_ref is supplied the server validates that reference_date matches
+    # the session reference_date captured on turn-0 and that the echoed
+    # candidate/proposal freshness ids match recomputed expected values.
+    turn_ref: Optional["BernieTurnRef"] = None
+    # Client echoes back the freshness ids it received from the server.
+    # Presence triggers the staleness gate; absence is tolerated for backward compat.
+    candidate_freshness_id: Optional[str] = None
+    proposal_freshness_id: Optional[str] = None
+
+
+# Resolve forward references now that all models are defined.
+BernieTurnRef.model_rebuild()
+SlotSelectionProposalOut.model_rebuild()
+BernieSupervisedBookingIn.model_rebuild()
+BernieSupervisedBookingOut.model_rebuild()
+BernieCreateProposalConfirmationIn.model_rebuild()
+BernieBookingInstructionInterpretIn.model_rebuild()
+BernieBookingInstructionInterpretOut.model_rebuild()
+BernieNoSlotSuggestionSelectionIn.model_rebuild()
+BernieNoSlotSuggestionSelectionOut.model_rebuild()
