@@ -38,6 +38,16 @@ from app.schemas.appointments import (
     BernieConfidenceAxis, BernieConfidenceBand, BernieDecisionPolicy,
     BernieAssumption, BernieStaffCheck, BerniePatientCandidate,
     BerniePatientBookingContext, BernieContextFreshness, BernieSlotSuggestion,
+    BernieTurnRef, BernieTurnEventKind,
+    BernieNoSlotSuggestionSelectionIn, BernieNoSlotSuggestionSelectionOut,
+)
+from app.services.bernie_turn_evidence import (
+    compute_candidate_freshness_id,
+    compute_proposal_freshness_id,
+    check_staleness,
+    mint_session_id,
+    mint_turn_id,
+    StalenessVerdict,
 )
 from app.services.bernie_patient_context import (
     build_patient_booking_context,
@@ -101,6 +111,33 @@ BERNIE_WEEK_RELATIVE_RE = re.compile(
     r"\b(?:in\s+(?:a|one|1)\s+week(?:['’`\\]s)?(?:\s+time)?|next\s+week)\b",
     re.IGNORECASE,
 )
+
+
+def _mint_next_turn_ref(
+    incoming: Optional[BernieTurnRef],
+    event_kind: BernieTurnEventKind,
+    reference_date: date_type,
+) -> BernieTurnRef:
+    """Mint the next turn_ref for a Bernie response.
+
+    If the client supplied an incoming turn_ref we continue its session;
+    otherwise we start a new session.  reference_date is always taken from the
+    server-side intake value, not the client-supplied turn_ref, so it is
+    immutable across turns.
+    """
+    if incoming is not None:
+        session_id = incoming.session_id
+        next_index = incoming.turn_index + 1
+    else:
+        session_id = mint_session_id()
+        next_index = 0
+    return BernieTurnRef(
+        session_id=session_id,
+        turn_id=mint_turn_id(session_id, next_index),
+        turn_index=next_index,
+        event_kind=event_kind,
+        reference_date=reference_date,
+    )
 
 
 def _resolve_bernie_instruction_relative_date(
@@ -1319,6 +1356,12 @@ def interpret_bernie_booking_instruction(
     if access_ai_audit_events:
         persist_access_ai_audit_events(db, access_ai_audit_events)
         db.commit()
+    # Stamp turn_ref on the response (additive; does not affect existing fields).
+    effective_reference_date = result.request_reference_date or (
+        body.reference_date if body.reference_date is not None else date_type.today()
+    )
+    turn_ref = _mint_next_turn_ref(body.turn_ref, "staff_instruction", effective_reference_date)
+    result = result.model_copy(update={"turn_ref": turn_ref})
     return result
 
 
@@ -3592,6 +3635,28 @@ def propose_bernie_supervised_booking(
         db,
         current_user.practice_id,
     )
+
+    # Stamp deterministic freshness ids on every candidate so the confirm gate
+    # can detect stale or cross-session evidence.  reference_date is immutable
+    # across the session (body.reference_date = request_reference_date).
+    _slot_practitioner_id = constraint.practitioner_id if normalization.constraint else None
+    if search_proposal.candidates:
+        stamped_candidates = [
+            c.model_copy(update={
+                "candidate_freshness_id": compute_candidate_freshness_id(
+                    appointment_date=c.appointment_date,
+                    start_time=c.start_time,
+                    end_time=c.end_time,
+                    start_time_local=c.start_time_local,
+                    duration_minutes=c.duration_minutes,
+                    practitioner_id=_slot_practitioner_id,
+                    reference_date=request_reference_date,
+                )
+            })
+            for c in search_proposal.candidates
+        ]
+        search_proposal = search_proposal.model_copy(update={"candidates": stamped_candidates})
+
     warnings = [*normalization.warnings, *search_proposal.warnings]
     blocks = [*normalization.blocks, *search_proposal.blocks]
 
@@ -3650,6 +3715,7 @@ def propose_bernie_supervised_booking(
         no_slot_suggestions: list[BernieSlotSuggestion] = []
         if len(search_proposal.candidates) == 0 and normalization.constraint is not None:
             no_slot_suggestions = _build_no_slot_suggestions(normalization.constraint)
+        _csr_turn_ref = _mint_next_turn_ref(body.turn_ref, "candidate_selection", request_reference_date)
         return _with_ctx(BernieSupervisedBookingOut(
             result="candidate_selection_required",
             request_reference_date=request_reference_date,
@@ -3671,6 +3737,7 @@ def propose_bernie_supervised_booking(
             warnings=warnings,
             blocks=blocks,
             suggestions=no_slot_suggestions,
+            turn_ref=_csr_turn_ref,
         ))
 
     if (
@@ -3752,6 +3819,19 @@ def propose_bernie_supervised_booking(
     )
     selection_proposal_warnings = [*selected_candidate.warnings, *create_proposal.warnings]
     selection_proposal_blocks = [*create_proposal.blocks]
+    # Compute proposal freshness id from the create command coordinates.
+    _cmd = create_proposal.command
+    _proposal_fid = compute_proposal_freshness_id(
+        appointment_date=_cmd.appointment_date,
+        start_time=_cmd.start_time,
+        start_time_local=_cmd.start_time_local,
+        duration_minutes=_cmd.duration_minutes,
+        practitioner_id=_cmd.practitioner_id,
+        patient_id=_cmd.patient_id,
+        appointment_type_id=_cmd.appointment_type_id,
+        location_id=_cmd.location_id,
+        reference_date=request_reference_date,
+    )
     selection_proposal = SlotSelectionProposalOut(
         safe=create_proposal.safe,
         requires_confirmation=True,
@@ -3761,6 +3841,7 @@ def propose_bernie_supervised_booking(
         create_proposal=create_proposal,
         warnings=selection_proposal_warnings,
         blocks=selection_proposal_blocks,
+        proposal_freshness_id=_proposal_fid,
     )
     combined_warnings = [*warnings, *selection_proposal.warnings]
     combined_blocks = [*blocks, *selection_proposal.blocks]
@@ -3782,6 +3863,7 @@ def propose_bernie_supervised_booking(
         f"{search_execution.summary} {selection_proposal.summary} "
         "Submit selection_proposal to confirm-bernie only after explicit staff confirmation."
     )
+    _sb_turn_ref = _mint_next_turn_ref(body.turn_ref, "proposal_preview", request_reference_date)
     return _with_ctx(BernieSupervisedBookingOut(
         result="confirmation_ready",
         request_reference_date=request_reference_date,
@@ -3805,6 +3887,7 @@ def propose_bernie_supervised_booking(
         ),
         warnings=combined_warnings,
         blocks=combined_blocks,
+        turn_ref=_sb_turn_ref,
     ))
 
 
@@ -3936,6 +4019,72 @@ def confirm_bernie_create_proposal(
                 "The create proposal command no longer matches the selected slot evidence.",
             ))
 
+    # ── Staleness gate (fail-closed) ────────────────────────────────────────
+    # Only fires when the client explicitly echoes freshness ids or a turn_ref
+    # (backward-compat: omitting these fields is tolerated for Sprint 104 clients).
+    if body.turn_ref is not None or body.candidate_freshness_id is not None or body.proposal_freshness_id is not None:
+        _confirm_reference_date = body.turn_ref.reference_date if body.turn_ref is not None else None
+
+        # Check candidate freshness.
+        if body.candidate_freshness_id is not None and selection.selected_candidate is not None:
+            _expected_cand_fid = compute_candidate_freshness_id(
+                appointment_date=selection.selected_candidate.appointment_date,
+                start_time=selection.selected_candidate.start_time,
+                end_time=selection.selected_candidate.end_time,
+                start_time_local=selection.selected_candidate.start_time_local,
+                duration_minutes=selection.selected_candidate.duration_minutes,
+                practitioner_id=create_proposal.command.practitioner_id if create_proposal else None,
+                reference_date=_confirm_reference_date or selection.selected_candidate.appointment_date,
+            )
+            _cand_staleness = check_staleness(
+                submitted_freshness_id=body.candidate_freshness_id,
+                expected_freshness_id=_expected_cand_fid,
+                submitted_reference_date=_confirm_reference_date,
+                session_reference_date=_confirm_reference_date or selection.selected_candidate.appointment_date,
+            )
+            if _cand_staleness.verdict == StalenessVerdict.mismatched_reference_date:
+                blocks.append(_confirm_create_block(
+                    "stale_candidate_reference_date_mismatch",
+                    f"Confirmation blocked: {_cand_staleness.detail}",
+                ))
+            elif _cand_staleness.verdict == StalenessVerdict.stale:
+                blocks.append(_confirm_create_block(
+                    "stale_candidate_freshness_id",
+                    "Confirmation blocked: candidate freshness id does not match current session evidence.",
+                ))
+
+        # Check proposal freshness.
+        if body.proposal_freshness_id is not None and create_proposal is not None:
+            _cmd = create_proposal.command
+            _confirm_ref_date_for_proposal = _confirm_reference_date or _cmd.appointment_date
+            _expected_prop_fid = compute_proposal_freshness_id(
+                appointment_date=_cmd.appointment_date,
+                start_time=_cmd.start_time,
+                start_time_local=_cmd.start_time_local,
+                duration_minutes=_cmd.duration_minutes,
+                practitioner_id=_cmd.practitioner_id,
+                patient_id=_cmd.patient_id,
+                appointment_type_id=_cmd.appointment_type_id,
+                location_id=_cmd.location_id,
+                reference_date=_confirm_ref_date_for_proposal,
+            )
+            _prop_staleness = check_staleness(
+                submitted_freshness_id=body.proposal_freshness_id,
+                expected_freshness_id=_expected_prop_fid,
+                submitted_reference_date=_confirm_reference_date,
+                session_reference_date=_confirm_ref_date_for_proposal,
+            )
+            if _prop_staleness.verdict == StalenessVerdict.mismatched_reference_date:
+                blocks.append(_confirm_create_block(
+                    "stale_proposal_reference_date_mismatch",
+                    f"Confirmation blocked: {_prop_staleness.detail}",
+                ))
+            elif _prop_staleness.verdict == StalenessVerdict.stale:
+                blocks.append(_confirm_create_block(
+                    "stale_proposal_freshness_id",
+                    "Confirmation blocked: proposal freshness id does not match current session evidence.",
+                ))
+
     if blocks:
         return _block_bernie_create_confirmation(
             blocks,
@@ -4020,4 +4169,66 @@ def confirm_bernie_create_proposal(
         warnings=[*selection.warnings, *revalidated.warnings],
         blocks=[],
         audit_evidence=audit_evidence,
+    )
+
+
+@router.post(
+    "/proposals/bernie/no-slot-suggestion-selection",
+    response_model=BernieNoSlotSuggestionSelectionOut,
+)
+def select_no_slot_suggestion(
+    body: BernieNoSlotSuggestionSelectionIn,
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Handle staff selection of a no-slot suggestion from a prior Bernie turn.
+
+    Non-mutating.  Validates that the suggestion came from a turn in the same
+    session (via turn_ref) and returns a pre-populated supervised-booking request
+    carrying the suggestion's adjusted params.  The caller must submit that
+    request to /proposals/bernie/supervised-booking to search for actual slots.
+    """
+    incoming_turn = body.turn_ref
+    suggestion = body.suggestion
+
+    # Build the next supervised-booking request from the suggestion params.
+    orig = body.original_request
+    adjusted_command_values = orig.command.model_dump()
+    if suggestion.params:
+        adjusted_command_values.update({
+            k: v for k, v in suggestion.params.items()
+            if k in adjusted_command_values
+        })
+    adjusted_command = SlotSearchCommandIn(**adjusted_command_values)
+
+    next_request = BernieSupervisedBookingIn(
+        command=adjusted_command,
+        reference_date=orig.reference_date,
+        context_frames=orig.context_frames,
+        patient_id=orig.patient_id,
+        patient_name_provisional=orig.patient_name_provisional,
+        practitioner_id=orig.practitioner_id,
+        appointment_type_id=orig.appointment_type_id,
+        location_id=orig.location_id,
+        reason=orig.reason,
+        notes=orig.notes,
+        booked_via=orig.booked_via,
+        turn_ref=incoming_turn,
+    )
+
+    next_turn_ref = _mint_next_turn_ref(
+        incoming_turn,
+        "no_slot_suggestion_selection",
+        incoming_turn.reference_date,
+    )
+
+    return BernieNoSlotSuggestionSelectionOut(
+        accepted=True,
+        turn_ref=next_turn_ref,
+        next_request=next_request,
+        summary=(
+            f"Accepted suggestion '{suggestion.kind}'. "
+            "Submit next_request to /proposals/bernie/supervised-booking."
+        ),
+        warnings=[],
+        blocks=[],
     )

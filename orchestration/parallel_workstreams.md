@@ -138,12 +138,12 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Plan-gated; dispatched for plan packets |
+| Status | Integrated locally; push/deploy/mirror/audit pending |
 | Product Goal | Promote Bernie chat/session metadata into typed backend-visible turns and confirmation evidence so no-slot suggestions, candidate selection, proposal preview, and confirmation are explicit events with stale-proposal protection |
 | Worker Shape | Claude backend/API turn contract plan, Antigravity/Gemini Diary typed-turn UI plan, and Codex worker invariant/review-harness plan |
 | Out Of Scope | Broad root-to-branch API redesign, statechart runtime dependency, limited Bernie auto-mode, voice/headset/wake-word work, Caller ID, Medicare/HI/PVM/OPV verification, and any agent-only write path |
 
-Plan-gated workstreams:
+Integrated workstreams:
 
 - Claude: `orchestration/agent_inbox/claude/claude-sprint105-bernie-turn-contract.md`
   for backend/API typed turn schemas, event vocabulary, candidate/proposal
@@ -152,14 +152,19 @@ Plan-gated workstreams:
   for Diary typed staff/Bernie turn events, typed no-slot suggestion clicks,
   candidate/proposal evidence wiring, and stale composer/proposal cleanup.
 - Codex worker: `orchestration/agent_inbox/codex/codex-sprint105-bernie-turn-invariants.md`
-  for executable acceptance invariants, stale-confirmation failure fixtures,
-  and review gates for the backend and UI submissions.
+  plan accepted as review guidance; implementation was stood down because
+  Claude/Antigravity plus Ariadne integration repairs covered the invariant
+  harness surfaces without needing a third overlapping production patch.
 
-Launch notes:
+Integration notes:
 
-- Workers must submit plan packets only, then stop.
-- Production code starts only after Ariadne reviews the plans and sends the
-  explicit implementation release.
+- Claude backend/API work was accepted with additive optional typed turn refs,
+  deterministic candidate/proposal freshness ids, and a fail-closed confirmation
+  staleness gate when clients echo evidence.
+- Antigravity Diary UI work was accepted after Ariadne repaired interrupted CLI
+  output and added the end-to-end bridge so the UI echoes backend `turn_ref`,
+  `candidate_freshness_id`, and `proposal_freshness_id` at confirmation.
+- Focused backend tests and the full deterministic diary smoke harness passed.
 - Sprint 105 continues the concrete agentic Diary/API-pattern programme before
   the broad root-to-branch API-spine review.
 

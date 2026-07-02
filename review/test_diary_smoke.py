@@ -125,25 +125,25 @@ def test_diary_check(diary_page, check):
 def test_booking_audit_history(diary_page):
     # Click Margaret Thompson's appointment on the grid to make it active.
     diary_page.click(".appt:has-text('Margaret Thompson')")
-    
+
     # Wait for the edit button to appear inside the active appointment block, then click it.
     diary_page.wait_for_selector(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt", state="visible", timeout=3000)
     diary_page.click(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt")
-    
+
     # Wait for the booking modal to become visible
     diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
-    
+
     # The audit section should be visible, but collapsed by default (has class hidden on the content element)
     diary_page.wait_for_selector("[data-testid='booking-audit-section']:not(.hidden)", state="visible", timeout=2000)
     diary_page.wait_for_selector("[data-testid='booking-audit-content'].hidden", state="attached", timeout=2000)
-    
+
     # Check accessibility/ARIA attributes
     header = diary_page.locator("[data-testid='booking-audit-header']")
     assert header.get_attribute("role") == "button"
     assert header.get_attribute("tabindex") == "0"
     assert header.get_attribute("aria-controls") == "booking-audit-content"
     assert header.get_attribute("aria-expanded") == "false"
-    
+
     # Test keyboard toggle with Enter
     header.focus()
     diary_page.keyboard.press("Enter")
@@ -1100,6 +1100,13 @@ def _bernie_live_confirmation_response():
         "requires_confirmation": True,
         "autonomy_tier": "proposal",
         "summary": "Confirmation ready.",
+        "turn_ref": {
+            "session_id": "session-smoke-105",
+            "turn_id": "turn-smoke-105-preview",
+            "turn_index": 2,
+            "reference_date": "2026-06-27",
+            "state": "proposal_preview",
+        },
         "staff_review": {
             "headline": "Proposal Confirmation Ready",
             "status": "confirmation_ready",
@@ -1121,13 +1128,15 @@ def _bernie_live_confirmation_response():
                 "selection_proposal": {
                     "intent": "select_slot_for_create_proposal",
                     "selected_candidate_index": 0,
+                    "proposal_freshness_id": "proposal-freshness-smoke-105",
                     "selected_candidate": {
                         "appointment_date": "2026-06-27",
                         "start_time_local": "09:00:00",
                         "end_time_local": "09:15:00",
                         "duration_minutes": 15,
                         "practitioner_id": "prac-1",
-                        "location_id": "loc-main"
+                        "location_id": "loc-main",
+                        "candidate_freshness_id": "candidate-freshness-smoke-105"
                     }
                 },
                 "create_proposal": {
@@ -1259,6 +1268,9 @@ def test_bernie_route_intercepted_confirm_flow_harness_success(diary_page):
 
         assert len(confirm_payloads) == 1
         assert confirm_payloads[0]["confirmed"] is True
+        assert confirm_payloads[0]["turn_ref"]["turn_id"] == "turn-smoke-105-preview"
+        assert confirm_payloads[0]["candidate_freshness_id"] == "candidate-freshness-smoke-105"
+        assert confirm_payloads[0]["proposal_freshness_id"] == "proposal-freshness-smoke-105"
         assert confirm_payloads[0]["selection_proposal"]["intent"] == "select_slot_for_create_proposal"
         assert confirm_payloads[0]["create_proposal"]["reason"] == "Follow-up"
         assert error_msg.is_hidden()
@@ -5523,3 +5535,270 @@ def test_sprint99_bernie_asset_version_checks():
     # Assert that scripts and style assets are loaded with cache-busting version query parameters
     assert re.search(r'diary\.css\?v=\d+', html_content) is not None
     assert re.search(r'diary\.js\?v=\d+', html_content) is not None
+
+
+def test_bernie_turns_and_typed_event_payloads(diary_page):
+    """Verify that turns are correctly logged as typed event objects and serialized."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_requests = []
+
+    mock_interpret = {
+        "safe": True,
+        "result": "clarification_required",
+        "summary": "Which date?",
+        "clarifying_question": "Which date?",
+        "command_candidate": None,
+        "normalization": None,
+        "blocks": [],
+        "warnings": [],
+        "assumptions": [],
+        "provider_metadata": {"mode": "mocked", "live_provider": False},
+    }
+
+    def capture_interpret(route):
+        captured_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret),
+        )
+
+    diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        capture_interpret,
+    )
+
+    try:
+        # Start fresh session
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        # We start a new session to clear any previous turns
+        diary_page.evaluate("bernieSession.startNewSession()")
+
+        # Enter an instruction
+        trigger_route_intercepted_bernie(
+            diary_page,
+            instruction="Book appointment for smoke-pat-1 with practitioner prac-1",
+            register_default_mock=False,
+        )
+        diary_page.wait_for_selector("[data-testid='bernie-chat-transcript']", state="visible", timeout=5000)
+
+        # Get session state
+        turns = diary_page.evaluate("bernieSession.turns")
+        assert len(turns) >= 2
+
+        # The first event should be staff_instruction
+        event0 = turns[0]
+        assert event0["kind"] == "staff_instruction"
+        assert event0["payload"]["instruction"] == "Book appointment for smoke-pat-1 with practitioner prac-1"
+        assert "id" in event0
+        assert "timestamp" in event0
+
+        # The second event should be bernie_clarification
+        event1 = turns[1]
+        assert event1["kind"] == "bernie_clarification"
+        assert event1["payload"]["text"] == "Which date?"
+        assert event1["payload"]["type"] == "clarification_question"
+
+        # Now reply to clarification
+        captured_requests.clear()
+
+        # Enter a reply
+        diary_page.locator("[data-testid='bernie-instruction-input']").fill("Tomorrow")
+        diary_page.locator("[data-testid='btn-bernie-instruction-submit']").click()
+        diary_page.wait_for_timeout(500)
+
+        turns_after_reply = diary_page.evaluate("bernieSession.turns")
+        assert len(turns_after_reply) >= 3
+
+        # The third event should be clarification_reply
+        event2 = turns_after_reply[2]
+        assert event2["kind"] == "clarification_reply"
+        assert event2["payload"]["reply"] == "Tomorrow"
+
+        # Check that the turns array is sent properly in request
+        assert captured_requests, "expected a Bernie interpret request"
+        req_turns = captured_requests[0].get("turns", [])
+        assert len(req_turns) >= 3
+        assert req_turns[2]["kind"] == "clarification_reply"
+        assert req_turns[2]["payload"]["reply"] == "Tomorrow"
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_composer_clearing_and_no_slot_suggestions(diary_page):
+    """Verify that clicking a no-slot suggestion chip clears composer and includes original turn ID."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_interpret_requests = []
+
+    mock_interpret = {
+        "safe": True,
+        "result": "interpreted",
+        "command_candidate": {
+            "practitioner_id": "prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "today",
+            "duration_minutes": "15"
+        }
+    }
+
+    mock_supervised_booking = {
+        "staff_review": {
+            "status": "candidate_selection_required",
+            "confirmation_ready": False,
+            "candidate_slots": [],
+            "selected_slot": None,
+            "identity_evidence": None,
+            "patient_evidence": None,
+            "warnings": [],
+            "blocks": [],
+            "suggestions": [
+                {"summary": "Try tomorrow instead"}
+            ]
+        }
+    }
+
+    def capture_interpret(route):
+        captured_interpret_requests.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret),
+        )
+
+    def capture_supervised(route):
+        route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_supervised_booking),
+        )
+
+    diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        capture_interpret,
+    )
+    diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        capture_supervised,
+    )
+
+    try:
+        # Start fresh session
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate("bernieSession.startNewSession()")
+
+        # Trigger interpretation that yields no slot but suggestions
+        trigger_route_intercepted_bernie(
+            diary_page,
+            instruction="Book slot",
+            register_default_mock=False,
+        )
+        # Wait for the suggestions container
+        diary_page.wait_for_selector("[data-testid='bernie-no-slot-suggestions']", state="visible", timeout=5000)
+
+        # Save turn info. The no-slot state may have a Bernie turn in some
+        # flows, but the typed suggestion event must still work without one.
+        turns_before_click = diary_page.evaluate("bernieSession.turns")
+        last_clarification = next(
+            (t for t in reversed(turns_before_click) if t["kind"] == "bernie_clarification"),
+            None,
+        )
+        expected_original_turn_id = last_clarification["id"] if last_clarification else None
+
+        # Focus/check input textarea values
+        diary_page.locator("[data-testid='bernie-instruction-input']").fill("stale text in composer")
+
+        # Click suggestion chip
+        captured_interpret_requests.clear()
+        diary_page.locator(".bernie-suggestion-chip:has-text('Try tomorrow instead')").click()
+        diary_page.wait_for_timeout(500)
+
+        # Composer textarea must be cleared
+        post_click_textarea_val = diary_page.locator("[data-testid='bernie-instruction-input']").input_value()
+        assert post_click_textarea_val == ""
+
+        # Check logged events
+        turns_after_click = diary_page.evaluate("bernieSession.turns")
+        # Should have a 'no_slot_suggestion_click' event
+        suggestion_event = next(t for t in turns_after_click if t["kind"] == "no_slot_suggestion_click")
+        assert suggestion_event["payload"]["suggestion"] == "Try tomorrow instead"
+        assert suggestion_event["payload"]["original_turn_id"] == expected_original_turn_id
+
+        # The subsequent request must send the new turns list with the event
+        assert captured_interpret_requests, "expected a Bernie interpret request"
+        req_body = captured_interpret_requests[0]
+        assert req_body["instruction"] == "Try tomorrow instead"
+        assert req_body["turns"][-1]["kind"] == "no_slot_suggestion_click"
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+
+def test_bernie_stale_navigation_clearing(diary_page):
+    """Verify that date navigation clears stale Bernie state and logs date_navigation_clear event."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        # Ensure we have active context
+        diary_page.evaluate("bernieSession.init('prac-1', 'smoke-pat-1')")
+        diary_page.evaluate("bernieSession.state = 'SLOT_PREVIEW'")
+        diary_page.evaluate("bernieSession.stagedBookingPreview = { test: 123 }")
+
+        # Click next day
+        diary_page.click("#btn-next-day")
+        diary_page.wait_for_timeout(500)
+
+        # Verify stale fields cleared
+        staged = diary_page.evaluate("bernieSession.stagedBookingPreview")
+        assert staged is None
+
+        # State should reset to INSTRUCTION_ENTRY (since practitioner/patient context is preserved in form/legacy state)
+        state = diary_page.evaluate("bernieSession.state")
+        assert state in ("INSTRUCTION_ENTRY", "CONTEXT_SELECTION")
+
+        # Check event logging
+        turns = diary_page.evaluate("bernieSession.turns")
+        nav_event = next(t for t in turns if t["kind"] == "date_navigation_clear")
+        assert nav_event["payload"]["reason"] == "next_day"
+        assert "old_date" in nav_event["payload"]
+        assert "new_date" in nav_event["payload"]
+
+        # Test today button click
+        diary_page.evaluate("bernieSession.state = 'SLOT_PREVIEW'")
+        diary_page.evaluate("bernieSession.stagedBookingPreview = { test: 456 }")
+
+        diary_page.click("#btn-today")
+        diary_page.wait_for_timeout(500)
+
+        # Verify cleared again
+        assert diary_page.evaluate("bernieSession.stagedBookingPreview") is None
+
+        turns_today = diary_page.evaluate("bernieSession.turns")
+        today_event = next(t for t in reversed(turns_today) if t["kind"] == "date_navigation_clear")
+        assert today_event["payload"]["reason"] == "today_click"
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

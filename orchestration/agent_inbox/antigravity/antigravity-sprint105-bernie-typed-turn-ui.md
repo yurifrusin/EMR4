@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 50b28c8 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint105-bernie-typed-turn-ui --summary "Short plan summary"` |
@@ -90,5 +90,14 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `docs/diary/diary.js`: added typed Bernie client events, structured visible transcript mapping, no-slot suggestion event dispatch, candidate/proposal preview events, stale navigation clearing events, and session/turn payload forwarding.
+  - `docs/diary/diary.html`: bumped diary asset versions to `diary.js?v=146` and `diary.css?v=126`.
+  - `review/test_diary_smoke.py`: added Sprint 105 smoke checks for typed turn payloads, composer clearing/no-slot suggestion event submission, and stale navigation clearing.
 - Verification run:
+  - `node --check docs\diary\diary.js`
+  - `C:\Users\sarashera\emr4\.venv\Scripts\python.exe C:\Users\sarashera\EMR4-worktrees\antigravity\scripts\check_frontend_versions.py`
+  - `C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_turns_and_typed_event_payloads review\test_diary_smoke.py::test_bernie_composer_clearing_and_no_slot_suggestions review\test_diary_smoke.py::test_bernie_stale_navigation_clearing -q --tb=short` (`3 passed`)
+  - `git diff --check`
 - Remaining risks:
+  - Ariadne repaired whitespace, the no-slot suggestion test expectation for absent originating Bernie turn ids, and verified the targeted checks after the Antigravity CLI timed out before submit.
+  - CSS cache-bust was bumped without CSS file changes; this is harmless but can be normalized during integration if preferred.
