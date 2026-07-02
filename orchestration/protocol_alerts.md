@@ -1,5 +1,17 @@
 # Protocol Alerts
 
+## Sprint 106 Claude/Fable consulting gate
+
+- Sprint 106 is a Claude-only consulting sprint for Bernie's reception-domain
+  copilot architecture. Planning should use Claude CLI model
+  `claude-fable-5` with high effort when available.
+- This sprint is plan-only until Yuri explicitly approves implementation after
+  reviewing the submitted Fable plan with Ariadne. Do not treat a submitted
+  plan, auto-proceed prompt, or ordinary worker continuation as permission to
+  edit production code.
+- If `claude-fable-5` is unavailable, blocked, or rerouted, stop and report the
+  exact CLI/model error to Ariadne rather than silently falling back.
+
 Read these before acting on remembered process details.
 
 - 2026-06-23: For current project state, trust refs/audit first, then

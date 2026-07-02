@@ -134,6 +134,19 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
+
+| Item | Value |
+|---|---|
+| Status | Queued, plan-gated, Claude-only consulting sprint |
+| Product Goal | Bring Claude Fable 5 in as a consulting reviewer for Bernie's reception-domain copilot architecture before further implementation |
+| Worker Shape | Claude/Fable 5 plan-only review, overseen by Ariadne; no Antigravity or Codex worker branch for this sprint |
+| Task Packet | `orchestration/agent_inbox/claude/claude-bernie-reception-domain-copilot-architecture-consult.md` |
+| Model Policy | Planning should use Claude CLI `--model claude-fable-5` with high effort if available; fall back only with explicit Ariadne/Yuri awareness |
+| Pause Gate | Hard stop after Claude submits the plan. Ariadne reviews it first, then reviews it with Yuri. Implementation starts only after explicit Yuri approval and a separate `complete sprint task` release |
+| In Scope | Current Bernie interpreter, patient booking context, slot search, roster/schedule diagnostics, diary UI state machine, chat turns, transition/render guards, tests, and the proposed domain-specific receptionist-agent architecture |
+| Out Of Scope | Production code edits during planning, autonomous booking, live PHI, broad API-spine rewrite, provider migration, and any direct booking mutation without staff confirmation |
+
 ## Sprint 105: Bernie Typed Turn Contract And Confirmation Evidence
 
 | Item | Value |
