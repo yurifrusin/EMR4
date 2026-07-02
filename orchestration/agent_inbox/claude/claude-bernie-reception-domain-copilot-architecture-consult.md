@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 1389579 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-bernie-reception-domain-copilot-architecture-consult --summary "Short plan summary"` |
@@ -85,10 +85,28 @@ Ariadne reviews Claude/Fable 5 plan for architectural fit, safety, determinism, 
 
 Record concerns, alternative designs, or reasons this task should not be merged as-is.
 
+- Dissent preserved in the plan (§9): the server-side Bernie session store is the
+  contentious recommendation; a stateless HMAC-signed-evidence alternative is
+  documented for Ariadne to weigh explicitly.
+
 ## Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: coordination artifacts only —
+  `orchestration/agent_inbox/codex/plan-claude-claude-bernie-reception-domain-copilot-architecture-consult.md`
+  (full Fable 5 consulting plan: diagnosis of nine failure modes, capability/tool
+  map, statechart boundary assignment, backend contract changes, UI copy strategy,
+  test strategy, five-sprint A–E migration breakdown, risks/dissent, explicit
+  pause-before-execution note) and this packet's status/notes. No production code,
+  migrations, UI, schema, or test files were edited.
+- Verification run: read-only review of all in-scope files (interpreter, patient
+  context, slot normalizer, appointments router Bernie sections, appointment
+  schemas, diary.js BernieSession/panel, transition-table tests, Bernie test-suite
+  inventory, orchestration docs, Sprints 103–105 closeouts, recent commits
+  a1865e6/1389579). No production-code tests were run — none were needed for
+  read-only evidence and the plan gate forbids implementation.
+- Remaining risks: plan is unreviewed; the server-session vs stateless-evidence
+  decision, PHI/retention classification of Bernie session rows, and sprint
+  ordering (small Sprint 106 chip-typing first vs extraction Sprint A first) all
+  need Ariadne/Yuri calls before any implementation dispatch.
