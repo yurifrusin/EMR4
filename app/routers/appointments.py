@@ -42,6 +42,7 @@ from app.schemas.appointments import (
 from app.services.bernie_patient_context import (
     build_patient_booking_context,
     build_existing_future_follow_up_warning,
+    has_existing_booking_on_requested_day,
 )
 from app.services.bernie_booking_interpreter import (
     actor_context_for_interpreter_user,
@@ -96,6 +97,21 @@ BERNIE_AUTONOMOUS_BOOKING_TERMS = (
     "make the booking",
     "write it",
 )
+BERNIE_WEEK_RELATIVE_RE = re.compile(
+    r"\b(?:in\s+(?:a|one|1)\s+week(?:['’`\\]s)?(?:\s+time)?|next\s+week)\b",
+    re.IGNORECASE,
+)
+
+
+def _resolve_bernie_instruction_relative_date(
+    instruction: str,
+    reference_date: Optional[date_type],
+) -> Optional[str]:
+    if reference_date is None:
+        return None
+    if BERNIE_WEEK_RELATIVE_RE.search(instruction):
+        return (reference_date + timedelta(days=7)).isoformat()
+    return None
 
 # ── Bernie confidence-policy helpers ─────────────────────────────────────────
 
@@ -1808,6 +1824,27 @@ def _resolve_bernie_interpretation_context(
         ))
 
     # ── Normalization ─────────────────────────────────────────────────────────
+    instruction_relative_date = _resolve_bernie_instruction_relative_date(
+        body.instruction,
+        body.reference_date,
+    )
+    if (
+        instruction_relative_date
+        and command_values.get("date_from") != instruction_relative_date
+    ):
+        command_values["date_from"] = instruction_relative_date
+        resolver_warnings.append(AppointmentProposalIssue(
+            code="date_resolved_from_instruction_relative_week",
+            severity="warning",
+            message="Bernie resolved the requested week-relative date from the instruction.",
+        ))
+        all_assumptions.append(BernieAssumption(
+            field="date_from",
+            assumed_value=instruction_relative_date,
+            basis="Instruction said in a week's time/next week.",
+            reversible_copy="Tell me the date if that week-relative interpretation is wrong.",
+        ))
+
     date_transition = resolve_booking_date_transition(
         date_from=command_values.get("date_from"),
         context_frames=body.context_frames,
@@ -2085,7 +2122,10 @@ def _resolve_bernie_interpretation_context(
             patient_booking_ctx = build_patient_booking_context(
                 db, practice_id, _pid, request_ref_date
             )
-            if patient_booking_ctx.existing_future_follow_up:
+            if has_existing_booking_on_requested_day(
+                patient_booking_ctx,
+                normalization.constraint.date_from if normalization.constraint else None,
+            ):
                 if not any(w.code == "existing_future_follow_up" for w in warnings):
                     warnings.append(build_existing_future_follow_up_warning())
             _ref_tz2 = _practice_zoneinfo(db, practice_id)
@@ -3491,7 +3531,10 @@ def propose_bernie_supervised_booking(
                 else "reference_date differs from clinic-local today; context may be stale"
             ),
         )
-        if _sb_patient_ctx.existing_future_follow_up:
+        if has_existing_booking_on_requested_day(
+            _sb_patient_ctx,
+            constraint.date_from,
+        ):
             warnings_for_ctx = list(normalization.warnings)
             if not any(w.code == "existing_future_follow_up" for w in warnings_for_ctx):
                 warnings_for_ctx.append(build_existing_future_follow_up_warning())

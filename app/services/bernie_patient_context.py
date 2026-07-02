@@ -138,12 +138,22 @@ def build_patient_booking_context(
 
 
 def build_existing_future_follow_up_warning() -> AppointmentProposalIssue:
-    """Warning issue emitted when a recognized patient already has a future booking."""
+    """Warning issue emitted when the requested day already has a patient booking."""
     return AppointmentProposalIssue(
         code="existing_future_follow_up",
         severity="warning",
         message=(
-            "This patient already has a future appointment booked. "
+            "This patient already has an appointment on the requested day. "
             "Check whether a new booking is still needed."
         ),
     )
+
+
+def has_existing_booking_on_requested_day(
+    context: BerniePatientBookingContext,
+    requested_date: date | None,
+) -> bool:
+    """Return True only when compact context shows a booking on the requested day."""
+    if requested_date is None:
+        return False
+    return any(entry.appointment_date == requested_date for entry in context.future_bookings)

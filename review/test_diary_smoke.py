@@ -5184,7 +5184,7 @@ def test_sprint103_bernie_compact_request_card_and_sensitive_details(diary_page)
     mock_interpret = {
         "safe": True,
         "result": "interpreted",
-        "summary": "Booking instruction needs staff clarification before slot search.",
+        "summary": "Bernie needs one more detail before it can search.",
         "command_candidate": {
             "practitioner_id": "smoke-prac-1",
             "practitioner_label": "Alex Shera",

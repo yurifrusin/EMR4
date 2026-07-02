@@ -143,8 +143,8 @@ class BernieSession {
     if (toggle) toggle.checked = bernieAutoPreview;
   }
 
-  clearResponse({ preserveInstruction = true } = {}) {
-    const currentInstruction = preserveInstruction ? this.instructionText || bernieInstructionText : "";
+  clearResponse({ preserveInstruction = false } = {}) {
+    const currentInstruction = preserveInstruction ? bernieInstructionText : "";
     const currentReferenceDate = this.referenceDate;
     const currentPractitionerId = this.practitionerId;
     const currentPatientId = this.patientId;
@@ -192,7 +192,6 @@ class BernieSession {
   }
 
   syncToLegacy() {
-    bernieInstructionText = this.instructionText;
     bernieInterpretResult = this.interpretEnvelope;
     bernieSelectedCandidateIndex = this.selectedCandidateIndex;
     bernieStagedBookingPreview = this.stagedBookingPreview;
@@ -2939,8 +2938,21 @@ function clearStaleBernieBookingState() {
   const keepBernieOpen = panel && !panel.classList.contains("hidden");
   if (!keepBernieOpen) return;
 
-  bernieSession.clearResponse({ preserveInstruction: true });
+  bernieSession.sessionId = bernieSession.generateSessionId();
+  bernieSession.turns = [];
+  bernieSession.referenceDate = localDateKey(diaryDate);
+  bernieSession.clearResponse({ preserveInstruction: false });
+  bernieSession.referenceDate = localDateKey(diaryDate);
   suppressAutoPreview = false;
+  const transcriptEl = document.getElementById("bernie-chat-transcript");
+  if (transcriptEl) {
+    transcriptEl.innerHTML = "";
+    transcriptEl.classList.add("hidden");
+  }
+  const newSessionBtn = document.getElementById("btn-bernie-new-session");
+  if (newSessionBtn) {
+    newSessionBtn.classList.add("hidden");
+  }
   const contentEl = document.getElementById("bernie-review-content");
   if (contentEl) {
     contentEl.innerHTML = "";
@@ -4426,7 +4438,7 @@ async function loadBernieLiveReview() {
   }
 
   // If there is no instruction text, render the empty input state
-  if (!bernieInstructionText && !bernieSession.instructionText) {
+  if (!bernieInstructionText && !bernieInterpretResult) {
     bernieSession.transitionTo("INSTRUCTION_ENTRY");
     if (contentEl) {
       contentEl.innerHTML = "";

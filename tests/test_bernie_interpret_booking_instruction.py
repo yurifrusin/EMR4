@@ -406,6 +406,53 @@ def test_live_provider_name_values_in_id_fields_are_resolved_before_normalizatio
     assert "appointment_duration_defaulted" in warning_codes
 
 
+def test_live_provider_week_relative_instruction_overrides_stale_model_date(
+    client,
+    gp_user,
+    practitioner,
+    patient,
+    monkeypatch,
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
+    provider = MockLiveProvider({
+        "command_candidate": {
+            "practitioner_id": str(practitioner.id),
+            "patient_id": str(patient.id),
+            "date_from": "today",
+            "duration_minutes": 30,
+            "earliest_time": "15:00",
+            "latest_time": "16:30",
+        },
+        "confidence": 0.8,
+        "summary": "Search for a week-relative appointment.",
+        "missing_fields": [],
+        "safety_flags": [],
+        "clarifying_question": None,
+    })
+    interpreter_service.set_live_provider_factory(lambda: provider)
+    token = make_token(gp_user)
+
+    try:
+        resp = _post_interpret(
+            client,
+            token,
+            (
+                "Make a 30 minute appointment for Margaret Thompson with Dr Shera "
+                "in a week's time, after 3 but before 4.30."
+            ),
+        )
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["command_candidate"]["date_from"] == "2026-06-29"
+    assert data["normalization"]["constraint"]["date_from"] == "2026-06-29"
+    assert data["result"] == "interpreted"
+    warning_codes = {warning["code"] for warning in data["warnings"]}
+    assert "date_resolved_from_instruction_relative_week" in warning_codes
+
+
 def test_mocked_live_provider_invalid_response_fails_closed(
     client,
     gp_user,
@@ -567,6 +614,34 @@ def _post_interpret_s104(client, token, instruction: str, reference_date: str = 
     )
 
 
+def test_in_a_weeks_time_resolves_against_reference_date(
+    client, gp_user, patient, practitioner, monkeypatch
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+
+    resp = _post_interpret_s104(
+        client,
+        token,
+        (
+            f"Make a 30 minute appointment for {patient.first_name} {patient.last_name} "
+            f"with {practitioner.first_name} {practitioner.last_name} "
+            "in a week's time, after 3 but before 4.30"
+        ),
+        reference_date="2026-07-02",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    command = data["command_candidate"]
+    assert command["date_from"] == "2026-07-09"
+    assert command["duration_minutes"] == "30"
+    assert command["earliest_time"] == "15:00"
+    assert command["latest_time"] == "16:30"
+    assert data["result"] == "interpreted"
+    assert data["clarifying_question"] is None
+
+
 def test_recognized_patient_interpret_returns_booking_context(
     client, db, gp_user, patient, practitioner, monkeypatch
 ):
@@ -649,6 +724,35 @@ def test_existing_future_follow_up_warning_in_interpret(
         assert "existing_future_follow_up" in warning_codes, (
             "existing_future_follow_up warning expected in response warnings"
         )
+
+
+def test_different_day_future_booking_stays_in_context_without_warning(
+    client, db, gp_user, patient, practitioner, monkeypatch
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    fixed_now = datetime(2026, 7, 2, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+    token = make_token(gp_user)
+
+    _make_appt(
+        db, gp_user.practice, practitioner, patient,
+        date_type(2026, 7, 23), 9, 0, AppointmentStatus.Booked,
+    )
+
+    resp = _post_interpret_s104(
+        client, token,
+        f"Book {patient.first_name} {patient.last_name} with "
+        f"{practitioner.first_name} {practitioner.last_name} next week",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    ctx = data.get("patient_booking_context")
+    assert ctx is not None
+    assert ctx["has_future_booking"] is True
+    assert ctx["existing_future_follow_up"] is True
+    warning_codes = [w["code"] for w in data.get("warnings", [])]
+    assert "existing_future_follow_up" not in warning_codes
 
 
 def test_interpret_booking_context_no_db_writes(

@@ -11,6 +11,7 @@ import os
 import re
 import asyncio
 from dataclasses import dataclass, field
+from datetime import date, timedelta
 from typing import Any, Callable, Protocol
 
 from pydantic import ValidationError
@@ -45,6 +46,10 @@ KEY_VALUE_RE = re.compile(
     re.IGNORECASE,
 )
 DATE_RE = re.compile(r"\b(?:today|tomorrow|\d{4}-\d{2}-\d{2})\b", re.IGNORECASE)
+WEEK_RELATIVE_RE = re.compile(
+    r"\b(?:in\s+(?:a|one|1)\s+week(?:['’`\\]s)?(?:\s+time)?|next\s+week)\b",
+    re.IGNORECASE,
+)
 TIME_RE = re.compile(r"\b(?:[01]?\d|2[0-3]):[0-5]\d(?::[0-5]\d)?\b")
 UNSAFE_TERMS = ("book it", "create it", "confirm it", "make the booking", "write it")
 
@@ -116,6 +121,18 @@ def _extract_natural_time_constraints(
         latest = _parse_time_fragment(before_m.group(1))
 
     return earliest, latest
+
+
+def _extract_natural_date_constraint(
+    instruction: str,
+    reference_date: date | None,
+) -> str | None:
+    date_match = DATE_RE.search(instruction)
+    if date_match:
+        return date_match.group(0).lower()
+    if WEEK_RELATIVE_RE.search(instruction) and reference_date is not None:
+        return (reference_date + timedelta(days=7)).isoformat()
+    return None
 
 
 @dataclass
@@ -348,7 +365,10 @@ class FakeBookingInstructionInterpreter:
         audit_events: list[AccessAiAuditEvent] | None = None,
     ) -> BernieBookingInstructionInterpretOut:
         _ = actor_context, audit_events
-        command = _extract_fake_command(body.instruction)
+        command = _extract_fake_command(
+            body.instruction,
+            reference_date=body.reference_date,
+        )
         safety_flags = _safety_flags(body.instruction)
         missing_fields = _missing_fields(command)
         warnings = [
@@ -374,7 +394,7 @@ class FakeBookingInstructionInterpreter:
                 safe=False,
                 result=result,
                 autonomy_tier="blocked",
-                summary="Booking instruction needs staff clarification before slot search.",
+                summary="Bernie needs one more detail before it can search.",
                 confidence=0.45 if missing_fields else 0.55,
                 command_candidate=command,
                 missing_fields=missing_fields,
@@ -405,7 +425,11 @@ class FakeBookingInstructionInterpreter:
         )
 
 
-def _extract_fake_command(instruction: str) -> SlotSearchCommandIn:
+def _extract_fake_command(
+    instruction: str,
+    *,
+    reference_date: date | None = None,
+) -> SlotSearchCommandIn:
     values: dict[str, object] = {}
     for match in KEY_VALUE_RE.finditer(instruction):
         key = match.group("key").lower()
@@ -423,9 +447,9 @@ def _extract_fake_command(instruction: str) -> SlotSearchCommandIn:
             values["practitioner_id"] = practitioner_match.group("uuid")
 
     if "date_from" not in values:
-        date_match = DATE_RE.search(instruction)
-        if date_match:
-            values["date_from"] = date_match.group(0).lower()
+        natural_date = _extract_natural_date_constraint(instruction, reference_date)
+        if natural_date:
+            values["date_from"] = natural_date
 
     # Natural time phrases take precedence over positional HH:MM scanning so
     # that 'after 3' and 'before 3:45' produce correct earlier/later semantics.
@@ -564,7 +588,7 @@ class GeminiVertexBookingInstructionInterpreter:
                 safe=False,
                 result=result,
                 autonomy_tier="blocked",
-                summary=summary or "Booking instruction needs staff clarification before slot search.",
+                summary=summary or "Bernie needs one more detail before it can search.",
                 confidence=min(confidence, 0.65),
                 command_candidate=command,
                 missing_fields=missing_fields,
