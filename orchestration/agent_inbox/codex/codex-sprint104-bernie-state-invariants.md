@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint104-bernie-state-invariants` |
-| Status | queued |
+| Status | submitted |
 | Created | 12fb780 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint104-bernie-state-invariants --summary "Short plan summary"` |
@@ -90,5 +90,7 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Verification run:
-- Remaining risks:
+- `orchestration/agent_inbox/codex/codex-sprint104-bernie-state-invariants.md` status/completion notes only.
+- `orchestration/agent_inbox/codex/plan-codex-codex-sprint104-bernie-state-invariants.md` implementation plan packet.
+- Verification run: `agent_worktrees.py handin --agent codex` with venv Python; `agent_worktrees.py plan --agent codex --task codex-sprint104-bernie-state-invariants ...`; read `AGENTS.md`, `implementation_plan.md`, `orchestration/parallel_workstreams.md`, `orchestration/event_driven_statechart_architecture.md`, `orchestration/bernie_interaction_model.md`, `orchestration/bernie_release_gates.md`, current Bernie transition/tests/UI surfaces, and inspected `git diff`/`git status`. No production tests run because this is a plan-only packet.
+- Remaining risks: Implementation must avoid dual truth between `BernieSession` and legacy globals; `patient_booking_context` needs compact deterministic bounds; stale confirmation likely needs backend-owned ids/hashes, not only UI flags; no-slot suggestions must be typed transitions, not prompt-string shortcuts; keep limited Bernie auto-mode deferred.
