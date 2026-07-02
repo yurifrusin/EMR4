@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 12fb780 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint104-bernie-chat-state-ui --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: None (Plan phase only, plan written to [plan-antigravity-antigravity-sprint104-bernie-chat-state-ui.md](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/orchestration/agent_inbox/codex/plan-antigravity-antigravity-sprint104-bernie-chat-state-ui.md))
+- Verification run: Plan-gated only; no code changes. Acceptance checks mapped out in plan.
+- Remaining risks: Coordinate with Claude/Codex on session state representation fields in interpret API.
