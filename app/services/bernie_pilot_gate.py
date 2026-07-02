@@ -32,6 +32,15 @@ def _parse_uuid_allowlist(raw_value: str | None) -> set[uuid.UUID]:
     return allowed
 
 
+def _coerce_uuid(value) -> uuid.UUID | None:
+    if isinstance(value, uuid.UUID):
+        return value
+    try:
+        return uuid.UUID(str(value))
+    except (TypeError, ValueError):
+        return None
+
+
 def evaluate_bernie_pilot_eligibility(
     *,
     enabled: bool,
@@ -41,9 +50,11 @@ def evaluate_bernie_pilot_eligibility(
 ) -> BerniePilotEligibility:
     practice_ids = _parse_uuid_allowlist(practice_allowlist)
     user_ids = _parse_uuid_allowlist(user_allowlist)
+    current_practice_id = _coerce_uuid(current_user.practice_id)
+    current_user_id = _coerce_uuid(current_user.id)
 
-    practice_allowed = current_user.practice_id in practice_ids
-    user_allowed = current_user.id in user_ids
+    practice_allowed = current_practice_id in practice_ids
+    user_allowed = current_user_id in user_ids
 
     if not enabled:
         return BerniePilotEligibility(

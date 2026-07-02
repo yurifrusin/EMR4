@@ -1,4 +1,5 @@
 import inspect
+from types import SimpleNamespace
 
 import app.routers.appointments as appointments_router
 import app.services.bernie_pilot_gate as bernie_pilot_gate
@@ -99,6 +100,24 @@ def test_user_allowlist_enables_only_matching_user(client, gp_user, gp_user_b, m
     assert blocked["reason"] == "no_allowlist_match"
     assert blocked["practice_allowed"] is False
     assert blocked["user_allowed"] is False
+
+
+def test_pilot_gate_normalizes_string_user_ids(gp_user):
+    current_user = SimpleNamespace(
+        id=str(gp_user.id),
+        practice_id=str(gp_user.practice_id),
+    )
+
+    result = bernie_pilot_gate.evaluate_bernie_pilot_eligibility(
+        enabled=True,
+        practice_allowlist=str(gp_user.practice_id),
+        user_allowlist=str(gp_user.id),
+        current_user=current_user,
+    )
+
+    assert result.eligible is True
+    assert result.practice_allowed is True
+    assert result.user_allowed is True
 
 
 def test_malformed_allowlists_are_ignored_and_fail_closed(client, gp_user, monkeypatch):
