@@ -154,6 +154,10 @@ Examples:
   current visible page.
 - UI navigation is a side effect, not semantic input, unless the user explicitly
   starts a new request using that context.
+- State machine memory is explicit. The system stores the active request
+  reference date, visible diary date, turn history, patient/practitioner
+  recognition, candidate snapshot, selected proposal, freshness flags, and
+  confirmation evidence instead of rediscovering them from the DOM or prompt.
 - Candidate lists are snapshots. Selecting or revisiting a candidate must not
   reinterpret the original natural-language prompt.
 - Human confirmation is a transition with evidence, not a boolean flag hidden
@@ -170,6 +174,11 @@ Examples:
   selected proposal context first, selected diary appointment context second,
   visible diary page third, and ask if none exists. The old "time present means
   today" rule is deliberately invalid.
+- No-slot states are real states, not failed candidate-list states. They should
+  produce direct copy plus typed next-action suggestions.
+- Patient recognition and patient details verification are separate workflows.
+  Recognition can be sufficient for an ordinary booking; Medicare/HI/IHI/PVM/OPV
+  verification is a later or parallel details-verification statechart.
 
 ## Immediate Application: Bernie
 
@@ -181,6 +190,18 @@ The same modelling discipline should later guide the root-to-branch EMR4 API
 review: bounded contexts first, events second, statecharts for workflows, API
 contracts for executable boundaries, policy for authorization, and YAML for
 declarative operating plans.
+
+The recommended order is now deliberately practical:
+
+1. Continue a few agentic Diary/Taskpane sprints where statecharts and API
+   contracts are tested against concrete reception and clinical workflows.
+2. Extract the repeated patterns into the root-to-branch API-spine review.
+3. Only then decide whether to introduce a statechart runtime such as XState.
+
+The immediate next sprint candidate is *bernie* conversational state memory:
+fresh clarification turns, stale-state clearing on diary navigation/refresh,
+patient-specific appointment context, no-slot suggestions, and tighter
+reception-facing copy.
 
 ## Bernie Context-Enrichment Subchart
 

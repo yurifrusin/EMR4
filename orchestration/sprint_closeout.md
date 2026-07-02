@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 103: Bernie Compact Request And Auto Preview |
 | Integrated through | Compact understood-request card, ordinary-mode best-candidate auto-preview, sensitive appointment details disclosure, and review harness updates |
-| Status | Integrated locally and verified; awaiting push/deploy |
+| Status | Integrated, verified, pushed, mirrored, audited, and user-tested; follow-up Sprint 104 not launched |
 | Last updated | 2026-07-02 |
 
 ## What Changed
@@ -79,11 +79,42 @@ After GitHub Pages deploys:
 - Add the receptionist-facing auto-preview toggle promised in the UX model.
 - Implement backend `patient_booking_context` so *bernie* can warn about existing
   future appointments for the same patient.
+- Add explicit conversational state memory so prompt entry becomes a fresh
+  chat/clarification turn after each transition instead of a stale single text
+  box.
+- Treat diary navigation, Today, Refresh, candidate selection, proposal preview,
+  confirmation, and cancellation as first-class state transitions with clear
+  stale-state rules.
+- Replace no-slot UI copy with a direct "no times are available" state and
+  clickable next-prompt suggestions.
 - Decide whether the compact request disclosure should become a tabbed details
   panel once the details payload grows.
-- Continue the root-to-branch API-spine design sprint with GraphQL/context graph,
-  command mutations, event contracts, YAML capability manifests, cybersecurity,
-  and statechart modelling.
+- Defer the root-to-branch API-spine design sprint until the next few
+  agentic-mode Diary/Taskpane sprints have produced more concrete statechart and
+  API-contract patterns.
+
+## Next Sprint Candidate - Sprint 104
+
+| Item | Value |
+|---|---|
+| Name | Bernie Conversational State Memory And Patient Context |
+| Status | Proposed; not launched |
+| Recommended agents | Claude for backend/API context contract, Antigravity/Gemini for Diary chat/state UI, Codex worker for statechart/acceptance invariants |
+
+Sprint 104 should start from the concrete live-test findings:
+
+- The prompt box should become a new input turn after *bernie* responds; prior
+  user and *bernie* messages belong in chat history/state memory.
+- "Need to clarify anything?" should not imply that clarification is mandatory
+  when the request is understood.
+- When no slots are available, *bernie* should say so plainly and offer useful
+  next actions rather than showing "Bernie found these times".
+- If the diary date changes through Today/Prev/Next/date picker/Refresh, stale
+  *bernie* candidates and proposals must be cleared or marked stale by rule.
+- If a patient is recognised, fetch compact `patient_booking_context` so
+  *bernie* can notice existing recent/future bookings before offering slots.
+- Limited auto-mode belongs in architecture as a future branch; do not implement
+  auto-confirm in Sprint 104.
 
 ## Previous Closeout - Sprint 102
 

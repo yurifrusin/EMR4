@@ -1,12 +1,21 @@
 # EMR4 New PC Transfer Guide
 
 This guide is for moving EMR4 development to a new Windows PC while keeping the
-current PC as a safe fallback. The clean baton for this transfer is:
+current PC as a safe fallback. For the July 2026 alternate-PC switch, use the
+shorter current runbook first:
 
-- `master` at `e53b283`
-- `handoff/current` at `e53b283`
-- durable mirrors aligned to the same baton: `codex/current`, `claude/current`,
-  and `antigravity/current`
+```text
+docs/alternate-pc-handover.md
+```
+
+The clean baton is always `origin/master` plus `origin/handoff/current`. At the
+time this guide was refreshed, the last code-sprint commit before the handover
+docs was:
+
+- `b896582` - Sprint 103 Bernie compact request auto preview
+
+The actual current commit after pulling may be newer because this documentation
+handover is committed on top of that code sprint.
 
 Do not delete or reset the old PC until the new PC can clone, audit, run the
 focused checks, and start the local development environment.
@@ -34,7 +43,9 @@ git rev-parse --short HEAD
 git ls-remote --heads origin master handoff/current codex/current claude/current antigravity/current
 ```
 
-Expected result: all relevant branch heads should start with `e53b283`.
+Expected result: `master`, `handoff/current`, and the durable mirror refs should
+point to the same current baton commit, or to intentionally submitted worker
+branches awaiting Ariadne review. Do not use the older `e53b283` baton.
 
 Create local tracking branches for the handoff and durable mirrors:
 
@@ -167,10 +178,11 @@ resuming sprint orchestration.
 
 ## 9. Resume with Ariadne
 
-Once the new PC is ready, start a Codex thread from the new PC and say:
+Once the new PC is ready, start a Codex thread from the new PC. Prefer the
+current prompt in `docs/alternate-pc-handover.md`. The older minimal prompt is:
 
 ```text
-Resume EMR4 sprint orchestration from C:\Users\YuriFrusin\Documents\EMR4 after new PC migration. Audit first. The clean baton should be master/handoff/current at e53b283.
+Resume EMR4 sprint orchestration from C:\Users\YuriFrusin\Documents\EMR4 after new PC migration. Audit first. The clean baton should be origin/master and origin/handoff/current at the same current commit.
 ```
 
 Ariadne should audit the repo, verify the baton, check local tooling, and only

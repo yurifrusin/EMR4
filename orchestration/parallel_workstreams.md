@@ -134,6 +134,24 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Proposed Sprint 104: Bernie Conversational State Memory
+
+| Item | Value |
+|---|---|
+| Status | Proposed only; do not start until the alternate PC has pulled/audited and Yuri authorizes launch |
+| Product Goal | Turn *bernie* from a single-prompt panel into an explicit conversational workflow with state machine memory, fresh clarification turns, no-slot suggestions, stale-state rules, and patient-specific booking context |
+| Worker Shape | Plan-gated Claude backend/API workstream, Antigravity/Gemini Diary UI workstream, and Codex worker invariant/review-harness workstream |
+| Out Of Scope | Broad root-to-branch API rewrite, XState dependency, voice/headset integration, Medicare/HI/PVM/OPV implementation, Caller ID integration, and limited auto-mode implementation |
+
+Candidate workstreams for dispatch after handover:
+
+- Claude: backend/API `patient_booking_context`, no-slot suggestion contract,
+  state-memory fields, and focused tests.
+- Antigravity/Gemini: Diary chat/clarification UI, stale-state transitions for
+  Today/Prev/Next/Refresh, compact/no-slot copy, and auto-preview toggle surface.
+- Codex worker: transition-table/statechart invariants, fixture design from
+  Yuri's live tests, and acceptance harness plan.
+
 ## Sprint 100: Bernie Booking Session State Machine
 
 | Item | Value |

@@ -276,6 +276,105 @@ interrupts the current lane and resets to a fresh query.
 Each staff user has their own Bernie session, transcript, and confirmation queue.
 Practice-level views may aggregate Bernie activity, but sessions are isolated.
 
+## State Machine Memory And Clarification Turns
+
+Bernie needs explicit state machine memory, not just a current prompt string.
+Every user prompt, Bernie response, diary navigation, candidate selection, and
+booking confirmation is a state transition. The session should remember the
+facts that make later turns meaningful:
+
+```yaml
+type: bernie_session_memory
+session_id: "<uuid>"
+state: "candidate_selection"
+visible_diary_date: "2026-07-03"
+request_reference_date: "2026-07-02"
+active_patient_id: "<uuid>"
+active_practitioner_id: "<uuid>"
+candidate_snapshot_id: "<uuid>"
+selected_candidate_index: 0
+staged_proposal_id: "<uuid>"
+proposal_fresh: true
+auto_preview_enabled: true
+turns:
+  - actor: staff
+    kind: instruction
+    text: "Make an appointment for Margaret Thompson after 3 tomorrow."
+  - actor: bernie
+    kind: response
+    text: "I found times tomorrow afternoon."
+```
+
+The text box should become a new-turn input after Bernie responds. It should not
+keep behaving as though the original prompt is the live request. Clarifications
+such as "make it later", "use Friday instead", "cancel that one", or "try Nurse
+Chen" should apply to the current session memory, candidate snapshot, selected
+proposal, and visible diary page.
+
+This also means UI controls belong in the statechart:
+
+- `Refresh` keeps the Bernie panel open but clears or invalidates stale response,
+  candidate, and proposal state.
+- `Today`, `Prev`, `Next`, and date picker transitions update visible diary
+  context and should clear or mark old proposals stale unless the active session
+  explicitly owns a selected absolute slot.
+- `Choose another time` returns to the existing candidate snapshot; it must not
+  reinterpret relative words such as "tomorrow".
+- `Confirm booking` consumes the current proposal and transitions to a terminal
+  confirmed state with compact success copy.
+
+The user-facing copy should be conversational and terse. Technical evidence,
+raw fields, assumptions, and confidence details belong behind a Details or See
+more disclosure.
+
+## No-Slot And Existing-Booking Behaviour
+
+If no slots are available, Bernie should not render "Bernie found these times".
+The state should be direct:
+
+```text
+I could not find a free time with Dr Shera between 3:00 and 4:30 on Friday.
+```
+
+Then Bernie can offer clickable suggestions that become the next prompt or next
+state transition, for example:
+
+- `Try Dr Shera's next available time that day`
+- `Try the same window with another practitioner`
+- `Try Monday afternoon`
+
+After patient recognition, Bernie should also use `patient_booking_context` to
+notice existing appointments before offering new ones. If Margaret already has
+appointments in the requested window, the useful response is not another blind
+slot search; it is something like:
+
+```text
+Margaret already has appointments with Dr Shera tomorrow at 3:00 and 4:00.
+Do you want another appointment as well, or should I change one of those?
+```
+
+This is not a broad diary dump. It is a compact patient-specific context frame
+fetched after recognition.
+
+## Limited Auto-Mode - Future Branch
+
+For a very small practice, a future limited auto-mode may be useful: Bernie can
+self-confirm only high-confidence, low-risk bookings, then place them in a
+review-later queue for the practice manager. This is not the default mode and
+must remain behind explicit practice configuration, audit, provenance, and hard
+exclusions.
+
+Auto-mode design constraints:
+
+- disabled by default;
+- practice-manager-only setting;
+- only recognised current patients and known practitioners;
+- no ambiguous patient/practitioner/date/time;
+- no clinical triage, urgent symptoms, procedure bookings, or policy exceptions;
+- every auto-confirmed action is reviewable and attributable.
+
+The ordinary receptionist flow remains proposal plus human confirmation.
+
 ---
 
 ## Build Order
