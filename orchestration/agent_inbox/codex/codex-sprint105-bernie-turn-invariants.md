@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint105-bernie-turn-invariants` |
-| Status | queued |
+| Status | submitted |
 | Created | 50b28c8 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint105-bernie-turn-invariants --summary "Short plan summary"` |
@@ -90,5 +90,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/plan-codex-codex-sprint105-bernie-turn-invariants.md`
+  - `orchestration/agent_inbox/codex/codex-sprint105-bernie-turn-invariants.md`
 - Verification run:
+  - `C:\Users\sarashera\emr4\.venv\Scripts\python.exe C:\Users\sarashera\emr4\scripts\agent_worktrees.py handin --agent codex`
+  - `C:\Users\sarashera\emr4\.venv\Scripts\python.exe C:\Users\sarashera\emr4\scripts\agent_worktrees.py plan --agent codex --task codex-sprint105-bernie-turn-invariants ...`
+  - `git status --short --branch`
 - Remaining risks:
+  - Plan gate only; no backend/UI implementation or test execution yet.
+  - Ariadne may need to normalize exact evidence field names across Claude and Antigravity plans before implementation release.
