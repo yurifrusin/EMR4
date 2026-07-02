@@ -2675,11 +2675,13 @@ def _build_slot_search_proposal(
 
     practice_tz = _practice_zoneinfo(db, practice_id)
     candidates: list[SlotCandidate] = []
+    unscheduled_dates: list[date_type] = []
     current_date = body.date_from
 
     while current_date <= effective_to and len(candidates) < body.limit:
         day_schedule = _resolve_day_schedule(db, body.practitioner_id, current_date)
         if day_schedule is None:
+            unscheduled_dates.append(current_date)
             current_date += timedelta(days=1)
             continue
 
@@ -2762,12 +2764,25 @@ def _build_slot_search_proposal(
     if not candidates:
         summary += " No free slots found in the requested window."
 
+    warnings: list[AppointmentProposalIssue] = []
+    total_days = (effective_to - body.date_from).days + 1
+    if not candidates and len(unscheduled_dates) == total_days:
+        warnings.append(AppointmentProposalIssue(
+            code="no_practitioner_schedule",
+            severity="warning",
+            message=(
+                f"{practitioner.first_name} {practitioner.last_name} has no bookable "
+                f"session configured on {date_range_str}."
+            ),
+        ))
+
     return SlotSearchProposalOut(
         safe=True,
         autonomy_tier="execute_with_report",
         summary=summary,
         resolved_duration_minutes=resolved_duration,
         candidates=candidates,
+        warnings=warnings,
     )
 
 

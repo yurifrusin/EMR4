@@ -381,8 +381,7 @@ function bernieReviewTransition(payload) {
     (
       payload.status === "candidate_selection_required" &&
       candidateSlots.length === 0 &&
-      !hasBlockingIssue &&
-      (suggestions.length > 0 || warnings.length === 0)
+      !hasBlockingIssue
     )
   );
   let state = payload.status || "blocked";
@@ -430,6 +429,10 @@ function bernieReviewActionCopy(payload) {
     return "Choose a time to show it on the diary. Nothing is booked until you confirm.";
   }
   if (transition.state === "no_slots") {
+    const scheduleIssue = [...(payload.warnings || []), ...(payload.blocks || [])].find(issue => issue.code === "no_practitioner_schedule");
+    if (scheduleIssue) {
+      return "I could not find a bookable session for that request. Tell me another day or practitioner to try.";
+    }
     return "I could not find matching free times in that window. Tell me another day or time to try.";
   }
   if (transition.state === "no_selectable_candidates") {
@@ -447,7 +450,10 @@ function bernieReviewActionCopy(payload) {
 function bernieIssueDisplayText(issue) {
   if (!issue) return "";
   if (issue.code === "existing_future_follow_up") {
-    return "By the way, this patient already has another appointment. Check whether a new booking is still intended.";
+    return "Margaret already has another appointment in the diary. It is worth checking that an extra booking is intended.";
+  }
+  if (issue.code === "no_practitioner_schedule") {
+    return issue.message || "This practitioner has no bookable session configured for that day.";
   }
   return issue.message || "";
 }
@@ -3835,8 +3841,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       const empty = document.createElement("div");
       empty.className = "bernie-candidate-empty";
       empty.setAttribute("data-testid", "bernie-review-candidates-empty");
+      const scheduleIssue = [...(payload.warnings || []), ...(payload.blocks || [])].find(issue => issue.code === "no_practitioner_schedule");
       empty.textContent = transition.canShowNoSlots
-        ? "I could not find matching free times in that window."
+        ? (scheduleIssue ? "There is no bookable session configured for that request." : "I could not find matching free times in that window.")
         : "I cannot show a time from this result. Check the notes above or ask Bernie another question.";
       list.appendChild(empty);
 
@@ -4596,6 +4603,29 @@ function renderBernieInstructionInput(contentEl) {
 
     const lastBernieEvent = [...bernieSession.turns].reverse().find(t => t.kind === "bernie_clarification");
     const isReply = lastBernieEvent && lastBernieEvent.payload.type === "clarification_question";
+    const visibleReferenceDate = localDateKey(diaryDate);
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasPinnedReferenceDate = !!urlParams.get("reference_date");
+    const isSmoke = urlParams.get("smoke") === "true";
+    const forceVisibleDateReanchor = urlParams.get("bernie_reanchor_visible_date") === "true";
+    const shouldReanchorVisibleDate = (
+      !isReply &&
+      !hasPinnedReferenceDate &&
+      (!isSmoke || forceVisibleDateReanchor) &&
+      bernieSession.referenceDate !== visibleReferenceDate
+    );
+    if (shouldReanchorVisibleDate) {
+      bernieSession.referenceDate = visibleReferenceDate;
+      bernieSession.turnRef = null;
+      bernieSession.candidateSnapshot = null;
+      bernieSession.selectedCandidateIndex = null;
+      bernieSession.stagedBookingPreview = null;
+      bernieSession.confirmedBookingPreview = null;
+      bernieSession.confirmPayload = null;
+      bernieSession.confirmEndpoint = null;
+      bernieSession.interpretEnvelope = null;
+      bernieSession.latestReviewPayload = null;
+    }
     if (isReply) {
       bernieSession.addEvent("clarification_reply", { reply: text });
     } else {
@@ -4618,7 +4648,7 @@ function renderBernieInstructionInput(contentEl) {
         method: "POST",
         body: JSON.stringify({
           instruction: text,
-          reference_date: bernieSession.referenceDate || localDateKey(diaryDate),
+          reference_date: bernieSession.referenceDate || visibleReferenceDate,
           context_frames: buildBernieContextFrames({}),
           ...bernieTurnRequestFields()
         })

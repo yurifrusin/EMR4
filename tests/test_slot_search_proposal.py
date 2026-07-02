@@ -351,6 +351,21 @@ def test_no_schedule_day_yields_no_candidates_for_that_day(
     assert tuesday_candidates, "Tuesday has a schedule — must yield candidates"
 
 
+def test_no_schedule_single_day_returns_diagnostic_warning(
+    client, gp_user, practitioner
+):
+    token = make_token(gp_user)
+    resp = _search(client, token, {
+        "practitioner_id": str(practitioner.id),
+        "date_from": MONDAY.isoformat(),
+        "duration_minutes": 15,
+    })
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["candidates"] == []
+    assert any(w["code"] == "no_practitioner_schedule" for w in data["warnings"])
+
+
 # ─── location filtering ───────────────────────────────────────────────────────
 
 def test_conflict_at_other_location_does_not_block_candidates(

@@ -757,6 +757,43 @@ def test_different_day_future_booking_stays_in_context_without_warning(
     assert "existing_future_follow_up" not in warning_codes
 
 
+def test_tomorrow_request_uses_visible_reference_date_not_today_bookings(
+    client, db, gp_user, patient, practitioner, monkeypatch
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    fixed_now = datetime(2026, 7, 3, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+    token = make_token(gp_user)
+
+    _make_appt(
+        db, gp_user.practice, practitioner, patient,
+        date_type(2026, 7, 3), 15, 0, AppointmentStatus.Booked,
+    )
+    _make_appt(
+        db, gp_user.practice, practitioner, patient,
+        date_type(2026, 7, 3), 15, 45, AppointmentStatus.Booked,
+    )
+
+    resp = _post_interpret(
+        client,
+        token,
+        (
+            f"Make an appointment for {patient.first_name} {patient.last_name} "
+            f"with {practitioner.first_name} {practitioner.last_name} "
+            "after 3 tomorrow and before 4.30"
+        ),
+        reference_date="2026-07-03",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["result"] == "interpreted"
+    assert data["command_candidate"]["date_from"] == "tomorrow"
+    assert data["normalization"]["constraint"]["date_from"] == "2026-07-04"
+    warning_codes = [w["code"] for w in data.get("warnings", [])]
+    assert "existing_future_follow_up" not in warning_codes
+
+
 def test_interpret_booking_context_no_db_writes(
     client, db, gp_user, patient, practitioner, monkeypatch
 ):

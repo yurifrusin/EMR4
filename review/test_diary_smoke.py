@@ -4828,7 +4828,7 @@ def test_sprint99_bernie_no_reference_date_clarification(diary_page):
     )
 
     try:
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_reanchor_visible_date=true")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
         trigger_route_intercepted_bernie(diary_page)
 
@@ -4884,7 +4884,7 @@ def test_sprint99_bernie_practitioner_typo(diary_page):
     )
 
     try:
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_reanchor_visible_date=true")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
         trigger_route_intercepted_bernie(diary_page)
 
@@ -4938,7 +4938,7 @@ def test_sprint99_bernie_patient_candidate_ambiguity(diary_page):
     )
 
     try:
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_reanchor_visible_date=true")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
         trigger_route_intercepted_bernie(diary_page)
 
@@ -5851,8 +5851,9 @@ def test_bernie_render_guard_prevents_false_found_or_no_slot_copy(diary_page):
         panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
         assert "Bernie found these times" not in panel_text
         assert "I could not find any free times for that request" not in panel_text
-        assert "By the way, this patient already has another appointment" in panel_text
-        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "Needs review"
+        assert "Margaret already has another appointment in the diary" in panel_text
+        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "Try another time"
+        assert "I could not find matching free times in that window" in panel_text
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
@@ -5890,3 +5891,92 @@ def test_bernie_composer_general_and_history_latest_visible(diary_page):
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_new_staff_instruction_reanchors_to_visible_diary_date(diary_page):
+    """A new instruction should use the visible diary date, not a stale session date."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured = []
+
+    def handle_api(route):
+        request = route.request
+        if (
+            request.method == "POST"
+            and request.url.endswith("/appointments/proposals/bernie/interpret-booking-instruction")
+        ):
+            body = request.post_data_json
+            captured.append(body)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "interpret_booking_instruction",
+                    "safe": False,
+                    "result": "clarification_required",
+                    "autonomy_tier": "blocked",
+                    "summary": "Need one more detail.",
+                    "confidence": 0.8,
+                    "request_reference_date": body["reference_date"],
+                    "command_candidate": None,
+                    "missing_fields": ["date_from"],
+                    "safety_flags": [],
+                    "clarifying_question": "Which day should I check?",
+                    "normalization": None,
+                    "warnings": [],
+                    "blocks": [],
+                    "provider_metadata": {"provider": "fake", "mode": "mocked", "live_provider": False},
+                    "confidence_axes": [],
+                    "decision": None,
+                    "assumptions": [],
+                    "staff_checks": [],
+                    "patient_candidates": [],
+                    "debug": None,
+                    "patient_booking_context": None,
+                    "context_freshness": None,
+                    "turn_ref": {
+                        "session_id": "s-visible",
+                        "turn_id": "s-visible:0",
+                        "turn_index": 0,
+                        "event_kind": "staff_instruction",
+                        "reference_date": body["reference_date"],
+                    },
+                }),
+            )
+            return
+        route.continue_()
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_reanchor_visible_date=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        diary_page.evaluate(
+            """() => {
+              diaryDate = new Date(2026, 6, 3);
+              bernieSession.referenceDate = "2026-07-02";
+              bernieSession.turnRef = {
+                session_id: "stale-session",
+                turn_id: "stale-session:4",
+                turn_index: 4,
+                event_kind: "candidate_selection",
+                reference_date: "2026-07-02"
+              };
+              isBerniePilotActive = true;
+              const contentEl = document.getElementById("bernie-review-content");
+              contentEl.innerHTML = "";
+              renderBernieInstructionInput(contentEl);
+            }"""
+        )
+        textarea = diary_page.locator("[data-testid='bernie-instruction-input']")
+        textarea.fill("Make an appointment for Margaret Thompson with Dr Shera after 3 tomorrow and before 4.30")
+        diary_page.click("[data-testid='btn-bernie-instruction-submit']")
+        diary_page.wait_for_function("captured => captured.length > 0", arg=captured, timeout=3000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured, "Expected interpret request"
+    assert captured[0]["reference_date"] == "2026-07-03"
+    assert "turn_ref" not in captured[0]
