@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 104: Bernie Conversational State Memory And Patient Context |
 | Integrated through | Backend patient_booking_context/no-slot contract, Diary chat-turn state surface, stale-state clearing, no-slot suggestions, and executable state-memory invariant harness |
-| Status | Integrated and verified locally; push, Pages deploy check, mirror realignment, and audit pending |
+| Status | Integrated, verified, pushed, deployed, mirrored, audited, and closed |
 | Last updated | 2026-07-02 |
 
 ## What Changed
@@ -38,12 +38,13 @@ reviewed, integrated, verified, pushed, and audited.
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_patient_context.py tests\test_bernie_no_slot_suggestions.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_sprint104_state_memory.py tests\test_bernie_transition_table.py -q --tb=short` passed: `66 passed`.
 - `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: full diary review harness green.
 - `node --check docs\diary\diary.js` passed.
-- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed; local/HEAD diary assets are bumped to JS `v=144` and CSS `v=125`. Deployed Pages still showed JS `v=143` and CSS `v=124` before push.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed after Pages deploy; local, HEAD, and deployed diary assets are JS `v=144` and CSS `v=125`.
+- GitHub Actions `Deploy GitHub Pages` run `28570769194` completed successfully for commit `0b9784b`.
 - `git diff --check` passed.
 
 ## Recommended User Review
 
-After GitHub Pages deploys:
+Live GitHub Pages is serving the Sprint 104 assets. Optional user review:
 
 1. Hard refresh the live Diary/Office dialog and confirm it loads
    `diary.js?v=144` and `diary.css?v=125`.

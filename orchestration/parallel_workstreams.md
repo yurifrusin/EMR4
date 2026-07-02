@@ -138,7 +138,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated and verified locally; push, Pages deploy check, mirror realignment, and audit pending |
+| Status | Integrated, verified, pushed, deployed, mirrored, audited, and closed |
 | Product Goal | Turn *bernie* from a single-prompt panel into an explicit conversational workflow with state machine memory, fresh clarification turns, no-slot suggestions, stale-state rules, and patient-specific booking context |
 | Worker Shape | Plan-gated Claude backend/API workstream, Antigravity/Gemini Diary UI workstream, and Codex worker invariant/review-harness workstream |
 | Out Of Scope | Broad root-to-branch API rewrite, XState dependency, voice/headset integration, Medicare/HI/PVM/OPV implementation, Caller ID integration, and limited auto-mode implementation |
