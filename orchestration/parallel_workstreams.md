@@ -214,6 +214,20 @@ Integration notes:
 - Focused Bernie session/evidence tests, adjacent evidence/confirm boundary
   tests, py-compile, and `git diff --check` passed.
 
+## Sprint N5: Bernie Session Endpoint And Diary Render Tail
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Product Goal | Expose the N4 server-owned Bernie session semantics through a minimal authenticated endpoint and let the Diary panel begin rendering/refetching server session state without making browser state authoritative |
+| Worker Shape | Claude backend session endpoint plan, Antigravity Diary render/refetch plan, Codex worker endpoint/UI invariant plan, Ariadne orchestration/review |
+| Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n5-bernie-session-endpoint-contract.md` |
+| Antigravity Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-n5-diary-session-render-tail.md` |
+| Codex Task Packet | `orchestration/agent_inbox/codex/codex-sprint-n5-session-endpoint-invariants.md` |
+| In Scope | Plan first; active-session/new-session/event append/refetch contract, revision conflict responses, stale/refetch UI, latest-message/history rendering from server state, no browser PHI storage, focused route/UI tests |
+| Out Of Scope | Production code before plan approval, PHI-bearing DB table/migration unless explicitly reapproved, GraphRAG route/UI wiring, auto-mode, broad API-spine rewrite, taskpane/Command Centre changes |
+| Verification | Plan packets first; later implementation must run backend session route tests, focused Diary smoke checks if UI changes, node/py-compile checks, frontend asset version checks if deployable assets change, and `git diff --check` |
+
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 
 | Item | Value |
