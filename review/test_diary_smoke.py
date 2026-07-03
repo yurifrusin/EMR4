@@ -6941,6 +6941,94 @@ def test_bernie_advisory_outcome_without_slot_does_not_become_blocked(diary_page
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_practice_reference_renders_without_confirm_authority(diary_page):
+    """Practice-knowledge frames render as reference cards and cannot create confirm UI."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "blocked",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [],
+                warnings: [],
+                blocks: [],
+                reception_context: {
+                  schema_version: "bernie.reception_context.v1",
+                  reference_date: "2026-07-03",
+                  frames: [{
+                    frame_type: "advisory_warning",
+                    status: "advisory",
+                    source: "server_resolver",
+                    basis: "practice_knowledge_retrieval",
+                    reference_date: "2026-07-03",
+                    reason_code: "practice_knowledge_retrieval",
+                    payload: {
+                      schema_version: "practice.knowledge.result.v1",
+                      retrieval_basis: "deterministic_in_memory",
+                      staff_copy: "[policy] New patient appointment duration: New patient appointments are 30 minutes.",
+                      advisory_only: true,
+                      cannot_affect_slots: true,
+                      cannot_affect_policy: true,
+                      cannot_affect_confirm: true,
+                      fact_snapshots: [{
+                        fact_id: "policy-001",
+                        kind: "policy",
+                        subject: "New patient appointment duration",
+                        body: "New patient appointments are 30 minutes. Standard follow-up appointments are 15 minutes.",
+                        match_basis: "body_keyword",
+                        rank: 1,
+                        provenance: {
+                          source_kind: "staff_authored",
+                          source_ref: "booking-policy-2026",
+                          author: "dr.shera@emr4dev.local",
+                          review_status: "current"
+                        }
+                      }]
+                    }
+                  }]
+                },
+                reception_policy: {
+                  availability: "not_evaluated",
+                  must_ask_clarification: false,
+                  must_block_confirmation: false,
+                  advisory_warnings_only: true,
+                  can_offer_candidates: false,
+                  search_ran_no_candidates: false
+                },
+                outcome: {
+                  kind: "advisory_warnings_present",
+                  family: "advisory",
+                  session_state: "context_enrichment",
+                  requires_confirmation: false,
+                  can_confirm: false,
+                  is_terminal: false,
+                  reason_codes: ["practice_knowledge_retrieval"],
+                  basis: "Only advisory warnings are present."
+                }
+              });
+            }"""
+        )
+
+        assert diary_page.locator("[data-testid='bernie-practice-reference']").count() == 1
+        assert "New patient appointment duration" in diary_page.locator("[data-testid='bernie-practice-reference']").text_content()
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-candidate-item']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-candidates-empty']").count() == 0
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_confirmation_ready_without_confirm_evidence_hides_confirm(diary_page):
     """Friendly/status payloads cannot create a confirm affordance without backend evidence."""
     import urllib.parse

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 736a9ce |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-k1b-advisory-boundary-invariants --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-sprint-k1b-advisory-boundary-invariants.md`; `orchestration/agent_inbox/codex/plan-codex-codex-sprint-k1b-advisory-boundary-invariants.md`
+- Verification run: plan-gated only; ran `py -3 scripts\agent_worktrees.py handin`, read `AGENTS.md`, `orchestration/parallel_workstreams.md`, and this task packet, mapped relevant practice-knowledge/Bernie/diary test files with `rg`, then captured the implementation plan with `py -3 scripts\agent_worktrees.py plan ...`. No production tests were run because no production/test code was changed.
+- Remaining risks: implementation still needs Codex/Ariadne approval before code changes; final K1b hook location may shift exact test file placement, but the submitted plan pins the required non-authority/fail-closed/provenance/stale non-interference invariants.

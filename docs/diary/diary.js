@@ -4201,6 +4201,116 @@ function renderBernieAppointmentSensitiveDetails(container, payload) {
   container.appendChild(details);
 }
 
+function berniePracticeKnowledgeFrames(payload, interpretEnvelope = null) {
+  const frameSets = [
+    payload?.reception_context,
+    payload?.receptionContext,
+    interpretEnvelope?.reception_context,
+    interpretEnvelope?.receptionContext,
+    bernieInterpretResult?.reception_context
+  ].filter(Boolean);
+  const frames = [];
+  frameSets.forEach(frameSet => {
+    if (!Array.isArray(frameSet.frames)) return;
+    frameSet.frames.forEach(frame => {
+      if (
+        frame &&
+        frame.frame_type === "advisory_warning" &&
+        frame.basis === "practice_knowledge_retrieval" &&
+        frame.payload &&
+        frame.payload.advisory_only === true
+      ) {
+        frames.push(frame);
+      }
+    });
+  });
+  const seen = new Set();
+  return frames.filter(frame => {
+    const key = JSON.stringify([
+      frame.reason_code || "",
+      frame.payload?.schema_version || "",
+      frame.payload?.staff_copy || "",
+      (frame.payload?.fact_snapshots || []).map(item => item.fact_id).join("|")
+    ]);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function renderBerniePracticeKnowledgeAdvisories(container, payload, interpretEnvelope = null) {
+  const frames = berniePracticeKnowledgeFrames(payload, interpretEnvelope);
+  if (frames.length === 0) return;
+
+  const section = document.createElement("section");
+  section.className = "bernie-practice-reference";
+  section.setAttribute("data-testid", "bernie-practice-reference");
+
+  const title = document.createElement("span");
+  title.className = "bernie-section-title";
+  title.textContent = "Practice reference";
+  section.appendChild(title);
+
+  frames.forEach(frame => {
+    const card = document.createElement("div");
+    card.className = "bernie-practice-reference-card";
+    card.setAttribute("data-testid", "bernie-practice-reference-card");
+
+    const snapshots = Array.isArray(frame.payload?.fact_snapshots)
+      ? frame.payload.fact_snapshots
+      : [];
+    const primary = snapshots[0] || {};
+
+    const heading = document.createElement("div");
+    heading.className = "bernie-practice-reference-heading";
+    heading.textContent = primary.subject || "Practice guidance";
+    card.appendChild(heading);
+
+    const body = document.createElement("div");
+    body.className = "bernie-practice-reference-body";
+    body.textContent = primary.body || frame.payload?.staff_copy || "Practice guidance is available for this request.";
+    card.appendChild(body);
+
+    if (snapshots.length > 1) {
+      const more = document.createElement("div");
+      more.className = "bernie-practice-reference-more";
+      more.textContent = `${snapshots.length - 1} more matching reference${snapshots.length === 2 ? "" : "s"}`;
+      card.appendChild(more);
+    }
+
+    const details = document.createElement("details");
+    details.className = "bernie-practice-reference-provenance";
+    details.setAttribute("data-testid", "bernie-practice-reference-provenance");
+
+    const summary = document.createElement("summary");
+    summary.textContent = "Source";
+    details.appendChild(summary);
+
+    const provenance = primary.provenance || {};
+    const provenanceLines = [
+      primary.fact_id ? `Reference: ${primary.fact_id}` : "",
+      primary.kind ? `Type: ${String(primary.kind).replace(/_/g, " ")}` : "",
+      provenance.source_ref ? `Source: ${provenance.source_ref}` : "",
+      provenance.review_status ? `Status: ${String(provenance.review_status).replace(/_/g, " ")}` : "",
+      provenance.author ? `Author: ${provenance.author}` : ""
+    ].filter(Boolean);
+    provenanceLines.forEach(line => {
+      const row = document.createElement("div");
+      row.textContent = line;
+      details.appendChild(row);
+    });
+    if (provenanceLines.length === 0) {
+      const row = document.createElement("div");
+      row.textContent = "Advisory reference only.";
+      details.appendChild(row);
+    }
+    card.appendChild(details);
+    section.appendChild(card);
+  });
+
+  container.appendChild(section);
+}
+
 function renderBernieReview(payload, interpretEnvelope = null) {
   const contentEl = document.getElementById("bernie-review-content");
   if (!contentEl) return;
@@ -4406,6 +4516,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   }
 
   renderBernieIdentityEvidence(contentEl, payload.identity_evidence, payload.patient_evidence, payload);
+  renderBerniePracticeKnowledgeAdvisories(contentEl, payload, interpretEnvelope);
 
   // 4. Content Section depending on Status
   if ((payload.status === "blocked" || payload.status === "clinic_day_exhausted") && transition.state !== "roster_unavailable" && transition.state !== "no_slots") {

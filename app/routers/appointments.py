@@ -93,6 +93,13 @@ from app.services.bernie import (
     build_session_confirmation_binding,
 )
 from app.services.ai.audit_store import persist_access_ai_audit_events
+from app.services.practice_knowledge import (
+    InMemoryPracticeKnowledgeRetriever,
+    PracticeKnowledgeQuery,
+    PracticeFactKind,
+    to_advisory_frame,
+)
+from app.services.practice_knowledge.examples import DEV_CLINIC_FACTS
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
 
@@ -1567,6 +1574,7 @@ def interpret_bernie_booking_instruction(
     result = _attach_bernie_interpret_reception_context(
         result,
         reference_date=effective_reference_date,
+        instruction=body.instruction,
     )
     if result.result == "interpreted":
         interpretation_target = BernieSessionState.context_enrichment
@@ -1640,9 +1648,80 @@ def _first_issue_code(issues: list[AppointmentProposalIssue]) -> Optional[str]:
     return issues[0].code if issues else None
 
 
+_PRACTICE_KNOWLEDGE_RETRIEVER = InMemoryPracticeKnowledgeRetriever(DEV_CLINIC_FACTS)
+
+
+def _practice_knowledge_query_text(
+    *,
+    instruction: Optional[str] = None,
+    normalization: Optional[SlotSearchCommandResult] = None,
+) -> str:
+    pieces: list[str] = []
+    if instruction:
+        pieces.append(instruction)
+    if normalization is not None:
+        pieces.append(normalization.summary)
+    if normalization is not None and normalization.constraint is not None:
+        constraint = normalization.constraint
+        if constraint.date_from:
+            pieces.append(str(constraint.date_from))
+            pieces.append(constraint.date_from.strftime("%A"))
+        if constraint.earliest_time:
+            pieces.append(str(constraint.earliest_time))
+        if constraint.latest_time:
+            pieces.append(str(constraint.latest_time))
+    return " ".join(piece.strip() for piece in pieces if str(piece).strip())
+
+
+def _practice_knowledge_subject_hints(
+    normalization: Optional[SlotSearchCommandResult],
+) -> list[str]:
+    if normalization is None:
+        return []
+    return [normalization.summary]
+
+
+def _practice_knowledge_advisory_frame(
+    *,
+    reference_date: date_type,
+    instruction: Optional[str] = None,
+    normalization: Optional[SlotSearchCommandResult] = None,
+) -> Optional[BernieAdvisoryWarningFrame]:
+    query_text = _practice_knowledge_query_text(
+        instruction=instruction,
+        normalization=normalization,
+    )
+    if not query_text.strip():
+        return None
+    try:
+        result = _PRACTICE_KNOWLEDGE_RETRIEVER.retrieve(
+            PracticeKnowledgeQuery(
+                query_text=query_text,
+                subject_hints=_practice_knowledge_subject_hints(normalization),
+                kinds=[
+                    PracticeFactKind.roster,
+                    PracticeFactKind.policy,
+                    PracticeFactKind.opening_hours,
+                    PracticeFactKind.reception_guidance,
+                ],
+                max_results=5,
+            )
+        )
+        if not result.items:
+            return None
+        return to_advisory_frame(
+            result,
+            reference_date=reference_date,
+            reason_code="practice_knowledge_retrieval",
+        )
+    except Exception:
+        return None
+
+
 def _build_bernie_reception_context(
     *,
     reference_date: date_type,
+    practice_knowledge_frame: Optional[BernieAdvisoryWarningFrame] = None,
     normalization: Optional[SlotSearchCommandResult] = None,
     warnings: Optional[list[AppointmentProposalIssue]] = None,
     blocks: Optional[list[AppointmentProposalIssue]] = None,
@@ -1726,6 +1805,9 @@ def _build_bernie_reception_context(
                 reference_date=reference_date,
             ))
 
+    if practice_knowledge_frame is not None:
+        frames.append(practice_knowledge_frame)
+
     if search_ran:
         schedule_warning = next(
             (
@@ -1798,9 +1880,15 @@ def _attach_bernie_interpret_reception_context(
     result: BernieBookingInstructionInterpretOut,
     *,
     reference_date: date_type,
+    instruction: Optional[str] = None,
 ) -> BernieBookingInstructionInterpretOut:
     frame_set = _build_bernie_reception_context(
         reference_date=reference_date,
+        practice_knowledge_frame=_practice_knowledge_advisory_frame(
+            reference_date=reference_date,
+            instruction=instruction,
+            normalization=result.normalization,
+        ),
         normalization=result.normalization,
         warnings=result.warnings,
         blocks=result.blocks,
@@ -1828,6 +1916,7 @@ def _attach_bernie_supervised_reception_context(
     out: BernieSupervisedBookingOut,
     *,
     reference_date: date_type,
+    instruction: Optional[str] = None,
     patient_booking_context: Optional[BerniePatientBookingContext] = None,
     context_freshness: Optional[BernieContextFreshness] = None,
 ) -> BernieSupervisedBookingOut:
@@ -1839,6 +1928,11 @@ def _attach_bernie_supervised_reception_context(
     enriched = out.model_copy(update=update_values) if update_values else out
     frame_set = _build_bernie_reception_context(
         reference_date=reference_date,
+        practice_knowledge_frame=_practice_knowledge_advisory_frame(
+            reference_date=reference_date,
+            instruction=instruction,
+            normalization=enriched.normalization,
+        ),
         normalization=enriched.normalization,
         warnings=enriched.warnings,
         blocks=enriched.blocks,

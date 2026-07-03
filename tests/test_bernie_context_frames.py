@@ -81,6 +81,35 @@ def test_future_booking_advisory_does_not_block_search_or_create_no_slot():
     assert decision.reason_codes == ["existing_future_follow_up"]
 
 
+def test_advisory_warning_with_candidates_is_not_advisory_only():
+    context = frame_set(
+        BernieRequestedAppointmentFrame(
+            status="known",
+            basis="Instruction has enough detail to search.",
+            reference_date=REFERENCE_DATE,
+        ),
+        BernieAdvisoryWarningFrame(
+            reason_code="practice_knowledge_retrieval",
+            basis="practice_knowledge_retrieval",
+            reference_date=REFERENCE_DATE,
+        ),
+        BernieSlotSearchFrame(
+            status="searched_with_candidates",
+            reason_code="slot_candidates_found",
+            basis="Slot search ran and returned candidates.",
+            reference_date=REFERENCE_DATE,
+            candidate_count=2,
+        ),
+    )
+
+    decision = evaluate_reception_context(context)
+
+    assert decision.availability == "search_ran_with_candidates"
+    assert decision.can_offer_candidates
+    assert decision.can_prepare_proposal
+    assert not decision.advisory_warnings_only
+
+
 def test_roster_unavailable_is_not_true_no_slot():
     context = frame_set(
         BernieRequestedAppointmentFrame(

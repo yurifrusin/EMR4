@@ -826,6 +826,79 @@ def test_tomorrow_request_uses_visible_reference_date_not_today_bookings(
     assert data["reception_policy"]["search_ran_no_candidates"] is False
 
 
+def test_interpret_adds_practice_knowledge_reference_as_advisory_only(
+    client, gp_user, patient, practitioner, monkeypatch
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+
+    resp = _post_interpret(
+        client,
+        token,
+        (
+            f"Make an appointment for {patient.first_name} {patient.last_name} "
+            f"with {practitioner.first_name} {practitioner.last_name} tomorrow"
+        ),
+        reference_date="2026-07-02",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    frames = data["reception_context"]["frames"]
+    advisory_frames = [
+        frame for frame in frames
+        if frame["frame_type"] == "advisory_warning"
+        and frame["basis"] == "practice_knowledge_retrieval"
+    ]
+    assert advisory_frames, "Expected a Friday practice-knowledge advisory reference"
+    frame = advisory_frames[0]
+    assert frame["status"] == "advisory"
+    assert frame["payload"]["advisory_only"] is True
+    assert frame["payload"]["cannot_affect_slots"] is True
+    assert frame["payload"]["cannot_affect_policy"] is True
+    assert frame["payload"]["cannot_affect_confirm"] is True
+    assert any(
+        item["fact_id"] == "roster-001"
+        for item in frame["payload"]["fact_snapshots"]
+    )
+    assert data["reception_policy"]["availability"] == "not_evaluated"
+    assert data["reception_policy"]["search_ran_no_candidates"] is False
+    assert data["outcome"]["can_confirm"] is False
+
+
+def test_saturday_request_does_not_show_friday_practice_reference(
+    client, gp_user, patient, practitioner, monkeypatch
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+
+    resp = _post_interpret(
+        client,
+        token,
+        (
+            f"Make an appointment for {patient.first_name} {patient.last_name} "
+            f"with {practitioner.first_name} {practitioner.last_name} tomorrow"
+        ),
+        reference_date="2026-07-03",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    practice_frames = [
+        frame for frame in data["reception_context"]["frames"]
+        if frame["frame_type"] == "advisory_warning"
+        and frame["basis"] == "practice_knowledge_retrieval"
+    ]
+    fact_ids = [
+        item["fact_id"]
+        for frame in practice_frames
+        for item in frame["payload"].get("fact_snapshots", [])
+    ]
+    assert "roster-001" not in fact_ids
+    assert data["reception_policy"]["availability"] == "not_evaluated"
+    assert data["reception_policy"]["search_ran_no_candidates"] is False
+
+
 def test_interpret_booking_context_no_db_writes(
     client, db, gp_user, patient, practitioner, monkeypatch
 ):

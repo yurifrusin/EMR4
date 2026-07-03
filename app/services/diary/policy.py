@@ -109,6 +109,7 @@ def evaluate_reception_context(
         and not must_ask
         and not roster_unavailable
         and not searched_no_candidates
+        and not searched_with_candidates
     )
 
     return BernieReceptionPolicyDecision(

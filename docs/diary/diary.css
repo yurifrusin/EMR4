@@ -2453,6 +2453,54 @@ html, body {
   border-left: 3px solid var(--blue-mid);
 }
 
+.bernie-practice-reference {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bernie-practice-reference-card {
+  background: #f8fafc;
+  border: 1px solid #bae6fd;
+  border-left: 3px solid #0284c7;
+  border-radius: 6px;
+  color: var(--text);
+  padding: 9px 10px;
+}
+
+.bernie-practice-reference-heading {
+  color: #075985;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.bernie-practice-reference-body {
+  color: #1f2937;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.bernie-practice-reference-more {
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.3;
+  margin-top: 6px;
+}
+
+.bernie-practice-reference-provenance {
+  color: #475569;
+  font-size: 11px;
+  line-height: 1.35;
+  margin-top: 8px;
+}
+
+.bernie-practice-reference-provenance summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
 .bernie-interpret-preview {
   border: 1px solid #d8b4fe;
   border-left: 4px solid #6a1b9a;

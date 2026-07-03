@@ -22,6 +22,16 @@ from app.services.practice_knowledge.envelopes import (
 )
 from app.services.practice_knowledge.facts import PracticeFact
 
+_WEEKDAY_TERMS = {
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+}
+
 
 @runtime_checkable
 class PracticeKnowledgeRetriever(Protocol):
@@ -70,10 +80,15 @@ class InMemoryPracticeKnowledgeRetriever:
     def _filter(self, query: PracticeKnowledgeQuery) -> list[PracticeFact]:
         results = []
         keywords = [w.lower() for w in query.query_text.split() if len(w) > 2]
+        query_weekdays = set(keywords).intersection(_WEEKDAY_TERMS)
         for fact in self._facts:
             if query.kinds and fact.kind not in query.kinds:
                 continue
             searchable = (fact.subject + " " + fact.body).lower()
+            fact_weekdays = set(fact.tags).intersection(_WEEKDAY_TERMS)
+            fact_weekdays.update(day for day in _WEEKDAY_TERMS if day in searchable)
+            if query_weekdays and fact_weekdays and not query_weekdays.intersection(fact_weekdays):
+                continue
             if not keywords or any(kw in searchable for kw in keywords):
                 results.append(fact)
         return results

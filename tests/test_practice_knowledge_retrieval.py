@@ -97,6 +97,12 @@ class TestInMemoryRetrieverKnownAnswers:
         fact_ids = [item.fact.fact_id for item in result.items]
         assert "roster-001" in fact_ids
 
+    def test_saturday_query_does_not_return_friday_roster_fact(self, retriever):
+        q = _query("Dr Shera Saturday appointment")
+        result = retriever.retrieve(q)
+        fact_ids = [item.fact.fact_id for item in result.items]
+        assert "roster-001" not in fact_ids
+
     def test_opening_hours_query_returns_hours_fact(self, retriever):
         q = _query("opening hours")
         result = retriever.retrieve(q)

@@ -134,6 +134,29 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint K1b: Advisory Retrieval Wiring
+
+| Item | Value |
+|---|---|
+| Status | Integrated and verified locally; push/mirror/audit pending |
+| Product Goal | Wire typed practice-knowledge retrieval into Bernie as advisory-only reception context so Bernie can show useful practice references without gaining slot/search/confirm/write authority |
+| Worker Shape | Claude backend lane superseded by session cap, Antigravity visible Diary UX plan accepted, Codex/Aristotle advisory-boundary plan accepted, Ariadne implementation/integration |
+| In Scope | `app/routers/appointments.py` advisory retrieval hook, `app/services/practice_knowledge/retriever.py` weekday guard, `app/services/diary/policy.py` advisory-only predicate, Diary practice-reference rendering, focused route/policy/UI tests |
+| Out Of Scope | Graph/vector store deployment, persisted PHI/session tables, auto-mode, taskpane/Command Centre, broad API rewrite, retrieval as slot/roster/policy/confirm/write truth |
+| Verification | Practice-knowledge and advisory-boundary tests; focused Bernie route/policy/confirm wrapper suite; full deterministic Diary smoke harness; py_compile; node check; frontend version check; diff check |
+
+Integration notes:
+
+- Retrieved facts now enter Bernie only as `advisory_warning` frames with
+  `basis="practice_knowledge_retrieval"` and advisory-only payload invariants.
+- The Diary panel renders those facts as "Practice reference" cards with source
+  provenance. They do not create candidate rows, no-slot rows, or confirm
+  controls.
+- Weekday-specific facts are guarded so a request for Saturday does not inherit
+  a Friday-only roster fact because the practitioner name matches.
+- Advisory warnings are no longer considered `advisory_warnings_only` when a
+  stronger slot-search state with candidates exists.
+
 ## Sprint K1: Typed Practice Knowledge Substrate
 
 | Item | Value |

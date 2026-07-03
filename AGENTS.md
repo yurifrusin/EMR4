@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint N12 - the native diary/reception programme now has display-only rich schedule explanations, preview-grade selected-slot rendering, confirm-grade evidence gating, and deterministic Diary copy for roster unavailable, outside-hours, clinic-day-exhausted, and true no-slot states |
-| **Next recommended work** | Sprint K1b advisory retrieval wiring: connect the typed practice-knowledge substrate into Bernie responses as explanation/suggestion support only, preserving that retrieval cannot set slot truth, policy truth, confirm affordance, freshness/audit evidence, or write payloads |
+| **Current active track** | Post-Sprint K1b - Bernie now receives typed practice-knowledge retrieval as advisory-only reception-context frames, with Diary "Practice reference" cards and deterministic guards proving retrieval cannot set slot truth, policy truth, confirm affordance, freshness/audit evidence, or write payloads |
+| **Next recommended work** | V1 Bernie reception voice and tool-intent routing: define typed intents for non-booking diary requests such as extending an appointment while keeping deterministic diary commands and staff confirmation authoritative |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint N3 unified evidence-gated confirm affordance |
+| **Latest integration commit** | Sprint K1b advisory retrieval wiring |
 
 ### Tag map (all tags pushed to remote)
 
