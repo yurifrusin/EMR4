@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n3-diary-confirm-affordance-ui-review` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 20:31 +1000 |
 | Source HEAD | `097ac41` |
 
@@ -51,4 +51,4 @@ Conflict with turn-history state tracking or auto-preview loop triggers when res
   local message inference. Preserve existing layout and grid/waiting-room
   surfaces. Add deterministic review smoke coverage for confirm-ready,
   blocked/stale, and composer-stale-reset cases.
-- Approved to proceed: yes, release with `complete sprint task`.
+- Approved to proceed: completed and integrated in Sprint N3.

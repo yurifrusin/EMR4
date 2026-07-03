@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-n3-unified-evidence-gated-confirm-contract` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 20:31 +1000 |
 | Source HEAD | `097ac41` |
 
@@ -53,4 +53,4 @@ No rendered surface changes; additive typed contract. confirm_grade_allowed True
   gate allows confirm-grade UI. Add schema/test coverage for the emitted
   `confirm_affordance`. Keep the actual booking write path, persistence,
   GraphRAG/K1, auto-mode, and broad API redesign out of scope.
-- Approved to proceed: yes, release with `complete sprint task`.
+- Approved to proceed: completed and integrated in Sprint N3.
