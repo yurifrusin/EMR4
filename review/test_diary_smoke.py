@@ -335,6 +335,76 @@ def test_bernie_review_confirmation_ready(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_review_schedule_reason_codes(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    cases = [
+        {
+            "param": "practitioner_day_off",
+            "expected_status": "Practitioner away",
+            "expected_headline": "Practitioner is away",
+            "expected_action": "Choose another practitioner or another date."
+        },
+        {
+            "param": "fully_booked",
+            "expected_status": "Fully booked",
+            "expected_headline": "Fully booked",
+            "expected_action": "Choose another time, practitioner, or date."
+        },
+        {
+            "param": "breaks_only",
+            "expected_status": "Break time",
+            "expected_headline": "Break time",
+            "expected_action": "Choose a time outside the break window."
+        },
+        {
+            "param": "outside_hours",
+            "expected_status": "Outside hours",
+            "expected_headline": "Outside rostered hours",
+            "expected_action": "Choose a time within the practitioner's rostered hours."
+        },
+        {
+            "param": "elapsed_same_day",
+            "expected_status": "Time passed",
+            "expected_headline": "Time has passed today",
+            "expected_action": "Choose a later time today or another date."
+        },
+        {
+            "param": "searched_no_candidates",
+            "expected_status": "No slots",
+            "expected_headline": "No matching slots",
+            "expected_action": "Try a wider time window, another practitioner, or another date."
+        }
+    ]
+
+    for case in cases:
+        try:
+            diary_page.goto(base_url + f"/diary/diary.html?smoke=true&bernie_review={case['param']}")
+            diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+            # Verify status is rendered
+            status = diary_page.locator("[data-testid='bernie-review-status']")
+            assert status.text_content().strip() == case["expected_status"]
+
+            # Verify headline
+            headline = diary_page.locator("[data-testid='bernie-review-headline']")
+            assert headline.text_content().strip() == case["expected_headline"]
+
+            # Verify action description
+            action = diary_page.locator("[data-testid='bernie-review-action']")
+            assert action.text_content().strip() == case["expected_action"]
+
+            # Verify empty candidate message matches the action text
+            empty = diary_page.locator("[data-testid='bernie-review-candidates-empty']")
+            assert empty.text_content().strip() == case["expected_action"]
+
+        finally:
+            diary_page.goto(base_url + CHECKS["target"])
+            diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_review_route_intercepted_blocked(diary_page):
     import json
     import urllib.parse
