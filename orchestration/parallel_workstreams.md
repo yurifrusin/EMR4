@@ -218,7 +218,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Plan gate accepted; backend endpoint implementation proceeding with Ariadne while Claude is session-limited |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Product Goal | Expose the N4 server-owned Bernie session semantics through a minimal authenticated endpoint and let the Diary panel begin rendering/refetching server session state without making browser state authoritative |
 | Worker Shape | Claude backend session endpoint plan, Antigravity Diary render/refetch plan, Codex worker endpoint/UI invariant plan, Ariadne orchestration/review |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n5-bernie-session-endpoint-contract.md` |
@@ -227,6 +227,21 @@ Integration notes:
 | In Scope | Plan first; active-session/new-session/event append/refetch contract, revision conflict responses, stale/refetch UI, latest-message/history rendering from server state, no browser PHI storage, focused route/UI tests |
 | Out Of Scope | Production code before plan approval, PHI-bearing DB table/migration unless explicitly reapproved, GraphRAG route/UI wiring, auto-mode, broad API-spine rewrite, taskpane/Command Centre changes |
 | Verification | Plan packets first; later implementation must run backend session route tests, focused Diary smoke checks if UI changes, node/py-compile checks, frontend asset version checks if deployable assets change, and `git diff --check` |
+
+Integration notes:
+
+- Claude remained capped by the five-hour session limit, so Ariadne superseded
+  the backend lane and implemented the minimal backend endpoint contract.
+- Antigravity submitted a Diary render/refetch plan; Ariadne accepted it as the
+  frontend follow-up but deferred runtime asset changes until after the route
+  contract landed.
+- Codex/Peirce submitted the endpoint/UI invariant plan; Ariadne implemented
+  backend route tests covering its route-layer invariants.
+- N5 adds process-local, authenticated Bernie session routes for active session,
+  new session, and append typed event with revision/idempotency conflict
+  handling. It does not add a persisted PHI-bearing table.
+- Focused backend route/session tests, adjacent signed-confirm/proposal tests,
+  py-compile, and `git diff --check` passed.
 
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 

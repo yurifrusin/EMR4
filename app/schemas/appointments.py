@@ -832,6 +832,94 @@ class BernieCreateProposalConfirmationIn(BaseModel):
     signed_confirmation_evidence_required: bool = False
 
 
+# ── Bernie server-owned session endpoint contract ───────────────────────────
+
+BernieSessionStateValue = Literal[
+    "instruction_entry",
+    "recognition",
+    "clarification",
+    "context_enrichment",
+    "slot_search",
+    "candidate_selection",
+    "proposal_preview",
+    "confirmation",
+    "confirmed",
+    "no_slot",
+    "clinic_day_exhausted",
+    "handed_off",
+]
+
+BernieSessionEventTypeValue = Literal[
+    "staff_instruction",
+    "clarification_reply",
+    "candidate_selected",
+    "suggestion_selected",
+    "diary_navigated",
+    "refresh_requested",
+    "confirm_submitted",
+    "new_session",
+]
+
+
+class BernieSessionEventOut(BaseModel):
+    event_id: str
+    session_id: str
+    event_type: BernieSessionEventTypeValue
+    turn_index: int
+    occurred_at: datetime
+    expected_revision: Optional[int] = None
+    idempotency_key: Optional[str] = None
+    payload: dict[str, Any] = Field(default_factory=dict)
+
+
+class BernieSessionSnapshotOut(BaseModel):
+    session_id: str
+    surface_id: str
+    state: BernieSessionStateValue
+    revision: int
+    request_reference_date: Optional[date] = None
+    patient_id: Optional[uuid.UUID] = None
+    patient_band: Optional[str] = None
+    practitioner_id: Optional[uuid.UUID] = None
+    practitioner_band: Optional[str] = None
+    candidate_freshness_ids: list[str] = Field(default_factory=list)
+    staged_proposal_freshness_id: Optional[str] = None
+    turn_count: int = 0
+    last_event_id: Optional[str] = None
+    stale_reason_code: Optional[str] = None
+    events: list[BernieSessionEventOut] = Field(default_factory=list)
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+
+class BernieSessionActiveOut(BaseModel):
+    result: Literal["active_session"]
+    session: BernieSessionSnapshotOut
+
+
+class BernieSessionNewIn(BaseModel):
+    surface_id: str = Field(min_length=1, max_length=100)
+    reference_date: Optional[date] = None
+
+
+class BernieSessionEventAppendIn(BaseModel):
+    event_type: BernieSessionEventTypeValue
+    expected_revision: int = Field(ge=0)
+    surface_id: str = Field(min_length=1, max_length=100)
+    event_id: Optional[str] = Field(default=None, min_length=1, max_length=100)
+    idempotency_key: Optional[str] = Field(default=None, min_length=1, max_length=100)
+    payload: dict[str, Any] = Field(default_factory=dict)
+
+
+class BernieSessionEventAppendOut(BaseModel):
+    result: Literal["accepted", "rejected"]
+    accepted: bool
+    session: Optional[BernieSessionSnapshotOut] = None
+    event: Optional[BernieSessionEventOut] = None
+    code: Optional[str] = None
+    detail: Optional[str] = None
+
+
 # Resolve forward references now that all models are defined.
 BernieTurnRef.model_rebuild()
 SlotSelectionProposalOut.model_rebuild()

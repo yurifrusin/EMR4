@@ -4,6 +4,7 @@ from datetime import date as date_type, datetime, time, timedelta, timezone
 from typing import Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from fastapi import APIRouter, Body, Depends, HTTPException, Query, status
+from fastapi.responses import JSONResponse
 from sqlalchemy import or_
 from sqlalchemy.orm import Session, joinedload
 
@@ -40,6 +41,8 @@ from app.schemas.appointments import (
     BerniePatientBookingContext, BernieContextFreshness, BernieSlotSuggestion,
     BernieTurnRef, BernieTurnEventKind,
     BernieNoSlotSuggestionSelectionIn, BernieNoSlotSuggestionSelectionOut,
+    BernieSessionActiveOut, BernieSessionEventAppendIn, BernieSessionEventAppendOut,
+    BernieSessionEventOut, BernieSessionNewIn, BernieSessionSnapshotOut,
 )
 from app.services.bernie import (
     BernieReceptionPolicyDecision,
@@ -74,6 +77,11 @@ from app.services.bernie import (
     normalize_slot_search_command,
     resolve_week_relative_date,
     resolve_booking_date_transition,
+    BernieSessionEvent,
+    BernieSessionEventResult,
+    BernieSessionEventType,
+    BernieSessionRecord,
+    InMemoryBernieSessionStore,
 )
 from app.services.ai.audit_store import persist_access_ai_audit_events
 
@@ -131,6 +139,55 @@ BERNIE_WEEK_RELATIVE_RE = re.compile(
     r"\b(?:in\s+(?:a|one|1)\s+week(?:['’`\\]s)?(?:\s+time)?|next\s+week)\b",
     re.IGNORECASE,
 )
+
+
+_BERNIE_SESSION_STORE = InMemoryBernieSessionStore()
+
+
+def _bernie_session_event_out(event: BernieSessionEvent) -> BernieSessionEventOut:
+    return BernieSessionEventOut(
+        event_id=event.event_id,
+        session_id=event.session_id,
+        event_type=event.event_type.value,
+        turn_index=event.turn_index,
+        occurred_at=event.occurred_at,
+        expected_revision=event.expected_revision,
+        idempotency_key=event.idempotency_key,
+        payload=event.payload,
+    )
+
+
+def _bernie_session_snapshot_out(session: BernieSessionRecord) -> BernieSessionSnapshotOut:
+    return BernieSessionSnapshotOut(
+        session_id=session.session_id,
+        surface_id=session.surface_id or "",
+        state=session.state.value,
+        revision=session.revision,
+        request_reference_date=session.request_reference_date,
+        patient_id=session.patient_id,
+        patient_band=session.patient_band,
+        practitioner_id=session.practitioner_id,
+        practitioner_band=session.practitioner_band,
+        candidate_freshness_ids=session.candidate_freshness_ids,
+        staged_proposal_freshness_id=session.staged_proposal_freshness_id,
+        turn_count=session.turn_count,
+        last_event_id=session.last_event_id,
+        stale_reason_code=session.stale_reason_code,
+        events=[_bernie_session_event_out(event) for event in session.events],
+        created_at=session.created_at,
+        updated_at=session.updated_at,
+    )
+
+
+def _bernie_session_append_out(result: BernieSessionEventResult) -> BernieSessionEventAppendOut:
+    return BernieSessionEventAppendOut(
+        result="accepted" if result.accepted else "rejected",
+        accepted=result.accepted,
+        session=_bernie_session_snapshot_out(result.session) if result.session is not None else None,
+        event=_bernie_session_event_out(result.event) if result.event is not None else None,
+        code=result.code.value if result.code is not None else None,
+        detail=result.detail,
+    )
 
 
 def _mint_next_turn_ref(
@@ -1337,6 +1394,70 @@ def get_bernie_pilot_eligibility(
         user_allowlist=settings.bernie_staff_pilot_user_ids,
         current_user=current_user,
     )
+
+
+@router.get("/bernie/sessions/active", response_model=BernieSessionActiveOut)
+def get_active_bernie_session(
+    surface_id: str = Query("diary-main", min_length=1, max_length=100),
+    reference_date: Optional[date_type] = Query(default=None),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    session = _BERNIE_SESSION_STORE.get_or_create_active_session(
+        practice_id=current_user.practice_id,
+        user_id=current_user.id,
+        surface_id=surface_id,
+        request_reference_date=reference_date,
+    )
+    return BernieSessionActiveOut(
+        result="active_session",
+        session=_bernie_session_snapshot_out(session),
+    )
+
+
+@router.post("/bernie/sessions/new", response_model=BernieSessionActiveOut)
+def create_new_bernie_session(
+    body: BernieSessionNewIn,
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    session = _BERNIE_SESSION_STORE.create_session(
+        practice_id=current_user.practice_id,
+        user_id=current_user.id,
+        surface_id=body.surface_id,
+        request_reference_date=body.reference_date,
+    )
+    return BernieSessionActiveOut(
+        result="active_session",
+        session=_bernie_session_snapshot_out(session),
+    )
+
+
+@router.post(
+    "/bernie/sessions/{session_id}/events",
+    response_model=BernieSessionEventAppendOut,
+)
+def append_bernie_session_event(
+    session_id: str,
+    body: BernieSessionEventAppendIn,
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    result = _BERNIE_SESSION_STORE.append_client_event(
+        session_id=session_id,
+        practice_id=current_user.practice_id,
+        user_id=current_user.id,
+        surface_id=body.surface_id,
+        event_type=BernieSessionEventType(body.event_type),
+        expected_revision=body.expected_revision,
+        event_id=body.event_id,
+        idempotency_key=body.idempotency_key,
+        payload=body.payload,
+    )
+    response = _bernie_session_append_out(result)
+    if not result.accepted:
+        return JSONResponse(
+            status_code=status.HTTP_409_CONFLICT,
+            content=response.model_dump(mode="json"),
+        )
+    return response
 
 
 @router.post(

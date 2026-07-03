@@ -6,7 +6,7 @@
 | From | codex |
 | Role | orchestrator |
 | Source Task | `claude-sprint-n5-bernie-session-endpoint-contract` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 |
 | Source HEAD | `c185281` |
 

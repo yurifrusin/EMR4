@@ -6,7 +6,7 @@
 | Role | codex-worker |
 | Worker Branch | `codex/current` |
 | Source Task | `orchestration/agent_inbox/codex/codex-sprint-n5-session-endpoint-invariants.md` |
-| Status | accepted |
+| Status | integrated |
 | Sprint | N5 - Bernie Session Endpoint And Diary Render Tail |
 
 ## My Understanding

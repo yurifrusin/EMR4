@@ -8,59 +8,56 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint N4: Bernie Server-Side Session/Event Foundation |
-| Integrated through | Ariadne backend implementation replacing the capped Claude lane, accepted Antigravity render-from-state tail plan, accepted Codex/McClintock invariant plan, and Ariadne verification |
+| Batch | Sprint N5: Bernie Session Endpoint Contract |
+| Integrated through | Ariadne backend implementation replacing the capped Claude lane, accepted Antigravity Diary render-tail plan deferred to follow-up, accepted Codex/Peirce endpoint invariant plan, and Ariadne verification |
 | Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- Added `app/services/bernie/session_store.py` as an executable in-memory model
-  of the future server-owned Bernie session/event transaction boundary.
-- Extended `BernieSessionRecord` and `BernieSessionEvent` with revision,
-  diary-surface ownership, idempotency, stale-reason, and event-result fields.
-- Added typed rejection codes for missing sessions, owner mismatch, stale/future
-  revisions, idempotency conflicts, illegal transitions, transient-state events,
-  and PHI-heavy payload keys.
-- Added optimistic concurrency semantics: a client event must echo the current
-  session revision; stale or skipped revisions fail closed without appending an
-  event.
-- Added bounded idempotency semantics: identical replays return the original
-  result; same id/key with a different payload is rejected.
-- Bound sessions to practice + staff user + diary surface to support one Bernie
-  session per staff per diary surface.
-- Added default PHI minimisation guardrails for session event payloads. Raw
-  transcript/instruction text, patient names, phone, Medicare/IHI, and similar
-  keys are rejected by default.
-- Added `build_session_confirmation_binding()` so future signed evidence can
-  include session-owned practice/staff/surface/revision/reference-date and slot
-  coordinates.
-- No database table, Alembic migration, route endpoint, frontend render-state
-  migration, or deployable Diary asset changed in N4.
+- Added a minimal authenticated Bernie session endpoint surface under
+  `/api/v1/appointments/bernie/sessions`.
+- `GET /bernie/sessions/active` returns or creates the active server-owned
+  session for the authenticated staff user and diary surface.
+- `POST /bernie/sessions/new` starts a fresh process-local session for the
+  authenticated staff user and diary surface.
+- `POST /bernie/sessions/{session_id}/events` appends typed client events with
+  expected revision and idempotency metadata, returning 409 typed conflicts for
+  stale/future revisions, owner mismatch, idempotency conflict, invalid events,
+  or PHI-heavy payloads.
+- Added additive Pydantic session request/response schemas, including
+  PHI-minimised session snapshots and event tails.
+- Added focused HTTP route tests for auth, active/new session, event append,
+  stale revision conflict, idempotent replay, cross-user/wrong-surface
+  rejection, and PHI payload rejection.
+- No database table, Alembic migration, Diary UI asset change, GraphRAG wiring,
+  or auto-mode was added. The session store remains process-local and
+  non-durable by design until retention/TTL policy is approved.
 
 ## Verification
 
-- Focused N4 backend session/evidence suite passed:
-  `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_session_store.py tests\test_bernie_domain_package.py tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_turn_contract.py -q`.
-- Adjacent evidence/confirm boundary suite passed:
-  `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py tests\test_diary_confirm_gate.py tests\test_diary_action_envelopes.py tests\test_diary_action_boundary_contracts.py -q`.
+- Focused N5 backend session route suite passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_session_routes.py tests\test_bernie_session_store.py tests\test_bernie_domain_package.py -q`.
+- Adjacent signed-confirm/proposal regression suite passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py tests\test_diary_confirm_gate.py -q`.
 - Compile check passed:
-  `.\.venv\Scripts\python.exe -m py_compile app\services\bernie\session.py app\services\bernie\session_store.py app\services\bernie\__init__.py tests\test_bernie_session_store.py tests\test_bernie_domain_package.py`.
+  `.\.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\schemas\appointments.py app\services\bernie\session_store.py tests\test_bernie_session_routes.py`.
 - `git diff --check` passed.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N4;
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N5;
   previous full runs showed pre-existing/global failures outside these
-  diary-domain/session/evidence slices.
+  diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. N4 did not change the visible Diary
-UI, live API routes, database schema, or deployable frontend assets.
+No required manual review before moving on. N5 did not change the visible Diary
+UI, database schema, or deployable frontend assets; the new route contract is
+covered by backend tests.
 
 ## Not Required Before Moving On
 
-- No persisted Bernie session table, Alembic migration, route endpoint,
-  GraphRAG/vector store, practice-knowledge route/UI wiring, UI redesign, or
-  frontend asset deployment was implemented.
+- No persisted Bernie session table, Alembic migration, GraphRAG/vector store,
+  practice-knowledge route/UI wiring, UI redesign, or frontend asset deployment
+  was implemented.
 - No auto-confirm or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was
   started.
@@ -73,7 +70,7 @@ UI, live API routes, database schema, or deployable frontend assets.
 
 - A later persistence sprint should add the real session/event table only after
   Yuri/Ariadne choose TTL, retention, cleanup, and transcript-storage policy.
-- A later UI sprint should use Antigravity's accepted N4 tail plan to render
+- A later UI sprint should use Antigravity's accepted N4/N5 tail plans to render
   Bernie from server-owned state, show stale-session conflicts, and avoid
   browser-owned PHI/state authority.
 - The signed confirmation evidence path should be bound to persisted session
@@ -87,19 +84,27 @@ UI, live API routes, database schema, or deployable frontend assets.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Session Endpoint Or Advisory Retrieval Wiring
+## Next Sprint Candidate - Diary Render Tail Or Advisory Retrieval Wiring
 
 | Item | Value |
 |---|---|
-| Name | Bernie Session Endpoint And Diary Render Tail, or K1b Advisory Retrieval Wiring |
+| Name | Diary Render-From-Session Tail, or K1b Advisory Retrieval Wiring |
 | Status | Recommended, not launched |
 | Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for UI/session review if UI is included; Codex worker for backend invariants |
 
-N4 has now made server-owned session append semantics executable without adding
-a PHI-bearing table. The next narrow slice can either expose that contract
-through a backend route plus Diary render-from-state tail, or wire K1 advisory
-retrieval into Bernie route/UI responses while preserving the advisory-only
-boundary.
+N5 has now exposed the process-local server session contract through authenticated
+routes. The next narrow slice can either wire the Diary panel to render/refetch
+that server session state, or wire K1 advisory retrieval into Bernie route/UI
+responses while preserving the advisory-only boundary.
+
+## Previous Closeout - Sprint N4
+
+| Item | Value |
+|---|---|
+| Batch | Sprint N4: Bernie Server-Side Session/Event Foundation |
+| Integrated through | Ariadne backend implementation replacing the capped Claude lane, accepted Antigravity render-from-state tail plan, accepted Codex/McClintock invariant plan, and Ariadne verification |
+| Status | Integrated, verified, pushed, mirrored, and audited |
+| Last updated | 2026-07-03 |
 
 ## Previous Closeout - Sprint S1
 

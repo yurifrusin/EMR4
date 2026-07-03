@@ -111,6 +111,7 @@ class InMemoryBernieSessionStore:
 
     def __init__(self) -> None:
         self._sessions: dict[str, BernieSessionRecord] = {}
+        self._active_sessions: dict[tuple[uuid.UUID, uuid.UUID, str], str] = {}
         self._idempotency_results: dict[tuple[str, str], BernieSessionEventResult] = {}
         self._idempotency_payloads: dict[tuple[str, str], str] = {}
 
@@ -135,11 +136,46 @@ class InMemoryBernieSessionStore:
             updated_at=timestamp,
         )
         self._sessions[record.session_id] = record
+        self._active_sessions[(practice_id, user_id, surface_id)] = record.session_id
         return record
 
     def get_session(self, session_id: str) -> Optional[BernieSessionRecord]:
         session = self._sessions.get(session_id)
         return session.model_copy(deep=True) if session is not None else None
+
+    def get_active_session(
+        self,
+        *,
+        practice_id: uuid.UUID,
+        user_id: uuid.UUID,
+        surface_id: str,
+    ) -> Optional[BernieSessionRecord]:
+        session_id = self._active_sessions.get((practice_id, user_id, surface_id))
+        if session_id is None:
+            return None
+        return self.get_session(session_id)
+
+    def get_or_create_active_session(
+        self,
+        *,
+        practice_id: uuid.UUID,
+        user_id: uuid.UUID,
+        surface_id: str,
+        request_reference_date: Optional[date] = None,
+    ) -> BernieSessionRecord:
+        existing = self.get_active_session(
+            practice_id=practice_id,
+            user_id=user_id,
+            surface_id=surface_id,
+        )
+        if existing is not None:
+            return existing
+        return self.create_session(
+            practice_id=practice_id,
+            user_id=user_id,
+            surface_id=surface_id,
+            request_reference_date=request_reference_date,
+        )
 
     def append_client_event(
         self,
