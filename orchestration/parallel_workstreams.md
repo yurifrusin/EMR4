@@ -185,6 +185,20 @@ Integration notes:
 - Focused signed-evidence tests, adjacent Bernie/diary confirm tests,
   py-compile, and `git diff --check` passed.
 
+## Sprint N4: Bernie Server-Side Session/Event Foundation
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Product Goal | Define the minimum server-owned Bernie session/event persistence foundation so conversation memory, stale-state rejection, signed confirmation evidence, and render-from-state UI can converge without premature PHI-heavy storage |
+| Worker Shape | Claude backend/session contract plan, Antigravity Diary session UX/render-from-state plan, Codex worker adversarial invariant plan, Ariadne orchestration/review |
+| Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n4-bernie-server-session-contract.md` |
+| Antigravity Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-n4-diary-session-ux-review.md` |
+| Codex Task Packet | `orchestration/agent_inbox/codex/codex-sprint-n4-session-invariants.md` |
+| In Scope | Plan first; build on `app/services/bernie/session.py`; retention/privacy posture, optimistic concurrency/stale event controls, one session per staff per diary surface, signed evidence/session binding, render-from-state tail, focused tests |
+| Out Of Scope | Production code before plan approval, broad API-spine rewrite, GraphRAG route/UI wiring, auto-mode, live PHI, full transcript persistence unless justified, UI redesign |
+| Verification | Plan packets first; later implementation must run focused Bernie session/evidence tests, migration checks if tables are added, relevant Diary harness checks if UI changes, py-compile/node checks as applicable, and `git diff --check` |
+
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 
 | Item | Value |
