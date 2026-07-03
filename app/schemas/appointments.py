@@ -436,6 +436,32 @@ class AppointmentDeleteProposalOut(BaseModel):
     command: AppointmentDeleteCommand
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    confirm_endpoint: Optional[str] = None
+    confirm_payload: Optional[dict[str, Any]] = None
+    delete_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
+
+
+class AppointmentDeleteProposalConfirmationIn(BaseModel):
+    confirmed: bool = False
+    delete_proposal: AppointmentDeleteProposalOut
+    confirmed_warnings: list[str] = Field(default_factory=list)
+    delete_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
+
+
+class AppointmentConfirmDeleteProposalOut(BaseModel):
+    intent: Literal["confirm_delete_appointment"] = "confirm_delete_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["confirmed_write", "blocked"]
+    summary: str
+    appointment: Optional[AppointmentOut] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    audit_evidence: list[str] = Field(default_factory=list)
 
 
 class AppointmentAuditLogOut(BaseModel):

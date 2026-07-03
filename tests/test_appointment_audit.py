@@ -26,6 +26,7 @@ from tests.conftest import make_token
 
 TODAY = date.today()
 APPT_URL = "/api/v1/appointments"
+DELETE_CONFIRM_URL = f"{APPT_URL}/proposals/delete-confirm"
 
 
 def _make_appt(db, practice, practitioner, patient,
@@ -256,6 +257,50 @@ def test_confirmed_delete_without_reason_writes_audit(
     ).one()
     assert e.action == AppointmentAuditAction.delete
     assert e.cancellation_reason is None
+
+
+def test_signed_delete_confirm_writes_delete_audit_evidence(
+    client, db, practice, practitioner, patient, receptionist_user
+):
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(receptionist_user)
+    proposal_resp = client.post(
+        f"{APPT_URL}/proposals/delete/{appt.id}",
+        json={"cancellation_reason": "Patient request"},
+        headers=_auth(token),
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+
+    confirm_resp = client.post(
+        DELETE_CONFIRM_URL,
+        json=payload,
+        headers=_auth(token),
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is True
+    assert data["audit_evidence"] == [
+        "diary_confirm_delete_proposal",
+        "source_delete_proposal",
+        "source_current_appointment_state",
+        "delete_signed_confirmation_evidence_verified",
+    ]
+    e = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.appointment_id == appt.id
+    ).one()
+    assert e.action == AppointmentAuditAction.delete
+    assert e.status_before == AppointmentStatus.Booked
+    assert e.status_after == AppointmentStatus.Cancelled
+    assert e.cancellation_reason == "Patient request"
+    assert e.confirmed_warnings == [
+        "diary_confirm_delete_proposal",
+        "source_delete_proposal",
+        "source_current_appointment_state",
+        "delete_signed_confirmation_evidence_verified",
+    ]
 
 
 # ─── GET /{id}/audit ─────────────────────────────────────────────────────────

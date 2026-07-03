@@ -7425,14 +7425,7 @@ async function deleteBooking() {
       mockAppointmentsCache = mockAppointmentsCache.filter(x => x.id !== editingAppointmentId);
       setStatus("Booking cancelled (Mock).");
     } else {
-      const res = await apiFetch(`/appointments/${editingAppointmentId}`, {
-        method: "DELETE",
-        body: JSON.stringify({ cancellation_reason })
-      });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Delete failed: ${res.status} ${text}`);
-      }
+      await applySignedDeleteProposal(proposal, cancellation_reason);
       setStatus("Booking cancelled successfully.");
     }
     const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
@@ -7801,6 +7794,46 @@ async function applySignedStatusProposal(appt, proposal, newStatus, waitingAreaI
     throw new Error(`Failed to update status: ${res.status} ${text}`);
   }
   return await res.json();
+}
+
+async function applySignedDeleteProposal(proposal, cancellationReason) {
+  const confirmedWarnings = (proposal?.warnings || []).map(issue => issue.code).filter(Boolean);
+  const confirmEndpoint = proposal?.confirm_endpoint;
+  const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
+
+  if (confirmEndpoint && confirmPayload) {
+    confirmPayload.confirmed = true;
+    confirmPayload.confirmed_warnings = Array.from(new Set([
+      ...(confirmPayload.confirmed_warnings || []),
+      ...confirmedWarnings
+    ]));
+    const confirmRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+      method: "POST",
+      body: JSON.stringify(confirmPayload)
+    });
+    if (!confirmRes.ok) {
+      throw new Error(await apiErrorMessage(confirmRes, "Delete confirm"));
+    }
+    const confirmResult = await confirmRes.json();
+    if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
+      const issue = (confirmResult?.blocks || [])[0];
+      throw new Error(issue?.message || confirmResult?.summary || "The appointment cancellation could not be confirmed.");
+    }
+    if (!confirmResult.appointment) {
+      throw new Error("Delete confirm response did not include an appointment.");
+    }
+    return confirmResult.appointment;
+  }
+
+  const res = await apiFetch(`/appointments/${editingAppointmentId}`, {
+    method: "DELETE",
+    body: JSON.stringify({ cancellation_reason: cancellationReason })
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Delete failed: ${res.status} ${text}`);
+  }
+  return null;
 }
 
 async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null) {

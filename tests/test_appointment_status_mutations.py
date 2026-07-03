@@ -235,6 +235,7 @@ def _delete(client, token, appt_id):
 
 
 DELETE_PROPOSAL_URL = "/api/v1/appointments/proposals/delete/{}"
+DELETE_CONFIRM_URL = "/api/v1/appointments/proposals/delete-confirm"
 
 
 def test_delete_requires_auth(client, db, practice, practitioner, patient):
@@ -376,6 +377,175 @@ def test_delete_proposal_echoes_reason_in_command(
     db.refresh(appt)
     assert appt.cancellation_reason is None
     assert appt.status == AppointmentStatus.Booked
+
+
+def test_delete_proposal_returns_signed_confirm_payload(
+        client, db, gp_user, practice, practitioner, patient):
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient, start_h=13)
+    appt.waiting_area_id = area.id
+    db.flush()
+    token = make_token(gp_user)
+
+    resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Patient request"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["confirm_endpoint"] == DELETE_CONFIRM_URL
+    assert data["delete_proposal_freshness_id"]
+    assert data["signed_confirmation_evidence_required"] is True
+    assert data["signed_confirmation_evidence"]["purpose"] == "diary_confirm_delete_proposal"
+    assert data["confirm_payload"]["confirmed"] is False
+    assert data["confirm_payload"]["delete_proposal"]["command"]["appointment_id"] == str(appt.id)
+    assert data["confirm_payload"]["delete_proposal"]["command"]["clears_waiting_area"] is True
+    assert data["confirm_payload"]["delete_proposal"]["command"]["cancellation_reason"] == "Patient request"
+    assert data["confirm_payload"]["delete_proposal_freshness_id"] == data["delete_proposal_freshness_id"]
+    assert data["confirm_payload"]["signed_confirmation_evidence"] == data["signed_confirmation_evidence"]
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Booked
+    assert appt.waiting_area_id == area.id
+
+
+def test_delete_confirm_requires_confirmed_true_without_write(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, start_h=14)
+    token = make_token(gp_user)
+    proposal_resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        DELETE_CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert any(block["code"] == "explicit_confirmation_required" for block in data["blocks"])
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Booked
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
+def test_delete_confirm_blocks_tampered_signed_evidence_without_write(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, start_h=15)
+    token = make_token(gp_user)
+    proposal_resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Original reason"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+    payload["delete_proposal"]["command"]["cancellation_reason"] = "Tampered reason"
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        DELETE_CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert any(block["code"] == "signed_evidence_mismatch" for block in data["blocks"])
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Booked
+    assert appt.cancellation_reason is None
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
+def test_delete_confirm_blocks_stale_freshness_without_write(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, start_h=16)
+    token = make_token(gp_user)
+    proposal_resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+    payload["delete_proposal_freshness_id"] = "stale-delete-proposal"
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        DELETE_CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert any(block["code"] == "stale_delete_proposal_freshness_id" for block in data["blocks"])
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Booked
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
+def test_delete_confirm_soft_cancels_once_with_signed_evidence(
+        client, db, gp_user, practice, practitioner, patient):
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient, start_h=17)
+    appt.waiting_area_id = area.id
+    db.flush()
+    token = make_token(gp_user)
+    proposal_resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Patient had transport issues"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        DELETE_CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "confirmed_write"
+    assert data["appointment"]["status"] == "Cancelled"
+    assert data["appointment"]["waiting_area_id"] is None
+    assert data["appointment"]["cancellation_reason"] == "Patient had transport issues"
+    assert "diary_confirm_delete_proposal" in data["audit_evidence"]
+    assert "delete_signed_confirmation_evidence_verified" in data["audit_evidence"]
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Cancelled
+    assert appt.waiting_area_id is None
+    assert appt.cancellation_reason == "Patient had transport issues"
+    entries = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.appointment_id == appt.id,
+    ).all()
+    assert db.query(AppointmentAuditLog).count() == before_audits + 1
+    assert len(entries) == 1
+    assert entries[0].confirmed_warnings == [
+        "diary_confirm_delete_proposal",
+        "source_delete_proposal",
+        "source_current_appointment_state",
+        "delete_signed_confirmation_evidence_verified",
+        "waiting_area_cleared",
+    ]
 
 
 def test_delete_reason_too_long_returns_422(

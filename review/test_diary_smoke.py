@@ -7468,6 +7468,284 @@ def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
     assert captured_raw_patches == []
 
 
+def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
+    """Appointment cancel posts signed delete-confirm when proposal evidence is present."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_proposals = []
+    captured_confirms = []
+    captured_raw_deletes = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete/appt-delete-1"):
+            body = request.post_data_json
+            captured_proposals.append(body)
+            proposal = {
+                "intent": "delete_appointment",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "proposal",
+                "summary": "Cancel and remove Margaret Thompson's appointment.",
+                "command": {
+                    "appointment_id": "appt-delete-1",
+                    "clears_waiting_area": True,
+                    "cancellation_reason": body.get("cancellation_reason"),
+                },
+                "warnings": [{
+                    "code": "waiting_area_cleared",
+                    "severity": "warning",
+                    "message": "Deleting this appointment will remove the patient from the waiting area.",
+                }],
+                "blocks": [],
+            }
+            signed_evidence = {
+                "schema_version": "bernie.confirmation_evidence.v1",
+                "purpose": "diary_confirm_delete_proposal",
+                "payload": {"fixture": "delete-control"},
+                "signature": "signed",
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/delete-confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "delete_proposal": proposal,
+                        "confirmed_warnings": ["waiting_area_cleared"],
+                        "delete_proposal_freshness_id": "delete-fresh-1",
+                        "signed_confirmation_evidence": signed_evidence,
+                        "signed_confirmation_evidence_required": True,
+                    },
+                    "delete_proposal_freshness_id": "delete-fresh-1",
+                    "signed_confirmation_evidence_required": True,
+                    "signed_confirmation_evidence": signed_evidence,
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete-confirm"):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_delete_appointment",
+                    "safe": True,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "confirmed_write",
+                    "summary": "Cancelled.",
+                    "appointment": {
+                        "id": "appt-delete-1",
+                        "status": "Cancelled",
+                        "waiting_area_id": None,
+                        "cancellation_reason": "Patient had transport issues",
+                    },
+                    "warnings": [],
+                    "blocks": [],
+                    "audit_evidence": [
+                        "diary_confirm_delete_proposal",
+                        "delete_signed_confirmation_evidence_verified",
+                    ],
+                }),
+            )
+            return
+        if request.method == "DELETE" and request.url.endswith("/appointments/appt-delete-1"):
+            captured_raw_deletes.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw DELETE should not be used"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              activeTemplate = {
+                columns: [{
+                  practitioner_ahpra: "MED0001234567",
+                  room_label: "Room 1",
+                  assignment: "Dr Alex Shera",
+                  slot_interval_minutes: 15
+                }],
+                slot_defaults: { interval_minutes: 15 }
+              };
+              activeTypes = [{ id: "type-1", name: "Standard", default_duration: 15 }];
+              ahpraToPractitionerMap["MED0001234567"] = {
+                id: "practitioner-123",
+                first_name: "Alex",
+                last_name: "Shera",
+                ahpra_number: "MED0001234567"
+              };
+              const appt = {
+                id: "appt-delete-1",
+                status: "Booked",
+                waiting_area_id: "area-1",
+                patient_id: "patient-123",
+                patient: { id: "patient-123", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
+                practitioner: { id: "practitioner-123", first_name: "Alex", last_name: "Shera", ahpra_number: "MED0001234567" },
+                practitioner_id: "practitioner-123",
+                appointment_type_id: "type-1",
+                appointment_date: "2026-07-03",
+                start_time_local: "09:00:00",
+                duration_minutes: 15,
+                reason: "Follow-up"
+              };
+              todayAppointments = [appt];
+              openBookingModalForEdit(appt);
+            }"""
+        )
+        diary_page.click("#btn-booking-delete")
+        diary_page.fill("#booking-cancel-reason", "Patient had transport issues")
+        diary_page.click("#btn-booking-delete")
+        diary_page.wait_for_selector(".identity-confirm-overlay", state="visible", timeout=5000)
+        diary_page.click(".identity-confirm-overlay button:has-text('Confirm & Save')")
+        diary_page.wait_for_timeout(1000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_proposals, "Expected delete proposal request"
+    assert captured_proposals[0]["cancellation_reason"] == "Patient had transport issues"
+    assert captured_confirms, "Expected signed delete-confirm request"
+    assert captured_confirms[0]["confirmed"] is True
+    assert captured_confirms[0]["delete_proposal"]["command"]["cancellation_reason"] == "Patient had transport issues"
+    assert captured_raw_deletes == []
+
+
+def test_cancel_flow_failed_signed_confirm_does_not_raw_delete(diary_page):
+    """A rejected signed delete-confirm must not fall back to raw DELETE."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_confirms = []
+    captured_raw_deletes = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete/appt-delete-fail"):
+            proposal = {
+                "intent": "delete_appointment",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "proposal",
+                "summary": "Cancel and remove Margaret Thompson's appointment.",
+                "command": {
+                    "appointment_id": "appt-delete-fail",
+                    "clears_waiting_area": False,
+                    "cancellation_reason": "Patient had transport issues",
+                },
+                "warnings": [],
+                "blocks": [],
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/delete-confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "delete_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "delete_proposal_freshness_id": "delete-fresh-fail",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "diary_confirm_delete_proposal",
+                            "payload": {"fixture": "delete-control-fail"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/delete-confirm"):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_delete_appointment",
+                    "safe": False,
+                    "requires_confirmation": True,
+                    "autonomy_tier": "blocked",
+                    "summary": "Delete proposal is stale.",
+                    "appointment": None,
+                    "warnings": [],
+                    "blocks": [{"code": "stale_delete_proposal_freshness_id", "message": "Delete proposal is stale."}],
+                    "audit_evidence": [],
+                }),
+            )
+            return
+        if request.method == "DELETE" and request.url.endswith("/appointments/appt-delete-fail"):
+            captured_raw_deletes.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw DELETE should not be used"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              activeTemplate = {
+                columns: [{
+                  practitioner_ahpra: "MED0001234567",
+                  room_label: "Room 1",
+                  assignment: "Dr Alex Shera",
+                  slot_interval_minutes: 15
+                }],
+                slot_defaults: { interval_minutes: 15 }
+              };
+              activeTypes = [{ id: "type-1", name: "Standard", default_duration: 15 }];
+              ahpraToPractitionerMap["MED0001234567"] = {
+                id: "practitioner-123",
+                first_name: "Alex",
+                last_name: "Shera",
+                ahpra_number: "MED0001234567"
+              };
+              const appt = {
+                id: "appt-delete-fail",
+                status: "Booked",
+                waiting_area_id: null,
+                patient_id: "patient-123",
+                patient: { id: "patient-123", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" },
+                practitioner: { id: "practitioner-123", first_name: "Alex", last_name: "Shera", ahpra_number: "MED0001234567" },
+                practitioner_id: "practitioner-123",
+                appointment_type_id: "type-1",
+                appointment_date: "2026-07-03",
+                start_time_local: "09:00:00",
+                duration_minutes: 15,
+                reason: "Follow-up"
+              };
+              todayAppointments = [appt];
+              openBookingModalForEdit(appt);
+            }"""
+        )
+        diary_page.click("#btn-booking-delete")
+        diary_page.fill("#booking-cancel-reason", "Patient had transport issues")
+        diary_page.click("#btn-booking-delete")
+        diary_page.wait_for_selector(".identity-confirm-overlay", state="visible", timeout=5000)
+        diary_page.click(".identity-confirm-overlay button:has-text('Confirm & Save')")
+        diary_page.wait_for_timeout(1000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_confirms, "Expected signed delete-confirm request"
+    assert captured_confirms[0]["confirmed"] is True
+    assert captured_raw_deletes == []
+
+
 def test_bernie_tool_intent_clarification_has_no_confirm_or_stale_no_slot(diary_page):
     """Incomplete tool-intent responses render as clarification, not stale booking/no-slot UI."""
     import urllib.parse

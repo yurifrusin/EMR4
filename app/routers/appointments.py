@@ -32,6 +32,7 @@ from app.schemas.appointments import (
     AppointmentStatusProposalConfirmationIn, AppointmentConfirmStatusProposalOut,
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
+    AppointmentDeleteProposalConfirmationIn, AppointmentConfirmDeleteProposalOut,
     AppointmentAuditLogOut,
     BernieToolIntentIn, BernieToolIntentOut,
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
@@ -66,6 +67,7 @@ from app.services.bernie import (
     mint_signed_confirmation_evidence,
     verify_signed_confirmation_evidence,
     SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
+    SIGNED_DELETE_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
     check_staleness,
@@ -159,10 +161,17 @@ _STATUS_CONFIRM_BASE_EVIDENCE = [
     "source_current_appointment_state",
 ]
 
+_DELETE_CONFIRM_BASE_EVIDENCE = [
+    "diary_confirm_delete_proposal",
+    "source_delete_proposal",
+    "source_current_appointment_state",
+]
+
 _BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE = [
     "bernie_signed_confirmation_evidence_verified",
     "staff_signed_confirmation_evidence_verified",
     "status_signed_confirmation_evidence_verified",
+    "delete_signed_confirmation_evidence_verified",
     "legacy_unsigned_confirmation_compat",
 ]
 
@@ -171,6 +180,7 @@ BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
     *_STAFF_CONFIRM_CREATE_BASE_EVIDENCE,
     *_BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE,
     *_STATUS_CONFIRM_BASE_EVIDENCE,
+    *_DELETE_CONFIRM_BASE_EVIDENCE,
     *_BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE,
     *BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES.values(),
 ]
@@ -3995,13 +4005,137 @@ def update_appointment_status(
     )
 
 
-@router.delete("/{appointment_id}", status_code=status.HTTP_204_NO_CONTENT)
-def cancel_appointment(
+def _appointment_delete_command_payload(command: AppointmentDeleteCommand) -> dict[str, object]:
+    return {
+        "appointment_id": str(command.appointment_id),
+        "clears_waiting_area": command.clears_waiting_area,
+        "cancellation_reason": command.cancellation_reason,
+    }
+
+
+def _appointment_delete_state_payload(appt: Appointment) -> dict[str, object]:
+    return {
+        "appointment_id": str(appt.id),
+        "status": appt.status.value,
+        "waiting_area_id": _uuid_or_none(appt.waiting_area_id),
+        "cancellation_reason": appt.cancellation_reason,
+    }
+
+
+def _compute_delete_proposal_freshness_id(
+    *,
+    command: AppointmentDeleteCommand,
+    current_state: dict[str, object],
+) -> str:
+    payload = {
+        "kind": "delete_proposal_v1",
+        "current_state": current_state,
+        "command": _appointment_delete_command_payload(command),
+    }
+    material = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str)
+    return hashlib.sha256(material.encode("utf-8")).hexdigest()[:32]
+
+
+def _delete_signed_confirmation_payload(
+    *,
+    practice_id: uuid.UUID,
+    staff_user_id: uuid.UUID,
+    command: AppointmentDeleteCommand,
+    current_state: dict[str, object],
+    delete_proposal_freshness_id: Optional[str],
+) -> dict[str, object]:
+    return {
+        "practice_id": str(practice_id),
+        "staff_user_id": str(staff_user_id),
+        "current_state": current_state,
+        "command": _appointment_delete_command_payload(command),
+        "delete_proposal_freshness_id": delete_proposal_freshness_id,
+    }
+
+
+_DELETE_CONFIRM_METADATA_FIELDS = {
+    "confirm_endpoint",
+    "confirm_payload",
+    "delete_proposal_freshness_id",
+    "signed_confirmation_evidence",
+    "signed_confirmation_evidence_required",
+}
+
+
+def _delete_proposal_evidence_payload(proposal: AppointmentDeleteProposalOut) -> dict[str, Any]:
+    return proposal.model_dump(mode="json", exclude=_DELETE_CONFIRM_METADATA_FIELDS)
+
+
+def _attach_delete_confirmation_evidence(
+    *,
+    proposal: AppointmentDeleteProposalOut,
+    appt: Appointment,
+    practice_id: uuid.UUID,
+    current_user: User,
+) -> AppointmentDeleteProposalOut:
+    if not proposal.safe:
+        return proposal
+
+    current_state = _appointment_delete_state_payload(appt)
+    delete_proposal_freshness_id = _compute_delete_proposal_freshness_id(
+        command=proposal.command,
+        current_state=current_state,
+    )
+    signed_payload = _delete_signed_confirmation_payload(
+        practice_id=practice_id,
+        staff_user_id=current_user.id,
+        command=proposal.command,
+        current_state=current_state,
+        delete_proposal_freshness_id=delete_proposal_freshness_id,
+    )
+    signed_confirmation_evidence = mint_signed_confirmation_evidence(
+        signed_payload,
+        evidence_purpose=SIGNED_DELETE_CONFIRMATION_EVIDENCE_PURPOSE,
+    )
+    proposal.confirm_endpoint = "/api/v1/appointments/proposals/delete-confirm"
+    proposal.delete_proposal_freshness_id = delete_proposal_freshness_id
+    proposal.signed_confirmation_evidence = signed_confirmation_evidence
+    proposal.signed_confirmation_evidence_required = True
+    proposal.confirm_payload = {
+        "confirmed": False,
+        "delete_proposal": _delete_proposal_evidence_payload(proposal),
+        "confirmed_warnings": [issue.code for issue in proposal.warnings],
+        "delete_proposal_freshness_id": delete_proposal_freshness_id,
+        "signed_confirmation_evidence": signed_confirmation_evidence,
+        "signed_confirmation_evidence_required": True,
+    }
+    return proposal
+
+
+def _block_delete_confirmation(
+    blocks: list[AppointmentProposalIssue],
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentConfirmDeleteProposalOut:
+    return AppointmentConfirmDeleteProposalOut(
+        safe=False,
+        requires_confirmation=True,
+        autonomy_tier="blocked",
+        summary="Cannot confirm delete proposal. See blocked issues.",
+        appointment=None,
+        warnings=warnings or [],
+        blocks=blocks,
+        audit_evidence=audit_evidence or [],
+    )
+
+
+def _confirm_delete_block(code: str, message: str) -> AppointmentProposalIssue:
+    return AppointmentProposalIssue(code=code, severity="blocked", message=message)
+
+
+def _apply_appointment_delete(
+    *,
     appointment_id: uuid.UUID,
-    body: Optional[AppointmentDeleteIn] = Body(default=None),
-    db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
-):
+    body: Optional[AppointmentDeleteIn],
+    db: Session,
+    current_user: User,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentOut:
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
     status_before_delete = appt.status
@@ -4019,8 +4153,134 @@ def cancel_appointment(
         status_after=AppointmentStatus.Cancelled,
         cancellation_reason=cancellation_reason,
         confirmed_warnings=body.confirmed_warnings if body else None,
+        audit_evidence=audit_evidence,
     )
     db.commit()
+    return _get_appointment(appointment_id, practice_id, db)
+
+
+@router.delete("/{appointment_id}", status_code=status.HTTP_204_NO_CONTENT)
+def cancel_appointment(
+    appointment_id: uuid.UUID,
+    body: Optional[AppointmentDeleteIn] = Body(default=None),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    _apply_appointment_delete(
+        appointment_id=appointment_id,
+        body=body,
+        db=db,
+        current_user=current_user,
+    )
+
+
+@router.post(
+    "/proposals/delete-confirm",
+    response_model=AppointmentConfirmDeleteProposalOut,
+)
+def confirm_delete_proposal_route(
+    body: AppointmentDeleteProposalConfirmationIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    audit_evidence = list(_DELETE_CONFIRM_BASE_EVIDENCE)
+    blocks: list[AppointmentProposalIssue] = []
+    proposal = body.delete_proposal
+    command = proposal.command
+
+    if body.confirmed is not True:
+        blocks.append(_confirm_delete_block(
+            "explicit_confirmation_required",
+            "confirmed=true is required before deleting this appointment.",
+        ))
+
+    if (
+        not proposal.safe
+        or proposal.autonomy_tier == "blocked"
+        or not proposal.requires_confirmation
+    ):
+        blocks.append(_confirm_delete_block(
+            "delete_proposal_not_safe",
+            "The delete proposal is not safe to confirm.",
+        ))
+
+    appt = _get_appointment(command.appointment_id, current_user.practice_id, db)
+    current_state = _appointment_delete_state_payload(appt)
+    submitted_freshness_id = (
+        body.delete_proposal_freshness_id
+        or proposal.delete_proposal_freshness_id
+    )
+    expected_freshness_id = _compute_delete_proposal_freshness_id(
+        command=command,
+        current_state=current_state,
+    )
+    signed_evidence_present = body.signed_confirmation_evidence is not None
+    if not (body.signed_confirmation_evidence_required or signed_evidence_present):
+        blocks.append(_confirm_delete_block(
+            "signed_evidence_required",
+            "Signed confirmation evidence is required before deleting this appointment.",
+        ))
+    else:
+        expected_signed_payload = _delete_signed_confirmation_payload(
+            practice_id=current_user.practice_id,
+            staff_user_id=current_user.id,
+            command=command,
+            current_state=current_state,
+            delete_proposal_freshness_id=expected_freshness_id,
+        )
+        signed_result = verify_signed_confirmation_evidence(
+            body.signed_confirmation_evidence,
+            expected_signed_payload,
+            expected_purpose=SIGNED_DELETE_CONFIRMATION_EVIDENCE_PURPOSE,
+        )
+        if signed_result.verified:
+            audit_evidence.append("delete_signed_confirmation_evidence_verified")
+        else:
+            blocks.append(_confirm_delete_block(signed_result.code, signed_result.detail))
+
+    if submitted_freshness_id != expected_freshness_id:
+        blocks.append(_confirm_delete_block(
+            "stale_delete_proposal_freshness_id",
+            "Confirmation blocked: delete proposal freshness id does not match current appointment state.",
+        ))
+
+    if command.clears_waiting_area != (appt.waiting_area_id is not None):
+        blocks.append(_confirm_delete_block(
+            "stale_delete_waiting_area_state",
+            "Confirmation blocked: the appointment waiting-area state has changed.",
+        ))
+
+    if blocks:
+        return _block_delete_confirmation(
+            blocks,
+            warnings=proposal.warnings,
+            audit_evidence=audit_evidence,
+        )
+
+    confirmed_warnings = [
+        *[issue.code for issue in proposal.warnings],
+        *body.confirmed_warnings,
+    ]
+    appointment = _apply_appointment_delete(
+        appointment_id=command.appointment_id,
+        body=AppointmentDeleteIn(
+            cancellation_reason=command.cancellation_reason,
+            confirmed_warnings=confirmed_warnings,
+        ),
+        db=db,
+        current_user=current_user,
+        audit_evidence=audit_evidence,
+    )
+    return AppointmentConfirmDeleteProposalOut(
+        safe=True,
+        requires_confirmation=False,
+        autonomy_tier="confirmed_write",
+        summary="Confirmed delete proposal and cancelled one appointment.",
+        appointment=appointment,
+        warnings=proposal.warnings,
+        blocks=[],
+        audit_evidence=audit_evidence,
+    )
 
 
 @router.post("/proposals/delete/{appointment_id}", response_model=AppointmentDeleteProposalOut)
@@ -4076,7 +4336,7 @@ def propose_delete_appointment(
 
     cancellation_reason = body.cancellation_reason if body else None
 
-    return AppointmentDeleteProposalOut(
+    proposal = AppointmentDeleteProposalOut(
         safe=safe,
         requires_confirmation=requires_confirmation,
         autonomy_tier=autonomy_tier,
@@ -4088,6 +4348,12 @@ def propose_delete_appointment(
         ),
         warnings=warnings,
         blocks=blocks,
+    )
+    return _attach_delete_confirmation_evidence(
+        proposal=proposal,
+        appt=appt,
+        practice_id=practice_id,
+        current_user=current_user,
     )
 
 
