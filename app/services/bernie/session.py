@@ -69,6 +69,11 @@ class BernieSessionEventType(str, Enum):
     refresh_requested = "refresh_requested"
     confirm_submitted = "confirm_submitted"
     new_session = "new_session"
+    interpretation_outcome = "interpretation_outcome"
+    context_outcome = "context_outcome"
+    slot_search_outcome = "slot_search_outcome"
+    proposal_outcome = "proposal_outcome"
+    confirmation_outcome = "confirmation_outcome"
 
 
 #: States the server advances out of by computing an outcome; clients cannot
@@ -150,6 +155,26 @@ SERVER_ADVANCE_TARGETS: dict[BernieSessionState, frozenset[BernieSessionState]] 
         BernieSessionState.proposal_preview,
         BernieSessionState.handed_off,
     }),
+}
+
+SERVER_OUTCOME_EVENT_TARGETS: dict[
+    BernieSessionState, dict[BernieSessionEventType, frozenset[BernieSessionState]]
+] = {
+    BernieSessionState.recognition: {
+        BernieSessionEventType.interpretation_outcome: SERVER_ADVANCE_TARGETS[BernieSessionState.recognition],
+    },
+    BernieSessionState.context_enrichment: {
+        BernieSessionEventType.context_outcome: SERVER_ADVANCE_TARGETS[BernieSessionState.context_enrichment],
+    },
+    BernieSessionState.slot_search: {
+        BernieSessionEventType.slot_search_outcome: SERVER_ADVANCE_TARGETS[BernieSessionState.slot_search],
+    },
+    BernieSessionState.candidate_selection: {
+        BernieSessionEventType.proposal_outcome: frozenset({BernieSessionState.proposal_preview}),
+    },
+    BernieSessionState.confirmation: {
+        BernieSessionEventType.confirmation_outcome: SERVER_ADVANCE_TARGETS[BernieSessionState.confirmation],
+    },
 }
 
 
@@ -315,6 +340,7 @@ __all__ = [
     "SessionTransitionValidation",
     "CLIENT_EVENT_TRANSITIONS",
     "SERVER_ADVANCE_TARGETS",
+    "SERVER_OUTCOME_EVENT_TARGETS",
     "TRANSIENT_STATES",
     "TERMINAL_STATES",
     "validate_session_event",

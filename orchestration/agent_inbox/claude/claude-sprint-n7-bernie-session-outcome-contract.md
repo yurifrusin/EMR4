@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | f46cb2f |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n7-bernie-session-outcome-contract --summary "Short plan summary"` |
@@ -90,5 +90,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+- None by Claude.
 - Verification run:
+- Claude headless plan attempt returned 429 session limit, resetting 1am Australia/Brisbane, before a plan packet was submitted.
+- Ariadne replaced this lane with local backend/session implementation and focused verification.
 - Remaining risks:
+- Retry Claude on a later sprint after quota reset if deeper backend review is needed.

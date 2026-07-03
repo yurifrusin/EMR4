@@ -830,6 +830,10 @@ class BernieCreateProposalConfirmationIn(BaseModel):
     # Legacy unsigned callers are accepted only through explicit compatibility.
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
     signed_confirmation_evidence_required: bool = False
+    # Optional N7 server-session binding. When present, it is included in the
+    # signed evidence payload and validated fail-closed against current
+    # server-owned Bernie session coordinates.
+    session_binding: Optional[dict[str, Any]] = None
 
 
 # ── Bernie server-owned session endpoint contract ───────────────────────────
@@ -858,6 +862,11 @@ BernieSessionEventTypeValue = Literal[
     "refresh_requested",
     "confirm_submitted",
     "new_session",
+    "interpretation_outcome",
+    "context_outcome",
+    "slot_search_outcome",
+    "proposal_outcome",
+    "confirmation_outcome",
 ]
 
 

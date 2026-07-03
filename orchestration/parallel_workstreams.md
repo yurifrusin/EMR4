@@ -279,7 +279,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated and verified locally; push/mirror/audit pending |
 | Product Goal | Make Bernie interpreter/proposal/candidate/confirmation outcomes first-class server-session events so N6's session bridge starts converging toward server-owned conversation state without raw transcript persistence |
 | Worker Shape | Claude backend/session contract plan if quota allows, Antigravity Diary outcome-render/state UX plan, Codex worker adversarial invariant plan, Ariadne orchestration/integration |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n7-bernie-session-outcome-contract.md` |
@@ -289,16 +289,25 @@ Integration notes:
 | Out Of Scope | Production code before plan approval, persisted DB table/migration, raw transcript/PHI event storage, GraphRAG/practice-knowledge wiring, auto-mode, broad API-spine rewrite, taskpane/Command Centre changes |
 | Verification | Plan packets first; later implementation must run focused backend session/evidence/confirm tests, Diary route-intercepted smoke checks if UI changes, node/py checks, frontend version checks if deployable assets change, and `git diff --check` |
 
-Launch notes:
+Integration notes:
 
-- N7 should keep the privacy posture from N6: event payloads may contain typed
-  outcome refs and compact non-PHI state coordinates, not raw staff text,
-  patient names, or broad transcript bodies.
-- The goal is not a persisted session table yet. The goal is to make the
-  process-local session model semantically useful enough that persistence later
-  is mostly storage plumbing rather than a conversation-model rewrite.
-- Contradictory Diary messages should be prevented by typed state/reason-code
-  rendering rules, not by accumulating ad hoc copy exceptions.
+- Claude remained capped by the five-hour session window, so Ariadne superseded
+  that lane after recording the 429 reset.
+- Antigravity was prompted twice through the project-scoped CLI but produced no
+  stdout, source-packet notes, plan packet, or worktree changes. Ariadne stood
+  the lane down because N7 did not require Diary asset changes.
+- Codex worker Boole produced a useful invariant plan but hit the Windows Store
+  `python` alias before it could submit. Ariadne recovered the plan into an
+  official Codex plan packet and implemented the accepted backend/session slice.
+- N7 adds server-owned outcome event types and process-local outcome append
+  semantics for interpreter/context/slot/proposal/confirmation milestones,
+  with revision/idempotency/PHI-key guardrails.
+- N7 also adds optional signed confirmation `session_binding`: existing signed
+  confirmation payloads remain compatible, but when a binding is supplied it is
+  included in the HMAC payload and validated fail-closed against the current
+  server-owned session coordinates before any write.
+- No persisted session table, migration, GraphRAG wiring, auto-mode, Diary asset
+  change, taskpane, Command Centre, or broad API rewrite was included.
 
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 

@@ -8,78 +8,64 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint N6: Diary Render From Bernie Session Endpoint |
-| Integrated through | Accepted Antigravity Diary render/refetch plan, accepted Codex/Lorentz UI invariant plan, Claude lane superseded by quota cap, Ariadne implementation and verification |
-| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
+| Batch | Sprint N7: Bernie Server Outcome Events And Confirmation Binding |
+| Integrated through | Claude lane superseded by quota cap, Antigravity stood down after no-artifact CLI attempts, Codex/Boole invariant plan recovered by Ariadne, and Ariadne backend/session implementation |
+| Status | Integrated and verified locally; push, mirror realign, and audit pending |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- The Diary Bernie panel now opportunistically loads the authenticated
-  server-owned active session from `/appointments/bernie/sessions/active` on
-  deployed/authenticated surfaces. Local review harnesses opt in with
-  `bernie_session=true` so existing smoke tests remain deterministic.
-- `New Session` now asks the server for a fresh session when server sessions are
-  enabled, while preserving the current client-side Bernie flow.
-- Staff instructions and clarification replies append PHI-minimised session
-  event metadata with `expected_revision`, `event_id`, and `idempotency_key`.
-  Raw staff text, patient names, and broad booking payloads are deliberately not
-  written into the N6 server-session event stream.
-- A 409 stale-session response now shows a compact Bernie session refresh banner
-  and disables confirmation until the session is refreshed.
-- The browser does not persist Bernie session snapshots, revisions, confirm
-  payloads, patient names, or raw staff instructions to `localStorage` or
-  `sessionStorage`.
-- Added focused diary smoke coverage for active-session loading, PHI-minimised
-  append payloads, stale-session confirmation blocking, and storage assertions.
-- Hardened adjacent Bernie UI state handling found during review: selected
-  appointment context survives diary re-renders, nested no-slot suggestions are
-  rendered, suggestion chips are not cleared by typing, and empty render calls
-  restore the composer rather than leaving stale content.
-- Updated Diary deploy assets to `diary.js?v=154` and `diary.css?v=129`.
-- No backend route/schema change, database table, GraphRAG wiring, auto-mode,
-  taskpane, Command Centre, or broad UI redesign was added.
+- Added server-owned Bernie outcome event types for interpretation, context,
+  slot-search, proposal, and confirmation milestones.
+- Added process-local `append_server_outcome_event()` semantics to the Bernie
+  session store: server outcomes append compact events, advance only through
+  allowed outcome targets, enforce expected revision/idempotency, and reject
+  PHI-heavy payload keys.
+- Added optional `session_binding` to Bernie confirmation bodies. Existing
+  signed confirmation payloads remain compatible; when a binding is supplied,
+  it is included in the HMAC payload and then validated against the current
+  server-owned session before any appointment write.
+- Session-bound confirmation now fails closed if the session id, owner, surface,
+  revision, candidate/proposal freshness ids, selected appointment coordinates,
+  stale flag, patient, or practitioner no longer match.
+- Added audit evidence `bernie_session_binding_verified` when session-bound
+  confirmation succeeds.
+- Expanded PHI-key guardrails for session events to reject debug/free-text/raw
+  transcript style payloads.
+- Added focused tests for server outcome append ordering, stale revision
+  rejection, idempotent replay/conflict handling, PHI guardrails, proposal
+  binding coordinates, successful session-bound signed confirmation, and
+  stale/mismatched session-binding rejection.
+- No Diary asset, backend persistence table, Alembic migration, GraphRAG wiring,
+  auto-mode, taskpane, Command Centre, or broad API rewrite was added.
 
 ## Verification
 
-- Full diary review harness passed:
-  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
 - Focused backend session/evidence/confirm regression suite passed:
   `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_session_routes.py tests\test_bernie_session_store.py tests\test_bernie_signed_confirmation_evidence.py tests\test_diary_confirm_gate.py -q`.
-- JavaScript syntax check passed: `node --check docs\diary\diary.js`.
-- Frontend asset version check passed locally; deployed Pages was still serving
-  older Diary assets before push, as expected.
+- Compile check passed:
+  `.\.venv\Scripts\python.exe -m py_compile app\services\bernie\session.py app\services\bernie\session_store.py app\schemas\appointments.py app\routers\appointments.py tests\test_bernie_session_store.py tests\test_bernie_signed_confirmation_evidence.py`.
+- JavaScript syntax check passed although no Diary assets changed:
+  `node --check docs\diary\diary.js`.
 - `git diff --check` passed.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N6;
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N7;
   previous full runs showed pre-existing/global failures outside these
-  diary-domain/session endpoint/evidence slices, and N6 touched only diary
-  frontend/runtime review harness code plus orchestration records.
+  diary-domain/session endpoint/evidence slices.
+- Full Diary smoke was not rerun because N7 did not change deployable Diary
+  assets; N6 already covered the session-refetch UI bridge.
 
 ## Recommended User Review
 
-After GitHub Pages serves the pushed assets, a short live Diary review is useful
-because N6 changes the visible Bernie panel and deployed frontend bundle.
-
-1. Hard refresh the live Diary/Office-dialog surface and confirm it loads
-   `diary.js?v=154` and `diary.css?v=129`.
-2. Open Bernie while authenticated and ask a simple appointment prompt. Expected:
-   the existing Bernie booking flow still reaches the correct interpreted
-   response without extra stale transcript content.
-3. Click `New Session`. Expected: Bernie clears the current local panel state
-   and starts cleanly.
-4. If practical, test a selected appointment action such as changing a booking
-   length. Expected: the selected appointment context is not lost after diary
-   refresh/re-render.
-5. If a no-slot response appears, try typing a follow-up without clicking a
-   suggestion. Expected: the visible no-slot suggestion chips remain accessible
-   until the next Bernie turn is submitted.
-6. Stale-session conflict forcing does not need manual review; the route-
-   intercepted smoke harness covers it.
+No required manual review before moving on. N7 is a backend/session contract
+slice with no visible Diary asset change and no database migration. The new
+session-binding path is optional until a later Diary sprint wires it into the
+normal confirm payload.
 
 ## Not Required Before Moving On
 
 - No persisted Bernie session table, Alembic migration, GraphRAG/vector store,
-  practice-knowledge route/UI wiring, or UI redesign was implemented.
+  practice-knowledge route/UI wiring, UI redesign, or frontend deployment was
+  implemented.
 - No auto-confirm or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was
   started.
@@ -92,12 +78,13 @@ because N6 changes the visible Bernie panel and deployed frontend bundle.
 
 - A later persistence sprint should add the real session/event table only after
   Yuri/Ariadne choose TTL, retention, cleanup, and transcript-storage policy.
-- A later session-authority sprint should add server-owned outcome events for
-  interpreter/proposal/confirmation results. N6 intentionally did not force raw
-  transcript rendering from the event tail because the current event endpoint is
-  PHI-minimised by design.
-- The signed confirmation evidence path should be bound to server session
-  coordinates once the server outcome model exists.
+- A later Diary sprint should pass `session_binding` from the live server
+  session into Bernie confirmation payloads and show session-stale conflicts
+  through the N6 banner path.
+- A later session-authority sprint should wire real interpreter/supervised-
+  booking route outcomes into `append_server_outcome_event()` so server session
+  state advances during normal Bernie turns rather than only through tests and
+  future adapter code.
 - The signed path remains additive; a later sprint can decide when to retire or
   further constrain `legacy_unsigned_confirmation_compat`.
 - Any future K1b route/UI retrieval integration must preserve the advisory-only
@@ -107,19 +94,28 @@ because N6 changes the visible Bernie panel and deployed frontend bundle.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Diary Render Tail Or Advisory Retrieval Wiring
+## Next Sprint Candidate - Wire Session Outcome Events Into Bernie Routes
 
 | Item | Value |
 |---|---|
-| Name | Server Outcome Events And Confirmation Binding, or K1b Advisory Retrieval Wiring |
+| Name | N8: Route-Level Outcome Event Wiring, or K1b Advisory Retrieval Wiring |
 | Status | Recommended, not launched |
 | Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for UI/session review if UI is included; Codex worker for backend invariants |
 
-N6 has connected the Diary panel to the process-local server session substrate
-without storing PHI-heavy transcripts. The next narrow slice can either add
-server-owned outcome events/session binding for interpreter/proposal/confirm
-results, or wire K1 advisory retrieval into Bernie route/UI responses while
-preserving the advisory-only boundary.
+N7 added server outcome event semantics and optional session-bound confirmation
+evidence. The next narrow session slice can wire actual Bernie interpret,
+supervised-booking, candidate/proposal, and confirm route outcomes into those
+server events; alternatively, K1b can wire advisory retrieval into Bernie
+responses while preserving the advisory-only boundary.
+
+## Previous Closeout - Sprint N6
+
+| Item | Value |
+|---|---|
+| Batch | Sprint N6: Diary Render From Bernie Session Endpoint |
+| Integrated through | Accepted Antigravity Diary render/refetch plan, accepted Codex/Lorentz UI invariant plan, Claude lane superseded by quota cap, Ariadne implementation and verification |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
+| Last updated | 2026-07-03 |
 
 ## Previous Closeout - Sprint N5
 

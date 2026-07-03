@@ -1,7 +1,7 @@
 import uuid
 import re
 from datetime import date as date_type, datetime, time, timedelta, timezone
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from fastapi import APIRouter, Body, Depends, HTTPException, Query, status
 from fastapi.responses import JSONResponse
@@ -82,6 +82,7 @@ from app.services.bernie import (
     BernieSessionEventType,
     BernieSessionRecord,
     InMemoryBernieSessionStore,
+    build_session_confirmation_binding,
 )
 from app.services.ai.audit_store import persist_access_ai_audit_events
 
@@ -4381,13 +4382,14 @@ def _bernie_signed_confirmation_payload(
     command: AppointmentCreateCommand,
     candidate_freshness_id: Optional[str],
     proposal_freshness_id: Optional[str],
+    session_binding: Optional[dict[str, Any]] = None,
 ) -> dict[str, object]:
     """Build the PHI-minimised payload covered by Bernie confirmation HMAC."""
 
     def _uuid_or_none(value: Optional[uuid.UUID]) -> Optional[str]:
         return str(value) if value is not None else None
 
-    return {
+    payload: dict[str, object] = {
         "practice_id": str(practice_id),
         "staff_user_id": str(staff_user_id),
         "session_id": turn_ref.session_id if turn_ref is not None else None,
@@ -4407,6 +4409,132 @@ def _bernie_signed_confirmation_payload(
         "candidate_freshness_id": candidate_freshness_id,
         "proposal_freshness_id": proposal_freshness_id,
     }
+    if session_binding is not None:
+        payload["session_binding"] = session_binding
+    return payload
+
+
+def _validate_bernie_session_confirmation_binding(
+    *,
+    session_binding: Optional[dict[str, Any]],
+    current_user: User,
+    candidate_freshness_id: Optional[str],
+    proposal_freshness_id: Optional[str],
+    selected_candidate: Optional[SlotCandidate],
+    command: Optional[AppointmentCreateCommand],
+) -> list[AppointmentProposalIssue]:
+    """Validate optional N7 session coordinates for confirm-grade writes."""
+
+    if session_binding is None:
+        return []
+    if not isinstance(session_binding, dict):
+        return [_confirm_create_block(
+            "session_binding_malformed",
+            "Session binding must be an object.",
+        )]
+
+    session_id = session_binding.get("session_id")
+    if not isinstance(session_id, str) or not session_id:
+        return [_confirm_create_block(
+            "session_binding_malformed",
+            "Session binding must include a session_id.",
+        )]
+    session = _BERNIE_SESSION_STORE.get_session(session_id)
+    if session is None:
+        return [_confirm_create_block(
+            "session_binding_session_not_found",
+            "The Bernie session bound to this confirmation was not found.",
+        )]
+
+    blocks: list[AppointmentProposalIssue] = []
+    expected = build_session_confirmation_binding(
+        session,
+        candidate_freshness_id=candidate_freshness_id,
+        proposal_freshness_id=proposal_freshness_id,
+        appointment_date=selected_candidate.appointment_date if selected_candidate else None,
+        start_time_local=(
+            selected_candidate.start_time_local.isoformat()
+            if selected_candidate is not None
+            else None
+        ),
+        duration_minutes=selected_candidate.duration_minutes if selected_candidate else None,
+    )
+
+    def _block(code: str, message: str) -> None:
+        blocks.append(_confirm_create_block(code, message))
+
+    for key in ("practice_id", "staff_user_id", "surface_id", "session_id", "session_revision"):
+        if session_binding.get(key) != expected.get(key):
+            _block(
+                f"session_binding_{key}_mismatch",
+                f"The Bernie session binding no longer matches {key}.",
+            )
+
+    if selected_candidate is not None:
+        for key in ("appointment_date", "start_time_local", "duration_minutes"):
+            if session_binding.get(key) != expected.get(key):
+                _block(
+                    f"session_binding_{key}_mismatch",
+                    f"The Bernie session binding no longer matches the selected appointment {key}.",
+                )
+
+    if command is not None:
+        if (
+            session.patient_id is not None
+            and command.patient_id is not None
+            and str(session.patient_id) != str(command.patient_id)
+        ):
+            _block(
+                "session_binding_patient_mismatch",
+                "The Bernie session patient no longer matches the confirmation.",
+            )
+        if (
+            session.practitioner_id is not None
+            and command.practitioner_id is not None
+            and str(session.practitioner_id) != str(command.practitioner_id)
+        ):
+            _block(
+                "session_binding_practitioner_mismatch",
+                "The Bernie session practitioner no longer matches the confirmation.",
+            )
+
+    if candidate_freshness_id is not None:
+        if session_binding.get("candidate_freshness_id") != candidate_freshness_id:
+            _block(
+                "session_binding_candidate_mismatch",
+                "The Bernie session binding no longer matches the selected candidate evidence.",
+            )
+        elif candidate_freshness_id not in session.candidate_freshness_ids:
+            _block(
+                "session_binding_candidate_stale",
+                "The selected candidate is no longer current in this Bernie session.",
+            )
+
+    if proposal_freshness_id is not None:
+        if session_binding.get("proposal_freshness_id") != proposal_freshness_id:
+            _block(
+                "session_binding_proposal_mismatch",
+                "The Bernie session binding no longer matches the proposal evidence.",
+            )
+        elif session.staged_proposal_freshness_id != proposal_freshness_id:
+            _block(
+                "session_binding_proposal_stale",
+                "The staged proposal is no longer current in this Bernie session.",
+            )
+
+    if session.stale_reason_code:
+        _block(
+            "session_binding_stale_session",
+            "The Bernie session has changed and must be refreshed before confirming.",
+        )
+
+    if str(session.practice_id) != str(current_user.practice_id) or str(session.user_id) != str(current_user.id):
+        _block(
+            "session_binding_owner_mismatch",
+            "The Bernie session belongs to a different practice or staff user.",
+        )
+
+    return blocks
 
 
 @router.post(
@@ -4496,6 +4624,7 @@ def confirm_bernie_create_proposal(
                 or selection.selected_candidate.candidate_freshness_id,
                 proposal_freshness_id=body.proposal_freshness_id
                 or selection.proposal_freshness_id,
+                session_binding=body.session_binding,
             )
             signed_result = verify_signed_confirmation_evidence(
                 body.signed_confirmation_evidence,
@@ -4507,6 +4636,26 @@ def confirm_bernie_create_proposal(
                 blocks.append(_confirm_create_block(signed_result.code, signed_result.detail))
     else:
         audit_evidence.append("legacy_unsigned_confirmation_compat")
+
+    if body.session_binding is not None:
+        binding_blocks = _validate_bernie_session_confirmation_binding(
+            session_binding=body.session_binding,
+            current_user=current_user,
+            candidate_freshness_id=body.candidate_freshness_id
+            or (
+                selection.selected_candidate.candidate_freshness_id
+                if selection.selected_candidate is not None
+                else None
+            ),
+            proposal_freshness_id=body.proposal_freshness_id
+            or selection.proposal_freshness_id,
+            selected_candidate=selection.selected_candidate,
+            command=create_proposal.command if create_proposal is not None else None,
+        )
+        if binding_blocks:
+            blocks.extend(binding_blocks)
+        elif "bernie_session_binding_verified" not in audit_evidence:
+            audit_evidence.append("bernie_session_binding_verified")
 
     # Only fires when the client explicitly echoes freshness ids or a turn_ref
     # (backward-compat: omitting these fields is tolerated for Sprint 104 clients).

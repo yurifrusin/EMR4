@@ -99,6 +99,7 @@ from app.services.bernie.schedule_explanations import (
 from app.services.bernie.session import (
     CLIENT_EVENT_TRANSITIONS,
     SERVER_ADVANCE_TARGETS,
+    SERVER_OUTCOME_EVENT_TARGETS,
     TERMINAL_STATES,
     TRANSIENT_STATES,
     BernieSessionEvent,
@@ -201,6 +202,7 @@ __all__ = [
     # session
     "CLIENT_EVENT_TRANSITIONS",
     "SERVER_ADVANCE_TARGETS",
+    "SERVER_OUTCOME_EVENT_TARGETS",
     "TERMINAL_STATES",
     "TRANSIENT_STATES",
     "BernieSessionEvent",

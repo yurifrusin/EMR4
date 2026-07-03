@@ -26,6 +26,7 @@ from app.services.bernie.session import (
     BernieSessionRecord,
     BernieSessionState,
     SERVER_ADVANCE_TARGETS,
+    SERVER_OUTCOME_EVENT_TARGETS,
     validate_session_event,
 )
 
@@ -33,17 +34,22 @@ from app.services.bernie.session import (
 PHI_PAYLOAD_KEYWORDS = frozenset({
     "address",
     "chat_transcript",
+    "debug",
     "dob",
+    "free_text",
     "full_patient_name",
     "ihi",
     "instruction_text",
     "medicare",
     "medicare_number",
+    "patient_dob",
     "patient_label",
     "patient_name",
     "phone",
     "raw_instruction",
+    "raw_transcript",
     "transcript",
+    "utterance",
 })
 
 
@@ -297,6 +303,117 @@ class InMemoryBernieSessionStore:
         }, deep=True)
         self._sessions[session_id] = updated
         return BernieSessionEventResult(accepted=True, session=updated.model_copy(deep=True))
+
+    def append_server_outcome_event(
+        self,
+        *,
+        session_id: str,
+        event_type: BernieSessionEventType,
+        target_state: BernieSessionState,
+        expected_revision: Optional[int] = None,
+        event_id: Optional[str] = None,
+        idempotency_key: Optional[str] = None,
+        payload: Optional[dict[str, Any]] = None,
+        occurred_at: Optional[datetime] = None,
+    ) -> BernieSessionEventResult:
+        """Append a server-computed outcome event and advance semantic state.
+
+        This is the server-side counterpart to ``append_client_event``. It is
+        still process-local and PHI-minimised, but it gives interpreter,
+        slot-search, proposal, and confirmation outcomes durable session
+        coordinates before a real session table exists.
+        """
+        session = self._sessions.get(session_id)
+        if session is None:
+            return self._reject(
+                BernieSessionEventRejectionCode.session_not_found,
+                "Bernie session was not found.",
+            )
+
+        event_payload = payload or {}
+        phi_key = _contains_phi_payload_key(event_payload)
+        if phi_key is not None:
+            return self._reject(
+                BernieSessionEventRejectionCode.phi_payload_not_allowed,
+                f"Event payload key {phi_key!r} is not allowed in Bernie session state.",
+            )
+
+        canonical = _canonical_payload({
+            "event_type": event_type.value,
+            "target_state": target_state.value,
+            "expected_revision": expected_revision,
+            "payload": event_payload,
+        })
+        identity = idempotency_key or event_id
+        if identity:
+            idem_key = (session_id, identity)
+            prior_payload = self._idempotency_payloads.get(idem_key)
+            if prior_payload is not None:
+                if prior_payload == canonical:
+                    return self._idempotency_results[idem_key]
+                return self._reject(
+                    BernieSessionEventRejectionCode.idempotency_conflict,
+                    "Event idempotency key was replayed with a different payload.",
+                )
+
+        if expected_revision is not None:
+            if expected_revision < session.revision:
+                return self._reject(
+                    BernieSessionEventRejectionCode.stale_session_revision,
+                    "Bernie session outcome was based on an older session revision.",
+                )
+            if expected_revision > session.revision:
+                return self._reject(
+                    BernieSessionEventRejectionCode.future_session_revision,
+                    "Bernie session outcome skipped the current session revision.",
+                )
+
+        allowed_targets = SERVER_OUTCOME_EVENT_TARGETS.get(session.state, {}).get(event_type)
+        if allowed_targets is None or target_state not in allowed_targets:
+            return self._reject(
+                BernieSessionEventRejectionCode.event_not_allowed_in_state,
+                (
+                    f"Server outcome {event_type.value} cannot advance "
+                    f"{session.state.value} to {target_state.value}."
+                ),
+            )
+
+        event = BernieSessionEvent(
+            event_id=event_id or uuid.uuid4().hex,
+            session_id=session_id,
+            event_type=event_type,
+            turn_index=session.turn_count,
+            occurred_at=occurred_at or _utcnow(),
+            expected_revision=expected_revision,
+            idempotency_key=idempotency_key,
+            payload=deepcopy(event_payload),
+        )
+        updated = session.model_copy(update={
+            "state": target_state,
+            "revision": session.revision + 1,
+            "events": [*session.events, event],
+            "last_event_id": event.event_id,
+            "updated_at": event.occurred_at,
+        }, deep=True)
+        if event_type is BernieSessionEventType.proposal_outcome:
+            candidate_id = event.payload.get("candidate_freshness_id")
+            proposal_id = event.payload.get("proposal_freshness_id")
+            if isinstance(candidate_id, str):
+                updated = updated.model_copy(update={"candidate_freshness_ids": [candidate_id]}, deep=True)
+            if isinstance(proposal_id, str):
+                updated = updated.model_copy(update={"staged_proposal_freshness_id": proposal_id}, deep=True)
+
+        self._sessions[session_id] = updated
+        result = BernieSessionEventResult(
+            accepted=True,
+            session=updated.model_copy(deep=True),
+            event=event,
+        )
+        if identity:
+            idem_key = (session_id, identity)
+            self._idempotency_payloads[idem_key] = canonical
+            self._idempotency_results[idem_key] = result
+        return result
 
     @staticmethod
     def _reject(

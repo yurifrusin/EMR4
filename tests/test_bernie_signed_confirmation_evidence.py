@@ -6,11 +6,15 @@ compatibility lane.
 """
 
 from copy import deepcopy
+from datetime import date
 
 from app.models.appointments import Appointment, AppointmentAuditLog
+from app.routers.appointments import _BERNIE_SESSION_STORE
 from app.services.bernie import (
+    BernieSessionState,
     SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_CONFIRMATION_EVIDENCE_VERSION,
+    build_session_confirmation_binding,
     mint_signed_confirmation_evidence,
     verify_signed_confirmation_evidence,
 )
@@ -152,4 +156,88 @@ def test_valid_signature_for_wrong_payload_blocks_without_mutation(
     data = resp.json()
     assert data["safe"] is False
     assert any(block["code"] == "signed_evidence_mismatch" for block in data["blocks"])
+    assert _row_counts(db) == before
+
+
+def _bind_payload_to_server_session(payload: dict, gp_user, *, revision: int = 7) -> dict:
+    selection = payload["selection_proposal"]
+    candidate = selection["selected_candidate"]
+    command = selection["create_proposal"]["command"]
+    candidate_id = payload["candidate_freshness_id"] or candidate["candidate_freshness_id"]
+    proposal_id = payload["proposal_freshness_id"] or selection["proposal_freshness_id"]
+
+    session = _BERNIE_SESSION_STORE.create_session(
+        practice_id=gp_user.practice_id,
+        user_id=gp_user.id,
+        surface_id=f"diary-test-{candidate_id[:8]}",
+        request_reference_date=gp_user.created_at.date() if getattr(gp_user, "created_at", None) else None,
+    )
+    session = session.model_copy(update={
+        "state": BernieSessionState.proposal_preview,
+        "revision": revision,
+        "patient_id": command["patient_id"],
+        "practitioner_id": command["practitioner_id"],
+        "candidate_freshness_ids": [candidate_id],
+        "staged_proposal_freshness_id": proposal_id,
+    })
+    _BERNIE_SESSION_STORE._sessions[session.session_id] = session
+
+    binding = build_session_confirmation_binding(
+        session,
+        candidate_freshness_id=candidate_id,
+        proposal_freshness_id=proposal_id,
+        appointment_date=date.fromisoformat(candidate["appointment_date"]),
+        start_time_local=candidate["start_time_local"],
+        duration_minutes=candidate["duration_minutes"],
+    )
+    signed_payload = deepcopy(payload["signed_confirmation_evidence"]["payload"])
+    signed_payload["session_binding"] = binding
+    payload["session_binding"] = binding
+    payload["signed_confirmation_evidence"] = mint_signed_confirmation_evidence(signed_payload)
+    return payload
+
+
+def test_session_bound_signed_confirmation_success_writes_and_audits_binding(
+    client, db, gp_user, practitioner, patient, schedule
+):
+    token = make_token(gp_user)
+    payload = _bind_payload_to_server_session(
+        _signed_confirm_payload(client, token, practitioner, patient),
+        gp_user,
+    )
+    before = _row_counts(db)
+
+    resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token))
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert "bernie_signed_confirmation_evidence_verified" in data["audit_evidence"]
+    assert "bernie_session_binding_verified" in data["audit_evidence"]
+    assert _row_counts(db) == (before[0] + 1, before[1] + 1)
+
+
+def test_signed_session_binding_mismatch_blocks_without_mutation(
+    client, db, gp_user, practitioner, patient, schedule
+):
+    token = make_token(gp_user)
+    payload = _bind_payload_to_server_session(
+        _signed_confirm_payload(client, token, practitioner, patient),
+        gp_user,
+        revision=4,
+    )
+    tampered_binding = deepcopy(payload["session_binding"])
+    tampered_binding["session_revision"] = 3
+    signed_payload = deepcopy(payload["signed_confirmation_evidence"]["payload"])
+    signed_payload["session_binding"] = tampered_binding
+    payload["session_binding"] = tampered_binding
+    payload["signed_confirmation_evidence"] = mint_signed_confirmation_evidence(signed_payload)
+    before = _row_counts(db)
+
+    resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token))
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert any(block["code"] == "session_binding_session_revision_mismatch" for block in data["blocks"])
     assert _row_counts(db) == before

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | f46cb2f |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-n7-session-outcome-invariants --summary "Short plan summary"` |
@@ -90,5 +90,10 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+- `orchestration/agent_inbox/codex/plan-codex-codex-sprint-n7-session-outcome-invariants.md`
+- Ariadne implementation files listed in the Sprint N7 closeout.
 - Verification run:
+- Codex worker Boole produced a useful paste-ready invariant plan but hit a hard protocol stop because `python` resolved to the Windows Store alias. Ariadne recovered the plan into the official packet with `.venv\Scripts\python.exe scripts\agent_worktrees.py plan ...`.
+- Ariadne implemented the accepted invariant subset and ran focused backend/session/evidence checks.
 - Remaining risks:
+- This is still process-local session authority, not a persisted session table. Diary UI render-from-outcome state is intentionally deferred because no Diary assets changed in N7.
