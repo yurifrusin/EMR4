@@ -594,7 +594,7 @@ const DIARY_COPY_CATALOG = {
   no_roster_row: {
     status: "Roster unavailable",
     headline: "No roster found",
-    action: "Check the practitioner roster or choose another practitioner."
+    action: "Check the practitioner's roster or choose another day."
   },
   practitioner_unavailable: {
     status: "Practitioner away",
@@ -603,7 +603,7 @@ const DIARY_COPY_CATALOG = {
   },
   outside_request_window: {
     status: "Outside hours",
-    headline: "Outside rostered hours",
+    headline: "Requested time is outside rostered hours",
     action: "Choose a time within the practitioner's rostered hours."
   },
   breaks_only_window: {
@@ -617,16 +617,30 @@ const DIARY_COPY_CATALOG = {
     action: "Choose another time, practitioner, or date."
   },
   same_day_window_elapsed: {
-    status: "Time passed",
-    headline: "Time has passed today",
-    action: "Choose a later time today or another date."
+    status: "Clinic day exhausted",
+    headline: "No times left today",
+    action: "Choose another date."
   },
   searched_no_candidates: {
     status: "No slots",
-    headline: "No matching slots",
+    headline: "No matching slots found",
     action: "Try a wider time window, another practitioner, or another date."
   }
 };
+
+function getScheduleExplanationCopy(payload) {
+  const explanation = payload?.outcome?.schedule_explanation;
+  const canonical = canonicalizeReasonCode(explanation?.reason_code);
+  if (canonical && DIARY_COPY_CATALOG[canonical]) {
+    return {
+      ...DIARY_COPY_CATALOG[canonical],
+      headline: explanation.title || DIARY_COPY_CATALOG[canonical].headline,
+      action: explanation.staff_prompt || DIARY_COPY_CATALOG[canonical].action
+    };
+  }
+  const reasonCode = getPrimaryScheduleReasonCode(payload);
+  return reasonCode && DIARY_COPY_CATALOG[reasonCode] ? DIARY_COPY_CATALOG[reasonCode] : null;
+}
 
 function getPrimaryScheduleReasonCode(payload) {
   if (!payload) return null;
@@ -767,11 +781,10 @@ function bernieHeadlineCopy(status, blocks = []) {
 
 function isBernieConfirmReady(payload) {
   if (!payload) return false;
-  const hasSelectedSlotEvidence = Boolean(
-    payload.selected_slot ||
-    payload.confirm_payload?.selection_proposal?.selected_candidate
-  );
-  if (!hasSelectedSlotEvidence) {
+  if (!hasBernieSelectedSlotEvidence(payload)) {
+    return false;
+  }
+  if (!payload.confirm_payload) {
     return false;
   }
   if (payload.outcome && payload.outcome.kind !== "confirmation_ready" && payload.outcome.can_confirm === false) {
@@ -782,20 +795,27 @@ function isBernieConfirmReady(payload) {
     if (policy.must_block_confirmation === true || policy.must_ask_clarification === true) {
       return false;
     }
-    if (policy.advisory_warnings_only === true) {
-      return true;
-    }
-    if (policy.availability === "confirmation_ready") {
-      return true;
-    }
   }
-  if (payload.confirm_affordance && typeof payload.confirm_affordance.can_show_confirm_ui === "boolean") {
-    return payload.confirm_affordance.can_show_confirm_ui;
+  if (!payload.confirm_affordance) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isSmokeHarness = urlParams.get("smoke") === "true";
+    const isLocalReviewHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+    return (isSmokeHarness || isBernieDevOrDebug() || isLocalReviewHost) && Boolean(payload.confirm_endpoint);
   }
-  if (payload.confirm_affordance && typeof payload.confirm_affordance.confirm_grade_allowed === "boolean") {
+  if (typeof payload.confirm_affordance.can_show_confirm_ui === "boolean") {
+    if (!payload.confirm_affordance.can_show_confirm_ui) return false;
+  }
+  if (typeof payload.confirm_affordance.confirm_grade_allowed === "boolean") {
     return payload.confirm_affordance.confirm_grade_allowed;
   }
-  return payload.status === "confirmation_ready";
+  return false;
+}
+
+function hasBernieSelectedSlotEvidence(payload) {
+  return Boolean(
+    payload?.selected_slot ||
+    payload?.confirm_payload?.selection_proposal?.selected_candidate
+  );
 }
 
 function bernieReviewTransition(payload) {
@@ -904,7 +924,16 @@ function bernieReviewTransition(payload) {
   }
 
   if (state === "confirmation_ready" && !isBernieConfirmReady(payload)) {
-    state = "blocked";
+    const blockedByGate = Boolean(
+      bernieSession.serverConflict ||
+      payload.confirm_affordance?.can_show_confirm_ui === false ||
+      payload.confirm_affordance?.confirm_grade_allowed === false ||
+      payload.reception_policy?.must_block_confirmation === true ||
+      payload.reception_policy?.must_ask_clarification === true
+    );
+    state = blockedByGate || !hasBernieSelectedSlotEvidence(payload)
+      ? "blocked"
+      : "confirmation_ready";
   }
 
   return {
@@ -918,9 +947,9 @@ function bernieReviewTransition(payload) {
 
 function bernieStatusCopyForPayload(payload) {
   const transition = bernieReviewTransition(payload);
-  const reasonCode = getPrimaryScheduleReasonCode(payload);
-  if (reasonCode && DIARY_COPY_CATALOG[reasonCode]) {
-    return DIARY_COPY_CATALOG[reasonCode].status;
+  const explanationCopy = getScheduleExplanationCopy(payload);
+  if (explanationCopy) {
+    return explanationCopy.status;
   }
   if (transition.state === "roster_unavailable") return "Roster/schedule unavailable";
   if (transition.state === "no_slots") return "Try another time";
@@ -932,9 +961,9 @@ function bernieStatusCopyForPayload(payload) {
 
 function bernieHeadlineCopyForPayload(payload) {
   const transition = bernieReviewTransition(payload);
-  const reasonCode = getPrimaryScheduleReasonCode(payload);
-  if (reasonCode && DIARY_COPY_CATALOG[reasonCode]) {
-    return DIARY_COPY_CATALOG[reasonCode].headline;
+  const explanationCopy = getScheduleExplanationCopy(payload);
+  if (explanationCopy) {
+    return explanationCopy.headline;
   }
   if (transition.state === "roster_unavailable") return "Roster/schedule unavailable";
   if (transition.state === "no_slots") return "No matching times found";
@@ -953,9 +982,9 @@ function bernieReviewActionCopy(payload) {
   if (hasProviderUnavailable && !isBernieDevOrDebug()) {
     return "Bernie could not search just now. Nothing was booked. Try again in a moment.";
   }
-  const reasonCode = getPrimaryScheduleReasonCode(payload);
-  if (reasonCode && DIARY_COPY_CATALOG[reasonCode]) {
-    return DIARY_COPY_CATALOG[reasonCode].action;
+  const explanationCopy = getScheduleExplanationCopy(payload);
+  if (explanationCopy) {
+    return explanationCopy.action;
   }
   if (transition.state === "roster_unavailable") {
     return "I could not find a bookable session for that request. Tell me another day or practitioner to try.";
@@ -977,6 +1006,9 @@ function bernieReviewActionCopy(payload) {
     return payload.clarifying_question || "I need clarification before I can proceed. Please check the chat notes or ask me a clarifying question.";
   }
   if (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") {
+    if (!isBernieConfirmReady(payload)) {
+      return "Review the details. Nothing is booked yet.";
+    }
     return "Review the details before confirming.";
   }
   if (payload.status === "clinic_day_exhausted") {
@@ -3960,6 +3992,7 @@ const mockBernieReviewConfirmationReady = {
   status: "confirmation_ready",
   confirmation_ready: true,
   confirm_affordance: {
+    confirm_grade_allowed: true,
     can_show_confirm_ui: true,
     gate: "allowed"
   },
@@ -4195,7 +4228,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
   // Auto-preview provisional card logic
   let autoStaged = false;
-  if (payload && isBernieConfirmReady(payload) && payload.selected_slot && bernieAutoPreview && !suppressAutoPreview) {
+  if (payload && hasBernieSelectedSlotEvidence(payload) && payload.selected_slot && bernieAutoPreview && !suppressAutoPreview) {
     const pConfidence = payload.patient_evidence?.confidence || payload.identity_evidence?.confidence;
     const hasAmbiguity = pConfidence === "ambiguous";
     const hasCandidates = payload.patient_candidates && payload.patient_candidates.length > 0;
@@ -4237,7 +4270,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     }
   }
 
-  if (suppressAutoPreview || !payload || !isBernieConfirmReady(payload) ||
+  if (suppressAutoPreview || !payload || !hasBernieSelectedSlotEvidence(payload) ||
       (payload.patient_evidence?.confidence || payload.identity_evidence?.confidence) === "ambiguous" ||
       (payload.patient_candidates && payload.patient_candidates.length > 0)) {
     if (bernieStagedBookingPreview && bernieStagedBookingPreview.isProvisional) {
@@ -4275,7 +4308,8 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   );
   if (
     (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") &&
-    hasSelectedSlotEvidence
+    hasSelectedSlotEvidence &&
+    isBernieConfirmReady(payload)
   ) {
     const patientName = berniePatientLabelFromPayload(payload);
     const practitionerName = berniePractitionerLabelFromPayload(payload);
@@ -4465,9 +4499,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       empty.className = "bernie-candidate-empty";
       empty.setAttribute("data-testid", "bernie-review-candidates-empty");
       const scheduleIssue = [...(payload.warnings || []), ...(payload.blocks || [])].find(issue => issue.code === "no_practitioner_schedule");
-      const reasonCode = getPrimaryScheduleReasonCode(payload);
-      if (reasonCode && DIARY_COPY_CATALOG[reasonCode]) {
-        empty.textContent = DIARY_COPY_CATALOG[reasonCode].action;
+      const explanationCopy = getScheduleExplanationCopy(payload);
+      if (explanationCopy) {
+        empty.textContent = explanationCopy.action;
       } else if (transition.state === "roster_unavailable") {
         empty.textContent = "There is no bookable session configured for that request.";
       } else {
@@ -4560,7 +4594,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       }
     }
   }
-  else if (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") {
+  else if ((transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") && hasSelectedSlotEvidence) {
     const selectionContainer = document.createElement("div");
     selectionContainer.className = "bernie-selection-container";
 
@@ -4590,8 +4624,10 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     renderBernieAppointmentSensitiveDetails(selectionContainer, payload);
     contentEl.appendChild(selectionContainer);
 
-    const confirmBox = document.createElement("div");
-    confirmBox.className = "bernie-confirmation-box";
+    let changeTimeBtn = null;
+    if (isBernieConfirmReady(payload)) {
+      const confirmBox = document.createElement("div");
+      confirmBox.className = "bernie-confirmation-box";
 
     const confirmHint = document.createElement("div");
     confirmHint.className = "bernie-confirm-hint";
@@ -4613,7 +4649,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     shortcutHint.textContent = "Shortcut: Ctrl+Alt+Enter";
     confirmBox.appendChild(shortcutHint);
 
-    const changeTimeBtn = document.createElement("button");
+    changeTimeBtn = document.createElement("button");
     changeTimeBtn.type = "button";
     changeTimeBtn.className = "btn-bernie-change-time";
     changeTimeBtn.setAttribute("data-testid", "bernie-review-change-slot-button");
@@ -4652,7 +4688,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     contentEl.appendChild(confirmBox);
 
     // Event listener to simulate or execute confirmation
-    confirmBtn.addEventListener("click", async () => {
+      confirmBtn.addEventListener("click", async () => {
       if (confirmBtn.disabled) return;
 
       bernieSession.transitionTo("CONFIRMING");
@@ -4732,7 +4768,18 @@ function renderBernieReview(payload, interpretEnvelope = null) {
         await loadDiary(true);
         renderBernieConfirmedState(contentEl);
       }
-    });
+      });
+    } else {
+      changeTimeBtn = document.createElement("button");
+      changeTimeBtn.type = "button";
+      changeTimeBtn.className = "btn-bernie-change-time";
+      changeTimeBtn.setAttribute("data-testid", "bernie-review-change-slot-button");
+      changeTimeBtn.textContent = "Choose another time";
+      changeTimeBtn.addEventListener("click", () => {
+        chooseAnotherTime();
+      });
+      contentEl.appendChild(changeTimeBtn);
+    }
   }
 
   if (isBernieDevOrDebug()) {

@@ -28,6 +28,10 @@ from typing import Literal, Optional
 from pydantic import BaseModel, Field
 
 from app.services.diary.policy import BernieReceptionPolicyDecision
+from app.services.diary.schedule_explanations import (
+    get_schedule_copy,
+    parse_schedule_explanation_reason,
+)
 
 # Session-state string literals used in outcome maps. Kept as plain strings to
 # avoid a circular import with app.services.bernie (bernie/__init__ re-exports
@@ -97,6 +101,23 @@ OutcomeFamily = Literal[
     "blocked",
     "terminal",
 ]
+
+
+class BernieScheduleExplanationPayload(BaseModel):
+    """Display-only schedule explanation attached to an outcome.
+
+    This payload is intentionally non-authoritative. It may help clients render
+    clearer receptionist-facing copy, but it must not decide availability,
+    confirmation, freshness, or write payloads.
+    """
+
+    model_config = {"frozen": True}
+
+    reason_code: str
+    title: str
+    staff_prompt: str
+    basis: str = ""
+    authority: Literal["display_only"] = "display_only"
 
 _KIND_FAMILY: dict[BernieBookingOutcomeKind, OutcomeFamily] = {
     BernieBookingOutcomeKind.interpreted_ready: "proceed",
@@ -209,6 +230,24 @@ class BernieBookingOutcome(BaseModel):
     is_terminal: bool = False
     reason_codes: list[str] = Field(default_factory=list)
     basis: str = ""
+    schedule_explanation: BernieScheduleExplanationPayload | None = None
+
+
+def _build_schedule_explanation_payload(
+    policy: BernieReceptionPolicyDecision,
+) -> BernieScheduleExplanationPayload | None:
+    for code in [*policy.schedule_reason_codes, *policy.reason_codes]:
+        reason = parse_schedule_explanation_reason(code)
+        if reason is None:
+            continue
+        copy = get_schedule_copy(reason)
+        return BernieScheduleExplanationPayload(
+            reason_code=reason.value,
+            title=copy.title,
+            staff_prompt=copy.staff_prompt,
+            basis=f"Typed schedule reason: {reason.value}.",
+        )
+    return None
 
 
 def classify_booking_outcome(
@@ -299,6 +338,7 @@ def classify_booking_outcome(
         is_terminal=_KIND_IS_TERMINAL.get(kind, False),
         reason_codes=reason_codes,
         basis=basis,
+        schedule_explanation=_build_schedule_explanation_payload(policy),
     )
 
 
@@ -328,6 +368,7 @@ def assert_outcome_matches_state(
 __all__ = [
     "BernieBookingOutcome",
     "BernieBookingOutcomeKind",
+    "BernieScheduleExplanationPayload",
     "OutcomeFamily",
     "OUTCOME_SESSION_STATE",
     "assert_outcome_matches_state",

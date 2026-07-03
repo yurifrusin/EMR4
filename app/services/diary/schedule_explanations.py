@@ -69,7 +69,7 @@ DIARY_SCHEDULE_COPY_CATALOG: dict[DiaryScheduleExplanationReason, DiaryScheduleC
     DiaryScheduleExplanationReason.no_roster_row: DiaryScheduleCopy(
         reason_code=DiaryScheduleExplanationReason.no_roster_row,
         title="No roster found",
-        staff_prompt="Check the practitioner roster or choose another practitioner.",
+        staff_prompt="Check the practitioner's roster or choose another day.",
     ),
     DiaryScheduleExplanationReason.practitioner_unavailable: DiaryScheduleCopy(
         reason_code=DiaryScheduleExplanationReason.practitioner_unavailable,
@@ -78,7 +78,7 @@ DIARY_SCHEDULE_COPY_CATALOG: dict[DiaryScheduleExplanationReason, DiaryScheduleC
     ),
     DiaryScheduleExplanationReason.outside_request_window: DiaryScheduleCopy(
         reason_code=DiaryScheduleExplanationReason.outside_request_window,
-        title="Outside rostered hours",
+        title="Requested time is outside rostered hours",
         staff_prompt="Choose a time within the practitioner's rostered hours.",
     ),
     DiaryScheduleExplanationReason.breaks_only_window: DiaryScheduleCopy(
@@ -93,12 +93,12 @@ DIARY_SCHEDULE_COPY_CATALOG: dict[DiaryScheduleExplanationReason, DiaryScheduleC
     ),
     DiaryScheduleExplanationReason.same_day_window_elapsed: DiaryScheduleCopy(
         reason_code=DiaryScheduleExplanationReason.same_day_window_elapsed,
-        title="Time has passed today",
-        staff_prompt="Choose a later time today or another date.",
+        title="No times left today",
+        staff_prompt="Choose another date.",
     ),
     DiaryScheduleExplanationReason.searched_no_candidates: DiaryScheduleCopy(
         reason_code=DiaryScheduleExplanationReason.searched_no_candidates,
-        title="No matching slots",
+        title="No matching slots found",
         staff_prompt="Try a wider time window, another practitioner, or another date.",
     ),
 }

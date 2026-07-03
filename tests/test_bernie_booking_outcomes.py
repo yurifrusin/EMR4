@@ -151,6 +151,10 @@ def test_roster_unavailable_from_policy():
     assert outcome.family == "roster_gap"
     assert outcome.session_state == BernieSessionState.no_slot
     assert not outcome.can_confirm
+    assert outcome.schedule_explanation is not None
+    assert outcome.schedule_explanation.reason_code == "no_roster_row"
+    assert outcome.schedule_explanation.title == "No roster found"
+    assert outcome.schedule_explanation.authority == "display_only"
 
 
 def test_no_matching_times_from_searched_no_candidates():
@@ -159,6 +163,9 @@ def test_no_matching_times_from_searched_no_candidates():
     assert outcome.family == "no_availability"
     assert outcome.session_state == BernieSessionState.no_slot
     assert not outcome.can_confirm
+    assert outcome.schedule_explanation is not None
+    assert outcome.schedule_explanation.reason_code == "searched_no_candidates"
+    assert outcome.schedule_explanation.staff_prompt
 
 
 def test_clinic_day_exhausted_from_route_result():
@@ -269,6 +276,28 @@ def test_no_matching_times_requires_roster_present():
     outcome = classify_booking_outcome(policy)
     # roster_unavailable wins over search_ran_no_candidates (higher precedence)
     assert outcome.kind == BernieBookingOutcomeKind.roster_unavailable
+    assert outcome.schedule_explanation is not None
+    assert outcome.schedule_explanation.reason_code == "no_roster_row"
+
+
+def test_schedule_explanation_payload_is_display_only_not_confirm_authority():
+    policy = _clean_policy(
+        availability="search_ran_no_candidates",
+        search_ran_no_candidates=True,
+        reason_codes=["searched_no_candidates"],
+        schedule_reason_codes=["searched_no_candidates"],
+    )
+
+    outcome = classify_booking_outcome(
+        policy,
+        has_staged_proposal=True,
+        route_result="blocked",
+    )
+
+    assert outcome.kind == BernieBookingOutcomeKind.no_matching_times
+    assert outcome.schedule_explanation is not None
+    assert outcome.schedule_explanation.authority == "display_only"
+    assert outcome.can_confirm is False
 
 
 def test_roster_unavailable_dominates_generic_blocked_route_result():

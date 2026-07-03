@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 1d18961 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n12-rich-schedule-explanation-contract --summary "Short plan summary"` |
@@ -89,6 +89,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: None by Claude. Claude headless returned the session-limit
+  429 before producing a plan, so Ariadne superseded this lane.
+- Verification run: Ariadne completed and verified the accepted N12 slice from
+  Antigravity and Codex plans.
+- Remaining risks: Retry Claude after quota refresh if a deeper backend/domain
+  review is useful.

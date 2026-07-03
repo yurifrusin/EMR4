@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint N11 - the native diary/reception programme now keeps roster/schedule-unavailable, searched-zero-slot, advisory-only, clarification, and confirm-ready outcomes distinct across backend outcome classification, confirm affordance, and Diary rendering |
-| **Next recommended work** | Continue the bounded Diary reception domain foundation with richer schedule/roster explanation payloads and render-from-state/domain-module tail work before any broad GraphRAG, auto-mode, or root-to-branch API review; K1b advisory retrieval wiring remains useful but must stay advisory-only |
+| **Current active track** | Post-Sprint N12 - the native diary/reception programme now has display-only rich schedule explanations, preview-grade selected-slot rendering, confirm-grade evidence gating, and deterministic Diary copy for roster unavailable, outside-hours, clinic-day-exhausted, and true no-slot states |
+| **Next recommended work** | Sprint K1b advisory retrieval wiring: connect the typed practice-knowledge substrate into Bernie responses as explanation/suggestion support only, preserving that retrieval cannot set slot truth, policy truth, confirm affordance, freshness/audit evidence, or write payloads |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

@@ -759,6 +759,7 @@ class BernieBookingOutcomeOut(BaseModel):
     is_terminal: bool = False
     reason_codes: list[str] = Field(default_factory=list)
     basis: str = ""
+    schedule_explanation: Optional[dict[str, Any]] = None
 
 
 class BernieBookingInstructionInterpretOut(BaseModel):

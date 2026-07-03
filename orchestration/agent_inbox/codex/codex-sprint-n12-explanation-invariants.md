@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 1d18961 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-n12-explanation-invariants --summary "Short plan summary"` |
@@ -89,6 +89,11 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Plan/review coordination artifacts by the Codex worker.
+  Ariadne implemented the accepted invariant plan in backend outcome/schedule
+  tests and Diary smoke tests.
+- Verification run: Ariadne ran focused and broader Bernie backend suites, full
+  `review\test_diary_smoke.py`, Python compile checks, `node --check`, frontend
+  version check, and `git diff --check`.
+- Remaining risks: Schedule explanations remain display-only. Future K1b
+  retrieval wiring must preserve the same non-authority boundary.

@@ -8,6 +8,102 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint N12: Rich Schedule Explanation Payloads |
+| Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted, Codex/Zeno invariant plan accepted, and Ariadne backend/UI implementation |
+| Status | Integrated and verified locally; push/mirror/audit pending |
+| Last updated | 2026-07-04 |
+
+## What Changed
+
+- Backend booking outcomes now include an additive
+  `schedule_explanation` display-only payload with `reason_code`, `title`,
+  `staff_prompt`, `basis`, and `authority="display_only"` when a typed
+  schedule reason exists.
+- The schedule copy catalog was refined for receptionist-facing wording:
+  roster unavailable, outside requested hours, clinic-day exhausted, and true
+  no matching slots now remain distinct and less scripted.
+- Diary rendering now prefers `outcome.schedule_explanation` for copy before
+  falling back to reason-code catalogs, while keeping availability and confirm
+  authority driven by typed backend evidence.
+- Confirm-grade UI now requires selected-slot evidence, a confirm payload, and
+  backend confirm-affordance approval. A selected slot without confirm-grade
+  evidence can still render as preview-grade appointment details, but it cannot
+  show the confirm button or shortcut.
+- Auto-preview now keys off preview-grade selected-slot evidence rather than
+  confirm-grade evidence, preserving provisional diary previews without
+  weakening booking confirmation.
+- Local smoke/dev harnesses keep a localhost-only legacy confirm fallback for
+  old mocked confirm payloads. Live production Diary remains fail-closed without
+  backend confirm-affordance evidence.
+- `diary.js` was cache-busted from v157 to v158.
+- No persisted session table, Alembic migration, GraphRAG wiring, auto-mode,
+  taskpane, Command Centre, broad UI redesign, or broad API rewrite was added.
+
+## Verification
+
+- JavaScript syntax check passed:
+  `node --check docs\diary\diary.js`.
+- Compile check passed:
+  `.\.venv\Scripts\python.exe -m py_compile app\services\diary\outcomes.py app\services\diary\schedule_explanations.py app\schemas\appointments.py`.
+- Frontend asset version check passed:
+  `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
+- Focused backend outcome/schedule tests passed:
+  `.\.venv\Scripts\pytest.exe tests\test_bernie_booking_outcomes.py tests\test_diary_schedule_explanations.py -q`.
+- Broader adjacent Bernie backend suite passed:
+  `.\.venv\Scripts\pytest.exe tests\test_bernie_booking_outcomes.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_route_outcome_events.py tests\test_diary_confirm_gate.py tests\test_diary_schedule_explanations.py tests\test_bernie_context_frames.py -q`.
+- Full deterministic Diary smoke harness passed:
+  `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
+- `git diff --check` passed.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N12;
+  previous full runs showed pre-existing/global failures outside these
+  diary-domain/session endpoint/evidence slices.
+
+## Recommended User Review
+
+No required manual review before moving on. N12 changes the live Diary asset and
+backend Bernie outcome payload shape, but the relevant backend contracts, confirm
+gating, preview/confirm separation, and deterministic Diary rendering behaviours
+were verified locally. A later live-user Bernie behaviour review is useful once
+Pages serves v158, but it is not required to close N12.
+
+## Not Required Before Moving On
+
+- No persisted Bernie session table, Alembic migration, GraphRAG/vector store,
+  practice-knowledge route/UI wiring, UI redesign, or frontend deployment
+  beyond the Diary cache-bust was implemented.
+- No auto-confirm or limited Bernie auto-mode was implemented.
+- No broad root-to-branch API review or GraphQL/context-graph redesign was
+  started.
+
+## Known Follow-Up
+
+- K1b advisory retrieval wiring should preserve N12's boundary: retrieval and
+  rich explanations may improve Bernie wording and next suggestions, but must
+  not set availability, policy hard blocks, confirm affordance, freshness/audit
+  evidence, or write payloads.
+- A future Diary copy/voice sprint can move more message generation toward a
+  typed “Bernie voice” layer while keeping machine state deterministic.
+- A later persisted-session sprint should still choose TTL, cleanup,
+  transcript-storage, and concurrency policy before adding PHI-bearing tables.
+
+## Next Sprint Candidate - K1b Advisory Retrieval Wiring
+
+| Item | Value |
+|---|---|
+| Name | K1b: Wire Typed Practice Knowledge Into Bernie As Advisory Retrieval |
+| Status | Recommended, not launched |
+| Recommended agents | Codex/Ariadne orchestration; Claude if quota is available for backend/domain review; Antigravity for visible Diary UX; Codex worker for advisory-boundary invariants |
+
+N12 gives Bernie typed, display-only schedule explanations. The next narrow
+slice can wire the existing K1 typed practice-knowledge substrate into Bernie
+responses as advisory retrieval only, proving that retrieval can help Bernie
+explain and suggest without becoming slot truth, policy truth, or confirm
+authority.
+
+## Previous Closeout - Sprint N11
+
+| Item | Value |
+|---|---|
 | Batch | Sprint N11: Bernie Roster Outcome Explanations |
 | Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted, Codex/Banach invariant plan accepted, and Ariadne backend/UI implementation |
 | Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |

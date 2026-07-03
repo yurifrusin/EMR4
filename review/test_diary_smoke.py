@@ -384,19 +384,19 @@ def test_bernie_review_schedule_reason_codes(diary_page):
         {
             "param": "outside_hours",
             "expected_status": "Outside hours",
-            "expected_headline": "Outside rostered hours",
+            "expected_headline": "Requested time is outside rostered hours",
             "expected_action": "Choose a time within the practitioner's rostered hours."
         },
         {
             "param": "elapsed_same_day",
-            "expected_status": "Time passed",
-            "expected_headline": "Time has passed today",
-            "expected_action": "Choose a later time today or another date."
+            "expected_status": "Clinic day exhausted",
+            "expected_headline": "No times left today",
+            "expected_action": "Choose another date."
         },
         {
             "param": "searched_no_candidates",
             "expected_status": "No slots",
-            "expected_headline": "No matching slots",
+            "expected_headline": "No matching slots found",
             "expected_action": "Try a wider time window, another practitioner, or another date."
         }
     ]
@@ -5798,6 +5798,22 @@ def test_sprint103_bernie_auto_stages_best_candidate_in_ordinary_mode(diary_page
             "candidate_slots": [],
             "warning_summary": "No warnings.",
             "evidence_summary": "Ready.",
+            "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+            "confirm_payload": {
+                "confirmed": False,
+                "selection_proposal": {
+                    "selected_candidate": {
+                        "appointment_date": "2026-07-03",
+                        "start_time_local": "15:00:00",
+                        "duration_minutes": 15
+                    }
+                }
+            },
+            "confirm_affordance": {
+                "confirm_grade_allowed": True,
+                "can_show_confirm_ui": True,
+                "gate": "allowed"
+            },
             "warnings": [],
             "blocks": [],
             "identity_evidence": {
@@ -6525,7 +6541,66 @@ def test_bernie_outcome_reason_codes_drive_roster_copy(diary_page):
 
         assert status_text == "Roster unavailable"
         assert headline_text == "No roster found"
-        assert empty_text == "Check the practitioner roster or choose another practitioner."
+        assert empty_text == "Check the practitioner's roster or choose another day."
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_outcome_schedule_explanation_payload_drives_copy(diary_page):
+    """Typed display-only schedule explanation payload drives copy without issue fallbacks."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "blocked",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [],
+                warnings: [],
+                blocks: [],
+                outcome: {
+                  kind: "roster_unavailable",
+                  family: "roster_gap",
+                  session_state: "no_slot",
+                  requires_confirmation: false,
+                  can_confirm: false,
+                  is_terminal: false,
+                  reason_codes: [],
+                  basis: "No roster row exists.",
+                  schedule_explanation: {
+                    reason_code: "outside_request_window",
+                    title: "Requested time is outside rostered hours",
+                    staff_prompt: "Choose a time within the practitioner's rostered hours.",
+                    authority: "display_only"
+                  }
+                },
+                reception_policy: {
+                  availability: "roster_unavailable",
+                  roster_unavailable: true,
+                  can_offer_candidates: false,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
+        status_text = diary_page.locator("[data-testid='bernie-review-status']").text_content().strip()
+        headline_text = diary_page.locator("[data-testid='bernie-review-headline']").text_content().strip()
+        empty_text = diary_page.locator("[data-testid='bernie-review-candidates-empty']").text_content().strip()
+
+        assert status_text == "Outside hours"
+        assert headline_text == "Requested time is outside rostered hours"
+        assert empty_text == "Choose a time within the practitioner's rostered hours."
 
     finally:
         diary_page.goto(base_url + CHECKS["target"])
@@ -6776,6 +6851,18 @@ def test_bernie_reception_policy_advisory_warnings_only(diary_page):
                 candidate_slots: [],
                 warnings: [{ code: "existing_future_follow_up", message: "Patient has future booking." }],
                 blocks: [],
+                confirm_payload: {
+                  selection_proposal: {
+                    selected_candidate: {
+                      appointment_date: "2026-07-06",
+                      start_time_local: "10:00:00"
+                    }
+                  }
+                },
+                confirm_affordance: {
+                  can_show_confirm_ui: true,
+                  confirm_grade_allowed: true
+                },
                 reception_policy: {
                   availability: "search_ran_with_candidates",
                   must_ask_clarification: false,
@@ -6847,6 +6934,61 @@ def test_bernie_advisory_outcome_without_slot_does_not_become_blocked(diary_page
         assert status_text == "Ready to book"
         assert headline_text == "Ready to book this appointment"
         assert "Add the missing details" not in action_text
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_confirmation_ready_without_confirm_evidence_hides_confirm(diary_page):
+    """Friendly/status payloads cannot create a confirm affordance without backend evidence."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "confirmation_ready",
+                confirmation_ready: true,
+                selected_slot: {
+                  appointment_date: "2026-07-06",
+                  start_time_local: "10:00:00",
+                  duration_minutes: 15,
+                  practitioner_id: "e44d3200-9ef2-4ab8-912f-b4df4492bfd4",
+                  patient_id: "a33d3200-9ef2-4ab8-912f-b4df4492bfd4"
+                },
+                candidate_slots: [],
+                warnings: [],
+                blocks: [],
+                outcome: {
+                  kind: "confirmation_ready",
+                  family: "proceed",
+                  session_state: "proposal_preview",
+                  requires_confirmation: true,
+                  can_confirm: true,
+                  is_terminal: false,
+                  reason_codes: [],
+                  basis: "Display-only test"
+                },
+                reception_policy: {
+                  availability: "search_ran_with_candidates",
+                  must_ask_clarification: false,
+                  must_block_confirmation: false,
+                  advisory_warnings_only: false,
+                  can_offer_candidates: true,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
 
     finally:

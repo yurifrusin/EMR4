@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 1d18961 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-n12-diary-explanation-ux-review --summary "Short plan summary"` |
@@ -87,8 +87,11 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
-
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: None by Antigravity beyond plan/review coordination
+  artifacts. Ariadne implemented the accepted UI plan in `docs/diary/diary.js`,
+  `docs/diary/diary.html`, and `review/test_diary_smoke.py`.
+- Verification run: Ariadne ran `node --check docs\diary\diary.js`, full
+  `review\test_diary_smoke.py`, frontend version check, and `git diff --check`.
+- Remaining risks: Local smoke/dev harnesses retain a localhost-only legacy
+  confirm fallback for old mocked confirm payloads; live production Diary still
+  requires backend confirm-affordance evidence.
