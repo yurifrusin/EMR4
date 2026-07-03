@@ -263,6 +263,33 @@ class AppointmentUpdateProposalOut(BaseModel):
     patient_identity: Literal["linked", "provisional"]
 
 
+class BernieToolIntentIn(BaseModel):
+    """Raw Bernie reception-tool intake for non-booking diary actions.
+
+    This is intentionally a non-mutating proposal surface. Tool intents may
+    resolve to existing deterministic proposal contracts, but they never write
+    appointment state directly.
+    """
+    instruction: str = Field(min_length=1, max_length=1000)
+    reference_date: Optional[date] = None
+    context_frames: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class BernieToolIntentOut(BaseModel):
+    """Typed, non-mutating Bernie tool-intent response."""
+    intent: Literal["bernie_tool_intent"] = "bernie_tool_intent"
+    safe: bool
+    result: Literal["proposal_ready", "clarification_required", "blocked", "unsupported"]
+    tool_intent: Optional[Literal["extend_appointment"]] = None
+    autonomy_tier: Literal["proposal", "blocked", "execute_with_report"]
+    requires_confirmation: bool
+    summary: str
+    proposal: Optional[AppointmentUpdateProposalOut] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    source_attribution: dict[str, Any] = Field(default_factory=dict)
+
+
 class AppointmentStatusProposalIn(BaseModel):
     status: AppointmentStatus
     waiting_area_id: Optional[uuid.UUID] = None

@@ -8,59 +8,75 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint K1b: Advisory Retrieval Wiring |
-| Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted, Codex/Aristotle invariant plan accepted, and Ariadne backend/UI implementation |
+| Batch | Sprint V1: Bernie Reception Voice And Tool-Intent Routing |
+| Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted for V2, Codex invariant plan accepted, and Ariadne backend/frame implementation |
 | Status | Integrated and verified locally; push/mirror/audit pending |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- Bernie interpretation and supervised-booking reception-context builders now call the existing typed `practice_knowledge` retriever and append retrieved facts only as `BernieAdvisoryWarningFrame` records with `basis="practice_knowledge_retrieval"`.
-- Retrieved practice facts carry advisory-only payload invariants: `advisory_only`, `cannot_affect_slots`, `cannot_affect_policy`, and `cannot_affect_confirm`.
-- Retrieval is fail-closed: empty, malformed, or unavailable retrieval omits the frame and leaves deterministic diary/search/confirm behaviour unchanged.
-- The in-memory retriever now filters weekday-specific facts so a Saturday request does not inherit a Friday roster reference merely because the practitioner name matches.
-- Reception policy now treats advisory warnings as `advisory_warnings_only` only when no stronger slot-search state exists, so practice references cannot block candidate selection or confirmation-ready flows.
-- The Diary Bernie panel now renders retrieved practice facts in a separate "Practice reference" card with collapsible source/provenance, without adding candidate rows, no-slot rows, or confirm controls.
-- `diary.css` was cache-busted from v130 to v131 and `diary.js` from v158 to v159.
-- No Graph/vector store, persisted PHI/session table, Alembic migration, auto-mode, taskpane, Command Centre, broad UI redesign, or broad API rewrite was added.
+- Added a typed, non-mutating Bernie tool-intent proposal route:
+  `POST /api/v1/appointments/proposals/bernie/tool-intent`.
+- V1 supports the first non-booking diary skill: explicit appointment extension requests such as "extend Margaret Thompson's 3pm booking with Dr Shera to 30 minutes".
+- The route resolves one visible diary appointment from typed `context_frames`, then delegates to the existing deterministic `AppointmentUpdateProposalOut` contract. It never writes appointment state and never returns confirmation-grade evidence by itself.
+- The response carries source attribution for intent parsing, visible diary appointment context, proposal authority, and write authority, so Bernie voice/model text cannot masquerade as deterministic diary truth.
+- Unsupported tool intents, missing target durations, and ambiguous or missing appointment context fail closed as clarification/block states with no proposal.
+- Diary `buildBernieContextFrames()` now includes visible appointment ids on `diary_day_booking` frames, giving Bernie a native diary handle for future edit/extend workflows.
+- `diary.js` was cache-busted from v159 to v160.
+- Imported the Antigravity V1 UX plan and Codex V1 invariant plan. Antigravity's richer visible voice/proposal-card plan is intentionally deferred until V2 because V1 first needed the backend typed-intent contract.
+- No auto-mode, direct write path, GraphRAG retrieval change, persisted PHI/session table, Alembic migration, taskpane, Command Centre, or broad API rewrite was added.
 
 ## Verification
 
 - JavaScript syntax check passed: `node --check docs\diary\diary.js`.
-- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\routers\appointments.py app\services\practice_knowledge\retriever.py app\services\diary\policy.py`.
+- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py`.
 - Frontend asset version check passed: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
-- Practice-knowledge and advisory-boundary tests passed: `.\.venv\Scripts\pytest.exe tests\test_practice_knowledge_retrieval.py tests\test_practice_knowledge_advisory_boundary.py -q`.
-- Focused K1b backend route/policy/confirm wrapper suite passed: `.\.venv\Scripts\pytest.exe tests\test_practice_knowledge_retrieval.py tests\test_practice_knowledge_advisory_boundary.py tests\test_bernie_context_frames.py tests\test_diary_confirm_gate.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py -q -k "practice_knowledge or advisory or context_frames or confirm_gate or tomorrow_request_uses_visible_reference_date or safe_command_returns_candidate_selection_response_without_mutating or selected_candidate_returns_confirmation_ready_evidence_without_mutating or no_practitioner_schedule_is_roster_unavailable"`.
+- New Bernie tool-intent tests passed: `.\.venv\Scripts\pytest.exe tests\test_bernie_tool_intent.py -q`.
+- Focused update-proposal tests passed: `.\.venv\Scripts\pytest.exe tests\test_appointment_update_proposal.py -q -k "update_proposal_returns_typed_command_without_mutating or update_proposal_blocked_on_conflict or confirmed_update_writes_row_and_audit"`.
+- Broader adjacent Bernie/update/confirm suite passed: `.\.venv\Scripts\pytest.exe tests\test_bernie_tool_intent.py tests\test_appointment_update_proposal.py tests\test_bernie_context_frames.py tests\test_diary_confirm_gate.py -q`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
 - `git diff --check` passed.
-- Two earlier parallel pytest attempts hit a Postgres enum creation race in the shared test DB; the same suites passed when rerun serially.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for K1b; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
+- One earlier parallel pytest attempt hit a Postgres enum creation race in the shared test DB; the same suite passed when rerun serially.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for V1; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. K1b changes the live Diary asset and backend Bernie reception-context payload shape, but the advisory-only boundary, route non-interference, confirm gating, weekday-specific retrieval guard, and deterministic Diary rendering behaviours were verified locally. A later live Bernie behaviour review is useful once Pages serves v159, but it is not required to close K1b.
+No required manual review before moving on. V1 adds a backend proposal contract and a narrow Diary frame id seam, but it does not yet wire the new route into the visible Bernie panel. The non-mutating route behaviour, no-write/no-confirm-bypass boundary, appointment update proposal delegation, frontend frame id, and deterministic Diary rendering were verified locally.
 
 ## Not Required Before Moving On
 
+- No visible "extend appointment" Bernie card or final friendly voice UX was implemented in V1.
 - No persisted Bernie session table, Alembic migration, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
-- No auto-confirm or limited Bernie auto-mode was implemented.
+- No auto-confirm, direct update execution, or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was started.
 
 ## Known Follow-Up
 
-- K1b still uses the deterministic in-memory typed fact set; a later sprint can replace the retriever implementation with a GraphRAG-backed retriever behind the same advisory-only envelope.
-- A future Diary copy/voice sprint can move more message generation toward a typed "Bernie voice" layer while keeping machine state deterministic.
+- V2 should wire the new tool-intent route into the Diary Bernie panel and render appointment-extension proposals with friendly, professional Bernie voice while keeping proposal/confirm/write authority visibly separate.
+- The tool-intent parser is intentionally narrow and deterministic. A later backend-domain extraction can move it into a bounded Bernie/Diary domain module and replace parser heuristics with a typed intent router while preserving the same proposal contract.
+- Appointment edit confirmation should continue to bind to deterministic appointment state and staff confirmation, not model wording or retrieved advisory facts.
 - A later persisted-session sprint should still choose TTL, cleanup, transcript-storage, and concurrency policy before adding PHI-bearing tables.
 
-## Next Sprint Candidate - Bernie Voice / Domain Tool Intent
+## Next Sprint Candidate - V2 Visible Tool-Intent UX
 
 | Item | Value |
 |---|---|
-| Name | V1: Bernie Reception Voice And Tool-Intent Routing |
+| Name | V2: Bernie Visible Tool-Intent UX And Voice |
 | Status | Recommended, not launched |
 | Recommended agents | Codex/Ariadne orchestration; Claude if quota is available for backend/domain review; Antigravity for visible Diary UX; Codex worker for state/authority invariants |
 
-K1b gives Bernie safe practice-reference retrieval. The next narrow slice should continue toward native diary-agent behaviour by defining typed tool intents for non-booking requests such as "extend this appointment" while preserving the same rule: model/retrieval may suggest and explain, but deterministic diary commands and staff confirmation own writes.
+V1 gives Bernie a safe backend route for appointment-extension proposals. V2 should consume that route from the Diary panel, replace generic booking-only controls with a more general "Ask Bernie" flow, show the latest Bernie response and proposal source clearly, and avoid creating any confirm affordance unless the backend proposal contract supplies it.
+
+## Previous Closeout - Sprint K1b
+
+| Item | Value |
+|---|---|
+| Batch | Sprint K1b: Advisory Retrieval Wiring |
+| Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted, Codex/Aristotle invariant plan accepted, and Ariadne backend/UI implementation |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
+| Last updated | 2026-07-04 |
+
+K1b wired typed practice-knowledge retrieval into Bernie as advisory-only reception context, added weekday guarding, rendered separate "Practice reference" cards in the Diary panel, and kept retrieved facts out of slot/search/confirm/write authority. `diary.css` was cache-busted from v130 to v131 and `diary.js` from v158 to v159. No Graph/vector store, persisted PHI/session table, Alembic migration, auto-mode, taskpane, Command Centre, broad UI redesign, or broad API rewrite was added.
 
 ## Previous Closeout - Sprint N11
 

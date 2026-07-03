@@ -7029,6 +7029,43 @@ def test_bernie_practice_reference_renders_without_confirm_authority(diary_page)
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_context_frames_include_visible_appointment_id(diary_page):
+    """Visible diary booking frames expose appointment ids for typed tool intents."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="attached", timeout=5000)
+
+        frame = diary_page.evaluate(
+            """() => {
+              const visibleDate = localDateKey(diaryDate);
+              activeAppointments = [{
+                id: "appt-visible-123",
+                appointment_date: visibleDate,
+                start_time_local: "15:00:00",
+                duration_minutes: 15,
+                patient_id: "patient-123",
+                patient: { id: "patient-123", first_name: "Margaret", last_name: "Thompson" },
+                practitioner_id: "practitioner-123",
+                practitioner: { first_name: "Alex", last_name: "Shera" },
+                status: "Booked"
+              }];
+              const frames = buildBernieContextFrames({ command: {} });
+              return frames.find(item => item.type === "diary_day_booking");
+            }"""
+        )
+
+        assert frame["appointment_id"] == "appt-visible-123"
+        assert frame["patient_label"] == "Margaret Thompson"
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_confirmation_ready_without_confirm_evidence_hides_confirm(diary_page):
     """Friendly/status payloads cannot create a confirm affordance without backend evidence."""
     import urllib.parse

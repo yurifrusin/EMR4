@@ -134,11 +134,36 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
-## Sprint K1b: Advisory Retrieval Wiring
+## Sprint V1: Bernie Reception Voice And Tool-Intent Routing
 
 | Item | Value |
 |---|---|
 | Status | Integrated and verified locally; push/mirror/audit pending |
+| Product Goal | Give Bernie the first typed, non-booking diary tool-intent proposal route so requests such as extending an appointment become native diary proposals rather than ad hoc prompt text |
+| Worker Shape | Claude backend lane superseded by session cap, Antigravity visible UX plan accepted for V2, Codex invariant plan accepted, Ariadne backend/frame implementation |
+| In Scope | `BernieToolIntentIn/Out`, non-mutating `/appointments/proposals/bernie/tool-intent` route for appointment extension, visible diary appointment ids in Bernie context frames, focused backend and Diary review tests |
+| Out Of Scope | Visible appointment-extension UI cards, auto-mode/direct writes, persisted PHI/session tables, GraphRAG retrieval changes, taskpane/Command Centre, broad API rewrite |
+| Verification | py_compile; node check; frontend version check; new tool-intent tests; adjacent appointment update/confirm/context tests; full deterministic Diary smoke harness; diff check |
+
+Integration notes:
+
+- V1 supports explicit extension language only (`extend`/`lengthen`) and requires
+  a target duration plus exactly one matching visible appointment context.
+- Successful requests delegate to the existing deterministic
+  `AppointmentUpdateProposalOut` contract. The Bernie route itself never writes
+  appointment state and never returns confirmation-grade evidence.
+- Unsupported, ambiguous, or incomplete requests fail closed as unsupported or
+  clarification-required states with no proposal.
+- The route carries source attribution for intent parsing, visible diary context,
+  proposal authority, and staff-confirmed write authority.
+- Diary `diary_day_booking` frames now include `appointment_id`, creating the
+  native handle V2 can use for visible extend/edit proposal UX.
+
+## Sprint K1b: Advisory Retrieval Wiring
+
+| Item | Value |
+|---|---|
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
 | Product Goal | Wire typed practice-knowledge retrieval into Bernie as advisory-only reception context so Bernie can show useful practice references without gaining slot/search/confirm/write authority |
 | Worker Shape | Claude backend lane superseded by session cap, Antigravity visible Diary UX plan accepted, Codex/Aristotle advisory-boundary plan accepted, Ariadne implementation/integration |
 | In Scope | `app/routers/appointments.py` advisory retrieval hook, `app/services/practice_knowledge/retriever.py` weekday guard, `app/services/diary/policy.py` advisory-only predicate, Diary practice-reference rendering, focused route/policy/UI tests |

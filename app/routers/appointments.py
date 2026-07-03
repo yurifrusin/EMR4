@@ -28,6 +28,7 @@ from app.schemas.appointments import (
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
     AppointmentAuditLogOut,
+    BernieToolIntentIn, BernieToolIntentOut,
     SlotSearchProposalIn, SlotCandidate, SlotSearchProposalOut,
     SlotSearchCommandIn, SlotSearchCommandResult, SlotSearchCommandExecutionOut,
     SlotSelectionProposalIn, SlotSelectionProposalOut,
@@ -1161,6 +1162,239 @@ def propose_update_appointment(
         conflict=conflict_brief,
         breaks_overlap=breaks_overlap,
         patient_identity=patient_identity,
+    )
+
+
+def _bernie_tool_issue(
+    code: str,
+    severity: Literal["warning", "blocked"],
+    message: str,
+) -> AppointmentProposalIssue:
+    return AppointmentProposalIssue(code=code, severity=severity, message=message)
+
+
+def _parse_extend_duration_minutes(instruction: str) -> Optional[int]:
+    patterns = [
+        r"\b(?:to|for)\s+(\d{1,3})\s*(?:minutes?|mins?)\b",
+        r"\b(\d{1,3})\s*(?:minutes?|mins?)\s*(?:total|altogether)\b",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, instruction or "", re.IGNORECASE)
+        if not match:
+            continue
+        duration = int(match.group(1))
+        if 0 < duration <= 480:
+            return duration
+    return None
+
+
+def _parse_instruction_time_minutes(instruction: str) -> Optional[int]:
+    match = re.search(
+        r"\b(?:at\s+)?(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b",
+        instruction or "",
+        re.IGNORECASE,
+    )
+    if not match:
+        return None
+    hour = int(match.group(1))
+    minute = int(match.group(2) or "0")
+    suffix = match.group(3).lower()
+    if hour == 12:
+        hour = 0
+    if suffix == "pm":
+        hour += 12
+    if hour > 23 or minute > 59:
+        return None
+    return hour * 60 + minute
+
+
+def _context_frame_appointment_id(frame: dict[str, Any]) -> Optional[uuid.UUID]:
+    for key in ("appointment_id", "source_appointment_id", "booking_id"):
+        value = frame.get(key)
+        if _valid_uuid_text(value):
+            return uuid.UUID(str(value))
+    return None
+
+
+def _frame_start_minutes(frame: dict[str, Any]) -> Optional[int]:
+    value = str(frame.get("start_time_local") or frame.get("start_time") or "")
+    match = re.search(r"(\d{1,2}):(\d{2})", value)
+    if not match:
+        return None
+    hour = int(match.group(1))
+    minute = int(match.group(2))
+    if hour > 23 or minute > 59:
+        return None
+    return hour * 60 + minute
+
+
+def _instruction_mentions_label(
+    instruction_tokens: set[str],
+    label: object,
+    *,
+    require_all: bool = True,
+) -> bool:
+    if not label:
+        return False
+    label_tokens = [
+        token
+        for token in _text_tokens(str(label))
+        if token not in {"dr", "doctor", "nurse", "mr", "mrs", "ms", "miss"}
+    ]
+    if not label_tokens:
+        return False
+    if require_all:
+        return all(token in instruction_tokens for token in label_tokens)
+    return any(token in instruction_tokens for token in label_tokens)
+
+
+def _resolve_bernie_tool_context_appointment_id(
+    body: BernieToolIntentIn,
+) -> tuple[Optional[uuid.UUID], list[AppointmentProposalIssue]]:
+    instruction_tokens = set(_text_tokens(body.instruction))
+    requested_minutes = _parse_instruction_time_minutes(body.instruction)
+    candidates: list[uuid.UUID] = []
+
+    for frame in body.context_frames:
+        if not isinstance(frame, dict):
+            continue
+        frame_type = frame.get("type")
+        if frame_type not in {"diary_day_booking", "selected_diary_appointment"}:
+            continue
+        appointment_id = _context_frame_appointment_id(frame)
+        if appointment_id is None:
+            continue
+        if frame_type == "selected_diary_appointment":
+            candidates.append(appointment_id)
+            continue
+        if requested_minutes is not None and _frame_start_minutes(frame) != requested_minutes:
+            continue
+        patient_matches = _instruction_mentions_label(
+            instruction_tokens,
+            frame.get("patient_label") or frame.get("booking_patient_label"),
+        )
+        practitioner_label = frame.get("practitioner_label") or frame.get("booking_practitioner_label")
+        practitioner_matches = (
+            not practitioner_label
+            or _instruction_mentions_label(instruction_tokens, practitioner_label, require_all=False)
+        )
+        if patient_matches and practitioner_matches:
+            candidates.append(appointment_id)
+
+    unique_candidates = list(dict.fromkeys(candidates))
+    if len(unique_candidates) == 1:
+        return unique_candidates[0], []
+    if len(unique_candidates) > 1:
+        return None, [_bernie_tool_issue(
+            "ambiguous_appointment_context",
+            "blocked",
+            "I found more than one matching appointment. Select the booking or name the exact time.",
+        )]
+    return None, [_bernie_tool_issue(
+        "appointment_context_required",
+        "blocked",
+        "I need a matching appointment from the visible diary before I can prepare that change.",
+    )]
+
+
+@router.post(
+    "/proposals/bernie/tool-intent",
+    response_model=BernieToolIntentOut,
+)
+def propose_bernie_tool_intent(
+    body: BernieToolIntentIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Resolve a Bernie diary tool intent into a deterministic proposal.
+
+    V1 intentionally supports only appointment extension. The route never
+    writes appointment state, never returns confirm-grade evidence, and never
+    lets model wording or advisory facts bypass existing proposal/confirm
+    contracts.
+    """
+    instruction = body.instruction or ""
+    if not re.search(r"\b(extend|lengthen)\b", instruction, re.IGNORECASE):
+        return BernieToolIntentOut(
+            safe=False,
+            result="unsupported",
+            tool_intent=None,
+            autonomy_tier="blocked",
+            requires_confirmation=False,
+            summary="I can only prepare appointment-extension proposals in this version.",
+            blocks=[_bernie_tool_issue(
+                "unsupported_tool_intent",
+                "blocked",
+                "This Bernie tool request is not supported yet.",
+            )],
+            source_attribution={
+                "intent_source": "deterministic_text_parser",
+                "write_authority": "none",
+            },
+        )
+
+    duration_minutes = _parse_extend_duration_minutes(instruction)
+    if duration_minutes is None:
+        return BernieToolIntentOut(
+            safe=False,
+            result="clarification_required",
+            tool_intent="extend_appointment",
+            autonomy_tier="blocked",
+            requires_confirmation=False,
+            summary="I need the new appointment duration before I can prepare that change.",
+            blocks=[_bernie_tool_issue(
+                "target_duration_required",
+                "blocked",
+                "Tell me the total appointment duration, for example 30 minutes.",
+            )],
+            source_attribution={
+                "intent_source": "deterministic_text_parser",
+                "write_authority": "none",
+            },
+        )
+
+    appointment_id, blocks = _resolve_bernie_tool_context_appointment_id(body)
+    if blocks or appointment_id is None:
+        return BernieToolIntentOut(
+            safe=False,
+            result="clarification_required",
+            tool_intent="extend_appointment",
+            autonomy_tier="blocked",
+            requires_confirmation=False,
+            summary="I need one matching appointment before I can prepare that extension.",
+            blocks=blocks,
+            source_attribution={
+                "intent_source": "deterministic_text_parser",
+                "appointment_source": "visible_diary_context",
+                "write_authority": "none",
+            },
+        )
+
+    proposal = propose_update_appointment(
+        appointment_id,
+        AppointmentUpdateProposalIn(duration_minutes=duration_minutes),
+        db,
+        current_user,
+    )
+    return BernieToolIntentOut(
+        safe=proposal.safe,
+        result="proposal_ready" if proposal.safe else "blocked",
+        tool_intent="extend_appointment",
+        autonomy_tier="proposal" if proposal.safe else "blocked",
+        requires_confirmation=True,
+        summary=(
+            f"I've prepared a proposal to change this appointment to "
+            f"{duration_minutes} minutes. Nothing is changed until staff confirm."
+        ),
+        proposal=proposal,
+        warnings=proposal.warnings,
+        blocks=proposal.blocks,
+        source_attribution={
+            "intent_source": "deterministic_text_parser",
+            "appointment_source": "visible_diary_context",
+            "proposal_authority": "appointment_update_proposal",
+            "write_authority": "staff_confirmed_put_only",
+        },
     )
 
 

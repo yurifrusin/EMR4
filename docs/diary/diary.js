@@ -1450,6 +1450,7 @@ function buildBernieContextFrames(requestBody) {
       ].join(" ").trim();
       return {
         type: "diary_day_booking",
+        appointment_id: appt.id || null,
         appointment_date: appt.appointment_date || localDateKey(diaryDate),
         start_time_local: appt.start_time_local || appt.start_time || "",
         patient_label: patientLabel,

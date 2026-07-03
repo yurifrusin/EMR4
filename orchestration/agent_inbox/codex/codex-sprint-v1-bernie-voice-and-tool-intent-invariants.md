@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | e14568c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-v1-bernie-voice-and-tool-intent-invariants --summary "Short plan summary"` |
@@ -90,5 +90,15 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  `orchestration/agent_inbox/codex/plan-codex-codex-sprint-v1-bernie-voice-and-tool-intent-invariants.md`;
+  `orchestration/agent_inbox/codex/codex-sprint-v1-bernie-voice-and-tool-intent-invariants.md`
+  status/completion notes only.
 - Verification run:
+  Plan-gated only; no production code, tests, runtime docs, or runtime assets
+  edited. Protocol handin completed with `py -3 scripts\agent_worktrees.py handin`
+  after the Windows `python` app-execution alias failed. Read `AGENTS.md`,
+  `orchestration/parallel_workstreams.md`, and the queued task packet.
 - Remaining risks:
+  Implementation not started. The eventual implementation must still prove no
+  direct writes, no confirm bypass, stale proposal rejection, authorship/source
+  separation, and UI non-authority with focused tests/checks.

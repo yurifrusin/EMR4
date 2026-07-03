@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint K1b - Bernie now receives typed practice-knowledge retrieval as advisory-only reception-context frames, with Diary "Practice reference" cards and deterministic guards proving retrieval cannot set slot truth, policy truth, confirm affordance, freshness/audit evidence, or write payloads |
-| **Next recommended work** | V1 Bernie reception voice and tool-intent routing: define typed intents for non-booking diary requests such as extending an appointment while keeping deterministic diary commands and staff confirmation authoritative |
+| **Current active track** | Post-Sprint V1 - Bernie now has a typed, non-mutating tool-intent proposal route for explicit appointment extension requests, backed by visible diary appointment ids and existing deterministic appointment-update proposal authority |
+| **Next recommended work** | V2 Bernie visible tool-intent UX and voice: wire the new route into the Diary panel so "Ask Bernie" can show friendly professional extension proposals without implying autonomous writes or creating confirm affordances without backend proposal evidence |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint K1b advisory retrieval wiring |
+| **Latest integration commit** | Sprint V1 Bernie tool-intent proposal route |
 
 ### Tag map (all tags pushed to remote)
 
