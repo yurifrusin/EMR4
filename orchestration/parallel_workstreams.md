@@ -189,7 +189,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Plan gate accepted; backend foundation implementation proceeding with Ariadne/Codex while Claude is session-limited |
 | Product Goal | Define the minimum server-owned Bernie session/event persistence foundation so conversation memory, stale-state rejection, signed confirmation evidence, and render-from-state UI can converge without premature PHI-heavy storage |
 | Worker Shape | Claude backend/session contract plan, Antigravity Diary session UX/render-from-state plan, Codex worker adversarial invariant plan, Ariadne orchestration/review |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n4-bernie-server-session-contract.md` |
