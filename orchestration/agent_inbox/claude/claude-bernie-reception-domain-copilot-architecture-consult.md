@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 1389579 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-bernie-reception-domain-copilot-architecture-consult --summary "Short plan summary"` |

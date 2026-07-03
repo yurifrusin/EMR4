@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-reception-domain-copilot-architecture-consult` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -44,5 +44,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted as the guiding Fable 5 architecture consult and integrated into the programme record. Ariadne dispatched and integrated the first bounded extraction foundation slice from this plan.
+- Follow-up required: Continue with small plan-gated slices; next likely work is moving implementation logic behind `app/services/bernie`, consolidating temporal policy, and designing typed context frames before persisted server-side sessions.
