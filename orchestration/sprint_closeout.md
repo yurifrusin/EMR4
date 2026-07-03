@@ -8,40 +8,39 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint G2: Human Diary Update Confirm Migration |
-| Integrated through | Claude backend/domain plan, Codex invariant plan, Antigravity lane superseded after no submitted artifact, and Ariadne implementation |
+| Batch | Sprint G3: Edit Modal Update Confirm Migration |
+| Integrated through | Claude edit-modal plan, Codex invariant plan, and Ariadne implementation |
 | Status | Integrated and verified locally; push/mirror/audit pending |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- Ordinary safe appointment update proposals now return `confirm_endpoint`, `confirm_payload`, update freshness id, and update-purpose signed confirmation evidence.
-- Human Diary drag/drop/resize keeps the existing proposal/confirm dialog flow, but after staff confirmation posts the signed confirm payload to `/appointments/proposals/update/confirm`.
-- The existing raw `PUT /appointments/{id}` remains available as a bounded authenticated staff/API compatibility endpoint and as an old-backend fallback, but confirm-grade human drag/resize UI now uses backend-owned evidence when available.
-- Added backend tests proving ordinary update proposals carry signed evidence and confirming that payload writes once with bounded audit evidence.
-- Added a deterministic Diary smoke assertion proving a human drag/resize sends proposal then signed confirm, and does not emit raw PUT.
-- `diary.js` was cache-busted from v162 to v163.
+- The Diary edit-booking modal now fetches a fresh update proposal for edit-mode Save and commits appointment-detail changes through the signed `/appointments/proposals/update/confirm` route when the backend returns a confirm envelope.
+- The status dropdown remains a separate attendance/status transition: `PATCH /appointments/{id}/status` runs only after the signed detail update succeeds and only when the requested status differs from the original status.
+- A failed/stale/blocked signed detail confirm now stops before the status PATCH, avoiding partial detail/status divergence.
+- The raw `PUT /appointments/{id}` path remains only as a bounded old-backend compatibility fallback when no signed confirm envelope is available.
+- Added deterministic Diary smoke assertions proving edit-modal Save uses signed confirm instead of raw PUT, preserves the separate status PATCH, and does not patch status after a rejected detail confirm.
+- `diary.js` was cache-busted from v163 to v164.
 - No persisted PHI/session table, broad status/cancel/delete grammar, GraphRAG, Alembic migration, taskpane, Command Centre, broad API rewrite, or Bernie auto-mode was added.
 
 ## Verification
 
 - JavaScript syntax check passed: `node --check docs\diary\diary.js`.
-- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py`.
+- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile scripts\agent_worktrees.py`.
 - Frontend asset version check passed: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
-- Tool-intent/update/confirm backend suite passed: `.\.venv\Scripts\pytest.exe tests\test_bernie_tool_intent.py tests\test_appointment_update_proposal.py tests\test_diary_confirm_gate.py -q`.
-- Focused human drag/resize signed-confirm smoke passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py::test_human_drag_resize_uses_signed_update_confirm_route -q`.
+- Focused G3/G2 signed-confirm smoke passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q -k "edit_modal_uses_signed_update_confirm_before_status_patch or edit_modal_does_not_patch_status_when_signed_update_confirm_fails or human_drag_resize_uses_signed_update_confirm_route"`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
 - `git diff --check` passed.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G2; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G3; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. G2 changes a live human Diary write path, but signed confirm submission, no raw PUT from the drag/resize confirm UI, bounded audit evidence, backend proposal compatibility, and deterministic Diary rendering were verified locally. A live human sanity check is still useful later because drag/drop feel is ergonomic, but it is not required to close the sprint.
+No required manual review before moving on. G3 changes a live edit-modal write path, but the signed confirm route, no raw PUT from signed-capable edit saves, separate status PATCH, failed-confirm/no-status-patch invariant, and deterministic Diary rendering were verified locally. A live edit-modal sanity check is still useful later, but it is not required to close the sprint.
 
 ## Not Required Before Moving On
 
 - No broad natural-language edit grammar was implemented beyond explicit `extend`/`lengthen`.
-- Edit-form Save still has the legacy raw PUT compatibility path; it was not migrated in G2 because it combines appointment detail and status semantics.
+- Create, delete/cancel, status grammar, and raw PUT endpoint retirement were not migrated in G3.
 - No persisted Bernie session table, Alembic migration, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
 - No model-authored write or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was started.
@@ -49,19 +48,35 @@ No required manual review before moving on. G2 changes a live human Diary write 
 ## Known Follow-Up
 
 - The frontend classifier is intentionally narrow and non-authoritative. Future move/cancel/status tool intents should be added as typed backend/domain actions, not by growing a broad frontend grammar.
-- Edit-form Save should move to the update-confirm endpoint in a later sprint, keeping status PATCH separate unless a status-action confirm grammar is explicitly added.
 - Appointment edit confirmation should continue to bind to deterministic appointment state and staff confirmation, not model wording or retrieved advisory facts.
+- Create, cancel/delete, and status-specific write surfaces should migrate in similarly narrow slices before considering raw PUT endpoint retirement.
 - A later persisted-session sprint should still choose TTL, cleanup, transcript-storage, and concurrency policy before adding PHI-bearing tables.
 
-## Next Sprint Candidate - Edit Modal Update Confirm Migration
+## Next Sprint Candidate - Create/Cancel/Status Confirm Surface Or Diary Domain Module Tail
 
 | Item | Value |
 |---|---|
-| Name | G3: Edit modal appointment update confirm route migration |
+| Name | G4: Continue signed-confirm migration for remaining diary write surfaces, or return to the bounded Diary domain module tail |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne orchestration; Claude for backend/domain review if quota is available; Antigravity only if a visible modal UX change is expected; Codex worker for status/update boundary invariants |
+| Recommended agents | Codex/Ariadne orchestration; Claude if quota is available for backend/domain review; Antigravity only for visible Diary UX review; Codex worker for invariants |
 
-G2 moved human drag/drop/resize confirms onto signed update evidence. The next architectural slice should migrate the edit modal's appointment detail Save path while keeping status PATCH semantics separate and preserving the existing modal UX.
+G1-G3 moved Bernie tool-intent update confirms, human drag/resize, and edit-modal detail saves onto signed update evidence. The next narrow slice can continue this pattern for create/cancel/status surfaces, or return to the bounded Diary domain module tail now that the main update paths share the same confirmation spine.
+
+## Previous Closeout - Sprint G2
+
+| Item | Value |
+|---|---|
+| Batch | Sprint G2: Human Diary Update Confirm Migration |
+| Integrated through | Claude backend/domain plan, Codex invariant plan, Antigravity lane superseded after no submitted artifact, and Ariadne implementation |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
+| Last updated | 2026-07-04 |
+
+G2 made ordinary safe appointment update proposals return `confirm_endpoint`,
+`confirm_payload`, update freshness id, and update-purpose signed confirmation
+evidence. Human Diary drag/drop/resize kept the existing proposal/confirm dialog
+flow, but after staff confirmation posts the signed confirm payload to
+`/appointments/proposals/update/confirm`; deterministic smoke coverage proves
+the path does not emit raw `PUT`. `diary.js` was cache-busted from v162 to v163.
 
 ## Previous Closeout - Sprint G1
 

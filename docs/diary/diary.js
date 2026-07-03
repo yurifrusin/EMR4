@@ -6444,6 +6444,7 @@ Office.onReady(() => {
 let selectedPatient = null;
 let provisionalName = null;
 let editingAppointmentId = null;
+let editingAppointmentOriginalStatus = null;
 
 function searchMockPatients(q) {
   const query = q.toLowerCase();
@@ -6486,6 +6487,7 @@ function prepareStatusDropdown(currentStatus) {
 function openBookingModalForCreate(col, slotTime) {
   resetProposalConfirmation();
   editingAppointmentId = null;
+  editingAppointmentOriginalStatus = null;
   selectedPatient = null;
   provisionalName = null;
   const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
@@ -6583,6 +6585,7 @@ function openBookingModalForEdit(appt) {
   document.getElementById("booking-duration").value = appt.duration_minutes || 15;
 
   const displayStatus = appt.status === "Confirmed" ? "Booked" : (appt.status || "Booked");
+  editingAppointmentOriginalStatus = displayStatus;
   prepareStatusDropdown(appt.status);
   document.getElementById("booking-status").value = displayStatus;
 
@@ -6622,6 +6625,7 @@ function openBookingModalForPatientLink(appt) {
 function closeBookingModal() {
   document.getElementById("booking-modal").classList.add("hidden");
   editingAppointmentId = null;
+  editingAppointmentOriginalStatus = null;
   selectedPatient = null;
   provisionalName = null;
   const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
@@ -7082,29 +7086,29 @@ async function saveBooking() {
   try {
     const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
     const statusToSend = statusVal;
+    const payload = {
+      practitioner_id: practitioner.id,
+      appointment_type_id: typeId,
+      appointment_date: dateVal,
+      start_time_local: timeVal,
+      duration_minutes: duration,
+      reason: reason,
+    };
+    if (activeLocationId) {
+      payload.location_id = activeLocationId;
+    }
+    if (selectedPatient) {
+      payload.patient_id = selectedPatient.id;
+      payload.patient_name_provisional = null;
+    } else {
+      payload.patient_id = null;
+      payload.patient_name_provisional = provisionalName;
+    }
 
     const isConfirmed = saveBtn.dataset.confirmed === "true";
-    if (!isConfirmed) {
-      const payload = {
-        practitioner_id: practitioner.id,
-        appointment_type_id: typeId,
-        appointment_date: dateVal,
-        start_time_local: timeVal,
-        duration_minutes: duration,
-        reason: reason,
-      };
-      if (activeLocationId) {
-        payload.location_id = activeLocationId;
-      }
-      if (selectedPatient) {
-        payload.patient_id = selectedPatient.id;
-        payload.patient_name_provisional = null;
-      } else {
-        payload.patient_id = null;
-        payload.patient_name_provisional = provisionalName;
-      }
-
-      let proposal;
+    let proposal = null;
+    const needsProposal = editingAppointmentId || !isConfirmed;
+    if (needsProposal) {
       if (isSmokeMode) {
         proposal = simulateProposal(payload);
       } else {
@@ -7120,7 +7124,9 @@ async function saveBooking() {
         }
         proposal = await propRes.json();
       }
+    }
 
+    if (!isConfirmed && proposal) {
       if (proposal.blocks && proposal.blocks.length > 0) {
         errorEl.textContent = proposal.blocks.map(b => b.message).join(" ");
         errorEl.classList.remove("hidden");
@@ -7198,35 +7204,45 @@ async function saveBooking() {
           }
         }
       } else {
-        const updatePayload = {
-          practitioner_id: practitioner.id,
-          appointment_type_id: typeId,
-          appointment_date: dateVal,
-          start_time_local: timeVal,
-          duration_minutes: duration,
-          reason: reason,
-        };
-        if (selectedPatient) {
-          updatePayload.patient_id = selectedPatient.id;
-          updatePayload.patient_name_provisional = null;
+        const confirmedWarnings = (proposal?.warnings || []).map(issue => issue.code).filter(Boolean);
+        const confirmEndpoint = proposal?.confirm_endpoint;
+        const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
+        let updateRes;
+        if (confirmEndpoint && confirmPayload) {
+          confirmPayload.confirmed = true;
+          confirmPayload.confirmed_warnings = Array.from(new Set([
+            ...(confirmPayload.confirmed_warnings || []),
+            ...confirmedWarnings
+          ]));
+          updateRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+            method: "POST",
+            body: JSON.stringify(confirmPayload)
+          });
         } else {
-          updatePayload.patient_id = null;
-          updatePayload.patient_name_provisional = provisionalName;
+          updateRes = await apiFetch(`/appointments/${editingAppointmentId}`, {
+            method: "PUT",
+            body: JSON.stringify(payload)
+          });
         }
-        const updateRes = await apiFetch(`/appointments/${editingAppointmentId}`, {
-          method: "PUT",
-          body: JSON.stringify(updatePayload)
-        });
         if (!updateRes.ok) {
           throw new Error(await apiErrorMessage(updateRes, "Update"));
         }
+        if (confirmEndpoint) {
+          const confirmResult = await updateRes.json();
+          if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
+            const issue = (confirmResult?.blocks || [])[0];
+            throw new Error(issue?.message || confirmResult?.summary || "The appointment update could not be confirmed.");
+          }
+        }
 
-        const statusRes = await apiFetch(`/appointments/${editingAppointmentId}/status`, {
-          method: "PATCH",
-          body: JSON.stringify({ status: statusToSend })
-        });
-        if (!statusRes.ok) {
-          throw new Error(await apiErrorMessage(statusRes, "Status update"));
+        if (statusToSend !== (editingAppointmentOriginalStatus || "Booked")) {
+          const statusRes = await apiFetch(`/appointments/${editingAppointmentId}/status`, {
+            method: "PATCH",
+            body: JSON.stringify({ status: statusToSend })
+          });
+          if (!statusRes.ok) {
+            throw new Error(await apiErrorMessage(statusRes, "Status update"));
+          }
         }
       }
       setStatus("Booking updated successfully.");

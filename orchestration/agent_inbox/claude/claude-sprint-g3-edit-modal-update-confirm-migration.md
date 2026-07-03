@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 8cf67ca |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-g3-edit-modal-update-confirm-migration --summary "Short plan summary"` |
@@ -90,5 +90,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - Plan-only lane submitted `orchestration/agent_inbox/codex/plan-claude-claude-sprint-g3-edit-modal-update-confirm-migration.md`.
+  - Ariadne implemented the accepted plan in `docs/diary/diary.js`, `docs/diary/diary.html`, and `review/test_diary_smoke.py`.
 - Verification run:
+  - `node --check docs\diary\diary.js`
+  - `.\.venv\Scripts\python.exe -m py_compile scripts\agent_worktrees.py`
+  - `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q -k "edit_modal_uses_signed_update_confirm_before_status_patch or edit_modal_does_not_patch_status_when_signed_update_confirm_fails or human_drag_resize_uses_signed_update_confirm_route"`
+  - `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`
 - Remaining risks:
+  - Raw `PUT /appointments/{id}` remains as a bounded compatibility fallback when no signed confirm envelope is present. The edit modal now uses signed confirm when the backend provides it.

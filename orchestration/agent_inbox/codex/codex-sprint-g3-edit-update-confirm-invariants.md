@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 8cf67ca |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-g3-edit-update-confirm-invariants --summary "Short plan summary"` |
@@ -90,5 +90,15 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/codex-sprint-g3-edit-update-confirm-invariants.md`
+  - `orchestration/agent_inbox/codex/plan-codex-codex-sprint-g3-edit-update-confirm-invariants.md`
 - Verification run:
+  - Planning mode only; read `AGENTS.md`, `orchestration/parallel_workstreams.md`, `orchestration/sprint_closeout.md`, and `orchestration/agent_inbox/codex/codex-sprint-g3-edit-update-confirm-invariants.md`.
+  - Ran required `handin --agent codex` with explicit venv Python path from `C:\Users\sarashera\EMR4-worktrees\codex`; succeeded and reported already up to date at `84a0934`.
+  - Ran required `plan --agent codex --task codex-sprint-g3-edit-update-confirm-invariants ...`; succeeded and wrote the implementation-plan packet.
+  - Focus-read the edit modal `saveBooking()` raw-PUT/status-PATCH branch, the G2 drag/resize signed confirm pattern, update-confirm backend contract, and existing update-confirm tests.
+  - No production code or tests were edited or run.
 - Remaining risks:
+  - Later implementation must prevent a stale/tampered failed detail update confirm from still sending the separate status PATCH.
+  - If an old-backend raw PUT fallback is retained, it must be explicit and must not run when signed confirm evidence is available.
+  - The update-confirm schema remains Bernie-named; avoid unnecessary renaming unless Ariadne accepts the compatibility work.
