@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint 103 / Sprint 104 planning - Bernie compact request card, sensitive details disclosure, and ordinary-mode best-candidate auto-preview are integrated; conversational state memory and clarification-turn statechart work is queued but not launched |
-| **Next recommended work** | Plan-gated Sprint 104: Bernie conversational state memory, chat/clarification turns, no-slot suggestions, stale-state clearing, and deterministic `patient_booking_context`; defer the broad API-spine review until after a few more agentic Diary/Taskpane state-machine sprints |
+| **Current active track** | Post-Sprint 106A - Bernie has a bounded backend domain package foundation (`app/services/bernie/`) with facade imports, capability registry skeleton, and persistence-shaped session/event contracts; no persisted session table or frontend state migration yet |
+| **Next recommended work** | Continue the Fable 5 Bernie architecture programme in small plan-gated slices: move implementation logic behind `app/services/bernie`, consolidate temporal policy, define typed context frames, and only then add persisted server-side Bernie sessions; keep broad root-to-branch API review deferred |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 103 Bernie compact request and auto-preview closeout commit |
+| **Latest integration commit** | Sprint 106A Bernie bounded domain extraction foundation |
 
 ### Tag map (all tags pushed to remote)
 

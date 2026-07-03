@@ -8,66 +8,44 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 105: Bernie Typed Turn Contract And Confirmation Evidence |
-| Integrated through | Backend typed turn refs/freshness evidence, Diary typed turn events, confirmation evidence echo, and deterministic backend/UI harness coverage |
-| Status | Integrated, verified, pushed, deployed, mirrored, audited, and closed |
+| Batch | Sprint 106A: Bernie Bounded Domain Extraction Foundation |
+| Integrated through | Claude Fable 5 bounded `app/services/bernie/` package foundation, capability registry skeleton, and persistence-shaped session/event contracts |
+| Status | Integrated locally; push/mirror/audit pending |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- Added backend-owned optional `turn_ref` metadata for Bernie interpret and
-  supervised-booking responses so a session carries stable `session_id`,
-  `turn_id`, `turn_index`, `reference_date`, and state.
-- Added deterministic candidate/proposal freshness ids and a confirmation
-  staleness gate that blocks writes when echoed evidence does not match the
-  current selected candidate/proposal.
-- Added a typed no-slot suggestion-selection API contract and focused backend
-  tests for turn refs, freshness ids, stale confirmation blocks, and
-  backward-compatible Sprint 104 clients.
-- Changed the Diary Bernie session to log typed client events for staff
-  instructions, clarification replies, no-slot suggestion clicks, candidate
-  selection, proposal preview, and stale navigation clearing.
-- Bridged the frontend/backend contract end to end: the Diary now stores
-  backend `turn_ref`, sends it on subsequent calls, and echoes
-  `turn_ref`, `candidate_freshness_id`, and `proposal_freshness_id` in the
-  explicit confirm POST when supplied by the backend.
-- Added/updated deterministic Diary smoke checks for typed turn serialization,
-  composer clearing, no-slot suggestion clicks, stale navigation clearing, and
-  confirmation evidence echo.
-- Updated diary assets to `diary.js?v=148` and `diary.css?v=126`.
+- Added `app/services/bernie/` as the bounded backend domain package for Bernie.
+- Re-exported the current interpreter, patient booking context, turn evidence,
+  slot normalizer, pilot gate, and date transition helpers through that package,
+  preserving existing behaviour while creating a stable domain boundary.
+- Added `app/services/bernie/session.py` with persistence-shaped session/event
+  contracts and static transition tables, but no database table or endpoint yet.
+- Added `app/services/bernie/capabilities.py` with a typed receptionist-domain
+  capability registry covering read-only, propose, confirm, and meta actions.
+- Updated `app/routers/appointments.py` to import Bernie services through the
+  new bounded package.
+- Added `tests/test_bernie_domain_package.py` to prove facade identity,
+  session-transition invariants, JSON round-tripping, and capability registry
+  shape.
 
 ## Verification
 
-- `.venv\Scripts\python.exe -m pytest tests\test_bernie_turn_contract.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_no_slot_suggestions.py tests\test_bernie_sprint104_state_memory.py tests\test_bernie_interpret_booking_instruction.py -q --tb=short` passed.
-- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` passed: full diary review harness green.
-- `node --check docs\diary\diary.js` passed.
-- `.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed after Pages deploy; local, HEAD, and deployed diary assets are JS `v=148` and CSS `v=126`.
-- `git diff --check` passed.
+- `Get-ChildItem app\services\bernie\*.py | ForEach-Object { .\.venv\Scripts\python.exe -m py_compile $_.FullName }` passed.
+- `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_domain_package.py -q` passed: 25 tests.
+- `git diff --check HEAD~1..HEAD` passed before closeout edits.
+- The requested broader Bernie backend group was run. Before test DB reset it
+  reported fixture collisions on `users_email_key`; after a metadata reset attempt
+  it exposed broader local test-database lifecycle fragility (`practices` missing
+  during fixture setup). The test database was restored with the full app metadata
+  and the new package test was rerun successfully. This is recorded as a test
+  harness follow-up, not a regression in the bounded Bernie package slice.
 
 ## Recommended User Review
 
-After GitHub Pages deploys, optional user review:
-
-1. Hard refresh the live Diary/Office dialog and confirm it loads
-   `diary.js?v=148` and `diary.css?v=126`.
-2. Open Bernie and enter `Make an appointment for Margaret Thompson with Dr
-   Shera after 3 tomorrow and before 4.30`.
-3. Expected result: the staff request appears as a chat turn, Bernie responds as
-   a separate turn, and the request can proceed to candidate/proposal preview as
-   before.
-4. If a proposal is staged, confirm only after checking the details. Expected
-   result: confirmation still requires the explicit blue confirm button and the
-   proposed appointment becomes a confirmed diary appointment.
-5. Navigate Today/Prev/Next or press Refresh after a proposed slot is staged.
-   Expected result: stale proposal/confirm controls are cleared instead of
-   allowing a previous proposal to be confirmed.
-6. Try an after-hours/no-slot request such as `Make an appointment for Margaret
-   Thompson with Dr Shera after 8 today`.
-7. Expected result: Bernie says no free times are available and shows useful
-   clickable alternatives instead of an empty candidate-selection state.
-8. Suspicious signs: a previous prompt is silently reused, confirm remains
-   enabled after date navigation/refresh, no-slot copy lacks alternatives, or
-   confirmation succeeds from an obviously stale proposal.
+None required for this slice. It is backend package scaffolding and import
+rerouting only; no Diary UI, deployed static asset, database schema, or public
+JSON contract changed.
 
 ## Not Required Before Moving On
 
@@ -77,6 +55,7 @@ After GitHub Pages deploys, optional user review:
 - No XState/runtime state-machine dependency was added.
 - No Medicare Online, HI/IHI, OPV/PVM, Caller ID, voice/headset, or production
   GCP change is included.
+- No persisted Bernie session table or Alembic migration was added.
 
 ## Known Follow-Up
 

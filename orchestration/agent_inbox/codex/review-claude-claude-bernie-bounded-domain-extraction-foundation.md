@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-bounded-domain-extraction-foundation` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into `master` as `a289451`. Ariadne accepted the bounded-package extraction as scoped and behaviour-preserving after stopping an orphaned timed-out Claude/Fable process, preserving its file changes, and applying only mechanical ASCII/comment cleanup before submit/integration.
+- Follow-up required: Later Bernie sprints should move implementation logic behind the new package, consolidate temporal policy, and decide PHI retention/concurrency policy before adding persisted server-side Bernie sessions. The broader Bernie DB-backed suite still exposes local test database isolation fragility when run as one large group; the new package checks passed.
