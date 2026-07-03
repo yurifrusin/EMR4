@@ -79,9 +79,12 @@ def test_transitions_facade_reexports_legacy_objects():
 def test_evidence_facade_reexports_legacy_objects():
     assert bernie_domain.compute_candidate_freshness_id is legacy_evidence.compute_candidate_freshness_id
     assert bernie_domain.compute_proposal_freshness_id is legacy_evidence.compute_proposal_freshness_id
+    assert bernie_domain.mint_signed_confirmation_evidence is legacy_evidence.mint_signed_confirmation_evidence
+    assert bernie_domain.verify_signed_confirmation_evidence is legacy_evidence.verify_signed_confirmation_evidence
     assert bernie_domain.check_staleness is legacy_evidence.check_staleness
     assert bernie_domain.mint_session_id is legacy_evidence.mint_session_id
     assert bernie_domain.mint_turn_id is legacy_evidence.mint_turn_id
+    assert bernie_domain.SignedEvidenceResult is legacy_evidence.SignedEvidenceResult
     assert bernie_domain.StalenessVerdict is legacy_evidence.StalenessVerdict
 
 

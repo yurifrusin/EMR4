@@ -6,21 +6,31 @@ legacy flat module. The implementation stays in
 """
 
 from app.services.bernie_turn_evidence import (
+    SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
+    SIGNED_CONFIRMATION_EVIDENCE_VERSION,
+    SignedEvidenceResult,
     StalenessResult,
     StalenessVerdict,
     check_staleness,
     compute_candidate_freshness_id,
     compute_proposal_freshness_id,
+    mint_signed_confirmation_evidence,
     mint_session_id,
     mint_turn_id,
+    verify_signed_confirmation_evidence,
 )
 
 __all__ = [
+    "SIGNED_CONFIRMATION_EVIDENCE_PURPOSE",
+    "SIGNED_CONFIRMATION_EVIDENCE_VERSION",
+    "SignedEvidenceResult",
     "StalenessResult",
     "StalenessVerdict",
     "check_staleness",
     "compute_candidate_freshness_id",
     "compute_proposal_freshness_id",
+    "mint_signed_confirmation_evidence",
     "mint_session_id",
     "mint_turn_id",
+    "verify_signed_confirmation_evidence",
 ]

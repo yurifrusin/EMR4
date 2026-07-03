@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-s1-confirm-evidence-ui-review` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 21:41 +1000 |
 | Source HEAD | `8659e7d` |
 

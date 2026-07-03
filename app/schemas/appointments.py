@@ -507,6 +507,9 @@ class SlotSelectionProposalOut(BaseModel):
     # Deterministic freshness id for the create proposal. Stamped by server;
     # clients echo back in confirmation; server recomputes and compares.
     proposal_freshness_id: Optional[str] = None
+    # Server-signed confirmation evidence. The client must echo this unchanged;
+    # the server verifies it before any confirmation-grade write.
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
 
 
 class BernieStaffReviewSlotSummary(BaseModel):
@@ -822,6 +825,11 @@ class BernieCreateProposalConfirmationIn(BaseModel):
     # Presence triggers the staleness gate; absence is tolerated for backward compat.
     candidate_freshness_id: Optional[str] = None
     proposal_freshness_id: Optional[str] = None
+    # S1 signed evidence path. New backend-prepared confirm payloads set
+    # signed_confirmation_evidence_required=True and include the signed envelope.
+    # Legacy unsigned callers are accepted only through explicit compatibility.
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
 
 
 # Resolve forward references now that all models are defined.

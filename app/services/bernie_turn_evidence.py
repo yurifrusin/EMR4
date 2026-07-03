@@ -14,11 +14,19 @@ Design constraints:
 from __future__ import annotations
 
 import hashlib
+import hmac
+import json
 import uuid
 from dataclasses import dataclass
 from datetime import date, datetime, time
 from enum import Enum
-from typing import Optional
+from typing import Any, Optional
+
+from app.config import settings
+
+
+SIGNED_CONFIRMATION_EVIDENCE_VERSION = "bernie.confirmation_evidence.v1"
+SIGNED_CONFIRMATION_EVIDENCE_PURPOSE = "bernie_confirm_create_proposal"
 
 
 class StalenessVerdict(str, Enum):
@@ -31,6 +39,14 @@ class StalenessVerdict(str, Enum):
 class StalenessResult:
     verdict: StalenessVerdict
     detail: str
+
+
+@dataclass(frozen=True)
+class SignedEvidenceResult:
+    verified: bool
+    code: str
+    detail: str
+    payload: Optional[dict[str, Any]] = None
 
 
 def _h(*parts: str) -> str:
@@ -60,6 +76,75 @@ def _norm_dt(dt: datetime) -> str:
 
 def _norm_uuid(u: Optional[uuid.UUID]) -> str:
     return str(u) if u is not None else ""
+
+
+def _canonical_json(payload: dict[str, Any]) -> str:
+    """Stable JSON representation for HMAC signing."""
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str)
+
+
+def _signing_secret(secret: Optional[str] = None) -> str:
+    return secret or settings.secret_key
+
+
+def mint_signed_confirmation_evidence(
+    payload: dict[str, Any],
+    *,
+    secret: Optional[str] = None,
+) -> dict[str, Any]:
+    """Mint a versioned HMAC evidence envelope for Bernie confirmation."""
+    material = {
+        "schema_version": SIGNED_CONFIRMATION_EVIDENCE_VERSION,
+        "purpose": SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
+        "payload": payload,
+    }
+    signature = hmac.new(
+        _signing_secret(secret).encode("utf-8"),
+        _canonical_json(material).encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+    return {**material, "signature": signature}
+
+
+def verify_signed_confirmation_evidence(
+    evidence: Optional[dict[str, Any]],
+    expected_payload: dict[str, Any],
+    *,
+    secret: Optional[str] = None,
+) -> SignedEvidenceResult:
+    """Verify a Bernie confirmation evidence envelope against expected payload."""
+    if evidence is None:
+        return SignedEvidenceResult(False, "signed_evidence_missing", "Signed confirmation evidence is required.")
+    if not isinstance(evidence, dict):
+        return SignedEvidenceResult(False, "signed_evidence_malformed", "Signed confirmation evidence must be an object.")
+
+    schema_version = evidence.get("schema_version")
+    purpose = evidence.get("purpose")
+    payload = evidence.get("payload")
+    signature = evidence.get("signature")
+    if schema_version != SIGNED_CONFIRMATION_EVIDENCE_VERSION:
+        return SignedEvidenceResult(False, "signed_evidence_wrong_version", "Signed confirmation evidence version is not supported.")
+    if purpose != SIGNED_CONFIRMATION_EVIDENCE_PURPOSE:
+        return SignedEvidenceResult(False, "signed_evidence_wrong_purpose", "Signed confirmation evidence purpose is not valid for this action.")
+    if not isinstance(payload, dict) or not isinstance(signature, str) or not signature:
+        return SignedEvidenceResult(False, "signed_evidence_malformed", "Signed confirmation evidence is missing payload or signature.")
+
+    material = {
+        "schema_version": schema_version,
+        "purpose": purpose,
+        "payload": payload,
+    }
+    expected_signature = hmac.new(
+        _signing_secret(secret).encode("utf-8"),
+        _canonical_json(material).encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+    if not hmac.compare_digest(signature, expected_signature):
+        return SignedEvidenceResult(False, "signed_evidence_tampered", "Signed confirmation evidence signature does not verify.")
+    if payload != expected_payload:
+        return SignedEvidenceResult(False, "signed_evidence_mismatch", "Signed confirmation evidence does not match the submitted proposal.")
+
+    return SignedEvidenceResult(True, "signed_evidence_verified", "", payload=payload)
 
 
 def compute_candidate_freshness_id(

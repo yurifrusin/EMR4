@@ -48,6 +48,8 @@ from app.services.bernie import (
     evaluate_confirm_affordance,
     compute_candidate_freshness_id,
     compute_proposal_freshness_id,
+    mint_signed_confirmation_evidence,
+    verify_signed_confirmation_evidence,
     check_staleness,
     mint_session_id,
     mint_turn_id,
@@ -107,8 +109,14 @@ _BERNIE_CONFIRM_CREATE_BASE_EVIDENCE = [
     "source_create_proposal",
 ]
 
+_BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE = [
+    "bernie_signed_confirmation_evidence_verified",
+    "legacy_unsigned_confirmation_compat",
+]
+
 BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
     *_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE,
+    *_BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE,
     *BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES.values(),
 ]
 
@@ -3430,6 +3438,15 @@ def _bernie_staff_review_payload(
             confirmed=False,
             selection_proposal=selection_proposal,
             confirmed_warnings=[],
+            turn_ref=selection_proposal.turn_ref,
+            candidate_freshness_id=(
+                selection_proposal.selected_candidate.candidate_freshness_id
+                if selection_proposal.selected_candidate is not None
+                else None
+            ),
+            proposal_freshness_id=selection_proposal.proposal_freshness_id,
+            signed_confirmation_evidence=selection_proposal.signed_confirmation_evidence,
+            signed_confirmation_evidence_required=selection_proposal.signed_confirmation_evidence is not None,
         ).model_dump(mode="json")
         confirm_evidence = list(_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE)
 
@@ -4103,6 +4120,17 @@ def propose_bernie_supervised_booking(
         location_id=_cmd.location_id,
         reference_date=request_reference_date,
     )
+    _sb_turn_ref = _mint_next_turn_ref(body.turn_ref, "proposal_preview", request_reference_date)
+    _signed_payload = _bernie_signed_confirmation_payload(
+        practice_id=current_user.practice_id,
+        staff_user_id=current_user.id,
+        turn_ref=_sb_turn_ref,
+        selected_candidate=selected_candidate,
+        command=_cmd,
+        candidate_freshness_id=selected_candidate.candidate_freshness_id,
+        proposal_freshness_id=_proposal_fid,
+    )
+    _signed_confirmation_evidence = mint_signed_confirmation_evidence(_signed_payload)
     selection_proposal = SlotSelectionProposalOut(
         safe=create_proposal.safe,
         requires_confirmation=True,
@@ -4112,7 +4140,9 @@ def propose_bernie_supervised_booking(
         create_proposal=create_proposal,
         warnings=selection_proposal_warnings,
         blocks=selection_proposal_blocks,
+        turn_ref=_sb_turn_ref,
         proposal_freshness_id=_proposal_fid,
+        signed_confirmation_evidence=_signed_confirmation_evidence,
     )
     combined_warnings = [*warnings, *selection_proposal.warnings]
     combined_blocks = [*blocks, *selection_proposal.blocks]
@@ -4134,7 +4164,6 @@ def propose_bernie_supervised_booking(
         f"{search_execution.summary} {selection_proposal.summary} "
         "Submit selection_proposal to confirm-bernie only after explicit staff confirmation."
     )
-    _sb_turn_ref = _mint_next_turn_ref(body.turn_ref, "proposal_preview", request_reference_date)
     return _with_ctx(BernieSupervisedBookingOut(
         result="confirmation_ready",
         request_reference_date=request_reference_date,
@@ -4222,6 +4251,43 @@ def _create_command_matches_selected_candidate(
     )
 
 
+def _bernie_signed_confirmation_payload(
+    *,
+    practice_id: uuid.UUID,
+    staff_user_id: uuid.UUID,
+    turn_ref: Optional[BernieTurnRef],
+    selected_candidate: SlotCandidate,
+    command: AppointmentCreateCommand,
+    candidate_freshness_id: Optional[str],
+    proposal_freshness_id: Optional[str],
+) -> dict[str, object]:
+    """Build the PHI-minimised payload covered by Bernie confirmation HMAC."""
+
+    def _uuid_or_none(value: Optional[uuid.UUID]) -> Optional[str]:
+        return str(value) if value is not None else None
+
+    return {
+        "practice_id": str(practice_id),
+        "staff_user_id": str(staff_user_id),
+        "session_id": turn_ref.session_id if turn_ref is not None else None,
+        "turn_id": turn_ref.turn_id if turn_ref is not None else None,
+        "turn_index": turn_ref.turn_index if turn_ref is not None else None,
+        "reference_date": turn_ref.reference_date.isoformat() if turn_ref is not None else selected_candidate.appointment_date.isoformat(),
+        "patient_id": _uuid_or_none(command.patient_id),
+        "patient_name_provisional": command.patient_name_provisional,
+        "practitioner_id": _uuid_or_none(command.practitioner_id),
+        "appointment_type_id": _uuid_or_none(command.appointment_type_id),
+        "location_id": _uuid_or_none(command.location_id),
+        "appointment_date": selected_candidate.appointment_date.isoformat(),
+        "start_time": selected_candidate.start_time.isoformat(),
+        "end_time": selected_candidate.end_time.isoformat(),
+        "start_time_local": selected_candidate.start_time_local.isoformat(),
+        "duration_minutes": selected_candidate.duration_minutes,
+        "candidate_freshness_id": candidate_freshness_id,
+        "proposal_freshness_id": proposal_freshness_id,
+    }
+
+
 @router.post(
     "/proposals/create/confirm-bernie",
     response_model=AppointmentConfirmCreateProposalOut,
@@ -4291,6 +4357,36 @@ def confirm_bernie_create_proposal(
             ))
 
     # ── Staleness gate (fail-closed) ────────────────────────────────────────
+    signed_evidence_present = body.signed_confirmation_evidence is not None
+    if body.signed_confirmation_evidence_required or signed_evidence_present:
+        if create_proposal is None or selection.selected_candidate is None:
+            blocks.append(_confirm_create_block(
+                "signed_evidence_unverifiable",
+                "Signed confirmation evidence cannot be verified without selected slot and create proposal evidence.",
+            ))
+        else:
+            expected_signed_payload = _bernie_signed_confirmation_payload(
+                practice_id=current_user.practice_id,
+                staff_user_id=current_user.id,
+                turn_ref=body.turn_ref or selection.turn_ref,
+                selected_candidate=selection.selected_candidate,
+                command=create_proposal.command,
+                candidate_freshness_id=body.candidate_freshness_id
+                or selection.selected_candidate.candidate_freshness_id,
+                proposal_freshness_id=body.proposal_freshness_id
+                or selection.proposal_freshness_id,
+            )
+            signed_result = verify_signed_confirmation_evidence(
+                body.signed_confirmation_evidence,
+                expected_signed_payload,
+            )
+            if signed_result.verified:
+                audit_evidence.append("bernie_signed_confirmation_evidence_verified")
+            else:
+                blocks.append(_confirm_create_block(signed_result.code, signed_result.detail))
+    else:
+        audit_evidence.append("legacy_unsigned_confirmation_compat")
+
     # Only fires when the client explicitly echoes freshness ids or a turn_ref
     # (backward-compat: omitting these fields is tolerated for Sprint 104 clients).
     if body.turn_ref is not None or body.candidate_freshness_id is not None or body.proposal_freshness_id is not None:

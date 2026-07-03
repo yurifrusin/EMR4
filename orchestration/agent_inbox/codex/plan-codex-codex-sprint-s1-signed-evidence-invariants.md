@@ -8,7 +8,7 @@
 | Worker Name | Codex S1 signed evidence invariants |
 | Worker Branch | `codex/current` |
 | Source Task | `codex-sprint-s1-signed-evidence-invariants` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 |
 | Source HEAD | `master` |
 

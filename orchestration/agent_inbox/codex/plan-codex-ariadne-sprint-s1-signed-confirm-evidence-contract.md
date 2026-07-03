@@ -6,7 +6,7 @@
 | From | codex |
 | Role | orchestrator |
 | Source Task | `claude-sprint-s1-signed-confirm-evidence-contract` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 |
 | Source HEAD | `8659e7d` |
 

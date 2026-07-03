@@ -34,13 +34,18 @@ from app.services.bernie.context import (
     has_existing_booking_on_requested_day,
 )
 from app.services.bernie.evidence import (
+    SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
+    SIGNED_CONFIRMATION_EVIDENCE_VERSION,
+    SignedEvidenceResult,
     StalenessResult,
     StalenessVerdict,
     check_staleness,
     compute_candidate_freshness_id,
     compute_proposal_freshness_id,
+    mint_signed_confirmation_evidence,
     mint_session_id,
     mint_turn_id,
+    verify_signed_confirmation_evidence,
 )
 from app.services.bernie.frames import (
     BernieAdvisoryWarningFrame,
@@ -131,13 +136,18 @@ __all__ = [
     "build_patient_booking_context",
     "has_existing_booking_on_requested_day",
     # evidence
+    "SIGNED_CONFIRMATION_EVIDENCE_PURPOSE",
+    "SIGNED_CONFIRMATION_EVIDENCE_VERSION",
+    "SignedEvidenceResult",
     "StalenessResult",
     "StalenessVerdict",
     "check_staleness",
     "compute_candidate_freshness_id",
     "compute_proposal_freshness_id",
+    "mint_signed_confirmation_evidence",
     "mint_session_id",
     "mint_turn_id",
+    "verify_signed_confirmation_evidence",
     # frames
     "BernieAdvisoryWarningFrame",
     "BernieFrameSource",

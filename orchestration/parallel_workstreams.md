@@ -161,15 +161,29 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Plan gate accepted; backend implementation proceeding with Ariadne/Codex while Claude is session-limited |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Product Goal | Harden Bernie/proposal confirmation evidence so confirmation-grade writes are backed by server-signed evidence and fail closed when evidence is missing, malformed, tampered, stale, or mismatched |
-| Worker Shape | Claude backend/domain contract plan, Antigravity Diary UI evidence-echo review plan, Codex worker adversarial invariant plan, Ariadne orchestration/review |
+| Worker Shape | Ariadne backend implementation replacing the capped Claude lane, Antigravity Diary UI evidence-echo review plan, Codex worker adversarial invariant plan, Ariadne orchestration/review |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-s1-signed-confirm-evidence-contract.md` |
 | Antigravity Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-s1-confirm-evidence-ui-review.md` |
 | Codex Task Packet | `orchestration/agent_inbox/codex/codex-sprint-s1-signed-evidence-invariants.md` |
 | In Scope | HMAC/signed candidate/proposal evidence design, confirm evidence echo, stale/tamper/replay/mismatch tests, legacy compatibility strategy, confirm-affordance authority boundaries |
 | Out Of Scope | Persisted session table, GraphRAG/practice-knowledge route/UI wiring, auto-mode, broad raw write-path/API-spine redesign, UI redesign, live PHI |
 | Verification | Plan packets first; later implementation must run focused evidence/confirm/proposal tests, relevant Diary smoke fixtures if UI changes, compileall/node checks as applicable, and `git diff --check` |
+
+Integration notes:
+
+- Claude hit its five-hour session cap before producing an implementation plan,
+  so Ariadne replaced the backend/domain lane and marked the Claude packet
+  superseded.
+- Antigravity's plan confirmed the Diary UI should only echo backend-supplied
+  evidence; Ariadne verified `enrichBernieConfirmPayload()` already preserves
+  signed confirm-payload fields, so no frontend code or asset bump was needed.
+- The backend now mints and verifies versioned HMAC confirmation evidence for
+  Bernie supervised booking confirms, while legacy unsigned compatibility is
+  explicit and auditable.
+- Focused signed-evidence tests, adjacent Bernie/diary confirm tests,
+  py-compile, and `git diff --check` passed.
 
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 
