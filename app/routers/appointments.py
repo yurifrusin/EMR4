@@ -52,8 +52,18 @@ from app.services.bernie import (
     build_existing_future_follow_up_warning,
     has_existing_booking_on_requested_day,
     actor_context_for_interpreter_user,
+    BernieAdvisoryWarningFrame,
+    BernieGuardrailOutcomeFrame,
+    BernieModelUncertaintyFrame,
+    BerniePatientBookingContextFrame,
+    BernieReceptionContextFrameSet,
+    BernieRequestedAppointmentFrame,
+    BernieRosterScheduleFrame,
+    BernieSlotSearchFrame,
+    BernieStaleEvidenceFrame,
     get_booking_instruction_interpreter,
     evaluate_bernie_pilot_eligibility,
+    evaluate_reception_context,
     evaluate_same_day_window,
     normalize_slot_search_command,
     resolve_week_relative_date,
@@ -1356,6 +1366,10 @@ def interpret_bernie_booking_instruction(
     )
     turn_ref = _mint_next_turn_ref(body.turn_ref, "staff_instruction", effective_reference_date)
     result = result.model_copy(update={"turn_ref": turn_ref})
+    result = _attach_bernie_interpret_reception_context(
+        result,
+        reference_date=effective_reference_date,
+    )
     return result
 
 
@@ -1384,6 +1398,215 @@ def _context_frame_value(
         if value:
             return str(value)
     return None
+
+
+def _first_issue_code(issues: list[AppointmentProposalIssue]) -> Optional[str]:
+    return issues[0].code if issues else None
+
+
+def _build_bernie_reception_context(
+    *,
+    reference_date: date_type,
+    normalization: Optional[SlotSearchCommandResult] = None,
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+    blocks: Optional[list[AppointmentProposalIssue]] = None,
+    confidence_axes: Optional[list[BernieConfidenceAxis]] = None,
+    patient_booking_context: Optional[BerniePatientBookingContext] = None,
+    context_freshness: Optional[BernieContextFreshness] = None,
+    search_proposal: Optional[SlotSearchProposalOut] = None,
+    search_ran: bool = False,
+) -> BernieReceptionContextFrameSet:
+    """Build additive typed metadata from facts the router already computed."""
+    effective_warnings = warnings or []
+    effective_blocks = blocks or []
+    frames = []
+
+    if normalization is None:
+        frames.append(BernieRequestedAppointmentFrame(
+            status="missing",
+            basis="No normalized appointment request is available yet.",
+            source="server_resolver",
+            reference_date=reference_date,
+            reason_code="request_not_normalized",
+        ))
+    else:
+        status = "known" if normalization.safe else "partial"
+        frames.append(BernieRequestedAppointmentFrame(
+            status=status,
+            basis=normalization.summary,
+            source="server_resolver",
+            reference_date=reference_date,
+            reason_code=_first_issue_code(normalization.blocks),
+        ))
+
+    if patient_booking_context is not None:
+        frames.append(BerniePatientBookingContextFrame(
+            status="recognized",
+            basis="Recognized patient booking context is available.",
+            reference_date=reference_date,
+            reason_code="recognized_patient_booking_context",
+            payload={
+                "patient_key": patient_booking_context.patient_key,
+                "recent_count": patient_booking_context.recent_count,
+                "future_count": patient_booking_context.future_count,
+                "has_future_booking": patient_booking_context.has_future_booking,
+                "existing_future_follow_up": patient_booking_context.existing_future_follow_up,
+            },
+        ))
+
+    if context_freshness is not None:
+        frames.append(BernieStaleEvidenceFrame(
+            status="stale" if context_freshness.stale else "fresh",
+            reason_code="context_reference_date_stale" if context_freshness.stale else "context_reference_date_fresh",
+            basis=context_freshness.basis,
+            reference_date=reference_date,
+        ))
+
+    for issue in effective_warnings:
+        if issue.code == "no_practitioner_schedule":
+            continue
+        frames.append(BernieAdvisoryWarningFrame(
+            reason_code=issue.code,
+            basis=issue.message,
+            source="patient_context" if issue.code == "existing_future_follow_up" else "server_resolver",
+            reference_date=reference_date,
+        ))
+
+    for issue in effective_blocks:
+        frames.append(BernieGuardrailOutcomeFrame(
+            status="blocked",
+            reason_code=issue.code,
+            basis=issue.message,
+            reference_date=reference_date,
+        ))
+
+    for axis in confidence_axes or []:
+        if axis.band in {"ask", "proceed_with_check"}:
+            frames.append(BernieModelUncertaintyFrame(
+                status="ask" if axis.band == "ask" else "proceed_with_check",
+                reason_code=f"{axis.axis}_{axis.band}",
+                basis=axis.basis,
+                source="server_resolver",
+                reference_date=reference_date,
+            ))
+
+    if search_ran:
+        schedule_warning = next(
+            (
+                issue
+                for issue in (search_proposal.warnings if search_proposal else [])
+                if issue.code == "no_practitioner_schedule"
+            ),
+            None,
+        )
+        if schedule_warning is not None:
+            frames.append(BernieRosterScheduleFrame(
+                status="unavailable",
+                reason_code=schedule_warning.code,
+                basis=schedule_warning.message,
+                reference_date=reference_date,
+            ))
+            frames.append(BernieSlotSearchFrame(
+                status="not_run",
+                reason_code="slot_search_skipped_no_schedule",
+                basis="Slot search found no bookable schedule to search.",
+                reference_date=reference_date,
+                candidate_count=0,
+            ))
+        elif search_proposal is None:
+            frames.append(BernieSlotSearchFrame(
+                status="blocked",
+                reason_code="slot_search_missing_result",
+                basis="Slot search was expected but no result is available.",
+                reference_date=reference_date,
+            ))
+        elif not search_proposal.safe:
+            frames.append(BernieSlotSearchFrame(
+                status="blocked",
+                reason_code=_first_issue_code(search_proposal.blocks) or "slot_search_blocked",
+                basis=search_proposal.summary,
+                reference_date=reference_date,
+                candidate_count=len(search_proposal.candidates),
+            ))
+        elif search_proposal.candidates:
+            frames.append(BernieRosterScheduleFrame(
+                status="available",
+                basis="Slot search ran against an available roster/schedule window.",
+                reference_date=reference_date,
+            ))
+            frames.append(BernieSlotSearchFrame(
+                status="searched_with_candidates",
+                reason_code="slot_candidates_found",
+                basis=search_proposal.summary,
+                reference_date=reference_date,
+                candidate_count=len(search_proposal.candidates),
+            ))
+        else:
+            frames.append(BernieRosterScheduleFrame(
+                status="available",
+                basis="Slot search ran against an available roster/schedule window.",
+                reference_date=reference_date,
+            ))
+            frames.append(BernieSlotSearchFrame(
+                status="searched_no_candidates",
+                reason_code="no_slot_candidates",
+                basis=search_proposal.summary,
+                reference_date=reference_date,
+                candidate_count=0,
+            ))
+
+    return BernieReceptionContextFrameSet(reference_date=reference_date, frames=frames)
+
+
+def _attach_bernie_interpret_reception_context(
+    result: BernieBookingInstructionInterpretOut,
+    *,
+    reference_date: date_type,
+) -> BernieBookingInstructionInterpretOut:
+    frame_set = _build_bernie_reception_context(
+        reference_date=reference_date,
+        normalization=result.normalization,
+        warnings=result.warnings,
+        blocks=result.blocks,
+        confidence_axes=result.confidence_axes,
+        patient_booking_context=result.patient_booking_context,
+        context_freshness=result.context_freshness,
+    )
+    policy = evaluate_reception_context(frame_set)
+    return result.model_copy(update={
+        "reception_context": frame_set.model_dump(mode="json"),
+        "reception_policy": policy.model_dump(mode="json"),
+    })
+
+
+def _attach_bernie_supervised_reception_context(
+    out: BernieSupervisedBookingOut,
+    *,
+    reference_date: date_type,
+    patient_booking_context: Optional[BerniePatientBookingContext] = None,
+    context_freshness: Optional[BernieContextFreshness] = None,
+) -> BernieSupervisedBookingOut:
+    update_values = {}
+    if patient_booking_context is not None:
+        update_values["patient_booking_context"] = patient_booking_context
+    if context_freshness is not None:
+        update_values["context_freshness"] = context_freshness
+    enriched = out.model_copy(update=update_values) if update_values else out
+    frame_set = _build_bernie_reception_context(
+        reference_date=reference_date,
+        normalization=enriched.normalization,
+        warnings=enriched.warnings,
+        blocks=enriched.blocks,
+        patient_booking_context=enriched.patient_booking_context,
+        context_freshness=enriched.context_freshness,
+        search_proposal=enriched.search_proposal,
+        search_ran=enriched.search_proposal is not None,
+    )
+    policy = evaluate_reception_context(frame_set)
+    return enriched.model_copy(update={
+        "reception_context": frame_set.model_dump(mode="json"),
+        "reception_policy": policy.model_dump(mode="json"),
+    })
 
 
 def _booking_context_practitioner_for_patient(
@@ -3537,13 +3760,17 @@ def propose_bernie_supervised_booking(
     )
     review_patient_evidence = _build_bernie_patient_evidence(review_identity_evidence, _review_patient)
     if not normalization.safe or normalization.constraint is None:
-        return _bernie_supervised_blocked(
+        blocked = _bernie_supervised_blocked(
             normalization=normalization,
             summary=normalization.summary,
             blocks=normalization.blocks,
             warnings=normalization.warnings,
             identity_evidence=review_identity_evidence,
             patient_evidence=review_patient_evidence,
+        )
+        return _attach_bernie_supervised_reception_context(
+            blocked,
+            reference_date=request_reference_date,
         )
 
     # Schedule-aware clinic-day exhaustion checks.
@@ -3593,13 +3820,13 @@ def propose_bernie_supervised_booking(
             normalization = normalization.model_copy(update={"warnings": warnings_for_ctx})
 
     def _with_ctx(out: BernieSupervisedBookingOut) -> BernieSupervisedBookingOut:
-        """Attach patient booking context and freshness to any supervised-booking response."""
-        if _sb_patient_ctx is None and _sb_context_freshness is None:
-            return out
-        return out.model_copy(update={
-            "patient_booking_context": _sb_patient_ctx,
-            "context_freshness": _sb_context_freshness,
-        })
+        """Attach patient context, freshness, and reception frames to any response."""
+        return _attach_bernie_supervised_reception_context(
+            out,
+            reference_date=request_reference_date,
+            patient_booking_context=_sb_patient_ctx,
+            context_freshness=_sb_context_freshness,
+        )
 
     # Before-search bounded-window pre-check: if the window's upper bound is entirely
     # in the past, short-circuit without running a slot query.

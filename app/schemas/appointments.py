@@ -751,6 +751,8 @@ class BernieBookingInstructionInterpretOut(BaseModel):
     # ── Patient booking context (additive; only populated for recognized patients) ──
     patient_booking_context: Optional[BerniePatientBookingContext] = None
     context_freshness: Optional[BernieContextFreshness] = None
+    reception_context: Optional[dict[str, Any]] = None
+    reception_policy: Optional[dict[str, Any]] = None
     # Additive turn tracking (default None for backward compat).
     turn_ref: Optional["BernieTurnRef"] = None
 
@@ -797,6 +799,8 @@ class BernieSupervisedBookingOut(BaseModel):
     # ── Additive context fields (default None/empty for backward compat) ──
     patient_booking_context: Optional[BerniePatientBookingContext] = None
     context_freshness: Optional[BernieContextFreshness] = None
+    reception_context: Optional[dict[str, Any]] = None
+    reception_policy: Optional[dict[str, Any]] = None
     suggestions: list[BernieSlotSuggestion] = Field(default_factory=list)
     # ── Additive turn tracking (default None for backward compat) ──
     turn_ref: Optional["BernieTurnRef"] = None

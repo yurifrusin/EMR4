@@ -676,6 +676,14 @@ def test_recognized_patient_interpret_returns_booking_context(
     assert ctx["has_future_booking"] is True
     assert ctx["existing_future_follow_up"] is True
     assert len(ctx["future_bookings"]) >= 1
+    reception_context = data["reception_context"]
+    assert reception_context["schema_version"] == "bernie.reception_context.v1"
+    assert any(
+        frame["frame_type"] == "patient_booking_context"
+        and frame["status"] == "recognized"
+        for frame in reception_context["frames"]
+    )
+    assert data["reception_policy"]["availability"] == "not_evaluated"
 
 
 def test_fuzzy_candidate_has_no_booking_context(
@@ -726,6 +734,17 @@ def test_existing_future_follow_up_warning_in_interpret(
         assert "existing_future_follow_up" in warning_codes, (
             "existing_future_follow_up warning expected in response warnings"
         )
+        frames = data["reception_context"]["frames"]
+        assert any(
+            frame["frame_type"] == "advisory_warning"
+            and frame["reason_code"] == "existing_future_follow_up"
+            and frame["source"] == "patient_context"
+            for frame in frames
+        )
+        policy = data["reception_policy"]
+        assert policy["availability"] == "not_evaluated"
+        assert policy["advisory_warnings_only"] is True
+        assert policy["search_ran_no_candidates"] is False
 
 
 def test_different_day_future_booking_stays_in_context_without_warning(
@@ -755,6 +774,12 @@ def test_different_day_future_booking_stays_in_context_without_warning(
     assert ctx["existing_future_follow_up"] is True
     warning_codes = [w["code"] for w in data.get("warnings", [])]
     assert "existing_future_follow_up" not in warning_codes
+    assert not any(
+        frame["frame_type"] == "advisory_warning"
+        and frame["reason_code"] == "existing_future_follow_up"
+        for frame in data["reception_context"]["frames"]
+    )
+    assert data["reception_policy"]["availability"] == "not_evaluated"
 
 
 def test_tomorrow_request_uses_visible_reference_date_not_today_bookings(
@@ -792,6 +817,13 @@ def test_tomorrow_request_uses_visible_reference_date_not_today_bookings(
     assert data["normalization"]["constraint"]["date_from"] == "2026-07-04"
     warning_codes = [w["code"] for w in data.get("warnings", [])]
     assert "existing_future_follow_up" not in warning_codes
+    assert data["reception_context"]["reference_date"] == "2026-07-03"
+    assert not any(
+        frame["frame_type"] == "advisory_warning"
+        and frame["reason_code"] == "existing_future_follow_up"
+        for frame in data["reception_context"]["frames"]
+    )
+    assert data["reception_policy"]["search_ran_no_candidates"] is False
 
 
 def test_interpret_booking_context_no_db_writes(

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint 106C - Bernie has a bounded backend domain package foundation, canonical pure temporal policy, and typed receptionist context-frame/reception-policy contracts (`app/services/bernie/frames.py`, `policy.py`) that distinguish true no-slot, roster unavailable, stale evidence, model uncertainty, advisory warnings, and hard guardrails; no persisted session table or frontend state migration yet |
-| **Next recommended work** | Continue the Fable/Codex Bernie architecture programme in small plan-gated slices: wire typed frames into interpret/supervised-booking route adapters and then decide the persisted server-side Bernie session migration; keep broad root-to-branch API review deferred |
+| **Current active track** | Post-Sprint 106D - Bernie has a bounded backend domain package foundation, canonical pure temporal policy, typed receptionist context-frame/reception-policy contracts, and additive route wiring on interpret/supervised-booking responses; no persisted session table or frontend state migration yet |
+| **Next recommended work** | Continue the Fable/Codex Bernie architecture programme in small plan-gated slices: make the Diary Bernie panel consume `reception_policy`/typed frames for logically correct messages, then decide the persisted server-side Bernie session migration; keep broad root-to-branch API review deferred |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 106C Bernie typed context-frame policy foundation |
+| **Latest integration commit** | Sprint 106D Bernie route context-frame wiring |
 
 ### Tag map (all tags pushed to remote)
 

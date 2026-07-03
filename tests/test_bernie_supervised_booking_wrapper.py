@@ -108,6 +108,14 @@ def test_blocked_normalization_does_not_execute_slot_search(client, gp_user, mon
     assert data["staff_review"]["blocks"][0]["code"] == "missing_practitioner_id"
     assert data["normalization"]["safe"] is False
     assert data["blocks"][0]["code"] == "missing_practitioner_id"
+    assert data["reception_policy"]["availability"] == "blocked"
+    assert data["reception_policy"]["must_ask_clarification"] is True
+    assert any(
+        frame["frame_type"] == "guardrail_outcome"
+        and frame["status"] == "blocked"
+        and frame["reason_code"] == "missing_practitioner_id"
+        for frame in data["reception_context"]["frames"]
+    )
 
 
 def test_safe_command_returns_candidate_selection_response_without_mutating(
@@ -148,8 +156,51 @@ def test_safe_command_returns_candidate_selection_response_without_mutating(
     assert review["evidence_summary"] == "Candidate slot summaries are review-only until staff selects one slot."
     assert review["confirm_endpoint"] is None
     assert review["confirm_payload"] is None
+    policy = data["reception_policy"]
+    assert policy["availability"] == "search_ran_with_candidates"
+    assert policy["can_offer_candidates"] is True
+    assert policy["search_ran_no_candidates"] is False
+    assert any(
+        frame["frame_type"] == "slot_search"
+        and frame["status"] == "searched_with_candidates"
+        and frame["candidate_count"] > 0
+        for frame in data["reception_context"]["frames"]
+    )
     assert db.query(Appointment).count() == appointment_before
     assert db.query(AppointmentAuditLog).count() == audit_before
+
+
+def test_no_practitioner_schedule_is_roster_unavailable_not_no_free_slots(
+    client,
+    gp_user,
+    practitioner,
+    monkeypatch,
+):
+    token = make_token(gp_user)
+    fixed_now = datetime(2026, 6, 22, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+
+    resp = _post_wrapper(client, token, _base_body(practitioner))
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    policy = data["reception_policy"]
+    assert policy["availability"] == "roster_unavailable"
+    assert policy["roster_unavailable"] is True
+    assert policy["search_ran_no_candidates"] is False
+    assert policy["can_search_slots"] is False
+    assert any(
+        frame["frame_type"] == "roster_schedule"
+        and frame["status"] == "unavailable"
+        and frame["reason_code"] == "no_practitioner_schedule"
+        for frame in data["reception_context"]["frames"]
+    )
+    assert any(
+        frame["frame_type"] == "slot_search"
+        and frame["status"] == "not_run"
+        and frame["reason_code"] == "slot_search_skipped_no_schedule"
+        for frame in data["reception_context"]["frames"]
+    )
 
 
 def test_selected_candidate_returns_confirmation_ready_evidence_without_mutating(
