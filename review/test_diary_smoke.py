@@ -6651,3 +6651,208 @@ def test_bernie_reception_policy_legacy_fallback(diary_page):
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_reception_policy_clarification(diary_page):
+    """Clarification required state should render appropriate status, headline, and action copy."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "blocked",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [],
+                warnings: [],
+                blocks: [],
+                clarifying_question: "Which day next week did you want to book?",
+                reception_policy: {
+                  availability: "blocked",
+                  must_ask_clarification: true,
+                  can_offer_candidates: false,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
+        status_text = diary_page.locator("[data-testid='bernie-review-status']").text_content().strip()
+        headline_text = diary_page.locator("[data-testid='bernie-review-headline']").text_content().strip()
+        action_text = diary_page.locator("[data-testid='bernie-review-action']").text_content().strip()
+
+        assert status_text == "Clarification required"
+        assert headline_text == "Clarification required"
+        assert action_text == "Which day next week did you want to book?"
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_reception_policy_advisory_warnings_only(diary_page):
+    """Advisory warnings only allows confirmation and shows confirm button."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "confirmation_ready",
+                confirmation_ready: true,
+                selected_slot: {
+                  appointment_date: "2026-07-06",
+                  start_time_local: "10:00:00",
+                  duration_minutes: 15,
+                  practitioner_id: "e44d3200-9ef2-4ab8-912f-b4df4492bfd4",
+                  patient_id: "a33d3200-9ef2-4ab8-912f-b4df4492bfd4"
+                },
+                candidate_slots: [],
+                warnings: [{ code: "existing_future_follow_up", message: "Patient has future booking." }],
+                blocks: [],
+                reception_policy: {
+                  availability: "search_ran_with_candidates",
+                  must_ask_clarification: false,
+                  must_block_confirmation: false,
+                  advisory_warnings_only: true,
+                  can_offer_candidates: true,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
+        status_text = diary_page.locator("[data-testid='bernie-review-status']").text_content().strip()
+        assert status_text == "Ready to book"
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").is_enabled()
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_reception_policy_stale_conflict_disables_confirm(diary_page):
+    """When stale conflict is present in reception policy, confirmation is blocked."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "confirmation_ready",
+                confirmation_ready: true,
+                selected_slot: {
+                  appointment_date: "2026-07-06",
+                  start_time_local: "10:00:00",
+                  duration_minutes: 15,
+                  practitioner_id: "e44d3200-9ef2-4ab8-912f-b4df4492bfd4",
+                  patient_id: "a33d3200-9ef2-4ab8-912f-b4df4492bfd4"
+                },
+                candidate_slots: [],
+                warnings: [],
+                blocks: [],
+                reception_policy: {
+                  availability: "blocked",
+                  must_ask_clarification: false,
+                  must_block_confirmation: true,
+                  advisory_warnings_only: false,
+                  can_offer_candidates: false,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_reception_policy_no_phi_in_storage(diary_page):
+    """Ensure that loading Bernie review panel leaves zero PHI in localStorage/sessionStorage."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "confirmation_ready",
+                confirmation_ready: true,
+                selected_slot: {
+                  appointment_date: "2026-07-06",
+                  start_time_local: "10:00:00",
+                  duration_minutes: 15,
+                  practitioner_id: "e44d3200-9ef2-4ab8-912f-b4df4492bfd4",
+                  patient_id: "a33d3200-9ef2-4ab8-912f-b4df4492bfd4"
+                },
+                patient_evidence: {
+                  patient_id: "a33d3200-9ef2-4ab8-912f-b4df4492bfd4",
+                  first_name: "John",
+                  last_name: "Doe",
+                  date_of_birth: "1980-01-01"
+                },
+                candidate_slots: [],
+                warnings: [],
+                blocks: [],
+                reception_policy: {
+                  availability: "search_ran_with_candidates",
+                  must_ask_clarification: false,
+                  must_block_confirmation: false,
+                  advisory_warnings_only: true,
+                  can_offer_candidates: true,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
+        storage_values = diary_page.evaluate(
+            """() => {
+                const values = [];
+                for (let i = 0; i < localStorage.length; i += 1) {
+                    const key = localStorage.key(i);
+                    if (key !== 'emr4_token') {
+                        values.push(localStorage.getItem(key));
+                    }
+                }
+                for (let i = 0; i < sessionStorage.length; i += 1) {
+                    values.push(sessionStorage.getItem(sessionStorage.key(i)));
+                }
+                return values.join("\\n");
+            }"""
+        )
+        assert "John" not in storage_values
+        assert "Doe" not in storage_values
+        assert "1980-01-01" not in storage_values
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

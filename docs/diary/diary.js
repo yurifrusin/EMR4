@@ -692,14 +692,18 @@ const BERNIE_STATUS_COPY = {
   blocked: "Needs details",
   candidate_selection_required: "Choose a time",
   confirmation_ready: "Ready to book",
-  clinic_day_exhausted: "Choose another day"
+  clinic_day_exhausted: "Choose another day",
+  clarification: "Clarification required",
+  advisory_warnings_only: "Ready to book"
 };
 
 const BERNIE_HEADLINE_COPY = {
   blocked: "Add the missing details",
   candidate_selection_required: "Bernie found these times",
   confirmation_ready: "Ready to book this appointment",
-  clinic_day_exhausted: "No times left today"
+  clinic_day_exhausted: "No times left today",
+  clarification: "Clarification required",
+  advisory_warnings_only: "Ready to book this appointment"
 };
 
 const BERNIE_INFORMATIONAL_CODES = new Set([
@@ -752,6 +756,18 @@ function bernieHeadlineCopy(status, blocks = []) {
 
 function isBernieConfirmReady(payload) {
   if (!payload) return false;
+  const policy = payload.reception_policy;
+  if (policy) {
+    if (policy.must_block_confirmation === true || policy.must_ask_clarification === true) {
+      return false;
+    }
+    if (policy.advisory_warnings_only === true) {
+      return true;
+    }
+    if (policy.availability === "confirmation_ready") {
+      return true;
+    }
+  }
   if (payload.confirm_affordance && typeof payload.confirm_affordance.can_show_confirm_ui === "boolean") {
     return payload.confirm_affordance.can_show_confirm_ui;
   }
@@ -790,8 +806,12 @@ function bernieReviewTransition(payload) {
       state = "roster_unavailable";
     } else if (policy.availability === "search_ran_no_candidates" || policy.search_ran_no_candidates === true) {
       state = "no_slots";
-    } else if (policy.availability === "blocked") {
+    } else if (policy.must_ask_clarification === true || policy.availability === "must_ask_clarification" || policy.availability === "clarification") {
+      state = "clarification";
+    } else if (policy.must_block_confirmation === true || policy.availability === "blocked") {
       state = "blocked";
+    } else if (policy.advisory_warnings_only === true || policy.availability === "advisory_warnings_only") {
+      state = "advisory_warnings_only";
     } else if (payload.status === "confirmation_ready") {
       state = "confirmation_ready";
     } else if (canShowCandidates) {
@@ -843,6 +863,10 @@ function bernieReviewTransition(payload) {
     state = "blocked";
   }
 
+  if (state === "advisory_warnings_only" && !isBernieConfirmReady(payload)) {
+    state = "blocked";
+  }
+
   return {
     state,
     canShowCandidates,
@@ -861,6 +885,8 @@ function bernieStatusCopyForPayload(payload) {
   if (transition.state === "roster_unavailable") return "Roster/schedule unavailable";
   if (transition.state === "no_slots") return "Try another time";
   if (transition.state === "no_selectable_candidates") return "Needs review";
+  if (transition.state === "advisory_warnings_only") return "Ready to book";
+  if (transition.state === "clarification") return "Clarification required";
   return bernieStatusCopy(transition.state, payload?.blocks);
 }
 
@@ -873,7 +899,8 @@ function bernieHeadlineCopyForPayload(payload) {
   if (transition.state === "roster_unavailable") return "Roster/schedule unavailable";
   if (transition.state === "no_slots") return "No matching times found";
   if (transition.state === "no_selectable_candidates") return "I could not show a time for this request";
-  if (transition.state === "confirmation_ready") return BERNIE_HEADLINE_COPY.confirmation_ready;
+  if (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") return BERNIE_HEADLINE_COPY.confirmation_ready;
+  if (transition.state === "clarification") return "Clarification required";
   return bernieHeadlineCopy(transition.state, payload?.blocks);
 }
 
@@ -906,7 +933,10 @@ function bernieReviewActionCopy(payload) {
   if (transition.state === "no_selectable_candidates") {
     return "I need staff review before I can show a time. Nothing is booked yet.";
   }
-  if (transition.state === "confirmation_ready") {
+  if (transition.state === "clarification") {
+    return payload.clarifying_question || "I need clarification before I can proceed. Please check the chat notes or ask me a clarifying question.";
+  }
+  if (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") {
     return "Review the details before confirming.";
   }
   if (payload.status === "clinic_day_exhausted") {
@@ -4199,7 +4229,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   const headline = document.createElement("h3");
   headline.className = "bernie-review-headline";
   headline.setAttribute("data-testid", "bernie-review-headline");
-  if (transition.state === "confirmation_ready") {
+  if (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") {
     const patientName = berniePatientLabelFromPayload(payload);
     const practitionerName = berniePractitionerLabelFromPayload(payload);
     const date = payload.selected_slot?.appointment_date || "";
@@ -4483,7 +4513,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       }
     }
   }
-  else if (transition.state === "confirmation_ready") {
+  else if (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") {
     const selectionContainer = document.createElement("div");
     selectionContainer.className = "bernie-selection-container";
 
@@ -4528,7 +4558,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     confirmBtn.title = "Confirm booking (Ctrl+Alt+Enter)";
     confirmBtn.id = "btn-bernie-confirm";
     confirmBtn.textContent = "Confirm booking";
-    confirmBtn.disabled = Boolean(bernieSession.serverConflict);
+    confirmBtn.disabled = Boolean(bernieSession.serverConflict) || (payload.reception_policy && payload.reception_policy.must_block_confirmation === true);
     confirmBox.appendChild(confirmBtn);
 
     const shortcutHint = document.createElement("div");

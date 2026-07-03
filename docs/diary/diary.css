@@ -2426,7 +2426,13 @@ html, body {
   color: #075985;
 }
 
-.bernie-status-badge.confirmation_ready {
+.bernie-status-badge.clarification {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.bernie-status-badge.confirmation_ready,
+.bernie-status-badge.advisory_warnings_only {
   background-color: #dcfce7;
   color: #166534;
 }

@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 9baa1ae |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-n10-diary-bernie-outcome-ux-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/diary/diary.js, docs/diary/diary.css, review/test_diary_smoke.py
+- Verification run: Static syntax checks via `node --check` and full smoke test suite execution via `pytest review/test_diary_smoke.py`.
+- Remaining risks: None. Old payload backward-compatibility is preserved, stale conflicts are cleanly blocked, and zero PHI leakage is guaranteed by tests.
