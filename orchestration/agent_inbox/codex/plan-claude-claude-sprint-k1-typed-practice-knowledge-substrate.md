@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-k1-typed-practice-knowledge-substrate` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 21:08 +1000 |
 | Source HEAD | `416fcc5` |
 
@@ -56,6 +56,15 @@ No visual/UI change is expected or allowed this sprint - the Diary grid, booking
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne. Use a separate
+  `app/services/practice_knowledge/` package for the advisory substrate, with a
+  deterministic in-memory retriever behind a protocol seam and no route/UI
+  wiring in K1.
+- Required changes before implementation: keep retrieval structurally
+  advisory-only; do not import practice knowledge from diary policy,
+  confirm_gate, temporal, slot search, envelopes, or write paths. Add
+  adversarial tests proving retrieved facts cannot create no-slot truth,
+  roster truth, confirm authority, freshness/audit evidence, or write payloads.
+  Prefer adding a dedicated `practice_knowledge` frame source only if typed
+  tests prove it is restricted to advisory frames.
+- Approved to proceed: yes, release with `complete sprint task`.

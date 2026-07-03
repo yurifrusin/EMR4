@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-k1-advisory-retrieval-ux-boundary` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 21:04 +1000 |
 | Source HEAD | `416fcc5` |
 
@@ -44,6 +44,12 @@ Defensively support both generic frame types and specialized payload fields to p
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted as a future UI consumption lane, not released for K1
+  implementation yet.
+- Required changes before implementation: do not add UI rendering until backend
+  route/session wiring exposes a typed advisory envelope. When that later
+  happens, the UI must label retrieved practice facts as advisory guidance and
+  must not let them override schedule explanations, no-slot authority, or
+  confirm-affordance state.
+- Approved to proceed: no for this K1 implementation slice; defer until route
+  wiring exists.
