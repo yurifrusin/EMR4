@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n6-diary-render-server-session` |
-| Status | accepted_with_amendments |
+| Status | integrated |
 | Created | 2026-07-03 22:45 +1000 |
 | Source HEAD | `6ec3298` |
 

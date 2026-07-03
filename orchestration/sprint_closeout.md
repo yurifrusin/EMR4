@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint N6: Diary Render From Bernie Session Endpoint |
 | Integrated through | Accepted Antigravity Diary render/refetch plan, accepted Codex/Lorentz UI invariant plan, Claude lane superseded by quota cap, Ariadne implementation and verification |
-| Status | Integrated and verified locally; push, mirror realign, and audit pending |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed

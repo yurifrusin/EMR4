@@ -247,7 +247,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Integrated and verified locally; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, deployed, mirrored, and audited |
 | Product Goal | Make the Diary Bernie panel consume the N5 server-owned session endpoint for active-session load, new-session/refetch, stale conflict handling, and PHI-minimised event appends while keeping the browser presentational |
 | Worker Shape | Claude backend/API contract review if quota allows, Antigravity Diary UI render/refetch plan, Codex worker UI invariant/review-harness plan, Ariadne orchestration/integration |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n6-bernie-session-ui-contract-review.md` |
