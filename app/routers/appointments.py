@@ -42,6 +42,10 @@ from app.schemas.appointments import (
     BernieNoSlotSuggestionSelectionIn, BernieNoSlotSuggestionSelectionOut,
 )
 from app.services.bernie import (
+    BernieReceptionPolicyDecision,
+    ConfirmAffordanceDecision,
+    ConfirmAffordanceGate,
+    evaluate_confirm_affordance,
     compute_candidate_freshness_id,
     compute_proposal_freshness_id,
     check_staleness,
@@ -3382,10 +3386,45 @@ def _bernie_staff_review_payload(
         and selection_proposal.safe
         and selection_proposal.create_proposal is not None
     )
+
+    # Evaluate the backend confirm-affordance gate.  A synthetic policy is
+    # built from the route-level result semantics so the gate can make a
+    # single, typed decision without needing the full reception frame set.
+    # advisory_warnings_only is False here: advisory warnings alongside a
+    # staged proposal do not constitute an advisory-only state.
+    _has_staged_proposal = confirmation_ready
+    _hard_blocked = result in {"blocked", "clinic_day_exhausted"} or any(
+        b.severity == "blocked" for b in blocks
+    )
+    _gate_policy = BernieReceptionPolicyDecision(
+        availability=(
+            "search_ran_with_candidates"
+            if result in {"confirmation_ready", "candidate_selection_required"}
+            else "search_ran_no_candidates"
+            if result == "clinic_day_exhausted"
+            else "blocked"
+        ),
+        can_search_slots=not _hard_blocked,
+        must_ask_clarification=False,
+        can_offer_candidates=result in {"confirmation_ready", "candidate_selection_required"},
+        can_prepare_proposal=_has_staged_proposal,
+        must_block_confirmation=_hard_blocked,
+        advisory_warnings_only=False,
+        roster_unavailable=False,
+        search_ran_no_candidates=result == "clinic_day_exhausted",
+        reason_codes=[b.code for b in blocks] + [w.code for w in warnings],
+        schedule_reason_codes=[],
+    )
+    gate_decision = evaluate_confirm_affordance(
+        _gate_policy,
+        staleness=None,
+        has_staged_proposal=_has_staged_proposal,
+    )
+
     confirm_payload = None
     confirm_endpoint = None
     confirm_evidence: list[str] = []
-    if confirmation_ready:
+    if gate_decision.confirm_grade_allowed:
         confirm_endpoint = "/api/v1/appointments/proposals/create/confirm-bernie"
         confirm_payload = BernieCreateProposalConfirmationIn(
             confirmed=False,
@@ -3428,6 +3467,7 @@ def _bernie_staff_review_payload(
         confirm_endpoint=confirm_endpoint,
         confirm_payload=confirm_payload,
         confirm_evidence=confirm_evidence,
+        confirm_affordance=gate_decision,
     )
 
 

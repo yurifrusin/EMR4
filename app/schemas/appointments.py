@@ -3,6 +3,7 @@ from datetime import datetime, date, time
 from typing import Any, Literal, Optional
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.models.appointments import AppointmentStatus, BookingChannel, AppointmentAuditAction
+from app.services.diary.confirm_gate import ConfirmAffordanceDecision
 
 
 # ── Bernie typed turn contract ────────────────────────────────────────────────
@@ -578,6 +579,7 @@ class BernieStaffReviewPayload(BaseModel):
     confirm_endpoint: Optional[str] = None
     confirm_payload: Optional[dict[str, Any]] = None
     confirm_evidence: list[str] = Field(default_factory=list)
+    confirm_affordance: Optional[ConfirmAffordanceDecision] = None
 
 
 class BerniePilotEligibilityOut(BaseModel):
