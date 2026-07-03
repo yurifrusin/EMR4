@@ -1,4 +1,4 @@
-"""Bounded reception-domain package for Bernie, EMR4's receptionist copilot.
+"""Bernie reception-agent package and compatibility facade.
 
 This package is the domain boundary named by the Fable 5 architecture consult
 (Sprint A of the Bernie extraction programme). Callers outside the Bernie
@@ -6,18 +6,15 @@ domain - routers, future session runtimes, voice lanes - should import from
 ``app.services.bernie`` (or its submodules), never from the legacy flat
 ``app.services.bernie_*`` modules directly.
 
-Current shape (extraction foundation, no behaviour change):
+Current shape (native diary/reception domain foundation, no behaviour change):
 
-- The legacy flat modules remain the implementation; each submodule here is a
-  facade that re-exports the domain's public contract under its bounded home:
-  ``interpreter``, ``context``, ``normalizer``, ``transitions``, ``evidence``,
-  ``pilot``, ``temporal``.
-- ``session`` and ``capabilities`` are new contract scaffolding: the
-  persistence-shaped booking-session/event contract (no DB table yet) and the
-  typed capability/tool registry skeleton.
+- Diary/reception implementation contracts live in ``app.services.diary``.
+  Bernie submodules keep stable import paths by re-exporting those contracts.
+- Bernie continues to own interpretation, session state, narration/pilot
+  boundaries, and legacy flat-module facades that have not moved yet.
 
-Later sprints move implementations into this package and retire the flat
-modules; external import paths through this package stay stable.
+Later sprints add action envelopes and retire more flat-module implementations;
+external import paths through this package stay stable.
 """
 
 from app.services.bernie.capabilities import (

@@ -16,6 +16,11 @@ from datetime import date, datetime, timezone
 import app.services.bernie as bernie_domain
 import app.services.bernie.frames as bernie_frames
 import app.services.bernie.policy as bernie_policy
+import app.services.diary as diary_domain
+import app.services.diary.capabilities as diary_capabilities
+import app.services.diary.frames as diary_frames
+import app.services.diary.policy as diary_policy
+import app.services.diary.temporal as diary_temporal
 import app.services.bernie_booking_interpreter as legacy_interpreter
 import app.services.bernie_patient_context as legacy_context
 import app.services.bernie_pilot_gate as legacy_pilot
@@ -87,6 +92,9 @@ def test_pilot_facade_reexports_legacy_objects():
 
 
 def test_frame_and_policy_facades_reexport_domain_objects():
+    assert bernie_domain.BernieReceptionContextFrameSet is diary_domain.BernieReceptionContextFrameSet
+    assert bernie_domain.BernieReceptionPolicyDecision is diary_domain.BernieReceptionPolicyDecision
+    assert bernie_domain.evaluate_reception_context is diary_domain.evaluate_reception_context
     assert bernie_domain.BernieReceptionContextFrameSet is bernie_frames.BernieReceptionContextFrameSet
     assert bernie_domain.BernieRequestedAppointmentFrame is bernie_frames.BernieRequestedAppointmentFrame
     assert bernie_domain.BerniePatientBookingContextFrame is bernie_frames.BerniePatientBookingContextFrame
@@ -98,9 +106,26 @@ def test_frame_and_policy_facades_reexport_domain_objects():
     assert bernie_domain.BernieGuardrailOutcomeFrame is bernie_frames.BernieGuardrailOutcomeFrame
     assert bernie_domain.BernieReceptionPolicyDecision is bernie_policy.BernieReceptionPolicyDecision
     assert bernie_domain.evaluate_reception_context is bernie_policy.evaluate_reception_context
+    assert bernie_frames.BernieReceptionContextFrameSet is diary_frames.BernieReceptionContextFrameSet
+    assert bernie_policy.BernieReceptionPolicyDecision is diary_policy.BernieReceptionPolicyDecision
+    assert bernie_policy.evaluate_reception_context is diary_policy.evaluate_reception_context
+
+
+def test_capability_facade_reexports_diary_domain_objects():
+    assert bernie_domain.BERNIE_CAPABILITY_REGISTRY is diary_domain.BERNIE_CAPABILITY_REGISTRY
+    assert bernie_domain.BernieCapability is diary_domain.BernieCapability
+    assert bernie_domain.BernieCapabilityTier is diary_domain.BernieCapabilityTier
+    assert bernie_domain.get_bernie_capability is diary_domain.get_bernie_capability
+    assert bernie_domain.BERNIE_CAPABILITY_REGISTRY is diary_capabilities.BERNIE_CAPABILITY_REGISTRY
+    assert bernie_domain.get_bernie_capability is diary_capabilities.get_bernie_capability
 
 
 def test_temporal_facade_reexports_legacy_pure_helpers():
+    assert temporal.parse_time_fragment is diary_domain.parse_time_fragment
+    assert temporal.extract_natural_time_constraints is diary_domain.extract_natural_time_constraints
+    assert temporal.extract_natural_date_constraint is diary_domain.extract_natural_date_constraint
+    assert temporal.evaluate_same_day_window is diary_domain.evaluate_same_day_window
+    assert temporal.parse_time_fragment is diary_temporal.parse_time_fragment
     assert temporal.parse_time_fragment is legacy_interpreter._parse_time_fragment
     assert temporal.extract_natural_time_constraints is legacy_interpreter._extract_natural_time_constraints
     assert temporal.extract_natural_date_constraint is legacy_interpreter._extract_natural_date_constraint

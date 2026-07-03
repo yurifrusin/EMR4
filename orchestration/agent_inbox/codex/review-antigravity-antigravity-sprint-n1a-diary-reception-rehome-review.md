@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n1a-diary-reception-rehome-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -34,5 +34,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. The compatibility suite was appropriate and
+  remained within the N1a contract-review lane.
+- Follow-up required: none for N1a; N1b should make the dynamic diary import
+  checks hard requirements as part of the new envelope/authorship tests.

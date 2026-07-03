@@ -8,53 +8,50 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 107: Diary Reception Policy UI Consumption |
-| Integrated through | Antigravity Diary UI implementation, Codex/Dalton invariant plan guidance, and Ariadne review/fixture repair |
-| Status | Integrated, verified, pushed, mirrored, and audited |
+| Batch | Sprint N1a: Diary Reception Domain Rehome |
+| Integrated through | Claude/Opus implementation plan, Antigravity compatibility tests, Codex/Kepler invariant tests, and Ariadne implementation after Claude session-limit exhaustion |
+| Status | Integrated locally, focused verification passed; push/mirror/audit pending |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- Changed the Diary Bernie review transition logic to consume backend
-  `reception_policy` when present, making typed policy facts authoritative over
-  brittle message/status inference.
-- Prevented "No matching times found" / no-free-times copy unless
-  `reception_policy.search_ran_no_candidates` is true.
-- Added a distinct `roster_unavailable` UI state for
-  `reception_policy.availability == "roster_unavailable"` or
-  `no_practitioner_schedule`, rendered as roster/schedule unavailable rather
-  than a false no-slot state.
-- Preserved candidate display when advisory warnings such as
-  `existing_future_follow_up` are present but candidates are available.
-- Propagated `reception_policy` and `suggestions` from supervised-booking route
-  envelopes into the existing `staff_review` payload consumed by the Diary UI.
-- Added safe fallback behavior for older responses that do not include
-  `reception_policy`.
-- Bumped Diary assets to `diary.js?v=151` and `diary.css?v=128`.
-- Added five deterministic Diary smoke invariants covering roster unavailable,
-  true searched-and-empty no-slot, blocked-but-not-no-slot, advisory future
-  booking with candidates, and legacy fallback.
+- Created the native backend `app/services/diary/` reception-domain package.
+- Moved the action/capability catalog, canonical temporal policy, typed
+  reception context frames, and deterministic reception policy into that diary
+  domain package as pure implementation moves.
+- Left thin `app/services/bernie/` compatibility facades in place so existing
+  Bernie imports resolve to the same objects.
+- Preserved the `reception_policy` response field and
+  `bernie.reception_context.v1` schema literal byte-identically.
+- Added compatibility tests proving Bernie facade objects and diary-domain
+  objects are identical, response models retain `reception_context` and
+  `reception_policy`, and the frame schema version remains stable.
+- Added Antigravity's focused rehome compatibility suite and kept the Diary UI
+  smoke `reception_policy` contract passing without UI changes.
 
 ## Verification
 
-- `node --check docs\diary\diary.js` passed.
-- `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed.
-- Focused Sprint 107 policy UI checks passed:
-  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "reception_policy"`.
-- Full Diary review harness passed:
-  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
+- Focused N1a backend suite passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_diary_rehome_compatibility.py tests\test_bernie_domain_package.py tests\test_bernie_temporal_policy.py tests\test_bernie_context_frames.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py -q`.
+- `.\.venv\Scripts\python.exe -m compileall app\services\diary app\services\bernie -q` passed.
+- Focused Diary smoke policy checks passed:
+  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k reception_policy`.
 - `git diff --check` passed.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was run but still has
+  pre-existing/global failures outside this slice, including async test plugin
+  handling and older Bernie expectation drift; those were not repaired inside
+  this pure rehome sprint.
 
 ## Recommended User Review
 
-No required manual review before moving on. This is a deterministic Diary UI
-copy/state correction with route-intercepted harness coverage. If Yuri wants to
-spot-check live after Pages deploy, the highest-value prompt is the Margaret
-Thompson / Dr Shera "after 3 tomorrow and before 4.30" case that previously
-produced false no-slot and future-booking blocking copy.
+No required manual review before moving on. This was a backend package
+ownership rehome with compatibility tests and no UI, route, schema, migration,
+or copy change.
 
 ## Not Required Before Moving On
 
+- No action envelopes, `allowed_authors`, or `DiaryActionSuggestion` were added
+  yet; that is N1b.
 - No auto-confirm or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was
   started.
@@ -65,34 +62,26 @@ produced false no-slot and future-booking blocking copy.
 
 ## Known Follow-Up
 
-- Diary now consumes the high-level `reception_policy`; future UI slices should
-  continue migrating more Bernie copy to typed state/reason-code sources rather
-  than adding scenario-specific message branches.
-- The legacy router-level `BERNIE_WEEK_RELATIVE_RE` constant remains unused from
-  Sprint 106B; remove during a future low-risk router cleanup if lint requires.
+- N1b should make the internal action envelope/authorship boundary explicit and
+  add the availability-provenance and suggestion-cannot-mutate adversarial
+  tests before K1 retrieval work exists.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Amended N1 / Sprint 108
+## Next Sprint Candidate - Sprint N1b
 
 | Item | Value |
 |---|---|
-| Name | Diary Reception Domain Foundation |
+| Name | Diary Action Envelopes And Boundary Tests |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne orchestration with Claude/Fable plan already accepted; use Antigravity and/or Codex workers for bounded implementation lanes after the sprint packet is dispatched |
+| Recommended agents | Codex/Ariadne orchestration; Claude if session window has refreshed; Antigravity for contract/review harness; Codex worker for adversarial tests |
 
-The next useful slice is the amended Fable/Ariadne/Yuri N1: create the native
-`app/services/diary/` reception domain package, preferably split for
-reviewability. N1a should be pure rehomes plus compatibility facades for the
-action catalog, canonical temporal policy, reception frames, and deterministic
-reception policy, while keeping `reception_policy` and
-`bernie.reception_context.v1` byte-identical. N1b should add internal action
-envelopes including `DiaryActionSuggestion`, authorship metadata, catalog
+N1b should add internal diary action envelopes including
+`DiaryActionSuggestion`, authorship metadata on catalog entries, catalog
 completeness checks, availability-provenance adversarial tests, temporal
 single-source tests, and suggestion-cannot-mutate tests. The former Sprint 108
-schedule-explanation/copy-catalog work becomes N2 after this foundation.
-Limited auto-mode remains a future architecture branch, not the next
-implementation.
+schedule-explanation/copy-catalog work becomes N2 after N1b. Limited auto-mode
+remains a future architecture branch, not the next implementation.
 
 ## Previous Closeout - Sprint 106D
 

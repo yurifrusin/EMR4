@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint 107 - Bernie has a bounded backend domain package foundation, canonical pure temporal policy, typed receptionist context-frame/reception-policy contracts, additive route wiring, and Diary UI consumption of `reception_policy` for logically correct no-slot/roster/advisory messaging; no persisted session table yet |
-| **Next recommended work** | Continue the Fable/Codex Bernie architecture programme in small plan-gated slices: add typed schedule explanation and/or a Diary copy catalog keyed by state/reason code, then decide the persisted server-side Bernie session migration; keep broad root-to-branch API review deferred |
+| **Current active track** | Post-Sprint N1a - Bernie/Diary reception contracts now have a native `app/services/diary/` implementation home with Bernie compatibility facades; no behaviour, UI, route, migration, or persisted session change was included |
+| **Next recommended work** | Sprint N1b: add internal diary action envelopes, `DiaryActionSuggestion`, authorship metadata, catalog completeness checks, availability-provenance adversarial tests, temporal single-source checks, and suggestion-cannot-mutate tests; then continue to N2 schedule explanation/copy catalog |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 107 Diary reception-policy UI consumption |
+| **Latest integration commit** | Sprint N1a Diary reception domain rehome |
 
 ### Tag map (all tags pushed to remote)
 

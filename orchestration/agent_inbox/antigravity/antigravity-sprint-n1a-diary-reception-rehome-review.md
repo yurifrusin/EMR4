@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | d76f100 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-n1a-diary-reception-rehome-review --summary "Short plan summary"` |

@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | accepted |
+| Status | integrated |
 | Created | d76f100 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n1a-diary-reception-domain-rehomes --summary "Short plan summary"` |
@@ -89,6 +89,14 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Ariadne/Codex completed this lane after Claude hit the session
+  limit. The implementation created `app/services/diary/`, moved the action
+  catalog, temporal policy, reception frames, and deterministic reception
+  policy there, and left `app/services/bernie/` compatibility facades in place.
+- Verification run: focused N1a backend suite passed; compileall passed;
+  `review/test_diary_smoke.py -q -k reception_policy` passed; `git diff
+  --check` passed. Full `pytest tests -q` still has pre-existing/global
+  failures outside this slice, including missing async-test plugin handling and
+  older Bernie expectation drift.
+- Remaining risks: none for the N1a pure rehome; N1b still needs action
+  envelopes, authorship metadata, and boundary tests.
