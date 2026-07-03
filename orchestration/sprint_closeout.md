@@ -31,7 +31,7 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused G3/G2 signed-confirm smoke passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q -k "edit_modal_uses_signed_update_confirm_before_status_patch or edit_modal_does_not_patch_status_when_signed_update_confirm_fails or human_drag_resize_uses_signed_update_confirm_route"`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
 - `git diff --check` passed.
-- Post-push orchestration audit passed: `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` are all aligned at `14b1580`.
+- Post-push orchestration audit passed: `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` are all aligned at the current Sprint G3 closeout HEAD.
 - Live GitHub Pages check passed: `diary.html` is serving `diary.js?v=164`.
 - Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G3; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
