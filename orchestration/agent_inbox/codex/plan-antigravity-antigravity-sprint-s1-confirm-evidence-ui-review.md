@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-s1-confirm-evidence-ui-review` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 21:41 +1000 |
 | Source HEAD | `8659e7d` |
 
@@ -79,6 +79,12 @@ The UI must safely transport these signed evidence strings from the backend revi
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted with sequencing limits. The UI must only echo
+  server-provided signed evidence and render backend `confirm_affordance`
+  decisions; it must not mint, repair, infer, or verify confirmation authority.
+- Required changes before implementation: wait for the backend signed-evidence
+  field shape unless Ariadne releases only smoke-fixture work. Preserve diary
+  grid, appointment card, booking modal, Waiting Room, taskpane, and Command
+  Centre surfaces.
+- Approved to proceed: yes, after backend shape is finalized or for
+  Ariadne-directed smoke fixtures only.

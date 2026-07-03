@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 11cbb2c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-s1-signed-confirm-evidence-contract --summary "Short plan summary"` |
@@ -88,6 +88,10 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 ## Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
+
+- Superseded by Ariadne/Codex plan because Claude hit the five-hour session
+  limit before producing a usable S1 backend plan. Replacement plan:
+  `orchestration/agent_inbox/codex/plan-codex-ariadne-sprint-s1-signed-confirm-evidence-contract.md`.
 
 - Files changed:
 - Verification run:

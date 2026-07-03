@@ -161,7 +161,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched for plan-gated worker plans |
+| Status | Plan gate accepted; backend implementation proceeding with Ariadne/Codex while Claude is session-limited |
 | Product Goal | Harden Bernie/proposal confirmation evidence so confirmation-grade writes are backed by server-signed evidence and fail closed when evidence is missing, malformed, tampered, stale, or mismatched |
 | Worker Shape | Claude backend/domain contract plan, Antigravity Diary UI evidence-echo review plan, Codex worker adversarial invariant plan, Ariadne orchestration/review |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-s1-signed-confirm-evidence-contract.md` |

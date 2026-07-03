@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | accepted |
 | Created | 11cbb2c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-s1-signed-evidence-invariants --summary "Short plan summary"` |
@@ -89,6 +89,8 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/plan-codex-codex-sprint-s1-signed-evidence-invariants.md`.
+- Verification run: `git diff --check` passed in the worker context.
+- Remaining risks: Worker wrote a local coordination plan rather than using the
+  protocol submit path because the task ran in the integration checkout; Ariadne
+  reviewed and accepted the plan manually.

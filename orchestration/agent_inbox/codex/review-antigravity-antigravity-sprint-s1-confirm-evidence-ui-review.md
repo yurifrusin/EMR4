@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-s1-confirm-evidence-ui-review` |
-| Status | queued |
+| Status | accepted |
 
 ## Review Request
 
@@ -34,5 +34,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted with sequencing limits; UI work should follow backend
+  signed-evidence field naming/shape and remain courier-only.
+- Follow-up required: release implementation after backend evidence shape is
+  available, or restrict Antigravity to smoke-fixture planning/verification.
