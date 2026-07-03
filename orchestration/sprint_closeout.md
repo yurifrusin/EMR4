@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint G6: Human Cancel/Delete Confirm Migration |
 | Integrated through | Codex/Rawls invariant packet and Ariadne implementation |
-| Status | Integrated and verified locally; push, mirror realign, audit, and live Pages check pending |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
 | Last updated | 2026-07-04 |
 
 ## What Changed
@@ -34,7 +34,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused G6 Diary smoke passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -k "cancel_flow_uses_signed_delete_confirm_without_raw_delete or cancel_flow_failed_signed_confirm_does_not_raw_delete" -q`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
 - `git diff --check` passed.
-- Post-push orchestration audit and live GitHub Pages check are pending until the G6 commit is pushed.
+- Post-push orchestration audit passed: `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` are all aligned at the current Sprint G6 closeout HEAD.
+- Live GitHub Pages check passed after rerunning a transient failed Pages deployment: `diary.html` is serving `diary.js?v=167`.
 - Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G6; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
