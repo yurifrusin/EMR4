@@ -756,6 +756,9 @@ function bernieHeadlineCopy(status, blocks = []) {
 
 function isBernieConfirmReady(payload) {
   if (!payload) return false;
+  if (payload.outcome && payload.outcome.kind !== "confirmation_ready" && payload.outcome.can_confirm === false) {
+    return false;
+  }
   const policy = payload.reception_policy;
   if (policy) {
     if (policy.must_block_confirmation === true || policy.must_ask_clarification === true) {
@@ -795,9 +798,32 @@ function bernieReviewTransition(payload) {
   let canShowCandidates = false;
   let canShowNoSlots = false;
   let state = payload.status || "blocked";
+  const outcomeKind = payload.outcome?.kind;
 
-  const policy = payload.reception_policy;
-  if (policy) {
+  if (outcomeKind) {
+    canShowCandidates = outcomeKind === "candidate_selection_required" && candidateSlots.length > 0;
+    canShowNoSlots = outcomeKind === "no_matching_times";
+    if (outcomeKind === "roster_unavailable") {
+      state = "roster_unavailable";
+    } else if (outcomeKind === "no_matching_times") {
+      state = "no_slots";
+    } else if (outcomeKind === "clarification_required") {
+      state = "clarification";
+    } else if (outcomeKind === "guardrail_blocked" || outcomeKind === "handed_off") {
+      state = "blocked";
+    } else if (outcomeKind === "clinic_day_exhausted") {
+      state = "clinic_day_exhausted";
+    } else if (outcomeKind === "confirmation_ready") {
+      state = "confirmation_ready";
+    } else if (outcomeKind === "candidate_selection_required") {
+      state = canShowCandidates ? "candidate_selection_required" : "no_selectable_candidates";
+    } else if (outcomeKind === "advisory_warnings_present") {
+      state = "advisory_warnings_only";
+    } else {
+      state = payload.status || "blocked";
+    }
+  } else if (payload.reception_policy) {
+    const policy = payload.reception_policy;
     // reception_policy is source of truth when present
     canShowCandidates = policy.can_offer_candidates === true && candidateSlots.length > 0;
     canShowNoSlots = policy.search_ran_no_candidates === true;

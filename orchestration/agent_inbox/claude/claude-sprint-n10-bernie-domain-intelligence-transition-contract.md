@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 9baa1ae |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n10-bernie-domain-intelligence-transition-contract --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: app/services/diary/outcomes.py, app/services/bernie/outcomes.py, app/schemas/appointments.py, app/routers/appointments.py, tests/test_bernie_booking_outcomes.py
+- Verification run: Ariadne recovered the timed-out Claude backend work by checkpointing the dirty Claude worktree, cherry-picking it to master, repairing outcome/state precedence and interpret-route assertion behaviour, then running focused and adjacent Bernie backend suites listed in orchestration/sprint_closeout.md.
+- Remaining risks: Claude did not complete the formal submit path before the worker timeout; Ariadne reviewed and integrated the recovered backend patch directly.

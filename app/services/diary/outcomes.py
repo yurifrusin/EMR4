@@ -245,6 +245,15 @@ def classify_booking_outcome(
     if route_result == "handed_off":
         kind = BernieBookingOutcomeKind.handed_off
         basis = "Session has been handed off to staff."
+    elif route_result == "blocked":
+        kind = BernieBookingOutcomeKind.guardrail_blocked
+        basis = "The route blocked the request before it could proceed."
+    elif route_result == "clarification_required":
+        kind = BernieBookingOutcomeKind.clarification_required
+        basis = "The route requires clarification before proceeding."
+    elif route_result == "interpreted" and not policy.advisory_warnings_only:
+        kind = BernieBookingOutcomeKind.interpreted_ready
+        basis = "Interpretation succeeded with no adverse signals; ready for context enrichment."
     elif policy.availability == "blocked":
         kind = BernieBookingOutcomeKind.guardrail_blocked
         basis = "A guardrail outcome frame hard-blocked the request."

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 9baa1ae |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-n10-bernie-outcome-invariant-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: No production branch from the Codex worker; invariant guidance was folded into Ariadne's review and repairs.
+- Verification run: Ariadne verified the integrated backend/UI outcome contract with the focused and adjacent suites listed in orchestration/sprint_closeout.md, including no-slot/advisory/clarification/stale-conflict Diary smoke coverage.
+- Remaining risks: The worker hit the local Python alias protocol issue and did not submit a committed branch; Ariadne treated the plan as review guidance only.

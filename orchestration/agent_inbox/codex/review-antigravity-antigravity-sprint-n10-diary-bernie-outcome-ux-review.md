@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n10-diary-bernie-outcome-ux-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne cherry-picked Antigravity's Diary outcome UX patch, resolved the task-packet status conflict, then tightened the UI to prefer typed backend `outcome.kind` and keep confirm authority with existing gates.
+- Follow-up required: Future N11/domain sprint should make roster/schedule explanation details first-class in backend typed outcomes so Diary copy can become more natural without inventing truth locally.

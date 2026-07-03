@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint K1 - the native diary/reception programme now has a typed, provenance-bearing `app/services/practice_knowledge/` advisory substrate with a deterministic retriever protocol and adversarial tests proving retrieval cannot create slot truth, roster truth, confirm authority, freshness/audit evidence, or write payloads |
-| **Next recommended work** | Continue the native-diary-agent foundation with signed/HMAC confirmation evidence or the N4 tail server-side Bernie session/event design before any broader GraphRAG, auto-mode, or root-to-branch API review; K1b route/UI advisory retrieval wiring should wait until those authority boundaries remain explicit |
+| **Current active track** | Post-Sprint N10 - the native diary/reception programme now has server-session route coordinates, typed Bernie booking outcomes, and Diary rendering that prefers backend outcome/state truth for confirmation, advisory, clarification, no-slot, roster, and blocked affordances |
+| **Next recommended work** | Continue the bounded Diary reception domain foundation with N11 schedule/roster explanation through typed outcomes and render-from-state/domain-module tail work before any broad GraphRAG, auto-mode, or root-to-branch API review; K1b advisory retrieval wiring remains useful but must stay advisory-only |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

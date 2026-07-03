@@ -1576,13 +1576,10 @@ def interpret_bernie_booking_instruction(
         interpretation_target = BernieSessionState.handed_off
     # N10: assert outcome kind is consistent with session advance target.
     if result.outcome is not None:
-        try:
-            assert_outcome_matches_state(
-                BernieBookingOutcomeKind(result.outcome.kind),
-                interpretation_target,
-            )
-        except AssertionError:
-            pass  # log-and-continue in production; hard-fail in tests
+        assert_outcome_matches_state(
+            BernieBookingOutcomeKind(result.outcome.kind),
+            interpretation_target,
+        )
     route_outcome = _append_bernie_route_outcome_event(
         session_id=body.server_session_id,
         current_user=current_user,
