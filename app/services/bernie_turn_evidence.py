@@ -29,6 +29,7 @@ SIGNED_CONFIRMATION_EVIDENCE_VERSION = "bernie.confirmation_evidence.v1"
 SIGNED_CONFIRMATION_EVIDENCE_PURPOSE = "bernie_confirm_create_proposal"
 SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE = "staff_confirm_create_proposal"
 SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE = "bernie_confirm_update_proposal"
+SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE = "diary_confirm_status_proposal"
 
 
 class StalenessVerdict(str, Enum):

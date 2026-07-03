@@ -29,6 +29,7 @@ from app.schemas.appointments import (
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
     AppointmentConfirmUpdateProposalOut, BernieUpdateProposalConfirmationIn,
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
+    AppointmentStatusProposalConfirmationIn, AppointmentConfirmStatusProposalOut,
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
     AppointmentAuditLogOut,
@@ -65,6 +66,7 @@ from app.services.bernie import (
     mint_signed_confirmation_evidence,
     verify_signed_confirmation_evidence,
     SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
+    SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
     check_staleness,
     mint_session_id,
@@ -151,9 +153,16 @@ _BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE = [
     "source_tool_intent_proposal",
 ]
 
+_STATUS_CONFIRM_BASE_EVIDENCE = [
+    "diary_confirm_status_proposal",
+    "source_status_proposal",
+    "source_current_appointment_state",
+]
+
 _BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE = [
     "bernie_signed_confirmation_evidence_verified",
     "staff_signed_confirmation_evidence_verified",
+    "status_signed_confirmation_evidence_verified",
     "legacy_unsigned_confirmation_compat",
 ]
 
@@ -161,6 +170,7 @@ BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
     *_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE,
     *_STAFF_CONFIRM_CREATE_BASE_EVIDENCE,
     *_BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE,
+    *_STATUS_CONFIRM_BASE_EVIDENCE,
     *_BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE,
     *BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES.values(),
 ]
@@ -1842,6 +1852,137 @@ def confirm_update_proposal(
     )
 
 
+def _appointment_status_command_payload(command: AppointmentStatusCommand | AppointmentWaitingAreaCommand) -> dict[str, object]:
+    payload: dict[str, object] = {
+        "appointment_id": str(command.appointment_id),
+        "waiting_area_id": _uuid_or_none(command.waiting_area_id),
+        "waiting_area_id_supplied": command.waiting_area_id_supplied,
+        "clears_waiting_area": command.clears_waiting_area,
+    }
+    if isinstance(command, AppointmentStatusCommand):
+        payload["kind"] = "status"
+        payload["status"] = command.status.value
+    else:
+        payload["kind"] = "waiting_area"
+    return payload
+
+
+def _appointment_status_state_payload(appt: Appointment) -> dict[str, object]:
+    return {
+        "appointment_id": str(appt.id),
+        "status": appt.status.value,
+        "waiting_area_id": _uuid_or_none(appt.waiting_area_id),
+    }
+
+
+def _compute_status_proposal_freshness_id(
+    *,
+    command: AppointmentStatusCommand | AppointmentWaitingAreaCommand,
+    current_state: dict[str, object],
+) -> str:
+    payload = {
+        "kind": "status_proposal_v1",
+        "current_state": current_state,
+        "command": _appointment_status_command_payload(command),
+    }
+    material = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str)
+    return hashlib.sha256(material.encode("utf-8")).hexdigest()[:32]
+
+
+def _status_signed_confirmation_payload(
+    *,
+    practice_id: uuid.UUID,
+    staff_user_id: uuid.UUID,
+    command: AppointmentStatusCommand | AppointmentWaitingAreaCommand,
+    current_state: dict[str, object],
+    status_proposal_freshness_id: Optional[str],
+) -> dict[str, object]:
+    return {
+        "practice_id": str(practice_id),
+        "staff_user_id": str(staff_user_id),
+        "current_state": current_state,
+        "command": _appointment_status_command_payload(command),
+        "status_proposal_freshness_id": status_proposal_freshness_id,
+    }
+
+
+_STATUS_CONFIRM_METADATA_FIELDS = {
+    "confirm_endpoint",
+    "confirm_payload",
+    "status_proposal_freshness_id",
+    "signed_confirmation_evidence",
+    "signed_confirmation_evidence_required",
+}
+
+
+def _status_proposal_evidence_payload(
+    proposal: AppointmentStatusProposalOut | AppointmentWaitingAreaProposalOut,
+) -> dict[str, Any]:
+    return proposal.model_dump(mode="json", exclude=_STATUS_CONFIRM_METADATA_FIELDS)
+
+
+def _attach_status_confirmation_evidence(
+    *,
+    proposal: AppointmentStatusProposalOut | AppointmentWaitingAreaProposalOut,
+    appt: Appointment,
+    practice_id: uuid.UUID,
+    current_user: User,
+) -> AppointmentStatusProposalOut | AppointmentWaitingAreaProposalOut:
+    if not proposal.safe:
+        return proposal
+
+    current_state = _appointment_status_state_payload(appt)
+    status_proposal_freshness_id = _compute_status_proposal_freshness_id(
+        command=proposal.command,
+        current_state=current_state,
+    )
+    signed_payload = _status_signed_confirmation_payload(
+        practice_id=practice_id,
+        staff_user_id=current_user.id,
+        command=proposal.command,
+        current_state=current_state,
+        status_proposal_freshness_id=status_proposal_freshness_id,
+    )
+    signed_confirmation_evidence = mint_signed_confirmation_evidence(
+        signed_payload,
+        evidence_purpose=SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
+    )
+    proposal.confirm_endpoint = "/api/v1/appointments/proposals/status-confirm"
+    proposal.status_proposal_freshness_id = status_proposal_freshness_id
+    proposal.signed_confirmation_evidence = signed_confirmation_evidence
+    proposal.signed_confirmation_evidence_required = True
+    proposal.confirm_payload = {
+        "confirmed": False,
+        "status_proposal": _status_proposal_evidence_payload(proposal),
+        "confirmed_warnings": [issue.code for issue in proposal.warnings],
+        "status_proposal_freshness_id": status_proposal_freshness_id,
+        "signed_confirmation_evidence": signed_confirmation_evidence,
+        "signed_confirmation_evidence_required": True,
+    }
+    return proposal
+
+
+def _block_status_confirmation(
+    blocks: list[AppointmentProposalIssue],
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentConfirmStatusProposalOut:
+    return AppointmentConfirmStatusProposalOut(
+        safe=False,
+        requires_confirmation=True,
+        autonomy_tier="blocked",
+        summary="Cannot confirm status proposal. See blocked issues.",
+        appointment=None,
+        warnings=warnings or [],
+        blocks=blocks,
+        audit_evidence=audit_evidence or [],
+    )
+
+
+def _confirm_status_block(code: str, message: str) -> AppointmentProposalIssue:
+    return AppointmentProposalIssue(code=code, severity="blocked", message=message)
+
+
 @router.post("/proposals/status/{appointment_id}", response_model=AppointmentStatusProposalOut)
 def propose_status_update(
     appointment_id: uuid.UUID,
@@ -1932,7 +2073,7 @@ def propose_status_update(
     elif warnings:
         summary += " Confirmation recommended."
 
-    return AppointmentStatusProposalOut(
+    proposal = AppointmentStatusProposalOut(
         safe=safe,
         requires_confirmation=requires_confirmation,
         autonomy_tier=autonomy_tier,
@@ -1941,10 +2082,17 @@ def propose_status_update(
             appointment_id=appointment_id,
             status=body.status,
             waiting_area_id=body.waiting_area_id,
+            waiting_area_id_supplied="waiting_area_id" in body.model_fields_set,
             clears_waiting_area=clears_waiting_area,
         ),
         warnings=warnings,
         blocks=blocks,
+    )
+    return _attach_status_confirmation_evidence(
+        proposal=proposal,
+        appt=appt,
+        practice_id=practice_id,
+        current_user=current_user,
     )
 
 
@@ -2018,7 +2166,7 @@ def propose_waiting_area_update(
     elif warnings:
         summary += " Confirmation recommended."
 
-    return AppointmentWaitingAreaProposalOut(
+    proposal = AppointmentWaitingAreaProposalOut(
         safe=safe,
         requires_confirmation=requires_confirmation,
         autonomy_tier=autonomy_tier,
@@ -2026,10 +2174,179 @@ def propose_waiting_area_update(
         command=AppointmentWaitingAreaCommand(
             appointment_id=appointment_id,
             waiting_area_id=body.waiting_area_id,
+            waiting_area_id_supplied=True,
             clears_waiting_area=clears_waiting_area,
         ),
         warnings=warnings,
         blocks=blocks,
+    )
+    return _attach_status_confirmation_evidence(
+        proposal=proposal,
+        appt=appt,
+        practice_id=practice_id,
+        current_user=current_user,
+    )
+
+
+def _status_update_body_from_command(
+    command: AppointmentStatusCommand | AppointmentWaitingAreaCommand,
+    *,
+    current_status: AppointmentStatus,
+    confirmed_warnings: Optional[list[str]] = None,
+) -> AppointmentStatusUpdate:
+    payload: dict[str, Any] = {
+        "status": command.status if isinstance(command, AppointmentStatusCommand) else current_status,
+        "confirmed_warnings": confirmed_warnings or [],
+    }
+    if command.waiting_area_id_supplied:
+        payload["waiting_area_id"] = command.waiting_area_id
+    return AppointmentStatusUpdate(**payload)
+
+
+def _apply_appointment_status_update(
+    *,
+    appointment_id: uuid.UUID,
+    body: AppointmentStatusUpdate,
+    db: Session,
+    current_user: User,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentOut:
+    practice_id = current_user.practice_id
+    appt = _get_appointment(appointment_id, practice_id, db)
+    status_before_patch = appt.status
+    appt.status = body.status
+    if "waiting_area_id" in body.model_fields_set:
+        if body.waiting_area_id is not None:
+            _ensure_waiting_area(body.waiting_area_id, practice_id, db)
+        appt.waiting_area_id = body.waiting_area_id
+    elif body.status in TERMINAL_STATUSES:
+        appt.waiting_area_id = None
+    _write_audit(
+        db,
+        practice_id=practice_id,
+        appointment_id=appointment_id,
+        confirmed_by_user_id=current_user.id,
+        action=AppointmentAuditAction.status_change,
+        status_before=status_before_patch,
+        status_after=body.status,
+        confirmed_warnings=body.confirmed_warnings,
+        audit_evidence=audit_evidence,
+    )
+    db.commit()
+    return _get_appointment(appointment_id, practice_id, db)
+
+
+@router.post(
+    "/proposals/status-confirm",
+    response_model=AppointmentConfirmStatusProposalOut,
+)
+def confirm_status_proposal_route(
+    body: AppointmentStatusProposalConfirmationIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    audit_evidence = list(_STATUS_CONFIRM_BASE_EVIDENCE)
+    blocks: list[AppointmentProposalIssue] = []
+    proposal = body.status_proposal
+    command = proposal.command
+
+    if body.confirmed is not True:
+        blocks.append(_confirm_status_block(
+            "explicit_confirmation_required",
+            "confirmed=true is required before changing appointment status.",
+        ))
+
+    if (
+        not proposal.safe
+        or proposal.autonomy_tier == "blocked"
+        or not proposal.requires_confirmation
+    ):
+        blocks.append(_confirm_status_block(
+            "status_proposal_not_safe",
+            "The status proposal is not safe to confirm.",
+        ))
+
+    appt = _get_appointment(command.appointment_id, current_user.practice_id, db)
+    current_state = _appointment_status_state_payload(appt)
+    submitted_freshness_id = (
+        body.status_proposal_freshness_id
+        or proposal.status_proposal_freshness_id
+    )
+    expected_freshness_id = _compute_status_proposal_freshness_id(
+        command=command,
+        current_state=current_state,
+    )
+    signed_evidence_present = body.signed_confirmation_evidence is not None
+    if not (body.signed_confirmation_evidence_required or signed_evidence_present):
+        blocks.append(_confirm_status_block(
+            "signed_evidence_required",
+            "Signed confirmation evidence is required before changing appointment status.",
+        ))
+    else:
+        expected_signed_payload = _status_signed_confirmation_payload(
+            practice_id=current_user.practice_id,
+            staff_user_id=current_user.id,
+            command=command,
+            current_state=current_state,
+            status_proposal_freshness_id=expected_freshness_id,
+        )
+        signed_result = verify_signed_confirmation_evidence(
+            body.signed_confirmation_evidence,
+            expected_signed_payload,
+            expected_purpose=SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
+        )
+        if signed_result.verified:
+            audit_evidence.append("status_signed_confirmation_evidence_verified")
+        else:
+            blocks.append(_confirm_status_block(signed_result.code, signed_result.detail))
+
+    if submitted_freshness_id != expected_freshness_id:
+        blocks.append(_confirm_status_block(
+            "stale_status_proposal_freshness_id",
+            "Confirmation blocked: status proposal freshness id does not match current appointment state.",
+        ))
+
+    if command.waiting_area_id_supplied and command.waiting_area_id is not None:
+        try:
+            _ensure_waiting_area(command.waiting_area_id, current_user.practice_id, db)
+        except HTTPException:
+            blocks.append(_confirm_status_block(
+                "waiting_area_not_found",
+                "The selected waiting area is no longer available.",
+            ))
+
+    if blocks:
+        return _block_status_confirmation(
+            blocks,
+            warnings=proposal.warnings,
+            audit_evidence=audit_evidence,
+        )
+
+    confirmed_warnings = [
+        *[issue.code for issue in proposal.warnings],
+        *body.confirmed_warnings,
+    ]
+    update_body = _status_update_body_from_command(
+        command,
+        current_status=appt.status,
+        confirmed_warnings=confirmed_warnings,
+    )
+    appointment = _apply_appointment_status_update(
+        appointment_id=command.appointment_id,
+        body=update_body,
+        db=db,
+        current_user=current_user,
+        audit_evidence=audit_evidence,
+    )
+    return AppointmentConfirmStatusProposalOut(
+        safe=True,
+        requires_confirmation=False,
+        autonomy_tier="confirmed_write",
+        summary="Confirmed status proposal and updated one appointment.",
+        appointment=appointment,
+        warnings=proposal.warnings,
+        blocks=[],
+        audit_evidence=audit_evidence,
     )
 
 
@@ -3670,28 +3987,12 @@ def update_appointment_status(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    practice_id = current_user.practice_id
-    appt = _get_appointment(appointment_id, practice_id, db)
-    status_before_patch = appt.status
-    appt.status = body.status
-    if "waiting_area_id" in body.model_fields_set:
-        if body.waiting_area_id is not None:
-            _ensure_waiting_area(body.waiting_area_id, practice_id, db)
-        appt.waiting_area_id = body.waiting_area_id
-    elif body.status in TERMINAL_STATUSES:
-        appt.waiting_area_id = None
-    _write_audit(
-        db,
-        practice_id=practice_id,
+    return _apply_appointment_status_update(
         appointment_id=appointment_id,
-        confirmed_by_user_id=current_user.id,
-        action=AppointmentAuditAction.status_change,
-        status_before=status_before_patch,
-        status_after=body.status,
-        confirmed_warnings=body.confirmed_warnings,
+        body=body,
+        db=db,
+        current_user=current_user,
     )
-    db.commit()
-    return _get_appointment(appointment_id, practice_id, db)
 
 
 @router.delete("/{appointment_id}", status_code=status.HTTP_204_NO_CONTENT)

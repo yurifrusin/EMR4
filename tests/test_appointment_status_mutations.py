@@ -18,7 +18,7 @@ from datetime import date, datetime, time, timezone
 
 import pytest
 
-from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
+from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
 from app.models.diary import WaitingArea
 from app.models.tenancy import Practitioner
 from tests.conftest import make_token
@@ -50,6 +50,24 @@ def _patch_status(client, token, appt_id, new_status: str):
     return client.patch(
         f"/api/v1/appointments/{appt_id}/status",
         json={"status": new_status},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+
+def _post_status_proposal(client, token, appt_id, payload: dict):
+    return client.post(
+        f"/api/v1/appointments/proposals/status/{appt_id}",
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+
+def _confirm_status_proposal(client, token, proposal: dict, *, confirmed: bool = True):
+    payload = proposal["confirm_payload"]
+    payload["confirmed"] = confirmed
+    return client.post(
+        "/api/v1/appointments/proposals/status-confirm",
+        json=payload,
         headers={"Authorization": f"Bearer {token}"},
     )
 
@@ -371,3 +389,111 @@ def test_delete_reason_too_long_returns_422(
         headers={"Authorization": f"Bearer {token}"},
     )
     assert resp.status_code == 422
+
+
+def test_status_proposal_returns_signed_confirm_payload(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+
+    resp = _post_status_proposal(client, token, appt.id, {"status": "Confirmed"})
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert data["confirm_endpoint"] == "/api/v1/appointments/proposals/status-confirm"
+    assert data["confirm_payload"]["confirmed"] is False
+    assert data["confirm_payload"]["status_proposal_freshness_id"] == data["status_proposal_freshness_id"]
+    assert data["signed_confirmation_evidence_required"] is True
+    assert data["signed_confirmation_evidence"]["purpose"] == "diary_confirm_status_proposal"
+    assert data["command"]["waiting_area_id_supplied"] is False
+
+
+def test_status_confirm_route_writes_once_with_signed_evidence(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+    proposal_resp = _post_status_proposal(client, token, appt.id, {"status": "Confirmed"})
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    proposal = proposal_resp.json()
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = _confirm_status_proposal(client, token, proposal)
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "confirmed_write"
+    assert data["appointment"]["status"] == "Confirmed"
+    assert "diary_confirm_status_proposal" in data["audit_evidence"]
+    assert "status_signed_confirmation_evidence_verified" in data["audit_evidence"]
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Confirmed
+    assert db.query(AppointmentAuditLog).count() == before_audits + 1
+
+
+def test_status_confirm_route_blocks_tampered_status_without_write(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(gp_user)
+    proposal_resp = _post_status_proposal(client, token, appt.id, {"status": "Confirmed"})
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+    payload["status_proposal"]["command"]["status"] = "Arrived"
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        "/api/v1/appointments/proposals/status-confirm",
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert any(block["code"] in {"signed_evidence_mismatch", "stale_status_proposal_freshness_id"} for block in data["blocks"])
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Booked
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
+def test_status_confirm_preserves_waiting_area_when_field_omitted(
+        client, db, gp_user, practice, practitioner, patient):
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient)
+    appt.waiting_area_id = area.id
+    db.flush()
+    token = make_token(gp_user)
+    proposal_resp = _post_status_proposal(client, token, appt.id, {"status": "Arrived"})
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    proposal = proposal_resp.json()
+    assert proposal["command"]["waiting_area_id_supplied"] is False
+
+    confirm_resp = _confirm_status_proposal(client, token, proposal)
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["appointment"]["status"] == "Arrived"
+    assert data["appointment"]["waiting_area_id"] == str(area.id)
+
+
+def test_status_confirm_clears_waiting_area_when_null_supplied(
+        client, db, gp_user, practice, practitioner, patient):
+    area = _make_area(db, practice)
+    appt = _make_appt(db, practice, practitioner, patient)
+    appt.waiting_area_id = area.id
+    db.flush()
+    token = make_token(gp_user)
+    proposal_resp = _post_status_proposal(client, token, appt.id, {
+        "status": "Arrived",
+        "waiting_area_id": None,
+    })
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    proposal = proposal_resp.json()
+    assert proposal["command"]["waiting_area_id_supplied"] is True
+
+    confirm_resp = _confirm_status_proposal(client, token, proposal)
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    assert confirm_resp.json()["appointment"]["waiting_area_id"] is None

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 40a0e33 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-g5-status-confirm-invariants --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-sprint-g5-status-confirm-invariants.md` status/completion notes and `orchestration/agent_inbox/codex/plan-codex-codex-sprint-g5-status-confirm-invariants.md` plan packet only. No production code edited.
+- Verification run: Plan-gate intake completed with `C:\Users\sarashera\emr4\.venv\Scripts\python.exe C:\Users\sarashera\emr4\scripts\agent_worktrees.py handin --agent codex`; read `AGENTS.md`, `orchestration/parallel_workstreams.md`, task packet, and scoped status surfaces; created plan packet with `C:\Users\sarashera\emr4\.venv\Scripts\python.exe scripts\agent_worktrees.py plan --agent codex --task codex-sprint-g5-status-confirm-invariants ...`. No backend/frontend tests run because this was plan-only.
+- Remaining risks: Later implementation must preserve `waiting_area_id` omitted-vs-null semantics, keep status confirm evidence purpose distinct from create/update evidence, avoid raw PATCH from signed-capable Diary status paths while keeping raw PATCH compatibility bounded, and ensure failed confirms leave appointment state and audit rows unchanged.

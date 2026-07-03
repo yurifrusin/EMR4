@@ -348,6 +348,7 @@ class AppointmentStatusCommand(BaseModel):
     appointment_id: uuid.UUID
     status: AppointmentStatus
     waiting_area_id: Optional[uuid.UUID] = None
+    waiting_area_id_supplied: bool = False
     clears_waiting_area: bool
 
 
@@ -360,6 +361,11 @@ class AppointmentStatusProposalOut(BaseModel):
     command: AppointmentStatusCommand
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    confirm_endpoint: Optional[str] = None
+    confirm_payload: Optional[dict[str, Any]] = None
+    status_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
 
 
 class AppointmentWaitingAreaProposalIn(BaseModel):
@@ -369,6 +375,7 @@ class AppointmentWaitingAreaProposalIn(BaseModel):
 class AppointmentWaitingAreaCommand(BaseModel):
     appointment_id: uuid.UUID
     waiting_area_id: Optional[uuid.UUID] = None
+    waiting_area_id_supplied: bool = True
     clears_waiting_area: bool
 
 
@@ -381,6 +388,32 @@ class AppointmentWaitingAreaProposalOut(BaseModel):
     command: AppointmentWaitingAreaCommand
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    confirm_endpoint: Optional[str] = None
+    confirm_payload: Optional[dict[str, Any]] = None
+    status_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
+
+
+class AppointmentStatusProposalConfirmationIn(BaseModel):
+    confirmed: bool = False
+    status_proposal: AppointmentStatusProposalOut | AppointmentWaitingAreaProposalOut
+    confirmed_warnings: list[str] = Field(default_factory=list)
+    status_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
+
+
+class AppointmentConfirmStatusProposalOut(BaseModel):
+    intent: Literal["confirm_status_appointment"] = "confirm_status_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["confirmed_write", "blocked"]
+    summary: str
+    appointment: Optional[AppointmentOut] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    audit_evidence: list[str] = Field(default_factory=list)
 
 
 class AppointmentDeleteIn(BaseModel):

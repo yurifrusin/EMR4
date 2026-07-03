@@ -7250,6 +7250,224 @@ def test_create_modal_does_not_patch_status_when_signed_create_confirm_fails(dia
     assert captured_status_patches == []
 
 
+def test_status_control_uses_signed_status_confirm_without_raw_patch(diary_page):
+    """Status-only controls write through signed status-confirm when evidence is present."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_proposals = []
+    captured_confirms = []
+    captured_raw_patches = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status/appt-status-1"):
+            body = request.post_data_json
+            captured_proposals.append(body)
+            proposal = {
+                "intent": "update_appointment_status",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "execute_with_report",
+                "summary": "Change status.",
+                "command": {
+                    "appointment_id": "appt-status-1",
+                    "status": body["status"],
+                    "waiting_area_id": body.get("waiting_area_id"),
+                    "waiting_area_id_supplied": "waiting_area_id" in body,
+                    "clears_waiting_area": False,
+                },
+                "warnings": [],
+                "blocks": [],
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/status-confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "status_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "status_proposal_freshness_id": "status-fresh-1",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "diary_confirm_status_proposal",
+                            "payload": {"fixture": "status-control"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                    "status_proposal_freshness_id": "status-fresh-1",
+                    "signed_confirmation_evidence_required": True,
+                    "signed_confirmation_evidence": {
+                        "schema_version": "bernie.confirmation_evidence.v1",
+                        "purpose": "diary_confirm_status_proposal",
+                        "payload": {"fixture": "status-control"},
+                        "signature": "signed",
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status-confirm"):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_status_appointment",
+                    "safe": True,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "confirmed_write",
+                    "summary": "Updated.",
+                    "appointment": {
+                        "id": "appt-status-1",
+                        "status": "Arrived",
+                        "waiting_area_id": None,
+                    },
+                    "warnings": [],
+                    "blocks": [],
+                    "audit_evidence": ["diary_confirm_status_proposal"],
+                }),
+            )
+            return
+        if request.method == "PATCH" and request.url.endswith("/appointments/appt-status-1/status"):
+            captured_raw_patches.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw PATCH should not be used"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              const appt = {
+                id: "appt-status-1",
+                status: "Booked",
+                waiting_area_id: null,
+                patient_id: "patient-123",
+                patient: { first_name: "Margaret", last_name: "Thompson" }
+              };
+              window.__g5StatusPromise = setAppointmentStatus(appt, "Arrived");
+            }"""
+        )
+        diary_page.wait_for_timeout(1000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_proposals, "Expected status proposal request"
+    assert captured_confirms, "Expected signed status-confirm request"
+    assert captured_confirms[0]["confirmed"] is True
+    assert captured_confirms[0]["status_proposal"]["command"]["status"] == "Arrived"
+    assert captured_raw_patches == []
+
+
+def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
+    """A rejected signed status-confirm must not fall back to raw PATCH."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_confirms = []
+    captured_raw_patches = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status/appt-status-fail"):
+            proposal = {
+                "intent": "update_appointment_status",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "execute_with_report",
+                "summary": "Change status.",
+                "command": {
+                    "appointment_id": "appt-status-fail",
+                    "status": "Arrived",
+                    "waiting_area_id": None,
+                    "waiting_area_id_supplied": False,
+                    "clears_waiting_area": False,
+                },
+                "warnings": [],
+                "blocks": [],
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/status-confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "status_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "status_proposal_freshness_id": "status-fresh-fail",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "diary_confirm_status_proposal",
+                            "payload": {"fixture": "status-control-fail"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/status-confirm"):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_status_appointment",
+                    "safe": False,
+                    "requires_confirmation": True,
+                    "autonomy_tier": "blocked",
+                    "summary": "Status proposal is stale.",
+                    "appointment": None,
+                    "warnings": [],
+                    "blocks": [{"code": "stale_status_proposal_freshness_id", "message": "Status proposal is stale."}],
+                    "audit_evidence": [],
+                }),
+            )
+            return
+        if request.method == "PATCH" and request.url.endswith("/appointments/appt-status-fail/status"):
+            captured_raw_patches.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw PATCH should not be used"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              const appt = {
+                id: "appt-status-fail",
+                status: "Booked",
+                waiting_area_id: null,
+                patient_id: "patient-123",
+                patient: { first_name: "Margaret", last_name: "Thompson" }
+              };
+              window.__g5StatusPromise = setAppointmentStatus(appt, "Arrived");
+            }"""
+        )
+        diary_page.wait_for_timeout(1000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_confirms, "Expected signed status-confirm request"
+    assert captured_raw_patches == []
+
+
 def test_bernie_tool_intent_clarification_has_no_confirm_or_stale_no_slot(diary_page):
     """Incomplete tool-intent responses render as clarification, not stale booking/no-slot UI."""
     import urllib.parse

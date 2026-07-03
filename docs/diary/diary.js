@@ -7759,6 +7759,50 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
   }
 }
 
+async function applySignedStatusProposal(appt, proposal, newStatus, waitingAreaId) {
+  const confirmedWarnings = (proposal?.warnings || []).map(issue => issue.code).filter(Boolean);
+  const confirmEndpoint = proposal?.confirm_endpoint;
+  const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
+
+  if (confirmEndpoint && confirmPayload) {
+    confirmPayload.confirmed = true;
+    confirmPayload.confirmed_warnings = Array.from(new Set([
+      ...(confirmPayload.confirmed_warnings || []),
+      ...confirmedWarnings
+    ]));
+    const confirmRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+      method: "POST",
+      body: JSON.stringify(confirmPayload)
+    });
+    if (!confirmRes.ok) {
+      throw new Error(await apiErrorMessage(confirmRes, "Status confirm"));
+    }
+    const confirmResult = await confirmRes.json();
+    if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
+      const issue = (confirmResult?.blocks || [])[0];
+      throw new Error(issue?.message || confirmResult?.summary || "The status change could not be confirmed.");
+    }
+    if (!confirmResult.appointment) {
+      throw new Error("Status confirm response did not include an appointment.");
+    }
+    return confirmResult.appointment;
+  }
+
+  const bodyPayload = { status: newStatus };
+  if (waitingAreaId !== null) {
+    bodyPayload.waiting_area_id = waitingAreaId || null;
+  }
+  const res = await apiFetch(`/appointments/${appt.id}/status`, {
+    method: "PATCH",
+    body: JSON.stringify(bodyPayload)
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Failed to update status: ${res.status} ${text}`);
+  }
+  return await res.json();
+}
+
 async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAreaId = null) {
   const isStatusChange = (newStatus !== appt.status);
   const isWaitingAreaChangeOnly = (!isStatusChange && waitingAreaId !== null && waitingAreaId !== appt.waiting_area_id);
@@ -7852,19 +7896,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
       if (el) el.classList.add("appt-active");
     } else {
-      const bodyPayload = { status: newStatus };
-      if (waitingAreaId !== null) {
-        bodyPayload.waiting_area_id = waitingAreaId || null;
-      }
-      const res = await apiFetch(`/appointments/${appt.id}/status`, {
-        method: "PATCH",
-        body: JSON.stringify(bodyPayload)
-      });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Failed to update status: ${res.status} ${text}`);
-      }
-      const updatedAppt = await res.json();
+      const updatedAppt = await applySignedStatusProposal(appt, proposal, newStatus, waitingAreaId);
       appt.status = updatedAppt.status;
       appt.waiting_area_id = updatedAppt.waiting_area_id;
       setStatus("Status updated successfully.");
