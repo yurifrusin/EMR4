@@ -134,11 +134,38 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
-## Sprint G1: Unified Diary Update Confirm Grammar
+## Sprint G2: Human Diary Update Confirm Migration
 
 | Item | Value |
 |---|---|
 | Status | Integrated and verified locally; push/mirror/audit pending |
+| Product Goal | Move human Diary drag/drop/resize appointment updates onto the same signed update-confirm route used by Bernie extension confirms |
+| Worker Shape | Claude backend/domain plan, Codex invariant plan, Antigravity lane superseded after no submitted artifact, Ariadne implementation |
+| In Scope | `AppointmentUpdateProposalOut` confirm evidence fields, update proposal evidence minting, `handleMoveResize` confirm POST path, backend and deterministic Diary smoke tests |
+| Out Of Scope | Edit-form Save migration, broad status/cancel/delete grammar, raw PUT endpoint removal, persisted PHI/session table, GraphRAG, taskpane/Command Centre, visual redesign |
+| Verification | py_compile; node check; frontend version check; focused update/tool-intent/confirm suites; human drag/resize confirm smoke; full deterministic Diary smoke harness; diff check |
+
+Integration notes:
+
+- Safe ordinary update proposals now return `confirm_endpoint`,
+  `confirm_payload`, update freshness id, and update-purpose signed evidence.
+- Human drag/drop/resize keeps the existing proposal dialog, but after staff
+  confirmation posts the signed confirm payload to
+  `/appointments/proposals/update/confirm`.
+- The old raw PUT update path remains as a bounded authenticated staff/API
+  compatibility endpoint and as an old-backend fallback, but confirm-grade
+  human drag/resize UI now uses backend-owned evidence when available.
+- New backend and Diary smoke tests prove signed evidence is present, confirming
+  writes once with bounded audit evidence, and the human drag/resize path does
+  not emit raw PUT.
+- Edit-form Save remains deliberately out of scope because it combines detail
+  update and separate status PATCH semantics.
+
+## Sprint G1: Unified Diary Update Confirm Grammar
+
+| Item | Value |
+|---|---|
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
 | Product Goal | Move Bernie-authored appointment extensions from raw update PUT to a backend-owned signed update confirmation grammar |
 | Worker Shape | Claude backend/domain plan, Antigravity Diary UX plan with scoped UI amendment, Codex invariant plan, Ariadne implementation |
 | In Scope | `POST /appointments/proposals/update/confirm`, update-scoped signed evidence, Bernie tool-intent confirm payloads, Diary Confirm change network path, adversarial backend/UI tests |

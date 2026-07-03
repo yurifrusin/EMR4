@@ -7679,12 +7679,35 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
       scrollToAppointment(appt.id);
     } else {
       setStatus("Updating appointment...");
-      const updateRes = await apiFetch(`/appointments/${appt.id}`, {
-        method: "PUT",
-        body: JSON.stringify(payload)
-      });
+      const confirmedWarnings = (proposal.warnings || []).map(issue => issue.code).filter(Boolean);
+      const confirmEndpoint = proposal.confirm_endpoint;
+      const confirmPayload = proposal.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
+      let updateRes;
+      if (confirmEndpoint && confirmPayload) {
+        confirmPayload.confirmed = true;
+        confirmPayload.confirmed_warnings = Array.from(new Set([
+          ...(confirmPayload.confirmed_warnings || []),
+          ...confirmedWarnings
+        ]));
+        updateRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+          method: "POST",
+          body: JSON.stringify(confirmPayload)
+        });
+      } else {
+        updateRes = await apiFetch(`/appointments/${appt.id}`, {
+          method: "PUT",
+          body: JSON.stringify(payload)
+        });
+      }
       if (!updateRes.ok) {
         throw new Error(await apiErrorMessage(updateRes, "Update"));
+      }
+      if (confirmEndpoint) {
+        const confirmResult = await updateRes.json();
+        if (confirmResult?.safe !== true || confirmResult?.autonomy_tier !== "confirmed_write") {
+          const issue = (confirmResult?.blocks || [])[0];
+          throw new Error(issue?.message || confirmResult?.summary || "The appointment update could not be confirmed.");
+        }
       }
       setStatus("Booking updated successfully.");
       await loadDiary(true);

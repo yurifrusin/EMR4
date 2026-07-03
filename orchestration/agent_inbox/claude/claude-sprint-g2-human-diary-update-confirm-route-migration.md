@@ -1,10 +1,10 @@
-# claude-sprint-g2-human-diary-update-confirm-route-migration
+﻿# claude-sprint-g2-human-diary-update-confirm-route-migration
 
 | Item | Value |
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 37ed8b2 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-g2-human-diary-update-confirm-route-migration --summary "Short plan summary"` |

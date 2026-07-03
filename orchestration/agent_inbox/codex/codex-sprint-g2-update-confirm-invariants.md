@@ -1,10 +1,10 @@
-# codex-sprint-g2-update-confirm-invariants
+﻿# codex-sprint-g2-update-confirm-invariants
 
 | Item | Value |
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 37ed8b2 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-g2-update-confirm-invariants --summary "Short plan summary"` |
@@ -90,5 +90,15 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/codex-sprint-g2-update-confirm-invariants.md`
+  - `orchestration/agent_inbox/codex/plan-codex-codex-sprint-g2-update-confirm-invariants.md`
 - Verification run:
+  - Planning mode only; read `AGENTS.md`, `orchestration/parallel_workstreams.md`, `orchestration/sprint_closeout.md`, and `orchestration/agent_inbox/codex/codex-sprint-g2-update-confirm-invariants.md`.
+  - Ran required `handin --agent codex` with explicit venv Python path from `C:\Users\sarashera\EMR4-worktrees\codex`; succeeded and reported already up to date at `85166f0`.
+  - Ran required `plan --agent codex --task codex-sprint-g2-update-confirm-invariants ...`; succeeded and wrote the implementation-plan packet.
+  - Focus-read G1 update-confirm backend route/schema/tests and Diary human edit/drag/resize raw-PUT call sites.
+  - No production code or tests were edited or run.
 - Remaining risks:
+  - Later implementation must decide whether to neutralize the Bernie-named update-confirm schema or keep a compatible alias while avoiding G1 regressions.
+  - Diary edit modal currently combines appointment update with a separate status PATCH; G2 must not accidentally fold status semantics into the update-confirm route.
+  - Raw PUT should remain a bounded authenticated staff/API compatibility path, but the migrated Diary confirm UI must not use it as confirmation authority.

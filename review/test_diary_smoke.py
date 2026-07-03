@@ -6532,6 +6532,155 @@ def test_bernie_tool_intent_extension_proposal_renders_and_confirms(diary_page):
     assert captured_update[0]["update_proposal"]["command"]["duration_minutes"] == 30
 
 
+def test_human_drag_resize_uses_signed_update_confirm_route(diary_page):
+    """Human move/resize uses the G2 signed update-confirm route instead of raw PUT."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_proposals = []
+    captured_confirms = []
+    captured_raw_puts = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/update/appt-human-1"):
+            body = request.post_data_json
+            captured_proposals.append(body)
+            command = {
+                "appointment_id": "appt-human-1",
+                "practitioner_id": body["practitioner_id"],
+                "appointment_type_id": body.get("appointment_type_id"),
+                "location_id": body.get("location_id"),
+                "appointment_date": body["appointment_date"],
+                "start_time": "2026-07-03T05:15:00Z",
+                "start_time_local": body["start_time_local"],
+                "duration_minutes": body["duration_minutes"],
+                "reason": body.get("reason") or "",
+                "notes": None,
+                "patient_id": body.get("patient_id"),
+                "patient_name_provisional": body.get("patient_name_provisional"),
+            }
+            proposal = {
+                "intent": "update_appointment",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "proposal",
+                "summary": "Update booking for linked patient to 2026-07-03 at 15:15, 15 min.",
+                "command": command,
+                "warnings": [],
+                "blocks": [],
+                "conflict": None,
+                "breaks_overlap": [],
+                "patient_identity": "linked",
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/update/confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "update_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "update_proposal_freshness_id": "human-fresh-1",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "bernie_confirm_update_proposal",
+                            "payload": {"fixture": "human-move"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                    "update_proposal_freshness_id": "human-fresh-1",
+                    "signed_confirmation_evidence_required": True,
+                    "signed_confirmation_evidence": {
+                        "schema_version": "bernie.confirmation_evidence.v1",
+                        "purpose": "bernie_confirm_update_proposal",
+                        "payload": {"fixture": "human-move"},
+                        "signature": "signed",
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/update/confirm"):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_update_appointment",
+                    "safe": True,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "confirmed_write",
+                    "summary": "Updated.",
+                    "appointment": {"id": "appt-human-1", "start_time_local": "15:15:00", "duration_minutes": 15},
+                    "warnings": [],
+                    "blocks": [],
+                    "audit_evidence": ["bernie_confirm_update_proposal"],
+                }),
+            )
+            return
+        if request.method == "PUT" and request.url.endswith("/appointments/appt-human-1"):
+            captured_raw_puts.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw PUT should not be used"}))
+            return
+        route.continue_()
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              isSmokeMode = () => false;
+              diaryDate = new Date(2026, 6, 3);
+              activeTemplate = {
+                columns: [{
+                  practitioner_ahpra: "MED0001234567",
+                  room_label: "Room 1",
+                  assignment: "Dr Alex Shera"
+                }]
+              };
+              ahpraToPractitionerMap["MED0001234567"] = {
+                id: "practitioner-123",
+                first_name: "Alex",
+                last_name: "Shera",
+                ahpra_number: "MED0001234567"
+              };
+              activeAppointments = [{
+                id: "appt-human-1",
+                appointment_date: "2026-07-03",
+                start_time_local: "15:00:00",
+                duration_minutes: 15,
+                patient_id: "patient-123",
+                patient: { id: "patient-123", first_name: "Margaret", last_name: "Thompson" },
+                practitioner_id: "practitioner-123",
+                practitioner: { id: "practitioner-123", first_name: "Alex", last_name: "Shera", ahpra_number: "MED0001234567" },
+                appointment_type_id: "type-1",
+                location_id: "loc-1",
+                reason: "Review",
+                status: "Booked"
+              }];
+              window.__g2MovePromise = handleMoveResize(activeAppointments[0], 15, 0, activeTemplate.columns[0]);
+            }"""
+        )
+        diary_page.wait_for_selector(".identity-confirm-panel", state="visible", timeout=5000)
+        diary_page.get_by_text("Confirm & Save").click()
+        diary_page.wait_for_function("payloads => payloads.length > 0", arg=captured_confirms, timeout=5000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_proposals, "Expected update proposal request"
+    assert captured_confirms, "Expected signed update confirm request"
+    assert captured_raw_puts == []
+    assert captured_confirms[0]["confirmed"] is True
+    assert captured_confirms[0]["update_proposal"]["command"]["appointment_id"] == "appt-human-1"
+    assert captured_confirms[0]["update_proposal"]["command"]["start_time_local"] == "15:15"
+
+
 def test_bernie_tool_intent_clarification_has_no_confirm_or_stale_no_slot(diary_page):
     """Incomplete tool-intent responses render as clarification, not stale booking/no-slot UI."""
     import urllib.parse

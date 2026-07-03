@@ -261,6 +261,11 @@ class AppointmentUpdateProposalOut(BaseModel):
     conflict: Optional[AppointmentConflictBrief] = None
     breaks_overlap: list[str] = Field(default_factory=list)
     patient_identity: Literal["linked", "provisional"]
+    confirm_endpoint: Optional[str] = None
+    confirm_payload: Optional[dict[str, Any]] = None
+    update_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
 
 
 class BernieUpdateProposalConfirmationIn(BaseModel):

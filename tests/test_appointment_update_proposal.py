@@ -7,7 +7,7 @@ from datetime import date, datetime, time, timezone
 
 import pytest
 
-from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
+from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
 from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea
 from app.models.tenancy import Practitioner
 from tests.conftest import make_token
@@ -16,6 +16,7 @@ THURSDAY = date(2026, 6, 26)   # a fixed future Thursday, guaranteed no conflict
 TODAY = date.today()
 
 UPDATE_URL = "/api/v1/appointments/proposals/update/{appt_id}"
+UPDATE_CONFIRM_URL = "/api/v1/appointments/proposals/update/confirm"
 STATUS_URL = "/api/v1/appointments/proposals/status/{appt_id}"
 WAITING_AREA_URL = "/api/v1/appointments/proposals/waiting-area/{appt_id}"
 
@@ -127,12 +128,63 @@ def test_update_proposal_returns_typed_command_without_mutating(
     assert data["command"]["appointment_date"] == THURSDAY.isoformat()
     assert data["command"]["start_time_local"] == "10:00:00"
     assert data["command"]["duration_minutes"] == 30
+    assert data["confirm_endpoint"] == UPDATE_CONFIRM_URL
+    assert data["confirm_payload"]["confirmed"] is False
+    assert data["confirm_payload"]["update_proposal"]["command"]["appointment_id"] == str(appt.id)
+    assert data["update_proposal_freshness_id"]
+    assert data["signed_confirmation_evidence_required"] is True
+    assert data["signed_confirmation_evidence"]["purpose"] == "bernie_confirm_update_proposal"
     # DB row unchanged
     db.refresh(appt)
     assert appt.status == before_status
     assert db.query(Appointment).count() == before_count
     # Row still has old time, not the proposed time
     assert appt.start_time_local == time(9, 0)
+
+
+def test_update_proposal_confirm_payload_writes_with_signed_audit_evidence(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+
+    proposal_resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={
+            "appointment_date": THURSDAY.isoformat(),
+            "start_time_local": "10:00:00",
+            "duration_minutes": 30,
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+
+    confirm_resp = client.post(
+        UPDATE_CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "confirmed_write"
+    assert data["appointment"]["id"] == str(appt.id)
+    assert data["appointment"]["start_time_local"] == "10:00:00"
+    assert data["appointment"]["duration_minutes"] == 30
+    assert "bernie_confirm_update_proposal" in data["audit_evidence"]
+    assert "bernie_signed_confirmation_evidence_verified" in data["audit_evidence"]
+
+    db.refresh(appt)
+    assert appt.start_time_local == time(10, 0)
+    assert appt.duration_minutes == 30
+    audit_rows = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.appointment_id == appt.id
+    ).all()
+    assert len(audit_rows) == 1
+    assert "bernie_confirm_update_proposal" in audit_rows[0].confirmed_warnings
+    assert "bernie_signed_confirmation_evidence_verified" in audit_rows[0].confirmed_warnings
 
 
 def test_update_proposal_blocked_on_conflict(

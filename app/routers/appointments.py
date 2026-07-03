@@ -1161,31 +1161,65 @@ def propose_update_appointment(
     else:
         summary += " Staff confirmation required."
 
-    return AppointmentUpdateProposalOut(
+    command = AppointmentUpdateCommand(
+        appointment_id=appointment_id,
+        patient_id=patient_id,
+        patient_name_provisional=patient_name_provisional,
+        practitioner_id=practitioner_id,
+        appointment_type_id=appointment_type_id,
+        location_id=location_id,
+        appointment_date=appointment_date,
+        start_time_local=start_time_local,
+        start_time=start_time,
+        duration_minutes=duration_minutes,
+        reason=reason,
+        notes=notes,
+    )
+    response = AppointmentUpdateProposalOut(
         safe=safe,
         requires_confirmation=requires_confirmation,
         autonomy_tier=autonomy_tier,
         summary=summary,
-        command=AppointmentUpdateCommand(
-            appointment_id=appointment_id,
-            patient_id=patient_id,
-            patient_name_provisional=patient_name_provisional,
-            practitioner_id=practitioner_id,
-            appointment_type_id=appointment_type_id,
-            location_id=location_id,
-            appointment_date=appointment_date,
-            start_time_local=start_time_local,
-            start_time=start_time,
-            duration_minutes=duration_minutes,
-            reason=reason,
-            notes=notes,
-        ),
+        command=command,
         warnings=warnings,
         blocks=blocks,
         conflict=conflict_brief,
         breaks_overlap=breaks_overlap,
         patient_identity=patient_identity,
     )
+    if safe:
+        current_state = _appointment_update_state_payload(appt)
+        update_proposal_freshness_id = _compute_update_proposal_freshness_id(
+            current_state=current_state,
+            command=command,
+            reference_date=command.appointment_date,
+        )
+        signed_payload = _bernie_update_signed_confirmation_payload(
+            practice_id=practice_id,
+            staff_user_id=current_user.id,
+            turn_ref=None,
+            current_state=current_state,
+            command=command,
+            update_proposal_freshness_id=update_proposal_freshness_id,
+            session_binding=None,
+        )
+        signed_confirmation_evidence = mint_signed_confirmation_evidence(
+            signed_payload,
+            evidence_purpose=SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
+        )
+        response.confirm_endpoint = "/api/v1/appointments/proposals/update/confirm"
+        response.update_proposal_freshness_id = update_proposal_freshness_id
+        response.signed_confirmation_evidence = signed_confirmation_evidence
+        response.signed_confirmation_evidence_required = True
+        response.confirm_payload = {
+            "confirmed": False,
+            "update_proposal": _update_proposal_evidence_payload(response),
+            "confirmed_warnings": [issue.code for issue in warnings],
+            "update_proposal_freshness_id": update_proposal_freshness_id,
+            "signed_confirmation_evidence": signed_confirmation_evidence,
+            "signed_confirmation_evidence_required": True,
+        }
+    return response
 
 
 def _bernie_tool_issue(
@@ -1403,37 +1437,10 @@ def propose_bernie_tool_intent(
     update_proposal_freshness_id = None
     signed_confirmation_evidence = None
     if proposal.safe:
-        current_state = _appointment_update_state_payload(
-            _get_appointment(appointment_id, current_user.practice_id, db)
-        )
-        reference_date = body.reference_date or proposal.command.appointment_date
-        update_proposal_freshness_id = _compute_update_proposal_freshness_id(
-            current_state=current_state,
-            command=proposal.command,
-            reference_date=reference_date,
-        )
-        signed_payload = _bernie_update_signed_confirmation_payload(
-            practice_id=current_user.practice_id,
-            staff_user_id=current_user.id,
-            turn_ref=None,
-            current_state=current_state,
-            command=proposal.command,
-            update_proposal_freshness_id=update_proposal_freshness_id,
-            session_binding=None,
-        )
-        signed_confirmation_evidence = mint_signed_confirmation_evidence(
-            signed_payload,
-            evidence_purpose=SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
-        )
-        confirm_endpoint = "/api/v1/appointments/proposals/update/confirm"
-        confirm_payload = {
-            "confirmed": False,
-            "update_proposal": proposal.model_dump(mode="json"),
-            "confirmed_warnings": [issue.code for issue in proposal.warnings],
-            "update_proposal_freshness_id": update_proposal_freshness_id,
-            "signed_confirmation_evidence": signed_confirmation_evidence,
-            "signed_confirmation_evidence_required": True,
-        }
+        confirm_endpoint = proposal.confirm_endpoint
+        confirm_payload = proposal.confirm_payload
+        update_proposal_freshness_id = proposal.update_proposal_freshness_id
+        signed_confirmation_evidence = proposal.signed_confirmation_evidence
     return BernieToolIntentOut(
         safe=proposal.safe,
         result="proposal_ready" if proposal.safe else "blocked",
@@ -5417,6 +5424,19 @@ def _update_body_from_command(command: AppointmentUpdateCommand) -> AppointmentU
         reason=command.reason,
         notes=command.notes,
     )
+
+
+_UPDATE_CONFIRM_METADATA_FIELDS = {
+    "confirm_endpoint",
+    "confirm_payload",
+    "update_proposal_freshness_id",
+    "signed_confirmation_evidence",
+    "signed_confirmation_evidence_required",
+}
+
+
+def _update_proposal_evidence_payload(proposal: AppointmentUpdateProposalOut) -> dict[str, Any]:
+    return proposal.model_dump(mode="json", exclude=_UPDATE_CONFIRM_METADATA_FIELDS)
 
 
 def _validate_bernie_session_confirmation_binding(

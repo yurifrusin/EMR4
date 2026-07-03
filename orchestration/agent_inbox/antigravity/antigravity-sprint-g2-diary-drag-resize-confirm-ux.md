@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 37ed8b2 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-g2-diary-drag-resize-confirm-ux --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none by Antigravity; Ariadne implemented the scoped UI migration directly after Antigravity produced exploration output but no submitted plan artifact.
+- Verification run: Ariadne ran `node --check docs\diary\diary.js`, `scripts\check_frontend_versions.py`, focused backend update-confirm suites, the new human drag/resize signed-confirm smoke assertion, full `review\test_diary_smoke.py -q`, and `git diff --check`.
+- Remaining risks: edit-form Save remains on the bounded raw PUT compatibility path; a later sprint should migrate it separately.
