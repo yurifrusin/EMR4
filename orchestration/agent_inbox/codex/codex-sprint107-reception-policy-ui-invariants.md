@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 0beddab |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint107-reception-policy-ui-invariants --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none by this packet; Codex worker Dalton returned the invariant plan in-thread after the helper failed on the local bare-`python` app execution alias.
+- Verification run: Dalton's five invariant categories were folded into the Antigravity Sprint 107 implementation and verified by `review/test_diary_smoke.py -q -k "reception_policy"` plus the full Diary review harness.
+- Remaining risks: Continue moving Bernie UI copy to typed state/reason-code sources; no standalone Codex packet branch remains to integrate.
