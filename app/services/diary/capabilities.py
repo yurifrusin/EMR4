@@ -16,6 +16,8 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Optional
 
+from app.services.diary.envelopes import DiaryActionAuthor
+
 
 class BernieCapabilityTier(str, Enum):
     """Autonomy tier of a capability.
@@ -42,6 +44,7 @@ class BernieCapability:
     summary: str
     implemented_as: Optional[str]  # current code location/endpoint; None = planned
     requires_staff_confirmation: bool
+    allowed_authors: tuple[DiaryActionAuthor, ...]
 
 
 BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
@@ -51,6 +54,7 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Translate a staff booking instruction into a typed slot-search command candidate.",
         implemented_as="POST /appointments/proposals/bernie/interpret-booking-instruction",
         requires_staff_confirmation=False,
+        allowed_authors=(DiaryActionAuthor.bernie,),
     ),
     BernieCapability(
         name="resolve_patient",
@@ -58,6 +62,7 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Resolve a patient reference from instruction text and diary context.",
         implemented_as="app/routers/appointments.py inline (extraction pending)",
         requires_staff_confirmation=False,
+        allowed_authors=(DiaryActionAuthor.bernie,),
     ),
     BernieCapability(
         name="resolve_practitioner",
@@ -65,6 +70,7 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Resolve a practitioner reference from instruction text and roster context.",
         implemented_as="app/routers/appointments.py inline (extraction pending)",
         requires_staff_confirmation=False,
+        allowed_authors=(DiaryActionAuthor.bernie,),
     ),
     BernieCapability(
         name="get_patient_booking_context",
@@ -72,6 +78,12 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Fetch the compact recognized-patient booking context (recent/future bookings).",
         implemented_as="app.services.bernie.context.build_patient_booking_context",
         requires_staff_confirmation=False,
+        allowed_authors=(
+            DiaryActionAuthor.staff_ui,
+            DiaryActionAuthor.bernie,
+            DiaryActionAuthor.rayleen,
+            DiaryActionAuthor.davida,
+        ),
     ),
     BernieCapability(
         name="find_slots",
@@ -79,6 +91,12 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Deterministic slot search over roster/schedule; never LLM-driven.",
         implemented_as="POST /appointments/proposals/slot-search + supervised wrapper",
         requires_staff_confirmation=False,
+        allowed_authors=(
+            DiaryActionAuthor.staff_ui,
+            DiaryActionAuthor.bernie,
+            DiaryActionAuthor.rayleen,
+            DiaryActionAuthor.davida,
+        ),
     ),
     BernieCapability(
         name="explain_schedule",
@@ -86,6 +104,12 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Explain why a day has no slots (no roster row, day off, breaks, fully booked).",
         implemented_as=None,
         requires_staff_confirmation=False,
+        allowed_authors=(
+            DiaryActionAuthor.staff_ui,
+            DiaryActionAuthor.bernie,
+            DiaryActionAuthor.rayleen,
+            DiaryActionAuthor.davida,
+        ),
     ),
     BernieCapability(
         name="suggest_next_actions",
@@ -93,6 +117,13 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Offer typed next-step suggestion chips after no-slot/exhausted outcomes.",
         implemented_as="app/routers/appointments.py _build_no_slot_suggestions + selection endpoint",
         requires_staff_confirmation=False,
+        allowed_authors=(
+            DiaryActionAuthor.staff_ui,
+            DiaryActionAuthor.bernie,
+            DiaryActionAuthor.rayleen,
+            DiaryActionAuthor.davida,
+            DiaryActionAuthor.system,
+        ),
     ),
     BernieCapability(
         name="propose_booking",
@@ -100,6 +131,7 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Prepare a typed booking proposal for staff review; writes nothing.",
         implemented_as="supervised-booking wrapper (app/routers/appointments.py)",
         requires_staff_confirmation=True,
+        allowed_authors=(DiaryActionAuthor.staff_ui, DiaryActionAuthor.bernie),
     ),
     BernieCapability(
         name="propose_edit",
@@ -107,6 +139,7 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Prepare a typed appointment-edit proposal for staff review.",
         implemented_as="existing appointment update/move/resize proposal endpoints",
         requires_staff_confirmation=True,
+        allowed_authors=(DiaryActionAuthor.staff_ui, DiaryActionAuthor.bernie),
     ),
     BernieCapability(
         name="propose_cancel",
@@ -114,6 +147,7 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Prepare a typed appointment-cancellation proposal for staff review.",
         implemented_as="existing appointment cancel proposal endpoint",
         requires_staff_confirmation=True,
+        allowed_authors=(DiaryActionAuthor.staff_ui, DiaryActionAuthor.bernie),
     ),
     BernieCapability(
         name="propose_status",
@@ -121,6 +155,11 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Prepare a typed appointment status-change proposal for staff review.",
         implemented_as="existing appointment status proposal endpoints",
         requires_staff_confirmation=True,
+        allowed_authors=(
+            DiaryActionAuthor.staff_ui,
+            DiaryActionAuthor.bernie,
+            DiaryActionAuthor.rayleen,
+        ),
     ),
     BernieCapability(
         name="confirm_booking",
@@ -128,6 +167,7 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="Create the appointment from a staff-confirmed proposal behind the evidence/freshness gate.",
         implemented_as="POST /appointments/proposals/create/confirm-bernie",
         requires_staff_confirmation=True,
+        allowed_authors=(DiaryActionAuthor.staff_ui,),
     ),
     BernieCapability(
         name="handoff_to_receptionist",
@@ -135,6 +175,13 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         summary="End Bernie involvement and hand the request to reception staff.",
         implemented_as=None,
         requires_staff_confirmation=False,
+        allowed_authors=(
+            DiaryActionAuthor.staff_ui,
+            DiaryActionAuthor.bernie,
+            DiaryActionAuthor.rayleen,
+            DiaryActionAuthor.davida,
+            DiaryActionAuthor.system,
+        ),
     ),
 )
 

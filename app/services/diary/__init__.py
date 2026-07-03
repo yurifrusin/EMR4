@@ -12,6 +12,14 @@ from app.services.diary.capabilities import (
     BernieCapabilityTier,
     get_bernie_capability,
 )
+from app.services.diary.envelopes import (
+    DiaryActionAuthor,
+    DiaryActionChannel,
+    DiaryActionConfirmation,
+    DiaryActionIntent,
+    DiaryActionProposal,
+    DiaryActionSuggestion,
+)
 from app.services.diary.frames import (
     BernieAdvisoryWarningFrame,
     BernieFrameSource,
@@ -50,6 +58,12 @@ __all__ = [
     "BernieCapability",
     "BernieCapabilityTier",
     "get_bernie_capability",
+    "DiaryActionAuthor",
+    "DiaryActionChannel",
+    "DiaryActionConfirmation",
+    "DiaryActionIntent",
+    "DiaryActionProposal",
+    "DiaryActionSuggestion",
     "BernieAdvisoryWarningFrame",
     "BernieFrameSource",
     "BernieFrameStatus",
