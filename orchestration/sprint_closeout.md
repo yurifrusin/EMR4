@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 106C: Bernie Typed Context Frames And Reception Policy Foundation |
 | Integrated through | Antigravity UX plan accepted with amendments, Codex invariant/backend plans accepted, and Ariadne backend contract implementation for typed receptionist frames plus deterministic policy predicates |
-| Status | Integrated locally; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed
