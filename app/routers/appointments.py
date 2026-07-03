@@ -3653,12 +3653,19 @@ def _bernie_staff_review_payload(
     # advisory_warnings_only is False here: advisory warnings alongside a
     # staged proposal do not constitute an advisory-only state.
     _has_staged_proposal = confirmation_ready
+    _schedule_or_roster_unavailable = any(
+        issue.code == "no_practitioner_schedule"
+        for issue in [*blocks, *warnings]
+    )
     _hard_blocked = result in {"blocked", "clinic_day_exhausted"} or any(
-        b.severity == "blocked" for b in blocks
+        b.severity == "blocked" and b.code != "no_practitioner_schedule"
+        for b in blocks
     )
     _gate_policy = BernieReceptionPolicyDecision(
         availability=(
-            "search_ran_with_candidates"
+            "roster_unavailable"
+            if _schedule_or_roster_unavailable
+            else "search_ran_with_candidates"
             if result in {"confirmation_ready", "candidate_selection_required"}
             else "search_ran_no_candidates"
             if result == "clinic_day_exhausted"
@@ -3670,7 +3677,7 @@ def _bernie_staff_review_payload(
         can_prepare_proposal=_has_staged_proposal,
         must_block_confirmation=_hard_blocked,
         advisory_warnings_only=False,
-        roster_unavailable=False,
+        roster_unavailable=_schedule_or_roster_unavailable,
         search_ran_no_candidates=result == "clinic_day_exhausted",
         reason_codes=[b.code for b in blocks] + [w.code for w in warnings],
         schedule_reason_codes=[],

@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | e82a885 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-n11-diary-roster-explanation-ux-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Plan phase only; Ariadne implemented the accepted UI slice in docs/diary/diary.js, docs/diary/diary.html, and review/test_diary_smoke.py.
+- Verification run: Ariadne ran full deterministic Diary smoke plus focused backend/outcome suites; see orchestration/sprint_closeout.md.
+- Remaining risks: Further natural-language roster detail remains future work once route payloads carry richer practitioner/date wording.

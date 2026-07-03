@@ -111,6 +111,17 @@ def test_interpreted_ready_clean_policy():
     assert not outcome.is_terminal
 
 
+def test_interpreted_route_result_dominates_soft_model_uncertainty():
+    """Accepted interpretation advances to context enrichment despite conservative checks."""
+    outcome = classify_booking_outcome(
+        _must_ask_policy(),
+        route_result="interpreted",
+    )
+
+    assert outcome.kind == BernieBookingOutcomeKind.interpreted_ready
+    assert outcome.session_state == BernieSessionState.context_enrichment
+
+
 def test_guardrail_blocked_from_availability_blocked():
     outcome = classify_booking_outcome(_blocked_policy())
     assert outcome.kind == BernieBookingOutcomeKind.guardrail_blocked
@@ -258,6 +269,37 @@ def test_no_matching_times_requires_roster_present():
     outcome = classify_booking_outcome(policy)
     # roster_unavailable wins over search_ran_no_candidates (higher precedence)
     assert outcome.kind == BernieBookingOutcomeKind.roster_unavailable
+
+
+def test_roster_unavailable_dominates_generic_blocked_route_result():
+    """A generic blocked route label must not erase typed roster/schedule truth."""
+    outcome = classify_booking_outcome(
+        _roster_unavailable_policy(),
+        route_result="blocked",
+    )
+
+    assert outcome.kind == BernieBookingOutcomeKind.roster_unavailable
+    assert outcome.family == "roster_gap"
+    assert "no_practitioner_schedule" in outcome.reason_codes
+
+
+def test_blocked_route_result_fallbacks_to_guardrail_when_policy_has_no_reason():
+    outcome = classify_booking_outcome(_clean_policy(), route_result="blocked")
+
+    assert outcome.kind == BernieBookingOutcomeKind.guardrail_blocked
+    assert outcome.family == "blocked"
+
+
+def test_clinic_day_exhausted_dominates_search_zero_candidates():
+    """Same-day exhaustion is distinct from a normal searched-zero-slot result."""
+    outcome = classify_booking_outcome(
+        _no_candidates_policy(),
+        route_result="clinic_day_exhausted",
+    )
+
+    assert outcome.kind == BernieBookingOutcomeKind.clinic_day_exhausted
+    assert outcome.family == "terminal"
+    assert outcome.is_terminal
 
 
 def test_advisory_rides_on_candidates_not_standalone():

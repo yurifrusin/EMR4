@@ -8,30 +8,29 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint N10: Bernie Outcome Intelligence And Diary Outcome UX |
-| Integrated through | Claude backend classifier work recovered from timed-out worker branch, Antigravity Diary UX review implementation, Codex/Socrates invariant plan accepted, and Ariadne integration repairs |
+| Batch | Sprint N11: Bernie Roster Outcome Explanations |
+| Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted, Codex/Banach invariant plan accepted, and Ariadne backend/UI implementation |
 | Status | Integrated and verified locally; push/mirror/audit pending |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- Added a typed Bernie booking outcome classifier in
-  `app/services/diary/outcomes.py`, re-exported through
-  `app/services/bernie/outcomes.py`.
-- Interpretation and supervised-booking envelopes now carry optional
-  `outcome`, classifying results such as `confirmation_ready`,
-  `advisory_warnings_present`, `clarification_required`,
-  `no_matching_times`, `roster_unavailable`, and `guardrail_blocked`.
-- Route/session state consistency is asserted instead of silently swallowed for
-  interpretation outcomes.
-- Diary rendering now prefers the typed `outcome.kind` when deciding whether to
-  show confirmation, candidate selection, no-slot, roster, clarification, or
-  advisory-only states. The outcome field can suppress confirm affordances but
-  cannot grant confirm authority by itself.
-- Diary CSS and smoke tests now cover clarification, advisory-only warning,
-  stale-conflict, and no-PHI-storage behaviours.
-- `diary.css` was cache-busted from v129 to v130 and `diary.js` from v155 to
-  v156.
+- Backend outcome precedence now preserves typed schedule truth: a generic
+  `blocked` route result no longer erases `roster_unavailable`, and
+  `clinic_day_exhausted` remains distinct from ordinary searched-zero-slot
+  `no_matching_times`.
+- Accepted interpretation route results remain `interpreted_ready` even when
+  conservative soft confidence checks are present; explicit clarification
+  route results still enter `clarification_required`.
+- The supervised booking staff-review confirm affordance now maps
+  `no_practitioner_schedule` to `blocked_schedule_or_roster`, not the generic
+  `blocked_no_proposal`.
+- Diary rendering now reads `outcome.reason_codes` before legacy issue fields
+  for schedule copy, so typed roster outcomes can render "No roster found" and
+  "Check the practitioner roster..." without UI inference.
+- Advisory-only outcomes without selected-slot evidence remain advisory in the
+  panel and do not produce fake prepared-booking headlines or confirm buttons.
+- `diary.js` was cache-busted from v156 to v157.
 - No persisted session table, Alembic migration, GraphRAG wiring, auto-mode,
   taskpane, Command Centre, broad UI redesign, or broad API rewrite was added.
 
@@ -40,32 +39,28 @@ reviewed, integrated, verified, pushed, and audited.
 - JavaScript syntax check passed:
   `node --check docs\diary\diary.js`.
 - Compile check passed:
-  `.\.venv\Scripts\python.exe -m py_compile app\services\diary\outcomes.py app\services\bernie\outcomes.py app\schemas\appointments.py app\routers\appointments.py`.
+  `.\.venv\Scripts\python.exe -m py_compile app\services\diary\outcomes.py app\routers\appointments.py`.
 - Frontend asset version check passed:
   `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
-- Focused N10 backend classifier and route outcome tests passed:
-  `.\.venv\Scripts\pytest.exe tests\test_bernie_booking_outcomes.py tests\test_bernie_route_outcome_events.py -q`.
-- Adjacent backend session/evidence/confirm regression suite passed:
-  `.\.venv\Scripts\pytest.exe tests\test_bernie_session_routes.py tests\test_bernie_session_store.py tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_route_outcome_events.py tests\test_diary_confirm_gate.py -q`.
-- Broader Bernie wrapper/evidence compatibility suite passed:
-  `.\.venv\Scripts\pytest.exe tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_route_outcome_events.py tests\test_bernie_booking_outcomes.py -q`.
+- Focused N11 backend outcome/schedule/frame tests passed:
+  `.\.venv\Scripts\pytest.exe tests\test_bernie_booking_outcomes.py tests\test_bernie_supervised_booking_wrapper.py::test_no_practitioner_schedule_is_roster_unavailable_not_no_free_slots tests\test_diary_schedule_explanations.py tests\test_bernie_context_frames.py -q`.
+- Broader adjacent Bernie backend suite passed:
+  `.\.venv\Scripts\pytest.exe tests\test_bernie_booking_outcomes.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_route_outcome_events.py tests\test_diary_confirm_gate.py tests\test_diary_schedule_explanations.py tests\test_bernie_context_frames.py -q`.
 - Full deterministic Diary smoke harness passed:
   `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
 - `git diff --check` passed.
-- During verification, earlier timed-out pytest processes left a stale
-  `gp_pms_test` lock; Ariadne terminated only the fresh test processes/Postgres
-  test backend, reset `gp_pms_test`, and reran the focused suites serially.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N10;
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N11;
   previous full runs showed pre-existing/global failures outside these
   diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. N10 changes the live Diary asset and
-backend Bernie outcome envelope, but the classifier, session/confirm
-compatibility, and deterministic Diary outcome rendering were verified with
-focused backend and UI harnesses. A later live-user Bernie behaviour review is
-still useful once Pages serves v156, but it is not required to close N10.
+No required manual review before moving on. N11 changes the live Diary asset and
+backend Bernie outcome/confirm-affordance precedence, but roster/no-slot,
+advisory, interpretation-route, confirm-affordance, and deterministic Diary
+rendering behaviours were verified with focused backend and UI harnesses. A
+later live-user Bernie behaviour review is still useful once Pages serves v157,
+but it is not required to close N11.
 
 ## Not Required Before Moving On
 
@@ -86,9 +81,9 @@ still useful once Pages serves v156, but it is not required to close N10.
 - A later render-from-state sprint should decide how far the visible chat and
   latest status should be reconstructed from server session events rather than
   the current browser-owned transcript.
-- A later domain sprint should route schedule/roster explanation details into
-  the same typed outcome envelope so Bernie can naturally say when a requested
-  practitioner is not rostered without the UI inventing the reason.
+- A later domain sprint should enrich typed schedule/roster outcome payloads
+  with safe practitioner/date wording so Bernie can naturally say when a
+  requested practitioner is not rostered without the UI inventing facts.
 - Continue to keep `session_binding` backend-authored only; the browser should
   echo it unchanged or fail closed.
 - The signed path remains additive; a later sprint can decide when to retire or
@@ -100,19 +95,37 @@ still useful once Pages serves v156, but it is not required to close N10.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Bernie Schedule Explanation / Domain Module Tail
+## Next Sprint Candidate - Rich Schedule Explanation / Domain Module Tail
 
 | Item | Value |
 |---|---|
-| Name | N11: Bernie schedule/roster explanation through typed outcomes, or K1b Advisory Retrieval Wiring |
+| Name | N12: Rich schedule/roster explanation payloads, or K1b Advisory Retrieval Wiring |
 | Status | Recommended, not launched |
 | Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for visible Diary UX review; Codex worker for state/session invariants |
 
-N10 establishes a typed outcome contract. The next narrow slice should make
-schedule/roster explanations first-class within that contract and continue
-extracting Bernie into the bounded Diary reception domain module. Alternatively,
-K1b can wire advisory retrieval into Bernie responses while preserving the
-advisory-only boundary.
+N11 keeps schedule/no-slot/advisory outcomes semantically distinct. The next
+narrow slice can enrich roster/schedule explanations with safe typed display
+payloads and continue extracting Bernie into the bounded Diary reception domain
+module. Alternatively, K1b can wire advisory retrieval into Bernie responses
+while preserving the advisory-only boundary.
+
+## Previous Closeout - Sprint N10
+
+| Item | Value |
+|---|---|
+| Batch | Sprint N10: Bernie Outcome Intelligence And Diary Outcome UX |
+| Integrated through | Claude backend classifier work recovered from timed-out worker branch, Antigravity Diary UX review implementation, Codex/Socrates invariant plan accepted, and Ariadne integration repairs |
+| Status | Integrated, verified, pushed, mirrored, and audited |
+| Last updated | 2026-07-04 |
+
+N10 added the typed Bernie booking outcome classifier, attached optional
+`outcome` fields to interpretation and supervised-booking envelopes, made Diary
+prefer `outcome.kind` for confirmation/advisory/clarification/no-slot/roster
+rendering, and added deterministic Diary smoke coverage for clarification,
+advisory-only, stale-conflict, and no-PHI-storage behaviours. `diary.css` was
+cache-busted from v129 to v130 and `diary.js` from v155 to v156. No persisted
+session table, Alembic migration, GraphRAG wiring, auto-mode, taskpane, Command
+Centre, or broad API rewrite was added.
 
 ## Previous Closeout - Sprint N9
 

@@ -629,7 +629,18 @@ const DIARY_COPY_CATALOG = {
 };
 
 function getPrimaryScheduleReasonCode(payload) {
-  if (!payload || !payload.reception_policy) return null;
+  if (!payload) return null;
+
+  if (Array.isArray(payload.outcome?.reason_codes)) {
+    for (const code of payload.outcome.reason_codes) {
+      const canonical = canonicalizeReasonCode(code);
+      if (canonical && DIARY_COPY_CATALOG[canonical]) {
+        return canonical;
+      }
+    }
+  }
+
+  if (!payload.reception_policy) return null;
 
   if (Array.isArray(payload.reception_policy.schedule_reason_codes)) {
     const codes = payload.reception_policy.schedule_reason_codes;
@@ -756,6 +767,13 @@ function bernieHeadlineCopy(status, blocks = []) {
 
 function isBernieConfirmReady(payload) {
   if (!payload) return false;
+  const hasSelectedSlotEvidence = Boolean(
+    payload.selected_slot ||
+    payload.confirm_payload?.selection_proposal?.selected_candidate
+  );
+  if (!hasSelectedSlotEvidence) {
+    return false;
+  }
   if (payload.outcome && payload.outcome.kind !== "confirmation_ready" && payload.outcome.can_confirm === false) {
     return false;
   }
@@ -886,10 +904,6 @@ function bernieReviewTransition(payload) {
   }
 
   if (state === "confirmation_ready" && !isBernieConfirmReady(payload)) {
-    state = "blocked";
-  }
-
-  if (state === "advisory_warnings_only" && !isBernieConfirmReady(payload)) {
     state = "blocked";
   }
 
@@ -4255,7 +4269,14 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   const headline = document.createElement("h3");
   headline.className = "bernie-review-headline";
   headline.setAttribute("data-testid", "bernie-review-headline");
-  if (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") {
+  const hasSelectedSlotEvidence = Boolean(
+    payload.selected_slot ||
+    payload.confirm_payload?.selection_proposal?.selected_candidate
+  );
+  if (
+    (transition.state === "confirmation_ready" || transition.state === "advisory_warnings_only") &&
+    hasSelectedSlotEvidence
+  ) {
     const patientName = berniePatientLabelFromPayload(payload);
     const practitionerName = berniePractitionerLabelFromPayload(payload);
     const date = payload.selected_slot?.appointment_date || "";

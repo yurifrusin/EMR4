@@ -223,11 +223,13 @@ def classify_booking_outcome(
     Precedence (first match wins; hard blocks dominate advisory warnings):
 
     1. handed_off        — route_result == "handed_off" (explicit terminal handoff)
-    2. guardrail_blocked — availability == "blocked" (hard guardrail frame present)
-    3. clarification_required — must_ask or must_block_confirmation (stale/missing)
-    4. roster_unavailable — no practitioner schedule available to search against
-    5. no_matching_times  — search ran with available roster, found zero candidates
-    6. clinic_day_exhausted — route signals same-day window exhausted (no_remaining_today)
+    2. clarification_required — route_result == "clarification_required"
+    3. guardrail_blocked — availability == "blocked" (hard guardrail frame present)
+    4. interpreted_ready — route_result == "interpreted" and no hard availability fact
+    5. clarification_required — must_ask or must_block_confirmation (stale/missing)
+    6. roster_unavailable — no practitioner schedule available to search against
+    7. clinic_day_exhausted — route signals same-day window exhausted (no_remaining_today)
+    8. no_matching_times  — search ran with available roster, found zero candidates
     7. confirmation_ready — staged proposal present with no adverse signals
     8. candidate_selection_required — candidates found but no staged proposal
     9. advisory_warnings_present — only advisory warnings, nothing stronger
@@ -245,18 +247,15 @@ def classify_booking_outcome(
     if route_result == "handed_off":
         kind = BernieBookingOutcomeKind.handed_off
         basis = "Session has been handed off to staff."
-    elif route_result == "blocked":
-        kind = BernieBookingOutcomeKind.guardrail_blocked
-        basis = "The route blocked the request before it could proceed."
     elif route_result == "clarification_required":
         kind = BernieBookingOutcomeKind.clarification_required
         basis = "The route requires clarification before proceeding."
-    elif route_result == "interpreted" and not policy.advisory_warnings_only:
-        kind = BernieBookingOutcomeKind.interpreted_ready
-        basis = "Interpretation succeeded with no adverse signals; ready for context enrichment."
     elif policy.availability == "blocked":
         kind = BernieBookingOutcomeKind.guardrail_blocked
         basis = "A guardrail outcome frame hard-blocked the request."
+    elif route_result == "interpreted" and not policy.advisory_warnings_only:
+        kind = BernieBookingOutcomeKind.interpreted_ready
+        basis = "Interpretation succeeded with no adverse signals; ready for context enrichment."
     elif policy.must_ask_clarification or policy.must_block_confirmation:
         kind = BernieBookingOutcomeKind.clarification_required
         basis = (
@@ -266,15 +265,18 @@ def classify_booking_outcome(
     elif policy.roster_unavailable:
         kind = BernieBookingOutcomeKind.roster_unavailable
         basis = "No practitioner schedule or roster is available to search against."
+    elif route_result == "clinic_day_exhausted":
+        kind = BernieBookingOutcomeKind.clinic_day_exhausted
+        basis = "No bookable slots remain in the requested same-day window."
     elif policy.search_ran_no_candidates:
         kind = BernieBookingOutcomeKind.no_matching_times
         basis = (
             "Slot search ran against an available roster but found no matching slots "
             "for the requested criteria."
         )
-    elif route_result == "clinic_day_exhausted":
-        kind = BernieBookingOutcomeKind.clinic_day_exhausted
-        basis = "No bookable slots remain in the requested same-day window."
+    elif route_result == "blocked":
+        kind = BernieBookingOutcomeKind.guardrail_blocked
+        basis = "The route blocked the request before it could proceed."
     elif has_staged_proposal:
         kind = BernieBookingOutcomeKind.confirmation_ready
         basis = "A create proposal is staged; explicit staff confirmation is required."

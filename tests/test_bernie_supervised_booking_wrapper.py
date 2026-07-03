@@ -189,6 +189,11 @@ def test_no_practitioner_schedule_is_roster_unavailable_not_no_free_slots(
     assert policy["roster_unavailable"] is True
     assert policy["search_ran_no_candidates"] is False
     assert policy["can_search_slots"] is False
+    assert data["outcome"]["kind"] == "roster_unavailable"
+    assert data["outcome"]["family"] == "roster_gap"
+    assert data["outcome"]["can_confirm"] is False
+    assert data["staff_review"]["confirm_affordance"]["gate"] == "blocked_schedule_or_roster"
+    assert data["staff_review"]["confirm_payload"] is None
     assert any(
         frame["frame_type"] == "roster_schedule"
         and frame["status"] == "unavailable"

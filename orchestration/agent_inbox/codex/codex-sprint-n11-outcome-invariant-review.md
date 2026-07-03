@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | e82a885 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-n11-outcome-invariant-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Plan phase only in the Codex worker; Ariadne implemented the accepted invariant slice in backend outcome/gate tests and Diary smoke tests.
+- Verification run: Ariadne ran focused and adjacent backend Bernie suites, full deterministic Diary smoke, py_compile, node --check, frontend version check, and git diff --check; see orchestration/sprint_closeout.md.
+- Remaining risks: The worker did not submit via branch; Ariadne copied the coordination-only plan packet from the clean Codex mirror and integrated it manually.

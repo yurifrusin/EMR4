@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | e82a885 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n11-bernie-schedule-explanation-outcome-contract --summary "Short plan summary"` |
@@ -90,5 +90,5 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Verification run:
-- Remaining risks:
+- Verification run: Claude headless plan attempt returned 429 session-limit reset before producing an N11 plan. Ariadne proceeded with Antigravity/Codex plans and local implementation.
+- Remaining risks: Retry Claude on a later sprint after session refresh if a deeper backend review is needed.
