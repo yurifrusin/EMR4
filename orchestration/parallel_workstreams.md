@@ -243,6 +243,32 @@ Integration notes:
 - Focused backend route/session tests, adjacent signed-confirm/proposal tests,
   py-compile, and `git diff --check` passed.
 
+## Sprint N6: Diary Render From Bernie Session Endpoint
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate in progress |
+| Product Goal | Make the Diary Bernie panel consume the N5 server-owned session endpoint for active-session load, new-session/refetch, stale conflict handling, and PHI-minimised event appends while keeping the browser presentational |
+| Worker Shape | Claude backend/API contract review if quota allows, Antigravity Diary UI render/refetch plan, Codex worker UI invariant/review-harness plan, Ariadne orchestration/integration |
+| Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n6-bernie-session-ui-contract-review.md` |
+| Antigravity Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-n6-diary-render-server-session.md` |
+| Codex Task Packet | `orchestration/agent_inbox/codex/codex-sprint-n6-diary-session-ui-invariants.md` |
+| In Scope | Plan first; `docs/diary/diary.js`, `diary.html/css` only if needed, focused review smoke checks, active-session load, new-session/refetch, append requests with expected revision/idempotency, stale conflict UX, no browser PHI/session authority |
+| Out Of Scope | Production code before plan approval, backend route/schema changes unless the plan proves a tiny additive adjustment is required, database migration, GraphRAG/practice-knowledge wiring, auto-mode, taskpane/Command Centre changes, broad UI redesign |
+| Verification | Plan packets first; later implementation must run `node --check`, focused route-intercepted Diary review checks, backend session route regressions if touched, no local/session storage PHI assertions, frontend version checks if deployable assets change, and `git diff --check` |
+
+Launch notes:
+
+- N6 is the frontend follow-through from N5. The diary may render and refetch
+  server session snapshots, but the browser must not become the authority for
+  session revision, PHI-bearing memory, confirmation eligibility, or signed
+  evidence.
+- Event payloads should stay PHI-minimised unless a later retention/privacy
+  policy explicitly permits transcript persistence.
+- If Claude remains capped by the five-hour window, Ariadne may supersede that
+  lane after recording the reason and proceed with Codex/Antigravity plus local
+  backend route verification.
+
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 
 | Item | Value |
