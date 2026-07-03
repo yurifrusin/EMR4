@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint N3 - the native diary reception domain now has a backend-owned confirm-affordance gate, Bernie staff-review payloads emit `confirm_affordance`, and the Diary UI suppresses confirm-grade affordances when the gate blocks; no write-path, persisted-session, GraphRAG, or auto-mode change was included |
-| **Next recommended work** | Sprint K1: typed practice knowledge substrate/retrieval advisory boundary, or Sprint N4 tail: server-side Bernie session/event persistence design; signed confirm evidence remains a near-term safety follow-up before broader auto-mode work |
+| **Current active track** | Post-Sprint K1 - the native diary/reception programme now has a typed, provenance-bearing `app/services/practice_knowledge/` advisory substrate with a deterministic retriever protocol and adversarial tests proving retrieval cannot create slot truth, roster truth, confirm authority, freshness/audit evidence, or write payloads |
+| **Next recommended work** | Continue the native-diary-agent foundation with signed/HMAC confirmation evidence or the N4 tail server-side Bernie session/event design before any broader GraphRAG, auto-mode, or root-to-branch API review; K1b route/UI advisory retrieval wiring should wait until those authority boundaries remain explicit |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

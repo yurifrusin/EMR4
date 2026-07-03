@@ -134,6 +134,29 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint K1: Typed Practice Knowledge Substrate
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; push/mirror/audit pending |
+| Product Goal | Create a typed, provenance-bearing practice-knowledge substrate that can later support GraphRAG-style retrieval while keeping Bernie and the diary state machine advisory-only at the retrieval boundary |
+| Worker Shape | Claude implementation, Antigravity advisory-UX plan accepted for a later wiring sprint, Codex/Laplace advisory-boundary review, Ariadne integration |
+| In Scope | `app/services/practice_knowledge/`, deterministic in-memory retriever protocol seam, advisory-only result envelopes, one-way Bernie advisory-frame adapter, adversarial tests |
+| Out Of Scope | Route/UI retrieval wiring, vector/graph store deployment, persisted sessions, PHI-bearing knowledge/session tables, slot availability authority from retrieval, confirm affordance decisions from retrieval, write payloads from retrieval |
+| Verification | K1 practice-knowledge tests, adjacent diary/Bernie authority tests, compileall, static import scan, `git diff --check` |
+
+Integration notes:
+
+- Claude submitted a pure `practice_knowledge` package and tests; Ariadne
+  reviewed and integrated it.
+- Antigravity's UI boundary plan remains useful for a later K1b wiring sprint,
+  but no frontend route/UI retrieval work was included in K1.
+- The GraphRAG-facing seam is now the retriever protocol and typed envelope,
+  not a deployed graph/vector store.
+- Retrieval remains advisory-only: it may help Bernie explain or suggest, but
+  must not set slot truth, roster truth, policy hard blocks, confirm authority,
+  freshness/audit evidence, or write payloads.
+
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 
 | Item | Value |

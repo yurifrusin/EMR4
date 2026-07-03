@@ -8,63 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint N3: Unified Evidence-Gated Confirm |
-| Integrated through | Claude backend/domain implementation, Antigravity UI plan plus Ariadne UI integration, Codex/Lovelace boundary review, and Ariadne verification/hotfixes |
+| Batch | Sprint K1: Typed Practice Knowledge Substrate |
+| Integrated through | Claude backend/domain implementation, Antigravity advisory-UX plan accepted for a later wiring lane, Codex/Laplace boundary review, and Ariadne integration verification |
 | Status | Integrated locally, focused verification passed; push/mirror/audit pending |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- Added `app/services/diary/confirm_gate.py`, a pure backend-owned
-  confirm-affordance gate that emits `confirm_grade_allowed`,
-  `can_show_confirm_ui`, a gate reason, blocking reason codes, and schedule
-  reason codes.
-- Added Bernie compatibility exports for the new diary-domain confirm gate.
-- Added `confirm_affordance` to `BernieStaffReviewPayload`.
-- Wired `_bernie_staff_review_payload()` so `confirm_endpoint` and
-  `confirm_payload` are present only when the backend gate allows
-  confirm-grade UI.
-- Updated the Diary Bernie panel so `confirm_affordance.can_show_confirm_ui`
-  or `confirm_grade_allowed` controls confirm rendering before legacy status
-  fallback.
-- Made composer edits clear stale Bernie preview/response state.
-- Added a smoke fixture for a contradictory stale payload where
-  `status=confirmation_ready` but the backend gate blocks confirmation.
-- Bumped the deployed Diary asset reference to `diary.js?v=153`.
-- Updated confirm/audit regression expectations to distinguish preview evidence
-  from final write audit evidence including identity confidence.
+- Added `app/services/practice_knowledge/` as a pure advisory substrate for
+  typed, provenance-bearing practice facts.
+- Added `PracticeFact`, `PracticeFactProvenance`, `PracticeKnowledgeQuery`,
+  `PracticeKnowledgeResult`, and result-item envelopes with structural
+  advisory-only invariants and `contains_phi=False`.
+- Added a deterministic `InMemoryPracticeKnowledgeRetriever` behind a
+  `PracticeKnowledgeRetriever` protocol seam so a later GraphRAG retriever can
+  implement the same contract without changing call sites.
+- Added a one-way boundary adapter that converts retrieval results only into
+  `BernieAdvisoryWarningFrame`, not slot, roster, guardrail, confirm, audit, or
+  write evidence.
+- Added dev-clinic example facts for tests only.
+- Added adversarial tests proving retrieved facts cannot create no-slot truth,
+  roster truth, confirm authority, freshness/audit evidence, or write payloads,
+  and that diary authority modules do not import `practice_knowledge`.
+- No route, schema, frontend, migration, slot search, reception policy, confirm
+  gate, or write-path code was changed.
 
 ## Verification
 
-- Focused N3 backend/domain suite passed:
-  `.\.venv\Scripts\python.exe -m pytest tests\test_diary_confirm_gate.py tests\test_diary_action_boundary_contracts.py tests\test_bernie_domain_package.py -q`.
-- Confirm/proposal regression slice passed:
-  `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_confirm_create_proposal.py tests\test_bernie_sprint98_confirm_contract.py tests\test_bernie_confirmed_flow_review_harness.py tests\test_bernie_wrapper_confirmation_review_harness.py tests\test_slot_selection_proposal.py -q`.
-- `node --check docs\diary\diary.js` passed.
-- `.\.venv\Scripts\python.exe -m compileall app\services\diary app\services\bernie -q` passed.
-- `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed.
-- Focused Diary smoke checks passed:
-  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "confirmation_ready_stale_gate_suppresses_confirm or confirmation_ready or reception_policy or schedule_reason_codes"`.
+- New K1 practice-knowledge suite passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_practice_knowledge_facts.py tests\test_practice_knowledge_retrieval.py tests\test_practice_knowledge_advisory_boundary.py -q`.
+- Adjacent diary/Bernie authority regression suite passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_diary_action_boundary_contracts.py tests\test_diary_confirm_gate.py tests\test_bernie_domain_package.py -q`.
+- Compile check passed:
+  `.\.venv\Scripts\python.exe -m compileall app\services\practice_knowledge app\services\diary app\services\bernie -q`.
+- Static import scan found no `practice_knowledge` imports in
+  `app/services/diary`, `app/routers/appointments.py`, or `app/schemas`.
 - `git diff --check` passed.
-- A first parallel pytest attempt hit the known local Postgres enum creation
-  race (`userrole` duplicate type) because two pytest processes initialized the
-  test schema simultaneously; the same focused suites passed when rerun
-  sequentially.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N3;
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for K1;
   previous full runs showed pre-existing/global failures outside these
-  diary-domain confirm/affordance slices.
+  diary-domain/practice-knowledge slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. Optional live spot-check: submit a
-normal Bernie booking that reaches confirmation, then change the composer text
-before confirming and confirm the old preview/confirm affordance disappears.
-Also check that a stale/blocked review payload does not show a confirm button.
+No required manual review before moving on. K1 has no live UI or route wiring,
+so there is nothing meaningful for Yuri to click-test yet.
 
 ## Not Required Before Moving On
 
-- No GraphRAG/K1 knowledge substrate, persisted session, HMAC evidence signing,
-  or booking write-path change was implemented.
+- No GraphRAG/vector store, persisted session, HMAC evidence signing, route/UI
+  retrieval wiring, or booking write-path change was implemented.
 - No auto-confirm or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was
   started.
@@ -77,27 +69,39 @@ Also check that a stale/blocked review payload does not show a confirm button.
 
 - Signed evidence/HMAC should be added before any broader unified write grammar
   or auto-mode branch.
-- K1 typed practice knowledge substrate remains a good candidate; retrieval
-  must stay advisory-only and must not affect confirm-grade affordances.
+- Any future K1b route/UI retrieval integration must preserve the advisory-only
+  boundary: retrieved facts may help Bernie explain or suggest, but must not
+  set availability, policy hard-blocks, confirm affordances, freshness/audit
+  evidence, or write payloads.
+- Consider a future dedicated `practice_knowledge` frame source rather than the
+  current `server_resolver` source used by the boundary adapter.
 - Persisted Bernie server-side session/event state remains the likely long-run
   foundation, but needs PHI retention and concurrency decisions.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Sprint K1 Or N4 Tail
+## Next Sprint Candidate - Signed Evidence Or N4 Tail
 
 | Item | Value |
 |---|---|
-| Name | Typed Practice Knowledge Substrate, or Server-Side Bernie Session/Event Design |
+| Name | Signed/HMAC Confirmation Evidence, or Server-Side Bernie Session/Event Design |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for Diary UI/session review if UI is included; Codex worker for backend invariants |
+| Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for UI/session review if UI is included; Codex worker for backend invariants |
 
-K1 should introduce a typed practice knowledge substrate with an advisory-only
-retrieval boundary, deliberately tested against Bernie's simple domain before
-Scribe/Consultant use GraphRAG-like retrieval. N4 tail should design server-side
-Bernie session/event persistence and retention/concurrency rules. Signed
-confirm evidence is a near-term safety follow-up before any broader auto-mode
-or unified write grammar.
+Signed evidence should harden the existing freshness/proposal evidence before
+any broader unified write grammar or auto-mode work. N4 tail should design
+server-side Bernie session/event persistence and retention/concurrency rules.
+K1b can later wire advisory retrieval into Bernie UI/routes once the boundary
+remains explicit.
+
+## Previous Closeout - Sprint N3
+
+| Item | Value |
+|---|---|
+| Batch | Sprint N3: Unified Evidence-Gated Confirm |
+| Integrated through | Claude backend/domain implementation, Antigravity UI plan plus Ariadne UI integration, Codex/Lovelace boundary review, and Ariadne verification/hotfixes |
+| Status | Integrated, verified, pushed, mirrored, and audited |
+| Last updated | 2026-07-03 |
 
 ## Previous Closeout - Sprint N2
 

@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-k1-typed-practice-knowledge-substrate` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -52,5 +52,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated by Ariadne in `c2e7b9e`. Scope matched the accepted K1 slice: a pure `app/services/practice_knowledge/` advisory substrate, deterministic in-memory retriever behind a protocol seam, one-way Bernie advisory-frame boundary, and adversarial tests proving retrieval cannot create slot truth, roster truth, freshness/audit evidence, confirm authority, or write payloads.
+- Follow-up required: later retrieval wiring must remain advisory-only; do not import practice knowledge into diary slot, policy, temporal, confirm, router, or write paths. Consider adding a dedicated `practice_knowledge` frame source and curated dev fact fixtures in a future route/UI integration sprint.
