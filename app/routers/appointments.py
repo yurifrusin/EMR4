@@ -41,27 +41,23 @@ from app.schemas.appointments import (
     BernieTurnRef, BernieTurnEventKind,
     BernieNoSlotSuggestionSelectionIn, BernieNoSlotSuggestionSelectionOut,
 )
-from app.services.bernie_turn_evidence import (
+from app.services.bernie import (
     compute_candidate_freshness_id,
     compute_proposal_freshness_id,
     check_staleness,
     mint_session_id,
     mint_turn_id,
     StalenessVerdict,
-)
-from app.services.bernie_patient_context import (
     build_patient_booking_context,
     build_existing_future_follow_up_warning,
     has_existing_booking_on_requested_day,
-)
-from app.services.bernie_booking_interpreter import (
     actor_context_for_interpreter_user,
     get_booking_instruction_interpreter,
+    evaluate_bernie_pilot_eligibility,
+    normalize_slot_search_command,
+    resolve_booking_date_transition,
 )
 from app.services.ai.audit_store import persist_access_ai_audit_events
-from app.services.bernie_pilot_gate import evaluate_bernie_pilot_eligibility
-from app.services.bernie_slot_normalizer import normalize_slot_search_command
-from app.services.bernie_transition_table import resolve_booking_date_transition
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
 
