@@ -2278,6 +2278,44 @@ html, body {
   color: var(--blue-dark);
 }
 
+.bernie-session-stale-banner {
+  margin: 0 0 10px;
+  padding: 9px 10px;
+  border: 1px solid #f59e0b;
+  border-left: 3px solid #f59e0b;
+  border-radius: 4px;
+  background: #fff7ed;
+  color: #7c2d12;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.bernie-session-stale-text {
+  min-width: 0;
+  font-weight: 600;
+}
+
+.btn-bernie-session-refresh {
+  flex: 0 0 auto;
+  border: 1px solid #f59e0b;
+  border-radius: 4px;
+  background: #fff;
+  color: #7c2d12;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+
+.btn-bernie-session-refresh:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 .bernie-review-content {
   padding: 16px;
   overflow-y: auto;

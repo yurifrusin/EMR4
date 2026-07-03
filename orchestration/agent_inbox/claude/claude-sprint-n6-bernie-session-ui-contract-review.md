@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 5361e69 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n6-bernie-session-ui-contract-review --summary "Short plan summary"` |
@@ -90,5 +90,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+- None by Claude.
 - Verification run:
+- Ariadne attempted the Claude lane, but Claude returned a 429/session-limit reset at 1am Australia/Brisbane before a plan packet was submitted.
+- Ariadne replaced this lane with local backend/session route verification during integration.
 - Remaining risks:
+- No backend/API changes were required for N6. Focused backend session/evidence/confirm tests passed during Ariadne verification.

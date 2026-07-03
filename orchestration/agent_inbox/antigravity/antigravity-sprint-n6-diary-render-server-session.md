@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 5361e69 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-n6-diary-render-server-session --summary "Short plan summary"` |
@@ -90,5 +90,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+- `orchestration/agent_inbox/antigravity/antigravity-sprint-n6-diary-render-server-session.md`
+- `orchestration/agent_inbox/codex/plan-antigravity-antigravity-sprint-n6-diary-render-server-session.md`
 - Verification run:
+- Plan-only submit from Antigravity; Ariadne implemented the amended plan locally after review.
 - Remaining risks:
+- Antigravity's pure server-event transcript rendering recommendation was intentionally amended for N6 because the current N5 event endpoint is PHI-minimised and not yet an authoritative conversation/outcome store.

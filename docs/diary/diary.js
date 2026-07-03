@@ -33,6 +33,19 @@ const BERNIE_DEV_QUERY_PARAM_ALLOWLIST = [
   "reference_date",
   "selected_candidate_index"
 ];
+const BERNIE_SESSION_SURFACE_ID = "diary-main";
+
+function shouldUseBernieServerSession() {
+  if (!token) {
+    return false;
+  }
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("bernie_session") === "false") {
+    return false;
+  }
+  const isLocalHarness = ["127.0.0.1", "localhost"].includes(window.location.hostname);
+  return !isLocalHarness || params.get("bernie_session") === "true";
+}
 
 let activeAppointments = [];
 let activeTypes = [];
@@ -74,6 +87,14 @@ class BernieSession {
     this.latestReviewPayload = null;
     this.autoPreviewCandidateKey = null;
     this.sessionId = this.generateSessionId();
+    this.serverSessionId = null;
+    this.serverRevision = 0;
+    this.serverState = null;
+    this.serverEvents = [];
+    this.serverReferenceDate = null;
+    this.serverConflict = null;
+    this.serverSessionLoaded = false;
+    this.serverSessionLoading = null;
     this.turnRef = null;
     this.turns = [];
   }
@@ -103,6 +124,170 @@ class BernieSession {
     return event;
   }
 
+  getServerSurfaceId() {
+    return BERNIE_SESSION_SURFACE_ID;
+  }
+
+  applyServerSessionSnapshot(snapshot) {
+    if (!snapshot || typeof snapshot !== "object") {
+      return;
+    }
+    this.serverSessionId = snapshot.session_id || this.serverSessionId;
+    this.serverRevision = Number.isFinite(Number(snapshot.revision)) ? Number(snapshot.revision) : this.serverRevision;
+    this.serverState = snapshot.state || this.serverState;
+    this.serverEvents = Array.isArray(snapshot.events) ? snapshot.events : [];
+    this.serverReferenceDate = snapshot.request_reference_date || this.serverReferenceDate;
+    this.serverConflict = snapshot.stale_reason_code
+      ? {
+          code: snapshot.stale_reason_code,
+          detail: "Bernie's session has changed. Refresh before confirming."
+        }
+      : null;
+    this.serverSessionLoaded = true;
+  }
+
+  async ensureServerSession({ force = false } = {}) {
+    if (!shouldUseBernieServerSession()) {
+      return null;
+    }
+    if (this.serverSessionLoading) {
+      return this.serverSessionLoading;
+    }
+    const referenceDate = localDateKey(diaryDate);
+    if (
+      !force &&
+      this.serverSessionLoaded &&
+      this.serverSessionId &&
+      this.serverReferenceDate === referenceDate
+    ) {
+      return null;
+    }
+    this.serverSessionLoading = this.fetchActiveServerSession(referenceDate)
+      .finally(() => {
+        this.serverSessionLoading = null;
+      });
+    return this.serverSessionLoading;
+  }
+
+  async fetchActiveServerSession(referenceDate = localDateKey(diaryDate)) {
+    const params = new URLSearchParams({
+      surface_id: this.getServerSurfaceId(),
+      reference_date: referenceDate
+    });
+    const response = await apiFetch(`/appointments/bernie/sessions/active?${params.toString()}`);
+    if (!response.ok) {
+      throw new Error(`Bernie session load failed with status ${response.status}`);
+    }
+    const data = await response.json();
+    if (!data || !data.session) {
+      throw new Error("Bernie session load returned no session snapshot");
+    }
+    this.applyServerSessionSnapshot(data.session);
+    updateBernieChatTranscriptUI();
+    return data.session;
+  }
+
+  async createServerSession(referenceDate = localDateKey(diaryDate)) {
+    const response = await apiFetch("/appointments/bernie/sessions/new", {
+      method: "POST",
+      body: JSON.stringify({
+        surface_id: this.getServerSurfaceId(),
+        reference_date: referenceDate
+      })
+    });
+    if (!response.ok) {
+      throw new Error(`Bernie new session failed with status ${response.status}`);
+    }
+    const data = await response.json();
+    if (!data || !data.session) {
+      throw new Error("Bernie new session returned no session snapshot");
+    }
+    this.applyServerSessionSnapshot(data.session);
+    updateBernieChatTranscriptUI();
+    return data.session;
+  }
+
+  async appendServerEvent(eventType, payload = {}) {
+    if (!this.serverSessionId) {
+      await this.ensureServerSession({ force: true });
+    }
+    if (!this.serverSessionId) {
+      return null;
+    }
+    if (!this.canAppendServerEvent(eventType)) {
+      return null;
+    }
+    const eventId = this.generateEventId();
+    const body = {
+      surface_id: this.getServerSurfaceId(),
+      event_type: eventType,
+      expected_revision: this.serverRevision,
+      event_id: eventId,
+      idempotency_key: eventId,
+      payload: {
+        source: "diary_bernie_panel",
+        reference_date: localDateKey(diaryDate),
+        ...payload
+      }
+    };
+    const response = await apiFetch(`/appointments/bernie/sessions/${this.serverSessionId}/events`, {
+      method: "POST",
+      body: JSON.stringify(body)
+    });
+    const data = await response.json().catch(() => ({}));
+    if (response.ok && data.session) {
+      this.applyServerSessionSnapshot(data.session);
+      updateBernieChatTranscriptUI();
+      return data;
+    }
+    if (response.status === 409) {
+      if (data.session) {
+        this.applyServerSessionSnapshot(data.session);
+      }
+      if (
+        data.code === "event_not_allowed_in_state" ||
+        data.code === "event_not_allowed_in_transient_state"
+      ) {
+        return data;
+      }
+      this.serverConflict = {
+        code: data.code || "session_conflict",
+        detail: data.detail || "Bernie's session has changed. Refresh before confirming."
+      };
+      const confirmBtn = document.getElementById("btn-bernie-confirm");
+      if (confirmBtn) {
+        confirmBtn.disabled = true;
+      }
+      updateBernieChatTranscriptUI();
+      return data;
+    }
+    throw new Error(data.detail || `Bernie session event failed with status ${response.status}`);
+  }
+
+  canAppendServerEvent(eventType) {
+    const state = this.serverState || "instruction_entry";
+    if (eventType === "staff_instruction") {
+      return [
+        "instruction_entry",
+        "clarification",
+        "candidate_selection",
+        "proposal_preview",
+        "no_slot",
+        "clinic_day_exhausted"
+      ].includes(state);
+    }
+    if (eventType === "clarification_reply") {
+      return state === "clarification";
+    }
+    if (eventType === "candidate_selected") {
+      return state === "candidate_selection" || state === "proposal_preview";
+    }
+    if (eventType === "confirm_submitted") {
+      return state === "proposal_preview";
+    }
+    return true;
+  }
+
   updateTurnRef(turnRef) {
     if (turnRef && typeof turnRef === "object") {
       this.turnRef = turnRef;
@@ -113,8 +298,15 @@ class BernieSession {
     }
   }
 
-  startNewSession() {
+  async startNewSession() {
     this.sessionId = this.generateSessionId();
+    this.serverSessionId = null;
+    this.serverRevision = 0;
+    this.serverState = null;
+    this.serverEvents = [];
+    this.serverReferenceDate = null;
+    this.serverConflict = null;
+    this.serverSessionLoaded = false;
     this.turnRef = null;
     this.turns = [];
     this.reset();
@@ -126,6 +318,13 @@ class BernieSession {
     const newSessionBtn = document.getElementById("btn-bernie-new-session");
     if (newSessionBtn) {
       newSessionBtn.classList.add("hidden");
+    }
+    if (shouldUseBernieServerSession()) {
+      try {
+        await this.createServerSession(localDateKey(diaryDate));
+      } catch (err) {
+        console.warn("Bernie server session reset failed", err);
+      }
     }
     loadBernieLiveReview();
   }
@@ -244,6 +443,10 @@ class BernieSession {
   }
 
   handleContextChanged(newApptId) {
+    if (!newApptId && berniePilotContext.sourceAppointmentId && berniePilotContext.practitionerId && berniePilotContext.patientId) {
+      this.init(berniePilotContext.practitionerId, berniePilotContext.patientId);
+      return;
+    }
     this.reset();
     const { appt } = getActiveBernieSelectedAppointment();
     if (appt) {
@@ -768,6 +971,47 @@ function getVisibleTurn(event) {
   return null;
 }
 
+function createBernieServerSessionBanner() {
+  if (!bernieSession.serverConflict) {
+    return null;
+  }
+
+  const banner = document.createElement("div");
+  banner.id = "bernie-session-stale-banner";
+  banner.className = "bernie-session-stale-banner";
+  banner.setAttribute("data-testid", "bernie-session-stale-banner");
+
+  const text = document.createElement("div");
+  text.className = "bernie-session-stale-text";
+  text.textContent = "Bernie's session has changed. Refresh before confirming.";
+  banner.appendChild(text);
+
+  const refreshBtn = document.createElement("button");
+  refreshBtn.type = "button";
+  refreshBtn.className = "btn-bernie-session-refresh";
+  refreshBtn.setAttribute("data-testid", "btn-bernie-session-refresh");
+  refreshBtn.textContent = "Refresh";
+  refreshBtn.addEventListener("click", async () => {
+    refreshBtn.disabled = true;
+    try {
+      bernieSession.serverConflict = null;
+      await bernieSession.ensureServerSession({ force: true });
+      loadBernieLiveReview();
+    } catch (err) {
+      bernieSession.serverConflict = {
+        code: "session_refresh_failed",
+        detail: err.message || String(err)
+      };
+      updateBernieChatTranscriptUI();
+    } finally {
+      refreshBtn.disabled = false;
+    }
+  });
+  banner.appendChild(refreshBtn);
+
+  return banner;
+}
+
 function bernieComposerPlaceholder() {
   if (!bernieSession.turns || bernieSession.turns.length === 0) {
     return "Ask Bernie...";
@@ -893,7 +1137,7 @@ function setBerniePilotContextValues(values) {
 
 function getActiveBernieSelectedAppointment() {
   const activeEl = document.querySelector(".appt-active");
-  const apptId = activeEl ? activeEl.getAttribute("data-id") : null;
+  const apptId = activeEl ? activeEl.getAttribute("data-id") : lastActiveAppointmentId;
   const appt = apptId ? activeAppointments.find(a => a.id === apptId) : null;
   return { apptId, appt };
 }
@@ -923,7 +1167,12 @@ function resolveBerniePilotLaunchRequest({ allowHarnessDefaults = false } = {}) 
   const referenceDate = bernieSession.referenceDate || (allowHarnessDefaults ? (queryReferenceDate || "2026-06-27") : (queryReferenceDate || localDateKey(diaryDate)));
 
   const blocks = [];
-  if (!allowManualContext && explicitContext.sourceAppointmentId && selectedContext.apptId !== explicitContext.sourceAppointmentId) {
+  if (
+    !allowManualContext &&
+    explicitContext.sourceAppointmentId &&
+    selectedContext.apptId &&
+    selectedContext.apptId !== explicitContext.sourceAppointmentId
+  ) {
     bernieSession.reset();
     setBerniePilotContextValues({ practitionerId: "", patientId: "", sourceAppointmentId: "" });
   }
@@ -2290,6 +2539,8 @@ async function selectCandidate(slot, index) {
       }
       if (data.suggestions) {
         payload.suggestions = data.suggestions;
+      } else if (data.staff_review?.suggestions) {
+        payload.suggestions = data.staff_review.suggestions;
       }
 
       const identity = payload.identity_evidence || {};
@@ -3776,6 +4027,14 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   }
 
   contentEl.innerHTML = "";
+  if (!payload) {
+    bernieLatestIdentityEvidence = null;
+    bernieLatestReviewPayload = null;
+    if (isBerniePilotActive) {
+      renderBernieInstructionInput(contentEl);
+    }
+    return;
+  }
   const transition = bernieReviewTransition(payload);
   bernieLatestIdentityEvidence = payload.identity_evidence || null;
   bernieLatestReviewPayload = payload || null;
@@ -4188,7 +4447,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     confirmBtn.title = "Confirm booking (Ctrl+Alt+Enter)";
     confirmBtn.id = "btn-bernie-confirm";
     confirmBtn.textContent = "Confirm booking";
-    confirmBtn.disabled = false;
+    confirmBtn.disabled = Boolean(bernieSession.serverConflict);
     confirmBox.appendChild(confirmBtn);
 
     const shortcutHint = document.createElement("div");
@@ -4698,7 +4957,18 @@ function renderBernieInstructionInput(contentEl) {
     changeBtn.setAttribute("data-testid", "bernie-pilot-context-change");
     changeBtn.textContent = "Change";
     changeBtn.addEventListener("click", () => {
+      const previousSourceAppointmentId = berniePilotContext.sourceAppointmentId || lastActiveAppointmentId;
       setBerniePilotContextValues({ practitionerId: "", patientId: "", sourceAppointmentId: "" });
+      if (previousSourceAppointmentId) {
+        lastActiveAppointmentId = previousSourceAppointmentId;
+        const escapedId = typeof CSS !== "undefined" && CSS.escape
+          ? CSS.escape(previousSourceAppointmentId)
+          : String(previousSourceAppointmentId).replace(/"/g, '\\"');
+        const selectedEl = document.querySelector(`[data-id="${escapedId}"]`);
+        if (selectedEl) {
+          selectedEl.classList.add("appt-active");
+        }
+      }
       bernieInstructionText = "";
       bernieInterpretResult = null;
       const practitionerInput = document.getElementById("bernie-pilot-practitioner-id");
@@ -4760,7 +5030,8 @@ function renderBernieInstructionInput(contentEl) {
 
   textarea.addEventListener("input", () => {
     bernieInstructionText = textarea.value;
-    if (bernieInterpretResult || bernieSession.interpretEnvelope) {
+    const hasVisibleNoSlotSuggestions = !!document.querySelector("[data-testid='bernie-no-slot-suggestions']");
+    if ((bernieInterpretResult || bernieSession.interpretEnvelope) && !hasVisibleNoSlotSuggestions) {
       bernieSession.clearResponse({ preserveInstruction: true });
       loadDiary(true);
       renderBernieReview(null);
@@ -4848,6 +5119,13 @@ function renderBernieInstructionInput(contentEl) {
     } else {
       bernieSession.addEvent("staff_instruction", { instruction: text });
     }
+    const sessionEventType = isReply ? "clarification_reply" : "staff_instruction";
+    bernieSession.appendServerEvent(sessionEventType, {
+      intent_ref: bernieSession.generateEventId(),
+      has_staff_text: true
+    }).catch(err => {
+      console.warn("Bernie session event append failed", err);
+    });
 
     textarea.value = "";
     bernieInstructionText = "";
@@ -4909,7 +5187,7 @@ function renderBernieInstructionInput(contentEl) {
     }
 
     bernieSession.interpretEnvelope = bernieInterpretResult;
-    loadBernieLiveReview();
+    await loadBernieLiveReview();
   });
 }
 
@@ -4925,10 +5203,14 @@ function updateBernieChatTranscriptUI() {
     return;
   }
 
-  if (bernieSession.turns && bernieSession.turns.length > 0) {
+  if ((bernieSession.turns && bernieSession.turns.length > 0) || bernieSession.serverConflict) {
     transcriptEl.innerHTML = "";
+    const staleBanner = createBernieServerSessionBanner();
+    if (staleBanner) {
+      transcriptEl.appendChild(staleBanner);
+    }
     const visibleTurns = bernieSession.turns.map(getVisibleTurn).filter(Boolean);
-    let hasVisible = false;
+    let hasVisible = Boolean(staleBanner);
     if (visibleTurns.length > 1) {
       const historyDetails = document.createElement("details");
       historyDetails.className = "bernie-chat-history";
@@ -4977,13 +5259,22 @@ async function loadBernieLiveReview() {
     panel.classList.remove("hidden");
   }
 
+  bernieSession.ensureServerSession().catch(err => {
+    console.warn("Bernie server session load failed", err);
+  });
+
   updateBernieChatTranscriptUI();
 
   const contentEl = document.getElementById("bernie-review-content");
 
   const activeEl = document.querySelector(".appt-active");
   const currentActiveId = activeEl ? activeEl.getAttribute("data-id") : null;
-  if (currentActiveId !== lastActiveAppointmentId) {
+  const hasImportedSelectedContext = Boolean(berniePilotContext.sourceAppointmentId);
+  if (
+    currentActiveId !== lastActiveAppointmentId &&
+    bernieSession.state !== "INTERPRETING" &&
+    (currentActiveId || !hasImportedSelectedContext)
+  ) {
     lastActiveAppointmentId = currentActiveId;
     bernieSession.handleContextChanged(currentActiveId);
   }
@@ -5113,6 +5404,8 @@ async function loadBernieLiveReview() {
       }
       if (data.suggestions) {
         payload.suggestions = data.suggestions;
+      } else if (data.staff_review?.suggestions) {
+        payload.suggestions = data.staff_review.suggestions;
       }
 
       // Update state machine and snapshot

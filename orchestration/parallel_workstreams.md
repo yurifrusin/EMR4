@@ -247,7 +247,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate in progress |
+| Status | Integrated and verified locally; push/mirror/audit pending |
 | Product Goal | Make the Diary Bernie panel consume the N5 server-owned session endpoint for active-session load, new-session/refetch, stale conflict handling, and PHI-minimised event appends while keeping the browser presentational |
 | Worker Shape | Claude backend/API contract review if quota allows, Antigravity Diary UI render/refetch plan, Codex worker UI invariant/review-harness plan, Ariadne orchestration/integration |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n6-bernie-session-ui-contract-review.md` |
@@ -257,17 +257,23 @@ Integration notes:
 | Out Of Scope | Production code before plan approval, backend route/schema changes unless the plan proves a tiny additive adjustment is required, database migration, GraphRAG/practice-knowledge wiring, auto-mode, taskpane/Command Centre changes, broad UI redesign |
 | Verification | Plan packets first; later implementation must run `node --check`, focused route-intercepted Diary review checks, backend session route regressions if touched, no local/session storage PHI assertions, frontend version checks if deployable assets change, and `git diff --check` |
 
-Launch notes:
+Integration notes:
 
-- N6 is the frontend follow-through from N5. The diary may render and refetch
-  server session snapshots, but the browser must not become the authority for
-  session revision, PHI-bearing memory, confirmation eligibility, or signed
-  evidence.
-- Event payloads should stay PHI-minimised unless a later retention/privacy
-  policy explicitly permits transcript persistence.
-- If Claude remains capped by the five-hour window, Ariadne may supersede that
-  lane after recording the reason and proceed with Codex/Antigravity plus local
-  backend route verification.
+- Claude remained capped by the five-hour window, so Ariadne superseded that
+  lane after recording the reason.
+- Antigravity submitted a server-session render/refetch UI plan. Ariadne
+  accepted the session/refetch/stale-conflict direction but amended the
+  transcript-rendering approach: N6 keeps the existing client-presentational
+  Bernie flow while appending PHI-minimised server-session events, because the
+  current endpoint intentionally rejects raw transcript/PHI payloads.
+- Codex/Lorentz submitted a UI invariant plan. Ariadne integrated the route-
+  intercepted smoke checks for active session load, PHI-minimised event append,
+  stale conflict confirmation blocking, and no browser PHI/session persistence.
+- N6 connects the deployed Diary Bernie panel to the N5 server session substrate,
+  adds stale-session guardrails, and bumps Diary assets to `diary.js?v=154` and
+  `diary.css?v=129`.
+- No backend route/schema change, database migration, GraphRAG wiring, auto-mode,
+  taskpane, Command Centre, or broad UI redesign was included.
 
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 

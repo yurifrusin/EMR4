@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 5361e69 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-n6-diary-session-ui-invariants --summary "Short plan summary"` |
@@ -90,5 +90,12 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+- `orchestration/agent_inbox/codex/codex-sprint-n6-diary-session-ui-invariants.md`
+- `orchestration/agent_inbox/codex/plan-codex-codex-sprint-n6-diary-session-ui-invariants.md`
 - Verification run:
+- Plan-only gate; no production code, diary UI, backend, migrations, or runtime tests changed.
+- Read `AGENTS.md`, `orchestration/parallel_workstreams.md`, the N6 task packet, `docs/diary/diary.js` Bernie/session-related sections, `review/test_diary_smoke.py`, N5 session route/schema snippets in `app/routers/appointments.py` and `app/schemas/appointments.py`, and `tests/test_bernie_session_routes.py`.
+- Planned verification for implementation: `node --check docs/diary/diary.js`, `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`, targeted N5 session route regressions if endpoint assumptions change, no local/session storage PHI/session-authority assertions, confirm-evidence route captures, and `git diff --check`.
 - Remaining risks:
+- Ariadne reviewed Antigravity's plan and integrated the invariant harness locally with the Diary UI bridge.
+- Existing `localStorage` use for auth token and non-PHI UI preferences was distinguished from forbidden Bernie PHI/session-authority persistence in the new smoke assertions.
