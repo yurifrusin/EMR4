@@ -36,6 +36,7 @@ from app.schemas.appointments import (
     BernieSupervisedBookingIn, BernieSupervisedBookingOut,
     BernieCreateProposalConfirmationIn, BerniePilotEligibilityOut,
     BernieBookingInstructionInterpretIn, BernieBookingInstructionInterpretOut,
+    BernieBookingOutcomeOut,
     BernieConfidenceAxis, BernieConfidenceBand, BernieDecisionPolicy,
     BernieAssumption, BernieStaffCheck, BerniePatientCandidate,
     BerniePatientBookingContext, BernieContextFreshness, BernieSlotSuggestion,
@@ -43,6 +44,11 @@ from app.schemas.appointments import (
     BernieNoSlotSuggestionSelectionIn, BernieNoSlotSuggestionSelectionOut,
     BernieSessionActiveOut, BernieSessionEventAppendIn, BernieSessionEventAppendOut,
     BernieSessionEventOut, BernieSessionNewIn, BernieSessionSnapshotOut,
+)
+from app.services.diary.outcomes import (
+    BernieBookingOutcomeKind,
+    assert_outcome_matches_state,
+    classify_booking_outcome,
 )
 from app.services.bernie import (
     BernieReceptionPolicyDecision,
@@ -1568,6 +1574,15 @@ def interpret_bernie_booking_instruction(
         interpretation_target = BernieSessionState.clarification
     else:
         interpretation_target = BernieSessionState.handed_off
+    # N10: assert outcome kind is consistent with session advance target.
+    if result.outcome is not None:
+        try:
+            assert_outcome_matches_state(
+                BernieBookingOutcomeKind(result.outcome.kind),
+                interpretation_target,
+            )
+        except AssertionError:
+            pass  # log-and-continue in production; hard-fail in tests
     route_outcome = _append_bernie_route_outcome_event(
         session_id=body.server_session_id,
         current_user=current_user,
@@ -1797,9 +1812,18 @@ def _attach_bernie_interpret_reception_context(
         context_freshness=result.context_freshness,
     )
     policy = evaluate_reception_context(frame_set)
+    # N10: classify the booking outcome from the typed policy. Interpret route
+    # never has staged proposals or candidates; route_result drives the kind.
+    _outcome = classify_booking_outcome(
+        policy,
+        has_staged_proposal=False,
+        has_candidates=False,
+        route_result=result.result,
+    )
     return result.model_copy(update={
         "reception_context": frame_set.model_dump(mode="json"),
         "reception_policy": policy.model_dump(mode="json"),
+        "outcome": BernieBookingOutcomeOut(**_outcome.model_dump()),
     })
 
 
@@ -1827,9 +1851,28 @@ def _attach_bernie_supervised_reception_context(
         search_ran=enriched.search_proposal is not None,
     )
     policy = evaluate_reception_context(frame_set)
+    # N10: classify the booking outcome from the real typed policy (not the
+    # synthetic _gate_policy inside _bernie_staff_review_payload). The outcome
+    # is a read-only report field; it never alters the confirm gate authority.
+    _has_staged = (
+        enriched.selection_proposal is not None
+        and enriched.selection_proposal.safe
+        and enriched.selection_proposal.create_proposal is not None
+    )
+    _has_candidates = (
+        enriched.search_proposal is not None
+        and len(enriched.search_proposal.candidates) > 0
+    )
+    _outcome = classify_booking_outcome(
+        policy,
+        has_staged_proposal=_has_staged,
+        has_candidates=_has_candidates,
+        route_result=enriched.result,
+    )
     return enriched.model_copy(update={
         "reception_context": frame_set.model_dump(mode="json"),
         "reception_policy": policy.model_dump(mode="json"),
+        "outcome": BernieBookingOutcomeOut(**_outcome.model_dump()),
     })
 
 

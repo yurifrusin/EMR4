@@ -735,6 +735,32 @@ class BernieBookingInterpreterMetadata(BaseModel):
     live_provider: bool = False
 
 
+class BernieBookingOutcomeOut(BaseModel):
+    """Read-only typed outcome label for a single Bernie booking turn.
+
+    Schema mirror of app.services.diary.outcomes.BernieBookingOutcome.
+    Attached as an additive Optional field on both interpret and supervised-booking
+    envelopes so callers can read one authoritative classification instead of
+    reconciling the result literal, reception_policy flags, and server_session state.
+
+    kind: BernieBookingOutcomeKind value (str enum — see app.services.diary.outcomes)
+    family: one of "proceed", "clarify", "advisory", "no_availability", "roster_gap",
+            "blocked", "terminal"
+    session_state: BernieSessionState value (str enum) the outcome maps to
+
+    can_confirm is REPORT ONLY and never itself a confirm grant. Confirm authority
+    still requires the existing gate, signed evidence, and session binding.
+    """
+    kind: str
+    family: str
+    session_state: str
+    requires_confirmation: bool
+    can_confirm: bool = False
+    is_terminal: bool = False
+    reason_codes: list[str] = Field(default_factory=list)
+    basis: str = ""
+
+
 class BernieBookingInstructionInterpretOut(BaseModel):
     """Structured, non-mutating intent envelope for a booking instruction."""
     intent: Literal["interpret_booking_instruction"] = "interpret_booking_instruction"
@@ -773,6 +799,9 @@ class BernieBookingInstructionInterpretOut(BaseModel):
     # caller supplied a valid Bernie server session and the route appended its
     # compact outcome event.
     server_session: Optional["BernieSessionSnapshotOut"] = None
+    # Additive N10 typed outcome classification. Read-only report field; never
+    # a confirm grant. Default None preserves backward compat for existing clients.
+    outcome: Optional["BernieBookingOutcomeOut"] = None
 
 
 class BernieSupervisedBookingIn(BaseModel):
@@ -830,6 +859,9 @@ class BernieSupervisedBookingOut(BaseModel):
     # ── Additive turn tracking (default None for backward compat) ──
     turn_ref: Optional["BernieTurnRef"] = None
     server_session: Optional["BernieSessionSnapshotOut"] = None
+    # Additive N10 typed outcome classification. Read-only report field; never
+    # a confirm grant. Default None preserves backward compat for existing clients.
+    outcome: Optional["BernieBookingOutcomeOut"] = None
 
 
 class BernieCreateProposalConfirmationIn(BaseModel):
