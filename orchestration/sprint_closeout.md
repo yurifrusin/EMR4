@@ -73,19 +73,25 @@ produced false no-slot and future-booking blocking copy.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Sprint 108
+## Next Sprint Candidate - Amended N1 / Sprint 108
 
 | Item | Value |
 |---|---|
-| Name | Bernie Schedule Explanation And Copy Catalog |
+| Name | Diary Reception Domain Foundation |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne for backend/domain extraction plan, Antigravity for narrow Diary copy catalog consumption if UI changes are included; Claude can remain unused until its window resets |
+| Recommended agents | Codex/Ariadne orchestration with Claude/Fable plan already accepted; use Antigravity and/or Codex workers for bounded implementation lanes after the sprint packet is dispatched |
 
-The next useful slice is to give Bernie a typed schedule-explanation capability
-and/or a small Diary copy catalog keyed by state/reason code, so roster off,
-no schedule configured, fully booked, elapsed same-day window, and true no-slot
-states can be explained precisely without spreading copy branches through
-`diary.js`. Limited auto-mode remains a future architecture branch, not the next
+The next useful slice is the amended Fable/Ariadne/Yuri N1: create the native
+`app/services/diary/` reception domain package, preferably split for
+reviewability. N1a should be pure rehomes plus compatibility facades for the
+action catalog, canonical temporal policy, reception frames, and deterministic
+reception policy, while keeping `reception_policy` and
+`bernie.reception_context.v1` byte-identical. N1b should add internal action
+envelopes including `DiaryActionSuggestion`, authorship metadata, catalog
+completeness checks, availability-provenance adversarial tests, temporal
+single-source tests, and suggestion-cannot-mutate tests. The former Sprint 108
+schedule-explanation/copy-catalog work becomes N2 after this foundation.
+Limited auto-mode remains a future architecture branch, not the next
 implementation.
 
 ## Previous Closeout - Sprint 106D

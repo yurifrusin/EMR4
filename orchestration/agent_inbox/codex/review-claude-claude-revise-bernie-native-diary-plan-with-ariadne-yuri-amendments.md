@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-revise-bernie-native-diary-plan-with-ariadne-yuri-amendments` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -64,5 +64,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated as an accepted architecture-plan artifact. No
+  production code was included.
+- Follow-up required: Dispatch amended N1, preferably split into N1a/N1b for
+  reviewability.

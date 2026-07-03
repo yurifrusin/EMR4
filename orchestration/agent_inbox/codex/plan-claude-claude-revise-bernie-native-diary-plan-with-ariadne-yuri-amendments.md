@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-revise-bernie-native-diary-plan-with-ariadne-yuri-amendments` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 19:05 +1000 |
 | Source HEAD | `1ef7c50` |
 
@@ -370,6 +370,15 @@ own plan-gated sprint packet with an explicit `complete sprint task` release.
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne as the revised architecture basis for the
+  next sprint sequence. The amended N1 direction should move reception frames
+  and deterministic reception policy into the new diary/reception domain early,
+  introduce multi-author suggestion semantics through a `DiaryActionSuggestion`
+  envelope plus author-side normalization contract, and land the advisory-only
+  provenance test before retrieval exists.
+- Required changes before implementation: Prefer dispatching N1 as N1a/N1b
+  unless Yuri explicitly wants one larger sprint: N1a for pure rehomes/facades
+  and byte-identical contract preservation, N1b for envelopes, authorship
+  metadata, and boundary tests.
+- Approved to proceed: ready for Yuri/Ariadne to dispatch the first
+  implementation sprint; this packet itself does not authorize code changes.
