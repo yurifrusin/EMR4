@@ -60,6 +60,8 @@ def test_allowed_when_all_guards_pass():
         has_staged_proposal=True,
     )
     assert decision.confirm_grade_allowed is True
+    assert decision.can_show_confirm_ui is True
+    assert decision.model_dump()["can_show_confirm_ui"] is True
     assert decision.gate == ConfirmAffordanceGate.allowed
     assert decision.blocking_reason_codes == []
 
@@ -108,6 +110,7 @@ def test_blocked_stale_when_verdict_stale():
         has_staged_proposal=True,
     )
     assert decision.confirm_grade_allowed is False
+    assert decision.can_show_confirm_ui is False
     assert decision.gate == ConfirmAffordanceGate.blocked_stale
 
 

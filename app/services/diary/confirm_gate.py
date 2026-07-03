@@ -12,7 +12,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 
 from app.services.diary.policy import BernieReceptionPolicyDecision
 from app.services.bernie_turn_evidence import StalenessResult, StalenessVerdict
@@ -39,9 +39,16 @@ class ConfirmAffordanceDecision(BaseModel):
     """
 
     confirm_grade_allowed: bool
+    can_show_confirm_ui: Optional[bool] = None
     gate: ConfirmAffordanceGate
     blocking_reason_codes: list[str]
     schedule_reason_codes: list[str]
+
+    @model_validator(mode="after")
+    def _default_ui_alias(self) -> "ConfirmAffordanceDecision":
+        if self.can_show_confirm_ui is None:
+            self.can_show_confirm_ui = self.confirm_grade_allowed
+        return self
 
 
 def evaluate_confirm_affordance(
@@ -58,18 +65,18 @@ def evaluate_confirm_affordance(
 
     Guard precedence (first match wins; preserves semantic distinctness):
     1. ``must_block_confirmation`` or ``availability == "blocked"``
-       → blocked_guardrail
+       -> blocked_guardrail
     2. Staleness is given and verdict is not fresh
-       → blocked_stale (stale or mismatched_reference_date both map here)
+       -> blocked_stale (stale or mismatched_reference_date both map here)
     3. ``advisory_warnings_only``
-       → blocked_advisory_only
+       -> blocked_advisory_only
     4. ``must_ask_clarification``
-       → blocked_model_uncertain
+       -> blocked_model_uncertain
     5. ``search_ran_no_candidates`` or ``roster_unavailable``
-       → blocked_no_candidates / blocked_schedule_or_roster (roster checked first)
+       -> blocked_no_candidates / blocked_schedule_or_roster (roster checked first)
     6. ``has_staged_proposal`` is False
-       → blocked_no_proposal
-    7. All guards pass → allowed
+       -> blocked_no_proposal
+    7. All guards pass -> allowed
     """
     blocking_reason_codes: list[str] = list(policy.reason_codes)
     schedule_reason_codes: list[str] = list(policy.schedule_reason_codes)

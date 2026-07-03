@@ -28,6 +28,7 @@ EXPECTED_AUDIT_EVIDENCE = [
     "bernie_confirm_create_proposal",
     "source_slot_selection_proposal",
     "source_create_proposal",
+    "bernie_identity_confidence_medium",
 ]
 
 

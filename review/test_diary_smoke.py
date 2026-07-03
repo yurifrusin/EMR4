@@ -335,6 +335,28 @@ def test_bernie_review_confirmation_ready(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_review_confirmation_ready_stale_gate_suppresses_confirm(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=confirmation_ready_stale")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        assert status.text_content().strip() == "Needs details"
+
+        headline = diary_page.locator("[data-testid='bernie-review-headline']")
+        assert "Would you like to confirm?" not in headline.text_content()
+
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 0
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_review_schedule_reason_codes(diary_page):
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)

@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-n3-unified-evidence-gated-confirm-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -45,5 +45,10 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated with bounded Ariadne hotfixes. Added the
+  `can_show_confirm_ui` serialized alias to the backend decision, updated the
+  Diary UI to consume backend-owned confirm affordance state, and added focused
+  smoke/regression coverage.
+- Follow-up required: Later signed-evidence/session work should make the
+  staff-review gate consume explicit staleness evidence rather than relying on
+  final confirm-route revalidation plus UI stale-preview clearing.

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n3-diary-confirm-affordance-ui-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,9 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated via Ariadne after Antigravity implementation timed
+  out before submit. The accepted UI plan was applied narrowly: Diary Bernie
+  confirm rendering now consults backend-owned `confirm_affordance` state, with
+  legacy fallback preserved.
+- Follow-up required: Expand composer/input stale-reset coverage when Bernie
+  moves to server-side session events.

@@ -8,55 +8,63 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint N2: Schedule Explanation And Copy Catalog |
-| Integrated through | Claude/Opus plan, Codex/Hubble backend invariant lane, Antigravity Diary UI lane, and Ariadne integration/review |
+| Batch | Sprint N3: Unified Evidence-Gated Confirm |
+| Integrated through | Claude backend/domain implementation, Antigravity UI plan plus Ariadne UI integration, Codex/Lovelace boundary review, and Ariadne verification/hotfixes |
 | Status | Integrated locally, focused verification passed; push/mirror/audit pending |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- Added a pure diary-domain schedule explanation contract and classifier for
-  `no_roster_row`, `practitioner_unavailable`, `outside_request_window`,
-  `breaks_only_window`, `fully_booked`, `same_day_window_elapsed`, and true
-  `searched_no_candidates`.
-- Added deterministic schedule copy catalog support keyed by canonical
-  state/reason code, plus legacy reason-code aliases for current router/UI
-  compatibility.
-- Added `schedule_reason_codes` to deterministic reception-policy decisions so
-  UI copy can be driven by typed facts instead of scenario-specific message
-  branches.
-- Added Bernie compatibility facades for the new diary-domain schedule
-  explanation contracts.
-- Updated the Diary Bernie review panel to consume typed schedule reason codes
-  through a local copy catalog while preserving legacy fallbacks.
-- Bumped the deployed Diary asset reference to `diary.js?v=152`.
-- Added backend and review-smoke coverage for schedule explanation precedence,
-  copy catalog totality, and UI copy for the canonical schedule reason codes.
+- Added `app/services/diary/confirm_gate.py`, a pure backend-owned
+  confirm-affordance gate that emits `confirm_grade_allowed`,
+  `can_show_confirm_ui`, a gate reason, blocking reason codes, and schedule
+  reason codes.
+- Added Bernie compatibility exports for the new diary-domain confirm gate.
+- Added `confirm_affordance` to `BernieStaffReviewPayload`.
+- Wired `_bernie_staff_review_payload()` so `confirm_endpoint` and
+  `confirm_payload` are present only when the backend gate allows
+  confirm-grade UI.
+- Updated the Diary Bernie panel so `confirm_affordance.can_show_confirm_ui`
+  or `confirm_grade_allowed` controls confirm rendering before legacy status
+  fallback.
+- Made composer edits clear stale Bernie preview/response state.
+- Added a smoke fixture for a contradictory stale payload where
+  `status=confirmation_ready` but the backend gate blocks confirmation.
+- Bumped the deployed Diary asset reference to `diary.js?v=153`.
+- Updated confirm/audit regression expectations to distinguish preview evidence
+  from final write audit evidence including identity confidence.
 
 ## Verification
 
-- Focused N2 backend/domain suite passed:
-  `.\.venv\Scripts\python.exe -m pytest tests\test_diary_schedule_explanations.py tests\test_diary_action_boundary_contracts.py tests\test_bernie_domain_package.py -q`.
+- Focused N3 backend/domain suite passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_diary_confirm_gate.py tests\test_diary_action_boundary_contracts.py tests\test_bernie_domain_package.py -q`.
+- Confirm/proposal regression slice passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_confirm_create_proposal.py tests\test_bernie_sprint98_confirm_contract.py tests\test_bernie_confirmed_flow_review_harness.py tests\test_bernie_wrapper_confirmation_review_harness.py tests\test_slot_selection_proposal.py -q`.
 - `node --check docs\diary\diary.js` passed.
+- `.\.venv\Scripts\python.exe -m compileall app\services\diary app\services\bernie -q` passed.
 - `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed.
 - Focused Diary smoke checks passed:
-  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "schedule_reason_codes or reception_policy"`.
+  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "confirmation_ready_stale_gate_suppresses_confirm or confirmation_ready or reception_policy or schedule_reason_codes"`.
 - `git diff --check` passed.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N2;
-  the previous full run showed pre-existing/global failures outside these
-  diary-domain schedule/copy slices.
+- A first parallel pytest attempt hit the known local Postgres enum creation
+  race (`userrole` duplicate type) because two pytest processes initialized the
+  test schema simultaneously; the same focused suites passed when rerun
+  sequentially.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N3;
+  previous full runs showed pre-existing/global failures outside these
+  diary-domain confirm/affordance slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. Optional live spot-check: ask Bernie
-for a same-day elapsed window, a practitioner-away day, an outside-roster window,
-and a genuinely fully booked window, and confirm the panel no longer collapses
-those states into false "no matching times" or stale clarification copy.
+No required manual review before moving on. Optional live spot-check: submit a
+normal Bernie booking that reaches confirmation, then change the composer text
+before confirming and confirm the old preview/confirm affordance disappears.
+Also check that a stale/blocked review payload does not show a confirm button.
 
 ## Not Required Before Moving On
 
-- No GraphRAG/K1 knowledge substrate, persisted session, unified confirm path,
-  HMAC evidence signing, or route write change was implemented.
+- No GraphRAG/K1 knowledge substrate, persisted session, HMAC evidence signing,
+  or booking write-path change was implemented.
 - No auto-confirm or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was
   started.
@@ -67,25 +75,38 @@ those states into false "no matching times" or stale clarification copy.
 
 ## Known Follow-Up
 
-- N3 should unify confirm gating around evidence-backed proposals so the UI
-  cannot show confirm/review affordances from stale or advisory-only state.
-- K1 typed practice knowledge substrate remains a good parallel candidate after
-  N3 scoping; retrieval must stay advisory-only until evidence boundaries exist.
+- Signed evidence/HMAC should be added before any broader unified write grammar
+  or auto-mode branch.
+- K1 typed practice knowledge substrate remains a good candidate; retrieval
+  must stay advisory-only and must not affect confirm-grade affordances.
+- Persisted Bernie server-side session/event state remains the likely long-run
+  foundation, but needs PHI retention and concurrency decisions.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Sprint N3
+## Next Sprint Candidate - Sprint K1 Or N4 Tail
 
 | Item | Value |
 |---|---|
-| Name | Unified Evidence-Gated Confirm |
+| Name | Typed Practice Knowledge Substrate, or Server-Side Bernie Session/Event Design |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for Diary UI confirm-affordance review; Codex worker for backend evidence/guardrail invariants |
+| Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for Diary UI/session review if UI is included; Codex worker for backend invariants |
 
-N3 should define one backend-owned evidence gate for booking confirmation and
-proposal review affordances. It should prevent stale/advisory/model-only state
-from producing confirm-grade UI, without implementing auto-mode, persisted
-sessions, GraphRAG, or broader write-path changes.
+K1 should introduce a typed practice knowledge substrate with an advisory-only
+retrieval boundary, deliberately tested against Bernie's simple domain before
+Scribe/Consultant use GraphRAG-like retrieval. N4 tail should design server-side
+Bernie session/event persistence and retention/concurrency rules. Signed
+confirm evidence is a near-term safety follow-up before any broader auto-mode
+or unified write grammar.
+
+## Previous Closeout - Sprint N2
+
+| Item | Value |
+|---|---|
+| Batch | Sprint N2: Schedule Explanation And Copy Catalog |
+| Integrated through | Claude/Opus plan, Codex/Hubble backend invariant lane, Antigravity Diary UI lane, and Ariadne integration/review |
+| Status | Integrated, verified, pushed, mirrored, and audited |
+| Last updated | 2026-07-03 |
 
 ## Previous Closeout - Sprint N1b
 

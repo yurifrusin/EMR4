@@ -28,6 +28,10 @@ EXPECTED_AUDIT_EVIDENCE = [
     "source_slot_selection_proposal",
     "source_create_proposal",
 ]
+EXPECTED_CONFIRMED_AUDIT_EVIDENCE = [
+    *EXPECTED_AUDIT_EVIDENCE,
+    "bernie_identity_confidence_medium",
+]
 
 
 def _auth(token: str) -> dict[str, str]:
@@ -203,7 +207,7 @@ def test_wrapper_confirmation_ready_evidence_confirms_exactly_one_write(
     assert data["appointment"]["practitioner_id"] == str(practitioner.id)
     assert data["appointment"]["appointment_date"] == REFERENCE_DATE
     assert data["appointment"]["start_time_local"] == "09:00:00"
-    assert data["audit_evidence"] == EXPECTED_AUDIT_EVIDENCE
+    assert data["audit_evidence"] == EXPECTED_CONFIRMED_AUDIT_EVIDENCE
     assert db.query(Appointment).count() == appointment_before + 1
     assert db.query(AppointmentAuditLog).count() == audit_before + 1
 
@@ -211,7 +215,7 @@ def test_wrapper_confirmation_ready_evidence_confirms_exactly_one_write(
         AppointmentAuditLog.appointment_id == data["appointment"]["id"]
     ).one()
     assert audit.action.value == "create"
-    assert audit.confirmed_warnings == EXPECTED_AUDIT_EVIDENCE
+    assert audit.confirmed_warnings == EXPECTED_CONFIRMED_AUDIT_EVIDENCE
 
 
 def test_wrapper_staff_review_confirm_payload_confirms_after_explicit_approval(
@@ -258,7 +262,7 @@ def test_wrapper_staff_review_confirm_payload_confirms_after_explicit_approval(
     data = confirm_resp.json()
     assert data["safe"] is True
     assert data["autonomy_tier"] == "confirmed_write"
-    assert data["audit_evidence"] == EXPECTED_AUDIT_EVIDENCE
+    assert data["audit_evidence"] == EXPECTED_CONFIRMED_AUDIT_EVIDENCE
     assert db.query(Appointment).count() == appointment_before + 1
     assert db.query(AppointmentAuditLog).count() == audit_before + 1
 
