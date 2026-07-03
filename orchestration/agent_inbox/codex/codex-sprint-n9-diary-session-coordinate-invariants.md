@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 0174ffe |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-n9-diary-session-coordinate-invariants --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.js`, `docs/diary/diary.html`, `review/test_diary_smoke.py`, `app/schemas/appointments.py`, `app/routers/appointments.py`, `tests/test_bernie_route_outcome_events.py`.
+- Verification run: `node --check docs\diary\diary.js`; `python -m py_compile app\schemas\appointments.py app\routers\appointments.py`; `pytest tests\test_bernie_route_outcome_events.py -q`; focused and full `review/test_diary_smoke.py`; adjacent Bernie/session/evidence suites; frontend version check; `git diff --check`.
+- Remaining risks: Browser now carries server coordinates and backend-stamped binding, but server sessions remain process-local and non-persistent until the later persistence sprint.

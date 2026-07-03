@@ -95,6 +95,7 @@ class BernieSession {
     this.serverConflict = null;
     this.serverSessionLoaded = false;
     this.serverSessionLoading = null;
+    this.serverRouteIdempotencyKeys = new Map();
     this.turnRef = null;
     this.turns = [];
   }
@@ -111,6 +112,20 @@ class BernieSession {
       return crypto.randomUUID();
     }
     return "evt-" + Math.random().toString(36).substring(2, 15) + "-" + Date.now();
+  }
+
+  getServerRouteIdempotencyKey(kind, discriminator = "") {
+    const turnKey = this.turnRef?.turn_id || `${this.sessionId}:${this.turns.length}`;
+    const mapKey = [
+      kind || "route",
+      this.serverSessionId || "unbound",
+      turnKey,
+      String(discriminator || "")
+    ].join("|");
+    if (!this.serverRouteIdempotencyKeys.has(mapKey)) {
+      this.serverRouteIdempotencyKeys.set(mapKey, this.generateEventId());
+    }
+    return this.serverRouteIdempotencyKeys.get(mapKey);
   }
 
   addEvent(kind, payload) {
@@ -307,6 +322,7 @@ class BernieSession {
     this.serverReferenceDate = null;
     this.serverConflict = null;
     this.serverSessionLoaded = false;
+    this.serverRouteIdempotencyKeys = new Map();
     this.turnRef = null;
     this.turns = [];
     this.reset();
@@ -476,9 +492,62 @@ function bernieTurnRequestFields() {
   return fields;
 }
 
+async function bernieServerSessionRequestFields(kind, discriminator = "") {
+  if (!shouldUseBernieServerSession()) {
+    return {};
+  }
+  if (bernieSession.serverConflict) {
+    return {};
+  }
+  try {
+    if (!bernieSession.serverSessionId) {
+      await bernieSession.ensureServerSession();
+    }
+  } catch (err) {
+    console.warn("Bernie server session coordinate load failed", err);
+    return {};
+  }
+  if (!bernieSession.serverSessionId || bernieSession.serverConflict) {
+    return {};
+  }
+  return {
+    server_session_id: bernieSession.serverSessionId,
+    server_session_surface_id: bernieSession.getServerSurfaceId(),
+    server_session_expected_revision: bernieSession.serverRevision,
+    server_session_idempotency_key: bernieSession.getServerRouteIdempotencyKey(kind, discriminator)
+  };
+}
+
+async function handleBernieServerRouteConflict(response) {
+  if (!response || response.status !== 409) {
+    return false;
+  }
+  const data = await response.clone().json().catch(() => ({}));
+  if (data.session) {
+    bernieSession.applyServerSessionSnapshot(data.session);
+  }
+  bernieSession.serverConflict = {
+    code: data.code || "session_conflict",
+    detail: data.detail || "Bernie's session has changed. Refresh before confirming."
+  };
+  const confirmBtn = document.getElementById("btn-bernie-confirm");
+  if (confirmBtn) {
+    confirmBtn.disabled = true;
+  }
+  updateBernieChatTranscriptUI();
+  return true;
+}
+
 function captureBernieTurnRef(responseBody) {
   if (responseBody && responseBody.turn_ref) {
     bernieSession.updateTurnRef(responseBody.turn_ref);
+  }
+}
+
+function captureBernieServerSessionSnapshot(responseBody) {
+  if (responseBody && responseBody.server_session) {
+    bernieSession.applyServerSessionSnapshot(responseBody.server_session);
+    updateBernieChatTranscriptUI();
   }
 }
 
@@ -1060,25 +1129,29 @@ async function handleNoSlotSuggestionClick(suggestionText, originalTurnId) {
   const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
 
   try {
+    const serverSessionFields = await bernieServerSessionRequestFields("interpret", "suggestion");
     const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
       method: "POST",
       body: JSON.stringify({
         instruction: suggestionText,
         reference_date: bernieSession.referenceDate || localDateKey(diaryDate),
         context_frames: buildBernieContextFrames(request.body || {}),
-        ...bernieTurnRequestFields()
+        ...bernieTurnRequestFields(),
+        ...serverSessionFields
       })
     });
 
     if (response.ok) {
       bernieInterpretResult = await response.json();
       captureBernieTurnRef(bernieInterpretResult);
+      captureBernieServerSessionSnapshot(bernieInterpretResult);
       const reply = bernieInterpretResult.clarifying_question || bernieInterpretResult.summary;
       if (reply) {
         const type = bernieInterpretResult.clarifying_question ? "clarification_question" : "summary";
         bernieSession.addEvent("bernie_clarification", { text: reply, type: type });
       }
     } else {
+      await handleBernieServerRouteConflict(response);
       let detail = "";
       try {
         const errData = await response.json();
@@ -1289,17 +1362,20 @@ function buildBernieContextFrames(requestBody) {
 
 async function fetchBernieInterpretation(requestBody) {
   const instruction = buildBernieInterpretInstruction(requestBody);
+  const serverSessionFields = await bernieServerSessionRequestFields("interpret", "pilot-request");
   const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
     method: "POST",
     body: JSON.stringify({
       instruction,
       reference_date: requestBody?.reference_date || localDateKey(diaryDate),
       context_frames: buildBernieContextFrames(requestBody),
-      ...bernieTurnRequestFields()
+      ...bernieTurnRequestFields(),
+      ...serverSessionFields
     })
   });
 
   if (!response.ok) {
+    await handleBernieServerRouteConflict(response);
     let detail = "";
     try {
       const errData = await response.json();
@@ -1332,6 +1408,7 @@ async function fetchBernieInterpretation(requestBody) {
 
   const data = await response.json();
   captureBernieTurnRef(data);
+  captureBernieServerSessionSnapshot(data);
   const reply = data.clarifying_question || data.summary;
   if (reply) {
     const alreadyAdded = bernieSession.turns.some(t => t.kind === "bernie_clarification" && t.payload.text === reply);
@@ -2515,13 +2592,15 @@ async function selectCandidate(slot, index) {
   }
 
   const command = bernieSession.candidateSnapshot?.command_candidate || bernieInterpretResult?.command_candidate || request.body.command;
+  const serverSessionFields = await bernieServerSessionRequestFields("supervised", `candidate:${index}:${candidateId}`);
   const supervisedBody = {
     reference_date: bernieSession.referenceDate,
     command: command,
     context_frames: buildBernieContextFrames(request.body),
     selected_candidate_index: index,
     reason: "Bernie supervised booking",
-    ...bernieTurnRequestFields()
+    ...bernieTurnRequestFields(),
+    ...serverSessionFields
   };
 
   try {
@@ -2533,6 +2612,7 @@ async function selectCandidate(slot, index) {
     if (res.ok) {
       const data = await res.json();
       captureBernieTurnRef(data);
+      captureBernieServerSessionSnapshot(data);
       const payload = data.staff_review;
       if (data.reception_policy) {
         payload.reception_policy = data.reception_policy;
@@ -2571,6 +2651,7 @@ async function selectCandidate(slot, index) {
 
       renderBernieReview(payload, bernieInterpretResult);
     } else {
+      await handleBernieServerRouteConflict(res);
       console.error("Supervised booking failed");
     }
   } catch (err) {
@@ -5120,11 +5201,10 @@ function renderBernieInstructionInput(contentEl) {
       bernieSession.addEvent("staff_instruction", { instruction: text });
     }
     const sessionEventType = isReply ? "clarification_reply" : "staff_instruction";
-    bernieSession.appendServerEvent(sessionEventType, {
-      intent_ref: bernieSession.generateEventId(),
+    const intentRef = bernieSession.generateEventId();
+    const serverEventAppend = bernieSession.appendServerEvent(sessionEventType, {
+      intent_ref: intentRef,
       has_staff_text: true
-    }).catch(err => {
-      console.warn("Bernie session event append failed", err);
     });
 
     textarea.value = "";
@@ -5139,19 +5219,34 @@ function renderBernieInstructionInput(contentEl) {
     button.textContent = "Asking...";
 
     try {
+      try {
+        await serverEventAppend;
+      } catch (err) {
+        console.warn("Bernie session event append failed", err);
+        if (shouldUseBernieServerSession() && !bernieSession.serverConflict) {
+          bernieSession.serverConflict = {
+            code: "session_event_append_failed",
+            detail: err.message || "Bernie's session has changed. Refresh before confirming."
+          };
+        }
+        updateBernieChatTranscriptUI();
+      }
+      const serverSessionFields = await bernieServerSessionRequestFields("interpret", intentRef);
       const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
         method: "POST",
         body: JSON.stringify({
           instruction: text,
           reference_date: bernieSession.referenceDate || visibleReferenceDate,
           context_frames: buildBernieContextFrames({}),
-          ...bernieTurnRequestFields()
+          ...bernieTurnRequestFields(),
+          ...serverSessionFields
         })
       });
 
       if (response.ok) {
         bernieInterpretResult = await response.json();
         captureBernieTurnRef(bernieInterpretResult);
+        captureBernieServerSessionSnapshot(bernieInterpretResult);
         const reply = bernieInterpretResult.clarifying_question || bernieInterpretResult.summary;
         if (reply) {
           const alreadyAdded = bernieSession.turns.some(t => t.kind === "bernie_clarification" && t.payload.text === reply);
@@ -5161,6 +5256,7 @@ function renderBernieInstructionInput(contentEl) {
           }
         }
       } else {
+        await handleBernieServerRouteConflict(response);
         let detail = "";
         try {
           const errData = await response.json();
@@ -5188,6 +5284,7 @@ function renderBernieInstructionInput(contentEl) {
 
     bernieSession.interpretEnvelope = bernieInterpretResult;
     await loadBernieLiveReview();
+    updateBernieChatTranscriptUI();
   });
 }
 
@@ -5259,9 +5356,11 @@ async function loadBernieLiveReview() {
     panel.classList.remove("hidden");
   }
 
-  bernieSession.ensureServerSession().catch(err => {
-    console.warn("Bernie server session load failed", err);
-  });
+  if (!bernieSession.serverConflict) {
+    bernieSession.ensureServerSession().catch(err => {
+      console.warn("Bernie server session load failed", err);
+    });
+  }
 
   updateBernieChatTranscriptUI();
 
@@ -5375,11 +5474,18 @@ async function loadBernieLiveReview() {
   }
 
   let payload = null;
+  const serverSessionFields = await bernieServerSessionRequestFields(
+    "supervised",
+    bernieSession.selectedCandidateIndex !== null && !isNaN(bernieSession.selectedCandidateIndex)
+      ? `candidate:${bernieSession.selectedCandidateIndex}`
+      : "auto-preview"
+  );
   const supervisedBody = {
     reference_date: bernieSession.referenceDate || request.body.reference_date,
     command: bernieInterpretResult.command_candidate,
     context_frames: buildBernieContextFrames(request.body),
-    ...bernieTurnRequestFields()
+    ...bernieTurnRequestFields(),
+    ...serverSessionFields
   };
   if (bernieSession.selectedCandidateIndex !== null && !isNaN(bernieSession.selectedCandidateIndex)) {
     supervisedBody.selected_candidate_index = bernieSession.selectedCandidateIndex;
@@ -5398,6 +5504,7 @@ async function loadBernieLiveReview() {
     if (res.ok) {
       const data = await res.json();
       captureBernieTurnRef(data);
+      captureBernieServerSessionSnapshot(data);
       payload = data.staff_review;
       if (data.reception_policy) {
         payload.reception_policy = data.reception_policy;
@@ -5418,6 +5525,7 @@ async function loadBernieLiveReview() {
       }
       bernieSession.syncToLegacy();
     } else {
+      await handleBernieServerRouteConflict(res);
       const errText = await res.text();
       console.error("Bernie live review error", res.status, errText);
       payload = {

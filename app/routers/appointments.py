@@ -1568,7 +1568,7 @@ def interpret_bernie_booking_instruction(
         interpretation_target = BernieSessionState.clarification
     else:
         interpretation_target = BernieSessionState.handed_off
-    _append_bernie_route_outcome_event(
+    route_outcome = _append_bernie_route_outcome_event(
         session_id=body.server_session_id,
         current_user=current_user,
         surface_id=body.server_session_surface_id,
@@ -1590,6 +1590,10 @@ def interpret_bernie_booking_instruction(
             "has_command_candidate": result.command_candidate is not None,
         },
     )
+    if route_outcome.accepted and route_outcome.session is not None:
+        result = result.model_copy(
+            update={"server_session": _bernie_session_snapshot_out(route_outcome.session)}
+        )
     return result
 
 
@@ -4085,14 +4089,21 @@ def propose_bernie_supervised_booking(
                 warnings_for_ctx.append(build_existing_future_follow_up_warning())
             normalization = normalization.model_copy(update={"warnings": warnings_for_ctx})
 
+    server_session_snapshot: Optional[BernieSessionRecord] = None
+
     def _with_ctx(out: BernieSupervisedBookingOut) -> BernieSupervisedBookingOut:
         """Attach patient context, freshness, and reception frames to any response."""
-        return _attach_bernie_supervised_reception_context(
+        out = _attach_bernie_supervised_reception_context(
             out,
             reference_date=request_reference_date,
             patient_booking_context=_sb_patient_ctx,
             context_freshness=_sb_context_freshness,
         )
+        if server_session_snapshot is not None:
+            out = out.model_copy(
+                update={"server_session": _bernie_session_snapshot_out(server_session_snapshot)}
+            )
+        return out
 
     session_expected_revision = body.server_session_expected_revision
 
@@ -4103,7 +4114,7 @@ def propose_bernie_supervised_booking(
         *,
         idempotency_suffix: str,
     ) -> BernieSessionEventResult:
-        nonlocal session_expected_revision
+        nonlocal session_expected_revision, server_session_snapshot
         result = _append_bernie_route_outcome_event(
             session_id=body.server_session_id,
             current_user=current_user,
@@ -4120,6 +4131,7 @@ def propose_bernie_supervised_booking(
         )
         if result.accepted and result.session is not None:
             session_expected_revision = result.session.revision
+            server_session_snapshot = result.session
         return result
 
     _append_supervised_outcome(

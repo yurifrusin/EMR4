@@ -76,6 +76,10 @@ def test_interpret_route_appends_compact_server_outcome_without_phi(
     updated = _session_tail(session["session_id"])
     assert updated.state is BernieSessionState.context_enrichment
     assert updated.revision == session["revision"] + 1
+    assert data["server_session"]["session_id"] == session["session_id"]
+    assert data["server_session"]["surface_id"] == surface_id
+    assert data["server_session"]["revision"] == updated.revision
+    assert data["server_session"]["state"] == "context_enrichment"
     outcome = updated.events[-1]
     assert outcome.event_type == "interpretation_outcome"
     assert outcome.payload["result"] == "interpreted"
@@ -125,6 +129,9 @@ def test_supervised_booking_stages_server_proposal_and_session_bound_evidence(
     assert resp.status_code == 200, resp.text
     data = resp.json()
     assert data["result"] == "confirmation_ready"
+    assert data["server_session"]["session_id"] == session["session_id"]
+    assert data["server_session"]["surface_id"] == surface_id
+    assert data["server_session"]["state"] == "proposal_preview"
     assert data["staff_review"]["confirm_payload"]["session_binding"] is not None
     assert data["selection_proposal"]["session_binding"] == data["staff_review"]["confirm_payload"]["session_binding"]
     signed_payload = data["staff_review"]["confirm_payload"]["signed_confirmation_evidence"]["payload"]

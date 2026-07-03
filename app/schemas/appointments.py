@@ -769,6 +769,10 @@ class BernieBookingInstructionInterpretOut(BaseModel):
     reception_policy: Optional[dict[str, Any]] = None
     # Additive turn tracking (default None for backward compat).
     turn_ref: Optional["BernieTurnRef"] = None
+    # Additive N9 server-owned session coordinate echo. Only populated when the
+    # caller supplied a valid Bernie server session and the route appended its
+    # compact outcome event.
+    server_session: Optional["BernieSessionSnapshotOut"] = None
 
 
 class BernieSupervisedBookingIn(BaseModel):
@@ -825,6 +829,7 @@ class BernieSupervisedBookingOut(BaseModel):
     suggestions: list[BernieSlotSuggestion] = Field(default_factory=list)
     # ── Additive turn tracking (default None for backward compat) ──
     turn_ref: Optional["BernieTurnRef"] = None
+    server_session: Optional["BernieSessionSnapshotOut"] = None
 
 
 class BernieCreateProposalConfirmationIn(BaseModel):

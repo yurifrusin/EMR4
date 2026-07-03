@@ -8,65 +8,65 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint N8: Route-Level Outcome Event Wiring |
-| Integrated through | Claude lane superseded by quota cap, Antigravity stood down after no-artifact CLI result, Codex/Sartre invariant plan accepted, and Ariadne backend/session implementation |
+| Batch | Sprint N9: Diary Route-Coordinate Wiring |
+| Integrated through | Claude lane superseded by quota cap, Antigravity stood down after CLI timeout/no artifact, Codex/Ampere invariant plan accepted, and Ariadne backend/UI implementation |
 | Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- Added optional `server_session_id`, `server_session_surface_id`,
-  `server_session_expected_revision`, and `server_session_idempotency_key`
-  coordinates to Bernie interpretation and supervised-booking request schemas.
-  Legacy callers remain backward compatible.
-- Interpretation routes can now append compact `interpretation_outcome` events
-  into a supplied server-owned Bernie session, advancing recognition to
-  context enrichment, clarification, or handoff without storing raw staff text.
-- Supervised-booking routes can now append compact context, slot-search, no-slot
-  / day-exhausted, and proposal outcome events as the real route progresses.
-- Safe proposal staging now records candidate/proposal freshness ids plus
-  patient/practitioner UUID coordinates in the server session, then stamps a
-  backend-built `session_binding` into the selection proposal, confirm payload,
-  and signed confirmation evidence.
-- Session-bound confirmation now consumes the backend-stamped binding from
-  either the top-level confirm body or the selection proposal, transitions the
-  session through `confirm_submitted`, blocks the write if that transition
-  cannot be recorded, and appends `confirmation_outcome -> confirmed` only after
-  the appointment write succeeds.
-- Added focused route tests proving compact interpretation outcome append,
-  proposal staging/session binding without mutation, and confirmed outcome
-  append after the write.
-- No Diary asset, persisted session table, Alembic migration, GraphRAG wiring,
-  auto-mode, taskpane, Command Centre, or broad API rewrite was added.
+- Diary Bernie route calls now carry active server-session coordinates into
+  interpretation and supervised-booking requests:
+  `server_session_id`, `server_session_surface_id`,
+  `server_session_expected_revision`, and a stable route-scoped
+  `server_session_idempotency_key`.
+- The browser remains a carrier, not a session authority. Coordinates are held
+  in the in-memory `BernieSession` object only; no PHI-bearing session authority
+  or transcript is written to browser storage.
+- Backend Bernie interpretation and supervised-booking responses now additively
+  echo `server_session` snapshots after accepted route-outcome appends. Diary
+  applies those snapshots before the next route transition so revisions advance
+  deterministically.
+- Existing stale-session behaviour was hardened: background session refresh does
+  not clear a conflict, route-coordinate helpers do not continue through a known
+  conflict, and confirm remains blocked until staff refreshes.
+- Confirm flow continues to echo the backend-stamped `session_binding` unchanged;
+  the browser does not author or recalculate it.
+- `diary.js` was cache-busted from v154 to v155.
+- No persisted session table, Alembic migration, GraphRAG wiring, auto-mode,
+  taskpane, Command Centre, broad UI redesign, or broad API rewrite was added.
 
 ## Verification
 
-- Focused N8 route outcome tests passed:
+- JavaScript syntax check passed:
+  `node --check docs\diary\diary.js`.
+- Compile check passed:
+  `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py`.
+- Frontend asset version check passed:
+  `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
+- Focused N9 route-coordinate Diary harness plus adjacent N6 stale/storage
+  checks passed:
+  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "route_calls_carry_server_session_coordinates_and_binding or session_endpoint_active_load_and_phi_minimized_append or session_stale_conflict"`.
+- Full deterministic Diary smoke harness passed:
+  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q`.
+- Focused N8/N9 route outcome tests passed:
   `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_route_outcome_events.py -q`.
 - Adjacent backend session/evidence/confirm regression suite passed:
   `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_session_routes.py tests\test_bernie_session_store.py tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_route_outcome_events.py tests\test_diary_confirm_gate.py -q`.
 - Broader Bernie wrapper/evidence compatibility suite passed:
   `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_confirm_create_proposal.py tests\test_bernie_evidence_contract.py tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_route_outcome_events.py -q`.
-- Compile check passed:
-  `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\services\bernie\session.py app\services\bernie\session_store.py app\routers\appointments.py tests\test_bernie_route_outcome_events.py tests\test_bernie_session_store.py tests\test_bernie_signed_confirmation_evidence.py`.
-- JavaScript syntax check passed although no Diary assets changed:
-  `node --check docs\diary\diary.js`.
-- Frontend asset version check passed; no deployable assets changed:
-  `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
 - `git diff --check` passed.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N8;
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N9;
   previous full runs showed pre-existing/global failures outside these
   diary-domain/session endpoint/evidence slices.
-- Full Diary smoke was not rerun because N8 did not change deployable Diary
-  assets.
 
 ## Recommended User Review
 
-No required manual review before moving on. N8 is a backend/session-authority
-slice with no visible Diary asset change and no database migration. The live
-Diary does not yet send the new `server_session_*` route coordinates, so user
-testing of the ordinary panel should behave as before until the next Diary
-wiring sprint.
+No required manual review before moving on. N9 changes the live Diary asset, but
+the route-coordinate and stale-conflict behaviour was verified with
+route-intercepted browser checks and full deterministic Diary smoke. A later
+user-facing Bernie behaviour review is still valuable after the next
+conversation/domain-intelligence sprint, but it is not needed to close N9.
 
 ## Not Required Before Moving On
 
@@ -84,13 +84,11 @@ wiring sprint.
 
 - A later persistence sprint should add the real session/event table only after
   Yuri/Ariadne choose TTL, retention, cleanup, and transcript-storage policy.
-- A later Diary sprint should pass `server_session_id`,
-  `server_session_surface_id`, `server_session_expected_revision`, and a stable
-  idempotency key into interpretation and supervised-booking calls so ordinary
-  live UI turns use the N8 route wiring.
-- The Diary confirm path should continue to carry the backend-stamped
-  `session_binding` from the confirm payload unchanged; do not make the browser
-  author that binding.
+- A later render-from-state sprint should decide how far the visible chat and
+  latest status should be reconstructed from server session events rather than
+  the current browser-owned transcript.
+- Continue to keep `session_binding` backend-authored only; the browser should
+  echo it unchanged or fail closed.
 - The signed path remains additive; a later sprint can decide when to retire or
   further constrain `legacy_unsigned_confirmation_compat`.
 - Any future K1b route/UI retrieval integration must preserve the advisory-only
@@ -100,20 +98,37 @@ wiring sprint.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Wire Diary Calls To Server Session Coordinates
+## Next Sprint Candidate - Bernie Domain Intelligence / Render-From-State Tail
 
 | Item | Value |
 |---|---|
-| Name | N9: Diary Route-Coordinate Wiring, or K1b Advisory Retrieval Wiring |
+| Name | N10: Bernie domain-intelligence transition outcomes, or K1b Advisory Retrieval Wiring |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for UI/session review if UI is included; Codex worker for backend invariants |
+| Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for visible Diary UX review; Codex worker for state/session invariants |
 
-N8 added optional backend route-coordinate wiring but the live Diary does not
-yet send those coordinates into interpretation and supervised-booking calls.
-The next narrow session slice can wire the Diary panel to supply the active
-server session id/surface/revision/idempotency key and preserve the returned
-session binding through confirmation; alternatively, K1b can wire advisory
-retrieval into Bernie responses while preserving the advisory-only boundary.
+N9 closes the minimum server-coordinate loop. The next narrow slice should use
+that foundation to reduce the remaining wrong/scripted Bernie outcomes: teach
+route/state outcomes to distinguish "no matching times in the requested window"
+from "blocked/review/clarify", make schedule/roster explanations first-class,
+and continue shifting visible Bernie responses toward render-from-state rather
+than ad hoc browser copy. Alternatively, K1b can wire advisory retrieval into
+Bernie responses while preserving the advisory-only boundary.
+
+## Previous Closeout - Sprint N8
+
+| Item | Value |
+|---|---|
+| Batch | Sprint N8: Route-Level Outcome Event Wiring |
+| Integrated through | Claude lane superseded by quota cap, Antigravity stood down after no-artifact CLI result, Codex/Sartre invariant plan accepted, and Ariadne backend/session implementation |
+| Status | Integrated, verified, pushed, mirrored, and audited |
+| Last updated | 2026-07-04 |
+
+N8 added optional `server_session_*` coordinates to Bernie interpretation and
+supervised-booking request schemas, appended compact route-outcome events into
+server-owned Bernie sessions, stamped backend-built `session_binding` into
+proposal/confirm evidence, and added focused backend route outcome tests. No
+Diary asset, persisted session table, Alembic migration, GraphRAG wiring,
+auto-mode, taskpane, Command Centre, or broad API rewrite was added.
 
 ## Previous Closeout - Sprint N7
 

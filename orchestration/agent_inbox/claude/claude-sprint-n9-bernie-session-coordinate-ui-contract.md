@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 0174ffe |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n9-bernie-session-coordinate-ui-contract --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none by Claude; Claude headless returned a session-limit 429 before submitting a plan.
+- Verification run: superseded by Ariadne/Codex N9 implementation and verification.
+- Remaining risks: none from this lane; retry Claude on a later sprint once quota is available if deeper review is needed.

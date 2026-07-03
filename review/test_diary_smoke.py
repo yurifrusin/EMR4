@@ -1525,6 +1525,152 @@ def test_bernie_session_stale_conflict_disables_confirm_until_refresh(diary_page
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_route_calls_carry_server_session_coordinates_and_binding(diary_page):
+    import copy
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    append_requests = []
+    interpret_requests = []
+    supervised_requests = []
+    confirm_payloads = []
+    binding = {
+        "practice_id": "practice-smoke",
+        "staff_user_id": "staff-smoke",
+        "surface_id": "diary-main",
+        "session_id": "server-session-n9",
+        "session_revision": 5,
+        "reference_date": "2026-07-03",
+        "patient_id": "smoke-pat-1",
+        "practitioner_id": "prac-1",
+        "candidate_freshness_id": "candidate-freshness-smoke-105",
+        "proposal_freshness_id": "proposal-freshness-smoke-105",
+        "appointment_date": "2026-06-27",
+        "start_time_local": "09:00:00",
+        "duration_minutes": 15,
+    }
+
+    def handle_api(route):
+        url = route.request.url
+        if "/api/v1/appointments/bernie/sessions/active" in url:
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({"session": _bernie_session_snapshot(session_id="server-session-n9")})
+            )
+            return
+        if "/api/v1/appointments/bernie/sessions/" in url and "/events" in url:
+            body = json.loads(route.request.post_data or "{}")
+            append_requests.append(body)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "accepted": True,
+                    "session": _bernie_session_snapshot(session_id="server-session-n9", revision=1, state="recognition"),
+                    "event": {"event_id": body.get("event_id"), "event_type": body.get("event_type"), "payload": body.get("payload", {})}
+                })
+            )
+            return
+        if "/api/v1/appointments/proposals/bernie/interpret-booking-instruction" in url:
+            body = json.loads(route.request.post_data or "{}")
+            interpret_requests.append(body)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "interpret_booking_instruction",
+                    "safe": True,
+                    "result": "interpreted",
+                    "autonomy_tier": "execute_with_report",
+                    "summary": "Find a routine appointment tomorrow.",
+                    "confidence": 0.9,
+                    "command_candidate": {
+                        "practitioner_id": "prac-1",
+                        "patient_id": "smoke-pat-1",
+                        "date_from": "2026-07-04",
+                        "duration_minutes": 15
+                    },
+                    "missing_fields": [],
+                    "safety_flags": [],
+                    "provider_metadata": {"provider": "fake", "mode": "mocked", "live_provider": False},
+                    "turn_ref": {
+                        "session_id": "turn-session-n9",
+                        "turn_id": "turn-session-n9:1",
+                        "turn_index": 1,
+                        "event_kind": "staff_instruction",
+                        "reference_date": body.get("reference_date"),
+                    },
+                    "server_session": _bernie_session_snapshot(session_id="server-session-n9", revision=2, state="context_enrichment")
+                })
+            )
+            return
+        if "/api/v1/appointments/proposals/bernie/supervised-booking" in url:
+            body = json.loads(route.request.post_data or "{}")
+            supervised_requests.append(body)
+            response = copy.deepcopy(_bernie_live_confirmation_response())
+            response["server_session"] = _bernie_session_snapshot(session_id="server-session-n9", revision=5, state="proposal_preview")
+            response["staff_review"]["confirm_payload"]["session_binding"] = binding
+            response["staff_review"]["confirm_payload"]["signed_confirmation_evidence"] = {
+                "payload": {"session_binding": binding}
+            }
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(response))
+            return
+        if "/api/v1/appointments/proposals/create/confirm-bernie" in url:
+            confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "confirmed"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"eligible": True}))
+
+    diary_page.route("**/api/v1/**", handle_api)
+
+    try:
+        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_session=true&bernie_confirm_adapter=true&practitioner_id=prac-1&patient_id=smoke-pat-1&selected_candidate_index=0")
+        diary_page.wait_for_selector("[data-testid='bernie-instruction-input']", state="visible", timeout=5000)
+        diary_page.fill("[data-testid='bernie-instruction-input']", "Make an appointment tomorrow after 3")
+        diary_page.click("[data-testid='btn-bernie-instruction-submit']")
+
+        for _ in range(50):
+            if interpret_requests and supervised_requests:
+                break
+            diary_page.wait_for_timeout(100)
+
+        assert append_requests, "expected staff instruction append"
+        assert interpret_requests, "expected interpret request"
+        assert supervised_requests, "expected supervised booking request"
+
+        interpret_body = interpret_requests[0]
+        assert interpret_body["server_session_id"] == "server-session-n9"
+        assert interpret_body["server_session_surface_id"] == "diary-main"
+        assert interpret_body["server_session_expected_revision"] == 1
+        assert interpret_body["server_session_idempotency_key"]
+
+        supervised_body = supervised_requests[0]
+        assert supervised_body["server_session_id"] == "server-session-n9"
+        assert supervised_body["server_session_surface_id"] == "diary-main"
+        assert supervised_body["server_session_expected_revision"] == 2
+        assert supervised_body["server_session_idempotency_key"]
+        assert supervised_body["server_session_idempotency_key"] != interpret_body["server_session_idempotency_key"]
+
+        diary_page.wait_for_selector("[data-testid='bernie-review-confirm-button']", state="visible", timeout=5000)
+        diary_page.click("[data-testid='bernie-review-confirm-button']")
+        for _ in range(30):
+            if confirm_payloads:
+                break
+            diary_page.wait_for_timeout(100)
+
+        assert confirm_payloads, "expected confirm payload"
+        assert confirm_payloads[0]["session_binding"] == binding
+        assert confirm_payloads[0]["confirmed"] is True
+    finally:
+        diary_page.evaluate("localStorage.removeItem('emr4_token')")
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_route_intercepted_confirm_flow_harness_success(diary_page):
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
