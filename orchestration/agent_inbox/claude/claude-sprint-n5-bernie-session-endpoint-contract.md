@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 9a38e67 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n5-bernie-session-endpoint-contract --summary "Short plan summary"` |

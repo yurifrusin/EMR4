@@ -218,7 +218,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Plan gate accepted; backend endpoint implementation proceeding with Ariadne while Claude is session-limited |
 | Product Goal | Expose the N4 server-owned Bernie session semantics through a minimal authenticated endpoint and let the Diary panel begin rendering/refetching server session state without making browser state authoritative |
 | Worker Shape | Claude backend session endpoint plan, Antigravity Diary render/refetch plan, Codex worker endpoint/UI invariant plan, Ariadne orchestration/review |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n5-bernie-session-endpoint-contract.md` |
