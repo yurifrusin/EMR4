@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 106B: Bernie Temporal Policy Consolidation |
 | Integrated through | Ariadne implementation of the accepted Claude Fable 5 plan: pure Bernie temporal policy module, shared week-relative/date-time helpers, and shared same-day window decisions |
-| Status | Integrated locally; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed
