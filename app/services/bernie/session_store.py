@@ -398,10 +398,25 @@ class InMemoryBernieSessionStore:
         if event_type is BernieSessionEventType.proposal_outcome:
             candidate_id = event.payload.get("candidate_freshness_id")
             proposal_id = event.payload.get("proposal_freshness_id")
+            patient_id = event.payload.get("patient_id")
+            practitioner_id = event.payload.get("practitioner_id")
             if isinstance(candidate_id, str):
                 updated = updated.model_copy(update={"candidate_freshness_ids": [candidate_id]}, deep=True)
             if isinstance(proposal_id, str):
                 updated = updated.model_copy(update={"staged_proposal_freshness_id": proposal_id}, deep=True)
+            identity_updates: dict[str, Any] = {}
+            if isinstance(patient_id, str) and patient_id:
+                try:
+                    identity_updates["patient_id"] = uuid.UUID(patient_id)
+                except ValueError:
+                    pass
+            if isinstance(practitioner_id, str) and practitioner_id:
+                try:
+                    identity_updates["practitioner_id"] = uuid.UUID(practitioner_id)
+                except ValueError:
+                    pass
+            if identity_updates:
+                updated = updated.model_copy(update=identity_updates, deep=True)
 
         self._sessions[session_id] = updated
         result = BernieSessionEventResult(

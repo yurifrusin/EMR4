@@ -78,9 +78,11 @@ from app.services.bernie import (
     resolve_week_relative_date,
     resolve_booking_date_transition,
     BernieSessionEvent,
+    BernieSessionEventRejectionCode,
     BernieSessionEventResult,
     BernieSessionEventType,
     BernieSessionRecord,
+    BernieSessionState,
     InMemoryBernieSessionStore,
     build_session_confirmation_binding,
 )
@@ -1461,6 +1463,62 @@ def append_bernie_session_event(
     return response
 
 
+def _append_bernie_route_outcome_event(
+    *,
+    session_id: Optional[str],
+    current_user: User,
+    event_type: BernieSessionEventType,
+    target_state: BernieSessionState,
+    payload: dict[str, Any],
+    expected_revision: Optional[int] = None,
+    surface_id: Optional[str] = None,
+    idempotency_key: Optional[str] = None,
+) -> BernieSessionEventResult:
+    """Append compact server-owned outcome evidence for route-computed turns.
+
+    The append is additive for legacy callers: if no server session id is
+    supplied the route behaves exactly as before. If a session id is supplied,
+    owner/surface mismatches are rejected by returning a result object; callers
+    decide whether that rejection should block their primary route result.
+    """
+
+    if not session_id:
+        return BernieSessionEventResult(accepted=False, detail="No Bernie session supplied.")
+
+    session = _BERNIE_SESSION_STORE.get_session(session_id)
+    if session is None:
+        return BernieSessionEventResult(
+            accepted=False,
+            code=BernieSessionEventRejectionCode.session_not_found,
+            detail="Bernie session was not found.",
+        )
+    if str(session.practice_id) != str(current_user.practice_id) or str(session.user_id) != str(current_user.id):
+        return BernieSessionEventResult(
+            accepted=False,
+            code=BernieSessionEventRejectionCode.session_owner_mismatch,
+            detail="Bernie session belongs to a different practice or staff user.",
+        )
+    if surface_id is not None and session.surface_id != surface_id:
+        return BernieSessionEventResult(
+            accepted=False,
+            code=BernieSessionEventRejectionCode.session_owner_mismatch,
+            detail="Bernie session belongs to a different diary surface.",
+        )
+
+    return _BERNIE_SESSION_STORE.append_server_outcome_event(
+        session_id=session_id,
+        event_type=event_type,
+        target_state=target_state,
+        expected_revision=expected_revision,
+        idempotency_key=idempotency_key,
+        payload=payload,
+    )
+
+
+def _issue_codes(issues: list[AppointmentProposalIssue]) -> list[str]:
+    return [issue.code for issue in issues]
+
+
 @router.post(
     "/proposals/bernie/interpret-booking-instruction",
     response_model=BernieBookingInstructionInterpretOut,
@@ -1503,6 +1561,34 @@ def interpret_bernie_booking_instruction(
     result = _attach_bernie_interpret_reception_context(
         result,
         reference_date=effective_reference_date,
+    )
+    if result.result == "interpreted":
+        interpretation_target = BernieSessionState.context_enrichment
+    elif result.result == "clarification_required":
+        interpretation_target = BernieSessionState.clarification
+    else:
+        interpretation_target = BernieSessionState.handed_off
+    _append_bernie_route_outcome_event(
+        session_id=body.server_session_id,
+        current_user=current_user,
+        surface_id=body.server_session_surface_id,
+        event_type=BernieSessionEventType.interpretation_outcome,
+        target_state=interpretation_target,
+        expected_revision=body.server_session_expected_revision,
+        idempotency_key=(
+            f"{body.server_session_id}:interpretation:{body.server_session_idempotency_key}"
+            if body.server_session_idempotency_key
+            else None
+        ),
+        payload={
+            "result": result.result,
+            "safe": result.safe,
+            "missing_field_count": len(result.missing_fields),
+            "warning_codes": _issue_codes(result.warnings),
+            "block_codes": _issue_codes(result.blocks),
+            "safety_flags": list(result.safety_flags),
+            "has_command_candidate": result.command_candidate is not None,
+        },
     )
     return result
 
@@ -3569,6 +3655,7 @@ def _bernie_staff_review_payload(
             proposal_freshness_id=selection_proposal.proposal_freshness_id,
             signed_confirmation_evidence=selection_proposal.signed_confirmation_evidence,
             signed_confirmation_evidence_required=selection_proposal.signed_confirmation_evidence is not None,
+            session_binding=selection_proposal.session_binding,
         ).model_dump(mode="json")
         confirm_evidence = list(_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE)
 
@@ -4007,9 +4094,66 @@ def propose_bernie_supervised_booking(
             context_freshness=_sb_context_freshness,
         )
 
+    session_expected_revision = body.server_session_expected_revision
+
+    def _append_supervised_outcome(
+        event_type: BernieSessionEventType,
+        target_state: BernieSessionState,
+        payload: dict[str, Any],
+        *,
+        idempotency_suffix: str,
+    ) -> BernieSessionEventResult:
+        nonlocal session_expected_revision
+        result = _append_bernie_route_outcome_event(
+            session_id=body.server_session_id,
+            current_user=current_user,
+            surface_id=body.server_session_surface_id,
+            event_type=event_type,
+            target_state=target_state,
+            expected_revision=session_expected_revision,
+            idempotency_key=(
+                f"{body.server_session_id}:{body.server_session_idempotency_key}:{idempotency_suffix}"
+                if body.server_session_id and body.server_session_idempotency_key
+                else None
+            ),
+            payload=payload,
+        )
+        if result.accepted and result.session is not None:
+            session_expected_revision = result.session.revision
+        return result
+
+    _append_supervised_outcome(
+        BernieSessionEventType.context_outcome,
+        BernieSessionState.slot_search,
+        {
+            "result": "normalized",
+            "safe": normalization.safe,
+            "warning_codes": _issue_codes(normalization.warnings),
+            "block_codes": _issue_codes(normalization.blocks),
+            "date_from": constraint.date_from.isoformat(),
+            "date_to": constraint.date_to.isoformat() if constraint.date_to else None,
+            "duration_minutes": constraint.duration_minutes,
+        },
+        idempotency_suffix="context",
+    )
+
     # Before-search bounded-window pre-check: if the window's upper bound is entirely
     # in the past, short-circuit without running a slot query.
     if same_day_decision.kind == "window_fully_past":
+        _append_supervised_outcome(
+            BernieSessionEventType.slot_search_outcome,
+            BernieSessionState.clinic_day_exhausted,
+            {
+                "result": "clinic_day_exhausted",
+                "safe": False,
+                "candidate_count": 0,
+                "reason_code": "window_fully_past",
+                "warning_codes": _issue_codes(normalization.warnings),
+                "block_codes": [],
+                "suggestion_kinds": [],
+            },
+            idempotency_suffix="slot-search-window-past",
+        )
         return _with_ctx(_bernie_clinic_day_exhausted(
             normalization=normalization,
             summary=(
@@ -4071,6 +4215,20 @@ def propose_bernie_supervised_booking(
     blocks = [*normalization.blocks, *search_proposal.blocks]
 
     if not search_proposal.safe:
+        _append_supervised_outcome(
+            BernieSessionEventType.slot_search_outcome,
+            BernieSessionState.no_slot,
+            {
+                "result": "slot_search_blocked",
+                "safe": False,
+                "candidate_count": len(search_proposal.candidates),
+                "reason_code": _first_issue_code(search_proposal.blocks) or "slot_search_blocked",
+                "warning_codes": _issue_codes(warnings),
+                "block_codes": _issue_codes(blocks),
+                "suggestion_kinds": [],
+            },
+            idempotency_suffix="slot-search-blocked",
+        )
         return _with_ctx(_bernie_supervised_blocked(
             normalization=normalization,
             summary=f"{normalization.summary} {search_proposal.summary}",
@@ -4091,6 +4249,20 @@ def propose_bernie_supervised_booking(
         and constraint.latest_time is None
         and len(search_proposal.candidates) == 0
     ):
+        _append_supervised_outcome(
+            BernieSessionEventType.slot_search_outcome,
+            BernieSessionState.clinic_day_exhausted,
+            {
+                "result": "clinic_day_exhausted",
+                "safe": True,
+                "candidate_count": 0,
+                "reason_code": "no_bookable_slots_remaining_today",
+                "warning_codes": _issue_codes(warnings),
+                "block_codes": _issue_codes(blocks),
+                "suggestion_kinds": [],
+            },
+            idempotency_suffix="slot-search-day-exhausted",
+        )
         return _with_ctx(_bernie_clinic_day_exhausted(
             normalization=normalization,
             summary=(
@@ -4116,6 +4288,21 @@ def propose_bernie_supervised_booking(
         body.selected_candidate_index is not None
         or body.selected_candidate is not None
     )
+    if has_selection:
+        _append_supervised_outcome(
+            BernieSessionEventType.slot_search_outcome,
+            BernieSessionState.candidate_selection,
+            {
+                "result": "candidates_found",
+                "safe": True,
+                "candidate_count": len(search_proposal.candidates),
+                "reason_code": "slot_candidates_found",
+                "warning_codes": _issue_codes(warnings),
+                "block_codes": _issue_codes(blocks),
+                "suggestion_kinds": [],
+            },
+            idempotency_suffix="slot-search-selection",
+        )
     if not has_selection:
         summary = (
             f"{search_execution.summary} Select one candidate before "
@@ -4125,6 +4312,32 @@ def propose_bernie_supervised_booking(
         no_slot_suggestions: list[BernieSlotSuggestion] = []
         if len(search_proposal.candidates) == 0 and normalization.constraint is not None:
             no_slot_suggestions = _build_no_slot_suggestions(normalization.constraint)
+        _append_supervised_outcome(
+            BernieSessionEventType.slot_search_outcome,
+            (
+                BernieSessionState.no_slot
+                if len(search_proposal.candidates) == 0
+                else BernieSessionState.candidate_selection
+            ),
+            {
+                "result": (
+                    "no_slot"
+                    if len(search_proposal.candidates) == 0
+                    else "candidates_found"
+                ),
+                "safe": True,
+                "candidate_count": len(search_proposal.candidates),
+                "reason_code": (
+                    "no_matching_slots"
+                    if len(search_proposal.candidates) == 0
+                    else "slot_candidates_found"
+                ),
+                "warning_codes": _issue_codes(warnings),
+                "block_codes": _issue_codes(blocks),
+                "suggestion_kinds": [suggestion.kind for suggestion in no_slot_suggestions],
+            },
+            idempotency_suffix="slot-search-candidates",
+        )
         _csr_turn_ref = _mint_next_turn_ref(body.turn_ref, "candidate_selection", request_reference_date)
         return _with_ctx(BernieSupervisedBookingOut(
             result="candidate_selection_required",
@@ -4243,6 +4456,35 @@ def propose_bernie_supervised_booking(
         reference_date=request_reference_date,
     )
     _sb_turn_ref = _mint_next_turn_ref(body.turn_ref, "proposal_preview", request_reference_date)
+    _session_binding = None
+    if create_proposal.safe:
+        _proposal_outcome = _append_supervised_outcome(
+            BernieSessionEventType.proposal_outcome,
+            BernieSessionState.proposal_preview,
+            {
+                "result": "proposal_staged",
+                "safe": True,
+                "candidate_freshness_id": selected_candidate.candidate_freshness_id,
+                "proposal_freshness_id": _proposal_fid,
+                "patient_id": str(_cmd.patient_id) if _cmd.patient_id is not None else None,
+                "practitioner_id": str(_cmd.practitioner_id) if _cmd.practitioner_id is not None else None,
+                "appointment_date": _cmd.appointment_date.isoformat(),
+                "start_time_local": _cmd.start_time_local.isoformat(),
+                "duration_minutes": _cmd.duration_minutes,
+                "warning_codes": _issue_codes(selection_proposal_warnings),
+                "block_codes": _issue_codes(selection_proposal_blocks),
+            },
+            idempotency_suffix="proposal",
+        )
+        if _proposal_outcome.accepted and _proposal_outcome.session is not None:
+            _session_binding = build_session_confirmation_binding(
+                _proposal_outcome.session,
+                candidate_freshness_id=selected_candidate.candidate_freshness_id,
+                proposal_freshness_id=_proposal_fid,
+                appointment_date=selected_candidate.appointment_date,
+                start_time_local=selected_candidate.start_time_local.isoformat(),
+                duration_minutes=selected_candidate.duration_minutes,
+            )
     _signed_payload = _bernie_signed_confirmation_payload(
         practice_id=current_user.practice_id,
         staff_user_id=current_user.id,
@@ -4251,6 +4493,7 @@ def propose_bernie_supervised_booking(
         command=_cmd,
         candidate_freshness_id=selected_candidate.candidate_freshness_id,
         proposal_freshness_id=_proposal_fid,
+        session_binding=_session_binding,
     )
     _signed_confirmation_evidence = mint_signed_confirmation_evidence(_signed_payload)
     selection_proposal = SlotSelectionProposalOut(
@@ -4264,6 +4507,7 @@ def propose_bernie_supervised_booking(
         blocks=selection_proposal_blocks,
         turn_ref=_sb_turn_ref,
         proposal_freshness_id=_proposal_fid,
+        session_binding=_session_binding,
         signed_confirmation_evidence=_signed_confirmation_evidence,
     )
     combined_warnings = [*warnings, *selection_proposal.warnings]
@@ -4558,6 +4802,7 @@ def confirm_bernie_create_proposal(
     blocks: list[AppointmentProposalIssue] = []
     selection = body.selection_proposal
     create_proposal = selection.create_proposal
+    effective_session_binding = body.session_binding or selection.session_binding
 
     if body.confirmed is not True:
         blocks.append(_confirm_create_block(
@@ -4624,7 +4869,7 @@ def confirm_bernie_create_proposal(
                 or selection.selected_candidate.candidate_freshness_id,
                 proposal_freshness_id=body.proposal_freshness_id
                 or selection.proposal_freshness_id,
-                session_binding=body.session_binding,
+                session_binding=effective_session_binding,
             )
             signed_result = verify_signed_confirmation_evidence(
                 body.signed_confirmation_evidence,
@@ -4637,9 +4882,9 @@ def confirm_bernie_create_proposal(
     else:
         audit_evidence.append("legacy_unsigned_confirmation_compat")
 
-    if body.session_binding is not None:
+    if effective_session_binding is not None:
         binding_blocks = _validate_bernie_session_confirmation_binding(
-            session_binding=body.session_binding,
+            session_binding=effective_session_binding,
             current_user=current_user,
             candidate_freshness_id=body.candidate_freshness_id
             or (
@@ -4722,6 +4967,71 @@ def confirm_bernie_create_proposal(
                     "Confirmation blocked: proposal freshness id does not match current session evidence.",
                 ))
 
+    confirmation_session_id: Optional[str] = None
+    if effective_session_binding is not None and not blocks:
+        binding_session_id = effective_session_binding.get("session_id")
+        binding_surface_id = effective_session_binding.get("surface_id")
+        binding_revision = effective_session_binding.get("session_revision")
+        if isinstance(binding_session_id, str) and isinstance(binding_revision, int):
+            confirm_event = _BERNIE_SESSION_STORE.append_client_event(
+                session_id=binding_session_id,
+                practice_id=current_user.practice_id,
+                user_id=current_user.id,
+                surface_id=binding_surface_id,
+                event_type=BernieSessionEventType.confirm_submitted,
+                expected_revision=binding_revision,
+                idempotency_key=f"{binding_session_id}:confirm-submitted:{body.proposal_freshness_id or selection.proposal_freshness_id}",
+                payload={
+                    "proposal_freshness_id": body.proposal_freshness_id or selection.proposal_freshness_id,
+                },
+            )
+            if confirm_event.accepted and confirm_event.session is not None:
+                confirmation_session_id = binding_session_id
+            else:
+                blocks.append(_confirm_create_block(
+                    confirm_event.code.value if confirm_event.code else "session_confirm_transition_failed",
+                    confirm_event.detail or "The Bernie session could not enter confirmation state.",
+                ))
+
+    def _append_confirmation_outcome(
+        *,
+        target_state: BernieSessionState,
+        payload: dict[str, Any],
+    ) -> None:
+        if confirmation_session_id is None:
+            return
+        _append_bernie_route_outcome_event(
+            session_id=confirmation_session_id,
+            current_user=current_user,
+            surface_id=effective_session_binding.get("surface_id") if effective_session_binding else None,
+            event_type=BernieSessionEventType.confirmation_outcome,
+            target_state=target_state,
+            payload=payload,
+        )
+
+    def _block_bound_confirmation(
+        block_items: list[AppointmentProposalIssue],
+        *,
+        warnings: list[AppointmentProposalIssue],
+        audit_evidence: list[str],
+        target_state: BernieSessionState = BernieSessionState.proposal_preview,
+    ) -> AppointmentConfirmCreateProposalOut:
+        _append_confirmation_outcome(
+            target_state=target_state,
+            payload={
+                "result": "blocked",
+                "confirmed": False,
+                "block_codes": _issue_codes(block_items),
+                "warning_codes": _issue_codes(warnings),
+                "audit_evidence_codes": list(audit_evidence),
+            },
+        )
+        return _block_bernie_create_confirmation(
+            block_items,
+            warnings=warnings,
+            audit_evidence=audit_evidence,
+        )
+
     if blocks:
         return _block_bernie_create_confirmation(
             blocks,
@@ -4735,7 +5045,7 @@ def confirm_bernie_create_proposal(
         db,
     )
     if entity_blocks:
-        return _block_bernie_create_confirmation(
+        return _block_bound_confirmation(
             entity_blocks,
             warnings=selection.warnings,
             audit_evidence=audit_evidence,
@@ -4752,7 +5062,7 @@ def confirm_bernie_create_proposal(
         or revalidated.autonomy_tier != "proposal"
         or not revalidated.requires_confirmation
     ):
-        return _block_bernie_create_confirmation(
+        return _block_bound_confirmation(
             [
                 _confirm_create_block(
                     "create_proposal_revalidation_blocked",
@@ -4765,7 +5075,7 @@ def confirm_bernie_create_proposal(
         )
 
     if not _same_create_command(create_proposal.command, revalidated.command):
-        return _block_bernie_create_confirmation(
+        return _block_bound_confirmation(
             [_confirm_create_block(
                 "create_proposal_revalidation_mismatch",
                 "The revalidated create command does not match the supplied proposal evidence.",
@@ -4796,6 +5106,17 @@ def confirm_bernie_create_proposal(
         current_user,
         confirmed_warnings=confirmed_warnings,
         audit_evidence=audit_evidence,
+    )
+    _append_confirmation_outcome(
+        target_state=BernieSessionState.confirmed,
+        payload={
+            "result": "confirmed",
+            "confirmed": True,
+            "appointment_id": str(appointment.id),
+            "block_codes": [],
+            "warning_codes": _issue_codes([*selection.warnings, *revalidated.warnings]),
+            "audit_evidence_codes": list(audit_evidence),
+        },
     )
     return AppointmentConfirmCreateProposalOut(
         safe=True,

@@ -1,0 +1,202 @@
+from app.config import settings
+from app.models.appointments import Appointment, AppointmentAuditLog
+from app.routers.appointments import _BERNIE_SESSION_STORE
+from app.services.bernie import BernieSessionEventType, BernieSessionState
+from tests.conftest import make_token
+
+
+INTERPRET_URL = "/api/v1/appointments/proposals/bernie/interpret-booking-instruction"
+WRAPPER_URL = "/api/v1/appointments/proposals/bernie/supervised-booking"
+CONFIRM_URL = "/api/v1/appointments/proposals/create/confirm-bernie"
+SESSION_BASE = "/api/v1/appointments/bernie/sessions"
+REFERENCE_DATE = "2026-06-22"
+
+
+def _auth(token: str) -> dict[str, str]:
+    return {"Authorization": f"Bearer {token}"}
+
+
+def _create_recognition_session(client, token: str, surface_id: str) -> dict:
+    active = client.get(
+        f"{SESSION_BASE}/active",
+        params={"surface_id": surface_id, "reference_date": REFERENCE_DATE},
+        headers=_auth(token),
+    )
+    assert active.status_code == 200, active.text
+    session = active.json()["session"]
+
+    event = client.post(
+        f"{SESSION_BASE}/{session['session_id']}/events",
+        json={
+            "surface_id": surface_id,
+            "event_type": "staff_instruction",
+            "expected_revision": 0,
+            "event_id": f"{surface_id}-staff",
+            "payload": {"intent_ref": f"{surface_id}-intent"},
+        },
+        headers=_auth(token),
+    )
+    assert event.status_code == 200, event.text
+    return event.json()["session"]
+
+
+def _session_tail(session_id: str):
+    session = _BERNIE_SESSION_STORE.get_session(session_id)
+    assert session is not None
+    return session
+
+
+def test_interpret_route_appends_compact_server_outcome_without_phi(
+    client, gp_user, practitioner, patient, monkeypatch
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+    surface_id = "diary-n8-interpret"
+    session = _create_recognition_session(client, token, surface_id)
+
+    resp = client.post(
+        INTERPRET_URL,
+        json={
+            "instruction": (
+                f"Please find practitioner_id:{practitioner.id} "
+                f"patient_id:{patient.id} date_from:today duration:15"
+            ),
+            "reference_date": REFERENCE_DATE,
+            "server_session_id": session["session_id"],
+            "server_session_surface_id": surface_id,
+            "server_session_expected_revision": session["revision"],
+            "server_session_idempotency_key": "interpret-1",
+        },
+        headers=_auth(token),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["result"] == "interpreted"
+    updated = _session_tail(session["session_id"])
+    assert updated.state is BernieSessionState.context_enrichment
+    assert updated.revision == session["revision"] + 1
+    outcome = updated.events[-1]
+    assert outcome.event_type == "interpretation_outcome"
+    assert outcome.payload["result"] == "interpreted"
+    assert outcome.payload["has_command_candidate"] is True
+    assert "instruction" not in outcome.payload
+    assert "patient_name" not in outcome.payload
+    assert "raw_instruction" not in outcome.payload
+
+
+def test_supervised_booking_stages_server_proposal_and_session_bound_evidence(
+    client, db, gp_user, practitioner, patient, schedule
+):
+    token = make_token(gp_user)
+    surface_id = "diary-n8-proposal"
+    session = _create_recognition_session(client, token, surface_id)
+    interpreted = _BERNIE_SESSION_STORE.append_server_outcome_event(
+        session_id=session["session_id"],
+        event_type=BernieSessionEventType.interpretation_outcome,
+        target_state=BernieSessionState.context_enrichment,
+        expected_revision=session["revision"],
+        payload={"result": "interpreted", "safe": True},
+    )
+    assert interpreted.accepted is True
+    before = (db.query(Appointment).count(), db.query(AppointmentAuditLog).count())
+
+    resp = client.post(
+        WRAPPER_URL,
+        json={
+            "reference_date": REFERENCE_DATE,
+            "command": {
+                "practitioner_id": str(practitioner.id),
+                "patient_id": str(patient.id),
+                "date_from": "today",
+                "duration_minutes": "15",
+            },
+            "selected_candidate_index": 0,
+            "patient_id": str(patient.id),
+            "reason": "N8 route outcome test",
+            "server_session_id": session["session_id"],
+            "server_session_surface_id": surface_id,
+            "server_session_expected_revision": interpreted.session.revision,
+            "server_session_idempotency_key": "supervised-1",
+        },
+        headers=_auth(token),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["result"] == "confirmation_ready"
+    assert data["staff_review"]["confirm_payload"]["session_binding"] is not None
+    assert data["selection_proposal"]["session_binding"] == data["staff_review"]["confirm_payload"]["session_binding"]
+    signed_payload = data["staff_review"]["confirm_payload"]["signed_confirmation_evidence"]["payload"]
+    assert signed_payload["session_binding"] == data["staff_review"]["confirm_payload"]["session_binding"]
+    updated = _session_tail(session["session_id"])
+    assert updated.state is BernieSessionState.proposal_preview
+    assert updated.patient_id == patient.id
+    assert updated.practitioner_id == practitioner.id
+    assert updated.candidate_freshness_ids == [
+        data["selection_proposal"]["selected_candidate"]["candidate_freshness_id"]
+    ]
+    assert updated.staged_proposal_freshness_id == data["selection_proposal"]["proposal_freshness_id"]
+    assert [event.event_type.value for event in updated.events[-3:]] == [
+        "context_outcome",
+        "slot_search_outcome",
+        "proposal_outcome",
+    ]
+    assert (db.query(Appointment).count(), db.query(AppointmentAuditLog).count()) == before
+
+
+def test_session_bound_confirm_appends_confirmed_outcome_after_write(
+    client, db, gp_user, practitioner, patient, schedule
+):
+    token = make_token(gp_user)
+    surface_id = "diary-n8-confirm"
+    session = _create_recognition_session(client, token, surface_id)
+    interpreted = _BERNIE_SESSION_STORE.append_server_outcome_event(
+        session_id=session["session_id"],
+        event_type=BernieSessionEventType.interpretation_outcome,
+        target_state=BernieSessionState.context_enrichment,
+        expected_revision=session["revision"],
+        payload={"result": "interpreted", "safe": True},
+    )
+    assert interpreted.accepted is True
+    proposal = client.post(
+        WRAPPER_URL,
+        json={
+            "reference_date": REFERENCE_DATE,
+            "command": {
+                "practitioner_id": str(practitioner.id),
+                "patient_id": str(patient.id),
+                "date_from": "today",
+                "duration_minutes": "15",
+            },
+            "selected_candidate_index": 0,
+            "patient_id": str(patient.id),
+            "reason": "N8 confirm outcome test",
+            "server_session_id": session["session_id"],
+            "server_session_surface_id": surface_id,
+            "server_session_expected_revision": interpreted.session.revision,
+        },
+        headers=_auth(token),
+    )
+    assert proposal.status_code == 200, proposal.text
+    payload = proposal.json()["staff_review"]["confirm_payload"]
+    payload["confirmed"] = True
+    before = (db.query(Appointment).count(), db.query(AppointmentAuditLog).count())
+
+    resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token))
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    assert "bernie_session_binding_verified" in data["audit_evidence"]
+    assert (db.query(Appointment).count(), db.query(AppointmentAuditLog).count()) == (
+        before[0] + 1,
+        before[1] + 1,
+    )
+    updated = _session_tail(session["session_id"])
+    assert updated.state is BernieSessionState.confirmed
+    assert [event.event_type.value for event in updated.events[-2:]] == [
+        "confirm_submitted",
+        "confirmation_outcome",
+    ]
+    assert updated.events[-1].payload["appointment_id"] == data["appointment"]["id"]

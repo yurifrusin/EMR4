@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | superseded |
 | Created | eb0de40 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-n8-diary-session-outcome-ui-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none.
+- Verification run: Antigravity CLI returned blank stdout and the antigravity/current worktree remained clean with no submitted artifact.
+- Remaining risks: No UI changes were required for Sprint N8; later Diary wiring should pass server_session_* coordinates and session_binding through the live panel.

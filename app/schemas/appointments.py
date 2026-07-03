@@ -507,6 +507,9 @@ class SlotSelectionProposalOut(BaseModel):
     # Deterministic freshness id for the create proposal. Stamped by server;
     # clients echo back in confirmation; server recomputes and compares.
     proposal_freshness_id: Optional[str] = None
+    # Optional server-owned Bernie session coordinates stamped by the backend
+    # when the proposal was staged through a live server session.
+    session_binding: Optional[dict[str, Any]] = None
     # Server-signed confirmation evidence. The client must echo this unchanged;
     # the server verifies it before any confirmation-grade write.
     signed_confirmation_evidence: Optional[dict[str, Any]] = None
@@ -718,6 +721,12 @@ class BernieBookingInstructionInterpretIn(BaseModel):
     # new turn_ref on the response with the next turn_index.  On the first call
     # (session_id absent) the server mints a fresh session_id.
     turn_ref: Optional["BernieTurnRef"] = None
+    # Additive N8 server-owned session coordinates. These are distinct from
+    # the legacy/UI turn_ref and are optional for backward compatibility.
+    server_session_id: Optional[str] = None
+    server_session_surface_id: Optional[str] = None
+    server_session_expected_revision: Optional[int] = Field(default=None, ge=0)
+    server_session_idempotency_key: Optional[str] = None
 
 
 class BernieBookingInterpreterMetadata(BaseModel):
@@ -781,6 +790,13 @@ class BernieSupervisedBookingIn(BaseModel):
     # Clients may supply a session_id to continue an existing session;
     # turn_ref is then stamped on the response with the next turn_index.
     turn_ref: Optional["BernieTurnRef"] = None
+    # Additive N8 server-owned session coordinates. When supplied, the route
+    # appends compact server outcome events as it progresses through the
+    # supervised booking workflow.
+    server_session_id: Optional[str] = None
+    server_session_surface_id: Optional[str] = None
+    server_session_expected_revision: Optional[int] = Field(default=None, ge=0)
+    server_session_idempotency_key: Optional[str] = None
 
 
 class BernieSupervisedBookingOut(BaseModel):

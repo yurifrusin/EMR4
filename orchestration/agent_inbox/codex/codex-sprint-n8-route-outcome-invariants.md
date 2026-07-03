@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | eb0de40 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-n8-route-outcome-invariants --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: app/routers/appointments.py; app/schemas/appointments.py; app/services/bernie/session_store.py; tests/test_bernie_route_outcome_events.py.
+- Verification run: py_compile touched Python; focused N8 route outcome tests; adjacent Bernie session/evidence/confirm/wrapper suites; node --check docs/diary/diary.js; frontend asset version check; git diff --check.
+- Remaining risks: Diary does not yet send the new server_session_* route coordinates, so normal UI use remains backward-compatible until a later Diary wiring sprint.

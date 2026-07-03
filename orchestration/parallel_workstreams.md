@@ -309,6 +309,35 @@ Integration notes:
 - No persisted session table, migration, GraphRAG wiring, auto-mode, Diary asset
   change, taskpane, Command Centre, or broad API rewrite was included.
 
+## Sprint N8: Route-Level Outcome Event Wiring
+
+| Item | Value |
+|---|---|
+| Status | Integrated, verified, pushed, mirrored, and audited |
+| Product Goal | Wire real Bernie interpretation, supervised-booking, proposal, and confirmation route outcomes into the server-owned session outcome event substrate without changing visible Diary behaviour |
+| Worker Shape | Claude lane superseded by quota cap, Antigravity lane superseded after no-artifact CLI result, Codex/Sartre invariant plan accepted, Ariadne implementation and verification |
+| Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n8-bernie-route-outcome-contract.md` |
+| Antigravity Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-n8-diary-session-outcome-ui-review.md` |
+| Codex Task Packet | `orchestration/agent_inbox/codex/codex-sprint-n8-route-outcome-invariants.md` |
+| In Scope | Optional server-session route coordinates, compact interpretation/context/slot/proposal/confirmation outcome appends, server-stamped session binding in signed confirm evidence, focused backend route/session tests |
+| Out Of Scope | Persisted session table/migration, Diary UI wiring for `server_session_*`, GraphRAG/practice-knowledge routing, auto-mode, taskpane/Command Centre changes, broad API-spine rewrite |
+| Verification | Focused N8 route outcome tests; adjacent Bernie session/store/evidence/confirm/wrapper tests; py_compile; node --check for unchanged Diary JS; frontend asset version check; git diff --check |
+
+Integration notes:
+
+- Claude headless plan attempt returned 429 session-limit reset, so Ariadne
+  superseded that lane.
+- Antigravity CLI returned blank stdout and the clean antigravity/current
+  worktree contained no plan packet or artifact, so Ariadne superseded that
+  lane.
+- Codex worker Sartre supplied the accepted invariant plan. Ariadne implemented
+  the bounded backend route wiring directly.
+- N8 keeps all route-session fields optional and backward-compatible. The live
+  Diary does not yet send `server_session_*` route coordinates; a later Diary
+  sprint should do that wiring.
+- No Diary asset, UI redesign, persisted PHI-bearing session table, GraphRAG
+  route/UI integration, auto-confirm, or broad appointment API refactor landed.
+
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 
 | Item | Value |
