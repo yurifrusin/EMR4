@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint V2 - Diary Ask Bernie now routes explicit appointment-extension requests to the typed tool-intent route, renders a visible appointment-change proposal, and shows `Confirm change` only when backend update-proposal evidence is safe |
-| **Next recommended work** | G1 unified diary action grammar / evidence-gated update confirmation: reduce the remaining asymmetry between human UI updates and Bernie-authored updates so both use one deterministic proposal/confirm/write grammar |
+| **Current active track** | Post-Sprint G1 - Bernie-authored appointment-extension confirms now use signed update confirmation evidence and the `/appointments/proposals/update/confirm` endpoint instead of raw appointment PUT |
+| **Next recommended work** | G2 human diary update confirm route migration: move drag/drop/resize updates to the same evidence-gated update confirm grammar while preserving the fast Diary edit UX |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint V2 Bernie visible tool-intent UX |
+| **Latest integration commit** | Sprint G1 Bernie signed update confirm grammar |
 
 ### Tag map (all tags pushed to remote)
 

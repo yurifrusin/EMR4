@@ -36,6 +36,7 @@ from app.services.bernie.context import (
 from app.services.bernie.evidence import (
     SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_CONFIRMATION_EVIDENCE_VERSION,
+    SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
     SignedEvidenceResult,
     StalenessResult,
     StalenessVerdict,
@@ -145,6 +146,7 @@ __all__ = [
     # evidence
     "SIGNED_CONFIRMATION_EVIDENCE_PURPOSE",
     "SIGNED_CONFIRMATION_EVIDENCE_VERSION",
+    "SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE",
     "SignedEvidenceResult",
     "StalenessResult",
     "StalenessVerdict",

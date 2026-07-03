@@ -1551,7 +1551,13 @@ function renderBernieToolIntentReview(envelope) {
 
   const proposal = envelope?.proposal;
   const command = proposal?.command || {};
-  const canConfirm = envelope?.result === "proposal_ready" && proposal?.safe === true && command.appointment_id;
+  const canConfirm = (
+    envelope?.result === "proposal_ready"
+    && proposal?.safe === true
+    && command.appointment_id
+    && envelope?.confirm_endpoint
+    && envelope?.confirm_payload
+  );
   if (proposal && command.appointment_id) {
     const appt = findAppointmentForToolIntent(envelope);
     const card = document.createElement("div");
@@ -1631,13 +1637,30 @@ async function confirmBernieToolIntentChange(envelope) {
     }
     return;
   }
-  const response = await apiFetch(`/appointments/${command.appointment_id}`, {
-    method: "PUT",
-    body: JSON.stringify(command)
+  if (!envelope.confirm_endpoint || !envelope.confirm_payload) {
+    throw new Error("This appointment change is missing confirmation evidence. Ask Bernie to prepare it again.");
+  }
+  const confirmPayload = JSON.parse(JSON.stringify(envelope.confirm_payload));
+  confirmPayload.confirmed = true;
+  const response = await apiFetch(normalizeApiPath(envelope.confirm_endpoint), {
+    method: "POST",
+    body: JSON.stringify(confirmPayload)
   });
   if (!response.ok) {
-    throw new Error(await apiErrorMessage(response, "Appointment update"));
+    throw new Error(await apiErrorMessage(response, "Appointment update confirmation"));
   }
+  const result = await response.json();
+  if (result?.safe !== true || result?.autonomy_tier !== "confirmed_write") {
+    const issue = (result?.blocks || [])[0];
+    throw new Error(issue?.message || result?.summary || "The appointment change could not be confirmed.");
+  }
+  if (result.appointment) {
+    const index = (activeAppointments || []).findIndex(item => item.id === result.appointment.id);
+    if (index >= 0) {
+      activeAppointments[index] = result.appointment;
+    }
+  }
+  return result;
 }
 
 async function fetchBernieInterpretation(requestBody) {

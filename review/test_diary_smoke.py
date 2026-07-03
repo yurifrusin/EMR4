@@ -6407,13 +6407,49 @@ def test_bernie_tool_intent_extension_proposal_renders_and_confirms(diary_page):
                         },
                         "patient_identity": "linked",
                     },
+                    "confirm_endpoint": "/api/v1/appointments/proposals/update/confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "update_proposal": {
+                            "intent": "update_appointment",
+                            "safe": True,
+                            "autonomy_tier": "proposal",
+                            "requires_confirmation": True,
+                            "warnings": [],
+                            "blocks": [],
+                            "command": {
+                                "appointment_id": "appt-tool-1",
+                                "practitioner_id": "practitioner-123",
+                                "appointment_type_id": "type-1",
+                                "appointment_date": "2026-07-03",
+                                "start_time": "2026-07-03T05:00:00Z",
+                                "start_time_local": "15:00:00",
+                                "duration_minutes": 30,
+                                "reason": "Review",
+                                "patient_id": "patient-123",
+                                "patient_name_provisional": None,
+                                "location_id": "loc-1",
+                            },
+                            "patient_identity": "linked",
+                        },
+                        "update_proposal_freshness_id": "fresh-tool-1",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "bernie_confirm_update_proposal",
+                            "payload": {"fixture": "tool-intent"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                    "update_proposal_freshness_id": "fresh-tool-1",
+                    "signed_confirmation_evidence_required": True,
                     "warnings": [],
                     "blocks": [],
                     "source_attribution": {
                         "intent_source": "deterministic_text_parser",
                         "appointment_source": "visible_diary_context",
                         "proposal_authority": "appointment_update_proposal",
-                        "write_authority": "staff_confirmed_put_only",
+                        "write_authority": "signed_update_confirm_endpoint",
                     },
                 }),
             )
@@ -6421,9 +6457,23 @@ def test_bernie_tool_intent_extension_proposal_renders_and_confirms(diary_page):
         if request.method == "POST" and request.url.endswith("/appointments/proposals/bernie/interpret-booking-instruction"):
             route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected booking interpreter"}))
             return
-        if request.method == "PUT" and request.url.endswith("/appointments/appt-tool-1"):
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/update/confirm"):
             captured_update.append(request.post_data_json)
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"id": "appt-tool-1", "duration_minutes": 30}))
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_update_appointment",
+                    "safe": True,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "confirmed_write",
+                    "summary": "Updated.",
+                    "appointment": {"id": "appt-tool-1", "duration_minutes": 30},
+                    "warnings": [],
+                    "blocks": [],
+                    "audit_evidence": ["bernie_confirm_update_proposal"],
+                }),
+            )
             return
         route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
 
@@ -6477,8 +6527,9 @@ def test_bernie_tool_intent_extension_proposal_renders_and_confirms(diary_page):
     assert captured_tool_intent, "Expected tool-intent request"
     assert captured_tool_intent[0]["context_frames"], "Expected visible diary context frames"
     assert any(frame.get("appointment_id") == "appt-tool-1" for frame in captured_tool_intent[0]["context_frames"])
-    assert captured_update[0]["appointment_id"] == "appt-tool-1"
-    assert captured_update[0]["duration_minutes"] == 30
+    assert captured_update[0]["confirmed"] is True
+    assert captured_update[0]["update_proposal"]["command"]["appointment_id"] == "appt-tool-1"
+    assert captured_update[0]["update_proposal"]["command"]["duration_minutes"] == 30
 
 
 def test_bernie_tool_intent_clarification_has_no_confirm_or_stale_no_slot(diary_page):

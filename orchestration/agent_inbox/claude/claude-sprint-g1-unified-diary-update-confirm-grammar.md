@@ -1,10 +1,10 @@
-# claude-sprint-g1-unified-diary-update-confirm-grammar
+﻿# claude-sprint-g1-unified-diary-update-confirm-grammar
 
 | Item | Value |
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | integrated |
 | Created | a1ba67c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-g1-unified-diary-update-confirm-grammar --summary "Short plan summary"` |

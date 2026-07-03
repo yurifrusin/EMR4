@@ -1,5 +1,7 @@
 import uuid
 import re
+import hashlib
+import json
 from datetime import date as date_type, datetime, time, timedelta, timezone
 from typing import Any, Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
@@ -24,6 +26,7 @@ from app.schemas.appointments import (
     AppointmentCheckinDefaults, AppointmentConflictBrief, AppointmentCreateCommand,
     AppointmentCreateProposalOut, AppointmentConfirmCreateProposalOut, AppointmentProposalIssue,
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
+    AppointmentConfirmUpdateProposalOut, BernieUpdateProposalConfirmationIn,
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
     AppointmentWaitingAreaProposalIn, AppointmentWaitingAreaCommand, AppointmentWaitingAreaProposalOut,
     AppointmentDeleteIn, AppointmentDeleteCommand, AppointmentDeleteProposalOut,
@@ -60,6 +63,7 @@ from app.services.bernie import (
     compute_proposal_freshness_id,
     mint_signed_confirmation_evidence,
     verify_signed_confirmation_evidence,
+    SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
     check_staleness,
     mint_session_id,
     mint_turn_id,
@@ -134,6 +138,12 @@ _BERNIE_CONFIRM_CREATE_BASE_EVIDENCE = [
     "source_create_proposal",
 ]
 
+_BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE = [
+    "bernie_confirm_update_proposal",
+    "source_update_proposal",
+    "source_tool_intent_proposal",
+]
+
 _BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE = [
     "bernie_signed_confirmation_evidence_verified",
     "legacy_unsigned_confirmation_compat",
@@ -141,6 +151,7 @@ _BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE = [
 
 BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
     *_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE,
+    *_BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE,
     *_BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE,
     *BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES.values(),
 ]
@@ -1016,6 +1027,18 @@ def _build_create_appointment_proposal(
     )
 
 
+@router.post(
+    "/proposals/update/confirm",
+    response_model=AppointmentConfirmUpdateProposalOut,
+)
+def confirm_update_proposal_route(
+    body: BernieUpdateProposalConfirmationIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    return confirm_update_proposal(body, db, current_user)
+
+
 @router.post("/proposals/update/{appointment_id}", response_model=AppointmentUpdateProposalOut)
 def propose_update_appointment(
     appointment_id: uuid.UUID,
@@ -1309,9 +1332,8 @@ def propose_bernie_tool_intent(
     """Resolve a Bernie diary tool intent into a deterministic proposal.
 
     V1 intentionally supports only appointment extension. The route never
-    writes appointment state, never returns confirm-grade evidence, and never
-    lets model wording or advisory facts bypass existing proposal/confirm
-    contracts.
+    writes appointment state and never lets model wording or advisory facts
+    bypass existing proposal/confirm contracts.
     """
     instruction = body.instruction or ""
     if not re.search(r"\b(extend|lengthen)\b", instruction, re.IGNORECASE):
@@ -1376,6 +1398,42 @@ def propose_bernie_tool_intent(
         db,
         current_user,
     )
+    confirm_endpoint = None
+    confirm_payload = None
+    update_proposal_freshness_id = None
+    signed_confirmation_evidence = None
+    if proposal.safe:
+        current_state = _appointment_update_state_payload(
+            _get_appointment(appointment_id, current_user.practice_id, db)
+        )
+        reference_date = body.reference_date or proposal.command.appointment_date
+        update_proposal_freshness_id = _compute_update_proposal_freshness_id(
+            current_state=current_state,
+            command=proposal.command,
+            reference_date=reference_date,
+        )
+        signed_payload = _bernie_update_signed_confirmation_payload(
+            practice_id=current_user.practice_id,
+            staff_user_id=current_user.id,
+            turn_ref=None,
+            current_state=current_state,
+            command=proposal.command,
+            update_proposal_freshness_id=update_proposal_freshness_id,
+            session_binding=None,
+        )
+        signed_confirmation_evidence = mint_signed_confirmation_evidence(
+            signed_payload,
+            evidence_purpose=SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
+        )
+        confirm_endpoint = "/api/v1/appointments/proposals/update/confirm"
+        confirm_payload = {
+            "confirmed": False,
+            "update_proposal": proposal.model_dump(mode="json"),
+            "confirmed_warnings": [issue.code for issue in proposal.warnings],
+            "update_proposal_freshness_id": update_proposal_freshness_id,
+            "signed_confirmation_evidence": signed_confirmation_evidence,
+            "signed_confirmation_evidence_required": True,
+        }
     return BernieToolIntentOut(
         safe=proposal.safe,
         result="proposal_ready" if proposal.safe else "blocked",
@@ -1387,14 +1445,199 @@ def propose_bernie_tool_intent(
             f"{duration_minutes} minutes. Nothing is changed until staff confirm."
         ),
         proposal=proposal,
+        confirm_endpoint=confirm_endpoint,
+        confirm_payload=confirm_payload,
+        update_proposal_freshness_id=update_proposal_freshness_id,
+        signed_confirmation_evidence=signed_confirmation_evidence,
+        signed_confirmation_evidence_required=signed_confirmation_evidence is not None,
         warnings=proposal.warnings,
         blocks=proposal.blocks,
         source_attribution={
             "intent_source": "deterministic_text_parser",
             "appointment_source": "visible_diary_context",
             "proposal_authority": "appointment_update_proposal",
-            "write_authority": "staff_confirmed_put_only",
+            "write_authority": "signed_update_confirm_endpoint",
         },
+    )
+
+
+def _block_bernie_update_confirmation(
+    blocks: list[AppointmentProposalIssue],
+    *,
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentConfirmUpdateProposalOut:
+    return AppointmentConfirmUpdateProposalOut(
+        safe=False,
+        requires_confirmation=True,
+        autonomy_tier="blocked",
+        summary="The update proposal could not be confirmed.",
+        appointment=None,
+        warnings=warnings or [],
+        blocks=blocks,
+        audit_evidence=audit_evidence or [],
+    )
+
+
+def confirm_update_proposal(
+    body: BernieUpdateProposalConfirmationIn,
+    db: Session,
+    current_user: User,
+):
+    """Confirm a backend-prepared Bernie update proposal with signed evidence."""
+    audit_evidence = list(_BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE)
+    blocks: list[AppointmentProposalIssue] = []
+    proposal = body.update_proposal
+    command = proposal.command
+    effective_session_binding = body.session_binding
+
+    if body.confirmed is not True:
+        blocks.append(_confirm_create_block(
+            "explicit_confirmation_required",
+            "confirmed=true is required before updating an appointment.",
+        ))
+    if proposal.intent != "update_appointment":
+        blocks.append(_confirm_create_block(
+            "invalid_update_source",
+            "The supplied evidence is not an appointment update proposal.",
+        ))
+    if not proposal.safe or proposal.autonomy_tier != "proposal" or not proposal.requires_confirmation:
+        blocks.append(_confirm_create_block(
+            "update_proposal_not_safe",
+            "The update proposal is not safe to confirm.",
+        ))
+
+    try:
+        current_appt = _get_appointment(command.appointment_id, current_user.practice_id, db)
+    except HTTPException:
+        blocks.append(_confirm_create_block(
+            "appointment_not_found",
+            "The appointment in the update proposal could not be found.",
+        ))
+        return _block_bernie_update_confirmation(
+            blocks,
+            warnings=proposal.warnings,
+            audit_evidence=audit_evidence,
+        )
+
+    current_state = _appointment_update_state_payload(current_appt)
+    reference_date = body.turn_ref.reference_date if body.turn_ref is not None else command.appointment_date
+    expected_freshness_id = _compute_update_proposal_freshness_id(
+        current_state=current_state,
+        command=command,
+        reference_date=reference_date,
+    )
+
+    signed_evidence_present = body.signed_confirmation_evidence is not None
+    if not (body.signed_confirmation_evidence_required or signed_evidence_present):
+        blocks.append(_confirm_create_block(
+            "signed_evidence_required",
+            "Signed update confirmation evidence is required.",
+        ))
+    else:
+        expected_signed_payload = _bernie_update_signed_confirmation_payload(
+            practice_id=current_user.practice_id,
+            staff_user_id=current_user.id,
+            turn_ref=body.turn_ref,
+            current_state=current_state,
+            command=command,
+            update_proposal_freshness_id=body.update_proposal_freshness_id,
+            session_binding=effective_session_binding,
+        )
+        signed_result = verify_signed_confirmation_evidence(
+            body.signed_confirmation_evidence,
+            expected_signed_payload,
+            expected_purpose=SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
+        )
+        if signed_result.verified:
+            audit_evidence.append("bernie_signed_confirmation_evidence_verified")
+        else:
+            blocks.append(_confirm_create_block(signed_result.code, signed_result.detail))
+
+    if body.update_proposal_freshness_id is None:
+        blocks.append(_confirm_create_block(
+            "update_proposal_freshness_required",
+            "Update proposal freshness evidence is required.",
+        ))
+    elif body.update_proposal_freshness_id != expected_freshness_id:
+        blocks.append(_confirm_create_block(
+            "stale_update_proposal_freshness_id",
+            "Confirmation blocked: update proposal freshness id does not match current appointment evidence.",
+        ))
+
+    if blocks:
+        return _block_bernie_update_confirmation(
+            blocks,
+            warnings=proposal.warnings,
+            audit_evidence=audit_evidence,
+        )
+
+    revalidated = propose_update_appointment(
+        command.appointment_id,
+        AppointmentUpdateProposalIn(
+            patient_id=command.patient_id,
+            patient_name_provisional=command.patient_name_provisional,
+            practitioner_id=command.practitioner_id,
+            appointment_type_id=command.appointment_type_id,
+            location_id=command.location_id,
+            appointment_date=command.appointment_date,
+            start_time_local=command.start_time_local,
+            duration_minutes=command.duration_minutes,
+            reason=command.reason,
+            notes=command.notes,
+        ),
+        db,
+        current_user,
+    )
+    if (
+        not revalidated.safe
+        or revalidated.autonomy_tier != "proposal"
+        or not revalidated.requires_confirmation
+    ):
+        return _block_bernie_update_confirmation(
+            [
+                _confirm_create_block(
+                    "update_proposal_revalidation_blocked",
+                    "The update proposal is no longer safe to confirm.",
+                ),
+                *revalidated.blocks,
+            ],
+            warnings=[*proposal.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
+    if not _same_update_command(command, revalidated.command):
+        return _block_bernie_update_confirmation(
+            [_confirm_create_block(
+                "update_proposal_revalidation_mismatch",
+                "The revalidated update command does not match the supplied proposal evidence.",
+            )],
+            warnings=[*proposal.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
+
+    confirmed_warnings = [
+        *[issue.code for issue in proposal.warnings],
+        *[issue.code for issue in revalidated.warnings],
+        *body.confirmed_warnings,
+    ]
+    update_body = _update_body_from_command(command)
+    update_body.confirmed_warnings = confirmed_warnings
+    appointment = _apply_appointment_update(
+        command.appointment_id,
+        update_body,
+        db,
+        current_user,
+        audit_evidence=audit_evidence,
+    )
+    return AppointmentConfirmUpdateProposalOut(
+        safe=True,
+        requires_confirmation=False,
+        autonomy_tier="confirmed_write",
+        summary="Confirmed supervised Bernie update proposal and updated one appointment.",
+        appointment=appointment,
+        warnings=[*proposal.warnings, *revalidated.warnings],
+        blocks=[],
+        audit_evidence=audit_evidence,
     )
 
 
@@ -3022,13 +3265,14 @@ def get_appointment(
     return _get_appointment(appointment_id, current_user.practice_id, db)
 
 
-@router.put("/{appointment_id}", response_model=AppointmentOut)
-def update_appointment(
+def _apply_appointment_update(
     appointment_id: uuid.UUID,
     body: AppointmentUpdate,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
-):
+    db: Session,
+    current_user: User,
+    *,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentOut:
     practice_id = current_user.practice_id
     practice_tz = _practice_zoneinfo(db, practice_id)
     appt = _get_appointment(appointment_id, practice_id, db)
@@ -3096,6 +3340,7 @@ def update_appointment(
         action=AppointmentAuditAction.update,
         status_before=status_before_update,
         confirmed_warnings=body.confirmed_warnings,
+        audit_evidence=audit_evidence,
     )
     db.commit()
     out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
@@ -3105,6 +3350,16 @@ def update_appointment(
         location_id=location_id,
     )
     return out
+
+
+@router.put("/{appointment_id}", response_model=AppointmentOut)
+def update_appointment(
+    appointment_id: uuid.UUID,
+    body: AppointmentUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    return _apply_appointment_update(appointment_id, body, db, current_user)
 
 
 @router.get("/{appointment_id}/checkin-defaults", response_model=AppointmentCheckinDefaults)
@@ -5043,6 +5298,125 @@ def _bernie_signed_confirmation_payload(
     if session_binding is not None:
         payload["session_binding"] = session_binding
     return payload
+
+
+def _uuid_or_none(value: Optional[uuid.UUID]) -> Optional[str]:
+    return str(value) if value is not None else None
+
+
+def _time_or_none(value: Optional[time]) -> Optional[str]:
+    return value.isoformat() if value is not None else None
+
+
+def _datetime_or_none(value: Optional[datetime]) -> Optional[str]:
+    return value.isoformat() if value is not None else None
+
+
+def _date_or_none(value: Optional[date_type]) -> Optional[str]:
+    return value.isoformat() if value is not None else None
+
+
+def _appointment_update_state_payload(appt: Appointment) -> dict[str, object]:
+    return {
+        "appointment_id": str(appt.id),
+        "patient_id": _uuid_or_none(appt.patient_id),
+        "patient_name_provisional": appt.patient_name_provisional,
+        "practitioner_id": _uuid_or_none(appt.practitioner_id),
+        "appointment_type_id": _uuid_or_none(appt.appointment_type_id),
+        "location_id": _uuid_or_none(appt.location_id),
+        "appointment_date": _date_or_none(appt.appointment_date),
+        "start_time": _datetime_or_none(appt.start_time),
+        "start_time_local": _time_or_none(appt.start_time_local),
+        "duration_minutes": appt.duration_minutes,
+        "reason": appt.reason,
+        "notes": appt.notes,
+        "status": appt.status.value if appt.status is not None else None,
+    }
+
+
+def _appointment_update_command_payload(command: AppointmentUpdateCommand) -> dict[str, object]:
+    return {
+        "appointment_id": str(command.appointment_id),
+        "patient_id": _uuid_or_none(command.patient_id),
+        "patient_name_provisional": command.patient_name_provisional,
+        "practitioner_id": _uuid_or_none(command.practitioner_id),
+        "appointment_type_id": _uuid_or_none(command.appointment_type_id),
+        "location_id": _uuid_or_none(command.location_id),
+        "appointment_date": command.appointment_date.isoformat(),
+        "start_time": command.start_time.isoformat(),
+        "start_time_local": command.start_time_local.isoformat(),
+        "duration_minutes": command.duration_minutes,
+        "reason": command.reason,
+        "notes": command.notes,
+    }
+
+
+def _compute_update_proposal_freshness_id(
+    *,
+    current_state: dict[str, object],
+    command: AppointmentUpdateCommand,
+    reference_date: date_type,
+) -> str:
+    payload = {
+        "kind": "update_proposal_v1",
+        "current": current_state,
+        "command": _appointment_update_command_payload(command),
+        "reference_date": reference_date.isoformat(),
+    }
+    material = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str)
+    return hashlib.sha256(material.encode("utf-8")).hexdigest()[:32]
+
+
+def _bernie_update_signed_confirmation_payload(
+    *,
+    practice_id: uuid.UUID,
+    staff_user_id: uuid.UUID,
+    turn_ref: Optional[BernieTurnRef],
+    current_state: dict[str, object],
+    command: AppointmentUpdateCommand,
+    update_proposal_freshness_id: Optional[str],
+    session_binding: Optional[dict[str, Any]] = None,
+) -> dict[str, object]:
+    payload: dict[str, object] = {
+        "practice_id": str(practice_id),
+        "staff_user_id": str(staff_user_id),
+        "session_id": turn_ref.session_id if turn_ref is not None else None,
+        "turn_id": turn_ref.turn_id if turn_ref is not None else None,
+        "turn_index": turn_ref.turn_index if turn_ref is not None else None,
+        "reference_date": turn_ref.reference_date.isoformat() if turn_ref is not None else command.appointment_date.isoformat(),
+        "current_appointment": current_state,
+        "command": _appointment_update_command_payload(command),
+        "update_proposal_freshness_id": update_proposal_freshness_id,
+    }
+    if session_binding is not None:
+        payload["session_binding"] = session_binding
+    return payload
+
+
+def _same_update_command(left: AppointmentUpdateCommand, right: AppointmentUpdateCommand) -> bool:
+    left_payload = _appointment_update_command_payload(left)
+    right_payload = _appointment_update_command_payload(right)
+    # start_time is derived from appointment_date/start_time_local and can
+    # round-trip with equivalent timezone text differences. The editable local
+    # coordinates remain the revalidation authority.
+    left_payload.pop("start_time", None)
+    right_payload.pop("start_time", None)
+    return left_payload == right_payload
+
+
+def _update_body_from_command(command: AppointmentUpdateCommand) -> AppointmentUpdate:
+    return AppointmentUpdate(
+        patient_id=command.patient_id,
+        patient_name_provisional=command.patient_name_provisional,
+        practitioner_id=command.practitioner_id,
+        appointment_type_id=command.appointment_type_id,
+        location_id=command.location_id,
+        appointment_date=command.appointment_date,
+        start_time_local=command.start_time_local,
+        duration_minutes=command.duration_minutes,
+        reason=command.reason,
+        notes=command.notes,
+    )
 
 
 def _validate_bernie_session_confirmation_binding(

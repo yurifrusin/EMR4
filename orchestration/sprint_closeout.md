@@ -8,40 +8,41 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint V2: Bernie Visible Tool-Intent UX |
-| Integrated through | Claude route/UI contract plan, Antigravity visible UX plan with Ariadne authority-boundary amendment, Codex invariant plan captured after protocol stop, and Ariadne implementation |
+| Batch | Sprint G1: Unified Diary Update Confirm Grammar |
+| Integrated through | Claude backend/domain plan, Antigravity Diary UX plan with scoped UI amendment, Codex invariant plan, and Ariadne implementation |
 | Status | Integrated and verified locally; push/mirror/audit pending |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- The Diary `Ask Bernie` composer now routes explicit `extend`/`lengthen` requests to the V1 backend tool-intent route instead of forcing them through the booking-slot interpreter.
-- Tool-intent responses render in a separate visible state with latest chat/history preserved, a "Proposed change" status, and a blue appointment-change proposal card.
-- The proposal card is populated from backend `BernieToolIntentOut.proposal.command` plus visible diary appointment context, not from staff/model text.
-- A `Confirm change` button appears only when the backend returns `result="proposal_ready"` with `proposal.safe=true` and an appointment id. Clarification, blocked, unsupported, or text-only responses show no confirm affordance.
-- Confirming an extension sends the backend proposal command to the existing appointment update path. Nothing is changed before staff confirmation.
-- New tool-intent rendering clears stale booking/no-slot UI, so old "no matching times" or booking-prep messages do not bleed into extension clarification states.
-- Added deterministic Diary smoke tests for extension proposal routing/confirm command and missing-duration clarification/no-stale-no-slot rendering.
-- `diary.css` was cache-busted from v131 to v132 and `diary.js` from v160 to v161.
-- No auto-mode, broad edit grammar, GraphRAG retrieval change, persisted PHI/session table, Alembic migration, taskpane, Command Centre, or broad API rewrite was added.
+- Added `POST /api/v1/appointments/proposals/update/confirm`, a signed, evidence-gated confirmation endpoint for Bernie-authored appointment updates/extensions.
+- Extracted the appointment update writer into a shared helper so legacy staff PUT and signed update confirmation use the same mutation/audit core.
+- Extended Bernie signed evidence with a separate update purpose, so create-confirm evidence cannot confirm an update.
+- Bernie tool-intent extension proposals now include `confirm_endpoint`, `confirm_payload`, update freshness id, and signed update confirmation evidence.
+- The signed update payload binds to the current appointment state plus the proposed command. If the appointment changes before confirmation, the confirm blocks as stale/tampered instead of writing.
+- Diary `Confirm change` now posts the signed confirm payload to the update-confirm endpoint and no longer calls raw `PUT /appointments/{id}` for Bernie tool-intent updates.
+- Added adversarial tests for explicit staff confirmation, wrong-purpose evidence, stale appointment state, no mutation before confirm, single audited write, and no stale/no-slot UI.
+- `diary.js` was cache-busted from v161 to v162.
+- No persisted PHI/session table, broad status/cancel/delete grammar, GraphRAG, Alembic migration, taskpane, Command Centre, broad API rewrite, or Bernie auto-mode was added.
 
 ## Verification
 
 - JavaScript syntax check passed: `node --check docs\diary\diary.js`.
-- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py`.
+- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\services\bernie_turn_evidence.py app\services\bernie\evidence.py app\services\bernie\__init__.py app\schemas\appointments.py app\routers\appointments.py`.
 - Frontend asset version check passed: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
 - Tool-intent/update/confirm backend suite passed: `.\.venv\Scripts\pytest.exe tests\test_bernie_tool_intent.py tests\test_appointment_update_proposal.py tests\test_diary_confirm_gate.py -q`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
 - `git diff --check` passed.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for V2; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G1; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. V2 changes live Diary Bernie behaviour, but route selection, proposal rendering, confirm gating, update command submission, stale no-slot clearing, backend proposal boundaries, and deterministic Diary rendering were verified locally. A live human sanity check is still useful later because the user-facing value is conversational, but it is not required to close the sprint.
+No required manual review before moving on. G1 changes a live Diary/Bernie write path, but no-write-before-confirm, signed confirm submission, stale/tampered blocking, bounded audit evidence, and deterministic Diary rendering were verified locally. A live human sanity check is still useful later because the user-facing value is conversational, but it is not required to close the sprint.
 
 ## Not Required Before Moving On
 
 - No broad natural-language edit grammar was implemented beyond explicit `extend`/`lengthen`.
+- Human drag/drop/resize still has the legacy raw PUT compatibility path; it was not migrated in G1.
 - No persisted Bernie session table, Alembic migration, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
 - No model-authored write or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was started.
@@ -49,19 +50,34 @@ No required manual review before moving on. V2 changes live Diary Bernie behavio
 ## Known Follow-Up
 
 - The frontend classifier is intentionally narrow and non-authoritative. Future move/cancel/status tool intents should be added as typed backend/domain actions, not by growing a broad frontend grammar.
-- The confirmation path still uses the existing appointment update PUT pattern. A later native diary-action sprint should move human UI and Bernie updates onto one evidence-gated confirm grammar.
+- Human drag/drop/resize should move to the update-confirm endpoint in a later sprint once the UI can preserve the current fast edit feel with confirm evidence behind the scenes.
 - Appointment edit confirmation should continue to bind to deterministic appointment state and staff confirmation, not model wording or retrieved advisory facts.
 - A later persisted-session sprint should still choose TTL, cleanup, transcript-storage, and concurrency policy before adding PHI-bearing tables.
 
-## Next Sprint Candidate - Unified Diary Action Grammar
+## Next Sprint Candidate - Human Update Confirm Migration
 
 | Item | Value |
 |---|---|
-| Name | G1: Unified diary action grammar / evidence-gated update confirmation |
+| Name | G2: Human diary update confirm route migration |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne orchestration; Claude if quota is available for backend/domain review; Antigravity for visible Diary UX; Codex worker for state/authority invariants |
+| Recommended agents | Codex/Ariadne orchestration; Claude for backend/domain review if quota is available; Antigravity for drag/drop/resize UX; Codex worker for replay/staleness/no-bypass invariants |
 
-V2 proves Bernie can author a visible appointment-extension proposal through the same deterministic update proposal contract as the human UI. The next architectural slice should reduce the remaining asymmetry by moving appointment update confirmation toward one evidence-gated diary action grammar for human UI and Bernie alike.
+G1 moved Bernie-authored extension confirms onto signed update evidence. The next architectural slice should migrate human drag/drop/resize to the same backend confirm grammar while preserving the existing fast diary-edit interaction.
+
+## Previous Closeout - Sprint V2
+
+| Item | Value |
+|---|---|
+| Batch | Sprint V2: Bernie Visible Tool-Intent UX |
+| Integrated through | Claude route/UI contract plan, Antigravity visible UX plan with Ariadne authority-boundary amendment, Codex invariant plan captured after protocol stop, and Ariadne implementation |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
+| Last updated | 2026-07-04 |
+
+V2 routed explicit `extend`/`lengthen` requests from the Diary `Ask Bernie`
+composer to the backend tool-intent route, rendered backend proposal evidence in
+a visible appointment-change card, and prevented clarification/blocked/text-only
+states from showing confirm controls. `diary.css` was cache-busted from v131 to
+v132 and `diary.js` from v160 to v161.
 
 ## Previous Closeout - Sprint V1
 

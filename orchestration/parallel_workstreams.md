@@ -134,11 +134,39 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
-## Sprint V2: Bernie Visible Tool-Intent UX
+## Sprint G1: Unified Diary Update Confirm Grammar
 
 | Item | Value |
 |---|---|
 | Status | Integrated and verified locally; push/mirror/audit pending |
+| Product Goal | Move Bernie-authored appointment extensions from raw update PUT to a backend-owned signed update confirmation grammar |
+| Worker Shape | Claude backend/domain plan, Antigravity Diary UX plan with scoped UI amendment, Codex invariant plan, Ariadne implementation |
+| In Scope | `POST /appointments/proposals/update/confirm`, update-scoped signed evidence, Bernie tool-intent confirm payloads, Diary Confirm change network path, adversarial backend/UI tests |
+| Out Of Scope | Broad diary action grammar for status/cancel/delete, persisted PHI/session table, GraphRAG, broad API rewrite, taskpane/Command Centre, human drag/drop migration off raw PUT |
+| Verification | py_compile; node check; frontend version check; focused tool-intent/update/confirm suites; full deterministic Diary smoke harness; diff check |
+
+Integration notes:
+
+- Bernie tool-intent extension proposals now return a backend-owned
+  `confirm_endpoint`, `confirm_payload`, update freshness id, and
+  update-purpose signed confirmation evidence.
+- `Confirm change` posts that payload to
+  `/appointments/proposals/update/confirm` with explicit staff confirmation.
+  It no longer calls raw `PUT /appointments/{id}`.
+- The confirm endpoint binds evidence to the current appointment state plus the
+  proposed command, revalidates the update against live state, writes once
+  through the shared update helper, and records bounded audit evidence.
+- Missing confirmation, wrong-purpose/tampered signed evidence, and stale
+  current appointment state fail closed without mutating or writing audit rows.
+- The raw staff PUT remains for backward compatibility this sprint; the next
+  native action grammar sprint can migrate human drag/drop/resize onto the same
+  confirm route.
+
+## Sprint V2: Bernie Visible Tool-Intent UX
+
+| Item | Value |
+|---|---|
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
 | Product Goal | Let the visible Diary Ask Bernie composer consume the V1 tool-intent route for appointment extension, showing friendly proposal states while preserving backend proposal evidence as the only source of confirmability |
 | Worker Shape | Claude route/UI contract plan, Antigravity visible UX plan accepted with Ariadne authority-boundary amendment, Codex invariant plan captured after protocol stop, Ariadne implementation |
 | In Scope | `docs/diary/diary.js` tool-intent routing/rendering/confirm guard, `docs/diary/diary.css` proposal card styling, `review/test_diary_smoke.py` route/confirm/stale-state coverage, asset cache-bust |

@@ -8,6 +8,7 @@ legacy flat module. The implementation stays in
 from app.services.bernie_turn_evidence import (
     SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_CONFIRMATION_EVIDENCE_VERSION,
+    SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
     SignedEvidenceResult,
     StalenessResult,
     StalenessVerdict,
@@ -23,6 +24,7 @@ from app.services.bernie_turn_evidence import (
 __all__ = [
     "SIGNED_CONFIRMATION_EVIDENCE_PURPOSE",
     "SIGNED_CONFIRMATION_EVIDENCE_VERSION",
+    "SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE",
     "SignedEvidenceResult",
     "StalenessResult",
     "StalenessVerdict",

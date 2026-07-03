@@ -1,10 +1,10 @@
-# antigravity-sprint-g1-diary-update-confirm-ux-review
+﻿# antigravity-sprint-g1-diary-update-confirm-ux-review
 
 | Item | Value |
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | a1ba67c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-g1-diary-update-confirm-ux-review --summary "Short plan summary"` |

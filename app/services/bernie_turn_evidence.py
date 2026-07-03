@@ -27,6 +27,7 @@ from app.config import settings
 
 SIGNED_CONFIRMATION_EVIDENCE_VERSION = "bernie.confirmation_evidence.v1"
 SIGNED_CONFIRMATION_EVIDENCE_PURPOSE = "bernie_confirm_create_proposal"
+SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE = "bernie_confirm_update_proposal"
 
 
 class StalenessVerdict(str, Enum):
@@ -90,12 +91,13 @@ def _signing_secret(secret: Optional[str] = None) -> str:
 def mint_signed_confirmation_evidence(
     payload: dict[str, Any],
     *,
+    evidence_purpose: str = SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
     secret: Optional[str] = None,
 ) -> dict[str, Any]:
     """Mint a versioned HMAC evidence envelope for Bernie confirmation."""
     material = {
         "schema_version": SIGNED_CONFIRMATION_EVIDENCE_VERSION,
-        "purpose": SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
+        "purpose": evidence_purpose,
         "payload": payload,
     }
     signature = hmac.new(
@@ -110,6 +112,7 @@ def verify_signed_confirmation_evidence(
     evidence: Optional[dict[str, Any]],
     expected_payload: dict[str, Any],
     *,
+    expected_purpose: str = SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
     secret: Optional[str] = None,
 ) -> SignedEvidenceResult:
     """Verify a Bernie confirmation evidence envelope against expected payload."""
@@ -124,7 +127,7 @@ def verify_signed_confirmation_evidence(
     signature = evidence.get("signature")
     if schema_version != SIGNED_CONFIRMATION_EVIDENCE_VERSION:
         return SignedEvidenceResult(False, "signed_evidence_wrong_version", "Signed confirmation evidence version is not supported.")
-    if purpose != SIGNED_CONFIRMATION_EVIDENCE_PURPOSE:
+    if purpose != expected_purpose:
         return SignedEvidenceResult(False, "signed_evidence_wrong_purpose", "Signed confirmation evidence purpose is not valid for this action.")
     if not isinstance(payload, dict) or not isinstance(signature, str) or not signature:
         return SignedEvidenceResult(False, "signed_evidence_malformed", "Signed confirmation evidence is missing payload or signature.")

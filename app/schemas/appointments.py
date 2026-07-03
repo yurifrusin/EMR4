@@ -263,6 +263,30 @@ class AppointmentUpdateProposalOut(BaseModel):
     patient_identity: Literal["linked", "provisional"]
 
 
+class BernieUpdateProposalConfirmationIn(BaseModel):
+    """Explicit staff confirmation for backend-prepared Bernie update evidence."""
+    confirmed: bool = False
+    update_proposal: AppointmentUpdateProposalOut
+    confirmed_warnings: list[str] = Field(default_factory=list)
+    turn_ref: Optional["BernieTurnRef"] = None
+    update_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
+    session_binding: Optional[dict[str, Any]] = None
+
+
+class AppointmentConfirmUpdateProposalOut(BaseModel):
+    intent: Literal["confirm_update_appointment"] = "confirm_update_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["confirmed_write", "blocked"]
+    summary: str
+    appointment: Optional[AppointmentOut] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    audit_evidence: list[str] = Field(default_factory=list)
+
+
 class BernieToolIntentIn(BaseModel):
     """Raw Bernie reception-tool intake for non-booking diary actions.
 
@@ -285,6 +309,11 @@ class BernieToolIntentOut(BaseModel):
     requires_confirmation: bool
     summary: str
     proposal: Optional[AppointmentUpdateProposalOut] = None
+    confirm_endpoint: Optional[str] = None
+    confirm_payload: Optional[dict[str, Any]] = None
+    update_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
     source_attribution: dict[str, Any] = Field(default_factory=dict)

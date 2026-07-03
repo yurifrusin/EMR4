@@ -1,10 +1,10 @@
-# codex-sprint-g1-update-confirm-invariants
+﻿# codex-sprint-g1-update-confirm-invariants
 
 | Item | Value |
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | a1ba67c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-g1-update-confirm-invariants --summary "Short plan summary"` |
@@ -90,5 +90,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/codex-sprint-g1-update-confirm-invariants.md`
+  - `orchestration/agent_inbox/codex/plan-codex-codex-sprint-g1-update-confirm-invariants.md`
 - Verification run:
+  - Planning mode only; read `AGENTS.md`, `orchestration/parallel_workstreams.md`, `orchestration/sprint_closeout.md`, and the task packet.
+  - Ran required `handin --agent codex` with explicit venv Python path from `C:\Users\sarashera\EMR4-worktrees\codex`; succeeded and fast-forward state was already current at `5eb771b`.
+  - Ran required `plan --agent codex --task codex-sprint-g1-update-confirm-invariants ...`; succeeded and wrote the implementation-plan packet.
+  - No production code or tests were edited or run.
 - Remaining risks:
+  - Implementation decision still needed: add a native update-confirm endpoint/evidence envelope, or keep raw PUT as a bounded staff-only compatibility write while proving Bernie/model text cannot use it as confirmation authority.
+  - Later implementation must run the focused backend/UI checks named in the plan before merge.
