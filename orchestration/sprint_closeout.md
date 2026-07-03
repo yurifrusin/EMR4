@@ -8,41 +8,45 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint G3: Edit Modal Update Confirm Migration |
-| Integrated through | Claude edit-modal plan, Codex invariant plan, and Ariadne implementation |
-| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
+| Batch | Sprint G4: Human Create Modal Create Confirm Migration |
+| Integrated through | Claude create-confirm plan, Codex invariant plan, Antigravity lane superseded, and Ariadne implementation |
+| Status | Integrated and verified locally; push, mirror, audit, Pages check, and notification pending |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- The Diary edit-booking modal now fetches a fresh update proposal for edit-mode Save and commits appointment-detail changes through the signed `/appointments/proposals/update/confirm` route when the backend returns a confirm envelope.
-- The status dropdown remains a separate attendance/status transition: `PATCH /appointments/{id}/status` runs only after the signed detail update succeeds and only when the requested status differs from the original status.
-- A failed/stale/blocked signed detail confirm now stops before the status PATCH, avoiding partial detail/status divergence.
-- The raw `PUT /appointments/{id}` path remains only as a bounded old-backend compatibility fallback when no signed confirm envelope is available.
-- Added deterministic Diary smoke assertions proving edit-modal Save uses signed confirm instead of raw PUT, preserves the separate status PATCH, and does not patch status after a rejected detail confirm.
-- `diary.js` was cache-busted from v163 to v164.
+- Safe human create-booking proposals now return a neutral staff create-confirm envelope: `confirm_endpoint`, `confirm_payload`, a create proposal freshness id, and signed confirmation evidence with purpose `staff_confirm_create_proposal`.
+- Added `POST /api/v1/appointments/proposals/create/confirm` for staff-authored create proposals. It requires explicit confirmation, verifies signed evidence, checks freshness, revalidates the create command against current diary state, and writes exactly one appointment only on `confirmed_write`.
+- The Diary create-booking modal now fetches a fresh create proposal for final Save in ordinary mode and posts the signed create-confirm payload when available.
+- The status dropdown remains a separate attendance/status transition: `PATCH /appointments/{id}/status` runs only after the signed create-confirm succeeds and returns an appointment id.
+- A failed/stale/blocked signed create-confirm now stops before the status PATCH, avoiding partial create/status divergence.
+- The raw `POST /appointments` path remains as a bounded authenticated compatibility fallback only when the backend does not return a create-confirm envelope.
+- Added backend and deterministic Diary smoke assertions proving signed create-confirm is used, raw create POST is bypassed in signed-capable mode, and failed create-confirm does not patch status.
+- `diary.js` was cache-busted from v164 to v165.
 - No persisted PHI/session table, broad status/cancel/delete grammar, GraphRAG, Alembic migration, taskpane, Command Centre, broad API rewrite, or Bernie auto-mode was added.
 
 ## Verification
 
 - JavaScript syntax check passed: `node --check docs\diary\diary.js`.
-- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile scripts\agent_worktrees.py`.
+- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py app\services\bernie_turn_evidence.py app\services\bernie\evidence.py app\services\bernie\__init__.py`.
 - Frontend asset version check passed: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
-- Focused G3/G2 signed-confirm smoke passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q -k "edit_modal_uses_signed_update_confirm_before_status_patch or edit_modal_does_not_patch_status_when_signed_update_confirm_fails or human_drag_resize_uses_signed_update_confirm_route"`.
-- Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
+- Focused backend create-confirm suite passed: `.\.venv\Scripts\pytest.exe tests\test_appointment_proposals.py -q`.
+- Adjacent backend confirm suites passed: `.\.venv\Scripts\pytest.exe tests\test_appointment_proposals.py tests\test_bernie_confirm_create_proposal.py tests\test_diary_confirm_gate.py -q`.
+- Focused G4/G3 status-boundary smoke passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q -k "create_modal_uses_signed_create_confirm_before_status_patch or create_modal_does_not_patch_status_when_signed_create_confirm_fails or edit_modal_uses_signed_update_confirm_before_status_patch or edit_modal_does_not_patch_status_when_signed_update_confirm_fails"`.
+- Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
 - `git diff --check` passed.
-- Post-push orchestration audit passed: `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` are all aligned at the current Sprint G3 closeout HEAD.
-- Live GitHub Pages check passed: `diary.html` is serving `diary.js?v=164`.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G3; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
+- Post-push orchestration audit: pending.
+- Live GitHub Pages check for `diary.js?v=165`: pending.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G4; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. G3 changes a live edit-modal write path, but the signed confirm route, no raw PUT from signed-capable edit saves, separate status PATCH, failed-confirm/no-status-patch invariant, and deterministic Diary rendering were verified locally. A live edit-modal sanity check is still useful later, but it is not required to close the sprint.
+No required manual review before moving on. G4 changes a live create-modal write path, but the signed create-confirm route, no raw POST from signed-capable create saves, separate status PATCH, failed-confirm/no-status-patch invariant, and deterministic Diary rendering were verified locally. A live create-modal sanity check is still useful later, but it is not required to close the sprint.
 
 ## Not Required Before Moving On
 
 - No broad natural-language edit grammar was implemented beyond explicit `extend`/`lengthen`.
-- Create, delete/cancel, status grammar, and raw PUT endpoint retirement were not migrated in G3.
+- Delete/cancel and status-specific write surfaces have not yet been migrated to signed confirm routes.
 - No persisted Bernie session table, Alembic migration, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
 - No model-authored write or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was started.
@@ -51,18 +55,34 @@ No required manual review before moving on. G3 changes a live edit-modal write p
 
 - The frontend classifier is intentionally narrow and non-authoritative. Future move/cancel/status tool intents should be added as typed backend/domain actions, not by growing a broad frontend grammar.
 - Appointment edit confirmation should continue to bind to deterministic appointment state and staff confirmation, not model wording or retrieved advisory facts.
-- Create, cancel/delete, and status-specific write surfaces should migrate in similarly narrow slices before considering raw PUT endpoint retirement.
+- Cancel/delete and status-specific write surfaces should migrate in similarly narrow slices before considering raw endpoint retirement.
 - A later persisted-session sprint should still choose TTL, cleanup, transcript-storage, and concurrency policy before adding PHI-bearing tables.
 
-## Next Sprint Candidate - Create/Cancel/Status Confirm Surface Or Diary Domain Module Tail
+## Next Sprint Candidate - Cancel/Status Confirm Surface Or Diary Domain Module Tail
 
 | Item | Value |
 |---|---|
-| Name | G4: Continue signed-confirm migration for remaining diary write surfaces, or return to the bounded Diary domain module tail |
+| Name | G5: Continue signed-confirm migration for cancel/status surfaces, or return to the bounded Diary domain module tail |
 | Status | Recommended, not launched |
 | Recommended agents | Codex/Ariadne orchestration; Claude if quota is available for backend/domain review; Antigravity only for visible Diary UX review; Codex worker for invariants |
 
-G1-G3 moved Bernie tool-intent update confirms, human drag/resize, and edit-modal detail saves onto signed update evidence. The next narrow slice can continue this pattern for create/cancel/status surfaces, or return to the bounded Diary domain module tail now that the main update paths share the same confirmation spine.
+G1-G4 moved Bernie tool-intent update confirms, human drag/resize, edit-modal detail saves, and human create-modal saves onto signed evidence. The next narrow slice can continue this pattern for cancel/delete and status-specific surfaces, or return to the bounded Diary domain module tail now that create/update paths share the same confirmation spine.
+
+## Previous Closeout - Sprint G3
+
+| Item | Value |
+|---|---|
+| Batch | Sprint G3: Edit Modal Update Confirm Migration |
+| Integrated through | Claude edit-modal plan, Codex invariant plan, and Ariadne implementation |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
+| Last updated | 2026-07-04 |
+
+G3 moved the Diary edit-booking modal onto fresh signed update proposals for
+edit-mode Save, preserved status changes as a separate
+`PATCH /appointments/{id}/status`, and added deterministic smoke coverage for
+signed update confirm, no raw PUT from signed-capable edit saves, and
+failed-confirm/no-status-patch behavior. `diary.js` was cache-busted from v163
+to v164.
 
 ## Previous Closeout - Sprint G2
 

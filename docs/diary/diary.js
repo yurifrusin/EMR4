@@ -7107,7 +7107,7 @@ async function saveBooking() {
 
     const isConfirmed = saveBtn.dataset.confirmed === "true";
     let proposal = null;
-    const needsProposal = editingAppointmentId || !isConfirmed;
+    const needsProposal = editingAppointmentId || !isConfirmed || !isSmokeMode;
     if (needsProposal) {
       if (isSmokeMode) {
         proposal = simulateProposal(payload);
@@ -7264,32 +7264,55 @@ async function saveBooking() {
         };
         mockAppointmentsCache.push(newAppt);
       } else {
-        const createPayload = {
-          practitioner_id: practitioner.id,
-          appointment_type_id: typeId,
-          appointment_date: dateVal,
-          start_time_local: timeVal,
-          duration_minutes: duration,
-          reason: reason,
-        };
-        if (activeLocationId) {
-          createPayload.location_id = activeLocationId;
-        }
-        if (selectedPatient) {
-          createPayload.patient_id = selectedPatient.id;
+        const confirmedWarnings = (proposal?.warnings || []).map(issue => issue.code).filter(Boolean);
+        const confirmEndpoint = proposal?.confirm_endpoint;
+        const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
+        let createRes;
+        if (confirmEndpoint && confirmPayload) {
+          confirmPayload.confirmed = true;
+          confirmPayload.confirmed_warnings = Array.from(new Set([
+            ...(confirmPayload.confirmed_warnings || []),
+            ...confirmedWarnings
+          ]));
+          createRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+            method: "POST",
+            body: JSON.stringify(confirmPayload)
+          });
         } else {
-          createPayload.patient_id = null;
-          createPayload.patient_name_provisional = provisionalName;
+          const createPayload = {
+            practitioner_id: practitioner.id,
+            appointment_type_id: typeId,
+            appointment_date: dateVal,
+            start_time_local: timeVal,
+            duration_minutes: duration,
+            reason: reason,
+          };
+          if (activeLocationId) {
+            createPayload.location_id = activeLocationId;
+          }
+          if (selectedPatient) {
+            createPayload.patient_id = selectedPatient.id;
+          } else {
+            createPayload.patient_id = null;
+            createPayload.patient_name_provisional = provisionalName;
+          }
+          createRes = await apiFetch(`/appointments`, {
+            method: "POST",
+            body: JSON.stringify(createPayload)
+          });
         }
-
-        const createRes = await apiFetch(`/appointments`, {
-          method: "POST",
-          body: JSON.stringify(createPayload)
-        });
         if (!createRes.ok) {
           throw new Error(await apiErrorMessage(createRes, "Create"));
         }
-        const newApptObj = await createRes.json();
+        const createResult = await createRes.json();
+        if (confirmEndpoint && (createResult?.safe !== true || createResult?.autonomy_tier !== "confirmed_write")) {
+          const issue = (createResult?.blocks || [])[0];
+          throw new Error(issue?.message || createResult?.summary || "The appointment could not be confirmed.");
+        }
+        const newApptObj = confirmEndpoint ? createResult.appointment : createResult;
+        if (!newApptObj || !newApptObj.id) {
+          throw new Error("Create response did not include an appointment id.");
+        }
 
         if (statusToSend !== "Booked") {
           const statusRes = await apiFetch(`/appointments/${newApptObj.id}/status`, {

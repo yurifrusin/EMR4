@@ -6980,6 +6980,276 @@ def test_edit_modal_does_not_patch_status_when_signed_update_confirm_fails(diary
     assert captured_status_patches == []
 
 
+def test_create_modal_uses_signed_create_confirm_before_status_patch(diary_page):
+    """Create modal writes through signed create-confirm, then patches non-Booked status separately."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_proposals = []
+    captured_confirms = []
+    captured_status_patches = []
+    captured_raw_posts = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/create"):
+            body = request.post_data_json
+            captured_proposals.append(body)
+            command = {
+                "patient_id": body.get("patient_id"),
+                "patient_name_provisional": body.get("patient_name_provisional"),
+                "practitioner_id": body["practitioner_id"],
+                "appointment_type_id": body.get("appointment_type_id"),
+                "location_id": body.get("location_id"),
+                "appointment_date": body["appointment_date"],
+                "start_time": "2026-07-03T05:00:00Z",
+                "start_time_local": body["start_time_local"],
+                "duration_minutes": body["duration_minutes"],
+                "reason": body.get("reason") or "",
+                "notes": None,
+                "booked_via": "Receptionist",
+            }
+            proposal = {
+                "intent": "create_appointment",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "proposal",
+                "summary": "Create booking.",
+                "command": command,
+                "warnings": [],
+                "blocks": [],
+                "conflict": None,
+                "breaks_overlap": [],
+                "patient_identity": "linked",
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "create_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "create_proposal_freshness_id": "create-fresh-1",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "staff_confirm_create_proposal",
+                            "payload": {"fixture": "create-modal"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                    "create_proposal_freshness_id": "create-fresh-1",
+                    "signed_confirmation_evidence_required": True,
+                    "signed_confirmation_evidence": {
+                        "schema_version": "bernie.confirmation_evidence.v1",
+                        "purpose": "staff_confirm_create_proposal",
+                        "payload": {"fixture": "create-modal"},
+                        "signature": "signed",
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/create/confirm"):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_create_appointment",
+                    "safe": True,
+                    "requires_confirmation": False,
+                    "autonomy_tier": "confirmed_write",
+                    "summary": "Created.",
+                    "appointment": {"id": "appt-create-1", "status": "Booked"},
+                    "warnings": [],
+                    "blocks": [],
+                    "audit_evidence": ["staff_confirm_create_proposal"],
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments"):
+            captured_raw_posts.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "raw POST should not be used"}))
+            return
+        if request.method == "PATCH" and request.url.endswith("/appointments/appt-create-1/status"):
+            captured_status_patches.append(request.post_data_json)
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"id": "appt-create-1", "status": request.post_data_json.get("status")}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              diaryDate = new Date(2026, 6, 3);
+              activeTemplate = {
+                columns: [{
+                  practitioner_ahpra: "MED0001234567",
+                  room_label: "Room 1",
+                  assignment: "Dr Alex Shera",
+                  slot_interval_minutes: 15
+                }],
+                slot_defaults: { interval_minutes: 15 }
+              };
+              activeTypes = [{ id: "type-1", name: "Standard", default_duration: 15 }];
+              activeLocationId = "loc-1";
+              ahpraToPractitionerMap["MED0001234567"] = {
+                id: "practitioner-123",
+                first_name: "Alex",
+                last_name: "Shera",
+                ahpra_number: "MED0001234567"
+              };
+              openBookingModalForCreate(activeTemplate.columns[0], "15:00");
+              selectedPatient = { id: "patient-123", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" };
+              document.getElementById("booking-type").value = "type-1";
+              document.getElementById("booking-status").value = "Arrived";
+              window.__g4SavePromise = saveBooking();
+            }"""
+        )
+        diary_page.wait_for_timeout(1000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_proposals, "Expected create proposal request"
+    assert captured_confirms, "Expected signed create-confirm request"
+    assert captured_raw_posts == []
+    assert captured_status_patches, "Expected status PATCH after confirmed create"
+    assert captured_confirms[0]["confirmed"] is True
+    assert captured_confirms[0]["create_proposal"]["command"]["duration_minutes"] == 15
+    assert captured_status_patches[0]["status"] == "Arrived"
+
+
+def test_create_modal_does_not_patch_status_when_signed_create_confirm_fails(diary_page):
+    """A rejected signed create-confirm must stop before status-after-create."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_confirms = []
+    captured_status_patches = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/create"):
+            body = request.post_data_json
+            proposal = {
+                "intent": "create_appointment",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "proposal",
+                "summary": "Create booking.",
+                "command": {
+                    "patient_id": body.get("patient_id"),
+                    "patient_name_provisional": body.get("patient_name_provisional"),
+                    "practitioner_id": body["practitioner_id"],
+                    "appointment_type_id": body.get("appointment_type_id"),
+                    "location_id": body.get("location_id"),
+                    "appointment_date": body["appointment_date"],
+                    "start_time": "2026-07-03T05:00:00Z",
+                    "start_time_local": body["start_time_local"],
+                    "duration_minutes": body["duration_minutes"],
+                    "reason": body.get("reason") or "",
+                    "notes": None,
+                    "booked_via": "Receptionist",
+                },
+                "warnings": [],
+                "blocks": [],
+                "patient_identity": "linked",
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    **proposal,
+                    "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm",
+                    "confirm_payload": {
+                        "confirmed": False,
+                        "create_proposal": proposal,
+                        "confirmed_warnings": [],
+                        "create_proposal_freshness_id": "create-fresh-fail",
+                        "signed_confirmation_evidence": {
+                            "schema_version": "bernie.confirmation_evidence.v1",
+                            "purpose": "staff_confirm_create_proposal",
+                            "payload": {"fixture": "create-modal-fail"},
+                            "signature": "signed",
+                        },
+                        "signed_confirmation_evidence_required": True,
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/create/confirm"):
+            captured_confirms.append(request.post_data_json)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "confirm_create_appointment",
+                    "safe": False,
+                    "requires_confirmation": True,
+                    "autonomy_tier": "blocked",
+                    "summary": "Create no longer matches current diary state.",
+                    "appointment": None,
+                    "blocks": [{"code": "stale_create_proposal_freshness_id", "message": "Create no longer matches current diary state."}],
+                    "warnings": [],
+                }),
+            )
+            return
+        if request.method == "PATCH" and "/appointments/" in request.url and request.url.endswith("/status"):
+            captured_status_patches.append(request.post_data_json)
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "status should not be patched"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              diaryDate = new Date(2026, 6, 3);
+              activeTemplate = {
+                columns: [{
+                  practitioner_ahpra: "MED0001234567",
+                  room_label: "Room 1",
+                  assignment: "Dr Alex Shera",
+                  slot_interval_minutes: 15
+                }],
+                slot_defaults: { interval_minutes: 15 }
+              };
+              activeTypes = [{ id: "type-1", name: "Standard", default_duration: 15 }];
+              activeLocationId = "loc-1";
+              ahpraToPractitionerMap["MED0001234567"] = {
+                id: "practitioner-123",
+                first_name: "Alex",
+                last_name: "Shera",
+                ahpra_number: "MED0001234567"
+              };
+              openBookingModalForCreate(activeTemplate.columns[0], "15:00");
+              selectedPatient = { id: "patient-123", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" };
+              document.getElementById("booking-type").value = "type-1";
+              document.getElementById("booking-status").value = "Arrived";
+              window.__g4SavePromise = saveBooking();
+            }"""
+        )
+        diary_page.wait_for_timeout(1000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_confirms, "Expected signed create-confirm request"
+    assert captured_status_patches == []
+
+
 def test_bernie_tool_intent_clarification_has_no_confirm_or_stale_no_slot(diary_page):
     """Incomplete tool-intent responses render as clarification, not stale booking/no-slot UI."""
     import urllib.parse

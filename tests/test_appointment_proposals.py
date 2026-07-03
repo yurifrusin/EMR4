@@ -8,11 +8,12 @@ from datetime import date, datetime, time, timezone
 
 import pytest
 
-from app.models.appointments import Appointment, AppointmentStatus, BookingChannel
+from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
 from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate
 from tests.conftest import make_token
 
 PROPOSAL_URL = "/api/v1/appointments/proposals/create"
+CONFIRM_URL = "/api/v1/appointments/proposals/create/confirm"
 TODAY = date.today()
 THURSDAY = date(2026, 6, 25)
 
@@ -31,6 +32,16 @@ def _post_proposal(client, token, body: dict):
     return client.post(
         PROPOSAL_URL,
         json=body,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+
+def _confirm_proposal(client, token, proposal: dict, *, confirmed: bool = True):
+    payload = proposal["confirm_payload"]
+    payload["confirmed"] = confirmed
+    return client.post(
+        CONFIRM_URL,
+        json=payload,
         headers={"Authorization": f"Bearer {token}"},
     )
 
@@ -107,7 +118,61 @@ def test_create_proposal_returns_typed_command_without_mutating(
     assert data["blocks"] == []
     assert data["command"]["patient_id"] == str(patient.id)
     assert data["command"]["appointment_date"] == THURSDAY.isoformat()
+    assert data["confirm_endpoint"] == "/api/v1/appointments/proposals/create/confirm"
+    assert data["confirm_payload"]["confirmed"] is False
+    assert data["confirm_payload"]["create_proposal_freshness_id"] == data["create_proposal_freshness_id"]
+    assert data["signed_confirmation_evidence_required"] is True
+    assert data["signed_confirmation_evidence"]["purpose"] == "staff_confirm_create_proposal"
     assert db.query(Appointment).count() == before
+
+
+def test_create_confirm_route_writes_once_with_signed_evidence(
+        client, db, gp_user, patient, practitioner):
+    token = make_token(gp_user)
+    proposal_resp = _post_proposal(client, token, _base_body(patient, practitioner))
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    proposal = proposal_resp.json()
+    before_appts = db.query(Appointment).count()
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = _confirm_proposal(client, token, proposal)
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "confirmed_write"
+    assert data["appointment"]["id"]
+    assert "staff_confirm_create_proposal" in data["audit_evidence"]
+    assert "staff_signed_confirmation_evidence_verified" in data["audit_evidence"]
+    assert db.query(Appointment).count() == before_appts + 1
+    assert db.query(AppointmentAuditLog).count() == before_audits + 1
+
+
+def test_create_confirm_route_blocks_tampered_evidence_without_write(
+        client, db, gp_user, patient, practitioner):
+    token = make_token(gp_user)
+    proposal_resp = _post_proposal(client, token, _base_body(patient, practitioner))
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    proposal = proposal_resp.json()
+    payload = proposal["confirm_payload"]
+    payload["confirmed"] = True
+    payload["create_proposal"]["command"]["duration_minutes"] = 30
+    before_appts = db.query(Appointment).count()
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert any(block["code"] in {"signed_evidence_mismatch", "stale_create_proposal_freshness_id"} for block in data["blocks"])
+    assert db.query(Appointment).count() == before_appts
+    assert db.query(AppointmentAuditLog).count() == before_audits
 
 
 def test_create_proposal_reports_conflict_without_409(

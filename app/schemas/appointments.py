@@ -206,6 +206,21 @@ class AppointmentCreateProposalOut(BaseModel):
     conflict: Optional[AppointmentConflictBrief] = None
     breaks_overlap: list[str] = Field(default_factory=list)
     patient_identity: Literal["linked", "provisional"]
+    confirm_endpoint: Optional[str] = None
+    confirm_payload: Optional[dict[str, Any]] = None
+    create_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
+
+
+class AppointmentCreateProposalConfirmationIn(BaseModel):
+    """Explicit staff confirmation for a backend-prepared human create proposal."""
+    confirmed: bool = False
+    create_proposal: AppointmentCreateProposalOut
+    confirmed_warnings: list[str] = Field(default_factory=list)
+    create_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[dict[str, Any]] = None
+    signed_confirmation_evidence_required: bool = False
 
 
 class AppointmentConfirmCreateProposalOut(BaseModel):

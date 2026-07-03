@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 1e49398 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-g4-create-confirm-invariants --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/agent_inbox/codex/codex-sprint-g4-create-confirm-invariants.md`; `orchestration/agent_inbox/codex/plan-codex-codex-sprint-g4-create-confirm-invariants.md`.
+- Verification run: Read `AGENTS.md`, `orchestration/parallel_workstreams.md`, `orchestration/sprint_closeout.md`, and this task packet; inspected the existing create proposal/confirm route, schema, diary create Save branch, and adjacent tests with `rg`/targeted file reads; plan packet captured with the explicit venv Python path. `git diff --check` to be run before submit.
+- Remaining risks: Implementation must choose whether to reuse the Bernie-named create-confirm route or add a neutral staff-create-confirm alias/input without duplicating validation; direct POST compatibility must be tightly bounded so the signed-capable create UI cannot silently bypass confirm evidence; status-after-create must remain a separate PATCH that only runs after confirmed create success.

@@ -25,6 +25,7 @@ from app.schemas.appointments import (
     AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
     AppointmentCheckinDefaults, AppointmentConflictBrief, AppointmentCreateCommand,
     AppointmentCreateProposalOut, AppointmentConfirmCreateProposalOut, AppointmentProposalIssue,
+    AppointmentCreateProposalConfirmationIn,
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
     AppointmentConfirmUpdateProposalOut, BernieUpdateProposalConfirmationIn,
     AppointmentStatusProposalIn, AppointmentStatusCommand, AppointmentStatusProposalOut,
@@ -63,6 +64,7 @@ from app.services.bernie import (
     compute_proposal_freshness_id,
     mint_signed_confirmation_evidence,
     verify_signed_confirmation_evidence,
+    SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
     check_staleness,
     mint_session_id,
@@ -138,6 +140,11 @@ _BERNIE_CONFIRM_CREATE_BASE_EVIDENCE = [
     "source_create_proposal",
 ]
 
+_STAFF_CONFIRM_CREATE_BASE_EVIDENCE = [
+    "staff_confirm_create_proposal",
+    "source_create_proposal",
+]
+
 _BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE = [
     "bernie_confirm_update_proposal",
     "source_update_proposal",
@@ -146,11 +153,13 @@ _BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE = [
 
 _BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE = [
     "bernie_signed_confirmation_evidence_verified",
+    "staff_signed_confirmation_evidence_verified",
     "legacy_unsigned_confirmation_compat",
 ]
 
 BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
     *_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE,
+    *_STAFF_CONFIRM_CREATE_BASE_EVIDENCE,
     *_BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE,
     *_BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE,
     *BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES.values(),
@@ -932,13 +941,14 @@ def propose_create_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    return _build_create_appointment_proposal(body, db, current_user.practice_id)
+    return _build_create_appointment_proposal(body, db, current_user.practice_id, current_user=current_user)
 
 
 def _build_create_appointment_proposal(
     body: AppointmentCreate,
     db: Session,
     practice_id: uuid.UUID,
+    current_user: Optional[User] = None,
 ) -> AppointmentCreateProposalOut:
     practice_tz = _practice_zoneinfo(db, practice_id)
     values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
@@ -1013,7 +1023,7 @@ def _build_create_appointment_proposal(
     else:
         summary += " Staff confirmation is required before creating the booking."
 
-    return AppointmentCreateProposalOut(
+    response = AppointmentCreateProposalOut(
         safe=safe,
         requires_confirmation=requires_confirmation,
         autonomy_tier=autonomy_tier,
@@ -1024,6 +1034,190 @@ def _build_create_appointment_proposal(
         conflict=conflict_brief,
         breaks_overlap=breaks_overlap,
         patient_identity=patient_identity,
+    )
+    if safe and current_user is not None:
+        create_proposal_freshness_id = _compute_create_proposal_freshness_id(
+            command=response.command,
+            reference_date=response.command.appointment_date,
+        )
+        signed_payload = _staff_create_signed_confirmation_payload(
+            practice_id=practice_id,
+            staff_user_id=current_user.id,
+            command=response.command,
+            create_proposal_freshness_id=create_proposal_freshness_id,
+        )
+        signed_confirmation_evidence = mint_signed_confirmation_evidence(
+            signed_payload,
+            evidence_purpose=SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
+        )
+        response.confirm_endpoint = "/api/v1/appointments/proposals/create/confirm"
+        response.create_proposal_freshness_id = create_proposal_freshness_id
+        response.signed_confirmation_evidence = signed_confirmation_evidence
+        response.signed_confirmation_evidence_required = True
+        response.confirm_payload = {
+            "confirmed": False,
+            "create_proposal": _create_proposal_evidence_payload(response),
+            "confirmed_warnings": [issue.code for issue in warnings],
+            "create_proposal_freshness_id": create_proposal_freshness_id,
+            "signed_confirmation_evidence": signed_confirmation_evidence,
+            "signed_confirmation_evidence_required": True,
+        }
+    return response
+
+
+def _block_create_confirmation(
+    blocks: list[AppointmentProposalIssue],
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+    audit_evidence: Optional[list[str]] = None,
+) -> AppointmentConfirmCreateProposalOut:
+    return AppointmentConfirmCreateProposalOut(
+        safe=False,
+        requires_confirmation=True,
+        autonomy_tier="blocked",
+        summary="Cannot confirm create proposal. See blocked issues.",
+        appointment=None,
+        warnings=warnings or [],
+        blocks=blocks,
+        audit_evidence=audit_evidence or [],
+    )
+
+
+@router.post(
+    "/proposals/create/confirm",
+    response_model=AppointmentConfirmCreateProposalOut,
+)
+def confirm_create_proposal_route(
+    body: AppointmentCreateProposalConfirmationIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    audit_evidence = list(_STAFF_CONFIRM_CREATE_BASE_EVIDENCE)
+    blocks: list[AppointmentProposalIssue] = []
+    create_proposal = body.create_proposal
+
+    if body.confirmed is not True:
+        blocks.append(_confirm_create_block(
+            "explicit_confirmation_required",
+            "confirmed=true is required before creating an appointment.",
+        ))
+
+    if (
+        not create_proposal.safe
+        or create_proposal.autonomy_tier != "proposal"
+        or not create_proposal.requires_confirmation
+    ):
+        blocks.append(_confirm_create_block(
+            "create_proposal_not_safe",
+            "The create proposal is not safe to confirm.",
+        ))
+
+    submitted_freshness_id = body.create_proposal_freshness_id or create_proposal.create_proposal_freshness_id
+    expected_freshness_id = _compute_create_proposal_freshness_id(
+        command=create_proposal.command,
+        reference_date=create_proposal.command.appointment_date,
+    )
+    signed_evidence_present = body.signed_confirmation_evidence is not None
+    if not (body.signed_confirmation_evidence_required or signed_evidence_present):
+        blocks.append(_confirm_create_block(
+            "signed_evidence_required",
+            "Signed confirmation evidence is required before creating this appointment.",
+        ))
+    else:
+        expected_signed_payload = _staff_create_signed_confirmation_payload(
+            practice_id=current_user.practice_id,
+            staff_user_id=current_user.id,
+            command=create_proposal.command,
+            create_proposal_freshness_id=submitted_freshness_id,
+        )
+        signed_result = verify_signed_confirmation_evidence(
+            body.signed_confirmation_evidence,
+            expected_signed_payload,
+            expected_purpose=SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
+        )
+        if signed_result.verified:
+            audit_evidence.append("staff_signed_confirmation_evidence_verified")
+        else:
+            blocks.append(_confirm_create_block(signed_result.code, signed_result.detail))
+
+    if submitted_freshness_id != expected_freshness_id:
+        blocks.append(_confirm_create_block(
+            "stale_create_proposal_freshness_id",
+            "Confirmation blocked: create proposal freshness id does not match current evidence.",
+        ))
+
+    if blocks:
+        return _block_create_confirmation(
+            blocks,
+            warnings=create_proposal.warnings,
+            audit_evidence=audit_evidence,
+        )
+
+    entity_blocks = _check_create_command_entities(
+        create_proposal.command,
+        current_user.practice_id,
+        db,
+    )
+    if entity_blocks:
+        return _block_create_confirmation(
+            entity_blocks,
+            warnings=create_proposal.warnings,
+            audit_evidence=audit_evidence,
+        )
+
+    create_body = _create_body_from_command(create_proposal.command)
+    revalidated = _build_create_appointment_proposal(
+        create_body,
+        db,
+        current_user.practice_id,
+    )
+    if (
+        not revalidated.safe
+        or revalidated.autonomy_tier != "proposal"
+        or not revalidated.requires_confirmation
+    ):
+        return _block_create_confirmation(
+            [
+                _confirm_create_block(
+                    "create_proposal_revalidation_blocked",
+                    "The create proposal is no longer safe to confirm.",
+                ),
+                *revalidated.blocks,
+            ],
+            warnings=[*create_proposal.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
+
+    if not _same_create_command(create_proposal.command, revalidated.command):
+        return _block_create_confirmation(
+            [_confirm_create_block(
+                "create_proposal_revalidation_mismatch",
+                "The revalidated create command does not match the supplied proposal evidence.",
+            )],
+            warnings=[*create_proposal.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
+
+    confirmed_warnings = [
+        *[issue.code for issue in create_proposal.warnings],
+        *[issue.code for issue in revalidated.warnings],
+        *body.confirmed_warnings,
+    ]
+    appointment = _create_appointment_from_body(
+        create_body,
+        db,
+        current_user,
+        confirmed_warnings=confirmed_warnings,
+        audit_evidence=audit_evidence,
+    )
+    return AppointmentConfirmCreateProposalOut(
+        safe=True,
+        requires_confirmation=False,
+        autonomy_tier="confirmed_write",
+        summary="Confirmed create proposal and created one appointment.",
+        appointment=appointment,
+        warnings=[*create_proposal.warnings, *revalidated.warnings],
+        blocks=[],
+        audit_evidence=audit_evidence,
     )
 
 
@@ -5252,6 +5446,66 @@ def _create_body_from_command(command: AppointmentCreateCommand) -> AppointmentC
         notes=command.notes,
         booked_via=command.booked_via,
     )
+
+
+def _appointment_create_command_payload(command: AppointmentCreateCommand) -> dict[str, object]:
+    return {
+        "patient_id": _uuid_or_none(command.patient_id),
+        "patient_name_provisional": command.patient_name_provisional,
+        "practitioner_id": _uuid_or_none(command.practitioner_id),
+        "appointment_type_id": _uuid_or_none(command.appointment_type_id),
+        "location_id": _uuid_or_none(command.location_id),
+        "appointment_date": command.appointment_date.isoformat(),
+        "start_time": command.start_time.isoformat(),
+        "start_time_local": command.start_time_local.isoformat(),
+        "duration_minutes": command.duration_minutes,
+        "reason": command.reason,
+        "notes": command.notes,
+        "booked_via": command.booked_via.value if command.booked_via is not None else None,
+    }
+
+
+def _compute_create_proposal_freshness_id(
+    *,
+    command: AppointmentCreateCommand,
+    reference_date: date_type,
+) -> str:
+    payload = {
+        "kind": "staff_create_proposal_v1",
+        "command": _appointment_create_command_payload(command),
+        "reference_date": reference_date.isoformat(),
+    }
+    material = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str)
+    return hashlib.sha256(material.encode("utf-8")).hexdigest()[:32]
+
+
+def _staff_create_signed_confirmation_payload(
+    *,
+    practice_id: uuid.UUID,
+    staff_user_id: uuid.UUID,
+    command: AppointmentCreateCommand,
+    create_proposal_freshness_id: Optional[str],
+) -> dict[str, object]:
+    return {
+        "practice_id": str(practice_id),
+        "staff_user_id": str(staff_user_id),
+        "reference_date": command.appointment_date.isoformat(),
+        "command": _appointment_create_command_payload(command),
+        "create_proposal_freshness_id": create_proposal_freshness_id,
+    }
+
+
+_CREATE_CONFIRM_METADATA_FIELDS = {
+    "confirm_endpoint",
+    "confirm_payload",
+    "create_proposal_freshness_id",
+    "signed_confirmation_evidence",
+    "signed_confirmation_evidence_required",
+}
+
+
+def _create_proposal_evidence_payload(proposal: AppointmentCreateProposalOut) -> dict[str, Any]:
+    return proposal.model_dump(mode="json", exclude=_CREATE_CONFIRM_METADATA_FIELDS)
 
 
 def _create_command_matches_selected_candidate(
