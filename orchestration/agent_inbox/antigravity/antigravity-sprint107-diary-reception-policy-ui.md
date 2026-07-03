@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 0beddab |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint107-diary-reception-policy-ui --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: C:\Users\sarashera\EMR4-worktrees\antigravity\orchestration\agent_inbox\codex\plan-antigravity-antigravity-sprint107-diary-reception-policy-ui.md, C:\Users\sarashera\EMR4-worktrees\antigravity\orchestration\agent_inbox\antigravity\antigravity-sprint107-diary-reception-policy-ui.md
+- Verification run: Pytest smoke test run completed successfully on baseline branch; no production changes made yet.
+- Remaining risks: Backward compatibility of legacy API responses (which lack reception_policy) when parsing them in diary.js. This is addressed in the plan via defensive checks.
