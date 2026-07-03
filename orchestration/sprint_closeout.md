@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint G5: Human Status Confirm Migration |
 | Integrated through | Codex/Lagrange invariant plan, Claude lane superseded by session cap, Antigravity lane superseded after no artifact, and Ariadne implementation |
-| Status | Integrated and verified locally; push, mirror, audit, Pages check, and notification pending |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
 | Last updated | 2026-07-04 |
 
 ## What Changed
@@ -34,8 +34,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused G5 Diary smoke passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q -k "status_control_uses_signed_status_confirm_without_raw_patch or status_control_failed_signed_confirm_does_not_raw_patch"`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
 - `git diff --check` passed.
-- Post-push orchestration audit: pending.
-- Live GitHub Pages check for `diary.js?v=166`: pending.
+- Post-push orchestration audit passed: `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` are all aligned at the current Sprint G5 closeout HEAD.
+- Live GitHub Pages check passed: `diary.html` is serving `diary.js?v=166`.
 - Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G5; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
