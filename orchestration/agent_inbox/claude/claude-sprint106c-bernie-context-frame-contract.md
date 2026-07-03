@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 1fec462 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint106c-bernie-context-frame-contract --summary "Short plan summary"` |
@@ -92,3 +92,9 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+
+## Superseded Notes
+
+- Claude/Fable was not run for this lane because the headless driver returned a 429 session-limit response before any work began.
+- Yuri explicitly asked Ariadne to ignore Claude for now and replace this lane with a Codex worker or Ariadne.
+- Replacement plan: `orchestration/agent_inbox/codex/plan-codex-codex-sprint106c-bernie-context-frame-contract.md`.

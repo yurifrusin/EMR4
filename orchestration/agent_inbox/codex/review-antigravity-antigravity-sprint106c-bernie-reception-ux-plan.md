@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint106c-bernie-reception-ux-plan` |
-| Status | queued |
+| Status | accepted |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted with amendments. Antigravity's UX plan is useful for the Diary side of Sprint 106C, especially around stale composer/proposal cleanup and preserving chat history, but it is too narrow if read as the whole sprint. It must be subordinated to the backend typed context-frame contract and reason-code taxonomy.
+- Follow-up required: Wait for backend contract plan before implementation. UI implementation should consume typed frame categories/reason codes, avoid brittle patient-specific copy, and include deterministic checks for true no-slot versus roster unavailable, stale state, advisory future appointment, and model uncertainty.

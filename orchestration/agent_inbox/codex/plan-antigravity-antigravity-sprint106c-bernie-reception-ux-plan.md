@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint106c-bernie-reception-ux-plan` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 13:14 +1000 |
 | Source HEAD | `61014e1` |
 
@@ -44,6 +44,6 @@ Late-night timezone browser/server calendar day mismatches; correct parent turn 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted with Ariadne amendments. The plan correctly identifies the affected Diary surfaces: Bernie transcript/composer, stale proposal/candidate clearing, warning rendering, and date/time boundary risks. It also correctly says the diary grid, booking modal, waiting room, taskpane, persisted sessions, autonomous booking, and broad redesign stay out of scope.
+- Required changes before implementation: Treat the listed bug fixes as examples, not the whole Sprint 106C product shape. Implementation must follow the backend typed-context-frame contract once accepted: UI should render typed frame categories and reason codes rather than inventing special-case copy branches. Future-appointment warnings must be advisory-only unless a deterministic guardrail says otherwise. No "no matching times" message may render unless a valid slot search actually ran and returned zero usable candidates. Do not hardcode patient names or one-off Margaret/Billy cases.
+- Approved to proceed: yes, after the backend context-frame contract plan is accepted and Ariadne releases implementation.

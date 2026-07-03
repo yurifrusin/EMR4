@@ -8,6 +8,85 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 106C: Bernie Typed Context Frames And Reception Policy Foundation |
+| Integrated through | Antigravity UX plan accepted with amendments, Codex invariant/backend plans accepted, and Ariadne backend contract implementation for typed receptionist frames plus deterministic policy predicates |
+| Status | Integrated locally; push/mirror/audit pending |
+| Last updated | 2026-07-03 |
+
+## What Changed
+
+- Added `app/services/bernie/frames.py` with typed, versioned receptionist
+  context frames for requested appointment facts, patient booking context,
+  roster/schedule facts, slot-search facts, advisory warnings, stale evidence,
+  model uncertainty, and hard guardrail outcomes.
+- Added `app/services/bernie/policy.py` with deterministic reception-policy
+  predicates that keep true no-slot, roster unavailable, stale evidence, model
+  uncertainty, advisory warnings, and hard blocks separate.
+- Exported the new frame and policy contracts through `app/services/bernie`.
+- Added `tests/test_bernie_context_frames.py` as executable design coverage for
+  JSON round-tripping, advisory future bookings, roster unavailable, true
+  searched-and-empty no-slot, model uncertainty, stale evidence, and hard
+  guardrails.
+- Integrated Antigravity's Diary/UX plan as accepted-with-amendments and
+  replaced the Claude/Fable lane with a Codex backend/domain plan because Claude
+  hit the session limit before starting.
+
+## Verification
+
+- `.\.venv\Scripts\python.exe -m py_compile app\services\bernie\frames.py app\services\bernie\policy.py app\services\bernie\__init__.py` passed.
+- `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_context_frames.py tests\test_bernie_domain_package.py tests\test_bernie_temporal_policy.py -q` passed.
+- Focused Bernie/slot backend suite passed:
+  `tests\test_bernie_context_frames.py tests\test_bernie_temporal_policy.py tests\test_bernie_domain_package.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_no_slot_suggestions.py tests\test_bernie_sprint104_state_memory.py tests\test_bernie_turn_contract.py tests\test_slot_search_proposal.py tests\test_bernie_slot_normalizer.py tests\test_slot_search_normalize_endpoint.py tests\test_bernie_confidence_policy.py -q`.
+- Local test schema was reset after the focused run.
+
+## Recommended User Review
+
+None required for this slice. It is backend-only contract scaffolding and pure
+policy tests; no Diary UI, deployed static asset, database schema, endpoint, or
+public JSON contract intentionally changed.
+
+## Not Required Before Moving On
+
+- No auto-confirm or limited Bernie auto-mode was implemented.
+- No broad root-to-branch API review or GraphQL/context-graph redesign was
+  started.
+- No XState/runtime state-machine dependency was added.
+- No Medicare Online, HI/IHI, OPV/PVM, Caller ID, voice/headset, or production
+  GCP change is included.
+- No persisted Bernie session table or Alembic migration was added.
+
+## Known Follow-Up
+
+- The new frame/policy contract is not yet wired into `appointments.py` or
+  `diary.js`; the next slice should add thin router adapters while preserving
+  existing JSON fields.
+- Antigravity's plan named useful UI bug examples, but implementation should
+  consume typed frame categories/reason codes rather than adding brittle
+  patient-specific copy branches.
+- The legacy router-level `BERNIE_WEEK_RELATIVE_RE` constant remains unused from
+  Sprint 106B; remove during a future low-risk router cleanup if lint requires.
+- Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
+  broad root-to-branch API-spine review.
+
+## Next Sprint Candidate - Sprint 106
+
+| Item | Value |
+|---|---|
+| Name | Wire Bernie Context Frames Into Interpret/Supervised Booking |
+| Status | Recommended, not launched |
+| Recommended agents | Codex/Ariadne or Codex worker for router adapters and backend tests; Antigravity only if Diary rendering changes are included; Claude can remain unused until its window resets |
+
+The next useful slice is to wire the new frame/policy contract into the
+interpret and supervised-booking routes. It should be additive: keep old JSON
+fields, add typed derived context only where useful, and prove false no-slot,
+roster-unavailable, stale-evidence, future-booking advisory, and model
+uncertainty paths stay distinct. Limited auto-mode remains a future architecture
+branch, not the next implementation.
+
+## Previous Closeout - Sprint 106B
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 106B: Bernie Temporal Policy Consolidation |
 | Integrated through | Ariadne implementation of the accepted Claude Fable 5 plan: pure Bernie temporal policy module, shared week-relative/date-time helpers, and shared same-day window decisions |
 | Status | Integrated, verified, pushed, mirrored, and audited |
@@ -29,59 +108,6 @@ reviewed, integrated, verified, pushed, and audited.
 - Added `tests/test_bernie_temporal_policy.py` covering week-relative dates,
   business-hours time parsing, non-same-day, fully-past, partial-past clamp,
   open-ended clamp, and boundary cases.
-
-## Verification
-
-- `.\.venv\Scripts\python.exe -m py_compile app\services\bernie\temporal.py app\services\bernie_booking_interpreter.py app\routers\appointments.py` passed.
-- Import smoke passed for `app.services.bernie`, the legacy interpreter helper
-  aliases, and the router week-relative delegate.
-- `git diff --check` passed with only existing CRLF normalization warnings in
-  touched Windows files.
-- Focused Bernie/slot suite passed in one process after resetting the local test
-  schema: `206 passed`.
-
-## Recommended User Review
-
-None required for this slice. It is backend-only temporal policy consolidation;
-no Diary UI, deployed static asset, database schema, endpoint, or public JSON
-contract intentionally changed.
-
-## Not Required Before Moving On
-
-- No auto-confirm or limited Bernie auto-mode was implemented.
-- No broad root-to-branch API review or GraphQL/context-graph redesign was
-  started.
-- No XState/runtime state-machine dependency was added.
-- No Medicare Online, HI/IHI, OPV/PVM, Caller ID, voice/headset, or production
-  GCP change is included.
-- No persisted Bernie session table or Alembic migration was added.
-
-## Known Follow-Up
-
-- The router still owns response assembly and search-result-dependent no-slot
-  decisions. A later sprint can introduce richer typed context frames without
-  turning temporal policy into a UI copy module.
-- The legacy router-level `BERNIE_WEEK_RELATIVE_RE` constant is now unused; it
-  can be removed during a future lower-risk router cleanup if lint starts
-  enforcing unused globals.
-- Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
-  broad root-to-branch API-spine review.
-
-## Next Sprint Candidate - Sprint 106
-
-| Item | Value |
-|---|---|
-| Name | Bernie Typed Context Frames And Reception Skill Policy |
-| Status | Recommended, not launched |
-| Recommended agents | Claude/Fable for backend context-frame design review when usage resets, Codex for implementation/integration, Antigravity/Gemini optional only if Diary UI wiring is included |
-
-The next useful slice is to define the typed receptionist context frame Bernie
-receives before she responds: requested date/window, practitioner roster facts,
-patient booking context, slot-search facts, and clearly separated advisory
-signals. This should let the model speak more naturally while guardrails verify
-state transitions and prevent false "no matching times" or future-appointment
-blocks. Limited auto-mode remains a future architecture branch, not the next
-implementation.
 
 ## Previous Closeout - Sprint 106A
 

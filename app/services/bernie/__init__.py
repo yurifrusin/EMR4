@@ -40,6 +40,22 @@ from app.services.bernie.evidence import (
     mint_session_id,
     mint_turn_id,
 )
+from app.services.bernie.frames import (
+    BernieAdvisoryWarningFrame,
+    BernieFrameSource,
+    BernieFrameStatus,
+    BernieFrameType,
+    BernieGuardrailOutcomeFrame,
+    BernieModelUncertaintyFrame,
+    BerniePatientBookingContextFrame,
+    BernieReceptionContextFrameSet,
+    BernieReceptionFrame,
+    BernieReceptionFrameBase,
+    BernieRequestedAppointmentFrame,
+    BernieRosterScheduleFrame,
+    BernieSlotSearchFrame,
+    BernieStaleEvidenceFrame,
+)
 from app.services.bernie.interpreter import (
     BookingInstructionInterpreter,
     DisabledBookingInstructionInterpreter,
@@ -56,6 +72,11 @@ from app.services.bernie.pilot import (
     BERNIE_STAFF_REVIEW_SURFACE,
     BerniePilotEligibility,
     evaluate_bernie_pilot_eligibility,
+)
+from app.services.bernie.policy import (
+    BernieAvailabilityClassification,
+    BernieReceptionPolicyDecision,
+    evaluate_reception_context,
 )
 from app.services.bernie.session import (
     CLIENT_EVENT_TRANSITIONS,
@@ -100,6 +121,21 @@ __all__ = [
     "compute_proposal_freshness_id",
     "mint_session_id",
     "mint_turn_id",
+    # frames
+    "BernieAdvisoryWarningFrame",
+    "BernieFrameSource",
+    "BernieFrameStatus",
+    "BernieFrameType",
+    "BernieGuardrailOutcomeFrame",
+    "BernieModelUncertaintyFrame",
+    "BerniePatientBookingContextFrame",
+    "BernieReceptionContextFrameSet",
+    "BernieReceptionFrame",
+    "BernieReceptionFrameBase",
+    "BernieRequestedAppointmentFrame",
+    "BernieRosterScheduleFrame",
+    "BernieSlotSearchFrame",
+    "BernieStaleEvidenceFrame",
     # interpreter
     "BookingInstructionInterpreter",
     "DisabledBookingInstructionInterpreter",
@@ -116,6 +152,10 @@ __all__ = [
     "BERNIE_STAFF_REVIEW_SURFACE",
     "BerniePilotEligibility",
     "evaluate_bernie_pilot_eligibility",
+    # policy
+    "BernieAvailabilityClassification",
+    "BernieReceptionPolicyDecision",
+    "evaluate_reception_context",
     # session
     "CLIENT_EVENT_TRANSITIONS",
     "SERVER_ADVANCE_TARGETS",

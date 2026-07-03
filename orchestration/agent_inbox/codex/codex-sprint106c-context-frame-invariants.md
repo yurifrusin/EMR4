@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 1fec462 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint106c-context-frame-invariants --summary "Short plan summary"` |
@@ -92,3 +92,9 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+
+## Integration Notes
+
+- Integration result: Superseded by Curie/Codex in-thread plan and Ariadne implementation of the backend frame/policy foundation.
+- Files changed in implementation: `app/services/bernie/frames.py`, `app/services/bernie/policy.py`, `app/services/bernie/__init__.py`, `tests/test_bernie_context_frames.py`, and Sprint 106C coordination docs.
+- Verification: py_compile passed for new Bernie frame/policy exports; focused backend Bernie/slot suite passed; local test schema reset afterwards.

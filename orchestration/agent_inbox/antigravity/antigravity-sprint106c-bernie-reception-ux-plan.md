@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 1fec462 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint106c-bernie-reception-ux-plan --summary "Short plan summary"` |
@@ -127,3 +127,8 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed: [antigravity-sprint106c-bernie-reception-ux-plan.md](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/orchestration/agent_inbox/antigravity/antigravity-sprint106c-bernie-reception-ux-plan.md)
 - Verification run: Captured implementation plan with `python scripts\agent_worktrees.py plan` and verified baseline pytest environment.
 - Remaining risks: Late-night timezone browser/server calendar day mismatches (e.g. AEST vs local developer time) which requires careful clinical date anchoring.
+
+## Integration Notes
+
+- Integration result: Accepted with Ariadne amendments as the Diary/UX planning input for Sprint 106C.
+- Required implementation constraint: UI work must consume typed frame categories/reason codes once the backend contract is wired, not add brittle patient-specific copy or special-case warning tables.
