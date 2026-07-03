@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | c3385e4 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n1b-diary-action-envelopes-and-authorship --summary "Short plan summary"` |
@@ -89,6 +89,8 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none by Claude. Claude remained in session-limit cooldown.
+  Ariadne/Codex completed the N1b implementation from the accepted architecture
+  plan.
+- Verification run: see Sprint N1b closeout.
+- Remaining risks: none from the skipped Claude lane.

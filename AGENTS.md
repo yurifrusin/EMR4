@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint N1a - Bernie/Diary reception contracts now have a native `app/services/diary/` implementation home with Bernie compatibility facades; no behaviour, UI, route, migration, or persisted session change was included |
-| **Next recommended work** | Sprint N1b: add internal diary action envelopes, `DiaryActionSuggestion`, authorship metadata, catalog completeness checks, availability-provenance adversarial tests, temporal single-source checks, and suggestion-cannot-mutate tests; then continue to N2 schedule explanation/copy catalog |
+| **Current active track** | Post-Sprint N1b - the native `app/services/diary/` reception domain now has internal action envelopes, multi-author suggestion contracts, catalog authorship metadata, and adversarial boundary tests; no route/UI/migration/write-path behaviour change was included |
+| **Next recommended work** | Sprint N2: typed schedule explanation and Diary copy catalog keyed by state/reason code, born in the diary domain and consumed by Bernie/Diary UI without scenario-specific message branches |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint N1a Diary reception domain rehome |
+| **Latest integration commit** | Sprint N1b Diary action envelopes and boundary tests |
 
 ### Tag map (all tags pushed to remote)
 

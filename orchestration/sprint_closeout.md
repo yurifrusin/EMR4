@@ -8,50 +8,51 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint N1a: Diary Reception Domain Rehome |
-| Integrated through | Claude/Opus implementation plan, Antigravity compatibility tests, Codex/Kepler invariant tests, and Ariadne implementation after Claude session-limit exhaustion |
-| Status | Integrated, focused verification passed, pushed, mirrored, and audited |
+| Batch | Sprint N1b: Diary Action Envelopes And Boundary Tests |
+| Integrated through | Codex/Halley envelope contract lane, Antigravity boundary review, and Ariadne implementation while Claude remained in session-limit cooldown |
+| Status | Integrated locally, focused verification passed; push/mirror/audit pending |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- Created the native backend `app/services/diary/` reception-domain package.
-- Moved the action/capability catalog, canonical temporal policy, typed
-  reception context frames, and deterministic reception policy into that diary
-  domain package as pure implementation moves.
-- Left thin `app/services/bernie/` compatibility facades in place so existing
-  Bernie imports resolve to the same objects.
-- Preserved the `reception_policy` response field and
-  `bernie.reception_context.v1` schema literal byte-identically.
-- Added compatibility tests proving Bernie facade objects and diary-domain
-  objects are identical, response models retain `reception_context` and
-  `reception_policy`, and the frame schema version remains stable.
-- Added Antigravity's focused rehome compatibility suite and kept the Diary UI
-  smoke `reception_policy` contract passing without UI changes.
+- Added internal diary action envelope contracts:
+  `DiaryActionIntent`, `DiaryActionProposal`, `DiaryActionConfirmation`, and
+  `DiaryActionSuggestion`.
+- Added `DiaryActionAuthor` and `DiaryActionChannel` enums, including
+  `staff_ui`, `bernie`, `rayleen`, `davida`, and `system` author families.
+- Added `allowed_authors` metadata to every diary action/capability catalog
+  entry.
+- Made suggestions explicitly read-only conversation inputs: they cannot claim
+  write authority, require confirmation, or smuggle confirm-grade evidence in
+  nested payloads.
+- Added adversarial reception-policy tests proving advisory/model frames cannot
+  fabricate no-slot/roster-unavailable states, offer candidates, or unblock hard
+  guardrails.
+- Added type-layer tests rejecting model-sourced slot-search/roster truth.
 
 ## Verification
 
-- Focused N1a backend suite passed:
-  `.\.venv\Scripts\python.exe -m pytest tests\test_bernie_diary_rehome_compatibility.py tests\test_bernie_domain_package.py tests\test_bernie_temporal_policy.py tests\test_bernie_context_frames.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py -q`.
+- Focused N1b backend suite passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_diary_action_envelopes.py tests\test_diary_action_boundary_contracts.py tests\test_bernie_diary_rehome_compatibility.py tests\test_bernie_domain_package.py -q`.
 - `.\.venv\Scripts\python.exe -m compileall app\services\diary app\services\bernie -q` passed.
 - Focused Diary smoke policy checks passed:
   `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k reception_policy`.
 - `git diff --check` passed.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was run but still has
-  pre-existing/global failures outside this slice, including async test plugin
-  handling and older Bernie expectation drift; those were not repaired inside
-  this pure rehome sprint.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N1b;
+  the previous N1a run showed pre-existing/global failures outside these
+  diary-domain contract slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. This was a backend package
-ownership rehome with compatibility tests and no UI, route, schema, migration,
-or copy change.
+No required manual review before moving on. This was an internal backend
+contract/test slice with no UI, route, schema, migration, or write-path
+behaviour change.
 
 ## Not Required Before Moving On
 
-- No action envelopes, `allowed_authors`, or `DiaryActionSuggestion` were added
-  yet; that is N1b.
+- No route consumes the new envelopes yet; they are internal contracts only.
+- No unified confirm path, HMAC evidence signing, persisted session, or K1
+  knowledge substrate was implemented.
 - No auto-confirm or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was
   started.
@@ -62,26 +63,25 @@ or copy change.
 
 ## Known Follow-Up
 
-- N1b should make the internal action envelope/authorship boundary explicit and
-  add the availability-provenance and suggestion-cannot-mutate adversarial
-  tests before K1 retrieval work exists.
+- N2 should now add typed schedule explanation and copy catalog support without
+  spreading scenario-specific message branches through `diary.js`.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Sprint N1b
+## Next Sprint Candidate - Sprint N2
 
 | Item | Value |
 |---|---|
-| Name | Diary Action Envelopes And Boundary Tests |
+| Name | Schedule Explanation And Copy Catalog |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne orchestration; Claude if session window has refreshed; Antigravity for contract/review harness; Codex worker for adversarial tests |
+| Recommended agents | Codex/Ariadne orchestration; Claude if session window has refreshed; Antigravity for Diary UI copy-catalog review if UI changes are included; Codex worker for backend reason-code invariants |
 
-N1b should add internal diary action envelopes including
-`DiaryActionSuggestion`, authorship metadata on catalog entries, catalog
-completeness checks, availability-provenance adversarial tests, temporal
-single-source tests, and suggestion-cannot-mutate tests. The former Sprint 108
-schedule-explanation/copy-catalog work becomes N2 after N1b. Limited auto-mode
-remains a future architecture branch, not the next implementation.
+N2 should implement typed schedule explanations in the diary domain and a small
+copy catalog keyed by state/reason code. It should explain no roster row, day
+off, breaks, fully booked, outside-hours, elapsed same-day window, and true
+searched-no-candidates states without using GraphRAG or changing the write path.
+Limited auto-mode remains a future architecture branch, not the next
+implementation.
 
 ## Previous Closeout - Sprint 106D
 

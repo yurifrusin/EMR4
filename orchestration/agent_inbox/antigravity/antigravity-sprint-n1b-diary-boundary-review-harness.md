@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | accepted |
+| Status | integrated |
 | Created | c3385e4 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-n1b-diary-boundary-review-harness --summary "Short plan summary"` |
@@ -89,6 +89,8 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Ariadne integrated Antigravity's additional envelope-boundary
+  test into `tests/test_diary_action_envelopes.py`.
+- Verification run: focused N1b contract suite, compileall, focused
+  `reception_policy` smoke checks, and `git diff --check` passed.
+- Remaining risks: none for this bounded review lane.

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n1b-diary-boundary-review-harness` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 19:52 +1000 |
 | Source HEAD | `0a605be` |
 

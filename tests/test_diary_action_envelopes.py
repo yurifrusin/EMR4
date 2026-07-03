@@ -151,3 +151,57 @@ def test_suggestion_cannot_claim_write_authority():
             reason_code="no_slots",
             writes_authorized=True,
         )
+
+
+def test_other_envelopes_enforce_write_and_confirm_boundaries():
+    with pytest.raises(ValidationError):
+        DiaryActionIntent(
+            intent_id="intent-1",
+            author=DiaryActionAuthor.bernie,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="find_slots",
+            writes_authorized=True,
+        )
+
+    with pytest.raises(ValidationError):
+        DiaryActionProposal(
+            proposal_id="proposal-1",
+            author=DiaryActionAuthor.bernie,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="propose_booking",
+            writes_authorized=True,
+        )
+
+    with pytest.raises(ValidationError):
+        DiaryActionProposal(
+            proposal_id="proposal-1",
+            author=DiaryActionAuthor.bernie,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="propose_booking",
+            requires_staff_confirmation=False,
+        )
+
+    confirmed_at = datetime(2026, 7, 3, 9, 30, tzinfo=timezone.utc)
+    with pytest.raises(ValidationError):
+        DiaryActionConfirmation(
+            confirmation_id="confirmation-1",
+            proposal_id="proposal-1",
+            confirmed_by_user_id="user-1",
+            confirmed_at=confirmed_at,
+            author=DiaryActionAuthor.staff_ui,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="confirm_booking",
+            writes_authorized=False,
+        )
+
+    with pytest.raises(ValidationError):
+        DiaryActionConfirmation(
+            confirmation_id="confirmation-1",
+            proposal_id="proposal-1",
+            confirmed_by_user_id="user-1",
+            confirmed_at=confirmed_at,
+            author=DiaryActionAuthor.staff_ui,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="confirm_booking",
+            staff_confirmed=False,
+        )
