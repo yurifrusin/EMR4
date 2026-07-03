@@ -14,12 +14,18 @@ import uuid
 from datetime import date, datetime, timezone
 
 import app.services.bernie as bernie_domain
+import app.services.bernie.frames as bernie_frames
+import app.services.bernie.policy as bernie_policy
 import app.services.bernie_booking_interpreter as legacy_interpreter
 import app.services.bernie_patient_context as legacy_context
 import app.services.bernie_pilot_gate as legacy_pilot
 import app.services.bernie_slot_normalizer as legacy_normalizer
 import app.services.bernie_transition_table as legacy_transitions
 import app.services.bernie_turn_evidence as legacy_evidence
+from app.schemas.appointments import (
+    BernieBookingInstructionInterpretOut,
+    BernieSupervisedBookingOut,
+)
 from app.services.bernie import (
     BERNIE_CAPABILITY_REGISTRY,
     CLIENT_EVENT_TRANSITIONS,
@@ -80,6 +86,20 @@ def test_pilot_facade_reexports_legacy_objects():
     assert bernie_domain.BERNIE_STAFF_REVIEW_SURFACE is legacy_pilot.BERNIE_STAFF_REVIEW_SURFACE
 
 
+def test_frame_and_policy_facades_reexport_domain_objects():
+    assert bernie_domain.BernieReceptionContextFrameSet is bernie_frames.BernieReceptionContextFrameSet
+    assert bernie_domain.BernieRequestedAppointmentFrame is bernie_frames.BernieRequestedAppointmentFrame
+    assert bernie_domain.BerniePatientBookingContextFrame is bernie_frames.BerniePatientBookingContextFrame
+    assert bernie_domain.BernieRosterScheduleFrame is bernie_frames.BernieRosterScheduleFrame
+    assert bernie_domain.BernieSlotSearchFrame is bernie_frames.BernieSlotSearchFrame
+    assert bernie_domain.BernieAdvisoryWarningFrame is bernie_frames.BernieAdvisoryWarningFrame
+    assert bernie_domain.BernieStaleEvidenceFrame is bernie_frames.BernieStaleEvidenceFrame
+    assert bernie_domain.BernieModelUncertaintyFrame is bernie_frames.BernieModelUncertaintyFrame
+    assert bernie_domain.BernieGuardrailOutcomeFrame is bernie_frames.BernieGuardrailOutcomeFrame
+    assert bernie_domain.BernieReceptionPolicyDecision is bernie_policy.BernieReceptionPolicyDecision
+    assert bernie_domain.evaluate_reception_context is bernie_policy.evaluate_reception_context
+
+
 def test_temporal_facade_reexports_legacy_pure_helpers():
     assert temporal.parse_time_fragment is legacy_interpreter._parse_time_fragment
     assert temporal.extract_natural_time_constraints is legacy_interpreter._extract_natural_time_constraints
@@ -105,6 +125,28 @@ def test_router_imports_bernie_services_through_domain_package():
     assert appointments_router.evaluate_bernie_pilot_eligibility is bernie_domain.evaluate_bernie_pilot_eligibility
     assert appointments_router.resolve_booking_date_transition is bernie_domain.resolve_booking_date_transition
     assert appointments_router.get_booking_instruction_interpreter is bernie_domain.get_booking_instruction_interpreter
+
+
+def test_reception_context_schema_version_is_stable():
+    frame_set = bernie_domain.BernieReceptionContextFrameSet(
+        reference_date=date(2026, 7, 3),
+        frames=[],
+    )
+
+    dumped = frame_set.model_dump(mode="json")
+
+    assert frame_set.schema_version == "bernie.reception_context.v1"
+    assert dumped["schema_version"] == "bernie.reception_context.v1"
+
+
+def test_bernie_response_models_keep_reception_policy_field():
+    for response_model in (
+        BernieBookingInstructionInterpretOut,
+        BernieSupervisedBookingOut,
+    ):
+        assert "reception_context" in response_model.model_fields
+        assert "reception_policy" in response_model.model_fields
+        assert response_model.model_fields["reception_policy"].default is None
 
 
 # 2. Session/event contract scaffolding invariants
