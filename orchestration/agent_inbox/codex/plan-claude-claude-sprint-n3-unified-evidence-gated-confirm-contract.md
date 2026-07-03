@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-n3-unified-evidence-gated-confirm-contract` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 20:31 +1000 |
 | Source HEAD | `097ac41` |
 
@@ -44,6 +44,13 @@ No rendered surface changes; additive typed contract. confirm_grade_allowed True
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne with a narrow integration amendment.
+  The pure diary-domain confirm gate is the correct foundation, but N3 must not
+  stop with an inert contract if scoped implementation bandwidth remains.
+- Required changes before implementation: implement the pure gate as planned,
+  then wire it narrowly into the Bernie staff-review payload so
+  `confirm_endpoint` and `confirm_payload` are present only when the backend
+  gate allows confirm-grade UI. Add schema/test coverage for the emitted
+  `confirm_affordance`. Keep the actual booking write path, persistence,
+  GraphRAG/K1, auto-mode, and broad API redesign out of scope.
+- Approved to proceed: yes, release with `complete sprint task`.
