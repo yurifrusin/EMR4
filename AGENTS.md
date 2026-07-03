@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint G2 - Bernie and human drag/drop/resize appointment updates now use signed update confirmation evidence and the `/appointments/proposals/update/confirm` endpoint when backend evidence is available |
-| **Next recommended work** | G3 edit modal appointment update confirm route migration: move the edit modal Save path to the same evidence-gated update confirm grammar while keeping status PATCH semantics separate |
+| **Current active track** | Post-Sprint G6 - Bernie/human update, drag/drop/resize, edit-modal detail saves, create-modal saves, status controls, and edit-modal cancel/delete now use signed confirmation evidence when backend evidence is available |
+| **Next recommended work** | Pause for Yuri direction. When resumed, either constrain/retire raw compatibility write endpoints, continue the bounded Diary domain module tail, or choose the next Bernie native-diary agent capability sprint |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint G2 human diary update confirm migration |
+| **Latest integration commit** | Sprint G6 signed cancel/delete confirm migration |
 
 ### Tag map (all tags pushed to remote)
 
