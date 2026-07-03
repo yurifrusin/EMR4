@@ -46,3 +46,39 @@ The goal of the amendment is to avoid building the shared diary/reception
 grammar in Bernie's private namespace and then extracting it later after other
 agents or UI paths have depended on it.
 
+## 2026-07-03 - Multi-Author Suggested Next Actions
+
+Fable's section 4.1 listed `suggest_next_actions` as a read-only action with
+Bernie as the author. Ariadne and Yuri think that is too narrow for the intended
+future architecture.
+
+The long-run conversation should be two-way and eventually multi-agential:
+human receptionists, Bernie, Rayleen, Davida, and other bounded agents may all
+suggest possible next actions. A human suggestion may arrive as natural language
+or UI gesture rather than as a typed action, but before the diary is mutated it
+must still be normalized into a typed `DiaryActionIntent`, validated by the
+deterministic diary domain, and confirmed where required.
+
+Refined principle:
+
+> Any participant may suggest. Only the diary domain may validate. Only
+> confirmed typed actions may mutate state.
+
+Proposed refinement to the action grammar:
+
+- Treat `suggest_next_actions` as a meta/read-only action with potential authors
+  `human`, `bernie`, `rayleen`, `davida`, and future bounded agents.
+- Consider splitting the concept into clearer stages:
+  - `propose_next_action`: any participant suggests a possible next diary move.
+  - `normalize_next_action`: the suggestion is compiled into a typed
+    `DiaryActionIntent`.
+  - `validate_next_action`: deterministic diary policy decides whether the
+    intent can be offered, blocked, or needs clarification.
+- Preserve a strict boundary between conversational suggestion and diary
+  mutation: free-form human or agent suggestions are first-class conversation
+  inputs, but they are not executable diary writes until typed, validated,
+  evidence-gated, and confirmed.
+
+After Yuri and Ariadne finish reviewing Fable's plan, this amendment should be
+included in the compiled response sent back to Fable for confirmation and
+stress-testing.
