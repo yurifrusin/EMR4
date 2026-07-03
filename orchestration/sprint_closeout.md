@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint 106D: Bernie Route Context Frame Wiring |
 | Integrated through | Ariadne/Codex backend route adapter implementation after replacing the blocked Claude lane with Codex-owned execution |
-| Status | Integrated and verified locally; push, mirror realign, and audit in progress |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed
