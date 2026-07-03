@@ -11,6 +11,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 from app.services.diary.frames import BernieReceptionContextFrameSet
+from app.services.diary.schedule_explanations import parse_schedule_explanation_reason
 
 
 BernieAvailabilityClassification = Literal[
@@ -35,6 +36,7 @@ class BernieReceptionPolicyDecision(BaseModel):
     roster_unavailable: bool
     search_ran_no_candidates: bool
     reason_codes: list[str] = Field(default_factory=list)
+    schedule_reason_codes: list[str] = Field(default_factory=list)
 
 
 def evaluate_reception_context(
@@ -48,10 +50,14 @@ def evaluate_reception_context(
     distinct classifications.
     """
     reason_codes: list[str] = []
+    schedule_reason_codes: list[str] = []
 
     def add_reason(reason_code: str | None) -> None:
         if reason_code and reason_code not in reason_codes:
             reason_codes.append(reason_code)
+        schedule_reason = parse_schedule_explanation_reason(reason_code)
+        if schedule_reason and schedule_reason.value not in schedule_reason_codes:
+            schedule_reason_codes.append(schedule_reason.value)
 
     hard_block = False
     stale = False
@@ -116,6 +122,7 @@ def evaluate_reception_context(
         roster_unavailable=roster_unavailable,
         search_ran_no_candidates=searched_no_candidates,
         reason_codes=reason_codes,
+        schedule_reason_codes=schedule_reason_codes,
     )
 
 

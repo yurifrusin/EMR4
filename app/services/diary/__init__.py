@@ -41,6 +41,17 @@ from app.services.diary.policy import (
     BernieReceptionPolicyDecision,
     evaluate_reception_context,
 )
+from app.services.diary.schedule_explanations import (
+    DIARY_SCHEDULE_COPY_CATALOG,
+    DIARY_SCHEDULE_REASON_ALIASES,
+    DiaryScheduleCopy,
+    DiaryScheduleExplanation,
+    DiaryScheduleExplanationEvidence,
+    DiaryScheduleExplanationReason,
+    explain_schedule,
+    get_schedule_copy,
+    parse_schedule_explanation_reason,
+)
 from app.services.diary.temporal import (
     DATE_RE,
     WEEK_RELATIVE_RE,
@@ -81,6 +92,15 @@ __all__ = [
     "BernieAvailabilityClassification",
     "BernieReceptionPolicyDecision",
     "evaluate_reception_context",
+    "DIARY_SCHEDULE_COPY_CATALOG",
+    "DIARY_SCHEDULE_REASON_ALIASES",
+    "DiaryScheduleCopy",
+    "DiaryScheduleExplanation",
+    "DiaryScheduleExplanationEvidence",
+    "DiaryScheduleExplanationReason",
+    "explain_schedule",
+    "get_schedule_copy",
+    "parse_schedule_explanation_reason",
     "DATE_RE",
     "WEEK_RELATIVE_RE",
     "SameDayWindowDecision",
