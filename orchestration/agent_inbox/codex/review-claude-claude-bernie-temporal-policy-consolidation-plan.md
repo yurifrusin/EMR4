@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-temporal-policy-consolidation-plan` |
-| Status | queued |
+| Status | accepted |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Accepted. This is the right next slice after the bounded Bernie package foundation because it attacks duplicated time/date policy without changing UI or persisted-session architecture.
+- Follow-up required: Dispatch implementation only after explicit release. Watch import-cycle risk when inverting temporal helper ownership, exact-string/copy drift, and the known local test DB lifecycle fragility during broad test runs.

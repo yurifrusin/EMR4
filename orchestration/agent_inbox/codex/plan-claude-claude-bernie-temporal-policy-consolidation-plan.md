@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-temporal-policy-consolidation-plan` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 12:17 +1000 |
 | Source HEAD | `a5b83e3` |
 
@@ -44,6 +44,6 @@ All existing JSON outputs unchanged: week-relative instruction still produces th
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne as a narrow Sprint 106B implementation plan. The plan preserves public JSON/API/copy behaviour, keeps `_clinic_local_now` in the router for existing monkeypatch seams, and limits implementation to temporal policy extraction plus focused tests.
+- Required changes before implementation: Implementation should wait for explicit Yuri/Ariadne `complete sprint task` approval, ideally after the Claude 5-hour window resets. Keep implementation at medium reasoning and stop if exact-string behaviour drifts or router changes widen beyond the listed call sites.
+- Approved to proceed: yes, after explicit implementation release
