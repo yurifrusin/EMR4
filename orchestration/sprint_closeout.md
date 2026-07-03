@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint N11: Bernie Roster Outcome Explanations |
 | Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted, Codex/Banach invariant plan accepted, and Ariadne backend/UI implementation |
-| Status | Integrated and verified locally; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
 | Last updated | 2026-07-04 |
 
 ## What Changed
@@ -49,6 +49,11 @@ reviewed, integrated, verified, pushed, and audited.
 - Full deterministic Diary smoke harness passed:
   `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
 - `git diff --check` passed.
+- Post-push orchestration audit passed: `master`, `handoff/current`,
+  `codex/current`, `claude/current`, and `antigravity/current` are all aligned
+  at `1d18961`.
+- Live GitHub Pages check passed: `diary.html` is serving `diary.js?v=157`
+  and `diary.css?v=130`.
 - Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N11;
   previous full runs showed pre-existing/global failures outside these
   diary-domain/session endpoint/evidence slices.
