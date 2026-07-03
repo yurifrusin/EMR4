@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-n2-schedule-explanation-domain-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-03 20:10 +1000 |
 | Source HEAD | `0d112ef` |
 
@@ -44,6 +44,8 @@ Classifier consumes a typed evidence model rather than reading DB/frames, keepin
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne. The backend contract was implemented by
+  Codex/Hubble and Ariadne, with the plan's pure evidence classifier and copy
+  catalog expectations preserved.
+- Required changes before implementation: none for backend contract slice.
+- Approved to proceed: superseded by completed backend implementation.

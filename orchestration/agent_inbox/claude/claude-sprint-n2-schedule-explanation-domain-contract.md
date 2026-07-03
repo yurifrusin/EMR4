@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 84f8c16 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n2-schedule-explanation-domain-contract --summary "Short plan summary"` |
@@ -89,6 +89,7 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Claude submitted the plan only; Codex/Hubble and Ariadne
+  implemented the backend schedule-explanation contract.
+- Verification run: see Sprint N2 closeout.
+- Remaining risks: live route/UI consumption remains the Antigravity UI lane.
