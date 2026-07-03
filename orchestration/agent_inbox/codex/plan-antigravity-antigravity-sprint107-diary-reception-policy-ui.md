@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint107-diary-reception-policy-ui` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 14:06 +1000 |
 | Source HEAD | `ece402f` |
 
@@ -44,6 +44,6 @@ Ensuring legacy payloads (which lack reception_policy) fall back gracefully with
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted with Codex/Dalton amendments: make `reception_policy` authoritative when present, keep older-response fallback, and prove the five message invariants in the Diary review harness.
+- Required changes before implementation: Ensure advisory future-booking candidate-list assertion runs with auto-preview disabled so it tests candidate rendering rather than the auto-preview branch.
+- Approved to proceed: yes

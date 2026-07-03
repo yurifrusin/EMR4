@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint107-diary-reception-policy-ui` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated after Ariadne review and a bounded smoke-fixture cleanup; focused and full Diary review harness passed on `master`.
+- Follow-up required: Continue migrating Bernie UI copy to typed state/reason-code sources; no immediate user-only review required for this slice.

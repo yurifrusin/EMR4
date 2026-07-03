@@ -8,40 +8,50 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 106D: Bernie Route Context Frame Wiring |
-| Integrated through | Ariadne/Codex backend route adapter implementation after replacing the blocked Claude lane with Codex-owned execution |
+| Batch | Sprint 107: Diary Reception Policy UI Consumption |
+| Integrated through | Antigravity Diary UI implementation, Codex/Dalton invariant plan guidance, and Ariadne review/fixture repair |
 | Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- Wired the typed receptionist frame/policy contract into
-  `interpret-booking-instruction` and `supervised-booking` responses through
-  additive `reception_context` and `reception_policy` JSON fields.
-- Kept existing public response fields, booking decisions, slot-search behavior,
-  confirmation gates, and user-facing copy unchanged in this backend slice.
-- Classified route evidence so the UI can distinguish advisory future-booking
-  context, roster unavailable/no practitioner schedule, true searched-and-empty
-  no-slot, stale context, model uncertainty, and hard guardrail blocks.
-- Avoided a schema/service import cycle by exposing the new route fields as
-  plain JSON dictionaries at the API schema boundary while keeping typed models
-  inside `app/services/bernie`.
-- Added route-level regression assertions proving that a different-day future
-  booking does not become a no-slot/blocking condition, that no practitioner
-  schedule is `roster_unavailable` rather than `search_ran_no_candidates`, and
-  that candidate searches expose `search_ran_with_candidates`.
+- Changed the Diary Bernie review transition logic to consume backend
+  `reception_policy` when present, making typed policy facts authoritative over
+  brittle message/status inference.
+- Prevented "No matching times found" / no-free-times copy unless
+  `reception_policy.search_ran_no_candidates` is true.
+- Added a distinct `roster_unavailable` UI state for
+  `reception_policy.availability == "roster_unavailable"` or
+  `no_practitioner_schedule`, rendered as roster/schedule unavailable rather
+  than a false no-slot state.
+- Preserved candidate display when advisory warnings such as
+  `existing_future_follow_up` are present but candidates are available.
+- Propagated `reception_policy` and `suggestions` from supervised-booking route
+  envelopes into the existing `staff_review` payload consumed by the Diary UI.
+- Added safe fallback behavior for older responses that do not include
+  `reception_policy`.
+- Bumped Diary assets to `diary.js?v=151` and `diary.css?v=128`.
+- Added five deterministic Diary smoke invariants covering roster unavailable,
+  true searched-and-empty no-slot, blocked-but-not-no-slot, advisory future
+  booking with candidates, and legacy fallback.
 
 ## Verification
 
-- `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py app\services\bernie\frames.py app\services\bernie\policy.py` passed.
-- Focused Bernie route/frame suite passed:
-  `tests\test_bernie_context_frames.py tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_no_slot_suggestions.py tests\test_bernie_confidence_policy.py -q`.
+- `node --check docs\diary\diary.js` passed.
+- `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed.
+- Focused Sprint 107 policy UI checks passed:
+  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "reception_policy"`.
+- Full Diary review harness passed:
+  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
+- `git diff --check` passed.
 
 ## Recommended User Review
 
-None required for this slice. It is backend-only additive response metadata with
-focused route regression tests; no Diary UI, static asset, database schema,
-booking mutation behavior, confirmation path, or deployed frontend changed.
+No required manual review before moving on. This is a deterministic Diary UI
+copy/state correction with route-intercepted harness coverage. If Yuri wants to
+spot-check live after Pages deploy, the highest-value prompt is the Margaret
+Thompson / Dr Shera "after 3 tomorrow and before 4.30" case that previously
+produced false no-slot and future-booking blocking copy.
 
 ## Not Required Before Moving On
 
@@ -55,32 +65,37 @@ booking mutation behavior, confirmation path, or deployed frontend changed.
 
 ## Known Follow-Up
 
-- The new frame/policy contract is wired into backend routes but not yet
-  consumed by `diary.js`; the next UI slice should render from
-  `reception_policy.availability` and frame reason codes instead of brittle
-  message text.
-- Antigravity's accepted Diary/UX plan should be used for the UI consumption
-  sprint, with Ariadne preserving the rule that true "no matching times" appears
-  only when `search_ran_no_candidates` is true.
+- Diary now consumes the high-level `reception_policy`; future UI slices should
+  continue migrating more Bernie copy to typed state/reason-code sources rather
+  than adding scenario-specific message branches.
 - The legacy router-level `BERNIE_WEEK_RELATIVE_RE` constant remains unused from
   Sprint 106B; remove during a future low-risk router cleanup if lint requires.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Sprint 106
+## Next Sprint Candidate - Sprint 108
 
 | Item | Value |
 |---|---|
-| Name | Diary UI Consumption Of Bernie Reception Policy |
+| Name | Bernie Schedule Explanation And Copy Catalog |
 | Status | Recommended, not launched |
-| Recommended agents | Antigravity or Codex worker for Diary rendering, Ariadne for backend/contract review; Claude can remain unused until its window resets |
+| Recommended agents | Codex/Ariadne for backend/domain extraction plan, Antigravity for narrow Diary copy catalog consumption if UI changes are included; Claude can remain unused until its window resets |
 
-The next useful slice is to make the Diary Bernie panel consume
-`reception_policy` and typed frame categories so logically wrong copy cannot
-appear: no "no matching times" unless a real search ran empty, no future-booking
-advisory treated as a blocker, and no roster-unavailable case rendered as a slot
-failure. Limited auto-mode remains a future architecture branch, not the next
+The next useful slice is to give Bernie a typed schedule-explanation capability
+and/or a small Diary copy catalog keyed by state/reason code, so roster off,
+no schedule configured, fully booked, elapsed same-day window, and true no-slot
+states can be explained precisely without spreading copy branches through
+`diary.js`. Limited auto-mode remains a future architecture branch, not the next
 implementation.
+
+## Previous Closeout - Sprint 106D
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 106D: Bernie Route Context Frame Wiring |
+| Integrated through | Ariadne/Codex backend route adapter implementation after replacing the blocked Claude lane with Codex-owned execution |
+| Status | Integrated, verified, pushed, mirrored, and audited |
+| Last updated | 2026-07-03 |
 
 ## Previous Closeout - Sprint 106C
 
