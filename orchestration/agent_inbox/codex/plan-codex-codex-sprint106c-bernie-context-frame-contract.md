@@ -6,7 +6,7 @@
 | From | codex-worker |
 | Branch | `codex/current` |
 | Source Task | `claude-sprint106c-bernie-context-frame-contract` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 13:28 +1000 |
 | Source HEAD | `61014e1` |
 

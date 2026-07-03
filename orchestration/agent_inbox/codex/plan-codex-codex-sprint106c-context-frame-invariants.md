@@ -6,7 +6,7 @@
 | From | codex-worker |
 | Branch | `codex/current` |
 | Source Task | `codex-sprint106c-context-frame-invariants` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 13:20 +1000 |
 | Source HEAD | `61014e1` |
 

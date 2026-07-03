@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint106c-bernie-reception-ux-plan` |
-| Status | accepted |
+| Status | integrated |
 
 ## Review Request
 
