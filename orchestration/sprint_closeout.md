@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint N1a: Diary Reception Domain Rehome |
 | Integrated through | Claude/Opus implementation plan, Antigravity compatibility tests, Codex/Kepler invariant tests, and Ariadne implementation after Claude session-limit exhaustion |
-| Status | Integrated locally, focused verification passed; push/mirror/audit pending |
+| Status | Integrated, focused verification passed, pushed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed
