@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n1b-diary-boundary-review-harness` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 19:52 +1000 |
 | Source HEAD | `0a605be` |
 
@@ -44,6 +44,11 @@ Coordinate names of suggestion classes and envelopes if they differ in the paral
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne as a bounded review/test lane over the
+  N1b contracts already implemented by Codex/Ariadne.
+- Required changes before implementation: Review existing
+  `tests/test_diary_action_boundary_contracts.py` and
+  `tests/test_diary_action_envelopes.py`; add only non-overlapping tests if a
+  gap is found. Do not edit service modules, routes, UI, migrations, or
+  runtime mutation paths.
+- Approved to proceed: yes, release with `complete sprint task`.
