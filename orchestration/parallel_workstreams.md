@@ -189,7 +189,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Plan gate accepted; backend foundation implementation proceeding with Ariadne/Codex while Claude is session-limited |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Product Goal | Define the minimum server-owned Bernie session/event persistence foundation so conversation memory, stale-state rejection, signed confirmation evidence, and render-from-state UI can converge without premature PHI-heavy storage |
 | Worker Shape | Claude backend/session contract plan, Antigravity Diary session UX/render-from-state plan, Codex worker adversarial invariant plan, Ariadne orchestration/review |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n4-bernie-server-session-contract.md` |
@@ -198,6 +198,21 @@ Integration notes:
 | In Scope | Plan first; build on `app/services/bernie/session.py`; retention/privacy posture, optimistic concurrency/stale event controls, one session per staff per diary surface, signed evidence/session binding, render-from-state tail, focused tests |
 | Out Of Scope | Production code before plan approval, broad API-spine rewrite, GraphRAG route/UI wiring, auto-mode, live PHI, full transcript persistence unless justified, UI redesign |
 | Verification | Plan packets first; later implementation must run focused Bernie session/evidence tests, migration checks if tables are added, relevant Diary harness checks if UI changes, py-compile/node checks as applicable, and `git diff --check` |
+
+Integration notes:
+
+- Claude remained capped by the five-hour session limit, so Ariadne superseded
+  the backend lane and implemented the accepted backend/session plan.
+- Antigravity submitted a render-from-state Diary tail plan. Ariadne accepted it
+  as future UI guidance but deferred implementation until a backend session
+  endpoint exists.
+- Codex/McClintock submitted the adversarial session invariant plan; Ariadne
+  implemented the backend foundation and tests from that plan.
+- N4 adds executable server-owned append/concurrency/idempotency semantics via
+  an in-memory store, without adding a PHI-bearing table, route endpoint, UI
+  migration, or frontend asset change.
+- Focused Bernie session/evidence tests, adjacent evidence/confirm boundary
+  tests, py-compile, and `git diff --check` passed.
 
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 

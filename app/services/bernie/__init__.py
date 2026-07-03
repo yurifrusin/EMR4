@@ -102,11 +102,17 @@ from app.services.bernie.session import (
     TERMINAL_STATES,
     TRANSIENT_STATES,
     BernieSessionEvent,
+    BernieSessionEventRejectionCode,
+    BernieSessionEventResult,
     BernieSessionEventType,
     BernieSessionRecord,
     BernieSessionState,
     SessionTransitionValidation,
     validate_session_event,
+)
+from app.services.bernie.session_store import (
+    InMemoryBernieSessionStore,
+    build_session_confirmation_binding,
 )
 from app.services.bernie.temporal import (
     SameDayWindowDecision,
@@ -198,10 +204,14 @@ __all__ = [
     "TERMINAL_STATES",
     "TRANSIENT_STATES",
     "BernieSessionEvent",
+    "BernieSessionEventRejectionCode",
+    "BernieSessionEventResult",
     "BernieSessionEventType",
     "BernieSessionRecord",
     "BernieSessionState",
+    "InMemoryBernieSessionStore",
     "SessionTransitionValidation",
+    "build_session_confirmation_binding",
     "validate_session_event",
     # temporal
     "SameDayWindowDecision",

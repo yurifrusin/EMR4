@@ -6,7 +6,7 @@
 | From | codex |
 | Role | orchestrator |
 | Source Task | `claude-sprint-n4-bernie-server-session-contract` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 |
 | Source HEAD | `a07f0ca` |
 

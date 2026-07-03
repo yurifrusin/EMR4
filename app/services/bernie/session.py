@@ -166,6 +166,31 @@ class SessionTransitionValidation(BaseModel):
     detail: Optional[str] = None
 
 
+class BernieSessionEventRejectionCode(str, Enum):
+    """Stable rejection codes for server-owned Bernie session events."""
+
+    session_not_found = "session_not_found"
+    session_owner_mismatch = "session_owner_mismatch"
+    stale_session_revision = "stale_session_revision"
+    future_session_revision = "future_session_revision"
+    idempotency_conflict = "idempotency_conflict"
+    event_not_allowed_in_state = "event_not_allowed_in_state"
+    event_not_allowed_in_transient_state = "event_not_allowed_in_transient_state"
+    phi_payload_not_allowed = "phi_payload_not_allowed"
+
+
+class BernieSessionEventResult(BaseModel):
+    """Typed result for appending an event to a server-owned Bernie session."""
+
+    model_config = {"frozen": True}
+
+    accepted: bool
+    session: Optional["BernieSessionRecord"] = None
+    event: Optional["BernieSessionEvent"] = None
+    code: Optional[BernieSessionEventRejectionCode] = None
+    detail: Optional[str] = None
+
+
 def validate_session_event(
     current_state: BernieSessionState,
     event_type: BernieSessionEventType,
@@ -244,6 +269,8 @@ class BernieSessionEvent(BaseModel):
     event_type: BernieSessionEventType
     turn_index: int = Field(ge=0)
     occurred_at: datetime
+    expected_revision: Optional[int] = Field(default=None, ge=0)
+    idempotency_key: Optional[str] = None
     payload: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -260,7 +287,9 @@ class BernieSessionRecord(BaseModel):
     session_id: str
     practice_id: Optional[uuid.UUID] = None
     user_id: Optional[uuid.UUID] = None
+    surface_id: Optional[str] = None
     state: BernieSessionState = BernieSessionState.instruction_entry
+    revision: int = Field(default=0, ge=0)
     request_reference_date: Optional[date] = None
     patient_id: Optional[uuid.UUID] = None
     patient_band: Optional[str] = None
@@ -270,6 +299,8 @@ class BernieSessionRecord(BaseModel):
     staged_proposal_freshness_id: Optional[str] = None
     turn_count: int = Field(default=0, ge=0)
     events: list[BernieSessionEvent] = Field(default_factory=list)
+    last_event_id: Optional[str] = None
+    stale_reason_code: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -277,6 +308,8 @@ class BernieSessionRecord(BaseModel):
 __all__ = [
     "BernieSessionState",
     "BernieSessionEventType",
+    "BernieSessionEventRejectionCode",
+    "BernieSessionEventResult",
     "BernieSessionEvent",
     "BernieSessionRecord",
     "SessionTransitionValidation",

@@ -39,9 +39,13 @@ from app.services.bernie import (
     TRANSIENT_STATES,
     BernieCapabilityTier,
     BernieSessionEvent,
+    BernieSessionEventRejectionCode,
+    BernieSessionEventResult,
     BernieSessionEventType,
     BernieSessionRecord,
     BernieSessionState,
+    InMemoryBernieSessionStore,
+    build_session_confirmation_binding,
     get_bernie_capability,
     validate_session_event,
 )
@@ -239,6 +243,13 @@ def test_new_session_allowed_from_every_state():
         verdict = validate_session_event(state, BernieSessionEventType.new_session)
         assert verdict.allowed
         assert verdict.target_state is BernieSessionState.instruction_entry
+
+
+def test_session_store_facade_exports_server_session_contracts():
+    assert bernie_domain.InMemoryBernieSessionStore is InMemoryBernieSessionStore
+    assert bernie_domain.BernieSessionEventRejectionCode is BernieSessionEventRejectionCode
+    assert bernie_domain.BernieSessionEventResult is BernieSessionEventResult
+    assert bernie_domain.build_session_confirmation_binding is build_session_confirmation_binding
 
 
 def test_diary_navigated_is_memory_only_in_non_transient_states():

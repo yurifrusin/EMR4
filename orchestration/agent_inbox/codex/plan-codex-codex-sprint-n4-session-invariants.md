@@ -7,7 +7,7 @@
 | Worker Name | Codex N4 Session Invariants |
 | Worker Branch | `codex/current` |
 | Source Task | `orchestration/agent_inbox/codex/codex-sprint-n4-session-invariants.md` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 |
 
 ## Understanding

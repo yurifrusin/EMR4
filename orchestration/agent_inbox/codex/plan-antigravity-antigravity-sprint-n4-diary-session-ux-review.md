@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n4-diary-session-ux-review` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 22:07 +1000 |
 | Source HEAD | `a07f0ca` |
 
