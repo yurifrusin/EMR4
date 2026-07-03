@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint V1 - Bernie now has a typed, non-mutating tool-intent proposal route for explicit appointment extension requests, backed by visible diary appointment ids and existing deterministic appointment-update proposal authority |
-| **Next recommended work** | V2 Bernie visible tool-intent UX and voice: wire the new route into the Diary panel so "Ask Bernie" can show friendly professional extension proposals without implying autonomous writes or creating confirm affordances without backend proposal evidence |
+| **Current active track** | Post-Sprint V2 - Diary Ask Bernie now routes explicit appointment-extension requests to the typed tool-intent route, renders a visible appointment-change proposal, and shows `Confirm change` only when backend update-proposal evidence is safe |
+| **Next recommended work** | G1 unified diary action grammar / evidence-gated update confirmation: reduce the remaining asymmetry between human UI updates and Bernie-authored updates so both use one deterministic proposal/confirm/write grammar |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint V1 Bernie tool-intent proposal route |
+| **Latest integration commit** | Sprint V2 Bernie visible tool-intent UX |
 
 ### Tag map (all tags pushed to remote)
 

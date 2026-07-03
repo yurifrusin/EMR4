@@ -134,11 +134,33 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
-## Sprint V1: Bernie Reception Voice And Tool-Intent Routing
+## Sprint V2: Bernie Visible Tool-Intent UX
 
 | Item | Value |
 |---|---|
 | Status | Integrated and verified locally; push/mirror/audit pending |
+| Product Goal | Let the visible Diary Ask Bernie composer consume the V1 tool-intent route for appointment extension, showing friendly proposal states while preserving backend proposal evidence as the only source of confirmability |
+| Worker Shape | Claude route/UI contract plan, Antigravity visible UX plan accepted with Ariadne authority-boundary amendment, Codex invariant plan captured after protocol stop, Ariadne implementation |
+| In Scope | `docs/diary/diary.js` tool-intent routing/rendering/confirm guard, `docs/diary/diary.css` proposal card styling, `review/test_diary_smoke.py` route/confirm/stale-state coverage, asset cache-bust |
+| Out Of Scope | Broad edit grammar, auto-mode/direct writes, persisted PHI/session tables, GraphRAG retrieval changes, taskpane/Command Centre, broad API rewrite |
+| Verification | node check; py_compile; frontend version check; tool-intent/update/confirm backend suite; full deterministic Diary smoke harness; diff check |
+
+Integration notes:
+
+- Explicit `extend`/`lengthen` instructions now route to
+  `/appointments/proposals/bernie/tool-intent`.
+- Proposal rendering uses backend `BernieToolIntentOut.proposal.command` plus
+  visible diary context; friendly text and staff text cannot create authority.
+- `Confirm change` is rendered only for `proposal_ready` plus `proposal.safe`
+  and sends the proposal command to the existing appointment update path.
+- Clarification/blocked/unsupported tool-intent states show no confirm control
+  and clear stale booking/no-slot UI.
+
+## Sprint V1: Bernie Reception Voice And Tool-Intent Routing
+
+| Item | Value |
+|---|---|
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
 | Product Goal | Give Bernie the first typed, non-booking diary tool-intent proposal route so requests such as extending an appointment become native diary proposals rather than ad hoc prompt text |
 | Worker Shape | Claude backend lane superseded by session cap, Antigravity visible UX plan accepted for V2, Codex invariant plan accepted, Ariadne backend/frame implementation |
 | In Scope | `BernieToolIntentIn/Out`, non-mutating `/appointments/proposals/bernie/tool-intent` route for appointment extension, visible diary appointment ids in Bernie context frames, focused backend and Diary review tests |

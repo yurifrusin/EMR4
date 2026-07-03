@@ -8,64 +8,71 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint V1: Bernie Reception Voice And Tool-Intent Routing |
-| Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted for V2, Codex invariant plan accepted, and Ariadne backend/frame implementation |
+| Batch | Sprint V2: Bernie Visible Tool-Intent UX |
+| Integrated through | Claude route/UI contract plan, Antigravity visible UX plan with Ariadne authority-boundary amendment, Codex invariant plan captured after protocol stop, and Ariadne implementation |
 | Status | Integrated and verified locally; push/mirror/audit pending |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- Added a typed, non-mutating Bernie tool-intent proposal route:
-  `POST /api/v1/appointments/proposals/bernie/tool-intent`.
-- V1 supports the first non-booking diary skill: explicit appointment extension requests such as "extend Margaret Thompson's 3pm booking with Dr Shera to 30 minutes".
-- The route resolves one visible diary appointment from typed `context_frames`, then delegates to the existing deterministic `AppointmentUpdateProposalOut` contract. It never writes appointment state and never returns confirmation-grade evidence by itself.
-- The response carries source attribution for intent parsing, visible diary appointment context, proposal authority, and write authority, so Bernie voice/model text cannot masquerade as deterministic diary truth.
-- Unsupported tool intents, missing target durations, and ambiguous or missing appointment context fail closed as clarification/block states with no proposal.
-- Diary `buildBernieContextFrames()` now includes visible appointment ids on `diary_day_booking` frames, giving Bernie a native diary handle for future edit/extend workflows.
-- `diary.js` was cache-busted from v159 to v160.
-- Imported the Antigravity V1 UX plan and Codex V1 invariant plan. Antigravity's richer visible voice/proposal-card plan is intentionally deferred until V2 because V1 first needed the backend typed-intent contract.
-- No auto-mode, direct write path, GraphRAG retrieval change, persisted PHI/session table, Alembic migration, taskpane, Command Centre, or broad API rewrite was added.
+- The Diary `Ask Bernie` composer now routes explicit `extend`/`lengthen` requests to the V1 backend tool-intent route instead of forcing them through the booking-slot interpreter.
+- Tool-intent responses render in a separate visible state with latest chat/history preserved, a "Proposed change" status, and a blue appointment-change proposal card.
+- The proposal card is populated from backend `BernieToolIntentOut.proposal.command` plus visible diary appointment context, not from staff/model text.
+- A `Confirm change` button appears only when the backend returns `result="proposal_ready"` with `proposal.safe=true` and an appointment id. Clarification, blocked, unsupported, or text-only responses show no confirm affordance.
+- Confirming an extension sends the backend proposal command to the existing appointment update path. Nothing is changed before staff confirmation.
+- New tool-intent rendering clears stale booking/no-slot UI, so old "no matching times" or booking-prep messages do not bleed into extension clarification states.
+- Added deterministic Diary smoke tests for extension proposal routing/confirm command and missing-duration clarification/no-stale-no-slot rendering.
+- `diary.css` was cache-busted from v131 to v132 and `diary.js` from v160 to v161.
+- No auto-mode, broad edit grammar, GraphRAG retrieval change, persisted PHI/session table, Alembic migration, taskpane, Command Centre, or broad API rewrite was added.
 
 ## Verification
 
 - JavaScript syntax check passed: `node --check docs\diary\diary.js`.
 - Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py`.
 - Frontend asset version check passed: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
-- New Bernie tool-intent tests passed: `.\.venv\Scripts\pytest.exe tests\test_bernie_tool_intent.py -q`.
-- Focused update-proposal tests passed: `.\.venv\Scripts\pytest.exe tests\test_appointment_update_proposal.py -q -k "update_proposal_returns_typed_command_without_mutating or update_proposal_blocked_on_conflict or confirmed_update_writes_row_and_audit"`.
-- Broader adjacent Bernie/update/confirm suite passed: `.\.venv\Scripts\pytest.exe tests\test_bernie_tool_intent.py tests\test_appointment_update_proposal.py tests\test_bernie_context_frames.py tests\test_diary_confirm_gate.py -q`.
+- Tool-intent/update/confirm backend suite passed: `.\.venv\Scripts\pytest.exe tests\test_bernie_tool_intent.py tests\test_appointment_update_proposal.py tests\test_diary_confirm_gate.py -q`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -q`.
 - `git diff --check` passed.
-- One earlier parallel pytest attempt hit a Postgres enum creation race in the shared test DB; the same suite passed when rerun serially.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for V1; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for V2; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. V1 adds a backend proposal contract and a narrow Diary frame id seam, but it does not yet wire the new route into the visible Bernie panel. The non-mutating route behaviour, no-write/no-confirm-bypass boundary, appointment update proposal delegation, frontend frame id, and deterministic Diary rendering were verified locally.
+No required manual review before moving on. V2 changes live Diary Bernie behaviour, but route selection, proposal rendering, confirm gating, update command submission, stale no-slot clearing, backend proposal boundaries, and deterministic Diary rendering were verified locally. A live human sanity check is still useful later because the user-facing value is conversational, but it is not required to close the sprint.
 
 ## Not Required Before Moving On
 
-- No visible "extend appointment" Bernie card or final friendly voice UX was implemented in V1.
+- No broad natural-language edit grammar was implemented beyond explicit `extend`/`lengthen`.
 - No persisted Bernie session table, Alembic migration, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
-- No auto-confirm, direct update execution, or limited Bernie auto-mode was implemented.
+- No model-authored write or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was started.
 
 ## Known Follow-Up
 
-- V2 should wire the new tool-intent route into the Diary Bernie panel and render appointment-extension proposals with friendly, professional Bernie voice while keeping proposal/confirm/write authority visibly separate.
-- The tool-intent parser is intentionally narrow and deterministic. A later backend-domain extraction can move it into a bounded Bernie/Diary domain module and replace parser heuristics with a typed intent router while preserving the same proposal contract.
+- The frontend classifier is intentionally narrow and non-authoritative. Future move/cancel/status tool intents should be added as typed backend/domain actions, not by growing a broad frontend grammar.
+- The confirmation path still uses the existing appointment update PUT pattern. A later native diary-action sprint should move human UI and Bernie updates onto one evidence-gated confirm grammar.
 - Appointment edit confirmation should continue to bind to deterministic appointment state and staff confirmation, not model wording or retrieved advisory facts.
 - A later persisted-session sprint should still choose TTL, cleanup, transcript-storage, and concurrency policy before adding PHI-bearing tables.
 
-## Next Sprint Candidate - V2 Visible Tool-Intent UX
+## Next Sprint Candidate - Unified Diary Action Grammar
 
 | Item | Value |
 |---|---|
-| Name | V2: Bernie Visible Tool-Intent UX And Voice |
+| Name | G1: Unified diary action grammar / evidence-gated update confirmation |
 | Status | Recommended, not launched |
 | Recommended agents | Codex/Ariadne orchestration; Claude if quota is available for backend/domain review; Antigravity for visible Diary UX; Codex worker for state/authority invariants |
 
-V1 gives Bernie a safe backend route for appointment-extension proposals. V2 should consume that route from the Diary panel, replace generic booking-only controls with a more general "Ask Bernie" flow, show the latest Bernie response and proposal source clearly, and avoid creating any confirm affordance unless the backend proposal contract supplies it.
+V2 proves Bernie can author a visible appointment-extension proposal through the same deterministic update proposal contract as the human UI. The next architectural slice should reduce the remaining asymmetry by moving appointment update confirmation toward one evidence-gated diary action grammar for human UI and Bernie alike.
+
+## Previous Closeout - Sprint V1
+
+| Item | Value |
+|---|---|
+| Batch | Sprint V1: Bernie Reception Voice And Tool-Intent Routing |
+| Integrated through | Claude lane superseded by session cap, Antigravity Diary UX plan accepted for V2, Codex invariant plan accepted, and Ariadne backend/frame implementation |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
+| Last updated | 2026-07-04 |
+
+V1 added `POST /api/v1/appointments/proposals/bernie/tool-intent`, the first typed non-booking Bernie diary tool-intent route. It supports explicit appointment-extension requests, resolves exactly one visible diary appointment from context frames, delegates to the deterministic appointment-update proposal contract, carries source attribution, and never writes directly. Diary context frames now include visible appointment ids. `diary.js` was cache-busted from v159 to v160.
 
 ## Previous Closeout - Sprint K1b
 

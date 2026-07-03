@@ -6361,6 +6361,192 @@ def test_bernie_composer_general_and_history_latest_visible(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_tool_intent_extension_proposal_renders_and_confirms(diary_page):
+    """Ask Bernie can route an appointment-extension request to the typed tool-intent proposal contract."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_tool_intent = []
+    captured_update = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/bernie/tool-intent"):
+            body = request.post_data_json
+            captured_tool_intent.append(body)
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "bernie_tool_intent",
+                    "safe": True,
+                    "result": "proposal_ready",
+                    "tool_intent": "extend_appointment",
+                    "autonomy_tier": "proposal",
+                    "requires_confirmation": True,
+                    "summary": "I've prepared a proposal to change this appointment to 30 minutes. Nothing is changed until staff confirm.",
+                    "proposal": {
+                        "intent": "update_appointment",
+                        "safe": True,
+                        "autonomy_tier": "proposal",
+                        "requires_confirmation": True,
+                        "issues": [],
+                        "warnings": [],
+                        "blocks": [],
+                        "command": {
+                            "appointment_id": "appt-tool-1",
+                            "practitioner_id": "practitioner-123",
+                            "appointment_type_id": "type-1",
+                            "appointment_date": "2026-07-03",
+                            "start_time_local": "15:00:00",
+                            "duration_minutes": 30,
+                            "reason": "Review",
+                            "patient_id": "patient-123",
+                            "patient_name_provisional": None,
+                            "location_id": "loc-1",
+                        },
+                        "patient_identity": "linked",
+                    },
+                    "warnings": [],
+                    "blocks": [],
+                    "source_attribution": {
+                        "intent_source": "deterministic_text_parser",
+                        "appointment_source": "visible_diary_context",
+                        "proposal_authority": "appointment_update_proposal",
+                        "write_authority": "staff_confirmed_put_only",
+                    },
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/bernie/interpret-booking-instruction"):
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected booking interpreter"}))
+            return
+        if request.method == "PUT" and request.url.endswith("/appointments/appt-tool-1"):
+            captured_update.append(request.post_data_json)
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"id": "appt-tool-1", "duration_minutes": 30}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        diary_page.evaluate(
+            """() => {
+              diaryDate = new Date(2026, 6, 3);
+              isBerniePilotActive = true;
+              activeAppointments = [{
+                id: "appt-tool-1",
+                appointment_date: "2026-07-03",
+                start_time_local: "15:00:00",
+                duration_minutes: 15,
+                patient_id: "patient-123",
+                patient: { id: "patient-123", first_name: "Margaret", last_name: "Thompson" },
+                practitioner_id: "practitioner-123",
+                practitioner: { first_name: "Alex", last_name: "Shera" },
+                appointment_type_id: "type-1",
+                location_id: "loc-1",
+                status: "Booked"
+              }];
+              const contentEl = document.getElementById("bernie-review-content");
+              contentEl.innerHTML = "";
+              renderBernieInstructionInput(contentEl);
+            }"""
+        )
+
+        diary_page.fill("[data-testid='bernie-instruction-input']", "Bernie extend Margaret Thompson's 3pm booking with Dr Shera to 30 minutes.")
+        diary_page.click("[data-testid='btn-bernie-instruction-submit']")
+        diary_page.wait_for_selector("[data-testid='bernie-tool-intent-proposal']", state="visible", timeout=5000)
+
+        panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
+        assert "Appointment change proposal" in panel_text
+        assert "Current duration" in panel_text
+        assert "30 mins" in panel_text
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert diary_page.locator("[data-testid='btn-bernie-tool-intent-confirm']").count() == 1
+        assert diary_page.locator("[data-testid='bernie-review-candidates-empty']").count() == 0
+
+        diary_page.evaluate("() => { isSmokeMode = () => false; }")
+        diary_page.click("[data-testid='btn-bernie-tool-intent-confirm']")
+        diary_page.wait_for_function("updates => updates.length > 0", arg=captured_update, timeout=5000)
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    assert captured_tool_intent, "Expected tool-intent request"
+    assert captured_tool_intent[0]["context_frames"], "Expected visible diary context frames"
+    assert any(frame.get("appointment_id") == "appt-tool-1" for frame in captured_tool_intent[0]["context_frames"])
+    assert captured_update[0]["appointment_id"] == "appt-tool-1"
+    assert captured_update[0]["duration_minutes"] == 30
+
+
+def test_bernie_tool_intent_clarification_has_no_confirm_or_stale_no_slot(diary_page):
+    """Incomplete tool-intent responses render as clarification, not stale booking/no-slot UI."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/bernie/tool-intent"):
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps({
+                    "intent": "bernie_tool_intent",
+                    "safe": False,
+                    "result": "clarification_required",
+                    "tool_intent": "extend_appointment",
+                    "autonomy_tier": "blocked",
+                    "requires_confirmation": False,
+                    "summary": "I need the new appointment duration before I can prepare that change.",
+                    "proposal": None,
+                    "warnings": [],
+                    "blocks": [{
+                        "code": "target_duration_required",
+                        "severity": "blocked",
+                        "message": "Tell me the total appointment duration, for example 30 minutes.",
+                    }],
+                    "source_attribution": {"write_authority": "none"},
+                }),
+            )
+            return
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/bernie/interpret-booking-instruction"):
+            route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected booking interpreter"}))
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              const contentEl = document.getElementById("bernie-review-content");
+              contentEl.innerHTML = "";
+              contentEl.innerHTML = '<div data-testid="bernie-review-candidates-empty">I could not find matching free times in that window.</div>';
+              renderBernieInstructionInput(contentEl);
+            }"""
+        )
+
+        diary_page.fill("[data-testid='bernie-instruction-input']", "Bernie extend Margaret Thompson's booking.")
+        diary_page.click("[data-testid='btn-bernie-instruction-submit']")
+        diary_page.wait_for_selector("[data-testid='bernie-tool-intent-issue']", state="visible", timeout=5000)
+
+        panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
+        assert "Tell me the total appointment duration" in panel_text
+        assert "I could not find matching free times in that window" not in panel_text
+        assert diary_page.locator("[data-testid='bernie-tool-intent-proposal']").count() == 0
+        assert diary_page.locator("[data-testid='btn-bernie-tool-intent-confirm']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 def test_bernie_new_staff_instruction_reanchors_to_visible_diary_date(diary_page):
     """A new instruction should use the visible diary date, not a stale session date."""
     import urllib.parse

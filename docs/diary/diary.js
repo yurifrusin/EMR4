@@ -84,6 +84,7 @@ class BernieSession {
     this.confirmPayload = null;
     this.confirmEndpoint = null;
     this.interpretEnvelope = null;
+    this.latestToolIntentPayload = null;
     this.latestReviewPayload = null;
     this.autoPreviewCandidateKey = null;
     this.sessionId = this.generateSessionId();
@@ -369,6 +370,7 @@ class BernieSession {
     this.confirmPayload = null;
     this.confirmEndpoint = null;
     this.interpretEnvelope = null;
+    this.latestToolIntentPayload = null;
     this.latestReviewPayload = null;
     this.autoPreviewCandidateKey = null;
     this.turnRef = null;
@@ -440,6 +442,9 @@ class BernieSession {
 
   syncToLegacy() {
     bernieInterpretResult = this.interpretEnvelope;
+    if (this.latestToolIntentPayload) {
+      bernieInterpretResult = this.latestToolIntentPayload;
+    }
     bernieSelectedCandidateIndex = this.selectedCandidateIndex;
     bernieStagedBookingPreview = this.stagedBookingPreview;
     bernieLatestReviewPayload = this.latestReviewPayload;
@@ -1461,6 +1466,178 @@ function buildBernieContextFrames(requestBody) {
     })
     .filter(frame => frame.patient_label && frame.booking_practitioner_id);
   return [visibleDateFrame, ...selectedFrames, ...dayBookingFrames];
+}
+
+function isBernieToolIntentInstruction(instruction) {
+  return /\b(extend|lengthen)\b/i.test(instruction || "");
+}
+
+async function fetchBernieToolIntent(instruction, referenceDate) {
+  const response = await apiFetch("/appointments/proposals/bernie/tool-intent", {
+    method: "POST",
+    body: JSON.stringify({
+      instruction,
+      reference_date: referenceDate,
+      context_frames: buildBernieContextFrames({})
+    })
+  });
+  if (!response.ok) {
+    await handleBernieServerRouteConflict(response);
+    throw new Error(await apiErrorMessage(response, "Bernie tool intent"));
+  }
+  return response.json();
+}
+
+function findAppointmentForToolIntent(envelope) {
+  const appointmentId = envelope?.proposal?.command?.appointment_id;
+  if (!appointmentId) return null;
+  return (activeAppointments || []).find(appt => appt.id === appointmentId) || null;
+}
+
+function toolIntentPatientLabel(envelope, appt) {
+  if (appt?.patient) {
+    return `${appt.patient.first_name || ""} ${appt.patient.last_name || ""}`.trim();
+  }
+  return appt?.patient_name_provisional || appt?.provisional_name || "Patient";
+}
+
+function toolIntentPractitionerLabel(appt) {
+  const practitioner = appt?.practitioner || {};
+  const mapEntry = practitioner.ahpra_number ? ahpraToPractitionerMap[practitioner.ahpra_number] : null;
+  const label = [
+    practitioner.first_name || mapEntry?.first_name || "",
+    practitioner.last_name || mapEntry?.last_name || ""
+  ].join(" ").trim();
+  return label ? berniePractitionerDisplayName(label) : "Practitioner";
+}
+
+function appendBernieToolIntentIssues(container, envelope) {
+  const issues = [...(envelope?.blocks || []), ...(envelope?.warnings || [])];
+  if (issues.length === 0) return;
+  const list = document.createElement("div");
+  list.className = "bernie-blocks-container";
+  list.setAttribute("data-testid", "bernie-tool-intent-issues");
+  issues.forEach(issue => {
+    const item = document.createElement("div");
+    item.className = "bernie-block-item";
+    item.setAttribute("data-testid", "bernie-tool-intent-issue");
+    item.textContent = bernieIssueDisplayText(issue) || issue.message || formatBernieCode(issue.code || "detail");
+    list.appendChild(item);
+  });
+  container.appendChild(list);
+}
+
+function renderBernieToolIntentReview(envelope) {
+  const contentEl = document.getElementById("bernie-review-content");
+  if (!contentEl) return;
+  contentEl.innerHTML = "";
+  if (isBerniePilotActive) {
+    renderBernieInstructionInput(contentEl);
+  }
+
+  const statusBadge = document.createElement("div");
+  statusBadge.className = `bernie-status-badge ${envelope?.result || "blocked"}`;
+  statusBadge.setAttribute("data-testid", "bernie-tool-intent-status");
+  statusBadge.textContent = envelope?.result === "proposal_ready"
+    ? "Proposed change"
+    : (envelope?.result === "clarification_required" ? "Need one more detail" : "Needs review");
+  contentEl.appendChild(statusBadge);
+
+  const headline = document.createElement("h3");
+  headline.className = "bernie-review-headline";
+  headline.setAttribute("data-testid", "bernie-tool-intent-summary");
+  headline.textContent = envelope?.summary || "I could not prepare that diary change.";
+  contentEl.appendChild(headline);
+
+  const proposal = envelope?.proposal;
+  const command = proposal?.command || {};
+  const canConfirm = envelope?.result === "proposal_ready" && proposal?.safe === true && command.appointment_id;
+  if (proposal && command.appointment_id) {
+    const appt = findAppointmentForToolIntent(envelope);
+    const card = document.createElement("div");
+    card.className = "bernie-tool-proposal-card";
+    card.setAttribute("data-testid", "bernie-tool-intent-proposal");
+
+    const title = document.createElement("div");
+    title.className = "bernie-tool-proposal-title";
+    title.textContent = "Appointment change proposal";
+    card.appendChild(title);
+
+    appendBernieDetailRow(card, "Patient", toolIntentPatientLabel(envelope, appt));
+    appendBernieDetailRow(card, "Practitioner", toolIntentPractitionerLabel(appt));
+    appendBernieDetailRow(card, "Date", command.appointment_date || appt?.appointment_date || "");
+    appendBernieDetailRow(card, "Time", (command.start_time_local || appt?.start_time_local || "").slice(0, 5));
+    appendBernieDetailRow(card, "Current duration", `${appt?.duration_minutes || "Unknown"} mins`);
+    appendBernieDetailRow(card, "Proposed duration", `${command.duration_minutes || proposal.command?.duration_minutes || ""} mins`);
+    appendBernieDetailRow(card, "Authority", "Staff confirmation required");
+    contentEl.appendChild(card);
+  }
+
+  appendBernieToolIntentIssues(contentEl, envelope);
+
+  const confirmBox = document.createElement("div");
+  confirmBox.className = "bernie-confirmation-box";
+  confirmBox.setAttribute("data-testid", "bernie-tool-intent-confirm-box");
+
+  const hint = document.createElement("div");
+  hint.className = "bernie-confirm-hint";
+  hint.textContent = canConfirm
+    ? "Review the proposed appointment change before confirming."
+    : "Nothing can be changed from this result. Ask Bernie another question or add the missing detail.";
+  confirmBox.appendChild(hint);
+
+  if (canConfirm) {
+    const confirmBtn = document.createElement("button");
+    confirmBtn.type = "button";
+    confirmBtn.className = "btn-bernie-confirm";
+    confirmBtn.id = "btn-bernie-tool-intent-confirm";
+    confirmBtn.setAttribute("data-testid", "btn-bernie-tool-intent-confirm");
+    confirmBtn.textContent = "Confirm change";
+    confirmBtn.addEventListener("click", async () => {
+      if (confirmBtn.disabled) return;
+      confirmBtn.disabled = true;
+      hint.textContent = "Updating appointment...";
+      try {
+        await confirmBernieToolIntentChange(envelope);
+        bernieSession.transitionTo("CONFIRMED");
+        bernieSession.latestToolIntentPayload = null;
+        bernieInterpretResult = null;
+        hint.textContent = "Appointment updated.";
+        await loadDiary(true);
+        scrollToAppointment(command.appointment_id);
+        renderBernieConfirmedState(contentEl);
+      } catch (err) {
+        bernieSession.transitionTo("SLOT_PREVIEW");
+        confirmBtn.disabled = false;
+        hint.textContent = err.message || "The appointment could not be updated. Please review the diary and try again.";
+      }
+    });
+    confirmBox.appendChild(confirmBtn);
+  }
+
+  contentEl.appendChild(confirmBox);
+}
+
+async function confirmBernieToolIntentChange(envelope) {
+  const proposal = envelope?.proposal;
+  const command = proposal?.command || {};
+  if (envelope?.result !== "proposal_ready" || proposal?.safe !== true || !command.appointment_id) {
+    throw new Error("This Bernie response does not contain a confirmable appointment proposal.");
+  }
+  if (isSmokeMode()) {
+    const appt = (activeAppointments || []).find(item => item.id === command.appointment_id);
+    if (appt && command.duration_minutes) {
+      appt.duration_minutes = command.duration_minutes;
+    }
+    return;
+  }
+  const response = await apiFetch(`/appointments/${command.appointment_id}`, {
+    method: "PUT",
+    body: JSON.stringify(command)
+  });
+  if (!response.ok) {
+    throw new Error(await apiErrorMessage(response, "Appointment update"));
+  }
 }
 
 async function fetchBernieInterpretation(requestBody) {
@@ -5467,46 +5644,64 @@ function renderBernieInstructionInput(contentEl) {
         }
         updateBernieChatTranscriptUI();
       }
-      const serverSessionFields = await bernieServerSessionRequestFields("interpret", intentRef);
-      const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
-        method: "POST",
-        body: JSON.stringify({
-          instruction: text,
-          reference_date: bernieSession.referenceDate || visibleReferenceDate,
-          context_frames: buildBernieContextFrames({}),
-          ...bernieTurnRequestFields(),
-          ...serverSessionFields
-        })
-      });
+      const referenceDate = bernieSession.referenceDate || visibleReferenceDate;
+      const shouldUseToolIntent = isBernieToolIntentInstruction(text);
 
-      if (response.ok) {
-        bernieInterpretResult = await response.json();
-        captureBernieTurnRef(bernieInterpretResult);
-        captureBernieServerSessionSnapshot(bernieInterpretResult);
-        const reply = bernieInterpretResult.clarifying_question || bernieInterpretResult.summary;
+      if (shouldUseToolIntent) {
+        bernieInterpretResult = await fetchBernieToolIntent(text, referenceDate);
+        bernieSession.latestToolIntentPayload = bernieInterpretResult;
+        bernieSession.interpretEnvelope = bernieInterpretResult;
+        bernieSession.latestReviewPayload = null;
+        const reply = bernieInterpretResult.summary;
         if (reply) {
           const alreadyAdded = bernieSession.turns.some(t => t.kind === "bernie_clarification" && t.payload.text === reply);
           if (!alreadyAdded) {
-            const type = bernieInterpretResult.clarifying_question ? "clarification_question" : "summary";
-            bernieSession.addEvent("bernie_clarification", { text: reply, type: type });
+            bernieSession.addEvent("bernie_clarification", { text: reply, type: "tool_intent" });
           }
         }
       } else {
-        await handleBernieServerRouteConflict(response);
-        let detail = "";
-        try {
-          const errData = await response.json();
-          detail = errData.detail || response.statusText || `Status ${response.status}`;
-        } catch (_) {
-          detail = `Status ${response.status}`;
+        const serverSessionFields = await bernieServerSessionRequestFields("interpret", intentRef);
+        const response = await apiFetch("/appointments/proposals/bernie/interpret-booking-instruction", {
+          method: "POST",
+          body: JSON.stringify({
+            instruction: text,
+            reference_date: referenceDate,
+            context_frames: buildBernieContextFrames({}),
+            ...bernieTurnRequestFields(),
+            ...serverSessionFields
+          })
+        });
+
+        if (response.ok) {
+          bernieInterpretResult = await response.json();
+          bernieSession.latestToolIntentPayload = null;
+          captureBernieTurnRef(bernieInterpretResult);
+          captureBernieServerSessionSnapshot(bernieInterpretResult);
+          const reply = bernieInterpretResult.clarifying_question || bernieInterpretResult.summary;
+          if (reply) {
+            const alreadyAdded = bernieSession.turns.some(t => t.kind === "bernie_clarification" && t.payload.text === reply);
+            if (!alreadyAdded) {
+              const type = bernieInterpretResult.clarifying_question ? "clarification_question" : "summary";
+              bernieSession.addEvent("bernie_clarification", { text: reply, type: type });
+            }
+          }
+        } else {
+          await handleBernieServerRouteConflict(response);
+          let detail = "";
+          try {
+            const errData = await response.json();
+            detail = errData.detail || response.statusText || `Status ${response.status}`;
+          } catch (_) {
+            detail = `Status ${response.status}`;
+          }
+          bernieInterpretResult = {
+            safe: false,
+            result: "blocked",
+            summary: "Booking instruction interpretation failed closed.",
+            blocks: [{ code: "interpret_request_failed", message: detail }]
+          };
+          bernieSession.addEvent("bernie_clarification", { text: bernieInterpretResult.summary, type: "blocked" });
         }
-        bernieInterpretResult = {
-          safe: false,
-          result: "blocked",
-          summary: "Booking instruction interpretation failed closed.",
-          blocks: [{ code: "interpret_request_failed", message: detail }]
-        };
-        bernieSession.addEvent("bernie_clarification", { text: bernieInterpretResult.summary, type: "blocked" });
       }
     } catch (err) {
       bernieInterpretResult = {
@@ -5619,6 +5814,18 @@ async function loadBernieLiveReview() {
     if (contentEl) {
       renderBernieConfirmedState(contentEl);
     }
+    return;
+  }
+
+  if (bernieInterpretResult?.intent === "bernie_tool_intent" || bernieSession.latestToolIntentPayload) {
+    const envelope = bernieSession.latestToolIntentPayload || bernieInterpretResult;
+    bernieSession.latestToolIntentPayload = envelope;
+    if (envelope?.result === "proposal_ready") {
+      bernieSession.transitionTo("SLOT_PREVIEW");
+    } else if (bernieSession.state !== "INSTRUCTION_ENTRY") {
+      bernieSession.transitionTo("INSTRUCTION_ENTRY");
+    }
+    renderBernieToolIntentReview(envelope);
     return;
   }
 
