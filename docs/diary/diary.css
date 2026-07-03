@@ -2373,6 +2373,16 @@ html, body {
   color: #334155;
 }
 
+.bernie-status-badge.roster_unavailable {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.bernie-status-badge.no_slots {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
 .bernie-status-badge.candidate_selection_required {
   background-color: #e0f2fe;
   color: #075985;

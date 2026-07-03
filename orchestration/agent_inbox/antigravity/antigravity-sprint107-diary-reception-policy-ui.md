@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | 0beddab |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint107-diary-reception-policy-ui --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed: C:\Users\sarashera\EMR4-worktrees\antigravity\orchestration\agent_inbox\codex\plan-antigravity-antigravity-sprint107-diary-reception-policy-ui.md, C:\Users\sarashera\EMR4-worktrees\antigravity\orchestration\agent_inbox\antigravity\antigravity-sprint107-diary-reception-policy-ui.md
-- Verification run: Pytest smoke test run completed successfully on baseline branch; no production changes made yet.
-- Remaining risks: Backward compatibility of legacy API responses (which lack reception_policy) when parsing them in diary.js. This is addressed in the plan via defensive checks.
+- Files changed: `docs/diary/diary.js`, `docs/diary/diary.css`, `docs/diary/diary.html`, `review/test_diary_smoke.py`, plus Sprint 107 plan/review coordination packets.
+- Verification run: `node --check docs\diary\diary.js`; `python scripts\check_frontend_versions.py`; focused `pytest review\test_diary_smoke.py -q -k reception_policy`; full `pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
+- Remaining risks: Older responses without `reception_policy` use conservative legacy fallback; future UI work should continue migrating copy to typed state/reason-code sources.

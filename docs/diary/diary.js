@@ -374,24 +374,59 @@ function bernieReviewTransition(payload) {
       suggestions
     };
   }
-  const hasBlockingIssue = blocks.length > 0;
-  const canShowCandidates = payload.status === "candidate_selection_required" && candidateSlots.length > 0;
-  const canShowNoSlots = (
-    payload.status === "clinic_day_exhausted" ||
-    (
-      payload.status === "candidate_selection_required" &&
-      candidateSlots.length === 0 &&
-      !hasBlockingIssue
-    )
-  );
+
+  let canShowCandidates = false;
+  let canShowNoSlots = false;
   let state = payload.status || "blocked";
-  if (canShowCandidates) {
-    state = "candidate_selection_required";
-  } else if (canShowNoSlots) {
-    state = "no_slots";
-  } else if (payload.status === "candidate_selection_required" && candidateSlots.length === 0) {
-    state = hasBlockingIssue ? "blocked" : "no_selectable_candidates";
+
+  const policy = payload.reception_policy;
+  if (policy) {
+    // reception_policy is source of truth when present
+    canShowCandidates = policy.can_offer_candidates === true && candidateSlots.length > 0;
+    canShowNoSlots = policy.search_ran_no_candidates === true;
+
+    if (policy.availability === "roster_unavailable" || policy.roster_unavailable === true) {
+      state = "roster_unavailable";
+    } else if (policy.availability === "search_ran_no_candidates" || policy.search_ran_no_candidates === true) {
+      state = "no_slots";
+    } else if (policy.availability === "blocked") {
+      state = "blocked";
+    } else if (payload.status === "confirmation_ready") {
+      state = "confirmation_ready";
+    } else if (canShowCandidates) {
+      state = "candidate_selection_required";
+    } else {
+      state = payload.status || "blocked";
+    }
+  } else {
+    // older responses without reception_policy must have safe legacy fallback
+    const hasRosterIssue = [...warnings, ...blocks].some(issue => issue.code === "no_practitioner_schedule");
+    if (hasRosterIssue) {
+      state = "roster_unavailable";
+      canShowCandidates = false;
+      canShowNoSlots = false;
+    } else {
+      const hasRealBlockingIssue = blocks.some(b => b.code !== "existing_future_follow_up");
+      canShowCandidates = payload.status === "candidate_selection_required" && candidateSlots.length > 0;
+      canShowNoSlots = (
+        payload.status === "clinic_day_exhausted" ||
+        (
+          payload.status === "candidate_selection_required" &&
+          candidateSlots.length === 0 &&
+          !hasRealBlockingIssue
+        )
+      );
+      state = payload.status || "blocked";
+      if (canShowCandidates) {
+        state = "candidate_selection_required";
+      } else if (canShowNoSlots) {
+        state = "no_slots";
+      } else if (payload.status === "candidate_selection_required" && candidateSlots.length === 0) {
+        state = hasRealBlockingIssue ? "blocked" : "no_selectable_candidates";
+      }
+    }
   }
+
   return {
     state,
     canShowCandidates,
@@ -403,6 +438,7 @@ function bernieReviewTransition(payload) {
 
 function bernieStatusCopyForPayload(payload) {
   const transition = bernieReviewTransition(payload);
+  if (transition.state === "roster_unavailable") return "Roster/schedule unavailable";
   if (transition.state === "no_slots") return "Try another time";
   if (transition.state === "no_selectable_candidates") return "Needs review";
   return bernieStatusCopy(payload?.status, payload?.blocks);
@@ -410,6 +446,7 @@ function bernieStatusCopyForPayload(payload) {
 
 function bernieHeadlineCopyForPayload(payload) {
   const transition = bernieReviewTransition(payload);
+  if (transition.state === "roster_unavailable") return "Roster/schedule unavailable";
   if (transition.state === "no_slots") return "No matching times found";
   if (transition.state === "no_selectable_candidates") return "I could not show a time for this request";
   if (payload?.status === "confirmation_ready") return BERNIE_HEADLINE_COPY.confirmation_ready;
@@ -424,6 +461,9 @@ function bernieReviewActionCopy(payload) {
   const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
   if (hasProviderUnavailable && !isBernieDevOrDebug()) {
     return "Bernie could not search just now. Nothing was booked. Try again in a moment.";
+  }
+  if (transition.state === "roster_unavailable") {
+    return "I could not find a bookable session for that request. Tell me another day or practitioner to try.";
   }
   if (transition.canShowCandidates) {
     return "Choose a time to show it on the diary. Nothing is booked until you confirm.";
@@ -2089,6 +2129,12 @@ async function selectCandidate(slot, index) {
       const data = await res.json();
       captureBernieTurnRef(data);
       const payload = data.staff_review;
+      if (data.reception_policy) {
+        payload.reception_policy = data.reception_policy;
+      }
+      if (data.suggestions) {
+        payload.suggestions = data.suggestions;
+      }
 
       const identity = payload.identity_evidence || {};
 
@@ -3751,7 +3797,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   renderBernieIdentityEvidence(contentEl, payload.identity_evidence, payload.patient_evidence, payload);
 
   // 4. Content Section depending on Status
-  if (payload.status === "blocked" || payload.status === "clinic_day_exhausted") {
+  if ((payload.status === "blocked" || payload.status === "clinic_day_exhausted") && transition.state !== "roster_unavailable" && transition.state !== "no_slots") {
     const isDevOrDebug = isBernieDevOrDebug();
     const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
 
@@ -3824,7 +3870,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     blocksContainer.appendChild(list);
     contentEl.appendChild(blocksContainer);
   }
-  else if (payload.status === "candidate_selection_required") {
+  else if (payload.status === "candidate_selection_required" || transition.state === "roster_unavailable" || transition.state === "no_slots") {
     const candidatesContainer = document.createElement("div");
     candidatesContainer.className = "bernie-candidates-container";
 
@@ -3842,9 +3888,13 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       empty.className = "bernie-candidate-empty";
       empty.setAttribute("data-testid", "bernie-review-candidates-empty");
       const scheduleIssue = [...(payload.warnings || []), ...(payload.blocks || [])].find(issue => issue.code === "no_practitioner_schedule");
-      empty.textContent = transition.canShowNoSlots
-        ? (scheduleIssue ? "There is no bookable session configured for that request." : "I could not find matching free times in that window.")
-        : "I cannot show a time from this result. Check the notes above or ask Bernie another question.";
+      if (transition.state === "roster_unavailable") {
+        empty.textContent = "There is no bookable session configured for that request.";
+      } else {
+        empty.textContent = transition.canShowNoSlots
+          ? (scheduleIssue ? "There is no bookable session configured for that request." : "I could not find matching free times in that window.")
+          : "I cannot show a time from this result. Check the notes above or ask Bernie another question.";
+      }
       list.appendChild(empty);
 
       const suggestions = transition.canShowNoSlots ? transition.suggestions : [];
@@ -4891,6 +4941,12 @@ async function loadBernieLiveReview() {
       const data = await res.json();
       captureBernieTurnRef(data);
       payload = data.staff_review;
+      if (data.reception_policy) {
+        payload.reception_policy = data.reception_policy;
+      }
+      if (data.suggestions) {
+        payload.suggestions = data.suggestions;
+      }
 
       // Update state machine and snapshot
       if (payload.status === "candidate_selection_required") {
@@ -4986,6 +5042,12 @@ async function initBernieReview() {
         const data = await res.json();
         if (data && data[reviewParam]) {
           payload = data[reviewParam].staff_review;
+          if (data[reviewParam].reception_policy) {
+            payload.reception_policy = data[reviewParam].reception_policy;
+          }
+          if (data[reviewParam].suggestions) {
+            payload.suggestions = data[reviewParam].suggestions;
+          }
         } else {
           console.error("Invalid response format from /bernie-review-fixtures:", data);
         }

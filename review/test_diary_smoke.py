@@ -5980,3 +5980,222 @@ def test_bernie_new_staff_instruction_reanchors_to_visible_diary_date(diary_page
     assert captured, "Expected interpret request"
     assert captured[0]["reference_date"] == "2026-07-03"
     assert "turn_ref" not in captured[0]
+
+
+def test_bernie_reception_policy_roster_unavailable(diary_page):
+    """Roster unavailable mapped state should render appropriate status, headline, action and empty message."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "blocked",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [],
+                warnings: [],
+                blocks: [],
+                reception_policy: {
+                  availability: "roster_unavailable",
+                  roster_unavailable: true,
+                  can_offer_candidates: false,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
+        status_text = diary_page.locator("[data-testid='bernie-review-status']").text_content().strip()
+        headline_text = diary_page.locator("[data-testid='bernie-review-headline']").text_content().strip()
+        action_text = diary_page.locator("[data-testid='bernie-review-action']").text_content().strip()
+        empty_text = diary_page.locator("[data-testid='bernie-review-candidates-empty']").text_content().strip()
+
+        assert status_text == "Roster/schedule unavailable"
+        assert headline_text == "Roster/schedule unavailable"
+        assert "I could not find a bookable session for that request" in action_text
+        assert "There is no bookable session configured for that request" in empty_text
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_reception_policy_search_ran_no_candidates(diary_page):
+    """True search_ran_no_candidates shows matching free times unavailable messages."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "candidate_selection_required",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [],
+                warnings: [],
+                blocks: [],
+                reception_policy: {
+                  availability: "search_ran_no_candidates",
+                  roster_unavailable: false,
+                  can_offer_candidates: false,
+                  search_ran_no_candidates: true
+                }
+              });
+            }"""
+        )
+
+        status_text = diary_page.locator("[data-testid='bernie-review-status']").text_content().strip()
+        headline_text = diary_page.locator("[data-testid='bernie-review-headline']").text_content().strip()
+        action_text = diary_page.locator("[data-testid='bernie-review-action']").text_content().strip()
+
+        assert status_text == "Try another time"
+        assert headline_text == "No matching times found"
+        assert "I could not find matching free times in that window" in action_text
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_reception_policy_search_ran_no_candidates_false(diary_page):
+    """When search_ran_no_candidates is false, no 'no matching times' copy appears."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "blocked",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [],
+                warnings: [],
+                blocks: [{ code: "missing_practitioner_id", message: "Missing practitioner" }],
+                reception_policy: {
+                  availability: "blocked",
+                  roster_unavailable: false,
+                  can_offer_candidates: false,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
+        status_text = diary_page.locator("[data-testid='bernie-review-status']").text_content().strip()
+        headline_text = diary_page.locator("[data-testid='bernie-review-headline']").text_content().strip()
+        action_text = diary_page.locator("[data-testid='bernie-review-action']").text_content().strip()
+
+        assert "Try another time" not in status_text
+        assert "No matching times found" not in headline_text
+        assert "I could not find matching free times in that window" not in action_text
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_reception_policy_advisory_future_bookings(diary_page):
+    """Advisory future bookings must still show candidates list successfully."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_auto_preview=false")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "candidate_selection_required",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [
+                  {
+                    appointment_date: "2026-06-27",
+                    start_time_local: "09:00:00",
+                    duration_minutes: 15,
+                    warnings: []
+                  }
+                ],
+                warnings: [{
+                  code: "existing_future_follow_up",
+                  severity: "warning",
+                  message: "Patient already has a future booking."
+                }],
+                blocks: [],
+                reception_policy: {
+                  availability: "search_ran_with_candidates",
+                  roster_unavailable: false,
+                  can_offer_candidates: true,
+                  search_ran_no_candidates: false
+                }
+              });
+            }"""
+        )
+
+        # Verify candidate item is visible
+        assert diary_page.locator("[data-testid='bernie-review-candidate-item']").count() == 1
+        assert "09:00:00" in diary_page.locator("[data-testid='bernie-review-candidate-item']").text_content()
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_reception_policy_legacy_fallback(diary_page):
+    """Legacy response without reception_policy fallback rules should behave correctly for roster unavailable."""
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        # Legacy payload lacks reception_policy, has no_practitioner_schedule block
+        diary_page.evaluate(
+            """() => {
+              isBerniePilotActive = true;
+              renderBernieReview({
+                status: "blocked",
+                confirmation_ready: false,
+                selected_slot: null,
+                candidate_slots: [],
+                warnings: [],
+                blocks: [{ code: "no_practitioner_schedule", message: "No practitioner schedule" }]
+              });
+            }"""
+        )
+
+        status_text = diary_page.locator("[data-testid='bernie-review-status']").text_content().strip()
+        headline_text = diary_page.locator("[data-testid='bernie-review-headline']").text_content().strip()
+        empty_text = diary_page.locator("[data-testid='bernie-review-candidates-empty']").text_content().strip()
+
+        assert status_text == "Roster/schedule unavailable"
+        assert headline_text == "Roster/schedule unavailable"
+        assert "There is no bookable session configured for that request" in empty_text
+
+    finally:
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
