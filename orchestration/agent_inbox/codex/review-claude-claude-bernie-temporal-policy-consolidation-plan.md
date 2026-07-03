@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-temporal-policy-consolidation-plan` |
-| Status | accepted |
+| Status | integrated |
 
 ## Review Request
 
@@ -32,3 +32,9 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 - Review result: Accepted. This is the right next slice after the bounded Bernie package foundation because it attacks duplicated time/date policy without changing UI or persisted-session architecture.
 - Follow-up required: Dispatch implementation only after explicit release. Watch import-cycle risk when inverting temporal helper ownership, exact-string/copy drift, and the known local test DB lifecycle fragility during broad test runs.
+
+## Integration Notes
+
+- Integration result: Implemented directly by Ariadne after Yuri approved proceeding.
+- Claude/Fable role: consulting plan author; no further Claude implementation run was used because the 5-hour limit was close.
+- Verification: py_compile/import smoke passed; focused Bernie/slot suite passed with `206 passed`; `git diff --check` passed with only existing CRLF normalization warnings.

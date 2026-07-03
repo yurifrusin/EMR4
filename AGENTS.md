@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint 106A - Bernie has a bounded backend domain package foundation (`app/services/bernie/`) with facade imports, capability registry skeleton, and persistence-shaped session/event contracts; no persisted session table or frontend state migration yet |
-| **Next recommended work** | Continue the Fable 5 Bernie architecture programme in small plan-gated slices: move implementation logic behind `app/services/bernie`, consolidate temporal policy, define typed context frames, and only then add persisted server-side Bernie sessions; keep broad root-to-branch API review deferred |
+| **Current active track** | Post-Sprint 106B - Bernie has a bounded backend domain package foundation and canonical pure temporal policy (`app/services/bernie/temporal.py`) for natural time/date helpers, week-relative date resolution, and shared same-day window decisions; no persisted session table or frontend state migration yet |
+| **Next recommended work** | Continue the Fable 5 Bernie architecture programme in small plan-gated slices: define typed receptionist context frames and reception-skill policy, then decide the persisted server-side Bernie session migration; keep broad root-to-branch API review deferred |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -490,7 +490,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint 106A Bernie bounded domain extraction foundation |
+| **Latest integration commit** | Sprint 106B Bernie temporal policy consolidation |
 
 ### Tag map (all tags pushed to remote)
 

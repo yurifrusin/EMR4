@@ -54,7 +54,9 @@ from app.services.bernie import (
     actor_context_for_interpreter_user,
     get_booking_instruction_interpreter,
     evaluate_bernie_pilot_eligibility,
+    evaluate_same_day_window,
     normalize_slot_search_command,
+    resolve_week_relative_date,
     resolve_booking_date_transition,
 )
 from app.services.ai.audit_store import persist_access_ai_audit_events
@@ -140,11 +142,7 @@ def _resolve_bernie_instruction_relative_date(
     instruction: str,
     reference_date: Optional[date_type],
 ) -> Optional[str]:
-    if reference_date is None:
-        return None
-    if BERNIE_WEEK_RELATIVE_RE.search(instruction):
-        return (reference_date + timedelta(days=7)).isoformat()
-    return None
+    return resolve_week_relative_date(instruction, reference_date)
 
 # ── Bernie confidence-policy helpers ─────────────────────────────────────────
 
@@ -1976,48 +1974,42 @@ def _resolve_bernie_interpretation_context(
     if resolved_date is not None and temporal_band in ("assume", "proceed_with_check"):
         practice_tz = _practice_zoneinfo(db, practice_id)
         clinic_now = _clinic_local_now(practice_tz)
-        if resolved_date == clinic_now.date():
-            # Same-day request: check earliest_time (or latest_time) against now
-            _earliest = normalization.constraint.earliest_time if normalization.constraint else None
-            _latest = normalization.constraint.latest_time if normalization.constraint else None
-            now_time = clinic_now.time().replace(second=0, microsecond=0)
-            if _earliest is not None and _latest is not None:
-                # Window defined: check if it is fully past
-                if _latest <= now_time:
-                    temporal_band = "ask"
-                    temporal_basis = "Same-day request: the requested time window has already passed today."
-                    temporal_clarifying = (
-                        "That time has already passed today — would you like a later time or another day?"
-                    )
-                elif _earliest < now_time:
-                    # Partly past — clamp earliest_time forward to now
-                    clamp_hhmm = now_time.strftime("%H:%M")
-                    if command_values.get("earliest_time"):
-                        command_values["earliest_time"] = clamp_hhmm
-                    # Re-normalize with clamped time
-                    command = SlotSearchCommandIn(**command_values)
-                    normalization = normalize_slot_search_command(
-                        command, reference_date=body.reference_date
-                    )
-                    temporal_basis = (
-                        f"Same-day request: earliest time clamped to {clamp_hhmm} "
-                        "(original time had partly passed)."
-                    )
-            elif _earliest is not None and _earliest <= now_time:
-                # Open-ended "after X today" requests remain useful after X has passed:
-                # clamp forward so Bernie never offers past slots, but does not block.
-                clamp_hhmm = now_time.strftime("%H:%M")
-                if command_values.get("earliest_time"):
-                    command_values["earliest_time"] = clamp_hhmm
-                command = SlotSearchCommandIn(**command_values)
-                normalization = normalize_slot_search_command(
-                    command, reference_date=body.reference_date
+        _earliest = normalization.constraint.earliest_time if normalization.constraint else None
+        _latest = normalization.constraint.latest_time if normalization.constraint else None
+        same_day_decision = evaluate_same_day_window(
+            resolved_date,
+            _earliest,
+            _latest,
+            clinic_now,
+        )
+        if (
+            same_day_decision.kind == "window_fully_past"
+            and _earliest is not None
+            and _latest is not None
+        ):
+            temporal_band = "ask"
+            temporal_basis = "Same-day request: the requested time window has already passed today."
+            temporal_clarifying = (
+                "That time has already passed today — would you like a later time or another day?"
+            )
+        elif same_day_decision.kind == "clamp_earliest" and same_day_decision.clamp_hhmm:
+            clamp_hhmm = same_day_decision.clamp_hhmm
+            if command_values.get("earliest_time"):
+                command_values["earliest_time"] = clamp_hhmm
+            command = SlotSearchCommandIn(**command_values)
+            normalization = normalize_slot_search_command(
+                command, reference_date=body.reference_date
+            )
+            if _latest is not None:
+                temporal_basis = (
+                    f"Same-day request: earliest time clamped to {clamp_hhmm} "
+                    "(original time had partly passed)."
                 )
+            else:
                 temporal_basis = (
                     f"Same-day request: earliest time clamped to {clamp_hhmm} "
                     "(open-ended start time had already passed)."
                 )
-
     temporal_axis = BernieConfidenceAxis(
         axis="temporal",
         band=temporal_band,
@@ -3560,6 +3552,12 @@ def propose_bernie_supervised_booking(
     clinic_now = _clinic_local_now(practice_tz)
     clinic_today = clinic_now.date()
     now_time = clinic_now.time().replace(second=0, microsecond=0)
+    same_day_decision = evaluate_same_day_window(
+        constraint.date_from,
+        constraint.earliest_time,
+        constraint.latest_time,
+        clinic_now,
+    )
 
     # ── Patient booking context (recognized-patient only) ────────────────────
     # Build once after normalization succeeds; attach to all subsequent returns.
@@ -3605,11 +3603,7 @@ def propose_bernie_supervised_booking(
 
     # Before-search bounded-window pre-check: if the window's upper bound is entirely
     # in the past, short-circuit without running a slot query.
-    if (
-        constraint.date_from == clinic_today
-        and constraint.latest_time is not None
-        and constraint.latest_time <= now_time
-    ):
+    if same_day_decision.kind == "window_fully_past":
         return _with_ctx(_bernie_clinic_day_exhausted(
             normalization=normalization,
             summary=(
@@ -3625,14 +3619,13 @@ def propose_bernie_supervised_booking(
     # Open-ended same-day clamp: if earliest_time is in the past, clamp it to now
     # so the slot search only looks at remaining bookable slots (not past ones).
     if (
-        constraint.date_from == clinic_today
-        and constraint.earliest_time is not None
+        same_day_decision.kind == "clamp_earliest"
+        and same_day_decision.clamp_hhmm
         and constraint.latest_time is None
-        and constraint.earliest_time < now_time
     ):
         # Re-normalize with the clamped earliest_time so the constraint reflects reality.
         clamped_command_values = body.command.model_dump()
-        clamped_command_values["earliest_time"] = now_time.strftime("%H:%M")
+        clamped_command_values["earliest_time"] = same_day_decision.clamp_hhmm
         clamped_command = SlotSearchCommandIn(**clamped_command_values)
         normalization = normalize_slot_search_command(
             clamped_command,

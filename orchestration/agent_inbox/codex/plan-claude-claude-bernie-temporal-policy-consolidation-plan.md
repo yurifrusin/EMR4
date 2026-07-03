@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-bernie-temporal-policy-consolidation-plan` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 12:17 +1000 |
 | Source HEAD | `a5b83e3` |
 
@@ -47,3 +47,9 @@ All existing JSON outputs unchanged: week-relative instruction still produces th
 - Review result: Accepted by Ariadne as a narrow Sprint 106B implementation plan. The plan preserves public JSON/API/copy behaviour, keeps `_clinic_local_now` in the router for existing monkeypatch seams, and limits implementation to temporal policy extraction plus focused tests.
 - Required changes before implementation: Implementation should wait for explicit Yuri/Ariadne `complete sprint task` approval, ideally after the Claude 5-hour window resets. Keep implementation at medium reasoning and stop if exact-string behaviour drifts or router changes widen beyond the listed call sites.
 - Approved to proceed: yes, after explicit implementation release
+
+## Integration Notes
+
+- Integration result: Implemented directly by Ariadne after Yuri approved proceeding, to conserve Claude/Fable 5 session usage.
+- Scope kept to the accepted plan: canonical pure temporal helpers in `app/services/bernie/temporal.py`, legacy interpreter aliases, shared router same-day window decisions, bounded package exports, and focused temporal tests.
+- Verification: py_compile/import smoke passed; focused Bernie/slot suite passed with `206 passed` after resetting the local test schema; `git diff --check` passed with only existing CRLF normalization warnings.

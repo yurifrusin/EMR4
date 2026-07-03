@@ -69,6 +69,14 @@ from app.services.bernie.session import (
     SessionTransitionValidation,
     validate_session_event,
 )
+from app.services.bernie.temporal import (
+    SameDayWindowDecision,
+    evaluate_same_day_window,
+    extract_natural_date_constraint,
+    extract_natural_time_constraints,
+    parse_time_fragment,
+    resolve_week_relative_date,
+)
 from app.services.bernie.transitions import (
     DateResolutionTransition,
     resolve_booking_date_transition,
@@ -119,6 +127,13 @@ __all__ = [
     "BernieSessionState",
     "SessionTransitionValidation",
     "validate_session_event",
+    # temporal
+    "SameDayWindowDecision",
+    "evaluate_same_day_window",
+    "extract_natural_date_constraint",
+    "extract_natural_time_constraints",
+    "parse_time_fragment",
+    "resolve_week_relative_date",
     # transitions
     "DateResolutionTransition",
     "resolve_booking_date_transition",

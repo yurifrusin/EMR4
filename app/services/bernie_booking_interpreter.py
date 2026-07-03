@@ -11,7 +11,7 @@ import os
 import re
 import asyncio
 from dataclasses import dataclass, field
-from datetime import date, timedelta
+from datetime import date
 from typing import Any, Callable, Protocol
 
 from pydantic import ValidationError
@@ -32,6 +32,11 @@ from app.services.ai.audit_events import AccessAiAuditEvent, AiAuditSourceSurfac
 from app.services.ai.contracts import AiCapability, AiMethod, AiProvider
 from app.services.ai.entitlements import AiAccessRole, AiActorContext, actor_context_from_user
 from app.services.ai.service import _get_default_provider
+from app.services.bernie.temporal import (
+    extract_natural_date_constraint,
+    extract_natural_time_constraints,
+    parse_time_fragment,
+)
 from app.services.bernie_slot_normalizer import normalize_slot_search_command
 
 
@@ -45,94 +50,16 @@ KEY_VALUE_RE = re.compile(
     r"limit)\s*[:=]\s*(?P<value>[^\s,;]+)",
     re.IGNORECASE,
 )
-DATE_RE = re.compile(r"\b(?:today|tomorrow|\d{4}-\d{2}-\d{2})\b", re.IGNORECASE)
-WEEK_RELATIVE_RE = re.compile(
-    r"\b(?:in\s+(?:a|one|1)\s+week(?:['’`\\]s)?(?:\s+time)?|next\s+week)\b",
-    re.IGNORECASE,
-)
 TIME_RE = re.compile(r"\b(?:[01]?\d|2[0-3]):[0-5]\d(?::[0-5]\d)?\b")
 UNSAFE_TERMS = ("book it", "create it", "confirm it", "make the booking", "write it")
-
-# Natural language time phrase patterns (no DB, no network).
-# Business-hours assumption: bare hour 1–11 without am/pm → pm.
-_NAT_TIME_PAT = r"(?:1?[0-9]|2[0-3])(?:[.:][0-5]\d)?(?:\s*(?:am|pm))?"
-_BETWEEN_TIME_RE = re.compile(
-    r"\bbetween\s+(" + _NAT_TIME_PAT + r")\s+and\s+(" + _NAT_TIME_PAT + r")\b",
-    re.IGNORECASE,
-)
-_AFTER_TIME_RE = re.compile(r"\bafter\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
-_BEFORE_TIME_RE = re.compile(r"\bbefore\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
-_TIME_FRAGMENT_RE = re.compile(
-    r"^(1?[0-9]|2[0-3])(?:[.:]([0-5]\d))?(?:\s*(am|pm))?$",
-    re.IGNORECASE,
-)
 
 LiveProviderFactory = Callable[[], AiProvider]
 _live_provider_factory: LiveProviderFactory | None = None
 
 
-def _parse_time_fragment(raw: str) -> str | None:
-    """Convert a natural time fragment (e.g. '3', '3:45', '3.45', '3 pm') to HH:MM.
-
-    Business-hours assumption: bare hours 1–11 without am/pm are treated as pm.
-    Returns None when the fragment cannot be parsed.
-    """
-    m = _TIME_FRAGMENT_RE.match(raw.strip())
-    if not m:
-        return None
-    hour = int(m.group(1))
-    minute = int(m.group(2) or 0)
-    meridiem = (m.group(3) or "").lower()
-    if meridiem == "pm" and hour < 12:
-        hour += 12
-    elif meridiem == "am" and hour == 12:
-        hour = 0
-    elif not meridiem and 1 <= hour <= 11:
-        hour += 12
-    if hour > 23 or minute > 59:
-        return None
-    return f"{hour:02d}:{minute:02d}"
-
-
-def _extract_natural_time_constraints(
-    instruction: str,
-) -> tuple[str | None, str | None]:
-    """Extract earliest/latest times from receptionist phrases.
-
-    Handles: 'after 3', 'after 3 pm', 'before 3:45', 'before 3.45',
-    'between 2 pm and 3:45'.  Returns (earliest_time, latest_time) as HH:MM
-    strings or None when not found.  Pure function — no DB, no network.
-    """
-    earliest: str | None = None
-    latest: str | None = None
-
-    between_m = _BETWEEN_TIME_RE.search(instruction)
-    if between_m:
-        earliest = _parse_time_fragment(between_m.group(1))
-        latest = _parse_time_fragment(between_m.group(2))
-        return earliest, latest
-
-    after_m = _AFTER_TIME_RE.search(instruction)
-    if after_m:
-        earliest = _parse_time_fragment(after_m.group(1))
-
-    before_m = _BEFORE_TIME_RE.search(instruction)
-    if before_m:
-        latest = _parse_time_fragment(before_m.group(1))
-
-    return earliest, latest
-
-
-def _extract_natural_date_constraint(
-    instruction: str,
-    reference_date: date | None,
-) -> str | None:
-    date_match = DATE_RE.search(instruction)
-    if date_match:
-        return date_match.group(0).lower()
-    if WEEK_RELATIVE_RE.search(instruction) and reference_date is not None:
-        return (reference_date + timedelta(days=7)).isoformat()
-    return None
+_parse_time_fragment = parse_time_fragment
+_extract_natural_time_constraints = extract_natural_time_constraints
+_extract_natural_date_constraint = extract_natural_date_constraint
 
 
 @dataclass
