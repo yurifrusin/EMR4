@@ -6,6 +6,11 @@ N1a keeps the public Bernie symbol names stable while moving the implementation
 home behind compatibility facades.
 """
 
+from app.services.diary.confirm_gate import (
+    ConfirmAffordanceDecision,
+    ConfirmAffordanceGate,
+    evaluate_confirm_affordance,
+)
 from app.services.diary.capabilities import (
     BERNIE_CAPABILITY_REGISTRY,
     BernieCapability,
@@ -65,6 +70,9 @@ from app.services.diary.temporal import (
 )
 
 __all__ = [
+    "ConfirmAffordanceDecision",
+    "ConfirmAffordanceGate",
+    "evaluate_confirm_affordance",
     "BERNIE_CAPABILITY_REGISTRY",
     "BernieCapability",
     "BernieCapabilityTier",

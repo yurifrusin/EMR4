@@ -17,6 +17,11 @@ Later sprints add action envelopes and retire more flat-module implementations;
 external import paths through this package stay stable.
 """
 
+from app.services.bernie.confirm_gate import (
+    ConfirmAffordanceDecision,
+    ConfirmAffordanceGate,
+    evaluate_confirm_affordance,
+)
 from app.services.bernie.capabilities import (
     BERNIE_CAPABILITY_REGISTRY,
     BernieCapability,
@@ -112,6 +117,10 @@ from app.services.bernie.transitions import (
 )
 
 __all__ = [
+    # confirm gate
+    "ConfirmAffordanceDecision",
+    "ConfirmAffordanceGate",
+    "evaluate_confirm_affordance",
     # capabilities
     "BERNIE_CAPABILITY_REGISTRY",
     "BernieCapability",
