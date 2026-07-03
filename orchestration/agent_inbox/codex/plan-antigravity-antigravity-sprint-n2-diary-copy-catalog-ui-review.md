@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n2-diary-copy-catalog-ui-review` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 20:08 +1000 |
 | Source HEAD | `0d112ef` |
 
@@ -49,4 +49,4 @@ docs/diary/diary.js, review/test_diary_smoke.py
 - Required changes before implementation: Consume typed reason codes/copy in
   the Bernie review panel only; avoid visual redesign, route/write changes, and
   fragile message sniffing. Preserve legacy fallbacks.
-- Approved to proceed: yes, release with `complete sprint task`.
+- Approved to proceed: completed and integrated in Sprint N2.

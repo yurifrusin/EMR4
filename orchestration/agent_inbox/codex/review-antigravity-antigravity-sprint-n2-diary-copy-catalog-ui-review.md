@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n2-diary-copy-catalog-ui-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,9 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. The Diary Bernie review panel now resolves
+  schedule/review copy from typed reason codes and a local copy catalog, with
+  legacy fallbacks preserved and no diary-grid or write-path redesign.
+- Follow-up required: N3 should unify confirm/review affordance gating around
+  backend-owned evidence so stale/advisory-only state cannot show confirm-grade
+  UI.

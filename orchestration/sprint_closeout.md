@@ -8,51 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint N1b: Diary Action Envelopes And Boundary Tests |
-| Integrated through | Codex/Halley envelope contract lane, Antigravity boundary review, and Ariadne implementation while Claude remained in session-limit cooldown |
+| Batch | Sprint N2: Schedule Explanation And Copy Catalog |
+| Integrated through | Claude/Opus plan, Codex/Hubble backend invariant lane, Antigravity Diary UI lane, and Ariadne integration/review |
 | Status | Integrated locally, focused verification passed; push/mirror/audit pending |
 | Last updated | 2026-07-03 |
 
 ## What Changed
 
-- Added internal diary action envelope contracts:
-  `DiaryActionIntent`, `DiaryActionProposal`, `DiaryActionConfirmation`, and
-  `DiaryActionSuggestion`.
-- Added `DiaryActionAuthor` and `DiaryActionChannel` enums, including
-  `staff_ui`, `bernie`, `rayleen`, `davida`, and `system` author families.
-- Added `allowed_authors` metadata to every diary action/capability catalog
-  entry.
-- Made suggestions explicitly read-only conversation inputs: they cannot claim
-  write authority, require confirmation, or smuggle confirm-grade evidence in
-  nested payloads.
-- Added adversarial reception-policy tests proving advisory/model frames cannot
-  fabricate no-slot/roster-unavailable states, offer candidates, or unblock hard
-  guardrails.
-- Added type-layer tests rejecting model-sourced slot-search/roster truth.
+- Added a pure diary-domain schedule explanation contract and classifier for
+  `no_roster_row`, `practitioner_unavailable`, `outside_request_window`,
+  `breaks_only_window`, `fully_booked`, `same_day_window_elapsed`, and true
+  `searched_no_candidates`.
+- Added deterministic schedule copy catalog support keyed by canonical
+  state/reason code, plus legacy reason-code aliases for current router/UI
+  compatibility.
+- Added `schedule_reason_codes` to deterministic reception-policy decisions so
+  UI copy can be driven by typed facts instead of scenario-specific message
+  branches.
+- Added Bernie compatibility facades for the new diary-domain schedule
+  explanation contracts.
+- Updated the Diary Bernie review panel to consume typed schedule reason codes
+  through a local copy catalog while preserving legacy fallbacks.
+- Bumped the deployed Diary asset reference to `diary.js?v=152`.
+- Added backend and review-smoke coverage for schedule explanation precedence,
+  copy catalog totality, and UI copy for the canonical schedule reason codes.
 
 ## Verification
 
-- Focused N1b backend suite passed:
-  `.\.venv\Scripts\python.exe -m pytest tests\test_diary_action_envelopes.py tests\test_diary_action_boundary_contracts.py tests\test_bernie_diary_rehome_compatibility.py tests\test_bernie_domain_package.py -q`.
-- `.\.venv\Scripts\python.exe -m compileall app\services\diary app\services\bernie -q` passed.
-- Focused Diary smoke policy checks passed:
-  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k reception_policy`.
+- Focused N2 backend/domain suite passed:
+  `.\.venv\Scripts\python.exe -m pytest tests\test_diary_schedule_explanations.py tests\test_diary_action_boundary_contracts.py tests\test_bernie_domain_package.py -q`.
+- `node --check docs\diary\diary.js` passed.
+- `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py` passed.
+- Focused Diary smoke checks passed:
+  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "schedule_reason_codes or reception_policy"`.
 - `git diff --check` passed.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N1b;
-  the previous N1a run showed pre-existing/global failures outside these
-  diary-domain contract slices.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for N2;
+  the previous full run showed pre-existing/global failures outside these
+  diary-domain schedule/copy slices.
 
 ## Recommended User Review
 
-No required manual review before moving on. This was an internal backend
-contract/test slice with no UI, route, schema, migration, or write-path
-behaviour change.
+No required manual review before moving on. Optional live spot-check: ask Bernie
+for a same-day elapsed window, a practitioner-away day, an outside-roster window,
+and a genuinely fully booked window, and confirm the panel no longer collapses
+those states into false "no matching times" or stale clarification copy.
 
 ## Not Required Before Moving On
 
-- No route consumes the new envelopes yet; they are internal contracts only.
-- No unified confirm path, HMAC evidence signing, persisted session, or K1
-  knowledge substrate was implemented.
+- No GraphRAG/K1 knowledge substrate, persisted session, unified confirm path,
+  HMAC evidence signing, or route write change was implemented.
 - No auto-confirm or limited Bernie auto-mode was implemented.
 - No broad root-to-branch API review or GraphQL/context-graph redesign was
   started.
@@ -63,25 +67,34 @@ behaviour change.
 
 ## Known Follow-Up
 
-- N2 should now add typed schedule explanation and copy catalog support without
-  spreading scenario-specific message branches through `diary.js`.
+- N3 should unify confirm gating around evidence-backed proposals so the UI
+  cannot show confirm/review affordances from stale or advisory-only state.
+- K1 typed practice knowledge substrate remains a good parallel candidate after
+  N3 scoping; retrieval must stay advisory-only until evidence boundaries exist.
 - Continue agentic Diary/Taskpane state-machine/API-pattern sprints before the
   broad root-to-branch API-spine review.
 
-## Next Sprint Candidate - Sprint N2
+## Next Sprint Candidate - Sprint N3
 
 | Item | Value |
 |---|---|
-| Name | Schedule Explanation And Copy Catalog |
+| Name | Unified Evidence-Gated Confirm |
 | Status | Recommended, not launched |
-| Recommended agents | Codex/Ariadne orchestration; Claude if session window has refreshed; Antigravity for Diary UI copy-catalog review if UI changes are included; Codex worker for backend reason-code invariants |
+| Recommended agents | Codex/Ariadne orchestration; Claude usual sprint model if session window allows; Antigravity for Diary UI confirm-affordance review; Codex worker for backend evidence/guardrail invariants |
 
-N2 should implement typed schedule explanations in the diary domain and a small
-copy catalog keyed by state/reason code. It should explain no roster row, day
-off, breaks, fully booked, outside-hours, elapsed same-day window, and true
-searched-no-candidates states without using GraphRAG or changing the write path.
-Limited auto-mode remains a future architecture branch, not the next
-implementation.
+N3 should define one backend-owned evidence gate for booking confirmation and
+proposal review affordances. It should prevent stale/advisory/model-only state
+from producing confirm-grade UI, without implementing auto-mode, persisted
+sessions, GraphRAG, or broader write-path changes.
+
+## Previous Closeout - Sprint N1b
+
+| Item | Value |
+|---|---|
+| Batch | Sprint N1b: Diary Action Envelopes And Boundary Tests |
+| Integrated through | Codex/Halley envelope contract lane, Antigravity boundary review, and Ariadne implementation while Claude remained in session-limit cooldown |
+| Status | Integrated, verified, pushed, mirrored, and audited |
+| Last updated | 2026-07-03 |
 
 ## Previous Closeout - Sprint 106D
 

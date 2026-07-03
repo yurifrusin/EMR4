@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 84f8c16 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-n2-diary-copy-catalog-ui-review --summary "Short plan summary"` |
@@ -89,6 +89,11 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.js`, `docs/diary/diary.html`,
+  `review/test_diary_smoke.py`, and this coordination packet.
+- Verification run: `node --check docs\diary\diary.js`;
+  `.\.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "schedule_reason_codes or reception_policy"`;
+  `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`;
+  `git diff --check`.
+- Remaining risks: UI currently consumes reason-code/catalog data with legacy
+  fallbacks; router-side evidence population remains a future sprint.
