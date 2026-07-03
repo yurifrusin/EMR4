@@ -157,6 +157,20 @@ Integration notes:
   must not set slot truth, roster truth, policy hard blocks, confirm authority,
   freshness/audit evidence, or write payloads.
 
+## Sprint S1: Signed Confirmation Evidence
+
+| Item | Value |
+|---|---|
+| Status | Dispatched for plan-gated worker plans |
+| Product Goal | Harden Bernie/proposal confirmation evidence so confirmation-grade writes are backed by server-signed evidence and fail closed when evidence is missing, malformed, tampered, stale, or mismatched |
+| Worker Shape | Claude backend/domain contract plan, Antigravity Diary UI evidence-echo review plan, Codex worker adversarial invariant plan, Ariadne orchestration/review |
+| Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-s1-signed-confirm-evidence-contract.md` |
+| Antigravity Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-s1-confirm-evidence-ui-review.md` |
+| Codex Task Packet | `orchestration/agent_inbox/codex/codex-sprint-s1-signed-evidence-invariants.md` |
+| In Scope | HMAC/signed candidate/proposal evidence design, confirm evidence echo, stale/tamper/replay/mismatch tests, legacy compatibility strategy, confirm-affordance authority boundaries |
+| Out Of Scope | Persisted session table, GraphRAG/practice-knowledge route/UI wiring, auto-mode, broad raw write-path/API-spine redesign, UI redesign, live PHI |
+| Verification | Plan packets first; later implementation must run focused evidence/confirm/proposal tests, relevant Diary smoke fixtures if UI changes, compileall/node checks as applicable, and `git diff --check` |
+
 ## Sprint 106: Bernie Reception-Domain Copilot Architecture Consult
 
 | Item | Value |
