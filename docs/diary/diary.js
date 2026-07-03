@@ -298,6 +298,124 @@ function enrichBernieConfirmPayload(confirmPayload) {
   return body;
 }
 
+const DIARY_SCHEDULE_REASON_ALIASES = {
+  "no_practitioner_schedule": "no_roster_row",
+  "slot_search_skipped_no_schedule": "no_roster_row",
+  "no_roster": "no_roster_row",
+  "day_off": "practitioner_unavailable",
+  "practitioner_day_off": "practitioner_unavailable",
+  "outside_hours": "outside_request_window",
+  "break_window": "breaks_only_window",
+  "breaks_only": "breaks_only_window",
+  "clinic_day_exhausted": "same_day_window_elapsed",
+  "elapsed_same_day": "same_day_window_elapsed",
+  "no_slot_candidates": "searched_no_candidates",
+  "searched_no_candidates": "searched_no_candidates"
+};
+
+function canonicalizeReasonCode(code) {
+  if (!code) return null;
+  return DIARY_SCHEDULE_REASON_ALIASES[code] || code;
+}
+
+const DIARY_COPY_CATALOG = {
+  no_roster_row: {
+    status: "Roster unavailable",
+    headline: "No roster found",
+    action: "Check the practitioner roster or choose another practitioner."
+  },
+  practitioner_unavailable: {
+    status: "Practitioner away",
+    headline: "Practitioner is away",
+    action: "Choose another practitioner or another date."
+  },
+  outside_request_window: {
+    status: "Outside hours",
+    headline: "Outside rostered hours",
+    action: "Choose a time within the practitioner's rostered hours."
+  },
+  breaks_only_window: {
+    status: "Break time",
+    headline: "Break time",
+    action: "Choose a time outside the break window."
+  },
+  fully_booked: {
+    status: "Fully booked",
+    headline: "Fully booked",
+    action: "Choose another time, practitioner, or date."
+  },
+  same_day_window_elapsed: {
+    status: "Time passed",
+    headline: "Time has passed today",
+    action: "Choose a later time today or another date."
+  },
+  searched_no_candidates: {
+    status: "No slots",
+    headline: "No matching slots",
+    action: "Try a wider time window, another practitioner, or another date."
+  }
+};
+
+function getPrimaryScheduleReasonCode(payload) {
+  if (!payload || !payload.reception_policy) return null;
+
+  if (Array.isArray(payload.reception_policy.schedule_reason_codes)) {
+    const codes = payload.reception_policy.schedule_reason_codes;
+    if (codes.length > 0) {
+      return canonicalizeReasonCode(codes[0]);
+    }
+  }
+
+  if (Array.isArray(payload.reception_policy.reason_codes)) {
+    for (const code of payload.reception_policy.reason_codes) {
+      const canonical = canonicalizeReasonCode(code);
+      if (canonical && DIARY_COPY_CATALOG[canonical]) {
+        return canonical;
+      }
+    }
+  }
+
+  const issues = [...(payload.blocks || []), ...(payload.warnings || [])];
+  for (const issue of issues) {
+    if (issue && issue.code) {
+      const canonical = canonicalizeReasonCode(issue.code);
+      if (canonical && DIARY_COPY_CATALOG[canonical]) {
+        return canonical;
+      }
+    }
+  }
+
+  return null;
+}
+
+function createMockScheduleExplanation(reasonCode, availability) {
+  return {
+    status: availability === "roster_unavailable" ? "blocked" : "candidate_selection_required",
+    confirmation_ready: false,
+    selected_slot: null,
+    candidate_slots: [],
+    warning_summary: "0 warning(s), 1 blocked issue(s).",
+    evidence_summary: "Blocked review payload; no confirm evidence is available.",
+    confirm_payload: null,
+    blocks: [
+      { code: reasonCode, severity: availability === "roster_unavailable" ? "blocked" : "warning", message: "Mock schedule issue" }
+    ],
+    reception_policy: {
+      availability: availability,
+      can_search_slots: false,
+      must_ask_clarification: false,
+      can_offer_candidates: false,
+      can_prepare_proposal: false,
+      must_block_confirmation: false,
+      advisory_warnings_only: false,
+      roster_unavailable: availability === "roster_unavailable",
+      search_ran_no_candidates: availability === "search_ran_no_candidates",
+      reason_codes: [reasonCode],
+      schedule_reason_codes: [reasonCode]
+    }
+  };
+}
+
 const BERNIE_STATUS_COPY = {
   blocked: "Needs details",
   candidate_selection_required: "Choose a time",
@@ -400,29 +518,40 @@ function bernieReviewTransition(payload) {
     }
   } else {
     // older responses without reception_policy must have safe legacy fallback
-    const hasRosterIssue = [...warnings, ...blocks].some(issue => issue.code === "no_practitioner_schedule");
-    if (hasRosterIssue) {
+    const reasonCode = getPrimaryScheduleReasonCode(payload);
+    if (reasonCode === "no_roster_row" || reasonCode === "practitioner_unavailable" || reasonCode === "outside_request_window" || reasonCode === "breaks_only_window") {
       state = "roster_unavailable";
       canShowCandidates = false;
       canShowNoSlots = false;
+    } else if (reasonCode === "fully_booked" || reasonCode === "same_day_window_elapsed" || reasonCode === "searched_no_candidates") {
+      state = "no_slots";
+      canShowCandidates = false;
+      canShowNoSlots = true;
     } else {
-      const hasRealBlockingIssue = blocks.some(b => b.code !== "existing_future_follow_up");
-      canShowCandidates = payload.status === "candidate_selection_required" && candidateSlots.length > 0;
-      canShowNoSlots = (
-        payload.status === "clinic_day_exhausted" ||
-        (
-          payload.status === "candidate_selection_required" &&
-          candidateSlots.length === 0 &&
-          !hasRealBlockingIssue
-        )
-      );
-      state = payload.status || "blocked";
-      if (canShowCandidates) {
-        state = "candidate_selection_required";
-      } else if (canShowNoSlots) {
-        state = "no_slots";
-      } else if (payload.status === "candidate_selection_required" && candidateSlots.length === 0) {
-        state = hasRealBlockingIssue ? "blocked" : "no_selectable_candidates";
+      const hasRosterIssue = [...warnings, ...blocks].some(issue => issue.code === "no_practitioner_schedule");
+      if (hasRosterIssue) {
+        state = "roster_unavailable";
+        canShowCandidates = false;
+        canShowNoSlots = false;
+      } else {
+        const hasRealBlockingIssue = blocks.some(b => b.code !== "existing_future_follow_up");
+        canShowCandidates = payload.status === "candidate_selection_required" && candidateSlots.length > 0;
+        canShowNoSlots = (
+          payload.status === "clinic_day_exhausted" ||
+          (
+            payload.status === "candidate_selection_required" &&
+            candidateSlots.length === 0 &&
+            !hasRealBlockingIssue
+          )
+        );
+        state = payload.status || "blocked";
+        if (canShowCandidates) {
+          state = "candidate_selection_required";
+        } else if (canShowNoSlots) {
+          state = "no_slots";
+        } else if (payload.status === "candidate_selection_required" && candidateSlots.length === 0) {
+          state = hasRealBlockingIssue ? "blocked" : "no_selectable_candidates";
+        }
       }
     }
   }
@@ -438,6 +567,10 @@ function bernieReviewTransition(payload) {
 
 function bernieStatusCopyForPayload(payload) {
   const transition = bernieReviewTransition(payload);
+  const reasonCode = getPrimaryScheduleReasonCode(payload);
+  if (reasonCode && DIARY_COPY_CATALOG[reasonCode]) {
+    return DIARY_COPY_CATALOG[reasonCode].status;
+  }
   if (transition.state === "roster_unavailable") return "Roster/schedule unavailable";
   if (transition.state === "no_slots") return "Try another time";
   if (transition.state === "no_selectable_candidates") return "Needs review";
@@ -446,6 +579,10 @@ function bernieStatusCopyForPayload(payload) {
 
 function bernieHeadlineCopyForPayload(payload) {
   const transition = bernieReviewTransition(payload);
+  const reasonCode = getPrimaryScheduleReasonCode(payload);
+  if (reasonCode && DIARY_COPY_CATALOG[reasonCode]) {
+    return DIARY_COPY_CATALOG[reasonCode].headline;
+  }
   if (transition.state === "roster_unavailable") return "Roster/schedule unavailable";
   if (transition.state === "no_slots") return "No matching times found";
   if (transition.state === "no_selectable_candidates") return "I could not show a time for this request";
@@ -461,6 +598,10 @@ function bernieReviewActionCopy(payload) {
   const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
   if (hasProviderUnavailable && !isBernieDevOrDebug()) {
     return "Bernie could not search just now. Nothing was booked. Try again in a moment.";
+  }
+  const reasonCode = getPrimaryScheduleReasonCode(payload);
+  if (reasonCode && DIARY_COPY_CATALOG[reasonCode]) {
+    return DIARY_COPY_CATALOG[reasonCode].action;
   }
   if (transition.state === "roster_unavailable") {
     return "I could not find a bookable session for that request. Tell me another day or practitioner to try.";
@@ -3888,7 +4029,10 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       empty.className = "bernie-candidate-empty";
       empty.setAttribute("data-testid", "bernie-review-candidates-empty");
       const scheduleIssue = [...(payload.warnings || []), ...(payload.blocks || [])].find(issue => issue.code === "no_practitioner_schedule");
-      if (transition.state === "roster_unavailable") {
+      const reasonCode = getPrimaryScheduleReasonCode(payload);
+      if (reasonCode && DIARY_COPY_CATALOG[reasonCode]) {
+        empty.textContent = DIARY_COPY_CATALOG[reasonCode].action;
+      } else if (transition.state === "roster_unavailable") {
         empty.textContent = "There is no bookable session configured for that request.";
       } else {
         empty.textContent = transition.canShowNoSlots
@@ -5083,6 +5227,17 @@ async function initBernieReview() {
       payload = mockBernieReviewCandidateSelection;
     } else if (reviewParam === "confirmation_ready") {
       payload = mockBernieReviewConfirmationReady;
+    } else {
+      const canonical = canonicalizeReasonCode(reviewParam);
+      if (canonical && DIARY_COPY_CATALOG[canonical]) {
+        const isRosterUnavailable = [
+          "no_roster_row",
+          "practitioner_unavailable",
+          "outside_request_window",
+          "breaks_only_window"
+        ].includes(canonical);
+        payload = createMockScheduleExplanation(reviewParam, isRosterUnavailable ? "roster_unavailable" : "search_ran_no_candidates");
+      }
     }
   }
 
