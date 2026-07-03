@@ -138,7 +138,7 @@ After every fully integrated batch, Codex updates
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; push/mirror/audit pending |
+| Status | Integrated, pushed, mirrored, and audited |
 | Product Goal | Create a typed, provenance-bearing practice-knowledge substrate that can later support GraphRAG-style retrieval while keeping Bernie and the diary state machine advisory-only at the retrieval boundary |
 | Worker Shape | Claude implementation, Antigravity advisory-UX plan accepted for a later wiring sprint, Codex/Laplace advisory-boundary review, Ariadne integration |
 | In Scope | `app/services/practice_knowledge/`, deterministic in-memory retriever protocol seam, advisory-only result envelopes, one-way Bernie advisory-frame adapter, adversarial tests |

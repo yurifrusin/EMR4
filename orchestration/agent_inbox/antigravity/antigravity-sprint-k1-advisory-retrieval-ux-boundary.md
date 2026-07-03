@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 944883f |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-k1-advisory-retrieval-ux-boundary --summary "Short plan summary"` |
@@ -88,6 +88,10 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 ## Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
+
+- Codex review result: accepted as a future UI consumption lane, not released for
+  K1 implementation. The plan remains deferred until backend route/session
+  wiring exposes a typed advisory envelope.
 
 - Files changed:
 - Verification run:

@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint K1: Typed Practice Knowledge Substrate |
 | Integrated through | Claude backend/domain implementation, Antigravity advisory-UX plan accepted for a later wiring lane, Codex/Laplace boundary review, and Ariadne integration verification |
-| Status | Integrated locally, focused verification passed; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed
