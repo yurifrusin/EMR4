@@ -279,7 +279,7 @@ Integration notes:
 
 | Item | Value |
 |---|---|
-| Status | Integrated and verified locally; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Product Goal | Make Bernie interpreter/proposal/candidate/confirmation outcomes first-class server-session events so N6's session bridge starts converging toward server-owned conversation state without raw transcript persistence |
 | Worker Shape | Claude backend/session contract plan if quota allows, Antigravity Diary outcome-render/state UX plan, Codex worker adversarial invariant plan, Ariadne orchestration/integration |
 | Claude Task Packet | `orchestration/agent_inbox/claude/claude-sprint-n7-bernie-session-outcome-contract.md` |

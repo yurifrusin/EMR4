@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint N7: Bernie Server Outcome Events And Confirmation Binding |
 | Integrated through | Claude lane superseded by quota cap, Antigravity stood down after no-artifact CLI attempts, Codex/Boole invariant plan recovered by Ariadne, and Ariadne backend/session implementation |
-| Status | Integrated and verified locally; push, mirror realign, and audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-03 |
 
 ## What Changed
