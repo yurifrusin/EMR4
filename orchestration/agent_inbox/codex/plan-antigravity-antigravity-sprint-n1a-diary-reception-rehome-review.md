@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n1a-diary-reception-rehome-review` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 19:26 +1000 |
 | Source HEAD | `0debced` |
 
@@ -69,6 +69,9 @@ This plan focuses on verifying and protecting the contract compatibility of the 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne as the N1a contract/review lane.
+- Required changes before implementation: Avoid overlapping with Claude's
+  service-module move. Prefer a compatibility test file and smoke-harness
+  verification; no UI, copy, route, or runtime service edits unless Ariadne
+  explicitly redirects after Claude submits.
+- Approved to proceed: yes, release with `complete sprint task`.

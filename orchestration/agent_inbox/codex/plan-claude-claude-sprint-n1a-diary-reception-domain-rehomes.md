@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-n1a-diary-reception-domain-rehomes` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | 2026-07-03 19:29 +1000 |
 | Source HEAD | `0debced` |
 
@@ -44,6 +44,9 @@ Import ordering/cycles: low - diary never imports bernie; bernie import-graph to
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted by Ariadne. This is the primary N1a implementation
+  lane for pure backend service rehomes and compatibility facades.
+- Required changes before implementation: Keep this slice strictly
+  no-behaviour-change. Do not add envelopes, allowed_authors, suggestion
+  semantics, UI changes, route/schema changes, or migrations.
+- Approved to proceed: yes, release with `complete sprint task`.

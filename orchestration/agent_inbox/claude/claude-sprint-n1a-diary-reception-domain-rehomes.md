@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | pending_plan_review |
+| Status | accepted |
 | Created | d76f100 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-n1a-diary-reception-domain-rehomes --summary "Short plan summary"` |

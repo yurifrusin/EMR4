@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n1a-diary-reception-rehome-review` |
-| Status | queued |
+| Status | accepted |
 
 ## Review Request
 
@@ -30,5 +30,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Plan accepted for bounded N1a contract verification.
+- Follow-up required: Implement after Claude's primary rehome if direct
+  identity against `app.services.diary` is required, or add tests that remain
+  compatible before the rehome lands.
