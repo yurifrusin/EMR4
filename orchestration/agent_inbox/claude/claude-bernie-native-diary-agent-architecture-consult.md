@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 97c3ca8 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-bernie-native-diary-agent-architecture-consult --summary "Short plan summary"` |
@@ -85,10 +85,38 @@ Codex/Ariadne can review the plan packet, compare it to EMR4 handover/protocol d
 
 Record concerns, alternative designs, or reasons this task should not be merged as-is.
 
+- Dissent preserved in the plan (§17): the consult reverses part of its own
+  Sprint 106A/B package placement (capability registry and temporal policy
+  belong in a diary domain package, not Bernie's); recommends N1 before the
+  queued Sprint 108 content (invertible); declines to recommend any GraphRAG
+  build now (typed practice-facts table first); and keeps the LLM paraphrase
+  lane optional and last.
+
 ## Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: coordination artifacts only —
+  `orchestration/agent_inbox/codex/plan-claude-claude-bernie-native-diary-agent-architecture-consult.md`
+  (full Fable 5 consulting plan: three-grammar diagnosis, domain boundaries,
+  native diary action grammar/catalog, three-layer event/state model,
+  deterministic authority consolidation, Bernie compile/clarify/narrate
+  responsibilities, layered guardrails, UI render-from-typed-state, session
+  persistence entry at N4, signed stateless evidence upgrade at N3, GraphRAG
+  advisory-only boundary with enforcement test, Sprint 104-107 migration map,
+  sprints N1-N4 with N1 recommended first, risks, acceptance checks, dissent,
+  pause note) and this packet's status/notes. No production code, migrations,
+  UI, schema, or test files were edited.
+- Verification run: read-only review of the bounded `app/services/bernie/`
+  package (capabilities, session, policy, frames, facades),
+  `bernie_turn_evidence.py`, the full `appointments.py` endpoint surface and
+  proposal/confirm flows, `diary.js` proposal call sites and drag/resize
+  proposal-then-raw-PUT flow, `bernie_interaction_model.md`, the accepted
+  Sprint 106 consult plan, parallel workstreams (Sprints 96-107), and the
+  Sprint 107 closeout. No production-code tests were run — none were needed
+  for read-only evidence and the plan gate forbids implementation.
+- Remaining risks: plan is unreviewed; key calls for Ariadne/Yuri are the
+  package rehome (reverses part of Sprint 106A/B placement), the N3 unified
+  evidence-gated confirm (breaking flow change for the diary UI write path),
+  the PHI/retention + TTL + concurrency decisions that gate N4, and the
+  N1-vs-N2 ordering preference.
