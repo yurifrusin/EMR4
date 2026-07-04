@@ -45,7 +45,7 @@ That catalog currently advertises DeepSeek models to the Codex model picker. In 
 - DeepSeek mode: the composer/picker shows the DeepSeek bridge catalog, e.g. `DeepSeek Pro`.
 - OpenAI-native mode: the `model_catalog_json` override is removed, so Codex falls back to the native OpenAI/Codex model list.
 
-The switch does not remove the DeepSeek provider or `deepseek-worker` agent. It only changes which model catalog the Desktop picker uses. Restart or reload Codex after switching modes so the dropdown refreshes.
+The switch does not remove the DeepSeek provider or `deepseek-worker` agent. It only changes which model catalog the Desktop picker uses. Fully exit/restart Codex after switching modes, then open a fresh conversation. Existing prompt windows may remain pinned to the model/catalog they were created with.
 
 ## Switch Scripts
 
@@ -81,7 +81,22 @@ Switch the Codex picker back to OpenAI-native mode:
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\tools\model-switch\Use-OpenAICodex.ps1"
 ```
 
-After either switch, restart or reload Codex before trusting the visible model selector.
+After either switch, fully exit/restart Codex and open a fresh conversation before trusting the visible model selector. These scripts are not live dropdown toggles for an already-open composer.
+
+## Known Limitation: Existing Conversations
+
+The switch scripts update local Codex configuration, but Codex Desktop can cache
+or bind the model picker for already-open conversations. If the dropdown does not
+change after running a script, that does not necessarily mean the script failed.
+Use this sequence instead:
+
+1. Run `Show-CodexModelMode.ps1` and confirm the intended config mode.
+2. Fully exit Codex Desktop, not just the current chat pane.
+3. Reopen Codex and start a fresh EMR4 conversation.
+4. Check the model dropdown in the fresh composer.
+
+Do not rely on an already-open Ariadne thread to switch models mid-thread. Treat
+DeepSeek Ariadne-v2 and OpenAI Ariadne as separate fresh sessions.
 
 ## Current Local Bridge State
 

@@ -186,7 +186,7 @@ Current safety point before the Ariadne-v2 experiment:
 - Tag: `safety/ariadne-v1-before-deepseek-20260704-182049`
 - Commit: `9d74c849e35cdd3e17984392ee8030622391f2a2`
 
-On the alternate PC, do not assume the model switch scripts exist. Recreate or securely copy the local scripts under `%USERPROFILE%\.codex\tools\model-switch\`, then restart Codex after each switch. Do not commit DeepSeek keys, bridge key files, Codex auth, or bridge logs.
+On the alternate PC, do not assume the model switch scripts exist. Recreate or securely copy the local scripts under `%USERPROFILE%\.codex\tools\model-switch\`, then fully exit/restart Codex and start a fresh conversation after each switch. Existing prompt windows may stay pinned to the old model/catalog. Do not commit DeepSeek keys, bridge key files, Codex auth, or bridge logs.
 ## Pull The Current Baton On The Alternate PC
 
 Run in PowerShell:
