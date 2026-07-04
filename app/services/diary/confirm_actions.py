@@ -1,4 +1,4 @@
-﻿"""Diary-domain signed confirmation action descriptors.
+"""Diary-domain signed confirmation action descriptors.
 
 This module is the single internal catalog for appointment proposal confirm
 routes that already require signed evidence. It deliberately does not execute
@@ -10,7 +10,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Callable, Optional
 
 from app.services.bernie_turn_evidence import (
     SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
@@ -18,7 +17,6 @@ from app.services.bernie_turn_evidence import (
     SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
-    verify_signed_confirmation_evidence,
 )
 
 
@@ -88,6 +86,10 @@ def get_diary_confirm_action(action: DiaryConfirmAction) -> DiaryConfirmActionDe
 
     return DIARY_CONFIRM_ACTIONS[action]
 
+from typing import Any, Callable, Optional
+
+from app.services.bernie_turn_evidence import verify_signed_confirmation_evidence
+
 
 def verify_signed_confirmation_evidence_block(
     evidence: Optional[dict[str, Any]],
@@ -100,7 +102,7 @@ def verify_signed_confirmation_evidence_block(
     missing_message: str = "Signed confirmation evidence is required.",
     secret: Optional[str] = None,
 ) -> tuple[Optional[str], list[dict[str, str]]]:
-    """Verify signed confirmation evidence and return (audit_tag, blocks).
+    '''Verify signed confirmation evidence and return (audit_tag, blocks).
 
     Encapsulates the common evidence-verification pattern shared across
     diary confirm routes:
@@ -128,7 +130,7 @@ def verify_signed_confirmation_evidence_block(
         - audit_tag_to_append is the audit_tag when verification succeeded,
           or None when it failed or evidence was missing.
         - blocks is a list of block entries; always empty on success.
-    """
+    '''
     signed_evidence_present = evidence is not None
     if not (evidence_required or signed_evidence_present):
         return None, [block_builder("signed_evidence_required", missing_message)]
