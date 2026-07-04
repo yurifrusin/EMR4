@@ -150,6 +150,11 @@ bridge/Codex after rotating `DEEPSEEK_API_KEY`.
   quota is healthy. Prefer ordinary Claude sprint models for implementation and
   reserve Fable/high-cost modes for architecture consulting, plan arbitration,
   or unusually hard reviews.
+- Antigravity/Gemini is not just a UX lane. When Gemini quota is healthy, use it
+  for independent backend/domain-policy critique, test design, fixture/harness
+  work, architecture dissent, and small bounded implementation lanes. Because
+  Antigravity CLI stdout can be blank, every prompt must demand a tangible repo
+  artifact and Ariadne must verify via git/file inspection.
 - Use DeepSeek Flash first for bounded backend-internal worker lanes and
   read-heavy reviews. On this PC, Sprint D2 cost roughly US$0.08 in DeepSeek
   tokens after setup, and D3 proved Flash could implement a real backend sprint

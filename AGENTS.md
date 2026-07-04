@@ -50,11 +50,15 @@ Codex role separation:
 - Codex workers may submit plans/reviews to Codex's inbox, but Ariadne remains
   responsible for final integration. Ariadne must not treat an
   orchestrator-created Codex plan as proof that a separate worker has submitted.
-- Claude, Antigravity, DeepSeek, and native Codex workers are all valid
+- Claude, Antigravity/Gemini, DeepSeek, and native Codex workers are all valid
   sprint workers when their quota/tooling is healthy. Claude may do real
   implementation work, not just planning, on `claude/current`; reserve Fable
   or other high-cost Claude modes for architecture/consulting gates where the
-  extra reasoning depth is worth the 5-hour-window burn.
+  extra reasoning depth is worth the 5-hour-window burn. Antigravity is not
+  limited to UX: use Gemini for independent backend/domain-policy critique,
+  test design, fixture/harness work, architecture dissent, and small bounded
+  implementation lanes when it has clear file ownership and must submit a
+  tangible repo artifact.
 - DeepSeek Flash via `codex-deepseek-bridge` may replace or supplement the
   spawned Codex worker for bounded read-heavy reviews and implementation lanes
   when Ariadne stays as OpenAI/Codex orchestrator. Use Flash first; consider
@@ -184,10 +188,11 @@ Codex is the default orchestration agent for EMR4. This means:
   spawn extra workers when independent ownership boundaries make the extra
   coverage worth it. Preferred cost posture while OpenAI/Codex usage is scarce:
   keep Ariadne as orchestrator, let Claude implement while quota is healthy, use
-  DeepSeek Flash for cheap bounded implementation/review lanes, escalate to
-  DeepSeek Pro for reasoning-heavy worker tasks, and reserve native Codex
-  subagents for times when OpenAI usage is flowing or their tool/context fit is
-  clearly superior.
+  Antigravity/Gemini for an independent domain/product/test-design lane when
+  Gemini quota is available, use DeepSeek Flash for cheap bounded
+  implementation/review lanes, escalate to DeepSeek Pro for reasoning-heavy
+  worker tasks, and reserve native Codex subagents for times when OpenAI usage
+  is flowing or their tool/context fit is clearly superior.
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).

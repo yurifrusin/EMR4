@@ -16,11 +16,15 @@ Read these before acting on remembered process details.
 
 - 2026-07-04: Updated sprint worker mix. Claude is allowed to perform real
   implementation work on `claude/current` when quota is healthy; it is not
-  limited to planning. Avoid spending Fable/high-cost Claude modes except for
-  architecture consulting or unusually hard review. When OpenAI/Codex usage is
-  scarce, keep Ariadne as orchestrator/integrator and offload bounded real work
-  to Claude plus DeepSeek. When OpenAI usage is healthy, Ariadne may also spawn
-  native Codex subagents alongside Claude, Antigravity, and DeepSeek.
+  limited to planning. Antigravity/Gemini is not limited to UX work: use it for
+  independent backend/domain-policy critique, test design, fixture/harness
+  work, architecture dissent, and small bounded implementation lanes when it
+  has clear file ownership and a tangible repo artifact. Avoid spending
+  Fable/high-cost Claude modes except for architecture consulting or unusually
+  hard review. When OpenAI/Codex usage is scarce, keep Ariadne as
+  orchestrator/integrator and offload bounded real work to Claude, Antigravity,
+  and DeepSeek. When OpenAI usage is healthy, Ariadne may also spawn native
+  Codex subagents alongside Claude, Antigravity, and DeepSeek.
 - 2026-07-04: DeepSeek Flash via `codex-deepseek-bridge` is approved for
   bounded implementation experiments when Ariadne remains orchestrator and
   integrator. Use a dedicated worker branch and a tight file boundary. Prompts
