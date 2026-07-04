@@ -68,11 +68,15 @@ Codex role separation:
   details live in `docs/alternate-pc-handover.md`; controlled DeepSeek/OpenAI
   model-picker switching and Ariadne-v2 safety rules live in
   `docs/codex-model-switching-deepseek.md`.
-- Ariadne-v2 DeepSeek Pro orchestration is experimental. Before deliberately
-  running the main Codex composer as DeepSeek Pro, create or confirm a remote
-  safety point and use a local review branch; do not auto-promote amended code
-  to `master` until Yuri approves. The current safety point is branch
-  `safety/ariadne-v1-before-deepseek` and tag
+- Ariadne-v2 DeepSeek Pro orchestration is currently blocked in the
+  ChatGPT-account Codex Desktop GUI: on 2026-07-04 the GUI showed `DeepSeek
+  Pro` but rejected prompts with "The 'deepseek-pro' model is not supported
+  when using Codex with a ChatGPT account." Keep Ariadne/main orchestration on
+  native OpenAI/Codex unless a future API-key/CLI/profile experiment proves a
+  safe DeepSeek main-composer path. Before any such experiment, create or
+  confirm a remote safety point and use a local review branch; do not
+  auto-promote amended code to `master` until Yuri approves. The current safety
+  point is branch `safety/ariadne-v1-before-deepseek` and tag
   `safety/ariadne-v1-before-deepseek-20260704-182049` at `9d74c84`.
 - Native OpenAI/Codex subagents remain part of the toolbox. When OpenAI usage
   credit is healthy, Ariadne may run Claude, Antigravity, DeepSeek, and Codex

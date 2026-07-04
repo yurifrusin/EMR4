@@ -5,9 +5,11 @@ This runbook records the controlled setup for switching the Codex Desktop model 
 EMR4 now uses DeepSeek in two distinct ways:
 
 1. Low-cost worker lanes through the `deepseek-worker` subagent.
-2. Experimental Ariadne-v2 orchestration, where Yuri may deliberately run the main Codex composer on DeepSeek Pro.
+2. A proposed Ariadne-v2 orchestration experiment, where Yuri tried to run the main Codex composer on DeepSeek Pro.
 
-The second mode is experimental. Keep the git safety point below until the experiment has proved itself.
+The second mode is currently blocked in the ChatGPT-account Codex Desktop GUI.
+Keep the git safety point below until any future API-key/CLI/main-composer
+experiment has proved itself.
 
 ## Current Safety Point
 
@@ -108,6 +110,28 @@ Do not ask an active Codex thread to run that command unless you are happy for
 the thread to terminate. Reopen Codex only after `Get-Process` returns no
 Codex processes.
 
+## Known Limitation: ChatGPT Account GUI
+
+On 2026-07-04, after the picker showed `DeepSeek Pro`, Codex Desktop rejected
+the prompt with:
+
+```text
+The 'deepseek-pro' model is not supported when using Codex with a ChatGPT account.
+```
+
+That means the bridge can make `deepseek-pro` visible in the Desktop model
+picker, but the ChatGPT-account execution path will not run that custom bridge
+model as the main Codex GUI model. Treat main-composer DeepSeek Pro Ariadne-v2
+as not available in this account mode.
+
+Current supported posture:
+
+- Keep Ariadne/main Codex orchestration on the native OpenAI/Codex model path.
+- Use `deepseek-worker` Flash/Pro for bounded worker lanes where the subagent
+  provider configuration can point at `deepseek_bridge`.
+- Revisit main-composer DeepSeek only as a separate API-key/CLI/profile
+  experiment, with a fresh safety point and no automatic `master` promotion.
+
 ## Known Limitation: Existing Conversations
 
 The switch scripts update local Codex configuration, but Codex Desktop can cache
@@ -122,7 +146,7 @@ Use this sequence instead:
 5. Check the model dropdown in the fresh composer.
 
 Do not rely on an already-open Ariadne thread to switch models mid-thread. Treat
-DeepSeek Ariadne-v2 and OpenAI Ariadne as separate fresh sessions.
+DeepSeek bridge and OpenAI-native sessions as separate fresh sessions.
 
 ## Current Local Bridge State
 
@@ -159,9 +183,11 @@ Use DeepSeek in increasing-risk tiers:
 
 1. `deepseek-worker` Flash for bounded, low-cost read-heavy review or narrow implementation lanes.
 2. `deepseek-worker` Pro only when reasoning depth is the bottleneck.
-3. Main-composer DeepSeek Pro Ariadne-v2 only as an explicit experiment with a git safety point and no automatic master promotion.
+3. Main-composer DeepSeek Pro Ariadne-v2 is blocked in ChatGPT-account Codex
+   Desktop. Revisit only as a separate API-key/CLI/profile experiment with a
+   git safety point and no automatic master promotion.
 
-When testing Ariadne-v2 on DeepSeek Pro:
+When testing any future Ariadne-v2-style DeepSeek Pro path:
 
 - Start with small review or planning tasks.
 - Prefer local review branches and do not push to `master` until Yuri approves.

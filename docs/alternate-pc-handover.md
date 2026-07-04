@@ -178,7 +178,13 @@ bridge/Codex after rotating `DEEPSEEK_API_KEY`.
 
 ## Ariadne-v2 DeepSeek Pro Experiment
 
-The low-cost worker setup above is distinct from running the main Codex composer as DeepSeek Pro. Controlled model-picker switching is documented in [Codex Model Switching and DeepSeek Ariadne Experiment](codex-model-switching-deepseek.md).
+The low-cost worker setup above is distinct from running the main Codex composer
+as DeepSeek Pro. Controlled model-picker switching is documented in
+[Codex Model Switching and DeepSeek Ariadne Experiment](codex-model-switching-deepseek.md).
+As of 2026-07-04, the ChatGPT-account Codex Desktop GUI rejects `deepseek-pro`
+as a main-composer model even when the picker displays it. Use DeepSeek through
+the `deepseek-worker` lane, not as the main Ariadne GUI model, unless a future
+API-key/CLI/profile experiment proves otherwise.
 
 Current safety point before the Ariadne-v2 experiment:
 
@@ -305,4 +311,3 @@ The key design decisions to preserve are:
 
 After the audit, tell me whether the alternate PC needs Google ADC re-auth for Bernie or Scribe, whether the repo is clean, whether DeepSeek worker setup is available, and whether you are ready to dispatch the next sprint as HANDIN READY.
 ```
-
