@@ -83,6 +83,31 @@ powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\tools\model-sw
 
 After either switch, fully exit/restart Codex and open a fresh conversation before trusting the visible model selector. These scripts are not live dropdown toggles for an already-open composer.
 
+## Verify Codex Is Really Closed
+
+On Windows, closing the visible Codex window may leave background `Codex.exe`
+or `codex.exe` processes alive. If those processes remain, the next visible
+window can keep using the old model catalog even when `config.toml` has already
+changed.
+
+Before deciding that a switch failed, close Codex and check from a separate
+PowerShell window:
+
+```powershell
+Get-Process Codex,codex -ErrorAction SilentlyContinue | Select-Object Id,ProcessName,Path,StartTime
+```
+
+If processes remain and you are ready to end all running Codex sessions, stop
+them from that separate PowerShell window:
+
+```powershell
+Get-Process Codex,codex -ErrorAction SilentlyContinue | Stop-Process
+```
+
+Do not ask an active Codex thread to run that command unless you are happy for
+the thread to terminate. Reopen Codex only after `Get-Process` returns no
+Codex processes.
+
 ## Known Limitation: Existing Conversations
 
 The switch scripts update local Codex configuration, but Codex Desktop can cache
@@ -92,8 +117,9 @@ Use this sequence instead:
 
 1. Run `Show-CodexModelMode.ps1` and confirm the intended config mode.
 2. Fully exit Codex Desktop, not just the current chat pane.
-3. Reopen Codex and start a fresh EMR4 conversation.
-4. Check the model dropdown in the fresh composer.
+3. Verify no `Codex`/`codex` processes remain with `Get-Process`.
+4. Reopen Codex and start a fresh EMR4 conversation.
+5. Check the model dropdown in the fresh composer.
 
 Do not rely on an already-open Ariadne thread to switch models mid-thread. Treat
 DeepSeek Ariadne-v2 and OpenAI Ariadne as separate fresh sessions.
