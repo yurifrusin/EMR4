@@ -32,7 +32,7 @@ from app.services.ai.audit_events import AccessAiAuditEvent, AiAuditSourceSurfac
 from app.services.ai.contracts import AiCapability, AiMethod, AiProvider
 from app.services.ai.entitlements import AiAccessRole, AiActorContext, actor_context_from_user
 from app.services.ai.service import _get_default_provider
-from app.services.bernie.temporal import (
+from app.services.diary.temporal import (
     extract_natural_date_constraint,
     extract_natural_time_constraints,
     parse_time_fragment,

@@ -8,6 +8,8 @@ Focused tests for:
 - interpreter_is_ready() readiness gate
 """
 
+from datetime import date
+
 from app.config import settings
 from app.models.ai_audit import AccessAiAuditLog
 from app.models.appointments import Appointment, AppointmentAuditLog
@@ -16,6 +18,7 @@ from app.services.bernie_booking_interpreter import (
     InterpreterReadinessStatus,
     interpreter_is_ready,
     _parse_time_fragment,
+    _extract_natural_date_constraint,
     _extract_natural_time_constraints,
 )
 from tests.conftest import make_token
@@ -104,6 +107,13 @@ def test_extract_natural_time_no_phrase_returns_none():
     earliest, latest = _extract_natural_time_constraints("practitioner_id:abc today 15 min")
     assert earliest is None
     assert latest is None
+
+
+def test_extract_natural_date_next_weekday_from_reference_date():
+    reference = date(2026, 7, 1)
+    assert _extract_natural_date_constraint("next Monday", reference) == "2026-07-06"
+    assert _extract_natural_date_constraint("on Monday", reference) == "2026-07-06"
+    assert _extract_natural_date_constraint("Monday", reference) == "2026-07-06"
 
 
 # ── Readiness gate ────────────────────────────────────────────────────────────
@@ -225,7 +235,7 @@ def test_margaret_thompson_dr_shera_ordinary_prompt_deterministic(
     # Name-resolution warnings present
     warning_codes = {w["code"] for w in data["warnings"]}
     assert "practitioner_name_resolved" in warning_codes
-    assert "patient_name_resolved_verify_identity" in warning_codes
+    assert "patient_recognized_by_register" in warning_codes
     # No DB mutations
     assert db.query(Appointment).count() == before_appt
     assert db.query(AppointmentAuditLog).count() == before_audit

@@ -115,13 +115,13 @@ function Stop-BackendProcesses() {
             $_.CommandLine -match "uvicorn" -and
             $_.CommandLine -match "app\.main:app" -and
             $_.CommandLine -match "--port $BackendPort"
-        }
+    }
 
     foreach ($process in $uvicornProcesses) {
-        $pid = [int]$process.ProcessId
-        if (-not $stopped.Contains($pid)) {
-            if (Stop-ProcessTree $pid) {
-                [void]$stopped.Add($pid)
+        $processId = [int]$process.ProcessId
+        if (-not $stopped.Contains($processId)) {
+            if (Stop-ProcessTree $processId) {
+                [void]$stopped.Add($processId)
             }
         }
     }
@@ -220,7 +220,7 @@ function Get-UvicornEnvCommand([string]$Surface) {
             "`$env:BERNIE_AI_PROJECT='bernie-emr4-dev'; " +
             "`$env:BERNIE_AI_LOCATION='australia-southeast1'; " +
             "`$env:BERNIE_STAFF_PILOT_ENABLED='true'; " +
-            "`$env:BERNIE_STAFF_PILOT_PRACTICE_IDS='d92314e3-aa1d-441e-81a5-f5db5ec22ca0'; " +
+            "`$env:BERNIE_STAFF_PILOT_PRACTICE_IDS='d92314e3-aa1d-441e-81a5-f5db5ec22ca0,addca958-85e0-4be5-aacc-38e88e5909dd'; " +
             "Remove-Item Env:BERNIE_STAFF_PILOT_USER_IDS -ErrorAction SilentlyContinue; " +
             "`$env:BERNIE_BOOKING_INTERPRETER_PROVIDER='gemini_vertex'; "
     }

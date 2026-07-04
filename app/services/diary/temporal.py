@@ -18,6 +18,19 @@ WEEK_RELATIVE_RE = re.compile(
     r"\b(?:in\s+(?:a|one|1)\s+week(?:['`\\]s)?(?:\s+time)?|next\s+week)\b",
     re.IGNORECASE,
 )
+WEEKDAY_RE = re.compile(
+    r"\b(?:(?P<modifier>next|on)\s+)?(?P<weekday>monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b",
+    re.IGNORECASE,
+)
+WEEKDAY_INDEX = {
+    "monday": 0,
+    "tuesday": 1,
+    "wednesday": 2,
+    "thursday": 3,
+    "friday": 4,
+    "saturday": 5,
+    "sunday": 6,
+}
 
 # Natural language time phrase patterns (no DB, no network).
 # Business-hours assumption: bare hour 1-11 without am/pm -> pm.
@@ -114,6 +127,29 @@ def resolve_week_relative_date(
     return None
 
 
+def resolve_weekday_date(
+    instruction: str,
+    reference_date: date | None,
+) -> str | None:
+    """Resolve simple receptionist weekday phrases relative to reference_date.
+
+    "next Monday" always means the next future Monday. "on Monday" or a bare
+    weekday means the upcoming occurrence, including today if the reference date
+    is already that weekday.
+    """
+    if reference_date is None:
+        return None
+    match = WEEKDAY_RE.search(instruction)
+    if not match:
+        return None
+    target_weekday = WEEKDAY_INDEX[match.group("weekday").lower()]
+    days_ahead = (target_weekday - reference_date.weekday()) % 7
+    modifier = (match.group("modifier") or "").lower()
+    if modifier == "next" and days_ahead == 0:
+        days_ahead = 7
+    return (reference_date + timedelta(days=days_ahead)).isoformat()
+
+
 def extract_natural_date_constraint(
     instruction: str,
     reference_date: date | None,
@@ -122,7 +158,10 @@ def extract_natural_date_constraint(
     date_match = DATE_RE.search(instruction)
     if date_match:
         return date_match.group(0).lower()
-    return resolve_week_relative_date(instruction, reference_date)
+    week_relative = resolve_week_relative_date(instruction, reference_date)
+    if week_relative:
+        return week_relative
+    return resolve_weekday_date(instruction, reference_date)
 
 
 def evaluate_same_day_window(
@@ -156,9 +195,11 @@ __all__ = [
     "SameDayWindowKind",
     "DATE_RE",
     "WEEK_RELATIVE_RE",
+    "WEEKDAY_RE",
     "evaluate_same_day_window",
     "parse_time_fragment",
     "extract_natural_time_constraints",
     "extract_natural_date_constraint",
     "resolve_week_relative_date",
+    "resolve_weekday_date",
 ]

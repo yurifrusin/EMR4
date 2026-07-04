@@ -135,6 +135,59 @@ def test_ordinary_prompt_resolves_practitioner_before_supervised_booking_gate(
     assert _row_counts(db) == before
 
 
+def test_next_monday_prompt_reaches_supervised_booking_candidates(
+    client,
+    db,
+    gp_user,
+    practitioner,
+    patient,
+    schedule,
+    monkeypatch,
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+    before = _row_counts(db)
+
+    interpret_resp = client.post(
+        INTERPRET_URL,
+        json={
+            "instruction": (
+                "Make an appointment for Margaret Thompson with Dr Shera "
+                "next Monday after 3"
+            ),
+            "reference_date": "2026-07-04",
+        },
+        headers=_auth(token),
+    )
+
+    assert interpret_resp.status_code == 200, interpret_resp.text
+    interpreted = interpret_resp.json()
+    assert interpreted["result"] == "interpreted"
+    assert interpreted["command_candidate"]["date_from"] == "2026-07-06"
+    assert interpreted["normalization"]["constraint"]["date_from"] == "2026-07-06"
+    assert interpreted["normalization"]["constraint"]["earliest_time"] == "15:00:00"
+    assert interpreted["command_candidate"]["practitioner_id"] == str(practitioner.id)
+    assert interpreted["command_candidate"]["patient_id"] == str(patient.id)
+
+    wrapper_resp = client.post(
+        WRAPPER_URL,
+        json={
+            "reference_date": "2026-07-04",
+            "command": interpreted["command_candidate"],
+        },
+        headers=_auth(token),
+    )
+
+    assert wrapper_resp.status_code == 200, wrapper_resp.text
+    wrapper = wrapper_resp.json()
+    assert wrapper["result"] == "candidate_selection_required"
+    assert wrapper["safe"] is True
+    assert wrapper["reception_policy"]["availability"] == "search_ran_with_candidates"
+    assert wrapper["staff_review"]["candidate_slots"], "next Monday should offer Dr Shera slots"
+    assert wrapper["staff_review"]["candidate_slots"][0]["appointment_date"] == "2026-07-06"
+    assert _row_counts(db) == before
+
+
 def test_confirmation_ready_uses_practitioner_evidence_not_raw_missing_id(
     client,
     db,

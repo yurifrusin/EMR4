@@ -29,7 +29,7 @@ $Project = "bernie-emr4-dev"
 $Location = "australia-southeast1"
 $ServiceAccount = "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
 $Scope = "https://www.googleapis.com/auth/cloud-platform"
-$DevPracticeId = "d92314e3-aa1d-441e-81a5-f5db5ec22ca0"
+$DevPracticeId = "d92314e3-aa1d-441e-81a5-f5db5ec22ca0,addca958-85e0-4be5-aacc-38e88e5909dd"
 
 function Write-Step([string]$Message) {
     Write-Host "  $Message" -ForegroundColor Cyan
