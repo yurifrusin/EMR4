@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint D1: Diary Confirm Action Descriptor Foundation |
 | Integrated through | Claude D1 backend plan, Codex/Feynman invariant review, Antigravity lane superseded, and Ariadne implementation |
-| Status | Integrated and locally verified; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-04 |
 
 ## What Changed
@@ -33,6 +33,7 @@ reviewed, integrated, verified, pushed, and audited.
 - Diary domain/package boundary suite passed: `.\.venv\Scripts\pytest.exe tests\test_diary_action_boundary_contracts.py tests\test_bernie_diary_rehome_compatibility.py tests\test_bernie_domain_package.py tests\test_diary_confirm_actions.py -q`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
 - `git diff --check` passed.
+- Post-push orchestration audit passed: `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` were all aligned at Sprint D1 HEAD before this closeout-status correction.
 - An initial parallel run of the Bernie suite errored on PostgreSQL enum creation while another pytest process was creating the same test enum; the same suite passed when rerun serially.
 - Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for D1; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
