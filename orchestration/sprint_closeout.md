@@ -8,38 +8,33 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint D1: Diary Confirm Action Descriptor Foundation |
-| Integrated through | Claude D1 backend plan, Codex/Feynman invariant review, Antigravity lane superseded, and Ariadne implementation |
-| Status | Integrated, verified, pushed, mirrored, and audited |
+| Batch | Sprint D2: Shared Confirm Evidence Helper |
+| Integrated through | DeepSeek Flash worker implementation on codex/d2-deepseek-confirm-helper, DeepSeek self-review/repair, and Ariadne review/polish |
+| Status | Integrated locally on master; push/mirror/audit pending |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- Added `app/services/diary/confirm_actions.py`, a pure diary-domain descriptor table for the five signed-capable confirm actions: staff create, Bernie create, update, status, and delete.
-- Confirm endpoints, signed-evidence purposes, and blocked-summary/issue payloads now have one typed source of truth instead of being scattered through `appointments.py`.
-- `appointments.py` now reads the existing confirm endpoints and HMAC purposes from the descriptor table while keeping each confirm route's validation and response flow unchanged.
-- The Bernie capability registry now points `confirm_booking` at the descriptor-owned Bernie create-confirm endpoint.
-- Added focused descriptor tests pinning current endpoint strings, signed-evidence purposes, blocked issue payload shape, and capability registry alignment.
-- Imported and accepted Claude's D1 plan packet. Antigravity produced no submitted artifact and was superseded because D1 had no UI asset changes.
-- No frontend assets changed; no `diary.js` cache-bust or GitHub Pages redeploy-specific check is required for D1.
-- No persisted PHI/session table, GraphRAG, raw endpoint removal, broad API rewrite, frontend redesign, taskpane, Command Centre, or Bernie auto-mode was added.
+- Added `verify_signed_confirmation_evidence_block()` to `app/services/diary/confirm_actions.py` so the shared signed-evidence verification pattern lives with the diary confirm action descriptors.
+- Refactored the staff create, Bernie update, status, delete, and Bernie create confirm routes in `appointments.py` to use the helper while preserving each route's expected payload, evidence purpose, block builder, audit evidence tag, and response flow.
+- Kept the D1 descriptor/capability contract tests and added helper tests for valid evidence, invalid evidence, required-but-missing evidence, optional-and-missing evidence, and optional valid evidence.
+- Used DeepSeek Flash through `codex-deepseek-bridge` as a real implementation sprint worker. The worker produced the core refactor and tests, then repaired deleted tests, BOM/import issues, and a temporary file after Ariadne review.
+- Ariadne added a final polish commit for import placement and helper/module docstrings before integration.
+- No frontend assets changed; no `diary.js` cache-bust or GitHub Pages redeploy-specific check is required for D2.
+- No raw compatibility endpoint retirement, persisted Bernie session table, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was added.
 
 ## Verification
 
-- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\services\diary\confirm_actions.py app\services\diary\capabilities.py app\services\diary\__init__.py app\routers\appointments.py tests\test_diary_confirm_actions.py`.
-- Focused descriptor suite passed: `.\.venv\Scripts\pytest.exe tests\test_diary_confirm_actions.py -q`.
-- Appointment proposal/update/status/audit suite passed: `.\.venv\Scripts\pytest.exe tests\test_appointment_proposals.py tests\test_appointment_update_proposal.py tests\test_appointment_status_mutations.py tests\test_appointment_audit.py -q`.
-- Bernie signed-confirm/tool-intent/release-gate suite passed after a serial rerun: `.\.venv\Scripts\pytest.exe tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_tool_intent.py tests\test_bernie_sprint98_release_gates.py -q`.
-- Diary domain/package boundary suite passed: `.\.venv\Scripts\pytest.exe tests\test_diary_action_boundary_contracts.py tests\test_bernie_diary_rehome_compatibility.py tests\test_bernie_domain_package.py tests\test_diary_confirm_actions.py -q`.
-- Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
-- `git diff --check` passed.
-- Post-push orchestration audit passed: `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` were all aligned at Sprint D1 HEAD before this closeout-status correction.
-- An initial parallel run of the Bernie suite errored on PostgreSQL enum creation while another pytest process was creating the same test enum; the same suite passed when rerun serially.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for D1; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
+- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app/services/diary/confirm_actions.py app/routers/appointments.py tests/test_diary_confirm_actions.py`.
+- Focused D2 backend suite passed: `.\.venv\Scripts\python.exe -m pytest tests/test_diary_confirm_actions.py tests/test_appointment_status_mutations.py tests/test_appointment_audit.py -q` (68 passed; existing Starlette/Google GenAI warnings only).
+- Bernie signed-confirm evidence suite passed: `.\.venv\Scripts\python.exe -m pytest tests/test_bernie_signed_confirmation_evidence.py -q` (7 passed; existing warnings only).
+- `git diff --check master..origin/codex/d2-deepseek-confirm-helper` passed before Ariadne's local polish commit; local tests passed again after polish.
+- DeepSeek final read-only review found no remaining route behaviour drift after repair.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for D2; previous full runs showed pre-existing/global failures outside these diary evidence slices.
 
 ## Recommended User Review
 
-No required manual review. D1 is a backend-internal contract refactor with no UI or API response-shape change, and the existing backend plus deterministic Diary smoke suites passed.
+No required manual review. D2 is a backend-internal refactor of repeated signed-evidence verification code, and the focused backend suites passed. User-facing diary and Bernie UI behaviour should be unchanged.
 
 ## Not Required Before Moving On
 
@@ -51,9 +46,8 @@ No required manual review. D1 is a backend-internal contract refactor with no UI
 
 ## Known Follow-Up
 
-- D2 can decide whether to fold the repeated confirm-route verify pipelines into a shared helper. D1 deliberately did not do that to keep behaviour stable.
 - Future native diary actions should consume this descriptor/catalog pattern rather than adding fresh route-local endpoint or signed-purpose literals.
-- Consider when to start constraining raw compatibility endpoints now that update/create/status/delete have signed-confirm paths.
+- Consider when to start constraining raw compatibility endpoints now that update/create/status/delete have signed-confirm paths and their shared verification helper is in place.
 - A later persisted-session sprint should still choose TTL, cleanup, transcript-storage, and concurrency policy before adding PHI-bearing tables.
 
 ## Next Sprint Candidate

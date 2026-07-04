@@ -14,6 +14,15 @@
 
 Read these before acting on remembered process details.
 
+- 2026-07-04: DeepSeek Flash via `codex-deepseek-bridge` is approved for
+  bounded implementation experiments only when Ariadne remains orchestrator and
+  integrator. Use a dedicated worker branch and a tight file boundary. Prompts
+  must explicitly forbid deleting existing tests unless requested, require
+  UTF-8 without BOM, top-level import hygiene, no `.tmp`/`.bak` leftovers,
+  `git diff --stat` plus `git status --short --branch` before handback, and
+  exact tests/results. Ariadne must review the diff and run verification before
+  merging. Prefer Flash for small/backend-internal refactors; try Pro only if
+  reasoning quality, not diff hygiene, becomes the limiting factor.
 - 2026-06-23: For current project state, trust refs/audit first, then
   `orchestration/sprint_closeout.md`, `orchestration/integration_log.md`,
   `orchestration/protocol_alerts.md`, and `AGENTS.md`. Historical sections in
