@@ -8,6 +8,60 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint D5: Route-Builder Search Horizon Threading |
+| Integrated through | Claude implementation, DeepSeek Flash scout, Antigravity/Gemini domain-policy review, and Ariadne review/polish |
+| Status | Integrated locally; pending push/mirror/audit in this closeout |
+| Last updated | 2026-07-04 |
+
+## What Changed
+
+- Added `_derive_search_horizon(reference_date, normalization)` in `appointments.py` to derive `same_day`, `advance`, or `None` from normalized slot-search date context without reading wall-clock state.
+- Threaded `search_horizon` into route-built `BernieSlotSearchFrame` records for real searched results: `searched_with_candidates` and `searched_no_candidates`.
+- Left `not_run` and `blocked` slot-search frames at `None`, because those do not represent an executed deterministic search against a resolved date.
+- Added focused D5 tests for helper derivation, frame-level tagging, untagged skipped/blocked frames, and unchanged outcome semantics for same-day, advance, and `None` horizons.
+- Preserved the D4/Ariadne invariant: `search_horizon` is metadata only; policy/outcome logic does not read it, and genuine `searched_no_candidates` remains `no_matching_times`.
+- Integrated Antigravity/Gemini as a real non-UX review lane. Gemini agreed with threading by `reference_date`, recommended route-level tests, and preserved the no-advisory-downgrade invariant.
+- No frontend/UI, API schema, migration, GraphRAG, persisted session table, or staff-facing copy change was added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app/routers/appointments.py tests/test_bernie_d5_route_builder_search_horizon.py`.
+- Focused D5/D4/adjacent suite passed after Ariadne polish: `.venv\Scripts\python.exe -m pytest tests/test_bernie_d5_route_builder_search_horizon.py tests/test_bernie_d4_diary_domain_frames_policy.py tests/test_diary_schedule_explanations.py tests/test_bernie_booking_outcomes.py tests/test_bernie_context_frames.py -q` (90 passed; existing Starlette/Google GenAI warnings only).
+- Antigravity/Gemini review lane ran `tests/test_bernie_d4_diary_domain_frames_policy.py` successfully before submitting its review artifact.
+- `git diff --check` passed.
+- Full `.venv\Scripts\python.exe -m pytest tests -q` was not rerun for D5; previous full runs showed pre-existing/global failures outside these diary-domain slices.
+
+## Recommended User Review
+
+No required manual review. D5 is backend route/domain metadata threading only. User-facing diary and Bernie UI behaviour should be unchanged.
+
+## Not Required Before Moving On
+
+- No frontend behaviour changed.
+- `search_horizon` does not yet alter copy or outcome routing.
+- No persisted Bernie session table, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
+
+## Known Follow-Up
+
+- Continue moving reception facts and policy into the diary domain before adjusting staff-facing copy.
+- Consider a later UI/copy sprint only after the backend frame set can distinguish roster gaps, true searched no-candidates, patient advisory context, and same-day/advance search horizon.
+- Use Antigravity/Gemini as a routine independent domain/test-design lane when Gemini quota is available, not only for UX.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint D6: Patient Advisory Context Collision Semantics |
+| Status | Candidate after D5 push/mirror/audit |
+| Recommended agents | Claude implementation lane, Antigravity/Gemini domain-policy review, DeepSeek Flash scout/review; native Codex worker only if OpenAI usage allows |
+
+D6 should likely focus on the patient future-booking advisory issue that started this thread: distinguish same requested day/window collision from unrelated future bookings, keeping patient context advisory unless it genuinely conflicts with the requested booking. Keep it backend-domain bounded before changing Bernie UI copy.
+
+
+## Previous Closeout - Sprint D4
+
+| Item | Value |
+|---|---|
 | Batch | Sprint D4: Native Diary Domain Frames and Reception Policy Foundation |
 | Integrated through | Claude implementation on `claude/current`, DeepSeek Flash semantic scout, and Ariadne review/polish on `codex/review-d4-claude` |
 | Status | Integrated locally; pending push/mirror/audit in this closeout |
@@ -55,7 +109,6 @@ No required manual review. D4 is backend diary-domain contract/policy work only.
 | Recommended agents | Claude implementation lane while quota is healthy, DeepSeek Flash review/parallel bounded lane, Antigravity only if UI copy or visible diary affordances enter scope |
 
 D5 should stay backend-bounded unless Yuri chooses otherwise: either thread `search_horizon` from route/date context into `BernieSlotSearchFrame`, or choose the next small reception fact that helps Bernie reason from diary-native structures without scripted UI strings.
-
 
 ## Previous Closeout - Sprint D3
 

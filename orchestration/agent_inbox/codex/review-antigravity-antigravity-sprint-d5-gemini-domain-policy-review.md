@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-d5-gemini-domain-policy-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -32,3 +32,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 - Review result:
 - Follow-up required:
+
+## Codex Integration Outcome
+
+Integrated by Ariadne in Sprint D5 after focused verification. Claude supplied the implementation; Antigravity supplied the independent Gemini domain-policy review.

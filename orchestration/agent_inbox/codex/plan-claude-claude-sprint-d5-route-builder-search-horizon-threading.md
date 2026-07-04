@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-d5-route-builder-search-horizon-threading` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-04 16:08 +1000 |
 | Source HEAD | `a12e4e3` |
 
@@ -47,3 +47,7 @@ Route-built frame from a same-day normalization (constraint.date_from == referen
 - Review result:
 - Required changes before implementation:
 - Approved to proceed: no
+
+## Codex Integration Outcome
+
+Integrated by Ariadne in Sprint D5 after focused verification. Claude supplied the implementation; Antigravity supplied the independent Gemini domain-policy review.

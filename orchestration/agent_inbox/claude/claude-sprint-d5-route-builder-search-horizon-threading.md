@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 1fce3b7 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-d5-route-builder-search-horizon-threading --summary "Short plan summary"` |
@@ -101,3 +101,7 @@ Required before submit. These notes are copied into Codex's review packet automa
   - The Ariadne/Gemini amendment is fully applied: no policy/outcome code reads search_horizon. A genuine searched_no_candidates result stays no_matching_times for same_day, advance, and None horizons alike (parametrized test proves this).
   - Date-range searches (date_from..date_to spanning forward) are labelled by their start date; a range starting today reads as same_day. This is metadata-only and documented in the helper docstring.
   - Past date_from (date_from < reference_date) maps to None rather than a fabricated label; such requests should not arise for forward booking searches but are handled defensively.
+
+## Codex Integration Outcome
+
+Integrated by Ariadne in Sprint D5 after focused verification. Claude supplied the implementation; Antigravity supplied the independent Gemini domain-policy review.

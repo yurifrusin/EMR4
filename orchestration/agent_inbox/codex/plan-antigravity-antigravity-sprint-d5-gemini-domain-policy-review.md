@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-d5-gemini-domain-policy-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-04 16:12 +1000 |
 | Source HEAD | `a12e4e3` |
 
@@ -47,3 +47,7 @@ Mismatch between local timezones in test/production environments.
 - Review result:
 - Required changes before implementation:
 - Approved to proceed: no
+
+## Codex Integration Outcome
+
+Integrated by Ariadne in Sprint D5 after focused verification. Claude supplied the implementation; Antigravity supplied the independent Gemini domain-policy review.

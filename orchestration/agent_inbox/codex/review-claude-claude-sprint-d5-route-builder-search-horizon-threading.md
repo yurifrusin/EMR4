@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-d5-route-builder-search-horizon-threading` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -41,3 +41,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 - Review result:
 - Follow-up required:
+
+## Codex Integration Outcome
+
+Integrated by Ariadne in Sprint D5 after focused verification. Claude supplied the implementation; Antigravity supplied the independent Gemini domain-policy review.

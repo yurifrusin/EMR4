@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint D4 - native diary-domain action/confirmation tail plus receptionist frame/policy foundation; raw compatibility endpoints are audit-marked; roster-unavailable self-explains; slot-search no-candidates remains gated by real search evidence |
-| **Next recommended work** | Continue the native Bernie diary-domain tail: decide whether to thread `search_horizon` through the route/frame builder, then move the next bounded reception fact/policy slice before returning to UI copy or GraphRAG work |
+| **Current active track** | Post-Sprint D5 - native diary-domain action/confirmation tail plus receptionist frame/policy foundation; route-built slot-search frames now carry metadata-only same-day/advance `search_horizon` for real searched results |
+| **Next recommended work** | Continue the native Bernie diary-domain tail with the next bounded reception fact/policy slice, or return to the live Bernie UI issue once the backend frame/policy substrate has enough signal |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

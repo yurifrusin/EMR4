@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 1fce3b7 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-d5-gemini-domain-policy-review --summary "Short plan summary"` |
@@ -93,3 +93,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Verification run: Pure domain policy design review. Ran focused pytest `tests/test_bernie_d4_diary_domain_frames_policy.py` verifying all 16 tests pass under python virtualenv.
 - Remaining risks: None. This is a review-only task with no production code changes.
 
+
+## Codex Integration Outcome
+
+Integrated by Ariadne in Sprint D5 after focused verification. Claude supplied the implementation; Antigravity supplied the independent Gemini domain-policy review.
