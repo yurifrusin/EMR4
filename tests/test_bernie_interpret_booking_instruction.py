@@ -919,3 +919,83 @@ def test_interpret_booking_context_no_db_writes(
 
     assert db.query(Appointment).count() == appt_before
     assert db.query(AppointmentAuditLog).count() == audit_before
+
+
+# -- D6: deterministic has_existing_booking_on_requested_day warning gating --
+
+def test_interpret_same_day_future_booking_produces_warning(
+    client, db, gp_user, patient, practitioner, monkeypatch
+):
+    """Deterministic same requested-day future booking produces existing_future_follow_up warning."""
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    fixed_now = datetime(2026, 7, 2, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+    token = make_token(gp_user)
+
+    # Future booking on the exact requested date (2026-07-09)
+    _make_appt(
+        db, gp_user.practice, practitioner, patient,
+        date_type(2026, 7, 9), 9, 0, AppointmentStatus.Booked,
+    )
+
+    resp = _post_interpret_s104(
+        client, token,
+        f"Book {patient.first_name} {patient.last_name} with "
+        f"{practitioner.first_name} {practitioner.last_name} "
+        "date_from:2026-07-09 duration_minutes:30",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    ctx = data.get("patient_booking_context")
+    assert ctx is not None, "Expected patient_booking_context"
+    assert ctx["existing_future_follow_up"] is True
+    warning_codes = [w["code"] for w in data.get("warnings", [])]
+    assert "existing_future_follow_up" in warning_codes, (
+        "existing_future_follow_up warning expected for same requested-day booking"
+    )
+    frames = data["reception_context"]["frames"]
+    assert any(
+        frame["frame_type"] == "advisory_warning"
+        and frame["reason_code"] == "existing_future_follow_up"
+        and frame["source"] == "patient_context"
+        for frame in frames
+    )
+
+
+def test_interpret_different_day_future_booking_suppresses_warning(
+    client, db, gp_user, patient, practitioner, monkeypatch
+):
+    """Deterministic different-day future booking keeps context but does NOT produce warning."""
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    fixed_now = datetime(2026, 7, 2, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+    token = make_token(gp_user)
+
+    # Future booking on a DIFFERENT day (2026-07-23) than requested (2026-07-09)
+    _make_appt(
+        db, gp_user.practice, practitioner, patient,
+        date_type(2026, 7, 23), 9, 0, AppointmentStatus.Booked,
+    )
+
+    resp = _post_interpret_s104(
+        client, token,
+        f"Book {patient.first_name} {patient.last_name} with "
+        f"{practitioner.first_name} {practitioner.last_name} "
+        "date_from:2026-07-09 duration_minutes:30",
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    ctx = data.get("patient_booking_context")
+    assert ctx is not None, "Expected patient_booking_context"
+    assert ctx["existing_future_follow_up"] is True  # broad advisory context remains True
+    warning_codes = [w["code"] for w in data.get("warnings", [])]
+    assert "existing_future_follow_up" not in warning_codes, (
+        "existing_future_follow_up warning must NOT be emitted for different-day booking"
+    )
+    assert not any(
+        frame["frame_type"] == "advisory_warning"
+        and frame["reason_code"] == "existing_future_follow_up"
+        for frame in data["reception_context"]["frames"]
+    )

@@ -507,3 +507,104 @@ def test_supervised_booking_suggestions_field_always_present(
     data = resp.json()
     assert "suggestions" in data
     assert isinstance(data["suggestions"], list)
+
+
+# -- D6: deterministic has_existing_booking_on_requested_day warning gating --
+
+def test_supervised_same_day_future_booking_produces_warning(
+    client, db, gp_user, practitioner, patient, monkeypatch
+):
+    """Supervised-booking with same requested-day future booking produces existing_future_follow_up warning."""
+    token = make_token(gp_user)
+    fixed_now = datetime(2026, 7, 2, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+
+    # Future booking on the same date as the requested date_from (2026-07-09)
+    appt = Appointment(
+        practice_id=gp_user.practice_id,
+        patient_id=patient.id,
+        practitioner_id=practitioner.id,
+        start_time=datetime(2026, 7, 9, 0, 0, tzinfo=timezone.utc),
+        appointment_date=date(2026, 7, 9),
+        start_time_local=time(10, 0),
+        duration_minutes=15,
+        status=AppointmentStatus.Booked,
+        booked_via=BookingChannel.Receptionist,
+    )
+    db.add(appt)
+    db.flush()
+
+    body = {
+        "reference_date": "2026-07-02",
+        "patient_id": str(patient.id),
+        "command": {
+            "practitioner_id": str(practitioner.id),
+            "date_from": "2026-07-09",
+            "duration_minutes": "30",
+        },
+    }
+
+    resp = _post_wrapper(client, token, body)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    ctx = data.get("patient_booking_context")
+    assert ctx is not None, "Expected patient_booking_context"
+    assert ctx["existing_future_follow_up"] is True
+
+    # Check warnings appear on the response
+    warnings = data.get("warnings", [])
+    warning_codes = [w["code"] for w in warnings]
+    assert "existing_future_follow_up" in warning_codes, (
+        "existing_future_follow_up warning expected for same requested-day booking"
+    )
+
+
+def test_supervised_different_day_future_booking_suppresses_warning(
+    client, db, gp_user, practitioner, patient, monkeypatch
+):
+    """Supervised-booking with different-day future booking keeps context but no warning."""
+    token = make_token(gp_user)
+    fixed_now = datetime(2026, 7, 2, 9, 0, tzinfo=timezone.utc)
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", lambda tz: fixed_now.astimezone(tz))
+
+    # Future booking on a DIFFERENT day (2026-07-23) than requested (2026-07-09)
+    appt = Appointment(
+        practice_id=gp_user.practice_id,
+        patient_id=patient.id,
+        practitioner_id=practitioner.id,
+        start_time=datetime(2026, 7, 23, 0, 0, tzinfo=timezone.utc),
+        appointment_date=date(2026, 7, 23),
+        start_time_local=time(10, 0),
+        duration_minutes=15,
+        status=AppointmentStatus.Booked,
+        booked_via=BookingChannel.Receptionist,
+    )
+    db.add(appt)
+    db.flush()
+
+    body = {
+        "reference_date": "2026-07-02",
+        "patient_id": str(patient.id),
+        "command": {
+            "practitioner_id": str(practitioner.id),
+            "date_from": "2026-07-09",
+            "duration_minutes": "30",
+        },
+    }
+
+    resp = _post_wrapper(client, token, body)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    ctx = data.get("patient_booking_context")
+    assert ctx is not None, "Expected patient_booking_context"
+    assert ctx["existing_future_follow_up"] is True  # broad advisory flag remains True
+
+    # Check warnings - normalization warnings may exist (e.g. date_from format),
+    # but existing_future_follow_up must NOT appear
+    warnings = data.get("warnings", [])
+    warning_codes = [w["code"] for w in warnings]
+    assert "existing_future_follow_up" not in warning_codes, (
+        "existing_future_follow_up warning must NOT be emitted for different-day booking"
+    )

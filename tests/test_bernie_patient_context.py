@@ -12,7 +12,11 @@ import pytest
 
 from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
 from app.models.tenancy import Practitioner
-from app.services.bernie_patient_context import build_patient_booking_context, _relative_label
+from app.schemas.appointments import BerniePatientBookingContext, BernieBookingContextEntry
+from app.services.bernie_patient_context import (
+    build_patient_booking_context, _relative_label,
+    has_existing_booking_on_requested_day, build_existing_future_follow_up_warning,
+)
 from tests.conftest import make_token
 
 
@@ -221,3 +225,110 @@ def test_future_bookings_soonest_first(db, practice, practitioner, patient):
     assert len(ctx.future_bookings) == 3
     assert ctx.future_bookings[0].appointment_date == REFERENCE_DATE + timedelta(days=3)
     assert ctx.future_bookings[2].appointment_date == REFERENCE_DATE + timedelta(days=10)
+
+
+# -- has_existing_booking_on_requested_day helper --
+
+def test_has_existing_booking_none_date_returns_false():
+    """requested_date=None returns False regardless of future_bookings."""
+    ctx = BerniePatientBookingContext(
+        patient_key=str(uuid.uuid4()),
+        recent_bookings=[],
+        future_bookings=[
+            BernieBookingContextEntry(
+                appointment_date=REFERENCE_DATE + timedelta(days=7),
+                relative_label="in 7 days",
+                status="Booked",
+                practitioner_display="Dr Test",
+                duration_minutes=15,
+            ),
+        ],
+        has_future_booking=True,
+        existing_future_follow_up=True,
+        recent_count=0,
+        future_count=1,
+        reference_date=REFERENCE_DATE,
+        generated_at=datetime.now(timezone.utc),
+    )
+    assert has_existing_booking_on_requested_day(ctx, None) is False
+
+
+def test_has_existing_booking_matching_date_returns_true():
+    """Matching future booking on the requested_date returns True."""
+    ctx = BerniePatientBookingContext(
+        patient_key=str(uuid.uuid4()),
+        recent_bookings=[],
+        future_bookings=[
+            BernieBookingContextEntry(
+                appointment_date=REFERENCE_DATE + timedelta(days=7),
+                relative_label="in 7 days",
+                status="Booked",
+                practitioner_display="Dr Test",
+                duration_minutes=15,
+            ),
+        ],
+        has_future_booking=True,
+        existing_future_follow_up=True,
+        recent_count=0,
+        future_count=1,
+        reference_date=REFERENCE_DATE,
+        generated_at=datetime.now(timezone.utc),
+    )
+    assert has_existing_booking_on_requested_day(ctx, REFERENCE_DATE + timedelta(days=7)) is True
+
+
+def test_has_existing_booking_different_day_returns_false():
+    """Future booking on a different day than requested_date returns False."""
+    ctx = BerniePatientBookingContext(
+        patient_key=str(uuid.uuid4()),
+        recent_bookings=[],
+        future_bookings=[
+            BernieBookingContextEntry(
+                appointment_date=REFERENCE_DATE + timedelta(days=14),
+                relative_label="in 14 days",
+                status="Booked",
+                practitioner_display="Dr Test",
+                duration_minutes=15,
+            ),
+        ],
+        has_future_booking=True,
+        existing_future_follow_up=True,
+        recent_count=0,
+        future_count=1,
+        reference_date=REFERENCE_DATE,
+        generated_at=datetime.now(timezone.utc),
+    )
+    assert has_existing_booking_on_requested_day(ctx, REFERENCE_DATE + timedelta(days=7)) is False
+
+
+def test_has_existing_booking_empty_future_returns_false():
+    """Empty future_bookings list returns False for any requested_date."""
+    ctx = BerniePatientBookingContext(
+        patient_key=str(uuid.uuid4()),
+        recent_bookings=[],
+        future_bookings=[],
+        has_future_booking=False,
+        existing_future_follow_up=False,
+        recent_count=0,
+        future_count=0,
+        reference_date=REFERENCE_DATE,
+        generated_at=datetime.now(timezone.utc),
+    )
+    assert has_existing_booking_on_requested_day(ctx, REFERENCE_DATE + timedelta(days=7)) is False
+
+
+# -- build_existing_future_follow_up_warning --
+
+def test_build_existing_future_follow_up_warning_has_correct_structure():
+    """Warning issue has expected code, severity, and message."""
+    issue = build_existing_future_follow_up_warning()
+    assert issue.code == "existing_future_follow_up"
+    assert issue.severity == "warning"
+    assert "already has an appointment on the requested day" in issue.message
+
+
+def test_build_existing_future_follow_up_warning_is_not_block():
+    """Warning issue is not a block: severity is warning, not error."""
+    issue = build_existing_future_follow_up_warning()
+    assert issue.severity == "warning"
+    assert issue.code != "block"
