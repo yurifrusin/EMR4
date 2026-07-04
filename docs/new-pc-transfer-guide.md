@@ -109,6 +109,7 @@ Copy these only through a secure channel, not through Git:
 - Pushover notification environment values
 - GitHub CLI authentication
 - Codex, Claude, and Antigravity local auth/settings
+- Codex model switching and DeepSeek bridge setup; see `docs/codex-model-switching-deepseek.md` and `docs/alternate-pc-handover.md`
 - Office add-in sideloading configuration
 - `patient_files/` only if intentionally needed for local dev continuity
 

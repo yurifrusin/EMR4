@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint D6 - Bernie patient future-booking advisory warnings are regression-locked to requested-day collisions; broad patient_booking_context remains advisory context |
-| **Next recommended work** | Continue the native Bernie diary-domain tail: fix frontend patient-advisory copy to render backend issue messages, then harden duplicate-day checks with direct DB lookup/source appointment exclusion |
+| **Current active track** | Post-Sprint D7 - Bernie Diary UI now renders backend-supplied patient advisory copy for future-booking warnings and no longer invents Margaret-specific fallback text |
+| **Next recommended work** | Continue the native Bernie diary-domain tail with patient collision source hardening: direct requested-day lookup plus source appointment exclusion for reschedule/extend flows |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -65,7 +65,15 @@ Codex role separation:
   DeepSeek Pro only when reasoning depth, not diff hygiene, is the bottleneck.
   Multiple DeepSeek workers may run concurrently only on separate branches with
   non-overlapping file ownership and explicit merge criteria. Reproduction/setup
-  details live in `docs/alternate-pc-handover.md`.
+  details live in `docs/alternate-pc-handover.md`; controlled DeepSeek/OpenAI
+  model-picker switching and Ariadne-v2 safety rules live in
+  `docs/codex-model-switching-deepseek.md`.
+- Ariadne-v2 DeepSeek Pro orchestration is experimental. Before deliberately
+  running the main Codex composer as DeepSeek Pro, create or confirm a remote
+  safety point and use a local review branch; do not auto-promote amended code
+  to `master` until Yuri approves. The current safety point is branch
+  `safety/ariadne-v1-before-deepseek` and tag
+  `safety/ariadne-v1-before-deepseek-20260704-182049` at `9d74c84`.
 - Native OpenAI/Codex subagents remain part of the toolbox. When OpenAI usage
   credit is healthy, Ariadne may run Claude, Antigravity, DeepSeek, and Codex
   subagents together on one sprint, or split truly independent work into

@@ -176,6 +176,17 @@ bridge/Codex after rotating `DEEPSEEK_API_KEY`.
   sprints, as long as the ownership and merge gates are explicit.
 - Ariadne must still review every worker diff, run verification, and integrate.
 
+## Ariadne-v2 DeepSeek Pro Experiment
+
+The low-cost worker setup above is distinct from running the main Codex composer as DeepSeek Pro. Controlled model-picker switching is documented in [Codex Model Switching and DeepSeek Ariadne Experiment](codex-model-switching-deepseek.md).
+
+Current safety point before the Ariadne-v2 experiment:
+
+- Branch: `safety/ariadne-v1-before-deepseek`
+- Tag: `safety/ariadne-v1-before-deepseek-20260704-182049`
+- Commit: `9d74c849e35cdd3e17984392ee8030622391f2a2`
+
+On the alternate PC, do not assume the model switch scripts exist. Recreate or securely copy the local scripts under `%USERPROFILE%\.codex\tools\model-switch\`, then restart Codex after each switch. Do not commit DeepSeek keys, bridge key files, Codex auth, or bridge logs.
 ## Pull The Current Baton On The Alternate PC
 
 Run in PowerShell:
