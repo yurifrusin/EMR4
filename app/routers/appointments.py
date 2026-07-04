@@ -5,7 +5,7 @@ import json
 from datetime import date as date_type, datetime, time, timedelta, timezone
 from typing import Any, Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
-from fastapi import APIRouter, Body, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Body, Depends, HTTPException, Query, Response, status
 from fastapi.responses import JSONResponse
 from sqlalchemy import or_
 from sqlalchemy.orm import Session, joinedload
@@ -189,6 +189,11 @@ BERNIE_CONFIRM_CREATE_AUDIT_EVIDENCE = [
     *_DELETE_CONFIRM_BASE_EVIDENCE,
     *_BERNIE_CONFIRM_CREATE_SIGNATURE_EVIDENCE,
     *BERNIE_IDENTITY_CONFIDENCE_AUDIT_CODES.values(),
+    # Raw appointment compatibility endpoint guard tags (Sprint D3).
+    "raw_compat_create",
+    "raw_compat_update",
+    "raw_compat_status",
+    "raw_compat_delete",
 ]
 
 BERNIE_AUTONOMOUS_BOOKING_TERMS = (
@@ -206,6 +211,33 @@ BERNIE_WEEK_RELATIVE_RE = re.compile(
 
 _BERNIE_SESSION_STORE = InMemoryBernieSessionStore()
 
+
+
+# -- Raw appointment compatibility guard helpers -----------------------------------
+
+def _raw_compat_evidence_and_headers(
+    raw_compat_tag: str,
+) -> tuple[Optional[list[str]], dict[str, str]]:
+    """Return (audit_evidence, response_headers) for a raw compat endpoint.
+
+    `raw_compat_tag` is one of `raw_compat_create`, `raw_compat_update`,
+    `raw_compat_status`, or `raw_compat_delete`.
+
+    Behaviour depends on `settings.appointment_raw_compat_mode`:
+
+    * `"audit"` (default) - return audit evidence with the tag, no headers.
+    * `"header"` - return audit evidence with the tag and set a
+      `Deprecation` header.
+    * `"off"` - return `(None, {})`.
+    """
+    mode = settings.appointment_raw_compat_mode
+    if mode == "off":
+        return None, {}
+    evidence = [raw_compat_tag]
+    if mode == "header":
+        return evidence, {"Deprecation": 'true; version="0"'}
+    # audit mode (default)
+    return evidence, {}
 
 def _bernie_session_event_out(event: BernieSessionEvent) -> BernieSessionEventOut:
     return BernieSessionEventOut(
@@ -952,12 +984,17 @@ def create_appointment(
     body: AppointmentCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+    response: Response = None,
 ):
+    audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_create")
+    for k, v in headers.items():
+        response.headers[k] = v
     return _create_appointment_from_body(
         body,
         db,
         current_user,
         confirmed_warnings=body.confirmed_warnings,
+        audit_evidence=audit_evidence,
     )
 
 
@@ -3882,8 +3919,15 @@ def update_appointment(
     body: AppointmentUpdate,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+    response: Response = None,
 ):
-    return _apply_appointment_update(appointment_id, body, db, current_user)
+    audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_update")
+    for k, v in headers.items():
+        response.headers[k] = v
+    return _apply_appointment_update(
+        appointment_id, body, db, current_user,
+        audit_evidence=audit_evidence,
+    )
 
 
 @router.get("/{appointment_id}/checkin-defaults", response_model=AppointmentCheckinDefaults)
@@ -3992,12 +4036,17 @@ def update_appointment_status(
     body: AppointmentStatusUpdate,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+    response: Response = None,
 ):
+    audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_status")
+    for k, v in headers.items():
+        response.headers[k] = v
     return _apply_appointment_status_update(
         appointment_id=appointment_id,
         body=body,
         db=db,
         current_user=current_user,
+        audit_evidence=audit_evidence,
     )
 
 
@@ -4163,12 +4212,17 @@ def cancel_appointment(
     body: Optional[AppointmentDeleteIn] = Body(default=None),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+    response: Response = None,
 ):
+    audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_delete")
+    for k, v in headers.items():
+        response.headers[k] = v
     _apply_appointment_delete(
         appointment_id=appointment_id,
         body=body,
         db=db,
         current_user=current_user,
+        audit_evidence=audit_evidence,
     )
 
 

@@ -1,6 +1,6 @@
 from pydantic_settings import BaseSettings
 from pydantic import model_validator
-from typing import Optional
+from typing import Literal, Optional
 
 INSECURE_DEFAULT_SECRET = "change-me-in-production"
 
@@ -42,6 +42,13 @@ class Settings(BaseSettings):
     # Emit raw debug_score and internal codes in the 'debug' field only when True.
     # Ordinary reception staff should never see raw scores or snake_case codes.
     bernie_interpreter_debug_disclosure: bool = False
+
+    # Raw appointment compatibility endpoint guard.
+    #   "audit" - attach raw_compat_* audit evidence tags only.
+    #   "header" - attach raw_compat_* audit evidence tags AND set
+    #              deprecation response headers.
+    #   "off"    - suppress both raw_compat_* tags and deprecation headers.
+    appointment_raw_compat_mode: Literal["audit", "header", "off"] = "audit"
 
     # Patient file storage. Point this at a OneDrive-synced folder so generated
     # .docx files are immediately accessible via Word Online. The backend creates
