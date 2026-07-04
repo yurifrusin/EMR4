@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-d6-patient-advisory-collision-semantics` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -63,3 +63,8 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 - Review result:
 - Follow-up required:
+
+
+## Codex Integration Notes
+
+Integrated in Sprint D6 closeout. Ariadne accepted the broad-context/narrow-warning semantics, kept the dedicated D6 regression module as canonical, and recorded follow-ups for frontend copy, capped-context collision lookup, and source appointment exclusion.

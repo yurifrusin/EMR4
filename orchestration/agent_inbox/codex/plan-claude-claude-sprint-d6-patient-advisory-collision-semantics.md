@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-d6-patient-advisory-collision-semantics` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-04 16:32 +1000 |
 | Source HEAD | `c4e793f` |
 
@@ -47,3 +47,8 @@ Visual: NO UI change anywhere - diary grid, booking-slot cards, status pills, wa
 - Review result:
 - Required changes before implementation:
 - Approved to proceed: no
+
+
+## Codex Integration Notes
+
+Integrated in Sprint D6 closeout. Ariadne accepted the broad-context/narrow-warning semantics, kept the dedicated D6 regression module as canonical, and recorded follow-ups for frontend copy, capped-context collision lookup, and source appointment exclusion.

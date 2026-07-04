@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-d6-gemini-patient-advisory-domain-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -62,3 +62,8 @@ We side with **Claude's semantic architecture** regarding the definition of `exi
 
 - Review result:
 - Follow-up required:
+
+
+## Codex Integration Notes
+
+Integrated in Sprint D6 closeout. Ariadne accepted the broad-context/narrow-warning semantics, kept the dedicated D6 regression module as canonical, and recorded follow-ups for frontend copy, capped-context collision lookup, and source appointment exclusion.

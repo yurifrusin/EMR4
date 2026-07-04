@@ -134,6 +134,24 @@ After every fully integrated batch, Codex updates
 - known follow-up
 - recommended next direction
 
+## Sprint D6: Patient Advisory Collision Semantics
+
+| Item | Value |
+|---|---|
+| Status | Integrated and verified locally; push/mirror/audit pending |
+| Product Goal | Stop Bernie's future-booking advisory from warning/blocking unless the existing booking collides with the requested day |
+| Worker Shape | Claude consolidated regression suite, Antigravity/Gemini backend/domain-policy review, DeepSeek Flash scout/test branch, Ariadne integration cleanup |
+| In Scope | Patient booking context warning semantics, interpret/supervised route regression tests, warning-shape assertion, coordination packet review |
+| Out Of Scope | Production code changes, frontend copy changes, migrations, persisted sessions, GraphRAG, auto-mode, broad API review |
+| Verification | py_compile; focused/adjacent pytest; worker packet review |
+
+Integration notes:
+
+- Broad patient context stays broad: `existing_future_follow_up` remains useful advisory context that a patient has some future booking.
+- Staff-facing collision warning stays narrow: warning emission is regression-locked to requested-day matches via `has_existing_booking_on_requested_day`.
+- Antigravity/Gemini acted as a domain-policy/test-design reviewer, not just a UX lane, and identified follow-up risks around capped context, self-collision, and frontend hardcoded copy.
+- DeepSeek Flash was useful as a cheap scout, but its scattered test additions were consolidated into one D6 regression module for maintainability.
+
 ## Sprint G2: Human Diary Update Confirm Migration
 
 | Item | Value |

@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | eff7cdd |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-d6-patient-advisory-collision-semantics --summary "Short plan summary"` |
@@ -123,3 +123,8 @@ Required before submit. These notes are copied into Codex's review packet automa
     happens), but could confuse reception staff. Follow-up: evaluate at the booking-create
     surface when the cancel+rebook workflow is implemented.
   - Both risks noted per user instruction; no production code change required this sprint.
+
+
+## Codex Integration Notes
+
+Integrated in Sprint D6 closeout. Ariadne accepted the broad-context/narrow-warning semantics, kept the dedicated D6 regression module as canonical, and recorded follow-ups for frontend copy, capped-context collision lookup, and source appointment exclusion.

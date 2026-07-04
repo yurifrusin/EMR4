@@ -1,4 +1,4 @@
-"""Sprint D6 patient advisory collision semantics — regression-test hardening.
+"""Sprint D6 patient advisory collision semantics - regression-test hardening.
 
 Proves that:
 1.  has_existing_booking_on_requested_day returns True only for an exact date
@@ -12,7 +12,7 @@ Proves that:
     preserving patient_booking_context in both cases.
 
 BerniePatientBookingContext.existing_future_follow_up intentionally stays broad
-(equivalent to has_future_booking) — it is advisory context, not the warning
+(equivalent to has_future_booking) - it is advisory context, not the warning
 gate.  Warning emission is gated by has_existing_booking_on_requested_day at
 the router/policy level.
 
@@ -31,7 +31,10 @@ from app.schemas.appointments import (
     BernieBookingContextEntry,
     BerniePatientBookingContext,
 )
-from app.services.bernie_patient_context import has_existing_booking_on_requested_day
+from app.services.bernie_patient_context import (
+    build_existing_future_follow_up_warning,
+    has_existing_booking_on_requested_day,
+)
 from tests.conftest import make_token
 
 
@@ -39,16 +42,16 @@ INTERPRET_URL = "/api/v1/appointments/proposals/bernie/interpret-booking-instruc
 SUPERVISED_URL = "/api/v1/appointments/proposals/bernie/supervised-booking"
 
 # Dates chosen to avoid accidental same-day clamping and to land on weekdays
-# (the schedule fixture covers Mon–Fri 09:00–17:00).
+# (the schedule fixture covers Mon-Fri 09:00-17:00).
 # July 2026 calendar: Jul 9=Thu, Jul 10=Fri, Jul 23=Thu.
-D6_REF_DATE_OBJ = date(2026, 7, 9)   # Thursday — reference / interpret test date
+D6_REF_DATE_OBJ = date(2026, 7, 9)   # Thursday - reference / interpret test date
 D6_REF_DATE_STR = "2026-07-09"
 D6_CLINIC_NOW = datetime(2026, 7, 9, 9, 0, tzinfo=timezone.utc)
 
-D6_SB_DATE_OBJ = date(2026, 7, 10)   # Friday — supervised booking requested date
+D6_SB_DATE_OBJ = date(2026, 7, 10)   # Friday - supervised booking requested date
 D6_SB_DATE_STR = "2026-07-10"
 
-D6_OTHER_DATE = date(2026, 7, 23)     # Thursday — unrelated future date
+D6_OTHER_DATE = date(2026, 7, 23)     # Thursday - unrelated future date
 
 
 def _make_appt(db, practice, practitioner, patient, appt_date, h, m, status, duration=15):
@@ -68,7 +71,7 @@ def _make_appt(db, practice, practitioner, patient, appt_date, h, m, status, dur
     return appt
 
 
-# ── Pure unit tests for has_existing_booking_on_requested_day ─────────────────
+# -- Pure unit tests for has_existing_booking_on_requested_day -----------------
 
 def _fake_context(future_dates: list[date]) -> BerniePatientBookingContext:
     """Minimal context with the given future booking dates and no DB dependency."""
@@ -143,7 +146,16 @@ def test_has_existing_returns_true_for_one_matching_among_several():
     assert has_existing_booking_on_requested_day(ctx, D6_REF_DATE_OBJ) is True
 
 
-# ── Interpret route: same requested-day positive warning ──────────────────────
+def test_existing_future_follow_up_warning_has_correct_structure():
+    """The same-day booking advisory remains a warning, not a hard block."""
+    issue = build_existing_future_follow_up_warning()
+
+    assert issue.code == "existing_future_follow_up"
+    assert issue.severity == "warning"
+    assert "already has an appointment on the requested day" in issue.message
+
+
+# -- Interpret route: same requested-day positive warning ----------------------
 
 def test_interpret_same_day_emits_existing_follow_up_warning(
     client, db, gp_user, practice, patient, practitioner, monkeypatch,
@@ -186,7 +198,7 @@ def test_interpret_same_day_emits_existing_follow_up_warning(
     )
 
 
-# ── Interpret route: different-day negative ───────────────────────────────────
+# -- Interpret route: different-day negative -----------------------------------
 
 def test_interpret_different_day_no_warning_but_preserves_context(
     client, db, gp_user, practice, patient, practitioner, monkeypatch,
@@ -231,7 +243,7 @@ def test_interpret_different_day_no_warning_but_preserves_context(
     )
 
 
-# ── Supervised booking: same requested-day positive warning ───────────────────
+# -- Supervised booking: same requested-day positive warning -------------------
 
 def test_supervised_booking_same_day_emits_existing_follow_up_warning(
     client, db, gp_user, practice, patient, practitioner, schedule, monkeypatch,
@@ -245,7 +257,7 @@ def test_supervised_booking_same_day_emits_existing_follow_up_warning(
     )
     token = make_token(gp_user)
 
-    # Booking on D6_SB_DATE_OBJ (2026-07-10, Friday) — same day as the request.
+    # Booking on D6_SB_DATE_OBJ (2026-07-10, Friday) - same day as the request.
     _make_appt(db, practice, practitioner, patient, D6_SB_DATE_OBJ, 11, 0, AppointmentStatus.Booked)
 
     resp = client.post(
@@ -277,7 +289,7 @@ def test_supervised_booking_same_day_emits_existing_follow_up_warning(
     )
 
 
-# ── Supervised booking: different-day negative ────────────────────────────────
+# -- Supervised booking: different-day negative --------------------------------
 
 def test_supervised_booking_different_day_no_warning_but_preserves_context(
     client, db, gp_user, practice, patient, practitioner, schedule, monkeypatch,

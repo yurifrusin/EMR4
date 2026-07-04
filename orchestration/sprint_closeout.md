@@ -8,9 +8,64 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint D6: Patient Advisory Collision Semantics |
+| Integrated through | Claude implementation tests, Antigravity/Gemini domain-policy review, DeepSeek Flash scout/test branch review, and Ariadne integration cleanup |
+| Status | Integrated locally; pending push/mirror/audit in this closeout |
+| Last updated | 2026-07-04 |
+
+## What Changed
+
+- Added a dedicated D6 regression suite proving Bernie only emits the `existing_future_follow_up` warning when a recognised patient's future booking is on the requested appointment day.
+- Preserved the broad `patient_booking_context.existing_future_follow_up` flag as advisory context: it can say the patient has some future booking, but it is not itself permission to show a collision warning.
+- Locked the interpret route and supervised booking route against the reported regression where today's Margaret bookings blocked or warned against a request for tomorrow/Saturday.
+- Added a warning-shape assertion so the same-day advisory remains a warning, not a hard block.
+- Accepted Claude's consolidated D6 test module and folded in DeepSeek's unique warning-structure assertion; reverted duplicate DeepSeek scatter added to older test files during integration cleanup.
+- Used Antigravity/Gemini as an independent backend/domain-policy review lane, not a UX-only worker. Gemini agreed with the broad-context/narrow-warning split and surfaced useful follow-up risks.
+- No production backend code, frontend code, schema, migration, GraphRAG, persisted session state, or staff-facing copy was changed in D6.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests/test_bernie_d6_patient_advisory_collision.py tests/test_bernie_patient_context.py tests/test_bernie_interpret_booking_instruction.py tests/test_bernie_supervised_booking_wrapper.py`.
+- Focused/adjacent pytest passed after Ariadne integration cleanup: `.venv\Scripts\python.exe -m pytest tests/test_bernie_d6_patient_advisory_collision.py tests/test_bernie_patient_context.py tests/test_bernie_interpret_booking_instruction.py tests/test_bernie_supervised_booking_wrapper.py tests/test_bernie_booking_outcomes.py -q` (103 passed; existing Starlette/Google GenAI warnings only).
+- Claude's submitted D6 tests were reviewed and accepted as the canonical regression suite.
+- Antigravity/Gemini review artifact was inspected and integrated as domain-policy evidence.
+- DeepSeek Flash branch was reviewed; its duplicate file-local additions were superseded by the canonical D6 suite, with its unique warning-shape check preserved.
+
+## Recommended User Review
+
+No required manual review for D6. It is backend regression-test hardening only and does not change live Diary/Bernie UI behaviour yet.
+
+## Not Required Before Moving On
+
+- No UI retest is required for this sprint because no frontend asset changed.
+- No Vertex/Gemini live call is needed; tests use deterministic fake/interpreted paths.
+- No database migration, GraphRAG integration, persisted Bernie session table, or broad root-to-branch API review was touched.
+
+## Known Follow-Up
+
+- Frontend `docs/diary/diary.js` still has hardcoded/overridden `existing_future_follow_up` display copy. A near-term frontend/domain-copy sprint should render backend `issue.message` instead of scripted patient-specific text.
+- `has_existing_booking_on_requested_day` currently checks compact `future_bookings`, which is capped. A later backend hardening sprint should add an exact requested-day DB lookup so collisions outside the compact context cap cannot be missed.
+- Reschedule/extend workflows will need a `source_appointment_id` or equivalent so Bernie's duplicate-day warning does not flag the appointment being edited as a separate collision.
+- Keep expanding Antigravity/Gemini usage beyond UX where it can provide domain-policy critique, test-design review, architecture dissent, and bounded implementation on clear file boundaries.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint D7: Backend-Supplied Patient Advisory Copy and Collision Source Hardening |
+| Status | Candidate after D6 push/mirror/audit |
+| Recommended agents | Claude or DeepSeek implementation lane for backend/source hardening, Antigravity/Gemini for Diary UI copy review, Ariadne final integration; native Codex worker optional when OpenAI usage allows |
+
+D7 should likely fix the visible Bernie copy path first: the UI should show backend-authored advisory text and stop hardcoding Margaret/scripted language. If the user prioritises backend safety first, D7 can instead add direct requested-day duplicate lookup plus source-appointment exclusion.
+
+
+## Previous Closeout - Sprint D5
+
+| Item | Value |
+|---|---|
 | Batch | Sprint D5: Route-Builder Search Horizon Threading |
 | Integrated through | Claude implementation, DeepSeek Flash scout, Antigravity/Gemini domain-policy review, and Ariadne review/polish |
-| Status | Integrated locally; pending push/mirror/audit in this closeout |
+| Status | Integrated, pushed, mirrors realigned, and audited at `eff7cdd` |
 | Last updated | 2026-07-04 |
 
 ## What Changed
@@ -52,7 +107,7 @@ No required manual review. D5 is backend route/domain metadata threading only. U
 | Item | Value |
 |---|---|
 | Name | Sprint D6: Patient Advisory Context Collision Semantics |
-| Status | Candidate after D5 push/mirror/audit |
+| Status | Completed as Sprint D6 |
 | Recommended agents | Claude implementation lane, Antigravity/Gemini domain-policy review, DeepSeek Flash scout/review; native Codex worker only if OpenAI usage allows |
 
 D6 should likely focus on the patient future-booking advisory issue that started this thread: distinguish same requested day/window collision from unrelated future bookings, keeping patient context advisory unless it genuinely conflicts with the requested booking. Keep it backend-domain bounded before changing Bernie UI copy.

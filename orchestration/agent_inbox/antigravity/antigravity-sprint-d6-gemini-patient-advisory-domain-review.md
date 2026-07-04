@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | eff7cdd |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-d6-gemini-patient-advisory-domain-review --summary "Short plan summary"` |
@@ -123,3 +123,8 @@ We side with **Claude's semantic architecture** regarding the definition of `exi
   2. Fix the capping vulnerability by doing a direct, lightweight DB check in the router/policy layer for duplicate bookings on the requested day instead of relying on the capped context list.
   3. Clean up the frontend `bernieIssueDisplayText()` in `diary.js` to render the backend-supplied `issue.message` directly.
 
+
+
+## Codex Integration Notes
+
+Integrated in Sprint D6 closeout. Ariadne accepted the broad-context/narrow-warning semantics, kept the dedicated D6 regression module as canonical, and recorded follow-ups for frontend copy, capped-context collision lookup, and source appointment exclusion.

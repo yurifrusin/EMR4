@@ -6,6 +6,9 @@ and worker-worktree retirement decisions. It complements the task packets under
 
 | When | Agent | Task | Branch | Submit/Review | Integration Commit | Result | Retire/Follow-up |
 |---|---|---|---|---|---|---|---|
+| 2026-07-04 18:00 +1000 | claude | claude-sprint-d6-patient-advisory-collision-semantics | `claude/current` | Consolidated D6 regression-test suite accepted; no production code change | `HEAD` | integrated | Source and review packets marked integrated; follow-up capped context/source appointment risks recorded |
+| 2026-07-04 18:00 +1000 | antigravity | antigravity-sprint-d6-gemini-patient-advisory-domain-review | `antigravity/current` | Gemini backend/domain-policy review accepted; not UX-only | `HEAD` | integrated | Review packet marked integrated; Antigravity role expanded for future domain/test-design lanes |
+| 2026-07-04 18:00 +1000 | deepseek | d6-patient-advisory-tests | `codex/d6-patient-advisory-tests` | Flash scout/test branch reviewed; duplicate scattered tests superseded, warning-shape assertion folded into canonical D6 suite | `HEAD` | integrated | DeepSeek remains suitable for cheap bounded scout/review lanes on task branches |
 | 2026-06-17 15:00 +1000 | claude | claude-appointment-security-tests | `claude/current` | Review packet integrated after production fixes were accepted | `0ab2f27` | integrated | Durable mirror realigned; source packet marked integrated |
 | 2026-06-17 15:00 +1000 | antigravity | antigravity-diary-interval-rendering | `antigravity/current` | Review packet integrated with small slot-height cleanup | `0ab2f27` | integrated | Durable mirror realigned; source packet marked integrated |
 | 2026-06-17 18:00 +1000 | codex | workstream-a-canonical-time-model | `codex/time-model` | Orchestrator-led canonical time model implementation | `882381e` | integrated | Disposable worktree later found stale/dirty; review before removal |
