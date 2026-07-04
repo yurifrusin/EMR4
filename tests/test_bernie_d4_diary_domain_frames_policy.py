@@ -2,10 +2,10 @@
 
 Verifies the safe D4 slice (Ariadne amendment applied):
 (a) BernieSlotSearchFrame.search_horizon round-trips without changing any
-    outcome classification — a real searched_no_candidates result stays
+    outcome classification : a real searched_no_candidates result stays
     no_matching_times regardless of search_horizon value.
 (b) roster_schedule unavailable with no reason_code yields schedule_reason_codes
-    containing no_roster_row so roster_unavailable always self-explains.
+# roster_unavailable always self-explains
 (c) no_matching_times is gated by a real slot_search searched_no_candidates
     frame; search_horizon never fabricates no-candidate copy or converts a
     non-search frame into a no_availability outcome.
@@ -57,7 +57,7 @@ def _roster_available_frame():
     )
 
 
-# ── search_horizon field round-trips ──────────────────────────────────────────
+# search_horizon field round-trips
 
 def test_search_horizon_defaults_to_none():
     frame = BernieSlotSearchFrame(
@@ -91,11 +91,11 @@ def test_search_horizon_advance_round_trips():
     assert frame.search_horizon == "advance"
 
 
-# ── search_horizon does NOT change outcome semantics ──────────────────────────
+# search_horizon does NOT change outcome semantics
 
 @pytest.mark.parametrize("horizon", [None, "same_day", "advance"])
 def test_searched_no_candidates_stays_no_matching_times_regardless_of_horizon(horizon):
-    """A real slot search that found zero candidates is no_matching_times — always.
+    """A real slot search that found zero candidates is no_matching_times : always.
 
     The Ariadne amendment prohibits downgrading genuine slot_search
     searched_no_candidates to advisory for future/advance searches.
@@ -123,7 +123,7 @@ def test_search_horizon_does_not_change_policy_predicates(horizon):
     assert "searched_no_candidates" in policy.schedule_reason_codes
 
 
-# ── roster_unavailable always self-explains ───────────────────────────────────
+# roster_unavailable always self-explains
 
 def test_roster_unavailable_no_reason_code_yields_no_roster_row_in_schedule_codes():
     """roster_schedule unavailable with no reason_code must synthesize no_roster_row."""
@@ -199,7 +199,7 @@ def test_roster_unavailable_with_alias_reason_code_resolves_to_catalog():
     assert outcome.schedule_explanation.reason_code == "no_roster_row"
 
 
-# ── no_matching_times gated by real searched_no_candidates ────────────────────
+# no_matching_times gated by real searched_no_candidates
 
 def test_no_matching_times_requires_real_slot_search_frame():
     """A roster_schedule-only unavailable frame must NOT yield no_matching_times."""
