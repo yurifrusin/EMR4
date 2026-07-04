@@ -58,6 +58,7 @@ from app.services.diary.outcomes import (
     classify_booking_outcome,
 )
 from app.services.diary.confirm_actions import (
+    verify_signed_confirmation_evidence_block,
     DiaryConfirmAction,
     get_diary_confirm_action,
 )
@@ -69,7 +70,6 @@ from app.services.bernie import (
     compute_candidate_freshness_id,
     compute_proposal_freshness_id,
     mint_signed_confirmation_evidence,
-    verify_signed_confirmation_evidence,
     check_staleness,
     mint_session_id,
     mint_turn_id,
@@ -1142,28 +1142,24 @@ def confirm_create_proposal_route(
         command=create_proposal.command,
         reference_date=create_proposal.command.appointment_date,
     )
-    signed_evidence_present = body.signed_confirmation_evidence is not None
-    if not (body.signed_confirmation_evidence_required or signed_evidence_present):
-        blocks.append(_confirm_create_block(
-            "signed_evidence_required",
-            "Signed confirmation evidence is required before creating this appointment.",
-        ))
-    else:
-        expected_signed_payload = _staff_create_signed_confirmation_payload(
-            practice_id=current_user.practice_id,
-            staff_user_id=current_user.id,
-            command=create_proposal.command,
-            create_proposal_freshness_id=submitted_freshness_id,
-        )
-        signed_result = verify_signed_confirmation_evidence(
-            body.signed_confirmation_evidence,
-            expected_signed_payload,
-            expected_purpose=_STAFF_CREATE_CONFIRM_ACTION.evidence_purpose,
-        )
-        if signed_result.verified:
-            audit_evidence.append("staff_signed_confirmation_evidence_verified")
-        else:
-            blocks.append(_confirm_create_block(signed_result.code, signed_result.detail))
+    expected_signed_payload = _staff_create_signed_confirmation_payload(
+        practice_id=current_user.practice_id,
+        staff_user_id=current_user.id,
+        command=create_proposal.command,
+        create_proposal_freshness_id=submitted_freshness_id,
+    )
+    ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
+        evidence=body.signed_confirmation_evidence,
+        evidence_required=body.signed_confirmation_evidence_required,
+        expected_payload=expected_signed_payload,
+        expected_purpose=_STAFF_CREATE_CONFIRM_ACTION.evidence_purpose,
+        block_builder=_confirm_create_block,
+        audit_tag="staff_signed_confirmation_evidence_verified",
+        missing_message="Signed confirmation evidence is required before creating this appointment.",
+    )
+    if ev_audit_tag is not None:
+        audit_evidence.append(ev_audit_tag)
+    blocks.extend(ev_blocks)
 
     if submitted_freshness_id != expected_freshness_id:
         blocks.append(_confirm_create_block(
@@ -1755,31 +1751,27 @@ def confirm_update_proposal(
         reference_date=reference_date,
     )
 
-    signed_evidence_present = body.signed_confirmation_evidence is not None
-    if not (body.signed_confirmation_evidence_required or signed_evidence_present):
-        blocks.append(_confirm_create_block(
-            "signed_evidence_required",
-            "Signed update confirmation evidence is required.",
-        ))
-    else:
-        expected_signed_payload = _bernie_update_signed_confirmation_payload(
-            practice_id=current_user.practice_id,
-            staff_user_id=current_user.id,
-            turn_ref=body.turn_ref,
-            current_state=current_state,
-            command=command,
-            update_proposal_freshness_id=body.update_proposal_freshness_id,
-            session_binding=effective_session_binding,
-        )
-        signed_result = verify_signed_confirmation_evidence(
-            body.signed_confirmation_evidence,
-            expected_signed_payload,
-            expected_purpose=_UPDATE_CONFIRM_ACTION.evidence_purpose,
-        )
-        if signed_result.verified:
-            audit_evidence.append("bernie_signed_confirmation_evidence_verified")
-        else:
-            blocks.append(_confirm_create_block(signed_result.code, signed_result.detail))
+    expected_signed_payload = _bernie_update_signed_confirmation_payload(
+        practice_id=current_user.practice_id,
+        staff_user_id=current_user.id,
+        turn_ref=body.turn_ref,
+        current_state=current_state,
+        command=command,
+        update_proposal_freshness_id=body.update_proposal_freshness_id,
+        session_binding=effective_session_binding,
+    )
+    ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
+        evidence=body.signed_confirmation_evidence,
+        evidence_required=body.signed_confirmation_evidence_required,
+        expected_payload=expected_signed_payload,
+        expected_purpose=_UPDATE_CONFIRM_ACTION.evidence_purpose,
+        block_builder=_confirm_create_block,
+        audit_tag="bernie_signed_confirmation_evidence_verified",
+        missing_message="Signed update confirmation evidence is required.",
+    )
+    if ev_audit_tag is not None:
+        audit_evidence.append(ev_audit_tag)
+    blocks.extend(ev_blocks)
 
     if body.update_proposal_freshness_id is None:
         blocks.append(_confirm_create_block(
@@ -2294,29 +2286,25 @@ def confirm_status_proposal_route(
         command=command,
         current_state=current_state,
     )
-    signed_evidence_present = body.signed_confirmation_evidence is not None
-    if not (body.signed_confirmation_evidence_required or signed_evidence_present):
-        blocks.append(_confirm_status_block(
-            "signed_evidence_required",
-            "Signed confirmation evidence is required before changing appointment status.",
-        ))
-    else:
-        expected_signed_payload = _status_signed_confirmation_payload(
-            practice_id=current_user.practice_id,
-            staff_user_id=current_user.id,
-            command=command,
-            current_state=current_state,
-            status_proposal_freshness_id=expected_freshness_id,
-        )
-        signed_result = verify_signed_confirmation_evidence(
-            body.signed_confirmation_evidence,
-            expected_signed_payload,
-            expected_purpose=_STATUS_CONFIRM_ACTION.evidence_purpose,
-        )
-        if signed_result.verified:
-            audit_evidence.append("status_signed_confirmation_evidence_verified")
-        else:
-            blocks.append(_confirm_status_block(signed_result.code, signed_result.detail))
+    expected_signed_payload = _status_signed_confirmation_payload(
+        practice_id=current_user.practice_id,
+        staff_user_id=current_user.id,
+        command=command,
+        current_state=current_state,
+        status_proposal_freshness_id=expected_freshness_id,
+    )
+    ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
+        evidence=body.signed_confirmation_evidence,
+        evidence_required=body.signed_confirmation_evidence_required,
+        expected_payload=expected_signed_payload,
+        expected_purpose=_STATUS_CONFIRM_ACTION.evidence_purpose,
+        block_builder=_confirm_status_block,
+        audit_tag="status_signed_confirmation_evidence_verified",
+        missing_message="Signed confirmation evidence is required before changing appointment status.",
+    )
+    if ev_audit_tag is not None:
+        audit_evidence.append(ev_audit_tag)
+    blocks.extend(ev_blocks)
 
     if submitted_freshness_id != expected_freshness_id:
         blocks.append(_confirm_status_block(
@@ -4224,29 +4212,25 @@ def confirm_delete_proposal_route(
         command=command,
         current_state=current_state,
     )
-    signed_evidence_present = body.signed_confirmation_evidence is not None
-    if not (body.signed_confirmation_evidence_required or signed_evidence_present):
-        blocks.append(_confirm_delete_block(
-            "signed_evidence_required",
-            "Signed confirmation evidence is required before deleting this appointment.",
-        ))
-    else:
-        expected_signed_payload = _delete_signed_confirmation_payload(
-            practice_id=current_user.practice_id,
-            staff_user_id=current_user.id,
-            command=command,
-            current_state=current_state,
-            delete_proposal_freshness_id=expected_freshness_id,
-        )
-        signed_result = verify_signed_confirmation_evidence(
-            body.signed_confirmation_evidence,
-            expected_signed_payload,
-            expected_purpose=_DELETE_CONFIRM_ACTION.evidence_purpose,
-        )
-        if signed_result.verified:
-            audit_evidence.append("delete_signed_confirmation_evidence_verified")
-        else:
-            blocks.append(_confirm_delete_block(signed_result.code, signed_result.detail))
+    expected_signed_payload = _delete_signed_confirmation_payload(
+        practice_id=current_user.practice_id,
+        staff_user_id=current_user.id,
+        command=command,
+        current_state=current_state,
+        delete_proposal_freshness_id=expected_freshness_id,
+    )
+    ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
+        evidence=body.signed_confirmation_evidence,
+        evidence_required=body.signed_confirmation_evidence_required,
+        expected_payload=expected_signed_payload,
+        expected_purpose=_DELETE_CONFIRM_ACTION.evidence_purpose,
+        block_builder=_confirm_delete_block,
+        audit_tag="delete_signed_confirmation_evidence_verified",
+        missing_message="Signed confirmation evidence is required before deleting this appointment.",
+    )
+    if ev_audit_tag is not None:
+        audit_evidence.append(ev_audit_tag)
+    blocks.extend(ev_blocks)
 
     if submitted_freshness_id != expected_freshness_id:
         blocks.append(_confirm_delete_block(
@@ -6481,15 +6465,17 @@ def confirm_bernie_create_proposal(
                 or selection.proposal_freshness_id,
                 session_binding=effective_session_binding,
             )
-            signed_result = verify_signed_confirmation_evidence(
-                body.signed_confirmation_evidence,
-                expected_signed_payload,
+            ev_audit_tag, ev_blocks = verify_signed_confirmation_evidence_block(
+                evidence=body.signed_confirmation_evidence,
+                evidence_required=body.signed_confirmation_evidence_required,
+                expected_payload=expected_signed_payload,
                 expected_purpose=_BERNIE_CREATE_CONFIRM_ACTION.evidence_purpose,
+                block_builder=_confirm_create_block,
+                audit_tag="bernie_signed_confirmation_evidence_verified",
             )
-            if signed_result.verified:
-                audit_evidence.append("bernie_signed_confirmation_evidence_verified")
-            else:
-                blocks.append(_confirm_create_block(signed_result.code, signed_result.detail))
+            if ev_audit_tag is not None:
+                audit_evidence.append(ev_audit_tag)
+            blocks.extend(ev_blocks)
     else:
         audit_evidence.append("legacy_unsigned_confirmation_compat")
 
