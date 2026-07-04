@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-d4-diary-domain-frames-policy-foundation` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-04 15:45 +1000 |
 | Source HEAD | `4cf9f68` |
 
@@ -40,10 +40,14 @@ No pixels change. Behavioural/typed checks: same-day empty search still yields n
 
 ## Risks / Ambiguities
 
-Semantics of "advisory unless same day/window": I read future as not the same clinic day as the request reference date, matching evaluate_same_day_window; a wider current-window/per-week threshold could be intended, so I will flag for Ariadne. Precedence: horizon change must not weaken hard guardrail/stale/clarification dominance; it is inserted only at the empty-search branch. Additive-only guarantee: search_horizon must default so current callers (routes passing no horizon) keep todays behaviour, avoiding any API contract shift.
+Semantics of "advisory unless same day/window": I read future as not the same clinic day as the request reference date, matching evaluate_same_day_window; a wider current-window/per-week threshold could be intended, so I will flag for Ariadne. Precedence: horizon change must not weaken hard guardrail/stale/clarification dominance; it is inserted only at the empty-search branch. Additive-only guarantee: search_horizon must default so current callers (routes passing no horizon) keep today's behaviour, avoiding any API contract shift.
 
 ## Codex Plan Review
 
 - Review result:
 - Required changes before implementation:
 - Approved to proceed: no
+
+## Codex Integration Outcome
+
+Integrated by Ariadne in Sprint D4 at `22d1aa0` after rejecting the risky future-empty-search downgrade from the original plan. Focused verification passed locally before master push.

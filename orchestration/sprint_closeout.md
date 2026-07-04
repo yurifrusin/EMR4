@@ -8,6 +8,59 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint D4: Native Diary Domain Frames and Reception Policy Foundation |
+| Integrated through | Claude implementation on `claude/current`, DeepSeek Flash semantic scout, and Ariadne review/polish on `codex/review-d4-claude` |
+| Status | Integrated locally; pending push/mirror/audit in this closeout |
+| Last updated | 2026-07-04 |
+
+## What Changed
+
+- Added optional metadata-only `search_horizon` to `BernieSlotSearchFrame` so future route work can label same-day versus advance searches without changing current outcome semantics.
+- Added a diary policy fallback: `roster_schedule` frames with `status="unavailable"` and no `reason_code` now synthesize `no_roster_row` into `schedule_reason_codes`, ensuring `roster_unavailable` outcomes self-explain.
+- Added focused D4 tests proving `search_horizon` round-trips, does not alter no-candidate outcome classification, roster-unavailable self-explains, explicit roster reason codes are not clobbered, advisory-only frames cannot produce `no_matching_times`, and legacy frames classify as before.
+- Ariadne rejected the risky original idea of downgrading future searched-no-candidates results to advisory. A deterministic slot search that ran and found zero candidates remains `no_matching_times` regardless of horizon.
+- Ariadne normalized new test comments/docstrings to ASCII after Claude implementation.
+- No frontend/UI, API schema, migration, GraphRAG, persisted session table, or broad API review was added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app/services/diary/frames.py app/services/diary/policy.py tests/test_bernie_d4_diary_domain_frames_policy.py`.
+- Focused D4/adjacent suite passed after Ariadne polish: `.venv\Scripts\python.exe -m pytest tests/test_bernie_d4_diary_domain_frames_policy.py tests/test_diary_schedule_explanations.py tests/test_bernie_booking_outcomes.py tests/test_bernie_context_frames.py -q` (74 passed; existing Starlette/Google GenAI warnings only).
+- `git diff --check` passed.
+- DeepSeek Flash performed an independent semantic scout and agreed that genuine searched-no-candidates should not be downgraded to advisory.
+- Full `.venv\Scripts\python.exe -m pytest tests -q` was not rerun for D4; previous full runs showed pre-existing/global failures outside these diary-domain slices.
+
+## Recommended User Review
+
+No required manual review. D4 is backend diary-domain contract/policy work only. User-facing diary and Bernie UI behaviour should be unchanged.
+
+## Not Required Before Moving On
+
+- No frontend behaviour changed.
+- `search_horizon` is not yet threaded through the appointment route/frame builder; it is a safe typed field for the next route-aware sprint.
+- No persisted Bernie session table, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
+
+## Known Follow-Up
+
+- Decide whether a narrow D5 should thread `search_horizon` through `_build_reception_context()` / route builders now that the typed field exists.
+- Keep `no_matching_times` reserved for real slot-search evidence; use roster/schedule explanation frames for unavailable or unknown roster states.
+- Continue moving reception facts and policy into the diary domain before adjusting staff-facing copy.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint D5: Route-Builder Horizon Threading / Reception Fact Source Alignment |
+| Status | Candidate after D4 push/mirror/audit |
+| Recommended agents | Claude implementation lane while quota is healthy, DeepSeek Flash review/parallel bounded lane, Antigravity only if UI copy or visible diary affordances enter scope |
+
+D5 should stay backend-bounded unless Yuri chooses otherwise: either thread `search_horizon` from route/date context into `BernieSlotSearchFrame`, or choose the next small reception fact that helps Bernie reason from diary-native structures without scripted UI strings.
+
+
+## Previous Closeout - Sprint D3
+
+| Item | Value |
+|---|---|
 | Batch | Sprint D3: Raw Appointment Compatibility Guard |
 | Integrated through | DeepSeek Flash worker implementation on codex/d3-raw-compat-guard plus Ariadne review/polish |
 | Status | Integrated branch reviewed and verified; pending master push/mirror/audit in this closeout |
@@ -61,7 +114,6 @@ No required manual review. D3 is backend compatibility instrumentation only. Use
 | Recommended agents | DeepSeek Flash implementation lane, Ariadne integration/review, Claude only for architecture review if quota/value warrants it, Antigravity only if a visible diary UI artifact is in scope |
 
 D4 should return to the native-Bernie architecture direction: move the first bounded slice of diary frames/policy/scheduling facts into a backend diary-domain module so Bernie can reason from shared diary-native structures instead of scripted UI strings. Keep it small and testable; do not start GraphRAG integration or broad API review in D4.
-
 
 ## Previous Closeout - Sprint D2
 
