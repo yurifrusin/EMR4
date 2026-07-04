@@ -1,4 +1,4 @@
-# EMR4 Alternate PC Handover - 2026-07-02
+# EMR4 Alternate PC Handover - 2026-07-04
 
 This is the short operational handover for moving the next EMR4 sprint to the
 alternate Windows PC. It assumes the alternate PC has already run EMR4 before
@@ -6,14 +6,16 @@ and only needs to catch up to the current Git baton and re-check local auth.
 
 ## Current Status
 
-- Last code sprint commit before this handover documentation: `b896582`
-  (`Sprint 103 Bernie compact request auto preview`).
-- This handover commit will be newer. After pulling, treat `origin/master` and
-  `origin/handoff/current` as the source of truth.
-- Sprint 104 is not launched yet.
-- Recommended next sprint: *bernie* conversational state memory and
-  clarification-turn statechart, with Claude, Antigravity/Gemini, and a Codex
-  worker brought in through the normal plan gate.
+- Last completed sprint before this handover refresh: Sprint D2 at `cc11b2c`
+  (shared confirm evidence helper plus DeepSeek Flash worker experiment).
+- After pulling, treat `origin/master` and `origin/handoff/current` as the
+  source of truth. They should be at `cc11b2c` or newer.
+- DeepSeek Flash via `codex-deepseek-bridge` is now the preferred low-cost
+  replacement for the spawned Codex worker on bounded implementation/review
+  lanes, while Ariadne remains OpenAI/Codex orchestrator.
+- Recommended next work: choose between constraining/retiring raw compatibility
+  write endpoints, continuing the bounded Diary domain module tail, or the next
+  Bernie native-diary capability sprint.
 
 ## What You Need To Save From This PC
 
@@ -25,12 +27,136 @@ Before this PC is unavailable, only check for local-only material:
 - ngrok auth/config if the alternate PC does not already have it
 - Google Cloud CLI login/ADC will normally need re-auth on the alternate PC
 - Pushover notification environment values, if you want sprint-close pings there
+- DeepSeek API key / Codex DeepSeek Bridge setup if you want low-cost Codex
+  worker subagents on the alternate PC
 - GitHub CLI auth, if the alternate PC is not already logged in
 - Office add-in sideloading settings, if the alternate PC has not already been set up
 - any intentionally retained local generated documents under `patient_files/`
 
 Do not copy `.venv`, `node_modules`, service-account JSON keys, real patient
 data, generated clinical documents, or agent session state through Git.
+
+## Optional: DeepSeek Worker Subagents With Codex Tools
+
+On 2026-07-04 we proved that DeepSeek Flash can run as a real Codex subagent
+worker through `codex-deepseek-bridge`. This is useful for low-cost sprint
+implementation/review lanes while Ariadne remains the OpenAI/Codex orchestrator
+and final integrator.
+
+The important discovery: a generic LiteLLM bridge can expose `/v1/responses`,
+but it does not translate Codex `namespace` tool schemas correctly for
+DeepSeek. `codex-deepseek-bridge` is the working method because it translates
+Codex namespace tools to DeepSeek-compatible function tools and maps tool calls
+back into Codex's expected response shape.
+
+### DeepSeek Setup Steps
+
+Run these in PowerShell on the alternate PC after installing/reopening Codex:
+
+```powershell
+# 1. Store a rotated DeepSeek key for future Codex/bridge processes.
+setx DEEPSEEK_API_KEY "<your_deepseek_key>"
+
+# 2. Restart Codex so the new environment variable is visible.
+
+# 3. Back up Codex config before bridge setup.
+$backupDir = "$env:USERPROFILE\.codex\backups"
+New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+$stamp = Get-Date -Format "yyyyMMdd-HHmmss"
+Copy-Item "$env:USERPROFILE\.codex\config.toml" `
+  (Join-Path $backupDir "config-before-deepseek-bridge-$stamp.toml") -Force
+
+# 4. Install the bridge locally under Codex home, not into the EMR4 repo.
+$prefix = "$env:USERPROFILE\.codex\tools\codex-deepseek-bridge-npm"
+New-Item -ItemType Directory -Force -Path $prefix | Out-Null
+npm install --prefix $prefix github:JetXu-LLM/codex-deepseek-bridge
+
+# 5. Configure bridge safely: no desktop patch, no Codex app install,
+#    no update check, and no raw payload logs.
+$env:DSCB_UPDATE_CHECK = "off"
+$env:DSCB_LOG_DIR = "off"
+$env:DSCB_DESKTOP_PATCH = "off"
+& "$prefix\node_modules\.bin\codex-deepseek-bridge.cmd" setup `
+  --no-desktop-patch --no-codex-app-install --no-upgrade-check `
+  --no-log-payloads --yes
+```
+
+After setup, inspect `%USERPROFILE%\.codex\config.toml`. The bridge may add a
+top-level default model block like this:
+
+```toml
+model = "deepseek-pro"
+model_provider = "deepseek_bridge"
+model_reasoning_effort = "xhigh"
+```
+
+For EMR4, remove those top-level defaults so Ariadne remains the normal Codex
+orchestrator. Keep only the bridge provider/catalog entries, for example:
+
+```toml
+model_catalog_json = "C:\\Users\\<user>\\.codex\\codex-deepseek-bridge\\models.json"
+
+[model_providers.deepseek_bridge]
+name = "DeepSeek (via Codex DeepSeek Bridge)"
+base_url = "http://127.0.0.1:8787/v1"
+wire_api = "responses"
+supports_websockets = false
+requires_openai_auth = false
+```
+
+Create or update `%USERPROFILE%\.codex\agents\deepseek-worker.toml`:
+
+```toml
+name = "deepseek-worker"
+description = "Cost-conscious EMR4 sprint worker for read-heavy planning, review, and bounded implementation."
+model_provider = "deepseek_bridge"
+model = "deepseek-flash"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+You are a worker on EMR4, not the orchestrator.
+Follow AGENTS.md and the current task packet exactly.
+Do not move master, handoff/current, or durable mirror branches.
+Do not implement production code during a plan gate.
+Prefer read-heavy review, focused plans, and concise findings.
+Submit tangible repo artifacts when asked.
+"""
+nickname_candidates = ["DeepSeek Worker", "Shen", "Delta"]
+```
+
+Restart Codex again after editing the agent/provider config. Then run a dry run
+from Ariadne:
+
+```text
+Ariadne, dry-run the DeepSeek worker.
+
+Spawn the `deepseek-worker` subagent for a read-only EMR4 protocol and
+capability check. Do not ask it to implement or edit anything.
+```
+
+Expected result: the worker can read repo files, run shell commands, see the
+expected tools/skills, and report the current EMR4 baton state. If the worker
+errors with `tools[n].type: unknown variant namespace`, Codex is not going
+through `codex-deepseek-bridge`; check the `deepseek_bridge` provider and
+`deepseek-worker.toml` model provider. If it reports an invalid key, restart the
+bridge/Codex after rotating `DEEPSEEK_API_KEY`.
+
+### DeepSeek Operating Policy
+
+- Keep Ariadne on the normal OpenAI/Codex model for orchestration,
+  integration, branch movement, closeout, and high-risk judgement.
+- Use DeepSeek Flash first for bounded backend-internal worker lanes and
+  read-heavy reviews. On this PC, Sprint D2 cost roughly US$0.08 in DeepSeek
+  tokens after setup.
+- Try DeepSeek Pro only when the work seems reasoning-depth limited rather than
+  diff-hygiene limited; Pro is roughly 3x Flash cost.
+- DeepSeek Flash must work on a dedicated branch and tight file boundary.
+  Prompts should explicitly forbid deleting existing tests unless requested,
+  require UTF-8 without BOM, top-level imports, no `.tmp`/`.bak` leftovers,
+  `git diff --stat`, `git status --short --branch`, and exact tests/results
+  before handback.
+- Ariadne must still review the diff, run verification, and integrate.
 
 ## Pull The Current Baton On The Alternate PC
 
@@ -55,8 +181,7 @@ python scripts\agent_worktrees.py audit --fetch
 ```
 
 Expected result: `master`, `origin/master`, `handoff/current`, and the durable
-worker mirrors are clean and aligned. The commit should be this handover commit
-or newer, not the older `b896582` code-sprint commit.
+worker mirrors are clean and aligned. The commit should be `cc11b2c` or newer, not the older `b896582` code-sprint commit.
 
 ## Re-Auth Google / Gemini If Needed
 
@@ -137,7 +262,7 @@ git status --short --branch
 git log --oneline -5 --decorate
 python scripts\agent_worktrees.py audit --fetch
 
-Do not launch Sprint 104 yet until you have reported repo/auth status. Current intended next sprint is Sprint 104: Bernie conversational state memory and clarification-turn statechart. It should probably be plan-gated with Claude, Antigravity/Gemini, and a Codex worker.
+Do not launch implementation until you have reported repo/auth status. Current intended next work should be chosen from the latest sprint closeout: constrain/retire raw compatibility write endpoints, continue the bounded Diary domain module tail, or pick the next Bernie native-diary capability sprint. Use DeepSeek Flash via `codex-deepseek-bridge` in place of the spawned Codex worker where appropriate, while Ariadne remains orchestrator/integrator.
 
 The key design decisions to preserve are:
 - continue agentic Diary/Taskpane state-machine/API-pattern sprints before the broad root-to-branch API review;
@@ -149,6 +274,6 @@ The key design decisions to preserve are:
 - no-slot states should say no times are available and offer useful clickable alternatives;
 - limited Bernie auto-mode is a future architecture branch only, not Sprint 104 implementation.
 
-After the audit, tell me whether the alternate PC needs Google ADC re-auth for Bernie or Scribe, whether the repo is clean, and whether you are ready to dispatch Sprint 104 as HANDIN READY.
+After the audit, tell me whether the alternate PC needs Google ADC re-auth for Bernie or Scribe, whether the repo is clean, whether DeepSeek worker setup is available, and whether you are ready to dispatch the next sprint as HANDIN READY.
 ```
 

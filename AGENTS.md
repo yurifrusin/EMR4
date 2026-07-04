@@ -50,6 +50,11 @@ Codex role separation:
 - Codex workers may submit plans/reviews to Codex's inbox, but Ariadne remains
   responsible for final integration. Ariadne must not treat an
   orchestrator-created Codex plan as proof that a separate worker has submitted.
+- DeepSeek Flash via `codex-deepseek-bridge` may replace the spawned Codex
+  subagent for bounded read-heavy reviews and small implementation slices when
+  Ariadne stays as OpenAI/Codex orchestrator. Use Flash first; consider
+  DeepSeek Pro only when reasoning depth, not diff hygiene, is the bottleneck.
+  Reproduction/setup details live in `docs/alternate-pc-handover.md`.
 
 ### Orchestration changelog / protocol alerts
 
