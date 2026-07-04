@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | submitted |
 | Created | 7bab79b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-d1-diary-action-envelope-backend-plan --summary "Short plan summary"` |
@@ -89,6 +89,20 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Plan phase only — no production code edited. Wrote the implementation-plan packet
+  `orchestration/agent_inbox/codex/plan-claude-claude-sprint-d1-diary-action-envelope-backend-plan.md`
+  and moved this source packet to `pending_plan_review`. The plan proposes (for the approved
+  implementation phase): new `app/services/diary/confirm_actions.py`, edits to
+  `app/routers/appointments.py`, `app/services/diary/__init__.py`, optional
+  `app/services/diary/capabilities.py`, and a new focused `tests/` regression test.
+- Verification run: Plan phase — no code executed. Read-only inspection of `app/routers/appointments.py`
+  (5 confirm routes + verify pipelines), `app/schemas/appointments.py` (confirm In/Out schemas),
+  `app/services/diary/*` (envelopes, confirm_gate, capabilities), and
+  `app/services/bernie/evidence.py` / `bernie_turn_evidence.py` (5 signed-evidence purpose constants).
+  Confirmed the diary envelope/capability contracts exist but are not yet wired to the confirm routes.
+- Remaining risks: Silent contract drift (mitigated by a regression test pinning exact pre-D1 endpoint
+  literals + evidence purposes); diff-size vs sprawl tension (mitigated by thin per-action wrappers
+  delegating to a shared factory); generic block-response factory must accept the differing
+  `Confirm*ProposalOut` output types; new capabilities.py↔router path invariant. Open question for
+  Codex: fold the five verify pipelines into one shared function now, or defer to D2? Plan recommends
+  defer.

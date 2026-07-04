@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 7bab79b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-d1-diary-action-envelope-ux-boundary --summary "Short plan summary"` |
@@ -92,3 +92,4 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+- Superseded by Ariadne: Antigravity CLI returned no submitted artifact and its durable worktree remained clean. D1 became a backend-only descriptor extraction with no Diary UI asset changes.

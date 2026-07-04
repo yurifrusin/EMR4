@@ -11,6 +11,12 @@ from app.services.diary.confirm_gate import (
     ConfirmAffordanceGate,
     evaluate_confirm_affordance,
 )
+from app.services.diary.confirm_actions import (
+    DIARY_CONFIRM_ACTIONS,
+    DiaryConfirmAction,
+    DiaryConfirmActionDescriptor,
+    get_diary_confirm_action,
+)
 from app.services.diary.capabilities import (
     BERNIE_CAPABILITY_REGISTRY,
     BernieCapability,
@@ -73,6 +79,10 @@ __all__ = [
     "ConfirmAffordanceDecision",
     "ConfirmAffordanceGate",
     "evaluate_confirm_affordance",
+    "DIARY_CONFIRM_ACTIONS",
+    "DiaryConfirmAction",
+    "DiaryConfirmActionDescriptor",
+    "get_diary_confirm_action",
     "BERNIE_CAPABILITY_REGISTRY",
     "BernieCapability",
     "BernieCapabilityTier",

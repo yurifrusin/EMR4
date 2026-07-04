@@ -57,6 +57,10 @@ from app.services.diary.outcomes import (
     assert_outcome_matches_state,
     classify_booking_outcome,
 )
+from app.services.diary.confirm_actions import (
+    DiaryConfirmAction,
+    get_diary_confirm_action,
+)
 from app.services.bernie import (
     BernieReceptionPolicyDecision,
     ConfirmAffordanceDecision,
@@ -66,10 +70,6 @@ from app.services.bernie import (
     compute_proposal_freshness_id,
     mint_signed_confirmation_evidence,
     verify_signed_confirmation_evidence,
-    SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
-    SIGNED_DELETE_CONFIRMATION_EVIDENCE_PURPOSE,
-    SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
-    SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
     check_staleness,
     mint_session_id,
     mint_turn_id,
@@ -103,6 +103,12 @@ from app.services.bernie import (
     InMemoryBernieSessionStore,
     build_session_confirmation_binding,
 )
+
+_STAFF_CREATE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.staff_create)
+_BERNIE_CREATE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.bernie_create)
+_UPDATE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.update)
+_STATUS_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.status)
+_DELETE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.delete)
 from app.services.ai.audit_store import persist_access_ai_audit_events
 from app.services.practice_knowledge import (
     InMemoryPracticeKnowledgeRetriever,
@@ -1068,9 +1074,9 @@ def _build_create_appointment_proposal(
         )
         signed_confirmation_evidence = mint_signed_confirmation_evidence(
             signed_payload,
-            evidence_purpose=SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
+            evidence_purpose=_STAFF_CREATE_CONFIRM_ACTION.evidence_purpose,
         )
-        response.confirm_endpoint = "/api/v1/appointments/proposals/create/confirm"
+        response.confirm_endpoint = _STAFF_CREATE_CONFIRM_ACTION.endpoint
         response.create_proposal_freshness_id = create_proposal_freshness_id
         response.signed_confirmation_evidence = signed_confirmation_evidence
         response.signed_confirmation_evidence_required = True
@@ -1094,7 +1100,7 @@ def _block_create_confirmation(
         safe=False,
         requires_confirmation=True,
         autonomy_tier="blocked",
-        summary="Cannot confirm create proposal. See blocked issues.",
+        summary=_STAFF_CREATE_CONFIRM_ACTION.blocked_summary,
         appointment=None,
         warnings=warnings or [],
         blocks=blocks,
@@ -1152,7 +1158,7 @@ def confirm_create_proposal_route(
         signed_result = verify_signed_confirmation_evidence(
             body.signed_confirmation_evidence,
             expected_signed_payload,
-            expected_purpose=SIGNED_STAFF_CREATE_CONFIRMATION_EVIDENCE_PURPOSE,
+            expected_purpose=_STAFF_CREATE_CONFIRM_ACTION.evidence_purpose,
         )
         if signed_result.verified:
             audit_evidence.append("staff_signed_confirmation_evidence_verified")
@@ -1419,9 +1425,9 @@ def propose_update_appointment(
         )
         signed_confirmation_evidence = mint_signed_confirmation_evidence(
             signed_payload,
-            evidence_purpose=SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
+            evidence_purpose=_UPDATE_CONFIRM_ACTION.evidence_purpose,
         )
-        response.confirm_endpoint = "/api/v1/appointments/proposals/update/confirm"
+        response.confirm_endpoint = _UPDATE_CONFIRM_ACTION.endpoint
         response.update_proposal_freshness_id = update_proposal_freshness_id
         response.signed_confirmation_evidence = signed_confirmation_evidence
         response.signed_confirmation_evidence_required = True
@@ -1692,7 +1698,7 @@ def _block_bernie_update_confirmation(
         safe=False,
         requires_confirmation=True,
         autonomy_tier="blocked",
-        summary="The update proposal could not be confirmed.",
+        summary=_UPDATE_CONFIRM_ACTION.blocked_summary,
         appointment=None,
         warnings=warnings or [],
         blocks=blocks,
@@ -1768,7 +1774,7 @@ def confirm_update_proposal(
         signed_result = verify_signed_confirmation_evidence(
             body.signed_confirmation_evidence,
             expected_signed_payload,
-            expected_purpose=SIGNED_UPDATE_CONFIRMATION_EVIDENCE_PURPOSE,
+            expected_purpose=_UPDATE_CONFIRM_ACTION.evidence_purpose,
         )
         if signed_result.verified:
             audit_evidence.append("bernie_signed_confirmation_evidence_verified")
@@ -1955,9 +1961,9 @@ def _attach_status_confirmation_evidence(
     )
     signed_confirmation_evidence = mint_signed_confirmation_evidence(
         signed_payload,
-        evidence_purpose=SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
+        evidence_purpose=_STATUS_CONFIRM_ACTION.evidence_purpose,
     )
-    proposal.confirm_endpoint = "/api/v1/appointments/proposals/status-confirm"
+    proposal.confirm_endpoint = _STATUS_CONFIRM_ACTION.endpoint
     proposal.status_proposal_freshness_id = status_proposal_freshness_id
     proposal.signed_confirmation_evidence = signed_confirmation_evidence
     proposal.signed_confirmation_evidence_required = True
@@ -1981,7 +1987,7 @@ def _block_status_confirmation(
         safe=False,
         requires_confirmation=True,
         autonomy_tier="blocked",
-        summary="Cannot confirm status proposal. See blocked issues.",
+        summary=_STATUS_CONFIRM_ACTION.blocked_summary,
         appointment=None,
         warnings=warnings or [],
         blocks=blocks,
@@ -1990,7 +1996,9 @@ def _block_status_confirmation(
 
 
 def _confirm_status_block(code: str, message: str) -> AppointmentProposalIssue:
-    return AppointmentProposalIssue(code=code, severity="blocked", message=message)
+    return AppointmentProposalIssue(
+        **_STATUS_CONFIRM_ACTION.blocked_issue_payload(code, message)
+    )
 
 
 @router.post("/proposals/status/{appointment_id}", response_model=AppointmentStatusProposalOut)
@@ -2303,7 +2311,7 @@ def confirm_status_proposal_route(
         signed_result = verify_signed_confirmation_evidence(
             body.signed_confirmation_evidence,
             expected_signed_payload,
-            expected_purpose=SIGNED_STATUS_CONFIRMATION_EVIDENCE_PURPOSE,
+            expected_purpose=_STATUS_CONFIRM_ACTION.evidence_purpose,
         )
         if signed_result.verified:
             audit_evidence.append("status_signed_confirmation_evidence_verified")
@@ -4090,9 +4098,9 @@ def _attach_delete_confirmation_evidence(
     )
     signed_confirmation_evidence = mint_signed_confirmation_evidence(
         signed_payload,
-        evidence_purpose=SIGNED_DELETE_CONFIRMATION_EVIDENCE_PURPOSE,
+        evidence_purpose=_DELETE_CONFIRM_ACTION.evidence_purpose,
     )
-    proposal.confirm_endpoint = "/api/v1/appointments/proposals/delete-confirm"
+    proposal.confirm_endpoint = _DELETE_CONFIRM_ACTION.endpoint
     proposal.delete_proposal_freshness_id = delete_proposal_freshness_id
     proposal.signed_confirmation_evidence = signed_confirmation_evidence
     proposal.signed_confirmation_evidence_required = True
@@ -4116,7 +4124,7 @@ def _block_delete_confirmation(
         safe=False,
         requires_confirmation=True,
         autonomy_tier="blocked",
-        summary="Cannot confirm delete proposal. See blocked issues.",
+        summary=_DELETE_CONFIRM_ACTION.blocked_summary,
         appointment=None,
         warnings=warnings or [],
         blocks=blocks,
@@ -4125,7 +4133,9 @@ def _block_delete_confirmation(
 
 
 def _confirm_delete_block(code: str, message: str) -> AppointmentProposalIssue:
-    return AppointmentProposalIssue(code=code, severity="blocked", message=message)
+    return AppointmentProposalIssue(
+        **_DELETE_CONFIRM_ACTION.blocked_issue_payload(code, message)
+    )
 
 
 def _apply_appointment_delete(
@@ -4231,7 +4241,7 @@ def confirm_delete_proposal_route(
         signed_result = verify_signed_confirmation_evidence(
             body.signed_confirmation_evidence,
             expected_signed_payload,
-            expected_purpose=SIGNED_DELETE_CONFIRMATION_EVIDENCE_PURPOSE,
+            expected_purpose=_DELETE_CONFIRM_ACTION.evidence_purpose,
         )
         if signed_result.verified:
             audit_evidence.append("delete_signed_confirmation_evidence_verified")
@@ -5043,7 +5053,7 @@ def _bernie_staff_review_payload(
     confirm_endpoint = None
     confirm_evidence: list[str] = []
     if gate_decision.confirm_grade_allowed:
-        confirm_endpoint = "/api/v1/appointments/proposals/create/confirm-bernie"
+        confirm_endpoint = _BERNIE_CREATE_CONFIRM_ACTION.endpoint
         confirm_payload = BernieCreateProposalConfirmationIn(
             confirmed=False,
             selection_proposal=selection_proposal,
@@ -5969,9 +5979,7 @@ def propose_bernie_supervised_booking(
 
 def _confirm_create_block(code: str, message: str) -> AppointmentProposalIssue:
     return AppointmentProposalIssue(
-        code=code,
-        severity="blocked",
-        message=message,
+        **_BERNIE_CREATE_CONFIRM_ACTION.blocked_issue_payload(code, message)
     )
 
 
@@ -5984,7 +5992,7 @@ def _block_bernie_create_confirmation(
         safe=False,
         requires_confirmation=True,
         autonomy_tier="blocked",
-        summary="Cannot confirm Bernie create proposal. See blocked issues.",
+        summary=_BERNIE_CREATE_CONFIRM_ACTION.blocked_summary,
         appointment=None,
         warnings=warnings or [],
         blocks=blocks,
@@ -6476,6 +6484,7 @@ def confirm_bernie_create_proposal(
             signed_result = verify_signed_confirmation_evidence(
                 body.signed_confirmation_evidence,
                 expected_signed_payload,
+                expected_purpose=_BERNIE_CREATE_CONFIRM_ACTION.evidence_purpose,
             )
             if signed_result.verified:
                 audit_evidence.append("bernie_signed_confirmation_evidence_verified")

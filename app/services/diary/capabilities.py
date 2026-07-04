@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Optional
 
+from app.services.diary.confirm_actions import DIARY_CONFIRM_ACTIONS, DiaryConfirmAction
 from app.services.diary.envelopes import DiaryActionAuthor
 
 
@@ -165,7 +166,7 @@ BERNIE_CAPABILITY_REGISTRY: tuple[BernieCapability, ...] = (
         name="confirm_booking",
         tier=BernieCapabilityTier.confirm,
         summary="Create the appointment from a staff-confirmed proposal behind the evidence/freshness gate.",
-        implemented_as="POST /appointments/proposals/create/confirm-bernie",
+        implemented_as=f"POST {DIARY_CONFIRM_ACTIONS[DiaryConfirmAction.bernie_create].endpoint}",
         requires_staff_confirmation=True,
         allowed_authors=(DiaryActionAuthor.staff_ui,),
     ),

@@ -8,43 +8,41 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint G6: Human Cancel/Delete Confirm Migration |
-| Integrated through | Codex/Rawls invariant packet and Ariadne implementation |
-| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
+| Batch | Sprint D1: Diary Confirm Action Descriptor Foundation |
+| Integrated through | Claude D1 backend plan, Codex/Feynman invariant review, Antigravity lane superseded, and Ariadne implementation |
+| Status | Integrated and locally verified; push/mirror/audit pending |
 | Last updated | 2026-07-04 |
 
 ## What Changed
 
-- Safe cancel/delete proposals now return a signed staff delete-confirm envelope with `confirm_endpoint`, `confirm_payload`, delete proposal freshness id, and purpose `diary_confirm_delete_proposal`.
-- Added `POST /api/v1/appointments/proposals/delete-confirm`, which requires explicit staff confirmation, verifies signed delete evidence, binds to current appointment status/waiting-area/cancellation state, and writes exactly one soft-cancel/audit transition only on `confirmed_write`.
-- The raw `DELETE /appointments/{id}` route remains as authenticated compatibility, but now delegates to the same internal soft-cancel helper as the signed confirm route.
-- Diary edit-modal cancellation now posts the signed delete-confirm payload when present, with raw `DELETE` retained only as a missing-envelope compatibility fallback.
-- Failed/stale/tampered delete confirms block without changing appointment state, writing audit rows, or falling back to raw `DELETE`.
-- Added backend and deterministic Diary smoke assertions proving signed delete-confirm is used from signed-capable cancel flows and failed delete-confirm does not raw `DELETE`.
-- `diary.js` was cache-busted from v166 to v167.
-- No persisted PHI/session table, broad status/cancel/delete grammar, GraphRAG, Alembic migration, taskpane, Command Centre, broad API rewrite, or Bernie auto-mode was added.
+- Added `app/services/diary/confirm_actions.py`, a pure diary-domain descriptor table for the five signed-capable confirm actions: staff create, Bernie create, update, status, and delete.
+- Confirm endpoints, signed-evidence purposes, and blocked-summary/issue payloads now have one typed source of truth instead of being scattered through `appointments.py`.
+- `appointments.py` now reads the existing confirm endpoints and HMAC purposes from the descriptor table while keeping each confirm route's validation and response flow unchanged.
+- The Bernie capability registry now points `confirm_booking` at the descriptor-owned Bernie create-confirm endpoint.
+- Added focused descriptor tests pinning current endpoint strings, signed-evidence purposes, blocked issue payload shape, and capability registry alignment.
+- Imported and accepted Claude's D1 plan packet. Antigravity produced no submitted artifact and was superseded because D1 had no UI asset changes.
+- No frontend assets changed; no `diary.js` cache-bust or GitHub Pages redeploy-specific check is required for D1.
+- No persisted PHI/session table, GraphRAG, raw endpoint removal, broad API rewrite, frontend redesign, taskpane, Command Centre, or Bernie auto-mode was added.
 
 ## Verification
 
-- JavaScript syntax check passed: `node --check docs\diary\diary.js`.
-- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\routers\appointments.py app\services\bernie_turn_evidence.py app\services\bernie\evidence.py app\services\bernie\__init__.py`.
-- Frontend asset version check passed: `.\.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
-- Focused backend delete-confirm suite passed: `.\.venv\Scripts\pytest.exe tests\test_appointment_status_mutations.py tests\test_appointment_audit.py -k "delete_confirm or signed_delete or delete_proposal_returns_signed_confirm_payload" -q`.
-- Adjacent backend cancel/status/audit/waiting-area suites passed: `.\.venv\Scripts\pytest.exe tests\test_appointment_status_mutations.py tests\test_appointment_audit.py tests\test_cancelled_appointment_review.py tests\test_waiting_area_checkin_contract.py tests\test_waiting_area_checkin_defaults.py tests\test_noshow_dna_status_contract.py -q`.
-- Focused G6 Diary smoke passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py -k "cancel_flow_uses_signed_delete_confirm_without_raw_delete or cancel_flow_failed_signed_confirm_does_not_raw_delete" -q`.
+- Compile check passed: `.\.venv\Scripts\python.exe -m py_compile app\services\diary\confirm_actions.py app\services\diary\capabilities.py app\services\diary\__init__.py app\routers\appointments.py tests\test_diary_confirm_actions.py`.
+- Focused descriptor suite passed: `.\.venv\Scripts\pytest.exe tests\test_diary_confirm_actions.py -q`.
+- Appointment proposal/update/status/audit suite passed: `.\.venv\Scripts\pytest.exe tests\test_appointment_proposals.py tests\test_appointment_update_proposal.py tests\test_appointment_status_mutations.py tests\test_appointment_audit.py -q`.
+- Bernie signed-confirm/tool-intent/release-gate suite passed after a serial rerun: `.\.venv\Scripts\pytest.exe tests\test_bernie_signed_confirmation_evidence.py tests\test_bernie_tool_intent.py tests\test_bernie_sprint98_release_gates.py -q`.
+- Diary domain/package boundary suite passed: `.\.venv\Scripts\pytest.exe tests\test_diary_action_boundary_contracts.py tests\test_bernie_diary_rehome_compatibility.py tests\test_bernie_domain_package.py tests\test_diary_confirm_actions.py -q`.
 - Full deterministic Diary smoke harness passed: `.\.venv\Scripts\pytest.exe review\test_diary_smoke.py --junitxml=review\diary-review.xml -q`.
 - `git diff --check` passed.
-- Post-push orchestration audit passed: `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` are all aligned at the current Sprint G6 closeout HEAD.
-- Live GitHub Pages check passed after rerunning a transient failed Pages deployment: `diary.html` is serving `diary.js?v=167`.
-- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for G6; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
+- An initial parallel run of the Bernie suite errored on PostgreSQL enum creation while another pytest process was creating the same test enum; the same suite passed when rerun serially.
+- Full `.\.venv\Scripts\python.exe -m pytest tests -q` was not rerun for D1; previous full runs showed pre-existing/global failures outside these diary-domain/session endpoint/evidence slices.
 
 ## Recommended User Review
 
-No required manual review before pausing. G6 changes live edit-modal cancellation controls, but the signed delete-confirm route, no raw `DELETE` from signed-capable cancel flows, failed-confirm/no-raw-DELETE invariant, cancellation reason preservation, waiting-area clearing, audit evidence, and deterministic Diary rendering were verified locally.
+No required manual review. D1 is a backend-internal contract refactor with no UI or API response-shape change, and the existing backend plus deterministic Diary smoke suites passed.
 
 ## Not Required Before Moving On
 
-- No broad natural-language edit grammar was implemented beyond explicit `extend`/`lengthen`.
+- No frontend behaviour changed.
 - Raw delete/status/create/update compatibility routes still exist for older or missing-envelope callers.
 - No persisted Bernie session table, Alembic migration, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
 - No model-authored write or limited Bernie auto-mode was implemented.
@@ -52,20 +50,31 @@ No required manual review before pausing. G6 changes live edit-modal cancellatio
 
 ## Known Follow-Up
 
-- The frontend classifier is intentionally narrow and non-authoritative. Future move/cancel/status tool intents should be added as typed backend/domain actions, not by growing a broad frontend grammar.
-- Appointment edit confirmation should continue to bind to deterministic appointment state and staff confirmation, not model wording or retrieved advisory facts.
+- D2 can decide whether to fold the repeated confirm-route verify pipelines into a shared helper. D1 deliberately did not do that to keep behaviour stable.
+- Future native diary actions should consume this descriptor/catalog pattern rather than adding fresh route-local endpoint or signed-purpose literals.
 - Consider when to start constraining raw compatibility endpoints now that update/create/status/delete have signed-confirm paths.
 - A later persisted-session sprint should still choose TTL, cleanup, transcript-storage, and concurrency policy before adding PHI-bearing tables.
 
-## Next Sprint Candidate - Pause For Yuri Direction
+## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Await Yuri instruction after Sprint G6 |
-| Status | Pause requested |
-| Recommended agents | None until Yuri chooses the next direction |
+| Name | Sprint D2: Confirm Pipeline Helper / Native Action Envelope Tail |
+| Status | Candidate after D1 push/mirror/audit |
+| Recommended agents | Claude backend review, Codex invariant worker, optional Antigravity only if UI affordance changes are in scope |
 
-G1-G6 moved Bernie tool-intent update confirms, human drag/resize, edit-modal detail saves, human create-modal saves, status-only controls, and edit-modal cancellation onto signed evidence. Yuri requested that Ariadne finish G6, then pause and await instructions.
+D2 should stay small: either unify the repeated confirm-route validation/block-response scaffolding behind descriptor-aware helpers, or defer that and move the internal `DiaryActionProposal`/`DiaryActionConfirmation` envelopes closer to the current proposal-confirm routes. Avoid UI work unless a visible affordance actually changes.
+
+## Previous Closeout - Sprint G6
+
+| Item | Value |
+|---|---|
+| Batch | Sprint G6: Human Cancel/Delete Confirm Migration |
+| Integrated through | Codex/Rawls invariant packet and Ariadne implementation |
+| Status | Integrated, verified, pushed, mirrored, audited, and live on GitHub Pages |
+| Last updated | 2026-07-04 |
+
+G6 added signed delete-confirm evidence, `POST /api/v1/appointments/proposals/delete-confirm`, edit-modal cancel submission through signed delete-confirm when present, and backend/UI tests proving failed signed delete confirms do not mutate or fall back to raw `DELETE`. `diary.js` was cache-busted from v166 to v167.
 
 ## Previous Closeout - Sprint G5
 
