@@ -982,9 +982,9 @@ def list_appointments(
 @router.post("", response_model=AppointmentOut, status_code=status.HTTP_201_CREATED)
 def create_appointment(
     body: AppointmentCreate,
+    response: Response,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
-    response: Response = None,
 ):
     audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_create")
     for k, v in headers.items():
@@ -3917,9 +3917,9 @@ def _apply_appointment_update(
 def update_appointment(
     appointment_id: uuid.UUID,
     body: AppointmentUpdate,
+    response: Response,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
-    response: Response = None,
 ):
     audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_update")
     for k, v in headers.items():
@@ -4034,9 +4034,9 @@ def get_appointment_audit(
 def update_appointment_status(
     appointment_id: uuid.UUID,
     body: AppointmentStatusUpdate,
+    response: Response,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
-    response: Response = None,
 ):
     audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_status")
     for k, v in headers.items():
@@ -4209,10 +4209,10 @@ def _apply_appointment_delete(
 @router.delete("/{appointment_id}", status_code=status.HTTP_204_NO_CONTENT)
 def cancel_appointment(
     appointment_id: uuid.UUID,
+    response: Response,
     body: Optional[AppointmentDeleteIn] = Body(default=None),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
-    response: Response = None,
 ):
     audit_evidence, headers = _raw_compat_evidence_and_headers("raw_compat_delete")
     for k, v in headers.items():
