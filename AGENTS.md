@@ -50,11 +50,23 @@ Codex role separation:
 - Codex workers may submit plans/reviews to Codex's inbox, but Ariadne remains
   responsible for final integration. Ariadne must not treat an
   orchestrator-created Codex plan as proof that a separate worker has submitted.
-- DeepSeek Flash via `codex-deepseek-bridge` may replace the spawned Codex
-  subagent for bounded read-heavy reviews and small implementation slices when
-  Ariadne stays as OpenAI/Codex orchestrator. Use Flash first; consider
+- Claude, Antigravity, DeepSeek, and native Codex workers are all valid
+  sprint workers when their quota/tooling is healthy. Claude may do real
+  implementation work, not just planning, on `claude/current`; reserve Fable
+  or other high-cost Claude modes for architecture/consulting gates where the
+  extra reasoning depth is worth the 5-hour-window burn.
+- DeepSeek Flash via `codex-deepseek-bridge` may replace or supplement the
+  spawned Codex worker for bounded read-heavy reviews and implementation lanes
+  when Ariadne stays as OpenAI/Codex orchestrator. Use Flash first; consider
   DeepSeek Pro only when reasoning depth, not diff hygiene, is the bottleneck.
-  Reproduction/setup details live in `docs/alternate-pc-handover.md`.
+  Multiple DeepSeek workers may run concurrently only on separate branches with
+  non-overlapping file ownership and explicit merge criteria. Reproduction/setup
+  details live in `docs/alternate-pc-handover.md`.
+- Native OpenAI/Codex subagents remain part of the toolbox. When OpenAI usage
+  credit is healthy, Ariadne may run Claude, Antigravity, DeepSeek, and Codex
+  subagents together on one sprint, or split truly independent work into
+  parallel sprints, provided each lane has disjoint ownership, verification, and
+  an explicit integration gate.
 
 ### Orchestration changelog / protocol alerts
 
@@ -167,9 +179,15 @@ Codex is the default orchestration agent for EMR4. This means:
 - No non-orchestrator agent should merge to `master` or move `handoff/current`
   during parallel mode unless the user explicitly says so.
 - Worker count is risk-based, not ritualized: use the right number of agents for
-  the risk and separable surfaces, not "always three agents". Ariadne may keep a
-  narrow sprint single-track, use one specialist reviewer, or spawn extra
-  workers when independent ownership boundaries make the extra coverage worth it.
+  the risk, quota state, and separable surfaces, not "always three agents".
+  Ariadne may keep a narrow sprint single-track, use one specialist reviewer, or
+  spawn extra workers when independent ownership boundaries make the extra
+  coverage worth it. Preferred cost posture while OpenAI/Codex usage is scarce:
+  keep Ariadne as orchestrator, let Claude implement while quota is healthy, use
+  DeepSeek Flash for cheap bounded implementation/review lanes, escalate to
+  DeepSeek Pro for reasoning-heavy worker tasks, and reserve native Codex
+  subagents for times when OpenAI usage is flowing or their tool/context fit is
+  clearly superior.
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).

@@ -14,15 +14,24 @@
 
 Read these before acting on remembered process details.
 
+- 2026-07-04: Updated sprint worker mix. Claude is allowed to perform real
+  implementation work on `claude/current` when quota is healthy; it is not
+  limited to planning. Avoid spending Fable/high-cost Claude modes except for
+  architecture consulting or unusually hard review. When OpenAI/Codex usage is
+  scarce, keep Ariadne as orchestrator/integrator and offload bounded real work
+  to Claude plus DeepSeek. When OpenAI usage is healthy, Ariadne may also spawn
+  native Codex subagents alongside Claude, Antigravity, and DeepSeek.
 - 2026-07-04: DeepSeek Flash via `codex-deepseek-bridge` is approved for
-  bounded implementation experiments only when Ariadne remains orchestrator and
+  bounded implementation experiments when Ariadne remains orchestrator and
   integrator. Use a dedicated worker branch and a tight file boundary. Prompts
   must explicitly forbid deleting existing tests unless requested, require
   UTF-8 without BOM, top-level import hygiene, no `.tmp`/`.bak` leftovers,
   `git diff --stat` plus `git status --short --branch` before handback, and
   exact tests/results. Ariadne must review the diff and run verification before
   merging. Prefer Flash for small/backend-internal refactors; try Pro only if
-  reasoning quality, not diff hygiene, becomes the limiting factor.
+  reasoning quality, not diff hygiene, becomes the limiting factor. Multiple
+  DeepSeek workers may run at once only on separate branches, with disjoint file
+  ownership and independent verification plans.
 - 2026-06-23: For current project state, trust refs/audit first, then
   `orchestration/sprint_closeout.md`, `orchestration/integration_log.md`,
   `orchestration/protocol_alerts.md`, and `AGENTS.md`. Historical sections in

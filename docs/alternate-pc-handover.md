@@ -146,17 +146,30 @@ bridge/Codex after rotating `DEEPSEEK_API_KEY`.
 
 - Keep Ariadne on the normal OpenAI/Codex model for orchestration,
   integration, branch movement, closeout, and high-risk judgement.
+- Claude is allowed to do real implementation work as well as planning when
+  quota is healthy. Prefer ordinary Claude sprint models for implementation and
+  reserve Fable/high-cost modes for architecture consulting, plan arbitration,
+  or unusually hard reviews.
 - Use DeepSeek Flash first for bounded backend-internal worker lanes and
   read-heavy reviews. On this PC, Sprint D2 cost roughly US$0.08 in DeepSeek
-  tokens after setup.
+  tokens after setup, and D3 proved Flash could implement a real backend sprint
+  branch with Ariadne review/polish.
 - Try DeepSeek Pro only when the work seems reasoning-depth limited rather than
   diff-hygiene limited; Pro is roughly 3x Flash cost.
-- DeepSeek Flash must work on a dedicated branch and tight file boundary.
+- DeepSeek workers must use dedicated branches and tight file boundaries.
   Prompts should explicitly forbid deleting existing tests unless requested,
   require UTF-8 without BOM, top-level imports, no `.tmp`/`.bak` leftovers,
   `git diff --stat`, `git status --short --branch`, and exact tests/results
   before handback.
-- Ariadne must still review the diff, run verification, and integrate.
+- Two DeepSeek workers may run at once if, and only if, they have disjoint
+  branches, disjoint file ownership, independent verification, and an explicit
+  Ariadne integration order. Do not run parallel DeepSeek agents against the
+  same files or the same behavioural contract.
+- Native OpenAI/Codex subagents remain available. When OpenAI usage credit is
+  healthy, Ariadne may combine Claude, Antigravity, DeepSeek, and native Codex
+  subagents in the same sprint, or split truly independent work into parallel
+  sprints, as long as the ownership and merge gates are explicit.
+- Ariadne must still review every worker diff, run verification, and integrate.
 
 ## Pull The Current Baton On The Alternate PC
 
