@@ -8,6 +8,65 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint D3: Raw Appointment Compatibility Guard |
+| Integrated through | DeepSeek Flash worker implementation on codex/d3-raw-compat-guard plus Ariadne review/polish |
+| Status | Integrated branch reviewed and verified; pending master push/mirror/audit in this closeout |
+| Last updated | 2026-07-04 |
+
+## What Changed
+
+- Added `appointment_raw_compat_mode` to settings with three modes: `audit` (default), `header`, and `off`.
+- Marked the four raw appointment compatibility endpoints with explicit audit evidence tags when compatibility guard mode is enabled:
+  - `raw_compat_create` for `POST /appointments`
+  - `raw_compat_update` for `PUT /appointments/{appointment_id}`
+  - `raw_compat_status` for `PATCH /appointments/{appointment_id}/status`
+  - `raw_compat_delete` for `DELETE /appointments/{appointment_id}`
+- Added a small centralized helper in `appointments.py` to attach raw-compat evidence and optional `Deprecation` headers without changing response models or endpoint payload shape.
+- Preserved default raw endpoint behaviour. The default `audit` mode records compatibility evidence only; existing callers still succeed.
+- Added focused backend tests for audit mode, header mode, off mode, and continued raw endpoint success.
+- Ariadne repaired worker polish issues before integration: FastAPI `Response` is now injected as a normal required parameter, the DELETE deprecation-header assertion is real, and non-ASCII/mangled test section dividers were removed.
+- No Bernie/UI/frontend, migrations, GraphRAG, persisted session state, taskpane, Command Centre, or broad API review was added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app/config.py app/routers/appointments.py tests/test_appointment_raw_compat.py`.
+- Focused D3 suite passed after Ariadne polish: `.venv\Scripts\python.exe -m pytest tests/test_appointment_raw_compat.py tests/test_appointment_conflicts.py tests/test_appointment_status_mutations.py tests/test_appointment_proposals.py tests/test_appointment_update_proposal.py tests/test_appointment_audit.py -q` (125 passed; existing Starlette/Google GenAI warnings only).
+- `git diff --check` passed after polish.
+- DeepSeek Flash implemented the core slice on an isolated branch; Ariadne reviewed, repaired, and reran the focused suite before integration.
+- Full `.venv\Scripts\python.exe -m pytest tests -q` was not rerun for D3; previous full runs showed pre-existing/global failures outside these diary compatibility slices.
+
+## Recommended User Review
+
+No required manual review. D3 is backend compatibility instrumentation only. User-facing diary and Bernie UI behaviour should be unchanged.
+
+## Not Required Before Moving On
+
+- No frontend behaviour changed.
+- Raw compatibility routes are not retired or blocked by default.
+- No persisted Bernie session table, Alembic migration, GraphRAG/vector store, auto-mode, taskpane, Command Centre, or broad API rewrite was implemented.
+- No model-authored write or limited Bernie auto-mode was implemented.
+
+## Known Follow-Up
+
+- Decide later when to change `appointment_raw_compat_mode` from `audit` to `header`, and much later whether to turn any raw route off after all native diary action paths are envelope/confirm based.
+- Keep using raw-compat audit evidence to identify any remaining frontend/backend callers that bypass native proposal/confirm flows.
+- Continue moving toward Bernie as a native diary-domain copilot: diary frames, policy, roster/scheduling facts, and render-from-state should live in the diary domain rather than being patched into Bernie as one-off UI strings.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint D4: Native Diary Domain Frames and Reception Policy Foundation |
+| Status | Candidate after D3 push/mirror/audit |
+| Recommended agents | DeepSeek Flash implementation lane, Ariadne integration/review, Claude only for architecture review if quota/value warrants it, Antigravity only if a visible diary UI artifact is in scope |
+
+D4 should return to the native-Bernie architecture direction: move the first bounded slice of diary frames/policy/scheduling facts into a backend diary-domain module so Bernie can reason from shared diary-native structures instead of scripted UI strings. Keep it small and testable; do not start GraphRAG integration or broad API review in D4.
+
+
+## Previous Closeout - Sprint D2
+
+| Item | Value |
+|---|---|
 | Batch | Sprint D2: Shared Confirm Evidence Helper |
 | Integrated through | DeepSeek Flash worker implementation on codex/d2-deepseek-confirm-helper, DeepSeek self-review/repair, and Ariadne review/polish |
 | Status | Integrated, verified, pushed, mirrored, and audited |
