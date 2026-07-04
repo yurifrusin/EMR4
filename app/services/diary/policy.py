@@ -79,6 +79,10 @@ def evaluate_reception_context(
             must_ask = True
         elif frame.frame_type == "roster_schedule" and frame.status == "unavailable":
             roster_unavailable = True
+            # Guarantee a self-explaining schedule reason so roster_unavailable
+            # always carries at least one schedule reason code.
+            if not frame.reason_code:
+                add_reason("no_roster_row")
         elif frame.frame_type == "slot_search" and frame.status == "searched_no_candidates":
             searched_no_candidates = True
         elif frame.frame_type == "slot_search" and frame.status == "searched_with_candidates":

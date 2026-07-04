@@ -99,6 +99,9 @@ class BernieSlotSearchFrame(BernieReceptionFrameBase):
     status: Literal["not_run", "searched_with_candidates", "searched_no_candidates", "blocked"]
     source: Literal["slot_search"] = "slot_search"
     candidate_count: int | None = Field(default=None, ge=0)
+    # Metadata-only horizon tag. Does NOT change outcome classification: a search
+    # that ran and found zero candidates is no_matching_times regardless of horizon.
+    search_horizon: Literal["same_day", "advance"] | None = None
 
 
 class BernieAdvisoryWarningFrame(BernieReceptionFrameBase):
