@@ -6319,7 +6319,7 @@ def test_bernie_render_guard_prevents_false_found_or_no_slot_copy(diary_page):
         panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
         assert "Bernie found these times" not in panel_text
         assert "I could not find any free times for that request" not in panel_text
-        assert "Margaret already has another appointment in the diary" in panel_text
+        assert "This patient already has a future appointment booked. Check whether a new booking is still needed." in panel_text
         assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "Try another time"
         assert "I could not find matching free times in that window" in panel_text
     finally:

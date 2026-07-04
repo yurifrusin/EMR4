@@ -1025,7 +1025,7 @@ function bernieReviewActionCopy(payload) {
 function bernieIssueDisplayText(issue) {
   if (!issue) return "";
   if (issue.code === "existing_future_follow_up") {
-    return "Margaret already has another appointment in the diary. It is worth checking that an extra booking is intended.";
+    return issue.message || "This patient already has another appointment in the diary. It is worth checking that an extra booking is intended.";
   }
   if (issue.code === "no_practitioner_schedule") {
     return issue.message || "This practitioner has no bookable session configured for that day.";
@@ -4677,7 +4677,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   // Patient Ambiguity warning
   const patientConfidence = payload.patient_evidence?.confidence || payload.identity_evidence?.confidence;
   if (patientConfidence === "ambiguous") {
-    const searchText = payload.patient_evidence?.patient_label || payload.identity_evidence?.patient_label || "Margaret";
+    const searchText = payload.patient_evidence?.patient_label || payload.identity_evidence?.patient_label || "this patient";
     const ambiguityNotice = document.createElement("div");
     ambiguityNotice.className = "bernie-notice-alert";
     ambiguityNotice.setAttribute("data-testid", "bernie-notice-alert");

@@ -8,9 +8,68 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint D7: Bernie Advisory Copy Rendering |
+| Integrated through | Claude local implementation, Antigravity/Gemini domain/UI-copy review, DeepSeek Flash worker lane, and Ariadne local integration |
+| Status | Local review branch only on `codex/d7-bernie-advisory-copy`; not pushed to `master` or `handoff/current` pending Yuri safety review |
+| Last updated | 2026-07-04 |
+
+## What Changed
+
+- Updated Diary Bernie issue rendering so `existing_future_follow_up` displays backend-supplied `issue.message` first, with a generic patient-agnostic fallback only if the backend message is missing.
+- Removed the hardcoded `Margaret already has another appointment...` display path from runtime Diary UI.
+- Changed a separate ambiguous-patient fallback from `Margaret` to `this patient` so legacy/missing labels do not invent a patient name.
+- Bumped `docs/diary/diary.html` from `diary.js?v=167` to `diary.js?v=168` for deployment cache safety.
+- Updated the deterministic Diary smoke test to assert the backend-provided advisory message.
+- Imported Antigravity/Gemini's D7 review artifact into Codex's inbox for review history.
+- No backend routes, schemas, migrations, GraphRAG, persisted sessions, or broad Bernie state-machine behaviour changed.
+
+## Verification
+
+- JavaScript syntax passed: `node --check docs/diary/diary.js`.
+- Deterministic Diary smoke suite passed: `.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -q`.
+- Frontend asset version integrity passed: `.venv\Scripts\python.exe scripts\check_frontend_versions.py`; local `diary.js` version is bumped from `167` to `168` while deployed remains `167` until/if this branch is approved and pushed.
+
+## Recommended User Review
+
+Before approving promotion to `master`, check the usage meters for this experiment:
+
+- Claude reported roughly `$1.45` for its D7 local implementation lane.
+- DeepSeek Flash handled a parallel worker lane and should have moved the DeepSeek meter only.
+- Antigravity/Gemini handled the independent review/implementation lane through the Gemini quota.
+- Ariadne/Codex still performed orchestration, review, and local integration in this thread.
+
+If you approve code review, the functional UI check after deployment should be: trigger an `existing_future_follow_up` warning and confirm the Bernie panel shows backend-authored generic text, not hardcoded Margaret-specific copy.
+
+## Not Required Before Moving On
+
+- No backend API or database migration test is required for this D7 patch.
+- No live Vertex/Gemini call is needed; this is deterministic Diary rendering.
+- No broad Bernie conversation or persisted-session change was made.
+
+## Known Follow-Up
+
+- Backend duplicate-day collision hardening remains: direct requested-day lookup should replace reliance on compact `future_bookings` cap.
+- Reschedule/extend flows still need source appointment exclusion to avoid self-collision warnings.
+- After you approve this branch, Ariadne should push/realign/audit and then test the deployed `diary.js?v=168` path.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint D8: Patient Collision Source Hardening |
+| Status | Candidate after D7 approval/promotion |
+| Recommended agents | Claude or DeepSeek backend lane, Antigravity/Gemini domain-policy review, Ariadne final integration |
+
+D8 should likely add direct requested-day duplicate lookup and source-appointment exclusion so warning correctness does not depend on capped compact context.
+
+
+## Previous Closeout - Sprint D6
+
+| Item | Value |
+|---|---|
 | Batch | Sprint D6: Patient Advisory Collision Semantics |
 | Integrated through | Claude implementation tests, Antigravity/Gemini domain-policy review, DeepSeek Flash scout/test branch review, and Ariadne integration cleanup |
-| Status | Integrated locally; pending push/mirror/audit in this closeout |
+| Status | Integrated, pushed, mirrors realigned, and audited at `ca375c5` |
 | Last updated | 2026-07-04 |
 
 ## What Changed
@@ -53,7 +112,7 @@ No required manual review for D6. It is backend regression-test hardening only a
 | Item | Value |
 |---|---|
 | Name | Sprint D7: Backend-Supplied Patient Advisory Copy and Collision Source Hardening |
-| Status | Candidate after D6 push/mirror/audit |
+| Status | In local review as Sprint D7 |
 | Recommended agents | Claude or DeepSeek implementation lane for backend/source hardening, Antigravity/Gemini for Diary UI copy review, Ariadne final integration; native Codex worker optional when OpenAI usage allows |
 
 D7 should likely fix the visible Bernie copy path first: the UI should show backend-authored advisory text and stop hardcoding Margaret/scripted language. If the user prioritises backend safety first, D7 can instead add direct requested-day duplicate lookup plus source-appointment exclusion.
