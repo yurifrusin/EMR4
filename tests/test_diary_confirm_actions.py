@@ -11,6 +11,7 @@ from app.services.diary.confirm_actions import (
     DIARY_CONFIRM_ACTIONS,
     DiaryConfirmAction,
     get_diary_confirm_action,
+    verify_signed_confirmation_evidence_block,
 )
 
 
@@ -66,10 +67,6 @@ def test_confirm_booking_capability_points_to_descriptor_endpoint():
         f"POST {get_diary_confirm_action(DiaryConfirmAction.bernie_create).endpoint}"
     )
 
-
-from app.services.diary.confirm_actions import (
-    verify_signed_confirmation_evidence_block,
-)
 
 
 DUMMY_SECRET = "test-secret-for-verify"
