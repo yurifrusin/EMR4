@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint D2: Shared Confirm Evidence Helper |
 | Integrated through | DeepSeek Flash worker implementation on codex/d2-deepseek-confirm-helper, DeepSeek self-review/repair, and Ariadne review/polish |
-| Status | Integrated locally on master; push/mirror/audit pending |
+| Status | Integrated, verified, pushed, mirrored, and audited |
 | Last updated | 2026-07-04 |
 
 ## What Changed
