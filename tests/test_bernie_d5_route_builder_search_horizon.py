@@ -34,7 +34,7 @@ PAST_DATE = date(2026, 7, 1)
 _PRACTITIONER_ID = uuid.uuid4()
 
 
-# ── _derive_search_horizon unit tests ────────────────────────────────────────
+# _derive_search_horizon unit tests
 
 def _normalization(date_from: date) -> SlotSearchCommandResult:
     return SlotSearchCommandResult(
@@ -68,7 +68,7 @@ def test_derive_horizon_no_constraint_returns_none():
     assert _derive_search_horizon(REFERENCE_DATE, norm) is None
 
 
-# ── _build_bernie_reception_context frame-level tests ────────────────────────
+# _build_bernie_reception_context frame-level tests
 
 def _empty_proposal(*, candidates=None) -> SlotSearchProposalOut:
     return SlotSearchProposalOut(
@@ -209,7 +209,7 @@ def test_blocked_frame_horizon_is_none():
     assert frame.search_horizon is None
 
 
-# ── Outcome-semantics unchanged ───────────────────────────────────────────────
+# Outcome-semantics unchanged
 
 @pytest.mark.parametrize(
     "target_date,expected_horizon",
