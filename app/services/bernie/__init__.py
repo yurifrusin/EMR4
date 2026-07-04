@@ -32,6 +32,7 @@ from app.services.bernie.context import (
     build_existing_future_follow_up_warning,
     build_patient_booking_context,
     has_existing_booking_on_requested_day,
+    patient_has_active_booking_on_date,
 )
 from app.services.bernie.evidence import (
     SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
@@ -146,6 +147,7 @@ __all__ = [
     "build_existing_future_follow_up_warning",
     "build_patient_booking_context",
     "has_existing_booking_on_requested_day",
+    "patient_has_active_booking_on_date",
     # evidence
     "SIGNED_CONFIRMATION_EVIDENCE_PURPOSE",
     "SIGNED_CONFIRMATION_EVIDENCE_VERSION",

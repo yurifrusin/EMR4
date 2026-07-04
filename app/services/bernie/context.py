@@ -9,10 +9,12 @@ from app.services.bernie_patient_context import (
     build_existing_future_follow_up_warning,
     build_patient_booking_context,
     has_existing_booking_on_requested_day,
+    patient_has_active_booking_on_date,
 )
 
 __all__ = [
     "build_existing_future_follow_up_warning",
     "build_patient_booking_context",
     "has_existing_booking_on_requested_day",
+    "patient_has_active_booking_on_date",
 ]
