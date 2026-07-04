@@ -2756,6 +2756,29 @@ def _practice_knowledge_advisory_frame(
         return None
 
 
+def _derive_search_horizon(
+    reference_date: date_type,
+    normalization: Optional[SlotSearchCommandResult],
+) -> Optional[Literal["same_day", "advance"]]:
+    """Derive search_horizon from the normalized constraint date vs reference_date.
+
+    Returns 'same_day' when the search targets reference_date, 'advance' when it
+    targets a later date, and None when unavailable or the date precedes reference
+    (which should not occur for forward booking but is mapped to None rather than
+    a fabricated label).  For range searches date_from labels the horizon start.
+    """
+    if normalization is None or normalization.constraint is None:
+        return None
+    date_from = normalization.constraint.date_from
+    if date_from is None:
+        return None
+    if date_from == reference_date:
+        return "same_day"
+    if date_from > reference_date:
+        return "advance"
+    return None
+
+
 def _build_bernie_reception_context(
     *,
     reference_date: date_type,
@@ -2847,6 +2870,7 @@ def _build_bernie_reception_context(
         frames.append(practice_knowledge_frame)
 
     if search_ran:
+        _horizon = _derive_search_horizon(reference_date, normalization)
         schedule_warning = next(
             (
                 issue
@@ -2896,6 +2920,7 @@ def _build_bernie_reception_context(
                 basis=search_proposal.summary,
                 reference_date=reference_date,
                 candidate_count=len(search_proposal.candidates),
+                search_horizon=_horizon,
             ))
         else:
             frames.append(BernieRosterScheduleFrame(
@@ -2909,6 +2934,7 @@ def _build_bernie_reception_context(
                 basis=search_proposal.summary,
                 reference_date=reference_date,
                 candidate_count=0,
+                search_horizon=_horizon,
             ))
 
     return BernieReceptionContextFrameSet(reference_date=reference_date, frames=frames)
