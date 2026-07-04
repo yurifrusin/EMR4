@@ -77,6 +77,7 @@ from app.services.bernie import (
     build_patient_booking_context,
     build_existing_future_follow_up_warning,
     has_existing_booking_on_requested_day,
+    patient_has_active_booking_on_date,
     actor_context_for_interpreter_user,
     BernieAdvisoryWarningFrame,
     BernieGuardrailOutcomeFrame,
@@ -1523,6 +1524,25 @@ def _context_frame_appointment_id(frame: dict[str, Any]) -> Optional[uuid.UUID]:
         value = frame.get(key)
         if _valid_uuid_text(value):
             return uuid.UUID(str(value))
+    return None
+
+
+def _source_appointment_id_from_frames(
+    context_frames: list[dict[str, Any]],
+) -> Optional[uuid.UUID]:
+    """Return the appointment_id from the first selected_diary_appointment frame.
+
+    Used to exclude the appointment being rescheduled/extended from the
+    same-day collision check so the source booking does not self-collide.
+    Returns None when no such frame is present.
+    """
+    for frame in context_frames:
+        if not isinstance(frame, dict):
+            continue
+        if frame.get("type") == "selected_diary_appointment":
+            appt_id = _context_frame_appointment_id(frame)
+            if appt_id is not None:
+                return appt_id
     return None
 
 
@@ -3798,11 +3818,20 @@ def _resolve_bernie_interpretation_context(
             patient_booking_ctx = build_patient_booking_context(
                 db, practice_id, _pid, request_ref_date
             )
-            if has_existing_booking_on_requested_day(
-                patient_booking_ctx,
-                normalization.constraint.date_from if normalization.constraint else None,
-            ):
-                if not any(w.code == "existing_future_follow_up" for w in warnings):
+            _requested_date = normalization.constraint.date_from if normalization.constraint else None
+            if _requested_date is not None:
+                _src_appt_id = _source_appointment_id_from_frames(body.context_frames)
+                # Fast path: compact context catches in-cap collisions when there is
+                # no source appointment to exclude (reschedule/extend). When a source
+                # appointment is present the fast path is skipped — it cannot exclude
+                # the source — and the authoritative DB query runs instead.
+                _collision = (
+                    (_src_appt_id is None and has_existing_booking_on_requested_day(patient_booking_ctx, _requested_date))
+                    or patient_has_active_booking_on_date(
+                        db, practice_id, _pid, _requested_date, _src_appt_id
+                    )
+                )
+                if _collision and not any(w.code == "existing_future_follow_up" for w in warnings):
                     warnings.append(build_existing_future_follow_up_warning())
             _ref_tz2 = _practice_zoneinfo(db, practice_id)
             _clinic_today = _clinic_local_now(_ref_tz2).date()
@@ -5552,10 +5581,21 @@ def propose_bernie_supervised_booking(
                 else "reference_date differs from clinic-local today; context may be stale"
             ),
         )
-        if has_existing_booking_on_requested_day(
-            _sb_patient_ctx,
-            constraint.date_from,
-        ):
+        _sb_src_appt_id = _source_appointment_id_from_frames(body.context_frames)
+        # Fast path: compact context catches in-cap collisions when there is no
+        # source appointment to exclude. When a source appointment is present the
+        # fast path is skipped and the authoritative DB query runs instead.
+        _sb_collision = (
+            (_sb_src_appt_id is None and has_existing_booking_on_requested_day(_sb_patient_ctx, constraint.date_from))
+            or patient_has_active_booking_on_date(
+                db,
+                current_user.practice_id,
+                review_identity_evidence.patient_id,
+                constraint.date_from,
+                _sb_src_appt_id,
+            )
+        )
+        if _sb_collision:
             warnings_for_ctx = list(normalization.warnings)
             if not any(w.code == "existing_future_follow_up" for w in warnings_for_ctx):
                 warnings_for_ctx.append(build_existing_future_follow_up_warning())

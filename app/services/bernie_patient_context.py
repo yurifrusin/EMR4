@@ -157,3 +157,30 @@ def has_existing_booking_on_requested_day(
     if requested_date is None:
         return False
     return any(entry.appointment_date == requested_date for entry in context.future_bookings)
+
+
+def patient_has_active_booking_on_date(
+    db: Session,
+    practice_id: uuid.UUID,
+    patient_id: uuid.UUID,
+    requested_date: date,
+    source_appointment_id: Optional[uuid.UUID] = None,
+) -> bool:
+    """Direct DB query for any non-terminal booking on requested_date.
+
+    Bypasses the compact-context cap so collisions beyond the first 3 future
+    bookings are caught. Excludes source_appointment_id so reschedule/extend
+    flows do not self-collide on the appointment being edited.
+    """
+    q = (
+        db.query(Appointment)
+        .filter(
+            Appointment.practice_id == practice_id,
+            Appointment.patient_id == patient_id,
+            Appointment.appointment_date == requested_date,
+            ~Appointment.status.in_(_TERMINAL_STATUSES),
+        )
+    )
+    if source_appointment_id is not None:
+        q = q.filter(Appointment.id != source_appointment_id)
+    return q.first() is not None
