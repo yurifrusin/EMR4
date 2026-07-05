@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H11: Historical Diary Trove Bounded Multi-Day Runtime Probe |
 | Integrated through | Ariadne local-only runtime probe; no external workers used because scope was raw-free and narrowly bounded |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -28,7 +28,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_runtime_report.py tests\test_historical_diary_event_summary_compare.py tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (22 passed; existing warnings only).
 - Local probe passed: 160/160 read-only Word COM opens, zero errors, elapsed 112.224 seconds.
 - Safety validation passed for ignored H11 ordered snapshots, runtime report, and event summary.
-- Validation pending final commit, audit, and post-push workflows.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors all aligned at `26c59c5d`.
+- GitHub workflows passed for the H11 push: Deploy GitHub Pages, Python Security, and CodeQL.
 
 ## Local Runtime Result
 
@@ -38,7 +39,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H11 is local tooling/tests/docs only and touches raw diary files only through read-only local Word COM extraction.
+No required manual review before continuing. H11 is local tooling/tests/docs only and touches raw diary files only through read-only local Word COM extraction.
 
 ## Not Required Before Moving On
 
