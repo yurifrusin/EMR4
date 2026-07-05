@@ -3717,7 +3717,6 @@ def _resolve_bernie_interpretation_context(
         )
         if (
             same_day_decision.kind == "window_fully_past"
-            and _earliest is not None
             and _latest is not None
         ):
             temporal_band = "ask"
