@@ -64,6 +64,31 @@ const RETROSPECTIVE_REASON_CODE_OPTIONS = [
   "DID_NOT_ATTEND",
   "LEFT_WITHOUT_SEEN"
 ];
+const STATUS_SPECIFIC_REASON_CODE_OPTIONS = {
+  Cancelled: [
+    "PATIENT_CANCELLED",
+    "PATIENT_TRANSPORT",
+    "PRACTITIONER_UNAVAILABLE",
+    "CLINIC_OPERATIONAL",
+    "ADMIN_ERROR",
+    "DUPLICATE_BOOKING",
+    "OTHER"
+  ],
+  DNA: [
+    "DID_NOT_ATTEND",
+    "LEFT_WITHOUT_SEEN",
+    "ADMIN_ERROR",
+    "DUPLICATE_BOOKING",
+    "OTHER"
+  ],
+  NoShow: [
+    "DID_NOT_ATTEND",
+    "LEFT_WITHOUT_SEEN",
+    "ADMIN_ERROR",
+    "DUPLICATE_BOOKING",
+    "OTHER"
+  ]
+};
 
 function statusReasonCodeLabel(code) {
   return STATUS_REASON_CODE_LABELS[code] || String(code || "");
@@ -6592,7 +6617,7 @@ function bookingReasonCodeContext() {
   return appointmentDate < new Date() ? "past" : "future";
 }
 
-function populateBookingReasonCodeOptions(context = "future") {
+function populateBookingReasonCodeOptions(status, context = "future") {
   const select = document.getElementById("booking-status-reason-code");
   if (!select) return;
   const currentValue = select.value;
@@ -6602,9 +6627,9 @@ function populateBookingReasonCodeOptions(context = "future") {
   defaultOption.textContent = "-- Select Reason --";
   select.appendChild(defaultOption);
 
-  const codes = context === "past"
+  const codes = STATUS_SPECIFIC_REASON_CODE_OPTIONS[status] || (context === "past"
     ? RETROSPECTIVE_REASON_CODE_OPTIONS.concat(FIRST_PARTY_REASON_CODE_OPTIONS)
-    : FIRST_PARTY_REASON_CODE_OPTIONS;
+    : FIRST_PARTY_REASON_CODE_OPTIONS);
   codes.forEach(code => {
     const option = document.createElement("option");
     option.value = code;
@@ -6619,7 +6644,10 @@ function setBookingReasonCodeVisible(visible, clearValue = false) {
   const container = document.getElementById("booking-status-reason-code-container");
   const select = document.getElementById("booking-status-reason-code");
   if (container) container.classList.toggle("hidden", !visible);
-  if (visible) populateBookingReasonCodeOptions(bookingReasonCodeContext());
+  if (visible) populateBookingReasonCodeOptions(
+    document.getElementById("booking-status")?.value,
+    bookingReasonCodeContext()
+  );
   if (select && clearValue) select.value = "";
 }
 

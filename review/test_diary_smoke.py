@@ -257,8 +257,34 @@ def test_reason_code_retrospective_options_are_prioritized(diary_page):
     option_values = diary_page.locator("[data-testid='booking-status-reason-code'] option").evaluate_all(
         "(options) => options.map((option) => option.value)"
     )
-    assert option_values[:3] == ["", "DID_NOT_ATTEND", "LEFT_WITHOUT_SEEN"]
-    assert "PATIENT_CANCELLED" in option_values
+    assert option_values == ["", "DID_NOT_ATTEND", "LEFT_WITHOUT_SEEN", "ADMIN_ERROR", "DUPLICATE_BOOKING", "OTHER"]
+    assert "PATIENT_CANCELLED" not in option_values
+    assert "PATIENT_UNWELL" not in option_values
+
+    diary_page.click("#btn-booking-close")
+    diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)
+
+
+def test_reason_code_noshow_options_match_attendance_housekeeping(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    diary_page.goto(base_url + CHECKS["target"])
+    diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    diary_page.click(".appt:has-text('Margaret Thompson')")
+    diary_page.wait_for_selector(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt", state="visible", timeout=3000)
+    diary_page.click(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt")
+    diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
+
+    diary_page.select_option("#booking-status", "NoShow")
+    diary_page.wait_for_selector("[data-testid='booking-status-reason-code-container']:not(.hidden)", state="visible", timeout=2000)
+
+    option_values = diary_page.locator("[data-testid='booking-status-reason-code'] option").evaluate_all(
+        "(options) => options.map((option) => option.value)"
+    )
+    assert option_values == ["", "DID_NOT_ATTEND", "LEFT_WITHOUT_SEEN", "ADMIN_ERROR", "DUPLICATE_BOOKING", "OTHER"]
+    assert "PATIENT_CANCELLED" not in option_values
     assert "PATIENT_UNWELL" not in option_values
 
     diary_page.click("#btn-booking-close")

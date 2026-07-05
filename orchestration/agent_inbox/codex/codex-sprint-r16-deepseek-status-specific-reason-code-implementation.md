@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 07a33fd |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r16-deepseek-status-specific-reason-code-implementation --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.js`, `docs/diary/diary.html`, `review/test_diary_smoke.py`, and coordination artifacts.
+- Verification run: Ariadne ran JS syntax, focused reason-code smoke, full Diary smoke, frontend asset version check, and diff hygiene during closeout.
+- Remaining risks: Inline status controls still do not collect reason codes; unchanged and out of scope.

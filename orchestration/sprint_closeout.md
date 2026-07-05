@@ -8,30 +8,30 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R15: Reason-Code UX Polish |
-| Integrated through | Ariadne implementation, DeepSeek Flash implementation/test plans, Antigravity/Gemini receptionist-domain review |
-| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean |
+| Batch | Sprint R16: Status-Specific Reason-Code Narrowing |
+| Integrated through | Ariadne implementation, DeepSeek Flash implementation plan, Antigravity/Gemini receptionist-domain review |
+| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Removed `PATIENT_UNWELL` from the first-party Diary reason-code dropdown while preserving `STATUS_REASON_CODE_LABELS` display compatibility for existing stored values.
-- Added context-aware dropdown population in `docs/diary/diary.js`: future cancellations hide retrospective housekeeping options, while past terminal-status changes prioritize `DID_NOT_ATTEND` and `LEFT_WITHOUT_SEEN`.
-- Removed retrospective-only options from static dropdown markup and cache-busted `docs/diary/diary.html` to `diary.js?v=170` and `diary.css?v=134`.
-- Added deterministic smoke coverage for future and retrospective reason-code option sets in `review/test_diary_smoke.py`.
-- Integrated Gemini's R15 receptionist-domain review in `docs/receptionist_review_r15.md`; its stricter per-status filtering recommendation is recorded as a follow-up rather than broadened into this slice.
+- Added `STATUS_SPECIFIC_REASON_CODE_OPTIONS` in `docs/diary/diary.js` so `Cancelled`, `DNA`, and `NoShow` receive narrower first-party reason-code lists.
+- Kept `PATIENT_UNWELL` display-only and never selectable in the first-party dropdown.
+- Accepted Gemini's R16 domain decision that `LEFT_WITHOUT_SEEN` belongs under `DNA` and `NoShow` until EMR4 has a dedicated terminal walkout status.
+- Cache-busted `docs/diary/diary.html` to `diary.js?v=171`.
+- Tightened `review/test_diary_smoke.py` to assert exact `DNA`/`NoShow` option lists and preserve the `Cancelled` exclusion checks.
 
 ## Verification
 
 - JS syntax passed: `node --check docs\diary\diary.js`.
-- Focused reason-code smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code" --junitxml=review\reason-code-review.xml` (6 passed).
-- Full Diary smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (117 passed).
-- Office add-in manifest validation and production npm audit passed through `npm run validate-all` until the known Windows `python` alias failure in `check-assets`; rerunning the same asset checker with `..\.venv\Scripts\python.exe ..\scripts\check_frontend_versions.py` passed.
-- Whitespace and encoding sweep passed: `git diff --check`; targeted mojibake scan found only intentional `PATIENT_UNWELL` references.
+- Focused reason-code smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code" --junitxml=review\reason-code-review.xml` (7 passed).
+- Full Diary smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (118 passed).
+- Frontend asset check passed: `..\.venv\Scripts\python.exe ..\scripts\check_frontend_versions.py`.
+- Whitespace and encoding sweep passed: `git diff --check` and targeted mojibake scan.
 
 ## Recommended User Review
 
-No required manual review before continuing. This is covered by deterministic Diary smoke tests and static asset checks. Optional live review after deploy: open the Diary, edit a future appointment, choose `Cancelled`, and confirm `Patient unwell`, `Did not attend`, and `Left before being seen` are absent from the reason dropdown.
+No required manual review before continuing. This is covered by deterministic Diary smoke tests and static asset checks. Optional live review after deploy: open the Diary, edit an appointment, choose `Cancelled`, `DNA`, and `No Show`, and confirm each dropdown only shows the status-specific administrative codes.
 
 ## Not Required Before Moving On
 
@@ -41,18 +41,18 @@ No required manual review before continuing. This is covered by deterministic Di
 
 ## Known Follow-Up
 
-- Consider Gemini's stricter per-status filtering: `Cancelled`, `DNA`, and `NoShow` could each receive narrower option lists in a later sprint.
+- Consider a future dedicated `Left without being seen` terminal status if operational reporting needs it.
 - Consider a staff-facing expired-session banner if production auth expiry currently leaves the Diary blank or ambiguous.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R16: Status-Specific Reason-Code Narrowing or Expired-Session Diary UX |
+| Name | Sprint R17: Expired-Session Diary UX Banner |
 | Status | Proposed |
 | Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for receptionist workflow review, and DeepSeek Flash lanes as sprint boundaries justify |
 
-Recommended scope: either narrow the reason-code dropdown per selected terminal status using Gemini's R15 review, or add a clear staff-facing expired-session banner for the Diary.
+Recommended scope: add a clear staff-facing expired-session banner/state when the Diary auth token is missing or expired, so staff are not left with a blank/ambiguous Diary.
 
 ## Previous Closeout - Sprint R4
 
