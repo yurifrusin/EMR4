@@ -565,7 +565,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `PENDING_R7_FINAL` - Sprint R7 raw appointment temporal guard hardening |
+| **Latest integration commit** | `212e25f` - Sprint R7 raw appointment temporal guard hardening |
 
 ### Tag map (all tags pushed to remote)
 
