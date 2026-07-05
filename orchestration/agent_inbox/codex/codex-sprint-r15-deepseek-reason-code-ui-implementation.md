@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 828c3ee |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r15-deepseek-reason-code-ui-implementation --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/diary/diary.html`, `docs/diary/diary.js`, `review/test_diary_smoke.py`, and coordination plan/review artifacts.
+- Verification run: Ariadne discarded an encoding-corrupted worker diff, implemented the accepted plan locally, then ran node syntax and focused/full Diary smoke checks during closeout.
+- Remaining risks: Gemini proposed stricter per-status option filtering; this sprint implements the narrower approved future-vs-retrospective filter and leaves per-status narrowing as a possible follow-up.

@@ -49,6 +49,21 @@ const STATUS_REASON_CODE_LABELS = {
   OTHER: "Other administrative reason"
 };
 const STATUS_REASON_CODE_STATUSES = new Set(["Cancelled", "NoShow", "DNA"]);
+const FIRST_PARTY_REASON_CODE_OPTIONS = [
+  "PATIENT_CANCELLED",
+  "PATIENT_RESCHEDULED",
+  "PATIENT_TRANSPORT",
+  "PRACTITIONER_UNAVAILABLE",
+  "CLINIC_OPERATIONAL",
+  "CLINIC_RESCHEDULED",
+  "ADMIN_ERROR",
+  "DUPLICATE_BOOKING",
+  "OTHER"
+];
+const RETROSPECTIVE_REASON_CODE_OPTIONS = [
+  "DID_NOT_ATTEND",
+  "LEFT_WITHOUT_SEEN"
+];
 
 function statusReasonCodeLabel(code) {
   return STATUS_REASON_CODE_LABELS[code] || String(code || "");
@@ -6263,6 +6278,10 @@ Office.onReady(() => {
   if (bookingReasonCodeSelect) {
     bookingReasonCodeSelect.addEventListener("change", resetProposalConfirmation);
   }
+  ["booking-date", "booking-time"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("change", syncBookingReasonCodeVisibility);
+  });
   ["booking-date", "booking-time", "booking-duration", "booking-reason"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", resetProposalConfirmation);
@@ -6556,10 +6575,51 @@ function prepareStatusDropdown(currentStatus) {
   });
 }
 
+function bookingReasonCodeContext() {
+  if (!editingAppointmentId) return "future";
+  const dateValue = document.getElementById("booking-date")?.value || "";
+  const timeValue = document.getElementById("booking-time")?.value || "23:59";
+  const match = dateValue.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return "future";
+  const timeParts = (timeValue || "23:59").slice(0, 5).split(":").map(Number);
+  const appointmentDate = new Date(
+    Number(match[1]),
+    Number(match[2]) - 1,
+    Number(match[3]),
+    Number.isFinite(timeParts[0]) ? timeParts[0] : 23,
+    Number.isFinite(timeParts[1]) ? timeParts[1] : 59
+  );
+  return appointmentDate < new Date() ? "past" : "future";
+}
+
+function populateBookingReasonCodeOptions(context = "future") {
+  const select = document.getElementById("booking-status-reason-code");
+  if (!select) return;
+  const currentValue = select.value;
+  select.innerHTML = "";
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "-- Select Reason --";
+  select.appendChild(defaultOption);
+
+  const codes = context === "past"
+    ? RETROSPECTIVE_REASON_CODE_OPTIONS.concat(FIRST_PARTY_REASON_CODE_OPTIONS)
+    : FIRST_PARTY_REASON_CODE_OPTIONS;
+  codes.forEach(code => {
+    const option = document.createElement("option");
+    option.value = code;
+    option.textContent = statusReasonCodeLabel(code);
+    select.appendChild(option);
+  });
+
+  select.value = codes.includes(currentValue) ? currentValue : "";
+}
+
 function setBookingReasonCodeVisible(visible, clearValue = false) {
   const container = document.getElementById("booking-status-reason-code-container");
   const select = document.getElementById("booking-status-reason-code");
   if (container) container.classList.toggle("hidden", !visible);
+  if (visible) populateBookingReasonCodeOptions(bookingReasonCodeContext());
   if (select && clearValue) select.value = "";
 }
 

@@ -8,50 +8,51 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R14: Auth Bootstrap Harness Guard |
-| Integrated through | Ariadne harness guard implementation, DeepSeek Flash implementation plan, Antigravity/Gemini receptionist-domain review |
-| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean |
+| Batch | Sprint R15: Reason-Code UX Polish |
+| Integrated through | Ariadne implementation, DeepSeek Flash implementation/test plans, Antigravity/Gemini receptionist-domain review |
+| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added reusable auth bootstrap helpers to `review/harness.py`: `assert_valid_review_token`, `bootstrap_auth`, and `clear_auth`.
-- Updated `review/test_diary_smoke.py` to validate `REVIEW_AUTH_TOKEN` at import and use harness helpers instead of direct `localStorage` auth snippets.
-- Preserved production behaviour: no `docs/diary`, backend, schema, migration, or deployed static asset changes were required.
-- Integrated Gemini's R14 domain review in `docs/receptionist_review_r14.md`, confirming the guard improves developer/CI diagnostics without changing receptionist workflow.
-- Left R12 reason-code coverage and the restored full Diary smoke signal intact.
+- Removed `PATIENT_UNWELL` from the first-party Diary reason-code dropdown while preserving `STATUS_REASON_CODE_LABELS` display compatibility for existing stored values.
+- Added context-aware dropdown population in `docs/diary/diary.js`: future cancellations hide retrospective housekeeping options, while past terminal-status changes prioritize `DID_NOT_ATTEND` and `LEFT_WITHOUT_SEEN`.
+- Removed retrospective-only options from static dropdown markup and cache-busted `docs/diary/diary.html` to `diary.js?v=170` and `diary.css?v=134`.
+- Added deterministic smoke coverage for future and retrospective reason-code option sets in `review/test_diary_smoke.py`.
+- Integrated Gemini's R15 receptionist-domain review in `docs/receptionist_review_r15.md`; its stricter per-status filtering recommendation is recorded as a follow-up rather than broadened into this slice.
 
 ## Verification
 
-- Focused auth-sensitive cluster passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "bernie_session_endpoint_active_load_and_phi_minimized_append or bernie_session_stale_conflict_disables_confirm_until_refresh or bernie_route_calls_carry_server_session_coordinates_and_binding or bernie_pilot_ordinary_mode_requires_real_context or bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated or bernie_pilot_imported_context_stales_when_selection_changes or bernie_pilot_selected_appointment_instruction_affordances or bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised_call or bernie_pilot_instruction_first_without_selected_appointment or bernie_candidate_click_stages_provisional_diary_preview or bernie_route_intercepted_selected_slot_can_return_to_candidates or bernie_pilot_selected_appointment_instruction_readiness_and_resets" --junitxml=review\r14-focused-review.xml` (12 passed).
-- Full Diary smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (all checks passed).
-- R12 reason-code guard passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code or cancel_flow_uses_signed_delete_confirm_without_raw_delete or cancel_flow_failed_signed_confirm_does_not_raw_delete" --junitxml=review\reason-code-review.xml` (7 passed).
-- Whitespace check passed: `git diff --check`.
+- JS syntax passed: `node --check docs\diary\diary.js`.
+- Focused reason-code smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code" --junitxml=review\reason-code-review.xml` (6 passed).
+- Full Diary smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (117 passed).
+- Office add-in manifest validation and production npm audit passed through `npm run validate-all` until the known Windows `python` alias failure in `check-assets`; rerunning the same asset checker with `..\.venv\Scripts\python.exe ..\scripts\check_frontend_versions.py` passed.
+- Whitespace and encoding sweep passed: `git diff --check`; targeted mojibake scan found only intentional `PATIENT_UNWELL` references.
 
 ## Recommended User Review
 
-No required manual review for Sprint R14. This was a deterministic harness-only guard; it makes future invalid auth-token drift fail fast and clearly without changing receptionist-facing behaviour.
+No required manual review before continuing. This is covered by deterministic Diary smoke tests and static asset checks. Optional live review after deploy: open the Diary, edit a future appointment, choose `Cancelled`, and confirm `Patient unwell`, `Did not attend`, and `Left before being seen` are absent from the reason dropdown.
 
 ## Not Required Before Moving On
 
-- No browser/Office/GitHub Pages/manual receptionist test is required because production UI assets did not change.
-- No backend/API/database verification is required because no backend files or migrations changed.
+- No backend/API/database verification is required because no backend files, schemas, or migrations changed.
+- No Office taskpane build is required because the changed production surface is `docs/diary`, not bundled taskpane source.
 - No live Gemini/Vertex call is required; Gemini's contribution was a documentation-only domain review.
 
 ## Known Follow-Up
 
+- Consider Gemini's stricter per-status filtering: `Cancelled`, `DNA`, and `NoShow` could each receive narrower option lists in a later sprint.
 - Consider a staff-facing expired-session banner if production auth expiry currently leaves the Diary blank or ambiguous.
-- Keep using full `review/test_diary_smoke.py` after visible Diary changes now that the harness is green again.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R15: Reason-Code UX Polish |
+| Name | Sprint R16: Status-Specific Reason-Code Narrowing or Expired-Session Diary UX |
 | Status | Proposed |
-| Recommended agents | Check Claude availability first; use Claude if healthy for harness/backend contract work, Antigravity/Gemini for receptionist workflow review, and DeepSeek Flash lanes as sprint boundaries justify |
+| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for receptionist workflow review, and DeepSeek Flash lanes as sprint boundaries justify |
 
-Recommended scope: continue reason-code UX polish such as contextual option grouping and `PATIENT_UNWELL` taxonomy refinement, now that full Diary smoke is clean and guarded.
+Recommended scope: either narrow the reason-code dropdown per selected terminal status using Gemini's R15 review, or add a clear staff-facing expired-session banner for the Diary.
 
 ## Previous Closeout - Sprint R4
 

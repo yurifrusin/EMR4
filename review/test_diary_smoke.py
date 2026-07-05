@@ -208,13 +208,18 @@ def test_reason_code_dropdown_no_default_and_ui_required(diary_page):
     reason_container = diary_page.locator("[data-testid='booking-status-reason-code-container']")
     assert "hidden" in (reason_container.get_attribute("class") or "")
 
+    future_date = diary_page.evaluate("() => { const d = new Date(); d.setDate(d.getDate() + 1); return localDateKey(d); }")
+    diary_page.fill("#booking-date", future_date)
+    diary_page.fill("#booking-time", "09:00")
     diary_page.select_option("#booking-status", "Cancelled")
     diary_page.wait_for_selector("[data-testid='booking-status-reason-code-container']:not(.hidden)", state="visible", timeout=2000)
     reason_select = diary_page.locator("[data-testid='booking-status-reason-code']")
     assert reason_select.input_value() == ""
     assert reason_select.locator("option[value='LEGACY_UNCLASSIFIED']").count() == 0
+    assert reason_select.locator("option[value='PATIENT_UNWELL']").count() == 0
     assert reason_select.locator("option[value='PATIENT_CANCELLED']").count() == 1
-    assert reason_select.locator("option[value='DID_NOT_ATTEND']").count() == 1
+    assert reason_select.locator("option[value='DID_NOT_ATTEND']").count() == 0
+    assert reason_select.locator("option[value='LEFT_WITHOUT_SEEN']").count() == 0
 
     note = diary_page.locator("[data-testid='booking-cancel-reason']")
     assert int(note.get_attribute("maxlength")) <= 150
@@ -226,6 +231,35 @@ def test_reason_code_dropdown_no_default_and_ui_required(diary_page):
     diary_page.click("#btn-booking-delete")
     error = diary_page.locator("#booking-error")
     assert "select an administrative reason code" in error.text_content()
+
+    diary_page.click("#btn-booking-close")
+    diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)
+
+
+def test_reason_code_retrospective_options_are_prioritized(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    diary_page.goto(base_url + CHECKS["target"])
+    diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    diary_page.click(".appt:has-text('Margaret Thompson')")
+    diary_page.wait_for_selector(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt", state="visible", timeout=3000)
+    diary_page.click(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt")
+    diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
+
+    past_date = diary_page.evaluate("() => { const d = new Date(); d.setDate(d.getDate() - 1); return localDateKey(d); }")
+    diary_page.fill("#booking-date", past_date)
+    diary_page.fill("#booking-time", "09:00")
+    diary_page.select_option("#booking-status", "DNA")
+    diary_page.wait_for_selector("[data-testid='booking-status-reason-code-container']:not(.hidden)", state="visible", timeout=2000)
+
+    option_values = diary_page.locator("[data-testid='booking-status-reason-code'] option").evaluate_all(
+        "(options) => options.map((option) => option.value)"
+    )
+    assert option_values[:3] == ["", "DID_NOT_ATTEND", "LEFT_WITHOUT_SEEN"]
+    assert "PATIENT_CANCELLED" in option_values
+    assert "PATIENT_UNWELL" not in option_values
 
     diary_page.click("#btn-booking-close")
     diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)

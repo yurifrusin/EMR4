@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 828c3ee |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r15-deepseek-reason-code-smoke-tests --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `review/test_diary_smoke.py` and coordination plan packet.
+- Verification run: Ariadne replaced the worker-generated test diff with focused deterministic assertions and ran the focused/full Diary smoke checks during closeout.
+- Remaining risks: None for the implemented future-vs-retrospective filter; stricter status-specific filtering remains a product follow-up.
