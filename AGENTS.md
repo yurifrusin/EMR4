@@ -565,7 +565,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `PENDING_R10_COMMIT` - Sprint R10 cancellation/status reason-code governance contract |
+| **Latest integration commit** | `b8f1fd4` - Sprint R10 cancellation/status reason-code governance contract |
 
 ### Tag map (all tags pushed to remote)
 
