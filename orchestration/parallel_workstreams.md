@@ -5,6 +5,43 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint R14: Auth Bootstrap Harness Guard
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Prevent future invalid review-auth token drift from surfacing as vague Diary selector timeouts |
+| Worker Shape | Claude availability checked first and unavailable until 9:30pm Australia/Brisbane; DeepSeek Flash implementation lane plus Antigravity/Gemini domain/test-design review |
+| In Scope | `review/test_diary_smoke.py` auth bootstrap helper/assertion, focused/full smoke verification, document-only domain review |
+| Out Of Scope | Production Diary assets, backend routes/schemas, assertion weakening, live Office/GitHub Pages/Gemini calls |
+| Verification | Focused R13 auth-sensitive cluster, full `review/test_diary_smoke.py`, R12 reason-code guard, `git diff --check` |
+
+### Workstream R14-A - DeepSeek Auth Bootstrap Guard
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r14-auth-bootstrap-guard` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r14-deepseek-auth-bootstrap-guard.md` |
+| Goal | Add reusable harness auth helper/assertion so invalid-token drift fails clearly |
+| In Scope | `review/test_diary_smoke.py` only unless Ariadne expands scope |
+| Out of Scope | Production code, backend, broad smoke rewrites |
+| Verification | Focused auth-sensitive cluster, full smoke, R12 reason-code guard |
+| Status | Queued |
+
+### Workstream R14-B - Gemini Auth Harness Domain Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-r14-auth-harness-domain-review.md` |
+| Goal | Ensure harness auth guard improves signal without hiding real expired-session UX concerns |
+| In Scope | `docs/receptionist_review_r14.md` only after plan approval |
+| Out of Scope | Production code, test implementation, live providers |
+| Verification | Tangible document-only review artifact |
+| Status | Queued |
+
 ## Sprint R13: Diary Smoke Harness Recovery
 
 | Item | Value |
