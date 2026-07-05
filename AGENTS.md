@@ -29,7 +29,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
 | **Current active track** | Native Bernie/Diary domain work with receptionist testing now formalised as a scenario-corpus/replay-harness workstream |
-| **Next recommended work** | Sprint R1: Reception Scenario Corpus Foundation, then Sprint R2: Clarification Merge Semantics; patient collision source hardening remains a near-term native diary-domain follow-up |
+| **Next recommended work** | Sprint R2: Clarification Merge Semantics; patient collision source hardening remains a near-term native diary-domain follow-up |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -530,7 +530,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint G6 signed cancel/delete confirm migration |
+| **Latest integration commit** | Sprint R1 reception scenario corpus foundation |
 
 ### Tag map (all tags pushed to remote)
 

@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r1-bernie-scenario-replay-harness` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -49,5 +49,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into Sprint R1. Ariadne applied bounded schema-compatibility repair so executable harness fixtures and natural-language corpus scenarios coexist.
+- Follow-up required: Sprint R2 should implement clarification merge semantics and start converting selected xfail corpus scenarios into executable replay cases.

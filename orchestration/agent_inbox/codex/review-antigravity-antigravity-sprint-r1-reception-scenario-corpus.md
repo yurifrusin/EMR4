@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r1-reception-scenario-corpus` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -42,5 +42,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into Sprint R1. Corpus accepted as receptionist-domain project memory; Ariadne expanded validator category/outcome handling for the submitted vocabulary.
+- Follow-up required: Use these scenarios as the acceptance spine for Sprint R2 and later replay promotion.

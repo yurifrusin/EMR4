@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r1-deepseek-scenario-integrity` |
 | Source Task | `codex-sprint-r1-deepseek-scenario-integrity` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated into Sprint R1 after Ariadne fixed a generated encoding issue and broadened the validator to understand both corpus and executable harness fixture shapes.
+- Follow-up required: Keep using the headless DeepSeek Flash bridge path for bounded worker lanes until in-app model attribution is trusted.

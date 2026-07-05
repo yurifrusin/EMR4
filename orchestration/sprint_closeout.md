@@ -8,59 +8,53 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint D7: Bernie Advisory Copy Rendering |
-| Integrated through | Claude local implementation, Antigravity/Gemini domain/UI-copy review, DeepSeek Flash worker lane, and Ariadne local integration |
-| Status | Local review branch only on `codex/d7-bernie-advisory-copy`; not pushed to `master` or `handoff/current` pending Yuri safety review |
-| Last updated | 2026-07-04 |
+| Batch | Sprint R1: Reception Scenario Corpus Foundation |
+| Integrated through | Claude replay-harness implementation, Antigravity/Gemini receptionist scenario corpus, DeepSeek Flash validator lane, and Ariadne schema integration repair |
+| Status | Integrated locally on `master`; push, mirror realign, and audit pending |
+| Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Updated Diary Bernie issue rendering so `existing_future_follow_up` displays backend-supplied `issue.message` first, with a generic patient-agnostic fallback only if the backend message is missing.
-- Removed the hardcoded `Margaret already has another appointment...` display path from runtime Diary UI.
-- Changed a separate ambiguous-patient fallback from `Margaret` to `this patient` so legacy/missing labels do not invent a patient name.
-- Bumped `docs/diary/diary.html` from `diary.js?v=167` to `diary.js?v=168` for deployment cache safety.
-- Updated the deterministic Diary smoke test to assert the backend-provided advisory message.
-- Imported Antigravity/Gemini's D7 review artifact into Codex's inbox for review history.
-- No backend routes, schemas, migrations, GraphRAG, persisted sessions, or broad Bernie state-machine behaviour changed.
+- Added a version-controlled Bernie receptionist scenario corpus under `tests/fixtures/bernie_scenarios/` with 9 seed YAML scenarios, including known xfail cases for long-appointment clarification and merge semantics.
+- Added `tests/bernie_scenarios/`, a backend/session replay harness that runs executable YAML fixtures through deterministic appointment proposal endpoints without live AI provider calls.
+- Added `tests/test_bernie_scenario_integrity.py`, a pure fixture-integrity validator for YAML parseability, unique ids, category/outcome shape, xfail reason metadata, and forbidden-list structure.
+- Added harness-owned executable demo fixtures: one passing normalize/search/select/confirm path and one xfail demo to prove expected-failure mechanics.
+- Ariadne repaired the integration boundary so natural-language corpus scenarios are retained as project memory while executable harness fixtures are the only files replayed by the backend harness.
+- No production backend code, frontend Diary UI, taskpane, migrations, GraphRAG, live provider prompts, PHI/log ingestion, or auto-mode behaviour changed.
 
 ## Verification
 
-- JavaScript syntax passed: `node --check docs/diary/diary.js`.
-- Deterministic Diary smoke suite passed: `.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -q`.
-- Frontend asset version integrity passed: `.venv\Scripts\python.exe scripts\check_frontend_versions.py`; local `diary.js` version is bumped from `167` to `168` while deployed remains `167` until/if this branch is approved and pushed.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\bernie_scenarios\loader.py tests\bernie_scenarios\replay.py tests\bernie_scenarios\test_scenario_replay.py tests\test_bernie_scenario_integrity.py`.
+- Fixture integrity passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q` (8 passed, 1 skipped; existing Starlette/Google GenAI warnings only).
+- Replay harness passed: `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios -q` (1 passed, 1 xfailed; existing warnings only).
+- `git diff --check` passed.
+- An earlier parallel pytest attempt against both R1 suites hit the existing shared PostgreSQL test-schema race (`userrole` enum duplicate); rerunning sequentially passed and no R1 code change was needed for that.
 
 ## Recommended User Review
 
-Before approving promotion to `master`, check the usage meters for this experiment:
-
-- Claude reported roughly `$1.45` for its D7 local implementation lane.
-- DeepSeek Flash handled a parallel worker lane and should have moved the DeepSeek meter only.
-- Antigravity/Gemini handled the independent review/implementation lane through the Gemini quota.
-- Ariadne/Codex still performed orchestration, review, and local integration in this thread.
-
-If you approve code review, the functional UI check after deployment should be: trigger an `existing_future_follow_up` warning and confirm the Bernie panel shows backend-authored generic text, not hardcoded Margaret-specific copy.
+No required manual review for Sprint R1. This is test/corpus infrastructure only and does not change live Bernie, Diary UI, appointment mutation behaviour, or GitHub Pages assets.
 
 ## Not Required Before Moving On
 
-- No backend API or database migration test is required for this D7 patch.
-- No live Vertex/Gemini call is needed; this is deterministic Diary rendering.
-- No broad Bernie conversation or persisted-session change was made.
+- No live Diary/Office/Chrome smoke is required; no frontend asset changed.
+- No live Gemini/Vertex call is required; the replay harness explicitly guards against provider calls.
+- No database migration, seed reset, GraphRAG, production log ingestion, or PHI handling review is required.
 
 ## Known Follow-Up
 
-- Backend duplicate-day collision hardening remains: direct requested-day lookup should replace reliance on compact `future_bookings` cap.
-- Reschedule/extend flows still need source appointment exclusion to avoid self-collision warnings.
-- After you approve this branch, Ariadne should push/realign/audit and then test the deployed `diary.js?v=168` path.
+- Sprint R2 should implement clarification merge semantics so replies such as "A long appointment is 30 minutes" preserve patient, practitioner, date, and time instead of re-asking for already-known fields.
+- Promote selected Antigravity corpus scenarios from natural-language memory into executable replay fixtures as deterministic session endpoints become available.
+- Keep the headless `codex exec -c 'model_provider="deepseek_bridge"' -m deepseek-flash` path as the trusted DeepSeek Flash worker route until in-app worker model attribution is proven.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint D8: Patient Collision Source Hardening |
-| Status | Candidate after D7 approval/promotion |
-| Recommended agents | Claude or DeepSeek backend lane, Antigravity/Gemini domain-policy review, Ariadne final integration |
+| Name | Sprint R2: Clarification Merge Semantics |
+| Status | Recommended next |
+| Recommended agents | Claude backend/session lane, Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash targeted regression/integrity lane, Ariadne integration |
 
-D8 should likely add direct requested-day duplicate lookup and source-appointment exclusion so warning correctness does not depend on capped compact context.
+R2 should make clarification turns merge only missing or ambiguous fields into the existing request frame, then convert the relevant R1 xfail scenarios into passing replay coverage.
 
 
 ## Previous Closeout - Sprint D6

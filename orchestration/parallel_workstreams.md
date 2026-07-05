@@ -29,7 +29,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatching / plan gate |
+| Status | Integrated locally; push/mirror/audit pending |
 | Product Goal | Establish a small version-controlled Bernie receptionist scenario corpus and replay harness so exploratory receptionist findings become executable project memory |
 | Worker Shape | Claude backend harness lane, Antigravity/Gemini receptionist-domain scenario lane, DeepSeek Flash fixture integrity lane, Ariadne orchestration/integration |
 | In Scope | Scenario schema/loader, backend/session replay harness, 8-12 seed scenarios, fixture integrity checks, authoring guidance |
@@ -47,7 +47,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | `tests/bernie_scenarios/`, loader/helpers, focused tests needed to prove scenario replay mechanics |
 | Out of Scope | Scenario corpus authorship beyond minimal fixtures needed to prove the harness, Diary frontend, production app changes except tiny seams required by the harness |
 | Verification | py_compile and focused pytest for the new harness plus relevant existing Bernie session tests |
-| Status | Dispatching |
+| Status | Integrated |
 
 ### Workstream R1-B - Reception Scenario Corpus
 
@@ -60,7 +60,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | `tests/fixtures/bernie_scenarios/`, scenario content, scenario acceptance notes, domain/test-design dissent |
 | Out of Scope | Backend harness implementation, Diary UI changes, production code, prompt rewrites, GraphRAG |
 | Verification | Corpus files parse under the agreed schema once Claude/DeepSeek validation is available; otherwise provide a manual schema checklist in completion notes |
-| Status | Dispatching |
+| Status | Integrated |
 
 ### Workstream R1-C - DeepSeek Fixture Integrity Lane
 
@@ -73,7 +73,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Scenario fixture README/checklist, parse/uniqueness/category validation tests, review notes for malformed or ambiguous scenario expectations |
 | Out of Scope | Backend replay harness, production app code, Diary UI, broad implementation of clarification semantics |
 | Verification | py_compile, focused integrity pytest, git diff --check |
-| Status | Dispatching |
+| Status | Integrated |
 
 ## Operating Rules
 
