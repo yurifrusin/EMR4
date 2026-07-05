@@ -1,0 +1,46 @@
+# Harness-owned xfail demo fixture.
+# Demonstrates the xfail mechanism for a known R2 target behaviour.
+# Expected to fail with current code. Sprint R2 should remove the xfail marker.
+
+id: harness-demo-clarification-merge-xfail
+category: clarification
+description: >
+  When a slot-search command contains an afternoon-time qualifier,
+  the normalized constraint should expose a time_of_day field.
+  Current code does not implement time_of_day filtering so this
+  scenario is expected to fail. Sprint R2 (clarification merge semantics)
+  should un-xfail it.
+reference_date: "2026-06-22"
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+xfail:
+  reason: "time_of_day filtering not yet implemented - target Sprint R2 clarification merge semantics"
+
+turns:
+  - action: normalize
+    input:
+      practitioner_id: "{practitioner_id}"
+      date_from: "today"
+      duration_minutes: "15"
+      patient_id: "{patient_id}"
+    expect:
+      status: 200
+      fields:
+        safe: true
+        "constraint.time_of_day": "afternoon"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

@@ -1,0 +1,67 @@
+# Harness-owned demo fixture: deterministic normalize -> search -> select -> confirm.
+# Owned by Claude/harness for R1 mechanics verification only.
+# Do not edit corpus content here — Antigravity owns the main scenario corpus.
+
+id: harness-demo-happy-path
+category: booking_create
+description: >
+  Deterministic normalize -> search -> select -> confirm path.
+  No LLM/provider calls. Proves the harness can load a YAML scenario,
+  run ordered backend turns, and assert write outcomes.
+reference_date: "2026-06-22"
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: normalize
+    input:
+      practitioner_id: "{practitioner_id}"
+      date_from: "today"
+      duration_minutes: "15"
+      patient_id: "{patient_id}"
+    expect:
+      status: 200
+      fields:
+        safe: true
+        "constraint.date_from": "2026-06-22"
+
+  - action: search
+    expect:
+      status: 200
+      fields:
+        intent: "search_slots_from_command"
+        safe: true
+
+  - action: select
+    input:
+      selected_candidate_index: 0
+      reason: "Harness demo booking R1"
+    expect:
+      status: 200
+      fields:
+        intent: "select_slot_for_create_proposal"
+        safe: true
+        requires_confirmation: true
+
+  - action: confirm
+    input:
+      confirmed: true
+    expect:
+      status: 200
+      fields:
+        intent: "confirm_create_appointment"
+        safe: true
+        autonomy_tier: "confirmed_write"
+
+expected:
+  appointment_written: true
+  audit_written: true
+
+forbidden_outcomes:
+  - provider_called
