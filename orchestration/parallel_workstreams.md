@@ -26,6 +26,56 @@ Recommended next slice when Bernie clarification/state work resumes:
 - Sprint R2: Clarification Merge Semantics.
 - Sprint R3: Stale Session / Revision Hardening.
 
+## Sprint R6: Temporal Boundary Harness Follow-Up
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Make same-day and related Bernie temporal-boundary policies deterministic in tests without broad production changes |
+| Worker Shape | Claude main implementation lane after availability probe, DeepSeek Flash adversarial review, Antigravity/Gemini domain-priority review, Ariadne orchestration/integration |
+| In Scope | Minimal harness or focused pytest clock injection, same-day `window_fully_past`/clamp/past-date coverage, selected executable fixtures or route tests, temporal policy review artifacts |
+| Out Of Scope | Diary UI redesign, Word/taskpane changes, GitHub Pages assets, live Gemini/Vertex calls, raw appointment mutation date-policy implementation, broad session-store redesign, GraphRAG/MCP/indexer automation |
+| Verification | py_compile touched tests/harness files; `pytest tests/test_bernie_scenario_integrity.py tests/bernie_scenarios -q`; focused same-day/no-slot/slot-search tests; git diff --check |
+
+### Workstream R6-A - Claude Temporal Harness Foundation
+
+| Item | Value |
+|---|---|
+| Owner | Claude |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-sprint-r6-temporal-harness-foundation.md` |
+| Goal | Add deterministic same-day/past-date temporal-boundary coverage with minimal harness or focused pytest support |
+| In Scope | Tests/fixtures/harness only unless a real bug is exposed |
+| Out of Scope | Production behavior changes without failing-test justification; UI; live provider calls |
+| Verification | py_compile plus focused scenario/no-slot/slot-search pytest |
+| Status | Queued |
+
+### Workstream R6-B - DeepSeek Temporal Adversarial Review
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r6-temporal-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r6-temporal-adversarial-review.md` |
+| Goal | Challenge clock-injection/replay design and classify remaining temporal scenarios |
+| In Scope | Review artifact or non-overlapping narrow tests |
+| Out of Scope | Production code; broad harness rewrite; UI |
+| Verification | Artifact inspection or focused tests if added |
+| Status | Queued |
+
+### Workstream R6-C - Gemini Temporal Domain Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-r6-temporal-domain-review.md` |
+| Goal | Rank temporal policies by clinical safety and define hard-block vs clarification semantics |
+| In Scope | `docs/receptionist_review_r6.md`, acceptance notes, executable-readiness classification |
+| Out of Scope | Production code; broad harness rewrite; UI; live provider calls |
+| Verification | Tangible review artifact |
+| Status | Queued |
+
 ## Sprint R5: Executable Scenario Promotion
 
 | Item | Value |

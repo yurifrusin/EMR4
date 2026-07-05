@@ -51,10 +51,10 @@ No required manual review for Sprint R5. This is deterministic backend test-harn
 | Item | Value |
 |---|---|
 | Name | Sprint R6: Temporal Boundary Harness Follow-Up |
-| Status | Candidate |
+| Status | Dispatched |
 | Recommended agents | Two DeepSeek Flash workers if Claude is still recuperating, plus Antigravity/Gemini for domain-priority/test-design |
 
-R6 can add a compact temporal-boundary test surface for same-day/past-date policies, or Ariadne can instead tackle raw appointment mutation/date-policy hardening if Yuri wants product-policy breadth before more harness work.
+R6 has been dispatched as the recommended next sprint: Claude takes the main temporal-harness implementation lane, DeepSeek reviews adversarially, and Gemini provides domain/test-design review.
 
 ## Previous Closeout - Sprint R4
 
