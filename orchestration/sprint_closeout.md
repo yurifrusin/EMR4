@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H7: Historical Diary Trove Synthetic Timeline Event Model |
 | Integrated through | Ariadne synthetic-only model/tests; no external workers used because scope was small and raw-free |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -27,11 +27,12 @@ reviewed, integrated, verified, pushed, and audited.
 
 - Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_timeline_events.py scripts\historical_diary_output_safety.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py`.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (14 passed; existing warnings only).
-- Validation pending final run before commit.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors all aligned at `5d26158f`.
+- GitHub workflows passed for the H7 push: Deploy GitHub Pages, Python Security, and CodeQL.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H7 is synthetic code/tests/docs only and does not touch raw diary files.
+No required manual review before continuing. H7 is synthetic code/tests/docs only and does not touch raw diary files.
 
 ## Not Required Before Moving On
 
