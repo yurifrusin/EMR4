@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H10 broad-run guardrails completed; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H11: bounded multi-day runtime probe, still ignored, capped, validator-gated, and non-semantic |
+| **Current active track** | Historical diary trove H11 bounded multi-day runtime probe completed; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H12: neutral large-delta local triage, still ignored, validator-gated, and non-semantic |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -91,9 +91,15 @@ broad-run caps to `scripts/historical_diary_structure_classifier.ps1`
 safe H8/H9 event-summary comparison. The ignored H10 comparison showed H8's
 grouped replay under-counted ordered small deltas by 8 in `pilot` and 1 in
 `pilot_01`. Safe H10 findings live in
-`docs/historical-diary-trove-broad-run-guardrails.md`. H11 should measure a
-small bounded multi-day/runtime probe without lifting the broad-run guardrails
-casually.
+`docs/historical-diary-trove-broad-run-guardrails.md`. H11 added
+`scripts/historical_diary_runtime_report.py` and
+`tests/test_historical_diary_runtime_report.py`, then ran a bounded two-dense-day
+probe with `SampleSize=80`, `DenseDays=2`, and `MaxDenseDays=2` without
+`-AllowLargeRun`. The ignored probe opened 160/160 files read-only with zero
+errors in 112.224 seconds; safe H11 findings live in
+`docs/historical-diary-trove-bounded-runtime-probe.md`. H12 should triage the
+single neutral `large_unexplained_delta` seen in `pilot_01` using only
+sequence-index pairs and neutral before/after counts.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

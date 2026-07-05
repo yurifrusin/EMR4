@@ -8,6 +8,54 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H11: Historical Diary Trove Bounded Multi-Day Runtime Probe |
+| Integrated through | Ariadne local-only runtime probe; no external workers used because scope was raw-free and narrowly bounded |
+| Status | Integrated locally; final push/workflow status pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `scripts\historical_diary_runtime_report.py`, a validator-safe runtime report generator for neutral probe output.
+- Added `tests\test_historical_diary_runtime_report.py`.
+- Ran a bounded two-dense-day local Word COM probe using `SampleSize=80`, `DenseDays=2`, and `MaxDenseDays=2`, without `-AllowLargeRun`.
+- Produced ignored `ordered_snapshots_h11.json`, `runtime_report_h11.json`, and `event_summary_h11.json`, each validated through H5.
+- Added `docs\historical-diary-trove-bounded-runtime-probe.md`.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_runtime_report.py scripts\historical_diary_output_safety.py tests\test_historical_diary_runtime_report.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_runtime_report.py tests\test_historical_diary_event_summary_compare.py tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (22 passed; existing warnings only).
+- Local probe passed: 160/160 read-only Word COM opens, zero errors, elapsed 112.224 seconds.
+- Safety validation passed for ignored H11 ordered snapshots, runtime report, and event summary.
+- Validation pending final commit, audit, and post-push workflows.
+
+## Local Runtime Result
+
+- `pilot`: 80 sampled/opened, 0 errors, 79 transitions: 40 `no_structural_change`, 39 `small_content_delta`.
+- `pilot_01`: 80 sampled/opened, 0 errors, 79 transitions: 50 `no_structural_change`, 28 `small_content_delta`, 1 `large_unexplained_delta`.
+- The `large_unexplained_delta` is neutral count movement only and must not be interpreted as an appointment event.
+
+## Recommended User Review
+
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H11 is local tooling/tests/docs only and touches raw diary files only through read-only local Word COM extraction.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- H12 should triage the single neutral `large_unexplained_delta` using only sequence-index pairs and before/after neutral counts.
+- Do not infer appointment create/delete/status semantics from H11.
+
+## Previous Closeout - Sprint H10
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H10: Historical Diary Trove Broad-Run Guardrails |
 | Integrated through | Ariadne local-only guardrail/comparer sprint; no external workers used because scope was raw-free and narrowly bounded |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
