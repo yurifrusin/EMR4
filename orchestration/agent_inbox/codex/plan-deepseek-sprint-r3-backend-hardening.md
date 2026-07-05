@@ -1,11 +1,11 @@
-# DeepSeek Sprint R3 Backend Stale Session Hardening — Implementation Plan
+ï»¿# DeepSeek Sprint R3 Backend Stale Session Hardening â€” Implementation Plan
 
 | Item | Value |
 |---|---|
 | Role | codex-worker |
 | Worker Name | Shen-2 / DeepSeek Flash |
 | Worker Branch | `codex/sprint-r3-deepseek-backend-hardening` |
-| Status | plan_gate — not yet implemented |
+| Status | plan_gate â€” not yet implemented |
 
 ## Protocol Status
 
@@ -19,7 +19,7 @@
 
 ## My Understanding
 
-The Bernie session store (`InMemoryBernieSessionStore`) is the server-owned state-machine for booking sessions. Clients (diary UI) send typed events with an `expected_revision` field — the session revision they last saw. When the actual session revision has advanced beyond that, the client has stale context. The store already rejects stale revisions (`stale_session_revision`), future revisions (`future_session_revision`), and conflicting idempotency keys for both client events and server outcomes. The route layer (in `app/routers/appointments.py`) also returns HTTP 409 for stale events and blocks confirm when `stale_reason_code` is set or freshness IDs mismatch.
+The Bernie session store (`InMemoryBernieSessionStore`) is the server-owned state-machine for booking sessions. Clients (diary UI) send typed events with an `expected_revision` field â€” the session revision they last saw. When the actual session revision has advanced beyond that, the client has stale context. The store already rejects stale revisions (`stale_session_revision`), future revisions (`future_session_revision`), and conflicting idempotency keys for both client events and server outcomes. The route layer (in `app/routers/appointments.py`) also returns HTTP 409 for stale events and blocks confirm when `stale_reason_code` is set or freshness IDs mismatch.
 
 **The core fail-closed stale session/revision guards are already implemented.** No production code change is needed for:
 - Session revision staleness rejection (store + route)
@@ -42,7 +42,7 @@ The Bernie session store (`InMemoryBernieSessionStore`) is the server-owned stat
 - **GitHub Pages assets**: No changes.
 - **Other appointment routes** (staff create, update, status, delete): No changes.
 - **Gemini/Vertex provider**: No changes.
-- **Persisted session table**: No changes — the in-memory store is deliberate.
+- **Persisted session table**: No changes â€” the in-memory store is deliberate.
 - **Clarification merge flow** (Sprint R2): Must be preserved.
 - **Patient collision source hardening**: No changes unless directly needed for stale-session safety.
 
@@ -62,35 +62,35 @@ The Bernie session store (`InMemoryBernieSessionStore`) is the server-owned stat
 ## Files I Expect To Edit
 
 Given no production gap, the only files that may change are:
-- `tests/test_bernie_session_store.py` — Add focused stale-revision scenario tests (optional; existing coverage is strong)
-- `tests/test_bernie_session_routes.py` — Add route-level stale confirm/status scenario tests (optional)
-- `tests/test_bernie_confirm_create_proposal.py` — Add integrated stale-session confirm scenario tests with explicit stale freshness IDs (highest value)
+- `tests/test_bernie_session_store.py` â€” Add focused stale-revision scenario tests (optional; existing coverage is strong)
+- `tests/test_bernie_session_routes.py` â€” Add route-level stale confirm/status scenario tests (optional)
+- `tests/test_bernie_confirm_create_proposal.py` â€” Add integrated stale-session confirm scenario tests with explicit stale freshness IDs (highest value)
 
 If Claude's concurrent lane already covers these, this lane reports **no-code-needed**.
 
 ## Implementation Steps
 
-### Step 0 — Assess Claude concurrent coverage
+### Step 0 â€” Assess Claude concurrent coverage
 Before writing any test, check whether Claude has already submitted stale-session tests on its workstream. If so, skip.
 
-### Step 1 — Focused regression tests (only if gaps remain after Step 0)
-Add 2–3 targeted tests that prove existing production guards work at the integrated scenario level:
+### Step 1 â€” Focused regression tests (only if gaps remain after Step 0)
+Add 2â€“3 targeted tests that prove existing production guards work at the integrated scenario level:
 
-1. **Stale session confirm block** — Create a session, advance through staff_instruction ? interpretation ? slot_search ? candidate_selection ? proposal_preview, then manually set the session stale via `diary_navigated` refresh (or simulate stale session binding), and confirm that `confirm-bernie` returns blocked with `session_binding_stale_session` and writes no appointment/audit rows.
+1. **Stale session confirm block** â€” Create a session, advance through staff_instruction ? interpretation ? slot_search ? candidate_selection ? proposal_preview, then manually set the session stale via `diary_navigated` refresh (or simulate stale session binding), and confirm that `confirm-bernie` returns blocked with `session_binding_stale_session` and writes no appointment/audit rows.
 
-2. **Stale candidate freshness ID** — Submit confirm with a tampered/non-matching `candidate_freshness_id` and verify the endpoint returns blocked with `stale_candidate_freshness_id` and writes nothing.
+2. **Stale candidate freshness ID** â€” Submit confirm with a tampered/non-matching `candidate_freshness_id` and verify the endpoint returns blocked with `stale_candidate_freshness_id` and writes nothing.
 
-3. **Stale proposal freshness ID** — Same for proposal freshness ID.
+3. **Stale proposal freshness ID** â€” Same for proposal freshness ID.
 
-4. **Post-confirm stale event** — From a terminal confirmed session, send a stale `staff_instruction` with old revision and verify it gets `event_not_allowed_in_state` (not stale revision — the state machine already prevents this).
+4. **Post-confirm stale event** â€” From a terminal confirmed session, send a stale `staff_instruction` with old revision and verify it gets `event_not_allowed_in_state` (not stale revision â€” the state machine already prevents this).
 
-### Step 2 — Verify
+### Step 2 â€” Verify
 - `py_compile` on all touched test files
 - Focused pytest: `tests/test_bernie_session_store.py`, `tests/test_bernie_session_routes.py`, `tests/test_bernie_confirm_create_proposal.py`
 - No regression in full Bernie suite
 - `git diff --check`
 
-### Step 3 — Submit plan
+### Step 3 â€” Submit plan
 Record findings, verdict, and completion notes for Codex.
 
 ## Visual / Behavioural Acceptance Checks
@@ -111,3 +111,4 @@ No visual changes. All changes are backend test-only.
 - **In-memory store**: All staleness guards are in-memory. A future persisted session table may need different staleness semantics.
 - **confirm_submitted staleness**: The confirm endpoint calls `append_client_event(..., expected_revision=binding_revision, event_type=confirm_submitted, ...)` at line 6754. The `binding_revision` comes from the session binding built at the start of the confirm function. Between the session binding and the append call, the revision cannot advance because the store is single-threaded. No gap here.
 - **Server outcome staleness**: Server outcomes arrive from the Bernie interpret/outcome handler, not from a client tab. The expected_revision for server outcomes is set by the server itself, so staleness there is a server-side/internal issue, not a client stale-context issue.
+
