@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R10: Cancellation/Status Reason-Code Governance Contract |
 | Integrated through | Ariadne policy/test integration, Antigravity/Gemini governance review, DeepSeek Flash inventory, DeepSeek Flash contract-test plan |
-| Status | Verified locally; push/audit pending |
+| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean; disposable DeepSeek worktrees retired |
 | Last updated | 2026-07-05 |
 
 ## What Changed
@@ -32,7 +32,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-No required manual review for Sprint R10 if final broader verification, push, mirror realignment, and audit succeed. This sprint is backend contract-test and documentation/protocol work; it does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, live Gemini behaviour, or production database shape.
+No required manual review for Sprint R10. This sprint is backend contract-test and documentation/protocol work; it does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, live Gemini behaviour, or production database shape.
 
 ## Not Required Before Moving On
 
