@@ -31,6 +31,14 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Current active track** | Native Bernie/Diary domain work with receptionist testing now formalised as a scenario-corpus/replay-harness workstream |
 | **Next recommended work** | Sprint R2: Clarification Merge Semantics; patient collision source hardening remains a near-term native diary-domain follow-up |
 
+Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
+tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
+noisy for broad natural-language graph search. Generated `graphify-out/` is
+ignored. Use `scripts/refresh_code_graph.ps1` only on demand for now; do not
+install Graphify Codex hooks, MCP server config, or post-commit auto-indexing
+until a later tooling sprint proves refresh/reload behaviour and worker safety.
+Details live in `docs/tooling/graphify-spike.md`.
+
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
 Use unique branches for those workers, e.g. `codex/time-model` or
@@ -530,7 +538,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint R1 reception scenario corpus foundation |
+| **Latest integration commit** | Graphify code graph tooling spike |
 
 ### Tag map (all tags pushed to remote)
 

@@ -94,3 +94,6 @@ MBS/*.jsonl
 # Gemini conversation exports
 Gemini_conversation.md
 gemini-code-*.md
+
+# Local code graph indexes
+graphify-out/
