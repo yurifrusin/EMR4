@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H1: Historical Diary Trove Local Inventory and Safety Boundary |
 | Integrated through | Ariadne local-only metadata inventory; no external workers used because raw files are PHI-bearing |
-| Status | Local validation complete; push, mirror realign, audit, and workflows pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
