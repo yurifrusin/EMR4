@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | submitted |
 | Created | e0406aa |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r20-manifest-prompt-safety-review --summary "Short plan summary"` |
@@ -90,5 +90,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [orchestration/manifest_prompt_safety_review.md](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/orchestration/manifest_prompt_safety_review.md) (Created safety review artifact)
 - Verification run:
+  - Local inspection of backend manifest capability fields and enums.
+  - Review of current prompt safety principles, refusal/clarification rules, and acceptance criteria.
 - Remaining risks:
+  - Divergence between manifest schema updates and LLM system prompt instructions (mitigated by version checks and automated safety validation checks).
