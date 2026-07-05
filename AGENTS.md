@@ -37,11 +37,14 @@ must stay local and ignored, preferably under
 `local_data/historical-diary-trove/raw/`; do not commit or send raw PHI-bearing
 content to LLM/external providers. The utilisation plan is
 `docs/historical-diary-trove-plan.md`. H1 pilot inventory found 411 `.doc` files
-in `local_data/historical-diary-trove/raw/pilot/`: 408 classic Word/OLE files
-and 3 tiny non-OLE `.doc` signatures. The safe committed summary is
-`docs/historical-diary-trove-pilot-inventory.md`; the detailed inventory JSON is
+in `local_data/historical-diary-trove/raw/pilot/` (likely Sunday/atypical) and
+584 `.doc` files in `local_data/historical-diary-trove/raw/pilot_01/` for
+comparison. Across both sets, 990 files have classic Word/OLE signatures and 5
+tiny `.doc` files have non-OLE signatures. The safe committed summary is
+`docs/historical-diary-trove-pilot-inventory.md`; detailed inventory JSON is
 ignored under `local_data/historical-diary-trove/inventory/`. H2 should test
-parser feasibility on a tiny local sample before touching the full trove.
+parser feasibility on tiny local samples from both pilots before touching the
+full trove.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

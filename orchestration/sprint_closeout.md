@@ -16,8 +16,8 @@ reviewed, integrated, verified, pushed, and audited.
 ## What Changed
 
 - Added `scripts/historical_diary_inventory.py`, a local-first inventory tool that emits aggregate metadata only and intentionally omits filenames, raw paths, document text, document metadata strings, and PHI-bearing values.
-- Ran the inventory against the ignored pilot folder `local_data/historical-diary-trove/raw/pilot/`; detailed JSON output remains ignored under `local_data/historical-diary-trove/inventory/pilot_inventory.json`.
-- Added `docs/historical-diary-trove-pilot-inventory.md` with safe H1 findings: 411 `.doc` files, 60,631,014 bytes, no duplicate hash prefixes, 408 classic Word/OLE signatures, and 3 tiny non-OLE `.doc` signatures.
+- Ran the inventory against ignored pilot folders `local_data/historical-diary-trove/raw/pilot/` and `local_data/historical-diary-trove/raw/pilot_01/`; detailed JSON output remains ignored under `local_data/historical-diary-trove/inventory/`.
+- Added `docs/historical-diary-trove-pilot-inventory.md` with safe H1 findings: original `pilot` has 411 `.doc` files, 60,631,014 bytes, no duplicate hash prefixes, 408 classic Word/OLE signatures, and 3 tiny non-OLE `.doc` signatures; comparison `pilot_01` has 584 `.doc` files, 79,252,804 bytes, no duplicate hash prefixes, 582 classic Word/OLE signatures, and 2 tiny non-OLE `.doc` signatures.
 - Recorded the discrepancy between the expected 414 files and observed 411 files; no filenames were printed or committed.
 - Updated `AGENTS.md` so future agents know the pilot exists, raw files remain local/ignored, and H2 parser feasibility is next.
 - No raw diary files, filenames, patient content, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
@@ -25,12 +25,12 @@ reviewed, integrated, verified, pushed, and audited.
 ## Verification
 
 - Inventory script compile passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_inventory.py`.
-- Pilot inventory command passed: `.venv\Scripts\python.exe scripts\historical_diary_inventory.py --root local_data\historical-diary-trove\raw\pilot --output local_data\historical-diary-trove\inventory\pilot_inventory.json --print-summary`.
+- Pilot inventory commands passed for both `pilot` and `pilot_01` with `.venv\Scripts\python.exe scripts\historical_diary_inventory.py --root ... --output ... --print-summary`.
 - Whitespace check pending final run before commit.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H1 is metadata/tooling/docs-only and does not commit raw files or expose PHI. Yuri may optionally confirm whether 411 vs expected 414 is acceptable or whether three files were missed during copy.
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H1 is metadata/tooling/docs-only and does not commit raw files or expose PHI. Yuri may optionally confirm whether 411 vs expected 414 is acceptable or whether three files were missed during the first copy.
 
 ## Not Required Before Moving On
 
@@ -41,7 +41,7 @@ No required manual review before continuing if validation, push, audit, and post
 
 ## Known Follow-Up
 
-- H2 should test parser feasibility on 5-10 local pilot `.doc` snapshots without committing filenames, text, metadata strings, or patient/staff labels.
+- H2 should test parser feasibility on 5-10 local `.doc` snapshots from each pilot set without committing filenames, text, metadata strings, or patient/staff labels.
 - Determine whether chronology is recoverable from filenames, OLE metadata, embedded visible diary dates, or adjacent binary/structural similarity.
 - Treat the three tiny non-OLE `.doc` files as possible ancillary/non-snapshot files until H2 proves their role.
 - Do not process the full 58k-file trove until parser and de-identification boundaries are proven on the pilot.
@@ -54,7 +54,7 @@ No required manual review before continuing if validation, push, audit, and post
 | Status | Proposed |
 | Recommended agents | Ariadne local-first for raw PHI inspection; external workers only on non-PHI parser code, synthetic fixtures, or safe summaries |
 
-Recommended scope: parse or structurally inspect 5-10 consecutive local pilot snapshots, recover neutral diary-grid facts if possible, and commit only non-PHI feasibility findings.
+Recommended scope: parse or structurally inspect 5-10 consecutive local snapshots from both pilots, recover neutral diary-grid facts if possible, compare Sunday/atypical versus busier churn, and commit only non-PHI feasibility findings.
 
 ## Previous Closeout - Sprint R25
 

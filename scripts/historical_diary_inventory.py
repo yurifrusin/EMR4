@@ -144,7 +144,7 @@ def build_inventory(root: Path) -> dict[str, Any]:
     return {
         "schema_version": "historical_diary_inventory.v1",
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "root_label": "pilot",
+        "root_label": resolved.name,
         "privacy_note": (
             "No filenames, raw paths, document text, metadata strings, or PHI-bearing "
             "values are included."
