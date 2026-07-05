@@ -8,32 +8,31 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R8: Confirm-Time Temporal Revalidation |
-| Integrated through | Ariadne backend tests/tooling fix, Antigravity/Gemini policy review, DeepSeek Flash route inventory, Claude plan superseded by quota limit |
+| Batch | Sprint R9: Status/Delete Retrospective Governance Review |
+| Integrated through | Ariadne backend tests/docs, Antigravity/Gemini policy review, DeepSeek Flash route inventory, DeepSeek test plan superseded by Ariadne implementation |
 | Status | Verified locally; push/audit pending |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added clock-advance regression coverage proving staff create confirm, update confirm, and Bernie create confirm block same-day proposals that were safe when minted but fully elapsed before confirmation.
-- Confirmed the existing route architecture already re-runs full proposal validation at confirm time, so no duplicate production temporal guard was added.
-- Added a module clock freeze to `tests/test_bernie_confirm_create_proposal.py` so its fixed June 2026 fixtures remain deterministic as real wall-clock time advances.
-- Added `docs/receptionist_review_r8.md` with Gemini-informed receptionist policy for confirm-time slot-writing blocks and status/delete exemptions.
-- Added `docs/receptionist_review_r8_confirm_inventory.md` with DeepSeek-informed route inventory and guard-chain classification.
-- Hardened `scripts/agent_worktrees.py` so `poll`/git subprocess output uses UTF-8 with replacement on Windows instead of failing on worker packet punctuation.
-- Superseded the Claude implementation lane because Claude hit its session limit during implementation; Ariadne integrated the tests directly using Claude's plan and DeepSeek/Gemini review inputs.
+- Added R9 retrospective-boundary tests in `tests/test_appointment_status_mutations.py` proving past-date and elapsed same-day status/delete operations remain allowed.
+- Added guard tests proving tampered status confirm and stale delete freshness still fail closed without writes for past appointments.
+- Added `docs/receptionist_review_r9.md` with Gemini-informed governance policy for retrospective status/delete operations.
+- Added `docs/receptionist_review_r9_status_delete_inventory.md` with DeepSeek-informed route inventory and safeguard-chain classification.
+- Preserved R8/R7 slot-writing temporal semantics; no production route code changed and no temporal blocks were added to status/delete paths.
+- Superseded the DeepSeek test implementation lane because it timed out/left no test diff; Ariadne implemented the canonical tests directly from the accepted plan.
 - No Diary UI, taskpane/Word assets, GitHub Pages assets, database migrations, live provider calls, GraphRAG/MCP/indexer automation, status/delete temporal policy, or deployed static assets changed.
 
 ## Verification
 
-- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\test_appointment_proposals.py tests\test_appointment_update_proposal.py tests\test_bernie_confirm_create_proposal.py`.
-- Focused R8 clock-advance tests passed: `.venv\Scripts\pytest.exe tests\test_appointment_proposals.py::test_create_confirm_revalidates_same_day_elapsed_window_without_write tests\test_appointment_update_proposal.py::test_update_confirm_revalidates_same_day_elapsed_window_without_write tests\test_bernie_confirm_create_proposal.py::test_bernie_confirm_revalidates_same_day_elapsed_window_without_write -q --tb=short` (3 passed; existing Starlette/Google GenAI warnings only).
-- Adjacent proposal/confirm/raw temporal suite passed: `.venv\Scripts\pytest.exe tests\test_appointment_proposals.py tests\test_appointment_update_proposal.py tests\test_bernie_confirm_create_proposal.py tests\test_appointment_raw_temporal_guard.py -q --tb=short` (62 passed; existing warnings only).
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\test_appointment_status_mutations.py`.
+- Focused R9 status/delete suite passed: `.venv\Scripts\pytest.exe tests\test_appointment_status_mutations.py -q --tb=short` (52 passed; existing Starlette/Google GenAI warnings only).
+- Adjacent status/delete plus slot-writing temporal boundary suite passed: `.venv\Scripts\pytest.exe tests\test_appointment_status_mutations.py tests\test_appointment_raw_temporal_guard.py tests\test_appointment_proposals.py tests\test_appointment_update_proposal.py tests\test_bernie_confirm_create_proposal.py -q --tb=short` (114 passed; existing warnings only).
 - Whitespace check passed: `git diff --check`.
 
 ## Recommended User Review
 
-No required manual review for Sprint R8 if final push/audit succeeds. This is backend route-test/tooling/documentation work and does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, or live provider behavior.
+No required manual review for Sprint R9 if final push/audit succeeds. This is backend route-test/documentation work and does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, or live provider behavior.
 
 ## Not Required Before Moving On
 
@@ -43,7 +42,7 @@ No required manual review for Sprint R8 if final push/audit succeeds. This is ba
 
 ## Known Follow-Up
 
-- Status/delete operations remain intentionally outside temporal slot-write blocking; future work can add audit/access policy if retrospective administrative actions need tighter controls.
+- Future governance work can consider structured cancellation/status reason codes and stronger UX routing toward signed proposal-confirm paths rather than raw compatibility endpoints.
 - The broad `poll --include-codex-workers` path can still be slow/noisy because old disposable `codex/*` worker branches exist remotely; use targeted branch inspection or retire stale worker refs when safe.
 - Claude should be rechecked at the next sprint start; it reported a reset time of 9:30pm Australia/Brisbane during R8 implementation.
 
@@ -51,11 +50,11 @@ No required manual review for Sprint R8 if final push/audit succeeds. This is ba
 
 | Item | Value |
 |---|---|
-| Name | Sprint R9: Status/Delete Retrospective Governance Review |
+| Name | Sprint R10: Cancellation Reason Governance Contract |
 | Status | Proposed |
-| Recommended agents | Check Claude availability first; use Antigravity/Gemini for receptionist/admin policy; add DeepSeek Flash workers for route inventory and adversarial tests as boundaries justify |
+| Recommended agents | Check Claude availability first; use Antigravity/Gemini for receptionist/admin copy; add DeepSeek Flash workers for route inventory/tests as boundaries justify |
 
-Recommended scope: review whether retrospective status/delete operations need additional audit, role, or reason-code governance without adding temporal slot-write blocks.
+Recommended scope: define and test a structured cancellation/status reason-code substrate or UX contract without changing temporal slot-write policy.
 
 ## Previous Closeout - Sprint R4
 

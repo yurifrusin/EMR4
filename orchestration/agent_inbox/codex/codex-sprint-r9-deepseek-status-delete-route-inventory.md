@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r9-status-delete-route-inventory` |
-| Status | queued |
+| Status | integrated |
 | Created | b01ccc0 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r9-deepseek-status-delete-route-inventory --summary "Short plan summary"` |

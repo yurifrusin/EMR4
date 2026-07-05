@@ -24,6 +24,7 @@ from app.models.tenancy import Practitioner
 from tests.conftest import make_token
 
 TODAY = date.today()
+PAST_DATE = date(2026, 4, 15)
 
 
 def _make_appt(db, practice, practitioner, patient,
@@ -667,3 +668,179 @@ def test_status_confirm_clears_waiting_area_when_null_supplied(
 
     assert confirm_resp.status_code == 200, confirm_resp.text
     assert confirm_resp.json()["appointment"]["waiting_area_id"] is None
+
+
+def test_r9_status_proposal_allows_past_date_without_temporal_block(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, appt_date=PAST_DATE)
+    token = make_token(gp_user)
+
+    resp = _post_status_proposal(client, token, appt.id, {"status": "Completed"})
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    block_codes = {block["code"] for block in data["blocks"]}
+    assert "appointment_in_past" not in block_codes
+    assert "same_day_window_elapsed" not in block_codes
+    assert data["signed_confirmation_evidence_required"] is True
+
+
+def test_r9_status_proposal_allows_elapsed_same_day_without_temporal_block(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, appt_date=TODAY, start_h=9)
+    token = make_token(gp_user)
+
+    resp = _post_status_proposal(client, token, appt.id, {"status": "Confirmed"})
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    block_codes = {block["code"] for block in data["blocks"]}
+    assert "appointment_in_past" not in block_codes
+    assert "same_day_window_elapsed" not in block_codes
+
+
+def test_r9_patch_status_allows_past_date_with_audit(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, appt_date=PAST_DATE)
+    token = make_token(gp_user)
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    resp = _patch_status(client, token, appt.id, "Completed")
+
+    assert resp.status_code == 200, resp.text
+    assert resp.json()["status"] == "Completed"
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Completed
+    assert db.query(AppointmentAuditLog).count() == before_audits + 1
+
+
+def test_r9_status_confirm_allows_past_date_with_signed_evidence_and_audit(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, appt_date=PAST_DATE)
+    token = make_token(gp_user)
+    proposal_resp = _post_status_proposal(client, token, appt.id, {"status": "Completed"})
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = _confirm_status_proposal(client, token, proposal_resp.json())
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "confirmed_write"
+    assert data["appointment"]["status"] == "Completed"
+    assert "diary_confirm_status_proposal" in data["audit_evidence"]
+    assert "status_signed_confirmation_evidence_verified" in data["audit_evidence"]
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Completed
+    assert db.query(AppointmentAuditLog).count() == before_audits + 1
+
+
+def test_r9_status_confirm_past_date_blocks_tampered_status_without_write(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, appt_date=PAST_DATE)
+    token = make_token(gp_user)
+    proposal_resp = _post_status_proposal(client, token, appt.id, {"status": "Completed"})
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+    payload["status_proposal"]["command"]["status"] = "NoShow"
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        "/api/v1/appointments/proposals/status-confirm",
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert any(block["code"] in {"signed_evidence_mismatch", "stale_status_proposal_freshness_id"} for block in data["blocks"])
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Booked
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
+def test_r9_delete_proposal_allows_past_date_without_temporal_block(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, appt_date=PAST_DATE)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Historical patient cancellation"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is True
+    block_codes = {block["code"] for block in data["blocks"]}
+    assert "appointment_in_past" not in block_codes
+    assert "same_day_window_elapsed" not in block_codes
+    assert data["signed_confirmation_evidence_required"] is True
+
+
+def test_r9_delete_confirm_allows_past_date_with_signed_evidence_and_audit(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, appt_date=PAST_DATE, start_h=10)
+    token = make_token(gp_user)
+    proposal_resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Historical correction"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        DELETE_CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is True
+    assert data["autonomy_tier"] == "confirmed_write"
+    assert data["appointment"]["status"] == "Cancelled"
+    assert "diary_confirm_delete_proposal" in data["audit_evidence"]
+    assert "delete_signed_confirmation_evidence_verified" in data["audit_evidence"]
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Cancelled
+    assert appt.cancellation_reason == "Historical correction"
+    assert db.query(AppointmentAuditLog).count() == before_audits + 1
+
+
+def test_r9_delete_confirm_past_date_blocks_stale_freshness_without_write(
+        client, db, gp_user, practice, practitioner, patient):
+    appt = _make_appt(db, practice, practitioner, patient, appt_date=PAST_DATE, start_h=11)
+    token = make_token(gp_user)
+    proposal_resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    payload = proposal_resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+    payload["delete_proposal_freshness_id"] = "stale-delete-proposal"
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        DELETE_CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert any(block["code"] == "stale_delete_proposal_freshness_id" for block in data["blocks"])
+    db.refresh(appt)
+    assert appt.status == AppointmentStatus.Booked
+    assert db.query(AppointmentAuditLog).count() == before_audits

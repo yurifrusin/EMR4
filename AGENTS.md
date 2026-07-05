@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R8 confirm-time proposal revalidation coverage verified locally; push/audit pending |
-| **Next recommended work** | Sprint R9: status/delete retrospective governance review without adding temporal slot-write blocks |
+| **Current active track** | Sprint R9 status/delete retrospective governance review verified locally; push/audit pending |
+| **Next recommended work** | Sprint R10: cancellation/status reason-code governance contract without changing temporal slot-write policy |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
@@ -565,7 +565,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `fb4d0ea` - Sprint R8 confirm-time temporal revalidation coverage |
+| **Latest integration commit** | `PENDING_R9_COMMIT` - Sprint R9 status/delete retrospective governance review |
 
 ### Tag map (all tags pushed to remote)
 

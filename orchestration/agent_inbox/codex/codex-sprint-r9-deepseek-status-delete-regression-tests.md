@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r9-status-delete-regression-tests` |
-| Status | queued |
+| Status | superseded |
 | Created | b01ccc0 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r9-deepseek-status-delete-regression-tests --summary "Short plan summary"` |
