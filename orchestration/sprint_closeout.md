@@ -49,11 +49,11 @@ No required manual review for Sprint R4. This is backend guard/test/domain-memor
 
 | Item | Value |
 |---|---|
-| Name | Executable Scenario Promotion or Direct Mutation Date-Policy Hardening |
-| Status | Candidate after R4 push/mirror/audit |
-| Recommended agents | DeepSeek Flash for bounded tests/review, Antigravity/Gemini for domain-policy/test-design, Claude when quota recovers for backend implementation or architecture review |
+| Name | Sprint R5: Executable Scenario Promotion |
+| Status | Dispatched after R4 push/mirror/audit |
+| Recommended agents | Two DeepSeek Flash workers under the Claude-recuperation fallback rule, plus Antigravity/Gemini for domain-priority/test-design |
 
-The next sprint should either turn the best R3/R4 natural-language fixtures into executable replay coverage, or clarify and enforce date policy for direct non-Bernie mutation surfaces if those should reject retrospective writes.
+R5 turns the best R3/R4 natural-language fixtures into executable replay coverage where the current harness can express them cleanly, while leaving session-freshness or direct mutation policy gaps as documented corpus memory.
 
 ## Previous Closeout - Sprint R2
 

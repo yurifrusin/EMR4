@@ -26,6 +26,56 @@ Recommended next slice when Bernie clarification/state work resumes:
 - Sprint R2: Clarification Merge Semantics.
 - Sprint R3: Stale Session / Revision Hardening.
 
+## Sprint R5: Executable Scenario Promotion
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Promote the best R3/R4 receptionist-domain corpus memory into executable Bernie replay coverage where the current harness can express it cleanly |
+| Worker Shape | Two DeepSeek Flash lanes under the Claude-recuperation fallback rule, Antigravity/Gemini domain-priority review, Ariadne orchestration/integration |
+| In Scope | Selected R3/R4 scenario fixtures, minimal scenario loader/replay support if needed, scenario integrity/replay tests, fixture classification notes |
+| Out Of Scope | Diary UI redesign, Word/taskpane changes, GitHub Pages assets, live Gemini/Vertex calls, raw appointment mutation date-policy implementation, broad session-store redesign, GraphRAG/MCP/indexer automation |
+| Verification | py_compile touched harness files; `pytest tests/test_bernie_scenario_integrity.py tests/bernie_scenarios -q`; focused adjacent Bernie tests if R4 executable coverage changes; git diff --check |
+
+### Workstream R5-A - DeepSeek Executable Promotion
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r5-scenario-promotion` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r5-deepseek-executable-scenario-promotion.md` |
+| Goal | Promote at least one high-value R3/R4 corpus scenario into passing executable replay coverage |
+| In Scope | Scenario fixtures, minimal harness support, focused replay/integrity tests |
+| Out of Scope | Production app code, UI, live provider calls, direct raw mutation policy |
+| Verification | py_compile and focused scenario pytest |
+| Status | Queued |
+
+### Workstream R5-B - DeepSeek Adversarial Review
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r5-scenario-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r5-deepseek-scenario-adversarial-review.md` |
+| Goal | Independently classify which R3/R4 fixtures can be executable now and which should remain corpus memory |
+| In Scope | Review artifact or narrow tests around fixture/harness boundaries |
+| Out of Scope | Production app code, broad harness rewrite, UI |
+| Verification | Scenario integrity/replay checks if files change, or explicit review artifact |
+| Status | Queued |
+
+### Workstream R5-C - Gemini Domain Priority Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-r5-scenario-promotion-domain-review.md` |
+| Goal | Rank R3/R4 fixtures by receptionist-domain value and executable-readiness |
+| In Scope | Review packet or `docs/receptionist_review_r5.md`, fixture classification, acceptance notes |
+| Out of Scope | Production code edits, broad harness rewrite, UI, live provider calls |
+| Verification | Tangible review artifact with recommended executable-vs-memory classification |
+| Status | Queued |
+
 ## Sprint R4: Backdated/Past-Date Safety
 
 | Item | Value |
