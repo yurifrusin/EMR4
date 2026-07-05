@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R24: Provider-Readiness Dry-Run Gate |
 | Integrated through | Antigravity/Gemini receptionist/product acceptance review, two DeepSeek Flash adversarial provider-output lanes, Ariadne hardening implementation |
-| Status | Integrated locally; validation passed; push/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-05 |
 
 ## What Changed
