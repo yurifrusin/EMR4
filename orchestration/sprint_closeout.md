@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R22: Fake-Provider Receptionist Scenario Gates |
 | Integrated through | Claude plan, Antigravity/Gemini UX acceptance review, DeepSeek Flash adversarial gap analysis, Ariadne implementation |
-| Status | Integrated locally; focused verification and whitespace checks green; push/workflow/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Python Security and CodeQL workflows green |
 | Last updated | 2026-07-05 |
 
 ## What Changed
