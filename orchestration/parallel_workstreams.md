@@ -25,6 +25,61 @@ Recommended next slice when Bernie clarification/state work resumes:
 - Sprint R1: Reception Scenario Corpus Foundation.
 - Sprint R2: Clarification Merge Semantics.
 
+## Sprint R2: Clarification Merge Semantics
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Product Goal | Make Bernie clarification replies merge only missing or ambiguous fields into the existing request frame, preserving already resolved patient, practitioner, date, time, and intent |
+| Worker Shape | Claude backend/session implementation lane, Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash regression lane, Ariadne orchestration/integration |
+| In Scope | Backend/session clarification merge semantics, focused regression tests, selected R1 clarification xfail promotion, scenario/fixture acceptance notes, bounded Graphify symbol-map use during review |
+| Out Of Scope | Diary visual redesign, broad UI copy rewrites, persisted session tables, GraphRAG, live provider calls, auto-mode, unrelated patient collision hardening, raw appointment mutation grammar changes |
+| Verification | py_compile; focused Bernie interpreter/supervised booking/session replay/slot normalizer pytest; fixture integrity tests if scenario files change; git diff --check |
+
+### Workstream R2-A - Backend Clarification Merge
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-sprint-r2-clarification-merge-semantics.md` |
+| Goal | Implement clarification merge semantics so missing-field replies preserve known request-frame fields |
+| In Scope | `app/routers/appointments.py`, `app/services/bernie*`, appointment schemas if needed, focused tests, selected executable scenario promotion |
+| Out of Scope | Diary UI redesign, live provider calls, persisted session store, GraphRAG, unrelated collision/source hardening |
+| Verification | py_compile and focused pytest for touched Bernie/session/normalizer/replay surfaces |
+| Status | Plan gate pending |
+
+### Workstream R2-B - Gemini Acceptance Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-r2-clarification-acceptance-review.md` |
+| Goal | Provide independent receptionist-domain acceptance criteria, fixture critique, and dissent for clarification merge semantics |
+| In Scope | R1 corpus clarification scenarios, reception workstream notes, scenario/docs/test-design artifacts, acceptance checklist |
+| Out of Scope | Production implementation, broad UI/copy rewrite, live provider prompt work, master/handoff updates |
+| Verification | Plan packet first; after approval, fixture integrity tests if scenario artifacts change plus review checklist |
+| Status | Plan gate pending |
+
+### Workstream R2-C - DeepSeek Regression Lane
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r2-deepseek-clarification-regression` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r2-deepseek-clarification-regression.md` |
+| Goal | Add or review independent regression coverage for clarification merge invariants using the headless `deepseek_bridge` route |
+| In Scope | Focused tests/review around slot normalization, interpreter/session routes, scenario replay fixtures, and fixture integrity |
+| Out of Scope | Primary production implementation ownership, UI edits, live provider calls, GraphRAG, Codex GUI model switching, global config edits |
+| Verification | py_compile, focused pytest for added/changed tests, git diff --check |
+| Status | Plan gate pending |
+
+### R2 Integration Notes
+
+- During R2 closeout, codify the agreed Graphify usage rule into durable protocol: use it autonomously for known-symbol impact/orientation only, refresh before use when code changed, and treat results as a map to source/tests rather than truth.
+- Do not enable Graphify MCP, hooks, or post-commit auto-indexing as part of R2 unless Yuri explicitly expands the sprint.
+
 ## Sprint R1: Reception Scenario Corpus Foundation
 
 | Item | Value |
