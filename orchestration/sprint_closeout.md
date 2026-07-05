@@ -8,55 +8,62 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R25: Default-Disabled Provider Sampling Harness |
-| Integrated through | Antigravity/Gemini product acceptance review, DeepSeek Flash scaffold lane, DeepSeek Flash adversarial review lane, Ariadne integration and gate hardening |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
+| Batch | Sprint H1: Historical Diary Trove Local Inventory and Safety Boundary |
+| Integrated through | Ariadne local-only metadata inventory; no external workers used because raw files are PHI-bearing |
+| Status | Local validation complete; push, mirror realign, audit, and workflows pending |
 | Last updated | 2026-07-06 |
 
 ## What Changed
 
-- Added `app/services/ai/evals/provider_sampling_harness.py`, a static, default-disabled harness for feeding Gemini-style, Vertex-style, and adversarial sample frames through `evaluate_manifest_response()`.
-- Exported the harness from `app/services/ai/evals/__init__.py` without importing provider SDKs, routes, DB models, or diary mutation services.
-- Hardened `app/services/ai/evals/manifest_eval.py` so provider-style `allow_write=True` is treated as a write-authority claim while `allow_write=False` remains safe metadata.
-- Added `tests/test_provider_sampling_harness.py` and `tests/test_sampling_harness_adversarial_review.py` covering disabled no-op behaviour, enabled static evaluation, no-write import boundaries, PHI/write-authority/metadata spoofing probes, malformed-frame boundaries, and fake-provider state.
-- Preserved Antigravity/Gemini's product/receptionist acceptance criteria in `docs/receptionist_review_r25.md`, adjusted by Ariadne to match the actual static scaffold and future live-pilot boundary.
-- Preserved DeepSeek Flash's adversarial review in `docs/adversarial/sampling_harness_adversarial_review_r25.md`.
-- Documented the historical diary trove plan separately in `docs/historical-diary-trove-plan.md` and ignored local raw-data paths via `.gitignore`.
-- No live Gemini/Vertex calls, runtime prompt wiring, database writes, routes, frontend, migrations, telemetry tables, background jobs, or GitHub Pages assets were added.
+- Added `scripts/historical_diary_inventory.py`, a local-first inventory tool that emits aggregate metadata only and intentionally omits filenames, raw paths, document text, document metadata strings, and PHI-bearing values.
+- Ran the inventory against the ignored pilot folder `local_data/historical-diary-trove/raw/pilot/`; detailed JSON output remains ignored under `local_data/historical-diary-trove/inventory/pilot_inventory.json`.
+- Added `docs/historical-diary-trove-pilot-inventory.md` with safe H1 findings: 411 `.doc` files, 60,631,014 bytes, no duplicate hash prefixes, 408 classic Word/OLE signatures, and 3 tiny non-OLE `.doc` signatures.
+- Recorded the discrepancy between the expected 414 files and observed 411 files; no filenames were printed or committed.
+- Updated `AGENTS.md` so future agents know the pilot exists, raw files remain local/ignored, and H2 parser feasibility is next.
+- No raw diary files, filenames, patient content, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
 
 ## Verification
 
-- Focused R25 compile and pytest passed: `.venv\Scripts\python.exe -m py_compile app\services\ai\evals\manifest_eval.py app\services\ai\evals\provider_sampling_harness.py app\services\ai\evals\__init__.py tests\test_provider_sampling_harness.py tests\test_provider_readiness_dry_run_gate.py tests\test_sampling_harness_adversarial_review.py` and `.venv\Scripts\pytest.exe tests\test_provider_sampling_harness.py tests\test_provider_readiness_dry_run_gate.py tests\test_sampling_harness_adversarial_review.py -q` (73 passed; existing Starlette/Google GenAI warnings only).
-- Broader manifest regression passed: `.venv\Scripts\pytest.exe tests\test_provider_sampling_harness.py tests\test_provider_readiness_dry_run_gate.py tests\test_sampling_harness_adversarial_review.py tests\test_bernie_manifest_receptionist_scenarios.py -q` (109 passed; existing warnings only).
-- Whitespace check passed: `git diff --check`.
+- Inventory script compile passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_inventory.py`.
+- Pilot inventory command passed: `.venv\Scripts\python.exe scripts\historical_diary_inventory.py --root local_data\historical-diary-trove\raw\pilot --output local_data\historical-diary-trove\inventory\pilot_inventory.json --print-summary`.
+- Whitespace check pending final run before commit.
 
 ## Recommended User Review
 
-No required manual review before continuing if push, audit, and post-push workflows pass. R25 is backend/test/docs-only and does not change visible Diary UI, Office assets, GitHub Pages content, database schema, or live provider behaviour.
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H1 is metadata/tooling/docs-only and does not commit raw files or expose PHI. Yuri may optionally confirm whether 411 vs expected 414 is acceptable or whether three files were missed during copy.
 
 ## Not Required Before Moving On
 
 - No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
-- No live Gemini/Vertex call is required because R25 deliberately uses static provider-style samples only.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
 - No database migration or test DB reset is required.
 - No user manual diary review is required because no visible diary behaviour changed.
 
 ## Known Follow-Up
 
-- Decide whether to make frameless safe-looking dicts malformed in a future hardening sprint.
-- A live shadow-sampling pilot remains blocked until privacy, opt-in, telemetry provenance, cost/latency, kill-switch, and no-write boundaries are explicit.
-- Feed observed provider outputs into the static harness only after redaction and provenance review.
-- Keep `evaluate_manifest_response()` as a safety gate for provider-output samples, not a runtime write-authority mechanism or evidence of write readiness.
+- H2 should test parser feasibility on 5-10 local pilot `.doc` snapshots without committing filenames, text, metadata strings, or patient/staff labels.
+- Determine whether chronology is recoverable from filenames, OLE metadata, embedded visible diary dates, or adjacent binary/structural similarity.
+- Treat the three tiny non-OLE `.doc` files as possible ancillary/non-snapshot files until H2 proves their role.
+- Do not process the full 58k-file trove until parser and de-identification boundaries are proven on the pilot.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint H1: Historical Diary Trove Local Inventory and Safety Boundary |
+| Name | Sprint H2: Historical Diary Trove Parser Feasibility |
 | Status | Proposed |
-| Recommended agents | Yuri provides a small ignored pilot subset when back; Ariadne can then use DeepSeek/Antigravity for parser-risk and de-identification review |
+| Recommended agents | Ariadne local-first for raw PHI inspection; external workers only on non-PHI parser code, synthetic fixtures, or safe summaries |
 
-Recommended scope after Yuri returns: inventory a small local ignored pilot slice of the continuous historical diary trove, emit only non-PHI metadata, and prove chronological ordering before parsing content.
+Recommended scope: parse or structurally inspect 5-10 consecutive local pilot snapshots, recover neutral diary-grid facts if possible, and commit only non-PHI feasibility findings.
+
+## Previous Closeout - Sprint R25
+
+Sprint R25 added `app/services/ai/evals/provider_sampling_harness.py`, static
+Gemini/Vertex/adversarial provider-style sample sets, and tests proving
+default-disabled/no-write/no-live-call behaviour through the R24 manifest gate.
+Ariadne also hardened `manifest_eval.py` so `allow_write=True` is a
+write-authority claim. Validation passed with 109 manifest/provider tests plus
+`git diff --check`; Pages, Python Security, and CodeQL workflows were green.
 
 ## Previous Closeout - Sprint R24
 

@@ -28,17 +28,20 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R25 no-write live-provider sampling harness scaffold dispatched; Claude capped until 2:30am so DeepSeek replaces Claude |
-| **Next recommended work** | Run R25 plan-gated Antigravity/Gemini and DeepSeek lanes; keep tests default-disabled with no live provider calls |
+| **Current active track** | Historical diary trove H1 pilot inventory completed locally; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H2: parser feasibility on 5-10 local pilot `.doc` snapshots, with no committed PHI and no external-provider raw-data exposure |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
 must stay local and ignored, preferably under
 `local_data/historical-diary-trove/raw/`; do not commit or send raw PHI-bearing
 content to LLM/external providers. The utilisation plan is
-`docs/historical-diary-trove-plan.md`. First recommended sprint after Yuri
-returns is H1: local inventory and safety boundary, starting with a small pilot
-subset before touching the full trove.
+`docs/historical-diary-trove-plan.md`. H1 pilot inventory found 411 `.doc` files
+in `local_data/historical-diary-trove/raw/pilot/`: 408 classic Word/OLE files
+and 3 tiny non-OLE `.doc` signatures. The safe committed summary is
+`docs/historical-diary-trove-pilot-inventory.md`; the detailed inventory JSON is
+ignored under `local_data/historical-diary-trove/inventory/`. H2 should test
+parser feasibility on a tiny local sample before touching the full trove.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
