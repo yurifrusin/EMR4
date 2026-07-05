@@ -538,7 +538,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Graphify code graph tooling spike |
+| **Latest integration commit** | Graphify efficacy benchmark tooling |
 
 ### Tag map (all tags pushed to remote)
 

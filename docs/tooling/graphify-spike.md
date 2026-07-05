@@ -66,3 +66,7 @@ sprint to evaluate:
 - a safe post-commit graph refresh hook,
 - MCP stdio registration in `C:\Users\sarashera\.codex\config.toml`,
 - whether Claude and Antigravity benefit from the same graph artifacts.
+
+Use `docs/tooling/graphify-efficacy-benchmark.md` and
+`scripts/run_graphify_efficacy_benchmark.ps1` to score whether the tool is
+actually improving code navigation before any stronger integration.
