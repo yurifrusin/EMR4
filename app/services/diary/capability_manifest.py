@@ -9,6 +9,7 @@ routes, RBAC, and audit logging.
 
 from __future__ import annotations
 
+import json
 from typing import Any, Literal
 
 from app.models.appointments import AppointmentStatus, BookingChannel
@@ -269,7 +270,201 @@ def build_bernie_diary_capability_manifest() -> dict[str, Any]:
     }
 
 
+MANIFEST_PROMPT_CONTEXT_MAX_CHARS = 10_000
+"""Generous char-budget for the compact manifest prompt context (serialised JSON).
+
+Chosen to be comfortably larger than the current compact payload while still
+materially smaller than the full manifest (which includes verbose summaries,
+transition maps, alias tables, and per-action evidence descriptors).
+"""
+
+_FORBIDDEN_KEY_PATTERNS: frozenset[str] = frozenset({
+    # credential / auth markers
+    "credential", "token", "secret", "password", "api_key", "apikey",
+    "private_key", "signing_key",
+    # patient-identifier markers
+    "medicare", "dob", "date_of_birth", "phone", "first_name", "last_name",
+    "given_name", "family_name", "address", "patient_id",
+})
+
+
+def _collect_string_keys(obj: Any, keys: set[str]) -> None:
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if isinstance(k, str):
+                keys.add(k.lower())
+            _collect_string_keys(v, keys)
+    elif isinstance(obj, list):
+        for item in obj:
+            _collect_string_keys(item, keys)
+
+
+def _find_write_authority_violations(obj: Any) -> list[str]:
+    violations: list[str] = []
+    if isinstance(obj, dict):
+        if obj.get("writes_authorized") is True:
+            if not (
+                obj.get("type") == "confirmation"
+                and obj.get("requires_staff_confirmation") is True
+            ):
+                violations.append(
+                    "writes_authorized=True outside a labelled staff-confirmed confirmation boundary "
+                    f"(keys present: {sorted(str(k) for k in obj.keys())})"
+                )
+        for v in obj.values():
+            violations.extend(_find_write_authority_violations(v))
+    elif isinstance(obj, list):
+        for item in obj:
+            violations.extend(_find_write_authority_violations(item))
+    return violations
+
+
+def assert_manifest_prompt_safe(payload: Any) -> None:
+    """Raise ValueError if payload contains forbidden credential/PHI keys or unexpected write grants.
+
+    This is a defence-in-depth heuristic. The primary safety guarantee is that
+    the manifest is source-derived from enums/registries only (no DB rows, no PHI).
+    This guard is an additional net that catches accidental additions.
+    """
+    all_keys: set[str] = set()
+    _collect_string_keys(payload, all_keys)
+
+    forbidden = _FORBIDDEN_KEY_PATTERNS & all_keys
+    if forbidden:
+        raise ValueError(
+            f"Manifest prompt payload contains forbidden key(s): {sorted(forbidden)}. "
+            "Remove PHI or credential markers before using in a prompt."
+        )
+
+    violations = _find_write_authority_violations(payload)
+    if violations:
+        raise ValueError(
+            f"Manifest prompt payload has unexpected write authority: {violations}"
+        )
+
+
+def build_manifest_prompt_context() -> dict[str, Any]:
+    """Return a compact, PHI-free, write-authority-safe subset of the diary capability manifest.
+
+    Drops verbose per-capability summaries, session-state transition maps, server-advance
+    maps, schedule-reason aliases, per-action evidence descriptors, and drift-watch prose.
+    The result is JSON-serializable, deterministic, and within MANIFEST_PROMPT_CONTEXT_MAX_CHARS.
+
+    This function is a non-runtime scaffold. It does not call any model or provider and
+    is not wired into live Bernie prompt assembly — that wiring is future work.
+    """
+    full = build_bernie_diary_capability_manifest()
+
+    context: dict[str, Any] = {
+        "schema_version": full["schema_version"],
+        "authority_statement": full["authority_statement"],
+        "principles": full["principles"],
+        "entities": {
+            "appointment_statuses": full["entities"]["appointment_statuses"]["values"],
+            "booking_channels": full["entities"]["booking_channels"]["values"],
+        },
+        "reason_codes": {
+            "appointment_status_reason_codes": full["reason_codes"]["appointment_status_reason_codes"],
+            "status_specific_reason_code_policy": full["reason_codes"]["status_specific_reason_code_policy"],
+            "schedule_reason_codes": full["reason_codes"]["schedule_reason_codes"],
+        },
+        "session_states": full["session_state"]["states"],
+        "capabilities": {
+            "tiers": full["capabilities"]["tiers"],
+            "authors": full["capabilities"]["authors"],
+            "items": [
+                {
+                    "name": item["name"],
+                    "tier": item["tier"],
+                    "requires_staff_confirmation": item["requires_staff_confirmation"],
+                }
+                for item in full["capabilities"]["items"]
+            ],
+        },
+        "confirmation_envelope_sequence": [
+            {
+                "type": entry["type"],
+                "writes_authorized": entry["writes_authorized"],
+                "requires_staff_confirmation": entry.get("requires_staff_confirmation", False),
+            }
+            for entry in full["confirmation_boundaries"]["envelope_sequence"]
+        ],
+        "non_authority_boundaries": full["non_authority_boundaries"],
+    }
+
+    assert_manifest_prompt_safe(context)
+
+    serialized_size = len(json.dumps(context))
+    if serialized_size > MANIFEST_PROMPT_CONTEXT_MAX_CHARS:
+        raise ValueError(
+            f"Manifest prompt context exceeds char budget: {serialized_size} > {MANIFEST_PROMPT_CONTEXT_MAX_CHARS}. "
+            "Trim the compact context before adding new entries."
+        )
+
+    return context
+
+
+def render_manifest_prompt_block(context: dict[str, Any] | None = None) -> str:
+    """Return a deterministic, human/model-readable text rendering of the manifest prompt context.
+
+    Suitable for inclusion in a future Bernie prompt assembly step. Does not call any
+    model or provider. Carries the read-only authority statement throughout.
+    """
+    if context is None:
+        context = build_manifest_prompt_context()
+
+    lines: list[str] = [
+        "=== Bernie Diary Capability Manifest (read-only context) ===",
+        "",
+        context["authority_statement"],
+        "",
+        "Principles:",
+    ]
+    for principle in context["principles"]:
+        lines.append(f"  - {principle}")
+
+    lines += [
+        "",
+        "Appointment statuses: " + ", ".join(context["entities"]["appointment_statuses"]),
+        "Booking channels: " + ", ".join(context["entities"]["booking_channels"]),
+        "",
+        "Reason codes (appointment status): " + ", ".join(context["reason_codes"]["appointment_status_reason_codes"]),
+        "Reason codes (schedule): " + ", ".join(context["reason_codes"]["schedule_reason_codes"]),
+        "",
+        "Session states: " + ", ".join(context["session_states"]),
+        "",
+        f"Capability tiers: {', '.join(context['capabilities']['tiers'])}",
+        f"Capability authors: {', '.join(context['capabilities']['authors'])}",
+        "Capabilities:",
+    ]
+    for item in context["capabilities"]["items"]:
+        staff_note = " (staff confirmation required)" if item["requires_staff_confirmation"] else ""
+        lines.append(f"  - {item['name']} [{item['tier']}]{staff_note}")
+
+    lines += [
+        "",
+        "Confirmation envelope sequence (only 'confirmation' type authorizes writes):",
+    ]
+    for entry in context["confirmation_envelope_sequence"]:
+        write_note = " WRITE_AUTHORIZED" if entry["writes_authorized"] else ""
+        staff_note = " [requires staff confirmation]" if entry.get("requires_staff_confirmation") else ""
+        lines.append(f"  - {entry['type']}{write_note}{staff_note}")
+
+    lines += [
+        "",
+        "Non-authority boundaries (this manifest cannot be used for):",
+    ]
+    for boundary in context["non_authority_boundaries"]:
+        lines.append(f"  - {boundary}")
+
+    return "\n".join(lines)
+
+
 __all__ = [
+    "MANIFEST_PROMPT_CONTEXT_MAX_CHARS",
     "MANIFEST_SCHEMA_VERSION",
+    "assert_manifest_prompt_safe",
     "build_bernie_diary_capability_manifest",
+    "build_manifest_prompt_context",
+    "render_manifest_prompt_block",
 ]
