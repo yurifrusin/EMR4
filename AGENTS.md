@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R5 executable Bernie scenario promotion integrated locally with two DeepSeek Flash lanes and Antigravity/Gemini review; final push/audit pending |
+| **Current active track** | Sprint R5 executable Bernie scenario promotion pushed with mirrors realigned and audit clean |
 | **Next recommended work** | Sprint R6: temporal boundary harness follow-up or direct raw appointment mutation/date-policy hardening if product policy requires it |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
