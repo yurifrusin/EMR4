@@ -118,6 +118,40 @@ def test_blocked_normalization_does_not_execute_slot_search(client, gp_user, mon
     )
 
 
+def test_past_absolute_date_blocks_before_slot_search(client, gp_user, practitioner, monkeypatch):
+    token = make_token(gp_user)
+
+    def forbidden_search(*args, **kwargs):
+        raise AssertionError("past-date guard must not execute slot search")
+
+    monkeypatch.setattr(appointments_router, "_build_slot_search_proposal", forbidden_search)
+    resp = _post_wrapper(client, token, _base_body(
+        practitioner,
+        command={
+            "practitioner_id": str(practitioner.id),
+            "date_from": "2026-06-21",
+            "duration_minutes": "15",
+        },
+    ))
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    block_codes = {block["code"] for block in data.get("blocks", [])}
+    assert data["result"] == "blocked"
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    assert data["normalization"]["safe"] is False
+    assert data["search_proposal"] is None
+    assert "requested_date_in_past" in block_codes
+    assert data["reception_policy"]["availability"] == "blocked"
+    assert any(
+        frame["frame_type"] == "guardrail_outcome"
+        and frame["status"] == "blocked"
+        and frame["reason_code"] == "requested_date_in_past"
+        for frame in data["reception_context"]["frames"]
+    )
+
+
 def test_safe_command_returns_candidate_selection_response_without_mutating(
     client,
     db,

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r4-past-date-review` |
-| Status | queued |
+| Status | superseded |
 | Created | 20a420f |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r4-deepseek-adversarial-past-date-review --summary "Short plan summary"` |
@@ -80,6 +80,12 @@ py_compile any new tests; run focused pytest for new adversarial tests and adjac
 ## Merge Criteria
 
 Provides independent evidence that past-date requests cannot reach executable slot search/proposal states, or documents concrete remaining risks for Ariadne integration.
+
+## Completion Notes
+
+- Superseded by Ariadne integration: the branch's pre-fix adversarial probes expected the old fail-open behavior and were not merged as tests.
+- Useful findings were folded into R4's route-level regressions and closeout notes.
+- Follow-up retained: direct raw appointment mutation and create-proposal temporal policy are outside Bernie's new-booking slot-search guard and should be addressed only after product-policy confirmation.
 
 ## Dissent / Risks
 

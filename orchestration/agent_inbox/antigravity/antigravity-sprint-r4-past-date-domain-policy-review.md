@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 20a420f |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r4-past-date-domain-policy-review --summary "Short plan summary"` |
@@ -80,6 +80,12 @@ Submit a review packet with acceptance criteria and risk notes; no runtime tests
 ## Merge Criteria
 
 Codex receives a concrete policy recommendation distinguishing absolute past dates, same-day fully-past windows, and stale reference-date cases, with actionable acceptance tests.
+
+## Completion Notes
+
+- Integrated by Ariadne after normalising outcome names to the scenario-corpus validator.
+- Files integrated: `docs/receptionist_review_r4.md` and three natural-language scenario fixtures under `tests/fixtures/bernie_scenarios/`.
+- `stale_reference_date_confirmation_blocked.yaml` remains corpus memory/xfail until a future executable replay can set up session freshness and confirmation evidence.
 
 ## Dissent / Risks
 

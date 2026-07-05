@@ -1,0 +1,15 @@
+id: stale_reference_date_confirmation_blocked
+category: stale_session
+description: "A stale overnight booking session must not confirm mutation evidence without passing the session freshness guards."
+reference_date: "2026-07-04"
+initial_state:
+  diary_date: "2026-07-04"
+  practice: emr4_dev_main
+  stale: true
+xfail:
+  reason: "Natural-language corpus memory only; future executable replay needs session freshness setup and confirm evidence threading."
+turns:
+  - user: "Confirm booking"
+    expect:
+      outcome: blocked
+      reason_codes: ["session_reference_date_stale"]

@@ -171,6 +171,27 @@ def test_temporal_axis_assume_with_explicit_date(
     assert axes["temporal"]["band"] == "assume"
 
 
+def test_past_absolute_date_blocks_before_slot_search(
+    client, db, gp_user, practitioner, patient, monkeypatch
+):
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    token = make_token(gp_user)
+    data = _post(
+        client, token,
+        f"practitioner_id:{practitioner.id} patient_id:{patient.id} "
+        "date_from:2026-07-14 duration:15",
+    )
+    axes = _axes_by_name(data)
+    block_codes = {block["code"] for block in data.get("blocks", [])}
+
+    assert data["result"] == "blocked"
+    assert data["safe"] is False
+    assert data["normalization"]["safe"] is False
+    assert "requested_date_in_past" in block_codes
+    assert axes["temporal"]["band"] == "block"
+    assert axes["slot_validity"]["band"] == "block"
+
+
 def test_omitted_date_with_time_constraint_without_diary_context_asks(
     client, db, gp_user, practitioner, patient, monkeypatch
 ):

@@ -157,6 +157,13 @@ def normalize_slot_search_command(
     if date_to is None and payload.date_to is None and date_from is not None:
         date_to = date_from
 
+    if date_from is not None and reference_date is not None and date_from < reference_date:
+        blocks.append(_issue(
+            "requested_date_in_past", "blocked",
+            f"date_from {date_from} is before the reference date {reference_date}. "
+            "Cannot search for slots in the past.",
+        ))
+
     # ── Time fields ───────────────────────────────────────────────────────────
     earliest_time = _parse_time(payload.earliest_time, "earliest_time", blocks)
     latest_time = _parse_time(payload.latest_time, "latest_time", blocks)

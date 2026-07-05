@@ -3666,6 +3666,10 @@ def _resolve_bernie_interpretation_context(
         b.code == "invalid_date_from"
         for b in normalization.blocks
     )
+    has_past_date_block = any(
+        b.code == "requested_date_in_past"
+        for b in normalization.blocks
+    )
 
     temporal_band: BernieConfidenceBand
     temporal_basis: str
@@ -3674,6 +3678,9 @@ def _resolve_bernie_interpretation_context(
     if has_invalid_date_block:
         temporal_band = "block"
         temporal_basis = "Date provided is invalid or contradictory."
+    elif has_past_date_block:
+        temporal_band = "block"
+        temporal_basis = "Requested appointment date is before the session reference date."
     elif has_explicit_date:
         temporal_band = "assume"
         temporal_basis = (

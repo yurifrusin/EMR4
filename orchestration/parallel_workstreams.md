@@ -30,7 +30,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
+| Status | Integrated, verification passed, closeout in progress |
 | Product Goal | Prevent Bernie backdated or past absolute appointment dates from reaching safe executable slot-search/proposal states while preserving same-day past-window handling |
 | Worker Shape | Two DeepSeek Flash lanes replacing Claude while Claude quota recuperates, Antigravity/Gemini domain-policy review, Ariadne orchestration/integration |
 | In Scope | Bernie slot normalizer past-date semantics, interpret/supervised booking route behavior, focused tests, domain-policy review artifact |
@@ -48,7 +48,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | `app/services/bernie_slot_normalizer.py`, narrowly related `app/routers/appointments.py`, focused route/normalizer tests |
 | Out of Scope | Diary UI, taskpane/Word, live provider calls, broad collision work |
 | Verification | py_compile and focused pytest for touched Bernie normalizer/route tests |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream R4-B - DeepSeek Adversarial Review Lane
 
@@ -61,7 +61,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Bernie normalizer/supervised/interpret tests and review notes |
 | Out of Scope | Broad production refactors, diary UI, duplicated implementation-lane edits unless critical |
 | Verification | py_compile, focused pytest, git diff --check, or explicit review artifact |
-| Status | Queued |
+| Status | Superseded by integrated R4 route-level regressions; branch retained as pre-fix adversarial evidence |
 
 ### Workstream R4-C - Gemini Domain Policy Review
 
@@ -74,7 +74,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Review packet, optional `docs/receptionist_review_r4.md`, acceptance criteria/test-design notes |
 | Out of Scope | Production code edits, diary UI, live provider calls |
 | Verification | Review packet with actionable acceptance criteria and risks |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint R3: Stale Session / Revision Hardening
 

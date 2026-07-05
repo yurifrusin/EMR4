@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r4-past-date-hardening` |
-| Status | queued |
+| Status | integrated |
 | Created | 20a420f |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r4-deepseek-past-date-hardening --summary "Short plan summary"` |
@@ -80,6 +80,12 @@ py_compile touched Python files; pytest focused normalizer/interpret/supervised 
 ## Merge Criteria
 
 Past absolute dates before the request/reference date block deterministically with typed issue code and no executable proposal; today same-day clamp behavior remains unchanged; D8 collision tests remain green.
+
+## Completion Notes
+
+- Integrated by Ariadne into `master` with additional route-level coverage.
+- Files integrated: `app/services/bernie_slot_normalizer.py`, `app/routers/appointments.py`, `tests/test_bernie_slot_normalizer.py`, `tests/test_bernie_confidence_policy.py`, `tests/test_bernie_supervised_booking_wrapper.py`.
+- Verification passed in the integration worktree: py_compile plus focused normalizer/confidence/supervised/D8/scenario pytest.
 
 ## Dissent / Risks
 

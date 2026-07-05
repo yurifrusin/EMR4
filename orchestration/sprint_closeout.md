@@ -8,54 +8,52 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R3: Stale Session / Revision Hardening |
-| Integrated through | Antigravity/Gemini receptionist-domain acceptance artifacts, DeepSeek Flash stale-session regression tests, Shen-2 DeepSeek backend no-code-needed review, and Ariadne verification/polish |
-| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean; stale DeepSeek worktrees ready to retire |
+| Batch | Sprint R4: Backdated/Past-Date Safety |
+| Integrated through | DeepSeek Flash implementation lane, DeepSeek Flash adversarial review lane (superseded into Ariadne route tests), Antigravity/Gemini domain-policy artifacts, and Ariadne verification/polish |
+| Status | Integration worktree verified; pending commit/push/mirror/audit |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added Sprint R3 receptionist-domain review in `docs/receptionist_review_r3.md`, covering stale browser tabs, two-receptionist revision conflicts, correction-vs-clarification overrides, intent switches, and safe failure copy.
-- Added three natural-language scenario fixtures for stale-session concurrency, stale reload blocking, and correction/pivot semantics under `tests/fixtures/bernie_scenarios/`.
-- Added focused session-store regressions in `tests/test_bernie_session_store.py` proving refresh staleness clears coordinates, new-session reset semantics, repeated stale attempts fail closed, and stale confirm submissions do not mutate session state.
-- Verified Shen/subagent identity: the configured `deepseek-worker` nickname `Shen` runs with `model_provider=deepseek_bridge` and turn-context `model=deepseek-flash`; self-reporting as OpenAI is generic Codex base-prompt leakage, not provider evidence.
-- Dispatched a second DeepSeek Flash backend backup lane while Claude quota was unavailable. Shen-2 reviewed the backend/session/confirm seams and found no production code change needed because existing stale revision, route, and freshness guards already fail closed.
-- Superseded the Claude R3 backend lane because Claude hit the session limit before plan submission; no Claude branch changes were integrated.
-- No Diary UI, taskpane, Word assets, GitHub Pages assets, database migrations, live provider calls, GraphRAG/MCP/indexer automation, or production backend code changed.
+- Added `requested_date_in_past` to the shared Bernie slot-search normalizer when `date_from < reference_date`.
+- Aligned the interpret route's temporal confidence axis so past requested dates are reported as `block`, not merely generic slot-validity failure.
+- Added route regressions proving the interpret and supervised-booking paths block before executable slot search for absolute past dates.
+- Added unit coverage for past, same-day, future, relative today/tomorrow, and no-reference normalizer boundaries.
+- Integrated Gemini's R4 receptionist policy note in `docs/receptionist_review_r4.md`.
+- Added three natural-language scenario fixtures for absolute past dates, same-day past windows, and stale reference-date confirmation memory under `tests/fixtures/bernie_scenarios/`.
+- Superseded the second DeepSeek adversarial test branch because it intentionally captured pre-fix fail-open behavior; useful findings were folded into Ariadne's route tests and closeout follow-ups.
+- No Diary UI, taskpane, Word assets, GitHub Pages assets, database migrations, live provider calls, GraphRAG/MCP/indexer automation, or raw appointment mutation endpoints changed.
 
 ## Verification
 
-- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\test_bernie_session_store.py tests\test_bernie_scenario_integrity.py tests\bernie_scenarios\loader.py tests\bernie_scenarios\replay.py`.
-- R3 focused suite passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_session_store.py tests\test_bernie_session_routes.py tests\test_bernie_clarification_merge.py tests\test_bernie_context_frames.py tests\test_bernie_scenario_integrity.py tests\bernie_scenarios -q` (53 passed, 1 skipped, 1 xfailed; existing Starlette/Google GenAI warnings only).
-- Confirm/interpret adjacent suite passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_confirm_create_proposal.py tests\test_bernie_interpret_booking_instruction.py -q` (30 passed; existing warnings only).
-- `git diff --check` passed.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\services\bernie_slot_normalizer.py app\routers\appointments.py tests\test_bernie_slot_normalizer.py tests\test_bernie_confidence_policy.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_scenario_integrity.py`.
+- Focused R4/D8/scenario suite passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_slot_normalizer.py tests\test_bernie_confidence_policy.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_d8_patient_collision_source_hardening.py tests\test_bernie_d8_collision_source_hardening.py tests\test_bernie_scenario_integrity.py -q` (106 passed, 1 skipped; existing Starlette/Google GenAI warnings only).
 
 ## Recommended User Review
 
-No required manual review for Sprint R3. This is backend test/domain-memory work and does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, or confirmed appointment mutation code.
+No required manual review for Sprint R4. This is backend guard/test/domain-memory work and does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, or live provider behavior.
 
 ## Not Required Before Moving On
 
 - No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
 - No live Gemini/Vertex call is required; this sprint used deterministic tests and domain fixtures only.
-- No database migration or test database reset is required; the R3 verification did not run DB-backed mutation suites in parallel.
+- No database migration or test database reset is required; the R4 verification used existing pytest fixtures only.
 
 ## Known Follow-Up
 
-- The new stale-session fixtures are accepted as natural-language project memory; promote selected cases into executable replay only where the current harness can express revision conflicts cleanly.
-- Future frontend/session UX work should preserve typed receptionist input on `stale_session_revision` where clinically safe while still blocking stale mutation.
-- If WebSocket/live diary update paths are introduced later, they must share the same revision/freshness contract as REST mutation paths.
-- Patient collision source hardening remains a near-term backend follow-up after this session-safety slice.
+- Promote selected R3/R4 natural-language scenario fixtures into executable replay coverage where the harness can express revision conflicts, past-date guardrails, and session freshness cleanly.
+- Decide product policy for direct raw appointment mutation/create-proposal endpoints: R4 intentionally guards Bernie's new-booking slot-search path, not every administrative or retrospective appointment write surface.
+- Future frontend/session UX work should preserve typed receptionist input on stale-session errors where clinically safe while still blocking stale mutation.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R4: Backdated/Past-Date Safety |
-| Status | Dispatched after R3 push/mirror/audit |
-| Recommended agents | Two DeepSeek Flash workers for implementation and adversarial review while Claude recuperates; Antigravity/Gemini for domain-policy/test-design |
+| Name | Executable Scenario Promotion or Direct Mutation Date-Policy Hardening |
+| Status | Candidate after R4 push/mirror/audit |
+| Recommended agents | DeepSeek Flash for bounded tests/review, Antigravity/Gemini for domain-policy/test-design, Claude when quota recovers for backend implementation or architecture review |
 
-R4 targets the remaining backdated-date risk surfaced by the D8 domain-policy review: absolute requested dates before the request/reference date should fail closed before executable slot-search/proposal states, while same-day fully-past windows keep their existing clarifying behavior.
+The next sprint should either turn the best R3/R4 natural-language fixtures into executable replay coverage, or clarify and enforce date policy for direct non-Bernie mutation surfaces if those should reject retrospective writes.
 
 ## Previous Closeout - Sprint R2
 
