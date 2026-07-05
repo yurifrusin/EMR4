@@ -8,29 +8,29 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R13: Diary Smoke Harness Recovery |
-| Integrated through | Ariadne harness fix, DeepSeek Flash diagnosis/focused-fix plan, Antigravity/Gemini receptionist-domain review |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned, audit clean, disposable DeepSeek branch retired |
+| Batch | Sprint R14: Auth Bootstrap Harness Guard |
+| Integrated through | Ariadne harness guard implementation, DeepSeek Flash implementation plan, Antigravity/Gemini receptionist-domain review |
+| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Restored the full deterministic Diary smoke harness by replacing invalid fake auth tokens with a central valid dummy JWT in `review/test_diary_smoke.py`.
-- Preserved the production Diary code: no `docs/diary/diary.js`, backend, schema, migration, or UI asset changes were required.
-- Integrated DeepSeek's diagnosis in `orchestration/sprint-r13-diary-smoke-diagnosis.md`: all 12 failures were stale harness auth-token drift, not real receptionist workflow regressions.
-- Integrated Gemini's domain review in `docs/receptionist_review_r13.md`, which confirms no receptionist workflow regression and records future auth/harness acceptance checks.
-- Left R12 reason-code coverage intact.
+- Added reusable auth bootstrap helpers to `review/harness.py`: `assert_valid_review_token`, `bootstrap_auth`, and `clear_auth`.
+- Updated `review/test_diary_smoke.py` to validate `REVIEW_AUTH_TOKEN` at import and use harness helpers instead of direct `localStorage` auth snippets.
+- Preserved production behaviour: no `docs/diary`, backend, schema, migration, or deployed static asset changes were required.
+- Integrated Gemini's R14 domain review in `docs/receptionist_review_r14.md`, confirming the guard improves developer/CI diagnostics without changing receptionist workflow.
+- Left R12 reason-code coverage and the restored full Diary smoke signal intact.
 
 ## Verification
 
-- Focused R13 failure cluster passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "bernie_session_endpoint_active_load_and_phi_minimized_append or bernie_session_stale_conflict_disables_confirm_until_refresh or bernie_route_calls_carry_server_session_coordinates_and_binding or bernie_pilot_ordinary_mode_requires_real_context or bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated or bernie_pilot_imported_context_stales_when_selection_changes or bernie_pilot_selected_appointment_instruction_affordances or bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised_call or bernie_pilot_instruction_first_without_selected_appointment or bernie_candidate_click_stages_provisional_diary_preview or bernie_route_intercepted_selected_slot_can_return_to_candidates or bernie_pilot_selected_appointment_instruction_readiness_and_resets" --junitxml=review\r13-focused-review.xml` (12 passed).
+- Focused auth-sensitive cluster passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "bernie_session_endpoint_active_load_and_phi_minimized_append or bernie_session_stale_conflict_disables_confirm_until_refresh or bernie_route_calls_carry_server_session_coordinates_and_binding or bernie_pilot_ordinary_mode_requires_real_context or bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated or bernie_pilot_imported_context_stales_when_selection_changes or bernie_pilot_selected_appointment_instruction_affordances or bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised_call or bernie_pilot_instruction_first_without_selected_appointment or bernie_candidate_click_stages_provisional_diary_preview or bernie_route_intercepted_selected_slot_can_return_to_candidates or bernie_pilot_selected_appointment_instruction_readiness_and_resets" --junitxml=review\r14-focused-review.xml` (12 passed).
 - Full Diary smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (all checks passed).
 - R12 reason-code guard passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code or cancel_flow_uses_signed_delete_confirm_without_raw_delete or cancel_flow_failed_signed_confirm_does_not_raw_delete" --junitxml=review\reason-code-review.xml` (7 passed).
 - Whitespace check passed: `git diff --check`.
 
 ## Recommended User Review
 
-No required manual review for Sprint R13. This was a deterministic harness repair only; it confirms the R12 Diary UI work is covered by a clean full smoke signal again.
+No required manual review for Sprint R14. This was a deterministic harness-only guard; it makes future invalid auth-token drift fail fast and clearly without changing receptionist-facing behaviour.
 
 ## Not Required Before Moving On
 
@@ -40,7 +40,6 @@ No required manual review for Sprint R13. This was a deterministic harness repai
 
 ## Known Follow-Up
 
-- Add an explicit auth-bootstrap assertion or helper in the smoke harness so future invalid-token drift fails with a clear auth error instead of selector timeouts.
 - Consider a staff-facing expired-session banner if production auth expiry currently leaves the Diary blank or ambiguous.
 - Keep using full `review/test_diary_smoke.py` after visible Diary changes now that the harness is green again.
 
@@ -48,11 +47,11 @@ No required manual review for Sprint R13. This was a deterministic harness repai
 
 | Item | Value |
 |---|---|
-| Name | Sprint R14: Auth Bootstrap Harness Guard or Reason-Code UX Polish |
+| Name | Sprint R15: Reason-Code UX Polish |
 | Status | Proposed |
 | Recommended agents | Check Claude availability first; use Claude if healthy for harness/backend contract work, Antigravity/Gemini for receptionist workflow review, and DeepSeek Flash lanes as sprint boundaries justify |
 
-Recommended scope: either add a reusable smoke-harness auth bootstrap guard to prevent this class of timeout again, or continue reason-code UX polish such as contextual option grouping and `PATIENT_UNWELL` taxonomy refinement.
+Recommended scope: continue reason-code UX polish such as contextual option grouping and `PATIENT_UNWELL` taxonomy refinement, now that full Diary smoke is clean and guarded.
 
 ## Previous Closeout - Sprint R4
 
@@ -3119,7 +3118,7 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 - Antigravity worker verification: `node --check docs\diary\diary.js`, `git diff --check origin/master...HEAD`, and `npm run validate-all` -> passed.
 - Integrated-tree backend verification: `.\.venv\Scripts\python.exe -m pytest tests\test_appointment_conflicts.py tests\test_appointment_update_proposal.py -q --tb=short -p no:randomly` -> 43 passed, with the existing pytest-asyncio deprecation warning.
 - Integrated-tree frontend verification: `node --check docs\diary\diary.js`, `git diff --check`, and `npm run validate-all` -> passed; manifest valid, production npm audit clean, and asset check accepted v94.
-- Browser smoke: local diary served at `http://127.0.0.1:8765/diary/diary.html?smoke=true`; page identity `EMR Ã¢â‚¬â€ Diary`, grid rendered 4 smoke appointments, no console warnings/errors.
+- Browser smoke: local diary served at `http://127.0.0.1:8765/diary/diary.html?smoke=true`; page identity `EMR4 - Diary`, grid rendered 4 smoke appointments, no console warnings/errors.
 - Browser/CDP drag smoke: real mouse events on a visible appointment created one dashed ghost preview, snapped the preview down by one slot, opened the proposal warning dialog, and `Confirm & Save` moved the card from `top: 331px` to `top: 361px`.
 - Browser/CDP resize smoke: real mouse events on the bottom resize handle created one dashed ghost preview with increased height, opened the proposal warning dialog, and `Confirm & Save` persisted the card height to `88px`.
 - Browser smoke confirmed status controls were ignored as drag targets and that ghost previews were removed after drop.
@@ -3253,7 +3252,7 @@ Detailed steps for Yuri-only review:
 1. Hard refresh the live diary/Office-dialog surface and confirm `diary.js?v=84`
    and `diary.css?v=84` are loaded.
 2. Sign in as an Admin or PracticeOwner-capable user.
-3. Open `Ã¢Å¡â„¢Ã¯Â¸Â Admin` -> `Resource Administration` -> `Rooms`.
+3. Open `Admin` -> `Resource Administration` -> `Rooms`.
 4. Confirm every active room card displays an explicit or fallback default
    waiting area when active waiting areas exist.
 5. Edit one room, confirm the default waiting-area dropdown is preselected, then

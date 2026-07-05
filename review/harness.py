@@ -13,6 +13,8 @@ drive pytest assertions today and a JSON report later without rewriting them.
 """
 from __future__ import annotations
 
+import base64
+import json
 import contextlib
 import functools
 import http.server
@@ -53,6 +55,35 @@ def stub_office(page) -> None:
             status=200, content_type="application/javascript", body=OFFICE_STUB
         ),
     )
+
+
+def _decode_base64url_json(segment: str) -> dict:
+    padding = "=" * (-len(segment) % 4)
+    try:
+        decoded = base64.urlsafe_b64decode(segment + padding)
+        value = json.loads(decoded.decode("utf-8"))
+    except Exception as exc:  # pragma: no cover - exercised via caller failure
+        raise AssertionError("review auth token must contain valid base64url JSON") from exc
+    if not isinstance(value, dict):
+        raise AssertionError("review auth token JSON payload must be an object")
+    return value
+
+
+def assert_valid_review_token(token: str) -> None:
+    parts = token.split(".")
+    if len(parts) != 3 or any(not part for part in parts):
+        raise AssertionError("review auth token must be a three-part JWT-like token")
+    _decode_base64url_json(parts[0])
+    _decode_base64url_json(parts[1])
+
+
+def bootstrap_auth(page, token: str) -> None:
+    assert_valid_review_token(token)
+    page.evaluate("(token) => localStorage.setItem('emr4_token', token)", token)
+
+
+def clear_auth(page) -> None:
+    page.evaluate("localStorage.removeItem('emr4_token')")
 
 
 # ── Primitives ───────────────────────────────────────────────────────────────

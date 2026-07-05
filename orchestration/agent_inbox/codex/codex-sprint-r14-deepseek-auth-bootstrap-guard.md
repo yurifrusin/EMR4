@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r14-auth-bootstrap-guard` |
-| Status | queued |
+| Status | integrated |
 | Created | 8625209 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r14-deepseek-auth-bootstrap-guard --summary "Short plan summary"` |
@@ -78,6 +78,13 @@ surface is affected and which nearby surfaces must not change.
 Focused R13 auth-sensitive smoke cluster; full review/test_diary_smoke.py if feasible; R12 reason-code guard; git diff --check.
 
 ## Merge Criteria
+
+## Completion Notes
+
+- Ariadne implemented the accepted DeepSeek plan directly in the integration worktree.
+- Files changed: `review/harness.py`, `review/test_diary_smoke.py`.
+- Verification: focused R13 auth-sensitive cluster passed; full `review/test_diary_smoke.py` passed; R12 reason-code guard passed; `git diff --check` passed.
+- Remaining risks: real expired-session UI remains a separate product UX follow-up, not a harness concern.
 
 Invalid-token drift would produce a clear harness auth assertion; full Diary smoke remains green; no production code changes.
 
