@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r5-scenario-review` |
-| Status | queued |
+| Status | submitted |
 | Created | 2687ef6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r5-deepseek-scenario-adversarial-review --summary "Short plan summary"` |
