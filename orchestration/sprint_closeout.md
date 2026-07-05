@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R17: Expired-Session Diary UX Banner |
 | Integrated through | Ariadne implementation, DeepSeek Flash auth-banner plan, Antigravity/Gemini receptionist-domain review |
-| Status | Ready for final integration commit, push, mirror realign, and audit |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit and GitHub workflows clean |
 | Last updated | 2026-07-05 |
 
 ## What Changed
