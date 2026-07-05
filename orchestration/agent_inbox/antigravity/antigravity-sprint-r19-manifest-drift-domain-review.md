@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | da69414 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r19-manifest-drift-domain-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/manifest_drift_review.md`.
+- Verification run: static domain analysis of backend schemas, routes, outcome/schedule explanation code, and frontend `diary.js` constants; Ariadne integrated accepted policy points and deferred larger copy-source migration.
+- Remaining risks: frontend schedule copy catalogs still duplicate backend schedule explanation wording and should be unified later.

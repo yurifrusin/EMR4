@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R19 Manifest Drift Guardrails dispatched; Claude capped until 21:30 Brisbane, so DeepSeek Flash replaces Claude |
-| **Next recommended work** | Sprint R19 Manifest Drift Guardrails: backend/frontend outcome-copy parity and status-specific reason-code policy hardening before live Bernie prompt consumption |
+| **Current active track** | Sprint R19 Manifest Drift Guardrails integration in progress |
+| **Next recommended work** | Sprint R20 Manifest Prompt Consumption Gate after R19 closes; check Claude availability at sprint start |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

@@ -3,7 +3,7 @@ from dataclasses import FrozenInstanceError
 import pytest
 
 from app.models.appointments import AppointmentStatus
-from app.schemas.appointments import STATUS_REASON_CODES
+from app.schemas.appointments import STATUS_REASON_CODES, STATUS_SPECIFIC_REASON_CODE_POLICY
 from app.services.diary.capabilities import (
     BERNIE_CAPABILITY_REGISTRY,
     BernieCapabilityTier,
@@ -41,7 +41,10 @@ def test_manifest_reason_codes_match_backend_sources():
     manifest = build_bernie_diary_capability_manifest()
 
     assert manifest["reason_codes"]["appointment_status_reason_codes"] == sorted(STATUS_REASON_CODES)
-    assert manifest["reason_codes"]["statuses_requiring_reason_code"] == ["Cancelled", "NoShow", "DNA"]
+    assert manifest["reason_codes"]["status_specific_reason_code_policy"] == {
+        status.value: sorted(codes)
+        for status, codes in STATUS_SPECIFIC_REASON_CODE_POLICY.items()
+    }
     assert manifest["reason_codes"]["schedule_reason_codes"] == [
         reason.value for reason in DiaryScheduleExplanationReason
     ]

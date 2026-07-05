@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | da69414 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r19-deepseek-reason-code-policy-source --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/schemas/appointments.py`, `docs/diary/diary.js`, `docs/diary/diary.html`, `tests/test_reason_code_backend.py`, plus manifest parity updates.
+- Verification run: `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py tests\test_reason_code_backend.py`; `.venv\Scripts\pytest.exe tests\test_reason_code_backend.py -q`; then integrated in the focused R19 suite.
+- Remaining risks: null reason codes remain accepted for grandfathering; requiredness should be tightened only with an explicit migration/backfill policy.

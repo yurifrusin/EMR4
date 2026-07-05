@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | da69414 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r19-deepseek-outcome-copy-drift-guard --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `tests/test_bernie_outcome_copy_drift_guard.py`.
+- Verification run: `.venv\Scripts\python.exe -m py_compile tests\test_bernie_outcome_copy_drift_guard.py`; `.venv\Scripts\pytest.exe tests\test_bernie_outcome_copy_drift_guard.py -q`; then integrated in the focused R19 suite.
+- Remaining risks: `interpreted_ready` remains an explicit transient exception; revisit if it becomes a stable staff-visible review state.

@@ -12,7 +12,7 @@ from __future__ import annotations
 from typing import Any, Literal
 
 from app.models.appointments import AppointmentStatus, BookingChannel
-from app.schemas.appointments import STATUS_REASON_CODES
+from app.schemas.appointments import STATUS_REASON_CODES, STATUS_SPECIFIC_REASON_CODE_POLICY
 from app.services.bernie.session import (
     CLIENT_EVENT_TRANSITIONS,
     SERVER_ADVANCE_TARGETS,
@@ -191,17 +191,20 @@ def build_bernie_diary_capability_manifest() -> dict[str, Any]:
         },
         "reason_codes": {
             "appointment_status_reason_codes": _sorted_values(STATUS_REASON_CODES),
-            "statuses_requiring_reason_code": ["Cancelled", "NoShow", "DNA"],
+            "status_specific_reason_code_policy": {
+                status.value: _sorted_values(codes)
+                for status, codes in STATUS_SPECIFIC_REASON_CODE_POLICY.items()
+            },
             "schedule_reason_codes": _enum_values(DiaryScheduleExplanationReason),
             "schedule_reason_aliases": {
                 alias: reason.value
                 for alias, reason in sorted(DIARY_SCHEDULE_REASON_ALIASES.items())
             },
-            "source": "app.schemas.appointments.STATUS_REASON_CODES and app.services.diary.schedule_explanations",
+            "source": "app.schemas.appointments.STATUS_REASON_CODES, STATUS_SPECIFIC_REASON_CODE_POLICY, and app.services.diary.schedule_explanations",
             "authority": "source_of_truth",
             "drift_note": (
-                "Frontend first-party vs retrospective reason-code option lists are display policy in docs/diary/diary.js; "
-                "backend status-specific reason-code policy is currently a flat valid-code set plus required-status checks."
+                "Frontend status-specific reason-code options must mirror STATUS_SPECIFIC_REASON_CODE_POLICY. "
+                "Null reason codes remain allowed for grandfathering until a later migration tightens requiredness."
             ),
         },
         "frames": {

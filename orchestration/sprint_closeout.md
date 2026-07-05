@@ -8,6 +8,62 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint R19: Bernie Manifest Drift Guardrails |
+| Integrated through | Ariadne integration, two DeepSeek Flash lanes replacing capped Claude, Antigravity/Gemini domain review |
+| Status | Integration in progress; focused checks passed, pending commit/push/mirror/audit |
+| Last updated | 2026-07-05 |
+
+## What Changed
+
+- Added `STATUS_SPECIFIC_REASON_CODE_POLICY` in `app/schemas/appointments.py` as the backend source of truth for terminal status/reason-code combinations.
+- Added schema validators so new `Cancelled`, `DNA`, and `NoShow` writes reject mismatched non-null reason codes while preserving null/grandfathering semantics.
+- Aligned `docs/diary/diary.js` so `Cancelled` options include `PATIENT_RESCHEDULED`, `PATIENT_UNWELL`, and `CLINIC_RESCHEDULED`; cache-busted `docs/diary/diary.html` to `diary.js?v=173`.
+- Added backend/frontend drift tests in `tests/test_reason_code_backend.py` for valid/invalid status-code pairs and frontend `STATUS_SPECIFIC_REASON_CODE_OPTIONS` parity.
+- Added `tests/test_bernie_outcome_copy_drift_guard.py`, parsing `diary.js` copy dictionaries to ensure every backend `BernieBookingOutcomeKind` has frontend copy coverage or an explicit transient exception.
+- Updated the capability manifest so Bernie-facing reason-code policy is source-derived from `STATUS_SPECIFIC_REASON_CODE_POLICY`.
+- Preserved Gemini's R19 domain review in `orchestration/manifest_drift_review.md`.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\services\diary\capability_manifest.py tests\test_reason_code_backend.py tests\test_bernie_outcome_copy_drift_guard.py tests\test_bernie_diary_capability_manifest.py`.
+- Focused R19 pytest passed: `.venv\Scripts\pytest.exe tests\test_reason_code_backend.py tests\test_bernie_outcome_copy_drift_guard.py tests\test_bernie_diary_capability_manifest.py -q` (41 passed; existing Starlette/Google GenAI warnings only).
+- JS syntax passed: `node --check docs\diary\diary.js`.
+- Frontend asset version check passed: `.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
+- Whitespace check passed: `git diff --check`.
+
+## Recommended User Review
+
+No required manual review before continuing if the focused checks and post-push workflows pass. The only visible change is adding three legitimate cancellation reason options to the existing Diary reason-code dropdown; deterministic backend/frontend parity tests cover the option set.
+
+## Not Required Before Moving On
+
+- No browser/Office smoke is required because the frontend change is a constant-only dropdown option alignment with cache-bust and syntax/version checks.
+- No live Gemini/Vertex call is required because the manifest is not yet injected into a runtime Bernie prompt.
+- No database migration or test DB reset is required.
+- No user manual diary review is required before the next sprint; optional later live check is to confirm the Cancelled reason dropdown includes patient rescheduled, patient unwell, and clinic requested reschedule.
+
+## Known Follow-Up
+
+- Decide whether to make reason codes non-null-required for `Cancelled`, `DNA`, and `NoShow` after a migration/backfill policy.
+- Unify duplicated frontend/backend schedule-explanation copy catalogs.
+- Decide whether and where to enforce capability `allowed_authors` at route/envelope boundaries.
+- Add shared typed confidence bands for patient/practitioner recognition before representing those bands as authoritative manifest facts.
+- Design a safe prompt/context injection path for Bernie to read the manifest after remaining authority-boundary checks.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint R20: Bernie Manifest Prompt Consumption Gate |
+| Status | Proposed |
+| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for domain-policy dissent, and DeepSeek Flash lanes for source inventory/test design |
+
+Recommended scope: design the safe prompt/context injection gate for the read-only manifest, including payload size, redaction/no-PHI guarantees, live-provider test strategy, and refusal rules proving Bernie cannot convert manifest knowledge into write authority.
+
+## Previous Closeout - Sprint R18
+
+| Item | Value |
+|---|---|
 | Batch | Sprint R18: Bernie Diary Capability Manifest v1 |
 | Integrated through | Ariadne implementation, two DeepSeek Flash review lanes, Antigravity/Gemini domain review |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit and GitHub Python Security/CodeQL workflows clean |
@@ -30,7 +86,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-No required manual review before continuing if the focused checks pass. This is backend data-contract/test/orchestration work only: no live prompt path, frontend route, Office taskpane, GitHub Pages asset, database migration, or appointment mutation behaviour changes.
+No required manual review before continuing. This is backend data-contract/test/orchestration work only: no live prompt path, frontend route, Office taskpane, GitHub Pages asset, database migration, or appointment mutation behaviour changes.
 
 ## Not Required Before Moving On
 
@@ -46,16 +102,6 @@ No required manual review before continuing if the focused checks pass. This is 
 - Decide whether and where to enforce capability `allowed_authors` at route/envelope boundaries.
 - Add shared typed confidence bands for patient/practitioner recognition before representing those bands as authoritative manifest facts.
 - Only after the drift guards are in place, design a safe prompt/context injection path for Bernie to read the manifest.
-
-## Next Sprint Candidate
-
-| Item | Value |
-|---|---|
-| Name | Sprint R19: Bernie Manifest Drift Guardrails |
-| Status | Proposed |
-| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for domain-policy dissent, and DeepSeek Flash lanes for source inventory/test design |
-
-Recommended scope: add deterministic guardrails for the manifest's highest-risk drift surfaces before any live prompt consumption. Start with backend/frontend outcome-copy parity and status-specific reason-code policy source-of-truth hardening.
 
 ## Previous Closeout - Sprint R17
 

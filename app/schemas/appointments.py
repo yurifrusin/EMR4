@@ -31,6 +31,60 @@ def validate_status_reason_code(value: Optional[str]) -> Optional[str]:
     return value
 
 
+# Status-specific reason-code policy: single source of truth for which reason
+# codes are valid for each terminal appointment status. This mirrors the
+# frontend's STATUS_SPECIFIC_REASON_CODE_OPTIONS in docs/diary/diary.js.
+# A frontend-drift detection test validates that the JS constants match here.
+STATUS_SPECIFIC_REASON_CODE_POLICY: dict[AppointmentStatus, frozenset[str]] = {
+    AppointmentStatus.Cancelled: frozenset({
+        "PATIENT_CANCELLED",
+        "PATIENT_RESCHEDULED",
+        "PATIENT_UNWELL",
+        "PATIENT_TRANSPORT",
+        "PRACTITIONER_UNAVAILABLE",
+        "CLINIC_OPERATIONAL",
+        "CLINIC_RESCHEDULED",
+        "ADMIN_ERROR",
+        "DUPLICATE_BOOKING",
+        "OTHER",
+    }),
+    AppointmentStatus.DNA: frozenset({
+        "DID_NOT_ATTEND",
+        "LEFT_WITHOUT_SEEN",
+        "ADMIN_ERROR",
+        "DUPLICATE_BOOKING",
+        "OTHER",
+    }),
+    AppointmentStatus.NoShow: frozenset({
+        "DID_NOT_ATTEND",
+        "LEFT_WITHOUT_SEEN",
+        "ADMIN_ERROR",
+        "DUPLICATE_BOOKING",
+        "OTHER",
+    }),
+}
+
+
+def validate_status_reason_code_for_status(
+    status: AppointmentStatus,
+    code: Optional[str],
+) -> Optional[str]:
+    """Validate status_reason_code against the status-specific policy.
+
+    Returns the code (or None) on success, raises ValueError on mismatch.
+    Non-terminal statuses and statuses without a policy entry are not
+    restricted (pass-through, matching existing behaviour).
+    """
+    if code is None:
+        return None
+    allowed = STATUS_SPECIFIC_REASON_CODE_POLICY.get(status)
+    if allowed is not None and code not in allowed:
+        raise ValueError(
+            f"status_reason_code '{code}' is not valid for status '{status.value}'"
+        )
+    return code
+
+
 # ── Bernie typed turn contract ────────────────────────────────────────────────
 
 BernieTurnEventKind = Literal[
@@ -158,6 +212,10 @@ class AppointmentStatusUpdate(BaseModel):
     def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
         return validate_status_reason_code(value)
 
+    @model_validator(mode="after")
+    def validate_reason_code_for_status(self) -> "AppointmentStatusUpdate":
+        validate_status_reason_code_for_status(self.status, self.status_reason_code)
+        return self
 
 class AppointmentOut(BaseModel):
     id: uuid.UUID
@@ -381,6 +439,10 @@ class AppointmentStatusProposalIn(BaseModel):
     def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
         return validate_status_reason_code(value)
 
+    @model_validator(mode="after")
+    def validate_reason_code_for_status(self) -> "AppointmentStatusProposalIn":
+        validate_status_reason_code_for_status(self.status, self.status_reason_code)
+        return self
 
 class AppointmentStatusCommand(BaseModel):
     appointment_id: uuid.UUID
@@ -395,6 +457,10 @@ class AppointmentStatusCommand(BaseModel):
     def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
         return validate_status_reason_code(value)
 
+    @model_validator(mode="after")
+    def validate_reason_code_for_status(self) -> "AppointmentStatusCommand":
+        validate_status_reason_code_for_status(self.status, self.status_reason_code)
+        return self
 
 class AppointmentStatusProposalOut(BaseModel):
     intent: Literal["update_appointment_status"] = "update_appointment_status"
@@ -482,6 +548,11 @@ class AppointmentDeleteCommand(BaseModel):
     def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
         return validate_status_reason_code(value)
 
+    @model_validator(mode="after")
+    def validate_reason_code_for_status(self) -> "AppointmentDeleteCommand":
+        # Delete always implies Cancelled; validate against Cancelled policy.
+        validate_status_reason_code_for_status(AppointmentStatus.Cancelled, self.status_reason_code)
+        return self
 
 class AppointmentDeleteProposalOut(BaseModel):
     intent: Literal["delete_appointment"] = "delete_appointment"
