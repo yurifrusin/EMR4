@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 25d9ab5 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r25-deepseek-sampling-harness-scaffold --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/services/ai/evals/provider_sampling_harness.py`, `app/services/ai/evals/__init__.py`, `app/services/ai/evals/manifest_eval.py`, `tests/test_provider_sampling_harness.py`, plus R25 review/closeout docs.
+- Verification run: focused R25/R24 pytest passed (73 tests), broader manifest regression passed (109 tests), `py_compile` passed, and `git diff --check` passed.
+- Remaining risks: R25 is a static scaffold only. Live shadow sampling remains blocked pending a separate privacy, opt-in, telemetry, cost/latency, and kill-switch design.

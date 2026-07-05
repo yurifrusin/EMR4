@@ -409,7 +409,8 @@ def _check_writes_authorized(
         writes_authorized_values = [
             value
             for key, value in obj.items()
-            if isinstance(key, str) and _normalise_key(key) == "writesauthorized"
+            if isinstance(key, str)
+            and _normalise_key(key) in {"writesauthorized", "allowwrite"}
         ]
         for writes_authorized_value in writes_authorized_values:
             if strict or not (
