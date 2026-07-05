@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r2-deepseek-clarification-regression` |
-| Status | queued |
+| Status | submitted |
 | Created | a45c323 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r2-deepseek-clarification-regression --summary "Short plan summary"` |
