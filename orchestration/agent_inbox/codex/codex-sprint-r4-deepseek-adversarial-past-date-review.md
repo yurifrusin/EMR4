@@ -1,94 +1,74 @@
-# codex-sprint-r4-deepseek-adversarial-past-date-review
+﻿# Plan: R4 Adversarial Past-Date Review Lane
 
-| Item | Value |
-|---|---|
-| To | codex |
-| Branch | `codex/sprint-r4-past-date-review` |
-| Status | queued |
-| Created | 20a420f |
-| Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
-| Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r4-deepseek-adversarial-past-date-review --summary "Short plan summary"` |
-| Submit Command | `python scripts\agent_worktrees.py submit --agent codex --task codex-sprint-r4-deepseek-adversarial-past-date-review --commit-message "Sprint R4 DeepSeek adversarial past-date review" --message "codex-sprint-r4-deepseek-adversarial-past-date-review ready for Codex review"` |
+## Summary
+Adversarial review and test-design lane exposing bypasses where absolute past dates, backdated reference_dates, or stale session reference dates can flow through normalize → slot search → proposal → confirm without temporal rejection.
 
-## Mission
+## Understanding
+The normalizer (bernie_slot_normalizer.py) is a pure format parser — it accepts any valid ISO date, including past dates. evaluate_same_day_window in diary/temporal.py only checks same-day time windows. Outside the same day, there is no past-date block at any pipeline stage:
 
-Use a second DeepSeek Flash worker as an adversarial reviewer/test designer for backdated-date safety: identify bypasses, add or propose focused regression tests, and avoid overlapping production edits unless the implementation lane misses a critical small fix.
+1. Normalizer accepts past date_from (e.g. "2026-06-30" when today is 2026-07-05).
+2. Slot search (_build_slot_search_proposal) generates candidate slots against practitioner schedule for past dates — no temporal check.
+3. Create proposal (_build_create_appointment_proposal) validates patient/practitioner/location existence and conflicts — no past-date check.
+4. Interpret booking instruction temporal axis only blocks same-day past windows; absolute past ISO dates pass as band=assume.
+5. Supervised booking only triggers clinic_day_exhausted for same-day (date_from == clinic_today).
+6. reference_date is client-supplied: a backdated reference_date resolves "today" to a past date. ContextFreshness.stale is informational only.
+7. Session reference_date is immutable once set, permitting stale sessions.
+8. Confirm-create staleness gate checks freshness IDs (session-coordination proof), not temporal validity.
+9. AppointmentCreate / AppointmentCreateCommand schemas have no model_validator for past dates.
+10. Raw compat endpoints bypass session overlay entirely.
 
-## Scope
+D8 patient collision semantics and existing same-day window clamp/block behavior must be preserved.
 
-### In Scope
+## Surface
+- app/services/bernie_slot_normalizer.py
+- app/services/bernie/__init__.py (resolve_booking_date_transition)
+- app/services/diary/temporal.py (evaluate_same_day_window)
+- app/routers/appointments.py (propose_bernie_supervised_booking, interpret_booking_instruction, _build_create_appointment_proposal, _build_slot_search_proposal, confirm_bernie_create_proposal, create_appointment)
+- app/schemas/appointments.py (SlotSearchProposalIn, AppointmentCreate, AppointmentCreateCommand, SlotSearchCommandIn)
+- app/services/bernie_patient_context.py (build_patient_booking_context)
+- app/services/bernie/evidence.py, session.py, session_store.py (staleness/session binding)
+- tests/test_bernie_slot_normalizer.py
+- tests/test_bernie_confidence_policy.py
+- tests/test_bernie_supervised_booking_wrapper.py
+- tests/test_bernie_confirm_create_proposal.py
+- tests/test_bernie_d8_collision_source_hardening.py
+- tests/test_bernie_d8_patient_collision_source_hardening.py
+- tests/test_bernie_booking_outcomes.py
+- tests/test_bernie_interpret_booking_instruction.py
 
-Read app/services/bernie_slot_normalizer.py, app/routers/appointments.py, tests around Bernie normalizer/supervised booking; add a separate review/test artifact or focused test module if useful.
+## Out of Scope
+- UI/frontend changes
+- Office.js add-in changes
+- Live Gemini/LLM integration
+- Patient data or schema migrations
+- Production code changes in this plan phase (plan gate only)
+- D4/D5/D6 domain frames unless directly affecting past-date gate logic
 
-### Out of Scope
+## Steps
+1. Probe normalizer past-date acceptance — pure-unit tests proving normalizer accepts past date_from with no past-date block.
+2. Probe backdated reference_date — show past reference_date resolves "today" to past date unblocked.
+3. Probe past absolute date through interpret — route-level: past ISO date passes as band=assume unblocked.
+4. Probe past absolute date through supervised-booking — route-level: past date_from proceeds past normalization and same-day check with no past-date block.
+5. Probe past-date slot candidates returned — show slot search returns candidates for a past schedule (or no_slot rather than past-date block).
+6. Probe past-date confirm-create proposal — route-level: confirm a past-date proposal passes staleness gate when freshness ids match.
+7. Probe past-date appointment creation — route-level: create proposal for past date with valid evidence confirms without past-date block.
+8. Probe session stale reference_date persistence — show session with past reference persists through turns.
+9. Probe raw compat endpoint bypass — demonstrate raw POST /api/v1/appointments/ accepts past appointment_date with no temporal check.
+10. Probe no regression on D8 collision — verify cap-overflow and source-appointment self-exclusion still correct.
+11. Probe existing same-day window preserved — confirm evaluate_same_day_window still blocks/clamps same-day past windows and clinic_day_exhausted fires.
+12. Synthesize findings — classify each probe as attack surface, acceptable, or false alarm; recommend changes with severity.
+13. Write adversarial test file tests/test_bernie_r4_past_date_adversarial.py.
 
-Do not refactor production broadly; do not alter diary UI; do not duplicate the implementation lane's production edits unless reporting a blocker; no live provider calls.
+## Acceptance Criteria
+- All 11 probes produce clear pass/fail with documented expectations.
+- D8 collision tests still pass.
+- Existing same-day window block and clinic_day_exhausted behavior unchanged.
+- Every bypass surface precisely identified with code references.
+- Adversarial test file self-contained and ready for review.
+- No production code modified during plan phase.
 
-## Required Steps
-
-1. Run the start command above.
-2. Read the protocol alerts printed by `handin`.
-3. Read `AGENTS.md` and `orchestration/parallel_workstreams.md`.
-4. Before editing project code, write an implementation plan and stop. The plan
-   must be shown in the agent GUI and captured for Codex with the plan command
-   above. Do not code until the user/Codex says `complete sprint task`.
-5. After plan approval, work only inside the stated scope unless the user or Codex
-   expands it.
-6. Do not merge to `master`.
-7. Do not move `handoff/current`.
-8. Run the verification listed below.
-9. Fill in the Completion Notes section below with files changed, verification run,
-   and remaining risks. The submit command copies those notes into Codex's review
-   packet automatically.
-10. Finish with the submit command above.
-
-## Implementation Plan Requirements
-
-Before coding, the implementation plan must include:
-
-- My Understanding
-- Intended Surface / Boundary
-- Out of Scope
-- Files I Expect To Edit
-- Implementation Steps
-- Visual / Behavioural Acceptance Checks
-- Risks / Ambiguities
-
-Pay special attention to visually loaded words such as cards, slots, stacking,
-panels, waiting room, diary grid, booking slot, and status. State exactly which
-surface is affected and which nearby surfaces must not change.
-
-## Hard Stop Rules
-
-- Do not push to `master` or `handoff/current`.
-- Do not manually work around a failed protocol command (`handin`, `sync`, `submit`,
-  `realign`, or related orchestration commands).
-- Report every protocol-followed command back to Codex/orchestrator, whether it
-  succeeds or fails. For success, include the command, working directory, branch,
-  and short success result.
-- If any protocol command refuses to run or fails, stop and report the exact command,
-  working directory, branch, `git status --short --branch`, and error output to the
-  orchestrator. On push failure, `submit` will also try to publish a
-  `submit-alert/...` branch for Codex to poll.
-- If these instructions conflict with remembered prior protocol, trust the current
-  `handin` alerts and this task packet.
-
-## Verification
-
-py_compile any new tests; run focused pytest for new adversarial tests and adjacent normalizer/supervised tests if possible; git diff --check.
-
-## Merge Criteria
-
-Provides independent evidence that past-date requests cannot reach executable slot search/proposal states, or documents concrete remaining risks for Ariadne integration.
-
-## Dissent / Risks
-
-Record concerns, alternative designs, or reasons this task should not be merged as-is.
-
-## Completion Notes
-
-Required before submit. These notes are copied into Codex's review packet automatically:
-
-- Files changed:
-- Verification run:
-- Remaining risks:
+## Risks
+- Past-date slot search returns confusing "no slot" instead of blocking clear — pipeline fails open.
+- Staleness gate is session-coordination proof not temporal check — single-session backdated booking bypasses.
+- Raw compat endpoints may accept past appointments with zero validation — may be intentionally permissive.
+- Past-date block risks false positives for history/retrospective entries — must be surgically applied to booking-new path only.
