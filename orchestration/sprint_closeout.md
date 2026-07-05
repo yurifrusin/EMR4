@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R13: Diary Smoke Harness Recovery |
 | Integrated through | Ariadne harness fix, DeepSeek Flash diagnosis/focused-fix plan, Antigravity/Gemini receptionist-domain review |
-| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned, audit clean, disposable DeepSeek branch retired |
 | Last updated | 2026-07-05 |
 
 ## What Changed
