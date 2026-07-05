@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Plan packet submitted; no production code changes.
+Adversarial review artifact submitted.
 
 ## Worker Completion Notes
 
