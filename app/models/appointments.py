@@ -62,6 +62,7 @@ class Appointment(Base):
     reason = Column(String(500))
     notes = Column(String(1000))
     cancellation_reason = Column(String(500), nullable=True)
+    status_reason_code = Column(String(50), nullable=True)
     booked_via = Column(Enum(BookingChannel), default=BookingChannel.Receptionist)
     waiting_room = Column(String(50))
     waiting_area_id = Column(UUID(as_uuid=True), ForeignKey("waiting_areas.id"), nullable=True)
@@ -123,6 +124,7 @@ class AppointmentAuditLog(Base):
     status_before = Column(Enum(AppointmentStatus), nullable=True)
     status_after = Column(Enum(AppointmentStatus), nullable=True)
     cancellation_reason = Column(String(500), nullable=True)
+    status_reason_code = Column(String(50), nullable=True)
     confirmed_warnings = Column(JSONB, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 

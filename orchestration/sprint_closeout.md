@@ -8,54 +8,52 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R10: Cancellation/Status Reason-Code Governance Contract |
-| Integrated through | Ariadne policy/test integration, Antigravity/Gemini governance review, DeepSeek Flash inventory, DeepSeek Flash contract-test plan |
-| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean; disposable DeepSeek worktrees retired |
+| Batch | Sprint R11: Optional Reason-Code Substrate |
+| Integrated through | Ariadne backend integration, Antigravity/Gemini UX/privacy review, DeepSeek Flash backend plan, DeepSeek Flash adversarial-test guidance |
+| Status | Locally integrated and verified; pending commit/push, mirror realign, audit, and worker cleanup |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added `docs/receptionist_review_r10.md` defining a receptionist-facing reason-code policy, taxonomy, staff copy, audit expectations, free-text privacy boundary, migration risks, and safe implementation sequence.
-- Added `docs/receptionist_review_r10_reason_code_inventory.md` cataloguing current model/schema/route/audit/test surfaces for cancellation/status reason capture.
-- Added focused contract tests in `tests/test_appointment_audit.py` proving delete and delete-confirm preserve `cancellation_reason` on both appointment and audit log records.
-- Added status-route contract coverage proving current raw status changes to `Cancelled`, `NoShow`, and `DNA` do not set `cancellation_reason`.
-- Made the audit test fixture future-safe so same-day create/update audit tests do not drift into elapsed-slot validation failures.
-- Reinforced the protocol alert that Claude must be checked at sprint start, and that a recuperating Claude lane is replaced by DeepSeek Flash by default while allowing additional DeepSeek workers when sprint boundaries justify them.
-- No production route code, database migration, UI asset, GitHub Pages asset, live provider call, or temporal slot-write policy changed.
+- Added nullable `status_reason_code` columns to appointments and appointment audit log via `alembic/versions/k0l1m2n3o4p5_add_status_reason_code.py`.
+- Added a shared uppercase allow-list validator in `app/schemas/appointments.py` and exposed optional `status_reason_code` fields on raw status updates, status proposals, delete proposals, command payloads, appointment output, and audit output.
+- Threaded `status_reason_code` through raw status changes, status proposal/confirm, delete proposal/confirm, appointment state payloads, and audit writes in `app/routers/appointments.py`.
+- Added focused backend coverage in `tests/test_reason_code_backend.py` for valid-code persistence, invalid-code rejection, legacy-null compatibility, proposal confirm flows, delete free-text coexistence, and past-date status/delete exemptions.
+- Integrated Antigravity/Gemini's `docs/receptionist_review_r11.md` UX/privacy critique as follow-up guidance for the first-party Diary UI.
+- Preserved the R8/R9 policy boundary: slot-writing temporal guards were not changed, and retrospective status/delete governance remains allowed with optional/null-compatible reason codes.
 
 ## Verification
 
-- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\test_appointment_audit.py`.
-- Focused R10 audit contract suite passed: `.venv\Scripts\pytest.exe tests\test_appointment_audit.py -q --tb=short` (21 passed; existing Starlette/Google GenAI warnings only).
-- Adjacent status/delete/temporal suite passed: `.venv\Scripts\pytest.exe tests\test_appointment_audit.py tests\test_appointment_status_mutations.py tests\test_appointment_raw_temporal_guard.py tests\test_appointment_proposals.py tests\test_appointment_update_proposal.py tests\test_bernie_confirm_create_proposal.py -q --tb=short` (135 passed; existing warnings only).
-- Whitespace check passed: `git diff --check`.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\models\appointments.py app\routers\appointments.py tests\test_reason_code_backend.py`.
+- Focused R11 reason-code backend suite passed: `.venv\Scripts\pytest.exe tests\test_reason_code_backend.py -q --tb=short` (9 passed; existing Starlette/Google GenAI warnings only).
+- Adjacent appointment governance suite passed: `.venv\Scripts\pytest.exe tests\test_reason_code_backend.py tests\test_appointment_audit.py tests\test_appointment_status_mutations.py tests\test_appointment_raw_temporal_guard.py tests\test_appointment_proposals.py tests\test_appointment_update_proposal.py tests\test_bernie_confirm_create_proposal.py -q --tb=short` (144 passed; existing warnings only).
 
 ## Recommended User Review
 
-No required manual review for Sprint R10. This sprint is backend contract-test and documentation/protocol work; it does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, live Gemini behaviour, or production database shape.
+No required manual review for Sprint R11 before continuing. This sprint changes backend schema/API/test contracts and adds a migration, but it does not change visible Diary UI, taskpane assets, Word add-in behaviour, GitHub Pages assets, or live Gemini behaviour.
 
 ## Not Required Before Moving On
 
 - No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
 - No live Gemini/Vertex call is required; tests are deterministic route/API tests.
-- No migration or production database action is required; this sprint only documents the future schema contract.
+- No receptionist/manual UI test is required until a first-party dropdown/warning flow is added.
 
 ## Known Follow-Up
 
-- Implement optional `status_reason_code` support across delete and status mutation schemas/routes after receptionist feedback validates the taxonomy.
-- Keep `cancellation_reason` as optional free text and explicitly non-clinical.
-- Preserve the R8/R9 boundary: reason-code validation must not alter past-date or same-day elapsed slot-write guards.
-- Recheck Claude at the next sprint start; during R10 Claude still reported session-limit reset at 9:30pm Australia/Brisbane.
+- Decide before UI rollout whether `PATIENT_UNWELL` should be removed, merged into `PATIENT_CANCELLED`, or renamed to avoid nudging receptionists toward clinical-detail capture.
+- Add first-party Diary UI dropdowns with no preselected default, administrative-only free-text copy, and privacy warnings before making reason selection mandatory in the UI.
+- Keep external/API compatibility nullable for now; strict missing-code rejection is not part of R11.
+- Recheck Claude at the next sprint start; during R11 Claude still reported a session-limit reset at 9:30pm Australia/Brisbane and was replaced by DeepSeek Flash lanes.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R11: Optional Reason-Code Substrate |
+| Name | Sprint R12: Diary Reason-Code UI Flow |
 | Status | Proposed |
-| Recommended agents | Check Claude availability first; use Claude if healthy for backend schema/route design, Antigravity/Gemini for receptionist taxonomy critique, and DeepSeek Flash workers for route inventory/contract tests as boundaries justify |
+| Recommended agents | Check Claude availability first; use Claude if healthy for UI/API contract review, Antigravity/Gemini for receptionist UX/privacy critique, and DeepSeek Flash workers for deterministic UI/API smoke or adversarial route tests as boundaries justify |
 
-Recommended scope: add a nullable application-level reason-code field and shared validator across cancellation/status mutation paths without requiring a database enum or changing temporal slot-write policy.
+Recommended scope: add first-party Diary reason-code controls for cancel/status flows using the nullable backend substrate, without changing external API null compatibility or temporal slot-write policy.
 
 ## Previous Closeout - Sprint R4
 

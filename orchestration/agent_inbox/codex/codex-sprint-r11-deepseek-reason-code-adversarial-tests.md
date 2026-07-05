@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r11-reason-code-adversarial-tests` |
-| Status | queued |
+| Status | superseded |
 | Created | f9f77a3 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r11-deepseek-reason-code-adversarial-tests --summary "Short plan summary"` |

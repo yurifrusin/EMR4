@@ -827,6 +827,7 @@ def _write_audit(
     status_before: Optional[AppointmentStatus] = None,
     status_after: Optional[AppointmentStatus] = None,
     cancellation_reason: Optional[str] = None,
+    status_reason_code: Optional[str] = None,
     confirmed_warnings: Optional[list[str]] = None,
     audit_evidence: Optional[list[str]] = None,
 ) -> None:
@@ -842,6 +843,7 @@ def _write_audit(
         status_before=status_before,
         status_after=status_after,
         cancellation_reason=cancellation_reason,
+        status_reason_code=status_reason_code,
         confirmed_warnings=bounded_codes or None,
     ))
 
@@ -1984,6 +1986,7 @@ def _appointment_status_command_payload(command: AppointmentStatusCommand | Appo
     if isinstance(command, AppointmentStatusCommand):
         payload["kind"] = "status"
         payload["status"] = command.status.value
+        payload["status_reason_code"] = command.status_reason_code
     else:
         payload["kind"] = "waiting_area"
     return payload
@@ -1994,6 +1997,7 @@ def _appointment_status_state_payload(appt: Appointment) -> dict[str, object]:
         "appointment_id": str(appt.id),
         "status": appt.status.value,
         "waiting_area_id": _uuid_or_none(appt.waiting_area_id),
+        "status_reason_code": appt.status_reason_code,
     }
 
 
@@ -2208,6 +2212,7 @@ def propose_status_update(
             waiting_area_id=body.waiting_area_id,
             waiting_area_id_supplied="waiting_area_id" in body.model_fields_set,
             clears_waiting_area=clears_waiting_area,
+            status_reason_code=body.status_reason_code,
         ),
         warnings=warnings,
         blocks=blocks,
@@ -2324,6 +2329,11 @@ def _status_update_body_from_command(
     }
     if command.waiting_area_id_supplied:
         payload["waiting_area_id"] = command.waiting_area_id
+    if (
+        isinstance(command, AppointmentStatusCommand)
+        and "status_reason_code" in command.model_fields_set
+    ):
+        payload["status_reason_code"] = command.status_reason_code
     return AppointmentStatusUpdate(**payload)
 
 
@@ -2339,6 +2349,8 @@ def _apply_appointment_status_update(
     appt = _get_appointment(appointment_id, practice_id, db)
     status_before_patch = appt.status
     appt.status = body.status
+    if "status_reason_code" in body.model_fields_set:
+        appt.status_reason_code = body.status_reason_code
     if "waiting_area_id" in body.model_fields_set:
         if body.waiting_area_id is not None:
             _ensure_waiting_area(body.waiting_area_id, practice_id, db)
@@ -2353,6 +2365,7 @@ def _apply_appointment_status_update(
         action=AppointmentAuditAction.status_change,
         status_before=status_before_patch,
         status_after=body.status,
+        status_reason_code=body.status_reason_code,
         confirmed_warnings=body.confirmed_warnings,
         audit_evidence=audit_evidence,
     )
@@ -4221,6 +4234,7 @@ def get_appointment_audit(
             status_before=entry.status_before,
             status_after=entry.status_after,
             cancellation_reason=entry.cancellation_reason,
+            status_reason_code=entry.status_reason_code,
             confirmed_warnings=entry.confirmed_warnings or [],
             created_at=entry.created_at,
         ))
@@ -4252,6 +4266,7 @@ def _appointment_delete_command_payload(command: AppointmentDeleteCommand) -> di
         "appointment_id": str(command.appointment_id),
         "clears_waiting_area": command.clears_waiting_area,
         "cancellation_reason": command.cancellation_reason,
+        "status_reason_code": command.status_reason_code,
     }
 
 
@@ -4261,6 +4276,7 @@ def _appointment_delete_state_payload(appt: Appointment) -> dict[str, object]:
         "status": appt.status.value,
         "waiting_area_id": _uuid_or_none(appt.waiting_area_id),
         "cancellation_reason": appt.cancellation_reason,
+        "status_reason_code": appt.status_reason_code,
     }
 
 
@@ -4384,9 +4400,14 @@ def _apply_appointment_delete(
     appt = _get_appointment(appointment_id, practice_id, db)
     status_before_delete = appt.status
     cancellation_reason = body.cancellation_reason if body else None
+    status_reason_code_supplied = (
+        body is not None and "status_reason_code" in body.model_fields_set
+    )
     appt.status = AppointmentStatus.Cancelled
     appt.waiting_area_id = None
     appt.cancellation_reason = cancellation_reason
+    if status_reason_code_supplied:
+        appt.status_reason_code = body.status_reason_code
     _write_audit(
         db,
         practice_id=practice_id,
@@ -4396,6 +4417,7 @@ def _apply_appointment_delete(
         status_before=status_before_delete,
         status_after=AppointmentStatus.Cancelled,
         cancellation_reason=cancellation_reason,
+        status_reason_code=body.status_reason_code if status_reason_code_supplied else None,
         confirmed_warnings=body.confirmed_warnings if body else None,
         audit_evidence=audit_evidence,
     )
@@ -4510,6 +4532,7 @@ def confirm_delete_proposal_route(
         appointment_id=command.appointment_id,
         body=AppointmentDeleteIn(
             cancellation_reason=command.cancellation_reason,
+            status_reason_code=command.status_reason_code,
             confirmed_warnings=confirmed_warnings,
         ),
         db=db,
@@ -4580,6 +4603,7 @@ def propose_delete_appointment(
         summary += " Confirmation recommended."
 
     cancellation_reason = body.cancellation_reason if body else None
+    status_reason_code = body.status_reason_code if body else None
 
     proposal = AppointmentDeleteProposalOut(
         safe=safe,
@@ -4590,6 +4614,7 @@ def propose_delete_appointment(
             appointment_id=appointment_id,
             clears_waiting_area=clears_waiting_area,
             cancellation_reason=cancellation_reason,
+            status_reason_code=status_reason_code,
         ),
         warnings=warnings,
         blocks=blocks,

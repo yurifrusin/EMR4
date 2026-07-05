@@ -1,9 +1,34 @@
 import uuid
 from datetime import datetime, date, time
 from typing import Any, Literal, Optional
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from app.models.appointments import AppointmentStatus, BookingChannel, AppointmentAuditAction
 from app.services.diary.confirm_gate import ConfirmAffordanceDecision
+
+
+STATUS_REASON_CODES = frozenset({
+    "PATIENT_CANCELLED",
+    "PATIENT_RESCHEDULED",
+    "PATIENT_UNWELL",
+    "PATIENT_TRANSPORT",
+    "PRACTITIONER_UNAVAILABLE",
+    "CLINIC_OPERATIONAL",
+    "CLINIC_RESCHEDULED",
+    "ADMIN_ERROR",
+    "DUPLICATE_BOOKING",
+    "DID_NOT_ATTEND",
+    "LEFT_WITHOUT_SEEN",
+    "OTHER",
+    "LEGACY_UNCLASSIFIED",
+})
+
+
+def validate_status_reason_code(value: Optional[str]) -> Optional[str]:
+    if value is None:
+        return None
+    if value not in STATUS_REASON_CODES:
+        raise ValueError("status_reason_code must be one of the configured appointment reason codes")
+    return value
 
 
 # ── Bernie typed turn contract ────────────────────────────────────────────────
@@ -125,7 +150,13 @@ class AppointmentUpdate(BaseModel):
 class AppointmentStatusUpdate(BaseModel):
     status: AppointmentStatus
     waiting_area_id: Optional[uuid.UUID] = None
+    status_reason_code: Optional[str] = Field(default=None, max_length=50)
     confirmed_warnings: list[str] = Field(default_factory=list)
+
+    @field_validator("status_reason_code")
+    @classmethod
+    def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
+        return validate_status_reason_code(value)
 
 
 class AppointmentOut(BaseModel):
@@ -145,6 +176,7 @@ class AppointmentOut(BaseModel):
     reason: Optional[str] = None
     notes: Optional[str] = None
     cancellation_reason: Optional[str] = None
+    status_reason_code: Optional[str] = None
     booked_via: BookingChannel
     waiting_room: Optional[str] = None
     waiting_area_id: Optional[uuid.UUID] = None
@@ -342,6 +374,12 @@ class BernieToolIntentOut(BaseModel):
 class AppointmentStatusProposalIn(BaseModel):
     status: AppointmentStatus
     waiting_area_id: Optional[uuid.UUID] = None
+    status_reason_code: Optional[str] = Field(default=None, max_length=50)
+
+    @field_validator("status_reason_code")
+    @classmethod
+    def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
+        return validate_status_reason_code(value)
 
 
 class AppointmentStatusCommand(BaseModel):
@@ -350,6 +388,12 @@ class AppointmentStatusCommand(BaseModel):
     waiting_area_id: Optional[uuid.UUID] = None
     waiting_area_id_supplied: bool = False
     clears_waiting_area: bool
+    status_reason_code: Optional[str] = Field(default=None, max_length=50)
+
+    @field_validator("status_reason_code")
+    @classmethod
+    def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
+        return validate_status_reason_code(value)
 
 
 class AppointmentStatusProposalOut(BaseModel):
@@ -418,13 +462,25 @@ class AppointmentConfirmStatusProposalOut(BaseModel):
 
 class AppointmentDeleteIn(BaseModel):
     cancellation_reason: Optional[str] = Field(None, max_length=500)
+    status_reason_code: Optional[str] = Field(default=None, max_length=50)
     confirmed_warnings: list[str] = Field(default_factory=list)
+
+    @field_validator("status_reason_code")
+    @classmethod
+    def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
+        return validate_status_reason_code(value)
 
 
 class AppointmentDeleteCommand(BaseModel):
     appointment_id: uuid.UUID
     clears_waiting_area: bool
     cancellation_reason: Optional[str] = None
+    status_reason_code: Optional[str] = Field(default=None, max_length=50)
+
+    @field_validator("status_reason_code")
+    @classmethod
+    def validate_reason_code(cls, value: Optional[str]) -> Optional[str]:
+        return validate_status_reason_code(value)
 
 
 class AppointmentDeleteProposalOut(BaseModel):
@@ -475,6 +531,7 @@ class AppointmentAuditLogOut(BaseModel):
     status_before: Optional[AppointmentStatus] = None
     status_after: Optional[AppointmentStatus] = None
     cancellation_reason: Optional[str] = None
+    status_reason_code: Optional[str] = None
     confirmed_warnings: list[str] = Field(default_factory=list)
     created_at: datetime
 
