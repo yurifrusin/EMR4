@@ -29,7 +29,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated locally; push/mirror/audit pending |
 | Product Goal | Make Bernie clarification replies merge only missing or ambiguous fields into the existing request frame, preserving already resolved patient, practitioner, date, time, and intent |
 | Worker Shape | Claude backend/session implementation lane, Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash regression lane, Ariadne orchestration/integration |
 | In Scope | Backend/session clarification merge semantics, focused regression tests, selected R1 clarification xfail promotion, scenario/fixture acceptance notes, bounded Graphify symbol-map use during review |
@@ -47,7 +47,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | `app/routers/appointments.py`, `app/services/bernie*`, appointment schemas if needed, focused tests, selected executable scenario promotion |
 | Out of Scope | Diary UI redesign, live provider calls, persisted session store, GraphRAG, unrelated collision/source hardening |
 | Verification | py_compile and focused pytest for touched Bernie/session/normalizer/replay surfaces |
-| Status | Plan gate pending |
+| Status | Integrated |
 
 ### Workstream R2-B - Gemini Acceptance Review
 
@@ -60,7 +60,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | R1 corpus clarification scenarios, reception workstream notes, scenario/docs/test-design artifacts, acceptance checklist |
 | Out of Scope | Production implementation, broad UI/copy rewrite, live provider prompt work, master/handoff updates |
 | Verification | Plan packet first; after approval, fixture integrity tests if scenario artifacts change plus review checklist |
-| Status | Plan gate pending |
+| Status | Integrated |
 
 ### Workstream R2-C - DeepSeek Regression Lane
 
@@ -73,7 +73,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Focused tests/review around slot normalization, interpreter/session routes, scenario replay fixtures, and fixture integrity |
 | Out of Scope | Primary production implementation ownership, UI edits, live provider calls, GraphRAG, Codex GUI model switching, global config edits |
 | Verification | py_compile, focused pytest for added/changed tests, git diff --check |
-| Status | Plan gate pending |
+| Status | Integrated |
 
 ### R2 Integration Notes
 

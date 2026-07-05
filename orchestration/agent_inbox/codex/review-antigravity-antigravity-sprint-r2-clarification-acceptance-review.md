@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r2-clarification-acceptance-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -36,5 +36,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Gemini acceptance review and intent-switch scenario fixture accepted as domain/test-design evidence.
+- Follow-up required: Intent switch and stale-session checks are future hardening candidates unless pulled into a later session sprint.

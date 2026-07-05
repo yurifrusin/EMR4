@@ -8,54 +8,73 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R1: Reception Scenario Corpus Foundation |
-| Integrated through | Claude replay-harness implementation, Antigravity/Gemini receptionist scenario corpus, DeepSeek Flash validator lane, and Ariadne schema integration repair |
+| Batch | Sprint R2: Clarification Merge Semantics |
+| Integrated through | Claude backend/session implementation, Antigravity/Gemini receptionist-domain acceptance review, DeepSeek Flash regression lane, and Ariadne verification/polish |
 | Status | Integrated locally on `master`; push, mirror realign, and audit pending |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added a version-controlled Bernie receptionist scenario corpus under `tests/fixtures/bernie_scenarios/` with 9 seed YAML scenarios, including known xfail cases for long-appointment clarification and merge semantics.
-- Added `tests/bernie_scenarios/`, a backend/session replay harness that runs executable YAML fixtures through deterministic appointment proposal endpoints without live AI provider calls.
-- Added `tests/test_bernie_scenario_integrity.py`, a pure fixture-integrity validator for YAML parseability, unique ids, category/outcome shape, xfail reason metadata, and forbidden-list structure.
-- Added harness-owned executable demo fixtures: one passing normalize/search/select/confirm path and one xfail demo to prove expected-failure mechanics.
-- Ariadne repaired the integration boundary so natural-language corpus scenarios are retained as project memory while executable harness fixtures are the only files replayed by the backend harness.
-- No production backend code, frontend Diary UI, taskpane, migrations, GraphRAG, live provider prompts, PHI/log ingestion, or auto-mode behaviour changed.
+- Added clarification-reply merge semantics to the Bernie interpret route so a follow-up answer can carry forward prior resolved appointment fields from a `requested_appointment` context frame.
+- Added a request-frame payload for resolved command fields including practitioner, patient, date, time window, duration, appointment type, and location.
+- Preserved new-reply-wins behaviour: explicitly supplied fields in the clarification reply override carried-forward fields, while silent fields are gap-filled from the prior frame.
+- Added focused backend tests in `tests/test_bernie_clarification_merge.py` proving patient/date/time/duration preservation, practitioner-name clarification, new-reply-wins override, no merge without a prior frame, and no appointment/audit writes.
+- Integrated Gemini's receptionist-domain review in `docs/receptionist_review_r2.md` and added the intent-switch scenario fixture `booking_to_extension_switch_during_clarification.yaml`.
+- Integrated DeepSeek Flash regression tests in `tests/test_deepseek_clarification_regression.py` after Ariadne repaired one false-positive static import assertion.
+- Codified Graphify usage: Ariadne may use it autonomously for known-symbol impact/orientation, but not as broad search, MCP memory, hooks, or auto-indexing yet.
+- No Diary UI, taskpane, Word assets, migrations, live provider prompts, GraphRAG, PHI/log ingestion, or auto-mode behaviour changed.
 
 ## Verification
 
-- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\bernie_scenarios\loader.py tests\bernie_scenarios\replay.py tests\bernie_scenarios\test_scenario_replay.py tests\test_bernie_scenario_integrity.py`.
-- Fixture integrity passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q` (8 passed, 1 skipped; existing Starlette/Google GenAI warnings only).
-- Replay harness passed: `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios -q` (1 passed, 1 xfailed; existing warnings only).
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py tests\test_bernie_clarification_merge.py tests\test_deepseek_clarification_regression.py tests\test_bernie_scenario_integrity.py tests\bernie_scenarios\loader.py tests\bernie_scenarios\replay.py`.
+- R2 focused suite passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_clarification_merge.py tests\test_deepseek_clarification_regression.py tests\test_bernie_scenario_integrity.py tests\bernie_scenarios -q` (47 passed, 1 skipped, 1 xfailed; existing Starlette/Google GenAI warnings only).
+- Adjacent interpret suite passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py -q` (24 passed; existing warnings only).
+- Adjacent normalizer/slot-search suite passed after resetting the local test database and rerunning sequentially: `.venv\Scripts\python.exe -m pytest tests\test_bernie_slot_normalizer.py tests\test_slot_search_normalize_endpoint.py tests\test_slot_search_normalized_execution.py -q` (45 passed; existing warnings only).
 - `git diff --check` passed.
-- An earlier parallel pytest attempt against both R1 suites hit the existing shared PostgreSQL test-schema race (`userrole` enum duplicate); rerunning sequentially passed and no R1 code change was needed for that.
+- A parallel adjacent pytest attempt caused the known PostgreSQL test-schema race (`userrole` enum duplicate) and left `gp_pms_test` half-dropped. Ariadne reset only the local `gp_pms_test` database and reran the suites sequentially; they passed.
 
 ## Recommended User Review
 
-No required manual review for Sprint R1. This is test/corpus infrastructure only and does not change live Bernie, Diary UI, appointment mutation behaviour, or GitHub Pages assets.
+No required manual review for Sprint R2. This is backend/test-domain work for the Bernie interpret route and does not change the visible Diary UI, taskpane, Word add-in, GitHub Pages assets, or confirmed appointment mutation path.
 
 ## Not Required Before Moving On
 
 - No live Diary/Office/Chrome smoke is required; no frontend asset changed.
-- No live Gemini/Vertex call is required; the replay harness explicitly guards against provider calls.
-- No database migration, seed reset, GraphRAG, production log ingestion, or PHI handling review is required.
+- No live Gemini/Vertex call is required; tests use deterministic/fake provider paths and source/fixture checks.
+- No database migration, seed reset beyond the local test DB repair, GraphRAG, production log ingestion, PHI handling review, or GitHub Pages deployment check is required.
 
 ## Known Follow-Up
 
-- Sprint R2 should implement clarification merge semantics so replies such as "A long appointment is 30 minutes" preserve patient, practitioner, date, and time instead of re-asking for already-known fields.
-- Promote selected Antigravity corpus scenarios from natural-language memory into executable replay fixtures as deterministic session endpoints become available.
-- Keep the headless `codex exec -c 'model_provider="deepseek_bridge"' -m deepseek-flash` path as the trusted DeepSeek Flash worker route until in-app worker model attribution is proven.
+- Gemini flagged correction-vs-clarification ambiguity: explicit corrected fields must override preserved fields, while silent fields should carry forward.
+- Gemini also flagged stale-session/session-revision hardening: future session append flows should reject stale revision coordinates rather than blending stale client context.
+- The new intent-switch fixture is accepted as natural-language project memory; it is not yet executable replay coverage.
+- The test database concurrency race remains a tooling/test-harness issue: avoid running DB-backed pytest sessions in parallel against the same `gp_pms_test` schema.
+- Keep the headless `codex exec -c 'model_provider="deepseek_bridge"' -m deepseek-flash` path as the trusted DeepSeek Flash worker route; Ariadne still needs to verify and submit when workspace-write blocks git/Python.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R2: Clarification Merge Semantics |
-| Status | Recommended next |
-| Recommended agents | Claude backend/session lane, Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash targeted regression/integrity lane, Ariadne integration |
+| Name | Sprint R3 candidate: Stale Session / Revision Hardening or Scenario Promotion |
+| Status | Candidate |
+| Recommended agents | Claude backend/session lane, Antigravity/Gemini domain acceptance lane, DeepSeek Flash regression lane, Ariadne integration |
 
-R2 should make clarification turns merge only missing or ambiguous fields into the existing request frame, then convert the relevant R1 xfail scenarios into passing replay coverage.
+R3 should either harden server-side session revision/stale-context handling, or promote selected receptionist natural-language scenarios into executable replay coverage now that clarification merge semantics exist.
 
+## Previous Closeout - Sprint R1
+
+| Item | Value |
+|---|---|
+| Batch | Sprint R1: Reception Scenario Corpus Foundation |
+| Integrated through | Claude replay-harness implementation, Antigravity/Gemini receptionist scenario corpus, DeepSeek Flash validator lane, and Ariadne schema integration repair |
+| Status | Integrated, pushed, mirrors realigned, and audited |
+| Last updated | 2026-07-05 |
+
+R1 established the version-controlled Bernie receptionist scenario corpus under
+`tests/fixtures/bernie_scenarios/`, the `tests/bernie_scenarios/` replay
+harness, and fixture integrity validation. It changed no production backend,
+frontend Diary UI, taskpane, migrations, GraphRAG, live provider prompts,
+PHI/log ingestion, or auto-mode behaviour.
 
 ## Previous Closeout - Sprint D6
 

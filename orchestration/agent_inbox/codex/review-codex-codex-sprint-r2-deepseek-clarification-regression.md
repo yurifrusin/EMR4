@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r2-deepseek-clarification-regression` |
 | Source Task | `codex-sprint-r2-deepseek-clarification-regression` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated after Ariadne fixed one false-positive static import check and verified the full DeepSeek regression file.
+- Follow-up required: Continue expecting Ariadne to verify and submit DeepSeek work when workspace-write blocks git index or Python access.

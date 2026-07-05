@@ -14,6 +14,15 @@
 
 Read these before acting on remembered process details.
 
+- 2026-07-05: Graphify is approved as an opt-in Ariadne navigation aid, not an
+  always-on memory layer. Use it autonomously when the question starts from a
+  known symbol, function, route, class, or UI handler and the goal is impact or
+  orientation. Refresh with `scripts\refresh_code_graph.ps1` when code changed
+  since the last graph build. Prefer `explain` and `affected`; avoid broad
+  natural-language `query` unless narrowed by concrete context. Treat graph
+  output as a map to source/tests, not as authoritative truth. Do not enable
+  Graphify MCP, hooks, or post-commit auto-indexing without a later tooling
+  sprint proving refresh/reload and worker-worktree safety.
 - 2026-07-04: Updated sprint worker mix. Claude is allowed to perform real
   implementation work on `claude/current` when quota is healthy; it is not
   limited to planning. Antigravity/Gemini is not limited to UX work: use it for

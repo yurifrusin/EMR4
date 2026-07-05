@@ -28,16 +28,18 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Native Bernie/Diary domain work with receptionist testing now formalised as a scenario-corpus/replay-harness workstream |
-| **Next recommended work** | Sprint R2: Clarification Merge Semantics; patient collision source hardening remains a near-term native diary-domain follow-up |
+| **Current active track** | Native Bernie/Diary domain work with clarification merge semantics integrated and receptionist scenario coverage expanding |
+| **Next recommended work** | Follow up on stale-session/session-revision hardening or patient collision source edge cases; keep promoting selected receptionist scenarios into executable replay coverage |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
 noisy for broad natural-language graph search. Generated `graphify-out/` is
-ignored. Use `scripts/refresh_code_graph.ps1` only on demand for now; do not
-install Graphify Codex hooks, MCP server config, or post-commit auto-indexing
-until a later tooling sprint proves refresh/reload behaviour and worker safety.
-Details live in `docs/tooling/graphify-spike.md`.
+ignored. Ariadne may use Graphify autonomously for known-symbol orientation or
+impact checks, should refresh the graph first when code has changed, and must
+treat graph output as a map to source/tests rather than truth. Do not install
+Graphify Codex hooks, MCP server config, or post-commit auto-indexing until a
+later tooling sprint proves refresh/reload behaviour and worker safety. Details
+live in `docs/tooling/graphify-spike.md`.
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
@@ -538,7 +540,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Graphify efficacy benchmark tooling |
+| **Latest integration commit** | Sprint R2 clarification merge semantics |
 
 ### Tag map (all tags pushed to remote)
 
