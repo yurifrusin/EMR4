@@ -5,6 +5,56 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint R13: Diary Smoke Harness Recovery
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Restore a clean deterministic Diary review signal after R12 exposed 12 unrelated Bernie session/pilot full-smoke failures |
+| Worker Shape | Claude availability checked first and unavailable until 9:30pm Australia/Brisbane; two DeepSeek Flash lanes replace Claude/Codex worker capacity, plus Antigravity/Gemini domain review |
+| In Scope | Diagnose failing Bernie session/pilot smoke checks, repair stale harness assumptions or narrow real regressions, preserve R12 reason-code coverage, document domain/UX risk classification |
+| Out Of Scope | Backend schema/routes, broad Diary redesign, weakening tests, live Gemini/Office/GitHub Pages calls, unrelated production changes |
+| Verification | Focused failing smoke tests, full `review/test_diary_smoke.py` where feasible, `node --check docs\diary\diary.js` if JS changes, `git diff --check` |
+
+### Workstream R13-A - DeepSeek Smoke Failure Diagnosis
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r13-diary-smoke-diagnosis` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r13-deepseek-diary-smoke-diagnosis.md` |
+| Goal | Classify each full-smoke failure and identify the smallest safe repair path |
+| In Scope | Diagnosis artifact and focused source/test inspection |
+| Out of Scope | Production fixes unless separately approved after plan gate |
+| Verification | Reproduce/cite failing tests and inspect implicated selectors/session mocks |
+| Status | Queued |
+
+### Workstream R13-B - DeepSeek Focused Smoke Recovery
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r13-diary-smoke-focused-fix` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r13-deepseek-diary-smoke-focused-fix.md` |
+| Goal | Implement the smallest deterministic harness/source fix once safe |
+| In Scope | `review/test_diary_smoke.py` and, only if proven necessary, narrow `docs/diary/diary.js` repair |
+| Out of Scope | Removing assertions, broad UI redesign, backend changes, R12 reason-code regression |
+| Verification | Focused smoke failures, R12 reason-code smoke target, full Diary smoke where feasible |
+| Status | Queued |
+
+### Workstream R13-C - Gemini Domain Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-r13-diary-smoke-domain-review.md` |
+| Goal | Ensure harness recovery does not hide real receptionist workflow regressions |
+| In Scope | `docs/receptionist_review_r13.md` only after plan approval |
+| Out of Scope | Production code, test implementation, live provider/Office/GitHub Pages |
+| Verification | Tangible review artifact with acceptance checks |
+| Status | Queued |
+
 ## Bernie Reception Scenario Workstream
 
 The native Bernie/Diary programme now has a formal receptionist-domain testing
