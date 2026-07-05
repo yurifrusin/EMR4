@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R18: Bernie Diary Capability Manifest v1 |
 | Integrated through | Ariadne implementation, two DeepSeek Flash review lanes, Antigravity/Gemini domain review |
-| Status | Focused verification passed; pending commit/push/mirror/audit |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit and GitHub Python Security/CodeQL workflows clean |
 | Last updated | 2026-07-05 |
 
 ## What Changed
