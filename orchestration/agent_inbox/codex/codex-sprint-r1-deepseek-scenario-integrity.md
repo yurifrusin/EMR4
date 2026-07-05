@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r1-deepseek-scenario-integrity` |
-| Status | queued |
+| Status | submitted |
 | Created | 788242c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r1-deepseek-scenario-integrity --summary "Short plan summary"` |
@@ -92,3 +92,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+- Plan: orchestration/agent_inbox/codex/codex-sprint-r1-deepseek-scenario-integrity-plan.md
+- Status: plan_gate — plan written, implementation not started
+- Python runtime: unavailable in this worktree (no python/py in PATH)
+- Next: Codex/orchestrator to review plan and approve "complete sprint task" when ready
