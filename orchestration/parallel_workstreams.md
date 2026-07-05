@@ -5,6 +5,26 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Bernie Reception Scenario Workstream
+
+The native Bernie/Diary programme now has a formal receptionist-domain testing
+track in `orchestration/bernie_reception_scenario_workstream.md`.
+
+Purpose:
+
+- Convert Yuri's exploratory receptionist testing into executable project
+  memory.
+- Start thin: 8-12 backend/session scenarios, not a grand receptionist
+  simulation.
+- Use the corpus to regression-lock clarification, slot-search, roster,
+  patient-advisory, and confirmation invariants as deterministic diary
+  mechanisms evolve.
+
+Recommended next slice when Bernie clarification/state work resumes:
+
+- Sprint R1: Reception Scenario Corpus Foundation.
+- Sprint R2: Clarification Merge Semantics.
+
 ## Operating Rules
 
 - Every agent starts with `python scripts\agent_worktrees.py handin`.

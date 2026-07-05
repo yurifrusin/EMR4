@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Post-Sprint D7 - Bernie Diary UI now renders backend-supplied patient advisory copy for future-booking warnings and no longer invents Margaret-specific fallback text |
-| **Next recommended work** | Continue the native Bernie diary-domain tail with patient collision source hardening: direct requested-day lookup plus source appointment exclusion for reschedule/extend flows |
+| **Current active track** | Native Bernie/Diary domain work with receptionist testing now formalised as a scenario-corpus/replay-harness workstream |
+| **Next recommended work** | Sprint R1: Reception Scenario Corpus Foundation, then Sprint R2: Clarification Merge Semantics; patient collision source hardening remains a near-term native diary-domain follow-up |
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.
