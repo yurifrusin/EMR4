@@ -26,6 +26,56 @@ Recommended next slice when Bernie clarification/state work resumes:
 - Sprint R2: Clarification Merge Semantics.
 - Sprint R3: Stale Session / Revision Hardening.
 
+## Sprint R4: Backdated/Past-Date Safety
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Prevent Bernie backdated or past absolute appointment dates from reaching safe executable slot-search/proposal states while preserving same-day past-window handling |
+| Worker Shape | Two DeepSeek Flash lanes replacing Claude while Claude quota recuperates, Antigravity/Gemini domain-policy review, Ariadne orchestration/integration |
+| In Scope | Bernie slot normalizer past-date semantics, interpret/supervised booking route behavior, focused tests, domain-policy review artifact |
+| Out Of Scope | Diary UI redesign, Word/taskpane changes, GitHub Pages assets, live Gemini/Vertex calls, D8 patient collision cap/self-source work, broad session-store redesign, GraphRAG/MCP/indexer automation |
+| Verification | py_compile; focused Bernie normalizer/interpret/supervised pytest; adjacent D8 collision tests; git diff --check; no browser/Pages checks unless frontend files change |
+
+### Workstream R4-A - DeepSeek Implementation Lane
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r4-past-date-hardening` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r4-deepseek-past-date-hardening.md` |
+| Goal | Harden Bernie slot normalization and proposal paths so absolute past dates block deterministically |
+| In Scope | `app/services/bernie_slot_normalizer.py`, narrowly related `app/routers/appointments.py`, focused route/normalizer tests |
+| Out of Scope | Diary UI, taskpane/Word, live provider calls, broad collision work |
+| Verification | py_compile and focused pytest for touched Bernie normalizer/route tests |
+| Status | Queued |
+
+### Workstream R4-B - DeepSeek Adversarial Review Lane
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r4-past-date-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r4-deepseek-adversarial-past-date-review.md` |
+| Goal | Independently probe bypasses and add/propose regression evidence for past-date safety |
+| In Scope | Bernie normalizer/supervised/interpret tests and review notes |
+| Out of Scope | Broad production refactors, diary UI, duplicated implementation-lane edits unless critical |
+| Verification | py_compile, focused pytest, git diff --check, or explicit review artifact |
+| Status | Queued |
+
+### Workstream R4-C - Gemini Domain Policy Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-r4-past-date-domain-policy-review.md` |
+| Goal | Define receptionist-safe policy for absolute past dates, same-day fully-past windows, and stale reference-date cases |
+| In Scope | Review packet, optional `docs/receptionist_review_r4.md`, acceptance criteria/test-design notes |
+| Out of Scope | Production code edits, diary UI, live provider calls |
+| Verification | Review packet with actionable acceptance criteria and risks |
+| Status | Queued |
+
 ## Sprint R3: Stale Session / Revision Hardening
 
 | Item | Value |

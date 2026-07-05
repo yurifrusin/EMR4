@@ -51,11 +51,11 @@ No required manual review for Sprint R3. This is backend test/domain-memory work
 
 | Item | Value |
 |---|---|
-| Name | Patient Collision Source Hardening or Stale-Session Scenario Promotion |
-| Status | Candidate after R3 push/mirror/audit |
-| Recommended agents | DeepSeek Flash for bounded tests/review, Antigravity/Gemini for domain-policy/test-design, Claude when quota recovers for backend implementation or architecture review |
+| Name | Sprint R4: Backdated/Past-Date Safety |
+| Status | Dispatched after R3 push/mirror/audit |
+| Recommended agents | Two DeepSeek Flash workers for implementation and adversarial review while Claude recuperates; Antigravity/Gemini for domain-policy/test-design |
 
-R4 should either harden patient collision source edge cases, or promote the most valuable stale-session natural-language fixtures into executable replay coverage.
+R4 targets the remaining backdated-date risk surfaced by the D8 domain-policy review: absolute requested dates before the request/reference date should fail closed before executable slot-search/proposal states, while same-day fully-past windows keep their existing clarifying behavior.
 
 ## Previous Closeout - Sprint R2
 
