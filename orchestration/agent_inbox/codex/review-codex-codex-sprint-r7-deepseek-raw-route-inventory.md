@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Raw route inventory plan submitted from host after bridge Python sandbox gap.
+Raw route inventory artifact submitted.
 
 ## Worker Completion Notes
 
