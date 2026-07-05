@@ -82,3 +82,44 @@ Proposed refinement to the action grammar:
 After Yuri and Ariadne finish reviewing Fable's plan, this amendment should be
 included in the compiled response sent back to Fable for confirmation and
 stress-testing.
+
+## 2026-07-05 - Schema-Literate Bernie, Not Code-Authoritative Bernie
+
+Yuri raised that EMR4 is now building "muscles, sinews and moveable limbs" for
+the Diary: native state transitions, validation paths, receptionist scenarios,
+reason-code policy, freshness checks, and explicit confirmation boundaries.
+Because Gemini has a large context window and strong domain reasoning, Bernie
+should eventually understand the intricacies of this diary/reception language
+well enough to feel native to the Diary system.
+
+The principle to preserve:
+
+> Bernie should be schema-literate, not code-authoritative.
+
+Recommended architecture:
+
+- Give Bernie a compact, versioned, read-only Diary Capability Manifest that
+  describes diary entities, states, transitions, permissions, reason-code rules,
+  roster semantics, patient-link semantics, audit evidence, and confirmation
+  boundaries.
+- Prefer curated generated artifacts over dumping raw code into the model
+  context. The manifest may be derived from constants, backend schemas, and
+  deterministic tests, but the runtime code and backend state machine remain the
+  source of authority.
+- Bernie's role is to translate receptionist language into typed diary movement
+  proposals such as slot search, appointment move/resize, status change,
+  cancellation with reason, patient link, or clarification request.
+- The deterministic diary domain remains the adjudicator for authorization,
+  freshness, collision checks, roster policy, reason-code validity, audit
+  evidence, and required human confirmation.
+- Gemini's large context window should be used for ambiguity handling, domain
+  fluency, long-range consistency, and explanation, not for bypassing typed
+  contracts or inventing new write paths.
+- Bernie explanations should expose why a proposed action is allowed, blocked,
+  or needs clarification in terms of the manifest and server-confirmed evidence.
+
+Future sprint candidate:
+
+- **Bernie Diary Capability Manifest v1**: create a read-only manifest and
+  golden tests proving Bernie-facing prompt/context material matches the native
+  diary action vocabulary and cannot grant write authority by itself.

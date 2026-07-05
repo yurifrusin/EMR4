@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 4ad3bf6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r17-expired-session-ux-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/receptionist_review_r17.md` captured the receptionist-domain review; Ariadne implemented the accepted visible banner and refresh-stop behaviour in the Diary surface.
+- Verification run: Antigravity/Gemini inspected the auth/token paths and produced review guidance; Ariadne verified with focused and full deterministic Diary smoke tests.
+- Remaining risks: Antigravity recommended richer connecting/unauthorized copy variants and offline-network handling; Sprint R17 intentionally kept one simple expired-session banner and explicit `401` handling.

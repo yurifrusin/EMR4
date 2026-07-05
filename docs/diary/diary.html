@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=134" />
-  <script src="diary.js?v=171" defer></script>
+  <link rel="stylesheet" href="diary.css?v=135" />
+  <script src="diary.js?v=172" defer></script>
 </head>
 <body>
 
@@ -71,6 +71,14 @@
 </div>
 
 <!-- ═══ GRID ═════════════════════════════════════════════ -->
+<div id="diary-auth-banner" class="hidden" data-testid="diary-auth-banner" role="status" aria-live="polite">
+  <div class="diary-auth-banner-inner">
+    <div class="diary-auth-banner-kicker">Session expired</div>
+    <div class="diary-auth-banner-heading">Please sign in again before using the diary.</div>
+    <div class="diary-auth-banner-text">Close and reopen the taskpane to refresh your EMR4 session.</div>
+  </div>
+</div>
+
 <div id="diary-body">
   <div id="diary-loading">
     <div class="spinner"></div>

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 4ad3bf6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r17-deepseek-expired-session-banner --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: DeepSeek Flash provided read-only implementation guidance through the Codex subagent channel; Ariadne implemented the accepted seams in `docs/diary/diary.html`, `docs/diary/diary.css`, `docs/diary/diary.js`, and `review/test_diary_smoke.py`.
+- Verification run: `node --check docs\diary\diary.js`; focused auth-banner smoke `pytest review\test_diary_smoke.py -q --tb=short -k "auth_banner"`; full Diary smoke; frontend asset version check; `git diff --check`.
+- Remaining risks: no backend/login redesign was attempted; generic network loss remains distinct future work rather than an auth-expiry banner case.

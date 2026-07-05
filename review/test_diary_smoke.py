@@ -56,6 +56,48 @@ def assert_bernie_confirmed_state(page):
     assert page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
 
 
+def route_minimal_diary_api(page):
+    """Route enough non-smoke API calls for deterministic diary auth tests."""
+    def handle_api(route):
+        url = route.request.url
+        if "/api/v1/auth/me" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
+        elif "/api/v1/diary/template" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "practice_name": "Smoke Practice",
+                "slot_defaults": {"start": "09:00", "end": "17:00", "interval_minutes": 15},
+                "columns": [{
+                    "room_label": "Room 1",
+                    "assignment": "Dr Alex Shera",
+                    "practitioner_id": "real-prac-auth",
+                    "practitioner_ahpra": "MED0001234567"
+                }]
+            }))
+        elif "/api/v1/appointments/types" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/appointments" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([
+                {"id": "loc-1", "name": "Main Clinic", "is_active": True}
+            ]))
+        elif "/api/v1/diary/roster" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"entries": []}))
+        elif "/api/v1/diary/waiting-areas" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/appointments/bernie/pilot-eligibility" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "surface": "bernie_staff_review",
+                "enabled": False,
+                "eligible": False,
+                "reason": "review_auth_fixture"
+            }))
+        else:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
+
+    page.route("**/api/v1/**", handle_api)
+
+
 @pytest.fixture(scope="module")
 def diary_page():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
@@ -122,6 +164,65 @@ def trigger_route_intercepted_bernie(page, instruction="Please find practitioner
 def test_diary_check(diary_page, check):
     result = harness.run_check(diary_page, check)
     assert result["passed"], result
+
+
+def test_auth_banner_shows_when_token_missing(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    route_minimal_diary_api(diary_page)
+    harness.clear_auth(diary_page)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("[data-testid='diary-auth-banner']:not(.hidden)", state="visible", timeout=5000)
+        assert "Please sign in again" in diary_page.locator("[data-testid='diary-auth-banner']").text_content()
+        assert diary_page.locator("#diary-grid-container.hidden").count() == 1
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_auth_banner_shows_and_clears_expired_local_token(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    route_minimal_diary_api(diary_page)
+
+    try:
+        diary_page.evaluate("() => localStorage.setItem('emr4_token', 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjF9.sig')")
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("[data-testid='diary-auth-banner']:not(.hidden)", state="visible", timeout=5000)
+        assert diary_page.evaluate("() => localStorage.getItem('emr4_token')") is None
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_auth_banner_shows_and_clears_token_after_backend_401(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    diary_page.route(
+        "**/api/v1/**",
+        lambda route: route.fulfill(status=401, content_type="application/json", body=json.dumps({"detail": "expired"}))
+    )
+
+    try:
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("[data-testid='diary-auth-banner']:not(.hidden)", state="visible", timeout=5000)
+        assert diary_page.evaluate("() => localStorage.getItem('emr4_token')") is None
+        assert diary_page.locator("#diary-error:not(.hidden)").count() == 0
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
 def test_booking_audit_history(diary_page):

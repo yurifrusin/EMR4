@@ -2356,6 +2356,26 @@ function showError(msg) {
   if (err) { err.textContent = msg; err.classList.toggle("hidden", !msg); }
 }
 
+function isAuthBannerVisible() {
+  const banner = document.getElementById("diary-auth-banner");
+  return !!banner && !banner.classList.contains("hidden");
+}
+
+function showAuthBanner() {
+  const banner = document.getElementById("diary-auth-banner");
+  if (banner) banner.classList.remove("hidden");
+  stopRefresh();
+  showLoading(false);
+  showError("");
+  const container = document.getElementById("diary-grid-container");
+  if (container) container.classList.add("hidden");
+}
+
+function hideAuthBanner() {
+  const banner = document.getElementById("diary-auth-banner");
+  if (banner) banner.classList.add("hidden");
+}
+
 function clearExpiredAuthToken() {
   token = null;
   currentUserRole = null;
@@ -2367,6 +2387,9 @@ function clearExpiredAuthToken() {
 async function apiFetch(path, opts = {}) {
   if (token && isTokenExpired(token)) {
     clearExpiredAuthToken();
+    showAuthBanner();
+    setStatus("Session expired - reopen the taskpane to sign in again.");
+    throw new Error("401 Unauthorized");
   }
   const headers = {
     "Content-Type": "application/json",
@@ -2377,6 +2400,7 @@ async function apiFetch(path, opts = {}) {
   const res = await fetch(`${API_BASE}${path}`, { ...opts, headers });
   if (res.status === 401) {
     clearExpiredAuthToken();
+    showAuthBanner();
     setStatus("Session expired — reopen the taskpane to sign in again.");
     throw new Error("401 Unauthorized");
   }
@@ -3872,9 +3896,11 @@ async function loadDiary(silent = false, options = {}) {
 
   if (!token && !isSmokeMode) {
     setStatus("Waiting for auth token…");
+    showAuthBanner();
     return;
   }
 
+  hideAuthBanner();
   await ensureCurrentUserRole();
 
   if (!silent) {
@@ -4135,6 +4161,9 @@ async function loadDiary(silent = false, options = {}) {
     const total = visibleAppointments.length;
     setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}${isSmokeMode ? " [SMOKE MODE]" : ""}`);
   } catch (e) {
+    if (isAuthBannerVisible()) {
+      return;
+    }
     if (!silent) {
       showLoading(false);
       showError("Failed to load diary: " + (e.message || String(e)));
@@ -4230,6 +4259,10 @@ function shiftDay(delta) {
 function scheduleRefresh() {
   if (refreshTimer) clearTimeout(refreshTimer);
   refreshTimer = setTimeout(() => { loadDiary(true); scheduleRefresh(); }, REFRESH_INTERVAL_MS);
+}
+function stopRefresh() {
+  if (refreshTimer) clearTimeout(refreshTimer);
+  refreshTimer = null;
 }
 function doRefresh() {
   clearStaleBernieBookingState();
@@ -6493,7 +6526,8 @@ Office.onReady(() => {
 
   if (token && isTokenExpired(token)) {
     clearExpiredAuthToken();
-    setStatus("Waiting for auth token...");
+    showAuthBanner();
+    setStatus("Session expired - reopen the taskpane to sign in again.");
   }
 
   if (Office.context?.ui?.addHandlerAsync) {
@@ -6512,6 +6546,7 @@ Office.onReady(() => {
             currentUserRole = getRoleFromToken(token);
             currentUserRoleToken = currentUserRole ? token : null;
             localStorage.setItem("emr4_token", token);
+            hideAuthBanner();
             updateAdminButtonVisibility();
             loadDiary();
             scheduleRefresh();
@@ -6551,6 +6586,10 @@ Office.onReady(() => {
     }
   }
 
+  if (!token && !isSmoke && !hasLiveDevReview && !isDevFixture) {
+    setStatus("Waiting for auth token...");
+    showAuthBanner();
+  }
   if (token || isSmoke || hasLiveDevReview || isDevFixture) { loadDiary(); scheduleRefresh(); }
   if (isSmoke || hasLiveDevReview || isDevFixture) { initBernieReview(); }
   checkBerniePilotEligibility();

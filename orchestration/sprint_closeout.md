@@ -8,51 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R16: Status-Specific Reason-Code Narrowing |
-| Integrated through | Ariadne implementation, DeepSeek Flash implementation plan, Antigravity/Gemini receptionist-domain review |
-| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean |
+| Batch | Sprint R17: Expired-Session Diary UX Banner |
+| Integrated through | Ariadne implementation, DeepSeek Flash auth-banner plan, Antigravity/Gemini receptionist-domain review |
+| Status | Ready for final integration commit, push, mirror realign, and audit |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added `STATUS_SPECIFIC_REASON_CODE_OPTIONS` in `docs/diary/diary.js` so `Cancelled`, `DNA`, and `NoShow` receive narrower first-party reason-code lists.
-- Kept `PATIENT_UNWELL` display-only and never selectable in the first-party dropdown.
-- Accepted Gemini's R16 domain decision that `LEFT_WITHOUT_SEEN` belongs under `DNA` and `NoShow` until EMR4 has a dedicated terminal walkout status.
-- Cache-busted `docs/diary/diary.html` to `diary.js?v=171`.
-- Tightened `review/test_diary_smoke.py` to assert exact `DNA`/`NoShow` option lists and preserve the `Cancelled` exclusion checks.
+- Added a visible `[data-testid="diary-auth-banner"]` in `docs/diary/diary.html` for missing, locally expired, or backend-rejected Diary auth.
+- Styled the banner in `docs/diary/diary.css` as a calm, staff-facing session notice that sits above the Diary body.
+- Updated `docs/diary/diary.js` so auth loss clears the token, hides stale grid content, suppresses generic `401` diary errors, stops background refresh polling, and hides the banner again after valid re-auth.
+- Cache-busted `docs/diary/diary.html` to `diary.css?v=135` and `diary.js?v=172`.
+- Added three deterministic non-smoke auth-banner tests to `review/test_diary_smoke.py` for missing token, expired local token, and backend `401`.
+- Preserved Gemini's receptionist-domain review in `docs/receptionist_review_r17.md`.
+- Captured Yuri/Ariadne's "schema-literate, not code-authoritative" Bernie architecture note in `orchestration/bernie_native_diary_agent_notes.md`.
 
 ## Verification
 
 - JS syntax passed: `node --check docs\diary\diary.js`.
-- Focused reason-code smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code" --junitxml=review\reason-code-review.xml` (7 passed).
-- Full Diary smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (118 passed).
+- Focused auth-banner smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "auth_banner" --junitxml=review\auth-banner-review.xml` (3 passed).
+- Full Diary smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (121 passed).
 - Frontend asset check passed: `..\.venv\Scripts\python.exe ..\scripts\check_frontend_versions.py`.
-- Whitespace and encoding sweep passed: `git diff --check` and targeted mojibake scan.
+- Whitespace check passed: `git diff --check`.
 
 ## Recommended User Review
 
-No required manual review before continuing. This is covered by deterministic Diary smoke tests and static asset checks. Optional live review after deploy: open the Diary, edit an appointment, choose `Cancelled`, `DNA`, and `No Show`, and confirm each dropdown only shows the status-specific administrative codes.
+No required manual review before continuing. This is covered by deterministic non-smoke auth tests, full Diary smoke coverage, and static asset checks. Optional live review after deploy: open the Diary with an expired/stale session and confirm the banner appears instead of a blank grid.
 
 ## Not Required Before Moving On
 
 - No backend/API/database verification is required because no backend files, schemas, or migrations changed.
 - No Office taskpane build is required because the changed production surface is `docs/diary`, not bundled taskpane source.
 - No live Gemini/Vertex call is required; Gemini's contribution was a documentation-only domain review.
+- No user manual auth-expiry test is required before the next sprint because the three auth-loss paths are covered by deterministic Playwright route interception.
 
 ## Known Follow-Up
 
-- Consider a future dedicated `Left without being seen` terminal status if operational reporting needs it.
-- Consider a staff-facing expired-session banner if production auth expiry currently leaves the Diary blank or ambiguous.
+- Consider richer connecting/unauthorized copy variants and explicit offline-network handling as separate UX hardening.
+- Consider a live Office dialog re-auth/reopen affordance only if the taskpane can safely support it.
+- Create the Bernie Diary Capability Manifest so Bernie can be schema-literate over native diary movements without becoming code-authoritative.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R17: Expired-Session Diary UX Banner |
+| Name | Sprint R18: Bernie Diary Capability Manifest v1 |
 | Status | Proposed |
-| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for receptionist workflow review, and DeepSeek Flash lanes as sprint boundaries justify |
+| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for domain/context critique, and DeepSeek Flash lanes as sprint boundaries justify |
 
-Recommended scope: add a clear staff-facing expired-session banner/state when the Diary auth token is missing or expired, so staff are not left with a blank/ambiguous Diary.
+Recommended scope: define a compact, read-only, versioned Diary Capability Manifest for Bernie that describes native diary entities, states, transitions, reason-code rules, roster semantics, patient-link semantics, evidence, and confirmation boundaries. The manifest should support Gemini's domain fluency while preserving deterministic backend authority.
 
 ## Previous Closeout - Sprint R4
 
