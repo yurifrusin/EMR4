@@ -8,10 +8,30 @@ param(
 
     [int]$DenseDays = 1,
 
-    [switch]$IncludeOrderedSnapshots
+    [switch]$IncludeOrderedSnapshots,
+
+    [int]$MaxRootCount = 2,
+
+    [int]$MaxSampleSize = 100,
+
+    [int]$MaxDenseDays = 1,
+
+    [switch]$AllowLargeRun
 )
 
 $ErrorActionPreference = "Stop"
+
+if (-not $AllowLargeRun) {
+    if ($Root.Count -gt $MaxRootCount) {
+        throw "Refusing broad historical diary run: root count $($Root.Count) exceeds MaxRootCount $MaxRootCount. Use -AllowLargeRun only after a documented safety review."
+    }
+    if ($SampleSize -gt $MaxSampleSize) {
+        throw "Refusing broad historical diary run: SampleSize $SampleSize exceeds MaxSampleSize $MaxSampleSize. Use -AllowLargeRun only after a documented safety review."
+    }
+    if ($DenseDays -gt $MaxDenseDays) {
+        throw "Refusing broad historical diary run: DenseDays $DenseDays exceeds MaxDenseDays $MaxDenseDays. Use -AllowLargeRun only after a documented safety review."
+    }
+}
 
 function Get-RootLabel {
     param([string]$Path)

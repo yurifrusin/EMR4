@@ -8,6 +8,57 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H10: Historical Diary Trove Broad-Run Guardrails |
+| Integrated through | Ariadne local-only guardrail/comparer sprint; no external workers used because scope was raw-free and narrowly bounded |
+| Status | Integrated locally; final push/workflow status pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added default broad-run caps to `scripts\historical_diary_structure_classifier.ps1`: `MaxRootCount=2`, `MaxSampleSize=100`, and `MaxDenseDays=1`.
+- Added explicit `-AllowLargeRun` as the only bypass path for those caps, intended only after documented safety/runtime review.
+- Added `scripts\historical_diary_event_summary_compare.py`, a safe comparer for two validator-approved neutral event summaries.
+- Extended `scripts\historical_diary_output_safety.py` to allow neutral comparison keys only.
+- Added `tests\test_historical_diary_event_summary_compare.py`.
+- Ran local H8-vs-H9 comparison and validated ignored `local_data\historical-diary-trove\inventory\event_summary_compare_h10.json`.
+- Added `docs\historical-diary-trove-broad-run-guardrails.md`.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_event_summary_compare.py scripts\historical_diary_event_summary_dry_run.py scripts\historical_diary_output_safety.py tests\test_historical_diary_event_summary_compare.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_event_summary_compare.py tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (20 passed; existing warnings only).
+- Guardrail smoke passed: classifier refused `SampleSize 101` before opening Word.
+- Local comparison passed: `.venv\Scripts\python.exe scripts\historical_diary_event_summary_compare.py local_data\historical-diary-trove\inventory\event_summary_h8.json local_data\historical-diary-trove\inventory\event_summary_h9.json`.
+- Safety validation passed for ignored H10 comparison output.
+- Validation pending final commit, audit, and post-push workflows.
+
+## Local Comparison Result
+
+- `pilot`: H9 ordered output shifted 8 transitions from `no_structural_change` to `small_content_delta` compared with H8 grouped replay.
+- `pilot_01`: H9 ordered output shifted 1 transition from `no_structural_change` to `small_content_delta` compared with H8 grouped replay.
+- Interpretation: ordered neutral snapshots are the better substrate for future temporal work.
+
+## Recommended User Review
+
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H10 is local tooling/tests/docs only and does not touch raw diary files.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- H11 should run a bounded multi-day/runtime probe without casually bypassing H10 caps.
+- Do not infer appointment create/delete/status semantics from H10; it is guardrail/comparison tooling only.
+
+## Previous Closeout - Sprint H9
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H9: Historical Diary Trove Ordered Neutral Event Export |
 | Integrated through | Ariadne local-only ordered neutral export; no external workers used because scope was raw-free and narrowly bounded |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |

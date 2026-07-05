@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H9 ordered local neutral snapshot event export completed; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H10: broad ignored ordered-export guardrail before any larger trove processing |
+| **Current active track** | Historical diary trove H10 broad-run guardrails completed; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H11: bounded multi-day runtime probe, still ignored, capped, validator-gated, and non-semantic |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -83,8 +83,17 @@ chronological reconstruction: both pilot roots produced only
 adjacent count deltas without exposing filenames, paths, timestamps, labels, or
 text. Safe H7/H8 findings live in
 `docs/historical-diary-trove-synthetic-event-model.md`; safe H9 findings live
-in `docs/historical-diary-trove-ordered-event-export.md`. H10 should add
-larger-run guardrails before any broader trove processing.
+in `docs/historical-diary-trove-ordered-event-export.md`. H10 added default
+broad-run caps to `scripts/historical_diary_structure_classifier.ps1`
+(`MaxRootCount=2`, `MaxSampleSize=100`, `MaxDenseDays=1`, explicit
+`-AllowLargeRun` required to bypass), plus
+`scripts/historical_diary_event_summary_compare.py` and synthetic tests for
+safe H8/H9 event-summary comparison. The ignored H10 comparison showed H8's
+grouped replay under-counted ordered small deltas by 8 in `pilot` and 1 in
+`pilot_01`. Safe H10 findings live in
+`docs/historical-diary-trove-broad-run-guardrails.md`. H11 should measure a
+small bounded multi-day/runtime probe without lifting the broad-run guardrails
+casually.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
