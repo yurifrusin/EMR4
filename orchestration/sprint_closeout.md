@@ -8,29 +8,30 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H1: Historical Diary Trove Local Inventory and Safety Boundary |
-| Integrated through | Ariadne local-only metadata inventory; no external workers used because raw files are PHI-bearing |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
+| Batch | Sprint H2: Historical Diary Trove Parser Feasibility |
+| Integrated through | Ariadne local-only structural OLE/Word probe; no external workers used because raw files are PHI-bearing |
+| Status | Local validation complete; push, mirror realign, audit, and workflows pending |
 | Last updated | 2026-07-06 |
 
 ## What Changed
 
-- Added `scripts/historical_diary_inventory.py`, a local-first inventory tool that emits aggregate metadata only and intentionally omits filenames, raw paths, document text, document metadata strings, and PHI-bearing values.
-- Ran the inventory against ignored pilot folders `local_data/historical-diary-trove/raw/pilot/` and `local_data/historical-diary-trove/raw/pilot_01/`; detailed JSON output remains ignored under `local_data/historical-diary-trove/inventory/`.
-- Added `docs/historical-diary-trove-pilot-inventory.md` with safe H1 findings: original `pilot` has 411 `.doc` files, 60,631,014 bytes, no duplicate hash prefixes, 408 classic Word/OLE signatures, and 3 tiny non-OLE `.doc` signatures; comparison `pilot_01` has 584 `.doc` files, 79,252,804 bytes, no duplicate hash prefixes, 582 classic Word/OLE signatures, and 2 tiny non-OLE `.doc` signatures.
-- Recorded the discrepancy between the expected 414 files and observed 411 files; no filenames were printed or committed.
-- Updated `AGENTS.md` so future agents know the pilot exists, raw files remain local/ignored, and H2 parser feasibility is next.
-- No raw diary files, filenames, patient content, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+- Added `scripts/historical_diary_doc_probe.py`, a pure-Python OLE compound-document structural probe for legacy Word `.doc` files.
+- Ran the probe against 10 dense-day candidate files from each ignored pilot folder; detailed JSON output remains ignored under `local_data/historical-diary-trove/inventory/doc_probe_h2.json`.
+- Added `docs/historical-diary-trove-parser-feasibility.md` with safe H2 findings: both pilots' dense samples are valid OLE Word documents with `WordDocument`, `1Table`, `Data`, and summary-information streams present in 10/10 sampled files.
+- Confirmed Word binary header `wIdent=eca5` and `nFib=193` in 10/10 sampled files from both `pilot` and `pilot_01`.
+- Recorded that local conversion tools (`soffice`, `antiword`, `catdoc`, `wvText`, `olefile`, `win32com`) were unavailable, so H2 used structural probing only.
+- Updated `AGENTS.md` so future agents know H2 succeeded structurally and H3 is the next local-only extraction spike.
+- No raw diary files, filenames, patient content, document text, document metadata strings, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
 
 ## Verification
 
-- Inventory script compile passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_inventory.py`.
-- Pilot inventory commands passed for both `pilot` and `pilot_01` with `.venv\Scripts\python.exe scripts\historical_diary_inventory.py --root ... --output ... --print-summary`.
+- Structural probe compile passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_doc_probe.py`.
+- H2 structural probe command passed: `.venv\Scripts\python.exe scripts\historical_diary_doc_probe.py --root local_data\historical-diary-trove\raw\pilot --root local_data\historical-diary-trove\raw\pilot_01 --output local_data\historical-diary-trove\inventory\doc_probe_h2.json --sample-size 10 --dense-days 2 --print-summary`.
 - Whitespace check pending final run before commit.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H1 is metadata/tooling/docs-only and does not commit raw files or expose PHI. Yuri may optionally confirm whether 411 vs expected 414 is acceptable or whether three files were missed during the first copy.
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H2 is structural tooling/docs-only and does not commit raw files, filenames, document text, or PHI.
 
 ## Not Required Before Moving On
 
@@ -41,20 +42,28 @@ No required manual review before continuing if validation, push, audit, and post
 
 ## Known Follow-Up
 
-- H2 should test parser feasibility on 5-10 local `.doc` snapshots from each pilot set without committing filenames, text, metadata strings, or patient/staff labels.
-- Determine whether chronology is recoverable from filenames, OLE metadata, embedded visible diary dates, or adjacent binary/structural similarity.
-- Treat the three tiny non-OLE `.doc` files as possible ancillary/non-snapshot files until H2 proves their role.
-- Do not process the full 58k-file trove until parser and de-identification boundaries are proven on the pilot.
+- H3 should attempt local text/structure extraction on 2-3 files from each pilot without committing filenames, text, metadata strings, or patient/staff labels.
+- Determine whether visible diary date, time labels, resource columns, and appointment-block counts are recoverable.
+- Decide whether to install/use a local converter, implement a minimal Word binary piece-table extractor, or use hidden/local Word automation under ignored outputs.
+- Do not process the full 58k-file trove until extraction and de-identification boundaries are proven on the pilots.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint H2: Historical Diary Trove Parser Feasibility |
+| Name | Sprint H3: Historical Diary Trove Local Text/Structure Extraction Spike |
 | Status | Proposed |
 | Recommended agents | Ariadne local-first for raw PHI inspection; external workers only on non-PHI parser code, synthetic fixtures, or safe summaries |
 
-Recommended scope: parse or structurally inspect 5-10 consecutive local snapshots from both pilots, recover neutral diary-grid facts if possible, compare Sunday/atypical versus busier churn, and commit only non-PHI feasibility findings.
+Recommended scope: locally extract or convert 2-3 sample documents from each pilot into ignored temporary outputs, classify whether neutral diary-grid facts are recoverable, and commit only non-PHI feasibility findings.
+
+## Previous Closeout - Sprint H1
+
+Sprint H1 added `scripts/historical_diary_inventory.py` and safe aggregate
+inventory docs for `pilot` and `pilot_01`. The two pilot sets contain 411 and
+584 `.doc` files respectively; 990 files have classic Word/OLE signatures and 5
+tiny `.doc` files have non-OLE signatures. Raw files and detailed JSON stayed
+ignored under `local_data/`; no filenames, document text, or PHI were committed.
 
 ## Previous Closeout - Sprint R25
 

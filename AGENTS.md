@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H1 pilot inventory completed locally; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H2: parser feasibility on 5-10 local pilot `.doc` snapshots, with no committed PHI and no external-provider raw-data exposure |
+| **Current active track** | Historical diary trove H2 parser feasibility completed locally; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H3: local text/structure extraction spike on tiny pilot samples, with no committed PHI and no external-provider raw-data exposure |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -42,9 +42,12 @@ in `local_data/historical-diary-trove/raw/pilot/` (likely Sunday/atypical) and
 comparison. Across both sets, 990 files have classic Word/OLE signatures and 5
 tiny `.doc` files have non-OLE signatures. The safe committed summary is
 `docs/historical-diary-trove-pilot-inventory.md`; detailed inventory JSON is
-ignored under `local_data/historical-diary-trove/inventory/`. H2 should test
-parser feasibility on tiny local samples from both pilots before touching the
-full trove.
+ignored under `local_data/historical-diary-trove/inventory/`. H2 structural
+probing found valid Word/OLE `WordDocument`, `1Table`, and `Data` streams with
+Word header `nFib=193` in 10/10 dense-day samples from each pilot; safe findings
+live in `docs/historical-diary-trove-parser-feasibility.md`. H3 should attempt
+local-only text/structure extraction on tiny samples before touching the full
+trove.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
