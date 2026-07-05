@@ -292,6 +292,87 @@ def test_date_range_exceeds_14_days_blocks():
     assert "constraint_validation_error" in codes
 
 
+
+# ── Past-date guard ──────────────────────────────────────────────────────
+
+def test_absolute_date_from_before_reference_date_blocks():
+    """date_from before reference_date must block with requested_date_in_past."""
+    result = normalize_slot_search_command(
+        _cmd(practitioner_id=PRAC_ID, date_from="2026-06-28"),
+        reference_date=REF_DATE,
+    )
+    assert result.safe is False
+    codes = {b.code for b in result.blocks}
+    assert "requested_date_in_past" in codes
+    assert result.constraint is None
+
+
+def test_absolute_date_from_equal_to_reference_date_passes():
+    """Same-day date_from equals reference_date, must remain safe."""
+    result = normalize_slot_search_command(
+        _cmd(practitioner_id=PRAC_ID, date_from="2026-07-01"),
+        reference_date=REF_DATE,
+    )
+    assert result.safe is True
+    assert result.constraint is not None
+    assert result.constraint.date_from == REF_DATE
+
+
+def test_absolute_date_from_after_reference_date_passes():
+    """Future date_from after reference_date must pass normally."""
+    future = REF_DATE + timedelta(days=1)
+    result = normalize_slot_search_command(
+        _cmd(practitioner_id=PRAC_ID, date_from=str(future)),
+        reference_date=REF_DATE,
+    )
+    assert result.safe is True
+    assert result.constraint is not None
+
+
+def test_relative_today_passes_past_date_guard():
+    """Today token resolves to reference_date, must not trigger past-date block."""
+    result = normalize_slot_search_command(
+        _cmd(practitioner_id=PRAC_ID, date_from="today"),
+        reference_date=REF_DATE,
+    )
+    assert result.safe is True
+    assert result.constraint is not None
+    assert result.constraint.date_from == REF_DATE
+
+
+def test_relative_tomorrow_passes_past_date_guard():
+    """Tomorrow token resolves after reference_date, must not trigger past-date block."""
+    result = normalize_slot_search_command(
+        _cmd(practitioner_id=PRAC_ID, date_from="tomorrow"),
+        reference_date=REF_DATE,
+    )
+    assert result.safe is True
+    assert result.constraint is not None
+    assert result.constraint.date_from == REF_DATE + timedelta(days=1)
+
+
+def test_past_date_block_without_reference_date_passes():
+    """Without reference_date, past-date guard does not fire (no reference to compare against)."""
+    result = normalize_slot_search_command(
+        _cmd(practitioner_id=PRAC_ID, date_from="2025-01-01"),
+    )
+    assert result.safe is True
+    assert result.constraint is not None
+
+
+def test_past_date_block_single_day_in_past_blocks():
+    """A single day in the past blocks, not just far past dates."""
+    yesterday = REF_DATE - timedelta(days=1)
+    result = normalize_slot_search_command(
+        _cmd(practitioner_id=PRAC_ID, date_from=str(yesterday)),
+        reference_date=REF_DATE,
+    )
+    assert result.safe is False
+    codes = {b.code for b in result.blocks}
+    assert "requested_date_in_past" in codes
+    assert result.constraint is None
+
+
 # ── Purity / non-mutation proof ───────────────────────────────────────────────
 
 def test_function_has_no_db_or_io_imports():

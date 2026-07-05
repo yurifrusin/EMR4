@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Plan packet submitted; no production code changes.
+Implemented normalizer past-date guard and route regression tests; host validation passed in integration.
 
 ## Worker Completion Notes
 
