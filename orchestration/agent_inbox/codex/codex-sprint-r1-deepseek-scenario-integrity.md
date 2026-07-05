@@ -89,10 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
-- Plan: orchestration/agent_inbox/codex/codex-sprint-r1-deepseek-scenario-integrity-plan.md
-- Status: plan_gate — plan written, implementation not started
-- Python runtime: unavailable in this worktree (no python/py in PATH)
-- Next: Codex/orchestrator to review plan and approve "complete sprint task" when ready
+- Files changed: `tests/test_bernie_scenario_integrity.py`; this task packet completion notes.
+- Verification run: DeepSeek Flash attempted verification but could not resolve Python from the sandbox. Ariadne reran verification from the integration Python: `C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m py_compile tests\test_bernie_scenario_integrity.py` passed; `C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q` passed as 9 skipped while the corpus directory is absent on this branch; `git diff --check` passed with a Windows CRLF warning only.
+- Remaining risks: Validator is intentionally strict on category/outcome names and may need small allow-list additions when Antigravity's corpus is integrated. Full value is proven only after running against the submitted corpus branch.
