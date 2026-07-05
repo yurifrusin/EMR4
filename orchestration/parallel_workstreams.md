@@ -76,6 +76,20 @@ Recommended next slice when Bernie clarification/state work resumes:
 | Verification | Tangible review artifact |
 | Status | Queued |
 
+
+### Workstream R6-D - DeepSeek Temporal Edge-Case Scout
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r6-temporal-edge-scout` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r6-temporal-edge-scout.md` |
+| Goal | Scout compact temporal edge cases without overlapping Claude implementation |
+| In Scope | Edge-case review artifact or small non-overlapping proposed tests |
+| Out of Scope | Production code; broad harness rewrite; Claude-owned implementation files unless later directed |
+| Verification | Artifact inspection or focused tests if added |
+| Status | Queued |
+
 ## Sprint R5: Executable Scenario Promotion
 
 | Item | Value |
