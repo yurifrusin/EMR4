@@ -8,53 +8,51 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R12: Diary Reason-Code UI Flow |
-| Integrated through | Ariadne UI/test integration, Antigravity/Gemini UX/privacy review, DeepSeek Flash implementation plan, DeepSeek Flash smoke-test plan |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned, audit clean, disposable DeepSeek worktrees retired |
+| Batch | Sprint R13: Diary Smoke Harness Recovery |
+| Integrated through | Ariadne harness fix, DeepSeek Flash diagnosis/focused-fix plan, Antigravity/Gemini receptionist-domain review |
+| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added first-party Diary reason-code controls for terminal appointment statuses (`Cancelled`, `NoShow`, `DNA`) with no preselected default.
-- Changed the cancellation free-text field into a capped administrative note with explicit privacy copy warning reception not to enter symptoms, diagnoses, or sensitive health details.
-- Threaded `status_reason_code` through Diary status saves, cancel/delete signed proposal payloads, fallback status proposals, raw fallback delete payloads, smoke-mode appointment state, and audit/flow-card rendering.
-- Displayed persisted reason codes in the booking audit history and cancelled-flow cards using human-readable labels.
-- Added deterministic review coverage for no-default dropdown behaviour, required UI selection, privacy copy, payload threading, and cancelled-card display.
-- Integrated Gemini's R12 receptionist UX/privacy review in `docs/receptionist_review_r12.md`.
+- Restored the full deterministic Diary smoke harness by replacing invalid fake auth tokens with a central valid dummy JWT in `review/test_diary_smoke.py`.
+- Preserved the production Diary code: no `docs/diary/diary.js`, backend, schema, migration, or UI asset changes were required.
+- Integrated DeepSeek's diagnosis in `orchestration/sprint-r13-diary-smoke-diagnosis.md`: all 12 failures were stale harness auth-token drift, not real receptionist workflow regressions.
+- Integrated Gemini's domain review in `docs/receptionist_review_r13.md`, which confirms no receptionist workflow regression and records future auth/harness acceptance checks.
+- Left R12 reason-code coverage intact.
 
 ## Verification
 
-- JavaScript syntax check passed: `node --check docs\diary\diary.js`.
-- Focused R12 Diary smoke target passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code or cancel_flow_uses_signed_delete_confirm_without_raw_delete or cancel_flow_failed_signed_confirm_does_not_raw_delete" --junitxml=review\reason-code-review.xml` (7 passed).
-- Full Diary smoke was attempted: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml`; R12-affected checks passed, but 12 pre-existing/unrelated Bernie session/pilot harness checks still fail around session append capture and pilot launch/grid visibility on non-smoke URLs.
+- Focused R13 failure cluster passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "bernie_session_endpoint_active_load_and_phi_minimized_append or bernie_session_stale_conflict_disables_confirm_until_refresh or bernie_route_calls_carry_server_session_coordinates_and_binding or bernie_pilot_ordinary_mode_requires_real_context or bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated or bernie_pilot_imported_context_stales_when_selection_changes or bernie_pilot_selected_appointment_instruction_affordances or bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised_call or bernie_pilot_instruction_first_without_selected_appointment or bernie_candidate_click_stages_provisional_diary_preview or bernie_route_intercepted_selected_slot_can_return_to_candidates or bernie_pilot_selected_appointment_instruction_readiness_and_resets" --junitxml=review\r13-focused-review.xml` (12 passed).
+- Full Diary smoke passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (all checks passed).
+- R12 reason-code guard passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code or cancel_flow_uses_signed_delete_confirm_without_raw_delete or cancel_flow_failed_signed_confirm_does_not_raw_delete" --junitxml=review\reason-code-review.xml` (7 passed).
 - Whitespace check passed: `git diff --check`.
 
 ## Recommended User Review
 
-No required manual review for Sprint R12 before continuing. The visible Diary UI change is covered by deterministic smoke checks for selector state, required selection, warning copy, and signed-confirm payload threading. A later receptionist workflow pass can still tune labels after real use, especially around the `PATIENT_UNWELL` taxonomy.
+No required manual review for Sprint R13. This was a deterministic harness repair only; it confirms the R12 Diary UI work is covered by a clean full smoke signal again.
 
 ## Not Required Before Moving On
 
-- No Office/Word taskpane review is required; R12 changes only Diary static assets and review harness files.
-- No live Gemini/Vertex call is required; tests use deterministic Diary smoke fixtures.
-- No database migration is required in R12; it consumes the nullable R11 backend substrate.
+- No browser/Office/GitHub Pages/manual receptionist test is required because production UI assets did not change.
+- No backend/API/database verification is required because no backend files or migrations changed.
+- No live Gemini/Vertex call is required; Gemini's contribution was a documentation-only domain review.
 
 ## Known Follow-Up
 
-- Resolve or re-baseline the unrelated full-smoke Bernie session/pilot failures so the whole Diary review harness is clean again.
-- Consider contextual filtering/grouping of reason-code options by terminal status after receptionist feedback.
-- Revisit whether `PATIENT_UNWELL` should remain visible, be renamed, or be folded into a less clinical-looking patient-cancelled category.
-- Consider dynamic warning/validation for clinical keywords in administrative notes if privacy risk persists after workflow testing.
+- Add an explicit auth-bootstrap assertion or helper in the smoke harness so future invalid-token drift fails with a clear auth error instead of selector timeouts.
+- Consider a staff-facing expired-session banner if production auth expiry currently leaves the Diary blank or ambiguous.
+- Keep using full `review/test_diary_smoke.py` after visible Diary changes now that the harness is green again.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R13: Diary Smoke Harness Recovery |
+| Name | Sprint R14: Auth Bootstrap Harness Guard or Reason-Code UX Polish |
 | Status | Proposed |
-| Recommended agents | Check Claude availability first; if Claude remains unavailable, use DeepSeek Flash workers for harness diagnosis/regression isolation and Antigravity/Gemini for receptionist-domain impact review if UI semantics are implicated |
+| Recommended agents | Check Claude availability first; use Claude if healthy for harness/backend contract work, Antigravity/Gemini for receptionist workflow review, and DeepSeek Flash lanes as sprint boundaries justify |
 
-Recommended scope: diagnose the 12 unrelated Bernie session/pilot full-smoke failures, separate stale harness assumptions from real regressions, and restore a clean deterministic Diary review signal before adding more visible Diary behaviour.
+Recommended scope: either add a reusable smoke-harness auth bootstrap guard to prevent this class of timeout again, or continue reason-code UX polish such as contextual option grouping and `PATIENT_UNWELL` taxonomy refinement.
 
 ## Previous Closeout - Sprint R4
 

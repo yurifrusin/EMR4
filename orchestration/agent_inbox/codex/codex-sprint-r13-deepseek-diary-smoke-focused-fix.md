@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r13-diary-smoke-focused-fix` |
-| Status | queued |
+| Status | integrated |
 | Created | 137482c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r13-deepseek-diary-smoke-focused-fix --summary "Short plan summary"` |
@@ -87,8 +87,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
-
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Ariadne implemented the accepted minimal fix directly after DeepSeek diagnosis: central `REVIEW_AUTH_TOKEN` in `review/test_diary_smoke.py` and replaced invalid fake token setup calls.
+- Verification: focused 12-failure R13 cluster passed; full Diary smoke passed; R12 reason-code guard passed; `git diff --check` passed.
+- No production code changed; no assertions were weakened.

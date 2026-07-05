@@ -42,6 +42,7 @@ except ImportError:  # pragma: no cover - dependency not installed
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = REPO_ROOT / "docs"
 CHECKS = json.loads((Path(__file__).parent / "checks_diary.json").read_text(encoding="utf-8"))
+REVIEW_AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.e30.c2ln"
 
 
 def assert_bernie_confirmed_state(page):
@@ -1435,7 +1436,7 @@ def test_bernie_session_endpoint_active_load_and_phi_minimized_append(diary_page
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_session=true&practitioner_id=prac-1&patient_id=smoke-pat-1")
         diary_page.wait_for_selector("[data-testid='bernie-instruction-input']", state="visible", timeout=5000)
         assert active_requests
@@ -1546,7 +1547,7 @@ def test_bernie_session_stale_conflict_disables_confirm_until_refresh(diary_page
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_session=true&bernie_confirm_adapter=true&practitioner_id=prac-1&patient_id=smoke-pat-1&selected_candidate_index=0")
         diary_page.wait_for_selector("[data-testid='bernie-instruction-input']", state="visible", timeout=5000)
         diary_page.fill("[data-testid='bernie-instruction-input']", "Make an appointment tomorrow after 3")
@@ -1671,7 +1672,7 @@ def test_bernie_route_calls_carry_server_session_coordinates_and_binding(diary_p
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true&bernie_session=true&bernie_confirm_adapter=true&practitioner_id=prac-1&patient_id=smoke-pat-1&selected_candidate_index=0")
         diary_page.wait_for_selector("[data-testid='bernie-instruction-input']", state="visible", timeout=5000)
         diary_page.fill("[data-testid='bernie-instruction-input']", "Make an appointment tomorrow after 3")
@@ -2444,7 +2445,7 @@ def test_bernie_pilot_ordinary_mode_requires_real_context(diary_page):
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_selector("[data-testid='bernie-pilot-launch-button']:not(.hidden)", state="visible", timeout=5000)
 
@@ -2608,7 +2609,7 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_selector("[data-testid='bernie-pilot-launch-button']:not(.hidden)", state="visible", timeout=5000)
         diary_page.wait_for_selector(".appt:has-text('Margaret Thompson')", state="visible", timeout=5000)
@@ -2785,7 +2786,7 @@ def test_bernie_pilot_imported_context_stales_when_selection_changes(diary_page)
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_selector("[data-testid='bernie-pilot-launch-button']:not(.hidden)", state="visible", timeout=5000)
         diary_page.wait_for_selector(".appt:has-text('Margaret Thompson')", state="visible", timeout=5000)
@@ -3375,7 +3376,7 @@ def test_bernie_pilot_selected_appointment_instruction_affordances(diary_page):
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
@@ -3547,7 +3548,7 @@ def test_bernie_pilot_blocks_interpreted_practitioner_mismatch_before_supervised
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
         diary_page.click(".appt:has-text('Margaret Thompson')")
@@ -3677,7 +3678,7 @@ def test_bernie_pilot_instruction_first_without_selected_appointment(diary_page)
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html?bernie_auto_preview=false")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
@@ -3842,7 +3843,7 @@ def test_bernie_candidate_click_stages_provisional_diary_preview(diary_page):
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html?bernie_auto_preview=false")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
@@ -4057,7 +4058,7 @@ def test_bernie_route_intercepted_selected_slot_can_return_to_candidates(diary_p
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html?bernie_auto_preview=false")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
@@ -4325,7 +4326,7 @@ def test_bernie_pilot_selected_appointment_instruction_readiness_and_resets(diar
     diary_page.route("**/api/v1/**", handle_api)
 
     try:
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
@@ -4482,7 +4483,7 @@ def test_bernie_ordinary_mode_readiness_and_diagnostics(diary_page):
 
     try:
         # 1. Test ordinary mode (stay calm, useful, and show friendly error without diagnostics)
-        diary_page.evaluate("localStorage.setItem('emr4_token', 'ordinary-staff-token')")
+        diary_page.evaluate(f"localStorage.setItem('emr4_token', '{REVIEW_AUTH_TOKEN}')")
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 

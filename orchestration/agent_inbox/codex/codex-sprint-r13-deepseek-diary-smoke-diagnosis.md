@@ -1,10 +1,10 @@
-# codex-sprint-r13-deepseek-diary-smoke-diagnosis
+﻿# codex-sprint-r13-deepseek-diary-smoke-diagnosis
 
 | Item | Value |
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r13-diary-smoke-diagnosis` |
-| Status | queued |
+| Status | integrated |
 | Created | 137482c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r13-deepseek-diary-smoke-diagnosis --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: orchestration/sprint-r13-diary-smoke-diagnosis.md (diagnosis artifact)
+- Verification run: Full diary smoke via `pytest review\test_diary_smoke.py -q --tb=short --junitxml=review/diary-review.xml` captured 12/12 failures; source inspection of diary.js:2460-2472 (isTokenExpired), diary.js:57-66 (shouldUseBernieServerSession), diary.js:3833-3835 (loadDiary early return), diary.js:5373-5374 (checkBerniePilotEligibility early return); validated JWT split length with Node REPL
+- Remaining risks: Zero production code risk — the fix is a harness token value only. 13 occurrences to update. The dummy JWT has no `exp` field; if isTokenExpired logic changes to require exp, harness needs another update. R12 reason-code coverage is orthogonal and should survive unchanged.
