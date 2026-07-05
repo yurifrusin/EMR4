@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H5: Historical Diary Trove De-Identification Contract |
 | Integrated through | Ariadne synthetic-only validator/tests; no external workers used because the safety contract was small and repo-local |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -28,7 +28,9 @@ reviewed, integrated, verified, pushed, and audited.
 - Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_output_safety.py tests\test_historical_diary_output_safety.py`.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_output_safety.py -q` (8 passed; existing warnings only).
 - Current ignored H4 aggregate validation passed: `.venv\Scripts\python.exe scripts\historical_diary_output_safety.py local_data\historical-diary-trove\inventory\structure_classifier_h4.json`.
-- Validation pending final run before commit.
+- Whitespace check passed: `git diff --check`.
+- Post-push audit passed with `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `be6a7e78`.
+- Post-push GitHub workflows passed for H5: Deploy GitHub Pages, Python Security, and CodeQL.
 
 ## Recommended User Review
 
