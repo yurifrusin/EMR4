@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r6-temporal-edge-scout` |
-| Status | queued |
+| Status | submitted |
 | Created | 565b67a |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r6-temporal-edge-scout --summary "Short plan summary"` |
