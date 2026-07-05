@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R2: Clarification Merge Semantics |
 | Integrated through | Claude backend/session implementation, Antigravity/Gemini receptionist-domain acceptance review, DeepSeek Flash regression lane, and Ariadne verification/polish |
-| Status | Integrated locally on `master`; push, mirror realign, and audit pending |
+| Status | Integrated, pushed to `master`/`handoff/current`, mirrors realigned, audit clean |
 | Last updated | 2026-07-05 |
 
 ## What Changed
@@ -55,11 +55,11 @@ No required manual review for Sprint R2. This is backend/test-domain work for th
 
 | Item | Value |
 |---|---|
-| Name | Sprint R3 candidate: Stale Session / Revision Hardening or Scenario Promotion |
-| Status | Candidate |
+| Name | Sprint R3: Stale Session / Revision Hardening |
+| Status | Dispatched; plan gate pending |
 | Recommended agents | Claude backend/session lane, Antigravity/Gemini domain acceptance lane, DeepSeek Flash regression lane, Ariadne integration |
 
-R3 should either harden server-side session revision/stale-context handling, or promote selected receptionist natural-language scenarios into executable replay coverage now that clarification merge semantics exist.
+R3 is proceeding with server-side stale session/revision hardening as the primary product-safety slice. Scenario promotion remains useful when it directly proves stale browser, two-receptionist, correction-vs-clarification, or intent-switch behavior.
 
 ## Previous Closeout - Sprint R1
 

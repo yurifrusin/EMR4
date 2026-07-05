@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Native Bernie/Diary domain work with clarification merge semantics integrated and receptionist scenario coverage expanding |
-| **Next recommended work** | Follow up on stale-session/session-revision hardening or patient collision source edge cases; keep promoting selected receptionist scenarios into executable replay coverage |
+| **Current active track** | Sprint R3 stale-session/session-revision hardening dispatched with Claude, Antigravity/Gemini, and DeepSeek Flash lanes |
+| **Next recommended work** | Complete R3 plan gate, then implementation/review; patient collision source hardening and scenario promotion remain near-term follow-ups |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
@@ -540,7 +540,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint R2 clarification merge semantics |
+| **Latest integration commit** | Sprint R2 clarification merge semantics; Sprint R3 stale-session hardening dispatched |
 
 ### Tag map (all tags pushed to remote)
 

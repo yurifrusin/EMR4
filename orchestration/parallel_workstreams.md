@@ -24,12 +24,63 @@ Recommended next slice when Bernie clarification/state work resumes:
 
 - Sprint R1: Reception Scenario Corpus Foundation.
 - Sprint R2: Clarification Merge Semantics.
+- Sprint R3: Stale Session / Revision Hardening.
+
+## Sprint R3: Stale Session / Revision Hardening
+
+| Item | Value |
+|---|---|
+| Status | Dispatched; plan gate pending |
+| Product Goal | Prevent stale Bernie client revision/context coordinates from merging, confirming, or resurrecting outdated appointment intent |
+| Worker Shape | Claude backend/session implementation lane, Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash regression lane, Ariadne orchestration/integration |
+| In Scope | Server-side stale revision/session append guards, focused regression tests, stale browser/two-receptionist/correction-vs-clarification acceptance cases, bounded scenario artifacts |
+| Out Of Scope | Diary UI redesign, Word/taskpane changes, GitHub Pages assets, live Gemini/Vertex calls, broad patient collision source hardening, GraphRAG/MCP/indexer automation, persisted session table redesign |
+| Verification | py_compile; focused Bernie clarification/session/interpret/scenario pytest; fixture integrity tests if scenario files change; git diff --check; no browser/Pages checks unless frontend files change |
+
+### Workstream R3-A - Backend Stale Revision Guard
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-sprint-r3-stale-session-revision-hardening.md` |
+| Goal | Implement fail-closed stale-session/revision handling for Bernie clarification/context append flows |
+| In Scope | `app/routers/appointments.py`, Bernie/session helpers if needed, focused stale revision tests |
+| Out of Scope | Diary UI, live provider calls, persisted session redesign, unrelated collision-source hardening |
+| Verification | py_compile and focused pytest for touched Bernie/session/interpret surfaces |
+| Status | Dispatched |
+
+### Workstream R3-B - Gemini Domain Acceptance
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-r3-stale-session-domain-review.md` |
+| Goal | Define receptionist-domain acceptance cases and dissent for stale browser tabs, two receptionists, corrections, clarifications, and intent switches |
+| In Scope | Scenario corpus notes, R2 clarification semantics, acceptance/review artifact, optional bounded scenario fixture additions |
+| Out of Scope | Production backend ownership, UI redesign, live provider calls, master/handoff updates |
+| Verification | Plan packet first; fixture integrity tests if scenario artifacts change |
+| Status | Dispatched |
+
+### Workstream R3-C - DeepSeek Regression Lane
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r3-deepseek-stale-session-regression` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r3-deepseek-stale-session-regression.md` |
+| Goal | Independently add or review focused regression coverage for stale Bernie session revision/context handling |
+| In Scope | Tests/review around stale revision coordinates, clarification merge, intent switches, and no stale appointment/audit mutation |
+| Out of Scope | Primary production implementation, UI edits, live provider calls, global config or model switching |
+| Verification | py_compile, focused pytest, git diff --check, or clear review artifact if bridge sandbox blocks git/Python |
+| Status | Dispatched |
 
 ## Sprint R2: Clarification Merge Semantics
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; push/mirror/audit pending |
+| Status | Integrated, pushed, mirrors realigned, audit clean |
 | Product Goal | Make Bernie clarification replies merge only missing or ambiguous fields into the existing request frame, preserving already resolved patient, practitioner, date, time, and intent |
 | Worker Shape | Claude backend/session implementation lane, Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash regression lane, Ariadne orchestration/integration |
 | In Scope | Backend/session clarification merge semantics, focused regression tests, selected R1 clarification xfail promotion, scenario/fixture acceptance notes, bounded Graphify symbol-map use during review |
