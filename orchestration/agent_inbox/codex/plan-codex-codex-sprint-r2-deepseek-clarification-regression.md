@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r2-deepseek-clarification-regression` |
 | Source Task | `codex-sprint-r2-deepseek-clarification-regression` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 14:13 +1000 |
 | Source HEAD | `89cb837` |
 
@@ -44,6 +44,6 @@ DeepSeek sandbox may block Python/git; harness support for preserved fields may 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted and integrated through Sprint R2.
+- Required changes before implementation: Keep implementation to regression tests/review only; no production code or UI.
+- Approved to proceed: yes
