@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H5 de-identification contract and redaction harness completed; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H6: safe local timeline delta prototype over a bounded pilot window, with H5 validator as a mandatory output gate |
+| **Current active track** | Historical diary trove H6 safe timeline delta prototype completed over bounded pilot samples; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H7: synthetic timeline event model using validator-approved neutral fixtures before any full-trove processing |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -61,7 +61,12 @@ allowlist and synthetic redaction tests for historical diary aggregate payloads.
 Safe H5 findings live in
 `docs/historical-diary-trove-deidentification-contract.md`. H6 may run a
 bounded local timeline-delta prototype only if every aggregate output passes
-the H5 validator before being considered committable.
+the H5 validator before being considered committable. H6 reused the H4
+classifier over 40 dense-day files from each pilot, validated the ignored
+aggregate output through H5, and found stable `strong_diary_grid` classification
+in 40/40 samples from both pilots with small adjacent neutral deltas. Safe H6
+findings live in `docs/historical-diary-trove-timeline-delta-prototype.md`. H7
+should build a synthetic neutral event model before any full-trove processing.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
