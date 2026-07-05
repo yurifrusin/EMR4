@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R15: Reason-Code UX Polish |
 | Integrated through | Ariadne implementation, DeepSeek Flash implementation/test plans, Antigravity/Gemini receptionist-domain review |
-| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
+| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean |
 | Last updated | 2026-07-05 |
 
 ## What Changed
