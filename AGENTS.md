@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H6 safe timeline delta prototype completed over bounded pilot samples; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H7: synthetic timeline event model using validator-approved neutral fixtures before any full-trove processing |
+| **Current active track** | Historical diary trove H7 synthetic timeline event model completed; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H8: local event summary dry run over ignored H6 aggregate data, still validator-gated and non-semantic |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -66,7 +66,14 @@ classifier over 40 dense-day files from each pilot, validated the ignored
 aggregate output through H5, and found stable `strong_diary_grid` classification
 in 40/40 samples from both pilots with small adjacent neutral deltas. Safe H6
 findings live in `docs/historical-diary-trove-timeline-delta-prototype.md`. H7
-should build a synthetic neutral event model before any full-trove processing.
+added `scripts/historical_diary_timeline_events.py` and
+`tests/test_historical_diary_timeline_events.py`, classifying synthetic neutral
+timeline deltas into non-semantic event classes such as
+`no_structural_change`, `small_content_delta`, `layout_shape_change`,
+`time_grid_delta`, and `large_unexplained_delta`. Safe H7 findings live in
+`docs/historical-diary-trove-synthetic-event-model.md`. H8 may run a local
+event-summary dry run over ignored aggregate data only, still behind the H5
+validator and without inferring real appointment semantics.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

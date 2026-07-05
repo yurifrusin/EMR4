@@ -8,35 +8,30 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H6: Historical Diary Trove Safe Timeline Delta Prototype |
-| Integrated through | Ariadne local-only bounded aggregate run plus H5 validator gate; no external workers used because raw files are PHI-bearing |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Python Security green; Pages green after fresh workflow dispatch |
+| Batch | Sprint H7: Historical Diary Trove Synthetic Timeline Event Model |
+| Integrated through | Ariadne synthetic-only model/tests; no external workers used because scope was small and raw-free |
+| Status | Integrated locally; final push/workflow status pending |
 | Last updated | 2026-07-06 |
 
 ## What Changed
 
-- Reused `scripts/historical_diary_structure_classifier.ps1` to classify 40 dense-day documents from each ignored pilot folder.
-- Wrote detailed H6 aggregate JSON only under ignored `local_data/historical-diary-trove/inventory/timeline_delta_h6.json`.
-- Validated the H6 aggregate JSON with `scripts/historical_diary_output_safety.py`.
-- Added `docs/historical-diary-trove-timeline-delta-prototype.md` with safe H6 findings.
-- Confirmed both pilots classify as `strong_diary_grid` in 40/40 samples with stable `1x11+1x3` table signatures and 10-minute inferred interval mode.
-- Confirmed adjacent neutral deltas remain small enough to support a future safe timeline event model without exposing appointment text.
-- Updated `AGENTS.md` so future agents know H6 succeeded and H7 should use synthetic neutral event fixtures before full-trove processing.
+- Added `scripts/historical_diary_timeline_events.py`, a synthetic neutral event model for adjacent aggregate snapshot deltas.
+- Added `tests/test_historical_diary_timeline_events.py`, using synthetic snapshots only.
+- Extended `scripts/historical_diary_output_safety.py` to allow neutral event-summary fields while keeping raw/text/path/label fields blocked.
+- Added `docs/historical-diary-trove-synthetic-event-model.md`.
+- Event classes are deliberately non-semantic: `no_structural_change`, `small_content_delta`, `layout_shape_change`, `time_grid_delta`, and `large_unexplained_delta`.
+- Event-summary payloads are validated through the H5 safety gate.
 - No raw diary files, filenames, patient content, document text, document metadata strings, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
 
 ## Verification
 
-- H6 bounded classifier command passed: `powershell -NoProfile -ExecutionPolicy Bypass -Command "& { .\scripts\historical_diary_structure_classifier.ps1 -Root @('local_data\historical-diary-trove\raw\pilot','local_data\historical-diary-trove\raw\pilot_01') -Output 'local_data\historical-diary-trove\inventory\timeline_delta_h6.json' -SampleSize 40 -DenseDays 1 }"`.
-- H6 aggregate safety validation passed: `.venv\Scripts\python.exe scripts\historical_diary_output_safety.py local_data\historical-diary-trove\inventory\timeline_delta_h6.json`.
-- Whitespace check passed: `git diff --check`.
-- Whitespace check passed: `git diff --check`.
-- Post-push audit passed with `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `6a07772b`.
-- Post-push Python Security passed for H6.
-- The push-triggered Pages deployment failed twice with GitHub's "Deployment failed, try again later" / duplicate-artifact rerun behaviour; a fresh `workflow_dispatch` Pages run succeeded after a short wait.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_timeline_events.py scripts\historical_diary_output_safety.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (14 passed; existing warnings only).
+- Validation pending final run before commit.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H6 commits only docs/handover summaries; raw and aggregate runtime outputs remain ignored.
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H7 is synthetic code/tests/docs only and does not touch raw diary files.
 
 ## Not Required Before Moving On
 
@@ -47,20 +42,29 @@ No required manual review before continuing if validation, push, audit, and post
 
 ## Known Follow-Up
 
-- H7 should build a synthetic neutral timeline event model over validator-approved fixtures.
-- Event labels should stay neutral, such as `no_structural_change`, `small_content_delta`, `layout_shape_change`, and `large_unexplained_delta`.
-- Do not infer real appointment events, statuses, or identities from raw content until a separate de-identification path is proven.
+- H8 may run a local event-summary dry run over ignored H6 aggregate data only.
+- H8 outputs must pass `scripts/historical_diary_output_safety.py`.
+- H8 should keep labels non-semantic and avoid inferring real appointment creation/deletion/status events.
 - Do not process the full 58k-file trove until extraction and de-identification boundaries are proven on the pilots.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint H7: Historical Diary Trove Synthetic Timeline Event Model |
+| Name | Sprint H8: Historical Diary Trove Local Event Summary Dry Run |
 | Status | Proposed |
 | Recommended agents | Ariadne local-first for raw PHI inspection; external workers only on non-PHI parser code, synthetic fixtures, or safe summaries |
 
-Recommended scope: create synthetic neutral timeline payloads and tests that classify safe structural deltas before any broader raw trove processing.
+Recommended scope: convert ignored H6 aggregate deltas into neutral event summaries in memory, validate the output, and commit only safe findings.
+
+## Previous Closeout - Sprint H6
+
+Sprint H6 reused `scripts/historical_diary_structure_classifier.ps1` over 40
+dense-day files from each pilot and validated the ignored aggregate JSON through
+the H5 safety gate. Both pilots remained `strong_diary_grid` in 40/40 samples,
+with stable table signatures and small adjacent neutral deltas. Raw files,
+filenames, exact document timestamps, document text, and metadata strings were
+not committed.
 
 ## Previous Closeout - Sprint H5
 
