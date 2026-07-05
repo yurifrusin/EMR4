@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R19 Manifest Drift Guardrails integration in progress |
+| **Current active track** | Sprint R19 Manifest Drift Guardrails closed |
 | **Next recommended work** | Sprint R20 Manifest Prompt Consumption Gate after R19 closes; check Claude availability at sprint start |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the

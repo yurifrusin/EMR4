@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R19: Bernie Manifest Drift Guardrails |
 | Integrated through | Ariadne integration, two DeepSeek Flash lanes replacing capped Claude, Antigravity/Gemini domain review |
-| Status | Hotfixing UI review assertion after GitHub harness caught the intentional new cancellation option |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, UI Review, Python Security, and CodeQL workflows green after hotfix |
 | Last updated | 2026-07-05 |
 
 ## What Changed
