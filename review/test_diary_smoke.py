@@ -317,8 +317,10 @@ def test_reason_code_dropdown_no_default_and_ui_required(diary_page):
     reason_select = diary_page.locator("[data-testid='booking-status-reason-code']")
     assert reason_select.input_value() == ""
     assert reason_select.locator("option[value='LEGACY_UNCLASSIFIED']").count() == 0
-    assert reason_select.locator("option[value='PATIENT_UNWELL']").count() == 0
     assert reason_select.locator("option[value='PATIENT_CANCELLED']").count() == 1
+    assert reason_select.locator("option[value='PATIENT_RESCHEDULED']").count() == 1
+    assert reason_select.locator("option[value='PATIENT_UNWELL']").count() == 1
+    assert reason_select.locator("option[value='CLINIC_RESCHEDULED']").count() == 1
     assert reason_select.locator("option[value='DID_NOT_ATTEND']").count() == 0
     assert reason_select.locator("option[value='LEFT_WITHOUT_SEEN']").count() == 0
 

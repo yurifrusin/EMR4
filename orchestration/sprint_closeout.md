@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R19: Bernie Manifest Drift Guardrails |
 | Integrated through | Ariadne integration, two DeepSeek Flash lanes replacing capped Claude, Antigravity/Gemini domain review |
-| Status | Integration in progress; focused checks passed, pending commit/push/mirror/audit |
+| Status | Hotfixing UI review assertion after GitHub harness caught the intentional new cancellation option |
 | Last updated | 2026-07-05 |
 
 ## What Changed
@@ -29,6 +29,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused R19 pytest passed: `.venv\Scripts\pytest.exe tests\test_reason_code_backend.py tests\test_bernie_outcome_copy_drift_guard.py tests\test_bernie_diary_capability_manifest.py -q` (41 passed; existing Starlette/Google GenAI warnings only).
 - JS syntax passed: `node --check docs\diary\diary.js`.
 - Frontend asset version check passed: `.venv\Scripts\python.exe scripts\check_frontend_versions.py`.
+- Targeted UI review hotfix test passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code_dropdown_no_default"`.
+- Full local UI Review harness passed after hotfix: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml` (121 passed).
 - Whitespace check passed: `git diff --check`.
 
 ## Recommended User Review
