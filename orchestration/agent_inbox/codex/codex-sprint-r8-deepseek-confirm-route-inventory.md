@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r8-confirm-route-inventory` |
-| Status | queued |
+| Status | integrated |
 | Created | bac3015 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r8-deepseek-confirm-route-inventory --summary "Short plan summary"` |

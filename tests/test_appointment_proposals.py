@@ -185,6 +185,44 @@ def test_create_confirm_route_blocks_tampered_evidence_without_write(
     assert db.query(AppointmentAuditLog).count() == before_audits
 
 
+def test_create_confirm_revalidates_same_day_elapsed_window_without_write(
+        client, db, gp_user, patient, practitioner, monkeypatch):
+    def proposal_time(tz):
+        return datetime(2026, 6, 22, 8, 0, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", proposal_time)
+    token = make_token(gp_user)
+    proposal_resp = _post_proposal(client, token, {
+        "patient_id": str(patient.id),
+        "practitioner_id": str(practitioner.id),
+        "appointment_date": "2026-06-22",
+        "start_time_local": "09:00:00",
+        "duration_minutes": 15,
+    })
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    proposal = proposal_resp.json()
+    assert proposal["safe"] is True
+
+    def confirm_time(tz):
+        return datetime(2026, 6, 22, 9, 15, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", confirm_time)
+    before_appts = db.query(Appointment).count()
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = _confirm_proposal(client, token, proposal)
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    block_codes = [block["code"] for block in data["blocks"]]
+    assert "create_proposal_revalidation_blocked" in block_codes
+    assert "same_day_window_elapsed" in block_codes
+    assert db.query(Appointment).count() == before_appts
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
 def test_create_proposal_reports_conflict_without_409(
         client, db, gp_user, practice, patient, practitioner):
     existing = _make_appt(db, practice, practitioner, patient, start_h=9, duration=30)

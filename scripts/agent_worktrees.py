@@ -10,6 +10,11 @@ import sys
 from pathlib import Path
 
 
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_WORKTREE_ROOT = REPO_ROOT.parent / "EMR4-worktrees"
 AGENTS = {
@@ -185,7 +190,14 @@ def md_cell(value: str | None) -> str:
 
 def run_git(args: list[str], cwd: Path = REPO_ROOT, check: bool = True) -> subprocess.CompletedProcess[str]:
     cmd = ["git", "-c", f"safe.directory={safe_path(cwd)}", "-c", "core.excludesFile=", *args]
-    result = subprocess.run(cmd, cwd=cwd, text=True, capture_output=True)
+    result = subprocess.run(
+        cmd,
+        cwd=cwd,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        capture_output=True,
+    )
     if check and result.returncode != 0:
         sys.stderr.write(result.stdout)
         sys.stderr.write(result.stderr)

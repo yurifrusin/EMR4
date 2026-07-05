@@ -197,6 +197,55 @@ def test_update_proposal_confirm_payload_writes_with_signed_audit_evidence(
     assert "bernie_signed_confirmation_evidence_verified" in audit_rows[0].confirmed_warnings
 
 
+def test_update_confirm_revalidates_same_day_elapsed_window_without_write(
+        client, db, gp_user, practice, practitioner, patient, monkeypatch):
+    appt = _make_appt(db, practice, practitioner, patient, start_h=14)
+    token = make_token(gp_user)
+
+    def proposal_time(tz):
+        return datetime(2026, 6, 22, 8, 0, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", proposal_time)
+    proposal_resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={
+            "appointment_date": "2026-06-22",
+            "start_time_local": "09:00:00",
+            "duration_minutes": 15,
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert proposal_resp.status_code == 200, proposal_resp.text
+    proposal = proposal_resp.json()
+    assert proposal["safe"] is True
+
+    def confirm_time(tz):
+        return datetime(2026, 6, 22, 9, 15, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", confirm_time)
+    payload = proposal["confirm_payload"]
+    payload["confirmed"] = True
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    confirm_resp = client.post(
+        UPDATE_CONFIRM_URL,
+        json=payload,
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert confirm_resp.status_code == 200, confirm_resp.text
+    data = confirm_resp.json()
+    assert data["safe"] is False
+    assert data["autonomy_tier"] == "blocked"
+    block_codes = [block["code"] for block in data["blocks"]]
+    assert "update_proposal_revalidation_blocked" in block_codes
+    assert "same_day_window_elapsed" in block_codes
+    db.refresh(appt)
+    assert appt.appointment_date == THURSDAY
+    assert appt.start_time_local == time(14, 0)
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
 def test_update_proposal_blocked_on_conflict(
         client, db, gp_user, practice, practitioner, patient):
     # Existing occupies 10:00–10:30

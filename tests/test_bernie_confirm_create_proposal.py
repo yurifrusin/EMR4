@@ -17,12 +17,21 @@ from app.models.appointments import (
 )
 import app.routers.appointments as appointments_router
 import app.services.ai.service as ai_service
+import pytest
 from tests.conftest import make_token
 
 NORMALIZED_SEARCH_URL = "/api/v1/appointments/proposals/slot-search/normalized"
 SELECTION_URL = "/api/v1/appointments/proposals/slot-search/selection"
 CONFIRM_URL = "/api/v1/appointments/proposals/create/confirm-bernie"
 REFERENCE_DATE = "2026-06-22"
+
+
+@pytest.fixture(autouse=True)
+def _freeze_bernie_confirm_clock(monkeypatch):
+    def fixed_now(tz):
+        return datetime(2026, 6, 22, 8, 0, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
 
 
 def _auth(token: str) -> dict[str, str]:
@@ -211,6 +220,42 @@ def test_bernie_confirm_stale_conflict_writes_no_new_rows(
     assert data["appointment"] is None
     assert data["blocks"][0]["code"] == "create_proposal_revalidation_blocked"
     assert data["blocks"][1]["code"] == "appointment_conflict"
+    _assert_row_counts_unchanged(db, expected_counts)
+
+
+def test_bernie_confirm_revalidates_same_day_elapsed_window_without_write(
+    client,
+    db,
+    gp_user,
+    practitioner,
+    patient,
+    schedule,
+    monkeypatch,
+):
+    def proposal_time(tz):
+        return datetime(2026, 6, 22, 8, 0, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", proposal_time)
+    token = make_token(gp_user)
+    selection = _search_and_select(client, token, practitioner, patient)
+    assert selection["create_proposal"]["command"]["appointment_date"] == REFERENCE_DATE
+    assert selection["create_proposal"]["command"]["start_time_local"] == "09:00:00"
+
+    def confirm_time(tz):
+        return datetime(2026, 6, 22, 9, 15, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", confirm_time)
+    expected_counts = _row_counts(db)
+
+    resp = _confirm(client, token, selection, confirmed=True)
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["appointment"] is None
+    block_codes = [block["code"] for block in data["blocks"]]
+    assert "create_proposal_revalidation_blocked" in block_codes
+    assert "same_day_window_elapsed" in block_codes
     _assert_row_counts_unchanged(db, expected_counts)
 
 
