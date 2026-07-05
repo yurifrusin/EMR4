@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R5: Executable Scenario Promotion |
 | Integrated through | DeepSeek Flash executable promotion lane with Ariadne correction, DeepSeek Flash adversarial review, Antigravity/Gemini domain-priority review, and Ariadne verification/polish |
-| Status | Integrated locally; push, mirror realign, and audit pending |
+| Status | Integrated at `99a5e50`; push, mirror realign, and audit pending |
 | Last updated | 2026-07-05 |
 
 ## What Changed

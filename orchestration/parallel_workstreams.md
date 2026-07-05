@@ -30,7 +30,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 
 | Item | Value |
 |---|---|
-| Status | Integrated locally; final push/audit pending |
+| Status | Integrated at `99a5e50`; final push/audit pending |
 | Product Goal | Promote the best R3/R4 receptionist-domain corpus memory into executable Bernie replay coverage where the current harness can express it cleanly |
 | Worker Shape | Two DeepSeek Flash lanes under the Claude-recuperation fallback rule, Antigravity/Gemini domain-priority review, Ariadne orchestration/integration |
 | In Scope | Selected R3/R4 scenario fixtures, minimal scenario loader/replay support if needed, scenario integrity/replay tests, fixture classification notes |
