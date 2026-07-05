@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R24 provider-readiness dry-run gate closed cleanly |
-| **Next recommended work** | Sprint R25 no-write live-provider sampling harness only if config/tooling is ready |
+| **Current active track** | Sprint R25 no-write live-provider sampling harness scaffold dispatched; Claude capped until 2:30am so DeepSeek replaces Claude |
+| **Next recommended work** | Run R25 plan-gated Antigravity/Gemini and DeepSeek lanes; keep tests default-disabled with no live provider calls |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
