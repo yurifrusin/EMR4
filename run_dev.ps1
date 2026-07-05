@@ -250,7 +250,7 @@ if ($Down) {
     }
 
     # ngrok (all processes)
-    $ng = Get-Process -Name ngrok -ErrorAction SilentlyContinue
+    $ng = @(Get-Process -Name ngrok -ErrorAction SilentlyContinue)
     if ($ng) {
         $ng | Stop-Process -Force -ErrorAction SilentlyContinue
         Write-Ok "ngrok stopped ($($ng.Count) process(es))"

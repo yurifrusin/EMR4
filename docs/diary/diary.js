@@ -2295,8 +2295,18 @@ function showError(msg) {
   if (err) { err.textContent = msg; err.classList.toggle("hidden", !msg); }
 }
 
+function clearExpiredAuthToken() {
+  token = null;
+  currentUserRole = null;
+  currentUserRoleToken = null;
+  localStorage.removeItem("emr4_token");
+}
+
 // ─── API FETCH ─────────────────────────────────────────────
 async function apiFetch(path, opts = {}) {
+  if (token && isTokenExpired(token)) {
+    clearExpiredAuthToken();
+  }
   const headers = {
     "Content-Type": "application/json",
     "ngrok-skip-browser-warning": "true",
@@ -2305,6 +2315,7 @@ async function apiFetch(path, opts = {}) {
   if (token) headers["Authorization"] = `Bearer ${token}`;
   const res = await fetch(`${API_BASE}${path}`, { ...opts, headers });
   if (res.status === 401) {
+    clearExpiredAuthToken();
     setStatus("Session expired — reopen the taskpane to sign in again.");
     throw new Error("401 Unauthorized");
   }
@@ -2419,6 +2430,20 @@ function getRoleFromToken(authToken = token) {
     return payload.role || payload.user_role || null;
   } catch (_) {
     return null;
+  }
+}
+
+function isTokenExpired(authToken = token, skewSeconds = 30) {
+  if (!authToken) return true;
+  try {
+    const parts = authToken.split(".");
+    if (parts.length !== 3) return true;
+    const payload = JSON.parse(atob(parts[1]));
+    if (!payload.exp) return false;
+    const expiresAtMs = Number(payload.exp) * 1000;
+    return Number.isFinite(expiresAtMs) && expiresAtMs <= Date.now() + skewSeconds * 1000;
+  } catch (_) {
+    return true;
   }
 }
 
@@ -6385,6 +6410,11 @@ Office.onReady(() => {
 
   updateDateLabel();
 
+  if (token && isTokenExpired(token)) {
+    clearExpiredAuthToken();
+    setStatus("Waiting for auth token...");
+  }
+
   if (Office.context?.ui?.addHandlerAsync) {
     Office.context.ui.addHandlerAsync(
       Office.EventType.DialogParentMessageReceived,
@@ -6392,6 +6422,11 @@ Office.onReady(() => {
         try {
           const msg = JSON.parse(arg.message);
           if (msg.type === "auth" && msg.token) {
+            if (isTokenExpired(msg.token)) {
+              clearExpiredAuthToken();
+              setStatus("Session expired - reopen the taskpane to sign in again.");
+              return;
+            }
             token = msg.token;
             currentUserRole = getRoleFromToken(token);
             currentUserRoleToken = currentUserRole ? token : null;
