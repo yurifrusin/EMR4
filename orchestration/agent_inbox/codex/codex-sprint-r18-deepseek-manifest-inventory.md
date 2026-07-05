@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 379d0df |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r18-deepseek-manifest-inventory --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none by worker; Ariadne integrated findings into `app/services/diary/capability_manifest.py`, `tests/test_bernie_diary_capability_manifest.py`, and closeout docs.
+- Verification run: source inventory reviewed against diary/bernie enums, registries, statecharts, outcome policy, reason-code constants, and confirmation descriptors.
+- Remaining risks: frontend outcome copy, frontend-only reason-code display policy, declared-but-not-enforced `allowed_authors`, and untyped confidence bands remain drift-watch follow-ups.

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 379d0df |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r18-deepseek-manifest-tests --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none by worker; Ariadne implemented the deterministic manifest suite in `tests/test_bernie_diary_capability_manifest.py`.
+- Verification run: test design accepted for source parity, frozen/unique registry entries, staff-only confirm capabilities, non-confirm no-write claims, outcome coverage, and confirmation-envelope write boundary.
+- Remaining risks: keep count assertions source-derived rather than brittle; add drift tests for frontend outcome copy in the next sprint before prompt injection.

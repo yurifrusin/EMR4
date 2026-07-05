@@ -123,3 +123,23 @@ Future sprint candidate:
 - **Bernie Diary Capability Manifest v1**: create a read-only manifest and
   golden tests proving Bernie-facing prompt/context material matches the native
   diary action vocabulary and cannot grant write authority by itself.
+
+## 2026-07-05 - Sprint R18 Manifest v1 Implemented
+
+Sprint R18 created a source-derived `Bernie Diary Capability Manifest` builder
+and deterministic tests. This is the first concrete step toward giving Bernie a
+native "body map" of the Diary's muscles, sinews, and moveable limbs while
+keeping every movement subject to backend state machines, policy guards, signed
+evidence, RBAC, and staff confirmation.
+
+Implementation boundary:
+
+- The manifest is a read-only context artifact, not a runtime route, prompt
+  injection path, authorization layer, or write grant.
+- It exposes canonical diary vocabulary from backend enums, registries, and
+  statecharts, plus explicit non-authority boundaries and drift-watch notes.
+- It preserves the design rule that Gemini's intelligence should help with
+  ambiguity handling, schema fluency, and explanation while deterministic EMR4
+  services remain authoritative for validation and mutation.
+- Next work should harden drift guardrails before injecting the manifest into
+  live Bernie prompts.

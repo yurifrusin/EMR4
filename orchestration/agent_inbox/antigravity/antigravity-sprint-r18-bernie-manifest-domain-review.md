@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 379d0df |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r18-bernie-manifest-domain-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/bernie_diary_manifest_review.md`.
+- Verification run: Gemini/Antigravity inspected diary/bernie services, schemas, frontend constants, and safety boundaries; Ariadne preserved the accepted domain critique in master.
+- Remaining risks: manifest content must remain synchronized with backend/Pydantic source and must not be treated as executable policy or write authority.

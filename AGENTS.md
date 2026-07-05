@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R17 expired-session Diary UX banner closed; Bernie native diary capability-manifest architecture captured |
-| **Next recommended work** | Sprint R18 Bernie Diary Capability Manifest v1, unless a higher-priority production bug appears; check Claude availability at sprint start |
+| **Current active track** | Sprint R18 Bernie Diary Capability Manifest v1 integration in progress |
+| **Next recommended work** | Sprint R19 Manifest Drift Guardrails: backend/frontend outcome-copy parity and status-specific reason-code policy hardening before live Bernie prompt consumption |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

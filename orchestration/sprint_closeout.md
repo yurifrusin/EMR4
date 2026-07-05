@@ -8,6 +8,59 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint R18: Bernie Diary Capability Manifest v1 |
+| Integrated through | Ariadne implementation, two DeepSeek Flash review lanes, Antigravity/Gemini domain review |
+| Status | Focused verification passed; pending commit/push/mirror/audit |
+| Last updated | 2026-07-05 |
+
+## What Changed
+
+- Added `app/services/diary/capability_manifest.py`, a JSON-serializable, source-derived, read-only manifest builder for Bernie's native Diary schema literacy.
+- Manifest sections cover appointment statuses, booking channels, diary template and waiting-area fields, Bernie session states/events, capability tiers, outcome kinds, reason codes, evidence/confirmation boundaries, and explicit non-authority boundaries.
+- Added drift-watch notes for frontend outcome copy, frontend-only status-specific reason-code option lists, declared-but-not-enforced `allowed_authors`, and untyped patient/practitioner confidence bands.
+- Added deterministic tests in `tests/test_bernie_diary_capability_manifest.py` proving manifest source parity, non-authority wording, capability registry immutability/uniqueness, staff-only confirm capabilities, outcome coverage, and confirmation-only write authority.
+- Preserved Gemini's domain/safety critique in `orchestration/bernie_diary_manifest_review.md`.
+- Updated `orchestration/bernie_native_diary_agent_notes.md` with the implemented version of Yuri's "Bernie knows the diary body map but does not rule it" architecture.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\services\diary\capability_manifest.py tests\test_bernie_diary_capability_manifest.py`.
+- Focused manifest pytest passed: `.venv\Scripts\pytest.exe tests\test_bernie_diary_capability_manifest.py -q` (10 passed; existing Starlette/Google GenAI warnings only).
+- Whitespace check passed: `git diff --check`.
+
+## Recommended User Review
+
+No required manual review before continuing if the focused checks pass. This is backend data-contract/test/orchestration work only: no live prompt path, frontend route, Office taskpane, GitHub Pages asset, database migration, or appointment mutation behaviour changes.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required because the manifest is not yet injected into a runtime Bernie prompt.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- Add drift guardrails that bind frontend Bernie outcome copy to backend `BernieBookingOutcomeKind`.
+- Promote status-specific reason-code display policy into backend source-of-truth policy before exposing it as authoritative manifest content.
+- Decide whether and where to enforce capability `allowed_authors` at route/envelope boundaries.
+- Add shared typed confidence bands for patient/practitioner recognition before representing those bands as authoritative manifest facts.
+- Only after the drift guards are in place, design a safe prompt/context injection path for Bernie to read the manifest.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint R19: Bernie Manifest Drift Guardrails |
+| Status | Proposed |
+| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for domain-policy dissent, and DeepSeek Flash lanes for source inventory/test design |
+
+Recommended scope: add deterministic guardrails for the manifest's highest-risk drift surfaces before any live prompt consumption. Start with backend/frontend outcome-copy parity and status-specific reason-code policy source-of-truth hardening.
+
+## Previous Closeout - Sprint R17
+
+| Item | Value |
+|---|---|
 | Batch | Sprint R17: Expired-Session Diary UX Banner |
 | Integrated through | Ariadne implementation, DeepSeek Flash auth-banner plan, Antigravity/Gemini receptionist-domain review |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit and GitHub workflows clean |
@@ -46,17 +99,6 @@ No required manual review before continuing. This is covered by deterministic no
 
 - Consider richer connecting/unauthorized copy variants and explicit offline-network handling as separate UX hardening.
 - Consider a live Office dialog re-auth/reopen affordance only if the taskpane can safely support it.
-- Create the Bernie Diary Capability Manifest so Bernie can be schema-literate over native diary movements without becoming code-authoritative.
-
-## Next Sprint Candidate
-
-| Item | Value |
-|---|---|
-| Name | Sprint R18: Bernie Diary Capability Manifest v1 |
-| Status | Proposed |
-| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for domain/context critique, and DeepSeek Flash lanes as sprint boundaries justify |
-
-Recommended scope: define a compact, read-only, versioned Diary Capability Manifest for Bernie that describes native diary entities, states, transitions, reason-code rules, roster semantics, patient-link semantics, evidence, and confirmation boundaries. The manifest should support Gemini's domain fluency while preserving deterministic backend authority.
 
 ## Previous Closeout - Sprint R4
 
