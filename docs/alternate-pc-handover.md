@@ -159,6 +159,12 @@ bridge/Codex after rotating `DEEPSEEK_API_KEY`.
   read-heavy reviews. On this PC, Sprint D2 cost roughly US$0.08 in DeepSeek
   tokens after setup, and D3 proved Flash could implement a real backend sprint
   branch with Ariadne review/polish.
+- If Claude is unavailable, quota-capped, recuperating, or fails to submit a
+  usable plan in the sprint window, replace Claude's lane with a second
+  DeepSeek Flash worker by default. Do not block the sprint waiting for Claude
+  unless the task specifically requires Claude/Fable reasoning. Give the second
+  DeepSeek lane a distinct role (for example implementation vs adversarial
+  review), separate branch, clear file boundary, and independent verification.
 - Try DeepSeek Pro only when the work seems reasoning-depth limited rather than
   diff-hygiene limited; Pro is roughly 3x Flash cost.
 - DeepSeek workers must use dedicated branches and tight file boundaries.

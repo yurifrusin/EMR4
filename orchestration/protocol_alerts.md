@@ -14,6 +14,14 @@
 
 Read these before acting on remembered process details.
 
+- 2026-07-05: Claude recuperation fallback is now hardwired. If Claude is
+  quota-capped, unavailable, recuperating, or fails to submit a usable plan in
+  the current sprint window, Ariadne should automatically replace the Claude
+  lane with a second DeepSeek Flash worker rather than waiting for Yuri. The
+  replacement worker must use a separate branch, clear file boundary, distinct
+  role (for example implementation vs adversarial review), plan gate, submit
+  path, and Ariadne-run verification before integration. Use DeepSeek Pro only
+  when reasoning depth, not diff hygiene, is the limiting factor.
 - 2026-07-05: Graphify is approved as an opt-in Ariadne navigation aid, not an
   always-on memory layer. Use it autonomously when the question starts from a
   known symbol, function, route, class, or UI handler and the goal is impact or

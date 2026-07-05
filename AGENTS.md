@@ -78,6 +78,13 @@ Codex role separation:
   details live in `docs/alternate-pc-handover.md`; controlled DeepSeek/OpenAI
   model-picker switching and Ariadne-v2 safety rules live in
   `docs/codex-model-switching-deepseek.md`.
+- If Claude is unavailable, quota-capped, recuperating, or fails to submit a
+  usable plan in the current sprint window, Ariadne should automatically replace
+  the Claude lane with a second DeepSeek Flash worker rather than waiting for
+  Yuri. Treat this as the default fallback for backend/test/review lanes, not an
+  exception. The replacement DeepSeek lane must have a separate branch, a clear
+  role such as implementation vs adversarial review, non-overlapping file
+  ownership where practical, and Ariadne-run verification before integration.
 - The configured `deepseek-worker` subagent may appear as nickname `Shen`.
   Verify identity from runtime metadata, not self-description: the current
   working setup records `agent_role=deepseek-worker`,
@@ -218,9 +225,10 @@ Codex is the default orchestration agent for EMR4. This means:
   keep Ariadne as orchestrator, let Claude implement while quota is healthy, use
   Antigravity/Gemini for an independent domain/product/test-design lane when
   Gemini quota is available, use DeepSeek Flash for cheap bounded
-  implementation/review lanes, escalate to DeepSeek Pro for reasoning-heavy
-  worker tasks, and reserve native Codex subagents for times when OpenAI usage
-  is flowing or their tool/context fit is clearly superior.
+  implementation/review lanes, and when Claude is capped or recuperating spawn
+  a second DeepSeek Flash worker in Claude's place. Escalate to DeepSeek Pro for
+  reasoning-heavy worker tasks, and reserve native Codex subagents for times
+  when OpenAI usage is flowing or their tool/context fit is clearly superior.
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).
@@ -295,6 +303,11 @@ not overlap. Use separate CLI processes for Claude and Antigravity rather than
 serial release, unless a worker channel is currently unproven, failing, or likely
 to mutate overlapping files. If release is intentionally serialized for safety,
 record the reason in the closeout or protocol notes.
+If Claude is still quota-capped or otherwise unavailable at plan or implementation
+release time, Ariadne should not pause the sprint by default. Dispatch a second
+DeepSeek Flash worker with Claude's intended backend/test/review role translated
+into a bounded branch and keep the usual plan gate, non-overlap, submit, and
+Ariadne verification requirements.
 After a Codex app or Windows restart, Computer Use may not appear as separate
 desktop `click`/`type` tools even when the plugin is installed. Ariadne should
 first run the Computer Use skill's JS bootstrap path through the Node REPL and
