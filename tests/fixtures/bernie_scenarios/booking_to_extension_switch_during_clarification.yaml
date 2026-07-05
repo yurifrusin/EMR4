@@ -1,0 +1,34 @@
+id: booking_to_extension_switch_during_clarification
+category: appointment_extension
+reference_date: 2026-07-05
+initial_state:
+  diary_date: 2026-07-05
+  practice: emr4_dev_main
+  seeded_appointments:
+    - id: "apt_1"
+      patient: "Margaret Thompson"
+      practitioner: "Dr Shera"
+      date: "2026-07-05"
+      time: "10:00"
+      duration_minutes: 15
+      status: "confirmed"
+turns:
+  - user: "Book Margaret Thompson next Tuesday at 3:30"
+    expect:
+      outcome: clarification_required
+      missing: ["practitioner"]
+      preserved:
+        patient: "Margaret Thompson"
+        date: "2026-07-14"
+        time: "15:30"
+  - user: "Actually, extend her 10:00 appointment today by 15 minutes"
+    expect:
+      outcome: confirmation_ready
+      action: "extend"
+      preserved:
+        appointment_id: "apt_1"
+        duration_minutes: 30
+forbidden:
+  - "create a new booking next Tuesday"
+  - "keep date as 2026-07-14"
+  - "ask for practitioner on next Tuesday"
