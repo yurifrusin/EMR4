@@ -21,6 +21,21 @@ evidence. If this ordinary prompt fails in the relevant release surface, closeou
 status is blocked until fixed or the sprint is explicitly narrowed away from
 Bernie booking interpretation and documented as such.
 
+## Read-Only Schema Awareness
+
+Bernie may know the Diary domain in detail through read-only, source-derived
+schema/manifest context: statuses, reason-code policies, confirmation envelope
+shape, receptionist-facing states, and backend transition boundaries. This is
+desirable because it lets Bernie become a native translator between ordinary
+reception language and the Diary's own movement/state grammar.
+
+That knowledge must never become authority. A model response, whether Gemini,
+fake provider, or another provider, cannot create live availability facts,
+choose between ambiguous patients/practitioners, invent status or reason codes,
+grant `writes_authorized=True`, skip staff confirmation, or bypass backend
+signed evidence. The backend and signed confirmation routes remain the only
+write authorities; manifest literacy is an interpretation aid only.
+
 ## Test Label Rules
 
 - A test that intercepts HTTP routes, uses `page.route(...)`, serves fixture

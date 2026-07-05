@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r21-manifest-fake-provider-prompt-evaluation` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 22:02 +1000 |
 | Source HEAD | `84b4c23` |
 

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R21 fake-provider manifest prompt evaluation dispatched; Claude available at sprint start |
-| **Next recommended work** | Continue R21 through plan-gated worker review; do not wire live Gemini until fake-provider gates pass |
+| **Current active track** | Sprint R21 fake-provider manifest prompt evaluation integrated locally; post-merge verification/closeout in progress |
+| **Next recommended work** | Sprint R22: fake-provider receptionist scenario gates for happy path, ambiguity, invalid reason codes, and availability deflection before live Gemini wiring |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
@@ -40,6 +40,17 @@ treat graph output as a map to source/tests rather than truth. Do not install
 Graphify Codex hooks, MCP server config, or post-commit auto-indexing until a
 later tooling sprint proves refresh/reload behaviour and worker safety. Details
 live in `docs/tooling/graphify-spike.md`.
+
+Bernie schema-awareness principle: Bernie may be made deeply literate in the
+Diary domain schema, state machine, status/reason-code taxonomy, confirmation
+envelopes, and visible receptionist affordances through read-only,
+source-derived manifests and fake-provider/live-provider gates. This knowledge
+must remain non-authoritative: Bernie can translate natural language into
+bounded proposals, clarification frames, or backend read requests, but cannot
+assert live availability, select ambiguous patients/practitioners by default,
+invent codes, bypass staff confirmation, or grant write authority. The native
+Diary/backend transition system remains the authority for collisions,
+availability, signed evidence, mutations, audit trails, and route permissions.
 
 `codex/current` is the durable Codex mirror branch. Codex-app subagents are
 separate disposable worker checkouts and may live under `.codex/worktrees/...`.

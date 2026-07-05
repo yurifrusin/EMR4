@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r21-manifest-fake-provider-prompt-evaluation` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -64,5 +64,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne merged Claude's fake-provider evaluation seam, verified it with focused and broader manifest tests, and kept it out of live runtime prompt wiring.
+- Follow-up required: Promote receptionist scenario gates before any live Gemini wiring.

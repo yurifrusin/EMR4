@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r21-fake-provider-prompt-ux-safety-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Antigravity/Gemini's receptionist-facing safety risks and live-provider readiness gates were preserved in `orchestration/fake_provider_prompt_ux_safety_review.md`.
+- Follow-up required: Use these scenarios as R22 fake-provider structured-output gates.

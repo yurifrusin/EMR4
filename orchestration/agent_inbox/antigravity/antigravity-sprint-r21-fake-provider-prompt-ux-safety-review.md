@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | 4b147aa |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r21-fake-provider-prompt-ux-safety-review --summary "Short plan summary"` |
@@ -92,4 +92,3 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed: [fake_provider_prompt_ux_safety_review.md](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/orchestration/fake_provider_prompt_ux_safety_review.md)
 - Verification run: Authored the safety review document identifying staff-facing UX risks, fake-provider acceptance scenarios, and live-provider readiness gates, referencing [capability_manifest.py](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/app/services/diary/capability_manifest.py), [bernie_release_gates.md](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/orchestration/bernie_release_gates.md), and [STATUS_SPECIFIC_REASON_CODE_POLICY](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/app/schemas/appointments.py).
 - Remaining risks: Evaluations are fake-provider only; live deployment requires additional monitoring for latency, model drift, and unhandled prompt injections.
-

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 4b147aa |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r21-deepseek-prompt-adversarial-evals --summary "Short plan summary"` |
@@ -90,5 +90,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - NEW: `tests/test_bernie_fake_provider_adversarial_prompt.py` — deterministic adversarial coverage for fake-provider manifest prompt evaluation.
 - Verification run:
+  - DeepSeek reported compileall clean, 21/21 new tests passing, and R20 manifest tests passing.
+  - Ariadne repaired f-string quoting in the submitted test file, then ran focused and broader manifest pytest locally.
 - Remaining risks:
+  - Unicode homoglyph/confusable key normalization is not implemented yet; track as a follow-up if adversarial provider output can use confusable key names.
