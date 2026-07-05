@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H8: Historical Diary Trove Local Event Summary Dry Run |
 | Integrated through | Ariadne local-only aggregate dry-run; no external workers used because scope was raw-free and narrowly bounded |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages green after rerun; Python Security and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -28,7 +28,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (16 passed; existing warnings only).
 - Local dry run passed: `.venv\Scripts\python.exe scripts\historical_diary_event_summary_dry_run.py local_data\historical-diary-trove\inventory\timeline_delta_h6.json`.
 - Safety validation passed: `.venv\Scripts\python.exe scripts\historical_diary_output_safety.py local_data\historical-diary-trove\inventory\event_summary_h8.json`.
-- Validation pending final commit, audit, and post-push workflows.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors all aligned at `5653dc3e`.
+- GitHub workflows passed for the H8 push: Python Security and CodeQL were green; the push-triggered Pages deploy hit the known transient "try again later" failure and a fresh `workflow_dispatch` Pages run passed.
 
 ## Local Dry-Run Result
 
@@ -38,7 +39,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H8 is local tooling/tests/docs only and does not touch raw diary files.
+No required manual review before continuing. H8 is local tooling/tests/docs only and does not touch raw diary files.
 
 ## Not Required Before Moving On
 
