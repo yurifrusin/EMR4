@@ -30,6 +30,10 @@ KNOWN_FORBIDDEN_OUTCOMES = frozenset({
 CORPUS_DIR = Path(__file__).parent.parent / "fixtures" / "bernie_scenarios"
 
 
+class NonExecutableScenario(ValueError):
+    """Raised when a YAML scenario is corpus memory, not a replay fixture."""
+
+
 @dataclass
 class TurnExpect:
     status: int = 200
@@ -70,6 +74,10 @@ class Scenario:
 
 def _parse_turn(raw: dict, idx: int, scenario_id: str) -> ScenarioTurn:
     action = raw.get("action")
+    if action is None:
+        raise NonExecutableScenario(
+            f"Scenario {scenario_id!r} turn {idx}: no executable action"
+        )
     if action not in KNOWN_ACTIONS:
         raise ValueError(
             f"Scenario {scenario_id!r} turn {idx}: "
@@ -171,7 +179,10 @@ def discover_scenarios(dirs: list[Path] | None = None) -> list[Scenario]:
         if not d.is_dir():
             continue
         for path in sorted(d.glob("*.yaml")):
-            s = load_scenario_yaml(path)
+            try:
+                s = load_scenario_yaml(path)
+            except NonExecutableScenario:
+                continue
             if s.id in seen_ids:
                 raise ValueError(
                     f"Duplicate scenario id {s.id!r}: found again in {path}"

@@ -20,14 +20,21 @@ FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures" / "bernie_scenarios"
 # -- Allowed categories (from bernie_reception_scenario_workstream.md) ------
 
 ALLOWED_CATEGORIES = frozenset({
+    "appointment_extension",
+    "booking_create",
     "booking_request",
     "booking_clarification",
     "booking_confirmation",
+    "clarification",
+    "future_booking_advisory",
+    "mutation_safety",
     "slot_search",
     "extension_request",
     "patient_advisory",
     "stale_session",
+    "session_state_guard",
     "roster_unavailable",
+    "roster_unavailable_outcome",
     "no_slot_outcome",
 })
 
@@ -42,10 +49,13 @@ KNOWN_OUTCOMES = frozenset({
     "confirmation_ready",
     "blocked",
     "candidate_selection_required",
+    "no_matching_times",
     "no_slots",
     "roster_unavailable",
     "completed",
 })
+
+KNOWN_ACTIONS = frozenset({"normalize", "search", "select", "confirm"})
 
 
 # -- Helpers ----------------------------------------------------------------
@@ -188,7 +198,7 @@ def test_category_allow_list():
 
 
 def test_turn_expectation_shape():
-    """Every turn must have 'user' text and 'expect.outcome'."""
+    """Every turn must use either corpus or executable harness shape."""
     yaml = pytest.importorskip("yaml", reason="PyYAML not installed")
 
     if not FIXTURE_DIR.is_dir():
@@ -201,6 +211,17 @@ def test_turn_expectation_shape():
         for i, turn in enumerate(turns):
             if not isinstance(turn, dict):
                 errors.append(f"{fn} [{sid}]: turn[{i}] is not a dict")
+                continue
+            action = turn.get("action")
+            if action is not None:
+                if action not in KNOWN_ACTIONS:
+                    errors.append(
+                        f"{fn} [{sid}]: turn[{i}] unknown action '{action}'; "
+                        f"known: {sorted(KNOWN_ACTIONS)}"
+                    )
+                expect = turn.get("expect")
+                if expect is not None and not isinstance(expect, dict):
+                    errors.append(f"{fn} [{sid}]: turn[{i}] non-dict 'expect'")
                 continue
             if not turn.get("user"):
                 errors.append(f"{fn} [{sid}]: turn[{i}] missing or empty 'user'")
@@ -233,8 +254,13 @@ def test_xfail_reason_metadata():
 
     errors = []
     for fn, sc in _all_scenarios():
-        if sc.get("xfail"):
-            reason = sc.get("reason", "")
+        xfail = sc.get("xfail")
+        if xfail:
+            reason = ""
+            if isinstance(xfail, dict):
+                reason = xfail.get("reason", "")
+            elif xfail is True:
+                reason = sc.get("reason", "")
             if not reason:
                 errors.append(
                     f"{fn} [{sc.get('id', '<no id>')}]: "
