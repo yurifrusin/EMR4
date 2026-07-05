@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H4 structure classifier completed on tiny pilot samples; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H5: de-identification contract and redaction harness for historical diary tooling before any broader local trove run |
+| **Current active track** | Historical diary trove H5 de-identification contract and redaction harness completed; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H6: safe local timeline delta prototype over a bounded pilot window, with H5 validator as a mandatory output gate |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -54,8 +54,14 @@ added a local-only structure classifier and found both pilots classify as
 `strong_diary_grid` in 8/8 samples with a stable `1x11+1x3` table signature,
 2-table/14-cell layout, dense time/date-like counts, and a 10-minute inferred
 time-grid interval. Safe H4 findings live in
-`docs/historical-diary-trove-structure-classifier.md`. H5 should add a
-de-identification contract/redaction harness before any broader local trove run.
+`docs/historical-diary-trove-structure-classifier.md`. H5 added
+`scripts/historical_diary_output_safety.py` and
+`tests/test_historical_diary_output_safety.py`, defining a committed-output
+allowlist and synthetic redaction tests for historical diary aggregate payloads.
+Safe H5 findings live in
+`docs/historical-diary-trove-deidentification-contract.md`. H6 may run a
+bounded local timeline-delta prototype only if every aggregate output passes
+the H5 validator before being considered committable.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

@@ -8,31 +8,31 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H4: Historical Diary Trove Structure Classifier Prototype |
-| Integrated through | Ariadne local-only Word COM aggregate classifier; no external workers used because raw files are PHI-bearing |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages and Python Security workflows green |
+| Batch | Sprint H5: Historical Diary Trove De-Identification Contract |
+| Integrated through | Ariadne synthetic-only validator/tests; no external workers used because the safety contract was small and repo-local |
+| Status | Integrated locally; final push/workflow status pending |
 | Last updated | 2026-07-06 |
 
 ## What Changed
 
-- Added `scripts/historical_diary_structure_classifier.ps1`, a local Microsoft Word COM classifier that disables macros, opens tiny `.doc` samples read-only, and emits neutral aggregate layout facts.
-- Ran the classifier against 8 dense-day candidate files from each ignored pilot folder; detailed JSON output remains ignored under `local_data/historical-diary-trove/inventory/structure_classifier_h4.json`.
-- Added `docs/historical-diary-trove-structure-classifier.md` with safe H4 findings: both pilots classify as `strong_diary_grid` in 8/8 sampled files.
-- Confirmed both pilots have stable `1x11+1x3` table-dimension signatures, 2-table/14-cell layout, dense time/date-like token counts, and an inferred 10-minute interval mode.
-- Confirmed adjacent neutral deltas remain bounded across the tiny samples, suggesting successive stable diary states without exposing appointment text.
-- Updated `AGENTS.md` so future agents know H4 succeeded locally and H5 should build a de-identification/redaction harness before broader trove processing.
+- Added `scripts/historical_diary_output_safety.py`, a committed-output validator for historical diary aggregate JSON.
+- Added `tests/test_historical_diary_output_safety.py`, using synthetic payloads only.
+- Added `docs/historical-diary-trove-deidentification-contract.md`, documenting the allowlist, forbidden categories, and H6 gate.
+- Validator rejects unknown keys, filename/path fields, raw path values, document text fields, exact document timestamp fields, likely person/staff labels, line-broken strings, and long free-form strings.
+- Validator accepts the current ignored H4 aggregate JSON at `local_data/historical-diary-trove/inventory/structure_classifier_h4.json`.
+- Updated `AGENTS.md` so future agents know H5 succeeded and H6 must use the safety validator as a mandatory output gate.
 - No raw diary files, filenames, patient content, document text, document metadata strings, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
 
 ## Verification
 
-- H4 classifier command passed: `powershell -NoProfile -ExecutionPolicy Bypass -Command "& { .\scripts\historical_diary_structure_classifier.ps1 -Root @('local_data\historical-diary-trove\raw\pilot','local_data\historical-diary-trove\raw\pilot_01') -Output 'local_data\historical-diary-trove\inventory\structure_classifier_h4.json' -SampleSize 8 -DenseDays 1 }"`.
-- Whitespace check passed: `git diff --check`.
-- Post-push audit passed with `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `26de3e02`.
-- Post-push GitHub workflows passed for H4: Deploy GitHub Pages and Python Security. CodeQL did not run for this docs/PowerShell-only change set.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_output_safety.py tests\test_historical_diary_output_safety.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_output_safety.py -q` (8 passed; existing warnings only).
+- Current ignored H4 aggregate validation passed: `.venv\Scripts\python.exe scripts\historical_diary_output_safety.py local_data\historical-diary-trove\inventory\structure_classifier_h4.json`.
+- Validation pending final run before commit.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H4 is local tooling/docs-only and does not commit raw files, filenames, document text, or PHI.
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H5 is validator/test/docs-only and uses synthetic tests plus already-ignored aggregate JSON.
 
 ## Not Required Before Moving On
 
@@ -43,20 +43,29 @@ No required manual review before continuing if validation, push, audit, and post
 
 ## Known Follow-Up
 
-- H5 should formalise the committed-output allowlist for historical diary tooling.
-- Add a redaction/test harness using synthetic fixtures or synthetic classifier payloads, not raw diary files.
-- Fail checks if outputs contain raw paths, filenames, exact timestamps, text snippets, or likely patient/staff labels.
+- H6 may run a safe local timeline delta prototype over a bounded pilot window.
+- H6 outputs must pass `scripts/historical_diary_output_safety.py` before any summary is considered committable.
+- H6 should emit only aggregate transition facts such as signature counts, delta distributions, run lengths, and possible edit cadence.
 - Do not process the full 58k-file trove until extraction and de-identification boundaries are proven on the pilots.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint H5: Historical Diary Trove De-Identification Contract |
+| Name | Sprint H6: Historical Diary Trove Safe Timeline Delta Prototype |
 | Status | Proposed |
 | Recommended agents | Ariadne local-first for raw PHI inspection; external workers only on non-PHI parser code, synthetic fixtures, or safe summaries |
 
-Recommended scope: add a testable committed-output safety contract and redaction harness before any broader local trove processing.
+Recommended scope: run a bounded local aggregate-only transition prototype and validate any output through the H5 safety gate before documenting safe findings.
+
+## Previous Closeout - Sprint H4
+
+Sprint H4 added `scripts/historical_diary_structure_classifier.ps1` and safe
+aggregate classifier docs. Both pilots classified as `strong_diary_grid` in 8/8
+tiny samples, with stable `1x11+1x3` table signatures, 2-table/14-cell layout,
+dense time/date-like counts, and an inferred 10-minute interval mode. Raw files,
+filenames, exact document timestamps, document text, and metadata strings were
+not committed.
 
 ## Previous Closeout - Sprint H3
 
