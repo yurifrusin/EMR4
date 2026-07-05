@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R25: Default-Disabled Provider Sampling Harness |
 | Integrated through | Antigravity/Gemini product acceptance review, DeepSeek Flash scaffold lane, DeepSeek Flash adversarial review lane, Ariadne integration and gate hardening |
-| Status | Integrated locally; push, workflow watch, mirror realign, and audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
