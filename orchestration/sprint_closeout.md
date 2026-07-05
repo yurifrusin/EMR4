@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H9: Historical Diary Trove Ordered Neutral Event Export |
 | Integrated through | Ariadne local-only ordered neutral export; no external workers used because scope was raw-free and narrowly bounded |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -30,7 +30,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (18 passed; existing warnings only).
 - Local ordered export passed: `.\scripts\historical_diary_structure_classifier.ps1 -Root @('local_data\historical-diary-trove\raw\pilot','local_data\historical-diary-trove\raw\pilot_01') -Output local_data\historical-diary-trove\inventory\ordered_snapshots_h9.json -SampleSize 40 -DenseDays 1 -IncludeOrderedSnapshots`.
 - Safety validation passed for ignored ordered snapshots and ignored event summary.
-- Validation pending final commit, audit, and post-push workflows.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors all aligned at `7e9462a2`.
+- GitHub workflows passed for the H9 push: Deploy GitHub Pages, Python Security, and CodeQL.
 
 ## Local Ordered Result
 
@@ -40,7 +41,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H9 is local tooling/tests/docs only and does not touch raw diary files beyond read-only local Word COM extraction.
+No required manual review before continuing. H9 is local tooling/tests/docs only and does not touch raw diary files beyond read-only local Word COM extraction.
 
 ## Not Required Before Moving On
 
