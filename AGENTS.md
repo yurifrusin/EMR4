@@ -565,7 +565,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `PENDING_R8_COMMIT` - Sprint R8 confirm-time temporal revalidation coverage |
+| **Latest integration commit** | `fb4d0ea` - Sprint R8 confirm-time temporal revalidation coverage |
 
 ### Tag map (all tags pushed to remote)
 
