@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r22-fake-provider-receptionist-scenario-gates` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 22:32 +1000 |
 | Source HEAD | `ab798a9` |
 
@@ -44,6 +44,6 @@ Behavioural (no UI): running the new test module shows every scenario's safe fra
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted as the R22 implementation direction. Claude hit session limit during implementation; Ariadne implemented the accepted seam locally with DeepSeek/Ariadne amendments.
+- Required changes before implementation: Keep the seam fake-provider/test-only; avoid live provider, DB, frontend, and appointment route wiring.
+- Approved to proceed: superseded by Ariadne implementation after Claude quota cap

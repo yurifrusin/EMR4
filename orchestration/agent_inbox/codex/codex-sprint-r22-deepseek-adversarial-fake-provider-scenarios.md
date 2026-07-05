@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | bed06b3 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r22-deepseek-adversarial-fake-provider-scenarios --summary "Short plan summary"` |
@@ -90,5 +90,8 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - NEW: `orchestration/r22_deepseek_adversarial_test_spec.md` — adversarial fake-provider response gap analysis and test specification.
 - Verification run:
+  - DeepSeek empirically probed current evaluator gaps; Ariadne integrated the key gaps into `manifest_eval.py` and `tests/test_bernie_manifest_receptionist_scenarios.py`, then ran focused and broader manifest regression suites.
 - Remaining risks:
+  - Phrase-list detection remains heuristic and should be extended as real provider outputs reveal new unsafe wording.

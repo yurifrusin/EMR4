@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r22-fake-provider-scenario-ux-acceptance-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 22:30 +1000 |
 | Source HEAD | `ab798a9` |
 
@@ -44,6 +44,6 @@ The primary risk is ensuring that the copy guidelines are realistic and matches 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted and integrated as the R22 receptionist/product-safety review artifact.
+- Required changes before implementation: Correct reason-code example wording to current backend policy; Ariadne applied the correction during integration.
+- Approved to proceed: yes

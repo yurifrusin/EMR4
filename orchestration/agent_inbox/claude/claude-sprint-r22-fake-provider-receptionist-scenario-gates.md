@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | pending_plan_review |
+| Status | superseded |
 | Created | bed06b3 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-r22-fake-provider-receptionist-scenario-gates --summary "Short plan summary"` |
@@ -90,5 +90,8 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - Plan only from Claude; Ariadne implemented the accepted scenario-gate seam locally after Claude hit session limit during implementation.
 - Verification run:
+  - Ariadne ran focused and broader manifest regression suites after local implementation.
 - Remaining risks:
+  - Claude can resume for a later review after quota refresh; no R22 implementation remains blocked on Claude.

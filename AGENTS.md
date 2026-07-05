@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R22 fake-provider receptionist scenario gates dispatched; Claude availability check required at sprint start |
-| **Next recommended work** | Continue R22 through plan-gated worker review; do not wire live Gemini until structured fake-provider scenario gates pass |
+| **Current active track** | Sprint R22 fake-provider receptionist scenario gates integrated locally; post-merge closeout in progress |
+| **Next recommended work** | Sprint R23: frame-aware fake-provider validator or live-provider dry-run harness; do not wire live Gemini until R22 gates and one provider-readiness dry run pass |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

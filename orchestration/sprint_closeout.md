@@ -8,6 +8,61 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint R22: Fake-Provider Receptionist Scenario Gates |
+| Integrated through | Claude plan, Antigravity/Gemini UX acceptance review, DeepSeek Flash adversarial gap analysis, Ariadne implementation |
+| Status | Integrated locally; focused verification and whitespace checks green; push/workflow/audit pending |
+| Last updated | 2026-07-05 |
+
+## What Changed
+
+- Extended `app/services/ai/evals/manifest_eval.py` with deterministic receptionist scenario gates for proposal, clarify, refusal, and backend read-request frames.
+- Added `ReceptionistScenario`, `ReceptionistScenarioUnsafeResponse`, `ReceptionistScenarioEvalResult`, `RECEPTIONIST_SCENARIO_GATES`, `evaluate_receptionist_scenario()`, and `run_receptionist_scenario_gates()`.
+- Hardened fake-provider output evaluation for claimed completed actions, live availability claims, ambiguous-patient defaulting, invalid/defaulted reason-code claims, and strict model-output `writes_authorized=True` detection.
+- Added `tests/test_bernie_manifest_receptionist_scenarios.py`, covering the ordinary Margaret Thompson/Dr Shera proposal path, ambiguous patient clarification, invalid reason-code clarification, envelope-injection refusal, and availability/collision deflection.
+- Preserved Antigravity/Gemini's receptionist-facing acceptance criteria in `orchestration/fake_provider_scenario_ux_acceptance_review.md`.
+- Preserved DeepSeek Flash's adversarial response gap analysis and future test specification in `orchestration/r22_deepseek_adversarial_test_spec.md`.
+- Claude produced the accepted implementation plan but hit the session cap during implementation; Ariadne implemented the seam locally using the accepted plan plus DeepSeek/Ariadne amendments.
+- No live Gemini/Bernie runtime prompt wiring was added; R22 remains fake-provider/test-only.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\services\ai\evals\manifest_eval.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_bernie_manifest_prompt_evaluation.py tests\test_bernie_fake_provider_adversarial_prompt.py tests\test_bernie_manifest_prompt_consumption.py tests\test_bernie_diary_capability_manifest.py`.
+- Focused R22/R21 pytest passed: `.venv\Scripts\pytest.exe tests\test_bernie_manifest_receptionist_scenarios.py tests\test_bernie_manifest_prompt_evaluation.py tests\test_bernie_fake_provider_adversarial_prompt.py -q` (99 passed; existing Starlette/Google GenAI warnings only).
+- Broader manifest regression pytest passed: `.venv\Scripts\pytest.exe tests\test_bernie_diary_capability_manifest.py tests\test_bernie_manifest_prompt_consumption.py tests\test_bernie_manifest_prompt_evaluation.py tests\test_bernie_fake_provider_adversarial_prompt.py tests\test_bernie_manifest_receptionist_scenarios.py -q` (138 passed; existing Starlette/Google GenAI warnings only).
+- Whitespace check passed: `git diff --check`.
+
+## Recommended User Review
+
+No required manual review before continuing if post-push workflows pass. R22 is backend/test/orchestration-only and does not change visible Diary UI, Office assets, GitHub Pages content, database schema, or live provider behaviour.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required because runtime Bernie prompt wiring is still deferred.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- Add a frame-aware fake-provider validator if scenario gates need deeper semantic checks than `frame_kind` plus safety flags.
+- Run a provider-readiness dry-run sprint before live Gemini wiring, still without granting write authority or connecting to mutation routes.
+- Extend claimed-action and availability phrase lists as real provider outputs reveal new unsafe wording.
+- Consider Unicode homoglyph normalization for model-output key scanning if provider-output risks increase.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint R23: Frame-Aware Fake-Provider Validator |
+| Status | Proposed |
+| Recommended agents | Check Claude availability first; use DeepSeek Flash fallback if Claude remains capped, Antigravity/Gemini for receptionist semantics, and one DeepSeek adversarial lane for unsafe frame variants |
+
+Recommended scope: make the fake-provider scenario gate validate structured frame shape more precisely for proposal/clarify/refusal/read-request outputs before any live provider dry run.
+
+## Previous Closeout - Sprint R21
+
+| Item | Value |
+|---|---|
 | Batch | Sprint R21: Manifest Fake-Provider Prompt Evaluation |
 | Integrated through | Claude implementation, Antigravity/Gemini prompt UX safety review, DeepSeek Flash adversarial tests, Ariadne integration |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Python Security and CodeQL workflows green |

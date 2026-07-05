@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r22-fake-provider-scenario-ux-acceptance-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. Ariadne accepted the UX acceptance criteria artifact after correcting one outdated reason-code example and using it to review the R22 scenario gates.
+- Follow-up required: Keep live Gemini wiring blocked until structured fake-provider gates and broader provider-readiness checks stay green.
