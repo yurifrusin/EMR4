@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R14: Auth Bootstrap Harness Guard |
 | Integrated through | Ariadne harness guard implementation, DeepSeek Flash implementation plan, Antigravity/Gemini receptionist-domain review |
-| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
+| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean |
 | Last updated | 2026-07-05 |
 
 ## What Changed
