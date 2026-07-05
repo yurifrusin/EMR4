@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R21: Manifest Fake-Provider Prompt Evaluation |
 | Integrated through | Claude implementation, Antigravity/Gemini prompt UX safety review, DeepSeek Flash adversarial tests, Ariadne integration |
-| Status | Integrated locally; focused verification and whitespace checks green; push/workflow/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Python Security and CodeQL workflows green |
 | Last updated | 2026-07-05 |
 
 ## What Changed
