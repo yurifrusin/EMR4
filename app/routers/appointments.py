@@ -111,6 +111,7 @@ _UPDATE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.update)
 _STATUS_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.status)
 _DELETE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.delete)
 from app.services.ai.audit_store import persist_access_ai_audit_events
+from app.services.diary.temporal import evaluate_raw_mutation_temporal_guard
 from app.services.practice_knowledge import (
     InMemoryPracticeKnowledgeRetriever,
     PracticeKnowledgeQuery,
@@ -878,6 +879,23 @@ def _create_appointment_from_body(
     practice_tz = _practice_zoneinfo(db, practice_id)
     values, appointment_date, start_time_local, _ = _canonical_create_values(body, practice_tz)
 
+    temporal_kind = evaluate_raw_mutation_temporal_guard(
+        appointment_date,
+        start_time_local,
+        values["duration_minutes"],
+        _clinic_local_now(practice_tz),
+    )
+    if temporal_kind == "past_date":
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={"code": "appointment_in_past", "message": "Appointment date is in the past."},
+        )
+    if temporal_kind == "window_fully_past":
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={"code": "same_day_window_elapsed", "message": "Same-day appointment window has already elapsed."},
+        )
+
     if body.patient_id is not None:
         _ensure_patient(body.patient_id, practice_id, db)
     _ensure_practitioner(body.practitioner_id, practice_id, db)
@@ -1056,6 +1074,25 @@ def _build_create_appointment_proposal(
             code="break_overlap",
             severity="warning",
             message=f"This appointment overlaps {label}.",
+        ))
+
+    temporal_kind = evaluate_raw_mutation_temporal_guard(
+        appointment_date,
+        start_time_local,
+        values["duration_minutes"],
+        _clinic_local_now(practice_tz),
+    )
+    if temporal_kind == "past_date":
+        blocks.append(AppointmentProposalIssue(
+            code="appointment_in_past",
+            severity="blocked",
+            message="Appointment date is in the past.",
+        ))
+    elif temporal_kind == "window_fully_past":
+        blocks.append(AppointmentProposalIssue(
+            code="same_day_window_elapsed",
+            severity="blocked",
+            message="Same-day appointment window has already elapsed.",
         ))
 
     patient_identity = "linked" if body.patient_id else "provisional"
@@ -1389,6 +1426,26 @@ def propose_update_appointment(
             severity="warning",
             message=f"This appointment overlaps {label}.",
         ))
+
+    if "appointment_date" in incoming or "start_time_local" in incoming or "duration_minutes" in incoming:
+        temporal_kind = evaluate_raw_mutation_temporal_guard(
+            appointment_date,
+            start_time_local,
+            duration_minutes,
+            _clinic_local_now(practice_tz),
+        )
+        if temporal_kind == "past_date":
+            blocks.append(AppointmentProposalIssue(
+                code="appointment_in_past",
+                severity="blocked",
+                message="Appointment date is in the past.",
+            ))
+        elif temporal_kind == "window_fully_past":
+            blocks.append(AppointmentProposalIssue(
+                code="same_day_window_elapsed",
+                severity="blocked",
+                message="Same-day appointment window has already elapsed.",
+            ))
 
     patient_identity = "linked" if patient_id else "provisional"
     if patient_identity == "provisional":
@@ -3984,6 +4041,24 @@ def _apply_appointment_update(
         values["appointment_date"] = appointment_date
         values["start_time_local"] = start_time_local
         values["start_time"] = start_time
+
+    if {"start_time", "appointment_date", "start_time_local", "duration_minutes"} & values.keys():
+        temporal_kind = evaluate_raw_mutation_temporal_guard(
+            appointment_date,
+            start_time_local,
+            duration_minutes,
+            _clinic_local_now(practice_tz),
+        )
+        if temporal_kind == "past_date":
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={"code": "appointment_in_past", "message": "Appointment date is in the past."},
+            )
+        if temporal_kind == "window_fully_past":
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={"code": "same_day_window_elapsed", "message": "Same-day appointment window has already elapsed."},
+            )
 
     if "patient_id" in values and values["patient_id"] is not None:
         _ensure_patient(values["patient_id"], practice_id, db)

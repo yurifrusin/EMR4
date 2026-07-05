@@ -53,6 +53,40 @@ SameDayWindowKind = Literal[
     "clamp_earliest",
 ]
 
+RawMutationTemporalKind = Literal[
+    "ok",
+    "past_date",
+    "window_fully_past",
+]
+
+
+def evaluate_raw_mutation_temporal_guard(
+    appointment_date: date,
+    start_time_local: time,
+    duration_minutes: int,
+    clinic_now: datetime,
+) -> RawMutationTemporalKind:
+    """Determine whether a raw create/update slot is in the past.
+
+    Returns 'ok' when the slot is future or same-day and still open.
+    Returns 'past_date' when appointment_date is before today (clinic-local).
+    Returns 'window_fully_past' when it is same-day but start+duration has
+    fully elapsed (i.e. the appointment window end <= now).
+
+    Uses clinic_now.tzinfo for tz-aware arithmetic so naive/aware comparisons
+    are avoided.  The caller should pass _clinic_local_now(practice_tz).
+    """
+    clinic_date = clinic_now.date()
+    if appointment_date < clinic_date:
+        return "past_date"
+    if appointment_date == clinic_date:
+        tz = clinic_now.tzinfo
+        start_dt = datetime.combine(appointment_date, start_time_local, tzinfo=tz)
+        window_end = start_dt + timedelta(minutes=duration_minutes)
+        if window_end <= clinic_now:
+            return "window_fully_past"
+    return "ok"
+
 
 @dataclass(frozen=True)
 class SameDayWindowDecision:
@@ -193,9 +227,11 @@ def evaluate_same_day_window(
 __all__ = [
     "SameDayWindowDecision",
     "SameDayWindowKind",
+    "RawMutationTemporalKind",
     "DATE_RE",
     "WEEK_RELATIVE_RE",
     "WEEKDAY_RE",
+    "evaluate_raw_mutation_temporal_guard",
     "evaluate_same_day_window",
     "parse_time_fragment",
     "extract_natural_time_constraints",
