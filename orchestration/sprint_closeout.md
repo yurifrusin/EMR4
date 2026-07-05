@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R20: Bernie Manifest Prompt Consumption Gate |
 | Integrated through | Claude implementation, DeepSeek Flash adversarial tests, Antigravity/Gemini prompt-safety review, Ariadne integration |
-| Status | Integration in progress; focused manifest gate passed, pending commit/push/mirror/audit |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Python Security and CodeQL workflows green |
 | Last updated | 2026-07-05 |
 
 ## What Changed

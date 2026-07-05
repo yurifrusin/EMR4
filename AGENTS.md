@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R20 Manifest Prompt Consumption Gate integration in progress |
+| **Current active track** | Sprint R20 Manifest Prompt Consumption Gate closed |
 | **Next recommended work** | Sprint R21 fake-provider manifest prompt evaluation before any live Gemini prompt wiring |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
