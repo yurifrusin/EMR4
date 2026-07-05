@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r20-manifest-prompt-safety-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -34,5 +34,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: integrated. Gemini safety principles and refusal rules preserved in `orchestration/manifest_prompt_safety_review.md`.
+- Follow-up required: apply these criteria to any future live prompt injection or fake-provider evaluation sprint.

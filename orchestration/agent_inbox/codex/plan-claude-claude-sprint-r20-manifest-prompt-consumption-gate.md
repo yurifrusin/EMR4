@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r20-manifest-prompt-consumption-gate` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 21:39 +1000 |
 | Source HEAD | `8631e6f` |
 
@@ -44,6 +44,6 @@ Behavioural only (no UI): (a) build_manifest_prompt_context() returns a dict tha
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: accepted; non-runtime prompt-consumption scaffold is the correct R20 boundary.
+- Required changes before implementation: do not wire into live Gemini/Bernie prompt assembly in this sprint.
+- Approved to proceed: yes

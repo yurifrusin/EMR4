@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | e0406aa |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r20-deepseek-manifest-adversarial-tests --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `tests/test_bernie_diary_capability_manifest.py`.
+- Verification run: `.venv\Scripts\python.exe -m py_compile tests\test_bernie_diary_capability_manifest.py`; `.venv\Scripts\pytest.exe tests\test_bernie_diary_capability_manifest.py -q` (20 passed); integrated again in the combined R20 manifest gate.
+- Remaining risks: pattern-based prompt-safety scans are heuristic; deeper prompt evaluation should be a separate non-live or fake-provider sprint before any live provider wiring.

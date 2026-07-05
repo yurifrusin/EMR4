@@ -8,6 +8,59 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint R20: Bernie Manifest Prompt Consumption Gate |
+| Integrated through | Claude implementation, DeepSeek Flash adversarial tests, Antigravity/Gemini prompt-safety review, Ariadne integration |
+| Status | Integration in progress; focused manifest gate passed, pending commit/push/mirror/audit |
+| Last updated | 2026-07-05 |
+
+## What Changed
+
+- Added a non-runtime prompt-consumption scaffold in `app/services/diary/capability_manifest.py`: `build_manifest_prompt_context()`, `assert_manifest_prompt_safe()`, `render_manifest_prompt_block()`, and `MANIFEST_PROMPT_CONTEXT_MAX_CHARS`.
+- The compact prompt context is JSON-serializable, deterministic, size-budgeted, PHI/credential-key guarded, and still preserves the explicit staff-confirmed confirmation write boundary.
+- Added `tests/test_bernie_manifest_prompt_consumption.py` with deterministic tests for prompt-context safety, compactness, write-authority isolation, poison payload rejection, and render stability.
+- Extended `tests/test_bernie_diary_capability_manifest.py` with DeepSeek adversarial prompt-consumption tests for write-authority phrasing, PHI/credential leakage, raw-code/source dumping, confirm-grade evidence leakage, backend-policy bypass phrasing, author/tier coherence, schema-version separation, and prompt-injection patterns.
+- Preserved Gemini's prompt-safety principles, refusal/clarification rules, and acceptance criteria in `orchestration/manifest_prompt_safety_review.md`.
+- No live Gemini/Bernie prompt path was wired; R20 deliberately ships a safe no-runtime-change gate first.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\services\diary\capability_manifest.py tests\test_bernie_diary_capability_manifest.py tests\test_bernie_manifest_prompt_consumption.py`.
+- Focused R20 pytest passed: `.venv\Scripts\pytest.exe tests\test_bernie_diary_capability_manifest.py tests\test_bernie_manifest_prompt_consumption.py -q` (39 passed; existing Starlette/Google GenAI warnings only).
+- Whitespace check passed: `git diff --check`.
+
+## Recommended User Review
+
+No required manual review before continuing if post-push workflows pass. R20 is backend/test/orchestration-only and does not wire the manifest into live prompts, change Diary UI, touch Office assets, migrate the database, or call Gemini.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required because the prompt-consumption helper is not yet wired into runtime Bernie prompts.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- Add a fake-provider prompt assembly/evaluation sprint before any live Gemini wiring.
+- Test refusal behavior for ambiguous patient/practitioner identity, invalid status/reason-code pairs, and attempts to bypass confirmation envelopes.
+- Decide whether to make reason codes non-null-required for `Cancelled`, `DNA`, and `NoShow` after a migration/backfill policy.
+- Unify duplicated frontend/backend schedule-explanation copy catalogs.
+- Decide whether and where to enforce capability `allowed_authors` at route/envelope boundaries.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint R21: Manifest Fake-Provider Prompt Evaluation |
+| Status | Proposed |
+| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for receptionist/prompt-safety review, and DeepSeek Flash for adversarial fake-provider tests |
+
+Recommended scope: add a fake-provider-only prompt assembly/evaluation harness that uses `render_manifest_prompt_block()` without live Gemini calls, proving Bernie-facing prompt instructions preserve schema literacy without granting authority or bypassing backend confirmation.
+
+## Previous Closeout - Sprint R19
+
+| Item | Value |
+|---|---|
 | Batch | Sprint R19: Bernie Manifest Drift Guardrails |
 | Integrated through | Ariadne integration, two DeepSeek Flash lanes replacing capped Claude, Antigravity/Gemini domain review |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, UI Review, Python Security, and CodeQL workflows green after hotfix |
@@ -35,7 +88,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-No required manual review before continuing if the focused checks and post-push workflows pass. The only visible change is adding three legitimate cancellation reason options to the existing Diary reason-code dropdown; deterministic backend/frontend parity tests cover the option set.
+No required manual review before continuing. The only visible change is adding three legitimate cancellation reason options to the existing Diary reason-code dropdown; deterministic backend/frontend parity tests and the UI Review harness cover the option set.
 
 ## Not Required Before Moving On
 
@@ -51,16 +104,6 @@ No required manual review before continuing if the focused checks and post-push 
 - Decide whether and where to enforce capability `allowed_authors` at route/envelope boundaries.
 - Add shared typed confidence bands for patient/practitioner recognition before representing those bands as authoritative manifest facts.
 - Design a safe prompt/context injection path for Bernie to read the manifest after remaining authority-boundary checks.
-
-## Next Sprint Candidate
-
-| Item | Value |
-|---|---|
-| Name | Sprint R20: Bernie Manifest Prompt Consumption Gate |
-| Status | Proposed |
-| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for domain-policy dissent, and DeepSeek Flash lanes for source inventory/test design |
-
-Recommended scope: design the safe prompt/context injection gate for the read-only manifest, including payload size, redaction/no-PHI guarantees, live-provider test strategy, and refusal rules proving Bernie cannot convert manifest knowledge into write authority.
 
 ## Previous Closeout - Sprint R18
 

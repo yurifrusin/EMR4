@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r20-manifest-prompt-consumption-gate` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -41,5 +41,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: integrated. Ariadne reran focused py_compile/pytest with DeepSeek adversarial tests after merge.
+- Follow-up required: next sprint should decide fake-provider prompt assembly/evaluation before live provider wiring.
