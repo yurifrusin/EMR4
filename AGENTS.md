@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R16 status-specific reason-code narrowing integrated locally; closeout/push in progress |
+| **Current active track** | Sprint R16 status-specific reason-code narrowing closed; Sprint R17 recommended next |
 | **Next recommended work** | Sprint R17 expired-session Diary UX banner after checking Claude availability at sprint start |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
