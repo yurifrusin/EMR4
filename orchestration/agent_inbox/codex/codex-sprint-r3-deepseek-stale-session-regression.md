@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r3-deepseek-stale-session-regression` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | b146f15 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r3-deepseek-stale-session-regression --summary "Short plan summary"` |
