@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Temporal regression test plan submitted.
+Raw temporal regression test artifact submitted.
 
 ## Worker Completion Notes
 
