@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R23: Frame-Aware Fake-Provider Validator |
 | Integrated through | Antigravity/Gemini frame-shape semantics review, two DeepSeek Flash planning/review lanes, Ariadne implementation |
-| Status | Integrated locally; validation passed; push/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Python Security and CodeQL workflows green |
 | Last updated | 2026-07-05 |
 
 ## What Changed
