@@ -10,7 +10,7 @@
 
 ## Review Request
 
-Plan packet submitted; no production code changes.
+Adversarial probes submitted for review; Ariadne should treat them as pre-fix evidence and supersede rather than merge if expectations conflict with the implemented guard.
 
 ## Worker Completion Notes
 
