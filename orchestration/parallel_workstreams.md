@@ -25,6 +25,56 @@ Recommended next slice when Bernie clarification/state work resumes:
 - Sprint R1: Reception Scenario Corpus Foundation.
 - Sprint R2: Clarification Merge Semantics.
 
+## Sprint R1: Reception Scenario Corpus Foundation
+
+| Item | Value |
+|---|---|
+| Status | Dispatching / plan gate |
+| Product Goal | Establish a small version-controlled Bernie receptionist scenario corpus and replay harness so exploratory receptionist findings become executable project memory |
+| Worker Shape | Claude backend harness lane, Antigravity/Gemini receptionist-domain scenario lane, DeepSeek Flash fixture integrity lane, Ariadne orchestration/integration |
+| In Scope | Scenario schema/loader, backend/session replay harness, 8-12 seed scenarios, fixture integrity checks, authoring guidance |
+| Out Of Scope | Broad UI redesign, GraphRAG, production PHI/log ingestion, auto-mode, unconfirmed diary writes, fixing every known Bernie behaviour |
+| Verification | Scenario fixture validation, focused pytest for replay/integrity harness, py_compile, git diff --check |
+
+### Workstream R1-A - Backend Replay Harness
+
+| Item | Value |
+|---|---|
+| Owner | Claude Code |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-sprint-r1-bernie-scenario-replay-harness.md` |
+| Goal | Build the pytest loader/replay harness for backend Bernie session scenarios |
+| In Scope | `tests/bernie_scenarios/`, loader/helpers, focused tests needed to prove scenario replay mechanics |
+| Out of Scope | Scenario corpus authorship beyond minimal fixtures needed to prove the harness, Diary frontend, production app changes except tiny seams required by the harness |
+| Verification | py_compile and focused pytest for the new harness plus relevant existing Bernie session tests |
+| Status | Dispatching |
+
+### Workstream R1-B - Reception Scenario Corpus
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-sprint-r1-reception-scenario-corpus.md` |
+| Goal | Design and author the first receptionist-domain scenario corpus from the R1 seed list |
+| In Scope | `tests/fixtures/bernie_scenarios/`, scenario content, scenario acceptance notes, domain/test-design dissent |
+| Out of Scope | Backend harness implementation, Diary UI changes, production code, prompt rewrites, GraphRAG |
+| Verification | Corpus files parse under the agreed schema once Claude/DeepSeek validation is available; otherwise provide a manual schema checklist in completion notes |
+| Status | Dispatching |
+
+### Workstream R1-C - DeepSeek Fixture Integrity Lane
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r1-deepseek-scenario-integrity` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r1-deepseek-scenario-integrity.md` |
+| Goal | Add cheap independent fixture/schema integrity coverage and consistency review without spending native Codex worker usage |
+| In Scope | Scenario fixture README/checklist, parse/uniqueness/category validation tests, review notes for malformed or ambiguous scenario expectations |
+| Out of Scope | Backend replay harness, production app code, Diary UI, broad implementation of clarification semantics |
+| Verification | py_compile, focused integrity pytest, git diff --check |
+| Status | Dispatching |
+
 ## Operating Rules
 
 - Every agent starts with `python scripts\agent_worktrees.py handin`.
