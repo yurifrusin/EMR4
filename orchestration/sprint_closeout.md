@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R4: Backdated/Past-Date Safety |
 | Integrated through | DeepSeek Flash implementation lane, DeepSeek Flash adversarial review lane (superseded into Ariadne route tests), Antigravity/Gemini domain-policy artifacts, and Ariadne verification/polish |
-| Status | Integration worktree verified; pending commit/push/mirror/audit |
+| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean; disposable DeepSeek worktrees retired |
 | Last updated | 2026-07-05 |
 
 ## What Changed

@@ -546,7 +546,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint R4 backdated/past-date Bernie slot-search guard |
+| **Latest integration commit** | `fd0e647` — Sprint R4 backdated/past-date Bernie slot-search guard |
 
 ### Tag map (all tags pushed to remote)
 
