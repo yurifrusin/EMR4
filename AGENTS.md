@@ -31,6 +31,15 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Current active track** | Sprint R25 no-write live-provider sampling harness scaffold dispatched; Claude capped until 2:30am so DeepSeek replaces Claude |
 | **Next recommended work** | Run R25 plan-gated Antigravity/Gemini and DeepSeek lanes; keep tests default-disabled with no live provider calls |
 
+Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
+apparently continuous original diary state snapshots, about 58k files. Raw files
+must stay local and ignored, preferably under
+`local_data/historical-diary-trove/raw/`; do not commit or send raw PHI-bearing
+content to LLM/external providers. The utilisation plan is
+`docs/historical-diary-trove-plan.md`. First recommended sprint after Yuri
+returns is H1: local inventory and safety boundary, starting with a small pilot
+subset before touching the full trove.
+
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
 noisy for broad natural-language graph search. Generated `graphify-out/` is

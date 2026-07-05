@@ -43,6 +43,9 @@ uploads/
 downloads/
 patient_data/
 clinical_data/
+local_data/
+historical_diary_trove/
+historical-diary-trove/
 
 # Audio / transcripts / generated media
 static/audio/
