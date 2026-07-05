@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H4: Historical Diary Trove Structure Classifier Prototype |
 | Integrated through | Ariadne local-only Word COM aggregate classifier; no external workers used because raw files are PHI-bearing |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages and Python Security workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -26,7 +26,9 @@ reviewed, integrated, verified, pushed, and audited.
 ## Verification
 
 - H4 classifier command passed: `powershell -NoProfile -ExecutionPolicy Bypass -Command "& { .\scripts\historical_diary_structure_classifier.ps1 -Root @('local_data\historical-diary-trove\raw\pilot','local_data\historical-diary-trove\raw\pilot_01') -Output 'local_data\historical-diary-trove\inventory\structure_classifier_h4.json' -SampleSize 8 -DenseDays 1 }"`.
-- Validation pending final run before commit.
+- Whitespace check passed: `git diff --check`.
+- Post-push audit passed with `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `26de3e02`.
+- Post-push GitHub workflows passed for H4: Deploy GitHub Pages and Python Security. CodeQL did not run for this docs/PowerShell-only change set.
 
 ## Recommended User Review
 
