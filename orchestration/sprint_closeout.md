@@ -8,53 +8,54 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R5: Executable Scenario Promotion |
-| Integrated through | DeepSeek Flash executable promotion lane with Ariadne correction, DeepSeek Flash adversarial review, Antigravity/Gemini domain-priority review, and Ariadne verification/polish |
-| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean; disposable DeepSeek worktrees retired |
+| Batch | Sprint R6: Temporal Boundary Harness Follow-Up |
+| Integrated through | Claude route-level temporal harness/fix, Antigravity/Gemini domain review, DeepSeek Flash adversarial review, DeepSeek Flash edge-case scout, and Ariadne integration cleanup |
+| Status | Verified locally; push/audit pending |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added `tests/fixtures/bernie_scenarios/absolute_past_date_blocked_exec.yaml`, a passing executable replay fixture for the R4 absolute-past-date guard.
-- Preserved `absolute_past_date_blocked.yaml` as natural-language corpus memory while adding deterministic API-level replay coverage.
-- Enhanced `tests/bernie_scenarios/replay.py` so dotted field assertions can traverse numeric list indices such as `blocks.0.code`.
-- Integrated Gemini's domain-priority review in `docs/receptionist_review_r5.md`.
-- Integrated the second DeepSeek worker's adversarial classification in `docs/receptionist_review_r5_adversarial.md`.
-- Corrected the first DeepSeek worker's stale `xfail` recommendation: the R4 normalizer already blocks `date_from < reference_date`, so the new executable scenario is a real passing regression test.
-- No production backend, Diary UI, taskpane/Word assets, GitHub Pages assets, database migrations, live provider calls, GraphRAG/MCP/indexer automation, or raw appointment mutation endpoints changed.
+- Added deterministic route tests in `tests/test_bernie_same_day_window_route.py` for same-day temporal boundaries on the Bernie interpret path.
+- Fixed the latest-only fully-past same-day gap in `app/routers/appointments.py`, so a request like "before 09:00 today" at 10:30 asks for clarification instead of being treated as safe.
+- Preserved clamp semantics for partially elapsed same-day windows: an earliest time in the past can clamp forward when the window is still usable.
+- Added review artifacts: `docs/receptionist_review_r6.md`, `docs/receptionist_review_r6_adversarial.md`, and `docs/receptionist_review_r6_edge_cases.md`.
+- Kept raw appointment create/update/date-policy changes out of R6; DeepSeek's raw-mutation findings are recorded as follow-up work rather than silently widening this sprint.
+- No Diary UI, taskpane/Word assets, GitHub Pages assets, database migrations, live provider calls, GraphRAG/MCP/indexer automation, or deployed static assets changed.
 
 ## Verification
 
-- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\bernie_scenarios\replay.py tests\bernie_scenarios\loader.py tests\bernie_scenarios\test_scenario_replay.py tests\test_bernie_scenario_integrity.py`.
-- Focused executable scenario passed: `.venv\Scripts\pytest.exe tests\bernie_scenarios\test_scenario_replay.py -k absolute-past-date-blocked-exec -q` (1 passed; existing Starlette/Google GenAI warnings only).
-- Scenario integrity/replay suite passed: `.venv\Scripts\pytest.exe tests\test_bernie_scenario_integrity.py tests\bernie_scenarios -q` (8 passed, 1 skipped, 1 xfailed; existing warnings only).
-- Adjacent Bernie normalizer/confidence/supervised suite passed: `.venv\Scripts\pytest.exe tests\test_bernie_slot_normalizer.py tests\test_bernie_confidence_policy.py tests\test_bernie_supervised_booking_wrapper.py -q` (83 passed; existing warnings only).
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py tests\test_bernie_same_day_window_route.py tests\test_bernie_scenario_integrity.py tests\bernie_scenarios\replay.py`.
+- New same-day temporal route suite passed: `.venv\Scripts\pytest.exe tests\test_bernie_same_day_window_route.py -q` (4 passed; existing Starlette/Google GenAI warnings only).
+- Adjacent Bernie temporal/confidence/no-slot suite passed: `.venv\Scripts\pytest.exe tests\test_bernie_temporal_policy.py tests\test_bernie_confidence_policy.py tests\test_bernie_no_slot_suggestions.py -q` (46 passed; existing warnings only).
+- Scenario integrity/replay suite passed: `.venv\Scripts\pytest.exe tests\test_bernie_scenario_integrity.py tests\bernie_scenarios -q` (10 passed, 1 skipped, 1 xfailed; existing warnings only).
+- Whitespace check passed: `git diff --check`.
 
 ## Recommended User Review
 
-No required manual review for Sprint R5. This is deterministic backend test-harness/domain-review work and does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, or live provider behavior.
+No required manual review for Sprint R6 if final validation passes. This is deterministic backend route/test and documentation work with no visible UI or deployed static asset change.
 
 ## Not Required Before Moving On
 
 - No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
-- No live Gemini/Vertex call is required; the new executable scenario runs through deterministic FastAPI pytest only.
-- No database migration or test database reset is required; pytest fixtures handled the scenario replay.
+- No live Gemini/Vertex call is required; the new route tests use deterministic fake/mock providers.
+- No database migration or test database reset is required; pytest fixtures own the test database state.
 
 ## Known Follow-Up
 
-- Same-day past-window and stale-session scenarios remain corpus memory until the harness can inject clinic-local clock/session freshness state.
-- DeepSeek's bridge continues to perform useful bounded work but still needs Ariadne host-side verification/submission when sandboxed away from Python/git.
-- Direct raw appointment mutation/date-policy hardening remains an open product-policy follow-up separate from Bernie slot-search scenario promotion.
+- Raw direct appointment create/update and compatibility proposal paths still need a separate temporal/date-policy hardening sprint; DeepSeek classified these as high-value follow-up surfaces.
+- The supervised Bernie path has strong same-day handling already, but an executable latest-only supervised regression can be added when the harness needs broader parity coverage.
+- The scenario replay harness still lacks general clinic-local clock injection; R6 deliberately used route-level monkeypatching rather than over-expanding the replay harness.
+- The `agent_worktrees.py poll --fetch --include-codex-workers` Unicode decode issue recurred during R6 and should be repaired in a tooling sprint if it keeps interrupting orchestration.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R6: Temporal Boundary Harness Follow-Up |
-| Status | Dispatched |
-| Recommended agents | Two DeepSeek Flash workers if Claude is still recuperating, plus Antigravity/Gemini for domain-priority/test-design |
+| Name | Sprint R7: Raw Appointment Temporal Guard Hardening |
+| Status | Proposed |
+| Recommended agents | Claude for backend implementation if available; DeepSeek Flash for adversarial route inventory/tests; Antigravity/Gemini for receptionist/product-policy review |
 
-R6 has been dispatched as the recommended next sprint: Claude takes the main temporal-harness implementation lane, DeepSeek reviews adversarially, and Gemini provides domain/test-design review.
+Recommended scope: apply explicit past-date/same-day temporal guardrails to raw direct appointment create/update and compatible proposal paths without changing the signed-confirm authority model.
 
 ## Previous Closeout - Sprint R4
 

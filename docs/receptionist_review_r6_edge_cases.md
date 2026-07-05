@@ -141,7 +141,5 @@ single new test for the pure function with `latest_time`-only past boundary.
 
 ## Completion Note
 
-> **Submitted via:** Artifact only (git `add` blocked by sandbox).
-> **File:** `docs/receptionist_review_r6_edge_cases.md` on branch `codex/sprint-r6-temporal-edge-scout`.
-> **Ariadne action needed:** `git add docs/receptionist_review_r6_edge_cases.md && git commit -m "Finalize R6 temporal edge-case scout review artifact"` then integrate via normal flow.
+> **Submitted via:** Host-submitted worker artifact on branch `codex/sprint-r6-temporal-edge-scout`.
 > **Do not edit production code or tests.** This is a review-only artifact.

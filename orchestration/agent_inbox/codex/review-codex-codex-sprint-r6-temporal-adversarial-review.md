@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r6-temporal-review` |
 | Source Task | `codex-sprint-r6-temporal-adversarial-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

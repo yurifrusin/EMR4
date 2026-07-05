@@ -6,14 +6,14 @@ This document provides the independent receptionist-domain, clinical safety, and
 
 ## 1. Executive Summary & Domain Invariants
 
-In a general practice clinical environment, date and time validations are critical safety boundaries. Booking appointments on dates or times that have already elapsed introduces major clinical risks (e.g., retrospective entry errors, auditing anomalies, billing compliance issues under the General Medical Services Table). 
+In a general practice clinical environment, date and time validations are critical safety boundaries. Booking appointments on dates or times that have already elapsed introduces major clinical risks (e.g., retrospective entry errors, auditing anomalies, billing compliance issues under the General Medical Services Table).
 
 In EMR4 Centaur, Bernie (the clinical assistant) must enforce these boundaries using clear, receptionist-safe semantics. We distinguish between:
 1. **Absolute Past Dates**: Strictly blocking historical bookings.
 2. **Same-Day Bounded Windows**: Clamping or clarifying same-day requests where time is passing dynamically.
 3. **Session Freshness**: Managing stale-session states across date boundaries or concurrent edits.
 
-This review verifies that the pure temporal logic consolidation in [temporal.py](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/app/services/diary/temporal.py) is a solid foundation, identifies a route-level gap (the **DeepSeek A1 Edge Case**) in the interpret route, and provides deterministic testing recommendations.
+This review verifies that the pure temporal logic consolidation in `app/services/diary/temporal.py` is a solid foundation, identifies a route-level gap (the **DeepSeek A1 Edge Case**) in the interpret route, and provides deterministic testing recommendations.
 
 ---
 
@@ -55,7 +55,7 @@ Understanding the distinct semantic rules prevents introducing UX or clinical fr
 ## 4. Assessment of the DeepSeek A1 (Latest-Only Fully-Past) Edge Case
 
 ### The Bug Description
-During static analysis of the same-day clamping logic in [appointments.py](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/app/routers/appointments.py#L3718-3722), a route-level discrepancy was identified.
+During static analysis of the same-day clamping logic in `app/routers/appointments.py`, a route-level discrepancy was identified.
 
 In the **supervised booking route**, the same-day window is evaluated and the route correctly short-circuits:
 ```python
@@ -77,7 +77,7 @@ if (
 
 ### Clinical Safety & UX Impact
 If a receptionist says *"Book today before 10 AM"* at 10:30 AM (meaning `_earliest` is `None` but `_latest` is `10:00`):
-1. [evaluate_same_day_window()](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/app/services/diary/temporal.py#L167) correctly returns `SameDayWindowDecision(kind="window_fully_past")`.
+1. `evaluate_same_day_window()` correctly returns `SameDayWindowDecision(kind="window_fully_past")`.
 2. The interpret route (line 3718) bypasses the `if` block because `_earliest` is `None`.
 3. The interpret route proceeds with `temporal_band = "proceed_with_check"` or `"assume"`, telling the staff UI that the request is valid.
 4. When the receptionist clicks "Book", the supervised route executes, evaluates line 5734, and hard blocks the request with `clinic_day_exhausted`.

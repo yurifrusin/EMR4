@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r6-temporal-domain-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

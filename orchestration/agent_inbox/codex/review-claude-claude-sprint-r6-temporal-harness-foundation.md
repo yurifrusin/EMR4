@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r6-temporal-harness-foundation` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

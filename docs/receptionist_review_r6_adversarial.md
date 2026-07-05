@@ -1,4 +1,4 @@
-﻿# Sprint R6 Adversarial Temporal Boundary Review
+# Sprint R6 Adversarial Temporal Boundary Review
 
 > **Reviewer:** DeepSeek Flash (Shen) — Adversarial track
 > **Date:** 2026-07-05
@@ -15,7 +15,8 @@
 The temporal boundary is **mostly solid** for the Bernie supervised path (NL →
 normalizer → slot search → proposal → signed confirmation). The normalizer
 enforces date_from >= reference_date (blocking past-date searches), and the
-Bernie interpreter path uses explicit eference_date binding to align relative
+Bernie interpreter path uses explicit
+eference_date binding to align relative
 NL tokens. The diary-domain 	emporal.py is cleanly pure with no DB or clock
 reads, and evaluate_same_day_window correctly defers route-level decisions to
 callers.
@@ -57,7 +58,8 @@ passed but the window is still open.
 
 _resolve_day_schedule correctly returns None when
 ScheduleOverride.is_unavailable is set. evaluate_reception_context keeps
-oster_unavailable as a distinct first-class classification.
+
+oster_unavailable as a distinct first-class classification.
 
 ---
 
@@ -74,7 +76,7 @@ evaluate_same_day_window, and never validates against the practice roster.
 
 **Exploitation:**
 1. Receptionist POSTs an appointment for yesterday or last week with any valid
-   ppointment_date and start_time_local.
+   appointment_date and start_time_local.
 2. If no conflicting appointment exists (same practitioner, same local time),
    the appointment is created successfully with a past date.
 3. A "Booked" or "Completed" appointment exists in the audit log for a time
@@ -114,7 +116,7 @@ update proposal builder and the raw status-update apply path.
 
 ### Finding 3 (Low) — _overlaps end-boundary arithmetic edge case
 
-**Location:** pp/routers/appointments.py line 643-651
+**Location:** app/routers/appointments.py line 643-651
 
 `python
 def _overlaps(start_a, duration_a, start_b, duration_b):
@@ -150,7 +152,7 @@ level.
 
 ### Finding 5 (Low) — Completed appointments blocking semantics are misleading
 
-**Location:** pp/routers/appointments.py lines 660-666
+**Location:** app/routers/appointments.py lines 660-666
 
 `python
 NON_BLOCKING_STATUSES = (
@@ -170,7 +172,7 @@ actual bug — rename or add a comment for clarity.
 
 ### Finding 6 (Medium) — _as_practice_local misinterprets naive UTC datetimes
 
-**Location:** pp/routers/appointments.py line 458-461
+**Location:** app/routers/appointments.py line 458-461
 
 `python
 def _as_practice_local(start_time, practice_tz):
@@ -231,7 +233,7 @@ persistence layer, or handle over-midnight by creating two same-date ranges.
 
 ### Finding 10 (Informational) — parse_time_fragment defensive guards
 
-**Location:** pp/services/diary/temporal.py lines 61-74
+**Location:** app/services/diary/temporal.py lines 61-74
 
 parse_time_fragment safely returns None for impossible meridiem/hour
 combinations (13 pm → hour=25 → None). Value like   pm normalises to 12:00,
@@ -306,9 +308,6 @@ area without proportional test value.
 This file is a **review artifact only**. No production code, tests, fixtures, or
 harness changes were made.
 
-Git operations in this worktree are blocked by filesystem sandbox (parent repo
-.git at C:\Users\sarashera\emr4\.git is not writable from this sandbox). The
-review artifact is created locally. Claude/Ariadne should pick it up from
-docs/receptionist_review_r6_adversarial.md, review the findings, and implement
-route-level temporal guards on the raw-compat paths following the recommended
-testing approach in Section 5.
+The artifact was host-submitted through the sprint protocol. Ariadne should
+review the findings and implement route-level temporal guards on the raw-compat
+paths in a follow-up sprint using the recommended testing approach in Section 5.

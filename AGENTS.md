@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R5 executable Bernie scenario promotion pushed with mirrors realigned and audit clean |
-| **Next recommended work** | Sprint R6: temporal boundary harness follow-up or direct raw appointment mutation/date-policy hardening if product policy requires it |
+| **Current active track** | Sprint R6 temporal boundary harness follow-up verified locally; push/audit pending |
+| **Next recommended work** | Sprint R7: raw appointment temporal guard hardening across direct create/update and compatibility proposal paths |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
@@ -559,7 +559,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `99a5e50` - Sprint R5 executable Bernie scenario promotion |
+| **Latest integration commit** | `2b1cca1` - Sprint R6 temporal boundary harness follow-up |
 
 ### Tag map (all tags pushed to remote)
 
