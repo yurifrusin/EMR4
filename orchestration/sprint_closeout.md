@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H6: Historical Diary Trove Safe Timeline Delta Prototype |
 | Integrated through | Ariadne local-only bounded aggregate run plus H5 validator gate; no external workers used because raw files are PHI-bearing |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Python Security green; Pages green after fresh workflow dispatch |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -29,7 +29,10 @@ reviewed, integrated, verified, pushed, and audited.
 - H6 bounded classifier command passed: `powershell -NoProfile -ExecutionPolicy Bypass -Command "& { .\scripts\historical_diary_structure_classifier.ps1 -Root @('local_data\historical-diary-trove\raw\pilot','local_data\historical-diary-trove\raw\pilot_01') -Output 'local_data\historical-diary-trove\inventory\timeline_delta_h6.json' -SampleSize 40 -DenseDays 1 }"`.
 - H6 aggregate safety validation passed: `.venv\Scripts\python.exe scripts\historical_diary_output_safety.py local_data\historical-diary-trove\inventory\timeline_delta_h6.json`.
 - Whitespace check passed: `git diff --check`.
-- Final validation pending before commit.
+- Whitespace check passed: `git diff --check`.
+- Post-push audit passed with `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `6a07772b`.
+- Post-push Python Security passed for H6.
+- The push-triggered Pages deployment failed twice with GitHub's "Deployment failed, try again later" / duplicate-artifact rerun behaviour; a fresh `workflow_dispatch` Pages run succeeded after a short wait.
 
 ## Recommended User Review
 
