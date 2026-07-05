@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R12 Diary reason-code UI flow integrated locally; closeout/push in progress |
+| **Current active track** | Sprint R12 Diary reason-code UI flow closed; R13 Diary smoke harness recovery recommended next |
 | **Next recommended work** | Sprint R13: Diary smoke harness recovery for unrelated Bernie session/pilot failures, after checking Claude availability at sprint start |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the

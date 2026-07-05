@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r12-diary-reason-code-ux-review` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-05 19:04 +1000 |
 | Source HEAD | `a45fe1b` |
 

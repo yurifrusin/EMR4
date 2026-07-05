@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R12: Diary Reason-Code UI Flow |
 | Integrated through | Ariadne UI/test integration, Antigravity/Gemini UX/privacy review, DeepSeek Flash implementation plan, DeepSeek Flash smoke-test plan |
-| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned, audit clean, disposable DeepSeek worktrees retired |
 | Last updated | 2026-07-05 |
 
 ## What Changed
