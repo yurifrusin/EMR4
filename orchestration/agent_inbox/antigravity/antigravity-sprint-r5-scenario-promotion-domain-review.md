@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 2687ef6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r5-scenario-promotion-domain-review --summary "Short plan summary"` |
@@ -92,3 +92,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+
+## Integration Outcome
+
+Integrated by Ariadne as `docs/receptionist_review_r5.md`. Gemini's domain review ranked the R3/R4 fixtures by clinical safety value and executable readiness, and recommended keeping same-day past-window and stale-session narratives as memory-only until clock/session harness support exists.

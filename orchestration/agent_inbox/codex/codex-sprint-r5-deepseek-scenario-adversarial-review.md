@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r5-scenario-review` |
-| Status | queued |
+| Status | integrated |
 | Created | 2687ef6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r5-deepseek-scenario-adversarial-review --summary "Short plan summary"` |
@@ -92,3 +92,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+
+## Integration Outcome
+
+Integrated by Ariadne as `docs/receptionist_review_r5_adversarial.md`. The review classified R3/R4 fixtures into executable-now, corpus-memory, and future-harness-work buckets, and confirmed that absolute past-date normalization is the only clean R5 executable promotion under the current harness.

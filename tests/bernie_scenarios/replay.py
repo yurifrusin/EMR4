@@ -52,10 +52,13 @@ def _resolve(value: Any, ctx: "ReplayContext") -> Any:
 
 
 def _get_nested(obj: Any, dotted_path: str) -> Any:
-    """Traverse a JSON dict using a dotted field path."""
+    """Traverse a JSON dict/list using a dotted field path."""
     for part in dotted_path.split("."):
         if isinstance(obj, dict):
             obj = obj.get(part)
+        elif isinstance(obj, list) and part.isdigit():
+            idx = int(part)
+            obj = obj[idx] if 0 <= idx < len(obj) else None
         else:
             return None
     return obj

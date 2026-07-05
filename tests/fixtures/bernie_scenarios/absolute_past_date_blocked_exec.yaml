@@ -1,0 +1,39 @@
+# Executable replay fixture: absolute past-date slot-search blocking.
+# Preserves absolute_past_date_blocked.yaml as natural-language corpus memory.
+
+id: absolute-past-date-blocked-exec
+category: session_state_guard
+description: >
+  An absolute date before the session reference_date must fail closed
+  at the normalize step before slot search runs.
+reference_date: "2026-07-05"
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: normalize
+    input:
+      practitioner_id: "{practitioner_id}"
+      date_from: "2026-07-04"
+      duration_minutes: 15
+    expect:
+      status: 200
+      fields:
+        safe: false
+        constraint: null
+        "blocks.0.code": "requested_date_in_past"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

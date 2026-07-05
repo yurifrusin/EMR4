@@ -30,7 +30,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
+| Status | Integrated locally; final push/audit pending |
 | Product Goal | Promote the best R3/R4 receptionist-domain corpus memory into executable Bernie replay coverage where the current harness can express it cleanly |
 | Worker Shape | Two DeepSeek Flash lanes under the Claude-recuperation fallback rule, Antigravity/Gemini domain-priority review, Ariadne orchestration/integration |
 | In Scope | Selected R3/R4 scenario fixtures, minimal scenario loader/replay support if needed, scenario integrity/replay tests, fixture classification notes |
@@ -48,7 +48,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Scenario fixtures, minimal harness support, focused replay/integrity tests |
 | Out of Scope | Production app code, UI, live provider calls, direct raw mutation policy |
 | Verification | py_compile and focused scenario pytest |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream R5-B - DeepSeek Adversarial Review
 
@@ -61,7 +61,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Review artifact or narrow tests around fixture/harness boundaries |
 | Out of Scope | Production app code, broad harness rewrite, UI |
 | Verification | Scenario integrity/replay checks if files change, or explicit review artifact |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream R5-C - Gemini Domain Priority Review
 
@@ -74,7 +74,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Review packet or `docs/receptionist_review_r5.md`, fixture classification, acceptance notes |
 | Out of Scope | Production code edits, broad harness rewrite, UI, live provider calls |
 | Verification | Tangible review artifact with recommended executable-vs-memory classification |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint R4: Backdated/Past-Date Safety
 

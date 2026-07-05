@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r5-scenario-promotion` |
-| Status | queued |
+| Status | integrated |
 | Created | 2687ef6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r5-deepseek-executable-scenario-promotion --summary "Short plan summary"` |
@@ -92,3 +92,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+
+## Integration Outcome
+
+Integrated by Ariadne. DeepSeek's submitted direction was accepted, but its stale `xfail` claim and incorrect `date_from_in_past` block code were corrected in the integration tree. Final integrated artifact is a passing executable replay fixture asserting `requested_date_in_past` plus a minimal list-index helper in the replay harness.

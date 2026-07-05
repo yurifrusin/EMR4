@@ -8,6 +8,58 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint R5: Executable Scenario Promotion |
+| Integrated through | DeepSeek Flash executable promotion lane with Ariadne correction, DeepSeek Flash adversarial review, Antigravity/Gemini domain-priority review, and Ariadne verification/polish |
+| Status | Integrated locally; push, mirror realign, and audit pending |
+| Last updated | 2026-07-05 |
+
+## What Changed
+
+- Added `tests/fixtures/bernie_scenarios/absolute_past_date_blocked_exec.yaml`, a passing executable replay fixture for the R4 absolute-past-date guard.
+- Preserved `absolute_past_date_blocked.yaml` as natural-language corpus memory while adding deterministic API-level replay coverage.
+- Enhanced `tests/bernie_scenarios/replay.py` so dotted field assertions can traverse numeric list indices such as `blocks.0.code`.
+- Integrated Gemini's domain-priority review in `docs/receptionist_review_r5.md`.
+- Integrated the second DeepSeek worker's adversarial classification in `docs/receptionist_review_r5_adversarial.md`.
+- Corrected the first DeepSeek worker's stale `xfail` recommendation: the R4 normalizer already blocks `date_from < reference_date`, so the new executable scenario is a real passing regression test.
+- No production backend, Diary UI, taskpane/Word assets, GitHub Pages assets, database migrations, live provider calls, GraphRAG/MCP/indexer automation, or raw appointment mutation endpoints changed.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\bernie_scenarios\replay.py tests\bernie_scenarios\loader.py tests\bernie_scenarios\test_scenario_replay.py tests\test_bernie_scenario_integrity.py`.
+- Focused executable scenario passed: `.venv\Scripts\pytest.exe tests\bernie_scenarios\test_scenario_replay.py -k absolute-past-date-blocked-exec -q` (1 passed; existing Starlette/Google GenAI warnings only).
+- Scenario integrity/replay suite passed: `.venv\Scripts\pytest.exe tests\test_bernie_scenario_integrity.py tests\bernie_scenarios -q` (8 passed, 1 skipped, 1 xfailed; existing warnings only).
+- Adjacent Bernie normalizer/confidence/supervised suite passed: `.venv\Scripts\pytest.exe tests\test_bernie_slot_normalizer.py tests\test_bernie_confidence_policy.py tests\test_bernie_supervised_booking_wrapper.py -q` (83 passed; existing warnings only).
+
+## Recommended User Review
+
+No required manual review for Sprint R5. This is deterministic backend test-harness/domain-review work and does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, or live provider behavior.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; the new executable scenario runs through deterministic FastAPI pytest only.
+- No database migration or test database reset is required; pytest fixtures handled the scenario replay.
+
+## Known Follow-Up
+
+- Same-day past-window and stale-session scenarios remain corpus memory until the harness can inject clinic-local clock/session freshness state.
+- DeepSeek's bridge continues to perform useful bounded work but still needs Ariadne host-side verification/submission when sandboxed away from Python/git.
+- Direct raw appointment mutation/date-policy hardening remains an open product-policy follow-up separate from Bernie slot-search scenario promotion.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint R6: Temporal Boundary Harness Follow-Up |
+| Status | Candidate |
+| Recommended agents | Two DeepSeek Flash workers if Claude is still recuperating, plus Antigravity/Gemini for domain-priority/test-design |
+
+R6 can add a compact temporal-boundary test surface for same-day/past-date policies, or Ariadne can instead tackle raw appointment mutation/date-policy hardening if Yuri wants product-policy breadth before more harness work.
+
+## Previous Closeout - Sprint R4
+
+| Item | Value |
+|---|---|
 | Batch | Sprint R4: Backdated/Past-Date Safety |
 | Integrated through | DeepSeek Flash implementation lane, DeepSeek Flash adversarial review lane (superseded into Ariadne route tests), Antigravity/Gemini domain-policy artifacts, and Ariadne verification/polish |
 | Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean; disposable DeepSeek worktrees retired |
