@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r10-reason-code-inventory` |
-| Status | queued |
+| Status | integrated |
 | Created | 81fc8c6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r10-deepseek-reason-code-inventory --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `docs/receptionist_review_r10_reason_code_inventory.md`
+- Verification run: Ariadne reviewed and integrated a cleaned inventory artifact; focused backend audit suite passed.
+- Remaining risks: Status mutation routes still lack reason capture; this remains a future implementation sprint.

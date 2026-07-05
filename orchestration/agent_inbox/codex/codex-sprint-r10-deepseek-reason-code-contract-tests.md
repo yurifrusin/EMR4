@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r10-reason-code-contract-tests` |
-| Status | queued |
+| Status | integrated |
 | Created | 81fc8c6 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r10-deepseek-reason-code-contract-tests --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `tests/test_appointment_audit.py`
+- Verification run: `.venv\Scripts\python.exe -m py_compile tests\test_appointment_audit.py`; `.venv\Scripts\pytest.exe tests\test_appointment_audit.py -q --tb=short`
+- Remaining risks: Tests intentionally pin current status-route behaviour where status changes cannot carry cancellation reasons.

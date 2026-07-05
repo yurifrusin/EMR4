@@ -14,7 +14,7 @@ Covers:
 - Multiple mutations produce multiple ordered entries.
 """
 import json
-from datetime import date, datetime, time, timezone
+from datetime import date, datetime, time, timedelta, timezone
 
 import pytest
 
@@ -24,7 +24,7 @@ from app.models.appointments import (
 )
 from tests.conftest import make_token
 
-TODAY = date.today()
+TODAY = date.today() + timedelta(days=14)
 APPT_URL = "/api/v1/appointments"
 DELETE_CONFIRM_URL = f"{APPT_URL}/proposals/delete-confirm"
 
@@ -392,3 +392,96 @@ def test_get_audit_empty_for_fresh_appointment(
     resp = client.get(f"{APPT_URL}/{appt.id}/audit", headers=_auth(token))
     assert resp.status_code == 200
     assert resp.json() == []
+
+
+def test_delete_preserves_cancellation_reason_on_appointment_and_audit(
+    client, db, practice, practitioner, patient, receptionist_user
+):
+    appt = _make_appt(db, practice, practitioner, patient)
+    reason = "Patient request"
+    token = make_token(receptionist_user)
+
+    resp = client.request(
+        "DELETE",
+        f"{APPT_URL}/{appt.id}",
+        json={"cancellation_reason": reason},
+        headers=_auth(token),
+    )
+    assert resp.status_code == 204
+
+    resp = client.get(f"{APPT_URL}/{appt.id}", headers=_auth(token))
+    assert resp.status_code == 200
+    assert resp.json()["status"] == "Cancelled"
+    assert resp.json()["cancellation_reason"] == reason
+
+    entries = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.appointment_id == appt.id
+    ).all()
+    assert len(entries) == 1
+    assert entries[0].action == AppointmentAuditAction.delete
+    assert entries[0].status_before == AppointmentStatus.Booked
+    assert entries[0].status_after == AppointmentStatus.Cancelled
+    assert entries[0].cancellation_reason == reason
+
+
+@pytest.mark.parametrize("status", ["Cancelled", "NoShow", "DNA"])
+def test_patch_status_does_not_set_cancellation_reason(
+    status, client, db, practice, practitioner, patient, receptionist_user
+):
+    appt = _make_appt(db, practice, practitioner, patient)
+    token = make_token(receptionist_user)
+
+    resp = client.patch(
+        f"{APPT_URL}/{appt.id}/status",
+        json={"status": status},
+        headers=_auth(token),
+    )
+    assert resp.status_code == 200
+
+    resp = client.get(f"{APPT_URL}/{appt.id}", headers=_auth(token))
+    assert resp.status_code == 200
+    assert resp.json()["status"] == status
+    assert resp.json()["cancellation_reason"] is None
+
+    resp = client.get(f"{APPT_URL}/{appt.id}/audit", headers=_auth(token))
+    assert resp.status_code == 200
+    entries = resp.json()
+    assert len(entries) == 1
+    assert entries[0]["action"] == "status_change"
+    assert entries[0]["status_before"] == "Booked"
+    assert entries[0]["status_after"] == status
+    assert entries[0]["cancellation_reason"] is None
+
+
+def test_delete_confirm_preserves_cancellation_reason_on_appointment_and_audit(
+    client, db, practice, practitioner, patient, receptionist_user
+):
+    appt = _make_appt(db, practice, practitioner, patient)
+    reason = "Moved to another clinic"
+    token = make_token(receptionist_user)
+
+    resp = client.post(
+        f"{APPT_URL}/proposals/delete/{appt.id}",
+        json={"cancellation_reason": reason},
+        headers=_auth(token),
+    )
+    assert resp.status_code == 200
+    payload = resp.json()["confirm_payload"]
+    payload["confirmed"] = True
+
+    resp = client.post(DELETE_CONFIRM_URL, json=payload, headers=_auth(token))
+    assert resp.status_code == 200
+
+    resp = client.get(f"{APPT_URL}/{appt.id}", headers=_auth(token))
+    assert resp.status_code == 200
+    assert resp.json()["status"] == "Cancelled"
+    assert resp.json()["cancellation_reason"] == reason
+
+    entries = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.appointment_id == appt.id
+    ).all()
+    assert len(entries) == 1
+    assert entries[0].action == AppointmentAuditAction.delete
+    assert entries[0].status_before == AppointmentStatus.Booked
+    assert entries[0].status_after == AppointmentStatus.Cancelled
+    assert entries[0].cancellation_reason == reason

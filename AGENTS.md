@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R9 status/delete retrospective governance review verified locally; push/audit pending |
-| **Next recommended work** | Sprint R10: cancellation/status reason-code governance contract without changing temporal slot-write policy |
+| **Current active track** | Sprint R10 cancellation/status reason-code governance contract verified locally; push/audit pending |
+| **Next recommended work** | Sprint R11: optional reason-code substrate after receptionist taxonomy feedback |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
@@ -565,7 +565,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `ef67327` - Sprint R9 status/delete retrospective governance review |
+| **Latest integration commit** | `PENDING_R10_COMMIT` - Sprint R10 cancellation/status reason-code governance contract |
 
 ### Tag map (all tags pushed to remote)
 
