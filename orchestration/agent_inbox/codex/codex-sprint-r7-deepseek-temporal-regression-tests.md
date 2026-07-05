@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r7-temporal-regression-tests` |
-| Status | queued |
+| Status | submitted |
 | Created | ad2ea75 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r7-deepseek-temporal-regression-tests --summary "Short plan summary"` |
