@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H10: Historical Diary Trove Broad-Run Guardrails |
 | Integrated through | Ariadne local-only guardrail/comparer sprint; no external workers used because scope was raw-free and narrowly bounded |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -31,7 +31,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Guardrail smoke passed: classifier refused `SampleSize 101` before opening Word.
 - Local comparison passed: `.venv\Scripts\python.exe scripts\historical_diary_event_summary_compare.py local_data\historical-diary-trove\inventory\event_summary_h8.json local_data\historical-diary-trove\inventory\event_summary_h9.json`.
 - Safety validation passed for ignored H10 comparison output.
-- Validation pending final commit, audit, and post-push workflows.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors all aligned at `333ee3f1`.
+- GitHub workflows passed for the H10 push: Deploy GitHub Pages, Python Security, and CodeQL.
 
 ## Local Comparison Result
 
@@ -41,7 +42,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H10 is local tooling/tests/docs only and does not touch raw diary files.
+No required manual review before continuing. H10 is local tooling/tests/docs only and does not touch raw diary files.
 
 ## Not Required Before Moving On
 
