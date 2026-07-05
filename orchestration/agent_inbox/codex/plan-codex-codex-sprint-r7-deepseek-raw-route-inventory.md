@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r7-raw-route-inventory` |
 | Source Task | `codex-sprint-r7-deepseek-raw-route-inventory` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 17:16 +1000 |
 | Source HEAD | `e7e891f` |
 

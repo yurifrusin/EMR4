@@ -14,14 +14,17 @@
 
 Read these before acting on remembered process details.
 
-- 2026-07-05: Claude recuperation fallback is now hardwired. If Claude is
+- 2026-07-05: Sprint worker mix now starts with a Claude availability/quota
+  check so Ariadne remembers to use Claude when it is healthy. If Claude is
   quota-capped, unavailable, recuperating, or fails to submit a usable plan in
   the current sprint window, Ariadne should automatically replace the Claude
-  lane with a second DeepSeek Flash worker rather than waiting for Yuri. The
-  replacement worker must use a separate branch, clear file boundary, distinct
-  role (for example implementation vs adversarial review), plan gate, submit
-  path, and Ariadne-run verification before integration. Use DeepSeek Pro only
-  when reasoning depth, not diff hygiene, is the limiting factor.
+  lane with a DeepSeek Flash worker rather than waiting for Yuri. Ariadne may
+  also spawn as many additional DeepSeek Flash workers as the sprint
+  requirements safely justify. Every DeepSeek worker must use a separate
+  branch, clear file/review boundary, distinct role (for example implementation
+  vs adversarial review), plan gate, submit path, and Ariadne-run verification
+  before integration. Use DeepSeek Pro only when reasoning depth, not diff
+  hygiene, is the limiting factor.
 - 2026-07-05: Graphify is approved as an opt-in Ariadne navigation aid, not an
   always-on memory layer. Use it autonomously when the question starts from a
   known symbol, function, route, class, or UI handler and the goal is impact or
@@ -44,15 +47,17 @@ Read these before acting on remembered process details.
   Codex subagents alongside Claude, Antigravity, and DeepSeek.
 - 2026-07-04: DeepSeek Flash via `codex-deepseek-bridge` is approved for
   bounded implementation experiments when Ariadne remains orchestrator and
-  integrator. Use a dedicated worker branch and a tight file boundary. Prompts
-  must explicitly forbid deleting existing tests unless requested, require
-  UTF-8 without BOM, top-level import hygiene, no `.tmp`/`.bak` leftovers,
-  `git diff --stat` plus `git status --short --branch` before handback, and
-  exact tests/results. Ariadne must review the diff and run verification before
-  merging. Prefer Flash for small/backend-internal refactors; try Pro only if
-  reasoning quality, not diff hygiene, becomes the limiting factor. Multiple
-  DeepSeek workers may run at once only on separate branches, with disjoint file
-  ownership and independent verification plans.
+  integrator. Use dedicated worker branches and tight file/review boundaries.
+  Prompts must explicitly forbid deleting existing tests unless requested,
+  require UTF-8 without BOM, top-level import hygiene, no `.tmp`/`.bak`
+  leftovers, `git diff --stat` plus `git status --short --branch` before
+  handback, and exact tests/results. Ariadne must review the diff and run
+  verification before merging. Prefer Flash for small/backend-internal
+  refactors; try Pro only if reasoning quality, not diff hygiene, becomes the
+  limiting factor. Multiple DeepSeek workers may run at once in whatever number
+  the sprint requirements justify, provided each has a separate branch,
+  non-overlapping ownership or review boundary, and independent verification
+  plan.
 - 2026-06-23: For current project state, trust refs/audit first, then
   `orchestration/sprint_closeout.md`, `orchestration/integration_log.md`,
   `orchestration/protocol_alerts.md`, and `AGENTS.md`. Historical sections in

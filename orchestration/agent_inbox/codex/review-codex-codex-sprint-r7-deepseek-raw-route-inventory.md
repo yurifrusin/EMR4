@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r7-raw-route-inventory` |
 | Source Task | `codex-sprint-r7-deepseek-raw-route-inventory` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

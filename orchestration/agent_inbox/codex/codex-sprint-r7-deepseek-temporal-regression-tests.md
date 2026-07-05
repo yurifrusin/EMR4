@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint-r7-temporal-regression-tests` |
-| Status | queued |
+| Status | superseded |
 | Created | ad2ea75 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r7-deepseek-temporal-regression-tests --summary "Short plan summary"` |
@@ -92,3 +92,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 - Files changed:
 - Verification run:
 - Remaining risks:
+
+## Codex Supersession Notes
+
+Superseded by Claude's integrated passing `tests/test_appointment_raw_temporal_guard.py` coverage. The DeepSeek branch produced a separate pre-guard `xfail` test artifact, but integrating it would duplicate the canonical R7 tests and preserve stale `guard_not_implemented` markers after the guard implementation landed. Ariadne reviewed the branch for useful coverage ideas and kept the canonical Claude suite as the integration target.

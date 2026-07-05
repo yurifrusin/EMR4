@@ -487,7 +487,7 @@ def _canonical_time_values(
         return local_dt.date(), local_dt.time().replace(tzinfo=None), local_dt.astimezone(timezone.utc)
 
     raise HTTPException(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
         detail="start_time or appointment_date + start_time_local is required",
     )
 
@@ -887,12 +887,12 @@ def _create_appointment_from_body(
     )
     if temporal_kind == "past_date":
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={"code": "appointment_in_past", "message": "Appointment date is in the past."},
         )
     if temporal_kind == "window_fully_past":
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={"code": "same_day_window_elapsed", "message": "Same-day appointment window has already elapsed."},
         )
 
@@ -4051,12 +4051,12 @@ def _apply_appointment_update(
         )
         if temporal_kind == "past_date":
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={"code": "appointment_in_past", "message": "Appointment date is in the past."},
             )
         if temporal_kind == "window_fully_past":
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={"code": "same_day_window_elapsed", "message": "Same-day appointment window has already elapsed."},
             )
 
@@ -4069,7 +4069,7 @@ def _apply_appointment_update(
     )
     if next_patient_id is None and not next_provisional_name:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="patient_id or patient_name_provisional is required",
         )
     _ensure_practitioner(practitioner_id, practice_id, db)

@@ -8,6 +8,7 @@ from datetime import date, datetime, time, timezone
 
 import pytest
 
+import app.routers.appointments as appointments_router
 from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
 from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate
 from tests.conftest import make_token
@@ -16,6 +17,15 @@ PROPOSAL_URL = "/api/v1/appointments/proposals/create"
 CONFIRM_URL = "/api/v1/appointments/proposals/create/confirm"
 TODAY = date.today()
 THURSDAY = date(2026, 6, 25)
+
+
+@pytest.fixture(autouse=True)
+def _freeze_proposal_clock(monkeypatch):
+    """Keep fixed June 2026 proposal fixtures future/open under temporal guards."""
+    def fixed_now(tz):
+        return datetime(2026, 6, 22, 8, 0, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
 
 
 def _base_body(patient, practitioner) -> dict:

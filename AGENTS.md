@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R6 temporal boundary harness follow-up verified locally; push/audit pending |
-| **Next recommended work** | Sprint R7: raw appointment temporal guard hardening across direct create/update and compatibility proposal paths |
+| **Current active track** | Sprint R7 raw appointment temporal guard hardening verified locally; push/audit pending |
+| **Next recommended work** | Sprint R8: confirm-time temporal revalidation policy/implementation for proposal confirmation routes |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
@@ -69,14 +69,19 @@ Codex role separation:
   test design, fixture/harness work, architecture dissent, and small bounded
   implementation lanes when it has clear file ownership and must submit a
   tangible repo artifact.
+- At the start of every sprint, Ariadne should check Claude's current
+  availability/quota state before deciding the worker mix so Claude is used when
+  it is healthy rather than accidentally bypassed.
 - DeepSeek Flash via `codex-deepseek-bridge` may replace or supplement the
   spawned Codex worker for bounded read-heavy reviews and implementation lanes
   when Ariadne stays as OpenAI/Codex orchestrator. Use Flash first; consider
   DeepSeek Pro only when reasoning depth, not diff hygiene, is the bottleneck.
-  Multiple DeepSeek workers may run concurrently only on separate branches with
-  non-overlapping file ownership and explicit merge criteria. Reproduction/setup
-  details live in `docs/alternate-pc-handover.md`; controlled DeepSeek/OpenAI
-  model-picker switching and Ariadne-v2 safety rules live in
+  Ariadne may spawn as many DeepSeek Flash workers as fit the sprint
+  requirements, provided every worker has a separate branch, narrow role, clear
+  file ownership or review boundary, explicit merge criteria, and Ariadne-run
+  verification. Reproduction/setup details live in
+  `docs/alternate-pc-handover.md`; controlled DeepSeek/OpenAI model-picker
+  switching and Ariadne-v2 safety rules live in
   `docs/codex-model-switching-deepseek.md`.
 - If Claude is unavailable, quota-capped, recuperating, or fails to submit a
   usable plan in the current sprint window, Ariadne should automatically replace
@@ -222,13 +227,14 @@ Codex is the default orchestration agent for EMR4. This means:
   Ariadne may keep a narrow sprint single-track, use one specialist reviewer, or
   spawn extra workers when independent ownership boundaries make the extra
   coverage worth it. Preferred cost posture while OpenAI/Codex usage is scarce:
-  keep Ariadne as orchestrator, let Claude implement while quota is healthy, use
+  first check Claude's state, let Claude implement while quota is healthy, use
   Antigravity/Gemini for an independent domain/product/test-design lane when
-  Gemini quota is available, use DeepSeek Flash for cheap bounded
-  implementation/review lanes, and when Claude is capped or recuperating spawn
-  a second DeepSeek Flash worker in Claude's place. Escalate to DeepSeek Pro for
-  reasoning-heavy worker tasks, and reserve native Codex subagents for times
-  when OpenAI usage is flowing or their tool/context fit is clearly superior.
+  Gemini quota is available, and use as many DeepSeek Flash workers as the
+  sprint boundary can safely absorb for cheap bounded implementation/review
+  lanes. When Claude is capped or recuperating, spawn a DeepSeek Flash worker in
+  Claude's place. Escalate to DeepSeek Pro for reasoning-heavy worker tasks, and
+  reserve native Codex subagents for times when OpenAI usage is flowing or their
+  tool/context fit is clearly superior.
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).
@@ -559,7 +565,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `fdaf99c` - Sprint R6 temporal boundary harness follow-up |
+| **Latest integration commit** | `PENDING_R7_FINAL` - Sprint R7 raw appointment temporal guard hardening |
 
 ### Tag map (all tags pushed to remote)
 

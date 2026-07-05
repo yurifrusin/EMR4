@@ -6,15 +6,25 @@ Appointment conflict validation:
 - PUT /{id} enforces the same conflict rules as POST for drag/resize writes.
 """
 
-from datetime import datetime
+from datetime import datetime, time
 
 import pytest
 
+import app.routers.appointments as appointments_router
 from app.models.tenancy import Practitioner
 from tests.conftest import make_token
 
 # Fixed Monday for deterministic day-of-week (schedule fixture covers Mon = 0)
 MONDAY = datetime(2026, 6, 22, 9, 0, 0)
+
+
+@pytest.fixture(autouse=True)
+def _freeze_conflict_clock(monkeypatch):
+    """Keep fixed June 2026 conflict fixtures future/open under temporal guards."""
+    def fixed_now(tz):
+        return datetime.combine(MONDAY.date(), time(8, 0), tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
 
 
 def _appt_body(practitioner_id, patient_id, start: datetime, duration: int = 15):

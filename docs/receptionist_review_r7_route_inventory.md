@@ -1,4 +1,4 @@
-﻿# Sprint R7 — Raw Appointment Route Inventory & Temporal Guard Analysis
+# Sprint R7 — Raw Appointment Route Inventory & Temporal Guard Analysis
 
 > **Artifact:** Route-by-route inventory of `app/routers/appointments.py` (274 KB)
 > **Scope:** Distinguish **slot-writing routes** (set appointment date/time) from **status/delete routes** (do not set date/time), plus guard/test recommendations.
@@ -36,7 +36,7 @@ These endpoints write appointment date/time directly via the _raw_compat_* wrapp
 - create_appointment: "raw_compat_create"
 - update_appointment: "raw_compat_update"
 
-Both are governed by settings.appointment_raw_compat_mode (udit/header/off). In off mode, no audit evidence is recorded at all.
+Both are governed by settings.appointment_raw_compat_mode (audit/header/off). In off mode, no audit evidence is recorded at all.
 
 ### 2.2 Proposal Confirm Write — Sets appointment date/time
 These endpoints write appointment date/time after proposal validation, signed confirmation evidence, and freshness checks.
@@ -77,7 +77,7 @@ These handle AI assistant (Bernie) interactions without writing appointment data
 | 16 | GET | /bernie/pilot-eligibility | get_bernie_pilot_eligibility | No — read-only |
 | 17 | GET | /bernie/sessions/active | get_active_bernie_session | No — read-only |
 | 18 | POST | /bernie/sessions/new | create_new_bernie_session | Session state only — no appointment data |
-| 19 | POST | /bernie/sessions/{session_id}/events | ppend_bernie_session_event | Session event log — no appointment data |
+| 19 | POST | /bernie/sessions/{session_id}/events | append_bernie_session_event | Session event log — no appointment data |
 | 20 | POST | /proposals/bernie/interpret-booking-instruction | interpret_bernie_booking_instruction | No — non-mutating text interpretation. No appointment writes. Bounded Access AI audit metadata only in live mode. |
 | 21 | POST | /proposals/bernie/supervised-booking | propose_bernie_supervised_booking | No — composes proposal steps, never writes |
 | 22 | POST | /proposals/bernie/no-slot-suggestion-selection | select_no_slot_suggestion | No — non-mutating, validates suggestion, returns pre-populated request |
@@ -88,7 +88,7 @@ These handle AI assistant (Bernie) interactions without writing appointment data
 |---|---|---|---|---|
 | 24 | GET | /slots/{practitioner_id} | get_available_slots | Returns available time slots with availability flag |
 | 25 | POST | /proposals/slot-search | propose_slot_search | Non-mutating candidate slot search |
-| 26 | POST | /proposals/slot-search/normalize | 
+| 26 | POST | /proposals/slot-search/normalize |
 ormalize_slot_search_proposal_command | Deterministic normalize only — no DB, no mutation |
 | 27 | POST | /proposals/slot-search/normalized | propose_normalized_slot_search | Normalize + search when safe, otherwise context only |
 
@@ -148,10 +148,10 @@ Add a _guard_past_date(practice_tz, appointment_date, start_time_local) check ca
 - _apply_appointment_update (raw update path, only when date/time fields are being changed)
 
 The guard should:
-1. Reject ppointment_date < today (practice-local) with 422 and a clear reason code such as "appointment_date_in_past".
-2. Handle same-day: when ppointment_date == today, check start_time_local >= current_time(local) and reject with "same_day_time_in_past" if the window has closed.
+1. Reject appointment_date < today (practice-local) with 422 and a clear reason code such as "appointment_date_in_past".
+2. Handle same-day: when appointment_date == today, check start_time_local >= current_time(local) and reject with "same_day_time_in_past" if the window has closed.
 
-Only existing models with no appointment fields set (e.g. ppointment_date=None, start_time_local=None) should skip this guard naturally via the lack of time data.
+Only existing models with no appointment fields set (e.g. appointment_date=None, start_time_local=None) should skip this guard naturally via the lack of time data.
 
 ### P1 — Proposal confirm temporal revalidation (Routes 3, 4, 5)
 
@@ -165,7 +165,7 @@ During an update_appointment call, if the body contains waiting-area or status c
 
 ### P3 — Timezone boundary hardening (all slot-writing routes)
 
-Add a test-level check (in 	ests/) that exercises DST transitions for _canonical_time_values to confirm correct UTC conversion. The code currently does not produce incorrect results for AEST/AEDT, but a regression test would protect against future changes.
+Add a test-level check (in tests/) that exercises DST transitions for _canonical_time_values to confirm correct UTC conversion. The code currently does not produce incorrect results for AEST/AEDT, but a regression test would protect against future changes.
 
 ---
 
@@ -175,18 +175,19 @@ Add a test-level check (in 	ests/) that exercises DST transitions for _canonical
 
 | Test | Route | What to assert |
 |---|---|---|
-| Reject past-date create | POST /appointments with ppointment_date = yesterday | 422, "appointment_date_in_past" |
-| Reject same-day past-time create | POST /appointments with ppointment_date = today, start_time_local = (now-5min) | 422, "same_day_time_in_past" |
+| Reject past-date create | POST /appointments with appointment_date = yesterday | 422, "appointment_date_in_past" |
+| Reject same-day past-time create | POST /appointments with appointment_date = today, start_time_local = (now-5min) | 422, "same_day_time_in_past" |
 | Accept valid future create | POST /appointments with tomorrow's date | 201, appointment created |
-| Accept same-day future-time create | POST /appointments with ppointment_date = today, start_time_local = (now+15min) | 201, appointment created |
+| Accept same-day future-time create | POST /appointments with appointment_date = today, start_time_local = (now+15min) | 201, appointment created |
 
 ### 5.2 Direct update — temporal guard tests
 
 | Test | Route | What to assert |
 |---|---|---|
-| Reject past-date reschedule | PUT /{id} with ppointment_date = yesterday | 422, "appointment_date_in_past" |
-| Reject same-day past-time reschedule | PUT /{id} with ppointment_date = today, start_time_local = (now-5min) | 422, "same_day_time_in_past" |
-| Accept non-time field update (bypass guard) | PUT /{id} with only eason changed (no date/time fields) | 200, unchanged date/time |
+| Reject past-date reschedule | PUT /{id} with appointment_date = yesterday | 422, "appointment_date_in_past" |
+| Reject same-day past-time reschedule | PUT /{id} with appointment_date = today, start_time_local = (now-5min) | 422, "same_day_time_in_past" |
+| Accept non-time field update (bypass guard) | PUT /{id} with only
+eason changed (no date/time fields) | 200, unchanged date/time |
 | Accept valid future reschedule | PUT /{id} with tomorrow's date | 200, rescheduled |
 
 ### 5.3 Proposal confirm — temporal revalidation tests
@@ -251,5 +252,5 @@ Add a test-level check (in 	ests/) that exercises DST transitions for _canonical
 
 - **Worker:** DeepSeek Flash
 - **Artifact created:** docs/receptionist_review_r7_route_inventory.md
-- **Scope respected:** No edits to pp/ or 	ests/. Only this document and worker completing notes.
+- **Scope respected:** No edits to app/ or tests/. Only this document and worker completing notes.
 - **Action required:** Submit via host; Python/git environment unavailable to this worker. Artifact is complete.

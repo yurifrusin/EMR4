@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r7-raw-temporal-guard-contract` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

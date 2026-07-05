@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r7-raw-temporal-guard-contract` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 17:12 +1000 |
 | Source HEAD | `e7e891f` |
 

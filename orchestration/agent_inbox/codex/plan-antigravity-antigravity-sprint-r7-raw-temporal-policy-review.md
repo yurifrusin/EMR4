@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r7-raw-temporal-policy-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 17:05 +1000 |
 | Source HEAD | `e7e891f` |
 

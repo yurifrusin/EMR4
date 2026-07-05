@@ -12,6 +12,7 @@ from datetime import date, datetime, time, timezone
 
 import pytest
 
+import app.routers.appointments as appointments_router
 from app.config import settings
 from app.models.appointments import (
     Appointment,
@@ -23,6 +24,15 @@ from app.models.diary import WaitingArea
 from tests.conftest import make_token
 
 TODAY = date.today()
+
+
+@pytest.fixture(autouse=True)
+def _freeze_raw_compat_clock(monkeypatch):
+    """Keep legacy raw-compat TODAY fixtures in an open same-day window."""
+    def fixed_now(tz):
+        return datetime.combine(TODAY, time(8, 0), tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
 
 
 # Helpers

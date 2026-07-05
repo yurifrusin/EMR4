@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r7-raw-temporal-policy-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
