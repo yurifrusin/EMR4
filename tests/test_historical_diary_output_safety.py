@@ -79,6 +79,31 @@ def test_accepts_safe_aggregate_classifier_payload():
     validate_historical_diary_output(safe_payload())
 
 
+def test_accepts_safe_ordered_neutral_snapshot_payload():
+    payload = safe_payload()
+    payload["roots"][0]["ordered_neutral_snapshots"] = [
+        {
+            "sequence_index": 0,
+            "char_count": 3118,
+            "paragraph_count": 232,
+            "non_empty_paragraph_count": 165,
+            "non_empty_line_count": 162,
+            "table_count": 2,
+            "table_cell_count": 14,
+            "time_like_token_count": 78,
+            "unique_time_like_token_count": 37,
+            "date_like_token_count": 13,
+            "inferred_time_interval_mode_minutes": 10,
+            "paragraph_length_range": {"min": 1, "max": 91},
+            "table_dimension_signature": "1x11+1x3",
+            "structure_class": "strong_diary_grid",
+            "neutral_signature": "tables=2;cells=14;paragraphs=232;lines=162;times=78;dates=13;dims=1x11+1x3;mode=10",
+        }
+    ]
+
+    validate_historical_diary_output(payload)
+
+
 def test_rejects_unknown_keys_that_could_bypass_the_allowlist():
     payload = safe_payload()
     payload["roots"][0]["unexpected"] = "strong_diary_grid"

@@ -8,6 +8,56 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H9: Historical Diary Trove Ordered Neutral Event Export |
+| Integrated through | Ariadne local-only ordered neutral export; no external workers used because scope was raw-free and narrowly bounded |
+| Status | Integrated locally; final push/workflow status pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Extended `scripts\historical_diary_structure_classifier.ps1` with opt-in `-IncludeOrderedSnapshots`.
+- Added validator allowlist coverage for `ordered_neutral_snapshots` and `sequence_index`.
+- Extended `scripts\historical_diary_event_summary_dry_run.py` so ordered neutral snapshots are preferred over grouped signature replay when present.
+- Added synthetic tests for ordered snapshot validation and ordered event-summary sequencing.
+- Ran a bounded local Word COM export over 40 dense-day samples from each ignored pilot root.
+- Produced ignored `local_data\historical-diary-trove\inventory\ordered_snapshots_h9.json` and `local_data\historical-diary-trove\inventory\event_summary_h9.json`, both H5-validator safe.
+- Added `docs\historical-diary-trove-ordered-event-export.md`.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_event_summary_dry_run.py scripts\historical_diary_output_safety.py tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_output_safety.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (18 passed; existing warnings only).
+- Local ordered export passed: `.\scripts\historical_diary_structure_classifier.ps1 -Root @('local_data\historical-diary-trove\raw\pilot','local_data\historical-diary-trove\raw\pilot_01') -Output local_data\historical-diary-trove\inventory\ordered_snapshots_h9.json -SampleSize 40 -DenseDays 1 -IncludeOrderedSnapshots`.
+- Safety validation passed for ignored ordered snapshots and ignored event summary.
+- Validation pending final commit, audit, and post-push workflows.
+
+## Local Ordered Result
+
+- `pilot`: 40 ordered snapshots, 39 transitions, 21 `no_structural_change`, 18 `small_content_delta`; character absolute delta range 0-114.
+- `pilot_01`: 40 ordered snapshots, 39 transitions, 32 `no_structural_change`, 7 `small_content_delta`; character absolute delta range 0-109.
+- H9 restores true adjacent neutral count deltas for the bounded sample, unlike H8's grouped-signature replay.
+
+## Recommended User Review
+
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H9 is local tooling/tests/docs only and does not touch raw diary files beyond read-only local Word COM extraction.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- H10 should add explicit larger-run guardrails and comparer tooling before broad trove processing.
+- Do not infer appointment create/delete/status semantics from H9; it is still neutral count/signature movement only.
+
+## Previous Closeout - Sprint H8
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H8: Historical Diary Trove Local Event Summary Dry Run |
 | Integrated through | Ariadne local-only aggregate dry-run; no external workers used because scope was raw-free and narrowly bounded |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages green after rerun; Python Security and CodeQL workflows green |

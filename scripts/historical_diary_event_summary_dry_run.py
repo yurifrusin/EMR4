@@ -1,8 +1,8 @@
-"""Build a safe synthetic event summary from historical diary aggregate output.
+"""Build a safe synthetic event summary from historical diary neutral output.
 
-This dry run intentionally consumes only committed-safe aggregate JSON, such as
-the ignored H6 timeline delta payload. It does not read raw diary documents and
-does not reconstruct true chronological edits from grouped aggregate signatures.
+This dry run intentionally consumes only committed-safe neutral JSON, such as
+the ignored H6 grouped aggregate payload or H9 ordered neutral snapshot output.
+It does not read raw diary documents.
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ def summarize_aggregate_timeline(payload: dict[str, Any]) -> dict[str, Any]:
     summaries = [
         summarize_timeline_events(
             str(root["root_label"]),
-            _snapshots_from_neutral_signature_distribution(root),
+            _snapshots_from_ordered_root(root),
         )["roots"][0]
         for root in payload.get("roots", [])
     ]
@@ -91,6 +91,30 @@ def _snapshots_from_neutral_signature_distribution(root: dict[str, Any]) -> list
     return snapshots
 
 
+def _snapshots_from_ordered_root(root: dict[str, Any]) -> list[NeutralSnapshot]:
+    ordered_snapshots = root.get("ordered_neutral_snapshots")
+    if isinstance(ordered_snapshots, list):
+        return [
+            NeutralSnapshot(
+                char_count=int(snapshot["char_count"]),
+                paragraph_count=int(snapshot["paragraph_count"]),
+                non_empty_line_count=int(snapshot["non_empty_line_count"]),
+                table_count=int(snapshot["table_count"]),
+                table_cell_count=int(snapshot["table_cell_count"]),
+                time_like_token_count=int(snapshot["time_like_token_count"]),
+                date_like_token_count=int(snapshot["date_like_token_count"]),
+                table_dimension_signature=str(snapshot["table_dimension_signature"]),
+                structure_class=str(snapshot["structure_class"]),
+            )
+            for snapshot in sorted(
+                ordered_snapshots,
+                key=lambda snapshot: int(snapshot["sequence_index"]),
+            )
+        ]
+
+    return _snapshots_from_neutral_signature_distribution(root)
+
+
 def _parse_neutral_signature(signature: str) -> dict[str, str]:
     parts: dict[str, str] = {}
     for segment in signature.split(";"):
@@ -127,7 +151,7 @@ def main() -> int:
     output = summarize_aggregate_timeline(load_json(args.input_json))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote safe aggregate event summary: {args.output}")
+    print(f"wrote safe neutral event summary: {args.output}")
     return 0
 
 

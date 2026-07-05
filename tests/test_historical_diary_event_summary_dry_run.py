@@ -80,6 +80,53 @@ def test_summarizes_safe_aggregate_timeline_events():
     ]
 
 
+def test_prefers_ordered_neutral_snapshots_when_present():
+    payload = aggregate_payload()
+    payload["roots"][0]["ordered_neutral_snapshots"] = [
+        {
+            "sequence_index": 1,
+            "char_count": 4900,
+            "paragraph_count": 252,
+            "non_empty_paragraph_count": 184,
+            "non_empty_line_count": 181,
+            "table_count": 2,
+            "table_cell_count": 14,
+            "table_dimension_signature": "1x11+1x3",
+            "time_like_token_count": 85,
+            "unique_time_like_token_count": 39,
+            "date_like_token_count": 11,
+            "inferred_time_interval_mode_minutes": 10,
+            "paragraph_length_range": {"min": 1, "max": 246},
+            "structure_class": "strong_diary_grid",
+            "neutral_signature": "tables=2;cells=14;paragraphs=252;lines=181;times=85;dates=11;dims=1x11+1x3;mode=10",
+        },
+        {
+            "sequence_index": 0,
+            "char_count": 4800,
+            "paragraph_count": 252,
+            "non_empty_paragraph_count": 184,
+            "non_empty_line_count": 181,
+            "table_count": 2,
+            "table_cell_count": 14,
+            "table_dimension_signature": "1x11+1x3",
+            "time_like_token_count": 85,
+            "unique_time_like_token_count": 39,
+            "date_like_token_count": 11,
+            "inferred_time_interval_mode_minutes": 10,
+            "paragraph_length_range": {"min": 1, "max": 246},
+            "structure_class": "strong_diary_grid",
+            "neutral_signature": "tables=2;cells=14;paragraphs=252;lines=181;times=85;dates=11;dims=1x11+1x3;mode=10",
+        },
+    ]
+
+    output = summarize_aggregate_timeline(payload)
+
+    validate_historical_diary_output(output)
+    assert output["roots"][0]["adjacent_neutral_delta_ranges"][
+        "char_count_abs_delta_range"
+    ] == {"min": 100, "max": 100}
+
+
 def test_cli_writes_safe_ignored_style_output(tmp_path, monkeypatch):
     input_path = tmp_path / "aggregate.json"
     output_path = tmp_path / "event_summary.json"

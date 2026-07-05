@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H8 local event-summary dry run completed; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H9: ordered local neutral snapshot event export, still ignored, validator-gated, and non-semantic |
+| **Current active track** | Historical diary trove H9 ordered local neutral snapshot event export completed; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H10: broad ignored ordered-export guardrail before any larger trove processing |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -76,10 +76,15 @@ timeline deltas into non-semantic event classes such as
 H6 aggregate JSON and producing ignored validator-safe event summaries. The H8
 pilot result was a representative aggregate replay only, not a true
 chronological reconstruction: both pilot roots produced only
-`no_structural_change` and `small_content_delta` classes. Safe H7/H8 findings
-live in `docs/historical-diary-trove-synthetic-event-model.md`. H9 should emit
-an ignored ordered neutral snapshot sequence before any claim about real
-temporal edit flow.
+`no_structural_change` and `small_content_delta` classes. H9 extended
+`scripts/historical_diary_structure_classifier.ps1` with
+`-IncludeOrderedSnapshots`, added validator allowlist/tests for
+`ordered_neutral_snapshots`, and used ordered neutral counts to restore true
+adjacent count deltas without exposing filenames, paths, timestamps, labels, or
+text. Safe H7/H8 findings live in
+`docs/historical-diary-trove-synthetic-event-model.md`; safe H9 findings live
+in `docs/historical-diary-trove-ordered-event-export.md`. H10 should add
+larger-run guardrails before any broader trove processing.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

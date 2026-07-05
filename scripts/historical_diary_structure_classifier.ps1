@@ -6,7 +6,9 @@ param(
 
     [int]$SampleSize = 8,
 
-    [int]$DenseDays = 1
+    [int]$DenseDays = 1,
+
+    [switch]$IncludeOrderedSnapshots
 )
 
 $ErrorActionPreference = "Stop"
@@ -230,6 +232,34 @@ function Get-AdjacentDeltaRanges {
     }
 }
 
+function Get-OrderedNeutralSnapshots {
+    param([hashtable[]]$Measurements)
+
+    $snapshots = @()
+    for ($index = 0; $index -lt $Measurements.Count; $index += 1) {
+        $measurement = $Measurements[$index]
+        $snapshots += @{
+            sequence_index = $index
+            char_count = $measurement.char_count
+            paragraph_count = $measurement.paragraph_count
+            non_empty_paragraph_count = $measurement.non_empty_paragraph_count
+            non_empty_line_count = $measurement.non_empty_line_count
+            table_count = $measurement.table_count
+            table_cell_count = $measurement.table_cell_count
+            table_dimension_signature = $measurement.table_dimension_signature
+            time_like_token_count = $measurement.time_like_token_count
+            unique_time_like_token_count = $measurement.unique_time_like_token_count
+            date_like_token_count = $measurement.date_like_token_count
+            inferred_time_interval_mode_minutes = $measurement.inferred_time_interval_mode_minutes
+            paragraph_length_range = $measurement.paragraph_length_range
+            structure_class = $measurement.structure_class
+            neutral_signature = $measurement.neutral_signature
+        }
+    }
+
+    return ,$snapshots
+}
+
 function Summarize-Root {
     param(
         [string]$Label,
@@ -239,7 +269,7 @@ function Summarize-Root {
         [int]$ErrorCount
     )
 
-    return @{
+    $summary = @{
         root_label = $Label
         dense_candidate_count = $Candidates.Count
         requested_sample_size = $SampleSize
@@ -266,6 +296,12 @@ function Summarize-Root {
         })
         adjacent_neutral_delta_ranges = Get-AdjacentDeltaRanges -Measurements $Measurements
     }
+
+    if ($IncludeOrderedSnapshots) {
+        $summary.ordered_neutral_snapshots = Get-OrderedNeutralSnapshots -Measurements $Measurements
+    }
+
+    return $summary
 }
 
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Output) | Out-Null
