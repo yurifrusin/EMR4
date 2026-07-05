@@ -2799,6 +2799,44 @@ def _derive_search_horizon(
     return None
 
 
+_MERGEABLE_COMMAND_FIELDS = (
+    "practitioner_id", "patient_id", "date_from", "date_to",
+    "earliest_time", "latest_time", "duration_minutes",
+    "appointment_type_id", "location_id",
+)
+
+
+def _command_to_payload(command: Optional["SlotSearchCommandIn"]) -> dict:
+    """Serialize resolved command fields into a payload dict for context frame storage."""
+    if command is None:
+        return {}
+    raw = command.model_dump()
+    return {
+        k: str(raw[k])
+        for k in _MERGEABLE_COMMAND_FIELDS
+        if raw.get(k) is not None
+    }
+
+
+def _clarification_prior_frame_values(context_frames: list[dict]) -> dict:
+    """Extract resolved appointment fields from the first requested_appointment context frame.
+
+    Used for clarification-reply merge (gap-fill only; new instruction wins when present).
+    Returns a dict of string-serialized field values from the frame payload.
+    """
+    for frame in context_frames:
+        if not isinstance(frame, dict):
+            continue
+        if frame.get("frame_type") == "requested_appointment":
+            payload = frame.get("payload") or {}
+            return {
+                k: v
+                for k, v in payload.items()
+                if k in _MERGEABLE_COMMAND_FIELDS and v is not None
+            }
+    return {}
+
+
 def _build_bernie_reception_context(
     *,
     reference_date: date_type,
@@ -2811,11 +2849,13 @@ def _build_bernie_reception_context(
     context_freshness: Optional[BernieContextFreshness] = None,
     search_proposal: Optional[SlotSearchProposalOut] = None,
     search_ran: bool = False,
+    command_candidate: Optional["SlotSearchCommandIn"] = None,
 ) -> BernieReceptionContextFrameSet:
     """Build additive typed metadata from facts the router already computed."""
     effective_warnings = warnings or []
     effective_blocks = blocks or []
     frames = []
+    command_payload = _command_to_payload(command_candidate)
 
     if normalization is None:
         frames.append(BernieRequestedAppointmentFrame(
@@ -2824,6 +2864,7 @@ def _build_bernie_reception_context(
             source="server_resolver",
             reference_date=reference_date,
             reason_code="request_not_normalized",
+            payload=command_payload,
         ))
     else:
         status = "known" if normalization.safe else "partial"
@@ -2833,6 +2874,7 @@ def _build_bernie_reception_context(
             source="server_resolver",
             reference_date=reference_date,
             reason_code=_first_issue_code(normalization.blocks),
+            payload=command_payload,
         ))
 
     if patient_booking_context is not None:
@@ -2979,6 +3021,7 @@ def _attach_bernie_interpret_reception_context(
         confidence_axes=result.confidence_axes,
         patient_booking_context=result.patient_booking_context,
         context_freshness=result.context_freshness,
+        command_candidate=result.command_candidate,
     )
     policy = evaluate_reception_context(frame_set)
     # N10: classify the booking outcome from the typed policy. Interpret route
@@ -3402,6 +3445,24 @@ def _resolve_bernie_interpretation_context(
     all_assumptions: list[BernieAssumption] = []
     all_staff_checks: list[BernieStaffCheck] = []
     all_patient_candidates: list[BerniePatientCandidate] = []
+
+    # ── Clarification-reply merge ─────────────────────────────────────────────
+    # If the caller sent back a prior requested_appointment context frame, carry
+    # forward any resolved fields that are missing in this (clarification-reply)
+    # instruction. New-reply-wins: an explicitly provided field is never overwritten.
+    _prior = _clarification_prior_frame_values(body.context_frames)
+    _merged_fields: list[str] = []
+    for _f, _v in _prior.items():
+        if not command_values.get(_f):
+            command_values[_f] = _v
+            _merged_fields.append(_f)
+    if _merged_fields:
+        all_assumptions.append(BernieAssumption(
+            field="clarification_merge",
+            assumed_value=",".join(sorted(_merged_fields)),
+            basis="Fields carried forward from prior turn (clarification reply).",
+            reversible_copy="Tell me if any of the carried-forward details are wrong.",
+        ))
 
     # ── Practitioner resolution ───────────────────────────────────────────────
     practitioner_axis: Optional[BernieConfidenceAxis] = None
