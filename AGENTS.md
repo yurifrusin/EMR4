@@ -78,6 +78,12 @@ Codex role separation:
   details live in `docs/alternate-pc-handover.md`; controlled DeepSeek/OpenAI
   model-picker switching and Ariadne-v2 safety rules live in
   `docs/codex-model-switching-deepseek.md`.
+- The configured `deepseek-worker` subagent may appear as nickname `Shen`.
+  Verify identity from runtime metadata, not self-description: the current
+  working setup records `agent_role=deepseek-worker`,
+  `model_provider=deepseek_bridge`, and turn-context `model=deepseek-flash`.
+  If Shen says it is "OpenAI", that usually reflects the generic Codex base
+  instructions rather than the actual upstream model provider.
 - Ariadne-v2 DeepSeek Pro orchestration is currently blocked in the
   ChatGPT-account Codex Desktop GUI: on 2026-07-04 the GUI showed `DeepSeek
   Pro` but rejected prompts with "The 'deepseek-pro' model is not supported

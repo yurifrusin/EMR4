@@ -32,7 +32,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 |---|---|
 | Status | Dispatched; plan gate pending |
 | Product Goal | Prevent stale Bernie client revision/context coordinates from merging, confirming, or resurrecting outdated appointment intent |
-| Worker Shape | Claude backend/session implementation lane, Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash regression lane, Ariadne orchestration/integration |
+| Worker Shape | Claude backend/session implementation lane (temporarily backed up by a second DeepSeek Flash lane while Claude quota recovers), Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash regression lane, Ariadne orchestration/integration |
 | In Scope | Server-side stale revision/session append guards, focused regression tests, stale browser/two-receptionist/correction-vs-clarification acceptance cases, bounded scenario artifacts |
 | Out Of Scope | Diary UI redesign, Word/taskpane changes, GitHub Pages assets, live Gemini/Vertex calls, broad patient collision source hardening, GraphRAG/MCP/indexer automation, persisted session table redesign |
 | Verification | py_compile; focused Bernie clarification/session/interpret/scenario pytest; fixture integrity tests if scenario files change; git diff --check; no browser/Pages checks unless frontend files change |
@@ -49,6 +49,25 @@ Recommended next slice when Bernie clarification/state work resumes:
 | Out of Scope | Diary UI, live provider calls, persisted session redesign, unrelated collision-source hardening |
 | Verification | py_compile and focused pytest for touched Bernie/session/interpret surfaces |
 | Status | Dispatched |
+
+### Workstream R3-D - DeepSeek Backend Backup Lane
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via Codex worker |
+| Branch | `codex/sprint-r3-deepseek-backend-hardening` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-sprint-r3-deepseek-backend-hardening.md` |
+| Goal | Cover Claude's backend implementation lane while Claude quota recovers, with minimal stale-session hardening or no-code-needed regression proof |
+| In Scope | `app/services/bernie/session_store.py`, `app/routers/appointments.py` stale coordinate seams, focused backend tests |
+| Out of Scope | Diary UI, taskpane/Word changes, live provider calls, Antigravity docs/fixtures, global model/config switching |
+| Verification | py_compile, focused Bernie session/clarification/context/scenario pytest, git diff --check |
+| Status | Dispatched |
+
+### R3 Tooling Note - Shen Identity
+
+- The configured `deepseek-worker` agent uses `model_provider = "deepseek_bridge"` and `model = "deepseek-flash"` in `C:\Users\sarashera\.codex\agents\deepseek-worker.toml`.
+- The 2026-07-05 spawned Shen session metadata records `agent_role = "deepseek-worker"`, `model_provider = "deepseek_bridge"`, and turn context `model = "deepseek-flash"`.
+- If Shen self-reports as OpenAI, treat that as generic Codex base-instruction leakage; the runtime provider evidence is the session metadata and provider config, not self-description.
 
 ### Workstream R3-B - Gemini Domain Acceptance
 
