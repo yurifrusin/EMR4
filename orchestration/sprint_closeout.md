@@ -8,6 +8,59 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint R3: Stale Session / Revision Hardening |
+| Integrated through | Antigravity/Gemini receptionist-domain acceptance artifacts, DeepSeek Flash stale-session regression tests, Shen-2 DeepSeek backend no-code-needed review, and Ariadne verification/polish |
+| Status | Integrated locally on `master`; push, mirror realign, and audit pending |
+| Last updated | 2026-07-05 |
+
+## What Changed
+
+- Added Sprint R3 receptionist-domain review in `docs/receptionist_review_r3.md`, covering stale browser tabs, two-receptionist revision conflicts, correction-vs-clarification overrides, intent switches, and safe failure copy.
+- Added three natural-language scenario fixtures for stale-session concurrency, stale reload blocking, and correction/pivot semantics under `tests/fixtures/bernie_scenarios/`.
+- Added focused session-store regressions in `tests/test_bernie_session_store.py` proving refresh staleness clears coordinates, new-session reset semantics, repeated stale attempts fail closed, and stale confirm submissions do not mutate session state.
+- Verified Shen/subagent identity: the configured `deepseek-worker` nickname `Shen` runs with `model_provider=deepseek_bridge` and turn-context `model=deepseek-flash`; self-reporting as OpenAI is generic Codex base-prompt leakage, not provider evidence.
+- Dispatched a second DeepSeek Flash backend backup lane while Claude quota was unavailable. Shen-2 reviewed the backend/session/confirm seams and found no production code change needed because existing stale revision, route, and freshness guards already fail closed.
+- Superseded the Claude R3 backend lane because Claude hit the session limit before plan submission; no Claude branch changes were integrated.
+- No Diary UI, taskpane, Word assets, GitHub Pages assets, database migrations, live provider calls, GraphRAG/MCP/indexer automation, or production backend code changed.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\test_bernie_session_store.py tests\test_bernie_scenario_integrity.py tests\bernie_scenarios\loader.py tests\bernie_scenarios\replay.py`.
+- R3 focused suite passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_session_store.py tests\test_bernie_session_routes.py tests\test_bernie_clarification_merge.py tests\test_bernie_context_frames.py tests\test_bernie_scenario_integrity.py tests\bernie_scenarios -q` (53 passed, 1 skipped, 1 xfailed; existing Starlette/Google GenAI warnings only).
+- Confirm/interpret adjacent suite passed: `.venv\Scripts\python.exe -m pytest tests\test_bernie_confirm_create_proposal.py tests\test_bernie_interpret_booking_instruction.py -q` (30 passed; existing warnings only).
+- `git diff --check` passed.
+
+## Recommended User Review
+
+No required manual review for Sprint R3. This is backend test/domain-memory work and does not change visible Diary UI, taskpane, Word add-in, GitHub Pages assets, or confirmed appointment mutation code.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; this sprint used deterministic tests and domain fixtures only.
+- No database migration or test database reset is required; the R3 verification did not run DB-backed mutation suites in parallel.
+
+## Known Follow-Up
+
+- The new stale-session fixtures are accepted as natural-language project memory; promote selected cases into executable replay only where the current harness can express revision conflicts cleanly.
+- Future frontend/session UX work should preserve typed receptionist input on `stale_session_revision` where clinically safe while still blocking stale mutation.
+- If WebSocket/live diary update paths are introduced later, they must share the same revision/freshness contract as REST mutation paths.
+- Patient collision source hardening remains a near-term backend follow-up after this session-safety slice.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Patient Collision Source Hardening or Stale-Session Scenario Promotion |
+| Status | Candidate after R3 push/mirror/audit |
+| Recommended agents | DeepSeek Flash for bounded tests/review, Antigravity/Gemini for domain-policy/test-design, Claude when quota recovers for backend implementation or architecture review |
+
+R4 should either harden patient collision source edge cases, or promote the most valuable stale-session natural-language fixtures into executable replay coverage.
+
+## Previous Closeout - Sprint R2
+
+| Item | Value |
+|---|---|
 | Batch | Sprint R2: Clarification Merge Semantics |
 | Integrated through | Claude backend/session implementation, Antigravity/Gemini receptionist-domain acceptance review, DeepSeek Flash regression lane, and Ariadne verification/polish |
 | Status | Integrated, pushed to `master`/`handoff/current`, mirrors realigned, audit clean |

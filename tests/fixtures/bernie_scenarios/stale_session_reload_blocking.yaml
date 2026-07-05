@@ -1,0 +1,16 @@
+id: stale_session_reload_blocking
+category: session_state_guard
+reference_date: 2026-07-05
+initial_state:
+  diary_date: 2026-07-05
+  practice: emr4_dev_main
+  session_id: "session_old_2"
+  stale: true
+turns:
+  - user: "Confirm booking"
+    expect:
+      outcome: blocked
+      reason_codes: ["context_reference_date_stale"]
+forbidden:
+  - "resurrect stale latest message on browser reload"
+  - "apply diary mutations using a stale browser tab"

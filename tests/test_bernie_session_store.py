@@ -417,3 +417,263 @@ def test_proposal_outcome_sets_candidate_and_proposal_binding_coordinates():
     assert result.session.state is BernieSessionState.proposal_preview
     assert result.session.candidate_freshness_ids == ["candidate-a"]
     assert result.session.staged_proposal_freshness_id == "proposal-a"
+
+def test_refresh_requested_sets_stale_and_clears_coordinates_and_transitions_state():
+    store, session, practice_id, user_id, surface_id = _store_with_session()
+    store._sessions[session.session_id] = session.model_copy(update={
+        "state": BernieSessionState.candidate_selection,
+        "revision": 4,
+        "candidate_freshness_ids": ["candidate-a"],
+        "staged_proposal_freshness_id": "proposal-a",
+    })
+    result = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.refresh_requested,
+        expected_revision=4,
+        payload={},
+    )
+    current = store.get_session(session.session_id)
+    assert result.accepted is True
+    assert current is not None
+    assert current.revision == 5
+    assert current.state is BernieSessionState.slot_search
+    assert current.stale_reason_code == "refresh_requested"
+    assert current.candidate_freshness_ids == []
+    assert current.staged_proposal_freshness_id is None
+    assert current.last_event_id == current.events[-1].event_id
+
+
+def test_refresh_requested_from_proposal_preview_sets_stale_and_clears():
+    store, session, practice_id, user_id, surface_id = _store_with_session()
+    store._sessions[session.session_id] = session.model_copy(update={
+        "state": BernieSessionState.proposal_preview,
+        "revision": 5,
+        "candidate_freshness_ids": ["candidate-a"],
+        "staged_proposal_freshness_id": "proposal-a",
+    })
+    result = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.refresh_requested,
+        expected_revision=5,
+        payload={},
+    )
+    current = store.get_session(session.session_id)
+    assert result.accepted is True
+    assert current is not None
+    assert current.state is BernieSessionState.slot_search
+    assert current.stale_reason_code == "refresh_requested"
+    assert current.candidate_freshness_ids == []
+    assert current.staged_proposal_freshness_id is None
+
+
+def test_new_session_resets_stale_reason_and_coordinates():
+    store, session, practice_id, user_id, surface_id = _store_with_session()
+    store._sessions[session.session_id] = session.model_copy(update={
+        "state": BernieSessionState.proposal_preview,
+        "revision": 12,
+        "patient_id": uuid.uuid4(),
+        "patient_band": "matched",
+        "practitioner_id": uuid.uuid4(),
+        "practitioner_band": "matched",
+        "candidate_freshness_ids": ["candidate-a"],
+        "staged_proposal_freshness_id": "proposal-a",
+        "stale_reason_code": "diary_context_changed",
+    })
+    result = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.new_session,
+        expected_revision=12,
+    )
+    current = store.get_session(session.session_id)
+    assert result.accepted is True
+    assert current is not None
+    assert current.revision == 13
+    assert current.state is BernieSessionState.instruction_entry
+    assert current.stale_reason_code is None
+    assert current.patient_id is None
+    assert current.patient_band is None
+    assert current.practitioner_id is None
+    assert current.practitioner_band is None
+    assert current.candidate_freshness_ids == []
+    assert current.staged_proposal_freshness_id is None
+    assert [event.event_type for event in current.events] == [
+        BernieSessionEventType.new_session
+    ]
+
+
+def test_stale_revision_after_multi_step_advance_is_fail_closed():
+    store, session, practice_id, user_id, surface_id = _store_with_session()
+    first = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.staff_instruction,
+        expected_revision=0,
+        event_id="event-1",
+        payload={"intent_ref": "intent-1"},
+    )
+    assert first.accepted is True
+    assert first.session.revision == 1
+    second = store.append_server_outcome_event(
+        session_id=session.session_id,
+        event_type=BernieSessionEventType.interpretation_outcome,
+        target_state=BernieSessionState.context_enrichment,
+        expected_revision=1,
+        event_id="interpret-1",
+        payload={"intent_ref": "intent-2"},
+    )
+    assert second.accepted is True
+    assert second.session.revision == 2
+    stale = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.staff_instruction,
+        expected_revision=0,
+        event_id="event-3",
+        payload={"intent_ref": "intent-3"},
+    )
+    current = store.get_session(session.session_id)
+    assert stale.accepted is False
+    assert stale.code is BernieSessionEventRejectionCode.stale_session_revision
+    assert current is not None
+    assert current.revision == 2
+    assert len(current.events) == 2
+    assert [event.event_id for event in current.events] == ["event-1", "interpret-1"]
+
+
+def test_multiple_stale_attempts_all_return_same_rejection():
+    store, session, practice_id, user_id, surface_id = _store_with_session()
+    accepted = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.staff_instruction,
+        expected_revision=0,
+        event_id="event-1",
+        payload={"intent_ref": "intent-1"},
+    )
+    assert accepted.accepted is True
+    assert accepted.session.revision == 1
+    stale1 = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.staff_instruction,
+        expected_revision=0,
+        event_id="event-2",
+        payload={"intent_ref": "intent-2"},
+    )
+    stale2 = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.staff_instruction,
+        expected_revision=0,
+        event_id="event-3",
+        payload={"intent_ref": "intent-3"},
+    )
+    stale3 = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.staff_instruction,
+        expected_revision=0,
+        event_id="event-4",
+        payload={"intent_ref": "intent-4"},
+    )
+    current = store.get_session(session.session_id)
+    for i, stale in enumerate([stale1, stale2, stale3], 1):
+        assert stale.accepted is False, f"Stale attempt {i} should be rejected"
+        assert stale.code is BernieSessionEventRejectionCode.stale_session_revision
+    assert current is not None
+    assert current.revision == 1
+    assert len(current.events) == 1
+    assert current.events[0].event_id == "event-1"
+
+
+def test_new_session_from_transient_state_is_allowed():
+    store, session, practice_id, user_id, surface_id = _store_with_session()
+    entered = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.staff_instruction,
+        expected_revision=0,
+        event_id="event-1",
+        payload={"intent_ref": "intent-1"},
+    )
+    assert entered.accepted is True
+    assert entered.session.state is BernieSessionState.recognition
+    reset = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.new_session,
+        expected_revision=1,
+        event_id="event-2",
+    )
+    current = store.get_session(session.session_id)
+    assert reset.accepted is True
+    assert current is not None
+    assert current.revision == 2
+    assert current.state is BernieSessionState.instruction_entry
+    assert current.events[-1].event_type is BernieSessionEventType.new_session
+    assert current.stale_reason_code is None
+
+
+def test_stale_revision_from_confirm_submitted_rejects_without_mutation():
+    store, session, practice_id, user_id, surface_id = _store_with_session()
+    store._sessions[session.session_id] = session.model_copy(update={
+        "state": BernieSessionState.proposal_preview,
+        "revision": 8,
+        "staged_proposal_freshness_id": "proposal-a",
+    })
+    accepted = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.confirm_submitted,
+        expected_revision=8,
+        event_id="confirm-1",
+        payload={"proposal_freshness_id": "proposal-a"},
+    )
+    assert accepted.accepted is True
+    assert accepted.session.revision == 9
+    assert accepted.session.state is BernieSessionState.confirmation
+    stale = store.append_client_event(
+        session_id=session.session_id,
+        practice_id=practice_id,
+        user_id=user_id,
+        surface_id=surface_id,
+        event_type=BernieSessionEventType.confirm_submitted,
+        expected_revision=8,
+        event_id="confirm-2",
+        payload={"proposal_freshness_id": "proposal-a"},
+    )
+    current = store.get_session(session.session_id)
+    assert stale.accepted is False
+    assert stale.code is BernieSessionEventRejectionCode.stale_session_revision
+    assert current is not None
+    assert current.revision == 9
+    assert current.state is BernieSessionState.confirmation
+    assert current.events[-1].event_id == "confirm-1"
+    assert len(current.events) == 1

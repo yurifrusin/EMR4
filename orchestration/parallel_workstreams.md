@@ -30,7 +30,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 
 | Item | Value |
 |---|---|
-| Status | Dispatched; plan gate pending |
+| Status | Integrated, verification passed, closeout in progress |
 | Product Goal | Prevent stale Bernie client revision/context coordinates from merging, confirming, or resurrecting outdated appointment intent |
 | Worker Shape | Claude backend/session implementation lane (temporarily backed up by a second DeepSeek Flash lane while Claude quota recovers), Antigravity/Gemini receptionist-domain acceptance lane, DeepSeek Flash regression lane, Ariadne orchestration/integration |
 | In Scope | Server-side stale revision/session append guards, focused regression tests, stale browser/two-receptionist/correction-vs-clarification acceptance cases, bounded scenario artifacts |
@@ -48,7 +48,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | `app/routers/appointments.py`, Bernie/session helpers if needed, focused stale revision tests |
 | Out of Scope | Diary UI, live provider calls, persisted session redesign, unrelated collision-source hardening |
 | Verification | py_compile and focused pytest for touched Bernie/session/interpret surfaces |
-| Status | Dispatched |
+| Status | Superseded by DeepSeek backup/no-code-needed review because Claude quota was unavailable |
 
 ### Workstream R3-D - DeepSeek Backend Backup Lane
 
@@ -61,7 +61,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | `app/services/bernie/session_store.py`, `app/routers/appointments.py` stale coordinate seams, focused backend tests |
 | Out of Scope | Diary UI, taskpane/Word changes, live provider calls, Antigravity docs/fixtures, global model/config switching |
 | Verification | py_compile, focused Bernie session/clarification/context/scenario pytest, git diff --check |
-| Status | Dispatched |
+| Status | Integrated |
 
 ### R3 Tooling Note - Shen Identity
 
@@ -80,7 +80,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Scenario corpus notes, R2 clarification semantics, acceptance/review artifact, optional bounded scenario fixture additions |
 | Out of Scope | Production backend ownership, UI redesign, live provider calls, master/handoff updates |
 | Verification | Plan packet first; fixture integrity tests if scenario artifacts change |
-| Status | Dispatched |
+| Status | Integrated |
 
 ### Workstream R3-C - DeepSeek Regression Lane
 
@@ -93,7 +93,7 @@ Recommended next slice when Bernie clarification/state work resumes:
 | In Scope | Tests/review around stale revision coordinates, clarification merge, intent switches, and no stale appointment/audit mutation |
 | Out of Scope | Primary production implementation, UI edits, live provider calls, global config or model switching |
 | Verification | py_compile, focused pytest, git diff --check, or clear review artifact if bridge sandbox blocks git/Python |
-| Status | Dispatched |
+| Status | Integrated |
 
 ## Sprint R2: Clarification Merge Semantics
 

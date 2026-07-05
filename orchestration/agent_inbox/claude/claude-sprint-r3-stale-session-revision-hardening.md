@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | superseded |
 | Created | b146f15 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint-r3-stale-session-revision-hardening --summary "Short plan summary"` |
@@ -87,8 +87,8 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
+Superseded during Sprint R3 because Claude hit the session limit before plan submission. Ariadne used two DeepSeek Flash lanes plus Antigravity/Gemini review instead; no Claude branch changes were integrated.
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: none
+- Verification run: none by Claude
+- Remaining risks: retry Claude on a future sprint only if deeper architecture review is needed
