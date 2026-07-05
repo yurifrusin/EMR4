@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r24-provider-readiness-dry-run-ux-semantics` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. The review gives receptionist/product acceptance criteria for no-write provider-readiness dry-runs.
+- Follow-up required: Use these criteria before any live Gemini/Vertex prompt wiring is enabled.

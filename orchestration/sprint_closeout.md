@@ -8,6 +8,59 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint R24: Provider-Readiness Dry-Run Gate |
+| Integrated through | Antigravity/Gemini receptionist/product acceptance review, two DeepSeek Flash adversarial provider-output lanes, Ariadne hardening implementation |
+| Status | Integrated locally; validation passed; push/audit pending |
+| Last updated | 2026-07-05 |
+
+## What Changed
+
+- Hardened `app/services/ai/evals/manifest_eval.py` so provider-style dry-run outputs are rejected safely when they are lists/multi-frame sequences, non-object payloads, case-mangled frame keys, or case/type-confused `writes_authorized` claims.
+- Added normalized key scanning for PHI variants such as `DateOfBirth`, `MedicareNumber`, `PatientID`, and `PhoneNumber`.
+- Expanded write-authority, availability, ambiguity-default, claimed-action, confirmation-bypass, and reason-code detectors from DeepSeek's adversarial provider-output findings.
+- Added `tests/test_provider_readiness_dry_run_gate.py` with 25 deterministic no-DB tests proving the R24 dry-run gate catches multi-frame, PHI-casing, write-authority synonym, availability synonym, ambiguity-default alias, passive claimed-action, and plural reason-code attacks.
+- Preserved Antigravity/Gemini's receptionist/product acceptance criteria in `docs/receptionist_review_r24.md`.
+- Preserved DeepSeek Flash's provider-output adversarial reviews in `orchestration/provider_output_adversarial_review.md` and `orchestration/r24_deepseek_adversarial_provider_output_review.md`.
+- No live Gemini/Vertex calls, runtime prompt wiring, database writes, routes, frontend, or migrations were added.
+
+## Verification
+
+- Focused R24 compile and provider dry-run pytest passed: `.venv\Scripts\python.exe -m py_compile app\services\ai\evals\manifest_eval.py tests\test_provider_readiness_dry_run_gate.py` and `.venv\Scripts\pytest.exe tests\test_provider_readiness_dry_run_gate.py -q` (25 passed; existing warnings only).
+- Broader manifest compile/regression passed: `.venv\Scripts\python.exe -m py_compile app\services\ai\evals\manifest_eval.py tests\test_provider_readiness_dry_run_gate.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_bernie_manifest_prompt_evaluation.py tests\test_bernie_fake_provider_adversarial_prompt.py tests\test_bernie_manifest_prompt_consumption.py tests\test_bernie_diary_capability_manifest.py` and `.venv\Scripts\pytest.exe tests\test_bernie_diary_capability_manifest.py tests\test_bernie_manifest_prompt_consumption.py tests\test_bernie_manifest_prompt_evaluation.py tests\test_bernie_fake_provider_adversarial_prompt.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_provider_readiness_dry_run_gate.py -q` (176 passed; existing Starlette/Google GenAI warnings only).
+- Whitespace check passed: `git diff --check`.
+
+## Recommended User Review
+
+No required manual review before continuing if whitespace, push, audit, and post-push workflows pass. R24 is backend/test/orchestration-only and does not change visible Diary UI, Office assets, GitHub Pages content, database schema, or live provider behaviour.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required because R24 deliberately hardened provider-style samples without calling a provider.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- Add a no-write live-provider sampling harness only after configuration and cost boundaries are explicit.
+- Feed observed dry-run outputs back into the R24 detector suite before any live prompt wiring.
+- Consider Unicode homoglyph normalization beyond NFKC if real provider outputs expose confusable-token bypasses.
+- Keep `evaluate_manifest_response()` as a safety gate for provider-output samples, not a runtime write-authority mechanism.
+
+## Next Sprint Candidate
+
+| Item | Value |
+|---|---|
+| Name | Sprint R25: No-Write Live-Provider Sampling Harness |
+| Status | Proposed |
+| Recommended agents | Check Claude availability first; use Claude if healthy, Antigravity/Gemini for receptionist/product dry-run semantics, and DeepSeek Flash for adversarial sample review |
+
+Recommended scope: add a default-disabled, no-write live-provider sampling harness that captures Gemini/Vertex-style outputs into the R24 gate without connecting to mutation routes or treating the model as authoritative.
+
+## Previous Closeout - Sprint R23
+
+| Item | Value |
+|---|---|
 | Batch | Sprint R23: Frame-Aware Fake-Provider Validator |
 | Integrated through | Antigravity/Gemini frame-shape semantics review, two DeepSeek Flash planning/review lanes, Ariadne implementation |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Python Security and CodeQL workflows green |

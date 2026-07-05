@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r24-provider-readiness-dry-run-ux-semantics` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 23:19 +1000 |
 | Source HEAD | `f3e4ea7` |
 
@@ -44,6 +44,6 @@ Ensuring dry-run samples realistically model future live prompt behavior.
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted and integrated through `docs/receptionist_review_r24.md`.
+- Required changes before implementation: Keep the lane documentation-only and no-write.
+- Approved to proceed: yes

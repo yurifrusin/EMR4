@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 4185731 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r24-deepseek-adversarial-provider-output-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/r24_deepseek_adversarial_provider_output_review.md`, `orchestration/provider_output_adversarial_review.md`, `tests/test_provider_readiness_dry_run_gate.py`.
+- Verification run: DeepSeek adversarial categories were distilled into passing R24 gate tests and the broader manifest regression passed locally.
+- Remaining risks: Continue expanding detectors from observed dry-run output; do not grant runtime write authority.

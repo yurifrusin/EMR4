@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 4185731 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r24-deepseek-provider-dry-run-gate-implementation --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/services/ai/evals/manifest_eval.py`, `tests/test_provider_readiness_dry_run_gate.py`, `orchestration/provider_output_adversarial_review.md`.
+- Verification run: Focused R24 provider dry-run tests passed; broader manifest regression passed locally and is recorded in sprint closeout.
+- Remaining risks: The gate remains no-live-provider and no-write; live provider sampling is still deferred to a later explicitly gated sprint.
