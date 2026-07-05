@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R3: Stale Session / Revision Hardening |
 | Integrated through | Antigravity/Gemini receptionist-domain acceptance artifacts, DeepSeek Flash stale-session regression tests, Shen-2 DeepSeek backend no-code-needed review, and Ariadne verification/polish |
-| Status | Integrated locally on `master`; push, mirror realign, and audit pending |
+| Status | Pushed to `master`/`handoff/current`, mirrors realigned, audit clean; stale DeepSeek worktrees ready to retire |
 | Last updated | 2026-07-05 |
 
 ## What Changed

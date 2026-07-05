@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r3-deepseek-stale-session-regression` |
 | Source Task | `codex-sprint-r3-deepseek-stale-session-regression` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 14:56 +1000 |
 | Source HEAD | `f8bc6c8` |
 

@@ -6,6 +6,7 @@
 | **Branch** | `codex/sprint-r3-deepseek-stale-session-regression` |
 | **Dispatched at** | `f8bc6c8` (Dispatch Sprint R3 stale session hardening) |
 | **Role** | codex-worker (regression lane) |
+| Status | integrated |
 
 ---
 

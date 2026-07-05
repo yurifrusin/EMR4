@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r3-stale-session-domain-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 14:53 +1000 |
 | Source HEAD | `f8bc6c8` |
 
