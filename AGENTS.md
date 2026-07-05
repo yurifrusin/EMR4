@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R23 frame-aware fake-provider validator dispatched; Claude capped until roughly 2:30am so DeepSeek replaces Claude |
-| **Next recommended work** | Continue R23 through plan-gated DeepSeek/Gemini review; no live Gemini wiring until frame validator passes |
+| **Current active track** | Sprint R23 frame-aware fake-provider validator integrated locally; broad manifest validation and closeout pending |
+| **Next recommended work** | Close R23, then continue toward provider-readiness dry-run gates without granting live write authority |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

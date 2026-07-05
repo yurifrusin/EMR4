@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r23-frame-aware-fake-provider-ux-semantics` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 23:00 +1000 |
 | Source HEAD | `b425002` |
 
@@ -44,6 +44,6 @@ Since this sprint involves documentation only, there are no runtime codebase or 
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: Accepted and integrated through `orchestration/fake_provider_frame_shape_acceptance_criteria.md`.
+- Required changes before implementation: None; documentation-only semantics lane stayed within scope.
+- Approved to proceed: yes

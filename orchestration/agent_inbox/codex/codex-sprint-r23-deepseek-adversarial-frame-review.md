@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | c8fed3c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r23-deepseek-adversarial-frame-review --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `orchestration/r23_deepseek_adversarial_frame_review.md` plus Ariadne-integrated frame-shape tests in `tests/test_bernie_manifest_receptionist_scenarios.py`.
+- Verification run: Adversarial recommendations were translated into focused frame-shape tests and the R23 manifest suite.
+- Remaining risks: Expand from observed live-provider output only after safe dry-run sampling; no live mutation authority added.

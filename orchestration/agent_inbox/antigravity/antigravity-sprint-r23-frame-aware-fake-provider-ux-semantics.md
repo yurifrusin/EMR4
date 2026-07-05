@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | submitted |
+| Status | integrated |
 | Created | c8fed3c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r23-frame-aware-fake-provider-ux-semantics --summary "Short plan summary"` |
@@ -97,4 +97,3 @@ Required before submit. These notes are copied into Codex's review packet automa
   - Executed focused pytest suite: `.venv/Scripts/python.exe -m pytest tests/test_bernie_manifest_receptionist_scenarios.py tests/test_bernie_manifest_prompt_evaluation.py tests/test_bernie_fake_provider_adversarial_prompt.py -q` (all passed successfully).
 - Remaining risks:
   - None; this is a documentation-only sprint defining frame-shape criteria, introducing zero runtime codebase or database risks.
-

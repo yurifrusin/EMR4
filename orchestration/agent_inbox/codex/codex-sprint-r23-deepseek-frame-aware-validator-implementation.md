@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | c8fed3c |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r23-deepseek-frame-aware-validator-implementation --summary "Short plan summary"` |
@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: `app/services/ai/evals/manifest_eval.py`, `tests/test_bernie_manifest_receptionist_scenarios.py`, `orchestration/r23_deepseek_adversarial_frame_review.md`.
+- Verification run: Focused R23 compile and receptionist scenario pytest passed locally; broader manifest regression run is recorded in sprint closeout.
+- Remaining risks: Fake-provider-only seam; do not treat model output as runtime write authority.

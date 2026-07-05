@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r23-frame-aware-fake-provider-ux-semantics` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -35,5 +35,5 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated. The acceptance criteria are consistent with the fake-provider frame validator and live-provider-readiness gate.
+- Follow-up required: Keep live Gemini wiring blocked until provider dry-runs satisfy these frame-shape constraints.
