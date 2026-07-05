@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/receptionist_review_r7.md
+- Verification run: Internal policy sanity checking, verification of route structures, alignment with Ariadne amendment.
+- Remaining risks: Integration of raw path validation might affect external scripts/integrations if not coupled with an administrative bypass/import flag.
