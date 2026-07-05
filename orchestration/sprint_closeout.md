@@ -8,6 +8,54 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H8: Historical Diary Trove Local Event Summary Dry Run |
+| Integrated through | Ariadne local-only aggregate dry-run; no external workers used because scope was raw-free and narrowly bounded |
+| Status | Integrated locally; final push/workflow status pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `scripts/historical_diary_event_summary_dry_run.py`, a CLI that consumes only H5-safe aggregate JSON and writes an ignored validator-safe event summary.
+- Added `tests/test_historical_diary_event_summary_dry_run.py`, using synthetic aggregate fixtures only.
+- Ran the dry-run locally against ignored `local_data\historical-diary-trove\inventory\timeline_delta_h6.json`.
+- Produced ignored `local_data\historical-diary-trove\inventory\event_summary_h8.json` and validated it through `scripts\historical_diary_output_safety.py`.
+- Documented that H8 is a representative aggregate replay, not true chronological reconstruction, because H6 groups identical neutral signatures.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_event_summary_dry_run.py tests\test_historical_diary_event_summary_dry_run.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (16 passed; existing warnings only).
+- Local dry run passed: `.venv\Scripts\python.exe scripts\historical_diary_event_summary_dry_run.py local_data\historical-diary-trove\inventory\timeline_delta_h6.json`.
+- Safety validation passed: `.venv\Scripts\python.exe scripts\historical_diary_output_safety.py local_data\historical-diary-trove\inventory\event_summary_h8.json`.
+- Validation pending final commit, audit, and post-push workflows.
+
+## Local Dry-Run Result
+
+- `pilot`: 40 representative snapshots, 39 transitions, all `no_structural_change` or `small_content_delta`.
+- `pilot_01`: 40 representative snapshots, 39 transitions, all `no_structural_change` or `small_content_delta`.
+- Character-delta ranges are zero by design in H8 because H6 aggregate signatures do not retain per-signature character counts.
+
+## Recommended User Review
+
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H8 is local tooling/tests/docs only and does not touch raw diary files.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- H9 should emit an ignored ordered neutral snapshot sequence before using event counts as evidence about actual temporal edit flow.
+- Do not infer appointment create/delete/status semantics from H8; it is only a safety-gated aggregate replay.
+
+## Previous Closeout - Sprint H7
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H7: Historical Diary Trove Synthetic Timeline Event Model |
 | Integrated through | Ariadne synthetic-only model/tests; no external workers used because scope was small and raw-free |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |

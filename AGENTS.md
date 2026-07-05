@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H7 synthetic timeline event model completed; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H8: local event summary dry run over ignored H6 aggregate data, still validator-gated and non-semantic |
+| **Current active track** | Historical diary trove H8 local event-summary dry run completed; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H9: ordered local neutral snapshot event export, still ignored, validator-gated, and non-semantic |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -70,10 +70,16 @@ added `scripts/historical_diary_timeline_events.py` and
 `tests/test_historical_diary_timeline_events.py`, classifying synthetic neutral
 timeline deltas into non-semantic event classes such as
 `no_structural_change`, `small_content_delta`, `layout_shape_change`,
-`time_grid_delta`, and `large_unexplained_delta`. Safe H7 findings live in
-`docs/historical-diary-trove-synthetic-event-model.md`. H8 may run a local
-event-summary dry run over ignored aggregate data only, still behind the H5
-validator and without inferring real appointment semantics.
+`time_grid_delta`, and `large_unexplained_delta`. H8 added
+`scripts/historical_diary_event_summary_dry_run.py` and
+`tests/test_historical_diary_event_summary_dry_run.py`, consuming only ignored
+H6 aggregate JSON and producing ignored validator-safe event summaries. The H8
+pilot result was a representative aggregate replay only, not a true
+chronological reconstruction: both pilot roots produced only
+`no_structural_change` and `small_content_delta` classes. Safe H7/H8 findings
+live in `docs/historical-diary-trove-synthetic-event-model.md`. H9 should emit
+an ignored ordered neutral snapshot sequence before any claim about real
+temporal edit flow.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

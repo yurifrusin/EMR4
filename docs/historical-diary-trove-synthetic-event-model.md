@@ -62,15 +62,48 @@ This gives the project a safe ladder:
 5. Future raw-derived event work can compare against this model without
    exposing document content.
 
-## H8 Recommendation
+## H8 Dry Run
 
-Next sprint: **H8 Local Event Summary Dry Run**.
+H8 added a local dry-run CLI:
+
+```text
+scripts/historical_diary_event_summary_dry_run.py
+```
+
+It consumes only an already-safe aggregate JSON payload, such as the ignored H6
+`timeline_delta_h6.json`, expands grouped neutral signatures into
+synthetic-like snapshots, and writes an ignored event summary:
+
+```text
+local_data/historical-diary-trove/inventory/event_summary_h8.json
+```
+
+The dry-run output is passed through the H5 validator before it is considered
+usable.
+
+Important limitation: H8 does **not** recover the real chronological sequence
+of diary edits. The H6 aggregate groups identical neutral signatures, so H8's
+transition counts describe a representative aggregate replay, not the exact
+order in which the original diary changed.
+
+Local H8 pilot result:
+
+- `pilot`: 40 representative snapshots, 39 transitions, all classified as
+  `no_structural_change` or `small_content_delta`.
+- `pilot_01`: 40 representative snapshots, 39 transitions, all classified as
+  `no_structural_change` or `small_content_delta`.
+- Character deltas are intentionally zero in this dry run because per-signature
+  character counts are not present in the H6 grouped aggregate.
+
+## H9 Recommendation
+
+Next sprint: **H9 Ordered Local Snapshot Event Export**.
 
 Recommended scope:
 
-1. Convert the ignored H6 aggregate JSON into neutral synthetic-like snapshots
-   in memory only.
-2. Produce an ignored event-summary JSON.
-3. Validate the event summary through H5.
-4. Commit only safe aggregate findings if the event summary remains useful.
-5. Do not infer appointment creation/deletion/status semantics yet.
+1. Extend the local-only classifier to emit an ignored ordered neutral snapshot
+   sequence with no filenames, paths, timestamps, labels, or text.
+2. Run the H7 event model over that ordered sequence.
+3. Validate the ignored output through H5.
+4. Compare ordered results with H8's representative replay.
+5. Still do not infer appointment creation/deletion/status semantics.
