@@ -559,7 +559,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | `2b1cca1` - Sprint R6 temporal boundary harness follow-up |
+| **Latest integration commit** | `fdaf99c` - Sprint R6 temporal boundary harness follow-up |
 
 ### Tag map (all tags pushed to remote)
 
