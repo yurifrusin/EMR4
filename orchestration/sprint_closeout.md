@@ -8,52 +8,53 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R11: Optional Reason-Code Substrate |
-| Integrated through | Ariadne backend integration, Antigravity/Gemini UX/privacy review, DeepSeek Flash backend plan, DeepSeek Flash adversarial-test guidance |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned, audit clean, disposable DeepSeek worktrees retired |
+| Batch | Sprint R12: Diary Reason-Code UI Flow |
+| Integrated through | Ariadne UI/test integration, Antigravity/Gemini UX/privacy review, DeepSeek Flash implementation plan, DeepSeek Flash smoke-test plan |
+| Status | Integrated locally; pending final commit, push, mirror realign, and audit |
 | Last updated | 2026-07-05 |
 
 ## What Changed
 
-- Added nullable `status_reason_code` columns to appointments and appointment audit log via `alembic/versions/k0l1m2n3o4p5_add_status_reason_code.py`.
-- Added a shared uppercase allow-list validator in `app/schemas/appointments.py` and exposed optional `status_reason_code` fields on raw status updates, status proposals, delete proposals, command payloads, appointment output, and audit output.
-- Threaded `status_reason_code` through raw status changes, status proposal/confirm, delete proposal/confirm, appointment state payloads, and audit writes in `app/routers/appointments.py`.
-- Added focused backend coverage in `tests/test_reason_code_backend.py` for valid-code persistence, invalid-code rejection, legacy-null compatibility, proposal confirm flows, delete free-text coexistence, and past-date status/delete exemptions.
-- Integrated Antigravity/Gemini's `docs/receptionist_review_r11.md` UX/privacy critique as follow-up guidance for the first-party Diary UI.
-- Preserved the R8/R9 policy boundary: slot-writing temporal guards were not changed, and retrospective status/delete governance remains allowed with optional/null-compatible reason codes.
+- Added first-party Diary reason-code controls for terminal appointment statuses (`Cancelled`, `NoShow`, `DNA`) with no preselected default.
+- Changed the cancellation free-text field into a capped administrative note with explicit privacy copy warning reception not to enter symptoms, diagnoses, or sensitive health details.
+- Threaded `status_reason_code` through Diary status saves, cancel/delete signed proposal payloads, fallback status proposals, raw fallback delete payloads, smoke-mode appointment state, and audit/flow-card rendering.
+- Displayed persisted reason codes in the booking audit history and cancelled-flow cards using human-readable labels.
+- Added deterministic review coverage for no-default dropdown behaviour, required UI selection, privacy copy, payload threading, and cancelled-card display.
+- Integrated Gemini's R12 receptionist UX/privacy review in `docs/receptionist_review_r12.md`.
 
 ## Verification
 
-- Compile check passed: `.venv\Scripts\python.exe -m py_compile app\schemas\appointments.py app\models\appointments.py app\routers\appointments.py tests\test_reason_code_backend.py`.
-- Focused R11 reason-code backend suite passed: `.venv\Scripts\pytest.exe tests\test_reason_code_backend.py -q --tb=short` (9 passed; existing Starlette/Google GenAI warnings only).
-- Adjacent appointment governance suite passed: `.venv\Scripts\pytest.exe tests\test_reason_code_backend.py tests\test_appointment_audit.py tests\test_appointment_status_mutations.py tests\test_appointment_raw_temporal_guard.py tests\test_appointment_proposals.py tests\test_appointment_update_proposal.py tests\test_bernie_confirm_create_proposal.py -q --tb=short` (144 passed; existing warnings only).
+- JavaScript syntax check passed: `node --check docs\diary\diary.js`.
+- Focused R12 Diary smoke target passed: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short -k "reason_code or cancel_flow_uses_signed_delete_confirm_without_raw_delete or cancel_flow_failed_signed_confirm_does_not_raw_delete" --junitxml=review\reason-code-review.xml` (7 passed).
+- Full Diary smoke was attempted: `.venv\Scripts\pytest.exe review\test_diary_smoke.py -q --tb=short --junitxml=review\diary-review.xml`; R12-affected checks passed, but 12 pre-existing/unrelated Bernie session/pilot harness checks still fail around session append capture and pilot launch/grid visibility on non-smoke URLs.
+- Whitespace check passed: `git diff --check`.
 
 ## Recommended User Review
 
-No required manual review for Sprint R11 before continuing. This sprint changes backend schema/API/test contracts and adds a migration, but it does not change visible Diary UI, taskpane assets, Word add-in behaviour, GitHub Pages assets, or live Gemini behaviour.
+No required manual review for Sprint R12 before continuing. The visible Diary UI change is covered by deterministic smoke checks for selector state, required selection, warning copy, and signed-confirm payload threading. A later receptionist workflow pass can still tune labels after real use, especially around the `PATIENT_UNWELL` taxonomy.
 
 ## Not Required Before Moving On
 
-- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
-- No live Gemini/Vertex call is required; tests are deterministic route/API tests.
-- No receptionist/manual UI test is required until a first-party dropdown/warning flow is added.
+- No Office/Word taskpane review is required; R12 changes only Diary static assets and review harness files.
+- No live Gemini/Vertex call is required; tests use deterministic Diary smoke fixtures.
+- No database migration is required in R12; it consumes the nullable R11 backend substrate.
 
 ## Known Follow-Up
 
-- Decide before UI rollout whether `PATIENT_UNWELL` should be removed, merged into `PATIENT_CANCELLED`, or renamed to avoid nudging receptionists toward clinical-detail capture.
-- Add first-party Diary UI dropdowns with no preselected default, administrative-only free-text copy, and privacy warnings before making reason selection mandatory in the UI.
-- Keep external/API compatibility nullable for now; strict missing-code rejection is not part of R11.
-- Recheck Claude at the next sprint start; during R11 Claude still reported a session-limit reset at 9:30pm Australia/Brisbane and was replaced by DeepSeek Flash lanes.
+- Resolve or re-baseline the unrelated full-smoke Bernie session/pilot failures so the whole Diary review harness is clean again.
+- Consider contextual filtering/grouping of reason-code options by terminal status after receptionist feedback.
+- Revisit whether `PATIENT_UNWELL` should remain visible, be renamed, or be folded into a less clinical-looking patient-cancelled category.
+- Consider dynamic warning/validation for clinical keywords in administrative notes if privacy risk persists after workflow testing.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint R12: Diary Reason-Code UI Flow |
+| Name | Sprint R13: Diary Smoke Harness Recovery |
 | Status | Proposed |
-| Recommended agents | Check Claude availability first; use Claude if healthy for UI/API contract review, Antigravity/Gemini for receptionist UX/privacy critique, and DeepSeek Flash workers for deterministic UI/API smoke or adversarial route tests as boundaries justify |
+| Recommended agents | Check Claude availability first; if Claude remains unavailable, use DeepSeek Flash workers for harness diagnosis/regression isolation and Antigravity/Gemini for receptionist-domain impact review if UI semantics are implicated |
 
-Recommended scope: add first-party Diary reason-code controls for cancel/status flows using the nullable backend substrate, without changing external API null compatibility or temporal slot-write policy.
+Recommended scope: diagnose the 12 unrelated Bernie session/pilot full-smoke failures, separate stale harness assumptions from real regressions, and restore a clean deterministic Diary review signal before adding more visible Diary behaviour.
 
 ## Previous Closeout - Sprint R4
 
@@ -2870,7 +2871,7 @@ Optional confidence check only, if Yuri happens to be in the live diary:
 - Backend compile check: `python -m py_compile app
 outersppointments.py app\schemasppointments.py` -> passed.
 - Frontend static check: `node --check docs\diary\diary.js` -> passed.
-- Deterministic diary review: `python -m pytest review	est_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 14 passed.
+- Deterministic diary review: `python -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q` -> 14 passed.
 - Diff hygiene: `git diff --check` -> passed, with only existing CRLF normalization warnings.
 
 ## Recommended Next Direction

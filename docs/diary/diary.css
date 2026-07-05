@@ -1078,6 +1078,16 @@ html, body {
   border-color: var(--blue-mid);
 }
 
+.booking-reason-privacy-warning {
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--grey-4);
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+
 .patient-search-container {
   position: relative;
   width: 100%;
@@ -1677,6 +1687,7 @@ html, body {
 .flow-card-cancelled { border-left: 3px solid var(--grey-3); opacity: 0.85; }
 .flow-card-cancelled .flow-card-name { text-decoration: line-through; color: var(--grey-3); }
 .flow-card-cancellation-reason { margin-top: 5px; font-size: 11px; color: var(--grey-4); font-style: italic; }
+.flow-card-status-reason-code { margin-top: 2px; font-size: 10px; color: var(--grey-3); font-weight: 600; letter-spacing: 0.01em; }
 
 .flow-card-identity-unconfirmed {
   border-color: #ef4444;

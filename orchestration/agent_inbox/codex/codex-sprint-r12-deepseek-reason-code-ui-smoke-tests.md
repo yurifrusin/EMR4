@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | accepted |
+| Status | integrated |
 | Created | 92c3abc |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-r12-deepseek-reason-code-ui-smoke-tests --summary "Short plan summary"` |
@@ -87,8 +87,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
-
-- Files changed:
-- Verification run:
-- Remaining risks:
+- DeepSeek Flash smoke-test plan was accepted; worker sandbox/git issues prevented a clean submitted implementation artifact.
+- Ariadne implemented deterministic smoke coverage directly in `review/test_diary_smoke.py` and `review/checks_diary.json`.
+- Verification: focused R12 reason-code smoke target passed; full smoke attempted and unrelated Bernie session/pilot failures recorded in sprint closeout.

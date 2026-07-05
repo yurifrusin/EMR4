@@ -191,6 +191,51 @@ def test_booking_audit_history(diary_page):
     diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)
 
 
+def test_reason_code_dropdown_no_default_and_ui_required(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    diary_page.goto(base_url + CHECKS["target"])
+    diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+    diary_page.click(".appt:has-text('Margaret Thompson')")
+    diary_page.wait_for_selector(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt", state="visible", timeout=3000)
+    diary_page.click(".appt.appt-active:has-text('Margaret Thompson') .btn-edit-appt")
+    diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
+
+    reason_container = diary_page.locator("[data-testid='booking-status-reason-code-container']")
+    assert "hidden" in (reason_container.get_attribute("class") or "")
+
+    diary_page.select_option("#booking-status", "Cancelled")
+    diary_page.wait_for_selector("[data-testid='booking-status-reason-code-container']:not(.hidden)", state="visible", timeout=2000)
+    reason_select = diary_page.locator("[data-testid='booking-status-reason-code']")
+    assert reason_select.input_value() == ""
+    assert reason_select.locator("option[value='LEGACY_UNCLASSIFIED']").count() == 0
+    assert reason_select.locator("option[value='PATIENT_CANCELLED']").count() == 1
+    assert reason_select.locator("option[value='DID_NOT_ATTEND']").count() == 1
+
+    note = diary_page.locator("[data-testid='booking-cancel-reason']")
+    assert int(note.get_attribute("maxlength")) <= 150
+    warning = diary_page.locator("[data-testid='booking-reason-privacy-warning']")
+    assert "do not enter symptoms" in warning.text_content().lower()
+
+    diary_page.select_option("#booking-status", "Booked")
+    diary_page.click("#btn-booking-delete")
+    diary_page.click("#btn-booking-delete")
+    error = diary_page.locator("#booking-error")
+    assert "select an administrative reason code" in error.text_content()
+
+    diary_page.click("#btn-booking-close")
+    diary_page.wait_for_selector("#booking-modal.hidden", state="attached", timeout=2000)
+
+
+def test_reason_code_payload_threading_present_in_diary_source():
+    source = (DOCS_DIR / "diary" / "diary.js").read_text(encoding="utf-8")
+    assert "status_reason_code: statusReasonCode" in source
+    assert "bookingStatusReasonCodeValue()" in source
+    assert "LEGACY_UNCLASSIFIED" not in source
+
+
 def test_slot_search_preview_harness_active(diary_page):
     import urllib.parse
     parsed = urllib.parse.urlparse(diary_page.url)
@@ -7601,6 +7646,7 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
         )
         diary_page.click("#btn-booking-delete")
         diary_page.fill("#booking-cancel-reason", "Patient had transport issues")
+        diary_page.select_option("[data-testid='booking-status-reason-code']", "PATIENT_TRANSPORT")
         diary_page.click("#btn-booking-delete")
         diary_page.wait_for_selector(".identity-confirm-overlay", state="visible", timeout=5000)
         diary_page.click(".identity-confirm-overlay button:has-text('Confirm & Save')")
@@ -7612,6 +7658,7 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
 
     assert captured_proposals, "Expected delete proposal request"
     assert captured_proposals[0]["cancellation_reason"] == "Patient had transport issues"
+    assert captured_proposals[0]["status_reason_code"] == "PATIENT_TRANSPORT"
     assert captured_confirms, "Expected signed delete-confirm request"
     assert captured_confirms[0]["confirmed"] is True
     assert captured_confirms[0]["delete_proposal"]["command"]["cancellation_reason"] == "Patient had transport issues"
@@ -7639,6 +7686,7 @@ def test_cancel_flow_failed_signed_confirm_does_not_raw_delete(diary_page):
                     "appointment_id": "appt-delete-fail",
                     "clears_waiting_area": False,
                     "cancellation_reason": "Patient had transport issues",
+                    "status_reason_code": "PATIENT_TRANSPORT",
                 },
                 "warnings": [],
                 "blocks": [],
@@ -7732,6 +7780,7 @@ def test_cancel_flow_failed_signed_confirm_does_not_raw_delete(diary_page):
         )
         diary_page.click("#btn-booking-delete")
         diary_page.fill("#booking-cancel-reason", "Patient had transport issues")
+        diary_page.select_option("[data-testid='booking-status-reason-code']", "PATIENT_TRANSPORT")
         diary_page.click("#btn-booking-delete")
         diary_page.wait_for_selector(".identity-confirm-overlay", state="visible", timeout=5000)
         diary_page.click(".identity-confirm-overlay button:has-text('Confirm & Save')")

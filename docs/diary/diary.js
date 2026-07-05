@@ -34,6 +34,25 @@ const BERNIE_DEV_QUERY_PARAM_ALLOWLIST = [
   "selected_candidate_index"
 ];
 const BERNIE_SESSION_SURFACE_ID = "diary-main";
+const STATUS_REASON_CODE_LABELS = {
+  PATIENT_CANCELLED: "Patient cancelled",
+  PATIENT_RESCHEDULED: "Patient requested reschedule",
+  PATIENT_UNWELL: "Patient unwell",
+  PATIENT_TRANSPORT: "Transport or access issue",
+  PRACTITIONER_UNAVAILABLE: "Practitioner unavailable",
+  CLINIC_OPERATIONAL: "Clinic operational issue",
+  CLINIC_RESCHEDULED: "Clinic requested reschedule",
+  ADMIN_ERROR: "Administrative correction",
+  DUPLICATE_BOOKING: "Duplicate booking",
+  DID_NOT_ATTEND: "Did not attend",
+  LEFT_WITHOUT_SEEN: "Left before being seen",
+  OTHER: "Other administrative reason"
+};
+const STATUS_REASON_CODE_STATUSES = new Set(["Cancelled", "NoShow", "DNA"]);
+
+function statusReasonCodeLabel(code) {
+  return STATUS_REASON_CODE_LABELS[code] || String(code || "");
+}
 
 function shouldUseBernieServerSession() {
   if (!token) {
@@ -2147,6 +2166,7 @@ function getMockAppointments() {
       patient_id: "smoke-pat-6",
       reason: "Blood test check",
       cancellation_reason: "Patient had transport issues",
+      status_reason_code: "PATIENT_TRANSPORT",
       appointment_type_id: "smoke-type-1",
       location_id: "loc-1"
     }
@@ -2190,6 +2210,7 @@ function getMockAuditEvents(apptId) {
         status_before: "Booked",
         status_after: "Cancelled",
         cancellation_reason: "Patient had transport issues",
+        status_reason_code: "PATIENT_TRANSPORT",
         confirmed_by_user_id: "Receptionist Sally"
       },
       {
@@ -2390,6 +2411,9 @@ async function loadAuditHistory(apptId) {
       }
       if (evt.cancellation_reason) {
         details.push(`Cancellation Reason: <strong>${escHtml(evt.cancellation_reason)}</strong>`);
+      }
+      if (evt.status_reason_code) {
+        details.push(`Reason Code: <strong>${escHtml(statusReasonCodeLabel(evt.status_reason_code))}</strong>`);
       }
       const warningsList = evt.confirmed_warnings || evt.warning_codes;
       if (warningsList) {
@@ -6226,6 +6250,19 @@ Office.onReady(() => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("change", resetProposalConfirmation);
   });
+  const bookingStatusSelect = document.getElementById("booking-status");
+  if (bookingStatusSelect) {
+    bookingStatusSelect.addEventListener("change", () => {
+      syncBookingReasonCodeVisibility();
+      if (!STATUS_REASON_CODE_STATUSES.has(bookingStatusSelect.value)) {
+        setBookingReasonCodeVisible(false, true);
+      }
+    });
+  }
+  const bookingReasonCodeSelect = document.getElementById("booking-status-reason-code");
+  if (bookingReasonCodeSelect) {
+    bookingReasonCodeSelect.addEventListener("change", resetProposalConfirmation);
+  }
   ["booking-date", "booking-time", "booking-duration", "booking-reason"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", resetProposalConfirmation);
@@ -6519,6 +6556,27 @@ function prepareStatusDropdown(currentStatus) {
   });
 }
 
+function setBookingReasonCodeVisible(visible, clearValue = false) {
+  const container = document.getElementById("booking-status-reason-code-container");
+  const select = document.getElementById("booking-status-reason-code");
+  if (container) container.classList.toggle("hidden", !visible);
+  if (select && clearValue) select.value = "";
+}
+
+function resetBookingReasonCode() {
+  setBookingReasonCodeVisible(false, true);
+}
+
+function syncBookingReasonCodeVisibility() {
+  const status = document.getElementById("booking-status")?.value;
+  setBookingReasonCodeVisible(STATUS_REASON_CODE_STATUSES.has(status));
+}
+
+function bookingStatusReasonCodeValue() {
+  const value = document.getElementById("booking-status-reason-code")?.value || "";
+  return value.trim() || null;
+}
+
 function openBookingModalForCreate(col, slotTime) {
   resetProposalConfirmation();
   editingAppointmentId = null;
@@ -6529,6 +6587,7 @@ function openBookingModalForCreate(col, slotTime) {
   if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
   const cancelReasonInput = document.getElementById("booking-cancel-reason");
   if (cancelReasonInput) cancelReasonInput.value = "";
+  resetBookingReasonCode();
   document.getElementById("booking-modal-title").textContent = "New Appointment";
   document.getElementById("btn-booking-delete").classList.add("hidden");
 
@@ -6569,6 +6628,7 @@ function openBookingModalForEdit(appt) {
   if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
   const cancelReasonInput = document.getElementById("booking-cancel-reason");
   if (cancelReasonInput) cancelReasonInput.value = "";
+  resetBookingReasonCode();
 
   const provisionalPatientName = appt.patient_name_provisional || appt.provisional_name || "";
   const isProvisional = !!provisionalPatientName || !appt.patient_id || !appt.patient;
@@ -6623,6 +6683,11 @@ function openBookingModalForEdit(appt) {
   editingAppointmentOriginalStatus = displayStatus;
   prepareStatusDropdown(appt.status);
   document.getElementById("booking-status").value = displayStatus;
+  if (appt.status_reason_code) {
+    const reasonSelect = document.getElementById("booking-status-reason-code");
+    if (reasonSelect) reasonSelect.value = appt.status_reason_code;
+  }
+  syncBookingReasonCodeVisibility();
 
   document.getElementById("booking-reason").value = appt.reason || "";
   document.getElementById("booking-error").classList.add("hidden");
@@ -6667,6 +6732,7 @@ function closeBookingModal() {
   if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
   const cancelReasonInput = document.getElementById("booking-cancel-reason");
   if (cancelReasonInput) cancelReasonInput.value = "";
+  resetBookingReasonCode();
   resetProposalConfirmation();
 }
 
@@ -6939,6 +7005,11 @@ function simulateStatusProposal(appt, payload) {
     requires_confirmation: true,
     autonomy_tier,
     summary,
+    command: {
+      status: payload.status,
+      waiting_area_id: payload.waiting_area_id,
+      status_reason_code: payload.status_reason_code || null
+    },
     warnings,
     blocks
   };
@@ -7107,11 +7178,20 @@ async function saveBooking() {
   const timeVal = document.getElementById("booking-time").value;
   const duration = parseInt(document.getElementById("booking-duration").value, 10);
   const statusVal = document.getElementById("booking-status").value;
+  const statusReasonCode = STATUS_REASON_CODE_STATUSES.has(statusVal)
+    ? bookingStatusReasonCodeValue()
+    : null;
   const reason = document.getElementById("booking-reason").value.trim();
 
   if (!dateVal || !timeVal || isNaN(duration)) {
     errorEl.textContent = "Date, time, and duration are required.";
     errorEl.classList.remove("hidden");
+    return;
+  }
+  if (STATUS_REASON_CODE_STATUSES.has(statusVal) && !statusReasonCode) {
+    errorEl.textContent = "Please select an administrative reason code for this status change.";
+    errorEl.classList.remove("hidden");
+    setBookingReasonCodeVisible(true);
     return;
   }
 
@@ -7223,6 +7303,7 @@ async function saveBooking() {
           appt.start_time_local = timeVal;
           appt.duration_minutes = duration;
           appt.status = statusToSend;
+          appt.status_reason_code = statusReasonCode;
           appt.practitioner.ahpra_number = ahpra;
           appt.reason = reason;
           appt.appointment_type_id = typeId;
@@ -7271,9 +7352,11 @@ async function saveBooking() {
         }
 
         if (statusToSend !== (editingAppointmentOriginalStatus || "Booked")) {
+          const statusPayload = { status: statusToSend };
+          if (statusReasonCode) statusPayload.status_reason_code = statusReasonCode;
           const statusRes = await apiFetch(`/appointments/${editingAppointmentId}/status`, {
             method: "PATCH",
-            body: JSON.stringify({ status: statusToSend })
+            body: JSON.stringify(statusPayload)
           });
           if (!statusRes.ok) {
             throw new Error(await apiErrorMessage(statusRes, "Status update"));
@@ -7289,6 +7372,7 @@ async function saveBooking() {
           start_time_local: timeVal,
           duration_minutes: duration,
           status: statusToSend,
+          status_reason_code: statusReasonCode,
           practitioner: { ahpra_number: ahpra, id: practitioner.id, first_name: practitioner.first_name, last_name: practitioner.last_name },
           patient: selectedPatient,
           patient_name_provisional: provisionalName,
@@ -7350,9 +7434,11 @@ async function saveBooking() {
         }
 
         if (statusToSend !== "Booked") {
+          const statusPayload = { status: statusToSend };
+          if (statusReasonCode) statusPayload.status_reason_code = statusReasonCode;
           const statusRes = await apiFetch(`/appointments/${newApptObj.id}/status`, {
             method: "PATCH",
-            body: JSON.stringify({ status: statusToSend })
+            body: JSON.stringify(statusPayload)
           });
           if (!statusRes.ok) {
             throw new Error(await apiErrorMessage(statusRes, "Set status"));
@@ -7385,6 +7471,7 @@ async function deleteBooking() {
     errorEl.classList.remove("hidden");
     const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
     if (cancelReasonContainer) cancelReasonContainer.classList.remove("hidden");
+    setBookingReasonCodeVisible(true, true);
     const cancelReasonInput = document.getElementById("booking-cancel-reason");
     if (cancelReasonInput) {
       cancelReasonInput.value = "";
@@ -7408,15 +7495,31 @@ async function deleteBooking() {
 
     const cancelReasonInput = document.getElementById("booking-cancel-reason");
     const cancellation_reason = cancelReasonInput ? cancelReasonInput.value.trim() : "";
+    const statusReasonCode = bookingStatusReasonCodeValue();
+    if (!statusReasonCode) {
+      errorEl.textContent = "Please select an administrative reason code for this cancellation.";
+      errorEl.classList.remove("hidden");
+      setBookingReasonCodeVisible(true);
+      deleteBtn.disabled = false;
+      return;
+    }
 
     let proposal;
     if (isSmokeMode) {
-      proposal = simulateStatusProposal(appt, { status: "Cancelled", waiting_area_id: null });
+      proposal = simulateStatusProposal(appt, {
+        status: "Cancelled",
+        waiting_area_id: null,
+        status_reason_code: statusReasonCode
+      });
     } else {
       try {
         const propRes = await apiFetch(`/appointments/proposals/delete/${editingAppointmentId}`, {
           method: "POST",
-          body: JSON.stringify({ intent: "delete_appointment", cancellation_reason })
+          body: JSON.stringify({
+            intent: "delete_appointment",
+            cancellation_reason,
+            status_reason_code: statusReasonCode
+          })
         });
         if (propRes.status === 404) {
           throw new Error("404");
@@ -7430,7 +7533,11 @@ async function deleteBooking() {
           // Fallback to status proposal (omitting cancellation_reason)
           const propRes = await apiFetch(`/appointments/proposals/status/${editingAppointmentId}`, {
             method: "POST",
-            body: JSON.stringify({ status: "Cancelled", waiting_area_id: null })
+            body: JSON.stringify({
+              status: "Cancelled",
+              waiting_area_id: null,
+              status_reason_code: statusReasonCode
+            })
           });
           if (!propRes.ok) {
             throw new Error(await apiErrorMessage(propRes, "Status proposal check"));
@@ -7450,6 +7557,7 @@ async function deleteBooking() {
         errorEl.classList.add("hidden");
         const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
         if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+        resetBookingReasonCode();
         if (cancelReasonInput) cancelReasonInput.value = "";
         deleteBtn.disabled = false;
         return;
@@ -7460,11 +7568,12 @@ async function deleteBooking() {
       mockAppointmentsCache = mockAppointmentsCache.filter(x => x.id !== editingAppointmentId);
       setStatus("Booking cancelled (Mock).");
     } else {
-      await applySignedDeleteProposal(proposal, cancellation_reason);
+      await applySignedDeleteProposal(proposal, cancellation_reason, statusReasonCode);
       setStatus("Booking cancelled successfully.");
     }
     const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
     if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+    resetBookingReasonCode();
     if (cancelReasonInput) cancelReasonInput.value = "";
     closeBookingModal();
     await loadDiary(true);
@@ -7476,6 +7585,7 @@ async function deleteBooking() {
     deleteBtn.textContent = "Cancel Appointment";
     const cancelReasonContainer = document.getElementById("booking-cancel-reason-container");
     if (cancelReasonContainer) cancelReasonContainer.classList.add("hidden");
+    resetBookingReasonCode();
     if (cancelReasonInput) cancelReasonInput.value = "";
   } finally {
     deleteBtn.disabled = false;
@@ -7831,7 +7941,7 @@ async function applySignedStatusProposal(appt, proposal, newStatus, waitingAreaI
   return await res.json();
 }
 
-async function applySignedDeleteProposal(proposal, cancellationReason) {
+async function applySignedDeleteProposal(proposal, cancellationReason, statusReasonCode = null) {
   const confirmedWarnings = (proposal?.warnings || []).map(issue => issue.code).filter(Boolean);
   const confirmEndpoint = proposal?.confirm_endpoint;
   const confirmPayload = proposal?.confirm_payload ? JSON.parse(JSON.stringify(proposal.confirm_payload)) : null;
@@ -7862,7 +7972,10 @@ async function applySignedDeleteProposal(proposal, cancellationReason) {
 
   const res = await apiFetch(`/appointments/${editingAppointmentId}`, {
     method: "DELETE",
-    body: JSON.stringify({ cancellation_reason: cancellationReason })
+    body: JSON.stringify({
+      cancellation_reason: cancellationReason,
+      status_reason_code: statusReasonCode
+    })
   });
   if (!res.ok) {
     const text = await res.text();
@@ -8449,6 +8562,14 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
       reason.setAttribute("data-testid", "flow-card-cancellation-reason");
       reason.textContent = `Reason: ${a.cancellation_reason}`;
       card.appendChild(reason);
+    }
+
+    if (a.status === "Cancelled" && a.status_reason_code) {
+      const reasonCode = document.createElement("div");
+      reasonCode.className = "flow-card-status-reason-code";
+      reasonCode.setAttribute("data-testid", "flow-card-status-reason-code");
+      reasonCode.textContent = `Code: ${statusReasonCodeLabel(a.status_reason_code)}`;
+      card.appendChild(reasonCode);
     }
 
     const footer = document.createElement("div");

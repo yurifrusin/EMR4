@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | accepted |
+| Status | integrated |
 | Created | 92c3abc |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint-r12-diary-reason-code-ux-review --summary "Short plan summary"` |
@@ -87,8 +87,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
-
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Integrated as `docs/receptionist_review_r12.md`.
+- Scope stayed documentation-only; Gemini UX/privacy guidance was used to shape the first-party Diary reason-code controls.
+- Verification: document reviewed by Ariadne; no code execution required for this lane.
