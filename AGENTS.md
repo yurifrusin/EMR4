@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H2 parser feasibility completed locally; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H3: local text/structure extraction spike on tiny pilot samples, with no committed PHI and no external-provider raw-data exposure |
+| **Current active track** | Historical diary trove H3 local extraction spike completed on tiny pilot samples; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H4: local diary structure classifier prototype, still tiny-sample and aggregate-only, with no committed PHI and no external-provider raw-data exposure |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -45,9 +45,13 @@ tiny `.doc` files have non-OLE signatures. The safe committed summary is
 ignored under `local_data/historical-diary-trove/inventory/`. H2 structural
 probing found valid Word/OLE `WordDocument`, `1Table`, and `Data` streams with
 Word header `nFib=193` in 10/10 dense-day samples from each pilot; safe findings
-live in `docs/historical-diary-trove-parser-feasibility.md`. H3 should attempt
-local-only text/structure extraction on tiny samples before touching the full
-trove.
+live in `docs/historical-diary-trove-parser-feasibility.md`. H3 confirmed local
+Microsoft Word COM can open dense-day samples read-only with macros disabled and
+recover aggregate structure: 5/5 opens from each pilot, stable 2-table/14-cell
+layout, dense paragraph/line counts, and repeated time/date-like token counts.
+Safe H3 findings live in `docs/historical-diary-trove-local-extraction.md`. H4
+should build a local-only diary structure classifier on tiny samples before
+touching the full trove.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too

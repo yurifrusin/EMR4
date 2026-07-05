@@ -8,30 +8,30 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H2: Historical Diary Trove Parser Feasibility |
-| Integrated through | Ariadne local-only structural OLE/Word probe; no external workers used because raw files are PHI-bearing |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
+| Batch | Sprint H3: Historical Diary Trove Local Extraction Spike |
+| Integrated through | Ariadne local-only Word COM read-only extraction probe; no external workers used because raw files are PHI-bearing |
+| Status | Integrated locally; final push/workflow status pending |
 | Last updated | 2026-07-06 |
 
 ## What Changed
 
-- Added `scripts/historical_diary_doc_probe.py`, a pure-Python OLE compound-document structural probe for legacy Word `.doc` files.
-- Ran the probe against 10 dense-day candidate files from each ignored pilot folder; detailed JSON output remains ignored under `local_data/historical-diary-trove/inventory/doc_probe_h2.json`.
-- Added `docs/historical-diary-trove-parser-feasibility.md` with safe H2 findings: both pilots' dense samples are valid OLE Word documents with `WordDocument`, `1Table`, `Data`, and summary-information streams present in 10/10 sampled files.
-- Confirmed Word binary header `wIdent=eca5` and `nFib=193` in 10/10 sampled files from both `pilot` and `pilot_01`.
-- Recorded that local conversion tools (`soffice`, `antiword`, `catdoc`, `wvText`, `olefile`, `win32com`) were unavailable, so H2 used structural probing only.
-- Updated `AGENTS.md` so future agents know H2 succeeded structurally and H3 is the next local-only extraction spike.
+- Added `scripts/historical_diary_word_extract_probe.ps1`, a local Microsoft Word COM probe that disables macros, opens tiny `.doc` samples read-only, and emits aggregate structure only.
+- Ran the probe against 5 dense-day candidate files from each ignored pilot folder; detailed JSON output remains ignored under `local_data/historical-diary-trove/inventory/word_extract_probe_h3.json`.
+- Added `docs/historical-diary-trove-local-extraction.md` with safe H3 findings: both pilot samples opened 5/5 with zero errors and showed stable table/time-like structure.
+- Confirmed `pilot` samples have 2 tables, 14 table cells, 252 paragraphs, 181 non-empty lines, 86 time-like tokens, and 11 date-like tokens across the 5-file sample.
+- Confirmed `pilot_01` samples have 2 tables, 14 table cells, 235-238 paragraphs, 166-167 non-empty lines, 78 time-like tokens, and 13 date-like tokens across the 5-file sample.
+- Updated `AGENTS.md` so future agents know H3 succeeded locally and H4 should build a diary structure classifier before full-trove processing.
 - No raw diary files, filenames, patient content, document text, document metadata strings, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
 
 ## Verification
 
-- Structural probe compile passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_doc_probe.py`.
-- H2 structural probe command passed: `.venv\Scripts\python.exe scripts\historical_diary_doc_probe.py --root local_data\historical-diary-trove\raw\pilot --root local_data\historical-diary-trove\raw\pilot_01 --output local_data\historical-diary-trove\inventory\doc_probe_h2.json --sample-size 10 --dense-days 2 --print-summary`.
-- Whitespace check pending final run before commit.
+- H3 Word COM availability probe passed locally with Word version `16.0`.
+- H3 extraction probe command passed: `powershell -NoProfile -ExecutionPolicy Bypass -Command "& { .\scripts\historical_diary_word_extract_probe.ps1 -Root @('local_data\historical-diary-trove\raw\pilot','local_data\historical-diary-trove\raw\pilot_01') -Output 'local_data\historical-diary-trove\inventory\word_extract_probe_h3.json' -SampleSize 5 -DenseDays 1 }"`.
+- Validation pending final run before commit.
 
 ## Recommended User Review
 
-No required manual review before continuing if validation, push, audit, and post-push workflows pass. H2 is structural tooling/docs-only and does not commit raw files, filenames, document text, or PHI.
+No required manual review before continuing if validation, push, audit, and post-push workflows pass. H3 is local tooling/docs-only and does not commit raw files, filenames, document text, or PHI.
 
 ## Not Required Before Moving On
 
@@ -42,20 +42,28 @@ No required manual review before continuing if validation, push, audit, and post
 
 ## Known Follow-Up
 
-- H3 should attempt local text/structure extraction on 2-3 files from each pilot without committing filenames, text, metadata strings, or patient/staff labels.
-- Determine whether visible diary date, time labels, resource columns, and appointment-block counts are recoverable.
-- Decide whether to install/use a local converter, implement a minimal Word binary piece-table extractor, or use hidden/local Word automation under ignored outputs.
+- H4 should build a local diary structure classifier on tiny samples without committing filenames, text, metadata strings, or patient/staff labels.
+- Determine whether neutral layout facts such as table shape, row/time-label density, grid regularity, and snapshot-to-snapshot deltas can be emitted safely.
+- Define a de-identification contract before processing more than tiny samples.
 - Do not process the full 58k-file trove until extraction and de-identification boundaries are proven on the pilots.
 
 ## Next Sprint Candidate
 
 | Item | Value |
 |---|---|
-| Name | Sprint H3: Historical Diary Trove Local Text/Structure Extraction Spike |
+| Name | Sprint H4: Historical Diary Trove Structure Classifier Prototype |
 | Status | Proposed |
 | Recommended agents | Ariadne local-first for raw PHI inspection; external workers only on non-PHI parser code, synthetic fixtures, or safe summaries |
 
-Recommended scope: locally extract or convert 2-3 sample documents from each pilot into ignored temporary outputs, classify whether neutral diary-grid facts are recoverable, and commit only non-PHI feasibility findings.
+Recommended scope: locally classify tiny pilot samples into neutral diary-grid structure facts, prove the emitted facts are non-PHI, and commit only safe classifier code and aggregate feasibility findings.
+
+## Previous Closeout - Sprint H2
+
+Sprint H2 added `scripts/historical_diary_doc_probe.py` and safe aggregate OLE
+parser feasibility docs. Both pilot dense samples were valid legacy Word/OLE
+documents with `WordDocument`, `1Table`, `Data`, and summary-information streams
+present in 10/10 sampled files; Word header `nFib=193` was consistent. Raw
+files, filenames, document text, and metadata strings were not committed.
 
 ## Previous Closeout - Sprint H1
 
