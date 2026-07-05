@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint R11: Optional Reason-Code Substrate |
 | Integrated through | Ariadne backend integration, Antigravity/Gemini UX/privacy review, DeepSeek Flash backend plan, DeepSeek Flash adversarial-test guidance |
-| Status | Locally integrated and verified; pending commit/push, mirror realign, audit, and worker cleanup |
+| Status | Ready for push to `master`/`handoff/current`; mirrors, audit, and disposable worker cleanup to run immediately after this closeout commit |
 | Last updated | 2026-07-05 |
 
 ## What Changed

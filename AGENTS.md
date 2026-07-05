@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint R11 optional reason-code substrate integrated locally; pending commit/push closeout |
+| **Current active track** | Sprint R11 optional reason-code substrate closed; R12 Diary reason-code UI flow recommended next |
 | **Next recommended work** | Sprint R12: first-party Diary UI reason-code dropdown/warning flow, after checking Claude availability at sprint start |
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
@@ -565,7 +565,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Pending Sprint R11 closeout commit - nullable cancellation/status reason-code substrate |
+| **Latest integration commit** | `4b736bf` - Sprint R11 nullable cancellation/status reason-code substrate and integration outcomes |
 
 ### Tag map (all tags pushed to remote)
 
