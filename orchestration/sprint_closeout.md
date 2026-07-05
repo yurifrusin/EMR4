@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H3: Historical Diary Trove Local Extraction Spike |
 | Integrated through | Ariadne local-only Word COM read-only extraction probe; no external workers used because raw files are PHI-bearing |
-| Status | Integrated locally; final push/workflow status pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages and Python Security workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -27,7 +27,9 @@ reviewed, integrated, verified, pushed, and audited.
 
 - H3 Word COM availability probe passed locally with Word version `16.0`.
 - H3 extraction probe command passed: `powershell -NoProfile -ExecutionPolicy Bypass -Command "& { .\scripts\historical_diary_word_extract_probe.ps1 -Root @('local_data\historical-diary-trove\raw\pilot','local_data\historical-diary-trove\raw\pilot_01') -Output 'local_data\historical-diary-trove\inventory\word_extract_probe_h3.json' -SampleSize 5 -DenseDays 1 }"`.
-- Validation pending final run before commit.
+- Whitespace check passed: `git diff --cached --check`.
+- Post-push audit passed with `master`, `handoff/current`, `codex/current`, `claude/current`, and `antigravity/current` aligned at `09ea767e`.
+- Post-push GitHub workflows passed for H3: Deploy GitHub Pages and Python Security. CodeQL did not run for this docs/PowerShell-only change set.
 
 ## Recommended User Review
 
