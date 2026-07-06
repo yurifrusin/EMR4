@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H66 self-validating interpretation projection integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | H67 should derive forbidden report text from committed fixture utterances |
+| **Current active track** | H67 derived report-text safety integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | H68 should add a mechanical readiness-reference guard before runtime/provider/trove proposal surfaces |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -496,6 +496,12 @@ H66 addresses H64-M3 and H64-L4 in
 self-validates both the input result and returned frame, and clarification frames
 must have exactly one active subtype (patient-context or reason-code). Focused
 tests reject mixed clarify frames and inconsistent projection inputs.
+H67 addresses H64-L1 in `scripts/bernie_interpretation_harness_report.py`.
+Report safety now derives forbidden text from every committed fixture
+`utterance` in the active fixture directory instead of a small static substring
+list. The aggregate report still omits utterance text; the derived text is used
+only for local validation. Combined readiness passes its fixture directory into
+the safety assertion.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

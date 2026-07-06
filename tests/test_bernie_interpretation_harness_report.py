@@ -71,6 +71,41 @@ def test_harness_report_safety_rejects_embedded_utterance_text():
         raise AssertionError("unsafe report text was not rejected")
 
 
+def test_harness_report_safety_rejects_any_fixture_utterance_text(tmp_path):
+    utterance = "Make it a double appointment for the authored sample."
+    _write_json(
+        tmp_path / "authored_utterance_actions.json",
+        {
+            "schema_version": "bernie.interpretation_harness.v1",
+            "source": "authored_synthetic",
+            "cases": [
+                {
+                    "utterance": utterance,
+                    "expected_dispatch": "route_to_confirm",
+                    "expected_frame_kind": "proposal",
+                }
+            ],
+        },
+    )
+    _write_json(
+        tmp_path / "projected_frame_contracts.json",
+        {
+            "schema_version": "bernie.interpretation_harness.v1",
+            "source": "authored_synthetic",
+            "contracts": [{"dispatch": "route_to_confirm"}],
+        },
+    )
+    report = build_harness_report(tmp_path)
+    report["unsafe_sample"] = utterance
+
+    try:
+        assert_harness_report_safety(report, fixture_dir=tmp_path)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("derived fixture utterance text was not rejected")
+
+
 def test_harness_report_safety_rejects_runtime_boundary_drift():
     report = build_harness_report()
     report["boundaries"]["provider_calls"] = "allowed"

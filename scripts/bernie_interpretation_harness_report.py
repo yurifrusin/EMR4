@@ -28,12 +28,6 @@ FORBIDDEN_REPORT_FRAGMENTS = (
     "h15",
     "h_series",
 )
-FORBIDDEN_REPORT_TEXT_FRAGMENTS = (
-    "book an appointment",
-    "which patient",
-    "ignore the rules",
-    "cancel the appointment because",
-)
 DEFAULT_FIXTURE_DIR = (
     REPO_ROOT
     / "tests"
@@ -136,7 +130,23 @@ def _walk_report_values(value: Any) -> tuple[str, ...]:
     return (str(value),)
 
 
-def assert_harness_report_safety(report: dict[str, Any]) -> None:
+def _fixture_utterances(fixture_dir: Path = DEFAULT_FIXTURE_DIR) -> tuple[str, ...]:
+    utterances: list[str] = []
+    for path in sorted(fixture_dir.glob("*.json")):
+        payload = _load_json(path)
+        cases = payload.get("cases", [])
+        if isinstance(cases, list):
+            for case in cases:
+                utterance = case.get("utterance") if isinstance(case, dict) else None
+                if isinstance(utterance, str) and utterance.strip():
+                    utterances.append(utterance.casefold())
+    return tuple(utterances)
+
+
+def assert_harness_report_safety(
+    report: dict[str, Any],
+    fixture_dir: Path = DEFAULT_FIXTURE_DIR,
+) -> None:
     """Assert a report remains aggregate-only and non-authoritative."""
 
     assert report.get("schema_version") == REPORT_SCHEMA_VERSION
@@ -178,7 +188,7 @@ def assert_harness_report_safety(report: dict[str, Any]) -> None:
     ]
     for fragment in FORBIDDEN_REPORT_FRAGMENTS:
         assert not any(fragment in part for part in searchable_parts)
-    for fragment in FORBIDDEN_REPORT_TEXT_FRAGMENTS:
+    for fragment in _fixture_utterances(fixture_dir):
         assert not any(fragment in part for part in searchable_parts)
 
 
@@ -194,7 +204,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     report = build_harness_report(args.fixture_dir)
-    assert_harness_report_safety(report)
+    assert_harness_report_safety(report, fixture_dir=args.fixture_dir)
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0
 

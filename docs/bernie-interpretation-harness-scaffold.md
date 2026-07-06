@@ -445,3 +445,14 @@ Clarification frame invariants now require exactly one active subtype:
 patient-context clarification or reason-code clarification, never neither and
 never both. Focused tests cover mixed clarify-frame rejection and projection
 self-validation of an inconsistent result.
+
+## H67 Derived Report Text Safety
+
+H67 addresses H64-L1. `scripts/bernie_interpretation_harness_report.py` now
+derives forbidden report text from every committed fixture `utterance` in the
+fixture directory instead of relying on a small hand-picked substring list.
+
+The derived utterance text is used only for local validation and is not emitted
+in the aggregate report. `scripts/bernie_interpretation_readiness_check.py`
+passes the active fixture directory into the report-safety assertion so custom
+fixture directories receive the same text-leakage protection.

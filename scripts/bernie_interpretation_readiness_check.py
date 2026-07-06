@@ -36,7 +36,7 @@ def build_readiness_status(
     gate_path: Path = DEFAULT_GATE_PATH,
 ) -> dict[str, object]:
     report = build_harness_report(fixture_dir)
-    assert_harness_report_safety(report)
+    assert_harness_report_safety(report, fixture_dir=fixture_dir)
     gate_status = build_runtime_gate_status(gate_path)
 
     return {

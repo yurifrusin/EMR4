@@ -8,12 +8,46 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H66: Self-Validating Interpretation Projection |
-| Integrated through | Ariadne implementation of H64-M3/L4 |
+| Batch | Sprint H67: Derived Report Text Safety |
+| Integrated through | Ariadne implementation of H64-L1 |
 | Status | Integrated; focused verification passed |
 | Last updated | 2026-07-07 |
 
 ## What Changed
+
+- Updated `scripts\bernie_interpretation_harness_report.py` so report safety
+  derives forbidden report text from every committed fixture `utterance` in the
+  active fixture directory.
+- Updated `scripts\bernie_interpretation_readiness_check.py` so custom fixture
+  directories flow into the report-safety assertion.
+- Added a focused synthetic test proving a newly authored fixture utterance is
+  automatically rejected if it appears in an aggregate report.
+- Updated `docs\bernie-interpretation-harness-scaffold.md`, `AGENTS.md`,
+  `orchestration\parallel_workstreams.md`, and
+  `orchestration\integration_log.md`.
+- No runtime routes, UI, providers, database access, memory/RAG/GraphRAG,
+  H15/H-series runtime imports, raw trove reads, or ignored local-data reads
+  were added.
+
+## Verification
+
+- Compile check passed:
+  `.venv\Scripts\python.exe -m py_compile scripts\bernie_interpretation_harness_report.py scripts\bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_harness_report.py`.
+- Report CLI passed:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_harness_report.py`.
+- Readiness CLI sample passed:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`.
+- Leakage lint passed:
+  `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- Focused pytest passed:
+  `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness_report.py tests\test_bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_readiness_snapshot.py tests\test_bernie_interpretation_h64_review_artifact.py -q`
+  (`26 passed`; existing deprecation warnings only).
+- `git diff --check` passed with the known CRLF warning on
+  `orchestration/integration_log.md`.
+
+---
+
+## Previous Closeout
 
 - Updated `app\services\bernie\interpretation_harness.py` so
   `interpretation_result_to_frame()` validates each input result and each
