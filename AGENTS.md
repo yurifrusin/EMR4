@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 112 provider metadata readiness invariants integrated locally. Tests now prove disabled/fake interpreters remain non-live and outside `LIVE_BERNIE_INTERPRETER_PROVIDERS`, the Gemini Vertex interpreter remains the sole live canonical provider, all live aliases resolve to that canonical provider, and current provider metadata values are unique/schema-declared. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
-| **Next recommended work** | Sprint 113: add a lightweight provider-boundary readiness report or static check that summarizes disabled/fake/live provider posture for reviewers, still blocked/default-disabled and without live calls or route behavior changes |
+| **Current active track** | Sprint 113 provider-boundary readiness report integrated locally. `scripts/bernie_provider_boundary_readiness_report.py` emits safe aggregate/static posture for disabled/fake/live interpreter metadata, live aliases, canonical provider resolution, and blocked runtime/provider readiness, with tests proving safety fields reject opened posture. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 114: fold the provider-boundary readiness report into the existing Bernie readiness command or release-gate docs so reviewers run one preflight before any provider-boundary proposal |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

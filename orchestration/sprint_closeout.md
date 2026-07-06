@@ -8,10 +8,49 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 112 Provider Metadata Readiness Invariants |
+| Batch | Sprint 113 Provider-Boundary Readiness Report |
 | Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 113 What Changed
+
+- Added `scripts/bernie_provider_boundary_readiness_report.py`, an importable
+  CLI helper that emits only safe aggregate/static provider-boundary posture.
+- The report summarizes provider metadata counts, declared provider values,
+  live alias count, canonical live-provider count, metadata uniqueness,
+  schema-declared metadata posture, and disabled/fake/live allowlist posture.
+- The report hard-codes and safety-asserts blocked runtime posture:
+  `default_provider="disabled"`, `runtime_or_provider_wiring_ready=false`,
+  `live_provider_enabled=false`, `provider_calls_performed=false`,
+  `route_behavior_changed=false`, and no DB/memory/RAG/trove access.
+- Added `tests/test_bernie_provider_boundary_readiness_report.py` covering the
+  exact aggregate payload and fail-closed negative cases for opened posture,
+  alias/metadata drift, and non-aggregate source.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Residual constructor/import coupling
+  risk is future-facing; current constructors are inert and provider eagerness
+  remains guarded by the blocked runtime gate/isolation tests.
+
+## Sprint 113 Verification
+
+- `.venv\Scripts\python.exe -m py_compile scripts\bernie_provider_boundary_readiness_report.py tests\test_bernie_provider_boundary_readiness_report.py`.
+- `.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_provider_boundary_readiness_report.py tests/test_bernie_provider_runtime_gate.py tests/test_bernie_interpret_booking_instruction.py -q`
+  (`53 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- scripts/bernie_provider_boundary_readiness_report.py tests/test_bernie_provider_boundary_readiness_report.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 114:
+fold the provider-boundary readiness report into the existing Bernie readiness
+command or release-gate docs so reviewers run one preflight before any
+provider-boundary proposal.
+
+---
+
+## Previous Closeout - Sprint 112
 
 ## Sprint 112 What Changed
 

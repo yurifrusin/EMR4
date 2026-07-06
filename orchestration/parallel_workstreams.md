@@ -204,6 +204,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 113 lightweight provider-boundary readiness report/static check for reviewers |
 | Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 113: Provider-Boundary Readiness Report
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Give reviewers a safe aggregate/static provider-boundary readiness report before any future provider-boundary proposal |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI `1.0.16` available; DeepSeek Flash bridge available |
+| Ariadne Lane | Added `scripts/bernie_provider_boundary_readiness_report.py` and tests for exact aggregate payload plus fail-closed safety assertions |
+| DeepSeek Lane | Reviewed as safe/no-blocker; constructor/import coupling noted as future maintainability risk |
+| Verification | `py_compile`; report CLI; focused provider/interpreter pytest (`53 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 114 fold report into existing Bernie readiness command or release-gate docs |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |
