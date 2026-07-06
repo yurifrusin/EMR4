@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H31: Access-AI and Read-Only Memory Boundary Review
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Define and guard the boundary before any historical-diary RAG, GraphRAG, Access AI, or memory work |
+| Worker Shape | Ariadne review and static guard tests |
+| In Scope | Boundary doc, runtime import/source guards for Access AI/practice-knowledge/Diary/Bernie modules |
+| Out Of Scope | RAG/GraphRAG implementation, provider calls, runtime memory integration, route/UI/database writes, broad full-trove processing |
+| Verification | `py_compile`; boundary tests; leakage lint; focused historical-diary/practice-knowledge guard cluster (92 passed); `git diff --check` |
+
 ## Sprint H30: H15 Read-Only Candidate Replay Wiring
 
 | Item | Value |

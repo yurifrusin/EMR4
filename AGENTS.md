@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H30 H15 read-only candidate replay wiring integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Review Access-AI/read-only memory boundaries before any RAG/GraphRAG work, or continue native Diary/Bernie route-level explanation work without trove memory |
+| **Current active track** | H31 Access-AI/read-only memory boundary review integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Add route-level read-only explanation tests or an advisory-only adapter proposal; do not wire historical diary candidates into runtime memory or providers yet |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -234,6 +234,11 @@ harness: each committed synthetic candidate is converted to an expected
 `route_read_only` action and checked through `tests.action_grammar_replay.replay`.
 This remains test-only and does not touch routes, providers, database writes, UI,
 RAG, GraphRAG, memory, or ignored local payloads.
+H31 added `docs/historical-diary-trove-access-ai-memory-boundary.md` and
+`tests/test_historical_diary_memory_boundary.py`. Historical diary candidates
+remain test-only/read-only; runtime Access AI, practice-knowledge, diary policy,
+confirm, slot-search, and Bernie memory modules must not import H15 fixtures,
+ignored local payloads, or historical-diary candidate builders.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

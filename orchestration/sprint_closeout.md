@@ -8,7 +8,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H30: H15 Read-Only Candidate Replay Wiring |
+| Batch | Sprint H31: Access-AI and Read-Only Memory Boundary Review |
 | Integrated through | Ariadne implementation |
 | Status | Integrated locally; focused verification passed; not yet pushed |
 | Last updated | 2026-07-06 |
@@ -52,6 +52,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Added `tests\fixtures\h15_semantic_candidates\read_only_explain_schedule_candidates.json`.
 - Added `tests\test_h15_semantic_candidate_fixtures.py`.
 - Wired H15 synthetic candidates through the R30 action-grammar replay harness as expected `route_read_only` actions.
+- Added `docs\historical-diary-trove-access-ai-memory-boundary.md`.
+- Added `tests\test_historical_diary_memory_boundary.py`.
 - No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
 
 ## Verification
@@ -98,6 +100,8 @@ reviewed, integrated, verified, pushed, and audited.
 - H29 focused guard pytest passed: `.venv\Scripts\pytest.exe tests\test_h15_semantic_candidate_fixtures.py tests\test_historical_diary_semantic_candidate_builder.py tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\action_grammar_replay tests\test_h_series_profile_consistency.py -q` (55 passed).
 - H30 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
 - H30 focused guard pytest passed: `.venv\Scripts\pytest.exe tests\test_h15_semantic_candidate_fixtures.py tests\action_grammar_replay tests\test_historical_diary_semantic_candidate_builder.py tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\test_h_series_profile_consistency.py -q` (56 passed).
+- H31 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- H31 focused guard pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_memory_boundary.py tests\test_h15_semantic_candidate_fixtures.py tests\action_grammar_replay tests\test_historical_diary_semantic_candidate_builder.py tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\test_h_series_profile_consistency.py tests\test_practice_knowledge_advisory_boundary.py -q` (92 passed).
 
 ## Local Result
 
@@ -120,6 +124,7 @@ reviewed, integrated, verified, pushed, and audited.
 - H28 corrects the candidate semantics: neutral aggregates may support read-only explanation candidates, not mutating diary action candidates.
 - H29 commits only a small hand-authored synthetic read-only fixture family, not generated local payloads.
 - H30 proves those fixtures are consumed by the deterministic action-grammar replay harness as read-only actions.
+- H31 keeps historical diary candidates out of runtime Access AI, practice-knowledge, Diary authority, and Bernie memory modules until a separate boundary is implemented.
 
 ## Bernie Memory Result
 
@@ -143,7 +148,7 @@ No required manual review before continuing. Yuri review is required only if a f
 
 ## Known Follow-Up
 
-- Review Access-AI/read-only memory boundaries before any RAG/GraphRAG work, or continue native Diary/Bernie route-level explanation work without trove memory.
+- Add route-level read-only explanation tests or an advisory-only adapter proposal, still without provider/memory integration.
 - Do not use the full trove broadly until H22 is reviewed and Yuri explicitly approves H15.
 - Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 
