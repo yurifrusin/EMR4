@@ -5,6 +5,56 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint R29: Native Bernie/Diary Action Grammar Foundation
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Define the smallest native backend/domain action grammar foundation before replay consumers, H15 semantic work, or broad full-trove mining |
+| Worker Shape | Claude implementation-plan lane, Codex/DeepSeek adversarial review lane, Antigravity/Gemini receptionist acceptance review |
+| In Scope | Plan-gated backend/domain action vocabulary, envelopes, confirmation/write-authority invariants, focused test strategy, source-safe review artifacts |
+| Out Of Scope | Production code before plan approval, frontend UI, taskpane, raw `local_data`, H15 semantic fixtures, provider calls, broad trove processing, autonomous writes |
+| Verification | Plan/review artifacts first; later implementation verification to be approved after plan review |
+
+### Workstream R29-A - Claude Native Action Grammar Plan
+
+| Item | Value |
+|---|---|
+| Owner | Claude |
+| Branch | `claude/native-action-grammar-foundation` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-r29-native-action-grammar-foundation.md` |
+| Goal | Produce an implementation-ready plan for the smallest backend/domain native action grammar contract |
+| In Scope | Existing Bernie/Diary backend contracts, proposal/confirm routes, schemas, tests, R28 Fable recommendation |
+| Out of Scope | Code edits before plan approval, UI, raw trove, semantic fixtures |
+| Verification | Plan packet inspection |
+| Status | Queued |
+
+### Workstream R29-B - Codex/DeepSeek Action Grammar Adversarial Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex/DeepSeek Flash |
+| Branch | `codex/r29-action-grammar-adversarial-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-r29-action-grammar-adversarial-review.md` |
+| Goal | Challenge overreach, hidden write authority, compatibility risks, and H-series/full-trove boundary mixing |
+| In Scope | Source-safe adversarial review artifact or plan packet |
+| Out of Scope | Production implementation, UI, raw trove, semantic labelling |
+| Verification | Review artifact inspection |
+| Status | Queued |
+
+### Workstream R29-C - Gemini Receptionist Acceptance Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-r29-action-grammar-receptionist-review.md` |
+| Goal | Define receptionist-domain acceptance criteria for the first action grammar foundation without changing visible UI |
+| In Scope | `docs/receptionist_review_r29.md` after plan approval |
+| Out of Scope | Code/tests, UI edits, raw trove, semantic H-series mapping |
+| Verification | Source-safe review artifact |
+| Status | Queued |
+
 ## Sprint R27: H-Series Profile Consumption Tests
 
 | Item | Value |
