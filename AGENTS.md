@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H14 neutral transition-neighborhood reporter completed; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H15: either broaden to another capped dense-day/root set or design the de-identification review gate before semantic labelling |
+| **Current active track** | Historical diary trove H15 semantic labelling de-identification gate completed; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H16: continue neutral broadening under H10 caps or prepare a Yuri review packet for changing the semantic gate from blocked |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -646,7 +646,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint H14 neutral transition-neighborhood reporter |
+| **Latest integration commit** | Sprint H15 semantic labelling de-identification gate |
 
 ### Tag map (all tags pushed to remote)
 

@@ -82,7 +82,46 @@ local_data/historical-diary-trove/inventory/structure_classifier_h4.json
 
 This output remains ignored and uncommitted.
 
-## H6 Recommendation
+## H15 Semantic Labelling Gate
+
+H15 adds an explicit gate before any semantic appointment labelling is derived
+from historical diary trove data.
+
+Gate validator:
+
+```text
+scripts/historical_diary_deidentification_gate.py
+```
+
+Default blocked template:
+
+```text
+docs/historical-diary-trove-semantic-gate-template.json
+```
+
+Current rule: semantic fixture promotion remains blocked until a gate payload
+passes validation with `decision` set to
+`approved_for_semantic_fixture_promotion`, a safe reviewer identifier, and
+explicit semantic-labelling acknowledgement. Neutral structural work may
+continue while the gate remains blocked.
+
+The gate is separate from the H5 aggregate-output validator. H5 protects
+committed neutral outputs; H15 prevents future semantic-labelling sprints from
+starting without an explicit privacy-review decision.
+
+## H16 Recommendation
+
+Next sprint: **H16 Neutral Broadening or Gate Review Packet**.
+
+Recommended scope:
+
+1. Continue broadening neutral-only ordered samples under H10 caps; or
+2. Prepare a concrete Yuri review packet for changing the semantic gate from
+   `blocked` to a stricter approved mode.
+3. Do not create committed semantic fixtures until the H15 gate passes in an
+   approved state.
+
+## H6 Historical Recommendation
 
 Next sprint: **H6 Safe Local Timeline Delta Prototype**.
 

@@ -8,6 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H15: Historical Diary Trove Semantic Labelling De-Identification Gate |
+| Integrated through | Ariadne local-only gate tooling; no external workers used because scope was privacy-policy/tooling and narrowly bounded |
+| Status | Local verification passed; push/mirror/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `scripts\historical_diary_deidentification_gate.py`, an executable validator for the privacy gate required before semantic diary labelling.
+- Added `tests\test_historical_diary_deidentification_gate.py` using synthetic-only payloads.
+- Added blocked-by-default gate template `docs\historical-diary-trove-semantic-gate-template.json`.
+- Added `docs\historical-diary-trove-semantic-labelling-gate.md`.
+- Updated `docs\historical-diary-trove-deidentification-contract.md` to distinguish H5 output safety from H15 semantic-labelling approval.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_deidentification_gate.py tests\test_historical_diary_deidentification_gate.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py -q` (17 passed; existing warnings only).
+- Gate template validation passed: `.venv\Scripts\python.exe scripts\historical_diary_deidentification_gate.py docs\historical-diary-trove-semantic-gate-template.json`.
+- Post-push audit pending.
+- GitHub workflows pending.
+
+## Gate Result
+
+- The committed semantic gate template is intentionally `blocked`.
+- Neutral structural work remains allowed.
+- Committed semantic appointment fixtures remain blocked until a future reviewed gate payload explicitly approves semantic fixture promotion.
+- Raw diary data remains local-only and must not be sent to external providers.
+
+## Recommended User Review
+
+No required manual review before continuing neutral work. Yuri review is required only if the next sprint proposes changing the gate decision from `blocked`.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No manual diary-content review is required for H15 because it uses synthetic tests and policy templates only.
+
+## Known Follow-Up
+
+- H16 should either continue neutral broadening under H10 caps or prepare a Yuri review packet for changing the semantic gate from `blocked`.
+- Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
+
+## Previous Closeout - Sprint H14
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H14: Historical Diary Trove Neutral Transition Neighborhoods |
 | Integrated through | Ariadne local-only transition-neighborhood tooling; no external workers used because scope was raw-free and narrowly bounded |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
