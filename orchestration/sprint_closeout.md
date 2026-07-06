@@ -8,10 +8,52 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 119 Programme Guidance Refresh |
-| Integrated through | Ariadne implementation with DeepSeek Flash review |
+| Batch | Sprint 120 Post-Sprint-118 API Spine Checkpoint |
+| Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 120 What Changed
+
+- Added `orchestration/api_spine_post_sprint118_checkpoint.md`, a
+  documentation/test-only API Spine checkpoint after Sprint 110-118
+  provider-boundary guard consolidation.
+- The checkpoint records the required API Steward source pass over the ADR,
+  API Spine programme, Access AI design, Bernie release gates, API-spine
+  prototype artifacts, and artifact tests.
+- It confirms the accepted mixed API spine still holds: GraphQL read/context
+  graph only, REST/OpenAPI command plane for high-risk actions, async contracts
+  as observed/ingested events, YAML as declarative posture, and Access AI as the
+  provider invocation boundary.
+- It names Sprint 121 as the next implementation slice: a non-invasive
+  appointment command envelope alignment inventory over current FastAPI
+  appointment proposal, confirmation, slot-search, and compatibility write
+  routes.
+- Updated `orchestration/phase_programmes.md` so Programme 2G now marks the
+  checkpoint complete and names Sprint 121 as the next candidate.
+- Added `tests/test_api_spine_post_sprint118_checkpoint.py` and updated
+  `tests/test_phase_programmes_current_checkpoint.py` to guard the checkpoint
+  and selected next slice.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Its venv warning was isolated to the
+  DeepSeek worker environment; Ariadne's focused verification passed locally.
+
+## Sprint 120 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_post_sprint118_checkpoint.py tests\test_phase_programmes_current_checkpoint.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`37 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- orchestration/api_spine_post_sprint118_checkpoint.md orchestration/phase_programmes.md tests/test_api_spine_post_sprint118_checkpoint.py tests/test_phase_programmes_current_checkpoint.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 121:
+build the non-invasive appointment command envelope alignment inventory.
+
+---
+
+## Previous Closeout - Sprint 119
 
 ## Sprint 119 What Changed
 

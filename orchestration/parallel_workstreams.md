@@ -302,6 +302,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 120 compact post-Sprint-118 API Spine checkpoint comparing ADR/schema/steward artifacts against the provider-boundary guard stack |
 | Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 120: Post-Sprint-118 API Spine Checkpoint
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2G / EMR4 API Spine |
+| Goal | Compare existing API Spine ADR/prototypes/API Steward posture against the provider-boundary guard stack and name the next implementation slice |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI not found on PATH in this shell; DeepSeek Flash bridge available |
+| Ariadne Lane | Used `$emr4-api-steward`; added `orchestration/api_spine_post_sprint118_checkpoint.md`, checkpoint tests, and Programme 2G status update |
+| DeepSeek Lane | Reviewed as no-blocker; its venv warning was isolated to the DeepSeek worker environment after Ariadne verification passed |
+| Verification | `py_compile`; API checkpoint + API-spine artifact + phase-programmes pytest (`37 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 121 non-invasive appointment command envelope alignment inventory over current FastAPI appointment routes |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

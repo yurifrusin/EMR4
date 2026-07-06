@@ -14,12 +14,13 @@ def test_phase_programmes_recommended_move_is_current_after_sprint_118():
     assert "post-Sprint-118 API Spine checkpoint" in text
     assert "provider-boundary guard stack has been consolidated" in text
     assert (
-        "Status | Checkpoint refresh due after Sprint 118 "
-        "provider-boundary guard consolidation" in text
+        "Status | Post-Sprint-118 checkpoint completed; "
+        "next implementation slice selected" in text
     )
     assert "Sprint 110-118 provider-boundary guard consolidation" in text
     assert (
-        "Next Candidate Sprints | Post-Sprint-118 API Spine checkpoint" in text
+        "Next Candidate Sprints | Sprint 121 appointment command envelope "
+        "alignment inventory" in text
     )
 
 

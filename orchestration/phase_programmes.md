@@ -115,10 +115,10 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Checkpoint refresh due after Sprint 118 provider-boundary guard consolidation |
+| Status | Post-Sprint-118 checkpoint completed; next implementation slice selected |
 | Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
 | Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation |
-| Next Candidate Sprints | Post-Sprint-118 API Spine checkpoint, then the next implementation slice named by that checkpoint |
+| Next Candidate Sprints | Sprint 121 appointment command envelope alignment inventory |
 | Design Record | `orchestration/api_spine_programme.md` |
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
