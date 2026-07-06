@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H27: Bounded H15 Semantic Prototype
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Run the approved tiny local-only H15 semantic prototype and commit only source-safe tooling/docs/tests |
+| Worker Shape | Ariadne implementation and local run |
+| In Scope | Semantic candidate builder, synthetic tests, one ignored local 80-sample run, source-safe summary |
+| Out Of Scope | Broad full-trove processing, committed generated local payloads, provider calls, RAG/GraphRAG/memory, route/UI/database writes |
+| Verification | `py_compile`; H5 neutral validation on ignored aggregate; semantic fixture validation on ignored candidates; leakage lint; focused H15/H27 pytest cluster (52 passed); `git diff --check` |
+
 ## Sprint H26: H15 Approval Recording
 
 | Item | Value |

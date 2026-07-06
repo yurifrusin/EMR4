@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H15 approved by Yuri for one bounded local-only semantic prototype; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Run or prepare the tiny H15 semantic prototype inside the approved scope: one root, one dense day, max 80 samples, action_grammar_candidates only, with all validator/lint gates enforced |
+| **Current active track** | H27 bounded H15 semantic prototype completed locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Review the candidate-builder semantics, then either keep generated candidates ignored and add a synthetic committed fixture family or prepare a separate gate before any broader semantic/full-trove work |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -210,6 +210,14 @@ tiny local-only semantic prototype: one root, one dense day, max 80 samples,
 bucket flags/coarse confidence, no external providers, no raw/extracted text
 committed, no memory/RAG/GraphRAG, no route/UI/database writes, and no broad
 full-trove pass.
+H27 added `scripts/historical_diary_semantic_candidate_builder.py` and ran the
+approved local prototype against one `pilot_01` dense-day slice with 80/80
+read-only opens and zero errors. Ignored outputs live under
+`local_data/historical-diary-trove/inventory/semantic_h15_*`. The safe summary is
+`docs/historical-diary-trove-h15-bounded-semantic-prototype.md`: 80 low-confidence
+`status_change` candidates with `unknown` status categories. This proves the
+pipeline and validators, not appointment truth, and does not authorize broad
+full-trove mining or memory integration.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

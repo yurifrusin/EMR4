@@ -8,8 +8,8 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H26: H15 Approval Recording |
-| Integrated through | Yuri approval plus Ariadne implementation |
+| Batch | Sprint H27: Bounded H15 Semantic Prototype |
+| Integrated through | Ariadne implementation and approved local run |
 | Status | Integrated locally; focused verification passed; not yet pushed |
 | Last updated | 2026-07-06 |
 
@@ -43,6 +43,10 @@ reviewed, integrated, verified, pushed, and audited.
 - Hardened the H15 gate validator so any future semantic approval requires bounded scope and `YYYY-MM-DD` expiry.
 - Added approved gate files `docs\historical-diary-trove-h15-approved-gate.json` and `docs\historical-diary-trove-h15-approval-decision.md`.
 - Added tests proving the draft remains blocked and the approved payload passes with the bounded scope.
+- Added `scripts\historical_diary_semantic_candidate_builder.py`.
+- Added `tests\test_historical_diary_semantic_candidate_builder.py`.
+- Added `docs\historical-diary-trove-h15-bounded-semantic-prototype.md`.
+- Ran the approved local prototype into ignored `local_data\historical-diary-trove\inventory\semantic_h15_*` outputs.
 - No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
 
 ## Verification
@@ -73,6 +77,13 @@ reviewed, integrated, verified, pushed, and audited.
 - H26 gate validation passed for default template, blocked draft, and approved payload: `.venv\Scripts\python.exe scripts\historical_diary_deidentification_gate.py docs\historical-diary-trove-semantic-gate-template.json docs\historical-diary-trove-h15-approval-payload-draft.json docs\historical-diary-trove-h15-approved-gate.json`.
 - H26 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
 - H26 focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\action_grammar_replay tests\test_h_series_profile_consistency.py -q` (47 passed).
+- H27 local neutral aggregate validation passed: `.venv\Scripts\python.exe scripts\historical_diary_output_safety.py local_data\historical-diary-trove\inventory\semantic_h15_prototype_neutral_aggregate.json`.
+- H27 semantic candidate builder produced validator-safe ignored candidates at `local_data\historical-diary-trove\inventory\semantic_h15_candidate_fixtures.json`.
+- H27 compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_semantic_candidate_builder.py scripts\historical_diary_deidentification_gate.py scripts\historical_diary_output_safety.py scripts\historical_diary_leakage_lint.py tests\test_historical_diary_semantic_candidate_builder.py`.
+- H27 gate validation passed for default template, blocked draft, and approved payload.
+- H27 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- H27 semantic candidate validation passed: 80 ignored candidate fixtures.
+- H27 focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_semantic_candidate_builder.py tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\action_grammar_replay tests\test_h_series_profile_consistency.py -q` (52 passed).
 
 ## Local Result
 
@@ -91,6 +102,7 @@ reviewed, integrated, verified, pushed, and audited.
 - H24 records an adversarial review of those tripwires and adds grammar-drift and approval-expiry guards.
 - H25 provides a concrete approval-payload draft while deliberately keeping `decision: blocked`.
 - H26 records Yuri's explicit H15 approval for the bounded local-only prototype scope.
+- H27 proves the approved local pipeline can produce validator-safe low-confidence candidates from validator-safe neutral aggregates.
 
 ## Bernie Memory Result
 
@@ -114,7 +126,7 @@ No required manual review before continuing. Yuri review is required only if a f
 
 ## Known Follow-Up
 
-- Prepare or run the tiny approved H15 semantic prototype under all validator and leakage-lint gates.
+- Review candidate-builder semantics before any committed semantic fixture promotion.
 - Do not use the full trove broadly until H22 is reviewed and Yuri explicitly approves H15.
 - Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 
