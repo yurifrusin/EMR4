@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H51 Bernie Interpretation Harness report safety assertion integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H52 Bernie Interpretation Harness report input fail-closed guards integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue small report/validator hardening or prepare the next bounded review before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -395,6 +395,11 @@ counts, prohibited runtime boundary posture, omitted-field declarations,
 dispatch/contract alignment, and representative forbidden text/payload
 fragments. Negative tests now prove embedded utterance text, weakened provider
 boundaries, and contract-dispatch drift fail closed.
+H52 hardens `build_harness_report()` input handling: missing fixture directory,
+non-directory paths, empty fixture directories, empty case/contract arrays,
+directories without case fixtures, and directories without contract fixtures now
+raise `ValueError` instead of emitting a meaningless aggregate report. Tests use
+temporary synthetic directories only and keep the report provider-free.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

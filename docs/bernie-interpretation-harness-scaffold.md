@@ -219,3 +219,17 @@ assertion checks:
 
 Negative tests cover embedded utterance text, weakened provider boundaries, and
 contract-dispatch drift.
+
+## H52 Report Input Fail-Closed Guards
+
+H52 hardens `build_harness_report()` so alternate fixture directories cannot
+silently produce empty or meaningless reports. It now raises `ValueError` when:
+
+- The fixture path is missing or not a directory.
+- The directory contains no JSON fixtures.
+- A case or contract fixture has an empty list.
+- No case fixtures are present.
+- No contract fixtures are present.
+
+The tests use temporary synthetic directories and do not touch runtime routes,
+providers, database access, or historical diary material.

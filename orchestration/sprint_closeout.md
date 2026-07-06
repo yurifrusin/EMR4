@@ -5325,3 +5325,37 @@ whitespace check clean apart from the known CRLF notice on
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is continued report/validator hardening before any
 runtime/provider wiring.
+
+---
+
+## Sprint H52 Closeout - Report Input Guards
+
+Integrated outcome:
+
+- Hardened `build_harness_report()` so alternate fixture-directory inputs fail
+  closed.
+- Missing paths, non-directory paths, empty fixture directories, empty case
+  lists, empty contract lists, directories without case fixtures, and
+  directories without contract fixtures now raise `ValueError`.
+- Added temporary-directory negative tests for missing, empty, case-less, and
+  contract-less inputs.
+- The report remains aggregate-only, provider-free, route-free, DB-free, and
+  disconnected from local historical diary material.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile scripts\bernie_interpretation_harness_report.py tests\test_bernie_interpretation_harness_report.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_harness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `270 passed`; report CLI sample succeeded; leakage lint safe;
+whitespace check clean apart from the known CRLF notice on
+`orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is continued report/validator hardening before runtime or
+provider wiring.

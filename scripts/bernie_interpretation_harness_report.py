@@ -49,7 +49,15 @@ def _load_json(path: Path) -> dict[str, Any]:
 def build_harness_report(fixture_dir: Path = DEFAULT_FIXTURE_DIR) -> dict[str, Any]:
     """Build a safe aggregate report over authored synthetic harness fixtures."""
 
+    if not fixture_dir.exists():
+        raise ValueError(f"Fixture directory does not exist: {fixture_dir}")
+    if not fixture_dir.is_dir():
+        raise ValueError(f"Fixture path is not a directory: {fixture_dir}")
+
     fixture_paths = sorted(fixture_dir.glob("*.json"))
+    if not fixture_paths:
+        raise ValueError(f"No JSON fixtures found in: {fixture_dir}")
+
     case_fixture_paths: list[Path] = []
     contract_count = 0
     dispatch_counts: Counter[str] = Counter()
@@ -67,14 +75,23 @@ def build_harness_report(fixture_dir: Path = DEFAULT_FIXTURE_DIR) -> dict[str, A
         cases = payload.get("cases")
         contracts = payload.get("contracts")
         if cases is not None:
+            if not isinstance(cases, list) or not cases:
+                raise ValueError(f"Fixture cases must be a non-empty list: {path.name}")
             case_fixture_paths.append(path)
             fixture_case_counts[path.name] = len(cases)
             for case in cases:
                 dispatch_counts[case["expected_dispatch"]] += 1
                 frame_kind_counts[case["expected_frame_kind"]] += 1
         if contracts is not None:
+            if not isinstance(contracts, list) or not contracts:
+                raise ValueError(f"Fixture contracts must be a non-empty list: {path.name}")
             contract_count += len(contracts)
             contract_dispatches.extend(contract["dispatch"] for contract in contracts)
+
+    if not case_fixture_paths:
+        raise ValueError(f"No case fixtures found in: {fixture_dir}")
+    if contract_count == 0:
+        raise ValueError(f"No contract fixtures found in: {fixture_dir}")
 
     return {
         "schema_version": REPORT_SCHEMA_VERSION,

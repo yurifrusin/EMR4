@@ -1,6 +1,7 @@
 """Safe aggregate report tests for the Bernie interpretation harness."""
 
 import json
+from pathlib import Path
 
 from scripts.bernie_interpretation_harness_report import (
     REPORT_SCHEMA_VERSION,
@@ -92,3 +93,68 @@ def test_harness_report_safety_rejects_contract_dispatch_drift():
         pass
     else:
         raise AssertionError("contract dispatch drift was not rejected")
+
+
+def test_harness_report_rejects_missing_fixture_directory(tmp_path):
+    missing = tmp_path / "missing"
+
+    try:
+        build_harness_report(missing)
+    except ValueError as exc:
+        assert "does not exist" in str(exc)
+    else:
+        raise AssertionError("missing fixture directory was not rejected")
+
+
+def test_harness_report_rejects_empty_fixture_directory(tmp_path):
+    try:
+        build_harness_report(tmp_path)
+    except ValueError as exc:
+        assert "No JSON fixtures" in str(exc)
+    else:
+        raise AssertionError("empty fixture directory was not rejected")
+
+
+def test_harness_report_rejects_directory_without_case_fixture(tmp_path):
+    _write_json(
+        tmp_path / "projected_frame_contracts.json",
+        {
+            "schema_version": "bernie.interpretation_harness.v1",
+            "source": "authored_synthetic",
+            "contracts": [{"dispatch": "route_to_confirm"}],
+        },
+    )
+
+    try:
+        build_harness_report(tmp_path)
+    except ValueError as exc:
+        assert "No case fixtures" in str(exc)
+    else:
+        raise AssertionError("case-less fixture directory was not rejected")
+
+
+def test_harness_report_rejects_directory_without_contract_fixture(tmp_path):
+    _write_json(
+        tmp_path / "authored_utterance_actions.json",
+        {
+            "schema_version": "bernie.interpretation_harness.v1",
+            "source": "authored_synthetic",
+            "cases": [
+                {
+                    "expected_dispatch": "route_to_confirm",
+                    "expected_frame_kind": "proposal",
+                }
+            ],
+        },
+    )
+
+    try:
+        build_harness_report(tmp_path)
+    except ValueError as exc:
+        assert "No contract fixtures" in str(exc)
+    else:
+        raise AssertionError("contract-less fixture directory was not rejected")
+
+
+def _write_json(path: Path, payload):
+    path.write_text(json.dumps(payload), encoding="utf-8")
