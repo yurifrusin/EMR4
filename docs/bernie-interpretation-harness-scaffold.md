@@ -56,3 +56,14 @@ before grammar matching when an utterance attempts to:
 Mixed planned-action phrases remain planned. For example, "check in ... and
 mark arrived" maps to `check_in` and dispatches
 `refuse_planned_not_implemented`, not to the implemented `status_change` path.
+
+## H42 Result Invariants
+
+H42 adds `assert_interpretation_result_consistency()`. Every harness result must
+preserve the dispatch/authority relationship:
+
+- `route_to_confirm` requires `signed_confirm`.
+- `route_read_only` requires `read_only`.
+- `route_meta` requires `meta`.
+- `refuse_planned_not_implemented` requires `planned_not_implemented`.
+- Unsafe and unknown refusals must not carry a verb or route authority.

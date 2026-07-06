@@ -166,9 +166,35 @@ def interpret_receptionist_utterance(utterance: str) -> InterpretationResult:
     )
 
 
+def assert_interpretation_result_consistency(result: InterpretationResult) -> None:
+    """Assert one harness result preserves dispatch/authority invariants."""
+
+    if result.dispatch is InterpretationDispatch.route_to_confirm:
+        assert result.verb is not None
+        assert result.authority is RouteAuthority.signed_confirm
+    elif result.dispatch is InterpretationDispatch.route_read_only:
+        assert result.verb is not None
+        assert result.authority is RouteAuthority.read_only
+    elif result.dispatch is InterpretationDispatch.route_meta:
+        assert result.verb is not None
+        assert result.authority is RouteAuthority.meta
+    elif result.dispatch is InterpretationDispatch.refuse_planned_not_implemented:
+        assert result.verb is not None
+        assert result.authority is RouteAuthority.planned_not_implemented
+    elif result.dispatch in {
+        InterpretationDispatch.refuse_unsafe_instruction,
+        InterpretationDispatch.refuse_unknown_utterance,
+    }:
+        assert result.verb is None
+        assert result.authority is None
+    else:
+        raise AssertionError(f"Unexpected interpretation dispatch: {result.dispatch!r}")
+
+
 __all__ = [
     "INTERPRETATION_HARNESS_SCHEMA_VERSION",
     "InterpretationDispatch",
     "InterpretationResult",
+    "assert_interpretation_result_consistency",
     "interpret_receptionist_utterance",
 ]

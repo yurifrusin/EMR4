@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H41 adversarial Bernie Interpretation Harness coverage integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Expand harness result invariants or begin fake-provider frame-shape preparation while preserving no provider/route/DB/memory authority |
+| **Current active track** | H42 Bernie Interpretation Harness result invariants integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Begin fake-provider frame-shape preparation while preserving no provider/route/DB/memory authority |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -322,6 +322,12 @@ endpoints, write directly to DB/raw mutation paths, or invoke providers/LLMs is
 refused before grammar matching. Mixed planned-action phrases stay planned, so
 "check in ... and mark arrived" does not fall through to implemented
 `status_change`.
+H42 adds `assert_interpretation_result_consistency()` to the provider-free
+interpretation harness and applies it across authored fixtures. Dispatch and
+route authority must stay aligned: confirm dispatch requires signed-confirm
+authority, read-only/meta dispatch requires matching authority, planned refusals
+require planned authority, and unsafe/unknown refusals must not carry a verb or
+route authority.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

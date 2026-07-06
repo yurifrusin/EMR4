@@ -9,6 +9,8 @@ import pytest
 from app.services.bernie.interpretation_harness import (
     INTERPRETATION_HARNESS_SCHEMA_VERSION,
     InterpretationDispatch,
+    InterpretationResult,
+    assert_interpretation_result_consistency,
     interpret_receptionist_utterance,
 )
 from app.services.diary.action_grammar import DiaryActionVerb
@@ -48,6 +50,7 @@ def test_fixture_schema_is_authored_synthetic():
 @pytest.mark.parametrize("case", _cases(), ids=lambda case: case["id"])
 def test_authored_utterances_map_to_expected_grammar_actions(case):
     result = interpret_receptionist_utterance(case["utterance"])
+    assert_interpretation_result_consistency(result)
 
     expected_verb = case["expected_verb"]
     expected_authority = case["expected_authority"]
@@ -61,6 +64,7 @@ def test_authored_utterances_map_to_expected_grammar_actions(case):
 
 def test_empty_utterance_refuses_unknown():
     result = interpret_receptionist_utterance("   ")
+    assert_interpretation_result_consistency(result)
     assert result.verb is None
     assert result.authority is None
     assert result.dispatch is InterpretationDispatch.refuse_unknown_utterance
@@ -73,6 +77,7 @@ def test_planned_actions_refuse_rather_than_route_to_confirm():
         "Link patient to the appointment.",
     ):
         result = interpret_receptionist_utterance(utterance)
+        assert_interpretation_result_consistency(result)
         assert result.verb in {
             DiaryActionVerb.check_in,
             DiaryActionVerb.waiting_area_move,
@@ -80,6 +85,30 @@ def test_planned_actions_refuse_rather_than_route_to_confirm():
         }
         assert result.authority is RouteAuthority.planned_not_implemented
         assert result.dispatch is InterpretationDispatch.refuse_planned_not_implemented
+
+
+def test_result_consistency_rejects_confirm_dispatch_without_signed_authority():
+    bad = InterpretationResult(
+        utterance="synthetic impossible result",
+        verb=DiaryActionVerb.create,
+        authority=RouteAuthority.read_only,
+        dispatch=InterpretationDispatch.route_to_confirm,
+        rationale="negative test",
+    )
+    with pytest.raises(AssertionError):
+        assert_interpretation_result_consistency(bad)
+
+
+def test_result_consistency_rejects_refusal_with_route_authority():
+    bad = InterpretationResult(
+        utterance="synthetic impossible result",
+        verb=DiaryActionVerb.create,
+        authority=RouteAuthority.signed_confirm,
+        dispatch=InterpretationDispatch.refuse_unsafe_instruction,
+        rationale="negative test",
+    )
+    with pytest.raises(AssertionError):
+        assert_interpretation_result_consistency(bad)
 
 
 def test_interpretation_harness_has_no_provider_route_db_memory_or_h15_coupling():

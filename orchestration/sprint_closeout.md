@@ -5004,3 +5004,32 @@ provider names inside refusal regexes; leakage lint safe; whitespace check clean
 
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is harness result invariants.
+
+---
+
+## Sprint H42 Closeout - Interpretation Harness Result Invariants
+
+Integrated outcome:
+
+- Added `assert_interpretation_result_consistency()` to the provider-free
+  Bernie interpretation harness.
+- Applied result invariants across all authored normal/adversarial fixtures.
+- Added negative tests for impossible result shapes.
+- Dispatch and authority now stay aligned: confirm requires signed-confirm,
+  read-only requires read-only, meta requires meta, planned refusal requires
+  planned authority, and unsafe/unknown refusals carry no verb or authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_diary_action_route_contract.py tests\test_diary_action_grammar.py -q
+git diff --check
+```
+
+Result: `91 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is fake-provider frame-shape preparation for the
+interpretation harness.
