@@ -271,3 +271,22 @@ The status includes only counts and state:
 
 The checker rejects unblocked decisions, true scope values, changed allowed or
 forbidden use sets, missing required reviews, and missing pause triggers.
+
+## H55 Combined Readiness Check
+
+H55 adds `scripts/bernie_interpretation_readiness_check.py`, which combines the
+safe aggregate report and runtime-gate checker into one provider-free command.
+
+The command emits only aggregate status:
+
+- Case, contract, dispatch, and frame-kind counts.
+- Report schema version.
+- Runtime gate status schema version.
+- Runtime gate decision.
+- `sprint_engine_state: continuing`.
+- `runtime_or_provider_wiring_ready: false`.
+- `raw_trove_access_ready: false`.
+
+This is a "still boxed in" check. It proves the harness/report/gate surface is
+coherent; it does not approve runtime routes, provider prompts, database access,
+memory, RAG/GraphRAG, H15/H-series runtime imports, or raw trove access.

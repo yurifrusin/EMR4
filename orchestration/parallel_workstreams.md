@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H55: Bernie Interpretation Harness Combined Readiness Check
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Provide one provider-free command showing the harness is coherent while still blocked from runtime/provider/trove access |
+| Worker Shape | Ariadne implementation |
+| In Scope | Combined readiness CLI/helper, safe status output, tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; readiness CLI sample; interpretation/report/readiness/runtime-gate/manifest/route-contract guard cluster (282 passed); leakage lint; `git diff --check` |
+
 ## Sprint H54: Bernie Interpretation Harness Runtime Gate Checker
 
 | Item | Value |
