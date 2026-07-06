@@ -86,6 +86,14 @@ The expected current result is `default_provider=disabled`,
 if the provider-boundary report fails, the sprint engine must pause for
 explicit review instead of continuing automatically.
 
+The report's `proposal_citation_required_fields` list is the source of truth for
+which provider-boundary report fields a proposal must cite. The current list is
+`default_provider`, `runtime_or_provider_wiring_ready`,
+`live_provider_enabled`, `provider_calls_performed`,
+`route_behavior_changed`, `database_access_performed`,
+`memory_or_rag_access_performed`, and
+`historical_diary_material_access_performed`.
+
 ### Proposal Surface Guard
 
 Any new markdown proposal artifact that discusses runtime route wiring, provider

@@ -8,10 +8,42 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 117 Provider-Boundary Proposal-Citation Field Contract |
+| Batch | Sprint 118 Provider-Boundary Release-Gate Citation Docs |
 | Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 118 What Changed
+
+- Updated `orchestration/bernie_release_gates.md` so the provider-boundary
+  report's `proposal_citation_required_fields` list is named as the source of
+  truth for provider-boundary proposal citations.
+- Listed the current eight provider-boundary citation fields in the release-gate
+  docs immediately before the proposal surface guard instructions.
+- Strengthened `tests/test_bernie_interpretation_readiness_release_gate.py` so
+  every field from `PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS` must appear in
+  the release-gate docs as a backtick-wrapped field token.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Its field-token residual was folded
+  in by requiring backtick-wrapped field names in the docs test.
+
+## Sprint 118 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_readiness_release_gate.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_readiness_release_gate.py tests/test_bernie_provider_boundary_readiness_report.py tests/test_bernie_interpretation_proposal_surface_guard.py -q`
+  (`22 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- orchestration/bernie_release_gates.md tests/test_bernie_interpretation_readiness_release_gate.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 119:
+step back to the Ariadne/Fable strategy map and pick the next highest-leverage
+programme checkpoint beyond provider-boundary guard consolidation.
+
+---
+
+## Previous Closeout - Sprint 117
 
 ## Sprint 117 What Changed
 

@@ -274,6 +274,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 118 next provider-boundary checkpoint, likely small proposal-doc/release-gate consolidation unless a broader programme checkpoint is higher leverage |
 | Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 118: Provider-Boundary Release-Gate Citation Docs
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Make release-gate instructions point reviewers to the report's provider-boundary proposal-citation field contract |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI not found on PATH in this shell; DeepSeek Flash bridge available |
+| Ariadne Lane | Documented `proposal_citation_required_fields` as the source of truth and asserted each report-declared field appears as a backtick-wrapped field token in release-gate docs |
+| DeepSeek Lane | Reviewed as safe/no-blocker; field-token residual was folded in before closeout |
+| Verification | `py_compile`; focused release-gate/report/proposal pytest (`22 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 119 return to the Ariadne/Fable strategy map and select the next highest-leverage programme checkpoint beyond provider-boundary guard consolidation |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

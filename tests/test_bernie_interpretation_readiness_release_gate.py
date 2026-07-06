@@ -2,6 +2,10 @@
 
 from pathlib import Path
 
+from scripts.bernie_provider_boundary_readiness_report import (
+    PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS,
+)
+
 
 RELEASE_GATES = Path("orchestration/bernie_release_gates.md")
 
@@ -27,6 +31,9 @@ def test_release_gates_require_provider_boundary_report_before_provider_changes(
     assert "database_access_performed=false" in text
     assert "memory_or_rag_access_performed=false" in text
     assert "historical_diary_material_access_performed=false" in text
+    assert "proposal_citation_required_fields" in text
+    for field in PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS:
+        assert f"`{field}`" in text
 
 
 def test_release_gates_pause_if_interpretation_readiness_changes():

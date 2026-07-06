@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 117 provider-boundary proposal-citation field contract completed locally. `scripts\bernie_provider_boundary_readiness_report.py` now emits a static `proposal_citation_required_fields` list, safety assertions reject field-list drift, and the proposal surface guard tests verify that list stays synchronized with `PROVIDER_BOUNDARY_EXPECTED_VALUES` and actual report values. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
-| **Next recommended work** | Sprint 118: move to the next Ariadne/Fable provider-boundary checkpoint, likely a small proposal-doc or release-gate consolidation, unless a broader programme checkpoint is now higher leverage |
+| **Current active track** | Sprint 118 provider-boundary release-gate citation docs completed locally. `orchestration\bernie_release_gates.md` now names the provider-boundary report's `proposal_citation_required_fields` list as the source of truth for proposal citations, and the release-gate documentation test checks every report-declared field appears as a backtick-wrapped field token. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 119: step back to the Ariadne/Fable strategy map and pick the next highest-leverage programme checkpoint beyond provider-boundary guard consolidation |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
