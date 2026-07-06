@@ -28,3 +28,13 @@ def test_protocol_alerts_pause_on_interpretation_readiness_change():
         "historical diary material access",
     ]:
         assert phrase in text
+
+
+def test_protocol_alerts_prevent_ariadne_only_sprint_drift():
+    text = ALERTS.read_text(encoding="utf-8")
+
+    assert "Avoid Ariadne-only sprint drift" in text
+    assert "tiny, tightly coupled guardrail increments" in text
+    assert "Substantial, separable, judgment-heavy" in text
+    assert "independent worker/reviewer lane by default" in text
+    assert "use the H63 independent review brief" in text

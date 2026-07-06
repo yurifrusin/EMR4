@@ -387,3 +387,21 @@ and assert generated readiness matches it before printing.
 If the snapshot is missing or generated readiness differs from the committed
 blocked status, the command fails closed. This turns the H59 snapshot from a
 pytest-only guard into part of the operational readiness command.
+
+## H63 Independent Review Brief
+
+H63 adds `docs/adversarial/h63_interpretation_independent_review_brief.md`, a
+bounded review handoff for the provider-free interpretation readiness/gate stack.
+
+The brief requires the readiness command first and preserves the expected
+blocked values:
+
+- `runtime_or_provider_wiring_ready: false`.
+- `raw_trove_access_ready: false`.
+- `runtime_gate_decision: blocked`.
+- `sprint_engine_state: continuing`.
+
+Its scope is review-only. Runtime routes, frontend changes, provider prompts or
+dry-runs, database access, memory/RAG/GraphRAG, H15/H-series runtime imports, and
+historical diary trove access remain out of scope unless Yuri explicitly opens a
+future implementation sprint.

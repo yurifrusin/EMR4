@@ -28,6 +28,15 @@
 
 Read these before acting on remembered process details.
 
+- 2026-07-07: Avoid Ariadne-only sprint drift. Ariadne-only implementation is
+  appropriate for tiny, tightly coupled guardrail increments, mechanical docs,
+  or urgent hotfixes where extra worker setup would add more risk than review.
+  Substantial, separable, judgment-heavy, architecture-facing, or safety-gate
+  sprint blocks should include an independent worker/reviewer lane by default,
+  or Ariadne must record why this sprint is intentionally single-track. This is
+  especially important for Bernie Interpretation Harness work after H40-H62:
+  use the H63 independent review brief before any larger runtime/provider/trove
+  proposal.
 - 2026-07-05: Sprint worker mix now starts with a Claude availability/quota
   check so Ariadne remembers to use Claude when it is healthy. If Claude is
   quota-capped, unavailable, recuperating, or fails to submit a usable plan in

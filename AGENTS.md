@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H62 Bernie Interpretation Harness readiness snapshot assertion integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
+| **Current active track** | H63 Bernie Interpretation Harness independent-review brief integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Use the H63 brief for a bounded independent review lane before any larger runtime/provider/trove proposal, or continue small provider-free guard hardening |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -466,6 +466,15 @@ H62 hardens `scripts/bernie_interpretation_readiness_check.py` so the CLI loads
 the committed blocked-readiness snapshot and asserts generated readiness matches
 it before printing. Tests now reject snapshot mismatches and missing snapshots,
 so the command fails closed if readiness shape or blocked values drift.
+H63 adds
+`docs/adversarial/h63_interpretation_independent_review_brief.md` and
+`tests/test_bernie_interpretation_independent_review_brief.py`. The brief makes
+the next independent-review lane explicit without launching runtime/provider
+work: reviewers must run the readiness command, preserve the blocked expected
+values, produce a source-safe review artifact only, and keep routes, providers,
+database access, memory/RAG/GraphRAG, H15/H-series runtime imports, raw trove
+processing, and ignored local-data reads out of scope unless Yuri explicitly
+opens a later implementation sprint.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
