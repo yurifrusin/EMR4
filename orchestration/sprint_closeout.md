@@ -8,10 +8,45 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 109 Band-2 Provider Gate Checkpoint |
-| Integrated through | Claude provider-gate criteria plan, Antigravity live-smoke UX readiness plan, DeepSeek Flash adversarial review, and Ariadne proposal synthesis |
+| Batch | Sprint 110 Provider-Gate Startup Guard |
+| Integrated through | Ariadne implementation with DeepSeek Flash review and alias hardening |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 110 What Changed
+
+- Added `LIVE_BERNIE_INTERPRETER_PROVIDERS` and
+  `assert_bernie_provider_allowed_by_runtime_gate()` in `app/config.py`.
+- `Settings` now fails closed at startup if
+  `BERNIE_BOOKING_INTERPRETER_PROVIDER` is configured to a live Bernie
+  interpreter provider while
+  `docs/bernie-interpretation-harness-runtime-gate.json` remains blocked or
+  lacks explicit provider scope.
+- Covered the current live alias family accepted by the interpreter:
+  `gemini`, `gemini_vertex`, `vertex`, and `vertex_gemini`.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers on the initial guard and noted the
+  live-provider allowlist drift risk; Ariadne fixed that by adding alias
+  coverage before closeout.
+
+## Sprint 110 Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\config.py tests\test_bernie_provider_runtime_gate.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_provider_runtime_gate.py tests/test_bernie_interpretation_runtime_gate.py tests/test_bernie_interpretation_runtime_gate_check.py tests/test_bernie_interpret_booking_instruction.py -q`
+  (`48 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- app/config.py tests/test_bernie_provider_runtime_gate.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 111: add
+a broader static route/config drift guard that proves all Bernie interpreter
+live-provider entry points remain covered by the startup gate and fake/disabled
+route behavior remains provider-free.
+
+---
+
+## Previous Closeout - Sprint 109
 
 ## Sprint 109 What Changed
 

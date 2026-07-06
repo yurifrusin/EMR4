@@ -161,6 +161,21 @@ default meaning of "three lane sprint".
 | Out Of Scope | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, route/model/schema/UI implementation, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 | Pause Rule | Yuri approval is required before changing any blocked gate to enabled; this sprint may only propose criteria and review artifacts |
 
+## Sprint 110: Provider-Gate Startup Guard
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Fail closed at application settings/startup if Bernie live-provider configuration appears while the runtime/provider gate remains blocked |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI `1.0.16` available; DeepSeek Flash bridge available |
+| Ariadne Lane | Added `assert_bernie_provider_allowed_by_runtime_gate()` and wired it into `Settings` validation without enabling providers or changing route behavior |
+| DeepSeek Lane | Reviewed the initial guard as non-blocking and identified hand-maintained live-provider allowlist drift as residual risk |
+| Alias Hardening | Folded DeepSeek's residual risk into the sprint: the guard now covers `gemini`, `gemini_vertex`, `vertex`, and `vertex_gemini`, matching the interpreter live-provider alias family |
+| Verification | `py_compile`; focused gate/interpreter pytest (`48 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 111 broader static route/config drift guard over Bernie interpreter live-provider entry points and fake/disabled route behavior |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

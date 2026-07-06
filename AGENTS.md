@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 109 Band-2 provider gate checkpoint integrated locally as proposal-only artifacts: `docs/bernie-band2-provider-gate-criteria.md`, Claude/Antigravity plan packets, and DeepSeek adversarial review. No runtime/provider gate was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
-| **Next recommended work** | Sprint 110: add a provider-gate runtime/startup assertion or health-check test that fails closed if live-provider configuration appears while the gate decision remains `blocked`, without enabling providers or changing route behavior |
+| **Current active track** | Sprint 110 provider-gate startup guard integrated locally. `Settings` now fails closed if Bernie live-provider configuration, including accepted Gemini/Vertex aliases, appears while `docs/bernie-interpretation-harness-runtime-gate.json` remains blocked or lacks explicit provider scope. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 111: add a broader static route/config drift guard that proves all Bernie interpreter live-provider entry points remain covered by the startup gate and that fake/disabled route behavior remains provider-free |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

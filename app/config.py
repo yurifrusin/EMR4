@@ -1,8 +1,54 @@
+import json
+from pathlib import Path
+
 from pydantic_settings import BaseSettings
 from pydantic import model_validator
 from typing import Literal, Optional
 
 INSECURE_DEFAULT_SECRET = "change-me-in-production"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+BERNIE_RUNTIME_GATE_PATH = REPO_ROOT / "docs" / "bernie-interpretation-harness-runtime-gate.json"
+LIVE_BERNIE_INTERPRETER_PROVIDERS = {
+    "gemini",
+    "gemini_vertex",
+    "vertex",
+    "vertex_gemini",
+}
+
+
+def assert_bernie_provider_allowed_by_runtime_gate(
+    provider: str,
+    gate_path: Path = BERNIE_RUNTIME_GATE_PATH,
+) -> None:
+    """Fail closed if live Bernie provider config appears while the gate is blocked."""
+
+    normalized_provider = (provider or "").strip().lower()
+    if normalized_provider not in LIVE_BERNIE_INTERPRETER_PROVIDERS:
+        return
+
+    try:
+        gate = json.loads(gate_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(
+            "Bernie live-provider configuration is blocked because the "
+            "runtime/provider gate could not be read."
+        ) from exc
+
+    scope = gate.get("scope")
+    provider_scope_enabled = (
+        isinstance(scope, dict)
+        and (
+            scope.get("provider_dry_run_wiring") is True
+            or scope.get("route_integration") is True
+        )
+    )
+    if gate.get("decision") == "blocked" or not provider_scope_enabled:
+        raise RuntimeError(
+            "Bernie live-provider configuration is blocked by "
+            "docs/bernie-interpretation-harness-runtime-gate.json. "
+            "Keep BERNIE_BOOKING_INTERPRETER_PROVIDER disabled or fake until "
+            "Yuri approves a scoped provider gate change."
+        )
 
 
 class Settings(BaseSettings):
@@ -79,6 +125,9 @@ class Settings(BaseSettings):
                 f"ENVIRONMENT={self.environment!r}. It is currently the insecure "
                 f"public default — refusing to start."
             )
+        assert_bernie_provider_allowed_by_runtime_gate(
+            self.bernie_booking_interpreter_provider
+        )
         return self
 
 
