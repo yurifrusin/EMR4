@@ -5494,3 +5494,36 @@ whitespace check clean apart from the known CRLF notice on
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is bounded readiness/gate hardening before runtime/provider
 wiring.
+
+---
+
+## Sprint H57 Closeout - Runtime Isolation Guard
+
+Integrated outcome:
+
+- Added `tests/test_bernie_interpretation_runtime_isolation.py`.
+- The guard scans production `app/` Python sources and proves they do not import
+  or reference interpretation harness report/readiness/gate tooling.
+- It also guards against runtime references to harness fixture paths,
+  projected-frame contracts, H15 semantic candidate fixtures, H-series profile
+  fixtures, historical diary candidate builders, `local_data`, or historical
+  diary trove paths.
+- No runtime code was changed.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_runtime_isolation.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_readiness_release_gate.py tests\test_bernie_interpretation_runtime_gate.py tests\test_bernie_interpretation_runtime_gate_check.py tests\test_bernie_interpretation_runtime_isolation.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `287 passed`; readiness CLI sample succeeded; leakage lint safe;
+whitespace check clean apart from the known CRLF notice on
+`orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded readiness/gate hardening before runtime/provider
+wiring.

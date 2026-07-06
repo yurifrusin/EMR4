@@ -305,3 +305,17 @@ historical diary material access, Ariadne must run:
 The expected current values are `runtime_or_provider_wiring_ready=false`,
 `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`. A changed
 value or failing command requires a sprint-engine pause and explicit review.
+
+## H57 Runtime Isolation Guard
+
+H57 adds `tests/test_bernie_interpretation_runtime_isolation.py`, which scans
+production `app/` Python sources and proves they do not import or reference:
+
+- Interpretation harness report/readiness/gate tooling.
+- Bernie interpretation harness fixture paths or projected-frame contracts.
+- H15 semantic candidate fixtures.
+- H-series profile fixtures.
+- Historical diary candidate builders, `local_data`, or trove paths.
+
+This keeps the interpretation harness as a provider-free test/review artifact
+until a future explicitly reviewed gate changes that boundary.

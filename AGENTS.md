@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H56 Bernie Interpretation Harness readiness release-gate hook integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H57 Bernie Interpretation Harness runtime isolation guard integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -430,6 +430,13 @@ historical diary material access, Ariadne must run
 Expected current values are `runtime_or_provider_wiring_ready=false`,
 `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`; any change
 or command failure requires a sprint-engine pause and explicit review.
+H57 adds `tests/test_bernie_interpretation_runtime_isolation.py`, a runtime
+source guard proving production `app/` Python code does not import or reference
+the provider-free interpretation harness report/readiness/gate tooling, harness
+fixture paths, projected-frame contracts, H15/H-series profile fixtures,
+historical diary candidate builders, `local_data`, or historical diary trove
+paths. This keeps the harness as a test/review artifact until a future explicitly
+reviewed gate changes that posture.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
