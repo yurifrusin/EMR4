@@ -22,6 +22,9 @@ jobs:
       - name: Install security tools
         run: pip install pip-audit bandit
 
+      - name: Historical diary leakage lint
+        run: python scripts/historical_diary_leakage_lint.py tests docs
+
       - name: Dependency CVE scan (pip-audit)
         # Fails when known CVEs are found in requirements.txt.
         # To clear a finding after verifying it is not reachable or after

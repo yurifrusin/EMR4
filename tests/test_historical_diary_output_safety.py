@@ -3,6 +3,7 @@ import pytest
 from scripts.historical_diary_output_safety import (
     HistoricalDiaryOutputSafetyError,
     validate_historical_diary_output,
+    validate_historical_diary_semantic_fixture_output,
 )
 
 
@@ -71,6 +72,49 @@ def safe_payload():
 def assert_unsafe(payload, reason_fragment):
     with pytest.raises(HistoricalDiaryOutputSafetyError) as error:
         validate_historical_diary_output(payload)
+    reasons = " ".join(issue.reason for issue in error.value.issues)
+    assert reason_fragment in reasons
+
+
+def safe_semantic_payload():
+    return {
+        "schema_version": "historical_diary.semantic_fixture.v1",
+        "source": "approved_h15_review_payload",
+        "privacy": {
+            "local_raw_processing_only": True,
+            "raw_data_external_provider_allowed": False,
+            "emits_document_text": False,
+            "emits_filenames": False,
+            "emits_raw_paths": False,
+            "emits_exact_document_timestamps": False,
+            "emits_patient_or_staff_labels": False,
+        },
+        "semantic_scope": {
+            "fixture_family": "action_grammar_candidates",
+            "date_policy": "relative_day_index_only",
+            "allowed_action_names": ["create", "move", "status_change"],
+            "approval_expires_on": "2027-01-01",
+        },
+        "fixtures": [
+            {
+                "synthetic_event_id": "event_001",
+                "relative_day_index": 0,
+                "time_of_day": "time_bucket_001",
+                "duration_minutes": 10,
+                "synthetic_resource_id": "resource_001",
+                "action_name": "create",
+                "status_categories": ["candidate"],
+                "transition_label": "candidate_create",
+                "confidence_label": "low",
+                "bucket_flags": ["has_time_bucket"],
+            }
+        ],
+    }
+
+
+def assert_semantic_unsafe(payload, reason_fragment):
+    with pytest.raises(HistoricalDiaryOutputSafetyError) as error:
+        validate_historical_diary_semantic_fixture_output(payload)
     reasons = " ".join(issue.reason for issue in error.value.issues)
     assert reason_fragment in reasons
 
@@ -151,3 +195,35 @@ def test_rejects_long_text_snippets_even_under_allowed_value_key():
     payload["roots"][0]["value"] = "x" * 161
 
     assert_unsafe(payload, "string is too long")
+
+
+def test_accepts_safe_semantic_fixture_payload_after_h15_review_shape():
+    validate_historical_diary_semantic_fixture_output(safe_semantic_payload())
+
+
+def test_semantic_fixture_rejects_external_provider_permission():
+    payload = safe_semantic_payload()
+    payload["privacy"]["raw_data_external_provider_allowed"] = True
+
+    assert_semantic_unsafe(payload, "must be False")
+
+
+def test_semantic_fixture_rejects_unsupported_action_name():
+    payload = safe_semantic_payload()
+    payload["fixtures"][0]["action_name"] = "invent_booking"
+
+    assert_semantic_unsafe(payload, "unsupported action name")
+
+
+def test_semantic_fixture_rejects_raw_booking_phrasing():
+    payload = safe_semantic_payload()
+    payload["fixtures"][0]["transition_label"] = "patient arrived"
+
+    assert_semantic_unsafe(payload, "raw booking semantics")
+
+
+def test_semantic_fixture_requires_approval_expiry():
+    payload = safe_semantic_payload()
+    del payload["semantic_scope"]["approval_expires_on"]
+
+    assert_semantic_unsafe(payload, "approval expiry is required")

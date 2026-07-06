@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H23: Semantic Validator and Leakage Lint Extensions
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Implement the synthetic validator and leakage-lint extensions required by the H22 gate-review packet while H15 stays blocked |
+| Worker Shape | Ariadne implementation |
+| In Scope | Semantic-mode validator, source/doc/test leakage lint, synthetic fail-closed tests, CI workflow hook |
+| Out Of Scope | Raw `local_data`, ignored JSON, semantic fixture promotion, reviewed approval payload approval, full-trove processing, provider calls, route/UI/database writes |
+| Verification | `py_compile`; leakage lint over `tests docs`; H15 blocked gate validation; `pytest tests/test_historical_diary_output_safety.py tests/test_historical_diary_leakage_lint.py tests/test_historical_diary_deidentification_gate.py tests/action_grammar_replay tests/test_h_series_profile_consistency.py -q`; `git diff --check` |
+
 ## Sprint H22: Semantic Gate-Review Packet
 
 | Item | Value |

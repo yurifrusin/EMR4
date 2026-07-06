@@ -117,6 +117,66 @@ SAFE_HISTORICAL_DIARY_OUTPUT_KEYS = {
     "word",
 }
 
+SAFE_HISTORICAL_DIARY_SEMANTIC_OUTPUT_KEYS = SAFE_HISTORICAL_DIARY_OUTPUT_KEYS | {
+    "action_name",
+    "allowed_action_names",
+    "approval_expires_on",
+    "bucket_flags",
+    "confidence_label",
+    "date_policy",
+    "date_shift_days",
+    "date_shifted_day_index",
+    "expires_on",
+    "fixture_family",
+    "fixtures",
+    "local_raw_processing_only",
+    "raw_data_external_provider_allowed",
+    "relative_day_index",
+    "schema_version",
+    "semantic_fixture",
+    "semantic_scope",
+    "source",
+    "synthetic_event_id",
+    "synthetic_resource_id",
+    "time_of_day",
+    "duration_minutes",
+    "status_categories",
+    "transition_label",
+}
+
+SEMANTIC_FIXTURE_SCHEMA_VERSION = "historical_diary.semantic_fixture.v1"
+SEMANTIC_FIXTURE_SOURCE = "approved_h15_review_payload"
+ALLOWED_SEMANTIC_ACTION_NAMES = {
+    "create",
+    "move",
+    "resize",
+    "cancel",
+    "status_change",
+    "check_in",
+    "waiting_area_move",
+    "link_patient",
+    "slot_search",
+    "explain_schedule",
+    "handoff",
+}
+ALLOWED_SEMANTIC_DATE_POLICIES = {
+    "relative_day_index_only",
+    "date_shifted",
+}
+ALLOWED_CONFIDENCE_LABELS = {
+    "high",
+    "medium",
+    "low",
+    "unknown",
+}
+ALLOWED_STATUS_CATEGORIES = {
+    "candidate",
+    "confirmed",
+    "cancelled",
+    "status_changed",
+    "unknown",
+}
+
 UNSAFE_KEY_PATTERNS = tuple(
     re.compile(pattern, re.IGNORECASE)
     for pattern in (
@@ -140,6 +200,13 @@ WINDOWS_PATH_RE = re.compile(r"[A-Za-z]:\\")
 DOC_PATH_RE = re.compile(r"(?:\\|/)[^\\/\s]+\.docx?\b", re.IGNORECASE)
 DATE_TIME_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}")
 LIKELY_PERSON_NAME_RE = re.compile(r"\b[A-Z][a-z]{2,}\s+[A-Z][a-z]{2,}\b")
+LIKELY_BOOKING_SEMANTIC_RE = re.compile(
+    r"\b("
+    r"booked|booking burst|cancelled appointment|moved appointment|"
+    r"patient arrived|normal surgery day|patient checked in|waiting room"
+    r")\b",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
@@ -162,25 +229,82 @@ def validate_historical_diary_output(payload: Any) -> None:
         raise HistoricalDiaryOutputSafetyError(issues)
 
 
+def validate_historical_diary_semantic_fixture_output(payload: Any) -> None:
+    """Validate a reviewed semantic fixture payload without weakening neutral safety.
+
+    This is for post-H15 review payloads only. It still rejects raw text,
+    identifiers, paths, timestamps, and unsupported grammar actions.
+    """
+    issues: list[SafetyIssue] = []
+    _validate_node_with_allowed(
+        payload,
+        "$",
+        issues,
+        allowed_keys=SAFE_HISTORICAL_DIARY_SEMANTIC_OUTPUT_KEYS,
+    )
+
+    if not isinstance(payload, dict):
+        issues.append(SafetyIssue("$", "semantic fixture payload must be an object"))
+    else:
+        if payload.get("schema_version") != SEMANTIC_FIXTURE_SCHEMA_VERSION:
+            issues.append(
+                SafetyIssue(
+                    "$.schema_version",
+                    f"must be {SEMANTIC_FIXTURE_SCHEMA_VERSION!r}",
+                )
+            )
+        if payload.get("source") != SEMANTIC_FIXTURE_SOURCE:
+            issues.append(
+                SafetyIssue("$.source", f"must be {SEMANTIC_FIXTURE_SOURCE!r}")
+            )
+        _validate_semantic_privacy(payload.get("privacy"), issues)
+        _validate_semantic_scope(payload.get("semantic_scope"), issues)
+        _validate_semantic_fixtures(payload.get("fixtures"), issues)
+
+    if issues:
+        raise HistoricalDiaryOutputSafetyError(issues)
+
+
 def _validate_node(node: Any, path: str, issues: list[SafetyIssue]) -> None:
+    _validate_node_with_allowed(
+        node,
+        path,
+        issues,
+        allowed_keys=SAFE_HISTORICAL_DIARY_OUTPUT_KEYS,
+    )
+
+
+def _validate_node_with_allowed(
+    node: Any,
+    path: str,
+    issues: list[SafetyIssue],
+    *,
+    allowed_keys: set[str],
+) -> None:
     if isinstance(node, dict):
         for key, value in node.items():
             key_path = f"{path}.{key}"
-            _validate_key(key, key_path, issues)
-            _validate_node(value, key_path, issues)
+            _validate_key(key, key_path, issues, allowed_keys=allowed_keys)
+            _validate_node_with_allowed(value, key_path, issues, allowed_keys=allowed_keys)
         return
 
     if isinstance(node, list):
         for index, value in enumerate(node):
-            _validate_node(value, f"{path}[{index}]", issues)
+            _validate_node_with_allowed(value, f"{path}[{index}]", issues, allowed_keys=allowed_keys)
         return
 
     if isinstance(node, str):
         _validate_string(node, path, issues)
 
 
-def _validate_key(key: str, path: str, issues: list[SafetyIssue]) -> None:
-    if key not in SAFE_HISTORICAL_DIARY_OUTPUT_KEYS:
+def _validate_key(
+    key: str,
+    path: str,
+    issues: list[SafetyIssue],
+    *,
+    allowed_keys: set[str],
+) -> None:
+    if key not in allowed_keys:
         issues.append(SafetyIssue(path, "key is not in the committed-output allowlist"))
     for pattern in UNSAFE_KEY_PATTERNS:
         if pattern.search(key) and key not in {
@@ -189,6 +313,8 @@ def _validate_key(key: str, path: str, issues: list[SafetyIssue]) -> None:
             "emits_filenames",
             "emits_patient_or_staff_labels",
             "emits_raw_paths",
+            "local_raw_processing_only",
+            "raw_data_external_provider_allowed",
         }:
             issues.append(SafetyIssue(path, "key name suggests PHI, raw text, paths, or document metadata"))
 
@@ -204,6 +330,91 @@ def _validate_string(value: str, path: str, issues: list[SafetyIssue]) -> None:
         issues.append(SafetyIssue(path, "string looks like an exact document timestamp"))
     if LIKELY_PERSON_NAME_RE.search(value):
         issues.append(SafetyIssue(path, "string looks like a person or staff label"))
+    if LIKELY_BOOKING_SEMANTIC_RE.search(value):
+        issues.append(SafetyIssue(path, "string looks like raw booking semantics"))
+
+
+def _validate_semantic_privacy(value: Any, issues: list[SafetyIssue]) -> None:
+    if not isinstance(value, dict):
+        issues.append(SafetyIssue("$.privacy", "semantic fixture privacy must be an object"))
+        return
+
+    required = {
+        "local_raw_processing_only": True,
+        "raw_data_external_provider_allowed": False,
+        "emits_document_text": False,
+        "emits_filenames": False,
+        "emits_raw_paths": False,
+        "emits_exact_document_timestamps": False,
+        "emits_patient_or_staff_labels": False,
+    }
+    for key, expected in required.items():
+        if value.get(key) is not expected:
+            issues.append(SafetyIssue(f"$.privacy.{key}", f"must be {expected!r}"))
+
+
+def _validate_semantic_scope(value: Any, issues: list[SafetyIssue]) -> None:
+    if not isinstance(value, dict):
+        issues.append(SafetyIssue("$.semantic_scope", "semantic scope must be an object"))
+        return
+
+    if value.get("date_policy") not in ALLOWED_SEMANTIC_DATE_POLICIES:
+        issues.append(SafetyIssue("$.semantic_scope.date_policy", "date policy is not allowed"))
+    if value.get("date_policy") == "date_shifted" and not isinstance(
+        value.get("date_shift_days"),
+        int,
+    ):
+        issues.append(
+            SafetyIssue(
+                "$.semantic_scope.date_shift_days",
+                "date_shifted policy requires integer date_shift_days",
+            )
+        )
+    if not value.get("fixture_family"):
+        issues.append(SafetyIssue("$.semantic_scope.fixture_family", "fixture family is required"))
+    if not value.get("approval_expires_on"):
+        issues.append(
+            SafetyIssue("$.semantic_scope.approval_expires_on", "approval expiry is required")
+        )
+
+    allowed_actions = value.get("allowed_action_names")
+    if not isinstance(allowed_actions, list) or not allowed_actions:
+        issues.append(
+            SafetyIssue("$.semantic_scope.allowed_action_names", "allowed actions are required")
+        )
+        return
+    unsupported = sorted(set(allowed_actions) - ALLOWED_SEMANTIC_ACTION_NAMES)
+    if unsupported:
+        issues.append(
+            SafetyIssue(
+                "$.semantic_scope.allowed_action_names",
+                f"unsupported action name(s): {unsupported}",
+            )
+        )
+
+
+def _validate_semantic_fixtures(value: Any, issues: list[SafetyIssue]) -> None:
+    if not isinstance(value, list) or not value:
+        issues.append(SafetyIssue("$.fixtures", "semantic fixtures must be a non-empty list"))
+        return
+
+    for index, fixture in enumerate(value):
+        path = f"$.fixtures[{index}]"
+        if not isinstance(fixture, dict):
+            issues.append(SafetyIssue(path, "semantic fixture must be an object"))
+            continue
+        for required in ("synthetic_event_id", "synthetic_resource_id", "action_name"):
+            if not fixture.get(required):
+                issues.append(SafetyIssue(f"{path}.{required}", "field is required"))
+        action_name = fixture.get("action_name")
+        if action_name not in ALLOWED_SEMANTIC_ACTION_NAMES:
+            issues.append(SafetyIssue(f"{path}.action_name", "unsupported action name"))
+        if "confidence_label" in fixture and fixture["confidence_label"] not in ALLOWED_CONFIDENCE_LABELS:
+            issues.append(SafetyIssue(f"{path}.confidence_label", "confidence label is not allowed"))
+        if "status_categories" in fixture:
+            categories = fixture["status_categories"]
+            if not isinstance(categories, list) or not set(categories).issubset(ALLOWED_STATUS_CATEGORIES):
+                issues.append(SafetyIssue(f"{path}.status_categories", "status category is not allowed"))
 
 
 def load_json(path: Path) -> Any:

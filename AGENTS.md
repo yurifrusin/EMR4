@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H22 semantic gate-review packet drafted; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Add synthetic validator/leakage-lint extensions for the H22 packet, then seek Yuri approval only if the reviewed H15 payload is ready; do not open H15 yet |
+| **Current active track** | H22/H23 semantic gate-review packet plus synthetic validator/leakage-lint extensions integrated locally; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Prepare a concrete reviewed H15 approval-payload draft or run an additional adversarial review of the new lint/validator surface; do not open H15 or touch the full trove until Yuri explicitly approves |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -183,6 +183,14 @@ requirements, approval payload shape, and explicit sprint-engine pause points.
 H22 is not an approval and does not touch raw trove material, ignored inventory
 JSON, semantic fixtures, providers, routes, UI, database writes, RAG, GraphRAG,
 or Bernie prompt memory.
+H23 added a semantic-mode extension to
+`scripts/historical_diary_output_safety.py` plus
+`scripts/historical_diary_leakage_lint.py`, with synthetic tests in
+`tests/test_historical_diary_output_safety.py` and
+`tests/test_historical_diary_leakage_lint.py`. The lint is now wired into the
+Python Security workflow. It scans ordinary docs/tests/fixtures for H-series
+semantic drift while allowing policy/adversarial docs and negative-test files
+to describe forbidden examples. The H15 template remains `blocked`.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

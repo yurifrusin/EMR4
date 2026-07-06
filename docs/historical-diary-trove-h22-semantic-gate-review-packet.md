@@ -145,9 +145,16 @@ fixture JSON. It should scan relevant `.py` and `.md` files for:
 - test names that combine an H-series identifier with a receptionist verb;
 - wording that treats `deterministic_uses` as permission rather than metadata.
 
-This lint is mandatory before semantic fixture promotion. It may be implemented
-in a later source-safe sprint, but H15 must remain blocked until it exists and
-passes.
+This lint is mandatory before semantic fixture promotion. H23 added the first
+source-safe implementation:
+
+```text
+scripts/historical_diary_leakage_lint.py
+tests/test_historical_diary_leakage_lint.py
+```
+
+H15 must remain blocked unless this lint and the semantic fixture validator
+continue to pass.
 
 ## Approval Payload Shape
 
@@ -195,6 +202,6 @@ The sprint engine must pause, with a Pushover notification that says
 ## Recommendation
 
 Use H22 as a human-readable approval runway, not as the approval itself. The
-next safe sprint should add the validator/leakage-lint extensions using
-synthetic fixtures only. The full diary trove should be touched for semantic
-work only after Yuri explicitly approves H15 from a reviewed gate payload.
+H23 has added the first validator/leakage-lint extensions using synthetic
+fixtures only. The full diary trove should be touched for semantic work only
+after Yuri explicitly approves H15 from a reviewed gate payload.
