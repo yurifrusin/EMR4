@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H22-H24 semantic gate packet, validator/leakage-lint extensions, and adversarial review integrated locally; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Prepare a concrete reviewed H15 approval-payload draft for Yuri's decision, but do not approve it, open H15, or touch the full trove until Yuri explicitly approves |
+| **Current active track** | H22-H25 semantic gate packet, validator/leakage-lint extensions, adversarial review, and blocked approval-payload draft integrated locally; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Present the H15 approval-payload draft for Yuri's decision, or continue with non-semantic backend/Diary work; do not approve H15 or touch the full trove until Yuri explicitly approves |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -196,6 +196,12 @@ guardrails during review: semantic action names now track `DiaryActionVerb`, and
 `approval_expires_on` must be a `YYYY-MM-DD` string. The review records the
 remaining accepted boundary that policy/adversarial docs can quote forbidden
 examples and therefore still require human review when H15 scope changes.
+H25 added `docs/historical-diary-trove-h15-approval-payload-draft.json` and
+`docs/historical-diary-trove-h15-approval-payload-draft.md`. The JSON is
+deliberately `decision: blocked` with blank reviewer and false acknowledgement;
+it records a proposed approval shape for Yuri's decision but is not approval.
+The H15 validator now requires semantic approval scope and a date-shaped expiry
+if the decision is ever changed to `approved_for_semantic_fixture_promotion`.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

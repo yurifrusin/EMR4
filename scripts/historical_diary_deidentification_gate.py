@@ -28,6 +28,9 @@ ALLOWED_TEXT_POLICIES = {
     "no_text_export",
     "bucket_flags_only",
 }
+ALLOWED_FIXTURE_FAMILIES = {
+    "action_grammar_candidates",
+}
 REQUIRED_FORBIDDEN_CATEGORIES = {
     "names",
     "phone_numbers",
@@ -57,6 +60,7 @@ SAFE_ALLOWED_FIELDS = {
 WINDOWS_PATH_RE = re.compile(r"[A-Za-z]:\\")
 DOC_PATH_RE = re.compile(r"(?:\\|/)[^\\/\s]+\.docx?\b", re.IGNORECASE)
 DATE_TIME_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}")
+DATE_ONLY_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 LIKELY_PERSON_NAME_RE = re.compile(r"\b[A-Z][a-z]{2,}\s+[A-Z][a-z]{2,}\b")
 
 
@@ -155,6 +159,17 @@ def validate_deidentification_gate(payload: dict[str, Any]) -> None:
                         "semantic approval requires explicit acknowledgement",
                     )
                 )
+            _validate_semantic_scope(approval.get("semantic_scope"), issues)
+            approval_expires_on = approval.get("approval_expires_on")
+            if not isinstance(approval_expires_on, str) or not DATE_ONLY_RE.fullmatch(
+                approval_expires_on
+            ):
+                issues.append(
+                    GateIssue(
+                        "$.approval.approval_expires_on",
+                        "semantic approval requires YYYY-MM-DD expiry",
+                    )
+                )
         elif semantic_ack is True:
             issues.append(
                 GateIssue(
@@ -165,6 +180,37 @@ def validate_deidentification_gate(payload: dict[str, Any]) -> None:
 
     if issues:
         raise DeidentificationGateError(issues)
+
+
+def _validate_semantic_scope(value: Any, issues: list[GateIssue]) -> None:
+    if not isinstance(value, dict):
+        issues.append(GateIssue("$.approval.semantic_scope", "semantic approval requires scope"))
+        return
+
+    fixture_families = value.get("fixture_families")
+    if not isinstance(fixture_families, list) or not fixture_families:
+        issues.append(
+            GateIssue("$.approval.semantic_scope.fixture_families", "fixture families are required")
+        )
+    else:
+        unexpected = sorted(set(fixture_families) - ALLOWED_FIXTURE_FAMILIES)
+        if unexpected:
+            issues.append(
+                GateIssue(
+                    "$.approval.semantic_scope.fixture_families",
+                    f"unsupported fixture families: {unexpected}",
+                )
+            )
+
+    if value.get("prototype_slice") != "single_root_single_dense_day_max_80":
+        issues.append(
+            GateIssue(
+                "$.approval.semantic_scope.prototype_slice",
+                "prototype slice must be single_root_single_dense_day_max_80",
+            )
+        )
+    if value.get("memory_use") != "prohibited":
+        issues.append(GateIssue("$.approval.semantic_scope.memory_use", "memory use must be prohibited"))
 
 
 def _dict(payload: dict[str, Any], key: str, issues: list[GateIssue]) -> dict[str, Any]:

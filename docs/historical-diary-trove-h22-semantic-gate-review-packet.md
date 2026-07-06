@@ -156,6 +156,16 @@ tests/test_historical_diary_leakage_lint.py
 H15 must remain blocked unless this lint and the semantic fixture validator
 continue to pass.
 
+H25 added a blocked approval-payload draft for Yuri's review:
+
+```text
+docs/historical-diary-trove-h15-approval-payload-draft.json
+docs/historical-diary-trove-h15-approval-payload-draft.md
+```
+
+The draft is intentionally not an approval. It keeps `decision` set to
+`blocked` until Yuri explicitly instructs otherwise.
+
 ## Approval Payload Shape
 
 If Yuri later approves H15, the reviewed payload should be a separate file or
@@ -203,5 +213,6 @@ The sprint engine must pause, with a Pushover notification that says
 
 Use H22 as a human-readable approval runway, not as the approval itself. The
 H23 has added the first validator/leakage-lint extensions using synthetic
-fixtures only. The full diary trove should be touched for semantic work only
-after Yuri explicitly approves H15 from a reviewed gate payload.
+fixtures only, and H25 has drafted the blocked approval-payload packet for
+review. The full diary trove should be touched for semantic work only after
+Yuri explicitly approves H15 from a reviewed gate payload.

@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import pytest
 
@@ -104,10 +105,43 @@ def test_semantic_approval_requires_acknowledgement():
     assert_gate_unsafe(payload, "explicit acknowledgement")
 
 
-def test_accepts_semantic_approval_with_safe_reviewer_and_acknowledgement():
+def add_safe_semantic_scope(payload):
+    payload["approval"]["semantic_scope"] = {
+        "fixture_families": ["action_grammar_candidates"],
+        "prototype_slice": "single_root_single_dense_day_max_80",
+        "memory_use": "prohibited",
+    }
+    payload["approval"]["approval_expires_on"] = "2027-01-01"
+    return payload
+
+
+def test_semantic_approval_requires_bounded_scope():
     payload = safe_gate(decision="approved_for_semantic_fixture_promotion")
     payload["approval"]["reviewer"] = "reviewer_1"
     payload["approval"]["semantic_labelling_acknowledged"] = True
+
+    assert_gate_unsafe(payload, "semantic approval requires scope")
+
+
+def test_semantic_approval_requires_date_shaped_expiry():
+    payload = safe_gate(decision="approved_for_semantic_fixture_promotion")
+    payload["approval"]["reviewer"] = "reviewer_1"
+    payload["approval"]["semantic_labelling_acknowledged"] = True
+    payload["approval"]["semantic_scope"] = {
+        "fixture_families": ["action_grammar_candidates"],
+        "prototype_slice": "single_root_single_dense_day_max_80",
+        "memory_use": "prohibited",
+    }
+    payload["approval"]["approval_expires_on"] = "later"
+
+    assert_gate_unsafe(payload, "YYYY-MM-DD expiry")
+
+
+def test_accepts_semantic_approval_with_safe_reviewer_ack_scope_and_expiry():
+    payload = safe_gate(decision="approved_for_semantic_fixture_promotion")
+    payload["approval"]["reviewer"] = "reviewer_1"
+    payload["approval"]["semantic_labelling_acknowledged"] = True
+    add_safe_semantic_scope(payload)
 
     validate_deidentification_gate(payload)
 
@@ -121,3 +155,14 @@ def test_cli_accepts_safe_gate(tmp_path, monkeypatch):
     )
 
     assert main() == 0
+
+
+def test_committed_h15_approval_payload_draft_remains_blocked():
+    path = Path("docs/historical-diary-trove-h15-approval-payload-draft.json")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+
+    validate_deidentification_gate(payload)
+    assert payload["decision"] == "blocked"
+    assert payload["approval"]["reviewer"] == ""
+    assert payload["approval"]["semantic_labelling_acknowledged"] is False
+    assert payload["draft_review"]["not_approved_until"] == "explicit_yuri_decision"
