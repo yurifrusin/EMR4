@@ -245,6 +245,7 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
             "writes_authorized": False,
             "interpretation_dispatch": result.dispatch.value,
             "refusal_reason_kind": None,
+            "copy": "I can stage this diary proposal for staff review.",
         }
     if result.dispatch is InterpretationDispatch.route_read_only:
         return {
@@ -254,6 +255,7 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
             "writes_authorized": False,
             "interpretation_dispatch": result.dispatch.value,
             "refusal_reason_kind": None,
+            "copy": "I can ask the backend to check the diary before showing options.",
         }
     reason_kind = {
         InterpretationDispatch.route_meta: "meta_handoff",
@@ -269,6 +271,7 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
         "interpretation_dispatch": result.dispatch.value,
         "refusal_reason_kind": reason_kind,
         "refused_action": result.verb.value if result.verb else None,
+        "copy": "I cannot complete that request from this harness.",
     }
 
 
@@ -279,8 +282,12 @@ def assert_interpretation_frame_consistency(frame: dict[str, object]) -> None:
     assert isinstance(dispatch_value, str)
     dispatch = InterpretationDispatch(dispatch_value)
     frame_kind = frame.get("frame_kind")
+    copy = frame.get("copy")
 
     assert frame.get("writes_authorized") is False
+    assert isinstance(copy, str)
+    assert copy.strip() == copy
+    assert copy
 
     if dispatch is InterpretationDispatch.route_to_confirm:
         assert frame_kind == "proposal"
@@ -288,12 +295,16 @@ def assert_interpretation_frame_consistency(frame: dict[str, object]) -> None:
         assert frame.get("refusal_reason_kind") is None
         assert frame.get("refused_action") is None
         assert isinstance(frame.get("proposed_action"), str)
+        assert "stage" in copy.casefold()
+        assert "staff review" in copy.casefold()
     elif dispatch is InterpretationDispatch.route_read_only:
         assert frame_kind == "read_request"
         assert frame.get("requires_backend_check") is True
         assert frame.get("refusal_reason_kind") is None
         assert frame.get("refused_action") is None
         assert isinstance(frame.get("proposed_action"), str)
+        assert "backend" in copy.casefold()
+        assert "check" in copy.casefold()
     else:
         expected_reason_kind = {
             InterpretationDispatch.route_meta: "meta_handoff",
@@ -305,6 +316,7 @@ def assert_interpretation_frame_consistency(frame: dict[str, object]) -> None:
         assert frame.get("blocked") is True
         assert frame.get("refusal_reason_kind") == expected_reason_kind
         assert isinstance(frame.get("reason"), str)
+        assert "cannot" in copy.casefold()
         if dispatch in {
             InterpretationDispatch.refuse_unsafe_instruction,
             InterpretationDispatch.refuse_unknown_utterance,

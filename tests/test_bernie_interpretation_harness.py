@@ -99,6 +99,9 @@ def test_interpretation_results_project_to_valid_fake_provider_frame_shapes(case
     eval_result = evaluate_manifest_response(frame)
     assert eval_result.safe is True
     assert eval_result.write_authority_claimed is False
+    assert eval_result.claimed_action_detected is False
+    assert eval_result.availability_claimed is False
+    assert eval_result.confirmation_bypass_detected is False
 
 
 def test_confirm_interpretation_projects_to_proposal_frame():
@@ -109,6 +112,7 @@ def test_confirm_interpretation_projects_to_proposal_frame():
     assert frame["proposed_action"] == "create"
     assert frame["requires_staff_confirmation"] is True
     assert frame["writes_authorized"] is False
+    assert frame["copy"] == "I can stage this diary proposal for staff review."
 
 
 def test_read_only_interpretation_projects_to_read_request_frame():
@@ -119,6 +123,7 @@ def test_read_only_interpretation_projects_to_read_request_frame():
     assert frame["proposed_action"] == "slot_search"
     assert frame["requires_backend_check"] is True
     assert frame["writes_authorized"] is False
+    assert frame["copy"] == "I can ask the backend to check the diary before showing options."
 
 
 def test_refused_interpretation_projects_to_refusal_frame_without_write_authority():
@@ -129,6 +134,24 @@ def test_refused_interpretation_projects_to_refusal_frame_without_write_authorit
     assert frame["blocked"] is True
     assert frame["writes_authorized"] is False
     assert frame["refused_action"] is None
+    assert frame["copy"] == "I cannot complete that request from this harness."
+
+
+@pytest.mark.parametrize("case", _cases(), ids=lambda case: case["id"])
+def test_projected_frame_copy_stays_inside_fake_provider_style_boundaries(case):
+    result = interpret_receptionist_utterance(case["utterance"])
+    frame = interpretation_result_to_frame(result)
+    copy = frame["copy"]
+
+    assert isinstance(copy, str)
+    assert "confirmed" not in copy.casefold()
+    assert "booked" not in copy.casefold()
+    assert "saved" not in copy.casefold()
+    assert "available" not in copy.casefold()
+    assert "/api/" not in copy.casefold()
+
+    eval_result = evaluate_manifest_response(frame)
+    assert eval_result.safe is True
 
 
 @pytest.mark.parametrize(
@@ -141,6 +164,7 @@ def test_refused_interpretation_projects_to_refusal_frame_without_write_authorit
             "writes_authorized": True,
             "interpretation_dispatch": "route_to_confirm",
             "refusal_reason_kind": None,
+            "copy": "I can stage this diary proposal for staff review.",
         },
         {
             "frame_kind": "read_request",
@@ -149,6 +173,7 @@ def test_refused_interpretation_projects_to_refusal_frame_without_write_authorit
             "writes_authorized": False,
             "interpretation_dispatch": "route_to_confirm",
             "refusal_reason_kind": None,
+            "copy": "I can ask the backend to check the diary before showing options.",
         },
         {
             "frame_kind": "refusal",
@@ -158,6 +183,7 @@ def test_refused_interpretation_projects_to_refusal_frame_without_write_authorit
             "interpretation_dispatch": "refuse_planned_not_implemented",
             "refusal_reason_kind": "unsafe_instruction",
             "refused_action": "check_in",
+            "copy": "I cannot complete that request from this harness.",
         },
         {
             "frame_kind": "refusal",
@@ -167,6 +193,35 @@ def test_refused_interpretation_projects_to_refusal_frame_without_write_authorit
             "interpretation_dispatch": "refuse_unsafe_instruction",
             "refusal_reason_kind": "unsafe_instruction",
             "refused_action": "create",
+            "copy": "I cannot complete that request from this harness.",
+        },
+        {
+            "frame_kind": "proposal",
+            "proposed_action": "create",
+            "requires_staff_confirmation": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": "route_to_confirm",
+            "refusal_reason_kind": None,
+            "copy": "Appointment booked.",
+        },
+        {
+            "frame_kind": "read_request",
+            "proposed_action": "slot_search",
+            "requires_backend_check": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": "route_read_only",
+            "refusal_reason_kind": None,
+            "copy": "Dr Shera is available.",
+        },
+        {
+            "frame_kind": "refusal",
+            "reason": "unsafe",
+            "blocked": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": "refuse_unsafe_instruction",
+            "refusal_reason_kind": "unsafe_instruction",
+            "refused_action": None,
+            "copy": "Completed.",
         },
     ],
 )

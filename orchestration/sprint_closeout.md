@@ -5126,3 +5126,35 @@ Result: `152 passed`; leakage lint safe; whitespace check clean.
 
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is richer fake-provider-style frame scenarios.
+
+---
+
+## Sprint H46 Closeout - Provider-Style Copy Contract
+
+Integrated outcome:
+
+- Added safe receptionist-facing `copy` fields to projected interpretation
+  frames.
+- Proposal copy stages a diary proposal for staff review instead of claiming a
+  completed booking.
+- Read-request copy defers to backend diary checks instead of asserting live
+  availability.
+- Refusal copy blocks the request without write authority.
+- Added positive fixture-wide tests and negative drift tests for copy that
+  claims completion, asserts availability, or loses refusal posture.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `195 passed`; leakage lint safe; whitespace check clean apart from the
+known CRLF notice on `orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is clarify/ambiguity-style projected frame preparation or
+another bounded reviewer pass after the next harness increment.

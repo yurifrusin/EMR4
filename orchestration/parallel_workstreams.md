@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H46: Bernie Interpretation Harness Provider-Style Copy Contract
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Make projected interpretation frames carry safe receptionist-facing copy before richer fake-provider scenario expansion |
+| Worker Shape | Ariadne implementation |
+| In Scope | Provider-style copy on proposal/read_request/refusal projections, copy invariants, positive/negative tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; interpretation/manifest frame-shape/route-contract guard cluster (195 passed); leakage lint; `git diff --check` |
+
 ## Sprint H45: Bernie Interpretation Harness Projected Frame Invariants
 
 | Item | Value |

@@ -122,3 +122,18 @@ top of the broader manifest frame validator. It checks that:
 This is deliberately narrower than the global manifest validator: it protects
 the interpretation harness's own dispatch/frame contract before any future
 fake-provider layer consumes it.
+
+## H46 Provider-Style Copy Contract
+
+H46 adds safe receptionist-facing `copy` strings to projected frames:
+
+- Proposal frames say the harness can stage a diary proposal for staff review.
+- Read-request frames say the backend must check the diary before options are
+  shown.
+- Refusal frames say the harness cannot complete the request.
+
+The copy is intentionally bland and authority-limited. Harness tests now assert
+that projected fixture frames do not claim a diary action has already happened,
+do not assert live availability, do not include confirmation-bypass language,
+and still pass the fake-provider manifest safety evaluator without provider
+calls.

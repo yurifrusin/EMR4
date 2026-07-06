@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H45 Bernie Interpretation Harness projected frame invariants integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue fake-provider-style frame scenarios or dispatch another bounded reviewer after the next harness increment |
+| **Current active track** | H46 Bernie Interpretation Harness provider-style copy contract integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue provider-style scenario expansion, especially clarify/ambiguity frames or another bounded reviewer pass after the next harness increment |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -354,6 +354,13 @@ manifest frame validator and enforces dispatch/frame invariants: no projected
 frame authorizes writes, confirm dispatch projects only to staff-confirmation
 proposal frames, read-only dispatch projects only to backend-check read requests,
 and refusal frames carry the correct refusal reason kind.
+H46 adds safe receptionist-facing `copy` strings to projected interpretation
+frames and treats that copy as part of the harness-local invariant surface.
+Proposal copy must stage for staff review rather than claim completion,
+read-request copy must defer to backend checks rather than assert availability,
+and refusal copy must block the request without write authority. The tests pass
+every projected fixture frame through manifest safety evaluation and assert no
+claimed action, availability claim, confirmation bypass, or provider call.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
