@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H49 Bernie Interpretation Harness bounded contract review integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue small projected-frame validator hardening or move toward a provider-free harness summary/report artifact |
+| **Current active track** | H50 Bernie Interpretation Harness safe aggregate report helper integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue small projected-frame/report validator hardening or prepare the next bounded review before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -383,6 +383,12 @@ H49 records a bounded adversarial review in
 `interpretation_dispatch` values fail with `AssertionError` like the rest of the
 invariant API. The fix adds no new behavior, authority, route wiring, provider
 calls, database access, H15/H-series input, RAG, GraphRAG, or memory.
+H50 adds `scripts/bernie_interpretation_harness_report.py` and
+`tests/test_bernie_interpretation_harness_report.py`. The report emits only
+safe aggregate counts over authored synthetic harness fixtures and contracts:
+44 cases, 4 case fixture files, 7 dispatch contracts, dispatch/frame-kind
+counts, omitted-field declarations, and no-provider/no-route/no-DB/no-raw-trove
+boundary posture. It deliberately omits utterance text and payload/ID fields.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

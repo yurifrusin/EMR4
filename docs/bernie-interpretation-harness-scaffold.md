@@ -183,3 +183,23 @@ instead of failing through the harness assertion contract. The invariant helper
 now converts that case to `AssertionError`, and the drifted-frame regression
 matrix covers the failure. This does not add any new interpretation behavior or
 runtime authority.
+
+## H50 Safe Aggregate Report
+
+H50 adds `scripts/bernie_interpretation_harness_report.py`, a provider-free CLI
+and importable helper that summarises the authored synthetic harness corpus
+without printing utterance text.
+
+The report includes:
+
+- Case and contract counts.
+- Dispatch and frame-kind counts.
+- Fixture-level case counts.
+- Contract dispatch coverage.
+- Explicit omitted-field declarations.
+- Boundary posture: providers, routes, database access, raw trove access, and
+  runtime memory are prohibited.
+
+The current report summarises 44 authored cases across 4 case fixture files and
+7 projected-frame contracts. Tests assert that representative utterance text and
+payload/ID fields are omitted from the serialized report.

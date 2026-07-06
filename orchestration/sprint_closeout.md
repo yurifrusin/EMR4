@@ -5258,3 +5258,37 @@ known CRLF notice on `orchestration/integration_log.md`.
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is projected-frame validator hardening or a provider-free
 harness summary/report artifact.
+
+---
+
+## Sprint H50 Closeout - Safe Aggregate Report
+
+Integrated outcome:
+
+- Added `scripts/bernie_interpretation_harness_report.py`.
+- Added `tests/test_bernie_interpretation_harness_report.py`.
+- The report emits safe aggregate counts only: 44 authored cases, 4 case
+  fixture files, 7 dispatch contracts, dispatch counts, frame-kind counts, and
+  fixture-level case counts.
+- The report declares omitted fields and avoids utterance text, payload fields,
+  and patient/practitioner/appointment ID fields.
+- The CLI was verified from the repo root; it calls no providers, routes,
+  database access, raw trove processing, or runtime memory.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile scripts\bernie_interpretation_harness_report.py tests\test_bernie_interpretation_harness_report.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_harness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `263 passed`; report CLI sample succeeded; leakage lint safe;
+whitespace check clean apart from the known CRLF notice on
+`orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is small report/validator hardening or a bounded review
+before any runtime/provider wiring.
