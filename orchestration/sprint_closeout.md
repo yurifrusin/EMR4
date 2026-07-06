@@ -8,6 +8,58 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H12: Historical Diary Trove Neutral Large-Delta Triage |
+| Integrated through | Ariadne local-only large-delta triage; no external workers used because scope was raw-free and narrowly bounded |
+| Status | Local verification passed; push/mirror/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `scripts\historical_diary_large_delta_triage.py`, a validator-safe local triage report for neutral large-delta transitions.
+- Extended `scripts\historical_diary_output_safety.py` to allow only the neutral triage keys required by H12.
+- Added `tests\test_historical_diary_large_delta_triage.py`.
+- Ran H12 triage against ignored H11 ordered neutral snapshots.
+- Produced ignored `large_delta_triage_h12.json` and validated it through H5.
+- Added `docs\historical-diary-trove-large-delta-triage.md`.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_large_delta_triage.py scripts\historical_diary_output_safety.py tests\test_historical_diary_large_delta_triage.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_large_delta_triage.py tests\test_historical_diary_runtime_report.py tests\test_historical_diary_event_summary_compare.py tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (24 passed; existing warnings only).
+- Local triage passed against ignored H11 ordered snapshots.
+- Safety validation passed for ignored H12 large-delta triage output.
+- Post-push audit pending.
+- GitHub workflows pending.
+
+## Local Triage Result
+
+- The single H11 large transition occurs in `pilot_01`, transition index 54, sequence pair 54 to 55.
+- The transition is large because character count moved by 547, crossing the current `>500` threshold.
+- Structure stayed `strong_diary_grid`; table count stayed `2`; table cell count stayed `14`; table signature stayed `1x11+1x3`; time-like token count stayed `78`.
+- Paragraph count moved by 6, non-empty line count moved by 6, and date-like token count moved by 1.
+- Interpretation: shape-stable content-volume movement inside the same diary structure, not a template/layout break and not a semantic appointment event.
+
+## Recommended User Review
+
+No required manual review before continuing. H12 is local tooling/tests/docs only and reads ignored neutral H11 output, not raw diary content.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- H13 should broaden ordered-snapshot sampling cautiously under H10 caps and compare large-delta frequency before any semantic labelling work.
+- Do not infer appointment create/delete/status semantics from H12.
+
+## Previous Closeout - Sprint H11
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H11: Historical Diary Trove Bounded Multi-Day Runtime Probe |
 | Integrated through | Ariadne local-only runtime probe; no external workers used because scope was raw-free and narrowly bounded |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
