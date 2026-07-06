@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H17: Historical Diary Trove Cross-Pilot Event Trends |
 | Integrated through | Ariadne local-only safe comparison tooling; no external workers used because scope was privacy-sensitive and narrow |
-| Status | Verified locally; push/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green at `12ed94d0` |
 | Last updated | 2026-07-06 |
 
 ## What Changed
