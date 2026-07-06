@@ -8,10 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 121 Appointment Command Envelope Alignment Inventory |
+| Batch | Sprint 122 Appointment Command OpenAPI Drift Guard |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 122 What Changed
+
+- Added `tests/test_api_spine_appointment_openapi_drift_guard.py`, a
+  non-invasive static guard over the appointment API spine.
+- The guard parses `app/routers/appointments.py` with `ast` and requires every
+  current appointment-router route to appear in the Sprint 121 inventory with
+  the exact handler name and classification.
+- It caught and corrected three stale handler names in
+  `orchestration/api_spine_appointment_command_alignment_inventory.md`:
+  `get_waiting_room`, `get_checkin_defaults`, and `get_available_slots`.
+- It pins the three deliberate current OpenAPI path mismatches:
+  `status-confirm` vs `/appointments/proposals/status/confirm`,
+  `delete-confirm` vs `/appointments/proposals/delete/confirm`, and
+  `slot-search/selection` vs `/appointments/proposals/slot-search/select`.
+- The drift assertions are row-scoped, and the guard pins the current OpenAPI
+  path set so future OpenAPI path additions are deliberate.
+- It also proves the Sprint 101 OpenAPI draft does not yet explicitly document
+  Bernie intent, interpreter, supervised-booking, confirm-Bernie, no-slot, or
+  session route variants.
+- Updated `AGENTS.md` and `orchestration/phase_programmes.md` so Programme 2G
+  now names Sprint 123 OpenAPI backend compatibility alias and Bernie variant
+  documentation as the next implementation slice.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+
+## Sprint 122 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_appointment_openapi_drift_guard.py tests\test_api_spine_appointment_command_alignment_inventory.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_appointment_command_alignment_inventory.py tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`47 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check`.
+- DeepSeek Flash review found no blockers. Ariadne folded in its row-scoping
+  and OpenAPI path-count residuals before closeout; the remaining AST-literal
+  and markdown-table strictness notes are acceptable for this static guard.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 123:
+document backend compatibility aliases and Bernie-specific variants in the
+OpenAPI layer without adding runtime aliases.
+
+---
+
+## Previous Closeout - Sprint 121
 
 ## Sprint 121 What Changed
 

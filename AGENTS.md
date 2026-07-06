@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 121 appointment command envelope alignment inventory completed locally. `orchestration\api_spine_appointment_command_alignment_inventory.md` maps current FastAPI appointment proposal, confirmation, slot-search, Bernie intent/session/supervised, compatibility write, and read-only routes to the OpenAPI command families. The sprint records route/OpenAPI naming drift, missing explicit Bernie OpenAPI variants, compatibility writes outside the proposal-confirm envelope, and the unproven `Idempotency-Key` enforcement gap without changing route behavior |
-| **Next recommended work** | Sprint 122: add a non-invasive appointment command OpenAPI drift guard that keeps the Sprint 121 inventory, current `app\routers\appointments.py` route strings, and `docs\api-spine\openapi\appointment-commands.yaml` aligned while recording deliberate current drift entries rather than changing runtime routes |
+| **Current active track** | Sprint 122 appointment command OpenAPI drift guard completed locally. `tests\test_api_spine_appointment_openapi_drift_guard.py` now parses `app\routers\appointments.py` with AST and requires the Sprint 121 inventory to match every current appointment-router route, handler, and classification. It also pins deliberate current OpenAPI drift entries and proves Bernie-specific route variants remain absent from the Sprint 101 OpenAPI draft |
+| **Next recommended work** | Sprint 123: update the OpenAPI draft or an adjacent OpenAPI companion artifact to explicitly document current backend compatibility aliases and Bernie intent/session/supervised variants, without adding runtime route aliases or changing behavior |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

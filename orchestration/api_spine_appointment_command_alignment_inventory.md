@@ -62,10 +62,10 @@ Reviewed sources:
 | `GET /api/v1/appointments/types` | `list_appointment_types` | reference read | `read-only route` | Appointment type vocabulary only. |
 | `GET /api/v1/appointments` | `list_appointments` | diary read model | `read-only route` | Appointment list read filtered by tenant/date/practitioner/patient/status/location. |
 | `GET /api/v1/appointments/{appointment_id}` | `get_appointment` | appointment read model | `read-only route` | Single appointment read. |
-| `GET /api/v1/appointments/{appointment_id}/checkin-defaults` | `get_appointment_checkin_defaults` | check-in context read | `read-only route` | Context/defaults only; no native `check_in` command authority yet. |
+| `GET /api/v1/appointments/{appointment_id}/checkin-defaults` | `get_checkin_defaults` | check-in context read | `read-only route` | Context/defaults only; no native `check_in` command authority yet. |
 | `GET /api/v1/appointments/{appointment_id}/audit` | `get_appointment_audit` | audit read model | `read-only route` | Audit trail read only. |
-| `GET /api/v1/appointments/waiting-room` | `list_waiting_room` | waiting-room read model | `read-only route` | Waiting-room state read only. |
-| `GET /api/v1/appointments/slots/{practitioner_id}` | `list_available_slots` | availability read model | `read-only route` | Slot availability read; proposal or confirmation routes remain separate. |
+| `GET /api/v1/appointments/waiting-room` | `get_waiting_room` | waiting-room read model | `read-only route` | Waiting-room state read only. |
+| `GET /api/v1/appointments/slots/{practitioner_id}` | `get_available_slots` | availability read model | `read-only route` | Slot availability read; proposal or confirmation routes remain separate. |
 
 ## Alignment Findings
 
