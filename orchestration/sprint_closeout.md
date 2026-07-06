@@ -8,6 +8,61 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H20: Historical Diary Trove Neutral Graph Report |
+| Integrated through | Ariadne local-only predefined graph report tooling; no external workers used because scope was privacy-sensitive and narrow |
+| Status | Verified locally; push/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `scripts\historical_diary_neutral_graph_report.py`, a predefined safe graph report helper.
+- Added `tests\test_historical_diary_neutral_graph_report.py`.
+- Extended `scripts\historical_diary_output_safety.py` with report-neutral keys only.
+- Produced ignored `neutral_graph_report_h20.json` from the H19 graph output.
+- Added `docs\historical-diary-trove-neutral-graph-report.md`.
+- Updated `AGENTS.md` with H20 state and the recommendation to broaden only if more neutral roots are ready.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- H20 neutral graph report output passed `scripts\historical_diary_output_safety.py`.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_neutral_graph_report.py scripts\historical_diary_output_safety.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_neutral_graph_report.py tests\test_historical_diary_output_safety.py -q` (11 passed; existing warnings only).
+
+## Local Result
+
+- Produced 9 predefined query result groups from the ignored H19 graph.
+- Notable event queries identify `pilot_01` for `large_unexplained_delta` and `pilot` for `time_grid_delta`.
+- Delta-bucket queries identify shared movement buckets across the three pilot roots.
+- Interpretation: the graph/report substrate is useful for safe aggregate questions, but remains local-only and not Bernie runtime memory.
+
+## Bernie Memory Result
+
+- The 58k-file trove should not be raw fine-tuning material.
+- RAG is useful over approved docs, policies, aggregate stats, and de-identified/synthetic examples.
+- GraphRAG is likely the best future fit once we have a derived neutral transition graph.
+- Bernie can use derived memory to clarify and propose; the deterministic diary backend remains the write authority.
+
+## Recommended User Review
+
+No required manual review before continuing neutral work. Yuri review is required only if a future sprint proposes approving semantic labelling or using raw/de-identified examples for provider-visible prompts.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No manual diary-content review is required because H16 commits only safe aggregate documentation and handover notes.
+
+## Known Follow-Up
+
+- Broaden H-series only if another capped neutral root is ready; otherwise return to diary/Bernie deterministic sprint work.
+- Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
+
+## Previous Closeout - Sprint H19
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H19: Historical Diary Trove Neutral Graph Delta Buckets |
 | Integrated through | Ariadne local-only graph enrichment tooling; no external workers used because scope was privacy-sensitive and narrow |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green at `f1b6c6f9` |
@@ -52,7 +107,7 @@ No required manual review before continuing neutral work. Yuri review is require
 - No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
 - No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
 - No database migration or test DB reset is required.
-- No manual diary-content review is required because H16 commits only safe aggregate documentation and handover notes.
+- No manual diary-content review is required because H19 commits only safe aggregate documentation, tooling, tests, and handover notes.
 
 ## Known Follow-Up
 
