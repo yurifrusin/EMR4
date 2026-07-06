@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 123 OpenAPI backend alignment metadata completed locally. `docs\api-spine\openapi\appointment-commands.yaml` now has an `x-emr4-current-backend-alignment` extension documenting current backend path drift, compatibility write routes, Bernie intent/session/supervised variants, and blocked gates without adding runtime aliases or changing behavior. `tests\test_api_spine_openapi_backend_alignment.py` guards the metadata |
-| **Next recommended work** | Sprint 124: inspect and document the appointment command `Idempotency-Key` enforcement gap for proposal/confirmation-grade command routes before any route behavior changes |
+| **Current active track** | Sprint 124 appointment command `Idempotency-Key` gap inspection completed locally. `orchestration\api_spine_appointment_idempotency_gap.md` documents that OpenAPI requires `Idempotency-Key` on proposal/confirmation-grade command paths, while current `app\routers\appointments.py` has no HTTP header binding or appointment-command replay ledger. Bernie session idempotency is explicitly scoped as non-equivalent |
+| **Next recommended work** | Sprint 125: draft the appointment command idempotency policy packet before implementation, covering route scope, replay ledger storage, actor/practice/operation/body-hash binding, stale evidence interaction, raw compatibility posture, and duplicate-write tests |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

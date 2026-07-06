@@ -8,10 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 123 OpenAPI Backend Alignment Metadata |
+| Batch | Sprint 124 Appointment Command Idempotency-Key Gap Inspection |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 124 What Changed
+
+- Added `orchestration/api_spine_appointment_idempotency_gap.md`, a
+  documentation/test-only inspection of the appointment command
+  `Idempotency-Key` gap.
+- Recorded that the OpenAPI draft requires `Idempotency-Key` on eight
+  proposal/confirmation-grade appointment command paths.
+- Documented that current `app/routers/appointments.py` has no `Header(...)`
+  binding and no `Idempotency-Key` HTTP-header enforcement for appointment
+  proposal, confirmation, compatibility write, or slot-search routes.
+- Distinguished existing freshness ids, signed confirmation evidence,
+  `confirmed=true`, raw compatibility audit posture, and Bernie session
+  idempotency from durable appointment command-plane idempotency.
+- Recorded raw compatibility writes as a separate policy decision, not a hidden
+  implementation requirement.
+- Added `tests/test_api_spine_appointment_idempotency_gap.py` to guard the gap
+  artifact, the eight OpenAPI idempotency paths, current absence of HTTP header
+  binding, non-equivalence boundaries, closed gates, and the Sprint 125 policy
+  packet recommendation.
+- Updated `AGENTS.md` and `orchestration/phase_programmes.md` so Programme 2G
+  now names Sprint 125 appointment command idempotency policy packet as the
+  next implementation slice.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+
+## Sprint 124 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_appointment_idempotency_gap.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_idempotency_gap.py tests/test_api_spine_openapi_backend_alignment.py tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_appointment_command_alignment_inventory.py tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`58 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check`.
+- DeepSeek Flash review found no blockers. Ariadne folded in its two
+  test-quality residuals before closeout: source-pass assertions now cover all
+  listed sources, and the router guard checks idempotency-specific header
+  patterns rather than banning unrelated future headers.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 125:
+draft the appointment command idempotency policy packet before implementation.
+
+---
+
+## Previous Closeout - Sprint 123
 
 ## Sprint 123 What Changed
 
