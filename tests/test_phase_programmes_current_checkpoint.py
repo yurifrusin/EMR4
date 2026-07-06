@@ -6,21 +6,21 @@ from pathlib import Path
 PHASE_PROGRAMMES = Path("orchestration/phase_programmes.md")
 
 
-def test_phase_programmes_recommended_move_is_current_after_sprint_130():
+def test_phase_programmes_recommended_move_is_current_after_sprint_131():
     text = PHASE_PROGRAMMES.read_text(encoding="utf-8")
 
-    assert "Current position after Sprint 130" in text
-    assert "default recommendation after Sprint 130 is **Programme 2G**" in text
-    assert "staff create-confirm idempotency route tests" in text
+    assert "Current position after Sprint 131" in text
+    assert "default recommendation after Sprint 131 is **Programme 2G**" in text
+    assert "wire staff" in text
     assert "provider-boundary guard stack has been consolidated" in text
     assert (
-        "Status | Sprint 130 appointment idempotency route integration "
-        "preflight completed; staff create-confirm route tests selected next" in text
+        "Status | Sprint 131 staff create-confirm idempotency route-test "
+        "contract completed; staff create-confirm route wiring selected next" in text
     )
     assert "Sprint 110-118 provider-boundary guard consolidation" in text
     assert (
-        "Next Candidate Sprints | Sprint 131 staff create-confirm idempotency "
-        "route tests" in text
+        "Next Candidate Sprints | Sprint 132 staff create-confirm idempotency "
+        "route wiring" in text
     )
 
 

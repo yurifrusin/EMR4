@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 130 appointment idempotency route integration preflight completed locally. `orchestration\api_spine_appointment_idempotency_route_integration_preflight.md` defines the first staff create-confirm wiring contract, helper call order, fail-closed mappings, and required route tests while leaving appointment routes unwired |
-| **Next recommended work** | Sprint 131: add staff create-confirm idempotency route tests before implementation, excluding Bernie/update/status/delete/raw families until the first family is green |
+| **Current active track** | Sprint 131 staff create-confirm idempotency route-test contract completed locally. `orchestration\api_spine_appointment_idempotency_staff_create_confirm_route_tests.md` and guarded tests define the future behavior matrix while leaving appointment routes unwired |
+| **Next recommended work** | Sprint 132: wire staff create-confirm idempotency narrowly, enabling the guarded tests and excluding Bernie/update/status/delete/raw families until the first family is green |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

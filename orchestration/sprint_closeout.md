@@ -8,10 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 130 Appointment Idempotency Route Integration Preflight |
+| Batch | Sprint 131 Staff Create-Confirm Idempotency Route Tests |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 131 What Changed
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_staff_create_confirm_route_tests.md`,
+  a guarded route-test contract for the staff create-confirm idempotency wiring
+  sprint.
+- Added
+  `tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py` to
+  guard the scope, enumerate future behavior tests, prove the current router is
+  still unwired, and keep behavior tests skipped until Sprint 132 wiring.
+- Folded DeepSeek review residuals by pinning the exact skip metadata: the nine
+  skipped behavior tests must match the contract and only static scope/router
+  guards may pass before wiring.
+- Scoped the future executable tests to
+  `POST /api/v1/appointments/proposals/create/confirm` /
+  `confirm_create_proposal_route`, canonical operation
+  `confirmAppointmentCreateProposal`, route family `create-confirm`.
+- Explicitly excluded Bernie create-confirm, update/status/delete confirmation
+  routes, raw compatibility writes, proposal-only create, slot-search, and
+  Bernie command-style reads.
+- Preserved fake/default-disabled behavior; no appointment route behavior
+  change, provider call, live smoke, runtime FGA client, external patient
+  client, GraphQL mutation, H15/H-series runtime import, memory/RAG/GraphRAG,
+  broad trove mining, or route-level model-to-database write was added.
+
+## Sprint 131 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_staff_create_confirm_idempotency_route_contract.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py -q`
+  (`5 passed, 9 skipped`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py tests/test_api_spine_appointment_idempotency_route_integration_preflight.py tests/test_api_spine_appointment_idempotency_storage_helper.py tests/test_api_spine_appointment_idempotency_model_migration.py tests/test_api_spine_appointment_idempotency_storage_artifact_guard.py tests/test_api_spine_appointment_idempotency_storage_design.py tests/test_api_spine_appointment_idempotency_policy_packet.py tests/test_api_spine_appointment_idempotency_gap.py tests/test_api_spine_openapi_backend_alignment.py tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_appointment_command_alignment_inventory.py tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`106 passed, 9 skipped`; existing Starlette/Google GenAI warnings only).
+- `git diff --check` (known CRLF notice on `orchestration/integration_log.md`
+  only).
+- DeepSeek Flash review found no blockers. Ariadne folded its skip-metadata
+  residuals into the guard before closeout.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 132:
+staff create-confirm idempotency route wiring, excluding Bernie/update/status/
+delete/raw families.
+
+---
+
+## Previous Closeout - Sprint 130
 
 ## Sprint 130 What Changed
 
