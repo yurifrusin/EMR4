@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H48 Bernie Interpretation Harness fixture-backed projected-frame contract matrix integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Dispatch a bounded reviewer pass over the interpretation harness or continue with small validator-hardening around projected frame contracts |
+| **Current active track** | H49 Bernie Interpretation Harness bounded contract review integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue small projected-frame validator hardening or move toward a provider-free harness summary/report artifact |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -377,6 +377,12 @@ contract, every contract is observed by authored fixtures, and every projected
 frame satisfies required true/false/null/absent fields plus copy fragments. The
 matrix deliberately avoids quoting payload-like ID keys inside the harness
 fixture corpus; the existing fixture guard continues to reject those fragments.
+H49 records a bounded adversarial review in
+`docs/adversarial/h49_interpretation_harness_contract_review.md` and hardens
+`assert_interpretation_frame_consistency()` so unknown external-style
+`interpretation_dispatch` values fail with `AssertionError` like the rest of the
+invariant API. The fix adds no new behavior, authority, route wiring, provider
+calls, database access, H15/H-series input, RAG, GraphRAG, or memory.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

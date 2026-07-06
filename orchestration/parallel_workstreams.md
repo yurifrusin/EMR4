@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H49: Bernie Interpretation Harness Bounded Contract Review
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Review the fixture-backed frame contract surface and harden concrete invariant escape hatches |
+| Worker Shape | Ariadne local adversarial review |
+| In Scope | Bounded review artifact, unknown-dispatch assertion hardening, regression test, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; interpretation/manifest frame-shape/route-contract guard cluster (260 passed); leakage lint; `git diff --check` |
+
 ## Sprint H48: Bernie Interpretation Harness Frame Contract Matrix
 
 | Item | Value |

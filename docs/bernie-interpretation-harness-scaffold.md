@@ -171,3 +171,15 @@ at least one authored fixture, and every projected frame satisfies the matching
 contract before it is passed through the broader fake-provider manifest
 evaluator. The contract fixture stays payload-free and avoids route, endpoint,
 patient/practitioner/appointment ID fragments.
+
+## H49 Bounded Contract Review
+
+H49 records a local adversarial contract review in
+`docs/adversarial/h49_interpretation_harness_contract_review.md`.
+
+The review found one small consistency issue: a malformed frame with an unknown
+`interpretation_dispatch` raised `ValueError` through the enum constructor
+instead of failing through the harness assertion contract. The invariant helper
+now converts that case to `AssertionError`, and the drifted-frame regression
+matrix covers the failure. This does not add any new interpretation behavior or
+runtime authority.

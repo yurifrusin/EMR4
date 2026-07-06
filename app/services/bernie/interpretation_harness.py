@@ -353,7 +353,12 @@ def assert_interpretation_frame_consistency(frame: dict[str, object]) -> None:
 
     dispatch_value = frame.get("interpretation_dispatch")
     assert isinstance(dispatch_value, str)
-    dispatch = InterpretationDispatch(dispatch_value)
+    try:
+        dispatch = InterpretationDispatch(dispatch_value)
+    except ValueError as exc:
+        raise AssertionError(
+            f"Unexpected interpretation dispatch: {dispatch_value!r}"
+        ) from exc
     frame_kind = frame.get("frame_kind")
     copy = frame.get("copy")
 

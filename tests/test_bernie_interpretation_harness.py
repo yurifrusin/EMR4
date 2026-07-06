@@ -327,6 +327,15 @@ def test_projected_frame_copy_stays_inside_fake_provider_style_boundaries(case):
             "refusal_reason_kind": None,
             "copy": "Please choose an allowed reason before I stage anything.",
         },
+        {
+            "frame_kind": "proposal",
+            "proposed_action": "create",
+            "requires_staff_confirmation": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": "route_direct_write",
+            "refusal_reason_kind": None,
+            "copy": "I can stage this diary proposal for staff review.",
+        },
     ],
 )
 def test_interpretation_frame_consistency_rejects_drifted_projected_frames(bad_frame):

@@ -5225,3 +5225,36 @@ known CRLF notice on `orchestration/integration_log.md`.
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is a bounded reviewer pass over the harness or small
 projected-frame validator hardening.
+
+---
+
+## Sprint H49 Closeout - Bounded Contract Review
+
+Integrated outcome:
+
+- Added
+  `docs/adversarial/h49_interpretation_harness_contract_review.md`.
+- Reviewed the provider-free interpretation harness projected-frame contract
+  surface after H48.
+- Hardened `assert_interpretation_frame_consistency()` so unknown
+  `interpretation_dispatch` values fail as `AssertionError` instead of leaking a
+  raw enum `ValueError`.
+- Added a drifted-frame regression case for unknown dispatch.
+- Added no new runtime interpretation behavior, provider calls, route wiring,
+  database access, H15/H-series input, RAG, GraphRAG, or memory.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `260 passed`; leakage lint safe; whitespace check clean apart from the
+known CRLF notice on `orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is projected-frame validator hardening or a provider-free
+harness summary/report artifact.
