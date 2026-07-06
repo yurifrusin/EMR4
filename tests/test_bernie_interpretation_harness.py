@@ -38,6 +38,15 @@ def _cases():
     return cases
 
 
+def _expected_refusal_reason_kind(dispatch: str):
+    return {
+        "route_meta": "meta_handoff",
+        "refuse_planned_not_implemented": "planned_not_implemented",
+        "refuse_unsafe_instruction": "unsafe_instruction",
+        "refuse_unknown_utterance": "unknown_utterance",
+    }.get(dispatch)
+
+
 def test_interpretation_harness_schema_version_pinned():
     assert INTERPRETATION_HARNESS_SCHEMA_VERSION == "bernie.interpretation_harness.v1"
 
@@ -80,6 +89,10 @@ def test_interpretation_results_project_to_valid_fake_provider_frame_shapes(case
     result = interpret_receptionist_utterance(case["utterance"])
     frame = interpretation_result_to_frame(result)
 
+    assert frame["frame_kind"] == case["expected_frame_kind"]
+    assert frame.get("refusal_reason_kind") == _expected_refusal_reason_kind(
+        case["expected_dispatch"]
+    )
     assert validate_response_frame_shape(frame) == ()
     eval_result = evaluate_manifest_response(frame)
     assert eval_result.safe is True
@@ -151,6 +164,32 @@ def test_result_consistency_rejects_refusal_with_route_authority():
         verb=DiaryActionVerb.create,
         authority=RouteAuthority.signed_confirm,
         dispatch=InterpretationDispatch.refuse_unsafe_instruction,
+        rationale="negative test",
+    )
+    with pytest.raises(AssertionError):
+        assert_interpretation_result_consistency(bad)
+
+
+@pytest.mark.parametrize(
+    ("dispatch", "authority"),
+    [
+        (InterpretationDispatch.route_to_confirm, RouteAuthority.planned_not_implemented),
+        (InterpretationDispatch.route_to_confirm, RouteAuthority.meta),
+        (InterpretationDispatch.route_read_only, RouteAuthority.signed_confirm),
+        (InterpretationDispatch.route_read_only, RouteAuthority.planned_not_implemented),
+        (InterpretationDispatch.route_meta, RouteAuthority.signed_confirm),
+        (InterpretationDispatch.route_meta, RouteAuthority.read_only),
+        (InterpretationDispatch.refuse_planned_not_implemented, RouteAuthority.signed_confirm),
+        (InterpretationDispatch.refuse_planned_not_implemented, RouteAuthority.read_only),
+        (InterpretationDispatch.refuse_unknown_utterance, RouteAuthority.meta),
+    ],
+)
+def test_result_consistency_rejects_invalid_dispatch_authority_pairs(dispatch, authority):
+    bad = InterpretationResult(
+        utterance="synthetic impossible result",
+        verb=DiaryActionVerb.create,
+        authority=authority,
+        dispatch=dispatch,
         rationale="negative test",
     )
     with pytest.raises(AssertionError):

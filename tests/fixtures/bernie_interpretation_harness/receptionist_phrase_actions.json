@@ -1,0 +1,118 @@
+{
+  "schema_version": "bernie.interpretation_harness.v1",
+  "source": "authored_synthetic",
+  "cases": [
+    {
+      "id": "slot_search_gaps",
+      "utterance": "Any gaps this afternoon?",
+      "expected_verb": "slot_search",
+      "expected_dispatch": "route_read_only",
+      "expected_authority": "read_only",
+      "expected_frame_kind": "read_request"
+    },
+    {
+      "id": "slot_search_squeeze_in",
+      "utterance": "Can we squeeze them in today?",
+      "expected_verb": "slot_search",
+      "expected_dispatch": "route_read_only",
+      "expected_authority": "read_only",
+      "expected_frame_kind": "read_request"
+    },
+    {
+      "id": "slot_search_free_times",
+      "utterance": "Show me free times tomorrow morning.",
+      "expected_verb": "slot_search",
+      "expected_dispatch": "route_read_only",
+      "expected_authority": "read_only",
+      "expected_frame_kind": "read_request"
+    },
+    {
+      "id": "check_in_patient_here",
+      "utterance": "Patient is here for their appointment.",
+      "expected_verb": "check_in",
+      "expected_dispatch": "refuse_planned_not_implemented",
+      "expected_authority": "planned_not_implemented",
+      "expected_frame_kind": "refusal"
+    },
+    {
+      "id": "check_in_arrived_at_desk",
+      "utterance": "They arrived at the desk.",
+      "expected_verb": "check_in",
+      "expected_dispatch": "refuse_planned_not_implemented",
+      "expected_authority": "planned_not_implemented",
+      "expected_frame_kind": "refusal"
+    },
+    {
+      "id": "cancel_patient_cancelled",
+      "utterance": "The patient cancelled, take the appointment out.",
+      "expected_verb": "cancel",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm",
+      "expected_frame_kind": "proposal"
+    },
+    {
+      "id": "cancel_remove_from_diary",
+      "utterance": "Remove the booking from the diary.",
+      "expected_verb": "cancel",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm",
+      "expected_frame_kind": "proposal"
+    },
+    {
+      "id": "resize_double_appointment",
+      "utterance": "Make it a double appointment.",
+      "expected_verb": "resize",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm",
+      "expected_frame_kind": "proposal"
+    },
+    {
+      "id": "resize_give_thirty_minutes",
+      "utterance": "Give them 30 minutes instead.",
+      "expected_verb": "resize",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm",
+      "expected_frame_kind": "proposal"
+    },
+    {
+      "id": "move_push_back",
+      "utterance": "Push the booking back by half an hour.",
+      "expected_verb": "move",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm",
+      "expected_frame_kind": "proposal"
+    },
+    {
+      "id": "move_bring_forward",
+      "utterance": "Bring the appointment forward to the morning.",
+      "expected_verb": "move",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm",
+      "expected_frame_kind": "proposal"
+    },
+    {
+      "id": "create_put_them_in",
+      "utterance": "Put them in after lunch.",
+      "expected_verb": "create",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm",
+      "expected_frame_kind": "proposal"
+    },
+    {
+      "id": "handoff_manual_review",
+      "utterance": "Manual review before changing this booking.",
+      "expected_verb": "handoff",
+      "expected_dispatch": "route_meta",
+      "expected_authority": "meta",
+      "expected_frame_kind": "refusal"
+    },
+    {
+      "id": "receptionist_note_does_not_auto_handoff",
+      "utterance": "Receptionist note: patient wants a later appointment.",
+      "expected_verb": null,
+      "expected_dispatch": "refuse_unknown_utterance",
+      "expected_authority": null,
+      "expected_frame_kind": "refusal"
+    }
+  ]
+}

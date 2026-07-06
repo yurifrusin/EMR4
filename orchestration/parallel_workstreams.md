@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H44: Reviewer-Informed Interpretation Phrase Coverage
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Make frame-kind expectations fixture-driven and add realistic receptionist phrase/safety coverage from external review |
+| Worker Shape | Ariadne implementation with external reviewer input |
+| In Scope | Fixture `expected_frame_kind`, receptionist phrase fixtures, deterministic rule expansion, unsafe phrase fixes, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; interpretation/manifest frame-shape/route-contract guard cluster (148 passed); leakage lint; `git diff --check` |
+
 ## Sprint H43: Bernie Interpretation Harness Frame-Shape Preparation
 
 | Item | Value |
@@ -13,7 +24,7 @@ For the layer between long phases and tactical sprints, use
 | Product Goal | Project deterministic interpretation results into fake-provider-compatible frame shapes without calling providers |
 | Worker Shape | Ariadne implementation |
 | In Scope | Result-to-frame projection, manifest frame-shape validation tests, docs/handover updates |
-| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Out Of Scope | Runtime dispatch, routes, UI, live providers, database writes, memory persistence, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG |
 | Verification | `py_compile`; interpretation/manifest frame-shape/route-contract guard cluster (97 passed); leakage lint; `git diff --check` |
 
 ## Sprint H42: Bernie Interpretation Harness Result Invariants

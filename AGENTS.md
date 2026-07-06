@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H43 Bernie Interpretation Harness frame-shape preparation integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Expand fake-provider-style frame scenarios or dispatch the harness to external reviewers |
+| **Current active track** | H44 reviewer-informed Bernie Interpretation Harness phrase/safety coverage integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue fake-provider-style frame scenarios or dispatch another bounded reviewer after the next harness increment |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -335,6 +335,19 @@ read-only labels become `read_request` frames requiring backend checks; meta,
 planned, unsafe, and unknown results become blocked `refusal` frames. Tests pass
 these frames through the existing manifest frame-shape and safety evaluators
 without calling providers.
+H44 follows external fixture review by making `expected_frame_kind` explicit in
+all Bernie interpretation harness fixture cases and adding
+`tests/fixtures/bernie_interpretation_harness/receptionist_phrase_actions.json`.
+The new cases cover everyday availability, check-in, cancellation, resize,
+move, create, and handoff phrasing while preventing generic "receptionist note"
+text from silently becoming `handoff`. The harness remains provider-free,
+route-free, DB-free, memory-free, and disconnected from H15/H-series material.
+H44 also incorporates external adversarial safety review: unsafe confirmation
+bypass phrases such as "no need for confirmation" and "skip confirmation",
+false-precondition phrases such as "pretend it is done" and "already confirmed",
+narrower slot-search matching, Unicode normalization/format-control stripping,
+and `refusal_reason_kind` on projected frames so handoff, planned, unsafe, and
+unknown refusals are distinguishable.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

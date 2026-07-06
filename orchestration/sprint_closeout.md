@@ -5065,3 +5065,35 @@ Result: `97 passed`; leakage lint safe; whitespace check clean.
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is richer fake-provider-style frame scenarios or external
 reviewer dispatch for the harness.
+
+---
+
+## Sprint H44 Closeout - Reviewer-Informed Interpretation Coverage
+
+Integrated outcome:
+
+- Added `expected_frame_kind` to every authored interpretation fixture case.
+- Added receptionist-phrase fixture coverage from external review for gaps/free
+  times/squeeze-in availability, short check-in phrasing, cancellation phrasing,
+  resize/move/create variants, and handoff ambiguity.
+- Folded adversarial safety review fixes into the harness:
+  broader confirmation-bypass refusal patterns, false-precondition refusals,
+  narrower slot-search matching, Unicode normalization plus format-control
+  stripping, and `refusal_reason_kind` on projected frames.
+- Added fixture/test coverage for compound planned-action phrases and generic
+  find/show wording that must not become slot search without availability cues.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `148 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is richer fake-provider-style frame scenarios or another
+bounded external review after the next harness increment.

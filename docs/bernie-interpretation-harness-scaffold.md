@@ -82,3 +82,28 @@ harness result to a fake-provider-compatible frame shape:
 
 Tests validate every authored fixture output through the existing manifest
 frame-shape and safety evaluators without making provider calls.
+
+## H44 Fixture-Driven Frame Expectations
+
+H44 makes `expected_frame_kind` part of every authored interpretation fixture
+case and adds receptionist-phrase coverage from external review:
+
+- Availability phrasing such as "gaps", "free times", and "squeeze them in".
+- Short check-in phrasing such as "patient is here" and "arrived at the desk".
+- Cancellation phrasing such as "patient cancelled" and "remove from the diary".
+- Resize/move/create phrasing such as "double appointment", "30 minutes",
+  "push back", "bring forward", and "put them in".
+- Handoff wording that avoids treating every "receptionist" mention as handoff.
+
+H44 also incorporates adversarial safety review fixes:
+
+- Broader confirmation-bypass refusal phrases such as "no need for
+  confirmation", "skip confirmation", and "auto-confirm".
+- False-precondition refusals such as "pretend it is done" and "already
+  confirmed".
+- Narrower slot-search matching so generic "find/show" phrasing does not
+  become availability search without an availability cue.
+- Unicode normalization and removal of common zero-width/directional formatting
+  controls before matching.
+- `refusal_reason_kind` on projected frames to distinguish meta handoff,
+  planned-not-implemented, unsafe, and unknown refusals.
