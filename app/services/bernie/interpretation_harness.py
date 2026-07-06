@@ -25,6 +25,7 @@ class InterpretationDispatch(str, Enum):
     route_read_only = "route_read_only"
     route_meta = "route_meta"
     refuse_planned_not_implemented = "refuse_planned_not_implemented"
+    refuse_unsafe_instruction = "refuse_unsafe_instruction"
     refuse_unknown_utterance = "refuse_unknown_utterance"
 
 
@@ -102,6 +103,14 @@ _UTTERANCE_RULES: tuple[_UtteranceRule, ...] = (
     ),
 )
 
+_UNSAFE_PATTERNS: tuple[re.Pattern[str], ...] = (
+    re.compile(r"\b(ignore|bypass|override) (the )?(rules|guardrails|confirmation)\b", re.I),
+    re.compile(r"\b(confirm endpoint|call .* endpoint|post .* /api)\b", re.I),
+    re.compile(r"\b(database|db|sql|raw write|write .* directly)\b", re.I),
+    re.compile(r"\b(use|call) (gemini|openai|anthropic|provider|llm)\b", re.I),
+    re.compile(r"\bwithout (staff )?confirmation\b", re.I),
+)
+
 
 def _dispatch_for_authority(authority: RouteAuthority) -> InterpretationDispatch:
     if authority is RouteAuthority.signed_confirm:
@@ -126,6 +135,15 @@ def interpret_receptionist_utterance(utterance: str) -> InterpretationResult:
             authority=None,
             dispatch=InterpretationDispatch.refuse_unknown_utterance,
             rationale="empty utterance",
+        )
+
+    if any(pattern.search(normalized) for pattern in _UNSAFE_PATTERNS):
+        return InterpretationResult(
+            utterance=utterance,
+            verb=None,
+            authority=None,
+            dispatch=InterpretationDispatch.refuse_unsafe_instruction,
+            rationale="unsafe instruction attempted to bypass harness boundaries",
         )
 
     for rule in _UTTERANCE_RULES:

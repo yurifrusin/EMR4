@@ -38,6 +38,21 @@ The harness does not:
 ## Verification
 
 `tests/test_bernie_interpretation_harness.py` loads
-`tests/fixtures/bernie_interpretation_harness/authored_utterance_actions.json`
-and checks the expected grammar verb, route authority, and dispatch for each
+all JSON fixtures under `tests/fixtures/bernie_interpretation_harness/` and
+checks the expected grammar verb, route authority, and dispatch for each
 synthetic utterance.
+
+## H41 Adversarial Coverage
+
+H41 adds `adversarial_utterance_actions.json` and the
+`refuse_unsafe_instruction` dispatch class. The harness refuses unsafe wording
+before grammar matching when an utterance attempts to:
+
+- Bypass guardrails or staff confirmation.
+- Call route endpoints directly.
+- Write directly to a database/raw mutation path.
+- Invoke a provider or LLM.
+
+Mixed planned-action phrases remain planned. For example, "check in ... and
+mark arrived" maps to `check_in` and dispatches
+`refuse_planned_not_implemented`, not to the implemented `status_change` path.

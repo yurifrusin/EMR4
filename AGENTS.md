@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H40 provider-free Bernie Interpretation Harness scaffold integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Expand the harness with adversarial synthetic utterance coverage while preserving no provider/route/DB/memory authority |
+| **Current active track** | H41 adversarial Bernie Interpretation Harness coverage integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Expand harness result invariants or begin fake-provider frame-shape preparation while preserving no provider/route/DB/memory authority |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -314,6 +314,14 @@ route-free, DB-free, memory-free, and does not read raw diary files, ignored
 local outputs, H-series profiles, H15 fixtures, RAG, or GraphRAG. Planned verbs
 such as `check_in`, `waiting_area_move`, and `link_patient` resolve but dispatch
 as `refuse_planned_not_implemented`.
+H41 extends that harness with a fail-closed `refuse_unsafe_instruction` dispatch
+and adversarial authored fixtures in
+`tests/fixtures/bernie_interpretation_harness/adversarial_utterance_actions.json`.
+Unsafe wording that tries to bypass guardrails/staff confirmation, call route
+endpoints, write directly to DB/raw mutation paths, or invoke providers/LLMs is
+refused before grammar matching. Mixed planned-action phrases stay planned, so
+"check in ... and mark arrived" does not fall through to implemented
+`status_change`.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

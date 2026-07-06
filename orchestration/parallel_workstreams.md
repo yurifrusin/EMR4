@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H41: Adversarial Bernie Interpretation Harness Coverage
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Make the provider-free interpretation harness fail closed on unsafe or boundary-bypassing receptionist utterances |
+| Worker Shape | Ariadne implementation |
+| In Scope | Unsafe-instruction dispatch, adversarial authored fixtures, harness tests/docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; leakage lint; interpretation/route-contract/action-grammar guard cluster (89 passed after static-scan correction); `git diff --check` |
+
 ## Sprint H40: Provider-Free Bernie Interpretation Harness Scaffold
 
 | Item | Value |
@@ -13,7 +24,7 @@ For the layer between long phases and tactical sprints, use
 | Product Goal | Start the Bernie Interpretation Harness with authored synthetic utterance-to-grammar mapping and no runtime authority |
 | Worker Shape | Ariadne implementation |
 | In Scope | Pure interpretation harness, authored synthetic fixture, tests, docs, handover updates |
-| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Out Of Scope | Runtime dispatch, routes, UI, providers, database writes, memory persistence, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG |
 | Verification | `py_compile`; interpretation/route-contract/action-grammar guard cluster (82 passed); leakage lint; `git diff --check` |
 
 ## Sprint H39: Planned Action Promotion Checklist

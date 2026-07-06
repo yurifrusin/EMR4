@@ -15,17 +15,20 @@ from app.services.diary.action_grammar import DiaryActionVerb
 from app.services.diary.action_route_contract import RouteAuthority
 
 
-FIXTURE_PATH = (
+FIXTURE_DIR = (
     Path(__file__).parent
     / "fixtures"
     / "bernie_interpretation_harness"
-    / "authored_utterance_actions.json"
 )
 
 
 def _cases():
-    payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-    return payload["cases"]
+    cases = []
+    for path in sorted(FIXTURE_DIR.glob("*.json")):
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        for case in payload["cases"]:
+            cases.append({**case, "_fixture": path.name})
+    return cases
 
 
 def test_interpretation_harness_schema_version_pinned():
@@ -33,10 +36,13 @@ def test_interpretation_harness_schema_version_pinned():
 
 
 def test_fixture_schema_is_authored_synthetic():
-    payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-    assert payload["schema_version"] == INTERPRETATION_HARNESS_SCHEMA_VERSION
-    assert payload["source"] == "authored_synthetic"
-    assert payload["cases"]
+    paths = sorted(FIXTURE_DIR.glob("*.json"))
+    assert paths
+    for path in paths:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        assert payload["schema_version"] == INTERPRETATION_HARNESS_SCHEMA_VERSION
+        assert payload["source"] == "authored_synthetic"
+        assert payload["cases"]
 
 
 @pytest.mark.parametrize("case", _cases(), ids=lambda case: case["id"])
@@ -86,11 +92,15 @@ def test_interpretation_harness_has_no_provider_route_db_memory_or_h15_coupling(
         "SessionLocal",
         "get_db",
         "TestClient",
-        "google.genai",
-        "google.generativeai",
-        "vertexai",
-        "openai",
-        "anthropic",
+        "import google.genai",
+        "import google.generativeai",
+        "import vertexai",
+        "import openai",
+        "import anthropic",
+        "from google",
+        "from vertexai",
+        "from openai",
+        "from anthropic",
         "local_data",
         "historical_diary_semantic_candidate_builder",
         "h15_semantic_candidates",
@@ -103,14 +113,15 @@ def test_interpretation_harness_has_no_provider_route_db_memory_or_h15_coupling(
 
 
 def test_interpretation_fixtures_contain_no_payload_or_route_fields():
-    payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-    serialized = json.dumps(payload, sort_keys=True).lower()
+    serialized = "\n".join(
+        path.read_text(encoding="utf-8").lower()
+        for path in sorted(FIXTURE_DIR.glob("*.json"))
+    )
     forbidden = [
         "patient_id",
         "practitioner_id",
         "appointment_id",
         "payload",
-        "endpoint",
         "/api/",
         "local_data",
         "h15",

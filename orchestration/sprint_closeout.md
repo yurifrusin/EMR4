@@ -4974,3 +4974,33 @@ Result: `82 passed`; leakage lint safe; whitespace check clean.
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is adversarial synthetic utterance coverage for the
 provider-free interpretation harness.
+
+---
+
+## Sprint H41 Closeout - Adversarial Interpretation Harness Coverage
+
+Integrated outcome:
+
+- Added `refuse_unsafe_instruction` dispatch to the provider-free Bernie
+  interpretation harness.
+- Added adversarial authored fixtures for provider/LLM injection, endpoint
+  spoofing, direct DB/raw-write wording, no-confirmation wording, and mixed
+  planned-action phrases.
+- Unsafe wording is refused before grammar matching.
+- Mixed planned-action phrases remain planned rather than falling through to
+  implemented mutating verbs.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_diary_action_route_contract.py tests\test_diary_action_grammar.py -q
+git diff --check
+```
+
+Result: `89 passed` after correcting the static provider-coupling scan to allow
+provider names inside refusal regexes; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is harness result invariants.
