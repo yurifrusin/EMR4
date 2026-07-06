@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H65 gate-derived interpretation readiness booleans integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | H66 should make interpretation result/frame helpers self-validating and tighten clarify-frame subtype invariants |
+| **Current active track** | H66 self-validating interpretation projection integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | H67 should derive forbidden report text from committed fixture utterances |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -491,6 +491,11 @@ runtime-gate scope in `scripts/bernie_interpretation_runtime_gate_check.py`; the
 combined readiness command now consumes those derived gate-status fields instead
 of standalone constants. Focused tests cover both the runtime-gate derivation and
 combined-readiness consumption. Runtime/provider/trove access remains blocked.
+H66 addresses H64-M3 and H64-L4 in
+`app/services/bernie/interpretation_harness.py`: projected-frame generation now
+self-validates both the input result and returned frame, and clarification frames
+must have exactly one active subtype (patient-context or reason-code). Focused
+tests reject mixed clarify frames and inconsistent projection inputs.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

@@ -280,7 +280,7 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
     assert_interpretation_result_consistency(result)
 
     if result.dispatch is InterpretationDispatch.route_to_confirm:
-        return {
+        return _assert_and_return_projected_frame({
             "frame_kind": "proposal",
             "proposed_action": result.verb.value if result.verb else None,
             "requires_staff_confirmation": True,
@@ -288,9 +288,9 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
             "interpretation_dispatch": result.dispatch.value,
             "refusal_reason_kind": None,
             "copy": "I can stage this diary proposal for staff review.",
-        }
+        })
     if result.dispatch is InterpretationDispatch.route_read_only:
-        return {
+        return _assert_and_return_projected_frame({
             "frame_kind": "read_request",
             "proposed_action": result.verb.value if result.verb else None,
             "requires_backend_check": True,
@@ -298,10 +298,10 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
             "interpretation_dispatch": result.dispatch.value,
             "refusal_reason_kind": None,
             "copy": "I can ask the backend to check the diary before showing options.",
-        }
+        })
     if result.dispatch is InterpretationDispatch.request_clarification:
         if result.clarification_kind == "patient_context":
-            return {
+            return _assert_and_return_projected_frame({
                 "frame_kind": "clarify",
                 "frame_type": "patient_booking_context",
                 "status": "ambiguous",
@@ -314,8 +314,8 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
                 "interpretation_dispatch": result.dispatch.value,
                 "refusal_reason_kind": None,
                 "copy": "Please choose the matching patient before I stage anything.",
-            }
-        return {
+            })
+        return _assert_and_return_projected_frame({
             "frame_kind": "clarify",
             "reason_code_options": [
                 "PATIENT_CANCELLED",
@@ -329,14 +329,14 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
             "interpretation_dispatch": result.dispatch.value,
             "refusal_reason_kind": None,
             "copy": "Please choose an allowed reason before I stage anything.",
-        }
+        })
     reason_kind = {
         InterpretationDispatch.route_meta: "meta_handoff",
         InterpretationDispatch.refuse_planned_not_implemented: "planned_not_implemented",
         InterpretationDispatch.refuse_unsafe_instruction: "unsafe_instruction",
         InterpretationDispatch.refuse_unknown_utterance: "unknown_utterance",
     }[result.dispatch]
-    return {
+    return _assert_and_return_projected_frame({
         "frame_kind": "refusal",
         "reason": result.rationale,
         "blocked": True,
@@ -345,7 +345,14 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
         "refusal_reason_kind": reason_kind,
         "refused_action": result.verb.value if result.verb else None,
         "copy": "I cannot complete that request from this harness.",
-    }
+    })
+
+
+def _assert_and_return_projected_frame(
+    frame: dict[str, object],
+) -> dict[str, object]:
+    assert_interpretation_frame_consistency(frame)
+    return frame
 
 
 def assert_interpretation_frame_consistency(frame: dict[str, object]) -> None:
@@ -401,7 +408,7 @@ def assert_interpretation_frame_consistency(frame: dict[str, object]) -> None:
             and frame.get("needs_selection") is True
             and frame.get("reason_code") is None
         )
-        assert has_patient_clarify or has_reason_clarify
+        assert has_patient_clarify != has_reason_clarify
     else:
         expected_reason_kind = {
             InterpretationDispatch.route_meta: "meta_handoff",

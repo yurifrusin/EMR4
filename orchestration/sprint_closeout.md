@@ -8,12 +8,43 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H65: Gate-Derived Interpretation Readiness Booleans |
-| Integrated through | Ariadne implementation of H64-M1 |
+| Batch | Sprint H66: Self-Validating Interpretation Projection |
+| Integrated through | Ariadne implementation of H64-M3/L4 |
 | Status | Integrated; focused verification passed |
 | Last updated | 2026-07-07 |
 
 ## What Changed
+
+- Updated `app\services\bernie\interpretation_harness.py` so
+  `interpretation_result_to_frame()` validates each input result and each
+  projected frame before returning.
+- Tightened clarification frame consistency so exactly one subtype is active:
+  patient-context clarification or reason-code clarification.
+- Added tests rejecting mixed clarify frames and inconsistent projection inputs.
+- Updated `docs\bernie-interpretation-harness-scaffold.md`, `AGENTS.md`,
+  `orchestration\parallel_workstreams.md`, and
+  `orchestration\integration_log.md`.
+- No runtime routes, UI, providers, database access, memory/RAG/GraphRAG,
+  H15/H-series runtime imports, raw trove reads, or ignored local-data reads
+  were added.
+
+## Verification
+
+- Compile check passed:
+  `.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py`.
+- Readiness CLI sample passed:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`.
+- Leakage lint passed:
+  `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- Focused pytest passed:
+  `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_interpretation_h64_review_artifact.py tests\test_bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_readiness_snapshot.py tests\test_bernie_interpretation_runtime_gate_check.py -q`
+  (`245 passed`; existing deprecation warnings only).
+- `git diff --check` passed with the known CRLF warning on
+  `orchestration/integration_log.md`.
+
+---
+
+## Previous Closeout
 
 - Updated `scripts\bernie_interpretation_runtime_gate_check.py` so runtime-gate
   status derives `runtime_or_provider_wiring_ready` and

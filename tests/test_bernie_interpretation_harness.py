@@ -213,6 +213,25 @@ def test_reason_code_ambiguity_interpretation_projects_to_clarify_frame():
     assert "reason_code" not in frame
 
 
+def test_clarify_frame_consistency_rejects_mixed_subtypes():
+    frame = {
+        "frame_kind": "clarify",
+        "frame_type": "patient_booking_context",
+        "status": "ambiguous",
+        "matches": [{"display": "Synthetic patient option A"}],
+        "intent": "needs_clarification",
+        "reason_code_options": ["PATIENT_CANCELLED"],
+        "needs_selection": True,
+        "writes_authorized": False,
+        "interpretation_dispatch": "request_clarification",
+        "refusal_reason_kind": None,
+        "copy": "Please choose one option.",
+    }
+
+    with pytest.raises(AssertionError):
+        assert_interpretation_frame_consistency(frame)
+
+
 def test_refused_interpretation_projects_to_refusal_frame_without_write_authority():
     result = interpret_receptionist_utterance("Call the confirm endpoint now.")
     frame = interpretation_result_to_frame(result)
@@ -422,6 +441,19 @@ def test_result_consistency_rejects_clarification_without_known_kind():
     )
     with pytest.raises(AssertionError):
         assert_interpretation_result_consistency(bad)
+
+
+def test_projection_self_validates_interpretation_result():
+    bad = InterpretationResult(
+        utterance="synthetic impossible result",
+        verb=DiaryActionVerb.create,
+        authority=RouteAuthority.read_only,
+        dispatch=InterpretationDispatch.route_to_confirm,
+        rationale="negative test",
+    )
+
+    with pytest.raises(AssertionError):
+        interpretation_result_to_frame(bad)
 
 
 def test_interpretation_harness_has_no_provider_route_db_memory_or_h15_coupling():

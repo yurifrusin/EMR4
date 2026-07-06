@@ -435,3 +435,13 @@ blocked values now come from the gate scope. Focused tests prove the runtime-gat
 status derives true values from drifted scope when the gate assertion is
 intentionally monkeypatched away, and that combined readiness consumes the
 runtime-gate status fields.
+
+## H66 Self-Validating Projection Frames
+
+H66 addresses H64-M3 and H64-L4. `interpretation_result_to_frame()` now validates
+each result before projection and each projected frame before returning it.
+
+Clarification frame invariants now require exactly one active subtype:
+patient-context clarification or reason-code clarification, never neither and
+never both. Focused tests cover mixed clarify-frame rejection and projection
+self-validation of an inconsistent result.
