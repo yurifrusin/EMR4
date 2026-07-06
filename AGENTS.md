@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H55 Bernie Interpretation Harness combined readiness check integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H56 Bernie Interpretation Harness readiness release-gate hook integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -422,6 +422,14 @@ It reports corpus counts and gate status while explicitly setting
 `runtime_or_provider_wiring_ready: false` and `raw_trove_access_ready: false`.
 This is a "still boxed in" readiness check, not permission to wire providers,
 routes, runtime memory, or historical diary material.
+H56 hooks that readiness command into `orchestration/bernie_release_gates.md`.
+Before any sprint proposes interpretation-harness runtime route wiring, provider
+prompt/dry-run wiring, memory/RAG/GraphRAG use, H15/H-series runtime imports, or
+historical diary material access, Ariadne must run
+`.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`.
+Expected current values are `runtime_or_provider_wiring_ready=false`,
+`raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`; any change
+or command failure requires a sprint-engine pause and explicit review.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

@@ -5458,3 +5458,39 @@ whitespace check clean apart from the known CRLF notice on
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is bounded readiness/gate hardening before
 runtime/provider wiring.
+
+---
+
+## Sprint H56 Closeout - Readiness Release Gate
+
+Integrated outcome:
+
+- Added a provider-free interpretation harness gate section to
+  `orchestration/bernie_release_gates.md`.
+- The release gate requires
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
+  before any sprint proposes runtime route wiring, provider prompt/dry-run
+  wiring, memory/RAG/GraphRAG use, H15/H-series runtime imports, or historical
+  diary material access from the interpretation harness.
+- Expected current values remain `runtime_or_provider_wiring_ready=false`,
+  `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`.
+- A changed value or failing readiness command requires sprint-engine pause and
+  explicit review.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_readiness_release_gate.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_readiness_release_gate.py tests\test_bernie_interpretation_runtime_gate.py tests\test_bernie_interpretation_runtime_gate_check.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `284 passed`; readiness CLI sample succeeded; leakage lint safe;
+whitespace check clean apart from the known CRLF notice on
+`orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded readiness/gate hardening before runtime/provider
+wiring.

@@ -49,6 +49,28 @@ write authorities; manifest literacy is an interpretation aid only.
   calls to the intended backend. If the browser/API path is intercepted, call it
   route-intercepted even when the UI is rendered in a real browser.
 
+## Provider-Free Interpretation Harness Gate
+
+The provider-free Bernie Interpretation Harness is not runtime or provider
+readiness evidence by itself. It is an authored synthetic contract surface for
+mapping small receptionist utterance fixtures to native Diary action grammar,
+projected fake-provider-style frames, safe aggregate reports, and blocked
+runtime-gate status.
+
+Before any sprint proposes runtime route wiring, provider prompt wiring,
+provider dry-run wiring, memory/RAG/GraphRAG use, H15/H-series runtime imports,
+or historical diary material access from the interpretation harness, Ariadne
+must run and record:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+```
+
+The expected current result is `runtime_or_provider_wiring_ready=false`,
+`raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`. If those
+values change, or if the readiness command fails, the sprint engine must pause
+for explicit review instead of continuing automatically.
+
 ## Closeout Rules
 
 - Basic Bernie happy paths are blocking release checks, not residual user review.

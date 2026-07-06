@@ -290,3 +290,18 @@ The command emits only aggregate status:
 This is a "still boxed in" check. It proves the harness/report/gate surface is
 coherent; it does not approve runtime routes, provider prompts, database access,
 memory, RAG/GraphRAG, H15/H-series runtime imports, or raw trove access.
+
+## H56 Release-Gate Hook
+
+H56 adds the readiness command to `orchestration/bernie_release_gates.md`.
+Before interpretation harness work can propose runtime route wiring, provider
+prompt/dry-run wiring, memory/RAG/GraphRAG use, H15/H-series runtime imports, or
+historical diary material access, Ariadne must run:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+```
+
+The expected current values are `runtime_or_provider_wiring_ready=false`,
+`raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`. A changed
+value or failing command requires a sprint-engine pause and explicit review.
