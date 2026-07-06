@@ -919,3 +919,238 @@ def test_interpret_booking_context_no_db_writes(
 
     assert db.query(Appointment).count() == appt_before
     assert db.query(AppointmentAuditLog).count() == audit_before
+
+
+def test_live_provider_audit_metadata_excludes_all_forbidden_keys(
+    client, db, gp_user, practitioner, patient, monkeypatch
+):
+    """Persisted Access AI audit metadata must not contain any forbidden key fragments
+    (raw, prompt, transcript, patient_name, medicare, ihi, dob, etc.) or instruction text.
+
+    This is a stronger complement to the existing "prompt not in metadata" assertion:
+    it iterates all forbidden fragments and checks every metadata key and string value.
+    """
+    from app.services.ai.audit_events import _FORBIDDEN_METADATA_KEY_FRAGMENTS
+
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_live_temperature", 0.0)
+    provider = MockLiveProvider({
+        "command_candidate": {
+            "practitioner_id": str(practitioner.id),
+            "patient_id": str(patient.id),
+            "date_from": "today",
+            "duration_minutes": 15,
+            "earliest_time": "09:00",
+            "latest_time": "11:00",
+        },
+        "confidence": 0.82,
+        "summary": "Structured request for a GP appointment.",
+        "missing_fields": [],
+        "safety_flags": [],
+        "clarifying_question": None,
+    })
+    interpreter_service.set_live_provider_factory(lambda: provider)
+    token = make_token(gp_user)
+    instruction = "Patient asks for a short GP booking today before lunch"
+
+    try:
+        resp = _post_interpret(client, token, instruction)
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+    assert resp.status_code == 200
+    audit_rows = db.query(AccessAiAuditLog).all()
+    assert len(audit_rows) == 1
+
+    # Check every metadata key against the forbidden fragments list
+    for row in audit_rows:
+        for key in row.metadata_json:
+            normalized = key.lower()
+            for fragment in _FORBIDDEN_METADATA_KEY_FRAGMENTS:
+                assert fragment not in normalized, (
+                    f"audit metadata key '{key}' contains forbidden fragment '{fragment}': "
+                    f"metadata={row.metadata_json}"
+                )
+        # Also verify no string metadata value contains the raw instruction text
+        for key, value in row.metadata_json.items():
+            if isinstance(value, str):
+                assert instruction.lower() not in value.lower(), (
+                    f"audit metadata value for '{key}' contains raw instruction text: {value}"
+                )
+
+
+def test_route_does_not_import_access_ai_service_directly():
+    """Route must go through the interpreter service's Access AI choke point,
+    not import AccessAiService directly for the live provider path.
+    """
+    route_source = inspect.getsource(
+        appointments_router.interpret_bernie_booking_instruction
+    )
+    route_lines = route_source.splitlines()
+    import_lines = [
+        line for line in route_lines
+        if "import" in line and "AccessAiService" in line
+    ]
+    assert not import_lines, (
+        "Route must not import AccessAiService directly: "
+        f"found {import_lines}"
+    )
+    # The route must go through get_booking_instruction_interpreter
+    assert "get_booking_instruction_interpreter" in route_source
+    # And must not call AccessAiService directly in the function body
+    assert "AccessAiService(" not in route_source.replace(" ", "")
+    # Service module does import and use AccessAiService
+    service_source = inspect.getsource(interpreter_service)
+    assert "AccessAiService" in service_source
+
+
+def test_live_provider_fallback_provider_exception_no_writes(
+    client, db, gp_user, practitioner, monkeypatch
+):
+    """When the live GeminiVertex provider call fails and fallback_to_deterministic
+    is True, the route must:
+    - return a deterministic_fallback result (no hard error)
+    - NOT write Appointment or AppointmentAuditLog rows
+    - persist Access AI audit events from the failed provider attempt
+    """
+    class _RaisingProvider:
+        """Mock AiProvider that raises on every generate_json call."""
+        def __init__(self):
+            self.calls = []
+
+        def generate_json(self, contents, temperature):
+            self.calls.append((contents, temperature))
+            raise RuntimeError("simulated provider failure for test")
+
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_fallback_to_deterministic", True)
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_live_temperature", 0.0)
+
+    raising = _RaisingProvider()
+    interpreter_service.set_live_provider_factory(lambda: raising)
+    token = make_token(gp_user)
+
+    appointment_before = db.query(Appointment).count()
+    audit_before = db.query(AppointmentAuditLog).count()
+    access_ai_audit_before = db.query(AccessAiAuditLog).count()
+    access_ai_audit_ids_before = {
+        row.id for row in db.query(AccessAiAuditLog).all()
+    }
+
+    try:
+        resp = _post_interpret(
+            client,
+            token,
+            f"practitioner_id:{practitioner.id} date_from:today duration:15",
+        )
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+    # Response shape: deterministic fallback succeeded
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["provider_metadata"]["mode"] == "deterministic_fallback"
+    assert data["provider_metadata"]["live_provider"] is False
+    assert data["safe"] is True
+    assert data["result"] == "interpreted"
+    # The provider was called exactly once
+    assert len(raising.calls) == 1
+
+    # No appointment or appointment audit writes
+    assert db.query(Appointment).count() == appointment_before
+    assert db.query(AppointmentAuditLog).count() == audit_before
+
+    # Access AI audit events were persisted from the failed provider attempt.
+    # AccessAiService.invoke() emits an allowed event (pre-approval) then catches
+    # the exception and emits a failed event -> 2 audit rows.
+    assert db.query(AccessAiAuditLog).count() == access_ai_audit_before + 2
+    new_audit_rows = [
+        row for row in db.query(AccessAiAuditLog).all()
+        if row.id not in access_ai_audit_ids_before
+    ]
+    event_types = sorted(row.event_type for row in new_audit_rows)
+    assert event_types == ["ai.invocation.allowed", "ai.invocation.failed"]
+
+    # The failed event carries the exception class name as reason_code
+    failed_rows = [
+        row for row in new_audit_rows
+        if row.event_type == "ai.invocation.failed"
+    ]
+    assert len(failed_rows) == 1
+    assert failed_rows[0].reason_code == "RuntimeError"
+    # No raw/prompt forbidden keys in failed event metadata
+    for row in new_audit_rows:
+        for key in (row.metadata_json or {}):
+            assert "raw" not in key.lower()
+            assert "prompt" not in key.lower()
+            assert "instruction" not in key.lower()
+
+
+def test_disabled_and_fake_providers_never_emit_access_ai_audit_events():
+    """Disabled and fake providers must never populate the access_ai_audit_events
+    list, even when audit_events is passed as a mutable list. This proves the
+    disabled/fake paths are structurally incapable of emitting Access AI audit rows.
+
+    Unlike the existing route-level count tests, this also unit-verifies that the
+    interpret method signature accepts and ignores the audit_events parameter.
+    """
+    from app.services.bernie_booking_interpreter import (
+        DisabledBookingInstructionInterpreter,
+        FakeBookingInstructionInterpreter,
+    )
+    from app.schemas.appointments import BernieBookingInstructionInterpretIn
+
+    body = BernieBookingInstructionInterpretIn(
+        instruction="practitioner_id:00000000-0000-0000-0000-000000000000 today",
+        reference_date=date_type(2026, 6, 22),
+    )
+
+    for label, interpreter_cls in [
+        ("disabled", DisabledBookingInstructionInterpreter),
+        ("fake", FakeBookingInstructionInterpreter),
+    ]:
+        audit_events = []
+        interpreter = interpreter_cls()
+        result = interpreter.interpret(body, audit_events=audit_events)
+        assert result is not None
+        assert audit_events == [], (
+            f"{label} interpreter populated audit_events: {audit_events}"
+        )
+
+
+def test_live_provider_fallback_does_not_write_appointment_audit(
+    client, db, gp_user, practitioner, monkeypatch
+):
+    """Repeat the fallback no-write guarantee specifically for AppointmentAuditLog.
+    The fallback path must never write an appointment audit row even when the
+    live provider encountered a failure.
+    """
+    class _RaisingProvider:
+        def __init__(self):
+            self.calls = []
+        def generate_json(self, contents, temperature):
+            self.calls.append((contents, temperature))
+            raise RuntimeError("provider fail")
+
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "gemini_vertex")
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_fallback_to_deterministic", True)
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_live_temperature", 0.0)
+
+    raising = _RaisingProvider()
+    interpreter_service.set_live_provider_factory(lambda: raising)
+    token = make_token(gp_user)
+    appointment_audit_before = db.query(AppointmentAuditLog).count()
+
+    try:
+        resp = _post_interpret(
+            client,
+            token,
+            f"practitioner_id:{practitioner.id} date_from:today duration:15",
+        )
+    finally:
+        interpreter_service.set_live_provider_factory(None)
+
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["provider_metadata"]["mode"] == "deterministic_fallback"
+    assert db.query(AppointmentAuditLog).count() == appointment_audit_before
