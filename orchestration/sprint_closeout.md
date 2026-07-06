@@ -8,6 +8,61 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H18: Historical Diary Trove Neutral Derived Graph |
+| Integrated through | Ariadne local-only graph export tooling; no external workers used because scope was privacy-sensitive and narrow |
+| Status | Verified locally; push/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `scripts\historical_diary_neutral_graph_export.py`, a safe graph export prototype.
+- Added `tests\test_historical_diary_neutral_graph_export.py`.
+- Extended `scripts\historical_diary_output_safety.py` with graph-neutral keys only.
+- Produced ignored `neutral_derived_graph_h18.json` from the H17 trend output.
+- Added `docs\historical-diary-trove-neutral-derived-graph.md`.
+- Updated `AGENTS.md` with H18 state and the next graph-enrichment recommendation.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- H18 neutral derived graph output passed `scripts\historical_diary_output_safety.py`.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_neutral_graph_export.py scripts\historical_diary_output_safety.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_neutral_graph_export.py tests\test_historical_diary_output_safety.py -q` (11 passed; existing warnings only).
+
+## Local Result
+
+- Derived graph contains 3 root nodes, 4 event-class nodes, and 8 counted root-to-event-class edges.
+- Represented transitions: 297.
+- The graph is aggregate-only and semantic-label-free.
+- Interpretation: the trove now has a safe first GraphRAG-shaped substrate, but not appointment-level memory.
+
+## Bernie Memory Result
+
+- The 58k-file trove should not be raw fine-tuning material.
+- RAG is useful over approved docs, policies, aggregate stats, and de-identified/synthetic examples.
+- GraphRAG is likely the best future fit once we have a derived neutral transition graph.
+- Bernie can use derived memory to clarify and propose; the deterministic diary backend remains the write authority.
+
+## Recommended User Review
+
+No required manual review before continuing neutral work. Yuri review is required only if a future sprint proposes approving semantic labelling or using raw/de-identified examples for provider-visible prompts.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No manual diary-content review is required because H16 commits only safe aggregate documentation and handover notes.
+
+## Known Follow-Up
+
+- H19 should enrich the neutral graph with derived delta-bucket nodes and edges.
+- Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
+
+## Previous Closeout - Sprint H17
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H17: Historical Diary Trove Cross-Pilot Event Trends |
 | Integrated through | Ariadne local-only safe comparison tooling; no external workers used because scope was privacy-sensitive and narrow |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green at `12ed94d0` |
@@ -51,7 +106,7 @@ No required manual review before continuing neutral work. Yuri review is require
 - No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
 - No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
 - No database migration or test DB reset is required.
-- No manual diary-content review is required because H16 commits only safe aggregate documentation and handover notes.
+- No manual diary-content review is required because H17 commits only safe aggregate documentation, tooling, tests, and handover notes.
 
 ## Known Follow-Up
 
