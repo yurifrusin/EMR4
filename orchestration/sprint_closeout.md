@@ -4943,3 +4943,34 @@ Result: `71 passed`; leakage lint safe; whitespace check clean.
 
 Sprint engine state: continuing. No user intervention is required; Yuri approved
 continuing past H39 into Bernie Interpretation Harness sprints.
+
+---
+
+## Sprint H40 Closeout - Provider-Free Bernie Interpretation Harness
+
+Integrated outcome:
+
+- Added `app/services/bernie/interpretation_harness.py`, a deterministic
+  provider-free scaffold mapping authored synthetic receptionist utterances to
+  native `DiaryActionVerb` decisions.
+- Added authored synthetic fixtures under
+  `tests/fixtures/bernie_interpretation_harness/`.
+- Added tests proving expected dispatch labels for read-only, signed-confirm,
+  meta, planned-not-implemented, and unknown utterances.
+- Guarded the harness against provider, route, DB, memory, H15, H-series, and
+  local diary coupling.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_diary_action_route_contract.py tests\test_diary_action_grammar.py -q
+git diff --check
+```
+
+Result: `82 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is adversarial synthetic utterance coverage for the
+provider-free interpretation harness.

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H39 planned action promotion checklist integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Proceed into Bernie Interpretation Harness sprints as approved by Yuri |
+| **Current active track** | H40 provider-free Bernie Interpretation Harness scaffold integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Expand the harness with adversarial synthetic utterance coverage while preserving no provider/route/DB/memory authority |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -303,6 +303,17 @@ policy, UI affordance, and regression tests. The verbs remain
 route authority until all gates are satisfied. Yuri has approved continuing
 past H39 into Bernie Interpretation Harness sprints without pausing unless
 intervention is required.
+H40 begins the Bernie Interpretation Harness track with
+`app/services/bernie/interpretation_harness.py`,
+`tests/test_bernie_interpretation_harness.py`,
+`tests/fixtures/bernie_interpretation_harness/authored_utterance_actions.json`,
+and `docs/bernie-interpretation-harness-scaffold.md`. The harness maps
+authored synthetic receptionist utterances to native `DiaryActionVerb`
+decisions, then labels them using H37 route authority. It is provider-free,
+route-free, DB-free, memory-free, and does not read raw diary files, ignored
+local outputs, H-series profiles, H15 fixtures, RAG, or GraphRAG. Planned verbs
+such as `check_in`, `waiting_area_move`, and `link_patient` resolve but dispatch
+as `refuse_planned_not_implemented`.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

@@ -1,0 +1,90 @@
+{
+  "schema_version": "bernie.interpretation_harness.v1",
+  "source": "authored_synthetic",
+  "cases": [
+    {
+      "id": "read_only_slot_search",
+      "utterance": "Find an available appointment slot tomorrow morning.",
+      "expected_verb": "slot_search",
+      "expected_dispatch": "route_read_only",
+      "expected_authority": "read_only"
+    },
+    {
+      "id": "read_only_schedule_explanation",
+      "utterance": "Explain why the schedule pattern looks unusual.",
+      "expected_verb": "explain_schedule",
+      "expected_dispatch": "route_read_only",
+      "expected_authority": "read_only"
+    },
+    {
+      "id": "confirm_create",
+      "utterance": "Book an appointment in the afternoon.",
+      "expected_verb": "create",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm"
+    },
+    {
+      "id": "confirm_move",
+      "utterance": "Move the appointment to a later time.",
+      "expected_verb": "move",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm"
+    },
+    {
+      "id": "confirm_resize",
+      "utterance": "Make the appointment longer.",
+      "expected_verb": "resize",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm"
+    },
+    {
+      "id": "confirm_cancel",
+      "utterance": "Cancel the booking.",
+      "expected_verb": "cancel",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm"
+    },
+    {
+      "id": "confirm_status",
+      "utterance": "Mark the appointment arrived.",
+      "expected_verb": "status_change",
+      "expected_dispatch": "route_to_confirm",
+      "expected_authority": "signed_confirm"
+    },
+    {
+      "id": "planned_check_in",
+      "utterance": "Check in the patient at reception.",
+      "expected_verb": "check_in",
+      "expected_dispatch": "refuse_planned_not_implemented",
+      "expected_authority": "planned_not_implemented"
+    },
+    {
+      "id": "planned_waiting_area",
+      "utterance": "Move the patient to the waiting area.",
+      "expected_verb": "waiting_area_move",
+      "expected_dispatch": "refuse_planned_not_implemented",
+      "expected_authority": "planned_not_implemented"
+    },
+    {
+      "id": "planned_link_patient",
+      "utterance": "Link patient to the appointment.",
+      "expected_verb": "link_patient",
+      "expected_dispatch": "refuse_planned_not_implemented",
+      "expected_authority": "planned_not_implemented"
+    },
+    {
+      "id": "meta_handoff",
+      "utterance": "Hand off to receptionist for manual review.",
+      "expected_verb": "handoff",
+      "expected_dispatch": "route_meta",
+      "expected_authority": "meta"
+    },
+    {
+      "id": "unknown",
+      "utterance": "Please sort out the vague thing.",
+      "expected_verb": null,
+      "expected_dispatch": "refuse_unknown_utterance",
+      "expected_authority": null
+    }
+  ]
+}

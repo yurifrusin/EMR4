@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H40: Provider-Free Bernie Interpretation Harness Scaffold
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Start the Bernie Interpretation Harness with authored synthetic utterance-to-grammar mapping and no runtime authority |
+| Worker Shape | Ariadne implementation |
+| In Scope | Pure interpretation harness, authored synthetic fixture, tests, docs, handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; interpretation/route-contract/action-grammar guard cluster (82 passed); leakage lint; `git diff --check` |
+
 ## Sprint H39: Planned Action Promotion Checklist
 
 | Item | Value |
@@ -13,7 +24,7 @@ For the layer between long phases and tactical sprints, use
 | Product Goal | Define the gates required before planned native Diary grammar verbs can become executable |
 | Worker Shape | Ariadne implementation |
 | In Scope | Static promotion checklist, tests, docs, handover updates |
-| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Out Of Scope | Runtime dispatch, routes, UI, providers, database writes, memory persistence, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG |
 | Verification | `py_compile`; planned-action/route-contract/action-grammar guard cluster (71 passed); leakage lint; `git diff --check` |
 
 ## Sprint H38: Read-Only Vs Mutating Route Boundary Tests
