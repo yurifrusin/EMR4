@@ -5097,3 +5097,32 @@ Result: `148 passed`; leakage lint safe; whitespace check clean.
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is richer fake-provider-style frame scenarios or another
 bounded external review after the next harness increment.
+
+---
+
+## Sprint H45 Closeout - Projected Frame Invariants
+
+Integrated outcome:
+
+- Added `assert_interpretation_frame_consistency()` to the provider-free Bernie
+  interpretation harness.
+- Every projected frame must keep `writes_authorized=false`.
+- Confirm dispatch must project to a staff-confirmation `proposal` frame.
+- Read-only dispatch must project to a backend-check `read_request` frame.
+- Refusal frames must carry the expected `refusal_reason_kind`; unsafe/unknown
+  refusals must not carry `refused_action`.
+- Added negative tests for plausible drifted frames that the harness must reject.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `152 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is richer fake-provider-style frame scenarios.

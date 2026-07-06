@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H44 reviewer-informed Bernie Interpretation Harness phrase/safety coverage integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H45 Bernie Interpretation Harness projected frame invariants integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue fake-provider-style frame scenarios or dispatch another bounded reviewer after the next harness increment |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -348,6 +348,12 @@ false-precondition phrases such as "pretend it is done" and "already confirmed",
 narrower slot-search matching, Unicode normalization/format-control stripping,
 and `refusal_reason_kind` on projected frames so handoff, planned, unsafe, and
 unknown refusals are distinguishable.
+H45 adds `assert_interpretation_frame_consistency()` to the provider-free Bernie
+interpretation harness. This harness-local guard sits on top of the broader
+manifest frame validator and enforces dispatch/frame invariants: no projected
+frame authorizes writes, confirm dispatch projects only to staff-confirmation
+proposal frames, read-only dispatch projects only to backend-check read requests,
+and refusal frames carry the correct refusal reason kind.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

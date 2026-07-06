@@ -107,3 +107,18 @@ H44 also incorporates adversarial safety review fixes:
   controls before matching.
 - `refusal_reason_kind` on projected frames to distinguish meta handoff,
   planned-not-implemented, unsafe, and unknown refusals.
+
+## H45 Projected Frame Invariants
+
+H45 adds `assert_interpretation_frame_consistency()`, a harness-local guard on
+top of the broader manifest frame validator. It checks that:
+
+- Every projected frame has `writes_authorized: false`.
+- `route_to_confirm` frames are `proposal` frames with staff confirmation.
+- `route_read_only` frames are `read_request` frames with backend checks.
+- Refusal frames carry the expected `refusal_reason_kind`.
+- Unsafe and unknown refusals do not carry `refused_action`.
+
+This is deliberately narrower than the global manifest validator: it protects
+the interpretation harness's own dispatch/frame contract before any future
+fake-provider layer consumes it.

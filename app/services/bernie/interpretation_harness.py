@@ -272,10 +272,51 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
     }
 
 
+def assert_interpretation_frame_consistency(frame: dict[str, object]) -> None:
+    """Assert one projected fake-provider frame keeps interpretation invariants."""
+
+    dispatch_value = frame.get("interpretation_dispatch")
+    assert isinstance(dispatch_value, str)
+    dispatch = InterpretationDispatch(dispatch_value)
+    frame_kind = frame.get("frame_kind")
+
+    assert frame.get("writes_authorized") is False
+
+    if dispatch is InterpretationDispatch.route_to_confirm:
+        assert frame_kind == "proposal"
+        assert frame.get("requires_staff_confirmation") is True
+        assert frame.get("refusal_reason_kind") is None
+        assert frame.get("refused_action") is None
+        assert isinstance(frame.get("proposed_action"), str)
+    elif dispatch is InterpretationDispatch.route_read_only:
+        assert frame_kind == "read_request"
+        assert frame.get("requires_backend_check") is True
+        assert frame.get("refusal_reason_kind") is None
+        assert frame.get("refused_action") is None
+        assert isinstance(frame.get("proposed_action"), str)
+    else:
+        expected_reason_kind = {
+            InterpretationDispatch.route_meta: "meta_handoff",
+            InterpretationDispatch.refuse_planned_not_implemented: "planned_not_implemented",
+            InterpretationDispatch.refuse_unsafe_instruction: "unsafe_instruction",
+            InterpretationDispatch.refuse_unknown_utterance: "unknown_utterance",
+        }[dispatch]
+        assert frame_kind == "refusal"
+        assert frame.get("blocked") is True
+        assert frame.get("refusal_reason_kind") == expected_reason_kind
+        assert isinstance(frame.get("reason"), str)
+        if dispatch in {
+            InterpretationDispatch.refuse_unsafe_instruction,
+            InterpretationDispatch.refuse_unknown_utterance,
+        }:
+            assert frame.get("refused_action") is None
+
+
 __all__ = [
     "INTERPRETATION_HARNESS_SCHEMA_VERSION",
     "InterpretationDispatch",
     "InterpretationResult",
+    "assert_interpretation_frame_consistency",
     "assert_interpretation_result_consistency",
     "interpret_receptionist_utterance",
     "interpretation_result_to_frame",

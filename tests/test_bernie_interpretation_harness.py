@@ -10,6 +10,7 @@ from app.services.bernie.interpretation_harness import (
     INTERPRETATION_HARNESS_SCHEMA_VERSION,
     InterpretationDispatch,
     InterpretationResult,
+    assert_interpretation_frame_consistency,
     assert_interpretation_result_consistency,
     interpret_receptionist_utterance,
     interpretation_result_to_frame,
@@ -93,6 +94,7 @@ def test_interpretation_results_project_to_valid_fake_provider_frame_shapes(case
     assert frame.get("refusal_reason_kind") == _expected_refusal_reason_kind(
         case["expected_dispatch"]
     )
+    assert_interpretation_frame_consistency(frame)
     assert validate_response_frame_shape(frame) == ()
     eval_result = evaluate_manifest_response(frame)
     assert eval_result.safe is True
@@ -127,6 +129,50 @@ def test_refused_interpretation_projects_to_refusal_frame_without_write_authorit
     assert frame["blocked"] is True
     assert frame["writes_authorized"] is False
     assert frame["refused_action"] is None
+
+
+@pytest.mark.parametrize(
+    "bad_frame",
+    [
+        {
+            "frame_kind": "proposal",
+            "proposed_action": "create",
+            "requires_staff_confirmation": True,
+            "writes_authorized": True,
+            "interpretation_dispatch": "route_to_confirm",
+            "refusal_reason_kind": None,
+        },
+        {
+            "frame_kind": "read_request",
+            "proposed_action": "slot_search",
+            "requires_backend_check": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": "route_to_confirm",
+            "refusal_reason_kind": None,
+        },
+        {
+            "frame_kind": "refusal",
+            "reason": "planned action",
+            "blocked": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": "refuse_planned_not_implemented",
+            "refusal_reason_kind": "unsafe_instruction",
+            "refused_action": "check_in",
+        },
+        {
+            "frame_kind": "refusal",
+            "reason": "unsafe",
+            "blocked": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": "refuse_unsafe_instruction",
+            "refusal_reason_kind": "unsafe_instruction",
+            "refused_action": "create",
+        },
+    ],
+)
+def test_interpretation_frame_consistency_rejects_drifted_projected_frames(bad_frame):
+    with pytest.raises(AssertionError):
+        assert_interpretation_frame_consistency(bad_frame)
 
 
 def test_planned_actions_refuse_rather_than_route_to_confirm():
