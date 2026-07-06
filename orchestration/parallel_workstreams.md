@@ -176,6 +176,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 111 broader static route/config drift guard over Bernie interpreter live-provider entry points and fake/disabled route behavior |
 | Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 111: Provider Alias Drift Guard
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Remove duplicated live-provider alias vocabulary between settings/startup gate and Bernie interpreter factory |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI `1.0.16` available; DeepSeek Flash bridge available |
+| Ariadne Lane | Updated `get_booking_instruction_interpreter()` to use `LIVE_BERNIE_INTERPRETER_PROVIDERS` and added route/config drift tests |
+| DeepSeek Lane | Reviewed the diff as non-blocking; noted future multi-provider registry and textual route-guard residual risks |
+| Verification | `py_compile`; focused provider/interpreter pytest (`40 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 112 provider-boundary audit/readiness invariant for future multi-provider growth, still blocked/default-disabled and no live calls |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

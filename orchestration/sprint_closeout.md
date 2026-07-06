@@ -8,10 +8,47 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 110 Provider-Gate Startup Guard |
-| Integrated through | Ariadne implementation with DeepSeek Flash review and alias hardening |
+| Batch | Sprint 111 Provider Alias Drift Guard |
+| Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 111 What Changed
+
+- Updated `get_booking_instruction_interpreter()` so live Bernie provider
+  aliases are resolved through `LIVE_BERNIE_INTERPRETER_PROVIDERS` from
+  `app/config.py` instead of a duplicated inline set.
+- Extended `tests/test_bernie_provider_runtime_gate.py` so every live alias
+  resolves to `GeminiVertexBookingInstructionInterpreter`, while `fake`,
+  `disabled`, and unknown provider names remain local/disabled.
+- Added a static route guard proving
+  `interpret_bernie_booking_instruction()` obtains its provider through
+  `settings.bernie_booking_interpreter_provider` plus
+  `get_booking_instruction_interpreter()` and does not hardcode live provider
+  names or the live provider class.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Residual risks are future-facing:
+  textual source guards may need refactoring if the route wrapper changes, and
+  a future second live provider should introduce a richer provider registry.
+
+## Sprint 111 Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\services\bernie_booking_interpreter.py tests\test_bernie_provider_runtime_gate.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_provider_runtime_gate.py tests/test_bernie_interpret_booking_instruction.py -q`
+  (`40 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- app/services/bernie_booking_interpreter.py tests/test_bernie_provider_runtime_gate.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 112:
+add a provider-boundary audit/readiness invariant for future multi-provider
+growth, still blocked/default-disabled and without live calls or route behavior
+changes.
+
+---
+
+## Previous Closeout - Sprint 110
 
 ## Sprint 110 What Changed
 

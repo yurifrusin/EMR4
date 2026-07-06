@@ -1,14 +1,21 @@
 import json
+import inspect
 from pathlib import Path
 
 import pytest
 
+from app.routers import appointments
 from app.config import (
     LIVE_BERNIE_INTERPRETER_PROVIDERS,
     Settings,
     assert_bernie_provider_allowed_by_runtime_gate,
 )
-from app.services.bernie_booking_interpreter import GeminiVertexBookingInstructionInterpreter
+from app.services.bernie_booking_interpreter import (
+    DisabledBookingInstructionInterpreter,
+    FakeBookingInstructionInterpreter,
+    GeminiVertexBookingInstructionInterpreter,
+    get_booking_instruction_interpreter,
+)
 
 
 def _write_gate(path: Path, *, decision: str = "blocked", provider_scope: bool = False):
@@ -61,6 +68,32 @@ def test_live_bernie_provider_allowlist_tracks_interpreter_aliases():
         "vertex_gemini",
     }
     assert GeminiVertexBookingInstructionInterpreter.metadata.provider == "gemini_vertex"
+
+
+def test_interpreter_factory_uses_live_provider_allowlist():
+    for provider in LIVE_BERNIE_INTERPRETER_PROVIDERS:
+        interpreter = get_booking_instruction_interpreter(provider)
+        assert isinstance(interpreter, GeminiVertexBookingInstructionInterpreter)
+
+    assert isinstance(get_booking_instruction_interpreter("fake"), FakeBookingInstructionInterpreter)
+    assert isinstance(
+        get_booking_instruction_interpreter("disabled"),
+        DisabledBookingInstructionInterpreter,
+    )
+    assert isinstance(
+        get_booking_instruction_interpreter("unknown-provider"),
+        DisabledBookingInstructionInterpreter,
+    )
+
+
+def test_interpret_route_uses_settings_provider_boundary():
+    source = inspect.getsource(appointments.interpret_bernie_booking_instruction)
+
+    assert "settings.bernie_booking_interpreter_provider" in source
+    assert "get_booking_instruction_interpreter(" in source
+    assert "GeminiVertexBookingInstructionInterpreter" not in source
+    for provider in LIVE_BERNIE_INTERPRETER_PROVIDERS:
+        assert provider not in source
 
 
 def test_live_bernie_provider_fails_closed_when_gate_file_missing(tmp_path):

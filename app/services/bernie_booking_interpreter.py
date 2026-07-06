@@ -16,7 +16,7 @@ from typing import Any, Callable, Protocol
 
 from pydantic import ValidationError
 
-from app.config import settings
+from app.config import LIVE_BERNIE_INTERPRETER_PROVIDERS, settings
 from app.schemas.appointments import (
     AppointmentProposalIssue,
     BernieBookingInstructionInterpretIn,
@@ -715,6 +715,6 @@ def get_booking_instruction_interpreter(
     normalized = (provider_name or "disabled").strip().lower()
     if normalized == "fake":
         return FakeBookingInstructionInterpreter()
-    if normalized in {"gemini_vertex", "vertex_gemini", "gemini", "vertex"}:
+    if normalized in LIVE_BERNIE_INTERPRETER_PROVIDERS:
         return GeminiVertexBookingInstructionInterpreter()
     return DisabledBookingInstructionInterpreter()
