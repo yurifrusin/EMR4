@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H21 Thursday neutral sample completed; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Convert H-series neutral movement profiles into deterministic diary/Bernie regression scenarios, or add an unusual-day sample only if Yuri wants broader trove contrast |
+| **Current active track** | R26 H-series neutral profile bridge completed; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Consume the new source-safe H-series profile layer in deterministic diary/Bernie refresh/no-write scenario tests, or return to native Bernie/Diary action grammar work |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -134,7 +134,13 @@ pipeline across 160 snapshots and 156 adjacent transitions. In this recomputed
 slice all roots remained inside `no_structural_change` and
 `small_content_delta`; the H21 graph report found no `large_unexplained_delta`
 or `time_grid_delta` roots. Safe H21 findings live in
-`docs/historical-diary-trove-thursday-neutral-sampling.md`.
+`docs/historical-diary-trove-thursday-neutral-sampling.md`. R26 converted this
+into a separate source-safe profile layer under
+`tests/fixtures/h_series_profiles/`, guarded by
+`tests/test_h_series_profile_consistency.py` and documented in
+`docs/h-series-profile-schema.md`. The profile layer is deliberately outside
+the Bernie scenario corpus until the H15 semantic labelling gate is explicitly
+reviewed and approved.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

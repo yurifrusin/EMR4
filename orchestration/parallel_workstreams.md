@@ -9,7 +9,7 @@ For the layer between long phases and tactical sprints, use
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
+| Status | Integrated locally; external reviews triaged |
 | Product Goal | Convert H21 neutral diary movement profiles into source-safe deterministic Diary/Bernie scenario coverage without raw trove exposure |
 | Worker Shape | Claude implementation lane, Antigravity/Gemini receptionist-domain review, DeepSeek Flash adversarial privacy/schema review |
 | In Scope | Synthetic H-derived profile/scenario fixtures or tests, existing Bernie scenario harness boundaries, review artifacts |
@@ -27,7 +27,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | `tests/fixtures/bernie_scenarios/`, `tests/bernie_scenarios/`, focused scenario integrity/replay tests, narrow docs if needed |
 | Out of Scope | Raw trove files, ignored local JSON, semantic labels, production code, frontend |
 | Verification | `py_compile` touched Python; `pytest tests/test_bernie_scenario_integrity.py tests/bernie_scenarios -q`; `git diff --check` |
-| Status | Queued |
+| Status | Superseded by Ariadne-local implementation after Claude plan accepted |
 
 ### Workstream R26-B - Gemini Receptionist Scenario Review
 
@@ -40,7 +40,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | `docs/receptionist_review_r26.md` only after plan approval |
 | Out of Scope | Code/tests, raw trove files, semantic labelling, live providers |
 | Verification | Tangible review artifact with scenario recommendations and acceptance criteria |
-| Status | Queued |
+| Status | Superseded; submitted artifact rejected for H15 semantic-boundary overreach |
 
 ### Workstream R26-C - DeepSeek Neutral Bridge Adversarial Review
 
@@ -53,7 +53,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | `docs/adversarial/h_series_scenario_bridge_review_r26.md` or narrow non-overlapping tests |
 | Out of Scope | Raw trove files, semantic labels, production code, frontend, live providers |
 | Verification | Review artifact inspection; tests if added |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint R14: Auth Bootstrap Harness Guard
 

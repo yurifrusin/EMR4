@@ -1,0 +1,35 @@
+id: stable-grid-small-delta-h21
+profile_kind: h_series_neutral_profile
+description: >
+  Source-safe profile distilled from committed H21 documentation. It records
+  neutral diary-grid movement only and is not an executable Bernie scenario.
+source_docs:
+  - docs/historical-diary-trove-thursday-neutral-sampling.md
+  - docs/historical-diary-trove-neutral-graph-report.md
+sample:
+  root_count: 4
+  snapshot_count: 160
+  adjacent_transition_count: 156
+neutral_event_classes:
+  allowed:
+    - no_structural_change
+    - small_content_delta
+  excluded:
+    - large_unexplained_delta
+    - time_grid_delta
+deterministic_uses:
+  - diary_refresh_preserves_backend_authority
+  - scenario_fixture_may_assert_no_unconfirmed_write
+  - scenario_fixture_may_assert_no_semantic_inference_from_neutral_delta
+privacy:
+  source_safe_only: true
+  semantic_labels: blocked
+  raw_trove_access: prohibited
+  external_provider_calls: prohibited
+  raw_identifiers: prohibited
+forbidden_promotions:
+  - infer appointment creation from small_content_delta
+  - infer appointment cancellation from neutral count movement
+  - infer practitioner, patient, or staff identity
+  - infer receptionist intent from aggregate structural movement
+  - use as provider prompt content

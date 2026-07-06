@@ -8,6 +8,64 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint R26: H-Series Neutral Profile Bridge |
+| Integrated through | Ariadne local implementation; Claude plan accepted in principle; DeepSeek adversarial review integrated; Antigravity review superseded for H15-boundary overreach |
+| Status | Local validation complete; push/workflow/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `tests\fixtures\h_series_profiles\stable_grid_small_delta_h21.yaml`, a source-safe neutral profile fixture distilled only from committed H-series docs.
+- Added `tests\test_h_series_profile_consistency.py`, validating profile shape, privacy flags, neutral event-class boundaries, and semantic-promotion blockers.
+- Added `docs\h-series-profile-schema.md`.
+- Added `docs\adversarial\h_series_scenario_bridge_review_r26.md` from DeepSeek's adversarial review and incorporated its recommendation.
+- Added `docs\receptionist_review_r26.md`, Ariadne's corrected source-safe product review after rejecting Antigravity's over-semantic mapping.
+- Updated `.gitignore` to ignore `orchestration\runtime_logs\`.
+- Refreshed `tests\fixtures\bernie_scenarios\harness_demo_happy_path.yaml` away from a now-past hard-coded date so the replay harness remains deterministic.
+- Updated R26 task packets, board, integration log, and `AGENTS.md`.
+- No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\test_h_series_profile_consistency.py tests\test_bernie_scenario_integrity.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_h_series_profile_consistency.py tests\test_bernie_scenario_integrity.py tests\bernie_scenarios -q` (10 passed, 1 skipped, 1 xfailed; existing warnings only).
+- `git diff --check` passed.
+
+## Local Result
+
+- R26 now has a separate H-series profile fixture layer outside the Bernie scenario corpus.
+- The validator blocks raw/semantic keys, requires committed H-series doc provenance, and requires the H15 semantic-label boundary to stay explicit.
+- DeepSeek's adversarial review prevented a too-eager direct mapping from neutral deltas into receptionist semantics.
+- Antigravity/Gemini participated, but the submitted artifact was rejected because it mapped neutral count classes to receptionist workflows despite correction.
+
+## Bernie Memory Result
+
+- The 58k-file trove should not be raw fine-tuning material.
+- RAG is useful over approved docs, policies, aggregate stats, and de-identified/synthetic examples.
+- GraphRAG is likely the best future fit once we have a derived neutral transition graph.
+- Bernie can use derived memory to clarify and propose; the deterministic diary backend remains the write authority.
+
+## Recommended User Review
+
+No required manual review before continuing. Yuri review is required only if a future sprint proposes approving semantic labelling, raw/de-identified examples, or provider-visible prompt consumption from historical diary material.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No manual diary-content review is required because H16 commits only safe aggregate documentation and handover notes.
+
+## Known Follow-Up
+
+- Consume the H-series profile layer in deterministic diary/Bernie refresh/no-write tests using explicit fake data.
+- Broaden H-series only if Yuri wants to add a deliberately unusual-day sample for contrast.
+- Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
+
+## Previous Closeout - Sprint H21
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H21: Historical Diary Trove Thursday Neutral Sampling |
 | Integrated through | Ariadne local-only neutral trove pipeline; no external workers used because scope was privacy-sensitive and raw-data-adjacent |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; Python Security green at `f1b1de0`; fresh manual Pages deployment green at `f1b1de0` after the initial push Pages run failed on duplicate artifact metadata during rerun |
@@ -34,30 +92,6 @@ reviewed, integrated, verified, pushed, and audited.
 - The recomputed H21 slice found only `no_structural_change` and `small_content_delta` event classes across all four roots.
 - The predefined H21 graph report found no `large_unexplained_delta` or `time_grid_delta` roots in this capped four-root slice.
 - Interpretation: the Thursday sample strengthens the case for using the trove to build safe deterministic diary scenario fixtures, while keeping semantic labelling blocked.
-
-## Bernie Memory Result
-
-- The 58k-file trove should not be raw fine-tuning material.
-- RAG is useful over approved docs, policies, aggregate stats, and de-identified/synthetic examples.
-- GraphRAG is likely the best future fit once we have a derived neutral transition graph.
-- Bernie can use derived memory to clarify and propose; the deterministic diary backend remains the write authority.
-
-## Recommended User Review
-
-No required manual review before continuing neutral work. Yuri review is required only if a future sprint proposes approving semantic labelling or using raw/de-identified examples for provider-visible prompts.
-
-## Not Required Before Moving On
-
-- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
-- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
-- No database migration or test DB reset is required.
-- No manual diary-content review is required because H16 commits only safe aggregate documentation and handover notes.
-
-## Known Follow-Up
-
-- Convert H-series neutral movement profiles into deterministic diary/Bernie regression scenarios.
-- Broaden H-series only if Yuri wants to add a deliberately unusual-day sample for contrast.
-- Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 
 ## Previous Closeout - Sprint H20
 

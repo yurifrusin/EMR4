@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 6a4099f5 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-r26-deepseek-neutral-scenario-adversarial-review --summary "Short plan summary"` |
@@ -90,5 +90,5 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Verification run:
-- Remaining risks:
+- Verification run: DeepSeek produced `docs/adversarial/h_series_scenario_bridge_review_r26.md`; Ariadne inspected the artifact and incorporated its middle-layer recommendation into the R26 implementation.
+- Remaining risks: DeepSeek could not run protocol `handin` because local runtime logs were untracked; `.gitignore` now excludes `orchestration/runtime_logs/`.

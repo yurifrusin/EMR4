@@ -8,7 +8,7 @@ description: >
   Deterministic normalize -> search -> select -> confirm path.
   No LLM/provider calls. Proves the harness can load a YAML scenario,
   run ordered backend turns, and assert write outcomes.
-reference_date: "2026-06-22"
+reference_date: "2026-07-06"
 
 initial_state:
   fixtures:
@@ -22,14 +22,14 @@ turns:
   - action: normalize
     input:
       practitioner_id: "{practitioner_id}"
-      date_from: "today"
+      date_from: "2026-07-13"
       duration_minutes: "15"
       patient_id: "{patient_id}"
     expect:
       status: 200
       fields:
         safe: true
-        "constraint.date_from": "2026-06-22"
+        "constraint.date_from": "2026-07-13"
 
   - action: search
     expect:

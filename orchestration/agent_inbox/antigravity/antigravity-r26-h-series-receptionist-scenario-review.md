@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | superseded |
 | Created | 6a4099f5 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-r26-h-series-receptionist-scenario-review --summary "Short plan summary"` |
@@ -90,5 +90,5 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
-- Verification run:
-- Remaining risks:
+- Verification run: Antigravity submitted a review artifact, but Ariadne rejected it for semantically mapping neutral H-series deltas into receptionist workflows despite the corrective prompt. Ariadne replaced it with a source-safe local review.
+- Remaining risks: Future Gemini review prompts need an even stronger H15-gate warning when neutral historical aggregates are involved.
