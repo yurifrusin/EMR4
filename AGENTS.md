@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H20 safe predefined graph report completed; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Either broaden H-series to another capped neutral root if available, or pause H-series and return to diary/Bernie deterministic work |
+| **Current active track** | Historical diary trove H21 Thursday neutral sample completed; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Convert H-series neutral movement profiles into deterministic diary/Bernie regression scenarios, or add an unusual-day sample only if Yuri wants broader trove contrast |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -128,7 +128,13 @@ findings live in
 `scripts/historical_diary_neutral_graph_report.py`, a predefined safe graph
 report helper with fixed query IDs only. It produced 9 aggregate query result
 groups from the ignored H19 graph. Safe H20 findings live in
-`docs/historical-diary-trove-neutral-graph-report.md`.
+`docs/historical-diary-trove-neutral-graph-report.md`. H21 added the Thursday
+`pilot_03` neutral sample, then refreshed the capped four-root aggregate
+pipeline across 160 snapshots and 156 adjacent transitions. In this recomputed
+slice all roots remained inside `no_structural_change` and
+`small_content_delta`; the H21 graph report found no `large_unexplained_delta`
+or `time_grid_delta` roots. Safe H21 findings live in
+`docs/historical-diary-trove-thursday-neutral-sampling.md`.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
