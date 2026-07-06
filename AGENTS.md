@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 125 appointment command idempotency policy packet completed locally. `orchestration\api_spine_appointment_idempotency_policy_packet.md` defines route-family policy, replay ledger binding, uniqueness, execution order, stale-evidence interaction, raw compatibility decision points, and duplicate-write regression tests before implementation |
-| **Next recommended work** | Sprint 126: draft the appointment command idempotency storage design, including model/Alembic shape, uniqueness, TTL, audit linkage, canonical body hashing, transaction boundaries, and rollback behavior before route enforcement |
+| **Current active track** | Sprint 126 appointment command idempotency storage design completed locally. `orchestration\api_spine_appointment_idempotency_storage_design.md` defines the future replay ledger shape, constraints, alias operation IDs, canonical body hashing, transaction boundary, concurrency behavior, replay semantics, rollback/recovery, and implementation tests before any model/migration/route enforcement |
+| **Next recommended work** | Sprint 127: add a storage artifact guard or begin model/migration preflight for the appointment command idempotency ledger, keeping appointment routes unwired until storage concurrency and rollback tests exist |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
