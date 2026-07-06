@@ -8,12 +8,36 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H63: Bernie Interpretation Harness Independent Review Brief |
-| Integrated through | Ariadne implementation |
+| Batch | Sprint H64: Bernie Interpretation Harness Independent Review Integration |
+| Integrated through | DeepSeek Flash read-only review; Ariadne integration |
 | Status | Integrated; focused verification passed |
 | Last updated | 2026-07-07 |
 
 ## What Changed
+
+- Integrated a read-only DeepSeek Flash adversarial review in `docs\adversarial\h64_interpretation_readiness_independent_review.md`.
+- Added `tests\test_bernie_interpretation_h64_review_artifact.py` to preserve the no-critical/high verdict, blocked runtime/provider/trove boundary, and H65-H67 follow-up sequence.
+- Updated `docs\bernie-interpretation-harness-scaffold.md`, `AGENTS.md`, `orchestration\parallel_workstreams.md`, and `orchestration\integration_log.md`.
+- The review accepted three medium hardening follow-ups: derive readiness booleans from runtime-gate scope, add more mechanical readiness-command enforcement before runtime/provider/trove proposals, and make interpretation result/frame helpers self-validating.
+- No runtime routes, UI, providers, database access, memory/RAG/GraphRAG, H15/H-series runtime imports, raw trove reads, or ignored local-data reads were added.
+
+## Verification
+
+- Compile check passed:
+  `.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_h64_review_artifact.py`.
+- Readiness CLI sample passed:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`.
+- Leakage lint passed:
+  `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- Focused pytest passed:
+  `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_h64_review_artifact.py tests\test_bernie_interpretation_independent_review_brief.py tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_readiness_release_gate.py tests\test_bernie_interpretation_readiness_review_artifact.py tests\test_bernie_interpretation_readiness_snapshot.py tests\test_bernie_interpretation_runtime_gate.py tests\test_bernie_interpretation_runtime_gate_check.py tests\test_bernie_interpretation_runtime_isolation.py tests\test_bernie_interpretation_protocol_alert.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q`
+  (`306 passed`; existing deprecation warnings only).
+- `git diff --check` passed with the known CRLF warning on
+  `orchestration/integration_log.md`.
+
+---
+
+## Previous Closeout
 
 - Added `docs\adversarial\h63_interpretation_independent_review_brief.md`, a bounded source-safe handoff for a future independent review of the Bernie Interpretation Harness readiness/gate stack.
 - Added `tests\test_bernie_interpretation_independent_review_brief.py` to require the readiness preflight, blocked expected values, review-artifact-only output, and explicit out-of-scope runtime/provider/trove boundaries.

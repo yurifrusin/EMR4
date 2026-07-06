@@ -405,3 +405,19 @@ Its scope is review-only. Runtime routes, frontend changes, provider prompts or
 dry-runs, database access, memory/RAG/GraphRAG, H15/H-series runtime imports, and
 historical diary trove access remain out of scope unless Yuri explicitly opens a
 future implementation sprint.
+
+## H64 Independent Review
+
+H64 records a DeepSeek Flash independent adversarial review in
+`docs/adversarial/h64_interpretation_readiness_independent_review.md`, guarded by
+`tests/test_bernie_interpretation_h64_review_artifact.py`.
+
+The review found no critical or high issues and kept the sprint engine
+continuing. It accepted three medium hardening follow-ups before any future
+runtime/provider/trove proposal:
+
+- Derive readiness booleans from runtime-gate scope instead of explicit blocked
+  constants.
+- Add more mechanical enforcement that the readiness command is run before
+  runtime/provider/trove proposal surfaces.
+- Make interpretation result/frame helpers self-validating.

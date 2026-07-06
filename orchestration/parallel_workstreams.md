@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H64: Bernie Interpretation Harness Independent Review Integration
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification pending |
+| Product Goal | Integrate a non-Ariadne adversarial review of the interpretation readiness/gate stack and turn findings into bounded follow-up sprints |
+| Worker Shape | DeepSeek Flash read-only reviewer; Ariadne integration |
+| In Scope | Source-safe review artifact, artifact guard tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; readiness CLI sample; H64 review artifact tests plus interpretation readiness guard cluster (306 passed); leakage lint; `git diff --check` |
+
 ## Sprint H63: Bernie Interpretation Harness Independent Review Brief
 
 | Item | Value |

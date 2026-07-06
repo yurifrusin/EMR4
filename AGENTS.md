@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H63 Bernie Interpretation Harness independent-review brief integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Use the H63 brief for a bounded independent review lane before any larger runtime/provider/trove proposal, or continue small provider-free guard hardening |
+| **Current active track** | H64 independent review integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | H65 should derive combined readiness booleans from runtime-gate scope, then continue H66/H67 hardening from the H64 review |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -475,6 +475,16 @@ values, produce a source-safe review artifact only, and keep routes, providers,
 database access, memory/RAG/GraphRAG, H15/H-series runtime imports, raw trove
 processing, and ignored local-data reads out of scope unless Yuri explicitly
 opens a later implementation sprint.
+H64 integrates a read-only DeepSeek Flash independent review in
+`docs/adversarial/h64_interpretation_readiness_independent_review.md`, guarded by
+`tests/test_bernie_interpretation_h64_review_artifact.py`. The review found no
+critical/high issues and kept the sprint engine continuing, but accepted three
+medium follow-ups before any runtime/provider/trove proposal: derive readiness
+booleans from runtime-gate scope, add more mechanical readiness-command
+enforcement for runtime/provider/trove proposal surfaces, and make interpretation
+result/frame helpers self-validating. Low follow-ups include deriving report
+forbidden text from fixture utterances and tightening clarify-frame subtype
+invariants.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
