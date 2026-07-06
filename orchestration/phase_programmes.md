@@ -115,16 +115,16 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Sprint 126 appointment command idempotency storage design completed; storage artifact guard/model preflight selected next |
+| Status | Sprint 127 appointment idempotency storage artifact guard completed; model/migration preflight selected next |
 | Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
-| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design |
-| Next Candidate Sprints | Sprint 127 appointment idempotency storage artifact guard/model preflight |
+| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard |
+| Next Candidate Sprints | Sprint 128 appointment idempotency model/migration preflight |
 | Design Record | `orchestration/api_spine_programme.md` |
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
 
-Current position after Sprint 126: the Ariadne/Fable 100+ sprint strategy map
+Current position after Sprint 127: the Ariadne/Fable 100+ sprint strategy map
 has been created, the stale worktree residue has been cleaned, the
 provider-boundary guard stack has been consolidated, and Programme 2G has
 returned to appointment-first API Spine alignment. Sprint 120 refreshed the API
@@ -144,7 +144,10 @@ binding, execution order, stale-evidence behavior, and duplicate-write tests.
 Sprint 126 translated that policy into storage design: ledger columns,
 constraints, alias operation identity, canonical body hashing, transaction
 boundary, concurrency/replay behavior, rollback/recovery, and required storage
-tests.
+tests. Sprint 127 added a non-runtime artifact guard so any future
+`appointment_command_idempotency` model or migration must land together and
+match that storage contract before appointment routes bind or enforce the HTTP
+`Idempotency-Key` header.
 
 The accepted strategy artifacts are
 `orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md`
@@ -158,9 +161,8 @@ Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
 1. If Bernie/API-spine architecture is the priority: continue **Programme 2G**
-   with an appointment idempotency storage artifact guard or model/migration
-   preflight, keeping route enforcement unwired until storage concurrency and
-   rollback tests exist.
+   with appointment idempotency model/migration preflight, keeping route
+   enforcement unwired until storage concurrency and rollback tests exist.
 2. If Bernie is the immediate product surface: continue **Programme 2B/2D**
    with the next supervised booking-loop product slice, keeping staff
    confirmation and fake/default-disabled provider posture intact.
@@ -170,9 +172,9 @@ the next sprint from the active programme that best advances the phase:
 4. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
 
-The default recommendation after Sprint 126 is **Programme 2G**: add the
-appointment idempotency storage artifact guard or model/migration preflight
-before expanding Caller ID, Medicare/OPV/PVM, clinical-library agent
+The default recommendation after Sprint 127 is **Programme 2G**: add the
+appointment idempotency model/migration preflight before expanding Caller ID,
+Medicare/OPV/PVM, clinical-library agent
 integrations, live-provider paths, or historical diary utilisation.
 
 ## Deployment Readiness Pattern

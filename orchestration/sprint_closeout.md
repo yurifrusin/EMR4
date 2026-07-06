@@ -8,10 +8,59 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 126 Appointment Command Idempotency Storage Design |
+| Batch | Sprint 127 Appointment Idempotency Storage Artifact Guard |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 127 What Changed
+
+- Added `orchestration/api_spine_appointment_idempotency_storage_artifact_guard.md`,
+  a non-runtime guard packet for the future appointment command idempotency
+  model/migration artifacts.
+- Added
+  `tests/test_api_spine_appointment_idempotency_storage_artifact_guard.py` to
+  enforce that any future `appointment_command_idempotency` model and migration
+  land together.
+- Guarded future model signals for the Sprint 126 storage contract: required
+  columns, unique scope, indexes, no raw idempotency key storage, no raw request
+  body storage, and canonical artifact names.
+- Guarded route-enforcement ordering: appointment routes must not bind or
+  enforce HTTP `Idempotency-Key` before matching model and migration artifacts
+  exist.
+- Folded DeepSeek review residuals into the guard: forbid future request-body
+  JSON storage, require storage-helper scenario tests before route enforcement,
+  and make future model/migration checks expect state/check/nullability signals.
+- Preserved the current distinction between existing Bernie session
+  idempotency fields and future appointment-command HTTP idempotency.
+- Updated `AGENTS.md`, `orchestration/phase_programmes.md`,
+  `orchestration/integration_log.md`, and the phase checkpoint test so
+  Programme 2G now names Sprint 128 appointment idempotency model/migration
+  preflight as the next slice.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+
+## Sprint 127 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_appointment_idempotency_storage_artifact_guard.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_idempotency_storage_artifact_guard.py tests/test_api_spine_appointment_idempotency_storage_design.py tests/test_api_spine_appointment_idempotency_policy_packet.py -q`
+  (`21 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_idempotency_storage_artifact_guard.py tests/test_api_spine_appointment_idempotency_storage_design.py tests/test_api_spine_appointment_idempotency_policy_packet.py tests/test_api_spine_appointment_idempotency_gap.py tests/test_api_spine_openapi_backend_alignment.py tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_appointment_command_alignment_inventory.py tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`80 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check` (known CRLF notice on `orchestration/integration_log.md`
+  only).
+- DeepSeek Flash review found no blockers. Ariadne folded its three residuals
+  into the guard before closeout.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 128:
+appointment command idempotency model/migration preflight, still without route
+enforcement.
+
+---
+
+## Previous Closeout - Sprint 126
 
 ## Sprint 126 What Changed
 
