@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 115 provider-boundary proposal guard extension completed locally. `scripts\bernie_interpretation_proposal_surface_guard.py` now requires provider-boundary proposal markdown to cite both `scripts\bernie_interpretation_readiness_check.py` and `scripts\bernie_provider_boundary_readiness_report.py` plus their expected blocked values; `docs\bernie-band2-provider-gate-criteria.md` has been upgraded to satisfy the new guard. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
-| **Next recommended work** | Sprint 116: add an optional live-value verification mode for the proposal surface guard, or keep moving to the next Ariadne/Fable provider-boundary checkpoint if that would be too much automation for proposal docs |
+| **Current active track** | Sprint 116 provider-boundary guard drift test completed locally. `tests\test_bernie_interpretation_proposal_surface_guard.py` now verifies the proposal guard's required provider-boundary blocked values against `scripts\bernie_provider_boundary_readiness_report.py` output, with the report import scoped inside the drift test to avoid widening collection-time imports. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 117: either add a reverse/explicit proposal-citation field contract for provider-boundary reports, or move to the next Ariadne/Fable provider-boundary checkpoint if the current guard stack is sufficient |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

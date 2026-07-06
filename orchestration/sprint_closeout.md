@@ -8,10 +8,44 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 115 Provider-Boundary Proposal Guard Extension |
+| Batch | Sprint 116 Provider-Boundary Guard Drift Test |
 | Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 116 What Changed
+
+- Added a focused drift test tying
+  `PROVIDER_BOUNDARY_EXPECTED_VALUES` in
+  `scripts/bernie_interpretation_proposal_surface_guard.py` to the actual safe
+  aggregate output of `build_provider_boundary_report()`.
+- Scoped the provider-boundary report import inside the drift test so the wider
+  report/app import path is not loaded at test collection time for the rest of
+  the proposal surface guard suite.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Its collection-time import residual
+  was folded into the sprint. Remaining residual risk: the test intentionally
+  checks only the explicit proposal-citation contract, not every field in the
+  full provider-boundary report schema.
+
+## Sprint 116 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_proposal_surface_guard.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_proposal_surface_guard.py tests/test_bernie_provider_boundary_readiness_report.py -q`
+  (`17 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- tests/test_bernie_interpretation_proposal_surface_guard.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 117:
+either add a reverse/explicit proposal-citation field contract for the
+provider-boundary report, or move to the next Ariadne/Fable provider-boundary
+checkpoint if the current guard stack is sufficient.
+
+---
+
+## Previous Closeout - Sprint 115
 
 ## Sprint 115 What Changed
 

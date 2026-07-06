@@ -4,6 +4,7 @@ from pathlib import Path
 
 from scripts.bernie_interpretation_proposal_surface_guard import (
     PROVIDER_BOUNDARY_COMMAND,
+    PROVIDER_BOUNDARY_EXPECTED_VALUES,
     READINESS_COMMAND,
     files_missing_readiness_reference,
 )
@@ -87,6 +88,19 @@ def test_proposal_surface_guard_accepts_provider_boundary_with_both_reports(tmp_
     )
 
     assert files_missing_readiness_reference((proposal,)) == ()
+
+
+def test_provider_boundary_expected_values_match_readiness_report():
+    from scripts.bernie_provider_boundary_readiness_report import (
+        build_provider_boundary_report,
+    )
+
+    report = build_provider_boundary_report()
+
+    assert {
+        key: str(report[key]).casefold()
+        for key in PROVIDER_BOUNDARY_EXPECTED_VALUES
+    } == PROVIDER_BOUNDARY_EXPECTED_VALUES
 
 
 def test_proposal_surface_guard_ignores_unrelated_markdown(tmp_path):
