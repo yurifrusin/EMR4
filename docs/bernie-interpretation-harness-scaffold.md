@@ -456,3 +456,18 @@ The derived utterance text is used only for local validation and is not emitted
 in the aggregate report. `scripts/bernie_interpretation_readiness_check.py`
 passes the active fixture directory into the report-safety assertion so custom
 fixture directories receive the same text-leakage protection.
+
+## H68 Proposal Surface Guard
+
+H68 addresses H64-M2 with
+`scripts/bernie_interpretation_proposal_surface_guard.py`. The guard scans new
+markdown proposal artifacts for runtime/provider/trove proposal trigger phrases
+and requires the readiness command plus the expected blocked values:
+
+- `runtime_or_provider_wiring_ready=false`.
+- `raw_trove_access_ready=false`.
+- `runtime_gate_decision=blocked`.
+
+This is a mechanical preflight for proposal artifacts, not approval to wire
+runtime routes, providers, memory, H15/H-series runtime imports, or historical
+diary material access.

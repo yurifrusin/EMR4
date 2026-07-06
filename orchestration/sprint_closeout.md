@@ -8,12 +8,45 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H67: Derived Report Text Safety |
-| Integrated through | Ariadne implementation of H64-L1 |
+| Batch | Sprint H68: Mechanical Readiness Reference Guard |
+| Integrated through | Ariadne implementation of H64-M2 |
 | Status | Integrated; focused verification passed |
 | Last updated | 2026-07-07 |
 
 ## What Changed
+
+- Added `scripts\bernie_interpretation_proposal_surface_guard.py`, a reusable
+  markdown guard for runtime/provider/trove proposal artifacts.
+- Added `tests\test_bernie_interpretation_proposal_surface_guard.py`.
+- Updated `orchestration\bernie_release_gates.md` so future interpretation
+  runtime/provider/trove proposals must run the guard and include readiness
+  command evidence plus blocked expected values.
+- Updated `docs\bernie-interpretation-harness-scaffold.md`, `AGENTS.md`,
+  `orchestration\parallel_workstreams.md`, and
+  `orchestration\integration_log.md`.
+- No runtime routes, UI, providers, database access, memory/RAG/GraphRAG,
+  H15/H-series runtime imports, raw trove reads, or ignored local-data reads
+  were added.
+
+## Verification
+
+- Compile check passed:
+  `.venv\Scripts\python.exe -m py_compile scripts\bernie_interpretation_proposal_surface_guard.py tests\test_bernie_interpretation_proposal_surface_guard.py`.
+- Proposal guard CLI passed:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\adversarial\h63_interpretation_independent_review_brief.md`.
+- Focused pytest passed:
+  `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_proposal_surface_guard.py tests\test_bernie_interpretation_readiness_release_gate.py tests\test_bernie_interpretation_h64_review_artifact.py -q`
+  (`10 passed`; existing deprecation warnings only).
+- Readiness CLI sample passed:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`.
+- Leakage lint passed:
+  `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- `git diff --check` passed with the known CRLF warning on
+  `orchestration/integration_log.md`.
+
+---
+
+## Previous Closeout
 
 - Updated `scripts\bernie_interpretation_harness_report.py` so report safety
   derives forbidden report text from every committed fixture `utterance` in the

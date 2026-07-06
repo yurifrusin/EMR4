@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H68: Mechanical Readiness Reference Guard
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Address H64-M2 by adding a reusable guard for runtime/provider/trove proposal artifacts |
+| Worker Shape | Ariadne implementation of independent-review finding |
+| In Scope | Proposal surface guard script, tests, release-gate docs, handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; proposal guard CLI; focused proposal/release/review tests (10 passed); readiness CLI; leakage lint; `git diff --check` |
+
 ## Sprint H67: Derived Report Text Safety
 
 | Item | Value |

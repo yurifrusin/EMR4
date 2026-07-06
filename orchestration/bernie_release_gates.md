@@ -71,6 +71,24 @@ The expected current result is `runtime_or_provider_wiring_ready=false`,
 values change, or if the readiness command fails, the sprint engine must pause
 for explicit review instead of continuing automatically.
 
+### Proposal Surface Guard
+
+Any new markdown proposal artifact that discusses runtime route wiring, provider
+prompt wiring, provider dry-run wiring, memory/RAG/GraphRAG use, H15/H-series
+runtime imports, historical diary material access, or a runtime/provider/trove
+proposal from the interpretation harness must also pass:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py <proposal-path>
+```
+
+The guard requires the proposal to include the readiness command and the expected
+blocked values:
+
+- `runtime_or_provider_wiring_ready=false`
+- `raw_trove_access_ready=false`
+- `runtime_gate_decision=blocked`
+
 ## Closeout Rules
 
 - Basic Bernie happy paths are blocking release checks, not residual user review.

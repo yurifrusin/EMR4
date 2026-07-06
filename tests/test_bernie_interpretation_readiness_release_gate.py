@@ -29,3 +29,11 @@ def test_release_gates_pause_if_interpretation_readiness_changes():
         "historical diary material access",
     ]:
         assert forbidden_surface in text
+
+
+def test_release_gates_document_proposal_surface_guard():
+    text = RELEASE_GATES.read_text(encoding="utf-8")
+
+    assert "Proposal Surface Guard" in text
+    assert "scripts\\bernie_interpretation_proposal_surface_guard.py" in text
+    assert "<proposal-path>" in text

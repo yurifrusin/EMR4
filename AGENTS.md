@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H67 derived report-text safety integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | H68 should add a mechanical readiness-reference guard before runtime/provider/trove proposal surfaces |
+| **Current active track** | H68 mechanical readiness-reference proposal guard integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue low-risk readiness hardening or clean orchestration residue before opening any runtime/provider/trove proposal |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -502,6 +502,13 @@ Report safety now derives forbidden text from every committed fixture
 list. The aggregate report still omits utterance text; the derived text is used
 only for local validation. Combined readiness passes its fixture directory into
 the safety assertion.
+H68 addresses H64-M2 with
+`scripts/bernie_interpretation_proposal_surface_guard.py` and
+`tests/test_bernie_interpretation_proposal_surface_guard.py`. New markdown
+proposal artifacts that discuss runtime/provider/trove surfaces must include the
+readiness command and the expected blocked values. The guard is documented in
+`orchestration/bernie_release_gates.md` and accepts both `key=false` and
+`key: false` forms for the expected values.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
