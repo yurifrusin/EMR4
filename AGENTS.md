@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | R27 H-series profile consumption guards in progress; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Finish R27 schema/isolation/no-write consumption tests, then return to native Bernie/Diary action grammar unless the H15 semantic gate is explicitly reviewed |
+| **Current active track** | R28 Fable full-trove readiness consult integrated; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Build native Bernie/Diary action grammar and a deterministic replay consumer before any H15 semantic-gate opening or broad full-trove mining |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -150,7 +150,16 @@ source-safe aggregate/profile refreshes rather than raw retrieval or fine-tuning
 Because Claude Fable access is expected only through the end of July 7, 2026,
 reserve a Fable review for the highest-leverage checkpoint before full-trove
 utilisation or semantic-gate opening, preferably after R27 is integrated and
-before any broad trove/GraphRAG-derived memory sprint.
+before any broad trove/GraphRAG-derived memory sprint. R28 used Fable at that
+checkpoint and integrated the plan packet
+`orchestration/agent_inbox/codex/plan-claude-claude-r28-fable-full-trove-readiness-review.md`.
+Fable's verdict: do not run broad 58k-file processing or open H15 yet. The
+blocker is missing consumers, not missing guardrails. Build the native
+Bernie/Diary action grammar first, then a deterministic replay harness over
+authored synthetic day slices, then an H22 gate-review packet with small-slice
+local semantic extraction, validator extension, leakage lint, and Yuri approval.
+Only after that should the one-time full-trove mining run happen, with
+checkpointing and an explicit `-AllowLargeRun` justification.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

@@ -6,12 +6,13 @@
   retrieval, raw fine-tuning, or provider prompt material. Treat it as a local
   PHI-bearing evidence mine that can refresh source-safe aggregate profiles and,
   only after H15 approval, de-identified synthetic semantic fixture families.
-- Before opening a broad full-trove utilisation, H15 semantic-gate, or
-  GraphRAG-derived diary-memory sprint, run a high-reasoning Claude Fable review
-  if `claude-fable-5` is still available. Current timing pressure: Fable is
-  expected only through the end of July 7, 2026, so prefer using it after R27
-  profile-consumption guards are integrated and before committing to the next
-  trove-memory architecture step.
+- R28 used `claude-fable-5` for the full-trove readiness consult. Trust the
+  integrated packet
+  `orchestration/agent_inbox/codex/plan-claude-claude-r28-fable-full-trove-readiness-review.md`
+  as the durable recommendation if Fable access has lapsed.
+- Fable's ordering is now the default: native Bernie/Diary action grammar first,
+  deterministic synthetic replay consumer second, H22 semantic gate-review
+  packet third, one-time full-trove mining only after Yuri approves H15.
 
 ## Sprint 106 Claude/Fable consulting gate
 

@@ -8,9 +8,9 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R27: H-Series Profile Consumption Guards |
-| Integrated through | Ariadne local implementation using source-safe adversarial review and receptionist acceptance artifacts |
-| Status | Integrated locally; focused verification passed; not yet pushed |
+| Batch | Sprint R28: Fable Full-Trove Readiness Review |
+| Integrated through | Claude Fable 5 consult on `claude/fable-full-trove-readiness`, reviewed and cherry-picked by Ariadne |
+| Status | Integrated locally; plan/review artifact only; not yet pushed |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -20,6 +20,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Added `docs\adversarial\h_series_profile_consumption_review_r27.md` as the source-safe adversarial review artifact.
 - Added `docs\receptionist_review_r27.md` as the source-safe receptionist acceptance note.
 - Updated `docs\h-series-profile-schema.md`, `AGENTS.md`, and `orchestration\protocol_alerts.md` with the future full-trove/Fable review gate.
+- Added the Fable review packet `orchestration\agent_inbox\codex\plan-claude-claude-r28-fable-full-trove-readiness-review.md`.
+- Added the corresponding review request `orchestration\agent_inbox\codex\review-claude-claude-r28-fable-full-trove-readiness-review.md`.
 - No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
 
 ## Verification
@@ -27,6 +29,7 @@ reviewed, integrated, verified, pushed, and audited.
 - Compile check passed: `.venv\Scripts\python.exe -m py_compile tests\test_h_series_profile_consistency.py`.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_h_series_profile_consistency.py -q` (3 passed; existing warnings only).
 - `git diff --check` passed.
+- Fable worker verification: plan/review artifact only; `git diff --check` clean on `claude/fable-full-trove-readiness`.
 
 ## Local Result
 
@@ -41,7 +44,8 @@ reviewed, integrated, verified, pushed, and audited.
 - RAG is useful over approved docs, policies, aggregate stats, and de-identified/synthetic examples.
 - GraphRAG is likely the best future fit once source-safe derived graph memory has a reviewed boundary.
 - Bernie can use derived memory to clarify and propose; the deterministic diary backend remains the write authority.
-- Run a Claude Fable review before any broad full-trove utilisation, H15 semantic-gate opening, or GraphRAG-derived diary-memory sprint if `claude-fable-5` remains available before the end of July 7, 2026.
+- Fable's R28 verdict is now integrated: grammar before labels, labels before mining, mining before memory.
+- Do not run broad 58k-file processing or open H15 yet. Build native Bernie/Diary action grammar, then a deterministic synthetic replay consumer, then an H22 semantic gate-review packet for Yuri.
 
 ## Recommended User Review
 
@@ -56,8 +60,8 @@ No required manual review before continuing. Yuri review is required only if a f
 
 ## Known Follow-Up
 
-- Return to native Bernie/Diary action grammar unless the H15 semantic gate is explicitly reviewed.
-- Use Fable at the full-trove readiness checkpoint if available before the July 7, 2026 access deadline.
+- Return to native Bernie/Diary action grammar next.
+- Do not use the full trove broadly until a replay consumer and H22 semantic gate-review packet exist.
 - Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 
 ## Previous Closeout - Sprint H21

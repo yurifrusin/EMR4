@@ -86,10 +86,9 @@ The expected next use is not raw retrieval or fine-tuning; it is a source-safe
 local aggregate refresh that can produce reviewed neutral profiles or, after
 explicit gate approval, de-identified synthetic semantic fixture families.
 
-Before opening that full-trove utilisation gate, run a high-reasoning
-architecture review if Claude Fable is available. Because Fable access is
-currently expected only through the end of July 7, 2026, prefer spending it at
-the highest-leverage checkpoint: when R27 profile-consumption guards are
-integrated and the next decision is whether the H-series layer can support
-broader trove processing, GraphRAG-shaped derived memory, or H15 semantic-gate
-review.
+R28 ran that high-reasoning Claude Fable review at this checkpoint. The durable
+recommendation is: grammar before labels, labels before mining, mining before
+memory. Do not run broad 58k-file processing yet; first build native Bernie/Diary
+action grammar, then a deterministic replay consumer, then an H22 gate-review
+packet for Yuri. GraphRAG-shaped diary memory remains advisory-only and future,
+behind approved synthetic/de-identified fixtures and Access AI policy.

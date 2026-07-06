@@ -56,6 +56,18 @@ For the layer between long phases and tactical sprints, use
 | Verification | Tangible source-safe acceptance review artifact |
 | Status | Superseded by Ariadne-local source-safe receptionist acceptance note |
 
+## Sprint R28: Fable Full-Trove Readiness Review
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally |
+| Product Goal | Use Claude Fable before its July 7 access deadline to decide when EMR4 should utilise the full local diary trove |
+| Worker Shape | Claude Fable 5 plan/review consult on disposable branch `claude/fable-full-trove-readiness` |
+| In Scope | Read committed R27/H-series docs and produce a source-safe readiness recommendation |
+| Out Of Scope | Production code, tests, raw `local_data`, ignored JSON, semantic labelling, provider calls, frontend UI, migrations, broad trove processing |
+| Verification | Plan/review artifact inspection; worker `git diff --check` |
+| Result | Fable recommends native Bernie/Diary action grammar first, deterministic replay consumer second, H22 gate-review packet third, and one-time full-trove mining only after Yuri approves H15 |
+
 ## Sprint R26: H-Series Neutral Scenario Bridge
 
 | Item | Value |
