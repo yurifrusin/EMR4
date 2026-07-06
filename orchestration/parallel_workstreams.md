@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H22: Semantic Gate-Review Packet
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; source-safe verification passed |
+| Product Goal | Define the smallest reviewable surface before Yuri may consider opening H15 semantic fixture promotion |
+| Worker Shape | Ariadne packet draft with DeepSeek sidecar adversarial criteria |
+| In Scope | Source-safe documentation, tiny local-only prototype plan, validator-extension requirements, leakage-lint requirements, approval payload shape, sprint-engine pause points |
+| Out Of Scope | Raw `local_data`, ignored JSON, broad full-trove processing, semantic fixture promotion, provider calls, route/UI/database writes, RAG/GraphRAG memory |
+| Verification | H15 gate validator on committed blocked template; `.venv\Scripts\pytest.exe tests\test_historical_diary_deidentification_gate.py tests\action_grammar_replay tests\test_h_series_profile_consistency.py -q`; `git diff --check`; sidecar review inspection |
+
 ## Sprint R30: Deterministic Synthetic Action Replay Consumer
 
 | Item | Value |

@@ -72,6 +72,12 @@ Blocked work while the gate decision is `blocked`:
 
 ## Recommendation
 
-Next historical-trove sprint should either keep broadening neutral-only samples
-under H10 guardrails, or prepare a concrete gate-review packet for Yuri before
-semantic fixture promotion begins.
+H22 has prepared the concrete gate-review packet for Yuri:
+
+```text
+docs/historical-diary-trove-h22-semantic-gate-review-packet.md
+```
+
+That packet is not an approval. Semantic fixture promotion remains blocked
+until Yuri explicitly approves a reviewed H15 gate payload and the required
+synthetic validator/leakage-lint extensions pass.
