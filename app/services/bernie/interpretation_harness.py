@@ -25,6 +25,7 @@ class InterpretationDispatch(str, Enum):
     route_to_confirm = "route_to_confirm"
     route_read_only = "route_read_only"
     route_meta = "route_meta"
+    request_clarification = "request_clarification"
     refuse_planned_not_implemented = "refuse_planned_not_implemented"
     refuse_unsafe_instruction = "refuse_unsafe_instruction"
     refuse_unknown_utterance = "refuse_unknown_utterance"
@@ -37,6 +38,7 @@ class InterpretationResult:
     authority: RouteAuthority | None
     dispatch: InterpretationDispatch
     rationale: str
+    clarification_kind: str | None = None
 
 
 @dataclass(frozen=True)
@@ -44,6 +46,31 @@ class _UtteranceRule:
     verb: DiaryActionVerb
     pattern: re.Pattern[str]
     rationale: str
+
+
+@dataclass(frozen=True)
+class _ClarificationRule:
+    clarification_kind: str
+    pattern: re.Pattern[str]
+    rationale: str
+
+
+_CLARIFICATION_RULES: tuple[_ClarificationRule, ...] = (
+    _ClarificationRule(
+        "patient_context",
+        re.compile(r"\b(ambiguous patient|which patient|multiple patients|two patients|same name)\b", re.I),
+        "patient context is ambiguous and needs staff selection",
+    ),
+    _ClarificationRule(
+        "reason_code",
+        re.compile(
+            r"\b(bad weather|reason code (is )?unclear|what reason|which reason|not sure why|"
+            r"cancel .* because .* weather)\b",
+            re.I,
+        ),
+        "reason-code wording is outside deterministic status taxonomy",
+    ),
+)
 
 
 _UTTERANCE_RULES: tuple[_UtteranceRule, ...] = (
@@ -187,6 +214,17 @@ def interpret_receptionist_utterance(utterance: str) -> InterpretationResult:
             rationale="unsafe instruction attempted to bypass harness boundaries",
         )
 
+    for rule in _CLARIFICATION_RULES:
+        if rule.pattern.search(normalized):
+            return InterpretationResult(
+                utterance=utterance,
+                verb=None,
+                authority=None,
+                dispatch=InterpretationDispatch.request_clarification,
+                rationale=rule.rationale,
+                clarification_kind=rule.clarification_kind,
+            )
+
     for rule in _UTTERANCE_RULES:
         if rule.pattern.search(normalized):
             contract = get_action_route_contract(rule.verb)
@@ -219,6 +257,10 @@ def assert_interpretation_result_consistency(result: InterpretationResult) -> No
     elif result.dispatch is InterpretationDispatch.route_meta:
         assert result.verb is not None
         assert result.authority is RouteAuthority.meta
+    elif result.dispatch is InterpretationDispatch.request_clarification:
+        assert result.verb is None
+        assert result.authority is None
+        assert result.clarification_kind in {"patient_context", "reason_code"}
     elif result.dispatch is InterpretationDispatch.refuse_planned_not_implemented:
         assert result.verb is not None
         assert result.authority is RouteAuthority.planned_not_implemented
@@ -256,6 +298,37 @@ def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, ob
             "interpretation_dispatch": result.dispatch.value,
             "refusal_reason_kind": None,
             "copy": "I can ask the backend to check the diary before showing options.",
+        }
+    if result.dispatch is InterpretationDispatch.request_clarification:
+        if result.clarification_kind == "patient_context":
+            return {
+                "frame_kind": "clarify",
+                "frame_type": "patient_booking_context",
+                "status": "ambiguous",
+                "matches": [
+                    {"display": "Synthetic patient option A"},
+                    {"display": "Synthetic patient option B"},
+                ],
+                "intent": "needs_clarification",
+                "writes_authorized": False,
+                "interpretation_dispatch": result.dispatch.value,
+                "refusal_reason_kind": None,
+                "copy": "Please choose the matching patient before I stage anything.",
+            }
+        return {
+            "frame_kind": "clarify",
+            "reason_code_options": [
+                "PATIENT_CANCELLED",
+                "PATIENT_RESCHEDULED",
+                "PRACTITIONER_UNAVAILABLE",
+                "CLINIC_OPERATIONAL",
+                "OTHER",
+            ],
+            "needs_selection": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": result.dispatch.value,
+            "refusal_reason_kind": None,
+            "copy": "Please choose an allowed reason before I stage anything.",
         }
     reason_kind = {
         InterpretationDispatch.route_meta: "meta_handoff",
@@ -305,6 +378,25 @@ def assert_interpretation_frame_consistency(frame: dict[str, object]) -> None:
         assert isinstance(frame.get("proposed_action"), str)
         assert "backend" in copy.casefold()
         assert "check" in copy.casefold()
+    elif dispatch is InterpretationDispatch.request_clarification:
+        assert frame_kind == "clarify"
+        assert frame.get("refusal_reason_kind") is None
+        assert frame.get("refused_action") is None
+        assert "choose" in copy.casefold()
+        has_patient_clarify = (
+            frame.get("frame_type") == "patient_booking_context"
+            and frame.get("status") == "ambiguous"
+            and isinstance(frame.get("matches"), list)
+            and len(frame.get("matches")) > 0
+            and frame.get("intent") == "needs_clarification"
+        )
+        has_reason_clarify = (
+            isinstance(frame.get("reason_code_options"), list)
+            and len(frame.get("reason_code_options")) > 0
+            and frame.get("needs_selection") is True
+            and frame.get("reason_code") is None
+        )
+        assert has_patient_clarify or has_reason_clarify
     else:
         expected_reason_kind = {
             InterpretationDispatch.route_meta: "meta_handoff",

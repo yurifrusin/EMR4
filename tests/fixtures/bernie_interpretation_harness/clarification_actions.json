@@ -1,0 +1,38 @@
+{
+  "schema_version": "bernie.interpretation_harness.v1",
+  "source": "authored_synthetic",
+  "cases": [
+    {
+      "id": "clarify_which_patient",
+      "utterance": "Which patient did you mean before booking?",
+      "expected_verb": null,
+      "expected_dispatch": "request_clarification",
+      "expected_authority": null,
+      "expected_frame_kind": "clarify"
+    },
+    {
+      "id": "clarify_multiple_patients_same_name",
+      "utterance": "There are multiple patients with the same name.",
+      "expected_verb": null,
+      "expected_dispatch": "request_clarification",
+      "expected_authority": null,
+      "expected_frame_kind": "clarify"
+    },
+    {
+      "id": "clarify_cancel_bad_weather_reason",
+      "utterance": "Cancel the appointment because of bad weather.",
+      "expected_verb": null,
+      "expected_dispatch": "request_clarification",
+      "expected_authority": null,
+      "expected_frame_kind": "clarify"
+    },
+    {
+      "id": "clarify_reason_code_unclear",
+      "utterance": "The reason code is unclear for this cancellation.",
+      "expected_verb": null,
+      "expected_dispatch": "request_clarification",
+      "expected_authority": null,
+      "expected_frame_kind": "clarify"
+    }
+  ]
+}

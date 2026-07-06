@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H46 Bernie Interpretation Harness provider-style copy contract integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue provider-style scenario expansion, especially clarify/ambiguity frames or another bounded reviewer pass after the next harness increment |
+| **Current active track** | H47 Bernie Interpretation Harness clarify-frame dispatch integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue provider-style scenario expansion with structured frame fixtures, or dispatch another bounded reviewer pass after the next harness increment |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -361,6 +361,14 @@ read-request copy must defer to backend checks rather than assert availability,
 and refusal copy must block the request without write authority. The tests pass
 every projected fixture frame through manifest safety evaluation and assert no
 claimed action, availability claim, confirmation bypass, or provider call.
+H47 adds a provider-free `request_clarification` dispatch and projected
+`clarify` frames for explicitly ambiguous patient context and unclear/invalid
+reason-code wording. Clarification runs after unsafe-instruction refusal and
+before ordinary action matching, carries no verb or route authority, and
+projects only to `writes_authorized=false` clarify frames with synthetic
+display choices or valid reason-code options. This gives the interpretation
+harness coverage for the remaining fake-provider frame kind without routes,
+database reads, providers, memory, H15/H-series inputs, or live patient data.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

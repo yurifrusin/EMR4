@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H47: Bernie Interpretation Harness Clarify-Frame Dispatch
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Exercise the remaining fake-provider frame kind with provider-free clarification dispatch for explicit ambiguity |
+| Worker Shape | Ariadne implementation |
+| In Scope | `request_clarification` dispatch, patient-context and reason-code clarify projections, authored synthetic fixtures, positive/negative tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; interpretation/manifest frame-shape/route-contract guard cluster (213 passed); leakage lint; `git diff --check` |
+
 ## Sprint H46: Bernie Interpretation Harness Provider-Style Copy Contract
 
 | Item | Value |

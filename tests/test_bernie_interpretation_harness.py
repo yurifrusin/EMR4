@@ -19,6 +19,7 @@ from app.services.ai.evals.manifest_eval import (
     evaluate_manifest_response,
     validate_response_frame_shape,
 )
+from app.schemas.appointments import STATUS_REASON_CODES
 from app.services.diary.action_grammar import DiaryActionVerb
 from app.services.diary.action_route_contract import RouteAuthority
 
@@ -126,6 +127,36 @@ def test_read_only_interpretation_projects_to_read_request_frame():
     assert frame["copy"] == "I can ask the backend to check the diary before showing options."
 
 
+def test_patient_ambiguity_interpretation_projects_to_clarify_frame():
+    result = interpret_receptionist_utterance("Which patient did you mean before booking?")
+    frame = interpretation_result_to_frame(result)
+
+    assert result.dispatch is InterpretationDispatch.request_clarification
+    assert result.clarification_kind == "patient_context"
+    assert frame["frame_kind"] == "clarify"
+    assert frame["frame_type"] == "patient_booking_context"
+    assert frame["status"] == "ambiguous"
+    assert frame["intent"] == "needs_clarification"
+    assert frame["writes_authorized"] is False
+    assert frame["copy"] == "Please choose the matching patient before I stage anything."
+    assert len(frame["matches"]) == 2
+    assert all("id" not in match for match in frame["matches"])
+
+
+def test_reason_code_ambiguity_interpretation_projects_to_clarify_frame():
+    result = interpret_receptionist_utterance("Cancel the appointment because of bad weather.")
+    frame = interpretation_result_to_frame(result)
+
+    assert result.dispatch is InterpretationDispatch.request_clarification
+    assert result.clarification_kind == "reason_code"
+    assert frame["frame_kind"] == "clarify"
+    assert frame["needs_selection"] is True
+    assert frame["writes_authorized"] is False
+    assert frame["copy"] == "Please choose an allowed reason before I stage anything."
+    assert set(frame["reason_code_options"]) <= STATUS_REASON_CODES
+    assert "reason_code" not in frame
+
+
 def test_refused_interpretation_projects_to_refusal_frame_without_write_authority():
     result = interpret_receptionist_utterance("Call the confirm endpoint now.")
     frame = interpretation_result_to_frame(result)
@@ -223,6 +254,23 @@ def test_projected_frame_copy_stays_inside_fake_provider_style_boundaries(case):
             "refused_action": None,
             "copy": "Completed.",
         },
+        {
+            "frame_kind": "clarify",
+            "writes_authorized": False,
+            "interpretation_dispatch": "request_clarification",
+            "refusal_reason_kind": None,
+            "copy": "Please choose.",
+        },
+        {
+            "frame_kind": "clarify",
+            "reason_code_options": ["PATIENT_CANCELLED"],
+            "needs_selection": True,
+            "reason_code": "PATIENT_CANCELLED",
+            "writes_authorized": False,
+            "interpretation_dispatch": "request_clarification",
+            "refusal_reason_kind": None,
+            "copy": "Please choose an allowed reason before I stage anything.",
+        },
     ],
 )
 def test_interpretation_frame_consistency_rejects_drifted_projected_frames(bad_frame):
@@ -280,6 +328,7 @@ def test_result_consistency_rejects_refusal_with_route_authority():
         (InterpretationDispatch.route_read_only, RouteAuthority.planned_not_implemented),
         (InterpretationDispatch.route_meta, RouteAuthority.signed_confirm),
         (InterpretationDispatch.route_meta, RouteAuthority.read_only),
+        (InterpretationDispatch.request_clarification, RouteAuthority.read_only),
         (InterpretationDispatch.refuse_planned_not_implemented, RouteAuthority.signed_confirm),
         (InterpretationDispatch.refuse_planned_not_implemented, RouteAuthority.read_only),
         (InterpretationDispatch.refuse_unknown_utterance, RouteAuthority.meta),
@@ -292,6 +341,19 @@ def test_result_consistency_rejects_invalid_dispatch_authority_pairs(dispatch, a
         authority=authority,
         dispatch=dispatch,
         rationale="negative test",
+    )
+    with pytest.raises(AssertionError):
+        assert_interpretation_result_consistency(bad)
+
+
+def test_result_consistency_rejects_clarification_without_known_kind():
+    bad = InterpretationResult(
+        utterance="synthetic impossible result",
+        verb=None,
+        authority=None,
+        dispatch=InterpretationDispatch.request_clarification,
+        rationale="negative test",
+        clarification_kind="unknown",
     )
     with pytest.raises(AssertionError):
         assert_interpretation_result_consistency(bad)

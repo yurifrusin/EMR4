@@ -5158,3 +5158,36 @@ known CRLF notice on `orchestration/integration_log.md`.
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is clarify/ambiguity-style projected frame preparation or
 another bounded reviewer pass after the next harness increment.
+
+---
+
+## Sprint H47 Closeout - Clarify-Frame Dispatch
+
+Integrated outcome:
+
+- Added `request_clarification` to the provider-free Bernie interpretation
+  harness.
+- Added authored synthetic clarification fixtures for explicit patient-context
+  ambiguity and unclear/invalid reason-code wording.
+- Patient ambiguity projects to a `clarify` frame with synthetic display
+  choices and no IDs.
+- Reason-code ambiguity projects to a `clarify` frame with valid reason-code
+  options and no selected/defaulted reason.
+- Clarification carries no verb, no route authority, no writes, and runs after
+  unsafe-instruction refusal so unsafe bypass attempts still fail closed.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `213 passed`; leakage lint safe; whitespace check clean apart from the
+known CRLF notice on `orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is structured provider-style frame fixtures or another
+bounded reviewer pass after the next harness increment.

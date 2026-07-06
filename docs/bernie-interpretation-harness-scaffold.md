@@ -137,3 +137,19 @@ that projected fixture frames do not claim a diary action has already happened,
 do not assert live availability, do not include confirmation-bypass language,
 and still pass the fake-provider manifest safety evaluator without provider
 calls.
+
+## H47 Clarify-Frame Dispatch
+
+H47 adds `request_clarification` as a provider-free dispatch class for
+authored synthetic utterances that explicitly describe ambiguity:
+
+- Patient-context ambiguity projects to a `clarify` frame with synthetic display
+  choices and no IDs.
+- Reason-code ambiguity projects to a `clarify` frame with valid reason-code
+  options and no selected/defaulted reason.
+
+Clarification runs after unsafe-instruction refusal and before ordinary action
+matching. It carries no verb, no route authority, no writes, and no database or
+provider dependency. The purpose is to exercise the remaining fake-provider
+frame kind while preserving the native backend as the authority for real
+patient matching and status/reason-code validation.
