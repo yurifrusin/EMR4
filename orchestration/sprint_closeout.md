@@ -8,10 +8,60 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 124 Appointment Command Idempotency-Key Gap Inspection |
+| Batch | Sprint 125 Appointment Command Idempotency Policy Packet |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 125 What Changed
+
+- Added `orchestration/api_spine_appointment_idempotency_policy_packet.md`, a
+  policy-only packet defining appointment command idempotency behavior before
+  implementation.
+- Defined route-family decisions for proposal routes, confirmation routes,
+  backend alias confirmations, Bernie create confirmation, slot-search reads,
+  Bernie command-style reads, and raw compatibility writes.
+- Specified replay ledger binding fields, uniqueness, retention, response
+  replay, conflict behavior, and no raw request body storage by default.
+- Folded review-driven storage constraints into the policy: same-transaction
+  appointment write/replay ledger/audit commit, replay-row locking before
+  writes, non-expiring confirmation-write entries while clinically/audit
+  relevant, deterministic JSON canonicalization, shared operation IDs for
+  aliases, and actor-role audit semantics.
+- Defined confirmation execution ordering so idempotency cannot bypass
+  `confirmed=true`, freshness, signed confirmation evidence, warning
+  acknowledgement, current-state revalidation, role/tenant policy, or audit.
+- Required future regression tests proving no duplicate appointment write on
+  replay, conflict on same key/different body, scoping by practice/actor/
+  operation, stale evidence behavior, raw compatibility policy, and audit
+  evidence without raw body exposure.
+- Added `tests/test_api_spine_appointment_idempotency_policy_packet.py` to
+  guard the packet.
+- Updated `AGENTS.md` and `orchestration/phase_programmes.md` so Programme 2G
+  now names Sprint 126 appointment command idempotency storage design as the
+  next implementation slice.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+
+## Sprint 125 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_appointment_idempotency_policy_packet.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_idempotency_policy_packet.py tests/test_api_spine_appointment_idempotency_gap.py tests/test_api_spine_openapi_backend_alignment.py tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_appointment_command_alignment_inventory.py tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`65 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check`.
+- DeepSeek Flash review found no blockers. Ariadne folded its storage-design
+  residuals into the packet before closeout so Sprint 126 starts with hard
+  transaction/concurrency/canonicalization/alias-scope constraints.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 126:
+draft the appointment command idempotency storage design before route
+enforcement.
+
+---
+
+## Previous Closeout - Sprint 124
 
 ## Sprint 124 What Changed
 

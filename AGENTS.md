@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 124 appointment command `Idempotency-Key` gap inspection completed locally. `orchestration\api_spine_appointment_idempotency_gap.md` documents that OpenAPI requires `Idempotency-Key` on proposal/confirmation-grade command paths, while current `app\routers\appointments.py` has no HTTP header binding or appointment-command replay ledger. Bernie session idempotency is explicitly scoped as non-equivalent |
-| **Next recommended work** | Sprint 125: draft the appointment command idempotency policy packet before implementation, covering route scope, replay ledger storage, actor/practice/operation/body-hash binding, stale evidence interaction, raw compatibility posture, and duplicate-write tests |
+| **Current active track** | Sprint 125 appointment command idempotency policy packet completed locally. `orchestration\api_spine_appointment_idempotency_policy_packet.md` defines route-family policy, replay ledger binding, uniqueness, execution order, stale-evidence interaction, raw compatibility decision points, and duplicate-write regression tests before implementation |
+| **Next recommended work** | Sprint 126: draft the appointment command idempotency storage design, including model/Alembic shape, uniqueness, TTL, audit linkage, canonical body hashing, transaction boundaries, and rollback behavior before route enforcement |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
