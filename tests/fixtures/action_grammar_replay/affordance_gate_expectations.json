@@ -1,0 +1,44 @@
+{
+  "id": "affordance_gate_expectations",
+  "schema_version": "action_grammar_replay.v1",
+  "source": "authored_synthetic",
+  "description": "Synthetic confirm actions must consult the runtime confirm affordance gate.",
+  "actions": [
+    {
+      "raw_name": "confirm_booking",
+      "expected_verb": "create",
+      "expected_dispatch": "route_to_confirm",
+      "expected_mutating": true,
+      "expected_implemented": true,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": true,
+      "affordance_case": "blocked_guardrail",
+      "expected_affordance_allowed": false,
+      "expected_affordance_gate": "blocked_guardrail"
+    },
+    {
+      "raw_name": "move_appointment",
+      "expected_verb": "move",
+      "expected_dispatch": "route_to_confirm",
+      "expected_mutating": true,
+      "expected_implemented": true,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": true,
+      "affordance_case": "blocked_no_proposal",
+      "expected_affordance_allowed": false,
+      "expected_affordance_gate": "blocked_no_proposal"
+    },
+    {
+      "raw_name": "status_change",
+      "expected_verb": "status_change",
+      "expected_dispatch": "route_to_confirm",
+      "expected_mutating": true,
+      "expected_implemented": true,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": true,
+      "affordance_case": "blocked_advisory_only",
+      "expected_affordance_allowed": false,
+      "expected_affordance_gate": "blocked_advisory_only"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "read_only_handoff_day",
+  "schema_version": "action_grammar_replay.v1",
+  "source": "authored_synthetic",
+  "description": "Synthetic read-only and meta actions that cannot write.",
+  "actions": [
+    {
+      "raw_name": "find_slots",
+      "expected_verb": "slot_search",
+      "expected_dispatch": "route_read_only",
+      "expected_mutating": false,
+      "expected_implemented": true,
+      "requires_staff_confirmation": false,
+      "confirm_actions_non_empty": false
+    },
+    {
+      "raw_name": "explain_schedule",
+      "expected_verb": "explain_schedule",
+      "expected_dispatch": "route_read_only",
+      "expected_mutating": false,
+      "expected_implemented": true,
+      "requires_staff_confirmation": false,
+      "confirm_actions_non_empty": false
+    },
+    {
+      "raw_name": "handoff_to_receptionist",
+      "expected_verb": "handoff",
+      "expected_dispatch": "route_meta",
+      "expected_mutating": false,
+      "expected_implemented": true,
+      "requires_staff_confirmation": false,
+      "confirm_actions_non_empty": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "unknown_actions_and_bridge",
+  "schema_version": "action_grammar_replay.v1",
+  "source": "authored_synthetic",
+  "description": "Synthetic unknown proposal names remain refused while known aliases resolve.",
+  "actions": [
+    {
+      "raw_name": "propose_booking",
+      "expected_verb": null,
+      "expected_dispatch": "refuse_unknown_action"
+    },
+    {
+      "raw_name": "propose_edit",
+      "expected_verb": null,
+      "expected_dispatch": "refuse_unknown_action"
+    },
+    {
+      "raw_name": "find_slots",
+      "expected_verb": "slot_search",
+      "expected_dispatch": "route_read_only",
+      "expected_mutating": false,
+      "expected_implemented": true,
+      "requires_staff_confirmation": false,
+      "confirm_actions_non_empty": false
+    }
+  ]
+}

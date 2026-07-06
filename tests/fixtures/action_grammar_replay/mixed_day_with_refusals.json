@@ -1,0 +1,44 @@
+{
+  "id": "mixed_day_with_refusals",
+  "schema_version": "action_grammar_replay.v1",
+  "source": "authored_synthetic",
+  "description": "Synthetic mix of available grammar actions and planned unavailable scaffolds.",
+  "actions": [
+    {
+      "raw_name": "slot_search",
+      "expected_verb": "slot_search",
+      "expected_dispatch": "route_read_only",
+      "expected_mutating": false,
+      "expected_implemented": true,
+      "requires_staff_confirmation": false,
+      "confirm_actions_non_empty": false
+    },
+    {
+      "raw_name": "check_in",
+      "expected_verb": "check_in",
+      "expected_dispatch": "refuse_not_implemented",
+      "expected_mutating": true,
+      "expected_implemented": false,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": false
+    },
+    {
+      "raw_name": "waiting_area_move",
+      "expected_verb": "waiting_area_move",
+      "expected_dispatch": "refuse_not_implemented",
+      "expected_mutating": true,
+      "expected_implemented": false,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": false
+    },
+    {
+      "raw_name": "link_patient",
+      "expected_verb": "link_patient",
+      "expected_dispatch": "refuse_not_implemented",
+      "expected_mutating": true,
+      "expected_implemented": false,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": false
+    }
+  ]
+}

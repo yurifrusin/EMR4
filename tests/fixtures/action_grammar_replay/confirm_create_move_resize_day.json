@@ -1,0 +1,56 @@
+{
+  "id": "confirm_create_move_resize_day",
+  "schema_version": "action_grammar_replay.v1",
+  "source": "authored_synthetic",
+  "description": "Synthetic confirm-grade actions that should route to existing confirm descriptors.",
+  "actions": [
+    {
+      "raw_name": "confirm_booking",
+      "expected_verb": "create",
+      "expected_dispatch": "route_to_confirm",
+      "expected_mutating": true,
+      "expected_implemented": true,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": true,
+      "affordance_case": "allowed",
+      "expected_affordance_allowed": true,
+      "expected_affordance_gate": "allowed"
+    },
+    {
+      "raw_name": "move_appointment",
+      "expected_verb": "move",
+      "expected_dispatch": "route_to_confirm",
+      "expected_mutating": true,
+      "expected_implemented": true,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": true,
+      "affordance_case": "allowed",
+      "expected_affordance_allowed": true,
+      "expected_affordance_gate": "allowed"
+    },
+    {
+      "raw_name": "resize_appointment",
+      "expected_verb": "resize",
+      "expected_dispatch": "route_to_confirm",
+      "expected_mutating": true,
+      "expected_implemented": true,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": true,
+      "affordance_case": "allowed",
+      "expected_affordance_allowed": true,
+      "expected_affordance_gate": "allowed"
+    },
+    {
+      "raw_name": "cancel_appointment",
+      "expected_verb": "cancel",
+      "expected_dispatch": "route_to_confirm",
+      "expected_mutating": true,
+      "expected_implemented": true,
+      "requires_staff_confirmation": true,
+      "confirm_actions_non_empty": true,
+      "affordance_case": "allowed",
+      "expected_affordance_allowed": true,
+      "expected_affordance_gate": "allowed"
+    }
+  ]
+}
