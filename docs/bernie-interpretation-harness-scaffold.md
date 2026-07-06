@@ -153,3 +153,21 @@ matching. It carries no verb, no route authority, no writes, and no database or
 provider dependency. The purpose is to exercise the remaining fake-provider
 frame kind while preserving the native backend as the authority for real
 patient matching and status/reason-code validation.
+
+## H48 Fixture-Backed Frame Contract Matrix
+
+H48 adds
+`tests/fixtures/bernie_interpretation_harness/projected_frame_contracts.json`.
+The matrix records the expected frame kind and key-level contract for each
+interpretation dispatch:
+
+- Required `true`, `false`, and `null` fields.
+- Fields that must be absent from projected frames.
+- Expected refusal reason kinds where relevant.
+- Required safe copy fragments.
+
+The tests now prove every dispatch has a contract, every contract is observed by
+at least one authored fixture, and every projected frame satisfies the matching
+contract before it is passed through the broader fake-provider manifest
+evaluator. The contract fixture stays payload-free and avoids route, endpoint,
+patient/practitioner/appointment ID fragments.

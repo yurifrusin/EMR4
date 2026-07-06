@@ -35,9 +35,21 @@ def _cases():
     cases = []
     for path in sorted(FIXTURE_DIR.glob("*.json")):
         payload = json.loads(path.read_text(encoding="utf-8"))
+        if "cases" not in payload:
+            continue
         for case in payload["cases"]:
             cases.append({**case, "_fixture": path.name})
     return cases
+
+
+def _frame_contracts():
+    path = FIXTURE_DIR / "projected_frame_contracts.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return payload["contracts"]
+
+
+def _contracts_by_dispatch():
+    return {contract["dispatch"]: contract for contract in _frame_contracts()}
 
 
 def _expected_refusal_reason_kind(dispatch: str):
@@ -60,7 +72,51 @@ def test_fixture_schema_is_authored_synthetic():
         payload = json.loads(path.read_text(encoding="utf-8"))
         assert payload["schema_version"] == INTERPRETATION_HARNESS_SCHEMA_VERSION
         assert payload["source"] == "authored_synthetic"
-        assert payload["cases"]
+        assert payload.get("cases") or payload.get("contracts")
+
+
+def test_projected_frame_contract_fixture_covers_every_dispatch():
+    contracts = _contracts_by_dispatch()
+    assert set(contracts) == {dispatch.value for dispatch in InterpretationDispatch}
+    assert {contract["frame_kind"] for contract in contracts.values()} == {
+        "proposal",
+        "read_request",
+        "clarify",
+        "refusal",
+    }
+
+
+def _assert_frame_matches_contract(frame, contract):
+    assert frame["frame_kind"] == contract["frame_kind"]
+    for key in contract.get("required_true", []):
+        assert frame.get(key) is True
+    for key in contract.get("required_false", []):
+        assert frame.get(key) is False
+    for key in contract.get("required_null", []):
+        assert frame.get(key) is None
+    for key in contract.get("required_absent", []):
+        assert key not in frame
+    if "required_refusal_reason_kind" in contract:
+        assert frame.get("refusal_reason_kind") == contract["required_refusal_reason_kind"]
+    copy = frame.get("copy")
+    assert isinstance(copy, str)
+    copy_lower = copy.casefold()
+    for fragment in contract.get("required_copy_contains", []):
+        assert fragment in copy_lower
+
+
+@pytest.mark.parametrize("case", _cases(), ids=lambda case: case["id"])
+def test_projected_frames_match_fixture_backed_contract_matrix(case):
+    result = interpret_receptionist_utterance(case["utterance"])
+    frame = interpretation_result_to_frame(result)
+    contract = _contracts_by_dispatch()[case["expected_dispatch"]]
+
+    _assert_frame_matches_contract(frame, contract)
+
+
+def test_every_projected_frame_contract_is_observed_by_authored_fixtures():
+    observed_dispatches = {case["expected_dispatch"] for case in _cases()}
+    assert observed_dispatches == set(_contracts_by_dispatch())
 
 
 @pytest.mark.parametrize("case", _cases(), ids=lambda case: case["id"])

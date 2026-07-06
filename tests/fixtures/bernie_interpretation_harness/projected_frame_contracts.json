@@ -1,0 +1,77 @@
+{
+  "schema_version": "bernie.interpretation_harness.v1",
+  "source": "authored_synthetic",
+  "contracts": [
+    {
+      "dispatch": "route_to_confirm",
+      "frame_kind": "proposal",
+      "required_true": ["requires_staff_confirmation"],
+      "required_false": ["writes_authorized"],
+      "required_null": ["refusal_reason_kind"],
+      "required_absent": ["refused_action", "reason_code", "availability"],
+      "required_copy_contains": ["stage", "staff review"]
+    },
+    {
+      "dispatch": "route_read_only",
+      "frame_kind": "read_request",
+      "required_true": ["requires_backend_check"],
+      "required_false": ["writes_authorized"],
+      "required_null": ["refusal_reason_kind"],
+      "required_absent": ["refused_action", "reason_code", "availability"],
+      "required_copy_contains": ["backend", "check"]
+    },
+    {
+      "dispatch": "request_clarification",
+      "frame_kind": "clarify",
+      "required_true": [],
+      "required_false": ["writes_authorized"],
+      "required_null": ["refusal_reason_kind"],
+      "required_absent": [
+        "refused_action",
+        "reason_code",
+        "selected_without_clarification"
+      ],
+      "required_copy_contains": ["choose"]
+    },
+    {
+      "dispatch": "route_meta",
+      "frame_kind": "refusal",
+      "required_true": ["blocked"],
+      "required_false": ["writes_authorized"],
+      "required_null": [],
+      "required_absent": ["reason_code", "availability"],
+      "required_refusal_reason_kind": "meta_handoff",
+      "required_copy_contains": ["cannot"]
+    },
+    {
+      "dispatch": "refuse_planned_not_implemented",
+      "frame_kind": "refusal",
+      "required_true": ["blocked"],
+      "required_false": ["writes_authorized"],
+      "required_null": [],
+      "required_absent": ["reason_code", "availability"],
+      "required_refusal_reason_kind": "planned_not_implemented",
+      "required_copy_contains": ["cannot"]
+    },
+    {
+      "dispatch": "refuse_unsafe_instruction",
+      "frame_kind": "refusal",
+      "required_true": ["blocked"],
+      "required_false": ["writes_authorized"],
+      "required_null": ["refused_action"],
+      "required_absent": ["reason_code", "availability"],
+      "required_refusal_reason_kind": "unsafe_instruction",
+      "required_copy_contains": ["cannot"]
+    },
+    {
+      "dispatch": "refuse_unknown_utterance",
+      "frame_kind": "refusal",
+      "required_true": ["blocked"],
+      "required_false": ["writes_authorized"],
+      "required_null": ["refused_action"],
+      "required_absent": ["reason_code", "availability"],
+      "required_refusal_reason_kind": "unknown_utterance",
+      "required_copy_contains": ["cannot"]
+    }
+  ]
+}

@@ -5191,3 +5191,37 @@ known CRLF notice on `orchestration/integration_log.md`.
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is structured provider-style frame fixtures or another
 bounded reviewer pass after the next harness increment.
+
+---
+
+## Sprint H48 Closeout - Frame Contract Matrix
+
+Integrated outcome:
+
+- Added
+  `tests/fixtures/bernie_interpretation_harness/projected_frame_contracts.json`
+  as an authored synthetic contract matrix for projected frames.
+- The matrix covers every `InterpretationDispatch` and records expected frame
+  kind, required true/false/null fields, absent fields, refusal reason kinds,
+  and safe copy fragments.
+- Tests prove every dispatch has a contract, every contract is observed by the
+  authored utterance fixtures, and every projected frame satisfies the matching
+  contract before broader manifest evaluation.
+- The contract fixture remains payload-free and does not quote route, endpoint,
+  patient/practitioner/appointment ID fragments.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `259 passed`; leakage lint safe; whitespace check clean apart from the
+known CRLF notice on `orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is a bounded reviewer pass over the harness or small
+projected-frame validator hardening.

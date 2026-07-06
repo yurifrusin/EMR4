@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H48: Bernie Interpretation Harness Frame Contract Matrix
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Make projected frame expectations fixture-backed so future utterance additions cannot silently loosen provider-style contracts |
+| Worker Shape | Ariadne implementation |
+| In Scope | Authored projected-frame contract fixture, dispatch coverage tests, per-frame contract assertions, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; interpretation/manifest frame-shape/route-contract guard cluster (259 passed); leakage lint; `git diff --check` |
+
 ## Sprint H47: Bernie Interpretation Harness Clarify-Frame Dispatch
 
 | Item | Value |
