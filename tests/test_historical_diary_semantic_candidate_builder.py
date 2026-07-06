@@ -162,7 +162,7 @@ def test_builds_low_confidence_candidates_from_safe_neutral_aggregate():
     assert payload["source"] == "approved_h15_review_payload"
     assert payload["semantic_scope"]["fixture_family"] == "action_grammar_candidates"
     assert len(payload["fixtures"]) == 2
-    assert {fixture["action_name"] for fixture in payload["fixtures"]} == {"status_change"}
+    assert {fixture["action_name"] for fixture in payload["fixtures"]} == {"explain_schedule"}
     assert {fixture["confidence_label"] for fixture in payload["fixtures"]} == {"low"}
     assert {fixture["status_categories"][0] for fixture in payload["fixtures"]} == {"unknown"}
 

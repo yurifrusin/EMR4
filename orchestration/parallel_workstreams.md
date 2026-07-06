@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H28: Semantic Candidate Builder Adversarial Review
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Review H27 candidate semantics before any committed semantic fixture promotion |
+| Worker Shape | Ariadne adversarial review and bounded repair |
+| In Scope | Review doc, mutating-action downgrade to read-only explanation candidate, synthetic test update, local ignored candidate regeneration |
+| Out Of Scope | Broad full-trove processing, committed generated local payloads, provider calls, RAG/GraphRAG/memory, route/UI/database writes |
+| Verification | `py_compile`; ignored candidate regeneration/validation; leakage lint; neutral aggregate validation; focused H15/H28 pytest cluster (52 passed); `git diff --check` |
+
 ## Sprint H27: Bounded H15 Semantic Prototype
 
 | Item | Value |

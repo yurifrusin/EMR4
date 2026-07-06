@@ -42,14 +42,18 @@ No generated local payload is committed.
 - Time-token count range: 78 to 79.
 - Date-token count range: 13 to 15.
 - Candidate fixture count: 80.
-- Candidate action names: `status_change`.
+- Candidate action names: `status_change` in the original H27 run, superseded
+  by H28 review as too assertive for neutral aggregate evidence. The builder now
+  emits `explain_schedule` candidates only.
 - Candidate confidence labels: `low`.
 - Candidate status categories: `unknown`.
 
 Interpretation: the prototype proves the approved H15 pipeline can transform
-validator-safe neutral aggregates into validator-safe semantic candidate
-fixtures. It does not prove appointment status, patient attendance, booking
-creation, cancellation, movement, or clinical meaning.
+validator-safe neutral aggregates into validator-safe grammar candidate
+fixtures. H28 review tightened this boundary: neutral aggregate evidence may
+support read-only explanation candidates, but not mutating status-change,
+booking, cancellation, movement, attendance, or other appointment-truth
+assertions.
 
 ## Validation
 
