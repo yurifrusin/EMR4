@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H32 test-only advisory adapter proposal integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Add route-level read-only explanation tests proving advisory H15 frames do not create provider calls, memory persistence, DB writes, or confirmation authority |
+| **Current active track** | H33 route-level read-only explanation boundary integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Consider an explicit read-only explanation endpoint/test harness only if it preserves no provider calls, no memory persistence, no DB writes, and no confirmation authority |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -245,6 +245,11 @@ H32 added a test-only adapter in `tests/h15_advisory_adapter.py`, with
 hand-authored H15 candidates to `PracticeKnowledgeResult` and then through
 `to_advisory_frame`, proving the shape stays advisory-only and cannot affect
 slots, policy, confirmation, or writes. No runtime wiring was added.
+H33 added `docs/historical-diary-trove-h15-route-explanation-boundary.md` and
+`tests/test_historical_diary_route_explanation_boundary.py`. The tests prove H15
+advisory frames do not create availability, roster, no-slot, proposal, or
+confirmation authority, and current API routers do not import H15 fixtures,
+ignored local payloads, or the test-only adapter.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

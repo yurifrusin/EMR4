@@ -8,7 +8,7 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H32: H15 Advisory-Only Adapter Proposal |
+| Batch | Sprint H33: H15 Route Explanation Boundary |
 | Integrated through | Ariadne implementation |
 | Status | Integrated locally; focused verification passed; not yet pushed |
 | Last updated | 2026-07-06 |
@@ -57,6 +57,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Added `tests\h15_advisory_adapter.py`.
 - Added `tests\test_historical_diary_advisory_adapter.py`.
 - Added `docs\historical-diary-trove-h15-advisory-adapter-proposal.md`.
+- Added `tests\test_historical_diary_route_explanation_boundary.py`.
+- Added `docs\historical-diary-trove-h15-route-explanation-boundary.md`.
 - No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
 
 ## Verification
@@ -107,6 +109,8 @@ reviewed, integrated, verified, pushed, and audited.
 - H31 focused guard pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_memory_boundary.py tests\test_h15_semantic_candidate_fixtures.py tests\action_grammar_replay tests\test_historical_diary_semantic_candidate_builder.py tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\test_h_series_profile_consistency.py tests\test_practice_knowledge_advisory_boundary.py -q` (92 passed).
 - H32 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
 - H32 advisory/boundary pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_advisory_adapter.py tests\test_practice_knowledge_advisory_boundary.py tests\test_historical_diary_memory_boundary.py tests\test_h15_semantic_candidate_fixtures.py -q` (42 passed).
+- H33 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- H33 route/advisory boundary pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_route_explanation_boundary.py tests\test_historical_diary_advisory_adapter.py tests\test_practice_knowledge_advisory_boundary.py tests\test_historical_diary_memory_boundary.py tests\test_h15_semantic_candidate_fixtures.py -q` (44 passed).
 
 ## Local Result
 
@@ -131,6 +135,7 @@ reviewed, integrated, verified, pushed, and audited.
 - H30 proves those fixtures are consumed by the deterministic action-grammar replay harness as read-only actions.
 - H31 keeps historical diary candidates out of runtime Access AI, practice-knowledge, Diary authority, and Bernie memory modules until a separate boundary is implemented.
 - H32 proves, in tests only, that H15 candidates can become advisory-only practice knowledge and Bernie advisory frames without authority over slots, policy, confirmation, or writes.
+- H33 proves those advisory frames remain read-only at the reception context and current API routers do not import H15 candidate material.
 
 ## Bernie Memory Result
 
@@ -154,7 +159,7 @@ No required manual review before continuing. Yuri review is required only if a f
 
 ## Known Follow-Up
 
-- Add route-level read-only explanation tests, still without provider/memory integration.
+- Consider an explicit read-only explanation endpoint/test harness, still without provider/memory integration.
 - Do not use the full trove broadly until H22 is reviewed and Yuri explicitly approves H15.
 - Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 

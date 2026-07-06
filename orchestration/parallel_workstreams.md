@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H33: H15 Route Explanation Boundary
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Prove H15 advisory frames remain read-only at the reception-context/route boundary |
+| Worker Shape | Ariadne implementation |
+| In Scope | Route-boundary tests and source-safe doc |
+| Out Of Scope | New endpoint, runtime H15 adapter wiring, RAG/GraphRAG, provider calls, memory persistence, route/UI/database writes, broad full-trove processing |
+| Verification | `py_compile`; route/advisory boundary tests; leakage lint; focused guard cluster (44 passed); `git diff --check` |
+
 ## Sprint H32: H15 Advisory-Only Adapter Proposal
 
 | Item | Value |
