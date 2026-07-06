@@ -83,12 +83,16 @@ Ariadne receives an implementation-ready plan for the smallest deterministic syn
 
 ## Dissent / Risks
 
-Record concerns, alternative designs, or reasons this task should not be merged as-is.
+Claude session-limited; Codex produced the plan. See orchestration/agent_inbox/codex/plan-r30-action-grammar-replay-consumer.md for full plan.
 
 ## Completion Notes
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+- orchestration/agent_inbox/codex/plan-r30-action-grammar-replay-consumer.md (new plan artifact produced by Codex)
 - Verification run:
+- Plan packet inspection only. Claude unavailable; Codex produced the plan. See plan artifact for full verification steps.
 - Remaining risks:
+- Tautology risk is the central design challenge; plan addresses with authored expected values, consumer-side dispatch branching, and standalone synthetic-descriptor test.
+- Claude lane replaced per protocol; DeepSeek Flash or Ariadne should implement per plan.
