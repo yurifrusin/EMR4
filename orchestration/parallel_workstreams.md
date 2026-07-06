@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H35: Action-Grammar Replay Fixture Schema Hardening
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Keep authored synthetic replay fixtures as grammar-shape evidence only, without payload-like route/identity/evidence fields |
+| Worker Shape | Ariadne implementation |
+| In Scope | Test-only replay loader schema allowlist and negative tests |
+| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; action-grammar replay/grammar/H15 fixture guard cluster (50 passed); leakage lint; `git diff --check` |
+
 ## Sprint H34: H15 Read-Only Explanation Preview Endpoint
 
 | Item | Value |

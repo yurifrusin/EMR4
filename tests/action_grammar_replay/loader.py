@@ -17,6 +17,41 @@ KNOWN_DISPATCH_VALUES = {
     "refuse_not_implemented",
     "refuse_unknown_action",
 }
+ALLOWED_TOP_LEVEL_KEYS = {
+    "id",
+    "schema_version",
+    "source",
+    "description",
+    "actions",
+}
+ALLOWED_ACTION_KEYS = {
+    "raw_name",
+    "expected_verb",
+    "expected_dispatch",
+    "expected_mutating",
+    "expected_implemented",
+    "requires_staff_confirmation",
+    "confirm_actions_non_empty",
+    "affordance_case",
+    "expected_affordance_allowed",
+    "expected_affordance_gate",
+}
+FORBIDDEN_ACTION_KEYS = {
+    "payload",
+    "context",
+    "evidence",
+    "confirmation_evidence",
+    "patient",
+    "patient_id",
+    "practitioner",
+    "practitioner_id",
+    "appointment",
+    "appointment_id",
+    "slot",
+    "slot_id",
+    "route",
+    "endpoint",
+}
 FORBIDDEN_TEXT_FRAGMENTS = {
     "h_series",
     "h-series",
@@ -59,6 +94,10 @@ def load_day_script(path: Path) -> dict[str, Any]:
     if payload.get("source") != REQUIRED_SOURCE:
         raise ValueError(f"{path.name}: source must be {REQUIRED_SOURCE!r}")
 
+    extra_top_level = sorted(set(payload) - ALLOWED_TOP_LEVEL_KEYS)
+    if extra_top_level:
+        raise ValueError(f"{path.name}: unsupported top-level key(s) {extra_top_level}")
+
     actions = payload.get("actions")
     if not isinstance(actions, list) or not actions:
         raise ValueError(f"{path.name}: actions must be a non-empty list")
@@ -71,6 +110,17 @@ def load_day_script(path: Path) -> dict[str, Any]:
     for index, action in enumerate(actions):
         if not isinstance(action, dict):
             raise ValueError(f"{path.name}: actions[{index}] must be an object")
+        blocked_action_keys = sorted(set(action) & FORBIDDEN_ACTION_KEYS)
+        if blocked_action_keys:
+            raise ValueError(
+                f"{path.name}: actions[{index}] forbidden action payload key(s) "
+                f"{blocked_action_keys}"
+            )
+        extra_action_keys = sorted(set(action) - ALLOWED_ACTION_KEYS)
+        if extra_action_keys:
+            raise ValueError(
+                f"{path.name}: actions[{index}] unsupported action key(s) {extra_action_keys}"
+            )
         if not action.get("raw_name"):
             raise ValueError(f"{path.name}: actions[{index}].raw_name is required")
         dispatch = action.get("expected_dispatch")

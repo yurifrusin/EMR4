@@ -4794,3 +4794,33 @@ Result: `65 passed`; leakage lint safe; whitespace check clean.
 Sprint engine state: continuing. No user intervention is required; recommended
 next direction is either tightening no-provider/no-write dev route contracts or
 returning to native Bernie/Diary grammar coverage.
+
+---
+
+## Sprint H35 Closeout - Action-Grammar Replay Fixture Schema
+
+Integrated outcome:
+
+- Hardened `tests/action_grammar_replay/loader.py` with allowlisted top-level
+  and per-action keys for authored synthetic replay fixtures.
+- Added negative tests rejecting payload-like action fields such as `payload`,
+  `endpoint`, and identity keys before they can become route or evidence
+  scaffolding.
+- Preserved the replay harness as grammar-shape evidence only: no routes, UI,
+  providers, database writes, raw trove files, ignored local payloads, H-series
+  profile consumption, H15 runtime wiring, RAG, GraphRAG, or memory.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\action_grammar_replay\loader.py tests\action_grammar_replay\test_grammar_replay.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\action_grammar_replay\test_grammar_replay.py tests\test_diary_action_grammar.py tests\test_h15_semantic_candidate_fixtures.py -q
+git diff --check
+```
+
+Result: `50 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; recommended
+next direction is further native Bernie/Diary grammar coverage, with broader
+route-contract review only if drift appears.

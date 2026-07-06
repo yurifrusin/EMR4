@@ -49,6 +49,72 @@ def test_loader_rejects_h_series_profile_shape():
         temp_dir.cleanup()
 
 
+def test_loader_rejects_unapproved_top_level_keys(tmp_path):
+    payload = {
+        "id": "bad",
+        "schema_version": "action_grammar_replay.v1",
+        "source": "authored_synthetic",
+        "description": "Synthetic replay fixture.",
+        "memory_context": {"notes": "not allowed"},
+        "actions": [{"raw_name": "find_slots", "expected_dispatch": "route_read_only"}],
+    }
+    path_obj = tmp_path / "fixture.json"
+    path_obj.write_text(__import__("json").dumps(payload), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="unsupported top-level key"):
+        loader.load_day_script(path_obj)
+
+
+@pytest.mark.parametrize(
+    "forbidden_key, value",
+    [
+        ("payload", {"reason": "not allowed"}),
+        ("patient_id", "00000000-0000-0000-0000-000000000001"),
+        ("endpoint", "/api/v1/appointments/proposals/create/confirm"),
+    ],
+)
+def test_loader_rejects_payload_like_action_keys(tmp_path, forbidden_key, value):
+    payload = {
+        "id": "bad",
+        "schema_version": "action_grammar_replay.v1",
+        "source": "authored_synthetic",
+        "description": "Synthetic replay fixture.",
+        "actions": [
+            {
+                "raw_name": "find_slots",
+                "expected_dispatch": "route_read_only",
+                forbidden_key: value,
+            }
+        ],
+    }
+    path_obj = tmp_path / "fixture.json"
+    path_obj.write_text(__import__("json").dumps(payload), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="forbidden action payload key"):
+        loader.load_day_script(path_obj)
+
+
+def test_loader_rejects_unknown_action_keys_even_when_not_payload_like(tmp_path):
+    payload = {
+        "id": "bad",
+        "schema_version": "action_grammar_replay.v1",
+        "source": "authored_synthetic",
+        "description": "Synthetic replay fixture.",
+        "actions": [
+            {
+                "raw_name": "find_slots",
+                "expected_dispatch": "route_read_only",
+                "unexpected_flag": True,
+            }
+        ],
+    }
+    path_obj = tmp_path / "fixture.json"
+    path_obj.write_text(__import__("json").dumps(payload), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="unsupported action key"):
+        loader.load_day_script(path_obj)
+
+
 def test_consumer_dispatch_uses_descriptor_fields_not_enum_membership():
     base = DIARY_ACTION_GRAMMAR[DiaryActionVerb.slot_search]
     synthetic = DiaryActionVerbDescriptor(
