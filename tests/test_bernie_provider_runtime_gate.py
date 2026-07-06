@@ -1,6 +1,7 @@
 import json
 import inspect
 from pathlib import Path
+from typing import get_args
 
 import pytest
 
@@ -75,7 +76,10 @@ def test_interpreter_factory_uses_live_provider_allowlist():
         interpreter = get_booking_instruction_interpreter(provider)
         assert isinstance(interpreter, GeminiVertexBookingInstructionInterpreter)
 
-    assert isinstance(get_booking_instruction_interpreter("fake"), FakeBookingInstructionInterpreter)
+    assert isinstance(
+        get_booking_instruction_interpreter("fake"),
+        FakeBookingInstructionInterpreter,
+    )
     assert isinstance(
         get_booking_instruction_interpreter("disabled"),
         DisabledBookingInstructionInterpreter,
@@ -84,6 +88,48 @@ def test_interpreter_factory_uses_live_provider_allowlist():
         get_booking_instruction_interpreter("unknown-provider"),
         DisabledBookingInstructionInterpreter,
     )
+
+
+def test_provider_metadata_boundary_matches_live_provider_allowlist():
+    non_live_interpreters = [
+        DisabledBookingInstructionInterpreter(),
+        FakeBookingInstructionInterpreter(),
+    ]
+    for interpreter in non_live_interpreters:
+        assert interpreter.metadata.live_provider is False
+        assert interpreter.metadata.provider not in LIVE_BERNIE_INTERPRETER_PROVIDERS
+
+    live_interpreter = GeminiVertexBookingInstructionInterpreter()
+    assert live_interpreter.metadata.live_provider is True
+    assert live_interpreter.metadata.mode == "live"
+    assert live_interpreter.metadata.provider in LIVE_BERNIE_INTERPRETER_PROVIDERS
+
+
+def test_live_provider_aliases_resolve_to_one_canonical_metadata_provider():
+    canonical_providers = {
+        get_booking_instruction_interpreter(provider).metadata.provider
+        for provider in LIVE_BERNIE_INTERPRETER_PROVIDERS
+    }
+
+    assert canonical_providers == {GeminiVertexBookingInstructionInterpreter.metadata.provider}
+
+
+def test_interpreter_metadata_provider_values_are_unique_and_schema_declared():
+    providers = [
+        DisabledBookingInstructionInterpreter.metadata.provider,
+        FakeBookingInstructionInterpreter.metadata.provider,
+        GeminiVertexBookingInstructionInterpreter.metadata.provider,
+    ]
+    declared_provider_values = set(
+        get_args(
+            type(GeminiVertexBookingInstructionInterpreter.metadata).model_fields[
+                "provider"
+            ].annotation
+        )
+    )
+
+    assert len(providers) == len(set(providers))
+    assert set(providers) <= declared_provider_values
 
 
 def test_interpret_route_uses_settings_provider_boundary():

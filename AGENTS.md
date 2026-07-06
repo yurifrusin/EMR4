@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 111 provider alias drift guard integrated locally. The Bernie interpreter factory now uses `LIVE_BERNIE_INTERPRETER_PROVIDERS` from `app/config.py` instead of a duplicated inline live alias set, and tests prove the interpret route still goes through `settings.bernie_booking_interpreter_provider` plus the factory without hardcoding live provider names/classes. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
-| **Next recommended work** | Sprint 112: add a provider-boundary audit/readiness invariant for future multi-provider growth, still blocked/default-disabled and without live calls or route behavior changes |
+| **Current active track** | Sprint 112 provider metadata readiness invariants integrated locally. Tests now prove disabled/fake interpreters remain non-live and outside `LIVE_BERNIE_INTERPRETER_PROVIDERS`, the Gemini Vertex interpreter remains the sole live canonical provider, all live aliases resolve to that canonical provider, and current provider metadata values are unique/schema-declared. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 113: add a lightweight provider-boundary readiness report or static check that summarizes disabled/fake/live provider posture for reviewers, still blocked/default-disabled and without live calls or route behavior changes |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

@@ -190,6 +190,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 112 provider-boundary audit/readiness invariant for future multi-provider growth, still blocked/default-disabled and no live calls |
 | Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 112: Provider Metadata Readiness Invariants
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Strengthen provider-boundary readiness for future multi-provider growth without adding runtime behavior |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI `1.0.16` available; DeepSeek Flash bridge available |
+| Ariadne Lane | Added metadata invariants for non-live providers, canonical live provider resolution, and unique/schema-declared provider metadata values |
+| DeepSeek Lane | Reviewed the metadata invariants as non-blocking; metadata-uniqueness residual risk was folded into the sprint |
+| Verification | `py_compile`; focused provider/interpreter pytest (`43 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 113 lightweight provider-boundary readiness report/static check for reviewers |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

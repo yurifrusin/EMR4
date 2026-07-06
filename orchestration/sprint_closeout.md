@@ -8,10 +8,44 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 111 Provider Alias Drift Guard |
+| Batch | Sprint 112 Provider Metadata Readiness Invariants |
 | Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 112 What Changed
+
+- Extended `tests/test_bernie_provider_runtime_gate.py` with provider metadata
+  readiness invariants.
+- Disabled and fake Bernie interpreters must keep `live_provider=false` and
+  remain outside `LIVE_BERNIE_INTERPRETER_PROVIDERS`.
+- The Gemini Vertex interpreter must keep `live_provider=true`, `mode="live"`,
+  and a canonical provider value inside the live-provider allowlist.
+- Every current live alias must resolve to the same canonical metadata provider.
+- Current interpreter provider metadata values must be unique and declared by
+  the response schema.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Its metadata-uniqueness residual
+  risk was folded into the sprint before closeout.
+
+## Sprint 112 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_bernie_provider_runtime_gate.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_provider_runtime_gate.py tests/test_bernie_interpret_booking_instruction.py -q`
+  (`43 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- tests/test_bernie_provider_runtime_gate.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 113:
+add a lightweight provider-boundary readiness report or static check that
+summarizes disabled/fake/live provider posture for reviewers, still
+blocked/default-disabled and without live calls or route behavior changes.
+
+---
+
+## Previous Closeout - Sprint 111
 
 ## Sprint 111 What Changed
 
