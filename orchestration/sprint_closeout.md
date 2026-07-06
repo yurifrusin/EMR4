@@ -8,10 +8,58 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 128 Appointment Idempotency Model/Migration Preflight |
+| Batch | Sprint 129 Appointment Idempotency Storage Helper |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 129 What Changed
+
+- Added `app/services/appointment_idempotency.py`, a storage-layer helper module
+  for appointment command idempotency.
+- Added canonical JSON serialization, SHA-256 body hashing, HMAC/SHA-256
+  idempotency-key hashing, ledger-first claim decisions with
+  `with_for_update()`, and completion metadata storage.
+- Added storage decisions for `started`, `replay`, `conflict`, `in_progress`,
+  `stale_in_progress`, and `failed_transient`.
+- Added `tests/test_api_spine_appointment_idempotency_storage_helper.py` with
+  DB-backed tests for stable hashes, no raw key storage, in-progress creation,
+  completed same-key/same-body replay, same-key/different-body conflict,
+  in-progress retry refusal, stale `in_progress` refusal, no helper commits, no
+  appointment writes, and no appointment-router wiring.
+- Added `orchestration/api_spine_appointment_idempotency_storage_helper.md` to
+  record the helper-only scope and Sprint 130 route integration preflight.
+- Folded DeepSeek review residuals by adding explicit `failed_transient`
+  coverage and documenting stale `in_progress`/`expires_at` as Sprint 130 caller
+  contract decisions.
+- Updated `AGENTS.md`, `orchestration/phase_programmes.md`,
+  `orchestration/integration_log.md`, and the phase checkpoint test so
+  Programme 2G now names Sprint 130 appointment idempotency route integration
+  preflight as the next slice.
+- Preserved fake/default-disabled behavior; no appointment route behavior
+  change, provider call, live smoke, runtime FGA client, external patient
+  client, GraphQL mutation, H15/H-series runtime import, memory/RAG/GraphRAG,
+  broad trove mining, or route-level model-to-database write was added.
+
+## Sprint 129 Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\services\appointment_idempotency.py tests\test_api_spine_appointment_idempotency_storage_helper.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_idempotency_storage_helper.py -q`
+  (`9 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_idempotency_storage_helper.py tests/test_api_spine_appointment_idempotency_model_migration.py tests/test_api_spine_appointment_idempotency_storage_artifact_guard.py tests/test_api_spine_appointment_idempotency_storage_design.py tests/test_api_spine_appointment_idempotency_policy_packet.py tests/test_api_spine_appointment_idempotency_gap.py tests/test_api_spine_openapi_backend_alignment.py tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_appointment_command_alignment_inventory.py tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`95 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check` (known CRLF notice on `orchestration/integration_log.md`
+  only).
+- DeepSeek Flash review found no blockers. Ariadne folded its
+  `failed_transient` residual into test coverage and recorded the stale/expiry
+  caller-contract decisions for Sprint 130.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 130:
+appointment idempotency route integration preflight for one confirm family.
+
+---
+
+## Previous Closeout - Sprint 128
 
 ## Sprint 128 What Changed
 
