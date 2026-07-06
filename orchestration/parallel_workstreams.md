@@ -260,6 +260,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 117 explicit proposal-citation field contract for provider-boundary reports, or next provider-boundary checkpoint if current guard stack is enough |
 | Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 117: Provider-Boundary Proposal-Citation Field Contract
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Make the provider-boundary readiness report explicitly declare which blocked fields proposal markdown must cite |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI not found on PATH in this shell; DeepSeek Flash bridge available |
+| Ariadne Lane | Added `PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS`, emitted it as `proposal_citation_required_fields`, asserted it in report safety checks, and synchronized proposal guard tests against it |
+| DeepSeek Lane | Reviewed as safe/no-blocker; residuals are the intentional `live_alias_count=4` snapshot and existing static app metadata imports |
+| Verification | `py_compile`; provider-boundary report CLI; focused report/proposal pytest (`18 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 118 next provider-boundary checkpoint, likely small proposal-doc/release-gate consolidation unless a broader programme checkpoint is higher leverage |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

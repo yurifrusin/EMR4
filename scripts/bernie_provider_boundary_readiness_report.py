@@ -22,6 +22,16 @@ from app.services.bernie_booking_interpreter import (
 )
 
 REPORT_SCHEMA_VERSION = "bernie.provider_boundary_readiness_report.v1"
+PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS = (
+    "default_provider",
+    "runtime_or_provider_wiring_ready",
+    "live_provider_enabled",
+    "provider_calls_performed",
+    "route_behavior_changed",
+    "database_access_performed",
+    "memory_or_rag_access_performed",
+    "historical_diary_material_access_performed",
+)
 
 
 def _declared_provider_values() -> set[str]:
@@ -66,6 +76,9 @@ def build_provider_boundary_report() -> dict[str, Any]:
     return {
         "schema_version": REPORT_SCHEMA_VERSION,
         "source": "static_provider_boundary",
+        "proposal_citation_required_fields": list(
+            PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS
+        ),
         "provider_metadata_count": len(metadata_rows),
         "declared_provider_count": len(_declared_provider_values()),
         "live_alias_count": len(LIVE_BERNIE_INTERPRETER_PROVIDERS),
@@ -97,6 +110,9 @@ def build_provider_boundary_report() -> dict[str, Any]:
 def assert_provider_boundary_report_safety(report: dict[str, Any]) -> None:
     assert report["schema_version"] == REPORT_SCHEMA_VERSION
     assert report["source"] == "static_provider_boundary"
+    assert report["proposal_citation_required_fields"] == list(
+        PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS
+    )
     assert report["provider_metadata_count"] == 3
     assert report["declared_provider_count"] == 3
     assert report["live_alias_count"] >= 1

@@ -1,6 +1,7 @@
 import pytest
 
 from scripts.bernie_provider_boundary_readiness_report import (
+    PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS,
     REPORT_SCHEMA_VERSION,
     assert_provider_boundary_report_safety,
     build_provider_boundary_report,
@@ -13,6 +14,9 @@ def test_provider_boundary_report_is_safe_aggregate_status():
     assert report == {
         "schema_version": REPORT_SCHEMA_VERSION,
         "source": "static_provider_boundary",
+        "proposal_citation_required_fields": list(
+            PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS
+        ),
         "provider_metadata_count": 3,
         "declared_provider_count": 3,
         "live_alias_count": 4,
@@ -70,6 +74,18 @@ def test_provider_boundary_report_rejects_alias_or_metadata_drift():
 def test_provider_boundary_report_rejects_non_aggregate_source():
     report = build_provider_boundary_report()
     report["source"] = "runtime_provider_probe"
+
+    with pytest.raises(AssertionError):
+        assert_provider_boundary_report_safety(report)
+
+
+def test_provider_boundary_report_rejects_proposal_citation_field_drift():
+    report = build_provider_boundary_report()
+    report["proposal_citation_required_fields"] = [
+        field
+        for field in report["proposal_citation_required_fields"]
+        if field != "live_provider_enabled"
+    ]
 
     with pytest.raises(AssertionError):
         assert_provider_boundary_report_safety(report)

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 116 provider-boundary guard drift test completed locally. `tests\test_bernie_interpretation_proposal_surface_guard.py` now verifies the proposal guard's required provider-boundary blocked values against `scripts\bernie_provider_boundary_readiness_report.py` output, with the report import scoped inside the drift test to avoid widening collection-time imports. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
-| **Next recommended work** | Sprint 117: either add a reverse/explicit proposal-citation field contract for provider-boundary reports, or move to the next Ariadne/Fable provider-boundary checkpoint if the current guard stack is sufficient |
+| **Current active track** | Sprint 117 provider-boundary proposal-citation field contract completed locally. `scripts\bernie_provider_boundary_readiness_report.py` now emits a static `proposal_citation_required_fields` list, safety assertions reject field-list drift, and the proposal surface guard tests verify that list stays synchronized with `PROVIDER_BOUNDARY_EXPECTED_VALUES` and actual report values. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 118: move to the next Ariadne/Fable provider-boundary checkpoint, likely a small proposal-doc or release-gate consolidation, unless a broader programme checkpoint is now higher leverage |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

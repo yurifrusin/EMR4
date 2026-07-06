@@ -8,10 +8,47 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 116 Provider-Boundary Guard Drift Test |
+| Batch | Sprint 117 Provider-Boundary Proposal-Citation Field Contract |
 | Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 117 What Changed
+
+- Added `PROVIDER_BOUNDARY_PROPOSAL_CITATION_FIELDS` to
+  `scripts/bernie_provider_boundary_readiness_report.py`.
+- The provider-boundary readiness report now emits the static
+  `proposal_citation_required_fields` list so proposal authors and guards can
+  see which report fields must be cited.
+- `assert_provider_boundary_report_safety()` now rejects citation-field-list
+  drift, and the report test includes a negative drift case.
+- Strengthened the proposal surface guard test so
+  `PROVIDER_BOUNDARY_EXPECTED_VALUES` must have the same key set as the report's
+  proposal-citation field contract and still match the actual report values.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Residual risks are low and bounded:
+  the report snapshot still intentionally pins `live_alias_count=4`, and the
+  report retains its existing static imports of provider metadata modules.
+
+## Sprint 117 Verification
+
+- `.venv\Scripts\python.exe -m py_compile scripts\bernie_provider_boundary_readiness_report.py tests\test_bernie_provider_boundary_readiness_report.py tests\test_bernie_interpretation_proposal_surface_guard.py`.
+- `.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_provider_boundary_readiness_report.py tests/test_bernie_interpretation_proposal_surface_guard.py -q`
+  (`18 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- scripts/bernie_provider_boundary_readiness_report.py tests/test_bernie_provider_boundary_readiness_report.py tests/test_bernie_interpretation_proposal_surface_guard.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 118:
+move to the next Ariadne/Fable provider-boundary checkpoint, likely a small
+proposal-doc or release-gate consolidation, unless a broader programme
+checkpoint is now higher leverage.
+
+---
+
+## Previous Closeout - Sprint 116
 
 ## Sprint 116 What Changed
 
