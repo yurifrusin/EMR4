@@ -3,6 +3,7 @@ from pathlib import Path
 
 from app.services.diary.action_grammar import action_verb_for_envelope, get_verb_descriptor
 from app.services.diary.capabilities import BernieCapabilityTier
+from tests.action_grammar_replay import replay
 
 
 FIXTURE_DIR = Path(__file__).parent / "fixtures" / "h15_semantic_candidates"
@@ -69,3 +70,27 @@ def test_h15_semantic_candidate_fixtures_do_not_reference_local_or_mutating_mate
         serialized = json.dumps(payload, sort_keys=True).lower()
         leaked = sorted(fragment for fragment in FORBIDDEN_FRAGMENTS if fragment in serialized)
         assert not leaked, f"{path.name}: forbidden fragment(s) {leaked}"
+
+
+def test_h15_semantic_candidate_fixtures_replay_as_read_only_actions():
+    for path, payload in _load_fixtures():
+        script = {
+            "id": f"h15-{path.stem}",
+            "actions": [
+                {
+                    "raw_name": candidate["action_name"],
+                    "expected_verb": "explain_schedule",
+                    "expected_dispatch": "route_read_only",
+                    "expected_mutating": False,
+                    "expected_implemented": True,
+                    "requires_staff_confirmation": False,
+                    "confirm_actions_non_empty": False,
+                    "expected_affordance_allowed": None,
+                    "expected_affordance_gate": None,
+                }
+                for candidate in payload["candidates"]
+            ],
+        }
+
+        result = replay.run_day_script(script)
+        assert result.passed, "\n".join(result.failures)

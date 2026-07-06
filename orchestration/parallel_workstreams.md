@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H30: H15 Read-Only Candidate Replay Wiring
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Prove hand-authored H15 read-only candidates consume the deterministic action-grammar replay harness |
+| Worker Shape | Ariadne implementation |
+| In Scope | Test-only replay wiring from H15 candidates to R30 action grammar replay |
+| Out Of Scope | Generated local payload commits, broad full-trove processing, provider calls, RAG/GraphRAG/memory, route/UI/database writes |
+| Verification | `py_compile`; H15 candidate replay tests; leakage lint; focused guard cluster (56 passed); `git diff --check` |
+
 ## Sprint H29: Hand-Authored H15 Semantic Candidate Fixtures
 
 | Item | Value |

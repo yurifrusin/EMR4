@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H29 hand-authored synthetic H15 candidate fixture family integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Wire the hand-authored read-only candidate fixture into deterministic Bernie/Diary explanation replay tests, or review Access-AI/read-only memory boundaries before any RAG/GraphRAG work |
+| **Current active track** | H30 H15 read-only candidate replay wiring integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Review Access-AI/read-only memory boundaries before any RAG/GraphRAG work, or continue native Diary/Bernie route-level explanation work without trove memory |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -229,6 +229,11 @@ H29 added a hand-authored synthetic fixture family under
 reviewed H28 read-only shape without copying ignored local-derived payloads:
 `authored_synthetic`, `explain_schedule` only, read-only grammar tier, low
 confidence, unknown status categories, no raw/local/H-series/mutating fragments.
+H30 wired those H15 candidates into the R30 deterministic action-grammar replay
+harness: each committed synthetic candidate is converted to an expected
+`route_read_only` action and checked through `tests.action_grammar_replay.replay`.
+This remains test-only and does not touch routes, providers, database writes, UI,
+RAG, GraphRAG, memory, or ignored local payloads.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
