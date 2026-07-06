@@ -21,6 +21,12 @@ from scripts.historical_diary_output_safety import (
 DEFAULT_OUTPUT = Path(
     "local_data/historical-diary-trove/inventory/neutral_derived_graph_h18.json"
 )
+DELTA_BUCKETS = (
+    (0, "none"),
+    (2, "tiny"),
+    (10, "small"),
+    (100, "medium"),
+)
 
 
 def build_neutral_derived_graph(trend_payload: dict[str, Any]) -> dict[str, Any]:
@@ -34,6 +40,15 @@ def build_neutral_derived_graph(trend_payload: dict[str, Any]) -> dict[str, Any]
             item["value"]
             for root in roots
             for item in root.get("event_class_distribution", [])
+        }
+    )
+    delta_buckets = sorted(
+        {
+            _delta_bucket_node_value(range_key, range_value)
+            for root in roots
+            for range_key, range_value in root.get(
+                "adjacent_neutral_delta_ranges", {}
+            ).items()
         }
     )
 
@@ -58,6 +73,15 @@ def build_neutral_derived_graph(trend_payload: dict[str, Any]) -> dict[str, Any]
             }
         )
 
+    for value in delta_buckets:
+        nodes.append(
+            {
+                "node_id": _delta_bucket_node_id(value),
+                "node_kind": "delta_bucket",
+                "value": value,
+            }
+        )
+
     for root in roots:
         root_label = root["root_label"]
         for item in sorted(
@@ -74,6 +98,20 @@ def build_neutral_derived_graph(trend_payload: dict[str, Any]) -> dict[str, Any]
                     "source_node_id": _root_node_id(root_label),
                     "target_node_id": _event_class_node_id(event_class),
                     "count": count,
+                }
+            )
+        for range_key, range_value in sorted(
+            root.get("adjacent_neutral_delta_ranges", {}).items()
+        ):
+            value = _delta_bucket_node_value(range_key, range_value)
+            edges.append(
+                {
+                    "edge_id": f"edge:{root_label}:{value}",
+                    "edge_kind": "has_delta_bucket",
+                    "source_node_id": _root_node_id(root_label),
+                    "target_node_id": _delta_bucket_node_id(value),
+                    "min": int(range_value["min"]),
+                    "max": int(range_value["max"]),
                 }
             )
 
@@ -113,6 +151,21 @@ def _root_node_id(root_label: str) -> str:
 
 def _event_class_node_id(event_class: str) -> str:
     return f"event_class:{event_class}"
+
+
+def _delta_bucket_node_id(value: str) -> str:
+    return f"delta_bucket:{value}"
+
+
+def _delta_bucket_node_value(range_key: str, range_value: dict[str, Any]) -> str:
+    return f"{range_key}:{_bucket_name(int(range_value['max']))}"
+
+
+def _bucket_name(max_value: int) -> str:
+    for upper_bound, name in DELTA_BUCKETS:
+        if max_value <= upper_bound:
+            return name
+    return "large"
 
 
 def main() -> int:

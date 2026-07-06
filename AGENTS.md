@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H18 neutral derived graph export completed; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Sprint H19: enrich neutral graph with derived delta-bucket nodes/edges |
+| **Current active track** | Historical diary trove H19 neutral graph delta-bucket enrichment completed; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Sprint H20: add safe predefined graph query/report helper |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -120,7 +120,11 @@ one `large_unexplained_delta`. Safe H17 findings live in
 `scripts/historical_diary_neutral_graph_export.py`, producing a validator-safe
 derived graph from H17 trends with 3 root nodes, 4 event-class nodes, 8 counted
 edges, and 297 represented transitions. Safe H18 findings live in
-`docs/historical-diary-trove-neutral-derived-graph.md`.
+`docs/historical-diary-trove-neutral-derived-graph.md`. H19 enriched the same
+graph export with derived delta-bucket nodes and `has_delta_bucket` edges,
+producing 14 nodes and 23 edges from the current safe H17 trend data. Safe H19
+findings live in
+`docs/historical-diary-trove-neutral-graph-delta-buckets.md`.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

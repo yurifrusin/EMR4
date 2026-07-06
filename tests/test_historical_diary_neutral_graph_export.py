@@ -82,12 +82,12 @@ def test_builds_safe_neutral_graph():
         "sample_only": True,
         "output_class": "neutral_derived_graph",
         "root_count": 2,
-        "node_count": 4,
-        "edge_count": 2,
+        "node_count": 12,
+        "edge_count": 12,
         "transition_count": 3,
     }
     assert output["nodes"][0]["node_id"] == "root:synthetic_alpha"
-    assert output["edges"] == [
+    expected_event_edges = [
         {
             "edge_id": "edge:synthetic_alpha:no_structural_change",
             "edge_kind": "has_event_class_count",
@@ -103,6 +103,22 @@ def test_builds_safe_neutral_graph():
             "count": 1,
         },
     ]
+    for edge in expected_event_edges:
+        assert edge in output["edges"]
+    assert {
+        node["value"]
+        for node in output["nodes"]
+        if node["node_kind"] == "delta_bucket"
+    } == {
+        "char_count_abs_delta_range:none",
+        "char_count_abs_delta_range:small",
+        "date_like_token_count_abs_delta_range:none",
+        "non_empty_line_count_abs_delta_range:none",
+        "non_empty_line_count_abs_delta_range:tiny",
+        "paragraph_count_abs_delta_range:none",
+        "paragraph_count_abs_delta_range:tiny",
+        "time_like_token_count_abs_delta_range:none",
+    }
 
 
 def test_cli_writes_safe_output(tmp_path, monkeypatch):
@@ -122,4 +138,4 @@ def test_cli_writes_safe_output(tmp_path, monkeypatch):
     assert main() == 0
     output = json.loads(output_path.read_text(encoding="utf-8"))
     validate_historical_diary_output(output)
-    assert output["graph"]["edge_count"] == 2
+    assert output["graph"]["edge_count"] == 12

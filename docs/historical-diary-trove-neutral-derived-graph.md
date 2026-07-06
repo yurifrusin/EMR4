@@ -89,6 +89,6 @@ approval and further derived graph sprints.
 
 ## Recommendation
 
-Next sprint: enrich the neutral graph with derived delta-bucket nodes and edges
-from validator-safe range data. Keep the graph aggregate-only and still block
+H19 enriched this graph with derived delta-bucket nodes and edges from
+validator-safe range data. Keep the graph aggregate-only and still block
 semantic labels until the H15 gate is approved.
