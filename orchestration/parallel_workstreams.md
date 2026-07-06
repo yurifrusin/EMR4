@@ -9,12 +9,12 @@ For the layer between long phases and tactical sprints, use
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
+| Status | Integrated locally; verification passed |
 | Product Goal | Define the smallest native backend/domain action grammar foundation before replay consumers, H15 semantic work, or broad full-trove mining |
 | Worker Shape | Claude implementation-plan lane, Codex/DeepSeek adversarial review lane, Antigravity/Gemini receptionist acceptance review |
 | In Scope | Plan-gated backend/domain action vocabulary, envelopes, confirmation/write-authority invariants, focused test strategy, source-safe review artifacts |
 | Out Of Scope | Production code before plan approval, frontend UI, taskpane, raw `local_data`, H15 semantic fixtures, provider calls, broad trove processing, autonomous writes |
-| Verification | Plan/review artifacts first; later implementation verification to be approved after plan review |
+| Verification | `py_compile`; `pytest tests/test_diary_action_grammar.py -q`; adjacent envelope/confirm/manifest/domain pytest cluster; `git diff --check` |
 
 ### Workstream R29-A - Claude Native Action Grammar Plan
 
@@ -27,7 +27,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | Existing Bernie/Diary backend contracts, proposal/confirm routes, schemas, tests, R28 Fable recommendation |
 | Out of Scope | Code edits before plan approval, UI, raw trove, semantic fixtures |
 | Verification | Plan packet inspection |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream R29-B - Codex/DeepSeek Action Grammar Adversarial Review
 
@@ -40,7 +40,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | Source-safe adversarial review artifact or plan packet |
 | Out of Scope | Production implementation, UI, raw trove, semantic labelling |
 | Verification | Review artifact inspection |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream R29-C - Gemini Receptionist Acceptance Review
 
@@ -53,7 +53,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | `docs/receptionist_review_r29.md` after plan approval |
 | Out of Scope | Code/tests, UI edits, raw trove, semantic H-series mapping |
 | Verification | Source-safe review artifact |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint R27: H-Series Profile Consumption Tests
 

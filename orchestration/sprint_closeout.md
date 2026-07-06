@@ -8,9 +8,9 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R28: Fable Full-Trove Readiness Review |
-| Integrated through | Claude Fable 5 consult on `claude/fable-full-trove-readiness`, reviewed and cherry-picked by Ariadne |
-| Status | Integrated locally; plan/review artifact only; not yet pushed |
+| Batch | Sprint R29: Native Bernie/Diary Action Grammar Foundation |
+| Integrated through | Claude implementation lane, DeepSeek/Codex adversarial review, Antigravity receptionist acceptance review, Ariadne verification |
+| Status | Integrated locally; focused verification passed; not yet pushed |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -22,6 +22,12 @@ reviewed, integrated, verified, pushed, and audited.
 - Updated `docs\h-series-profile-schema.md`, `AGENTS.md`, and `orchestration\protocol_alerts.md` with the future full-trove/Fable review gate.
 - Added the Fable review packet `orchestration\agent_inbox\codex\plan-claude-claude-r28-fable-full-trove-readiness-review.md`.
 - Added the corresponding review request `orchestration\agent_inbox\codex\review-claude-claude-r28-fable-full-trove-readiness-review.md`.
+- Added `app\services\diary\action_grammar.py`, a pure versioned action grammar scaffold.
+- Added `app\services\bernie\action_grammar.py`, a compatibility facade.
+- Exported grammar symbols from `app\services\diary\__init__.py` and `app\services\bernie\__init__.py`.
+- Added `tests\test_diary_action_grammar.py` with 31 focused tests.
+- Added `docs\adversarial\r29_action_grammar_adversarial_review.md`.
+- Added `docs\receptionist_review_r29.md`.
 - No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
 
 ## Verification
@@ -30,6 +36,9 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_h_series_profile_consistency.py -q` (3 passed; existing warnings only).
 - `git diff --check` passed.
 - Fable worker verification: plan/review artifact only; `git diff --check` clean on `claude/fable-full-trove-readiness`.
+- R29 compile check passed: `.venv\Scripts\python.exe -m py_compile app\services\diary\action_grammar.py app\services\bernie\action_grammar.py tests\test_diary_action_grammar.py`.
+- R29 focused pytest passed: `.venv\Scripts\pytest.exe tests\test_diary_action_grammar.py -q` (31 passed).
+- Adjacent regression cluster passed: `.venv\Scripts\pytest.exe tests\test_diary_action_envelopes.py tests\test_diary_confirm_gate.py tests\test_diary_confirm_actions.py tests\test_bernie_diary_capability_manifest.py tests\test_bernie_domain_package.py tests\test_bernie_diary_rehome_compatibility.py -q` (98 passed).
 
 ## Local Result
 
@@ -37,6 +46,9 @@ reviewed, integrated, verified, pushed, and audited.
 - The validator blocks raw/semantic keys, requires committed H-series doc provenance, requires the H15 semantic-label boundary to stay explicit, and guards against profile/scenario cross-contamination.
 - DeepSeek's adversarial review shaped the schema-version and isolation guard recommendations.
 - The receptionist acceptance note explicitly rejects semantic promotion from neutral movement into appointment intent.
+- R29 gives EMR4 a native typed action vocabulary without adding write authority.
+- Implemented confirm verbs map to existing `DiaryConfirmAction` entries; planned check-in/waiting-area/link-patient verbs remain unavailable scaffolds.
+- The grammar is not wired into routes, prompts, UI, provider calls, or full-trove processing.
 
 ## Bernie Memory Result
 
@@ -60,7 +72,7 @@ No required manual review before continuing. Yuri review is required only if a f
 
 ## Known Follow-Up
 
-- Return to native Bernie/Diary action grammar next.
+- Build the deterministic synthetic replay consumer over the new action grammar next.
 - Do not use the full trove broadly until a replay consumer and H22 semantic gate-review packet exist.
 - Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 

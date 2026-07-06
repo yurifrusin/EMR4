@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | R29 native Bernie/Diary action grammar foundation dispatched; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Collect R29 plan/review packets, approve the smallest backend/domain action grammar foundation, then build deterministic replay consumer before any H15 semantic-gate opening or broad full-trove mining |
+| **Current active track** | R29 native Bernie/Diary action grammar foundation integrated locally; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Build the deterministic synthetic replay consumer over the new action grammar before any H15 semantic-gate opening or broad full-trove mining |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -160,6 +160,14 @@ authored synthetic day slices, then an H22 gate-review packet with small-slice
 local semantic extraction, validator extension, leakage lint, and Yuri approval.
 Only after that should the one-time full-trove mining run happen, with
 checkpointing and an explicit `-AllowLargeRun` justification.
+R29 implemented the first grammar foundation as
+`app/services/diary/action_grammar.py`, with a Bernie facade,
+`tests/test_diary_action_grammar.py`, and `docs/receptionist_review_r29.md`.
+The grammar is deliberately not wired into routes, prompts, UI, provider calls,
+or full-trove processing. It uses existing `BernieCapabilityTier` vocabulary,
+maps implemented confirm verbs to existing `DiaryConfirmAction` entries, marks
+unimplemented check-in/waiting-area/link-patient verbs as unavailable scaffolds,
+and includes a golden confirm-affordance-block test.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
