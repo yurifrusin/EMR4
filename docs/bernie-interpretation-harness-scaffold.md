@@ -333,3 +333,23 @@ imports, or historical diary material access are ready.
 The review preserves the recommendation to pause the sprint engine if
 `runtime_or_provider_wiring_ready` or `raw_trove_access_ready` ever changes away
 from `false`.
+
+## H59 Blocked-Readiness Snapshot
+
+H59 adds
+`tests/fixtures/bernie_interpretation_readiness/blocked_readiness_status.json`.
+The generated readiness status must match this committed blocked snapshot
+exactly.
+
+The snapshot preserves:
+
+- 44 authored cases.
+- 7 projected-frame contracts.
+- 7 dispatches and 4 frame kinds.
+- `runtime_gate_decision: blocked`.
+- `sprint_engine_state: continuing`.
+- `runtime_or_provider_wiring_ready: false`.
+- `raw_trove_access_ready: false`.
+
+It is aggregate-only and contains no utterance text, payload fields, route
+fragments, local-data paths, H15 fragments, or H-series fragments.

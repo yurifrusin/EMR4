@@ -1,0 +1,14 @@
+{
+  "schema_version": "bernie.interpretation_readiness_check.v1",
+  "harness_report_schema_version": "bernie.interpretation_harness_report.v1",
+  "runtime_gate_status_schema_version": "bernie.interpretation_harness_runtime_gate_status.v1",
+  "case_count": 44,
+  "contract_count": 7,
+  "dispatch_count": 7,
+  "frame_kind_count": 4,
+  "runtime_gate_decision": "blocked",
+  "runtime_gate_pause_required": false,
+  "sprint_engine_state": "continuing",
+  "runtime_or_provider_wiring_ready": false,
+  "raw_trove_access_ready": false
+}

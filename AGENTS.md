@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H58 Bernie Interpretation Harness readiness/gate review artifact integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H59 Bernie Interpretation Harness blocked-readiness snapshot integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -444,6 +444,13 @@ blocked-by-default preflight, not evidence that runtime routes, provider prompts
 live provider dry-runs, memory/RAG/GraphRAG, H15/H-series runtime imports, or
 historical diary material access are ready. The guard test preserves the blocked
 verdict and pause requirement if readiness values change.
+H59 adds
+`tests/fixtures/bernie_interpretation_readiness/blocked_readiness_status.json`
+and `tests/test_bernie_interpretation_readiness_snapshot.py`. Generated readiness
+status must match the committed blocked snapshot exactly: 44 cases, 7 contracts,
+7 dispatches, 4 frame kinds, runtime gate decision `blocked`, sprint engine
+`continuing`, and both `runtime_or_provider_wiring_ready` and
+`raw_trove_access_ready` false. The snapshot is aggregate-only and payload-free.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
