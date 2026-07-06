@@ -89,6 +89,6 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: docs/adversarial/r29_action_grammar_adversarial_review.md (new adversarial review artifact, 18.7 KB, 210 lines, sections 0-10 covering overbroad grammar, hidden write authority, route compatibility risks, terminology drift, missing invariants, H-series boundary, concrete attack vectors, positive design requirements, adversarial questions, and verdict)
+- Verification run: Source-safe review artifact inspection only per packet scope. No production code, tests, frontend, raw local_data, ignored JSON, migrations, or provider files touched. The artifact explicitly preserves: H15 closed, deterministic backend write authority, no trove content in grammar decisions, no semantic inference from neutral event classes.
+- Remaining risks: recommended pre-merge gates are documented in section 10 (Literal die on writes_authorized, confirm-gate precondition on every confirm-tier action, zero H-series references, golden test). If the Claude implementation lane ignores any of the four gates, the grammar could introduce a parallel confirm-authority path or hidden write grant. The H15 semantic gate depends on Yuri approving a reviewed gate payload after the grammar and replay consumer exist - not before.
