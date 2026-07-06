@@ -8,9 +8,63 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H17: Historical Diary Trove Cross-Pilot Event Trends |
+| Integrated through | Ariadne local-only safe comparison tooling; no external workers used because scope was privacy-sensitive and narrow |
+| Status | Verified locally; push/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `scripts\historical_diary_cross_pilot_event_trends.py`, a safe multi-summary trend reporter.
+- Added `tests\test_historical_diary_cross_pilot_event_trends.py`.
+- Produced ignored `cross_pilot_event_trends_h17.json` from H13 and H16 event summaries.
+- Added `docs\historical-diary-trove-cross-pilot-event-trends.md`.
+- Updated `AGENTS.md` with H17 state and the next neutral graph-export recommendation.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- H17 cross-pilot trend output passed `scripts\historical_diary_output_safety.py`.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_cross_pilot_event_trends.py scripts\historical_diary_output_safety.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_cross_pilot_event_trends.py tests\test_historical_diary_output_safety.py -q` (12 passed; existing warnings only).
+
+## Local Result
+
+- Compared 300 sampled snapshots and 297 adjacent transitions across `pilot`, `pilot_01`, and `pilot_02`.
+- 295/297 transitions are either `no_structural_change` or `small_content_delta`.
+- The only notable transitions are the previously known one `time_grid_delta` in `pilot` and one `large_unexplained_delta` in `pilot_01`.
+- Interpretation: the trove looks highly useful for deterministic replay and graph mining, but semantic labelling remains blocked.
+
+## Bernie Memory Result
+
+- The 58k-file trove should not be raw fine-tuning material.
+- RAG is useful over approved docs, policies, aggregate stats, and de-identified/synthetic examples.
+- GraphRAG is likely the best future fit once we have a derived neutral transition graph.
+- Bernie can use derived memory to clarify and propose; the deterministic diary backend remains the write authority.
+
+## Recommended User Review
+
+No required manual review before continuing neutral work. Yuri review is required only if a future sprint proposes approving semantic labelling or using raw/de-identified examples for provider-visible prompts.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No manual diary-content review is required because H16 commits only safe aggregate documentation and handover notes.
+
+## Known Follow-Up
+
+- H18 should prototype a neutral derived graph export for Bernie memory research.
+- Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
+
+## Previous Closeout - Sprint H16
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H16: Historical Diary Trove Friday Neutral Sampling |
 | Integrated through | Ariadne local-only capped neutral sampling; no external workers used because scope was privacy-sensitive and read-only |
-| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean at `00a00b78` |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean at `691b0ab8` |
 | Last updated | 2026-07-06 |
 
 ## What Changed

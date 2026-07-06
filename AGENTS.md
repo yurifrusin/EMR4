@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H16 Friday neutral sampling completed; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Sprint H17: safe cross-pilot comparison reporter, then neutral derived graph export prototype for Bernie memory research |
+| **Current active track** | Historical diary trove H17 cross-pilot event trends completed; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Sprint H18: neutral derived graph export prototype for Bernie memory research |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -110,7 +110,13 @@ reviewed gate payload. H16 sampled the Friday `pilot_02` root, 100/100 read-only
 opens from 667 local files with zero errors, 100 `strong_diary_grid`
 classifications, 65 `no_structural_change`, 34 `small_content_delta`, no large
 delta, and no transition-neighborhood centers. Safe H16 findings live in
-`docs/historical-diary-trove-friday-neutral-sampling.md`.
+`docs/historical-diary-trove-friday-neutral-sampling.md`. H17 added
+`scripts/historical_diary_cross_pilot_event_trends.py` and compared the current
+validator-safe pilot event summaries across 300 snapshots and 297 adjacent
+transitions: 295 transitions are either `no_structural_change` or
+`small_content_delta`, with only the previously known one `time_grid_delta` and
+one `large_unexplained_delta`. Safe H17 findings live in
+`docs/historical-diary-trove-cross-pilot-event-trends.md`.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
