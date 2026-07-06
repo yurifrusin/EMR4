@@ -180,7 +180,11 @@ def test_future_migration_artifact_must_match_storage_contract():
         assert "migration that creates `appointment_command_idempotency`" in _read(GUARD_DOC)
         return
 
-    assert f'create_table("{TABLE_NAME}"' in migration_text or f"create_table('{TABLE_NAME}'" in migration_text
+    assert re.search(
+        rf"create_table\(\s*['\"]{TABLE_NAME}['\"]",
+        migration_text,
+        flags=re.MULTILINE,
+    )
     for column in REQUIRED_COLUMNS:
         assert column in migration_text
     assert "UniqueConstraint" in migration_text

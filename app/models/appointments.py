@@ -3,7 +3,7 @@ import enum
 from datetime import timedelta
 from sqlalchemy import (
     Column, String, Boolean, DateTime, Integer, Enum, ForeignKey, Date,
-    Time, Index, Text,
+    Time, Index, Text, CheckConstraint, UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship
@@ -131,6 +131,52 @@ class AppointmentAuditLog(Base):
     __table_args__ = (
         Index("ix_appt_audit_log_practice_appt", "practice_id", "appointment_id"),
         Index("ix_appt_audit_log_appointment_id", "appointment_id"),
+    )
+
+
+class AppointmentCommandIdempotency(Base):
+    __tablename__ = "appointment_command_idempotency"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    practice_id = Column(UUID(as_uuid=True), ForeignKey("practices.id"), nullable=False)
+    actor_user_id = Column(String(64), nullable=False)
+    actor_role = Column(String(64), nullable=False)
+    operation_id = Column(String(100), nullable=False)
+    route_family = Column(String(100), nullable=False)
+    idempotency_key_hash = Column(String(128), nullable=False)
+    request_body_hash = Column(String(128), nullable=False)
+    request_body_canonicalization_version = Column(Integer, nullable=False, default=1)
+    state = Column(String(32), nullable=False)
+    response_status_code = Column(Integer, nullable=True)
+    response_body_hash = Column(String(128), nullable=True)
+    response_body_json = Column(JSONB, nullable=True)
+    result_kind = Column(String(50), nullable=True)
+    target_appointment_id = Column(UUID(as_uuid=True), ForeignKey("appointments.id"), nullable=True)
+    audit_log_id = Column(UUID(as_uuid=True), ForeignKey("appointment_audit_log.id"), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=True)
+
+    __table_args__ = (
+        UniqueConstraint(
+            "practice_id",
+            "actor_user_id",
+            "operation_id",
+            "idempotency_key_hash",
+            name="uq_appt_cmd_idem_practice_actor_operation_key",
+        ),
+        CheckConstraint(
+            "state in ('in_progress', 'completed', 'failed_transient')",
+            name="ck_appt_cmd_idem_state",
+        ),
+        CheckConstraint(
+            "state != 'completed' OR "
+            "(response_status_code IS NOT NULL AND "
+            "response_body_hash IS NOT NULL AND response_body_json IS NOT NULL)",
+            name="ck_appt_cmd_idem_completed_response",
+        ),
+        Index("ix_appt_cmd_idem_practice_target", "practice_id", "target_appointment_id"),
+        Index("ix_appt_cmd_idem_practice_created", "practice_id", "created_at"),
     )
 
 

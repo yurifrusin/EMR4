@@ -8,6 +8,7 @@ from app.models.clinical import (
 from app.models.care_plans import CarePlan
 from app.models.appointments import (
     Appointment, AppointmentType, PractitionerSchedule, ScheduleOverride,
+    AppointmentCommandIdempotency,
 )
 from app.models.results import (
     TestRequest, Result, ResultItem, Referral, Reminder, ScannedDocument,
@@ -27,6 +28,7 @@ __all__ = [
     "Allergy", "Immunisation", "PatientHistory", "ConsentForm", "ClinicalImage",
     "CarePlan",
     "Appointment", "AppointmentType", "PractitionerSchedule", "ScheduleOverride",
+    "AppointmentCommandIdempotency",
     "TestRequest", "Result", "ResultItem", "Referral", "Reminder", "ScannedDocument",
     "MbsClaim", "Invoice", "MbsDirectory", "SnomedDirectory",
     "DiaryTemplate", "DiaryColumn", "DiaryBreak", "Room", "DiaryRoster",

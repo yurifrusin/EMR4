@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 127 appointment command idempotency storage artifact guard completed locally. `orchestration\api_spine_appointment_idempotency_storage_artifact_guard.md` and its guard test require any future `appointment_command_idempotency` model/migration to land together and match the Sprint 126 storage contract before appointment routes bind or enforce HTTP `Idempotency-Key` |
-| **Next recommended work** | Sprint 128: begin appointment idempotency model/migration preflight for the replay ledger, keeping appointment routes unwired until storage concurrency, rollback, replay, stale `in_progress`, lock-ordering, and replay-audit tests exist |
+| **Current active track** | Sprint 128 appointment command idempotency model/migration preflight completed locally. `AppointmentCommandIdempotency`, migration `l1m2n3o4p5q6_add_appointment_command_idempotency.py`, and guarded tests add the replay ledger storage artifacts while leaving appointment routes unwired from HTTP `Idempotency-Key` enforcement |
+| **Next recommended work** | Sprint 129: add appointment idempotency storage helper tests for replay, conflicts, rollback, stale `in_progress`, ledger-first lock ordering, and replay audit/telemetry before any route wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
