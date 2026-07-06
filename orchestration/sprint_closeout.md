@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H12: Historical Diary Trove Neutral Large-Delta Triage |
 | Integrated through | Ariadne local-only large-delta triage; no external workers used because scope was raw-free and narrowly bounded |
-| Status | Local verification passed; push/mirror/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -29,8 +29,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_large_delta_triage.py tests\test_historical_diary_runtime_report.py tests\test_historical_diary_event_summary_compare.py tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (24 passed; existing warnings only).
 - Local triage passed against ignored H11 ordered snapshots.
 - Safety validation passed for ignored H12 large-delta triage output.
-- Post-push audit pending.
-- GitHub workflows pending.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors all aligned at `4a17974f`.
+- GitHub workflows passed for the H12 push: Deploy GitHub Pages, Python Security, and CodeQL.
 
 ## Local Triage Result
 
