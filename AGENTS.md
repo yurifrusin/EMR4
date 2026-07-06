@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | R29 native Bernie/Diary action grammar foundation integrated locally; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Build the deterministic synthetic replay consumer over the new action grammar before any H15 semantic-gate opening or broad full-trove mining |
+| **Current active track** | R30 deterministic synthetic replay consumer dispatched; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Collect R30 plan/review packets, then implement the smallest synthetic replay consumer over the R29 action grammar before any H15 semantic-gate opening or broad full-trove mining |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

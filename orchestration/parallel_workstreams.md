@@ -5,6 +5,56 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint R30: Deterministic Synthetic Action Replay Consumer
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Prove the R29 action grammar has a deterministic synthetic replay consumer before any H15 semantic work or full-trove mining |
+| Worker Shape | Claude implementation-plan lane, Codex/DeepSeek adversarial review lane, Antigravity/Gemini receptionist acceptance review |
+| In Scope | Synthetic-only replay fixture/test design, grammar consumption invariants, no-write/no-provider/no-trove boundaries |
+| Out Of Scope | Raw `local_data`, ignored JSON, H15 semantic fixtures, broad full-trove processing, route/UI/provider changes, autonomous writes |
+| Verification | Plan/review artifacts first; later implementation verification to be approved after plan review |
+
+### Workstream R30-A - Claude Action Grammar Replay Consumer Plan
+
+| Item | Value |
+|---|---|
+| Owner | Claude |
+| Branch | `claude/action-grammar-replay-consumer` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-r30-action-grammar-replay-consumer.md` |
+| Goal | Produce an implementation-ready plan for the smallest deterministic synthetic replay consumer over the R29 grammar |
+| In Scope | Synthetic fixtures/tests/helpers, existing scenario/replay patterns, R29 grammar contracts |
+| Out of Scope | Code edits before plan approval, raw trove, semantic fixtures, UI/routes |
+| Verification | Plan packet inspection |
+| Status | Queued |
+
+### Workstream R30-B - Codex/DeepSeek Replay Consumer Adversarial Review
+
+| Item | Value |
+|---|---|
+| Owner | Codex/DeepSeek Flash |
+| Branch | `codex/r30-replay-consumer-adversarial-review` |
+| Task Packet | `orchestration/agent_inbox/codex/codex-r30-replay-consumer-adversarial-review.md` |
+| Goal | Challenge tautology, hidden write authority, semantic leakage, and weak no-write replay assertions |
+| In Scope | Source-safe adversarial review artifact or plan packet |
+| Out of Scope | Production implementation, UI, raw trove, semantic labelling |
+| Verification | Review artifact inspection |
+| Status | Queued |
+
+### Workstream R30-C - Gemini Replay Consumer Receptionist Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-r30-replay-consumer-receptionist-review.md` |
+| Goal | Define receptionist-domain acceptance criteria for synthetic fake day/action replay |
+| In Scope | `docs/receptionist_review_r30.md` after plan approval |
+| Out of Scope | Code/tests, UI edits, raw trove, semantic H-series mapping |
+| Verification | Source-safe review artifact |
+| Status | Queued |
+
 ## Sprint R29: Native Bernie/Diary Action Grammar Foundation
 
 | Item | Value |
