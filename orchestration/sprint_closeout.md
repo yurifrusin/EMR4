@@ -8,10 +8,61 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 120 Post-Sprint-118 API Spine Checkpoint |
+| Batch | Sprint 121 Appointment Command Envelope Alignment Inventory |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 121 What Changed
+
+- Added
+  `orchestration/api_spine_appointment_command_alignment_inventory.md`, a
+  documentation/test-only inventory mapping current FastAPI appointment routes
+  to the API Spine command-plane families.
+- Classified current appointment routes as proposal commands, confirm commands,
+  command-style reads, compatibility writes, or read-only routes.
+- Recorded alignment for create, update, status/waiting-area, delete/cancel,
+  slot-search normalize/search/normalized/selection, Bernie intent,
+  interpretation, supervised booking, no-slot suggestion selection, session
+  lifecycle, Bernie create confirmation, raw compatibility writes, and
+  read-only appointment/slot/audit/reference surfaces.
+- Identified deliberate current drift between backend paths and the Sprint 101
+  OpenAPI draft: `status-confirm` vs `/status/confirm`, `delete-confirm` vs
+  `/delete/confirm`, `slot-search/selection` vs `slot-search/select`, missing
+  explicit Bernie intent/session/supervised/confirm variants, compatibility
+  writes outside the proposal-confirm envelope, and unproven `Idempotency-Key`
+  enforcement.
+- Added `tests/test_api_spine_appointment_command_alignment_inventory.py` to
+  statically guard the inventory against current router route families, expected
+  classification vocabulary, OpenAPI drift entries, and closed-gate posture.
+- Updated `AGENTS.md` and `orchestration/phase_programmes.md` so Programme 2G
+  now names Sprint 122 appointment command OpenAPI drift guard as the next
+  implementation slice.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+
+## Sprint 121 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_appointment_command_alignment_inventory.py tests\test_phase_programmes_current_checkpoint.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_command_alignment_inventory.py tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`42 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check` passed with the known CRLF notice on
+  `orchestration/integration_log.md`.
+- DeepSeek Flash review initially found a Bernie-route coverage gap. Ariadne
+  folded it in before closeout by adding Bernie intent, interpreter, no-slot,
+  pilot eligibility, and session lifecycle routes to the inventory and guard.
+- DeepSeek Flash re-check confirmed the Bernie route coverage gap was resolved.
+  Its remaining blocker was isolated to the DeepSeek worker's inaccessible
+  Python interpreter; Ariadne's integration worktree verification passed.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 122:
+add a non-invasive appointment command OpenAPI drift guard.
+
+---
+
+## Previous Closeout - Sprint 120
 
 ## Sprint 120 What Changed
 
