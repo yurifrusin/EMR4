@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint108-bernie-access-ai-ux-acceptance` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-06 23:51 +1000 |
 | Source HEAD | `7581696f` |
 
@@ -59,6 +59,8 @@ Specifically, the rendering of the `bernie-interpret-provider` element (which on
 
 ## Codex Plan Review
 
-- Review result:
-- Required changes before implementation:
-- Approved to proceed: no
+- Review result: accepted with Ariadne amendment to use
+  `Provider: ${provider} (mode: ${mode}; live_provider: ${true_or_false})`.
+- Required changes before implementation: avoid "live live" wording in debug
+  copy.
+- Approved to proceed: yes; implementation integrated in Sprint 108.
