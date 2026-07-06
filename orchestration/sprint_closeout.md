@@ -4913,3 +4913,33 @@ Result: `64 passed`; leakage lint safe; whitespace check clean.
 
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is H39 planned action promotion checklist.
+
+---
+
+## Sprint H39 Closeout - Planned Action Promotion Checklist
+
+Integrated outcome:
+
+- Added `app/services/diary/planned_action_promotion.py`, a static checklist
+  for promoting planned grammar verbs.
+- Covered `check_in`, `waiting_area_move`, and `link_patient`.
+- Required every promotion to satisfy route contract, signed confirm action,
+  signed evidence, audit contract, staff confirmation affordance, role/tenancy
+  policy, UI affordance, and regression tests.
+- Added tests proving the planned verbs remain non-executable until promoted:
+  no confirm actions, no confirm routes, and no raw mutation route authority.
+- Documented the checklist in `docs/diary-planned-action-promotion-checklist.md`.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\diary\planned_action_promotion.py tests\test_diary_planned_action_promotion.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_diary_planned_action_promotion.py tests\test_diary_action_route_contract.py tests\test_diary_action_grammar.py -q
+git diff --check
+```
+
+Result: `71 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; Yuri approved
+continuing past H39 into Bernie Interpretation Harness sprints.

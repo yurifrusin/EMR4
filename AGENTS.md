@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H38 read-only vs mutating route boundary tests integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue to H39 planned action promotion checklist |
+| **Current active track** | H39 planned action promotion checklist integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Proceed into Bernie Interpretation Harness sprints as approved by Yuri |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -292,6 +292,17 @@ mutation surfaces; implemented mutating contracts must retain proposal and
 signed-confirm routes instead of relying on raw mutation routes; planned
 mutating contracts may document adjacent proposal/read surfaces but must not
 have confirm or raw mutation route authority. This remains tests-only.
+H39 adds `app/services/diary/planned_action_promotion.py`,
+`tests/test_diary_planned_action_promotion.py`, and
+`docs/diary-planned-action-promotion-checklist.md`. It defines the required
+promotion gates for planned native Diary grammar verbs (`check_in`,
+`waiting_area_move`, `link_patient`): route contract, signed confirm action,
+signed evidence, audit contract, staff confirmation affordance, role/tenancy
+policy, UI affordance, and regression tests. The verbs remain
+`implemented=False` with no confirm actions, confirm routes, or raw mutation
+route authority until all gates are satisfied. Yuri has approved continuing
+past H39 into Bernie Interpretation Harness sprints without pausing unless
+intervention is required.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

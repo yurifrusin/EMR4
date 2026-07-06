@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H39: Planned Action Promotion Checklist
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Define the gates required before planned native Diary grammar verbs can become executable |
+| Worker Shape | Ariadne implementation |
+| In Scope | Static promotion checklist, tests, docs, handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; planned-action/route-contract/action-grammar guard cluster (71 passed); leakage lint; `git diff --check` |
+
 ## Sprint H38: Read-Only Vs Mutating Route Boundary Tests
 
 | Item | Value |
@@ -13,7 +24,7 @@ For the layer between long phases and tactical sprints, use
 | Product Goal | Prove route contracts keep read-only/meta verbs away from proposal/confirm/raw mutation surfaces and keep mutating verbs behind signed confirmation |
 | Worker Shape | Ariadne implementation |
 | In Scope | Route-contract boundary tests, handover updates |
-| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Out Of Scope | Runtime dispatch, routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
 | Verification | `py_compile`; route-contract/action-grammar guard cluster (64 passed); leakage lint; `git diff --check` |
 
 ## Sprint H37: Grammar-To-Route Contract Inventory
