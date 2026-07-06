@@ -59,6 +59,26 @@ def test_readiness_status_does_not_authorize_runtime_provider_or_trove_access():
     assert status["sprint_engine_state"] == "continuing"
 
 
+def test_readiness_status_derives_scope_readiness_from_runtime_gate(monkeypatch):
+    gate_status = {
+        "schema_version": "bernie.interpretation_harness_runtime_gate_status.v1",
+        "decision": "blocked",
+        "pause_required": False,
+        "runtime_or_provider_wiring_ready": True,
+        "raw_trove_access_ready": True,
+    }
+
+    monkeypatch.setattr(
+        "scripts.bernie_interpretation_readiness_check.build_runtime_gate_status",
+        lambda _path: gate_status,
+    )
+
+    status = build_readiness_status()
+
+    assert status["runtime_or_provider_wiring_ready"] is True
+    assert status["raw_trove_access_ready"] is True
+
+
 def test_readiness_status_rejects_unblocked_runtime_gate(tmp_path):
     gate = json.loads(DEFAULT_GATE_PATH.read_text(encoding="utf-8"))
     gate["decision"] = "approved"

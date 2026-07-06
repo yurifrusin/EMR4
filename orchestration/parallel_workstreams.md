@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H65: Gate-Derived Interpretation Readiness Booleans
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Address H64-M1 by deriving readiness booleans from runtime-gate scope instead of standalone constants |
+| Worker Shape | Ariadne implementation of independent-review finding |
+| In Scope | Runtime gate status, combined readiness check, focused tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; runtime gate CLI; readiness CLI; focused pytest gate/readiness/review cluster (35 passed); leakage lint; `git diff --check` |
+
 ## Sprint H64: Bernie Interpretation Harness Independent Review Integration
 
 | Item | Value |

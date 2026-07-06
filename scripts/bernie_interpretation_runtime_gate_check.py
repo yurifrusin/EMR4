@@ -23,6 +23,15 @@ REQUIRED_BLOCKED_SCOPE = {
     "historical_diary_material_access",
 }
 
+RUNTIME_OR_PROVIDER_SCOPE = {
+    "interpretation_harness_runtime_wiring",
+    "provider_dry_run_wiring",
+    "route_integration",
+    "database_access",
+    "memory_or_rag_access",
+}
+RAW_TROVE_SCOPE = {"historical_diary_material_access"}
+
 REQUIRED_UNBLOCK_REVIEWS = {
     "explicit_yuri_approval",
     "bounded_no_write_runtime_plan",
@@ -88,6 +97,11 @@ def assert_runtime_gate_blocked(gate: dict[str, Any]) -> None:
 def build_runtime_gate_status(path: Path = DEFAULT_GATE_PATH) -> dict[str, Any]:
     gate = load_runtime_gate(path)
     assert_runtime_gate_blocked(gate)
+    scope = gate["scope"]
+    runtime_or_provider_wiring_ready = any(
+        scope[key] is True for key in RUNTIME_OR_PROVIDER_SCOPE
+    )
+    raw_trove_access_ready = any(scope[key] is True for key in RAW_TROVE_SCOPE)
     return {
         "schema_version": "bernie.interpretation_harness_runtime_gate_status.v1",
         "gate_schema_version": gate["schema_version"],
@@ -98,6 +112,8 @@ def build_runtime_gate_status(path: Path = DEFAULT_GATE_PATH) -> dict[str, Any]:
         "pause_trigger_count": len(gate["sprint_engine_pause_required_if"]),
         "sprint_engine_state": "continuing",
         "pause_required": False,
+        "runtime_or_provider_wiring_ready": runtime_or_provider_wiring_ready,
+        "raw_trove_access_ready": raw_trove_access_ready,
     }
 
 

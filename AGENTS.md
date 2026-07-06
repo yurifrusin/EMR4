@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H64 independent review integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | H65 should derive combined readiness booleans from runtime-gate scope, then continue H66/H67 hardening from the H64 review |
+| **Current active track** | H65 gate-derived interpretation readiness booleans integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | H66 should make interpretation result/frame helpers self-validating and tighten clarify-frame subtype invariants |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -485,6 +485,12 @@ enforcement for runtime/provider/trove proposal surfaces, and make interpretatio
 result/frame helpers self-validating. Low follow-ups include deriving report
 forbidden text from fixture utterances and tightening clarify-frame subtype
 invariants.
+H65 addresses H64-M1 by deriving
+`runtime_or_provider_wiring_ready` and `raw_trove_access_ready` from the
+runtime-gate scope in `scripts/bernie_interpretation_runtime_gate_check.py`; the
+combined readiness command now consumes those derived gate-status fields instead
+of standalone constants. Focused tests cover both the runtime-gate derivation and
+combined-readiness consumption. Runtime/provider/trove access remains blocked.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

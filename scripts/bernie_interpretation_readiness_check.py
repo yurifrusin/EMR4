@@ -50,8 +50,10 @@ def build_readiness_status(
         "runtime_gate_decision": gate_status["decision"],
         "runtime_gate_pause_required": gate_status["pause_required"],
         "sprint_engine_state": "continuing",
-        "runtime_or_provider_wiring_ready": False,
-        "raw_trove_access_ready": False,
+        "runtime_or_provider_wiring_ready": gate_status[
+            "runtime_or_provider_wiring_ready"
+        ],
+        "raw_trove_access_ready": gate_status["raw_trove_access_ready"],
     }
 
 

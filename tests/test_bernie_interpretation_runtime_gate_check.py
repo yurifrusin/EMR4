@@ -4,6 +4,7 @@ import copy
 import json
 
 from scripts.bernie_interpretation_runtime_gate_check import (
+    DEFAULT_GATE_PATH,
     assert_runtime_gate_blocked,
     build_runtime_gate_status,
     load_runtime_gate,
@@ -30,6 +31,8 @@ def test_runtime_gate_status_is_safe_aggregate_only():
         "pause_trigger_count": 4,
         "sprint_engine_state": "continuing",
         "pause_required": False,
+        "runtime_or_provider_wiring_ready": False,
+        "raw_trove_access_ready": False,
     }
     for fragment in [
         "patient_id",
@@ -66,6 +69,34 @@ def test_runtime_gate_checker_rejects_true_scope_value():
         pass
     else:
         raise AssertionError("true runtime gate scope value was not rejected")
+
+
+def test_runtime_gate_status_derives_readiness_booleans_from_scope(monkeypatch):
+    gate = load_runtime_gate()
+
+    def fake_assert_runtime_gate_blocked(_gate):
+        return None
+
+    monkeypatch.setattr(
+        "scripts.bernie_interpretation_runtime_gate_check.assert_runtime_gate_blocked",
+        fake_assert_runtime_gate_blocked,
+    )
+    gate["scope"]["provider_dry_run_wiring"] = True
+    gate["scope"]["historical_diary_material_access"] = True
+    gate_path = DEFAULT_GATE_PATH.parent / "unused.json"
+
+    def fake_load_runtime_gate(_path):
+        return gate
+
+    monkeypatch.setattr(
+        "scripts.bernie_interpretation_runtime_gate_check.load_runtime_gate",
+        fake_load_runtime_gate,
+    )
+
+    status = build_runtime_gate_status(gate_path)
+
+    assert status["runtime_or_provider_wiring_ready"] is True
+    assert status["raw_trove_access_ready"] is True
 
 
 def test_runtime_gate_checker_rejects_missing_pause_trigger():

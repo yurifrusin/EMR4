@@ -421,3 +421,17 @@ runtime/provider/trove proposal:
 - Add more mechanical enforcement that the readiness command is run before
   runtime/provider/trove proposal surfaces.
 - Make interpretation result/frame helpers self-validating.
+
+## H65 Gate-Derived Readiness Booleans
+
+H65 addresses H64-M1. `scripts/bernie_interpretation_runtime_gate_check.py` now
+derives `runtime_or_provider_wiring_ready` and `raw_trove_access_ready` from the
+runtime-gate scope keys, and
+`scripts/bernie_interpretation_readiness_check.py` consumes those derived values
+instead of using standalone constants.
+
+The external combined readiness output remains blocked and unchanged, but the
+blocked values now come from the gate scope. Focused tests prove the runtime-gate
+status derives true values from drifted scope when the gate assertion is
+intentionally monkeypatched away, and that combined readiness consumes the
+runtime-gate status fields.

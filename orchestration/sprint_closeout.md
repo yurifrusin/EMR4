@@ -8,12 +8,47 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H64: Bernie Interpretation Harness Independent Review Integration |
-| Integrated through | DeepSeek Flash read-only review; Ariadne integration |
+| Batch | Sprint H65: Gate-Derived Interpretation Readiness Booleans |
+| Integrated through | Ariadne implementation of H64-M1 |
 | Status | Integrated; focused verification passed |
 | Last updated | 2026-07-07 |
 
 ## What Changed
+
+- Updated `scripts\bernie_interpretation_runtime_gate_check.py` so runtime-gate
+  status derives `runtime_or_provider_wiring_ready` and
+  `raw_trove_access_ready` from named gate scope keys.
+- Updated `scripts\bernie_interpretation_readiness_check.py` so combined
+  readiness consumes those derived gate-status fields instead of standalone
+  constants.
+- Added focused tests proving gate-status derivation and combined-readiness
+  consumption.
+- Updated `docs\bernie-interpretation-harness-scaffold.md`, `AGENTS.md`,
+  `orchestration\parallel_workstreams.md`, and
+  `orchestration\integration_log.md`.
+- No runtime routes, UI, providers, database access, memory/RAG/GraphRAG,
+  H15/H-series runtime imports, raw trove reads, or ignored local-data reads
+  were added.
+
+## Verification
+
+- Compile check passed:
+  `.venv\Scripts\python.exe -m py_compile scripts\bernie_interpretation_runtime_gate_check.py scripts\bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_runtime_gate_check.py tests\test_bernie_interpretation_readiness_check.py`.
+- Runtime gate CLI passed:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_runtime_gate_check.py`.
+- Readiness CLI sample passed:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`.
+- Focused pytest passed:
+  `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_runtime_gate_check.py tests\test_bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_readiness_snapshot.py tests\test_bernie_interpretation_runtime_gate.py tests\test_bernie_interpretation_h64_review_artifact.py tests\test_bernie_interpretation_harness_report.py -q`
+  (`35 passed`; existing deprecation warnings only).
+- Leakage lint passed:
+  `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- `git diff --check` passed with the known CRLF warning on
+  `orchestration/integration_log.md`.
+
+---
+
+## Previous Closeout
 
 - Integrated a read-only DeepSeek Flash adversarial review in `docs\adversarial\h64_interpretation_readiness_independent_review.md`.
 - Added `tests\test_bernie_interpretation_h64_review_artifact.py` to preserve the no-critical/high verdict, blocked runtime/provider/trove boundary, and H65-H67 follow-up sequence.
