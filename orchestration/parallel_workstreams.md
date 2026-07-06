@@ -125,8 +125,20 @@ default meaning of "three lane sprint".
 | Guard lane | Extended `docs/api-spine/security/permission-matrix.yaml` and `tests/test_api_spine_artifacts.py` so enterprise-auth/FGA remains `static_mapping_only` and blocked runtime gates stay denied |
 | Worker mix note | Completed with already-assigned native Codex subagents before protocol correction; future non-trivial sprints must start with Claude and Antigravity availability checks and prefer Claude + Antigravity + DeepSeek |
 | Verification | `py_compile`; `.venv\Scripts\python.exe -m pytest tests/test_ai_external_identity.py tests/test_ai_entitlements.py tests/test_access_ai_service.py tests/test_api_spine_artifacts.py -q` (`64 passed`); `git diff --check` for Sprint 84 patch set |
-| Next | Sprint 85 Bernie interpreter migration through Access AI, fake-provider/default-disabled/no-write only |
+| Next | Sprint 108 Bernie interpreter migration through Access AI, fake-provider/default-disabled/no-write only; legacy Access AI design-record label was Sprint 85 |
 | Gates Still Closed | Runtime FGA clients, live providers, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
+## Sprint 108: Bernie Interpreter Migration Through Access AI
+
+| Item | Value |
+|---|---|
+| Status | Preparing worker launch |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Route Bernie booking-instruction interpretation through Access AI as the single backend entry point while preserving fake-provider/default-disabled/no-write/staff-confirmation guards |
+| Legacy Map Cross-Reference | Called "Sprint 85" in older Access AI design notes and Fable's numbered list; current post-Sprint-107 chronology should call this Sprint 108 |
+| Required Worker Mix | Check Claude and Antigravity availability first; prefer Claude + Antigravity/Gemini + DeepSeek Flash |
+| In Scope | Plan-gated bounded migration/review only; no live provider opening, no autonomous booking writes, no GraphQL mutation, no H15/trove, no memory/RAG/GraphRAG |
+| Gates Still Closed | Live providers, runtime FGA clients, external patient clients, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 

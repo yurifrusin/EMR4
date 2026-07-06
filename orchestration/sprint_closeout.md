@@ -100,9 +100,11 @@ orchestration signal to proceed, Sprint 98's three blockers split cleanly across
 backend/UI/smoke lanes, and the API Spine work split cleanly into plan review,
 ADR synthesis, non-invasive schema artifacts, API stewardship, and Access AI
 fake-provider hardening, and Sprint 84 static enterprise-auth/FGA boundary
-mapping. The next planned step is Sprint 85 Bernie interpreter migration through
-Access AI while preserving fake-provider/default-disabled/no-write behavior,
-unless Sprint 98 live/manual review finds a release blocker first.
+mapping. The next planned step is Sprint 108 Bernie interpreter migration
+through Access AI while preserving fake-provider/default-disabled/no-write
+behavior. Older Access AI design notes call this "Sprint 85"; current chronology
+should use Sprint 108 unless Sprint 98 live/manual review finds a release
+blocker first.
 
 ## Verification
 
@@ -142,8 +144,8 @@ unless Sprint 98 live/manual review finds a release blocker first.
 - Sprint 84 diff hygiene passed:
   `git diff --check -- app/services/ai/external_identity.py tests/test_ai_external_identity.py docs/access-ai-enterprise-auth-fga-boundary.md docs/api-spine/security/permission-matrix.yaml tests/test_api_spine_artifacts.py`.
 
-Sprint engine state: continuing locally. Next recommended direction is Access
-AI Sprint 85 Bernie interpreter migration through Access AI, fake-provider and
+Sprint engine state: continuing locally. Next recommended direction is Sprint
+108 Bernie interpreter migration through Access AI, fake-provider and
 default-disabled only, with runtime FGA clients, live-provider, trove,
 H15/H-series runtime import, memory/RAG/GraphRAG, GraphQL mutation, external
 patient-client, and model-write gates still blocked.
