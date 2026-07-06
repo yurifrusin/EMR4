@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H29: Hand-Authored H15 Semantic Candidate Fixtures
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Add a committed synthetic fixture family from the reviewed read-only H28 shape without copying local derived payloads |
+| Worker Shape | Ariadne implementation |
+| In Scope | Small authored fixture JSON, read-only grammar guards, no-local/no-mutating/no-H-series tests |
+| Out Of Scope | Generated local payload commits, broad full-trove processing, provider calls, RAG/GraphRAG/memory, route/UI/database writes |
+| Verification | `py_compile`; leakage lint; H15/H28/H29 guard cluster (55 passed); `git diff --check` |
+
 ## Sprint H28: Semantic Candidate Builder Adversarial Review
 
 | Item | Value |

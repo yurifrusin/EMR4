@@ -8,8 +8,8 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H28: Semantic Candidate Builder Adversarial Review |
-| Integrated through | Ariadne adversarial review and bounded repair |
+| Batch | Sprint H29: Hand-Authored H15 Semantic Candidate Fixtures |
+| Integrated through | Ariadne implementation |
 | Status | Integrated locally; focused verification passed; not yet pushed |
 | Last updated | 2026-07-06 |
 
@@ -49,6 +49,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Ran the approved local prototype into ignored `local_data\historical-diary-trove\inventory\semantic_h15_*` outputs.
 - Added `docs\adversarial\h28_semantic_candidate_builder_review.md`.
 - Downgraded generated candidates from mutating `status_change` to read-only `explain_schedule`.
+- Added `tests\fixtures\h15_semantic_candidates\read_only_explain_schedule_candidates.json`.
+- Added `tests\test_h15_semantic_candidate_fixtures.py`.
 - No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
 
 ## Verification
@@ -90,6 +92,9 @@ reviewed, integrated, verified, pushed, and audited.
 - H28 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
 - H28 neutral aggregate validation passed: `.venv\Scripts\python.exe scripts\historical_diary_output_safety.py local_data\historical-diary-trove\inventory\semantic_h15_prototype_neutral_aggregate.json`.
 - H28 focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_semantic_candidate_builder.py tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\action_grammar_replay tests\test_h_series_profile_consistency.py -q` (52 passed).
+- H29 focused fixture pytest passed: `.venv\Scripts\pytest.exe tests\test_h15_semantic_candidate_fixtures.py -q` (3 passed).
+- H29 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- H29 focused guard pytest passed: `.venv\Scripts\pytest.exe tests\test_h15_semantic_candidate_fixtures.py tests\test_historical_diary_semantic_candidate_builder.py tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\action_grammar_replay tests\test_h_series_profile_consistency.py -q` (55 passed).
 
 ## Local Result
 
@@ -110,6 +115,7 @@ reviewed, integrated, verified, pushed, and audited.
 - H26 records Yuri's explicit H15 approval for the bounded local-only prototype scope.
 - H27 proves the approved local pipeline can produce validator-safe low-confidence candidates from validator-safe neutral aggregates.
 - H28 corrects the candidate semantics: neutral aggregates may support read-only explanation candidates, not mutating diary action candidates.
+- H29 commits only a small hand-authored synthetic read-only fixture family, not generated local payloads.
 
 ## Bernie Memory Result
 
@@ -133,7 +139,7 @@ No required manual review before continuing. Yuri review is required only if a f
 
 ## Known Follow-Up
 
-- Consider a hand-authored synthetic fixture family from the reviewed read-only shape, without copying local derived payloads.
+- Wire the hand-authored read-only candidates into deterministic explanation replay tests, or review Access-AI/read-only memory boundaries.
 - Do not use the full trove broadly until H22 is reviewed and Yuri explicitly approves H15.
 - Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 

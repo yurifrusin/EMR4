@@ -1,0 +1,52 @@
+{
+  "schema_version": "h15.semantic_candidate_fixture.v1",
+  "source": "authored_synthetic",
+  "fixture_family": "action_grammar_candidates",
+  "description": "Hand-authored synthetic read-only candidates based on the reviewed H28 shape.",
+  "privacy": {
+    "local_raw_processing_only": false,
+    "raw_data_external_provider_allowed": false,
+    "emits_document_text": false,
+    "emits_filenames": false,
+    "emits_raw_paths": false,
+    "emits_exact_document_timestamps": false,
+    "emits_patient_or_staff_labels": false
+  },
+  "candidates": [
+    {
+      "synthetic_event_id": "synthetic_candidate_001",
+      "relative_day_index": 0,
+      "time_of_day": "time_bucket_interval_10",
+      "duration_minutes": 10,
+      "synthetic_resource_id": "resource_001",
+      "action_name": "explain_schedule",
+      "status_categories": [
+        "unknown"
+      ],
+      "transition_label": "candidate_explain_schedule",
+      "confidence_label": "low",
+      "bucket_flags": [
+        "candidate_only",
+        "strong_grid",
+        "two_tables",
+        "dense_time_tokens"
+      ]
+    },
+    {
+      "synthetic_event_id": "synthetic_candidate_002",
+      "relative_day_index": 0,
+      "time_of_day": "time_bucket_unknown",
+      "duration_minutes": 10,
+      "synthetic_resource_id": "resource_002",
+      "action_name": "explain_schedule",
+      "status_categories": [
+        "unknown"
+      ],
+      "transition_label": "candidate_explain_schedule",
+      "confidence_label": "low",
+      "bucket_flags": [
+        "candidate_only"
+      ]
+    }
+  ]
+}

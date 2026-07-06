@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H28 candidate-builder adversarial review integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Consider a hand-authored synthetic fixture family from the reviewed read-only `explain_schedule` shape; do not copy ignored local derived payloads or broaden trove use without a separate gate |
+| **Current active track** | H29 hand-authored synthetic H15 candidate fixture family integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Wire the hand-authored read-only candidate fixture into deterministic Bernie/Diary explanation replay tests, or review Access-AI/read-only memory boundaries before any RAG/GraphRAG work |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -223,6 +223,12 @@ neutral aggregate evidence because it is a mutating diary action. The builder no
 emits only read-only `explain_schedule` candidates with low confidence and
 unknown status categories. The review artifact is
 `docs/adversarial/h28_semantic_candidate_builder_review.md`.
+H29 added a hand-authored synthetic fixture family under
+`tests/fixtures/h15_semantic_candidates/` plus
+`tests/test_h15_semantic_candidate_fixtures.py`. These fixtures mirror the
+reviewed H28 read-only shape without copying ignored local-derived payloads:
+`authored_synthetic`, `explain_schedule` only, read-only grammar tier, low
+confidence, unknown status categories, no raw/local/H-series/mutating fragments.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
