@@ -6,6 +6,15 @@ N1a keeps the public Bernie symbol names stable while moving the implementation
 home behind compatibility facades.
 """
 
+from app.services.diary.action_grammar import (
+    DIARY_ACTION_GRAMMAR,
+    GRAMMAR_SCHEMA_VERSION,
+    DiaryActionVerb,
+    DiaryActionVerbDescriptor,
+    action_verb_for_envelope,
+    assert_grammar_consistency,
+    get_verb_descriptor,
+)
 from app.services.diary.confirm_gate import (
     ConfirmAffordanceDecision,
     ConfirmAffordanceGate,
@@ -76,6 +85,15 @@ from app.services.diary.temporal import (
 )
 
 __all__ = [
+    # action grammar
+    "GRAMMAR_SCHEMA_VERSION",
+    "DiaryActionVerb",
+    "DiaryActionVerbDescriptor",
+    "DIARY_ACTION_GRAMMAR",
+    "get_verb_descriptor",
+    "action_verb_for_envelope",
+    "assert_grammar_consistency",
+    # confirm gate
     "ConfirmAffordanceDecision",
     "ConfirmAffordanceGate",
     "evaluate_confirm_affordance",
