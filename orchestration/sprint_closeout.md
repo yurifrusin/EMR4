@@ -8,10 +8,47 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 118 Provider-Boundary Release-Gate Citation Docs |
+| Batch | Sprint 119 Programme Guidance Refresh |
 | Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 119 What Changed
+
+- Refreshed `orchestration/phase_programmes.md` so the recommended next
+  planning move now reflects the current post-Sprint-118 state instead of stale
+  H69/Sprint 97 wording.
+- Recorded that the Ariadne/Fable strategy map has been created, stale worktree
+  residue has been cleaned, and the provider-boundary guard stack has been
+  consolidated.
+- Refreshed the Programme 2G table to mark a checkpoint refresh due after
+  Sprint 118, include Sprint 110-118 provider-boundary guard consolidation, and
+  name the post-Sprint-118 API Spine checkpoint as the next candidate sprint.
+- Added `tests/test_phase_programmes_current_checkpoint.py` to guard the current
+  post-Sprint-118 guidance and prevent stale H69/Sprint 97 next-move wording
+  from returning.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Its Programme 2G table-refresh
+  residual was folded into the sprint before closeout.
+
+## Sprint 119 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_phase_programmes_current_checkpoint.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_phase_programmes_current_checkpoint.py -q`
+  (`2 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- orchestration/phase_programmes.md tests/test_phase_programmes_current_checkpoint.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 120:
+run the compact post-Sprint-118 API Spine checkpoint comparing the existing ADR,
+schema prototypes, and API steward skill against the provider-boundary guard
+stack, then name the next implementation slice.
+
+---
+
+## Previous Closeout - Sprint 118
 
 ## Sprint 118 What Changed
 

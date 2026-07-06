@@ -288,6 +288,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 119 return to the Ariadne/Fable strategy map and select the next highest-leverage programme checkpoint beyond provider-boundary guard consolidation |
 | Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 119: Programme Guidance Refresh
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Strategy maintenance across Programme 2F / Access AI API and Programme 2G / EMR4 API Spine |
+| Goal | Refresh the programme layer from stale H69/Sprint 97 guidance to current post-Sprint-118 checkpoint guidance |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI not found on PATH in this shell; DeepSeek Flash bridge available |
+| Ariadne Lane | Updated `orchestration/phase_programmes.md` to record provider-boundary guard consolidation, refresh Programme 2G as checkpoint-due, and name the post-Sprint-118 API Spine checkpoint as the default next move |
+| DeepSeek Lane | Reviewed as no-blocker; Programme 2G table-refresh residual was folded in before closeout |
+| Verification | `py_compile`; focused phase-programmes pytest (`2 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 120 compact post-Sprint-118 API Spine checkpoint comparing ADR/schema/steward artifacts against the provider-boundary guard stack |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

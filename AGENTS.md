@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 118 provider-boundary release-gate citation docs completed locally. `orchestration\bernie_release_gates.md` now names the provider-boundary report's `proposal_citation_required_fields` list as the source of truth for proposal citations, and the release-gate documentation test checks every report-declared field appears as a backtick-wrapped field token. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
-| **Next recommended work** | Sprint 119: step back to the Ariadne/Fable strategy map and pick the next highest-leverage programme checkpoint beyond provider-boundary guard consolidation |
+| **Current active track** | Sprint 119 programme guidance refresh completed locally. `orchestration\phase_programmes.md` now reflects the current post-Sprint-118 state, records that the provider-boundary guard stack is consolidated, refreshes Programme 2G's table as checkpoint-due, and names a post-Sprint-118 API Spine checkpoint as the default next move; `tests\test_phase_programmes_current_checkpoint.py` guards against stale H69/Sprint 97 next-move wording returning. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 120: run the compact post-Sprint-118 API Spine checkpoint comparing the existing ADR, schema prototypes, and API steward skill against the provider-boundary guard stack, then name the next implementation slice |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

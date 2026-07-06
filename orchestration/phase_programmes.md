@@ -115,22 +115,23 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Starting |
+| Status | Checkpoint refresh due after Sprint 118 provider-boundary guard consolidation |
 | Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
-| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill |
+| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation |
+| Next Candidate Sprints | Post-Sprint-118 API Spine checkpoint, then the next implementation slice named by that checkpoint |
 | Design Record | `orchestration/api_spine_programme.md` |
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
 
-Current next move after H69: launch an Ariadne/Fable strategy sprint from a
-fresh chat to map the next ~100 sprints. The output should refresh this
-programme layer against `implementation_plan.md`, recent H-series/Bernie
-Interpretation Harness work, Access AI/API-spine direction, and worker
-orchestration health. It should include explicit adaptation checkpoints rather
-than pretending the 100-sprint map will remain fixed.
+Current position after Sprint 118: the Ariadne/Fable 100+ sprint strategy map
+has been created, the stale worktree residue has been cleaned, and the
+provider-boundary guard stack has been consolidated through startup guards,
+safe aggregate reporting, release-gate docs, proposal-surface checks, and
+proposal-citation field synchronization. This was useful guardrail work, but it
+should not become the main product track.
 
-The resulting local strategy artifacts are
+The accepted strategy artifacts are
 `orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md`
 and `orchestration/ariadne_fable_100_sprint_strategy_map.md`. Their accepted
 near-term direction is to close the Bernie/API-spine/Access-AI consumer gap
@@ -141,21 +142,23 @@ and model-to-database write gates blocked.
 Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
-1. If Bernie is the immediate product surface: complete Sprint 98 in
-   **Programme 2G** to stabilise the current booking loop before adding more
-   features.
-2. If architecture is the priority: continue **Programme 2G** with Sprint 99 API
-   root-to-branch plan review.
+1. If Bernie/API-spine architecture is the priority: refresh **Programme 2G**
+   with a post-Sprint-118 API Spine checkpoint that compares the existing ADR,
+   schema prototypes, and API steward skill against the provider-boundary guard
+   stack and names the next implementation slice.
+2. If Bernie is the immediate product surface: continue **Programme 2B/2D**
+   with the next supervised booking-loop product slice, keeping staff
+   confirmation and fake/default-disabled provider posture intact.
 3. If AI platform safety is the priority: continue **Programme 2F** with
    caller-context booking proposal groundwork or a Wiley/Cochrane licensed
    knowledge-base integration spike.
 4. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
 
-The default recommendation after Sprint 97 is **Programme 2G**: first stabilise
-the visible *bernie* booking loop, then run the deliberate API-spine design
-programme before expanding Caller ID, Medicare/OPV/PVM, or clinical-library
-agent integrations.
+The default recommendation after Sprint 118 is **Programme 2G**: run a compact
+API Spine checkpoint before expanding Caller ID, Medicare/OPV/PVM,
+clinical-library agent integrations, live-provider paths, or historical diary
+utilisation.
 
 ## Deployment Readiness Pattern
 
