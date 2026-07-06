@@ -5497,6 +5497,38 @@ wiring.
 
 ---
 
+## Sprint H61 Closeout - Combined Readiness Fail-Closed Tests
+
+Integrated outcome:
+
+- Strengthened `tests/test_bernie_interpretation_readiness_check.py`.
+- The combined readiness layer now directly rejects:
+  - an unblocked runtime gate decision;
+  - a missing fixture directory;
+  - an empty fixture directory.
+- This duplicates key lower-level fail-closed checks at the command future
+  agents are expected to run before runtime/provider/trove proposals.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_interpretation_protocol_alert.py tests\test_bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_readiness_release_gate.py tests\test_bernie_interpretation_readiness_review_artifact.py tests\test_bernie_interpretation_readiness_snapshot.py tests\test_bernie_interpretation_runtime_gate.py tests\test_bernie_interpretation_runtime_gate_check.py tests\test_bernie_interpretation_runtime_isolation.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `297 passed`; readiness CLI sample succeeded; leakage lint safe;
+whitespace check clean apart from the known CRLF notice on
+`orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded readiness/gate hardening before runtime/provider
+wiring.
+
+---
+
 ## Sprint H60 Closeout - Readiness Protocol Alert
 
 Integrated outcome:

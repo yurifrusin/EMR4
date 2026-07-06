@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H60 Bernie Interpretation Harness readiness protocol alert integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H61 Bernie Interpretation Harness combined readiness fail-closed tests integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -458,6 +458,10 @@ and Ariadne to run the readiness command before proposing runtime route wiring,
 provider prompt/dry-run wiring, memory/RAG/GraphRAG use, H15/H-series runtime
 imports, or historical diary material access. It preserves the expected blocked
 values and pause requirement.
+H61 strengthens `tests/test_bernie_interpretation_readiness_check.py` so the
+combined readiness layer itself rejects an unblocked runtime gate, missing
+fixture directory, and empty fixture directory. This duplicates the most
+important lower-level fail-closed checks at the command users will actually run.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

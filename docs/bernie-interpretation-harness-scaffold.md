@@ -365,3 +365,15 @@ material access from the provider-free interpretation harness.
 Expected values remain `runtime_or_provider_wiring_ready=false`,
 `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`. Any command
 failure or changed value pauses the sprint engine for explicit review.
+
+## H61 Combined Readiness Fail-Closed Tests
+
+H61 strengthens the combined readiness check tests. The command layer now has
+direct negative coverage for:
+
+- An unblocked runtime gate decision.
+- A missing fixture directory.
+- An empty fixture directory.
+
+These duplicate key lower-level safeguards at the command future agents are
+expected to run before any runtime/provider/trove proposal.

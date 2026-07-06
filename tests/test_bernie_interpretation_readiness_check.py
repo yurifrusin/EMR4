@@ -6,6 +6,7 @@ from scripts.bernie_interpretation_readiness_check import (
     READINESS_SCHEMA_VERSION,
     build_readiness_status,
 )
+from scripts.bernie_interpretation_runtime_gate_check import DEFAULT_GATE_PATH
 
 
 def test_readiness_status_combines_report_and_runtime_gate_safely():
@@ -55,3 +56,37 @@ def test_readiness_status_does_not_authorize_runtime_provider_or_trove_access():
     assert status["runtime_or_provider_wiring_ready"] is False
     assert status["raw_trove_access_ready"] is False
     assert status["sprint_engine_state"] == "continuing"
+
+
+def test_readiness_status_rejects_unblocked_runtime_gate(tmp_path):
+    gate = json.loads(DEFAULT_GATE_PATH.read_text(encoding="utf-8"))
+    gate["decision"] = "approved"
+    gate_path = tmp_path / "runtime_gate.json"
+    gate_path.write_text(json.dumps(gate), encoding="utf-8")
+
+    try:
+        build_readiness_status(gate_path=gate_path)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("unblocked runtime gate was not rejected")
+
+
+def test_readiness_status_rejects_missing_fixture_directory(tmp_path):
+    missing_fixture_dir = tmp_path / "missing"
+
+    try:
+        build_readiness_status(fixture_dir=missing_fixture_dir)
+    except ValueError as exc:
+        assert "does not exist" in str(exc)
+    else:
+        raise AssertionError("missing readiness fixture directory was not rejected")
+
+
+def test_readiness_status_rejects_empty_fixture_directory(tmp_path):
+    try:
+        build_readiness_status(fixture_dir=tmp_path)
+    except ValueError as exc:
+        assert "No JSON fixtures" in str(exc)
+    else:
+        raise AssertionError("empty readiness fixture directory was not rejected")
