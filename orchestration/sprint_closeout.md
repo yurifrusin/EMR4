@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H16: Historical Diary Trove Friday Neutral Sampling |
 | Integrated through | Ariadne local-only capped neutral sampling; no external workers used because scope was privacy-sensitive and read-only |
-| Status | Verified locally; push/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean at `00a00b78` |
 | Last updated | 2026-07-06 |
 
 ## What Changed
