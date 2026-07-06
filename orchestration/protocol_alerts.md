@@ -353,3 +353,12 @@ Read these before acting on remembered process details.
   `origin/handoff/current` and force-with-lease updates the durable remote mirror
   branch, rather than rebasing and replaying the already-integrated submit commit.
 - If these alerts conflict with a prior session memory, trust these alerts.
+- Bernie Interpretation Harness readiness gate: before any worker or Ariadne
+  sprint proposes runtime route wiring, provider prompt/dry-run wiring,
+  memory/RAG/GraphRAG use, H15/H-series runtime imports, or
+  historical diary material access from the provider-free interpretation harness, run
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`.
+  Current expected values are `runtime_or_provider_wiring_ready=false`,
+  `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`. If the
+  command fails or those values change, pause the sprint engine for explicit
+  review instead of continuing automatically.

@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H59 Bernie Interpretation Harness blocked-readiness snapshot integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H60 Bernie Interpretation Harness readiness protocol alert integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -451,6 +451,13 @@ status must match the committed blocked snapshot exactly: 44 cases, 7 contracts,
 7 dispatches, 4 frame kinds, runtime gate decision `blocked`, sprint engine
 `continuing`, and both `runtime_or_provider_wiring_ready` and
 `raw_trove_access_ready` false. The snapshot is aggregate-only and payload-free.
+H60 adds a short worker-facing protocol alert to
+`orchestration/protocol_alerts.md` and
+`tests/test_bernie_interpretation_protocol_alert.py`. The alert tells workers
+and Ariadne to run the readiness command before proposing runtime route wiring,
+provider prompt/dry-run wiring, memory/RAG/GraphRAG use, H15/H-series runtime
+imports, or historical diary material access. It preserves the expected blocked
+values and pause requirement.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

@@ -5497,6 +5497,41 @@ wiring.
 
 ---
 
+## Sprint H60 Closeout - Readiness Protocol Alert
+
+Integrated outcome:
+
+- Added a worker-facing Bernie Interpretation Harness readiness alert to
+  `orchestration/protocol_alerts.md`.
+- Added `tests/test_bernie_interpretation_protocol_alert.py`.
+- The alert requires
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
+  before runtime route wiring, provider prompt/dry-run wiring,
+  memory/RAG/GraphRAG use, H15/H-series runtime imports, or historical diary
+  material access from the provider-free interpretation harness.
+- The alert preserves expected blocked values and says the sprint engine must
+  pause for explicit review if the command fails or values change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_protocol_alert.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_interpretation_protocol_alert.py tests\test_bernie_interpretation_readiness_check.py tests\test_bernie_interpretation_readiness_release_gate.py tests\test_bernie_interpretation_readiness_review_artifact.py tests\test_bernie_interpretation_readiness_snapshot.py tests\test_bernie_interpretation_runtime_gate.py tests\test_bernie_interpretation_runtime_gate_check.py tests\test_bernie_interpretation_runtime_isolation.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `294 passed`; readiness CLI sample succeeded; leakage lint safe;
+whitespace check clean apart from the known CRLF notice on
+`orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded readiness/gate hardening before runtime/provider
+wiring.
+
+---
+
 ## Sprint H59 Closeout - Blocked-Readiness Snapshot
 
 Integrated outcome:

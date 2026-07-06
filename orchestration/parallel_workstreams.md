@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H60: Bernie Interpretation Harness Readiness Protocol Alert
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Put the interpretation readiness gate in worker-facing protocol alerts so future agents see it during handin |
+| Worker Shape | Ariadne implementation |
+| In Scope | Protocol alert, static alert guard tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; readiness CLI sample; interpretation/report/protocol-alert/readiness/snapshot/release-gate/review/runtime-gate/runtime-isolation/manifest/route-contract guard cluster (294 passed); leakage lint; `git diff --check` |
+
 ## Sprint H59: Bernie Interpretation Harness Blocked-Readiness Snapshot
 
 | Item | Value |

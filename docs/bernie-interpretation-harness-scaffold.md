@@ -353,3 +353,15 @@ The snapshot preserves:
 
 It is aggregate-only and contains no utterance text, payload fields, route
 fragments, local-data paths, H15 fragments, or H-series fragments.
+
+## H60 Protocol Alert
+
+H60 adds a short worker-facing alert to `orchestration/protocol_alerts.md`.
+The alert requires the readiness command before any worker or Ariadne sprint
+proposes runtime route wiring, provider prompt/dry-run wiring,
+memory/RAG/GraphRAG use, H15/H-series runtime imports, or historical diary
+material access from the provider-free interpretation harness.
+
+Expected values remain `runtime_or_provider_wiring_ready=false`,
+`raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`. Any command
+failure or changed value pauses the sprint engine for explicit review.
