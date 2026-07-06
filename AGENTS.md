@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H68 mechanical readiness-reference proposal guard integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue low-risk readiness hardening or clean orchestration residue before opening any runtime/provider/trove proposal |
+| **Current active track** | H69 orchestration poll legacy-encoding tolerance integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Paused by Yuri request after H69 closeout; when resumed, clean stale inbox/Claude residue before launching more durable worker lanes |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -509,6 +509,13 @@ proposal artifacts that discuss runtime/provider/trove surfaces must include the
 readiness command and the expected blocked values. The guard is documented in
 `orchestration/bernie_release_gates.md` and accepts both `key=false` and
 `key: false` forms for the expected values.
+H69 fixes an orchestration-health blocker in `scripts/agent_worktrees.py`:
+`read_task_status()` now tolerates legacy non-UTF-8 bytes with replacement while
+reading packet status. This lets `agent_worktrees.py poll --fetch` complete
+again even when old inbox packets contain legacy smart punctuation. The fix is
+covered by `tests/test_agent_worktrees.py`. Poll still reports old queued and
+pending packets plus Claude branch residue; it no longer crashes on Unicode
+decode.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed; pause requested after closeout |
+| Product Goal | Keep worker polling usable when old inbox packets contain legacy non-UTF-8 bytes |
+| Worker Shape | Ariadne implementation of orchestration-health fix |
+| In Scope | `read_task_status()` tolerance, regression test, docs/handover updates |
+| Out Of Scope | Rewriting old inbox packets, deleting stale worker branches, reconciling Claude residue, runtime/provider/trove work |
+| Verification | `py_compile`; `tests/test_agent_worktrees.py` (5 passed); `.venv\Scripts\python.exe scripts\agent_worktrees.py poll --fetch` completed without Unicode crash; `git diff --check` |
+
 ## Sprint H68: Mechanical Readiness Reference Guard
 
 | Item | Value |

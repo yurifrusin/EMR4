@@ -2,6 +2,7 @@ from scripts.agent_worktrees import (
     HANDOFF_REF,
     build_parser,
     create_codex_review_packet,
+    read_task_status,
     task_completion_notes,
 )
 
@@ -57,6 +58,22 @@ Fill this in before submit:
     )
 
     assert task_completion_notes(task) == ""
+
+
+def test_read_task_status_tolerates_legacy_non_utf8_bytes(tmp_path):
+    task = tmp_path / "legacy-packet.md"
+    task.write_bytes(
+        b"""# legacy-packet
+
+| Item | Value |
+|---|---|
+| Status | queued |
+
+Legacy smart dash byte: \x97
+"""
+    )
+
+    assert read_task_status(task) == "queued"
 
 
 def test_realign_defaults_to_handoff_ref():

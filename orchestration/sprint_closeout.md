@@ -8,12 +8,46 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H68: Mechanical Readiness Reference Guard |
-| Integrated through | Ariadne implementation of H64-M2 |
+| Batch | Sprint H69: Orchestration Poll Legacy-Encoding Tolerance |
+| Integrated through | Ariadne implementation |
 | Status | Integrated; focused verification passed |
 | Last updated | 2026-07-07 |
 
 ## What Changed
+
+- Updated `scripts\agent_worktrees.py` so `read_task_status()` tolerates legacy
+  non-UTF-8 bytes with replacement while reading task-packet status.
+- Added a regression test in `tests\test_agent_worktrees.py` using a legacy
+  smart-dash byte.
+- Verified `.venv\Scripts\python.exe scripts\agent_worktrees.py poll --fetch`
+  completes without the previous UnicodeDecodeError. It still reports old
+  queued/pending Codex inbox packets and Claude branch residue; those are
+  follow-up cleanup, not H69 scope.
+- Updated `AGENTS.md`, `orchestration\parallel_workstreams.md`, and
+  `orchestration\integration_log.md`.
+- No runtime routes, UI, providers, database access, memory/RAG/GraphRAG,
+  H15/H-series runtime imports, raw trove reads, or ignored local-data reads
+  were added.
+
+## Verification
+
+- Compile check passed:
+  `.venv\Scripts\python.exe -m py_compile scripts\agent_worktrees.py tests\test_agent_worktrees.py`.
+- Focused pytest passed:
+  `.venv\Scripts\python.exe -m pytest tests\test_agent_worktrees.py -q`
+  (`5 passed`; existing deprecation warnings only).
+- Poll smoke passed:
+  `.venv\Scripts\python.exe scripts\agent_worktrees.py poll --fetch` completed
+  without UnicodeDecodeError.
+- `git diff --check` passed with the known CRLF warning on
+  `orchestration/integration_log.md`.
+
+Sprint engine state after H69 closeout: paused by Yuri request. Reason: Yuri
+asked to pause execution after the next sprint closeout.
+
+---
+
+## Previous Closeout
 
 - Added `scripts\bernie_interpretation_proposal_surface_guard.py`, a reusable
   markdown guard for runtime/provider/trove proposal artifacts.

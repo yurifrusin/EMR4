@@ -426,7 +426,7 @@ def task_files(agent: str | None = None, repo_root: Path = REPO_ROOT) -> list[Pa
 
 
 def read_task_status(path: Path) -> str:
-    return read_status_from_text(path.read_text(encoding="utf-8"))
+    return read_status_from_text(path.read_text(encoding="utf-8", errors="replace"))
 
 
 def read_status_from_text(text: str) -> str:
