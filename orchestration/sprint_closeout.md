@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H18: Historical Diary Trove Neutral Derived Graph |
 | Integrated through | Ariadne local-only graph export tooling; no external workers used because scope was privacy-sensitive and narrow |
-| Status | Verified locally; push/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green at `2cc76dab` |
 | Last updated | 2026-07-06 |
 
 ## What Changed
