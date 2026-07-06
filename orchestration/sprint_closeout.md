@@ -4854,3 +4854,33 @@ Result: `71 passed`; leakage lint safe; whitespace check clean.
 Sprint engine state: continuing. No user intervention is required; recommended
 next direction is additional native Bernie/Diary grammar coverage unless a
 route-contract drift risk appears.
+
+---
+
+## Sprint H37 Closeout - Grammar-To-Route Contract Inventory
+
+Integrated outcome:
+
+- Added `app/services/diary/action_route_contract.py`, a pure static inventory
+  mapping every `DiaryActionVerb` to current route authority:
+  `signed_confirm`, `read_only`, `meta`, or `planned_not_implemented`.
+- Added tests proving implemented confirm verbs map to existing
+  `DiaryConfirmAction` endpoints.
+- Proved adjacent planned surfaces such as check-in defaults, status proposals,
+  and waiting-area proposals do not make `check_in`, `waiting_area_move`, or
+  `link_patient` executable.
+- Documented the route-contract boundary in `docs/diary-action-route-contract.md`.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\diary\action_route_contract.py tests\test_diary_action_route_contract.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py tests\test_diary_action_grammar.py tests\action_grammar_replay\test_grammar_replay.py -q
+git diff --check
+```
+
+Result: `75 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is H38 read-only vs mutating route boundary tests.

@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H37: Grammar-To-Route Contract Inventory
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Map every native Diary grammar verb to current backend route authority without adding dispatch or write power |
+| Worker Shape | Ariadne implementation |
+| In Scope | Pure route-contract inventory, tests, docs, handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; route-contract/action-grammar/replay guard cluster (75 passed); leakage lint; `git diff --check` |
+
 ## Sprint H36: Native Diary Action Alias Coverage
 
 | Item | Value |
@@ -13,7 +24,7 @@ For the layer between long phases and tactical sprints, use
 | Product Goal | Keep the public free-string action bridge explicit for all current grammar verbs, including planned-not-implemented aliases |
 | Worker Shape | Ariadne implementation |
 | In Scope | Test-only alias matrix and planned-action non-executable assertions |
-| Out Of Scope | Runtime routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Out Of Scope | Runtime dispatch, routes, UI, providers, database writes, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
 | Verification | `py_compile`; action grammar/replay/H15 fixture guard cluster (71 passed); leakage lint; `git diff --check` |
 
 ## Sprint H35: Action-Grammar Replay Fixture Schema Hardening

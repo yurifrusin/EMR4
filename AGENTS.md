@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H36 native Diary action alias coverage integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue native Bernie/Diary grammar coverage, with broader route-contract review only if drift appears |
+| **Current active track** | H37 grammar-to-route contract inventory integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue to H38 read-only vs mutating route boundary tests |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -276,6 +276,16 @@ aliases must resolve to confirm-tier mutating descriptors while remaining
 without becoming executable. This is tests-only and does not touch routes, UI,
 providers, database writes, H15 fixtures, raw/local diary material, RAG,
 GraphRAG, or memory.
+H37 adds `app/services/diary/action_route_contract.py`,
+`tests/test_diary_action_route_contract.py`, and
+`docs/diary-action-route-contract.md`. This pure static inventory maps each
+`DiaryActionVerb` to current route authority: `signed_confirm`, `read_only`,
+`meta`, or `planned_not_implemented`. It proves implemented confirm verbs map to
+existing `DiaryConfirmAction` endpoints, while adjacent planned surfaces such as
+check-in defaults, status proposals, and waiting-area proposals do not make
+`check_in`, `waiting_area_move`, or `link_patient` executable. It does not
+dispatch, import routers, touch DB/models, call providers, use local trove/H15
+fixtures, or grant write authority.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
