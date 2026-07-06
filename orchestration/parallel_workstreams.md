@@ -9,12 +9,12 @@ For the layer between long phases and tactical sprints, use
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
+| Status | Integrated locally; verification passed |
 | Product Goal | Prove the R29 action grammar has a deterministic synthetic replay consumer before any H15 semantic work or full-trove mining |
 | Worker Shape | Claude implementation-plan lane, Codex/DeepSeek adversarial review lane, Antigravity/Gemini receptionist acceptance review |
 | In Scope | Synthetic-only replay fixture/test design, grammar consumption invariants, no-write/no-provider/no-trove boundaries |
 | Out Of Scope | Raw `local_data`, ignored JSON, H15 semantic fixtures, broad full-trove processing, route/UI/provider changes, autonomous writes |
-| Verification | Plan/review artifacts first; later implementation verification to be approved after plan review |
+| Verification | `py_compile`; `pytest tests/action_grammar_replay tests/test_diary_action_grammar.py tests/test_h_series_profile_consistency.py -q`; `git diff --check` |
 
 ### Workstream R30-A - Claude Action Grammar Replay Consumer Plan
 
@@ -40,7 +40,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | Source-safe adversarial review artifact or plan packet |
 | Out of Scope | Production implementation, UI, raw trove, semantic labelling |
 | Verification | Review artifact inspection |
-| Status | Queued |
+| Status | Integrated |
 
 ### Workstream R30-C - Gemini Replay Consumer Receptionist Review
 
@@ -53,7 +53,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | `docs/receptionist_review_r30.md` after plan approval |
 | Out of Scope | Code/tests, UI edits, raw trove, semantic H-series mapping |
 | Verification | Source-safe review artifact |
-| Status | Queued |
+| Status | Integrated |
 
 ## Sprint R29: Native Bernie/Diary Action Grammar Foundation
 
@@ -3479,4 +3479,3 @@ branch only; Codex reviews and integrates afterward.
 | Out of Scope | Frontend consumption, drag/drop, booking mutations |
 | Verification | compileall, relevant pytest, Alembic head/current/upgrade if migration added |
 | Status | Integrated |
-

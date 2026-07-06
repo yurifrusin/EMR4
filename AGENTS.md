@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | R30 deterministic synthetic replay consumer dispatched; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Collect R30 plan/review packets, then implement the smallest synthetic replay consumer over the R29 action grammar before any H15 semantic-gate opening or broad full-trove mining |
+| **Current active track** | R30 deterministic synthetic replay consumer integrated locally; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Prepare the H22 semantic gate-review packet with a tiny local-only prototype plan, validator-extension design, leakage-lint design, and Yuri approval payload; do not open H15 yet |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -168,6 +168,14 @@ or full-trove processing. It uses existing `BernieCapabilityTier` vocabulary,
 maps implemented confirm verbs to existing `DiaryConfirmAction` entries, marks
 unimplemented check-in/waiting-area/link-patient verbs as unavailable scaffolds,
 and includes a golden confirm-affordance-block test.
+R30 added a test-only deterministic synthetic replay consumer under
+`tests/action_grammar_replay/` with hand-authored fixtures in
+`tests/fixtures/action_grammar_replay/`. It proves consumer-side action
+resolution, planned-unavailable refusal, read-only/meta routing, and runtime
+confirm-affordance pre-checks without touching routes, UI, database models,
+provider code, H-series profiles, raw trove files, or semantic fixtures. The
+separate `tests/action_grammar_replay/DRIFT.md` records why this pure grammar
+consumer is not the existing route-level Bernie scenario replay harness yet.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

@@ -8,9 +8,9 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint R29: Native Bernie/Diary Action Grammar Foundation |
-| Integrated through | Claude implementation lane, DeepSeek/Codex adversarial review, Antigravity receptionist acceptance review, Ariadne verification |
-| Status | Integrated locally; focused verification passed; not yet pushed |
+| Batch | Sprint R30: Deterministic Synthetic Action Replay Consumer |
+| Integrated through | Ariadne implementation after Claude session-limit fallback to DeepSeek plan, DeepSeek adversarial review, Antigravity receptionist acceptance review |
+| Status | Integrated; focused verification passed; pushed to master |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -28,6 +28,10 @@ reviewed, integrated, verified, pushed, and audited.
 - Added `tests\test_diary_action_grammar.py` with 31 focused tests.
 - Added `docs\adversarial\r29_action_grammar_adversarial_review.md`.
 - Added `docs\receptionist_review_r29.md`.
+- Added `tests\action_grammar_replay\`, a pure test-only replay consumer.
+- Added `tests\fixtures\action_grammar_replay\`, hand-authored synthetic JSON scripts.
+- Added `docs\adversarial\r30_replay_consumer_adversarial_review.md`.
+- Added `docs\receptionist_review_r30.md`.
 - No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
 
 ## Verification
@@ -39,6 +43,8 @@ reviewed, integrated, verified, pushed, and audited.
 - R29 compile check passed: `.venv\Scripts\python.exe -m py_compile app\services\diary\action_grammar.py app\services\bernie\action_grammar.py tests\test_diary_action_grammar.py`.
 - R29 focused pytest passed: `.venv\Scripts\pytest.exe tests\test_diary_action_grammar.py -q` (31 passed).
 - Adjacent regression cluster passed: `.venv\Scripts\pytest.exe tests\test_diary_action_envelopes.py tests\test_diary_confirm_gate.py tests\test_diary_confirm_actions.py tests\test_bernie_diary_capability_manifest.py tests\test_bernie_domain_package.py tests\test_bernie_diary_rehome_compatibility.py -q` (98 passed).
+- R30 compile check passed: `.venv\Scripts\python.exe -m py_compile tests\action_grammar_replay\loader.py tests\action_grammar_replay\replay.py tests\action_grammar_replay\test_grammar_replay.py`.
+- R30 focused pytest passed: `.venv\Scripts\pytest.exe tests\action_grammar_replay tests\test_diary_action_grammar.py tests\test_h_series_profile_consistency.py -q` (44 passed).
 
 ## Local Result
 
@@ -49,6 +55,9 @@ reviewed, integrated, verified, pushed, and audited.
 - R29 gives EMR4 a native typed action vocabulary without adding write authority.
 - Implemented confirm verbs map to existing `DiaryConfirmAction` entries; planned check-in/waiting-area/link-patient verbs remain unavailable scaffolds.
 - The grammar is not wired into routes, prompts, UI, provider calls, or full-trove processing.
+- R30 now proves the action grammar can be consumed by hand-authored synthetic fake day/action scripts.
+- The replay consumer resolves actions, refuses planned-unavailable and unknown actions, checks read-only/meta routing, and calls the runtime confirm-affordance gate instead of only scanning notes text.
+- `DRIFT.md` records why this pure grammar consumer is separate from route-level DB replay until grammar verbs are wired into backend routes.
 
 ## Bernie Memory Result
 
@@ -72,8 +81,8 @@ No required manual review before continuing. Yuri review is required only if a f
 
 ## Known Follow-Up
 
-- Build the deterministic synthetic replay consumer over the new action grammar next.
-- Do not use the full trove broadly until a replay consumer and H22 semantic gate-review packet exist.
+- Prepare the H22 semantic gate-review packet next.
+- Do not use the full trove broadly until H22 is reviewed and Yuri explicitly approves H15.
 - Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 
 ## Previous Closeout - Sprint H21
