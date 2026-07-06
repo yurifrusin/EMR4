@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H14: Historical Diary Trove Neutral Transition Neighborhoods |
 | Integrated through | Ariadne local-only transition-neighborhood tooling; no external workers used because scope was raw-free and narrowly bounded |
-| Status | Local verification passed; push/mirror/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -29,8 +29,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_transition_neighborhoods.py tests\test_historical_diary_large_delta_triage.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (19 passed; existing warnings only).
 - Local neighborhood report passed against ignored H13 ordered snapshots.
 - Safety validation passed for ignored H14 transition-neighborhood output.
-- Post-push audit pending.
-- GitHub workflows pending.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors aligned.
+- GitHub workflows passed for the H14 push: Deploy GitHub Pages, Python Security, and CodeQL.
 
 ## Local Neighborhood Result
 
