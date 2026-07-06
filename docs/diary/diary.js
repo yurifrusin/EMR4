@@ -1999,7 +1999,7 @@ function renderBernieInterpretPreview(contentEl, envelope) {
     const provider = document.createElement("div");
     provider.className = "bernie-interpret-provider";
     provider.setAttribute("data-testid", "bernie-interpret-provider");
-    provider.textContent = `Provider: ${metadata.mode || "mocked"}${metadata.live_provider ? " live" : " non-live"}`;
+    provider.textContent = `Provider: ${metadata.provider || "fake"} (mode: ${metadata.mode || "mocked"}; live_provider: ${metadata.live_provider ? "true" : "false"})`;
     preview.appendChild(provider);
   }
 
