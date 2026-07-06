@@ -1,10 +1,12 @@
 import pytest
 
 from scripts.historical_diary_output_safety import (
+    ALLOWED_SEMANTIC_ACTION_NAMES,
     HistoricalDiaryOutputSafetyError,
     validate_historical_diary_output,
     validate_historical_diary_semantic_fixture_output,
 )
+from app.services.diary.action_grammar import DiaryActionVerb
 
 
 def safe_payload():
@@ -227,3 +229,14 @@ def test_semantic_fixture_requires_approval_expiry():
     del payload["semantic_scope"]["approval_expires_on"]
 
     assert_semantic_unsafe(payload, "approval expiry is required")
+
+
+def test_semantic_fixture_requires_date_shaped_approval_expiry():
+    payload = safe_semantic_payload()
+    payload["semantic_scope"]["approval_expires_on"] = "later"
+
+    assert_semantic_unsafe(payload, "approval expiry must be YYYY-MM-DD")
+
+
+def test_semantic_action_allowlist_tracks_diary_action_grammar():
+    assert ALLOWED_SEMANTIC_ACTION_NAMES == {verb.value for verb in DiaryActionVerb}

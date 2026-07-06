@@ -199,6 +199,7 @@ UNSAFE_KEY_PATTERNS = tuple(
 WINDOWS_PATH_RE = re.compile(r"[A-Za-z]:\\")
 DOC_PATH_RE = re.compile(r"(?:\\|/)[^\\/\s]+\.docx?\b", re.IGNORECASE)
 DATE_TIME_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}")
+DATE_ONLY_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 LIKELY_PERSON_NAME_RE = re.compile(r"\b[A-Z][a-z]{2,}\s+[A-Z][a-z]{2,}\b")
 LIKELY_BOOKING_SEMANTIC_RE = re.compile(
     r"\b("
@@ -372,9 +373,19 @@ def _validate_semantic_scope(value: Any, issues: list[SafetyIssue]) -> None:
         )
     if not value.get("fixture_family"):
         issues.append(SafetyIssue("$.semantic_scope.fixture_family", "fixture family is required"))
-    if not value.get("approval_expires_on"):
+    approval_expires_on = value.get("approval_expires_on")
+    if not approval_expires_on:
         issues.append(
             SafetyIssue("$.semantic_scope.approval_expires_on", "approval expiry is required")
+        )
+    elif not isinstance(approval_expires_on, str) or not DATE_ONLY_RE.fullmatch(
+        approval_expires_on
+    ):
+        issues.append(
+            SafetyIssue(
+                "$.semantic_scope.approval_expires_on",
+                "approval expiry must be YYYY-MM-DD",
+            )
         )
 
     allowed_actions = value.get("allowed_action_names")

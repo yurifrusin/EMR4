@@ -8,8 +8,8 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H23: Semantic Validator and Leakage Lint Extensions |
-| Integrated through | Ariadne implementation |
+| Batch | Sprint H24: Semantic Guardrails Adversarial Review |
+| Integrated through | Ariadne adversarial review and bounded guardrail tightening |
 | Status | Integrated locally; focused verification passed; not yet pushed |
 | Last updated | 2026-07-06 |
 
@@ -37,6 +37,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Added `scripts\historical_diary_leakage_lint.py`.
 - Added `tests\test_historical_diary_leakage_lint.py`.
 - Wired the leakage lint into `.github\workflows\python-security.yml`.
+- Added `docs\adversarial\h23_semantic_guardrails_review.md`.
+- Tightened semantic guardrails so semantic action names track `DiaryActionVerb` and approval expiry must be `YYYY-MM-DD`.
 - No raw diary files, ignored local JSON, filenames, exact source timestamps, patient/staff labels, document text, live-provider calls, database writes, routes, frontend assets, migrations, or runtime prompts were added.
 
 ## Verification
@@ -55,6 +57,10 @@ reviewed, integrated, verified, pushed, and audited.
 - H23 compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_output_safety.py scripts\historical_diary_leakage_lint.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py`.
 - H23 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
 - H23 focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\test_historical_diary_deidentification_gate.py tests\action_grammar_replay tests\test_h_series_profile_consistency.py -q` (41 passed).
+- H24 compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_output_safety.py scripts\historical_diary_leakage_lint.py tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py`.
+- H24 leakage lint passed: `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`.
+- H24 blocked gate validation passed: `.venv\Scripts\python.exe scripts\historical_diary_deidentification_gate.py docs\historical-diary-trove-semantic-gate-template.json`.
+- H24 focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_output_safety.py tests\test_historical_diary_leakage_lint.py tests\test_historical_diary_deidentification_gate.py tests\action_grammar_replay tests\test_h_series_profile_consistency.py -q` (43 passed).
 
 ## Local Result
 
@@ -70,6 +76,7 @@ reviewed, integrated, verified, pushed, and audited.
 - `DRIFT.md` records why this pure grammar consumer is separate from route-level DB replay until grammar verbs are wired into backend routes.
 - H22 now defines the human-readable review packet for a future H15 decision without approving semantic labelling or touching raw trove material.
 - H23 now gives H22 its first executable tripwires: semantic-mode payload validation and repo-path leakage lint for H-series semantic drift.
+- H24 records an adversarial review of those tripwires and adds grammar-drift and approval-expiry guards.
 
 ## Bernie Memory Result
 
@@ -93,7 +100,7 @@ No required manual review before continuing. Yuri review is required only if a f
 
 ## Known Follow-Up
 
-- Prepare a concrete reviewed H15 approval-payload draft, or first adversarially review the new lint/validator surface.
+- Prepare a concrete reviewed H15 approval-payload draft for Yuri's decision.
 - Do not use the full trove broadly until H22 is reviewed and Yuri explicitly approves H15.
 - Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
 

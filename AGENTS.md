@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H22/H23 semantic gate-review packet plus synthetic validator/leakage-lint extensions integrated locally; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Prepare a concrete reviewed H15 approval-payload draft or run an additional adversarial review of the new lint/validator surface; do not open H15 or touch the full trove until Yuri explicitly approves |
+| **Current active track** | H22-H24 semantic gate packet, validator/leakage-lint extensions, and adversarial review integrated locally; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Prepare a concrete reviewed H15 approval-payload draft for Yuri's decision, but do not approve it, open H15, or touch the full trove until Yuri explicitly approves |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -191,6 +191,11 @@ H23 added a semantic-mode extension to
 Python Security workflow. It scans ordinary docs/tests/fixtures for H-series
 semantic drift while allowing policy/adversarial docs and negative-test files
 to describe forbidden examples. The H15 template remains `blocked`.
+H24 added `docs/adversarial/h23_semantic_guardrails_review.md` and tightened the
+guardrails during review: semantic action names now track `DiaryActionVerb`, and
+`approval_expires_on` must be a `YYYY-MM-DD` string. The review records the
+remaining accepted boundary that policy/adversarial docs can quote forbidden
+examples and therefore still require human review when H15 scope changes.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

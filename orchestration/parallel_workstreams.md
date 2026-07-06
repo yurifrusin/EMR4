@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H24: Semantic Guardrails Adversarial Review
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Review and tighten the H23 validator/leakage-lint surface before any H15 approval-payload draft |
+| Worker Shape | Ariadne adversarial review |
+| In Scope | Source-safe review doc, grammar-drift guard, approval-expiry shape guard |
+| Out Of Scope | Raw `local_data`, ignored JSON, semantic fixture promotion, H15 approval, full-trove processing, provider calls, route/UI/database writes |
+| Verification | `py_compile`; leakage lint over `tests docs`; blocked H15 gate validation; focused H23/H15/H-series pytest cluster (43 passed); `git diff --check` |
+
 ## Sprint H23: Semantic Validator and Leakage Lint Extensions
 
 | Item | Value |
