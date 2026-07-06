@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H13: Historical Diary Trove Broadened Neutral Sampling |
 | Integrated through | Ariadne local-only capped neutral sampling; no external workers used because scope was raw-free and narrowly bounded |
-| Status | Local verification passed; push/mirror/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages and Python Security workflows green; CodeQL not triggered for docs-only H13 |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -26,8 +26,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Local export passed: 200/200 read-only Word COM opens, zero classifier errors.
 - Safety validation passed for ignored H13 ordered snapshots, event summary, and large-delta triage output.
 - Existing H12/H13 helper checks passed earlier in the sequence: focused pytest 24 passed with existing warnings only.
-- Post-push audit pending.
-- GitHub workflows pending.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors all aligned at `21648441`.
+- GitHub workflows passed for the clean H13 push: Deploy GitHub Pages and Python Security. CodeQL did not trigger for this docs-only H13 change.
 
 ## Local Sampling Result
 
