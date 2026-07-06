@@ -17,6 +17,15 @@ Later sprints add action envelopes and retire more flat-module implementations;
 external import paths through this package stay stable.
 """
 
+from app.services.bernie.action_grammar import (
+    DIARY_ACTION_GRAMMAR,
+    GRAMMAR_SCHEMA_VERSION,
+    DiaryActionVerb,
+    DiaryActionVerbDescriptor,
+    action_verb_for_envelope,
+    assert_grammar_consistency,
+    get_verb_descriptor,
+)
 from app.services.bernie.confirm_gate import (
     ConfirmAffordanceDecision,
     ConfirmAffordanceGate,
@@ -134,6 +143,14 @@ from app.services.bernie.transitions import (
 )
 
 __all__ = [
+    # action grammar
+    "GRAMMAR_SCHEMA_VERSION",
+    "DiaryActionVerb",
+    "DiaryActionVerbDescriptor",
+    "DIARY_ACTION_GRAMMAR",
+    "get_verb_descriptor",
+    "action_verb_for_envelope",
+    "assert_grammar_consistency",
     # confirm gate
     "ConfirmAffordanceDecision",
     "ConfirmAffordanceGate",
