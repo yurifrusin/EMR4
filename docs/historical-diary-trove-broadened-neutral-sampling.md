@@ -2,8 +2,8 @@
 
 Date: 2026-07-06
 Sprint: H13 broadened neutral ordered-snapshot sampling
-Scope: one capped dense day from each ignored pilot root, 100 snapshots per
-root, no `-AllowLargeRun`
+Scope: one capped dense-day sample from each ignored pilot root, 100 snapshots
+per root, no `-AllowLargeRun`
 Privacy posture: ignored local neutral outputs only; no filenames, raw paths,
 exact source document timestamps, document text, patient labels, staff labels,
 or visible diary content committed.
