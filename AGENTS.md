@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H12 neutral large-delta local triage completed; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H13: broaden neutral ordered-snapshot sampling with H10 caps intact, then compare large-delta frequency before any semantic labelling |
+| **Current active track** | Historical diary trove H13 broadened neutral ordered-snapshot sampling completed; R25 provider sampling scaffold closed |
+| **Next recommended work** | Sprint H14: neutral transition-neighborhood reporter for large/time-grid events before any semantic labelling |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -646,7 +646,7 @@ agent session state.
 |---|---|
 | **Remote** | https://github.com/yurifrusin/EMR4.git |
 | **Branch** | `master` |
-| **Latest integration commit** | Sprint H12 neutral large-delta local triage |
+| **Latest integration commit** | Sprint H13 broadened neutral ordered-snapshot sampling |
 
 ### Tag map (all tags pushed to remote)
 

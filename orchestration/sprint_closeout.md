@@ -8,6 +8,54 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H13: Historical Diary Trove Broadened Neutral Sampling |
+| Integrated through | Ariadne local-only capped neutral sampling; no external workers used because scope was raw-free and narrowly bounded |
+| Status | Local verification passed; push/mirror/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Ran a capped H13 ordered neutral export over 100 snapshots from each ignored pilot root, with H10 guardrails active and without `-AllowLargeRun`.
+- Produced ignored `ordered_snapshots_h13.json`, `event_summary_h13.json`, and `large_delta_triage_h13.json`.
+- Validated each ignored H13 output through H5.
+- Added `docs\historical-diary-trove-broadened-neutral-sampling.md`.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- Local export passed: 200/200 read-only Word COM opens, zero classifier errors.
+- Safety validation passed for ignored H13 ordered snapshots, event summary, and large-delta triage output.
+- Existing H12/H13 helper checks passed earlier in the sequence: focused pytest 24 passed with existing warnings only.
+- Post-push audit pending.
+- GitHub workflows pending.
+
+## Local Sampling Result
+
+- `pilot`: 100 snapshots, 99 transitions: 61 `no_structural_change`, 37 `small_content_delta`, 1 `time_grid_delta`; large-delta triage count 0.
+- `pilot_01`: 100 snapshots, 99 transitions: 60 `no_structural_change`, 38 `small_content_delta`, 1 `large_unexplained_delta`; large-delta triage count 1.
+- The `pilot_01` large transition is the same neutral sequence pair as H12, sequence 54 to 55.
+- Interpretation: H13 did not reveal a new large unexplained transition; the one `pilot` time-grid event is a neutral future structural-question signal only.
+
+## Recommended User Review
+
+No required manual review before continuing. H13 is local tooling/docs only and touches raw diary files only through read-only local Word COM extraction.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- H14 should add a neutral transition-neighborhood reporter for large/time-grid events.
+- Do not infer appointment create/delete/status semantics from H13.
+
+## Previous Closeout - Sprint H12
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H12: Historical Diary Trove Neutral Large-Delta Triage |
 | Integrated through | Ariadne local-only large-delta triage; no external workers used because scope was raw-free and narrowly bounded |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
