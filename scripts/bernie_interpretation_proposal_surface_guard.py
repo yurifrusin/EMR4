@@ -9,6 +9,9 @@ from pathlib import Path
 READINESS_COMMAND = (
     ".venv\\Scripts\\python.exe scripts\\bernie_interpretation_readiness_check.py"
 )
+PROVIDER_BOUNDARY_COMMAND = (
+    ".venv\\Scripts\\python.exe scripts\\bernie_provider_boundary_readiness_report.py"
+)
 REQUIRED_MARKERS = (
     READINESS_COMMAND,
 )
@@ -16,6 +19,16 @@ REQUIRED_EXPECTED_VALUES = {
     "runtime_or_provider_wiring_ready": "false",
     "raw_trove_access_ready": "false",
     "runtime_gate_decision": "blocked",
+}
+PROVIDER_BOUNDARY_EXPECTED_VALUES = {
+    "default_provider": "disabled",
+    "runtime_or_provider_wiring_ready": "false",
+    "live_provider_enabled": "false",
+    "provider_calls_performed": "false",
+    "route_behavior_changed": "false",
+    "database_access_performed": "false",
+    "memory_or_rag_access_performed": "false",
+    "historical_diary_material_access_performed": "false",
 }
 TRIGGER_PHRASES = (
     "runtime route wiring",
@@ -25,6 +38,20 @@ TRIGGER_PHRASES = (
     "h15/h-series runtime imports",
     "historical diary material access",
     "runtime/provider/trove proposal",
+    "bernie booking interpreter provider boundary",
+    "provider-boundary proposal",
+    "provider boundary proposal",
+    "live-provider",
+    "aliasing",
+)
+PROVIDER_BOUNDARY_TRIGGER_PHRASES = (
+    "bernie booking interpreter provider boundary",
+    "provider-boundary proposal",
+    "provider boundary proposal",
+    "provider prompt wiring",
+    "provider dry-run wiring",
+    "live-provider",
+    "aliasing",
 )
 
 
@@ -56,6 +83,16 @@ def files_missing_readiness_reference(paths: tuple[Path, ...]) -> tuple[Path, ..
             for key, value in REQUIRED_EXPECTED_VALUES.items()
         ):
             missing.append(path)
+            continue
+        if any(phrase in folded for phrase in PROVIDER_BOUNDARY_TRIGGER_PHRASES):
+            if PROVIDER_BOUNDARY_COMMAND.casefold() not in folded:
+                missing.append(path)
+                continue
+            if any(
+                f"{key}={value}" not in compact and f"{key}:{value}" not in compact
+                for key, value in PROVIDER_BOUNDARY_EXPECTED_VALUES.items()
+            ):
+                missing.append(path)
     return tuple(missing)
 
 
@@ -77,7 +114,9 @@ def main() -> int:
             f"{formatted}\n"
             f"Required command: {READINESS_COMMAND}\n"
             "Required expected values: runtime_or_provider_wiring_ready=false, "
-            "raw_trove_access_ready=false, runtime_gate_decision=blocked"
+            "raw_trove_access_ready=false, runtime_gate_decision=blocked\n"
+            "Provider-boundary proposals also require command: "
+            f"{PROVIDER_BOUNDARY_COMMAND}"
         )
     return 0
 

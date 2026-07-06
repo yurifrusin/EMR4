@@ -3,6 +3,7 @@
 from pathlib import Path
 
 from scripts.bernie_interpretation_proposal_surface_guard import (
+    PROVIDER_BOUNDARY_COMMAND,
     READINESS_COMMAND,
     files_missing_readiness_reference,
 )
@@ -36,6 +37,50 @@ def test_proposal_surface_guard_accepts_runtime_proposal_with_readiness(tmp_path
                 "runtime_or_provider_wiring_ready=false",
                 "raw_trove_access_ready=false",
                 "runtime_gate_decision=blocked",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    assert files_missing_readiness_reference((proposal,)) == ()
+
+
+def test_proposal_surface_guard_rejects_provider_boundary_without_report(tmp_path):
+    proposal = tmp_path / "provider-boundary.md"
+    proposal.write_text(
+        "\n".join(
+            [
+                "This provider-boundary proposal discusses live-provider aliasing.",
+                READINESS_COMMAND,
+                "runtime_or_provider_wiring_ready=false",
+                "raw_trove_access_ready=false",
+                "runtime_gate_decision=blocked",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    assert files_missing_readiness_reference((proposal,)) == (proposal,)
+
+
+def test_proposal_surface_guard_accepts_provider_boundary_with_both_reports(tmp_path):
+    proposal = tmp_path / "provider-boundary.md"
+    proposal.write_text(
+        "\n".join(
+            [
+                "This provider-boundary proposal discusses live-provider aliasing.",
+                READINESS_COMMAND,
+                PROVIDER_BOUNDARY_COMMAND,
+                "runtime_or_provider_wiring_ready=false",
+                "raw_trove_access_ready=false",
+                "runtime_gate_decision=blocked",
+                "default_provider=disabled",
+                "live_provider_enabled=false",
+                "provider_calls_performed=false",
+                "route_behavior_changed=false",
+                "database_access_performed=false",
+                "memory_or_rag_access_performed=false",
+                "historical_diary_material_access_performed=false",
             ]
         ),
         encoding="utf-8",

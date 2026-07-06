@@ -232,6 +232,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 115 live-provider proposal surface guard extension requiring both readiness commands in provider-boundary proposals |
 | Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 115: Provider-Boundary Proposal Guard Extension
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Require provider-boundary proposal markdown to cite both standing readiness commands and expected blocked values before review |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI `1.0.16` available; DeepSeek Flash bridge available |
+| Ariadne Lane | Extended `scripts/bernie_interpretation_proposal_surface_guard.py` with provider-boundary triggers, required provider-boundary report command, expected disabled/false values, and proposal-doc tests |
+| DeepSeek Lane | Reviewed as safe/no-blocker and confirmed the guard's expected values match the current provider-boundary report output |
+| Verification | `py_compile`; proposal surface guard CLI; focused proposal/release-gate pytest (`10 passed`; existing Starlette/Google GenAI warnings only); `git diff --check` |
+| Next | Sprint 116 optional live-value verification mode for proposal-surface readiness text, or next provider-boundary checkpoint if static scanning remains the right fit |
+| Gates Still Closed | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

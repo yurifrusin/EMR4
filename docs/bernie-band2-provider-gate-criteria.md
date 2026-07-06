@@ -20,11 +20,24 @@ Current required readiness evidence remains:
 .venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
 ```
 
+Provider-boundary proposals must also record:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+```
+
 Expected blocked values:
 
 - `runtime_or_provider_wiring_ready=false`
 - `raw_trove_access_ready=false`
 - `runtime_gate_decision=blocked`
+- `default_provider=disabled`
+- `live_provider_enabled=false`
+- `provider_calls_performed=false`
+- `route_behavior_changed=false`
+- `database_access_performed=false`
+- `memory_or_rag_access_performed=false`
+- `historical_diary_material_access_performed=false`
 
 If any of those values changes, the sprint engine pauses for explicit review.
 

@@ -8,10 +8,53 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 114 Provider-Boundary Release-Gate Integration |
+| Batch | Sprint 115 Provider-Boundary Proposal Guard Extension |
 | Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 115 What Changed
+
+- Extended `scripts/bernie_interpretation_proposal_surface_guard.py` so
+  provider-boundary proposal markdown must cite both:
+  `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
+  and
+  `.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py`.
+- Provider-boundary proposal markdown must now include the existing blocked
+  interpretation readiness values plus the provider-boundary blocked/static
+  values: `default_provider=disabled`,
+  `runtime_or_provider_wiring_ready=false`, `live_provider_enabled=false`,
+  `provider_calls_performed=false`, `route_behavior_changed=false`,
+  `database_access_performed=false`, `memory_or_rag_access_performed=false`,
+  and `historical_diary_material_access_performed=false`.
+- Added rejection/acceptance tests for provider-boundary proposal markdown.
+- Upgraded `docs/bernie-band2-provider-gate-criteria.md` to satisfy the new
+  provider-boundary guard.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers and confirmed guard expected values
+  match the current provider-boundary report output. Residual risk: this remains
+  static text scanning, not proof that proposal authors actually reran the
+  commands immediately before writing.
+
+## Sprint 115 Verification
+
+- `.venv\Scripts\python.exe -m py_compile scripts\bernie_interpretation_proposal_surface_guard.py tests\test_bernie_interpretation_proposal_surface_guard.py`.
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\adversarial\h63_interpretation_independent_review_brief.md docs\bernie-band2-provider-gate-criteria.md`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_proposal_surface_guard.py tests/test_bernie_interpretation_readiness_release_gate.py -q`
+  (`10 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- scripts/bernie_interpretation_proposal_surface_guard.py tests/test_bernie_interpretation_proposal_surface_guard.py docs/bernie-band2-provider-gate-criteria.md`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 116:
+consider an optional live-value verification mode for the proposal surface guard,
+or move to the next Ariadne/Fable provider-boundary checkpoint if that would add
+too much automation to proposal docs.
+
+---
+
+## Previous Closeout - Sprint 114
 
 ## Sprint 114 What Changed
 
