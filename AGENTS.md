@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 113 provider-boundary readiness report integrated locally. `scripts/bernie_provider_boundary_readiness_report.py` emits safe aggregate/static posture for disabled/fake/live interpreter metadata, live aliases, canonical provider resolution, and blocked runtime/provider readiness, with tests proving safety fields reject opened posture. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
-| **Next recommended work** | Sprint 114: fold the provider-boundary readiness report into the existing Bernie readiness command or release-gate docs so reviewers run one preflight before any provider-boundary proposal |
+| **Current active track** | Sprint 114 provider-boundary release-gate integration completed locally. `orchestration/bernie_release_gates.md` now requires Ariadne to run `scripts\bernie_provider_boundary_readiness_report.py` before any sprint proposes enabling, expanding, aliasing, or dry-running a Bernie booking interpreter provider boundary, and tests lock the expected disabled/false values into the release-gate docs. No provider was enabled; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 115: add a live-provider proposal surface guard extension so provider-boundary proposal markdown must cite both the existing interpretation readiness command and the provider-boundary readiness report before review |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

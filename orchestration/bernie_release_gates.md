@@ -71,6 +71,21 @@ The expected current result is `runtime_or_provider_wiring_ready=false`,
 values change, or if the readiness command fails, the sprint engine must pause
 for explicit review instead of continuing automatically.
 
+Before any sprint proposes enabling, expanding, aliasing, or dry-running a
+Bernie booking interpreter provider boundary, Ariadne must also run and record:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+```
+
+The expected current result is `default_provider=disabled`,
+`runtime_or_provider_wiring_ready=false`, `live_provider_enabled=false`,
+`provider_calls_performed=false`, `route_behavior_changed=false`,
+`database_access_performed=false`, `memory_or_rag_access_performed=false`, and
+`historical_diary_material_access_performed=false`. If those values change, or
+if the provider-boundary report fails, the sprint engine must pause for
+explicit review instead of continuing automatically.
+
 ### Proposal Surface Guard
 
 Any new markdown proposal artifact that discusses runtime route wiring, provider

@@ -16,11 +16,25 @@ def test_release_gates_require_interpretation_readiness_command_before_wiring():
     assert "runtime_gate_decision=blocked" in text
 
 
+def test_release_gates_require_provider_boundary_report_before_provider_changes():
+    text = RELEASE_GATES.read_text(encoding="utf-8")
+
+    assert "scripts\\bernie_provider_boundary_readiness_report.py" in text
+    assert "default_provider=disabled" in text
+    assert "live_provider_enabled=false" in text
+    assert "provider_calls_performed=false" in text
+    assert "route_behavior_changed=false" in text
+    assert "database_access_performed=false" in text
+    assert "memory_or_rag_access_performed=false" in text
+    assert "historical_diary_material_access_performed=false" in text
+
+
 def test_release_gates_pause_if_interpretation_readiness_changes():
     text = RELEASE_GATES.read_text(encoding="utf-8")
 
     assert "sprint engine must pause" in text
     assert "explicit review" in text
+    assert "provider-boundary report fails" in text
     for forbidden_surface in [
         "runtime route wiring",
         "provider prompt wiring",

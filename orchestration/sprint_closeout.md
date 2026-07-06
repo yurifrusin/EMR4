@@ -8,10 +8,50 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 113 Provider-Boundary Readiness Report |
+| Batch | Sprint 114 Provider-Boundary Release-Gate Integration |
 | Integrated through | Ariadne implementation with DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 114 What Changed
+
+- Updated `orchestration/bernie_release_gates.md` so any sprint proposing to
+  enable, expand, alias, or dry-run a Bernie booking interpreter provider
+  boundary must run and record:
+  `.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py`.
+- Documented the expected current blocked/static values:
+  `default_provider=disabled`, `runtime_or_provider_wiring_ready=false`,
+  `live_provider_enabled=false`, `provider_calls_performed=false`,
+  `route_behavior_changed=false`, `database_access_performed=false`,
+  `memory_or_rag_access_performed=false`, and
+  `historical_diary_material_access_performed=false`.
+- Strengthened `tests/test_bernie_interpretation_readiness_release_gate.py` so
+  the release-gate docs must continue to cite the provider-boundary report and
+  those expected blocked values.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+- DeepSeek Flash review found no blockers. Residual risk matches the existing
+  documentation-gate pattern: docs tests assert required text, while the actual
+  command output must be run and recorded before provider-boundary proposals.
+
+## Sprint 114 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_readiness_release_gate.py`.
+- `.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_readiness_release_gate.py tests/test_bernie_provider_boundary_readiness_report.py -q`
+  (`14 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check -- orchestration/bernie_release_gates.md tests/test_bernie_interpretation_readiness_release_gate.py`.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 115:
+extend the proposal surface guard so provider-boundary proposal markdown must
+cite both the existing interpretation readiness command and the provider-boundary
+readiness report before review.
+
+---
+
+## Previous Closeout - Sprint 113
 
 ## Sprint 113 What Changed
 
