@@ -5,6 +5,56 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint R26: H-Series Neutral Scenario Bridge
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Convert H21 neutral diary movement profiles into source-safe deterministic Diary/Bernie scenario coverage without raw trove exposure |
+| Worker Shape | Claude implementation lane, Antigravity/Gemini receptionist-domain review, DeepSeek Flash adversarial privacy/schema review |
+| In Scope | Synthetic H-derived profile/scenario fixtures or tests, existing Bernie scenario harness boundaries, review artifacts |
+| Out Of Scope | Raw `local_data`/ignored JSON, semantic appointment labelling, live AI/provider calls, frontend Diary UI, production routes, database migrations |
+| Verification | Scenario integrity/replay pytest, py_compile for touched Python, review artifacts, `git diff --check` |
+
+### Workstream R26-A - Claude H-Series Scenario Implementation
+
+| Item | Value |
+|---|---|
+| Owner | Claude |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-r26-h-series-neutral-scenario-implementation.md` |
+| Goal | Add the smallest source-safe bridge from H-series neutral movement profiles into deterministic scenario coverage |
+| In Scope | `tests/fixtures/bernie_scenarios/`, `tests/bernie_scenarios/`, focused scenario integrity/replay tests, narrow docs if needed |
+| Out of Scope | Raw trove files, ignored local JSON, semantic labels, production code, frontend |
+| Verification | `py_compile` touched Python; `pytest tests/test_bernie_scenario_integrity.py tests/bernie_scenarios -q`; `git diff --check` |
+| Status | Queued |
+
+### Workstream R26-B - Gemini Receptionist Scenario Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-r26-h-series-receptionist-scenario-review.md` |
+| Goal | Map H21 neutral movement findings to receptionist-domain deterministic scenario priorities |
+| In Scope | `docs/receptionist_review_r26.md` only after plan approval |
+| Out of Scope | Code/tests, raw trove files, semantic labelling, live providers |
+| Verification | Tangible review artifact with scenario recommendations and acceptance criteria |
+| Status | Queued |
+
+### Workstream R26-C - DeepSeek Neutral Bridge Adversarial Review
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via `deepseek-worker` |
+| Branch | subagent fork / `codex-r26-deepseek-neutral-scenario-adversarial-review` packet |
+| Task Packet | `orchestration/agent_inbox/codex/codex-r26-deepseek-neutral-scenario-adversarial-review.md` |
+| Goal | Challenge privacy leakage, semantic overclaiming, fixture drift, and deterministic acceptance criteria |
+| In Scope | `docs/adversarial/h_series_scenario_bridge_review_r26.md` or narrow non-overlapping tests |
+| Out of Scope | Raw trove files, semantic labels, production code, frontend, live providers |
+| Verification | Review artifact inspection; tests if added |
+| Status | Queued |
+
 ## Sprint R14: Auth Bootstrap Harness Guard
 
 | Item | Value |
