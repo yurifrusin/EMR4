@@ -8,6 +8,56 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H14: Historical Diary Trove Neutral Transition Neighborhoods |
+| Integrated through | Ariadne local-only transition-neighborhood tooling; no external workers used because scope was raw-free and narrowly bounded |
+| Status | Local verification passed; push/mirror/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Added `scripts\historical_diary_transition_neighborhoods.py`, a validator-safe local report for notable transition neighborhoods.
+- Extended `scripts\historical_diary_output_safety.py` with neutral neighborhood keys only.
+- Added `tests\test_historical_diary_transition_neighborhoods.py`.
+- Ran H14 against ignored H13 ordered neutral snapshots.
+- Produced ignored `transition_neighborhoods_h14.json` and validated it through H5.
+- Added `docs\historical-diary-trove-transition-neighborhoods.md`.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_transition_neighborhoods.py scripts\historical_diary_output_safety.py tests\test_historical_diary_transition_neighborhoods.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_transition_neighborhoods.py tests\test_historical_diary_large_delta_triage.py tests\test_historical_diary_timeline_events.py tests\test_historical_diary_output_safety.py -q` (19 passed; existing warnings only).
+- Local neighborhood report passed against ignored H13 ordered snapshots.
+- Safety validation passed for ignored H14 transition-neighborhood output.
+- Post-push audit pending.
+- GitHub workflows pending.
+
+## Local Neighborhood Result
+
+- `pilot`: one neighborhood centered on transition 68, `time_grid_delta`; previous neighbor is `small_content_delta`, next neighbor is `no_structural_change`.
+- `pilot_01`: one neighborhood centered on transition 54, `large_unexplained_delta`; previous and next neighbors are both `small_content_delta`.
+- Interpretation: both notable events are isolated in the immediate neutral neighborhood and remain structural/count signals only.
+
+## Recommended User Review
+
+No required manual review before continuing. H14 is local tooling/tests/docs only and reads ignored neutral H13 output, not raw diary content.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No user manual diary review is required because no visible diary behaviour changed.
+
+## Known Follow-Up
+
+- H15 should either broaden to another capped dense-day/root set or design the de-identification review gate before semantic appointment labelling.
+- Do not infer appointment create/delete/status semantics from H14.
+
+## Previous Closeout - Sprint H13
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H13: Historical Diary Trove Broadened Neutral Sampling |
 | Integrated through | Ariadne local-only capped neutral sampling; no external workers used because scope was raw-free and narrowly bounded |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages and Python Security workflows green; CodeQL not triggered for docs-only H13 |
