@@ -144,6 +144,20 @@ default meaning of "three lane sprint".
 | Next | Sprint 109 Band-2 checkpoint/gate proposal before any runtime-provider/live-smoke movement |
 | Gates Still Closed | Live providers, runtime FGA clients, external patient clients, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
+## Sprint 109: Band-2 Provider Gate Checkpoint
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
+| Goal | Produce a proposal/checkpoint packet for any future runtime-provider or no-write live-smoke movement, without enabling blocked gates |
+| Worker Availability | Claude CLI `2.1.196` available; Antigravity CLI `1.0.16` available; DeepSeek Flash bridge key present |
+| Claude Lane | `orchestration/agent_inbox/claude/claude-sprint109-band2-provider-gate-criteria.md` on fresh branch `claude/sprint109-band2-provider-gate-criteria` |
+| Antigravity Lane | `orchestration/agent_inbox/antigravity/antigravity-sprint109-live-smoke-ux-readiness.md` on `antigravity/current` |
+| DeepSeek Lane | `orchestration/agent_inbox/codex/deepseek-sprint109-provider-gate-adversarial-review.md`, to be run via `codex exec -c 'model_provider="deepseek_bridge"' -m deepseek-flash` rather than as a native Codex subagent |
+| Out Of Scope | Provider enablement, live calls, runtime FGA clients, external patient clients, GraphQL mutations, route/model/schema/UI implementation, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+| Pause Rule | Yuri approval is required before changing any blocked gate to enabled; this sprint may only propose criteria and review artifacts |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |
