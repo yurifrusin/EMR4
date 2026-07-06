@@ -5,6 +5,56 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint R27: H-Series Profile Consumption Tests
+
+| Item | Value |
+|---|---|
+| Status | Dispatched |
+| Product Goal | Consume the R26 H-series profile layer in deterministic no-write/non-semantic test coverage |
+| Worker Shape | Claude implementation lane, DeepSeek Flash adversarial test-design review, Antigravity/Gemini receptionist acceptance review |
+| In Scope | Focused tests over `tests/fixtures/h_series_profiles/`, profile schema docs, review artifacts |
+| Out Of Scope | Raw `local_data`/ignored JSON, semantic appointment labelling, Bernie executable scenario insertion, frontend UI, production routes, live providers |
+| Verification | Profile pytest, py_compile for touched Python, review artifacts, `git diff --check` |
+
+### Workstream R27-A - Claude H-Profile No-Write Test Consumption
+
+| Item | Value |
+|---|---|
+| Owner | Claude |
+| Branch | `claude/current` |
+| Task Packet | `orchestration/agent_inbox/claude/claude-r27-h-profile-no-write-test-consumption.md` |
+| Goal | Add focused deterministic tests that consume H-series profiles as no-write/non-semantic invariants |
+| In Scope | `tests/test_h_series_profile_consistency.py` or a narrow new focused test; profile fixtures/docs only if needed |
+| Out of Scope | Raw trove, Bernie scenario corpus insertion, production code, frontend |
+| Verification | `py_compile`; `pytest tests/test_h_series_profile_consistency.py -q`; `git diff --check` |
+| Status | Queued |
+
+### Workstream R27-B - DeepSeek Profile Consumption Adversarial Review
+
+| Item | Value |
+|---|---|
+| Owner | DeepSeek Flash via `deepseek-worker` |
+| Branch | subagent fork / `codex-r27-deepseek-profile-consumption-adversarial-review` packet |
+| Task Packet | `orchestration/agent_inbox/codex/codex-r27-deepseek-profile-consumption-adversarial-review.md` |
+| Goal | Challenge tautologies, semantic leakage, weak no-write assertions, and schema drift |
+| In Scope | `docs/adversarial/h_series_profile_consumption_review_r27.md` or narrow non-overlapping tests |
+| Out of Scope | Raw trove, semantic labels, production code, frontend, live providers |
+| Verification | Review artifact inspection; tests if added |
+| Status | Queued |
+
+### Workstream R27-C - Gemini Receptionist Acceptance Review
+
+| Item | Value |
+|---|---|
+| Owner | Antigravity / Gemini |
+| Branch | `antigravity/current` |
+| Task Packet | `orchestration/agent_inbox/antigravity/antigravity-r27-h-profile-receptionist-acceptance-review.md` |
+| Goal | Define receptionist-facing acceptance criteria for H-profile tests without semantic overreach |
+| In Scope | `docs/receptionist_review_r27.md` only after plan approval |
+| Out of Scope | Code/tests, raw trove, semantic mapping, live providers |
+| Verification | Tangible source-safe acceptance review artifact |
+| Status | Queued |
+
 ## Sprint R26: H-Series Neutral Scenario Bridge
 
 | Item | Value |
