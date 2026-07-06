@@ -27,7 +27,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | Synthetic fixtures/tests/helpers, existing scenario/replay patterns, R29 grammar contracts |
 | Out of Scope | Code edits before plan approval, raw trove, semantic fixtures, UI/routes |
 | Verification | Plan packet inspection |
-| Status | Queued |
+| Status | Plan_ready (Claude session-limited; plan in codex/r30-grammar-replay-consumer-plan) |
 
 ### Workstream R30-B - Codex/DeepSeek Replay Consumer Adversarial Review
 
@@ -3479,3 +3479,4 @@ branch only; Codex reviews and integrates afterward.
 | Out of Scope | Frontend consumption, drag/drop, booking mutations |
 | Verification | compileall, relevant pytest, Alembic head/current/upgrade if migration added |
 | Status | Integrated |
+
