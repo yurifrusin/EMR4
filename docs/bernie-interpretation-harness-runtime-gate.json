@@ -1,0 +1,46 @@
+{
+  "schema_version": "bernie.interpretation_harness_runtime_gate.v1",
+  "decision": "blocked",
+  "reviewer": "",
+  "reviewed_on": "",
+  "scope": {
+    "interpretation_harness_runtime_wiring": false,
+    "provider_dry_run_wiring": false,
+    "route_integration": false,
+    "database_access": false,
+    "memory_or_rag_access": false,
+    "historical_diary_material_access": false
+  },
+  "required_before_unblocking": [
+    "explicit_yuri_approval",
+    "bounded_no_write_runtime_plan",
+    "provider_privacy_and_cost_review",
+    "route_authority_review",
+    "staff_confirmation_affordance_review",
+    "audit_and_observability_plan",
+    "rollback_or_kill_switch_plan",
+    "focused_tests_and_manual_review_plan"
+  ],
+  "allowed_current_uses": [
+    "provider_free_fixture_tests",
+    "safe_aggregate_report",
+    "contract_validation",
+    "bounded_review_artifacts"
+  ],
+  "forbidden_current_uses": [
+    "runtime_route_calls",
+    "live_or_fake_provider_prompt_wiring",
+    "database_reads_or_writes",
+    "appointment_or_audit_mutations",
+    "patient_matching",
+    "raw_trove_processing",
+    "h15_or_h_series_runtime_imports",
+    "rag_or_graphrag_memory"
+  ],
+  "sprint_engine_pause_required_if": [
+    "decision_changes_from_blocked",
+    "any_scope_value_changes_to_true",
+    "required_before_unblocking_changes",
+    "forbidden_current_uses_changes"
+  ]
+}

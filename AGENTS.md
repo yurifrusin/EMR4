@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H52 Bernie Interpretation Harness report input fail-closed guards integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue small report/validator hardening or prepare the next bounded review before any runtime/provider wiring |
+| **Current active track** | H53 Bernie Interpretation Harness runtime/provider wiring gate integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -400,6 +400,14 @@ non-directory paths, empty fixture directories, empty case/contract arrays,
 directories without case fixtures, and directories without contract fixtures now
 raise `ValueError` instead of emitting a meaningless aggregate report. Tests use
 temporary synthetic directories only and keep the report provider-free.
+H53 adds `docs/bernie-interpretation-harness-runtime-gate.json` and
+`tests/test_bernie_interpretation_runtime_gate.py`. The gate is
+blocked-by-default for interpretation harness runtime wiring, provider dry-run
+wiring, route integration, database access, memory/RAG access, and historical
+diary material access. It permits only current provider-free fixture tests, safe
+aggregate reporting, contract validation, and bounded review artifacts. Any
+change away from `blocked`, any true scope value, or changes to required/forbidden
+lists require a sprint-engine pause and explicit review.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

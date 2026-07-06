@@ -5359,3 +5359,35 @@ whitespace check clean apart from the known CRLF notice on
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is continued report/validator hardening before runtime or
 provider wiring.
+
+---
+
+## Sprint H53 Closeout - Runtime/Provider Wiring Gate
+
+Integrated outcome:
+
+- Added `docs/bernie-interpretation-harness-runtime-gate.json`.
+- Added `tests/test_bernie_interpretation_runtime_gate.py`.
+- The gate is blocked by default for runtime wiring, provider dry-run wiring,
+  route integration, database access, memory/RAG access, and historical diary
+  material access.
+- Current allowed uses are limited to provider-free fixture tests, safe aggregate
+  reports, contract validation, and bounded review artifacts.
+- Any decision change away from `blocked`, true scope value, or change to
+  required/forbidden lists requires a sprint-engine pause and explicit review.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\test_bernie_interpretation_runtime_gate.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_interpretation_runtime_gate.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `274 passed`; leakage lint safe; whitespace check clean apart from the
+known CRLF notice on `orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded gate/review hardening before runtime/provider
+wiring.

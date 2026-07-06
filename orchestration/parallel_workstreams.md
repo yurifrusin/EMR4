@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H53: Bernie Interpretation Harness Runtime Gate
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Add a blocked-by-default gate before interpretation harness work can move toward runtime routes or providers |
+| Worker Shape | Ariadne implementation |
+| In Scope | Runtime/provider gate JSON, blocked-scope tests, pause trigger tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; interpretation/report/runtime-gate/manifest/route-contract guard cluster (274 passed); leakage lint; `git diff --check` |
+
 ## Sprint H52: Bernie Interpretation Harness Report Input Guards
 
 | Item | Value |

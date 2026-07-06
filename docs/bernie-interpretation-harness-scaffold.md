@@ -233,3 +233,23 @@ silently produce empty or meaningless reports. It now raises `ValueError` when:
 
 The tests use temporary synthetic directories and do not touch runtime routes,
 providers, database access, or historical diary material.
+
+## H53 Runtime/Provider Wiring Gate
+
+H53 adds `docs/bernie-interpretation-harness-runtime-gate.json`, a
+blocked-by-default gate for moving the provider-free interpretation harness
+toward runtime/provider surfaces.
+
+The gate keeps these scopes false:
+
+- Runtime wiring.
+- Provider dry-run wiring.
+- Route integration.
+- Database access.
+- Memory/RAG access.
+- Historical diary material access.
+
+Current allowed uses remain provider-free fixture tests, safe aggregate reports,
+contract validation, and bounded review artifacts. Any decision change away from
+`blocked`, any scope value changing to `true`, or edits to the required/forbidden
+lists require a sprint-engine pause and explicit review.
