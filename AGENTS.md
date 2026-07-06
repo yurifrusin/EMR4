@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H53 Bernie Interpretation Harness runtime/provider wiring gate integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H54 Bernie Interpretation Harness runtime gate checker integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -408,6 +408,13 @@ diary material access. It permits only current provider-free fixture tests, safe
 aggregate reporting, contract validation, and bounded review artifacts. Any
 change away from `blocked`, any true scope value, or changes to required/forbidden
 lists require a sprint-engine pause and explicit review.
+H54 adds `scripts/bernie_interpretation_runtime_gate_check.py` and
+`tests/test_bernie_interpretation_runtime_gate_check.py`. The checker is a
+provider-free CLI/importable helper that validates the H53 gate and emits a safe
+aggregate status only: blocked scope count, required review count, forbidden use
+count, pause trigger count, `sprint_engine_state: continuing`, and
+`pause_required: false`. Negative tests reject unblocked decisions, true scope
+values, and missing pause triggers.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

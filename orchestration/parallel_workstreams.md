@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H54: Bernie Interpretation Harness Runtime Gate Checker
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Provide a reusable provider-free CLI/importable check for the blocked runtime/provider gate |
+| Worker Shape | Ariadne implementation |
+| In Scope | Runtime gate checker script, safe status output, negative drift tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; gate-check CLI sample; report CLI sample; interpretation/report/runtime-gate/manifest/route-contract guard cluster (279 passed); leakage lint; `git diff --check` |
+
 ## Sprint H53: Bernie Interpretation Harness Runtime Gate
 
 | Item | Value |

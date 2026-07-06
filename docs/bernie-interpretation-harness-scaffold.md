@@ -253,3 +253,21 @@ Current allowed uses remain provider-free fixture tests, safe aggregate reports,
 contract validation, and bounded review artifacts. Any decision change away from
 `blocked`, any scope value changing to `true`, or edits to the required/forbidden
 lists require a sprint-engine pause and explicit review.
+
+## H54 Runtime Gate Checker
+
+H54 adds `scripts/bernie_interpretation_runtime_gate_check.py`, a provider-free
+CLI/importable helper that validates the H53 runtime gate before emitting a safe
+aggregate status.
+
+The status includes only counts and state:
+
+- Blocked scope count.
+- Required review count.
+- Forbidden use count.
+- Pause trigger count.
+- `sprint_engine_state: continuing`.
+- `pause_required: false`.
+
+The checker rejects unblocked decisions, true scope values, changed allowed or
+forbidden use sets, missing required reviews, and missing pause triggers.
