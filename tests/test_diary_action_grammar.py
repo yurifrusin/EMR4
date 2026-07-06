@@ -348,6 +348,49 @@ def test_action_verb_for_envelope_known_names():
     assert action_verb_for_envelope("handoff") is DiaryActionVerb.handoff
 
 
+@pytest.mark.parametrize(
+    ("raw_name", "expected_verb"),
+    [
+        ("create", DiaryActionVerb.create),
+        ("create_appointment", DiaryActionVerb.create),
+        ("confirm_booking", DiaryActionVerb.create),
+        ("move", DiaryActionVerb.move),
+        ("move_appointment", DiaryActionVerb.move),
+        ("resize", DiaryActionVerb.resize),
+        ("resize_appointment", DiaryActionVerb.resize),
+        ("cancel", DiaryActionVerb.cancel),
+        ("cancel_appointment", DiaryActionVerb.cancel),
+        ("status_change", DiaryActionVerb.status_change),
+        ("check_in", DiaryActionVerb.check_in),
+        ("waiting_area_move", DiaryActionVerb.waiting_area_move),
+        ("link_patient", DiaryActionVerb.link_patient),
+        ("find_slots", DiaryActionVerb.slot_search),
+        ("slot_search", DiaryActionVerb.slot_search),
+        ("explain_schedule", DiaryActionVerb.explain_schedule),
+        ("handoff", DiaryActionVerb.handoff),
+        ("handoff_to_receptionist", DiaryActionVerb.handoff),
+    ],
+)
+def test_action_verb_for_envelope_alias_matrix(raw_name, expected_verb):
+    assert action_verb_for_envelope(raw_name) is expected_verb
+
+
+@pytest.mark.parametrize(
+    "raw_name",
+    ["check_in", "waiting_area_move", "link_patient"],
+)
+def test_planned_aliases_resolve_but_remain_not_implemented(raw_name):
+    verb = action_verb_for_envelope(raw_name)
+    assert verb is not None
+
+    desc = get_verb_descriptor(verb)
+    assert desc.tier is BernieCapabilityTier.confirm
+    assert desc.mutating is True
+    assert desc.requires_staff_confirmation is True
+    assert desc.implemented is False
+    assert desc.confirm_actions == ()
+
+
 def test_action_verb_for_envelope_unknown_returns_none():
     assert action_verb_for_envelope("propose_booking") is None
     assert action_verb_for_envelope("propose_edit") is None

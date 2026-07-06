@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H35 action-grammar replay fixture schema hardening integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H36 native Diary action alias coverage integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue native Bernie/Diary grammar coverage, with broader route-contract review only if drift appears |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -268,6 +268,14 @@ such as endpoint, route, patient/practitioner/appointment/slot IDs, context, and
 evidence. This keeps the replay corpus as grammar-shape evidence only; it still
 does not touch routes, UI, providers, database writes, raw trove files, ignored
 local payloads, H-series profiles, H15 runtime imports, RAG, GraphRAG, or memory.
+H36 strengthens native Diary action grammar tests by asserting the public
+free-string alias matrix for every current grammar verb, including planned
+`check_in`, `waiting_area_move`, and `link_patient` aliases. Those planned
+aliases must resolve to confirm-tier mutating descriptors while remaining
+`implemented=False` with no confirm actions, so they are known to the grammar
+without becoming executable. This is tests-only and does not touch routes, UI,
+providers, database writes, H15 fixtures, raw/local diary material, RAG,
+GraphRAG, or memory.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

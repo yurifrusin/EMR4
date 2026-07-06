@@ -4824,3 +4824,33 @@ Result: `50 passed`; leakage lint safe; whitespace check clean.
 Sprint engine state: continuing. No user intervention is required; recommended
 next direction is further native Bernie/Diary grammar coverage, with broader
 route-contract review only if drift appears.
+
+---
+
+## Sprint H36 Closeout - Native Diary Action Alias Coverage
+
+Integrated outcome:
+
+- Added a parametrized public action-name alias matrix for every current native
+  Diary grammar verb.
+- Added explicit coverage for planned aliases `check_in`, `waiting_area_move`,
+  and `link_patient`: they resolve to confirm-tier mutating descriptors but
+  remain `implemented=False` with no confirm actions.
+- Kept the change tests-only: no routes, UI, providers, database writes,
+  local trove processing, H-series profile consumption, H15 runtime wiring,
+  RAG, GraphRAG, or memory.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\test_diary_action_grammar.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_grammar.py tests\action_grammar_replay\test_grammar_replay.py tests\test_h15_semantic_candidate_fixtures.py -q
+git diff --check
+```
+
+Result: `71 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; recommended
+next direction is additional native Bernie/Diary grammar coverage unless a
+route-contract drift risk appears.
