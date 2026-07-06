@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 39dac51b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task deepseek-sprint109-provider-gate-adversarial-review --summary "Short plan summary"` |
@@ -90,5 +90,9 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/review-deepseek-sprint109-provider-gate-adversarial-review.md`
 - Verification run:
+  - DeepSeek worker ran `git diff --check`; Ariadne reran proposal guard and
+    diff hygiene before integration.
 - Remaining risks:
+  - Review only; no gate value changed.

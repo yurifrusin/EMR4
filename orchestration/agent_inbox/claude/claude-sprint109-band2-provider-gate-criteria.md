@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/sprint109-band2-provider-gate-criteria` |
-| Status | queued |
+| Status | integrated |
 | Created | 39dac51b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint109-band2-provider-gate-criteria --summary "Short plan summary"` |
@@ -90,5 +90,8 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/plan-claude-claude-sprint109-band2-provider-gate-criteria.md`
 - Verification run:
+  - Plan accepted and integrated into `docs/bernie-band2-provider-gate-criteria.md`.
 - Remaining risks:
+  - Proposal only; no gate value changed.

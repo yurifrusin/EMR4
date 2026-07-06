@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | 39dac51b |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint109-live-smoke-ux-readiness --summary "Short plan summary"` |
@@ -90,5 +90,10 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/plan-antigravity-antigravity-sprint109-live-smoke-ux-readiness.md`
 - Verification run:
+  - Plan accepted for UX criteria and integrated into
+    `docs/bernie-band2-provider-gate-criteria.md`.
 - Remaining risks:
+  - Antigravity CLI repeatedly prefaced the run with stale `--print-timeout`
+    investigation chatter; useful Sprint 109 plan content was still captured.

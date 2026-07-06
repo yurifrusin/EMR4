@@ -8,10 +8,43 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 108 Bernie Interpreter Access AI Closure |
-| Integrated through | Claude backend plan/review, DeepSeek Flash backend audit/no-write tests, Antigravity/Gemini Diary UX acceptance, and Ariadne integration |
+| Batch | Sprint 109 Band-2 Provider Gate Checkpoint |
+| Integrated through | Claude provider-gate criteria plan, Antigravity live-smoke UX readiness plan, DeepSeek Flash adversarial review, and Ariadne proposal synthesis |
 | Status | Local integration verified; pending final push/audit |
-| Last updated | 2026-07-06 |
+| Last updated | 2026-07-07 |
+
+## Sprint 109 What Changed
+
+- Added `docs/bernie-band2-provider-gate-criteria.md`, a proposal-only gate
+  checkpoint artifact.
+- Captured Claude's Sprint 109 criteria plan in
+  `orchestration\agent_inbox\codex\plan-claude-claude-sprint109-band2-provider-gate-criteria.md`.
+- Captured Antigravity's Sprint 109 UX readiness plan in
+  `orchestration\agent_inbox\codex\plan-antigravity-antigravity-sprint109-live-smoke-ux-readiness.md`.
+- Captured DeepSeek Flash's adversarial provider-gate review in
+  `orchestration\agent_inbox\codex\review-deepseek-sprint109-provider-gate-adversarial-review.md`.
+- Defined the future approval payload shape, blocking criteria, staff UX
+  criteria, and non-approval statement for any future runtime-provider or
+  no-write live-smoke movement.
+- No provider was enabled. No live call, runtime FGA client, external patient
+  client, GraphQL mutation, route/model/schema/UI behavior change, broad trove
+  mining, H15/H-series runtime import, memory/RAG/GraphRAG, database write from
+  model output, or raw/ignored local-data read was added.
+
+## Sprint 109 Verification
+
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\bernie-band2-provider-gate-criteria.md`.
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`.
+- `git diff --check` for Sprint 109 artifacts.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 110:
+add a provider-gate runtime/startup assertion or health-check test that fails
+closed if live-provider configuration appears while the gate decision remains
+`blocked`, without enabling providers or changing route behavior.
+
+---
+
+## Previous Closeout - Sprint 108
 
 ## Sprint 108 What Changed
 
