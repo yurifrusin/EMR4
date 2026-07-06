@@ -22,6 +22,13 @@ from scripts.bernie_interpretation_runtime_gate_check import (
 )
 
 READINESS_SCHEMA_VERSION = "bernie.interpretation_readiness_check.v1"
+DEFAULT_SNAPSHOT_PATH = (
+    REPO_ROOT
+    / "tests"
+    / "fixtures"
+    / "bernie_interpretation_readiness"
+    / "blocked_readiness_status.json"
+)
 
 
 def build_readiness_status(
@@ -48,6 +55,23 @@ def build_readiness_status(
     }
 
 
+def load_blocked_readiness_snapshot(
+    snapshot_path: Path = DEFAULT_SNAPSHOT_PATH,
+) -> dict[str, object]:
+    if not snapshot_path.exists():
+        raise ValueError(f"Blocked readiness snapshot does not exist: {snapshot_path}")
+    return json.loads(snapshot_path.read_text(encoding="utf-8"))
+
+
+def assert_matches_blocked_readiness_snapshot(
+    status: dict[str, object],
+    snapshot_path: Path = DEFAULT_SNAPSHOT_PATH,
+) -> None:
+    """Assert generated readiness still matches the committed blocked snapshot."""
+
+    assert status == load_blocked_readiness_snapshot(snapshot_path)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run safe aggregate Bernie interpretation readiness checks."
@@ -64,8 +88,15 @@ def main() -> int:
         default=DEFAULT_GATE_PATH,
         help="Path to the runtime gate JSON file.",
     )
+    parser.add_argument(
+        "--snapshot",
+        type=Path,
+        default=DEFAULT_SNAPSHOT_PATH,
+        help="Path to the blocked readiness snapshot JSON file.",
+    )
     args = parser.parse_args()
     status = build_readiness_status(args.fixture_dir, args.gate)
+    assert_matches_blocked_readiness_snapshot(status, args.snapshot)
     print(json.dumps(status, indent=2, sort_keys=True))
     return 0
 

@@ -4,6 +4,7 @@ import json
 
 from scripts.bernie_interpretation_readiness_check import (
     READINESS_SCHEMA_VERSION,
+    assert_matches_blocked_readiness_snapshot,
     build_readiness_status,
 )
 from scripts.bernie_interpretation_runtime_gate_check import DEFAULT_GATE_PATH
@@ -90,3 +91,34 @@ def test_readiness_status_rejects_empty_fixture_directory(tmp_path):
         assert "No JSON fixtures" in str(exc)
     else:
         raise AssertionError("empty readiness fixture directory was not rejected")
+
+
+def test_readiness_status_rejects_snapshot_mismatch(tmp_path):
+    snapshot = build_readiness_status()
+    snapshot["runtime_or_provider_wiring_ready"] = True
+    snapshot_path = tmp_path / "blocked_readiness_status.json"
+    snapshot_path.write_text(json.dumps(snapshot), encoding="utf-8")
+
+    try:
+        assert_matches_blocked_readiness_snapshot(
+            build_readiness_status(),
+            snapshot_path=snapshot_path,
+        )
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("readiness snapshot mismatch was not rejected")
+
+
+def test_readiness_status_rejects_missing_snapshot(tmp_path):
+    missing_snapshot = tmp_path / "missing_snapshot.json"
+
+    try:
+        assert_matches_blocked_readiness_snapshot(
+            build_readiness_status(),
+            snapshot_path=missing_snapshot,
+        )
+    except ValueError as exc:
+        assert "does not exist" in str(exc)
+    else:
+        raise AssertionError("missing readiness snapshot was not rejected")

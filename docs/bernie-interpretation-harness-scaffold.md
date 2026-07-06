@@ -377,3 +377,13 @@ direct negative coverage for:
 
 These duplicate key lower-level safeguards at the command future agents are
 expected to run before any runtime/provider/trove proposal.
+
+## H62 Readiness Snapshot Assertion
+
+H62 makes the readiness CLI load
+`tests/fixtures/bernie_interpretation_readiness/blocked_readiness_status.json`
+and assert generated readiness matches it before printing.
+
+If the snapshot is missing or generated readiness differs from the committed
+blocked status, the command fails closed. This turns the H59 snapshot from a
+pytest-only guard into part of the operational readiness command.
