@@ -14,6 +14,27 @@ from app.services.diary.capabilities import BernieCapabilityTier
 from app.services.diary.confirm_actions import DIARY_CONFIRM_ACTIONS
 
 
+MUTATING_ROUTE_MARKERS = (
+    "/proposals/create",
+    "/proposals/update",
+    "/proposals/status",
+    "/proposals/waiting-area",
+    "/proposals/delete",
+    "/confirm",
+    "-confirm",
+    "/api/v1/appointments/{appointment_id}",
+)
+
+
+def _all_contract_routes(contract):
+    return (
+        contract.read_routes
+        + contract.proposal_routes
+        + contract.confirm_routes
+        + contract.raw_mutation_routes
+    )
+
+
 def test_route_contract_schema_version_pinned():
     assert ROUTE_CONTRACT_SCHEMA_VERSION == "diary.action_route_contract.v1"
 
@@ -81,6 +102,50 @@ def test_read_only_and_meta_contracts_have_no_write_authority():
         assert descriptor.confirm_actions == ()
         assert contract.authority in {RouteAuthority.read_only, RouteAuthority.meta}
         assert contract.proposal_routes == ()
+        assert contract.confirm_routes == ()
+        assert contract.raw_mutation_routes == ()
+
+
+def test_read_only_and_meta_routes_do_not_point_at_mutating_surfaces():
+    for verb in (DiaryActionVerb.slot_search, DiaryActionVerb.explain_schedule, DiaryActionVerb.handoff):
+        contract = get_action_route_contract(verb)
+
+        for route in _all_contract_routes(contract):
+            assert not any(marker in route for marker in MUTATING_ROUTE_MARKERS), (
+                f"{verb.value} read-only/meta route {route!r} points at a mutating surface"
+            )
+
+
+def test_signed_confirm_contracts_keep_proposal_and_confirm_paths_separate():
+    for verb, contract in DIARY_ACTION_ROUTE_CONTRACTS.items():
+        if contract.authority is not RouteAuthority.signed_confirm:
+            continue
+
+        assert contract.proposal_routes, f"{verb.value} must retain a proposal route"
+        assert contract.confirm_routes, f"{verb.value} must retain a signed confirm route"
+        assert contract.raw_mutation_routes, f"{verb.value} should document adjacent raw mutation routes"
+
+        for route in contract.proposal_routes:
+            assert "/proposals/" in route
+            assert "confirm" not in route
+        for route in contract.confirm_routes:
+            assert "confirm" in route
+
+
+def test_mutating_implemented_contracts_do_not_rely_only_on_raw_mutation_routes():
+    for verb, descriptor in DIARY_ACTION_GRAMMAR.items():
+        contract = get_action_route_contract(verb)
+        if descriptor.mutating and descriptor.implemented:
+            assert contract.authority is RouteAuthority.signed_confirm
+            assert contract.confirm_routes
+            assert contract.confirm_actions
+
+
+def test_planned_mutating_contracts_may_have_proposals_but_not_confirm_or_raw_mutation_routes():
+    for verb in (DiaryActionVerb.check_in, DiaryActionVerb.waiting_area_move, DiaryActionVerb.link_patient):
+        contract = get_action_route_contract(verb)
+
+        assert contract.authority is RouteAuthority.planned_not_implemented
         assert contract.confirm_routes == ()
         assert contract.raw_mutation_routes == ()
 

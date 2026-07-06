@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H37 grammar-to-route contract inventory integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue to H38 read-only vs mutating route boundary tests |
+| **Current active track** | H38 read-only vs mutating route boundary tests integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue to H39 planned action promotion checklist |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -286,6 +286,12 @@ check-in defaults, status proposals, and waiting-area proposals do not make
 `check_in`, `waiting_area_move`, or `link_patient` executable. It does not
 dispatch, import routers, touch DB/models, call providers, use local trove/H15
 fixtures, or grant write authority.
+H38 extends `tests/test_diary_action_route_contract.py` with route-boundary
+checks: read-only/meta contracts must not point at proposal, confirm, or raw
+mutation surfaces; implemented mutating contracts must retain proposal and
+signed-confirm routes instead of relying on raw mutation routes; planned
+mutating contracts may document adjacent proposal/read surfaces but must not
+have confirm or raw mutation route authority. This remains tests-only.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

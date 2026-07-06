@@ -4884,3 +4884,32 @@ Result: `75 passed`; leakage lint safe; whitespace check clean.
 
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is H38 read-only vs mutating route boundary tests.
+
+---
+
+## Sprint H38 Closeout - Read-Only Vs Mutating Route Boundary
+
+Integrated outcome:
+
+- Extended `tests/test_diary_action_route_contract.py` with route-boundary
+  checks over the H37 static contract.
+- Read-only/meta contracts now fail if they point at proposal, confirm, or raw
+  mutation route surfaces.
+- Implemented mutating contracts must retain proposal and signed-confirm routes
+  instead of relying only on raw mutation routes.
+- Planned mutating contracts may document adjacent read/proposal surfaces, but
+  must not carry confirm or raw mutation route authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\test_diary_action_route_contract.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py tests\test_diary_action_grammar.py -q
+git diff --check
+```
+
+Result: `64 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is H39 planned action promotion checklist.
