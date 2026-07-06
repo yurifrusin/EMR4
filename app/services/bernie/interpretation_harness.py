@@ -191,10 +191,42 @@ def assert_interpretation_result_consistency(result: InterpretationResult) -> No
         raise AssertionError(f"Unexpected interpretation dispatch: {result.dispatch!r}")
 
 
+def interpretation_result_to_frame(result: InterpretationResult) -> dict[str, object]:
+    """Project a deterministic harness result into a fake-provider frame shape."""
+
+    assert_interpretation_result_consistency(result)
+
+    if result.dispatch is InterpretationDispatch.route_to_confirm:
+        return {
+            "frame_kind": "proposal",
+            "proposed_action": result.verb.value if result.verb else None,
+            "requires_staff_confirmation": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": result.dispatch.value,
+        }
+    if result.dispatch is InterpretationDispatch.route_read_only:
+        return {
+            "frame_kind": "read_request",
+            "proposed_action": result.verb.value if result.verb else None,
+            "requires_backend_check": True,
+            "writes_authorized": False,
+            "interpretation_dispatch": result.dispatch.value,
+        }
+    return {
+        "frame_kind": "refusal",
+        "reason": result.rationale,
+        "blocked": True,
+        "writes_authorized": False,
+        "interpretation_dispatch": result.dispatch.value,
+        "refused_action": result.verb.value if result.verb else None,
+    }
+
+
 __all__ = [
     "INTERPRETATION_HARNESS_SCHEMA_VERSION",
     "InterpretationDispatch",
     "InterpretationResult",
     "assert_interpretation_result_consistency",
     "interpret_receptionist_utterance",
+    "interpretation_result_to_frame",
 ]

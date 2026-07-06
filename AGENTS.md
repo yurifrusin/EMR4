@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H42 Bernie Interpretation Harness result invariants integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Begin fake-provider frame-shape preparation while preserving no provider/route/DB/memory authority |
+| **Current active track** | H43 Bernie Interpretation Harness frame-shape preparation integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Expand fake-provider-style frame scenarios or dispatch the harness to external reviewers |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -328,6 +328,13 @@ route authority must stay aligned: confirm dispatch requires signed-confirm
 authority, read-only/meta dispatch requires matching authority, planned refusals
 require planned authority, and unsafe/unknown refusals must not carry a verb or
 route authority.
+H43 adds `interpretation_result_to_frame()` to project deterministic harness
+results into fake-provider-compatible frame shapes. Confirm labels become
+`proposal` frames requiring staff confirmation with `writes_authorized=false`;
+read-only labels become `read_request` frames requiring backend checks; meta,
+planned, unsafe, and unknown results become blocked `refusal` frames. Tests pass
+these frames through the existing manifest frame-shape and safety evaluators
+without calling providers.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

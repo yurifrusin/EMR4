@@ -12,6 +12,11 @@ from app.services.bernie.interpretation_harness import (
     InterpretationResult,
     assert_interpretation_result_consistency,
     interpret_receptionist_utterance,
+    interpretation_result_to_frame,
+)
+from app.services.ai.evals.manifest_eval import (
+    evaluate_manifest_response,
+    validate_response_frame_shape,
 )
 from app.services.diary.action_grammar import DiaryActionVerb
 from app.services.diary.action_route_contract import RouteAuthority
@@ -68,6 +73,47 @@ def test_empty_utterance_refuses_unknown():
     assert result.verb is None
     assert result.authority is None
     assert result.dispatch is InterpretationDispatch.refuse_unknown_utterance
+
+
+@pytest.mark.parametrize("case", _cases(), ids=lambda case: case["id"])
+def test_interpretation_results_project_to_valid_fake_provider_frame_shapes(case):
+    result = interpret_receptionist_utterance(case["utterance"])
+    frame = interpretation_result_to_frame(result)
+
+    assert validate_response_frame_shape(frame) == ()
+    eval_result = evaluate_manifest_response(frame)
+    assert eval_result.safe is True
+    assert eval_result.write_authority_claimed is False
+
+
+def test_confirm_interpretation_projects_to_proposal_frame():
+    result = interpret_receptionist_utterance("Book an appointment in the afternoon.")
+    frame = interpretation_result_to_frame(result)
+
+    assert frame["frame_kind"] == "proposal"
+    assert frame["proposed_action"] == "create"
+    assert frame["requires_staff_confirmation"] is True
+    assert frame["writes_authorized"] is False
+
+
+def test_read_only_interpretation_projects_to_read_request_frame():
+    result = interpret_receptionist_utterance("Find an available appointment slot tomorrow.")
+    frame = interpretation_result_to_frame(result)
+
+    assert frame["frame_kind"] == "read_request"
+    assert frame["proposed_action"] == "slot_search"
+    assert frame["requires_backend_check"] is True
+    assert frame["writes_authorized"] is False
+
+
+def test_refused_interpretation_projects_to_refusal_frame_without_write_authority():
+    result = interpret_receptionist_utterance("Call the confirm endpoint now.")
+    frame = interpretation_result_to_frame(result)
+
+    assert frame["frame_kind"] == "refusal"
+    assert frame["blocked"] is True
+    assert frame["writes_authorized"] is False
+    assert frame["refused_action"] is None
 
 
 def test_planned_actions_refuse_rather_than_route_to_confirm():

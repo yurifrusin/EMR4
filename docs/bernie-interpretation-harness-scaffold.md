@@ -67,3 +67,18 @@ preserve the dispatch/authority relationship:
 - `route_meta` requires `meta`.
 - `refuse_planned_not_implemented` requires `planned_not_implemented`.
 - Unsafe and unknown refusals must not carry a verb or route authority.
+
+## H43 Frame-Shape Preparation
+
+H43 adds `interpretation_result_to_frame()`, a deterministic projection from a
+harness result to a fake-provider-compatible frame shape:
+
+- Confirm-route labels become `proposal` frames with
+  `requires_staff_confirmation: true` and `writes_authorized: false`.
+- Read-only labels become `read_request` frames with
+  `requires_backend_check: true` and `writes_authorized: false`.
+- Meta, planned, unsafe, and unknown results become `refusal` frames with
+  `blocked: true` and `writes_authorized: false`.
+
+Tests validate every authored fixture output through the existing manifest
+frame-shape and safety evaluators without making provider calls.

@@ -5033,3 +5033,35 @@ Result: `91 passed`; leakage lint safe; whitespace check clean.
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is fake-provider frame-shape preparation for the
 interpretation harness.
+
+---
+
+## Sprint H43 Closeout - Interpretation Frame-Shape Preparation
+
+Integrated outcome:
+
+- Added `interpretation_result_to_frame()` to project deterministic
+  interpretation harness results into fake-provider-compatible frame shapes.
+- Confirm-route labels become `proposal` frames requiring staff confirmation
+  with `writes_authorized=false`.
+- Read-only labels become `read_request` frames requiring backend checks with
+  `writes_authorized=false`.
+- Meta, planned, unsafe, and unknown results become blocked `refusal` frames
+  with `writes_authorized=false`.
+- Tests validate every authored interpretation fixture through the existing
+  manifest frame-shape and safety evaluators without provider calls.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\services\bernie\interpretation_harness.py tests\test_bernie_interpretation_harness.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `97 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is richer fake-provider-style frame scenarios or external
+reviewer dispatch for the harness.
