@@ -18,6 +18,22 @@ from app.services.bernie.interpretation_harness import (
 )
 
 REPORT_SCHEMA_VERSION = "bernie.interpretation_harness_report.v1"
+FORBIDDEN_REPORT_FRAGMENTS = (
+    "patient_id",
+    "practitioner_id",
+    "appointment_id",
+    "payload",
+    "/api/",
+    "local_data",
+    "h15",
+    "h_series",
+)
+FORBIDDEN_REPORT_TEXT_FRAGMENTS = (
+    "book an appointment",
+    "which patient",
+    "ignore the rules",
+    "cancel the appointment because",
+)
 DEFAULT_FIXTURE_DIR = (
     REPO_ROOT
     / "tests"
@@ -88,6 +104,67 @@ def build_harness_report(fixture_dir: Path = DEFAULT_FIXTURE_DIR) -> dict[str, A
     }
 
 
+def _walk_report_values(value: Any) -> tuple[str, ...]:
+    if isinstance(value, dict):
+        parts: list[str] = []
+        for key, child in value.items():
+            parts.append(str(key))
+            parts.extend(_walk_report_values(child))
+        return tuple(parts)
+    if isinstance(value, list):
+        parts = []
+        for child in value:
+            parts.extend(_walk_report_values(child))
+        return tuple(parts)
+    return (str(value),)
+
+
+def assert_harness_report_safety(report: dict[str, Any]) -> None:
+    """Assert a report remains aggregate-only and non-authoritative."""
+
+    assert report.get("schema_version") == REPORT_SCHEMA_VERSION
+    assert report.get("source_schema_version") == INTERPRETATION_HARNESS_SCHEMA_VERSION
+    assert report.get("source") == "authored_synthetic_aggregate"
+    assert isinstance(report.get("case_count"), int)
+    assert isinstance(report.get("contract_count"), int)
+    assert report["case_count"] > 0
+    assert report["contract_count"] > 0
+
+    boundaries = report.get("boundaries")
+    assert boundaries == {
+        "provider_calls": "prohibited",
+        "route_calls": "prohibited",
+        "database_access": "prohibited",
+        "raw_trove_access": "prohibited",
+        "runtime_memory": "prohibited",
+    }
+
+    omitted_fields = report.get("omitted_fields")
+    assert omitted_fields == [
+        "utterance",
+        "patient_id",
+        "practitioner_id",
+        "appointment_id",
+        "payload",
+    ]
+
+    dispatch_counts = report.get("dispatch_counts")
+    contract_dispatches = report.get("contract_dispatches")
+    assert isinstance(dispatch_counts, dict)
+    assert isinstance(contract_dispatches, list)
+    assert set(dispatch_counts) == set(contract_dispatches)
+
+    searchable_parts = [
+        part.casefold()
+        for part in _walk_report_values(report)
+        if part not in omitted_fields
+    ]
+    for fragment in FORBIDDEN_REPORT_FRAGMENTS:
+        assert not any(fragment in part for part in searchable_parts)
+    for fragment in FORBIDDEN_REPORT_TEXT_FRAGMENTS:
+        assert not any(fragment in part for part in searchable_parts)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Emit a safe aggregate Bernie interpretation harness report."
@@ -100,6 +177,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     report = build_harness_report(args.fixture_dir)
+    assert_harness_report_safety(report)
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0
 

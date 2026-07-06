@@ -203,3 +203,19 @@ The report includes:
 The current report summarises 44 authored cases across 4 case fixture files and
 7 projected-frame contracts. Tests assert that representative utterance text and
 payload/ID fields are omitted from the serialized report.
+
+## H51 Report Safety Assertion
+
+H51 adds `assert_harness_report_safety()` and runs it before CLI output. The
+assertion checks:
+
+- Report schema and source schema.
+- Non-empty aggregate counts.
+- No-provider/no-route/no-database/no-raw-trove/no-memory boundary posture.
+- Omitted-field declarations.
+- Contract dispatches matching dispatch counts.
+- Representative forbidden payload, ID, local-data, H15/H-series, and utterance
+  text fragments are absent from searchable report values.
+
+Negative tests cover embedded utterance text, weakened provider boundaries, and
+contract-dispatch drift.

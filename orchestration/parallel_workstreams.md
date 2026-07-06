@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H51: Bernie Interpretation Harness Report Safety Assertion
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Make the safe aggregate report fail closed if report fields drift toward payload, runtime authority, or contract mismatch |
+| Worker Shape | Ariadne implementation |
+| In Scope | Report safety assertion, CLI assertion hook, negative tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; report CLI sample; interpretation/report/manifest/route-contract guard cluster (266 passed); leakage lint; `git diff --check` |
+
 ## Sprint H50: Bernie Interpretation Harness Safe Aggregate Report
 
 | Item | Value |

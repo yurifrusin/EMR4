@@ -5292,3 +5292,36 @@ whitespace check clean apart from the known CRLF notice on
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is small report/validator hardening or a bounded review
 before any runtime/provider wiring.
+
+---
+
+## Sprint H51 Closeout - Report Safety Assertion
+
+Integrated outcome:
+
+- Added `assert_harness_report_safety()` to
+  `scripts/bernie_interpretation_harness_report.py`.
+- The CLI now validates the report before printing.
+- The assertion checks schema/source, non-empty counts, prohibited runtime
+  boundary posture, omitted-field declarations, dispatch/contract alignment, and
+  representative forbidden text/payload fragments.
+- Added negative tests for embedded utterance text, weakened provider
+  boundaries, and contract-dispatch drift.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile scripts\bernie_interpretation_harness_report.py tests\test_bernie_interpretation_harness_report.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_harness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_harness.py tests\test_bernie_interpretation_harness_report.py tests\test_bernie_manifest_receptionist_scenarios.py tests\test_diary_action_route_contract.py -q
+git diff --check
+```
+
+Result: `266 passed`; report CLI sample succeeded; leakage lint safe;
+whitespace check clean apart from the known CRLF notice on
+`orchestration/integration_log.md`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is continued report/validator hardening before any
+runtime/provider wiring.

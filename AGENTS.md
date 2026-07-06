@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H50 Bernie Interpretation Harness safe aggregate report helper integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Continue small projected-frame/report validator hardening or prepare the next bounded review before any runtime/provider wiring |
+| **Current active track** | H51 Bernie Interpretation Harness report safety assertion integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Continue small report/validator hardening or prepare the next bounded review before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -389,6 +389,12 @@ safe aggregate counts over authored synthetic harness fixtures and contracts:
 44 cases, 4 case fixture files, 7 dispatch contracts, dispatch/frame-kind
 counts, omitted-field declarations, and no-provider/no-route/no-DB/no-raw-trove
 boundary posture. It deliberately omits utterance text and payload/ID fields.
+H51 adds `assert_harness_report_safety()` to the same report helper and runs it
+before CLI output. The assertion checks schema/source, non-empty aggregate
+counts, prohibited runtime boundary posture, omitted-field declarations,
+dispatch/contract alignment, and representative forbidden text/payload
+fragments. Negative tests now prove embedded utterance text, weakened provider
+boundaries, and contract-dispatch drift fail closed.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
