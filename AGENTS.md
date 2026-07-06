@@ -675,8 +675,13 @@ setup/preconditions, exact UI path, expected result, suspicious/failure signs,
 what can be skipped, and what evidence or screenshots to report back. If local
 notification variables are configured, also send a short non-PHI alert with
 `python scripts\notify_yuri.py`; keep the full details in Codex/repo docs, not
-push notifications. If notification delivery is not configured or fails, report
-that in the Codex closeout summary and continue with the in-thread notification.
+push notifications. Every closeout notification must include the sprint-engine
+state: either `sprint engine continuing` with the next sprint/workstream, or
+`sprint engine paused` with the concrete reason such as awaiting Yuri approval,
+manual clinical review, external credential/console action, failing verification,
+worker protocol failure, or an unresolved safety/product decision. If notification
+delivery is not configured or fails, report that in the Codex closeout summary
+and continue with the in-thread notification.
 If a sprint closes cleanly and Ariadne's tool-enabled review leaves no
 Yuri-only tests, decisions, or approvals, Ariadne should keep the project moving:
 choose the next recommended sprint from the current programme/closeout state,

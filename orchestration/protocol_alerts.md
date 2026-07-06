@@ -302,9 +302,14 @@ Read these before acting on remembered process details.
   `scripts/notify_yuri.py`. Prefer `NOTIFY_PROVIDER=pushover` when available;
   WhatsApp remains a fallback path. Do not put PHI, patient identifiers,
   secrets, raw errors, or detailed clinical/project context in push messages;
-  link Yuri back to Codex/repo docs for details. If notification delivery is
-  unavailable, keep using the in-thread closeout notification and say the push
-  alert was not sent.
+  link Yuri back to Codex/repo docs for details. Every sprint-closeout push
+  notification must state whether the sprint engine is continuing or paused. If
+  continuing, name the next sprint/workstream briefly. If paused, include the
+  concrete pause reason, for example awaiting Yuri approval, manual clinical
+  review, external credential/console action, failing verification, worker
+  protocol failure, or an unresolved safety/product decision. If notification
+  delivery is unavailable, keep using the in-thread closeout notification and
+  say the push alert was not sent.
 - Protocol amendment rule: prefer batching non-urgent orchestration protocol edits
   until the discussion settles. Codex should remind the user before launch if
   agreed protocol edits are still pending.
