@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | pending_plan_review |
+| Status | submitted |
 | Created | f781b969 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint108-bernie-access-ai-ux-acceptance --summary "Short plan summary"` |
@@ -90,5 +90,14 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `docs/diary/diary.js`
+  - `docs/diary/diary.html`
+  - `review/test_diary_smoke.py`
 - Verification run:
+  - Validated syntax with `node --check docs/diary/diary.js`
+  - Executed new parameterized Playwright test case: `pytest review/test_diary_smoke.py -k test_bernie_debug_provider_metadata_honest` (passed)
+  - Executed all Bernie smoke tests: `pytest review/test_diary_smoke.py -k test_bernie` (73 passed)
+  - Executed backend interpreter tests: `pytest tests/test_smoke_bernie_interpreter_script.py` (9 passed)
+  - Verified no trailing whitespace with `git diff --check`
 - Remaining risks:
+  - None. The frontend debug display logic only renders if `bernie_debug=true` or `bernie_dev_review=true` is set. The changes are local UI presentation updates with zero backend impacts.

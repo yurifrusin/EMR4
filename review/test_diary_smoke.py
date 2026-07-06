@@ -8978,3 +8978,84 @@ def test_bernie_reception_policy_no_phi_in_storage(diary_page):
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+@pytest.mark.parametrize(
+    "provider_info,expected_text",
+    [
+        (
+            {"provider": "fake", "mode": "mocked", "live_provider": False},
+            "Provider: fake (mode: mocked; live_provider: false)",
+        ),
+        (
+            {"provider": "gemini_vertex", "mode": "live", "live_provider": True},
+            "Provider: gemini_vertex (mode: live; live_provider: true)",
+        ),
+    ],
+)
+def test_bernie_debug_provider_metadata_honest(diary_page, provider_info, expected_text):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_interpret = {
+        "intent": "interpret_booking_instruction",
+        "safe": True,
+        "result": "interpreted",
+        "autonomy_tier": "execute_with_report",
+        "summary": "Find a 15 minute follow-up for this patient with prac-1 today.",
+        "confidence": 0.9,
+        "command_candidate": {
+            "practitioner_id": "prac-1",
+            "patient_id": "smoke-pat-1",
+            "date_from": "today",
+            "duration_minutes": "15"
+        },
+        "missing_fields": [],
+        "safety_flags": [],
+        "clarifying_question": None,
+        "normalization": {
+            "safe": True,
+            "constraint": {
+                "practitioner_id": "prac-1",
+                "patient_id": "smoke-pat-1",
+                "date_from": "2026-06-27",
+                "duration_minutes": 15
+            },
+            "warnings": [],
+            "blocks": [],
+            "summary": "Normalized successfully."
+        },
+        "warnings": [],
+        "blocks": [],
+        "provider_metadata": provider_info
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret)
+        )
+    )
+
+    try:
+        # Navigate with bernie_debug=true
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_interpret=true&bernie_debug=true&practitioner_id=prac-1&patient_id=smoke-pat-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        trigger_route_intercepted_bernie(diary_page, "Find time for patient", register_default_mock=False)
+
+        # Wait for the preview and check provider info
+        diary_page.wait_for_selector("[data-testid='bernie-interpret-preview']", state="visible", timeout=5000)
+        provider_el = diary_page.locator("[data-testid='bernie-interpret-provider']")
+        provider_el.wait_for(state="visible", timeout=5000)
+
+        assert provider_el.text_content().strip() == expected_text
+
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
