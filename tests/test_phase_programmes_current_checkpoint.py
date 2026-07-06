@@ -6,21 +6,21 @@ from pathlib import Path
 PHASE_PROGRAMMES = Path("orchestration/phase_programmes.md")
 
 
-def test_phase_programmes_recommended_move_is_current_after_sprint_122():
+def test_phase_programmes_recommended_move_is_current_after_sprint_123():
     text = PHASE_PROGRAMMES.read_text(encoding="utf-8")
 
-    assert "Current position after Sprint 122" in text
-    assert "default recommendation after Sprint 122 is **Programme 2G**" in text
-    assert "backend compatibility aliases and Bernie-specific variants" in text
+    assert "Current position after Sprint 123" in text
+    assert "default recommendation after Sprint 123 is **Programme 2G**" in text
+    assert "Idempotency-Key` enforcement gap" in text
     assert "provider-boundary guard stack has been consolidated" in text
     assert (
-        "Status | Sprint 122 appointment command OpenAPI drift guard completed; "
-        "backend alias/Bernie OpenAPI documentation selected next" in text
+        "Status | Sprint 123 OpenAPI backend alignment metadata completed; "
+        "idempotency-key gap inspection selected next" in text
     )
     assert "Sprint 110-118 provider-boundary guard consolidation" in text
     assert (
-        "Next Candidate Sprints | Sprint 123 OpenAPI backend compatibility "
-        "alias and Bernie variant documentation" in text
+        "Next Candidate Sprints | Sprint 124 appointment command "
+        "Idempotency-Key enforcement gap inspection" in text
     )
 
 

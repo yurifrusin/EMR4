@@ -8,10 +8,55 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 122 Appointment Command OpenAPI Drift Guard |
+| Batch | Sprint 123 OpenAPI Backend Alignment Metadata |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill and DeepSeek Flash review |
 | Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-07 |
+
+## Sprint 123 What Changed
+
+- Added an `x-emr4-current-backend-alignment` extension to
+  `docs/api-spine/openapi/appointment-commands.yaml`.
+- The extension documents current backend path drift against canonical OpenAPI
+  paths for status confirmation, delete confirmation, and slot-search
+  selection.
+- It records current compatibility write routes as legacy paths outside the
+  proposal-confirm envelope.
+- It records Bernie intent, interpreter, supervised booking, confirm-Bernie,
+  no-slot suggestion, pilot eligibility, and session lifecycle variants as
+  current backend variants without adding them as canonical `paths:` entries.
+- It preserves blocked gates in a `blocked_gates` section so existing API Spine
+  artifact safety scanning treats them as exclusions, not enabled capabilities.
+- Added `tests/test_api_spine_openapi_backend_alignment.py` to parse the
+  OpenAPI YAML and guard the alignment extension.
+- The test validates the metadata review date shape and cross-checks extension
+  paths/handlers against the AST-backed Sprint 122 route inventory guard.
+- Updated the Sprint 122 drift guard so Bernie variants may appear in OpenAPI
+  metadata while remaining absent from explicit OpenAPI `paths:`.
+- Updated `AGENTS.md` and `orchestration/phase_programmes.md` so Programme 2G
+  now names Sprint 124 appointment command `Idempotency-Key` enforcement gap
+  inspection as the next implementation slice.
+- Preserved fake/default-disabled behavior; no route behavior change, provider
+  call, live smoke, runtime FGA client, external patient client, GraphQL
+  mutation, H15/H-series runtime import, memory/RAG/GraphRAG, broad trove
+  mining, or model-to-database write was added.
+
+## Sprint 123 Verification
+
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_openapi_backend_alignment.py tests\test_api_spine_appointment_openapi_drift_guard.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_openapi_backend_alignment.py tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_appointment_command_alignment_inventory.py tests/test_api_spine_post_sprint118_checkpoint.py tests/test_api_spine_artifacts.py tests/test_phase_programmes_current_checkpoint.py -q`
+  (`53 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check`.
+- DeepSeek Flash review found no blockers. Ariadne folded in its metadata date
+  and route/handler cross-check residuals before closeout.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 124:
+inspect the appointment command `Idempotency-Key` enforcement gap before any
+route behavior change.
+
+---
+
+## Previous Closeout - Sprint 122
 
 ## Sprint 122 What Changed
 

@@ -175,7 +175,7 @@ def test_openapi_path_set_changes_are_intentional():
 
 
 def test_openapi_draft_keeps_no_explicit_bernie_variants_yet():
-    openapi_text = OPENAPI.read_text(encoding="utf-8")
+    openapi_paths = _openapi_paths()
     inventory = INVENTORY.read_text(encoding="utf-8")
 
     for bernie_fragment in (
@@ -187,4 +187,4 @@ def test_openapi_draft_keeps_no_explicit_bernie_variants_yet():
         "/bernie/sessions",
     ):
         assert bernie_fragment in inventory
-        assert bernie_fragment not in openapi_text
+        assert not any(bernie_fragment in path for path in openapi_paths)

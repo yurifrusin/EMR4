@@ -115,16 +115,16 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Sprint 122 appointment command OpenAPI drift guard completed; backend alias/Bernie OpenAPI documentation selected next |
+| Status | Sprint 123 OpenAPI backend alignment metadata completed; idempotency-key gap inspection selected next |
 | Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
-| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard |
-| Next Candidate Sprints | Sprint 123 OpenAPI backend compatibility alias and Bernie variant documentation |
+| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata |
+| Next Candidate Sprints | Sprint 124 appointment command Idempotency-Key enforcement gap inspection |
 | Design Record | `orchestration/api_spine_programme.md` |
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
 
-Current position after Sprint 122: the Ariadne/Fable 100+ sprint strategy map
+Current position after Sprint 123: the Ariadne/Fable 100+ sprint strategy map
 has been created, the stale worktree residue has been cleaned, the
 provider-boundary guard stack has been consolidated, and Programme 2G has
 returned to appointment-first API Spine alignment. Sprint 120 refreshed the API
@@ -133,7 +133,9 @@ FastAPI appointment proposal, confirmation, slot-search, Bernie intent/session/s
 compatibility write, and read-only routes against the OpenAPI command families.
 Sprint 122 added a static AST-backed drift guard so that inventory cannot drift
 from current FastAPI route strings, handlers, classifications, or documented
-OpenAPI path mismatches.
+OpenAPI path mismatches. Sprint 123 added OpenAPI metadata documenting current
+backend path drift, compatibility writes, Bernie-specific variants, and closed
+gates without adding runtime aliases.
 
 The accepted strategy artifacts are
 `orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md`
@@ -147,9 +149,9 @@ Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
 1. If Bernie/API-spine architecture is the priority: continue **Programme 2G**
-   by updating the OpenAPI draft or an adjacent OpenAPI companion artifact to
-   explicitly document current backend compatibility aliases and Bernie
-   intent/session/supervised variants.
+   with an appointment command `Idempotency-Key` enforcement gap inspection
+   over proposal, confirmation, compatibility write, and command-style read
+   routes before any behavior change.
 2. If Bernie is the immediate product surface: continue **Programme 2B/2D**
    with the next supervised booking-loop product slice, keeping staff
    confirmation and fake/default-disabled provider posture intact.
@@ -159,10 +161,10 @@ the next sprint from the active programme that best advances the phase:
 4. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
 
-The default recommendation after Sprint 122 is **Programme 2G**: document the
-backend compatibility aliases and Bernie-specific variants in the OpenAPI layer
-before expanding Caller ID, Medicare/OPV/PVM, clinical-library agent
-integrations, live-provider paths, or historical diary utilisation.
+The default recommendation after Sprint 123 is **Programme 2G**: inspect the
+appointment command `Idempotency-Key` enforcement gap before expanding Caller
+ID, Medicare/OPV/PVM, clinical-library agent integrations, live-provider paths,
+or historical diary utilisation.
 
 ## Deployment Readiness Pattern
 

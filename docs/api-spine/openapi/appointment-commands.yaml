@@ -19,6 +19,90 @@ tags:
   - name: SlotSearchCommands
     description: Non-mutating command-style reads that prepare executable proposals.
 
+x-emr4-current-backend-alignment:
+  sprint: 123
+  status: documentation_only_no_runtime_aliases
+  reviewed_on: "2026-07-07"
+  backend_prefix: /api/v1
+  source_inventory: orchestration/api_spine_appointment_command_alignment_inventory.md
+  guard_test: tests/test_api_spine_appointment_openapi_drift_guard.py
+  canonical_path_drift:
+    - current_backend_path: /appointments/proposals/status-confirm
+      canonical_openapi_path: /appointments/proposals/status/confirm
+      operation_id: confirmAppointmentStatusProposal
+      disposition: documented_current_backend_alias_candidate
+    - current_backend_path: /appointments/proposals/delete-confirm
+      canonical_openapi_path: /appointments/proposals/delete/confirm
+      operation_id: confirmAppointmentDeleteProposal
+      disposition: documented_current_backend_alias_candidate
+    - current_backend_path: /appointments/proposals/slot-search/selection
+      canonical_openapi_path: /appointments/proposals/slot-search/select
+      operation_id: selectSlotForCreateProposal
+      disposition: documented_current_backend_alias_candidate
+  compatibility_write_routes:
+    - method: POST
+      current_backend_path: /appointments
+      handler: create_appointment
+      posture: legacy_compatibility_write_outside_proposal_confirm_envelope
+    - method: PUT
+      current_backend_path: /appointments/{appointment_id}
+      handler: update_appointment
+      posture: legacy_compatibility_write_outside_proposal_confirm_envelope
+    - method: PATCH
+      current_backend_path: /appointments/{appointment_id}/status
+      handler: update_appointment_status
+      posture: legacy_compatibility_write_outside_proposal_confirm_envelope
+    - method: DELETE
+      current_backend_path: /appointments/{appointment_id}
+      handler: cancel_appointment
+      posture: legacy_compatibility_write_outside_proposal_confirm_envelope
+  bernie_backend_variants:
+    - method: POST
+      current_backend_path: /appointments/proposals/bernie/tool-intent
+      handler: propose_bernie_tool_intent
+      posture: command_style_read_no_appointment_write
+    - method: POST
+      current_backend_path: /appointments/proposals/bernie/interpret-booking-instruction
+      handler: interpret_bernie_booking_instruction
+      posture: command_style_read_default_disabled_provider_boundary
+    - method: POST
+      current_backend_path: /appointments/proposals/bernie/supervised-booking
+      handler: propose_bernie_supervised_booking
+      posture: command_style_read_no_confirm_or_create
+    - method: POST
+      current_backend_path: /appointments/proposals/create/confirm-bernie
+      handler: confirm_bernie_create_proposal
+      posture: create_confirm_family_variant
+    - method: POST
+      current_backend_path: /appointments/proposals/bernie/no-slot-suggestion-selection
+      handler: select_no_slot_suggestion
+      posture: command_style_read_next_request_only
+    - method: GET
+      current_backend_path: /appointments/bernie/pilot-eligibility
+      handler: get_bernie_pilot_eligibility
+      posture: read_only_pilot_gate_check
+    - method: GET
+      current_backend_path: /appointments/bernie/sessions/active
+      handler: get_active_bernie_session
+      posture: read_only_session_state
+    - method: POST
+      current_backend_path: /appointments/bernie/sessions/new
+      handler: create_new_bernie_session
+      posture: session_state_only_no_appointment_write
+    - method: POST
+      current_backend_path: /appointments/bernie/sessions/{session_id}/events
+      handler: append_bernie_session_event
+      posture: session_state_only_no_appointment_write
+  blocked_gates:
+    - live_providers
+    - runtime_fga_clients
+    - external_patient_clients
+    - graphql_mutations
+    - broad_historical_diary_trove_mining
+    - h15_h_series_runtime_imports
+    - memory_rag_graphrag_runtime_wiring
+    - model_to_database_writes
+
 paths:
   /appointments/proposals/create:
     post:

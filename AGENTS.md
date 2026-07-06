@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 122 appointment command OpenAPI drift guard completed locally. `tests\test_api_spine_appointment_openapi_drift_guard.py` now parses `app\routers\appointments.py` with AST and requires the Sprint 121 inventory to match every current appointment-router route, handler, and classification. It also pins deliberate current OpenAPI drift entries and proves Bernie-specific route variants remain absent from the Sprint 101 OpenAPI draft |
-| **Next recommended work** | Sprint 123: update the OpenAPI draft or an adjacent OpenAPI companion artifact to explicitly document current backend compatibility aliases and Bernie intent/session/supervised variants, without adding runtime route aliases or changing behavior |
+| **Current active track** | Sprint 123 OpenAPI backend alignment metadata completed locally. `docs\api-spine\openapi\appointment-commands.yaml` now has an `x-emr4-current-backend-alignment` extension documenting current backend path drift, compatibility write routes, Bernie intent/session/supervised variants, and blocked gates without adding runtime aliases or changing behavior. `tests\test_api_spine_openapi_backend_alignment.py` guards the metadata |
+| **Next recommended work** | Sprint 124: inspect and document the appointment command `Idempotency-Key` enforcement gap for proposal/confirmation-grade command routes before any route behavior changes |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
