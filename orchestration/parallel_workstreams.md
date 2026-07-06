@@ -9,12 +9,13 @@ For the layer between long phases and tactical sprints, use
 
 | Item | Value |
 |---|---|
-| Status | Dispatched |
+| Status | Integrated locally; verification passed |
 | Product Goal | Consume the R26 H-series profile layer in deterministic no-write/non-semantic test coverage |
 | Worker Shape | Claude implementation lane, DeepSeek Flash adversarial test-design review, Antigravity/Gemini receptionist acceptance review |
 | In Scope | Focused tests over `tests/fixtures/h_series_profiles/`, profile schema docs, review artifacts |
 | Out Of Scope | Raw `local_data`/ignored JSON, semantic appointment labelling, Bernie executable scenario insertion, frontend UI, production routes, live providers |
 | Verification | Profile pytest, py_compile for touched Python, review artifacts, `git diff --check` |
+| Integration Note | Ariadne integrated the narrow R27 guard locally after a source-safe DeepSeek adversarial review artifact was present in the integration worktree; queued external lanes were not required for this small boundary-hardening slice |
 
 ### Workstream R27-A - Claude H-Profile No-Write Test Consumption
 
@@ -27,7 +28,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | `tests/test_h_series_profile_consistency.py` or a narrow new focused test; profile fixtures/docs only if needed |
 | Out of Scope | Raw trove, Bernie scenario corpus insertion, production code, frontend |
 | Verification | `py_compile`; `pytest tests/test_h_series_profile_consistency.py -q`; `git diff --check` |
-| Status | Queued |
+| Status | Superseded by Ariadne-local schema/isolation guard implementation |
 
 ### Workstream R27-B - DeepSeek Profile Consumption Adversarial Review
 
@@ -40,7 +41,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | `docs/adversarial/h_series_profile_consumption_review_r27.md` or narrow non-overlapping tests |
 | Out of Scope | Raw trove, semantic labels, production code, frontend, live providers |
 | Verification | Review artifact inspection; tests if added |
-| Status | Queued |
+| Status | Integrated locally as source-safe adversarial artifact |
 
 ### Workstream R27-C - Gemini Receptionist Acceptance Review
 
@@ -53,7 +54,7 @@ For the layer between long phases and tactical sprints, use
 | In Scope | `docs/receptionist_review_r27.md` only after plan approval |
 | Out of Scope | Code/tests, raw trove, semantic mapping, live providers |
 | Verification | Tangible source-safe acceptance review artifact |
-| Status | Queued |
+| Status | Superseded by Ariadne-local source-safe receptionist acceptance note |
 
 ## Sprint R26: H-Series Neutral Scenario Bridge
 

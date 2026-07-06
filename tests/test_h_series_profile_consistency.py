@@ -9,6 +9,8 @@ import pytest
 
 
 PROFILE_DIR = Path(__file__).resolve().parent / "fixtures" / "h_series_profiles"
+BERNIE_SCENARIO_DIR = Path(__file__).resolve().parent / "fixtures" / "bernie_scenarios"
+PROFILE_SCHEMA_VERSION = "h_series.neutral_profile.v1"
 ALLOWED_EVENT_CLASSES = {"no_structural_change", "small_content_delta"}
 REQUIRED_EXCLUDED_EVENT_CLASSES = {"large_unexplained_delta", "time_grid_delta"}
 FORBIDDEN_KEYS = {
@@ -55,6 +57,11 @@ def test_h_series_profiles_have_required_safe_shape():
 
     for path, profile in _load_profiles():
         profile_id = profile.get("id", "<no id>")
+        if profile.get("schema_version") != PROFILE_SCHEMA_VERSION:
+            errors.append(
+                f"{path.name} [{profile_id}]: schema_version must be {PROFILE_SCHEMA_VERSION!r}"
+            )
+
         if profile.get("profile_kind") != "h_series_neutral_profile":
             errors.append(f"{path.name} [{profile_id}]: invalid profile_kind")
 
@@ -123,3 +130,44 @@ def test_h_series_profiles_do_not_smuggle_semantics():
             )
 
     assert not errors, "H-series profile semantic violations:\n" + "\n".join(errors)
+
+
+def test_h_series_profiles_are_not_consumed_as_bernie_scenarios():
+    yaml = pytest.importorskip("yaml", reason="PyYAML not installed")
+    profiles = _load_profiles()
+    if not BERNIE_SCENARIO_DIR.is_dir():
+        pytest.skip(f"Bernie scenario directory not found: {BERNIE_SCENARIO_DIR}")
+
+    profile_names = {path.name for path, _profile in profiles}
+    profile_ids = {str(profile.get("id")) for _path, profile in profiles if profile.get("id")}
+    scenario_paths = sorted(BERNIE_SCENARIO_DIR.glob("*.yaml"))
+    scenario_names = {path.name for path in scenario_paths}
+
+    errors: list[str] = []
+    overlap = sorted(profile_names & scenario_names)
+    if overlap:
+        errors.append(f"H-series profile filename(s) duplicated in Bernie scenarios: {overlap}")
+
+    for scenario_path in scenario_paths:
+        text = scenario_path.read_text(encoding="utf-8").lower()
+        if "h_series_profiles" in text or "h-series neutral profile" in text:
+            errors.append(f"{scenario_path.name}: references H-series profile layer")
+
+        try:
+            scenario = yaml.safe_load(text)
+        except yaml.YAMLError as exc:
+            errors.append(f"{scenario_path.name}: invalid YAML while checking isolation: {exc}")
+            continue
+        if not isinstance(scenario, dict):
+            continue
+
+        scenario_dump = yaml.safe_dump(scenario).lower()
+        referenced_ids = sorted(
+            profile_id for profile_id in profile_ids if profile_id.lower() in scenario_dump
+        )
+        if referenced_ids:
+            errors.append(
+                f"{scenario_path.name}: references H-series profile id(s) {referenced_ids}"
+            )
+
+    assert not errors, "H-series/Bernie scenario isolation violations:\n" + "\n".join(errors)

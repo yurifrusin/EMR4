@@ -1,5 +1,18 @@
 # Protocol Alerts
 
+## H-series full-trove and Claude Fable review gate
+
+- The full local diary trove is expected to become useful later, but not as raw
+  retrieval, raw fine-tuning, or provider prompt material. Treat it as a local
+  PHI-bearing evidence mine that can refresh source-safe aggregate profiles and,
+  only after H15 approval, de-identified synthetic semantic fixture families.
+- Before opening a broad full-trove utilisation, H15 semantic-gate, or
+  GraphRAG-derived diary-memory sprint, run a high-reasoning Claude Fable review
+  if `claude-fable-5` is still available. Current timing pressure: Fable is
+  expected only through the end of July 7, 2026, so prefer using it after R27
+  profile-consumption guards are integrated and before committing to the next
+  trove-memory architecture step.
+
 ## Sprint 106 Claude/Fable consulting gate
 
 - Sprint 106 is a Claude-only consulting sprint for Bernie's reception-domain

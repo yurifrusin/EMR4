@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | R26 H-series neutral profile bridge completed; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Consume the new source-safe H-series profile layer in deterministic diary/Bernie refresh/no-write scenario tests, or return to native Bernie/Diary action grammar work |
+| **Current active track** | R27 H-series profile consumption guards in progress; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Finish R27 schema/isolation/no-write consumption tests, then return to native Bernie/Diary action grammar unless the H15 semantic gate is explicitly reviewed |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -140,7 +140,17 @@ into a separate source-safe profile layer under
 `tests/test_h_series_profile_consistency.py` and documented in
 `docs/h-series-profile-schema.md`. The profile layer is deliberately outside
 the Bernie scenario corpus until the H15 semantic labelling gate is explicitly
-reviewed and approved.
+reviewed and approved. R27 began consuming that layer conservatively by adding
+schema-version and isolation guards: profiles may be structurally loaded and
+kept distinct from Bernie executable scenarios, but neutral fields must not be
+used as scenario parameters, provider prompts, or appointment-semantics evidence.
+The full trove should be used later, but only after these guards, the H15 gate,
+and native Bernie/Diary action grammar are stable enough to absorb it through
+source-safe aggregate/profile refreshes rather than raw retrieval or fine-tuning.
+Because Claude Fable access is expected only through the end of July 7, 2026,
+reserve a Fable review for the highest-leverage checkpoint before full-trove
+utilisation or semantic-gate opening, preferably after R27 is integrated and
+before any broad trove/GraphRAG-derived memory sprint.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

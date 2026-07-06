@@ -26,6 +26,7 @@ scenarios, not provider prompts, and not semantic labels.
 Each profile is YAML with:
 
 - `id`: unique fixture id.
+- `schema_version`: currently `h_series.neutral_profile.v1`.
 - `profile_kind`: always `h_series_neutral_profile`.
 - `source_docs`: committed H-series documentation only.
 - `sample`: positive aggregate counts, such as root, snapshot, and transition counts.
@@ -49,6 +50,7 @@ Profiles may support deterministic tests that assert:
 - H-derived fixtures remain source-safe and non-semantic.
 - Future synthetic scenario families clearly distinguish fake authored data from H-series evidence.
 - Diary refresh, backend-authority, and no-unconfirmed-write invariants remain explicit.
+- H-series profile fixtures remain isolated from executable Bernie scenario fixtures.
 
 ## Blocked Uses
 
@@ -58,6 +60,11 @@ Profiles must not be used to assert:
 - a practitioner, patient, or staff member was involved;
 - receptionist intent can be reconstructed from count movement;
 - Bernie may retrieve or reason over raw historical diary content.
+
+Profile fields are metadata, not executable parameters. In particular,
+`deterministic_uses` must not be treated as a permission switch, and neutral
+event classes must not be passed into Bernie replay, scenario-generation,
+provider-prompt, or diary-write harnesses.
 
 ## Verification
 
@@ -69,3 +76,20 @@ Run:
 
 The validator is deliberately conservative. If a future sprint needs richer
 semantics, it should update the H15 gate first rather than weakening this schema.
+
+## Future Full-Trove Gate
+
+The full local diary trove should become useful later, but only after the
+neutral profile layer, H15 semantic-labelling gate, deterministic Bernie/Diary
+action grammar, and no-unconfirmed-write tests are stable enough to absorb it.
+The expected next use is not raw retrieval or fine-tuning; it is a source-safe
+local aggregate refresh that can produce reviewed neutral profiles or, after
+explicit gate approval, de-identified synthetic semantic fixture families.
+
+Before opening that full-trove utilisation gate, run a high-reasoning
+architecture review if Claude Fable is available. Because Fable access is
+currently expected only through the end of July 7, 2026, prefer spending it at
+the highest-leverage checkpoint: when R27 profile-consumption guards are
+integrated and the next decision is whether the H-series layer can support
+broader trove processing, GraphRAG-shaped derived memory, or H15 semantic-gate
+review.
