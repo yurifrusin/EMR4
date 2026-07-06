@@ -78,6 +78,14 @@ H22 has prepared the concrete gate-review packet for Yuri:
 docs/historical-diary-trove-h22-semantic-gate-review-packet.md
 ```
 
-That packet is not an approval. Semantic fixture promotion remains blocked
-until Yuri explicitly approves a reviewed H15 gate payload and the required
-synthetic validator/leakage-lint extensions pass.
+Yuri approved the bounded H15 payload on 2026-07-06:
+
+```text
+docs/historical-diary-trove-h15-approved-gate.json
+docs/historical-diary-trove-h15-approval-decision.md
+```
+
+This approval is narrow: one tiny local-only prototype slice,
+`action_grammar_candidates` only, no external providers, no raw or extracted
+text committed, no full-trove mining, and no memory/RAG/GraphRAG. The default
+template remains blocked as a safe starting point for future scopes.

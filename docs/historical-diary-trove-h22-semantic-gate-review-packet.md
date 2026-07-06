@@ -153,8 +153,9 @@ scripts/historical_diary_leakage_lint.py
 tests/test_historical_diary_leakage_lint.py
 ```
 
-H15 must remain blocked unless this lint and the semantic fixture validator
-continue to pass.
+Yuri approved the bounded H15 payload on 2026-07-06. This lint and the semantic
+fixture validator must continue to pass before any candidate semantic output is
+committable.
 
 H25 added a blocked approval-payload draft for Yuri's review:
 
@@ -213,6 +214,7 @@ The sprint engine must pause, with a Pushover notification that says
 
 Use H22 as a human-readable approval runway, not as the approval itself. The
 H23 has added the first validator/leakage-lint extensions using synthetic
-fixtures only, and H25 has drafted the blocked approval-payload packet for
-review. The full diary trove should be touched for semantic work only after
-Yuri explicitly approves H15 from a reviewed gate payload.
+fixtures only, H25 drafted the blocked approval-payload packet, and Yuri
+approved the bounded H15 gate payload on 2026-07-06. The approval does not
+authorize broad full-trove mining; it permits only the tiny local-only prototype
+scope recorded in `docs/historical-diary-trove-h15-approved-gate.json`.

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H22-H25 semantic gate packet, validator/leakage-lint extensions, adversarial review, and blocked approval-payload draft integrated locally; semantic labelling remains blocked by the H15 gate |
-| **Next recommended work** | Present the H15 approval-payload draft for Yuri's decision, or continue with non-semantic backend/Diary work; do not approve H15 or touch the full trove until Yuri explicitly approves |
+| **Current active track** | H15 approved by Yuri for one bounded local-only semantic prototype; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Run or prepare the tiny H15 semantic prototype inside the approved scope: one root, one dense day, max 80 samples, action_grammar_candidates only, with all validator/lint gates enforced |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -202,6 +202,14 @@ deliberately `decision: blocked` with blank reviewer and false acknowledgement;
 it records a proposed approval shape for Yuri's decision but is not approval.
 The H15 validator now requires semantic approval scope and a date-shaped expiry
 if the decision is ever changed to `approved_for_semantic_fixture_promotion`.
+Yuri approved H15 as drafted on 2026-07-06. The approved payload is
+`docs/historical-diary-trove-h15-approved-gate.json` and the decision note is
+`docs/historical-diary-trove-h15-approval-decision.md`. This authorizes only one
+tiny local-only semantic prototype: one root, one dense day, max 80 samples,
+`action_grammar_candidates` only, relative day indexes, synthetic resource IDs,
+bucket flags/coarse confidence, no external providers, no raw/extracted text
+committed, no memory/RAG/GraphRAG, no route/UI/database writes, and no broad
+full-trove pass.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

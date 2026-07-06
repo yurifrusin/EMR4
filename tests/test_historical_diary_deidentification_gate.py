@@ -166,3 +166,17 @@ def test_committed_h15_approval_payload_draft_remains_blocked():
     assert payload["approval"]["reviewer"] == ""
     assert payload["approval"]["semantic_labelling_acknowledged"] is False
     assert payload["draft_review"]["not_approved_until"] == "explicit_yuri_decision"
+
+
+def test_committed_h15_approved_gate_payload_passes_with_bounded_scope():
+    path = Path("docs/historical-diary-trove-h15-approved-gate.json")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+
+    validate_deidentification_gate(payload)
+    assert payload["decision"] == "approved_for_semantic_fixture_promotion"
+    assert payload["approval"]["reviewer"] == "yuri"
+    assert payload["approval"]["semantic_labelling_acknowledged"] is True
+    assert payload["approval"]["semantic_scope"]["prototype_slice"] == (
+        "single_root_single_dense_day_max_80"
+    )
+    assert payload["approval"]["semantic_scope"]["memory_use"] == "prohibited"

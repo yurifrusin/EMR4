@@ -1,0 +1,52 @@
+{
+  "gate": "historical_diary_deidentification_gate",
+  "version": 1,
+  "decision": "approved_for_semantic_fixture_promotion",
+  "privacy": {
+    "local_raw_processing_only": true,
+    "raw_data_external_provider_allowed": false,
+    "commit_raw_or_extracted_text_allowed": false,
+    "commit_identifying_labels_allowed": false
+  },
+  "deidentification_policy": {
+    "date_policy": "relative_day_index_only",
+    "resource_policy": "synthetic_resource_ids_only",
+    "text_policy": "bucket_flags_only"
+  },
+  "allowed_committed_fields": [
+    "synthetic_event_ids",
+    "relative_sequence_indexes",
+    "relative_day_indexes",
+    "time_of_day",
+    "duration_minutes",
+    "synthetic_resource_ids",
+    "status_categories",
+    "transition_labels",
+    "confidence_labels",
+    "count_distributions",
+    "bucket_flags"
+  ],
+  "forbidden_committed_categories": [
+    "names",
+    "phone_numbers",
+    "medicare_numbers",
+    "addresses",
+    "free_text_notes",
+    "staff_labels",
+    "original_filenames",
+    "exact_source_timestamps",
+    "external_raw_uploads"
+  ],
+  "approval": {
+    "reviewer": "yuri",
+    "semantic_labelling_acknowledged": true,
+    "approval_expires_on": "2027-01-01",
+    "semantic_scope": {
+      "fixture_families": [
+        "action_grammar_candidates"
+      ],
+      "prototype_slice": "single_root_single_dense_day_max_80",
+      "memory_use": "prohibited"
+    }
+  }
+}

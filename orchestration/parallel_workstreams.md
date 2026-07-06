@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H26: H15 Approval Recording
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Record Yuri's H15 approval exactly within the drafted bounded scope |
+| Worker Shape | Ariadne implementation |
+| In Scope | Approved gate payload, decision note, tests proving draft remains blocked and approved payload passes, handover updates |
+| Out Of Scope | Running semantic extraction, raw `local_data`, ignored JSON, broad full-trove processing, provider calls, route/UI/database writes, memory/RAG/GraphRAG |
+| Verification | `py_compile`; gate validation on default template, draft, and approved payload; leakage lint over `tests docs`; focused H15/H23/H-series pytest cluster (47 passed); `git diff --check` |
+
 ## Sprint H25: H15 Approval-Payload Draft
 
 | Item | Value |
