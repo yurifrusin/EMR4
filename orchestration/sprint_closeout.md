@@ -8,12 +8,62 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H70-H73 / Strategy Through API Spine Schema Prototype + Access AI Audit/Cost Envelope Hardening + Sprint 84 Enterprise Auth/FGA Boundary |
-| Integrated through | Ariadne + Fable strategy collaboration, Ariadne inbox cleanup, three Sprint 98 worker lanes, three API Spine planning lanes, four Sprint 101 schema artifact lanes, API steward skill creation, Access AI invocation verification, Access AI audit/cost hardening, and Sprint 84 static enterprise-auth/FGA boundary contracts |
-| Status | Local integration verified; not yet committed/pushed |
+| Batch | Sprint 108 Bernie Interpreter Access AI Closure |
+| Integrated through | Claude backend plan/review, DeepSeek Flash backend audit/no-write tests, Antigravity/Gemini Diary UX acceptance, and Ariadne integration |
+| Status | Local integration verified; pending final push/audit |
 | Last updated | 2026-07-06 |
 
-## What Changed
+## Sprint 108 What Changed
+
+- Corrected the active chronology: the Bernie interpreter Access AI migration is
+  Sprint 108 in the current Ariadne/Fable map. Older Access AI design notes may
+  call the same item "Sprint 85", but future current-track references should not
+  restart there.
+- Checked worker availability at sprint start:
+  - Claude CLI was available and submitted a backend plan.
+  - Antigravity CLI was available and submitted the UX implementation.
+  - DeepSeek Flash was used as the backend hardening lane.
+- Claude's accepted plan found that the main migration already existed:
+  `GeminiVertexBookingInstructionInterpreter` invokes `AccessAiService`, the
+  route persists Access AI audit events, and fake/disabled paths remain local.
+  Claude stood down from implementation after DeepSeek covered the focused test
+  gaps, avoiding same-file worker overlap.
+- DeepSeek/Ariadne backend hardening added tests that prove:
+  - live-provider audit metadata excludes forbidden key fragments and raw
+    instruction text;
+  - the route does not import or call `AccessAiService` directly;
+  - disabled and fake interpreters do not emit Access AI audit events;
+  - provider-exception fallback persists only Access AI allowed/failed events;
+  - provider-exception fallback does not write appointments or appointment audit
+    rows.
+- Antigravity UX acceptance added honest debug metadata:
+  `Provider: fake (mode: mocked; live_provider: false)` and
+  `Provider: gemini_vertex (mode: live; live_provider: true)`, plus
+  route-intercepted smoke coverage and a `diary.js` cache-bust.
+- No live provider default was enabled. No runtime FGA client, external patient
+  client, GraphQL mutation, broad trove mining, H15/H-series runtime import,
+  memory/RAG/GraphRAG, database write from model output, or raw/ignored
+  local-data read was added.
+
+## Sprint 108 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests/test_bernie_interpret_booking_instruction.py -q`
+  (`29 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests/test_access_ai_service.py tests/test_ai_audit_events.py tests/test_smoke_bernie_interpreter_script.py -q`
+  (`46 passed`; existing Starlette/Google GenAI warnings only).
+- `node --check docs\diary\diary.js`.
+- `.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -k test_bernie_debug_provider_metadata_honest -q`
+  (`2 passed`).
+- `git diff --check` passed after integration hygiene.
+
+Sprint engine state: continuing. Next recommended direction is Sprint 109
+Band-2 checkpoint/gate proposal before any runtime-provider or live-smoke
+movement. Continue no-runtime, no-provider-enabling work autonomously, but pause
+for Yuri before changing blocked gates to enabled.
+
+---
+
+## Previous Batch Context
 
 - Captured Fable's 100+ sprint strategy review at
   `orchestration\agent_inbox\codex\review-claude-fable-100-sprint-strategy-map.md`.

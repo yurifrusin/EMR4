@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/sprint108-bernie-access-ai-backend` |
-| Status | queued |
+| Status | superseded |
 | Created | f781b969 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint108-bernie-access-ai-backend-contract --summary "Short plan summary"` |
@@ -90,5 +90,10 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - `orchestration/agent_inbox/codex/plan-claude-claude-sprint108-bernie-access-ai-backend-contract.md`
 - Verification run:
+  - Claude plan accepted by Ariadne; no Claude implementation was requested after
+    DeepSeek covered the accepted backend test gaps.
 - Remaining risks:
+  - None for this lane. The source task is superseded only to avoid same-file
+    overlap with the integrated DeepSeek backend hardening lane.

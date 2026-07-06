@@ -132,12 +132,16 @@ default meaning of "three lane sprint".
 
 | Item | Value |
 |---|---|
-| Status | Preparing worker launch |
+| Status | Integrated locally; focused verification passed |
 | Programme | Programme 2F / Access AI API; Phase 2B Bernie Receptionist Copilot |
-| Goal | Route Bernie booking-instruction interpretation through Access AI as the single backend entry point while preserving fake-provider/default-disabled/no-write/staff-confirmation guards |
-| Legacy Map Cross-Reference | Called "Sprint 85" in older Access AI design notes and Fable's numbered list; current post-Sprint-107 chronology should call this Sprint 108 |
-| Required Worker Mix | Check Claude and Antigravity availability first; prefer Claude + Antigravity/Gemini + DeepSeek Flash |
-| In Scope | Plan-gated bounded migration/review only; no live provider opening, no autonomous booking writes, no GraphQL mutation, no H15/trove, no memory/RAG/GraphRAG |
+| Goal | Close the Bernie booking-instruction interpreter's Access AI migration evidence while preserving fake-provider/default-disabled/no-write/staff-confirmation guards |
+| Legacy Map Cross-Reference | Called "Sprint 85" in older Access AI design notes and Fable's numbered list; current post-Sprint-107 chronology is Sprint 108 |
+| Worker Availability | Claude CLI available and submitted a backend plan; Antigravity CLI available and implemented the UX lane; DeepSeek Flash implemented backend audit/no-write hardening |
+| Claude Lane | Confirmed the migration already existed and identified focused backend test gaps; stood down from implementation to avoid same-file overlap after DeepSeek covered the accepted gaps |
+| Antigravity Lane | Added honest debug display of provider, mode, and `live_provider`, cache-busted `diary.js`, and added route-intercepted Diary smoke coverage |
+| DeepSeek Lane | Added backend tests for forbidden Access AI audit metadata fragments, route chokepoint ownership, disabled/fake no-audit behavior, provider-exception fallback audit rows, and no appointment/audit writes |
+| Verification | `.venv\Scripts\python.exe -m pytest tests/test_bernie_interpret_booking_instruction.py -q` (`29 passed`); `.venv\Scripts\python.exe -m pytest tests/test_access_ai_service.py tests/test_ai_audit_events.py tests/test_smoke_bernie_interpreter_script.py -q` (`46 passed`); `node --check docs/diary/diary.js`; `.venv\Scripts\python.exe -m pytest review/test_diary_smoke.py -k test_bernie_debug_provider_metadata_honest -q` (`2 passed`); `git diff --check` |
+| Next | Sprint 109 Band-2 checkpoint/gate proposal before any runtime-provider/live-smoke movement |
 | Gates Still Closed | Live providers, runtime FGA clients, external patient clients, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
 
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance

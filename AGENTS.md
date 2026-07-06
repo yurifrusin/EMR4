@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Ariadne/Fable strategy map completed locally; Sprint 98 Bernie booking-loop integrity locally integrated and focused verification passed; API Spine plan-review lanes completed, ADR drafted, Sprint 101 schema prototype artifacts validated locally, `$emr4-api-steward` personal skill created/validated, Access AI invocation service verified fake-provider only, Access AI audit/cost envelope hardening integrated locally, and Sprint 84/Band-2 enterprise-auth/FGA boundary mapping integrated as static contracts/tests only; full-trove mining, providers, memory, and model writes remain blocked |
-| **Next recommended work** | Sprint 108: Bernie interpreter migration through Access AI, fake-provider/default-disabled/no-write only. This corresponds to the legacy Access AI design-record item "Sprint 85"; use Sprint 108 for current chronology unless Sprint 98 live/manual review finds a release blocker |
+| **Current active track** | Sprint 108 Bernie interpreter Access AI closure integrated locally: backend audit/no-write/fallback tests hardened, Diary debug provider/mode/live-provider acceptance added, and legacy "Sprint 85" references corrected to current Sprint 108 chronology; full-trove mining, runtime provider opening, memory/RAG/GraphRAG, external patient clients, GraphQL mutations, and model writes remain blocked |
+| **Next recommended work** | Sprint 109: Band-2 checkpoint/gate proposal for any further runtime-provider or live-smoke movement. Continue no-runtime, no-provider-enabling work autonomously, but pause for Yuri before changing any blocked gate to enabled |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

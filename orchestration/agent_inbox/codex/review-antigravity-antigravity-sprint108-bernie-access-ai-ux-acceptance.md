@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint108-bernie-access-ai-ux-acceptance` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -39,5 +39,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: accepted and merged into `master` as Sprint 108 UX
+  acceptance.
+- Follow-up required: none. Continue to Sprint 109 checkpoint/gate proposal
+  before any live-provider or runtime-provider movement.
