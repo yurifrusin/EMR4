@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H15: Historical Diary Trove Semantic Labelling De-Identification Gate |
 | Integrated through | Ariadne local-only gate tooling; no external workers used because scope was privacy-policy/tooling and narrowly bounded |
-| Status | Local verification passed; push/mirror/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |
 | Last updated | 2026-07-06 |
 
 ## What Changed
@@ -27,8 +27,8 @@ reviewed, integrated, verified, pushed, and audited.
 - Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_deidentification_gate.py tests\test_historical_diary_deidentification_gate.py`.
 - Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_deidentification_gate.py tests\test_historical_diary_output_safety.py -q` (17 passed; existing warnings only).
 - Gate template validation passed: `.venv\Scripts\python.exe scripts\historical_diary_deidentification_gate.py docs\historical-diary-trove-semantic-gate-template.json`.
-- Post-push audit pending.
-- GitHub workflows pending.
+- Post-push audit passed: master, `handoff/current`, and durable worker mirrors aligned at `74055204`.
+- GitHub workflows passed for the H15 push: Deploy GitHub Pages, Python Security, and CodeQL.
 
 ## Gate Result
 
