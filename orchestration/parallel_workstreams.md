@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H32: H15 Advisory-Only Adapter Proposal
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Prove H15 read-only candidates can map to advisory-only practice knowledge in tests without runtime wiring |
+| Worker Shape | Ariadne implementation |
+| In Scope | Test-only adapter, advisory-frame tests, boundary proposal doc |
+| Out Of Scope | Runtime adapter wiring, RAG/GraphRAG, provider calls, memory persistence, route/UI/database writes, broad full-trove processing |
+| Verification | `py_compile`; leakage lint; H15 advisory/practice-knowledge boundary tests (42 passed); `git diff --check` |
+
 ## Sprint H31: Access-AI and Read-Only Memory Boundary Review
 
 | Item | Value |

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H31 Access-AI/read-only memory boundary review integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Add route-level read-only explanation tests or an advisory-only adapter proposal; do not wire historical diary candidates into runtime memory or providers yet |
+| **Current active track** | H32 test-only advisory adapter proposal integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Add route-level read-only explanation tests proving advisory H15 frames do not create provider calls, memory persistence, DB writes, or confirmation authority |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -239,6 +239,12 @@ H31 added `docs/historical-diary-trove-access-ai-memory-boundary.md` and
 remain test-only/read-only; runtime Access AI, practice-knowledge, diary policy,
 confirm, slot-search, and Bernie memory modules must not import H15 fixtures,
 ignored local payloads, or historical-diary candidate builders.
+H32 added a test-only adapter in `tests/h15_advisory_adapter.py`, with
+`tests/test_historical_diary_advisory_adapter.py` and
+`docs/historical-diary-trove-h15-advisory-adapter-proposal.md`. It maps the
+hand-authored H15 candidates to `PracticeKnowledgeResult` and then through
+`to_advisory_frame`, proving the shape stays advisory-only and cannot affect
+slots, policy, confirmation, or writes. No runtime wiring was added.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,
