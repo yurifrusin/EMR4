@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H33 route-level read-only explanation boundary integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Consider an explicit read-only explanation endpoint/test harness only if it preserves no provider calls, no memory persistence, no DB writes, and no confirmation authority |
+| **Current active track** | H34 dev-only H15 read-only explanation preview integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Next recommended work** | Either add a no-provider endpoint contract review around existing Bernie dev fixtures or return to native Bernie/Diary grammar coverage |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -250,6 +250,17 @@ H33 added `docs/historical-diary-trove-h15-route-explanation-boundary.md` and
 advisory frames do not create availability, roster, no-slot, proposal, or
 confirmation authority, and current API routers do not import H15 fixtures,
 ignored local payloads, or the test-only adapter.
+H34 adds a dev-only/auth-gated
+`/api/v1/appointments/dev/h15-read-only-explanation-preview` endpoint in
+`app/routers/bernie_dev.py`, with tests in `tests/test_bernie_dev_fixtures.py`
+and documentation in
+`docs/historical-diary-trove-h15-read-only-endpoint-boundary.md`. The endpoint
+returns only static authored synthetic boundary metadata: advisory-only,
+`explain_schedule`, `route_read_only`, no provider calls, no memory persistence,
+no database/appointment/audit writes, and no authority to search slots, offer
+candidates, prepare proposals, confirm, or mutate the diary. It intentionally
+does not import H15 fixtures, ignored local outputs, the candidate builder, RAG,
+GraphRAG, Access AI, or provider code.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

@@ -6,7 +6,7 @@ No appointment writes, no audit rows, no LLM/provider calls.
 """
 import uuid
 from datetime import date, datetime, time, timezone
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 
@@ -234,6 +234,38 @@ _ALL_FIXTURES: dict[str, BernieSupervisedBookingOut] = {
     "confirmation_ready": _fixture_confirmation_ready(),
 }
 
+_H15_READ_ONLY_EXPLANATION_PREVIEW: dict[str, Any] = {
+    "schema_version": "h15_read_only_explanation_preview.v1",
+    "source": "authored_synthetic_route_preview",
+    "status": "advisory_only",
+    "action_name": "explain_schedule",
+    "dispatch": "route_read_only",
+    "candidate_scope": {
+        "origin": "hand_authored_synthetic",
+        "uses_raw_diary_text": False,
+        "uses_local_trove_payloads": False,
+        "uses_historical_diary_candidate_builder": False,
+    },
+    "route_boundary": {
+        "can_search_slots": False,
+        "can_offer_candidates": False,
+        "can_prepare_proposal": False,
+        "can_confirm_or_write": False,
+        "authority": "none",
+    },
+    "execution_boundary": {
+        "provider_calls": "prohibited",
+        "memory_persistence": "prohibited",
+        "database_writes": "prohibited",
+        "appointment_writes": "prohibited",
+        "audit_writes": "prohibited",
+    },
+    "staff_message": (
+        "Synthetic H15 material may explain that a schedule-like pattern was detected; "
+        "native diary APIs remain the only authority for availability and writes."
+    ),
+}
+
 _VALID_STATES = Literal["blocked", "candidate_selection_required", "confirmation_ready"]
 
 
@@ -257,3 +289,16 @@ def bernie_review_fixtures(
     if state is not None:
         return {state: _ALL_FIXTURES[state]}
     return _ALL_FIXTURES
+
+
+@router.get("/h15-read-only-explanation-preview")
+def h15_read_only_explanation_preview(
+    current_user: User = Depends(get_current_user),
+) -> dict[str, Any]:
+    """Return the static H15 read-only explanation boundary preview.
+
+    This endpoint is dev-gated and auth-gated. It intentionally does not import
+    H15 fixtures, ignored local outputs, provider clients, memory stores, or
+    database dependencies beyond the standard auth user lookup.
+    """
+    return _H15_READ_ONLY_EXPLANATION_PREVIEW

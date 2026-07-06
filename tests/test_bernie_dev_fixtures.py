@@ -16,12 +16,13 @@ from app.models.appointments import Appointment, AppointmentAuditLog
 from tests.conftest import make_token
 
 FIXTURES_URL = "/api/v1/appointments/dev/bernie-review-fixtures"
+H15_PREVIEW_URL = "/api/v1/appointments/dev/h15-read-only-explanation-preview"
 ALL_STATES = {"blocked", "candidate_selection_required", "confirmation_ready"}
 
 
-def _get(client, token, **params):
+def _get(client, token, url=FIXTURES_URL, **params):
     return client.get(
-        FIXTURES_URL,
+        url,
         params=params,
         headers={"Authorization": f"Bearer {token}"},
     )
@@ -159,3 +160,79 @@ def test_fixture_response_is_deterministic_across_calls(client, gp_user):
     first = _get(client, token).json()
     second = _get(client, token).json()
     assert first == second
+
+
+# -- H15 read-only explanation preview ---------------------------------------
+
+def test_h15_preview_requires_auth(client):
+    resp = client.get(H15_PREVIEW_URL)
+    assert resp.status_code == 401
+
+
+def test_h15_preview_returns_404_in_non_dev_environment(client, gp_user, monkeypatch):
+    monkeypatch.setattr(bernie_dev_module.settings, "environment", "production")
+    token = make_token(gp_user)
+    resp = _get(client, token, url=H15_PREVIEW_URL)
+    assert resp.status_code == 404
+
+
+def test_h15_preview_is_advisory_read_only_and_non_authoritative(client, gp_user):
+    token = make_token(gp_user)
+    payload = _get(client, token, url=H15_PREVIEW_URL).json()
+
+    assert payload["schema_version"] == "h15_read_only_explanation_preview.v1"
+    assert payload["source"] == "authored_synthetic_route_preview"
+    assert payload["status"] == "advisory_only"
+    assert payload["action_name"] == "explain_schedule"
+    assert payload["dispatch"] == "route_read_only"
+
+    assert payload["candidate_scope"] == {
+        "origin": "hand_authored_synthetic",
+        "uses_raw_diary_text": False,
+        "uses_local_trove_payloads": False,
+        "uses_historical_diary_candidate_builder": False,
+    }
+    assert payload["route_boundary"] == {
+        "can_search_slots": False,
+        "can_offer_candidates": False,
+        "can_prepare_proposal": False,
+        "can_confirm_or_write": False,
+        "authority": "none",
+    }
+    assert payload["execution_boundary"] == {
+        "provider_calls": "prohibited",
+        "memory_persistence": "prohibited",
+        "database_writes": "prohibited",
+        "appointment_writes": "prohibited",
+        "audit_writes": "prohibited",
+    }
+
+
+def test_h15_preview_writes_no_appointment_or_audit_rows(client, gp_user, db):
+    token = make_token(gp_user)
+    before_appointments = db.query(Appointment).count()
+    before_audits = db.query(AppointmentAuditLog).count()
+
+    _get(client, token, url=H15_PREVIEW_URL)
+
+    db.expire_all()
+    assert db.query(Appointment).count() == before_appointments
+    assert db.query(AppointmentAuditLog).count() == before_audits
+
+
+def test_h15_preview_module_has_no_local_payload_or_provider_coupling():
+    source = inspect.getsource(bernie_dev_module).lower()
+    for forbidden in [
+        "local_data",
+        "semantic_h15_candidate_fixtures",
+        "semantic_h15_prototype_neutral_aggregate",
+        "historical_diary_semantic_candidate_builder",
+        "tests.fixtures.h15_semantic_candidates",
+        "tests.h15_advisory_adapter",
+        "google.genai",
+        "google.generativeai",
+        "vertexai",
+        "openai",
+        "anthropic",
+    ]:
+        assert forbidden not in source, f"H15 preview coupling found: {forbidden!r}"

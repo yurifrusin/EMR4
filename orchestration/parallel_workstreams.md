@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H34: H15 Read-Only Explanation Preview Endpoint
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Expose a dev-only/auth-gated static preview of the H15 read-only explanation boundary without adding runtime authority |
+| Worker Shape | Ariadne implementation |
+| In Scope | Bernie dev endpoint, route tests, source-safe doc, handover updates |
+| Out Of Scope | Runtime H15 fixture import, provider calls, Access AI/RAG/GraphRAG/memory persistence, route/UI/database writes, broad full-trove processing |
+| Verification | `py_compile`; leakage lint; dev fixture and route/advisory guard cluster (65 passed); `git diff --check` |
+
 ## Sprint H33: H15 Route Explanation Boundary
 
 | Item | Value |

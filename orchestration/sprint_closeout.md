@@ -4765,3 +4765,32 @@ Manual user review:
 - Confirm the proposal warning/error copy is readable in the booking modal and does not disturb the main diary grid or Waiting Room panel.
 
 User review result: positive after hotfix `d081834`; break-crossing warning now appears for the visible break path.
+
+---
+
+## Sprint H34 Closeout - H15 Read-Only Explanation Preview
+
+Integrated outcome:
+
+- Added `GET /api/v1/appointments/dev/h15-read-only-explanation-preview` as a
+  dev-only/auth-gated static boundary preview in `app/routers/bernie_dev.py`.
+- Added route tests proving the preview is advisory/read-only, blocked outside
+  dev, auth-gated, and writes no appointment or audit rows.
+- Documented that the endpoint does not authorize H15 runtime fixture imports,
+  provider calls, Access AI/RAG/GraphRAG/memory, diary writes, or broad full
+  trove processing.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile app\routers\bernie_dev.py tests\test_bernie_dev_fixtures.py tests\test_historical_diary_route_explanation_boundary.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_dev_fixtures.py tests\test_historical_diary_route_explanation_boundary.py tests\test_historical_diary_advisory_adapter.py tests\test_practice_knowledge_advisory_boundary.py tests\test_historical_diary_memory_boundary.py tests\test_h15_semantic_candidate_fixtures.py -q
+git diff --check
+```
+
+Result: `65 passed`; leakage lint safe; whitespace check clean.
+
+Sprint engine state: continuing. No user intervention is required; recommended
+next direction is either tightening no-provider/no-write dev route contracts or
+returning to native Bernie/Diary grammar coverage.
