@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H57 Bernie Interpretation Harness runtime isolation guard integrated locally; full-trove mining, providers, memory, and writes remain blocked |
+| **Current active track** | H58 Bernie Interpretation Harness readiness/gate review artifact integrated locally; full-trove mining, providers, memory, and writes remain blocked |
 | **Next recommended work** | Continue bounded gate/review hardening before any runtime/provider wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
@@ -437,6 +437,13 @@ fixture paths, projected-frame contracts, H15/H-series profile fixtures,
 historical diary candidate builders, `local_data`, or historical diary trove
 paths. This keeps the harness as a test/review artifact until a future explicitly
 reviewed gate changes that posture.
+H58 adds `docs/adversarial/h58_interpretation_readiness_gate_review.md` and
+`tests/test_bernie_interpretation_readiness_review_artifact.py`. The review
+records the current verdict that the readiness/gate stack is a useful
+blocked-by-default preflight, not evidence that runtime routes, provider prompts,
+live provider dry-runs, memory/RAG/GraphRAG, H15/H-series runtime imports, or
+historical diary material access are ready. The guard test preserves the blocked
+verdict and pause requirement if readiness values change.
 
 Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
 raw diary files. Use the trove first to build validator-safe derived aggregates,

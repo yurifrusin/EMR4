@@ -5,6 +5,17 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Sprint H58: Bernie Interpretation Harness Readiness/Gate Review
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Product Goal | Record a bounded adversarial review of the readiness/gate stack so blocked readiness remains explicit |
+| Worker Shape | Ariadne local adversarial review |
+| In Scope | Review artifact, artifact guard tests, docs/handover updates |
+| Out Of Scope | Runtime routes, UI, providers, database reads/writes, live patient matching, local trove processing, H-series profile consumption, H15 runtime wiring, RAG/GraphRAG/memory |
+| Verification | `py_compile`; readiness CLI sample; interpretation/report/readiness/release-gate/review/runtime-gate/runtime-isolation/manifest/route-contract guard cluster (289 passed); leakage lint; `git diff --check` |
+
 ## Sprint H57: Bernie Interpretation Harness Runtime Isolation Guard
 
 | Item | Value |
