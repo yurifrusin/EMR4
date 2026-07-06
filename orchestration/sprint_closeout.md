@@ -10,7 +10,7 @@ reviewed, integrated, verified, pushed, and audited.
 |---|---|
 | Batch | Sprint H21: Historical Diary Trove Thursday Neutral Sampling |
 | Integrated through | Ariadne local-only neutral trove pipeline; no external workers used because scope was privacy-sensitive and raw-data-adjacent |
-| Status | Local validation complete; push/workflow/audit pending |
+| Status | Pushed to `master`/`handoff/current`; mirrors realigned; Python Security green at `f1b1de0`; fresh manual Pages deployment green at `f1b1de0` after the initial push Pages run failed on duplicate artifact metadata during rerun |
 | Last updated | 2026-07-06 |
 
 ## What Changed
