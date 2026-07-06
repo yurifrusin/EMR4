@@ -8,6 +8,63 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
+| Batch | Sprint H16: Historical Diary Trove Friday Neutral Sampling |
+| Integrated through | Ariadne local-only capped neutral sampling; no external workers used because scope was privacy-sensitive and read-only |
+| Status | Verified locally; push/audit pending |
+| Last updated | 2026-07-06 |
+
+## What Changed
+
+- Ran the H16 capped read-only neutral export over ignored `pilot_02` Friday files.
+- Produced ignored H16 ordered snapshots, event summary, large-delta triage, and transition-neighborhood outputs.
+- Added `docs\historical-diary-trove-friday-neutral-sampling.md`.
+- Updated `AGENTS.md` with H16 state and the safe Bernie memory posture for the 58k-file trove.
+- No raw diary files, filenames, paths, exact source timestamps, patient/staff labels, document text, external-provider calls, database writes, routes, frontend, migrations, or GitHub Pages assets were added.
+
+## Verification
+
+- H16 raw folder count confirmed: 667 local files under ignored `pilot_02`.
+- H16 classifier opened 100/100 sampled files read-only with zero errors.
+- H16 ordered snapshot, event summary, large-delta triage, and transition-neighborhood outputs passed `scripts\historical_diary_output_safety.py`.
+- Compile check passed: `.venv\Scripts\python.exe -m py_compile scripts\historical_diary_output_safety.py scripts\historical_diary_event_summary_dry_run.py scripts\historical_diary_large_delta_triage.py scripts\historical_diary_transition_neighborhoods.py`.
+- Focused pytest passed: `.venv\Scripts\pytest.exe tests\test_historical_diary_output_safety.py tests\test_historical_diary_event_summary_dry_run.py tests\test_historical_diary_large_delta_triage.py tests\test_historical_diary_transition_neighborhoods.py -q` (16 passed; existing warnings only).
+
+## Local Result
+
+- `pilot_02`: 100 `strong_diary_grid` classifications.
+- Event classes: 65 `no_structural_change`, 34 `small_content_delta`.
+- Large-delta triage count: 0.
+- Transition-neighborhood count: 0.
+- Interpretation: the Friday slice strengthens the stable-grid hypothesis and does not reproduce the isolated H12/H14 notable events.
+
+## Bernie Memory Result
+
+- The 58k-file trove should not be raw fine-tuning material.
+- RAG is useful over approved docs, policies, aggregate stats, and de-identified/synthetic examples.
+- GraphRAG is likely the best future fit once we have a derived neutral transition graph.
+- Bernie can use derived memory to clarify and propose; the deterministic diary backend remains the write authority.
+
+## Recommended User Review
+
+No required manual review before continuing neutral work. Yuri review is required only if a future sprint proposes approving semantic labelling or using raw/de-identified examples for provider-visible prompts.
+
+## Not Required Before Moving On
+
+- No browser/Office/GitHub Pages smoke is required because no frontend or deployed static asset changed.
+- No live Gemini/Vertex call is required; raw diary files must not be sent to external providers.
+- No database migration or test DB reset is required.
+- No manual diary-content review is required because H16 commits only safe aggregate documentation and handover notes.
+
+## Known Follow-Up
+
+- H17 should add a cross-pilot comparison reporter for safe event summaries.
+- H18 can prototype a neutral derived graph export for Bernie memory research.
+- Do not infer appointment create/delete/status semantics from the trove until the H15 gate is approved.
+
+## Previous Closeout - Sprint H15
+
+| Item | Value |
+|---|---|
 | Batch | Sprint H15: Historical Diary Trove Semantic Labelling De-Identification Gate |
 | Integrated through | Ariadne local-only gate tooling; no external workers used because scope was privacy-policy/tooling and narrowly bounded |
 | Status | Pushed to `master`/`handoff/current`; mirrors realigned; audit clean; Pages, Python Security, and CodeQL workflows green |

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Historical diary trove H15 semantic labelling de-identification gate completed; R25 provider sampling scaffold closed |
-| **Next recommended work** | Sprint H16: continue neutral broadening under H10 caps or prepare a Yuri review packet for changing the semantic gate from blocked |
+| **Current active track** | Historical diary trove H16 Friday neutral sampling completed; semantic labelling remains blocked by the H15 gate |
+| **Next recommended work** | Sprint H17: safe cross-pilot comparison reporter, then neutral derived graph export prototype for Bernie memory research |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -97,9 +97,32 @@ grouped replay under-counted ordered small deltas by 8 in `pilot` and 1 in
 probe with `SampleSize=80`, `DenseDays=2`, and `MaxDenseDays=2` without
 `-AllowLargeRun`. The ignored probe opened 160/160 files read-only with zero
 errors in 112.224 seconds; safe H11 findings live in
-`docs/historical-diary-trove-bounded-runtime-probe.md`. H12 should triage the
+`docs/historical-diary-trove-bounded-runtime-probe.md`. H12 triaged the
 single neutral `large_unexplained_delta` seen in `pilot_01` using only
-sequence-index pairs and neutral before/after counts.
+sequence-index pairs and neutral before/after counts; it was shape-stable
+content-volume movement, not a proved layout break. H13 broadened capped
+ordered sampling to 100 snapshots per existing pilot root and found the H12
+large delta remained isolated. H14 added neutral transition-neighborhood
+reporting for `large_unexplained_delta` and `time_grid_delta` centers. H15 added
+a blocked-by-default semantic labelling de-identification gate: committed
+semantic appointment fixtures remain prohibited until Yuri explicitly approves a
+reviewed gate payload. H16 sampled the Friday `pilot_02` root, 100/100 read-only
+opens from 667 local files with zero errors, 100 `strong_diary_grid`
+classifications, 65 `no_structural_change`, 34 `small_content_delta`, no large
+delta, and no transition-neighborhood centers. Safe H16 findings live in
+`docs/historical-diary-trove-friday-neutral-sampling.md`.
+
+Bernie memory posture for the 58k-file trove: do not fine-tune or retrieve from
+raw diary files. Use the trove first to build validator-safe derived aggregates,
+then a neutral transition graph, then semantic fixtures only after the H15 gate
+is approved. RAG can be useful over approved docs, policies, and de-identified
+examples; GraphRAG is likely the better fit for derived diary state transitions.
+Fine-tuning, if ever used, should train only on approved synthetic or
+de-identified derived phrasing examples, not raw diary content or authoritative
+state transitions. Bernie may consult derived memory to explain, clarify, and
+propose bounded actions, but the native backend diary system remains the write
+authority for availability, collisions, transitions, signed evidence, audit, and
+route permissions.
 
 Tooling note: a controlled Graphify code-graph spike on 2026-07-05 found the
 tool useful for opt-in symbol-level navigation (`explain`/`affected`) but too
