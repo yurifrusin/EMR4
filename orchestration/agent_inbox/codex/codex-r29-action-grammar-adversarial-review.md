@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/r29-action-grammar-adversarial-review` |
-| Status | queued |
+| Status | integrated |
 | Created | c610e1de |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-r29-action-grammar-adversarial-review --summary "Short plan summary"` |

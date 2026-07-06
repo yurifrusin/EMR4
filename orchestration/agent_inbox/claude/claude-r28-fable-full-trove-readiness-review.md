@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/fable-full-trove-readiness` |
-| Status | submitted |
+| Status | integrated |
 | Created | 374006cf |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-r28-fable-full-trove-readiness-review --summary "Short plan summary"` |

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | H69 orchestration poll legacy-encoding tolerance integrated locally; full-trove mining, providers, memory, and writes remain blocked |
-| **Next recommended work** | Paused by Yuri request after H69 closeout; when resumed, clean stale inbox/Claude residue before launching more durable worker lanes |
+| **Current active track** | Ariadne/Fable strategy map completed locally; Sprint 98 Bernie booking-loop integrity locally integrated and focused verification passed; API Spine plan-review lanes completed, ADR drafted, Sprint 101 schema prototype artifacts validated locally, `$emr4-api-steward` personal skill created/validated, Access AI invocation service verified fake-provider only, Access AI audit/cost envelope hardening integrated locally, and Sprint 84 enterprise-auth/FGA boundary mapping integrated as static contracts/tests only; full-trove mining, providers, memory, and model writes remain blocked |
+| **Next recommended work** | Sprint 85 Bernie interpreter migration through Access AI, fake-provider/default-disabled/no-write only, unless Sprint 98 live/manual review finds a release blocker |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -569,21 +569,24 @@ Codex role separation:
 - Codex workers may submit plans/reviews to Codex's inbox, but Ariadne remains
   responsible for final integration. Ariadne must not treat an
   orchestrator-created Codex plan as proof that a separate worker has submitted.
-- Claude, Antigravity/Gemini, DeepSeek, and native Codex workers are all valid
-  sprint workers when their quota/tooling is healthy. Claude may do real
-  implementation work, not just planning, on `claude/current`; reserve Fable
-  or other high-cost Claude modes for architecture/consulting gates where the
-  extra reasoning depth is worth the 5-hour-window burn. Antigravity is not
-  limited to UX: use Gemini for independent backend/domain-policy critique,
-  test design, fixture/harness work, architecture dissent, and small bounded
-  implementation lanes when it has clear file ownership and must submit a
-  tangible repo artifact.
-- At the start of every sprint, Ariadne should check Claude's current
-  availability/quota state before deciding the worker mix so Claude is used when
-  it is healthy rather than accidentally bypassed.
-- DeepSeek Flash via `codex-deepseek-bridge` may replace or supplement the
-  spawned Codex worker for bounded read-heavy reviews and implementation lanes
-  when Ariadne stays as OpenAI/Codex orchestrator. Use Flash first; consider
+- Claude, Antigravity/Gemini, and DeepSeek are the preferred sprint-worker
+  lanes when their quota/tooling is healthy. Claude may do real implementation
+  work, not just planning, on `claude/current`; use Sonnet for ordinary
+  implementation/review and reserve Opus/Fable or other high-cost Claude modes
+  for architecture/consulting gates where the extra reasoning depth is worth
+  the window burn. Antigravity is not limited to UX: use Gemini for independent
+  backend/domain-policy critique, test design, fixture/harness work,
+  architecture dissent, and small bounded implementation lanes when it has clear
+  file ownership and must submit a tangible repo artifact. DeepSeek Flash is
+  the preferred cheap replacement or supplement lane for bounded
+  review/test/backend work.
+- At the start of every non-trivial sprint, Ariadne must check and record
+  Claude and Antigravity availability/quota state before deciding the worker
+  mix. "Three lane sprint" means Claude + Antigravity + DeepSeek by default,
+  not three native Codex subagents.
+- DeepSeek Flash via `codex-deepseek-bridge` may replace or supplement Claude,
+  Antigravity, or Codex worker capacity for bounded read-heavy reviews and
+  implementation lanes when Ariadne stays as orchestrator. Use Flash first; consider
   DeepSeek Pro only when reasoning depth, not diff hygiene, is the bottleneck.
   Ariadne may spawn as many DeepSeek Flash workers as fit the sprint
   requirements, provided every worker has a separate branch, narrow role, clear
@@ -599,6 +602,10 @@ Codex role separation:
   exception. The replacement DeepSeek lane must have a separate branch, a clear
   role such as implementation vs adversarial review, non-overlapping file
   ownership where practical, and Ariadne-run verification before integration.
+- If Antigravity is unavailable, quota-capped, recuperating, silent without a
+  durable artifact, or blocked by CLI/app trouble in the current sprint window,
+  Ariadne should replace the Antigravity lane with DeepSeek Flash or a bounded
+  Ariadne-local task before using a native Codex subagent.
 - The configured `deepseek-worker` subagent may appear as nickname `Shen`.
   Verify identity from runtime metadata, not self-description: the current
   working setup records `agent_role=deepseek-worker`,
@@ -615,7 +622,11 @@ Codex role separation:
   auto-promote amended code to `master` until Yuri approves. The current safety
   point is branch `safety/ariadne-v1-before-deepseek` and tag
   `safety/ariadne-v1-before-deepseek-20260704-182049` at `9d74c84`.
-- Native OpenAI/Codex subagents remain part of the toolbox. When OpenAI usage
+- Native OpenAI/Codex subagents remain part of the toolbox, but they are not the
+  default worker-lane mix. Use them as fallback/integration helpers when Claude
+  or Antigravity is recuperating/unavailable, when more DeepSeek capacity is not
+  sufficient, when the work is tiny and tightly coupled to Ariadne's integration
+  pass, or when Codex-specific tooling is materially better. When OpenAI usage
   credit is healthy, Ariadne may run Claude, Antigravity, DeepSeek, and Codex
   subagents together on one sprint, or split truly independent work into
   parallel sprints, provided each lane has disjoint ownership, verification, and
@@ -740,10 +751,10 @@ Codex is the default orchestration agent for EMR4. This means:
   Antigravity/Gemini for an independent domain/product/test-design lane when
   Gemini quota is available, and use as many DeepSeek Flash workers as the
   sprint boundary can safely absorb for cheap bounded implementation/review
-  lanes. When Claude is capped or recuperating, spawn a DeepSeek Flash worker in
-  Claude's place. Escalate to DeepSeek Pro for reasoning-heavy worker tasks, and
-  reserve native Codex subagents for times when OpenAI usage is flowing or their
-  tool/context fit is clearly superior.
+  lanes. When Claude or Antigravity is capped or recuperating, spawn a DeepSeek
+  Flash worker in that lane's place. Escalate to DeepSeek Pro for
+  reasoning-heavy worker tasks, and reserve native Codex subagents for fallback,
+  integration-adjacent, or Codex-tooling-specific work.
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).
@@ -1007,6 +1018,9 @@ python scripts\agent_worktrees.py retire-stale --apply
 routine; they must be reviewed or explicitly abandoned first.
 
 9. Report final post-push closeout status to the user:
+   - where the sprint sits in the larger implementation plan: phase/programme
+     or strategy track, the kind of sprint it was, the larger objective it
+     advanced, and the next planned step
    - every Codex-side/tool-enabled review and test already run, including
      browser/Chrome/Office-dialog checks for UI work when relevant and available
    - any bounded hotfixes applied after those checks
@@ -1038,6 +1052,15 @@ manual clinical review, external credential/console action, failing verification
 worker protocol failure, or an unresolved safety/product decision. If notification
 delivery is not configured or fails, report that in the Codex closeout summary
 and continue with the in-thread notification.
+Every closeout must also answer the strategic-position question in plain
+language: "where did this sprint sit in the larger plan?" Name the active
+`implementation_plan.md` phase, `orchestration/phase_programmes.md` programme,
+or emerging strategy track; identify whether the sprint was a feature increment,
+guardrail hardening, independent-review integration, tooling/process repair, or
+strategy sprint; explain why its size was appropriate; and name the next
+planned step. If Ariadne cannot clearly place the sprint inside a larger arc,
+pause tactical micro-sprints and propose a strategy/planning sprint, potentially
+with Claude/Fable, before continuing.
 If a sprint closes cleanly and Ariadne's tool-enabled review leaves no
 Yuri-only tests, decisions, or approvals, Ariadne should keep the project moving:
 choose the next recommended sprint from the current programme/closeout state,

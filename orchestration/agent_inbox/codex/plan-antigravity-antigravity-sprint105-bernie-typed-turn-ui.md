@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint105-bernie-typed-turn-ui` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-02 23:34 +1000 |
 | Source HEAD | `0e9438b` |
 

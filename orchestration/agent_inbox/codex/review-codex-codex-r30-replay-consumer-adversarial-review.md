@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/r30-replay-consumer-adversarial-review` |
 | Source Task | `codex-r30-replay-consumer-adversarial-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

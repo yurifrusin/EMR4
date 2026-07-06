@@ -5,6 +5,129 @@ single source of truth for durable project state; this file tracks active branch
 For the layer between long phases and tactical sprints, use
 `orchestration/phase_programmes.md`.
 
+## Worker Mix Protocol
+
+Default non-trivial sprint lanes are cross-worker lanes: Claude,
+Antigravity/Gemini, and DeepSeek Flash. Ariadne must check Claude and
+Antigravity availability at the start of each sprint and record any
+substitution. If Claude or Antigravity is unavailable, recuperating,
+quota-capped, or fails to submit a durable artifact inside the sprint window,
+replace that lane with additional DeepSeek Flash work, bounded Ariadne work, or
+a native Codex subagent only as a fallback. Native Codex subagents are not the
+default meaning of "three lane sprint".
+
+## Next Sprint: Ariadne/Fable 100-Sprint Strategy Map
+
+| Item | Value |
+|---|---|
+| Status | Completed locally; strategy artifacts captured |
+| Product Goal | Restore the wider implementation view by mapping the next ~100 sprints across active EMR4 programmes, with explicit adaptation checkpoints rather than pretending the map will survive unchanged |
+| Worker Shape | Ariadne orchestration plus Claude/Fable strategy collaboration if available; use Fable/high-reasoning Claude for strategic review, not routine implementation |
+| In Scope | Review `implementation_plan.md`, `orchestration/phase_programmes.md`, recent H-series/Bernie closeouts, pending worker residue, active gates, and safety/product dependencies; produce a strategy artifact with programmes, sprint bands, dependencies, checkpoints, stop/pivot criteria, and recommended first 5-10 tactical sprints |
+| Out Of Scope | Runtime routes, providers, database writes, UI implementation, historical diary broad mining, H15/H-series runtime use, RAG/GraphRAG/memory wiring, and production code changes |
+| Required Adaptation Checkpoints | At least every 10 sprints; after any failed gate, major user decision, live-provider/runtime boundary change, security finding, or material architecture discovery |
+| Enabling Cleanup | Include stale inbox/Claude residue and durable worker-lane cleanup as a first-band orchestration workstream if needed, but do not let cleanup replace the strategy objective |
+| Fable Review | `orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md` |
+| Ariadne Synthesis | `orchestration/ariadne_fable_100_sprint_strategy_map.md` |
+
+## Sprint 98: Bernie Booking Loop Integrity
+
+| Item | Value |
+|---|---|
+| Status | Locally integrated and focused verification passed |
+| Programme | Programme 2G / EMR4 API Spine, with Phase 2B Bernie release-gate impact |
+| Goal | Remove the three Sprint 98 release blockers before API-spine/Access-AI wiring |
+| Backend lane | Typed `confirm-bernie` failures, entity blocks before revalidation, raw practitioner-id copy removed |
+| UI lane | Route-intercepted Diary coverage for candidate selection, choose-another-slot path, configured confirm endpoint, and ordinary-copy redaction |
+| Smoke lane | Ordinary Margaret Thompson / Dr Shera prompt evidence for 14:00-15:45 parsing, fake/mocked provider labeling, `live_provider=false`, and compact redaction |
+| Verification | `py_compile`; `node --check docs\diary\diary.js`; 41 focused backend/smoke tests; 6 route-intercepted Diary review tests; `git diff --check` line-ending warnings only |
+| Gates Still Closed | Live providers, broad historical diary mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+| Next | API root-to-branch plan review / API Spine ADR preparation |
+
+## API Root-To-Branch Plan Review
+
+| Item | Value |
+|---|---|
+| Status | Worker planning artifacts landed locally |
+| Programme | Programme 2G / EMR4 API Spine |
+| Goal | Prepare the API Spine ADR with independent domain/schema, frontend/agent UX, and security/audit/deployment input |
+| Domain/schema lane | `orchestration/agent_inbox/codex/plan-api-spine-domain-schema-review.md` |
+| Frontend/agent UX lane | `orchestration/agent_inbox/codex/plan-api-spine-frontend-agent-ux-review.md` |
+| Security/audit/deploy lane | `orchestration/agent_inbox/codex/plan-api-spine-security-audit-deploy-review.md` |
+| ADR | `orchestration/api_spine_adr.md` |
+| Next | Sprint 101 non-invasive schema prototype artifacts and validation |
+| Gates Still Closed | Runtime provider opening, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
+## Sprint 101: API Spine Schema Prototype
+
+| Item | Value |
+|---|---|
+| Status | Locally integrated and validation passed |
+| Programme | Programme 2G / EMR4 API Spine |
+| Goal | Add non-invasive appointment-first API Spine artifacts and validation |
+| GraphQL SDL | `docs/api-spine/graphql/appointment-diary-read.graphql` |
+| OpenAPI command draft | `docs/api-spine/openapi/appointment-commands.yaml` |
+| YAML manifests | `docs/api-spine/manifests/agent-capability-charters.yaml`; `docs/api-spine/manifests/practice-onboarding-example.yaml` |
+| Async/security examples | `docs/api-spine/async/integration-events.yaml`; `docs/api-spine/security/permission-matrix.yaml` |
+| Validation | `tests/test_api_spine_artifacts.py` |
+| Verification | `py_compile`; `.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q` (`28 passed`); `git diff --check` for artifact set |
+| Next | Sprint 102 API steward skill/subagent profile |
+| Gates Still Closed | Runtime provider opening, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, GraphQL mutations, external patient clients, and model-to-database writes |
+
+## Sprint 102: API Steward Skill
+
+| Item | Value |
+|---|---|
+| Status | Completed locally as personal Codex skill |
+| Programme | Programme 2G / EMR4 API Spine |
+| Goal | Create a standing API steward skill/profile to keep future sprints aligned with the API Spine |
+| Skill | `$emr4-api-steward` at `C:\Users\sarashera\.codex\skills\emr4-api-steward` |
+| Reference | `references/review-checklist.md` inside the skill |
+| Verification | `quick_validate.py C:\Users\sarashera\.codex\skills\emr4-api-steward` (`Skill is valid!`) |
+| Next | Access AI invocation service, fake-provider only |
+| Gates Still Closed | Runtime provider opening, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, GraphQL mutations, external patient clients, and model-to-database writes |
+
+## Access AI Invocation Service
+
+| Item | Value |
+|---|---|
+| Status | Existing implementation verified locally; async test harness repaired |
+| Programme | Programme 2F / Access AI API |
+| Goal | Confirm Access AI is the backend choke point for fake-provider invocation before audit/cost hardening |
+| Core files | `app/services/ai/access_service.py`; `app/services/ai/contracts.py`; `app/services/ai/registry.py`; `tests/test_access_ai_service.py` |
+| Local fix | Replaced unsupported `pytest.mark.asyncio` usage in `tests/test_access_ai_service.py` with plain `asyncio.run()` helper |
+| Verification | `py_compile`; `.venv\Scripts\python.exe -m pytest tests/test_access_ai_service.py tests/test_ai_audit_events.py tests/test_ai_costing.py tests/test_ai_entitlements.py tests/test_ai_capability_registry.py -q` (`33 passed`) |
+| Next | Access AI audit/cost envelope hardening |
+| Gates Still Closed | Live providers, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
+## Access AI Audit/Cost Envelope Hardening
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API |
+| Goal | Add deterministic budget/cost warning metadata and adversarial audit-safety tests without opening live providers |
+| Backend lane | `AiCostEnvelope.audit_metadata()` now emits deterministic budget metadata: `budget_limit_present`, `budget_threshold_ratio`, and `budget_warning` |
+| Test lane | Added adversarial fake-provider audit/cost tests for blocked entitlement variants, provider failure, capped capabilities, PHI-like metadata rejection, and no provider calls when blocked or dry-run |
+| Verification | `py_compile`; `.venv\Scripts\python.exe -m pytest tests/test_access_ai_service.py tests/test_ai_audit_events.py tests/test_ai_costing.py tests/test_ai_entitlements.py tests/test_ai_capability_registry.py -q` (`61 passed`); `git diff --check` for Access AI patch set |
+| Next | Access AI enterprise-auth/FGA boundary mapping, static/fake-provider only |
+| Gates Still Closed | Live providers, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
+## Sprint 84: Access AI Enterprise Auth/FGA Boundary
+
+| Item | Value |
+|---|---|
+| Status | Integrated locally; focused verification passed |
+| Programme | Programme 2F / Access AI API; Programme 2G / API Spine |
+| Goal | Map enterprise identity/FGA concepts into EMR4-owned Access AI roles and API Spine permission boundaries without adding runtime identity/FGA clients |
+| Design lane | Added `docs/access-ai-enterprise-auth-fga-boundary.md` |
+| Code/test lane | Added static external attribute mapping in `app/services/ai/external_identity.py`, with fail-closed filtering for unknown/misconfigured roles |
+| Guard lane | Extended `docs/api-spine/security/permission-matrix.yaml` and `tests/test_api_spine_artifacts.py` so enterprise-auth/FGA remains `static_mapping_only` and blocked runtime gates stay denied |
+| Worker mix note | Completed with already-assigned native Codex subagents before protocol correction; future non-trivial sprints must start with Claude and Antigravity availability checks and prefer Claude + Antigravity + DeepSeek |
+| Verification | `py_compile`; `.venv\Scripts\python.exe -m pytest tests/test_ai_external_identity.py tests/test_ai_entitlements.py tests/test_access_ai_service.py tests/test_api_spine_artifacts.py -q` (`64 passed`); `git diff --check` for Sprint 84 patch set |
+| Next | Sprint 85 Bernie interpreter migration through Access AI, fake-provider/default-disabled/no-write only |
+| Gates Still Closed | Runtime FGA clients, live providers, external patient clients, GraphQL mutations, broad trove mining, H15/H-series runtime imports, memory/RAG/GraphRAG, and model-to-database writes |
+
 ## Sprint H69: Orchestration Poll Legacy-Encoding Tolerance
 
 | Item | Value |

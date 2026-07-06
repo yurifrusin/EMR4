@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r11-reason-code-adversarial-tests` |
 | Source Task | `codex-sprint-r11-deepseek-reason-code-adversarial-tests` |
-| Status | pending_plan_review |
+| Status | superseded |
 | Created | 2026-07-05 18:43 +1000 |
 | Source HEAD | `01cf500` |
 

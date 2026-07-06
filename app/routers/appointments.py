@@ -7,6 +7,7 @@ from typing import Any, Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from fastapi import APIRouter, Body, Depends, HTTPException, Query, Response, status
 from fastapi.responses import JSONResponse
+from pydantic import ValidationError
 from sqlalchemy import or_
 from sqlalchemy.orm import Session, joinedload
 
@@ -5491,7 +5492,7 @@ def _resolve_selection_context(
     if practitioner_id is None:
         blocks.append(_selection_block(
             "missing_practitioner",
-            "practitioner_id is required when no normalized slot-search constraint supplies it.",
+            "Please choose a practitioner before preparing booking evidence.",
         ))
 
     return practitioner_id, appointment_type_id, location_id, patient_id
@@ -6271,6 +6272,26 @@ def _block_bernie_create_confirmation(
     )
 
 
+def _invalid_bernie_confirmation_payload() -> AppointmentConfirmCreateProposalOut:
+    return _block_bernie_create_confirmation(
+        [
+            _confirm_create_block(
+                "invalid_confirmation_payload",
+                "The booking confirmation could not be read. Please refresh the proposed booking and try again.",
+            )
+        ],
+        audit_evidence=list(_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE),
+    )
+
+
+def _append_unique_issue(
+    issues: list[AppointmentProposalIssue],
+    issue: AppointmentProposalIssue,
+) -> None:
+    if not any(existing.code == issue.code for existing in issues):
+        issues.append(issue)
+
+
 def _same_create_command(
     left: AppointmentCreateCommand,
     right: AppointmentCreateCommand,
@@ -6667,7 +6688,7 @@ def _validate_bernie_session_confirmation_binding(
     response_model=AppointmentConfirmCreateProposalOut,
 )
 def confirm_bernie_create_proposal(
-    body: BernieCreateProposalConfirmationIn,
+    body: Any = Body(...),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
@@ -6680,6 +6701,11 @@ def confirm_bernie_create_proposal(
     and one bounded audit evidence trail.
     """
     audit_evidence = list(_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE)
+    try:
+        body = BernieCreateProposalConfirmationIn.model_validate(body)
+    except ValidationError:
+        return _invalid_bernie_confirmation_payload()
+
     blocks: list[AppointmentProposalIssue] = []
     selection = body.selection_proposal
     create_proposal = selection.create_proposal
@@ -6851,6 +6877,14 @@ def confirm_bernie_create_proposal(
                     "Confirmation blocked: proposal freshness id does not match current session evidence.",
                 ))
 
+    if create_proposal is not None:
+        for entity_block in _check_create_command_entities(
+            create_proposal.command,
+            current_user.practice_id,
+            db,
+        ):
+            _append_unique_issue(blocks, entity_block)
+
     confirmation_session_id: Optional[str] = None
     if effective_session_binding is not None and not blocks:
         binding_session_id = effective_session_binding.get("session_id")
@@ -6919,18 +6953,6 @@ def confirm_bernie_create_proposal(
     if blocks:
         return _block_bernie_create_confirmation(
             blocks,
-            warnings=selection.warnings,
-            audit_evidence=audit_evidence,
-        )
-
-    entity_blocks = _check_create_command_entities(
-        create_proposal.command,
-        current_user.practice_id,
-        db,
-    )
-    if entity_blocks:
-        return _block_bound_confirmation(
-            entity_blocks,
             warnings=selection.warnings,
             audit_evidence=audit_evidence,
         )

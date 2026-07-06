@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `codex/sprint-r1-deepseek-scenario-integrity` |
 | Source Task | `codex-sprint-r1-deepseek-scenario-integrity` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 11:43 +1000 |
 | Source HEAD | `dde0e36` |
 

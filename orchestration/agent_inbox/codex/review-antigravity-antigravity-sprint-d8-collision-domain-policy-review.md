@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-d8-collision-domain-policy-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated in Sprint D8 collision source hardening; see
+  `orchestration/integration_log.md`.
+- Follow-up required: Backdated-date risk remains a future follow-up, not an
+  active D8 packet.

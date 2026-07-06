@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/fable-full-trove-readiness` |
 | Source Task | `claude-r28-fable-full-trove-readiness-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -30,5 +30,7 @@ Required before submit. These notes are copied into Codex's review packet automa
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated in R28 / H-series full-trove readiness checkpoint;
+  see `orchestration/integration_log.md` and `AGENTS.md`.
+- Follow-up required: Broad full-trove mining remains blocked until the
+  consumer/gate sequence recorded in the Fable review is satisfied.

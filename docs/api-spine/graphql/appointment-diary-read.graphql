@@ -1,0 +1,768 @@
+"""
+Sprint 101 appointment-first GraphQL read/context graph draft.
+
+This SDL is a non-runtime prototype. It defines no write root and grants no
+write, provider, external-system, memory, RAG, GraphRAG, H15, or historical
+diary trove access. State-changing work stays in REST/OpenAPI commands with
+freshness, confirmation, idempotency, and audit.
+"""
+
+scalar Date
+scalar DateTime
+scalar Time
+
+schema {
+  query: Query
+}
+
+type Query {
+  "Current authenticated principal and safe display affordances."
+  viewer: Viewer!
+
+  "Practice read model scoped by the viewer's tenancy and role."
+  practice(id: ID): Practice
+
+  "Patient summary for a specifically authorized patient."
+  patient(id: ID!): Patient
+
+  "Appointment-first diary day context. Availability fields are read-only hints."
+  diary(date: Date!, locationId: ID): DiaryDay!
+
+  "Appointment detail and audit read model for an authorized appointment."
+  appointment(id: ID!): Appointment
+
+  "Read-only Bernie booking/session context. Confirmation readiness is display state only."
+  bernieSession(id: ID!): BernieSession
+
+  "Conservative audit read model with explicit filters."
+  audit(filter: AuditFilter!): AuditConnection!
+
+  "Read-only directory lookup for coded/cited knowledge sources."
+  directorySearch(query: String!, source: DirectorySource!, limit: Int = 10): DirectorySearchResult!
+}
+
+type Viewer {
+  id: ID!
+  displayName: String!
+  role: ViewerRole!
+  practice: Practice!
+  practitioner: Practitioner
+  environment: EnvironmentPosture!
+  featureFlags: [FeatureFlag!]!
+  capabilities: [CapabilityHint!]!
+}
+
+type Practice {
+  id: ID!
+  name: String!
+  timezone: String!
+  locations: [PracticeLocation!]!
+  rooms(locationId: ID): [Room!]!
+  waitingAreas(locationId: ID): [WaitingArea!]!
+  appointmentTypes: [AppointmentType!]!
+  practitioners(activeOnly: Boolean = true): [Practitioner!]!
+  diaryTemplates(locationId: ID): [DiaryTemplate!]!
+  roster(date: Date!, locationId: ID): [DiaryRosterEntry!]!
+}
+
+type PracticeLocation {
+  id: ID!
+  name: String!
+  displayOrder: Int!
+  active: Boolean!
+}
+
+type Room {
+  id: ID!
+  location: PracticeLocation
+  name: String!
+  displayOrder: Int!
+  active: Boolean!
+}
+
+type WaitingArea {
+  id: ID!
+  location: PracticeLocation
+  name: String!
+  displayOrder: Int!
+  active: Boolean!
+  currentSummary: WaitingAreaSummary!
+}
+
+type WaitingAreaSummary {
+  totalWaiting: Int!
+  longestWaitingMinutes: Int
+  byStatus: [WaitingAreaStatusCount!]!
+}
+
+type WaitingAreaStatusCount {
+  status: WaitingAreaStatus!
+  count: Int!
+}
+
+type Practitioner {
+  id: ID!
+  displayName: String!
+  roleLabel: String
+  active: Boolean!
+  defaultLocation: PracticeLocation
+}
+
+type AppointmentType {
+  id: ID!
+  name: String!
+  colour: String
+  defaultDurationMinutes: Int!
+  active: Boolean!
+}
+
+type DiaryTemplate {
+  id: ID!
+  location: PracticeLocation
+  name: String!
+  startTime: Time!
+  endTime: Time!
+  slotIntervalMinutes: Int!
+  columns: [DiaryColumn!]!
+  breaks: [DiaryBreak!]!
+}
+
+type DiaryColumn {
+  id: ID!
+  label: String!
+  practitioner: Practitioner
+  room: Room
+  displayOrder: Int!
+  slotIntervalMinutes: Int
+}
+
+type DiaryBreak {
+  id: ID!
+  column: DiaryColumn
+  label: String!
+  startTime: Time!
+  endTime: Time!
+  breakType: DiaryBreakType!
+}
+
+type DiaryRosterEntry {
+  id: ID!
+  date: Date!
+  location: PracticeLocation
+  room: Room
+  practitioner: Practitioner
+  label: String
+  startTime: Time
+  endTime: Time
+}
+
+type DiaryDay {
+  date: Date!
+  location: PracticeLocation
+  template: DiaryTemplate
+  roster: [DiaryRosterEntry!]!
+  resources: [DiaryResource!]!
+  appointments: [AppointmentCard!]!
+  breaks: [DiaryBreak!]!
+  waitingAreas: [WaitingArea!]!
+  availabilityContext: AvailabilityContext!
+  contextFreshness: ContextFreshness!
+}
+
+union DiaryResource = Practitioner | Room | WaitingArea
+
+type AvailabilityContext {
+  requestedDate: Date!
+  location: PracticeLocation
+  slotIntervalMinutes: Int!
+  candidateWindows: [AvailabilityWindow!]!
+  blockedReasonCodes: [BlockedReasonCode!]!
+  # Read-only hint for UI display. It is not a grant to create, move, resize,
+  # confirm, or otherwise mutate an appointment.
+  canShowBookingAffordance: Boolean!
+}
+
+type AvailabilityWindow {
+  startsAt: DateTime!
+  endsAt: DateTime!
+  practitioner: Practitioner
+  room: Room
+  evidence: [EvidenceFrame!]!
+  warnings: [DisplayWarning!]!
+  blockedReasonCodes: [BlockedReasonCode!]!
+}
+
+interface AppointmentSummary {
+  id: ID!
+  startsAt: DateTime!
+  endsAt: DateTime!
+  durationMinutes: Int!
+  status: AppointmentStatus!
+  type: AppointmentType
+  practitioner: Practitioner!
+  location: PracticeLocation
+}
+
+type AppointmentCard implements AppointmentSummary {
+  id: ID!
+  startsAt: DateTime!
+  endsAt: DateTime!
+  durationMinutes: Int!
+  status: AppointmentStatus!
+  type: AppointmentType
+  practitioner: Practitioner!
+  location: PracticeLocation
+  patient: PatientBrief
+  room: Room
+  waitingArea: WaitingArea
+  reasonSummary: String
+  noteSummary: String
+  warnings: [DisplayWarning!]!
+  breaksOverlap: Boolean!
+  contextFreshness: ContextFreshness!
+}
+
+type Appointment implements AppointmentSummary {
+  id: ID!
+  startsAt: DateTime!
+  endsAt: DateTime!
+  durationMinutes: Int!
+  status: AppointmentStatus!
+  type: AppointmentType
+  practitioner: Practitioner!
+  location: PracticeLocation
+  patient: PatientBrief
+  room: Room
+  waitingArea: WaitingArea
+  reasonSummary: String
+  noteSummary: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  proposalState: AppointmentProposalReadState
+  warnings: [DisplayWarning!]!
+  auditTrail(first: Int = 20, after: String): AppointmentAuditConnection!
+  contextFreshness: ContextFreshness!
+}
+
+type AppointmentProposalReadState {
+  id: ID
+  intent: AppointmentIntent!
+  status: ProposalStatus!
+  autonomyTier: AutonomyTier!
+  summary: String!
+  warnings: [DisplayWarning!]!
+  blocks: [ProposalBlock!]!
+  evidence: [ProposalEvidence!]!
+  confirmationReadiness: ConfirmationReadiness!
+  contextFreshness: ContextFreshness!
+}
+
+type ConfirmationReadiness {
+  state: ConfirmationReadinessState!
+  required: Boolean!
+  blockedReasonCodes: [BlockedReasonCode!]!
+  # Display-only hint. REST confirmation commands must still revalidate
+  # freshness, role, tenancy, evidence, conflicts, and staff confirmation.
+  canShowConfirmButton: Boolean!
+}
+
+type ProposalEvidence {
+  id: ID!
+  label: String!
+  mode: EvidenceMode!
+  source: ContextFrameSource!
+  summary: String!
+  observedAt: DateTime
+}
+
+type ProposalBlock {
+  code: BlockedReasonCode!
+  label: String!
+  severity: WarningSeverity!
+}
+
+type AppointmentAuditConnection {
+  edges: [AppointmentAuditEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AppointmentAuditEdge {
+  cursor: String!
+  node: AppointmentAuditEvent!
+}
+
+type AppointmentAuditEvent {
+  id: ID!
+  appointmentId: ID!
+  occurredAt: DateTime!
+  actor: AuditActor!
+  action: AppointmentAuditAction!
+  outcome: AuditOutcome!
+  correlationId: String
+  evidenceMode: EvidenceMode!
+  summary: String!
+}
+
+type Patient {
+  id: ID!
+  brief: PatientBrief!
+  document: PatientDocumentMetadata
+  clinicalSummary: PatientClinicalSummary
+  recentAppointments(first: Int = 10): [AppointmentCard!]!
+  futureAppointments(first: Int = 10): [AppointmentCard!]!
+  reminders: [PatientReminder!]!
+  messages: [PatientMessageSummary!]!
+  bookingContext: PatientBookingContext!
+}
+
+type PatientBrief {
+  id: ID!
+  displayName: String!
+  preferredName: String
+  dateOfBirth: Date
+  ageLabel: String
+  genderLabel: String
+  alerts: [PatientAlert!]!
+}
+
+type PatientAlert {
+  id: ID!
+  severity: WarningSeverity!
+  label: String!
+}
+
+type PatientDocumentMetadata {
+  documentId: ID
+  documentUrlPresent: Boolean!
+  lastLinkedAt: DateTime
+}
+
+type PatientClinicalSummary {
+  activeProblems: [ClinicalSummaryItem!]!
+  allergies: [ClinicalSummaryItem!]!
+  activeMedications: [ClinicalSummaryItem!]!
+  lastEncounterAt: DateTime
+}
+
+type ClinicalSummaryItem {
+  id: ID!
+  label: String!
+  recordedAt: DateTime
+}
+
+type PatientReminder {
+  id: ID!
+  dueAt: DateTime
+  summary: String!
+  status: ReminderStatus!
+}
+
+type PatientMessageSummary {
+  id: ID!
+  sentAt: DateTime!
+  channel: MessageChannel!
+  summary: String!
+  status: MessageStatus!
+}
+
+type PatientBookingContext {
+  recentAppointmentCount: Int!
+  futureAppointmentCount: Int!
+  usualPractitioner: Practitioner
+  hasFutureBooking: Boolean!
+  existingFutureFollowUp: AppointmentCard
+  contextFreshness: ContextFreshness!
+}
+
+type BernieSession {
+  id: ID!
+  sessionRevision: Int!
+  state: BernieSessionState!
+  patientCandidates: [PatientCandidate!]!
+  selectedPatient: PatientBrief
+  selectedDiaryContext: DiaryDay
+  candidateSlots: [BernieCandidateSlot!]!
+  staffReview: BernieStaffReviewContext
+  outcomeEvents: [BernieOutcomeEvent!]!
+  contextFreshness: ContextFreshness!
+}
+
+type PatientCandidate {
+  patient: PatientBrief!
+  confidenceLabel: ConfidenceLabel!
+  evidence: [EvidenceFrame!]!
+}
+
+type BernieCandidateSlot {
+  startsAt: DateTime!
+  endsAt: DateTime!
+  practitioner: Practitioner
+  room: Room
+  evidence: [EvidenceFrame!]!
+  warnings: [DisplayWarning!]!
+}
+
+type BernieStaffReviewContext {
+  displayState: StaffReviewDisplayState!
+  proposal: AppointmentProposalReadState
+  # Read-only affordance state. It must not be used as a command payload or a
+  # shortcut around REST proposal/confirm endpoints.
+  confirmAffordance: ConfirmationReadiness!
+  contextFrames: [ContextFrame!]!
+}
+
+type BernieOutcomeEvent {
+  id: ID!
+  occurredAt: DateTime!
+  kind: BernieOutcomeKind!
+  summary: String!
+  evidenceMode: EvidenceMode!
+}
+
+type ContextFrame {
+  id: ID!
+  label: ContextFrameLabel!
+  source: ContextFrameSource!
+  summary: String!
+  freshness: ContextFreshness
+  evidence: [EvidenceFrame!]!
+}
+
+type EvidenceFrame {
+  id: ID!
+  label: String!
+  mode: EvidenceMode!
+  source: ContextFrameSource!
+  summary: String!
+}
+
+type ContextFreshness {
+  id: ID!
+  observedAt: DateTime!
+  expiresAt: DateTime
+  stale: Boolean!
+  reason: String
+}
+
+type DisplayWarning {
+  code: String!
+  label: String!
+  severity: WarningSeverity!
+}
+
+type AuditConnection {
+  edges: [AuditEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AuditEdge {
+  cursor: String!
+  node: AuditEvent!
+}
+
+type AuditEvent {
+  id: ID!
+  occurredAt: DateTime!
+  actor: AuditActor!
+  target: AuditTarget!
+  action: String!
+  outcome: AuditOutcome!
+  evidenceMode: EvidenceMode!
+  correlationId: String
+  summary: String!
+}
+
+input AuditFilter {
+  targetType: AuditTargetType
+  targetId: ID
+  actorId: ID
+  correlationId: String
+  occurredFrom: DateTime
+  occurredTo: DateTime
+  first: Int = 20
+  after: String
+}
+
+type AuditActor {
+  id: ID!
+  displayName: String!
+  actorType: AuditActorType!
+}
+
+type AuditTarget {
+  id: ID!
+  targetType: AuditTargetType!
+  label: String!
+}
+
+type DirectorySearchResult {
+  source: DirectorySource!
+  query: String!
+  items: [DirectoryEntry!]!
+  evidenceMode: EvidenceMode!
+}
+
+type DirectoryEntry {
+  id: ID!
+  code: String
+  title: String!
+  summary: String!
+  citation: Citation
+}
+
+type Citation {
+  title: String!
+  url: String
+  accessedAt: DateTime
+}
+
+type CapabilityHint {
+  key: String!
+  label: String!
+  permitted: Boolean!
+  reason: String
+}
+
+type FeatureFlag {
+  key: String!
+  enabled: Boolean!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  endCursor: String
+}
+
+# Deliberate exclusions: this read graph has no raw provider prompts, raw model
+# responses, raw diary trove/H15/H-series outputs, ignored local payloads,
+# memory/RAG/GraphRAG fields, unrestricted clinical note dumps, or generic
+# database introspection fields.
+
+enum ViewerRole {
+  RECEPTIONIST
+  PRACTICE_MANAGER
+  GP
+  NURSE
+  ADMIN
+  AGENT
+  INTEGRATION
+}
+
+enum EnvironmentPosture {
+  DEV
+  TEST
+  STAGING
+  PRODUCTION
+}
+
+enum AppointmentStatus {
+  BOOKED
+  CONFIRMED
+  ARRIVED
+  IN_CONSULT
+  COMPLETED
+  CANCELLED
+  DID_NOT_ATTEND
+}
+
+enum WaitingAreaStatus {
+  WAITING
+  READY
+  IN_CONSULT
+  COMPLETED
+}
+
+enum DiaryBreakType {
+  BREAK
+  LUNCH
+  MEETING
+  UNAVAILABLE
+}
+
+enum AppointmentIntent {
+  CREATE
+  MOVE
+  RESIZE
+  STATUS_CHANGE
+  WAITING_AREA_MOVE
+  CANCEL
+  DELETE
+  EXPLAIN_SCHEDULE
+}
+
+enum ProposalStatus {
+  DRAFT_INTENT
+  PROPOSAL_READY
+  CONFIRMATION_READY
+  BLOCKED
+  STALE
+  SUPERSEDED
+  CONFIRMED_WRITE
+}
+
+enum AutonomyTier {
+  READ_ONLY
+  PROPOSE_ONLY
+  STAFF_CONFIRM_REQUIRED
+  DOCTOR_CONFIRM_REQUIRED
+  EXTERNAL_CONFIRM_REQUIRED
+}
+
+enum ConfirmationReadinessState {
+  NOT_REQUIRED
+  READY_FOR_STAFF_REVIEW
+  READY_FOR_CONFIRM_COMMAND
+  BLOCKED
+  STALE
+}
+
+enum EvidenceMode {
+  LIVE_API_FACT
+  STAFF_SELECTED
+  CALLER_SIGNAL
+  MANIFEST_POLICY
+  MODEL_INTERPRETATION
+  FIXTURE_INTERCEPTED
+  ROUTE_INTERCEPTED
+  FAKE_PROVIDER
+  MOCKED_PROVIDER
+  LIVE_BACKEND
+  LIVE_PROVIDER
+}
+
+enum ContextFrameLabel {
+  LIVE_API_FACT
+  STAFF_SELECTED
+  CALLER_SIGNAL
+  MANIFEST_POLICY
+  MODEL_INTERPRETATION
+  FIXTURE_INTERCEPTED
+}
+
+enum ContextFrameSource {
+  VIEWER
+  PRACTICE
+  PATIENT
+  DIARY
+  APPOINTMENT
+  BERNIE_SESSION
+  AUDIT
+  DIRECTORY
+  MANIFEST
+}
+
+enum BlockedReasonCode {
+  NONE
+  UNAUTHORIZED
+  TENANT_SCOPE_MISMATCH
+  PATIENT_IDENTITY_AMBIGUOUS
+  PRACTITIONER_UNAVAILABLE
+  ROOM_UNAVAILABLE
+  BREAK_OVERLAP
+  APPOINTMENT_CONFLICT
+  STALE_CONTEXT
+  CONFIRMATION_REQUIRED
+  POLICY_BLOCKED
+  NOT_IMPLEMENTED
+}
+
+enum WarningSeverity {
+  INFO
+  WARNING
+  BLOCKING
+}
+
+enum AppointmentAuditAction {
+  PROPOSAL_STAGED
+  CONFIRMED_CREATE
+  CONFIRMED_UPDATE
+  CONFIRMED_STATUS_CHANGE
+  CONFIRMED_WAITING_AREA_MOVE
+  CONFIRMED_CANCEL
+  DIRECT_COMPATIBILITY_WRITE
+  READ
+}
+
+enum AuditOutcome {
+  ALLOWED
+  DENIED
+  BLOCKED
+  FAILED
+  SUCCEEDED
+}
+
+enum AuditActorType {
+  HUMAN_USER
+  AGENT
+  INTEGRATION
+  SYSTEM
+}
+
+enum AuditTargetType {
+  APPOINTMENT
+  PATIENT
+  DIARY
+  PRACTICE
+  ACCESS_AI
+  DIRECTORY
+}
+
+enum DirectorySource {
+  MBS
+  SNOMED
+  RACGP_GUIDELINES
+  COCHRANE_LIBRARY
+}
+
+enum ReminderStatus {
+  OPEN
+  COMPLETED
+  DISMISSED
+}
+
+enum MessageChannel {
+  INTERNAL
+  SMS
+  EMAIL
+}
+
+enum MessageStatus {
+  DRAFT
+  SENT
+  RECEIVED
+  FAILED
+  READ
+}
+
+enum BernieSessionState {
+  OPEN
+  NEEDS_CLARIFICATION
+  STAFF_REVIEW
+  CONFIRM_READY
+  COMPLETED
+  BLOCKED
+}
+
+enum ConfidenceLabel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum StaffReviewDisplayState {
+  READ_ONLY_CONTEXT
+  CANDIDATE_SELECTION
+  PROPOSAL_REVIEW
+  CONFIRMATION_REVIEW
+  BLOCKED
+}
+
+enum BernieOutcomeKind {
+  READ_CONTEXT_SHOWN
+  CLARIFICATION_REQUESTED
+  CANDIDATES_PRESENTED
+  PROPOSAL_READY
+  CONFIRMATION_READY
+  REFUSED_UNSAFE
+  BLOCKED
+}

@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `master` |
 | Source Task | `codex-r30-replay-consumer-adversarial-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-06 15:52 +1000 |
 | Source HEAD | `fdb3cdb9` |
 

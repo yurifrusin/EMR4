@@ -1,0 +1,290 @@
+schema_version: api-spine.permission-matrix.v0
+artifact_kind: non_invasive_permission_fixture_example
+status: prototype_only
+model: abac_default_deny
+source_safety:
+  phi: none
+  examples: authored_synthetic
+  enterprise_auth_fga_boundary: static_mapping_only
+  runtime_fga_clients: blocked
+  runtime_wiring: blocked
+  provider_calls: blocked
+  live_provider_opening: blocked
+  external_patient_clients: blocked
+  graph_ql_mutations: blocked
+  historical_diary_trove_access: blocked
+  h15_or_h_series_runtime_imports: blocked
+  memory_rag_graphrag: blocked
+  model_to_database_writes: blocked
+notes:
+  - This fixture names example role/action/resource decisions for future tests.
+  - A missing role/action/resource triple must evaluate to deny.
+  - Agents are principals with narrower delegated authority than the invoking human.
+  - Database RLS or an RLS-equivalent milestone remains required before production external clients or live providers.
+  - Enterprise-auth and FGA terms are a static boundary map only; this artifact does not enable a runtime FGA client, external identity write path, external patient client, or live provider.
+
+roles:
+  - role_id: receptionist
+    principal_kind: human_user
+  - role_id: nurse
+    principal_kind: human_user
+  - role_id: gp
+    principal_kind: human_user
+  - role_id: practice_manager
+    principal_kind: human_user
+  - role_id: practice_owner
+    principal_kind: human_user
+  - role_id: agent:bernie
+    principal_kind: agent
+  - role_id: agent:davida
+    principal_kind: agent
+  - role_id: agent:consultant
+    principal_kind: agent
+  - role_id: integration:caller_id
+    principal_kind: integration
+  - role_id: integration:sms
+    principal_kind: integration
+  - role_id: integration:pathology
+    principal_kind: integration
+  - role_id: integration:billing
+    principal_kind: integration
+
+actions:
+  read: read scoped resource data
+  list: list scoped resource collections
+  propose: prepare non-final proposal or dry-run
+  confirm: commit a human-confirmed state change
+  cancel: cancel a committed appointment or workflow
+  administer: change setup, policy, or practice configuration
+  ingest: ingest external event through an authenticated integration command
+  invoke_ai: request Access AI capability through backend entitlement checks
+  audit_read: read audit metadata
+  delete: delete or destructive removal
+
+resources:
+  - diary_day
+  - appointment
+  - appointment_proposal
+  - waiting_area
+  - patient_summary
+  - clinical_note
+  - practice_manifest
+  - ai_capability
+  - audit_event
+  - caller_context
+  - sms_message
+  - pathology_result
+  - billing_record
+  - knowledge_source
+
+defaults:
+  decision: deny
+  deny_reason: missing_explicit_allow
+  applies_to:
+    - unknown_role
+    - unknown_action
+    - unknown_resource
+    - omitted_practice_scope
+    - cross_practice_resource
+    - stale_or_missing_confirmation_evidence
+    - live_provider_gate_closed
+    - historical_trove_or_h15_runtime_gate_closed
+    - memory_rag_graphrag_gate_closed
+
+allow_examples:
+  - role: receptionist
+    action: read
+    resource: diary_day
+    conditions:
+      practice_scope: same_practice
+      phi_scope: operational_minimum
+  - role: receptionist
+    action: propose
+    resource: appointment_proposal
+    conditions:
+      practice_scope: same_practice
+      staff_session: required
+      final_write: false
+  - role: receptionist
+    action: confirm
+    resource: appointment
+    conditions:
+      practice_scope: same_practice
+      signed_confirmation_evidence: required
+      idempotency_key: required
+      audit_event: required
+  - role: nurse
+    action: read
+    resource: diary_day
+    conditions:
+      practice_scope: same_practice
+      phi_scope: operational_minimum
+  - role: nurse
+    action: propose
+    resource: appointment_proposal
+    conditions:
+      practice_scope: same_practice
+      final_write: false
+  - role: gp
+    action: read
+    resource: clinical_note
+    conditions:
+      practice_scope: same_practice
+      clinical_read_audit: required
+  - role: gp
+    action: confirm
+    resource: clinical_note
+    conditions:
+      practice_scope: same_practice
+      doctor_confirmation: required
+      audit_event: required
+  - role: practice_manager
+    action: administer
+    resource: practice_manifest
+    conditions:
+      practice_scope: same_practice
+      dry_run_first: required
+      audit_event: required
+  - role: practice_owner
+    action: audit_read
+    resource: audit_event
+    conditions:
+      practice_scope: same_practice
+      aggregate_or_authorized_detail_only: true
+  - role: agent:bernie
+    action: read
+    resource: caller_context
+    conditions:
+      delegated_by_human_role:
+        - receptionist
+        - gp
+        - practice_manager
+      identity_proof: false
+  - role: agent:bernie
+    action: propose
+    resource: appointment_proposal
+    conditions:
+      delegated_by_human_role:
+        - receptionist
+        - gp
+        - practice_manager
+      final_write: false
+      staff_confirmation_required_for_write: true
+  - role: agent:davida
+    action: propose
+    resource: practice_manifest
+    conditions:
+      dry_run_only: true
+      final_write: false
+  - role: agent:consultant
+    action: read
+    resource: knowledge_source
+    conditions:
+      delegated_by_human_role:
+        - gp
+      citations_required: true
+      licensed_runtime: blocked
+  - role: integration:caller_id
+    action: ingest
+    resource: caller_context
+    conditions:
+      integration_principal: required
+      signature_or_mtls: required
+      idempotency_key: required
+      may_verify_identity: false
+  - role: integration:sms
+    action: ingest
+    resource: sms_message
+    conditions:
+      integration_principal: required
+      signature_or_mtls: required
+      idempotency_key: required
+      raw_sms_body_logging: forbidden
+  - role: integration:pathology
+    action: ingest
+    resource: pathology_result
+    conditions:
+      integration_principal: required
+      signature_or_mtls: required
+      idempotency_key: required
+      raw_result_text_in_event_metadata: forbidden
+  - role: integration:billing
+    action: ingest
+    resource: billing_record
+    conditions:
+      integration_principal: required
+      signature_or_mtls: required
+      idempotency_key: required
+      regulated_submission_command_required: true
+
+explicit_deny_examples:
+  - role: receptionist
+    action: administer
+    resource: practice_manifest
+    deny_reason: role_not_authorized_for_practice_configuration
+  - role: receptionist
+    action: delete
+    resource: clinical_note
+    deny_reason: destructive_clinical_action_forbidden
+  - role: nurse
+    action: confirm
+    resource: appointment
+    deny_reason: confirmation_authority_not_granted_in_example_policy
+  - role: agent:bernie
+    action: confirm
+    resource: appointment
+    deny_reason: agent_must_not_perform_final_write
+  - role: agent:bernie
+    action: read
+    resource: clinical_note
+    deny_reason: receptionist_agent_not_authorized_for_clinical_note_context
+  - role: agent:davida
+    action: administer
+    resource: practice_manifest
+    deny_reason: davida_can_prepare_dry_run_not_apply_changes
+  - role: agent:consultant
+    action: confirm
+    resource: clinical_note
+    deny_reason: doctor_confirmation_required_for_record_mutation
+  - role: integration:caller_id
+    action: confirm
+    resource: appointment
+    deny_reason: caller_id_is_context_signal_only
+  - role: integration:sms
+    action: confirm
+    resource: appointment
+    deny_reason: sms_reply_may_trigger_proposal_only
+  - role: integration:pathology
+    action: invoke_ai
+    resource: ai_capability
+    deny_reason: integration_ingest_does_not_imply_ai_invocation
+  - role: integration:billing
+    action: read
+    resource: patient_summary
+    deny_reason: billing_integration_receives_billing_scoped_resources_only
+
+blocked_gates:
+  runtime_fga_clients:
+    decision: deny
+    required_future_review: enterprise auth/FGA runtime client design and security review
+  live_provider_runtime:
+    decision: deny
+    required_future_review: Access AI entitlement, audit, budget, and provider gate
+  external_patient_clients:
+    decision: deny
+    required_future_review: external patient/client authentication, RLS, rate-limit, and privacy review
+  broad_historical_diary_trove_mining:
+    decision: deny
+    required_future_review: reviewed trove mining sprint with explicit approval
+  h15_h_series_runtime_imports:
+    decision: deny
+    required_future_review: H15/H-series runtime import gate review
+  memory_rag_graphrag_runtime:
+    decision: deny
+    required_future_review: memory/RAG/GraphRAG architecture and privacy review
+  graph_ql_mutations:
+    decision: deny
+    required_future_review: no reviewed exception exists
+  model_to_database_writes:
+    decision: deny
+    required_future_review: human confirmation and command audit design

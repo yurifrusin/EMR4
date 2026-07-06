@@ -1,0 +1,1595 @@
+openapi: 3.1.0
+info:
+  title: EMR4 Appointment Command Surface Draft
+  version: 0.1.0
+  summary: Appointment-first REST/OpenAPI command envelope prototype.
+  description: >
+    Sprint 101 non-invasive schema draft for appointment proposal, confirmation,
+    and slot-search command-style read surfaces. This artifact documents the
+    command plane only. It does not define runtime routes, provider wiring,
+    memory/RAG/GraphRAG access, historical diary trove access, or GraphQL
+    mutations. GraphQL may expose read/context state and affordance hints, but
+    it cannot execute these commands or act as a generic command tunnel.
+servers:
+  - url: https://api.example.invalid/api/v1
+    description: Documentation placeholder; not a live EMR4 endpoint.
+tags:
+  - name: AppointmentCommands
+    description: Staff-confirmed scheduling commands and proposal preparation.
+  - name: SlotSearchCommands
+    description: Non-mutating command-style reads that prepare executable proposals.
+
+paths:
+  /appointments/proposals/create:
+    post:
+      tags: [AppointmentCommands]
+      operationId: proposeAppointmentCreate
+      summary: Prepare a create-appointment proposal envelope.
+      description: >
+        Resolves current diary state, policy, tenant scope, conflicts, breaks,
+        identity, and freshness. Returns a typed proposal for staff review; it
+        does not create an appointment.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentCreateProposalCommand"
+            examples:
+              safeCreateProposal:
+                $ref: "#/components/examples/AppointmentCreateProposalCommand"
+      responses:
+        "200":
+          description: Proposal prepared for staff confirmation or blocked with typed reasons.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentCreateProposalEnvelope"
+              examples:
+                confirmationReady:
+                  $ref: "#/components/examples/AppointmentCreateProposalEnvelope"
+
+  /appointments/proposals/create/confirm:
+    post:
+      tags: [AppointmentCommands]
+      operationId: confirmAppointmentCreateProposal
+      summary: Confirm backend-prepared create proposal evidence.
+      description: >
+        Writes only after explicit confirmation. The backend recomputes the
+        proposal, verifies freshness, signed evidence, confirmer authority,
+        tenant scope, warnings, and blocks before creating the appointment and
+        emitting audit evidence.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentCreateConfirmationCommand"
+            examples:
+              confirmCreate:
+                $ref: "#/components/examples/AppointmentCreateConfirmationCommand"
+      responses:
+        "200":
+          description: Confirmed write result, or a blocked confirmation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentConfirmResultEnvelope"
+              examples:
+                confirmed:
+                  $ref: "#/components/examples/AppointmentConfirmResultEnvelope"
+
+  /appointments/proposals/update:
+    post:
+      tags: [AppointmentCommands]
+      operationId: proposeAppointmentUpdate
+      summary: Prepare an update/reschedule proposal envelope.
+      description: >
+        Non-mutating preparation for appointment time, duration, practitioner,
+        appointment type, patient/provisional name, reason, or notes changes.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentUpdateProposalCommand"
+      responses:
+        "200":
+          description: Update proposal prepared or blocked.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentUpdateProposalEnvelope"
+
+  /appointments/proposals/update/confirm:
+    post:
+      tags: [AppointmentCommands]
+      operationId: confirmAppointmentUpdateProposal
+      summary: Confirm backend-prepared update proposal evidence.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentUpdateConfirmationCommand"
+      responses:
+        "200":
+          description: Confirmed update result, or a blocked confirmation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentConfirmResultEnvelope"
+
+  /appointments/proposals/status:
+    post:
+      tags: [AppointmentCommands]
+      operationId: proposeAppointmentStatus
+      summary: Prepare a status or waiting-area proposal envelope.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentStatusProposalCommand"
+      responses:
+        "200":
+          description: Status/waiting-area proposal prepared or blocked.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentStatusProposalEnvelope"
+
+  /appointments/proposals/status/confirm:
+    post:
+      tags: [AppointmentCommands]
+      operationId: confirmAppointmentStatusProposal
+      summary: Confirm backend-prepared status or waiting-area proposal evidence.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentStatusConfirmationCommand"
+      responses:
+        "200":
+          description: Confirmed status/waiting-area result, or a blocked confirmation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentConfirmResultEnvelope"
+
+  /appointments/proposals/delete:
+    post:
+      tags: [AppointmentCommands]
+      operationId: proposeAppointmentDelete
+      summary: Prepare a delete/cancel proposal envelope.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentDeleteProposalCommand"
+      responses:
+        "200":
+          description: Delete proposal prepared or blocked.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentDeleteProposalEnvelope"
+
+  /appointments/proposals/delete/confirm:
+    post:
+      tags: [AppointmentCommands]
+      operationId: confirmAppointmentDeleteProposal
+      summary: Confirm backend-prepared delete/cancel proposal evidence.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentDeleteConfirmationCommand"
+      responses:
+        "200":
+          description: Confirmed delete/cancel result, or a blocked confirmation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentConfirmResultEnvelope"
+
+  /appointments/proposals/slot-search/normalize:
+    post:
+      tags: [SlotSearchCommands]
+      operationId: normalizeSlotSearchCommand
+      summary: Normalize staff/agent slot-search input.
+      description: >
+        Command-style read. Produces deterministic normalized constraints and
+        typed warnings/blocks; it does not search slots, write state, call
+        providers, or create proposal authority.
+      parameters:
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlotSearchNormalizeCommand"
+            examples:
+              normalize:
+                $ref: "#/components/examples/SlotSearchNormalizeCommand"
+      responses:
+        "200":
+          description: Normalized slot-search command or typed block.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SlotSearchNormalizeEnvelope"
+              examples:
+                normalized:
+                  $ref: "#/components/examples/SlotSearchNormalizeEnvelope"
+
+  /appointments/proposals/slot-search:
+    post:
+      tags: [SlotSearchCommands]
+      operationId: proposeSlotSearch
+      summary: Search candidate slots from normalized constraints.
+      description: >
+        Command-style read. Returns candidate slots and freshness evidence for
+        later selection; it does not reserve or create an appointment.
+      parameters:
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlotSearchProposalCommand"
+            examples:
+              propose:
+                $ref: "#/components/examples/SlotSearchProposalCommand"
+      responses:
+        "200":
+          description: Candidate slots, no-slot suggestions, or typed block.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SlotSearchProposalEnvelope"
+              examples:
+                candidates:
+                  $ref: "#/components/examples/SlotSearchProposalEnvelope"
+
+  /appointments/proposals/slot-search/select:
+    post:
+      tags: [SlotSearchCommands]
+      operationId: selectSlotForCreateProposal
+      summary: Select one slot candidate and prepare create-proposal evidence.
+      description: >
+        Command-style read that transforms a selected candidate into a
+        create-appointment proposal envelope. The returned proposal still
+        requires explicit staff confirmation through the command plane.
+      parameters:
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlotSelectionCommand"
+            examples:
+              select:
+                $ref: "#/components/examples/SlotSelectionCommand"
+      responses:
+        "200":
+          description: Create proposal prepared from the selected slot, or typed block.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SlotSelectionProposalEnvelope"
+              examples:
+                selected:
+                  $ref: "#/components/examples/SlotSelectionProposalEnvelope"
+
+components:
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: >
+        Client-generated key for mutating or confirmation-grade command
+        attempts. The server must bind it to actor, practice, operation, and
+        request body hash before replaying a prior result.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+        examples: ["idem_01J2SLOTCONFIRM000000000001"]
+    CorrelationId:
+      name: X-Correlation-Id
+      in: header
+      required: false
+      description: Request correlation id propagated into audit and event records.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+        examples: ["corr_01J2BOOKINGFLOW0000000001"]
+
+  schemas:
+    Uuid:
+      type: string
+      format: uuid
+
+    ClinicDate:
+      type: string
+      format: date
+
+    ClinicTime:
+      type: string
+      pattern: "^([01][0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$"
+      examples: ["09:30:00"]
+
+    DateTime:
+      type: string
+      format: date-time
+
+    ActorRef:
+      type: object
+      required: [actor_id, actor_type, display, role]
+      additionalProperties: false
+      properties:
+        actor_id:
+          $ref: "#/components/schemas/Uuid"
+        actor_type:
+          type: string
+          enum: [human_user, agent, integration]
+        display:
+          type: string
+        role:
+          type: string
+          enum: [receptionist, practice_manager, gp, nurse, admin, agent, integration]
+        practitioner_id:
+          $ref: "#/components/schemas/Uuid"
+
+    ConfirmerRef:
+      type: object
+      required: [confirmed_by_user_id, confirmed_by_display, confirmed_at]
+      additionalProperties: false
+      properties:
+        confirmed_by_user_id:
+          $ref: "#/components/schemas/Uuid"
+        confirmed_by_display:
+          type: string
+        confirmed_by_role:
+          type: string
+        confirmed_at:
+          $ref: "#/components/schemas/DateTime"
+        confirmation_surface:
+          type: string
+          enum: [diary_grid, bernie_staff_review, command_centre, api_client]
+
+    PracticeScope:
+      type: object
+      required: [practice_id]
+      additionalProperties: false
+      properties:
+        practice_id:
+          $ref: "#/components/schemas/Uuid"
+        location_id:
+          $ref: "#/components/schemas/Uuid"
+
+    CommandMeta:
+      type: object
+      required: [actor, practice, correlation_id, requested_at]
+      additionalProperties: false
+      properties:
+        actor:
+          $ref: "#/components/schemas/ActorRef"
+        practice:
+          $ref: "#/components/schemas/PracticeScope"
+        correlation_id:
+          type: string
+        requested_at:
+          $ref: "#/components/schemas/DateTime"
+        source_surface:
+          type: string
+          enum: [diary_grid, bernie_staff_review, taskpane, command_centre, api_client]
+        evidence_label:
+          type: string
+          enum: [live_api_fact, staff_selected, caller_signal, manifest_policy, model_interpretation, fixture_intercepted]
+
+    FreshnessRef:
+      type: object
+      required: [freshness_id, basis, generated_at, expires_at]
+      additionalProperties: false
+      properties:
+        freshness_id:
+          type: string
+        basis:
+          type: string
+          enum:
+            - create_proposal
+            - update_proposal
+            - status_proposal
+            - delete_proposal
+            - candidate_slot
+            - bernie_session
+        generated_at:
+          $ref: "#/components/schemas/DateTime"
+        expires_at:
+          $ref: "#/components/schemas/DateTime"
+        server_session_id:
+          type: string
+        server_session_revision:
+          type: integer
+          minimum: 0
+
+    SignedConfirmationEvidence:
+      type: object
+      required: [scheme, key_id, signed_at, payload_hash, signature, covered_fields]
+      additionalProperties: false
+      properties:
+        scheme:
+          type: string
+          enum: [emr4-hmac-sha256-v1]
+        key_id:
+          type: string
+        signed_at:
+          $ref: "#/components/schemas/DateTime"
+        payload_hash:
+          type: string
+        signature:
+          type: string
+        covered_fields:
+          type: array
+          items:
+            type: string
+
+    Issue:
+      type: object
+      required: [code, severity, message]
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          examples: [break_overlap, conflict_detected, stale_proposal_freshness_id]
+        severity:
+          type: string
+          enum: [warning, blocked]
+        message:
+          type: string
+        field:
+          type: string
+
+    AuditIntent:
+      type: object
+      required: [audit_action, target_kind, expected_audit_event]
+      additionalProperties: false
+      properties:
+        audit_action:
+          type: string
+          enum:
+            - appointment_proposal_prepared
+            - appointment_created
+            - appointment_updated
+            - appointment_status_changed
+            - appointment_deleted
+            - slot_search_normalized
+            - slot_search_proposed
+            - slot_selected_for_proposal
+        target_kind:
+          type: string
+          enum: [appointment, slot_search, proposal]
+        expected_audit_event:
+          type: string
+        audit_tags:
+          type: array
+          items:
+            type: string
+
+    AppointmentCommandFields:
+      type: object
+      required: [practitioner_id, appointment_date, start_time_local, duration_minutes]
+      additionalProperties: false
+      properties:
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        patient_id:
+          $ref: "#/components/schemas/Uuid"
+        patient_name_provisional:
+          type: string
+        practitioner_id:
+          $ref: "#/components/schemas/Uuid"
+        appointment_type_id:
+          $ref: "#/components/schemas/Uuid"
+        location_id:
+          $ref: "#/components/schemas/Uuid"
+        appointment_date:
+          $ref: "#/components/schemas/ClinicDate"
+        start_time_local:
+          $ref: "#/components/schemas/ClinicTime"
+        start_time:
+          $ref: "#/components/schemas/DateTime"
+        duration_minutes:
+          type: integer
+          minimum: 1
+          maximum: 480
+        reason:
+          type: string
+        notes:
+          type: string
+        booked_via:
+          type: string
+          enum: [Receptionist, Online, Phone, WalkIn, Bernie]
+
+    ProposalEnvelopeBase:
+      type: object
+      required:
+        - intent
+        - safe
+        - requires_confirmation
+        - autonomy_tier
+        - summary
+        - command
+        - warnings
+        - blocks
+        - audit
+      properties:
+        intent:
+          type: string
+        safe:
+          type: boolean
+        requires_confirmation:
+          type: boolean
+        autonomy_tier:
+          type: string
+          enum: [execute_with_report, proposal, blocked]
+        summary:
+          type: string
+        command:
+          $ref: "#/components/schemas/AppointmentCommandFields"
+        warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        confirm_endpoint:
+          type: string
+        confirm_payload:
+          type: object
+          additionalProperties: true
+        freshness:
+          $ref: "#/components/schemas/FreshnessRef"
+        signed_confirmation_evidence:
+          $ref: "#/components/schemas/SignedConfirmationEvidence"
+        signed_confirmation_evidence_required:
+          type: boolean
+          default: false
+        audit:
+          $ref: "#/components/schemas/AuditIntent"
+
+    AppointmentCreateProposalCommand:
+      type: object
+      required: [meta, command]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        command:
+          $ref: "#/components/schemas/AppointmentCommandFields"
+
+    AppointmentCreateProposalEnvelope:
+      allOf:
+        - $ref: "#/components/schemas/ProposalEnvelopeBase"
+        - type: object
+          properties:
+            intent:
+              const: create_appointment
+            patient_identity:
+              type: string
+              enum: [linked, provisional]
+            conflict:
+              $ref: "#/components/schemas/AppointmentConflict"
+            breaks_overlap:
+              type: array
+              items:
+                type: string
+
+    AppointmentUpdateProposalCommand:
+      type: object
+      required: [meta, appointment_id, patch]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        patch:
+          type: object
+          additionalProperties: false
+          properties:
+            patient_id:
+              $ref: "#/components/schemas/Uuid"
+            patient_name_provisional:
+              type: string
+            practitioner_id:
+              $ref: "#/components/schemas/Uuid"
+            appointment_type_id:
+              $ref: "#/components/schemas/Uuid"
+            location_id:
+              $ref: "#/components/schemas/Uuid"
+            appointment_date:
+              $ref: "#/components/schemas/ClinicDate"
+            start_time_local:
+              $ref: "#/components/schemas/ClinicTime"
+            duration_minutes:
+              type: integer
+              minimum: 1
+              maximum: 480
+            reason:
+              type: string
+            notes:
+              type: string
+
+    AppointmentUpdateProposalEnvelope:
+      allOf:
+        - $ref: "#/components/schemas/ProposalEnvelopeBase"
+        - type: object
+          properties:
+            intent:
+              const: update_appointment
+            conflict:
+              $ref: "#/components/schemas/AppointmentConflict"
+
+    AppointmentStatusProposalCommand:
+      type: object
+      required: [meta, appointment_id, status]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        status:
+          type: string
+          enum: [Booked, Confirmed, Arrived, InConsult, Completed, Cancelled, DNA, NoShow]
+        waiting_area_id:
+          $ref: "#/components/schemas/Uuid"
+        status_reason_code:
+          type: string
+          enum:
+            - PATIENT_CANCELLED
+            - PATIENT_RESCHEDULED
+            - PATIENT_UNWELL
+            - PATIENT_TRANSPORT
+            - PRACTITIONER_UNAVAILABLE
+            - CLINIC_OPERATIONAL
+            - CLINIC_RESCHEDULED
+            - ADMIN_ERROR
+            - DUPLICATE_BOOKING
+            - DID_NOT_ATTEND
+            - LEFT_WITHOUT_SEEN
+            - OTHER
+            - LEGACY_UNCLASSIFIED
+
+    AppointmentStatusProposalEnvelope:
+      allOf:
+        - $ref: "#/components/schemas/ProposalEnvelopeBase"
+        - type: object
+          properties:
+            intent:
+              enum: [update_appointment_status, update_appointment_waiting_area]
+
+    AppointmentDeleteProposalCommand:
+      type: object
+      required: [meta, appointment_id, delete_reason]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        delete_reason:
+          type: string
+        status_reason_code:
+          type: string
+
+    AppointmentDeleteProposalEnvelope:
+      allOf:
+        - $ref: "#/components/schemas/ProposalEnvelopeBase"
+        - type: object
+          properties:
+            intent:
+              const: delete_appointment
+
+    AppointmentCreateConfirmationCommand:
+      type: object
+      required: [meta, confirmer, confirmed, create_proposal, confirmed_warnings, freshness]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        confirmer:
+          $ref: "#/components/schemas/ConfirmerRef"
+        confirmed:
+          const: true
+        create_proposal:
+          $ref: "#/components/schemas/AppointmentCreateProposalEnvelope"
+        confirmed_warnings:
+          type: array
+          items:
+            type: string
+        freshness:
+          $ref: "#/components/schemas/FreshnessRef"
+        signed_confirmation_evidence:
+          $ref: "#/components/schemas/SignedConfirmationEvidence"
+        signed_confirmation_evidence_required:
+          type: boolean
+        session_binding:
+          $ref: "#/components/schemas/SessionBinding"
+
+    AppointmentUpdateConfirmationCommand:
+      type: object
+      required: [meta, confirmer, confirmed, update_proposal, confirmed_warnings, freshness]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        confirmer:
+          $ref: "#/components/schemas/ConfirmerRef"
+        confirmed:
+          const: true
+        update_proposal:
+          $ref: "#/components/schemas/AppointmentUpdateProposalEnvelope"
+        confirmed_warnings:
+          type: array
+          items:
+            type: string
+        freshness:
+          $ref: "#/components/schemas/FreshnessRef"
+        signed_confirmation_evidence:
+          $ref: "#/components/schemas/SignedConfirmationEvidence"
+        signed_confirmation_evidence_required:
+          type: boolean
+        session_binding:
+          $ref: "#/components/schemas/SessionBinding"
+
+    AppointmentStatusConfirmationCommand:
+      type: object
+      required: [meta, confirmer, confirmed, status_proposal, confirmed_warnings, freshness]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        confirmer:
+          $ref: "#/components/schemas/ConfirmerRef"
+        confirmed:
+          const: true
+        status_proposal:
+          $ref: "#/components/schemas/AppointmentStatusProposalEnvelope"
+        confirmed_warnings:
+          type: array
+          items:
+            type: string
+        freshness:
+          $ref: "#/components/schemas/FreshnessRef"
+        signed_confirmation_evidence:
+          $ref: "#/components/schemas/SignedConfirmationEvidence"
+        signed_confirmation_evidence_required:
+          type: boolean
+
+    AppointmentDeleteConfirmationCommand:
+      type: object
+      required: [meta, confirmer, confirmed, delete_proposal, confirmed_warnings, freshness]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        confirmer:
+          $ref: "#/components/schemas/ConfirmerRef"
+        confirmed:
+          const: true
+        delete_proposal:
+          $ref: "#/components/schemas/AppointmentDeleteProposalEnvelope"
+        confirmed_warnings:
+          type: array
+          items:
+            type: string
+        freshness:
+          $ref: "#/components/schemas/FreshnessRef"
+        signed_confirmation_evidence:
+          $ref: "#/components/schemas/SignedConfirmationEvidence"
+        signed_confirmation_evidence_required:
+          type: boolean
+
+    AppointmentConfirmResultEnvelope:
+      type: object
+      required: [intent, safe, requires_confirmation, autonomy_tier, summary, warnings, blocks, audit_evidence]
+      additionalProperties: false
+      properties:
+        intent:
+          type: string
+          enum:
+            - confirm_create_appointment
+            - confirm_update_appointment
+            - confirm_status_appointment
+            - confirm_delete_appointment
+        safe:
+          type: boolean
+        requires_confirmation:
+          type: boolean
+        autonomy_tier:
+          type: string
+          enum: [confirmed_write, blocked]
+        summary:
+          type: string
+        appointment:
+          $ref: "#/components/schemas/AppointmentSummary"
+        warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        audit_evidence:
+          type: array
+          items:
+            type: string
+        audit_event:
+          $ref: "#/components/schemas/ConfirmationAuditEvent"
+
+    SlotSearchNormalizeCommand:
+      type: object
+      required: [meta, raw_request]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        raw_request:
+          type: object
+          additionalProperties: false
+          properties:
+            instruction:
+              type: string
+            reference_date:
+              $ref: "#/components/schemas/ClinicDate"
+            date_from:
+              $ref: "#/components/schemas/ClinicDate"
+            date_to:
+              $ref: "#/components/schemas/ClinicDate"
+            practitioner_id:
+              $ref: "#/components/schemas/Uuid"
+            duration_minutes:
+              type: integer
+              minimum: 1
+              maximum: 480
+
+    SlotSearchNormalizeEnvelope:
+      type: object
+      required: [intent, safe, result, normalized, warnings, blocks, audit]
+      additionalProperties: false
+      properties:
+        intent:
+          const: search_slots_from_command
+        safe:
+          type: boolean
+        result:
+          type: string
+          enum: [normalized, blocked, missing_fields]
+        normalized:
+          $ref: "#/components/schemas/SlotSearchConstraint"
+        warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        audit:
+          $ref: "#/components/schemas/AuditIntent"
+
+    SlotSearchProposalCommand:
+      type: object
+      required: [meta, constraint]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        constraint:
+          $ref: "#/components/schemas/SlotSearchConstraint"
+
+    SlotSearchProposalEnvelope:
+      type: object
+      required: [intent, safe, requires_confirmation, autonomy_tier, summary, candidates, warnings, blocks, audit]
+      additionalProperties: false
+      properties:
+        intent:
+          const: search_slots
+        safe:
+          type: boolean
+        requires_confirmation:
+          const: false
+        autonomy_tier:
+          type: string
+          enum: [execute_with_report, blocked]
+        summary:
+          type: string
+        constraint:
+          $ref: "#/components/schemas/SlotSearchConstraint"
+        candidates:
+          type: array
+          items:
+            $ref: "#/components/schemas/SlotCandidate"
+        warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        candidate_freshness_id:
+          type: string
+        audit:
+          $ref: "#/components/schemas/AuditIntent"
+
+    SlotSelectionCommand:
+      type: object
+      required: [meta, search_proposal, selected_candidate]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        search_proposal:
+          $ref: "#/components/schemas/SlotSearchProposalEnvelope"
+        selected_candidate:
+          $ref: "#/components/schemas/SlotCandidate"
+        patient_id:
+          $ref: "#/components/schemas/Uuid"
+        patient_name_provisional:
+          type: string
+        reason:
+          type: string
+        notes:
+          type: string
+
+    SlotSelectionProposalEnvelope:
+      type: object
+      required:
+        - intent
+        - safe
+        - requires_confirmation
+        - autonomy_tier
+        - summary
+        - selected_candidate
+        - warnings
+        - blocks
+        - audit
+      additionalProperties: false
+      properties:
+        intent:
+          const: select_slot_for_create_proposal
+        safe:
+          type: boolean
+        requires_confirmation:
+          type: boolean
+        autonomy_tier:
+          type: string
+          enum: [proposal, blocked]
+        summary:
+          type: string
+        selected_candidate:
+          $ref: "#/components/schemas/SlotCandidate"
+        create_proposal:
+          $ref: "#/components/schemas/AppointmentCreateProposalEnvelope"
+        warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        candidate_freshness_id:
+          type: string
+        proposal_freshness_id:
+          type: string
+        signed_confirmation_evidence:
+          $ref: "#/components/schemas/SignedConfirmationEvidence"
+        signed_confirmation_evidence_required:
+          type: boolean
+        session_binding:
+          $ref: "#/components/schemas/SessionBinding"
+        audit:
+          $ref: "#/components/schemas/AuditIntent"
+
+    SlotSearchConstraint:
+      type: object
+      required: [date_from, date_to, duration_minutes]
+      additionalProperties: false
+      properties:
+        date_from:
+          $ref: "#/components/schemas/ClinicDate"
+        date_to:
+          $ref: "#/components/schemas/ClinicDate"
+        time_from:
+          $ref: "#/components/schemas/ClinicTime"
+        time_to:
+          $ref: "#/components/schemas/ClinicTime"
+        practitioner_id:
+          $ref: "#/components/schemas/Uuid"
+        appointment_type_id:
+          $ref: "#/components/schemas/Uuid"
+        location_id:
+          $ref: "#/components/schemas/Uuid"
+        duration_minutes:
+          type: integer
+          minimum: 1
+          maximum: 480
+
+    SlotCandidate:
+      type: object
+      required: [candidate_id, appointment_date, start_time_local, start_time, duration_minutes, practitioner_id]
+      additionalProperties: false
+      properties:
+        candidate_id:
+          type: string
+        appointment_date:
+          $ref: "#/components/schemas/ClinicDate"
+        start_time_local:
+          $ref: "#/components/schemas/ClinicTime"
+        start_time:
+          $ref: "#/components/schemas/DateTime"
+        duration_minutes:
+          type: integer
+        practitioner_id:
+          $ref: "#/components/schemas/Uuid"
+        appointment_type_id:
+          $ref: "#/components/schemas/Uuid"
+        location_id:
+          $ref: "#/components/schemas/Uuid"
+        summary:
+          type: string
+
+    AppointmentConflict:
+      type: object
+      required: [appointment_id, start_time, end_time, start_time_local, duration_minutes, status]
+      additionalProperties: false
+      properties:
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        start_time:
+          $ref: "#/components/schemas/DateTime"
+        end_time:
+          $ref: "#/components/schemas/DateTime"
+        start_time_local:
+          $ref: "#/components/schemas/ClinicTime"
+        duration_minutes:
+          type: integer
+        status:
+          type: string
+        patient_name:
+          type: string
+
+    AppointmentSummary:
+      type: object
+      required: [id, practice_id, practitioner_id, appointment_date, start_time_local, duration_minutes, status]
+      additionalProperties: false
+      properties:
+        id:
+          $ref: "#/components/schemas/Uuid"
+        practice_id:
+          $ref: "#/components/schemas/Uuid"
+        patient_id:
+          $ref: "#/components/schemas/Uuid"
+        patient_name_provisional:
+          type: string
+        practitioner_id:
+          $ref: "#/components/schemas/Uuid"
+        appointment_type_id:
+          $ref: "#/components/schemas/Uuid"
+        location_id:
+          $ref: "#/components/schemas/Uuid"
+        appointment_date:
+          $ref: "#/components/schemas/ClinicDate"
+        start_time_local:
+          $ref: "#/components/schemas/ClinicTime"
+        start_time:
+          $ref: "#/components/schemas/DateTime"
+        duration_minutes:
+          type: integer
+        status:
+          type: string
+
+    SessionBinding:
+      type: object
+      required: [session_id, surface_id, expected_revision, proposal_freshness_id]
+      additionalProperties: false
+      properties:
+        session_id:
+          type: string
+        surface_id:
+          type: string
+        expected_revision:
+          type: integer
+          minimum: 0
+        proposal_freshness_id:
+          type: string
+
+    ConfirmationAuditEvent:
+      type: object
+      required:
+        - event_id
+        - practice_id
+        - action
+        - actor
+        - confirmer
+        - occurred_at
+        - correlation_id
+      additionalProperties: false
+      properties:
+        event_id:
+          type: string
+        practice_id:
+          $ref: "#/components/schemas/Uuid"
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        action:
+          type: string
+          enum: [create, update, status_change, delete]
+        actor:
+          $ref: "#/components/schemas/ActorRef"
+        confirmer:
+          $ref: "#/components/schemas/ConfirmerRef"
+        occurred_at:
+          $ref: "#/components/schemas/DateTime"
+        correlation_id:
+          type: string
+        idempotency_key:
+          type: string
+        evidence:
+          type: array
+          items:
+            type: string
+
+  examples:
+    AppointmentCreateProposalCommand:
+      value:
+        meta:
+          actor:
+            actor_id: "11111111-1111-4111-8111-111111111111"
+            actor_type: human_user
+            display: "Reception User"
+            role: receptionist
+          practice:
+            practice_id: "22222222-2222-4222-8222-222222222222"
+            location_id: "33333333-3333-4333-8333-333333333333"
+          correlation_id: "corr_01J2BOOKINGFLOW0000000001"
+          requested_at: "2026-07-06T23:00:00+10:00"
+          source_surface: bernie_staff_review
+          evidence_label: staff_selected
+        command:
+          patient_id: "44444444-4444-4444-8444-444444444444"
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          appointment_type_id: "66666666-6666-4666-8666-666666666666"
+          location_id: "33333333-3333-4333-8333-333333333333"
+          appointment_date: "2026-07-14"
+          start_time_local: "09:30:00"
+          start_time: "2026-07-14T09:30:00+10:00"
+          duration_minutes: 15
+          reason: "Follow-up"
+          booked_via: Receptionist
+
+    AppointmentCreateProposalEnvelope:
+      value:
+        intent: create_appointment
+        safe: true
+        requires_confirmation: true
+        autonomy_tier: proposal
+        summary: "Create-proposal evidence ready for staff confirmation."
+        command:
+          patient_id: "44444444-4444-4444-8444-444444444444"
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          appointment_type_id: "66666666-6666-4666-8666-666666666666"
+          location_id: "33333333-3333-4333-8333-333333333333"
+          appointment_date: "2026-07-14"
+          start_time_local: "09:30:00"
+          start_time: "2026-07-14T09:30:00+10:00"
+          duration_minutes: 15
+          reason: "Follow-up"
+          booked_via: Receptionist
+        warnings:
+          - code: break_overlap
+            severity: warning
+            message: "The appointment touches a configured diary break; staff confirmation is required."
+        blocks: []
+        confirm_endpoint: "/api/v1/appointments/proposals/create/confirm"
+        confirm_payload:
+          confirmed: true
+          create_proposal_freshness_id: "fresh_create_01J2BOOKING0001"
+        freshness:
+          freshness_id: "fresh_create_01J2BOOKING0001"
+          basis: create_proposal
+          generated_at: "2026-07-06T23:00:01+10:00"
+          expires_at: "2026-07-06T23:05:01+10:00"
+        signed_confirmation_evidence_required: true
+        signed_confirmation_evidence:
+          scheme: emr4-hmac-sha256-v1
+          key_id: "dev-command-signing-key"
+          signed_at: "2026-07-06T23:00:01+10:00"
+          payload_hash: "sha256:example-create-proposal-payload-hash"
+          signature: "example-signature"
+          covered_fields:
+            - command
+            - freshness
+            - practice
+        audit:
+          audit_action: appointment_proposal_prepared
+          target_kind: proposal
+          expected_audit_event: appointment_create_proposal_prepared
+          audit_tags:
+            - staff_review_required
+        patient_identity: linked
+        breaks_overlap:
+          - "Morning tea"
+
+    AppointmentCreateConfirmationCommand:
+      value:
+        meta:
+          actor:
+            actor_id: "11111111-1111-4111-8111-111111111111"
+            actor_type: human_user
+            display: "Reception User"
+            role: receptionist
+          practice:
+            practice_id: "22222222-2222-4222-8222-222222222222"
+            location_id: "33333333-3333-4333-8333-333333333333"
+          correlation_id: "corr_01J2BOOKINGFLOW0000000001"
+          requested_at: "2026-07-06T23:00:30+10:00"
+          source_surface: bernie_staff_review
+          evidence_label: staff_selected
+        confirmer:
+          confirmed_by_user_id: "11111111-1111-4111-8111-111111111111"
+          confirmed_by_display: "Reception User"
+          confirmed_by_role: receptionist
+          confirmed_at: "2026-07-06T23:00:30+10:00"
+          confirmation_surface: bernie_staff_review
+        confirmed: true
+        create_proposal:
+          intent: create_appointment
+          safe: true
+          requires_confirmation: true
+          autonomy_tier: proposal
+          summary: "Create-proposal evidence ready for staff confirmation."
+          command:
+            patient_id: "44444444-4444-4444-8444-444444444444"
+            practitioner_id: "55555555-5555-4555-8555-555555555555"
+            appointment_type_id: "66666666-6666-4666-8666-666666666666"
+            location_id: "33333333-3333-4333-8333-333333333333"
+            appointment_date: "2026-07-14"
+            start_time_local: "09:30:00"
+            start_time: "2026-07-14T09:30:00+10:00"
+            duration_minutes: 15
+            reason: "Follow-up"
+            booked_via: Receptionist
+          warnings:
+            - code: break_overlap
+              severity: warning
+              message: "The appointment touches a configured diary break; staff confirmation is required."
+          blocks: []
+          confirm_endpoint: "/api/v1/appointments/proposals/create/confirm"
+          freshness:
+            freshness_id: "fresh_create_01J2BOOKING0001"
+            basis: create_proposal
+            generated_at: "2026-07-06T23:00:01+10:00"
+            expires_at: "2026-07-06T23:05:01+10:00"
+          signed_confirmation_evidence_required: true
+          audit:
+            audit_action: appointment_proposal_prepared
+            target_kind: proposal
+            expected_audit_event: appointment_create_proposal_prepared
+        confirmed_warnings:
+          - break_overlap
+        freshness:
+          freshness_id: "fresh_create_01J2BOOKING0001"
+          basis: create_proposal
+          generated_at: "2026-07-06T23:00:01+10:00"
+          expires_at: "2026-07-06T23:05:01+10:00"
+        signed_confirmation_evidence_required: true
+        signed_confirmation_evidence:
+          scheme: emr4-hmac-sha256-v1
+          key_id: "dev-command-signing-key"
+          signed_at: "2026-07-06T23:00:01+10:00"
+          payload_hash: "sha256:example-create-proposal-payload-hash"
+          signature: "example-signature"
+          covered_fields:
+            - command
+            - freshness
+            - practice
+
+    AppointmentConfirmResultEnvelope:
+      value:
+        intent: confirm_create_appointment
+        safe: true
+        requires_confirmation: false
+        autonomy_tier: confirmed_write
+        summary: "Confirmed create proposal and created one appointment."
+        appointment:
+          id: "77777777-7777-4777-8777-777777777777"
+          practice_id: "22222222-2222-4222-8222-222222222222"
+          patient_id: "44444444-4444-4444-8444-444444444444"
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          appointment_type_id: "66666666-6666-4666-8666-666666666666"
+          location_id: "33333333-3333-4333-8333-333333333333"
+          appointment_date: "2026-07-14"
+          start_time_local: "09:30:00"
+          start_time: "2026-07-14T09:30:00+10:00"
+          duration_minutes: 15
+          status: Booked
+        warnings:
+          - code: break_overlap
+            severity: warning
+            message: "Staff confirmed the break-overlap warning."
+        blocks: []
+        audit_evidence:
+          - signed_confirmation_evidence_verified
+          - proposal_freshness_verified
+          - appointment_audit_log_written
+        audit_event:
+          event_id: "audit_01J2BOOKINGCONFIRMED0001"
+          practice_id: "22222222-2222-4222-8222-222222222222"
+          appointment_id: "77777777-7777-4777-8777-777777777777"
+          action: create
+          actor:
+            actor_id: "11111111-1111-4111-8111-111111111111"
+            actor_type: human_user
+            display: "Reception User"
+            role: receptionist
+          confirmer:
+            confirmed_by_user_id: "11111111-1111-4111-8111-111111111111"
+            confirmed_by_display: "Reception User"
+            confirmed_by_role: receptionist
+            confirmed_at: "2026-07-06T23:00:30+10:00"
+            confirmation_surface: bernie_staff_review
+          occurred_at: "2026-07-06T23:00:31+10:00"
+          correlation_id: "corr_01J2BOOKINGFLOW0000000001"
+          idempotency_key: "idem_01J2SLOTCONFIRM000000000001"
+          evidence:
+            - signed_confirmation_evidence_verified
+            - explicit_staff_confirmation
+
+    SlotSearchNormalizeCommand:
+      value:
+        meta:
+          actor:
+            actor_id: "11111111-1111-4111-8111-111111111111"
+            actor_type: human_user
+            display: "Reception User"
+            role: receptionist
+          practice:
+            practice_id: "22222222-2222-4222-8222-222222222222"
+          correlation_id: "corr_01J2SLOTSEARCH0000000001"
+          requested_at: "2026-07-06T22:58:00+10:00"
+          source_surface: bernie_staff_review
+          evidence_label: staff_selected
+        raw_request:
+          instruction: "Find a 15 minute follow-up next Tuesday morning."
+          reference_date: "2026-07-06"
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          duration_minutes: 15
+
+    SlotSearchNormalizeEnvelope:
+      value:
+        intent: search_slots_from_command
+        safe: true
+        result: normalized
+        normalized:
+          date_from: "2026-07-14"
+          date_to: "2026-07-14"
+          time_from: "09:00:00"
+          time_to: "12:00:00"
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          duration_minutes: 15
+        warnings: []
+        blocks: []
+        audit:
+          audit_action: slot_search_normalized
+          target_kind: slot_search
+          expected_audit_event: slot_search_normalized
+
+    SlotSearchProposalCommand:
+      value:
+        meta:
+          actor:
+            actor_id: "11111111-1111-4111-8111-111111111111"
+            actor_type: human_user
+            display: "Reception User"
+            role: receptionist
+          practice:
+            practice_id: "22222222-2222-4222-8222-222222222222"
+            location_id: "33333333-3333-4333-8333-333333333333"
+          correlation_id: "corr_01J2SLOTSEARCH0000000001"
+          requested_at: "2026-07-06T22:58:10+10:00"
+          source_surface: bernie_staff_review
+          evidence_label: live_api_fact
+        constraint:
+          date_from: "2026-07-14"
+          date_to: "2026-07-14"
+          time_from: "09:00:00"
+          time_to: "12:00:00"
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          location_id: "33333333-3333-4333-8333-333333333333"
+          duration_minutes: 15
+
+    SlotSearchProposalEnvelope:
+      value:
+        intent: search_slots
+        safe: true
+        requires_confirmation: false
+        autonomy_tier: execute_with_report
+        summary: "Found 3 candidate slots on 2026-07-14."
+        constraint:
+          date_from: "2026-07-14"
+          date_to: "2026-07-14"
+          time_from: "09:00:00"
+          time_to: "12:00:00"
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          location_id: "33333333-3333-4333-8333-333333333333"
+          duration_minutes: 15
+        candidates:
+          - candidate_id: "slot_20260714_0930_prac5555"
+            appointment_date: "2026-07-14"
+            start_time_local: "09:30:00"
+            start_time: "2026-07-14T09:30:00+10:00"
+            duration_minutes: 15
+            practitioner_id: "55555555-5555-4555-8555-555555555555"
+            location_id: "33333333-3333-4333-8333-333333333333"
+            summary: "9:30 AM with selected practitioner"
+        warnings: []
+        blocks: []
+        candidate_freshness_id: "fresh_candidate_01J2SLOT0001"
+        audit:
+          audit_action: slot_search_proposed
+          target_kind: slot_search
+          expected_audit_event: slot_search_candidates_returned
+
+    SlotSelectionCommand:
+      value:
+        meta:
+          actor:
+            actor_id: "11111111-1111-4111-8111-111111111111"
+            actor_type: human_user
+            display: "Reception User"
+            role: receptionist
+          practice:
+            practice_id: "22222222-2222-4222-8222-222222222222"
+            location_id: "33333333-3333-4333-8333-333333333333"
+          correlation_id: "corr_01J2SLOTSEARCH0000000001"
+          requested_at: "2026-07-06T22:59:00+10:00"
+          source_surface: bernie_staff_review
+          evidence_label: staff_selected
+        search_proposal:
+          intent: search_slots
+          safe: true
+          requires_confirmation: false
+          autonomy_tier: execute_with_report
+          summary: "Found 3 candidate slots on 2026-07-14."
+          candidates:
+            - candidate_id: "slot_20260714_0930_prac5555"
+              appointment_date: "2026-07-14"
+              start_time_local: "09:30:00"
+              start_time: "2026-07-14T09:30:00+10:00"
+              duration_minutes: 15
+              practitioner_id: "55555555-5555-4555-8555-555555555555"
+              location_id: "33333333-3333-4333-8333-333333333333"
+              summary: "9:30 AM with selected practitioner"
+          warnings: []
+          blocks: []
+          audit:
+            audit_action: slot_search_proposed
+            target_kind: slot_search
+            expected_audit_event: slot_search_candidates_returned
+        selected_candidate:
+          candidate_id: "slot_20260714_0930_prac5555"
+          appointment_date: "2026-07-14"
+          start_time_local: "09:30:00"
+          start_time: "2026-07-14T09:30:00+10:00"
+          duration_minutes: 15
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          location_id: "33333333-3333-4333-8333-333333333333"
+          summary: "9:30 AM with selected practitioner"
+        patient_id: "44444444-4444-4444-8444-444444444444"
+        reason: "Follow-up"
+
+    SlotSelectionProposalEnvelope:
+      value:
+        intent: select_slot_for_create_proposal
+        safe: true
+        requires_confirmation: true
+        autonomy_tier: proposal
+        summary: "Prepared create proposal from selected slot. Submit only after explicit staff confirmation."
+        selected_candidate:
+          candidate_id: "slot_20260714_0930_prac5555"
+          appointment_date: "2026-07-14"
+          start_time_local: "09:30:00"
+          start_time: "2026-07-14T09:30:00+10:00"
+          duration_minutes: 15
+          practitioner_id: "55555555-5555-4555-8555-555555555555"
+          location_id: "33333333-3333-4333-8333-333333333333"
+          summary: "9:30 AM with selected practitioner"
+        create_proposal:
+          intent: create_appointment
+          safe: true
+          requires_confirmation: true
+          autonomy_tier: proposal
+          summary: "Create-proposal evidence ready for staff confirmation."
+          command:
+            patient_id: "44444444-4444-4444-8444-444444444444"
+            practitioner_id: "55555555-5555-4555-8555-555555555555"
+            location_id: "33333333-3333-4333-8333-333333333333"
+            appointment_date: "2026-07-14"
+            start_time_local: "09:30:00"
+            start_time: "2026-07-14T09:30:00+10:00"
+            duration_minutes: 15
+            reason: "Follow-up"
+            booked_via: Receptionist
+          warnings: []
+          blocks: []
+          freshness:
+            freshness_id: "fresh_create_01J2BOOKING0001"
+            basis: create_proposal
+            generated_at: "2026-07-06T22:59:01+10:00"
+            expires_at: "2026-07-06T23:04:01+10:00"
+          signed_confirmation_evidence_required: true
+          audit:
+            audit_action: appointment_proposal_prepared
+            target_kind: proposal
+            expected_audit_event: appointment_create_proposal_prepared
+        warnings: []
+        blocks: []
+        candidate_freshness_id: "fresh_candidate_01J2SLOT0001"
+        proposal_freshness_id: "fresh_create_01J2BOOKING0001"
+        signed_confirmation_evidence_required: true
+        signed_confirmation_evidence:
+          scheme: emr4-hmac-sha256-v1
+          key_id: "dev-command-signing-key"
+          signed_at: "2026-07-06T22:59:01+10:00"
+          payload_hash: "sha256:example-slot-selection-payload-hash"
+          signature: "example-signature"
+          covered_fields:
+            - selected_candidate
+            - create_proposal.command
+            - proposal_freshness_id
+        audit:
+          audit_action: slot_selected_for_proposal
+          target_kind: proposal
+          expected_audit_event: slot_selected_for_create_proposal

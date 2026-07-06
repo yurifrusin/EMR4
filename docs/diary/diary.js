@@ -817,6 +817,32 @@ function formatBernieCode(value) {
     .replace(/\b\w/g, letter => letter.toUpperCase());
 }
 
+function scrubBernieStaffCopy(message, fallback = "I need one more safe booking detail before I can continue.") {
+  const raw = String(message || "").trim();
+  if (!raw) return fallback;
+  if (/missing_practitioner_id|practitioner_id|practitioner id is required/i.test(raw)) {
+    return "I need a practitioner before I can search.";
+  }
+  if (/missing_patient_id|patient_id|patient id is required/i.test(raw)) {
+    return "I need a patient before I can prepare this booking.";
+  }
+  if (/not\s*found/i.test(raw)) {
+    return "I could not find the booking detail needed to continue. Nothing was booked.";
+  }
+
+  let safe = raw
+    .replace(/\b[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\b/gi, "")
+    .replace(/\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b/gi, "")
+    .replace(/\bUUID\b/gi, "")
+    .replace(/\bID\b/g, "detail")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([.,;:!?])/g, "$1")
+    .trim();
+
+  safe = safe.replace(/^[\s:;,.!-]+|[\s:;,.!-]+$/g, "").trim();
+  return safe || fallback;
+}
+
 function isBernieDevOrDebug() {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get("bernie_debug") === "true" || urlParams.get("bernie_dev_review") === "true";
@@ -4893,8 +4919,10 @@ function renderBernieReview(payload, interpretEnvelope = null) {
         } else if (block.code === "clinic_day_exhausted") {
           message = "There are no suitable times left today. Tell me another day or a later time window.";
         } else {
-          friendlyReason = message.replace(/\(UUID\)/gi, "").replace(/ID/g, "").replace(/uuid/gi, "").replace(/supervised booking/gi, "booking").trim();
-          if (friendlyReason && friendlyReason[0] === friendlyReason[0].toUpperCase() && friendlyReason[1] === friendlyReason[1].toLowerCase()) {
+          friendlyReason = scrubBernieStaffCopy(message, "I need one more safe booking detail before I can continue.")
+            .replace(/supervised booking/gi, "booking")
+            .trim();
+          if (friendlyReason && friendlyReason !== "I" && !friendlyReason.startsWith("I ") && friendlyReason[0] === friendlyReason[0].toUpperCase() && friendlyReason[1] === friendlyReason[1].toLowerCase()) {
             friendlyReason = friendlyReason[0].toLowerCase() + friendlyReason.slice(1);
           }
           message = `I can't proceed with this booking because ${friendlyReason}.`;

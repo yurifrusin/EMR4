@@ -1,0 +1,191 @@
+schema_version: api-spine.integration-events.v0
+artifact_kind: non_invasive_async_contract_example
+status: prototype_only
+source_safety:
+  phi: none
+  examples: authored_synthetic
+  runtime_wiring: blocked
+  provider_calls: blocked
+  external_clients: blocked
+  historical_diary_trove_access: blocked
+  h15_or_h_series_runtime_imports: blocked
+  memory_rag_graphrag: blocked
+notes:
+  - Async integrations observe or ingest typed events; they do not bypass command endpoints.
+  - Every real integration endpoint will require an integration principal, idempotency, signature verification, tenancy checks, and audit.
+  - Payload examples here are placeholders and intentionally omit patient names, phone numbers, Medicare, DOB, result text, invoice details, and provider secrets.
+
+common_envelope:
+  required_fields:
+    - event_id
+    - event_type
+    - schema_version
+    - occurred_at
+    - received_at
+    - practice_id
+    - source_system
+    - correlation_id
+    - idempotency_key
+    - principal
+    - evidence_mode
+  principal:
+    allowed_kinds:
+      - integration_service_account
+      - mtls_certificate
+      - signed_hmac_sender
+    user_session_token_allowed: false
+  evidence_mode:
+    allowed_values:
+      - fixture_intercepted
+      - fake_provider
+      - local_live_backend
+      - live_provider
+    default_for_this_artifact: fixture_intercepted
+  idempotency:
+    scope: practice_id_plus_idempotency_key
+    minimum_retention_hours: 24
+  audit_posture:
+    mutation_or_external_call: required
+    phi_in_metadata: forbidden
+
+event_families:
+  - family_id: caller_id
+    research_status: placeholder
+    direction: ingest
+    event_types:
+      - caller_id.context_observed
+      - caller_id.call_state_changed
+      - caller_id.candidate_match_changed
+    allowed_payload_fields:
+      - call_context_id
+      - call_state
+      - candidate_count
+      - confidence_bucket
+      - match_reason_codes
+      - observed_at
+    prohibited_payload_fields:
+      - raw_phone_number
+      - patient_name
+      - date_of_birth
+      - medicare_number
+      - free_text_transcript
+    command_boundary:
+      may_rank_candidates: true
+      may_verify_identity: false
+      may_confirm_appointment: false
+
+  - family_id: sms
+    research_status: placeholder
+    direction: emit_and_ingest
+    event_types:
+      - sms.message_send_requested
+      - sms.message_sent
+      - sms.message_failed
+      - sms.reply_received
+      - sms.reminder_outcome_recorded
+    allowed_payload_fields:
+      - message_id
+      - template_id
+      - delivery_status
+      - reply_category
+      - appointment_reference_id
+      - provider_status_code
+    prohibited_payload_fields:
+      - raw_phone_number
+      - sms_body
+      - patient_name
+      - medicare_number
+      - date_of_birth
+    command_boundary:
+      send_requires_rest_command: true
+      replies_may_trigger_proposal_only: true
+      appointment_mutation_requires_confirm_command: true
+
+  - family_id: pathology
+    research_status: placeholder
+    direction: ingest
+    event_types:
+      - pathology.result_ingested
+      - pathology.result_triage_requested
+      - pathology.result_filed
+      - pathology.result_acknowledged
+    allowed_payload_fields:
+      - result_reference_id
+      - source_facility_code
+      - result_category
+      - abnormal_flag_bucket
+      - received_at
+      - attachment_reference_id
+    prohibited_payload_fields:
+      - result_text
+      - patient_name
+      - date_of_birth
+      - medicare_number
+      - provider_number
+      - raw_hl7_message
+    command_boundary:
+      ingest_endpoint_is_command: true
+      filing_requires_clinician_or_policy_command: true
+      consultant_advice_requires_doctor_review: true
+
+  - family_id: billing
+    research_status: placeholder
+    direction: emit_and_ingest
+    event_types:
+      - billing.invoice_created
+      - billing.claim_submit_requested
+      - billing.claim_submitted
+      - billing.claim_rejected
+      - billing.payment_received
+      - billing.reconciliation_completed
+    allowed_payload_fields:
+      - billing_reference_id
+      - claim_reference_id
+      - amount_bucket
+      - payment_status
+      - rejection_reason_code
+      - reconciliation_batch_id
+    prohibited_payload_fields:
+      - card_number
+      - bank_account_number
+      - medicare_number
+      - patient_name
+      - date_of_birth
+      - full_invoice_line_text
+    command_boundary:
+      claim_submission_requires_rest_command: true
+      idempotency_required: true
+      confirmer_required_for_regulated_submission: true
+
+  - family_id: knowledge_refresh
+    research_status: placeholder
+    direction: ingest
+    event_types:
+      - knowledge_source.refresh_started
+      - knowledge_source.refresh_completed
+      - knowledge_source.refresh_failed
+      - knowledge_source.citation_index_changed
+    allowed_payload_fields:
+      - knowledge_source_id
+      - license_namespace
+      - citation_count_bucket
+      - refresh_status
+      - source_freshness_date
+    prohibited_payload_fields:
+      - licensed_full_text
+      - raw_passage_text
+      - patient_query_text
+      - provider_api_key
+      - embedding_vector
+    command_boundary:
+      clinician_query_runtime: blocked
+      live_licensed_provider_runtime: blocked
+      citations_required_when_opened: true
+
+blocked_gates:
+  live_provider_runtime: blocked
+  regulated_external_integrations: blocked
+  historical_diary_trove_or_h15_runtime_imports: blocked
+  memory_rag_graphrag_runtime: blocked
+  model_to_database_writes: blocked
+  graph_ql_mutations: blocked

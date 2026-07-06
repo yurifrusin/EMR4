@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-n1a-diary-reception-rehome-review` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 19:26 +1000 |
 | Source HEAD | `0debced` |
 

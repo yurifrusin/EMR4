@@ -48,6 +48,14 @@ def _install_forbidden_ai_provider_guard(monkeypatch) -> None:
     monkeypatch.setattr(ai_service, "_get_default_provider", forbidden_provider)
 
 
+def _pin_clinic_fixture_time(monkeypatch) -> None:
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda tz: datetime(2026, 6, 22, 9, 0, 0, tzinfo=tz),
+    )
+
+
 def _do_supervised_booking(client, token, practitioner, patient):
     """Run supervised-booking to confirmation_ready with a selected candidate."""
     from tests.test_bernie_confirm_create_proposal import _search_and_select
@@ -138,6 +146,7 @@ def test_supervised_booking_confirm_payload_round_trip_writes_one_appointment(
 ):
     """staff_review.confirm_payload from supervised-booking (confirmed=True) confirms and writes one appointment."""
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     counts_before = _row_counts(db)
 
@@ -186,6 +195,7 @@ def test_confirm_stale_practitioner_returns_structured_block_not_404(
     scope) returns HTTP 200 with a practitioner_not_found block — not a bare 404
     — and writes nothing."""
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
 
     supervised = _do_supervised_booking(client, token, practitioner, patient)
@@ -227,6 +237,7 @@ def test_confirm_stale_patient_returns_structured_block_not_404(
     scope) returns HTTP 200 with a patient_not_found block — not a bare 404
     — and writes nothing."""
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
 
     supervised = _do_supervised_booking(client, token, practitioner, patient)
@@ -256,6 +267,35 @@ def test_confirm_stale_patient_returns_structured_block_not_404(
 
 # ── Test 4: no booking before confirm ─────────────────────────────────────────
 
+def test_confirm_malformed_payload_returns_typed_block_not_raw_validation(
+    client,
+    db,
+    gp_user,
+    monkeypatch,
+):
+    """Malformed confirm bodies return the Bernie envelope, not raw validation copy."""
+    _install_forbidden_ai_provider_guard(monkeypatch)
+    token = make_token(gp_user)
+    counts_before = _row_counts(db)
+
+    resp = client.post(
+        CONFIRM_URL,
+        json={"confirmed": True},
+        headers=_auth(token),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["safe"] is False
+    assert data["appointment"] is None
+    assert data["autonomy_tier"] == "blocked"
+    assert data["blocks"][0]["code"] == "invalid_confirmation_payload"
+    rendered = resp.text
+    assert "Field required" not in rendered
+    assert "Not Found" not in rendered
+    assert _row_counts(db) == counts_before
+
+
 def test_supervised_booking_alone_writes_no_rows(
     client,
     db,
@@ -267,6 +307,7 @@ def test_supervised_booking_alone_writes_no_rows(
 ):
     """supervised-booking, even reaching confirmation_ready, must never write appointment or audit rows."""
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     counts_before = _row_counts(db)
 

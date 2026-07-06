@@ -44,6 +44,13 @@ DOCS_DIR = REPO_ROOT / "docs"
 CHECKS = json.loads((Path(__file__).parent / "checks_diary.json").read_text(encoding="utf-8"))
 REVIEW_AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.e30.c2ln"
 harness.assert_valid_review_token(REVIEW_AUTH_TOKEN)
+SPRINT98_FORBIDDEN_ORDINARY_COPY = [
+    "missing_practitioner_id",
+    "practitioner_id",
+    "Practitioner ID is required",
+    "Not Found",
+    "123e4567-e89b-12d3-a456-426614174000",
+]
 
 
 def assert_bernie_confirmed_state(page):
@@ -5770,6 +5777,80 @@ def test_sprint99_bernie_raw_code_exclusion(diary_page):
         review_panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
         assert "missing_practitioner_id" not in review_panel_text
         assert "UUID" not in review_panel_text
+
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_sprint98_ordinary_block_copy_scrubs_raw_booking_internals(diary_page):
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    mock_interpret = {
+        "safe": True,
+        "result": "interpreted",
+        "command_candidate": {
+            "practitioner_label": "Dr Shera",
+            "patient_label": "Margaret Thompson",
+            "date_from": "today",
+            "duration_minutes": 15
+        }
+    }
+    mock_response = {
+        "staff_review": {
+            "status": "blocked",
+            "confirmation_ready": False,
+            "selected_slot": None,
+            "candidate_slots": [],
+            "warning_summary": "Blocked by booking evidence.",
+            "evidence_summary": "Technical detail should not reach ordinary staff copy.",
+            "warnings": [],
+            "blocks": [
+                {
+                    "code": "booking_detail_missing",
+                    "severity": "blocked",
+                    "message": "Not Found: missing_practitioner_id practitioner_id 123e4567-e89b-12d3-a456-426614174000 Practitioner ID is required."
+                }
+            ]
+        }
+    }
+
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/interpret-booking-instruction",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_interpret)
+        )
+    )
+    diary_page.route(
+        "**/api/v1/appointments/proposals/bernie/supervised-booking",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(mock_response)
+        )
+    )
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_open=true")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+        trigger_route_intercepted_bernie(
+            diary_page,
+            instruction="Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45",
+            register_default_mock=False
+        )
+
+        diary_page.locator("[data-testid='bernie-review-block-item']").wait_for(state="visible", timeout=5000)
+        panel_text = diary_page.locator("[data-testid='bernie-review-panel']").text_content()
+
+        assert "I need a practitioner before I can search." in panel_text
+        for forbidden in SPRINT98_FORBIDDEN_ORDINARY_COPY:
+            assert forbidden not in panel_text
 
     finally:
         diary_page.unroute("**/api/v1/**")

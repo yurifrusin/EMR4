@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-r1-bernie-scenario-replay-harness` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 11:35 +1000 |
 | Source HEAD | `dde0e36` |
 

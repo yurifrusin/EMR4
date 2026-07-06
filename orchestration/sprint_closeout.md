@@ -8,42 +8,145 @@ reviewed, integrated, verified, pushed, and audited.
 
 | Item | Value |
 |---|---|
-| Batch | Sprint H69: Orchestration Poll Legacy-Encoding Tolerance |
-| Integrated through | Ariadne implementation |
-| Status | Integrated; focused verification passed |
-| Last updated | 2026-07-07 |
+| Batch | Sprint H70-H73 / Strategy Through API Spine Schema Prototype + Access AI Audit/Cost Envelope Hardening + Sprint 84 Enterprise Auth/FGA Boundary |
+| Integrated through | Ariadne + Fable strategy collaboration, Ariadne inbox cleanup, three Sprint 98 worker lanes, three API Spine planning lanes, four Sprint 101 schema artifact lanes, API steward skill creation, Access AI invocation verification, Access AI audit/cost hardening, and Sprint 84 static enterprise-auth/FGA boundary contracts |
+| Status | Local integration verified; not yet committed/pushed |
+| Last updated | 2026-07-06 |
 
 ## What Changed
 
-- Updated `scripts\agent_worktrees.py` so `read_task_status()` tolerates legacy
-  non-UTF-8 bytes with replacement while reading task-packet status.
-- Added a regression test in `tests\test_agent_worktrees.py` using a legacy
-  smart-dash byte.
-- Verified `.venv\Scripts\python.exe scripts\agent_worktrees.py poll --fetch`
-  completes without the previous UnicodeDecodeError. It still reports old
-  queued/pending Codex inbox packets and Claude branch residue; those are
-  follow-up cleanup, not H69 scope.
-- Updated `AGENTS.md`, `orchestration\parallel_workstreams.md`, and
-  `orchestration\integration_log.md`.
-- No runtime routes, UI, providers, database access, memory/RAG/GraphRAG,
-  H15/H-series runtime imports, raw trove reads, or ignored local-data reads
-  were added.
+- Captured Fable's 100+ sprint strategy review at
+  `orchestration\agent_inbox\codex\review-claude-fable-100-sprint-strategy-map.md`.
+- Added Ariadne's durable synthesis at
+  `orchestration\ariadne_fable_100_sprint_strategy_map.md`.
+- Updated planning docs so the next arc is explicit: close the Bernie/API-spine/
+  Access-AI consumer gap before adding more provider-free harness guardrails.
+- Performed bounded inbox hygiene by marking historically integrated/superseded
+  R27-R30, D1, D8, K1/K1b, R1, Sprint 105/107, and related review packets from
+  the integration ledger.
+- Launched three parallel Sprint 98 worker lanes:
+  - backend/API confirm contract;
+  - Diary UI/review harness;
+  - smoke/release-gate evidence.
+- Integrated the Sprint 98 backend changes:
+  - malformed `confirm-bernie` payloads now return a typed blocked Bernie
+    confirmation envelope instead of raw validation copy;
+  - stale/tampered confirm payloads surface precise entity blocks such as
+    `practitioner_not_found` before revalidation;
+  - the missing-practitioner selection copy no longer exposes raw
+    `practitioner_id` wording.
+- Integrated the Sprint 98 Diary UI/review changes:
+  - ordinary staff-facing Bernie block copy now scrubs raw internal identifiers,
+    snake_case fragments, UUID-like values, and bare `Not Found`;
+  - route-intercepted smoke coverage proves candidate selection, choose-another
+    slot affordance, configured confirm endpoint use, and ordinary-copy
+    redaction.
+- Integrated smoke/release-gate evidence:
+  - ordinary Margaret Thompson / Dr Shera prompt evidence now checks 14:00-15:45
+    parsing, fake/mocked provider labeling, `live_provider=false`, and compact
+    redaction.
+- No live providers, broad historical diary mining, H15/H-series runtime imports,
+  memory/RAG/GraphRAG wiring, database writes from model output, or raw/ignored
+  local-data reads were added.
+- Synthesised the three API root-to-branch planning lanes into
+  `orchestration\api_spine_adr.md`.
+- Added Sprint 101 non-invasive API Spine prototype artifacts:
+  - `docs\api-spine\graphql\appointment-diary-read.graphql`;
+  - `docs\api-spine\openapi\appointment-commands.yaml`;
+  - `docs\api-spine\manifests\agent-capability-charters.yaml`;
+  - `docs\api-spine\manifests\practice-onboarding-example.yaml`;
+  - `docs\api-spine\async\integration-events.yaml`;
+  - `docs\api-spine\security\permission-matrix.yaml`;
+  - `tests\test_api_spine_artifacts.py`.
+- Created and validated personal Codex skill `$emr4-api-steward` at
+  `C:\Users\sarashera\.codex\skills\emr4-api-steward` for future API-spine
+  review/design/implementation consistency checks.
+- Verified the existing Access AI invocation service as the fake-provider
+  backend choke point and repaired its test harness so it no longer depends on
+  `pytest-asyncio`.
+- Hardened the Access AI cost/audit envelope:
+  - `AiCostEnvelope.audit_metadata()` now emits deterministic budget posture
+    fields: `budget_limit_present`, `budget_threshold_ratio`, and
+    `budget_warning`;
+  - adversarial tests prove blocked entitlement variants, blocked estimate-cost
+    calls, dry-run calls, provider failures, capped capability metadata, and
+    PHI-like request metadata all preserve audit-safety and do not open provider
+    calls when blocked.
+- Integrated Sprint 84 enterprise-auth/FGA boundary mapping:
+  - added `docs\access-ai-enterprise-auth-fga-boundary.md`;
+  - added static FGA-like external attribute mapping into EMR4-owned
+    `AiAccessRole` values without runtime FGA clients;
+  - fail-closed filtering prevents misconfigured external mappings from
+    emitting arbitrary role strings;
+  - API Spine permission-matrix guards now require enterprise-auth/FGA to remain
+    `static_mapping_only` and keep runtime FGA clients, live providers, external
+    patient clients, GraphQL mutations, memory/RAG/GraphRAG, H15/trove access,
+    and model-to-database writes denied.
+- Protocol correction: Sprint 84 completed with native Codex subagents already
+  assigned before Yuri corrected the worker-lane interpretation. Future
+  non-trivial sprints must start with Claude and Antigravity availability checks
+  and use Claude + Antigravity + DeepSeek Flash as the preferred three-lane mix;
+  native Codex subagents are fallback/integration helpers, not the default
+  meaning of "three lane sprint".
+
+## Larger Plan Position
+
+This batch sits in Phase 2B / Bernie Receptionist Copilot, Programme 2G / EMR4
+API Spine, Programme 2F / Access AI API, and Programme 2C / Ariadne Tooling and
+Review Automation. It was a strategy-and-launch batch plus concrete Sprint 98,
+Sprint 99/100, and Sprint 101 increments. Its size was appropriate because the
+strategy map identified the consumer gap, bounded cleanup restored enough
+orchestration signal to proceed, Sprint 98's three blockers split cleanly across
+backend/UI/smoke lanes, and the API Spine work split cleanly into plan review,
+ADR synthesis, non-invasive schema artifacts, API stewardship, and Access AI
+fake-provider hardening, and Sprint 84 static enterprise-auth/FGA boundary
+mapping. The next planned step is Sprint 85 Bernie interpreter migration through
+Access AI while preserving fake-provider/default-disabled/no-write behavior,
+unless Sprint 98 live/manual review finds a release blocker first.
 
 ## Verification
 
 - Compile check passed:
-  `.venv\Scripts\python.exe -m py_compile scripts\agent_worktrees.py tests\test_agent_worktrees.py`.
-- Focused pytest passed:
-  `.venv\Scripts\python.exe -m pytest tests\test_agent_worktrees.py -q`
-  (`5 passed`; existing deprecation warnings only).
-- Poll smoke passed:
-  `.venv\Scripts\python.exe scripts\agent_worktrees.py poll --fetch` completed
-  without UnicodeDecodeError.
-- `git diff --check` passed with the known CRLF warning on
-  `orchestration/integration_log.md`.
+  `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py tests\test_bernie_sprint98_confirm_contract.py tests\test_bernie_sprint98_release_gates.py tests\test_bernie_sprint97_interpreter_readiness.py tests\test_smoke_bernie_interpreter_script.py`.
+- JS syntax check passed:
+  `node --check docs\diary\diary.js`.
+- Focused backend/smoke pytest passed:
+  `.venv\Scripts\python.exe -m pytest tests/test_bernie_sprint98_confirm_contract.py tests/test_bernie_sprint98_release_gates.py tests/test_bernie_sprint97_interpreter_readiness.py tests/test_smoke_bernie_interpreter_script.py -q`
+  (`41 passed`; existing Starlette/Google GenAI warnings only).
+- Route-intercepted Diary review pytest passed:
+  `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "bernie_review_candidate_selection or bernie_choose_different_time_restores_candidates or bernie_generic_confirm_not_found_calm_copy or sprint98_ordinary_block_copy_scrubs_raw_booking_internals or bernie_route_intercepted_confirm_flow_harness_success"`
+  (`6 passed`).
+- `git diff --check` passed with line-ending warnings only on existing CRLF
+  files touched by status cleanup and Sprint 98 tests.
+- API Spine artifact compile/test passed:
+  `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_artifacts.py`
+  and `.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q`
+  (`28 passed`; existing Starlette/Google GenAI warnings only).
+- Artifact diff hygiene passed:
+  `git diff --check -- docs/api-spine tests/test_api_spine_artifacts.py orchestration/api_spine_adr.md`.
+- Access AI invocation service compile/test passed:
+  `.venv\Scripts\python.exe -m py_compile tests\test_access_ai_service.py app\services\ai\access_service.py`
+  and `.venv\Scripts\python.exe -m pytest tests/test_access_ai_service.py tests/test_ai_audit_events.py tests/test_ai_costing.py tests/test_ai_entitlements.py tests/test_ai_capability_registry.py -q`
+  (`33 passed`; existing Starlette/Google GenAI warnings only).
+- Access AI audit/cost hardening compile/test passed:
+  `.venv\Scripts\python.exe -m py_compile app\services\ai\access_service.py app\services\ai\costing.py app\services\ai\audit_events.py tests\test_access_ai_service.py tests\test_ai_costing.py tests\test_ai_audit_events.py`
+  and `.venv\Scripts\python.exe -m pytest tests/test_access_ai_service.py tests/test_ai_audit_events.py tests/test_ai_costing.py tests/test_ai_entitlements.py tests/test_ai_capability_registry.py -q`
+  (`61 passed`; existing Starlette/Google GenAI warnings only).
+- Access AI patch diff hygiene passed:
+  `git diff --check -- app/services/ai/costing.py tests/test_access_ai_service.py tests/test_ai_costing.py tests/test_ai_audit_events.py`
+  with known CRLF notices on touched test files.
+- Sprint 84 enterprise-auth/FGA compile/test passed:
+  `.venv\Scripts\python.exe -m py_compile app\services\ai\external_identity.py tests\test_ai_external_identity.py tests\test_ai_entitlements.py tests\test_access_ai_service.py tests\test_api_spine_artifacts.py`
+  and `.venv\Scripts\python.exe -m pytest tests/test_ai_external_identity.py tests/test_ai_entitlements.py tests/test_access_ai_service.py tests/test_api_spine_artifacts.py -q`
+  (`64 passed`; existing Starlette/Google GenAI warnings only).
+- Sprint 84 diff hygiene passed:
+  `git diff --check -- app/services/ai/external_identity.py tests/test_ai_external_identity.py docs/access-ai-enterprise-auth-fga-boundary.md docs/api-spine/security/permission-matrix.yaml tests/test_api_spine_artifacts.py`.
 
-Sprint engine state after H69 closeout: paused by Yuri request. Reason: Yuri
-asked to pause execution after the next sprint closeout.
+Sprint engine state: continuing locally. Next recommended direction is Access
+AI Sprint 85 Bernie interpreter migration through Access AI, fake-provider and
+default-disabled only, with runtime FGA clients, live-provider, trove,
+H15/H-series runtime import, memory/RAG/GraphRAG, GraphQL mutation, external
+patient-client, and model-write gates still blocked.
 
 ---
 

@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/native-action-grammar-foundation` |
 | Source Task | `claude-r29-native-action-grammar-foundation` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 
@@ -59,5 +59,7 @@ claude-r29-native-action-grammar-foundation ready for Codex review
 
 ## Completion Notes
 
-- Review result:
-- Follow-up required:
+- Review result: Integrated in R29 native Diary action grammar foundation; see
+  `orchestration/integration_log.md` and `AGENTS.md`.
+- Follow-up required: Replay-consumer and later runtime promotion gates remain
+  separate work.

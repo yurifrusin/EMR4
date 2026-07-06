@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint105-bernie-turn-contract` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-02 23:40 +1000 |
 | Source HEAD | `0e9438b` |
 

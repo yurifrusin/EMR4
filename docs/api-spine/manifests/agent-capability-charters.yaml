@@ -1,0 +1,179 @@
+schema_version: api-spine.agent-capability-charters.v0
+artifact_kind: non_invasive_yaml_example
+status: prototype_only
+source_safety:
+  phi: none
+  examples: authored_synthetic
+  runtime_wiring: blocked
+  provider_calls: blocked
+  historical_diary_trove_access: blocked
+  h15_or_h_series_runtime_imports: blocked
+  memory_rag_graphrag: blocked
+  model_to_database_writes: blocked
+  graph_ql_mutations: blocked
+notes:
+  - YAML describes declared agent posture only.
+  - Runtime authorization, freshness, audit, PHI policy, and confirmation remain enforced by typed backend code.
+  - Browsers and agents should receive backend-evaluated affordance frames, not this raw manifest.
+
+agents:
+  - agent_id: bernie
+    display_name: Bernie
+    product_surface: receptionist_copilot
+    principal_kind: agent
+    default_risk_tier: admin_proposal
+    allowed_context_frames:
+      - frame: selected_diary_context
+        authority_label: Staff selected
+        max_scope: current_visible_diary_selection
+      - frame: caller_context
+        authority_label: Caller signal
+        max_scope: active_or_recent_call_candidate_set
+        identity_proof: false
+      - frame: patient_booking_context
+        authority_label: Live API fact
+        max_scope: one_staff_selected_or_verified_patient
+      - frame: availability_context
+        authority_label: Live API fact
+        max_scope: requested_date_time_resource_window
+      - frame: appointment_policy
+        authority_label: Manifest policy
+        max_scope: backend_evaluated_affordances
+      - frame: model_interpretation
+        authority_label: Model interpretation
+        max_scope: current_turn_only
+    may:
+      - explain_schedule
+      - ask_clarifying_questions
+      - prepare_appointment_proposal
+      - surface_candidate_slots_for_staff_review
+      - stage_pending_proposal_for_human_confirmation
+    must_require_staff_confirmation_for:
+      - appointment_confirm
+      - appointment_cancel
+      - appointment_reschedule
+      - status_change
+      - waiting_area_move
+      - patient_linking
+    must_not:
+      - create_final_appointment_without_staff_confirmation
+      - verify_identity_from_caller_id_alone
+      - call_ai_provider_directly_from_frontend
+      - read_entire_practice_diary
+      - read_raw_provider_prompts_or_responses
+      - read_raw_historical_diary_trove_or_h15_payloads
+      - persist_memory_or_graphrag_state
+      - use_graphql_as_a_command_tunnel
+    blocked_gates:
+      live_provider_runtime: blocked
+      broad_historical_trove_mining: blocked
+      h15_h_series_runtime_imports: blocked
+      memory_rag_graphrag_runtime: blocked
+      model_to_database_writes: blocked
+
+  - agent_id: davida
+    display_name: Davida
+    product_surface: practice_operations_copilot
+    principal_kind: agent
+    default_risk_tier: low_read_only
+    allowed_context_frames:
+      - frame: practice_setup_profile
+        authority_label: Live API fact
+        max_scope: current_practice_setup_state
+      - frame: capability_posture
+        authority_label: Manifest policy
+        max_scope: backend_evaluated_capabilities
+      - frame: setup_path_dry_run
+        authority_label: Fixture/intercepted
+        max_scope: authored_or_dry_run_steps_only
+      - frame: provider_readiness
+        authority_label: Manifest policy
+        max_scope: readiness_labels_no_secrets
+      - frame: audit_summary
+        authority_label: Live API fact
+        max_scope: aggregate_only
+    may:
+      - explain_onboarding_manifest
+      - validate_setup_inputs
+      - prepare_setup_dry_run
+      - summarize_permission_gaps
+      - draft_admin_checklists
+    must_require_admin_command_for:
+      - apply_setup_step
+      - rollback_setup_step
+      - enable_feature
+      - invite_user
+      - update_practice_profile
+      - configure_provider
+    must_not:
+      - execute_cloud_or_identity_changes_from_yaml_alone
+      - expose_provider_secrets_to_browser_or_agent
+      - bypass_command_audit_for_setup_changes
+      - grant_itself_or_other_agents_broader_authority
+      - call_live_provider_paths
+      - import_h15_or_h_series_runtime_material
+      - persist_memory_or_graphrag_state
+    blocked_gates:
+      live_provider_runtime: blocked
+      external_identity_write_runtime: blocked
+      provider_secret_material_access: blocked
+      historical_trove_or_h15_access: blocked
+      memory_rag_graphrag_runtime: blocked
+
+  - agent_id: consultant
+    display_name: Consultant
+    product_surface: doctor_reviewed_clinical_copilot
+    principal_kind: agent
+    default_risk_tier: clinical_draft
+    allowed_context_frames:
+      - frame: current_consult_note
+        authority_label: Staff selected
+        max_scope: active_document_selection_or_current_consult
+      - frame: patient_clinical_summary
+        authority_label: Live API fact
+        max_scope: doctor_authorized_patient_context
+      - frame: medications_allergies_problems
+        authority_label: Live API fact
+        max_scope: curated_patient_context
+      - frame: recent_results
+        authority_label: Live API fact
+        max_scope: relevant_results_only
+      - frame: cited_knowledge_source
+        authority_label: Live API fact
+        max_scope: licensed_source_with_citations
+      - frame: model_synthesis
+        authority_label: Model interpretation
+        max_scope: draft_or_advice_only
+    knowledge_sources:
+      allowed_placeholders:
+        - cochrane-library
+        - racgp-guidelines
+        - wiley-clinical-knowledge
+      citation_required: true
+      live_licensed_runtime: blocked
+    may:
+      - summarize_doctor_selected_context
+      - draft_clinical_correspondence_for_review
+      - suggest_next_questions
+      - list_red_flags
+      - cite_retrieved_knowledge_sources
+    must_require_doctor_confirmation_for:
+      - insert_or_finalize_clinical_note
+      - create_letter
+      - request_test
+      - prescribe_or_prepare_prescribing_action
+      - file_or_acknowledge_result
+    must_not:
+      - make_final_diagnosis_without_doctor_review
+      - autonomously_prescribe
+      - autonomously_mutate_clinical_record
+      - query_knowledge_sources_without_license_and_phi_policy
+      - log_raw_phi_prompts_by_default
+      - read_raw_historical_diary_trove_or_h15_payloads
+      - persist_memory_or_graphrag_state
+    blocked_gates:
+      live_clinical_knowledge_provider: blocked
+      autonomous_clinical_write: blocked
+      broad_patient_context_dump: blocked
+      historical_trove_or_h15_access: blocked
+      memory_rag_graphrag_runtime: blocked

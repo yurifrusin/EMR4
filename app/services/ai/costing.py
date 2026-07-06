@@ -26,6 +26,13 @@ class AiCostEnvelope:
     max_estimated_cost_usd: float | None
 
     def audit_metadata(self, *, latency_ms: int | None = None) -> dict[str, str | int | float | bool | None]:
+        budget_limit_present = self.max_estimated_cost_usd is not None
+        budget_threshold_ratio = self._budget_threshold_ratio()
+        budget_warning = (
+            budget_limit_present
+            and budget_threshold_ratio is not None
+            and budget_threshold_ratio >= 0.8
+        )
         metadata: dict[str, str | int | float | bool | None] = {
             "default_provider": self.default_provider,
             "default_project": self.default_project,
@@ -35,10 +42,18 @@ class AiCostEnvelope:
             "response_units": self.response_units,
             "estimated_cost_usd": self.estimated_cost_usd,
             "max_estimated_cost_usd": self.max_estimated_cost_usd,
+            "budget_limit_present": budget_limit_present,
+            "budget_threshold_ratio": budget_threshold_ratio,
+            "budget_warning": budget_warning,
         }
         if latency_ms is not None:
             metadata["latency_ms"] = latency_ms
         return metadata
+
+    def _budget_threshold_ratio(self) -> float | None:
+        if self.max_estimated_cost_usd is None or self.max_estimated_cost_usd <= 0:
+            return None
+        return round(self.estimated_cost_usd / self.max_estimated_cost_usd, 6)
 
 
 def estimate_ai_cost(

@@ -6,7 +6,7 @@
 | From | codex |
 | Branch | `master` |
 | Source Task | `codex-sprint-d8-deepseek-collision-verification-lane` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-04 22:09 +1000 |
 | Source HEAD | `23b93f1` |
 

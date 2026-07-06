@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-r29-action-grammar-receptionist-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-06 15:30 +1000 |
 | Source HEAD | `9d759599` |
 

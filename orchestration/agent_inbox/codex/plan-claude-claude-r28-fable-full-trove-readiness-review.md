@@ -7,7 +7,7 @@
 | Model | claude-fable-5 (Claude Fable 5, high-reasoning consult) |
 | Branch | `claude/fable-full-trove-readiness` |
 | Source Task | `claude-r28-fable-full-trove-readiness-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-06 15:08 +1000 |
 | Source HEAD | `5ee23ea1` |
 

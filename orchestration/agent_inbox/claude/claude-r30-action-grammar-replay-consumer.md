@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/action-grammar-replay-consumer` |
-| Status | queued |
+| Status | superseded |
 | Created | da852ba5 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-r30-action-grammar-replay-consumer --summary "Short plan summary"` |

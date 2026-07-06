@@ -1,0 +1,167 @@
+schema_version: api-spine.practice-onboarding.v0
+artifact_kind: non_invasive_yaml_example
+status: prototype_only
+source_safety:
+  phi: none
+  examples: authored_synthetic
+  runtime_wiring: blocked
+  provider_calls: blocked
+  external_client_access: blocked
+  historical_diary_trove_access: blocked
+  h15_or_h_series_runtime_imports: blocked
+  memory_rag_graphrag: blocked
+notes:
+  - This is an example of declared onboarding input, not executable runtime configuration.
+  - IDs are synthetic and do not identify a real practice, patient, practitioner, or location.
+  - A future backend must validate, authorize, dry-run, audit, and apply onboarding commands.
+
+practice:
+  practice_id: practice_demo_source_safe
+  name: Source Safe Family Practice
+  country: AU
+  timezone: Australia/Brisbane
+  environment: preview
+  onboarding_mode: dry_run_only
+  feature_posture:
+    graphql_reads: draft
+    rest_commands: existing_backend_only
+    async_integrations: placeholder_only
+    live_ai_providers: blocked
+    external_patient_clients: blocked
+
+locations:
+  - location_id: loc_main
+    label: Main Clinic
+    address_label: synthetic_suburb_only
+    rooms:
+      - room_id: room_gp_1
+        label: GP Room 1
+        clinical_use: general_practice_consult
+        visible_in_diary: true
+      - room_id: room_gp_2
+        label: GP Room 2
+        clinical_use: general_practice_consult
+        visible_in_diary: true
+      - room_id: room_nurse_1
+        label: Nurse Room
+        clinical_use: nurse_consult
+        visible_in_diary: true
+      - room_id: room_treatment
+        label: Treatment Room
+        clinical_use: procedures
+        visible_in_diary: true
+
+waiting_areas:
+  - waiting_area_id: wait_reception
+    label: Reception Waiting
+    intended_use: arrived_patient_queue
+    visible_to_roles:
+      - receptionist
+      - nurse
+      - gp
+      - practice_manager
+  - waiting_area_id: wait_treatment
+    label: Treatment Waiting
+    intended_use: nurse_or_procedure_queue
+    visible_to_roles:
+      - receptionist
+      - nurse
+      - gp
+      - practice_manager
+
+appointment_types:
+  - appointment_type_id: appt_standard_gp
+    label: Standard GP
+    default_duration_minutes: 15
+    color_token: appointment.standard
+    booking_surfaces:
+      - staff_diary
+    confirmation_required: true
+  - appointment_type_id: appt_long_gp
+    label: Long GP
+    default_duration_minutes: 30
+    color_token: appointment.long
+    booking_surfaces:
+      - staff_diary
+    confirmation_required: true
+  - appointment_type_id: appt_nurse
+    label: Nurse
+    default_duration_minutes: 20
+    color_token: appointment.nurse
+    booking_surfaces:
+      - staff_diary
+    confirmation_required: true
+  - appointment_type_id: appt_procedure
+    label: Procedure
+    default_duration_minutes: 45
+    color_token: appointment.procedure
+    booking_surfaces:
+      - staff_diary
+    confirmation_required: true
+
+diary_template:
+  template_id: diary_template_source_safe
+  slot_interval_minutes: 5
+  day_start: "08:00"
+  day_end: "18:00"
+  columns:
+    - column_id: col_gp_1
+      label: GP 1
+      room_id: room_gp_1
+      default_interval_minutes: 15
+    - column_id: col_gp_2
+      label: GP 2
+      room_id: room_gp_2
+      default_interval_minutes: 15
+    - column_id: col_nurse
+      label: Nurse
+      room_id: room_nurse_1
+      default_interval_minutes: 10
+    - column_id: col_treatment
+      label: Treatment
+      room_id: room_treatment
+      default_interval_minutes: 15
+  breaks:
+    - break_id: break_lunch
+      label: Lunch
+      start: "12:30"
+      end: "13:30"
+      applies_to_columns:
+        - col_gp_1
+        - col_gp_2
+
+role_affordance_examples:
+  receptionist:
+    can_read_diary: true
+    can_prepare_appointment_proposal: true
+    can_confirm_appointment: true
+    can_administer_practice_manifest: false
+  nurse:
+    can_read_diary: true
+    can_prepare_appointment_proposal: true
+    can_confirm_appointment: false
+    can_administer_practice_manifest: false
+  gp:
+    can_read_diary: true
+    can_prepare_appointment_proposal: true
+    can_confirm_appointment: true
+    can_administer_practice_manifest: false
+  practice_manager:
+    can_read_diary: true
+    can_prepare_appointment_proposal: true
+    can_confirm_appointment: true
+    can_administer_practice_manifest: true
+
+blocked_gates:
+  live_provider_runtime:
+    status: blocked
+    reason: Access AI/provider gate remains closed for this artifact.
+  historical_diary_trove_or_h15_runtime_imports:
+    status: blocked
+    reason: Onboarding manifests must not import raw trove, H15, or H-series material.
+  memory_rag_graphrag_runtime:
+    status: blocked
+    reason: Practice onboarding examples do not create memory or retrieval stores.
+  model_to_database_writes:
+    status: blocked
+    reason: Future apply commands require typed backend validation, authorization, idempotency, and audit.

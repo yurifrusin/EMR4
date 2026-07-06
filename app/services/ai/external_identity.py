@@ -27,6 +27,20 @@ class ExternalIdentityRoleMapping:
     access_ai_role: str
 
 
+@dataclass(frozen=True)
+class ExternalIdentityAttributeMapping:
+    provider: ExternalIdentityProvider
+    attribute: str
+    value: str
+    access_ai_role: str
+
+
+@dataclass(frozen=True)
+class ExternalIdentityAttribute:
+    attribute: str
+    value: str
+
+
 DEFAULT_EXTERNAL_ROLE_MAPPINGS: tuple[ExternalIdentityRoleMapping, ...] = (
     ExternalIdentityRoleMapping(
         provider=ExternalIdentityProvider.CLOUD_IDENTITY,
@@ -80,6 +94,44 @@ DEFAULT_EXTERNAL_ROLE_MAPPINGS: tuple[ExternalIdentityRoleMapping, ...] = (
     ),
 )
 
+DEFAULT_EXTERNAL_ATTRIBUTE_MAPPINGS: tuple[ExternalIdentityAttributeMapping, ...] = (
+    ExternalIdentityAttributeMapping(
+        provider=ExternalIdentityProvider.WORKOS,
+        attribute="access_ai.role",
+        value="clinical",
+        access_ai_role=AiAccessRole.CLINICAL_USER,
+    ),
+    ExternalIdentityAttributeMapping(
+        provider=ExternalIdentityProvider.WORKOS,
+        attribute="access_ai.role",
+        value="reception",
+        access_ai_role=AiAccessRole.RECEPTION_USER,
+    ),
+    ExternalIdentityAttributeMapping(
+        provider=ExternalIdentityProvider.WORKOS,
+        attribute="access_ai.role",
+        value="reception_supervisor",
+        access_ai_role=AiAccessRole.RECEPTION_SUPERVISOR,
+    ),
+    ExternalIdentityAttributeMapping(
+        provider=ExternalIdentityProvider.WORKOS,
+        attribute="access_ai.disabled",
+        value="true",
+        access_ai_role=AiAccessRole.DISABLED,
+    ),
+)
+
+_KNOWN_ACCESS_AI_ROLES = frozenset(
+    {
+        AiAccessRole.DISABLED,
+        AiAccessRole.PLATFORM_ADMIN,
+        AiAccessRole.DEV_OPERATOR,
+        AiAccessRole.CLINICAL_USER,
+        AiAccessRole.RECEPTION_USER,
+        AiAccessRole.RECEPTION_SUPERVISOR,
+    }
+)
+
 
 def access_roles_from_external_groups(
     provider: ExternalIdentityProvider,
@@ -94,6 +146,49 @@ def access_roles_from_external_groups(
             continue
         if mapping.external_group.lower() not in normalized_groups:
             continue
+        if mapping.access_ai_role not in _KNOWN_ACCESS_AI_ROLES:
+            continue
         if mapping.access_ai_role not in roles:
             roles.append(mapping.access_ai_role)
     return tuple(roles)
+
+
+def access_roles_from_external_attributes(
+    provider: ExternalIdentityProvider,
+    external_attributes: tuple[ExternalIdentityAttribute, ...],
+    *,
+    mappings: tuple[ExternalIdentityAttributeMapping, ...] = DEFAULT_EXTERNAL_ATTRIBUTE_MAPPINGS,
+) -> tuple[str, ...]:
+    normalized_attributes = {
+        (item.attribute.strip().lower(), item.value.strip().lower())
+        for item in external_attributes
+        if item.attribute.strip() and item.value.strip()
+    }
+    roles: list[str] = []
+    for mapping in mappings:
+        if mapping.provider is not provider:
+            continue
+        normalized_mapping = (
+            mapping.attribute.strip().lower(),
+            mapping.value.strip().lower(),
+        )
+        if normalized_mapping not in normalized_attributes:
+            continue
+        if mapping.access_ai_role not in _KNOWN_ACCESS_AI_ROLES:
+            continue
+        if mapping.access_ai_role not in roles:
+            roles.append(mapping.access_ai_role)
+    return tuple(roles)
+
+
+def access_roles_from_external_identity(
+    provider: ExternalIdentityProvider,
+    *,
+    external_groups: tuple[str, ...] = (),
+    external_attributes: tuple[ExternalIdentityAttribute, ...] = (),
+) -> tuple[str, ...]:
+    roles = (
+        *access_roles_from_external_groups(provider, external_groups),
+        *access_roles_from_external_attributes(provider, external_attributes),
+    )
+    return tuple(dict.fromkeys(roles))

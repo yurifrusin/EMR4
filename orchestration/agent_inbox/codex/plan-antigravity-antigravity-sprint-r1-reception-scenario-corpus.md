@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-r1-reception-scenario-corpus` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-05 11:34 +1000 |
 | Source HEAD | `dde0e36` |
 

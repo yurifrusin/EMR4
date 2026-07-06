@@ -30,6 +30,21 @@ overhead dominates. The preferred sprint unit is:
 
 In short: **narrow by outcome, not by file count**.
 
+## Closeout Position Rule
+
+Every sprint closeout must explicitly state where that sprint sits in the
+larger implementation plan. The closeout should name the active
+`implementation_plan.md` phase, this file's programme, or a clearly named
+emerging strategy track; classify the sprint as feature work, guardrail
+hardening, review integration, tooling/process repair, or strategy; explain the
+larger objective advanced; and name the next planned step.
+
+Short micro-sprints are acceptable when they are the right unit for a tightly
+coupled guardrail, review finding, tooling repair, or mechanical documentation
+change. They should not become invisible drift: if Ariadne cannot clearly place
+the work inside a programme or strategy track, the next move should be a
+planning sprint to restore the wider map before further tactical work.
+
 ## Phase 2 Current Programmes
 
 Phase 2 has already pivoted from a Word-hosted "Living Diary" document toward a
@@ -107,6 +122,21 @@ tracks that actual architecture.
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
+
+Current next move after H69: launch an Ariadne/Fable strategy sprint from a
+fresh chat to map the next ~100 sprints. The output should refresh this
+programme layer against `implementation_plan.md`, recent H-series/Bernie
+Interpretation Harness work, Access AI/API-spine direction, and worker
+orchestration health. It should include explicit adaptation checkpoints rather
+than pretending the 100-sprint map will remain fixed.
+
+The resulting local strategy artifacts are
+`orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md`
+and `orchestration/ariadne_fable_100_sprint_strategy_map.md`. Their accepted
+near-term direction is to close the Bernie/API-spine/Access-AI consumer gap
+before adding more provider-free harness guardrails, while keeping historical
+diary trove, runtime provider, memory/RAG/GraphRAG, H15/H-series runtime import,
+and model-to-database write gates blocked.
 
 Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:

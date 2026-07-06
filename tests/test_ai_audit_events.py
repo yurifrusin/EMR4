@@ -108,3 +108,102 @@ def test_naive_timestamps_are_rejected():
             capability=AiCapability.PROVIDER_LIVE_SMOKE,
             method=AiMethod.LIVE_SMOKE,
         )
+
+
+# ---- Adversarial test lane: Sprint Access AI audit event hardening ----
+
+@pytest.mark.parametrize("key", ["raw_transcript", "note_text", "letter_text"])
+def test_metadata_rejects_clinical_text_keys(key):
+    with pytest.raises(ValidationError, match="audit-safe"):
+        build_access_ai_audit_event(
+            event_type=AiAuditEventType.INVOCATION_ALLOWED,
+            source_surface=AiAuditSourceSurface.TASKPANE,
+            decision=AiAuditDecision.ALLOWED,
+            capability=AiCapability.AUDIO_SCRIBE,
+            method=AiMethod.INVOKE,
+            metadata={key: "do not store this"},
+        )
+
+
+@pytest.mark.parametrize("key", ["raw_transcript", "note_text", "letter_text"])
+def test_blocked_event_rejects_clinical_text_keys(key):
+    with pytest.raises(ValidationError, match="audit-safe"):
+        build_access_ai_audit_event(
+            event_type=AiAuditEventType.INVOCATION_BLOCKED,
+            source_surface=AiAuditSourceSurface.API,
+            decision=AiAuditDecision.BLOCKED,
+            capability=AiCapability.CLINICAL_EXTRACTION,
+            method=AiMethod.INVOKE,
+            reason_code="role_not_allowed",
+            metadata={key: "do not store this"},
+        )
+
+
+@pytest.mark.parametrize("key", ["raw_transcript", "note_text", "letter_text"])
+def test_failed_event_rejects_clinical_text_keys(key):
+    with pytest.raises(ValidationError, match="audit-safe"):
+        build_access_ai_audit_event(
+            event_type=AiAuditEventType.INVOCATION_FAILED,
+            source_surface=AiAuditSourceSurface.API,
+            decision=AiAuditDecision.FAILED,
+            capability=AiCapability.PROVIDER_LIVE_SMOKE,
+            method=AiMethod.LIVE_SMOKE,
+            reason_code="RuntimeError",
+            metadata={key: "do not store this"},
+        )
+
+
+def test_blocked_event_has_cost_envelope_metadata():
+    from app.services.ai.registry import get_capability_metadata
+    from app.services.ai.costing import estimate_ai_cost
+
+    metadata = get_capability_metadata(AiCapability.CLINICAL_EXTRACTION)
+    cost = estimate_ai_cost(metadata, request_contents={"prompt": "fixture"}, response_payload={"result": "ok"})
+    event = build_access_ai_audit_event(
+        event_type=AiAuditEventType.INVOCATION_BLOCKED,
+        source_surface=AiAuditSourceSurface.API,
+        decision=AiAuditDecision.BLOCKED,
+        capability=AiCapability.CLINICAL_EXTRACTION,
+        method=AiMethod.INVOKE,
+        reason_code="role_not_allowed",
+        metadata=cost.audit_metadata(),
+    )
+    assert event.metadata["estimated_cost_usd"] >= 0
+    assert event.metadata["request_units"] == cost.request_units
+    assert event.metadata["response_units"] == cost.response_units
+    assert event.metadata["default_provider"] == "gemini_vertex"
+
+
+def test_failed_event_has_cost_envelope_metadata():
+    from app.services.ai.registry import get_capability_metadata
+    from app.services.ai.costing import estimate_ai_cost
+
+    metadata = get_capability_metadata(AiCapability.PROVIDER_LIVE_SMOKE)
+    cost = estimate_ai_cost(metadata, request_contents={"smoke": "test"}, response_payload=None)
+    event = build_access_ai_audit_event(
+        event_type=AiAuditEventType.INVOCATION_FAILED,
+        source_surface=AiAuditSourceSurface.DEV_TOOL,
+        decision=AiAuditDecision.FAILED,
+        capability=AiCapability.PROVIDER_LIVE_SMOKE,
+        method=AiMethod.LIVE_SMOKE,
+        reason_code="ProviderTimeout",
+        metadata=cost.audit_metadata(latency_ms=5000),
+    )
+    assert event.metadata["latency_ms"] == 5000
+    assert event.metadata["estimated_cost_usd"] == 0.0
+    assert event.metadata["max_estimated_cost_usd"] == 1.0
+
+
+def test_invocation_event_correlation_id_survives_latency_update():
+    correlation_id = uuid.uuid4()
+    event = build_access_ai_audit_event(
+        event_type=AiAuditEventType.INVOCATION_ALLOWED,
+        source_surface=AiAuditSourceSurface.DIARY,
+        decision=AiAuditDecision.ALLOWED,
+        capability=AiCapability.BERNIE_BOOKING_INTERPRET,
+        method=AiMethod.INVOKE,
+        correlation_id=correlation_id,
+        metadata={"latency_ms": 42, "estimated_cost_usd": 0.0001},
+    )
+    assert event.correlation_id == correlation_id
+    assert event.metadata["latency_ms"] == 42

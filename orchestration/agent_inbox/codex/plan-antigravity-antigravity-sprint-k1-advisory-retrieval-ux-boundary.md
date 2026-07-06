@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint-k1-advisory-retrieval-ux-boundary` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 21:04 +1000 |
 | Source HEAD | `416fcc5` |
 

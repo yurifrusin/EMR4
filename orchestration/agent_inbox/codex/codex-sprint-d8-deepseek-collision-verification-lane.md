@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/current` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 23b93f1 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint-d8-deepseek-collision-verification-lane --summary "Short plan summary"` |

@@ -124,7 +124,7 @@ def test_smoke_script_id_presence_expectation_failure_is_nonzero(capsys):
 
     captured = capsys.readouterr()
     assert exit_code == 1
-    assert "Expected command_candidate.practitioner_id to be present." in captured.err
+    assert "Expected required command_candidate identifier to be present." in captured.err
     payload = json.loads(captured.out)
     assert payload["command_candidate"].get("practitioner_id") is None
     assert "420fb926-750b-4914-910b-e9d3f804e0f0" not in captured.out
@@ -143,3 +143,62 @@ def test_smoke_script_time_expectation_failure_is_nonzero(capsys):
     captured = capsys.readouterr()
     assert exit_code == 1
     assert "Expected earliest_time '15:00', got '14:00'." in captured.err
+
+def test_smoke_script_ordinary_prompt_compact_output_is_honest_and_redacted(capsys):
+    """Sprint 98 release gate: compact output for the ordinary names-only
+    receptionist prompt must honestly report provider/mode/result, carry the
+    parsed 14:00-15:45 time window, and contain no raw UUIDs."""
+    exit_code = smoke_bernie_interpreter.main([
+        "--provider",
+        "fake",
+        "--instruction",
+        (
+            "Make an appointment for Margaret Thompson with Dr Shera "
+            "today after 2 pm but before 3:45"
+        ),
+        "--reference-date",
+        "2026-07-01",
+        "--expect-result",
+        "clarification_required",
+        "--expect-earliest-time",
+        "14:00",
+        "--expect-latest-time",
+        "15:45",
+        "--expect-mode",
+        "mocked",
+    ])
+
+    assert exit_code == 0
+    payload = json.loads(capsys.readouterr().out)
+
+    # Time window parsing (the core Sprint 98 release evidence)
+    assert payload["command_candidate"]["earliest_time"] == "14:00"
+    assert payload["command_candidate"]["latest_time"] == "15:45"
+
+    # Honest provider/mode/result labels
+    assert payload["provider"] == "fake"
+    assert payload["mode"] == "mocked"
+    assert payload["live_provider"] is False
+    assert payload["result"] == "clarification_required"
+    assert payload["safe"] is False
+
+    # No raw UUIDs in compact output (names-only prompt -> no resolved IDs)
+    import re
+    uuid_re = re.compile(
+        r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+        re.I,
+    )
+    compact_text = json.dumps(payload)
+    match = uuid_re.search(compact_text)
+    assert not match, (
+        f"Compact output must not leak raw UUIDs; found {match.group()!r}"
+    )
+
+    # Route-intercept/fake-provider honesty
+    assert "live_provider: true" not in compact_text.lower()
+    assert payload["provider"] == "fake", "Must honestly report fake provider"
+    assert payload["mode"] == "mocked", "Must honestly report mocked mode"
+    assert payload["live_provider"] is False, "Must honestly flag live_provider as false"
+    assert payload["result"] == "clarification_required", (
+        "Must honestly report clarification_required for unresolved names-only prompt"
+    )

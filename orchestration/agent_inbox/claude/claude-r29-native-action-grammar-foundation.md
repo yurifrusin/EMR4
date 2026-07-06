@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/native-action-grammar-foundation` |
-| Status | submitted |
+| Status | integrated |
 | Created | c610e1de |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-r29-native-action-grammar-foundation --summary "Short plan summary"` |

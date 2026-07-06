@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-r30-replay-consumer-receptionist-review` |
-| Status | queued |
+| Status | integrated |
 
 ## Review Request
 

@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-sprint107-diary-reception-policy-ui` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 14:06 +1000 |
 | Source HEAD | `ece402f` |
 

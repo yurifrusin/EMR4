@@ -6,7 +6,7 @@
 | From | antigravity |
 | Branch | `antigravity/current` |
 | Source Task | `antigravity-r30-replay-consumer-receptionist-review` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-06 15:50 +1000 |
 | Source HEAD | `be0f8fbd` |
 

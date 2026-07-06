@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-k1-typed-practice-knowledge-substrate` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 21:08 +1000 |
 | Source HEAD | `416fcc5` |
 

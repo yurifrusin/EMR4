@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/current` |
 | Source Task | `claude-sprint-n1a-diary-reception-domain-rehomes` |
-| Status | accepted |
+| Status | integrated |
 | Created | 2026-07-03 19:29 +1000 |
 | Source HEAD | `0debced` |
 

@@ -28,6 +28,30 @@
 
 Read these before acting on remembered process details.
 
+- 2026-07-06: Default sprint-worker protocol means cross-worker lanes, not
+  three native Codex subagents. At the start of each non-trivial sprint, Ariadne
+  must check and record Claude and Antigravity availability before choosing the
+  worker mix. The preferred mix is Claude first (Sonnet for ordinary
+  implementation/review, Opus/Fable only for unusually complex architecture or
+  high-leverage consulting), Antigravity/Gemini as a first-class independent
+  worker (current default/Gemini Flash-class model unless escalation is needed),
+  and DeepSeek Flash as the cheap high-parallelism worker lane. If Claude or
+  Antigravity is quota-capped, recuperating, unavailable, or fails to submit a
+  durable artifact in the sprint window, Ariadne should replace that lane with
+  additional DeepSeek Flash work or complete the bounded remainder directly.
+  Native Codex subagents are fallback/integration helpers, not the default
+  meaning of "three lane sprint"; use them only when an external lane is
+  unavailable, the work is tiny/tightly coupled, or Codex-specific tooling is
+  materially better. Sprint closeout must state the actual worker mix and any
+  substitutions from the preferred Claude/Antigravity/DeepSeek mix.
+- 2026-07-07: Every sprint closeout must explicitly situate the sprint inside
+  the larger implementation plan. State the relevant phase, programme, or
+  strategy track; whether the sprint was a feature increment, guardrail
+  hardening, review integration, tooling/process repair, or strategy sprint;
+  what larger objective it advanced; and what the next planned step is. If
+  Ariadne cannot clearly name that larger position, pause tactical
+  micro-sprints and propose a strategy/planning sprint, potentially with
+  Claude/Fable, before continuing.
 - 2026-07-07: Avoid Ariadne-only sprint drift. Ariadne-only implementation is
   appropriate for tiny, tightly coupled guardrail increments, mechanical docs,
   or urgent hotfixes where extra worker setup would add more risk than review.
@@ -94,14 +118,18 @@ Read these before acting on remembered process details.
 - 2026-06-24: Use `orchestration/phase_programmes.md` as the planning layer
   between implementation phases and tactical sprints. Prefer coherent
   outcome-sized sprints inside a programme over reactive micro-sprints.
-- 2026-06-30: Substantial Bernie / agentic-reception work defaults to the full
-  three-way plan-gated loop: Claude, Antigravity/Gemini, and a Codex subagent
-  each submit plans first; Ariadne reviews, accepts or requests resubmission,
-  and only then releases implementation with `complete sprint task`. Depart from
-  this only for narrow hotfixes, tooling failures, or explicitly documented
-  scope/risk reasons. Keep visible receptionist UX calm and helpful; safety
-  belongs primarily in typed API contracts, confirmation endpoints, RBAC, and
-  audit trails rather than alarming staff-facing copy.
+- 2026-06-30, amended 2026-07-06: Substantial Bernie / agentic-reception work
+  defaults to the external-worker plan-gated loop: Claude,
+  Antigravity/Gemini, and DeepSeek Flash each submit bounded plans/reviews or
+  implementation artifacts first when available; Ariadne reviews, accepts or
+  requests resubmission, and only then releases implementation with
+  `complete sprint task`. Depart from this only for narrow hotfixes, tooling
+  failures, quota/recuperation, or explicitly documented scope/risk reasons.
+  If Claude or Antigravity is unavailable, replace that lane with another
+  DeepSeek Flash worker before reaching for a native Codex subagent. Keep
+  visible receptionist UX calm and helpful; safety belongs primarily in typed
+  API contracts, confirmation endpoints, RBAC, and audit trails rather than
+  alarming staff-facing copy.
 - 2026-07-01: Bernie release gates are recorded in
   `orchestration/bernie_release_gates.md`. A basic Bernie booking happy path,
   including the Margaret Thompson / Dr Shera ordinary receptionist prompt, is a
@@ -200,11 +228,15 @@ Read these before acting on remembered process details.
   only the smallest manual prompt still needed.
 - Parallel implementation release rule: once all plan packets for a sprint have
   been reviewed and accepted, Ariadne should release independent Claude,
-  Antigravity, and Codex-worker implementation tasks in parallel using their
-  lowest-cost text channels. Serial release is reserved for unusual conditions:
+  Antigravity, and DeepSeek Flash implementation/review tasks in parallel using
+  their lowest-cost text channels. A native Codex worker may supplement or
+  replace one of those lanes only when the external lane is unavailable,
+  recuperating, too slow for the bounded sprint window, or when Codex-specific
+  tooling is the right fit. Serial release is reserved for unusual conditions:
   unproven/broken worker CLI channels, overlapping mutable file surfaces,
   security-sensitive manual approval points, or active recovery from a protocol
-  violation. If Ariadne serializes a release, record why.
+  violation. If Ariadne serializes a release or substitutes Codex for an
+  external lane, record why.
 - Claude headless plan-gate rule: do not `--resume` across a plan gate. The plan
   and implementation turns use different default models (`plan` = Opus/medium,
   `implement` = Sonnet/medium), so use a fresh session per phase. Re-run

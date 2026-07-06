@@ -6,7 +6,7 @@
 | From | claude |
 | Branch | `claude/native-action-grammar-foundation` |
 | Source Task | `claude-r29-native-action-grammar-foundation` |
-| Status | pending_plan_review |
+| Status | integrated |
 | Created | 2026-07-06 15:27 +1000 |
 | Source HEAD | `9d759599` |
 

@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/r30-replay-consumer-adversarial-review` |
-| Status | submitted |
+| Status | integrated |
 | Created | da852ba5 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-r30-replay-consumer-adversarial-review --summary "Short plan summary"` |

@@ -41,6 +41,14 @@ def _row_counts(db) -> tuple[int, int]:
     )
 
 
+def _pin_clinic_fixture_time(monkeypatch, *, day: int = 1) -> None:
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda tz: datetime(2026, 7, day, 9, 0, 0, tzinfo=tz),
+    )
+
+
 def _search_and_select(client, token: str, practitioner, patient):
     search_resp = client.post(
         NORMALIZED_SEARCH_URL,
@@ -87,14 +95,7 @@ def test_ordinary_prompt_resolves_practitioner_before_supervised_booking_gate(
     monkeypatch,
 ):
     monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
-    # Pin clinic-local time to 09:00 on the reference date so same-day validity
-    # does not reject the "today after 2 pm" window (which would be in the past
-    # when this test runs after 15:45 AEST).
-    monkeypatch.setattr(
-        appointments_router,
-        "_clinic_local_now",
-        lambda tz: datetime(2026, 7, 1, 9, 0, 0, tzinfo=tz),
-    )
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     before = _row_counts(db)
 
@@ -106,6 +107,10 @@ def test_ordinary_prompt_resolves_practitioner_before_supervised_booking_gate(
 
     assert interpret_resp.status_code == 200, interpret_resp.text
     interpreted = interpret_resp.json()
+    # Provider mode/label honesty (Sprint 98 release gate)
+    assert interpreted["provider_metadata"]["provider"] == "fake"
+    assert interpreted["provider_metadata"]["mode"] == "mocked"
+    assert interpreted["provider_metadata"]["live_provider"] is False
     assert interpreted["safe"] is True
     assert interpreted["result"] == "interpreted"
     assert interpreted["command_candidate"]["practitioner_id"] == str(practitioner.id)
@@ -145,6 +150,7 @@ def test_next_monday_prompt_reaches_supervised_booking_candidates(
     monkeypatch,
 ):
     monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    _pin_clinic_fixture_time(monkeypatch, day=6)
     token = make_token(gp_user)
     before = _row_counts(db)
 
@@ -168,6 +174,11 @@ def test_next_monday_prompt_reaches_supervised_booking_candidates(
     assert interpreted["normalization"]["constraint"]["earliest_time"] == "15:00:00"
     assert interpreted["command_candidate"]["practitioner_id"] == str(practitioner.id)
     assert interpreted["command_candidate"]["patient_id"] == str(patient.id)
+    # Provider mode/label honesty (Sprint 98 release gate)
+    assert interpreted["provider_metadata"]["provider"] == "fake"
+    assert interpreted["provider_metadata"]["mode"] == "mocked"
+    assert interpreted["provider_metadata"]["live_provider"] is False
+
 
     wrapper_resp = client.post(
         WRAPPER_URL,
@@ -195,7 +206,9 @@ def test_confirmation_ready_uses_practitioner_evidence_not_raw_missing_id(
     practitioner,
     patient,
     schedule,
+    monkeypatch,
 ):
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     before = _row_counts(db)
 
@@ -241,7 +254,9 @@ def test_confirm_bernie_invalid_practitioner_returns_typed_failure_not_not_found
     practitioner,
     patient,
     schedule,
+    monkeypatch,
 ):
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     selection = _search_and_select(client, token, practitioner, patient)
     selection["create_proposal"]["command"]["practitioner_id"] = (
@@ -265,4 +280,9 @@ def test_confirm_bernie_invalid_practitioner_returns_typed_failure_not_not_found
     block_codes = {block["code"] for block in data["blocks"]}
     assert "practitioner_not_found" in block_codes
     assert "create_proposal_revalidation_blocked" not in block_codes
+
+    # No injectable raw UUID leaks in response text
+    assert "00000000-0000-0000-0000-000000000001" not in resp.text
+    assert "Not Found" not in resp.text
+    assert "404" not in resp.text
     assert _row_counts(db) == before
