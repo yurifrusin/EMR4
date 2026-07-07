@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 155 create-confirm client header emission implemented in commit `25e42bc`; diary staff create-confirm now sends a distinct stable modal `confirmIdempotencyKey`, and Bernie review create-confirm-Bernie sends a stable Bernie route key |
+| **Current active track** | Sprint 155 create-confirm client header emission implemented in commit `25e42bc` and closed/pushed through `d172b2c`; diary staff create-confirm now sends a distinct stable modal `confirmIdempotencyKey`, and Bernie review create-confirm-Bernie sends a stable Bernie route key |
 | **Next recommended work** | Sprint 156 should choose the next bounded confirm client-header family, likely status-confirm/delete-confirm or update-confirm, before proposal-only backend binding or strict `minLength: 8` enforcement |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
