@@ -6895,7 +6895,10 @@ def test_human_drag_resize_uses_signed_update_confirm_route(diary_page):
             )
             return
         if request.method == "POST" and request.url.endswith("/appointments/proposals/update/confirm"):
-            captured_confirms.append(request.post_data_json)
+            captured_confirms.append({
+                "body": request.post_data_json,
+                "idempotency_key": request.headers.get("idempotency-key"),
+            })
             route.fulfill(
                 status=200,
                 content_type="application/json",
@@ -6967,9 +6970,10 @@ def test_human_drag_resize_uses_signed_update_confirm_route(diary_page):
     assert captured_proposals, "Expected update proposal request"
     assert captured_confirms, "Expected signed update confirm request"
     assert captured_raw_puts == []
-    assert captured_confirms[0]["confirmed"] is True
-    assert captured_confirms[0]["update_proposal"]["command"]["appointment_id"] == "appt-human-1"
-    assert captured_confirms[0]["update_proposal"]["command"]["start_time_local"] == "15:15"
+    assert captured_confirms[0]["idempotency_key"] == "update-confirm-human-fresh-1"
+    assert captured_confirms[0]["body"]["confirmed"] is True
+    assert captured_confirms[0]["body"]["update_proposal"]["command"]["appointment_id"] == "appt-human-1"
+    assert captured_confirms[0]["body"]["update_proposal"]["command"]["start_time_local"] == "15:15"
 
 
 def test_edit_modal_uses_signed_update_confirm_before_status_patch(diary_page):
@@ -7045,7 +7049,10 @@ def test_edit_modal_uses_signed_update_confirm_before_status_patch(diary_page):
             )
             return
         if request.method == "POST" and request.url.endswith("/appointments/proposals/update/confirm"):
-            captured_confirms.append(request.post_data_json)
+            captured_confirms.append({
+                "body": request.post_data_json,
+                "idempotency_key": request.headers.get("idempotency-key"),
+            })
             route.fulfill(
                 status=200,
                 content_type="application/json",
@@ -7131,9 +7138,10 @@ def test_edit_modal_uses_signed_update_confirm_before_status_patch(diary_page):
     assert captured_confirms, "Expected signed update confirm request"
     assert captured_status_patches, "Expected separate status PATCH after detail confirm"
     assert captured_raw_puts == []
-    assert captured_confirms[0]["confirmed"] is True
-    assert captured_confirms[0]["update_proposal"]["command"]["appointment_id"] == "appt-edit-1"
-    assert captured_confirms[0]["update_proposal"]["command"]["duration_minutes"] == 30
+    assert captured_confirms[0]["idempotency_key"] == "update-confirm-edit-fresh-1"
+    assert captured_confirms[0]["body"]["confirmed"] is True
+    assert captured_confirms[0]["body"]["update_proposal"]["command"]["appointment_id"] == "appt-edit-1"
+    assert captured_confirms[0]["body"]["update_proposal"]["command"]["duration_minutes"] == 30
     assert captured_status_patches[0]["status"] == "Arrived"
 
 

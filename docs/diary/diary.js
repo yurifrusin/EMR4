@@ -7069,6 +7069,14 @@ function statusConfirmIdempotencyKey(proposal, confirmPayload) {
   );
 }
 
+function updateConfirmIdempotencyKey(proposal, confirmPayload) {
+  return confirmIdempotencyKeyFromFreshness(
+    "update-confirm",
+    confirmPayload?.update_proposal_freshness_id || proposal?.update_proposal_freshness_id,
+    proposal
+  );
+}
+
 function deleteConfirmIdempotencyKey(proposal, confirmPayload) {
   return confirmIdempotencyKeyFromFreshness(
     "delete-confirm",
@@ -7568,8 +7576,12 @@ async function saveBooking() {
             ...(confirmPayload.confirmed_warnings || []),
             ...confirmedWarnings
           ]));
+          const confirmHeaders = idempotencyHeadersFor(
+            updateConfirmIdempotencyKey(proposal, confirmPayload)
+          );
           updateRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
             method: "POST",
+            headers: confirmHeaders,
             body: JSON.stringify(confirmPayload)
           });
         } else {
@@ -8108,8 +8120,12 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
           ...(confirmPayload.confirmed_warnings || []),
           ...confirmedWarnings
         ]));
+        const confirmHeaders = idempotencyHeadersFor(
+          updateConfirmIdempotencyKey(proposal, confirmPayload)
+        );
         updateRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
           method: "POST",
+          headers: confirmHeaders,
           body: JSON.stringify(confirmPayload)
         });
       } else {

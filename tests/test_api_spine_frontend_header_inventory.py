@@ -80,16 +80,45 @@ def test_frontend_status_and_delete_confirm_callers_emit_stable_headers():
     assert "function ensureProposalConfirmIdempotencyKey(proposal, kind)" in source
 
 
+def test_frontend_update_confirm_callers_emit_stable_headers():
+    source = _read(DIARY_JS)
+    save_booking = _function_source(source, "saveBooking")
+    move_resize = _function_source(source, "handleMoveResize")
+
+    update_confirm_block = _block(
+        save_booking,
+        "let updateRes;",
+        "if (!updateRes.ok)",
+    )
+    move_resize_confirm_block = _block(
+        move_resize,
+        "let updateRes;",
+        "if (!updateRes.ok)",
+    )
+
+    assert "function updateConfirmIdempotencyKey(proposal, confirmPayload)" in source
+    assert "updateConfirmIdempotencyKey(proposal, confirmPayload)" in update_confirm_block
+    assert "headers: confirmHeaders" in update_confirm_block
+    assert "updateConfirmIdempotencyKey(proposal, confirmPayload)" in move_resize_confirm_block
+    assert "headers: confirmHeaders" in move_resize_confirm_block
+
+
+def test_frontend_update_confirm_falls_back_to_proposal_scoped_key():
+    source = _read(DIARY_JS)
+    update_key = _function_source(source, "updateConfirmIdempotencyKey")
+    freshness_helper = _function_source(source, "confirmIdempotencyKeyFromFreshness")
+
+    assert '"update-confirm"' in update_key
+    assert "confirmPayload?.update_proposal_freshness_id" in update_key
+    assert "proposal?.update_proposal_freshness_id" in update_key
+    assert "return ensureProposalConfirmIdempotencyKey(proposal, kind);" in freshness_helper
+
+
 def test_frontend_remaining_confirm_callers_are_explicitly_tracked_as_missing_headers():
     source = _read(DIARY_JS)
     preflight = _read(PREFLIGHT)
 
     confirm_blocks = {
-        "saveBooking update confirm branch": _block(
-            _function_source(source, "saveBooking"),
-            "if (confirmEndpoint && confirmPayload) {",
-            "if (!updateRes.ok)",
-        ),
         "confirmBernieToolIntentChange": _function_source(source, "confirmBernieToolIntentChange"),
     }
 
@@ -104,7 +133,7 @@ def test_frontend_remaining_confirm_callers_are_explicitly_tracked_as_missing_he
         "confirm_update_proposal_route",
         "confirm_status_proposal_route",
         "confirm_delete_proposal_route",
-        "Missing frontend header",
+        "confirmBernieToolIntentChange",
     ):
         assert phrase in preflight
 
@@ -148,4 +177,5 @@ def test_frontend_header_preflight_keeps_closed_gates_closed():
     ):
         assert phrase in text
 
-    assert "Sprint 155 should wire the create-confirm client header path first" in text
+    assert "confirm-client surface checkpoint" in text
+    assert "`confirmBernieToolIntentChange`, proposal-only header binding" in text
