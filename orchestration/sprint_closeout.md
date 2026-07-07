@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 152 Create-Proposal minLength Readiness Decision |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude recommendation accepted; Antigravity integrated as dissent; DeepSeek adversarial recommendation accepted |
-| Status | Implementation committed in `11913f0`; pending closeout metadata commit/push |
+| Status | Committed and pushed; sprint engine continuing |
 | Last updated | 2026-07-07 |
 
 ## Sprint 152 What Changed
@@ -71,9 +71,10 @@ Every closeout entry should record:
 Publication state:
 
 - Integration commit SHA: `11913f0`.
-- Closeout metadata commit SHA: pending.
-- Push result: pending.
-- Final `git status --short --branch`: pending final closeout check.
+- Closeout metadata commit SHA: `eb09470`.
+- Push result: pushed to `origin/master`; GitHub reported the known moved-repo
+  notice and 1 moderate Dependabot alert.
+- Final `git status --short --branch`: `## master...origin/master`.
 
 Strategic position: Sprint 152 is **Programme 2G / EMR4 API Spine** guardrail
 hardening and compatibility-decision work. It was intentionally small because
