@@ -24,10 +24,60 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 169 Temporal Drift Follow-Up Fixture |
-| Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Integrated and pushed |
+| Batch | Sprint 170 Temporal Drift Reset/No-Merge Fixture |
+| Integrated through | Ariadne narrow guardrail implementation after Sprint 169 closeout; adjacent replay verification |
+| Status | Pending push |
 | Last updated | 2026-07-07 |
+
+## Sprint 170 What Changed
+
+- Added `interpret_context_temporal_drift_reset_no_merge.yaml`, an authored
+  synthetic fake-provider route-level fixture proving that explicit
+  `context_frames: []` clears prior requested-appointment context.
+- The fixture stages a complete initial request, then sends a later-turn
+  relative `tomorrow` follow-up with Dr Shera restated and empty context. It
+  proves `tomorrow` resolves from the current turn `reference_date:
+  2026-07-09` to `2026-07-10`, while patient/time/duration are not inherited
+  from the prior requested appointment.
+- Updated `AGENTS.md` so the baton records Sprint 170 as the current active
+  prompt-thread guardrail and recommends continuing only inside reset/no-prior
+  context or non-intercepted fake-provider backend edges.
+
+Sprint 170 is a narrow guardrail hardening sprint inside the Programme 2D
+Reception Copilot Readiness / Programme 2G Bernie API Spine review-readiness
+track. It advances the larger objective of proving Bernie prompt-thread context
+semantics before any provider/runtime/memory gate opens. The sprint was small
+because it touched only an executable fixture and handover state after Sprint
+169 had already established the adjacent threaded-date behavior.
+
+Sprint 170 does not open runtime route wiring from the provider-free
+interpretation harness, provider prompt/dry-run wiring, live-provider
+enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
+material access, GraphQL mutations, or model-to-database writes.
+
+## Sprint 170 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -k interpret_context_temporal_drift_reset_no_merge -q`
+  (`1 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -k "interpret_context_temporal_drift_followup or interpret_context_temporal_drift_reset_no_merge or interpret_context_frames_auto_thread_vs_empty or interpret_no_prior_frame_no_merge" -q`
+  (`4 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  (`8 passed, 1 skipped`; existing Starlette/Google GenAI warnings only).
+- `git diff --check` passed.
+- Local integration commit: `6fc466b9`.
+- Push result: pending; sandboxed `git push origin master` failed without
+  network access, and the escalated push request was not approved.
+
+Initial parallel verification hit the known transient Postgres enum DDL race
+(`userrole` duplicate type) when two DB-initializing tests ran at once; rerunning
+the replay by itself passed.
+
+Sprint engine state: continuing. No user intervention is required; next planned
+step is Sprint 171, a bounded reset/no-prior context matrix using the preferred
+Claude, Antigravity, and DeepSeek worker mix where available, with extra
+DeepSeek lanes substituting for temporary Claude/Antigravity limits.
+
+---
 
 ## Sprint 169 What Changed
 

@@ -1,0 +1,63 @@
+id: interpret_context_temporal_drift_reset_no_merge
+category: booking_interpret_contract
+description: >
+  A relative-date follow-up after explicit context reset uses the current turn's
+  reference date but does not inherit patient, time, or duration from the prior
+  requested appointment.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera next Tuesday at 09:00 for 20 minutes"
+      reference_date: "2026-07-08"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": "2026-07-14"
+        "command_candidate.earliest_time": "09:00"
+        "command_candidate.duration_minutes": "20"
+        "request_reference_date": "2026-07-08"
+  - action: interpret
+    input:
+      instruction: "With Dr Shera, actually make it tomorrow"
+      reference_date: "2026-07-09"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": null
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": tomorrow
+        "command_candidate.earliest_time": null
+        "command_candidate.duration_minutes": 15
+        "request_reference_date": "2026-07-09"
+        "normalization.constraint.date_from": "2026-07-10"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
