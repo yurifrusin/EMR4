@@ -24,10 +24,85 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 194 Appointment Route Documented-Path Split |
+| Batch | Sprint 195 Out-of-Contract POST Route Classification |
 | Integrated through | Ariadne implementation with Claude, Antigravity via `agy.exe`, and DeepSeek reviews |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
+
+## Sprint 195 What Changed
+
+- Extended `scripts/appointment_route_inventory_preflight.py` with a separate
+  POST sub-family axis for out-of-contract appointment route method rows.
+- Kept the existing method-family compatibility anchor:
+  `out_of_contract_by_method_family["query_or_command_post"] == 9`.
+- Added `out_of_contract_post_route_method_count=9`.
+- Added `out_of_contract_post_by_sub_family` with current safe aggregate counts:
+  - `proposal_support_post=7`;
+  - `state_tracking_post=2`.
+- Added `out_of_contract_post_rows_are_grammar_dispatch_authority=false` and
+  `post_sub_family_classifier=fixed_static_path_patterns`.
+- Strengthened `tests/test_appointment_route_inventory_preflight.py` with POST
+  count anchoring, sub-family sum invariants, unknown-label rejection, authority
+  flag rejection, and leakage checks for route/path fragments.
+- Updated `docs/appointment-route-inventory-preflight.md`.
+- Integrated Claude and Antigravity Sprint 195 review artifacts under
+  `orchestration/agent_inbox/codex/`.
+
+Worker mix:
+
+- Claude submitted a usable review artifact and recommended retaining the
+  legacy POST method-family anchor while adding a separate false-authority POST
+  axis.
+- Antigravity ran through the corrected `agy.exe` protocol and submitted a
+  tangible review artifact; its worker worktree was cleaned after integration.
+- DeepSeek reviewed the same narrow scope and recommended neutral naming,
+  count-sum invariants, and explicit non-authority posture.
+
+Boundary:
+
+- Static FastAPI `APIRoute` metadata inspection only.
+- Count-only/path-free output; no route paths, handler names, request bodies,
+  IDs, patient/practitioner data, local material paths, or external-provider
+  content.
+- No HTTP requests, route handler execution, database session, provider calls,
+  memory/RAG/GraphRAG access, H15/H-series runtime imports, historical diary
+  material access, GraphQL access, or writes.
+- POST sub-family labels are planning signals only and do not add proposal,
+  confirm, raw mutation, or Diary grammar dispatch authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe scripts\appointment_route_inventory_preflight.py
+.venv\Scripts\python.exe -m pytest tests\test_appointment_route_inventory_preflight.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: inventory script emitted safe aggregate counts with 9 out-of-contract
+POST method rows split into 7 proposal-support and 2 state-tracking rows;
+inventory tests `23 passed`; API spine artifacts `31 passed`; endpoint coverage
+`9 passed` on serial rerun; route contract `12 passed`; scenario integrity
+`8 passed, 1 skipped`; readiness/provider reports stayed blocked/false;
+leakage lint safe; whitespace check clean. A parallel pytest batch hit the
+known PostgreSQL enum DDL setup race (`userrole` duplicate type); affected
+commands passed when rerun serially.
+
+Implementation commit: `69ff1e9f`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded backend-readiness via route contract behavior
+checks or narrow non-grammar documentation review for out-of-contract support
+surfaces.
+
+---
 
 ## Sprint 194 What Changed
 
