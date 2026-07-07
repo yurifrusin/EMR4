@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 162 Interpret-Capable Bernie Scenario Replay |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI advice; DeepSeek adversarial review; Antigravity CLI corpus review |
-| Status | Closeout metadata commit/push in progress |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 162 What Changed
@@ -87,9 +87,12 @@ material access, GraphQL mutations, or model-to-database writes.
 Publication state:
 
 - Implementation commit SHA: `a31ebfdf`.
-- Closeout metadata commit SHA: this closeout metadata commit.
-- Push result: pending final push.
-- Final `git status --short --branch`: pending.
+- Closeout metadata commit SHA: `b96f5a90`.
+- Push result: `origin/master`, `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` aligned at the Sprint 162
+  publication commit.
+- Final `git status --short --branch`: clean except the expected branch header
+  after publication push.
 
 Strategic position: Sprint 162 follows Fable's Sprint 161 advice. The system's
 contract bones are strong enough for prompt-thread automation, but this sprint
