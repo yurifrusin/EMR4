@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 173 multi-frame-source reset fixture added after Sprint 172: requested appointments derived from visible diary, selected diary appointment, and selected proposal context now auto-thread on omitted context and clear on explicit `context_frames: []` |
-| **Next recommended work** | Move the authored Bernie/Diary prompt-thread tranche toward a narrow non-intercepted fake-provider backend pass, or close the tranche with a compact readiness artifact; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 174 authored prompt-thread tranche readiness packet added after Sprint 173: the fixture tranche is ready for a narrow non-intercepted fake-provider backend pass while runtime/provider/memory/H15/trove/GraphQL/model-write gates remain closed |
+| **Next recommended work** | Run the narrow non-intercepted fake-provider backend pass against the authored Bernie prompt-thread corpus, first rechecking readiness values remain `runtime_or_provider_wiring_ready=false`, `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

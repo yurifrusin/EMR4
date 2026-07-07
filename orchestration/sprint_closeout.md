@@ -24,10 +24,57 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 173 Multi-Frame Source Reset Fixture |
-| Integrated through | Ariadne direct fixture implementation from Sprint 171 DeepSeek recommendation; no new worker dispatch because scope was a single test-only YAML fixture |
-| Status | Integrated and pushed |
+| Batch | Sprint 174 Prompt-Thread Tranche Readiness |
+| Integrated through | Ariadne readiness packet; DeepSeek Flash review lane |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 174 What Changed
+
+- Added `docs/bernie-prompt-thread-tranche-readiness.md`, a compact readiness
+  packet for the authored Bernie/Diary prompt-thread fixture tranche.
+- Integrated DeepSeek's independent readiness review at
+  `orchestration/agent_inbox/codex/review-deepseek-sprint174-fixture-tranche-readiness.md`.
+- Recorded that the tranche is ready for a narrow non-intercepted fake-provider
+  backend pass, with remaining fixture-only gaps non-blocking.
+
+Sprint 174 is a strategy/review integration sprint inside Programme 2D
+Reception Copilot Readiness and Programme 2G Bernie API Spine
+review-readiness. It closes the fixture tranche as sufficient for the next
+bounded evidence step without authorizing live-provider, runtime memory, H15,
+historical diary, GraphQL, or model-write gates.
+
+Worker mix:
+
+- Ariadne drafted the readiness packet.
+- DeepSeek Flash independently reviewed the fixture tranche and returned
+  `READY` for a narrow fake-provider backend pass with three non-blocking gaps.
+- Claude/Antigravity were not re-run because their durable mirrors remain
+  stale/dirty and this was a bounded review artifact, not a separable
+  implementation surface.
+
+Sprint 174 does not open runtime route wiring from the provider-free
+interpretation harness, provider prompt/dry-run wiring, live-provider enablement,
+memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary material
+access, GraphQL mutations, or model-to-database writes.
+
+## Sprint 174 Verification
+
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
+  returned `runtime_or_provider_wiring_ready=false`,
+  `raw_trove_access_ready=false`, `runtime_gate_decision=blocked`, and
+  `sprint_engine_state=continuing`.
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  (`.x..........................`; one pre-existing xfail, existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+
+Sprint engine state: continuing. No user intervention is required. Next planned
+step is the narrow non-intercepted fake-provider backend pass, provided the same
+readiness values remain blocked/false before launch.
+
+---
 
 ## Sprint 173 What Changed
 
