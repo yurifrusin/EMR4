@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 189 Fable-aligned Bernie prompt-thread route fixture integrated after Sprint 188: "at the same time" wording in a date-change follow-up is now covered as inert distractor robustness, preserving threaded time via route merge without claiming true anaphora support |
-| **Next recommended work** | Continue the bounded fake-provider Bernie backend-readiness track with another small route-level prompt-thread fixture or backend contract check; use Ariadne plus three worker lanes by default (Claude, Antigravity, DeepSeek, with extra DeepSeek substitutions when a lane is unavailable), keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 190 Fable-aligned Bernie prompt-thread backend-readiness evidence snapshot integrated after Sprint 189: the expanded 50-file scenario corpus now has an executable fake-provider evidence snapshot with live-provider/provider-quality labels locked false |
+| **Next recommended work** | Continue the bounded fake-provider Bernie backend-readiness track with a larger backend contract check or another genuinely uncovered route-level prompt-thread fixture; use Ariadne plus three worker lanes by default (Claude, Antigravity, DeepSeek, with extra DeepSeek substitutions when a lane is unavailable), keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

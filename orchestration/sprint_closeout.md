@@ -24,10 +24,77 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 189 Same-Time Distractor Follow-Up Fixture |
-| Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek review lanes |
+| Batch | Sprint 190 Scenario Evidence Snapshot |
+| Integrated through | Ariadne implementation with Antigravity and two DeepSeek lanes |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
+
+## Sprint 190 What Changed
+
+- Added `scripts/bernie_scenario_evidence_snapshot.py`, a path/text-free
+  aggregate evidence snapshot over `tests/fixtures/bernie_scenarios/*.yaml`.
+- Added
+  `tests/fixtures/bernie_scenario_evidence/blocked_fake_provider_snapshot.json`
+  as the committed golden snapshot.
+- Added `tests/test_bernie_scenario_evidence_snapshot.py`.
+- Refreshed `docs/bernie-prompt-thread-fake-provider-backend-pass.md` to cite
+  the new executable snapshot and current replay result.
+- The snapshot records only aggregate counts and closed evidence posture:
+  50 scenario YAML fixtures, 31 interpret fixtures, 2 harness demo fixtures,
+  17 non-interpret fixtures, 6 fixtures since the last backend pass,
+  `fake_provider_evidence=true`, `route_level_backend_evidence=true`,
+  `live_provider_evidence=false`, `provider_quality_evidence=false`, provider
+  calls false, runtime/provider wiring false, default provider disabled, raw
+  trove access false, and runtime gate decision blocked.
+
+Sprint 190 is a Fable-aligned Programme 2D / Programme 2G backend-readiness
+evidence consolidation sprint. It does not add runtime behavior and does not
+open live provider, provider dry-run, runtime memory, RAG, GraphRAG,
+H15/H-series runtime imports, historical diary material access, GraphQL
+mutations, or model-to-database writes.
+
+Worker mix:
+
+- Antigravity recommended refreshing the fake-provider backend-pass evidence
+  now that Sprints 184-189 added six fixtures.
+- DeepSeek recommended making the refresh executable rather than prose-only by
+  adding a safe aggregate snapshot and tests.
+- Claude hit a session limit resetting at 11:30pm Australia/Brisbane, so Ariadne
+  substituted a second DeepSeek lane under the Ariadne-plus-three protocol.
+- The replacement DeepSeek lane independently supported the snapshot-script
+  approach, with filename-only counting and anti-overclaim labels.
+- Ariadne implemented the snapshot, tests, and doc refresh.
+
+## Sprint 190 Verification
+
+- `.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py`
+  passed and matched the committed golden snapshot.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_evidence_snapshot.py -q`
+  passed (`9 passed`; existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_fake_provider_evidence_labels.py -q`
+  passed serially (`2 passed`; existing warnings only).
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
+  returned blocked/false values with `sprint_engine_state=continuing`.
+- `.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py`
+  returned `default_provider=disabled`, live provider disabled, provider calls
+  false, route behavior unchanged, DB false, memory/RAG false, and historical
+  diary material false.
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  passed (`historical diary leakage lint safe`).
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\bernie-prompt-thread-fake-provider-backend-pass.md`
+  passed.
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  passed serially (`.x................................`; one pre-existing xfail,
+  existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  passed (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+- Note: an earlier parallel run of evidence-label pytest work hit the known
+  transient Postgres enum DDL race (`userrole` duplicate type); rerunning
+  serially passed.
+- Integration commit: `2877ce50`.
+- Push result: `git push origin master` succeeded.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 189 What Changed
 
