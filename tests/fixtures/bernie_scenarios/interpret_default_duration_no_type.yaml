@@ -1,0 +1,44 @@
+id: interpret_default_duration_no_type
+category: booking_interpret_contract
+description: >
+  A complete generic booking instruction with patient, practitioner, date, and
+  time but no duration or appointment type defaults to 15 minutes at the route
+  boundary without writing appointment or audit rows.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera next Monday at 09:00"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": "2026-07-13"
+        "command_candidate.earliest_time": "09:00"
+        "command_candidate.duration_minutes": 15
+        "assumptions.0.field": duration_minutes
+        "assumptions.0.assumed_value": "15"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

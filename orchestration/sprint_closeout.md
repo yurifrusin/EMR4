@@ -24,10 +24,56 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 183 Release/Protocol Proposal-Guard Slice |
-| Integrated through | Ariadne narrow protocol-alert citation triage |
-| Status | Integrated and pushed |
+| Batch | Sprint 184 Default-Duration Interpret Fixture |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 184 What Changed
+
+- Added
+  `tests/fixtures/bernie_scenarios/interpret_default_duration_no_type.yaml`.
+- The fixture proves a complete generic receptionist booking instruction with
+  patient, practitioner, date, and time, but no duration or appointment type,
+  defaults to `duration_minutes=15` at the route boundary.
+- The fixture also asserts fake-provider metadata, no live provider, explicit
+  default-duration assumption field/value, and no appointment/audit writes.
+- Updated `tests/fixtures/bernie_scenarios/README.md` to record
+  default-duration prompt coverage.
+- Documented Yuri's protocol correction in `orchestration/protocol_alerts.md`:
+  product-facing EMR4 development and sprint-direction work should stay in a
+  multi-agent stream by default, using Claude and Antigravity when available
+  and DeepSeek as an independent worker/reviewer or fallback lane.
+
+Sprint 184 returns the sprint engine to the Fable-aligned Bernie/Diary track:
+native prompt-thread and fake-provider route-level behavior first, with provider
+and runtime gates still closed. It is a backend-readiness fixture increment, not
+orchestration cleanup, and it does not open live provider, provider dry-run,
+runtime memory, RAG, GraphRAG, H15/H-series runtime imports, historical diary
+material access, GraphQL mutations, or model-to-database writes.
+
+Worker mix:
+
+- Ariadne implemented the narrow fixture directly.
+- DeepSeek reviewed fixture scope and brittleness, confirmed Fable alignment,
+  and recommended removing the one-off exact `reversible_copy` assertion. That
+  change was accepted so the fixture matches the rest of the corpus by asserting
+  `assumptions.0.field` and `assumptions.0.assumed_value`.
+
+## Sprint 184 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  passed serially (`.x...........................`; one pre-existing xfail,
+  existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  passed (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+- Note: an earlier parallel run of scenario replay and integrity hit the known
+  transient Postgres enum DDL race (`userrole` duplicate type); rerunning the
+  scenario replay serially passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 183 What Changed
 

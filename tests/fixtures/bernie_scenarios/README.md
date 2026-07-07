@@ -43,6 +43,9 @@ The current executable `interpret_*` corpus covers two slices:
 - reset/no-merge follow-ups: explicit `context_frames: []` prevents patient,
   practitioner, time, and duration from being carried forward unless the
   receptionist restates them in the current turn.
+- default-duration prompts: complete generic booking requests with no duration
+  or appointment type default to 15 minutes at the route boundary while staying
+  fake-provider and no-write.
 
 Unknown patient-name fixtures deliberately assert the current route contract:
 the interpret layer may still produce a slot-search command when practitioner

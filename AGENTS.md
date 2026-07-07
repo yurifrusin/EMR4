@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 183 release/protocol proposal-guard slice integrated after Sprint 182: protocol alerts now cite the provider-boundary readiness report and exact closed values, the release/protocol slice passes the guard, and the aggregate backlog is down to 446 missing-readiness findings with zero unreadable markdown findings |
-| **Next recommended work** | Triage another narrow recent-doc slice using the aggregate report; keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 184 Fable-aligned Bernie prompt-thread route fixture integrated after Sprint 183: complete generic booking instructions with no duration or appointment type now prove the route defaults duration to 15 minutes while staying fake-provider and no-write |
+| **Next recommended work** | Continue the bounded fake-provider Bernie backend-readiness track with another small route-level prompt-thread fixture or backend contract check; keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

@@ -61,6 +61,16 @@ Read these before acting on remembered process details.
   especially important for Bernie Interpretation Harness work after H40-H62:
   use the H63 independent review brief before any larger runtime/provider/trove
   proposal.
+- 2026-07-07: Recent sidetracked guard-cleanup sprints proved that even
+  well-intended Ariadne-only work can become too single-track. Product-facing
+  EMR4 development, sprint direction, safety-gate judgment, and Fable-aligned
+  Bernie/Diary work should stay in a multi-agent stream by default: use Claude
+  and Antigravity when available, keep DeepSeek active as an independent worker
+  or reviewer, and add extra DeepSeek lanes when Claude or Antigravity are
+  capped, unavailable, stale, or too slow for the sprint window. Ariadne-only
+  continuation is acceptable only for tiny mechanical edits, hotfixes, or
+  tightly coupled integration work, and the closeout must say why a broader
+  worker mix was not used.
 - 2026-07-07: Antigravity availability must not be inferred solely from a bare
   `antigravity --version` shell probe. If the Antigravity/Gemini UI quota view
   shows usable availability, treat Antigravity as available and use the known
