@@ -5166,8 +5166,17 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       if (isConfirmAdapter && payload.confirm_endpoint && payload.confirm_payload) {
         const body = enrichBernieConfirmPayload(payload.confirm_payload);
         try {
+          const confirmHeaders = isCreateConfirmEndpoint(payload.confirm_endpoint)
+            ? idempotencyHeadersFor(
+                bernieSession.getServerRouteIdempotencyKey(
+                  "create-confirm-bernie",
+                  payload.confirm_endpoint
+                )
+              )
+            : {};
           const response = await apiFetch(normalizeApiPath(payload.confirm_endpoint), {
             method: "POST",
+            headers: confirmHeaders,
             body: JSON.stringify(body)
           });
           if (response.ok) {
@@ -7022,6 +7031,30 @@ function generateClientIdempotencyKey() {
   return "evt-" + Math.random().toString(36).substring(2, 10);
 }
 
+function ensureElementIdempotencyKey(element) {
+  if (!element.dataset.idempotencyKey) {
+    element.dataset.idempotencyKey = generateClientIdempotencyKey();
+  }
+  return element.dataset.idempotencyKey;
+}
+
+function ensureElementConfirmIdempotencyKey(element) {
+  if (!element.dataset.confirmIdempotencyKey) {
+    element.dataset.confirmIdempotencyKey = generateClientIdempotencyKey();
+  }
+  return element.dataset.confirmIdempotencyKey;
+}
+
+function idempotencyHeadersFor(key) {
+  return { "Idempotency-Key": key };
+}
+
+function isCreateConfirmEndpoint(endpoint) {
+  const normalized = normalizeApiPath(endpoint || "");
+  return normalized.endsWith("/appointments/proposals/create/confirm") ||
+    normalized.endsWith("/appointments/proposals/create/confirm-bernie");
+}
+
 function resetProposalConfirmation() {
   const saveBtn = document.getElementById("btn-booking-save");
   if (saveBtn) {
@@ -7029,6 +7062,7 @@ function resetProposalConfirmation() {
     saveBtn.textContent = "Save Booking";
     saveBtn.classList.remove("btn-warning-action");
     delete saveBtn.dataset.idempotencyKey;
+    delete saveBtn.dataset.confirmIdempotencyKey;
   }
   const warningEl = document.getElementById("booking-warnings");
   if (warningEl) {
@@ -7399,10 +7433,7 @@ async function saveBooking() {
           : "/appointments/proposals/create";
         const headers = {};
         if (!editingAppointmentId) {
-          if (!saveBtn.dataset.idempotencyKey) {
-            saveBtn.dataset.idempotencyKey = generateClientIdempotencyKey();
-          }
-          headers["Idempotency-Key"] = saveBtn.dataset.idempotencyKey;
+          headers["Idempotency-Key"] = ensureElementIdempotencyKey(saveBtn);
         }
         const propRes = await apiFetch(url, {
           method: "POST",
@@ -7568,8 +7599,12 @@ async function saveBooking() {
             ...(confirmPayload.confirmed_warnings || []),
             ...confirmedWarnings
           ]));
+          const confirmHeaders = isCreateConfirmEndpoint(confirmEndpoint)
+            ? idempotencyHeadersFor(ensureElementConfirmIdempotencyKey(saveBtn))
+            : {};
           createRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
             method: "POST",
+            headers: confirmHeaders,
             body: JSON.stringify(confirmPayload)
           });
         } else {

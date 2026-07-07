@@ -9070,9 +9070,18 @@ def test_create_proposal_idempotency_header(diary_page):
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
     captured_keys = []
+    captured_confirm_keys = []
 
     def handle_api(route):
         request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/create/confirm"):
+            captured_confirm_keys.append(request.headers.get("idempotency-key"))
+            route.fulfill(
+                status=500,
+                content_type="application/json",
+                body=json.dumps({"detail": "captured confirm header"}),
+            )
+            return
         if request.method == "POST" and request.url.endswith("/appointments/proposals/create"):
             key = request.headers.get("idempotency-key")
             captured_keys.append(key)
@@ -9104,6 +9113,17 @@ def test_create_proposal_idempotency_header(diary_page):
                 "conflict": None,
                 "breaks_overlap": [],
                 "patient_identity": "linked",
+                "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm",
+                "confirm_payload": {
+                    "confirmed": False,
+                    "create_proposal": {"command": command},
+                    "create_proposal_freshness_id": "fresh-create-smoke",
+                    "confirmed_warnings": [],
+                    "signed_confirmation_evidence": {
+                        "scheme": "emr4-hmac-sha256-v1",
+                        "signature": "signed",
+                    },
+                },
             }
             route.fulfill(
                 status=200,
@@ -9163,6 +9183,11 @@ def test_create_proposal_idempotency_header(diary_page):
         assert len(captured_keys) == 2
         key2 = captured_keys[1]
         assert key2 == key1, "Idempotency-Key should be stable for the same proposal attempt"
+        assert len(captured_confirm_keys) == 1
+        confirm_key = captured_confirm_keys[0]
+        assert confirm_key is not None
+        assert len(confirm_key) >= 8
+        assert confirm_key != key1, "Confirm Idempotency-Key should be distinct from proposal key"
 
         # Now simulate changing input field to reset proposal confirmation and clear key
         diary_page.evaluate(

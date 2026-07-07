@@ -31,27 +31,48 @@ def _block(source: str, start_marker: str, end_marker: str) -> str:
     return source[start:end]
 
 
-def test_frontend_only_create_proposal_emits_http_idempotency_header():
+def test_frontend_create_proposal_and_create_confirm_emit_http_idempotency_headers():
     source = _read(DIARY_JS)
     save_booking = _function_source(source, "saveBooking")
 
     assert "function generateClientIdempotencyKey()" in source
-    assert "saveBtn.dataset.idempotencyKey = generateClientIdempotencyKey();" in save_booking
-    assert 'headers["Idempotency-Key"] = saveBtn.dataset.idempotencyKey;' in save_booking
+    assert "function ensureElementIdempotencyKey(element)" in source
+    assert "function idempotencyHeadersFor(key)" in source
+    assert 'headers["Idempotency-Key"] = ensureElementIdempotencyKey(saveBtn);' in save_booking
     assert save_booking.index('headers["Idempotency-Key"]') < save_booking.index(
         'const propRes = await apiFetch(url, {'
     )
 
-    # No other current frontend call emits the appointment command HTTP header.
-    assert source.count('"Idempotency-Key"') == 1
+    create_confirm_block = _block(
+        save_booking,
+        "let createRes;",
+        "if (!createRes.ok)",
+    )
+    assert "isCreateConfirmEndpoint(confirmEndpoint)" in create_confirm_block
+    assert "idempotencyHeadersFor(ensureElementConfirmIdempotencyKey(saveBtn))" in create_confirm_block
+    assert "headers: confirmHeaders" in create_confirm_block
 
 
-def test_frontend_confirm_callers_are_explicitly_tracked_as_missing_headers():
+def test_frontend_create_confirm_bernie_review_caller_emits_stable_header():
+    source = _read(DIARY_JS)
+    review_confirm_block = _block(
+        source,
+        "if (isConfirmAdapter && payload.confirm_endpoint && payload.confirm_payload) {",
+        "if (response.ok) {",
+    )
+
+    assert "isCreateConfirmEndpoint(payload.confirm_endpoint)" in review_confirm_block
+    assert 'bernieSession.getServerRouteIdempotencyKey(' in review_confirm_block
+    assert '"create-confirm-bernie"' in review_confirm_block
+    assert "headers: confirmHeaders" in review_confirm_block
+
+
+def test_frontend_remaining_confirm_callers_are_explicitly_tracked_as_missing_headers():
     source = _read(DIARY_JS)
     preflight = _read(PREFLIGHT)
 
     confirm_blocks = {
-        "saveBooking create/update confirm branch": _block(
+        "saveBooking update confirm branch": _block(
             _function_source(source, "saveBooking"),
             "if (confirmEndpoint && confirmPayload) {",
             "if (!updateRes.ok)",

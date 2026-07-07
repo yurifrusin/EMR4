@@ -24,10 +24,76 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 154 Diary/API Header Gap Preflight |
-| Integrated through | Ariadne integration with EMR4 API Steward skill; Claude and Antigravity plan reviews integrated; DeepSeek adversarial review accepted |
-| Status | Committed and pushed; sprint engine continuing |
+| Batch | Sprint 155 Create-Confirm Client Header Emission |
+| Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude and Antigravity plan reviews integrated; DeepSeek adversarial review accepted |
+| Status | Pending Sprint 155 commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 155 What Changed
+
+- Updated `docs/diary/diary.js` so the staff booking-modal create-confirm POST
+  sends HTTP `Idempotency-Key` when the returned confirm endpoint is
+  `/appointments/proposals/create/confirm`.
+- Kept the create-proposal key and create-confirm key distinct:
+  `btn-booking-save.dataset.idempotencyKey` remains proposal-scoped, while
+  `btn-booking-save.dataset.confirmIdempotencyKey` is stable for the staged
+  confirmation attempt and is cleared by `resetProposalConfirmation()`.
+- Updated the Bernie review confirm adapter so create-confirm-Bernie calls send
+  `Idempotency-Key` from
+  `bernieSession.getServerRouteIdempotencyKey("create-confirm-bernie", ...)`.
+- Left Bernie tool-intent confirm, update-confirm, status-confirm,
+  delete-confirm, proposal-only backend binding, raw compatibility writes,
+  backend runtime validation, idempotency ledger semantics, providers, GraphQL,
+  H15/H-series, memory/RAG/GraphRAG, and strict `minLength: 8` enforcement
+  unchanged.
+- Bumped `docs/diary/diary.html` to `diary.js?v=176`.
+- Updated `tests/test_api_spine_frontend_header_inventory.py` and
+  `review/test_diary_smoke.py` to guard staff create-confirm and Bernie review
+  create-confirm-Bernie header emission while keeping remaining confirm gaps
+  explicit.
+- Added
+  `orchestration/api_spine_appointment_idempotency_create_confirm_client_header.md`.
+- Integrated worker lanes:
+  - Claude recommended a client-only fix with stable confirm keys and no
+    backend changes.
+  - Antigravity agreed the create-confirm/Bernie confirm path is the right
+    next client slice.
+  - DeepSeek recommended a distinct staff confirm key and preserving closed
+    boundaries; Ariadne accepted the distinct-key recommendation.
+
+## Sprint 155 Verification
+
+- `node --check docs\diary\diary.js`.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py`
+  (`[PASSED] Verification Passed: All modified assets have appropriate version bumps`).
+- `.venv\Scripts\python.exe -m pytest -k "test_create_proposal_idempotency_header" review\test_diary_smoke.py -q`
+  (`1 passed`).
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_frontend_header_inventory.py tests\test_api_spine_create_proposal_header_alignment.py tests\test_api_spine_create_proposal_idempotency_route_contract.py tests\test_api_spine_confirmation_family_idempotency_checkpoint.py -q`
+  (`37 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean.
+
+Publication state:
+
+- Integration commit SHA: pending Sprint 155 integration commit.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Strategic position: Sprint 155 is **Programme 2G / EMR4 API Spine** client
+readiness and guardrail hardening. It closes the first already-enforced
+confirmation client gap after create-proposal without changing backend command
+semantics.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 156: choose
+the next bounded confirm client-header family, likely status-confirm/delete-
+confirm or update-confirm, before proposal-only backend binding or strict
+`minLength: 8` enforcement.
+
+---
+
+## Previous Closeout - Sprint 154
 
 ## Sprint 154 What Changed
 
