@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 142 delete-confirm idempotency preflight completed in the sprint closeout commit. The preflight chooses `POST /api/v1/appointments/proposals/delete-confirm` as the next family and records soft-cancel, waiting-area clear, reason-evidence, `_apply_appointment_delete()` commit-boundary, and rollback requirements; no route behavior changed |
-| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 143 delete-confirm idempotency route-test contract before any destructive soft-cancel route wiring |
+| **Current active track** | Sprint 143 delete-confirm idempotency route-test contract completed locally pending closeout commit. The guarded contract covers `POST /api/v1/appointments/proposals/delete-confirm`, destructive soft-cancel replay/rollback risks, full confirmation-body conflict hashing, warning preservation, waiting-area mismatch directions, invalid reason-code/signed-evidence blocks, and keeps route behavior unchanged |
+| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 144 narrow delete-confirm idempotency route wiring only, preserving raw/proposal-only/provider/GraphQL/H15/memory/trove gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
