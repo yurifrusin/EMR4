@@ -46,6 +46,8 @@ The current executable `interpret_*` corpus covers two slices:
 - reference-date no-op prompts: when a follow-up changes only time and contains
   no date wording, a changed turn reference date must not re-resolve the
   threaded absolute appointment date.
+- time-window threading prompts: date-change follow-ups preserve both earliest
+  and latest time-window bounds from the threaded requested appointment.
 - reset/no-merge follow-ups: explicit `context_frames: []` prevents patient,
   practitioner, time, and duration from being carried forward unless the
   receptionist restates them in the current turn.
