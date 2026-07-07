@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 174 Prompt-Thread Tranche Readiness |
 | Integrated through | Ariadne readiness packet; DeepSeek Flash review lane |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 174 What Changed
@@ -69,6 +69,9 @@ access, GraphQL mutations, or model-to-database writes.
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`8 passed, 1 skipped`; existing warnings only).
 - `git diff --check` passed.
+- Integration commit: `67b051b3`.
+- Push result: `git push origin master` succeeded; GitHub reported the
+  repository moved notice and the existing moderate Dependabot alert.
 
 Sprint engine state: continuing. No user intervention is required. Next planned
 step is the narrow non-intercepted fake-provider backend pass, provided the same
