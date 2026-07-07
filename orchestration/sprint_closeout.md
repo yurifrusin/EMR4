@@ -24,10 +24,77 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 195 Out-of-Contract POST Route Classification |
+| Batch | Sprint 196 Route Contract Behavior Cross-Checks |
 | Integrated through | Ariadne implementation with Claude, Antigravity via `agy.exe`, and DeepSeek reviews |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
+
+## Sprint 196 What Changed
+
+- Extended `tests/test_diary_action_route_endpoint_coverage.py` with two static
+  route-contract behavior checks.
+- Added a disjointness invariant proving read routes do not overlap proposal,
+  confirm, or raw mutation surfaces, and signed-confirm confirm routes stay
+  distinct from adjacent raw mutation routes.
+- Added a route-table/preflight cross-check proving mounted out-of-contract
+  appointment POST support rows exactly match the preflight sub-family counts:
+  `proposal_support_post=7`, `state_tracking_post=2`, and `ambiguous_post=0`.
+- Updated `docs/diary-action-route-contract.md` to document the new verification
+  layer.
+- Integrated Claude and Antigravity Sprint 196 review artifacts under
+  `orchestration/agent_inbox/codex/`.
+
+Worker mix:
+
+- Claude recommended static behavior checks for signed-confirm/raw separation
+  and auth-gating metadata; Ariadne accepted the lower-coupling disjointness
+  portion for this sprint and deferred auth-gating metadata review.
+- Antigravity ran through `agy.exe`, submitted a tangible review artifact, and
+  its worker worktree was cleaned after integration.
+- DeepSeek identified the strongest low-risk invariant: cross-check route table
+  gaps against the safe preflight's POST support counts.
+
+Boundary:
+
+- Static FastAPI `APIRoute` path/method metadata and route-contract tuples only.
+- No HTTP requests, route handler execution, database session, provider calls,
+  memory/RAG/GraphRAG access, H15/H-series runtime imports, historical diary
+  material access, GraphQL access, or writes.
+- The new checks do not add routes to the Diary action contract, promote planned
+  verbs, or convert out-of-contract support routes into grammar authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe -m pytest tests\test_appointment_route_inventory_preflight.py -q
+.venv\Scripts\python.exe scripts\appointment_route_inventory_preflight.py
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: endpoint coverage `11 passed`; inventory preflight tests `23 passed`;
+inventory script emitted the same safe aggregate counts; route contract
+`12 passed`; API spine artifacts `31 passed`; scenario integrity
+`8 passed, 1 skipped`; readiness/provider reports stayed blocked/false;
+leakage lint safe; whitespace check clean. Parallel pytest attempts again hit
+the known PostgreSQL enum DDL setup race (`userrole` duplicate type); affected
+pytest commands passed when rerun serially.
+
+Implementation commit: `9aad8bf7`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded backend-readiness via auth-gating metadata
+review for documented write surfaces or narrow non-grammar documentation for
+out-of-contract support routes.
+
+---
 
 ## Sprint 195 What Changed
 
