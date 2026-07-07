@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 157 update-confirm client header emission in progress; Diary edit-modal and drag/reschedule update-confirm calls now send freshness-derived HTTP `Idempotency-Key` headers while raw PUT fallbacks and Bernie tool-intent confirm remain header-free/deferred |
-| **Next recommended work** | After Sprint 157 closeout, run a compact confirm-client surface checkpoint before deciding whether Bernie tool-intent confirm, proposal-only backend binding, or strict `minLength: 8` enforcement is the next safe slice |
+| **Current active track** | Sprint 157 update-confirm client header emission implemented in commit `df3f926` and closed/pushed through `8464a3e`; Diary edit-modal and drag/reschedule update-confirm calls now send freshness-derived HTTP `Idempotency-Key` headers while raw PUT fallbacks and Bernie tool-intent confirm remain header-free/deferred |
+| **Next recommended work** | Sprint 158 should run a compact confirm-client surface checkpoint before deciding whether Bernie tool-intent confirm, proposal-only backend binding, or strict `minLength: 8` enforcement is the next safe slice |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

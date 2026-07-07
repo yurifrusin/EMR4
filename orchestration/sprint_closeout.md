@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 157 Update Confirm Client Header Emission |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude/Antigravity lanes replaced by additional DeepSeek reviews due tool/usage friction; DeepSeek adversarial review accepted |
-| Status | Committed locally; push pending |
+| Status | Committed and pushed; sprint engine continuing |
 | Last updated | 2026-07-07 |
 
 ## Sprint 157 What Changed
@@ -83,14 +83,17 @@ Publication state:
 
 - Implementation commit SHA: `df3f926`.
 - Closeout metadata commit SHA: `3bdce2b`.
-- Push result: pending.
-- Final `git status --short --branch`: pending.
+- Push result: pushed to `origin/master`; `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` all aligned and pushed to
+  `8464a3ee`. Claude/Antigravity durable worktrees had untracked stale review
+  artifacts, which were stashed before clean realignment.
+- Final `git status --short --branch`: `## master...origin/master`.
 
 Strategic position: Sprint 157 is **Programme 2G / EMR4 API Spine** client
 readiness and guardrail hardening. It closes the ordinary update-confirm client
 header gap while preserving raw fallback and backend semantics.
 
-Sprint engine state: continuing after push. Next recommended slice is a compact
+Sprint engine state: continuing. Next recommended slice is Sprint 158, a compact
 confirm-client surface checkpoint before deciding whether Bernie tool-intent
 confirm, proposal-only backend binding, or strict `minLength: 8` enforcement is
 the next safe implementation path.
