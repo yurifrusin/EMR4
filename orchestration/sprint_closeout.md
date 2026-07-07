@@ -24,10 +24,55 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 187 Time-Window Date-Change Fixture |
+| Batch | Sprint 188 Date-And-Time Follow-Up Fixture |
 | Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek review lanes |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
+
+## Sprint 188 What Changed
+
+- Added
+  `tests/fixtures/bernie_scenarios/interpret_change_date_and_time_new_reply_wins.yaml`.
+- The fixture proves a single follow-up can change both date and time together
+  while preserving threaded patient, practitioner, and duration.
+- The first turn requests `2026-07-14` at `10:00`; the follow-up changes to
+  `2026-07-15` at `11:00` with patient, practitioner, and duration preserved.
+- Updated `tests/fixtures/bernie_scenarios/README.md` to record multi-field
+  override prompt coverage.
+
+Sprint 188 is a Fable-aligned Programme 2D / Programme 2G backend-readiness
+fixture increment. It continues the native Bernie prompt-thread route-level
+track and does not open live provider, provider dry-run, runtime memory, RAG,
+GraphRAG, H15/H-series runtime imports, historical diary material access,
+GraphQL mutations, or model-to-database writes.
+
+Worker mix:
+
+- Claude recommended against landing the same-time anaphora prompt as an
+  anaphora fixture because the deterministic fake-provider path currently
+  treats "same time" as inert wording and ordinary threading fills the time.
+  Claude recommended the integrated simultaneous date-and-time override
+  fixture as a real uncovered merge contract.
+- Antigravity recommended a passing same-time fixture plus a broader xfail for
+  bare-weekday ambiguity, but also confirmed the deterministic fake-provider
+  path relies on merge behavior rather than true anaphora resolution.
+- DeepSeek recommended the same-time prompt as a useful explicit anaphora edge.
+- Ariadne chose the simultaneous date-and-time override fixture for Sprint 188
+  because it adds a non-misleading route contract now; same-time anaphora
+  remains a candidate only if framed honestly as distractor robustness or after
+  true anaphora behavior is specified.
+
+## Sprint 188 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  passed serially (`.x...............................`; one pre-existing xfail,
+  existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  passed (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+- Integration commit: `47ff5375`.
+- Push result: `git push origin master` succeeded.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 187 What Changed
 
