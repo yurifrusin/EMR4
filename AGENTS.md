@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 170 temporal-drift reset/no-merge fixture added after Sprint 169: an explicit empty-context follow-up with a later reference date now proves relative `tomorrow` resolves against the current turn while patient/time/duration are not inherited from the prior requested appointment |
-| **Next recommended work** | Continue the authored Bernie/Diary prompt-thread tranche with a narrow non-intercepted fake-provider backend pass or another edge fixture around reset/no-prior context behavior; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 171 reset/no-prior context matrix added after Sprint 170: explicit empty-context follow-up with restated patient/date now proves practitioner/time/duration are not inherited, and `interpret_no_prior_frame_no_merge` wording now matches its first-turn scope |
+| **Next recommended work** | Continue the authored Bernie/Diary prompt-thread tranche with one of DeepSeek's remaining low-risk fixture recommendations, preferably explicit `requested_appointment` frame input or multi-frame reset coverage; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

@@ -1,8 +1,9 @@
 id: interpret_no_prior_frame_no_merge
 category: booking_interpret_contract
 description: >
-  A bare clarification-style practitioner reply without a prior frame remains
-  clarification_required instead of inheriting stale context.
+  A first-turn clarification-style practitioner reply with explicit empty
+  context remains clarification_required instead of inventing missing date
+  context.
 reference_date: 2026-07-08
 
 initial_state:

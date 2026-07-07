@@ -24,10 +24,77 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 170 Temporal Drift Reset/No-Merge Fixture |
-| Integrated through | Ariadne narrow guardrail implementation after Sprint 169 closeout; adjacent replay verification |
-| Status | Integrated and pushed |
+| Batch | Sprint 171 Reset/No-Prior Context Matrix |
+| Integrated through | Ariadne fixture implementation; DeepSeek Flash adversarial review; DeepSeek Flash implementation-suggestion lane; Claude/Antigravity packets dispatched but external mirrors were stale/dirty and not run |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 171 What Changed
+
+- Added `interpret_context_reset_patient_date_no_practitioner.yaml`, proving that
+  after a complete prior request, an explicit `context_frames: []` reset with
+  restated patient and relative date does not inherit practitioner, time, or
+  duration from the prior requested appointment.
+- Kept the canonical fixture more assertive than the duplicate DeepSeek
+  suggestion by checking raw `date_from: tomorrow`, default
+  `duration_minutes: 15`, `normalization.safe: false`, missing practitioner,
+  clarifying copy, and no appointment/audit writes.
+- Tightened `interpret_no_prior_frame_no_merge.yaml` wording so it describes its
+  actual first-turn empty-context scope instead of overclaiming stale-context
+  coverage.
+- Updated `tests/fixtures/bernie_scenarios/README.md` to record reset/no-merge
+  follow-up coverage.
+- Integrated DeepSeek's Sprint 171 adversarial review artifact at
+  `orchestration/agent_inbox/codex/review-deepseek-sprint171-reset-no-prior-context-matrix.md`.
+
+Sprint 171 is a narrow guardrail hardening sprint inside the Programme 2D
+Reception Copilot Readiness / Programme 2G Bernie API Spine review-readiness
+track. It advances the larger objective of proving authored Bernie prompt-thread
+context semantics before any provider/runtime/memory gate opens. The sprint
+stayed fixture-only because the behavior under test is already implemented and
+needed deterministic replay coverage, not new route behavior.
+
+Worker mix:
+
+- Claude task packet dispatched:
+  `orchestration/agent_inbox/claude/claude-sprint171-reset-no-prior-context-matrix.md`.
+- Antigravity task packet dispatched:
+  `orchestration/agent_inbox/antigravity/antigravity-sprint171-reset-no-prior-context-review.md`.
+- External Claude/Antigravity mirrors were stale/dirty with old Sprint 160 staged
+  reversions, so Ariadne did not destructively reset them during this sprint.
+- DeepSeek Flash lane 1 produced the adversarial review artifact and identified
+  remaining fixture-only recommendations.
+- DeepSeek Flash lane 2 independently proposed the same patient+relative-date
+  reset fixture; Ariadne kept the stronger local version and removed the
+  duplicate.
+
+Sprint 171 does not open runtime route wiring from the provider-free
+interpretation harness, provider prompt/dry-run wiring, live-provider enablement,
+memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary material
+access, GraphQL mutations, or model-to-database writes.
+
+## Sprint 171 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -k "interpret_context_temporal_drift_followup or interpret_context_temporal_drift_reset_no_merge or interpret_context_reset_patient_date_no_practitioner or interpret_context_frames_auto_thread_vs_empty or interpret_no_prior_frame_no_merge" -q`
+  (`5 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  (`.x........................`; one pre-existing xfail, existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed with the known CRLF normalization warning on
+  `interpret_no_prior_frame_no_merge.yaml`.
+
+An earlier concurrent integrity/replay run hit the known transient Postgres enum
+DDL race (`userrole` duplicate type); rerunning the integrity check serially
+passed.
+
+Sprint engine state: continuing unless Yuri asks for a pause. No user
+intervention is required for the fixture tranche itself. Next planned step is a
+small Sprint 172 fixture-only pass using one of DeepSeek's remaining
+recommendations, preferably explicit `requested_appointment` frame input or
+multi-frame reset coverage.
+
+---
 
 ## Sprint 170 What Changed
 
