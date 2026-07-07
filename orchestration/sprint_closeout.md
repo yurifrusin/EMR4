@@ -24,10 +24,47 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 176 Fake-Provider Evidence Label Guard |
-| Integrated through | Ariadne static guard test over the prompt-thread readiness and backend-pass evidence packets |
-| Status | Integrated and pushed |
+| Batch | Sprint 177 Proposal-Surface Guard Vocabulary |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review of release-gate trigger wording |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 177 What Changed
+
+- Extended `scripts/bernie_interpretation_proposal_surface_guard.py` so
+  proposal markdown is checked for more release-gate wording: route/provider
+  integration, provider prompt/dry-run integration, live provider enablement,
+  Access AI, H15/H-series runtime imports, historical diary/raw-trove/local-data
+  access, model selection, and provider-specific aliasing.
+- Narrowed the old generic `aliasing` trigger to provider-specific wording so
+  unrelated code-aliasing notes do not require provider-boundary citations.
+- Added regression coverage in
+  `tests/test_bernie_interpretation_proposal_surface_guard.py`.
+- Updated `docs/adversarial/h63_interpretation_independent_review_brief.md` to
+  include the provider-boundary readiness report command and expected closed
+  values before any provider-boundary recommendation.
+
+Sprint 177 is a bounded guardrail sprint. It changes only proposal/review
+artifact validation and one existing review brief. It does not change runtime
+code, routes, provider configuration, database behavior, memory, RAG, GraphRAG,
+H15/H-series imports, historical diary processing, GraphQL mutations, or
+model-to-database write authority.
+
+Worker mix:
+
+- DeepSeek reviewed the guard vocabulary and identified additional release-gate
+  variants plus the generic-aliasing false-positive risk.
+
+## Sprint 177 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_proposal_surface_guard.py -q`
+  (`11 passed`; existing warnings only).
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\adversarial\h63_interpretation_independent_review_brief.md`
+  passed.
+- `git diff --check` passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 176 What Changed
 

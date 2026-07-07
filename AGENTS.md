@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 176 evidence-label guard integrated after Sprint 175: fake-provider route-level backend evidence is now guarded by a static test so future prompt-thread closeouts cannot drift into live-provider or provider-quality claims |
-| **Next recommended work** | Continue with the next bounded backend-readiness step while keeping readiness/provider gates blocked and false; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 177 proposal-surface guard vocabulary integrated after Sprint 176: backend/provider readiness proposal markdown now catches release-gate wording for route/provider integration, live provider enablement, Access AI, H15/H-series imports, historical diary/raw-trove access, and model selection while avoiding generic aliasing false positives |
+| **Next recommended work** | Continue with a bounded backend-readiness surface such as applying the proposal-surface guard to additional docs/review folders or adding a safe aggregate report; keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

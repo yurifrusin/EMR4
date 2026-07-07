@@ -28,6 +28,34 @@ def test_proposal_surface_guard_rejects_runtime_proposal_without_readiness(tmp_p
     assert files_missing_readiness_reference((proposal,)) == (proposal,)
 
 
+def test_proposal_surface_guard_rejects_release_gate_route_integration_phrase(
+    tmp_path,
+):
+    proposal = tmp_path / "route-integration.md"
+    proposal.write_text(
+        "This plan discusses interpretation harness runtime route integration.",
+        encoding="utf-8",
+    )
+
+    assert files_missing_readiness_reference((proposal,)) == (proposal,)
+
+
+def test_proposal_surface_guard_rejects_release_gate_memory_and_h_series_phrases(
+    tmp_path,
+):
+    proposal = tmp_path / "memory-h-series.md"
+    proposal.write_text(
+        (
+            "This proposal discusses memory/RAG/GraphRAG use, H15 runtime "
+            "imports, H-series runtime imports, Access AI, historical diary "
+            "access, historical diary trove, raw diary, and local data."
+        ),
+        encoding="utf-8",
+    )
+
+    assert files_missing_readiness_reference((proposal,)) == (proposal,)
+
+
 def test_proposal_surface_guard_accepts_runtime_proposal_with_readiness(tmp_path):
     proposal = tmp_path / "proposal.md"
     proposal.write_text(
@@ -62,6 +90,36 @@ def test_proposal_surface_guard_rejects_provider_boundary_without_report(tmp_pat
     )
 
     assert files_missing_readiness_reference((proposal,)) == (proposal,)
+
+
+def test_proposal_surface_guard_rejects_provider_integration_without_report(
+    tmp_path,
+):
+    proposal = tmp_path / "provider-integration.md"
+    proposal.write_text(
+        "\n".join(
+            [
+                "This provider integration proposal discusses live provider enablement.",
+                READINESS_COMMAND,
+                "runtime_or_provider_wiring_ready=false",
+                "raw_trove_access_ready=false",
+                "runtime_gate_decision=blocked",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    assert files_missing_readiness_reference((proposal,)) == (proposal,)
+
+
+def test_proposal_surface_guard_ignores_unrelated_aliasing(tmp_path):
+    note = tmp_path / "aliasing.md"
+    note.write_text(
+        "This note discusses Python import aliasing in a helper module.",
+        encoding="utf-8",
+    )
+
+    assert files_missing_readiness_reference((note,)) == ()
 
 
 def test_proposal_surface_guard_accepts_provider_boundary_with_both_reports(tmp_path):

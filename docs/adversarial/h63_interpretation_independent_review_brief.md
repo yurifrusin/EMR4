@@ -25,6 +25,24 @@ Expected current values:
 - `runtime_gate_decision: blocked`
 - `sprint_engine_state: continuing`
 
+Before making any provider-boundary, provider integration, provider prompt, or
+provider dry-run recommendation, also run:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+```
+
+Expected current provider-boundary values:
+
+- `default_provider: disabled`
+- `runtime_or_provider_wiring_ready: false`
+- `live_provider_enabled: false`
+- `provider_calls_performed: false`
+- `route_behavior_changed: false`
+- `database_access_performed: false`
+- `memory_or_rag_access_performed: false`
+- `historical_diary_material_access_performed: false`
+
 If the command fails or any expected value changes, pause the sprint engine for explicit review before continuing.
 
 ## In Scope
