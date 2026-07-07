@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 184 Default-Duration Interpret Fixture |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 184 What Changed
@@ -71,8 +71,8 @@ Worker mix:
 - Note: an earlier parallel run of scenario replay and integrity hit the known
   transient Postgres enum DDL race (`userrole` duplicate type); rerunning the
   scenario replay serially passed.
-- Integration commit: pending.
-- Push result: pending.
+- Integration commit: `cf683833`.
+- Push result: `git push origin master` succeeded.
 - Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 183 What Changed
