@@ -24,10 +24,34 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 175 Prompt-Thread Fake-Provider Backend Pass |
-| Integrated through | Ariadne backend-pass report using existing route-level replay harness and closed-gate readiness/provider reports |
-| Status | Integrated and pushed |
+| Batch | Sprint 176 Fake-Provider Evidence Label Guard |
+| Integrated through | Ariadne static guard test over the prompt-thread readiness and backend-pass evidence packets |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 176 What Changed
+
+- Added `tests/test_bernie_fake_provider_evidence_labels.py`, a static guard
+  over the prompt-thread readiness and backend-pass evidence packets.
+- The guard requires the backend-pass packet to keep its
+  fake-provider/route-level evidence label, explicitly deny live-provider and
+  provider-quality evidence, and preserve the provider-boundary false values.
+- The guard requires the tranche-readiness packet to keep the closed-gate
+  labels for fake-provider testing and `live_provider: false`.
+
+Sprint 176 is a small evidence-label integrity sprint. It does not change
+runtime code, routes, provider configuration, database behavior, memory, RAG,
+GraphRAG, H15/H-series imports, historical diary material access, GraphQL
+mutations, or model-to-database write authority.
+
+## Sprint 176 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_fake_provider_evidence_labels.py -q`
+  (`2 passed`; existing warnings only).
+- `git diff --check` passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 175 What Changed
 

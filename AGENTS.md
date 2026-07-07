@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 175 narrow fake-provider backend pass recorded after Sprint 174: the authored prompt-thread corpus passes through the real FastAPI test-client interpret route with fake provider configured, provider-boundary/readiness values blocked/false, and no appointment/audit writes |
-| **Next recommended work** | Add a small evidence-label guard/report so future closeouts cannot mislabel fake-provider route-level evidence as live-provider evidence, or choose the next bounded backend-readiness step; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 176 evidence-label guard integrated after Sprint 175: fake-provider route-level backend evidence is now guarded by a static test so future prompt-thread closeouts cannot drift into live-provider or provider-quality claims |
+| **Next recommended work** | Continue with the next bounded backend-readiness step while keeping readiness/provider gates blocked and false; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
