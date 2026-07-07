@@ -218,7 +218,11 @@ def test_create_proposal_past_date_blocked(
         "start_time_local": "09:00:00",
         "duration_minutes": 15,
     }
-    resp = client.post(PROPOSAL_CREATE_URL, json=body, headers=_auth(gp_user))
+    resp = client.post(
+        PROPOSAL_CREATE_URL,
+        json=body,
+        headers={**_auth(gp_user), "Idempotency-Key": "raw-temporal-past-proposal-key"},
+    )
     assert resp.status_code == 200
     data = resp.json()
     assert data["safe"] is False
@@ -240,7 +244,11 @@ def test_create_proposal_elapsed_same_day_blocked(
         "start_time_local": "09:00:00",
         "duration_minutes": 15,
     }
-    resp = client.post(PROPOSAL_CREATE_URL, json=body, headers=_auth(gp_user))
+    resp = client.post(
+        PROPOSAL_CREATE_URL,
+        json=body,
+        headers={**_auth(gp_user), "Idempotency-Key": "raw-temporal-elapsed-proposal-key"},
+    )
     assert resp.status_code == 200
     data = resp.json()
     assert data["safe"] is False
@@ -262,7 +270,11 @@ def test_create_proposal_future_date_safe(
         "start_time_local": "09:00:00",
         "duration_minutes": 15,
     }
-    resp = client.post(PROPOSAL_CREATE_URL, json=body, headers=_auth(gp_user))
+    resp = client.post(
+        PROPOSAL_CREATE_URL,
+        json=body,
+        headers={**_auth(gp_user), "Idempotency-Key": "raw-temporal-future-proposal-key"},
+    )
     assert resp.status_code == 200
     data = resp.json()
     assert data["safe"] is True

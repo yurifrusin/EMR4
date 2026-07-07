@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 149 create-proposal replay-model decision completed locally pending closeout commit. Deterministic re-evaluation is selected for `POST /api/v1/appointments/proposals/create`: require syntactic header later, no proposal ledger, no stored proposal replay, no `409` on same-key/different-body, and no separate Bernie proposal path |
-| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 150 create-proposal idempotency wiring using deterministic re-evaluation semantics only |
+| **Current active track** | Sprint 150 create-proposal syntactic idempotency wiring completed locally pending closeout commit. `POST /api/v1/appointments/proposals/create` now requires a non-blank `Idempotency-Key` header, then deterministically re-evaluates without proposal ledger rows, stored replay, same-key conflicts, slot reservations, audit writes, or appointment writes |
+| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 151 OpenAPI/FastAPI header alignment guard for create-proposal, including the deferred `minLength: 8` compatibility decision |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

@@ -81,7 +81,7 @@ def test_proposal_create_does_not_write_audit(
     client.post(
         f"{APPT_URL}/proposals/create",
         json=_create_body(practitioner, patient),
-        headers=_auth(token),
+        headers={**_auth(token), "Idempotency-Key": "audit-create-proposal-key"},
     )
     assert db.query(AppointmentAuditLog).count() == 0
 
@@ -136,7 +136,7 @@ def test_blocked_proposal_does_not_write_audit(
     resp = client.post(
         f"{APPT_URL}/proposals/create",
         json=_create_body(practitioner, patient, start_h=10),
-        headers=_auth(token),
+        headers={**_auth(token), "Idempotency-Key": "audit-blocked-create-proposal-key"},
     )
     assert resp.json()["autonomy_tier"] == "blocked"
     assert db.query(AppointmentAuditLog).count() == 0

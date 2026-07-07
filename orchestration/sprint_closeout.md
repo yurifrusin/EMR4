@@ -7676,6 +7676,64 @@ wiring.
 
 ---
 
+## Sprint 150 Closeout - Create-Proposal Syntactic Idempotency Wiring
+
+Publication state:
+
+- Integration commit SHA: `pending Sprint 150 closeout commit`.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Programme position:
+
+- Phase/programme: Programme 2G / EMR4 API Spine.
+- Classification: narrow route wiring and guardrail hardening.
+- Larger objective advanced: the first proposal-only route now enforces
+  syntactic `Idempotency-Key` discipline without gaining write replay authority.
+- Next planned step: Sprint 151 OpenAPI/FastAPI header alignment guard for
+  create-proposal, including the deferred `minLength: 8` compatibility decision.
+
+Integrated outcome:
+
+- Updated `app/routers/appointments.py` so
+  `POST /api/v1/appointments/proposals/create` requires a non-blank
+  `Idempotency-Key` header.
+- Added a proposal-specific missing-key error message:
+  `Idempotency-Key is required for creating appointment proposals.`
+- Kept `_build_create_appointment_proposal` idempotency-free.
+- Enabled the Sprint 148 future DB-backed behavior tests in
+  `tests/test_api_spine_create_proposal_idempotency_route_contract.py`.
+- Updated existing create-proposal callers in focused tests to send the new
+  header deliberately.
+- Proved keyed create-proposal calls create no appointment, audit, or
+  `AppointmentCommandIdempotency` rows.
+- Proved same-key/same-body retries re-evaluate fresh current state, and
+  same-key/different-body retries return fresh proposal envelopes without
+  `409 idempotency_key_conflict`.
+- Deliberately deferred OpenAPI `minLength: 8` enforcement for a compatibility
+  alignment sprint.
+- Raw compatibility, other proposal families, provider, GraphQL, H15/H-series,
+  memory/RAG/GraphRAG, and historical diary trove gates remain closed.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_api_spine_create_proposal_idempotency_route_contract.py tests/test_api_spine_create_proposal_replay_model_decision.py tests/test_api_spine_proposal_only_idempotency_preflight.py tests/test_appointment_proposals.py tests/test_appointment_audit.py tests/test_appointment_raw_temporal_guard.py tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py -q
+```
+
+Result: `88 passed`; existing Starlette and Google GenAI deprecation warnings
+only.
+
+Note: `tests/test_appointment_audit_warning_summary.py` remains time-sensitive
+around raw compatibility `TODAY` fixtures and currently fails independently of
+Sprint 150 with same-day elapsed/raw-compat audit expectations.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is the create-proposal OpenAPI/FastAPI header alignment
+guard.
+
+---
+
 ## Sprint 149 Closeout - Create-Proposal Replay Model Decision
 
 Publication state:

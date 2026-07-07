@@ -5,7 +5,7 @@
 | Sprint | 149 |
 | Programme | Programme 2G / EMR4 API Spine |
 | Steward posture | Replay-model decision only before route wiring |
-| Runtime posture | No route behavior changed |
+| Runtime posture | Sprint 150 wires syntactic header enforcement only |
 
 ## Decision
 
@@ -18,6 +18,10 @@ This means a future wiring sprint may require syntactically valid
 `Idempotency-Key` headers on create-proposal requests as client discipline, but
 the backend should continue to evaluate each accepted proposal request against
 current diary state and mint fresh proposal evidence.
+
+Sprint 150 implemented the first-pass wiring with non-blank header validation
+only. OpenAPI `minLength: 8` validation remains deferred pending an explicit
+client-compatibility decision.
 
 ## Accepted Semantics
 
@@ -79,9 +83,11 @@ there is no separate Bernie proposal idempotency path in this decision.
 
 ## Current No-Wiring Guard
 
-Sprint 149 does not wire the route. Current FastAPI behavior remains:
+Sprint 149 did not wire the route. Sprint 150 now wires only syntactic header
+enforcement. Current FastAPI behavior is:
 
-- `propose_create_appointment` has no `Idempotency-Key` header binding;
+- `propose_create_appointment` has an `Idempotency-Key` header binding;
+- missing or whitespace-only keys return `400 idempotency_key_required`;
 - `_build_create_appointment_proposal` has no idempotency helper call;
 - dynamic proposal tests prove no appointment, audit, or idempotency-ledger row
   is created by a proposal call.

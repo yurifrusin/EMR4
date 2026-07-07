@@ -44,11 +44,14 @@ def _base_body(patient, practitioner) -> dict:
     }
 
 
-def _post_proposal(client, token, body: dict):
+def _post_proposal(client, token, body: dict, *, idempotency_key: str | None = "proposal-key"):
+    headers = {"Authorization": f"Bearer {token}"}
+    if idempotency_key is not None:
+        headers["Idempotency-Key"] = idempotency_key
     return client.post(
         PROPOSAL_URL,
         json=body,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=headers,
     )
 
 
@@ -124,6 +127,46 @@ def diary_with_break(db, practice, practitioner):
 def test_create_proposal_requires_auth(client, patient, practitioner):
     resp = client.post(PROPOSAL_URL, json=_base_body(patient, practitioner))
     assert resp.status_code == 401
+
+
+def test_create_proposal_requires_idempotency_key_before_evidence(
+        client, db, gp_user, patient, practitioner):
+    token = make_token(gp_user)
+    before = db.query(Appointment).count()
+    before_audits = db.query(AppointmentAuditLog).count()
+    before_idempotency_rows = db.query(AppointmentCommandIdempotency).count()
+
+    resp = _post_proposal(
+        client,
+        token,
+        _base_body(patient, practitioner),
+        idempotency_key=None,
+    )
+
+    assert resp.status_code == 400, resp.text
+    assert resp.json()["detail"]["code"] == "idempotency_key_required"
+    assert db.query(Appointment).count() == before
+    assert db.query(AppointmentAuditLog).count() == before_audits
+    assert db.query(AppointmentCommandIdempotency).count() == before_idempotency_rows
+
+
+def test_create_proposal_blank_idempotency_key_is_missing(
+        client, db, gp_user, patient, practitioner):
+    token = make_token(gp_user)
+    before = db.query(Appointment).count()
+    before_idempotency_rows = db.query(AppointmentCommandIdempotency).count()
+
+    resp = _post_proposal(
+        client,
+        token,
+        _base_body(patient, practitioner),
+        idempotency_key="   ",
+    )
+
+    assert resp.status_code == 400, resp.text
+    assert resp.json()["detail"]["code"] == "idempotency_key_required"
+    assert db.query(Appointment).count() == before
+    assert db.query(AppointmentCommandIdempotency).count() == before_idempotency_rows
 
 
 def test_create_proposal_returns_typed_command_without_mutating(

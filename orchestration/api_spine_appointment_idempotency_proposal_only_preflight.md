@@ -117,3 +117,11 @@ create-confirm ledger path.
 Do not wire proposal-route enforcement in Sprint 148. The route-test contract
 must first define proposal-specific replay/conflict/client-readiness semantics
 without copying confirmation-write replay authority.
+
+## Sprint 150 Update
+
+`POST /api/v1/appointments/proposals/create` now requires a non-blank
+`Idempotency-Key` header using deterministic re-evaluation semantics. It still
+does not create proposal idempotency ledger rows, stored proposal replay,
+same-key conflicts, slot reservations, appointment writes, or audit writes.
+Other proposal families and raw compatibility writes remain out of scope.

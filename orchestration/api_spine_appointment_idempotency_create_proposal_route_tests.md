@@ -5,7 +5,7 @@
 | Sprint | 148 |
 | Programme | Programme 2G / EMR4 API Spine |
 | Steward posture | Guarded route-test contract only |
-| Runtime posture | No route behavior changed |
+| Runtime posture | Sprint 150 wires syntactic header enforcement only |
 
 ## Scope
 
@@ -15,9 +15,11 @@ This contract covers only:
 |---|---|---|---|
 | `POST /api/v1/appointments/proposals/create` | `propose_create_appointment` | `proposeAppointmentCreate` | proposal command |
 
-The route currently builds a proposal envelope and optional staff-confirmation
-payload. It does not create an appointment, write audit rows, reserve a slot, or
-complete the confirmation idempotency ledger.
+The route builds a proposal envelope and optional staff-confirmation payload.
+As of Sprint 150 it requires a non-blank `Idempotency-Key` header, then
+deterministically re-evaluates the current diary state. It does not create an
+appointment, write audit rows, reserve a slot, create proposal idempotency
+ledger rows, or complete the confirmation idempotency ledger.
 
 ## Contract Decision
 
@@ -35,10 +37,9 @@ Future implementation must not use create-proposal idempotency to:
 
 ## Future Behavior Tests
 
-When a later sprint intentionally wires proposal-route enforcement, the skipped
-tests in `tests/test_api_spine_create_proposal_idempotency_route_contract.py`
-should be enabled and made executable. They define the first accepted behavior
-surface:
+Sprint 150 enabled the future behavior tests in
+`tests/test_api_spine_create_proposal_idempotency_route_contract.py` as
+DB-backed route tests. They define the accepted behavior surface:
 
 1. missing `Idempotency-Key` fails closed before proposal evidence is minted;
 2. blank or whitespace-only `Idempotency-Key` is treated as missing;
@@ -54,25 +55,27 @@ These future tests must become DB-backed `POST
 /api/v1/appointments/proposals/create` integration tests when unskipped, not
 only static source/document checks.
 
-## Pending Replay-Model Decision
+## Replay-Model Decision
 
-Sprint 148 deliberately does not choose create-proposal replay behavior. Sprint
-149 must choose one of:
+Sprint 149 chose deterministic re-evaluation before Sprint 150 wiring:
 
 | Option | Meaning | Current preference |
 |---|---|---|
-| Deterministic re-evaluation | Require `Idempotency-Key`, but do not create a proposal ledger; same-key retries are fresh proposal evaluations and same-key/different-body does not return `409`. | Preferred default unless client/product needs conflict discipline |
-| Short-retention proposal marker | Store a bounded proposal marker; same-key/different-body returns a proposal-scoped `409`, never appointment write replay. | Acceptable if client retries need stricter discipline |
-| Stored proposal-envelope replay | Store and replay the proposal envelope for a short period. | Highest risk; only acceptable if freshness/evidence semantics are preserved and retention is short |
+| Deterministic re-evaluation | Require `Idempotency-Key`, but do not create a proposal ledger; same-key retries are fresh proposal evaluations and same-key/different-body does not return `409`. | Chosen |
+| Short-retention proposal marker | Store a bounded proposal marker; same-key/different-body returns a proposal-scoped `409`, never appointment write replay. | Rejected for first pass |
+| Stored proposal-envelope replay | Store and replay the proposal envelope for a short period. | Rejected for first pass |
 
 Whichever option is chosen, create-proposal idempotency must remain separate
 from confirmation-write replay authority.
 
-## Current No-Wiring Guard
+## Current Wiring Guard
 
-Sprint 148 must keep the current FastAPI route unwired:
+Sprint 150 keeps the FastAPI route wired narrowly:
 
-- no `Idempotency-Key` header binding on `propose_create_appointment`;
+- `propose_create_appointment` binds `Idempotency-Key` from the HTTP header;
+- missing or whitespace-only keys return `400 idempotency_key_required`;
+- non-blank short keys are accepted for Sprint 150; OpenAPI `minLength: 8`
+  enforcement remains a future compatibility decision;
 - no `claim_appointment_command()` call from `propose_create_appointment` or
   `_build_create_appointment_proposal`;
 - no `complete_appointment_command()` call from `propose_create_appointment` or
@@ -99,13 +102,8 @@ This contract does not open:
 - broad historical diary trove mining;
 - model-to-database writes outside REST command handlers.
 
-## Recommended Sprint 149
+## Recommended Sprint 151
 
-Before wiring, run a focused review on the create-proposal replay model and
-choose one implementation shape:
-
-- deterministic re-evaluation with required key but no proposal ledger;
-- short-retention proposal marker that rejects same-key/different-body retries;
-- or stored proposal-envelope replay with explicit short retention.
-
-Do not implement until that choice is explicit.
+Before expanding to other proposal routes, add an OpenAPI/FastAPI header
+alignment guard for create-proposal, including the currently deferred
+`minLength: 8` question and client-readiness note.

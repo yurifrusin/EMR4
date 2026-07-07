@@ -311,6 +311,6 @@ def test_proposal_create_does_not_write_audit_with_warnings(
     client.post(
         f"{APPT_URL}/proposals/create",
         json=_create_body(practitioner, patient),
-        headers=_auth(token),
+        headers={**_auth(token), "Idempotency-Key": "audit-warning-create-proposal-key"},
     )
     assert db.query(AppointmentAuditLog).count() == 0

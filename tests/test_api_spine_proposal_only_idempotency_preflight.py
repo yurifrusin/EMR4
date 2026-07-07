@@ -108,10 +108,21 @@ def test_inventory_classifies_proposal_routes_as_non_mutating_proposal_commands(
         assert phrase in inventory
 
 
-def test_current_fastapi_proposal_routes_remain_unwired_in_preflight():
+def test_current_fastapi_proposal_routes_reflect_create_only_wiring():
     router_text = _read(ROUTER)
 
-    for details in PROPOSAL_ROUTES.values():
+    create_route = _route_body(
+        router_text,
+        PROPOSAL_ROUTES["create"]["handler"],
+        PROPOSAL_ROUTES["create"]["end"],
+    )
+    assert "Idempotency-Key" in create_route
+    assert "claim_appointment_command(" not in create_route
+    assert "complete_appointment_command(" not in create_route
+
+    for name, details in PROPOSAL_ROUTES.items():
+        if name == "create":
+            continue
         route = _route_body(router_text, details["handler"], details["end"])
         assert "Idempotency-Key" not in route
         assert "claim_appointment_command(" not in route

@@ -32,7 +32,7 @@ def test_decision_selects_deterministic_re_evaluation_without_proposal_ledger():
     compact = _compact(text)
 
     assert "| Sprint | 149 |" in text
-    assert "No route behavior changed" in text
+    assert "Sprint 150 wires syntactic header enforcement only" in text
     assert "Deterministic re-evaluation with a required `Idempotency-Key`" in text
     assert "no proposal ledger" in compact
     assert "no stored proposal-envelope replay" in compact
@@ -80,7 +80,7 @@ def test_decision_forbids_confirmation_ledger_helper_reuse_on_create_proposal():
     assert "target_appointment_id" in helper
 
 
-def test_current_create_proposal_route_remains_unwired_after_decision():
+def test_current_create_proposal_route_wires_syntactic_header_without_ledger_after_decision():
     router_text = _read(ROUTER)
     route = _route_body(
         router_text,
@@ -93,8 +93,9 @@ def test_current_create_proposal_route_remains_unwired_after_decision():
         "def _block_create_confirmation(",
     )
 
-    assert "Idempotency-Key" not in route
-    assert "Header(" not in route
+    assert "Idempotency-Key" in route
+    assert "Header(" in route
+    assert "_normalize_create_proposal_idempotency_key(idempotency_key)" in route
     assert "claim_appointment_command(" not in f"{route}\n{helper}"
     assert "complete_appointment_command(" not in f"{route}\n{helper}"
 
@@ -111,8 +112,8 @@ def test_sprint148_contract_points_to_sprint149_decision_and_sprint150_wiring():
     decision = _read(DECISION)
     contract = _read(ROUTE_CONTRACT)
 
-    assert "Recommended Sprint 149" in contract
-    assert "deterministic re-evaluation with required key but no proposal ledger" in contract
+    assert "Replay-Model Decision" in contract
+    assert "do not create a proposal ledger" in contract
     assert "Recommended Sprint 150" in decision
     assert "deterministic re-evaluation semantics only" in decision
 

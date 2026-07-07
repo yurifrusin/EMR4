@@ -62,7 +62,7 @@ def _proposal(client, token, patient, practitioner, *, start="09:00:00", duratio
     resp = client.post(
         PROPOSAL_URL,
         json=_base_body(patient, practitioner, start=start, duration=duration),
-        headers=_auth(token),
+        headers=_auth(token, "staff-create-proposal-key"),
     )
     assert resp.status_code == 200, resp.text
     return resp.json()
@@ -316,7 +316,7 @@ def test_proposal_only_create_route_remains_out_of_scope(client, db, gp_user, pa
     resp = client.post(
         PROPOSAL_URL,
         json=_base_body(patient, practitioner),
-        headers=_auth(token),
+        headers=_auth(token, "proposal-only-create-key"),
     )
 
     assert resp.status_code == 200, resp.text

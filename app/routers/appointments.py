@@ -1030,10 +1030,25 @@ def create_appointment(
 @router.post("/proposals/create", response_model=AppointmentCreateProposalOut)
 def propose_create_appointment(
     body: AppointmentCreate,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
+    _normalize_create_proposal_idempotency_key(idempotency_key)
     return _build_create_appointment_proposal(body, db, current_user.practice_id, current_user=current_user)
+
+
+def _normalize_create_proposal_idempotency_key(raw_key: Optional[str]) -> str:
+    normalized = (raw_key or "").strip()
+    if not normalized:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "code": "idempotency_key_required",
+                "message": "Idempotency-Key is required for creating appointment proposals.",
+            },
+        )
+    return normalized
 
 
 def _build_create_appointment_proposal(
