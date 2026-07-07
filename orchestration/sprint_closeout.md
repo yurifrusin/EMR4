@@ -24,10 +24,39 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 181 H63/H64 Proposal-Guard Backlog Slice |
-| Integrated through | Ariadne narrow docs triage with DeepSeek sidecar confirmation |
-| Status | Integrated and pushed |
+| Batch | Sprint 182 Proposal-Guard Unreadable Markdown Cleanup |
+| Integrated through | Ariadne encoding cleanup and narrow citation triage |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 182 What Changed
+
+- Converted the two markdown files that the proposal-surface guard reported as
+  unreadable into UTF-8-readable markdown:
+  `orchestration/agent_inbox/codex/plan-r30-action-grammar-replay-consumer.md`
+  and
+  `orchestration/agent_inbox/codex/review-deepseek-sprint159-bernie-tool-intent-confirm-header.md`.
+- Added exact closed-gate proposal-surface citations to the now-readable R30
+  plan packet so it does not move from unreadable to missing-readiness backlog.
+- Removed trailing-space hard breaks surfaced by the UTF-16-to-UTF-8 conversion
+  in the Sprint 159 review artifact.
+
+Sprint 182 is a documentation/encoding cleanup sprint. It does not change
+runtime code, routes, provider configuration, database behavior, memory, RAG,
+GraphRAG, H15/H-series imports, historical diary processing, GraphQL mutations,
+or model-to-database write authority.
+
+## Sprint 182 Verification
+
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py orchestration\agent_inbox\codex\plan-r30-action-grammar-replay-consumer.md orchestration\agent_inbox\codex\review-deepseek-sprint159-bernie-tool-intent-confirm-header.md`
+  passed.
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_report.py docs orchestration`
+  returned `missing_readiness_count=447`, `unreadable_markdown_count=0`, and
+  `total_fail_closed_findings_count=447`, down from Sprint 181's 447/2/449.
+- `git diff --check` passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 181 What Changed
 

@@ -8,9 +8,29 @@
 | Status | pending_plan_review |
 | Created | 2026-07-06 |
 
+## Proposal-Surface Guard Citation
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+```
+
+Expected closed values:
+
+- `runtime_or_provider_wiring_ready=false`
+- `raw_trove_access_ready=false`
+- `runtime_gate_decision=blocked`
+- `default_provider=disabled`
+- `live_provider_enabled=false`
+- `provider_calls_performed=false`
+- `route_behavior_changed=false`
+- `database_access_performed=false`
+- `memory_or_rag_access_performed=false`
+- `historical_diary_material_access_performed=false`
+
 ## Plan Summary
 
-Build the smallest deterministic synthetic replay consumer that proves the R29 action grammar can be *consumed* by dispatch/routing logic without tautology. The replay consumer lives entirely in test helpers and synthetic fixtures (no production pp/ changes). It simulates consumer-side decisions — tier-based routing, implementation gates, staff-confirmation enforcement, envelope-name resolution, and affordance pre-check — against authored day/action scripts. No DB, no HTTP, no provider calls, no H-series semantic data. H15 stays closed.
+Build the smallest deterministic synthetic replay consumer that proves the R29 action grammar can be *consumed* by dispatch/routing logic without tautology. The replay consumer lives entirely in test helpers and synthetic fixtures (no production pp/ changes). It simulates consumer-side decisions â€” tier-based routing, implementation gates, staff-confirmation enforcement, envelope-name resolution, and affordance pre-check â€” against authored day/action scripts. No DB, no HTTP, no provider calls, no H-series semantic data. H15 stays closed.
 
 ## My Understanding
 
@@ -24,17 +44,17 @@ The **grammar replay consumer** is a fundamentally different kind of replay:
 - Authored synthetic day scripts describe action sequences with expected consumer-side decisions
 - No provider calls (trivially guaranteed by no i_service imports and no monkeypatch needed)
 
-The tautology risk is the central design challenge. If the consumer only re-checks descriptor.mutating == True and descriptor.tier == BernieCapabilityTier.confirm, that's just ssert_grammar_consistency repeated at a different call site. Real consumer logic is **cross-field dispatch decisions** — the consumer must correctly answer "what do I do next?" based on the grammar contract, not "does the grammar contract hold?"
+The tautology risk is the central design challenge. If the consumer only re-checks descriptor.mutating == True and descriptor.tier == BernieCapabilityTier.confirm, that's just ssert_grammar_consistency repeated at a different call site. Real consumer logic is **cross-field dispatch decisions** â€” the consumer must correctly answer "what do I do next?" based on the grammar contract, not "does the grammar contract hold?"
 
 ## Intended Surface / Boundary
 
-- 	ests/action_grammar_replay/ — new test helper directory (mirrors 	ests/bernie_scenarios/ structure but pure domain, no HTTP/DB)
-  - loader.py — loads synthetic day-action scripts
-  - eplay.py — grammar replay consumer engine with consumer-side decision logic
-  - 	est_grammar_replay.py — parametrized pytest harness
-- 	ests/fixtures/action_grammar_replay/ — new synthetic-only JSON fixtures directory
-  - 3–5 authored day-action scripts covering: full confirm day, read-only day, mixed day, planned-not-implemented refusal, unknown action graceful degradation
-- docs/receptionist_review_r30.md — Antigravity/Gemini to produce after plan approval
+- 	ests/action_grammar_replay/ â€” new test helper directory (mirrors 	ests/bernie_scenarios/ structure but pure domain, no HTTP/DB)
+  - loader.py â€” loads synthetic day-action scripts
+  - eplay.py â€” grammar replay consumer engine with consumer-side decision logic
+  - 	est_grammar_replay.py â€” parametrized pytest harness
+- 	ests/fixtures/action_grammar_replay/ â€” new synthetic-only JSON fixtures directory
+  - 3â€“5 authored day-action scripts covering: full confirm day, read-only day, mixed day, planned-not-implemented refusal, unknown action graceful degradation
+- docs/receptionist_review_r30.md â€” Antigravity/Gemini to produce after plan approval
 - Coordination-only updates to packet status
 
 **Surfaces that must NOT change:**
@@ -65,11 +85,11 @@ Loads synthetic day-action JSON/JSON5 scripts from 	ests/fixtures/action_grammar
 
 ### New: 	ests/action_grammar_replay/replay.py
 The grammar replay consumer engine. Contains consumer-side decision logic that proves grammar consumption:
-- esolve_action(raw_name) — calls ction_verb_for_envelope, then get_verb_descriptor; returns structured consumer state
-- consumer_dispatch_decision(descriptor) — returns a typed enum covering: oute_to_confirm, oute_read_only, oute_meta, efuse_not_implemented, efuse_unknown_action
-- consumer_confirm_prerequisites(descriptor) — returns what conditions must hold before a confirm endpoint may be called (requires_staff_confirmation, confirm_affordance_notes expectations)
-- consumer_enforce_invariants(descriptor) — cross-field checks a real consumer would need (e.g., "is it an error if a confirm-tier verb is implemented but has no confirm_actions?", "is it normal that a read-only verb is not mutating?")
-- un_day_script(script) — loads and executes each action through the consumer functions, collects structured decisions and evidence
+- esolve_action(raw_name) â€” calls ction_verb_for_envelope, then get_verb_descriptor; returns structured consumer state
+- consumer_dispatch_decision(descriptor) â€” returns a typed enum covering: oute_to_confirm, oute_read_only, oute_meta, efuse_not_implemented, efuse_unknown_action
+- consumer_confirm_prerequisites(descriptor) â€” returns what conditions must hold before a confirm endpoint may be called (requires_staff_confirmation, confirm_affordance_notes expectations)
+- consumer_enforce_invariants(descriptor) â€” cross-field checks a real consumer would need (e.g., "is it an error if a confirm-tier verb is implemented but has no confirm_actions?", "is it normal that a read-only verb is not mutating?")
+- un_day_script(script) â€” loads and executes each action through the consumer functions, collects structured decisions and evidence
 
 ### New: 	ests/action_grammar_replay/test_grammar_replay.py
 Parametrized pytest tests that:
@@ -82,25 +102,25 @@ Parametrized pytest tests that:
 ### New: 	ests/fixtures/action_grammar_replay/ directory
 Synthetic-only JSON fixtures. Each fixture is a single authored day-action script:
 
-**confirm_create_move_resize_day.json** — Full confirm day:
+**confirm_create_move_resize_day.json** â€” Full confirm day:
 - Action sequence: create (via ction_verb_for_envelope bridge with confirm_booking), move, resize, cancel
 - Expected: each resolves to a confirm-tier, implemented, requires_staff_confirmation verb
 - Consumer must route each to oute_to_confirm
 
-**ead_only_handoff_day.json** — Read-only day:
+**ead_only_handoff_day.json** â€” Read-only day:
 - Actions: slot_search, explain_schedule, handoff
 - Expected: no mutating, no staff confirmation, read_only/meta tier
 - Consumer must route each to oute_read_only or oute_meta
 
-**mixed_day_with_refusals.json** — Mixed day:
+**mixed_day_with_refusals.json** â€” Mixed day:
 - Actions: slot_search (read_only), check_in (not implemented ? consumer must refuse), waiting_area_move (not implemented ? refuse), create (confirm ? route)
 - Expected consumer dispatch: refuse for check_in and waiting_area_move, route_to_confirm for create, route_read_only for slot_search
 
-**unknown_actions_and_bridge.json** — Graceful degradation:
+**unknown_actions_and_bridge.json** â€” Graceful degradation:
 - Actions: "propose_booking" (unknown ? should get back None from bridge), "propose_edit" (unknown), "find_slots" (known alias ? slot_search)
 - Expected: consumer handles unknown gracefully, returns efuse_unknown_action
 
-**ffordance_gate_expectations.json** — Confirm affordance pre-check:
+**ffordance_gate_expectations.json** â€” Confirm affordance pre-check:
 - Actions: create, move, status_change
 - For each: verifies consumer extracts confirm_affordance_notes, interprets staff_confirmation requirement, and can enumerate the confirm_actions endpoints that back it
 
@@ -132,10 +152,10 @@ Each fixture has the format:
 
 ## Implementation Steps
 
-### Step 1 — Create synthetic fixture directory and 5 authored scripts
-Create 	ests/fixtures/action_grammar_replay/ with 5 JSON fixtures (described above). Each is purely synthetic — no H-series references, no appointment times, no patient/practitioner identities, no raw diary content. Just action names and expected consumer dispatch metadata.
+### Step 1 â€” Create synthetic fixture directory and 5 authored scripts
+Create 	ests/fixtures/action_grammar_replay/ with 5 JSON fixtures (described above). Each is purely synthetic â€” no H-series references, no appointment times, no patient/practitioner identities, no raw diary content. Just action names and expected consumer dispatch metadata.
 
-### Step 2 — Build 	ests/action_grammar_replay/loader.py
+### Step 2 â€” Build 	ests/action_grammar_replay/loader.py
 A load_day_script(path) -> dict function that:
 - Reads JSON from the fixture directory
 - Validates required fields (id, source, actions list)
@@ -145,7 +165,7 @@ A load_day_script(path) -> dict function that:
 
 Schema validation: SCHEMA_VERSION = "action_grammar_replay.v1", KNOWN_DISPATCH_VALUES = {"route_to_confirm", "route_read_only", "route_meta", "refuse_not_implemented", "refuse_unknown_action"}.
 
-### Step 3 — Build 	ests/action_grammar_replay/replay.py
+### Step 3 â€” Build 	ests/action_grammar_replay/replay.py
 Contains the consumer-side decision functions:
 
 `python
@@ -208,9 +228,9 @@ def run_day_script(script: dict) -> DayScriptResult:
     # Return structured result
 `
 
-Key design choice: the replay engine **compares consumer decisions against expected script outcomes**, not against grammar-module values read a second time. If a script says "action 'confirm_booking' should dispatch to route_to_confirm", the engine resolves the action through the consumer's dispatch function and checks the result matches the script's expectation. The expected values in the script are **authored correct expectations** — they represent what a correct consumer should produce, not what the grammar module internally stores. This avoids tautology because the expected values are authored independently and tested against the consumer's decision logic, not pulled from the grammar.
+Key design choice: the replay engine **compares consumer decisions against expected script outcomes**, not against grammar-module values read a second time. If a script says "action 'confirm_booking' should dispatch to route_to_confirm", the engine resolves the action through the consumer's dispatch function and checks the result matches the script's expectation. The expected values in the script are **authored correct expectations** â€” they represent what a correct consumer should produce, not what the grammar module internally stores. This avoids tautology because the expected values are authored independently and tested against the consumer's decision logic, not pulled from the grammar.
 
-### Step 4 — Build 	ests/action_grammar_replay/test_grammar_replay.py
+### Step 4 â€” Build 	ests/action_grammar_replay/test_grammar_replay.py
 Parametrized pytest harness:
 
 `python
@@ -231,7 +251,7 @@ def test_consumer_dispatch_is_independent_of_grammar_enum_values():
     # reads the right fields independently.
 `
 
-### Step 5 — Run verification
+### Step 5 â€” Run verification
 `powershell
 .venv\Scripts\python.exe -m py_compile tests\action_grammar_replay\loader.py tests\action_grammar_replay\replay.py tests\action_grammar_replay\test_grammar_replay.py
 .venv\Scripts\python.exe -m pytest tests\action_grammar_replay\ -v --tb=short -p no:randomly
@@ -239,7 +259,7 @@ def test_consumer_dispatch_is_independent_of_grammar_enum_values():
 git diff --check
 `
 
-### Step 6 — Update coordination artifacts
+### Step 6 â€” Update coordination artifacts
 Update the Claude R30 task packet's completion notes to record this plan. Update orchestration/parallel_workstreams.md status.
 
 ## How Replay Proves Grammar Consumption Without Tautology
@@ -251,13 +271,13 @@ Update the Claude R30 task packet's completion notes to record this plan. Update
 
 ### What makes this non-tautological
 
-1. **Authored expected values vs. programmatic re-read**: Each fixture's expected_* values are authored by hand (not programmatically derived from the grammar module). The consumer's consumer_dispatch_decision() function reads descriptor fields and produces a dispatch enum. The test compares that dispatch output against the authored expectation. If someone breaks the consumer logic while keeping descriptor fields correct, the test fails. If someone breaks descriptor fields (e.g., marks create as read_only), both the R29 consistency tests and the consumer tests fail — orthogonal coverage.
+1. **Authored expected values vs. programmatic re-read**: Each fixture's expected_* values are authored by hand (not programmatically derived from the grammar module). The consumer's consumer_dispatch_decision() function reads descriptor fields and produces a dispatch enum. The test compares that dispatch output against the authored expectation. If someone breaks the consumer logic while keeping descriptor fields correct, the test fails. If someone breaks descriptor fields (e.g., marks create as read_only), both the R29 consistency tests and the consumer tests fail â€” orthogonal coverage.
 
-2. **Consumer-side decision logic**: consumer_dispatch_decision() implements dispatch branching that is not present in the grammar module. It reads 	ier, implemented, and mutating and produces a single ConsumerDispatch decision. This logic is the same kind of decision a real route or Bernie dispatch point would make. The R29 tests never exercise this branching — they only test individual descriptor field values and static invariants.
+2. **Consumer-side decision logic**: consumer_dispatch_decision() implements dispatch branching that is not present in the grammar module. It reads 	ier, implemented, and mutating and produces a single ConsumerDispatch decision. This logic is the same kind of decision a real route or Bernie dispatch point would make. The R29 tests never exercise this branching â€” they only test individual descriptor field values and static invariants.
 
 3. **Cross-field invariant enforcement**: consumer_enforce_invariants() applies consumer-side validation rules that a real dispatch handler would need. For example: "is it an operational error if a confirm-tier implemented verb has zero confirm_actions?" The grammar module's ssert_grammar_consistency() checks this statically, but a consumer must also handle dynamic cases where a descriptor is retrieved at runtime and could theoretically be corrupted or from an unexpected version.
 
-4. **Graceful degradation path**: The consumer handles ction_verb_for_envelope returning None (unknown action names, "propose_*" names) with efuse_unknown_action. The grammar tests only verify the bridge returns None — they don't test what a consumer *does* with that None. The replay test proves the consumer handles it correctly in a workflow context.
+4. **Graceful degradation path**: The consumer handles ction_verb_for_envelope returning None (unknown action names, "propose_*" names) with efuse_unknown_action. The grammar tests only verify the bridge returns None â€” they don't test what a consumer *does* with that None. The replay test proves the consumer handles it correctly in a workflow context.
 
 5. **Synthetic unknown descriptor test**: The standalone "consumer dispatch is independent" test constructs a synthetic descriptor not from DIARY_ACTION_GRAMMAR to prove the consumer reads descriptor fields correctly rather than being tautologically correct because it processes the same object reference.
 
@@ -285,11 +305,11 @@ Update the Claude R30 task packet's completion notes to record this plan. Update
 ## Risks / Ambiguities
 
 - **Risk: fixture file format overengineering.** Mitigation: use simple JSON with minimal schema validation. No YAML dependency needed since the consumer has no DB/HTTP context to configure. Avoid adding a new serialisation library.
-- **Risk: the consumer logic appears too trivial.** Mitigation: document explicitly that the consumer's value is proving *consumption*, not sophistication. The consumer is intentionally minimal — it must be small enough to review and trust, but exercise enough branching to prove the grammar is consumable. A trivial consumer that still fails on a corrupted or unexpected descriptor is worth more than a complex one that is hard to reason about.
-- **Risk: tautology accusation remains despite mitigation.** Mitigation: the 	ests/test_diary_action_grammar.py golden confirm-block test is different from the replay consumer's affordance pre-check — the golden test verifies the grammar descriptor has notes; the consumer verifies it can *interpret and act on* those notes in a dispatch context. Include this distinction in the implementation review.
+- **Risk: the consumer logic appears too trivial.** Mitigation: document explicitly that the consumer's value is proving *consumption*, not sophistication. The consumer is intentionally minimal â€” it must be small enough to review and trust, but exercise enough branching to prove the grammar is consumable. A trivial consumer that still fails on a corrupted or unexpected descriptor is worth more than a complex one that is hard to reason about.
+- **Risk: tautology accusation remains despite mitigation.** Mitigation: the 	ests/test_diary_action_grammar.py golden confirm-block test is different from the replay consumer's affordance pre-check â€” the golden test verifies the grammar descriptor has notes; the consumer verifies it can *interpret and act on* those notes in a dispatch context. Include this distinction in the implementation review.
 - **Ambiguity: whether to add a consumer.py in pp/services/diary/ for production use.** Decision: not yet. The consumer lives in test helpers for R30. If it proves useful, later sprints may promote it to production dispatch code. This follows the Fable recommendation of "grammar first, consumer second, dispatch third."
-- **Ambiguity: JSON vs YAML for fixtures.** Decision: JSON. The existing bernie_scenarios uses YAML because those fixtures have rich initial_state, 	urns, and nested expect structures. Grammar replay fixtures are flat action lists — JSON is simpler and avoids adding PyYAML as an implicit dependency (the existing project already has it, but the new fixtures should not rely on it).
-- **Ambiguity: should the loader validate that expected_tier matches verb descriptor?** Decision: no — that's what the test assertion does. The loader only validates structure and format, not semantic correctness. Semantic comparison happens in the replay engine.
+- **Ambiguity: JSON vs YAML for fixtures.** Decision: JSON. The existing bernie_scenarios uses YAML because those fixtures have rich initial_state, 	urns, and nested expect structures. Grammar replay fixtures are flat action lists â€” JSON is simpler and avoids adding PyYAML as an implicit dependency (the existing project already has it, but the new fixtures should not rely on it).
+- **Ambiguity: should the loader validate that expected_tier matches verb descriptor?** Decision: no â€” that's what the test assertion does. The loader only validates structure and format, not semantic correctness. Semantic comparison happens in the replay engine.
 - **Risk: fixture source field may be forgotten.** Mitigation: loader validates source == "authored_synthetic" and rejects any fixture with a different or missing source. This prevents accidental loading of non-synthetic data in future sprints.
 - **H15 gate**: remains closed. No semantic appointment data, no patient/practitioner identifiers, no diary times, no raw trove content in fixtures. The fixtures contain only action verb names and expected consumer dispatch values.
 - **No provider calls**: proven by the absence of any i_service import in the replay engine or tests. No monkeypatch guard needed (unlike the bernie_scenarios replay which has DB/HTTP routes that could theoretically trigger AI provider calls).
