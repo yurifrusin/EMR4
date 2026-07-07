@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 173 Multi-Frame Source Reset Fixture |
 | Integrated through | Ariadne direct fixture implementation from Sprint 171 DeepSeek recommendation; no new worker dispatch because scope was a single test-only YAML fixture |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 173 What Changed
@@ -68,6 +68,9 @@ access, GraphQL mutations, or model-to-database writes.
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`8 passed, 1 skipped`; existing warnings only).
 - `git diff --check` passed.
+- Integration commit: `62325db2`.
+- Push result: `git push origin master` succeeded; GitHub reported the
+  repository moved notice and the existing moderate Dependabot alert.
 
 Sprint engine state: continuing. No user intervention is required. Next planned
 step is either a narrow non-intercepted fake-provider backend pass or a compact
