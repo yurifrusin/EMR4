@@ -24,10 +24,62 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 184 Default-Duration Interpret Fixture |
+| Batch | Sprint 185 Reference-Date Reload Conflict Fixture |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
-| Status | Integrated and pushed |
+| Status | Pending final commit and push |
 | Last updated | 2026-07-07 |
+
+## Sprint 185 What Changed
+
+- Added
+  `tests/fixtures/bernie_scenarios/interpret_reference_date_reload_resolve_conflict.yaml`.
+- The fixture proves repeated relative-date wording re-resolves against the
+  current turn `reference_date` instead of reusing the previous turn-level
+  resolution or the auto-threaded prior requested appointment date.
+- The two-turn case first resolves `next Tuesday` from `2026-07-15` to
+  `2026-07-21`, then resolves the same phrase from `2026-07-08` to
+  `2026-07-14` while preserving threaded patient, practitioner, time, and
+  duration.
+- Updated `tests/fixtures/bernie_scenarios/README.md` to record
+  reference-date reload/reset coverage.
+- Documented Yuri's Ariadne-plus-three protocol correction in
+  `orchestration/protocol_alerts.md`: general sprint work should use Ariadne
+  plus Claude, Antigravity, and DeepSeek by default, with extra DeepSeek lanes
+  substituting immediately when Claude or Antigravity is unavailable.
+
+Sprint 185 is a Fable-aligned Programme 2D / Programme 2G backend-readiness
+fixture increment. It continues the native Bernie prompt-thread route-level
+track and does not open live provider, provider dry-run, runtime memory, RAG,
+GraphRAG, H15/H-series runtime imports, historical diary material access,
+GraphQL mutations, or model-to-database writes.
+
+Worker mix:
+
+- Ariadne implemented and integrated the narrow fixture directly.
+- DeepSeek reviewed the reference-date reload edge and recommended the
+  conflict shape: same relative phrase, different current-turn reference date,
+  prior requested appointment auto-threaded, and current resolution winning.
+- The Ariadne-plus-three correction was applied during this sprint. Future
+  general sprints must use Ariadne plus Claude, Antigravity, and DeepSeek, with
+  unavailable Claude/Antigravity lanes replaced by extra DeepSeek workers in
+  the same sprint window.
+
+## Sprint 185 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  passed serially (`.x............................`; one pre-existing xfail,
+  existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  passed (`8 passed, 1 skipped`; existing warnings only).
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py orchestration\protocol_alerts.md`
+  passed.
+- `git diff --check` passed.
+- Note: an earlier parallel run of scenario replay and integrity hit the known
+  transient Postgres enum DDL race (`userrole` duplicate type); rerunning the
+  tests serially passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 184 What Changed
 

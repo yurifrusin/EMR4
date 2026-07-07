@@ -40,6 +40,9 @@ The current executable `interpret_*` corpus covers two slices:
   for missing practitioner/date details instead of guessing;
 - temporal-drift follow-ups: relative-date corrections resolve against the
   current turn reference date while preserving threaded appointment details.
+- reference-date reload/reset prompts: repeated relative-date wording
+  re-resolves against the current turn reference date and wins over
+  auto-threaded prior requested appointment dates.
 - reset/no-merge follow-ups: explicit `context_frames: []` prevents patient,
   practitioner, time, and duration from being carried forward unless the
   receptionist restates them in the current turn.

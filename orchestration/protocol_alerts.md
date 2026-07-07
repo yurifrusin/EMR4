@@ -71,6 +71,17 @@ Read these before acting on remembered process details.
   continuation is acceptable only for tiny mechanical edits, hotfixes, or
   tightly coupled integration work, and the closeout must say why a broader
   worker mix was not used.
+- 2026-07-07: Ariadne plus three is the default for general sprint work. The
+  intended active sprint team is Ariadne as orchestrator/integrator plus three
+  worker lanes: Claude, Antigravity, and DeepSeek. DeepSeek is not merely an
+  emergency fallback; one DeepSeek lane should be used alongside Claude and
+  Antigravity for ordinary multi-agent sprint work. If Claude or Antigravity is
+  offline, quota-limited, stale, blocked, or otherwise unavailable in the sprint
+  window, Ariadne should immediately replace that lane with an additional
+  DeepSeek worker and keep moving under Yuri's standing full authority. When
+  Claude or Antigravity becomes available again, restore the standard
+  Claude/Antigravity/DeepSeek worker mix. Sprint closeout must state the actual
+  worker mix and any DeepSeek substitutions.
 - 2026-07-07: Antigravity availability must not be inferred solely from a bare
   `antigravity --version` shell probe. If the Antigravity/Gemini UI quota view
   shows usable availability, treat Antigravity as available and use the known

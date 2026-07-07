@@ -1,0 +1,70 @@
+id: interpret_reference_date_reload_resolve_conflict
+category: booking_interpret_contract
+description: >
+  After the diary/reference date is reloaded from a later date back to an
+  earlier safe date, the same relative phrase must re-resolve against the
+  current turn reference date and win over the auto-threaded prior requested
+  appointment date.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera next Tuesday at 09:00 for 20 minutes"
+      reference_date: "2026-07-15"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": "2026-07-21"
+        "command_candidate.earliest_time": "09:00"
+        "command_candidate.duration_minutes": "20"
+        "request_reference_date": "2026-07-15"
+        "normalization.constraint.date_from": "2026-07-21"
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera next Tuesday at 09:00 for 20 minutes"
+      reference_date: "2026-07-08"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": "2026-07-14"
+        "command_candidate.earliest_time": "09:00"
+        "command_candidate.duration_minutes": "20"
+        "request_reference_date": "2026-07-08"
+        "normalization.constraint.date_from": "2026-07-14"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+preserved_fields:
+  - command_candidate.patient_id
+  - command_candidate.practitioner_id
+  - command_candidate.earliest_time
+  - command_candidate.duration_minutes
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
