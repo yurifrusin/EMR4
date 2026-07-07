@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 153 Diary Create-Proposal Client Header Readiness |
 | Integrated through | Ariadne integration with EMR4 API Steward skill; Claude plan accepted; Antigravity implementation integrated; DeepSeek adversarial review accepted |
-| Status | Implementation committed in `9d7f9bd`; pending closeout metadata commit/push |
+| Status | Committed and pushed; sprint engine continuing |
 | Last updated | 2026-07-07 |
 
 ## Sprint 153 What Changed
@@ -72,9 +72,10 @@ Every closeout entry should record:
 Publication state:
 
 - Integration commit SHA: `9d7f9bd`.
-- Closeout metadata commit SHA: pending.
-- Push result: pending.
-- Final `git status --short --branch`: pending final closeout check.
+- Closeout metadata commit SHA: `a60b084`.
+- Push result: pushed to `origin/master`; GitHub reported the known moved-repo
+  notice and 1 moderate Dependabot alert.
+- Final `git status --short --branch`: `## master...origin/master`.
 
 Strategic position: Sprint 153 is **Programme 2G / EMR4 API Spine** client
 readiness and guardrail hardening. It was the right-sized follow-up to Sprint
