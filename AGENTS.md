@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 144 delete-confirm idempotency route wiring completed locally pending closeout commit. `POST /api/v1/appointments/proposals/delete-confirm` now requires `Idempotency-Key`, claims/replays via the appointment command ledger, uses `_apply_appointment_delete(..., commit=False)` so soft-cancel/audit/ledger completion commit together, rolls back started claims on blocked destructive checks, and keeps raw/proposal-only/provider/GraphQL/H15/memory/trove gates closed |
-| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 145 appointment idempotency confirmation-family checkpoint/audit before deciding whether to touch proposal-only routes or broader command surfaces |
+| **Current active track** | Sprint 145 appointment idempotency confirmation-family checkpoint completed locally pending closeout commit. The checkpoint records all five wired proposal-confirm appointment mutation families, the shared fail-closed replay/conflict/preclaim map, and the closed raw/proposal-only/provider/GraphQL/H15/memory/trove gates; no route behavior changed |
+| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 146 cross-family route-level idempotency integration tests across all wired confirmation families before any proposal-only/raw expansion |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

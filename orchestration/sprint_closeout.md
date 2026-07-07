@@ -24,6 +24,53 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 145 Confirmation-Family Idempotency Checkpoint |
+| Integrated through | Ariadne implementation with EMR4 API Steward skill; DeepSeek worker advice integrated; Claude and Antigravity protocol packets remain queued locally |
+| Status | Committed and pushed in Sprint 145 closeout commit; sprint engine continuing |
+| Last updated | 2026-07-07 |
+
+## Sprint 145 What Changed
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_confirmation_family_checkpoint.md`.
+- Added
+  `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` to guard
+  the five wired proposal-confirm appointment idempotency families: staff
+  create, Bernie create, status, update, and delete confirm.
+- Recorded the shared fail-closed decision map for replay, conflict,
+  in-progress, stale-in-progress, and failed-transient ledger states.
+- Preserved raw/proposal-only/provider/GraphQL/H15/memory/trove gates as closed
+  checkpoint boundaries.
+- Integrated DeepSeek worker review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint145-confirmation-family-checkpoint.md`.
+- Added Claude and Antigravity Sprint 145 packets:
+  `orchestration/agent_inbox/claude/claude-sprint145-confirmation-family-checkpoint-review.md`
+  and
+  `orchestration/agent_inbox/antigravity/antigravity-sprint145-confirmation-family-checkpoint-acceptance.md`.
+- No route behavior changed.
+
+## Sprint 145 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_confirmation_family_idempotency_checkpoint.py tests\test_api_spine_appointment_idempotency_route_integration_preflight.py tests\test_phase_programmes_current_checkpoint.py -q`
+  (`15 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_confirmation_family_idempotency_checkpoint.py tests\test_phase_programmes_current_checkpoint.py tests\test_sprint_closeout_protocol.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_confirmation_family_idempotency_checkpoint.py tests/test_api_spine_appointment_idempotency_route_integration_preflight.py tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py tests/test_api_spine_status_confirm_idempotency_route_contract.py tests/test_api_spine_update_confirm_idempotency_route_contract.py tests/test_api_spine_delete_confirm_idempotency_route_contract.py tests/test_phase_programmes_current_checkpoint.py tests/test_sprint_closeout_protocol.py -q`
+  (`118 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean apart from the known CRLF notice on
+  `orchestration/integration_log.md`.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 146,
+cross-family route-level idempotency integration tests across all five wired
+confirmation families.
+
+---
+
+## Previous Closeout - Sprint 144
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 144 Delete-Confirm Idempotency Route Wiring |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; DeepSeek worker advice integrated; Claude and Antigravity protocol packets remain queued locally |
 | Status | Committed and pushed in Sprint 144 closeout commit; sprint engine continuing |
