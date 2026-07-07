@@ -115,16 +115,16 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Sprint 155 create-confirm client header emission completed; sprint engine continuing |
+| Status | Sprint 156 status/delete confirm client header emission completed; sprint engine continuing |
 | Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
-| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard, Sprint 128 appointment idempotency model/migration preflight, Sprint 129 appointment idempotency storage helper foundation, Sprint 130 appointment idempotency route integration preflight, Sprint 131 staff create-confirm idempotency route-test contract, Sprint 132 staff create-confirm idempotency route wiring, Sprint 133 Bernie create-confirm idempotency preflight, Sprint 134 Bernie create-confirm idempotency route-test contract, Sprint 135 Bernie create-confirm idempotency route wiring, Sprint 136 status-confirm idempotency preflight, Sprint 137 status-confirm idempotency route-test contract, Sprint 138 status-confirm idempotency route wiring, Sprint 139 update-confirm idempotency preflight, Sprint 140 update-confirm idempotency route-test contract, Sprint 141 update-confirm idempotency route wiring, Sprint 142 delete-confirm idempotency preflight, Sprint 143 delete-confirm idempotency route-test contract, Sprint 144 delete-confirm idempotency route wiring, Sprint 145 confirmation-family idempotency checkpoint, Sprint 146 cross-family idempotency integration tests, Sprint 147 proposal-only idempotency preflight, Sprint 148 create-proposal route-test contract, Sprint 149 create-proposal replay-model decision, Sprint 150 create-proposal syntactic idempotency wiring, Sprint 151 create-proposal header alignment guard, Sprint 152 create-proposal minLength readiness decision, Sprint 153 diary create-proposal client header readiness, Sprint 154 diary/API header-gap preflight, Sprint 155 create-confirm client header emission |
-| Next Candidate Sprints | Sprint 156 should choose the next bounded confirm client header family, likely status-confirm/delete-confirm or update-confirm, before proposal-only backend binding or strict `minLength: 8` enforcement |
+| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard, Sprint 128 appointment idempotency model/migration preflight, Sprint 129 appointment idempotency storage helper foundation, Sprint 130 appointment idempotency route integration preflight, Sprint 131 staff create-confirm idempotency route-test contract, Sprint 132 staff create-confirm idempotency route wiring, Sprint 133 Bernie create-confirm idempotency preflight, Sprint 134 Bernie create-confirm idempotency route-test contract, Sprint 135 Bernie create-confirm idempotency route wiring, Sprint 136 status-confirm idempotency preflight, Sprint 137 status-confirm idempotency route-test contract, Sprint 138 status-confirm idempotency route wiring, Sprint 139 update-confirm idempotency preflight, Sprint 140 update-confirm idempotency route-test contract, Sprint 141 update-confirm idempotency route wiring, Sprint 142 delete-confirm idempotency preflight, Sprint 143 delete-confirm idempotency route-test contract, Sprint 144 delete-confirm idempotency route wiring, Sprint 145 confirmation-family idempotency checkpoint, Sprint 146 cross-family idempotency integration tests, Sprint 147 proposal-only idempotency preflight, Sprint 148 create-proposal route-test contract, Sprint 149 create-proposal replay-model decision, Sprint 150 create-proposal syntactic idempotency wiring, Sprint 151 create-proposal header alignment guard, Sprint 152 create-proposal minLength readiness decision, Sprint 153 diary create-proposal client header readiness, Sprint 154 diary/API header-gap preflight, Sprint 155 create-confirm client header emission, Sprint 156 status/delete confirm client header emission |
+| Next Candidate Sprints | Sprint 157 should address update-confirm client header emission, including modal update and drag/reschedule update-confirm call sites, before proposal-only backend binding or strict `minLength: 8` enforcement |
 | Design Record | `orchestration/api_spine_programme.md` |
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
 
-Current position after Sprint 155: the Ariadne/Fable 100+ sprint strategy map
+Current position after Sprint 156: the Ariadne/Fable 100+ sprint strategy map
 has been created, the stale worktree residue has been cleaned, the
 provider-boundary guard stack has been consolidated, and Programme 2G has
 returned to appointment-first API Spine alignment. Sprint 120 refreshed the API
@@ -304,6 +304,12 @@ Bernie route key for create-confirm-Bernie. It leaves update/status/delete
 confirm, Bernie tool-intent confirm, proposal-only binding, raw compatibility
 writes, backend ledger/runtime behavior, and strict `minLength: 8` enforcement
 unchanged.
+Sprint 156 then wired status-confirm and delete-confirm client headers in the
+dedicated Diary helper functions. The header key is derived from
+`status_proposal_freshness_id` or `delete_proposal_freshness_id`, with a
+proposal-scoped generated fallback for malformed fixtures. Raw PATCH/DELETE
+fallbacks remain header-free, and update-confirm/Bernie tool-intent confirm
+remain deferred.
 
 The accepted strategy artifacts are
 `orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md`
@@ -329,9 +335,9 @@ the next sprint from the active programme that best advances the phase:
 4. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
 
-The default recommendation after Sprint 155 is **Programme 2G**: Sprint 156
-should select the next bounded confirm client-header family, likely
-status-confirm/delete-confirm or update-confirm, before proposal-only backend
+The default recommendation after Sprint 156 is **Programme 2G**: Sprint 157
+should address update-confirm client header emission, including modal update
+and drag/reschedule update-confirm call sites, before proposal-only backend
 binding or strict `minLength: 8` enforcement. Preserve backend runtime
 enforcement, ledger semantics, raw compatibility writes, providers, GraphQL,
 H15/H-series, memory/RAG/GraphRAG, and historical diary trove gates.

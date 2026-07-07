@@ -67,6 +67,19 @@ def test_frontend_create_confirm_bernie_review_caller_emits_stable_header():
     assert "headers: confirmHeaders" in review_confirm_block
 
 
+def test_frontend_status_and_delete_confirm_callers_emit_stable_headers():
+    source = _read(DIARY_JS)
+    status_confirm = _function_source(source, "applySignedStatusProposal")
+    delete_confirm = _function_source(source, "applySignedDeleteProposal")
+
+    assert "statusConfirmIdempotencyKey(proposal, confirmPayload)" in status_confirm
+    assert "headers: confirmHeaders" in status_confirm
+    assert "deleteConfirmIdempotencyKey(proposal, confirmPayload)" in delete_confirm
+    assert "headers: confirmHeaders" in delete_confirm
+    assert "function confirmIdempotencyKeyFromFreshness(" in source
+    assert "function ensureProposalConfirmIdempotencyKey(proposal, kind)" in source
+
+
 def test_frontend_remaining_confirm_callers_are_explicitly_tracked_as_missing_headers():
     source = _read(DIARY_JS)
     preflight = _read(PREFLIGHT)
@@ -78,8 +91,6 @@ def test_frontend_remaining_confirm_callers_are_explicitly_tracked_as_missing_he
             "if (!updateRes.ok)",
         ),
         "confirmBernieToolIntentChange": _function_source(source, "confirmBernieToolIntentChange"),
-        "applySignedStatusProposal": _function_source(source, "applySignedStatusProposal"),
-        "applySignedDeleteProposal": _function_source(source, "applySignedDeleteProposal"),
     }
 
     for label, block in confirm_blocks.items():

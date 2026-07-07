@@ -7665,6 +7665,7 @@ def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
     parsed = urllib.parse.urlparse(diary_page.url)
     base_url = f"{parsed.scheme}://{parsed.netloc}"
     captured_confirms = []
+    captured_confirm_keys = []
     captured_raw_patches = []
 
     def handle_api(route):
@@ -7710,6 +7711,7 @@ def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
             return
         if request.method == "POST" and request.url.endswith("/appointments/proposals/status-confirm"):
             captured_confirms.append(request.post_data_json)
+            captured_confirm_keys.append(request.headers.get("idempotency-key"))
             route.fulfill(
                 status=200,
                 content_type="application/json",
@@ -7756,6 +7758,7 @@ def test_status_control_failed_signed_confirm_does_not_raw_patch(diary_page):
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
     assert captured_confirms, "Expected signed status-confirm request"
+    assert captured_confirm_keys == ["status-confirm-status-fresh-fail"]
     assert captured_raw_patches == []
 
 
@@ -7766,6 +7769,7 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
     base_url = f"{parsed.scheme}://{parsed.netloc}"
     captured_proposals = []
     captured_confirms = []
+    captured_confirm_keys = []
     captured_raw_deletes = []
 
     def handle_api(route):
@@ -7819,6 +7823,7 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
             return
         if request.method == "POST" and request.url.endswith("/appointments/proposals/delete-confirm"):
             captured_confirms.append(request.post_data_json)
+            captured_confirm_keys.append(request.headers.get("idempotency-key"))
             route.fulfill(
                 status=200,
                 content_type="application/json",
@@ -7906,6 +7911,7 @@ def test_cancel_flow_uses_signed_delete_confirm_without_raw_delete(diary_page):
     assert captured_proposals[0]["cancellation_reason"] == "Patient had transport issues"
     assert captured_proposals[0]["status_reason_code"] == "PATIENT_TRANSPORT"
     assert captured_confirms, "Expected signed delete-confirm request"
+    assert captured_confirm_keys == ["delete-confirm-delete-fresh-1"]
     assert captured_confirms[0]["confirmed"] is True
     assert captured_confirms[0]["delete_proposal"]["command"]["cancellation_reason"] == "Patient had transport issues"
     assert captured_raw_deletes == []

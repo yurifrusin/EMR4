@@ -24,10 +24,75 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 155 Create-Confirm Client Header Emission |
+| Batch | Sprint 156 Status/Delete Confirm Client Header Emission |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude and Antigravity plan reviews integrated; DeepSeek adversarial review accepted |
-| Status | Committed and pushed; sprint engine continuing |
+| Status | Pending Sprint 156 commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 156 What Changed
+
+- Updated `docs/diary/diary.js` so `applySignedStatusProposal()` sends HTTP
+  `Idempotency-Key` to `/appointments/proposals/status-confirm`.
+- Updated `docs/diary/diary.js` so `applySignedDeleteProposal()` sends HTTP
+  `Idempotency-Key` to `/appointments/proposals/delete-confirm`.
+- Preferred freshness-derived keys:
+  `status-confirm-{status_proposal_freshness_id}` and
+  `delete-confirm-{delete_proposal_freshness_id}`, with a proposal-scoped
+  generated fallback only for malformed fixtures with missing/oversized
+  freshness IDs.
+- Left raw compatibility `PATCH /appointments/{id}/status` and
+  `DELETE /appointments/{id}` fallbacks header-free.
+- Left update-confirm, Bernie tool-intent confirm, proposal-only backend
+  binding, backend runtime validation, idempotency ledger semantics, providers,
+  GraphQL, H15/H-series, memory/RAG/GraphRAG, and strict `minLength: 8`
+  enforcement unchanged.
+- Bumped `docs/diary/diary.html` to `diary.js?v=177`.
+- Updated `tests/test_api_spine_frontend_header_inventory.py` and
+  `review/test_diary_smoke.py` to guard status/delete confirm header emission
+  and raw-fallback separation.
+- Added
+  `orchestration/api_spine_appointment_idempotency_status_delete_confirm_client_header.md`.
+- Integrated worker lanes:
+  - Claude recommended stable per-proposal status/delete confirm keys and no
+    backend changes.
+  - Antigravity recommended proposal-object key scoping and focused static/
+    smoke coverage.
+  - DeepSeek recommended freshness-derived status/delete keys and preserving
+    update-confirm/tool-intent/proposal-only boundaries; Ariadne accepted the
+    freshness-derived key recommendation.
+
+## Sprint 156 Verification
+
+- `node --check docs\diary\diary.js`.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py`
+  (`[PASSED] Verification Passed: All modified assets have appropriate version bumps`).
+- `.venv\Scripts\python.exe -m pytest -k "test_status_control_uses_signed_status_confirm_without_raw_patch or test_cancel_flow_uses_signed_delete_confirm_without_raw_delete" review\test_diary_smoke.py -q`
+  (`2 passed`).
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_frontend_header_inventory.py tests\test_api_spine_create_proposal_header_alignment.py tests\test_api_spine_create_proposal_idempotency_route_contract.py tests\test_api_spine_confirmation_family_idempotency_checkpoint.py tests\test_phase_programmes_current_checkpoint.py tests\test_sprint_closeout_protocol.py -q`
+  (`43 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean.
+
+Publication state:
+
+- Integration commit SHA: pending Sprint 156 integration commit.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Strategic position: Sprint 156 is **Programme 2G / EMR4 API Spine** client
+readiness and guardrail hardening. It closes the status/delete confirmed-write
+client header gaps while preserving raw fallback and backend semantics.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 157:
+update-confirm client header emission across modal update and drag/reschedule
+call sites before proposal-only backend binding or strict `minLength: 8`
+enforcement.
+
+---
+
+## Previous Closeout - Sprint 155
 
 ## Sprint 155 What Changed
 

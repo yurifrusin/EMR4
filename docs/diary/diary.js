@@ -7045,6 +7045,38 @@ function ensureElementConfirmIdempotencyKey(element) {
   return element.dataset.confirmIdempotencyKey;
 }
 
+function ensureProposalConfirmIdempotencyKey(proposal, kind) {
+  if (!proposal.client_confirm_idempotency_key) {
+    proposal.client_confirm_idempotency_key = `${kind || "confirm"}-${generateClientIdempotencyKey()}`;
+  }
+  return proposal.client_confirm_idempotency_key;
+}
+
+function confirmIdempotencyKeyFromFreshness(kind, freshnessId, proposal) {
+  const freshness = String(freshnessId || "").trim();
+  const prefix = `${kind || "confirm"}-`;
+  if (freshness && freshness.length + prefix.length <= 128) {
+    return `${prefix}${freshness}`;
+  }
+  return ensureProposalConfirmIdempotencyKey(proposal, kind);
+}
+
+function statusConfirmIdempotencyKey(proposal, confirmPayload) {
+  return confirmIdempotencyKeyFromFreshness(
+    "status-confirm",
+    confirmPayload?.status_proposal_freshness_id || proposal?.status_proposal_freshness_id,
+    proposal
+  );
+}
+
+function deleteConfirmIdempotencyKey(proposal, confirmPayload) {
+  return confirmIdempotencyKeyFromFreshness(
+    "delete-confirm",
+    confirmPayload?.delete_proposal_freshness_id || proposal?.delete_proposal_freshness_id,
+    proposal
+  );
+}
+
 function idempotencyHeadersFor(key) {
   return { "Idempotency-Key": key };
 }
@@ -8118,8 +8150,12 @@ async function applySignedStatusProposal(appt, proposal, newStatus, waitingAreaI
       ...(confirmPayload.confirmed_warnings || []),
       ...confirmedWarnings
     ]));
+    const confirmHeaders = idempotencyHeadersFor(
+      statusConfirmIdempotencyKey(proposal, confirmPayload)
+    );
     const confirmRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
       method: "POST",
+      headers: confirmHeaders,
       body: JSON.stringify(confirmPayload)
     });
     if (!confirmRes.ok) {
@@ -8162,8 +8198,12 @@ async function applySignedDeleteProposal(proposal, cancellationReason, statusRea
       ...(confirmPayload.confirmed_warnings || []),
       ...confirmedWarnings
     ]));
+    const confirmHeaders = idempotencyHeadersFor(
+      deleteConfirmIdempotencyKey(proposal, confirmPayload)
+    );
     const confirmRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
       method: "POST",
+      headers: confirmHeaders,
       body: JSON.stringify(confirmPayload)
     });
     if (!confirmRes.ok) {
