@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 178 Proposal-Surface Guard Fail-Closed Diagnostics |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review of unreadable-markdown handling |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 178 What Changed
@@ -60,8 +60,8 @@ Worker mix:
   now fails closed with missing-citation backlog paths plus two explicit
   unreadable markdown diagnostics instead of crashing.
 - `git diff --check` passed.
-- Integration commit: pending.
-- Push result: pending.
+- Integration commit: `06189cb0`.
+- Push result: `git push origin master` succeeded.
 - Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 177 What Changed
