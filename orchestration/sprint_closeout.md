@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 165 Context Date Fallback Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Closeout publication metadata in progress |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 165 What Changed
@@ -74,9 +74,12 @@ material access, GraphQL mutations, or model-to-database writes.
 Publication state:
 
 - Implementation commit SHA: `0ccea30d`.
-- Closeout metadata commit SHA: this publication metadata commit.
-- Push result: pending final push.
-- Final `git status --short --branch`: pending.
+- Closeout metadata commit SHA: `0f2ecc3d`.
+- Push result: `origin/master`, `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` aligned at the Sprint 165
+  publication commit.
+- Final `git status --short --branch`: clean except the expected branch header
+  after publication push.
 
 Strategic position: Sprint 165 completes the date-context precedence/fallback
 mini-matrix before broader backend or provider evidence claims. Provider-quality
