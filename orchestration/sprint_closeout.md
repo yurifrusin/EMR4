@@ -24,10 +24,83 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 199 API Spine Idempotency/Audit Metadata Preflight |
-| Integrated through | Ariadne implementation with Claude, DeepSeek, and replacement DeepSeek review after Antigravity `agy.exe` timeout |
+| Batch | Sprint 200 API Spine Idempotency Continuity Index |
+| Integrated through | Ariadne implementation with Antigravity `agy.exe` review, DeepSeek review, and replacement DeepSeek review after Claude failed to produce a durable packet |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
+
+## Sprint 200 What Changed
+
+- Added `docs/api-spine/idempotency-continuity-index.md`, a static continuity
+  table over the eleven canonical OpenAPI appointment command paths.
+- Added `tests/test_api_spine_idempotency_continuity_index.py`, which parses
+  only the OpenAPI YAML and the markdown index, then checks exact path coverage,
+  status counts, source-test citations, table shape, and closed-gate wording.
+- The accepted count is four canonical OpenAPI confirm paths as
+  `ledger_wired`, four proposal-only paths as `documented_gap`, and three
+  slot-search command-style reads as `read_no_idempotency`. The fifth wired
+  backend family in the runtime checkpoint is the Bernie create-confirm backend
+  variant, not a canonical OpenAPI `paths` entry.
+- The index records that legacy compatibility writes and Bernie backend variants
+  remain outside the OpenAPI continuity table unless they become canonical
+  OpenAPI paths.
+- Integrated Sprint 200 review records under `orchestration/agent_inbox/codex/`.
+
+Worker mix:
+
+- Antigravity was reached through the documented `agy.exe` CLI and produced a
+  durable review artifact. Its broader runtime header-enforcement suggestions
+  were intentionally kept out of scope for this static index sprint.
+- DeepSeek recommended the index/test shape and warned against overclaiming
+  runtime replay behavior.
+- Replacement DeepSeek completed before integration and caught the 5/3/3 versus
+  4/4/3 count mismatch; Ariadne accepted the correction and folded in its
+  source-file-existence and out-of-scope-note suggestions.
+- Claude was attempted through the headless driver but not with the preferred
+  routine protocol shape: the attempt lacked the `--mint-session` handin/submit
+  packet pattern and produced no durable artifact before the budget limit.
+  Sprint 200 therefore records Claude as unavailable/replaced, not as a
+  successful Claude lane. Future Claude sprint lanes should use
+  `scripts\drive_agent_headless.py --cwd C:\Users\sarashera\EMR4-worktrees\claude --phase plan --mint-session --prompt "handin, write the implementation plan, submit the plan packet, then stop"`
+  or the equivalent implementation-phase prompt.
+
+Boundary:
+
+- Static OpenAPI YAML and markdown parsing only.
+- No FastAPI router import in the new continuity test, no route handler
+  execution, HTTP requests, database session, provider calls, memory/RAG/GraphRAG
+  access, H15/H-series runtime imports, historical diary material access,
+  GraphQL mutation work, or writes.
+- The change does not prove runtime concurrency behavior, network-loss replay
+  behavior, backend handler correctness, transaction durability, audit-log
+  append-only semantics, or deployment readiness.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_idempotency_continuity_index.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_idempotency_audit_metadata.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_appointment_idempotency_gap.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_confirmation_family_idempotency_checkpoint.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: continuity index `5 passed`; idempotency/audit metadata `7 passed`;
+appointment idempotency gap `5 passed`; confirmation-family checkpoint
+`7 passed`; API spine artifacts `31 passed`; readiness/provider reports stayed
+blocked/false; leakage lint safe; whitespace check clean.
+
+Implementation commit: `496e0cee`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a narrow audit-event/read-model inventory or
+correlation/audit continuity pass, with runtime/provider gates still blocked.
+
+---
 
 ## Sprint 199 What Changed
 
