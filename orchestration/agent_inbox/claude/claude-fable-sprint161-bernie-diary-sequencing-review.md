@@ -29,6 +29,29 @@ becomes useful.
 
 This packet asks Fable to adjudicate that sequencing question.
 
+## Yuri's Added Readiness Question
+
+Please answer this directly, not only by implication:
+
+Does the current Diary/Bernie system have strong and able enough bones, sinews,
+and muscles to make automatic prompt testing and troubleshooting worthwhile at
+this stage?
+
+In more operational terms:
+
+- Are the current route contracts, proposal/confirm paths, fake-provider
+  interpreter, clarification merge behavior, route-intercepted Diary review
+  surface, and scenario/replay fixtures mature enough that automated prompt
+  testing would produce useful troubleshooting signal rather than mostly noise?
+- If not yet, what exact missing structural capability, behavior, or evidence
+  threshold would make prompt automation worthwhile?
+- Should the threshold be framed as a technical gate, such as stable
+  clarification/change-request semantics, selected-slot pivot behavior, live
+  backend evidence, provider-boundary review, or a minimum route-level scenario
+  corpus?
+- Which defects should still be found by Yuri's hands-on review before a prompt
+  automation harness can carry meaningful weight?
+
 ## Existing Relevant Surfaces
 
 Please treat these as source context:
@@ -115,6 +138,9 @@ Please rank the next 3-5 sprints among these or propose a better sequence:
    semantics.
 7. What acceptance criteria should make Yuri's next review meaningful without
    opening provider, memory, H15/H-series, or broad-trove gates?
+8. Does the current implementation have enough structural maturity for prompt
+   automation to be diagnostic now? If not, name the concrete point at which it
+   becomes diagnostic.
 
 ## Requested Output
 
@@ -126,9 +152,9 @@ The packet should include:
 
 - a clear verdict: prompt automation now, after one or two prerequisite sprints,
   or later;
+- a direct answer to Yuri's "bones, sinews, and muscles" readiness question;
 - ranked next 3-5 sprint recommendations;
 - explicit no-go boundaries for historical diary/trove usage;
 - the smallest useful prompt-thread automation scope if recommended;
 - risks and acceptance criteria;
 - any concrete files/tests Fable thinks should be touched first.
-
