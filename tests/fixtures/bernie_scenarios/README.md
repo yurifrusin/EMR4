@@ -50,6 +50,10 @@ The current executable `interpret_*` corpus covers two slices:
   threaded absolute appointment date.
 - time-window threading prompts: date-change follow-ups preserve both earliest
   and latest time-window bounds from the threaded requested appointment.
+- same-time distractor prompts: "at the same time" wording in a date-change
+  follow-up is treated as inert by the fake interpreter, so the prior time is
+  preserved through route-level threading without claiming true anaphora
+  support.
 - reset/no-merge follow-ups: explicit `context_frames: []` prevents patient,
   practitioner, time, and duration from being carried forward unless the
   receptionist restates them in the current turn.
