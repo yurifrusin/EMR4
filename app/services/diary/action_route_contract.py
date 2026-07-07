@@ -111,7 +111,7 @@ DIARY_ACTION_ROUTE_CONTRACTS: dict[DiaryActionVerb, DiaryActionRouteContract] = 
     DiaryActionVerb.slot_search: DiaryActionRouteContract(
         verb=DiaryActionVerb.slot_search,
         authority=RouteAuthority.read_only,
-        read_routes=("/api/v1/appointments/bernie/interpret",),
+        read_routes=("/api/v1/appointments/proposals/bernie/interpret-booking-instruction",),
         notes="Slot search may read availability through existing Bernie interpretation/proposal flow only.",
     ),
     DiaryActionVerb.explain_schedule: DiaryActionRouteContract(
