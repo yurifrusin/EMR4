@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 167 Practitioner Override Context Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Integrated locally; publication pending this closeout commit/push |
+| Status | Integrated and publication status recorded; push pending |
 | Last updated | 2026-07-07 |
 
 ## Sprint 167 What Changed
@@ -80,9 +80,9 @@ material access, GraphQL mutations, or model-to-database writes.
 Publication state:
 
 - Implementation commit SHA: `2620bed1`.
-- Closeout metadata commit SHA: pending.
-- Push result: pending.
-- Final `git status --short --branch`: pending publication.
+- Closeout metadata commit SHA: `0fbd5ee8`.
+- Push result: pending final ref push.
+- Final `git status --short --branch`: clean after publication-status commit.
 
 Strategic position: Sprint 167 locks a realistic "change one thing, keep the
 rest" prompt-thread behavior before broader backend or provider evidence
