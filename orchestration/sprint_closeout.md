@@ -24,10 +24,56 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 185 Reference-Date Reload Conflict Fixture |
-| Integrated through | Ariadne implementation with DeepSeek sidecar review |
+| Batch | Sprint 186 Reference-Date No-Op Follow-Up Fixture |
+| Integrated through | Ariadne implementation with three DeepSeek lanes |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
+
+## Sprint 186 What Changed
+
+- Added
+  `tests/fixtures/bernie_scenarios/interpret_reference_date_change_no_relative_wording.yaml`.
+- The fixture proves a follow-up turn with a changed `reference_date` but no
+  date wording keeps the auto-threaded absolute appointment date instead of
+  re-resolving it against the current turn date.
+- The same follow-up applies the current time change from `09:00` to `10:00`
+  while preserving patient, practitioner, date, and duration.
+- Updated `tests/fixtures/bernie_scenarios/README.md` to record
+  reference-date no-op prompt coverage.
+
+Sprint 186 is a Fable-aligned Programme 2D / Programme 2G backend-readiness
+fixture increment. It continues the native Bernie prompt-thread route-level
+track and does not open live provider, provider dry-run, runtime memory, RAG,
+GraphRAG, H15/H-series runtime imports, historical diary material access,
+GraphQL mutations, or model-to-database writes.
+
+Worker mix:
+
+- Ariadne implemented and integrated the narrow fixture.
+- One DeepSeek lane recommended a future time-window threading fixture.
+- One DeepSeek replacement lane for unavailable Claude recommended a future
+  same-time anaphora fixture.
+- One DeepSeek replacement lane for unavailable Antigravity recommended the
+  integrated no-relative-wording reference-date drift fixture.
+- Claude and Antigravity durable mirrors were 30 commits behind and dirty with
+  old Sprint 160-era changes, so they were treated as unavailable in this
+  sprint window and replaced with extra DeepSeek lanes under the
+  Ariadne-plus-three rule.
+
+## Sprint 186 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  passed serially (`.x.............................`; one pre-existing xfail,
+  existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  passed (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+- Note: an earlier parallel run of scenario replay and integrity hit the known
+  transient Postgres enum DDL race (`userrole` duplicate type); rerunning the
+  replay suite serially passed.
+- Integration commit: `1db4cd4c`.
+- Push result: `git push origin master` succeeded.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 185 What Changed
 
