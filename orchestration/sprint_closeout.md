@@ -83,7 +83,7 @@ Publication state:
 - Closeout metadata commit SHA: `0fbd5ee8`.
 - Push result: `origin/master`, `handoff/current`, `codex/current`,
   `claude/current`, and `antigravity/current` aligned at Sprint 167
-  publication commit `6db11e64`.
+  final closeout head.
 - Final `git status --short --branch`: clean after publication-status commit.
 
 Strategic position: Sprint 167 locks a realistic "change one thing, keep the
