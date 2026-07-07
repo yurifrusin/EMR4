@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 151 create-proposal OpenAPI/FastAPI header alignment guard in progress. Sprint 150 wired `POST /api/v1/appointments/proposals/create` to require a non-blank `Idempotency-Key`; Sprint 151 preserves that OpenAPI documents `minLength: 8` while FastAPI deliberately enforces non-blank only pending a client-readiness decision |
-| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 152: either decide client readiness for enforcing OpenAPI `minLength: 8` on create-proposal, or preflight the next proposal-only header surface before any update/status/waiting-area/delete proposal enforcement |
+| **Current active track** | Sprint 151 create-proposal OpenAPI/FastAPI header alignment guard completed in implementation commit `e5647b9`; sprint engine paused at Yuri's request after formal closeout |
+| **Next recommended work** | When resumed, Sprint 152 is either a client-readiness decision for enforcing OpenAPI `minLength: 8` on create-proposal, or a preflight for the next proposal-only header surface before any update/status/waiting-area/delete proposal enforcement |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
