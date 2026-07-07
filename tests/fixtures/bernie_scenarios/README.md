@@ -33,7 +33,9 @@ The current executable `interpret_*` corpus covers two slices:
   such as practitioner, while preserving the remaining patient/date/time/
   duration fields;
 - multi-field-missing prompts: patient-only booking requests without context ask
-  for missing practitioner/date details instead of guessing.
+  for missing practitioner/date details instead of guessing;
+- temporal-drift follow-ups: relative-date corrections resolve against the
+  current turn reference date while preserving threaded appointment details.
 
 Unknown patient-name fixtures deliberately assert the current route contract:
 the interpret layer may still produce a slot-search command when practitioner
