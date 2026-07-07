@@ -28,7 +28,8 @@ The current executable `interpret_*` corpus covers two slices:
   instead of guessing;
 - context-threading prompts: omitted `context_frames` auto-threads prior
   requested appointment context, while explicit `context_frames: []` clears the
-  thread and asks again;
+  thread and asks again, including when the threaded requested appointment was
+  originally derived from multiple diary context frames;
 - explicit-frame prompts: caller-supplied `requested_appointment` frames can
   provide prior appointment fields directly while current instruction fields
   still win;

@@ -24,10 +24,56 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 172 Explicit Requested-Appointment Frame Fixture |
+| Batch | Sprint 173 Multi-Frame Source Reset Fixture |
 | Integrated through | Ariadne direct fixture implementation from Sprint 171 DeepSeek recommendation; no new worker dispatch because scope was a single test-only YAML fixture |
-| Status | Integrated and pushed |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 173 What Changed
+
+- Added `interpret_context_multi_frame_source_reset.yaml`, proving that a request
+  derived from multiple diary context frames can still be threaded as a
+  requested appointment when a follow-up omits `context_frames`.
+- The same fixture then proves explicit `context_frames: []` clears that derived
+  requested appointment and asks again instead of carrying forward
+  patient/practitioner/date.
+- Updated the Bernie scenario corpus README so context-threading coverage
+  includes requested appointments originally derived from multiple diary context
+  frames.
+
+Sprint 173 is a tiny fixture-only guardrail hardening pass inside the Programme
+2D Reception Copilot Readiness / Programme 2G Bernie API Spine
+review-readiness track. It consumes the remaining practical Sprint 171 DeepSeek
+fixture recommendation and keeps the tranche inside authored synthetic
+fake-provider replay.
+
+Worker mix:
+
+- Ariadne-only implementation was chosen because the accepted recommendation
+  was one test-only YAML fixture with no route or UI changes.
+- No new Claude/Antigravity run was launched while their durable mirrors remain
+  stale/dirty.
+
+Sprint 173 does not open runtime route wiring from the provider-free
+interpretation harness, provider prompt/dry-run wiring, live-provider enablement,
+memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary material
+access, GraphQL mutations, or model-to-database writes.
+
+## Sprint 173 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -k interpret_context_multi_frame_source_reset -q`
+  (`1 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  (`.x..........................`; one pre-existing xfail, existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+
+Sprint engine state: continuing. No user intervention is required. Next planned
+step is either a narrow non-intercepted fake-provider backend pass or a compact
+closeout/readiness artifact for the authored prompt-thread tranche.
+
+---
 
 ## Sprint 172 What Changed
 

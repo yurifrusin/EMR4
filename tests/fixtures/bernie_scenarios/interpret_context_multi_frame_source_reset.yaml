@@ -1,0 +1,83 @@
+id: interpret_context_multi_frame_source_reset
+category: booking_interpret_contract
+description: >
+  A request derived from multiple diary context frames can be auto-threaded on
+  an omitted-context follow-up, but explicit context_frames: [] clears the
+  derived request and asks again.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera at 09:00 for 20 minutes"
+      context_frames:
+        - type: visible_diary_page
+          visible_date: "2026-07-16"
+        - type: selected_diary_appointment
+          appointment_date: "2026-07-17"
+        - type: selected_proposal
+          appointment_date: "2026-07-18"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": "2026-07-18"
+        "command_candidate.earliest_time": "09:00"
+        "command_candidate.duration_minutes": "20"
+        "assumptions.0.field": date_from
+        "assumptions.0.assumed_value": "2026-07-18"
+  - action: interpret
+    input:
+      instruction: "Actually make it 09:30"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": "2026-07-18"
+        "command_candidate.earliest_time": "09:30"
+        "command_candidate.duration_minutes": "20"
+        "assumptions.0.field": clarification_merge
+  - action: interpret
+    input:
+      instruction: "Actually make it 10:00"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: clarification_required
+        safe: false
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": null
+        "command_candidate.practitioner_id": null
+        "command_candidate.date_from": null
+        "command_candidate.earliest_time": "10:00"
+        "missing_fields.0": practitioner_id
+        "missing_fields.1": date_from
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

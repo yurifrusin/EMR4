@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 172 explicit requested-appointment frame fixture added after Sprint 171: caller-supplied `requested_appointment` context frames now prove prior appointment fields can be provided directly while current instruction fields still win |
-| **Next recommended work** | Continue the authored Bernie/Diary prompt-thread tranche with DeepSeek's remaining multi-frame reset coverage or move to the narrow non-intercepted fake-provider backend pass; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 173 multi-frame-source reset fixture added after Sprint 172: requested appointments derived from visible diary, selected diary appointment, and selected proposal context now auto-thread on omitted context and clear on explicit `context_frames: []` |
+| **Next recommended work** | Move the authored Bernie/Diary prompt-thread tranche toward a narrow non-intercepted fake-provider backend pass, or close the tranche with a compact readiness artifact; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
