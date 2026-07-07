@@ -24,10 +24,80 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 192 Diary Route Shadow Hardening |
-| Integrated through | Ariadne implementation with Claude, DeepSeek, and substituted DeepSeek review |
+| Batch | Sprint 193 Appointment Route Inventory Preflight |
+| Integrated through | Ariadne implementation with three DeepSeek review lanes after Claude budget/Antigravity CLI substitution |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
+
+## Sprint 193 What Changed
+
+- Added `scripts/appointment_route_inventory_preflight.py`, a source-derived
+  aggregate report over mounted FastAPI appointment `APIRoute` metadata.
+- Added `tests/test_appointment_route_inventory_preflight.py`.
+- Added `docs/appointment-route-inventory-preflight.md`.
+- The report separates method rows rather than path-only matches:
+  - 35 mounted appointment route/method rows;
+  - 18 contract-covered method rows;
+  - 14 grammar-authority method rows;
+  - 4 raw-adjacent write method rows;
+  - 17 out-of-contract method rows.
+- The report keeps raw mutation paths as adjacent awareness only with
+  `raw_adjacent_routes_are_grammar_dispatch_authority=false`.
+- The report is count-only and path-free; it does not emit route paths, handler
+  names, request bodies, IDs, patient/practitioner data, or local material paths.
+
+Worker mix:
+
+- Claude was attempted but hit the configured budget before producing a usable
+  review, so Ariadne replaced that lane with DeepSeek.
+- Antigravity still had no callable CLI in this environment, so Ariadne replaced
+  that lane with DeepSeek.
+- The three DeepSeek review lanes shaped the sprint toward aggregate counts,
+  method-specific raw-adjacent separation, and explicit non-catalogue boundary
+  wording.
+
+Boundary:
+
+- Static FastAPI `APIRoute` metadata inspection only.
+- No HTTP requests, route handler execution, database session, provider calls,
+  memory/RAG/GraphRAG access, H15/H-series runtime imports, historical diary
+  material access, GraphQL access, or writes.
+- `DIARY_ACTION_ROUTE_CONTRACTS` remains a Diary grammar authority contract,
+  not a complete appointment-router catalogue.
+- Out-of-contract route counts are planning signals, not automatic bugs and not
+  a reason to add non-grammar infrastructure routes to the Diary action
+  contract.
+- Runtime/provider wiring remains blocked; live-provider and provider-quality
+  evidence remain false.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe scripts\appointment_route_inventory_preflight.py
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe -m pytest tests\test_appointment_route_inventory_preflight.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: inventory script emitted safe aggregate counts; inventory tests
+`17 passed`; endpoint coverage `9 passed`; route contract `12 passed`; scenario
+integrity `8 passed, 1 skipped`; readiness/provider reports stayed
+blocked/false; leakage lint safe; whitespace check clean.
+
+Implementation commit: `95da886b`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded backend-readiness via method-specific contract
+tunnel review, out-of-contract POST route classification, or route contract
+behavior checks.
+
+---
 
 ## Sprint 192 What Changed
 
