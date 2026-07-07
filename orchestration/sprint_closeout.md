@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 158 Confirm Client Surface Checkpoint |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude/Antigravity lanes replaced by additional DeepSeek reviews due tool/usage friction; DeepSeek adversarial review accepted |
-| Status | Committed locally; push pending |
+| Status | Committed and pushed; sprint engine continuing |
 | Last updated | 2026-07-07 |
 
 ## Sprint 158 What Changed
@@ -65,16 +65,18 @@ Publication state:
 - Dispatch commit SHA: `9f939dd`.
 - Checkpoint implementation commit SHA: `908cf7a`.
 - Closeout metadata commit SHA: `cec5746`.
-- Push result: pending.
-- Final `git status --short --branch`: pending.
+- Push result: pushed to `origin/master`; `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` all aligned and pushed to
+  `00146e87`.
+- Final `git status --short --branch`: `## master...origin/master`.
 
 Strategic position: Sprint 158 is **Programme 2G / EMR4 API Spine** checkpoint
 work. It says the ordinary confirm-client surface is complete enough, but the
 Bernie tool-intent update-confirm click should be fixed before asking Yuri for a
 meaningful integrated Bernie/Diary review.
 
-Sprint engine state: continuing after push. Next recommended slice is Sprint
-159: wire `confirmBernieToolIntentChange()` HTTP `Idempotency-Key` headers.
+Sprint engine state: continuing. Next recommended slice is Sprint 159: wire
+`confirmBernieToolIntentChange()` HTTP `Idempotency-Key` headers.
 
 ---
 

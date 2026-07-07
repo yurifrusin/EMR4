@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 158 confirm-client surface checkpoint implemented in commit `908cf7a`; ordinary Diary confirm-client header surface is complete, but `confirmBernieToolIntentChange` remains a user-clickable enforced-route gap |
+| **Current active track** | Sprint 158 confirm-client surface checkpoint implemented in commit `908cf7a` and closed/pushed through `00146e8`; ordinary Diary confirm-client header surface is complete, but `confirmBernieToolIntentChange` remains a user-clickable enforced-route gap |
 | **Next recommended work** | Sprint 159 should wire Bernie tool-intent update-confirm HTTP `Idempotency-Key` headers before the Sprint 160 Bernie/Diary review-readiness packet and Yuri review pause |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
