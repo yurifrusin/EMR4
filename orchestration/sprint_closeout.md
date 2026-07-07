@@ -24,10 +24,53 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 188 Date-And-Time Follow-Up Fixture |
+| Batch | Sprint 189 Same-Time Distractor Follow-Up Fixture |
 | Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek review lanes |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
+
+## Sprint 189 What Changed
+
+- Added
+  `tests/fixtures/bernie_scenarios/interpret_date_change_same_time_distractor.yaml`.
+- The fixture proves a date-change follow-up containing "at the same time"
+  preserves the threaded prior time through route-level merge.
+- The fixture deliberately frames "same time" as inert distractor text in the
+  deterministic fake interpreter, not as true anaphora support.
+- The first turn requests `2026-07-14` at `11:00`; the follow-up changes to
+  `2026-07-15` while preserving `11:00`, patient, practitioner, and duration.
+- Updated `tests/fixtures/bernie_scenarios/README.md` to record same-time
+  distractor coverage.
+
+Sprint 189 is a Fable-aligned Programme 2D / Programme 2G backend-readiness
+fixture increment. It continues the native Bernie prompt-thread route-level
+track and does not open live provider, provider dry-run, runtime memory, RAG,
+GraphRAG, H15/H-series runtime imports, historical diary material access,
+GraphQL mutations, or model-to-database writes.
+
+Worker mix:
+
+- Claude confirmed "same time" is inert in the fake interpreter and recommended
+  adding it only as distractor robustness, not anaphora support.
+- Antigravity confirmed the same route-merge behavior and recommended using
+  `next Wednesday` instead of bare `Wednesday` to avoid a separate
+  bare-weekday ambiguity.
+- DeepSeek identified the distractor/date-change matrix gap and recommended
+  asserting `clarification_merge` so the fixture does not over-claim explicit
+  time parsing.
+- Ariadne implemented the fixture with those boundaries.
+
+## Sprint 189 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  passed serially (`.x................................`; one pre-existing xfail,
+  existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  passed (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+- Integration commit: `cb38cf82`.
+- Push result: `git push origin master` succeeded.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 188 What Changed
 

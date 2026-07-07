@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 188 Fable-aligned Bernie prompt-thread route fixture integrated after Sprint 187: a single follow-up can now change both date and time while preserving threaded patient, practitioner, and duration, fake-provider/no-write |
+| **Current active track** | Sprint 189 Fable-aligned Bernie prompt-thread route fixture integrated after Sprint 188: "at the same time" wording in a date-change follow-up is now covered as inert distractor robustness, preserving threaded time via route merge without claiming true anaphora support |
 | **Next recommended work** | Continue the bounded fake-provider Bernie backend-readiness track with another small route-level prompt-thread fixture or backend contract check; use Ariadne plus three worker lanes by default (Claude, Antigravity, DeepSeek, with extra DeepSeek substitutions when a lane is unavailable), keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
