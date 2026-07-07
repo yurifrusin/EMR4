@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 170 Temporal Drift Reset/No-Merge Fixture |
 | Integrated through | Ariadne narrow guardrail implementation after Sprint 169 closeout; adjacent replay verification |
-| Status | Pending push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 170 What Changed
@@ -64,9 +64,9 @@ material access, GraphQL mutations, or model-to-database writes.
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`8 passed, 1 skipped`; existing Starlette/Google GenAI warnings only).
 - `git diff --check` passed.
-- Local integration commit: `6fc466b9`.
-- Push result: pending; sandboxed `git push origin master` failed without
-  network access, and the escalated push request was not approved.
+- Integration commit: `92c96c36`.
+- Push result: `git push origin master` succeeded; GitHub reported the
+  repository moved notice and the existing moderate Dependabot alert.
 
 Initial parallel verification hit the known transient Postgres enum DDL race
 (`userrole` duplicate type) when two DB-initializing tests ran at once; rerunning
