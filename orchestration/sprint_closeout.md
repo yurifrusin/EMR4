@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 154 Diary/API Header Gap Preflight |
 | Integrated through | Ariadne integration with EMR4 API Steward skill; Claude and Antigravity plan reviews integrated; DeepSeek adversarial review accepted |
-| Status | Committed locally; push pending |
+| Status | Committed and pushed; sprint engine continuing |
 | Last updated | 2026-07-07 |
 
 ## Sprint 154 What Changed
@@ -64,9 +64,11 @@ Every closeout entry should record:
 Publication state:
 
 - Integration commit SHA: `ded8791`.
-- Closeout metadata commit SHA: pending.
-- Push result: pending.
-- Final `git status --short --branch`: pending final closeout check.
+- Closeout metadata commit SHA: `db76171`.
+- Push result: pushed to `origin/master` and `origin/handoff/current` by
+  `.venv\Scripts\python.exe scripts\agent_worktrees.py handoff --message "Sprint 154 closeout: diary API header gap preflight"`;
+  GitHub reported the known moved-repo notice and 1 moderate Dependabot alert.
+- Final `git status --short --branch`: `## master...origin/master`.
 
 Strategic position: Sprint 154 is **Programme 2G / EMR4 API Spine** preflight
 and guardrail hardening. It clarifies that create-proposal client readiness is

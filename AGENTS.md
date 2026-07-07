@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 154 diary/API header-gap preflight implemented in commit `ded8791`; only the diary create-proposal caller emits HTTP `Idempotency-Key`, while confirm-route client headers remain the next runtime gap |
+| **Current active track** | Sprint 154 diary/API header-gap preflight implemented in commit `ded8791` and closed/pushed through `db76171`; only the diary create-proposal caller emits HTTP `Idempotency-Key`, while confirm-route client headers remain the next runtime gap |
 | **Next recommended work** | Sprint 155 should wire create-confirm and confirm-Bernie client header emission first, using a stable per-proposal confirm key and preserving backend ledger/runtime behavior, raw compatibility writes, providers, GraphQL, H15/H-series, memory/RAG/GraphRAG, and strict `minLength: 8` enforcement as unchanged |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
