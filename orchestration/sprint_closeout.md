@@ -24,10 +24,79 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 200 API Spine Idempotency Continuity Index |
-| Integrated through | Ariadne implementation with Antigravity `agy.exe` review, DeepSeek review, and replacement DeepSeek review after Claude failed to produce a durable packet |
+| Batch | Sprint 201 API Spine Audit/Correlation Continuity Index |
+| Integrated through | Ariadne implementation with Claude headless review packet, Antigravity `agy.exe` review packet, and DeepSeek review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
+
+## Sprint 201 What Changed
+
+- Added `docs/api-spine/audit-correlation-continuity-index.md`, a static bridge
+  between GraphQL audit/read-model declarations and OpenAPI appointment command
+  audit/correlation metadata.
+- Added `tests/test_api_spine_audit_correlation_continuity_index.py`, which
+  parses only the GraphQL SDL, OpenAPI YAML, and markdown index.
+- The index pins action continuity labels across GraphQL
+  `AppointmentAuditAction` and OpenAPI `AuditIntent.audit_action`: shared
+  values are `bridged`, `DIRECT_COMPATIBILITY_WRITE` and `READ` are
+  `read_model_only`, and slot-search audit intents are `command_plane_only`.
+- It also pins correlation surfaces (`AuditEvent.correlationId`,
+  `AppointmentAuditEvent.correlationId`, `AuditFilter.correlationId`,
+  `X-Correlation-Id`, `CommandMeta.correlation_id`, and
+  `ConfirmationAuditEvent.correlation_id`) plus target-kind asymmetries.
+- Integrated Sprint 201 review records under `orchestration/agent_inbox/codex/`.
+
+Worker mix:
+
+- Claude was invoked through `scripts\drive_agent_headless.py` with
+  `--mint-session`; the CLI returned a budget-stop result after producing a
+  durable review packet, so Ariadne trusted the artifact rather than the result
+  JSON. Claude also hit denied internal `handin` command attempts, which did not
+  block review-packet creation.
+- Antigravity was reached through the documented `agy.exe` CLI and produced a
+  durable review packet in the Antigravity worktree.
+- DeepSeek completed before integration and independently recommended the same
+  parser-only audit/read-model continuity artifact, with warnings about
+  intentional enum asymmetry and command-plane field leakage.
+
+Boundary:
+
+- Static SDL/YAML/markdown parsing only.
+- No FastAPI router import in the new continuity test, no route handler
+  execution, HTTP requests, database session, provider calls, memory/RAG/GraphRAG
+  access, H15/H-series runtime imports, historical diary material access,
+  GraphQL mutation work, or writes.
+- The change does not prove runtime correlation-id propagation, audit-log
+  append-only semantics, database durability, resolver implementation, route
+  handler correctness, or deployment readiness.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_audit_correlation_continuity_index.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_idempotency_continuity_index.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_idempotency_audit_metadata.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: audit/correlation continuity index `7 passed`; idempotency continuity
+index `5 passed`; idempotency/audit metadata `7 passed`; API spine artifacts
+`31 passed`; readiness/provider reports stayed blocked/false; leakage lint
+safe; whitespace check clean. An initial parallel adjacent pytest run hit the
+known PostgreSQL enum creation race; serial reruns passed.
+
+Implementation commit: `1aa8fb48`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a narrow appointment read-model route inventory
+or command/read-model deprecation map for legacy compatibility writes, with
+runtime/provider gates still blocked.
+
+---
 
 ## Sprint 200 What Changed
 
