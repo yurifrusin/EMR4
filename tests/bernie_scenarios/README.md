@@ -86,6 +86,7 @@ contracts such as `command_candidate.patient_id` or
 | Variable | Resolves to |
 |---|---|
 | `{practitioner_id}` | `str(practitioner.id)` from conftest fixture |
+| `{other_practitioner_id}` | `str(other_practitioner.id)` from the replay harness fixture |
 | `{patient_id}` | `str(patient.id)` from conftest fixture |
 | `{practice_id}` | `str(practice.id)` from conftest fixture |
 

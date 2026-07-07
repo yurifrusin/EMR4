@@ -3720,6 +3720,25 @@ def _resolve_bernie_interpretation_context(
     all_assumptions: list[BernieAssumption] = []
     all_staff_checks: list[BernieStaffCheck] = []
     all_patient_candidates: list[BerniePatientCandidate] = []
+    pre_resolved_practitioner_id: Optional[str] = None
+    pre_resolved_practitioner_warnings: list[AppointmentProposalIssue] = []
+    pre_resolved_practitioner_axis: Optional[BernieConfidenceAxis] = None
+    pre_resolved_practitioner_assumptions: list[BernieAssumption] = []
+
+    if not command_values.get("practitioner_id"):
+        practitioner_id, warnings, practitioner_axis, pr_assumptions = (
+            _resolve_practitioner_from_instruction(
+                instruction_tokens,
+                body.instruction,
+                db,
+                practice_id,
+            )
+        )
+        if practitioner_id:
+            pre_resolved_practitioner_id = str(practitioner_id)
+        pre_resolved_practitioner_warnings = warnings
+        pre_resolved_practitioner_axis = practitioner_axis
+        pre_resolved_practitioner_assumptions = pr_assumptions
 
     # ── Clarification-reply merge ─────────────────────────────────────────────
     # If the caller sent back a prior requested_appointment context frame, carry
@@ -3728,6 +3747,8 @@ def _resolve_bernie_interpretation_context(
     _prior = _clarification_prior_frame_values(body.context_frames)
     _merged_fields: list[str] = []
     for _f, _v in _prior.items():
+        if _f == "practitioner_id" and pre_resolved_practitioner_id:
+            continue
         if not command_values.get(_f):
             command_values[_f] = _v
             _merged_fields.append(_f)
@@ -3744,28 +3765,24 @@ def _resolve_bernie_interpretation_context(
     if command_values.get("practitioner_id") and not _valid_uuid_text(command_values.get("practitioner_id")):
         command_values["practitioner_id"] = None
     if not command_values.get("practitioner_id"):
-        frame_practitioner_id = _context_frame_value(body, "practitioner_id")
-        if _valid_uuid_text(frame_practitioner_id):
-            command_values["practitioner_id"] = frame_practitioner_id
-            practitioner_axis = BernieConfidenceAxis(
-                axis="practitioner",
-                band="assume",
-                basis="Practitioner resolved from context frame UUID.",
-            )
+        if pre_resolved_practitioner_id:
+            command_values["practitioner_id"] = pre_resolved_practitioner_id
+            resolver_warnings.extend(pre_resolved_practitioner_warnings)
+            all_assumptions.extend(pre_resolved_practitioner_assumptions)
+            practitioner_axis = pre_resolved_practitioner_axis
         else:
-            practitioner_id, warnings, practitioner_axis, pr_assumptions = (
-                _resolve_practitioner_from_instruction(
-                    instruction_tokens,
-                    body.instruction,
-                    db,
-                    practice_id,
+            frame_practitioner_id = _context_frame_value(body, "practitioner_id")
+            if _valid_uuid_text(frame_practitioner_id):
+                command_values["practitioner_id"] = frame_practitioner_id
+                practitioner_axis = BernieConfidenceAxis(
+                    axis="practitioner",
+                    band="assume",
+                    basis="Practitioner resolved from context frame UUID.",
                 )
-            )
-            resolver_warnings.extend(warnings)
-            all_assumptions.extend(pr_assumptions)
-            if practitioner_id:
-                command_values["practitioner_id"] = str(practitioner_id)
             else:
+                resolver_warnings.extend(pre_resolved_practitioner_warnings)
+                all_assumptions.extend(pre_resolved_practitioner_assumptions)
+                practitioner_axis = pre_resolved_practitioner_axis
                 inferred_practitioner_id, inferred_label, inferred_time = (
                     _booking_context_practitioner_for_patient(
                         body,

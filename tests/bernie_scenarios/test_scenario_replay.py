@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import pytest
 
+from app.models.tenancy import Practitioner
 from tests.conftest import make_token
 from tests.bernie_scenarios.loader import Scenario, discover_scenarios
 from tests.bernie_scenarios.replay import run_scenario
@@ -36,6 +37,19 @@ def _build_params() -> list:
 _SCENARIO_PARAMS = _build_params()
 
 
+@pytest.fixture()
+def other_practitioner(db, practice):
+    pr = Practitioner(
+        practice_id=practice.id,
+        first_name="Priya",
+        last_name="Patel",
+        ahpra_number="MED0007654321",
+    )
+    db.add(pr)
+    db.flush()
+    return pr
+
+
 @pytest.mark.parametrize("scenario", _SCENARIO_PARAMS)
 def test_bernie_scenario_replay(
     scenario: Scenario,
@@ -43,6 +57,7 @@ def test_bernie_scenario_replay(
     db,
     gp_user,
     practitioner,
+    other_practitioner,
     patient,
     practice,
     schedule,
@@ -55,6 +70,7 @@ def test_bernie_scenario_replay(
         db=db,
         token=token,
         practitioner=practitioner,
+        other_practitioner=other_practitioner,
         patient=patient,
         practice=practice,
         monkeypatch=monkeypatch,

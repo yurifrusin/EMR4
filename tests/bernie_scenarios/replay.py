@@ -43,6 +43,11 @@ def _resolve(value: Any, ctx: "ReplayContext") -> Any:
     """Replace {practitioner_id}, {patient_id}, {practice_id} template vars."""
     if isinstance(value, str):
         value = value.replace("{practitioner_id}", str(ctx.practitioner_id))
+        if ctx.other_practitioner_id is not None:
+            value = value.replace(
+                "{other_practitioner_id}",
+                str(ctx.other_practitioner_id),
+            )
         value = value.replace("{patient_id}", str(ctx.patient_id))
         value = value.replace("{practice_id}", str(ctx.practice_id))
         return value
@@ -92,6 +97,7 @@ class ReplayContext:
         token: str,
         reference_date: str,
         practitioner_id,
+        other_practitioner_id,
         patient_id,
         practice_id,
     ):
@@ -100,6 +106,7 @@ class ReplayContext:
         self.token = token
         self.reference_date = reference_date
         self.practitioner_id = practitioner_id
+        self.other_practitioner_id = other_practitioner_id
         self.patient_id = patient_id
         self.practice_id = practice_id
         self._turns: list[TurnRecord] = []
@@ -244,6 +251,7 @@ def run_scenario(
     patient,
     practice,
     monkeypatch,
+    other_practitioner=None,
 ) -> ReplayResult:
     """Run all turns for a scenario and return structured pass/fail evidence."""
     ctx = ReplayContext(
@@ -252,6 +260,9 @@ def run_scenario(
         token=token,
         reference_date=scenario.reference_date,
         practitioner_id=practitioner.id,
+        other_practitioner_id=(
+            other_practitioner.id if other_practitioner is not None else None
+        ),
         patient_id=patient.id,
         practice_id=practice.id,
     )

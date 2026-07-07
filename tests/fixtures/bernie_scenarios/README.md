@@ -28,7 +28,10 @@ The current executable `interpret_*` corpus covers two slices:
   instead of guessing;
 - context-threading prompts: omitted `context_frames` auto-threads prior
   requested appointment context, while explicit `context_frames: []` clears the
-  thread and asks again.
+  thread and asks again;
+- partial-override prompts: follow-up wording can change one threaded field,
+  such as practitioner, while preserving the remaining patient/date/time/
+  duration fields.
 
 Unknown patient-name fixtures deliberately assert the current route contract:
 the interpret layer may still produce a slot-search command when practitioner
