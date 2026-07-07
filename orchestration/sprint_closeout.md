@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 156 Status/Delete Confirm Client Header Emission |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude and Antigravity plan reviews integrated; DeepSeek adversarial review accepted |
-| Status | Committed locally; push pending |
+| Status | Committed and pushed; sprint engine continuing |
 | Last updated | 2026-07-07 |
 
 ## Sprint 156 What Changed
@@ -77,9 +77,13 @@ Every closeout entry should record:
 Publication state:
 
 - Integration commit SHA: `475cfef`.
-- Closeout metadata commit SHA: pending.
-- Push result: pending.
-- Final `git status --short --branch`: pending final closeout check.
+- Closeout metadata commit SHA: `4dc1f23`.
+- Push result: pushed to `origin/master`; `handoff/current` was moved locally by
+  `.venv\Scripts\python.exe scripts\agent_worktrees.py handoff --message "Sprint 156 closeout: status/delete confirm client headers"`
+  and then pushed directly after the helper's internal master push raced the
+  already-completed `git push origin master`. GitHub reported the known
+  moved-repo notice and 1 moderate Dependabot alert.
+- Final `git status --short --branch`: `## master...origin/master`.
 
 Strategic position: Sprint 156 is **Programme 2G / EMR4 API Spine** client
 readiness and guardrail hardening. It closes the status/delete confirmed-write
