@@ -7676,6 +7676,55 @@ wiring.
 
 ---
 
+## Sprint 147 Closeout - Proposal-Only Idempotency Preflight
+
+Publication state:
+
+- Integration commit SHA: `pending Sprint 147 closeout commit`.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Programme position:
+
+- Phase/programme: Programme 2G / EMR4 API Spine.
+- Classification: policy/preflight and guardrail hardening.
+- Larger objective advanced: appointment command idempotency now has an
+  explicit next-surface policy before expanding beyond confirmation routes.
+- Next planned step: Sprint 148 guarded create-proposal route-test contract
+  only, with no proposal-route enforcement wiring yet.
+
+Integrated outcome:
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_proposal_only_preflight.md`.
+- Added `tests/test_api_spine_proposal_only_idempotency_preflight.py`.
+- Integrated DeepSeek's Sprint 147 review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint147-proposal-only-idempotency-preflight.md`.
+- Selected proposal-only appointment routes as the next preflight surface before
+  raw compatibility writes because they are canonical OpenAPI command-plane
+  routes and non-mutating.
+- Recorded the key distinction that proposal idempotency must be
+  proposal-specific client discipline and must not copy confirmation-write
+  replay authority.
+- Preserved no route behavior changes. Proposal-only routes remain unwired;
+  raw compatibility, provider, GraphQL, H15/H-series, memory/RAG/GraphRAG, and
+  historical diary trove gates remain closed.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_api_spine_proposal_only_idempotency_preflight.py -q
+```
+
+Result: `8 passed`; existing Starlette and Google GenAI deprecation warnings
+only.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is a guarded create-proposal route-test contract before
+proposal-route enforcement.
+
+---
+
 ## Sprint 146 Closeout - Confirmation-Family Idempotency Integration Tests
 
 Publication state:
