@@ -25,6 +25,7 @@ ALLOWED_CATEGORIES = frozenset({
     "booking_request",
     "booking_clarification",
     "booking_confirmation",
+    "booking_interpret_contract",
     "clarification",
     "future_booking_advisory",
     "mutation_safety",
@@ -55,7 +56,7 @@ KNOWN_OUTCOMES = frozenset({
     "completed",
 })
 
-KNOWN_ACTIONS = frozenset({"normalize", "search", "select", "confirm"})
+KNOWN_ACTIONS = frozenset({"normalize", "search", "select", "confirm", "interpret"})
 
 
 # -- Helpers ----------------------------------------------------------------

@@ -10,11 +10,13 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
+from app.config import settings
 from app.models.appointments import Appointment, AppointmentAuditLog
 import app.services.ai.service as ai_service
 
 from .loader import Scenario, ScenarioTurn
 
+INTERPRET_URL = "/api/v1/appointments/proposals/bernie/interpret-booking-instruction"
 NORMALIZE_URL = "/api/v1/appointments/proposals/slot-search/normalize"
 SEARCH_URL = "/api/v1/appointments/proposals/slot-search/normalized"
 SELECTION_URL = "/api/v1/appointments/proposals/slot-search/selection"
@@ -70,6 +72,18 @@ def _install_forbidden_ai_provider_guard(monkeypatch) -> None:
     monkeypatch.setattr(ai_service, "_get_default_provider", _forbidden)
 
 
+def _requested_appointment_frames(response: Optional[dict]) -> list[dict]:
+    if not response:
+        return []
+    ctx = response.get("reception_context") or {}
+    return [
+        frame
+        for frame in (ctx.get("frames") or [])
+        if isinstance(frame, dict)
+        and frame.get("frame_type") == "requested_appointment"
+    ]
+
+
 class ReplayContext:
     def __init__(
         self,
@@ -101,6 +115,21 @@ class ReplayContext:
         return None
 
     @property
+    def last_interpret_response(self) -> Optional[dict]:
+        for t in reversed(self._turns):
+            if t.action == "interpret":
+                return t.response
+        return None
+
+    @property
+    def last_interpret_command(self) -> Optional[dict]:
+        last = self.last_interpret_response
+        if not last:
+            return None
+        command = last.get("command_candidate")
+        return command if isinstance(command, dict) else None
+
+    @property
     def last_search_response(self) -> Optional[dict]:
         for t in reversed(self._turns):
             if t.action == "search":
@@ -120,6 +149,28 @@ class ReplayContext:
         except Exception:
             return {}
 
+    def _execute_interpret(self, turn: ScenarioTurn) -> TurnRecord:
+        inp = _resolve(turn.input, self)
+        if not isinstance(inp, dict):
+            inp = {}
+        if "context_frames" in inp:
+            context_frames = inp.get("context_frames") or []
+        else:
+            # First interpret turn has no prior response, so this intentionally
+            # starts with an empty context-frame list.
+            context_frames = _requested_appointment_frames(self.last_interpret_response)
+        body = {
+            "instruction": inp.get("instruction", ""),
+            "reference_date": inp.get("reference_date", self.reference_date),
+            "context_frames": context_frames,
+        }
+        resp = self.client.post(
+            INTERPRET_URL,
+            json=body,
+            headers=self._auth(),
+        )
+        return TurnRecord("interpret", body, resp.status_code, self._safe_json(resp))
+
     def _execute_normalize(self, turn: ScenarioTurn) -> TurnRecord:
         command = _resolve(turn.input, self)
         resp = self.client.post(
@@ -131,7 +182,11 @@ class ReplayContext:
         return TurnRecord("normalize", command, resp.status_code, self._safe_json(resp))
 
     def _execute_search(self, turn: ScenarioTurn) -> TurnRecord:
-        command = _resolve(turn.input, self) if turn.input else (self.last_normalize_input or {})
+        command = (
+            _resolve(turn.input, self)
+            if turn.input
+            else (self.last_normalize_input or self.last_interpret_command or {})
+        )
         resp = self.client.post(
             SEARCH_URL,
             params={"reference_date": self.reference_date},
@@ -157,11 +212,19 @@ class ReplayContext:
             "confirmed": inp.get("confirmed", True),
             "selection_proposal": self.last_selection_response,
         }
-        resp = self.client.post(CONFIRM_URL, json=body, headers=self._auth())
+        headers = {
+            **self._auth(),
+            "Idempotency-Key": inp.get(
+                "idempotency_key",
+                f"scenario-replay-confirm-{len(self._turns)}",
+            ),
+        }
+        resp = self.client.post(CONFIRM_URL, json=body, headers=headers)
         return TurnRecord("confirm", body, resp.status_code, self._safe_json(resp))
 
     def execute_turn(self, turn: ScenarioTurn) -> TurnRecord:
         dispatch = {
+            "interpret": self._execute_interpret,
             "normalize": self._execute_normalize,
             "search": self._execute_search,
             "select": self._execute_select,
@@ -194,6 +257,7 @@ def run_scenario(
     )
 
     _install_forbidden_ai_provider_guard(monkeypatch)
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
 
     appt_before = db.query(Appointment).count()
     audit_before = db.query(AppointmentAuditLog).count()
@@ -231,6 +295,11 @@ def run_scenario(
         for pf in scenario.preserved_fields:
             actual = _get_nested(record.response, pf)
             if actual is None:
+                if pf in preserved_snapshots:
+                    failures.append(
+                        f"turn[{idx}] preserved field '{pf}' disappeared: "
+                        f"was={preserved_snapshots[pf]!r} now=None"
+                    )
                 continue
             if pf not in preserved_snapshots:
                 preserved_snapshots[pf] = actual

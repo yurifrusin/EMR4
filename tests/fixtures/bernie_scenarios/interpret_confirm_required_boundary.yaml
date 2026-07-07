@@ -1,0 +1,38 @@
+id: interpret_confirm_required_boundary
+category: booking_interpret_contract
+description: >
+  Booking language remains interpretation-only under the fake provider; no
+  appointment or audit row is written before staff confirmation.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Please book it for Margaret Thompson with Dr Shera next Tuesday at 09:00 for 20 minutes"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "safety_flags.0": autonomous_booking_language
+        "warnings.0.code": autonomous_booking_language
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+

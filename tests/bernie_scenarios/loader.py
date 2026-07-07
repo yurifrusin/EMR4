@@ -19,7 +19,7 @@ from typing import Any, Optional
 
 import yaml
 
-KNOWN_ACTIONS = frozenset({"normalize", "search", "select", "confirm"})
+KNOWN_ACTIONS = frozenset({"normalize", "search", "select", "confirm", "interpret"})
 KNOWN_FORBIDDEN_OUTCOMES = frozenset({
     "provider_called",
     "appointment_written",

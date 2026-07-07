@@ -1,0 +1,37 @@
+id: interpret_no_prior_frame_no_merge
+category: booking_interpret_contract
+description: >
+  A bare clarification-style practitioner reply without a prior frame remains
+  clarification_required instead of inheriting stale context.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "With Dr Shera please"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: clarification_required
+        safe: false
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "missing_fields.0": date_from
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+

@@ -1,0 +1,35 @@
+id: interpret_absolute_past_date_blocked
+category: booking_interpret_contract
+description: >
+  A natural request for an absolute past date is blocked without appointment or
+  audit writes.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera on 2026-07-01 at 09:00 for 20 minutes"
+    expect:
+      status: 200
+      fields:
+        result: blocked
+        safe: false
+        "blocks.0.code": requested_date_in_past
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+

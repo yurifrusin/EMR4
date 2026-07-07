@@ -1,0 +1,56 @@
+id: interpret_clarification_practitioner_merge
+category: booking_interpret_contract
+description: >
+  A natural request missing the practitioner asks for clarification, then a
+  natural practitioner reply uses the threaded requested_appointment frame.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson next Tuesday at 15:30 for 30 minutes"
+    expect:
+      status: 200
+      fields:
+        result: clarification_required
+        safe: false
+        "missing_fields.0": practitioner_id
+        "command_candidate.patient_id": "{patient_id}"
+        "reception_context.frames.0.payload.patient_id": "{patient_id}"
+        "reception_context.frames.0.payload.date_from": "2026-07-14"
+        "reception_context.frames.0.payload.earliest_time": "15:30"
+  - action: interpret
+    input:
+      instruction: "With Dr Shera please"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.date_from": "2026-07-14"
+        "command_candidate.earliest_time": "15:30"
+        "command_candidate.duration_minutes": "30"
+        "assumptions.0.field": clarification_merge
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+preserved_fields:
+  - "command_candidate.patient_id"
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+

@@ -1,0 +1,61 @@
+id: interpret_search_select_pivot
+category: booking_interpret_contract
+description: >
+  An interpreted natural request can hand its command candidate to the existing
+  search and selection actions without writing an appointment.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Find Margaret Thompson a slot with Dr Shera next Tuesday after 9 am for 20 minutes"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+  - action: search
+    input: {}
+    expect:
+      status: 200
+      fields:
+        safe: true
+        "normalization.constraint.patient_id": "{patient_id}"
+        "normalization.constraint.practitioner_id": "{practitioner_id}"
+  - action: select
+    input:
+      selected_candidate_index: 0
+      reason: "Use the first suitable option for staff review."
+    expect:
+      status: 200
+      fields:
+        safe: true
+        "selected_candidate.appointment_date": "2026-07-14"
+  - action: select
+    input:
+      selected_candidate_index: 1
+      reason: "Staff chose a different candidate before confirming."
+    expect:
+      status: 200
+      fields:
+        safe: true
+        "selected_candidate.appointment_date": "2026-07-14"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+

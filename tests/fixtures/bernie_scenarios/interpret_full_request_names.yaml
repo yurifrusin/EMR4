@@ -1,0 +1,43 @@
+id: interpret_full_request_names
+category: booking_interpret_contract
+description: >
+  Full natural receptionist request resolves patient, practitioner, date, time
+  window, and duration without writing appointment or audit rows.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Make an appointment for Margaret Thompson with Dr Shera next Monday after 2 pm but before 3:45 for 30 minutes"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "normalization.constraint.date_from": "2026-07-13"
+        "normalization.constraint.earliest_time": "14:00:00"
+        "normalization.constraint.latest_time": "15:45:00"
+        "normalization.constraint.duration_minutes": 30
+        "reception_context.frames.0.frame_type": requested_appointment
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+

@@ -1,6 +1,16 @@
 # Bernie Reception Scenario Corpus
 
-This directory contains the canonical receptionist-domain scenarios for testing Bernie's native diary-agent behavior. These scenarios represent real-world interactions and edge cases found during GP clinic testing.
+This directory contains the canonical receptionist-domain scenarios for testing Bernie's native diary-agent behavior. Older corpus-memory scenarios represent real-world interactions and edge cases found during GP clinic testing; executable `interpret_*` cases are authored synthetic receptionist-style contract fixtures.
+
+The directory contains two fixture styles:
+
+- executable replay fixtures with `turns[].action`, loaded by
+  `tests/bernie_scenarios/loader.py`;
+- older scenario-memory fixtures with `turns[].user`, which remain useful corpus
+  notes but are intentionally skipped by the executable replay loader.
+
+Executable `interpret_*` fixtures are fake-provider, route-level contract tests.
+They are not live-backend, live-provider, or provider-quality evidence.
 
 ## Scenario Schema Reference
 
@@ -26,6 +36,25 @@ Each scenario is defined as a YAML file containing:
     - **`can_confirm`** / **`requires_confirmation`** / **`appointment_written`** *(optional)*: Mutation-safety flags.
 - **`forbidden`**: List of strings describing behaviors, copy patterns, or outcomes that are strictly disallowed during this scenario (e.g., losing patient context, mutating the DB before confirmation, re-asking resolved fields).
 - **`xfail`** *(optional)*: Used to mark known unfixed bugs. Contains a `reason` explaining why the scenario is expected to fail (for example, clarification merge bugs scheduled for Sprint R2).
+- **`preserved_fields`** *(executable replay only)*: Dotted response paths whose
+  first non-null value must not change or disappear on later turns.
+
+Executable replay fixtures instead use:
+
+```yaml
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson next Tuesday at 15:30 for 30 minutes"
+    expect:
+      status: 200
+      fields:
+        result: clarification_required
+```
+
+For `interpret` turns, omitted `context_frames` auto-threads the
+`requested_appointment` frame from the previous `interpret` turn. Use
+`context_frames: []` to force a fresh turn.
 
 ## Boundary & Dissent Guidelines
 

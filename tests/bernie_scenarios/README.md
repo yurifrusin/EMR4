@@ -4,10 +4,14 @@ Backend pytest replay harness for the Bernie receptionist scenario corpus.
 
 ## What it does
 
-Loads YAML scenario fixtures, runs ordered backend/session turns (no LLM calls),
-and asserts structured outcomes (field values, row writes, forbidden outcomes, preserved
-field invariants). Supports `xfail` scenarios for known behaviour that a future sprint
-will fix.
+Loads YAML scenario fixtures, runs ordered backend/session turns (no live LLM
+calls), and asserts structured outcomes (field values, row writes, forbidden
+outcomes, preserved field invariants). Supports `xfail` scenarios for known
+behaviour that a future sprint will fix.
+
+Interpret scenarios run against the deterministic fake Bernie interpreter. They
+are `fake-provider, route-level` evidence only: useful contract regression
+coverage, not live-backend, live-provider, or provider-quality evidence.
 
 ## Running
 
@@ -50,7 +54,7 @@ xfail:                                # optional; mark scenario as expected-fail
   reason: "Why this fails today and what sprint will fix it"
 
 turns:
-  - action: normalize | search | select | confirm
+  - action: interpret | normalize | search | select | confirm
     input:                            # action-specific; may use {practitioner_id},
       key: value                      # {patient_id}, {practice_id} template vars
     expect:
@@ -72,6 +76,11 @@ forbidden_outcomes:                   # things that must NOT happen
   - audit_written                     # new AppointmentAuditLog row written
 ```
 
+`preserved_fields` snapshots the first non-null value for each dotted path and
+fails if a later turn changes or drops that value. Use it for cross-turn
+contracts such as `command_candidate.patient_id` or
+`reception_context.frames.0.payload.date_from`.
+
 ### Template variables
 
 | Variable | Resolves to |
@@ -82,9 +91,46 @@ forbidden_outcomes:                   # things that must NOT happen
 
 ### Action turn state threading
 
+- **interpret**: posts `input.instruction` to
+  `/api/v1/appointments/proposals/bernie/interpret-booking-instruction` with
+  the fake interpreter. `reference_date` defaults to the scenario
+  `reference_date`. If `input.context_frames` is omitted, the harness threads
+  the `requested_appointment` frame from the previous `interpret` turn. Set
+  `context_frames: []` explicitly to start a fresh turn.
 - **search**: when `input` is empty, reuses the command from the last `normalize` turn
+  or the `command_candidate` from the last `interpret` turn
 - **select**: always uses the `search_execution` from the last `search` turn
 - **confirm**: always uses the `selection_proposal` from the last `select` turn
+  and sends a deterministic `Idempotency-Key` unless `input.idempotency_key` is
+  supplied
+
+Example interpret thread:
+
+```yaml
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson next Tuesday at 15:30 for 30 minutes"
+    expect:
+      status: 200
+      fields:
+        result: clarification_required
+        "missing_fields.0": practitioner_id
+        "reception_context.frames.0.payload.patient_id": "{patient_id}"
+  - action: interpret
+    input:
+      instruction: "With Dr Shera please"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "assumptions.0.field": clarification_merge
+```
+
+New interpret corpus fixtures should use receptionist-like natural phrasing
+rather than `key:value` shorthand except where a fixture is deliberately testing
+the lower-level command parser.
 
 ## Authorship boundary
 

@@ -1,0 +1,46 @@
+id: interpret_context_practitioner_change
+category: booking_interpret_contract
+description: >
+  The first turn returns a requested_appointment frame for patient/date/time;
+  the follow-up instruction naturally supplies the missing practitioner.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson next Tuesday at 09:00 for 20 minutes"
+    expect:
+      status: 200
+      fields:
+        result: clarification_required
+        "missing_fields.0": practitioner_id
+  - action: interpret
+    input:
+      instruction: "With Dr Shera please"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.date_from": "2026-07-14"
+        "command_candidate.earliest_time": "09:00"
+        "command_candidate.duration_minutes": "20"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+
