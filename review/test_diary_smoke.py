@@ -9059,3 +9059,133 @@ def test_bernie_debug_provider_metadata_honest(diary_page, provider_info, expect
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_create_proposal_idempotency_header(diary_page):
+    """Verify that create-proposal POST carries an 8+ character Idempotency-Key header,
+    keeps it stable during confirm/warning retries, and changes it when inputs are modified.
+    """
+    import json
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured_keys = []
+
+    def handle_api(route):
+        request = route.request
+        if request.method == "POST" and request.url.endswith("/appointments/proposals/create"):
+            key = request.headers.get("idempotency-key")
+            captured_keys.append(key)
+
+            body = request.post_data_json
+            command = {
+                "patient_id": body.get("patient_id"),
+                "patient_name_provisional": body.get("patient_name_provisional"),
+                "practitioner_id": body["practitioner_id"],
+                "appointment_type_id": body.get("appointment_type_id"),
+                "location_id": body.get("location_id"),
+                "appointment_date": body["appointment_date"],
+                "start_time": "2026-07-03T05:00:00Z",
+                "start_time_local": body["start_time_local"],
+                "duration_minutes": body["duration_minutes"],
+                "reason": body.get("reason") or "",
+                "notes": None,
+                "booked_via": "Receptionist",
+            }
+            proposal = {
+                "intent": "create_appointment",
+                "safe": True,
+                "requires_confirmation": True,
+                "autonomy_tier": "proposal",
+                "summary": "Create booking.",
+                "command": command,
+                "warnings": [{"code": "overlapping_break", "message": "Overlaps with break"}],
+                "blocks": [],
+                "conflict": None,
+                "breaks_overlap": [],
+                "patient_identity": "linked",
+            }
+            route.fulfill(
+                status=200,
+                content_type="application/json",
+                body=json.dumps(proposal),
+            )
+            return
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"ok": True}))
+
+    try:
+        diary_page.route("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+        # Open create modal and fill details
+        diary_page.evaluate(
+            """() => {
+              history.replaceState(null, "", "/diary/diary.html");
+              diaryDate = new Date(2026, 6, 3);
+              activeTemplate = {
+                columns: [{
+                  practitioner_ahpra: "MED0001234567",
+                  room_label: "Room 1",
+                  assignment: "Dr Alex Shera",
+                  slot_interval_minutes: 15
+                }],
+                slot_defaults: { interval_minutes: 15 }
+              };
+              activeTypes = [{ id: "type-1", name: "Standard", default_duration: 15 }];
+              activeLocationId = "loc-1";
+              ahpraToPractitionerMap["MED0001234567"] = {
+                id: "practitioner-123",
+                first_name: "Alex",
+                last_name: "Shera",
+                ahpra_number: "MED0001234567"
+              };
+              openBookingModalForCreate(activeTemplate.columns[0], "15:00");
+              selectedPatient = { id: "patient-123", first_name: "Margaret", last_name: "Thompson", date_of_birth: "1952-03-14" };
+              document.getElementById("booking-type").value = "type-1";
+            }"""
+        )
+
+        # First save attempt: will trigger warning, button changes to 'Confirm & Save'
+        diary_page.click("#btn-booking-save")
+        diary_page.wait_for_timeout(500)
+
+        # Verify first call key is valid
+        assert len(captured_keys) == 1
+        key1 = captured_keys[0]
+        assert key1 is not None
+        assert len(key1) >= 8
+
+        # Second save attempt (confirming warning, no input change): key must be stable
+        diary_page.click("#btn-booking-save")
+        diary_page.wait_for_timeout(500)
+
+        assert len(captured_keys) == 2
+        key2 = captured_keys[1]
+        assert key2 == key1, "Idempotency-Key should be stable for the same proposal attempt"
+
+        # Now simulate changing input field to reset proposal confirmation and clear key
+        diary_page.evaluate(
+            """() => {
+              const reasonInput = document.getElementById("booking-reason");
+              reasonInput.value = "New reason";
+              // Dispatch input event to trigger resetProposalConfirmation
+              reasonInput.dispatchEvent(new Event('input', { bubbles: true }));
+            }"""
+        )
+        diary_page.wait_for_timeout(200)
+
+        # Third save attempt after input change: key must change
+        diary_page.click("#btn-booking-save")
+        diary_page.wait_for_timeout(500)
+
+        assert len(captured_keys) == 3
+        key3 = captured_keys[2]
+        assert key3 is not None
+        assert len(key3) >= 8
+        assert key3 != key1, "Idempotency-Key should be refreshed when input changes"
+
+    finally:
+        diary_page.unroute("**/api/v1/**", handle_api)
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

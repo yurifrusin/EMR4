@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | c09f3132 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint153-diary-create-proposal-header-ui --summary "Short plan summary"` |
@@ -81,6 +81,11 @@ Plan gate: identify static JS checks and any deterministic UI/review harness che
 
 Ariadne gets a clear UI/client plan: where the key is generated, why it is 8+ chars, how retries behave, and what tests prove create-proposal calls now satisfy the Sprint 152 readiness precondition.
 
+## Integration Notes
+
+- Integration result: accepted after Ariadne review.
+- Follow-up: confirm-route and other proposal-route header emission remains outside Sprint 153 and should be handled by later API-spine slices.
+
 ## Dissent / Risks
 
 Record concerns, alternative designs, or reasons this task should not be merged as-is.
@@ -90,5 +95,13 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
 - Files changed:
+  - [diary.html](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/docs/diary/diary.html)
+  - [diary.js](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/docs/diary/diary.js)
+  - [test_diary_smoke.py](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/review/test_diary_smoke.py)
 - Verification run:
+  - Checked JS syntax: `node --check docs/diary/diary.js` (passed).
+  - Validated frontend asset versions: `python scripts/check_frontend_versions.py` (passed).
+  - Checked for Git diff formatting/whitespace issues: `git diff --check` (passed).
+  - Executed focused pytest tests: `.venv\Scripts\pytest.exe -k "test_create_proposal_idempotency_header" review/test_diary_smoke.py` (passed) and `.venv\Scripts\pytest.exe tests/test_api_spine_create_proposal_idempotency_route_contract.py` (passed).
 - Remaining risks:
+  - None. Client-only change is fully covered by smoke tests and satisfies all idempotency/warning-retry requirements.

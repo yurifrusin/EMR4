@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | integrated |
 | Created | c09f3132 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint153-diary-create-proposal-header-readiness --summary "Short plan summary"` |
@@ -81,6 +81,12 @@ Plan gate only: list exact tests for Ariadne/implementation, likely node --check
 
 Ariadne can implement or release implementation with clear acceptance: diary create-proposal sends an 8+ char key, backend runtime remains non-blank-only, and tests prove no write/replay authority change.
 
+## Completion Notes
+
+- Files changed: plan/review packet only; no production code, tests, OpenAPI, diary UI, taskpane, or migrations.
+- Verification run: read-only/static review by Claude; Ariadne ran focused JS, review harness, API-spine, and leakage checks after integration.
+- Integration result: accepted. Ariadne used Claude's client-only plan and no-route-change boundary for Sprint 153.
+
 ## Dissent / Risks
 
 Record concerns, alternative designs, or reasons this task should not be merged as-is.
@@ -89,6 +95,41 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Plan-gate only. No production code or tests edited. Wrote the
+  implementation/review plan packet
+  `orchestration/agent_inbox/codex/plan-claude-claude-sprint153-diary-create-proposal-header-readiness.md`
+  and moved this task packet to `pending_plan_review`. No `app/`, OpenAPI,
+  migration, diary UI, or test edits.
+
+- Verification run: Read-only/static review only (plan gate). Reviewed AGENTS.md,
+  protocol_alerts.md, the Sprint 152 task/decision packet + its completion notes,
+  `app/routers/appointments.py` (`propose_create_appointment` +
+  `_normalize_create_proposal_idempotency_key`, lines 1030-1051, and
+  `propose_update_appointment` at 1503 which takes no Idempotency-Key), the live
+  diary caller `docs/diary/diary.js:7389-7395` (create/update proposal POST via
+  `apiFetch` with NO Idempotency-Key header), `apiFetch` (diary.js:2417, forwards
+  `opts.headers`), and `bernieSession.generateEventId()` (diary.js:174,
+  `crypto.randomUUID()` / `evt-...` fallback, both >=8 chars). No pytest run per
+  the plan-gate rule.
+
+- Recommendation: PROCEED with a client-only fix. Add an 8+ char Idempotency-Key
+  header to the CREATE branch of the diary booking-modal save flow (generated via
+  a standalone `crypto.randomUUID` helper, not a hard dependency on bernieSession),
+  bump the diary cache-bust, and add a structural check. This closes the Sprint 152
+  client-readiness gap (live non-smoke create currently 400s with
+  `idempotency_key_required`) while leaving runtime enforcement at non-blank-only,
+  OpenAPI unchanged, and no ledger/write/replay authority change. A UUID key also
+  satisfies the deferred minLength 8, making a future runtime-enforcement sprint a
+  clean follow-on. Suggested tests for Ariadne/implementation: `node --check
+  docs/diary/diary.js`; `pytest tests/test_api_spine_create_proposal_header_alignment.py
+  tests/test_api_spine_create_proposal_idempotency_route_contract.py -q`;
+  `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`.
+
+- Remaining risks: (1) Prefer a standalone key generator; bernieSession may be
+  uninitialised in the plain booking path. (2) Scope the header to the create
+  branch so the shared caller does not alter update-proposal (which ignores the
+  header). (3) Smoke mode bypasses the endpoint, so header coverage needs a
+  structural/static check, not the smoke path. (4) The OpenAPI-vs-runtime
+  minLength split is intentionally preserved this sprint. (5) No tests were run
+  during the plan gate; Ariadne should run the three commands above before/after
+  implementation.

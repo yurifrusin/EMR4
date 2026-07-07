@@ -7015,12 +7015,20 @@ async function apiErrorMessage(res, action) {
   return `${action} failed: ${res.status}${text ? ` ${text}` : ""}`;
 }
 
+function generateClientIdempotencyKey() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return "evt-" + Math.random().toString(36).substring(2, 10);
+}
+
 function resetProposalConfirmation() {
   const saveBtn = document.getElementById("btn-booking-save");
   if (saveBtn) {
     saveBtn.dataset.confirmed = "false";
     saveBtn.textContent = "Save Booking";
     saveBtn.classList.remove("btn-warning-action");
+    delete saveBtn.dataset.idempotencyKey;
   }
   const warningEl = document.getElementById("booking-warnings");
   if (warningEl) {
@@ -7389,8 +7397,16 @@ async function saveBooking() {
         const url = editingAppointmentId
           ? `/appointments/proposals/update/${editingAppointmentId}`
           : "/appointments/proposals/create";
+        const headers = {};
+        if (!editingAppointmentId) {
+          if (!saveBtn.dataset.idempotencyKey) {
+            saveBtn.dataset.idempotencyKey = generateClientIdempotencyKey();
+          }
+          headers["Idempotency-Key"] = saveBtn.dataset.idempotencyKey;
+        }
         const propRes = await apiFetch(url, {
           method: "POST",
+          headers: headers,
           body: JSON.stringify(payload)
         });
         if (!propRes.ok) {

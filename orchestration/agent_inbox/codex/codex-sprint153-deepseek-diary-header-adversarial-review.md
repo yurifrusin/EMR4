@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint153-deepseek-diary-header-adversarial-review` |
-| Status | queued |
+| Status | integrated |
 | Created | c09f3132 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint153-deepseek-diary-header-adversarial-review --summary "Short plan summary"` |
