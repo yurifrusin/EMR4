@@ -2,7 +2,7 @@
 
 Date: 2026-07-07
 
-Sprint: 193
+Sprint: 193, extended in Sprint 194
 
 ## Purpose
 
@@ -28,13 +28,21 @@ The preflight reports:
 - grammar-authority route and method-row counts;
 - raw-adjacent route and method-row counts;
 - out-of-contract route and method-row counts by coarse method family; and
-- out-of-contract route counts by coarse category.
+- out-of-contract route counts by coarse category; and
+- out-of-contract method-row counts split into contract-documented paths and
+  wholly undocumented paths.
 
 `raw_mutation_routes` are counted separately as adjacent route awareness. They
 are not counted as grammar dispatch authority, and only mounted write methods
 on those paths are counted as raw-adjacent rows. Mounted read methods on the
 same path remain out-of-contract unless another non-raw contract field claims
 them. The report keeps `raw_adjacent_routes_are_grammar_dispatch_authority=false`.
+
+Documented-path out-of-contract rows remain out-of-contract. This bucket means
+only that the mounted path appears somewhere in `DIARY_ACTION_ROUTE_CONTRACTS`;
+it does not mean the method has grammar authority, route behavior evidence, or a
+safe dispatch contract. The report keeps
+`documented_path_out_of_contract_rows_are_grammar_authority=false`.
 
 ## Boundary
 

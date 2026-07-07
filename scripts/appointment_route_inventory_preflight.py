@@ -114,6 +114,12 @@ def build_appointment_route_inventory_preflight() -> dict[str, Any]:
     }
     covered_rows = route_rows & contract_rows
     uncovered_rows = route_rows - contract_rows
+    out_of_contract_documented_path_rows = {
+        (method, path) for method, path in uncovered_rows if path in contract_paths
+    }
+    out_of_contract_undocumented_path_rows = (
+        uncovered_rows - out_of_contract_documented_path_rows
+    )
 
     uncovered_by_method_family = Counter(
         _method_family({method}) for method, _path in uncovered_rows
@@ -148,6 +154,18 @@ def build_appointment_route_inventory_preflight() -> dict[str, Any]:
         "out_of_contract_route_count": len(uncovered_paths),
         "out_of_contract_route_method_count": len(uncovered_rows),
         "out_of_contract_distinct_path_count": len(uncovered_paths),
+        "out_of_contract_documented_path_count": len(
+            {path for _method, path in out_of_contract_documented_path_rows}
+        ),
+        "out_of_contract_documented_path_method_count": len(
+            out_of_contract_documented_path_rows
+        ),
+        "out_of_contract_undocumented_path_count": len(
+            {path for _method, path in out_of_contract_undocumented_path_rows}
+        ),
+        "out_of_contract_undocumented_path_method_count": len(
+            out_of_contract_undocumented_path_rows
+        ),
         "out_of_contract_by_method_family": dict(
             sorted(uncovered_by_method_family.items())
         ),
@@ -155,6 +173,7 @@ def build_appointment_route_inventory_preflight() -> dict[str, Any]:
         "all_contract_paths_mounted": contract_paths <= mounted_paths,
         "contract_is_complete_router_catalogue": False,
         "raw_adjacent_routes_are_grammar_dispatch_authority": False,
+        "documented_path_out_of_contract_rows_are_grammar_authority": False,
         "runtime_or_provider_wiring_ready": False,
         "provider_calls_performed": False,
         "http_requests_performed": False,
@@ -191,11 +210,31 @@ def assert_appointment_route_inventory_preflight_safety(report: dict[str, Any]) 
     assert report["out_of_contract_distinct_path_count"] > 0
     assert report["out_of_contract_distinct_path_count"] < report["appointment_distinct_path_count"]
     assert report["out_of_contract_route_method_count"] > 0
+    assert report["out_of_contract_documented_path_count"] >= 0
+    assert report["out_of_contract_documented_path_method_count"] >= 0
+    assert (
+        report["out_of_contract_documented_path_count"]
+        <= report["out_of_contract_documented_path_method_count"]
+        or report["out_of_contract_documented_path_method_count"] == 0
+    )
+    assert report["out_of_contract_undocumented_path_count"] > 0
+    assert report["out_of_contract_undocumented_path_method_count"] > 0
+    assert (
+        report["out_of_contract_documented_path_count"]
+        + report["out_of_contract_undocumented_path_count"]
+        == report["out_of_contract_distinct_path_count"]
+    )
+    assert (
+        report["out_of_contract_documented_path_method_count"]
+        + report["out_of_contract_undocumented_path_method_count"]
+        == report["out_of_contract_route_method_count"]
+    )
     assert report["out_of_contract_by_method_family"]
     assert report["out_of_contract_by_category"]
     assert report["all_contract_paths_mounted"] is True
     assert report["contract_is_complete_router_catalogue"] is False
     assert report["raw_adjacent_routes_are_grammar_dispatch_authority"] is False
+    assert report["documented_path_out_of_contract_rows_are_grammar_authority"] is False
     assert report["runtime_or_provider_wiring_ready"] is False
     assert report["provider_calls_performed"] is False
     assert report["http_requests_performed"] is False

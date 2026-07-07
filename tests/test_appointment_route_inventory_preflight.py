@@ -25,6 +25,22 @@ def test_appointment_route_inventory_preflight_is_safe_aggregate_status():
     assert report["raw_adjacent_route_count"] > 0
     assert report["out_of_contract_route_count"] > 0
     assert report["out_of_contract_route_count"] < report["appointment_route_count"]
+    assert report["out_of_contract_documented_path_method_count"] >= 0
+    assert report["out_of_contract_documented_path_method_count"] <= 5
+    assert (
+        report["out_of_contract_documented_path_method_count"]
+        < report["out_of_contract_undocumented_path_method_count"]
+    )
+    assert (
+        report["out_of_contract_documented_path_method_count"]
+        + report["out_of_contract_undocumented_path_method_count"]
+        == report["out_of_contract_route_method_count"]
+    )
+    assert (
+        report["out_of_contract_documented_path_count"]
+        + report["out_of_contract_undocumented_path_count"]
+        == report["out_of_contract_distinct_path_count"]
+    )
     assert report["out_of_contract_by_method_family"]["read_get"] > 0
     assert report["out_of_contract_by_method_family"]["query_or_command_post"] > 0
     assert report["out_of_contract_by_category"]["slot_search"] > 0
@@ -69,6 +85,7 @@ def test_appointment_route_inventory_preflight_has_closed_runtime_posture():
         "writes_performed",
         "contract_is_complete_router_catalogue",
         "raw_adjacent_routes_are_grammar_dispatch_authority",
+        "documented_path_out_of_contract_rows_are_grammar_authority",
     ],
 )
 def test_appointment_route_inventory_preflight_rejects_opened_boundaries(field):
@@ -90,6 +107,14 @@ def test_appointment_route_inventory_preflight_rejects_missing_contract_mounts()
 def test_appointment_route_inventory_preflight_rejects_collapsed_coverage_split():
     report = build_appointment_route_inventory_preflight()
     report["grammar_authority_route_count"] = report["contract_covered_route_count"] + 1
+
+    with pytest.raises(AssertionError):
+        assert_appointment_route_inventory_preflight_safety(report)
+
+
+def test_appointment_route_inventory_preflight_rejects_uncovered_partition_drift():
+    report = build_appointment_route_inventory_preflight()
+    report["out_of_contract_undocumented_path_method_count"] += 1
 
     with pytest.raises(AssertionError):
         assert_appointment_route_inventory_preflight_safety(report)
