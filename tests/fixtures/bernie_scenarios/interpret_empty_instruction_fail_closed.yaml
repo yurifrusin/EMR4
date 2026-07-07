@@ -1,0 +1,31 @@
+id: interpret_empty_instruction_fail_closed
+category: booking_interpret_contract
+description: >
+  An empty receptionist instruction is rejected at request validation before
+  provider routing and still performs no appointment or audit writes.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: ""
+      context_frames: []
+    expect:
+      status: 422
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

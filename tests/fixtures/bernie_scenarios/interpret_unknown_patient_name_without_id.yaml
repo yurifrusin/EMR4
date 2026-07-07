@@ -1,0 +1,41 @@
+id: interpret_unknown_patient_name_without_id
+category: booking_interpret_contract
+description: >
+  A known practitioner and date with an unknown sentinel patient name may still
+  produce a slot-search command candidate, but it must not invent a patient
+  record.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Alice Nonexistent with Dr Shera tomorrow at 09:00 for 20 minutes"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "command_candidate.patient_id": null
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": tomorrow
+        "normalization.constraint.date_from": "2026-07-09"
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

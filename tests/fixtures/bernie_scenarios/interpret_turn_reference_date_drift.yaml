@@ -1,0 +1,57 @@
+id: interpret_turn_reference_date_drift
+category: booking_interpret_contract
+description: >
+  Two otherwise identical "today" turns resolve against their explicit turn
+  reference dates, proving prompt automation can catch reference-date drift.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera today at 09:00 for 20 minutes"
+      reference_date: "2026-07-08"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "request_reference_date": "2026-07-08"
+        "normalization.constraint.date_from": "2026-07-08"
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera today at 09:00 for 20 minutes"
+      reference_date: "2026-07-09"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "request_reference_date": "2026-07-09"
+        "normalization.constraint.date_from": "2026-07-09"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

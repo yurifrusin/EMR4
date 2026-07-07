@@ -12,6 +12,22 @@ The directory contains two fixture styles:
 Executable `interpret_*` fixtures are fake-provider, route-level contract tests.
 They are not live-backend, live-provider, or provider-quality evidence.
 
+The current executable `interpret_*` corpus covers two slices:
+
+- first-pass natural prompt threads: full requests, clarifications, follow-up
+  changes, confirm-required no-write boundaries, past-date blocking, and
+  interpret -> search -> select handoff;
+- edge-contract prompts: empty instruction validation, unknown patient names
+  without invented patient ids, visible-diary date context, and explicit
+  per-turn reference-date drift.
+
+Unknown patient-name fixtures deliberately assert the current route contract:
+the interpret layer may still produce a slot-search command when practitioner
+and date are known, but it must leave `command_candidate.patient_id` null and
+must not write appointments or audit rows. Patient identity enforcement belongs
+to later proposal/confirmation surfaces unless a future reviewed sprint changes
+this contract.
+
 ## Scenario Schema Reference
 
 Each scenario is defined as a YAML file containing:

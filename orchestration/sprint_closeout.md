@@ -24,51 +24,51 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 162 Interpret-Capable Bernie Scenario Replay |
-| Integrated through | Fable-directed prompt-thread automation; Claude CLI advice; DeepSeek adversarial review; Antigravity CLI corpus review |
-| Status | Integrated and pushed |
+| Batch | Sprint 163 Interpret Edge Fixtures |
+| Integrated through | Fable-directed prompt-thread automation; Antigravity CLI product review; DeepSeek review; replacement DeepSeek review after Claude session limit |
+| Status | Pending commit/push at closeout draft time |
 | Last updated | 2026-07-07 |
 
-## Sprint 162 What Changed
+## Sprint 163 What Changed
 
-- Extended `tests/bernie_scenarios` with an executable `interpret` action for
-  `/api/v1/appointments/proposals/bernie/interpret-booking-instruction`.
-- Scenario replay now forces the deterministic fake Bernie interpreter,
-  auto-threads `requested_appointment` frames between interpret turns when
-  `context_frames` is omitted, and allows `context_frames: []` for a fresh turn.
-- Empty `search` turns can now reuse the `command_candidate` from the last
-  interpret turn, enabling an interpret -> search -> select prompt-thread path.
-- Scenario `confirm` turns now send a deterministic HTTP `Idempotency-Key`,
-  keeping the older happy-path fixture aligned with the current API-spine
-  confirm route contract.
-- Added 10 authored synthetic natural-phrasing `interpret_*.yaml` fixtures
-  covering full request resolution, missing-practitioner clarification, date/
-  time/duration/practitioner follow-up changes, no-prior-frame isolation,
-  confirm-required no-write boundary, past-date block, and selected-slot pivot.
-- Updated scenario README files and integrity validation so executable
-  interpret fixtures are explicitly labelled `fake-provider, route-level`
-  evidence only.
-- Tightened `preserved_fields`: once a preserved field has been snapshotted, a
-  later disappearance now fails instead of silently passing.
+- Added four authored synthetic executable `interpret_*` edge fixtures:
+  - `interpret_empty_instruction_fail_closed.yaml` proves empty instruction
+    validation returns `422` before provider routing and writes nothing.
+  - `interpret_unknown_patient_name_without_id.yaml` proves an unknown sentinel
+    patient name may still produce a slot-search command candidate, but
+    `command_candidate.patient_id` stays null and no patient identity is
+    invented.
+  - `interpret_visible_diary_date_context.yaml` proves a partial request can
+    use a `visible_diary_page` context frame for the missing date, with a
+    reversible `date_from` assumption.
+  - `interpret_turn_reference_date_drift.yaml` proves otherwise identical
+    "today" turns resolve against each turn's explicit `reference_date`.
+- Updated the Bernie scenario corpus README to separate first-pass prompt
+  threads from edge-contract prompts and to document the unknown-patient
+  route-level contract.
 - Recorded worker lanes:
-  - Claude CLI implementation advice in
-    `orchestration/agent_inbox/claude/claude-sprint162-interpret-replay-harness.md`.
-  - DeepSeek adversarial review in
-    `orchestration/agent_inbox/codex/review-deepseek-sprint162-interpret-replay-harness.md`.
-  - Antigravity corpus-review packet in
-    `orchestration/agent_inbox/antigravity/antigravity-sprint162-interpret-prompt-corpus.md`.
-  - Antigravity CLI review output in
-    `orchestration/agent_inbox/antigravity/antigravity-sprint162-interpret-prompt-corpus-cli.md`.
+  - Antigravity CLI product/receptionist review in
+    `orchestration/agent_inbox/antigravity/antigravity-sprint163-interpret-edge-fixtures.md`.
+  - DeepSeek review and replacement DeepSeek review synthesis in
+    `orchestration/agent_inbox/codex/review-deepseek-sprint163-interpret-edge-fixtures.md`.
+- Accepted review polish before closeout: renamed the uncommitted
+  `interpret_unknown_patient_name_clarifies` draft to
+  `interpret_unknown_patient_name_without_id`, clarified "command candidate"
+  wording, added patient/practitioner and `safe` assertions to the
+  reference-date drift fixture, and added explicit fake-provider metadata
+  assertions to every new 200-response fixture.
 
-Sprint 162 does not open runtime route wiring from the provider-free
+Sprint 163 does not open runtime route wiring from the provider-free
 interpretation harness, provider prompt/dry-run wiring, live-provider
 enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
 material access, GraphQL mutations, or model-to-database writes.
 
-## Sprint 162 Verification
+## Sprint 163 Verification
 
 - `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ -q`
-  (`.x...........`; existing Starlette/Google GenAI warnings only).
+  (`.x...............`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  (`........s`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
   succeeded with `runtime_or_provider_wiring_ready=false`,
   `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`.
@@ -78,32 +78,35 @@ material access, GraphQL mutations, or model-to-database writes.
   `route_behavior_changed=false`, `database_access_performed=false`,
   `memory_or_rag_access_performed=false`, and
   `historical_diary_material_access_performed=false`.
-- `.venv\Scripts\python.exe -m pytest tests\test_bernie_clarification_merge.py tests\test_bernie_interpret_booking_instruction.py -q`
-  (`37 passed`; existing Starlette/Google GenAI warnings only).
-- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ tests\test_bernie_scenario_integrity.py -q`
-  (`.x...................s`; existing Starlette/Google GenAI warnings only).
 - `git diff --check` clean.
 
 Publication state:
 
-- Implementation commit SHA: `a31ebfdf`.
-- Closeout metadata commit SHA: `b96f5a90`.
-- Push result: `origin/master`, `handoff/current`, `codex/current`,
-  `claude/current`, and `antigravity/current` aligned at the Sprint 162
-  publication commit.
-- Final `git status --short --branch`: clean except the expected branch header
-  after publication push.
+- Implementation commit SHA: pending.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending.
 
-Strategic position: Sprint 162 follows Fable's Sprint 161 advice. The system's
-contract bones are strong enough for prompt-thread automation, but this sprint
-is deliberately contract-level only. It creates the stable fake-provider
-route-level yardstick needed before any later live-backend or provider-quality
-review can be measured honestly.
+Strategic position: Sprint 163 continues Fable's Sprint 161 sequencing:
+small authored fake-provider, route-level prompt automation is useful now, but
+provider-quality and live-provider gates remain closed. This sprint tightens the
+edge-contract corpus before any broader backend or provider evidence claims.
 
 Sprint engine state: continuing unless Yuri pauses. Next recommended work is
-either a narrow non-intercepted local-backend run of the same corpus with the
-fake provider, or the next small fixture expansion for unknown names,
-empty/invalid instructions, partial context frames, and reference-date drift.
+either multi-frame context precedence / large temporal drift fixtures, or a
+narrow non-intercepted local-backend pass of the current corpus with the fake
+provider.
+
+---
+
+## Previous Closeout - Sprint 162
+
+Sprint 162 added the executable `interpret` action to
+`tests/bernie_scenarios`, threaded `requested_appointment` frames, enabled
+interpret -> search -> select replay, added deterministic confirm
+`Idempotency-Key` headers, and introduced 10 authored synthetic natural
+prompt-thread fixtures. It was committed through `a31ebfdf`, closeout metadata
+through `b96f5a90`, and publication status through `bd4f598`.
 
 ---
 
