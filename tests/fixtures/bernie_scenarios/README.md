@@ -36,6 +36,8 @@ The current executable `interpret_*` corpus covers two slices:
 - partial-override prompts: follow-up wording can change one threaded field,
   such as practitioner, while preserving the remaining patient/date/time/
   duration fields;
+- multi-field override prompts: a single follow-up can change date and time
+  together while preserving patient, practitioner, and duration;
 - multi-field-missing prompts: patient-only booking requests without context ask
   for missing practitioner/date details instead of guessing;
 - temporal-drift follow-ups: relative-date corrections resolve against the
