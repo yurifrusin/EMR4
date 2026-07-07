@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 139 update-confirm idempotency preflight completed and pushed in `37767ac51ef266b7c454d4c215dacaa14a44a319`. DeepSeek affirmed choosing `POST /api/v1/appointments/proposals/update/confirm` before delete-confirm because it is reversible and exercises revalidation before the destructive soft-cancel path; no route behavior changed |
-| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 140 update-confirm idempotency route-test contract before any route wiring; delete/raw/proposal-only/provider/GraphQL/H15/memory/trove gates stay closed |
+| **Current active track** | Sprint 140 update-confirm idempotency route-test contract completed in the sprint closeout commit. The guarded contract covers route-wrapper replay before revalidation, `_apply_appointment_update(..., commit=False)` as the wiring prerequisite, rollback on blocked started claims, full validated-body hashing, and raw/proposal/delete scope exclusions; no route behavior changed |
+| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 141 update-confirm idempotency route wiring only; delete/raw/proposal-only/provider/GraphQL/H15/memory/trove gates stay closed |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

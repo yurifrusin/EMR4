@@ -24,6 +24,58 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 140 Update-Confirm Idempotency Route-Test Contract |
+| Integrated through | Ariadne implementation with EMR4 API Steward skill; DeepSeek worker advice integrated; Claude and Antigravity protocol packets remain queued locally |
+| Status | Committed and pushed in Sprint 140 closeout commit; sprint engine continuing |
+| Last updated | 2026-07-07 |
+
+## Sprint 140 What Changed
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_update_confirm_route_tests.md`.
+- Added
+  `tests/test_api_spine_update_confirm_idempotency_route_contract.py` with
+  passing static route-scope checks and skipped future behavior tests for
+  Sprint 141 wiring.
+- Integrated DeepSeek worker review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint140-update-confirm-idempotency-route-contract.md`.
+- Preserved the route-wrapper ownership decision: replay must return before
+  `confirm_update_proposal()` can re-run `propose_update_appointment()`.
+- Recorded that `_apply_appointment_update()` currently commits internally and
+  must gain a scoped `commit=False` path before ledger completion.
+- Chose transactional rollback for blocked started claims, matching
+  status-confirm.
+- Recorded the canonicalization boundary: full validated confirmation-body
+  hashing includes signed evidence, freshness, turn/session metadata, and
+  `confirmed_warnings`; `_UPDATE_CONFIRM_METADATA_FIELDS` remains signed
+  evidence payload shaping only.
+- Preserved fake/default-disabled behavior; no update-confirm route wiring,
+  delete/raw/proposal-only idempotency wiring, provider call, live smoke,
+  runtime FGA client, external patient client, GraphQL mutation, H15/H-series
+  runtime import, memory/RAG/GraphRAG, or broad trove mining was added.
+
+## Sprint 140 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_update_confirm_idempotency_route_contract.py tests\test_api_spine_update_confirm_idempotency_preflight.py -q`
+  (`15 passed, 13 skipped`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_update_confirm_idempotency_route_contract.py tests\test_api_spine_update_confirm_idempotency_preflight.py tests\test_phase_programmes_current_checkpoint.py tests\test_sprint_closeout_protocol.py`.
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_update_confirm_idempotency_route_contract.py tests\test_api_spine_update_confirm_idempotency_preflight.py tests\test_phase_programmes_current_checkpoint.py tests\test_sprint_closeout_protocol.py -q`
+  (`20 passed, 13 skipped`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean apart from the known CRLF notice on
+  `orchestration/integration_log.md`.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 141, narrow
+update-confirm idempotency route wiring only, with delete/raw/proposal-only
+families still out of scope.
+
+---
+
+## Previous Closeout - Sprint 139
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 139 Update-Confirm Idempotency Preflight |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; DeepSeek worker advice integrated; Claude and Antigravity protocol packets remain queued locally |
 | Status | Committed and pushed in batch commit `37767ac51ef266b7c454d4c215dacaa14a44a319`; sprint engine continuing |

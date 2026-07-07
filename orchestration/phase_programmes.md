@@ -115,16 +115,16 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Sprint 139 update-confirm idempotency preflight completed; sprint engine continuing |
+| Status | Sprint 140 update-confirm idempotency route-test contract completed; sprint engine continuing |
 | Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
-| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard, Sprint 128 appointment idempotency model/migration preflight, Sprint 129 appointment idempotency storage helper foundation, Sprint 130 appointment idempotency route integration preflight, Sprint 131 staff create-confirm idempotency route-test contract, Sprint 132 staff create-confirm idempotency route wiring, Sprint 133 Bernie create-confirm idempotency preflight, Sprint 134 Bernie create-confirm idempotency route-test contract, Sprint 135 Bernie create-confirm idempotency route wiring, Sprint 136 status-confirm idempotency preflight, Sprint 137 status-confirm idempotency route-test contract, Sprint 138 status-confirm idempotency route wiring, Sprint 139 update-confirm idempotency preflight |
-| Next Candidate Sprints | Sprint 140 update-confirm idempotency route-test contract before wiring; keep delete/raw/proposal-only families out of scope |
+| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard, Sprint 128 appointment idempotency model/migration preflight, Sprint 129 appointment idempotency storage helper foundation, Sprint 130 appointment idempotency route integration preflight, Sprint 131 staff create-confirm idempotency route-test contract, Sprint 132 staff create-confirm idempotency route wiring, Sprint 133 Bernie create-confirm idempotency preflight, Sprint 134 Bernie create-confirm idempotency route-test contract, Sprint 135 Bernie create-confirm idempotency route wiring, Sprint 136 status-confirm idempotency preflight, Sprint 137 status-confirm idempotency route-test contract, Sprint 138 status-confirm idempotency route wiring, Sprint 139 update-confirm idempotency preflight, Sprint 140 update-confirm idempotency route-test contract |
+| Next Candidate Sprints | Sprint 141 update-confirm idempotency route wiring; keep delete/raw/proposal-only families out of scope |
 | Design Record | `orchestration/api_spine_programme.md` |
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
 
-Current position after Sprint 139: the Ariadne/Fable 100+ sprint strategy map
+Current position after Sprint 140: the Ariadne/Fable 100+ sprint strategy map
 has been created, the stale worktree residue has been cleaned, the
 provider-boundary guard stack has been consolidated, and Programme 2G has
 returned to appointment-first API Spine alignment. Sprint 120 refreshed the API
@@ -202,7 +202,15 @@ Sprint 139 then preflighted the next family and chose `update-confirm` before
 `delete-confirm`. DeepSeek affirmed that delete-confirm is structurally simpler,
 but update-confirm is the safer next risk-order step because it is reversible
 and exercises the update revalidation pattern before the destructive soft-cancel
-path. Sprint 139 did not change route behavior.
+path. Sprint 139 did not change route behavior. Sprint 140 added the guarded
+update-confirm route-test contract without route wiring. It records that
+idempotency must live at the route wrapper before `confirm_update_proposal()`
+re-runs `propose_update_appointment()`, that `_apply_appointment_update()` needs
+a scoped `commit=False` path before ledger completion, that blocked started
+claims should roll back transactionally, and that full validated confirmation
+body hashing must include signed evidence, freshness, turn/session metadata,
+and `confirmed_warnings` unless a future cross-route canonicalization version
+change is explicitly approved.
 
 The accepted strategy artifacts are
 `orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md`
@@ -216,8 +224,8 @@ Do not launch another micro-sprint solely because one small snag appeared. Pick
 the next sprint from the active programme that best advances the phase:
 
 1. If Bernie/API-spine architecture is the priority: continue **Programme 2G**
-   with the next confirmation-family preflight, choosing update/status/delete
-   deliberately and excluding raw/proposal-only families.
+   with narrow update-confirm idempotency route wiring, excluding
+   delete/raw/proposal-only families.
 2. If Bernie is the immediate product surface: continue **Programme 2B/2D**
    with the next supervised booking-loop product slice, keeping staff
    confirmation and fake/default-disabled provider posture intact.
@@ -227,8 +235,8 @@ the next sprint from the active programme that best advances the phase:
 4. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
 
-The default recommendation after Sprint 139 is **Programme 2G**: add the
-update-confirm idempotency route-test contract before route wiring, and
+The default recommendation after Sprint 140 is **Programme 2G**: wire
+update-confirm idempotency narrowly, and
 before expanding Caller ID, Medicare/OPV/PVM, clinical-library agent
 integrations, live-provider paths, or historical diary utilisation.
 
