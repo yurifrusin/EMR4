@@ -24,39 +24,42 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 166 Context Threading Fixture |
+| Batch | Sprint 167 Practitioner Override Context Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Integrated and pushed |
+| Status | Integrated locally; publication pending this closeout commit/push |
 | Last updated | 2026-07-07 |
 
-## Sprint 166 What Changed
+## Sprint 167 What Changed
 
-- Added `interpret_context_frames_auto_thread_vs_empty.yaml`, an authored
-  synthetic fake-provider route-level fixture proving both sides of the scenario
-  replay context-threading contract:
-  - omitted `context_frames` auto-threads the prior `requested_appointment`
-    frame, preserving patient, practitioner, date, and duration while applying a
-    time change;
-  - explicit `context_frames: []` clears the thread, leaving a bare time change
-    as `clarification_required`.
-- Updated the Bernie scenario corpus README to record context-threading prompts.
+- Added `interpret_context_practitioner_override.yaml`, an authored synthetic
+  fake-provider route-level fixture proving that a follow-up practitioner change
+  can override the threaded practitioner while preserving patient, date, time,
+  and duration from the prior requested appointment.
+- Fixed `_resolve_bernie_interpretation_context` so the current instruction's
+  explicit practitioner name is resolved before prior-frame clarification merge.
+  This prevents stale threaded practitioner IDs from masking "Actually with
+  Dr Patel please" style follow-ups.
+- Extended the scenario replay harness with an `other_practitioner` fixture and
+  `{other_practitioner_id}` template variable.
+- Updated the Bernie scenario corpus READMEs to record partial-override prompt
+  coverage and the second-practitioner template variable.
 - Recorded worker lanes:
   - Claude CLI review in
-    `orchestration/agent_inbox/claude/claude-sprint166-context-threading.md`.
+    `orchestration/agent_inbox/claude/claude-sprint167-practitioner-override.md`.
   - Antigravity CLI product/receptionist review in
-    `orchestration/agent_inbox/antigravity/antigravity-sprint166-context-threading.md`.
+    `orchestration/agent_inbox/antigravity/antigravity-sprint167-practitioner-override.md`.
   - DeepSeek review in
-    `orchestration/agent_inbox/codex/review-deepseek-sprint166-context-threading.md`.
+    `orchestration/agent_inbox/codex/review-deepseek-sprint167-practitioner-override.md`.
 
-Sprint 166 does not open runtime route wiring from the provider-free
+Sprint 167 does not open runtime route wiring from the provider-free
 interpretation harness, provider prompt/dry-run wiring, live-provider
 enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
 material access, GraphQL mutations, or model-to-database writes.
 
-## Sprint 166 Verification
+## Sprint 167 Verification
 
 - `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ -q`
-  (`.x...................`; existing Starlette/Google GenAI warnings only).
+  (`.x....................`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`........s`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
@@ -69,24 +72,34 @@ material access, GraphQL mutations, or model-to-database writes.
   `memory_or_rag_access_performed=false`, and
   `historical_diary_material_access_performed=false`.
 - `git diff --check` clean.
+- Note: one parallel verification attempt hit the existing Postgres test-schema
+  enum creation race (`CREATE TYPE userrole` duplicate) when two pytest
+  processes started together. The standalone `tests\bernie_scenarios\` rerun
+  passed.
 
 Publication state:
 
-- Implementation commit SHA: `b83e694f`.
-- Closeout metadata commit SHA: `0f474c13`.
-- Push result: `origin/master`, `handoff/current`, `codex/current`,
-  `claude/current`, and `antigravity/current` aligned at the Sprint 166
-  publication commit.
-- Final `git status --short --branch`: clean except the expected branch header
-  after publication push.
+- Implementation commit SHA: `2620bed1`.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending publication.
 
-Strategic position: Sprint 166 locks the replay harness's conversation-context
-semantics before broader backend or provider evidence claims. Provider-quality
-and live-provider gates remain closed.
+Strategic position: Sprint 167 locks a realistic "change one thing, keep the
+rest" prompt-thread behavior before broader backend or provider evidence
+claims. Provider-quality and live-provider gates remain closed.
 
 Sprint engine state: continuing unless Yuri pauses. Next recommended work is a
-partial-context override fixture, followed by multi-field missing or temporal
-drift threading coverage.
+multi-field missing fixture or temporal-drift threading coverage.
+
+---
+
+## Previous Closeout - Sprint 166
+
+Sprint 166 added `interpret_context_frames_auto_thread_vs_empty.yaml`, proving
+omitted `context_frames` auto-threads prior requested appointment context while
+explicit `context_frames: []` clears the thread and re-clarifies. It was
+committed through `b83e694f`, closeout metadata through `0f474c13`, and
+publication status through `e5f65906`.
 
 ---
 

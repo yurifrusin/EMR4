@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 166 context-threading fixture implemented locally: omitted `context_frames` now has executable fake-provider route-level coverage for auto-threading prior requested appointment context, while explicit `context_frames: []` clears it and re-clarifies |
-| **Next recommended work** | After Sprint 166 closeout/push, add a partial-context override fixture such as changing only practitioner while preserving patient/date/time/duration, then add a multi-field missing fixture or temporal-drift threading fixture; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, or broad trove gates |
+| **Current active track** | Sprint 167 practitioner-override context fixture integrated in implementation commit `2620bed1`: current-turn practitioner names now win over prior requested-appointment context while patient/date/time/duration thread forward in fake-provider route-level replay |
+| **Next recommended work** | Continue the authored Bernie/Diary prompt-thread fixture tranche with a multi-field missing fixture or temporal-drift threading fixture; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
