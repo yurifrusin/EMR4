@@ -1,7 +1,9 @@
 """Route-table coverage checks for the Diary action route contract."""
 
 from fastapi.routing import APIRoute
+from fastapi.dependencies.utils import get_flat_dependant
 
+from app.dependencies import get_current_user
 from app.main import app
 from app.services.diary.action_grammar import DiaryActionVerb
 from app.services.diary.action_route_contract import (
@@ -25,6 +27,38 @@ def _mounted_routes() -> dict[str, set[str]]:
             set(route.methods or set()) - {"HEAD", "OPTIONS"}
         )
     return mounted
+
+
+def _route_method_rows(path: str, methods: set[str]) -> tuple[APIRoute, ...]:
+    return tuple(
+        route
+        for route in _ordered_api_routes()
+        if route.path == path and _route_methods(route) & methods
+    )
+
+
+def _route_methods(route: APIRoute) -> set[str]:
+    return set(route.methods or set()) - {"HEAD", "OPTIONS"}
+
+
+def _route_dependency_calls(route: APIRoute) -> tuple[object, ...]:
+    flat = get_flat_dependant(route.dependant)
+    return tuple(
+        dependency.call
+        for dependency in flat.dependencies
+        if dependency.call is not None
+    )
+
+
+def _has_get_current_user_dependency(route: APIRoute) -> bool:
+    return any(call is get_current_user for call in _route_dependency_calls(route))
+
+
+def _has_require_role_dependency(route: APIRoute) -> bool:
+    return any(
+        getattr(call, "__qualname__", "") == "require_role.<locals>.checker"
+        for call in _route_dependency_calls(route)
+    )
 
 
 def _all_contract_routes() -> tuple[tuple[DiaryActionVerb, str, str], ...]:
@@ -265,6 +299,43 @@ def test_out_of_contract_post_sub_family_counts_match_route_table_gaps():
     assert state_tracking_count == sub_family_counts["state_tracking_post"]
     assert ambiguous_count == sub_family_counts.get("ambiguous_post", 0)
     assert len(uncovered_post_paths) == report["out_of_contract_post_route_method_count"]
+
+
+def test_documented_write_contract_routes_are_auth_and_role_gated():
+    write_methods = {"POST", "PUT", "PATCH", "DELETE"}
+    missing_mounts = []
+    missing_auth = []
+    missing_role_gate = []
+
+    for verb, contract in DIARY_ACTION_ROUTE_CONTRACTS.items():
+        for group_name in ("proposal_routes", "confirm_routes"):
+            for path in getattr(contract, group_name):
+                routes = _route_method_rows(path, {"POST"})
+                if not routes:
+                    missing_mounts.append(f"{verb.value}:{group_name}:POST:{path}")
+                    continue
+                for route in routes:
+                    if not _has_get_current_user_dependency(route):
+                        missing_auth.append(f"{verb.value}:{group_name}:POST:{path}")
+                    if not _has_require_role_dependency(route):
+                        missing_role_gate.append(f"{verb.value}:{group_name}:POST:{path}")
+
+        for path in contract.raw_mutation_routes:
+            routes = _route_method_rows(path, write_methods)
+            if not routes:
+                missing_mounts.append(f"{verb.value}:raw_mutation_routes:{path}")
+                continue
+            for route in routes:
+                methods = sorted(_route_methods(route) & write_methods)
+                row = f"{verb.value}:raw_mutation_routes:{methods}:{path}"
+                if not _has_get_current_user_dependency(route):
+                    missing_auth.append(row)
+                if not _has_require_role_dependency(route):
+                    missing_role_gate.append(row)
+
+    assert not missing_mounts
+    assert not missing_auth
+    assert not missing_role_gate
 
 
 def test_contract_route_table_scan_does_not_issue_requests_or_grant_authority():

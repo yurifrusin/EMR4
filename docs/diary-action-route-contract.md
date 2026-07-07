@@ -49,3 +49,6 @@ confirmation affordance exist.
   inventory preflight match the mounted route table after documented contract
   rows are removed. This is a static cross-check only and does not make those
   support routes grammar authority.
+- Documented write contract routes are auth- and role-gated in FastAPI metadata:
+  proposal, confirm, and raw mutation write-method rows must resolve through
+  `get_current_user` and the `require_role` checker without executing handlers.
