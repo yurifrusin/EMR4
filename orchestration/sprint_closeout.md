@@ -7676,6 +7676,58 @@ wiring.
 
 ---
 
+## Sprint 149 Closeout - Create-Proposal Replay Model Decision
+
+Publication state:
+
+- Integration commit SHA: `pending Sprint 149 closeout commit`.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Programme position:
+
+- Phase/programme: Programme 2G / EMR4 API Spine.
+- Classification: replay-model policy decision.
+- Larger objective advanced: create-proposal idempotency now has an explicit
+  semantics choice before route enforcement wiring.
+- Next planned step: Sprint 150 create-proposal route wiring with deterministic
+  re-evaluation semantics only.
+
+Integrated outcome:
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_create_proposal_replay_model.md`.
+- Added `tests/test_api_spine_create_proposal_replay_model_decision.py`.
+- Integrated DeepSeek's Sprint 149 review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint149-create-proposal-replay-model.md`.
+- Selected deterministic re-evaluation with required syntactic
+  `Idempotency-Key` as the future create-proposal model.
+- Rejected short-retention proposal markers and stored proposal-envelope replay
+  for the first create-proposal pass.
+- Recorded that future wiring is header-only, syntactic validation only,
+  `proposeAppointmentCreate` is logging/review metadata only, and no
+  `AppointmentCommandIdempotency` rows are created.
+- Recorded that same-key/same-body and same-key/different-body retries should
+  return fresh proposal evaluations, not cached envelopes or `409` conflicts.
+- No route behavior changed. Raw compatibility, other proposal families,
+  provider, GraphQL, H15/H-series, memory/RAG/GraphRAG, and historical diary
+  trove gates remain closed.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_api_spine_create_proposal_replay_model_decision.py -q
+```
+
+Result: `9 passed`; existing Starlette and Google GenAI deprecation warnings
+only.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is create-proposal route wiring with deterministic
+re-evaluation semantics only.
+
+---
+
 ## Sprint 148 Closeout - Create-Proposal Idempotency Route-Test Contract
 
 Publication state:
