@@ -24,10 +24,42 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 180 Prompt-Thread Proposal-Guard Backlog Slice |
+| Batch | Sprint 181 H63/H64 Proposal-Guard Backlog Slice |
 | Integrated through | Ariadne narrow docs triage with DeepSeek sidecar confirmation |
-| Status | Integrated and pushed |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 181 What Changed
+
+- Added exact proposal-surface guard citations to
+  `docs/adversarial/h64_interpretation_readiness_independent_review.md`.
+- The citations include the required readiness and provider-boundary commands
+  plus compact closed values such as `runtime_or_provider_wiring_ready=false`,
+  `raw_trove_access_ready=false`, `runtime_gate_decision=blocked`,
+  `live_provider_enabled=false`, and no provider/DB/memory/trove activity.
+- The H63/H64 review-doc slice now passes the proposal-surface guard directly.
+
+Sprint 181 is a narrow recent-review-doc backlog triage sprint. It does not
+change runtime code, routes, provider configuration, database behavior, memory,
+RAG, GraphRAG, H15/H-series imports, historical diary processing, GraphQL
+mutations, or model-to-database write authority.
+
+Worker mix:
+
+- DeepSeek confirmed the patched H64 pattern passes the guard and asserts
+  blocked/false status rather than readiness.
+
+## Sprint 181 Verification
+
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\adversarial\h63_interpretation_independent_review_brief.md docs\adversarial\h64_interpretation_readiness_independent_review.md`
+  passed.
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_report.py docs orchestration`
+  returned `missing_readiness_count=447`, `unreadable_markdown_count=2`, and
+  `total_fail_closed_findings_count=449`, down from Sprint 180's 448/2/450.
+- `git diff --check` passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 180 What Changed
 
