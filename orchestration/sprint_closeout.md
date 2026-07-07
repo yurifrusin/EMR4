@@ -24,10 +24,69 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 190 Scenario Evidence Snapshot |
-| Integrated through | Ariadne implementation with Antigravity and two DeepSeek lanes |
+| Batch | Sprint 191 Diary Route Endpoint Coverage Scan |
+| Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek recommendations |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
+
+## Sprint 191 What Changed
+
+- Added `tests/test_diary_action_route_endpoint_coverage.py`, a static FastAPI
+  route-table scan proving every route documented in
+  `DIARY_ACTION_ROUTE_CONTRACTS` is mounted on `app.main:app`.
+- Corrected the static `slot_search` read-route contract from stale
+  `/api/v1/appointments/bernie/interpret` to mounted
+  `/api/v1/appointments/proposals/bernie/interpret-booking-instruction`.
+- Added `docs/diary-action-route-endpoint-coverage.md` documenting the static
+  route-registry boundary and anti-overclaim posture.
+
+Worker mix:
+
+- Claude, Antigravity, and DeepSeek all recommended moving from micro-fixtures
+  to a route table reconciliation / endpoint coverage scan.
+- Ariadne implemented the integrated slice.
+- No worker-lane substitution was needed for Sprint 191.
+
+Boundary:
+
+- Static FastAPI `APIRoute` registry scan only.
+- No HTTP requests, route handler execution, database session, provider calls,
+  memory/RAG/GraphRAG access, H15/H-series runtime imports, historical diary
+  material access, GraphQL mutation, or writes.
+- Endpoint existence does not prove route behavior, authorization,
+  idempotency, confirmation evidence, provider quality, or availability
+  quality.
+- Runtime/provider wiring remains blocked; live-provider and provider-quality
+  evidence remain false.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q
+.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q
+git diff --check
+```
+
+Result: endpoint coverage `4 passed`; route contract `12 passed`; scenario
+integrity `8 passed, 1 skipped`; scenario replay `.x................................`;
+readiness/provider reports stayed blocked/false; leakage lint safe; whitespace
+check clean. Parallel pytest attempts hit the known Postgres enum DDL
+`userrole` duplicate-type race and passed when rerun serially.
+
+Implementation commit: `48e2f8ba`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded backend-readiness with route-method/path shadow
+checks, route contract behavior checks, or another genuinely uncovered
+route-level prompt-thread fixture.
+
+---
 
 ## Sprint 190 What Changed
 
