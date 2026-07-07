@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 156 Status/Delete Confirm Client Header Emission |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude and Antigravity plan reviews integrated; DeepSeek adversarial review accepted |
-| Status | Pending Sprint 156 commit/push |
+| Status | Committed locally; push pending |
 | Last updated | 2026-07-07 |
 
 ## Sprint 156 What Changed
@@ -76,7 +76,7 @@ Every closeout entry should record:
 
 Publication state:
 
-- Integration commit SHA: pending Sprint 156 integration commit.
+- Integration commit SHA: `475cfef`.
 - Closeout metadata commit SHA: pending.
 - Push result: pending.
 - Final `git status --short --branch`: pending final closeout check.

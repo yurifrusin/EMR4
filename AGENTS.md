@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 156 status/delete confirm client header emission implemented locally; Diary status-confirm and delete-confirm now send freshness-derived HTTP `Idempotency-Key` headers while raw PATCH/DELETE fallbacks stay header-free |
+| **Current active track** | Sprint 156 status/delete confirm client header emission implemented in commit `475cfef`; Diary status-confirm and delete-confirm now send freshness-derived HTTP `Idempotency-Key` headers while raw PATCH/DELETE fallbacks stay header-free |
 | **Next recommended work** | Sprint 157 should address update-confirm client header emission, including modal update and drag/reschedule update-confirm call sites, before proposal-only backend binding or strict `minLength: 8` enforcement |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
