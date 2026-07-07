@@ -29,6 +29,9 @@ The current executable `interpret_*` corpus covers two slices:
 - context-threading prompts: omitted `context_frames` auto-threads prior
   requested appointment context, while explicit `context_frames: []` clears the
   thread and asks again;
+- explicit-frame prompts: caller-supplied `requested_appointment` frames can
+  provide prior appointment fields directly while current instruction fields
+  still win;
 - partial-override prompts: follow-up wording can change one threaded field,
   such as practitioner, while preserving the remaining patient/date/time/
   duration fields;

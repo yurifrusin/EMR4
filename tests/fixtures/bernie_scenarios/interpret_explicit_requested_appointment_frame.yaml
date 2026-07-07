@@ -1,0 +1,50 @@
+id: interpret_explicit_requested_appointment_frame
+category: booking_interpret_contract
+description: >
+  An explicit requested_appointment context frame can provide prior appointment
+  fields directly, while the current instruction still wins for the updated
+  time.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Actually make it 09:30"
+      context_frames:
+        - frame_type: requested_appointment
+          payload:
+            patient_id: "{patient_id}"
+            practitioner_id: "{practitioner_id}"
+            date_from: "2026-07-14"
+            earliest_time: "09:00"
+            duration_minutes: "20"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": "2026-07-14"
+        "command_candidate.earliest_time": "09:30"
+        "command_candidate.duration_minutes": "20"
+        "assumptions.0.field": clarification_merge
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

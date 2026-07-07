@@ -24,10 +24,57 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 171 Reset/No-Prior Context Matrix |
-| Integrated through | Ariadne fixture implementation; DeepSeek Flash adversarial review; DeepSeek Flash implementation-suggestion lane; Claude/Antigravity packets dispatched but external mirrors were stale/dirty and not run |
-| Status | Integrated and pushed |
+| Batch | Sprint 172 Explicit Requested-Appointment Frame Fixture |
+| Integrated through | Ariadne direct fixture implementation from Sprint 171 DeepSeek recommendation; no new worker dispatch because scope was a single test-only YAML fixture |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 172 What Changed
+
+- Added `interpret_explicit_requested_appointment_frame.yaml`, proving that a
+  caller-supplied `requested_appointment` frame can provide prior appointment
+  fields directly in `context_frames`.
+- The fixture asserts that current-turn instruction text still wins for the
+  updated time: explicit frame payload supplies patient/practitioner/date/
+  duration, while the instruction changes `earliest_time` from `09:00` to
+  `09:30`.
+- Updated the Bernie scenario corpus README to record explicit-frame prompt
+  coverage.
+
+Sprint 172 is a tiny fixture-only guardrail hardening pass inside the Programme
+2D Reception Copilot Readiness / Programme 2G Bernie API Spine
+review-readiness track. It directly consumes a Sprint 171 DeepSeek
+recommendation and closes the highest-value remaining context-frame coverage
+gap without changing runtime code.
+
+Worker mix:
+
+- Ariadne-only implementation was chosen because the accepted recommendation
+  was one test-only YAML fixture with an obvious route helper contract.
+- The Sprint 171 DeepSeek adversarial artifact is the source review for this
+  follow-on. No new Claude/Antigravity run was launched while their durable
+  mirrors remain stale/dirty.
+
+Sprint 172 does not open runtime route wiring from the provider-free
+interpretation harness, provider prompt/dry-run wiring, live-provider enablement,
+memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary material
+access, GraphQL mutations, or model-to-database writes.
+
+## Sprint 172 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -k interpret_explicit_requested_appointment_frame -q`
+  (`1 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  (`.x.........................`; one pre-existing xfail, existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+
+Sprint engine state: continuing. No user intervention is required. Next planned
+step is either DeepSeek's remaining multi-frame reset fixture or the narrow
+non-intercepted fake-provider backend pass.
+
+---
 
 ## Sprint 171 What Changed
 
