@@ -24,10 +24,68 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 158 Confirm Client Surface Checkpoint |
+| Batch | Sprint 159 Bernie Tool-Intent Confirm Client Header |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude/Antigravity lanes replaced by additional DeepSeek reviews due tool/usage friction; DeepSeek adversarial review accepted |
-| Status | Committed and pushed; sprint engine continuing |
+| Status | Committed locally; push pending |
 | Last updated | 2026-07-07 |
+
+## Sprint 159 What Changed
+
+- Updated `docs/diary/diary.js` so `confirmBernieToolIntentChange()` sends HTTP
+  `Idempotency-Key` to the signed update-confirm endpoint.
+- Reused the same freshness-derived key strategy as ordinary update-confirm:
+  `update-confirm-{update_proposal_freshness_id}` through
+  `updateConfirmIdempotencyKey(envelope, confirmPayload)`.
+- Bumped `docs/diary/diary.html` to `diary.js?v=179`.
+- Updated the Bernie tool-intent route-intercepted smoke test to capture and
+  assert `update-confirm-fresh-tool-1`.
+- Updated API-spine header inventory/checkpoint tests and living docs so the
+  tool-intent confirm gap is now closed.
+- Added
+  `orchestration/api_spine_appointment_idempotency_bernie_tool_intent_confirm_client_header.md`.
+- Integrated worker lanes:
+  - DeepSeek confirmed the user-clickable missing-header bug and the small fix.
+  - Replacement Claude-lane DeepSeek confirmed freshness-derived keying is
+    API-spine correct for the update-confirm route family.
+  - Replacement Antigravity-lane DeepSeek confirmed smoke coverage captures the
+    header and no UI/provider/backend scope expanded.
+
+## Sprint 159 Verification
+
+- `node --check docs\diary\diary.js`.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py`
+  (`[PASSED] Verification Passed: All modified assets have appropriate version bumps`).
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_frontend_header_inventory.py tests\test_api_spine_confirm_client_surface_checkpoint.py -q`
+  (`13 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_tool_intent_extension_proposal_renders_and_confirms -q`
+  (`1 passed`).
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_frontend_header_inventory.py tests\test_api_spine_confirm_client_surface_checkpoint.py tests\test_api_spine_artifacts.py -q`
+  (`44 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_tool_intent_extension_proposal_renders_and_confirms review\test_diary_smoke.py::test_human_drag_resize_uses_signed_update_confirm_route review\test_diary_smoke.py::test_edit_modal_uses_signed_update_confirm_before_status_patch -q`
+  (`3 passed`).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean.
+
+Publication state:
+
+- Dispatch commit SHA: `bc31b10`.
+- Implementation commit SHA: `710e1b9`.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending.
+
+Strategic position: Sprint 159 is **Programme 2G / EMR4 API Spine** client
+readiness. It closes the last known enforced confirm-client header gap before a
+meaningful integrated Bernie/Diary review-readiness packet.
+
+Sprint engine state: continuing after push. Next recommended slice is Sprint
+160: prepare the Bernie/Diary review-readiness packet, run the required
+readiness/provider-boundary checks, and pause for Yuri if checks pass.
+
+---
+
+## Previous Closeout - Sprint 158
 
 ## Sprint 158 What Changed
 
