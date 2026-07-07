@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 169 Temporal Drift Follow-Up Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Integrated locally; publication pending this closeout commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 169 What Changed
@@ -78,9 +78,11 @@ material access, GraphQL mutations, or model-to-database writes.
 Publication state:
 
 - Implementation commit SHA: `1f3268f6`.
-- Closeout metadata commit SHA: pending.
-- Push result: pending.
-- Final `git status --short --branch`: pending publication.
+- Closeout metadata commit SHA: `2f8704fe`.
+- Push result: `origin/master`, `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` aligned at Sprint 169 final
+  closeout head.
+- Final `git status --short --branch`: clean after publication push.
 
 Strategic position: Sprint 169 locks a subtle reference-date drift behavior that
 automated prompt troubleshooting will need before broader backend or provider
