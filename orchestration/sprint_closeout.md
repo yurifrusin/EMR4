@@ -71,7 +71,7 @@ Publication state:
 
 - Dispatch commit SHA: `bc31b10`.
 - Implementation commit SHA: `710e1b9`.
-- Closeout metadata commit SHA: pending.
+- Closeout metadata commit SHA: `a7cf880`.
 - Push result: pending.
 - Final `git status --short --branch`: pending.
 
