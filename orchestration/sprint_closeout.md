@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 164 Context Date Precedence Fixtures |
 | Integrated through | Fable-directed prompt-thread automation; Antigravity CLI product review; replacement DeepSeek review after Claude session limit |
-| Status | Closeout publication metadata in progress |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 164 What Changed
@@ -74,9 +74,12 @@ material access, GraphQL mutations, or model-to-database writes.
 Publication state:
 
 - Implementation commit SHA: `9eb3a6a5`.
-- Closeout metadata commit SHA: this publication metadata commit.
-- Push result: pending final push.
-- Final `git status --short --branch`: pending.
+- Closeout metadata commit SHA: `7a9659a4`.
+- Push result: `origin/master`, `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` aligned at the Sprint 164
+  publication commit.
+- Final `git status --short --branch`: clean except the expected branch header
+  after publication push.
 
 Strategic position: Sprint 164 continues the small authored prompt-automation
 track by proving context precedence before any broader backend or provider
