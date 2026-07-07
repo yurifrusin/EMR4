@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 167 Practitioner Override Context Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Integrated and publication status recorded; push pending |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 167 What Changed
@@ -81,7 +81,9 @@ Publication state:
 
 - Implementation commit SHA: `2620bed1`.
 - Closeout metadata commit SHA: `0fbd5ee8`.
-- Push result: pending final ref push.
+- Push result: `origin/master`, `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` aligned at Sprint 167
+  publication commit `f8d1b33e`.
 - Final `git status --short --branch`: clean after publication-status commit.
 
 Strategic position: Sprint 167 locks a realistic "change one thing, keep the
