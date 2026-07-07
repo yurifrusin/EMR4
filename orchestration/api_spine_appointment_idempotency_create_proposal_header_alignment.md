@@ -31,8 +31,10 @@ enforcement deferred. The decision is recorded in
 `orchestration/api_spine_appointment_idempotency_create_proposal_minlength_readiness.md`.
 The important evidence is that the real diary create-proposal caller still has
 to prove the non-blank header path, and the sibling proposal handlers
-`propose_update_appointment`, `propose_status_update`, and
-`propose_delete_appointment` do not yet bind `Idempotency-Key` in FastAPI.
+`propose_update_appointment`, `propose_status_update`,
+`propose_waiting_area_update`, and `propose_delete_appointment` do not yet bind
+`Idempotency-Key` in FastAPI. `propose_waiting_area_update` is a handler-level
+variant of the OpenAPI status/waiting-area proposal family.
 
 ## Preserved Replay Model
 
@@ -68,8 +70,8 @@ proposal-confirm routes and their appointment command ledger.
 - all four canonical OpenAPI proposal operations keep referencing the shared
   `IdempotencyKey` parameter;
 - the current FastAPI proposal-header binding gap is explicit for
-  `propose_update_appointment`, `propose_status_update`, and
-  `propose_delete_appointment`;
+  `propose_update_appointment`, `propose_status_update`,
+  `propose_waiting_area_update`, and `propose_delete_appointment`;
 - the Sprint 152 minLength decision has named client-readiness preconditions;
 - adjacent command gates remain closed.
 

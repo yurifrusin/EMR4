@@ -36,10 +36,13 @@ accepts that as the likely client-fix direction, but not as evidence that the
 current runtime is ready for stricter rejection.
 
 DeepSeek's adversarial review found the wider API-spine gap: 3 of 4 canonical
-OpenAPI proposal operations do not yet bind `Idempotency-Key` in FastAPI:
+OpenAPI proposal operations do not yet bind `Idempotency-Key` in FastAPI.
+Sprint 154 later made the handler-level inventory explicit by adding the
+waiting-area proposal variant under the status/waiting-area family:
 
 - `propose_update_appointment`
 - `propose_status_update`
+- `propose_waiting_area_update`
 - `propose_delete_appointment`
 
 Only `propose_create_appointment` currently binds the header. Tightening

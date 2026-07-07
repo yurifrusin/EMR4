@@ -24,10 +24,62 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 153 Diary Create-Proposal Client Header Readiness |
-| Integrated through | Ariadne integration with EMR4 API Steward skill; Claude plan accepted; Antigravity implementation integrated; DeepSeek adversarial review accepted |
-| Status | Committed and pushed; sprint engine continuing |
+| Batch | Sprint 154 Diary/API Header Gap Preflight |
+| Integrated through | Ariadne integration with EMR4 API Steward skill; Claude and Antigravity plan reviews integrated; DeepSeek adversarial review accepted |
+| Status | Pending Sprint 154 commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 154 What Changed
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_diary_header_gap_preflight.md`.
+- Added `tests/test_api_spine_frontend_header_inventory.py`, a source-derived
+  frontend inventory guard for current Diary `Idempotency-Key` header emission
+  and explicitly missing confirm/proposal headers.
+- Strengthened
+  `tests/test_api_spine_create_proposal_header_alignment.py` so the
+  handler-level proposal binding gap includes `propose_waiting_area_update` as
+  the status/waiting-area proposal variant.
+- Updated the Sprint 151/152 header-alignment/readiness docs to name the
+  waiting-area proposal handler gap.
+- Integrated worker lanes:
+  - DeepSeek found only one current frontend HTTP `Idempotency-Key` emitter
+    and identified five already-enforced confirmation routes with missing
+    Diary client headers.
+  - Claude recommended a stable per-proposal confirm key so retries use the
+    existing confirmation ledger replay path.
+  - Antigravity agreed create-confirm/confirm-Bernie is the safest next slice;
+    Ariadne recorded its fresh-per-attempt key suggestion as dissent because it
+    would weaken replay semantics.
+- No runtime route behavior, OpenAPI schema, idempotency ledger semantics,
+  provider, GraphQL, H15/H-series, memory/RAG/GraphRAG, or raw compatibility
+  write behavior changed.
+
+## Sprint 154 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_frontend_header_inventory.py tests\test_api_spine_create_proposal_header_alignment.py -q`
+  (`13 passed`; existing Starlette/Google GenAI warnings only).
+- `git diff --check` clean.
+
+Publication state:
+
+- Integration commit SHA: pending Sprint 154 integration commit.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Strategic position: Sprint 154 is **Programme 2G / EMR4 API Spine** preflight
+and guardrail hardening. It clarifies that create-proposal client readiness is
+not enough by itself: the next live break is the missing HTTP header on
+already-enforced create-confirm and confirm-Bernie routes.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 155:
+wire create-confirm and confirm-Bernie client header emission first, using a
+stable per-proposal confirm key and preserving backend ledger/runtime behavior.
+
+---
+
+## Previous Closeout - Sprint 153
 
 ## Sprint 153 What Changed
 

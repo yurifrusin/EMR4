@@ -31,6 +31,7 @@ PROPOSAL_OPERATION_PATHS = {
 UNWIRED_PROPOSAL_HANDLERS = (
     "propose_update_appointment",
     "propose_status_update",
+    "propose_waiting_area_update",
     "propose_delete_appointment",
 )
 
