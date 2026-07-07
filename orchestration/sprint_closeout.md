@@ -24,10 +24,74 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 197 Auth-Gating Metadata Checks |
+| Batch | Sprint 198 Support Route Non-Grammar Boundary |
 | Integrated through | Ariadne implementation with Claude, Antigravity via `agy.exe`, and DeepSeek reviews |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
+
+## Sprint 198 What Changed
+
+- Added `docs/appointment-support-routes-infrastructure-boundary.md` to define
+  the current out-of-contract appointment POST sub-families as infrastructure,
+  not Diary grammar dispatch authority.
+- Updated `docs/appointment-route-inventory-preflight.md` to cite the Sprint 198
+  boundary and the current aggregate split: `proposal_support_post=7`,
+  `state_tracking_post=2`, and `ambiguous_post=0`.
+- Strengthened `tests/test_appointment_route_inventory_preflight.py` so
+  ambiguous out-of-contract appointment POST rows must remain zero.
+- Integrated Claude and Antigravity Sprint 198 review artifacts under
+  `orchestration/agent_inbox/codex/`.
+
+Worker mix:
+
+- Claude recommended staying in the aggregate preflight boundary rather than
+  adding support routes to `DIARY_ACTION_ROUTE_CONTRACTS`.
+- Antigravity ran through `agy.exe` and recommended explicit support-route drift
+  guards while keeping the infrastructure/grammar distinction clear.
+- DeepSeek recommended the zero-ambiguous guard and a dedicated boundary doc.
+
+Boundary:
+
+- Static route-table and documentation guard only.
+- No route handler execution, HTTP requests, database session, provider calls,
+  memory/RAG/GraphRAG access, H15/H-series runtime imports, historical diary
+  material access, GraphQL access, or writes.
+- The change does not add support routes to the Diary action contract, promote
+  planned verbs, authorize runtime/provider wiring, or expand grammar authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_appointment_route_inventory_preflight.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe scripts\appointment_route_inventory_preflight.py
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: inventory preflight tests `24 passed` after serial rerun; endpoint
+coverage `12 passed`; route contract `12 passed` after serial rerun; inventory
+script emitted safe aggregate counts with `proposal_support_post=7` and
+`state_tracking_post=2`; API spine artifacts `31 passed`; scenario integrity
+`8 passed, 1 skipped`; readiness/provider reports stayed blocked/false;
+leakage lint safe; whitespace check clean. An initial parallel pytest invocation
+hit the known PostgreSQL enum DDL race (`userrole` duplicate type); serial
+reruns passed.
+
+Implementation commit: `457d6614`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is a bounded idempotency/audit metadata preflight for
+documented appointment command surfaces while provider/runtime gates remain
+blocked.
+
+---
 
 ## Sprint 197 What Changed
 
