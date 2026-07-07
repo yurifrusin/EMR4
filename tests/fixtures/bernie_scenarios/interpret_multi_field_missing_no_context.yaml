@@ -1,0 +1,43 @@
+id: interpret_multi_field_missing_no_context
+category: booking_interpret_contract
+description: >
+  A bare patient-only booking request without usable diary context asks for
+  missing appointment details instead of guessing practitioner or date.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: clarification_required
+        safe: false
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": null
+        "command_candidate.date_from": null
+        "missing_fields.0": practitioner_id
+        "missing_fields.1": date_from
+        "clarifying_question": "I need the doctor or nurse, and the day before I search."
+        "normalization.safe": false
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

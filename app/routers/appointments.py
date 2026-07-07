@@ -3725,7 +3725,7 @@ def _resolve_bernie_interpretation_context(
     pre_resolved_practitioner_axis: Optional[BernieConfidenceAxis] = None
     pre_resolved_practitioner_assumptions: list[BernieAssumption] = []
 
-    if not command_values.get("practitioner_id"):
+    if not _valid_uuid_text(command_values.get("practitioner_id")):
         practitioner_id, warnings, practitioner_axis, pr_assumptions = (
             _resolve_practitioner_from_instruction(
                 instruction_tokens,
@@ -4121,9 +4121,9 @@ def _resolve_bernie_interpretation_context(
     )
 
     # ── First-person clarifying copy ──────────────────────────────────────────
-    clarifying: Optional[str] = temporal_clarifying
+    clarifying: Optional[str] = _bernie_clarifying_question(missing_fields)
     if not clarifying:
-        clarifying = _bernie_clarifying_question(missing_fields)
+        clarifying = temporal_clarifying
     # Add patient-specific clarifying copy if needed
     if not clarifying and all_patient_candidates:
         clarifying = "I could not find an exact patient match — did you mean one of these patients?"

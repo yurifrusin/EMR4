@@ -31,7 +31,9 @@ The current executable `interpret_*` corpus covers two slices:
   thread and asks again;
 - partial-override prompts: follow-up wording can change one threaded field,
   such as practitioner, while preserving the remaining patient/date/time/
-  duration fields.
+  duration fields;
+- multi-field-missing prompts: patient-only booking requests without context ask
+  for missing practitioner/date details instead of guessing.
 
 Unknown patient-name fixtures deliberately assert the current route contract:
 the interpret layer may still produce a slot-search command when practitioner
