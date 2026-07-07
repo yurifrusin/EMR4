@@ -1,12 +1,16 @@
 <#
 .SYNOPSIS
-    Select keyless Bernie Google ADC for local EMR4 live AI testing.
+    Select keyless Bernie Google ADC for local EMR4 Bernie development.
 
 .DESCRIPTION
     Configures gcloud and Application Default Credentials to impersonate the
     Bernie dev service account. Also sets PowerShell environment variables for
     the current process so child processes, such as uvicorn launched by
     run_dev.ps1, use the Bernie project and australia-southeast1 region.
+
+    The Bernie booking interpreter provider remains fake by default because the
+    runtime/provider gate is currently blocked. Use -EnableLiveProvider only for
+    an explicitly approved live-provider smoke.
 
     This script intentionally removes GOOGLE_APPLICATION_CREDENTIALS from the
     current process so local live tests use ADC impersonation rather than JSON
@@ -16,10 +20,16 @@
     Set environment variables and gcloud's active project, but do not revoke or
     recreate ADC. Use only when ADC is already known to point at this service
     account.
+
+.PARAMETER EnableLiveProvider
+    Set BERNIE_BOOKING_INTERPRETER_PROVIDER=gemini_vertex for an explicitly
+    approved live-provider smoke. While the runtime/provider gate is blocked,
+    this will intentionally prevent the backend from starting.
 #>
 
 param(
-    [switch]$SkipAdcLogin
+    [switch]$SkipAdcLogin,
+    [switch]$EnableLiveProvider
 )
 
 Set-StrictMode -Version Latest
@@ -73,7 +83,15 @@ $env:BERNIE_AI_LOCATION = $Location
 $env:BERNIE_STAFF_PILOT_ENABLED = "true"
 $env:BERNIE_STAFF_PILOT_PRACTICE_IDS = $DevPracticeId
 Remove-Item Env:BERNIE_STAFF_PILOT_USER_IDS -ErrorAction SilentlyContinue
-$env:BERNIE_BOOKING_INTERPRETER_PROVIDER = "gemini_vertex"
+if ($EnableLiveProvider) {
+    $env:BERNIE_BOOKING_INTERPRETER_PROVIDER = "gemini_vertex"
+    Write-Warning (
+        "Live Bernie provider selected. The backend will fail closed while " +
+        "docs/bernie-interpretation-harness-runtime-gate.json remains blocked."
+    )
+} else {
+    $env:BERNIE_BOOKING_INTERPRETER_PROVIDER = "fake"
+}
 
 Write-Host ""
 Write-Host "  [OK] Bernie ADC/env selected" -ForegroundColor Green
@@ -81,3 +99,6 @@ Write-Host "       GCP_PROJECT=$env:GCP_PROJECT" -ForegroundColor Gray
 Write-Host "       BERNIE_STAFF_PILOT_ENABLED=$env:BERNIE_STAFF_PILOT_ENABLED" -ForegroundColor Gray
 Write-Host "       BERNIE_BOOKING_INTERPRETER_PROVIDER=$env:BERNIE_BOOKING_INTERPRETER_PROVIDER" -ForegroundColor Gray
 Write-Host "       Service account: $ServiceAccount" -ForegroundColor Gray
+if (-not $EnableLiveProvider) {
+    Write-Host "       Live Bernie provider remains blocked; using fake provider for local review." -ForegroundColor Gray
+}

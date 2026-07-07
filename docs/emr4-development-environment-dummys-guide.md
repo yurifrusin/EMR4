@@ -267,7 +267,10 @@ Centre. For Bernie diary testing:
 .\run_dev.ps1 -LiveAiSurface Diary
 ```
 
-uses the Bernie dev project and enables the live Bernie interpreter provider.
+uses the Bernie dev project, enables the staff pilot gate, and keeps the Bernie
+booking interpreter on the fake provider while the runtime/provider gate is
+blocked. Use `-EnableLiveProvider` only for an explicitly approved
+live-provider smoke.
 
 ### `run_dev.ps1` Switch Reference
 
@@ -278,9 +281,10 @@ backend starts; it is not switched dynamically inside a running backend process.
 |---|---|
 | `.\run_dev.ps1` | Normal local development. Starts the full stack without changing local ADC impersonation. Good for fake-provider or non-AI work. |
 | `.\run_dev.ps1 -LiveAiSurface Taskpane` | Live doctor taskpane / Command Centre testing. Switches ADC and environment to `scribe-emr4-dev`. |
-| `.\run_dev.ps1 -LiveAiSurface Diary` | Live Bernie diary testing. Switches ADC and environment to `bernie-emr4-dev`, enables the Bernie staff pilot gate for the dev practice, and enables the live Gemini Vertex interpreter. |
+| `.\run_dev.ps1 -LiveAiSurface Diary` | Bernie diary review. Switches ADC and environment to `bernie-emr4-dev`, enables the Bernie staff pilot gate for the dev practice, and keeps the fake provider by default. |
 | `.\run_dev.ps1 -LiveAiSurface Taskpane -SkipAdcLogin` | Taskpane live AI when ADC is already impersonating the Scribe service account. Avoids opening the browser login flow again. |
-| `.\run_dev.ps1 -LiveAiSurface Diary -SkipAdcLogin` | Bernie live AI when ADC is already impersonating the Bernie service account. Avoids opening the browser login flow again. |
+| `.\run_dev.ps1 -LiveAiSurface Diary -SkipAdcLogin` | Bernie diary review when ADC is already impersonating the Bernie service account. Avoids opening the browser login flow again and keeps the fake provider by default. |
+| `.\run_dev.ps1 -LiveAiSurface Diary -EnableLiveProvider` | Approved Bernie live-provider smoke only. Sets `BERNIE_BOOKING_INTERPRETER_PROVIDER=gemini_vertex` and will fail closed while the provider gate is blocked. |
 | `.\run_dev.ps1 -NoNgrok` | Start Docker, backend, and npm dev server only. Useful on a second PC or when another machine owns the reserved ngrok domain. |
 | `.\run_dev.ps1 -NoDevServer` | Start Docker, backend, and ngrok only. Useful when the npm static server is already running or not needed. |
 | `.\run_dev.ps1 -NoNgrok -NoDevServer` | Backend-only local work with Docker Postgres. |

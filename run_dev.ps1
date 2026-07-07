@@ -19,19 +19,26 @@
 
 .PARAMETER LiveAiSurface
     Select keyless live-AI ADC/env for the surface being tested.
-    Taskpane = Scribe/Copilot project. Diary = Bernie project. None = no live
-    ADC switch.
+    Taskpane = Scribe/Copilot project. Diary = Bernie project with the fake
+    Bernie booking interpreter unless -EnableLiveProvider is explicitly passed.
+    None = no live ADC switch.
 
 .PARAMETER SkipAdcLogin
     With -LiveAiSurface, set project/env only and do not recreate ADC. Use when
     ADC is already known to point at the matching service account.
+
+.PARAMETER EnableLiveProvider
+    With -LiveAiSurface Diary, set BERNIE_BOOKING_INTERPRETER_PROVIDER to
+    gemini_vertex for an explicitly approved live-provider smoke. While the
+    Bernie runtime/provider gate is blocked, this intentionally fails closed.
 
 .EXAMPLE
     .\run_dev.ps1                        # Start everything
     .\run_dev.ps1 -Down                  # Stop app processes (leave Postgres)
     .\run_dev.ps1 -NoDevServer -NoNgrok  # Backend only
     .\run_dev.ps1 -LiveAiSurface Taskpane # Live Scribe/Copilot test
-    .\run_dev.ps1 -LiveAiSurface Diary    # Live Bernie/diary test
+    .\run_dev.ps1 -LiveAiSurface Diary    # Bernie diary review with fake provider
+    .\run_dev.ps1 -LiveAiSurface Diary -EnableLiveProvider # approved live-provider smoke only
 #>
 
 param(
@@ -40,7 +47,8 @@ param(
     [switch]$NoNgrok,
     [ValidateSet("None", "Taskpane", "Diary")]
     [string]$LiveAiSurface = "None",
-    [switch]$SkipAdcLogin
+    [switch]$SkipAdcLogin,
+    [switch]$EnableLiveProvider
 )
 
 Set-StrictMode -Version Latest
@@ -167,7 +175,7 @@ function Show-StatusRow([string]$Name, [bool]$Up, [string]$Detail) {
     Write-Host ("  {0} {1,-24} {2}" -f $icon, $Name, $Detail) -ForegroundColor $color
 }
 
-function Invoke-LiveAiSetup([string]$Surface) {
+function Invoke-LiveAiSetup([string]$Surface, [bool]$SkipAdcLoginForSurface, [bool]$EnableLiveProviderForDiary) {
     if ($Surface -eq "None") {
         Write-Warn "No live AI ADC selected. Scribe/Bernie live provider calls may fail unless configured separately."
         return
@@ -179,9 +187,12 @@ function Invoke-LiveAiSetup([string]$Surface) {
         exit 1
     }
 
-    $scriptArgs = @()
-    if ($SkipAdcLogin) {
-        $scriptArgs += "-SkipAdcLogin"
+    $scriptArgs = @{}
+    if ($SkipAdcLoginForSurface) {
+        $scriptArgs["SkipAdcLogin"] = $true
+    }
+    if ($Surface -eq "Diary" -and $EnableLiveProviderForDiary) {
+        $scriptArgs["EnableLiveProvider"] = $true
     }
 
     try {
@@ -196,7 +207,7 @@ function Invoke-LiveAiSetup([string]$Surface) {
     }
 }
 
-function Get-UvicornEnvCommand([string]$Surface) {
+function Get-UvicornEnvCommand([string]$Surface, [bool]$EnableLiveProviderForDiary) {
     $common = "Remove-Item Env:GOOGLE_APPLICATION_CREDENTIALS -ErrorAction SilentlyContinue; "
     if ($Surface -eq "Taskpane") {
         return $common +
@@ -212,6 +223,7 @@ function Get-UvicornEnvCommand([string]$Surface) {
             "Remove-Item Env:BERNIE_BOOKING_INTERPRETER_PROVIDER -ErrorAction SilentlyContinue; "
     }
     if ($Surface -eq "Diary") {
+        $provider = if ($EnableLiveProviderForDiary) { "gemini_vertex" } else { "fake" }
         return $common +
             "`$env:GCP_PROJECT='bernie-emr4-dev'; " +
             "`$env:GOOGLE_CLOUD_PROJECT='bernie-emr4-dev'; " +
@@ -222,7 +234,7 @@ function Get-UvicornEnvCommand([string]$Surface) {
             "`$env:BERNIE_STAFF_PILOT_ENABLED='true'; " +
             "`$env:BERNIE_STAFF_PILOT_PRACTICE_IDS='d92314e3-aa1d-441e-81a5-f5db5ec22ca0,addca958-85e0-4be5-aacc-38e88e5909dd'; " +
             "Remove-Item Env:BERNIE_STAFF_PILOT_USER_IDS -ErrorAction SilentlyContinue; " +
-            "`$env:BERNIE_BOOKING_INTERPRETER_PROVIDER='gemini_vertex'; "
+            "`$env:BERNIE_BOOKING_INTERPRETER_PROVIDER='$provider'; "
     }
     return $common
 }
@@ -339,7 +351,10 @@ if (-not $NoDevServer) {
 # -- 2. Live AI ADC/env --------------------------------------------------------
 
 Write-Step "2/6  Live AI ADC/env selection..."
-Invoke-LiveAiSetup $LiveAiSurface
+Invoke-LiveAiSetup `
+    -Surface $LiveAiSurface `
+    -SkipAdcLoginForSurface ([bool]$SkipAdcLogin) `
+    -EnableLiveProviderForDiary ([bool]$EnableLiveProvider)
 
 # -- 3. Postgres ---------------------------------------------------------------
 
@@ -372,7 +387,7 @@ if (Test-PortListening $BackendPort) {
 } else {
     # Build the command string. Single-quote path literals so spaces in $Root
     # are handled correctly when the string is evaluated in the new window.
-    $uvEnvCmd = Get-UvicornEnvCommand $LiveAiSurface
+    $uvEnvCmd = Get-UvicornEnvCommand $LiveAiSurface ([bool]$EnableLiveProvider)
     $uvCmd = "Set-Location '$Root'; . '$Venv'; $uvEnvCmd uvicorn app.main:app --reload --port $BackendPort"
     Start-Process powershell -ArgumentList "-NoProfile", "-NoExit", "-Command", $uvCmd `
         -WindowStyle Normal

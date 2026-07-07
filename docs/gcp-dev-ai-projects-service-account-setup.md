@@ -259,7 +259,7 @@ Doctor taskpane / Command Centre / scribe live test:
 .\run_dev.ps1 -LiveAiSurface Taskpane
 ```
 
-Diary / Bernie live test:
+Diary / Bernie local review:
 
 ```powershell
 .\run_dev.ps1 -LiveAiSurface Diary
@@ -267,7 +267,8 @@ Diary / Bernie live test:
 
 This also enables the Bernie staff pilot gate for the seeded dev practice, so
 the diary should show the Supervised Booking Review entry point when the current
-dev user is signed in.
+dev user is signed in. The Bernie booking interpreter stays on the fake provider
+by default while the runtime/provider gate is blocked.
 
 If you already ran the matching `use_*_adc.ps1` script and do not want a browser
 reauthorization flow:
@@ -276,6 +277,10 @@ reauthorization flow:
 .\run_dev.ps1 -LiveAiSurface Taskpane -SkipAdcLogin
 .\run_dev.ps1 -LiveAiSurface Diary -SkipAdcLogin
 ```
+
+Use `.\run_dev.ps1 -LiveAiSurface Diary -EnableLiveProvider` only for an
+explicitly approved non-PHI live-provider smoke; it intentionally fails closed
+while the Bernie provider gate is blocked.
 
 Ordinary fake-provider/local development can still use:
 
@@ -426,5 +431,6 @@ When rebuilding from scratch:
 6. create ADC for either Scribe or Bernie with `scripts\use_scribe_adc.ps1` or
    `scripts\use_bernie_adc.ps1`, not both at once
 7. launch EMR4 with `run_dev.ps1 -LiveAiSurface Taskpane` or
-   `run_dev.ps1 -LiveAiSurface Diary`
+   `run_dev.ps1 -LiveAiSurface Diary`; Diary keeps the fake provider unless
+   `-EnableLiveProvider` is explicitly supplied for an approved smoke
 8. run non-PHI live smoke only after fake tests pass

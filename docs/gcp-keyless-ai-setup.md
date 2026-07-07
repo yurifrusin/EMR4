@@ -101,6 +101,11 @@ The local launcher can call the matching script before starting the backend:
 .\run_dev.ps1 -LiveAiSurface Diary
 ```
 
+`-LiveAiSurface Diary` selects the Bernie project and staff-pilot environment
+but keeps `BERNIE_BOOKING_INTERPRETER_PROVIDER=fake` by default while the
+runtime/provider gate is blocked. Add `-EnableLiveProvider` only for an
+explicitly approved non-PHI live-provider smoke.
+
 ## Local Dev Authentication
 
 Install or update the Google Cloud CLI, then authenticate as the daily user:
