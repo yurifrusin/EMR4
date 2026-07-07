@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 151 Create-Proposal Header Alignment Guard |
 | Integrated through | Ariadne implementation; DeepSeek review lane advice integrated; Claude and Antigravity protocol packets remain queued locally |
-| Status | Implementation committed in `e5647b9`; closeout publication pending push; sprint engine will pause after closeout per Yuri request |
+| Status | Committed and pushed; sprint engine paused after closeout per Yuri request |
 | Last updated | 2026-07-07 |
 
 ## Sprint 151 What Changed
@@ -66,8 +66,10 @@ Every closeout entry should record:
 Publication state:
 
 - Integration commit SHA: `e5647b9`.
-- Push result: pending immediate closeout push.
-- Final `git status --short --branch`: pending final closeout check after push.
+- Closeout metadata commit SHA: `9e8dc80`.
+- Push result: pushed to `origin/master`; GitHub reported the known moved-repo
+  notice and 1 moderate Dependabot alert.
+- Final `git status --short --branch`: `## master...origin/master`.
 
 Sprint engine state: paused after formal closeout at Yuri's request. Next
 recommended slice when resumed is Sprint 152, either client-readiness for
