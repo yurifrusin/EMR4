@@ -24,10 +24,83 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 198 Support Route Non-Grammar Boundary |
-| Integrated through | Ariadne implementation with Claude, Antigravity via `agy.exe`, and DeepSeek reviews |
+| Batch | Sprint 199 API Spine Idempotency/Audit Metadata Preflight |
+| Integrated through | Ariadne implementation with Claude, DeepSeek, and replacement DeepSeek review after Antigravity `agy.exe` timeout |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
+
+## Sprint 199 What Changed
+
+- Added `tests/test_api_spine_idempotency_audit_metadata.py`, an import-free
+  YAML structural preflight over `docs/api-spine/openapi/appointment-commands.yaml`.
+- The preflight guards that appointment proposal/confirmation command paths
+  carry `Idempotency-Key` and `X-Correlation-Id`, while slot-search
+  command-style reads carry `X-Correlation-Id` but not `Idempotency-Key`.
+- It pins core OpenAPI metadata shapes for `AuditIntent`, `FreshnessRef`,
+  `SignedConfirmationEvidence`, confirmation commands, and
+  `ConfirmationAuditEvent` idempotency/correlation linkage.
+- Added `docs/api-spine/idempotency-audit-metadata-preflight.md` to document the
+  guard and state clearly that runtime idempotency storage and durable audit
+  writes remain separate closed gates.
+- Integrated Claude and DeepSeek review artifacts under
+  `orchestration/agent_inbox/codex/`; Antigravity timed out via `agy.exe`, so a
+  second DeepSeek review substituted for that lane.
+
+Worker mix:
+
+- Claude recommended a pure YAML structural guard and warned not to require
+  idempotency on non-mutating slot-search reads.
+- DeepSeek identified OpenAPI schema gaps and recommended a focused
+  idempotency/audit preflight.
+- Replacement DeepSeek confirmed the guard adds coverage beyond older
+  idempotency gap tests while remaining a schema-invariant check, not runtime
+  enforcement evidence.
+- Antigravity was dispatched through `agy.exe` but produced no artifact before
+  timeout; no Antigravity changes were integrated.
+
+Boundary:
+
+- Static OpenAPI YAML parsing only.
+- No FastAPI router import in the new preflight, no route handler execution,
+  HTTP requests, database session, provider calls, memory/RAG/GraphRAG access,
+  H15/H-series runtime imports, historical diary material access, GraphQL
+  mutation work, or writes.
+- The change does not prove idempotency-store enforcement, replay semantics, or
+  durable audit writes.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_idempotency_audit_metadata.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_appointment_idempotency_gap.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_appointment_openapi_drift_guard.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_confirmation_family_idempotency_checkpoint.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_post_sprint118_checkpoint.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: new preflight `7 passed`; API spine artifacts `31 passed`; idempotency
+gap `5 passed`; OpenAPI drift guard `5 passed`; confirmation-family checkpoint
+`7 passed`; post-Sprint-118 checkpoint `4 passed`; route contract `12 passed`;
+endpoint coverage `12 passed`; readiness/provider reports stayed blocked/false;
+leakage lint safe; whitespace check clean. Initial parallel DB-backed pytest
+commands hit the known PostgreSQL enum/drop race; serial reruns passed.
+
+Implementation commit: `49718e21`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is a narrow bridge from static idempotency/audit metadata
+to existing runtime idempotency checkpoints, or a small audit-event/read-model
+inventory, with runtime/provider gates still blocked.
+
+---
 
 ## Sprint 198 What Changed
 
