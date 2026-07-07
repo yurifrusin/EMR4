@@ -24,10 +24,45 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 179 Proposal-Surface Guard Aggregate Report |
-| Integrated through | Ariadne implementation with DeepSeek sidecar review of safe aggregate report shape |
-| Status | Integrated and pushed |
+| Batch | Sprint 180 Prompt-Thread Proposal-Guard Backlog Slice |
+| Integrated through | Ariadne narrow docs triage with DeepSeek sidecar confirmation |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 180 What Changed
+
+- Added exact proposal-surface guard citation blocks to
+  `docs/bernie-prompt-thread-tranche-readiness.md` and
+  `docs/bernie-prompt-thread-fake-provider-backend-pass.md`.
+- The citations include the required readiness and provider-boundary commands
+  plus compact closed values such as `runtime_or_provider_wiring_ready=false`,
+  `raw_trove_access_ready=false`, `runtime_gate_decision=blocked`,
+  `live_provider_enabled=false`, and no provider/DB/memory/trove activity.
+- The two recent prompt-thread evidence docs now pass the proposal-surface
+  guard directly without implying live-provider, provider-quality, runtime,
+  memory, H15/H-series, historical diary, GraphQL, or model-write readiness.
+
+Sprint 180 is a narrow backlog-slice triage sprint over recent evidence docs. It
+does not change runtime code, routes, provider configuration, database behavior,
+memory, RAG, GraphRAG, H15/H-series imports, historical diary processing,
+GraphQL mutations, or model-to-database write authority.
+
+Worker mix:
+
+- DeepSeek confirmed the patched two-doc slice passes the guard with no missing
+  items and no live-provider/runtime-readiness implication.
+
+## Sprint 180 Verification
+
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\bernie-prompt-thread-tranche-readiness.md docs\bernie-prompt-thread-fake-provider-backend-pass.md`
+  passed.
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_report.py docs orchestration`
+  returned `missing_readiness_count=448`, `unreadable_markdown_count=2`, and
+  `total_fail_closed_findings_count=450`, down from Sprint 179's 450/2/452.
+- `git diff --check` passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 179 What Changed
 

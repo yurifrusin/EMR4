@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 179 safe aggregate proposal-guard report integrated after Sprint 178: broad docs/orchestration scans now have a path/text-free JSON count report showing 1045 markdown files scanned, 456 trigger hits, 450 missing-readiness findings, 2 unreadable markdown findings, and 452 total fail-closed findings |
-| **Next recommended work** | Triage a narrow backlog slice such as current prompt-thread docs, H63/H64 review docs, or new closeout/review surfaces using the aggregate report; keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 180 prompt-thread proposal-guard backlog slice integrated after Sprint 179: the two recent prompt-thread evidence docs now carry exact closed-gate proposal-surface citations, pass the guard directly, and reduce the aggregate backlog to 448 missing-readiness findings plus 2 unreadable markdown findings |
+| **Next recommended work** | Triage another narrow recent-doc slice such as H63/H64 review docs or new closeout/review surfaces using the aggregate report; keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

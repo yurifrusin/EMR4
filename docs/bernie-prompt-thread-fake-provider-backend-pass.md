@@ -43,6 +43,19 @@ These are the required blocked/false values for this pass. No provider,
 runtime, memory, H15/H-series, historical diary, GraphQL, or model-write gate
 changed.
 
+Proposal-surface guard citation:
+
+- `runtime_or_provider_wiring_ready=false`
+- `raw_trove_access_ready=false`
+- `runtime_gate_decision=blocked`
+- `default_provider=disabled`
+- `live_provider_enabled=false`
+- `provider_calls_performed=false`
+- `route_behavior_changed=false`
+- `database_access_performed=false`
+- `memory_or_rag_access_performed=false`
+- `historical_diary_material_access_performed=false`
+
 ## Backend Pass
 
 The replay harness posts each executable scenario turn to the real FastAPI test

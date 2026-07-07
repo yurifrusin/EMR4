@@ -66,6 +66,26 @@ This tranche does not authorize:
 - GraphQL mutations; or
 - model-to-database writes.
 
+Proposal-surface guard citation:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+```
+
+Expected closed values:
+
+- `runtime_or_provider_wiring_ready=false`
+- `raw_trove_access_ready=false`
+- `runtime_gate_decision=blocked`
+- `default_provider=disabled`
+- `live_provider_enabled=false`
+- `provider_calls_performed=false`
+- `route_behavior_changed=false`
+- `database_access_performed=false`
+- `memory_or_rag_access_performed=false`
+- `historical_diary_material_access_performed=false`
+
 ## Remaining Fixture-Only Edges
 
 The following edges are known but not blockers for moving to a narrow
