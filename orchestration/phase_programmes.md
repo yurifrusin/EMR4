@@ -115,16 +115,16 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Sprint 147 proposal-only appointment idempotency preflight completed; sprint engine continuing |
+| Status | Sprint 148 guarded create-proposal idempotency route-test contract completed; sprint engine continuing |
 | Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
-| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard, Sprint 128 appointment idempotency model/migration preflight, Sprint 129 appointment idempotency storage helper foundation, Sprint 130 appointment idempotency route integration preflight, Sprint 131 staff create-confirm idempotency route-test contract, Sprint 132 staff create-confirm idempotency route wiring, Sprint 133 Bernie create-confirm idempotency preflight, Sprint 134 Bernie create-confirm idempotency route-test contract, Sprint 135 Bernie create-confirm idempotency route wiring, Sprint 136 status-confirm idempotency preflight, Sprint 137 status-confirm idempotency route-test contract, Sprint 138 status-confirm idempotency route wiring, Sprint 139 update-confirm idempotency preflight, Sprint 140 update-confirm idempotency route-test contract, Sprint 141 update-confirm idempotency route wiring, Sprint 142 delete-confirm idempotency preflight, Sprint 143 delete-confirm idempotency route-test contract, Sprint 144 delete-confirm idempotency route wiring, Sprint 145 confirmation-family idempotency checkpoint, Sprint 146 cross-family idempotency integration tests, Sprint 147 proposal-only idempotency preflight |
-| Next Candidate Sprints | Sprint 148 guarded create-proposal route-test contract before proposal-route enforcement |
+| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard, Sprint 128 appointment idempotency model/migration preflight, Sprint 129 appointment idempotency storage helper foundation, Sprint 130 appointment idempotency route integration preflight, Sprint 131 staff create-confirm idempotency route-test contract, Sprint 132 staff create-confirm idempotency route wiring, Sprint 133 Bernie create-confirm idempotency preflight, Sprint 134 Bernie create-confirm idempotency route-test contract, Sprint 135 Bernie create-confirm idempotency route wiring, Sprint 136 status-confirm idempotency preflight, Sprint 137 status-confirm idempotency route-test contract, Sprint 138 status-confirm idempotency route wiring, Sprint 139 update-confirm idempotency preflight, Sprint 140 update-confirm idempotency route-test contract, Sprint 141 update-confirm idempotency route wiring, Sprint 142 delete-confirm idempotency preflight, Sprint 143 delete-confirm idempotency route-test contract, Sprint 144 delete-confirm idempotency route wiring, Sprint 145 confirmation-family idempotency checkpoint, Sprint 146 cross-family idempotency integration tests, Sprint 147 proposal-only idempotency preflight, Sprint 148 create-proposal route-test contract |
+| Next Candidate Sprints | Sprint 149 focused create-proposal replay-model decision before proposal-route enforcement wiring |
 | Design Record | `orchestration/api_spine_programme.md` |
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
 
-Current position after Sprint 147: the Ariadne/Fable 100+ sprint strategy map
+Current position after Sprint 148: the Ariadne/Fable 100+ sprint strategy map
 has been created, the stale worktree residue has been cleaned, the
 provider-boundary guard stack has been consolidated, and Programme 2G has
 returned to appointment-first API Spine alignment. Sprint 120 refreshed the API
@@ -252,6 +252,13 @@ discipline and must not copy confirmation-write replay authority. The preflight
 therefore records open semantics for client readiness, replay response,
 same-key/different-body conflict, retention, status/waiting-area operation
 identity, and storage reuse before any route wiring.
+Sprint 148 then added the guarded create-proposal route-test contract for
+`POST /api/v1/appointments/proposals/create`. It keeps the current route
+unwired, preserves the existing confirmation evidence/freshness path, and
+records skipped future behavior tests for missing keys, blank keys, valid keyed
+proposal envelopes without write side effects, same-key retries without write
+authority, same-key/different-body proposal-scoped semantics, and confirmation
+evidence/freshness preservation.
 
 The accepted strategy artifacts are
 `orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md`
@@ -277,11 +284,11 @@ the next sprint from the active programme that best advances the phase:
 4. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
 
-The default recommendation after Sprint 147 is **Programme 2G**: add a guarded
-create-proposal route-test contract before proposal-route enforcement. The
-contract must define proposal-specific replay/conflict/client-readiness
-semantics and preserve no write authority, no slot reservation, no raw
-compatibility enforcement, and no provider/GraphQL/H15/memory/trove expansion.
+The default recommendation after Sprint 148 is **Programme 2G**: make a focused
+create-proposal replay-model decision before wiring enforcement. Choose between
+deterministic re-evaluation with a required key, a short-retention proposal
+marker, or stored proposal-envelope replay with short retention. Do not wire
+proposal-route enforcement until that choice is explicit.
 
 ## Deployment Readiness Pattern
 

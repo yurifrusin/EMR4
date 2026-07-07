@@ -7676,6 +7676,61 @@ wiring.
 
 ---
 
+## Sprint 148 Closeout - Create-Proposal Idempotency Route-Test Contract
+
+Publication state:
+
+- Integration commit SHA: `pending Sprint 148 closeout commit`.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Programme position:
+
+- Phase/programme: Programme 2G / EMR4 API Spine.
+- Classification: guarded route-test contract.
+- Larger objective advanced: proposal-only idempotency now has a first
+  create-proposal contract without route behavior changes.
+- Next planned step: Sprint 149 focused create-proposal replay-model decision
+  before any proposal-route enforcement wiring.
+
+Integrated outcome:
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_create_proposal_route_tests.md`.
+- Added `tests/test_api_spine_create_proposal_idempotency_route_contract.py`.
+- Added Claude, Antigravity, and DeepSeek review/acceptance lane packets for
+  Sprint 148.
+- The current no-wiring guards prove `propose_create_appointment` still has no
+  `Idempotency-Key` header binding and no appointment command ledger calls.
+- The dynamic create-proposal test now also proves proposal calls do not create
+  appointment command idempotency ledger rows.
+- The contract preserves the existing create-proposal confirmation evidence and
+  freshness path.
+- DeepSeek's review was integrated: Sprint 149 must choose deterministic
+  re-evaluation, a short-retention proposal marker, or stored proposal-envelope
+  replay before any wiring.
+- Six future behavior tests are present but skipped until a later sprint
+  explicitly wires proposal-route enforcement.
+- Raw compatibility, other proposal families, provider, GraphQL, H15/H-series,
+  memory/RAG/GraphRAG, and historical diary trove gates remain closed.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_api_spine_create_proposal_idempotency_route_contract.py -q
+.venv\Scripts\python.exe -m pytest tests/test_api_spine_create_proposal_idempotency_route_contract.py tests/test_appointment_proposals.py tests/test_diary_action_route_contract.py -q
+```
+
+Result: focused contract `7 passed, 6 skipped`; adjacent closeout suite
+`30 passed, 6 skipped`; existing Starlette and Google GenAI deprecation
+warnings only.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is a focused create-proposal replay-model decision before
+proposal-route enforcement wiring.
+
+---
+
 ## Sprint 147 Closeout - Proposal-Only Idempotency Preflight
 
 Publication state:

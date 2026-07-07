@@ -9,7 +9,13 @@ from datetime import date, datetime, time, timezone
 import pytest
 
 import app.routers.appointments as appointments_router
-from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
+from app.models.appointments import (
+    Appointment,
+    AppointmentAuditLog,
+    AppointmentCommandIdempotency,
+    AppointmentStatus,
+    BookingChannel,
+)
 from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate
 from tests.conftest import make_token
 
@@ -124,6 +130,8 @@ def test_create_proposal_returns_typed_command_without_mutating(
         client, db, gp_user, patient, practitioner):
     token = make_token(gp_user)
     before = db.query(Appointment).count()
+    before_audits = db.query(AppointmentAuditLog).count()
+    before_idempotency_rows = db.query(AppointmentCommandIdempotency).count()
 
     resp = _post_proposal(client, token, _base_body(patient, practitioner))
 
@@ -144,6 +152,8 @@ def test_create_proposal_returns_typed_command_without_mutating(
     assert data["signed_confirmation_evidence_required"] is True
     assert data["signed_confirmation_evidence"]["purpose"] == "staff_confirm_create_proposal"
     assert db.query(Appointment).count() == before
+    assert db.query(AppointmentAuditLog).count() == before_audits
+    assert db.query(AppointmentCommandIdempotency).count() == before_idempotency_rows
 
 
 def test_create_confirm_route_writes_once_with_signed_evidence(

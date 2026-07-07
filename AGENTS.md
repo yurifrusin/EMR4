@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 147 proposal-only appointment idempotency preflight completed locally pending closeout commit. Proposal-only routes are the next preferred surface before raw compatibility writes, but their replay/conflict/client-readiness semantics must be proposal-specific and must not copy confirmation-write replay authority |
-| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 148 guarded create-proposal route-test contract only; do not wire proposal-route enforcement until that contract is reviewed |
+| **Current active track** | Sprint 148 guarded create-proposal idempotency route-test contract completed locally pending closeout commit. The contract keeps `POST /api/v1/appointments/proposals/create` unwired while recording future proposal-specific client-discipline tests and preserving no confirmation-write replay authority |
+| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 149 focused create-proposal replay-model decision before any proposal-route enforcement wiring |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
