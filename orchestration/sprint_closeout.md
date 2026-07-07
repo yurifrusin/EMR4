@@ -24,10 +24,61 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 157 Update Confirm Client Header Emission |
+| Batch | Sprint 158 Confirm Client Surface Checkpoint |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude/Antigravity lanes replaced by additional DeepSeek reviews due tool/usage friction; DeepSeek adversarial review accepted |
-| Status | Committed and pushed; sprint engine continuing |
+| Status | Committed locally; push pending |
 | Last updated | 2026-07-07 |
+
+## Sprint 158 What Changed
+
+- Added `orchestration/api_spine_confirm_client_surface_checkpoint.md`.
+- Added `tests/test_api_spine_confirm_client_surface_checkpoint.py`.
+- Recorded that the ordinary Diary confirm-client header surface is now covered:
+  create-proposal, staff create-confirm, Bernie create-confirm review adapter,
+  ordinary update-confirm, status-confirm, and delete-confirm.
+- Kept proposal-only backend binding and strict OpenAPI `minLength: 8`
+  enforcement deferred.
+- Reclassified `confirmBernieToolIntentChange()` as the next user-clickable
+  enforced-route gap rather than a harmless long-term deferral, because it posts
+  to the already-enforced update-confirm backend route without an HTTP
+  `Idempotency-Key`.
+- Recommended Sprint 159: wire Bernie tool-intent update-confirm client headers.
+- Recommended Sprint 160: prepare the Bernie/Diary review-readiness packet and
+  pause for Yuri if readiness checks pass.
+
+## Sprint 158 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_confirm_client_surface_checkpoint.py -q`
+  (`5 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_frontend_header_inventory.py tests\test_api_spine_artifacts.py tests\test_api_spine_confirm_client_surface_checkpoint.py -q`
+  (`44 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean.
+
+Note: an earlier parallel pytest attempt collided while creating the shared
+local Postgres test schema, leaving `gp_pms_test` half-reset. Ariadne reset only
+the guarded `gp_pms_test` public schema and reran the suites sequentially.
+
+Publication state:
+
+- Dispatch commit SHA: `9f939dd`.
+- Checkpoint implementation commit SHA: `908cf7a`.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending.
+
+Strategic position: Sprint 158 is **Programme 2G / EMR4 API Spine** checkpoint
+work. It says the ordinary confirm-client surface is complete enough, but the
+Bernie tool-intent update-confirm click should be fixed before asking Yuri for a
+meaningful integrated Bernie/Diary review.
+
+Sprint engine state: continuing after push. Next recommended slice is Sprint
+159: wire `confirmBernieToolIntentChange()` HTTP `Idempotency-Key` headers.
+
+---
+
+## Previous Closeout - Sprint 157
 
 ## Sprint 157 What Changed
 
