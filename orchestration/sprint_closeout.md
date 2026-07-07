@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 177 Proposal-Surface Guard Vocabulary |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review of release-gate trigger wording |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 177 What Changed
@@ -62,8 +62,8 @@ Worker mix:
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\adversarial\h63_interpretation_independent_review_brief.md`
   passed.
 - `git diff --check` passed.
-- Integration commit: pending.
-- Push result: pending.
+- Integration commit: `a6815d8d`.
+- Push result: `git push origin master` succeeded.
 - Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 176 What Changed
