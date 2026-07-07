@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 193 Fable-aligned Bernie/Diary backend-readiness appointment route inventory preflight integrated in implementation commit `95da886b`: a safe aggregate static route-table report now separates 14 grammar-authority method rows, 4 raw-adjacent write rows, and 17 out-of-contract method rows across mounted appointment `APIRoute` metadata without emitting route paths or expanding Diary grammar authority |
-| **Next recommended work** | Continue bounded backend-readiness with method-specific contract tunnel review, out-of-contract POST route classification, or route contract behavior checks; use Ariadne plus three worker lanes by default (Claude, Antigravity, DeepSeek, with extra DeepSeek substitutions when a lane is unavailable), keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 194 Fable-aligned Bernie/Diary backend-readiness appointment route documented-path split integrated in implementation commit `ba694ceb`: the safe aggregate appointment route inventory preflight now splits 17 out-of-contract method rows into 2 documented-path uncovered rows and 15 wholly undocumented rows, with explicit `documented_path_out_of_contract_rows_are_grammar_authority=false`; Antigravity CLI protocol was corrected and used via `agy.exe` |
+| **Next recommended work** | Continue bounded backend-readiness with out-of-contract POST route classification or route contract behavior checks; use Ariadne plus three worker lanes for general sprint work (Claude, Antigravity via `C:\Users\sarashera\AppData\Local\agy\bin\agy.exe`, and DeepSeek, with extra DeepSeek substitutions when a lane is unavailable), keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -742,19 +742,23 @@ Codex is the default orchestration agent for EMR4. This means:
   agent hierarchy.
 - No non-orchestrator agent should merge to `master` or move `handoff/current`
   during parallel mode unless the user explicitly says so.
-- Worker count is risk-based, not ritualized: use the right number of agents for
-  the risk, quota state, and separable surfaces, not "always three agents".
-  Ariadne may keep a narrow sprint single-track, use one specialist reviewer, or
-  spawn extra workers when independent ownership boundaries make the extra
-  coverage worth it. Preferred cost posture while OpenAI/Codex usage is scarce:
-  first check Claude's state, let Claude implement while quota is healthy, use
+- For general sprint work, use Ariadne plus three worker lanes by default:
+  Claude, Antigravity/Gemini, and DeepSeek. This Ariadne-plus-three rule is a
+  protocol correction from July 2026 after single-agent drift: do not let
+  Ariadne-only momentum redefine sprint direction without the multi-agent
+  stream. If Claude or Antigravity is unavailable, quota-capped, recuperating,
+  or fails to submit a durable artifact in the sprint window, replace that lane
+  with an extra DeepSeek Flash worker until the lane recovers. Tiny mechanical
+  tasks may stay Ariadne-local, but planned sprint work should record the
+  worker-lane mix and any substitutions.
+- Preferred cost posture while OpenAI/Codex usage is scarce: first check
+  Claude's state, let Claude implement while quota is healthy, use
   Antigravity/Gemini for an independent domain/product/test-design lane when
   Gemini quota is available, and use as many DeepSeek Flash workers as the
   sprint boundary can safely absorb for cheap bounded implementation/review
-  lanes. When Claude or Antigravity is capped or recuperating, spawn a DeepSeek
-  Flash worker in that lane's place. Escalate to DeepSeek Pro for
-  reasoning-heavy worker tasks, and reserve native Codex subagents for fallback,
-  integration-adjacent, or Codex-tooling-specific work.
+  lanes. Escalate to DeepSeek Pro for reasoning-heavy worker tasks, and reserve
+  native Codex subagents for fallback, integration-adjacent, or
+  Codex-tooling-specific work.
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).
@@ -790,6 +794,9 @@ blank. Therefore Antigravity prompts must ask for a tangible repo artifact
 (plan packet, review packet, completion notes, or explicit proof file), and
 Codex verifies via `git status`, file inspection, and `poll --fetch` rather than
 stdout alone.
+
+Do not probe for a bare `antigravity` command and treat failure as
+unavailability. The EMR4 Antigravity CLI entry point is:
 
 ```powershell
 C:\Users\sarashera\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\sarashera\EMR4-worktrees\antigravity --print "<prompt>"

@@ -24,10 +24,83 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 193 Appointment Route Inventory Preflight |
-| Integrated through | Ariadne implementation with three DeepSeek review lanes after Claude budget/Antigravity CLI substitution |
+| Batch | Sprint 194 Appointment Route Documented-Path Split |
+| Integrated through | Ariadne implementation with Claude, Antigravity via `agy.exe`, and DeepSeek reviews |
 | Status | Integrated and pushed |
-| Last updated | 2026-07-07 |
+| Last updated | 2026-07-08 |
+
+## Sprint 194 What Changed
+
+- Extended `scripts/appointment_route_inventory_preflight.py` with a
+  documented-path versus wholly undocumented split for out-of-contract
+  appointment route method rows.
+- The safe aggregate report now keeps the total 17 out-of-contract method rows
+  but splits them into:
+  - 2 documented-path out-of-contract method rows;
+  - 15 wholly undocumented out-of-contract method rows.
+- Added `documented_path_out_of_contract_rows_are_grammar_authority=false` so
+  documented-path tunnel accounting cannot be mistaken for Diary grammar
+  authority.
+- Strengthened `tests/test_appointment_route_inventory_preflight.py` with
+  partition invariants for documented and undocumented method/path counts.
+- Updated `docs/appointment-route-inventory-preflight.md` to explain that
+  documented-path out-of-contract rows remain out-of-contract and are planning
+  signals only.
+- Added the Antigravity Sprint 194 review artifact at
+  `orchestration/agent_inbox/codex/review-antigravity-sprint194-contract-tunnel-accounting.md`.
+
+Worker mix:
+
+- Claude submitted a usable backend-readiness review.
+- Antigravity was corrected after Yuri's protocol reminder and run via
+  `C:\Users\sarashera\AppData\Local\agy\bin\agy.exe --add-dir C:\Users\sarashera\EMR4-worktrees\antigravity --print ...`.
+  Future sprints must not infer Antigravity unavailability from a missing bare
+  `antigravity` shell command.
+- DeepSeek review lanes agreed on neutral documented/undocumented accounting,
+  partition invariants, and preserving POST classification as a separate
+  follow-up.
+
+Boundary:
+
+- Static FastAPI `APIRoute` metadata inspection only.
+- Count-only/path-free output; no route paths, handler names, request bodies,
+  IDs, patient/practitioner data, local material paths, or external-provider
+  content.
+- No HTTP requests, route handler execution, database session, provider calls,
+  memory/RAG/GraphRAG access, H15/H-series runtime imports, historical diary
+  material access, GraphQL access, or writes.
+- Documented-path out-of-contract rows are not grammar dispatch authority and
+  do not expand the Diary route contract.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe scripts\appointment_route_inventory_preflight.py
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe -m pytest tests\test_appointment_route_inventory_preflight.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: inventory script emitted safe aggregate counts with 2 documented-path
+and 15 wholly undocumented out-of-contract method rows; inventory tests
+`19 passed`; endpoint coverage `9 passed`; route contract `12 passed`; scenario
+integrity `8 passed, 1 skipped`; readiness/provider reports stayed
+blocked/false; leakage lint safe; whitespace check clean.
+
+Implementation commit: `ba694ceb`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded backend-readiness via out-of-contract POST
+route classification or route contract behavior checks, using Ariadne plus
+Claude, Antigravity via `agy.exe`, and DeepSeek by default.
+
+---
 
 ## Sprint 193 What Changed
 
