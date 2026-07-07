@@ -24,10 +24,72 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 159 Bernie Tool-Intent Confirm Client Header |
-| Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude/Antigravity lanes replaced by additional DeepSeek reviews due tool/usage friction; DeepSeek adversarial review accepted |
-| Status | Committed and pushed; sprint engine continuing |
+| Batch | Sprint 160 Bernie/Diary Review Readiness |
+| Integrated through | Ariadne review-readiness packet with EMR4 API Steward skill; Claude/Antigravity packets dispatched; DeepSeek replacement/adversarial review accepted |
+| Status | Committed locally; push pending closeout metadata; sprint engine paused for Yuri review |
 | Last updated | 2026-07-07 |
+
+## Sprint 160 What Changed
+
+- Added `orchestration/bernie_diary_review_readiness_sprint160.md`.
+- Added `tests/test_bernie_diary_review_readiness_packet.py` to mechanically
+  preserve the review packet's evidence labels, blocked readiness values, closed
+  gates, ordinary prompt, and pause recommendation.
+- Added Sprint 160 Claude and Antigravity task packets for continuity, with
+  explicit replacement-by-DeepSeek language if those lanes are paused.
+- Integrated DeepSeek's adversarial review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint160-bernie-diary-review-readiness.md`.
+- Recorded that Sprint 160 is a review-readiness checkpoint only. It does not
+  open runtime route wiring, provider prompt wiring, provider dry-run wiring,
+  live-provider enablement, memory/RAG/GraphRAG, H15/H-series runtime imports,
+  historical diary material access, GraphQL mutations, or model-to-database
+  writes.
+- Explicitly defers live-provider readiness: the current evidence is
+  provider-disabled, fake-provider, or route-intercepted unless provider metadata
+  proves `live_provider: true`.
+
+## Sprint 160 Verification
+
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
+  succeeded with `runtime_or_provider_wiring_ready=false`,
+  `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`.
+- `.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py`
+  succeeded with `default_provider=disabled`,
+  `live_provider_enabled=false`, `provider_calls_performed=false`,
+  `route_behavior_changed=false`, `database_access_performed=false`,
+  `memory_or_rag_access_performed=false`, and
+  `historical_diary_material_access_performed=false`.
+- `.venv\Scripts\python.exe scripts\smoke_bernie_interpreter.py --instruction "Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45" --reference-date 2026-07-01 --expect-result clarification_required --expect-earliest-time 14:00 --expect-latest-time 15:45 --expect-mode mocked`
+  succeeded. This fake-provider check proves honest redacted time-window parsing;
+  it does not prove deterministic name-to-ID resolution.
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_route_intercepted_selected_slot_can_return_to_candidates -q`
+  (`1 passed`). This is route-intercepted evidence only.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_diary_review_readiness_packet.py tests\test_smoke_bernie_interpreter_script.py -q`
+  (`14 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py orchestration\bernie_diary_review_readiness_sprint160.md`
+  succeeded.
+
+Publication state:
+
+- Dispatch commit SHA: `33454df`.
+- Review-readiness packet commit SHA: `abec002c`.
+- Closeout metadata commit SHA: pending until this closeout is committed.
+- Push result: pending.
+- Final `git status --short --branch`: pending.
+
+Strategic position: Sprint 160 is **Programme 2G / EMR4 API Spine** review
+readiness. It closes the sprint engine's current implementation run and creates
+the review packet for Yuri to run the Diary/Bernie workflow meaningfully without
+claiming live-provider or live-backend proof.
+
+Sprint engine state: paused for Yuri review. Recommended review focus is the
+supervised receptionist workflow: ordinary prompt understanding, candidate
+selection, staged-vs-confirmed copy, the path back to choose another slot, and
+absence of raw IDs, `snake_case` internals, or generic `Not Found` failures.
+
+---
+
+## Previous Closeout - Sprint 159
 
 ## Sprint 159 What Changed
 
