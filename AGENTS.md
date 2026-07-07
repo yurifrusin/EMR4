@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 168 multi-field missing prompt fixture integrated in implementation commit `0f19ca6b`: patient-only fake-provider route-level replay now proves Bernie recognizes the patient, does not guess practitioner/date, and asks for both missing fields coherently |
-| **Next recommended work** | Continue the authored Bernie/Diary prompt-thread fixture tranche with temporal-drift threading coverage or a narrow non-intercepted fake-provider backend pass; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 169 temporal-drift follow-up fixture integrated in implementation commit `1f3268f6`: omitted-context follow-up with a later reference date now proves relative `tomorrow` resolves against the current turn while threaded patient/practitioner/time/duration are preserved |
+| **Next recommended work** | Continue the authored Bernie/Diary prompt-thread tranche with a narrow non-intercepted fake-provider backend pass or an additional no-prior-date/threading edge fixture; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

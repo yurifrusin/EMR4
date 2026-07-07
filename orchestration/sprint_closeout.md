@@ -24,45 +24,40 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 168 Multi-Field Missing Prompt Fixture |
+| Batch | Sprint 169 Temporal Drift Follow-Up Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Integrated and pushed |
+| Status | Integrated locally; publication pending this closeout commit/push |
 | Last updated | 2026-07-07 |
 
-## Sprint 168 What Changed
+## Sprint 169 What Changed
 
-- Added `interpret_multi_field_missing_no_context.yaml`, an authored synthetic
-  fake-provider route-level fixture proving that a patient-only request
-  (`Book Margaret Thompson`) recognizes the patient but does not guess
-  practitioner or date when no context frames are available.
-- Adjusted clarifying-copy selection in `_resolve_bernie_interpretation_context`
-  so ordered required-field questions win before generic temporal clarification.
-  Multi-field missing prompts now ask for both doctor/nurse and day instead of
-  asking only for the day.
-- Widened practitioner pre-resolution from empty-only to non-UUID values, keeping
-  live-provider-style payloads that put names such as `Dr Shera` in
-  `practitioner_id` compatible with pre-normalization name resolution.
-- Updated the Bernie scenario corpus README to record multi-field-missing prompt
+- Added `interpret_context_temporal_drift_followup.yaml`, an authored synthetic
+  fake-provider route-level fixture proving that an omitted-context follow-up can
+  preserve threaded patient/practitioner/time/duration while resolving a new
+  relative date against the current turn `reference_date`.
+- The fixture intentionally asserts both raw and normalized date contracts:
+  `command_candidate.date_from` remains `tomorrow`, while
+  `normalization.constraint.date_from` resolves to `2026-07-10` from the
+  follow-up turn's `reference_date: 2026-07-09`.
+- Updated the Bernie scenario corpus README to record temporal-drift follow-up
   coverage.
 - Recorded worker lanes:
   - Claude CLI review in
-    `orchestration/agent_inbox/claude/claude-sprint168-multi-field-missing.md`.
+    `orchestration/agent_inbox/claude/claude-sprint169-temporal-drift-followup.md`.
   - Antigravity CLI product/receptionist review in
-    `orchestration/agent_inbox/antigravity/antigravity-sprint168-multi-field-missing.md`.
+    `orchestration/agent_inbox/antigravity/antigravity-sprint169-temporal-drift-followup.md`.
   - DeepSeek review in
-    `orchestration/agent_inbox/codex/review-deepseek-sprint168-multi-field-missing.md`.
+    `orchestration/agent_inbox/codex/review-deepseek-sprint169-temporal-drift-followup.md`.
 
-Sprint 168 does not open runtime route wiring from the provider-free
+Sprint 169 does not open runtime route wiring from the provider-free
 interpretation harness, provider prompt/dry-run wiring, live-provider
 enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
 material access, GraphQL mutations, or model-to-database writes.
 
-## Sprint 168 Verification
+## Sprint 169 Verification
 
 - `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ -q`
-  (`.x.....................`; existing Starlette/Google GenAI warnings only).
-- `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_confidence_policy.py tests\test_bernie_same_day_window_route.py -q`
-  (`................................................................`; existing Starlette/Google GenAI warnings only).
+  (`.x......................`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`........s`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
@@ -82,20 +77,29 @@ material access, GraphQL mutations, or model-to-database writes.
 
 Publication state:
 
-- Implementation commit SHA: `0f19ca6b`.
-- Closeout metadata commit SHA: `ab8ae0a9`.
-- Push result: `origin/master`, `handoff/current`, `codex/current`,
-  `claude/current`, and `antigravity/current` aligned at Sprint 168 final
-  closeout head.
-- Final `git status --short --branch`: clean after publication push.
+- Implementation commit SHA: `1f3268f6`.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending publication.
 
-Strategic position: Sprint 168 strengthens "ask, do not guess" behavior for
-under-specified prompt automation before broader backend or provider evidence
-claims. Provider-quality and live-provider gates remain closed.
+Strategic position: Sprint 169 locks a subtle reference-date drift behavior that
+automated prompt troubleshooting will need before broader backend or provider
+evidence claims. Provider-quality and live-provider gates remain closed.
 
 Sprint engine state: continuing unless Yuri pauses. Next recommended work is a
-temporal-drift threading fixture or a narrow non-intercepted fake-provider
-backend pass.
+narrow non-intercepted fake-provider backend pass or an additional no-prior-date
+threading edge fixture.
+
+---
+
+## Previous Closeout - Sprint 168
+
+Sprint 168 added `interpret_multi_field_missing_no_context.yaml`, adjusted
+clarifying-copy ordering so under-specified patient-only prompts ask for missing
+practitioner/date together, and preserved non-UUID practitioner-name
+pre-resolution for live-provider-style payloads. It was committed through
+`0f19ca6b`, closeout metadata through `ab8ae0a9`, and published through final
+closeout head `97f6f52b`.
 
 ---
 
