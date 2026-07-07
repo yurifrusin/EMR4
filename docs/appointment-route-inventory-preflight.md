@@ -1,8 +1,8 @@
 # Appointment Route Inventory Preflight
 
-Date: 2026-07-07
+Date: 2026-07-08
 
-Sprint: 193, extended in Sprints 194 and 195
+Sprint: 193, extended in Sprints 194, 195, and 198
 
 ## Purpose
 
@@ -51,6 +51,12 @@ derived from fixed static path patterns and emitted as aggregate labels such as
 `proposal_support_post`, `state_tracking_post`, and `ambiguous_post`; they do
 not inspect handlers, request bodies, or runtime behavior. The report keeps
 `out_of_contract_post_rows_are_grammar_dispatch_authority=false`.
+
+Sprint 198 documents the current support-route boundary in
+`docs/appointment-support-routes-infrastructure-boundary.md`. The current
+aggregate split is `proposal_support_post=7`, `state_tracking_post=2`, and
+`ambiguous_post=0`. `ambiguous_post` must remain zero unless a future sprint
+explicitly reviews and classifies the new mounted POST shape.
 
 ## Boundary
 

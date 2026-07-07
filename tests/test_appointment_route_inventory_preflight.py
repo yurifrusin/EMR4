@@ -56,6 +56,7 @@ def test_appointment_route_inventory_preflight_is_safe_aggregate_status():
     )
     assert report["out_of_contract_post_by_sub_family"]["proposal_support_post"] > 0
     assert report["out_of_contract_post_by_sub_family"]["state_tracking_post"] > 0
+    assert report["out_of_contract_post_by_sub_family"].get("ambiguous_post", 0) == 0
     assert report["out_of_contract_post_rows_are_grammar_dispatch_authority"] is False
     assert report["post_sub_family_classifier"] == "fixed_static_path_patterns"
     assert report["all_contract_paths_mounted"] is True
@@ -155,6 +156,14 @@ def test_appointment_route_inventory_preflight_rejects_unknown_post_sub_family()
 
     with pytest.raises(AssertionError):
         assert_appointment_route_inventory_preflight_safety(report)
+
+
+def test_out_of_contract_post_support_routes_have_no_ambiguous_family():
+    report = build_appointment_route_inventory_preflight()
+
+    assert report["out_of_contract_post_by_sub_family"].get("ambiguous_post", 0) == 0
+    assert report["out_of_contract_post_rows_are_grammar_dispatch_authority"] is False
+    assert report["post_sub_family_classifier"] == "fixed_static_path_patterns"
 
 
 def test_appointment_route_inventory_preflight_does_not_emit_route_paths():
