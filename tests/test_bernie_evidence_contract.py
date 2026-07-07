@@ -8,11 +8,16 @@ audit-evidence code on the AppointmentAuditLog row, and that provisional /
 unlinked / ambiguous patient paths emit appropriate evidence without PHI leaks.
 """
 
+from datetime import datetime
+
+import pytest
+
 from app.models.appointments import (
     Appointment,
     AppointmentAuditLog,
 )
 from app.models.patients import Patient
+import app.routers.appointments as appointments_router
 from tests.conftest import make_token
 
 WRAPPER_URL = "/api/v1/appointments/proposals/bernie/supervised-booking"
@@ -20,10 +25,24 @@ NORMALIZED_SEARCH_URL = "/api/v1/appointments/proposals/slot-search/normalized"
 SELECTION_URL = "/api/v1/appointments/proposals/slot-search/selection"
 CONFIRM_URL = "/api/v1/appointments/proposals/create/confirm-bernie"
 REFERENCE_DATE = "2026-06-22"
+_IDEMPOTENCY_COUNTER = 0
+
+
+@pytest.fixture(autouse=True)
+def _freeze_bernie_evidence_clock(monkeypatch):
+    def fixed_now(tz):
+        return datetime(2026, 6, 22, 8, 0, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
 
 
 def _auth(token: str) -> dict[str, str]:
-    return {"Authorization": f"Bearer {token}"}
+    global _IDEMPOTENCY_COUNTER
+    _IDEMPOTENCY_COUNTER += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"evidence-contract-{_IDEMPOTENCY_COUNTER}",
+    }
 
 
 def _post_wrapper(client, token, body: dict):

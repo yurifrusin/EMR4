@@ -61,6 +61,16 @@ Read these before acting on remembered process details.
   especially important for Bernie Interpretation Harness work after H40-H62:
   use the H63 independent review brief before any larger runtime/provider/trove
   proposal.
+- 2026-07-07: Antigravity availability must not be inferred solely from a bare
+  `antigravity --version` shell probe. If the Antigravity/Gemini UI quota view
+  shows usable availability, treat Antigravity as available and use the known
+  Antigravity CLI path/protocol (`agy.exe`) or GUI/tooling route for the worker
+  lane. A missing PATH alias is a tooling-path issue, not quota recuperation.
+- 2026-07-07: Do not leave completed, stale, or idle Codex subagent threads open
+  after their sprint role is finished. Before launching extra DeepSeek or other
+  native subagent lanes, close old worker agents that are no longer needed so
+  the local worker pool does not hit its thread limit while useful lanes are
+  waiting.
 - 2026-07-05: Sprint worker mix now starts with a Claude availability/quota
   check so Ariadne remembers to use Claude when it is healthy. If Claude is
   quota-capped, unavailable, recuperating, or fails to submit a usable plan in

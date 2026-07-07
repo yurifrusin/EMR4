@@ -52,10 +52,16 @@ SUPERVISED_URL = "/api/v1/appointments/proposals/bernie/supervised-booking"
 NO_SLOT_URL = "/api/v1/appointments/proposals/bernie/no-slot-suggestion-selection"
 REFERENCE_DATE = date(2026, 7, 15)
 REFERENCE_DATE_STR = "2026-07-15"
+_IDEMPOTENCY_COUNTER = 0
 
 
 def _auth(token: str) -> dict:
-    return {"Authorization": f"Bearer {token}"}
+    global _IDEMPOTENCY_COUNTER
+    _IDEMPOTENCY_COUNTER += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"turn-contract-{_IDEMPOTENCY_COUNTER}",
+    }
 
 
 def _row_counts(db):

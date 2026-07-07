@@ -5,7 +5,7 @@ import json
 from datetime import date as date_type, datetime, time, timedelta, timezone
 from typing import Any, Literal, Optional
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
-from fastapi import APIRouter, Body, Depends, HTTPException, Query, Response, status
+from fastapi import APIRouter, Body, Depends, Header, HTTPException, Query, Response, status
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 from sqlalchemy import or_
@@ -113,6 +113,11 @@ _STATUS_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.status)
 _DELETE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.delete)
 from app.services.ai.audit_store import persist_access_ai_audit_events
 from app.services.diary.temporal import evaluate_raw_mutation_temporal_guard
+from app.services.appointment_idempotency import (
+    AppointmentIdempotencyDecision,
+    claim_appointment_command,
+    complete_appointment_command,
+)
 from app.services.practice_knowledge import (
     InMemoryPracticeKnowledgeRetriever,
     PracticeKnowledgeQuery,
@@ -876,6 +881,7 @@ def _create_appointment_from_body(
     current_user: User,
     confirmed_warnings: Optional[list[str]] = None,
     audit_evidence: Optional[list[str]] = None,
+    commit: bool = True,
 ) -> AppointmentOut:
     practice_id = current_user.practice_id
     booked_by = current_user.id
@@ -932,7 +938,8 @@ def _create_appointment_from_body(
         confirmed_warnings=confirmed_warnings,
         audit_evidence=audit_evidence,
     )
-    db.commit()
+    if commit:
+        db.commit()
     out = AppointmentOut.model_validate(_get_appointment(appt_id, practice_id, db))
     out.breaks_overlap = _get_break_overlaps(
         db, practice_id, body.practitioner_id,
@@ -1186,15 +1193,104 @@ def _block_create_confirmation(
     )
 
 
+_STAFF_CREATE_CONFIRM_OPERATION_ID = "confirmAppointmentCreateProposal"
+_STAFF_CREATE_CONFIRM_ROUTE_FAMILY = "create-confirm"
+_BERNIE_CREATE_CONFIRM_ROUTE_FAMILY = "create-confirm-bernie"
+_STATUS_CONFIRM_OPERATION_ID = "confirmAppointmentStatusProposal"
+_STATUS_CONFIRM_ROUTE_FAMILY = "status-confirm"
+_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER = timedelta(minutes=10)
+
+
+def _idempotency_key_required_error() -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail={
+            "code": "idempotency_key_required",
+            "message": "Idempotency-Key is required for confirming appointment proposals.",
+        },
+    )
+
+
+def _idempotency_key_error(status_code: int, code: str, message: str) -> HTTPException:
+    return HTTPException(
+        status_code=status_code,
+        detail={"code": code, "message": message},
+    )
+
+
+def _normalize_idempotency_key(raw_key: Optional[str]) -> str:
+    normalized = (raw_key or "").strip()
+    if not normalized:
+        raise _idempotency_key_required_error()
+    return normalized
+
+
+def _staff_create_confirm_idempotency_secret() -> bytes:
+    return settings.secret_key.encode("utf-8")
+
+
+def _handle_create_confirm_idempotency_decision(
+    decision: AppointmentIdempotencyDecision,
+):
+    if decision.kind == "replay":
+        return JSONResponse(
+            status_code=decision.response_status_code or status.HTTP_200_OK,
+            content=decision.response_body_json or {},
+        )
+    if decision.kind == "conflict":
+        raise _idempotency_key_error(
+            status.HTTP_409_CONFLICT,
+            "idempotency_key_conflict",
+            "Idempotency-Key was already used with a different confirmation payload.",
+        )
+    if decision.kind == "in_progress":
+        raise _idempotency_key_error(
+            status.HTTP_409_CONFLICT,
+            "idempotency_key_in_progress",
+            "A confirmation with this Idempotency-Key is already in progress.",
+        )
+    if decision.kind == "stale_in_progress":
+        raise _idempotency_key_error(
+            status.HTTP_409_CONFLICT,
+            "idempotency_key_stale_in_progress",
+            "A prior confirmation with this Idempotency-Key is stale and needs staff review.",
+        )
+    if decision.kind == "failed_transient":
+        raise _idempotency_key_error(
+            status.HTTP_503_SERVICE_UNAVAILABLE,
+            "idempotency_key_failed_transient",
+            "A prior confirmation with this Idempotency-Key failed transiently and needs staff review.",
+        )
+    return None
+
+
 @router.post(
     "/proposals/create/confirm",
     response_model=AppointmentConfirmCreateProposalOut,
 )
 def confirm_create_proposal_route(
     body: AppointmentCreateProposalConfirmationIn,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
+    normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
+    decision = claim_appointment_command(
+        db,
+        practice_id=current_user.practice_id,
+        actor_user_id=str(current_user.id),
+        actor_role=current_user.role.value if current_user.role else "unknown",
+        operation_id=_STAFF_CREATE_CONFIRM_OPERATION_ID,
+        route_family=_STAFF_CREATE_CONFIRM_ROUTE_FAMILY,
+        raw_idempotency_key=normalized_idempotency_key,
+        request_body=body.model_dump(mode="json"),
+        secret=_staff_create_confirm_idempotency_secret(),
+        stale_after=_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER,
+    )
+    mapped_decision = _handle_create_confirm_idempotency_decision(decision)
+    if mapped_decision is not None:
+        return mapped_decision
+
     audit_evidence = list(_STAFF_CONFIRM_CREATE_BASE_EVIDENCE)
     blocks: list[AppointmentProposalIssue] = []
     create_proposal = body.create_proposal
@@ -1246,6 +1342,7 @@ def confirm_create_proposal_route(
         ))
 
     if blocks:
+        db.rollback()
         return _block_create_confirmation(
             blocks,
             warnings=create_proposal.warnings,
@@ -1258,6 +1355,7 @@ def confirm_create_proposal_route(
         db,
     )
     if entity_blocks:
+        db.rollback()
         return _block_create_confirmation(
             entity_blocks,
             warnings=create_proposal.warnings,
@@ -1275,6 +1373,7 @@ def confirm_create_proposal_route(
         or revalidated.autonomy_tier != "proposal"
         or not revalidated.requires_confirmation
     ):
+        db.rollback()
         return _block_create_confirmation(
             [
                 _confirm_create_block(
@@ -1288,6 +1387,7 @@ def confirm_create_proposal_route(
         )
 
     if not _same_create_command(create_proposal.command, revalidated.command):
+        db.rollback()
         return _block_create_confirmation(
             [_confirm_create_block(
                 "create_proposal_revalidation_mismatch",
@@ -1308,8 +1408,9 @@ def confirm_create_proposal_route(
         current_user,
         confirmed_warnings=confirmed_warnings,
         audit_evidence=audit_evidence,
+        commit=False,
     )
-    return AppointmentConfirmCreateProposalOut(
+    response_body = AppointmentConfirmCreateProposalOut(
         safe=True,
         requires_confirmation=False,
         autonomy_tier="confirmed_write",
@@ -1319,6 +1420,16 @@ def confirm_create_proposal_route(
         blocks=[],
         audit_evidence=audit_evidence,
     )
+    complete_appointment_command(
+        db,
+        decision.record,
+        response_status_code=status.HTTP_200_OK,
+        response_body=response_body.model_dump(mode="json"),
+        result_kind="confirmed_write",
+        target_appointment_id=appointment.id,
+    )
+    db.commit()
+    return response_body
 
 
 @router.post(
@@ -2345,6 +2456,7 @@ def _apply_appointment_status_update(
     db: Session,
     current_user: User,
     audit_evidence: Optional[list[str]] = None,
+    commit: bool = True,
 ) -> AppointmentOut:
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
@@ -2370,7 +2482,10 @@ def _apply_appointment_status_update(
         confirmed_warnings=body.confirmed_warnings,
         audit_evidence=audit_evidence,
     )
-    db.commit()
+    if commit:
+        db.commit()
+    else:
+        db.flush()
     return _get_appointment(appointment_id, practice_id, db)
 
 
@@ -2380,9 +2495,27 @@ def _apply_appointment_status_update(
 )
 def confirm_status_proposal_route(
     body: AppointmentStatusProposalConfirmationIn,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
+    normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
+    decision = claim_appointment_command(
+        db,
+        practice_id=current_user.practice_id,
+        actor_user_id=str(current_user.id),
+        actor_role=current_user.role.value if current_user.role else "unknown",
+        operation_id=_STATUS_CONFIRM_OPERATION_ID,
+        route_family=_STATUS_CONFIRM_ROUTE_FAMILY,
+        raw_idempotency_key=normalized_idempotency_key,
+        request_body=body.model_dump(mode="json"),
+        secret=_staff_create_confirm_idempotency_secret(),
+        stale_after=_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER,
+    )
+    mapped_decision = _handle_create_confirm_idempotency_decision(decision)
+    if mapped_decision is not None:
+        return mapped_decision
+
     audit_evidence = list(_STATUS_CONFIRM_BASE_EVIDENCE)
     blocks: list[AppointmentProposalIssue] = []
     proposal = body.status_proposal
@@ -2450,6 +2583,7 @@ def confirm_status_proposal_route(
             ))
 
     if blocks:
+        db.rollback()
         return _block_status_confirmation(
             blocks,
             warnings=proposal.warnings,
@@ -2471,8 +2605,9 @@ def confirm_status_proposal_route(
         db=db,
         current_user=current_user,
         audit_evidence=audit_evidence,
+        commit=False,
     )
-    return AppointmentConfirmStatusProposalOut(
+    response_body = AppointmentConfirmStatusProposalOut(
         safe=True,
         requires_confirmation=False,
         autonomy_tier="confirmed_write",
@@ -2482,6 +2617,16 @@ def confirm_status_proposal_route(
         blocks=[],
         audit_evidence=audit_evidence,
     )
+    complete_appointment_command(
+        db,
+        decision.record,
+        response_status_code=status.HTTP_200_OK,
+        response_body=response_body.model_dump(mode="json"),
+        result_kind="confirmed_write",
+        target_appointment_id=command.appointment_id,
+    )
+    db.commit()
+    return response_body
 
 
 @router.get("/waiting-room", response_model=list[AppointmentOut])
@@ -6689,6 +6834,7 @@ def _validate_bernie_session_confirmation_binding(
 )
 def confirm_bernie_create_proposal(
     body: Any = Body(...),
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
@@ -6701,10 +6847,26 @@ def confirm_bernie_create_proposal(
     and one bounded audit evidence trail.
     """
     audit_evidence = list(_BERNIE_CONFIRM_CREATE_BASE_EVIDENCE)
+    normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
     try:
         body = BernieCreateProposalConfirmationIn.model_validate(body)
     except ValidationError:
         return _invalid_bernie_confirmation_payload()
+    decision = claim_appointment_command(
+        db,
+        practice_id=current_user.practice_id,
+        actor_user_id=str(current_user.id),
+        actor_role=current_user.role.value if current_user.role else "unknown",
+        operation_id=_STAFF_CREATE_CONFIRM_OPERATION_ID,
+        route_family=_BERNIE_CREATE_CONFIRM_ROUTE_FAMILY,
+        raw_idempotency_key=normalized_idempotency_key,
+        request_body=body.model_dump(mode="json"),
+        secret=_staff_create_confirm_idempotency_secret(),
+        stale_after=_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER,
+    )
+    mapped_decision = _handle_create_confirm_idempotency_decision(decision)
+    if mapped_decision is not None:
+        return mapped_decision
 
     blocks: list[AppointmentProposalIssue] = []
     selection = body.selection_proposal
@@ -6951,6 +7113,7 @@ def confirm_bernie_create_proposal(
         )
 
     if blocks:
+        db.rollback()
         return _block_bernie_create_confirmation(
             blocks,
             warnings=selection.warnings,
@@ -6968,6 +7131,7 @@ def confirm_bernie_create_proposal(
         or revalidated.autonomy_tier != "proposal"
         or not revalidated.requires_confirmation
     ):
+        db.rollback()
         return _block_bound_confirmation(
             [
                 _confirm_create_block(
@@ -6981,6 +7145,7 @@ def confirm_bernie_create_proposal(
         )
 
     if not _same_create_command(create_proposal.command, revalidated.command):
+        db.rollback()
         return _block_bound_confirmation(
             [_confirm_create_block(
                 "create_proposal_revalidation_mismatch",
@@ -7012,6 +7177,7 @@ def confirm_bernie_create_proposal(
         current_user,
         confirmed_warnings=confirmed_warnings,
         audit_evidence=audit_evidence,
+        commit=False,
     )
     _append_confirmation_outcome(
         target_state=BernieSessionState.confirmed,
@@ -7024,7 +7190,7 @@ def confirm_bernie_create_proposal(
             "audit_evidence_codes": list(audit_evidence),
         },
     )
-    return AppointmentConfirmCreateProposalOut(
+    response_body = AppointmentConfirmCreateProposalOut(
         safe=True,
         requires_confirmation=False,
         autonomy_tier="confirmed_write",
@@ -7034,6 +7200,16 @@ def confirm_bernie_create_proposal(
         blocks=[],
         audit_evidence=audit_evidence,
     )
+    complete_appointment_command(
+        db,
+        decision.record,
+        response_status_code=status.HTTP_200_OK,
+        response_body=response_body.model_dump(mode="json"),
+        result_kind="confirmed_write",
+        target_appointment_id=appointment.id,
+    )
+    db.commit()
+    return response_body
 
 
 @router.post(

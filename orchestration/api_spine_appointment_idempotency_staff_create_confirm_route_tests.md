@@ -5,7 +5,7 @@
 | Sprint | 131 |
 | Programme | Programme 2G / EMR4 API Spine |
 | Date | 2026-07-07 |
-| Status | Guarded route-test contract only; route implementation still unwired |
+| Status | Superseded by Sprint 132 route wiring; guarded tests are now executable route tests |
 | Steward posture | Define deterministic staff create-confirm route tests before enabling HTTP `Idempotency-Key` |
 
 ## Route Family Under Test
@@ -27,9 +27,9 @@ Out of scope for this route-test slice:
 - proposal-only `POST /api/v1/appointments/proposals/create`;
 - slot-search and Bernie command-style reads.
 
-## Future Executable Test Cases
+## Executable Test Cases
 
-The route wiring sprint must turn on deterministic tests for:
+Sprint 132 turned on deterministic tests for:
 
 1. missing `Idempotency-Key` returns a fail-closed error before appointment or
    audit writes;
@@ -53,10 +53,11 @@ The route wiring sprint must turn on deterministic tests for:
 
 The guarded tests in
 `tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py` must
-remain skipped until Sprint 132 or later wires the route. When wiring begins,
-remove the skip markers and make the tests execute against the real route.
+remain executable now that Sprint 132 has wired the route. Future route-family
+wiring should follow the same pattern: define the behavior matrix first, then
+enable real route tests only for the approved family.
 
-## Still Not Implemented
+## Sprint 131 Did Not Implement
 
 Sprint 131 does not:
 
@@ -70,9 +71,10 @@ Sprint 131 does not:
 
 ## Smallest Next Alignment Slice
 
-Recommended Sprint 132:
+Completed by Sprint 132:
 
 **Staff create-confirm route idempotency wiring.**
 
-Wire only the staff create-confirm route and make the guarded tests executable.
-Keep Bernie/update/status/delete/raw/proposal-only families out of scope.
+Sprint 132 wired only the staff create-confirm route and made the guarded tests
+executable. Bernie/update/status/delete/raw/proposal-only families remain out of
+scope.

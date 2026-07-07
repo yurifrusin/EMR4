@@ -46,13 +46,23 @@ def _post_proposal(client, token, body: dict):
     )
 
 
-def _confirm_proposal(client, token, proposal: dict, *, confirmed: bool = True):
+def _confirm_proposal(
+    client,
+    token,
+    proposal: dict,
+    *,
+    confirmed: bool = True,
+    idempotency_key: str = "test-create-confirm-key",
+):
     payload = proposal["confirm_payload"]
     payload["confirmed"] = confirmed
     return client.post(
         CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Idempotency-Key": idempotency_key,
+        },
     )
 
 
@@ -173,7 +183,10 @@ def test_create_confirm_route_blocks_tampered_evidence_without_write(
     confirm_resp = client.post(
         CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Idempotency-Key": "tampered-create-confirm-key",
+        },
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text

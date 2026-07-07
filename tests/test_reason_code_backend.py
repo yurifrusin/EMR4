@@ -54,6 +54,17 @@ def _auth(token):
     return {"Authorization": f"Bearer {token}"}
 
 
+_status_confirm_key_counter = 0
+
+
+def _auth_status_confirm(token):
+    global _status_confirm_key_counter
+    _status_confirm_key_counter += 1
+    headers = _auth(token)
+    headers["Idempotency-Key"] = f"reason-status-confirm-{_status_confirm_key_counter}"
+    return headers
+
+
 def test_reason_code_taxonomy_contains_expected_codes():
     assert {
         "PATIENT_CANCELLED",
@@ -134,7 +145,7 @@ def test_status_proposal_confirm_persists_status_reason_code(
     payload = proposal_resp.json()["confirm_payload"]
     payload["confirmed"] = True
 
-    confirm_resp = client.post(STATUS_CONFIRM_URL, json=payload, headers=_auth(token))
+    confirm_resp = client.post(STATUS_CONFIRM_URL, json=payload, headers=_auth_status_confirm(token))
     assert confirm_resp.status_code == 200, confirm_resp.text
     assert confirm_resp.json()["appointment"]["status_reason_code"] == "DID_NOT_ATTEND"
 

@@ -1,4 +1,3 @@
-import re
 from pathlib import Path
 
 from sqlalchemy import CheckConstraint, UniqueConstraint
@@ -172,9 +171,10 @@ def test_migration_matches_model_contract_and_previous_revision():
         assert forbidden not in text
 
 
-def test_appointment_routes_remain_unwired_from_idempotency_storage():
+def test_appointment_routes_do_not_import_storage_model_directly():
     route_text = _read(APPOINTMENTS_ROUTER)
 
     assert TABLE_NAME not in route_text
     assert "AppointmentCommandIdempotency" not in route_text
-    assert not re.search(r"Idempotency-Key|Header\([^)]*idempotency", route_text)
+    assert "confirmAppointmentCreateProposal" in route_text
+    assert "Idempotency-Key" in route_text

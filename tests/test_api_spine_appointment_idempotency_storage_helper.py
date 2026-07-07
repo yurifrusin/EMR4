@@ -139,12 +139,13 @@ def test_failed_transient_row_is_reported_without_retrying(db, practice, gp_user
     assert db.query(AppointmentCommandIdempotency).count() == 1
 
 
-def test_helper_source_keeps_routes_and_commits_out_of_scope():
+def test_helper_source_keeps_commits_and_route_specific_behavior_out_of_scope():
     helper_text = HELPER.read_text(encoding="utf-8")
     route_text = APPOINTMENTS_ROUTER.read_text(encoding="utf-8", errors="replace")
 
     assert "db.commit(" not in helper_text
     assert "Appointment(" not in helper_text
     assert ".with_for_update()" in helper_text
-    assert "Idempotency-Key" not in route_text
+    assert "Idempotency-Key" in route_text
+    assert "confirmAppointmentCreateProposal" in route_text
     assert "AppointmentCommandIdempotency" not in route_text

@@ -34,8 +34,11 @@ def _freeze_bernie_confirm_clock(monkeypatch):
     monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
 
 
-def _auth(token: str) -> dict[str, str]:
-    return {"Authorization": f"Bearer {token}"}
+def _auth(token: str, idempotency_key: str | None = None) -> dict[str, str]:
+    headers = {"Authorization": f"Bearer {token}"}
+    if idempotency_key is not None:
+        headers["Idempotency-Key"] = idempotency_key
+    return headers
 
 
 def _row_counts(db) -> tuple[int, int]:
@@ -97,7 +100,7 @@ def _confirm(client, token: str, selection: dict, confirmed=True):
             "confirmed": confirmed,
             "selection_proposal": selection,
         },
-        headers=_auth(token),
+        headers=_auth(token, "bernie-confirm-test-key"),
     )
 
 
@@ -115,6 +118,7 @@ def _make_conflicting_appointment(db, practice, practitioner, patient) -> Appoin
     )
     db.add(appt)
     db.flush()
+    db.commit()
     return appt
 
 

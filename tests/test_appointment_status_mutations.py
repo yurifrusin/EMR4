@@ -63,13 +63,25 @@ def _post_status_proposal(client, token, appt_id, payload: dict):
     )
 
 
+_status_confirm_key_counter = 0
+
+
+def _status_confirm_headers(token: str, prefix: str = "status-confirm-test") -> dict[str, str]:
+    global _status_confirm_key_counter
+    _status_confirm_key_counter += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"{prefix}-{_status_confirm_key_counter}",
+    }
+
+
 def _confirm_status_proposal(client, token, proposal: dict, *, confirmed: bool = True):
     payload = proposal["confirm_payload"]
     payload["confirmed"] = confirmed
     return client.post(
         "/api/v1/appointments/proposals/status-confirm",
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_confirm_headers(token),
     )
 
 
@@ -391,7 +403,7 @@ def test_delete_proposal_returns_signed_confirm_payload(
     resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
         json={"cancellation_reason": "Patient request"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_confirm_headers(token, "tampered-past-status"),
     )
 
     assert resp.status_code == 200, resp.text
@@ -612,12 +624,13 @@ def test_status_confirm_route_blocks_tampered_status_without_write(
     payload = proposal_resp.json()["confirm_payload"]
     payload["confirmed"] = True
     payload["status_proposal"]["command"]["status"] = "Arrived"
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = client.post(
         "/api/v1/appointments/proposals/status-confirm",
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_confirm_headers(token, "tampered-status"),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
@@ -747,12 +760,13 @@ def test_r9_status_confirm_past_date_blocks_tampered_status_without_write(
     payload = proposal_resp.json()["confirm_payload"]
     payload["confirmed"] = True
     payload["status_proposal"]["command"]["status"] = "NoShow"
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = client.post(
         "/api/v1/appointments/proposals/status-confirm",
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_confirm_headers(token, "tampered-past-status"),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text

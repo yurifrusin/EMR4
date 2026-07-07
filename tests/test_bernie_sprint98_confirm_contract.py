@@ -32,10 +32,16 @@ INTERPRET_URL = "/api/v1/appointments/proposals/bernie/interpret-booking-instruc
 SUPERVISED_URL = "/api/v1/appointments/proposals/bernie/supervised-booking"
 CONFIRM_URL = "/api/v1/appointments/proposals/create/confirm-bernie"
 REFERENCE_DATE = "2026-06-22"
+_IDEMPOTENCY_COUNTER = 0
 
 
 def _auth(token: str) -> dict[str, str]:
-    return {"Authorization": f"Bearer {token}"}
+    global _IDEMPOTENCY_COUNTER
+    _IDEMPOTENCY_COUNTER += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"sprint98-confirm-{_IDEMPOTENCY_COUNTER}",
+    }
 
 
 def _row_counts(db) -> tuple[int, int]:

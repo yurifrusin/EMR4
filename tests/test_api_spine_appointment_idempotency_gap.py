@@ -49,12 +49,38 @@ def test_openapi_idempotency_paths_are_documented_as_missing_enforcement():
     )
 
 
-def test_current_appointments_router_has_no_http_idempotency_header_binding():
+def test_current_appointments_router_has_bounded_staff_create_confirm_binding():
     router_text = APPOINTMENTS_ROUTER.read_text(encoding="utf-8")
+    route_start = router_text.index("def _idempotency_key_required_error(")
+    route_end = router_text.index("def confirm_update_proposal_route(")
+    bernie_start = router_text.index("def confirm_bernie_create_proposal(")
+    bernie_end = router_text.index("def select_no_slot_suggestion(")
+    status_start = router_text.index("def confirm_status_proposal_route(")
+    status_end = router_text.index("def get_waiting_room(")
+    create_confirm_route = router_text[route_start:route_end]
+    bernie_route = router_text[bernie_start:bernie_end]
+    status_route = router_text[status_start:status_end]
+    non_create_confirm_later_routes = (
+        router_text[route_end:status_start]
+        + router_text[status_end:bernie_start]
+        + router_text[bernie_end:]
+    )
 
-    assert "Idempotency-Key" not in router_text
-    assert not re.search(r"idempotency[_-]?key[^\n]{0,120}Header\(", router_text, re.IGNORECASE)
-    assert not re.search(r"Header\([^\n]{0,120}idempotency[_-]?key", router_text, re.IGNORECASE)
+    assert "Idempotency-Key" in create_confirm_route
+    assert re.search(
+        r"idempotency[_-]?key[^\n]{0,120}Header\(",
+        create_confirm_route,
+        re.IGNORECASE,
+    ) or re.search(
+        r"Header\([^\n]{0,120}idempotency[_-]?key",
+        create_confirm_route,
+        re.IGNORECASE,
+    )
+    assert "Idempotency-Key" in bernie_route
+    assert "_BERNIE_CREATE_CONFIRM_ROUTE_FAMILY" in bernie_route
+    assert "Idempotency-Key" in status_route
+    assert "_STATUS_CONFIRM_ROUTE_FAMILY" in status_route
+    assert "Idempotency-Key" not in non_create_confirm_later_routes
 
 
 def test_gap_doc_distinguishes_existing_safety_controls_from_idempotency():

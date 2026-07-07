@@ -6,8 +6,11 @@ compatibility lane.
 """
 
 from copy import deepcopy
-from datetime import date
+from datetime import date, datetime
 
+import pytest
+
+import app.routers.appointments as appointments_router
 from app.models.appointments import Appointment, AppointmentAuditLog
 from app.routers.appointments import _BERNIE_SESSION_STORE
 from app.services.bernie import (
@@ -24,10 +27,24 @@ from tests.conftest import make_token
 WRAPPER_URL = "/api/v1/appointments/proposals/bernie/supervised-booking"
 CONFIRM_URL = "/api/v1/appointments/proposals/create/confirm-bernie"
 REFERENCE_DATE = "2026-06-22"
+_IDEMPOTENCY_COUNTER = 0
+
+
+@pytest.fixture(autouse=True)
+def _freeze_signed_confirmation_clock(monkeypatch):
+    def fixed_now(tz):
+        return datetime(2026, 6, 22, 8, 0, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
 
 
 def _auth(token: str) -> dict[str, str]:
-    return {"Authorization": f"Bearer {token}"}
+    global _IDEMPOTENCY_COUNTER
+    _IDEMPOTENCY_COUNTER += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"signed-evidence-{_IDEMPOTENCY_COUNTER}",
+    }
 
 
 def _row_counts(db) -> tuple[int, int]:

@@ -1,5 +1,10 @@
+from datetime import datetime
+
+import pytest
+
 from app.config import settings
 from app.models.appointments import Appointment, AppointmentAuditLog
+import app.routers.appointments as appointments_router
 from app.routers.appointments import _BERNIE_SESSION_STORE
 from app.services.bernie import BernieSessionEventType, BernieSessionState
 from tests.conftest import make_token
@@ -12,8 +17,19 @@ SESSION_BASE = "/api/v1/appointments/bernie/sessions"
 REFERENCE_DATE = "2026-06-22"
 
 
-def _auth(token: str) -> dict[str, str]:
-    return {"Authorization": f"Bearer {token}"}
+@pytest.fixture(autouse=True)
+def _freeze_bernie_route_outcome_clock(monkeypatch):
+    def fixed_now(tz):
+        return datetime(2026, 6, 22, 8, 0, 0, tzinfo=tz)
+
+    monkeypatch.setattr(appointments_router, "_clinic_local_now", fixed_now)
+
+
+def _auth(token: str, idempotency_key: str | None = None) -> dict[str, str]:
+    headers = {"Authorization": f"Bearer {token}"}
+    if idempotency_key is not None:
+        headers["Idempotency-Key"] = idempotency_key
+    return headers
 
 
 def _create_recognition_session(client, token: str, surface_id: str) -> dict:
@@ -190,7 +206,7 @@ def test_session_bound_confirm_appends_confirmed_outcome_after_write(
     payload["confirmed"] = True
     before = (db.query(Appointment).count(), db.query(AppointmentAuditLog).count())
 
-    resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token))
+    resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "route-outcome-confirm-key"))
 
     assert resp.status_code == 200, resp.text
     data = resp.json()
