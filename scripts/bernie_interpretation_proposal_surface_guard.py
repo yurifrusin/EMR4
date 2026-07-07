@@ -90,6 +90,7 @@ PROVIDER_BOUNDARY_TRIGGER_PHRASES = (
 
 @dataclass(frozen=True)
 class ProposalSurfaceGuardFindings:
+    trigger_phrase_hit_count: int
     missing_readiness: tuple[Path, ...]
     unreadable_markdown: tuple[tuple[Path, str], ...]
 
@@ -113,6 +114,7 @@ def scan_proposal_surface(paths: tuple[Path, ...]) -> ProposalSurfaceGuardFindin
 
     missing: list[Path] = []
     unreadable: list[tuple[Path, str]] = []
+    trigger_phrase_hit_count = 0
     for path in _iter_markdown_paths(paths):
         try:
             text = _read_markdown_text(path)
@@ -122,6 +124,7 @@ def scan_proposal_surface(paths: tuple[Path, ...]) -> ProposalSurfaceGuardFindin
         folded = text.casefold()
         if not any(phrase in folded for phrase in TRIGGER_PHRASES):
             continue
+        trigger_phrase_hit_count += 1
         if any(marker.casefold() not in folded for marker in REQUIRED_MARKERS):
             missing.append(path)
             continue
@@ -142,6 +145,7 @@ def scan_proposal_surface(paths: tuple[Path, ...]) -> ProposalSurfaceGuardFindin
             ):
                 missing.append(path)
     return ProposalSurfaceGuardFindings(
+        trigger_phrase_hit_count=trigger_phrase_hit_count,
         missing_readiness=tuple(missing),
         unreadable_markdown=tuple(unreadable),
     )
