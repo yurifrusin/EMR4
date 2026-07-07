@@ -6,22 +6,24 @@ from pathlib import Path
 PHASE_PROGRAMMES = Path("orchestration/phase_programmes.md")
 
 
-def test_phase_programmes_recommended_move_is_current_after_sprint_151():
+def test_phase_programmes_recommended_move_is_current_after_sprint_152():
     text = PHASE_PROGRAMMES.read_text(encoding="utf-8")
 
-    assert "Current position after Sprint 151" in text
-    assert "default recommendation after Sprint 151 is **Programme 2G**" in text
+    assert "Current position after Sprint 152" in text
+    assert "default recommendation after Sprint 152 is **Programme 2G**" in text
     assert "OpenAPI/FastAPI header alignment guard for create-proposal" in text
-    assert "client-readiness decision for create-proposal `minLength: 8`" in text
+    assert "Sprint 152 then made that client-readiness decision" in text
+    assert "runtime" in text
+    assert "`minLength: 8` enforcement remains deferred" in text
     assert "provider-boundary guard stack has been consolidated" in text
     assert (
-        "Status | Sprint 151 create-proposal header alignment guard "
+        "Status | Sprint 152 create-proposal minLength readiness decision "
         "completed; sprint engine continuing" in text
     )
     assert "Sprint 110-118 provider-boundary guard consolidation" in text
     assert (
-        "Next Candidate Sprints | Sprint 152 client-readiness decision for "
-        "create-proposal `minLength: 8`" in text
+        "Next Candidate Sprints | Sprint 153 proposal-header readiness gap "
+        "preflight" in text
     )
 
 

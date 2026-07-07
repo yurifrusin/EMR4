@@ -15,6 +15,24 @@ ALIGNMENT = (
     / "orchestration"
     / "api_spine_appointment_idempotency_create_proposal_header_alignment.md"
 )
+READINESS = (
+    ROOT
+    / "orchestration"
+    / "api_spine_appointment_idempotency_create_proposal_minlength_readiness.md"
+)
+
+PROPOSAL_OPERATION_PATHS = {
+    "proposeAppointmentCreate": "/appointments/proposals/create",
+    "proposeAppointmentUpdate": "/appointments/proposals/update",
+    "proposeAppointmentStatus": "/appointments/proposals/status",
+    "proposeAppointmentDelete": "/appointments/proposals/delete",
+}
+
+UNWIRED_PROPOSAL_HANDLERS = (
+    "propose_update_appointment",
+    "propose_status_update",
+    "propose_delete_appointment",
+)
 
 
 def _openapi_doc():
@@ -68,6 +86,48 @@ def test_openapi_create_proposal_records_runtime_minlength_deferral():
         "openapi_min_length_runtime_enforcement": "deferred_until_client_readiness_decision",
         "replay_model": "deterministic_re_evaluation_no_proposal_ledger",
     }
+
+
+def test_openapi_proposal_routes_share_idempotency_header_contract():
+    doc = _openapi_doc()
+
+    for operation_id, path in PROPOSAL_OPERATION_PATHS.items():
+        operation = doc["paths"][path]["post"]
+        parameter_refs = [parameter["$ref"] for parameter in operation["parameters"]]
+
+        assert operation["operationId"] == operation_id
+        assert "#/components/parameters/IdempotencyKey" in parameter_refs
+
+
+def test_fastapi_proposal_header_binding_gap_is_explicitly_documented():
+    alignment = ALIGNMENT.read_text(encoding="utf-8")
+    readiness = READINESS.read_text(encoding="utf-8")
+
+    assert 'Header(None, alias="Idempotency-Key")' in _function_source(
+        "propose_create_appointment"
+    )
+    for handler in UNWIRED_PROPOSAL_HANDLERS:
+        source = _function_source(handler)
+        assert 'Header(None, alias="Idempotency-Key")' not in source
+        assert handler in alignment
+        assert handler in readiness
+
+    assert "3 of 4 canonical" in readiness
+    assert "OpenAPI proposal operations" in readiness
+    assert "do not yet bind `Idempotency-Key` in FastAPI" in readiness
+
+
+def test_minlength_enforcement_has_named_client_readiness_preconditions():
+    readiness = READINESS.read_text(encoding="utf-8")
+
+    for phrase in (
+        "create-proposal clients send a non-blank key",
+        "candidate keys are at least 8 characters after trimming",
+        "typed short-key rejection contract",
+        "All proposal-route header postures are reviewed together",
+        "runtime minLength enforcement remains deferred",
+    ):
+        assert phrase in readiness
 
 
 def test_fastapi_create_proposal_binds_header_before_proposal_evidence():

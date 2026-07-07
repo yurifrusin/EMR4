@@ -115,16 +115,16 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Sprint 151 create-proposal header alignment guard completed; sprint engine continuing |
+| Status | Sprint 152 create-proposal minLength readiness decision completed; sprint engine continuing |
 | Outcome | EMR4 has a root-to-branch API architecture that can guide implementation across clinical, diary, admin, agent, integration, security, and deployment surfaces |
-| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard, Sprint 128 appointment idempotency model/migration preflight, Sprint 129 appointment idempotency storage helper foundation, Sprint 130 appointment idempotency route integration preflight, Sprint 131 staff create-confirm idempotency route-test contract, Sprint 132 staff create-confirm idempotency route wiring, Sprint 133 Bernie create-confirm idempotency preflight, Sprint 134 Bernie create-confirm idempotency route-test contract, Sprint 135 Bernie create-confirm idempotency route wiring, Sprint 136 status-confirm idempotency preflight, Sprint 137 status-confirm idempotency route-test contract, Sprint 138 status-confirm idempotency route wiring, Sprint 139 update-confirm idempotency preflight, Sprint 140 update-confirm idempotency route-test contract, Sprint 141 update-confirm idempotency route wiring, Sprint 142 delete-confirm idempotency preflight, Sprint 143 delete-confirm idempotency route-test contract, Sprint 144 delete-confirm idempotency route wiring, Sprint 145 confirmation-family idempotency checkpoint, Sprint 146 cross-family idempotency integration tests, Sprint 147 proposal-only idempotency preflight, Sprint 148 create-proposal route-test contract, Sprint 149 create-proposal replay-model decision, Sprint 150 create-proposal syntactic idempotency wiring, Sprint 151 create-proposal header alignment guard |
-| Next Candidate Sprints | Sprint 152 client-readiness decision for create-proposal `minLength: 8`, or next proposal-only idempotency preflight before expanding update/status/waiting-area/delete proposal enforcement |
+| Representative Sprints | Sprint 98 *bernie* booking loop integrity, Sprint 99 API root-to-branch plan review, Sprint 100 API spine ADR, Sprint 101 schema prototype, Sprint 102 API steward skill, Sprint 110-118 provider-boundary guard consolidation, Sprint 120 post-118 checkpoint, Sprint 121 appointment command envelope inventory, Sprint 122 appointment OpenAPI drift guard, Sprint 123 OpenAPI backend alignment metadata, Sprint 124 appointment idempotency gap inspection, Sprint 125 appointment idempotency policy packet, Sprint 126 appointment idempotency storage design, Sprint 127 appointment idempotency storage artifact guard, Sprint 128 appointment idempotency model/migration preflight, Sprint 129 appointment idempotency storage helper foundation, Sprint 130 appointment idempotency route integration preflight, Sprint 131 staff create-confirm idempotency route-test contract, Sprint 132 staff create-confirm idempotency route wiring, Sprint 133 Bernie create-confirm idempotency preflight, Sprint 134 Bernie create-confirm idempotency route-test contract, Sprint 135 Bernie create-confirm idempotency route wiring, Sprint 136 status-confirm idempotency preflight, Sprint 137 status-confirm idempotency route-test contract, Sprint 138 status-confirm idempotency route wiring, Sprint 139 update-confirm idempotency preflight, Sprint 140 update-confirm idempotency route-test contract, Sprint 141 update-confirm idempotency route wiring, Sprint 142 delete-confirm idempotency preflight, Sprint 143 delete-confirm idempotency route-test contract, Sprint 144 delete-confirm idempotency route wiring, Sprint 145 confirmation-family idempotency checkpoint, Sprint 146 cross-family idempotency integration tests, Sprint 147 proposal-only idempotency preflight, Sprint 148 create-proposal route-test contract, Sprint 149 create-proposal replay-model decision, Sprint 150 create-proposal syntactic idempotency wiring, Sprint 151 create-proposal header alignment guard, Sprint 152 create-proposal minLength readiness decision |
+| Next Candidate Sprints | Sprint 153 proposal-header readiness gap preflight: real diary create-proposal caller key emission and/or next proposal-only idempotency surface before expanding update/status/waiting-area/delete proposal enforcement |
 | Design Record | `orchestration/api_spine_programme.md` |
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
 
-Current position after Sprint 151: the Ariadne/Fable 100+ sprint strategy map
+Current position after Sprint 152: the Ariadne/Fable 100+ sprint strategy map
 has been created, the stale worktree residue has been cleaned, the
 provider-boundary guard stack has been consolidated, and Programme 2G has
 returned to appointment-first API Spine alignment. Sprint 120 refreshed the API
@@ -277,7 +277,13 @@ alignment sprint. Sprint 151 then added the OpenAPI/FastAPI header alignment gua
 OpenAPI keeps the shared required header shape with
 `minLength: 8` and `maxLength: 128`, while FastAPI deliberately enforces only
 non-blank keys until a separate client-readiness decision changes runtime
-behavior.
+behavior. Sprint 152 then made that client-readiness decision: runtime
+`minLength: 8` enforcement remains deferred because the current diary caller
+still has to prove the non-blank proposal-header path and because update/status/
+delete proposal routes do not yet bind `Idempotency-Key` in FastAPI. Sprint 152
+added explicit guards for the shared OpenAPI proposal header references, the
+current FastAPI binding gap, and the concrete preconditions required before any
+future short-key rejection.
 
 The accepted strategy artifacts are
 `orchestration/agent_inbox/codex/review-claude-fable-100-sprint-strategy-map.md`
@@ -303,10 +309,12 @@ the next sprint from the active programme that best advances the phase:
 4. If orchestration confidence is the priority: continue **Programme 2C** with a
    browser-smoke automation harness plus broad pytest timeout segmentation.
 
-The default recommendation after Sprint 151 is **Programme 2G**: either decide
-client readiness for enforcing OpenAPI `minLength: 8` on create-proposal, or
-preflight the next proposal-only idempotency surface before expanding
-enforcement to update/status/waiting-area/delete proposal routes.
+The default recommendation after Sprint 152 is **Programme 2G**: close the
+proposal-header readiness gap before strict length enforcement. The strongest
+next candidates are a preflight/wiring sprint for the real diary create-proposal
+caller to send an 8+ character key, or a preflight for the next proposal-only
+idempotency surface before expanding enforcement to update/status/waiting-area/
+delete proposal routes.
 
 ## Deployment Readiness Pattern
 

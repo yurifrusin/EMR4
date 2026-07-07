@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | integrated |
 | Created | a3783d74 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-sprint152-create-proposal-minlength-readiness --summary "Short plan summary"` |
@@ -81,6 +81,12 @@ Run only read-only/static checks needed for the plan if useful; otherwise list e
 
 Ariadne can decide Sprint 152 scope from the packet: enforce minLength now with explicit client evidence and regression plan, or record deferred compatibility with guard tests and next proposal-only preflight recommendation.
 
+## Completion Notes
+
+- Files changed: plan/review packet only; no production code, tests, OpenAPI, diary UI, taskpane, or migrations.
+- Verification run: read-only/static review by Claude; Ariadne ran the focused Sprint 152 API-spine pytest suite after integration.
+- Integration result: accepted. Ariadne followed the defer-with-guard recommendation and added static guard tests plus a Sprint 152 decision artifact.
+
 ## Dissent / Risks
 
 Record concerns, alternative designs, or reasons this task should not be merged as-is.
@@ -89,6 +95,42 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 Required before submit. These notes are copied into Codex's review packet automatically:
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: Plan-gate only. No production code or tests edited. Wrote the
+  implementation/review plan packet
+  `orchestration/agent_inbox/codex/plan-claude-claude-sprint152-create-proposal-minlength-readiness.md`
+  and moved this task packet to `pending_plan_review`. No `app/`, OpenAPI,
+  migration, diary UI, or test edits.
+
+- Verification run: Read-only/static review only (plan gate). Reviewed AGENTS.md,
+  protocol_alerts.md, api_spine_programme.md, the Sprint 149/150/151 create-proposal
+  decision/guard docs, `app/routers/appointments.py` (propose_create_appointment +
+  _normalize_create_proposal_idempotency_key, lines 1030-1051), the OpenAPI
+  IdempotencyKey parameter (`docs/api-spine/openapi/appointment-commands.yaml:405`,
+  minLength 8/maxLength 128, required), the guard/contract tests
+  (`tests/test_api_spine_create_proposal_header_alignment.py`,
+  `tests/test_api_spine_create_proposal_idempotency_route_contract.py` incl.
+  `test_short_nonblank_key_is_accepted_until_minlength_client_readiness_decision`),
+  and the real callers. Key evidence: the diary booking modal
+  (`docs/diary/diary.js:7392`) POSTs `/appointments/proposals/create` via `apiFetch`
+  with NO Idempotency-Key header, and `apiFetch` (`docs/diary/diary.js:2417`) injects
+  only Content-Type/ngrok-skip/Authorization; backend test default key `proposal-key`
+  (12 chars) already satisfies minLength 8. No pytest was run per the plan-gate rule.
+
+- Recommendation: DEFER runtime OpenAPI minLength 8 enforcement this sprint; keep
+  non-blank-only compatibility and keep the existing guard tests locking the split
+  posture. Reasons: (A) client-readiness for even the non-blank bar is not met (the
+  diary client sends no header); (B) create-proposal is deterministic re-evaluation
+  with no ledger/replay, so short keys cause no correctness harm and minLength adds
+  negligible safety while adding client-break risk; (C) a raw FastAPI min_length would
+  emit 422, inconsistent with the typed 400 idempotency_key_required. Next proposal-only
+  preflight should be update/status header discipline, not raw-compat writes. Natural
+  trigger to later enforce minLength: once the diary client sends an 8+ char key
+  (e.g. reuse generateEventId), which satisfies minLength automatically.
+
+- Remaining risks: (1) Live non-smoke diary booking may already 400 on create-proposal
+  because it sends no header at all — a pre-existing client gap for the client-compat
+  lane (Antigravity) to confirm; (2) the OpenAPI-vs-runtime split may confuse SDK
+  generators, mitigated by the x-emr4-proposal-header-posture annotation + guard test;
+  (3) recommendation assumes the route stays deterministic (no proposal marker/ledger);
+  (4) no tests were run during the plan gate — Ariadne should run the three test files
+  above before acting on either verdict.

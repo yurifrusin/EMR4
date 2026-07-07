@@ -4,7 +4,7 @@
 |---|---|
 | To | antigravity |
 | Branch | `antigravity/current` |
-| Status | queued |
+| Status | integrated |
 | Created | a3783d74 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent antigravity` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent antigravity --task antigravity-sprint152-create-proposal-client-compatibility --summary "Short plan summary"` |
@@ -80,6 +80,12 @@ Prefer rg/static inspection. If you recommend runtime enforcement, name the exac
 ## Merge Criteria
 
 Ariadne gets a clear product/client compatibility verdict for Sprint 152 closeout and can integrate it into the API-spine decision artifact.
+
+## Completion Notes
+
+- Files changed: plan/review packet only; no production code, tests, OpenAPI, diary UI, taskpane, or migrations.
+- Verification run: read-only/static review by Antigravity; Ariadne ran the focused Sprint 152 API-spine pytest suite after integration.
+- Integration result: partially accepted as dissent. Ariadne accepted the finding that future diary-generated keys can easily be 8+ characters, but rejected immediate runtime enforcement because current readiness is not proven and sibling proposal routes remain unwired.
 
 ## Dissent / Risks
 

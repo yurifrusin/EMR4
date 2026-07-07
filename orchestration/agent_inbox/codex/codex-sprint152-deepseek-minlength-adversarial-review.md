@@ -4,7 +4,7 @@
 |---|---|
 | To | codex |
 | Branch | `codex/sprint152-deepseek-minlength-adversarial-review` |
-| Status | queued |
+| Status | integrated |
 | Created | a3783d74 |
 | Start Command | `python scripts\agent_worktrees.py handin --agent codex` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent codex --task codex-sprint152-deepseek-minlength-adversarial-review --summary "Short plan summary"` |
@@ -80,6 +80,13 @@ Run rg/static checks and, if editing only a review artifact, git diff --check. R
 ## Merge Criteria
 
 Review artifact names concrete blockers or says no blockers, and gives a clear recommendation: enforce minLength now, defer with guard, or choose next proposal-only preflight.
+
+## Completion Notes
+
+- Files changed: DeepSeek review artifact
+  `orchestration/agent_inbox/codex/review-deepseek-sprint152-create-proposal-minlength-readiness.md`.
+- Verification run: DeepSeek reported `git diff --check` clean for its artifact; Ariadne ran the focused Sprint 152 API-spine pytest suite after integration.
+- Integration result: accepted. Ariadne folded the defer-with-guard recommendation into Sprint 152 decision docs and tests.
 
 ## Dissent / Risks
 
