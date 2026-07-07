@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 180 Prompt-Thread Proposal-Guard Backlog Slice |
 | Integrated through | Ariadne narrow docs triage with DeepSeek sidecar confirmation |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 180 What Changed
@@ -60,8 +60,8 @@ Worker mix:
   returned `missing_readiness_count=448`, `unreadable_markdown_count=2`, and
   `total_fail_closed_findings_count=450`, down from Sprint 179's 450/2/452.
 - `git diff --check` passed.
-- Integration commit: pending.
-- Push result: pending.
+- Integration commit: `dbb110ca`.
+- Push result: `git push origin master` succeeded.
 - Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 179 What Changed
