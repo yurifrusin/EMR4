@@ -24,10 +24,72 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 196 Route Contract Behavior Cross-Checks |
+| Batch | Sprint 197 Auth-Gating Metadata Checks |
 | Integrated through | Ariadne implementation with Claude, Antigravity via `agy.exe`, and DeepSeek reviews |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
+
+## Sprint 197 What Changed
+
+- Extended `tests/test_diary_action_route_endpoint_coverage.py` with static
+  auth-gating metadata checks for documented Diary write contract routes.
+- Added helper inspection over FastAPI's flattened `APIRoute.dependant`
+  metadata.
+- Proposal routes, confirm routes, and raw mutation write-method rows must now
+  resolve through both `get_current_user` and the `require_role` checker.
+- Updated `docs/diary-action-route-contract.md` to document the auth/role
+  metadata verification layer.
+- Integrated Claude and Antigravity Sprint 197 review artifacts under
+  `orchestration/agent_inbox/codex/`.
+
+Worker mix:
+
+- Claude recommended flattened-dependant identity checks against
+  `get_current_user`, with write-row iteration to avoid shared-path blind spots.
+- Antigravity ran through `agy.exe` and recommended static dependency-tree
+  inspection for proposal, confirm, and raw mutation routes.
+- DeepSeek reviewed the same boundary and confirmed the current write surfaces
+  are covered by `require_role`, while warning against path-only checks.
+
+Boundary:
+
+- Static FastAPI dependency metadata inspection only.
+- No `TestClient`, HTTP requests, route handler execution, database session,
+  provider calls, memory/RAG/GraphRAG access, H15/H-series runtime imports,
+  historical diary material access, GraphQL access, or writes.
+- The checks do not add routes to the Diary action contract, promote planned
+  verbs, or convert support routes into grammar authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe -m pytest tests\test_appointment_route_inventory_preflight.py -q
+.venv\Scripts\python.exe scripts\appointment_route_inventory_preflight.py
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: endpoint coverage `12 passed`; inventory preflight tests `23 passed`;
+inventory script emitted the same safe aggregate counts; route contract
+`12 passed`; API spine artifacts `31 passed`; scenario integrity
+`8 passed, 1 skipped`; readiness/provider reports stayed blocked/false;
+leakage lint safe; whitespace check clean.
+
+Implementation commit: `cd8983a7`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded backend-readiness via narrow non-grammar
+documentation for out-of-contract support routes or a small idempotency/audit
+metadata preflight.
+
+---
 
 ## Sprint 196 What Changed
 
