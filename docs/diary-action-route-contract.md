@@ -42,3 +42,10 @@ confirmation affordance exist.
 - Read-only/meta verbs have no proposal, confirm, raw mutation, or staff
   confirmation authority.
 - The route-contract module stays static and side-effect free.
+- Mounted route surfaces stay disjoint by behavior role: read routes do not
+  overlap proposal, confirm, or raw mutation routes; signed-confirm routes stay
+  distinct from adjacent raw mutation routes.
+- Out-of-contract POST support-surface counts in the safe appointment route
+  inventory preflight match the mounted route table after documented contract
+  rows are removed. This is a static cross-check only and does not make those
+  support routes grammar authority.

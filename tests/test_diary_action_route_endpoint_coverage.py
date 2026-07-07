@@ -8,6 +8,10 @@ from app.services.diary.action_route_contract import (
     DIARY_ACTION_ROUTE_CONTRACTS,
     RouteAuthority,
 )
+from scripts.appointment_route_inventory_preflight import (
+    APPOINTMENT_PREFIX,
+    build_appointment_route_inventory_preflight,
+)
 
 
 def _ordered_api_routes() -> tuple[APIRoute, ...]:
@@ -17,7 +21,9 @@ def _ordered_api_routes() -> tuple[APIRoute, ...]:
 def _mounted_routes() -> dict[str, set[str]]:
     mounted: dict[str, set[str]] = {}
     for route in _ordered_api_routes():
-        mounted.setdefault(route.path, set()).update(route.methods or set())
+        mounted.setdefault(route.path, set()).update(
+            set(route.methods or set()) - {"HEAD", "OPTIONS"}
+        )
     return mounted
 
 
@@ -189,6 +195,76 @@ def test_planned_proposal_routes_do_not_overlap_executable_targets():
                 overlaps.append(f"{verb.value}:{route}")
 
     assert not overlaps
+
+
+def test_contract_route_surfaces_remain_disjoint_by_behavior_role():
+    overlaps = []
+
+    for verb, contract in DIARY_ACTION_ROUTE_CONTRACTS.items():
+        read_routes = set(contract.read_routes)
+        proposal_routes = set(contract.proposal_routes)
+        confirm_routes = set(contract.confirm_routes)
+        raw_mutation_routes = set(contract.raw_mutation_routes)
+        write_routes = proposal_routes | confirm_routes | raw_mutation_routes
+
+        if read_routes & write_routes:
+            overlaps.append(f"{verb.value}:read/write:{sorted(read_routes & write_routes)}")
+        if contract.authority is RouteAuthority.signed_confirm:
+            if confirm_routes & raw_mutation_routes:
+                overlaps.append(
+                    f"{verb.value}:confirm/raw:{sorted(confirm_routes & raw_mutation_routes)}"
+                )
+            if proposal_routes & confirm_routes:
+                overlaps.append(
+                    f"{verb.value}:proposal/confirm:{sorted(proposal_routes & confirm_routes)}"
+                )
+
+    assert not overlaps
+
+
+def test_out_of_contract_post_sub_family_counts_match_route_table_gaps():
+    mounted = _mounted_routes()
+    route_rows = {
+        (method, path)
+        for path, methods in mounted.items()
+        if path.startswith(APPOINTMENT_PREFIX)
+        for method in methods
+    }
+    contract_rows: set[tuple[str, str]] = set()
+
+    for contract in DIARY_ACTION_ROUTE_CONTRACTS.values():
+        for path in contract.read_routes:
+            for method in mounted.get(path, set()):
+                contract_rows.add((method, path))
+        for path in contract.proposal_routes + contract.confirm_routes:
+            if "POST" in mounted.get(path, set()):
+                contract_rows.add(("POST", path))
+        for path in contract.raw_mutation_routes:
+            for method in mounted.get(path, set()) & {"POST", "PUT", "PATCH", "DELETE"}:
+                contract_rows.add((method, path))
+
+    uncovered_post_paths = {
+        path
+        for method, path in route_rows - contract_rows
+        if method == "POST"
+    }
+    proposal_support_count = sum(
+        1 for path in uncovered_post_paths if "/proposals/" in path
+    )
+    state_tracking_count = sum(
+        1 for path in uncovered_post_paths if "/bernie/sessions" in path
+    )
+    ambiguous_count = (
+        len(uncovered_post_paths) - proposal_support_count - state_tracking_count
+    )
+
+    report = build_appointment_route_inventory_preflight()
+    sub_family_counts = report["out_of_contract_post_by_sub_family"]
+
+    assert proposal_support_count == sub_family_counts["proposal_support_post"]
+    assert state_tracking_count == sub_family_counts["state_tracking_post"]
+    assert ambiguous_count == sub_family_counts.get("ambiguous_post", 0)
+    assert len(uncovered_post_paths) == report["out_of_contract_post_route_method_count"]
 
 
 def test_contract_route_table_scan_does_not_issue_requests_or_grant_authority():
