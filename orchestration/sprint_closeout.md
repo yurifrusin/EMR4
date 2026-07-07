@@ -24,10 +24,55 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 186 Reference-Date No-Op Follow-Up Fixture |
-| Integrated through | Ariadne implementation with three DeepSeek lanes |
+| Batch | Sprint 187 Time-Window Date-Change Fixture |
+| Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek review lanes |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
+
+## Sprint 187 What Changed
+
+- Added
+  `tests/fixtures/bernie_scenarios/interpret_time_window_date_change_preserves_upper.yaml`.
+- The fixture proves a date-change follow-up preserves the threaded
+  time-window upper bound (`normalization.constraint.latest_time`) alongside
+  earliest time, patient, practitioner, and duration.
+- The first turn parses a bounded time window (`after 14:00 but before 15:30`)
+  for `2026-07-14`; the second turn changes only the date to `2026-07-15`
+  while preserving the full time window.
+- Updated `tests/fixtures/bernie_scenarios/README.md` to record
+  time-window threading prompt coverage.
+
+Sprint 187 is a Fable-aligned Programme 2D / Programme 2G backend-readiness
+fixture increment. It continues the native Bernie prompt-thread route-level
+track and does not open live provider, provider dry-run, runtime memory, RAG,
+GraphRAG, H15/H-series runtime imports, historical diary material access,
+GraphQL mutations, or model-to-database writes.
+
+Worker mix:
+
+- Claude reviewed the remaining Sprint 186 fixture candidates and recommended
+  the time-window upper-bound fixture over same-time anaphora because it closes
+  a real `latest_time` threading gap without novel anaphora ambiguity.
+- Antigravity independently reviewed the same candidates and also recommended
+  the time-window upper-bound fixture, after inspecting parser and route merge
+  behavior.
+- DeepSeek independently recommended the same time-window fixture and warned
+  not to assert `command_candidate.latest_time` because the stable contract is
+  currently on `normalization.constraint.latest_time`.
+- Ariadne implemented and integrated the fixture after realigning stale
+  Claude/current and Antigravity/current mirrors to `handoff/current`.
+
+## Sprint 187 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\test_scenario_replay.py -q`
+  passed serially (`.x..............................`; one pre-existing xfail,
+  existing warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
+  passed (`8 passed, 1 skipped`; existing warnings only).
+- `git diff --check` passed.
+- Integration commit: `f2a046ff`.
+- Push result: `git push origin master` succeeded.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 186 What Changed
 
