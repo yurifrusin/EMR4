@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 163 Interpret Edge Fixtures |
 | Integrated through | Fable-directed prompt-thread automation; Antigravity CLI product review; DeepSeek review; replacement DeepSeek review after Claude session limit |
-| Status | Closeout publication metadata in progress |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 163 What Changed
@@ -83,9 +83,12 @@ material access, GraphQL mutations, or model-to-database writes.
 Publication state:
 
 - Implementation commit SHA: `d1804cb6`.
-- Closeout metadata commit SHA: this publication metadata commit.
-- Push result: pending final push.
-- Final `git status --short --branch`: pending.
+- Closeout metadata commit SHA: `a25b69ea`.
+- Push result: `origin/master`, `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` aligned at the Sprint 163
+  publication commit.
+- Final `git status --short --branch`: clean except the expected branch header
+  after publication push.
 
 Strategic position: Sprint 163 continues Fable's Sprint 161 sequencing:
 small authored fake-provider, route-level prompt automation is useful now, but
