@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 160 Bernie/Diary Review Readiness |
 | Integrated through | Ariadne review-readiness packet with EMR4 API Steward skill; Claude/Antigravity packets dispatched; DeepSeek replacement/adversarial review accepted |
-| Status | Committed locally; push pending closeout metadata; sprint engine paused for Yuri review |
+| Status | Committed locally; push pending; sprint engine paused for Yuri review |
 | Last updated | 2026-07-07 |
 
 ## Sprint 160 What Changed
@@ -73,7 +73,7 @@ Publication state:
 
 - Dispatch commit SHA: `33454df`.
 - Review-readiness packet commit SHA: `abec002c`.
-- Closeout metadata commit SHA: pending until this closeout is committed.
+- Closeout metadata commit SHA: `bab2660`.
 - Push result: pending.
 - Final `git status --short --branch`: pending.
 
