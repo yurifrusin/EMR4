@@ -46,6 +46,18 @@ def test_appointment_route_inventory_preflight_is_safe_aggregate_status():
     assert report["out_of_contract_by_category"]["slot_search"] > 0
     assert report["out_of_contract_by_category"]["bernie_session"] > 0
     assert report["out_of_contract_by_category"]["bernie_proposal_support"] > 0
+    assert report["out_of_contract_post_route_method_count"] == (
+        report["out_of_contract_by_method_family"]["query_or_command_post"]
+    )
+    assert report["out_of_contract_post_route_method_count"] > 0
+    assert (
+        sum(report["out_of_contract_post_by_sub_family"].values())
+        == report["out_of_contract_post_route_method_count"]
+    )
+    assert report["out_of_contract_post_by_sub_family"]["proposal_support_post"] > 0
+    assert report["out_of_contract_post_by_sub_family"]["state_tracking_post"] > 0
+    assert report["out_of_contract_post_rows_are_grammar_dispatch_authority"] is False
+    assert report["post_sub_family_classifier"] == "fixed_static_path_patterns"
     assert report["all_contract_paths_mounted"] is True
     assert report["contract_is_complete_router_catalogue"] is False
     assert report["raw_adjacent_routes_are_grammar_dispatch_authority"] is False
@@ -86,6 +98,7 @@ def test_appointment_route_inventory_preflight_has_closed_runtime_posture():
         "contract_is_complete_router_catalogue",
         "raw_adjacent_routes_are_grammar_dispatch_authority",
         "documented_path_out_of_contract_rows_are_grammar_authority",
+        "out_of_contract_post_rows_are_grammar_dispatch_authority",
     ],
 )
 def test_appointment_route_inventory_preflight_rejects_opened_boundaries(field):
@@ -120,6 +133,30 @@ def test_appointment_route_inventory_preflight_rejects_uncovered_partition_drift
         assert_appointment_route_inventory_preflight_safety(report)
 
 
+def test_appointment_route_inventory_preflight_rejects_post_count_drift():
+    report = build_appointment_route_inventory_preflight()
+    report["out_of_contract_post_route_method_count"] += 1
+
+    with pytest.raises(AssertionError):
+        assert_appointment_route_inventory_preflight_safety(report)
+
+
+def test_appointment_route_inventory_preflight_rejects_post_sub_family_drift():
+    report = build_appointment_route_inventory_preflight()
+    report["out_of_contract_post_by_sub_family"]["ambiguous_post"] = 1
+
+    with pytest.raises(AssertionError):
+        assert_appointment_route_inventory_preflight_safety(report)
+
+
+def test_appointment_route_inventory_preflight_rejects_unknown_post_sub_family():
+    report = build_appointment_route_inventory_preflight()
+    report["out_of_contract_post_by_sub_family"]["confirm_post"] = 1
+
+    with pytest.raises(AssertionError):
+        assert_appointment_route_inventory_preflight_safety(report)
+
+
 def test_appointment_route_inventory_preflight_does_not_emit_route_paths():
     report = build_appointment_route_inventory_preflight()
     rendered = repr(report)
@@ -127,3 +164,6 @@ def test_appointment_route_inventory_preflight_does_not_emit_route_paths():
     assert "/api/v1/appointments/" not in rendered
     assert "appointment_id" not in rendered
     assert "practitioner_id" not in rendered
+    assert "session_id" not in rendered
+    assert "slot-search" not in rendered
+    assert "events" not in rendered

@@ -87,6 +87,16 @@ def _method_family(methods: set[str]) -> str:
     return "other"
 
 
+def _post_sub_family(method: str, path: str) -> str:
+    if method != "POST":
+        return "not_post"
+    if "/proposals/" in path:
+        return "proposal_support_post"
+    if "/bernie/sessions" in path:
+        return "state_tracking_post"
+    return "ambiguous_post"
+
+
 def _route_category(path: str) -> str:
     if path.startswith(f"{APPOINTMENT_PREFIX}/dev/"):
         return "dev"
@@ -125,6 +135,12 @@ def build_appointment_route_inventory_preflight() -> dict[str, Any]:
         _method_family({method}) for method, _path in uncovered_rows
     )
     uncovered_by_category = Counter(_route_category(path) for _method, path in uncovered_rows)
+    uncovered_post_rows = {
+        (method, path) for method, path in uncovered_rows if method == "POST"
+    }
+    uncovered_post_by_sub_family = Counter(
+        _post_sub_family(method, path) for method, path in uncovered_post_rows
+    )
 
     route_method_rows = len(route_rows)
     grammar_authority_paths = {path for _method, path in grammar_authority_rows}
@@ -170,10 +186,16 @@ def build_appointment_route_inventory_preflight() -> dict[str, Any]:
             sorted(uncovered_by_method_family.items())
         ),
         "out_of_contract_by_category": dict(sorted(uncovered_by_category.items())),
+        "out_of_contract_post_route_method_count": len(uncovered_post_rows),
+        "out_of_contract_post_by_sub_family": dict(
+            sorted(uncovered_post_by_sub_family.items())
+        ),
         "all_contract_paths_mounted": contract_paths <= mounted_paths,
         "contract_is_complete_router_catalogue": False,
         "raw_adjacent_routes_are_grammar_dispatch_authority": False,
         "documented_path_out_of_contract_rows_are_grammar_authority": False,
+        "out_of_contract_post_rows_are_grammar_dispatch_authority": False,
+        "post_sub_family_classifier": "fixed_static_path_patterns",
         "runtime_or_provider_wiring_ready": False,
         "provider_calls_performed": False,
         "http_requests_performed": False,
@@ -231,10 +253,31 @@ def assert_appointment_route_inventory_preflight_safety(report: dict[str, Any]) 
     )
     assert report["out_of_contract_by_method_family"]
     assert report["out_of_contract_by_category"]
+    assert report["out_of_contract_post_route_method_count"] > 0
+    assert (
+        report["out_of_contract_post_route_method_count"]
+        == report["out_of_contract_by_method_family"].get("query_or_command_post", 0)
+    )
+    assert (
+        report["out_of_contract_post_route_method_count"]
+        <= report["out_of_contract_route_method_count"]
+    )
+    assert report["out_of_contract_post_by_sub_family"]
+    assert set(report["out_of_contract_post_by_sub_family"]) <= {
+        "proposal_support_post",
+        "state_tracking_post",
+        "ambiguous_post",
+    }
+    assert (
+        sum(report["out_of_contract_post_by_sub_family"].values())
+        == report["out_of_contract_post_route_method_count"]
+    )
     assert report["all_contract_paths_mounted"] is True
     assert report["contract_is_complete_router_catalogue"] is False
     assert report["raw_adjacent_routes_are_grammar_dispatch_authority"] is False
     assert report["documented_path_out_of_contract_rows_are_grammar_authority"] is False
+    assert report["out_of_contract_post_rows_are_grammar_dispatch_authority"] is False
+    assert report["post_sub_family_classifier"] == "fixed_static_path_patterns"
     assert report["runtime_or_provider_wiring_ready"] is False
     assert report["provider_calls_performed"] is False
     assert report["http_requests_performed"] is False

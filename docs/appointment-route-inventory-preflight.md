@@ -2,7 +2,7 @@
 
 Date: 2026-07-07
 
-Sprint: 193, extended in Sprint 194
+Sprint: 193, extended in Sprints 194 and 195
 
 ## Purpose
 
@@ -30,7 +30,9 @@ The preflight reports:
 - out-of-contract route and method-row counts by coarse method family; and
 - out-of-contract route counts by coarse category; and
 - out-of-contract method-row counts split into contract-documented paths and
-  wholly undocumented paths.
+  wholly undocumented paths; and
+- out-of-contract POST method-row counts split by fixed, path-pattern
+  sub-family.
 
 `raw_mutation_routes` are counted separately as adjacent route awareness. They
 are not counted as grammar dispatch authority, and only mounted write methods
@@ -44,6 +46,12 @@ it does not mean the method has grammar authority, route behavior evidence, or a
 safe dispatch contract. The report keeps
 `documented_path_out_of_contract_rows_are_grammar_authority=false`.
 
+Out-of-contract POST sub-family counts are also planning signals only. They are
+derived from fixed static path patterns and emitted as aggregate labels such as
+`proposal_support_post`, `state_tracking_post`, and `ambiguous_post`; they do
+not inspect handlers, request bodies, or runtime behavior. The report keeps
+`out_of_contract_post_rows_are_grammar_dispatch_authority=false`.
+
 ## Boundary
 
 This is a static route-table preflight only. It does not issue HTTP requests,
@@ -55,6 +63,8 @@ diary material, invoke GraphQL, or perform writes.
 complete appointment-router catalogue. Out-of-contract route counts are a
 planning signal for later review; they are not automatically bugs and do not
 require adding non-grammar infrastructure routes to the Diary action contract.
+Classifying a POST row as proposal-support or state-tracking shaped does not
+make that route a proposal, confirm, raw mutation, or grammar dispatch route.
 
 ## Verification
 
