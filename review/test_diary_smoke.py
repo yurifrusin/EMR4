@@ -6749,7 +6749,10 @@ def test_bernie_tool_intent_extension_proposal_renders_and_confirms(diary_page):
             route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected booking interpreter"}))
             return
         if request.method == "POST" and request.url.endswith("/appointments/proposals/update/confirm"):
-            captured_update.append(request.post_data_json)
+            captured_update.append({
+                "body": request.post_data_json,
+                "idempotency_key": request.headers.get("idempotency-key"),
+            })
             route.fulfill(
                 status=200,
                 content_type="application/json",
@@ -6818,9 +6821,10 @@ def test_bernie_tool_intent_extension_proposal_renders_and_confirms(diary_page):
     assert captured_tool_intent, "Expected tool-intent request"
     assert captured_tool_intent[0]["context_frames"], "Expected visible diary context frames"
     assert any(frame.get("appointment_id") == "appt-tool-1" for frame in captured_tool_intent[0]["context_frames"])
-    assert captured_update[0]["confirmed"] is True
-    assert captured_update[0]["update_proposal"]["command"]["appointment_id"] == "appt-tool-1"
-    assert captured_update[0]["update_proposal"]["command"]["duration_minutes"] == 30
+    assert captured_update[0]["idempotency_key"] == "update-confirm-fresh-tool-1"
+    assert captured_update[0]["body"]["confirmed"] is True
+    assert captured_update[0]["body"]["update_proposal"]["command"]["appointment_id"] == "appt-tool-1"
+    assert captured_update[0]["body"]["update_proposal"]["command"]["duration_minutes"] == 30
 
 
 def test_human_drag_resize_uses_signed_update_confirm_route(diary_page):

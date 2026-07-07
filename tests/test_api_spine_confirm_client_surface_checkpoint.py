@@ -32,7 +32,7 @@ def test_confirm_client_checkpoint_keeps_remaining_decisions_separate():
         "Bernie tool-intent update confirm",
         "Proposal-only update/status/waiting-area/delete",
         "Strict `minLength: 8` runtime enforcement",
-        "Next fix",
+        "confirmBernieToolIntentChange()` sends `update-confirm-<freshness>`",
         "Deferred, broader",
         "Deferred, compatibility hardening",
     ):
@@ -50,7 +50,7 @@ def test_confirm_client_checkpoint_recommends_tool_intent_then_review_prep():
         'wire `confirmBernieToolIntentChange()`',
         "freshness-derived key from `update_proposal_freshness_id`",
         "tool-intent confirm click",
-        "Recommended Sprint 160",
+        "After Sprint 159, recommended Sprint 160",
         "Bernie/Diary review-readiness packet",
         "provider-boundary/readiness commands",
         "Pause for Yuri after the Sprint 160 packet",
@@ -90,4 +90,5 @@ def test_diary_client_surface_matches_checkpoint_summary():
     next_function = source.index("\nfunction ", tool_intent_start)
     tool_intent = source[tool_intent_start:next_function]
     assert "apiFetch(normalizeApiPath(envelope.confirm_endpoint)" in tool_intent
-    assert "Idempotency-Key" not in tool_intent
+    assert "updateConfirmIdempotencyKey(envelope, confirmPayload)" in tool_intent
+    assert "headers: confirmHeaders" in tool_intent

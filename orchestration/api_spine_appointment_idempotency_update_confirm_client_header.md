@@ -49,8 +49,7 @@ surfaces:
 
 ## Deferred Work
 
-`confirmBernieToolIntentChange()` still posts a signed update-confirm payload
-without a client idempotency header. It is intentionally left as the remaining
-tracked confirm-client gap because its server-session/tool-intent key semantics
-should be handled in a Bernie-specific sprint rather than folded into ordinary
-Diary edit/move behaviour.
+Sprint 159 wires `confirmBernieToolIntentChange()` with the same
+freshness-derived update-confirm header strategy. Proposal-only header binding,
+raw compatibility paths, strict `minLength: 8` runtime enforcement, and backend
+ledger behaviour remain separate follow-up decisions.

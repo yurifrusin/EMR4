@@ -1731,8 +1731,12 @@ async function confirmBernieToolIntentChange(envelope) {
   }
   const confirmPayload = JSON.parse(JSON.stringify(envelope.confirm_payload));
   confirmPayload.confirmed = true;
+  const confirmHeaders = idempotencyHeadersFor(
+    updateConfirmIdempotencyKey(envelope, confirmPayload)
+  );
   const response = await apiFetch(normalizeApiPath(envelope.confirm_endpoint), {
     method: "POST",
+    headers: confirmHeaders,
     body: JSON.stringify(confirmPayload)
   });
   if (!response.ok) {

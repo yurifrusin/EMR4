@@ -36,14 +36,15 @@ The following Diary callers currently emit HTTP `Idempotency-Key`:
 
 These FastAPI confirmation routes already bind
 `Header(None, alias="Idempotency-Key")` and fail closed when the header is
-missing or blank. The remaining ordinary Diary confirm-client gap is now
-limited to Bernie tool-intent update confirmation.
+missing or blank. After Sprint 159, the known Diary confirm-client callers for
+these enforced routes emit HTTP idempotency headers.
 
 | Backend route | FastAPI handler | Diary caller(s) | Sprint 154 posture |
 |---|---|---|---|
 | `POST /api/v1/appointments/proposals/create/confirm` | `confirm_create_proposal_route` | `saveBooking` create confirm branch | Wired in Sprint 155 |
-| `POST /api/v1/appointments/proposals/create/confirm-bernie` | `confirm_bernie_create_proposal` | Bernie review confirm adapter; `confirmBernieToolIntentChange` remains out of scope because it is an update-confirm tool-intent path | Partially wired in Sprint 155; tool-intent path still deferred |
+| `POST /api/v1/appointments/proposals/create/confirm-bernie` | `confirm_bernie_create_proposal` | Bernie review confirm adapter | Wired in Sprint 155 |
 | `POST /api/v1/appointments/proposals/update/confirm` | `confirm_update_proposal_route` | `saveBooking` update confirm branch and drag/reschedule confirm branch | Wired in Sprint 157 |
+| `POST /api/v1/appointments/proposals/update/confirm` | `confirm_update_proposal_route` | `confirmBernieToolIntentChange` Bernie tool-intent update confirm | Wired in Sprint 159 |
 | `POST /api/v1/appointments/proposals/status-confirm` | `confirm_status_proposal_route` | `applySignedStatusProposal` | Wired in Sprint 156 |
 | `POST /api/v1/appointments/proposals/delete-confirm` | `confirm_delete_proposal_route` | `applySignedDeleteProposal` | Wired in Sprint 156 |
 
@@ -83,17 +84,17 @@ Sprint 154 does not change:
 
 ## Follow-Up Recommendation
 
-Sprints 155-157 have wired the already-enforced ordinary confirm-client header
+Sprints 155-159 have wired the already-enforced confirm-client header
 paths:
 
 1. staff create confirm from the booking modal;
 2. Bernie create confirm from the Bernie review confirm adapter;
 3. status confirm and delete confirm from dedicated Diary helpers;
-4. ordinary update confirm from edit-modal and drag/reschedule flows.
+4. ordinary update confirm from edit-modal and drag/reschedule flows;
+5. Bernie tool-intent update confirm.
 
-The remaining client-header decisions should be handled through a compact
-confirm-client surface checkpoint before choosing the next implementation
-slice.
+The remaining idempotency decisions should be handled as separate backend/API
+spine slices rather than as confirm-client header plumbing.
 
-`confirmBernieToolIntentChange`, proposal-only header binding, and strict
-`minLength: 8` runtime enforcement should follow only in later bounded sprints.
+Proposal-only header binding and strict `minLength: 8` runtime enforcement
+should follow only in later bounded sprints.

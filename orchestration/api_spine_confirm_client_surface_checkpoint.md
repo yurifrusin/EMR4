@@ -21,7 +21,7 @@ path, and which idempotency topics should stay separate.
 | Ordinary update confirm | Confirmation ledger enforced | Edit-modal and drag/reschedule callers send `update-confirm-<freshness>` | Covered |
 | Status confirm | Confirmation ledger enforced | `applySignedStatusProposal()` sends `status-confirm-<freshness>` | Covered |
 | Delete confirm | Confirmation ledger enforced | `applySignedDeleteProposal()` sends `delete-confirm-<freshness>` | Covered |
-| Bernie tool-intent update confirm | Same update-confirm backend route is enforced | `confirmBernieToolIntentChange()` remains header-free | Next fix |
+| Bernie tool-intent update confirm | Same update-confirm backend route is enforced | `confirmBernieToolIntentChange()` sends `update-confirm-<freshness>` after Sprint 159 | Covered |
 | Proposal-only update/status/waiting-area/delete | OpenAPI declares proposal-command idempotency, but FastAPI binding is not wired | Client proposal-only headers remain mostly unwired except create-proposal | Deferred, broader |
 | Strict `minLength: 8` runtime enforcement | OpenAPI documents the stricter shape | Runtime enforcement remains blank/non-blank only | Deferred, compatibility hardening |
 
@@ -44,7 +44,7 @@ Rationale:
 
 ## Recommendation
 
-The next sprint should fix the Bernie tool-intent update-confirm header before a
+Sprint 159 should fix the Bernie tool-intent update-confirm header before a
 meaningful integrated Bernie/Diary review.
 
 Recommended Sprint 159:
@@ -56,7 +56,7 @@ Recommended Sprint 159:
 - add route-intercepted smoke coverage that captures the header on the
   tool-intent confirm click.
 
-Recommended Sprint 160:
+After Sprint 159, recommended Sprint 160:
 
 - produce a compact Bernie/Diary review-readiness packet;
 - run the existing provider-boundary/readiness commands required by

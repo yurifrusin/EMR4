@@ -84,6 +84,7 @@ def test_frontend_update_confirm_callers_emit_stable_headers():
     source = _read(DIARY_JS)
     save_booking = _function_source(source, "saveBooking")
     move_resize = _function_source(source, "handleMoveResize")
+    tool_intent = _function_source(source, "confirmBernieToolIntentChange")
 
     update_confirm_block = _block(
         save_booking,
@@ -101,6 +102,8 @@ def test_frontend_update_confirm_callers_emit_stable_headers():
     assert "headers: confirmHeaders" in update_confirm_block
     assert "updateConfirmIdempotencyKey(proposal, confirmPayload)" in move_resize_confirm_block
     assert "headers: confirmHeaders" in move_resize_confirm_block
+    assert "updateConfirmIdempotencyKey(envelope, confirmPayload)" in tool_intent
+    assert "headers: confirmHeaders" in tool_intent
 
 
 def test_frontend_update_confirm_falls_back_to_proposal_scoped_key():
@@ -114,18 +117,14 @@ def test_frontend_update_confirm_falls_back_to_proposal_scoped_key():
     assert "return ensureProposalConfirmIdempotencyKey(proposal, kind);" in freshness_helper
 
 
-def test_frontend_remaining_confirm_callers_are_explicitly_tracked_as_missing_headers():
+def test_frontend_confirm_callers_are_wired_or_explicitly_tracked():
     source = _read(DIARY_JS)
     preflight = _read(PREFLIGHT)
 
-    confirm_blocks = {
-        "confirmBernieToolIntentChange": _function_source(source, "confirmBernieToolIntentChange"),
-    }
-
-    for label, block in confirm_blocks.items():
-        assert "apiFetch(normalizeApiPath(" in block, label
-        assert not _contains_idempotency_header(block), label
-        assert label.split()[0] in preflight or label in preflight
+    tool_intent = _function_source(source, "confirmBernieToolIntentChange")
+    assert "apiFetch(normalizeApiPath(" in tool_intent
+    assert "updateConfirmIdempotencyKey(envelope, confirmPayload)" in tool_intent
+    assert "headers: confirmHeaders" in tool_intent
 
     for phrase in (
         "confirm_create_proposal_route",
@@ -177,5 +176,5 @@ def test_frontend_header_preflight_keeps_closed_gates_closed():
     ):
         assert phrase in text
 
-    assert "confirm-client surface checkpoint" in text
-    assert "`confirmBernieToolIntentChange`, proposal-only header binding" in text
+    assert "Bernie tool-intent update confirm" in text
+    assert "Proposal-only header binding and strict `minLength: 8` runtime enforcement" in text
