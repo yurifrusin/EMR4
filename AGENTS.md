@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 150 create-proposal syntactic idempotency wiring completed locally pending closeout commit. `POST /api/v1/appointments/proposals/create` now requires a non-blank `Idempotency-Key` header, then deterministically re-evaluates without proposal ledger rows, stored replay, same-key conflicts, slot reservations, audit writes, or appointment writes |
-| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 151 OpenAPI/FastAPI header alignment guard for create-proposal, including the deferred `minLength: 8` compatibility decision |
+| **Current active track** | Sprint 151 create-proposal OpenAPI/FastAPI header alignment guard in progress. Sprint 150 wired `POST /api/v1/appointments/proposals/create` to require a non-blank `Idempotency-Key`; Sprint 151 preserves that OpenAPI documents `minLength: 8` while FastAPI deliberately enforces non-blank only pending a client-readiness decision |
+| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 152: either decide client readiness for enforcing OpenAPI `minLength: 8` on create-proposal, or preflight the next proposal-only header surface before any update/status/waiting-area/delete proposal enforcement |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

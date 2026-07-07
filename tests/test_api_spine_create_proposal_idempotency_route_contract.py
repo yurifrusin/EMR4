@@ -44,6 +44,7 @@ PASSING_CONTRACT_TESTS = {
     "test_missing_idempotency_key_blocks_before_create_proposal_evidence",
     "test_blank_idempotency_key_is_treated_as_missing_for_create_proposal",
     "test_keyed_create_proposal_has_no_appointment_audit_ledger_or_slot_reservation_side_effect",
+    "test_short_nonblank_key_is_accepted_until_minlength_client_readiness_decision",
     "test_same_key_same_body_create_proposal_retry_does_not_gain_write_authority",
     "test_same_key_different_body_create_proposal_semantics_are_proposal_scoped",
     "test_create_proposal_idempotency_does_not_weaken_confirmation_evidence_or_freshness",
@@ -283,6 +284,18 @@ def test_keyed_create_proposal_has_no_appointment_audit_ledger_or_slot_reservati
         db.query(AppointmentAuditLog).count(),
         db.query(AppointmentCommandIdempotency).count(),
     ) == before
+
+
+def test_short_nonblank_key_is_accepted_until_minlength_client_readiness_decision(
+    client, db, gp_user, patient, practitioner
+):
+    token = make_token(gp_user)
+
+    resp = _post_proposal(client, token, _base_body(patient, practitioner), idempotency_key="a")
+
+    assert resp.status_code == 200, resp.text
+    assert resp.json()["safe"] is True, resp.json()
+    assert db.query(AppointmentCommandIdempotency).count() == 0
 
 
 def test_same_key_same_body_create_proposal_retry_does_not_gain_write_authority(

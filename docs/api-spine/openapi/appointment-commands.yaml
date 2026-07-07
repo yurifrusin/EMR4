@@ -113,6 +113,10 @@ paths:
         Resolves current diary state, policy, tenant scope, conflicts, breaks,
         identity, and freshness. Returns a typed proposal for staff review; it
         does not create an appointment.
+      x-emr4-proposal-header-posture:
+        runtime_validation: non_blank_only
+        openapi_min_length_runtime_enforcement: deferred_until_client_readiness_decision
+        replay_model: deterministic_re_evaluation_no_proposal_ledger
       parameters:
         - $ref: "#/components/parameters/IdempotencyKey"
         - $ref: "#/components/parameters/CorrelationId"

@@ -24,10 +24,58 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 145 Confirmation-Family Idempotency Checkpoint |
-| Integrated through | Ariadne implementation with EMR4 API Steward skill; DeepSeek worker advice integrated; Claude and Antigravity protocol packets remain queued locally |
-| Status | Committed and pushed in Sprint 145 closeout commit; sprint engine continuing |
+| Batch | Sprint 151 Create-Proposal Header Alignment Guard |
+| Integrated through | Ariadne implementation; DeepSeek review lane advice integrated; Claude and Antigravity protocol packets remain queued locally |
+| Status | Pending Sprint 151 closeout commit and push |
 | Last updated | 2026-07-07 |
+
+## Sprint 151 What Changed
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_create_proposal_header_alignment.md`.
+- Added `tests/test_api_spine_create_proposal_header_alignment.py`.
+- Added the operation-level
+  `x-emr4-proposal-header-posture` OpenAPI annotation for
+  `proposeAppointmentCreate`.
+- Guarded that OpenAPI keeps the shared required `Idempotency-Key` header for
+  `/appointments/proposals/create` with `minLength: 8` and `maxLength: 128`.
+- Guarded that FastAPI binds `Header(None, alias="Idempotency-Key")` on
+  `propose_create_appointment` before proposal evidence is minted.
+- Recorded and tested that runtime `minLength: 8` enforcement remains deferred:
+  Sprint 150 rejects missing/blank keys only until a separate client-readiness
+  decision changes behavior.
+- Added a DB-backed one-character-key test proving short non-blank keys are
+  still accepted until that decision is made.
+- Guarded that create-proposal still has no proposal ledger, no stored proposal
+  replay, no same-key/different-body conflicts, no appointment/audit writes,
+  and no slot reservations.
+- Updated the programme and handover pointers so Sprint 152 is either a
+  client-readiness decision for `minLength: 8` or the next proposal-only
+  preflight.
+- No route behavior changed.
+
+## Sprint 151 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_create_proposal_header_alignment.py tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_create_proposal_idempotency_route_contract.py tests/test_api_spine_create_proposal_replay_model_decision.py tests/test_phase_programmes_current_checkpoint.py tests/test_sprint_closeout_protocol.py -q`
+  (`41 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_create_proposal_header_alignment.py tests\test_api_spine_create_proposal_idempotency_route_contract.py tests\test_phase_programmes_current_checkpoint.py tests\test_sprint_closeout_protocol.py`.
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean.
+
+Publication state:
+
+- Integration commit SHA: `pending Sprint 151 closeout commit`.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 152, either
+client-readiness for create-proposal `minLength: 8` runtime enforcement or a
+guarded preflight for the next proposal-only header surface.
+
+---
+
+## Previous Closeout - Sprint 145
 
 ## Sprint 145 What Changed
 
