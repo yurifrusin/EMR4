@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 176 Fake-Provider Evidence Label Guard |
 | Integrated through | Ariadne static guard test over the prompt-thread readiness and backend-pass evidence packets |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 176 What Changed
@@ -49,8 +49,8 @@ mutations, or model-to-database write authority.
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_fake_provider_evidence_labels.py -q`
   (`2 passed`; existing warnings only).
 - `git diff --check` passed.
-- Integration commit: pending.
-- Push result: pending.
+- Integration commit: `14facb34`.
+- Push result: `git push origin master` succeeded.
 - Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 175 What Changed
