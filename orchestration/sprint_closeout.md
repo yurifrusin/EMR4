@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 185 Reference-Date Reload Conflict Fixture |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
-| Status | Pending final commit and push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 185 What Changed
@@ -77,8 +77,8 @@ Worker mix:
 - Note: an earlier parallel run of scenario replay and integrity hit the known
   transient Postgres enum DDL race (`userrole` duplicate type); rerunning the
   tests serially passed.
-- Integration commit: pending.
-- Push result: pending.
+- Integration commit: `13d5dbc9`.
+- Push result: `git push origin master` succeeded.
 - Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 184 What Changed
