@@ -24,10 +24,80 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 156 Status/Delete Confirm Client Header Emission |
-| Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude and Antigravity plan reviews integrated; DeepSeek adversarial review accepted |
-| Status | Committed and pushed; sprint engine continuing |
+| Batch | Sprint 157 Update Confirm Client Header Emission |
+| Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude/Antigravity lanes replaced by additional DeepSeek reviews due tool/usage friction; DeepSeek adversarial review accepted |
+| Status | Committed locally; push pending |
 | Last updated | 2026-07-07 |
+
+## Sprint 157 What Changed
+
+- Updated `docs/diary/diary.js` so ordinary update-confirm calls send HTTP
+  `Idempotency-Key` to `/appointments/proposals/update/confirm`.
+- Added `updateConfirmIdempotencyKey(proposal, confirmPayload)`, deriving keys
+  from `update_proposal_freshness_id` with the existing proposal-scoped
+  generated fallback for absent or oversized freshness values.
+- Wired both ordinary Diary update-confirm call sites:
+  - `saveBooking()` edit-modal update confirm;
+  - `handleMoveResize()` drag/move/resize update confirm.
+- Left raw compatibility `PUT /appointments/{id}` fallbacks header-free.
+- Left `confirmBernieToolIntentChange`, proposal-only backend binding, backend
+  runtime validation, idempotency ledger semantics, providers, GraphQL,
+  H15/H-series, memory/RAG/GraphRAG, and strict `minLength: 8` enforcement
+  unchanged.
+- Bumped `docs/diary/diary.html` to `diary.js?v=178`.
+- Updated `tests/test_api_spine_frontend_header_inventory.py` and
+  `review/test_diary_smoke.py` to guard modal edit and drag/resize
+  update-confirm header emission.
+- Refreshed the Sprint 154 diary/API header preflight inventory so it no longer
+  lists ordinary update-confirm as missing after Sprint 157.
+- Added
+  `orchestration/api_spine_appointment_idempotency_update_confirm_client_header.md`.
+- Integrated worker lanes:
+  - DeepSeek review accepted freshness-derived update-confirm keys and caught
+    stale preflight/test inventory language, which Ariadne fixed.
+  - Replacement Claude-lane DeepSeek review found the command/idempotency
+    boundary clean and recommended a compact confirm-client checkpoint next.
+  - Replacement Antigravity-lane DeepSeek review found the frontend/smoke
+    coverage ready for closeout, with only non-blocking future ideas.
+
+## Sprint 157 Verification
+
+- `node --check docs\diary\diary.js`.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py`
+  (`[PASSED] Verification Passed: All modified assets have appropriate version bumps`).
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_frontend_header_inventory.py -q`
+  (`8 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_human_drag_resize_uses_signed_update_confirm_route review\test_diary_smoke.py::test_edit_modal_uses_signed_update_confirm_before_status_patch -q`
+  (`2 passed`).
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py tests\test_api_spine_frontend_header_inventory.py -q`
+  (`39 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean.
+
+Note: a broader lint command including `orchestration/` encountered an existing
+legacy non-UTF-8 artifact before scanning current Sprint 157 content, so the
+established safe lint scope `tests docs` was used for closeout.
+
+Publication state:
+
+- Implementation commit SHA: `df3f926`.
+- Closeout metadata commit SHA: `68b0f36`.
+- Push result: pending.
+- Final `git status --short --branch`: pending.
+
+Strategic position: Sprint 157 is **Programme 2G / EMR4 API Spine** client
+readiness and guardrail hardening. It closes the ordinary update-confirm client
+header gap while preserving raw fallback and backend semantics.
+
+Sprint engine state: continuing after push. Next recommended slice is a compact
+confirm-client surface checkpoint before deciding whether Bernie tool-intent
+confirm, proposal-only backend binding, or strict `minLength: 8` enforcement is
+the next safe implementation path.
+
+---
+
+## Previous Closeout - Sprint 156
 
 ## Sprint 156 What Changed
 
