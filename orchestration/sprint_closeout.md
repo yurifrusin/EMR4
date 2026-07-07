@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 182 Proposal-Guard Unreadable Markdown Cleanup |
 | Integrated through | Ariadne encoding cleanup and narrow citation triage |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 182 What Changed
@@ -54,8 +54,8 @@ or model-to-database write authority.
   returned `missing_readiness_count=447`, `unreadable_markdown_count=0`, and
   `total_fail_closed_findings_count=447`, down from Sprint 181's 447/2/449.
 - `git diff --check` passed.
-- Integration commit: pending.
-- Push result: pending.
+- Integration commit: `76f8cf26`.
+- Push result: `git push origin master` succeeded.
 - Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 181 What Changed
