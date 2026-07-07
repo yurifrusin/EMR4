@@ -1,0 +1,44 @@
+id: interpret_context_date_missing_no_context
+category: booking_interpret_contract
+description: >
+  A partial booking request with patient, practitioner, time, and duration but
+  no date and no usable diary context asks for the missing date.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera at 09:00 for 20 minutes"
+      context_frames: []
+    expect:
+      status: 200
+      fields:
+        result: clarification_required
+        safe: false
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": null
+        "missing_fields.0": date_from
+        "clarifying_question": "Which day would you like me to check?"
+        "normalization.safe": false
+        "blocks.0.code": missing_date_from
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+

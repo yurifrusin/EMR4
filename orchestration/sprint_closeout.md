@@ -24,40 +24,40 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 164 Context Date Precedence Fixtures |
-| Integrated through | Fable-directed prompt-thread automation; Antigravity CLI product review; replacement DeepSeek review after Claude session limit |
+| Batch | Sprint 165 Context Date Fallback Fixture |
+| Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
-## Sprint 164 What Changed
+## Sprint 165 What Changed
 
-- Added two authored synthetic executable `interpret_*` context-precedence
-  fixtures:
-  - `interpret_context_date_precedence_selected_diary.yaml` proves
-    `selected_diary_appointment` date wins over `visible_diary_page` date when
-    a partial booking request omits the date.
-  - `interpret_context_date_precedence_selected_proposal.yaml` proves
-    `selected_proposal` date wins over both `selected_diary_appointment` and
-    `visible_diary_page` dates.
-- Updated the Bernie scenario corpus README to record the new
-  context-precedence prompt slice.
+- Added `interpret_context_date_missing_no_context.yaml`, an authored synthetic
+  fake-provider route-level fixture proving that a partial booking request with
+  patient, practitioner, time, and duration but no date and explicit empty
+  `context_frames: []` returns `clarification_required` and asks "Which day
+  would you like me to check?" instead of guessing a date.
+- The fixture asserts `command_candidate.date_from: null`,
+  `missing_fields.0: date_from`, `normalization.safe: false`,
+  `blocks.0.code: missing_date_from`, fake provider metadata, and no
+  appointment/audit writes.
+- Updated the Bernie scenario corpus README to record context-fallback prompts.
 - Recorded worker lanes:
+  - Claude CLI review in
+    `orchestration/agent_inbox/claude/claude-sprint165-context-date-fallback.md`.
   - Antigravity CLI product/receptionist review in
-    `orchestration/agent_inbox/antigravity/antigravity-sprint164-context-date-precedence.md`.
-  - Replacement DeepSeek review in
-    `orchestration/agent_inbox/codex/review-deepseek-sprint164-context-date-precedence.md`.
-- Kept DeepSeek's `assumptions.0.assumed_value` observation in the review
-  packet and retained the assertion after local scenario replay verified it.
+    `orchestration/agent_inbox/antigravity/antigravity-sprint165-context-date-fallback.md`.
+  - DeepSeek review in
+    `orchestration/agent_inbox/codex/review-deepseek-sprint165-context-date-fallback.md`.
 
-Sprint 164 does not open runtime route wiring from the provider-free
+Sprint 165 does not open runtime route wiring from the provider-free
 interpretation harness, provider prompt/dry-run wiring, live-provider
 enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
 material access, GraphQL mutations, or model-to-database writes.
 
-## Sprint 164 Verification
+## Sprint 165 Verification
 
 - `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ -q`
-  (`.x.................`; existing Starlette/Google GenAI warnings only).
+  (`.x..................`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`........s`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
@@ -73,22 +73,29 @@ material access, GraphQL mutations, or model-to-database writes.
 
 Publication state:
 
-- Implementation commit SHA: `9eb3a6a5`.
-- Closeout metadata commit SHA: `7a9659a4`.
-- Push result: `origin/master`, `handoff/current`, `codex/current`,
-  `claude/current`, and `antigravity/current` aligned at the Sprint 164
-  publication commit.
-- Final `git status --short --branch`: clean except the expected branch header
-  after publication push.
+- Implementation commit SHA: pending.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending.
 
-Strategic position: Sprint 164 continues the small authored prompt-automation
-track by proving context precedence before any broader backend or provider
-evidence claims. Provider-quality and live-provider gates remain closed.
+Strategic position: Sprint 165 completes the date-context precedence/fallback
+mini-matrix before broader backend or provider evidence claims. Provider-quality
+and live-provider gates remain closed.
 
-Sprint engine state: continuing unless Yuri pauses. Next recommended work is
-either the omitted-date/no-context fallback fixture, a large temporal-drift
-fixture, or a narrow non-intercepted local-backend pass of the current corpus
-with the fake provider.
+Sprint engine state: continuing unless Yuri pauses. Next recommended work is a
+multi-turn fixture proving omitted `context_frames` auto-threads prior context
+while explicit `context_frames: []` clears it, followed by multi-field missing
+or large temporal-drift coverage.
+
+---
+
+## Previous Closeout - Sprint 164
+
+Sprint 164 added fake-provider route-level fixtures proving selected proposal
+date beats selected diary appointment and visible diary page context, and
+selected diary appointment date beats visible diary page context. It was
+committed through `9eb3a6a5`, closeout metadata through `7a9659a4`, and
+publication status through `dfa6d75`.
 
 ---
 

@@ -22,7 +22,10 @@ The current executable `interpret_*` corpus covers two slices:
   per-turn reference-date drift;
 - context-precedence prompts: selected proposal date wins over selected diary
   appointment and visible diary page dates, while selected diary appointment
-  date wins over visible diary page date.
+  date wins over visible diary page date;
+- context-fallback prompts: omitted dates with no selected proposal, selected
+  diary appointment, or visible diary page context ask for the missing date
+  instead of guessing.
 
 Unknown patient-name fixtures deliberately assert the current route contract:
 the interpret layer may still produce a slot-search command when practitioner

@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 164 context-date precedence fixtures implemented locally: selected proposal date now has executable fake-provider route-level coverage over selected diary appointment and visible diary page dates, and selected diary appointment date has coverage over visible diary page date |
-| **Next recommended work** | After Sprint 164 closeout/push, add the omitted-date/no-context fallback fixture or a large temporal-drift fixture, then consider a narrow non-intercepted local-backend pass of the current corpus with `BERNIE_BOOKING_INTERPRETER_PROVIDER=fake`; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, or broad trove gates |
+| **Current active track** | Sprint 165 context-date fallback fixture implemented locally: omitted date with explicit empty context now asks for the missing date instead of guessing, while preserving fake-provider route-level/no-write boundaries |
+| **Next recommended work** | After Sprint 165 closeout/push, add a multi-turn fixture proving omitted `context_frames` auto-threads prior requested appointment context while explicit `context_frames: []` clears it, then add a multi-field missing fixture or large temporal-drift fixture; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, or broad trove gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
