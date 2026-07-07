@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 179 Proposal-Surface Guard Aggregate Report |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review of safe aggregate report shape |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 179 What Changed
@@ -63,8 +63,8 @@ Worker mix:
   `total_fail_closed_findings_count=452`, with paths/text omitted and boundary
   posture prohibited/false.
 - `git diff --check` passed.
-- Integration commit: pending.
-- Push result: pending.
+- Integration commit: `6460ce50`.
+- Push result: `git push origin master` succeeded.
 - Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 178 What Changed
