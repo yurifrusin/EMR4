@@ -24,42 +24,45 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 167 Practitioner Override Context Fixture |
+| Batch | Sprint 168 Multi-Field Missing Prompt Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Integrated and pushed |
+| Status | Integrated locally; publication pending this closeout commit/push |
 | Last updated | 2026-07-07 |
 
-## Sprint 167 What Changed
+## Sprint 168 What Changed
 
-- Added `interpret_context_practitioner_override.yaml`, an authored synthetic
-  fake-provider route-level fixture proving that a follow-up practitioner change
-  can override the threaded practitioner while preserving patient, date, time,
-  and duration from the prior requested appointment.
-- Fixed `_resolve_bernie_interpretation_context` so the current instruction's
-  explicit practitioner name is resolved before prior-frame clarification merge.
-  This prevents stale threaded practitioner IDs from masking "Actually with
-  Dr Patel please" style follow-ups.
-- Extended the scenario replay harness with an `other_practitioner` fixture and
-  `{other_practitioner_id}` template variable.
-- Updated the Bernie scenario corpus READMEs to record partial-override prompt
-  coverage and the second-practitioner template variable.
+- Added `interpret_multi_field_missing_no_context.yaml`, an authored synthetic
+  fake-provider route-level fixture proving that a patient-only request
+  (`Book Margaret Thompson`) recognizes the patient but does not guess
+  practitioner or date when no context frames are available.
+- Adjusted clarifying-copy selection in `_resolve_bernie_interpretation_context`
+  so ordered required-field questions win before generic temporal clarification.
+  Multi-field missing prompts now ask for both doctor/nurse and day instead of
+  asking only for the day.
+- Widened practitioner pre-resolution from empty-only to non-UUID values, keeping
+  live-provider-style payloads that put names such as `Dr Shera` in
+  `practitioner_id` compatible with pre-normalization name resolution.
+- Updated the Bernie scenario corpus README to record multi-field-missing prompt
+  coverage.
 - Recorded worker lanes:
   - Claude CLI review in
-    `orchestration/agent_inbox/claude/claude-sprint167-practitioner-override.md`.
+    `orchestration/agent_inbox/claude/claude-sprint168-multi-field-missing.md`.
   - Antigravity CLI product/receptionist review in
-    `orchestration/agent_inbox/antigravity/antigravity-sprint167-practitioner-override.md`.
+    `orchestration/agent_inbox/antigravity/antigravity-sprint168-multi-field-missing.md`.
   - DeepSeek review in
-    `orchestration/agent_inbox/codex/review-deepseek-sprint167-practitioner-override.md`.
+    `orchestration/agent_inbox/codex/review-deepseek-sprint168-multi-field-missing.md`.
 
-Sprint 167 does not open runtime route wiring from the provider-free
+Sprint 168 does not open runtime route wiring from the provider-free
 interpretation harness, provider prompt/dry-run wiring, live-provider
 enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
 material access, GraphQL mutations, or model-to-database writes.
 
-## Sprint 167 Verification
+## Sprint 168 Verification
 
 - `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ -q`
-  (`.x....................`; existing Starlette/Google GenAI warnings only).
+  (`.x.....................`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpret_booking_instruction.py tests\test_bernie_confidence_policy.py tests\test_bernie_same_day_window_route.py -q`
+  (`................................................................`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`........s`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
@@ -79,19 +82,28 @@ material access, GraphQL mutations, or model-to-database writes.
 
 Publication state:
 
-- Implementation commit SHA: `2620bed1`.
-- Closeout metadata commit SHA: `0fbd5ee8`.
-- Push result: `origin/master`, `handoff/current`, `codex/current`,
-  `claude/current`, and `antigravity/current` aligned at Sprint 167
-  final closeout head.
-- Final `git status --short --branch`: clean after publication-status commit.
+- Implementation commit SHA: `0f19ca6b`.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending publication.
 
-Strategic position: Sprint 167 locks a realistic "change one thing, keep the
-rest" prompt-thread behavior before broader backend or provider evidence
+Strategic position: Sprint 168 strengthens "ask, do not guess" behavior for
+under-specified prompt automation before broader backend or provider evidence
 claims. Provider-quality and live-provider gates remain closed.
 
 Sprint engine state: continuing unless Yuri pauses. Next recommended work is a
-multi-field missing fixture or temporal-drift threading coverage.
+temporal-drift threading fixture or a narrow non-intercepted fake-provider
+backend pass.
+
+---
+
+## Previous Closeout - Sprint 167
+
+Sprint 167 added `interpret_context_practitioner_override.yaml` and narrowed
+interpretation context merge order so a current-turn practitioner name overrides
+prior requested-appointment context while patient/date/time/duration thread
+forward. It was committed through `2620bed1`, closeout metadata through
+`0fbd5ee8`, and published through final closeout head `79509e99`.
 
 ---
 
