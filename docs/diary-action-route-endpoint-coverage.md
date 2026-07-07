@@ -2,7 +2,7 @@
 
 Date: 2026-07-07
 
-Sprint: 191
+Sprint: 191, extended in Sprint 192
 
 ## Purpose
 
@@ -31,6 +31,18 @@ It also checks method shape:
 - read routes are GET or POST mounted; and
 - raw mutation routes expose a mutating HTTP method.
 
+Sprint 192 hardens the same static scan with route-table shape checks:
+
+- documented contract paths must not have duplicate `(path, method)` mounts;
+- literal documented contract paths must not be captured by an earlier
+  parametric route with an overlapping HTTP method;
+- proposal and confirm routes must be POST-only after ignoring framework-level
+  HEAD/OPTIONS metadata;
+- read routes may be query-style POST routes, but must not expose
+  PUT/PATCH/DELETE; and
+- planned action proposal routes must not overlap implemented confirm or raw
+  mutation targets.
+
 Planned native Diary verbs (`check_in`, `waiting_area_move`, and
 `link_patient`) remain `planned_not_implemented`: they may document adjacent
 read/proposal surfaces, but still have no confirm route or raw mutation route
@@ -47,6 +59,11 @@ scenario replay, and reviewed gate decisions.
 This sprint grants Bernie no new write, availability, or confirmation
 authority. The runtime/provider gate remains blocked, and live-provider and
 provider-quality evidence remain false.
+
+The broader question of whether every mounted appointment route should be
+classified in a source-derived route inventory is intentionally deferred. The
+current `DIARY_ACTION_ROUTE_CONTRACTS` module remains a Diary grammar authority
+contract, not a complete appointment-router catalogue.
 
 ## Verification
 

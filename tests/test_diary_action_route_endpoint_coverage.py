@@ -10,11 +10,13 @@ from app.services.diary.action_route_contract import (
 )
 
 
+def _ordered_api_routes() -> tuple[APIRoute, ...]:
+    return tuple(route for route in app.routes if isinstance(route, APIRoute))
+
+
 def _mounted_routes() -> dict[str, set[str]]:
     mounted: dict[str, set[str]] = {}
-    for route in app.routes:
-        if not isinstance(route, APIRoute):
-            continue
+    for route in _ordered_api_routes():
         mounted.setdefault(route.path, set()).update(route.methods or set())
     return mounted
 
@@ -31,6 +33,27 @@ def _all_contract_routes() -> tuple[tuple[DiaryActionVerb, str, str], ...]:
             for path in getattr(contract, group_name):
                 rows.append((verb, group_name, path))
     return tuple(rows)
+
+
+def _segments(path: str) -> tuple[str, ...]:
+    return tuple(segment for segment in path.split("/") if segment)
+
+
+def _is_path_parameter(segment: str) -> bool:
+    return segment.startswith("{") and segment.endswith("}")
+
+
+def _parametric_route_would_capture(route_path: str, literal_path: str) -> bool:
+    route_segments = _segments(route_path)
+    literal_segments = _segments(literal_path)
+    if len(route_segments) != len(literal_segments):
+        return False
+    if not any(_is_path_parameter(segment) for segment in route_segments):
+        return False
+    return all(
+        _is_path_parameter(route_segment) or route_segment == literal_segment
+        for route_segment, literal_segment in zip(route_segments, literal_segments)
+    )
 
 
 def test_all_documented_action_contract_routes_are_mounted():
@@ -58,6 +81,78 @@ def test_documented_action_contract_route_methods_match_authority():
             assert methods & {"POST", "PUT", "PATCH", "DELETE"}
 
 
+def test_contract_paths_have_no_duplicate_method_mounts():
+    seen: dict[tuple[str, str], list[str]] = {}
+    contract_paths = {path for _verb, _group_name, path in _all_contract_routes()}
+
+    for route in _ordered_api_routes():
+        if route.path not in contract_paths:
+            continue
+        for method in route.methods or set():
+            seen.setdefault((route.path, method), []).append(route.name)
+
+    duplicates = {
+        f"{method} {path}: {names}"
+        for (path, method), names in seen.items()
+        if len(names) > 1
+    }
+
+    assert not duplicates
+
+
+def test_contract_literal_paths_are_not_shadowed_by_earlier_parametric_routes():
+    routes = _ordered_api_routes()
+    route_indexes: dict[str, int] = {}
+    for index, route in enumerate(routes):
+        route_indexes.setdefault(route.path, index)
+
+    shadowed = []
+    for verb, group_name, path in _all_contract_routes():
+        if "{" in path:
+            continue
+        route_index = route_indexes[path]
+        target_methods = _mounted_routes()[path]
+        for earlier in routes[:route_index]:
+            overlapping_methods = target_methods & (earlier.methods or set())
+            if not overlapping_methods:
+                continue
+            if _parametric_route_would_capture(earlier.path, path):
+                shadowed.append(
+                    f"{verb.value}:{group_name}:{path} shadowed by "
+                    f"{sorted(overlapping_methods)} {earlier.path}"
+                )
+
+    assert not shadowed
+
+
+def test_proposal_and_confirm_contract_routes_are_post_only():
+    mounted = _mounted_routes()
+
+    extra_methods = []
+    for verb, group_name, path in _all_contract_routes():
+        if group_name not in {"proposal_routes", "confirm_routes"}:
+            continue
+        methods = mounted[path] - {"HEAD", "OPTIONS"}
+        if methods != {"POST"}:
+            extra_methods.append(f"{verb.value}:{group_name}:{path}:{sorted(methods)}")
+
+    assert not extra_methods
+
+
+def test_read_contract_routes_do_not_expose_update_or_delete_methods():
+    mounted = _mounted_routes()
+    mutation_methods = {"PUT", "PATCH", "DELETE"}
+
+    unsafe_read_routes = []
+    for verb, contract in DIARY_ACTION_ROUTE_CONTRACTS.items():
+        for path in contract.read_routes:
+            exposed = mounted[path] & mutation_methods
+            if exposed:
+                unsafe_read_routes.append(f"{verb.value}:{path}:{sorted(exposed)}")
+
+    assert not unsafe_read_routes
+
+
 def test_planned_actions_remain_without_confirm_route_authority():
     planned = {
         DiaryActionVerb.check_in,
@@ -73,6 +168,27 @@ def test_planned_actions_remain_without_confirm_route_authority():
         assert contract.raw_mutation_routes == ()
         for route in contract.proposal_routes + contract.read_routes:
             assert route in mounted
+
+
+def test_planned_proposal_routes_do_not_overlap_executable_targets():
+    executable_targets = set()
+    planned_verbs = []
+
+    for verb, contract in DIARY_ACTION_ROUTE_CONTRACTS.items():
+        if contract.authority is RouteAuthority.signed_confirm:
+            executable_targets.update(contract.confirm_routes)
+            executable_targets.update(contract.raw_mutation_routes)
+        if contract.authority is RouteAuthority.planned_not_implemented:
+            planned_verbs.append(verb)
+
+    overlaps = []
+    for verb in planned_verbs:
+        contract = DIARY_ACTION_ROUTE_CONTRACTS[verb]
+        for route in contract.proposal_routes:
+            if route in executable_targets:
+                overlaps.append(f"{verb.value}:{route}")
+
+    assert not overlaps
 
 
 def test_contract_route_table_scan_does_not_issue_requests_or_grant_authority():
