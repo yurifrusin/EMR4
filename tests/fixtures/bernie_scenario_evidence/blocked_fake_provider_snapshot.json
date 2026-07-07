@@ -1,0 +1,33 @@
+{
+  "database_access_performed": false,
+  "default_provider": "disabled",
+  "evidence_type": "fake_provider_backend_pass",
+  "fake_provider_evidence": true,
+  "fixtures_since_last_backend_pass": 6,
+  "harness_demo_fixture_count": 2,
+  "historical_diary_material_access_performed": false,
+  "interpret_fixture_count": 31,
+  "last_backend_pass_refreshed_on": "2026-07-07",
+  "live_provider_enabled": false,
+  "live_provider_evidence": false,
+  "memory_or_rag_access_performed": false,
+  "non_interpret_fixture_count": 17,
+  "omitted_field_groups": [
+    "scenario_text",
+    "utterance_text",
+    "identity_fields",
+    "request_body_fields",
+    "endpoint_paths",
+    "local_material_paths"
+  ],
+  "provider_calls_performed": false,
+  "provider_quality_evidence": false,
+  "raw_trove_access_ready": false,
+  "route_behavior_changed": false,
+  "route_level_backend_evidence": true,
+  "runtime_gate_decision": "blocked",
+  "runtime_or_provider_wiring_ready": false,
+  "scenario_yaml_fixture_count": 50,
+  "schema_version": "bernie.scenario_evidence_snapshot.v1",
+  "source": "scenario_fixture_aggregate"
+}
