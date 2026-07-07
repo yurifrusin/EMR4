@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 171 Reset/No-Prior Context Matrix |
 | Integrated through | Ariadne fixture implementation; DeepSeek Flash adversarial review; DeepSeek Flash implementation-suggestion lane; Claude/Antigravity packets dispatched but external mirrors were stale/dirty and not run |
-| Status | Pending commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 171 What Changed
@@ -83,6 +83,9 @@ access, GraphQL mutations, or model-to-database writes.
   (`8 passed, 1 skipped`; existing warnings only).
 - `git diff --check` passed with the known CRLF normalization warning on
   `interpret_no_prior_frame_no_merge.yaml`.
+- Integration commit: `f6a3ea50`.
+- Push result: `git push origin master` succeeded; GitHub reported the
+  repository moved notice and the existing moderate Dependabot alert.
 
 An earlier concurrent integrity/replay run hit the known transient Postgres enum
 DDL race (`userrole` duplicate type); rerunning the integrity check serially
