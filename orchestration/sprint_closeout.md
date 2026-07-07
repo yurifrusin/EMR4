@@ -24,10 +24,42 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 182 Proposal-Guard Unreadable Markdown Cleanup |
-| Integrated through | Ariadne encoding cleanup and narrow citation triage |
-| Status | Integrated and pushed |
+| Batch | Sprint 183 Release/Protocol Proposal-Guard Slice |
+| Integrated through | Ariadne narrow protocol-alert citation triage |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 183 What Changed
+
+- Updated `orchestration/protocol_alerts.md` so the Bernie Interpretation
+  Harness readiness alert also cites
+  `scripts\bernie_provider_boundary_readiness_report.py`.
+- Added exact compact closed provider-boundary values to the protocol alert:
+  `default_provider=disabled`, `live_provider_enabled=false`,
+  `provider_calls_performed=false`, `route_behavior_changed=false`,
+  `database_access_performed=false`, `memory_or_rag_access_performed=false`,
+  and `historical_diary_material_access_performed=false`.
+- The current release/protocol slice
+  (`orchestration\sprint_closeout.md`,
+  `orchestration\bernie_release_gates.md`, and
+  `orchestration\protocol_alerts.md`) now passes the proposal-surface guard.
+
+Sprint 183 is a protocol guardrail documentation sprint. It does not change
+runtime code, routes, provider configuration, database behavior, memory, RAG,
+GraphRAG, H15/H-series imports, historical diary processing, GraphQL mutations,
+or model-to-database write authority.
+
+## Sprint 183 Verification
+
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py orchestration\sprint_closeout.md orchestration\bernie_release_gates.md orchestration\protocol_alerts.md`
+  passed.
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_report.py docs orchestration`
+  returned `missing_readiness_count=446`, `unreadable_markdown_count=0`, and
+  `total_fail_closed_findings_count=446`, down from Sprint 182's 447/0/447.
+- `git diff --check` passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 182 What Changed
 

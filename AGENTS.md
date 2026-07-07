@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 182 unreadable-markdown proposal-guard cleanup integrated after Sprint 181: the two unreadable markdown diagnostics are now UTF-8 readable, one newly readable R30 plan packet carries exact closed-gate citations, and the aggregate backlog is down to 447 missing-readiness findings with zero unreadable markdown findings |
+| **Current active track** | Sprint 183 release/protocol proposal-guard slice integrated after Sprint 182: protocol alerts now cite the provider-boundary readiness report and exact closed values, the release/protocol slice passes the guard, and the aggregate backlog is down to 446 missing-readiness findings with zero unreadable markdown findings |
 | **Next recommended work** | Triage another narrow recent-doc slice using the aggregate report; keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
