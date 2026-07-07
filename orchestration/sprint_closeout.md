@@ -24,10 +24,73 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 151 Create-Proposal Header Alignment Guard |
-| Integrated through | Ariadne implementation; DeepSeek review lane advice integrated; Claude and Antigravity protocol packets remain queued locally |
-| Status | Committed and pushed; sprint engine paused after closeout per Yuri request |
+| Batch | Sprint 152 Create-Proposal minLength Readiness Decision |
+| Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude recommendation accepted; Antigravity integrated as dissent; DeepSeek adversarial recommendation accepted |
+| Status | Implementation committed in `11913f0`; pending closeout metadata commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 152 What Changed
+
+- Added
+  `orchestration/api_spine_appointment_idempotency_create_proposal_minlength_readiness.md`.
+- Decided **not** to enforce OpenAPI `Idempotency-Key` `minLength: 8` at
+  runtime for create-proposal yet.
+- Preserved current runtime behavior: missing/blank keys fail closed, while
+  short non-blank keys still pass until named client-readiness preconditions
+  are met.
+- Added tests proving all four canonical OpenAPI proposal operations continue
+  to reference the shared `IdempotencyKey` parameter.
+- Added tests documenting the current FastAPI proposal-header binding gap:
+  `propose_update_appointment`, `propose_status_update`, and
+  `propose_delete_appointment` do not yet bind `Idempotency-Key`.
+- Added tests requiring concrete preconditions before future runtime
+  `minLength: 8` enforcement: real client key emission, 8+ character trimmed
+  candidate keys, typed short-key rejection behavior, and a shared review of
+  proposal-route header postures.
+- Updated the Sprint 151 header-alignment guard and Programme 2G checkpoint to
+  point to the Sprint 152 decision and Sprint 153 direction.
+- Integrated worker lanes:
+  - Claude recommended defer-with-guard and flagged that the diary caller still
+    has to prove the non-blank header path.
+  - Antigravity recommended enforce-now; Ariadne accepted its future-key
+    observation as useful dissent but rejected immediate enforcement.
+  - DeepSeek recommended defer-with-guard and flagged the wider 3-of-4 proposal
+    binding gap.
+- No route behavior changed.
+
+## Sprint 152 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_create_proposal_header_alignment.py tests/test_api_spine_create_proposal_idempotency_route_contract.py tests/test_api_spine_appointment_openapi_drift_guard.py tests/test_api_spine_create_proposal_replay_model_decision.py tests/test_phase_programmes_current_checkpoint.py tests/test_sprint_closeout_protocol.py -q`
+  (`44 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m py_compile tests\test_api_spine_create_proposal_header_alignment.py tests\test_phase_programmes_current_checkpoint.py`.
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean apart from a CRLF normalization warning on a
+  coordination packet.
+
+Publication state:
+
+- Integration commit SHA: `11913f0`.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Strategic position: Sprint 152 is **Programme 2G / EMR4 API Spine** guardrail
+hardening and compatibility-decision work. It was intentionally small because
+the right outcome was to settle whether to tighten one proposal route without
+silently changing runtime behavior across adjacent proposal surfaces. It
+advanced the larger objective of making the appointment command plane explicit,
+auditable, and mechanically guarded.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 153, a
+proposal-header readiness gap preflight: either wire/preflight the real diary
+create-proposal caller to send an 8+ character `Idempotency-Key`, or preflight
+the next proposal-only route's non-blank header discipline. Keep raw
+compatibility writes out of scope.
+
+---
+
+## Previous Closeout - Sprint 151
 
 ## Sprint 151 What Changed
 
