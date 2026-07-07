@@ -1200,6 +1200,8 @@ _STATUS_CONFIRM_OPERATION_ID = "confirmAppointmentStatusProposal"
 _STATUS_CONFIRM_ROUTE_FAMILY = "status-confirm"
 _UPDATE_CONFIRM_OPERATION_ID = "confirmAppointmentUpdateProposal"
 _UPDATE_CONFIRM_ROUTE_FAMILY = "update-confirm"
+_DELETE_CONFIRM_OPERATION_ID = "confirmAppointmentDeleteProposal"
+_DELETE_CONFIRM_ROUTE_FAMILY = "delete-confirm"
 _STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER = timedelta(minutes=10)
 
 
@@ -4587,6 +4589,7 @@ def _apply_appointment_delete(
     db: Session,
     current_user: User,
     audit_evidence: Optional[list[str]] = None,
+    commit: bool = True,
 ) -> AppointmentOut:
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
@@ -4613,7 +4616,10 @@ def _apply_appointment_delete(
         confirmed_warnings=body.confirmed_warnings if body else None,
         audit_evidence=audit_evidence,
     )
-    db.commit()
+    if commit:
+        db.commit()
+    else:
+        db.flush()
     return _get_appointment(appointment_id, practice_id, db)
 
 
@@ -4643,9 +4649,27 @@ def cancel_appointment(
 )
 def confirm_delete_proposal_route(
     body: AppointmentDeleteProposalConfirmationIn,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
+    normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
+    decision = claim_appointment_command(
+        db,
+        practice_id=current_user.practice_id,
+        actor_user_id=str(current_user.id),
+        actor_role=current_user.role.value if current_user.role else "unknown",
+        operation_id=_DELETE_CONFIRM_OPERATION_ID,
+        route_family=_DELETE_CONFIRM_ROUTE_FAMILY,
+        raw_idempotency_key=normalized_idempotency_key,
+        request_body=body.model_dump(mode="json"),
+        secret=_staff_create_confirm_idempotency_secret(),
+        stale_after=_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER,
+    )
+    mapped_decision = _handle_create_confirm_idempotency_decision(decision)
+    if mapped_decision is not None:
+        return mapped_decision
+
     audit_evidence = list(_DELETE_CONFIRM_BASE_EVIDENCE)
     blocks: list[AppointmentProposalIssue] = []
     proposal = body.delete_proposal
@@ -4667,7 +4691,11 @@ def confirm_delete_proposal_route(
             "The delete proposal is not safe to confirm.",
         ))
 
-    appt = _get_appointment(command.appointment_id, current_user.practice_id, db)
+    try:
+        appt = _get_appointment(command.appointment_id, current_user.practice_id, db)
+    except HTTPException:
+        db.rollback()
+        raise
     current_state = _appointment_delete_state_payload(appt)
     submitted_freshness_id = (
         body.delete_proposal_freshness_id
@@ -4710,6 +4738,7 @@ def confirm_delete_proposal_route(
         ))
 
     if blocks:
+        db.rollback()
         return _block_delete_confirmation(
             blocks,
             warnings=proposal.warnings,
@@ -4730,8 +4759,9 @@ def confirm_delete_proposal_route(
         db=db,
         current_user=current_user,
         audit_evidence=audit_evidence,
+        commit=False,
     )
-    return AppointmentConfirmDeleteProposalOut(
+    response_body = AppointmentConfirmDeleteProposalOut(
         safe=True,
         requires_confirmation=False,
         autonomy_tier="confirmed_write",
@@ -4741,6 +4771,16 @@ def confirm_delete_proposal_route(
         blocks=[],
         audit_evidence=audit_evidence,
     )
+    complete_appointment_command(
+        db,
+        decision.record,
+        response_status_code=status.HTTP_200_OK,
+        response_body=response_body.model_dump(mode="json"),
+        result_kind="confirmed_write",
+        target_appointment_id=appointment.id,
+    )
+    db.commit()
+    return response_body
 
 
 @router.post("/proposals/delete/{appointment_id}", response_model=AppointmentDeleteProposalOut)

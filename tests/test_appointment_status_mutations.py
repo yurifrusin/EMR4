@@ -75,6 +75,18 @@ def _status_confirm_headers(token: str, prefix: str = "status-confirm-test") -> 
     }
 
 
+_delete_confirm_key_counter = 0
+
+
+def _delete_confirm_headers(token: str, prefix: str = "delete-confirm-test") -> dict[str, str]:
+    global _delete_confirm_key_counter
+    _delete_confirm_key_counter += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"{prefix}-{_delete_confirm_key_counter}",
+    }
+
+
 def _confirm_status_proposal(client, token, proposal: dict, *, confirmed: bool = True):
     payload = proposal["confirm_payload"]
     payload["confirmed"] = confirmed
@@ -434,12 +446,13 @@ def test_delete_confirm_requires_confirmed_true_without_write(
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = client.post(
         DELETE_CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_confirm_headers(token, "delete-unconfirmed"),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
@@ -464,12 +477,13 @@ def test_delete_confirm_blocks_tampered_signed_evidence_without_write(
     payload = proposal_resp.json()["confirm_payload"]
     payload["confirmed"] = True
     payload["delete_proposal"]["command"]["cancellation_reason"] = "Tampered reason"
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = client.post(
         DELETE_CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_confirm_headers(token, "delete-tampered"),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
@@ -494,12 +508,13 @@ def test_delete_confirm_blocks_stale_freshness_without_write(
     payload = proposal_resp.json()["confirm_payload"]
     payload["confirmed"] = True
     payload["delete_proposal_freshness_id"] = "stale-delete-proposal"
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = client.post(
         DELETE_CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_confirm_headers(token, "delete-stale"),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
@@ -531,7 +546,7 @@ def test_delete_confirm_soft_cancels_once_with_signed_evidence(
     confirm_resp = client.post(
         DELETE_CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_confirm_headers(token, "delete-success"),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
@@ -815,7 +830,7 @@ def test_r9_delete_confirm_allows_past_date_with_signed_evidence_and_audit(
     confirm_resp = client.post(
         DELETE_CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_confirm_headers(token, "delete-past-success"),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
@@ -843,12 +858,13 @@ def test_r9_delete_confirm_past_date_blocks_stale_freshness_without_write(
     payload = proposal_resp.json()["confirm_payload"]
     payload["confirmed"] = True
     payload["delete_proposal_freshness_id"] = "stale-delete-proposal"
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = client.post(
         DELETE_CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_confirm_headers(token, "delete-past-stale"),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text

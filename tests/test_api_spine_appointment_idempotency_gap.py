@@ -59,13 +59,17 @@ def test_current_appointments_router_has_bounded_staff_create_confirm_binding():
     bernie_end = router_text.index("def select_no_slot_suggestion(")
     status_start = router_text.index("def confirm_status_proposal_route(")
     status_end = router_text.index("def get_waiting_room(")
+    delete_start = router_text.index("def confirm_delete_proposal_route(")
+    delete_end = router_text.index("def propose_delete_appointment(")
     create_confirm_route = router_text[route_start:route_end]
     update_route = router_text[update_start:update_end]
     bernie_route = router_text[bernie_start:bernie_end]
     status_route = router_text[status_start:status_end]
+    delete_route = router_text[delete_start:delete_end]
     non_create_confirm_later_routes = (
         router_text[update_end:status_start]
-        + router_text[status_end:bernie_start]
+        + router_text[status_end:delete_start]
+        + router_text[delete_end:bernie_start]
         + router_text[bernie_end:]
     )
 
@@ -85,6 +89,8 @@ def test_current_appointments_router_has_bounded_staff_create_confirm_binding():
     assert "_STATUS_CONFIRM_ROUTE_FAMILY" in status_route
     assert "Idempotency-Key" in update_route
     assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in update_route
+    assert "Idempotency-Key" in delete_route
+    assert "_DELETE_CONFIRM_ROUTE_FAMILY" in delete_route
     assert "Idempotency-Key" not in non_create_confirm_later_routes
 
 

@@ -24,6 +24,73 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 144 Delete-Confirm Idempotency Route Wiring |
+| Integrated through | Ariadne implementation with EMR4 API Steward skill; DeepSeek worker advice integrated; Claude and Antigravity protocol packets remain queued locally |
+| Status | Committed and pushed in Sprint 144 closeout commit; sprint engine continuing |
+| Last updated | 2026-07-07 |
+
+## Sprint 144 What Changed
+
+- Wired HTTP `Idempotency-Key` enforcement for
+  `POST /api/v1/appointments/proposals/delete-confirm` only.
+- Added `_DELETE_CONFIRM_OPERATION_ID` and `_DELETE_CONFIRM_ROUTE_FAMILY`, with
+  route-wrapper claim/replay handling before destructive soft-cancel checks or
+  mutation run.
+- Added a scoped `commit=False` path to `_apply_appointment_delete()` so
+  delete-confirm soft-cancel, audit row, ledger completion, and commit happen
+  in one transaction; raw `DELETE /api/v1/appointments/{appointment_id}` still
+  uses the default commit path and no idempotency semantics.
+- Converted the Sprint 143 guarded route-test contract into executable tests
+  covering missing/blank keys, invalid payloads, first delete, replay,
+  replay after raw delete, conflict, active/stale/failed preclaims, blocked
+  confirmation rollback, already-cancelled/missing appointment behavior,
+  warning/nested body conflicts, signed-evidence blocks, waiting-area drift
+  directions, and different-key destructive concurrency.
+- Updated existing delete-confirm semantic tests to send `Idempotency-Key` and
+  commit rollback-sensitive fixtures before intentionally blocked confirms.
+- Integrated DeepSeek worker review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint144-delete-confirm-idempotency-wiring.md`.
+- Added Claude and Antigravity Sprint 144 packets:
+  `orchestration/agent_inbox/claude/claude-sprint144-delete-confirm-idempotency-wiring-review.md`
+  and
+  `orchestration/agent_inbox/antigravity/antigravity-sprint144-delete-confirm-idempotency-acceptance.md`.
+- Preserved fake/default-disabled behavior; no raw/proposal-only idempotency
+  wiring, provider call, live smoke, runtime FGA client, external patient
+  client, GraphQL mutation, H15/H-series runtime import, memory/RAG/GraphRAG,
+  or broad trove mining was added.
+
+## Sprint 144 Verification
+
+- `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py tests\test_api_spine_delete_confirm_idempotency_route_contract.py tests\test_appointment_status_mutations.py`.
+- `.venv\Scripts\python.exe -m pytest tests\test_api_spine_delete_confirm_idempotency_route_contract.py -q`
+  (`30 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\test_appointment_status_mutations.py -q`
+  (`52 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_appointment_idempotency_route_integration_preflight.py tests/test_api_spine_appointment_idempotency_gap.py tests/test_api_spine_update_confirm_idempotency_route_contract.py tests/test_api_spine_delete_confirm_idempotency_preflight.py tests/test_api_spine_delete_confirm_idempotency_route_contract.py tests/test_appointment_status_mutations.py -q`
+  (`121 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_staff_create_confirm_idempotency_route_contract.py tests/test_api_spine_bernie_create_confirm_idempotency_route_contract.py tests/test_api_spine_status_confirm_idempotency_route_contract.py tests/test_api_spine_update_confirm_idempotency_route_contract.py tests/test_api_spine_delete_confirm_idempotency_route_contract.py tests/test_api_spine_appointment_idempotency_route_integration_preflight.py tests/test_api_spine_appointment_idempotency_gap.py tests/test_api_spine_delete_confirm_idempotency_preflight.py tests/test_phase_programmes_current_checkpoint.py tests/test_sprint_closeout_protocol.py -q`
+  (`122 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests/test_appointment_status_mutations.py tests/test_api_spine_delete_confirm_idempotency_route_contract.py tests/test_appointment_update_proposal.py tests/test_api_spine_update_confirm_idempotency_route_contract.py tests/test_appointment_audit.py tests/test_reason_code_backend.py tests/test_appointment_proposals.py tests/test_bernie_confirm_create_proposal.py tests/test_bernie_evidence_contract.py tests/test_bernie_route_outcome_events.py tests/test_bernie_signed_confirmation_evidence.py tests/test_bernie_sprint98_confirm_contract.py tests/test_bernie_turn_contract.py -q`
+  (`265 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m py_compile app\routers\appointments.py tests\test_api_spine_delete_confirm_idempotency_route_contract.py tests\test_appointment_status_mutations.py tests\test_appointment_audit.py tests\test_reason_code_backend.py tests\test_api_spine_appointment_idempotency_route_integration_preflight.py tests\test_api_spine_appointment_idempotency_gap.py tests\test_api_spine_delete_confirm_idempotency_preflight.py tests\test_api_spine_update_confirm_idempotency_route_contract.py tests\test_api_spine_staff_create_confirm_idempotency_route_contract.py tests\test_api_spine_status_confirm_idempotency_route_contract.py tests\test_phase_programmes_current_checkpoint.py tests\test_sprint_closeout_protocol.py`.
+- `.venv\Scripts\python.exe -m pytest tests/test_phase_programmes_current_checkpoint.py tests/test_sprint_closeout_protocol.py -q`
+  (`5 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean apart from known CRLF notices on
+  `orchestration/integration_log.md`, `tests/test_appointment_status_mutations.py`,
+  and `tests/test_reason_code_backend.py`.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 145, a
+confirmation-family idempotency checkpoint/audit before broader proposal-only
+or command-surface decisions.
+
+---
+
+## Previous Closeout - Sprint 143
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 143 Delete-Confirm Idempotency Route-Test Contract |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; DeepSeek worker advice integrated; Claude and Antigravity protocol packets remain queued locally |
 | Status | Committed and pushed in Sprint 143 closeout commit; sprint engine continuing |

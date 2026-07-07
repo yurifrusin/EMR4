@@ -311,10 +311,10 @@ def test_current_router_keeps_proposal_delete_and_raw_update_out_of_scope():
         "def update_appointment(",
         "def get_checkin_defaults(",
     )
-    delete_route = _route_body(
+    delete_proposal_route = _route_body(
         router_text,
-        "def confirm_delete_proposal_route(",
         "def propose_delete_appointment(",
+        "@router.get(\"/slots/{practitioner_id}\"",
     )
 
     assert "Idempotency-Key" not in update_proposal_route
@@ -323,8 +323,8 @@ def test_current_router_keeps_proposal_delete_and_raw_update_out_of_scope():
     assert "claim_appointment_command(" not in raw_update_route
     assert "_apply_appointment_update(" in raw_update_route
     assert "commit=False" not in raw_update_route
-    assert "Idempotency-Key" not in delete_route
-    assert "claim_appointment_command(" not in delete_route
+    assert "Idempotency-Key" not in delete_proposal_route
+    assert "claim_appointment_command(" not in delete_proposal_route
     assert RAW_UPDATE_DOC not in _route_body(
         router_text,
         "def confirm_update_proposal_route(",

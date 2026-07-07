@@ -51,6 +51,17 @@ def _auth(token):
     return {"Authorization": f"Bearer {token}"}
 
 
+_delete_confirm_key_counter = 0
+
+
+def _auth_delete_confirm(token):
+    global _delete_confirm_key_counter
+    _delete_confirm_key_counter += 1
+    headers = _auth(token)
+    headers["Idempotency-Key"] = f"audit-delete-confirm-{_delete_confirm_key_counter}"
+    return headers
+
+
 def _create_body(practitioner, patient, start_h=10):
     return {
         "patient_id": str(patient.id),
@@ -276,7 +287,7 @@ def test_signed_delete_confirm_writes_delete_audit_evidence(
     confirm_resp = client.post(
         DELETE_CONFIRM_URL,
         json=payload,
-        headers=_auth(token),
+        headers=_auth_delete_confirm(token),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
@@ -469,7 +480,7 @@ def test_delete_confirm_preserves_cancellation_reason_on_appointment_and_audit(
     payload = resp.json()["confirm_payload"]
     payload["confirmed"] = True
 
-    resp = client.post(DELETE_CONFIRM_URL, json=payload, headers=_auth(token))
+    resp = client.post(DELETE_CONFIRM_URL, json=payload, headers=_auth_delete_confirm(token))
     assert resp.status_code == 200
 
     resp = client.get(f"{APPT_URL}/{appt.id}", headers=_auth(token))

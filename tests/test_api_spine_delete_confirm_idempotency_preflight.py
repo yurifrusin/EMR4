@@ -83,7 +83,7 @@ def test_delete_confirm_preflight_lists_required_future_route_tests():
         assert phrase in text
 
 
-def test_delete_confirm_preflight_keeps_closed_gates_and_no_route_wiring_yet():
+def test_delete_confirm_preflight_keeps_closed_gates_and_records_sprint_144_wiring():
     text = _read(PREFLIGHT)
     router_text = _read(ROUTER)
 
@@ -109,10 +109,10 @@ def test_delete_confirm_preflight_keeps_closed_gates_and_no_route_wiring_yet():
         "@router.post(\n    \"/proposals/delete-confirm\"",
     )
 
-    assert "Header(" not in delete_route
-    assert "Idempotency-Key" not in delete_route
-    assert "claim_appointment_command(" not in delete_route
-    assert "complete_appointment_command(" not in delete_route
+    assert "Header(" in delete_route
+    assert "Idempotency-Key" in delete_route
+    assert "claim_appointment_command(" in delete_route
+    assert "complete_appointment_command(" in delete_route
     assert "Idempotency-Key" not in raw_delete_route
 
 

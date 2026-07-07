@@ -54,6 +54,17 @@ def _auth(token):
     return {"Authorization": f"Bearer {token}"}
 
 
+_delete_confirm_key_counter = 0
+
+
+def _auth_delete_confirm(token):
+    global _delete_confirm_key_counter
+    _delete_confirm_key_counter += 1
+    headers = _auth(token)
+    headers["Idempotency-Key"] = f"reason-delete-confirm-{_delete_confirm_key_counter}"
+    return headers
+
+
 _status_confirm_key_counter = 0
 
 
@@ -176,7 +187,7 @@ def test_delete_proposal_confirm_persists_status_reason_code_and_text_reason(
     payload = proposal_resp.json()["confirm_payload"]
     payload["confirmed"] = True
 
-    confirm_resp = client.post(DELETE_CONFIRM_URL, json=payload, headers=_auth(token))
+    confirm_resp = client.post(DELETE_CONFIRM_URL, json=payload, headers=_auth_delete_confirm(token))
     assert confirm_resp.status_code == 200, confirm_resp.text
     appointment = confirm_resp.json()["appointment"]
     assert appointment["status_reason_code"] == "DUPLICATE_BOOKING"

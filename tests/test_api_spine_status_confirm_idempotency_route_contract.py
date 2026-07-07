@@ -247,8 +247,9 @@ def test_current_router_wires_status_confirm_idempotency_surface():
     assert "Header(" in update_route
     assert "Idempotency-Key" in update_route
     assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in update_route
-    assert "Header(" not in delete_route
-    assert "Idempotency-Key" not in delete_route
+    assert "Header(" in delete_route
+    assert "Idempotency-Key" in delete_route
+    assert "_DELETE_CONFIRM_ROUTE_FAMILY" in delete_route
 
 
 def test_existing_status_confirm_tests_cover_semantics_to_preserve():
