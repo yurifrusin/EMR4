@@ -19,7 +19,10 @@ The current executable `interpret_*` corpus covers two slices:
   interpret -> search -> select handoff;
 - edge-contract prompts: empty instruction validation, unknown patient names
   without invented patient ids, visible-diary date context, and explicit
-  per-turn reference-date drift.
+  per-turn reference-date drift;
+- context-precedence prompts: selected proposal date wins over selected diary
+  appointment and visible diary page dates, while selected diary appointment
+  date wins over visible diary page date.
 
 Unknown patient-name fixtures deliberately assert the current route contract:
 the interpret layer may still produce a slot-search command when practitioner

@@ -1,0 +1,49 @@
+id: interpret_context_date_precedence_selected_proposal
+category: booking_interpret_contract
+description: >
+  When selected proposal, selected diary appointment, and visible diary page
+  dates disagree, the selected proposal date wins.
+reference_date: 2026-07-08
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera at 09:00 for 20 minutes"
+      context_frames:
+        - type: visible_diary_page
+          visible_date: "2026-07-16"
+        - type: selected_diary_appointment
+          appointment_date: "2026-07-17"
+        - type: selected_proposal
+          appointment_date: "2026-07-18"
+    expect:
+      status: 200
+      fields:
+        result: interpreted
+        safe: true
+        "provider_metadata.provider": fake
+        "provider_metadata.live_provider": false
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "command_candidate.date_from": "2026-07-18"
+        "normalization.constraint.date_from": "2026-07-18"
+        "assumptions.0.field": date_from
+        "assumptions.0.assumed_value": "2026-07-18"
+
+expected:
+  appointment_written: false
+  audit_written: false
+
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written
+

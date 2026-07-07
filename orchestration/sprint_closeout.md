@@ -24,49 +24,40 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 163 Interpret Edge Fixtures |
-| Integrated through | Fable-directed prompt-thread automation; Antigravity CLI product review; DeepSeek review; replacement DeepSeek review after Claude session limit |
+| Batch | Sprint 164 Context Date Precedence Fixtures |
+| Integrated through | Fable-directed prompt-thread automation; Antigravity CLI product review; replacement DeepSeek review after Claude session limit |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
-## Sprint 163 What Changed
+## Sprint 164 What Changed
 
-- Added four authored synthetic executable `interpret_*` edge fixtures:
-  - `interpret_empty_instruction_fail_closed.yaml` proves empty instruction
-    validation returns `422` before provider routing and writes nothing.
-  - `interpret_unknown_patient_name_without_id.yaml` proves an unknown sentinel
-    patient name may still produce a slot-search command candidate, but
-    `command_candidate.patient_id` stays null and no patient identity is
-    invented.
-  - `interpret_visible_diary_date_context.yaml` proves a partial request can
-    use a `visible_diary_page` context frame for the missing date, with a
-    reversible `date_from` assumption.
-  - `interpret_turn_reference_date_drift.yaml` proves otherwise identical
-    "today" turns resolve against each turn's explicit `reference_date`.
-- Updated the Bernie scenario corpus README to separate first-pass prompt
-  threads from edge-contract prompts and to document the unknown-patient
-  route-level contract.
+- Added two authored synthetic executable `interpret_*` context-precedence
+  fixtures:
+  - `interpret_context_date_precedence_selected_diary.yaml` proves
+    `selected_diary_appointment` date wins over `visible_diary_page` date when
+    a partial booking request omits the date.
+  - `interpret_context_date_precedence_selected_proposal.yaml` proves
+    `selected_proposal` date wins over both `selected_diary_appointment` and
+    `visible_diary_page` dates.
+- Updated the Bernie scenario corpus README to record the new
+  context-precedence prompt slice.
 - Recorded worker lanes:
   - Antigravity CLI product/receptionist review in
-    `orchestration/agent_inbox/antigravity/antigravity-sprint163-interpret-edge-fixtures.md`.
-  - DeepSeek review and replacement DeepSeek review synthesis in
-    `orchestration/agent_inbox/codex/review-deepseek-sprint163-interpret-edge-fixtures.md`.
-- Accepted review polish before closeout: renamed the uncommitted
-  `interpret_unknown_patient_name_clarifies` draft to
-  `interpret_unknown_patient_name_without_id`, clarified "command candidate"
-  wording, added patient/practitioner and `safe` assertions to the
-  reference-date drift fixture, and added explicit fake-provider metadata
-  assertions to every new 200-response fixture.
+    `orchestration/agent_inbox/antigravity/antigravity-sprint164-context-date-precedence.md`.
+  - Replacement DeepSeek review in
+    `orchestration/agent_inbox/codex/review-deepseek-sprint164-context-date-precedence.md`.
+- Kept DeepSeek's `assumptions.0.assumed_value` observation in the review
+  packet and retained the assertion after local scenario replay verified it.
 
-Sprint 163 does not open runtime route wiring from the provider-free
+Sprint 164 does not open runtime route wiring from the provider-free
 interpretation harness, provider prompt/dry-run wiring, live-provider
 enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
 material access, GraphQL mutations, or model-to-database writes.
 
-## Sprint 163 Verification
+## Sprint 164 Verification
 
 - `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ -q`
-  (`.x...............`; existing Starlette/Google GenAI warnings only).
+  (`.x.................`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`........s`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
@@ -82,23 +73,29 @@ material access, GraphQL mutations, or model-to-database writes.
 
 Publication state:
 
-- Implementation commit SHA: `d1804cb6`.
-- Closeout metadata commit SHA: `a25b69ea`.
-- Push result: `origin/master`, `handoff/current`, `codex/current`,
-  `claude/current`, and `antigravity/current` aligned at the Sprint 163
-  publication commit.
-- Final `git status --short --branch`: clean except the expected branch header
-  after publication push.
+- Implementation commit SHA: pending.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending.
 
-Strategic position: Sprint 163 continues Fable's Sprint 161 sequencing:
-small authored fake-provider, route-level prompt automation is useful now, but
-provider-quality and live-provider gates remain closed. This sprint tightens the
-edge-contract corpus before any broader backend or provider evidence claims.
+Strategic position: Sprint 164 continues the small authored prompt-automation
+track by proving context precedence before any broader backend or provider
+evidence claims. Provider-quality and live-provider gates remain closed.
 
 Sprint engine state: continuing unless Yuri pauses. Next recommended work is
-either multi-frame context precedence / large temporal drift fixtures, or a
-narrow non-intercepted local-backend pass of the current corpus with the fake
-provider.
+either the omitted-date/no-context fallback fixture, a large temporal-drift
+fixture, or a narrow non-intercepted local-backend pass of the current corpus
+with the fake provider.
+
+---
+
+## Previous Closeout - Sprint 163
+
+Sprint 163 added four fake-provider route-level interpret edge fixtures for
+empty instruction validation, unknown sentinel patient names without invented
+patient ids, visible-diary date context, and per-turn reference-date drift. It
+was committed through `d1804cb6`, closeout metadata through `a25b69ea`, and
+publication status through `e6e5c1e`.
 
 ---
 
