@@ -29,6 +29,16 @@ UPDATE_URL = "/api/v1/appointments/proposals/update/{appt_id}"
 UPDATE_CONFIRM_URL = "/api/v1/appointments/proposals/update/confirm"
 STATUS_URL = "/api/v1/appointments/proposals/status/{appt_id}"
 WAITING_AREA_URL = "/api/v1/appointments/proposals/waiting-area/{appt_id}"
+_update_confirm_key_counter = 0
+
+
+def _update_confirm_headers(token):
+    global _update_confirm_key_counter
+    _update_confirm_key_counter += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"update-confirm-test-{_update_confirm_key_counter}",
+    }
 
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -173,7 +183,7 @@ def test_update_proposal_confirm_payload_writes_with_signed_audit_evidence(
     confirm_resp = client.post(
         UPDATE_CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_update_confirm_headers(token),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
@@ -225,12 +235,13 @@ def test_update_confirm_revalidates_same_day_elapsed_window_without_write(
     monkeypatch.setattr(appointments_router, "_clinic_local_now", confirm_time)
     payload = proposal["confirm_payload"]
     payload["confirmed"] = True
+    db.commit()
     before_audits = db.query(AppointmentAuditLog).count()
 
     confirm_resp = client.post(
         UPDATE_CONFIRM_URL,
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_update_confirm_headers(token),
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text

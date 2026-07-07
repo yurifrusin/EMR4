@@ -89,6 +89,7 @@ def test_current_router_wires_only_approved_confirmation_families():
     helper_start = router_text.index("def _idempotency_key_required_error(")
     staff_start = router_text.index("def confirm_create_proposal_route(")
     update_start = router_text.index("def confirm_update_proposal_route(")
+    update_end = router_text.index("def propose_update_appointment(")
     bernie_start = router_text.index("def confirm_bernie_create_proposal(")
     bernie_end = router_text.index("def select_no_slot_suggestion(")
     status_start = router_text.index("def confirm_status_proposal_route(")
@@ -96,9 +97,10 @@ def test_current_router_wires_only_approved_confirmation_families():
     helper_and_staff = router_text[helper_start:update_start]
     bernie_route = router_text[bernie_start:bernie_end]
     status_route = router_text[status_start:status_end]
+    update_route = router_text[update_start:update_end]
     rest = (
         router_text[:helper_start]
-        + router_text[update_start:status_start]
+        + router_text[update_end:status_start]
         + router_text[status_end:bernie_start]
         + router_text[bernie_end:]
     )
@@ -116,6 +118,10 @@ def test_current_router_wires_only_approved_confirmation_families():
     assert "claim_appointment_command(" in status_route
     assert "complete_appointment_command(" in status_route
     assert "_STATUS_CONFIRM_ROUTE_FAMILY" in status_route
+    assert "Idempotency-Key" in update_route
+    assert "claim_appointment_command(" in update_route
+    assert "complete_appointment_command(" in update_route
+    assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in update_route
     assert "Idempotency-Key" not in rest
     assert "claim_appointment_command(" not in rest
     assert "complete_appointment_command(" not in rest

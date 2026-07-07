@@ -244,8 +244,9 @@ def test_current_router_wires_status_confirm_idempotency_surface():
     assert "_STATUS_CONFIRM_OPERATION_ID" in router_text
     assert "_STATUS_CONFIRM_ROUTE_FAMILY" in router_text
     assert "commit=False" in status_route
-    assert "Header(" not in update_route
-    assert "Idempotency-Key" not in update_route
+    assert "Header(" in update_route
+    assert "Idempotency-Key" in update_route
+    assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in update_route
     assert "Header(" not in delete_route
     assert "Idempotency-Key" not in delete_route
 

@@ -1198,6 +1198,8 @@ _STAFF_CREATE_CONFIRM_ROUTE_FAMILY = "create-confirm"
 _BERNIE_CREATE_CONFIRM_ROUTE_FAMILY = "create-confirm-bernie"
 _STATUS_CONFIRM_OPERATION_ID = "confirmAppointmentStatusProposal"
 _STATUS_CONFIRM_ROUTE_FAMILY = "status-confirm"
+_UPDATE_CONFIRM_OPERATION_ID = "confirmAppointmentUpdateProposal"
+_UPDATE_CONFIRM_ROUTE_FAMILY = "update-confirm"
 _STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER = timedelta(minutes=10)
 
 
@@ -1438,10 +1440,47 @@ def confirm_create_proposal_route(
 )
 def confirm_update_proposal_route(
     body: BernieUpdateProposalConfirmationIn,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    return confirm_update_proposal(body, db, current_user)
+    normalized_idempotency_key = _normalize_idempotency_key(idempotency_key)
+    decision = claim_appointment_command(
+        db,
+        practice_id=current_user.practice_id,
+        actor_user_id=str(current_user.id),
+        actor_role=current_user.role.value if current_user.role else "unknown",
+        operation_id=_UPDATE_CONFIRM_OPERATION_ID,
+        route_family=_UPDATE_CONFIRM_ROUTE_FAMILY,
+        raw_idempotency_key=normalized_idempotency_key,
+        request_body=body.model_dump(mode="json"),
+        secret=_staff_create_confirm_idempotency_secret(),
+        stale_after=_STAFF_CREATE_CONFIRM_IDEMPOTENCY_STALE_AFTER,
+    )
+    mapped_decision = _handle_create_confirm_idempotency_decision(decision)
+    if mapped_decision is not None:
+        return mapped_decision
+
+    response_body = confirm_update_proposal(
+        body,
+        db,
+        current_user,
+        commit=False,
+    )
+    if response_body.safe is not True or response_body.appointment is None:
+        db.rollback()
+        return response_body
+
+    complete_appointment_command(
+        db,
+        decision.record,
+        response_status_code=status.HTTP_200_OK,
+        response_body=response_body.model_dump(mode="json"),
+        result_kind="confirmed_write",
+        target_appointment_id=response_body.appointment.id,
+    )
+    db.commit()
+    return response_body
 
 
 @router.post("/proposals/update/{appointment_id}", response_model=AppointmentUpdateProposalOut)
@@ -1934,6 +1973,8 @@ def confirm_update_proposal(
     body: BernieUpdateProposalConfirmationIn,
     db: Session,
     current_user: User,
+    *,
+    commit: bool = True,
 ):
     """Confirm a backend-prepared Bernie update proposal with signed evidence."""
     audit_evidence = list(_BERNIE_CONFIRM_UPDATE_BASE_EVIDENCE)
@@ -2075,6 +2116,7 @@ def confirm_update_proposal(
         db,
         current_user,
         audit_evidence=audit_evidence,
+        commit=commit,
     )
     return AppointmentConfirmUpdateProposalOut(
         safe=True,
@@ -4171,6 +4213,7 @@ def _apply_appointment_update(
     current_user: User,
     *,
     audit_evidence: Optional[list[str]] = None,
+    commit: bool = True,
 ) -> AppointmentOut:
     practice_id = current_user.practice_id
     practice_tz = _practice_zoneinfo(db, practice_id)
@@ -4259,7 +4302,10 @@ def _apply_appointment_update(
         confirmed_warnings=body.confirmed_warnings,
         audit_evidence=audit_evidence,
     )
-    db.commit()
+    if commit:
+        db.commit()
+    else:
+        db.flush()
     out = AppointmentOut.model_validate(_get_appointment(appointment_id, practice_id, db))
     out.breaks_overlap = _get_break_overlaps(
         db, practice_id, practitioner_id,

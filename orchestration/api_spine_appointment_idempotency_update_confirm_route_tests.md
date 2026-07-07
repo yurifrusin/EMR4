@@ -5,7 +5,7 @@
 | Sprint | 140 |
 | Programme | Programme 2G / EMR4 API Spine |
 | Date | 2026-07-07 |
-| Status | Guarded route-test contract only; no route behavior changed |
+| Status | Sprint 141 wiring completed; update-confirm route tests executable |
 | Steward posture | Define deterministic update-confirm idempotency route tests before enabling HTTP `Idempotency-Key` |
 
 ## Source Pass
@@ -32,8 +32,8 @@ Reviewed sources:
 - canonical operation id: `confirmAppointmentUpdateProposal`;
 - proposed route family: `update-confirm`.
 
-Sprint 140 creates the guarded route-test contract only. It must not wire
-`Idempotency-Key` enforcement or change update-confirm behavior.
+Sprint 140 created the guarded route-test contract only. Sprint 141 consumed it
+and wired `Idempotency-Key` enforcement for `update-confirm` only.
 
 ## Explicitly Out Of Scope
 
@@ -53,8 +53,7 @@ Do not wire beyond the future approved `update-confirm` surface:
 
 ## Future Behavior Matrix
 
-When Sprint 141 wires update-confirm idempotency, the route-test contract should
-cover:
+The executable route-test contract covers:
 
 1. missing `Idempotency-Key` returns a fail-closed error before ledger,
    appointment, or audit mutation;
@@ -125,12 +124,10 @@ canonicalization change is explicitly approved.
 
 ## Smallest Next Alignment Slice
 
-Recommended Sprint 141:
+Recommended Sprint 142:
 
-**Update-confirm idempotency route wiring.**
+**Delete-confirm idempotency preflight.**
 
-Wire only `POST /api/v1/appointments/proposals/update/confirm` with HTTP
-`Idempotency-Key`, full validated-body hashing, started-claim rollback on
-blocks, and one transaction covering appointment update, audit row, ledger
-completion, and commit. Keep delete/raw/proposal-only/provider/GraphQL/H15/
+Choose the safest delete-confirm ordering and route-test shape before touching
+the destructive soft-cancel path. Keep raw/proposal-only/provider/GraphQL/H15/
 memory/trove gates closed.

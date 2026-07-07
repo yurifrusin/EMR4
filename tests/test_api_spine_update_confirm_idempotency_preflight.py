@@ -28,7 +28,7 @@ def test_update_confirm_preflight_selects_next_confirmation_family():
     text = _read(PREFLIGHT)
 
     assert "| Sprint | 139 |" in text
-    assert "Preflight/review only; no route behavior changed" in text
+    assert "Consumed by Sprint 141 route wiring" in text
     assert "POST /api/v1/appointments/proposals/update/confirm" in text
     assert "confirm_update_proposal_route" in text
     assert "confirm_update_proposal" in text
@@ -80,7 +80,7 @@ def test_update_confirm_preflight_lists_required_future_route_tests():
         assert phrase in text
 
 
-def test_update_confirm_preflight_keeps_closed_gates_and_no_route_wiring_yet():
+def test_update_confirm_preflight_keeps_closed_gates_and_scoped_route_wiring():
     text = _read(PREFLIGHT)
     router_text = _read(ROUTER)
 
@@ -107,10 +107,12 @@ def test_update_confirm_preflight_keeps_closed_gates_and_no_route_wiring_yet():
         "def propose_delete_appointment(",
     )
 
-    assert "Header(" not in update_route
-    assert "Idempotency-Key" not in update_route
-    assert "claim_appointment_command(" not in update_route
-    assert "complete_appointment_command(" not in update_route
+    assert "Header(" in update_route
+    assert "Idempotency-Key" in update_route
+    assert "claim_appointment_command(" in update_route
+    assert "complete_appointment_command(" in update_route
+    assert "_UPDATE_CONFIRM_OPERATION_ID" in router_text
+    assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in router_text
     assert "Header(" not in delete_route
     assert "Idempotency-Key" not in delete_route
 

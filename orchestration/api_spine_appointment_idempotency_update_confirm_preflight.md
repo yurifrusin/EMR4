@@ -5,7 +5,7 @@
 | Sprint | 139 |
 | Programme | Programme 2G / EMR4 API Spine |
 | Date | 2026-07-07 |
-| Status | Preflight/review only; no route behavior changed |
+| Status | Consumed by Sprint 141 route wiring |
 | Steward posture | Choose the next confirmation family after status-confirm wiring before widening HTTP `Idempotency-Key` enforcement |
 
 ## Source Pass
