@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 145 appointment idempotency confirmation-family checkpoint completed locally pending closeout commit. The checkpoint records all five wired proposal-confirm appointment mutation families, the shared fail-closed replay/conflict/preclaim map, and the closed raw/proposal-only/provider/GraphQL/H15/memory/trove gates; no route behavior changed |
-| **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 146 cross-family route-level idempotency integration tests across all wired confirmation families before any proposal-only/raw expansion |
+| **Current active track** | Sprint 146 cross-family confirmation idempotency integration tests completed locally pending closeout commit. The new DB-backed route matrix exercises all five wired proposal-confirm appointment mutation families for missing key, replay, conflict, in-progress, stale-in-progress, and failed-transient behavior without changing routes |
+| **Next recommended work** | Sprint engine continuing. Next likely slice is a narrow Sprint 147 policy/preflight decision before any expansion into proposal-only routes, raw compatibility writes, or broader command-surface idempotency |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

@@ -7676,6 +7676,56 @@ wiring.
 
 ---
 
+## Sprint 146 Closeout - Confirmation-Family Idempotency Integration Tests
+
+Publication state:
+
+- Integration commit SHA: `pending Sprint 146 closeout commit`.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Programme position:
+
+- Phase/programme: Programme 2G / EMR4 API Spine.
+- Classification: guardrail hardening and route-level integration coverage.
+- Larger objective advanced: appointment command idempotency now has both
+  per-family contract tests and one shared DB-backed integration matrix across
+  all proposal-confirm mutation families.
+- Next planned step: Sprint 147 policy/preflight decision before proposal-only,
+  raw compatibility, or broader command-surface idempotency expansion.
+
+Integrated outcome:
+
+- Added
+  `tests/test_api_spine_confirmation_family_idempotency_integration.py`.
+- Added
+  `orchestration/api_spine_appointment_idempotency_confirmation_family_integration_tests.md`.
+- Added Claude, Antigravity, and DeepSeek review/acceptance lane packets for
+  Sprint 146.
+- The new test matrix drives staff create, Bernie create, status, update, and
+  delete confirmation routes through missing-key, replay, conflict,
+  in-progress, stale-in-progress, and failed-transient cases.
+- The matrix asserts no duplicate appointment, audit, ledger, or Bernie
+  session-event side effects on replay or fail-closed paths.
+- No route behavior changed. Proposal-only, raw compatibility, provider,
+  GraphQL, H15/H-series, memory/RAG/GraphRAG, and historical diary trove gates
+  remain closed.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_api_spine_confirmation_family_idempotency_integration.py -q
+```
+
+Result: `30 passed`; existing Starlette and Google GenAI deprecation warnings
+only.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is a narrow policy/preflight decision before broader
+idempotency expansion.
+
+---
+
 ## Sprint H59 Closeout - Blocked-Readiness Snapshot
 
 Integrated outcome:
