@@ -24,10 +24,81 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 191 Diary Route Endpoint Coverage Scan |
-| Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek recommendations |
+| Batch | Sprint 192 Diary Route Shadow Hardening |
+| Integrated through | Ariadne implementation with Claude, DeepSeek, and substituted DeepSeek review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
+
+## Sprint 192 What Changed
+
+- Hardened `tests/test_diary_action_route_endpoint_coverage.py` beyond simple
+  route membership checks.
+- Added static guards for duplicate documented `(path, method)` mounts.
+- Added a segment-by-segment declaration-order guard so literal documented
+  contract paths are not captured by earlier parametric routes with overlapping
+  methods.
+- Tightened proposal and confirm route method posture to POST-only, ignoring
+  framework-level HEAD/OPTIONS metadata.
+- Added a read-route guard allowing GET or query-style POST while rejecting
+  PUT/PATCH/DELETE.
+- Added a planned-action guard so planned proposal routes do not overlap
+  implemented confirm or raw mutation targets.
+- Updated `docs/diary-action-route-endpoint-coverage.md` to document the Sprint
+  192 hardening and explicitly defer the broader appointment-router inventory
+  question.
+
+Worker mix:
+
+- Claude completed a read-only review and recommended duplicate mount,
+  parametric shadow, POST-only, and read-route mutation-creep checks.
+- DeepSeek identified a broader appointment-router inventory/classification
+  follow-up; Ariadne deferred it to avoid changing the Diary grammar contract
+  scope inside this sprint.
+- Antigravity had no callable CLI in this environment, so Ariadne substituted a
+  second DeepSeek lane. The substituted lane validated the implemented shadow
+  checks and the segment-by-segment matching approach.
+
+Boundary:
+
+- Static FastAPI `APIRoute` registry scan only.
+- No HTTP requests, route handler execution, database session, provider calls,
+  memory/RAG/GraphRAG access, H15/H-series runtime imports, historical diary
+  material access, GraphQL mutation, or writes.
+- These checks prove route-table shape for documented Diary action contract
+  paths only. They do not prove runtime dispatch, authorization, tenancy,
+  permission enforcement, idempotency, confirmation evidence, provider quality,
+  availability quality, or handler behavior.
+- `DIARY_ACTION_ROUTE_CONTRACTS` remains a Diary grammar authority contract,
+  not a complete appointment-router catalogue.
+- Runtime/provider wiring remains blocked; live-provider and provider-quality
+  evidence remain false.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_endpoint_coverage.py -q
+.venv\Scripts\python.exe -m pytest tests\test_diary_action_route_contract.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q
+.venv\Scripts\python.exe scripts\bernie_scenario_evidence_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: endpoint coverage `9 passed`; route contract `12 passed`; scenario
+integrity `8 passed, 1 skipped`; readiness/provider reports stayed
+blocked/false; leakage lint safe; whitespace check clean. Parallel pytest
+attempts again hit the known Postgres enum DDL `userrole` duplicate-type race
+and passed when rerun serially.
+
+Implementation commit: `11d76bfb`.
+
+Sprint engine state: continuing. No user intervention is required; next
+recommended direction is bounded backend-readiness via a deliberate appointment
+route inventory/classification preflight or route contract behavior checks.
+
+---
 
 ## Sprint 191 What Changed
 
