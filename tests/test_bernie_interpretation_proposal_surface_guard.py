@@ -7,6 +7,7 @@ from scripts.bernie_interpretation_proposal_surface_guard import (
     PROVIDER_BOUNDARY_EXPECTED_VALUES,
     READINESS_COMMAND,
     files_missing_readiness_reference,
+    scan_proposal_surface,
 )
 
 
@@ -26,6 +27,22 @@ def test_proposal_surface_guard_rejects_runtime_proposal_without_readiness(tmp_p
     )
 
     assert files_missing_readiness_reference((proposal,)) == (proposal,)
+
+
+def test_proposal_surface_guard_reports_non_utf8_markdown_as_unreadable(
+    tmp_path,
+):
+    proposal = tmp_path / "legacy-proposal.md"
+    proposal.write_bytes(
+        b"This runtime/provider/trove proposal discusses runtime route wiring.\x97"
+    )
+
+    assert files_missing_readiness_reference((proposal,)) == (proposal,)
+    findings = scan_proposal_surface((proposal,))
+    assert findings.missing_readiness == ()
+    assert len(findings.unreadable_markdown) == 1
+    assert findings.unreadable_markdown[0][0] == proposal
+    assert "utf-8" in findings.unreadable_markdown[0][1].casefold()
 
 
 def test_proposal_surface_guard_rejects_release_gate_route_integration_phrase(

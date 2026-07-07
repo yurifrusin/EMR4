@@ -24,10 +24,45 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 177 Proposal-Surface Guard Vocabulary |
-| Integrated through | Ariadne implementation with DeepSeek sidecar review of release-gate trigger wording |
-| Status | Integrated and pushed |
+| Batch | Sprint 178 Proposal-Surface Guard Fail-Closed Diagnostics |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review of unreadable-markdown handling |
+| Status | Pending commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 178 What Changed
+
+- Changed `scripts/bernie_interpretation_proposal_surface_guard.py` to treat
+  non-UTF-8 markdown as an explicit fail-closed finding instead of crashing or
+  silently decoding with replacement.
+- Added `ProposalSurfaceGuardFindings` and `scan_proposal_surface()` so callers
+  can distinguish missing readiness citations from unreadable markdown.
+- Kept the compatibility wrapper fail-closed by returning unreadable markdown
+  paths together with missing-readiness paths.
+- Added regression coverage proving invalid UTF-8 markdown is reported as
+  unreadable with a path-specific decode error.
+
+Sprint 178 is a guard robustness sprint. It does not edit historical backlog
+documents en masse and does not change runtime code, routes, provider
+configuration, database behavior, memory, RAG, GraphRAG, H15/H-series imports,
+historical diary processing, GraphQL mutations, or model-to-database write
+authority.
+
+Worker mix:
+
+- DeepSeek reviewed the unreadable-markdown options and recommended
+  path-specific diagnostics that fail closed.
+
+## Sprint 178 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_proposal_surface_guard.py -q`
+  (`12 passed`; existing warnings only).
+- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs orchestration`
+  now fails closed with missing-citation backlog paths plus two explicit
+  unreadable markdown diagnostics instead of crashing.
+- `git diff --check` passed.
+- Integration commit: pending.
+- Push result: pending.
+- Sprint engine state: continuing unless Yuri pauses.
 
 ## Sprint 177 What Changed
 

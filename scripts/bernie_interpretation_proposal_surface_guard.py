@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import dataclass
 from pathlib import Path
 
 
@@ -87,6 +88,12 @@ PROVIDER_BOUNDARY_TRIGGER_PHRASES = (
 )
 
 
+@dataclass(frozen=True)
+class ProposalSurfaceGuardFindings:
+    missing_readiness: tuple[Path, ...]
+    unreadable_markdown: tuple[tuple[Path, str], ...]
+
+
 def _iter_markdown_paths(paths: tuple[Path, ...]) -> tuple[Path, ...]:
     discovered: list[Path] = []
     for path in paths:
@@ -97,12 +104,21 @@ def _iter_markdown_paths(paths: tuple[Path, ...]) -> tuple[Path, ...]:
     return tuple(discovered)
 
 
-def files_missing_readiness_reference(paths: tuple[Path, ...]) -> tuple[Path, ...]:
-    """Return proposal-surface files missing required readiness evidence."""
+def _read_markdown_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def scan_proposal_surface(paths: tuple[Path, ...]) -> ProposalSurfaceGuardFindings:
+    """Return proposal-surface files missing evidence or unreadable as UTF-8."""
 
     missing: list[Path] = []
+    unreadable: list[tuple[Path, str]] = []
     for path in _iter_markdown_paths(paths):
-        text = path.read_text(encoding="utf-8")
+        try:
+            text = _read_markdown_text(path)
+        except UnicodeDecodeError as exc:
+            unreadable.append((path, str(exc)))
+            continue
         folded = text.casefold()
         if not any(phrase in folded for phrase in TRIGGER_PHRASES):
             continue
@@ -125,7 +141,19 @@ def files_missing_readiness_reference(paths: tuple[Path, ...]) -> tuple[Path, ..
                 for key, value in PROVIDER_BOUNDARY_EXPECTED_VALUES.items()
             ):
                 missing.append(path)
-    return tuple(missing)
+    return ProposalSurfaceGuardFindings(
+        missing_readiness=tuple(missing),
+        unreadable_markdown=tuple(unreadable),
+    )
+
+
+def files_missing_readiness_reference(paths: tuple[Path, ...]) -> tuple[Path, ...]:
+    """Return proposal-surface files missing evidence or unreadable as UTF-8."""
+
+    findings = scan_proposal_surface(paths)
+    return findings.missing_readiness + tuple(
+        path for path, _error in findings.unreadable_markdown
+    )
 
 
 def main() -> int:
@@ -138,12 +166,27 @@ def main() -> int:
     parser.add_argument("paths", nargs="+", type=Path)
     args = parser.parse_args()
 
-    missing = files_missing_readiness_reference(tuple(args.paths))
-    if missing:
-        formatted = "\n".join(f"- {path}" for path in missing)
+    findings = scan_proposal_surface(tuple(args.paths))
+    if findings.missing_readiness or findings.unreadable_markdown:
+        sections: list[str] = []
+        if findings.missing_readiness:
+            formatted = "\n".join(f"- {path}" for path in findings.missing_readiness)
+            sections.append(
+                "Missing Bernie interpretation readiness evidence in:\n"
+                f"{formatted}"
+            )
+        if findings.unreadable_markdown:
+            formatted = "\n".join(
+                f"- {path}: {error}"
+                for path, error in findings.unreadable_markdown
+            )
+            sections.append(
+                "Unreadable markdown files; convert to UTF-8 before relying on "
+                f"this guard:\n{formatted}"
+            )
         raise SystemExit(
-            "Missing Bernie interpretation readiness evidence in:\n"
-            f"{formatted}\n"
+            "\n".join(sections)
+            + "\n"
             f"Required command: {READINESS_COMMAND}\n"
             "Required expected values: runtime_or_provider_wiring_ready=false, "
             "raw_trove_access_ready=false, runtime_gate_decision=blocked\n"
