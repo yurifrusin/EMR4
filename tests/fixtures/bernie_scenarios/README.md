@@ -43,6 +43,9 @@ The current executable `interpret_*` corpus covers two slices:
 - reference-date reload/reset prompts: repeated relative-date wording
   re-resolves against the current turn reference date and wins over
   auto-threaded prior requested appointment dates.
+- reference-date no-op prompts: when a follow-up changes only time and contains
+  no date wording, a changed turn reference date must not re-resolve the
+  threaded absolute appointment date.
 - reset/no-merge follow-ups: explicit `context_frames: []` prevents patient,
   practitioner, time, and duration from being carried forward unless the
   receptionist restates them in the current turn.
