@@ -25,7 +25,10 @@ The current executable `interpret_*` corpus covers two slices:
   date wins over visible diary page date;
 - context-fallback prompts: omitted dates with no selected proposal, selected
   diary appointment, or visible diary page context ask for the missing date
-  instead of guessing.
+  instead of guessing;
+- context-threading prompts: omitted `context_frames` auto-threads prior
+  requested appointment context, while explicit `context_frames: []` clears the
+  thread and asks again.
 
 Unknown patient-name fixtures deliberately assert the current route contract:
 the interpret layer may still produce a slot-search command when practitioner

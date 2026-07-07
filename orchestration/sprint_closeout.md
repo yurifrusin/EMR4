@@ -24,40 +24,39 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 165 Context Date Fallback Fixture |
+| Batch | Sprint 166 Context Threading Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
-## Sprint 165 What Changed
+## Sprint 166 What Changed
 
-- Added `interpret_context_date_missing_no_context.yaml`, an authored synthetic
-  fake-provider route-level fixture proving that a partial booking request with
-  patient, practitioner, time, and duration but no date and explicit empty
-  `context_frames: []` returns `clarification_required` and asks "Which day
-  would you like me to check?" instead of guessing a date.
-- The fixture asserts `command_candidate.date_from: null`,
-  `missing_fields.0: date_from`, `normalization.safe: false`,
-  `blocks.0.code: missing_date_from`, fake provider metadata, and no
-  appointment/audit writes.
-- Updated the Bernie scenario corpus README to record context-fallback prompts.
+- Added `interpret_context_frames_auto_thread_vs_empty.yaml`, an authored
+  synthetic fake-provider route-level fixture proving both sides of the scenario
+  replay context-threading contract:
+  - omitted `context_frames` auto-threads the prior `requested_appointment`
+    frame, preserving patient, practitioner, date, and duration while applying a
+    time change;
+  - explicit `context_frames: []` clears the thread, leaving a bare time change
+    as `clarification_required`.
+- Updated the Bernie scenario corpus README to record context-threading prompts.
 - Recorded worker lanes:
   - Claude CLI review in
-    `orchestration/agent_inbox/claude/claude-sprint165-context-date-fallback.md`.
+    `orchestration/agent_inbox/claude/claude-sprint166-context-threading.md`.
   - Antigravity CLI product/receptionist review in
-    `orchestration/agent_inbox/antigravity/antigravity-sprint165-context-date-fallback.md`.
+    `orchestration/agent_inbox/antigravity/antigravity-sprint166-context-threading.md`.
   - DeepSeek review in
-    `orchestration/agent_inbox/codex/review-deepseek-sprint165-context-date-fallback.md`.
+    `orchestration/agent_inbox/codex/review-deepseek-sprint166-context-threading.md`.
 
-Sprint 165 does not open runtime route wiring from the provider-free
+Sprint 166 does not open runtime route wiring from the provider-free
 interpretation harness, provider prompt/dry-run wiring, live-provider
 enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
 material access, GraphQL mutations, or model-to-database writes.
 
-## Sprint 165 Verification
+## Sprint 166 Verification
 
 - `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ -q`
-  (`.x..................`; existing Starlette/Google GenAI warnings only).
+  (`.x...................`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe -m pytest tests\test_bernie_scenario_integrity.py -q`
   (`........s`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
@@ -73,22 +72,28 @@ material access, GraphQL mutations, or model-to-database writes.
 
 Publication state:
 
-- Implementation commit SHA: `0ccea30d`.
-- Closeout metadata commit SHA: `0f2ecc3d`.
-- Push result: `origin/master`, `handoff/current`, `codex/current`,
-  `claude/current`, and `antigravity/current` aligned at the Sprint 165
-  publication commit.
-- Final `git status --short --branch`: clean except the expected branch header
-  after publication push.
+- Implementation commit SHA: pending.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending.
 
-Strategic position: Sprint 165 completes the date-context precedence/fallback
-mini-matrix before broader backend or provider evidence claims. Provider-quality
+Strategic position: Sprint 166 locks the replay harness's conversation-context
+semantics before broader backend or provider evidence claims. Provider-quality
 and live-provider gates remain closed.
 
 Sprint engine state: continuing unless Yuri pauses. Next recommended work is a
-multi-turn fixture proving omitted `context_frames` auto-threads prior context
-while explicit `context_frames: []` clears it, followed by multi-field missing
-or large temporal-drift coverage.
+partial-context override fixture, followed by multi-field missing or temporal
+drift threading coverage.
+
+---
+
+## Previous Closeout - Sprint 165
+
+Sprint 165 added the fake-provider route-level omitted-date/no-context fallback
+fixture, proving Bernie asks for the missing date instead of guessing while
+preserving no-write/provider-boundary gates. It was committed through
+`0ccea30d`, closeout metadata through `0f2ecc3d`, and publication status through
+`45d7cb6`.
 
 ---
 
