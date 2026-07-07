@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 161 Fable sequencing consult completed via Claude CLI and recorded in `orchestration/agent_inbox/codex/plan-claude-fable-sprint161-bernie-diary-sequencing-review.md`; Fable's verdict is that contract-level prompt-thread automation is worthwhile now, while provider/live-quality gates remain closed |
-| **Next recommended work** | Start the interpret-capable Bernie scenario replay sprint: extend `tests/bernie_scenarios` with an `interpret` action, thread `requested_appointment` context frames between turns, and add 10-15 natural-phrasing multi-turn fixtures labelled `fake-provider, route-level`; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, or broad trove gates |
+| **Current active track** | Sprint 162 interpret-capable Bernie scenario replay implemented locally: `tests/bernie_scenarios` now supports `interpret` turns with threaded `requested_appointment` frames, deterministic fake-provider enforcement, interpret-to-search handoff, confirm idempotency headers, and 10 authored synthetic natural-phrasing prompt-thread fixtures; verification is fake-provider route-level only |
+| **Next recommended work** | After Sprint 162 closeout/push, either run the same corpus against a non-intercepted local backend with the fake provider for narrow live-backend evidence, or add the next small source-safe fixture slice for unknown names, empty instruction, partial context frames, and reference-date drift; do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, or broad trove gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

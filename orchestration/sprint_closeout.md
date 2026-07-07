@@ -24,32 +24,51 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 160 Bernie/Diary Review Readiness |
-| Integrated through | Ariadne review-readiness packet with EMR4 API Steward skill; Claude/Antigravity packets dispatched; DeepSeek replacement/adversarial review accepted |
-| Status | Committed and pushed; sprint engine paused for Yuri review |
+| Batch | Sprint 162 Interpret-Capable Bernie Scenario Replay |
+| Integrated through | Fable-directed prompt-thread automation; Claude CLI advice; DeepSeek adversarial review; Antigravity CLI corpus review |
+| Status | Closeout metadata commit/push in progress |
 | Last updated | 2026-07-07 |
 
-## Sprint 160 What Changed
+## Sprint 162 What Changed
 
-- Added `orchestration/bernie_diary_review_readiness_sprint160.md`.
-- Added `tests/test_bernie_diary_review_readiness_packet.py` to mechanically
-  preserve the review packet's evidence labels, blocked readiness values, closed
-  gates, ordinary prompt, and pause recommendation.
-- Added Sprint 160 Claude and Antigravity task packets for continuity, with
-  explicit replacement-by-DeepSeek language if those lanes are paused.
-- Integrated DeepSeek's adversarial review in
-  `orchestration/agent_inbox/codex/review-deepseek-sprint160-bernie-diary-review-readiness.md`.
-- Recorded that Sprint 160 is a review-readiness checkpoint only. It does not
-  open runtime route wiring, provider prompt wiring, provider dry-run wiring,
-  live-provider enablement, memory/RAG/GraphRAG, H15/H-series runtime imports,
-  historical diary material access, GraphQL mutations, or model-to-database
-  writes.
-- Explicitly defers live-provider readiness: the current evidence is
-  provider-disabled, fake-provider, or route-intercepted unless provider metadata
-  proves `live_provider: true`.
+- Extended `tests/bernie_scenarios` with an executable `interpret` action for
+  `/api/v1/appointments/proposals/bernie/interpret-booking-instruction`.
+- Scenario replay now forces the deterministic fake Bernie interpreter,
+  auto-threads `requested_appointment` frames between interpret turns when
+  `context_frames` is omitted, and allows `context_frames: []` for a fresh turn.
+- Empty `search` turns can now reuse the `command_candidate` from the last
+  interpret turn, enabling an interpret -> search -> select prompt-thread path.
+- Scenario `confirm` turns now send a deterministic HTTP `Idempotency-Key`,
+  keeping the older happy-path fixture aligned with the current API-spine
+  confirm route contract.
+- Added 10 authored synthetic natural-phrasing `interpret_*.yaml` fixtures
+  covering full request resolution, missing-practitioner clarification, date/
+  time/duration/practitioner follow-up changes, no-prior-frame isolation,
+  confirm-required no-write boundary, past-date block, and selected-slot pivot.
+- Updated scenario README files and integrity validation so executable
+  interpret fixtures are explicitly labelled `fake-provider, route-level`
+  evidence only.
+- Tightened `preserved_fields`: once a preserved field has been snapshotted, a
+  later disappearance now fails instead of silently passing.
+- Recorded worker lanes:
+  - Claude CLI implementation advice in
+    `orchestration/agent_inbox/claude/claude-sprint162-interpret-replay-harness.md`.
+  - DeepSeek adversarial review in
+    `orchestration/agent_inbox/codex/review-deepseek-sprint162-interpret-replay-harness.md`.
+  - Antigravity corpus-review packet in
+    `orchestration/agent_inbox/antigravity/antigravity-sprint162-interpret-prompt-corpus.md`.
+  - Antigravity CLI review output in
+    `orchestration/agent_inbox/antigravity/antigravity-sprint162-interpret-prompt-corpus-cli.md`.
 
-## Sprint 160 Verification
+Sprint 162 does not open runtime route wiring from the provider-free
+interpretation harness, provider prompt/dry-run wiring, live-provider
+enablement, memory/RAG/GraphRAG, H15/H-series runtime imports, historical diary
+material access, GraphQL mutations, or model-to-database writes.
 
+## Sprint 162 Verification
+
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ -q`
+  (`.x...........`; existing Starlette/Google GenAI warnings only).
 - `.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py`
   succeeded with `runtime_or_provider_wiring_ready=false`,
   `raw_trove_access_ready=false`, and `runtime_gate_decision=blocked`.
@@ -59,34 +78,39 @@ Every closeout entry should record:
   `route_behavior_changed=false`, `database_access_performed=false`,
   `memory_or_rag_access_performed=false`, and
   `historical_diary_material_access_performed=false`.
-- `.venv\Scripts\python.exe scripts\smoke_bernie_interpreter.py --instruction "Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45" --reference-date 2026-07-01 --expect-result clarification_required --expect-earliest-time 14:00 --expect-latest-time 15:45 --expect-mode mocked`
-  succeeded. This fake-provider check proves honest redacted time-window parsing;
-  it does not prove deterministic name-to-ID resolution.
-- `.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_bernie_route_intercepted_selected_slot_can_return_to_candidates -q`
-  (`1 passed`). This is route-intercepted evidence only.
-- `.venv\Scripts\python.exe -m pytest tests\test_bernie_diary_review_readiness_packet.py tests\test_smoke_bernie_interpreter_script.py -q`
-  (`14 passed`; existing Starlette/Google GenAI warnings only).
-- `.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py orchestration\bernie_diary_review_readiness_sprint160.md`
-  succeeded.
+- `.venv\Scripts\python.exe -m pytest tests\test_bernie_clarification_merge.py tests\test_bernie_interpret_booking_instruction.py -q`
+  (`37 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe -m pytest tests\bernie_scenarios\ tests\test_bernie_scenario_integrity.py -q`
+  (`.x...................s`; existing Starlette/Google GenAI warnings only).
+- `git diff --check` clean.
 
 Publication state:
 
-- Dispatch commit SHA: `33454df`.
-- Review-readiness packet commit SHA: `abec002c`.
-- Closeout metadata commit SHA: `0714ed2`.
-- Push result: pushed to `origin/master`; final push-status commit follows this
-  entry and is pushed immediately after creation.
-- Final `git status --short --branch`: `## master...origin/master`.
+- Implementation commit SHA: `a31ebfdf`.
+- Closeout metadata commit SHA: this closeout metadata commit.
+- Push result: pending final push.
+- Final `git status --short --branch`: pending.
 
-Strategic position: Sprint 160 is **Programme 2G / EMR4 API Spine** review
-readiness. It closes the sprint engine's current implementation run and creates
-the review packet for Yuri to run the Diary/Bernie workflow meaningfully without
-claiming live-provider or live-backend proof.
+Strategic position: Sprint 162 follows Fable's Sprint 161 advice. The system's
+contract bones are strong enough for prompt-thread automation, but this sprint
+is deliberately contract-level only. It creates the stable fake-provider
+route-level yardstick needed before any later live-backend or provider-quality
+review can be measured honestly.
 
-Sprint engine state: paused for Yuri review. Recommended review focus is the
-supervised receptionist workflow: ordinary prompt understanding, candidate
-selection, staged-vs-confirmed copy, the path back to choose another slot, and
-absence of raw IDs, `snake_case` internals, or generic `Not Found` failures.
+Sprint engine state: continuing unless Yuri pauses. Next recommended work is
+either a narrow non-intercepted local-backend run of the same corpus with the
+fake provider, or the next small fixture expansion for unknown names,
+empty/invalid instructions, partial context frames, and reference-date drift.
+
+---
+
+## Previous Closeout - Sprint 160
+
+Sprint 160 added `orchestration/bernie_diary_review_readiness_sprint160.md`,
+verified blocked readiness/provider values, integrated DeepSeek's adversarial
+review, and paused the sprint engine for Yuri's hands-on Diary/Bernie review
+without claiming live-provider or live-backend proof. It was committed and
+pushed through `0714ed2`, followed by the post-closeout launcher fix `6e8c19b`.
 
 ---
 
