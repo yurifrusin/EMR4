@@ -4,13 +4,29 @@ This file tracks what the user should review after each integrated sprint batch
 of parallel-agent work. Codex updates it after submitted work has been polled,
 reviewed, integrated, verified, pushed, and audited.
 
+## Closeout Completeness Rule
+
+A sprint or sprint batch is not closed until the integrated work is committed,
+pushed to `origin/master`, and the integration worktree is clean. If publication
+is intentionally deferred, the status must say `local-only`, `pending commit`,
+or `pending push`, and the closeout must name the blocker or Yuri instruction
+that caused the deferral.
+
+Every closeout entry should record:
+
+- verification commands and results;
+- the integration commit SHA once committed;
+- push result or explicit push blocker;
+- final `git status --short --branch`;
+- whether the sprint engine is continuing or paused, and why.
+
 ## Current Closeout
 
 | Item | Value |
 |---|---|
 | Batch | Sprint 139 Update-Confirm Idempotency Preflight |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; DeepSeek worker advice integrated; Claude and Antigravity protocol packets remain queued locally |
-| Status | Local preflight integrated; sprint engine continuing |
+| Status | Committed and pushed in batch commit `37767ac51ef266b7c454d4c215dacaa14a44a319`; sprint engine continuing |
 | Last updated | 2026-07-07 |
 
 ## Sprint 139 What Changed
@@ -44,6 +60,10 @@ reviewed, integrated, verified, pushed, and audited.
 
 Sprint engine state: continuing. Next recommended slice is Sprint 140, a
 guarded update-confirm idempotency route-test contract before any route wiring.
+
+Publication status after cleanup: committed and pushed to `origin/master` in
+`37767ac51ef266b7c454d4c215dacaa14a44a319`; final status was clean
+(`master...origin/master`).
 
 ---
 

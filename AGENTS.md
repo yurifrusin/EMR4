@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 139 update-confirm idempotency preflight completed locally. DeepSeek affirmed choosing `POST /api/v1/appointments/proposals/update/confirm` before delete-confirm because it is reversible and exercises revalidation before the destructive soft-cancel path; no route behavior changed |
+| **Current active track** | Sprint 139 update-confirm idempotency preflight completed and pushed in `37767ac51ef266b7c454d4c215dacaa14a44a319`. DeepSeek affirmed choosing `POST /api/v1/appointments/proposals/update/confirm` before delete-confirm because it is reversible and exercises revalidation before the destructive soft-cancel path; no route behavior changed |
 | **Next recommended work** | Sprint engine continuing. Next likely slice is Sprint 140 update-confirm idempotency route-test contract before any route wiring; delete/raw/proposal-only/provider/GraphQL/H15/memory/trove gates stay closed |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of

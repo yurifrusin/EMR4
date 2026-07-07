@@ -71,6 +71,16 @@ Read these before acting on remembered process details.
   native subagent lanes, close old worker agents that are no longer needed so
   the local worker pool does not hit its thread limit while useful lanes are
   waiting.
+- 2026-07-07: Sprint closeout is not complete until the integrated work is
+  committed, pushed, and the integration worktree is clean. A closeout may be
+  recorded as `local-only`, `pending commit`, or `pending push` only when there
+  is an explicit blocker or Yuri has asked to defer publication; otherwise each
+  sprint/batch closeout must run and record `git status --short --branch`, the
+  verification commands, `git commit`, `git push origin master`, and the final
+  clean status. Do not describe a sprint as `integrated`, `closed`, or
+  `continuing` in `orchestration/sprint_closeout.md`,
+  `orchestration/integration_log.md`, AGENTS.md, or push notifications if the
+  corresponding code/docs remain only in the local working tree.
 - 2026-07-05: Sprint worker mix now starts with a Claude availability/quota
   check so Ariadne remembers to use Claude when it is healthy. If Claude is
   quota-capped, unavailable, recuperating, or fails to submit a usable plan in
