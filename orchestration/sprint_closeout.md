@@ -24,10 +24,79 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 201 API Spine Audit/Correlation Continuity Index |
-| Integrated through | Ariadne implementation with Claude headless review packet, Antigravity `agy.exe` review packet, and DeepSeek review |
+| Batch | Sprint 202 API Spine Appointment Read-Model Route Inventory |
+| Integrated through | Ariadne implementation with Antigravity `agy.exe` review/draft and DeepSeek review; Claude attempted but unavailable |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
+
+## Sprint 202 What Changed
+
+- Added `docs/api-spine/appointment-read-model-route-inventory.md`, a static
+  bridge from GraphQL appointment/diary/audit/Bernie read surfaces to current
+  appointment-router GET/read routes.
+- Added `tests/test_api_spine_appointment_read_model_route_inventory.py`, which
+  parses only the markdown inventory, GraphQL SDL, appointment router source,
+  and existing OpenAPI drift guard route inventory.
+- The inventory covers every GraphQL `Query` root and every current
+  appointment-router GET/read route, marking coverage as `full`, `partial`,
+  `external`, or `unmapped`.
+- It records the four legacy compatibility writes as `outside_read_graph` and
+  keeps proposal commands, confirm commands, command-style POST reads, and
+  Bernie session POST commands outside the GraphQL read-route bridge.
+- Integrated Sprint 202 review records under `orchestration/agent_inbox/codex/`.
+
+Worker mix:
+
+- Antigravity was reached through the documented `agy.exe` CLI and produced a
+  useful review packet plus a draft implementation. Ariadne did not copy the
+  draft wholesale; the integrated version tightened GET coverage, unmapped-route
+  accounting, and mutating-route exclusion tests.
+- DeepSeek completed before integration and independently recommended the same
+  static route inventory, with warnings about partial GraphQL coverage and
+  command-style POST read exclusion.
+- Claude was invoked through `scripts\drive_agent_headless.py` with
+  `--mint-session`, but stopped at the configured budget limit before producing
+  a durable review packet. No Claude recommendations were integrated.
+
+Boundary:
+
+- Static source/markdown parsing only.
+- No FastAPI router import in the new inventory test, no route handler
+  execution, HTTP requests, database session, provider calls, memory/RAG/GraphRAG
+  access, H15/H-series runtime imports, historical diary material access,
+  GraphQL mutation work, or writes.
+- The change does not prove runtime resolver implementation, schema conversion
+  correctness, authorization policy, performance, database access behavior,
+  provider readiness, or deployment readiness.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_appointment_read_model_route_inventory.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_appointment_openapi_drift_guard.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_idempotency_continuity_index.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_audit_correlation_continuity_index.py -q
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs
+git diff --check
+```
+
+Result: appointment read-model route inventory `8 passed`; OpenAPI drift guard
+`5 passed`; idempotency continuity index `5 passed`; audit/correlation
+continuity index `7 passed`; readiness/provider reports stayed blocked/false;
+leakage lint safe; whitespace check clean. An initial parallel continuity run
+hit the known PostgreSQL enum creation race; serial reruns passed.
+
+Implementation commit: `3564f9d0`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a command/read-model deprecation map for legacy
+compatibility writes or a static external-router inventory for
+viewer/practice/patient/directory GraphQL roots, with runtime/provider gates
+still blocked.
+
+---
 
 ## Sprint 201 What Changed
 
