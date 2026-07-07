@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 159 Bernie Tool-Intent Confirm Client Header |
 | Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude/Antigravity lanes replaced by additional DeepSeek reviews due tool/usage friction; DeepSeek adversarial review accepted |
-| Status | Committed locally; push pending |
+| Status | Committed and pushed; sprint engine continuing |
 | Last updated | 2026-07-07 |
 
 ## Sprint 159 What Changed
@@ -72,15 +72,17 @@ Publication state:
 - Dispatch commit SHA: `bc31b10`.
 - Implementation commit SHA: `710e1b9`.
 - Closeout metadata commit SHA: `a7cf880`.
-- Push result: pending.
-- Final `git status --short --branch`: pending.
+- Push result: pushed to `origin/master`; `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` all aligned and pushed to
+  `0f94f1e4`.
+- Final `git status --short --branch`: `## master...origin/master`.
 
 Strategic position: Sprint 159 is **Programme 2G / EMR4 API Spine** client
 readiness. It closes the last known enforced confirm-client header gap before a
 meaningful integrated Bernie/Diary review-readiness packet.
 
-Sprint engine state: continuing after push. Next recommended slice is Sprint
-160: prepare the Bernie/Diary review-readiness packet, run the required
+Sprint engine state: continuing. Next recommended slice is Sprint 160: prepare
+the Bernie/Diary review-readiness packet, run the required
 readiness/provider-boundary checks, and pause for Yuri if checks pass.
 
 ---

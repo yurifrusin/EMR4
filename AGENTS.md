@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 159 Bernie tool-intent update-confirm client header emission implemented in commit `710e1b9`; the last known enforced confirm-client header gap is closed |
+| **Current active track** | Sprint 159 Bernie tool-intent update-confirm client header emission implemented in commit `710e1b9` and closed/pushed through `0f94f1e`; the last known enforced confirm-client header gap is closed |
 | **Next recommended work** | Sprint 160 should prepare the Bernie/Diary review-readiness packet, run required provider/readiness gates, and pause for Yuri's meaningful review if checks pass |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
