@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 168 Multi-Field Missing Prompt Fixture |
 | Integrated through | Fable-directed prompt-thread automation; Claude CLI review; Antigravity CLI product review; DeepSeek review |
-| Status | Integrated locally; publication pending this closeout commit/push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-07 |
 
 ## Sprint 168 What Changed
@@ -83,9 +83,11 @@ material access, GraphQL mutations, or model-to-database writes.
 Publication state:
 
 - Implementation commit SHA: `0f19ca6b`.
-- Closeout metadata commit SHA: pending.
-- Push result: pending.
-- Final `git status --short --branch`: pending publication.
+- Closeout metadata commit SHA: `ab8ae0a9`.
+- Push result: `origin/master`, `handoff/current`, `codex/current`,
+  `claude/current`, and `antigravity/current` aligned at Sprint 168 final
+  closeout head.
+- Final `git status --short --branch`: clean after publication push.
 
 Strategic position: Sprint 168 strengthens "ask, do not guess" behavior for
 under-specified prompt automation before broader backend or provider evidence
