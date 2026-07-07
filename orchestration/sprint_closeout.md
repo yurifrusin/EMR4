@@ -82,7 +82,7 @@ established safe lint scope `tests docs` was used for closeout.
 Publication state:
 
 - Implementation commit SHA: `df3f926`.
-- Closeout metadata commit SHA: `68b0f36`.
+- Closeout metadata commit SHA: `3bdce2b`.
 - Push result: pending.
 - Final `git status --short --branch`: pending.
 
