@@ -33,6 +33,6 @@ def test_sprint_closeout_template_records_publication_state():
 def test_current_baton_no_longer_describes_sprint_139_as_local_only():
     text = AGENTS.read_text(encoding="utf-8", errors="replace")
 
-    assert "Sprint 152 create-proposal `minLength: 8` readiness decision" in text
+    assert "Sprint 153 diary create-proposal client header readiness" in text
     assert "Sprint 139 update-confirm idempotency preflight completed locally" not in text
     assert "Sprint 140 update-confirm idempotency route-test contract completed locally" not in text

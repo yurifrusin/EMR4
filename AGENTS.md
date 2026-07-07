@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 152 create-proposal `minLength: 8` readiness decision implemented in commit `11913f0`; runtime enforcement remains deferred with new guard tests and concrete preconditions |
-| **Next recommended work** | Sprint 153 should close the proposal-header readiness gap: either preflight/wire the real diary create-proposal caller to send an 8+ character `Idempotency-Key`, or preflight the next proposal-only route's non-blank header discipline before update/status/waiting-area/delete proposal enforcement |
+| **Current active track** | Sprint 153 diary create-proposal client header readiness implemented in commit `9d7f9bd`; the diary create-proposal POST now sends an 8+ character `Idempotency-Key` without backend runtime `minLength` enforcement |
+| **Next recommended work** | Sprint 154 should continue Programme 2G by preflighting the remaining diary/API header gaps, especially create-confirm/confirm-Bernie/status/delete confirm emission or the next proposal-only non-blank header surface, without touching raw compatibility writes by default |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files

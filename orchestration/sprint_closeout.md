@@ -24,10 +24,73 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 152 Create-Proposal minLength Readiness Decision |
-| Integrated through | Ariadne implementation with EMR4 API Steward skill; Claude recommendation accepted; Antigravity integrated as dissent; DeepSeek adversarial recommendation accepted |
-| Status | Committed and pushed; sprint engine continuing |
+| Batch | Sprint 153 Diary Create-Proposal Client Header Readiness |
+| Integrated through | Ariadne integration with EMR4 API Steward skill; Claude plan accepted; Antigravity implementation integrated; DeepSeek adversarial review accepted |
+| Status | Implementation committed in `9d7f9bd`; pending closeout metadata commit/push |
 | Last updated | 2026-07-07 |
+
+## Sprint 153 What Changed
+
+- Updated `docs/diary/diary.js` so the real diary create-proposal POST sends an
+  `Idempotency-Key` header for new appointment proposals.
+- Added `generateClientIdempotencyKey()`, using `crypto.randomUUID()` when
+  available and an `evt-...` fallback that satisfies the 8+ character
+  readiness precondition.
+- Scoped the key to the current booking-modal proposal attempt by storing it on
+  the Save button dataset; it remains stable across warning-confirm retries and
+  is cleared when `resetProposalConfirmation()` runs after input changes or
+  modal reset.
+- Left update-proposal behavior unchanged.
+- Bumped `docs/diary/diary.html` to `diary.js?v=175`.
+- Added `review/test_diary_smoke.py::test_create_proposal_idempotency_header`
+  to assert the header is present, 8+ characters, stable across warning-confirm
+  retry, and refreshed after input changes.
+- Integrated worker lanes:
+  - Claude recommended a client-only fix with no backend/OpenAPI/runtime
+    `minLength` changes.
+  - Antigravity implemented the diary client/header and smoke-test slice.
+  - DeepSeek found no blockers and flagged the broader remaining diary header
+    gap for confirm and sibling proposal routes.
+- No backend route behavior, OpenAPI schema, idempotency ledger semantics,
+  provider, GraphQL, H15/H-series, memory/RAG/GraphRAG, or raw compatibility
+  write behavior changed.
+
+## Sprint 153 Verification
+
+- `node --check docs\diary\diary.js`.
+- `.venv\Scripts\python.exe scripts\check_frontend_versions.py`
+  (`[PASSED] Verification Passed: All modified assets have appropriate version bumps`).
+- `.venv\Scripts\python.exe -m pytest -k "test_create_proposal_idempotency_header or test_create_modal_uses_signed_create_confirm_before_status_patch" review/test_diary_smoke.py -q`
+  (`2 passed`).
+- `.venv\Scripts\python.exe -m pytest tests/test_api_spine_create_proposal_header_alignment.py tests/test_api_spine_create_proposal_idempotency_route_contract.py -q`
+  (`25 passed`; existing Starlette/Google GenAI warnings only).
+- `.venv\Scripts\python.exe scripts\historical_diary_leakage_lint.py tests docs`
+  (`historical diary leakage lint safe`).
+- `git diff --check` clean apart from a CRLF normalization warning on a
+  coordination packet.
+
+Publication state:
+
+- Integration commit SHA: `9d7f9bd`.
+- Closeout metadata commit SHA: pending.
+- Push result: pending.
+- Final `git status --short --branch`: pending final closeout check.
+
+Strategic position: Sprint 153 is **Programme 2G / EMR4 API Spine** client
+readiness and guardrail hardening. It was the right-sized follow-up to Sprint
+152 because it closed one concrete runtime/client mismatch without broadening
+proposal-route enforcement or changing backend idempotency semantics.
+
+Sprint engine state: continuing. Next recommended slice is Sprint 154, a
+remaining diary/API header-gap preflight. DeepSeek specifically flagged that
+create-confirm, confirm-Bernie, status/delete confirm, and sibling proposal
+callers may still lack HTTP `Idempotency-Key` emission; address those in
+bounded slices rather than rolling headers onto raw compatibility writes by
+default.
+
+---
+
+## Previous Closeout - Sprint 152
 
 ## Sprint 152 What Changed
 
