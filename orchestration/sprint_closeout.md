@@ -64,7 +64,7 @@ Publication state:
 
 - Dispatch commit SHA: `9f939dd`.
 - Checkpoint implementation commit SHA: `908cf7a`.
-- Closeout metadata commit SHA: pending.
+- Closeout metadata commit SHA: `cec5746`.
 - Push result: pending.
 - Final `git status --short --branch`: pending.
 
