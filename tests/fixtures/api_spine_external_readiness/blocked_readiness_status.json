@@ -1,6 +1,6 @@
 {
   "approval_gate_artifact_present": true,
-  "approval_gate_decision": "blocked",
+  "approval_gate_decision": "approved_for_rest_route_first_slice",
   "approval_gate_node_count": 1,
   "approval_gate_runtime_authority": false,
   "blocked_runtime_gate_count": 3,

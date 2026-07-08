@@ -32,6 +32,9 @@ DEFAULT_COMBINED_REVIEW_PATH = (
     / "api-spine"
     / "external-read-model-combined-readiness-review.md"
 )
+DEFAULT_APPROVED_GATE_PATH = (
+    REPO_ROOT / "docs" / "api-spine" / "practitioner-directory-approved-gate.json"
+)
 
 STATUS_SCHEMA_VERSION = "api_spine.external_read_model_readiness_check.v1"
 GAP_STATUS_SCHEMA_VERSION = "api_spine.external_read_model_gap_status.v1"
@@ -48,6 +51,7 @@ EXPECTED_READY_FLAGS = {
     "write_authority_ready": False,
     "raw_compat_mode_change_ready": False,
 }
+EXPECTED_APPROVAL_DECISION = "approved_for_rest_route_first_slice"
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -153,15 +157,32 @@ def build_readiness_status(
     dag_path: Path = DEFAULT_DAG_PATH,
     root_inventory_path: Path = DEFAULT_ROOT_INVENTORY_PATH,
     combined_review_path: Path = DEFAULT_COMBINED_REVIEW_PATH,
+    approved_gate_path: Path = DEFAULT_APPROVED_GATE_PATH,
 ) -> dict[str, object]:
     dag = _load_json(dag_path)
     gap_status = build_gap_status()
     root_disjunction = _assert_directory_root_gap_disjunction(root_inventory_path)
     combined_review_status = _assert_combined_review(combined_review_path)
+    approved_gate = _load_json(approved_gate_path)
 
     assert dag["schema_version"] == EXPECTED_DAG_SCHEMA_VERSION
     assert dag["decision"] == "blocked"
     assert dag["readiness"] == EXPECTED_READY_FLAGS
+    assert approved_gate["decision"] == EXPECTED_APPROVAL_DECISION
+    assert approved_gate["approval"]["reviewer"] == "yuri"
+    assert approved_gate["approval"]["go_no_go_acknowledged"] is True
+    assert approved_gate["permitted_scope"]["rest_route_first_slice_only"] is True
+    for blocked_scope in [
+        "sdl_changes_allowed",
+        "graphql_resolver_allowed",
+        "graphql_runtime_dependency_allowed",
+        "provider_or_memory_trove_allowed",
+        "write_authority_allowed",
+        "readiness_flag_changes_allowed",
+        "deployment_or_production_readiness_allowed",
+    ]:
+        assert approved_gate["permitted_scope"][blocked_scope] is False
+    assert approved_gate["readiness_posture"] == EXPECTED_READY_FLAGS
     assert all(node["runtime_authority"] is False for node in dag["nodes"])
 
     completed_nodes = [
@@ -190,7 +211,7 @@ def build_readiness_status(
     assert approval_gate_nodes[0]["kind"] == "approval_gate"
     assert approval_gate_nodes[0]["status"] == "static_complete"
     assert approval_gate_nodes[0]["artifact"] == (
-        "docs/api-spine/practitioner-directory-approval-decision.md"
+        "docs/api-spine/practitioner-directory-approved-gate.json"
     )
     assert approval_gate_nodes[0]["runtime_authority"] is False
     assert all(node["status"] == "blocked" for node in runtime_gate_nodes)
@@ -210,7 +231,7 @@ def build_readiness_status(
         "combined_readiness_review_status": combined_nodes[0]["status"],
         "combined_readiness_review_artifact_present": True,
         "approval_gate_node_count": len(approval_gate_nodes),
-        "approval_gate_decision": "blocked",
+        "approval_gate_decision": approved_gate["decision"],
         "approval_gate_artifact_present": True,
         "approval_gate_runtime_authority": approval_gate_nodes[0]["runtime_authority"],
         **combined_review_status,

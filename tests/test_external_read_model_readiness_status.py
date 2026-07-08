@@ -42,7 +42,6 @@ FORBIDDEN_OUTPUT_FRAGMENTS = {
     "provider prompt",
     "local_data",
     "readiness\": true",
-    "decision\": \"approved",
     "runtime_authority\": true",
 }
 
@@ -72,7 +71,7 @@ def test_readiness_status_does_not_authorize_runtime():
     assert status["combined_readiness_review_status"] == "static_complete"
     assert status["blocked_runtime_gate_count"] == 3
     assert status["approval_gate_node_count"] == 1
-    assert status["approval_gate_decision"] == "blocked"
+    assert status["approval_gate_decision"] == "approved_for_rest_route_first_slice"
     assert status["approval_gate_artifact_present"] is True
     assert status["approval_gate_runtime_authority"] is False
     assert status["runtime_authority_node_count"] == 0

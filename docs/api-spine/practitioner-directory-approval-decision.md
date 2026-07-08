@@ -1,40 +1,39 @@
-# Practitioner Directory REST Route Approval Decision Draft
+# Practitioner Directory REST Route Approval Decision
 
 Date: 2026-07-08
 
-Status: draft only; practitioner-directory route implementation remains blocked
+Status: approved for REST first slice only
 
 Decision authority: Yuri
 
 ## Purpose
 
-This packet gives Yuri a concrete decision surface for the future go/no-go on:
+This packet records Yuri's go/no-go decision for:
 
 ```text
 GET /api/v1/practice/practitioners
 ```
 
-It is not approval. The companion JSON keeps `decision` as `blocked`, keeps
-`approval.go_no_go_acknowledged` false, and leaves `approval.reviewer`,
-`approval.approval_expires_on`, and `approval.approved_contract_commit` blank:
+The original companion draft JSON remains as the pre-approval decision surface:
 
 ```text
 docs/api-spine/practitioner-directory-approval-payload-draft.json
 ```
 
-There is deliberately no approved gate file yet:
+Yuri approved the REST first slice on 2026-07-08. The committed approved gate is:
 
 ```text
 docs/api-spine/practitioner-directory-approved-gate.json
 ```
 
-That file may exist only after Yuri explicitly instructs Ariadne to approve the
-REST first slice.
+The approved gate has `decision: approved_for_rest_route_first_slice`,
+`reviewer: yuri`, `go_no_go_acknowledged: true`,
+`approval_expires_on: 2027-07-01`, and
+`approved_contract_commit: ce23212d538fbba24e5061def2142b817d5528ad`.
 
-## Evidence Checklist Before Approval
+## Evidence Checklist Before Implementation
 
-Before the JSON can be converted from draft to approved, the route approval
-decision must verify:
+Before runtime code is written, the route implementation sprint must verify:
 
 1. `docs/api-spine/practitioner-directory-read-shape-design.md` exists.
 2. `docs/api-spine/practitioner-directory-route-schema-ownership-candidate.md`
@@ -53,21 +52,22 @@ decision must verify:
 8. `docs/api-spine/practitioner-directory-route-implementation-breakdown-readiness-decision.md`
    defines Slices A-D and the pre-code stop/go points.
 9. `tests/fixtures/api_spine_external_readiness/blocked_readiness_status.json`
-   still has `dag_decision: blocked` and readiness flags false.
+   still has `dag_decision: blocked`, `approval_gate_decision:
+   approved_for_rest_route_first_slice`, and readiness flags false.
 10. Current production source still has no practitioner directory route, schema,
     shared read service, GraphQL resolver, SDL edit, provider call, memory/RAG/
     GraphRAG wiring, H15/H-series runtime import, or readiness flag change.
 
-## Proposed Scope If Yuri Approves Later
+## Approved Scope
 
-The proposed future approval would allow only the Sprint 232 REST first slice:
+This approval allows only the Sprint 232 REST first slice:
 
 - directory response schemas in `app/schemas/practice.py`;
 - shared read service in `app/services/practice/practitioner_directory_read.py`;
 - REST route and mount for `GET /api/v1/practice/practitioners`;
 - runtime tests covering the Sprint 227 and Sprint 230 matrices.
 
-It would still forbid:
+It still forbids:
 
 - SDL changes, including `PracticeLocationBrief`;
 - GraphQL runtime dependencies, resolvers, or mutations;
@@ -91,39 +91,38 @@ It would still forbid:
 
 | Decision | Consequence |
 |---|---|
-| `blocked` | Default state. No route, schema, service, SDL, GraphQL, readiness, provider, memory, or database code is authorized. |
-| `approved_for_rest_route_first_slice` | Authorizes only Sprint 232 Slice A-D: schemas, shared read service, REST route/mount, and runtime tests. All SDL, GraphQL, provider, memory, write, deployment, and readiness flag gates remain closed. |
+| `blocked` | Historical pre-approval default. No route, schema, service, SDL, GraphQL, readiness, provider, memory, or database code is authorized. |
+| `approved_for_rest_route_first_slice` | Current decision. Authorizes only Sprint 232 Slice A-D: schemas, shared read service, REST route/mount, and runtime tests. All SDL, GraphQL, provider, memory, write, deployment, and readiness flag gates remain closed. |
 | `deferred` | No code change is permitted. Planning may continue or the sprint engine may wait for a later decision checkpoint. |
 | `rejected` | No code change is permitted. The route attempt leaves the active implementation queue until a new reviewed proposal supersedes this gate. |
 | `expired` | No further route work is permitted until pre-code checks are refreshed and Yuri records a new explicit decision. |
 
-## Manual Decision Required
+## Approval Payload Applied
 
-If Yuri approves later, the approval patch should:
+The approval patch:
 
 - add `docs/api-spine/practitioner-directory-approved-gate.json`;
-- change `decision` to `approved_for_rest_route_first_slice`;
+- set `decision` to `approved_for_rest_route_first_slice`;
 - set `approval.reviewer` to `yuri`;
 - set `approval.go_no_go_acknowledged` to `true`;
-- set `approval.approval_expires_on` to a reviewed `YYYY-MM-DD` date;
-- set `approval.approved_contract_commit` to the reviewed contract commit hash;
+- set `approval.approval_expires_on` to `2027-07-01`;
+- set `approval.approved_contract_commit` to
+  `ce23212d538fbba24e5061def2142b817d5528ad`;
 - keep every non-REST-first-slice scope field false;
 - keep `readiness_flag_changes_allowed` false;
 - keep `deployment_or_production_readiness_allowed` false.
 
-No agent should make that approval patch without Yuri explicitly instructing it
-to approve this route.
+No further scope expansion is approved by this patch.
 
 ## Boundary
 
-This is a static approval-decision draft. It proves only that the route has a
-reviewable future decision surface. It does not prove runtime REST
-authorization, route correctness, database query correctness, field-level
-authorization, audit implementation, SDL correctness after edit, GraphQL
-authorization, resolver correctness, RLS, field encryption, rate limiting,
-pagination performance, deployment readiness, provider readiness, external
-directory readiness, patient-facing client readiness, production readiness, or
-Yuri approval.
+This is a static approval decision for the first REST implementation slice. It
+does not prove runtime REST authorization, route correctness, database query
+correctness, field-level authorization, audit implementation, SDL correctness
+after edit, GraphQL authorization, resolver correctness, RLS, field encryption,
+rate limiting, pagination performance, deployment readiness, provider
+readiness, external directory readiness, patient-facing client readiness, or
+production readiness.
 
 ## Verification
 

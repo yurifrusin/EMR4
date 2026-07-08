@@ -35,9 +35,9 @@ EXPECTED_CLOSED_GATES = {
     "Access AI invocation wiring",
     "model-to-database writes outside REST command handlers",
     "raw compatibility deprecation mode changes",
-    "adding docs/api-spine/practitioner-directory-approved-gate.json without explicit Yuri approval",
-    "changing practitioner_directory_approval_gate decision from blocked to approved without explicit Yuri go/no-go",
-    "approving practitioner directory route implementation without passing the Sprint 233 evidence checklist",
+    "expanding practitioner-directory approval beyond REST first slice",
+    "changing readiness flags to true without implementation evidence",
+    "treating practitioner-directory approval as deployment or production readiness",
 }
 
 
@@ -136,7 +136,7 @@ def test_external_read_model_readiness_dag_approval_gate_blocks_rest_route():
         "id": "practitioner_directory_approval_gate",
         "kind": "approval_gate",
         "status": "static_complete",
-        "artifact": "docs/api-spine/practitioner-directory-approval-decision.md",
+        "artifact": "docs/api-spine/practitioner-directory-approved-gate.json",
         "runtime_authority": False,
     }
     assert (
@@ -144,7 +144,7 @@ def test_external_read_model_readiness_dag_approval_gate_blocks_rest_route():
         in edges[("combined_readiness_review", "practitioner_directory_approval_gate")]
     )
     assert (
-        "route implementation remains blocked until Sprint 233 gate is explicitly approved by Yuri"
+        "Yuri approved only the REST first slice; route readiness remains blocked until implementation and runtime tests pass"
         == edges[("practitioner_directory_approval_gate", "rest_route_wiring")]
     )
     assert ("combined_readiness_review", "rest_route_wiring") not in edges

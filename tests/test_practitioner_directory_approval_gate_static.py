@@ -51,6 +51,10 @@ def _draft() -> dict:
     return json.loads(DRAFT_JSON.read_text(encoding="utf-8"))
 
 
+def _approved() -> dict:
+    return json.loads(APPROVED_GATE.read_text(encoding="utf-8"))
+
+
 def _app_python_text() -> str:
     return "\n".join(
         path.read_text(encoding="utf-8", errors="replace")
@@ -75,9 +79,18 @@ def test_payload_draft_exists_and_is_blocked_by_default():
     assert payload["draft_review"]["not_approved_until"] == "explicit_yuri_decision"
 
 
-def test_approved_gate_does_not_exist_before_yuri_decision():
-    assert not APPROVED_GATE.exists()
-    assert "There is deliberately no approved gate file yet" in _read(DECISION_MD)
+def test_approved_gate_exists_after_yuri_decision():
+    payload = _approved()
+
+    assert APPROVED_GATE.exists()
+    assert payload["decision"] == "approved_for_rest_route_first_slice"
+    assert payload["approval"] == {
+        "reviewer": "yuri",
+        "go_no_go_acknowledged": True,
+        "approval_expires_on": "2027-07-01",
+        "approved_contract_commit": "ce23212d538fbba24e5061def2142b817d5528ad",
+    }
+    assert "Yuri approved the REST first slice on 2026-07-08" in _read(DECISION_MD)
 
 
 def test_decision_field_is_enum_restricted_and_consequences_complete():
@@ -90,11 +103,11 @@ def test_decision_field_is_enum_restricted_and_consequences_complete():
         assert f"`{decision}`" in _read(DECISION_MD)
 
 
-def test_blocked_decision_rejects_all_non_rest_scope_fields_as_false():
-    payload = _draft()
-    scope = payload["permitted_scope_if_approved"]
+def test_approved_decision_rejects_all_non_rest_scope_fields_as_false():
+    payload = _approved()
+    scope = payload["permitted_scope"]
 
-    assert payload["decision"] == "blocked"
+    assert payload["decision"] == "approved_for_rest_route_first_slice"
     assert scope["rest_route_first_slice_only"] is True
     assert scope["schema_slice_allowed"] is True
     assert scope["shared_read_service_slice_allowed"] is True
@@ -138,33 +151,24 @@ def test_evidence_checklist_maps_to_sprint_214_223_227_to_232_docs():
     assert checklist["yuri_explicit_go_no_go_recorded"] is False
 
 
-def test_approval_expiry_and_contract_commit_are_blank_until_approval_but_draft_shape_is_valid():
-    payload = _draft()
+def test_approval_expiry_and_contract_commit_are_recorded_in_approved_gate():
+    payload = _approved()
     approval = payload["approval"]
 
-    assert approval["approval_expires_on"] is None
-    assert approval["approved_contract_commit"] is None
-    assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", payload["draft_review"]["proposed_approval_expires_on"])
+    assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", approval["approval_expires_on"])
+    assert re.fullmatch(r"[0-9a-f]{40}", approval["approved_contract_commit"])
 
 
 def test_closed_gates_preserved_match_route_breakdown_boundary():
-    payload = _draft()
+    payload = _approved()
     forbidden = "\n".join(payload["forbidden_changes"])
     decision = _compact(_read(DECISION_MD))
 
     for phrase in [
-        "adding a REST practitioner directory route without approved_for_rest_route_first_slice",
-        "adding app/routers/practice.py without approved_for_rest_route_first_slice",
-        "adding app/schemas/practice.py without approved_for_rest_route_first_slice",
-        "adding app/services/practice/ without approved_for_rest_route_first_slice",
-        "adding GraphQL resolvers or GraphQL mutations",
-        "adding a GraphQL runtime dependency or server",
-        "changing the SDL",
-        "adding PracticeLocationBrief to the SDL",
-        "changing Practitioner.defaultLocation",
-        "adding limit or offset arguments to Practice.practitioners",
-        "changing the blocked readiness snapshot",
-        "changing readiness flags to true",
+        "SDL changes, including PracticeLocationBrief",
+        "GraphQL runtime dependencies, resolvers, or mutations",
+        "readiness flag changes",
+        "deployment or production-readiness claims",
         "provider calls or live provider gates",
         "runtime FGA clients",
         "external patient clients",
@@ -193,6 +197,7 @@ def test_readiness_snapshot_remains_blocked():
     snapshot = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
 
     assert snapshot["dag_decision"] == "blocked"
+    assert snapshot["approval_gate_decision"] == "approved_for_rest_route_first_slice"
     assert snapshot["rest_route_ready"] is False
     assert snapshot["graphql_resolver_ready"] is False
     assert snapshot["external_read_model_runtime_ready"] is False
@@ -222,9 +227,8 @@ def test_packet_does_not_authorize_runtime_code_by_itself():
     compact = _compact(_read(DECISION_MD))
 
     for phrase in [
-        "It is not approval",
-        "That file may exist only after Yuri explicitly instructs Ariadne",
-        "No agent should make that approval patch without Yuri explicitly instructing it",
+        "Status: approved for REST first slice only",
+        "No further scope expansion is approved by this patch",
         "does not prove runtime REST authorization",
         "route correctness",
         "database query correctness",
@@ -232,6 +236,5 @@ def test_packet_does_not_authorize_runtime_code_by_itself():
         "resolver correctness",
         "deployment readiness",
         "production readiness",
-        "Yuri approval",
     ]:
         assert phrase in compact

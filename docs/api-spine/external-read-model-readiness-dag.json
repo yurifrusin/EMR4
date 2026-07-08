@@ -3,7 +3,7 @@
   "date": "2026-07-08",
   "sprint": 234,
   "decision": "blocked",
-  "purpose": "Static DAG snapshot for external read-model readiness. It records documentation, review, and approval-gate dependencies only; it does not create runtime graph execution, GraphRAG, REST routes, GraphQL resolvers, provider calls, database queries, readiness flag changes, or write authority. Sprint 234 adds the Sprint 233 practitioner-directory approval-decision draft as a static blocking gate before REST route wiring.",
+  "purpose": "Static DAG snapshot for external read-model readiness. It records documentation, review, and approval-gate dependencies only; it does not create runtime graph execution, GraphRAG, REST routes, GraphQL resolvers, provider calls, database queries, readiness flag changes, or write authority. Yuri approved the practitioner-directory REST first slice on 2026-07-08, but route readiness remains false until implementation and runtime evidence exist.",
   "readiness": {
     "external_read_model_runtime_ready": false,
     "graphql_resolver_ready": false,
@@ -74,7 +74,7 @@
       "id": "practitioner_directory_approval_gate",
       "kind": "approval_gate",
       "status": "static_complete",
-      "artifact": "docs/api-spine/practitioner-directory-approval-decision.md",
+      "artifact": "docs/api-spine/practitioner-directory-approved-gate.json",
       "runtime_authority": false
     },
     {
@@ -163,7 +163,7 @@
     {
       "from": "practitioner_directory_approval_gate",
       "to": "rest_route_wiring",
-      "reason": "route implementation remains blocked until Sprint 233 gate is explicitly approved by Yuri"
+      "reason": "Yuri approved only the REST first slice; route readiness remains blocked until implementation and runtime tests pass"
     },
     {
       "from": "combined_readiness_review",
@@ -191,8 +191,8 @@
     "Access AI invocation wiring",
     "model-to-database writes outside REST command handlers",
     "raw compatibility deprecation mode changes",
-    "adding docs/api-spine/practitioner-directory-approved-gate.json without explicit Yuri approval",
-    "changing practitioner_directory_approval_gate decision from blocked to approved without explicit Yuri go/no-go",
-    "approving practitioner directory route implementation without passing the Sprint 233 evidence checklist"
+    "expanding practitioner-directory approval beyond REST first slice",
+    "changing readiness flags to true without implementation evidence",
+    "treating practitioner-directory approval as deployment or production readiness"
   ]
 }
