@@ -7,6 +7,15 @@ provider prompt wiring, provider dry-run wiring, memory/RAG/GraphRAG use,
 H15/H-series runtime imports, historical diary material access, GraphQL
 mutations, external patient clients, or model-to-database writes.
 
+Sprint 236 D1/D2 amendment: Fable approved the direction only with the
+constraints below. The first selector is anchored to
+`app/schemas/appointments.py::BernieSessionSnapshotOut`, binds
+`session_phase` to `app/services/bernie/session.py::BernieSessionState`, treats
+`copy_mode` as a derived leaf, tags node values by source of truth, fails closed
+on unknown enum values, and emits display-only state with no write payload,
+write authority, provider, route, database, H15/H-series, historical diary, or
+memory/RAG/GraphRAG wiring.
+
 Proposal-surface guard citation:
 
 ```powershell
@@ -200,7 +209,7 @@ Out of scope:
 ### Sprint D2: Pure View-Model Selector
 
 Goal: add a provider-free, route-free, DB-free selector that maps a synthetic
-Bernie session snapshot to a view model.
+`BernieSessionSnapshotOut`-shaped snapshot to a view model.
 
 Candidate artifact:
 
@@ -214,12 +223,29 @@ The selector should be pure and deterministic. It should not import routers,
 provider code, database models, H15 fixtures, H-series profiles, historical
 diary builders, or local ignored outputs.
 
+Fable-required D2 constraints:
+
+- `session_phase` is exactly `BernieSessionState`, not a parallel phase enum;
+- every canonical node records whether its value is server-snapshot-derived,
+  client-transient, or derived;
+- `copy_mode` is a leaf derived from the other nodes, not an independent input;
+- unknown session or client-transient enum values fail closed with `ValueError`;
+- `confirmed` and `success` can be produced only from backend-confirmed session
+  state, never from client-transient button state;
+- the view-model schema contains no `writes_authorized`, confirm payload,
+  signed evidence, proposal freshness echo, appointment id, patient id, or
+  practitioner id fields;
+- the frontend consumption mechanism remains future backend-computed view model
+  delivery, not shared frontend/backend code, because the current taskpane is
+  plain JavaScript and must not drift through a reimplementation.
+
 Acceptance:
 
 - each fixture has one canonical session state and one expected view model;
 - confirmation states drive multiple otherwise unrelated UI elements;
 - success state is reachable only from backend-confirmed input;
-- pressed/awaiting-backend states never claim the appointment is booked;
+- pressed/awaiting-backend states never claim the appointment is booked or
+  confirmed;
 - stale and failed states keep retry/edit paths visible;
 - tests include the ordinary Margaret Thompson / Dr Shera release-gate flow as
   a fixture shape, with route/provider evidence clearly labelled as synthetic.

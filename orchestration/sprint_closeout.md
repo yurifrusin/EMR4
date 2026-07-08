@@ -24,6 +24,78 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 236 Bernie UI Derived-State DAG D1/D2 Selector |
+| Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded pure selector/test sprint |
+| Status | Verified; pending commit and push |
+| Last updated | 2026-07-08 |
+
+## Sprint 236 What Changed
+
+- Amended `docs/bernie-ui-derived-state-dag-plan.md` with Fable's required D2
+  constraints: bind `session_phase` to `BernieSessionState`, anchor input to
+  `BernieSessionSnapshotOut`, source-tag node values, keep `copy_mode` derived,
+  fail closed on unknown enums, keep success backend-confirmed only, and emit no
+  write-echo fields.
+- Added `app/services/bernie/ui_view_model.py`, a pure display selector that
+  maps a Bernie session snapshot plus explicit client-transient confirmation
+  request state to a `BernieUiViewModel`.
+- Added authored synthetic fixtures in
+  `tests/fixtures/bernie_ui_view_model/cases.json`.
+- Added `tests/test_bernie_ui_view_model.py` covering fixture projections,
+  confirmation-state conditioning across unrelated UI flags, backend-confirmed
+  only success copy, negative pre-confirm copy, fail-closed unknown enums,
+  no write-echo schema fields, no provider/route/DB/memory/H15/trove imports,
+  and no production route imports yet.
+
+Worker mix:
+
+- Claude/Fable was not invoked; the sprint followed the existing Fable review
+  artifact directly.
+- Antigravity was not invoked.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start; no worker artifacts were
+  created.
+
+Boundary:
+
+- Pure backend contract selector, synthetic fixtures, plan amendment, and tests
+  only.
+- No route mount or response wiring, UI consumer wiring, provider call, Access
+  AI invocation, memory/RAG/GraphRAG wiring, H15/H-series runtime import,
+  historical diary/local_data import, GraphQL resolver, write authority, or
+  appointment confirmation behavior change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_view_model.py -q
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\bernie-ui-derived-state-dag-plan.md
+.venv\Scripts\python.exe -m py_compile app\services\bernie\ui_view_model.py tests\test_bernie_ui_view_model.py
+git diff --check -- app\services\bernie\ui_view_model.py tests\test_bernie_ui_view_model.py tests\fixtures\bernie_ui_view_model\cases.json docs\bernie-ui-derived-state-dag-plan.md
+```
+
+Result: selector suite `17 passed`; readiness check stayed
+`runtime_or_provider_wiring_ready=false`, `raw_trove_access_ready=false`,
+`runtime_gate_decision=blocked`; provider-boundary report stayed
+`default_provider=disabled`, `live_provider_enabled=false`,
+`provider_calls_performed=false`, `route_behavior_changed=false`,
+`database_access_performed=false`, `memory_or_rag_access_performed=false`, and
+`historical_diary_material_access_performed=false`; proposal guard, py_compile,
+and whitespace checks passed.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing to D3 inventory/review only; D4 UI wiring waits
+for a separate reviewed route-intercepted UI consumer sprint.
+
+---
+
+## Previous Closeout - Sprint 235
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 235 API Spine Practitioner Directory Post-Implementation Readiness Review |
 | Integrated through | Ariadne direct implementation; no Claude/Antigravity/DeepSeek lanes used because this was a bounded artifact/test review sprint |
 | Status | Integrated and ready to push |

@@ -1,0 +1,228 @@
+{
+  "schema_version": "bernie.ui_view_model.fixture.v1",
+  "cases": [
+    {
+      "id": "instruction_waiting",
+      "client_confirmation_request_state": "idle",
+      "snapshot": {
+        "session_id": "session-instruction",
+        "surface_id": "diary-main",
+        "state": "instruction_entry",
+        "revision": 0
+      },
+      "expected": {
+        "confirmation_state": "not_applicable",
+        "copy_mode": "technical_details_only",
+        "show_confirm_button": false,
+        "show_success_copy": false
+      }
+    },
+    {
+      "id": "clarification_ambiguous_identity",
+      "client_confirmation_request_state": "idle",
+      "snapshot": {
+        "session_id": "session-clarify",
+        "surface_id": "diary-main",
+        "state": "clarification",
+        "revision": 2,
+        "patient_band": "ambiguous",
+        "practitioner_band": "recognized"
+      },
+      "expected": {
+        "clarification_state": "required",
+        "identity_state": "ambiguous",
+        "confirmation_state": "blocked",
+        "copy_mode": "blocked",
+        "show_clarification_prompt": true,
+        "show_confirm_button": false
+      }
+    },
+    {
+      "id": "candidate_slots_available",
+      "client_confirmation_request_state": "idle",
+      "snapshot": {
+        "session_id": "session-candidates",
+        "surface_id": "diary-main",
+        "state": "candidate_selection",
+        "revision": 4,
+        "patient_id": "11111111-1111-1111-1111-111111111111",
+        "patient_band": "recognized",
+        "practitioner_id": "22222222-2222-2222-2222-222222222222",
+        "practitioner_band": "recognized",
+        "candidate_freshness_ids": ["candidate-snapshot-1"]
+      },
+      "expected": {
+        "candidate_state": "available",
+        "confirmation_state": "not_applicable",
+        "copy_mode": "offer",
+        "show_candidate_slots": true,
+        "show_confirm_button": false
+      }
+    },
+    {
+      "id": "margaret_dr_shera_proposal_ready",
+      "client_confirmation_request_state": "idle",
+      "snapshot": {
+        "session_id": "session-proposal",
+        "surface_id": "diary-main",
+        "state": "proposal_preview",
+        "revision": 6,
+        "patient_id": "11111111-1111-1111-1111-111111111111",
+        "patient_band": "recognized",
+        "practitioner_id": "22222222-2222-2222-2222-222222222222",
+        "practitioner_band": "recognized",
+        "candidate_freshness_ids": ["candidate-snapshot-1"],
+        "staged_proposal_freshness_id": "proposal-freshness-1"
+      },
+      "expected": {
+        "proposal_state": "ready",
+        "confirmation_state": "ready",
+        "copy_mode": "not_booked_yet",
+        "show_pending_proposal_card": true,
+        "show_confirm_button": true,
+        "enable_confirm_button": true,
+        "show_choose_another_time": true,
+        "show_success_copy": false
+      }
+    },
+    {
+      "id": "confirm_pressed_not_booked",
+      "client_confirmation_request_state": "pressed",
+      "snapshot": {
+        "session_id": "session-pressed",
+        "surface_id": "diary-main",
+        "state": "proposal_preview",
+        "revision": 7,
+        "patient_id": "11111111-1111-1111-1111-111111111111",
+        "patient_band": "recognized",
+        "practitioner_id": "22222222-2222-2222-2222-222222222222",
+        "practitioner_band": "recognized",
+        "candidate_freshness_ids": ["candidate-snapshot-1"],
+        "staged_proposal_freshness_id": "proposal-freshness-1"
+      },
+      "expected": {
+        "confirmation_state": "pressed",
+        "copy_mode": "not_booked_yet",
+        "show_candidate_slots": true,
+        "show_confirm_button": false,
+        "show_success_copy": false
+      }
+    },
+    {
+      "id": "awaiting_backend_hides_old_candidates",
+      "client_confirmation_request_state": "awaiting_backend",
+      "snapshot": {
+        "session_id": "session-awaiting",
+        "surface_id": "diary-main",
+        "state": "confirmation",
+        "revision": 8,
+        "patient_id": "11111111-1111-1111-1111-111111111111",
+        "patient_band": "recognized",
+        "practitioner_id": "22222222-2222-2222-2222-222222222222",
+        "practitioner_band": "recognized",
+        "candidate_freshness_ids": ["candidate-snapshot-1"],
+        "staged_proposal_freshness_id": "proposal-freshness-1"
+      },
+      "expected": {
+        "confirmation_state": "awaiting_backend",
+        "copy_mode": "not_booked_yet",
+        "show_candidate_slots": false,
+        "show_confirm_button": false,
+        "show_success_copy": false
+      }
+    },
+    {
+      "id": "backend_confirmed_success",
+      "client_confirmation_request_state": "idle",
+      "snapshot": {
+        "session_id": "session-confirmed",
+        "surface_id": "diary-main",
+        "state": "confirmed",
+        "revision": 9,
+        "patient_id": "11111111-1111-1111-1111-111111111111",
+        "patient_band": "recognized",
+        "practitioner_id": "22222222-2222-2222-2222-222222222222",
+        "practitioner_band": "recognized"
+      },
+      "expected": {
+        "proposal_state": "confirmed",
+        "confirmation_state": "confirmed",
+        "copy_mode": "success",
+        "show_candidate_slots": false,
+        "show_confirm_button": false,
+        "show_success_copy": true,
+        "show_identity_verification_panel": false
+      }
+    },
+    {
+      "id": "stale_proposal_retry",
+      "client_confirmation_request_state": "idle",
+      "snapshot": {
+        "session_id": "session-stale",
+        "surface_id": "diary-main",
+        "state": "proposal_preview",
+        "revision": 10,
+        "patient_id": "11111111-1111-1111-1111-111111111111",
+        "patient_band": "recognized",
+        "practitioner_id": "22222222-2222-2222-2222-222222222222",
+        "practitioner_band": "recognized",
+        "candidate_freshness_ids": ["candidate-snapshot-1"],
+        "staged_proposal_freshness_id": "proposal-freshness-1",
+        "stale_reason_code": "diary_navigated"
+      },
+      "expected": {
+        "proposal_state": "stale",
+        "confirmation_state": "stale",
+        "copy_mode": "stale_or_retry",
+        "show_stale_warning": true,
+        "show_retry_action": true,
+        "show_edit_action": true,
+        "show_confirm_button": false
+      }
+    },
+    {
+      "id": "backend_rejection_retry",
+      "client_confirmation_request_state": "failed",
+      "snapshot": {
+        "session_id": "session-failed",
+        "surface_id": "diary-main",
+        "state": "proposal_preview",
+        "revision": 11,
+        "patient_id": "11111111-1111-1111-1111-111111111111",
+        "patient_band": "recognized",
+        "practitioner_id": "22222222-2222-2222-2222-222222222222",
+        "practitioner_band": "recognized",
+        "candidate_freshness_ids": ["candidate-snapshot-1"],
+        "staged_proposal_freshness_id": "proposal-freshness-1"
+      },
+      "expected": {
+        "confirmation_state": "failed",
+        "copy_mode": "stale_or_retry",
+        "show_retry_action": true,
+        "show_edit_action": true,
+        "show_success_copy": false
+      }
+    },
+    {
+      "id": "no_slots_suggestions",
+      "client_confirmation_request_state": "idle",
+      "snapshot": {
+        "session_id": "session-no-slot",
+        "surface_id": "diary-main",
+        "state": "no_slot",
+        "revision": 5,
+        "patient_id": "11111111-1111-1111-1111-111111111111",
+        "patient_band": "recognized",
+        "practitioner_id": "22222222-2222-2222-2222-222222222222",
+        "practitioner_band": "recognized"
+      },
+      "expected": {
+        "candidate_state": "empty_after_search",
+        "confirmation_state": "not_applicable",
+        "copy_mode": "no_slots",
+        "show_no_slot_suggestions": true,
+        "show_confirm_button": false
+      }
+    }
+  ]
+}
