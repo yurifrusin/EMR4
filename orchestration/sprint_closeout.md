@@ -24,6 +24,75 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 210 API Spine Raw Compat Header Rollout Gate |
+| Integrated through | Ariadne implementation with DeepSeek review; Claude budget-blocked and Antigravity timed out without artifact |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 210 What Changed
+
+- Added `docs/api-spine/raw-compat-header-rollout-gate.json`, a structured
+  blocked-by-default gate for any future raw compatibility header-mode rollout.
+- The gate records decision `blocked`, empty
+  `environments_can_default_header`, the four raw compatibility route families,
+  the sole backend signal site, the known frontend console consumer, and no
+  user-facing UI consumers.
+- The gate separates already-proven readiness signals from still-false
+  observability requirements, including per-environment observability, rollback
+  planning, signal-volume metrics, staff impact assessment, external consumer
+  impact audit, and proposal/confirm parity review.
+- Added `tests/test_api_spine_raw_compat_header_rollout_gate.py`, validating
+  the blocked decision, route inventory, false unblocking requirements,
+  forbidden uses, and mutation-driven sprint-engine pause triggers.
+- Cross-linked the rollout gate from
+  `docs/api-spine/raw-compat-consumer-signal-readiness.md` and its parser test.
+
+Worker mix:
+
+- DeepSeek completed a bounded review lane and recommended the JSON gate shape,
+  invariant set, and pause-trigger pattern.
+- Claude was invoked through `scripts/drive_agent_headless.py` but exceeded the
+  sprint review budget before producing a usable final recommendation.
+- Antigravity was invoked through `agy.exe` but timed out without producing a
+  review artifact.
+
+Boundary:
+
+- Static gate JSON, documentation, and parser tests only.
+- No `appointment_raw_compat_mode` change, no environment default to `header`,
+  no backend route behavior change, no frontend production code change, no
+  user-facing deprecation UI, no route removal, no idempotency expansion, no
+  provider calls or dry-runs, no memory/RAG/GraphRAG, no H15/H-series runtime
+  imports, no historical diary material access, no GraphQL mutations, no
+  external patient clients, no runtime FGA clients, and no model-to-database
+  write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_header_rollout_gate.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_header_rollout_gate.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py review\test_diary_deprecation_consumer.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py tests\test_appointment_raw_compat.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py tests\test_api_spine_raw_compat_header_rollout_gate.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py -q
+git diff --check -- docs\api-spine\raw-compat-header-rollout-gate.json tests\test_api_spine_raw_compat_header_rollout_gate.py docs\api-spine\raw-compat-consumer-signal-readiness.md tests\test_api_spine_raw_compat_consumer_signal_readiness.py
+```
+
+Result: focused rollout-gate test `6 passed`; integrated raw-compat/readiness
+suite `37 passed`; API Spine static suite with rollout gate `54 passed`;
+whitespace check clean.
+
+Implementation commit: `386aed6f`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a safe aggregate raw compatibility header rollout
+gate status checker/report so workers can inspect the blocked posture without
+hand-reading JSON.
+
+---
+
+## Previous Closeout - Sprint 209
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 209 API Spine Diary Deprecation Header Browser Harness |
 | Integrated through | Ariadne implementation with DeepSeek review; Claude budget-blocked twice and Antigravity timed out without artifact |
 | Status | Integrated and pushed |
