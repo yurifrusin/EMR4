@@ -24,34 +24,30 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 231 API Spine Practitioner Directory SDL Pagination/DefaultLocation Resolution Proposal |
+| Batch | Sprint 232 API Spine Practitioner Directory Route Implementation Breakdown Readiness Decision |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
 | Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
-## Sprint 231 What Changed
+## Sprint 232 What Changed
 
 - Added
-  `docs/api-spine/practitioner-directory-sdl-pagination-default-location-resolution-proposal.md`,
-  a static SDL-resolution proposal for the two Sprint 229
-  `known_and_blocked_drift` items.
+  `docs/api-spine/practitioner-directory-route-implementation-breakdown-readiness-decision.md`,
+  a static implementation breakdown/readiness decision packet for the future
+  `GET /api/v1/practice/practitioners` route.
 - Added
-  `tests/test_api_spine_practitioner_directory_sdl_resolution_proposal.py`,
-  guarding the gate verdict, current SDL drift, proposed future
-  `PracticeLocationBrief`, proposed explicit `activeOnly`/`limit`/`offset`
-  arguments, rejected wrapper/connection alternatives for the first slice,
-  error/pagination semantics, prior-contract relationships, required future
-  runtime/SDL tests, current no-runtime-code state, blocked readiness snapshot,
-  and closed gates.
-- The proposal recommends a future directory-specific
-  `PracticeLocationBrief { id, name }` and future
-  `Practitioner.defaultLocation: PracticeLocationBrief` so GraphQL cannot expose
-  full `PracticeLocation` fields through practitioner-directory reads.
-- The proposal recommends future
-  `Practice.practitioners(activeOnly: Boolean = true, limit: Int = 50, offset:
-  Int = 0): [Practitioner!]!`, matching REST pagination while preserving the
-  Sprint 227 bare-list first slice.
-- Runtime state remains blocked: no SDL change, no REST route, no GraphQL
+  `tests/test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py`,
+  guarding the gate verdict, reviewed inputs, pre-code readiness checklist,
+  future schema/read-service/REST route slices, unified runtime test matrix,
+  separate SDL and GraphQL gates, stop/go points, consumer notes, blocked
+  readiness snapshot, and boundary wording.
+- The packet decomposes the future route into four slices: explicit directory
+  response schemas, a shared practitioner-directory read service, the REST route
+  and mount, and a required runtime test matrix.
+- It records the hard sequencing: explicit Yuri REST go/no-go before route code,
+  separate pause/approval before Sprint 231 SDL edits, and separate
+  pause/approval before any GraphQL runtime dependency or resolver.
+- Runtime state remains blocked: no REST route, no SDL change, no GraphQL
   dependency/resolver, no runtime schema, no shared read service, no database
   query or migration, no audit write, no provider, no memory/RAG/GraphRAG, no
   H15/H-series runtime import, no external client, no GraphQL mutation, and no
@@ -60,15 +56,15 @@ Every closeout entry should record:
 Worker mix:
 
 - Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
-  It hit the budget cap after producing a useful review artifact; Ariadne
-  adopted its `PracticeLocationBrief` and bare-list REST-parity recommendations.
+  It hit the budget cap after producing a durable review artifact. Ariadne
+  incorporated its REST-first slicing, shared-read-service sequencing, and
+  stop/go points.
 - Antigravity was called through the `agy.exe` CLI and produced a tangible
-  review artifact. It preferred a GraphQL connection shape; Ariadne recorded
-  that as useful dissent but kept the first slice aligned with REST's bare list.
+  review artifact before timing out. Ariadne incorporated its consumer notes and
+  its emphasis on keeping SDL/GraphQL gates separate from the first REST route.
 - DeepSeek was called through direct Codex `deepseek-worker` spawning and
-  recommended `PracticeLocationBrief`, explicit pagination semantics, and a
-  wrapper-style alternative. Ariadne used the shape and semantics while rejecting
-  wrapper/connection forms for the first slice.
+  completed with a task breakdown, test matrix, prerequisite checklist, and risk
+  register. The lane was closed after output capture.
 - Worker cleanliness was checked during the sprint. Integration was clean at
   start; Claude and Antigravity were clean at sprint start; Claude and
   Antigravity produced hand-in artifacts during the sprint; DeepSeek has zero
@@ -76,8 +72,8 @@ Worker mix:
 
 Boundary:
 
-- Static SDL-resolution documentation and tests only.
-- No SDL edit, REST route, GraphQL runtime dependency, GraphQL resolver,
+- Static route-breakdown/readiness documentation and tests only.
+- No REST route, SDL edit, GraphQL runtime dependency, GraphQL resolver,
   GraphQL mutation, runtime schema, database query/join/migration, shared read
   service, audit write/migration, rate-limiter, field encryption, RLS policy,
   provider call, provider dry-run, Access AI invocation, RAG/GraphRAG/memory
@@ -89,20 +85,42 @@ Boundary:
 Verification:
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py tests\test_api_spine_practitioner_directory_security_audit_preflight.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check -- docs\api-spine\practitioner-directory-sdl-pagination-default-location-resolution-proposal.md tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py tests\test_api_spine_practitioner_directory_security_audit_preflight.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check -- docs\api-spine\practitioner-directory-route-implementation-breakdown-readiness-decision.md tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py
 ```
 
-Result: focused SDL-resolution proposal suite `13 passed`; broader external
-read-model static suite `175 passed`; whitespace check clean.
+Result: focused route-breakdown readiness suite `11 passed`; broader external
+read-model static suite `186 passed`; whitespace check clean.
 
-Implementation commit: `ad2d9c42`.
+Implementation commit: `c817067e`.
 
 Sprint engine state: continuing after push unless Yuri chooses to give the
 explicit first-route implementation go/no-go. Next safe direction without that
-decision is another plan-only preflight, such as a route implementation task
-breakdown/readiness decision packet.
+decision is an explicit approval-decision packet or another plan-only readiness
+review.
+
+---
+
+## Previous Closeout - Sprint 231
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 231 API Spine Practitioner Directory SDL Pagination/DefaultLocation Resolution Proposal |
+| Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 231 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-sdl-pagination-default-location-resolution-proposal.md`,
+  a static SDL-resolution proposal for the two Sprint 229
+  `known_and_blocked_drift` items.
+- Added `tests/test_api_spine_practitioner_directory_sdl_resolution_proposal.py`.
+- Verification: focused SDL-resolution proposal suite `13 passed`; broader
+  external read-model static suite `175 passed`; whitespace check clean.
+- Implementation commit: `ad2d9c42`; closeout commit `c18c31d4`.
 
 ---
 
