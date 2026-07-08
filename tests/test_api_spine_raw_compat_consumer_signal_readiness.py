@@ -15,6 +15,7 @@ APPOINTMENTS_ROUTER = ROOT / "app" / "routers" / "appointments.py"
 DIARY_JS = ROOT / "docs" / "diary" / "diary.js"
 RAW_COMPAT_TEST = ROOT / "tests" / "test_appointment_raw_compat.py"
 DEPRECATION_CONSUMER_REVIEW_TEST = ROOT / "review" / "test_diary_deprecation_consumer.py"
+ROLLOUT_GATE = ROOT / "docs" / "api-spine" / "raw-compat-header-rollout-gate.json"
 
 EXPECTED_ROWS = {
     "POST /api/v1/appointments": {
@@ -202,6 +203,8 @@ def test_backend_header_modes_are_covered_but_default_stays_audit():
     assert "The current decision is `keep_audit_mode`." in readiness
     assert "Do not change `appointment_raw_compat_mode` to `header`" in readiness
     assert "Do not change `appointment_raw_compat_mode` to `off`" in readiness
+    assert "`docs/api-spine/raw-compat-header-rollout-gate.json`" in readiness
+    assert ROLLOUT_GATE.is_file()
 
 
 def test_cors_exposes_deprecation_header_for_cross_origin_consumers():

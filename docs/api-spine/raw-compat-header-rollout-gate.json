@@ -1,0 +1,79 @@
+{
+  "schema_version": "appointment.raw_compat_header_rollout_gate.v1",
+  "decision": "blocked",
+  "reviewer": "",
+  "reviewed_on": "",
+  "operational_purpose": "Header mode exists to signal to known frontend consumers that raw appointment compatibility writes are deprecated in favor of the proposal/confirm families. It is not end-user communication, external client enablement, or a general HTTP deprecation program.",
+  "rollout_surface": {
+    "routes": [
+      "POST /api/v1/appointments (raw_compat_create)",
+      "PUT /api/v1/appointments/{appointment_id} (raw_compat_update)",
+      "PATCH /api/v1/appointments/{appointment_id}/status (raw_compat_status)",
+      "DELETE /api/v1/appointments/{appointment_id} (raw_compat_delete)"
+    ],
+    "backend_site": "app.routers.appointments._raw_compat_evidence_and_headers()",
+    "environments_can_default_header": [],
+    "known_frontend_consumers": [
+      "docs/diary/diary.js apiFetch console.warn"
+    ],
+    "user_facing_ui_consumers": []
+  },
+  "observability_and_audit_signals": {
+    "already_proven_before_header_default": {
+      "all_routes_use_raw_compat_evidence_and_headers": true,
+      "cors_exposes_deprecation_header": true,
+      "frontend_shared_consumer_proven": true,
+      "header_mode_test_coverage": true,
+      "off_mode_test_coverage": true,
+      "no_production_reassignment_of_mode": true,
+      "readiness_doc_agrees_keep_audit_mode": true,
+      "deprecation_map_agrees_map_only": true
+    },
+    "required_before_unblocking_any_environment": {
+      "operational_telemetry_ready": false,
+      "per_environment_header_mode_observability": false,
+      "planned_header_toggle_window_and_rollback": false,
+      "metrics_on_deprecation_signal_volume": false,
+      "staff_notification_impact_assessed": false,
+      "external_consumer_impact_audited": false,
+      "proposal_confirm_parity_asserted_for_affected_routes": false,
+      "sprint_engine_review_artifact_documented": false
+    }
+  },
+  "required_before_unblocking": [
+    "explicit_sprint_engine_pause_and_review",
+    "per_environment_rollout_plan_with_rollback",
+    "observability_metrics_defined_for_header_signal_volume",
+    "staff_impact_notification_plan",
+    "external_consumer_impact_audit_for_affected_deployments",
+    "proposal_confirm_parity_review_for_each_affected_route",
+    "audit_evidence_continuity_check_for_header_mode_writes",
+    "staged_environment_rollout_not_global_toggle"
+  ],
+  "allowed_current_uses": [
+    "existing_audit_mode_evidence_tags",
+    "existing_header_mode_test_coverage",
+    "existing_off_mode_test_coverage",
+    "frontend_console_deprecation_consumer_test",
+    "readiness_preflight_and_gate_doc_maintenance"
+  ],
+  "forbidden_current_uses": [
+    "any_environment_defaulting_appointment_raw_compat_mode_to_header",
+    "user_facing_deprecation_ui_without_review",
+    "removing_or_blocking_raw_compat_routes",
+    "idempotency_enforcement_on_raw_compat_routes",
+    "provider_or_dry_run_wiring",
+    "memory_rag_or_graphrag_runtime_wiring",
+    "h15_or_h_series_runtime_imports",
+    "historical_diary_material_access",
+    "external_patient_or_fga_client_consumers",
+    "graphql_mutations",
+    "model_to_database_writes_outside_rest_command_handlers"
+  ],
+  "sprint_engine_pause_required_if": [
+    "decision_changes_from_blocked",
+    "any_environment_appears_in_environments_can_default_header",
+    "required_before_unblocking_changes",
+    "forbidden_current_uses_changes"
+  ]
+}

@@ -2,7 +2,7 @@
 
 Date: 2026-07-08
 
-Sprint: 209
+Sprint: 210
 
 ## Purpose
 
@@ -18,7 +18,9 @@ CORS and verifies a raw compatibility header-mode response also carries
 browser execution proof that `apiFetch()` warns only when an exposed
 `Deprecation` header is present. The safe default remains `audit` until a later
 reviewed sprint decides whether any environment should emit the header by
-default.
+default. Sprint 210 records that rollout decision surface in
+`docs/api-spine/raw-compat-header-rollout-gate.json`, with decision `blocked`
+and no environment allowed to default to `header`.
 
 ## Consumer Signal Inventory
 
@@ -70,7 +72,9 @@ The current decision is `keep_audit_mode`.
 
 Do not change `appointment_raw_compat_mode` to `header` until a later reviewed
 sprint decides the operational purpose, rollout surface, and observability for
-emitting that signal by default.
+emitting that signal by default. The current authoritative rollout gate is
+`docs/api-spine/raw-compat-header-rollout-gate.json`, and its current decision
+is `blocked`.
 
 Do not change `appointment_raw_compat_mode` to `off` while any raw compatibility
 write remains available to product clients or system compatibility paths.
@@ -88,6 +92,9 @@ Before `header` mode can become a reviewed default, prove all of the following:
   raw compatibility response header after browser CORS filtering;
 - route-intercepted tests that mock raw compatibility writes include a header
   tolerance check or explicitly remain outside header-readiness evidence;
+- the raw compatibility header rollout gate records a reviewed non-blocked
+  decision, a specific staged environment rollout plan, and observability/rollback
+  evidence;
 - replacement proposal/confirm paths remain the preferred product flow;
 - the raw compatibility deprecation map and this readiness preflight agree on
   the four compatibility write families.
@@ -125,11 +132,14 @@ preflight by parsing only this markdown file, `app/config.py`,
 `app/routers/appointments.py`, `docs/diary/diary.js`, selected committed
 frontend files, `tests/test_appointment_raw_compat.py`,
 `review/test_diary_deprecation_consumer.py`, and the existing legacy
-compatibility write deprecation map test.
+compatibility write deprecation map test. The separate
+`tests/test_api_spine_raw_compat_header_rollout_gate.py` validates the blocked
+rollout gate.
 
 ## Verification
 
 ```powershell
 .venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py -q
 .venv\Scripts\python.exe -m pytest review\test_diary_deprecation_consumer.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_header_rollout_gate.py -q
 ```
