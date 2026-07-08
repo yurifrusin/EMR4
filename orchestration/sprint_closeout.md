@@ -24,6 +24,65 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 237 Bernie UI Derived-State DAG D3 Inventory |
+| Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded inventory/review sprint |
+| Status | Verified; pending commit and push |
+| Last updated | 2026-07-08 |
+
+## Sprint 237 What Changed
+
+- Added `docs/bernie-ui-derived-state-dag-d3-inventory.md`.
+- Added `tests/test_bernie_ui_view_model_d3_inventory.py`.
+- Mapped current `docs/diary/diary.js` switch points to future
+  `BernieUiViewModel` fields, including `BERNIE_STATUS_COPY`,
+  `BERNIE_HEADLINE_COPY`, `scrubBernieStaffCopy`, `bernieReviewTransition`,
+  status/headline/action copy helpers, `createBernieServerSessionBanner`,
+  `bernieComposerPlaceholder`, `renderBernieReview`,
+  `handleBernieConfirmShortcut`, and the `bernie-review-confirm-button` branch.
+- Preserved the command boundary: confirm command payloads must continue using
+  existing signed proposal/freshness/evidence fields and must not consume
+  display view-model fields.
+
+Worker mix:
+
+- Claude/Fable was not invoked; the sprint followed the existing Fable review
+  artifact directly.
+- Antigravity was not invoked.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start; no worker artifacts were
+  created.
+
+Boundary:
+
+- Inventory/review artifact and tests only.
+- No edits to `docs/diary/diary.js`, no UI wiring, no route/response wiring for
+  `BernieUiViewModel`, no provider call, no Access AI invocation, no
+  memory/RAG/GraphRAG wiring, no H15/H-series runtime import, no historical
+  diary/local_data import, no GraphQL resolver, no write authority, and no
+  appointment confirmation behavior change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_view_model_d3_inventory.py tests\test_bernie_ui_view_model.py -q
+.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\bernie-ui-derived-state-dag-d3-inventory.md
+git diff --check -- docs\bernie-ui-derived-state-dag-d3-inventory.md tests\test_bernie_ui_view_model_d3_inventory.py
+```
+
+Result: inventory + selector suite `22 passed`; proposal guard and whitespace
+check passed.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing to a D4 preflight/review packet before any UI
+consumer wiring.
+
+---
+
+## Previous Closeout - Sprint 236
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 236 Bernie UI Derived-State DAG D1/D2 Selector |
 | Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded pure selector/test sprint |
 | Status | Integrated and ready to push |
