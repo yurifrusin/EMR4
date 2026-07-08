@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 242 Bernie UI D5 Implementation Checklist |
 | Integrated through | Ariadne direct implementation using the already-integrated DeepSeek D5 recommendations; no Claude/Antigravity/DeepSeek lanes opened because this was a bounded checklist and gate-hygiene sprint |
-| Status | Integrated locally; pending metadata commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 242 What Changed
