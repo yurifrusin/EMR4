@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 238 Bernie UI Derived-State DAG D4 Preflight |
 | Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded preflight/review sprint |
-| Status | Verified; pending commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
 ## Sprint 238 What Changed
@@ -71,7 +71,7 @@ git diff --check -- docs\bernie-ui-derived-state-dag-d4-preflight.md tests\test_
 Result: D4 preflight + D3 inventory + selector suite `28 passed`; proposal
 guard and whitespace check passed.
 
-Implementation commit: pending.
+Implementation commit: `ee3991a9`.
 
 Sprint engine state: continuing to the narrow D4 route-intercepted UI consumer
 slice if no user redirect arrives; all provider/backend/GraphQL/write gates
