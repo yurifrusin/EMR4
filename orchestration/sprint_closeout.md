@@ -24,6 +24,65 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 238 Bernie UI Derived-State DAG D4 Preflight |
+| Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded preflight/review sprint |
+| Status | Verified; pending commit and push |
+| Last updated | 2026-07-08 |
+
+## Sprint 238 What Changed
+
+- Added `docs/bernie-ui-derived-state-dag-d4-preflight.md`.
+- Added `tests/test_bernie_ui_view_model_d4_preflight.py`.
+- Defined the narrow D4 route-intercepted UI consumer slice for the primary
+  `renderBernieReview` booking panel only.
+- Required fixture coverage for candidate slots, proposal ready, pressed or
+  awaiting backend, backend-confirmed success, stale proposal, backend rejected,
+  and ambiguous identity states.
+- Preserved command-payload boundaries: existing signed proposal/freshness/
+  evidence fields remain the command authority, and `BernieUiViewModel` fields
+  must not appear in command payloads.
+
+Worker mix:
+
+- Claude/Fable was not invoked; the sprint followed the existing Fable review
+  artifact directly.
+- Antigravity was not invoked.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start; no worker artifacts were
+  created.
+
+Boundary:
+
+- Preflight/review artifact and tests only.
+- No edits to `docs/diary/diary.js`, no UI wiring, no backend response wiring,
+  no route/schema change, no provider call, no Access AI invocation, no
+  memory/RAG/GraphRAG wiring, no H15/H-series runtime import, no historical
+  diary/local_data import, no GraphQL resolver, no write authority, and no
+  appointment confirmation behavior change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_view_model_d4_preflight.py tests\test_bernie_ui_view_model_d3_inventory.py tests\test_bernie_ui_view_model.py -q
+.venv\Scripts\python.exe scripts\bernie_interpretation_proposal_surface_guard.py docs\bernie-ui-derived-state-dag-d4-preflight.md
+git diff --check -- docs\bernie-ui-derived-state-dag-d4-preflight.md tests\test_bernie_ui_view_model_d4_preflight.py
+```
+
+Result: D4 preflight + D3 inventory + selector suite `28 passed`; proposal
+guard and whitespace check passed.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing to the narrow D4 route-intercepted UI consumer
+slice if no user redirect arrives; all provider/backend/GraphQL/write gates
+remain closed.
+
+---
+
+## Previous Closeout - Sprint 237
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 237 Bernie UI Derived-State DAG D3 Inventory |
 | Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded inventory/review sprint |
 | Status | Integrated and ready to push |
