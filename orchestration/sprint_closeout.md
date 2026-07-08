@@ -24,6 +24,77 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 211 API Spine Raw Compat Header Rollout Gate Status Checker |
+| Integrated through | Ariadne implementation with DeepSeek review; Claude budget-blocked |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 211 What Changed
+
+- Added `scripts/raw_compat_header_rollout_gate_check.py`, a CLI/importable
+  checker for `docs/api-spine/raw-compat-header-rollout-gate.json`.
+- The checker asserts the gate remains `blocked`, has zero environments allowed
+  to default `appointment_raw_compat_mode` to `header`, keeps all unblocking
+  observability signals false, and preserves required/allowed/forbidden/pause
+  trigger lists.
+- The checker emits only safe aggregate status fields: counts, booleans,
+  schema/decision, `sprint_engine_state: continuing`, and
+  `pause_required: false`.
+- Added `tests/test_raw_compat_header_rollout_gate_check.py`, including exact
+  safe-output assertions and negative drift tests for unblocked decision,
+  non-empty environment list, changed required/forbidden lists, true
+  unblocking signals, and missing pause triggers.
+- Updated the raw-compat readiness doc and rollout-gate test to reference the
+  checker.
+
+Worker mix:
+
+- DeepSeek completed a bounded review lane and recommended the safe aggregate
+  status shape, payload-free output fragments, and negative mutation tests.
+- Claude was invoked through `scripts/drive_agent_headless.py` but exceeded the
+  sprint review budget before producing a usable final recommendation.
+- Antigravity was not re-run for this small checker sprint after repeated
+  timeout behavior in the prior raw-compat header sprints.
+
+Boundary:
+
+- Safe aggregate checker/report and tests only.
+- No `appointment_raw_compat_mode` change, no environment default to `header`,
+  no backend route behavior change, no frontend production code change, no
+  user-facing deprecation UI, no route removal, no idempotency expansion, no
+  provider calls or dry-runs, no memory/RAG/GraphRAG, no H15/H-series runtime
+  imports, no historical diary material access, no GraphQL mutations, no
+  external patient clients, no runtime FGA clients, and no model-to-database
+  write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_raw_compat_header_rollout_gate_check.py -q
+.venv\Scripts\python.exe scripts\raw_compat_header_rollout_gate_check.py
+.venv\Scripts\python.exe -m pytest tests\test_raw_compat_header_rollout_gate_check.py tests\test_api_spine_raw_compat_header_rollout_gate.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py review\test_diary_deprecation_consumer.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py tests\test_appointment_raw_compat.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py tests\test_raw_compat_header_rollout_gate_check.py tests\test_api_spine_raw_compat_header_rollout_gate.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py -q
+git diff --check -- scripts\raw_compat_header_rollout_gate_check.py tests\test_raw_compat_header_rollout_gate_check.py docs\api-spine\raw-compat-consumer-signal-readiness.md tests\test_api_spine_raw_compat_header_rollout_gate.py
+```
+
+Result: focused checker test `9 passed`; checker CLI emitted blocked aggregate
+status with `environment_count: 0`, `observability_ready: false`,
+`rollout_ready: false`, and `pause_required: false`; integrated raw-compat
+suite `46 passed`; API Spine static suite with checker `63 passed`; whitespace
+check clean.
+
+Implementation commit: `3231a381`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a small read-model gap inventory for
+practitioner/reminder/message/directory gaps.
+
+---
+
+## Previous Closeout - Sprint 210
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 210 API Spine Raw Compat Header Rollout Gate |
 | Integrated through | Ariadne implementation with DeepSeek review; Claude budget-blocked and Antigravity timed out without artifact |
 | Status | Integrated and pushed |
