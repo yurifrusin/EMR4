@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 224 API Spine Patient Reminders Ownership Candidate + Sprint Ritual Protocol Repair |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
-| Status | Pending commit/push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
 ## Sprint 224 What Changed
@@ -96,14 +96,13 @@ git diff --check -- AGENTS.md orchestration\protocol_alerts.md docs\api-spine\pa
 ```
 
 Result so far: focused ownership candidate suite `7 passed`; whitespace check
-clean. Broader external read-model suite still to run before final push.
+clean. Broader external read-model static suite `101 passed`.
 
-Implementation commit: pending.
+Implementation/protocol commit: `92470dbf`.
 
-Sprint engine state: continuing after commit/push unless verification fails.
-Next recommended direction is a similar static route/schema ownership candidate
-for patient messages, followed by ownership consolidation and a first-runtime
-implementation go/no-go preflight.
+Sprint engine state: continuing after push. Next recommended direction is a
+similar static route/schema ownership candidate for patient messages, followed
+by ownership consolidation and a first-runtime implementation go/no-go preflight.
 
 ---
 
