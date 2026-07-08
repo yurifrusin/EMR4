@@ -4,10 +4,29 @@ from pathlib import Path
 
 GATE_PATH = Path("docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json")
 DOC_PATH = Path("docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.md")
+CHECKLIST_PATH = Path("docs/bernie-ui-derived-state-dag-d5-implementation-checklist.md")
 
 
 def _gate():
     return json.loads(GATE_PATH.read_text(encoding="utf-8"))
+
+
+def test_d5_response_delivery_gate_json_has_no_duplicate_keys():
+    duplicates = []
+
+    def hook(pairs):
+        seen = set()
+        result = {}
+        for key, value in pairs:
+            if key in seen:
+                duplicates.append(key)
+            seen.add(key)
+            result[key] = value
+        return result
+
+    json.loads(GATE_PATH.read_text(encoding="utf-8"), object_pairs_hook=hook)
+
+    assert duplicates == []
 
 
 def test_d5_response_delivery_gate_remains_blocked_by_default():
@@ -81,3 +100,17 @@ def test_d5_gate_doc_preserves_no_runtime_delivery_posture():
     assert "scripts\\bernie_interpretation_readiness_check.py" in text
     assert "scripts\\bernie_provider_boundary_readiness_report.py" in text
     assert "does not approve production route emission" in text
+
+
+def test_d5_implementation_checklist_stays_static_and_gate_bound():
+    text = CHECKLIST_PATH.read_text(encoding="utf-8")
+
+    assert "Status: static checklist only" in text
+    assert "does not approve changing" in text
+    assert "`decision: blocked`" in text
+    assert "optional response field only" in text
+    assert "one response assembly attachment point" in text
+    assert "Response without a server session snapshot omits the field" in text
+    assert "Confirm payload serialization excludes" in text
+    assert "Non-Bernie production routers do not import" in text
+    assert "Stop and return to review" in text
