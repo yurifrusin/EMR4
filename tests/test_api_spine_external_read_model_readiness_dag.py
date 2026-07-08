@@ -99,7 +99,6 @@ def test_external_read_model_readiness_dag_preserves_blocked_runtime_posture():
     assert {node["status"] for node in dag["nodes"]} >= {
         "static_complete",
         "design_complete_no_runtime",
-        "blocked_pending_combined_readiness_review",
         "blocked",
     }
 
@@ -107,7 +106,6 @@ def test_external_read_model_readiness_dag_preserves_blocked_runtime_posture():
 def test_external_read_model_readiness_dag_artifacts_exist_or_are_blocked_future_nodes():
     dag = _dag()
     future_nodes = {
-        "combined_readiness_review",
         "rest_route_wiring",
         "graphql_resolver_wiring",
         "provider_memory_external_clients",

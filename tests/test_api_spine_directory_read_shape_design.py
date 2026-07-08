@@ -186,7 +186,10 @@ def test_design_updates_dag_artifact_and_preserves_blocked_runtime_posture():
     assert '"id": "directory_read_shape_design"' in dag
     assert '"status": "design_complete_no_runtime"' in dag
     assert '"artifact": "docs/api-spine/directory-read-shape-design.md"' in dag
-    assert '"status": "blocked_pending_combined_readiness_review"' in dag
+    assert (
+        '"artifact": "docs/api-spine/external-read-model-combined-readiness-review.md"'
+        in dag
+    )
     for fragment in [
         '"external_read_model_runtime_ready": false',
         '"graphql_resolver_ready": false',
