@@ -24,6 +24,65 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 235 API Spine Practitioner Directory Post-Implementation Readiness Review |
+| Integrated through | Ariadne direct implementation; no Claude/Antigravity/DeepSeek lanes used because this was a bounded artifact/test review sprint |
+| Status | Verified; pending commit and push |
+| Last updated | 2026-07-08 |
+
+## Sprint 235 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-post-implementation-readiness-review.json`
+  and `.md`.
+- Recorded that the bounded practitioner-directory REST first slice at
+  implementation commit `5b3b9102` is implemented and runtime-tested.
+- Preserved blocked posture for `rest_route_ready`, `graphql_resolver_ready`,
+  `external_read_model_runtime_ready`, `runtime_or_memory_ready`,
+  `provider_or_directory_runtime_ready`, `write_authority_ready`, deployment
+  readiness, and production readiness.
+- Added
+  `tests/test_practitioner_directory_post_implementation_readiness_review.py`
+  to guard the decision, runtime evidence checklist, unchanged blocked
+  readiness snapshot, and forbidden scope expansions.
+
+Worker mix:
+
+- Claude/Fable was not invoked; prior Fable verdict remains binding.
+- Antigravity was not invoked.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start; no worker artifacts were
+  created.
+
+Boundary:
+
+- Review artifact and static/runtime guard tests only.
+- No readiness snapshot flag change, SDL edit, GraphQL resolver, provider call,
+  Access AI invocation, memory/RAG/GraphRAG wiring, H15/H-series runtime import,
+  historical diary/local_data import, write authority, audit write, deployment
+  claim, production claim, or external patient-client exposure.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_post_implementation_readiness_review.py tests\test_practitioner_directory_route.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_external_read_model_readiness_status.py -q
+git diff --check -- docs\api-spine\practitioner-directory-post-implementation-readiness-review.json docs\api-spine\practitioner-directory-post-implementation-readiness-review.md tests\test_practitioner_directory_post_implementation_readiness_review.py
+```
+
+Result: focused review/route/readiness suite `52 passed`; whitespace check
+clean.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing to Fable-approved Bernie UI derived-state DAG
+D1/D2 only; no practitioner-directory readiness expansion without separate
+review.
+
+---
+
+## Previous Closeout - Sprint 234
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 234 API Spine Practitioner Directory Approval Gate DAG Wiring |
 | Integrated through | Ariadne implementation with Antigravity CLI, DeepSeek direct-spawn sidecar review, and extra DeepSeek substitution for Claude session limit |
 | Status | Integrated and ready to push |

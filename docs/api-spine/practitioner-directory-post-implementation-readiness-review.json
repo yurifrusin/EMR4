@@ -1,0 +1,55 @@
+{
+  "schema_version": "api_spine.practitioner_directory_post_implementation_review.v1",
+  "date": "2026-07-08",
+  "sprint": 235,
+  "reviewer": "ariadne",
+  "decision": "implemented_rest_slice_reviewed_readiness_blocked",
+  "implementation_commit": "5b3b9102",
+  "approved_gate": "docs/api-spine/practitioner-directory-approved-gate.json",
+  "approved_contract_commit": "ce23212d538fbba24e5061def2142b817d5528ad",
+  "implemented_surface": {
+    "route": "GET /api/v1/practice/practitioners",
+    "router": "app/routers/practice.py",
+    "schema": "app/schemas/practice.py",
+    "read_service": "app/services/practice/practitioner_directory_read.py",
+    "runtime_tests": "tests/test_practitioner_directory_route.py"
+  },
+  "runtime_evidence": {
+    "authn_checked": true,
+    "inactive_user_denied": true,
+    "practice_scoping_checked": true,
+    "inactive_scope_admin_owner_only": true,
+    "sensitive_fields_excluded": true,
+    "default_location_scoped": true,
+    "deterministic_ordering_checked": true,
+    "pagination_bounds_checked": true,
+    "no_practitioner_detail_route": true,
+    "no_database_writes_checked": true,
+    "no_appointment_audit_write_checked": true,
+    "no_idempotency_key_required_for_read": true,
+    "no_provider_or_access_ai_imports": true,
+    "no_memory_or_rag_or_graphrag_imports": true,
+    "no_h15_h_series_or_historical_diary_imports": true
+  },
+  "readiness": {
+    "rest_route_implemented": true,
+    "rest_route_runtime_tests_passed": true,
+    "rest_route_ready": false,
+    "graphql_resolver_ready": false,
+    "external_read_model_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false
+  },
+  "blocked_until_separate_review": [
+    "changing tests/fixtures/api_spine_external_readiness/blocked_readiness_status.json rest_route_ready to true",
+    "adding SDL or GraphQL resolver coverage for Query.practice.practitioners",
+    "adding provider, Access AI, memory, RAG, or GraphRAG wiring",
+    "adding H15, H-series, historical diary, or local_data runtime imports",
+    "adding write authority, audit writes, or appointment mutation behavior",
+    "claiming deployment, production, external patient-client, rate-limit, RLS, or field-encryption readiness"
+  ],
+  "boundary": "This review acknowledges the bounded REST first slice is implemented and covered by runtime tests. It does not mark the route deployed, production-ready, externally exposed, GraphQL-ready, provider-ready, memory-ready, write-ready, or readiness-flag-ready."
+}
