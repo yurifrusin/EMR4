@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 243 Bernie UI D5 Router Import Guard Plan |
 | Integrated through | Ariadne direct implementation; no Claude/Antigravity/DeepSeek lanes opened because this was a bounded static guard-plan sprint |
-| Status | Integrated locally; pending metadata commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 243 What Changed
