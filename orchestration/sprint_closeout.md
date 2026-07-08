@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 236 Bernie UI Derived-State DAG D1/D2 Selector |
 | Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded pure selector/test sprint |
-| Status | Verified; pending commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
 ## Sprint 236 What Changed
@@ -85,7 +85,7 @@ Result: selector suite `17 passed`; readiness check stayed
 `historical_diary_material_access_performed=false`; proposal guard, py_compile,
 and whitespace checks passed.
 
-Implementation commit: pending.
+Implementation commit: `3ff5838a`.
 
 Sprint engine state: continuing to D3 inventory/review only; D4 UI wiring waits
 for a separate reviewed route-intercepted UI consumer sprint.
