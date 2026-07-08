@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 241 Bernie UI Derived-State DAG D5 Response Delivery Gate |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this was a bounded static gate sprint |
-| Status | Integrated locally; pending metadata commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 241 What Changed
