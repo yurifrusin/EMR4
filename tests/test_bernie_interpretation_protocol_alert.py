@@ -50,3 +50,13 @@ def test_protocol_alerts_require_start_of_sprint_worker_mix_announcement():
     assert "usage limits" in text
     assert "spawn an extra DeepSeek worker" in text
     assert "Sprint closeout must repeat the actual worker mix" in text
+
+
+def test_protocol_alerts_require_deepseek_lane_count_and_reuse_cleanup():
+    text = ALERTS.read_text(encoding="utf-8")
+
+    assert "how many DeepSeek worker lanes are already spawned/open" in text
+    assert "active versus completed or idle" in text
+    assert "existing lane will be reused" in text
+    assert "close completed or unused DeepSeek lanes" in text
+    assert "Reuse an existing DeepSeek lane" in text

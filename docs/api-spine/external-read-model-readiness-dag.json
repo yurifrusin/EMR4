@@ -1,0 +1,171 @@
+{
+  "schema_version": "api_spine.external_read_model_readiness_dag.v1",
+  "date": "2026-07-08",
+  "sprint": 216,
+  "decision": "blocked",
+  "purpose": "Static DAG snapshot for external read-model readiness. It records documentation and review dependencies only; it does not create runtime graph execution, GraphRAG, REST routes, GraphQL resolvers, provider calls, database queries, or write authority.",
+  "readiness": {
+    "external_read_model_runtime_ready": false,
+    "graphql_resolver_ready": false,
+    "rest_route_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "write_authority_ready": false,
+    "raw_compat_mode_change_ready": false
+  },
+  "nodes": [
+    {
+      "id": "external_gap_inventory",
+      "kind": "source_inventory",
+      "status": "static_complete",
+      "artifact": "docs/api-spine/external-router-read-model-gap-inventory.md",
+      "runtime_authority": false
+    },
+    {
+      "id": "external_gap_status_checker",
+      "kind": "safe_aggregate_checker",
+      "status": "static_complete",
+      "artifact": "scripts/external_read_model_gap_status.py",
+      "runtime_authority": false
+    },
+    {
+      "id": "practitioner_directory_design",
+      "kind": "read_shape_design",
+      "status": "design_complete_no_runtime",
+      "artifact": "docs/api-spine/practitioner-directory-read-shape-design.md",
+      "runtime_authority": false
+    },
+    {
+      "id": "patient_reminders_design",
+      "kind": "read_shape_design",
+      "status": "design_complete_no_runtime",
+      "artifact": "docs/api-spine/patient-reminders-read-shape-design.md",
+      "runtime_authority": false
+    },
+    {
+      "id": "patient_messages_design",
+      "kind": "read_shape_design",
+      "status": "blocked_design_needed",
+      "artifact": "",
+      "runtime_authority": false
+    },
+    {
+      "id": "directory_source_review",
+      "kind": "source_and_licensing_review",
+      "status": "blocked_source_review_needed",
+      "artifact": "",
+      "runtime_authority": false
+    },
+    {
+      "id": "combined_readiness_review",
+      "kind": "review_gate",
+      "status": "blocked_pending_missing_designs",
+      "artifact": "",
+      "runtime_authority": false
+    },
+    {
+      "id": "rest_route_wiring",
+      "kind": "runtime_gate",
+      "status": "blocked",
+      "artifact": "",
+      "runtime_authority": false
+    },
+    {
+      "id": "graphql_resolver_wiring",
+      "kind": "runtime_gate",
+      "status": "blocked",
+      "artifact": "",
+      "runtime_authority": false
+    },
+    {
+      "id": "provider_memory_external_clients",
+      "kind": "runtime_gate",
+      "status": "blocked",
+      "artifact": "",
+      "runtime_authority": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "external_gap_inventory",
+      "to": "external_gap_status_checker",
+      "reason": "gap inventory must remain static before aggregate readiness reporting"
+    },
+    {
+      "from": "external_gap_inventory",
+      "to": "practitioner_directory_design",
+      "reason": "practitioner route_gap selected from inventory"
+    },
+    {
+      "from": "external_gap_inventory",
+      "to": "patient_reminders_design",
+      "reason": "patient reminders route_and_shape_gap selected from inventory"
+    },
+    {
+      "from": "external_gap_inventory",
+      "to": "patient_messages_design",
+      "reason": "patient messages remains the model-backed design gap"
+    },
+    {
+      "from": "external_gap_inventory",
+      "to": "directory_source_review",
+      "reason": "directory gaps need source and licensing review before design"
+    },
+    {
+      "from": "external_gap_status_checker",
+      "to": "combined_readiness_review",
+      "reason": "aggregate blocked posture feeds readiness review"
+    },
+    {
+      "from": "practitioner_directory_design",
+      "to": "combined_readiness_review",
+      "reason": "design-only practitioner mapping is one prerequisite"
+    },
+    {
+      "from": "patient_reminders_design",
+      "to": "combined_readiness_review",
+      "reason": "design-only reminder mapping is one prerequisite"
+    },
+    {
+      "from": "patient_messages_design",
+      "to": "combined_readiness_review",
+      "reason": "messages design must exist before combined readiness"
+    },
+    {
+      "from": "directory_source_review",
+      "to": "combined_readiness_review",
+      "reason": "directory source/licensing review must exist before readiness"
+    },
+    {
+      "from": "combined_readiness_review",
+      "to": "rest_route_wiring",
+      "reason": "route implementation remains blocked until explicit review"
+    },
+    {
+      "from": "combined_readiness_review",
+      "to": "graphql_resolver_wiring",
+      "reason": "GraphQL resolver implementation remains blocked until explicit review"
+    },
+    {
+      "from": "combined_readiness_review",
+      "to": "provider_memory_external_clients",
+      "reason": "provider, memory, and external-client use remains blocked"
+    }
+  ],
+  "closed_gates": [
+    "runtime graph execution",
+    "GraphRAG runtime wiring",
+    "GraphQL resolvers or GraphQL mutations",
+    "new REST routes",
+    "provider calls or live provider gates",
+    "provider dry-run wiring",
+    "runtime FGA clients",
+    "external patient clients",
+    "H15/H-series runtime imports",
+    "memory/RAG runtime wiring",
+    "broad historical diary trove mining",
+    "Access AI invocation wiring",
+    "model-to-database writes outside REST command handlers",
+    "raw compatibility deprecation mode changes"
+  ]
+}

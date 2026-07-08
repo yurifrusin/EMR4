@@ -89,6 +89,11 @@ Read these before acting on remembered process details.
   unavailability and spawn an extra DeepSeek worker to cover that missing
   lane's review or implementation role unless the sprint is tiny and Ariadne
   records why a substitution would add more risk than value. Sprint closeout must repeat the actual worker mix and any substitution.
+- 2026-07-08: The same sprint-start worker announcement must state how many DeepSeek worker lanes are already spawned/open, which ones are active versus completed or idle, and whether an existing lane will be reused for related follow-on work. Ariadne must close completed or unused DeepSeek lanes before
+  spawning fresh ones when their outputs have been captured, so the worker pool
+  does not hit its thread limit during the next sprint. Reuse an existing DeepSeek lane when the follow-on task is closely related and the lane is still
+  open and coherent; spawn a fresh lane only when the old lane is closed,
+  stale, overloaded, or contextually wrong for the new task.
 - 2026-07-07: Antigravity availability must not be inferred solely from a bare
   `antigravity --version` shell probe. If the Antigravity/Gemini UI quota view
   shows usable availability, treat Antigravity as available and use the known

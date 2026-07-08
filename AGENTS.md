@@ -592,6 +592,13 @@ Codex role separation:
   role unless the sprint is tiny and the closeout records why substitution would
   add more risk than value. Sprint closeout must repeat the actual worker mix
   and any substitutions.
+- The sprint-start announcement must also state how many DeepSeek worker lanes
+  are already spawned/open, which are active versus completed or idle, and
+  whether an existing DeepSeek lane will be reused. Close completed or unused
+  DeepSeek lanes once their outputs are captured before spawning fresh lanes, so
+  the worker pool stays available. Reuse an open related DeepSeek lane for
+  follow-on review when its context is still coherent; spawn a new lane only
+  when the existing lane is closed, stale, overloaded, or contextually wrong.
 - DeepSeek Flash via `codex-deepseek-bridge` may replace or supplement Claude,
   Antigravity, or Codex worker capacity for bounded read-heavy reviews and
   implementation lanes when Ariadne stays as orchestrator. Use Flash first; consider
@@ -764,6 +771,9 @@ Codex is the default orchestration agent for EMR4. This means:
   using" with the reason. Usage-limit or quota unavailability for Claude or
   Antigravity must be paired with an announced extra DeepSeek substitution
   unless the sprint is tiny and the reason for no substitution is recorded.
+- The same update must include the current DeepSeek lane count and reuse/cleanup
+  decision: active lanes to keep, completed/idle lanes to close, and whether a
+  related existing lane can be reused instead of spawning a fresh worker.
 - Preferred cost posture while OpenAI/Codex usage is scarce: first check
   Claude's state, let Claude implement while quota is healthy, use
   Antigravity/Gemini for an independent domain/product/test-design lane when
