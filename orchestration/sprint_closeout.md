@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 237 Bernie UI Derived-State DAG D3 Inventory |
 | Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded inventory/review sprint |
-| Status | Verified; pending commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
 ## Sprint 237 What Changed
@@ -72,7 +72,7 @@ git diff --check -- docs\bernie-ui-derived-state-dag-d3-inventory.md tests\test_
 Result: inventory + selector suite `22 passed`; proposal guard and whitespace
 check passed.
 
-Implementation commit: pending.
+Implementation commit: `900ee253`.
 
 Sprint engine state: continuing to a D4 preflight/review packet before any UI
 consumer wiring.
