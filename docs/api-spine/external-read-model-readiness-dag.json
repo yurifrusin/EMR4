@@ -1,7 +1,7 @@
 {
   "schema_version": "api_spine.external_read_model_readiness_dag.v1",
   "date": "2026-07-08",
-  "sprint": 218,
+  "sprint": 219,
   "decision": "blocked",
   "purpose": "Static DAG snapshot for external read-model readiness. It records documentation and review dependencies only; it does not create runtime graph execution, GraphRAG, REST routes, GraphQL resolvers, provider calls, database queries, or write authority.",
   "readiness": {
@@ -59,14 +59,14 @@
     {
       "id": "directory_read_shape_design",
       "kind": "read_shape_design",
-      "status": "blocked_design_needed",
-      "artifact": "",
+      "status": "design_complete_no_runtime",
+      "artifact": "docs/api-spine/directory-read-shape-design.md",
       "runtime_authority": false
     },
     {
       "id": "combined_readiness_review",
       "kind": "review_gate",
-      "status": "blocked_pending_directory_read_shape_design",
+      "status": "blocked_pending_combined_readiness_review",
       "artifact": "",
       "runtime_authority": false
     },
