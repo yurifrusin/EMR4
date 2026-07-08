@@ -108,8 +108,18 @@ client readiness, or deployment readiness.
 by parsing only this markdown file, the GraphQL SDL, selected model/router
 sources, and `docs/api-spine/external-router-read-root-inventory.md`.
 
+Sprint 213 added `scripts/external_read_model_gap_status.py` as a safe
+aggregate checker for this inventory. The checker validates that the five gap
+rows, coverage counts, gap-posture counts, missing route posture, and closed
+gates remain static, then emits only counts and false readiness flags. It does
+not emit route paths, model names, GraphQL field names, patient/practitioner
+keys, RACGP/Cochrane labels, raw local data, or provider/runtime payload
+fragments.
+
 ## Verification
 
 ```powershell
 .venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_gap_inventory.py -q
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_gap_status.py -q
+.venv\Scripts\python.exe scripts\external_read_model_gap_status.py
 ```
