@@ -24,6 +24,82 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 209 API Spine Diary Deprecation Header Browser Harness |
+| Integrated through | Ariadne implementation with DeepSeek review; Claude budget-blocked twice and Antigravity timed out without artifact |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 209 What Changed
+
+- Added `review/test_diary_deprecation_consumer.py`, a dedicated Playwright
+  review test that serves the Diary page, stubs Office, routes two synthetic
+  appointment API responses, captures browser console warnings, and calls the
+  real `apiFetch()` in page context.
+- Proved the positive path: when a routed response includes `Deprecation` and
+  `Access-Control-Expose-Headers: Deprecation`, browser-executed `apiFetch()`
+  emits the expected `[EMR4 Deprecation Warning]` developer warning.
+- Proved the negative path: a routed response without `Deprecation` emits no
+  deprecation warning.
+- Updated `docs/api-spine/raw-compat-consumer-signal-readiness.md` and
+  `tests/test_api_spine_raw_compat_consumer_signal_readiness.py` to record
+  `console_warn_proven` and
+  `consumer_cors_backend_and_browser_harness_checked_keep_audit_mode`.
+
+Worker mix:
+
+- DeepSeek completed a bounded review lane and recommended the exact
+  route-intercepted Playwright proof shape with positive and negative controls.
+- Claude was invoked twice through `scripts/drive_agent_headless.py`, once with
+  Sonnet and once with Haiku, but both runs exceeded their sprint review budget
+  before producing a usable final recommendation.
+- Antigravity was invoked through `agy.exe` but timed out without producing a
+  review artifact.
+
+Browser path note:
+
+- The in-app Browser plugin was bootstrapped and its documentation read, but
+  the exposed Browser Playwright subset does not include network route
+  interception. Sprint 209 therefore used the repo's regular Playwright review
+  harness for the necessary routed-response proof.
+
+Boundary:
+
+- Route-intercepted browser execution proof only.
+- No `appointment_raw_compat_mode` change, no backend route behavior change, no
+  frontend production code change, no user-facing UI change, no route removal,
+  no idempotency expansion, no provider calls or dry-runs, no
+  memory/RAG/GraphRAG, no H15/H-series runtime imports, no historical diary
+  material access, no GraphQL mutations, no external patient clients, no
+  runtime FGA clients, and no model-to-database write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest review\test_diary_deprecation_consumer.py -q
+.venv\Scripts\python.exe -m pytest review\test_diary_deprecation_consumer.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py -q
+.venv\Scripts\python.exe -m pytest review\test_diary_deprecation_consumer.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py tests\test_appointment_raw_compat.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py -q
+git diff --check -- review\test_diary_deprecation_consumer.py docs\api-spine\raw-compat-consumer-signal-readiness.md tests\test_api_spine_raw_compat_consumer_signal_readiness.py
+```
+
+Result: dedicated Playwright review test `1 passed`; focused browser/readiness
+suite `11 passed`; adjacent raw-compat/deprecation-map suite `31 passed`; API
+Spine static suite with new/legacy guards `48 passed`; whitespace check clean.
+
+Implementation commit: `84deb920`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a blocked-by-default raw compatibility header-mode
+rollout/observability gate that records the operational purpose, rollout
+surface, metrics/audit signals, and explicit review requirements before any
+environment emits `Deprecation` by default.
+
+---
+
+## Previous Closeout - Sprint 208
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 208 API Spine Raw Compat CORS Exposed-Header Readiness |
 | Integrated through | Ariadne implementation with Claude and DeepSeek review; Antigravity invoked twice but timed out without artifact |
 | Status | Integrated and pushed |
