@@ -24,6 +24,76 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 205 API Spine External Router Read-Root Inventory |
+| Integrated through | Ariadne implementation with DeepSeek review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 205 What Changed
+
+- Added `docs/api-spine/external-router-read-root-inventory.md`, a static
+  inventory for the four GraphQL roots that Sprint 202 marked external to the
+  appointment-router slice: `viewer`, `practice`, `patient`, and
+  `directorySearch`.
+- Mapped current GET/read sources across auth, diary, patients, clinical,
+  search, and appointment type surfaces without creating GraphQL resolvers or
+  changing runtime behavior.
+- Recorded explicit read-model gaps for viewer environment/feature/capability
+  hints, practice practitioner directory, patient reminders/messages, and
+  RACGP/Cochrane directory lookup.
+- Added `tests/test_api_spine_external_router_read_root_inventory.py`, which
+  AST-parses selected router/service sources and parses the markdown table
+  without importing FastAPI routers or executing handlers.
+- Integrated DeepSeek's review recommendation to keep missing/gap rows
+  explicit, avoid reusing the old `external` coverage label, resolve router
+  prefixes mechanically, and preserve closed-gate wording.
+
+Worker mix:
+
+- DeepSeek completed a bounded review lane and its recommendations were
+  incorporated.
+- Claude and Antigravity were not launched for this small continuation slice
+  because Sprint 205 stayed within one static documentation/test surface and
+  did not touch runtime code. Next larger general sprint work should return to
+  the Ariadne plus Claude, Antigravity, and DeepSeek default.
+
+Boundary:
+
+- Static source/markdown parsing only.
+- No FastAPI router import, HTTP requests, database writes, route behavior
+  changes, raw compatibility deprecation mode changes, provider calls,
+  provider dry-runs, memory/RAG/GraphRAG access, H15/H-series runtime imports,
+  historical diary material access, GraphQL mutations, external patient
+  clients, runtime FGA clients, Access AI invocation wiring, or
+  model-to-database write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_router_read_root_inventory.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_router_read_root_inventory.py tests\test_api_spine_appointment_read_model_route_inventory.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+git diff --check -- docs\api-spine\external-router-read-root-inventory.md tests\test_api_spine_external_router_read_root_inventory.py
+```
+
+Result: focused external-router inventory `9 passed`; adjacent read-model
+inventory run `17 passed`; API Spine artifacts `31 passed`; whitespace check
+clean. An initial parallel adjacent pytest run hit the known PostgreSQL enum
+creation race; serial reruns passed.
+
+Implementation commit: `547ddd18`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a raw-compat consumer/signal readiness preflight
+before any deprecation-header mode change, or a small read-model gap inventory
+for the newly explicit practitioner/reminder/message/directory gaps.
+
+---
+
+## Previous Closeout - Sprint 204
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 204 API Spine Legacy Compatibility Write Deprecation Map |
 | Integrated through | Ariadne implementation with DeepSeek review |
 | Status | Integrated and pushed |
