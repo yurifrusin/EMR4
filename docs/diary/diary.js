@@ -2438,6 +2438,10 @@ async function apiFetch(path, opts = {}) {
     setStatus("Session expired — reopen the taskpane to sign in again.");
     throw new Error("401 Unauthorized");
   }
+  const deprecation = res.headers ? res.headers.get("deprecation") : null;
+  if (deprecation) {
+    console.warn(`[EMR4 Deprecation Warning] Deprecated route: ${path} (${deprecation})`);
+  }
   return res;
 }
 

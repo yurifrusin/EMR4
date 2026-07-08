@@ -2,7 +2,7 @@
 
 Date: 2026-07-08
 
-Sprint: 206
+Sprint: 207
 
 ## Purpose
 
@@ -11,18 +11,19 @@ narrow question: are current consumers and signals ready for a future
 `appointment_raw_compat_mode` move from `audit` to `header`?
 
 Current answer: no mode change yet. The backend can emit `Deprecation` headers,
-but the Diary frontend does not consume or surface that signal. The safe default
-therefore remains `audit` until a later sprint wires deliberate frontend
-deprecation awareness and verifies it.
+and Sprint 207 adds a shared Diary frontend console warning consumer for that
+signal. The safe default therefore remains `audit` until a later sprint verifies
+the consumer against a live backend path and reviews any required exposed-header
+behavior.
 
 ## Consumer Signal Inventory
 
 | Compatibility write | Handler | Raw compatibility tag | Backend signal site | Frontend consumer | Frontend raw call sites | Frontend condition | Header consumed | Readiness posture |
 |---|---|---|---|---|---|---|---|---|
-| `POST /api/v1/appointments` | `create_appointment` | `raw_compat_create` | `_raw_compat_evidence_and_headers("raw_compat_create")` | `docs/diary/diary.js` | `create_modal_raw_post` | create fallback when `confirmEndpoint` or `confirmPayload` is absent | `no` | `not_ready_for_header_mode` |
-| `PUT /api/v1/appointments/{appointment_id}` | `update_appointment` | `raw_compat_update` | `_raw_compat_evidence_and_headers("raw_compat_update")` | `docs/diary/diary.js` | `edit_modal_raw_put`; `drag_resize_raw_put` | edit-modal or drag/resize fallback when `confirmEndpoint` or `confirmPayload` is absent | `no` | `not_ready_for_header_mode` |
-| `PATCH /api/v1/appointments/{appointment_id}/status` | `update_appointment_status` | `raw_compat_status` | `_raw_compat_evidence_and_headers("raw_compat_status")` | `docs/diary/diary.js` | `edit_modal_raw_status_patch`; `create_modal_raw_status_patch`; `status_proposal_raw_patch` | status side-write after edit/create or fallback when signed status confirmation is unavailable | `no` | `not_ready_for_header_mode` |
-| `DELETE /api/v1/appointments/{appointment_id}` | `cancel_appointment` | `raw_compat_delete` | `_raw_compat_evidence_and_headers("raw_compat_delete")` | `docs/diary/diary.js` | `delete_modal_raw_delete` | delete fallback when `confirmEndpoint` or `confirmPayload` is absent | `no` | `not_ready_for_header_mode` |
+| `POST /api/v1/appointments` | `create_appointment` | `raw_compat_create` | `_raw_compat_evidence_and_headers("raw_compat_create")` | `docs/diary/diary.js` | `create_modal_raw_post` | create fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_wired_keep_audit_mode` |
+| `PUT /api/v1/appointments/{appointment_id}` | `update_appointment` | `raw_compat_update` | `_raw_compat_evidence_and_headers("raw_compat_update")` | `docs/diary/diary.js` | `edit_modal_raw_put`; `drag_resize_raw_put` | edit-modal or drag/resize fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_wired_keep_audit_mode` |
+| `PATCH /api/v1/appointments/{appointment_id}/status` | `update_appointment_status` | `raw_compat_status` | `_raw_compat_evidence_and_headers("raw_compat_status")` | `docs/diary/diary.js` | `edit_modal_raw_status_patch`; `create_modal_raw_status_patch`; `status_proposal_raw_patch` | status side-write after edit/create or fallback when signed status confirmation is unavailable | `console_warn` | `consumer_wired_keep_audit_mode` |
+| `DELETE /api/v1/appointments/{appointment_id}` | `cancel_appointment` | `raw_compat_delete` | `_raw_compat_evidence_and_headers("raw_compat_delete")` | `docs/diary/diary.js` | `delete_modal_raw_delete` | delete fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_wired_keep_audit_mode` |
 
 ## Signal Baseline
 
@@ -42,9 +43,11 @@ deprecation awareness and verifies it.
 - `docs/diary/diary.js` uses the shared `apiFetch()` helper and browser
   `fetch()`, so extra response headers should be tolerated by ordinary response
   handling.
-- `docs/diary/diary.js` has no `Deprecation` or `deprecation` header consumer.
-- No committed frontend JavaScript/HTML surface currently reads or displays a
-  `Deprecation` response header.
+- `docs/diary/diary.js` now reads the `Deprecation` response header inside the
+  shared `apiFetch()` helper after the 401 branch and writes a developer-facing
+  `console.warn()` when the header is present.
+- No committed frontend JavaScript/HTML surface currently displays a
+  user-facing `Deprecation` response header message.
 - route-intercepted smoke tests in `review/test_diary_smoke.py` do not prove
   live backend header consumption.
 
@@ -53,8 +56,8 @@ deprecation awareness and verifies it.
 The current decision is `keep_audit_mode`.
 
 Do not change `appointment_raw_compat_mode` to `header` until a later sprint
-adds and verifies at least one deliberate consumer of the `Deprecation` header,
-preferably inside `apiFetch()` or an equivalent shared request boundary.
+verifies the frontend consumer against a live, non-intercepted backend path and
+reviews any required CORS exposed-header behavior.
 
 Do not change `appointment_raw_compat_mode` to `off` while any raw compatibility
 write remains available to product clients or system compatibility paths.

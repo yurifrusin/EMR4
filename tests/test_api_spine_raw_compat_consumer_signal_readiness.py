@@ -124,8 +124,8 @@ def test_readiness_inventory_rows_match_expected_consumers_and_posture():
         assert row["consumer"] == "docs/diary/diary.js"
         assert row["sites"] == expected["sites"]
         assert row["condition"] == expected["condition"]
-        assert row["header_consumed"] == "no"
-        assert row["readiness"] == "not_ready_for_header_mode"
+        assert row["header_consumed"] == "console_warn"
+        assert row["readiness"] == "consumer_wired_keep_audit_mode"
 
 
 def test_backend_raw_compat_handlers_emit_expected_signals():
@@ -166,7 +166,7 @@ def test_diary_frontend_contains_the_documented_raw_call_sites_only():
             assert method_fragment in text
 
 
-def test_frontend_does_not_consume_deprecation_header_yet():
+def test_frontend_consumes_deprecation_header_only_at_shared_api_fetch_boundary():
     frontend_files = [
         *list((ROOT / "docs" / "diary").glob("*.js")),
         *list((ROOT / "docs" / "taskpane").glob("*.js")),
@@ -178,10 +178,14 @@ def test_frontend_does_not_consume_deprecation_header_yet():
         text = path.read_text(encoding="utf-8", errors="replace")
         if "deprecation" in text.lower():
             hits.append(path.relative_to(ROOT).as_posix())
-    assert not hits, (
-        "Header mode is not ready until frontend code deliberately consumes or "
-        f"logs the Deprecation response header. Unexpected hits: {hits}"
-    )
+    assert hits == ["docs/diary/diary.js"]
+
+    diary = DIARY_JS.read_text(encoding="utf-8", errors="replace")
+    api_fetch = diary[diary.index("async function apiFetch(") : diary.index("function normalizeApiPath(")]
+    assert 'res.headers.get("deprecation")' in api_fetch
+    assert "console.warn" in api_fetch
+    assert "Deprecated route:" in api_fetch
+    assert api_fetch.index("if (res.status === 401)") < api_fetch.index('res.headers.get("deprecation")')
 
 
 def test_backend_header_modes_are_covered_but_default_stays_audit():
