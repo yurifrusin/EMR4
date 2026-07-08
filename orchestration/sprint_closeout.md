@@ -24,6 +24,75 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 213 API Spine External Read-Model Gap Status Checker |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review; Claude/Antigravity not escalated beyond non-blocking availability because the checker was narrow |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 213 What Changed
+
+- Added `scripts/external_read_model_gap_status.py`, an importable CLI checker
+  for `docs/api-spine/external-router-read-model-gap-inventory.md`.
+- The checker validates the five Sprint 212 gap rows directly from markdown:
+  expected surface set, all route sources still `none`, coverage counts
+  (`model_only=3`, `none=2`), gap-posture counts (`route_gap=1`,
+  `route_and_shape_gap=2`, `source_and_licensing_gap=2`), and all closed-gate
+  phrases.
+- The CLI emits only safe aggregate status fields: counts, schema labels,
+  `sprint_engine_state: continuing`, `pause_required: false`, and false
+  readiness flags for GraphQL resolvers, REST routes, provider/directory
+  runtime, memory/runtime, write authority, and raw-compat mode changes.
+- Added `tests/test_external_read_model_gap_status.py`, including exact
+  safe-output assertions and negative drift tests for added surfaces, route
+  source claims, coverage drift, gap-posture drift, and removed closed gates.
+- Updated the gap inventory doc to reference the new safe aggregate checker.
+
+Worker mix:
+
+- DeepSeek completed a bounded sidecar review and recommended a heavier JSON
+  gate. Ariadne kept this sprint lean by validating the markdown source
+  directly, avoiding a second source of truth while preserving fail-closed
+  aggregate output.
+
+Boundary:
+
+- Static checker/report and tests only.
+- No GraphQL resolvers, no new REST routes, no provider calls, no provider
+  dry-run wiring, no runtime FGA clients, no external patient clients, no
+  H15/H-series runtime imports, no memory/RAG/GraphRAG, no broad historical
+  diary trove mining, no Access AI invocation wiring, no practitioner/reminder/
+  message/SMS/directory write authority, no model-to-database write authority,
+  and no raw compatibility deprecation mode change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_gap_status.py -q
+.venv\Scripts\python.exe scripts\external_read_model_gap_status.py
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_gap_status.py tests\test_api_spine_external_read_model_gap_inventory.py -q
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_gap_status.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_api_spine_external_router_read_root_inventory.py tests\test_api_spine_artifacts.py -q
+git diff --check -- scripts\external_read_model_gap_status.py tests\test_external_read_model_gap_status.py docs\api-spine\external-router-read-model-gap-inventory.md
+```
+
+Result: focused checker test `7 passed`; CLI emitted aggregate status; paired
+gap inventory/checker suite `16 passed`; broader external-router/API Spine suite
+`56 passed` when rerun serially. One earlier parallel wider run failed during
+shared Postgres enum setup with duplicate `userrole`, consistent with test
+process concurrency rather than Sprint 213 behavior. Whitespace check clean.
+
+Implementation commit: `9b7c19b2`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a non-runtime design packet for one external
+read-model gap, likely practitioner directory read shape first because it is
+the pure `route_gap`.
+
+---
+
+## Previous Closeout - Sprint 212
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 212 API Spine External Read-Model Gap Inventory |
 | Integrated through | Ariadne implementation with DeepSeek review; Claude budget-blocked and Antigravity timed out without artifact |
 | Status | Integrated and pushed |
