@@ -24,6 +24,83 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 216 API Spine External Read-Model Readiness DAG |
+| Integrated through | Ariadne implementation with DeepSeek/Shen sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 216 What Changed
+
+- Added `docs/api-spine/external-read-model-readiness-dag.json`, a static
+  Directed Acyclic Graph snapshot for external read-model readiness.
+- The DAG connects the external gap inventory, safe aggregate gap checker,
+  completed practitioner/reminder design packets, pending patient messages
+  design, pending RACGP/Cochrane source review, combined readiness review, and
+  still-blocked runtime gates for REST route wiring, GraphQL resolver wiring,
+  and provider/memory/external-client use.
+- Added `tests/test_api_spine_external_read_model_readiness_dag.py`, proving the
+  graph has the expected nodes/edges, is acyclic, keeps every readiness flag
+  false, gives no node runtime authority, requires future nodes to stay blocked,
+  and preserves closed gates including no runtime graph execution and no
+  GraphRAG runtime wiring.
+- Extended the sprint protocol in `AGENTS.md` and
+  `orchestration/protocol_alerts.md`: every sprint start must explicitly name
+  Claude, Antigravity, and DeepSeek use/non-use; state why any lane is not used;
+  announce any extra DeepSeek substitution for usage-limited Claude/Antigravity;
+  state the current DeepSeek lane count; close completed/idle lanes; and reuse
+  a coherent open DeepSeek lane for related follow-on work when appropriate.
+- Extended `tests/test_bernie_interpretation_protocol_alert.py` so the new
+  worker-mix and DeepSeek lane-count/reuse ritual is guarded.
+
+Worker mix:
+
+- Claude was not used because this was a narrow static readiness/DAG packet,
+  not a budget-heavy architecture or implementation lane.
+- Antigravity was not used because the sprint had no UI/workflow artifact or
+  frontend/product interaction surface.
+- DeepSeek/Shen was used as the independent sidecar and recommended a more
+  elaborate script-plus-snapshot readiness graph; Ariadne integrated a smaller
+  JSON-first DAG now and left the script/snapshot promotion as a possible next
+  sprint.
+- Existing completed DeepSeek/Delta sidecars from Sprints 213-216 were closed
+  after their outputs were captured. The next sprint-start announcement must
+  state the current DeepSeek lane count and reuse/cleanup plan before spawning
+  more workers.
+
+Boundary:
+
+- Static JSON DAG, protocol documentation, and tests only.
+- No runtime graph engine, no GraphRAG, no GraphQL resolver, no GraphQL
+  mutation, no REST route, no database query, no provider call, no provider
+  dry-run wiring, no runtime FGA client, no external patient client, no
+  H15/H-series runtime import, no memory/RAG runtime wiring, no broad historical
+  diary trove mining, no Access AI invocation, no write authority, no
+  model-to-database write authority, and no raw compatibility deprecation mode
+  change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_readiness_dag.py tests\test_bernie_interpretation_protocol_alert.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_bernie_interpretation_protocol_alert.py -q
+git diff --check -- docs\api-spine\external-read-model-readiness-dag.json tests\test_api_spine_external_read_model_readiness_dag.py AGENTS.md orchestration\protocol_alerts.md tests\test_bernie_interpretation_protocol_alert.py
+```
+
+Result: DAG/protocol suite `11 passed`; broader external read-model static
+suite plus protocol alerts `42 passed`; whitespace check clean.
+
+Implementation commit: `6125d6e2`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a non-runtime `Query.patient.messages`
+read-shape design packet or script-plus-snapshot external readiness checker.
+
+---
+
+## Previous Closeout - Sprint 215
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 215 API Spine Patient Reminders Read-Shape Design |
 | Integrated through | Ariadne implementation with DeepSeek/Delta sidecar review |
 | Status | Integrated and pushed |
