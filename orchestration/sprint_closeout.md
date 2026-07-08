@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 239 Diary/Bernie Playwright Evidence Protocol |
 | Integrated through | Ariadne direct implementation; no Claude/Antigravity/DeepSeek lanes used because this was a tiny protocol/test clarification requested before D4 UI wiring |
-| Status | Integrated locally; pending metadata commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 239 What Changed
