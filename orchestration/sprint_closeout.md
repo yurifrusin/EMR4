@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 225 API Spine Patient Messages Ownership Candidate |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
-| Status | Pending commit/push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
 ## Sprint 225 What Changed
@@ -88,11 +88,11 @@ git diff --check
 Result so far: focused messages/read-shape suite `15 passed`; broader external
 read-model static suite `108 passed`; whitespace check clean.
 
-Implementation commit: pending.
+Implementation commit: `77567098`.
 
-Sprint engine state: continuing after commit/push unless verification fails.
-Next recommended direction is route/schema ownership consolidation and a
-first-runtime implementation go/no-go preflight.
+Sprint engine state: continuing after push. Next recommended direction is
+route/schema ownership consolidation and a first-runtime implementation
+go/no-go preflight.
 
 ---
 
