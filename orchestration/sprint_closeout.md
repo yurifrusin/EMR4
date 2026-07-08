@@ -24,6 +24,71 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 204 API Spine Legacy Compatibility Write Deprecation Map |
+| Integrated through | Ariadne implementation with DeepSeek review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 204 What Changed
+
+- Added `docs/api-spine/legacy-compatibility-write-deprecation-map.md`, a
+  static map from the four raw appointment compatibility writes to their
+  proposal/confirm replacement families and read-model witness routes.
+- Added `tests/test_api_spine_legacy_compatibility_write_deprecation_map.py`,
+  which parses the markdown map and existing static source artifacts without
+  importing the FastAPI router.
+- The map records raw compatibility tags (`raw_compat_create`,
+  `raw_compat_update`, `raw_compat_status`, `raw_compat_delete`) and the current
+  `appointment_raw_compat_mode` posture: default `audit`, optional `header`,
+  and explicit `off`.
+- The current decision remains `map_only`: no raw route is removed, renamed,
+  blocked, deprecated in code, or changed by this sprint.
+- Integrated DeepSeek's review recommendation to include the raw compatibility
+  signal modes and preserve the risk that `off` suppresses evidence/header
+  signals.
+
+Worker mix:
+
+- DeepSeek completed a bounded review lane and its recommendations were
+  incorporated.
+- Claude and Antigravity were not launched for this small continuation slice
+  because Sprint 204 stayed within one static documentation/test surface and did
+  not touch runtime code. Next larger general sprint work should return to the
+  Ariadne plus Claude, Antigravity, and DeepSeek default.
+
+Boundary:
+
+- Static source/markdown parsing only.
+- No FastAPI router import, HTTP requests, database writes, route behavior
+  changes, raw compatibility deprecation mode changes, provider calls,
+  provider dry-runs, memory/RAG/GraphRAG access, H15/H-series runtime imports,
+  historical diary material access, GraphQL mutations, external patient
+  clients, runtime FGA clients, or model-to-database write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_legacy_compatibility_write_deprecation_map.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_legacy_compatibility_write_deprecation_map.py tests\test_api_spine_appointment_read_model_route_inventory.py tests\test_api_spine_appointment_openapi_drift_guard.py -q
+git diff --check -- docs\api-spine\legacy-compatibility-write-deprecation-map.md tests\test_api_spine_legacy_compatibility_write_deprecation_map.py
+```
+
+Result: focused map test `7 passed`; adjacent API Spine continuity run
+`20 passed`; whitespace check clean.
+
+Implementation commit: `28d5f617`.
+
+Sprint engine state: continuing after push. No user intervention is
+required; next recommended direction is a static external-router inventory for
+viewer/practice/patient/directory GraphQL roots, or a raw-compat consumer/signal
+readiness preflight before any deprecation-header mode change.
+
+---
+
+## Previous Closeout - Sprint 203
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 203 API Spine Blueprint First Boundary Capture |
 | Integrated through | Ariadne documentation/test capture from Yuri paper review discussion |
 | Status | Integrated and pushed |
