@@ -24,6 +24,76 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 208 API Spine Raw Compat CORS Exposed-Header Readiness |
+| Integrated through | Ariadne implementation with Claude and DeepSeek review; Antigravity invoked twice but timed out without artifact |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 208 What Changed
+
+- Added `expose_headers=["Deprecation"]` to the FastAPI `CORSMiddleware`
+  configuration in `app/main.py`, making the raw compatibility deprecation
+  signal readable by cross-origin browser JavaScript when a reviewed
+  environment emits it.
+- Tightened `tests/test_appointment_raw_compat.py` so a header-mode raw
+  appointment create response with an allowed `Origin` now proves both
+  `Deprecation` and `Access-Control-Expose-Headers: Deprecation`.
+- Extended `tests/test_api_spine_raw_compat_consumer_signal_readiness.py` with
+  a static and TestClient CORS exposure guard, while continuing to assert the
+  raw compatibility default remains `audit`.
+- Updated `docs/api-spine/raw-compat-consumer-signal-readiness.md` to record the
+  new posture:
+  `consumer_cors_and_backend_header_checked_keep_audit_mode`.
+
+Worker mix:
+
+- Claude completed a Sonnet review lane and identified missing
+  `expose_headers` as the critical CORS gap, while recommending no mode change.
+- DeepSeek completed a bounded review lane and confirmed the exact invariant:
+  `expose_headers=["Deprecation"]`, with `appointment_raw_compat_mode` staying
+  `audit`.
+- Antigravity was invoked twice through `agy.exe`; both runs timed out without
+  producing a review artifact, so no Antigravity recommendations were
+  integrated for this sprint.
+
+Boundary:
+
+- CORS response-header exposure and tests only.
+- No `appointment_raw_compat_mode` change, no route behavior change, no route
+  removal, no idempotency expansion, no user-facing UI change, no provider
+  calls or dry-runs, no memory/RAG/GraphRAG, no H15/H-series runtime imports,
+  no historical diary material access, no GraphQL mutations, no external
+  patient clients, no runtime FGA clients, and no model-to-database write
+  authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_appointment_raw_compat.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py tests\test_appointment_raw_compat.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py -q
+git diff --check -- app\main.py docs\api-spine\raw-compat-consumer-signal-readiness.md tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_appointment_raw_compat.py
+```
+
+Result: focused readiness test `9 passed`; raw-compat plus readiness suite
+`22 passed`; adjacent deprecation-map/raw-compat suite `29 passed`; API Spine
+static suite with new/legacy guards `47 passed`; whitespace check clean.
+
+Implementation commit: `7d9b0e85`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a browser or equivalent frontend execution check
+proving `apiFetch()` can read a raw compatibility `Deprecation` header after
+CORS filtering, or a small read-model gap inventory for
+practitioner/reminder/message/directory gaps.
+
+---
+
+## Previous Closeout - Sprint 207
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 207 API Spine Frontend Deprecation Header Consumer |
 | Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek review |
 | Status | Integrated and pushed |
