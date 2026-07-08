@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 241 Bernie UI Derived-State DAG D5 Response Delivery Gate |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this was a bounded static gate sprint |
-| Status | Integrated locally; pending commit and push |
+| Status | Integrated locally; pending metadata commit and push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 241 What Changed
@@ -72,7 +72,7 @@ git diff --check -- docs\bernie-ui-derived-state-dag-d5-response-delivery-gate.j
 Result: D5 gate + selector + D4 preflight suite `28 passed`; whitespace check
 passed.
 
-Implementation commit: pending.
+Implementation commit: `c10f2d9a`.
 
 Sprint engine state: continuing only with bounded plan/review work unless Yuri
 explicitly approves changing the D5 gate; all backend/provider/GraphQL/write/
