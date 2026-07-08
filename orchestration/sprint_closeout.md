@@ -24,6 +24,75 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 206 API Spine Raw Compatibility Consumer Signal Readiness |
+| Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 206 What Changed
+
+- Added `docs/api-spine/raw-compat-consumer-signal-readiness.md`, a static
+  preflight before any future `appointment_raw_compat_mode` move from `audit`
+  to `header`.
+- Mapped all four raw compatibility writes to their backend
+  `_raw_compat_evidence_and_headers()` signal calls, current Diary frontend
+  fallback call-site IDs, header-consumption status, and readiness posture.
+- Recorded the current decision as `keep_audit_mode`: backend header mode
+  exists, but no committed frontend JavaScript/HTML surface consumes or logs
+  the `Deprecation` response header.
+- Added `tests/test_api_spine_raw_compat_consumer_signal_readiness.py`, a
+  parser/static-source guard over the preflight doc, appointment router,
+  config, Diary JS fallback call sites, frontend header-consumption baseline,
+  raw compatibility backend tests, and the existing deprecation map.
+
+Worker mix:
+
+- DeepSeek completed a bounded review lane and recommended the consumer
+  inventory, frontend non-consumption assertion, and handler consistency guard.
+- Antigravity completed a CLI review lane and produced a tangible review note
+  in its worker worktree; the integrated artifact folded in its call-site and
+  mock-drift recommendations.
+- Claude initially hit budget stops twice; a cheap Sonnet retry succeeded and
+  confirmed no hard blockers, with recommendations to pin route completeness,
+  explicit header non-consumption, and the `keep_audit_mode` decision.
+
+Boundary:
+
+- Static source/markdown parsing only.
+- No config change, no `appointment_raw_compat_mode` change, no frontend
+  behavior change, no backend route behavior change, no route removal, no
+  idempotency expansion, no provider calls or dry-runs, no memory/RAG/GraphRAG,
+  no H15/H-series runtime imports, no historical diary material access, no
+  GraphQL mutations, no external patient clients, no runtime FGA clients, and
+  no model-to-database write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py tests\test_appointment_raw_compat.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py -q
+git diff --check -- docs\api-spine\raw-compat-consumer-signal-readiness.md tests\test_api_spine_raw_compat_consumer_signal_readiness.py
+```
+
+Result: focused readiness test `8 passed`; adjacent raw-compat suite
+`28 passed`; API Spine static suite with new/legacy guards `46 passed`;
+whitespace check clean.
+
+Implementation commit: `8244f36c`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a deliberate frontend deprecation-header consumer
+design/test preflight before any `appointment_raw_compat_mode` change, or a
+small read-model gap inventory for practitioner/reminder/message/directory
+gaps.
+
+---
+
+## Previous Closeout - Sprint 205
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 205 API Spine External Router Read-Root Inventory |
 | Integrated through | Ariadne implementation with DeepSeek review |
 | Status | Integrated and pushed |
