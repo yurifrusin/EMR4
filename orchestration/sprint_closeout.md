@@ -24,74 +24,97 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 226 API Spine External Read-Model Ownership Consolidation Preflight |
+| Batch | Sprint 227 API Spine Practitioner Directory First-Runtime Proposal Gate |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
 | Status | Integrated and ready to push |
+| Last updated | 2026-07-08 |
+
+## Sprint 227 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-first-runtime-implementation-proposal.md`,
+  a static implementation-proposal gate for the first candidate runtime read
+  route, `GET /api/v1/practice/practitioners`.
+- Added
+  `tests/test_api_spine_practitioner_directory_implementation_proposal.py`,
+  guarding the proposal inputs, gate verdict, route contract, schema contract,
+  sensitive-field exclusions, pagination/order/inactive policy, safe
+  default-location join, runtime test blueprint, and closed gates.
+- The packet resolves the future route/schema contract but keeps
+  `runtime_code_authorized=false`, `rest_route_ready=false`,
+  `graphql_resolver_ready=false`, `external_read_model_runtime_ready=false`,
+  `readiness_snapshot_decision=blocked`, and
+  `explicit_yuri_go_no_go_required=true`.
+- Practical answer: first-route implementation is now one explicit Yuri
+  go/no-go away. Without that approval, the safe next sprint is GraphQL resolver
+  ownership/authorization planning, not resolver or route code.
+
+Worker mix:
+
+- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
+  It produced a worker-local review commit/artifact and was one commit ahead of
+  `origin/claude/current`; this was treated as hand-in history and will be
+  realigned after closeout.
+- Antigravity was called through the `agy.exe` CLI and produced a tangible
+  review artifact emphasizing static gate checks, privacy/product preconditions,
+  sensitive-field exclusions, and runtime test requirements.
+- DeepSeek was called through direct Codex `deepseek-worker` spawning and
+  recommended keeping the readiness snapshot blocked while documenting the
+  future route contract. The lane was closed after output capture.
+- Worker cleanliness was checked during the sprint. Integration was clean at
+  start; Claude was clean but ahead by one worker hand-in commit; Antigravity
+  had one untracked hand-in artifact; DeepSeek has zero open lanes after
+  closeout cleanup/realignment.
+
+Boundary:
+
+- Static implementation-proposal documentation and tests only.
+- No REST route, no GraphQL resolver, no GraphQL mutation, no runtime schema, no
+  database query/join/migration, no provider call, no provider dry-run, no
+  Access AI invocation, no RAG/GraphRAG/memory wiring, no H15/H-series runtime
+  import, no broad historical diary trove mining, no external patient client, no
+  runtime FGA client, no write authority, no model-to-database write authority,
+  and no raw compatibility deprecation mode change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_implementation_proposal.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check
+```
+
+Result so far: focused proposal suite `9 passed`; broader external read-model
+static suite `124 passed`; whitespace check clean.
+
+Implementation commit: `ad5b8e5d`.
+
+Sprint engine state: continuing after push unless Yuri chooses to give the
+explicit first-route implementation go/no-go. Next safe direction without that
+decision is GraphQL resolver ownership/authorization planning only.
+
+---
+
+## Previous Closeout - Sprint 226
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 226 API Spine External Read-Model Ownership Consolidation Preflight |
+| Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
 ## Sprint 226 What Changed
 
 - Added
   `docs/api-spine/external-read-model-ownership-consolidation-preflight.md`,
-  a static consolidation/go-no-go preflight across the three ownership
+  a static consolidation/go/no-go preflight across the three ownership
   candidates from Sprints 223-225.
-- The preflight records the ownership matrix for
-  `practice_practitioners`, `patient_reminders`, and `patient_messages`,
-  ranks candidate complexity, keeps every runtime gate blocked, and recommends
-  `practice_practitioners` as the first future runtime go/no-go candidate.
 - Added
-  `tests/test_api_spine_external_read_model_ownership_consolidation.py`,
-  guarding the consolidated inputs, ownership matrix, unapproved/evidence-only
-  ownership rows, current absence of runtime routes/schemas, candidate-specific
-  preflight emphasis, and closed-gate posture.
-
-Worker mix:
-
-- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
-  It hit the budget cap after producing a partial review/test. Claude favored
-  patient reminders as first runtime candidate; Ariadne did not adopt that
-  choice because practitioner directory is the only `route_gap` and has no
-  patient PHI or route-and-shape gap.
-- Antigravity was called through the `agy.exe` CLI and produced a tangible
-  review artifact recommending practitioner directory as safest first runtime
-  candidate and emphasizing privacy/product/test preconditions for the patient
-  surfaces.
-- DeepSeek was called through direct Codex `deepseek-worker` spawning and
-  independently recommended practitioner directory as the first go/no-go
-  candidate and listed the required static consolidation assertions. The lane
-  was closed after output capture.
-- Worker cleanliness was checked and repaired during the sprint. Claude and
-  Antigravity worktrees were rechecked clean after cleanup; DeepSeek has zero
-  open lanes after closeout.
-
-Boundary:
-
-- Static ownership-candidate documentation and tests only.
-- No source ingestion, no source manifest approved as runtime configuration, no
-  scraping, no live lookup, no route, no resolver, no schema, no provider call,
-  no provider dry-run, no Access AI invocation, no RAG/GraphRAG/memory wiring,
-  no H15/H-series runtime import, no broad historical diary trove mining, no
-  external patient client, no runtime FGA client, no clinical decision support
-  runtime, no write authority, no model-to-database write authority, and no raw
-  compatibility deprecation mode change.
-
-Verification:
-
-```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_reminders_ownership_candidate.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_ownership_consolidation.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check
-```
-
-Result so far: focused consolidation suite `7 passed`; broader external
-read-model static suite `115 passed`; whitespace check clean.
-
-Implementation commit: `8abf5531`.
-
-Sprint engine state: continuing after push. Next recommended direction is a
-practitioner-directory first-runtime implementation proposal/gate packet, not
-route code.
+  `tests/test_api_spine_external_read_model_ownership_consolidation.py`.
+- Verification: focused consolidation suite `7 passed`; broader external
+  read-model static suite `115 passed`; whitespace check clean.
+- Implementation commit: `8abf5531`; closeout commit `da60751c`.
 
 ---
 
