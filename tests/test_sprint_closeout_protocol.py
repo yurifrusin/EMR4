@@ -36,3 +36,16 @@ def test_current_baton_no_longer_describes_sprint_139_as_local_only():
     assert "Sprint 156 status/delete confirm client header emission" in text
     assert "Sprint 139 update-confirm idempotency preflight completed locally" not in text
     assert "Sprint 140 update-confirm idempotency route-test contract completed locally" not in text
+
+
+def test_diary_ui_evidence_prefers_committed_playwright_harnesses():
+    agent_text = AGENTS.read_text(encoding="utf-8", errors="replace")
+    alert_text = PROTOCOL_ALERTS.read_text(encoding="utf-8", errors="replace")
+    combined = f"{agent_text}\n{alert_text}"
+
+    assert "review/test_diary_smoke.py" in combined
+    assert "Playwright/pytest harnesses" in combined
+    assert "route-intercepted checks" in combined
+    assert "Browser plugin is supplemental" in combined
+    assert "replace committed" in combined
+    assert "Playwright regression evidence" in combined

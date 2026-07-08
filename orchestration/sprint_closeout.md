@@ -24,9 +24,62 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 239 Diary/Bernie Playwright Evidence Protocol |
+| Integrated through | Ariadne direct implementation; no Claude/Antigravity/DeepSeek lanes used because this was a tiny protocol/test clarification requested before D4 UI wiring |
+| Status | Integrated locally; pending commit and push |
+| Last updated | 2026-07-09 |
+
+## Sprint 239 What Changed
+
+- Updated the EMR4 handover protocol to make existing Playwright/pytest review
+  harnesses, especially `review/test_diary_smoke.py`, the default committed
+  evidence for Diary/Bernie UI sprints.
+- Clarified that Browser plugin use is supplemental for visual inspection,
+  screenshots, console/debug exploration, and ambiguous rendering failures, not
+  a replacement for committed route-intercepted Playwright regression evidence.
+- Added a protocol guard test preserving that evidence priority.
+
+Worker mix:
+
+- Claude was not invoked; the sprint was a narrow protocol/test edit.
+- Antigravity was not invoked.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start; no worker artifacts were
+  created.
+
+Boundary:
+
+- Protocol/docs/tests only.
+- No frontend runtime code, no backend route/schema/service change, no provider
+  call, no Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series
+  runtime import, no historical diary/local_data import, no GraphQL resolver, no
+  write authority, and no appointment confirmation behavior change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_sprint_closeout_protocol.py -q
+git diff --check -- AGENTS.md orchestration\protocol_alerts.md tests\test_sprint_closeout_protocol.py orchestration\sprint_closeout.md orchestration\integration_log.md
+```
+
+Result: protocol closeout suite `4 passed`; whitespace check passed with only
+Git's existing CRLF normalization warning for `orchestration/integration_log.md`.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing after push to the narrow D4 route-intercepted
+UI consumer slice if no user redirect arrives; all provider/backend/GraphQL/write
+gates remain closed.
+
+---
+
+## Previous Closeout - Sprint 238
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 238 Bernie UI Derived-State DAG D4 Preflight |
 | Integrated through | Ariadne direct implementation following Fable's prior verdict; no Claude/Antigravity/DeepSeek lanes used because this was a bounded preflight/review sprint |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
 ## Sprint 238 What Changed

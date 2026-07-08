@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 238 Bernie UI derived-state DAG D4 preflight added `docs/bernie-ui-derived-state-dag-d4-preflight.md` and guard tests, defining the exact route-intercepted UI consumer acceptance for candidate list, proposal card, confirm button, stale warning, success copy, retry/edit affordances, and command-payload non-use of `BernieUiViewModel` fields while keeping UI wiring, route/response wiring, providers, memory/RAG/GraphRAG, H15/H-series/trove imports, GraphQL, and writes closed |
-| **Next recommended work** | Proceed only with the narrow D4 route-intercepted UI consumer slice in `docs/diary/diary.js` if no user redirect arrives: consume or mirror the selector outcomes for the primary `renderBernieReview` panel only, prove candidate/proposal/confirm/stale/success/retry behavior with route-intercepted tests, and keep command payloads using existing signed proposal/freshness/evidence fields; do not open backend response delivery, provider, memory, GraphQL, write, H15/H-series/trove, practitioner-directory readiness, live UI/provider, or external gates without explicit review; at every sprint start explicitly announce Claude, Antigravity, and DeepSeek use/non-use, invocation mode (`scripts\drive_agent_headless.py`/Claude CLI, `agy.exe`/Antigravity CLI, direct Codex `deepseek-worker` spawn), Claude/Antigravity/DeepSeek cleanliness state, current DeepSeek lane count and reuse/cleanup plan, and any extra DeepSeek substitution for unavailable Claude/Antigravity lanes; clean stale worker artifacts before progressing and reannounce clean state |
+| **Current active track** | Sprint 239 clarified the EMR4 Diary/Bernie UI evidence protocol: committed UI regression evidence now defaults to existing Playwright/pytest harnesses, especially `review/test_diary_smoke.py` and route-intercepted checks, while Browser plugin use remains supplemental for visual/debug inspection; no runtime/UI/backend/provider/memory/write gates were opened |
+| **Next recommended work** | Proceed only with the narrow D4 route-intercepted UI consumer slice in `docs/diary/diary.js` if no user redirect arrives: consume or mirror the selector outcomes for the primary `renderBernieReview` panel only, prove candidate/proposal/confirm/stale/success/retry behavior with route-intercepted Playwright tests, and keep command payloads using existing signed proposal/freshness/evidence fields; do not open backend response delivery, provider, memory, GraphQL, write, H15/H-series/trove, practitioner-directory readiness, live UI/provider, or external gates without explicit review; at every sprint start explicitly announce Claude, Antigravity, and DeepSeek use/non-use, invocation mode (`scripts\drive_agent_headless.py`/Claude CLI, `agy.exe`/Antigravity CLI, direct Codex `deepseek-worker` spawn), Claude/Antigravity/DeepSeek cleanliness state, current DeepSeek lane count and reuse/cleanup plan, and any extra DeepSeek substitution for unavailable Claude/Antigravity lanes; clean stale worker artifacts before progressing and reannounce clean state |
 
 2026-07-08 Yuri proposed applying DAG-style conditioning dependencies to the
 Bernie UI so a few canonical state nodes, especially confirmation state, can
@@ -1045,6 +1045,12 @@ interactive/visual review cost remains high after this scripting approach.
 The first ratified deterministic UI harness lives in `review/` and is run with
 `pytest review/test_diary_smoke.py --junitxml=review/diary-review.xml -q`; CI
 also runs it via `.github/workflows/ui-review.yml` for diary/review changes.
+For EMR4 Diary/Bernie UI sprints, committed regression evidence should prefer
+the existing Playwright/pytest harnesses, especially `review/test_diary_smoke.py`
+and narrow route-intercepted checks. The Browser plugin is supplemental: use it
+for visual inspection, console/debug exploration, screenshots, or unclear
+rendering failures, but do not let Browser-plugin exploration replace committed
+Playwright regression evidence for ordinary UI behaviour.
 
 After Codex integrates a submit, it must:
 

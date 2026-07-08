@@ -110,6 +110,12 @@ Read these before acting on remembered process details.
   worktree because it is direct-spawned inside Codex; report active/completed
   lane count, unintegrated output state, and close/reuse decisions as its
   cleanliness check.
+- 2026-07-09: EMR4 Diary/Bernie UI sprint evidence should default to the
+  version-controlled Playwright/pytest harnesses, especially
+  `review/test_diary_smoke.py` and narrow route-intercepted checks. Browser
+  plugin use is still allowed for supplemental visual inspection, console
+  debugging, screenshots, and ambiguous rendering failures, but it must not
+  replace committed Playwright regression evidence for ordinary UI behaviour.
 - 2026-07-07: Antigravity availability must not be inferred solely from a bare
   `antigravity --version` shell probe. If the Antigravity/Gemini UI quota view
   shows usable availability, treat Antigravity as available and use the known
