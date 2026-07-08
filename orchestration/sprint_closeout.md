@@ -24,6 +24,73 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 207 API Spine Frontend Deprecation Header Consumer |
+| Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 207 What Changed
+
+- Added a shared `Deprecation` response-header consumer to
+  `docs/diary/diary.js` inside `apiFetch()`. When the header is present, the
+  taskpane now emits a developer-facing `console.warn()` identifying the route.
+- Updated `docs/api-spine/raw-compat-consumer-signal-readiness.md` so all four
+  raw compatibility writes now record `Header consumed` as `console_warn` and
+  `Readiness posture` as `consumer_wired_keep_audit_mode`.
+- Updated `tests/test_api_spine_raw_compat_consumer_signal_readiness.py` so the
+  frontend guard proves the only current deprecation-header consumer is the
+  shared `apiFetch()` boundary and that it runs after the 401 branch.
+- Preserved the `keep_audit_mode` decision. This sprint does not flip
+  `appointment_raw_compat_mode` to `header` or `off`.
+
+Worker mix:
+
+- Claude completed a Sonnet review lane and recommended the shared `apiFetch()`
+  insertion with no backend or route changes.
+- Antigravity completed a CLI review lane and produced a tangible review note
+  in its worker worktree, recommending the same minimal console warning
+  posture and static assertion.
+- DeepSeek completed a bounded review lane and confirmed this should remain a
+  static/frontend precondition rather than a browser/live-backend mode flip.
+
+Boundary:
+
+- Frontend console-warning consumer only.
+- No user-facing UI banner, no backend route behavior change, no config change,
+  no `appointment_raw_compat_mode` change, no route removal, no idempotency
+  expansion, no provider calls or dry-runs, no memory/RAG/GraphRAG, no
+  H15/H-series runtime imports, no historical diary material access, no
+  GraphQL mutations, no external patient clients, no runtime FGA clients, and
+  no model-to-database write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py -q
+node --check docs\diary\diary.js
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py tests\test_appointment_raw_compat.py -q
+git diff --check -- docs\diary\diary.js docs\api-spine\raw-compat-consumer-signal-readiness.md tests\test_api_spine_raw_compat_consumer_signal_readiness.py
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py tests\test_api_spine_raw_compat_consumer_signal_readiness.py tests\test_api_spine_legacy_compatibility_write_deprecation_map.py -q
+```
+
+Result: focused readiness test `8 passed`; JS syntax check clean; adjacent
+raw-compat suite `28 passed`; whitespace check clean; API Spine static suite
+with new/legacy guards `46 passed`.
+
+Implementation commit: `0884bca9`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a live/non-intercepted raw-compat header consumer
+verification and CORS exposed-header preflight before any
+`appointment_raw_compat_mode` change, or a small read-model gap inventory for
+practitioner/reminder/message/directory gaps.
+
+---
+
+## Previous Closeout - Sprint 206
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 206 API Spine Raw Compatibility Consumer Signal Readiness |
 | Integrated through | Ariadne implementation with Claude, Antigravity, and DeepSeek review |
 | Status | Integrated and pushed |
