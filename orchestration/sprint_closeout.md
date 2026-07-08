@@ -24,6 +24,73 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 214 API Spine Practitioner Directory Read-Shape Design |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 214 What Changed
+
+- Added `docs/api-spine/practitioner-directory-read-shape-design.md`, a static
+  design packet for the `Query.practice.practitioners` route gap.
+- Mapped the SDL `Practitioner` shape to current model facts:
+  `id` direct, `displayName` derived from first/last name, `roleLabel` as an
+  optional `specialty` mapping with a documented mismatch, `active` from
+  `is_active`, and `defaultLocation` as a linked read gap through
+  `default_location_id`.
+- Documented current supporting context reads from diary template and roster,
+  while making clear they are not practitioner-directory coverage.
+- Captured future route requirements for any later implementation sprint:
+  authenticated practice-scoped GET, `current_user.practice_id` filtering,
+  default active-only behavior, display-safe fields only, same-practice
+  default-location projection, deterministic ordering, bounded result policy,
+  and no provider/RAG/Access AI/external-client authority.
+- Added `tests/test_api_spine_practitioner_directory_read_shape_design.py`,
+  validating the packet against the SDL, tenancy model fields, diary/auth
+  router source, diary schemas, existing gap inventory, and closed gates.
+
+Worker mix:
+
+- DeepSeek completed a bounded sidecar review and recommended the same
+  SDL/model mapping plus future route properties. It also suggested adding a
+  schema next; Ariadne kept Sprint 214 design-only because current gates do not
+  authorize route/schema/runtime work.
+
+Boundary:
+
+- Static design packet and parser/source tests only.
+- No Pydantic runtime schema, no REST practitioner directory route, no GraphQL
+  resolver, no GraphQL mutation, no database query, no provider call, no
+  provider dry-run wiring, no runtime FGA client, no external patient client,
+  no H15/H-series runtime import, no memory/RAG/GraphRAG, no broad historical
+  diary trove mining, no Access AI invocation, no practitioner create/update
+  command, no appointment/roster/schedule/diary write authority, no
+  model-to-database write authority, and no raw compatibility deprecation mode
+  change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_read_shape_design.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py -q
+git diff --check -- docs\api-spine\practitioner-directory-read-shape-design.md tests\test_api_spine_practitioner_directory_read_shape_design.py
+```
+
+Result: focused practitioner design test `7 passed`; combined practitioner
+design/gap inventory/gap status suite `23 passed`; whitespace check clean.
+
+Implementation commit: `db98e742`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is either a combined external read-model readiness
+snapshot or a non-runtime design packet for `Query.patient.reminders`.
+
+---
+
+## Previous Closeout - Sprint 213
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 213 API Spine External Read-Model Gap Status Checker |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review; Claude/Antigravity not escalated beyond non-blocking availability because the checker was narrow |
 | Status | Integrated and pushed |
