@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 240 Bernie UI Derived-State DAG D4 Consumer |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because the slice stayed bounded to one UI file and one existing Playwright harness |
-| Status | Integrated locally; pending commit and push |
+| Status | Integrated locally; pending metadata commit and push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 240 What Changed
@@ -87,7 +87,7 @@ passed and wrote `review/diary-review.xml`; whitespace check passed; static grep
 confirmed view-model field references are confined to the display adapter and
 payload-purity tests.
 
-Implementation commit: pending.
+Implementation commit: `845e6d2c`.
 
 Sprint engine state: continuing only to a bounded post-D4 review or backend
 response-delivery gate decision; all backend/provider/GraphQL/write/memory/H15
