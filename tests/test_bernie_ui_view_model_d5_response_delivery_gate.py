@@ -5,6 +5,7 @@ from pathlib import Path
 GATE_PATH = Path("docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json")
 DOC_PATH = Path("docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.md")
 CHECKLIST_PATH = Path("docs/bernie-ui-derived-state-dag-d5-implementation-checklist.md")
+ROUTER_IMPORT_PLAN_PATH = Path("docs/bernie-ui-derived-state-dag-d5-router-import-guard-plan.md")
 
 
 def _gate():
@@ -114,3 +115,18 @@ def test_d5_implementation_checklist_stays_static_and_gate_bound():
     assert "Confirm payload serialization excludes" in text
     assert "Non-Bernie production routers do not import" in text
     assert "Stop and return to review" in text
+
+
+def test_d5_router_import_guard_plan_preserves_current_broad_ban():
+    text = ROUTER_IMPORT_PLAN_PATH.read_text(encoding="utf-8")
+
+    assert "Status: static plan only" in text
+    assert "production-router import ban" in text
+    assert "remains in" in text
+    assert "force while the D5 response-delivery gate is blocked" in text
+    assert "test_production_routes_do_not_import_selector_yet" in text
+    assert "Do not delete the guard" in text
+    assert "allows only the reviewed Bernie response-delivery attachment point" in text
+    assert "app/routers/appointments.py" in text
+    assert "keeps all non-Bernie production routers blocked" in text
+    assert "Until that approval exists, the broad no-router-import guard" in text
