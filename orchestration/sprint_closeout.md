@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 226 API Spine External Read-Model Ownership Consolidation Preflight |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
-| Status | Pending commit/push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
 ## Sprint 226 What Changed
@@ -87,11 +87,11 @@ git diff --check
 Result so far: focused consolidation suite `7 passed`; broader external
 read-model static suite `115 passed`; whitespace check clean.
 
-Implementation commit: pending.
+Implementation commit: `8abf5531`.
 
-Sprint engine state: continuing after commit/push unless verification fails.
-Next recommended direction is a practitioner-directory first-runtime
-implementation proposal/gate packet, not route code.
+Sprint engine state: continuing after push. Next recommended direction is a
+practitioner-directory first-runtime implementation proposal/gate packet, not
+route code.
 
 ---
 
