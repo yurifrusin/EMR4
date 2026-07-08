@@ -24,6 +24,79 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 217 API Spine Patient Messages Read-Shape Design |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 217 What Changed
+
+- Added `docs/api-spine/patient-messages-read-shape-design.md`, a static
+  design packet for the external `Query.patient.messages` /
+  `PatientMessageSummary` read shape.
+- Mapped the proposed safe summary fields across current `InternalMessage` and
+  `SmsLog` evidence: namespaced union `id`, `sentAt`, `channel`, display-safe
+  `summary`, and `status`.
+- Recorded the still-open design gaps: two-table union identity, staff-to-staff
+  internal-message scope, no current email backing model, incomplete status and
+  channel enums, SMS direction/type inclusion policy, raw body exposure risk,
+  bulk-SMS exclusion policy, ordering, pagination, and route authorization.
+- Updated `docs/api-spine/external-read-model-readiness-dag.json` so
+  `patient_messages_design` is `design_complete_no_runtime`, while the combined
+  review remains blocked on directory source review.
+- Added `tests/test_api_spine_patient_messages_read_shape_design.py` and updated
+  DAG tests to guard the static design packet, closed gates, and false readiness
+  posture.
+
+Worker mix:
+
+- Claude was not used because this was another narrow static API Spine design
+  packet, not a budget-heavy architecture or implementation lane.
+- Antigravity was not used because the sprint had no UI/workflow artifact or
+  frontend/product interaction surface.
+- DeepSeek was used as the independent sidecar review lane and validated the
+  patient messages packet shape with no runtime-wiring request.
+- Sprint start reported zero open DeepSeek lanes intended for reuse after
+  closing completed recent lanes. A fresh DeepSeek worker was spawned for this
+  sprint, completed, and had no reusable open lane remaining at closeout.
+- No extra DeepSeek substitution was needed because Claude and Antigravity were
+  intentionally stood down for scope, not unavailable due usage limits.
+
+Boundary:
+
+- Static design documentation, readiness DAG status update, and tests only.
+- No Pydantic schema, no REST route, no GraphQL resolver, no GraphQL mutation,
+  no database query, no provider call, no provider dry-run wiring, no runtime
+  FGA client, no external patient client, no H15/H-series runtime import, no
+  memory/RAG/GraphRAG runtime wiring, no broad historical diary trove mining, no
+  Access AI invocation, no SMS/internal-message command, no write authority, no
+  model-to-database write authority, and no raw compatibility deprecation mode
+  change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_messages_read_shape_design.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py -q
+git diff --check -- docs\api-spine\patient-messages-read-shape-design.md tests\test_api_spine_patient_messages_read_shape_design.py docs\api-spine\external-read-model-readiness-dag.json tests\test_api_spine_external_read_model_readiness_dag.py
+```
+
+Result: focused patient messages suite `8 passed`; broader external read-model
+static suite `45 passed`; whitespace check clean.
+
+Implementation commit: `0529c67e`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a non-runtime RACGP/Cochrane directory
+source/licensing review packet before directory-read design, or the
+script-plus-snapshot external readiness checker.
+
+---
+
+## Previous Closeout - Sprint 216
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 216 API Spine External Read-Model Readiness DAG |
 | Integrated through | Ariadne implementation with DeepSeek/Shen sidecar review |
 | Status | Integrated and pushed |
