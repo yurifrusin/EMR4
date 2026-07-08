@@ -24,9 +24,89 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 233 API Spine Practitioner Directory REST Route Approval-Decision Draft |
+| Integrated through | Ariadne implementation with Antigravity CLI, DeepSeek direct-spawn sidecar review, and extra DeepSeek substitution for Claude session limit |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-08 |
+
+## Sprint 233 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-approval-payload-draft.json`, a
+  blocked-by-default approval payload draft for the future
+  `GET /api/v1/practice/practitioners` go/no-go.
+- Added
+  `docs/api-spine/practitioner-directory-approval-decision.md`, the human-readable
+  decision packet explaining evidence checks, proposed scope if Yuri approves
+  later, decision consequences, manual approval steps, and boundary.
+- Added `tests/test_practitioner_directory_approval_gate_static.py`.
+- The JSON draft keeps `decision: blocked`, blank reviewer, no acknowledgement,
+  no expiry, and no approved contract commit. It proposes but does not grant a
+  future `approved_for_rest_route_first_slice` decision.
+- No `docs/api-spine/practitioner-directory-approved-gate.json` file exists.
+- Runtime state remains blocked: no REST route, no SDL change, no GraphQL
+  dependency/resolver, no runtime schema, no shared read service, no database
+  query or migration, no audit write, no provider, no memory/RAG/GraphRAG, no
+  H15/H-series runtime import, no external client, no GraphQL mutation, no
+  readiness flag change, and no write authority.
+
+Worker mix:
+
+- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
+  It hit a session limit before producing a durable packet, so Ariadne recorded
+  the unavailability and spawned an extra DeepSeek lane to cover the missing
+  review work.
+- Antigravity was called through the `agy.exe` CLI and produced a tangible
+  review artifact. Ariadne incorporated its approval UX, payload-field,
+  consequences, and boundary-risk notes.
+- DeepSeek was called through direct Codex `deepseek-worker` spawning and
+  recommended the H15-style approval draft/decision/approved-gate pattern. A
+  second DeepSeek lane was spawned as Claude substitution and reinforced the
+  fail-closed JSON/static-test shape.
+- Worker cleanliness was checked during the sprint. Integration was clean at
+  start; Claude and Antigravity were clean at sprint start; Claude and
+  Antigravity worker artifacts were cleaned after integration; DeepSeek has zero
+  open lanes after closeout cleanup/realignment.
+
+Boundary:
+
+- Static approval-decision draft documentation and tests only.
+- No approved gate, REST route, SDL edit, GraphQL runtime dependency, GraphQL
+  resolver, GraphQL mutation, runtime schema, database query/join/migration,
+  shared read service, audit write/migration, rate-limiter, field encryption,
+  RLS policy, provider call, provider dry-run, Access AI invocation,
+  RAG/GraphRAG/memory wiring, H15/H-series runtime import, broad historical diary
+  trove mining, external patient client, runtime FGA client, write authority,
+  model-to-database write authority, or raw compatibility deprecation mode
+  change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_approval_gate_static.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_approval_gate_static.py tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py tests\test_api_spine_practitioner_directory_security_audit_preflight.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check -- docs\api-spine\practitioner-directory-approval-payload-draft.json docs\api-spine\practitioner-directory-approval-decision.md tests\test_practitioner_directory_approval_gate_static.py
+```
+
+Result: focused approval-gate static suite `10 passed`; broader external
+read-model static suite `196 passed`; whitespace check clean.
+
+Implementation commit: `3ac7eee2`.
+
+Sprint engine state: continuing after push unless Yuri chooses to give the
+explicit first-route implementation go/no-go by instructing Ariadne to create
+the approved gate. Next safe direction without that decision is another
+plan-only readiness review.
+
+---
+
+## Previous Closeout - Sprint 232
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 232 API Spine Practitioner Directory Route Implementation Breakdown Readiness Decision |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
 ## Sprint 232 What Changed
@@ -36,69 +116,10 @@ Every closeout entry should record:
   a static implementation breakdown/readiness decision packet for the future
   `GET /api/v1/practice/practitioners` route.
 - Added
-  `tests/test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py`,
-  guarding the gate verdict, reviewed inputs, pre-code readiness checklist,
-  future schema/read-service/REST route slices, unified runtime test matrix,
-  separate SDL and GraphQL gates, stop/go points, consumer notes, blocked
-  readiness snapshot, and boundary wording.
-- The packet decomposes the future route into four slices: explicit directory
-  response schemas, a shared practitioner-directory read service, the REST route
-  and mount, and a required runtime test matrix.
-- It records the hard sequencing: explicit Yuri REST go/no-go before route code,
-  separate pause/approval before Sprint 231 SDL edits, and separate
-  pause/approval before any GraphQL runtime dependency or resolver.
-- Runtime state remains blocked: no REST route, no SDL change, no GraphQL
-  dependency/resolver, no runtime schema, no shared read service, no database
-  query or migration, no audit write, no provider, no memory/RAG/GraphRAG, no
-  H15/H-series runtime import, no external client, no GraphQL mutation, and no
-  write authority.
-
-Worker mix:
-
-- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
-  It hit the budget cap after producing a durable review artifact. Ariadne
-  incorporated its REST-first slicing, shared-read-service sequencing, and
-  stop/go points.
-- Antigravity was called through the `agy.exe` CLI and produced a tangible
-  review artifact before timing out. Ariadne incorporated its consumer notes and
-  its emphasis on keeping SDL/GraphQL gates separate from the first REST route.
-- DeepSeek was called through direct Codex `deepseek-worker` spawning and
-  completed with a task breakdown, test matrix, prerequisite checklist, and risk
-  register. The lane was closed after output capture.
-- Worker cleanliness was checked during the sprint. Integration was clean at
-  start; Claude and Antigravity were clean at sprint start; Claude and
-  Antigravity produced hand-in artifacts during the sprint; DeepSeek has zero
-  open lanes after closeout cleanup/realignment.
-
-Boundary:
-
-- Static route-breakdown/readiness documentation and tests only.
-- No REST route, SDL edit, GraphQL runtime dependency, GraphQL resolver,
-  GraphQL mutation, runtime schema, database query/join/migration, shared read
-  service, audit write/migration, rate-limiter, field encryption, RLS policy,
-  provider call, provider dry-run, Access AI invocation, RAG/GraphRAG/memory
-  wiring, H15/H-series runtime import, broad historical diary trove mining,
-  external patient client, runtime FGA client, write authority,
-  model-to-database write authority, or raw compatibility deprecation mode
-  change.
-
-Verification:
-
-```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py tests\test_api_spine_practitioner_directory_security_audit_preflight.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check -- docs\api-spine\practitioner-directory-route-implementation-breakdown-readiness-decision.md tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py
-```
-
-Result: focused route-breakdown readiness suite `11 passed`; broader external
-read-model static suite `186 passed`; whitespace check clean.
-
-Implementation commit: `c817067e`.
-
-Sprint engine state: continuing after push unless Yuri chooses to give the
-explicit first-route implementation go/no-go. Next safe direction without that
-decision is an explicit approval-decision packet or another plan-only readiness
-review.
+  `tests/test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py`.
+- Verification: focused route-breakdown readiness suite `11 passed`; broader
+  external read-model static suite `186 passed`; whitespace check clean.
+- Implementation commit: `c817067e`; closeout commit `0598c468`.
 
 ---
 
