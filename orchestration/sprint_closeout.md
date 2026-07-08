@@ -24,43 +24,42 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 225 API Spine Patient Messages Ownership Candidate |
+| Batch | Sprint 226 API Spine External Read-Model Ownership Consolidation Preflight |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
-| Status | Integrated and ready to push |
+| Status | Pending commit/push |
 | Last updated | 2026-07-08 |
 
-## Sprint 225 What Changed
+## Sprint 226 What Changed
 
 - Added
-  `docs/api-spine/patient-messages-route-schema-ownership-candidate.md`,
-  a static route/schema ownership candidate packet for
-  `Query.patient.messages`.
-- The candidate proposes, without approving,
-  `GET /api/v1/patients/{patient_id}/messages`, existing
-  `app/routers/patients.py`, existing
-  `app/schemas/patients.py::PatientMessageSummaryOut`, authenticated practice
-  and requested-patient scoping, two-table `InternalMessage`/`SmsLog` union
-  prerequisites, ID namespace policy, timestamp ordering policy, channel
-  derivation, status union policy, bounded summary derivation, candidate
-  pagination values, deterministic ordering, 404 anti-enumeration behavior, and
-  sensitive field exclusions.
-- Added `tests/test_api_spine_patient_messages_ownership_candidate.py`,
-  guarding the candidate-only posture, absence of current route/schema code,
-  model evidence boundaries, auth/scoping/union/status/pagination/test
-  prerequisites, closed gates, and blocked readiness snapshot posture.
+  `docs/api-spine/external-read-model-ownership-consolidation-preflight.md`,
+  a static consolidation/go-no-go preflight across the three ownership
+  candidates from Sprints 223-225.
+- The preflight records the ownership matrix for
+  `practice_practitioners`, `patient_reminders`, and `patient_messages`,
+  ranks candidate complexity, keeps every runtime gate blocked, and recommends
+  `practice_practitioners` as the first future runtime go/no-go candidate.
+- Added
+  `tests/test_api_spine_external_read_model_ownership_consolidation.py`,
+  guarding the consolidated inputs, ownership matrix, unapproved/evidence-only
+  ownership rows, current absence of runtime routes/schemas, candidate-specific
+  preflight emphasis, and closed-gate posture.
 
 Worker mix:
 
-- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI
-  and produced the candidate packet and deterministic test on `claude/current`.
+- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
+  It hit the budget cap after producing a partial review/test. Claude favored
+  patient reminders as first runtime candidate; Ariadne did not adopt that
+  choice because practitioner directory is the only `route_gap` and has no
+  patient PHI or route-and-shape gap.
 - Antigravity was called through the `agy.exe` CLI and produced a tangible
-  review artifact supporting the patient-scoped route, patient schema
-  ownership, privacy boundaries, pagination, and error semantics. Its
-  worker-local AGENTS update was stale against current handover state and was
-  not integrated.
+  review artifact recommending practitioner directory as safest first runtime
+  candidate and emphasizing privacy/product/test preconditions for the patient
+  surfaces.
 - DeepSeek was called through direct Codex `deepseek-worker` spawning and
-  confirmed the route/schema ownership candidate, response-shape posture, and
-  closed-gate constraints. The lane was closed after output capture.
+  independently recommended practitioner directory as the first go/no-go
+  candidate and listed the required static consolidation assertions. The lane
+  was closed after output capture.
 - Worker cleanliness was checked and repaired during the sprint. Claude and
   Antigravity worktrees were rechecked clean after cleanup; DeepSeek has zero
   open lanes after closeout.
@@ -80,19 +79,41 @@ Verification:
 
 ```powershell
 .venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_reminders_ownership_candidate.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_messages_read_shape_design.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_ownership_consolidation.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
 git diff --check
 ```
 
-Result so far: focused messages/read-shape suite `15 passed`; broader external
-read-model static suite `108 passed`; whitespace check clean.
+Result so far: focused consolidation suite `7 passed`; broader external
+read-model static suite `115 passed`; whitespace check clean.
 
-Implementation commit: `77567098`.
+Implementation commit: pending.
 
-Sprint engine state: continuing after push. Next recommended direction is
-route/schema ownership consolidation and a first-runtime implementation
-go/no-go preflight.
+Sprint engine state: continuing after commit/push unless verification fails.
+Next recommended direction is a practitioner-directory first-runtime
+implementation proposal/gate packet, not route code.
+
+---
+
+## Previous Closeout - Sprint 225
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 225 API Spine Patient Messages Ownership Candidate |
+| Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 225 What Changed
+
+- Added
+  `docs/api-spine/patient-messages-route-schema-ownership-candidate.md`,
+  a static route/schema ownership candidate packet for
+  `Query.patient.messages`.
+- Added `tests/test_api_spine_patient_messages_ownership_candidate.py`.
+- Verification: focused messages/read-shape suite `15 passed`; broader external
+  read-model static suite `108 passed`; whitespace check clean.
+- Implementation commit: `77567098`; closeout commit `aae92286`.
 
 ---
 
