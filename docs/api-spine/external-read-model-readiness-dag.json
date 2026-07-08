@@ -3,7 +3,7 @@
   "date": "2026-07-08",
   "sprint": 234,
   "decision": "blocked",
-  "purpose": "Static DAG snapshot for external read-model readiness. It records documentation, review, and approval-gate dependencies only; it does not create runtime graph execution, GraphRAG, REST routes, GraphQL resolvers, provider calls, database queries, readiness flag changes, or write authority. Yuri approved the practitioner-directory REST first slice on 2026-07-08, but route readiness remains false until implementation and runtime evidence exist.",
+  "purpose": "Static DAG snapshot for external read-model readiness. It records documentation, review, and approval-gate dependencies only; it does not create runtime graph execution, GraphRAG, GraphQL resolvers, provider calls, readiness flag changes, or write authority. Yuri approved the practitioner-directory REST first slice on 2026-07-08, and that bounded route slice is implemented separately; route readiness remains false until a separate readiness/deployment review explicitly changes it.",
   "readiness": {
     "external_read_model_runtime_ready": false,
     "graphql_resolver_ready": false,
@@ -163,7 +163,7 @@
     {
       "from": "practitioner_directory_approval_gate",
       "to": "rest_route_wiring",
-      "reason": "Yuri approved only the REST first slice; route readiness remains blocked until implementation and runtime tests pass"
+      "reason": "Yuri approved only the REST first slice; route readiness remains blocked until a separate readiness/deployment review changes it"
     },
     {
       "from": "combined_readiness_review",

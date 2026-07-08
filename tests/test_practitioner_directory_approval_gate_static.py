@@ -205,17 +205,21 @@ def test_readiness_snapshot_remains_blocked():
     assert snapshot["write_authority_ready"] is False
 
 
-def test_current_source_has_no_route_schema_service_resolver_or_sdl_gate_change():
+def test_current_source_has_only_approved_rest_slice_and_no_resolver_or_sdl_gate_change():
     app_text = _app_python_text()
 
-    assert not (APP / "routers" / "practice.py").exists()
-    assert not (APP / "schemas" / "practice.py").exists()
-    assert not (APP / "services" / "practice").exists()
+    assert (APP / "routers" / "practice.py").exists()
+    assert (APP / "schemas" / "practice.py").exists()
+    assert (APP / "services" / "practice" / "practitioner_directory_read.py").exists()
     for fragment in [
         "class PractitionerOut",
         "class PractitionerDefaultLocationOut",
-        "def list_practitioners",
         "def get_practitioners",
+        "def list_practitioner_directory",
+    ]:
+        assert fragment in app_text
+    for fragment in [
+        "def list_practitioners",
         "Query.practice.practitioners",
         "PracticeLocationBrief",
         "provider_or_memory_trove_allowed = True",

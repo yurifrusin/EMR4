@@ -53,25 +53,28 @@ this document itself is not approval to write runtime code.
 
 ## Preflight Checks
 
-Any implementation sprint must re-run these checks before code:
+The implementation sprint re-ran these checks before code and converted the
+approved slice into `app/routers/practice.py`, `app/schemas/practice.py`, and
+`app/services/practice/practitioner_directory_read.py`:
 
 1. `blocked_readiness_status.json` still has `dag_decision: blocked`,
    `rest_route_ready: false`, `graphql_resolver_ready: false`, and
    `external_read_model_runtime_ready: false`.
 2. `docs/api-spine/practitioner-directory-route-schema-ownership-candidate.md`
    still has no `approved` or `implemented` ownership rows.
-3. No router declares `@router.get("/practice/practitioners"`,
-   `@router.get("/practitioners"`, `def list_practitioners`, or
-   `def get_practitioners`.
-4. No schema declares `class PractitionerOut` or
+3. The only approved router surface is `@router.get("/practitioners"` inside
+   the `/api/v1/practice` router; there is no
+   `@router.get("/practice/practitioners"` duplicate and no detail route.
+4. The only approved schema objects are `class PractitionerOut` and
+   `class PractitionerDefaultLocationOut`; there is no
    `class PractitionerDirectory`.
 5. No GraphQL resolver or query wiring exists for
    `Query.practice.practitioners`.
-6. The implementation sprint has Yuri's explicit go/no-go recorded in the
-   sprint closeout before route/schema/query code is written.
+6. Yuri's explicit go/no-go is recorded in the approved gate before the
+   route/schema/read-service code.
 
-If any preflight fails, the sprint engine must stop the route-code attempt and
-report the drift.
+If any post-implementation guard fails, the sprint engine must stop further
+scope expansion and report the drift.
 
 ## Accepted Route Contract For Future Code
 

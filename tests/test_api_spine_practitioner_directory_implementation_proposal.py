@@ -99,7 +99,7 @@ def test_gate_verdict_requires_yuri_go_no_go_before_runtime_code():
     )
 
 
-def test_route_contract_is_explicit_but_current_code_remains_absent():
+def test_route_contract_is_explicit_and_current_rest_slice_matches_it():
     text = _read(PROPOSAL)
     router_text = _python_text_under(ROUTERS_DIR)
     schema_text = _python_text_under(SCHEMAS_DIR)
@@ -118,17 +118,20 @@ def test_route_contract_is_explicit_but_current_code_remains_absent():
 
     for fragment in [
         '@router.get("/practice/practitioners"',
-        '@router.get("/practitioners"',
         "def list_practitioners",
-        "def get_practitioners",
     ]:
         assert fragment not in router_text
     for fragment in [
+        '@router.get("/practitioners"',
+        "def get_practitioners",
+    ]:
+        assert fragment in router_text
+    for fragment in [
         "class PractitionerOut",
-        "class PractitionerDirectory",
         "class PractitionerDefaultLocationOut",
     ]:
-        assert fragment not in schema_text
+        assert fragment in schema_text
+    assert "class PractitionerDirectory" not in schema_text
 
 
 def test_schema_contract_uses_minimal_directory_fields_and_safe_location_shape():

@@ -236,19 +236,23 @@ def test_required_future_runtime_tests_are_listed():
         assert test_name in text
 
 
-def test_current_code_has_no_route_schema_service_or_resolver():
+def test_current_code_has_rest_slice_but_no_graphql_resolver_or_extra_surface():
     app_text = _app_python_text()
 
-    assert not (APP / "routers" / "practice.py").exists()
-    assert not (APP / "schemas" / "practice.py").exists()
-    assert not (APP / "services" / "practice").exists()
+    assert (APP / "routers" / "practice.py").exists()
+    assert (APP / "schemas" / "practice.py").exists()
+    assert (APP / "services" / "practice" / "practitioner_directory_read.py").exists()
     for fragment in [
-        '@router.get("/practice/practitioners"',
         '@router.get("/practitioners"',
-        "def list_practitioners",
         "def get_practitioners",
         "class PractitionerOut",
         "class PractitionerDefaultLocationOut",
+        "def list_practitioner_directory",
+    ]:
+        assert fragment in app_text
+    for fragment in [
+        '@router.get("/practice/practitioners"',
+        "def list_practitioners",
         "Query.practice.practitioners",
         "@strawberry.field",
         "import strawberry",

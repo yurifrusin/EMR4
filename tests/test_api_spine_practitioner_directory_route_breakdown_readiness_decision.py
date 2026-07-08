@@ -85,7 +85,7 @@ def test_inputs_reviewed_cover_sprints_214_223_227_to_231():
         assert phrase in text
 
 
-def test_pre_code_readiness_checklist_requires_yuri_and_current_absence():
+def test_pre_code_readiness_checklist_now_preserves_bounded_rest_slice():
     text = _read(PACKET)
     compact = _compact(text)
     app_text = _app_python_text()
@@ -99,8 +99,6 @@ def test_pre_code_readiness_checklist_requires_yuri_and_current_absence():
         "no `approved` or `implemented` ownership rows",
         '@router.get("/practice/practitioners"',
         '@router.get("/practitioners"',
-        "`def list_practitioners`",
-        "`def get_practitioners`",
         "`class PractitionerOut`",
         "`class PractitionerDefaultLocationOut`",
         "`app/services/practice/practitioner_directory_read.py`",
@@ -112,24 +110,28 @@ def test_pre_code_readiness_checklist_requires_yuri_and_current_absence():
         assert phrase in compact
 
     for fragment in [
-        '@router.get("/practice/practitioners"',
         '@router.get("/practitioners"',
-        "def list_practitioners",
         "def get_practitioners",
         "class PractitionerOut",
         "class PractitionerDefaultLocationOut",
+        "practitioner_directory_read",
+    ]:
+        assert fragment in app_text
+    for fragment in [
+        '@router.get("/practice/practitioners"',
+        "def list_practitioners",
         "class PractitionerDirectory",
         "Query.practice.practitioners",
     ]:
         assert fragment not in app_text
-    assert not (APP / "services" / "practice").exists()
+    assert (APP / "services" / "practice" / "practitioner_directory_read.py").exists()
 
 
 def test_future_schema_slice_is_minimal_and_sensitive_fields_excluded():
     text = _read(PACKET)
 
     for phrase in [
-        "Future file: `app/schemas/practice.py`",
+        "Implemented file: `app/schemas/practice.py`",
         "class PractitionerDefaultLocationOut",
         "class PractitionerOut",
         "displayName",
@@ -168,7 +170,7 @@ def test_future_read_service_slice_captures_tenancy_pagination_location_and_no_s
     compact = _compact(_read(PACKET))
 
     for phrase in [
-        "Future file: `app/services/practice/practitioner_directory_read.py`",
+        "Implemented file: `app/services/practice/practitioner_directory_read.py`",
         "`Practitioner.practice_id == current_user.practice_id`",
         "`activeOnly=true` as the default filter",
         "`activeOnly=false` restricted to `Admin` or `PracticeOwner`",
@@ -196,12 +198,12 @@ def test_future_read_service_slice_captures_tenancy_pagination_location_and_no_s
         assert phrase in compact
 
 
-def test_future_rest_route_slice_is_explicit_but_current_code_absent():
+def test_rest_route_slice_is_explicit_and_current_code_matches_bounded_surface():
     text = _read(PACKET)
     app_text = _app_python_text()
 
     for phrase in [
-        "Future file: `app/routers/practice.py`",
+        "Implemented file: `app/routers/practice.py`",
         "router prefix: `/api/v1/practice`",
         "route: `GET /practitioners`",
         "full path: `GET /api/v1/practice/practitioners`",
@@ -216,12 +218,17 @@ def test_future_rest_route_slice_is_explicit_but_current_code_absent():
         assert phrase in text
 
     for fragment in [
-        "app/routers/practice.py",
         "PractitionerOut",
         "PractitionerDefaultLocationOut",
         "practitioner_directory_read",
-        "list_practitioners",
         "get_practitioners",
+    ]:
+        assert fragment in app_text
+    for fragment in [
+        '@router.get("/practice/practitioners"',
+        "list_practitioners",
+        "class PractitionerDirectory",
+        "Query.practice.practitioners",
     ]:
         assert fragment not in app_text
 

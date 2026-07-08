@@ -73,12 +73,13 @@ Before any runtime code is written, a route implementation sprint must prove:
 3. `docs/api-spine/practitioner-directory-route-schema-ownership-candidate.md`
    still has candidate/evidence posture only and no `approved` or `implemented`
    ownership rows.
-4. No current router declares `@router.get("/practice/practitioners"`,
-   `@router.get("/practitioners"`, `def list_practitioners`, or
-   `def get_practitioners`.
-5. No current schema declares `class PractitionerOut`,
-   `class PractitionerDefaultLocationOut`, or `class PractitionerDirectory`.
-6. No current production service path declares
+4. The only approved router surface is `@router.get("/practitioners"` inside
+   the `/api/v1/practice` router; there is no
+   `@router.get("/practice/practitioners"` duplicate and no detail route.
+5. The only approved schema objects are `class PractitionerOut` and
+   `class PractitionerDefaultLocationOut`; there is no
+   `class PractitionerDirectory`.
+6. The only approved production service path is
    `app/services/practice/practitioner_directory_read.py`.
 7. No current GraphQL runtime dependency, resolver, or query wiring exists for
    `Query.practice.practitioners`.
@@ -91,15 +92,17 @@ Before any runtime code is written, a route implementation sprint must prove:
 If any pre-code check fails, the sprint engine must stop the route-code attempt
 and report the drift instead of continuing on momentum.
 
-## Future Implementation Slices
+## Implemented REST First Slice
 
-These slices are a future route-code plan only.
+These slices were implemented under the approved REST first-slice gate only.
+They do not open SDL, GraphQL, provider, memory, write, deployment, or readiness
+gates.
 
 ### Slice A - Directory Response Schemas
 
-Future file: `app/schemas/practice.py`
+Implemented file: `app/schemas/practice.py`
 
-Allowed future objects after explicit go/no-go:
+Allowed objects after explicit go/no-go:
 
 ```python
 class PractitionerDefaultLocationOut(BaseModel):
@@ -133,7 +136,7 @@ Rules:
 
 ### Slice B - Shared Read Service
 
-Future file: `app/services/practice/practitioner_directory_read.py`
+Implemented file: `app/services/practice/practitioner_directory_read.py`
 
 The service is the sole data path for the REST route and any later GraphQL
 facade. It must own:
@@ -172,7 +175,7 @@ facade. It must own:
 
 ### Slice C - REST Route And Mount
 
-Future file: `app/routers/practice.py`
+Implemented file: `app/routers/practice.py`
 
 Future route:
 
@@ -190,14 +193,14 @@ Future route:
 - cross-practice data: silently absent through the practice filter;
 - no `GET /api/v1/practice/practitioners/{id}` detail route.
 
-Mounting the router in `app/main.py` is part of the future REST slice only after
-explicit go/no-go.
+Mounting the router in `app/main.py` is part of the implemented REST slice
+under the explicit go/no-go.
 
 ### Slice D - Runtime Test Matrix
 
-The future route implementation must arrive with tests before merge. The union
-of Sprint 227 and Sprint 230 requirements should be de-duplicated into a single
-runtime suite proving:
+The route implementation arrived with tests before merge. The union of Sprint
+227 and Sprint 230 requirements was de-duplicated into a single runtime suite
+proving:
 
 1. `test_auth_denial_returns_401`
 2. `test_invalid_token_returns_401`

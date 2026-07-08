@@ -188,7 +188,7 @@ def test_shared_read_service_invariants_are_defined_but_not_implemented():
         "no write authority",
     ]:
         assert phrase in text
-    assert not (APP / "services" / "practice").exists()
+    assert (APP / "services" / "practice" / "practitioner_directory_read.py").exists()
 
 
 def test_sensitive_exclusion_parity_is_canonical():
@@ -240,17 +240,21 @@ def test_active_only_pagination_ordering_and_error_parity_defined():
         assert phrase in compact
 
 
-def test_current_code_has_no_route_schema_service_or_resolver():
+def test_current_code_has_rest_slice_but_no_graphql_resolver():
     app_text = _app_python_text()
 
-    assert not (APP / "routers" / "practice.py").exists()
-    assert not (APP / "schemas" / "practice.py").exists()
-    assert not (APP / "services" / "practice").exists()
+    assert (APP / "routers" / "practice.py").exists()
+    assert (APP / "schemas" / "practice.py").exists()
+    assert (APP / "services" / "practice" / "practitioner_directory_read.py").exists()
     for fragment in [
         "class PractitionerOut",
         "class PractitionerDefaultLocationOut",
-        "def list_practitioners",
         "def get_practitioners",
+        "def list_practitioner_directory",
+    ]:
+        assert fragment in app_text
+    for fragment in [
+        "def list_practitioners",
         "Query.practice.practitioners",
         "@strawberry.field",
         "ObjectType(\"Practice\")",

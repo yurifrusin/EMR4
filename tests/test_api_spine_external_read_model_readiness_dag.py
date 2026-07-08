@@ -144,7 +144,7 @@ def test_external_read_model_readiness_dag_approval_gate_blocks_rest_route():
         in edges[("combined_readiness_review", "practitioner_directory_approval_gate")]
     )
     assert (
-        "Yuri approved only the REST first slice; route readiness remains blocked until implementation and runtime tests pass"
+        "Yuri approved only the REST first slice; route readiness remains blocked until a separate readiness/deployment review changes it"
         == edges[("practitioner_directory_approval_gate", "rest_route_wiring")]
     )
     assert ("combined_readiness_review", "rest_route_wiring") not in edges

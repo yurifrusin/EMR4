@@ -234,17 +234,21 @@ def test_future_runtime_sdl_tests_are_listed():
         assert phrase in text
 
 
-def test_current_code_has_no_sdl_runtime_route_schema_service_or_resolver_changes():
+def test_current_code_has_rest_slice_but_no_sdl_or_graphql_resolver_changes():
     app_text = _app_python_text()
 
-    assert not (APP / "routers" / "practice.py").exists()
-    assert not (APP / "schemas" / "practice.py").exists()
-    assert not (APP / "services" / "practice").exists()
+    assert (APP / "routers" / "practice.py").exists()
+    assert (APP / "schemas" / "practice.py").exists()
+    assert (APP / "services" / "practice" / "practitioner_directory_read.py").exists()
     for fragment in [
         "class PractitionerOut",
         "class PractitionerDefaultLocationOut",
-        "def list_practitioners",
         "def get_practitioners",
+        "def list_practitioner_directory",
+    ]:
+        assert fragment in app_text
+    for fragment in [
+        "def list_practitioners",
         "Query.practice.practitioners",
         "@strawberry.field",
         "import strawberry",
