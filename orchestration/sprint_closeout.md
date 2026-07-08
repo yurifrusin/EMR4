@@ -24,6 +24,82 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 220 API Spine Combined External Readiness Review |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 220 What Changed
+
+- Added `docs/api-spine/external-read-model-combined-readiness-review.md`, a
+  static combined review over the external gap inventory, aggregate gap status
+  checker, practitioner/reminder/message design packets, directory
+  source/licensing review, and directory read-shape design.
+- The combined review records every readiness field as `false` and the overall
+  decision as `blocked`, while `sprint_engine_state` remains `continuing` and
+  `pause_required` remains `false`.
+- Documented the still-blocked implementation prerequisites for REST routes,
+  GraphQL resolvers, RACGP/Cochrane source manifests, provider/runtime
+  boundaries, security review, and migration/deployment readiness.
+- Updated `docs/api-spine/external-read-model-readiness-dag.json` so
+  `combined_readiness_review` is `static_complete` and points to the new
+  artifact, while `rest_route_wiring`, `graphql_resolver_wiring`, and
+  `provider_memory_external_clients` remain blocked.
+- Added `tests/test_api_spine_external_read_model_combined_readiness_review.py`
+  and updated DAG/design tests to preserve the new completed static checkpoint
+  and downstream blocked runtime posture.
+
+Worker mix:
+
+- Claude was not used because this was a static combined readiness checkpoint,
+  not a budget-heavy architecture or implementation lane.
+- Antigravity was not used because the sprint had no UI/workflow artifact or
+  frontend/product interaction surface.
+- DeepSeek/Shen was used as the independent sidecar review lane and identified
+  the pre-sprint combined-review gap, stale DAG sprint metadata, and future
+  status-checker/root-disjunction follow-ups.
+- Sprint start reported zero open reusable DeepSeek lanes. A fresh DeepSeek
+  worker was spawned, completed, and was closed; no reusable DeepSeek lane
+  remains open at closeout.
+- No extra DeepSeek substitution was needed because Claude and Antigravity were
+  intentionally stood down for scope, not unavailable due usage limits.
+
+Boundary:
+
+- Static combined readiness documentation, readiness DAG status update, and
+  tests only.
+- No source ingestion, no source manifest approved as runtime configuration, no
+  scraping, no live lookup, no route, no resolver, no schema, no provider call,
+  no provider dry-run, no Access AI invocation, no RAG/GraphRAG/memory wiring,
+  no H15/H-series runtime import, no broad historical diary trove mining, no
+  external patient client, no runtime FGA client, no clinical decision support
+  runtime, no write authority, no model-to-database write authority, and no raw
+  compatibility deprecation mode change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check -- docs\api-spine\external-read-model-combined-readiness-review.md tests\test_api_spine_external_read_model_combined_readiness_review.py docs\api-spine\external-read-model-readiness-dag.json tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py
+```
+
+Result: focused combined review/DAG suite `11 passed`; broader external
+read-model static suite `72 passed`; whitespace check clean.
+
+Implementation commit: `c055387e`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a script-plus-snapshot readiness checker that
+includes combined-review state and root-inventory disjunction, or an explicit
+implementation-planning review before any runtime route/resolver work.
+
+---
+
+## Previous Closeout - Sprint 219
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 219 API Spine Directory Read-Shape Design |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |
@@ -38,84 +114,11 @@ Every closeout entry should record:
   future manifest-backed sources, sanitized queries, bounded summaries,
   synthetic stable IDs, citation metadata, freshness, and fail-closed
   unavailable states.
-- Consumed Sprint 218's source/licensing review without claiming source
-  manifest approval, licence approval, provider readiness, route readiness,
-  clinical-safety approval, or patient-facing readiness.
-- Updated `docs/api-spine/external-read-model-readiness-dag.json` so
-  `directory_read_shape_design` is `design_complete_no_runtime`, while combined
-  readiness and all runtime/provider/route/resolver gates remain blocked.
-- Added `tests/test_api_spine_directory_read_shape_design.py` and updated DAG
-  tests to guard the new static artifact and blocked runtime posture.
-
-Worker mix:
-
-- Claude was not used because this was a narrow static API Spine design
-  packet, not a budget-heavy architecture or implementation lane.
-- Antigravity was not used because the sprint had no UI/workflow artifact or
-  frontend/product interaction surface.
-- DeepSeek/Shen was used as the independent sidecar review lane and confirmed
-  the design should emphasize source-manifest gaps, synthetic ID posture, and
-  no backing RACGP/Cochrane model.
-- Sprint start reported zero open reusable DeepSeek lanes. A fresh DeepSeek
-  worker was spawned, completed, and was closed; no reusable DeepSeek lane
-  remains open at closeout.
-- No extra DeepSeek substitution was needed because Claude and Antigravity were
-  intentionally stood down for scope, not unavailable due usage limits.
-
-Boundary:
-
-- Static read-shape documentation, readiness DAG status update, and tests only.
-- No source ingestion, no source manifest approved as runtime configuration, no
-  scraping, no live lookup, no route, no resolver, no schema, no provider call,
-  no provider dry-run, no Access AI invocation, no RAG/GraphRAG/memory wiring,
-  no H15/H-series runtime import, no broad historical diary trove mining, no
-  external patient client, no runtime FGA client, no clinical decision support
-  runtime, no write authority, no model-to-database write authority, and no raw
-  compatibility deprecation mode change.
-
-Verification:
-
-```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_external_read_model_readiness_dag.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check -- docs\api-spine\directory-read-shape-design.md tests\test_api_spine_directory_read_shape_design.py docs\api-spine\external-read-model-readiness-dag.json tests\test_api_spine_external_read_model_readiness_dag.py
-```
-
-Result: focused directory design/DAG suite `13 passed`; broader external
-read-model static suite `67 passed`; whitespace check clean.
-
-Implementation commit: `63d67c8`.
-
-Sprint engine state: continuing after push. No user intervention is required;
-next recommended direction is a non-runtime combined external read-model
-readiness review over the now-complete static design/source packets, or the
-script-plus-snapshot external readiness checker.
-
----
-
-## Previous Closeout - Sprint 218
-
-| Item | Value |
-|---|---|
-| Batch | Sprint 218 API Spine Directory Source Licensing Review |
-| Integrated through | Ariadne implementation with DeepSeek sidecar review |
-| Status | Integrated and pushed |
-| Last updated | 2026-07-08 |
-
-## Sprint 218 What Changed
-
-- Added `docs/api-spine/directory-source-licensing-review.md`, a static
-  source/licensing review packet for `Query.directorySearch.RACGP_GUIDELINES`
-  and `Query.directorySearch.COCHRANE_LIBRARY`.
-- Recorded RACGP as blocked pending source-manifest review and Cochrane as
-  historical Wiley/AWS research provenance only, with no approved licence,
-  entitlement, adapter, table, manifest, or route.
-- Defined minimum source-manifest fields and completion criteria, then updated
-  the DAG so `directory_source_review` is `static_complete` while directory
-  read-shape design remained blocked.
-- Verification: focused directory source/DAG suite `12 passed`; broader
-  external read-model static suite `60 passed`; whitespace check clean.
-- Implementation commit: `5dfea6cd`.
+- Updated the DAG so `directory_read_shape_design` is
+  `design_complete_no_runtime`, while combined readiness remained blocked.
+- Verification: focused directory design/DAG suite `13 passed`; broader
+  external read-model static suite `67 passed`; whitespace check clean.
+- Implementation commit: `63d67c8`.
 
 ---
 
