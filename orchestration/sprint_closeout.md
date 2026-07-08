@@ -24,44 +24,45 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 229 API Spine Practitioner Directory REST/GraphQL Drift Contract |
+| Batch | Sprint 230 API Spine Practitioner Directory Security/Audit Test Harness Preflight |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
 | Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
-## Sprint 229 What Changed
+## Sprint 230 What Changed
 
 - Added
-  `docs/api-spine/practitioner-directory-rest-graphql-drift-contract.md`,
-  a static parity contract between the future REST `PractitionerOut` and future
-  GraphQL `Practitioner` projection.
+  `docs/api-spine/practitioner-directory-security-audit-test-harness-preflight.md`,
+  a static security/audit preflight for the future first REST practitioner
+  directory route.
 - Added
-  `tests/test_api_spine_practitioner_directory_rest_graphql_drift_contract.py`,
-  guarding the canonical five-field projection, SDL field parity, known blocked
-  drift findings, shared read-service invariants, sensitive-field parity,
-  `activeOnly`/pagination/order/error parity, current non-implementation state,
-  readiness snapshot, and closed gates.
-- The contract marks two current mismatches as known and blocked before runtime:
-  `defaultLocation` currently points to full SDL `PracticeLocation` rather than
-  the REST `{id, name}` directory shape, and GraphQL lacks pagination arguments
-  despite the REST `limit=50`, max `200`, `offset=0` contract.
+  `tests/test_api_spine_practitioner_directory_security_audit_preflight.py`,
+  guarding the gate verdict, existing OAuth2/get-current-user dependency,
+  active-user filtering, inactive admin gate, tenancy/anti-enumeration posture,
+  no `AppointmentAuditLog` write posture, future RLS/field-encryption/rate-limit
+  posture, no-write/no-provider assertions, required runtime test names, current
+  non-implementation state, readiness snapshot, and closed gates.
+- The preflight records that the future route is a read-only operational
+  directory: no idempotency key, no staff-confirmation payload, no appointment
+  audit write, and no provider/Access AI/RAG/GraphRAG/H15/trove involvement.
 - Runtime state remains blocked: no REST route, no GraphQL dependency/resolver,
-  no SDL change, no runtime schema, no shared read service, no database query,
-  no provider, no memory/RAG/GraphRAG, no H15/H-series runtime import, no
-  external client, no GraphQL mutation, and no write authority.
+  no SDL change, no runtime schema, no shared read service, no database query or
+  migration, no audit write, no provider, no memory/RAG/GraphRAG, no H15/H-series
+  runtime import, no external client, no GraphQL mutation, and no write authority.
 
 Worker mix:
 
 - Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
   It hit the budget cap but left a useful uncommitted review artifact; Ariadne
-  incorporated its canonical parity matrix and shared read-service drift rules.
+  incorporated its auth dependency, active-user, permission-matrix, audit, and
+  SEC-1 role-naming drift observations.
 - Antigravity was called through the `agy.exe` CLI and produced a tangible
-  review artifact emphasizing API consumer/privacy risks, especially
-  `defaultLocation` shape mismatch and missing GraphQL pagination arguments. It
-  also edited its worker `AGENTS.md`, which was not merged directly.
+  review artifact emphasizing consumer/privacy/security tests, correlation
+  posture, RLS/rate-limit/field-encryption future posture, and no-write/provider
+  assertions.
 - DeepSeek was called through direct Codex `deepseek-worker` spawning and
-  recommended the drift contract, known-blocked drift gates, and static test
-  matrix. The lane was closed after output capture.
+  recommended the static security/audit preflight contract and test matrix. The
+  lane was closed after output capture.
 - Worker cleanliness was checked during the sprint. Integration was clean at
   start; Claude and Antigravity were clean at sprint start; Claude and
   Antigravity produced hand-in artifacts during the sprint; DeepSeek has zero
@@ -69,10 +70,11 @@ Worker mix:
 
 Boundary:
 
-- Static drift-contract documentation and tests only.
+- Static security/audit preflight documentation and tests only.
 - No REST route, no GraphQL runtime dependency, no GraphQL resolver, no GraphQL
   mutation, no SDL change, no runtime schema, no database query/join/migration,
-  no shared read service, no provider call, no provider dry-run, no Access AI
+  no shared read service, no audit write/migration, no rate-limiter, no field
+  encryption, no RLS policy, no provider call, no provider dry-run, no Access AI
   invocation, no RAG/GraphRAG/memory wiring, no H15/H-series runtime import, no
   broad historical diary trove mining, no external patient client, no runtime
   FGA client, no write authority, no model-to-database write authority, and no
@@ -81,20 +83,43 @@ Boundary:
 Verification:
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_security_audit_preflight.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_security_audit_preflight.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
 git diff --check
 ```
 
-Result so far: focused drift contract suite `12 passed`; broader external
-read-model static suite `148 passed`; whitespace check clean.
+Result so far: focused security/audit preflight suite `14 passed`; broader
+external read-model static suite `162 passed`; whitespace check clean.
 
-Implementation commit: `ad58563a`.
+Implementation commit: `aa48ccfc`.
 
 Sprint engine state: continuing after push unless Yuri chooses to give the
 explicit first-route implementation go/no-go. Next safe direction without that
-decision is another plan-only preflight, such as first-route security/audit
-test harness or SDL pagination/default-location resolution proposal.
+decision is another plan-only preflight, such as SDL pagination/default-location
+resolution proposal or route implementation task breakdown.
+
+---
+
+## Previous Closeout - Sprint 229
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 229 API Spine Practitioner Directory REST/GraphQL Drift Contract |
+| Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 229 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-rest-graphql-drift-contract.md`, a
+  static parity contract between the future REST `PractitionerOut` and future
+  GraphQL `Practitioner` projection.
+- Added
+  `tests/test_api_spine_practitioner_directory_rest_graphql_drift_contract.py`.
+- Verification: focused drift contract suite `12 passed`; broader external
+  read-model static suite `148 passed`; whitespace check clean.
+- Implementation commit: `ad58563a`; closeout commit `b08e89a1`.
 
 ---
 
