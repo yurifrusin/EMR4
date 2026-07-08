@@ -912,6 +912,89 @@ function hasBernieSelectedSlotEvidence(payload) {
   );
 }
 
+function bernieUiViewModelFromPayload(payload) {
+  const viewModel = payload?.ui_view_model || payload?.bernie_ui_view_model || null;
+  if (!viewModel || typeof viewModel !== "object") {
+    return null;
+  }
+  if (viewModel.schema_version !== "bernie.ui_view_model.v1") {
+    return null;
+  }
+  if (!viewModel.flags || typeof viewModel.flags !== "object") {
+    return null;
+  }
+  return viewModel;
+}
+
+function bernieUiNodeValue(viewModel, key) {
+  const node = viewModel?.[key];
+  return typeof node?.value === "string" ? node.value : "";
+}
+
+function attachBernieUiViewModelToStaffReview(data, payload) {
+  if (!payload || typeof payload !== "object") {
+    return payload;
+  }
+  const viewModel = data?.ui_view_model || data?.bernie_ui_view_model || data?.staff_review?.ui_view_model;
+  if (viewModel && typeof viewModel === "object") {
+    payload.ui_view_model = viewModel;
+  }
+  return payload;
+}
+
+function bernieReviewTransitionFromViewModel(payload, viewModel, candidateSlots, suggestions) {
+  const flags = viewModel.flags || {};
+  const confirmation = bernieUiNodeValue(viewModel, "confirmation_state");
+  const candidate = bernieUiNodeValue(viewModel, "candidate_state");
+  const proposal = bernieUiNodeValue(viewModel, "proposal_state");
+  const clarification = bernieUiNodeValue(viewModel, "clarification_state");
+  const copyMode = bernieUiNodeValue(viewModel, "copy_mode");
+  const freshness = bernieUiNodeValue(viewModel, "freshness_state");
+
+  let state = "blocked";
+  if (confirmation === "confirmed" || copyMode === "success" || flags.show_success_copy === true) {
+    state = "confirmed";
+  } else if (flags.show_stale_warning === true || freshness === "stale" || confirmation === "stale") {
+    state = "stale";
+  } else if (confirmation === "failed") {
+    state = "failed";
+  } else if (confirmation === "pressed" || confirmation === "awaiting_backend") {
+    state = "confirmation_pending";
+  } else if (flags.show_confirm_button === true || confirmation === "ready") {
+    state = "confirmation_ready";
+  } else if (flags.show_candidate_slots === true || candidate === "available") {
+    state = candidateSlots.length > 0 ? "candidate_selection_required" : "no_selectable_candidates";
+  } else if (flags.show_no_slot_suggestions === true || candidate === "empty_after_search" || copyMode === "no_slots") {
+    state = "no_slots";
+  } else if (
+    flags.show_clarification_prompt === true ||
+    flags.show_identity_verification_panel === true ||
+    clarification === "required" ||
+    clarification === "identity_ambiguous"
+  ) {
+    state = "clarification";
+  } else if (proposal === "blocked" || confirmation === "blocked" || copyMode === "blocked") {
+    state = "blocked";
+  }
+
+  return {
+    state,
+    canShowCandidates: flags.show_candidate_slots === true && candidateSlots.length > 0,
+    canShowNoSlots: flags.show_no_slot_suggestions === true || state === "no_slots",
+    candidateSlots,
+    suggestions,
+    uiViewModel: viewModel,
+    showPendingProposalCard: flags.show_pending_proposal_card === true,
+    showConfirmButton: flags.show_confirm_button === true,
+    enableConfirmButton: flags.enable_confirm_button === true,
+    showChooseAnotherTime: flags.show_choose_another_time === true,
+    showSuccessCopy: flags.show_success_copy === true,
+    showStaleWarning: flags.show_stale_warning === true,
+    showRetryAction: flags.show_retry_action === true,
+    showEditAction: flags.show_edit_action === true
+  };
+}
+
 function bernieReviewTransition(payload) {
   const candidateSlots = Array.isArray(payload?.candidate_slots) ? payload.candidate_slots : [];
   const blocks = Array.isArray(payload?.blocks) ? payload.blocks : [];
@@ -925,6 +1008,17 @@ function bernieReviewTransition(payload) {
       candidateSlots,
       suggestions
     };
+  }
+
+  const uiViewModel = bernieUiViewModelFromPayload(payload);
+  if (uiViewModel) {
+    const viewModelTransition = bernieReviewTransitionFromViewModel(payload, uiViewModel, candidateSlots, suggestions);
+    if (viewModelTransition.state === "confirmation_ready" && !isBernieConfirmReady(payload)) {
+      viewModelTransition.state = "blocked";
+      viewModelTransition.showConfirmButton = false;
+      viewModelTransition.enableConfirmButton = false;
+    }
+    return viewModelTransition;
   }
 
   let canShowCandidates = false;
@@ -1079,6 +1173,9 @@ function bernieReviewActionCopy(payload) {
   const explanationCopy = getScheduleExplanationCopy(payload);
   if (explanationCopy) {
     return explanationCopy.action;
+  }
+  if (transition.uiViewModel?.primary_copy) {
+    return transition.uiViewModel.primary_copy;
   }
   if (transition.state === "roster_unavailable") {
     return "I could not find a bookable session for that request. Tell me another day or practitioner to try.";
@@ -3067,7 +3164,7 @@ async function selectCandidate(slot, index) {
       const data = await res.json();
       captureBernieTurnRef(data);
       captureBernieServerSessionSnapshot(data);
-      const payload = data.staff_review;
+      const payload = attachBernieUiViewModelToStaffReview(data, data.staff_review);
       if (data.reception_policy) {
         payload.reception_policy = data.reception_policy;
       }
@@ -4800,6 +4897,53 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   actionEl.textContent = bernieReviewActionCopy(payload);
   contentEl.appendChild(actionEl);
 
+  if (transition.showSuccessCopy) {
+    const successCopy = document.createElement("div");
+    successCopy.className = "bernie-success-alert";
+    successCopy.setAttribute("data-testid", "bernie-success-copy");
+    successCopy.textContent = transition.uiViewModel?.primary_copy || "Booking confirmed.";
+    contentEl.appendChild(successCopy);
+  }
+
+  if (transition.showStaleWarning) {
+    const staleWarning = document.createElement("div");
+    staleWarning.className = "bernie-notice-alert";
+    staleWarning.setAttribute("data-testid", "bernie-stale-warning");
+    staleWarning.textContent = transition.uiViewModel?.secondary_copy || "This proposal needs to be refreshed before it can be confirmed.";
+    contentEl.appendChild(staleWarning);
+  }
+
+  if (transition.showRetryAction || transition.showEditAction) {
+    const recoveryActions = document.createElement("div");
+    recoveryActions.className = "bernie-recovery-actions";
+    if (transition.showRetryAction) {
+      const retryBtn = document.createElement("button");
+      retryBtn.type = "button";
+      retryBtn.className = "btn-bernie-retry";
+      retryBtn.setAttribute("data-testid", "bernie-retry-button");
+      retryBtn.textContent = "Try again";
+      retryBtn.addEventListener("click", () => {
+        renderBernieReview(null);
+      });
+      recoveryActions.appendChild(retryBtn);
+    }
+    if (transition.showEditAction) {
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.className = "btn-bernie-edit";
+      editBtn.setAttribute("data-testid", "bernie-edit-button");
+      editBtn.textContent = "Edit request";
+      editBtn.addEventListener("click", () => {
+        const instruction = document.getElementById("bernie-pilot-instruction");
+        if (instruction) {
+          instruction.focus();
+        }
+      });
+      recoveryActions.appendChild(editBtn);
+    }
+    contentEl.appendChild(recoveryActions);
+  }
+
   // Notices / alerts (first-person phrasing)
   const allWarnings = [
     ...(payload.warnings || []),
@@ -4880,7 +5024,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   renderBerniePracticeKnowledgeAdvisories(contentEl, payload, interpretEnvelope);
 
   // 4. Content Section depending on Status
-  if ((payload.status === "blocked" || payload.status === "clinic_day_exhausted") && transition.state !== "roster_unavailable" && transition.state !== "no_slots") {
+  if ((transition.state === "blocked" || transition.state === "clinic_day_exhausted") && transition.state !== "roster_unavailable" && transition.state !== "no_slots") {
     const isDevOrDebug = isBernieDevOrDebug();
     const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
 
@@ -4955,7 +5099,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     blocksContainer.appendChild(list);
     contentEl.appendChild(blocksContainer);
   }
-  else if (payload.status === "candidate_selection_required" || transition.state === "roster_unavailable" || transition.state === "no_slots") {
+  else if (transition.canShowCandidates || payload.status === "candidate_selection_required" || transition.state === "roster_unavailable" || transition.state === "no_slots") {
     const candidatesContainer = document.createElement("div");
     candidatesContainer.className = "bernie-candidates-container";
 
@@ -6142,7 +6286,7 @@ async function loadBernieLiveReview() {
       const data = await res.json();
       captureBernieTurnRef(data);
       captureBernieServerSessionSnapshot(data);
-      payload = data.staff_review;
+      payload = attachBernieUiViewModelToStaffReview(data, data.staff_review);
       if (data.reception_policy) {
         payload.reception_policy = data.reception_policy;
       }

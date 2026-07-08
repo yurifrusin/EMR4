@@ -24,9 +24,84 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 240 Bernie UI Derived-State DAG D4 Consumer |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because the slice stayed bounded to one UI file and one existing Playwright harness |
+| Status | Integrated locally; pending commit and push |
+| Last updated | 2026-07-09 |
+
+## Sprint 240 What Changed
+
+- Added optional `bernie.ui_view_model.v1` consumption to the primary
+  `renderBernieReview` panel in `docs/diary/diary.js`.
+- Added a small response adapter that carries route-intercepted/root
+  `ui_view_model` data onto the existing `staff_review` display payload without
+  changing backend route schemas.
+- Let the view model drive display-only transitions for candidate slots,
+  proposal-ready, pressed/awaiting backend, stale, failed, and success states.
+- Preserved existing signed confirm authority: `isBernieConfirmReady`,
+  `confirm_endpoint`, `confirm_payload`, freshness IDs, evidence, and REST
+  submit logic remain the command surface.
+- Added stale warning, retry, edit, and success-copy DOM markers for D4 state
+  assertions.
+- Bumped `docs/diary/diary.html` from `diary.js?v=179` to `diary.js?v=180`.
+- Added route-intercepted Playwright coverage proving view-model precedence,
+  pending/stale/failed no-confirm behavior, recovery actions, and confirm
+  payload purity.
+
+Worker mix:
+
+- Claude worktree checked clean; Claude was not invoked because the
+  implementation remained bounded after local inspection.
+- Antigravity worktree checked clean; Antigravity was not invoked for the same
+  bounded-slice reason.
+- DeepSeek direct-spawn sidecar `Delta` reviewed the D4 risks and acceptance
+  checks; Ariadne integrated the payload-purity, precedence, and recovery-action
+  recommendations, then closed the lane. DeepSeek lane count returned to zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- `docs/diary/diary.js`, `docs/diary/diary.html`, and
+  `review/test_diary_smoke.py` only.
+- No backend route/schema/service change, no provider call, no Access AI
+  invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime import, no
+  historical diary/local_data import, no GraphQL resolver, and no new write
+  authority.
+
+Verification:
+
+```powershell
+node --check docs\diary\diary.js
+.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "ui_view_model or confirm_flow_harness"
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_view_model.py tests\test_bernie_ui_view_model_d4_preflight.py -q
+.venv\Scripts\python.exe scripts\check_frontend_versions.py
+.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py --junitxml=review\diary-review.xml -q
+git diff --check -- docs\diary\diary.js docs\diary\diary.html review\test_diary_smoke.py
+rg -n "ui_view_model|bernie_ui_view_model|copy_mode|confirmation_state|freshness_state|show_confirm_button|show_success_copy" docs\diary\diary.js review\test_diary_smoke.py
+```
+
+Result: JS syntax passed; focused route-intercepted D4/confirm-flow smoke
+cluster `11 passed`; Python selector + D4 preflight guards `23 passed`; frontend
+asset version check passed; full Diary route-intercepted Playwright harness
+passed and wrote `review/diary-review.xml`; whitespace check passed; static grep
+confirmed view-model field references are confined to the display adapter and
+payload-purity tests.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing only to a bounded post-D4 review or backend
+response-delivery gate decision; all backend/provider/GraphQL/write/memory/H15
+gates remain closed.
+
+---
+
+## Previous Closeout - Sprint 239
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 239 Diary/Bernie Playwright Evidence Protocol |
 | Integrated through | Ariadne direct implementation; no Claude/Antigravity/DeepSeek lanes used because this was a tiny protocol/test clarification requested before D4 UI wiring |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 239 What Changed

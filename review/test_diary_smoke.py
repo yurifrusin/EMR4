@@ -1528,6 +1528,56 @@ def _bernie_live_candidate_response():
     }
 
 
+def _bernie_ui_node(value, source="derived"):
+    return {"value": value, "source": source}
+
+
+def _bernie_ui_view_model(
+    *,
+    candidate_state="absent",
+    proposal_state="absent",
+    confirmation_state="not_applicable",
+    freshness_state="fresh",
+    identity_state="recognized",
+    clarification_state="none",
+    copy_mode="technical_details_only",
+    primary_copy="Review the booking details. No appointment has been made.",
+    secondary_copy=None,
+    flags=None,
+):
+    default_flags = {
+        "show_clarification_prompt": False,
+        "show_candidate_slots": False,
+        "show_no_slot_suggestions": False,
+        "show_pending_proposal_card": False,
+        "show_confirm_button": False,
+        "enable_confirm_button": False,
+        "show_choose_another_time": False,
+        "show_identity_verification_panel": False,
+        "show_success_copy": False,
+        "show_stale_warning": False,
+        "show_retry_action": False,
+        "show_edit_action": False,
+        "show_technical_details": False,
+    }
+    if flags:
+        default_flags.update(flags)
+    return {
+        "schema_version": "bernie.ui_view_model.v1",
+        "session_phase": _bernie_ui_node("proposal_preview", "server_snapshot"),
+        "clarification_state": _bernie_ui_node(clarification_state),
+        "candidate_state": _bernie_ui_node(candidate_state),
+        "proposal_state": _bernie_ui_node(proposal_state),
+        "confirmation_state": _bernie_ui_node(confirmation_state),
+        "freshness_state": _bernie_ui_node(freshness_state),
+        "identity_state": _bernie_ui_node(identity_state),
+        "copy_mode": _bernie_ui_node(copy_mode),
+        "flags": default_flags,
+        "primary_copy": primary_copy,
+        "secondary_copy": secondary_copy,
+    }
+
+
 def _bernie_session_snapshot(session_id="server-session-n6", revision=0, state="instruction_entry", stale_reason_code=None):
     return {
         "session_id": session_id,
@@ -1943,6 +1993,191 @@ def test_bernie_route_intercepted_confirm_flow_harness_success(diary_page):
         assert confirm_payloads[0]["selection_proposal"]["intent"] == "select_slot_for_create_proposal"
         assert confirm_payloads[0]["create_proposal"]["reason"] == "Follow-up"
         assert error_msg.is_hidden()
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_ui_view_model_proposal_ready_drives_display_without_payload_leak(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    response = _bernie_live_confirmation_response()
+    response["evidence_label"] = "route_intercepted"
+    response["staff_review"]["headline"] = "Legacy status disagrees with UI view model"
+    response["ui_view_model"] = _bernie_ui_view_model(
+        proposal_state="ready",
+        confirmation_state="ready",
+        copy_mode="not_booked_yet",
+        primary_copy="Review the booking details before confirming. No appointment has been made.",
+        flags={
+            "show_pending_proposal_card": True,
+            "show_confirm_button": True,
+            "enable_confirm_button": True,
+            "show_choose_another_time": True,
+        },
+    )
+
+    confirm_payloads = []
+
+    def handle_supervised_booking(route):
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(response))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1&selected_candidate_index=0")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        trigger_route_intercepted_bernie(diary_page)
+        diary_page.locator("[data-testid='bernie-review-status']").wait_for(state="visible", timeout=5000)
+
+        assert diary_page.locator("[data-testid='bernie-review-candidate-item']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 1
+        confirm_btn = diary_page.locator("[data-testid='bernie-review-confirm-button']")
+        confirm_btn.wait_for(state="visible", timeout=5000)
+        assert confirm_btn.is_enabled()
+        assert "No appointment has been made" in diary_page.locator("[data-testid='bernie-review-action']").text_content()
+
+        confirm_btn.click()
+        assert_bernie_confirmed_state(diary_page)
+
+        assert len(confirm_payloads) == 1
+        serialized_payload = json.dumps(confirm_payloads[0])
+        forbidden_view_model_fields = [
+            "copy_mode",
+            "confirmation_state",
+            "freshness_state",
+            "flags",
+            "primary_copy",
+            "secondary_copy",
+            "show_confirm_button",
+            "show_success_copy",
+        ]
+        for field in forbidden_view_model_fields:
+            assert field not in serialized_payload
+        assert confirm_payloads[0]["selection_proposal"]["intent"] == "select_slot_for_create_proposal"
+        assert confirm_payloads[0]["create_proposal"]["reason"] == "Follow-up"
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_ui_view_model_candidate_slots_win_over_legacy_blocked_status(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    response = _bernie_live_candidate_response()
+    response["evidence_label"] = "route_intercepted"
+    response["staff_review"]["status"] = "blocked"
+    response["staff_review"]["blocks"] = []
+    response["ui_view_model"] = _bernie_ui_view_model(
+        candidate_state="available",
+        copy_mode="offer",
+        primary_copy="Choose an available time. No appointment has been made.",
+        flags={"show_candidate_slots": True},
+    )
+
+    confirm_payloads = []
+
+    def handle_supervised_booking(route):
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(response))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected write"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        trigger_route_intercepted_bernie(diary_page)
+        diary_page.locator("[data-testid='bernie-review-status']").wait_for(state="visible", timeout=5000)
+
+        assert diary_page.locator("[data-testid='bernie-review-candidate-item']").count() == 1
+        assert "09:00:00" in diary_page.locator("[data-testid='bernie-review-candidate-item']").text_content()
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert len(confirm_payloads) == 0
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+@pytest.mark.parametrize(
+    ("confirmation_state", "expected_marker"),
+    [
+        ("pressed", None),
+        ("awaiting_backend", None),
+        ("stale", "bernie-stale-warning"),
+        ("failed", "bernie-retry-button"),
+    ],
+)
+def test_bernie_ui_view_model_non_ready_states_do_not_show_confirm_or_success(diary_page, confirmation_state, expected_marker):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    response = _bernie_live_confirmation_response()
+    response["evidence_label"] = "route_intercepted"
+    flags = {
+        "show_retry_action": confirmation_state in {"stale", "failed"},
+        "show_edit_action": confirmation_state in {"stale", "failed"},
+        "show_stale_warning": confirmation_state == "stale",
+    }
+    response["ui_view_model"] = _bernie_ui_view_model(
+        proposal_state="ready",
+        confirmation_state=confirmation_state,
+        freshness_state="stale" if confirmation_state == "stale" else "fresh",
+        copy_mode="stale_or_retry" if confirmation_state in {"stale", "failed"} else "not_booked_yet",
+        primary_copy="Review the booking details. No appointment has been made.",
+        secondary_copy="Refresh this proposal before confirming.",
+        flags=flags,
+    )
+
+    confirm_payloads = []
+
+    def handle_supervised_booking(route):
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(response))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected write"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1&selected_candidate_index=0")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        trigger_route_intercepted_bernie(diary_page)
+        diary_page.locator("[data-testid='bernie-review-status']").wait_for(state="visible", timeout=5000)
+
+        action_text = diary_page.locator("[data-testid='bernie-review-action']").text_content().lower()
+        assert "booked" not in action_text
+        assert "confirmed" not in action_text
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-success-copy']").count() == 0
+        if expected_marker:
+            assert diary_page.locator(f"[data-testid='{expected_marker}']").is_visible()
+            assert diary_page.locator("[data-testid='bernie-edit-button']").is_visible()
+        assert len(confirm_payloads) == 0
     finally:
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
         diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
