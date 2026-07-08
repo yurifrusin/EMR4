@@ -24,43 +24,38 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 218 API Spine Directory Source Licensing Review |
+| Batch | Sprint 219 API Spine Directory Read-Shape Design |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
-## Sprint 218 What Changed
+## Sprint 219 What Changed
 
-- Added `docs/api-spine/directory-source-licensing-review.md`, a static
-  source/licensing review packet for `Query.directorySearch.RACGP_GUIDELINES`
-  and `Query.directorySearch.COCHRANE_LIBRARY`.
-- Recorded that RACGP remains blocked pending a source manifest and
-  source/licensing review, while Cochrane has historical Wiley/AWS research
-  provenance but no approved licence, entitlement, adapter, table, manifest, or
-  route.
-- Defined minimum future source-manifest fields: source type, licence status,
-  permitted use, audience policy, PHI policy, freshness, citation shape,
-  storage, and Australian privacy/CDSS notes.
-- Added explicit completion criteria for the static `directory_source_review`
-  prerequisite while stating that this does not approve either source for
-  runtime, licence, clinical, or patient-facing use.
+- Added `docs/api-spine/directory-read-shape-design.md`, a static read-shape
+  design packet for the reserved RACGP/Cochrane `Query.directorySearch`
+  surfaces.
+- Mapped `DirectorySearchResult`, `DirectoryEntry`, and `Citation` fields to
+  future manifest-backed sources, sanitized queries, bounded summaries,
+  synthetic stable IDs, citation metadata, freshness, and fail-closed
+  unavailable states.
+- Consumed Sprint 218's source/licensing review without claiming source
+  manifest approval, licence approval, provider readiness, route readiness,
+  clinical-safety approval, or patient-facing readiness.
 - Updated `docs/api-spine/external-read-model-readiness-dag.json` so
-  `directory_source_review` points to the new artifact and is `static_complete`,
-  then inserted a still-blocked `directory_read_shape_design` prerequisite
-  before combined readiness.
-- Added `tests/test_api_spine_directory_source_licensing_review.py` and updated
-  DAG tests to guard the new static artifact, blocked runtime posture, and
-  downstream gate ordering.
+  `directory_read_shape_design` is `design_complete_no_runtime`, while combined
+  readiness and all runtime/provider/route/resolver gates remain blocked.
+- Added `tests/test_api_spine_directory_read_shape_design.py` and updated DAG
+  tests to guard the new static artifact and blocked runtime posture.
 
 Worker mix:
 
-- Claude was not used because this was a narrow static source/licensing review
+- Claude was not used because this was a narrow static API Spine design
   packet, not a budget-heavy architecture or implementation lane.
 - Antigravity was not used because the sprint had no UI/workflow artifact or
   frontend/product interaction surface.
-- DeepSeek/Delta was used as the independent sidecar review lane and identified
-  the need to move `directory_source_review` out of future-node status while
-  adding a later blocked directory read-shape design node.
+- DeepSeek/Shen was used as the independent sidecar review lane and confirmed
+  the design should emphasize source-manifest gaps, synthetic ID posture, and
+  no backing RACGP/Cochrane model.
 - Sprint start reported zero open reusable DeepSeek lanes. A fresh DeepSeek
   worker was spawned, completed, and was closed; no reusable DeepSeek lane
   remains open at closeout.
@@ -69,8 +64,7 @@ Worker mix:
 
 Boundary:
 
-- Static source/licensing documentation, readiness DAG status update, and tests
-  only.
+- Static read-shape documentation, readiness DAG status update, and tests only.
 - No source ingestion, no source manifest approved as runtime configuration, no
   scraping, no live lookup, no route, no resolver, no schema, no provider call,
   no provider dry-run, no Access AI invocation, no RAG/GraphRAG/memory wiring,
@@ -82,46 +76,46 @@ Boundary:
 Verification:
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_external_read_model_readiness_dag.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check -- docs\api-spine\directory-source-licensing-review.md tests\test_api_spine_directory_source_licensing_review.py docs\api-spine\external-read-model-readiness-dag.json tests\test_api_spine_external_read_model_readiness_dag.py
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_external_read_model_readiness_dag.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check -- docs\api-spine\directory-read-shape-design.md tests\test_api_spine_directory_read_shape_design.py docs\api-spine\external-read-model-readiness-dag.json tests\test_api_spine_external_read_model_readiness_dag.py
 ```
 
-Result: focused directory source/DAG suite `12 passed`; broader external
-read-model static suite `60 passed`; whitespace check clean.
+Result: focused directory design/DAG suite `13 passed`; broader external
+read-model static suite `67 passed`; whitespace check clean.
 
-Implementation commit: `5dfea6cd`.
+Implementation commit: `63d67c8`.
 
 Sprint engine state: continuing after push. No user intervention is required;
-next recommended direction is a non-runtime RACGP/Cochrane directory read-shape
-design packet that consumes this review without claiming licence approval, or
-the script-plus-snapshot external readiness checker.
+next recommended direction is a non-runtime combined external read-model
+readiness review over the now-complete static design/source packets, or the
+script-plus-snapshot external readiness checker.
 
 ---
 
-## Previous Closeout - Sprint 217
+## Previous Closeout - Sprint 218
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 217 API Spine Patient Messages Read-Shape Design |
+| Batch | Sprint 218 API Spine Directory Source Licensing Review |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
-## Sprint 217 What Changed
+## Sprint 218 What Changed
 
-- Added `docs/api-spine/patient-messages-read-shape-design.md`, a static
-  design packet for the external `Query.patient.messages` /
-  `PatientMessageSummary` read shape.
-- Mapped current `InternalMessage` and `SmsLog` evidence to namespaced union
-  `id`, `sentAt`, `channel`, display-safe `summary`, and `status`, while
-  documenting the two-table union, email, enum, raw body, bulk SMS, ordering,
-  pagination, and authorization gaps.
-- Updated the readiness DAG so `patient_messages_design` is
-  `design_complete_no_runtime`, while combined readiness remained blocked.
-- Verification: focused patient messages suite `8 passed`; broader external
-  read-model static suite `45 passed`; whitespace check clean.
-- Implementation commit: `0529c67e`.
+- Added `docs/api-spine/directory-source-licensing-review.md`, a static
+  source/licensing review packet for `Query.directorySearch.RACGP_GUIDELINES`
+  and `Query.directorySearch.COCHRANE_LIBRARY`.
+- Recorded RACGP as blocked pending source-manifest review and Cochrane as
+  historical Wiley/AWS research provenance only, with no approved licence,
+  entitlement, adapter, table, manifest, or route.
+- Defined minimum source-manifest fields and completion criteria, then updated
+  the DAG so `directory_source_review` is `static_complete` while directory
+  read-shape design remained blocked.
+- Verification: focused directory source/DAG suite `12 passed`; broader
+  external read-model static suite `60 passed`; whitespace check clean.
+- Implementation commit: `5dfea6cd`.
 
 ---
 
