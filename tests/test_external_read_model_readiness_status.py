@@ -71,6 +71,10 @@ def test_readiness_status_does_not_authorize_runtime():
     assert status["combined_review_decision"] == "blocked"
     assert status["combined_readiness_review_status"] == "static_complete"
     assert status["blocked_runtime_gate_count"] == 3
+    assert status["approval_gate_node_count"] == 1
+    assert status["approval_gate_decision"] == "blocked"
+    assert status["approval_gate_artifact_present"] is True
+    assert status["approval_gate_runtime_authority"] is False
     assert status["runtime_authority_node_count"] == 0
     assert all(status[flag] is False for flag in READINESS_FLAGS)
     assert status["pause_required"] is False

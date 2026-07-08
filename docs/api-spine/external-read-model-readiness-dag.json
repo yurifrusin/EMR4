@@ -1,9 +1,9 @@
 {
   "schema_version": "api_spine.external_read_model_readiness_dag.v1",
   "date": "2026-07-08",
-  "sprint": 220,
+  "sprint": 234,
   "decision": "blocked",
-  "purpose": "Static DAG snapshot for external read-model readiness. It records documentation and review dependencies only; it does not create runtime graph execution, GraphRAG, REST routes, GraphQL resolvers, provider calls, database queries, or write authority.",
+  "purpose": "Static DAG snapshot for external read-model readiness. It records documentation, review, and approval-gate dependencies only; it does not create runtime graph execution, GraphRAG, REST routes, GraphQL resolvers, provider calls, database queries, readiness flag changes, or write authority. Sprint 234 adds the Sprint 233 practitioner-directory approval-decision draft as a static blocking gate before REST route wiring.",
   "readiness": {
     "external_read_model_runtime_ready": false,
     "graphql_resolver_ready": false,
@@ -68,6 +68,13 @@
       "kind": "review_gate",
       "status": "static_complete",
       "artifact": "docs/api-spine/external-read-model-combined-readiness-review.md",
+      "runtime_authority": false
+    },
+    {
+      "id": "practitioner_directory_approval_gate",
+      "kind": "approval_gate",
+      "status": "static_complete",
+      "artifact": "docs/api-spine/practitioner-directory-approval-decision.md",
       "runtime_authority": false
     },
     {
@@ -150,8 +157,13 @@
     },
     {
       "from": "combined_readiness_review",
+      "to": "practitioner_directory_approval_gate",
+      "reason": "combined readiness review identifies practitioner directory as first go/no-go candidate, feeding the Sprint 233 approval gate surface"
+    },
+    {
+      "from": "practitioner_directory_approval_gate",
       "to": "rest_route_wiring",
-      "reason": "route implementation remains blocked until explicit review"
+      "reason": "route implementation remains blocked until Sprint 233 gate is explicitly approved by Yuri"
     },
     {
       "from": "combined_readiness_review",
@@ -178,6 +190,9 @@
     "broad historical diary trove mining",
     "Access AI invocation wiring",
     "model-to-database writes outside REST command handlers",
-    "raw compatibility deprecation mode changes"
+    "raw compatibility deprecation mode changes",
+    "adding docs/api-spine/practitioner-directory-approved-gate.json without explicit Yuri approval",
+    "changing practitioner_directory_approval_gate decision from blocked to approved without explicit Yuri go/no-go",
+    "approving practitioner directory route implementation without passing the Sprint 233 evidence checklist"
   ]
 }

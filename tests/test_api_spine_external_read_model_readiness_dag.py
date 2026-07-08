@@ -14,6 +14,7 @@ EXPECTED_NODES = {
     "directory_source_review",
     "directory_read_shape_design",
     "combined_readiness_review",
+    "practitioner_directory_approval_gate",
     "rest_route_wiring",
     "graphql_resolver_wiring",
     "provider_memory_external_clients",
@@ -34,6 +35,9 @@ EXPECTED_CLOSED_GATES = {
     "Access AI invocation wiring",
     "model-to-database writes outside REST command handlers",
     "raw compatibility deprecation mode changes",
+    "adding docs/api-spine/practitioner-directory-approved-gate.json without explicit Yuri approval",
+    "changing practitioner_directory_approval_gate decision from blocked to approved without explicit Yuri go/no-go",
+    "approving practitioner directory route implementation without passing the Sprint 233 evidence checklist",
 }
 
 
@@ -69,8 +73,9 @@ def test_external_read_model_readiness_dag_has_expected_nodes_and_edges():
 
     assert dag["schema_version"] == "api_spine.external_read_model_readiness_dag.v1"
     assert dag["decision"] == "blocked"
+    assert dag["sprint"] >= 234
     assert node_ids == EXPECTED_NODES
-    assert len(edges) == 14
+    assert len(edges) == 15
     assert all(edge["from"] in node_ids and edge["to"] in node_ids for edge in edges)
     assert all(edge["from"] != edge["to"] for edge in edges)
 
@@ -119,6 +124,30 @@ def test_external_read_model_readiness_dag_artifacts_exist_or_are_blocked_future
         else:
             assert artifact
             assert (ROOT / artifact).exists()
+
+
+def test_external_read_model_readiness_dag_approval_gate_blocks_rest_route():
+    dag = _dag()
+    nodes = {node["id"]: node for node in dag["nodes"]}
+    edges = {(edge["from"], edge["to"]): edge["reason"] for edge in dag["edges"]}
+
+    gate = nodes["practitioner_directory_approval_gate"]
+    assert gate == {
+        "id": "practitioner_directory_approval_gate",
+        "kind": "approval_gate",
+        "status": "static_complete",
+        "artifact": "docs/api-spine/practitioner-directory-approval-decision.md",
+        "runtime_authority": False,
+    }
+    assert (
+        "combined readiness review identifies practitioner directory"
+        in edges[("combined_readiness_review", "practitioner_directory_approval_gate")]
+    )
+    assert (
+        "route implementation remains blocked until Sprint 233 gate is explicitly approved by Yuri"
+        == edges[("practitioner_directory_approval_gate", "rest_route_wiring")]
+    )
+    assert ("combined_readiness_review", "rest_route_wiring") not in edges
 
 
 def test_external_read_model_readiness_dag_closed_gates_are_complete():

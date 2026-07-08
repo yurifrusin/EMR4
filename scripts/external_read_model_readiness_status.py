@@ -37,7 +37,7 @@ STATUS_SCHEMA_VERSION = "api_spine.external_read_model_readiness_check.v1"
 GAP_STATUS_SCHEMA_VERSION = "api_spine.external_read_model_gap_status.v1"
 
 EXPECTED_DAG_SCHEMA_VERSION = "api_spine.external_read_model_readiness_dag.v1"
-EXPECTED_COMPLETED_NODE_COUNT = 8
+EXPECTED_COMPLETED_NODE_COUNT = 9
 EXPECTED_BLOCKED_RUNTIME_GATE_COUNT = 3
 EXPECTED_READY_FLAGS = {
     "external_read_model_runtime_ready": False,
@@ -175,14 +175,24 @@ def build_readiness_status(
     combined_nodes = [
         node for node in dag["nodes"] if node["id"] == "combined_readiness_review"
     ]
+    approval_gate_nodes = [
+        node for node in dag["nodes"] if node["id"] == "practitioner_directory_approval_gate"
+    ]
 
     assert len(completed_nodes) == EXPECTED_COMPLETED_NODE_COUNT
     assert len(runtime_gate_nodes) == EXPECTED_BLOCKED_RUNTIME_GATE_COUNT
     assert len(combined_nodes) == 1
+    assert len(approval_gate_nodes) == 1
     assert combined_nodes[0]["status"] == "static_complete"
     assert combined_nodes[0]["artifact"] == str(
         combined_review_path.relative_to(REPO_ROOT)
     ).replace("\\", "/")
+    assert approval_gate_nodes[0]["kind"] == "approval_gate"
+    assert approval_gate_nodes[0]["status"] == "static_complete"
+    assert approval_gate_nodes[0]["artifact"] == (
+        "docs/api-spine/practitioner-directory-approval-decision.md"
+    )
+    assert approval_gate_nodes[0]["runtime_authority"] is False
     assert all(node["status"] == "blocked" for node in runtime_gate_nodes)
     assert gap_status["closed_gate_count"] == len(REQUIRED_CLOSED_GATE_PHRASES)
     assert combined_review_status["combined_review_closed_gate_count"] >= gap_status[
@@ -199,6 +209,10 @@ def build_readiness_status(
         "blocked_runtime_gate_count": len(runtime_gate_nodes),
         "combined_readiness_review_status": combined_nodes[0]["status"],
         "combined_readiness_review_artifact_present": True,
+        "approval_gate_node_count": len(approval_gate_nodes),
+        "approval_gate_decision": "blocked",
+        "approval_gate_artifact_present": True,
+        "approval_gate_runtime_authority": approval_gate_nodes[0]["runtime_authority"],
         **combined_review_status,
         "dag_all_readiness_false": all(value is False for value in dag["readiness"].values()),
         "dag_static_node_count": len(completed_nodes),
