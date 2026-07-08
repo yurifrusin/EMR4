@@ -1,7 +1,7 @@
 {
   "schema_version": "api_spine.external_read_model_readiness_dag.v1",
   "date": "2026-07-08",
-  "sprint": 216,
+  "sprint": 218,
   "decision": "blocked",
   "purpose": "Static DAG snapshot for external read-model readiness. It records documentation and review dependencies only; it does not create runtime graph execution, GraphRAG, REST routes, GraphQL resolvers, provider calls, database queries, or write authority.",
   "readiness": {
@@ -52,14 +52,21 @@
     {
       "id": "directory_source_review",
       "kind": "source_and_licensing_review",
-      "status": "blocked_source_review_needed",
+      "status": "static_complete",
+      "artifact": "docs/api-spine/directory-source-licensing-review.md",
+      "runtime_authority": false
+    },
+    {
+      "id": "directory_read_shape_design",
+      "kind": "read_shape_design",
+      "status": "blocked_design_needed",
       "artifact": "",
       "runtime_authority": false
     },
     {
       "id": "combined_readiness_review",
       "kind": "review_gate",
-      "status": "blocked_pending_directory_source_review",
+      "status": "blocked_pending_directory_read_shape_design",
       "artifact": "",
       "runtime_authority": false
     },
@@ -112,6 +119,11 @@
       "reason": "directory gaps need source and licensing review before design"
     },
     {
+      "from": "directory_source_review",
+      "to": "directory_read_shape_design",
+      "reason": "directory source/licensing review must exist before read-shape design"
+    },
+    {
       "from": "external_gap_status_checker",
       "to": "combined_readiness_review",
       "reason": "aggregate blocked posture feeds readiness review"
@@ -132,9 +144,9 @@
       "reason": "messages design must exist before combined readiness"
     },
     {
-      "from": "directory_source_review",
+      "from": "directory_read_shape_design",
       "to": "combined_readiness_review",
-      "reason": "directory source/licensing review must exist before readiness"
+      "reason": "directory read-shape design must exist before readiness"
     },
     {
       "from": "combined_readiness_review",

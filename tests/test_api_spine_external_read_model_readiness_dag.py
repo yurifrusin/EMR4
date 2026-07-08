@@ -12,6 +12,7 @@ EXPECTED_NODES = {
     "patient_reminders_design",
     "patient_messages_design",
     "directory_source_review",
+    "directory_read_shape_design",
     "combined_readiness_review",
     "rest_route_wiring",
     "graphql_resolver_wiring",
@@ -69,7 +70,7 @@ def test_external_read_model_readiness_dag_has_expected_nodes_and_edges():
     assert dag["schema_version"] == "api_spine.external_read_model_readiness_dag.v1"
     assert dag["decision"] == "blocked"
     assert node_ids == EXPECTED_NODES
-    assert len(edges) == 13
+    assert len(edges) == 14
     assert all(edge["from"] in node_ids and edge["to"] in node_ids for edge in edges)
     assert all(edge["from"] != edge["to"] for edge in edges)
 
@@ -98,8 +99,8 @@ def test_external_read_model_readiness_dag_preserves_blocked_runtime_posture():
     assert {node["status"] for node in dag["nodes"]} >= {
         "static_complete",
         "design_complete_no_runtime",
-        "blocked_source_review_needed",
-        "blocked_pending_directory_source_review",
+        "blocked_design_needed",
+        "blocked_pending_directory_read_shape_design",
         "blocked",
     }
 
@@ -107,7 +108,7 @@ def test_external_read_model_readiness_dag_preserves_blocked_runtime_posture():
 def test_external_read_model_readiness_dag_artifacts_exist_or_are_blocked_future_nodes():
     dag = _dag()
     future_nodes = {
-        "directory_source_review",
+        "directory_read_shape_design",
         "combined_readiness_review",
         "rest_route_wiring",
         "graphql_resolver_wiring",
