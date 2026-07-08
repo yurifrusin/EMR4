@@ -24,40 +24,39 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 220 API Spine Combined External Readiness Review |
+| Batch | Sprint 221 API Spine External Readiness Status Snapshot Checker |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
-## Sprint 220 What Changed
+## Sprint 221 What Changed
 
-- Added `docs/api-spine/external-read-model-combined-readiness-review.md`, a
-  static combined review over the external gap inventory, aggregate gap status
-  checker, practitioner/reminder/message design packets, directory
-  source/licensing review, and directory read-shape design.
-- The combined review records every readiness field as `false` and the overall
-  decision as `blocked`, while `sprint_engine_state` remains `continuing` and
-  `pause_required` remains `false`.
-- Documented the still-blocked implementation prerequisites for REST routes,
-  GraphQL resolvers, RACGP/Cochrane source manifests, provider/runtime
-  boundaries, security review, and migration/deployment readiness.
-- Updated `docs/api-spine/external-read-model-readiness-dag.json` so
-  `combined_readiness_review` is `static_complete` and points to the new
-  artifact, while `rest_route_wiring`, `graphql_resolver_wiring`, and
-  `provider_memory_external_clients` remain blocked.
-- Added `tests/test_api_spine_external_read_model_combined_readiness_review.py`
-  and updated DAG/design tests to preserve the new completed static checkpoint
-  and downstream blocked runtime posture.
+- Added `scripts/external_read_model_readiness_status.py`, a safe aggregate
+  checker that combines the existing gap-status checker, root-inventory
+  disjunction, readiness DAG, and combined readiness review.
+- Added
+  `tests/fixtures/api_spine_external_readiness/blocked_readiness_status.json`,
+  a committed blocked snapshot with every readiness flag false, runtime
+  authority count zero, downstream runtime gates blocked, and actual
+  root-inventory counts.
+- Added `tests/test_external_read_model_readiness_status.py`, covering exact
+  snapshot equality, CLI output, no payload/prompt fragments, unblocked DAG
+  rejection, true-readiness rejection, root disjunction drift rejection, and
+  missing artifact/snapshot failures.
+- The checker emits aggregate counts and booleans only; it does not emit route
+  paths, source labels, model names, patient/practitioner/appointment IDs,
+  provider prompts, raw payloads, or local data paths.
 
 Worker mix:
 
-- Claude was not used because this was a static combined readiness checkpoint,
-  not a budget-heavy architecture or implementation lane.
+- Claude was not used because this was a bounded static script/test hardening
+  sprint, not a budget-heavy architecture or implementation lane.
 - Antigravity was not used because the sprint had no UI/workflow artifact or
   frontend/product interaction surface.
-- DeepSeek/Shen was used as the independent sidecar review lane and identified
-  the pre-sprint combined-review gap, stale DAG sprint metadata, and future
-  status-checker/root-disjunction follow-ups.
+- DeepSeek/Delta was used as the independent sidecar review lane and
+  recommended combined-review state, root-inventory disjunction, safe aggregate
+  output, and a committed blocked snapshot. Ariadne incorporated those with the
+  actual root-inventory counts.
 - Sprint start reported zero open reusable DeepSeek lanes. A fresh DeepSeek
   worker was spawned, completed, and was closed; no reusable DeepSeek lane
   remains open at closeout.
@@ -66,8 +65,7 @@ Worker mix:
 
 Boundary:
 
-- Static combined readiness documentation, readiness DAG status update, and
-  tests only.
+- Static checker, committed snapshot, and tests only.
 - No source ingestion, no source manifest approved as runtime configuration, no
   scraping, no live lookup, no route, no resolver, no schema, no provider call,
   no provider dry-run, no Access AI invocation, no RAG/GraphRAG/memory wiring,
@@ -79,46 +77,44 @@ Boundary:
 Verification:
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check -- docs\api-spine\external-read-model-combined-readiness-review.md tests\test_api_spine_external_read_model_combined_readiness_review.py docs\api-spine\external-read-model-readiness-dag.json tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_external_read_model_gap_status.py -q
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check -- scripts\external_read_model_readiness_status.py tests\test_external_read_model_readiness_status.py tests\fixtures\api_spine_external_readiness\blocked_readiness_status.json
 ```
 
-Result: focused combined review/DAG suite `11 passed`; broader external
-read-model static suite `72 passed`; whitespace check clean.
+Result: focused checker/DAG/gap-status suite `22 passed`; broader external
+read-model static suite `81 passed`; whitespace check clean.
 
-Implementation commit: `c055387e`.
+Implementation commit: `6def136f`.
 
 Sprint engine state: continuing after push. No user intervention is required;
-next recommended direction is a script-plus-snapshot readiness checker that
-includes combined-review state and root-inventory disjunction, or an explicit
-implementation-planning review before any runtime route/resolver work.
+next recommended direction is an explicit implementation-planning review before
+any runtime route/resolver work, or a narrow static ownership guard for route
+and schema candidates.
 
 ---
 
-## Previous Closeout - Sprint 219
+## Previous Closeout - Sprint 220
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 219 API Spine Directory Read-Shape Design |
+| Batch | Sprint 220 API Spine Combined External Readiness Review |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
-## Sprint 219 What Changed
+## Sprint 220 What Changed
 
-- Added `docs/api-spine/directory-read-shape-design.md`, a static read-shape
-  design packet for the reserved RACGP/Cochrane `Query.directorySearch`
-  surfaces.
-- Mapped `DirectorySearchResult`, `DirectoryEntry`, and `Citation` fields to
-  future manifest-backed sources, sanitized queries, bounded summaries,
-  synthetic stable IDs, citation metadata, freshness, and fail-closed
-  unavailable states.
-- Updated the DAG so `directory_read_shape_design` is
-  `design_complete_no_runtime`, while combined readiness remained blocked.
-- Verification: focused directory design/DAG suite `13 passed`; broader
-  external read-model static suite `67 passed`; whitespace check clean.
-- Implementation commit: `63d67c8`.
+- Added `docs/api-spine/external-read-model-combined-readiness-review.md`, a
+  static combined review over the external gap inventory, aggregate gap status
+  checker, design packets, directory source/licensing review, and readiness DAG.
+- Recorded every readiness field as `false`, overall decision `blocked`,
+  `sprint_engine_state` `continuing`, and `pause_required` `false`.
+- Updated the DAG so `combined_readiness_review` is `static_complete` while
+  downstream runtime gates remain blocked.
+- Verification: focused combined review/DAG suite `11 passed`; broader
+  external read-model static suite `72 passed`; whitespace check clean.
+- Implementation commit: `c055387e`.
 
 ---
 
