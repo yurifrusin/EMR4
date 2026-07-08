@@ -24,38 +24,36 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 222 API Spine External Read-Model Implementation Planning Review |
+| Batch | Sprint 223 API Spine Practitioner Directory Ownership Candidate |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
-## Sprint 222 What Changed
+## Sprint 223 What Changed
 
 - Added
-  `docs/api-spine/external-read-model-implementation-planning-review.md`, a
-  static planning review before any external read-model REST/GraphQL work.
-- The review defines route/schema/resolver ownership prerequisites,
-  authorization/scoping/pagination/error requirements, candidate planning
-  sequence, and test gates that must exist before implementation can be
-  proposed.
-- It records `Runtime implementation proposal ready: false` and
-  `Pause required before runtime implementation: true`.
-- Added
-  `tests/test_api_spine_external_read_model_implementation_planning_review.py`
-  to guard the planning-only posture, current blocked readiness inputs, route
-  and GraphQL prerequisites, candidate sequence, test gates, closed gates, and
-  boundary language.
+  `docs/api-spine/practitioner-directory-route-schema-ownership-candidate.md`,
+  a static route/schema ownership candidate packet for
+  `Query.practice.practitioners`.
+- The candidate proposes, without approving, `GET /api/v1/practice/practitioners`,
+  new `app/routers/practice.py`, new `app/schemas/practice.py::PractitionerOut`,
+  authenticated practice scoping, candidate pagination values, deterministic
+  ordering, empty-result behavior, inactive-inclusion review, and sensitive
+  field exclusions.
+- Added `tests/test_api_spine_practitioner_directory_ownership_candidate.py`,
+  guarding the candidate-only posture, absence of current route/schema code,
+  model evidence boundaries, auth/scoping/pagination/test prerequisites, closed
+  gates, and blocked readiness snapshot posture.
 
 Worker mix:
 
-- Claude was unavailable as a directly callable worker in this session, so the
-  sprint used DeepSeek sidecar review for the static planning artifact.
+- Claude was unavailable as a directly callable worker in this session; the
+  sprint used DeepSeek sidecar review for the static ownership candidate.
 - Antigravity was not used because the sprint had no UI/workflow artifact or
   frontend/product interaction surface.
-- DeepSeek was used as the independent sidecar review lane and recommended
-  explicit route/schema/resolver ownership prerequisites, source-manifest-first
-  directory sequencing, pagination/default-limit planning, and unchanged
-  runtime gates.
+- DeepSeek was used as the independent sidecar review lane and recommended the
+  explicit practice router/schema candidates, auth/scoping/error requirements,
+  candidate pagination defaults, and unchanged runtime gates.
 - Sprint start reported zero open reusable DeepSeek lanes. A fresh DeepSeek
   worker was spawned, completed, and was closed; no reusable DeepSeek lane
   remains open at closeout.
@@ -64,7 +62,7 @@ Worker mix:
 
 Boundary:
 
-- Static planning documentation and tests only.
+- Static ownership-candidate documentation and tests only.
 - No source ingestion, no source manifest approved as runtime configuration, no
   scraping, no live lookup, no route, no resolver, no schema, no provider call,
   no provider dry-run, no Access AI invocation, no RAG/GraphRAG/memory wiring,
@@ -76,42 +74,43 @@ Boundary:
 Verification:
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check -- docs\api-spine\external-read-model-implementation-planning-review.md tests\test_api_spine_external_read_model_implementation_planning_review.py
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check -- docs\api-spine\practitioner-directory-route-schema-ownership-candidate.md tests\test_api_spine_practitioner_directory_ownership_candidate.py
 ```
 
-Result: focused planning/status suite `15 passed`; broader external read-model
-static suite `87 passed`; whitespace check clean.
+Result: focused ownership/planning/status suite `22 passed`; broader external
+read-model static suite `94 passed`; whitespace check clean.
 
-Implementation commit: `3ae88570`.
+Implementation commit: `30e91b8d`.
 
-Sprint engine state: continuing after push. No user intervention is required;
-next recommended direction is a narrow static route/schema ownership candidate
-guard for one non-provider surface, likely practitioner directory first, or a
-DAG/root-inventory node alignment pass.
+Sprint engine state: tranche target satisfied after push. No user intervention
+is required; if continuing, next recommended direction is a similar static
+route/schema ownership candidate for patient reminders, or a DAG/root-inventory
+node alignment pass.
 
 ---
 
-## Previous Closeout - Sprint 221
+## Previous Closeout - Sprint 222
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 221 API Spine External Readiness Status Snapshot Checker |
+| Batch | Sprint 222 API Spine External Read-Model Implementation Planning Review |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
-## Sprint 221 What Changed
+## Sprint 222 What Changed
 
-- Added `scripts/external_read_model_readiness_status.py`, a safe aggregate
-  checker combining gap status, root-inventory disjunction, readiness DAG, and
-  combined readiness review.
-- Added the committed blocked snapshot under
-  `tests/fixtures/api_spine_external_readiness/`.
-- Verification: focused checker/DAG/gap-status suite `22 passed`; broader
-  external read-model static suite `81 passed`; whitespace check clean.
-- Implementation commit: `6def136f`.
+- Added
+  `docs/api-spine/external-read-model-implementation-planning-review.md`, a
+  static planning review before any external read-model REST/GraphQL work.
+- Defined route/schema/resolver ownership prerequisites,
+  authorization/scoping/pagination/error requirements, candidate sequence, and
+  test gates.
+- Verification: focused planning/status suite `15 passed`; broader external
+  read-model static suite `87 passed`; whitespace check clean.
+- Implementation commit: `3ae88570`.
 
 ---
 
