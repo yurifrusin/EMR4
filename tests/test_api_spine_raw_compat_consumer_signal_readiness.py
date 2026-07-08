@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 READINESS_PATH = ROOT / "docs" / "api-spine" / "raw-compat-consumer-signal-readiness.md"
 DEPRECATION_MAP_PATH = ROOT / "docs" / "api-spine" / "legacy-compatibility-write-deprecation-map.md"
 CONFIG_PATH = ROOT / "app" / "config.py"
+MAIN_PATH = ROOT / "app" / "main.py"
 APPOINTMENTS_ROUTER = ROOT / "app" / "routers" / "appointments.py"
 DIARY_JS = ROOT / "docs" / "diary" / "diary.js"
 RAW_COMPAT_TEST = ROOT / "tests" / "test_appointment_raw_compat.py"
@@ -125,7 +126,7 @@ def test_readiness_inventory_rows_match_expected_consumers_and_posture():
         assert row["sites"] == expected["sites"]
         assert row["condition"] == expected["condition"]
         assert row["header_consumed"] == "console_warn"
-        assert row["readiness"] == "consumer_wired_keep_audit_mode"
+        assert row["readiness"] == "consumer_cors_and_backend_header_checked_keep_audit_mode"
 
 
 def test_backend_raw_compat_handlers_emit_expected_signals():
@@ -200,6 +201,23 @@ def test_backend_header_modes_are_covered_but_default_stays_audit():
     assert "The current decision is `keep_audit_mode`." in readiness
     assert "Do not change `appointment_raw_compat_mode` to `header`" in readiness
     assert "Do not change `appointment_raw_compat_mode` to `off`" in readiness
+
+
+def test_cors_exposes_deprecation_header_for_cross_origin_consumers():
+    main = MAIN_PATH.read_text(encoding="utf-8")
+    assert 'expose_headers=["Deprecation"]' in main
+    assert main.count("expose_headers=") == 1
+
+    from fastapi.testclient import TestClient
+
+    from app.config import settings
+    from app.main import app
+
+    origin = settings.cors_origins[0]
+    response = TestClient(app).get("/health", headers={"Origin": origin})
+
+    assert response.status_code == 200
+    assert response.headers.get("access-control-expose-headers") == "Deprecation"
 
 
 def test_no_production_code_overrides_raw_compat_mode():

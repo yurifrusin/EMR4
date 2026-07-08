@@ -212,12 +212,16 @@ class TestHeaderMode:
         resp = client.post(
             "/api/v1/appointments",
             json=body,
-            headers={"Authorization": f"Bearer {token}"},
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Origin": settings.cors_origins[0],
+            },
         )
         assert resp.status_code == 201
         assert resp.headers.get("deprecation") is not None, (
             "Expected Deprecation header in header mode"
         )
+        assert resp.headers.get("access-control-expose-headers") == "Deprecation"
         # Evidence tags should still be present
         data = resp.json()
         appt_id = uuid.UUID(data["id"])

@@ -2,7 +2,7 @@
 
 Date: 2026-07-08
 
-Sprint: 207
+Sprint: 208
 
 ## Purpose
 
@@ -11,19 +11,21 @@ narrow question: are current consumers and signals ready for a future
 `appointment_raw_compat_mode` move from `audit` to `header`?
 
 Current answer: no mode change yet. The backend can emit `Deprecation` headers,
-and Sprint 207 adds a shared Diary frontend console warning consumer for that
-signal. The safe default therefore remains `audit` until a later sprint verifies
-the consumer against a live backend path and reviews any required exposed-header
-behavior.
+Sprint 207 added a shared Diary frontend console warning consumer for that
+signal, and Sprint 208 exposes the `Deprecation` response header through FastAPI
+CORS and verifies a raw compatibility header-mode response also carries
+`Access-Control-Expose-Headers: Deprecation`. The safe default therefore remains
+`audit` until a later sprint verifies the consumer in a browser or equivalent
+frontend execution path.
 
 ## Consumer Signal Inventory
 
 | Compatibility write | Handler | Raw compatibility tag | Backend signal site | Frontend consumer | Frontend raw call sites | Frontend condition | Header consumed | Readiness posture |
 |---|---|---|---|---|---|---|---|---|
-| `POST /api/v1/appointments` | `create_appointment` | `raw_compat_create` | `_raw_compat_evidence_and_headers("raw_compat_create")` | `docs/diary/diary.js` | `create_modal_raw_post` | create fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_wired_keep_audit_mode` |
-| `PUT /api/v1/appointments/{appointment_id}` | `update_appointment` | `raw_compat_update` | `_raw_compat_evidence_and_headers("raw_compat_update")` | `docs/diary/diary.js` | `edit_modal_raw_put`; `drag_resize_raw_put` | edit-modal or drag/resize fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_wired_keep_audit_mode` |
-| `PATCH /api/v1/appointments/{appointment_id}/status` | `update_appointment_status` | `raw_compat_status` | `_raw_compat_evidence_and_headers("raw_compat_status")` | `docs/diary/diary.js` | `edit_modal_raw_status_patch`; `create_modal_raw_status_patch`; `status_proposal_raw_patch` | status side-write after edit/create or fallback when signed status confirmation is unavailable | `console_warn` | `consumer_wired_keep_audit_mode` |
-| `DELETE /api/v1/appointments/{appointment_id}` | `cancel_appointment` | `raw_compat_delete` | `_raw_compat_evidence_and_headers("raw_compat_delete")` | `docs/diary/diary.js` | `delete_modal_raw_delete` | delete fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_wired_keep_audit_mode` |
+| `POST /api/v1/appointments` | `create_appointment` | `raw_compat_create` | `_raw_compat_evidence_and_headers("raw_compat_create")` | `docs/diary/diary.js` | `create_modal_raw_post` | create fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_cors_and_backend_header_checked_keep_audit_mode` |
+| `PUT /api/v1/appointments/{appointment_id}` | `update_appointment` | `raw_compat_update` | `_raw_compat_evidence_and_headers("raw_compat_update")` | `docs/diary/diary.js` | `edit_modal_raw_put`; `drag_resize_raw_put` | edit-modal or drag/resize fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_cors_and_backend_header_checked_keep_audit_mode` |
+| `PATCH /api/v1/appointments/{appointment_id}/status` | `update_appointment_status` | `raw_compat_status` | `_raw_compat_evidence_and_headers("raw_compat_status")` | `docs/diary/diary.js` | `edit_modal_raw_status_patch`; `create_modal_raw_status_patch`; `status_proposal_raw_patch` | status side-write after edit/create or fallback when signed status confirmation is unavailable | `console_warn` | `consumer_cors_and_backend_header_checked_keep_audit_mode` |
+| `DELETE /api/v1/appointments/{appointment_id}` | `cancel_appointment` | `raw_compat_delete` | `_raw_compat_evidence_and_headers("raw_compat_delete")` | `docs/diary/diary.js` | `delete_modal_raw_delete` | delete fallback when `confirmEndpoint` or `confirmPayload` is absent | `console_warn` | `consumer_cors_and_backend_header_checked_keep_audit_mode` |
 
 ## Signal Baseline
 
@@ -35,8 +37,13 @@ behavior.
   header.
 - `off` mode suppresses both raw compatibility evidence and deprecation
   headers and is not a migration target.
+- FastAPI CORS now declares `expose_headers=["Deprecation"]`, so a cross-origin
+  browser client can read the response header once a reviewed environment emits
+  it.
 - `tests/test_appointment_raw_compat.py` already verifies backend response
-  behavior for `audit`, `header`, and `off`.
+  behavior for `audit`, `header`, and `off`, including a header-mode raw
+  compatibility response with both `Deprecation` and
+  `Access-Control-Expose-Headers`.
 
 ## Consumer Baseline
 
@@ -56,8 +63,8 @@ behavior.
 The current decision is `keep_audit_mode`.
 
 Do not change `appointment_raw_compat_mode` to `header` until a later sprint
-verifies the frontend consumer against a live, non-intercepted backend path and
-reviews any required CORS exposed-header behavior.
+verifies the frontend consumer in a browser or equivalent frontend execution
+path.
 
 Do not change `appointment_raw_compat_mode` to `off` while any raw compatibility
 write remains available to product clients or system compatibility paths.
@@ -69,6 +76,10 @@ Before `header` mode can become a reviewed default, prove all of the following:
 - every raw compatibility write still uses `_raw_compat_evidence_and_headers()`;
 - every known frontend raw call site is inventoried with its fallback condition;
 - frontend code deliberately observes or logs the `Deprecation` response header;
+- FastAPI CORS exposes the `Deprecation` response header to cross-origin
+  browser JavaScript;
+- a frontend execution check proves the shared `apiFetch()` consumer can read a
+  raw compatibility response header after browser CORS filtering;
 - route-intercepted tests that mock raw compatibility writes include a header
   tolerance check or explicitly remain outside header-readiness evidence;
 - replacement proposal/confirm paths remain the preferred product flow;
