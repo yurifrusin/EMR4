@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 242 Bernie UI D5 Implementation Checklist |
 | Integrated through | Ariadne direct implementation using the already-integrated DeepSeek D5 recommendations; no Claude/Antigravity/DeepSeek lanes opened because this was a bounded checklist and gate-hygiene sprint |
-| Status | Integrated locally; pending commit and push |
+| Status | Integrated locally; pending metadata commit and push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 242 What Changed
@@ -68,7 +68,7 @@ git diff --check -- docs\bernie-ui-derived-state-dag-d5-response-delivery-gate.j
 Result: D5 checklist/gate + selector + D4 preflight suite `30 passed`;
 whitespace check passed.
 
-Implementation commit: pending.
+Implementation commit: `3a3319d8`.
 
 Sprint engine state: continuing only with bounded plan/review work unless Yuri
 explicitly approves changing the D5 gate; all backend/provider/GraphQL/write/
