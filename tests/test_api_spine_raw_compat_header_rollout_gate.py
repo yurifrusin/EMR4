@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 GATE_PATH = ROOT / "docs" / "api-spine" / "raw-compat-header-rollout-gate.json"
 READINESS_PATH = ROOT / "docs" / "api-spine" / "raw-compat-consumer-signal-readiness.md"
 CONFIG_PATH = ROOT / "app" / "config.py"
+CHECKER_PATH = ROOT / "scripts" / "raw_compat_header_rollout_gate_check.py"
 
 EXPECTED_FORBIDDEN = {
     "any_environment_defaulting_appointment_raw_compat_mode_to_header",
@@ -95,6 +96,8 @@ def test_rollout_gate_keeps_header_mode_out_of_current_environments():
     assert 'appointment_raw_compat_mode: Literal["audit", "header", "off"] = "audit"' in config
     assert "keep_audit_mode" in readiness
     assert "raw-compat-header-rollout-gate.json" in readiness
+    assert "raw_compat_header_rollout_gate_check.py" in readiness
+    assert CHECKER_PATH.is_file()
     assert "any_environment_defaulting_appointment_raw_compat_mode_to_header" in gate[
         "forbidden_current_uses"
     ]

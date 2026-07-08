@@ -2,7 +2,7 @@
 
 Date: 2026-07-08
 
-Sprint: 210
+Sprint: 211
 
 ## Purpose
 
@@ -20,7 +20,10 @@ browser execution proof that `apiFetch()` warns only when an exposed
 reviewed sprint decides whether any environment should emit the header by
 default. Sprint 210 records that rollout decision surface in
 `docs/api-spine/raw-compat-header-rollout-gate.json`, with decision `blocked`
-and no environment allowed to default to `header`.
+and no environment allowed to default to `header`. Sprint 211 adds
+`scripts/raw_compat_header_rollout_gate_check.py`, a safe aggregate checker that
+reports the gate remains blocked without emitting route, payload, patient, or
+consumer details.
 
 ## Consumer Signal Inventory
 
@@ -134,7 +137,8 @@ frontend files, `tests/test_appointment_raw_compat.py`,
 `review/test_diary_deprecation_consumer.py`, and the existing legacy
 compatibility write deprecation map test. The separate
 `tests/test_api_spine_raw_compat_header_rollout_gate.py` validates the blocked
-rollout gate.
+rollout gate, and `tests/test_raw_compat_header_rollout_gate_check.py`
+validates the safe aggregate checker.
 
 ## Verification
 
@@ -142,4 +146,5 @@ rollout gate.
 .venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_consumer_signal_readiness.py -q
 .venv\Scripts\python.exe -m pytest review\test_diary_deprecation_consumer.py -q
 .venv\Scripts\python.exe -m pytest tests\test_api_spine_raw_compat_header_rollout_gate.py -q
+.venv\Scripts\python.exe scripts\raw_compat_header_rollout_gate_check.py
 ```
