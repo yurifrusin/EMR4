@@ -1,0 +1,79 @@
+{
+  "schema_version": "bernie.ui_dag.d5_response_delivery_gate.v1",
+  "decision": "blocked",
+  "reviewer": "",
+  "review_required_before_change": true,
+  "approved_contract_commit": "",
+  "reviewer": "",
+  "acknowledged_at": "",
+  "ui_consumer_first_slice_integrated": true,
+  "route_intercepted_ui_evidence_only": true,
+  "backend_response_delivery_approved": false,
+  "rest_or_fastapi_route_change_approved": false,
+  "graphql_delivery_approved": false,
+  "provider_or_live_provider_wiring_approved": false,
+  "memory_or_rag_wiring_approved": false,
+  "h15_or_h_series_runtime_input_approved": false,
+  "appointment_write_behavior_change_approved": false,
+  "model_to_database_write_approved": false,
+  "allowed_current_scope": [
+    "route_intercepted_ui_fixture_tests",
+    "display_only_frontend_consumer",
+    "selector_unit_tests",
+    "static_review_artifacts"
+  ],
+  "required_before_backend_delivery": [
+    "explicit_yuri_review",
+    "bernie_interpretation_readiness_check_expected_blocked",
+    "bernie_provider_boundary_readiness_report_expected_disabled",
+    "response_schema_contract_for_bernie_ui_view_model",
+    "server_snapshot_to_view_model_attachment_tests",
+    "no_command_payload_field_leakage_tests",
+    "route_import_and_provider_isolation_tests",
+    "stale_pressed_awaiting_failed_state_contract_tests",
+    "backward_compatibility_absent_when_no_session_snapshot_tests",
+    "non_bernie_router_import_ban_tests"
+  ],
+  "allowed_future_d5_scope_after_review": [
+    "optional_staff_review_or_supervised_booking_ui_view_model_field",
+    "single_response_assembly_call_to_build_bernie_ui_view_model",
+    "idle_client_confirmation_request_state_default",
+    "synthetic_or_route_intercepted_delivery_tests",
+    "fine_grained_non_bernie_router_import_guard"
+  ],
+  "forbidden_until_approved": [
+    "production_route_emits_bernie_ui_view_model",
+    "graphql_resolver_emits_bernie_ui_view_model",
+    "provider_prompt_uses_bernie_ui_view_model",
+    "confirm_payload_contains_view_model_fields",
+    "database_write_depends_on_view_model_fields",
+    "historical_diary_material_runtime_input",
+    "external_patient_client_exposure",
+    "frontend_javascript_scope_expansion"
+  ],
+  "pause_triggers": [
+    "decision_changes_from_blocked",
+    "any_approved_scope_field_changes_to_true",
+    "required_before_backend_delivery_is_weakened",
+    "forbidden_until_approved_is_weakened",
+    "backend_route_or_schema_change_needed",
+    "live_provider_or_memory_evidence_needed",
+    "selector_requires_database_provider_memory_or_raw_diary_input",
+    "confirmed_state_reachable_from_non_confirmed_snapshot",
+    "view_model_copy_or_flags_used_as_write_authority",
+    "schema_version_changes_from_bernie_ui_view_model_v1",
+    "circular_import_or_broad_router_refactor_needed"
+  ],
+  "pre_d5_readiness_commands": [
+    ".venv\\Scripts\\python.exe scripts\\bernie_interpretation_readiness_check.py",
+    ".venv\\Scripts\\python.exe scripts\\bernie_provider_boundary_readiness_report.py"
+  ],
+  "expected_pre_d5_values": [
+    "runtime_or_provider_wiring_ready=false",
+    "raw_trove_access_ready=false",
+    "runtime_gate_decision=blocked",
+    "default_provider=disabled",
+    "live_provider_enabled=false",
+    "provider_calls_performed=false"
+  ]
+}

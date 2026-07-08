@@ -24,9 +24,69 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 241 Bernie UI Derived-State DAG D5 Response Delivery Gate |
+| Integrated through | Ariadne implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this was a bounded static gate sprint |
+| Status | Integrated locally; pending commit and push |
+| Last updated | 2026-07-09 |
+
+## Sprint 241 What Changed
+
+- Added `docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json` as a
+  blocked-by-default source-of-truth gate for any future backend delivery of
+  `BernieUiViewModel`.
+- Added `docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.md` to
+  explain the post-D4 posture and required readiness commands.
+- Added `tests/test_bernie_ui_view_model_d5_response_delivery_gate.py`.
+- Incorporated DeepSeek's recommendations for pre-D5 readiness commands,
+  expected blocked/disabled values, allowed future D5 scope, forbidden runtime
+  scope, pause triggers, backward-compatibility checks, and non-Bernie router
+  import guards.
+
+Worker mix:
+
+- Claude worktree checked clean; Claude was not invoked because the sprint was a
+  bounded static gate.
+- Antigravity worktree checked clean; Antigravity was not invoked for the same
+  bounded-gate reason.
+- DeepSeek direct-spawn sidecar reviewed the D5 backend-response-delivery gate
+  shape; Ariadne integrated its readiness-command, forbidden-scope, pause, and
+  test-matrix recommendations, then closed the lane. DeepSeek lane count
+  returned to zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- Static gate docs/tests only.
+- No backend response delivery, no route/schema/service change, no provider
+  call, no Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series
+  runtime import, no historical diary/local_data import, no GraphQL resolver,
+  no frontend runtime change, and no new write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_view_model_d5_response_delivery_gate.py tests\test_bernie_ui_view_model.py tests\test_bernie_ui_view_model_d4_preflight.py -q
+git diff --check -- docs\bernie-ui-derived-state-dag-d5-response-delivery-gate.json docs\bernie-ui-derived-state-dag-d5-response-delivery-gate.md tests\test_bernie_ui_view_model_d5_response_delivery_gate.py
+```
+
+Result: D5 gate + selector + D4 preflight suite `28 passed`; whitespace check
+passed.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing only with bounded plan/review work unless Yuri
+explicitly approves changing the D5 gate; all backend/provider/GraphQL/write/
+memory/H15 gates remain closed.
+
+---
+
+## Previous Closeout - Sprint 240
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 240 Bernie UI Derived-State DAG D4 Consumer |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because the slice stayed bounded to one UI file and one existing Playwright harness |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 240 What Changed
