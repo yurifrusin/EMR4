@@ -24,6 +24,73 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 212 API Spine External Read-Model Gap Inventory |
+| Integrated through | Ariadne implementation with DeepSeek review; Claude budget-blocked and Antigravity timed out without artifact |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 212 What Changed
+
+- Added `docs/api-spine/external-router-read-model-gap-inventory.md`, expanding
+  the five external-router read-model gaps left by the earlier external-root
+  inventory:
+  `Query.practice.practitioners`, `Query.patient.reminders`,
+  `Query.patient.messages`, `Query.directorySearch.RACGP_GUIDELINES`, and
+  `Query.directorySearch.COCHRANE_LIBRARY`.
+- Mapped each gap to current backing models or source absence:
+  `Practitioner`, `Reminder`, `InternalMessage`, `SmsLog`, and the absence of
+  RACGP/Cochrane local/cited source models.
+- Captured shape mismatches: practitioner display-name derivation, reminder
+  `Date` versus SDL `DateTime`, missing reminder `COMPLETED` representation,
+  message two-table union, absent EMAIL model, raw body avoidance, and
+  RACGP/Cochrane source/licensing prerequisites.
+- Added `tests/test_api_spine_external_read_model_gap_inventory.py`, which
+  parses the markdown table, AST-checks selected model fields, verifies the SDL
+  reserved surfaces, confirms the missing routes remain missing, and preserves
+  closed gates.
+
+Worker mix:
+
+- DeepSeek completed a bounded review lane and recommended the detailed
+  model/schema/source gap shape and exact invariants.
+- Claude was invoked through `scripts/drive_agent_headless.py` but exceeded the
+  sprint review budget before producing a usable final recommendation.
+- Antigravity was invoked through `agy.exe` but timed out without producing a
+  review artifact.
+
+Boundary:
+
+- Static inventory and parser/source tests only.
+- No GraphQL resolvers, no new REST routes, no provider calls, no provider
+  dry-run wiring, no runtime FGA clients, no external patient clients, no
+  H15/H-series runtime imports, no memory/RAG/GraphRAG, no broad historical
+  diary trove mining, no Access AI invocation wiring, no practitioner/reminder/
+  message/SMS/directory write authority, no model-to-database write authority,
+  and no raw compatibility deprecation mode change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_gap_inventory.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_external_read_model_gap_inventory.py tests\test_api_spine_external_router_read_root_inventory.py tests\test_api_spine_artifacts.py -q
+git diff --check -- docs\api-spine\external-router-read-model-gap-inventory.md tests\test_api_spine_external_read_model_gap_inventory.py
+```
+
+Result: focused gap inventory test `9 passed`; broader external-router/API
+Spine suite `49 passed`; whitespace check clean.
+
+Implementation commit: `eacdb5bc`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is a safe aggregate external read-model gap status
+checker/report for the five practitioner/reminder/message/directory gaps.
+
+---
+
+## Previous Closeout - Sprint 211
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 211 API Spine Raw Compat Header Rollout Gate Status Checker |
 | Integrated through | Ariadne implementation with DeepSeek review; Claude budget-blocked |
 | Status | Integrated and pushed |
