@@ -14,6 +14,7 @@ MAIN_PATH = ROOT / "app" / "main.py"
 APPOINTMENTS_ROUTER = ROOT / "app" / "routers" / "appointments.py"
 DIARY_JS = ROOT / "docs" / "diary" / "diary.js"
 RAW_COMPAT_TEST = ROOT / "tests" / "test_appointment_raw_compat.py"
+DEPRECATION_CONSUMER_REVIEW_TEST = ROOT / "review" / "test_diary_deprecation_consumer.py"
 
 EXPECTED_ROWS = {
     "POST /api/v1/appointments": {
@@ -125,8 +126,8 @@ def test_readiness_inventory_rows_match_expected_consumers_and_posture():
         assert row["consumer"] == "docs/diary/diary.js"
         assert row["sites"] == expected["sites"]
         assert row["condition"] == expected["condition"]
-        assert row["header_consumed"] == "console_warn"
-        assert row["readiness"] == "consumer_cors_and_backend_header_checked_keep_audit_mode"
+        assert row["header_consumed"] == "console_warn_proven"
+        assert row["readiness"] == "consumer_cors_backend_and_browser_harness_checked_keep_audit_mode"
 
 
 def test_backend_raw_compat_handlers_emit_expected_signals():
@@ -220,6 +221,22 @@ def test_cors_exposes_deprecation_header_for_cross_origin_consumers():
     assert response.headers.get("access-control-expose-headers") == "Deprecation"
 
 
+def test_review_harness_proves_api_fetch_deprecation_warning_behavior():
+    review_test = DEPRECATION_CONSUMER_REVIEW_TEST.read_text(encoding="utf-8")
+    readiness = READINESS_PATH.read_text(encoding="utf-8")
+
+    assert "test_api_fetch_warns_only_when_deprecation_header_is_exposed" in review_test
+    assert "harness.serve_dir(DOCS_DIR)" in review_test
+    assert "harness.stub_office(page)" in review_test
+    assert "page.on(" in review_test
+    assert "apiFetch('/appointments/plain-consumer-proof')" in review_test
+    assert "apiFetch('/appointments/deprecated-consumer-proof')" in review_test
+    assert '"Access-Control-Expose-Headers": "Deprecation"' in review_test
+    assert '"Deprecation"' in review_test
+    assert "[EMR4 Deprecation Warning] Deprecated route:" in review_test
+    assert "review/test_diary_deprecation_consumer.py" in readiness
+
+
 def test_no_production_code_overrides_raw_compat_mode():
     assignments = []
     for path in (ROOT / "app").rglob("*.py"):
@@ -239,6 +256,7 @@ def test_readiness_preflight_preserves_closed_gate_boundary():
     assert "This preflight does not authorize:" in text
     for gate in REQUIRED_CLOSED_GATES:
         assert gate in text
-    assert "does not prove runtime client behavior in a browser" in compact
-    assert "route-intercepted smoke tests" in text
+    assert "bounded route-intercepted browser execution proof" in compact
+    assert "does not prove production observability" in compact
+    assert "Existing route-intercepted smoke tests" in text
     assert "no mode change yet" in text
