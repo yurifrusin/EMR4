@@ -24,58 +24,46 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 224 API Spine Patient Reminders Ownership Candidate + Sprint Ritual Protocol Repair |
+| Batch | Sprint 225 API Spine Patient Messages Ownership Candidate |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
-| Status | Integrated and ready to push |
+| Status | Pending commit/push |
 | Last updated | 2026-07-08 |
 
-## Sprint 224 What Changed
+## Sprint 225 What Changed
 
 - Added
-  `docs/api-spine/patient-reminders-route-schema-ownership-candidate.md`,
+  `docs/api-spine/patient-messages-route-schema-ownership-candidate.md`,
   a static route/schema ownership candidate packet for
-  `Query.patient.reminders`.
+  `Query.patient.messages`.
 - The candidate proposes, without approving,
-  `GET /api/v1/patients/{patient_id}/reminders`, existing
+  `GET /api/v1/patients/{patient_id}/messages`, existing
   `app/routers/patients.py`, existing
-  `app/schemas/patients.py::PatientReminderOut`, authenticated practice and
-  requested-patient scoping, date-only to `DateTime` policy, bounded summary
-  derivation, `OPEN`/`DISMISSED` status mapping while `COMPLETED` remains
-  unavailable, candidate pagination values, deterministic ordering, 404
-  anti-enumeration behavior, and sensitive field exclusions.
-- Added `tests/test_api_spine_patient_reminders_ownership_candidate.py`,
+  `app/schemas/patients.py::PatientMessageSummaryOut`, authenticated practice
+  and requested-patient scoping, two-table `InternalMessage`/`SmsLog` union
+  prerequisites, ID namespace policy, timestamp ordering policy, channel
+  derivation, status union policy, bounded summary derivation, candidate
+  pagination values, deterministic ordering, 404 anti-enumeration behavior, and
+  sensitive field exclusions.
+- Added `tests/test_api_spine_patient_messages_ownership_candidate.py`,
   guarding the candidate-only posture, absence of current route/schema code,
-  model evidence boundaries, auth/scoping/date/status/pagination/test
+  model evidence boundaries, auth/scoping/union/status/pagination/test
   prerequisites, closed gates, and blocked readiness snapshot posture.
-- Updated `AGENTS.md` and `orchestration/protocol_alerts.md` so every
-  sprint-start ritual must announce each worker's invocation mode and worker
-  cleanliness state: Claude via the headless Claude CLI driver, Antigravity via
-  `agy.exe`, and DeepSeek via direct Codex `deepseek-worker` spawning.
-- Added `docs/sprint-204-223-summary.html`, the standalone interactive summary
-  artifact for the prior 20-sprint tranche.
 
 Worker mix:
 
-- Initial startout wording incorrectly described Claude as unavailable because
-  it was not exposed as a native Codex subagent; Yuri corrected this, and the
-  protocol has been amended. Claude was then called through
-  `scripts\drive_agent_headless.py` / the Claude CLI. It hit the small
-  `max_budget_usd` cap and produced an SMS-log-oriented review that was
-  inspected but not adopted for the `Reminder` model surface.
+- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI
+  and produced the candidate packet and deterministic test on `claude/current`.
 - Antigravity was called through the `agy.exe` CLI and produced a tangible
-  review artifact. Ariadne adopted its `patients.py` owner, patient-scoped path,
-  404 anti-enumeration, pagination, and closed-gate recommendations, while not
-  adopting any runtime implementation or migration suggestion.
-- DeepSeek was reused as the direct Codex-spawned `deepseek-worker` sidecar
-  lane. DeepSeek preferred `app/routers/clinical.py` ownership because that
-  router already owns several patient subresources, but Ariadne chose
-  `app/routers/patients.py` because this is a patient read-model summary, not a
-  clinical subresource.
-- Worker cleanliness was checked and repaired during the sprint: Claude and
-  Antigravity untracked Sprint 224 artifacts were inspected, stale Antigravity
-  Sprint 207 residue was removed, and both CLI worktrees were rechecked clean
-  of uncommitted artifacts. DeepSeek had one open reused lane during review; it
-  was closed after output capture.
+  review artifact supporting the patient-scoped route, patient schema
+  ownership, privacy boundaries, pagination, and error semantics. Its
+  worker-local AGENTS update was stale against current handover state and was
+  not integrated.
+- DeepSeek was called through direct Codex `deepseek-worker` spawning and
+  confirmed the route/schema ownership candidate, response-shape posture, and
+  closed-gate constraints. The lane was closed after output capture.
+- Worker cleanliness was checked and repaired during the sprint. Claude and
+  Antigravity worktrees were rechecked clean after cleanup; DeepSeek has zero
+  open lanes after closeout.
 
 Boundary:
 
@@ -92,17 +80,45 @@ Verification:
 
 ```powershell
 .venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_reminders_ownership_candidate.py -q
-git diff --check -- AGENTS.md orchestration\protocol_alerts.md docs\api-spine\patient-reminders-route-schema-ownership-candidate.md tests\test_api_spine_patient_reminders_ownership_candidate.py
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_messages_read_shape_design.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check
 ```
 
-Result so far: focused ownership candidate suite `7 passed`; whitespace check
-clean. Broader external read-model static suite `101 passed`.
+Result so far: focused messages/read-shape suite `15 passed`; broader external
+read-model static suite `108 passed`; whitespace check clean.
 
-Implementation/protocol commit: `92470dbf`.
+Implementation commit: pending.
 
-Sprint engine state: continuing after push. Next recommended direction is a
-similar static route/schema ownership candidate for patient messages, followed
-by ownership consolidation and a first-runtime implementation go/no-go preflight.
+Sprint engine state: continuing after commit/push unless verification fails.
+Next recommended direction is route/schema ownership consolidation and a
+first-runtime implementation go/no-go preflight.
+
+---
+
+## Previous Closeout - Sprint 224
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 224 API Spine Patient Reminders Ownership Candidate + Sprint Ritual Protocol Repair |
+| Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 224 What Changed
+
+- Added
+  `docs/api-spine/patient-reminders-route-schema-ownership-candidate.md`,
+  a static route/schema ownership candidate packet for
+  `Query.patient.reminders`.
+- Updated `AGENTS.md` and `orchestration/protocol_alerts.md` so every
+  sprint-start ritual must announce each worker's invocation mode and worker
+  cleanliness state.
+- Added `tests/test_api_spine_patient_reminders_ownership_candidate.py` and
+  `docs/sprint-204-223-summary.html`.
+- Verification: focused ownership candidate suite `7 passed`; broader external
+  read-model static suite `101 passed`; whitespace check clean.
+- Implementation/protocol commit: `92470dbf`; closeout commit `8bb50686`.
 
 ---
 
