@@ -24,9 +24,87 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 227 API Spine Practitioner Directory First-Runtime Proposal Gate |
+| Batch | Sprint 228 API Spine Practitioner Directory GraphQL Resolver Ownership Plan |
 | Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
 | Status | Integrated and ready to push |
+| Last updated | 2026-07-08 |
+
+## Sprint 228 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-graphql-resolver-ownership-plan.md`,
+  a static GraphQL ownership/authorization plan for future
+  `Query.practice.practitioners`.
+- Added
+  `tests/test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py`,
+  guarding SDL shape, absent runtime GraphQL imports/resolvers, blocked DAG and
+  readiness snapshot, gate verdict, tenancy/auth plan, REST/read-service
+  prerequisites, field sensitivity, pagination/cost/depth posture, and closed
+  gates.
+- The packet makes GraphQL stricter than a direct database facade: the future
+  resolver must wait for the explicit REST route/read-service go/no-go and then
+  call the same shared read service. GraphQL must not become the first path to
+  the practitioner table.
+- Runtime state remains blocked: no GraphQL dependency, resolver, REST route,
+  runtime schema, query, read service, provider, memory/RAG/GraphRAG, H15/H-series
+  runtime import, external client, GraphQL mutation, or write authority.
+
+Worker mix:
+
+- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
+  It hit the budget cap but left a useful uncommitted review artifact; Ariadne
+  incorporated its stricter REST/read-service prerequisite recommendation and
+  will clean/realign the worker tree after closeout.
+- Antigravity was called through the `agy.exe` CLI and produced a tangible
+  review artifact emphasizing tenancy validation, product/privacy boundaries,
+  inactive-role restrictions, field sensitivity, default-location safety, and
+  query-cost/N+1 controls.
+- DeepSeek was called through direct Codex `deepseek-worker` spawning and
+  recommended the plan-only gate posture, static tests, and closed-gate matrix.
+  The lane was closed after output capture.
+- Worker cleanliness was checked during the sprint. Integration was clean at
+  start; Claude and Antigravity were clean at sprint start; Claude and
+  Antigravity produced hand-in artifacts during the sprint; DeepSeek has zero
+  open lanes after closeout cleanup/realignment.
+
+Boundary:
+
+- Static GraphQL ownership/authorization documentation and tests only.
+- No REST route, no GraphQL runtime dependency, no GraphQL resolver, no GraphQL
+  mutation, no runtime schema, no database query/join/migration/read service, no
+  provider call, no provider dry-run, no Access AI invocation, no
+  RAG/GraphRAG/memory wiring, no H15/H-series runtime import, no broad
+  historical diary trove mining, no external patient client, no runtime FGA
+  client, no write authority, no model-to-database write authority, and no raw
+  compatibility deprecation mode change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
+git diff --check
+```
+
+Result so far: focused GraphQL plan suite `12 passed`; broader external
+read-model static suite `136 passed`; whitespace check clean.
+
+Implementation commit: `c9dc54bb`.
+
+Sprint engine state: continuing after push unless Yuri chooses to give the
+explicit first-route implementation go/no-go. Next safe direction without that
+decision is another plan-only preflight, such as REST/GraphQL drift contract or
+first-route security/audit test harness.
+
+---
+
+## Previous Closeout - Sprint 227
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 227 API Spine Practitioner Directory First-Runtime Proposal Gate |
+| Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-08 |
 
 ## Sprint 227 What Changed
@@ -36,62 +114,10 @@ Every closeout entry should record:
   a static implementation-proposal gate for the first candidate runtime read
   route, `GET /api/v1/practice/practitioners`.
 - Added
-  `tests/test_api_spine_practitioner_directory_implementation_proposal.py`,
-  guarding the proposal inputs, gate verdict, route contract, schema contract,
-  sensitive-field exclusions, pagination/order/inactive policy, safe
-  default-location join, runtime test blueprint, and closed gates.
-- The packet resolves the future route/schema contract but keeps
-  `runtime_code_authorized=false`, `rest_route_ready=false`,
-  `graphql_resolver_ready=false`, `external_read_model_runtime_ready=false`,
-  `readiness_snapshot_decision=blocked`, and
-  `explicit_yuri_go_no_go_required=true`.
-- Practical answer: first-route implementation is now one explicit Yuri
-  go/no-go away. Without that approval, the safe next sprint is GraphQL resolver
-  ownership/authorization planning, not resolver or route code.
-
-Worker mix:
-
-- Claude was called through `scripts\drive_agent_headless.py` / the Claude CLI.
-  It produced a worker-local review commit/artifact and was one commit ahead of
-  `origin/claude/current`; this was treated as hand-in history and will be
-  realigned after closeout.
-- Antigravity was called through the `agy.exe` CLI and produced a tangible
-  review artifact emphasizing static gate checks, privacy/product preconditions,
-  sensitive-field exclusions, and runtime test requirements.
-- DeepSeek was called through direct Codex `deepseek-worker` spawning and
-  recommended keeping the readiness snapshot blocked while documenting the
-  future route contract. The lane was closed after output capture.
-- Worker cleanliness was checked during the sprint. Integration was clean at
-  start; Claude was clean but ahead by one worker hand-in commit; Antigravity
-  had one untracked hand-in artifact; DeepSeek has zero open lanes after
-  closeout cleanup/realignment.
-
-Boundary:
-
-- Static implementation-proposal documentation and tests only.
-- No REST route, no GraphQL resolver, no GraphQL mutation, no runtime schema, no
-  database query/join/migration, no provider call, no provider dry-run, no
-  Access AI invocation, no RAG/GraphRAG/memory wiring, no H15/H-series runtime
-  import, no broad historical diary trove mining, no external patient client, no
-  runtime FGA client, no write authority, no model-to-database write authority,
-  and no raw compatibility deprecation mode change.
-
-Verification:
-
-```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_implementation_proposal.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_implementation_proposal.py tests\test_api_spine_external_read_model_ownership_consolidation.py tests\test_api_spine_patient_messages_ownership_candidate.py tests\test_api_spine_patient_reminders_ownership_candidate.py tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check
-```
-
-Result so far: focused proposal suite `9 passed`; broader external read-model
-static suite `124 passed`; whitespace check clean.
-
-Implementation commit: `ad5b8e5d`.
-
-Sprint engine state: continuing after push unless Yuri chooses to give the
-explicit first-route implementation go/no-go. Next safe direction without that
-decision is GraphQL resolver ownership/authorization planning only.
+  `tests/test_api_spine_practitioner_directory_implementation_proposal.py`.
+- Verification: focused proposal suite `9 passed`; broader external read-model
+  static suite `124 passed`; whitespace check clean.
+- Implementation commit: `ad5b8e5d`; closeout commit `7231d42c`.
 
 ---
 
