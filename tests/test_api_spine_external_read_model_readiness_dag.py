@@ -98,9 +98,8 @@ def test_external_read_model_readiness_dag_preserves_blocked_runtime_posture():
     assert {node["status"] for node in dag["nodes"]} >= {
         "static_complete",
         "design_complete_no_runtime",
-        "blocked_design_needed",
         "blocked_source_review_needed",
-        "blocked_pending_missing_designs",
+        "blocked_pending_directory_source_review",
         "blocked",
     }
 
@@ -108,7 +107,6 @@ def test_external_read_model_readiness_dag_preserves_blocked_runtime_posture():
 def test_external_read_model_readiness_dag_artifacts_exist_or_are_blocked_future_nodes():
     dag = _dag()
     future_nodes = {
-        "patient_messages_design",
         "directory_source_review",
         "combined_readiness_review",
         "rest_route_wiring",

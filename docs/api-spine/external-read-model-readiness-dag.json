@@ -45,8 +45,8 @@
     {
       "id": "patient_messages_design",
       "kind": "read_shape_design",
-      "status": "blocked_design_needed",
-      "artifact": "",
+      "status": "design_complete_no_runtime",
+      "artifact": "docs/api-spine/patient-messages-read-shape-design.md",
       "runtime_authority": false
     },
     {
@@ -59,7 +59,7 @@
     {
       "id": "combined_readiness_review",
       "kind": "review_gate",
-      "status": "blocked_pending_missing_designs",
+      "status": "blocked_pending_directory_source_review",
       "artifact": "",
       "runtime_authority": false
     },
