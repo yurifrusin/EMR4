@@ -24,6 +24,90 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 215 API Spine Patient Reminders Read-Shape Design |
+| Integrated through | Ariadne implementation with DeepSeek/Delta sidecar review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 215 What Changed
+
+- Added `docs/api-spine/patient-reminders-read-shape-design.md`, a static
+  design packet for the `Query.patient.reminders` route-and-shape gap.
+- Mapped the SDL `PatientReminder` shape to current `Reminder` model facts:
+  `id` direct, `dueAt` from date-only `due_date` with an explicit
+  date-to-DateTime gap, `summary` as a derived/truncated display-safe projection
+  from raw `message`/`reminder_type`, and `status` from `is_dismissed` with an
+  incomplete enum gap because `COMPLETED` has no current model state.
+- Documented current backing evidence: `Reminder` has practice and patient
+  indexes, while current patient/clinical routers expose no reminder read route
+  and current schemas expose no patient reminder summary shape.
+- Captured future route requirements for any later implementation sprint:
+  authenticated patient-scoped GET, `current_user.practice_id` and patient
+  ownership checks, summary-only display fields, documented date conversion,
+  fail-closed or unreachable `COMPLETED` handling, deterministic ordering,
+  bounded result policy, no raw message exposure, and no dismissal/create/
+  complete/escalate mutation authority.
+- Added `tests/test_api_spine_patient_reminders_read_shape_design.py`,
+  validating the packet against the SDL, `Reminder` model fields, patient and
+  clinical router source, patient schemas, existing gap inventory, and closed
+  gates.
+
+Worker mix:
+
+- DeepSeek/Delta completed a bounded sidecar review and sharpened the design
+  around `derive_truncate` summary semantics, incomplete `COMPLETED` status,
+  raw-message PHI risk, and date/timezone conversion risk. Ariadne kept Sprint
+  215 design-only because current gates do not authorize route/schema/runtime
+  work.
+- Claude was not used because this sprint was a narrow static design packet and
+  the independent reminder-shape review was already covered by the DeepSeek lane.
+- Antigravity was not used because this sprint had no UI/product interaction
+  surface and no separate frontend or workflow artifact to review.
+- No extra DeepSeek substitution was needed because neither unused lane was
+  skipped due to a usage-limit or quota failure; the sprint scope was deliberately
+  small enough for Ariadne plus one DeepSeek/Delta sidecar.
+
+Boundary:
+
+- Static design packet and parser/source tests only.
+- No Pydantic runtime schema, no REST patient reminder route, no GraphQL
+  resolver, no GraphQL mutation, no database query, no provider call, no
+  provider dry-run wiring, no runtime FGA client, no external patient client,
+  no H15/H-series runtime import, no memory/RAG/GraphRAG, no broad historical
+  diary trove mining, no Access AI invocation, no reminder create/update/
+  dismiss/complete/escalate command, no result-triage or recall-policy write
+  authority, no model-to-database write authority, and no raw compatibility
+  deprecation mode change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_reminders_read_shape_design.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_interpretation_protocol_alert.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_bernie_interpretation_protocol_alert.py -q
+git diff --check -- docs\api-spine\patient-reminders-read-shape-design.md tests\test_api_spine_patient_reminders_read_shape_design.py
+```
+
+Result: focused patient reminders design test `8 passed`; combined reminders/
+practitioner/gap inventory/gap status suite `31 passed`; protocol alert guard
+`4 passed`; combined design/gap/protocol suite `35 passed` when rerun serially.
+One earlier parallel combined run failed during shared Postgres enum setup with
+duplicate `userrole`, consistent with the known test process concurrency race
+rather than Sprint 215 behavior. Whitespace check clean.
+
+Implementation commit: `a8a8ed50`.
+
+Sprint engine state: continuing after push. No user intervention is required;
+next recommended direction is either a combined external read-model readiness
+snapshot or a non-runtime design packet for `Query.patient.messages`.
+
+---
+
+## Previous Closeout - Sprint 214
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 214 API Spine Practitioner Directory Read-Shape Design |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |

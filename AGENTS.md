@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 214 API Spine practitioner directory read-shape design integrated in implementation commit `db98e742`: a static packet now maps the reserved `Query.practice.practitioners` / `Practitioner` SDL shape to current model fields, known display-safe gaps, and future GET route requirements without adding schemas, routes, resolvers, providers, database queries, or write authority |
-| **Next recommended work** | Continue bounded backend-readiness with either a combined external read-model readiness snapshot that includes the practitioner design packet, or a non-runtime design packet for the next route-and-shape gap (`patient.reminders` is smaller than messages); use Ariadne plus worker lanes when useful (Claude through `scripts\drive_agent_headless.py` with `--mint-session` if budget permits, Antigravity via `C:\Users\sarashera\AppData\Local\agy\bin\agy.exe` if responsive, and DeepSeek for bounded review), let DeepSeek workers finish before integration, keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
+| **Current active track** | Sprint 215 API Spine patient reminders read-shape design integrated in implementation commit `a8a8ed50`: a static packet now maps `Query.patient.reminders` / `PatientReminder` to the current `Reminder` model, documenting the date-to-DateTime gap, incomplete `COMPLETED` status enum, raw-message summary risk, future patient-scoped GET requirements, and closed gates without adding schemas, routes, resolvers, providers, database queries, or write authority |
+| **Next recommended work** | Continue bounded backend-readiness with either a combined external read-model readiness snapshot covering the gap checker plus practitioner/reminder design packets, or a non-runtime design packet for `Query.patient.messages` because it is the remaining model-backed route-and-shape gap; use Ariadne plus worker lanes when useful (Claude through `scripts\drive_agent_headless.py` with `--mint-session` if budget permits, Antigravity via `C:\Users\sarashera\AppData\Local\agy\bin\agy.exe` if responsive, and DeepSeek for bounded review), let DeepSeek workers finish before integration, keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -584,6 +584,14 @@ Codex role separation:
   Claude and Antigravity availability/quota state before deciding the worker
   mix. "Three lane sprint" means Claude + Antigravity + DeepSeek by default,
   not three native Codex subagents.
+- At the start of every sprint, Ariadne must explicitly announce whether
+  Claude, Antigravity, and DeepSeek will be used. If a lane is not used, state
+  why before proceeding. If Claude or Antigravity is unavailable because of
+  usage limits, quota recovery, tooling failure, or silence in the sprint
+  window, announce that and spawn an extra DeepSeek worker to cover the missing
+  role unless the sprint is tiny and the closeout records why substitution would
+  add more risk than value. Sprint closeout must repeat the actual worker mix
+  and any substitutions.
 - DeepSeek Flash via `codex-deepseek-bridge` may replace or supplement Claude,
   Antigravity, or Codex worker capacity for bounded read-heavy reviews and
   implementation lanes when Ariadne stays as orchestrator. Use Flash first; consider
@@ -751,6 +759,11 @@ Codex is the default orchestration agent for EMR4. This means:
   with an extra DeepSeek Flash worker until the lane recovers. Tiny mechanical
   tasks may stay Ariadne-local, but planned sprint work should record the
   worker-lane mix and any substitutions.
+- Start-of-sprint updates must name all three preferred worker lanes explicitly:
+  Claude, Antigravity, and DeepSeek. For each lane, say either "using" or "not
+  using" with the reason. Usage-limit or quota unavailability for Claude or
+  Antigravity must be paired with an announced extra DeepSeek substitution
+  unless the sprint is tiny and the reason for no substitution is recorded.
 - Preferred cost posture while OpenAI/Codex usage is scarce: first check
   Claude's state, let Claude implement while quota is healthy, use
   Antigravity/Gemini for an independent domain/product/test-design lane when

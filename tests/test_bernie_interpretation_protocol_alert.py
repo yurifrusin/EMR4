@@ -38,3 +38,15 @@ def test_protocol_alerts_prevent_ariadne_only_sprint_drift():
     assert "Substantial, separable, judgment-heavy" in text
     assert "independent worker/reviewer lane by default" in text
     assert "use the H63 independent review brief" in text
+
+
+def test_protocol_alerts_require_start_of_sprint_worker_mix_announcement():
+    text = ALERTS.read_text(encoding="utf-8")
+
+    assert "At the start of every sprint" in text
+    for lane in ["Claude", "Antigravity", "DeepSeek"]:
+        assert lane in text
+    assert "If a lane will not be used" in text
+    assert "usage limits" in text
+    assert "spawn an extra DeepSeek worker" in text
+    assert "Sprint closeout must repeat the actual worker mix" in text

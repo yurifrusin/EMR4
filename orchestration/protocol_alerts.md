@@ -82,6 +82,13 @@ Read these before acting on remembered process details.
   Claude or Antigravity becomes available again, restore the standard
   Claude/Antigravity/DeepSeek worker mix. Sprint closeout must state the actual
   worker mix and any DeepSeek substitutions.
+- 2026-07-08: At the start of every sprint, Ariadne must explicitly announce
+  whether Claude, Antigravity, and DeepSeek will be used for that sprint. If a lane will not be used, Ariadne must state the reason before proceeding. If
+  Claude or Antigravity is unavailable because of usage limits, quota recovery,
+  tooling failure, or silence in the sprint window, Ariadne must announce the
+  unavailability and spawn an extra DeepSeek worker to cover that missing
+  lane's review or implementation role unless the sprint is tiny and Ariadne
+  records why a substitution would add more risk than value. Sprint closeout must repeat the actual worker mix and any substitution.
 - 2026-07-07: Antigravity availability must not be inferred solely from a bare
   `antigravity --version` shell probe. If the Antigravity/Gemini UI quota view
   shows usable availability, treat Antigravity as available and use the known
