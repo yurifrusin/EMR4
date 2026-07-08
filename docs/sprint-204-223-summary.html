@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMR4 Sprint 204-223 Summary</title>
+  <style>
+    :root {
+      --ink: #1d2733;
+      --muted: #5b6775;
+      --line: #d8dee6;
+      --panel: #ffffff;
+      --page: #f5f7f9;
+      --green: #2f7d52;
+      --blue: #2b6cb0;
+      --amber: #9b6a18;
+      --red: #9a3412;
+      --violet: #6750a4;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+    }
+    header {
+      padding: 32px 28px 20px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    .lede {
+      max-width: 980px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    main {
+      padding: 24px 28px 40px;
+      display: grid;
+      gap: 22px;
+    }
+    section {
+      max-width: 1180px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 8px 11px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      box-shadow: inset 0 0 0 1px var(--blue);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .timeline {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .sprint {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+    .sprint:last-child {
+      border-bottom: 0;
+    }
+    .sprint.active {
+      background: #eef5ff;
+    }
+    .sprint-num {
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .sprint-title {
+      font-weight: 650;
+      margin-bottom: 3px;
+    }
+    .sprint-track {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .detail {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 320px;
+    }
+    .detail h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0 16px;
+    }
+    .tag {
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      background: #eef1f4;
+      color: #344052;
+    }
+    .tag.green { background: #e8f4ed; color: var(--green); }
+    .tag.blue { background: #e8f1fb; color: var(--blue); }
+    .tag.amber { background: #fbf1df; color: var(--amber); }
+    .tag.red { background: #f9ebe6; color: var(--red); }
+    .detail ul {
+      padding-left: 18px;
+      line-height: 1.5;
+    }
+    .map {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
+      align-items: stretch;
+    }
+    .node {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 92px;
+      position: relative;
+    }
+    .node h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+    .node p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .node.done { border-top: 4px solid var(--green); }
+    .node.blocked { border-top: 4px solid var(--red); }
+    .node.review { border-top: 4px solid var(--violet); }
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .band {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .band h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+    .band p {
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0 0 10px;
+    }
+    @media (max-width: 900px) {
+      .metrics, .map {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 560px) {
+      header, main {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .metrics, .map {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EMR4 Sprints 204-223: External Read-Model Readiness</h1>
+    <p class="lede">
+      These sprints built a safe, test-backed planning layer around EMR4's future external read models.
+      The important result is not new runtime behavior. The result is a clear map of what can be built later,
+      what is still blocked, and which gates must remain closed before REST routes, GraphQL resolvers,
+      providers, source manifests, or writes are allowed.
+    </p>
+  </header>
+
+  <main>
+    <section class="metrics">
+      <div class="metric"><strong>20</strong><span>Sprints summarized, 204 through 223</span></div>
+      <div class="metric"><strong>0</strong><span>Runtime gates opened</span></div>
+      <div class="metric"><strong>94</strong><span>External-readiness static tests in the last broad suite</span></div>
+      <div class="metric"><strong>5</strong><span>Main external gap surfaces brought under design/review</span></div>
+    </section>
+
+    <section class="band">
+      <h2>What Changed In Plain English</h2>
+      <p>
+        We moved from scattered external GraphQL/read-model gaps to a documented and testable readiness stack.
+        Practitioner directory, patient reminders, patient messages, and RACGP/Cochrane directory search now each
+        have static design or source-review artifacts. A DAG, combined review, status checker, blocked snapshot,
+        and implementation-planning packet now keep future work honest.
+      </p>
+      <p>
+        Runtime remains deliberately boxed in: no new REST routes, GraphQL resolvers, schemas, providers,
+        source ingestion, Access AI, RAG/GraphRAG, or database writes were introduced.
+      </p>
+    </section>
+
+    <section class="map" aria-label="Readiness pipeline">
+      <div class="node done"><h3>Inventory</h3><p>External roots and 5 selected gap surfaces identified.</p></div>
+      <div class="arrow">to</div>
+      <div class="node done"><h3>Design Packets</h3><p>Practitioners, reminders, messages, directory search.</p></div>
+      <div class="arrow">to</div>
+      <div class="node review"><h3>Reviews</h3><p>Source/licensing, combined readiness, implementation planning.</p></div>
+      <div class="node done"><h3>Status Checker</h3><p>Aggregate blocked snapshot proves readiness flags are false.</p></div>
+      <div class="arrow">to</div>
+      <div class="node blocked"><h3>Runtime Gates</h3><p>Routes, resolvers, providers, memory/RAG, and writes remain blocked.</p></div>
+    </section>
+
+    <section>
+      <div class="controls" id="filters" aria-label="Sprint filters"></div>
+    </section>
+
+    <section class="grid">
+      <div class="timeline" id="timeline" aria-label="Sprint timeline"></div>
+      <div class="detail" id="detail" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script>
+    const sprints = [
+      { n: 204, track: "Raw compat", title: "Legacy compatibility write deprecation map", tags: ["static map", "blocked runtime"], body: ["Mapped raw appointment compatibility writes to proposal/confirm replacements.", "Kept raw compatibility mode changes blocked."] },
+      { n: 205, track: "External reads", title: "External router read-root inventory", tags: ["inventory", "GraphQL"], body: ["Mapped external GraphQL roots for viewer, practice, patient, and directorySearch to current read sources.", "Identified practitioner, reminder, message, RACGP, and Cochrane gaps."] },
+      { n: 206, track: "Raw compat", title: "Consumer/signal readiness", tags: ["preflight", "blocked runtime"], body: ["Checked whether deprecation signals could be consumed before changing raw compatibility mode.", "Kept header-mode rollout blocked."] },
+      { n: 207, track: "Frontend signal", title: "Deprecation header consumer", tags: ["frontend", "console warning"], body: ["Added shared Diary apiFetch deprecation-header handling.", "No behavior change to raw compatibility write mode."] },
+      { n: 208, track: "CORS", title: "Expose deprecation header", tags: ["CORS", "browser readiness"], body: ["Exposed Deprecation response header through FastAPI CORS.", "Prepared browser visibility before any default-mode change."] },
+      { n: 209, track: "Browser harness", title: "Header consumer execution check", tags: ["browser", "harness"], body: ["Added Playwright/browser-style harness around frontend deprecation warning behavior.", "Documented browser plugin limitations and kept rollout gate blocked."] },
+      { n: 210, track: "Raw compat", title: "Header rollout gate", tags: ["gate", "observability"], body: ["Added blocked rollout/observability gate for raw compatibility header mode.", "No default header-mode change."] },
+      { n: 211, track: "Raw compat", title: "Rollout gate status checker", tags: ["checker", "safe aggregate"], body: ["Added safe aggregate checker/report for raw compatibility header rollout state.", "Kept readiness false."] },
+      { n: 212, track: "External reads", title: "External read-model gap inventory", tags: ["inventory", "5 gaps"], body: ["Inventoried five external read-model gaps: practitioners, reminders, messages, RACGP, Cochrane.", "Captured model/source/route posture without adding runtime code."] },
+      { n: 213, track: "External reads", title: "Gap status checker", tags: ["checker", "safe aggregate"], body: ["Added script to summarize the external gap inventory as safe aggregate counts.", "Emits no route paths, model names, source labels, or payload fragments."] },
+      { n: 214, track: "Design", title: "Practitioner directory read-shape design", tags: ["design", "practice scoped"], body: ["Mapped future Practitioner fields to current model evidence.", "Documented display-safe shape and blocked route/schema/resolver gates."] },
+      { n: 215, track: "Design", title: "Patient reminders read-shape design", tags: ["design", "patient scoped"], body: ["Mapped Reminder fields to PatientReminder shape.", "Documented due-date/status gaps and no mutation authority."] },
+      { n: 216, track: "DAG", title: "External readiness DAG", tags: ["DAG", "protocol"], body: ["Added static JSON DAG linking inventory, checkers, designs, reviews, and blocked runtime gates.", "Protocol now requires worker-mix and DeepSeek lane-count announcements."] },
+      { n: 217, track: "Design", title: "Patient messages read-shape design", tags: ["design", "two-table union"], body: ["Mapped InternalMessage and SmsLog to safe PatientMessageSummary fields.", "Captured email/status/raw-body/union gaps."] },
+      { n: 218, track: "Source review", title: "Directory source/licensing review", tags: ["RACGP", "Cochrane", "licensing"], body: ["Reviewed RACGP/Cochrane source-manifest and licensing prerequisites.", "Marked source review static-complete, but kept manifests/licences/runtime blocked."] },
+      { n: 219, track: "Design", title: "Directory read-shape design", tags: ["directorySearch", "citations"], body: ["Mapped DirectorySearchResult, DirectoryEntry, and Citation fields.", "Kept source manifests, licences, providers, and runtime directory clients blocked."] },
+      { n: 220, track: "Review", title: "Combined external readiness review", tags: ["combined review", "blocked"], body: ["Linked all static source/design packets into one combined review.", "Recorded all readiness flags false and downstream runtime gates blocked."] },
+      { n: 221, track: "Checker", title: "Readiness status snapshot checker", tags: ["snapshot", "safe aggregate"], body: ["Added safe aggregate checker over gap status, root disjunction, DAG, and combined review.", "Committed blocked snapshot proving readiness remains false and output is payload-free."] },
+      { n: 222, track: "Planning", title: "Implementation planning review", tags: ["planning", "pause before runtime"], body: ["Defined route/schema/resolver ownership prerequisites, auth/scoping/pagination/error requirements, and test gates.", "Recorded runtime implementation proposal ready=false and pause-before-runtime=true."] },
+      { n: 223, track: "Ownership", title: "Practitioner directory ownership candidate", tags: ["candidate", "no implementation"], body: ["Proposed candidate route/schema ownership for practitioner directory.", "Still no route, schema, resolver, query, provider, or readiness flag change."] }
+    ];
+
+    const filterNames = ["All", "External reads", "Design", "Raw compat", "Review", "Checker", "Ownership"];
+    let activeFilter = "All";
+    let activeSprint = sprints[sprints.length - 1].n;
+
+    const timeline = document.getElementById("timeline");
+    const detail = document.getElementById("detail");
+    const filters = document.getElementById("filters");
+
+    function renderFilters() {
+      filters.innerHTML = "";
+      filterNames.forEach(name => {
+        const button = document.createElement("button");
+        button.textContent = name;
+        button.className = name === activeFilter ? "active" : "";
+        button.addEventListener("click", () => {
+          activeFilter = name;
+          const visible = filtered();
+          activeSprint = visible.length ? visible[visible.length - 1].n : activeSprint;
+          render();
+        });
+        filters.appendChild(button);
+      });
+    }
+
+    function filtered() {
+      if (activeFilter === "All") return sprints;
+      return sprints.filter(s => s.track === activeFilter || s.tags.includes(activeFilter.toLowerCase()));
+    }
+
+    function renderTimeline() {
+      timeline.innerHTML = "";
+      filtered().forEach(sprint => {
+        const item = document.createElement("div");
+        item.className = "sprint" + (sprint.n === activeSprint ? " active" : "");
+        item.addEventListener("click", () => {
+          activeSprint = sprint.n;
+          render();
+        });
+        item.innerHTML = `
+          <div class="sprint-num">${sprint.n}</div>
+          <div>
+            <div class="sprint-title">${sprint.title}</div>
+            <div class="sprint-track">${sprint.track}</div>
+          </div>
+        `;
+        timeline.appendChild(item);
+      });
+    }
+
+    function renderDetail() {
+      const sprint = sprints.find(s => s.n === activeSprint) || sprints[sprints.length - 1];
+      detail.innerHTML = `
+        <h2>Sprint ${sprint.n}: ${sprint.title}</h2>
+        <div class="tags">
+          <span class="tag blue">${sprint.track}</span>
+          ${sprint.tags.map((tag, i) => `<span class="tag ${i % 3 === 0 ? "green" : i % 3 === 1 ? "amber" : ""}">${tag}</span>`).join("")}
+        </div>
+        <ul>${sprint.body.map(line => `<li>${line}</li>`).join("")}</ul>
+      `;
+    }
+
+    function render() {
+      renderFilters();
+      renderTimeline();
+      renderDetail();
+    }
+
+    render();
+  </script>
+</body>
+</html>

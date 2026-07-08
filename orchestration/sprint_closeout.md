@@ -24,6 +24,93 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 224 API Spine Patient Reminders Ownership Candidate + Sprint Ritual Protocol Repair |
+| Integrated through | Ariadne implementation with Claude CLI, Antigravity CLI, and DeepSeek direct-spawn sidecar review |
+| Status | Pending commit/push |
+| Last updated | 2026-07-08 |
+
+## Sprint 224 What Changed
+
+- Added
+  `docs/api-spine/patient-reminders-route-schema-ownership-candidate.md`,
+  a static route/schema ownership candidate packet for
+  `Query.patient.reminders`.
+- The candidate proposes, without approving,
+  `GET /api/v1/patients/{patient_id}/reminders`, existing
+  `app/routers/patients.py`, existing
+  `app/schemas/patients.py::PatientReminderOut`, authenticated practice and
+  requested-patient scoping, date-only to `DateTime` policy, bounded summary
+  derivation, `OPEN`/`DISMISSED` status mapping while `COMPLETED` remains
+  unavailable, candidate pagination values, deterministic ordering, 404
+  anti-enumeration behavior, and sensitive field exclusions.
+- Added `tests/test_api_spine_patient_reminders_ownership_candidate.py`,
+  guarding the candidate-only posture, absence of current route/schema code,
+  model evidence boundaries, auth/scoping/date/status/pagination/test
+  prerequisites, closed gates, and blocked readiness snapshot posture.
+- Updated `AGENTS.md` and `orchestration/protocol_alerts.md` so every
+  sprint-start ritual must announce each worker's invocation mode and worker
+  cleanliness state: Claude via the headless Claude CLI driver, Antigravity via
+  `agy.exe`, and DeepSeek via direct Codex `deepseek-worker` spawning.
+- Added `docs/sprint-204-223-summary.html`, the standalone interactive summary
+  artifact for the prior 20-sprint tranche.
+
+Worker mix:
+
+- Initial startout wording incorrectly described Claude as unavailable because
+  it was not exposed as a native Codex subagent; Yuri corrected this, and the
+  protocol has been amended. Claude was then called through
+  `scripts\drive_agent_headless.py` / the Claude CLI. It hit the small
+  `max_budget_usd` cap and produced an SMS-log-oriented review that was
+  inspected but not adopted for the `Reminder` model surface.
+- Antigravity was called through the `agy.exe` CLI and produced a tangible
+  review artifact. Ariadne adopted its `patients.py` owner, patient-scoped path,
+  404 anti-enumeration, pagination, and closed-gate recommendations, while not
+  adopting any runtime implementation or migration suggestion.
+- DeepSeek was reused as the direct Codex-spawned `deepseek-worker` sidecar
+  lane. DeepSeek preferred `app/routers/clinical.py` ownership because that
+  router already owns several patient subresources, but Ariadne chose
+  `app/routers/patients.py` because this is a patient read-model summary, not a
+  clinical subresource.
+- Worker cleanliness was checked and repaired during the sprint: Claude and
+  Antigravity untracked Sprint 224 artifacts were inspected, stale Antigravity
+  Sprint 207 residue was removed, and both CLI worktrees were rechecked clean
+  of uncommitted artifacts. DeepSeek had one open reused lane during review; it
+  was closed after output capture.
+
+Boundary:
+
+- Static ownership-candidate documentation and tests only.
+- No source ingestion, no source manifest approved as runtime configuration, no
+  scraping, no live lookup, no route, no resolver, no schema, no provider call,
+  no provider dry-run, no Access AI invocation, no RAG/GraphRAG/memory wiring,
+  no H15/H-series runtime import, no broad historical diary trove mining, no
+  external patient client, no runtime FGA client, no clinical decision support
+  runtime, no write authority, no model-to-database write authority, and no raw
+  compatibility deprecation mode change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_patient_reminders_ownership_candidate.py -q
+git diff --check -- AGENTS.md orchestration\protocol_alerts.md docs\api-spine\patient-reminders-route-schema-ownership-candidate.md tests\test_api_spine_patient_reminders_ownership_candidate.py
+```
+
+Result so far: focused ownership candidate suite `7 passed`; whitespace check
+clean. Broader external read-model suite still to run before final push.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing after commit/push unless verification fails.
+Next recommended direction is a similar static route/schema ownership candidate
+for patient messages, followed by ownership consolidation and a first-runtime
+implementation go/no-go preflight.
+
+---
+
+## Previous Closeout - Sprint 223
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 223 API Spine Practitioner Directory Ownership Candidate |
 | Integrated through | Ariadne implementation with DeepSeek sidecar review |
 | Status | Integrated and pushed |
@@ -44,50 +131,9 @@ Every closeout entry should record:
   guarding the candidate-only posture, absence of current route/schema code,
   model evidence boundaries, auth/scoping/pagination/test prerequisites, closed
   gates, and blocked readiness snapshot posture.
-
-Worker mix:
-
-- Claude was unavailable as a directly callable worker in this session; the
-  sprint used DeepSeek sidecar review for the static ownership candidate.
-- Antigravity was not used because the sprint had no UI/workflow artifact or
-  frontend/product interaction surface.
-- DeepSeek was used as the independent sidecar review lane and recommended the
-  explicit practice router/schema candidates, auth/scoping/error requirements,
-  candidate pagination defaults, and unchanged runtime gates.
-- Sprint start reported zero open reusable DeepSeek lanes. A fresh DeepSeek
-  worker was spawned, completed, and was closed; no reusable DeepSeek lane
-  remains open at closeout.
-- No extra DeepSeek substitution was needed because Claude and Antigravity were
-  intentionally stood down for scope, not unavailable due usage limits.
-
-Boundary:
-
-- Static ownership-candidate documentation and tests only.
-- No source ingestion, no source manifest approved as runtime configuration, no
-  scraping, no live lookup, no route, no resolver, no schema, no provider call,
-  no provider dry-run, no Access AI invocation, no RAG/GraphRAG/memory wiring,
-  no H15/H-series runtime import, no broad historical diary trove mining, no
-  external patient client, no runtime FGA client, no clinical decision support
-  runtime, no write authority, no model-to-database write authority, and no raw
-  compatibility deprecation mode change.
-
-Verification:
-
-```powershell
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_practitioner_directory_ownership_candidate.py tests\test_api_spine_external_read_model_implementation_planning_review.py tests\test_external_read_model_readiness_status.py tests\test_api_spine_external_read_model_combined_readiness_review.py tests\test_api_spine_external_read_model_readiness_dag.py tests\test_api_spine_directory_read_shape_design.py tests\test_api_spine_directory_source_licensing_review.py tests\test_api_spine_patient_messages_read_shape_design.py tests\test_api_spine_patient_reminders_read_shape_design.py tests\test_api_spine_practitioner_directory_read_shape_design.py tests\test_api_spine_external_read_model_gap_inventory.py tests\test_external_read_model_gap_status.py tests\test_api_spine_external_router_read_root_inventory.py -q
-git diff --check -- docs\api-spine\practitioner-directory-route-schema-ownership-candidate.md tests\test_api_spine_practitioner_directory_ownership_candidate.py
-```
-
-Result: focused ownership/planning/status suite `22 passed`; broader external
-read-model static suite `94 passed`; whitespace check clean.
-
-Implementation commit: `30e91b8d`.
-
-Sprint engine state: tranche target satisfied after push. No user intervention
-is required; if continuing, next recommended direction is a similar static
-route/schema ownership candidate for patient reminders, or a DAG/root-inventory
-node alignment pass.
+- Verification: focused ownership/planning/status suite `22 passed`; broader
+  external read-model static suite `94 passed`; whitespace check clean.
+- Implementation commit: `30e91b8d`.
 
 ---
 

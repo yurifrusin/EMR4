@@ -94,6 +94,22 @@ Read these before acting on remembered process details.
   does not hit its thread limit during the next sprint. Reuse an existing DeepSeek lane when the follow-on task is closely related and the lane is still
   open and coherent; spawn a fresh lane only when the old lane is closed,
   stale, overloaded, or contextually wrong for the new task.
+- 2026-07-08: Sprint-start worker announcements must name the invocation mode
+  for each preferred lane: Claude through the headless Claude CLI driver
+  (`scripts\drive_agent_headless.py`), Antigravity through the Antigravity
+  `agy.exe` CLI channel, and DeepSeek through direct Codex `deepseek-worker`
+  spawning. Do not describe Claude or Antigravity as unavailable merely because
+  they are not exposed as native Codex subagent tools; their CLI channels are
+  the expected routine path.
+- 2026-07-08: Sprint-start worker announcements must also report worker
+  cleanliness before dispatch. Check Claude and Antigravity with
+  `git status --short --branch` in their worktrees; if stale untracked
+  artifacts from previous sprints are present, preserve/integrate any relevant
+  current-sprint work, clean the stale artifacts, re-run status, and
+  re-announce cleanliness before progressing. DeepSeek normally has no durable
+  worktree because it is direct-spawned inside Codex; report active/completed
+  lane count, unintegrated output state, and close/reuse decisions as its
+  cleanliness check.
 - 2026-07-07: Antigravity availability must not be inferred solely from a bare
   `antigravity --version` shell probe. If the Antigravity/Gemini UI quota view
   shows usable availability, treat Antigravity as available and use the known

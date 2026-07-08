@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 223 API Spine practitioner directory route/schema ownership candidate guard integrated in implementation commit `30e91b8d`: a static candidate packet now proposes `GET /api/v1/practice/practitioners`, new `app/routers/practice.py`, new `app/schemas/practice.py::PractitionerOut`, auth/scoping/pagination/error/test preconditions, and sensitive-field exclusions while keeping routes, schemas, resolvers, queries, readiness flags, and runtime gates blocked |
-| **Next recommended work** | Sprint engine tranche target of roughly a dozen sprints is now satisfied through Sprint 223; if continuing, next bounded backend-readiness work should add a similar static route/schema ownership candidate guard for patient reminders or a DAG/root-inventory node alignment pass; at every sprint start explicitly announce Claude, Antigravity, and DeepSeek use/non-use, current DeepSeek lane count and reuse/cleanup plan, and any extra DeepSeek substitution for unavailable Claude/Antigravity lanes; close completed/idle DeepSeek lanes before spawning new ones and reuse a coherent open DeepSeek lane for related follow-on work when it exists; keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, runtime graph execution, REST/GraphQL implementation, or model-to-database-write gates |
+| **Current active track** | Sprint 224 API Spine patient reminders route/schema ownership candidate guard is ready for closeout: a static candidate packet now proposes `GET /api/v1/patients/{patient_id}/reminders`, existing `app/routers/patients.py`, existing `app/schemas/patients.py::PatientReminderOut`, patient/practice scoping, date/status/summary/pagination/error/test preconditions, and sensitive-field exclusions while keeping routes, schemas, resolvers, queries, readiness flags, and runtime gates blocked; protocol docs now require sprint-start worker invocation modes plus worker-worktree cleanliness checks |
+| **Next recommended work** | Continue bounded backend-readiness with a similar static route/schema ownership candidate guard for patient messages, then a route/schema ownership consolidation and implementation go/no-go preflight for the first small practitioner-directory REST read; at every sprint start explicitly announce Claude, Antigravity, and DeepSeek use/non-use, invocation mode (`scripts\drive_agent_headless.py`/Claude CLI, `agy.exe`/Antigravity CLI, direct Codex `deepseek-worker` spawn), Claude/Antigravity/DeepSeek cleanliness state, current DeepSeek lane count and reuse/cleanup plan, and any extra DeepSeek substitution for unavailable Claude/Antigravity lanes; clean stale worker artifacts before progressing and reannounce clean state; keep readiness/provider gates blocked and false, and do not open provider, memory/RAG/GraphRAG, H15/H-series runtime, broad trove, GraphQL mutation, runtime graph execution, REST/GraphQL implementation, or model-to-database-write gates |
 
 Historical original-EMR diary snapshot trove: Yuri has roughly 3.5 months of
 apparently continuous original diary state snapshots, about 58k files. Raw files
@@ -585,13 +585,24 @@ Codex role separation:
   mix. "Three lane sprint" means Claude + Antigravity + DeepSeek by default,
   not three native Codex subagents.
 - At the start of every sprint, Ariadne must explicitly announce whether
-  Claude, Antigravity, and DeepSeek will be used. If a lane is not used, state
+  Claude, Antigravity, and DeepSeek will be used, and must name the invocation
+  channel/mode for each lane: Claude through the headless Claude CLI driver,
+  Antigravity through the Antigravity `agy.exe` CLI channel, and DeepSeek
+  through direct Codex `deepseek-worker` spawning. If a lane is not used, state
   why before proceeding. If Claude or Antigravity is unavailable because of
   usage limits, quota recovery, tooling failure, or silence in the sprint
   window, announce that and spawn an extra DeepSeek worker to cover the missing
   role unless the sprint is tiny and the closeout records why substitution would
-  add more risk than value. Sprint closeout must repeat the actual worker mix
-  and any substitutions.
+  add more risk than value. Sprint closeout must repeat the actual worker mix,
+  invocation modes, and any substitutions.
+- The same sprint-start ritual must check Claude, Antigravity, and DeepSeek
+  worker-state cleanliness before progressing. For CLI lanes, run/report
+  `git status --short --branch` in the Claude and Antigravity worktrees and
+  clean stale untracked artifacts from previous sprints before dispatching new
+  work. Preserve or integrate any current-sprint artifact before cleanup; never
+  discard unclear user-authored work. For DeepSeek, report the direct-spawned
+  lane count and whether any spawned lane has unintegrated output or needs to
+  be closed. After cleanup, re-announce the worker cleanliness state.
 - The sprint-start announcement must also state how many DeepSeek worker lanes
   are already spawned/open, which are active versus completed or idle, and
   whether an existing DeepSeek lane will be reused. Close completed or unused
@@ -768,9 +779,20 @@ Codex is the default orchestration agent for EMR4. This means:
   worker-lane mix and any substitutions.
 - Start-of-sprint updates must name all three preferred worker lanes explicitly:
   Claude, Antigravity, and DeepSeek. For each lane, say either "using" or "not
-  using" with the reason. Usage-limit or quota unavailability for Claude or
+  using" with the reason, and name the mode/channel: Claude via
+  `scripts\drive_agent_headless.py` and the Claude CLI, Antigravity via
+  `agy.exe --add-dir ... --print`, and DeepSeek via direct Codex
+  `deepseek-worker` spawning. Usage-limit or quota unavailability for Claude or
   Antigravity must be paired with an announced extra DeepSeek substitution
   unless the sprint is tiny and the reason for no substitution is recorded.
+- Start-of-sprint updates must also announce whether the Claude, Antigravity,
+  and DeepSeek worker states are clean. Check the Claude and Antigravity CLI
+  worktrees with `git status --short --branch`; if either contains stale
+  untracked artifacts from previous sprints, clean or archive/integrate them
+  before dispatching new work, then re-run status and re-announce cleanliness.
+  Because DeepSeek is normally direct-spawned inside Codex rather than a durable
+  worker worktree, report its active/completed lane state, unintegrated outputs,
+  and close/reuse decision as the DeepSeek cleanliness check.
 - The same update must include the current DeepSeek lane count and reuse/cleanup
   decision: active lanes to keep, completed/idle lanes to close, and whether a
   related existing lane can be reused instead of spawning a fresh worker.
@@ -805,6 +827,13 @@ python scripts\agent_worktrees.py brief --agent claude
 After Ariadne announces `HANDIN READY`, Ariadne should prompt external workers
 through cheap headless text channels before using GUI automation. Yuri should
 not need to explicitly invoke routine sprint prompts.
+
+Every `HANDIN READY` or sprint-start announcement must include the worker
+invocation modes and cleanup state: Claude through the headless Claude CLI
+driver, Antigravity through the `agy.exe` CLI channel, and DeepSeek through
+direct Codex `deepseek-worker` spawning. Claude and Antigravity worktrees must
+be checked for stale artifacts and cleaned before new sprint dispatch; DeepSeek
+lanes must be counted, closed or reused deliberately, and reported.
 
 Antigravity uses the CLI from a fresh project-scoped session unless a current
 conversation ID has been verified. Old conversation IDs can disappear after app
