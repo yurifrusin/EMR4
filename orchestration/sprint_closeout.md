@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 235 API Spine Practitioner Directory Post-Implementation Readiness Review |
 | Integrated through | Ariadne direct implementation; no Claude/Antigravity/DeepSeek lanes used because this was a bounded artifact/test review sprint |
-| Status | Verified; pending commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-08 |
 
 ## Sprint 235 What Changed
@@ -71,7 +71,7 @@ git diff --check -- docs\api-spine\practitioner-directory-post-implementation-re
 Result: focused review/route/readiness suite `52 passed`; whitespace check
 clean.
 
-Implementation commit: pending.
+Implementation commit: `de81111e`.
 
 Sprint engine state: continuing to Fable-approved Bernie UI derived-state DAG
 D1/D2 only; no practitioner-directory readiness expansion without separate
