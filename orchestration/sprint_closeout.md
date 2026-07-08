@@ -24,6 +24,66 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 203 API Spine Blueprint First Boundary Capture |
+| Integrated through | Ariadne documentation/test capture from Yuri paper review discussion |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-08 |
+
+## Sprint 203 What Changed
+
+- Reviewed local paper `2508.02721v2.pdf`, `Blueprint First, Model Second: A
+  Framework for Deterministic LLM Workflow`, and captured the useful EMR4
+  mapping in `docs/api-spine/blueprint-first-model-second-boundary.md`.
+- Recorded the architectural vocabulary: Bernie interprets; the backend
+  blueprint decides; signed command routes mutate.
+- Framed Bernie training as practice-management training, analogous to a
+  novice receptionist learning allowed diary lanes, rather than probabilistic
+  fine-tuning or raw retrieval.
+- Added `tests/test_api_spine_blueprint_first_boundary.py` to keep the note
+  anchored to API Spine rules and closed gates.
+
+Worker mix:
+
+- Ariadne-only by scope: this was a narrow documentation preservation step from
+  a just-finished user discussion and local paper review, with no runtime,
+  product, provider, route, database, or UI change.
+- Next general sprint work should return to the Ariadne plus Claude,
+  Antigravity, and DeepSeek pattern, with extra DeepSeek substitutions for any
+  unavailable external lane.
+
+Boundary:
+
+- Documentation and parser-style markdown assertions only.
+- No FastAPI route imports, HTTP requests, database writes, provider calls,
+  provider dry-runs, memory/RAG/GraphRAG access, H15/H-series runtime imports,
+  historical diary material access, GraphQL mutations, external patient clients,
+  runtime FGA clients, or model-to-database write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_blueprint_first_boundary.py tests\test_api_spine_artifacts.py -q
+git diff --check -- docs\api-spine\blueprint-first-model-second-boundary.md tests\test_api_spine_blueprint_first_boundary.py
+```
+
+Result: combined serial pytest `36 passed`; whitespace check clean. Earlier
+parallel pytest attempts hit the known PostgreSQL enum creation race; the same
+tests passed serially.
+
+Implementation commit: `e3a6b41f`.
+
+Sprint engine state: continuing after push. No user intervention is
+required; next recommended direction remains a command/read-model deprecation
+map for legacy compatibility writes or a static external-router inventory for
+viewer/practice/patient/directory GraphQL roots, with runtime/provider gates
+still blocked.
+
+---
+
+## Previous Closeout - Sprint 202
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 202 API Spine Appointment Read-Model Route Inventory |
 | Integrated through | Ariadne implementation with Antigravity `agy.exe` review/draft and DeepSeek review; Claude attempted but unavailable |
 | Status | Integrated and pushed |
