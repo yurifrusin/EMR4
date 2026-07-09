@@ -24,9 +24,72 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 252 Bernie UI D5 Frontend Consumption Evidence |
+| Integrated through | Ariadne direct implementation; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because this was a bounded route-intercepted frontend evidence slice |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-09 |
+
+## Sprint 252 What Changed
+
+- Added
+  `docs/bernie-ui-derived-state-dag-d5-frontend-consumption-evidence.json`.
+- Added
+  `docs/bernie-ui-derived-state-dag-d5-frontend-consumption-evidence.md`.
+- Added `tests/test_bernie_ui_dag_d5_frontend_consumption_evidence.py`.
+- Added
+  `review/test_diary_smoke.py::test_bernie_ui_view_model_consumes_backend_staff_review_field_without_js_expansion`.
+- Proved, with a route-intercepted Playwright response, that the existing
+  Diary JavaScript consumes the post-D5 backend response shape at
+  `staff_review.ui_view_model` without requiring a top-level `ui_view_model`
+  field or any JavaScript expansion.
+- Confirmed the rendered staff-review panel uses the backend-shaped view model
+  and that the signed confirm payload still excludes view-model fields.
+
+Worker mix:
+
+- Claude worktree available; Claude was not invoked because this was a bounded
+  route-intercepted Playwright/evidence slice over existing code.
+- Antigravity worktree available; Antigravity was not invoked for the same
+  reason.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- One route-intercepted browser-smoke test plus docs/tests.
+- No production JavaScript change, no backend route/schema/service change beyond
+  Sprint 249, no provider call, no Access AI invocation, no memory/RAG/GraphRAG
+  wiring, no H15/H-series runtime import, no historical diary/local_data import,
+  no GraphQL resolver, no external patient-client exposure, no confirm payload
+  change, and no appointment write behavior change.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_dag_d5_frontend_consumption_evidence.py tests\test_bernie_ui_dag_d5_response_shape_report.py -q
+.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "consumes_backend_staff_review_field"
+git diff --check -- review\test_diary_smoke.py docs\bernie-ui-derived-state-dag-d5-frontend-consumption-evidence.json docs\bernie-ui-derived-state-dag-d5-frontend-consumption-evidence.md tests\test_bernie_ui_dag_d5_frontend_consumption_evidence.py
+```
+
+Result: `9 passed` for the static/evidence checks, the focused Playwright smoke
+case passed, existing Starlette and Google GenAI deprecation warnings only, and
+the whitespace check passed.
+
+Implementation commit: `fac533de`.
+
+Sprint engine state: pause before D5 expansion; the first slice now has backend
+delivery, post-implementation review, response-shape evidence, and
+route-intercepted frontend consumption evidence.
+
+---
+
+## Previous Closeout - Sprint 251
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 251 Bernie UI D5 Response-Shape Report |
 | Integrated through | Ariadne direct implementation; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because this was a bounded safe aggregate report/checker |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 251 What Changed
