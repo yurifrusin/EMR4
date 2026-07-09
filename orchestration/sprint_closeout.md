@@ -24,6 +24,66 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 246 Bernie UI D5 Approval Decision Draft |
+| Integrated through | Ariadne direct implementation; Claude/Antigravity worktrees available but not invoked, and DeepSeek lane count stayed zero because this was a bounded blocked-decision artifact |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-09 |
+
+## Sprint 246 What Changed
+
+- Added `docs/bernie-ui-derived-state-dag-d5-approval-decision-draft.json`.
+- Added `docs/bernie-ui-derived-state-dag-d5-approval-decision-draft.md`.
+- Added `tests/test_bernie_ui_view_model_d5_approval_decision_draft.py`.
+- Recorded the only proposed future approval decision name:
+  `approved_for_backend_response_delivery_first_slice`.
+- Kept `decision: blocked`, reviewer blank, approved contract commit blank,
+  expiry blank, acknowledgement false, and every approval-scope field false.
+- Restated the forbidden scope that remains closed even if a future first slice
+  is approved: GraphQL, providers, Access AI, memory/RAG/GraphRAG,
+  H15/H-series, historical diary material, confirm payload changes, writes,
+  external patient clients, and frontend JavaScript expansion.
+
+Worker mix:
+
+- Claude worktree available and previously checked clean; Claude was not invoked
+  because this was a small blocked-decision draft.
+- Antigravity worktree available and previously checked clean; Antigravity was
+  not invoked for the same reason.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- Static docs/tests only.
+- No backend response delivery, no route/schema/service change, no provider
+  call, no Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series
+  runtime import, no historical diary/local_data import, no GraphQL resolver, no
+  frontend runtime change, no external patient-client exposure, and no new write
+  authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_view_model_d5_approval_decision_draft.py tests\test_bernie_ui_view_model_d5_response_delivery_gate.py tests\test_bernie_ui_view_model_evidence_consolidation.py -q
+.venv\Scripts\python.exe -m py_compile tests\test_bernie_ui_view_model_d5_approval_decision_draft.py
+git diff --check -- docs\bernie-ui-derived-state-dag-d5-approval-decision-draft.json docs\bernie-ui-derived-state-dag-d5-approval-decision-draft.md tests\test_bernie_ui_view_model_d5_approval_decision_draft.py
+```
+
+Result: `20 passed`; py_compile passed; existing Starlette and Google GenAI
+deprecation warnings only; whitespace check passed.
+
+Implementation commit: `a4573a6b`.
+
+Sprint engine state: continuing through the user-approved Sprint 247-248
+review-only block. Backend response delivery remains blocked until explicit D5
+approval exists.
+
+---
+
+## Previous Closeout - Sprint 245
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 245 Bernie UI D4/D5 Evidence Consolidation |
 | Integrated through | Ariadne review-only implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this sprint only consolidated already-committed evidence |
 | Status | Integrated and ready to push |
