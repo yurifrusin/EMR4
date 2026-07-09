@@ -1,0 +1,82 @@
+{
+  "schema_version": "api_spine.practitioner_directory_graphql_internal_consumer_harness.v1",
+  "date": "2026-07-09",
+  "sprint": 273,
+  "recorded_by": "ariadne",
+  "decision": "test_only_internal_consumer_harness_added",
+  "target_field": "Query.practice.practitioners",
+  "approved_release_boundary_commit": "0ad2b639",
+  "approval_expires_on": "2026-08-06",
+  "harness": {
+    "module": "tests/graphql_practitioner_consumer_harness.py",
+    "test_file": "tests/test_practitioner_directory_graphql_internal_consumer_harness.py",
+    "runtime_app_wiring": false,
+    "office_addin_wiring": false,
+    "external_client_wiring": false
+  },
+  "covered_consumer_outcomes": [
+    "authenticated_success_projection",
+    "missing_auth_http_401",
+    "bad_user_input_limit_or_offset",
+    "forbidden_active_only_false",
+    "practice_id_mismatch_null",
+    "sensitive_field_rejected",
+    "idempotency_key_not_required",
+    "idempotency_key_does_not_change_read_behavior",
+    "graphql_null_argument_bad_user_input",
+    "admin_owner_inactive_scope",
+    "default_active_only_and_pagination",
+    "practice_scoping",
+    "inactive_or_cross_practice_default_location_null",
+    "no_audit_write",
+    "forbidden_runtime_path_source_guard"
+  ],
+  "authorized_now": {
+    "internal_authenticated_staff_consumer_harness": true,
+    "office_addin_runtime_switch": false,
+    "readiness_flag_changes": false,
+    "deployment_or_production_exposure": false,
+    "external_client_access": false,
+    "schema_field_expansion": false,
+    "write_mutation_or_subscription": false,
+    "provider_memory_rag_graphrag_h15_trove": false
+  },
+  "worker_reviews": {
+    "claude_api_contract": {
+      "artifact": "orchestration/agent_inbox/claude/claude-sprint273-graphql-internal-consumer-harness-review.md",
+      "verdict": "PASS",
+      "integrated_cautions": [
+        "harness must be a reusable consumer-contract primitive rather than a duplicate resolver suite",
+        "HTTP 401 auth failures and GraphQL 200 error-code failures must stay distinct",
+        "practice(id) mismatch is null without an error",
+        "no Idempotency-Key is required and adding one must not change read behavior",
+        "negative sensitive-field selection must remain a validation error"
+      ]
+    },
+    "deepseek_security_static": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint273-graphql-internal-consumer-harness.md",
+      "verdict": "PASS",
+      "integrated_cautions": [
+        "FORBIDDEN must be asserted as a GraphQL error extension rather than HTTP 403",
+        "practice(id:) mismatch returns null for the practice node",
+        "null GraphQL variables must be explicitly serialized to trigger BAD_USER_INPUT",
+        "the harness must remain in tests and must not wire production UI or schema changes",
+        "source guards must block provider, memory, H15, trove, mutation, subscription, and write paths"
+      ]
+    },
+    "antigravity": {
+      "used": false,
+      "reason": "Sprint 273 is a backend/test-only harness; Antigravity is reserved for Sprint 274 Office add-in consumer UX boundary."
+    }
+  },
+  "must_remain_false": {
+    "graphql_mutation_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_recommended_work": "Sprint 274 Office add-in GraphQL consumer proposal with Antigravity consumer/UX review before any taskpane runtime switch."
+}

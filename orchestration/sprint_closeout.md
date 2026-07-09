@@ -24,9 +24,74 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 273 Practitioner Directory GraphQL Internal Consumer Harness |
+| Integrated through | Ariadne harness with Claude and DeepSeek PASS reviews |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 273 What Changed
+
+- Added `tests/graphql_practitioner_consumer_harness.py`.
+- Added `tests/test_practitioner_directory_graphql_internal_consumer_harness.py`.
+- Added
+  `docs/api-spine/practitioner-directory-graphql-internal-consumer-harness.json`.
+- Added
+  `docs/api-spine/practitioner-directory-graphql-internal-consumer-harness.md`.
+- Added Claude API/contract review artifact at
+  `orchestration/agent_inbox/claude/claude-sprint273-graphql-internal-consumer-harness-review.md`.
+- Added DeepSeek security/static review artifact at
+  `orchestration/agent_inbox/codex/review-deepseek-sprint273-graphql-internal-consumer-harness.md`.
+- Proved the test-only internal consumer harness handles approved success,
+  HTTP 401, GraphQL `BAD_USER_INPUT`, GraphQL `FORBIDDEN`,
+  `practice(id:) = null`, sensitive-field rejection, no idempotency-key
+  requirement or behavior change, default/max/offset pagination, role/default
+  active scope, practice scoping, inactive/cross-practice location nulls, no
+  audit writes, and forbidden runtime-path imports.
+
+Worker mix:
+
+- Claude via `scripts\drive_agent_headless.py` and the Claude CLI: PASS;
+  reviewed the API/contract boundary and pushed the harness toward reusable
+  consumer-contract helpers instead of duplicated resolver tests.
+- DeepSeek via direct Codex `deepseek-worker`: PASS; reviewed security/static
+  boundaries and added pitfalls for GraphQL error-code shape, null-variable
+  serialization, no UI/schema changes, and forbidden runtime paths.
+- Antigravity via `agy.exe`: not used in Sprint 273 because this sprint was a
+  backend/test-only harness. Antigravity is reserved for Sprint 274's Office
+  add-in consumer/UX proposal where it has a distinct artifact or veto surface.
+
+Boundary:
+
+- Test-only harness under `tests/`.
+- No Office add-in runtime switch, production UI wiring, runtime schema change,
+  global readiness snapshot change, provider/Access AI invocation,
+  memory/RAG/GraphRAG wiring, H15/H-series runtime import, historical
+  diary/local_data import, external patient-client exposure, write authority,
+  audit write, mutation, subscription, deployment claim, or production
+  readiness claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_internal_consumer_harness.py tests\test_practitioner_directory_graphql_release_boundary.py tests\test_sprint_closeout_protocol.py -q
+```
+
+Result: Sprint 273 harness/release/protocol suite `40 passed`.
+
+Implementation commit: integrating commit for Sprint 273.
+
+Sprint engine state: continuing to Sprint 274 Office add-in GraphQL consumer
+proposal with Antigravity consumer/UX review.
+
+---
+
+## Previous Closeout - Sprint 272 Approval
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 272 Practitioner Directory GraphQL Release-Boundary Approval |
 | Integrated through | Ariadne approval-slip update after Yuri go/no-go |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 272 Approval Update
