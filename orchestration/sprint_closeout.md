@@ -24,10 +24,44 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 279 Practitioner Directory Office Add-in GraphQL Switch Route-Intercepted Evidence |
-| Integrated through | Ariadne route-intercepted Playwright evidence with DeepSeek PASS review |
+| Batch | Sprint 280 Practitioner Directory Office Add-in GraphQL Default-On Approval Packet |
+| Integrated through | Ariadne docs/tests-only default-on approval packet, pending Yuri approval |
 | Status | Integrated, verified, pending commit/push |
 | Last updated | 2026-07-09 |
+
+## Sprint 280 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-default-on-approval-packet.{json,md}`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_default_on_approval_packet.py`.
+- The packet decision is
+  `pending_yuri_approval_for_office_addin_graphql_practitioner_selector_default_on`.
+- No runtime code was changed; `docs/diary/diary.js` remains
+  `ENABLE_GRAPHQL_PRACTITIONERS = false`.
+- The packet defines the exact approval template, single-consumer default-on
+  scope, REST fallback requirements, required post-approval runtime tests, and
+  must-remain-false gates.
+- Claude and Antigravity were stood down for Sprint 280 because this is a
+  docs/tests-only approval packet with no API contract, resolver, backend route,
+  schema, auth model, or runtime UX change. DeepSeek final review is recorded in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint280-office-addin-graphql-default-on-packet.md`.
+
+## Sprint 280 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_default_on_approval_packet.py tests\test_practitioner_directory_office_addin_graphql_switch_route_intercepted.py tests\test_practitioner_directory_office_addin_graphql_switch_runtime.py tests\test_sprint_closeout_protocol.py -q
+git diff --check
+```
+
+Result: packet/support/protocol suite `25 passed`; whitespace check passed.
+
+Sprint engine state: paused for Yuri approval before any default-on runtime
+change or Office add-in GraphQL traffic by default.
+
+---
+
+## Previous Closeout - Sprint 279
 
 ## Sprint 279 What Changed
 

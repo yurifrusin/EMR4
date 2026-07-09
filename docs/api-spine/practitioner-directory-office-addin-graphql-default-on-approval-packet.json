@@ -1,0 +1,138 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_default_on_approval_packet.v1",
+  "date": "2026-07-09",
+  "sprint": 280,
+  "recorded_by": "ariadne",
+  "decision": "pending_yuri_approval_for_office_addin_graphql_practitioner_selector_default_on",
+  "target_consumer": "office_addin_diary_booking_practitioner_selector",
+  "target_field": "Query.practice.practitioners",
+  "endpoint": "/api/v1/graphql",
+  "source_switch_approval": "docs/api-spine/practitioner-directory-office-addin-graphql-consumer-switch-approval-packet.json",
+  "source_runtime_evidence": "docs/api-spine/practitioner-directory-office-addin-graphql-switch-runtime.json",
+  "source_route_intercepted_evidence": "docs/api-spine/practitioner-directory-office-addin-graphql-switch-route-intercepted-evidence.json",
+  "current_release_boundary_expires_on": "2026-08-06",
+  "proposed_default_on_approval_expires_on": "2026-08-06",
+  "approval_required_before_code": true,
+  "yuri_approval_record": {
+    "statement": null,
+    "recorded_on": null,
+    "approved_scope": null,
+    "approval_expires_on": null
+  },
+  "authorized_now": {
+    "change_enable_graphql_practitioners_default_to_true": false,
+    "send_office_addin_live_graphql_traffic_by_default": false,
+    "remove_rest_fallback": false,
+    "add_runtime_user_override": false,
+    "add_server_config_endpoint": false,
+    "add_telemetry_endpoint": false,
+    "claim_deployment_or_production_readiness": false
+  },
+  "if_yuri_approves_later": {
+    "may_change_enable_graphql_practitioners_default_to_true": true,
+    "may_send_graphql_traffic_for_one_internal_staff_consumer_by_default": true,
+    "must_keep_rest_fallback": true,
+    "must_keep_http_401_logout_behavior": true,
+    "must_keep_source_controlled_gate_or_equivalent_static_config": true,
+    "may_add_runtime_user_override": false,
+    "may_add_local_storage_override": false,
+    "may_add_query_parameter_override": false,
+    "may_add_office_settings_override": false,
+    "may_add_server_config_endpoint": false,
+    "may_add_telemetry_endpoint": false,
+    "may_change_backend_routes_or_schema": false,
+    "may_expand_graphql_projection": false,
+    "may_change_readiness_flags": false,
+    "may_claim_deployment_or_production_readiness": false
+  },
+  "approval_preconditions": {
+    "runtime_switch_default_off_implemented": true,
+    "route_intercepted_default_off_rest_evidence_passed": true,
+    "route_intercepted_enabled_fallback_evidence_passed": true,
+    "deepseek_sprint279_review_passed": true,
+    "antigravity_sprint279_review_passed": false,
+    "antigravity_sprint279_status": "timed_out",
+    "claude_required": false,
+    "claude_reason": "No API contract, resolver, backend route, schema, or runtime auth/error model changed."
+  },
+  "default_on_scope": {
+    "consumer": "office_addin_diary_booking_practitioner_selector",
+    "audience": "authenticated_internal_staff_only",
+    "practice_scoped": true,
+    "external_or_patient_client": false,
+    "graphql_operation": "query",
+    "mutations_allowed": false,
+    "subscriptions_allowed": false,
+    "other_graphql_roots_allowed": false,
+    "default_render_source_if_approved": "GraphQL",
+    "fallback_render_source": "REST",
+    "rest_route_retained": "GET /api/v1/practice/practitioners?activeOnly=true&limit=200"
+  },
+  "approved_projection": [
+    "id",
+    "displayName",
+    "roleLabel",
+    "active",
+    "defaultLocation.id",
+    "defaultLocation.name"
+  ],
+  "required_runtime_behavior_if_approved": {
+    "http_401": "existing_apiFetch_logout_and_no_rest_fallback_retry_loop",
+    "http_non_401_or_network_timeout": "fall_back_to_rest_once",
+    "graphql_forbidden": "fall_back_to_rest_once_without_logout",
+    "graphql_bad_user_input": "fall_back_to_rest_once_without_logout",
+    "practice_null": "empty_rows_without_rest_fallback",
+    "empty_practitioners": "ordinary_empty_directory_state",
+    "default_location_null": "preserve_row_with_empty_location_shape",
+    "unknown_fields": "not_bound_by_normalizePractitionerDirectory",
+    "malformed_required_row_field": "drop_malformed_row"
+  },
+  "required_tests_before_default_on_closeout": [
+    "runtime source guard proves ENABLE_GRAPHQL_PRACTITIONERS true only after approval packet is updated",
+    "route-intercepted default-on browser test proves POST /api/v1/graphql is attempted first",
+    "route-intercepted default-on browser test proves approved query variables",
+    "route-intercepted fallback test proves REST fallback remains one-shot",
+    "HTTP 401 test proves existing logout path still rethrows",
+    "sensitive canary fields are absent from rendered page",
+    "no telemetry, deployment, production, readiness, provider, memory, H15, trove, mutation, subscription, or field expansion claim"
+  ],
+  "worker_reviews": {
+    "deepseek_default_on_packet": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint280-office-addin-graphql-default-on-packet.md",
+      "verdict": "PASS"
+    },
+    "antigravity": {
+      "used": false,
+      "reason": "Sprint 280 is a docs/tests-only approval packet; Sprint 279 Antigravity invocation timed out and no runtime UX changed."
+    },
+    "claude": {
+      "used": false,
+      "reason": "No API contract, resolver, backend route, schema, or runtime auth/error model changed."
+    }
+  },
+  "must_remain_false": {
+    "runtime_default_on_approved": false,
+    "graphql_live_traffic_by_default": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false
+  },
+  "yuri_approval_payload_template": {
+    "decision": "approved_for_office_addin_graphql_practitioner_selector_default_on",
+    "target_consumer": "office_addin_diary_booking_practitioner_selector",
+    "target_field": "Query.practice.practitioners",
+    "approval_expires_on": "2026-08-06",
+    "acknowledged_internal_staff_only": true,
+    "acknowledged_rest_fallback_retained": true,
+    "acknowledged_no_deployment_or_production_readiness": true,
+    "acknowledged_no_external_client_write_provider_memory_h15_trove_mutation_subscription_field_expansion": true
+  },
+  "next_recommended_work": "Stop for Yuri approval before changing ENABLE_GRAPHQL_PRACTITIONERS to true or sending Office add-in GraphQL traffic by default."
+}
