@@ -24,9 +24,73 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 270 Practitioner Directory GraphQL Resolver |
+| Integrated through | Ariadne resolver implementation with DeepSeek PASS review |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 270 What Changed
+
+- Added `Query.practice(id: ID)` to the Strawberry schema; it returns the
+  viewer practice context by default and returns `null` for a mismatched
+  practice ID without querying or leaking the other practice.
+- Added the single approved
+  `Practice.practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0)`
+  field.
+- The resolver calls only
+  `app/services/practice/practitioner_directory_read.py::list_practitioner_directory`.
+- GraphQL projection matches the REST slice:
+  `id`, `displayName`, `roleLabel`, `active`, and
+  `defaultLocation { id, name }`.
+- Added explicit GraphQL bounds checks for `limit` and `offset`.
+- Mapped inactive-directory authorization failures to GraphQL `FORBIDDEN` and
+  unexpected resolver failures to `INTERNAL_ERROR`.
+- Added
+  `docs/api-spine/practitioner-directory-graphql-resolver-runtime.json`.
+- Added
+  `docs/api-spine/practitioner-directory-graphql-resolver-runtime.md`.
+- Added `tests/test_practitioner_directory_graphql_resolver.py`.
+- Updated older plan-era static tests so they now assert the approved live
+  resolver boundary rather than the pre-approval absence of GraphQL runtime code.
+- Added DeepSeek Sprint 270 resolver-boundary review artifact.
+
+Worker mix:
+
+- DeepSeek via direct Codex `deepseek-worker`: PASS; flagged the HTTPException
+  mapping, GraphQL-side input validation, UUID-to-ID conversion, and no-leak
+  `practice(id:)` behavior. Those cautions were integrated.
+
+Boundary:
+
+- Only `Query.practice.practitioners` is opened.
+- No GraphQL mutations, subscriptions, global readiness snapshot change,
+  provider/Access AI invocation, memory/RAG/GraphRAG wiring, H15/H-series
+  runtime import, historical diary/local_data import, external patient-client
+  exposure, write authority, audit write, deployment claim, or production
+  readiness claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_resolver.py tests\test_practitioner_directory_graphql_runtime_shell.py tests\test_practitioner_directory_graphql_dependency_preflight.py tests\test_practitioner_directory_graphql_runtime_gate.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_practitioner_directory_graphql_sdl_alignment_evidence.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py -q
+```
+
+Result: Sprint 270 resolver/API-spine suite `82 passed`.
+
+Implementation commit: integrating commit for Sprint 270.
+
+Sprint engine state: continuing to Sprint 271 GraphQL practitioner contract
+hardening and release-boundary evidence.
+
+---
+
+## Previous Closeout - Sprint 269
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 269 Practitioner Directory GraphQL Runtime Shell |
 | Integrated through | Ariadne runtime shell with DeepSeek PASS review |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 269 What Changed

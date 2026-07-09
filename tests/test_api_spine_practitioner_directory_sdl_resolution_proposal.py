@@ -239,12 +239,17 @@ def test_future_runtime_sdl_tests_are_listed():
         assert phrase in text
 
 
-def test_current_code_has_sdl_and_rest_slice_but_no_graphql_resolver_changes():
+def test_current_code_has_sdl_rest_slice_and_approved_graphql_resolver():
     app_text = _app_python_text()
+    graphql_text = "\n".join(
+        path.read_text(encoding="utf-8", errors="replace")
+        for path in sorted((APP / "graphql").rglob("*.py"))
+    )
 
     assert (APP / "routers" / "practice.py").exists()
     assert (APP / "schemas" / "practice.py").exists()
     assert (APP / "services" / "practice" / "practitioner_directory_read.py").exists()
+    assert (APP / "graphql" / "schema.py").exists()
     for fragment in [
         "class PractitionerOut",
         "class PractitionerDefaultLocationOut",
@@ -253,17 +258,25 @@ def test_current_code_has_sdl_and_rest_slice_but_no_graphql_resolver_changes():
     ]:
         assert fragment in app_text
     for fragment in [
-        "def list_practitioners",
-        "Query.practice.practitioners",
-        "@strawberry.field",
         "import strawberry",
         "from strawberry",
+        "def practitioners(",
+        "list_practitioner_directory(",
+    ]:
+        assert fragment in graphql_text
+    for fragment in [
+        "def list_practitioners",
+        "Query.practice.practitioners",
         "import graphene",
         "from graphene",
         "import ariadne",
         "from ariadne",
+        "app.routers.practice",
+        "db.query(",
+        ".add(",
+        ".commit(",
     ]:
-        assert fragment not in app_text
+        assert fragment not in graphql_text
     assert "type PracticeLocationBrief" in _read(SDL)
     assert "defaultLocation: PracticeLocationBrief" in _read(SDL)
     assert "PractitionerListResult" not in _read(SDL)

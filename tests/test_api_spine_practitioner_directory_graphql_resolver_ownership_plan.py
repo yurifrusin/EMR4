@@ -130,9 +130,11 @@ def test_graphql_resolver_gate_verdict_keeps_runtime_false():
     }
 
 
-def test_no_graphql_runtime_dependency_or_import_exists():
+def test_approved_graphql_runtime_imports_are_scoped_to_strawberry():
     app_text = _app_python_text().lower()
-    for fragment in RUNTIME_GRAPHQL_IMPORTS:
+    assert "import strawberry" in app_text
+    assert "from strawberry" in app_text
+    for fragment in ("import graphene", "from graphene", "import ariadne", "from ariadne"):
         assert fragment not in app_text
 
     dependency_text = "\n".join(
@@ -140,23 +142,31 @@ def test_no_graphql_runtime_dependency_or_import_exists():
         for pattern in ["pyproject.toml", "requirements*.txt"]
         for path in ROOT.glob(pattern)
     )
-    for package in ["strawberry-graphql", "graphene", "ariadne"]:
+    assert "strawberry-graphql[fastapi]==0.320.3" in dependency_text
+    for package in ["graphene", "ariadne"]:
         assert package not in dependency_text
 
 
-def test_no_query_practice_practitioners_resolver_exists():
+def test_query_practice_practitioners_resolver_uses_shared_read_service_only():
     app_text = _app_python_text()
+    graphql_text = "\n".join(
+        path.read_text(encoding="utf-8", errors="replace")
+        for path in sorted((APP / "graphql").rglob("*.py"))
+    )
 
-    forbidden_fragments = [
+    assert "@strawberry.field" in graphql_text
+    assert "def practitioners(" in graphql_text
+    assert "list_practitioner_directory(" in graphql_text
+    for fragment in [
         "app/graphql/resolvers/practice.py",
         "def resolve_practitioners",
         "async def resolve_practitioners",
         "Query.practice.practitioners",
-        "@strawberry.field",
         "ObjectType(\"Practice\")",
-    ]
-    for fragment in forbidden_fragments:
+    ]:
         assert fragment not in app_text
+    for fragment in ["app.routers.practice", "db.query(", "select(", ".add(", ".commit("]:
+        assert fragment not in graphql_text
 
 
 def test_readiness_dag_and_snapshot_graphql_resolver_wiring_remain_blocked():

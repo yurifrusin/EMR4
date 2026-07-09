@@ -31,15 +31,13 @@ def test_graphql_endpoint_is_mounted_only_at_api_v1_graphql():
     assert {method for route in graphql_routes for method in route.methods} == {"GET", "POST"}
 
 
-def test_graphql_schema_shell_has_query_and_no_mutation_or_practitioners():
+def test_graphql_runtime_has_query_and_no_mutation_or_subscription():
     sdl = schema.as_str()
 
     assert "type Query" in sdl
     assert "graphqlHealth" in sdl
     assert "type Mutation" not in sdl
     assert "type Subscription" not in sdl
-    assert "practice" not in sdl
-    assert "practitioners" not in sdl
 
 
 def test_graphql_schema_shell_does_not_expose_sensitive_field_names():
@@ -110,7 +108,6 @@ def test_graphql_shell_no_provider_memory_trove_rest_router_or_write_imports():
 
     for fragment in (
         "app.routers.practice",
-        "list_practitioner_directory",
         "provider",
         "access_ai",
         "practice_knowledge",

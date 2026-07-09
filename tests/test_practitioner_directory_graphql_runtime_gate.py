@@ -148,10 +148,10 @@ def test_graphql_runtime_gate_allows_later_shell_but_not_practitioner_resolver()
         "import ariadne",
         "from ariadne",
         "def resolve_practitioners",
-        "practice.practitioners",
     ):
         assert fragment not in app_text
-    assert "list_practitioner_directory" not in graphql_text
+    assert "practice.practitioners" not in app_text
+    assert "list_practitioner_directory" in graphql_text
     for package in ("graphene", "ariadne"):
         assert package not in dependency_text
 

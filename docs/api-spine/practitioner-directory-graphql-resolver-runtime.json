@@ -1,0 +1,63 @@
+{
+  "schema_version": "api_spine.practitioner_directory_graphql_resolver_runtime.v1",
+  "date": "2026-07-09",
+  "sprint": 270,
+  "recorded_by": "ariadne",
+  "approval_source": "explicit Yuri authorization for Sprints 268-272 to add the GraphQL dependency, mount /api/v1/graphql, and implement Query.practice.practitioners only",
+  "decision": "approved_query_practice_practitioners_only",
+  "endpoint_path": "/api/v1/graphql",
+  "target_field": "Query.practice.practitioners",
+  "runtime_surface": {
+    "query_practice_field": true,
+    "query_practice_optional_id_argument": true,
+    "query_practice_id_mismatch_returns_null": true,
+    "query_practice_practitioners_resolver": true,
+    "practice_practitioners_args": {
+      "activeOnly": "Boolean = true",
+      "limit": "Int = 50",
+      "offset": "Int = 0"
+    },
+    "mutations": false,
+    "subscriptions": false
+  },
+  "resolver_contract": {
+    "sole_data_path": "app/services/practice/practitioner_directory_read.py::list_practitioner_directory",
+    "rest_router_import": false,
+    "independent_sqlalchemy_query": false,
+    "provider_access_ai_memory_rag_graphrag": false,
+    "h15_h_series_historical_diary": false,
+    "writes_or_audit_writes": false,
+    "external_client_surface": false,
+    "deployment_or_production_readiness": false
+  },
+  "error_model": {
+    "missing_or_invalid_token_http_status": 401,
+    "limit_or_offset_invalid_code": "BAD_USER_INPUT",
+    "active_only_false_without_admin_owner_code": "FORBIDDEN",
+    "internal_exception_code": "INTERNAL_ERROR",
+    "raw_sql_or_stack_trace_exposure_allowed": false
+  },
+  "worker_review": {
+    "reviewer_lane": "deepseek-worker",
+    "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint270-graphql-practitioners-resolver.md",
+    "verdict": "PASS",
+    "integrated_cautions": [
+      "map shared-service HTTPException 403 to GraphQL FORBIDDEN",
+      "validate limit and offset in the resolver because FastAPI Query bounds do not apply",
+      "implement Query.practice(id) as viewer-practice context only and return null on mismatch without querying other practices",
+      "convert UUIDs to Strawberry ID strings",
+      "keep all non-practitioner GraphQL fields and adjacent gates closed"
+    ]
+  },
+  "must_remain_false": {
+    "graphql_mutation_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_allowed_step": "sprint_271_practitioner_graphql_contract_hardening_and_release_boundary_evidence"
+}
+
