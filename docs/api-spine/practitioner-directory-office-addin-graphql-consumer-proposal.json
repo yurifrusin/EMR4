@@ -1,0 +1,121 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_consumer_proposal.v1",
+  "date": "2026-07-09",
+  "sprint": 274,
+  "recorded_by": "ariadne",
+  "decision": "proposal_only_no_runtime_switch",
+  "target_consumer": "Office add-in taskpane practitioner selector",
+  "target_field": "Query.practice.practitioners",
+  "endpoint": "/api/v1/graphql",
+  "approved_release_boundary_commit": "0ad2b639",
+  "consumer_harness_commit": "17fdeb53",
+  "approval_expires_on": "2026-08-06",
+  "scope": {
+    "proposal_only": true,
+    "comparison_design_only": true,
+    "runtime_taskpane_switch": false,
+    "taskpane_code_change": false,
+    "backend_route_change": false,
+    "schema_change": false,
+    "readiness_flag_change": false,
+    "deployment_or_production_exposure": false,
+    "external_or_patient_client_exposure": false
+  },
+  "authorized_query": {
+    "operation": "query",
+    "root": "practice",
+    "field": "practitioners",
+    "variables": {
+      "activeOnly": "Boolean",
+      "limit": "Int",
+      "offset": "Int"
+    },
+    "approved_projection": [
+      "id",
+      "displayName",
+      "roleLabel",
+      "active",
+      "defaultLocation.id",
+      "defaultLocation.name"
+    ],
+    "field_expansion_allowed": false
+  },
+  "consumer_error_model": {
+    "http_401_transport": "same_logout_path_as_rest",
+    "graphql_forbidden_extensions_code": "consumer_layer_access_denied_no_logout",
+    "graphql_bad_user_input_extensions_code": "developer_argument_error_no_logout",
+    "practice_id_mismatch": "practice_null_without_data_leak",
+    "raw_graphql_error_copy_user_visible": false
+  },
+  "comparison_methodology": {
+    "mode": "future_developer_or_staging_shadow_comparison_only",
+    "render_source_during_comparison": "REST",
+    "graphql_result_use_during_comparison": "contract_drift_detection_only",
+    "telemetry_in_sprint_274": "none",
+    "telemetry_before_switch": "local_browser_console_only_unless_separately_approved",
+    "data_content_values_in_committed_artifacts": false,
+    "latency_or_throughput_claims": false,
+    "readiness_claims": false
+  },
+  "future_runtime_gate_required_before_switch": [
+    "current_non_expired_release_boundary",
+    "taskpane_graphql_fetch_wrapper_tests",
+    "rest_graphql_projection_drift_tests",
+    "feature_flag_or_config_gate_defaults_false",
+    "expiry_or_sunset_handling",
+    "antigravity_consumer_ux_pass",
+    "deepseek_security_static_pass",
+    "new_yuri_approval_if_scope_or_expiry_changes"
+  ],
+  "forbidden_in_sprint_274": {
+    "local_storage_feature_flag": true,
+    "query_parameter_feature_flag": true,
+    "config_toggle": true,
+    "runtime_shadow_fetch": true,
+    "client_logging_endpoint": true,
+    "mutation_or_subscription": true,
+    "audit_write": true,
+    "idempotency_key_requirement": true,
+    "provider_access_ai_memory_rag_graphrag_h15_trove": true,
+    "production_introspection_or_rate_limit_claim": true
+  },
+  "worker_reviews": {
+    "antigravity_consumer_ux": {
+      "artifact": "orchestration/agent_inbox/antigravity/antigravity-sprint274-office-addin-graphql-consumer-proposal.md",
+      "verdict": "PASS",
+      "integrated_cautions": [
+        "handle HTTP transport errors separately from GraphQL response-body errors",
+        "comparison mode must render from REST until a later switch gate",
+        "never show raw GraphQL or resolver strings to users",
+        "keep field projection minimal and discard undocumented fields",
+        "future feature flag must default false and respect expiry"
+      ]
+    },
+    "deepseek_api_static": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint274-office-addin-graphql-consumer-proposal.md",
+      "verdict": "PASS",
+      "integrated_cautions": [
+        "HTTP 401 and GraphQL extensions.code failures must not be conflated",
+        "Sprint 274 must not introduce even a hidden runtime flag",
+        "REST-vs-GraphQL comparison must be structural and contractual only",
+        "approval expiry 2026-08-06 must remain visible",
+        "writes, audit writes, idempotency keys, providers, memory, H15, and trove remain zero"
+      ]
+    },
+    "claude": {
+      "used": false,
+      "reason": "No API contract or resolver shape changed in Sprint 274; Claude remains stood down rather than duplicating Antigravity/DeepSeek review."
+    }
+  },
+  "must_remain_false": {
+    "office_addin_runtime_switch_ready": false,
+    "graphql_resolver_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_recommended_work": "Sprint 275 may draft a blocked-by-default taskpane GraphQL fetch wrapper test plan only if the release boundary remains current; do not implement runtime traffic without a separate consumer switch approval."
+}

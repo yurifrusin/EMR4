@@ -24,9 +24,63 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 274 Practitioner Directory Office Add-in GraphQL Consumer Proposal |
+| Integrated through | Ariadne proposal/tests with Antigravity and DeepSeek PASS reviews |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 274 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-consumer-proposal.json`.
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-consumer-proposal.md`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_consumer_proposal.py`.
+- Added Antigravity consumer/UX PASS review artifact at
+  `orchestration/agent_inbox/antigravity/antigravity-sprint274-office-addin-graphql-consumer-proposal.md`.
+- Added DeepSeek API/static PASS review artifact at
+  `orchestration/agent_inbox/codex/review-deepseek-sprint274-office-addin-graphql-consumer-proposal.md`.
+- Proved the proposal stays proposal-only: no `taskpane.js` GraphQL query,
+  hidden feature flag, runtime shadow fetch, taskpane code change, route change,
+  schema change, readiness flag change, deployment/production claim,
+  external-client exposure, provider/memory/H15/trove path, write/audit write,
+  mutation, subscription, telemetry endpoint, or field expansion.
+
+Worker mix:
+
+- Antigravity via `agy.exe`: PASS; reviewed the Office add-in consumer/UX
+  surface, error copy, comparison posture, fallback behavior, privacy, and future
+  feature-flag posture.
+- DeepSeek via direct Codex `deepseek-worker`: PASS; reviewed API/static
+  boundaries, especially HTTP `401` versus GraphQL `extensions.code`, no hidden
+  switch, exact projection, and no latency/readiness claims.
+- Claude: intentionally stood down because Sprint 274 did not change the API
+  contract, resolver shape, or runtime auth/error model.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_consumer_proposal.py tests\test_practitioner_directory_graphql_internal_consumer_harness.py tests\test_practitioner_directory_graphql_release_boundary.py tests\test_sprint_closeout_protocol.py -q
+```
+
+Result: Sprint 274 proposal/harness/release/protocol suite `48 passed`.
+
+Implementation commit: integrating commit for Sprint 274.
+
+Sprint engine state: continuing to Sprint 275 only as a blocked-by-default
+Office add-in GraphQL fetch-wrapper test plan; no runtime traffic without a
+separate consumer switch approval.
+
+---
+
+## Previous Closeout - Sprint 273
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 273 Practitioner Directory GraphQL Internal Consumer Harness |
 | Integrated through | Ariadne harness with Claude and DeepSeek PASS reviews |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 273 What Changed
