@@ -26,7 +26,10 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 290 D5 Reopening Decision Packet |
 | Integrated through | Ariadne decision packet with Antigravity review; DeepSeek worker retired and not used |
-| Status | Integrated, verified, pending commit/push |
+| Status | Published to `origin/master` and `origin/handoff/current` |
+| Commit | `e74c2a22` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` before publication-state correction |
 | Last updated | 2026-07-09 |
 
 ## Sprint 290 What Changed
