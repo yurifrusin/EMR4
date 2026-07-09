@@ -74,7 +74,7 @@ Verification:
 
 Result: route-scoped readiness status suite `7 passed`.
 
-Implementation commit: pending.
+Implementation commit: `0ff0e10a`.
 
 Sprint engine state: continuing to Sprint 261 consumer-boundary/readiness-use
 preflight. The next block should decide where this route-scoped readiness status
