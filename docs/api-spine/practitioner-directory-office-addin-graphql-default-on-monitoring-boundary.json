@@ -1,0 +1,75 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_default_on_monitoring_boundary.v1",
+  "date": "2026-07-09",
+  "sprint": 285,
+  "recorded_by": "ariadne",
+  "decision": "monitoring_boundary_defined_no_telemetry_or_readiness_claim",
+  "source_runtime_evidence": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-runtime.json",
+  "source_publication_status": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-publication-status.json",
+  "source_local_backend_smoke": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-local-backend-smoke.json",
+  "source_rollback_packet": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-rollback-packet.json",
+  "target_surface": "docs/diary/diary.js",
+  "target_consumer": "office_addin_diary_booking_practitioner_selector",
+  "current_runtime_state": {
+    "feature_gate_name": "ENABLE_GRAPHQL_PRACTITIONERS",
+    "feature_gate_default": true,
+    "single_consumer_only": true,
+    "rest_fallback_retained": true,
+    "rollback_packet_available": true,
+    "server_config_endpoint": false,
+    "runtime_user_override": false,
+    "telemetry_endpoint": false
+  },
+  "observable_without_new_instrumentation": {
+    "committed_route_intercepted_browser_evidence": true,
+    "committed_local_backend_smoke": true,
+    "manual_user_report_channels": true,
+    "existing_browser_console_warning_path": true,
+    "new_backend_or_frontend_telemetry_added": false,
+    "production_metrics_claimed": false
+  },
+  "operator_checklist": [
+    "Confirm Office add-in practitioner selector rows render in the intended environment before any readiness claim.",
+    "Watch for selector-empty reports after authentication succeeds.",
+    "Watch for GraphQL-specific 401/logout loops.",
+    "Watch for repeated fallback-to-REST console warnings tied to practitioner directory GraphQL.",
+    "Watch for any practitioner row, inactive practitioner, or cross-practice leakage report.",
+    "Use the Sprint 284 rollback packet if GraphQL-specific selector failures block booking flow."
+  ],
+  "readiness_blockers": {
+    "production_observability_evidence": true,
+    "deployment_environment_validation": true,
+    "external_client_policy": true,
+    "global_graphql_readiness_review": true,
+    "security_review_for_broader_graphql_surface": true,
+    "telemetry_privacy_review_if_new_instrumentation_is_proposed": true
+  },
+  "must_not_claim": {
+    "deployment_ready": true,
+    "production_ready": true,
+    "telemetry_ready": true,
+    "global_graphql_ready": true,
+    "external_client_ready": true,
+    "write_or_audit_write_ready": true,
+    "provider_or_memory_ready": true
+  },
+  "must_remain_false": {
+    "deployment_ready": false,
+    "production_ready": false,
+    "global_graphql_readiness": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false
+  },
+  "worker_posture": {
+    "claude": "stood_down_no_api_contract_resolver_schema_auth_or_error_model_change",
+    "antigravity": "stood_down_no_new_ui_or_user_interaction_change",
+    "deepseek": "requested_static_readiness_overclaim_review"
+  },
+  "next_recommended_work": "Pause before deployment or production readiness. If continuing without approval, work only on non-runtime evidence hygiene or choose a different already-approved track."
+}

@@ -24,9 +24,56 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 285 Default-On Monitoring Boundary |
+| Integrated through | Ariadne monitoring/readiness-boundary packet and guard tests |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 285 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-default-on-monitoring-boundary.{json,md}`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_default_on_monitoring_boundary.py`.
+- Defined observable-without-new-instrumentation evidence for the default-on
+  Office add-in practitioner selector path.
+- Recorded operator watchpoints for selector-empty reports, GraphQL-specific
+  logout loops, fallback warnings, leakage reports, and rollback use.
+- Kept production observability, deployment validation, external-client policy,
+  global GraphQL readiness, broader security review, and telemetry privacy
+  review as blockers before any readiness claim.
+- Added no telemetry endpoint, metrics system, runtime override, server config,
+  or readiness flag.
+
+## Sprint 285 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_default_on_monitoring_boundary.py tests\test_practitioner_directory_office_addin_graphql_default_on_rollback_packet.py tests\test_sprint_closeout_protocol.py -q
+node --check docs\diary\diary.js
+git diff --check
+```
+
+Result: monitoring/rollback/protocol suite `18 passed`. Final node and
+whitespace checks pending closeout metadata.
+
+Sprint engine state: pause before any deployment or production readiness claim.
+If continuing without approval, choose only a different already-approved
+non-runtime evidence track. No deployment, production, readiness, telemetry,
+external-client, write, provider, memory, H15/trove, mutation, subscription, or
+field-expansion gate is opened.
+
+---
+
+## Previous Closeout - Sprint 284
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 284 Default-On Rollback Packet |
 | Integrated through | Ariadne rollback packet and guard tests |
-| Status | Integrated, verified, pending commit/push |
+| Status | Published to `origin/master` and `handoff/current`; worktree clean |
+| Commit | `16eed7ed5fbf47d978712f752be164610335d8b2` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` |
 | Last updated | 2026-07-09 |
 
 ## Sprint 284 What Changed
@@ -46,24 +93,25 @@ Every closeout entry should record:
   broader readiness.
 - Did not roll back the runtime now; the current default-on path remains
   active for the one approved Office add-in diary practitioner selector.
+- DeepSeek blocked the first packet because post-rollback validation listed
+  current default-on baseline tests; the fix replaced those commands with
+  rollback-specific validation and added a static one-line rollback simulator.
 
 ## Sprint 284 Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_default_on_rollback_packet.py tests\test_practitioner_directory_office_addin_graphql_switch_runtime.py tests\test_practitioner_directory_office_addin_graphql_default_on_local_backend_smoke.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_default_on_rollback_packet.py tests\test_practitioner_directory_office_addin_graphql_switch_runtime.py tests\test_practitioner_directory_office_addin_graphql_default_on_local_backend_smoke.py tests\test_sprint_closeout_protocol.py -q
 node --check docs\diary\diary.js
 git diff --check
 ```
 
-Result: rollback/support suite `14 passed`. Final node and whitespace checks
-pending closeout metadata.
+Result: rollback/support/protocol suite `22 passed`; `node --check` and
+whitespace checks passed.
 
-Sprint engine state: continuing after Sprint 284 commit/push and Pushover
-closure ping only to a small post-default-on monitoring/readiness-boundary
-packet, or pausing before any deployment/production readiness claim. No
-deployment, production, readiness, telemetry,
-external-client, write, provider, memory, H15/trove, mutation, subscription, or
-field-expansion gate is opened.
+Sprint engine state: continued to Sprint 285 monitoring/readiness-boundary
+packet. No deployment, production, readiness, telemetry, external-client, write,
+provider, memory, H15/trove, mutation, subscription, or field-expansion gate was
+opened.
 
 ---
 
