@@ -1,0 +1,40 @@
+{
+  "schema_version": "bernie.ui_dag.d5_frontend_consumption_evidence.v1",
+  "date": "2026-07-09",
+  "status": "route_intercepted_frontend_consumption_verified",
+  "implemented_backend_commit": "098b92a7",
+  "response_shape_report_commit": "c029f27e",
+  "evidence_label": "route_intercepted_playwright",
+  "frontend_javascript_changed": false,
+  "production_backend_called": false,
+  "provider_called": false,
+  "appointment_write_performed": false,
+  "view_model_source_under_test": "staff_review.ui_view_model",
+  "legacy_top_level_view_model_required": false,
+  "existing_consumer_function": "attachBernieUiViewModelToStaffReview",
+  "rendered_flow": "diary smoke page -> intercepted supervised-booking response -> staff review panel renders backend-delivered UI model -> signed confirm payload excludes view-model fields",
+  "playwright_evidence": {
+    "file": "review/test_diary_smoke.py",
+    "test": "test_bernie_ui_view_model_consumes_backend_staff_review_field_without_js_expansion"
+  },
+  "static_evidence": {
+    "frontend_source": "docs/diary/diary.js",
+    "consumer_expression": "data?.staff_review?.ui_view_model",
+    "backend_response_field": "staff_review.ui_view_model"
+  },
+  "closed_scope": {
+    "frontend_javascript_expansion": false,
+    "additional_route_delivery": false,
+    "graphql_delivery": false,
+    "provider_or_live_provider_wiring": false,
+    "access_ai_invocation": false,
+    "memory_rag_or_graphrag_wiring": false,
+    "h15_or_h_series_runtime_inputs": false,
+    "historical_diary_runtime_inputs": false,
+    "external_patient_client_exposure": false,
+    "confirm_payload_change": false,
+    "appointment_write_behavior_change": false,
+    "model_to_database_writes": false
+  },
+  "next_required_decision": "separate_review_for_any_scope_expansion"
+}
