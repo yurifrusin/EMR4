@@ -1,0 +1,45 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_default_on_publication_status.v1",
+  "date": "2026-07-09",
+  "sprint": 282,
+  "recorded_by": "ariadne",
+  "source_runtime_evidence": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-runtime.json",
+  "published_runtime_commit": "d3dda16e657a4eb51b845a509c5cff071f530c43",
+  "published_refs": {
+    "master": true,
+    "handoff_current": true
+  },
+  "integration_worktree_clean_after_publication": true,
+  "target_surface": "docs/diary/diary.js",
+  "target_consumer": "office_addin_diary_booking_practitioner_selector",
+  "runtime_posture": {
+    "feature_gate_name": "ENABLE_GRAPHQL_PRACTITIONERS",
+    "feature_gate_default": true,
+    "graphql_live_traffic_by_default": true,
+    "single_consumer_only": true,
+    "rest_fallback_retained": true,
+    "runtime_user_override": false,
+    "server_config_endpoint": false
+  },
+  "evidence_status": {
+    "route_intercepted_browser_evidence_passed": true,
+    "deepseek_review_passed": true,
+    "deepseek_review_artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint282-default-on-publication-status.md",
+    "antigravity_review": "timed_out",
+    "claude_required": false
+  },
+  "must_remain_false": {
+    "deployment_ready": false,
+    "production_ready": false,
+    "global_graphql_readiness": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false
+  },
+  "next_recommended_work": "Proceed to post-default-on safety evidence: a narrow non-intercepted local backend fake-data check, then a rollback packet before any deployment or production readiness claim."
+}

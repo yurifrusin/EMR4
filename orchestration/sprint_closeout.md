@@ -24,9 +24,52 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 282 Default-On Publication Status |
+| Integrated through | Ariadne publication status snapshot and guard tests |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 282 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-default-on-publication-status.{json,md}`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_default_on_publication_status.py`.
+- Corrected Sprint 281 closeout publication metadata inside the previous
+  closeout entry, proving `master` and `handoff/current` were pushed at
+  `d3dda16e657a4eb51b845a509c5cff071f530c43`.
+- Preserved the default-on scope as exactly one Office add-in diary practitioner
+  selector consumer with REST fallback retained.
+- DeepSeek returned PASS for publication-boundary review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint282-default-on-publication-status.md`.
+
+## Sprint 282 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_default_on_publication_status.py tests\test_sprint_closeout_protocol.py -q
+git diff --check
+```
+
+Result: publication/status suite `11 passed`; whitespace check passed with the
+known CRLF notices for touched orchestration Markdown files.
+
+Sprint engine state: continuing to Sprint 283, a narrow non-intercepted local
+backend fake-data check. No deployment, production, readiness, telemetry,
+external-client, write, provider, memory, H15/trove, mutation, subscription, or
+field-expansion gate is opened.
+
+---
+
+## Previous Closeout - Sprint 281
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 281 Practitioner Directory Office Add-in GraphQL Default-On Runtime |
 | Integrated through | Ariadne default-on runtime flip with route-intercepted evidence and DeepSeek PASS review |
-| Status | Integrated, verified, pending commit/push |
+| Status | Published to `origin/master` and `handoff/current`; worktree clean |
+| Commit | `d3dda16e657a4eb51b845a509c5cff071f530c43` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` |
 | Last updated | 2026-07-09 |
 
 ## Sprint 281 What Changed
