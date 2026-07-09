@@ -1,0 +1,73 @@
+{
+  "schema_version": "api_spine.practitioner_directory_sprint257_go_no_go.v1",
+  "date": "2026-07-09",
+  "sprint": 257,
+  "reviewer": "ariadne",
+  "target_route": "GET /api/v1/practice/practitioners",
+  "target_readiness_flag": "rest_route_ready",
+  "current_readiness_value": false,
+  "decision": "no_go_blocker_closure_required_before_readiness_approval_request",
+  "approved_value_after_this_packet": false,
+  "worker_lanes": {
+    "claude": {
+      "role": "independent_readiness_safety_veto",
+      "artifact": "orchestration/agent_inbox/codex/review-claude-sprint257-practitioner-readiness-veto.md",
+      "recommendation": "no_go",
+      "material_finding": "route implementation and direct security evidence are solid, but required readiness criteria remain undocumented and separate Yuri readiness approval is absent"
+    },
+    "antigravity": {
+      "role": "consumer_api_boundary_review",
+      "artifact": "orchestration/agent_inbox/codex/codex-sprint257-antigravity-practitioner-consumer-boundary.md",
+      "recommendation": "go_for_internal_consumer_contract",
+      "material_finding": "OpenAPI shape, query defaults, response fields, sensitive-field exclusion, tenancy boundary, and external-patient-client non-exposure are sound"
+    },
+    "deepseek": {
+      "role": "mechanical_static_sweep",
+      "artifact": "direct deepseek-worker lane Delta plus Ariadne verification commands recorded in markdown packet",
+      "recommendation": "no_mechanical_blockers",
+      "material_finding": "no readiness flag flip, practitioner detail route, sensitive-field schema exposure, adjacent provider/memory/H15/trove import, write side effect, or OpenAPI-test mismatch blocker found"
+    }
+  },
+  "criteria_status": {
+    "runtime_test_matrix_passes_in_isolated_run": "needs_committed_pass_record",
+    "api_spine_artifact_tests_pass": "needs_committed_pass_record",
+    "openapi_contract_snapshot_matches_runtime_route": "met_by_sprint256_report_and_tests",
+    "authn_authz_tenancy_review_current": "met",
+    "anti_enumeration_review_current": "met",
+    "sensitive_field_exclusion_review_current": "met",
+    "pagination_and_error_contract_review_current": "met",
+    "rate_limit_or_deferred_rate_limit_decision_recorded": "missing",
+    "deployment_surface_explicitly_named": "missing",
+    "rls_or_rls_equivalent_gap_recorded": "missing",
+    "field_encryption_gap_recorded": "missing",
+    "external_client_exposure_decision_recorded": "partial_internal_only_boundary_recorded_but_needs_explicit_scope_decision",
+    "separate_yuri_approval_payload_exists": "missing"
+  },
+  "blocking_items_before_requesting_yuri_readiness_approval": [
+    "record isolated runtime route test pass",
+    "record API-spine artifact test pass",
+    "record rate-limit or deferred-rate-limit decision",
+    "name deployment surface",
+    "record practitioner-directory-specific RLS or RLS-equivalent gap",
+    "record practitioner-directory-specific field-encryption gap",
+    "record explicit external-client scope decision",
+    "create separate Yuri approval payload for rest_route_ready=true"
+  ],
+  "consumer_contract_posture": {
+    "internal_staff_consumer_contract": "passes_worker_review",
+    "external_patient_client_ready": false,
+    "public_exposure_ready": false
+  },
+  "must_remain_false": {
+    "rest_route_ready": false,
+    "graphql_resolver_ready": false,
+    "external_read_model_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false
+  },
+  "next_recommended_block": "Sprint 258 practitioner-directory readiness blocker closure: record the missing gap/decision artifacts and test-pass evidence, without creating the separate Yuri approval payload or flipping readiness unless explicitly approved"
+}

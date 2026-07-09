@@ -24,9 +24,81 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 257 Practitioner Directory Multi-Worker Go/No-Go |
+| Integrated through | Ariadne orchestration/integration with Claude readiness/safety veto, Antigravity consumer/API-boundary review, and DeepSeek mechanical static sweep |
+| Status | Integrated and pending push |
+| Last updated | 2026-07-09 |
+
+## Sprint 257 What Changed
+
+- Integrated Claude plan/review packets for
+  `claude-sprint257-practitioner-readiness-veto`.
+- Integrated Antigravity plan/review packets for
+  `antigravity-sprint257-practitioner-consumer-boundary`.
+- Ran a DeepSeek `deepseek-worker` mechanical static sweep; result:
+  no mechanical blockers.
+- Added
+  `docs/api-spine/practitioner-directory-sprint257-go-no-go.json`.
+- Added `docs/api-spine/practitioner-directory-sprint257-go-no-go.md`.
+- Added `tests/test_practitioner_directory_sprint257_go_no_go.py`.
+- Decision:
+  `no_go_blocker_closure_required_before_readiness_approval_request`.
+- Preserved `rest_route_ready=false` and all GraphQL/provider/memory/H15/trove/
+  external-client/write/deployment/production readiness gates as false.
+
+Worker mix:
+
+- Claude via `scripts\drive_agent_headless.py`: used for independent
+  readiness/safety veto; submitted a no-go because several Sprint 255 criteria
+  remain undocumented and a separate Yuri readiness approval payload is absent.
+- Antigravity via `agy.exe`: used for consumer/API ergonomics and
+  external-client boundary review; submitted a pass for the internal consumer
+  contract.
+- DeepSeek via direct Codex `deepseek-worker` spawn: used for mechanical
+  static sweep; reported no readiness flag, detail-route, sensitive-field,
+  adjacent-import, write-side-effect, or OpenAPI/test mismatch blocker.
+
+Boundary:
+
+- Docs, worker review packets, and tests only.
+- No route/schema/service behavior change, no readiness flag change, no SDL or
+  GraphQL resolver, no provider/Access AI invocation, no memory/RAG/GraphRAG
+  wiring, no H15/H-series runtime import, no historical diary/local_data import,
+  no external patient-client exposure, no write authority, no deployment claim,
+  and no production-readiness claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_sprint257_go_no_go.py tests\test_practitioner_directory_readiness_criteria.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_consumer_contract_report.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+git diff --check -- docs\api-spine\practitioner-directory-sprint257-go-no-go.json docs\api-spine\practitioner-directory-sprint257-go-no-go.md tests\test_practitioner_directory_sprint257_go_no_go.py
+```
+
+Result: Sprint 257 go/no-go and readiness criteria set `10 passed`;
+consumer-contract report set `5 passed`; practitioner-directory route matrix
+`31 passed`; API-spine artifact suite `31 passed`; whitespace check passed. An
+accidental parallel run of DB-bootstrapping suites hit the known transient
+Postgres enum creation collision, then passed when rerun serially.
+
+Implementation commits: worker/prep commits `1644c978`, `ce7d358f`,
+`c8bdbbf9`, `954f4eac`, `d7132d25`; Ariadne synthesis commit `4a2f6555`.
+
+Sprint engine state: continuing to Sprint 258 blocker-closure block. Do not
+create a Yuri approval payload or flip `rest_route_ready` without explicit Yuri
+approval.
+
+---
+
+## Previous Closeout - Sprints 254-256
+
+| Item | Value |
+|---|---|
 | Batch | Sprints 254-256 Practitioner Directory Evidence, Readiness Criteria, and Consumer Contract |
 | Integrated through | Ariadne direct implementation; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because the block was bounded API-spine evidence/contract work over an implemented read route |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprints 254-256 What Changed
