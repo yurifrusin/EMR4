@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 262 Practitioner Directory Static Release Check |
 | Integrated through | Ariadne implementation with DeepSeek static-boundary PASS, Claude complete-diff PASS, and Antigravity consumer/deployment PASS |
-| Status | Integrated, verified, and pending push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 262 What Changed
