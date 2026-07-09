@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 261 Practitioner Directory Route Readiness Consumer Boundary |
 | Integrated through | Ariadne implementation with DeepSeek consumer-boundary preflight, Claude API-spine/security PASS, and Antigravity consumer/release/deployment PASS |
-| Status | Integrated and pending push |
+| Status | Integrated, verified, and pending push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 261 What Changed
@@ -87,7 +87,7 @@ suite `31 passed`; whitespace check clean apart from the known CRLF notice on
 the known disposable Postgres enum creation race and passed after resetting the
 test schema and rerunning serially.
 
-Implementation commit: pending.
+Implementation commit: `05007bc8`.
 
 Sprint engine state: continuing only to static release-check/report integration
 if useful. Do not wire runtime behavior or widen adjacent readiness gates.
