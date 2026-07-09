@@ -24,9 +24,58 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 277 Practitioner Directory Office Add-in GraphQL Consumer Switch Approval Packet |
+| Integrated through | Ariadne approval packet/tests with Antigravity and DeepSeek PASS reviews |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 277 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-consumer-switch-approval-packet.json`.
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-consumer-switch-approval-packet.md`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_consumer_switch_approval_packet.py`.
+- Added Antigravity consumer/UX PASS review artifact at
+  `orchestration/agent_inbox/antigravity/antigravity-sprint277-office-addin-graphql-consumer-switch-approval.md`.
+- Added DeepSeek static/release PASS review artifact at
+  `orchestration/agent_inbox/codex/review-deepseek-sprint277-office-addin-graphql-consumer-switch-approval.md`.
+- Updated `orchestration/bernie_release_gates.md` with the Office add-in GraphQL
+  switch gate.
+
+Boundary:
+
+- Decision remains `pending_yuri_switch_approval`.
+- No `taskpane.js` edit, live GraphQL traffic, feature gate, backend route/schema
+  change, server config endpoint, telemetry endpoint, readiness flag change,
+  write/audit write, provider/memory/H15/trove path, mutation, subscription,
+  deployment, production, external-client exposure, or field expansion.
+- If later approved, the approval expires on `2026-08-06` and authorizes only a
+  default-off internal staff practitioner-selector switch.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_consumer_switch_approval_packet.py tests\test_practitioner_directory_office_addin_graphql_mock_contract.py tests\test_practitioner_directory_office_addin_graphql_fetch_wrapper_test_plan.py tests\test_practitioner_directory_graphql_release_boundary.py tests\test_sprint_closeout_protocol.py -q
+```
+
+Result: Sprint 277 approval-packet/support/protocol suite `43 passed`.
+
+Implementation commit: integrating commit for Sprint 277.
+
+Sprint engine state: stopped for Yuri switch approval before any Office add-in
+taskpane runtime implementation or live GraphQL traffic.
+
+---
+
+## Previous Closeout - Sprint 276
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 276 Practitioner Directory Office Add-in GraphQL Mock Contract Scaffold |
 | Integrated through | Ariadne scaffold/tests with Antigravity and DeepSeek PASS reviews |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 276 What Changed

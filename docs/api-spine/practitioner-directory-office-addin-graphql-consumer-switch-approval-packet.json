@@ -1,0 +1,151 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_consumer_switch_approval_packet.v1",
+  "date": "2026-07-09",
+  "sprint": 277,
+  "recorded_by": "ariadne",
+  "decision": "pending_yuri_switch_approval",
+  "target_consumer": "Office add-in taskpane practitioner selector",
+  "target_field": "Query.practice.practitioners",
+  "endpoint": "/api/v1/graphql",
+  "source_release_boundary": "docs/api-spine/practitioner-directory-graphql-release-boundary.json",
+  "source_consumer_proposal": "docs/api-spine/practitioner-directory-office-addin-graphql-consumer-proposal.json",
+  "source_fetch_wrapper_test_plan": "docs/api-spine/practitioner-directory-office-addin-graphql-fetch-wrapper-test-plan.json",
+  "source_mock_contract_scaffold": "docs/api-spine/practitioner-directory-office-addin-graphql-mock-contract-scaffold.json",
+  "current_release_boundary_expires_on": "2026-08-06",
+  "proposed_switch_approval_expires_on": "2026-08-06",
+  "approval_required_before_code": true,
+  "authorized_now": {
+    "office_addin_taskpane_runtime_implementation": false,
+    "office_addin_live_graphql_traffic": false,
+    "taskpane_js_edits_for_graphql": false,
+    "feature_gate_added": false
+  },
+  "if_yuri_approves_later": {
+    "may_edit_taskpane_js_for_one_consumer": true,
+    "may_add_default_off_graphql_fetch_wrapper": true,
+    "may_add_internal_staff_selector_graphql_path": true,
+    "may_send_graphql_traffic_only_when_gate_enabled": true,
+    "may_change_backend_routes_or_schema": false,
+    "may_add_server_config_endpoint": false,
+    "may_add_telemetry_endpoint": false,
+    "may_change_readiness_flags": false,
+    "may_claim_deployment_or_production_readiness": false
+  },
+  "switch_scope": {
+    "consumer": "office_addin_diary_booking_practitioner_selector",
+    "audience": "authenticated_internal_staff_only",
+    "practice_scoped": true,
+    "external_or_patient_client": false,
+    "default_render_source_until_gate_enabled": "REST",
+    "fallback_render_source": "REST",
+    "graphql_operation": "query",
+    "mutations_allowed": false,
+    "subscriptions_allowed": false,
+    "other_graphql_roots_allowed": false
+  },
+  "feature_gate": {
+    "mechanism": "source_controlled_build_time_constant_or_equivalent_static_taskpane_config",
+    "default": false,
+    "runtime_user_override_allowed": false,
+    "local_storage_allowed": false,
+    "query_parameter_allowed": false,
+    "office_settings_persistence_allowed": false,
+    "server_side_config_endpoint_allowed_without_separate_approval": false,
+    "expired_or_disabled_gate_behavior": "zero_graphql_fetches_render_from_rest"
+  },
+  "approved_projection": [
+    "id",
+    "displayName",
+    "roleLabel",
+    "active",
+    "defaultLocation.id",
+    "defaultLocation.name"
+  ],
+  "projection_drift_behavior": "discard_unapproved_fields_before_binding",
+  "required_error_and_fallback_contract": {
+    "http_401": "logout_and_do_not_retry_graphql",
+    "http_non_401_or_network_timeout": "fall_back_to_rest_and_show_system_retry_copy",
+    "graphql_forbidden": "no_logout_access_denied_copy_and_fallback_to_rest",
+    "graphql_bad_user_input": "no_logout_invalid_request_copy_and_fallback_to_rest",
+    "practice_null": "distinct_no_access_empty_state_not_same_as_empty_filter",
+    "empty_practitioners": "ordinary_empty_directory_or_filter_state",
+    "default_location_null": "preserve_row_with_empty_location_shape",
+    "malformed_required_row_field": "drop_malformed_row_and_continue_if_any_valid_rows_remain"
+  },
+  "fallback_contract": {
+    "on_graphql_transport_failure": "attempt_rest_immediately_once",
+    "on_graphql_response_body_error": "render_user_safe_message_and_attempt_rest_immediately_once",
+    "on_rest_fallback_failure": "show_existing_rest_failure_state",
+    "backoff_or_retry_loop": false,
+    "telemetry": "none_before_separate_approval"
+  },
+  "required_tests_before_switch_closeout": [
+    "taskpane source guard proves only one GraphQL endpoint reference",
+    "default-off gate causes zero GraphQL fetches",
+    "enabled gate sends exact approved query projection",
+    "HTTP 401 triggers logout and no REST fallback retry loop",
+    "HTTP non-401 or timeout falls back to REST once",
+    "GraphQL FORBIDDEN and BAD_USER_INPUT do not logout",
+    "practice null has distinct no-access empty state",
+    "empty practitioners has ordinary empty state",
+    "defaultLocation null preserves row",
+    "unknown fields are discarded before binding",
+    "malformed required row fields are dropped",
+    "no live practitioner values, latency, throughput, deployment, production, or readiness claims"
+  ],
+  "worker_reviews": {
+    "antigravity_consumer_ux_release": {
+      "artifact": "orchestration/agent_inbox/antigravity/antigravity-sprint277-office-addin-graphql-consumer-switch-approval.md",
+      "verdict": "PASS",
+      "integrated_cautions": [
+        "default-off switch posture",
+        "role/internal-staff UX boundary",
+        "display only approved projection",
+        "offline and failure fallback to REST or existing safe state",
+        "no deployment, production, or readiness side effects"
+      ]
+    },
+    "deepseek_static_release": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint277-office-addin-graphql-consumer-switch-approval.md",
+      "verdict": "PASS",
+      "integrated_cautions": [
+        "explicit Yuri approval is still required before taskpane code changes",
+        "feature-gate mechanism specified",
+        "REST fallback orchestration specified",
+        "non-401 transport and timeout handling specified",
+        "practice-null and empty-list UX states separated",
+        "partial malformed row behavior specified",
+        "switch approval consumes the existing 2026-08-06 runway"
+      ]
+    },
+    "claude": {
+      "used": false,
+      "reason": "No API contract, resolver, backend route, schema, or runtime auth/error model changed in Sprint 277."
+    }
+  },
+  "must_remain_false": {
+    "graphql_resolver_ready": false,
+    "office_addin_graphql_fetch_wrapper_ready": false,
+    "runtime_taskpane_switch_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false
+  },
+  "yuri_approval_payload_template": {
+    "decision": "approved_for_default_off_office_addin_graphql_practitioner_selector_switch",
+    "target_consumer": "office_addin_diary_booking_practitioner_selector",
+    "target_field": "Query.practice.practitioners",
+    "approval_expires_on": "2026-08-06",
+    "acknowledged_default_off_internal_only": true,
+    "acknowledged_no_deployment_or_production_readiness": true,
+    "acknowledged_no_external_client_write_provider_memory_h15_trove_mutation_subscription_field_expansion": true
+  },
+  "next_recommended_work": "Stop for Yuri approval. If approved, Sprint 278 may implement only the default-off Office add-in GraphQL practitioner selector switch under this packet."
+}
