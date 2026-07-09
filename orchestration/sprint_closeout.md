@@ -26,7 +26,10 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 285 Default-On Monitoring Boundary |
 | Integrated through | Ariadne monitoring/readiness-boundary packet and guard tests |
-| Status | Integrated, verified, pending commit/push |
+| Status | Published to `origin/master` and `handoff/current`; worktree clean |
+| Commit | `2c6cd5146b1c8c9538873f4a3f2e3a2970191077` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` |
 | Last updated | 2026-07-09 |
 
 ## Sprint 285 What Changed
@@ -53,8 +56,8 @@ node --check docs\diary\diary.js
 git diff --check
 ```
 
-Result: monitoring/rollback/protocol suite `18 passed`. Final node and
-whitespace checks pending closeout metadata.
+Result: monitoring/rollback/protocol suite `19 passed`; `node --check` and
+whitespace checks passed.
 
 Sprint engine state: pause before any deployment or production readiness claim.
 If continuing without approval, choose only a different already-approved
