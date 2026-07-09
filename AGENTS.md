@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprints 254-256 refreshed practitioner-directory REST first-slice evidence: Sprint 254 commit `4615a51e` added runtime evidence refresh, Sprint 255 commit `923b74e4` defined criteria before any `rest_route_ready=true`, and Sprint 256 commit `43dabd60` added an OpenAPI/consumer contract report for `GET /api/v1/practice/practitioners`; route implementation remains bounded and all GraphQL/provider/memory/H15/trove/external-client/write/deployment/production readiness gates remain false |
-| **Next recommended work** | Pause before flipping any practitioner-directory readiness flag. The next safe move is Sprint 257 as a go/no-go decision draft for either keeping the route implemented-but-not-ready or approving `rest_route_ready=true` for this route only; do not change readiness without explicit Yuri approval. D5 expansion also remains paused unless separately approved. At every sprint start explicitly announce Claude, Antigravity, and DeepSeek use/non-use, invocation mode (`scripts\drive_agent_headless.py`/Claude CLI, `agy.exe`/Antigravity CLI, direct Codex `deepseek-worker` spawn), Claude/Antigravity/DeepSeek cleanliness state, current DeepSeek lane count and reuse/cleanup plan, and any extra DeepSeek substitution for unavailable Claude/Antigravity lanes; clean stale worker artifacts before progressing and reannounce clean state |
+| **Current active track** | Sprints 254-256 refreshed practitioner-directory REST first-slice evidence: Sprint 254 commit `4615a51e` added runtime evidence refresh, Sprint 255 commit `923b74e4` defined criteria before any `rest_route_ready=true`, and Sprint 256 commit `43dabd60` added an OpenAPI/consumer contract report for `GET /api/v1/practice/practitioners`; route implementation remains bounded and all GraphQL/provider/memory/H15/trove/external-client/write/deployment/production readiness gates remain false. Sprint 257 prep now adds a worker-dispatch correction: start-of-sprint worker enumeration must be a dispatch decision with distinct artifacts or veto surfaces, not a ritual. |
+| **Next recommended work** | Pause before flipping any practitioner-directory readiness flag. The next safe move is Sprint 257 as a multi-worker go/no-go decision block prepared in `orchestration/sprint_257_practitioner_directory_worker_readiness_block.md`; do not change readiness without explicit Yuri approval. Use Claude for readiness/safety veto review, Antigravity for consumer/API ergonomics and external-client boundary review, and DeepSeek for mechanical gate/sensitive-field/import/flag sweeps, with Ariadne integrating the final decision packet. If a preferred lane is unavailable, substitute a DeepSeek lane only when it preserves a distinct artifact or veto surface. D5 expansion remains paused unless separately approved. |
 
 2026-07-08 Yuri proposed applying DAG-style conditioning dependencies to the
 Bernie UI so a few canonical state nodes, especially confirmation state, can
@@ -609,6 +609,15 @@ Codex role separation:
   role unless the sprint is tiny and the closeout records why substitution would
   add more risk than value. Sprint closeout must repeat the actual worker mix,
   invocation modes, and any substitutions.
+- Worker enumeration is not itself evidence. Before dispatch, Ariadne must
+  classify each proposed lane as one of: implementation owner, independent
+  review/veto, consumer/product review, mechanical safety sweep, or intentionally
+  stood down. A lane is worth using only when it has a distinct artifact or veto
+  surface that Ariadne can integrate: for example a committed branch, review
+  packet, decision table, failing-test proposal, OpenAPI/consumer diff, or
+  explicit no-go finding. If a sprint is too small, too serial, or too tightly
+  coupled for such a lane, say so and keep it Ariadne-local; do not spawn or
+  announce workers just to satisfy ceremony.
 - The same sprint-start ritual must check Claude, Antigravity, and DeepSeek
   worker-state cleanliness before progressing. For CLI lanes, run/report
   `git status --short --branch` in the Claude and Antigravity worktrees and
@@ -791,6 +800,15 @@ Codex is the default orchestration agent for EMR4. This means:
   with an extra DeepSeek Flash worker until the lane recovers. Tiny mechanical
   tasks may stay Ariadne-local, but planned sprint work should record the
   worker-lane mix and any substitutions.
+- "Ariadne plus three" is a default search for useful parallelism, not a quota
+  to fill. Sprint prep must name the intended gain from each worker and the
+  artifact or veto surface expected from that lane. Adjust sprint size and block
+  boundaries so workers can own separable surfaces: combine related
+  micro-sprints into one evidence/review block when that creates meaningful
+  parallel lanes, or split a broad sprint when implementation, consumer review,
+  safety review, and mechanical sweeps can proceed independently. If maximum
+  worker usage would produce overlapping edits, repeated prose, or no
+  integrable evidence, use fewer lanes and record that decision.
 - Start-of-sprint updates must name all three preferred worker lanes explicitly:
   Claude, Antigravity, and DeepSeek. For each lane, say either "using" or "not
   using" with the reason, and name the mode/channel: Claude via
