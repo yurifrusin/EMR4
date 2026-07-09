@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 244 Bernie UI Clarification/Identity Route-Intercepted Evidence |
 | Integrated through | Ariadne test implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this stayed inside the existing Playwright harness |
-| Status | Integrated locally; pending metadata commit and push |
+| Status | Integrated and ready to push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 244 What Changed
