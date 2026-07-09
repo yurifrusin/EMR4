@@ -82,7 +82,7 @@ Result: focused approval suite `8 passed`; adjacent approval/release/boundary
 suite `19 passed` after resetting the disposable test schema and rerunning
 serially; API-spine artifact suite `31 passed`; whitespace check passed.
 
-Implementation commit: pending.
+Implementation commit: `f19a17a6`.
 
 Sprint engine state: continuing to Sprint 264, which may wire only the named
 Office add-in Diary booking practitioner selector/list consumer.
