@@ -1,0 +1,107 @@
+{
+  "schema_version": "bernie.ui_dag.d5_backend_delivery_test_plan.v1",
+  "status": "blocked_test_plan_only",
+  "approval_required": "approved_for_backend_response_delivery_first_slice",
+  "implementation_authorized": false,
+  "candidate_attachment_point": "one_reviewed_bernie_response_assembly_point",
+  "candidate_route": "POST /api/v1/appointments/proposals/bernie/supervised-booking",
+  "candidate_response_location": "staff_review.bernie.ui_view_model",
+  "evidence_label_after_implementation": "backend_response_delivery_synthetic_or_fake_provider",
+  "preflight_commands": [
+    ".venv\\Scripts\\python.exe scripts\\bernie_interpretation_readiness_check.py",
+    ".venv\\Scripts\\python.exe scripts\\bernie_provider_boundary_readiness_report.py"
+  ],
+  "expected_preflight_values": [
+    "runtime_or_provider_wiring_ready=false",
+    "raw_trove_access_ready=false",
+    "runtime_gate_decision=blocked",
+    "default_provider=disabled",
+    "live_provider_enabled=false",
+    "provider_calls_performed=false"
+  ],
+  "required_test_ids": [
+    "test_d5_gate_approved_before_route_delivery",
+    "test_supervised_booking_response_includes_ui_view_model_when_server_session_snapshot_exists",
+    "test_supervised_booking_response_omits_ui_view_model_without_server_session_snapshot",
+    "test_server_delivery_defaults_client_confirmation_request_state_idle",
+    "test_backend_confirmed_snapshot_is_only_success_source",
+    "test_pressed_awaiting_stale_failed_states_hide_confirm_and_success",
+    "test_stale_state_sets_freshness_stale_and_blocks_confirm_display",
+    "test_failed_state_shows_retry_without_success_copy",
+    "test_confirm_payload_serialization_excludes_ui_view_model_fields",
+    "test_confirm_payload_still_uses_signed_confirm_endpoint_and_freshness_ids",
+    "test_supervised_booking_still_writes_zero_appointments_and_audit_rows_without_confirm",
+    "test_non_bernie_routers_do_not_import_ui_view_model_selector",
+    "test_provider_memory_graphql_h15_and_trove_import_isolation",
+    "test_response_schema_remains_optional_and_backward_compatible",
+    "test_absent_ui_view_model_keeps_existing_frontend_behavior",
+    "test_route_response_evidence_label_is_not_live_provider",
+    "test_model_json_schema_contains_no_write_authority_fields",
+    "test_pre_confirm_copy_excludes_booked_confirmed_raw_uuid_and_error_codes"
+  ],
+  "test_groups": [
+    {
+      "id": "gate_and_preflight",
+      "required_test_ids": [
+        "test_d5_gate_approved_before_route_delivery"
+      ]
+    },
+    {
+      "id": "response_attachment",
+      "required_test_ids": [
+        "test_supervised_booking_response_includes_ui_view_model_when_server_session_snapshot_exists",
+        "test_supervised_booking_response_omits_ui_view_model_without_server_session_snapshot",
+        "test_server_delivery_defaults_client_confirmation_request_state_idle",
+        "test_response_schema_remains_optional_and_backward_compatible"
+      ]
+    },
+    {
+      "id": "state_matrix",
+      "required_test_ids": [
+        "test_backend_confirmed_snapshot_is_only_success_source",
+        "test_pressed_awaiting_stale_failed_states_hide_confirm_and_success",
+        "test_stale_state_sets_freshness_stale_and_blocks_confirm_display",
+        "test_failed_state_shows_retry_without_success_copy",
+        "test_pre_confirm_copy_excludes_booked_confirmed_raw_uuid_and_error_codes"
+      ]
+    },
+    {
+      "id": "payload_and_write_boundary",
+      "required_test_ids": [
+        "test_confirm_payload_serialization_excludes_ui_view_model_fields",
+        "test_confirm_payload_still_uses_signed_confirm_endpoint_and_freshness_ids",
+        "test_supervised_booking_still_writes_zero_appointments_and_audit_rows_without_confirm",
+        "test_model_json_schema_contains_no_write_authority_fields"
+      ]
+    },
+    {
+      "id": "isolation_and_evidence_label",
+      "required_test_ids": [
+        "test_non_bernie_routers_do_not_import_ui_view_model_selector",
+        "test_provider_memory_graphql_h15_and_trove_import_isolation",
+        "test_absent_ui_view_model_keeps_existing_frontend_behavior",
+        "test_route_response_evidence_label_is_not_live_provider"
+      ]
+    }
+  ],
+  "forbidden_test_plan_expansions_without_separate_review": [
+    "graphql_resolver_delivery_tests",
+    "provider_prompt_or_live_provider_tests",
+    "access_ai_invocation_tests",
+    "memory_rag_or_graphrag_runtime_tests",
+    "h15_or_h_series_runtime_input_tests",
+    "historical_diary_material_runtime_input_tests",
+    "confirm_payload_shape_change_tests",
+    "appointment_write_behavior_change_tests",
+    "external_patient_client_tests",
+    "frontend_javascript_scope_expansion_tests"
+  ],
+  "stop_conditions": [
+    "test_requires_database_queries_outside_existing_supervised_booking_behavior",
+    "test_requires_provider_calls",
+    "test_requires_memory_or_graphql_wiring",
+    "test_requires_h15_h_series_or_historical_diary_material",
+    "test_requires_confirm_payload_or_write_behavior_changes",
+    "test_requires_broad_router_refactor"
+  ]
+}
