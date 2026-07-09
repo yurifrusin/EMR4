@@ -125,6 +125,34 @@ summaries. The expected current values are `static_release_check_ready=true`,
 fails, the sprint engine must pause for explicit review instead of continuing
 automatically.
 
+## Practitioner Directory GraphQL Release Boundary Gate
+
+The practitioner-directory GraphQL release-boundary packet is a proposed
+approval surface for `Query.practice.practitioners` only. Until Yuri approves
+`docs/api-spine/practitioner-directory-graphql-release-boundary.json`, internal
+consumer development remains unauthorized even though the resolver and hardening
+tests pass.
+
+Before any sprint proposes internal consumer development, readiness promotion,
+deployment or production exposure, external-client access, schema field
+expansion, mutation/subscription authority, write authority, provider or memory
+use, H15/H-series runtime imports, or historical diary/trove access from this
+GraphQL path, Ariadne must run and record:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_release_boundary.py tests\test_practitioner_directory_graphql_contract_hardening.py -q
+```
+
+Expected current values are
+`decision=proposed_internal_staff_consumer_development_ready_pending_yuri_approval`,
+`internal_consumer_development=false`,
+`readiness_flag_changes=false`, `deployment_or_production_exposure=false`,
+`external_client_access=false`, `schema_field_expansion=false`,
+`write_mutation_or_subscription=false`,
+`provider_memory_rag_graphrag_h15_trove=false`, and
+`go_no_go_acknowledged=false`. If any value changes without explicit Yuri
+approval, the sprint engine must pause.
+
 ### Proposal Surface Guard
 
 Any new markdown proposal artifact that discusses runtime route wiring, provider

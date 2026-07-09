@@ -1,0 +1,118 @@
+{
+  "schema_version": "api_spine.practitioner_directory_graphql_release_boundary.v1",
+  "date": "2026-07-09",
+  "sprint": 272,
+  "recorded_by": "ariadne",
+  "decision": "proposed_internal_staff_consumer_development_ready_pending_yuri_approval",
+  "reviewer": "ariadne",
+  "target_field": "Query.practice.practitioners",
+  "endpoint": "/api/v1/graphql",
+  "consumer_scope": [
+    "authenticated_staff_only",
+    "practice_scoped"
+  ],
+  "consumption_mode": "graphql_through_existing_endpoint",
+  "allowed_field_set": [
+    "id",
+    "displayName",
+    "roleLabel",
+    "active",
+    "defaultLocation { id, name }"
+  ],
+  "yuri_approval_slip": {
+    "required": true,
+    "approved_contract_commit": "",
+    "go_no_go_acknowledged": false,
+    "approval_expires_on": "",
+    "sunset_review_required": true
+  },
+  "allowed_use": {
+    "internal_authenticated_staff_consumer_development": false,
+    "test_harness_use": true,
+    "rest_parity_comparison": true,
+    "external_patient_client_use": false,
+    "production_readiness_claim": false,
+    "deployment_readiness_claim": false,
+    "global_graphql_readiness_claim": false
+  },
+  "completed_evidence": {
+    "dependency_preflight": "docs/api-spine/practitioner-directory-graphql-dependency-preflight.json",
+    "runtime_shell": "docs/api-spine/practitioner-directory-graphql-runtime-shell.json",
+    "resolver_runtime": "docs/api-spine/practitioner-directory-graphql-resolver-runtime.json",
+    "contract_hardening": "docs/api-spine/practitioner-directory-graphql-contract-hardening.json",
+    "resolver_tests": "tests/test_practitioner_directory_graphql_resolver.py",
+    "hardening_tests": "tests/test_practitioner_directory_graphql_contract_hardening.py",
+    "runtime_gate": "docs/api-spine/practitioner-directory-graphql-runtime-gate.json",
+    "readiness_dag": "docs/api-spine/external-read-model-readiness-dag.json",
+    "blocked_readiness_snapshot": "tests/fixtures/api_spine_external_readiness/blocked_readiness_status.json"
+  },
+  "runtime_scope": {
+    "endpoint": "/api/v1/graphql",
+    "query_fields_allowed": [
+      "graphqlHealth",
+      "practice"
+    ],
+    "practice_fields_allowed": [
+      "id",
+      "practitioners"
+    ],
+    "practitioner_fields_allowed": [
+      "id",
+      "displayName",
+      "roleLabel",
+      "active",
+      "defaultLocation.id",
+      "defaultLocation.name"
+    ],
+    "mutations_allowed": false,
+    "subscriptions_allowed": false,
+    "other_read_roots_allowed": false
+  },
+  "required_consumer_constraints": {
+    "must_send_existing_bearer_token": true,
+    "must_handle_http_401_auth_failures": true,
+    "must_handle_graphql_bad_user_input": true,
+    "must_handle_graphql_forbidden": true,
+    "must_handle_practice_null_on_id_mismatch": true,
+    "must_not_request_sensitive_fields": true,
+    "must_not_treat_field_as_external_api": true,
+    "must_not_require_idempotency_key": true
+  },
+  "authorized_now": {
+    "internal_consumer_development": false,
+    "readiness_flag_changes": false,
+    "deployment_or_production_exposure": false,
+    "external_client_access": false,
+    "schema_field_expansion": false,
+    "write_mutation_or_subscription": false,
+    "provider_memory_rag_graphrag_h15_trove": false
+  },
+  "boundary_statement": "This packet is an internal staff development gate proposal only, distinct from deployment, production, external-client, write, provider, memory, H15, trove, mutation, and subscription gates.",
+  "release_blockers_remaining": {
+    "rate_limit_review": "deferred",
+    "production_introspection_posture_review": "deferred",
+    "deployment_smoke": "deferred",
+    "external_client_contract": "blocked",
+    "global_readiness_snapshot_migration": "blocked",
+    "mutations": "blocked",
+    "subscriptions": "blocked",
+    "provider_memory_h15_trove": "blocked",
+    "write_authority": "blocked"
+  },
+  "worker_review": {
+    "reviewer_lane": "deepseek-worker",
+    "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint272-graphql-release-boundary.md",
+    "verdict": "PASS",
+    "approval_required_before_ready": true
+  },
+  "must_remain_false": {
+    "graphql_mutation_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_recommended_work": "Pause for Yuri approval before treating this field as ready for internal authenticated staff consumer development; continue with a separate approval packet before any global readiness/deployment/external-client/provider/memory/write expansion."
+}

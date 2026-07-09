@@ -24,9 +24,63 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 272 Practitioner Directory GraphQL Release-Boundary Packet |
+| Integrated through | Ariadne approval-packet drafting with DeepSeek PASS review |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 272 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-graphql-release-boundary.json`.
+- Added
+  `docs/api-spine/practitioner-directory-graphql-release-boundary.md`.
+- Added `tests/test_practitioner_directory_graphql_release_boundary.py`.
+- Added the practitioner-directory GraphQL release-boundary gate section to
+  `orchestration/bernie_release_gates.md`.
+- Integrated DeepSeek Sprint 272 PASS review.
+- Converted the release decision into a proposed approval surface:
+  `internal_consumer_development=false` pending Yuri approval.
+
+Worker mix:
+
+- DeepSeek via direct Codex `deepseek-worker`: PASS; confirmed the Sprints
+  268-271 evidence chain supports a scoped internal-staff consumer proposal, but
+  required an explicit Yuri approval slip before treating it as ready. The
+  packet now records that pause.
+
+Boundary:
+
+- No runtime code changed in Sprint 272.
+- No internal consumer development is authorized yet.
+- No GraphQL mutations, subscriptions, global readiness snapshot change,
+  provider/Access AI invocation, memory/RAG/GraphRAG wiring, H15/H-series
+  runtime import, historical diary/local_data import, external patient-client
+  exposure, write authority, audit write, deployment claim, or production
+  readiness claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_release_boundary.py tests\test_practitioner_directory_graphql_contract_hardening.py tests\test_sprint_closeout_protocol.py -q
+```
+
+Result: Sprint 272 release-boundary/protocol suite `23 passed`.
+
+Implementation commit: integrating commit for Sprint 272.
+
+Sprint engine state: paused for Yuri go/no-go on the Sprint 272 release-boundary
+packet.
+
+---
+
+## Previous Closeout - Sprint 271
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 271 Practitioner Directory GraphQL Contract Hardening |
 | Integrated through | Ariadne hardening with DeepSeek PASS review |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 271 What Changed
