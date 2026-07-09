@@ -10,7 +10,7 @@
 
 ## Review Request
 
-antigravity-sprint257-practitioner-consumer-boundary plan ready for Codex review
+antigravity-sprint257-practitioner-consumer-boundary ready for Codex review
 
 ## Worker Completion Notes
 
