@@ -24,9 +24,72 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 271 Practitioner Directory GraphQL Contract Hardening |
+| Integrated through | Ariadne hardening with DeepSeek PASS review |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 271 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-graphql-contract-hardening.json`.
+- Added
+  `docs/api-spine/practitioner-directory-graphql-contract-hardening.md`.
+- Added `tests/test_practitioner_directory_graphql_contract_hardening.py`.
+- Added runtime SDL parity checks for the approved practitioner GraphQL slice.
+- Added token-budget negative tests for both `graphqlHealth` and the
+  `practice.practitioners` resolver path.
+- Recorded that the current 500-token budget preempts 501-alias attempts before
+  the alias limiter is reached; the alias limiter remains configured.
+- Recorded that the current shallow practitioner graph cannot structurally
+  exceed depth six, and that any future deeper field must add a true depth
+  negative test before sprint closeout.
+- Broadened blocked-readiness snapshot checks.
+- Added cross-document `must_remain_false` consistency checks across shell,
+  resolver, and hardening evidence.
+- Updated DeepSeek Sprint 271 review artifact from pending to PASS with
+  integrated recommendations.
+
+Worker mix:
+
+- DeepSeek via direct Codex `deepseek-worker`: PASS; recommended documenting the
+  depth-test limitation, resolving alias/token ambiguity honestly, testing the
+  practitioner resolver path under token pressure, broadening readiness checks,
+  and closing the pending worker-review marker. Those recommendations were
+  integrated.
+
+Boundary:
+
+- No new runtime field beyond `graphqlHealth`, `Query.practice(id)`, and
+  `Practice.practitioners(activeOnly, limit, offset)`.
+- No GraphQL mutations, subscriptions, global readiness snapshot change,
+  provider/Access AI invocation, memory/RAG/GraphRAG wiring, H15/H-series
+  runtime import, historical diary/local_data import, external patient-client
+  exposure, write authority, audit write, deployment claim, or production
+  readiness claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_contract_hardening.py tests\test_practitioner_directory_graphql_resolver.py tests\test_practitioner_directory_graphql_runtime_shell.py tests\test_sprint_closeout_protocol.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py -q
+```
+
+Result: Sprint 271 hardening/API-spine suite `81 passed`.
+
+Implementation commit: integrating commit for Sprint 271.
+
+Sprint engine state: continuing to Sprint 272 practitioner GraphQL
+release-boundary packet.
+
+---
+
+## Previous Closeout - Sprint 270
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 270 Practitioner Directory GraphQL Resolver |
 | Integrated through | Ariadne resolver implementation with DeepSeek PASS review |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 270 What Changed

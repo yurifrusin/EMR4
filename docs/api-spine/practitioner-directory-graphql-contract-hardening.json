@@ -1,0 +1,41 @@
+{
+  "schema_version": "api_spine.practitioner_directory_graphql_contract_hardening.v1",
+  "date": "2026-07-09",
+  "sprint": 271,
+  "recorded_by": "ariadne",
+  "decision": "contract_hardened_no_new_surface",
+  "target_field": "Query.practice.practitioners",
+  "new_runtime_fields_added": false,
+  "guard_checks": {
+    "runtime_sdl_practitioner_slice_matches_approved_sdl": true,
+    "alias_limit_configured": true,
+    "alias_limit_negative_test_preempted_by_token_budget": true,
+    "token_limit_negative_test": true,
+    "practitioner_path_token_limit_negative_test": true,
+    "depth_limit_configured": true,
+    "depth_greater_than_six_not_structurally_reachable_in_current_slice": true
+  },
+  "readiness_snapshots_remain_blocked": true,
+  "cross_document_must_remain_false_consistency": true,
+  "worker_review": {
+    "reviewer_lane": "deepseek-worker",
+    "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint271-graphql-contract-hardening.md",
+    "verdict": "PASS",
+    "integrated_cautions": [
+      "depth fail-closed cannot be exercised with the current shallow first-slice schema, so it is recorded as configured plus structurally unreachable until deeper fields are added",
+      "alias-flood attempts are preempted by the 500-token budget in Strawberry 0.320.3, so alias limiter independence remains deferred while the alias limiter stays configured",
+      "token-budget negative testing now covers both graphqlHealth and the practitioner resolver path",
+      "readiness snapshot checks are broadened and must-remain-false keys are cross-checked across shell, resolver, and hardening evidence"
+    ]
+  },
+  "must_remain_false": {
+    "graphql_mutation_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_allowed_step": "sprint_272_practitioner_graphql_release_boundary_packet_or_pause_if_hardening_fails"
+}
