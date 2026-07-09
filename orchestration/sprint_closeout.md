@@ -24,6 +24,76 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 259 Practitioner Directory REST Route Readiness Approval |
+| Integrated through | Ariadne orchestration/integration with Claude API-spine/security PASS, Antigravity consumer/deployment-boundary PASS, and DeepSeek mechanical approval-scope PASS |
+| Status | Integrated and pending push |
+| Last updated | 2026-07-09 |
+
+## Sprint 259 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-rest-route-readiness-approval.json`.
+- Added
+  `docs/api-spine/practitioner-directory-rest-route-readiness-approval.md`.
+- Added `tests/test_practitioner_directory_rest_route_readiness_approval.py`.
+- Recorded Yuri's explicit authorization for a separate
+  `rest_route_ready=true` approval payload for
+  `GET /api/v1/practice/practitioners` only.
+- Added route-scoped approval fields: reviewer, acknowledgement, expiry,
+  approved contract commit, route-only scope, and non-REST adjacent gates.
+- Integrated Claude and Antigravity PASS reviews, plus DeepSeek's PASS for
+  approval-payload creation.
+- Preserved the global external-readiness snapshot in this sprint. The payload
+  records approval; it does not silently flip the broader status checker or DAG.
+- Preserved all GraphQL/provider/memory/H15/trove/external-client/write/
+  deployment/production gates as false.
+
+Worker mix:
+
+- Claude via `scripts\drive_agent_headless.py`: used for route-scope and
+  API-spine/security veto; returned PASS.
+- Antigravity via `agy.exe`: used for consumer, deployment, production, and
+  external-client boundary review; returned PASS.
+- DeepSeek via direct Codex `deepseek-worker` spawn: used for mechanical
+  approval/fixture-change analysis; returned PASS for approval creation and
+  identified global fixture flipping as a separate readiness-model migration.
+
+Boundary:
+
+- Approval payload, decision markdown, worker review packets, and tests only.
+- No route/schema/service behavior change, no global readiness snapshot change,
+  no SDL or GraphQL resolver, no provider/Access AI invocation, no
+  memory/RAG/GraphRAG wiring, no H15/H-series runtime import, no historical
+  diary/local_data import, no external patient-client exposure, no write
+  authority, no deployment claim, and no production-readiness claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_rest_route_readiness_approval.py tests\test_practitioner_directory_readiness_criteria.py tests\test_practitioner_directory_sprint258_blocker_closure.py -q
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_readiness_status.py -q
+git diff --check -- docs\api-spine\practitioner-directory-rest-route-readiness-approval.json docs\api-spine\practitioner-directory-rest-route-readiness-approval.md tests\test_practitioner_directory_rest_route_readiness_approval.py orchestration\agent_inbox\codex\review-claude-sprint259-practitioner-readiness-approval.md orchestration\agent_inbox\codex\review-antigravity-sprint259-practitioner-readiness-approval.md orchestration\agent_inbox\codex\review-deepseek-sprint259-practitioner-readiness-approval.md
+```
+
+Result: approval/criteria/Sprint 258 closure set `16 passed`; external
+readiness status suite `9 passed`; whitespace check passed. An accidental
+parallel DB-backed run hit the known transient Postgres enum creation collision;
+the local `gp_pms_test` public schema was reset and the DB-backed suite passed
+when rerun serially.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing to Sprint 260 route-readiness status
+migration/preflight. The next block must not claim deployment, production,
+external patient-client, GraphQL, provider, memory/RAG/GraphRAG, H15/H-series,
+historical diary, or write readiness.
+
+---
+
+## Previous Closeout - Sprint 258
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 258 Practitioner Directory Blocker Closure |
 | Integrated through | Ariadne orchestration/integration with Claude security/gap wording review, Antigravity deployment/external-client boundary review, and DeepSeek mechanical completeness sweep |
 | Status | Integrated and pushed |

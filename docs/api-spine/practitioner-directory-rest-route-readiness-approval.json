@@ -1,0 +1,130 @@
+{
+  "schema_version": "api_spine.practitioner_directory_rest_route_readiness_approval.v1",
+  "date": "2026-07-09",
+  "sprint": 259,
+  "reviewer": "yuri",
+  "recorded_by": "ariadne",
+  "gate": "practitioner_directory_rest_route_readiness",
+  "decision": "approved_for_practitioner_directory_rest_route_ready_true",
+  "target_readiness_flag": "rest_route_ready",
+  "target_route": "GET /api/v1/practice/practitioners",
+  "approved_value": true,
+  "approved_contract_commit": "344dc671a81f2bce9c66c87f2bc671f86bd110d8",
+  "approval_expires_on": "2026-08-08",
+  "approval": {
+    "reviewer": "yuri",
+    "go_no_go_acknowledged": true,
+    "approval_expires_on": "2026-08-08",
+    "approved_contract_commit": "344dc671a81f2bce9c66c87f2bc671f86bd110d8"
+  },
+  "approval_source": {
+    "kind": "explicit_yuri_chat_authorization",
+    "date": "2026-07-09",
+    "statement": "Yes I authorize a separate rest_route_ready=true approval payload for GET /api/v1/practice/practitioners only."
+  },
+  "criteria_evidence": {
+    "runtime_test_matrix_passes_in_isolated_run": {
+      "status": "satisfied",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json",
+      "evidence_key": "record_isolated_runtime_route_test_pass"
+    },
+    "api_spine_artifact_tests_pass": {
+      "status": "satisfied",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json",
+      "evidence_key": "record_api_spine_artifact_test_pass"
+    },
+    "openapi_contract_snapshot_matches_runtime_route": {
+      "status": "satisfied",
+      "artifact": "docs/api-spine/practitioner-directory-consumer-contract-check.md"
+    },
+    "authn_authz_tenancy_review_current": {
+      "status": "satisfied",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "anti_enumeration_review_current": {
+      "status": "satisfied",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "sensitive_field_exclusion_review_current": {
+      "status": "satisfied",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "pagination_and_error_contract_review_current": {
+      "status": "satisfied",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "rate_limit_or_deferred_rate_limit_decision_recorded": {
+      "status": "satisfied_deferred_internal_route",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "deployment_surface_explicitly_named": {
+      "status": "satisfied_not_deployment_ready",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "rls_or_rls_equivalent_gap_recorded": {
+      "status": "satisfied_gap_recorded_not_equivalent_to_rls",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "field_encryption_gap_recorded": {
+      "status": "satisfied_gap_recorded",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "external_client_exposure_decision_recorded": {
+      "status": "satisfied_internal_staff_only",
+      "artifact": "docs/api-spine/practitioner-directory-sprint258-blocker-closure.json"
+    },
+    "separate_yuri_approval_payload_exists": {
+      "status": "satisfied_by_this_payload",
+      "artifact": "docs/api-spine/practitioner-directory-rest-route-readiness-approval.json"
+    }
+  },
+  "approved_scope": {
+    "rest_route_ready": true,
+    "route": "GET /api/v1/practice/practitioners",
+    "rest_route_ready_route_scoped_only": true,
+    "client_scope": "authenticated_internal_staff_only",
+    "read_only": true,
+    "practice_scoped": true,
+    "paginated": true,
+    "sensitive_practitioner_identifiers_excluded_from_response": true
+  },
+  "non_rest_scope_fields": {
+    "graphql_resolver_ready": false,
+    "external_read_model_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false
+  },
+  "must_remain_false": {
+    "graphql_resolver_ready": false,
+    "external_read_model_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false
+  },
+  "not_authorized": [
+    "GraphQL SDL or resolver readiness",
+    "external read-model runtime readiness beyond this one REST route",
+    "Access AI, provider, memory, RAG, or GraphRAG wiring",
+    "H15, H-series, historical diary, or local_data runtime import",
+    "practitioner create, update, delete, or write authority",
+    "external patient-client exposure",
+    "deployment or production readiness",
+    "model-to-database writes"
+  ],
+  "residual_risks_accepted_for_this_route_only": {
+    "route_specific_rate_limit": "deferred for authenticated internal staff read route; required before external or public exposure",
+    "postgresql_rls": "gap recorded; current control is application-layer practice filter and tests, not database-level RLS",
+    "field_level_encryption": "gap recorded for stored provider_number, prescriber_number, ahpra_number, and hpi_i; response schema excludes them"
+  },
+  "readiness_fixture_change": {
+    "performed_in_this_payload": false,
+    "allowed_follow_up": "a later bounded sprint may update only the route-specific readiness evidence if tests prove adjacent gates remain false"
+  }
+}
