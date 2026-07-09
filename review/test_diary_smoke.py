@@ -2185,6 +2185,139 @@ def test_bernie_ui_view_model_non_ready_states_do_not_show_confirm_or_success(di
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
 
+def test_bernie_ui_view_model_clarification_blocks_legacy_confirmable_payload(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    response = _bernie_live_confirmation_response()
+    response["evidence_label"] = "route_intercepted"
+    response["staff_review"]["clarifying_question"] = "Which practitioner should I check before searching?"
+    response["ui_view_model"] = _bernie_ui_view_model(
+        clarification_state="required",
+        proposal_state="blocked",
+        confirmation_state="blocked",
+        copy_mode="ask",
+        primary_copy="Which practitioner should I check before searching?",
+        flags={"show_clarification_prompt": True},
+    )
+
+    confirm_payloads = []
+
+    def handle_supervised_booking(route):
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(response))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected write"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1&selected_candidate_index=0")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        trigger_route_intercepted_bernie(diary_page)
+
+        status = diary_page.locator("[data-testid='bernie-review-status']")
+        status.wait_for(state="visible", timeout=5000)
+        headline_text = diary_page.locator("[data-testid='bernie-review-headline']").text_content()
+        action_text = diary_page.locator("[data-testid='bernie-review-action']").text_content()
+
+        assert status.text_content().strip() == "Clarification required"
+        assert headline_text.strip() == "Clarification required"
+        assert action_text.strip() == "Which practitioner should I check before searching?"
+        assert "booked" not in action_text.lower()
+        assert "confirmed" not in action_text.lower()
+        assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-notice-alert']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-patient-candidates-list']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-blocks-list']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-candidates-list']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-success-copy']").count() == 0
+        assert len(confirm_payloads) == 0
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_bernie_ui_view_model_identity_ambiguous_blocks_confirm_and_shows_choices(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+
+    response = _bernie_live_confirmation_response()
+    response["evidence_label"] = "route_intercepted"
+    response["staff_review"]["identity_evidence"] = {
+        "confidence": "ambiguous",
+        "patient_label": "Margaret Thompson",
+        "staff_prompt": "Select the correct Margaret Thompson before preparing a booking.",
+    }
+    response["staff_review"]["patient_candidates"] = [
+        {"candidate_key": "candidate-1", "display_name": "Margaret Thompson", "dob_masked": "19**-02-14"},
+        {"candidate_key": "candidate-2", "display_name": "Margaret Thompson", "dob_masked": "19**-09-02"},
+    ]
+    response["ui_view_model"] = _bernie_ui_view_model(
+        clarification_state="identity_ambiguous",
+        proposal_state="blocked",
+        confirmation_state="blocked",
+        identity_state="ambiguous",
+        copy_mode="ask",
+        primary_copy="Select the correct patient before continuing. No appointment has been made.",
+        flags={"show_identity_verification_panel": True},
+    )
+
+    confirm_payloads = []
+
+    def handle_supervised_booking(route):
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(response))
+
+    def handle_confirm(route):
+        confirm_payloads.append(json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected write"}))
+
+    diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
+    diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1&selected_candidate_index=0")
+        diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
+
+        trigger_route_intercepted_bernie(diary_page)
+
+        diary_page.locator("[data-testid='bernie-review-status']").wait_for(state="visible", timeout=5000)
+        action_text = diary_page.locator("[data-testid='bernie-review-action']").text_content()
+        notice_text = diary_page.locator("[data-testid='bernie-notice-alert']").first.text_content()
+        identity_text = diary_page.locator("[data-testid='bernie-identity-evidence']").text_content()
+
+        assert diary_page.locator("[data-testid='bernie-review-status']").text_content().strip() == "Clarification required"
+        assert "Select the correct patient" in action_text
+        assert "No appointment has been made" in action_text
+        assert "multiple patients matching" in notice_text
+        assert "Margaret Thompson" in identity_text
+        assert "Ambiguous confidence" in identity_text
+        assert "Select the correct" in diary_page.locator("[data-testid='bernie-compact-recognition-prompt']").text_content()
+        for forbidden_copy in ["booked", "confirmed", "saved"]:
+            assert forbidden_copy not in identity_text.lower()
+        assert diary_page.locator("[data-testid='bernie-patient-candidates-list']").count() == 1
+        assert diary_page.locator("[data-testid='bernie-patient-candidate-item']").count() == 2
+        assert diary_page.locator("[data-testid='bernie-review-blocks-list']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-candidates-list']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-selected-slot']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
+        assert diary_page.locator("[data-testid='bernie-success-copy']").count() == 0
+        assert len(confirm_payloads) == 0
+    finally:
+        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
 @pytest.mark.parametrize(
     ("review_response", "expected_status"),
     [

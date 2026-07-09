@@ -24,9 +24,71 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 244 Bernie UI Clarification/Identity Route-Intercepted Evidence |
+| Integrated through | Ariadne test implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this stayed inside the existing Playwright harness |
+| Status | Integrated locally; pending commit and push |
+| Last updated | 2026-07-09 |
+
+## Sprint 244 What Changed
+
+- Added `test_bernie_ui_view_model_clarification_blocks_legacy_confirmable_payload`
+  to `review/test_diary_smoke.py`.
+- Added `test_bernie_ui_view_model_identity_ambiguous_blocks_confirm_and_shows_choices`
+  to `review/test_diary_smoke.py`.
+- Proved route-intercepted `bernie.ui_view_model.v1` clarification state can
+  override a legacy confirmable payload, hide selected-slot/confirm/success UI,
+  and avoid confirm POSTs.
+- Proved ambiguous identity state shows the identity evidence card, recognition
+  prompt, and patient candidate choices while blocking proposal/confirm UI and
+  avoiding write-authority copy.
+- Folded in DeepSeek's sidecar recommendations for absent identity markers in
+  plain clarification, absent block/candidate lists, and identity copy safety.
+
+Worker mix:
+
+- Claude worktree checked clean; Claude was not invoked because this was a
+  bounded route-intercepted test sprint.
+- Antigravity worktree checked clean; Antigravity was not invoked for the same
+  reason.
+- DeepSeek direct-spawn sidecar reviewed clarification/identity DOM and
+  copy-safety gaps; Ariadne integrated its recommendations, then closed the
+  lane. DeepSeek lane count returned to zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- `review/test_diary_smoke.py` only.
+- No frontend runtime code change, no asset bump, no backend response delivery,
+  no route/schema/service change, no provider call, no Access AI invocation, no
+  memory/RAG/GraphRAG wiring, no H15/H-series runtime import, no historical
+  diary/local_data import, no GraphQL resolver, and no new write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "ui_view_model"
+.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q -k "ui_view_model or clarification or identity"
+git diff --check
+```
+
+Result: focused `ui_view_model` route-intercepted cluster `8 passed`; broader
+clarification/identity route-intercepted cluster `12 passed`; whitespace check
+passed.
+
+Implementation commit: pending.
+
+Sprint engine state: pausing before any D5 gate change or backend response
+delivery; only bounded review-only work remains without explicit approval.
+
+---
+
+## Previous Closeout - Sprint 243
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 243 Bernie UI D5 Router Import Guard Plan |
 | Integrated through | Ariadne direct implementation; no Claude/Antigravity/DeepSeek lanes opened because this was a bounded static guard-plan sprint |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 243 What Changed
