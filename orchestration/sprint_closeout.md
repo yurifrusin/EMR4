@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 261 Practitioner Directory Route Readiness Consumer Boundary |
 | Integrated through | Ariadne implementation with DeepSeek consumer-boundary preflight, Claude API-spine/security PASS, and Antigravity consumer/release/deployment PASS |
-| Status | Integrated, verified, and pending push |
+| Status | Integrated, verified, and ready for publication |
 | Last updated | 2026-07-09 |
 
 ## Sprint 261 What Changed
