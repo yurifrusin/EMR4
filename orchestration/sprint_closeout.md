@@ -24,6 +24,70 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 248 Bernie UI D5 Readiness Snapshot |
+| Integrated through | Ariadne direct implementation; Claude/Antigravity worktrees available but not invoked, and DeepSeek lane count stayed zero because this was a bounded safe aggregate checker/snapshot |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-09 |
+
+## Sprint 248 What Changed
+
+- Added `scripts/bernie_ui_dag_d5_readiness_snapshot.py`.
+- Added
+  `tests/fixtures/bernie_ui_dag_d5/blocked_readiness_snapshot.json`.
+- Added `tests/test_bernie_ui_dag_d5_readiness_snapshot.py`.
+- The checker derives a safe aggregate status from the committed D5 gate,
+  approval-decision draft, and backend delivery test plan.
+- The emitted snapshot says `ui_consumer_ready=true`, while backend response
+  delivery ready/approved, implementation authorization, runtime/provider
+  readiness, raw-trove access, live-provider enablement, provider calls, write
+  authority, and external-client readiness remain false or blocked.
+- The snapshot intentionally omits route fragments, payload field names, local
+  data paths, and identifier field names.
+
+Worker mix:
+
+- Claude worktree available and previously checked clean; Claude was not invoked
+  because this was a small safe aggregate checker/snapshot sprint.
+- Antigravity worktree available and previously checked clean; Antigravity was
+  not invoked for the same reason.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- Safe aggregate script, fixture, and tests only.
+- No backend response delivery, no route/schema/service change, no provider
+  call, no Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series
+  runtime import, no historical diary/local_data import, no GraphQL resolver, no
+  frontend runtime change, no external patient-client exposure, and no new write
+  authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_ui_dag_d5_readiness_snapshot.py
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_dag_d5_readiness_snapshot.py tests\test_bernie_ui_view_model_d5_backend_delivery_test_plan.py tests\test_bernie_ui_view_model_d5_approval_decision_draft.py tests\test_bernie_ui_view_model_d5_response_delivery_gate.py -q
+.venv\Scripts\python.exe -m py_compile scripts\bernie_ui_dag_d5_readiness_snapshot.py tests\test_bernie_ui_dag_d5_readiness_snapshot.py
+git diff --check -- scripts\bernie_ui_dag_d5_readiness_snapshot.py tests\fixtures\bernie_ui_dag_d5\blocked_readiness_snapshot.json tests\test_bernie_ui_dag_d5_readiness_snapshot.py
+```
+
+Result: checker CLI emitted the committed safe aggregate snapshot; `26 passed`;
+py_compile passed; existing Starlette and Google GenAI deprecation warnings
+only; whitespace check passed.
+
+Implementation commit: `7b86ab9f`.
+
+Sprint engine state: paused for Yuri's explicit D5 go/no-go before any backend
+response delivery. If approved, the next implementation must stay inside the
+single first-slice boundary and keep provider, memory, GraphQL, H15/H-series,
+historical diary, external-client, and write gates closed.
+
+---
+
+## Previous Closeout - Sprint 247
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 247 Bernie UI D5 Backend Delivery Test Plan |
 | Integrated through | Ariadne direct implementation; Claude/Antigravity worktrees available but not invoked, and DeepSeek lane count stayed zero because this was a bounded static test-plan artifact |
 | Status | Integrated and ready to push |
