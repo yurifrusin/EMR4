@@ -113,6 +113,7 @@ function shouldUseBernieServerSession() {
 let activeAppointments = [];
 let activeTypes = [];
 let ahpraToPractitionerMap = {};
+let activePractitionerDirectory = [];
 let waitingAreas = [];
 let isBerniePilotEligible = false;
 let isBerniePilotActive = false;
@@ -4070,6 +4071,7 @@ async function loadDiary(silent = false, options = {}) {
 
   try {
     let template, appointments, types, rosterEntries = [], fetchedWaitingAreas = [];
+    let practitionerDirectory = [];
 
     if (isSmokeMode) {
       template = normalizeTemplate(getMockTemplate());
@@ -4078,9 +4080,10 @@ async function loadDiary(silent = false, options = {}) {
         return apptLocId === activeLocationId;
       });
       types = getMockTypes();
+      practitionerDirectory = [];
       waitingAreas = getMockWaitingAreas().filter(wa => !activeLocationId || wa.location_id === activeLocationId);
     } else {
-      const [templateRes, apptRes, typeRes, rosterRes, waitingAreasRes] = await Promise.all([
+      const [templateRes, apptRes, typeRes, rosterRes, waitingAreasRes, practitionerRes] = await Promise.all([
         loadDiaryTemplate(),
         apiFetch(`/appointments?${apptParams.toString()}`),
         apiFetch(`/appointments/types`),
@@ -4097,6 +4100,13 @@ async function loadDiary(silent = false, options = {}) {
           }
           console.warn("Waiting areas fetch failed:", err);
           return null;
+        }),
+        apiFetch("/practice/practitioners?activeOnly=true&limit=200").catch(err => {
+          if (err && err.message === "401 Unauthorized") {
+            throw err;
+          }
+          console.warn("Practitioner directory fetch failed:", err);
+          return null;
         })
       ]);
       template = templateRes;
@@ -4108,6 +4118,14 @@ async function loadDiary(silent = false, options = {}) {
         fetchedWaitingAreas = await waitingAreasRes.json();
       }
       waitingAreas = Array.isArray(fetchedWaitingAreas) ? fetchedWaitingAreas : [];
+      if (practitionerRes && practitionerRes.ok) {
+        try {
+          const directoryData = await practitionerRes.json();
+          practitionerDirectory = Array.isArray(directoryData) ? directoryData : [];
+        } catch (err) {
+          console.warn("Failed to parse practitioner directory JSON:", err);
+        }
+      }
 
       rosterEntries = [];
       if (rosterRes && rosterRes.ok) {
@@ -4172,6 +4190,7 @@ async function loadDiary(silent = false, options = {}) {
     // Update global cache variables
     activeAppointments = appointments;
     activeTypes = types;
+    activePractitionerDirectory = normalizePractitionerDirectory(practitionerDirectory);
     ahpraToPractitionerMap = {};
 
     // Scan template/roster columns first so blank days can still create bookings.
@@ -6918,7 +6937,7 @@ function openBookingModalForCreate(col, slotTime) {
   document.getElementById("selected-patient-display").classList.add("hidden");
   document.getElementById("btn-link-patient").classList.add("hidden");
 
-  populatePractitionerDropdown(col.practitioner_ahpra);
+  populatePractitionerDropdown(col.practitioner_id || col.practitioner_ahpra);
   populateTypeDropdown();
 
   const yyyy = diaryDate.getFullYear();
@@ -6986,7 +7005,7 @@ function openBookingModalForEdit(appt) {
     document.getElementById("btn-clear-patient").classList.add("hidden");
   }
 
-  populatePractitionerDropdown(appt.practitioner?.ahpra_number);
+  populatePractitionerDropdown(appt.practitioner?.id || appt.practitioner_id || appt.practitioner?.ahpra_number);
   populateTypeDropdown(appt.appointment_type_id || appt.appointment_type?.id);
 
   let dateStr = appt.appointment_date;
@@ -7056,16 +7075,68 @@ function closeBookingModal() {
   resetProposalConfirmation();
 }
 
-function populatePractitionerDropdown(selectedAhpra) {
+function normalizePractitionerDirectory(rows) {
+  if (!Array.isArray(rows)) return [];
+  return rows
+    .map(row => {
+      const id = row && row.id ? String(row.id) : "";
+      const displayName = row && row.displayName ? String(row.displayName).trim() : "";
+      const defaultLocation = row && row.defaultLocation && typeof row.defaultLocation === "object"
+        ? row.defaultLocation
+        : null;
+      return {
+        id,
+        displayName,
+        defaultLocationId: defaultLocation && defaultLocation.id ? String(defaultLocation.id) : null,
+        defaultLocationName: defaultLocation && defaultLocation.name ? String(defaultLocation.name).trim() : ""
+      };
+    })
+    .filter(row => row.id && row.displayName);
+}
+
+function resolvePractitionerSelection(value) {
+  const selected = String(value || "");
+  const directoryMatch = activePractitionerDirectory.find(practitioner => practitioner.id === selected);
+  if (directoryMatch) {
+    return {
+      id: directoryMatch.id,
+      first_name: directoryMatch.displayName,
+      last_name: ""
+    };
+  }
+  return ahpraToPractitionerMap[selected] || null;
+}
+
+function populatePractitionerDropdown(selectedPractitionerRef) {
   const select = document.getElementById("booking-practitioner");
   select.innerHTML = "";
+  const selectedRef = selectedPractitionerRef || "";
+  const selectedDirectoryId = resolvePractitionerSelection(selectedRef)?.id || selectedRef;
+  const canUseDirectorySelection = !selectedRef || activePractitionerDirectory.some(
+    practitioner => practitioner.id === selectedDirectoryId
+  );
+
+  if (activePractitionerDirectory.length > 0 && canUseDirectorySelection) {
+    activePractitionerDirectory.forEach(practitioner => {
+      const opt = document.createElement("option");
+      opt.value = practitioner.id;
+      opt.textContent = practitioner.defaultLocationName
+        ? `${practitioner.displayName} (${practitioner.defaultLocationName})`
+        : practitioner.displayName;
+      if (practitioner.id === selectedDirectoryId) {
+        opt.selected = true;
+      }
+      select.appendChild(opt);
+    });
+    return;
+  }
 
   activeTemplate.columns.forEach(col => {
     if (col.practitioner_ahpra) {
       const opt = document.createElement("option");
       opt.value = col.practitioner_ahpra;
       opt.textContent = `${col.assignment} (${col.room_label})`;
-      if (col.practitioner_ahpra === selectedAhpra) {
+      if (col.practitioner_ahpra === selectedRef || col.practitioner_id === selectedRef) {
         opt.selected = true;
       }
       select.appendChild(opt);
@@ -7558,8 +7629,8 @@ async function saveBooking() {
     return;
   }
 
-  const ahpra = document.getElementById("booking-practitioner").value;
-  const practitioner = ahpraToPractitionerMap[ahpra];
+  const practitionerSelection = document.getElementById("booking-practitioner").value;
+  const practitioner = resolvePractitionerSelection(practitionerSelection);
   if (!practitioner || !practitioner.id) {
     errorEl.textContent = "Practitioner ID not found. Verify practitioner column data.";
     errorEl.classList.remove("hidden");

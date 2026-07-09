@@ -114,7 +114,7 @@ def test_internal_consumer_does_not_authorize_adjacent_gates():
 def test_internal_consumer_field_scope_excludes_sensitive_identifiers():
     consumer = _approval()["approved_consumer"][0]
 
-    assert set(consumer["allowed_fields"]) == {"id", "display_name", "default_location_id"}
+    assert set(consumer["allowed_fields"]) == {"id", "displayName", "defaultLocation"}
     forbidden = set(consumer["must_not_request_fields"])
     assert {
         "provider_number",

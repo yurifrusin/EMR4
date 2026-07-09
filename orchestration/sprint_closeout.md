@@ -24,44 +24,40 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 263 Practitioner Directory Internal Runtime Consumer Approval |
-| Integrated through | Ariadne approval packet with Claude PASS, DeepSeek API-boundary PASS, and substitute DeepSeek UI/consumer PASS after Antigravity timeout |
-| Status | Integrated, verified, and pushed |
+| Batch | Sprint 264 Practitioner Directory Internal Runtime Consumer Wiring |
+| Integrated through | Ariadne implementation with DeepSeek PASS review |
+| Status | Integrated, verified, pending commit/push |
 | Last updated | 2026-07-09 |
 
-## Sprint 263 What Changed
+## Sprint 264 What Changed
 
+- Wired the approved Office add-in Diary booking practitioner selector/list to
+  `GET /api/v1/practice/practitioners?activeOnly=true&limit=200` through the
+  existing `apiFetch` staff-auth path.
+- Added `activePractitionerDirectory` plus normalization for only `id`,
+  `displayName`, and display-safe `defaultLocation` subfields.
+- Updated the booking practitioner dropdown to prefer route UUIDs when the
+  selected practitioner can be preserved, while keeping the legacy
+  template/AHPRA fallback for older columns or unavailable route data.
+- Updated booking save resolution to accept route UUID selections first and
+  fall back to the existing AHPRA map.
+- Bumped `docs/diary/diary.html` from `diary.js?v=180` to `diary.js?v=181`.
 - Added
-  `docs/api-spine/practitioner-directory-internal-runtime-consumer-approval.json`.
-- Added
-  `docs/api-spine/practitioner-directory-internal-runtime-consumer-approval.md`.
-- Added
-  `tests/test_practitioner_directory_internal_runtime_consumer_approval.py`.
-- Added Claude, DeepSeek, and substitute DeepSeek review artifacts.
-- Approved exactly one route-data runtime consumer:
-  `office_addin_diary_booking_practitioner_selector`.
-- Locked consumption mode to `http_through_existing_route`.
-- Explicitly preserved the Sprint 261 readiness-status boundary and Sprint 262
-  release check as static-only.
-- Deferred GraphQL until the named REST route consumer proves itself with
-  runtime evidence.
+  `tests/test_practitioner_directory_internal_runtime_consumer_wiring.py`.
+- Corrected the Sprint 263 approval packet and tests from snake_case field
+  names to the actual REST contract fields: `id`, `displayName`, and
+  `defaultLocation`.
+- Added DeepSeek Sprint 264 review artifact.
 
 Worker mix:
 
-- Claude via `scripts\drive_agent_headless.py`: PASS with conditions; required
-  one named consumer, HTTP-through-route mode, real approval fields, auth/tenancy
-  posture, and no wiring in this sprint.
-- DeepSeek via direct Codex `deepseek-worker`: PASS; clarified the distinction
-  between readiness-status consumers and route-data consumers.
-- Antigravity via `agy.exe`: timed out; Ariadne substituted a second DeepSeek
-  UI/consumer boundary review.
-- Substitute DeepSeek: PASS; required single-consumer isolation, Office add-in
-  authenticated-surface gating, no route/service bypass, no caching outside the
-  active Diary session, and no provider/memory/H15/trove/write path.
+- DeepSeek via direct Codex `deepseek-worker`: PASS; confirmed existing route
+  reuse, display-safe field consumption, legacy fallback, no storage outside the
+  active Diary session, and no GraphQL/provider/memory/H15/trove/write path.
 
 Boundary:
 
-- Approval packet and tests only; no runtime wiring yet.
+- One named internal runtime consumer only.
 - No route/schema/service behavior change, no global readiness snapshot change,
   no external-readiness DAG change, no SDL or GraphQL resolver, no provider/
   Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime
@@ -72,20 +68,37 @@ Boundary:
 Verification:
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_internal_runtime_consumer_approval.py -q
-.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_internal_runtime_consumer_approval.py tests\test_practitioner_directory_route_readiness_release_check.py tests\test_practitioner_directory_route_readiness_consumer_boundary.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
-git diff --check
+node --check docs\diary\diary.js
+.venv\Scripts\python.exe scripts\check_frontend_versions.py
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_internal_runtime_consumer_wiring.py tests\test_practitioner_directory_internal_runtime_consumer_approval.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route_readiness_release_check.py tests\test_practitioner_directory_route_readiness_status.py tests\test_api_spine_artifacts.py -q
 ```
 
-Result: focused approval suite `8 passed`; adjacent approval/release/boundary
-suite `19 passed` after resetting the disposable test schema and rerunning
-serially; API-spine artifact suite `31 passed`; whitespace check passed.
+Result: JS syntax check passed; frontend asset-version integrity check passed;
+focused wiring/approval suite `13 passed`; adjacent release/status/API-spine
+suite `44 passed`.
 
-Implementation commit: `f19a17a6`.
+Implementation commit: integrating commit for Sprint 264.
 
-Sprint engine state: continuing to Sprint 264, which may wire only the named
-Office add-in Diary booking practitioner selector/list consumer.
+Sprint engine state: continuing to Sprint 265 runtime/browser evidence before
+GraphQL.
+
+---
+
+## Previous Closeout - Sprint 263
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 263 Practitioner Directory Internal Runtime Consumer Approval |
+| Integrated through | Ariadne approval packet with Claude PASS, DeepSeek API-boundary PASS, and substitute DeepSeek UI/consumer PASS after Antigravity timeout |
+| Status | Integrated, verified, and pushed |
+| Last updated | 2026-07-09 |
+
+Sprint 263 approved exactly one route-data runtime consumer,
+`office_addin_diary_booking_practitioner_selector`, using
+`http_through_existing_route`, while preserving the Sprint 261 readiness-status
+boundary, the Sprint 262 static release check, and all adjacent gates. Commit:
+`f19a17a6`.
 
 ---
 

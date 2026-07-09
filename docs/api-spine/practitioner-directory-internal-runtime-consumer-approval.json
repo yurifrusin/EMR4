@@ -37,8 +37,8 @@
       },
       "allowed_fields": [
         "id",
-        "display_name",
-        "default_location_id"
+        "displayName",
+        "defaultLocation"
       ],
       "must_not_request_fields": [
         "provider_number",

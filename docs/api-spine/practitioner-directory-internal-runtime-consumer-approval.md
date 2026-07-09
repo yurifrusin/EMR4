@@ -35,7 +35,7 @@ persist the practitioner list outside the active Diary session.
 ## Fields
 
 The consumer may use only the display-safe route projection needed for the
-selector: `id`, `display_name`, and `default_location_id`.
+selector: `id`, `displayName`, and `defaultLocation` as `{id, name}`.
 
 The consumer must not request, store, or display provider number, prescriber
 number, AHPRA number, HPI-I, email, phone, or address fields. If later Diary
