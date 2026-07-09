@@ -24,6 +24,69 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 260 Practitioner Directory Route-Scoped Readiness Status |
+| Integrated through | Ariadne implementation with DeepSeek mechanical status-model review |
+| Status | Integrated and pushed |
+| Last updated | 2026-07-09 |
+
+## Sprint 260 What Changed
+
+- Added `scripts/practitioner_directory_route_readiness_status.py`.
+- Added
+  `tests/fixtures/api_spine_external_readiness/practitioner_directory_route_readiness_status.json`.
+- Added `tests/test_practitioner_directory_route_readiness_status.py`.
+- Added
+  `orchestration/agent_inbox/codex/review-deepseek-sprint260-route-readiness-status.md`.
+- Accepted DeepSeek's recommendation to expose a route-scoped readiness
+  fixture/report instead of flipping the global `blocked_readiness_status.json`
+  or external-readiness DAG semantics.
+- The route-scoped status reports `rest_route_ready=true` for
+  `GET /api/v1/practice/practitioners` only, with approval expiry and residual
+  risk posture.
+- The helper asserts the global external-readiness snapshot remains all-false
+  and fails closed if the global snapshot is silently flipped.
+- The helper rejects wrong routes, adjacent gate drift, and expired approval.
+
+Worker mix:
+
+- DeepSeek via direct Codex `deepseek-worker` spawn: used for status-model
+  path selection; recommended the route-scoped fixture/report path and warned
+  against global readiness flag migration in this sprint.
+- Claude and Antigravity were not re-invoked because Sprint 260 was a narrow
+  mechanical status-model follow-up to the already reviewed Sprint 259 approval
+  payload; DeepSeek had the distinct artifact/veto surface.
+
+Boundary:
+
+- Script, fixture, worker review packet, and tests only.
+- No route/schema/service behavior change, no global readiness snapshot change,
+  no external-readiness DAG change, no SDL or GraphQL resolver, no provider/
+  Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime
+  import, no historical diary/local_data import, no external patient-client
+  exposure, no write authority, no deployment claim, and no production-readiness
+  claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route_readiness_status.py -q
+```
+
+Result: route-scoped readiness status suite `7 passed`.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing to Sprint 261 consumer-boundary/readiness-use
+preflight. The next block should decide where this route-scoped readiness status
+is allowed to be consumed without wiring runtime behavior or widening adjacent
+gates.
+
+---
+
+## Previous Closeout - Sprint 259
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 259 Practitioner Directory REST Route Readiness Approval |
 | Integrated through | Ariadne orchestration/integration with Claude API-spine/security PASS, Antigravity consumer/deployment-boundary PASS, and DeepSeek mechanical approval-scope PASS |
 | Status | Integrated and pushed |
