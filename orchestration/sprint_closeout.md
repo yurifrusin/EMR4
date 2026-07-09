@@ -24,6 +24,66 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 250 Bernie UI D5 Post-Implementation Review |
+| Integrated through | Ariadne direct implementation; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because this was a bounded review artifact with mechanical guards |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-09 |
+
+## Sprint 250 What Changed
+
+- Added `docs/bernie-ui-derived-state-dag-d5-post-implementation-review.json`.
+- Added `docs/bernie-ui-derived-state-dag-d5-post-implementation-review.md`.
+- Added `tests/test_bernie_ui_dag_d5_post_implementation_review.py`.
+- Recorded Sprint 249 as `implemented_first_slice_reviewed_scope_blocked`.
+- Cited the backend delivery, no-server-session compatibility, router import
+  guard, D5 readiness snapshot, D5 gate/approval, and API-spine evidence.
+- Preserved separate-review requirements for any additional response assembly
+  point, GraphQL, providers, Access AI, memory/RAG/GraphRAG, H15/H-series,
+  historical diary runtime input, confirm payload/write behavior change,
+  external patient clients, frontend JavaScript expansion, or model-to-database
+  writes.
+
+Worker mix:
+
+- Claude worktree available; Claude was not invoked because this was a bounded
+  static review artifact.
+- Antigravity worktree available; Antigravity was not invoked for the same
+  reason.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- Static docs/tests only.
+- No backend response expansion, no route/schema/service change, no provider
+  call, no Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series
+  runtime import, no historical diary/local_data import, no GraphQL resolver, no
+  frontend runtime change, no external patient-client exposure, and no new write
+  authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_dag_d5_post_implementation_review.py tests\test_bernie_ui_dag_d5_readiness_snapshot.py tests\test_bernie_route_outcome_events.py tests\test_bernie_ui_view_model_d5_response_delivery_gate.py -q
+.venv\Scripts\python.exe scripts\bernie_ui_dag_d5_readiness_snapshot.py
+git diff --check -- docs\bernie-ui-derived-state-dag-d5-post-implementation-review.json docs\bernie-ui-derived-state-dag-d5-post-implementation-review.md tests\test_bernie_ui_dag_d5_post_implementation_review.py
+```
+
+Result: `23 passed`; D5 readiness snapshot emitted the approved first-slice and
+closed-gates status; existing Starlette and Google GenAI deprecation warnings
+only; whitespace check passed.
+
+Implementation commit: `d2a0151b`.
+
+Sprint engine state: continuing only through evidence/reporting work; D5 scope
+expansion remains blocked pending separate review.
+
+---
+
+## Previous Closeout - Sprint 249
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 249 Bernie UI D5 Response Delivery First Slice |
 | Integrated through | Ariadne direct implementation after Yuri explicitly approved Codex's recommended narrow D5 go; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because the approved slice was already bounded by the committed D5 plan/checker |
 | Status | Integrated and ready to push |
