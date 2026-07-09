@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 259 Practitioner Directory REST Route Readiness Approval |
 | Integrated through | Ariadne orchestration/integration with Claude API-spine/security PASS, Antigravity consumer/deployment-boundary PASS, and DeepSeek mechanical approval-scope PASS |
-| Status | Integrated and pending push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 259 What Changed
@@ -81,7 +81,7 @@ parallel DB-backed run hit the known transient Postgres enum creation collision;
 the local `gp_pms_test` public schema was reset and the DB-backed suite passed
 when rerun serially.
 
-Implementation commit: pending.
+Implementation commit: `69297a02`.
 
 Sprint engine state: continuing to Sprint 260 route-readiness status
 migration/preflight. The next block must not claim deployment, production,
