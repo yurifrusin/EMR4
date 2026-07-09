@@ -24,6 +24,76 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 249 Bernie UI D5 Response Delivery First Slice |
+| Integrated through | Ariadne direct implementation after Yuri explicitly approved Codex's recommended narrow D5 go; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because the approved slice was already bounded by the committed D5 plan/checker |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-09 |
+
+## Sprint 249 What Changed
+
+- Updated the D5 gate and approval-decision artifacts to
+  `approved_for_backend_response_delivery_first_slice`, reviewer `yuri`,
+  approved contract commit `b0e255c8`, and expiry `2026-07-23`.
+- Added optional `ui_view_model` to `BernieStaffReviewPayload`.
+- Wired `app/routers/appointments.py` to attach
+  `build_bernie_ui_view_model(server_session)` only at the existing
+  supervised-booking response assembly point and only when a server session
+  snapshot exists.
+- Responses without a server session keep `staff_review.ui_view_model` null.
+- Confirm payloads remain free of UI view-model fields, and supervised booking
+  still performs zero appointment/audit writes without a confirm command.
+- Updated D5 readiness snapshot/checker to report the first slice ready while
+  provider, memory/RAG/GraphRAG, raw-trove, live-provider, provider-call, write,
+  external-client, GraphQL, H15/H-series, and model-to-database gates remain
+  closed.
+
+Worker mix:
+
+- Claude worktree available; Claude was not invoked because the first-slice
+  implementation was narrow and already covered by committed D5 contracts.
+- Antigravity worktree available; Antigravity was not invoked for the same
+  reason.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- One backend response field at one existing Bernie supervised-booking assembly
+  point.
+- No confirm payload change, no appointment/audit write change, no provider
+  call, no Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series
+  runtime import, no historical diary/local_data import, no GraphQL resolver, no
+  frontend runtime change, no external patient-client exposure, and no
+  model-to-database-write gate.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_route_outcome_events.py tests\test_bernie_supervised_booking_wrapper.py tests\test_bernie_ui_view_model.py tests\test_bernie_ui_view_model_d5_response_delivery_gate.py tests\test_bernie_ui_view_model_d5_approval_decision_draft.py tests\test_bernie_ui_view_model_d5_backend_delivery_test_plan.py tests\test_bernie_ui_dag_d5_readiness_snapshot.py tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe scripts\bernie_ui_dag_d5_readiness_snapshot.py
+.venv\Scripts\python.exe scripts\bernie_interpretation_readiness_check.py
+.venv\Scripts\python.exe scripts\bernie_provider_boundary_readiness_report.py
+.venv\Scripts\python.exe -m py_compile scripts\bernie_ui_dag_d5_readiness_snapshot.py tests\test_bernie_route_outcome_events.py tests\test_bernie_ui_dag_d5_readiness_snapshot.py
+git diff --check
+```
+
+Result: focused/API-spine suite `93 passed`; D5 readiness snapshot emitted the
+approved first-slice/closed-provider-write-gates status; interpretation
+readiness and provider-boundary reports remained blocked/disabled; py_compile
+passed; whitespace check passed apart from the known CRLF notice on
+`app/schemas/appointments.py`.
+
+Implementation commit: `098b92a7`.
+
+Sprint engine state: paused for separate review before any D5 expansion beyond
+the single supervised-booking response field.
+
+---
+
+## Previous Closeout - Sprint 248
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 248 Bernie UI D5 Readiness Snapshot |
 | Integrated through | Ariadne direct implementation; Claude/Antigravity worktrees available but not invoked, and DeepSeek lane count stayed zero because this was a bounded safe aggregate checker/snapshot |
 | Status | Integrated and ready to push |
