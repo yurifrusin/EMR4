@@ -24,9 +24,88 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 258 Practitioner Directory Blocker Closure |
+| Integrated through | Ariadne orchestration/integration with Claude security/gap wording review, Antigravity deployment/external-client boundary review, and DeepSeek mechanical completeness sweep |
+| Status | Integrated and pending push |
+| Last updated | 2026-07-09 |
+
+## Sprint 258 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-sprint258-blocker-closure.json`.
+- Added `docs/api-spine/practitioner-directory-sprint258-blocker-closure.md`.
+- Added `tests/test_practitioner_directory_sprint258_blocker_closure.py`.
+- Integrated Claude's Sprint 258 security/gap wording review.
+- Integrated Antigravity's Sprint 258 deployment/external-client boundary
+  review.
+- Ran a DeepSeek `deepseek-worker` mechanical completeness sweep; result:
+  PASS.
+- Closed all Sprint 257 blocker-evidence items except the intentionally
+  withheld separate Yuri approval payload.
+- Recorded isolated runtime route and API-spine artifact test pass evidence.
+- Recorded deferred internal-route rate-limit posture, including accepted risk
+  for a compromised authenticated staff credential and current soft controls.
+- Named the current development/internal deployment surface while keeping
+  deployment and production readiness false.
+- Recorded the RLS gap as not equivalent to PostgreSQL RLS and the
+  field-encryption residual risk for regulated practitioner identifiers.
+- Recorded explicit internal-staff-only external-client scope.
+- Preserved `rest_route_ready=false` and all GraphQL/provider/memory/H15/trove/
+  external-client/write/deployment/production readiness gates as false.
+
+Worker mix:
+
+- Claude via `scripts\drive_agent_headless.py`: used for security/gap wording
+  review; tightened rate-limit, deployment, RLS, field-encryption, and
+  external-client residual-risk language.
+- Antigravity via `agy.exe`: used for deployment/external-client and consumer
+  boundary review; reported PASS/VERIFY.
+- DeepSeek via direct Codex `deepseek-worker` spawn: used for mechanical
+  completeness; reported all Sprint 257 blockers closed except the separate
+  Yuri approval payload, which remains intentionally absent.
+
+Boundary:
+
+- Docs, worker review packets, and tests only.
+- No route/schema/service behavior change, no readiness flag change, no SDL or
+  GraphQL resolver, no provider/Access AI invocation, no memory/RAG/GraphRAG
+  wiring, no H15/H-series runtime import, no historical diary/local_data import,
+  no external patient-client exposure, no write authority, no deployment claim,
+  no production-readiness claim, and no Yuri approval payload.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_sprint258_blocker_closure.py tests\test_practitioner_directory_sprint257_go_no_go.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route.py -q
+git diff --check -- docs\api-spine\practitioner-directory-sprint258-blocker-closure.json docs\api-spine\practitioner-directory-sprint258-blocker-closure.md tests\test_practitioner_directory_sprint258_blocker_closure.py orchestration\agent_inbox\codex\review-antigravity-sprint258-practitioner-blocker-closure.md
+```
+
+Result: Sprint 258/Sprint 257 blocker-governance set `10 passed`;
+API-spine artifact suite `31 passed`; practitioner-directory route matrix
+`31 passed`; whitespace check passed. An accidental parallel run of
+DB-bootstrapping suites hit the known transient Postgres enum creation
+collision; the local `gp_pms_test` public schema was reset and the suites passed
+when rerun serially.
+
+Implementation commits: Claude review commit `bf2c0412`; Sprint 258 synthesis
+commit pending.
+
+Sprint engine state: paused for Yuri decision. The next move is not another
+autonomous implementation sprint; Yuri must explicitly decide whether to
+authorize a separate `rest_route_ready=true` approval payload for
+`GET /api/v1/practice/practitioners` only.
+
+---
+
+## Previous Closeout - Sprint 257
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 257 Practitioner Directory Multi-Worker Go/No-Go |
 | Integrated through | Ariadne orchestration/integration with Claude readiness/safety veto, Antigravity consumer/API-boundary review, and DeepSeek mechanical static sweep |
-| Status | Integrated and pending push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 257 What Changed
@@ -84,7 +163,8 @@ accidental parallel run of DB-bootstrapping suites hit the known transient
 Postgres enum creation collision, then passed when rerun serially.
 
 Implementation commits: worker/prep commits `1644c978`, `ce7d358f`,
-`c8bdbbf9`, `954f4eac`, `d7132d25`; Ariadne synthesis commit `3a1d7c0a`.
+`c8bdbbf9`, `954f4eac`, `d7132d25`; Ariadne synthesis commit `3a1d7c0a`;
+closeout metadata commit `b2e6f839`.
 
 Sprint engine state: continuing to Sprint 258 blocker-closure block. Do not
 create a Yuri approval payload or flip `rest_route_ready` without explicit Yuri

@@ -1,0 +1,120 @@
+{
+  "schema_version": "api_spine.practitioner_directory_sprint258_blocker_closure.v1",
+  "date": "2026-07-09",
+  "sprint": 258,
+  "reviewer": "ariadne",
+  "target_route": "GET /api/v1/practice/practitioners",
+  "target_readiness_flag": "rest_route_ready",
+  "decision": "readiness_blockers_closed_except_separate_yuri_approval",
+  "readiness_value_after_this_packet": false,
+  "closes_sprint257_blockers": {
+    "record_isolated_runtime_route_test_pass": {
+      "status": "closed",
+      "command": ".venv\\Scripts\\python.exe -m pytest tests\\test_practitioner_directory_route.py -q",
+      "result": "31 passed",
+      "execution_mode": "isolated_local_pytest"
+    },
+    "record_api_spine_artifact_test_pass": {
+      "status": "closed",
+      "command": ".venv\\Scripts\\python.exe -m pytest tests\\test_api_spine_artifacts.py -q",
+      "result": "31 passed",
+      "execution_mode": "isolated_local_pytest"
+    },
+    "record_rate_limit_or_deferred_rate_limit_decision": {
+      "status": "closed_deferred_internal_route",
+      "decision": "defer_route_specific_rate_limit_for_internal_authenticated_staff_read_route",
+      "required_before_external_or_public_exposure": true,
+      "rationale": "route is authenticated, role-gated, same-practice scoped, read-only, paginated, and not exposed to external patient clients; production/public exposure still requires rate-limit review",
+      "accepted_risk": "a compromised or malicious authenticated staff credential could enumerate the practitioner directory at high request rate without a route-specific middleware throttle",
+      "current_controls": [
+        "JWT authentication and expiry",
+        "role-gated access",
+        "same-practice tenancy filter",
+        "limit and offset pagination bounds",
+        "structured request logging",
+        "Cloud Run request concurrency as a soft ceiling, not a per-user rate limit"
+      ]
+    },
+    "name_deployment_surface": {
+      "status": "closed",
+      "current_surface": "FastAPI backend route mounted under /api/v1/practice for authenticated internal staff clients",
+      "development_surface": "local uvicorn app.main:app development backend, with ngrok used only as a development tunnel for add-in access when needed",
+      "future_surface": "GCP Cloud Run FastAPI backend internal staff API deployment only; no public patient-client deployment surface is approved",
+      "deployment_ready_after_this_packet": false,
+      "production_ready_after_this_packet": false
+    },
+    "record_rls_or_rls_equivalent_gap": {
+      "status": "closed_gap_recorded",
+      "current_control": "application-layer tenancy filter Practitioner.practice_id == current_user.practice_id plus route tests",
+      "gap": "PostgreSQL RLS is not yet enabled as a database-level backstop for this read model",
+      "accepted_for_route_readiness_request": true,
+      "production_follow_up_required": true,
+      "residual_risk": "a future ORM query, raw SQL path, migration script, or route variant that omits the practice_id filter could return cross-practice practitioner data without a database-level backstop",
+      "not_equivalent_to_rls": true
+    },
+    "record_field_encryption_gap": {
+      "status": "closed_gap_recorded",
+      "current_control": "PractitionerOut excludes sensitive identifiers and route tests assert response absence",
+      "gap": "Practitioner model may store provider_number, prescriber_number, ahpra_number, and hpi_i without field-level encryption",
+      "accepted_for_route_readiness_request": true,
+      "production_follow_up_required": true,
+      "regulated_fields": [
+        "provider_number",
+        "prescriber_number",
+        "ahpra_number",
+        "hpi_i"
+      ],
+      "residual_risk": "a database-level breach, SQL injection elsewhere, or compromised database credential could expose these identifiers in plaintext; API schema exclusion does not mitigate that storage risk"
+    },
+    "record_explicit_external_client_scope_decision": {
+      "status": "closed",
+      "decision": "internal_staff_only",
+      "external_patient_client_ready": false,
+      "public_client_ready": false,
+      "future_external_exposure_requires": [
+        "PostgreSQL RLS or approved RLS-equivalent control",
+        "route or shared middleware rate limiting",
+        "external-surface CORS and CSRF review",
+        "privacy impact assessment for exposing practitioner role and location information",
+        "patient identity proofing and authentication distinct from staff auth",
+        "separate Yuri approval payload for external-client exposure"
+      ]
+    },
+    "create_separate_yuri_approval_payload_for_rest_route_ready_true": {
+      "status": "not_created_requires_explicit_yuri_approval",
+      "rationale": "Sprint 258 closes blocker evidence only; it intentionally stops before approval-payload creation or readiness flag change"
+    }
+  },
+  "criteria_status_after_sprint258": {
+    "runtime_test_matrix_passes_in_isolated_run": "closed",
+    "api_spine_artifact_tests_pass": "closed",
+    "openapi_contract_snapshot_matches_runtime_route": "closed_by_sprint256_and_consumer_contract_tests",
+    "authn_authz_tenancy_review_current": "closed",
+    "anti_enumeration_review_current": "closed",
+    "sensitive_field_exclusion_review_current": "closed",
+    "pagination_and_error_contract_review_current": "closed",
+    "rate_limit_or_deferred_rate_limit_decision_recorded": "closed_deferred_internal_route",
+    "deployment_surface_explicitly_named": "closed",
+    "rls_or_rls_equivalent_gap_recorded": "closed_gap_recorded",
+    "field_encryption_gap_recorded": "closed_gap_recorded",
+    "external_client_exposure_decision_recorded": "closed_internal_staff_only",
+    "separate_yuri_approval_payload_exists": "missing_requires_explicit_yuri_approval"
+  },
+  "must_remain_false": {
+    "rest_route_ready": false,
+    "graphql_resolver_ready": false,
+    "external_read_model_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false
+  },
+  "worker_review_plan": {
+    "claude": "security_gap_and_readiness_blocker_closure_veto",
+    "antigravity": "deployment_external_client_and_consumer_boundary_veto",
+    "deepseek": "mechanical_completeness_sweep"
+  },
+  "next_required_decision": "Yuri must explicitly decide whether to authorize a separate rest_route_ready=true approval payload for this route only"
+}
