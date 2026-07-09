@@ -1,0 +1,53 @@
+{
+  "schema_version": "api_spine.practitioner_directory_readiness_criteria.v1",
+  "date": "2026-07-09",
+  "sprint": 255,
+  "reviewer": "ariadne",
+  "decision": "criteria_defined_readiness_not_approved",
+  "target_readiness_flag": "rest_route_ready",
+  "target_route": "GET /api/v1/practice/practitioners",
+  "current_value": false,
+  "approved_value_after_this_packet": false,
+  "required_before_true": {
+    "runtime_test_matrix_passes_in_isolated_run": true,
+    "api_spine_artifact_tests_pass": true,
+    "openapi_contract_snapshot_matches_runtime_route": true,
+    "authn_authz_tenancy_review_current": true,
+    "anti_enumeration_review_current": true,
+    "sensitive_field_exclusion_review_current": true,
+    "pagination_and_error_contract_review_current": true,
+    "rate_limit_or_deferred_rate_limit_decision_recorded": true,
+    "deployment_surface_explicitly_named": true,
+    "rls_or_rls_equivalent_gap_recorded": true,
+    "field_encryption_gap_recorded": true,
+    "external_client_exposure_decision_recorded": true,
+    "separate_yuri_approval_payload_exists": true
+  },
+  "must_remain_false_when_rest_route_ready_true": {
+    "graphql_resolver_ready": false,
+    "external_read_model_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false
+  },
+  "blocked_scope": {
+    "graphql_sdl_or_resolver": false,
+    "provider_access_ai_or_memory_wiring": false,
+    "h15_h_series_or_historical_diary_runtime_import": false,
+    "write_authority_or_audit_write": false,
+    "practitioner_create_update_delete": false,
+    "external_patient_client_exposure": false,
+    "model_to_database_write": false
+  },
+  "approval_packet_shape": {
+    "decision": "approved_for_practitioner_directory_rest_route_ready_true",
+    "reviewer_required": true,
+    "approved_contract_commit_required": true,
+    "approval_expires_on_required": true,
+    "non_rest_scope_fields_must_be_false": true
+  },
+  "next_recommended_sprint": "practitioner_directory_openapi_consumer_contract_check"
+}
