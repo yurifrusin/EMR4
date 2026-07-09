@@ -24,6 +24,65 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 245 Bernie UI D4/D5 Evidence Consolidation |
+| Integrated through | Ariadne review-only implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this sprint only consolidated already-committed evidence |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-09 |
+
+## Sprint 245 What Changed
+
+- Added `docs/bernie-ui-derived-state-dag-evidence-consolidation.md`.
+- Added `tests/test_bernie_ui_view_model_evidence_consolidation.py`.
+- Consolidated D1-D5 evidence into a single review packet covering pure selector
+  evidence, route-intercepted UI evidence, evidence-label limits, payload/write
+  authority boundaries, and still-blocked D5 delivery surfaces.
+- Restated that `BernieUiViewModel` is display-only state and carries no write
+  authority.
+- Recorded the next review-only sequence: Sprint 246 approval-decision draft,
+  Sprint 247 backend delivery test plan, and Sprint 248 readiness snapshot.
+
+Worker mix:
+
+- Claude worktree checked clean; Claude was not invoked because the sprint was
+  a bounded evidence-consolidation artifact.
+- Antigravity worktree checked clean; Antigravity was not invoked for the same
+  reason.
+- DeepSeek direct-spawn sidecar reviewed the consolidation packet shape;
+  Ariadne incorporated its section recommendations, then closed the lane.
+  DeepSeek lane count returned to zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- Static docs/tests only.
+- No backend response delivery, no route/schema/service change, no provider
+  call, no Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series
+  runtime import, no historical diary/local_data import, no GraphQL resolver, no
+  frontend runtime change, no external patient-client exposure, and no new write
+  authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_view_model_evidence_consolidation.py tests\test_bernie_ui_view_model.py tests\test_bernie_ui_view_model_d5_response_delivery_gate.py -q
+git diff --check -- docs\bernie-ui-derived-state-dag-evidence-consolidation.md tests\test_bernie_ui_view_model_evidence_consolidation.py
+```
+
+Result: `31 passed`; existing Starlette and Google GenAI deprecation warnings
+only; whitespace check passed.
+
+Implementation commit: `77c01756`.
+
+Sprint engine state: continuing through the user-approved Sprint 246-248
+review-only block. Backend response delivery remains blocked until explicit D5
+approval exists.
+
+---
+
+## Previous Closeout - Sprint 244
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 244 Bernie UI Clarification/Identity Route-Intercepted Evidence |
 | Integrated through | Ariadne test implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this stayed inside the existing Playwright harness |
 | Status | Integrated and ready to push |
