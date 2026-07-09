@@ -105,6 +105,7 @@ from app.services.bernie import (
     InMemoryBernieSessionStore,
     build_session_confirmation_binding,
 )
+from app.services.bernie.ui_view_model import build_bernie_ui_view_model
 
 _STAFF_CREATE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.staff_create)
 _BERNIE_CREATE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.bernie_create)
@@ -6043,8 +6044,15 @@ def propose_bernie_supervised_booking(
             context_freshness=_sb_context_freshness,
         )
         if server_session_snapshot is not None:
+            session_out = _bernie_session_snapshot_out(server_session_snapshot)
+            ui_view_model = build_bernie_ui_view_model(session_out).model_dump(mode="json")
             out = out.model_copy(
-                update={"server_session": _bernie_session_snapshot_out(server_session_snapshot)}
+                update={
+                    "server_session": session_out,
+                    "staff_review": out.staff_review.model_copy(
+                        update={"ui_view_model": ui_view_model}
+                    ),
+                }
             )
         return out
 

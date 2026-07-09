@@ -21,33 +21,39 @@ def _load_json_no_duplicate_keys(path: Path) -> dict:
     return json.loads(raw, object_pairs_hook=reject_duplicates)
 
 
-def test_d5_approval_decision_draft_is_blocked_and_unacknowledged():
+def test_d5_approval_decision_records_yuri_first_slice_go():
     draft = _load_json_no_duplicate_keys(DRAFT_JSON)
 
     assert draft["schema_version"] == "bernie.ui_dag.d5_approval_decision_draft.v1"
-    assert draft["decision"] == "blocked"
-    assert draft["reviewer"] == ""
-    assert draft["go_no_go_acknowledged"] is False
-    assert draft["approved_contract_commit"] == ""
-    assert draft["approval_expires_on"] == ""
+    assert draft["decision"] == "approved_for_backend_response_delivery_first_slice"
+    assert draft["reviewer"] == "yuri"
+    assert draft["go_no_go_acknowledged"] is True
+    assert draft["approved_contract_commit"] == "b0e255c8"
+    assert draft["approval_expires_on"] == "2026-07-23"
     assert draft["recommended_approval_expiry_days"] == 14
     assert draft["proposed_decision_if_approved"] == (
         "approved_for_backend_response_delivery_first_slice"
     )
 
 
-def test_d5_approval_scope_fields_all_remain_false():
+def test_d5_approval_scope_fields_are_limited_to_first_slice():
     draft = _load_json_no_duplicate_keys(DRAFT_JSON)
     scope = draft["approval_scope"]
 
-    assert scope
-    assert all(value is False for value in scope.values())
-    assert scope["backend_response_delivery_first_slice_approved"] is False
-    assert scope["route_or_schema_change_approved"] is False
+    approved_fields = {key for key, value in scope.items() if value is True}
+    assert approved_fields == {
+        "backend_response_delivery_first_slice_approved",
+        "single_response_assembly_point_approved",
+        "optional_bernie_ui_view_model_v1_field_approved",
+        "idle_client_confirmation_request_state_default_approved",
+        "route_or_schema_change_approved",
+    }
     assert scope["graphql_delivery_approved"] is False
     assert scope["provider_or_live_provider_wiring_approved"] is False
     assert scope["appointment_write_behavior_change_approved"] is False
+    assert scope["confirm_payload_change_approved"] is False
     assert scope["model_to_database_write_approved"] is False
+    assert scope["external_patient_client_exposure_approved"] is False
 
 
 def test_d5_approval_draft_points_to_required_evidence_contracts():
@@ -96,23 +102,25 @@ def test_d5_approval_draft_preserves_forbidden_scope_and_readiness_values():
     }
 
 
-def test_existing_d5_gate_remains_blocked_while_draft_exists():
+def test_existing_d5_gate_matches_approved_first_slice_scope():
     gate = _load_json_no_duplicate_keys(GATE_JSON)
 
-    assert gate["decision"] == "blocked"
-    assert gate["backend_response_delivery_approved"] is False
-    assert gate["rest_or_fastapi_route_change_approved"] is False
+    assert gate["decision"] == "approved_for_backend_response_delivery_first_slice"
+    assert gate["backend_response_delivery_approved"] is True
+    assert gate["rest_or_fastapi_route_change_approved"] is True
     assert gate["provider_or_live_provider_wiring_approved"] is False
     assert gate["model_to_database_write_approved"] is False
 
 
-def test_d5_approval_markdown_says_draft_not_approval():
+def test_d5_approval_markdown_says_narrow_approval_only():
     text = DRAFT_MD.read_text(encoding="utf-8")
 
-    assert "Status: blocked decision draft" in text
-    assert "This is not an approval" in text
+    assert "Status: approved for the narrow D5 backend response-delivery first slice" in text
+    assert "does not approve any non-first-slice scope" in text
     assert "`approved_for_backend_response_delivery_first_slice`" in text
-    assert "Every approval-scope field remains false" in text
+    assert "approved contract commit `b0e255c8`" in text
+    assert "2026-07-23" in text
+    assert "All non-first-slice fields remain false" in text
     assert "one reviewed Bernie response assembly point" in text
     assert "runtime_gate_decision=blocked" in text
     assert "provider_calls_performed=false" in text

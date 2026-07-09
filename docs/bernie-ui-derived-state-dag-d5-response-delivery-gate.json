@@ -1,14 +1,15 @@
 {
   "schema_version": "bernie.ui_dag.d5_response_delivery_gate.v1",
-  "decision": "blocked",
-  "reviewer": "",
+  "decision": "approved_for_backend_response_delivery_first_slice",
+  "reviewer": "yuri",
   "review_required_before_change": true,
-  "approved_contract_commit": "",
-  "acknowledged_at": "",
+  "approved_contract_commit": "b0e255c8",
+  "approval_expires_on": "2026-07-23",
+  "acknowledged_at": "2026-07-09",
   "ui_consumer_first_slice_integrated": true,
-  "route_intercepted_ui_evidence_only": true,
-  "backend_response_delivery_approved": false,
-  "rest_or_fastapi_route_change_approved": false,
+  "route_intercepted_ui_evidence_only": false,
+  "backend_response_delivery_approved": true,
+  "rest_or_fastapi_route_change_approved": true,
   "graphql_delivery_approved": false,
   "provider_or_live_provider_wiring_approved": false,
   "memory_or_rag_wiring_approved": false,
@@ -19,7 +20,11 @@
     "route_intercepted_ui_fixture_tests",
     "display_only_frontend_consumer",
     "selector_unit_tests",
-    "static_review_artifacts"
+    "static_review_artifacts",
+    "optional_staff_review_ui_view_model_field",
+    "single_supervised_booking_response_assembly_call_to_build_bernie_ui_view_model",
+    "idle_client_confirmation_request_state_default",
+    "backend_response_delivery_synthetic_or_fake_provider_tests"
   ],
   "required_before_backend_delivery": [
     "explicit_yuri_review",
@@ -40,8 +45,8 @@
     "synthetic_or_route_intercepted_delivery_tests",
     "fine_grained_non_bernie_router_import_guard"
   ],
-  "forbidden_until_approved": [
-    "production_route_emits_bernie_ui_view_model",
+  "forbidden_after_first_slice_approval": [
+    "additional_production_routes_emit_bernie_ui_view_model",
     "graphql_resolver_emits_bernie_ui_view_model",
     "provider_prompt_uses_bernie_ui_view_model",
     "confirm_payload_contains_view_model_fields",
@@ -54,7 +59,7 @@
     "decision_changes_from_blocked",
     "any_approved_scope_field_changes_to_true",
     "required_before_backend_delivery_is_weakened",
-    "forbidden_until_approved_is_weakened",
+    "forbidden_after_first_slice_approval_is_weakened",
     "backend_route_or_schema_change_needed",
     "live_provider_or_memory_evidence_needed",
     "selector_requires_database_provider_memory_or_raw_diary_input",

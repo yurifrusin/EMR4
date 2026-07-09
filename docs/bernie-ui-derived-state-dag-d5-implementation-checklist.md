@@ -2,15 +2,16 @@
 
 Date: 2026-07-09
 
-Status: static checklist only. This does not approve changing
-`docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json`, backend
-response delivery, route/schema code, providers, GraphQL, memory/RAG/GraphRAG,
-H15/H-series runtime inputs, or appointment writes.
+Status: first-slice checklist. This records the narrow implementation checklist
+for the approved `approved_for_backend_response_delivery_first_slice` gate. It
+does not approve providers, GraphQL, memory/RAG/GraphRAG, H15/H-series runtime
+inputs, historical diary runtime inputs, confirm payload changes, appointment
+writes, or model-to-database writes.
 
 Gate prerequisite:
-`docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json` must remain
-`decision: blocked` until Yuri explicitly reviews and approves a D5 delivery
-slice.
+`docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json` now records
+`approved_for_backend_response_delivery_first_slice`. The implementation must
+stay inside that first slice.
 
 ## Pre-Implementation Checks
 
@@ -30,9 +31,9 @@ Expected values:
 - `live_provider_enabled=false`
 - `provider_calls_performed=false`
 
-## Permitted Future Slice After Approval
+## Permitted First Slice
 
-Only after the D5 gate is approved, the first delivery slice should remain:
+The first delivery slice must remain:
 
 - optional response field only;
 - one response assembly attachment point;
@@ -48,8 +49,8 @@ Only after the D5 gate is approved, the first delivery slice should remain:
 
 1. Response with a server session snapshot includes a valid
    `bernie.ui_view_model.v1` model.
-2. Response without a server session snapshot omits the field rather than
-   constructing a synthetic empty view model.
+2. Response without a server session snapshot leaves the field null or absent
+   rather than constructing a synthetic empty view model.
 3. Pre-confirm states never set `confirmation_state=confirmed` or
    `show_success_copy=true`.
 4. Confirmed server-snapshot state sets

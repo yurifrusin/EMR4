@@ -20,17 +20,17 @@ def test_d5_readiness_snapshot_matches_committed_blocked_snapshot():
     assert snapshot == json.loads(DEFAULT_BLOCKED_SNAPSHOT_PATH.read_text(encoding="utf-8"))
 
 
-def test_d5_readiness_snapshot_says_ui_ready_but_backend_delivery_blocked():
+def test_d5_readiness_snapshot_says_first_slice_ready_but_expansion_blocked():
     snapshot = build_d5_readiness_snapshot()
 
     assert snapshot["ui_consumer_ready"] is True
-    assert snapshot["route_intercepted_ui_evidence_only"] is True
-    assert snapshot["backend_response_delivery_ready"] is False
-    assert snapshot["backend_response_delivery_approved"] is False
-    assert snapshot["implementation_authorized"] is False
-    assert snapshot["approval_scope_true_count"] == 0
-    assert snapshot["readiness_label"] == "ui_consumer_ready_backend_delivery_blocked"
-    assert snapshot["next_required_decision"] == "explicit_d5_approval"
+    assert snapshot["route_intercepted_ui_evidence_only"] is False
+    assert snapshot["backend_response_delivery_ready"] is True
+    assert snapshot["backend_response_delivery_approved"] is True
+    assert snapshot["implementation_authorized"] is True
+    assert snapshot["approval_scope_true_count"] == 5
+    assert snapshot["readiness_label"] == "d5_first_slice_ready_provider_write_gates_closed"
+    assert snapshot["next_required_decision"] == "separate_review_for_any_scope_expansion"
 
 
 def test_d5_readiness_snapshot_keeps_provider_memory_write_and_external_gates_closed():
@@ -44,7 +44,7 @@ def test_d5_readiness_snapshot_keeps_provider_memory_write_and_external_gates_cl
     assert snapshot["provider_calls_performed"] is False
     assert snapshot["write_authority_ready"] is False
     assert snapshot["external_patient_client_ready"] is False
-    assert snapshot["closed_gate_scope_count"] == 8
+    assert snapshot["closed_gate_scope_count"] == 6
 
 
 def test_d5_readiness_snapshot_contains_no_route_payload_or_local_fragments():
@@ -63,9 +63,9 @@ def test_d5_readiness_snapshot_contains_no_route_payload_or_local_fragments():
         assert fragment not in serialized
 
 
-def test_d5_readiness_snapshot_safety_rejects_unblocked_backend_delivery():
+def test_d5_readiness_snapshot_safety_rejects_provider_gate_opening():
     snapshot = build_d5_readiness_snapshot()
-    snapshot["backend_response_delivery_ready"] = True
+    snapshot["provider_calls_performed"] = True
 
     with pytest.raises(AssertionError):
         assert_d5_readiness_snapshot_safety(snapshot)

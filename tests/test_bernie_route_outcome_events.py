@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 import pytest
@@ -148,7 +149,26 @@ def test_supervised_booking_stages_server_proposal_and_session_bound_evidence(
     assert data["server_session"]["session_id"] == session["session_id"]
     assert data["server_session"]["surface_id"] == surface_id
     assert data["server_session"]["state"] == "proposal_preview"
+    ui_view_model = data["staff_review"]["ui_view_model"]
+    assert ui_view_model["schema_version"] == "bernie.ui_view_model.v1"
+    assert ui_view_model["confirmation_state"] == {
+        "value": "ready",
+        "source": "derived",
+    }
+    assert ui_view_model["flags"]["show_confirm_button"] is True
+    assert ui_view_model["flags"]["show_success_copy"] is False
+    assert ui_view_model["primary_copy"].startswith("No appointment has been made yet")
     assert data["staff_review"]["confirm_payload"]["session_binding"] is not None
+    serialized_confirm_payload = json.dumps(data["staff_review"]["confirm_payload"])
+    for forbidden in [
+        "ui_view_model",
+        "copy_mode",
+        "confirmation_state",
+        "freshness_state",
+        "primary_copy",
+        "secondary_copy",
+    ]:
+        assert forbidden not in serialized_confirm_payload
     assert data["selection_proposal"]["session_binding"] == data["staff_review"]["confirm_payload"]["session_binding"]
     signed_payload = data["staff_review"]["confirm_payload"]["signed_confirmation_evidence"]["payload"]
     assert signed_payload["session_binding"] == data["staff_review"]["confirm_payload"]["session_binding"]
@@ -165,6 +185,37 @@ def test_supervised_booking_stages_server_proposal_and_session_bound_evidence(
         "slot_search_outcome",
         "proposal_outcome",
     ]
+    assert (db.query(Appointment).count(), db.query(AppointmentAuditLog).count()) == before
+
+
+def test_supervised_booking_without_server_session_has_no_ui_view_model_delivery(
+    client, db, gp_user, practitioner, patient, schedule
+):
+    token = make_token(gp_user)
+    before = (db.query(Appointment).count(), db.query(AppointmentAuditLog).count())
+
+    resp = client.post(
+        WRAPPER_URL,
+        json={
+            "reference_date": REFERENCE_DATE,
+            "command": {
+                "practitioner_id": str(practitioner.id),
+                "patient_id": str(patient.id),
+                "date_from": "today",
+                "duration_minutes": "15",
+            },
+            "selected_candidate_index": 0,
+            "patient_id": str(patient.id),
+            "reason": "D5 no server session response compatibility",
+        },
+        headers=_auth(token),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["server_session"] is None
+    assert data["staff_review"]["ui_view_model"] is None
+    assert data["result"] == "confirmation_ready"
     assert (db.query(Appointment).count(), db.query(AppointmentAuditLog).count()) == before
 
 

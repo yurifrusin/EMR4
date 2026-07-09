@@ -2,28 +2,27 @@
 
 Date: 2026-07-09
 
-Status: blocked test plan only. This plan does not authorize implementation,
-backend response delivery, route/schema changes, providers, memory/RAG/GraphRAG,
-H15/H-series runtime inputs, historical diary runtime inputs, GraphQL delivery,
-external patient clients, confirm payload changes, appointment write behavior
-changes, or model-to-database writes.
+Status: approved first-slice test plan. This plan authorizes only the narrow
+D5 backend response-delivery first slice. It does not authorize providers,
+memory/RAG/GraphRAG, H15/H-series runtime inputs, historical diary runtime
+inputs, GraphQL delivery, external patient clients, confirm payload changes,
+appointment write behavior changes, or model-to-database writes.
 
 Structured plan:
 `docs/bernie-ui-derived-state-dag-d5-backend-delivery-test-plan.json`.
 
 ## Approval Prerequisite
 
-The test plan is executable only after an explicit
-`approved_for_backend_response_delivery_first_slice` decision. Until then,
-`docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json` remains
-`decision: blocked` and the production route import ban remains correct.
+The test plan is executable because Yuri explicitly approved
+`approved_for_backend_response_delivery_first_slice` on 2026-07-09. The
+production route import guard remains narrow.
 
 ## Candidate First Slice
 
 The candidate first slice is a single reviewed Bernie response assembly point,
 currently represented as
 `POST /api/v1/appointments/proposals/bernie/supervised-booking`, with an
-optional `staff_review.bernie.ui_view_model` response field.
+optional `staff_review.ui_view_model` response field.
 
 The field must be omitted when no server session snapshot exists. If delivered,
 server-side client confirmation request state must default to `idle` unless a

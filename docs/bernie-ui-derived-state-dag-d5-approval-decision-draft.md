@@ -2,34 +2,39 @@
 
 Date: 2026-07-09
 
-Status: blocked decision draft. This is not an approval and does not change the
-D5 response-delivery gate.
+Status: approved for the narrow D5 backend response-delivery first slice. This
+does not approve any non-first-slice scope.
 
 Draft payload:
 `docs/bernie-ui-derived-state-dag-d5-approval-decision-draft.json`.
 
 ## Decision Surface
 
-The only proposed future approval name is
-`approved_for_backend_response_delivery_first_slice`. If Yuri later approves
-that decision explicitly, the approval should cover only one reviewed Bernie response assembly point
-that emits an optional `bernie.ui_view_model.v1` display field.
+Yuri approved `approved_for_backend_response_delivery_first_slice` on
+2026-07-09 against approved contract commit `b0e255c8`. The approval expires on
+2026-07-23.
 
-The draft keeps `decision: blocked`, blank reviewer, blank approved contract
-commit, blank expiry date, and `go_no_go_acknowledged: false`.
+The approval covers only one reviewed Bernie response assembly point that emits
+an optional `bernie.ui_view_model.v1` display field. It keeps the existing
+signed confirm endpoint and confirm payload as the sole booking authority.
 
 ## Scope Still False
 
-Every approval-scope field remains false in the draft, including backend
-response delivery, route/schema change, GraphQL delivery, provider/live-provider
-wiring, Access AI invocation, memory/RAG/GraphRAG wiring, H15/H-series runtime
-input, historical diary runtime input, appointment write behavior changes,
-confirm payload changes, model-to-database writes, external patient-client
-exposure, and frontend JavaScript scope expansion.
+Only the narrow D5 first-slice fields are true: backend response delivery first
+slice, a single response assembly point, the optional
+`bernie.ui_view_model.v1` field, the server-side `idle` client confirmation
+request-state default, and the route/schema response change needed for that
+field.
 
-## If Later Approved
+All non-first-slice fields remain false, including GraphQL delivery,
+provider/live-provider wiring, Access AI invocation, memory/RAG/GraphRAG wiring,
+H15/H-series runtime input, historical diary runtime input, appointment write
+behavior changes, confirm payload changes, model-to-database writes, external
+patient-client exposure, and frontend JavaScript scope expansion.
 
-The future first slice may only:
+## Approved First Slice
+
+The approved first slice may only:
 
 - emit optional `bernie.ui_view_model.v1` from one reviewed Bernie response
   assembly point;
@@ -54,6 +59,5 @@ Before any approval, the pre-D5 checks must still report:
 - `live_provider_enabled=false`
 - `provider_calls_performed=false`
 
-Any change to the decision, reviewer, expiry, contract commit, approval-scope
-booleans, allowed future scope, or forbidden future scope requires a sprint
-pause and explicit review.
+Any expansion beyond the approved first slice requires a sprint pause and
+explicit review.

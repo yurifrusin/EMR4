@@ -249,7 +249,13 @@ def test_selected_candidate_returns_confirmation_ready_evidence_without_mutating
     practitioner,
     patient,
     schedule,
+    monkeypatch,
 ):
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda tz: datetime(2026, 6, 22, 8, 0, tzinfo=tz),
+    )
     token = make_token(gp_user)
     appointment_before = db.query(Appointment).count()
     audit_before = db.query(AppointmentAuditLog).count()

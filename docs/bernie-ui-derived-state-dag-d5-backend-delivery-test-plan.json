@@ -1,11 +1,11 @@
 {
   "schema_version": "bernie.ui_dag.d5_backend_delivery_test_plan.v1",
-  "status": "blocked_test_plan_only",
+  "status": "approved_first_slice_test_plan",
   "approval_required": "approved_for_backend_response_delivery_first_slice",
-  "implementation_authorized": false,
+  "implementation_authorized": true,
   "candidate_attachment_point": "one_reviewed_bernie_response_assembly_point",
   "candidate_route": "POST /api/v1/appointments/proposals/bernie/supervised-booking",
-  "candidate_response_location": "staff_review.bernie.ui_view_model",
+  "candidate_response_location": "staff_review.ui_view_model",
   "evidence_label_after_implementation": "backend_response_delivery_synthetic_or_fake_provider",
   "preflight_commands": [
     ".venv\\Scripts\\python.exe scripts\\bernie_interpretation_readiness_check.py",
@@ -22,7 +22,7 @@
   "required_test_ids": [
     "test_d5_gate_approved_before_route_delivery",
     "test_supervised_booking_response_includes_ui_view_model_when_server_session_snapshot_exists",
-    "test_supervised_booking_response_omits_ui_view_model_without_server_session_snapshot",
+    "test_supervised_booking_response_leaves_ui_view_model_null_or_absent_without_server_session_snapshot",
     "test_server_delivery_defaults_client_confirmation_request_state_idle",
     "test_backend_confirmed_snapshot_is_only_success_source",
     "test_pressed_awaiting_stale_failed_states_hide_confirm_and_success",
@@ -50,7 +50,7 @@
       "id": "response_attachment",
       "required_test_ids": [
         "test_supervised_booking_response_includes_ui_view_model_when_server_session_snapshot_exists",
-        "test_supervised_booking_response_omits_ui_view_model_without_server_session_snapshot",
+        "test_supervised_booking_response_leaves_ui_view_model_null_or_absent_without_server_session_snapshot",
         "test_server_delivery_defaults_client_confirmation_request_state_idle",
         "test_response_schema_remains_optional_and_backward_compatible"
       ]

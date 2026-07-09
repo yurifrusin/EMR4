@@ -1,10 +1,10 @@
 {
   "schema_version": "bernie.ui_dag.d5_approval_decision_draft.v1",
-  "decision": "blocked",
-  "reviewer": "",
-  "go_no_go_acknowledged": false,
-  "approved_contract_commit": "",
-  "approval_expires_on": "",
+  "decision": "approved_for_backend_response_delivery_first_slice",
+  "reviewer": "yuri",
+  "go_no_go_acknowledged": true,
+  "approved_contract_commit": "b0e255c8",
+  "approval_expires_on": "2026-07-23",
   "recommended_approval_expiry_days": 14,
   "proposed_decision_if_approved": "approved_for_backend_response_delivery_first_slice",
   "candidate_contract_commits": [
@@ -24,11 +24,11 @@
     "review/test_diary_smoke.py"
   ],
   "approval_scope": {
-    "backend_response_delivery_first_slice_approved": false,
-    "single_response_assembly_point_approved": false,
-    "optional_bernie_ui_view_model_v1_field_approved": false,
-    "idle_client_confirmation_request_state_default_approved": false,
-    "route_or_schema_change_approved": false,
+    "backend_response_delivery_first_slice_approved": true,
+    "single_response_assembly_point_approved": true,
+    "optional_bernie_ui_view_model_v1_field_approved": true,
+    "idle_client_confirmation_request_state_default_approved": true,
+    "route_or_schema_change_approved": true,
     "graphql_delivery_approved": false,
     "provider_or_live_provider_wiring_approved": false,
     "access_ai_invocation_approved": false,

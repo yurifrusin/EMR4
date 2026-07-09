@@ -2,11 +2,16 @@
 
 Date: 2026-07-09
 
-Status: blocked. Sprint 240 proved a frontend-only, route-intercepted consumer
-for an optional `bernie.ui_view_model.v1` display payload. It did not approve
-backend response delivery, route/schema changes, GraphQL delivery, provider
-delivery, memory/RAG/GraphRAG use, H15/H-series runtime inputs, or write
-authority.
+Status: approved for the narrow D5 backend response-delivery first slice. Sprint
+240 proved a frontend-only, route-intercepted consumer for an optional
+`bernie.ui_view_model.v1` display payload, and Yuri approved the single backend
+response-delivery slice on 2026-07-09 against contract commit `b0e255c8`.
+
+This approval covers only one reviewed Bernie response assembly point and the
+optional display-only `bernie.ui_view_model.v1` field. It does not approve
+GraphQL delivery, provider delivery, memory/RAG/GraphRAG use, H15/H-series
+runtime inputs, historical diary runtime inputs, external patient clients,
+confirm payload changes, appointment write changes, or model-to-database writes.
 
 Gate payload: `docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json`.
 
@@ -26,18 +31,18 @@ Expected values remain blocked/disabled: `runtime_or_provider_wiring_ready=false
 
 - The primary `renderBernieReview` panel can consume an optional display-only
   view model when route-intercepted fixtures provide it.
+- The approved backend first slice may deliver the same display-only view model
+  from one reviewed Bernie response assembly point.
 - Command authority still comes from existing signed confirm fields:
   `confirm_endpoint`, `confirm_payload`, freshness IDs, evidence, and the
   existing confirm affordance gate.
 - The full Diary route-intercepted Playwright harness remains the committed UI
   evidence spine.
-- Production routes must not emit or import `BernieUiViewModel` until this gate
-  is explicitly reviewed and changed.
+- Non-approved production routes must not emit or import `BernieUiViewModel`.
 
-## Before Backend Delivery
+## First-Slice Delivery Requirements
 
-Any sprint that proposes backend delivery of `BernieUiViewModel` must pause for
-explicit review and provide:
+The approved first slice must provide:
 
 - the exact response schema contract and attachment point;
 - server-side tests building the view model from a session snapshot without
@@ -51,6 +56,7 @@ explicit review and provide:
 
 ## Not Approved
 
-This gate does not approve production route emission, GraphQL resolver delivery,
-provider prompts, Access AI invocation, memory/RAG/GraphRAG, historical diary
-runtime inputs, appointment write changes, or model-to-database writes.
+This gate does not approve additional production route emission, GraphQL
+resolver delivery, provider prompts, Access AI invocation, memory/RAG/GraphRAG,
+historical diary runtime inputs, appointment write changes, confirm payload
+changes, external patient-client exposure, or model-to-database writes.

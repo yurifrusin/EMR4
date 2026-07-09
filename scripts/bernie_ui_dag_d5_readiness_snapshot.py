@@ -86,7 +86,7 @@ def build_d5_readiness_snapshot(
         "test_plan_status": test_plan["status"],
         "ui_consumer_ready": gate["ui_consumer_first_slice_integrated"],
         "route_intercepted_ui_evidence_only": gate["route_intercepted_ui_evidence_only"],
-        "backend_response_delivery_ready": False,
+        "backend_response_delivery_ready": True,
         "backend_response_delivery_approved": gate["backend_response_delivery_approved"],
         "implementation_authorized": test_plan["implementation_authorized"],
         "approval_scope_true_count": approval_scope_true_count,
@@ -115,8 +115,8 @@ def build_d5_readiness_snapshot(
         "provider_calls_performed": gate_expected["provider_calls_performed"],
         "write_authority_ready": False,
         "external_patient_client_ready": False,
-        "readiness_label": "ui_consumer_ready_backend_delivery_blocked",
-        "next_required_decision": "explicit_d5_approval",
+        "readiness_label": "d5_first_slice_ready_provider_write_gates_closed",
+        "next_required_decision": "separate_review_for_any_scope_expansion",
     }
     assert_d5_readiness_snapshot_safety(snapshot)
     return snapshot
@@ -125,17 +125,17 @@ def build_d5_readiness_snapshot(
 def assert_d5_readiness_snapshot_safety(snapshot: dict[str, object]) -> None:
     assert snapshot["schema_version"] == SNAPSHOT_SCHEMA_VERSION
     assert snapshot["source"] == "committed_bernie_ui_dag_d5_artifacts"
-    assert snapshot["d5_gate_decision"] == "blocked"
-    assert snapshot["approval_decision"] == "blocked"
-    assert snapshot["test_plan_status"] == "blocked_test_plan_only"
+    assert snapshot["d5_gate_decision"] == "approved_for_backend_response_delivery_first_slice"
+    assert snapshot["approval_decision"] == "approved_for_backend_response_delivery_first_slice"
+    assert snapshot["test_plan_status"] == "approved_first_slice_test_plan"
     assert snapshot["ui_consumer_ready"] is True
-    assert snapshot["route_intercepted_ui_evidence_only"] is True
-    assert snapshot["backend_response_delivery_ready"] is False
-    assert snapshot["backend_response_delivery_approved"] is False
-    assert snapshot["implementation_authorized"] is False
-    assert snapshot["approval_scope_true_count"] == 0
+    assert snapshot["route_intercepted_ui_evidence_only"] is False
+    assert snapshot["backend_response_delivery_ready"] is True
+    assert snapshot["backend_response_delivery_approved"] is True
+    assert snapshot["implementation_authorized"] is True
+    assert snapshot["approval_scope_true_count"] == 5
     assert snapshot["approval_scope_count"] >= 16
-    assert snapshot["closed_gate_scope_count"] == len(GATE_FALSE_FIELDS)
+    assert snapshot["closed_gate_scope_count"] == len(GATE_FALSE_FIELDS) - 2
     assert snapshot["preflight_command_count"] == 2
     assert snapshot["preflight_expected_value_count"] == 6
     assert snapshot["required_future_test_count"] >= 18
@@ -152,8 +152,8 @@ def assert_d5_readiness_snapshot_safety(snapshot: dict[str, object]) -> None:
     assert snapshot["provider_calls_performed"] is False
     assert snapshot["write_authority_ready"] is False
     assert snapshot["external_patient_client_ready"] is False
-    assert snapshot["readiness_label"] == "ui_consumer_ready_backend_delivery_blocked"
-    assert snapshot["next_required_decision"] == "explicit_d5_approval"
+    assert snapshot["readiness_label"] == "d5_first_slice_ready_provider_write_gates_closed"
+    assert snapshot["next_required_decision"] == "separate_review_for_any_scope_expansion"
 
     serialized = json.dumps(snapshot, sort_keys=True).casefold()
     forbidden_fragments = [

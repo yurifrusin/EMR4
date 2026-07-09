@@ -30,23 +30,25 @@ def test_d5_response_delivery_gate_json_has_no_duplicate_keys():
     assert duplicates == []
 
 
-def test_d5_response_delivery_gate_remains_blocked_by_default():
+def test_d5_response_delivery_gate_records_narrow_first_slice_approval():
     gate = _gate()
 
     assert gate["schema_version"] == "bernie.ui_dag.d5_response_delivery_gate.v1"
-    assert gate["decision"] == "blocked"
+    assert gate["decision"] == "approved_for_backend_response_delivery_first_slice"
+    assert gate["reviewer"] == "yuri"
     assert gate["review_required_before_change"] is True
+    assert gate["approved_contract_commit"] == "b0e255c8"
+    assert gate["approval_expires_on"] == "2026-07-23"
     assert gate["ui_consumer_first_slice_integrated"] is True
-    assert gate["route_intercepted_ui_evidence_only"] is True
-
-    approved_scope_fields = [
-        key for key, value in gate.items()
-        if (key.endswith("_approved") or key.endswith("_change_approved"))
-        and isinstance(value, bool)
-    ]
-    assert approved_scope_fields
-    for field in approved_scope_fields:
-        assert gate[field] is False
+    assert gate["route_intercepted_ui_evidence_only"] is False
+    assert gate["backend_response_delivery_approved"] is True
+    assert gate["rest_or_fastapi_route_change_approved"] is True
+    assert gate["graphql_delivery_approved"] is False
+    assert gate["provider_or_live_provider_wiring_approved"] is False
+    assert gate["memory_or_rag_wiring_approved"] is False
+    assert gate["h15_or_h_series_runtime_input_approved"] is False
+    assert gate["appointment_write_behavior_change_approved"] is False
+    assert gate["model_to_database_write_approved"] is False
 
 
 def test_d5_gate_names_required_backend_delivery_prerequisites():
@@ -65,11 +67,11 @@ def test_d5_gate_names_required_backend_delivery_prerequisites():
     assert "non_bernie_router_import_ban_tests" in required
 
 
-def test_d5_gate_forbids_runtime_delivery_and_write_authority_until_approved():
+def test_d5_gate_forbids_non_first_slice_delivery_and_write_authority_after_approval():
     gate = _gate()
-    forbidden = set(gate["forbidden_until_approved"])
+    forbidden = set(gate["forbidden_after_first_slice_approval"])
 
-    assert "production_route_emits_bernie_ui_view_model" in forbidden
+    assert "additional_production_routes_emit_bernie_ui_view_model" in forbidden
     assert "graphql_resolver_emits_bernie_ui_view_model" in forbidden
     assert "provider_prompt_uses_bernie_ui_view_model" in forbidden
     assert "confirm_payload_contains_view_model_fields" in forbidden
@@ -92,41 +94,41 @@ def test_d5_gate_records_pre_delivery_readiness_commands_and_values():
     assert "provider_calls_performed=false" in gate["expected_pre_d5_values"]
 
 
-def test_d5_gate_doc_preserves_no_runtime_delivery_posture():
+def test_d5_gate_doc_preserves_narrow_first_slice_posture():
     text = DOC_PATH.read_text(encoding="utf-8")
 
-    assert "Status: blocked" in text
+    assert "Status: approved for the narrow D5 backend response-delivery first slice" in text
     assert "route-intercepted consumer" in text
-    assert "Production routes must not emit or import `BernieUiViewModel`" in text
+    assert "one reviewed Bernie response assembly point" in text
     assert "scripts\\bernie_interpretation_readiness_check.py" in text
     assert "scripts\\bernie_provider_boundary_readiness_report.py" in text
-    assert "does not approve production route emission" in text
+    assert "It does not approve" in text
+    assert "GraphQL delivery" in text
 
 
 def test_d5_implementation_checklist_stays_static_and_gate_bound():
     text = CHECKLIST_PATH.read_text(encoding="utf-8")
 
-    assert "Status: static checklist only" in text
-    assert "does not approve changing" in text
-    assert "`decision: blocked`" in text
+    assert "Status: first-slice checklist" in text
+    assert "does not approve providers" in text
+    assert "approved_for_backend_response_delivery_first_slice" in text
     assert "optional response field only" in text
     assert "one response assembly attachment point" in text
-    assert "Response without a server session snapshot omits the field" in text
+    assert "Response without a server session snapshot leaves the field null or absent" in text
     assert "Confirm payload serialization excludes" in text
     assert "Non-Bernie production routers do not import" in text
     assert "Stop and return to review" in text
 
 
-def test_d5_router_import_guard_plan_preserves_current_broad_ban():
+def test_d5_router_import_guard_plan_preserves_fine_grained_ban():
     text = ROUTER_IMPORT_PLAN_PATH.read_text(encoding="utf-8")
 
-    assert "Status: static plan only" in text
+    assert "Status: approved first slice" in text
     assert "production-router import ban" in text
-    assert "remains in" in text
-    assert "force while the D5 response-delivery gate is blocked" in text
-    assert "test_production_routes_do_not_import_selector_yet" in text
+    assert "approved first slice" in text
+    assert "test_only_approved_bernie_route_imports_selector_after_d5_approval" in text
     assert "Do not delete the guard" in text
     assert "allows only the reviewed Bernie response-delivery attachment point" in text
     assert "app/routers/appointments.py" in text
     assert "keeps all non-Bernie production routers blocked" in text
-    assert "Until that approval exists, the broad no-router-import guard" in text
+    assert "requires a new approval" in text

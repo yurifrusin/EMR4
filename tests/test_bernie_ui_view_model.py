@@ -140,11 +140,16 @@ def test_selector_source_is_provider_route_db_memory_and_trove_free():
         assert forbidden not in source
 
 
-def test_production_routes_do_not_import_selector_yet():
-    route_source = "\n".join(
-        path.read_text(encoding="utf-8", errors="replace")
-        for path in Path("app/routers").glob("*.py")
-    )
+def test_only_approved_bernie_route_imports_selector_after_d5_approval():
+    allowed_importers = {Path("app/routers/appointments.py")}
+    offenders = []
+    for path in Path("app/routers").glob("*.py"):
+        source = path.read_text(encoding="utf-8", errors="replace")
+        imports_selector = (
+            "app.services.bernie.ui_view_model" in source
+            or "build_bernie_ui_view_model" in source
+        )
+        if imports_selector and path not in allowed_importers:
+            offenders.append(str(path))
 
-    assert "ui_view_model" not in route_source
-    assert "build_bernie_ui_view_model" not in route_source
+    assert offenders == []

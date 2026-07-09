@@ -23,16 +23,16 @@ def _load_json_no_duplicate_keys(path: Path) -> dict:
     return json.loads(raw, object_pairs_hook=reject_duplicates)
 
 
-def test_backend_delivery_test_plan_is_blocked_and_requires_approval():
+def test_backend_delivery_test_plan_is_authorized_only_for_first_slice():
     plan = _load_json_no_duplicate_keys(PLAN_JSON)
     draft = _load_json_no_duplicate_keys(APPROVAL_DRAFT_JSON)
 
     assert plan["schema_version"] == "bernie.ui_dag.d5_backend_delivery_test_plan.v1"
-    assert plan["status"] == "blocked_test_plan_only"
-    assert plan["implementation_authorized"] is False
+    assert plan["status"] == "approved_first_slice_test_plan"
+    assert plan["implementation_authorized"] is True
     assert plan["approval_required"] == draft["proposed_decision_if_approved"]
-    assert draft["decision"] == "blocked"
-    assert draft["approval_scope"]["backend_response_delivery_first_slice_approved"] is False
+    assert draft["decision"] == "approved_for_backend_response_delivery_first_slice"
+    assert draft["approval_scope"]["backend_response_delivery_first_slice_approved"] is True
 
 
 def test_backend_delivery_test_plan_names_single_candidate_attachment_point():
@@ -42,7 +42,7 @@ def test_backend_delivery_test_plan_names_single_candidate_attachment_point():
     assert plan["candidate_route"] == (
         "POST /api/v1/appointments/proposals/bernie/supervised-booking"
     )
-    assert plan["candidate_response_location"] == "staff_review.bernie.ui_view_model"
+    assert plan["candidate_response_location"] == "staff_review.ui_view_model"
     assert plan["evidence_label_after_implementation"] == (
         "backend_response_delivery_synthetic_or_fake_provider"
     )
@@ -73,7 +73,7 @@ def test_backend_delivery_test_plan_has_required_test_matrix():
     assert {
         "test_d5_gate_approved_before_route_delivery",
         "test_supervised_booking_response_includes_ui_view_model_when_server_session_snapshot_exists",
-        "test_supervised_booking_response_omits_ui_view_model_without_server_session_snapshot",
+        "test_supervised_booking_response_leaves_ui_view_model_null_or_absent_without_server_session_snapshot",
         "test_server_delivery_defaults_client_confirmation_request_state_idle",
         "test_backend_confirmed_snapshot_is_only_success_source",
         "test_pressed_awaiting_stale_failed_states_hide_confirm_and_success",
@@ -111,14 +111,13 @@ def test_backend_delivery_test_plan_keeps_expanded_scopes_forbidden():
     assert "test_requires_broad_router_refactor" in stop_conditions
 
 
-def test_backend_delivery_test_plan_markdown_is_plan_only():
+def test_backend_delivery_test_plan_markdown_is_first_slice_only():
     text = PLAN_MD.read_text(encoding="utf-8")
 
-    assert "Status: blocked test plan only" in text
-    assert "does not authorize implementation" in text
+    assert "Status: approved first-slice test plan" in text
+    assert "only the narrow" in text
     assert "`approved_for_backend_response_delivery_first_slice`" in text
-    assert "`decision: blocked`" in text
     assert "single reviewed Bernie response assembly point" in text
-    assert "optional `staff_review.bernie.ui_view_model`" in text
+    assert "optional `staff_review.ui_view_model`" in text
     assert "zero appointment/audit writes" in text
     assert "evidence labeling that remains non-live-provider" in text

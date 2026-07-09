@@ -849,6 +849,7 @@ class BernieStaffReviewPayload(BaseModel):
     confirm_payload: Optional[dict[str, Any]] = None
     confirm_evidence: list[str] = Field(default_factory=list)
     confirm_affordance: Optional[ConfirmAffordanceDecision] = None
+    ui_view_model: Optional[dict[str, Any]] = None
 
 
 class BerniePilotEligibilityOut(BaseModel):
