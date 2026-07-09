@@ -1,0 +1,93 @@
+{
+  "schema_version": "bernie.ui_dag.view_model_contract_cross_reference.v1",
+  "date": "2026-07-09",
+  "sprint": 289,
+  "recorded_by": "ariadne",
+  "approval_source": "Yuri approved Sprint 288-289 docs/tests-only Bernie UI derived-state post-D5 checkpoint block",
+  "decision": "checkpoint_review_packet_docs_tests_only",
+  "source_inventory": "docs/bernie-ui-derived-state-post-d5-next-slice-inventory.json",
+  "cross_reference_goal": "Provide one reviewer-facing map across the D3 inventory, D4 preflight, D5 completion review, evidence consolidation, and API-spine boundary without adding runtime behavior.",
+  "artifact_map": [
+    {
+      "artifact": "docs/bernie-ui-derived-state-dag-d3-inventory.md",
+      "role": "switch_point_inventory",
+      "contract_question": "Which current Diary/Bernie switch points map to future view-model fields?",
+      "runtime_authority": "none"
+    },
+    {
+      "artifact": "docs/bernie-ui-derived-state-dag-d4-preflight.md",
+      "role": "route_intercepted_ui_preflight",
+      "contract_question": "Which UI fixture states and copy/confirm invariants must be preserved before any UI wiring?",
+      "runtime_authority": "none"
+    },
+    {
+      "artifact": "docs/bernie-ui-derived-state-dag-d5-first-slice-completion-review.json",
+      "role": "completed_first_slice_boundary",
+      "contract_question": "What was completed in the approved first slice, and which expansion gates remain closed?",
+      "runtime_authority": "display_only_response_contract"
+    },
+    {
+      "artifact": "docs/bernie-ui-derived-state-dag-evidence-consolidation.md",
+      "role": "evidence_label_and_write_authority_summary",
+      "contract_question": "Which evidence is route-intercepted, what remains unproven, and why view-model fields are not write authority?",
+      "runtime_authority": "none"
+    },
+    {
+      "artifact": "orchestration/api_spine_adr.md",
+      "role": "api_spine_boundary",
+      "contract_question": "Why GraphQL/read models may expose display hints while REST/OpenAPI commands own writes?",
+      "runtime_authority": "architecture_decision_only"
+    }
+  ],
+  "reviewer_questions": [
+    "Can a reviewer trace every proposed display flag back to either D3 switch-point inventory or D5 completed response shape?",
+    "Can a reviewer see that D4 fixture expectations remain route-intercepted and not live-provider evidence?",
+    "Can a reviewer see that staff confirmation and appointment writes remain owned by signed REST confirm commands?",
+    "Can a reviewer identify which next steps require separate approval before any runtime expansion?"
+  ],
+  "allowed_followups_without_new_approval": [
+    "human_review_notes",
+    "documentation_cross_reference_cleanup",
+    "fixture_label_consistency_checks",
+    "safe_copy_matrix_documentation"
+  ],
+  "requires_separate_approval": [
+    "runtime_code_change",
+    "d5_scope_expansion",
+    "additional_backend_response_attachment_point",
+    "frontend_javascript_expansion",
+    "graphql_delivery_or_readiness",
+    "provider_or_live_provider_wiring",
+    "access_ai_invocation",
+    "memory_rag_or_graphrag_runtime_access",
+    "h15_or_h_series_runtime_input",
+    "historical_diary_runtime_input",
+    "external_patient_client_exposure",
+    "confirm_payload_or_write_behavior_change",
+    "model_to_database_write",
+    "deployment_or_production_readiness_claim"
+  ],
+  "must_remain_closed": {
+    "runtime_code_change": true,
+    "d5_scope_expansion": true,
+    "additional_backend_response_attachment_point": true,
+    "frontend_javascript_expansion": true,
+    "graphql_delivery_or_readiness": true,
+    "provider_or_live_provider_wiring": true,
+    "access_ai_invocation": true,
+    "memory_rag_or_graphrag_runtime_access": true,
+    "h15_or_h_series_runtime_input": true,
+    "historical_diary_runtime_input": true,
+    "external_patient_client_exposure": true,
+    "confirm_payload_or_write_behavior_change": true,
+    "model_to_database_write": true,
+    "deployment_or_production_readiness_claim": true
+  },
+  "worker_posture": {
+    "codex": "integration_owner_and_tests",
+    "claude": "strategic_gate_review_requested",
+    "antigravity": "product_workflow_review_requested",
+    "deepseek": "static_overclaim_and_gate_review_requested"
+  },
+  "next_recommended_action": "Stop after Sprint 289 closeout for Yuri direction. The approved 288-289 block is complete; any runtime expansion or D5 reopening requires separate approval."
+}

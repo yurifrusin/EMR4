@@ -24,9 +24,58 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 289 View-Model Contract Cross-Reference |
+| Integrated through | Ariadne cross-reference packet with Claude, Antigravity, and DeepSeek reviews |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 289 What Changed
+
+- Added
+  `docs/bernie-ui-derived-state-view-model-contract-cross-reference.{json,md}`.
+- Added
+  `tests/test_bernie_ui_view_model_contract_cross_reference.py`.
+- Built one reviewer-facing map across D3 inventory, D4 preflight, D5
+  completion review, evidence consolidation, and API-spine boundary.
+- Recorded reviewer questions for tracing display flags, route-intercepted
+  evidence labels, signed REST command authority, and separate approval points.
+- Claude and Antigravity both blocked an initial Markdown/JSON goal mismatch;
+  the fix was integrated before closeout.
+- DeepSeek passed the corrected packet and suggested cosmetic key
+  normalization; the key sets were normalized before closeout.
+- Kept D5 expansion, route delivery, frontend JavaScript changes,
+  provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series,
+  historical diary runtime inputs, GraphQL delivery/readiness, external
+  clients, confirm payload/write behavior changes, model-to-database writes,
+  deployment, and production readiness closed.
+
+## Sprint 289 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_view_model_contract_cross_reference.py tests\test_bernie_ui_post_d5_next_slice_inventory.py tests\test_sprint287_next_block_reorientation.py tests\test_bernie_ui_dag_d5_first_slice_completion_review.py tests\test_sprint_closeout_protocol.py -q
+git diff --check
+```
+
+Result: initial cross-reference/inventory suite `10 passed`; final combined
+verification pending closeout metadata.
+
+Sprint engine state: stop after Sprint 289 commit/push for Yuri direction. No
+deployment, production, readiness, telemetry, external-client, write, provider,
+memory, H15/trove, mutation, subscription, D5 expansion, or field-expansion gate
+is opened.
+
+---
+
+## Previous Closeout - Sprint 288
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 288 Post-D5 Next-Slice Inventory |
 | Integrated through | Ariadne inventory with Claude, Antigravity, and DeepSeek PASS reviews |
-| Status | Integrated, verified, pending commit/push |
+| Status | Published to `origin/master` and `handoff/current`; worktree clean |
+| Commit | `4ccea66a15c41b92f7a91a5afc180667ddd04cc4` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` |
 | Last updated | 2026-07-09 |
 
 ## Sprint 288 What Changed
@@ -54,17 +103,16 @@ Every closeout entry should record:
 ## Sprint 288 Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_post_d5_next_slice_inventory.py tests\test_sprint287_next_block_reorientation.py tests\test_bernie_ui_dag_d5_first_slice_completion_review.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_post_d5_next_slice_inventory.py tests\test_sprint287_next_block_reorientation.py tests\test_bernie_ui_dag_d5_first_slice_completion_review.py tests\test_sprint_closeout_protocol.py -q
 git diff --check
 ```
 
-Result: post-D5 inventory suite `5 passed`; final combined verification pending
-closeout metadata.
+Result: post-D5 inventory/related protocol suite `22 passed`; whitespace check
+passed with known CRLF notices for touched orchestration Markdown files.
 
-Sprint engine state: continuing to Sprint 289 after Sprint 288 commit/push and
-Pushover. No deployment, production, readiness, telemetry, external-client,
-write, provider, memory, H15/trove, mutation, subscription, D5 expansion, or
-field-expansion gate is opened.
+Sprint engine state: continued to Sprint 289. No deployment, production,
+readiness, telemetry, external-client, write, provider, memory, H15/trove,
+mutation, subscription, D5 expansion, or field-expansion gate was opened.
 
 ---
 

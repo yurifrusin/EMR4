@@ -104,7 +104,8 @@ def test_sprint287_markdown_and_handover_state_pause_before_readiness():
     assert "Stop before any work that adds telemetry" in text
     assert "Sprint 287 next-block reorientation" in agents
     assert "Yuri approved Sprints 288-289" in agents
-    assert "continue to Sprint 289 `view_model_contract_cross_reference`" in agents
+    assert "Sprint 289 view-model contract cross-reference is complete locally" in agents
+    assert "stop for Yuri direction" in agents
 
 
 def test_sprint287_json_and_markdown_stay_aligned():
