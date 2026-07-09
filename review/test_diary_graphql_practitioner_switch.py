@@ -2,9 +2,9 @@
 Route-intercepted browser evidence for the Diary practitioner-directory GraphQL
 switch.
 
-These checks deliberately keep the committed runtime default off. The enabled
-path is exercised by serving a test-only copy of diary.js with the source
-constant flipped before the browser loads the page.
+These checks prove the committed default-on GraphQL path and keep one disabled
+copy check so the REST fallback shape stays executable if the gate is later
+rolled back.
 """
 import json
 import sys
@@ -53,6 +53,28 @@ def _rest_rows(default_location=None):
     ]
 
 
+def _graphql_rows(default_location=None):
+    if default_location == "omit":
+        location = None
+    else:
+        location = default_location or {"id": "loc-1", "name": "Main Clinic"}
+    return [
+        {
+            "id": "prac-graphql-1",
+            "displayName": "Dr GraphQL Directory",
+            "roleLabel": "GP",
+            "active": True,
+            "defaultLocation": location,
+            "providerNumber": "PN-SECRET-CANARY",
+            "prescriberNumber": "PR-SECRET-CANARY",
+            "ahpraNumber": "AHPRA-SECRET-CANARY",
+            "hpiI": "HPII-SECRET-CANARY",
+            "email": "secret@example.invalid",
+            "phone": "555-SECRET",
+        }
+    ]
+
+
 def _route_diary_api(page, *, graphql_status=200, graphql_body=None, rest_rows=None):
     captured = {
         "rest_requests": [],
@@ -82,7 +104,9 @@ def _route_diary_api(page, *, graphql_status=200, graphql_body=None, rest_rows=N
             route.fulfill(
                 status=graphql_status,
                 content_type="application/json",
-                body=json.dumps(graphql_body or {"errors": [{"extensions": {"code": "FORBIDDEN"}}]}),
+                body=json.dumps(graphql_body if graphql_body is not None else {
+                    "data": {"practice": {"practitioners": _graphql_rows()}}
+                }),
             )
         elif "/api/v1/auth/me" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
@@ -140,11 +164,14 @@ def _route_diary_api(page, *, graphql_status=200, graphql_body=None, rest_rows=N
 
 def _serve_enabled_graphql_script(page):
     source = DIARY_JS.read_text(encoding="utf-8", errors="replace")
-    assert source.count("const ENABLE_GRAPHQL_PRACTITIONERS = false;") == 1
-    enabled_source = source.replace(
-        "const ENABLE_GRAPHQL_PRACTITIONERS = false;",
-        "const ENABLE_GRAPHQL_PRACTITIONERS = true;",
-    )
+    if "const ENABLE_GRAPHQL_PRACTITIONERS = false;" in source:
+        enabled_source = source.replace(
+            "const ENABLE_GRAPHQL_PRACTITIONERS = false;",
+            "const ENABLE_GRAPHQL_PRACTITIONERS = true;",
+        )
+    else:
+        assert source.count("const ENABLE_GRAPHQL_PRACTITIONERS = true;") == 1
+        enabled_source = source
     page.route(
         "**/diary/diary.js*",
         lambda route: route.fulfill(
@@ -155,7 +182,24 @@ def _serve_enabled_graphql_script(page):
     )
 
 
-def _open_diary_and_selector(page, base_url):
+def _serve_disabled_graphql_script(page):
+    source = DIARY_JS.read_text(encoding="utf-8", errors="replace")
+    assert source.count("const ENABLE_GRAPHQL_PRACTITIONERS = true;") == 1
+    disabled_source = source.replace(
+        "const ENABLE_GRAPHQL_PRACTITIONERS = true;",
+        "const ENABLE_GRAPHQL_PRACTITIONERS = false;",
+    )
+    page.route(
+        "**/diary/diary.js*",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/javascript",
+            body=disabled_source,
+        ),
+    )
+
+
+def _open_diary_and_selector(page, base_url, *, practitioner_id="prac-rest-1"):
     page.goto(base_url + "/diary/diary.html")
     harness.bootstrap_auth(page, REVIEW_AUTH_TOKEN)
     page.reload()
@@ -164,10 +208,10 @@ def _open_diary_and_selector(page, base_url):
         () => window.openBookingModalForCreate({
             room_label: "Room 1",
             assignment: "Dr Legacy Template",
-            practitioner_id: "prac-rest-1",
+            practitioner_id: "%s",
             practitioner_ahpra: "MED0001234567"
         }, "09:00")
-    """)
+    """ % practitioner_id)
     page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
 
 
@@ -176,6 +220,7 @@ def test_default_off_practitioner_switch_uses_rest_without_graphql_request():
         browser = pw.chromium.launch()
         page = browser.new_page()
         harness.stub_office(page)
+        _serve_disabled_graphql_script(page)
         captured = _route_diary_api(page)
 
         _open_diary_and_selector(page, base_url)
@@ -198,7 +243,32 @@ def test_default_off_practitioner_switch_uses_rest_without_graphql_request():
         browser.close()
 
 
-def test_enabled_graphql_forbidden_response_falls_back_to_rest_selector_rows():
+def test_default_on_graphql_success_populates_selector_without_rest_request():
+    with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        page = browser.new_page()
+        harness.stub_office(page)
+        captured = _route_diary_api(page)
+
+        _open_diary_and_selector(page, base_url, practitioner_id="prac-graphql-1")
+
+        assert len(captured["graphql_requests"]) == 1
+        assert captured["rest_requests"] == []
+        graphql_request = captured["graphql_requests"][0]
+        assert graphql_request["method"] == "POST"
+        body = graphql_request["body"]
+        assert "query GetPractitioners" in body["query"]
+        assert body["variables"] == {"activeOnly": True, "limit": 200, "offset": 0}
+        assert page.locator("#booking-practitioner option").evaluate_all(
+            "(options) => options.map(option => ({ value: option.value, text: option.textContent }))"
+        ) == [{"value": "prac-graphql-1", "text": "Dr GraphQL Directory (Main Clinic)"}]
+        page_text = page.locator("body").text_content()
+        for forbidden in ("SECRET", "AHPRA-SECRET", "HPII-SECRET", "secret@example.invalid", "555-SECRET"):
+            assert forbidden not in page_text
+        browser.close()
+
+
+def test_default_on_graphql_forbidden_response_falls_back_to_rest_selector_rows():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page()
@@ -228,7 +298,7 @@ def test_enabled_graphql_forbidden_response_falls_back_to_rest_selector_rows():
         browser.close()
 
 
-def test_enabled_graphql_bad_user_input_response_falls_back_to_rest_selector_rows():
+def test_default_on_graphql_bad_user_input_response_falls_back_to_rest_selector_rows():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page()
@@ -249,7 +319,7 @@ def test_enabled_graphql_bad_user_input_response_falls_back_to_rest_selector_row
         browser.close()
 
 
-def test_enabled_graphql_transport_failure_falls_back_to_single_rest_request():
+def test_default_on_graphql_transport_failure_falls_back_to_single_rest_request():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page()
@@ -266,7 +336,26 @@ def test_enabled_graphql_transport_failure_falls_back_to_single_rest_request():
         browser.close()
 
 
-def test_enabled_graphql_practice_null_returns_empty_without_rest_fallback():
+def test_default_on_graphql_401_rethrows_without_rest_fallback_and_clears_token():
+    with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        page = browser.new_page()
+        harness.stub_office(page)
+        captured = _route_diary_api(page, graphql_status=401, graphql_body={"detail": "expired"})
+
+        page.goto(base_url + "/diary/diary.html")
+        harness.bootstrap_auth(page, REVIEW_AUTH_TOKEN)
+        page.reload()
+        page.wait_for_selector("[data-testid='diary-auth-banner']:not(.hidden)", state="visible", timeout=5000)
+
+        assert len(captured["graphql_requests"]) == 1
+        assert captured["rest_requests"] == []
+        assert page.evaluate("() => localStorage.getItem('emr4_token')") is None
+        assert "Session expired" in page.locator("[data-testid='diary-auth-banner']").text_content()
+        browser.close()
+
+
+def test_default_on_graphql_practice_null_returns_empty_without_rest_fallback():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page()
@@ -284,7 +373,7 @@ def test_enabled_graphql_practice_null_returns_empty_without_rest_fallback():
         browser.close()
 
 
-def test_enabled_graphql_default_location_null_preserves_row_without_rest_fallback():
+def test_default_on_graphql_default_location_null_preserves_row_without_rest_fallback():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page()
@@ -322,3 +411,27 @@ def test_enabled_graphql_default_location_null_preserves_row_without_rest_fallba
         for forbidden in ("SECRET", "secret@example.invalid"):
             assert forbidden not in page_text
         browser.close()
+
+
+def test_enabled_graphql_forbidden_response_falls_back_to_rest_selector_rows():
+    test_default_on_graphql_forbidden_response_falls_back_to_rest_selector_rows()
+
+
+def test_enabled_graphql_bad_user_input_response_falls_back_to_rest_selector_rows():
+    test_default_on_graphql_bad_user_input_response_falls_back_to_rest_selector_rows()
+
+
+def test_enabled_graphql_transport_failure_falls_back_to_single_rest_request():
+    test_default_on_graphql_transport_failure_falls_back_to_single_rest_request()
+
+
+def test_enabled_graphql_401_rethrows_without_rest_fallback_and_clears_token():
+    test_default_on_graphql_401_rethrows_without_rest_fallback_and_clears_token()
+
+
+def test_enabled_graphql_practice_null_returns_empty_without_rest_fallback():
+    test_default_on_graphql_practice_null_returns_empty_without_rest_fallback()
+
+
+def test_enabled_graphql_default_location_null_preserves_row_without_rest_fallback():
+    test_default_on_graphql_default_location_null_preserves_row_without_rest_fallback()

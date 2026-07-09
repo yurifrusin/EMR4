@@ -1,0 +1,78 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_default_on_runtime.v1",
+  "date": "2026-07-09",
+  "sprint": 281,
+  "recorded_by": "ariadne",
+  "decision": "approved_default_on_office_addin_graphql_practitioner_selector_runtime",
+  "approval_source": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-approval-packet.json",
+  "approval_expires_on": "2026-08-06",
+  "target_surface": "docs/diary/diary.js",
+  "target_consumer": "office_addin_diary_booking_practitioner_selector",
+  "target_field": "Query.practice.practitioners",
+  "runtime_posture": {
+    "feature_gate_name": "ENABLE_GRAPHQL_PRACTITIONERS",
+    "feature_gate_default": true,
+    "graphql_live_traffic_by_default": true,
+    "single_consumer_only": true,
+    "rest_fallback_retained": true,
+    "runtime_user_override": false,
+    "local_storage_override": false,
+    "query_parameter_override": false,
+    "office_settings_override": false,
+    "server_config_endpoint": false
+  },
+  "browser_evidence": {
+    "test_file": "review/test_diary_graphql_practitioner_switch.py",
+    "tests": [
+      "test_default_on_graphql_success_populates_selector_without_rest_request",
+      "test_default_on_graphql_forbidden_response_falls_back_to_rest_selector_rows",
+      "test_default_on_graphql_bad_user_input_response_falls_back_to_rest_selector_rows",
+      "test_default_on_graphql_transport_failure_falls_back_to_single_rest_request",
+      "test_default_on_graphql_401_rethrows_without_rest_fallback_and_clears_token",
+      "test_default_on_graphql_practice_null_returns_empty_without_rest_fallback",
+      "test_default_on_graphql_default_location_null_preserves_row_without_rest_fallback"
+    ],
+    "observed_default_on": {
+      "first_practitioner_directory_request": "POST /api/v1/graphql",
+      "approved_query_variables": {
+        "activeOnly": true,
+        "limit": 200,
+        "offset": 0
+      },
+      "success_path_rest_requests": 0,
+      "fallback_path_rest_request_count_per_case": 1,
+      "graphql_401_rethrows_without_rest_fallback": true,
+      "sensitive_display_canaries_absent": true,
+      "write_methods_observed": []
+    }
+  },
+  "worker_reviews": {
+    "antigravity_consumer_ux": {
+      "used": false,
+      "artifact": null,
+      "verdict": "unavailable",
+      "reason": "agy.exe invocation timed out before returning review output"
+    },
+    "deepseek_static_security": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint281-office-addin-graphql-default-on-runtime.md",
+      "verdict": "PASS"
+    },
+    "claude": {
+      "used": false,
+      "reason": "No API contract, resolver, backend route, schema, or runtime auth/error model changed."
+    }
+  },
+  "must_remain_false": {
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false
+  },
+  "next_recommended_work": "Run a narrow non-intercepted local backend fake-data check or prepare a rollback/monitoring packet before any deployment or production readiness claim."
+}

@@ -3,7 +3,7 @@
   "date": "2026-07-09",
   "sprint": 280,
   "recorded_by": "ariadne",
-  "decision": "pending_yuri_approval_for_office_addin_graphql_practitioner_selector_default_on",
+  "decision": "approved_for_office_addin_graphql_practitioner_selector_default_on",
   "target_consumer": "office_addin_diary_booking_practitioner_selector",
   "target_field": "Query.practice.practitioners",
   "endpoint": "/api/v1/graphql",
@@ -14,14 +14,14 @@
   "proposed_default_on_approval_expires_on": "2026-08-06",
   "approval_required_before_code": true,
   "yuri_approval_record": {
-    "statement": null,
-    "recorded_on": null,
-    "approved_scope": null,
-    "approval_expires_on": null
+    "statement": "I approve the default-on packet.",
+    "recorded_on": "2026-07-09",
+    "approved_scope": "Office add-in diary practitioner selector GraphQL default-on only",
+    "approval_expires_on": "2026-08-06"
   },
   "authorized_now": {
-    "change_enable_graphql_practitioners_default_to_true": false,
-    "send_office_addin_live_graphql_traffic_by_default": false,
+    "change_enable_graphql_practitioners_default_to_true": true,
+    "send_office_addin_live_graphql_traffic_by_default": true,
     "remove_rest_fallback": false,
     "add_runtime_user_override": false,
     "add_server_config_endpoint": false,
@@ -111,8 +111,6 @@
     }
   },
   "must_remain_false": {
-    "runtime_default_on_approved": false,
-    "graphql_live_traffic_by_default": false,
     "deployment_ready": false,
     "production_ready": false,
     "external_patient_client_ready": false,

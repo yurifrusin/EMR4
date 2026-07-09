@@ -41,12 +41,12 @@ def test_review_tests_name_default_off_and_enabled_fallback_paths():
     assert "limit=200" in source
 
 
-def test_runtime_file_remains_default_off_without_user_override():
+def test_runtime_file_is_approved_default_on_without_user_override():
     source = DIARY_JS.read_text(encoding="utf-8", errors="replace")
     lowered = source.lower()
 
-    assert "const ENABLE_GRAPHQL_PRACTITIONERS = false;" in source
-    assert "const ENABLE_GRAPHQL_PRACTITIONERS = true;" not in source
+    assert "const ENABLE_GRAPHQL_PRACTITIONERS = true;" in source
+    assert "const ENABLE_GRAPHQL_PRACTITIONERS = false;" not in source
     assert "emr4_flag_graphql_practitioners" not in lowered
     for line in lowered.splitlines():
         if "enable_graphql_practitioners" in line:

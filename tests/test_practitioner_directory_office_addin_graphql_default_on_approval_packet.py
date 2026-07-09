@@ -13,31 +13,31 @@ def _packet() -> dict:
     return json.loads(PACKET.read_text(encoding="utf-8"))
 
 
-def test_default_on_packet_is_pending_not_approval():
+def test_default_on_packet_records_yuri_approval():
     payload = _packet()
 
     assert payload["schema_version"] == (
         "api_spine.practitioner_directory_office_addin_graphql_default_on_approval_packet.v1"
     )
     assert payload["sprint"] == 280
-    assert payload["decision"] == "pending_yuri_approval_for_office_addin_graphql_practitioner_selector_default_on"
+    assert payload["decision"] == "approved_for_office_addin_graphql_practitioner_selector_default_on"
     assert payload["approval_required_before_code"] is True
     assert payload["yuri_approval_record"] == {
-        "statement": None,
-        "recorded_on": None,
-        "approved_scope": None,
-        "approval_expires_on": None,
+        "statement": "I approve the default-on packet.",
+        "recorded_on": "2026-07-09",
+        "approved_scope": "Office add-in diary practitioner selector GraphQL default-on only",
+        "approval_expires_on": "2026-08-06",
     }
     assert payload["current_release_boundary_expires_on"] == "2026-08-06"
     assert payload["proposed_default_on_approval_expires_on"] == "2026-08-06"
 
 
-def test_default_on_packet_authorizes_no_runtime_change_now():
+def test_default_on_packet_authorizes_only_single_runtime_default_flip_now():
     payload = _packet()
 
     assert payload["authorized_now"] == {
-        "change_enable_graphql_practitioners_default_to_true": False,
-        "send_office_addin_live_graphql_traffic_by_default": False,
+        "change_enable_graphql_practitioners_default_to_true": True,
+        "send_office_addin_live_graphql_traffic_by_default": True,
         "remove_rest_fallback": False,
         "add_runtime_user_override": False,
         "add_server_config_endpoint": False,
@@ -63,7 +63,7 @@ def test_default_on_packet_scope_is_single_consumer_read_only_graphql():
     assert scope["rest_route_retained"] == "GET /api/v1/practice/practitioners?activeOnly=true&limit=200"
 
 
-def test_default_on_packet_depends_on_sprint279_evidence_but_does_not_flip_runtime():
+def test_default_on_packet_depends_on_sprint279_evidence_and_runtime_is_now_approved_true():
     payload = _packet()
     evidence = json.loads(SPRINT279.read_text(encoding="utf-8"))
     source = DIARY_JS.read_text(encoding="utf-8", errors="replace")
@@ -74,8 +74,8 @@ def test_default_on_packet_depends_on_sprint279_evidence_but_does_not_flip_runti
     assert evidence["sprint"] == 279
     assert evidence["browser_evidence"]["default_off_observed"]["graphql_requests"] == 0
     assert evidence["browser_evidence"]["enabled_fallback_observed"]["graphql_forbidden_then_rest_fallback"] is True
-    assert "const ENABLE_GRAPHQL_PRACTITIONERS = false;" in source
-    assert "const ENABLE_GRAPHQL_PRACTITIONERS = true;" not in source
+    assert "const ENABLE_GRAPHQL_PRACTITIONERS = true;" in source
+    assert "const ENABLE_GRAPHQL_PRACTITIONERS = false;" not in source
 
 
 def test_default_on_packet_preserves_projection_and_fallback_contract():
@@ -108,6 +108,6 @@ def test_default_on_packet_template_and_markdown_force_stop_point():
     )
     assert payload["yuri_approval_payload_template"]["approval_expires_on"] == "2026-08-06"
     assert payload["next_recommended_work"].startswith("Stop for Yuri approval")
-    assert "It is not approval and it does not change runtime code." in text
-    assert "Stop for Yuri approval" in text
-    assert "ENABLE_GRAPHQL_PRACTITIONERS` to `true`" in text
+    assert "Yuri approved that packet on 2026-07-09" in text
+    assert "Stop before any expansion beyond this one selector" in text
+    assert "REST fallback must remain" in text

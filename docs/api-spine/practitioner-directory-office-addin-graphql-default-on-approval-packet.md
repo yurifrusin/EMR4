@@ -1,17 +1,19 @@
 # Practitioner Directory Office Add-in GraphQL Default-On Approval Packet
 
-Sprint 280 prepares a default-on decision packet for the Office add-in diary
-practitioner selector. It is not approval and it does not change runtime code.
+Sprint 280 prepared a default-on decision packet for the Office add-in diary
+practitioner selector. Yuri approved that packet on 2026-07-09 with:
+"I approve the default-on packet."
 
 Decision:
-`pending_yuri_approval_for_office_addin_graphql_practitioner_selector_default_on`.
+`approved_for_office_addin_graphql_practitioner_selector_default_on`.
 
 ## Current State
 
-Sprint 278 implemented the switch as default-off:
+Sprint 281 may change the single source-controlled gate from default-off to
+default-on:
 
 ```javascript
-const ENABLE_GRAPHQL_PRACTITIONERS = false;
+const ENABLE_GRAPHQL_PRACTITIONERS = true;
 ```
 
 Sprint 279 added route-intercepted browser evidence for:
@@ -25,9 +27,8 @@ Sprint 279 added route-intercepted browser evidence for:
 
 ## What Later Approval Would Allow
 
-Only after Yuri explicitly approves this packet, a later sprint may change the
-single Office add-in diary practitioner selector gate so the GraphQL path is the
-default render source for authenticated internal staff.
+The approved Sprint 281 runtime change may make the GraphQL path the default
+render source for authenticated internal staff for this one selector.
 
 The approved consumer would remain:
 `office_addin_diary_booking_practitioner_selector`.
@@ -45,15 +46,12 @@ The existing REST fallback route must remain:
 
 ## Not Approved
 
-This packet does not approve runtime code changes, live/default-on Office add-in
-GraphQL traffic, deployment readiness, production readiness, external patient
-clients, write authority, audit writes, provider calls, memory/RAG/GraphRAG,
-H15/H-series or historical diary/trove access, GraphQL mutations, GraphQL
-subscriptions, telemetry endpoints, server-config flag endpoints, runtime user
-overrides, or field expansion.
+This packet does not approve deployment readiness, production readiness,
+external patient clients, write authority, audit writes, provider calls,
+memory/RAG/GraphRAG, H15/H-series or historical diary/trove access, GraphQL
+mutations, GraphQL subscriptions, telemetry endpoints, server-config flag
+endpoints, runtime user overrides, or field expansion.
 
 ## Stop Point
 
-Stop for Yuri approval before changing
-`ENABLE_GRAPHQL_PRACTITIONERS` to `true` or sending Office add-in GraphQL
-traffic by default.
+Stop before any expansion beyond this one selector. REST fallback must remain.

@@ -14,7 +14,7 @@ const BACKEND_URL = (window.location.port === "3000")
     ? window.location.origin
     : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
-const ENABLE_GRAPHQL_PRACTITIONERS = false;
+const ENABLE_GRAPHQL_PRACTITIONERS = true;
 const PRACTITIONER_DIRECTORY_GRAPHQL_QUERY = `
 query GetPractitioners($activeOnly: Boolean, $limit: Int, $offset: Int) {
   practice {

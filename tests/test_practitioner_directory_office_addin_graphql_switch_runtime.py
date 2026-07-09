@@ -3,7 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DIARY_JS = ROOT / "docs" / "diary" / "diary.js"
-EVIDENCE = ROOT / "docs" / "api-spine" / "practitioner-directory-office-addin-graphql-switch-runtime.json"
+EVIDENCE = ROOT / "docs" / "api-spine" / "practitioner-directory-office-addin-graphql-default-on-runtime.json"
 TASKPANE_JS = ROOT / "EMR4 Sidebar" / "src" / "taskpane" / "taskpane.js"
 SNAPSHOT = ROOT / "tests" / "fixtures" / "api_spine_external_readiness" / "blocked_readiness_status.json"
 
@@ -19,11 +19,12 @@ def _graphql_query_block() -> str:
     return source[start:end]
 
 
-def test_diary_graphql_practitioner_switch_defaults_off_and_has_no_user_override():
+def test_diary_graphql_practitioner_switch_defaults_on_after_approval_and_has_no_user_override():
     source = _diary_source()
     lowered = source.lower()
 
-    assert "const ENABLE_GRAPHQL_PRACTITIONERS = false;" in source
+    assert "const ENABLE_GRAPHQL_PRACTITIONERS = true;" in source
+    assert "const ENABLE_GRAPHQL_PRACTITIONERS = false;" not in source
     assert "emr4_flag_graphql_practitioners" not in lowered
     for line in lowered.splitlines():
         if "enable_graphql_practitioners" in line:
@@ -91,26 +92,21 @@ def test_no_unrelated_taskpane_graphql_path_or_readiness_flip():
     assert '"deployment_ready": false' not in snapshot
 
 
-def test_runtime_evidence_records_default_off_switch_boundaries():
+def test_runtime_evidence_records_approved_default_on_switch_boundaries():
     import json
 
     payload = json.loads(EVIDENCE.read_text(encoding="utf-8"))
 
-    assert payload["schema_version"] == "api_spine.practitioner_directory_office_addin_graphql_switch_runtime.v1"
-    assert payload["sprint"] == 278
-    assert payload["decision"] == "default_off_office_addin_graphql_practitioner_selector_switch_implemented"
+    assert payload["schema_version"] == "api_spine.practitioner_directory_office_addin_graphql_default_on_runtime.v1"
+    assert payload["sprint"] == 281
+    assert payload["decision"] == "approved_default_on_office_addin_graphql_practitioner_selector_runtime"
     assert payload["runtime_posture"]["feature_gate_name"] == "ENABLE_GRAPHQL_PRACTITIONERS"
-    assert payload["runtime_posture"]["feature_gate_default"] is False
-    assert payload["runtime_posture"]["graphql_live_traffic_by_default"] is False
-    assert payload["implemented_behavior"]["graphql_endpoint"] == "/graphql"
-    assert payload["implemented_behavior"]["approved_projection"] == [
-        "id",
-        "displayName",
-        "roleLabel",
-        "active",
-        "defaultLocation.id",
-        "defaultLocation.name",
-    ]
+    assert payload["runtime_posture"]["feature_gate_default"] is True
+    assert payload["runtime_posture"]["graphql_live_traffic_by_default"] is True
+    assert payload["runtime_posture"]["single_consumer_only"] is True
+    assert payload["runtime_posture"]["rest_fallback_retained"] is True
+    assert "test_default_on_graphql_401_rethrows_without_rest_fallback_and_clears_token" in payload["browser_evidence"]["tests"]
+    assert payload["browser_evidence"]["observed_default_on"]["graphql_401_rethrows_without_rest_fallback"] is True
     assert all(value is False for value in payload["must_remain_false"].values())
-    assert payload["worker_reviews"]["antigravity_consumer_ux"]["verdict"] == "PASS"
+    assert payload["worker_reviews"]["antigravity_consumer_ux"]["verdict"] == "unavailable"
     assert payload["worker_reviews"]["deepseek_static_security"]["verdict"] == "PASS"

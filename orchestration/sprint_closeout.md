@@ -24,10 +24,49 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 280 Practitioner Directory Office Add-in GraphQL Default-On Approval Packet |
-| Integrated through | Ariadne docs/tests-only default-on approval packet, pending Yuri approval |
+| Batch | Sprint 281 Practitioner Directory Office Add-in GraphQL Default-On Runtime |
+| Integrated through | Ariadne default-on runtime flip with route-intercepted evidence and DeepSeek PASS review |
 | Status | Integrated, verified, pending commit/push |
 | Last updated | 2026-07-09 |
+
+## Sprint 281 What Changed
+
+- Recorded Yuri's default-on approval in
+  `docs/api-spine/practitioner-directory-office-addin-graphql-default-on-approval-packet.{json,md}`.
+- Flipped only `docs/diary/diary.js`:
+  `ENABLE_GRAPHQL_PRACTITIONERS = true`.
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-default-on-runtime.{json,md}`.
+- Expanded `review/test_diary_graphql_practitioner_switch.py` to prove the
+  committed default-on GraphQL success path, approved query variables,
+  one-shot REST fallback, GraphQL HTTP 401 logout/no-REST-fallback behavior,
+  `practice=null`, `defaultLocation=null`, and sensitive-canary non-rendering.
+- Updated static guards for the approved default-on posture.
+- Recorded DeepSeek PASS review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint281-office-addin-graphql-default-on-runtime.md`.
+- Antigravity was invoked but timed out. Claude was stood down because no API
+  contract, resolver, backend route, schema, or auth model changed.
+
+## Sprint 281 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest review\test_diary_graphql_practitioner_switch.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_default_on_approval_packet.py tests\test_practitioner_directory_office_addin_graphql_switch_route_intercepted.py tests\test_practitioner_directory_office_addin_graphql_switch_runtime.py tests\test_practitioner_directory_office_addin_graphql_mock_contract.py tests\test_practitioner_directory_graphql_release_boundary.py tests\test_sprint_closeout_protocol.py -q
+node --check docs\diary\diary.js
+git diff --check
+```
+
+Result: route-intercepted browser evidence `14 passed`; runtime/support/protocol
+suite `46 passed`; `node --check` and whitespace checks passed.
+
+Sprint engine state: continuing, but only into post-default-on safety evidence
+or rollback/monitoring packets. No deployment, production, readiness,
+telemetry, external-client, write, provider, memory, H15/trove, mutation,
+subscription, or field-expansion gate is opened.
+
+---
+
+## Previous Closeout - Sprint 280
 
 ## Sprint 280 What Changed
 
@@ -57,7 +96,8 @@ git diff --check
 Result: packet/support/protocol suite `25 passed`; whitespace check passed.
 
 Sprint engine state: paused for Yuri approval before any default-on runtime
-change or Office add-in GraphQL traffic by default.
+change or Office add-in GraphQL traffic by default. Yuri approved the packet on
+2026-07-09, enabling Sprint 281's single-consumer runtime flip.
 
 ---
 
