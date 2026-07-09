@@ -1,0 +1,64 @@
+{
+  "adjacent_scope": {
+    "deployment_ready": false,
+    "external_patient_client_ready": false,
+    "graphql_delivery_ready": false,
+    "production_ready": false,
+    "provider_or_memory_ready": false,
+    "write_authority_ready": false
+  },
+  "default_location": {
+    "fields": [
+      "id",
+      "name"
+    ],
+    "required_fields": [
+      "id",
+      "name"
+    ],
+    "schema": "PractitionerDefaultLocationOut"
+  },
+  "detail_route_present": false,
+  "methods_on_route": [
+    "get"
+  ],
+  "operation_id": "get_practitioners_api_v1_practice_practitioners_get",
+  "query_parameters": {
+    "activeOnly": {
+      "default": true,
+      "type": "boolean"
+    },
+    "limit": {
+      "default": 50,
+      "maximum": 200,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "offset": {
+      "default": 0,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "response": {
+    "fields": [
+      "active",
+      "defaultLocation",
+      "displayName",
+      "id",
+      "roleLabel"
+    ],
+    "item_schema": "PractitionerOut",
+    "required_fields": [
+      "id",
+      "displayName",
+      "active"
+    ],
+    "sensitive_fields_present": [],
+    "status_200_array": true
+  },
+  "route": "GET /api/v1/practice/practitioners",
+  "schema_version": "api_spine.practitioner_directory_consumer_contract_report.v1",
+  "security_declared": true,
+  "source": "fastapi_openapi_introspection"
+}
