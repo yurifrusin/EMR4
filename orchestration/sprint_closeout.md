@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 244 Bernie UI Clarification/Identity Route-Intercepted Evidence |
 | Integrated through | Ariadne test implementation with DeepSeek sidecar review; Claude/Antigravity worktrees checked clean but not invoked because this stayed inside the existing Playwright harness |
-| Status | Integrated locally; pending commit and push |
+| Status | Integrated locally; pending metadata commit and push |
 | Last updated | 2026-07-09 |
 
 ## Sprint 244 What Changed
@@ -75,7 +75,7 @@ Result: focused `ui_view_model` route-intercepted cluster `8 passed`; broader
 clarification/identity route-intercepted cluster `12 passed`; whitespace check
 passed.
 
-Implementation commit: pending.
+Implementation commit: `3da57321`.
 
 Sprint engine state: pausing before any D5 gate change or backend response
 delivery; only bounded review-only work remains without explicit approval.
