@@ -1,0 +1,61 @@
+{
+  "schema_version": "api_spine.practitioner_directory_graphql_dependency_preflight.v1",
+  "date": "2026-07-09",
+  "sprint": 268,
+  "recorded_by": "ariadne",
+  "approval_source": "docs/api-spine/practitioner-directory-graphql-runtime-gate.json",
+  "decision": "approved_dependency_pin_only",
+  "target_field": "Query.practice.practitioners",
+  "dependency": {
+    "package": "strawberry-graphql[fastapi]",
+    "pinned_version": "0.320.3",
+    "import_check": "from strawberry.fastapi import GraphQLRouter",
+    "official_docs": [
+      "https://strawberry.rocks/docs/integrations/fastapi",
+      "https://fastapi.tiangolo.com/how-to/graphql/",
+      "https://pypi.org/project/strawberry-graphql/"
+    ]
+  },
+  "observed_local_install": {
+    "pip_check": "No broken requirements found.",
+    "strawberry_graphql": "0.320.3",
+    "graphql_core": "3.2.11",
+    "cross_web": "0.7.0",
+    "query_depth_limiter_available": true,
+    "max_aliases_limiter_available": true,
+    "disable_introspection_available": true,
+    "fastapi_already_present": "0.136.3",
+    "pydantic_already_present": "2.13.4",
+    "python_requires_from_pypi": ">=3.10,<4.0"
+  },
+  "worker_review": {
+    "reviewer_lane": "deepseek-worker",
+    "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint268-graphql-dependency-preflight.md",
+    "verdict": "PASS",
+    "pre_existing_unrelated_audit_findings": [
+      "ecdsa 0.19.2 PYSEC-2026-1325",
+      "pytest 8.4.2 PYSEC-2026-1845"
+    ],
+    "new_vulnerabilities_introduced_by_dependency": false
+  },
+  "authorized_now": {
+    "dependency_pin": true,
+    "dependency_install_in_dev_environment": true,
+    "graphql_endpoint": false,
+    "schema_runtime_code": false,
+    "resolver_code": false,
+    "readiness_flag_changes": false
+  },
+  "must_remain_false": {
+    "graphql_resolver_ready": false,
+    "graphql_server_ready": false,
+    "graphql_mutation_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_allowed_step": "sprint_269_minimal_graphql_runtime_shell_without_practitioner_resolver"
+}

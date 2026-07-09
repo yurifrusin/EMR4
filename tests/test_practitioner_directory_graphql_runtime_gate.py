@@ -127,7 +127,7 @@ def test_required_implementation_test_matrix_is_explicit():
     }.issubset(tests)
 
 
-def test_no_graphql_runtime_code_or_dependency_was_added_by_gate_packet():
+def test_no_graphql_endpoint_or_resolver_code_exists_after_dependency_preflight():
     app_text = _app_text().lower()
     dependency_text = "\n".join(
         path.read_text(encoding="utf-8", errors="replace").lower()
@@ -147,7 +147,8 @@ def test_no_graphql_runtime_code_or_dependency_was_added_by_gate_packet():
         "def resolve_practitioners",
     ):
         assert fragment not in app_text
-    for package in ("strawberry-graphql", "graphene", "ariadne"):
+    assert "strawberry-graphql[fastapi]==0.320.3" in dependency_text
+    for package in ("graphene", "ariadne"):
         assert package not in dependency_text
 
 
