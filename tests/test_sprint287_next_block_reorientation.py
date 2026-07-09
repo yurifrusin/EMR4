@@ -103,7 +103,8 @@ def test_sprint287_markdown_and_handover_state_pause_before_readiness():
     assert "documentation/tests-only" in text
     assert "Stop before any work that adds telemetry" in text
     assert "Sprint 287 next-block reorientation" in agents
-    assert "Recommended next block is Sprints 288-289 only if Yuri agrees" in agents
+    assert "Yuri approved Sprints 288-289" in agents
+    assert "continue to Sprint 289 `view_model_contract_cross_reference`" in agents
 
 
 def test_sprint287_json_and_markdown_stay_aligned():

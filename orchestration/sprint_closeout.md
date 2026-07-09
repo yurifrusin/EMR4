@@ -24,9 +24,60 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 288 Post-D5 Next-Slice Inventory |
+| Integrated through | Ariadne inventory with Claude, Antigravity, and DeepSeek PASS reviews |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 288 What Changed
+
+- Added
+  `docs/bernie-ui-derived-state-post-d5-next-slice-inventory.{json,md}`.
+- Added
+  `tests/test_bernie_ui_post_d5_next_slice_inventory.py`.
+- Recorded Yuri's approval for Sprints 288-289 as a non-runtime Bernie UI
+  derived-state post-D5 checkpoint block.
+- Inventoried three possible non-D5 next-slice candidates:
+  `review_copy_safety_matrix`, `view_model_contract_cross_reference`, and
+  `ordinary_prompt_release_gate_mapping`.
+- Recommended Sprint 289 as `view_model_contract_cross_reference` because it
+  is the lowest-risk docs/tests-only map across D3, D4, D5, and API-spine
+  evidence.
+- Recorded Claude strategic gate PASS, Antigravity product/workflow PASS, and
+  DeepSeek static gate PASS review artifacts.
+- Kept D5 expansion, route delivery, frontend JavaScript changes,
+  provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series,
+  historical diary runtime inputs, GraphQL delivery/readiness, external
+  clients, confirm payload/write behavior changes, and model-to-database writes
+  closed.
+
+## Sprint 288 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_post_d5_next_slice_inventory.py tests\test_sprint287_next_block_reorientation.py tests\test_bernie_ui_dag_d5_first_slice_completion_review.py -q
+git diff --check
+```
+
+Result: post-D5 inventory suite `5 passed`; final combined verification pending
+closeout metadata.
+
+Sprint engine state: continuing to Sprint 289 after Sprint 288 commit/push and
+Pushover. No deployment, production, readiness, telemetry, external-client,
+write, provider, memory, H15/trove, mutation, subscription, D5 expansion, or
+field-expansion gate is opened.
+
+---
+
+## Previous Closeout - Sprint 287
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 287 Next Block Reorientation |
 | Integrated through | Ariadne non-runtime next-block recommendation packet and guard tests |
-| Status | Integrated, verified, pending DeepSeek review/commit/push |
+| Status | Published to `origin/master` and `handoff/current`; worktree clean |
+| Commit | `ed012044` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` |
 | Last updated | 2026-07-09 |
 
 ## Sprint 287 What Changed
@@ -48,17 +99,17 @@ Every closeout entry should record:
 ## Sprint 287 Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_sprint287_next_block_reorientation.py tests\test_bernie_ui_dag_d5_first_slice_completion_review.py tests\test_sprint286_publication_state_correction.py -q
+.venv\Scripts\python.exe -m pytest tests\test_sprint287_next_block_reorientation.py tests\test_bernie_ui_dag_d5_first_slice_completion_review.py tests\test_sprint286_publication_state_correction.py tests\test_sprint_closeout_protocol.py -q
 git diff --check
 ```
 
-Result: next-block/D5/publication-state suite `10 passed`. Final whitespace
-check pending closeout metadata.
+Result: next-block/D5/publication-state/protocol suite `18 passed`; whitespace
+check passed with known CRLF notices for touched orchestration Markdown files.
 
-Sprint engine state: stop after Sprint 287 commit/push for Yuri approval before
-running Sprint 288. No deployment, production, readiness, telemetry,
-external-client, write, provider, memory, H15/trove, mutation, subscription,
-D5 expansion, or field-expansion gate is opened.
+Sprint engine state: stopped for Yuri approval before Sprint 288. No deployment,
+production, readiness, telemetry, external-client, write, provider, memory,
+H15/trove, mutation, subscription, D5 expansion, or field-expansion gate was
+opened.
 
 ---
 

@@ -1,0 +1,116 @@
+{
+  "schema_version": "bernie.ui_dag.post_d5_next_slice_inventory.v1",
+  "date": "2026-07-09",
+  "sprint": 288,
+  "recorded_by": "ariadne",
+  "approval_source": "Yuri approved Sprint 288-289 docs/tests-only Bernie UI derived-state post-D5 checkpoint block",
+  "decision": "inventory_only_no_runtime_or_d5_expansion",
+  "source_reorientation": "docs/sprint-287-next-block-reorientation.json",
+  "source_d5_completion_review": "docs/bernie-ui-derived-state-dag-d5-first-slice-completion-review.json",
+  "inventory_scope": {
+    "documentation_and_tests_only": true,
+    "runtime_code_changed": false,
+    "frontend_javascript_changed": false,
+    "backend_route_changed": false,
+    "provider_or_live_provider_wiring": false,
+    "memory_rag_or_graphrag_wiring": false,
+    "h15_h_series_or_historical_diary_runtime_input": false,
+    "graphql_delivery_or_readiness": false,
+    "appointment_write_behavior_changed": false
+  },
+  "candidate_non_d5_surfaces": [
+    {
+      "id": "review_copy_safety_matrix",
+      "classification": "non_d5_fixture_consolidation",
+      "candidate_value": "Consolidate safe-copy expectations across proposal, clarification, stale, failed, and success-like states without changing renderer behavior.",
+      "allowed_next_action": "docs_tests_fixture_matrix_only",
+      "requires_new_approval": false,
+      "blocked_runtime_surfaces": [
+        "frontend_javascript_expansion",
+        "backend_response_delivery",
+        "provider_wiring",
+        "write_behavior_change"
+      ]
+    },
+    {
+      "id": "view_model_contract_cross_reference",
+      "classification": "documentation_cross_reference_cleanup",
+      "candidate_value": "Tie D3 inventory, D4 preflight, D5 completion, and API-spine classification into one reviewer-facing map.",
+      "allowed_next_action": "docs_tests_cross_reference_only",
+      "requires_new_approval": false,
+      "blocked_runtime_surfaces": [
+        "additional_route_delivery",
+        "graphql_delivery",
+        "frontend_javascript_expansion",
+        "write_behavior_change"
+      ]
+    },
+    {
+      "id": "ordinary_prompt_release_gate_mapping",
+      "classification": "release_gate_mapping",
+      "candidate_value": "Map the ordinary Margaret Thompson / Dr Shera release prompt to existing provider-free and route-intercepted evidence labels.",
+      "allowed_next_action": "docs_tests_evidence_label_map_only",
+      "requires_new_approval": false,
+      "blocked_runtime_surfaces": [
+        "live_provider_evidence",
+        "backend_route_change",
+        "frontend_javascript_expansion",
+        "production_readiness_claim"
+      ]
+    }
+  ],
+  "recommended_candidate_for_sprint_289": "view_model_contract_cross_reference",
+  "why_recommended": "It is the least likely candidate to reopen D5 or runtime behavior, and it gives future reviewers one map before deciding whether a later approval packet is warranted.",
+  "not_recommended_now": [
+    {
+      "id": "additional_backend_response_attachment_point",
+      "reason": "would expand D5 route delivery and requires separate review"
+    },
+    {
+      "id": "frontend_javascript_consumption_expansion",
+      "reason": "would expand UI behavior and requires separate review"
+    },
+    {
+      "id": "graphql_or_provider_delivery",
+      "reason": "would open closed GraphQL/provider gates and requires separate approval"
+    }
+  ],
+  "must_remain_closed": {
+    "d5_scope_expansion": true,
+    "additional_backend_response_attachment_point": true,
+    "frontend_javascript_expansion": true,
+    "graphql_delivery_or_readiness": true,
+    "provider_or_live_provider_wiring": true,
+    "access_ai_invocation": true,
+    "memory_rag_or_graphrag_runtime_access": true,
+    "h15_or_h_series_runtime_input": true,
+    "historical_diary_runtime_input": true,
+    "external_patient_client_exposure": true,
+    "confirm_payload_or_write_behavior_change": true,
+    "model_to_database_write": true
+  },
+  "worker_posture": {
+    "codex": "integration_owner_and_tests",
+    "claude": "use_when_available_for_strategic_gate_review_even_without_api_contract_changes",
+    "antigravity": "use_when_available_for_product_workflow_or_independent_review_even_without_ui_changes",
+    "deepseek": "requested_static_overclaim_and_gate_review"
+  },
+  "worker_reviews": {
+    "claude_strategic_gate": {
+      "mode": "scripts/drive_agent_headless.py via Claude CLI",
+      "artifact": "orchestration/agent_inbox/codex/review-claude-sprint288-post-d5-next-slice-inventory.md",
+      "verdict": "PASS"
+    },
+    "antigravity_product_workflow": {
+      "mode": "agy.exe --print read-only review",
+      "artifact": "orchestration/agent_inbox/antigravity/review-antigravity-sprint288-post-d5-next-slice-inventory.md",
+      "verdict": "PASS"
+    },
+    "deepseek_static_gate": {
+      "mode": "direct deepseek-worker spawn",
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint288-post-d5-next-slice-inventory.md",
+      "verdict": "PASS"
+    }
+  },
+  "next_recommended_action": "Sprint 289 should produce a checkpoint review packet for view_model_contract_cross_reference only, still docs/tests-only."
+}
