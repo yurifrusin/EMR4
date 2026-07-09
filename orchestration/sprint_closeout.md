@@ -84,7 +84,7 @@ accidental parallel run of DB-bootstrapping suites hit the known transient
 Postgres enum creation collision, then passed when rerun serially.
 
 Implementation commits: worker/prep commits `1644c978`, `ce7d358f`,
-`c8bdbbf9`, `954f4eac`, `d7132d25`; Ariadne synthesis commit `4a2f6555`.
+`c8bdbbf9`, `954f4eac`, `d7132d25`; Ariadne synthesis commit `3a1d7c0a`.
 
 Sprint engine state: continuing to Sprint 258 blocker-closure block. Do not
 create a Yuri approval payload or flip `rest_route_ready` without explicit Yuri
