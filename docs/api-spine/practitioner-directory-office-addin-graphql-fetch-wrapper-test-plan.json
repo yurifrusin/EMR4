@@ -1,0 +1,94 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_fetch_wrapper_test_plan.v1",
+  "date": "2026-07-09",
+  "sprint": 275,
+  "recorded_by": "ariadne",
+  "decision": "blocked_by_default_test_plan_only",
+  "target_consumer": "Office add-in taskpane practitioner selector",
+  "target_field": "Query.practice.practitioners",
+  "approval_expires_on": "2026-08-06",
+  "source_proposal": "docs/api-spine/practitioner-directory-office-addin-graphql-consumer-proposal.json",
+  "scope": {
+    "docs_and_tests_only": true,
+    "mocked_fetch_wrapper_plan": true,
+    "runtime_taskpane_wrapper_implementation": false,
+    "taskpane_code_change": false,
+    "hidden_feature_flag": false,
+    "runtime_shadow_fetch": false,
+    "client_telemetry_endpoint": false,
+    "backend_route_or_schema_change": false,
+    "readiness_flag_change": false
+  },
+  "required_mock_cases": [
+    "graphql_success_exact_projection",
+    "graphql_empty_practitioners_list",
+    "http_401_transport_calls_logout",
+    "graphql_forbidden_extensions_code_no_logout",
+    "graphql_bad_user_input_extensions_code_no_logout",
+    "practice_null_returns_empty_without_leak",
+    "default_location_null_keeps_row",
+    "projection_drift_extra_field_rejected",
+    "expired_or_disabled_gate_skips_graphql_fetch",
+    "future_rest_fallback_on_graphql_failure"
+  ],
+  "approved_projection": [
+    "id",
+    "displayName",
+    "roleLabel",
+    "active",
+    "defaultLocation.id",
+    "defaultLocation.name"
+  ],
+  "safe_user_copy": {
+    "http_401": "Please sign in again.",
+    "graphql_forbidden": "You do not have permission to access the practitioner directory.",
+    "graphql_bad_user_input": "Invalid request. Please check the practitioner directory filters.",
+    "network_or_system": "Unable to load practitioner directory. Please try again later."
+  },
+  "copy_must_not_include": [
+    "Query.practice.practitioners",
+    "extensions.code",
+    "FORBIDDEN",
+    "BAD_USER_INPUT",
+    "401 Unauthorized",
+    "/api/v1/graphql",
+    "resolver",
+    "SQL",
+    "stack trace"
+  ],
+  "forbidden_write_set": [
+    "EMR4 Sidebar/src/taskpane/taskpane.js",
+    "app/",
+    "requirements.txt",
+    "pyproject.toml",
+    "local_data/",
+    "tests/fixtures/h15_semantic_candidates/",
+    "tests/fixtures/h_series_profiles/"
+  ],
+  "must_remain_false": {
+    "office_addin_graphql_fetch_wrapper_ready": false,
+    "runtime_taskpane_switch_ready": false,
+    "telemetry_endpoint_ready": false,
+    "shadow_fetch_ready": false,
+    "any_hidden_flag_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "write_authority_ready": false,
+    "deployment_or_production_ready": false
+  },
+  "worker_reviews": {
+    "antigravity_consumer_ux_tests": {
+      "artifact": "orchestration/agent_inbox/antigravity/antigravity-sprint275-office-addin-graphql-fetch-wrapper-test-plan.md",
+      "verdict": "PASS"
+    },
+    "deepseek_static_gate_tests": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint275-office-addin-graphql-fetch-wrapper-test-plan.md",
+      "verdict": "PASS"
+    },
+    "claude": {
+      "used": false,
+      "reason": "No API contract, resolver, or runtime auth/error model changed; Claude remains stood down."
+    }
+  },
+  "next_recommended_work": "Pause before runtime taskpane implementation unless Yuri approves a separate consumer switch gate; otherwise continue with mocked test scaffolding only."
+}

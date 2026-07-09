@@ -24,9 +24,58 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 275 Practitioner Directory Office Add-in GraphQL Fetch-wrapper Test Plan |
+| Integrated through | Ariadne plan/tests with Antigravity and DeepSeek PASS reviews |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 275 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-fetch-wrapper-test-plan.json`.
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-fetch-wrapper-test-plan.md`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_fetch_wrapper_test_plan.py`.
+- Added Antigravity UX/test PASS review artifact at
+  `orchestration/agent_inbox/antigravity/antigravity-sprint275-office-addin-graphql-fetch-wrapper-test-plan.md`.
+- Added DeepSeek static/gate PASS review artifact at
+  `orchestration/agent_inbox/codex/review-deepseek-sprint275-office-addin-graphql-fetch-wrapper-test-plan.md`.
+- Defined mocked test cases for success, empty list, HTTP `401`, GraphQL
+  `FORBIDDEN`, GraphQL `BAD_USER_INPUT`, `practice = null`,
+  `defaultLocation = null`, projection drift, expired/disabled gate, and future
+  REST fallback.
+
+Boundary:
+
+- No `taskpane.js` edit, hidden feature flag, runtime shadow fetch, telemetry
+  endpoint, backend route/schema change, readiness flag change, write/audit
+  write, provider/memory/H15/trove path, mutation, subscription, deployment,
+  production, external-client exposure, or field expansion.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_fetch_wrapper_test_plan.py tests\test_practitioner_directory_office_addin_graphql_consumer_proposal.py tests\test_practitioner_directory_graphql_internal_consumer_harness.py tests\test_practitioner_directory_graphql_release_boundary.py tests\test_sprint_closeout_protocol.py -q
+```
+
+Result: Sprint 275 plan/proposal/harness/release/protocol suite `55 passed`.
+
+Implementation commit: integrating commit for Sprint 275.
+
+Sprint engine state: pause before runtime taskpane implementation unless Yuri
+approves a separate consumer switch gate; non-runtime mocked client-contract
+scaffolding remains possible.
+
+---
+
+## Previous Closeout - Sprint 274
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 274 Practitioner Directory Office Add-in GraphQL Consumer Proposal |
 | Integrated through | Ariadne proposal/tests with Antigravity and DeepSeek PASS reviews |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 274 What Changed
