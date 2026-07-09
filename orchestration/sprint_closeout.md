@@ -24,9 +24,60 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 276 Practitioner Directory Office Add-in GraphQL Mock Contract Scaffold |
+| Integrated through | Ariadne scaffold/tests with Antigravity and DeepSeek PASS reviews |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 276 What Changed
+
+- Added `tests/practitioner_directory_office_addin_graphql_mock_contract.py`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_mock_contract.py`.
+- Added
+  `tests/practitioner_directory_office_addin_graphql_mock_contract/DRIFT.md`.
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-mock-contract-scaffold.json`.
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-mock-contract-scaffold.md`.
+- Updated the Sprint 275 test plan to set
+  `projection_drift_behavior=discard`.
+- Added Antigravity UX/test PASS review artifact at
+  `orchestration/agent_inbox/antigravity/antigravity-sprint276-office-addin-graphql-mock-contract-scaffold.md`.
+- Added DeepSeek static/gate PASS review artifact at
+  `orchestration/agent_inbox/codex/review-deepseek-sprint276-office-addin-graphql-mock-contract-scaffold.md`.
+
+Boundary:
+
+- Python tests-only scaffold under `tests/`.
+- No `taskpane.js` edit, app import, live GraphQL fetch, hidden feature flag,
+  runtime shadow fetch, telemetry endpoint, backend route/schema change,
+  readiness flag change, write/audit write, provider/memory/H15/trove path,
+  mutation, subscription, deployment, production, external-client exposure, or
+  field expansion.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_mock_contract.py tests\test_practitioner_directory_office_addin_graphql_fetch_wrapper_test_plan.py tests\test_practitioner_directory_office_addin_graphql_consumer_proposal.py tests\test_practitioner_directory_graphql_release_boundary.py tests\test_sprint_closeout_protocol.py -q
+```
+
+Result: Sprint 276 scaffold/plan/proposal/release/protocol suite `43 passed`.
+
+Implementation commit: integrating commit for Sprint 276.
+
+Sprint engine state: paused for separate consumer switch approval before any
+Office add-in taskpane runtime implementation or live GraphQL traffic.
+
+---
+
+## Previous Closeout - Sprint 275
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 275 Practitioner Directory Office Add-in GraphQL Fetch-wrapper Test Plan |
 | Integrated through | Ariadne plan/tests with Antigravity and DeepSeek PASS reviews |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 275 What Changed

@@ -45,7 +45,7 @@ def test_fetch_wrapper_test_plan_names_required_mock_cases():
         "graphql_bad_user_input_extensions_code_no_logout",
         "practice_null_returns_empty_without_leak",
         "default_location_null_keeps_row",
-        "projection_drift_extra_field_rejected",
+        "projection_drift_extra_field_discarded",
         "expired_or_disabled_gate_skips_graphql_fetch",
         "future_rest_fallback_on_graphql_failure",
     ]
@@ -54,6 +54,7 @@ def test_fetch_wrapper_test_plan_names_required_mock_cases():
 def test_fetch_wrapper_test_plan_keeps_projection_and_copy_safe():
     payload = _payload()
 
+    assert payload["projection_drift_behavior"] == "discard"
     assert payload["approved_projection"] == [
         "id",
         "displayName",

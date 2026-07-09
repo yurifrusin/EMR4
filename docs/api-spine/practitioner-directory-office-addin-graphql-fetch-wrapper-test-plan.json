@@ -27,7 +27,7 @@
     "graphql_bad_user_input_extensions_code_no_logout",
     "practice_null_returns_empty_without_leak",
     "default_location_null_keeps_row",
-    "projection_drift_extra_field_rejected",
+    "projection_drift_extra_field_discarded",
     "expired_or_disabled_gate_skips_graphql_fetch",
     "future_rest_fallback_on_graphql_failure"
   ],
@@ -39,6 +39,7 @@
     "defaultLocation.id",
     "defaultLocation.name"
   ],
+  "projection_drift_behavior": "discard",
   "safe_user_copy": {
     "http_401": "Please sign in again.",
     "graphql_forbidden": "You do not have permission to access the practitioner directory.",

@@ -1,0 +1,73 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_mock_contract_scaffold.v1",
+  "date": "2026-07-09",
+  "sprint": 276,
+  "recorded_by": "ariadne",
+  "decision": "tests_only_mock_contract_scaffold_added",
+  "target_consumer": "Office add-in taskpane practitioner selector",
+  "target_field": "Query.practice.practitioners",
+  "approval_expires_on": "2026-08-06",
+  "scaffold": {
+    "helper": "tests/practitioner_directory_office_addin_graphql_mock_contract.py",
+    "tests": "tests/test_practitioner_directory_office_addin_graphql_mock_contract.py",
+    "drift_note": "tests/practitioner_directory_office_addin_graphql_mock_contract/DRIFT.md",
+    "language": "python",
+    "runtime_taskpane_wrapper": false,
+    "live_graphql_fetch": false,
+    "app_imports": false
+  },
+  "contract_behavior": {
+    "http_401": "HTTP_401 with logout_requested=true",
+    "graphql_forbidden": "GRAPHQL_FORBIDDEN with logout_requested=false",
+    "graphql_bad_user_input": "GRAPHQL_BAD_USER_INPUT with logout_requested=false",
+    "practice_null": "empty rows without practice field leakage",
+    "default_location_null": "row preserved with defaultLocation=null",
+    "projection_drift_behavior": "discard",
+    "disabled_gate": "zero GraphQL fetch attempts",
+    "future_rest_fallback": "event classification only, no orchestration"
+  },
+  "synthetic_only": {
+    "live_practitioner_values": false,
+    "latency_or_throughput_claims": false,
+    "readiness_claims": false,
+    "ui_copy_rendering": false
+  },
+  "worker_reviews": {
+    "antigravity_ux_contract": {
+      "artifact": "orchestration/agent_inbox/antigravity/antigravity-sprint276-office-addin-graphql-mock-contract-scaffold.md",
+      "verdict": "PASS"
+    },
+    "deepseek_static_contract": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint276-office-addin-graphql-mock-contract-scaffold.md",
+      "verdict": "PASS",
+      "integrated_concerns": [
+        "raw response level rather than apiFetch",
+        "practice-null leak assertions",
+        "defaultLocation-null as data shape only",
+        "projection drift behavior explicitly set to discard",
+        "gate disabled parameter rather than date-dependent helper logic",
+        "fallback as event classification only",
+        "error classification rather than UI copy string assertions",
+        "zero app imports",
+        "Python helper as contract reference rather than JS runtime",
+        "DRIFT note preventing proto-implementation creep"
+      ]
+    },
+    "claude": {
+      "used": false,
+      "reason": "No API contract, resolver, backend route, or runtime auth/error model changed."
+    }
+  },
+  "must_remain_false": {
+    "office_addin_graphql_fetch_wrapper_ready": false,
+    "runtime_taskpane_switch_ready": false,
+    "telemetry_endpoint_ready": false,
+    "shadow_fetch_ready": false,
+    "any_hidden_flag_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "write_authority_ready": false,
+    "deployment_or_production_ready": false
+  },
+  "next_recommended_work": "Pause for a separate consumer switch approval before taskpane runtime implementation; no more GraphQL client runtime work should proceed without that approval."
+}
