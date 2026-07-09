@@ -7,13 +7,13 @@ boundary for:
 Query.practice.practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0)
 ```
 
-## Proposed Decision
+## Decision
 
-The field is proposed as ready for internal authenticated staff consumer
-development and test-harness use, pending Yuri approval of this packet. If
-approved, internal UI or integration code may compare it with the existing REST
-practitioner directory while using the same staff bearer-token auth model and
-the same closed-gate posture.
+The field is approved for internal authenticated staff consumer development and
+test-harness use through 2026-08-06, against approved contract commit
+`d4ed14d3`. Internal UI or integration code may compare it with the existing
+REST practitioner directory while using the same staff bearer-token auth model
+and the same closed-gate posture.
 
 This is not global GraphQL readiness, not deployment readiness, not production
 readiness, not external patient-client readiness, not provider readiness, not

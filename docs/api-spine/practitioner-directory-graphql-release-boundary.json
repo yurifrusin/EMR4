@@ -3,7 +3,7 @@
   "date": "2026-07-09",
   "sprint": 272,
   "recorded_by": "ariadne",
-  "decision": "proposed_internal_staff_consumer_development_ready_pending_yuri_approval",
+  "decision": "release_boundary_approved_for_internal_staff_consumer_development",
   "reviewer": "ariadne",
   "target_field": "Query.practice.practitioners",
   "endpoint": "/api/v1/graphql",
@@ -21,13 +21,13 @@
   ],
   "yuri_approval_slip": {
     "required": true,
-    "approved_contract_commit": "",
-    "go_no_go_acknowledged": false,
-    "approval_expires_on": "",
+    "approved_contract_commit": "d4ed14d3",
+    "go_no_go_acknowledged": true,
+    "approval_expires_on": "2026-08-06",
     "sunset_review_required": true
   },
   "allowed_use": {
-    "internal_authenticated_staff_consumer_development": false,
+    "internal_authenticated_staff_consumer_development": true,
     "test_harness_use": true,
     "rest_parity_comparison": true,
     "external_patient_client_use": false,
@@ -79,7 +79,7 @@
     "must_not_require_idempotency_key": true
   },
   "authorized_now": {
-    "internal_consumer_development": false,
+    "internal_consumer_development": true,
     "readiness_flag_changes": false,
     "deployment_or_production_exposure": false,
     "external_client_access": false,
@@ -103,7 +103,7 @@
     "reviewer_lane": "deepseek-worker",
     "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint272-graphql-release-boundary.md",
     "verdict": "PASS",
-    "approval_required_before_ready": true
+    "approval_required_before_ready": false
   },
   "must_remain_false": {
     "graphql_mutation_ready": false,
@@ -114,5 +114,5 @@
     "provider_or_memory_ready": false,
     "h15_h_series_historical_diary_ready": false
   },
-  "next_recommended_work": "Pause for Yuri approval before treating this field as ready for internal authenticated staff consumer development; continue with a separate approval packet before any global readiness/deployment/external-client/provider/memory/write expansion."
+  "next_recommended_work": "Allow scoped internal authenticated staff consumer development for Query.practice.practitioners through 2026-08-06; require a separate approval packet before any global readiness/deployment/external-client/provider/memory/write expansion."
 }

@@ -143,14 +143,15 @@ GraphQL path, Ariadne must run and record:
 .venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_release_boundary.py tests\test_practitioner_directory_graphql_contract_hardening.py -q
 ```
 
-Expected current values are
-`decision=proposed_internal_staff_consumer_development_ready_pending_yuri_approval`,
-`internal_consumer_development=false`,
+Expected current values after Yuri's Sprint 272 approval are
+`decision=release_boundary_approved_for_internal_staff_consumer_development`,
+`internal_consumer_development=true`,
 `readiness_flag_changes=false`, `deployment_or_production_exposure=false`,
 `external_client_access=false`, `schema_field_expansion=false`,
 `write_mutation_or_subscription=false`,
-`provider_memory_rag_graphrag_h15_trove=false`, and
-`go_no_go_acknowledged=false`. If any value changes without explicit Yuri
+`provider_memory_rag_graphrag_h15_trove=false`,
+`approved_contract_commit=d4ed14d3`, `approval_expires_on=2026-08-06`, and
+`go_no_go_acknowledged=true`. If any other value changes without explicit Yuri
 approval, the sprint engine must pause.
 
 ### Proposal Surface Guard

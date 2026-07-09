@@ -24,9 +24,47 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 272 Practitioner Directory GraphQL Release-Boundary Approval |
+| Integrated through | Ariadne approval-slip update after Yuri go/no-go |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 272 Approval Update
+
+- Yuri approved the Sprint 272 GraphQL release-boundary packet with expiry
+  `2026-08-06`.
+- Updated
+  `docs/api-spine/practitioner-directory-graphql-release-boundary.json` with
+  `decision=release_boundary_approved_for_internal_staff_consumer_development`,
+  `approved_contract_commit=d4ed14d3`, `go_no_go_acknowledged=true`, and
+  `approval_expires_on=2026-08-06`.
+- Set only `internal_consumer_development=true`; all global readiness,
+  deployment, production, external-client, write, provider, memory, H15/trove,
+  mutation, subscription, and field-expansion gates remain closed.
+- Updated `docs/api-spine/practitioner-directory-graphql-release-boundary.md`,
+  `tests/test_practitioner_directory_graphql_release_boundary.py`,
+  `orchestration/bernie_release_gates.md`, `AGENTS.md`, and the integration log.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_release_boundary.py tests\test_practitioner_directory_graphql_contract_hardening.py tests\test_sprint_closeout_protocol.py -q
+```
+
+Implementation commit: integrating commit for Sprint 272 approval update.
+
+Sprint engine state: continuing only into bounded internal staff consumer
+development, or pause for a new approval packet before any expansion.
+
+---
+
+## Previous Closeout - Sprint 272 Packet
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 272 Practitioner Directory GraphQL Release-Boundary Packet |
 | Integrated through | Ariadne approval-packet drafting with DeepSeek PASS review |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 272 What Changed
@@ -39,8 +77,8 @@ Every closeout entry should record:
 - Added the practitioner-directory GraphQL release-boundary gate section to
   `orchestration/bernie_release_gates.md`.
 - Integrated DeepSeek Sprint 272 PASS review.
-- Converted the release decision into a proposed approval surface:
-  `internal_consumer_development=false` pending Yuri approval.
+- Converted the release decision into a proposed approval surface before the
+  subsequent Yuri approval update.
 
 Worker mix:
 

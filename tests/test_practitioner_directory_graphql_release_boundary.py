@@ -19,7 +19,7 @@ def test_release_boundary_shape_and_decision_are_scoped():
 
     assert payload["schema_version"] == "api_spine.practitioner_directory_graphql_release_boundary.v1"
     assert payload["sprint"] == 272
-    assert payload["decision"] == "proposed_internal_staff_consumer_development_ready_pending_yuri_approval"
+    assert payload["decision"] == "release_boundary_approved_for_internal_staff_consumer_development"
     assert payload["reviewer"] == "ariadne"
     assert payload["target_field"] == "Query.practice.practitioners"
     assert payload["endpoint"] == "/api/v1/graphql"
@@ -32,7 +32,7 @@ def test_release_boundary_shape_and_decision_are_scoped():
         "active",
         "defaultLocation { id, name }",
     ]
-    assert payload["allowed_use"]["internal_authenticated_staff_consumer_development"] is False
+    assert payload["allowed_use"]["internal_authenticated_staff_consumer_development"] is True
     assert payload["allowed_use"]["test_harness_use"] is True
     assert payload["allowed_use"]["rest_parity_comparison"] is True
     for key in (
@@ -69,7 +69,7 @@ def test_release_boundary_keeps_all_adjacent_gates_false():
 
     assert all(value is False for value in payload["must_remain_false"].values())
     assert payload["authorized_now"] == {
-        "internal_consumer_development": False,
+        "internal_consumer_development": True,
         "readiness_flag_changes": False,
         "deployment_or_production_exposure": False,
         "external_client_access": False,
@@ -78,7 +78,7 @@ def test_release_boundary_keeps_all_adjacent_gates_false():
         "provider_memory_rag_graphrag_h15_trove": False,
     }
     assert payload["worker_review"]["verdict"] == "PASS"
-    assert payload["worker_review"]["approval_required_before_ready"] is True
+    assert payload["worker_review"]["approval_required_before_ready"] is False
     assert blockers["global_readiness_snapshot_migration"] == "blocked"
     assert blockers["external_client_contract"] == "blocked"
     assert blockers["mutations"] == "blocked"
@@ -128,9 +128,9 @@ def test_release_boundary_requires_yuri_approval_slip():
 
     assert approval == {
         "required": True,
-        "approved_contract_commit": "",
-        "go_no_go_acknowledged": False,
-        "approval_expires_on": "",
+        "approved_contract_commit": "d4ed14d3",
+        "go_no_go_acknowledged": True,
+        "approval_expires_on": "2026-08-06",
         "sunset_review_required": True,
     }
 
@@ -156,7 +156,9 @@ def test_release_boundary_markdown_names_uses_and_blockers():
     text = " ".join(BOUNDARY_MD.read_text(encoding="utf-8").split())
 
     assert "internal authenticated staff consumer development" in text
-    assert "pending Yuri approval" in text
+    assert "approved for internal authenticated staff consumer development" in text
+    assert "2026-08-06" in text
+    assert "d4ed14d3" in text
     assert "not global GraphQL readiness" in text
     assert "not deployment readiness" in text
     assert "not external patient-client readiness" in text
