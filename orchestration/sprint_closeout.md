@@ -24,9 +24,95 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprints 254-256 Practitioner Directory Evidence, Readiness Criteria, and Consumer Contract |
+| Integrated through | Ariadne direct implementation; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because the block was bounded API-spine evidence/contract work over an implemented read route |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-09 |
+
+## Sprints 254-256 What Changed
+
+Sprint 254:
+
+- Added `docs/api-spine/practitioner-directory-runtime-evidence-refresh.json`.
+- Added `docs/api-spine/practitioner-directory-runtime-evidence-refresh.md`.
+- Added `tests/test_practitioner_directory_runtime_evidence_refresh.py`.
+- Refreshed runtime evidence for `GET /api/v1/practice/practitioners` while
+  keeping readiness blocked.
+
+Sprint 255:
+
+- Added `docs/api-spine/practitioner-directory-readiness-criteria.json`.
+- Added `docs/api-spine/practitioner-directory-readiness-criteria.md`.
+- Added `tests/test_practitioner_directory_readiness_criteria.py`.
+- Defined criteria required before any future `rest_route_ready=true` decision.
+
+Sprint 256:
+
+- Added `scripts/practitioner_directory_consumer_contract_report.py`.
+- Added
+  `tests/fixtures/api_spine_practitioner_directory/consumer_contract_report.json`.
+- Added `docs/api-spine/practitioner-directory-consumer-contract-check.md`.
+- Added `tests/test_practitioner_directory_consumer_contract_report.py`.
+- Locked the FastAPI/OpenAPI consumer contract: GET-only route, security
+  declared, `activeOnly`/`limit`/`offset` query defaults and bounds,
+  `PractitionerOut` response fields, sensitive-field absence, and no detail
+  route.
+
+Worker mix:
+
+- Claude worktree available; Claude was not invoked because this was bounded
+  evidence/criteria/contract work over committed route code.
+- Antigravity worktree available; Antigravity was not invoked for the same
+  reason.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at block start.
+
+Boundary:
+
+- Docs, fixture, script, and tests only.
+- No route/schema/service behavior change, no readiness flag change, no SDL or
+  GraphQL resolver, no provider/Access AI invocation, no memory/RAG/GraphRAG
+  wiring, no H15/H-series runtime import, no historical diary/local_data import,
+  no external patient-client exposure, no write authority, no deployment claim,
+  and no production-readiness claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_runtime_evidence_refresh.py tests\test_practitioner_directory_post_implementation_readiness_review.py tests\test_practitioner_directory_approval_gate_static.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_readiness_criteria.py tests\test_practitioner_directory_runtime_evidence_refresh.py tests\test_external_read_model_readiness_status.py -q
+.venv\Scripts\python.exe scripts\practitioner_directory_consumer_contract_report.py
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_consumer_contract_report.py tests\test_practitioner_directory_readiness_criteria.py tests\test_practitioner_directory_runtime_evidence_refresh.py -q
+git diff --check -- docs\api-spine\practitioner-directory-runtime-evidence-refresh.json docs\api-spine\practitioner-directory-runtime-evidence-refresh.md tests\test_practitioner_directory_runtime_evidence_refresh.py
+git diff --check -- docs\api-spine\practitioner-directory-readiness-criteria.json docs\api-spine\practitioner-directory-readiness-criteria.md tests\test_practitioner_directory_readiness_criteria.py
+git diff --check -- scripts\practitioner_directory_consumer_contract_report.py tests\fixtures\api_spine_practitioner_directory\consumer_contract_report.json docs\api-spine\practitioner-directory-consumer-contract-check.md tests\test_practitioner_directory_consumer_contract_report.py
+```
+
+Result: Sprint 254 guard/review set `20 passed`; practitioner-directory route
+matrix `31 passed` after isolated rerun; API-spine artifact suite `31 passed`;
+Sprint 255 criteria/status set `19 passed`; Sprint 256 consumer-contract set
+`15 passed`; OpenAPI report emitted the expected safe aggregate snapshot;
+whitespace checks passed. An accidental parallel run of the DB-heavy route suite
+hit the known transient Postgres enum creation collision, then passed when
+rerun alone.
+
+Implementation commits: `4615a51e`, `923b74e4`, `43dabd60`.
+
+Sprint engine state: pause before any `rest_route_ready=true` change; next safe
+step is a Sprint 257 go/no-go decision draft requiring explicit Yuri approval
+before readiness flips.
+
+---
+
+## Previous Closeout - Sprint 253
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 253 Bernie UI D5 First-Slice Completion Review |
 | Integrated through | Ariadne direct implementation; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because this was a bounded review/decision packet |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 253 What Changed
