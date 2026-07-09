@@ -84,7 +84,7 @@ artifact suite `31 passed`; external-readiness/protocol suite `16 passed`;
 broader run hit the known disposable Postgres enum race and passed after schema
 reset and serial rerun.
 
-Implementation commit: pending.
+Implementation commit: `061f9cd0`.
 
 Sprint engine state: continuing only to static release-summary/report
 integration if useful, or pausing for Yuri direction before runtime consumption.
