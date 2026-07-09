@@ -1,0 +1,46 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_default_on_local_backend_smoke.v1",
+  "date": "2026-07-09",
+  "sprint": 283,
+  "recorded_by": "ariadne",
+  "source_runtime_evidence": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-runtime.json",
+  "source_publication_status": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-publication-status.json",
+  "target_surface": "docs/diary/diary.js",
+  "target_consumer": "office_addin_diary_booking_practitioner_selector",
+  "local_backend_smoke": {
+    "endpoint": "/api/v1/graphql",
+    "uses_office_addin_graphql_document": true,
+    "uses_fastapi_testclient": true,
+    "uses_route_interception": false,
+    "uses_fake_local_db_rows": true,
+    "asserts_authenticated_staff_context": true,
+    "asserts_practice_scope": true,
+    "asserts_active_only": true,
+    "asserts_default_location_projection": true,
+    "asserts_sensitive_canaries_absent": true,
+    "asserts_no_audit_write": true
+  },
+  "runtime_posture": {
+    "feature_gate_name": "ENABLE_GRAPHQL_PRACTITIONERS",
+    "feature_gate_default": true,
+    "graphql_live_traffic_by_default": true,
+    "single_consumer_only": true,
+    "rest_fallback_retained": true,
+    "runtime_user_override": false,
+    "server_config_endpoint": false
+  },
+  "must_remain_false": {
+    "deployment_ready": false,
+    "production_ready": false,
+    "global_graphql_readiness": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false
+  },
+  "next_recommended_work": "Proceed to a rollback packet for the same single Office add-in practitioner selector consumer before any deployment or production readiness claim."
+}

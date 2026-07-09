@@ -24,9 +24,54 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 283 Default-On Local Backend Smoke |
+| Integrated through | Ariadne local backend fake-data smoke and bounded evidence |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 283 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-default-on-local-backend-smoke.{json,md}`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_default_on_local_backend_smoke.py`.
+- Extracted the committed Office add-in GraphQL query from
+  `docs/diary/diary.js` and posted it through the local FastAPI `TestClient`
+  `/api/v1/graphql` route with authenticated fake staff context.
+- Proved fake-data practice scoping, active-only filtering, default-location
+  projection, sensitive canary absence, and no appointment audit writes without
+  browser route interception.
+- Kept the default-on scope as exactly one Office add-in diary practitioner
+  selector consumer with REST fallback retained.
+
+## Sprint 283 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_default_on_local_backend_smoke.py tests\test_practitioner_directory_graphql_resolver.py tests\test_practitioner_directory_office_addin_graphql_switch_runtime.py -q
+node --check docs\diary\diary.js
+git diff --check
+```
+
+Result: local backend smoke/support suite `29 passed`; `node --check` passed.
+Final whitespace check pending closeout metadata.
+
+Sprint engine state: continuing to Sprint 284 rollback packet after Sprint 283
+commit/push and Pushover closure ping. No deployment, production, readiness, telemetry,
+external-client, write, provider, memory, H15/trove, mutation, subscription, or
+field-expansion gate is opened.
+
+---
+
+## Previous Closeout - Sprint 282
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 282 Default-On Publication Status |
 | Integrated through | Ariadne publication status snapshot and guard tests |
-| Status | Integrated, verified, pending commit/push |
+| Status | Published to `origin/master` and `handoff/current`; worktree clean |
+| Commit | `514970f656eb55991c3c0def62bfd6d522ea3f74` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` |
 | Last updated | 2026-07-09 |
 
 ## Sprint 282 What Changed
@@ -53,10 +98,10 @@ git diff --check
 Result: publication/status suite `11 passed`; whitespace check passed with the
 known CRLF notices for touched orchestration Markdown files.
 
-Sprint engine state: continuing to Sprint 283, a narrow non-intercepted local
+Sprint engine state: continued to Sprint 283, a narrow non-intercepted local
 backend fake-data check. No deployment, production, readiness, telemetry,
 external-client, write, provider, memory, H15/trove, mutation, subscription, or
-field-expansion gate is opened.
+field-expansion gate was opened.
 
 ---
 
