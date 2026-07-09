@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 258 Practitioner Directory Blocker Closure |
 | Integrated through | Ariadne orchestration/integration with Claude security/gap wording review, Antigravity deployment/external-client boundary review, and DeepSeek mechanical completeness sweep |
-| Status | Integrated and pending push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 258 What Changed
@@ -90,7 +90,7 @@ collision; the local `gp_pms_test` public schema was reset and the suites passed
 when rerun serially.
 
 Implementation commits: Claude review commit `bf2c0412`; Sprint 258 synthesis
-commit pending.
+commit `f24d7a34`.
 
 Sprint engine state: paused for Yuri decision. The next move is not another
 autonomous implementation sprint; Yuri must explicitly decide whether to
