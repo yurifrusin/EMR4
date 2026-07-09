@@ -1,0 +1,82 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_default_on_rollback_packet.v1",
+  "date": "2026-07-09",
+  "sprint": 284,
+  "recorded_by": "ariadne",
+  "decision": "rollback_path_prepared_no_runtime_rollback_now",
+  "source_runtime_evidence": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-runtime.json",
+  "source_publication_status": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-publication-status.json",
+  "source_local_backend_smoke": "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-local-backend-smoke.json",
+  "target_surface": "docs/diary/diary.js",
+  "target_consumer": "office_addin_diary_booking_practitioner_selector",
+  "current_runtime_state": {
+    "feature_gate_name": "ENABLE_GRAPHQL_PRACTITIONERS",
+    "feature_gate_default": true,
+    "rollback_applied_now": false,
+    "rest_fallback_retained": true,
+    "server_config_endpoint": false,
+    "runtime_user_override": false
+  },
+  "rollback_action_if_needed": {
+    "change_scope": "single_line_office_addin_feature_gate_only",
+    "from": "const ENABLE_GRAPHQL_PRACTITIONERS = true;",
+    "to": "const ENABLE_GRAPHQL_PRACTITIONERS = false;",
+    "file": "docs/diary/diary.js",
+    "retain_graphql_query_code": true,
+    "retain_rest_fallback_code": true,
+    "retain_backend_graphql_route_and_resolver": true,
+    "requires_yuri_pause_if_not_emergency": true
+  },
+  "rollback_triggers": [
+    "GraphQL practitioner selector failures that block ordinary diary booking practitioner selection",
+    "Unexpected authenticated staff 401 or logout loops specific to the GraphQL selector path",
+    "Sensitive-field exposure from the GraphQL practitioner selector response or rendered options",
+    "Repeated non-401 GraphQL transport failures where REST fallback does not restore selector rows",
+    "Practice-scoping or inactive-practitioner leakage in local, staging, or production evidence",
+    "Material performance regression attributed to the GraphQL selector path"
+  ],
+  "post_rollback_validation": {
+    "required_commands": [
+      ".venv\\Scripts\\python.exe -m pytest tests\\test_practitioner_directory_office_addin_graphql_default_on_rollback_packet.py -q",
+      "node --check docs\\diary\\diary.js",
+      "git diff --check"
+    ],
+    "operator_check": "After applying the one-line rollback, confirm `docs/diary/diary.js` contains exactly one `const ENABLE_GRAPHQL_PRACTITIONERS = false;` and no `const ENABLE_GRAPHQL_PRACTITIONERS = true;` default assignment. Current default-on runtime tests are pre-rollback baseline tests and should be updated or excluded if rollback is actually applied.",
+    "expected_after_rollback": {
+      "default_off_rest_first": true,
+      "graphql_query_code_present_for_future_reenable": true,
+      "backend_graphql_resolver_unchanged": true,
+      "rest_fallback_path_available": true
+    }
+  },
+  "must_not_do_during_rollback": {
+    "delete_graphql_dependency": false,
+    "unmount_api_v1_graphql": false,
+    "remove_query_practice_practitioners_resolver": false,
+    "change_backend_auth_or_error_model": false,
+    "remove_rest_practitioner_directory_route": false,
+    "add_server_side_feature_config": false,
+    "add_runtime_user_override": false,
+    "claim_deployment_or_production_readiness": false,
+    "claim_global_graphql_readiness": false
+  },
+  "must_remain_false": {
+    "deployment_ready": false,
+    "production_ready": false,
+    "global_graphql_readiness": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false
+  },
+  "worker_posture": {
+    "claude": "stood_down_no_api_contract_resolver_schema_auth_or_error_model_change",
+    "antigravity": "stood_down_no_new_ui_or_user_interaction_change",
+    "deepseek": "requested_static_rollback_packet_review"
+  },
+  "next_recommended_work": "After Sprint 284 is committed and pushed, continue to a small post-default-on monitoring/readiness-boundary packet or pause before any deployment or production readiness claim."
+}
