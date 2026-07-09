@@ -24,9 +24,68 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 251 Bernie UI D5 Response-Shape Report |
+| Integrated through | Ariadne direct implementation; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because this was a bounded safe aggregate report/checker |
+| Status | Integrated and ready to push |
+| Last updated | 2026-07-09 |
+
+## Sprint 251 What Changed
+
+- Added `scripts/bernie_ui_dag_d5_response_shape_report.py`.
+- Added `tests/fixtures/bernie_ui_dag_d5/response_shape_report.json`.
+- Added `tests/test_bernie_ui_dag_d5_response_shape_report.py`.
+- Reported the delivered D5 backend response-shape contract as safe aggregate
+  evidence without route paths, payload IDs, raw diary material, or provider
+  claims.
+- Preserved one backend response assembly point, present/null field behavior,
+  unchanged command payload and appointment write behavior, unchanged frontend
+  JavaScript, and false values for additional routes, GraphQL, providers/live
+  providers, memory/RAG, external clients, and write authority.
+
+Worker mix:
+
+- Claude worktree available; Claude was not invoked because this was a bounded
+  safe aggregate report and checker.
+- Antigravity worktree available; Antigravity was not invoked for the same
+  reason.
+- DeepSeek was not invoked; DeepSeek lane count stayed zero.
+- Integration worktree was clean at sprint start.
+
+Boundary:
+
+- Script, fixture, and tests only.
+- No backend response expansion beyond Sprint 249, no new route/schema/service
+  behavior, no provider call, no Access AI invocation, no memory/RAG/GraphRAG
+  wiring, no H15/H-series runtime import, no historical diary/local_data import,
+  no GraphQL resolver, no frontend JavaScript change, no external patient-client
+  exposure, and no new write authority.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe scripts\bernie_ui_dag_d5_response_shape_report.py
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_dag_d5_response_shape_report.py tests\test_bernie_ui_dag_d5_post_implementation_review.py tests\test_bernie_route_outcome_events.py -q
+git diff --check -- scripts\bernie_ui_dag_d5_response_shape_report.py tests\fixtures\bernie_ui_dag_d5\response_shape_report.json tests\test_bernie_ui_dag_d5_response_shape_report.py
+```
+
+Result: report emitted the expected safe aggregate snapshot; `14 passed`;
+existing Starlette and Google GenAI deprecation warnings only; whitespace check
+passed.
+
+Implementation commit: `c029f27e`.
+
+Sprint engine state: continuing only through evidence/reporting work; D5 scope
+expansion remains blocked pending separate review.
+
+---
+
+## Previous Closeout - Sprint 250
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 250 Bernie UI D5 Post-Implementation Review |
 | Integrated through | Ariadne direct implementation; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because this was a bounded review artifact with mechanical guards |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 250 What Changed
@@ -86,7 +145,7 @@ expansion remains blocked pending separate review.
 |---|---|
 | Batch | Sprint 249 Bernie UI D5 Response Delivery First Slice |
 | Integrated through | Ariadne direct implementation after Yuri explicitly approved Codex's recommended narrow D5 go; Claude/Antigravity were available but not invoked, and DeepSeek lane count stayed zero because the approved slice was already bounded by the committed D5 plan/checker |
-| Status | Integrated and ready to push |
+| Status | Integrated and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 249 What Changed
