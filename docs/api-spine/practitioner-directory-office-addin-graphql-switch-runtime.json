@@ -1,0 +1,79 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_switch_runtime.v1",
+  "date": "2026-07-09",
+  "sprint": 278,
+  "recorded_by": "ariadne",
+  "decision": "default_off_office_addin_graphql_practitioner_selector_switch_implemented",
+  "approval_source": "docs/api-spine/practitioner-directory-office-addin-graphql-consumer-switch-approval-packet.json",
+  "approval_expires_on": "2026-08-06",
+  "target_surface": "docs/diary/diary.js",
+  "target_consumer": "office_addin_diary_booking_practitioner_selector",
+  "target_field": "Query.practice.practitioners",
+  "runtime_posture": {
+    "feature_gate_name": "ENABLE_GRAPHQL_PRACTITIONERS",
+    "feature_gate_default": false,
+    "graphql_live_traffic_by_default": false,
+    "rest_render_source_when_disabled": true,
+    "runtime_user_override": false,
+    "local_storage_override": false,
+    "query_parameter_override": false,
+    "office_settings_override": false,
+    "server_config_endpoint": false
+  },
+  "implemented_behavior": {
+    "rest_loader": "fetchPractitionerDirectoryRest",
+    "graphql_loader": "fetchPractitionerDirectoryGraphql",
+    "combined_loader": "loadPractitionerDirectory",
+    "graphql_endpoint": "/graphql",
+    "approved_projection": [
+      "id",
+      "displayName",
+      "roleLabel",
+      "active",
+      "defaultLocation.id",
+      "defaultLocation.name"
+    ],
+    "disabled_gate_behavior": "REST path only",
+    "http_401_behavior": "existing apiFetch logout path rethrows",
+    "http_non_401_or_graphql_body_error_behavior": "one-shot REST fallback",
+    "practice_null_behavior": "empty rows without REST fallback",
+    "default_location_null_behavior": "row preserved with empty location shape",
+    "unknown_field_behavior": "not bound by normalizePractitionerDirectory",
+    "malformed_required_row_behavior": "row dropped when id or displayName is absent"
+  },
+  "worker_reviews": {
+    "antigravity_consumer_ux": {
+      "artifact": "orchestration/agent_inbox/antigravity/antigravity-sprint278-office-addin-graphql-switch-runtime.md",
+      "verdict": "PASS"
+    },
+    "deepseek_static_security": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint278-office-addin-graphql-switch-runtime.md",
+      "verdict": "PASS",
+      "integrated_cautions": [
+        "approval was recorded before runtime edit",
+        "malformed required row dropping covered by normalizer filter",
+        "roleLabel and active preserved in normalized rows",
+        "REST fallback is one-shot and no telemetry is added"
+      ]
+    },
+    "claude": {
+      "used": false,
+      "reason": "No API contract, resolver, backend route, schema, or runtime auth/error model changed."
+    }
+  },
+  "must_remain_false": {
+    "runtime_taskpane_switch_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false,
+    "graphql_live_traffic_by_default": false
+  },
+  "next_recommended_work": "Run route-intercepted browser evidence proving default-off REST behavior and enabled-path GraphQL fallback before considering any default-on or deployment readiness proposal."
+}

@@ -24,9 +24,65 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 278 Practitioner Directory Office Add-in GraphQL Switch Runtime |
+| Integrated through | Ariadne default-off runtime switch with Antigravity and DeepSeek PASS reviews |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 278 What Changed
+
+- Recorded Yuri's switch approval in
+  `docs/api-spine/practitioner-directory-office-addin-graphql-consumer-switch-approval-packet.{json,md}`.
+- Updated `docs/diary/diary.js` with `ENABLE_GRAPHQL_PRACTITIONERS = false`,
+  the exact approved `Query.practice.practitioners` query, a GraphQL practitioner
+  directory loader, and REST fallback through the existing route.
+- Preserved `roleLabel` and `active` in normalized practitioner rows while the
+  selector still renders the existing display name/location shape.
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-switch-runtime.{json,md}`.
+- Added
+  `tests/test_practitioner_directory_office_addin_graphql_switch_runtime.py`.
+- Added Antigravity UX PASS review artifact at
+  `orchestration/agent_inbox/antigravity/antigravity-sprint278-office-addin-graphql-switch-runtime.md`.
+- Added DeepSeek static/security PASS review artifact at
+  `orchestration/agent_inbox/codex/review-deepseek-sprint278-office-addin-graphql-switch-runtime.md`.
+- Updated `orchestration/bernie_release_gates.md` to name `docs/diary/diary.js`
+  as the actual Office add-in diary selector surface.
+
+Boundary:
+
+- GraphQL switch is implemented but default-off; no GraphQL traffic is sent by
+  default.
+- No backend route/schema change, server config endpoint, telemetry endpoint,
+  readiness flag change, write/audit write, provider/memory/H15/trove path,
+  mutation, subscription, deployment, production, external-client exposure,
+  default-on switch, or field expansion.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_switch_runtime.py tests\test_practitioner_directory_office_addin_graphql_consumer_switch_approval_packet.py tests\test_practitioner_directory_office_addin_graphql_mock_contract.py tests\test_practitioner_directory_graphql_release_boundary.py tests\test_sprint_closeout_protocol.py -q
+node --check docs\diary\diary.js
+```
+
+Result: Sprint 278 runtime/support/protocol suite `43 passed`; `node --check`
+passed.
+
+Implementation commit: integrating commit for Sprint 278.
+
+Sprint engine state: continuing only to route-intercepted evidence for
+default-off REST behavior and enabled-path GraphQL fallback; no default-on,
+telemetry, deployment, production, or readiness claim.
+
+---
+
+## Previous Closeout - Sprint 277
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 277 Practitioner Directory Office Add-in GraphQL Consumer Switch Approval Packet |
 | Integrated through | Ariadne approval packet/tests with Antigravity and DeepSeek PASS reviews |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 277 What Changed

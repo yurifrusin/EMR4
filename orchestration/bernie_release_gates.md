@@ -157,8 +157,8 @@ approval, the sprint engine must pause.
 ## Practitioner Directory Office Add-in GraphQL Switch Gate
 
 The Office add-in practitioner selector must not send GraphQL traffic or edit
-`EMR4 Sidebar/src/taskpane/taskpane.js` for the GraphQL practitioner path until
-Yuri explicitly approves
+`docs/diary/diary.js` or `EMR4 Sidebar/src/taskpane/taskpane.js` for the
+GraphQL practitioner path until Yuri explicitly approves
 `docs/api-spine/practitioner-directory-office-addin-graphql-consumer-switch-approval-packet.json`.
 
 Before any such implementation sprint, Ariadne must run and record:
@@ -167,12 +167,12 @@ Before any such implementation sprint, Ariadne must run and record:
 .venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_consumer_switch_approval_packet.py tests\test_practitioner_directory_office_addin_graphql_mock_contract.py tests\test_practitioner_directory_graphql_release_boundary.py -q
 ```
 
-Expected current values before switch approval are
-`decision=pending_yuri_switch_approval`,
+Expected current values after Yuri's Sprint 278 approval are
+`decision=approved_for_default_off_office_addin_graphql_practitioner_selector_switch`,
 `approval_required_before_code=true`,
-`office_addin_taskpane_runtime_implementation=false`,
+`office_addin_taskpane_runtime_implementation=true`,
 `office_addin_live_graphql_traffic=false`,
-`taskpane_js_edits_for_graphql=false`, `feature_gate_added=false`,
+`taskpane_js_edits_for_graphql=true`, `feature_gate_added=true`,
 `proposed_switch_approval_expires_on=2026-08-06`,
 `runtime_taskpane_switch_ready=false`, `telemetry_endpoint_ready=false`,
 `deployment_ready=false`, `production_ready=false`,

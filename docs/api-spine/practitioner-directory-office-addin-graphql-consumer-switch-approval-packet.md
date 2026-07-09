@@ -4,13 +4,16 @@ Sprint 277 prepares the approval packet for a future Office add-in taskpane
 switch to `Query.practice.practitioners`. It is not approval and it does not
 change runtime code.
 
-Decision: `pending_yuri_switch_approval`.
+Decision: `approved_for_default_off_office_addin_graphql_practitioner_selector_switch`.
+
+Approval record: Yuri approved continuing on 2026-07-09 with "Ok let's keep
+going." The approval is bounded to the default-off internal Office add-in
+practitioner selector switch and expires on 2026-08-06.
 
 ## What Approval Would Allow
 
-If Yuri approves this packet later, the next sprint may edit only the Office
-add-in practitioner selector path to add a default-off GraphQL fetch wrapper for
-`Query.practice.practitioners`.
+The next sprint may edit only the Office add-in practitioner selector path to
+add a default-off GraphQL fetch wrapper for `Query.practice.practitioners`.
 
 The switch is internal staff only, practice-scoped, and limited to:
 
@@ -55,5 +58,5 @@ The proposed switch approval consumes the existing release runway and expires on
 
 ## Stop Point
 
-Yuri must explicitly approve the payload before any taskpane GraphQL
-implementation sprint starts.
+The approval does not authorize enabling the switch by default, deployment,
+production readiness, telemetry, field expansion, or any adjacent gate.

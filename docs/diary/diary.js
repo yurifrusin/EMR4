@@ -14,6 +14,23 @@ const BACKEND_URL = (window.location.port === "3000")
     ? window.location.origin
     : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
+const ENABLE_GRAPHQL_PRACTITIONERS = false;
+const PRACTITIONER_DIRECTORY_GRAPHQL_QUERY = `
+query GetPractitioners($activeOnly: Boolean, $limit: Int, $offset: Int) {
+  practice {
+    practitioners(activeOnly: $activeOnly, limit: $limit, offset: $offset) {
+      id
+      displayName
+      roleLabel
+      active
+      defaultLocation {
+        id
+        name
+      }
+    }
+  }
+}
+`;
 const SLOT_HEIGHT_PX = 30;
 const APPT_BLOCK_GAP_PX = 2;
 const DRAG_START_THRESHOLD_PX = 3;
@@ -2543,6 +2560,61 @@ async function apiFetch(path, opts = {}) {
   return res;
 }
 
+async function fetchPractitionerDirectoryRest() {
+  const res = await apiFetch("/practice/practitioners?activeOnly=true&limit=200");
+  if (!res || !res.ok) return [];
+  const data = await res.json();
+  return Array.isArray(data) ? data : [];
+}
+
+async function fetchPractitionerDirectoryGraphql() {
+  if (!ENABLE_GRAPHQL_PRACTITIONERS) {
+    return { rows: [], attempted: false, fallback: true, reason: "disabled" };
+  }
+  const res = await apiFetch("/graphql", {
+    method: "POST",
+    body: JSON.stringify({
+      query: PRACTITIONER_DIRECTORY_GRAPHQL_QUERY,
+      variables: {
+        activeOnly: true,
+        limit: 200,
+        offset: 0,
+      },
+    }),
+  });
+  if (!res || !res.ok) {
+    return { rows: [], attempted: true, fallback: true, reason: "transport" };
+  }
+  const body = await res.json();
+  const code = body?.errors?.[0]?.extensions?.code || null;
+  if (code === "FORBIDDEN" || code === "BAD_USER_INPUT") {
+    return { rows: [], attempted: true, fallback: true, reason: code };
+  }
+  const practice = body?.data?.practice;
+  if (practice === null) {
+    return { rows: [], attempted: true, fallback: false, reason: "practice_null" };
+  }
+  const rows = Array.isArray(practice?.practitioners) ? practice.practitioners : [];
+  return { rows, attempted: true, fallback: false, reason: "ok" };
+}
+
+async function loadPractitionerDirectory() {
+  if (!ENABLE_GRAPHQL_PRACTITIONERS) {
+    return fetchPractitionerDirectoryRest();
+  }
+  try {
+    const graphqlResult = await fetchPractitionerDirectoryGraphql();
+    if (graphqlResult.attempted && !graphqlResult.fallback) {
+      return graphqlResult.rows;
+    }
+    return await fetchPractitionerDirectoryRest();
+  } catch (err) {
+    if (err && err.message === "401 Unauthorized") throw err;
+    console.warn("Practitioner GraphQL directory fetch failed; falling back to REST:", err);
+    return fetchPractitionerDirectoryRest();
+  }
+}
+
 function normalizeApiPath(path) {
   const value = String(path || "");
   if (value.startsWith("/api/v1/")) {
@@ -4083,7 +4155,7 @@ async function loadDiary(silent = false, options = {}) {
       practitionerDirectory = [];
       waitingAreas = getMockWaitingAreas().filter(wa => !activeLocationId || wa.location_id === activeLocationId);
     } else {
-      const [templateRes, apptRes, typeRes, rosterRes, waitingAreasRes, practitionerRes] = await Promise.all([
+      const [templateRes, apptRes, typeRes, rosterRes, waitingAreasRes, practitionerRows] = await Promise.all([
         loadDiaryTemplate(),
         apiFetch(`/appointments?${apptParams.toString()}`),
         apiFetch(`/appointments/types`),
@@ -4101,12 +4173,12 @@ async function loadDiary(silent = false, options = {}) {
           console.warn("Waiting areas fetch failed:", err);
           return null;
         }),
-        apiFetch("/practice/practitioners?activeOnly=true&limit=200").catch(err => {
+        loadPractitionerDirectory().catch(err => {
           if (err && err.message === "401 Unauthorized") {
             throw err;
           }
           console.warn("Practitioner directory fetch failed:", err);
-          return null;
+          return [];
         })
       ]);
       template = templateRes;
@@ -4118,14 +4190,7 @@ async function loadDiary(silent = false, options = {}) {
         fetchedWaitingAreas = await waitingAreasRes.json();
       }
       waitingAreas = Array.isArray(fetchedWaitingAreas) ? fetchedWaitingAreas : [];
-      if (practitionerRes && practitionerRes.ok) {
-        try {
-          const directoryData = await practitionerRes.json();
-          practitionerDirectory = Array.isArray(directoryData) ? directoryData : [];
-        } catch (err) {
-          console.warn("Failed to parse practitioner directory JSON:", err);
-        }
-      }
+      practitionerDirectory = Array.isArray(practitionerRows) ? practitionerRows : [];
 
       rosterEntries = [];
       if (rosterRes && rosterRes.ok) {
@@ -7081,12 +7146,16 @@ function normalizePractitionerDirectory(rows) {
     .map(row => {
       const id = row && row.id ? String(row.id) : "";
       const displayName = row && row.displayName ? String(row.displayName).trim() : "";
+      const roleLabel = row && row.roleLabel ? String(row.roleLabel).trim() : "";
+      const active = typeof row?.active === "boolean" ? row.active : null;
       const defaultLocation = row && row.defaultLocation && typeof row.defaultLocation === "object"
         ? row.defaultLocation
         : null;
       return {
         id,
         displayName,
+        roleLabel,
+        active,
         defaultLocationId: defaultLocation && defaultLocation.id ? String(defaultLocation.id) : null,
         defaultLocationName: defaultLocation && defaultLocation.name ? String(defaultLocation.name).trim() : ""
       };

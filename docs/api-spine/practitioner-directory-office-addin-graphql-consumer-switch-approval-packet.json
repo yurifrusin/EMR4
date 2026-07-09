@@ -3,7 +3,7 @@
   "date": "2026-07-09",
   "sprint": 277,
   "recorded_by": "ariadne",
-  "decision": "pending_yuri_switch_approval",
+  "decision": "approved_for_default_off_office_addin_graphql_practitioner_selector_switch",
   "target_consumer": "Office add-in taskpane practitioner selector",
   "target_field": "Query.practice.practitioners",
   "endpoint": "/api/v1/graphql",
@@ -14,11 +14,17 @@
   "current_release_boundary_expires_on": "2026-08-06",
   "proposed_switch_approval_expires_on": "2026-08-06",
   "approval_required_before_code": true,
+  "yuri_approval_record": {
+    "statement": "Ok let's keep going.",
+    "recorded_on": "2026-07-09",
+    "approved_scope": "default-off Office add-in GraphQL practitioner selector switch only",
+    "approval_expires_on": "2026-08-06"
+  },
   "authorized_now": {
-    "office_addin_taskpane_runtime_implementation": false,
+    "office_addin_taskpane_runtime_implementation": true,
     "office_addin_live_graphql_traffic": false,
-    "taskpane_js_edits_for_graphql": false,
-    "feature_gate_added": false
+    "taskpane_js_edits_for_graphql": true,
+    "feature_gate_added": true
   },
   "if_yuri_approves_later": {
     "may_edit_taskpane_js_for_one_consumer": true,
