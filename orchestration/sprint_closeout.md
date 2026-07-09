@@ -26,7 +26,7 @@ Every closeout entry should record:
 |---|---|
 | Batch | Sprint 263 Practitioner Directory Internal Runtime Consumer Approval |
 | Integrated through | Ariadne approval packet with Claude PASS, DeepSeek API-boundary PASS, and substitute DeepSeek UI/consumer PASS after Antigravity timeout |
-| Status | Integrated, verified, and pending push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 263 What Changed
