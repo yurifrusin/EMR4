@@ -1,0 +1,34 @@
+{
+  "schema_version": "api_spine.practitioner_directory_route_readiness_consumer_boundary.v1",
+  "date": "2026-07-09",
+  "sprint": 261,
+  "decision": "route_scoped_readiness_status_may_feed_static_release_checks_only",
+  "source_status": "tests/fixtures/api_spine_external_readiness/practitioner_directory_route_readiness_status.json",
+  "target_route": "GET /api/v1/practice/practitioners",
+  "allowed_consumers": [
+    "docs/api-spine review packets",
+    "orchestration sprint closeout and integration logs",
+    "static CI or pytest release-gate checks that emit aggregate readiness status",
+    "developer-facing release readiness summaries"
+  ],
+  "forbidden_consumers": [
+    "production app routers or services",
+    "provider, Access AI, memory, RAG, or GraphRAG code",
+    "Office add-in runtime UI decisions",
+    "deployment or production configuration",
+    "external patient-client enablement",
+    "global external-readiness DAG or blocked_readiness_status mutation",
+    "appointment or practitioner write authority"
+  ],
+  "must_remain_false": {
+    "global_external_read_model_runtime_ready": false,
+    "global_graphql_resolver_ready": false,
+    "global_provider_or_directory_runtime_ready": false,
+    "global_write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false
+  },
+  "implementation_rule": "Runtime app code under app/ must not import scripts.practitioner_directory_route_readiness_status or read the route-scoped readiness fixture.",
+  "next_allowed_step": "add static release-check consumption only, if useful, without runtime wiring"
+}

@@ -94,6 +94,31 @@ which provider-boundary report fields a proposal must cite. The current list is
 `memory_or_rag_access_performed`, and
 `historical_diary_material_access_performed`.
 
+## Practitioner Directory Route Readiness Gate
+
+The practitioner-directory route-scoped readiness status is a static release and
+review artifact only. It records that `GET /api/v1/practice/practitioners` has
+route-scoped `rest_route_ready=true` approval for authenticated internal-staff
+read use while the global external-readiness snapshot remains unchanged.
+
+Before any sprint proposes consuming the route-scoped practitioner-directory
+readiness status from runtime app code, the global external-readiness DAG,
+deployment gates, GraphQL resolver work, provider prompts, memory/RAG/GraphRAG
+access, external patient-client surfaces, or write authority, Ariadne must run
+and record:
+
+```powershell
+.venv\Scripts\python.exe scripts\practitioner_directory_route_readiness_status.py
+```
+
+The expected current values are `rest_route_ready=true`,
+`global_readiness_snapshot_updated=false`, `adjacent_gate_false_count=8`,
+`deployment_ready=false`, `production_ready=false`,
+`external_patient_client_ready=false`, `pause_required=false`, and
+`sprint_engine_state=continuing`. If those values change, or if the command
+fails, the sprint engine must pause for explicit review instead of continuing
+automatically.
+
 ### Proposal Surface Guard
 
 Any new markdown proposal artifact that discusses runtime route wiring, provider

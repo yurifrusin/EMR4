@@ -24,6 +24,80 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 261 Practitioner Directory Route Readiness Consumer Boundary |
+| Integrated through | Ariadne implementation with DeepSeek consumer-boundary preflight, Claude API-spine/security PASS, and Antigravity consumer/release/deployment PASS |
+| Status | Integrated and pending push |
+| Last updated | 2026-07-09 |
+
+## Sprint 261 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-route-readiness-consumer-boundary.json`.
+- Added
+  `docs/api-spine/practitioner-directory-route-readiness-consumer-boundary.md`.
+- Added
+  `tests/test_practitioner_directory_route_readiness_consumer_boundary.py`.
+- Added a Practitioner Directory Route Readiness Gate to
+  `orchestration/bernie_release_gates.md`.
+- Added DeepSeek, Claude, and Antigravity review artifacts for the consumer
+  boundary.
+- Allowed only static docs, orchestration, CI/pytest release checks, and
+  developer-facing release summaries to consume the route-scoped readiness
+  status.
+- Forbid runtime `app/` consumers, global external-readiness DAG/snapshot
+  mutation, provider/Access AI/memory/RAG/GraphRAG, Office add-in runtime UI,
+  deployment/production configuration, external patient-client enablement,
+  GraphQL resolver work, and write authority.
+- Added a runtime isolation guard proving `app/` Python code does not import the
+  route readiness helper or read its fixture.
+
+Worker mix:
+
+- DeepSeek via direct Codex `deepseek-worker` spawn: used for consumer-boundary
+  preflight; recommended a release-gate citation and static-only consumers.
+- Claude via `scripts\drive_agent_headless.py`: used for API-spine/security and
+  runtime-import veto; returned PASS.
+- Antigravity via `agy.exe`: used for consumer/release/deployment/UI boundary
+  review; returned PASS.
+
+Boundary:
+
+- Docs, release-gate text, worker review packets, and tests only.
+- No route/schema/service behavior change, no global readiness snapshot change,
+  no external-readiness DAG change, no SDL or GraphQL resolver, no provider/
+  Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime
+  import, no historical diary/local_data import, no external patient-client
+  exposure, no write authority, no deployment claim, and no production-readiness
+  claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route_readiness_consumer_boundary.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route_readiness_consumer_boundary.py tests\test_practitioner_directory_route_readiness_status.py tests\test_practitioner_directory_rest_route_readiness_approval.py -q
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_readiness_status.py tests\test_sprint_closeout_protocol.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+git diff --check -- AGENTS.md orchestration\integration_log.md orchestration\sprint_closeout.md orchestration\bernie_release_gates.md docs\api-spine\practitioner-directory-route-readiness-consumer-boundary.json docs\api-spine\practitioner-directory-route-readiness-consumer-boundary.md tests\test_practitioner_directory_route_readiness_consumer_boundary.py orchestration\agent_inbox\codex\review-deepseek-sprint261-route-readiness-consumer-boundary.md orchestration\agent_inbox\codex\review-claude-sprint261-route-readiness-consumer-boundary.md orchestration\agent_inbox\codex\review-antigravity-sprint261-route-readiness-consumer-boundary.md
+```
+
+Result: focused consumer-boundary suite `5 passed`; route-readiness chain
+`18 passed`; external-readiness/protocol suite `16 passed`; API-spine artifact
+suite `31 passed`; whitespace check clean apart from the known CRLF notice on
+`orchestration/integration_log.md`. An overlapping DB-backed pytest attempt hit
+the known disposable Postgres enum creation race and passed after resetting the
+test schema and rerunning serially.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing only to static release-check/report integration
+if useful. Do not wire runtime behavior or widen adjacent readiness gates.
+
+---
+
+## Previous Closeout - Sprint 260
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 260 Practitioner Directory Route-Scoped Readiness Status |
 | Integrated through | Ariadne implementation with DeepSeek mechanical status-model review |
 | Status | Integrated and pushed |
