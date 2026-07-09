@@ -1,0 +1,81 @@
+{
+  "schema_version": "bernie.ui_dag.d5_approval_decision_draft.v1",
+  "decision": "blocked",
+  "reviewer": "",
+  "go_no_go_acknowledged": false,
+  "approved_contract_commit": "",
+  "approval_expires_on": "",
+  "recommended_approval_expiry_days": 14,
+  "proposed_decision_if_approved": "approved_for_backend_response_delivery_first_slice",
+  "candidate_contract_commits": [
+    {
+      "commit": "77c01756",
+      "artifact": "docs/bernie-ui-derived-state-dag-evidence-consolidation.md",
+      "purpose": "review-only evidence consolidation"
+    }
+  ],
+  "source_contracts": [
+    "docs/bernie-ui-derived-state-dag-evidence-consolidation.md",
+    "docs/bernie-ui-derived-state-dag-d5-response-delivery-gate.json",
+    "docs/bernie-ui-derived-state-dag-d5-implementation-checklist.md",
+    "docs/bernie-ui-derived-state-dag-d5-router-import-guard-plan.md",
+    "app/services/bernie/ui_view_model.py",
+    "tests/test_bernie_ui_view_model.py",
+    "review/test_diary_smoke.py"
+  ],
+  "approval_scope": {
+    "backend_response_delivery_first_slice_approved": false,
+    "single_response_assembly_point_approved": false,
+    "optional_bernie_ui_view_model_v1_field_approved": false,
+    "idle_client_confirmation_request_state_default_approved": false,
+    "route_or_schema_change_approved": false,
+    "graphql_delivery_approved": false,
+    "provider_or_live_provider_wiring_approved": false,
+    "access_ai_invocation_approved": false,
+    "memory_or_rag_wiring_approved": false,
+    "h15_or_h_series_runtime_input_approved": false,
+    "historical_diary_runtime_input_approved": false,
+    "appointment_write_behavior_change_approved": false,
+    "confirm_payload_change_approved": false,
+    "model_to_database_write_approved": false,
+    "external_patient_client_exposure_approved": false,
+    "frontend_javascript_scope_expansion_approved": false
+  },
+  "allowed_if_future_approved": [
+    "emit_optional_bernie_ui_view_model_v1_from_one_reviewed_bernie_response_assembly_point",
+    "call_build_bernie_ui_view_model_once_from_that_attachment_point",
+    "omit_the_field_when_no_server_session_snapshot_exists",
+    "default_client_confirmation_request_state_to_idle_on_server_delivery",
+    "preserve_existing_confirm_endpoint_and_confirm_payload_authority"
+  ],
+  "forbidden_even_if_future_first_slice_is_approved": [
+    "graphql_resolver_emits_bernie_ui_view_model",
+    "provider_prompt_uses_bernie_ui_view_model",
+    "live_provider_or_provider_dry_run_wiring",
+    "access_ai_invocation",
+    "memory_rag_or_graphrag_runtime_access",
+    "h15_or_h_series_runtime_input",
+    "historical_diary_material_runtime_input",
+    "confirm_payload_contains_view_model_fields",
+    "database_write_depends_on_view_model_fields",
+    "external_patient_client_exposure",
+    "frontend_javascript_scope_expansion"
+  ],
+  "required_review_values_before_approval": [
+    "runtime_or_provider_wiring_ready=false",
+    "raw_trove_access_ready=false",
+    "runtime_gate_decision=blocked",
+    "default_provider=disabled",
+    "live_provider_enabled=false",
+    "provider_calls_performed=false"
+  ],
+  "pause_triggers": [
+    "decision_changes_from_blocked",
+    "reviewer_or_expiry_or_contract_commit_is_filled",
+    "any_approval_scope_field_changes_to_true",
+    "allowed_if_future_approved_is_expanded",
+    "forbidden_even_if_future_first_slice_is_approved_is_weakened",
+    "backend_delivery_implementation_starts_without_yuri_approval",
+    "provider_memory_graphql_h15_external_or_write_scope_is_requested"
+  ]
+}
