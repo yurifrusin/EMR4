@@ -1,0 +1,73 @@
+{
+  "schema_version": "emr4.sprint_287_next_block_reorientation.v1",
+  "date": "2026-07-09",
+  "recorded_by": "ariadne",
+  "sprint": 287,
+  "decision": "pause_graphql_readiness_and_select_non_runtime_checkpoint_block",
+  "preceded_by": {
+    "sprint": 286,
+    "commit": "7e2dd6e71a5ff6d5d1aadc9fa6f137e1beedb833",
+    "title": "correct publication state"
+  },
+  "current_graphql_track_state": {
+    "office_addin_graphql_default_on": true,
+    "single_consumer": "office_addin_diary_booking_practitioner_selector",
+    "monitoring_boundary_complete": true,
+    "rollback_packet_complete": true,
+    "deployment_readiness_claim_allowed": false,
+    "production_readiness_claim_allowed": false,
+    "telemetry_expansion_allowed": false,
+    "global_graphql_readiness_allowed": false
+  },
+  "bernie_d5_state": {
+    "first_slice_complete": true,
+    "d5_expansion_allowed_without_review": false,
+    "source": "docs/bernie-ui-derived-state-dag-d5-first-slice-completion-review.json"
+  },
+  "recommended_next_block": {
+    "name": "Bernie UI derived-state non-D5 checkpoint block",
+    "sprints": [
+      {
+        "sprint": 288,
+        "title": "Bernie UI derived-state post-D5 next-slice inventory",
+        "allowed_scope": "documentation_and_tests_only",
+        "goal": "identify candidate non-D5 derived-state cleanup or checkpoint surfaces without adding route delivery, frontend expansion, provider wiring, memory, writes, or GraphQL delivery"
+      },
+      {
+        "sprint": 289,
+        "title": "Bernie UI derived-state checkpoint review packet",
+        "allowed_scope": "documentation_and_tests_only",
+        "goal": "choose whether the next safe move is human review, non-D5 fixture consolidation, or a separate approval packet"
+      }
+    ],
+    "why_this_block": "It uses the proven value of the D5 first slice without expanding D5, and it avoids turning the completed practitioner GraphQL default-on track into an unapproved readiness/deployment programme."
+  },
+  "worker_plan": {
+    "codex": "integration_owner_and_tests",
+    "claude": "use_only_if_api_contract_or_review_packet_scope_materially_changes",
+    "antigravity": "use_only_if_user_facing_ui_or_interaction_evidence_is_introduced",
+    "deepseek": "use_for_static_overclaim_and_gate_review"
+  },
+  "must_remain_closed": {
+    "graphql_deployment_or_production_readiness": true,
+    "graphql_telemetry_expansion": true,
+    "global_graphql_readiness": true,
+    "d5_scope_expansion": true,
+    "provider_or_live_provider_wiring": true,
+    "access_ai_invocation": true,
+    "memory_rag_or_graphrag_runtime_access": true,
+    "h15_or_h_series_runtime_input": true,
+    "historical_diary_runtime_input": true,
+    "external_patient_client_exposure": true,
+    "confirm_payload_or_write_behavior_change": true,
+    "model_to_database_write": true
+  },
+  "stop_conditions": [
+    "Yuri asks for deployment or production readiness work",
+    "a sprint would add telemetry or runtime observability code",
+    "a sprint would expand GraphQL beyond the approved Office add-in practitioner selector path",
+    "a sprint would expand D5 route delivery or frontend JavaScript behavior",
+    "a sprint would touch provider, memory/RAG/GraphRAG, H15/H-series, historical diary runtime input, external client exposure, or write authority"
+  ],
+  "next_recommended_action": "Run Sprint 288 only if Yuri agrees to a non-runtime Bernie UI derived-state post-D5 checkpoint block; otherwise pause for direction."
+}

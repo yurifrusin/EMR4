@@ -24,6 +24,84 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 287 Next Block Reorientation |
+| Integrated through | Ariadne non-runtime next-block recommendation packet and guard tests |
+| Status | Integrated, verified, pending DeepSeek review/commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 287 What Changed
+
+- Added
+  `docs/sprint-287-next-block-reorientation.{json,md}`.
+- Added
+  `tests/test_sprint287_next_block_reorientation.py`.
+- Recommends pausing the practitioner-directory GraphQL default-on track before
+  deployment, production, telemetry, or global readiness work.
+- Uses the D5 completion review without reopening D5 expansion.
+- Recommends Sprints 288-289 only as a documentation/tests-only Bernie UI
+  derived-state non-D5 checkpoint block, and only if Yuri agrees.
+- Keeps GraphQL readiness/deployment/telemetry, D5 expansion, provider/live
+  provider, Access AI, memory/RAG/GraphRAG, H15/H-series, historical diary
+  runtime inputs, external clients, confirm payload changes, write behavior
+  changes, and model-to-database writes closed.
+
+## Sprint 287 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_sprint287_next_block_reorientation.py tests\test_bernie_ui_dag_d5_first_slice_completion_review.py tests\test_sprint286_publication_state_correction.py -q
+git diff --check
+```
+
+Result: next-block/D5/publication-state suite `10 passed`. Final whitespace
+check pending closeout metadata.
+
+Sprint engine state: stop after Sprint 287 commit/push for Yuri approval before
+running Sprint 288. No deployment, production, readiness, telemetry,
+external-client, write, provider, memory, H15/trove, mutation, subscription,
+D5 expansion, or field-expansion gate is opened.
+
+---
+
+## Previous Closeout - Sprint 286
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 286 Publication State Correction |
+| Integrated through | Ariadne stale Sprint 285 publication wording correction and guard test |
+| Status | Published to `origin/master` and `handoff/current`; worktree clean |
+| Commit | `7e2dd6e7` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` |
+| Last updated | 2026-07-09 |
+
+## Sprint 286 What Changed
+
+- Corrected `AGENTS.md`, `orchestration/sprint_closeout.md`, and
+  `orchestration/integration_log.md` so Sprint 285 no longer appeared pending
+  after it had already been pushed.
+- Added `tests/test_sprint286_publication_state_correction.py` to guard the
+  current Sprint 285 closeout section against stale pending commit/push wording.
+
+## Sprint 286 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_sprint286_publication_state_correction.py tests\test_sprint_closeout_protocol.py -q
+git diff --check
+```
+
+Result: publication-state/protocol suite `8 passed`; whitespace check passed
+with known CRLF notices for touched orchestration Markdown files.
+
+Sprint engine state: continued to Sprint 287 next-block reorientation. No
+deployment, production, readiness, telemetry, external-client, write, provider,
+memory, H15/trove, mutation, subscription, or field-expansion gate was opened.
+
+---
+
+## Previous Closeout - Sprint 285
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 285 Default-On Monitoring Boundary |
 | Integrated through | Ariadne monitoring/readiness-boundary packet and guard tests |
 | Status | Published to `origin/master` and `handoff/current`; worktree clean |
@@ -59,11 +137,10 @@ git diff --check
 Result: monitoring/rollback/protocol suite `19 passed`; `node --check` and
 whitespace checks passed.
 
-Sprint engine state: pause before any deployment or production readiness claim.
-If continuing without approval, choose only a different already-approved
-non-runtime evidence track. No deployment, production, readiness, telemetry,
-external-client, write, provider, memory, H15/trove, mutation, subscription, or
-field-expansion gate is opened.
+Sprint engine state: paused before any deployment or production readiness claim.
+No deployment, production, readiness, telemetry, external-client, write,
+provider, memory, H15/trove, mutation, subscription, or field-expansion gate was
+opened.
 
 ---
 

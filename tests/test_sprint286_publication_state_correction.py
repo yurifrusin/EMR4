@@ -22,9 +22,10 @@ def test_sprint285_publication_state_is_not_left_pending():
     assert "| Final status | `## master...origin/master` |" in closeout
     assert "| `2c6cd514` | integrated and pushed |" in log
 
-    current_block = closeout.split("## Current Closeout", 1)[1].split(
+    sprint285_block = closeout.split("## Previous Closeout - Sprint 285", 1)[1].split(
         "## Previous Closeout - Sprint 284", 1
     )[0]
-    assert "pending commit/push" not in current_block.lower()
-    assert "pending push" not in current_block.lower()
+    sprint285_table = sprint285_block.split("## Sprint 285 What Changed", 1)[0]
+    assert "pending commit/push" not in sprint285_table.lower()
+    assert "pending push" not in sprint285_table.lower()
     assert "pending worker review" not in agent_text.lower()
