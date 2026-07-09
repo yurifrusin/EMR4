@@ -24,10 +24,50 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 278 Practitioner Directory Office Add-in GraphQL Switch Runtime |
-| Integrated through | Ariadne default-off runtime switch with Antigravity and DeepSeek PASS reviews |
+| Batch | Sprint 279 Practitioner Directory Office Add-in GraphQL Switch Route-Intercepted Evidence |
+| Integrated through | Ariadne route-intercepted Playwright evidence with DeepSeek PASS review |
 | Status | Integrated, verified, pending commit/push |
 | Last updated | 2026-07-09 |
+
+## Sprint 279 What Changed
+
+- Added `review/test_diary_graphql_practitioner_switch.py` with
+  route-intercepted Playwright evidence for the Office add-in diary practitioner
+  selector GraphQL switch.
+- Proved the committed default-off runtime sends zero GraphQL requests and uses
+  `GET /api/v1/practice/practitioners?activeOnly=true&limit=200`.
+- Proved the enabled path only through a test-harness-served copy of `diary.js`,
+  covering `FORBIDDEN`, `BAD_USER_INPUT`, transport failure, `practice: null`,
+  and `defaultLocation: null`.
+- Added
+  `docs/api-spine/practitioner-directory-office-addin-graphql-switch-route-intercepted-evidence.{json,md}`
+  plus static guard tests.
+- Recorded DeepSeek PASS review in
+  `orchestration/agent_inbox/codex/review-deepseek-sprint279-office-addin-graphql-switch-route-intercepted.md`.
+- Antigravity was invoked for Office add-in UX review but timed out. Claude was
+  stood down because no API contract, backend route, schema, resolver, or auth
+  model changed.
+
+## Sprint 279 Verification
+
+```powershell
+.venv\Scripts\python.exe -m pytest review\test_diary_graphql_practitioner_switch.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_office_addin_graphql_switch_route_intercepted.py tests\test_practitioner_directory_office_addin_graphql_switch_runtime.py tests\test_practitioner_directory_office_addin_graphql_consumer_switch_approval_packet.py tests\test_practitioner_directory_office_addin_graphql_mock_contract.py tests\test_practitioner_directory_graphql_release_boundary.py tests\test_sprint_closeout_protocol.py -q
+node --check docs\diary\diary.js
+git diff --check
+```
+
+Result: route-intercepted browser evidence `6 passed`; runtime/support/protocol
+suite `48 passed`; `node --check` and whitespace checks passed.
+
+Sprint engine state: continuing, but default-on Office add-in GraphQL traffic
+requires a separate approval packet before runtime enablement. Next recommended
+work is Sprint 280, a docs/tests-only default-on decision packet or explicit
+pause for Yuri approval.
+
+---
+
+## Previous Closeout - Sprint 278
 
 ## Sprint 278 What Changed
 

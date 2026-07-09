@@ -1,0 +1,91 @@
+{
+  "schema_version": "api_spine.practitioner_directory_office_addin_graphql_switch_route_intercepted_evidence.v1",
+  "date": "2026-07-09",
+  "sprint": 279,
+  "recorded_by": "ariadne",
+  "decision": "route_intercepted_office_addin_graphql_switch_evidence_added",
+  "source_runtime_commit": "c0fadf3a",
+  "target_surface": "docs/diary/diary.js",
+  "target_consumer": "office_addin_diary_booking_practitioner_selector",
+  "target_field": "Query.practice.practitioners",
+  "evidence_type": "route_intercepted_browser_tests",
+  "browser_evidence": {
+    "test_file": "review/test_diary_graphql_practitioner_switch.py",
+    "tests": [
+      "test_default_off_practitioner_switch_uses_rest_without_graphql_request",
+      "test_enabled_graphql_forbidden_response_falls_back_to_rest_selector_rows",
+      "test_enabled_graphql_bad_user_input_response_falls_back_to_rest_selector_rows",
+      "test_enabled_graphql_transport_failure_falls_back_to_single_rest_request",
+      "test_enabled_graphql_practice_null_returns_empty_without_rest_fallback",
+      "test_enabled_graphql_default_location_null_preserves_row_without_rest_fallback"
+    ],
+    "default_off_observed": {
+      "feature_gate_value": false,
+      "graphql_requests": 0,
+      "rest_requests": 1,
+      "rest_request": {
+        "method": "GET",
+        "path": "/api/v1/practice/practitioners",
+        "query": {
+          "activeOnly": "true",
+          "limit": "200"
+        },
+        "authorization_header_present": true
+      },
+      "selector_rows_from_rest": true,
+      "sensitive_display_canaries_absent": true,
+      "write_methods_observed": []
+    },
+    "enabled_fallback_observed": {
+      "feature_gate_flip_source": "test_harness_served_copy_only",
+      "runtime_source_file_changed": false,
+      "graphql_endpoint": "/api/v1/graphql",
+      "graphql_method": "POST",
+      "graphql_variables": {
+        "activeOnly": true,
+        "limit": 200,
+        "offset": 0
+      },
+      "graphql_forbidden_then_rest_fallback": true,
+      "graphql_bad_user_input_then_rest_fallback": true,
+      "graphql_transport_then_rest_fallback": true,
+      "graphql_practice_null_without_rest_fallback": true,
+      "graphql_default_location_null_preserves_row_without_rest_fallback": true,
+      "rest_fallback_request_count_per_case": 1,
+      "selector_rows_from_rest_fallback": true,
+      "write_methods_observed": []
+    }
+  },
+  "worker_reviews": {
+    "antigravity_consumer_ux": {
+      "used": false,
+      "artifact": null,
+      "verdict": "unavailable",
+      "reason": "agy.exe invocation timed out before returning review output"
+    },
+    "deepseek_static_security": {
+      "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint279-office-addin-graphql-switch-route-intercepted.md",
+      "verdict": "PASS"
+    },
+    "claude": {
+      "used": false,
+      "reason": "No API contract, resolver, backend route, schema, or runtime auth/error model changed."
+    }
+  },
+  "must_remain_false": {
+    "runtime_taskpane_switch_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "audit_write_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "mutation_or_subscription_ready": false,
+    "telemetry_endpoint_ready": false,
+    "schema_field_expansion_ready": false,
+    "graphql_live_traffic_by_default": false,
+    "default_on_ready": false
+  },
+  "next_recommended_work": "If route-intercepted evidence passes review, prepare a separate default-on decision packet or stop for Yuri approval before enabling live Office add-in GraphQL traffic."
+}
