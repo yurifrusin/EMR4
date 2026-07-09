@@ -1,0 +1,76 @@
+{
+  "schema_version": "bernie.ui_dag.d5_first_slice_completion_review.v1",
+  "date": "2026-07-09",
+  "reviewer": "ariadne",
+  "decision": "d5_first_slice_complete_pause_expansion",
+  "recommendation": "treat_the_approved_d5_backend_response_delivery_first_slice_as_complete_and_pause_before_any_expansion",
+  "implemented_backend_commit": "098b92a7",
+  "post_implementation_review_commit": "d2a0151b",
+  "response_shape_report_commit": "c029f27e",
+  "frontend_consumption_evidence_commit": "fac533de",
+  "approval_contract_commit": "b0e255c8",
+  "approval_expires_on": "2026-07-23",
+  "completed_scope": {
+    "single_backend_response_assembly_point": true,
+    "response_field": "staff_review.ui_view_model",
+    "display_only_view_model": true,
+    "server_session_snapshot_required": true,
+    "null_without_server_session_snapshot": true,
+    "existing_frontend_consumer_verified": true,
+    "frontend_javascript_expansion_performed": false,
+    "confirm_payload_unchanged": true,
+    "appointment_write_behavior_unchanged": true
+  },
+  "evidence": {
+    "backend_delivery_tests": "tests/test_bernie_route_outcome_events.py",
+    "post_implementation_review": "docs/bernie-ui-derived-state-dag-d5-post-implementation-review.json",
+    "response_shape_report": "scripts/bernie_ui_dag_d5_response_shape_report.py",
+    "frontend_consumption_evidence": "docs/bernie-ui-derived-state-dag-d5-frontend-consumption-evidence.json",
+    "route_intercepted_playwright_test": "review/test_diary_smoke.py::test_bernie_ui_view_model_consumes_backend_staff_review_field_without_js_expansion",
+    "api_spine_boundary": "orchestration/api_spine_adr.md"
+  },
+  "api_spine_classification": {
+    "surface": "read_display_response_contract",
+    "graphql_mutation": false,
+    "rest_command_mutation": false,
+    "write_authority": false,
+    "command_authority_source": "existing_signed_rest_confirm_command_only"
+  },
+  "closed_scope": {
+    "additional_backend_response_attachment_points": false,
+    "additional_route_delivery": false,
+    "graphql_delivery": false,
+    "graphql_mutation": false,
+    "provider_or_live_provider_wiring": false,
+    "access_ai_invocation": false,
+    "memory_rag_or_graphrag_wiring": false,
+    "h15_or_h_series_runtime_inputs": false,
+    "historical_diary_runtime_inputs": false,
+    "external_patient_client_exposure": false,
+    "confirm_payload_change": false,
+    "appointment_write_behavior_change": false,
+    "model_to_database_writes": false,
+    "frontend_javascript_expansion": false
+  },
+  "allowed_next_without_new_approval": [
+    "human_review_notes",
+    "documentation_cross_reference_cleanup",
+    "bounded_non_d5_sprint_with_closed_gates"
+  ],
+  "requires_separate_review": [
+    "any_d5_scope_expansion",
+    "additional_backend_response_attachment_point",
+    "additional_route_delivery",
+    "graphql_delivery",
+    "provider_or_live_provider_wiring",
+    "access_ai_invocation",
+    "memory_rag_or_graphrag_runtime_access",
+    "h15_or_h_series_runtime_input",
+    "historical_diary_runtime_input",
+    "confirm_payload_or_write_behavior_change",
+    "external_patient_client_exposure",
+    "frontend_javascript_expansion",
+    "model_to_database_write"
+  ],
+  "next_recommended_move": "leave_d5_closed_and_select_a_separate_bounded_non_d5_sprint_or_human_review_checkpoint"
+}
