@@ -286,10 +286,14 @@ def test_deferred_sdl_and_graphql_gates_remain_separate():
     ]:
         assert phrase in text
 
-    assert "type PracticeLocationBrief" not in sdl
+    assert "type PracticeLocationBrief" in sdl
+    assert "defaultLocation: PracticeLocationBrief" in sdl
     assert "PractitionerListResult" not in sdl
     assert "PractitionerConnection" not in sdl
-    assert "practitioners(activeOnly: Boolean = true): [Practitioner!]!" in sdl
+    assert (
+        "practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0): "
+        "[Practitioner!]!"
+    ) in sdl
 
 
 def test_stop_go_points_and_consumer_notes_are_documented():

@@ -4,6 +4,10 @@ Date: 2026-07-08
 
 Sprint: 229
 
+Updated: 2026-07-09, Sprint 266, after the REST consumer runtime evidence
+passed. The SDL drift items recorded in Sprint 229 are now resolved in the
+non-runtime SDL artifact; GraphQL resolver/runtime readiness remains false.
+
 ## Purpose
 
 This packet defines the canonical drift contract between the future REST
@@ -30,9 +34,9 @@ diary trove access, or write authority.
 | `canonical_projection_field_set_defined` | `true` |
 | `sensitive_exclusion_parity_defined` | `true` |
 | `shared_read_service_invariants_defined` | `true` |
-| `default_location_shape_status` | `known_and_blocked_drift` |
-| `graphql_pagination_shape_status` | `known_and_blocked_drift` |
-| `shared_read_service_exists` | `false` |
+| `default_location_shape_status` | `sdl_aligned_to_brief_shape` |
+| `graphql_pagination_shape_status` | `sdl_aligned_with_limit_offset` |
+| `shared_read_service_exists` | `true` |
 | `runtime_code_authorized` | `false` |
 | `rest_route_ready` | `false` |
 | `graphql_resolver_ready` | `false` |
@@ -68,26 +72,20 @@ The canonical field set is:
 Adding, removing, or renaming a field on only one surface is a drift defect. The
 model field `is_active` must never leak as `is_active` on either surface.
 
-## Known Blocked Drift
+## Resolved SDL Drift
 
-Two current SDL/document mismatches are accepted only while runtime gates remain
-blocked:
+Two former SDL/document mismatches recorded in Sprint 229 have been resolved in
+the non-runtime SDL artifact:
 
-1. `defaultLocation` in the Sprint 227 REST contract is `{id, name}` only, but
-   the current SDL points `Practitioner.defaultLocation` at full
-   `PracticeLocation`, whose fields are `id`, `name`, `displayOrder`, and
-   `active`. Before resolver code, this must be resolved by changing the SDL to
-   a restricted brief shape such as `PracticeLocationBrief`, or by another
-   explicitly reviewed equivalent that preserves `{id, name}` directory
-   minimality.
-2. GraphQL currently reserves
-   `practitioners(activeOnly: Boolean = true): [Practitioner!]!` without
-   pagination arguments. Before resolver code, the runtime path must either add
-   reviewed pagination arguments or prove a server-side capped list that cannot
-   truncate clients silently.
+1. `Practitioner.defaultLocation` now points to `PracticeLocationBrief`, whose
+   fields are exactly `id` and `name`.
+2. `Practice.practitioners` now declares reviewed `limit` and `offset`
+   arguments:
+   `practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0)`.
 
-These are `known_and_blocked_drift` findings. They do not authorize SDL changes,
-route code, resolver code, or runtime dependencies in this sprint.
+These SDL changes do not authorize GraphQL runtime dependencies, a GraphQL
+server, resolver code, production introspection, deployment readiness, or
+readiness-flag changes.
 
 ## Shared Read-Service Invariants
 
@@ -163,13 +161,14 @@ shapes that may contain booking-context-only identifiers.
 
 ## Current Non-Implementation Evidence
 
-Current source remains non-runtime for this surface:
+Current source remains non-runtime for GraphQL:
 
-- no `app/routers/practice.py`;
-- no `app/schemas/practice.py`;
-- no `app/services/practice/`;
-- no `class PractitionerOut`;
-- no `class PractitionerDefaultLocationOut`;
+- `app/routers/practice.py` exists for the REST route;
+- `app/schemas/practice.py` exists for the REST response contract;
+- `app/services/practice/practitioner_directory_read.py` exists as the shared
+  read-service data path;
+- `class PractitionerOut` exists;
+- `class PractitionerDefaultLocationOut` exists;
 - no `def list_practitioners`;
 - no `Query.practice.practitioners` resolver;
 - no GraphQL runtime dependency or server wiring;
@@ -189,12 +188,12 @@ Required static checks:
 1. `test_drift_contract_gate_verdict_keeps_runtime_blocked`
 2. `test_canonical_projection_is_exactly_five_fields`
 3. `test_sdl_practitioner_field_set_matches_projection`
-4. `test_default_location_shape_is_known_blocked_drift`
-5. `test_graphql_pagination_shape_is_known_blocked_drift`
-6. `test_shared_read_service_invariants_are_defined_but_not_implemented`
+4. `test_default_location_shape_is_sdl_aligned_to_brief`
+5. `test_graphql_pagination_shape_is_sdl_aligned`
+6. `test_shared_read_service_invariants_are_defined_and_implemented`
 7. `test_sensitive_exclusion_parity_is_canonical`
 8. `test_active_only_pagination_ordering_and_error_parity_defined`
-9. `test_current_code_has_no_route_schema_service_or_resolver`
+9. `test_current_code_has_rest_slice_but_no_graphql_resolver`
 10. `test_readiness_snapshot_remains_blocked`
 11. `test_closed_gates_preserved`
 12. `test_boundary_says_contract_is_not_runtime_or_production_readiness`
@@ -203,14 +202,10 @@ Required static checks:
 
 This packet does not authorize:
 
-- adding a REST practitioner directory route;
 - adding GraphQL resolvers or GraphQL mutations;
 - adding a GraphQL runtime dependency or server;
-- changing the SDL;
-- adding Pydantic runtime schemas;
-- adding `app/services/practice/` or a practitioner directory read service;
-- adding database queries, joins, indexes, migrations, read services, or query
-  services;
+- adding GraphQL runtime database queries, joins, indexes, migrations, read
+  services, or query services outside the existing shared REST read service;
 - changing the blocked readiness snapshot;
 - changing readiness flags to `true`;
 - provider calls or live provider gates;

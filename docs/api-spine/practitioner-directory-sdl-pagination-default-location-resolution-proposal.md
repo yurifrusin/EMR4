@@ -180,13 +180,13 @@ from Sprint 228. They are not implemented by this proposal.
 |---|---|
 | Sprint 227 REST proposal | Proposed `limit`, `offset`, `activeOnly`, empty-list behaviour, and `{id, name}` default-location shape mirror REST. |
 | Sprint 228 GraphQL resolver ownership plan | Sequencing remains REST route -> shared read service -> SDL/resolver; GraphQL remains a facade, not the first database path. |
-| Sprint 229 drift contract | This proposal resolves both `known_and_blocked_drift` findings into a preferred future SDL shape without making the SDL change. |
+| Sprint 229 drift contract | Sprint 266 implemented this proposal in the non-runtime SDL artifact, resolving both former drift findings while keeping resolver/runtime gates closed. |
 | Sprint 230 security/audit preflight | Authn/authz, tenancy, anti-enumeration, no audit write, and no-write/no-provider posture are unchanged. |
 
 ## Required Future Runtime/SDL Tests
 
-When Yuri explicitly approves SDL/runtime work, the implementation must add
-tests proving:
+Sprint 266 implemented the SDL portion of this proposal. Runtime resolver work
+must still add execution tests proving:
 
 1. `PracticeLocationBrief` exists and has exactly `id` and `name`;
 2. `Practitioner.defaultLocation` points to `PracticeLocationBrief`;
@@ -211,15 +211,15 @@ H15/H-series material.
 Required static checks:
 
 1. `test_sdl_resolution_gate_verdict_keeps_runtime_blocked`
-2. `test_current_sdl_default_location_drift_is_still_present`
-3. `test_current_sdl_pagination_drift_is_still_present`
+2. `test_current_sdl_default_location_is_aligned`
+3. `test_current_sdl_pagination_is_aligned`
 4. `test_proposal_recommends_practice_location_brief`
 5. `test_proposal_recommends_offset_pagination_args_matching_rest`
 6. `test_proposal_rejects_wrapper_and_connection_for_first_slice`
 7. `test_error_and_pagination_semantics_documented`
 8. `test_relationship_to_prior_contracts_documented`
 9. `test_future_runtime_sdl_tests_are_listed`
-10. `test_current_code_has_no_sdl_runtime_route_schema_service_or_resolver_changes`
+10. `test_current_code_has_sdl_and_rest_slice_but_no_graphql_resolver_changes`
 11. `test_readiness_snapshot_remains_blocked`
 12. `test_closed_gates_preserved`
 13. `test_boundary_says_proposal_is_not_runtime_or_production_readiness`
@@ -228,18 +228,11 @@ Required static checks:
 
 This packet does not authorize:
 
-- changing the SDL;
-- adding `PracticeLocationBrief` to the SDL;
-- changing `Practitioner.defaultLocation`;
-- adding `limit` or `offset` arguments to `Practice.practitioners`;
 - adding `PractitionerListResult` or `PractitionerConnection`;
-- adding a REST practitioner directory route;
 - adding GraphQL resolvers or GraphQL mutations;
 - adding a GraphQL runtime dependency or server;
-- adding Pydantic runtime schemas;
-- adding `app/services/practice/` or a practitioner directory read service;
-- adding database queries, joins, indexes, migrations, read services, or query
-  services;
+- adding GraphQL runtime database queries, joins, indexes, migrations, read
+  services, or query services outside the existing shared REST read service;
 - adding audit writes or audit migrations;
 - adding rate-limiting middleware;
 - adding field-encryption code;

@@ -91,7 +91,10 @@ def test_graphql_sdl_declares_practice_practitioners_without_mutation():
 
     assert "schema {\n  query: Query\n}" in sdl
     assert "type Mutation" not in sdl
-    assert "practitioners(activeOnly: Boolean = true): [Practitioner!]!" in practice
+    assert (
+        "practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0): "
+        "[Practitioner!]!"
+    ) in practice
 
 
 def test_graphql_practitioner_field_set_matches_rest_projection():
@@ -194,10 +197,10 @@ def test_rest_route_and_read_service_are_prerequisites():
 
     for phrase in [
         "GraphQL must not become the first path to the practitioner table",
-        "Yuri explicitly approves the Sprint 227 REST route implementation gate",
+        "REST consumer runtime evidence passed",
         "`GET /api/v1/practice/practitioners` is implemented, tested, merged",
         "A shared practitioner directory read service exists",
-        "future `app/services/practice/practitioner_directory_read.py`",
+        "`app/services/practice/practitioner_directory_read.py`",
         "GraphQL does not get an independent database path",
     ]:
         assert phrase in compact
@@ -245,6 +248,7 @@ def test_pagination_cost_depth_and_n_plus_one_plan_defined():
         "default page size | `50`",
         "maximum page size | `200`",
         "offset | default `0`, minimum `0`",
+        "SDL now reserves `activeOnly`, `limit`, and `offset`",
         "ordering | `last_name`, then `first_name`, then `id`",
         "N+1 prevention | pre-join default locations in the read service or batch-load by location id",
         "max depth | production runtime must enforce a global depth limit before public use",
@@ -275,11 +279,9 @@ def test_required_static_tests_and_closed_gates_are_preserved():
         assert test_name in compact
 
     for phrase in [
-        "adding a REST practitioner directory route",
         "adding GraphQL resolvers or GraphQL mutations",
         "adding a GraphQL runtime dependency or server",
-        "adding Pydantic runtime schemas",
-        "adding database queries, joins, indexes, migrations, read services, or query services",
+        "adding GraphQL runtime database queries, joins, indexes, migrations, read services, or query services outside the existing shared REST read service",
         "changing the blocked readiness snapshot",
         "changing readiness flags to `true`",
         "provider calls or live provider gates",

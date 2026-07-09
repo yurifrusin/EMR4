@@ -60,7 +60,7 @@ type Practice {
   rooms(locationId: ID): [Room!]!
   waitingAreas(locationId: ID): [WaitingArea!]!
   appointmentTypes: [AppointmentType!]!
-  practitioners(activeOnly: Boolean = true): [Practitioner!]!
+  practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0): [Practitioner!]!
   diaryTemplates(locationId: ID): [DiaryTemplate!]!
   roster(date: Date!, locationId: ID): [DiaryRosterEntry!]!
 }
@@ -70,6 +70,11 @@ type PracticeLocation {
   name: String!
   displayOrder: Int!
   active: Boolean!
+}
+
+type PracticeLocationBrief {
+  id: ID!
+  name: String!
 }
 
 type Room {
@@ -105,7 +110,7 @@ type Practitioner {
   displayName: String!
   roleLabel: String
   active: Boolean!
-  defaultLocation: PracticeLocation
+  defaultLocation: PracticeLocationBrief
 }
 
 type AppointmentType {

@@ -1,0 +1,40 @@
+{
+  "schema_version": "api_spine.practitioner_directory_graphql_sdl_alignment_evidence.v1",
+  "date": "2026-07-09",
+  "sprint": 266,
+  "recorded_by": "ariadne",
+  "prerequisite_evidence": "docs/api-spine/practitioner-directory-runtime-consumer-evidence.json",
+  "target_sdl": "docs/api-spine/graphql/appointment-diary-read.graphql",
+  "decision": "graphql_sdl_aligned_runtime_resolver_still_blocked",
+  "changes": {
+    "practice_practitioners_arguments": {
+      "activeOnly": "Boolean = true",
+      "limit": "Int = 50",
+      "offset": "Int = 0"
+    },
+    "practice_location_brief_added": true,
+    "practice_location_brief_fields": [
+      "id",
+      "name"
+    ],
+    "practitioner_default_location_type": "PracticeLocationBrief"
+  },
+  "resolved_former_drift": {
+    "default_location_shape_status": "sdl_aligned_to_brief_shape",
+    "graphql_pagination_shape_status": "sdl_aligned_with_limit_offset"
+  },
+  "must_remain_false": {
+    "graphql_resolver_ready": false,
+    "graphql_runtime_dependency_ready": false,
+    "graphql_server_ready": false,
+    "graphql_mutation_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_allowed_step": "practitioner_directory_graphql_runtime_gate_or_resolver_approval_packet",
+  "runtime_code_added": false
+}

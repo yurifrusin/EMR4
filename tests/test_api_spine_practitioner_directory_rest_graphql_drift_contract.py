@@ -108,9 +108,9 @@ def test_drift_contract_gate_verdict_keeps_runtime_blocked():
         "canonical_projection_field_set_defined": "true",
         "sensitive_exclusion_parity_defined": "true",
         "shared_read_service_invariants_defined": "true",
-        "default_location_shape_status": "known_and_blocked_drift",
-        "graphql_pagination_shape_status": "known_and_blocked_drift",
-        "shared_read_service_exists": "false",
+        "default_location_shape_status": "sdl_aligned_to_brief_shape",
+        "graphql_pagination_shape_status": "sdl_aligned_with_limit_offset",
+        "shared_read_service_exists": "true",
         "runtime_code_authorized": "false",
         "rest_route_ready": "false",
         "graphql_resolver_ready": "false",
@@ -133,49 +133,53 @@ def test_canonical_projection_is_exactly_five_fields():
 
 def test_sdl_practitioner_field_set_matches_projection():
     assert _field_names("Practitioner") == CANONICAL_FIELDS
-    assert "practitioners(activeOnly: Boolean = true): [Practitioner!]!" in _type_body(
-        "Practice"
-    )
+    assert (
+        "practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0): "
+        "[Practitioner!]!"
+    ) in _type_body("Practice")
     assert "type Mutation" not in _read(SDL)
 
 
-def test_default_location_shape_is_known_blocked_drift():
+def test_default_location_shape_is_sdl_aligned_to_brief():
     text = _read(CONTRACT)
     compact = _compact(text)
-    sdl_location_fields = _field_names("PracticeLocation")
+    sdl_location_fields = _field_names("PracticeLocationBrief")
 
-    assert sdl_location_fields == {"id", "name", "displayOrder", "active"}
+    assert sdl_location_fields == {"id", "name"}
+    assert "defaultLocation: PracticeLocationBrief" in _type_body("Practitioner")
     for phrase in [
-        "`defaultLocation` in the Sprint 227 REST contract is `{id, name}` only",
-        "current SDL points `Practitioner.defaultLocation` at full `PracticeLocation`",
-        "`PracticeLocationBrief`",
-        "`known_and_blocked_drift` findings",
+        "`Practitioner.defaultLocation` now points to `PracticeLocationBrief`",
+        "fields are exactly `id` and `name`",
+        "`sdl_aligned_to_brief_shape`",
     ]:
         assert phrase in compact
 
 
-def test_graphql_pagination_shape_is_known_blocked_drift():
+def test_graphql_pagination_shape_is_sdl_aligned():
     text = _read(CONTRACT)
     compact = _compact(text)
     practice = _type_body("Practice")
 
-    assert "practitioners(activeOnly: Boolean = true): [Practitioner!]!" in practice
-    assert "limit" not in practice.split("practitioners(", 1)[1].split(")", 1)[0]
-    assert "offset" not in practice.split("practitioners(", 1)[1].split(")", 1)[0]
+    assert (
+        "practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0): "
+        "[Practitioner!]!"
+    ) in practice
+    args = practice.split("practitioners(", 1)[1].split(")", 1)[0]
+    assert "limit: Int = 50" in args
+    assert "offset: Int = 0" in args
     for phrase in [
-        "without pagination arguments",
-        "add reviewed pagination arguments",
-        "server-side capped list",
-        "cannot truncate clients silently",
+        "`Practice.practitioners` now declares reviewed `limit` and `offset`",
+        "`practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0)`",
+        "`sdl_aligned_with_limit_offset`",
     ]:
         assert phrase in compact
 
 
-def test_shared_read_service_invariants_are_defined_but_not_implemented():
+def test_shared_read_service_invariants_are_defined_and_implemented():
     text = _read(CONTRACT)
 
     for phrase in [
-        "future `app/services/practice/practitioner_directory_read.py`",
+        "`app/services/practice/practitioner_directory_read.py` exists",
         "`Practitioner.practice_id == viewer.practice_id`",
         "`displayName` derivation",
         "`activeOnly=true` default filtering",
@@ -283,13 +287,9 @@ def test_closed_gates_preserved():
     compact = _compact(_read(CONTRACT))
 
     for phrase in [
-        "adding a REST practitioner directory route",
         "adding GraphQL resolvers or GraphQL mutations",
         "adding a GraphQL runtime dependency or server",
-        "changing the SDL",
-        "adding Pydantic runtime schemas",
-        "adding `app/services/practice/` or a practitioner directory read service",
-        "adding database queries, joins, indexes, migrations, read services, or query services",
+        "adding GraphQL runtime database queries, joins, indexes, migrations, read services, or query services outside the existing shared REST read service",
         "changing the blocked readiness snapshot",
         "changing readiness flags to `true`",
         "provider calls or live provider gates",

@@ -99,24 +99,29 @@ def test_sdl_resolution_gate_verdict_keeps_runtime_blocked():
     }
 
 
-def test_current_sdl_default_location_drift_is_still_present():
+def test_current_sdl_default_location_is_aligned():
     sdl = _read(SDL)
 
-    assert _field_line("Practitioner", "defaultLocation") == "defaultLocation: PracticeLocation"
-    assert "type PracticeLocationBrief" not in sdl
+    assert _field_line("Practitioner", "defaultLocation") == "defaultLocation: PracticeLocationBrief"
+    assert "type PracticeLocationBrief" in sdl
     assert set(
         line.strip().split(":", 1)[0]
-        for line in _type_body("PracticeLocation").splitlines()
+        for line in _type_body("PracticeLocationBrief").splitlines()
         if ":" in line
-    ) == {"id", "name", "displayOrder", "active"}
+    ) == {"id", "name"}
 
 
-def test_current_sdl_pagination_drift_is_still_present():
+def test_current_sdl_pagination_is_aligned():
     practitioners = _field_line("Practice", "practitioners")
 
-    assert practitioners == "practitioners(activeOnly: Boolean = true): [Practitioner!]!"
+    assert practitioners == (
+        "practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0): "
+        "[Practitioner!]!"
+    )
     args = practitioners.split("(", 1)[1].split(")", 1)[0]
-    for arg in ["limit", "offset", "first", "after", "last", "before"]:
+    for arg in ["activeOnly", "limit", "offset"]:
+        assert arg in args
+    for arg in ["first", "after", "last", "before"]:
         assert arg not in args
     assert "PractitionerListResult" not in _read(SDL)
     assert "PractitionerConnection" not in _read(SDL)
@@ -208,7 +213,7 @@ def test_relationship_to_prior_contracts_documented():
         "Authn/authz, tenancy, anti-enumeration, no audit write",
     ]:
         assert phrase in compact
-    assert "known_and_blocked_drift" in _read(DRIFT_CONTRACT)
+    assert "former SDL/document mismatches" in _read(DRIFT_CONTRACT)
     assert "default-location join filters same-practice active locations only" in _read(
         SECURITY_PREFLIGHT
     )
@@ -234,7 +239,7 @@ def test_future_runtime_sdl_tests_are_listed():
         assert phrase in text
 
 
-def test_current_code_has_rest_slice_but_no_sdl_or_graphql_resolver_changes():
+def test_current_code_has_sdl_and_rest_slice_but_no_graphql_resolver_changes():
     app_text = _app_python_text()
 
     assert (APP / "routers" / "practice.py").exists()
@@ -259,7 +264,8 @@ def test_current_code_has_rest_slice_but_no_sdl_or_graphql_resolver_changes():
         "from ariadne",
     ]:
         assert fragment not in app_text
-    assert "type PracticeLocationBrief" not in _read(SDL)
+    assert "type PracticeLocationBrief" in _read(SDL)
+    assert "defaultLocation: PracticeLocationBrief" in _read(SDL)
     assert "PractitionerListResult" not in _read(SDL)
     assert "PractitionerConnection" not in _read(SDL)
 
@@ -279,17 +285,10 @@ def test_closed_gates_preserved():
     compact = _compact(_read(PROPOSAL))
 
     for phrase in [
-        "changing the SDL",
-        "adding `PracticeLocationBrief` to the SDL",
-        "changing `Practitioner.defaultLocation`",
-        "adding `limit` or `offset` arguments to `Practice.practitioners`",
         "adding `PractitionerListResult` or `PractitionerConnection`",
-        "adding a REST practitioner directory route",
         "adding GraphQL resolvers or GraphQL mutations",
         "adding a GraphQL runtime dependency or server",
-        "adding Pydantic runtime schemas",
-        "adding `app/services/practice/` or a practitioner directory read service",
-        "adding database queries, joins, indexes, migrations, read services, or query services",
+        "adding GraphQL runtime database queries, joins, indexes, migrations, read services, or query services outside the existing shared REST read service",
         "adding audit writes or audit migrations",
         "adding rate-limiting middleware",
         "adding field-encryption code",

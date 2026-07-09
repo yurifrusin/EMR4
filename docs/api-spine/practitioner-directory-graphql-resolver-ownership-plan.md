@@ -4,6 +4,10 @@ Date: 2026-07-08
 
 Sprint: 228
 
+Updated: 2026-07-09, Sprint 266, after REST consumer runtime evidence passed
+and the non-runtime SDL was aligned to the REST practitioner-directory
+projection. GraphQL runtime resolver/server code remains blocked.
+
 ## Purpose
 
 This packet defines a static ownership and authorization plan for the future
@@ -57,9 +61,10 @@ service gate has been resolved.
 
 GraphQL must not become the first path to the practitioner table.
 
-The future resolver may proceed only after:
+As of Sprint 266, the REST route and named internal REST consumer evidence are
+in place. The future resolver may proceed only after:
 
-1. Yuri explicitly approves the Sprint 227 REST route implementation gate.
+1. REST consumer runtime evidence passed.
 2. `GET /api/v1/practice/practitioners` is implemented, tested, merged, and
    still excludes sensitive fields.
 3. A shared practitioner directory read service exists and is used by the REST
@@ -75,12 +80,12 @@ Until those events happen, GraphQL resolver work remains plan-only and
 | Concern | Future owner |
 |---|---|
 | SDL of record | `docs/api-spine/graphql/appointment-diary-read.graphql` |
-| Field | `Practice.practitioners(activeOnly: Boolean = true): [Practitioner!]!` |
+| Field | `Practice.practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0): [Practitioner!]!` |
 | Resolver module | future `app/graphql/resolvers/practice.py` |
-| Shared data path | future `app/services/practice/practitioner_directory_read.py` |
-| REST reference | future `GET /api/v1/practice/practitioners` |
+| Shared data path | existing `app/services/practice/practitioner_directory_read.py` |
+| REST reference | existing `GET /api/v1/practice/practitioners` |
 | GraphQL type | runtime subset of SDL `type Practitioner` |
-| Default-location projection | display-safe `{id, name}` only, not the full SDL `PracticeLocation` shape |
+| Default-location projection | display-safe `PracticeLocationBrief { id, name }` only, not the full SDL `PracticeLocation` shape |
 
 The resolver must be a facade over the shared read service. It must not call the
 REST route over HTTP, import REST router modules, import future REST Pydantic
@@ -167,9 +172,9 @@ If the location is absent, inactive, or from another practice, GraphQL returns
 
 ## Pagination, Cost, And Depth Plan
 
-The current SDL reserves only `activeOnly`; before runtime resolver work, the
-field must either gain explicit pagination arguments or be server-capped by the
-shared read service:
+The SDL now reserves `activeOnly`, `limit`, and `offset`; before runtime
+resolver work, the resolver must enforce those bounds through the shared read
+service:
 
 | Rule | Plan value |
 |---|---|
@@ -210,12 +215,11 @@ GraphQL server and resolver code.
 
 This packet does not authorize:
 
-- adding a REST practitioner directory route;
 - adding GraphQL resolvers or GraphQL mutations;
 - adding a GraphQL runtime dependency or server;
 - adding Pydantic runtime schemas;
-- adding database queries, joins, indexes, migrations, read services, or query
-  services;
+- adding GraphQL runtime database queries, joins, indexes, migrations, read
+  services, or query services outside the existing shared REST read service;
 - changing the blocked readiness snapshot;
 - changing readiness flags to `true`;
 - provider calls or live provider gates;

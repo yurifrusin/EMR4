@@ -24,43 +24,42 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 265 Practitioner Directory Runtime Consumer Evidence |
-| Integrated through | Ariadne browser/backend evidence with DeepSeek PASS review |
+| Batch | Sprint 266 Practitioner Directory GraphQL SDL Alignment |
+| Integrated through | Ariadne SDL/test alignment with DeepSeek PASS review |
 | Status | Integrated, verified, pending commit/push |
 | Last updated | 2026-07-09 |
 
-## Sprint 265 What Changed
+## Sprint 266 What Changed
 
-- Added route-intercepted Playwright evidence in `review/test_diary_smoke.py`
-  for the approved Diary booking practitioner selector/list consumer.
+- Updated `docs/api-spine/graphql/appointment-diary-read.graphql` so
+  practitioner-directory GraphQL no longer carries the two known SDL drift
+  points.
+- Added `PracticeLocationBrief { id, name }`.
+- Changed `Practitioner.defaultLocation` to `PracticeLocationBrief`.
+- Changed `Practice.practitioners` to include
+  `activeOnly: Boolean = true`, `limit: Int = 50`, and `offset: Int = 0`.
 - Added
-  `docs/api-spine/practitioner-directory-runtime-consumer-evidence.json`.
+  `docs/api-spine/practitioner-directory-graphql-sdl-alignment-evidence.json`.
 - Added
-  `docs/api-spine/practitioner-directory-runtime-consumer-evidence.md`.
-- Added
-  `tests/test_practitioner_directory_runtime_consumer_evidence.py`.
-- Added DeepSeek Sprint 265 evidence review artifact.
-- Proved the browser calls
-  `GET /api/v1/practice/practitioners?activeOnly=true&limit=200` through the
-  existing bearer-token `apiFetch` path.
-- Proved route UUID/display-name/default-location rendering, legacy AHPRA
-  fallback for unmapped older columns, route 401 fail-closed auth-banner/token
-  clearing, smoke-mode no-route fallback, no write methods, and 200 returned
-  rows rendering into the selector.
-- Reconfirmed the backend route contract for auth, tenancy, active-only policy,
-  default-location scoping, sensitive-field absence, and `limit <= 200`.
+  `docs/api-spine/practitioner-directory-graphql-sdl-alignment-evidence.md`.
+- Added `tests/test_practitioner_directory_graphql_sdl_alignment_evidence.py`.
+- Updated the Sprint 229 drift contract, Sprint 228 GraphQL resolver ownership
+  plan, Sprint 231 SDL proposal, and related guard tests from "known blocked
+  drift" to "SDL aligned; runtime resolver still blocked".
+- Added DeepSeek Sprint 266 review artifact.
 
 Worker mix:
 
-- DeepSeek via direct Codex `deepseek-worker`: PASS; requested the browser
-  endpoint/auth-header, 401, smoke fallback, 200-cap, tenancy, no-sensitive,
-  no-write/no-provider/no-memory evidence captured in this sprint.
+- DeepSeek via direct Codex `deepseek-worker`: PASS; confirmed SDL alignment is
+  the safe next block and that resolver/server/dependency work should remain a
+  separate gate because this repo has no existing GraphQL runtime pattern.
 
 Boundary:
 
-- Evidence only for the one named internal runtime consumer.
-- No route/schema/service behavior change, no global readiness snapshot change,
-  no external-readiness DAG change, no SDL or GraphQL resolver, no provider/
+- SDL/document/test alignment only.
+- No GraphQL runtime dependency, no GraphQL endpoint/server, no GraphQL
+  resolver, no global readiness snapshot change, no external-readiness DAG
+  readiness change, no provider/
   Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime
   import, no historical diary/local_data import, no external patient-client
   exposure, no write authority, no deployment claim, and no production-readiness
@@ -69,21 +68,34 @@ Boundary:
 Verification:
 
 ```powershell
-node --check docs\diary\diary.js
-.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_practitioner_directory_route_data_populates_booking_selector review\test_diary_smoke.py::test_practitioner_directory_selector_keeps_legacy_fallback_for_unmapped_ahpra review\test_diary_smoke.py::test_practitioner_directory_401_fails_closed_with_auth_banner review\test_diary_smoke.py::test_practitioner_directory_smoke_mode_does_not_call_route_and_uses_template_fallback review\test_diary_smoke.py::test_practitioner_directory_limit_200_cap_renders_all_returned_rows -q
-.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_runtime_consumer_evidence.py tests\test_practitioner_directory_internal_runtime_consumer_wiring.py tests\test_practitioner_directory_internal_runtime_consumer_approval.py -q
-.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_sdl_alignment_evidence.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
 ```
 
-Result: JS syntax check passed; practitioner-directory Playwright evidence
-slice `5 passed`; evidence/wiring/approval suite `18 passed`; backend route
-suite `31 passed` after resetting the disposable test schema.
+Result: focused Sprint 266 SDL/contract suite `52 passed` after resetting the
+disposable test schema and running serially; API-spine artifact suite
+`31 passed`.
 
-Implementation commit: integrating commit for Sprint 265.
+Implementation commit: integrating commit for Sprint 266.
 
-Sprint engine state: continuing to practitioner-directory GraphQL SDL/resolver
-alignment. GraphQL readiness remains false until that work is implemented and
-verified.
+Sprint engine state: continuing to a GraphQL runtime/resolver approval gate
+before adding dependency/server/resolver code.
+
+---
+
+## Previous Closeout - Sprint 265
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 265 Practitioner Directory Runtime Consumer Evidence |
+| Integrated through | Ariadne browser/backend evidence with DeepSeek PASS review |
+| Status | Integrated, verified, and pushed |
+| Last updated | 2026-07-09 |
+
+Sprint 265 added route-intercepted Playwright and backend evidence for the
+approved Diary booking practitioner selector/list REST consumer, proving
+bearer-token route use, route 401 fail-closed behavior, smoke/legacy fallback,
+200 returned-row rendering, and no adjacent gate openings. Commit: `63201c65`.
 
 ---
 
