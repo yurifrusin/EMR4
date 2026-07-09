@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Sprint 290 D5 reopening decision packet is published on `master` and `handoff/current` at `e74c2a22`. It records the post-Sprint-289 decision not to reopen D5 runtime yet, recommends Sprint 291 safe-copy matrix and Sprint 292 draft-only approval payload, and keeps all runtime/provider/write/readiness gates closed. Sprint 290 also retires the old unused local DeepSeek worker-agent definition at `C:\Users\sarashera\.codex\agents\deepseek-worker.toml`; historical DeepSeek review artifacts remain preserved as evidence, but the current packet no longer depends on a DeepSeek worker lane. No D5 expansion, route delivery, frontend JavaScript change, provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series, historical diary runtime input, GraphQL delivery/readiness, external patient client, confirm payload/write behavior change, model-to-database write, deployment, production, telemetry, or global readiness gate is opened. |
-| **Next recommended work** | Stop for Yuri direction or continue only into the recommended non-runtime Sprint 291 safe-copy matrix. Any runtime expansion, D5 reopening, GraphQL/default-on readiness work, telemetry, deployment, production readiness, provider/memory/H15/trove access, external-client exposure, or write behavior change requires separate explicit approval. |
+| **Current active track** | Sprint 289 view-model contract cross-reference is complete locally and pending commit/push. Yuri approved Sprints 288-289 as a non-runtime Bernie UI derived-state post-D5 checkpoint block. Sprint 288 post-D5 next-slice inventory is published at `4ccea66a15c41b92f7a91a5afc180667ddd04cc4` on `master` and `handoff/current`; Sprint 287 next-block reorientation is published at `ed012044`; Sprint 286 publication-state correction is published at `7e2dd6e7`. Sprint 289 adds `docs/bernie-ui-derived-state-view-model-contract-cross-reference.{json,md}`, guard tests, and Claude/Antigravity/DeepSeek review artifacts. It completes the approved 288-289 block and stops for Yuri direction. No D5 expansion, route delivery, frontend JavaScript change, provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series, historical diary runtime input, GraphQL delivery/readiness, external patient client, confirm payload/write behavior change, model-to-database write, deployment, production, telemetry, or global readiness gate is opened. |
+| **Next recommended work** | After Sprint 289 commit/push and Pushover, stop for Yuri direction. Any runtime expansion, D5 reopening, GraphQL/default-on readiness work, telemetry, deployment, production readiness, provider/memory/H15/trove access, external-client exposure, or write behavior change requires separate explicit approval. |
 
 2026-07-08 Yuri proposed applying DAG-style conditioning dependencies to the
 Bernie UI so a few canonical state nodes, especially confirmation state, can
@@ -583,7 +583,7 @@ Codex role separation:
 - Codex workers may submit plans/reviews to Codex's inbox, but Ariadne remains
   responsible for final integration. Ariadne must not treat an
   orchestrator-created Codex plan as proof that a separate worker has submitted.
-- Claude and Antigravity/Gemini are the preferred sprint-worker
+- Claude, Antigravity/Gemini, and DeepSeek are the preferred sprint-worker
   lanes when their quota/tooling is healthy. Claude may do real implementation
   work, not just planning, on `claude/current`; use Sonnet for ordinary
   implementation/review and reserve Opus/Fable or other high-cost Claude modes
@@ -591,21 +591,24 @@ Codex role separation:
   the window burn. Antigravity is not limited to UX: use Gemini for independent
   backend/domain-policy critique, test design, fixture/harness work,
   architecture dissent, and small bounded implementation lanes when it has clear
-  file ownership and must submit a tangible repo artifact. DeepSeek Flash was a
-  historical cheap replacement or supplement lane, but the old local
-  `deepseek-worker` agent definition was retired in Sprint 290 and must not be
-  used for new sprint lanes unless Yuri explicitly approves a fresh setup.
+  file ownership and must submit a tangible repo artifact. DeepSeek Flash is
+  the preferred cheap replacement or supplement lane for bounded
+  review/test/backend work.
 - At the start of every non-trivial sprint, Ariadne must check and record
   Claude and Antigravity availability/quota state before deciding the worker
-  mix. "Three lane sprint" is no longer a default after Sprint 290; use only
-  distinct available lanes with tangible artifact or veto surfaces.
+  mix. "Three lane sprint" means Claude + Antigravity + DeepSeek by default,
+  not three native Codex subagents.
 - At the start of every sprint, Ariadne must explicitly announce whether
-  Claude and Antigravity will be used, and must name the invocation
-  channel/mode for each lane: Claude through the headless Claude CLI driver and
-  Antigravity through the Antigravity `agy.exe` CLI channel. If a lane is not
-  used, state why before proceeding. Do not substitute with DeepSeek unless a
-  new worker-agent definition has been explicitly approved. Sprint closeout must
-  repeat the actual worker mix, invocation modes, and any substitutions.
+  Claude, Antigravity, and DeepSeek will be used, and must name the invocation
+  channel/mode for each lane: Claude through the headless Claude CLI driver,
+  Antigravity through the Antigravity `agy.exe` CLI channel, and DeepSeek
+  through direct Codex `deepseek-worker` spawning. If a lane is not used, state
+  why before proceeding. If Claude or Antigravity is unavailable because of
+  usage limits, quota recovery, tooling failure, or silence in the sprint
+  window, announce that and spawn an extra DeepSeek worker to cover the missing
+  role unless the sprint is tiny and the closeout records why substitution would
+  add more risk than value. Sprint closeout must repeat the actual worker mix,
+  invocation modes, and any substitutions.
 - Worker enumeration is not itself evidence. Before dispatch, Ariadne must
   classify each proposed lane as one of: implementation owner, independent
   review/veto, consumer/product review, mechanical safety sweep, or intentionally
@@ -615,30 +618,49 @@ Codex role separation:
   explicit no-go finding. If a sprint is too small, too serial, or too tightly
   coupled for such a lane, say so and keep it Ariadne-local; do not spawn or
   announce workers just to satisfy ceremony.
-- The same sprint-start ritual must check Claude and Antigravity
+- The same sprint-start ritual must check Claude, Antigravity, and DeepSeek
   worker-state cleanliness before progressing. For CLI lanes, run/report
   `git status --short --branch` in the Claude and Antigravity worktrees and
   clean stale untracked artifacts from previous sprints before dispatching new
   work. Preserve or integrate any current-sprint artifact before cleanup; never
-  discard unclear user-authored work. After cleanup, re-announce the worker
-  cleanliness state.
-- DeepSeek Flash via `codex-deepseek-bridge` is retired for new worker lanes as
-  of Sprint 290. Historical reproduction/setup details remain in
+  discard unclear user-authored work. For DeepSeek, report the direct-spawned
+  lane count and whether any spawned lane has unintegrated output or needs to
+  be closed. After cleanup, re-announce the worker cleanliness state.
+- The sprint-start announcement must also state how many DeepSeek worker lanes
+  are already spawned/open, which are active versus completed or idle, and
+  whether an existing DeepSeek lane will be reused. Close completed or unused
+  DeepSeek lanes once their outputs are captured before spawning fresh lanes, so
+  the worker pool stays available. Reuse an open related DeepSeek lane for
+  follow-on review when its context is still coherent; spawn a new lane only
+  when the existing lane is closed, stale, overloaded, or contextually wrong.
+- DeepSeek Flash via `codex-deepseek-bridge` may replace or supplement Claude,
+  Antigravity, or Codex worker capacity for bounded read-heavy reviews and
+  implementation lanes when Ariadne stays as orchestrator. Use Flash first; consider
+  DeepSeek Pro only when reasoning depth, not diff hygiene, is the bottleneck.
+  Ariadne may spawn as many DeepSeek Flash workers as fit the sprint
+  requirements, provided every worker has a separate branch, narrow role, clear
+  file ownership or review boundary, explicit merge criteria, and Ariadne-run
+  verification. Reproduction/setup details live in
   `docs/alternate-pc-handover.md`; controlled DeepSeek/OpenAI model-picker
   switching and Ariadne-v2 safety rules live in
   `docs/codex-model-switching-deepseek.md`.
 - If Claude is unavailable, quota-capped, recuperating, or fails to submit a
-  usable plan in the current sprint window, Ariadne should continue with
-  available approved lanes or keep the sprint Ariadne-local with that reason
-  recorded. Do not replace Claude with DeepSeek unless Yuri explicitly
-  reinstalls and approves a fresh worker setup.
+  usable plan in the current sprint window, Ariadne should automatically replace
+  the Claude lane with a second DeepSeek Flash worker rather than waiting for
+  Yuri. Treat this as the default fallback for backend/test/review lanes, not an
+  exception. The replacement DeepSeek lane must have a separate branch, a clear
+  role such as implementation vs adversarial review, non-overlapping file
+  ownership where practical, and Ariadne-run verification before integration.
 - If Antigravity is unavailable, quota-capped, recuperating, silent without a
   durable artifact, or blocked by CLI/app trouble in the current sprint window,
-  Ariadne should use a bounded Ariadne-local task or another explicitly
-  approved lane before using a native Codex subagent.
-- The old configured `deepseek-worker` subagent, sometimes nicknamed `Shen`, was
-  deleted locally in Sprint 290. Treat any future `deepseek-worker` reference as
-  historical unless a fresh worker definition and approval are present.
+  Ariadne should replace the Antigravity lane with DeepSeek Flash or a bounded
+  Ariadne-local task before using a native Codex subagent.
+- The configured `deepseek-worker` subagent may appear as nickname `Shen`.
+  Verify identity from runtime metadata, not self-description: the current
+  working setup records `agent_role=deepseek-worker`,
+  `model_provider=deepseek_bridge`, and turn-context `model=deepseek-flash`.
+  If Shen says it is "OpenAI", that usually reflects the generic Codex base
+  instructions rather than the actual upstream model provider.
 - Ariadne-v2 DeepSeek Pro orchestration is currently blocked in the
   ChatGPT-account Codex Desktop GUI: on 2026-07-04 the GUI showed `DeepSeek
   Pro` but rejected prompts with "The 'deepseek-pro' model is not supported
@@ -651,12 +673,13 @@ Codex role separation:
   `safety/ariadne-v1-before-deepseek-20260704-182049` at `9d74c84`.
 - Native OpenAI/Codex subagents remain part of the toolbox, but they are not the
   default worker-lane mix. Use them as fallback/integration helpers when Claude
-  or Antigravity is recuperating/unavailable, when the work is tiny and tightly
-  coupled to Ariadne's integration pass, or when Codex-specific tooling is
-  materially better. When usage credit is healthy, Ariadne may run Claude,
-  Antigravity, and explicitly approved Codex subagents together on one sprint,
-  or split truly independent work into parallel sprints, provided each lane has
-  disjoint ownership, verification, and an explicit integration gate.
+  or Antigravity is recuperating/unavailable, when more DeepSeek capacity is not
+  sufficient, when the work is tiny and tightly coupled to Ariadne's integration
+  pass, or when Codex-specific tooling is materially better. When OpenAI usage
+  credit is healthy, Ariadne may run Claude, Antigravity, DeepSeek, and Codex
+  subagents together on one sprint, or split truly independent work into
+  parallel sprints, provided each lane has disjoint ownership, verification, and
+  an explicit integration gate.
 
 ### Orchestration changelog / protocol alerts
 
@@ -773,10 +796,10 @@ Codex is the default orchestration agent for EMR4. This means:
   protocol correction from July 2026 after single-agent drift: do not let
   Ariadne-only momentum redefine sprint direction without the multi-agent
   stream. If Claude or Antigravity is unavailable, quota-capped, recuperating,
-  or fails to submit a durable artifact in the sprint window, continue with
-  approved available lanes or keep the work Ariadne-local with the reason
-  recorded. Tiny mechanical tasks may stay Ariadne-local, but planned sprint
-  work should record the worker-lane mix and any substitutions.
+  or fails to submit a durable artifact in the sprint window, replace that lane
+  with an extra DeepSeek Flash worker until the lane recovers. Tiny mechanical
+  tasks may stay Ariadne-local, but planned sprint work should record the
+  worker-lane mix and any substitutions.
 - "Ariadne plus three" is a default search for useful parallelism, not a quota
   to fill. Sprint prep must name the intended gain from each worker and the
   artifact or veto surface expected from that lane. Adjust sprint size and block
@@ -786,24 +809,33 @@ Codex is the default orchestration agent for EMR4. This means:
   safety review, and mechanical sweeps can proceed independently. If maximum
   worker usage would produce overlapping edits, repeated prose, or no
   integrable evidence, use fewer lanes and record that decision.
-- Start-of-sprint updates must name Claude and Antigravity explicitly. For each
-  lane, say either "using" or "not using" with the reason, and name the
-  mode/channel: Claude via `scripts\drive_agent_headless.py` and the Claude CLI,
-  Antigravity via `agy.exe --add-dir ... --print`. DeepSeek is retired for new
-  lanes unless Yuri explicitly approves a fresh worker definition.
-- Start-of-sprint updates must also announce whether the Claude and Antigravity
-  worker states are clean. Check the Claude and Antigravity CLI
+- Start-of-sprint updates must name all three preferred worker lanes explicitly:
+  Claude, Antigravity, and DeepSeek. For each lane, say either "using" or "not
+  using" with the reason, and name the mode/channel: Claude via
+  `scripts\drive_agent_headless.py` and the Claude CLI, Antigravity via
+  `agy.exe --add-dir ... --print`, and DeepSeek via direct Codex
+  `deepseek-worker` spawning. Usage-limit or quota unavailability for Claude or
+  Antigravity must be paired with an announced extra DeepSeek substitution
+  unless the sprint is tiny and the reason for no substitution is recorded.
+- Start-of-sprint updates must also announce whether the Claude, Antigravity,
+  and DeepSeek worker states are clean. Check the Claude and Antigravity CLI
   worktrees with `git status --short --branch`; if either contains stale
   untracked artifacts from previous sprints, clean or archive/integrate them
   before dispatching new work, then re-run status and re-announce cleanliness.
-- If DeepSeek is ever explicitly reinstated, report its active/completed lane
-  state, unintegrated outputs, and close/reuse decision before use.
+  Because DeepSeek is normally direct-spawned inside Codex rather than a durable
+  worker worktree, report its active/completed lane state, unintegrated outputs,
+  and close/reuse decision as the DeepSeek cleanliness check.
+- The same update must include the current DeepSeek lane count and reuse/cleanup
+  decision: active lanes to keep, completed/idle lanes to close, and whether a
+  related existing lane can be reused instead of spawning a fresh worker.
 - Preferred cost posture while OpenAI/Codex usage is scarce: first check
   Claude's state, let Claude implement while quota is healthy, use
   Antigravity/Gemini for an independent domain/product/test-design lane when
-  Gemini quota is available, and keep narrower Ariadne-local work when no
-  approved extra lane is available. Reserve native Codex subagents for
-  fallback, integration-adjacent, or Codex-tooling-specific work.
+  Gemini quota is available, and use as many DeepSeek Flash workers as the
+  sprint boundary can safely absorb for cheap bounded implementation/review
+  lanes. Escalate to DeepSeek Pro for reasoning-heavy worker tasks, and reserve
+  native Codex subagents for fallback, integration-adjacent, or
+  Codex-tooling-specific work.
 - Each parallel workstream must have a narrow owner, file boundary, verification
   plan, and merge criteria before coding starts.
 - The live board is [`orchestration/parallel_workstreams.md`](orchestration/parallel_workstreams.md).
@@ -830,10 +862,10 @@ not need to explicitly invoke routine sprint prompts.
 
 Every `HANDIN READY` or sprint-start announcement must include the worker
 invocation modes and cleanup state: Claude through the headless Claude CLI
-driver and Antigravity through the `agy.exe` CLI channel. Claude and Antigravity
-worktrees must be checked for stale artifacts and cleaned before new sprint
-dispatch. DeepSeek is retired for new lanes unless Yuri explicitly approves a
-fresh worker definition.
+driver, Antigravity through the `agy.exe` CLI channel, and DeepSeek through
+direct Codex `deepseek-worker` spawning. Claude and Antigravity worktrees must
+be checked for stale artifacts and cleaned before new sprint dispatch; DeepSeek
+lanes must be counted, closed or reused deliberately, and reported.
 
 Antigravity uses the CLI from a fresh project-scoped session unless a current
 conversation ID has been verified. Old conversation IDs can disappear after app
