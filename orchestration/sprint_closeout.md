@@ -24,6 +24,75 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 263 Practitioner Directory Internal Runtime Consumer Approval |
+| Integrated through | Ariadne approval packet with Claude PASS, DeepSeek API-boundary PASS, and substitute DeepSeek UI/consumer PASS after Antigravity timeout |
+| Status | Integrated, verified, and pending push |
+| Last updated | 2026-07-09 |
+
+## Sprint 263 What Changed
+
+- Added
+  `docs/api-spine/practitioner-directory-internal-runtime-consumer-approval.json`.
+- Added
+  `docs/api-spine/practitioner-directory-internal-runtime-consumer-approval.md`.
+- Added
+  `tests/test_practitioner_directory_internal_runtime_consumer_approval.py`.
+- Added Claude, DeepSeek, and substitute DeepSeek review artifacts.
+- Approved exactly one route-data runtime consumer:
+  `office_addin_diary_booking_practitioner_selector`.
+- Locked consumption mode to `http_through_existing_route`.
+- Explicitly preserved the Sprint 261 readiness-status boundary and Sprint 262
+  release check as static-only.
+- Deferred GraphQL until the named REST route consumer proves itself with
+  runtime evidence.
+
+Worker mix:
+
+- Claude via `scripts\drive_agent_headless.py`: PASS with conditions; required
+  one named consumer, HTTP-through-route mode, real approval fields, auth/tenancy
+  posture, and no wiring in this sprint.
+- DeepSeek via direct Codex `deepseek-worker`: PASS; clarified the distinction
+  between readiness-status consumers and route-data consumers.
+- Antigravity via `agy.exe`: timed out; Ariadne substituted a second DeepSeek
+  UI/consumer boundary review.
+- Substitute DeepSeek: PASS; required single-consumer isolation, Office add-in
+  authenticated-surface gating, no route/service bypass, no caching outside the
+  active Diary session, and no provider/memory/H15/trove/write path.
+
+Boundary:
+
+- Approval packet and tests only; no runtime wiring yet.
+- No route/schema/service behavior change, no global readiness snapshot change,
+  no external-readiness DAG change, no SDL or GraphQL resolver, no provider/
+  Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime
+  import, no historical diary/local_data import, no external patient-client
+  exposure, no write authority, no deployment claim, and no production-readiness
+  claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_internal_runtime_consumer_approval.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_internal_runtime_consumer_approval.py tests\test_practitioner_directory_route_readiness_release_check.py tests\test_practitioner_directory_route_readiness_consumer_boundary.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+git diff --check
+```
+
+Result: focused approval suite `8 passed`; adjacent approval/release/boundary
+suite `19 passed` after resetting the disposable test schema and rerunning
+serially; API-spine artifact suite `31 passed`; whitespace check passed.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing to Sprint 264, which may wire only the named
+Office add-in Diary booking practitioner selector/list consumer.
+
+---
+
+## Previous Closeout - Sprint 262
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 262 Practitioner Directory Static Release Check |
 | Integrated through | Ariadne implementation with DeepSeek static-boundary PASS, Claude complete-diff PASS, and Antigravity consumer/deployment PASS |
 | Status | Integrated, verified, and pushed |

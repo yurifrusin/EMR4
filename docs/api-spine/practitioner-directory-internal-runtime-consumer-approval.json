@@ -1,0 +1,122 @@
+{
+  "schema_version": "api_spine.practitioner_directory_internal_runtime_consumer_approval.v1",
+  "date": "2026-07-09",
+  "sprint": 263,
+  "reviewer": "yuri",
+  "recorded_by": "ariadne",
+  "gate": "practitioner_directory_internal_runtime_consumer_gate",
+  "decision": "approved_for_single_internal_runtime_consumer",
+  "target_route": "GET /api/v1/practice/practitioners",
+  "source_rest_route_readiness_approval": "docs/api-spine/practitioner-directory-rest-route-readiness-approval.json",
+  "source_static_release_check": "scripts/practitioner_directory_route_readiness_release_check.py",
+  "approved_contract_commit": "3d22142acd0b68da15844f041d9819fd860749b0",
+  "approval_expires_on": "2026-08-08",
+  "approval": {
+    "reviewer": "yuri",
+    "go_no_go_acknowledged": true,
+    "approval_expires_on": "2026-08-08",
+    "approved_contract_commit": "3d22142acd0b68da15844f041d9819fd860749b0"
+  },
+  "approval_source": {
+    "kind": "explicit_yuri_chat_authorization",
+    "date": "2026-07-09",
+    "statement": "Yes do that then if this block of sprints proves the route works, move seamlessly on to GraphQL work if that appears to be the right next move."
+  },
+  "approved_consumer": [
+    {
+      "consumer_id": "office_addin_diary_booking_practitioner_selector",
+      "consumer_surface": "Office add-in Command Center SPA Diary booking practitioner selector/list",
+      "candidate_files": [
+        "docs/diary/diary.js",
+        "docs/diary/diary.html"
+      ],
+      "consumption_mode": "http_through_existing_route",
+      "route": "GET /api/v1/practice/practitioners",
+      "default_query": {
+        "activeOnly": true
+      },
+      "allowed_fields": [
+        "id",
+        "display_name",
+        "default_location_id"
+      ],
+      "must_not_request_fields": [
+        "provider_number",
+        "prescriber_number",
+        "ahpra_number",
+        "hpi_i",
+        "email",
+        "phone",
+        "address"
+      ]
+    }
+  ],
+  "authorized_runtime_consumers": [
+    "office_addin_diary_booking_practitioner_selector"
+  ],
+  "readiness_status_boundary_unchanged": {
+    "sprint_261_consumer_boundary_stays_static_only": true,
+    "sprint_262_release_check_runtime_consumers_allowed_stays_false": true,
+    "reason": "Sprints 261-262 govern readiness-status consumers; Sprint 263 governs one route-data runtime consumer."
+  },
+  "allows_only_one_runtime_consumer": true,
+  "permitted_scope": {
+    "single_internal_runtime_consumer_allowed": true,
+    "read_only": true,
+    "practice_scoped": true,
+    "authenticated_internal_staff_only": true,
+    "consumption_mode": "http_through_existing_route",
+    "reuse_existing_route_auth_and_tenancy": true,
+    "client_supplied_practice_scope_allowed": false,
+    "active_only_false_by_default_allowed": false,
+    "graphql_resolver_ready": false,
+    "external_read_model_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "sdl_changes_allowed": false,
+    "graphql_resolver_allowed": false,
+    "provider_or_memory_trove_allowed": false,
+    "write_authority_allowed": false,
+    "new_route_or_endpoint_allowed": false,
+    "direct_database_or_service_bypass_allowed": false,
+    "public_origin_or_ngrok_header_auth_bypass_allowed": false,
+    "persist_practitioner_list_outside_active_diary_session_allowed": false,
+    "readiness_flag_changes_allowed": false,
+    "deployment_or_production_readiness_allowed": false,
+    "h15_h_series_historical_diary_allowed": false,
+    "external_patient_client_allowed": false
+  },
+  "must_remain_false": {
+    "graphql_resolver_ready": false,
+    "external_read_model_runtime_ready": false,
+    "runtime_or_memory_ready": false,
+    "provider_or_directory_runtime_ready": false,
+    "write_authority_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "sdl_changes_allowed": false,
+    "graphql_resolver_allowed": false,
+    "provider_or_memory_trove_allowed": false,
+    "h15_h_series_historical_diary_allowed": false
+  },
+  "forbidden_expansions": [
+    "multiple runtime consumers without separate reviewed approval",
+    "consumer bypassing the existing route auth/authz layer",
+    "consumer creating a new route, endpoint, or IDOR surface",
+    "consumer-specific response schema or field additions",
+    "rate-limit bypass for this consumer",
+    "deployment or production-readiness claims for the consumer path",
+    "GraphQL SDL or resolver implementation",
+    "provider, Access AI, memory, RAG, or GraphRAG use",
+    "H15, H-series, historical diary, or local_data runtime access",
+    "external patient-client, kiosk, or anonymous access",
+    "practitioner create, update, delete, or write authority"
+  ],
+  "next_allowed_step": "Sprint 264 may wire only the named Office add-in Diary booking practitioner selector/list through the existing HTTP route, then Sprint 265 must collect runtime evidence before any GraphQL work.",
+  "graphql_follow_on_rule": "GraphQL work may begin only after the named internal runtime consumer proves the REST route with focused auth, tenancy, no-write, no-provider, and no-sensitive-field evidence."
+}
