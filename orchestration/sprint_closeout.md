@@ -24,62 +24,71 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 266 Practitioner Directory GraphQL SDL Alignment |
-| Integrated through | Ariadne SDL/test alignment with DeepSeek PASS review |
+| Batch | Sprint 267 Practitioner Directory GraphQL Runtime Gate |
+| Integrated through | Ariadne gate packet with DeepSeek PASS review |
 | Status | Integrated, verified, pending commit/push |
 | Last updated | 2026-07-09 |
 
-## Sprint 266 What Changed
+## Sprint 267 What Changed
 
-- Updated `docs/api-spine/graphql/appointment-diary-read.graphql` so
-  practitioner-directory GraphQL no longer carries the two known SDL drift
-  points.
-- Added `PracticeLocationBrief { id, name }`.
-- Changed `Practitioner.defaultLocation` to `PracticeLocationBrief`.
-- Changed `Practice.practitioners` to include
-  `activeOnly: Boolean = true`, `limit: Int = 50`, and `offset: Int = 0`.
 - Added
-  `docs/api-spine/practitioner-directory-graphql-sdl-alignment-evidence.json`.
+  `docs/api-spine/practitioner-directory-graphql-runtime-gate.json`.
 - Added
-  `docs/api-spine/practitioner-directory-graphql-sdl-alignment-evidence.md`.
-- Added `tests/test_practitioner_directory_graphql_sdl_alignment_evidence.py`.
-- Updated the Sprint 229 drift contract, Sprint 228 GraphQL resolver ownership
-  plan, Sprint 231 SDL proposal, and related guard tests from "known blocked
-  drift" to "SDL aligned; runtime resolver still blocked".
-- Added DeepSeek Sprint 266 review artifact.
+  `docs/api-spine/practitioner-directory-graphql-runtime-gate.md`.
+- Added `tests/test_practitioner_directory_graphql_runtime_gate.py`.
+- Added DeepSeek Sprint 267 review artifact.
+- Recorded Yuri's approval for a gate packet only for
+  `Query.practice.practitioners`.
+- Selected `strawberry-graphql` as the preferred future runtime while keeping
+  dependency installation unauthorized in this sprint.
+- Defined future `/api/v1/graphql` endpoint posture, auth context, error
+  taxonomy, depth/cost/alias/introspection posture, dependency security checks,
+  resolver contract, and an implementation test matrix of more than 25 checks.
 
 Worker mix:
 
-- DeepSeek via direct Codex `deepseek-worker`: PASS; confirmed SDL alignment is
-  the safe next block and that resolver/server/dependency work should remain a
-  separate gate because this repo has no existing GraphQL runtime pattern.
+- DeepSeek via direct Codex `deepseek-worker`: PASS; recommended Strawberry as
+  preferred, required auth/error/depth/cost/dependency-risk/test-matrix detail,
+  and confirmed resolver code remains blocked.
 
 Boundary:
 
-- SDL/document/test alignment only.
-- No GraphQL runtime dependency, no GraphQL endpoint/server, no GraphQL
-  resolver, no global readiness snapshot change, no external-readiness DAG
-  readiness change, no provider/
-  Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime
-  import, no historical diary/local_data import, no external patient-client
-  exposure, no write authority, no deployment claim, and no production-readiness
-  claim.
+- Gate packet only.
+- No GraphQL runtime dependency install, no GraphQL endpoint/server, no GraphQL
+  schema runtime code, no resolver, no global readiness snapshot change, no
+  external-readiness DAG readiness change, no provider/Access AI invocation, no
+  memory/RAG/GraphRAG wiring, no H15/H-series runtime import, no historical
+  diary/local_data import, no external patient-client exposure, no write
+  authority, no deployment claim, and no production-readiness claim.
 
 Verification:
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_sdl_alignment_evidence.py tests\test_api_spine_practitioner_directory_rest_graphql_drift_contract.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_practitioner_directory_sdl_resolution_proposal.py tests\test_api_spine_practitioner_directory_route_breakdown_readiness_decision.py -q
-.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_runtime_gate.py tests\test_practitioner_directory_graphql_sdl_alignment_evidence.py tests\test_api_spine_practitioner_directory_graphql_resolver_ownership_plan.py tests\test_api_spine_artifacts.py -q
 ```
 
-Result: focused Sprint 266 SDL/contract suite `52 passed` after resetting the
-disposable test schema and running serially; API-spine artifact suite
-`31 passed`.
+Result: Sprint 267 gate/adjacent SDL/API-spine suite `54 passed` after resetting
+the disposable test schema and running serially.
 
-Implementation commit: integrating commit for Sprint 266.
+Implementation commit: integrating commit for Sprint 267.
 
-Sprint engine state: continuing to a GraphQL runtime/resolver approval gate
-before adding dependency/server/resolver code.
+Sprint engine state: paused for explicit Yuri approval before dependency,
+endpoint, schema runtime, or resolver implementation.
+
+---
+
+## Previous Closeout - Sprint 266
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 266 Practitioner Directory GraphQL SDL Alignment |
+| Integrated through | Ariadne SDL/test alignment with DeepSeek PASS review |
+| Status | Integrated, verified, and pushed |
+| Last updated | 2026-07-09 |
+
+Sprint 266 aligned the non-runtime GraphQL SDL to the REST practitioner-directory
+projection, resolved the two former SDL drift points, and kept runtime/resolver
+readiness false. Commit: `eb349d87`.
 
 ---
 

@@ -1,0 +1,168 @@
+{
+  "schema_version": "api_spine.practitioner_directory_graphql_runtime_gate.v1",
+  "date": "2026-07-09",
+  "sprint": 267,
+  "reviewer": "yuri",
+  "recorded_by": "ariadne",
+  "gate": "practitioner_directory_graphql_runtime_resolver_gate",
+  "decision": "approved_for_gate_packet_only",
+  "target_field": "Query.practice.practitioners",
+  "target_sdl": "docs/api-spine/graphql/appointment-diary-read.graphql",
+  "approval_source": {
+    "kind": "explicit_yuri_chat_authorization",
+    "date": "2026-07-09",
+    "statement": "I authorize a Sprint 267 GraphQL runtime/resolver gate packet for Query.practice.practitioners only, with resolver code still blocked until the packet defines the runtime library, auth/error model, depth/cost posture, and test matrix."
+  },
+  "prerequisites": {
+    "rest_route_implemented": true,
+    "rest_consumer_runtime_evidence_passed": true,
+    "graphql_sdl_aligned": true,
+    "shared_read_service_exists": true
+  },
+  "selected_runtime_library": {
+    "library": "strawberry-graphql",
+    "reason": "FastAPI-compatible GraphQLRouter, Python type-first schema definitions, and a small path to mapping the current non-runtime SDL shape.",
+    "dependency_install_authorized": false,
+    "exact_version_selection_deferred": true
+  },
+  "runtime_library_candidates": [
+    {
+      "library": "strawberry-graphql",
+      "status": "preferred",
+      "fit": "FastAPI GraphQLRouter integration and Python type-first schema definitions fit the current FastAPI/Pydantic codebase.",
+      "risk": "New GraphQL dependency surface and first GraphQL auth-context implementation in this repo."
+    },
+    {
+      "library": "ariadne",
+      "status": "declined_for_first_slice",
+      "fit": "Schema-first approach could align with the committed SDL artifact.",
+      "risk": "Adds resolver binding boilerplate before the project has any runtime GraphQL pattern."
+    },
+    {
+      "library": "graphene",
+      "status": "declined_for_first_slice",
+      "fit": "Mature GraphQL ecosystem.",
+      "risk": "Less natural fit for current FastAPI/Pydantic-v2 code style."
+    }
+  ],
+  "future_runtime_surface": {
+    "endpoint_path": "/api/v1/graphql",
+    "endpoint_authorized_now": false,
+    "resolver_module": "app/graphql/resolvers/practice.py",
+    "schema_module": "app/graphql/schema.py",
+    "query_field": "practice.practitioners(activeOnly: Boolean = true, limit: Int = 50, offset: Int = 0)",
+    "mutations_allowed": false,
+    "subscriptions_allowed": false,
+    "introspection_production_allowed": false
+  },
+  "auth_error_model": {
+    "auth_context_source": "Authorization bearer token decoded with the existing EMR4 auth principal model",
+    "database_user_lookup_required": true,
+    "inactive_user_error": "UNAUTHENTICATED",
+    "missing_or_invalid_token_error": "UNAUTHENTICATED",
+    "practice_id_mismatch_error": "NOT_FOUND",
+    "active_only_false_without_admin_owner_error": "FORBIDDEN",
+    "limit_or_offset_invalid_error": "BAD_USER_INPUT",
+    "internal_exception_error": "INTERNAL_ERROR",
+    "raw_sql_error_exposure_allowed": false,
+    "stack_trace_exposure_allowed": false
+  },
+  "depth_cost_posture": {
+    "development_depth_limit_required_before_endpoint_mount": true,
+    "development_cost_limit_required_before_endpoint_mount": true,
+    "proposed_development_max_depth": 6,
+    "proposed_development_cost_budget": 500,
+    "production_depth_cost_review_required": true,
+    "alias_repetition_must_count_against_cost": true,
+    "introspection_dev_test_allowed": true,
+    "introspection_production_allowed": false,
+    "practice_practitioners_max_limit": 200,
+    "practice_practitioners_default_limit": 50,
+    "practice_practitioners_default_offset": 0
+  },
+  "dependency_security_risk_assessment": {
+    "new_dependency_surface": true,
+    "exact_transitive_dependency_count_deferred_until_version_pin": true,
+    "known_cve_review_required_before_dependency_install": true,
+    "python_version_compatibility_check_required": true,
+    "fastapi_pydantic_sqlalchemy_conflict_check_required": true,
+    "accepted_application_scoping_gap_matches_rest_route": "PostgreSQL RLS remains a separate milestone; GraphQL must inherit shared read-service practice scoping."
+  },
+  "resolver_contract": {
+    "sole_data_path": "app/services/practice/practitioner_directory_read.py::list_practitioner_directory",
+    "rest_router_import_allowed": false,
+    "independent_sqlalchemy_query_allowed": false,
+    "provider_access_ai_memory_rag_graphrag_allowed": false,
+    "h15_h_series_historical_diary_allowed": false,
+    "writes_or_audit_writes_allowed": false,
+    "sensitive_fields_forbidden": [
+      "provider_number",
+      "prescriber_number",
+      "ahpra_number",
+      "hpi_i",
+      "practice_id",
+      "created_at",
+      "email",
+      "phone",
+      "address",
+      "password_hash",
+      "credentials",
+      "schedule_overrides",
+      "schedules",
+      "appointments"
+    ]
+  },
+  "required_test_matrix": [
+    "test_graphql_runtime_dependency_is_explicit_and_pinned",
+    "test_graphql_endpoint_is_mounted_only_at_api_v1_graphql",
+    "test_graphql_schema_has_query_and_no_mutation",
+    "test_query_practice_practitioners_requires_auth",
+    "test_query_practice_defaults_to_viewer_practice",
+    "test_query_practice_id_mismatch_does_not_leak_other_practice",
+    "test_practitioners_default_active_only_limit_offset",
+    "test_default_limit_returns_at_most_50_practitioners",
+    "test_limit_200_returns_at_most_200_practitioners",
+    "test_offset_skips_ordered_practitioners",
+    "test_practitioners_limit_and_offset_bounds",
+    "test_active_only_false_requires_admin_or_practice_owner",
+    "test_active_only_false_with_admin_or_owner_returns_inactive",
+    "test_practitioner_projection_matches_rest_fields",
+    "test_display_name_joins_first_and_last_name",
+    "test_ordering_matches_rest_last_first_id",
+    "test_default_location_brief_is_id_name_only",
+    "test_inactive_or_other_practice_default_location_returns_null",
+    "test_empty_authorized_practice_returns_empty_list",
+    "test_other_practice_practitioners_are_silently_absent",
+    "test_other_practice_query_practice_id_returns_null",
+    "test_sensitive_fields_absent_from_schema_and_response",
+    "test_resolver_uses_shared_read_service_only",
+    "test_resolver_does_not_call_rest_route_over_http",
+    "test_resolver_does_not_import_rest_router_modules",
+    "test_resolver_does_not_perform_independent_sqlalchemy_query",
+    "test_no_provider_memory_h15_trove_or_write_imports",
+    "test_depth_and_cost_limits_fail_closed",
+    "test_alias_repetition_counts_against_cost_budget",
+    "test_unhandled_resolver_exception_maps_to_internal_error"
+  ],
+  "authorized_now": {
+    "gate_packet": true,
+    "dependency_install": false,
+    "graphql_endpoint": false,
+    "schema_runtime_code": false,
+    "resolver_code": false,
+    "readiness_flag_changes": false
+  },
+  "must_remain_false": {
+    "graphql_resolver_ready": false,
+    "graphql_runtime_dependency_ready": false,
+    "graphql_server_ready": false,
+    "graphql_mutation_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_allowed_step": "separate_sprint_for_graphql_runtime_dependency_endpoint_and_resolver_implementation_after_reviewing_this_gate"
+}
