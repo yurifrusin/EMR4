@@ -2,14 +2,17 @@
 
 This runbook records the controlled setup for switching the Codex Desktop model picker between the native OpenAI/Codex model list and the local DeepSeek bridge catalog.
 
-EMR4 now uses DeepSeek in two distinct ways:
+EMR4 historically used DeepSeek in two distinct ways:
 
 1. Low-cost worker lanes through the `deepseek-worker` subagent.
 2. A proposed Ariadne-v2 orchestration experiment, where Yuri tried to run the main Codex composer on DeepSeek Pro.
 
-The second mode is currently blocked in the ChatGPT-account Codex Desktop GUI.
-Keep the git safety point below until any future API-key/CLI/main-composer
-experiment has proved itself.
+The worker subagent was retired on 2026-07-09 during Sprint 290 by deleting the
+old unused local definition at
+`%USERPROFILE%\.codex\agents\deepseek-worker.toml`. The second mode is
+currently blocked in the ChatGPT-account Codex Desktop GUI. Keep the git safety
+point below until any future API-key/CLI/main-composer experiment has proved
+itself.
 
 ## Current Safety Point
 
@@ -47,7 +50,10 @@ That catalog currently advertises DeepSeek models to the Codex model picker. In 
 - DeepSeek mode: the composer/picker shows the DeepSeek bridge catalog, e.g. `DeepSeek Pro`.
 - OpenAI-native mode: the `model_catalog_json` override is removed, so Codex falls back to the native OpenAI/Codex model list.
 
-The switch does not remove the DeepSeek provider or `deepseek-worker` agent. It only changes which model catalog the Desktop picker uses. Fully exit/restart Codex after switching modes, then open a fresh conversation. Existing prompt windows may remain pinned to the model/catalog they were created with.
+The switch does not reinstall the retired `deepseek-worker` agent. It only
+changes which model catalog the Desktop picker uses. Fully exit/restart Codex
+after switching modes, then open a fresh conversation. Existing prompt windows
+may remain pinned to the model/catalog they were created with.
 
 ## Switch Scripts
 
@@ -127,8 +133,8 @@ as not available in this account mode.
 Current supported posture:
 
 - Keep Ariadne/main Codex orchestration on the native OpenAI/Codex model path.
-- Use `deepseek-worker` Flash/Pro for bounded worker lanes where the subagent
-  provider configuration can point at `deepseek_bridge`.
+- Do not use `deepseek-worker` for new sprint lanes unless Yuri explicitly
+  reinstalls and approves a fresh worker-agent definition.
 - Revisit main-composer DeepSeek only as a separate API-key/CLI/profile
   experiment, with a fresh safety point and no automatic `master` promotion.
 
@@ -167,7 +173,7 @@ supports_websockets = false
 requires_openai_auth = false
 ```
 
-The worker agent remains:
+The retired worker agent used to be:
 
 ```toml
 # %USERPROFILE%\.codex\agents\deepseek-worker.toml
@@ -179,7 +185,8 @@ model_reasoning_effort = "medium"
 
 ## Operating Policy
 
-Use DeepSeek in increasing-risk tiers:
+Do not use DeepSeek for new sprint worker lanes unless Yuri explicitly approves
+a fresh worker setup. Historical increasing-risk tiers were:
 
 1. `deepseek-worker` Flash for bounded, low-cost read-heavy review or narrow implementation lanes.
 2. `deepseek-worker` Pro only when reasoning depth is the bottleneck.

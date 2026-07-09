@@ -1,0 +1,70 @@
+{
+  "schema_version": "bernie.ui_dag.d5_reopening_decision_packet.v1",
+  "date": "2026-07-09",
+  "sprint": 290,
+  "recorded_by": "ariadne",
+  "decision": "do_not_reopen_d5_runtime_yet",
+  "source_cross_reference": "docs/bernie-ui-derived-state-view-model-contract-cross-reference.json",
+  "source_d5_completion_review": "docs/bernie-ui-derived-state-dag-d5-first-slice-completion-review.json",
+  "source_evidence_consolidation": "docs/bernie-ui-derived-state-dag-evidence-consolidation.md",
+  "options_reviewed": [
+    {
+      "option": "keep_d5_closed",
+      "decision": "recommended_now",
+      "reason": "The approved 288-289 checkpoint block is complete, but no new runtime safety signal requires D5 reopening."
+    },
+    {
+      "option": "approve_route_intercepted_frontend_evidence_slice",
+      "decision": "defer_until_safe_copy_matrix_exists",
+      "reason": "Route-intercepted evidence may be useful later, but safe-copy matrix gaps should be resolved first."
+    },
+    {
+      "option": "approve_tiny_runtime_expansion",
+      "decision": "not_recommended",
+      "reason": "Runtime expansion would reopen D5 and requires separate explicit approval after stronger copy/evidence review."
+    }
+  ],
+  "recommended_next_block": {
+    "sprints": [
+      {
+        "sprint": 291,
+        "title": "Bernie UI derived-state safe-copy matrix",
+        "scope": "docs_tests_only"
+      },
+      {
+        "sprint": 292,
+        "title": "D5 next-step approval payload draft",
+        "scope": "draft_only_no_approval_application"
+      }
+    ],
+    "runtime_reopening_allowed": false
+  },
+  "must_remain_closed": {
+    "runtime_code_change": true,
+    "d5_scope_expansion": true,
+    "additional_backend_response_attachment_point": true,
+    "frontend_javascript_expansion": true,
+    "graphql_delivery_or_readiness": true,
+    "provider_or_live_provider_wiring": true,
+    "access_ai_invocation": true,
+    "memory_rag_or_graphrag_runtime_access": true,
+    "h15_or_h_series_runtime_input": true,
+    "historical_diary_runtime_input": true,
+    "external_patient_client_exposure": true,
+    "confirm_payload_or_write_behavior_change": true,
+    "model_to_database_write": true,
+    "deployment_or_production_readiness_claim": true
+  },
+  "worker_plan": {
+    "claude": "strategic_gate_review",
+    "antigravity": "product_workflow_review",
+    "deepseek": "retired_not_used"
+  },
+  "worker_cleanup": {
+    "deepseek_worker_agent_config": "deleted_local_unused_agent_definition",
+    "deleted_path": "C:/Users/sarashera/.codex/agents/deepseek-worker.toml",
+    "historical_review_artifacts_preserved": true,
+    "replacement_static_review": "ariadne_local_guard_tests"
+  },
+  "next_recommended_action": "Run Sprint 291 safe-copy matrix as docs/tests-only, then Sprint 292 draft-only approval payload. Do not apply approval or reopen D5 runtime in this block."
+}

@@ -24,9 +24,62 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 290 D5 Reopening Decision Packet |
+| Integrated through | Ariadne decision packet with Antigravity review; DeepSeek worker retired and not used |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 290 What Changed
+
+- Added
+  `docs/bernie-ui-derived-state-d5-reopening-decision-packet.{json,md}`.
+- Added
+  `tests/test_bernie_ui_d5_reopening_decision_packet.py`.
+- Added Antigravity review artifact
+  `orchestration/agent_inbox/antigravity/review-antigravity-sprint290-d5-reopening-decision-packet.md`.
+- Recorded the decision not to reopen D5 runtime yet.
+- Recommended Sprint 291 as a docs/tests-only safe-copy matrix and Sprint 292
+  as a draft-only approval payload.
+- Deleted the old unused local DeepSeek worker-agent definition at
+  `C:\Users\sarashera\.codex\agents\deepseek-worker.toml`.
+- Updated `AGENTS.md` and `docs/codex-model-switching-deepseek.md` so future
+  sprint protocol treats DeepSeek as retired unless Yuri explicitly approves a
+  fresh worker setup.
+- Kept D5 expansion, route delivery, frontend JavaScript changes,
+  provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series,
+  historical diary runtime inputs, GraphQL delivery/readiness, external
+  clients, confirm payload/write behavior changes, model-to-database writes,
+  deployment, and production readiness closed.
+
+## Sprint 290 Verification
+
+```powershell
+.venv\Scripts\python.exe -m py_compile tests\test_bernie_ui_d5_reopening_decision_packet.py
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_d5_reopening_decision_packet.py -q
+git diff --check
+```
+
+Result: `6 passed`; existing Starlette and Google GenAI deprecation warnings
+only. Whitespace check clean.
+
+Sprint engine state: stop after Sprint 290 commit/push for Yuri direction, or
+continue only into the recommended non-runtime Sprint 291 safe-copy matrix. No
+deployment, production, readiness, telemetry, external-client, write, provider,
+memory, H15/trove, mutation, subscription, D5 expansion, or field-expansion gate
+is opened.
+
+---
+
+## Previous Closeout - Sprint 289
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 289 View-Model Contract Cross-Reference |
 | Integrated through | Ariadne cross-reference packet with Claude, Antigravity, and DeepSeek reviews |
-| Status | Integrated, verified, pending commit/push |
+| Status | Published to `origin/master` and `origin/handoff/current` |
+| Commit | `15baca10` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` before Sprint 290 local edits |
 | Last updated | 2026-07-09 |
 
 ## Sprint 289 What Changed
@@ -56,10 +109,10 @@ Every closeout entry should record:
 git diff --check
 ```
 
-Result: initial cross-reference/inventory suite `10 passed`; final combined
-verification pending closeout metadata.
+Result: final targeted closeout suite passed before publication; Sprint 289 was
+published at `15baca10`.
 
-Sprint engine state: stop after Sprint 289 commit/push for Yuri direction. No
+Sprint engine state after Sprint 289 publication: stopped for Yuri direction. No
 deployment, production, readiness, telemetry, external-client, write, provider,
 memory, H15/trove, mutation, subscription, D5 expansion, or field-expansion gate
 is opened.
