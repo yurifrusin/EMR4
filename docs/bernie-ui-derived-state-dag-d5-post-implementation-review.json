@@ -1,0 +1,73 @@
+{
+  "schema_version": "bernie.ui_dag.d5_post_implementation_review.v1",
+  "decision": "implemented_first_slice_reviewed_scope_blocked",
+  "reviewer": "ariadne",
+  "reviewed_on": "2026-07-09",
+  "implemented_commit": "098b92a7",
+  "approval_contract_commit": "b0e255c8",
+  "approval_decision": "approved_for_backend_response_delivery_first_slice",
+  "approval_expires_on": "2026-07-23",
+  "implemented_scope": {
+    "single_response_assembly_point": true,
+    "response_field": "staff_review.ui_view_model",
+    "source_snapshot_required": true,
+    "no_server_session_field_null": true,
+    "client_confirmation_request_state_default": "idle",
+    "confirm_payload_unchanged": true,
+    "appointment_write_behavior_unchanged": true,
+    "frontend_javascript_unchanged": true
+  },
+  "evidence": {
+    "backend_response_delivery_test": "tests/test_bernie_route_outcome_events.py::test_supervised_booking_stages_server_proposal_and_session_bound_evidence",
+    "no_server_session_compatibility_test": "tests/test_bernie_route_outcome_events.py::test_supervised_booking_without_server_session_has_no_ui_view_model_delivery",
+    "router_import_guard_test": "tests/test_bernie_ui_view_model.py::test_only_approved_bernie_route_imports_selector_after_d5_approval",
+    "readiness_snapshot_test": "tests/test_bernie_ui_dag_d5_readiness_snapshot.py",
+    "gate_tests": "tests/test_bernie_ui_view_model_d5_response_delivery_gate.py",
+    "api_spine_artifact_tests": "tests/test_api_spine_artifacts.py"
+  },
+  "readiness_snapshot_expected": {
+    "backend_response_delivery_ready": true,
+    "backend_response_delivery_approved": true,
+    "runtime_or_provider_wiring_ready": false,
+    "raw_trove_access_ready": false,
+    "runtime_gate_decision": "blocked",
+    "default_provider": "disabled",
+    "live_provider_enabled": false,
+    "provider_calls_performed": false,
+    "write_authority_ready": false,
+    "external_patient_client_ready": false,
+    "next_required_decision": "separate_review_for_any_scope_expansion"
+  },
+  "closed_scope": {
+    "additional_response_assembly_points": false,
+    "graphql_delivery": false,
+    "provider_or_live_provider_wiring": false,
+    "access_ai_invocation": false,
+    "memory_or_rag_wiring": false,
+    "h15_or_h_series_runtime_input": false,
+    "historical_diary_runtime_input": false,
+    "confirm_payload_change": false,
+    "appointment_write_behavior_change": false,
+    "model_to_database_write": false,
+    "external_patient_client_exposure": false,
+    "frontend_javascript_expansion": false
+  },
+  "allowed_next_without_new_approval": [
+    "post_implementation_review_artifacts",
+    "backend_response_shape_evidence_reports",
+    "route_intercepted_frontend_consumption_evidence",
+    "manual_frontend_verification_notes"
+  ],
+  "requires_separate_review": [
+    "additional_backend_response_attachment_point",
+    "graphql_delivery",
+    "provider_or_live_provider_wiring",
+    "access_ai_invocation",
+    "memory_rag_or_graphrag_runtime_access",
+    "h15_or_h_series_runtime_input",
+    "historical_diary_runtime_input",
+    "confirm_payload_or_write_behavior_change",
+    "external_patient_client_exposure",
+    "frontend_javascript_expansion"
+  ]
+}
