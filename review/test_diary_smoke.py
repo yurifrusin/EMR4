@@ -105,6 +105,70 @@ def route_minimal_diary_api(page):
     page.route("**/api/v1/**", handle_api)
 
 
+def route_practitioner_directory_consumer_api(
+    page,
+    *,
+    practitioner_rows,
+    template_practitioner_id="prac-route-1",
+    practitioner_status=200,
+):
+    """Route the authenticated non-smoke diary API path for practitioner consumer evidence."""
+    captured = {"practitioner_requests": [], "methods": []}
+
+    def handle_api(route):
+        request = route.request
+        url = request.url
+        captured["methods"].append(request.method)
+        if "/api/v1/auth/me" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
+        elif "/api/v1/diary/template" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "practice_name": "Runtime Evidence Practice",
+                "slot_defaults": {"start": "09:00", "end": "10:00", "interval_minutes": 15},
+                "columns": [{
+                    "room_label": "Room 1",
+                    "assignment": "Dr Alex Legacy",
+                    "practitioner_id": template_practitioner_id,
+                    "practitioner_ahpra": "MED0001234567"
+                }]
+            }))
+        elif "/api/v1/practice/practitioners" in url:
+            captured["practitioner_requests"].append({
+                "url": url,
+                "method": request.method,
+                "authorization": request.headers.get("authorization", ""),
+            })
+            route.fulfill(
+                status=practitioner_status,
+                content_type="application/json",
+                body=json.dumps(practitioner_rows),
+            )
+        elif "/api/v1/appointments/types" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/appointments" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/diary/locations" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([
+                {"id": "loc-1", "name": "Main Clinic", "is_active": True}
+            ]))
+        elif "/api/v1/diary/roster" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({"entries": []}))
+        elif "/api/v1/diary/waiting-areas" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+        elif "/api/v1/appointments/bernie/pilot-eligibility" in url:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({
+                "surface": "bernie_staff_review",
+                "enabled": False,
+                "eligible": False,
+                "reason": "runtime_consumer_evidence_fixture"
+            }))
+        else:
+            route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
+
+    page.route("**/api/v1/**", handle_api)
+    return captured
+
+
 @pytest.fixture(scope="module")
 def diary_page():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
@@ -226,6 +290,214 @@ def test_auth_banner_shows_and_clears_token_after_backend_401(diary_page):
         diary_page.wait_for_selector("[data-testid='diary-auth-banner']:not(.hidden)", state="visible", timeout=5000)
         assert diary_page.evaluate("() => localStorage.getItem('emr4_token')") is None
         assert diary_page.locator("#diary-error:not(.hidden)").count() == 0
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_practitioner_directory_route_data_populates_booking_selector(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    rows = [{
+        "id": "prac-route-1",
+        "displayName": "Dr Route Directory",
+        "roleLabel": "GP",
+        "active": True,
+        "defaultLocation": {"id": "loc-1", "name": "Main Clinic"},
+        "provider_number": "PN-SECRET-CANARY",
+        "prescriber_number": "PR-SECRET-CANARY",
+        "ahpra_number": "AHPRA-SECRET-CANARY",
+        "hpi_i": "HPII-SECRET-CANARY",
+        "email": "secret@example.invalid",
+        "phone": "555-SECRET",
+        "address": "Hidden Street"
+    }]
+    captured = route_practitioner_directory_consumer_api(diary_page, practitioner_rows=rows)
+
+    try:
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("#diary-grid-container:not(.hidden)", state="visible", timeout=10000)
+        diary_page.evaluate("""
+            () => window.openBookingModalForCreate({
+                room_label: "Room 1",
+                assignment: "Dr Alex Legacy",
+                practitioner_id: "prac-route-1",
+                practitioner_ahpra: "MED0001234567"
+            }, "09:00")
+        """)
+        diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
+
+        assert len(captured["practitioner_requests"]) == 1
+        request = captured["practitioner_requests"][0]
+        assert request["method"] == "GET"
+        assert "/api/v1/practice/practitioners" in request["url"]
+        assert "activeOnly=true" in request["url"]
+        assert "limit=200" in request["url"]
+        assert request["authorization"].startswith("Bearer ")
+        assert not any(method in {"POST", "PUT", "PATCH", "DELETE"} for method in captured["methods"])
+
+        options = diary_page.locator("#booking-practitioner option").evaluate_all(
+            "(options) => options.map(option => ({ value: option.value, text: option.textContent }))"
+        )
+        assert options == [{"value": "prac-route-1", "text": "Dr Route Directory (Main Clinic)"}]
+        assert diary_page.locator("#booking-practitioner").input_value() == "prac-route-1"
+
+        page_text = diary_page.locator("body").text_content()
+        for forbidden in ("SECRET", "AHPRA", "HPII", "secret@example.invalid", "Hidden Street"):
+            assert forbidden not in page_text
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_practitioner_directory_selector_keeps_legacy_fallback_for_unmapped_ahpra(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured = route_practitioner_directory_consumer_api(
+        diary_page,
+        practitioner_rows=[{
+            "id": "prac-route-other",
+            "displayName": "Dr Other Directory",
+            "roleLabel": "GP",
+            "active": True,
+            "defaultLocation": {"id": "loc-1", "name": "Main Clinic"}
+        }],
+        template_practitioner_id=None,
+    )
+
+    try:
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("#diary-grid-container:not(.hidden)", state="visible", timeout=10000)
+        diary_page.evaluate("""
+            () => window.openBookingModalForCreate({
+                room_label: "Room 1",
+                assignment: "Dr Alex Legacy",
+                practitioner_id: null,
+                practitioner_ahpra: "MED0001234567"
+            }, "09:00")
+        """)
+        diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
+
+        assert len(captured["practitioner_requests"]) == 1
+        assert not any(method in {"POST", "PUT", "PATCH", "DELETE"} for method in captured["methods"])
+        options = diary_page.locator("#booking-practitioner option").evaluate_all(
+            "(options) => options.map(option => ({ value: option.value, text: option.textContent }))"
+        )
+        assert options == [{"value": "MED0001234567", "text": "Dr Alex Legacy (Room 1)"}]
+        assert diary_page.locator("#booking-practitioner").input_value() == "MED0001234567"
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_practitioner_directory_401_fails_closed_with_auth_banner(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured = route_practitioner_directory_consumer_api(
+        diary_page,
+        practitioner_rows={"detail": "expired"},
+        practitioner_status=401,
+    )
+
+    try:
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("[data-testid='diary-auth-banner']:not(.hidden)", state="visible", timeout=5000)
+        assert len(captured["practitioner_requests"]) == 1
+        assert diary_page.evaluate("() => localStorage.getItem('emr4_token')") is None
+        assert diary_page.locator("#diary-grid-container.hidden").count() == 1
+        assert "Session expired" in diary_page.locator("[data-testid='diary-auth-banner']").text_content()
+    finally:
+        diary_page.unroute("**/api/v1/**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_practitioner_directory_smoke_mode_does_not_call_route_and_uses_template_fallback(diary_page):
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    captured = {"practitioner_requests": []}
+
+    def handle_practitioner_route(route):
+        captured["practitioner_requests"].append(route.request.url)
+        route.fulfill(status=500, content_type="application/json", body=json.dumps({"detail": "unexpected"}))
+
+    diary_page.route("**/api/v1/practice/practitioners**", handle_practitioner_route)
+
+    try:
+        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        diary_page.wait_for_selector("#diary-grid-container:not(.hidden)", state="visible", timeout=10000)
+        diary_page.evaluate("""
+            () => window.openBookingModalForCreate({
+                room_label: "Room 1",
+                assignment: "Dr Alex Shera",
+                practitioner_id: "prac-1",
+                practitioner_ahpra: "MED0001234567"
+            }, "09:00")
+        """)
+        diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
+        assert captured["practitioner_requests"] == []
+        options = diary_page.locator("#booking-practitioner option").evaluate_all(
+            "(options) => options.map(option => ({ value: option.value, text: option.textContent }))"
+        )
+        assert {"value": "MED0001234567", "text": "Dr Alex Shera (Room 1)"} in options
+    finally:
+        diary_page.unroute("**/api/v1/practice/practitioners**")
+        diary_page.goto(base_url + CHECKS["target"])
+        diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
+
+
+def test_practitioner_directory_limit_200_cap_renders_all_returned_rows(diary_page):
+    import time
+    import urllib.parse
+    parsed = urllib.parse.urlparse(diary_page.url)
+    base_url = f"{parsed.scheme}://{parsed.netloc}"
+    rows = [
+        {
+            "id": f"prac-route-{idx:03d}",
+            "displayName": f"Dr Directory {idx:03d}",
+            "roleLabel": "GP",
+            "active": True,
+            "defaultLocation": {"id": "loc-1", "name": "Main Clinic"},
+        }
+        for idx in range(200)
+    ]
+    captured = route_practitioner_directory_consumer_api(
+        diary_page,
+        practitioner_rows=rows,
+        template_practitioner_id="prac-route-000",
+    )
+
+    try:
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html")
+        diary_page.wait_for_selector("#diary-grid-container:not(.hidden)", state="visible", timeout=10000)
+        start = time.perf_counter()
+        diary_page.evaluate("""
+            () => window.openBookingModalForCreate({
+                room_label: "Room 1",
+                assignment: "Dr Alex Legacy",
+                practitioner_id: "prac-route-000",
+                practitioner_ahpra: "MED0001234567"
+            }, "09:00")
+        """)
+        diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
+        elapsed_ms = (time.perf_counter() - start) * 1000
+
+        assert len(captured["practitioner_requests"]) == 1
+        assert "limit=200" in captured["practitioner_requests"][0]["url"]
+        assert diary_page.locator("#booking-practitioner option").count() == 200
+        assert diary_page.locator("#booking-practitioner").input_value() == "prac-route-000"
+        assert elapsed_ms < 500
     finally:
         diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])

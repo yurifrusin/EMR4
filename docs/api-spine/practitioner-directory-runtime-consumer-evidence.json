@@ -1,0 +1,90 @@
+{
+  "schema_version": "api_spine.practitioner_directory_runtime_consumer_evidence.v1",
+  "date": "2026-07-09",
+  "sprint": 265,
+  "recorded_by": "ariadne",
+  "target_route": "GET /api/v1/practice/practitioners",
+  "approved_consumer": "office_addin_diary_booking_practitioner_selector",
+  "source_approval": "docs/api-spine/practitioner-directory-internal-runtime-consumer-approval.json",
+  "source_wiring_commit": "3c48ab59",
+  "evidence_type": "route_intercepted_browser_and_backend_runtime_tests",
+  "browser_evidence": {
+    "test_file": "review/test_diary_smoke.py",
+    "tests": [
+      "test_practitioner_directory_route_data_populates_booking_selector",
+      "test_practitioner_directory_selector_keeps_legacy_fallback_for_unmapped_ahpra",
+      "test_practitioner_directory_401_fails_closed_with_auth_banner",
+      "test_practitioner_directory_smoke_mode_does_not_call_route_and_uses_template_fallback",
+      "test_practitioner_directory_limit_200_cap_renders_all_returned_rows"
+    ],
+    "observed_request": {
+      "method": "GET",
+      "path": "/api/v1/practice/practitioners",
+      "query": {
+        "activeOnly": "true",
+        "limit": "200"
+      },
+      "authorization_header_present": true
+    },
+    "observed_selector_behavior": {
+      "route_uuid_option_used_when_selection_preserved": true,
+      "display_name_rendered": true,
+      "default_location_name_rendered": true,
+      "legacy_ahpra_fallback_kept_when_route_uuid_unmapped": true,
+      "smoke_mode_does_not_call_route": true,
+      "route_401_shows_auth_banner_and_clears_token": true,
+      "limit_200_rows_rendered": true,
+      "write_methods_observed": []
+    },
+    "sensitive_display_canaries_absent_from_page": [
+      "provider_number",
+      "prescriber_number",
+      "ahpra_number",
+      "hpi_i",
+      "email",
+      "phone",
+      "address"
+    ]
+  },
+  "backend_evidence": {
+    "test_file": "tests/test_practitioner_directory_route.py",
+    "coverage": [
+      "401 without auth",
+      "401 invalid token",
+      "inactive user denied",
+      "authenticated staff roles can read active directory",
+      "activeOnly default excludes inactive practitioners",
+      "activeOnly=false restricted to admin/practice owner",
+      "practice scoping excludes other-practice practitioners",
+      "defaultLocation same-practice active only",
+      "sensitive keys absent from response",
+      "limit upper bound is 200"
+    ]
+  },
+  "accepted_limits": {
+    "limit_200_cap_observed": true,
+    "limit_200_browser_render_observed": true,
+    "pagination_ui_not_implemented": true,
+    "overflow_policy_requires_future_graphql_or_rest_pagination_design": true
+  },
+  "worker_review": {
+    "reviewer_lane": "deepseek-worker",
+    "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint265-practitioner-runtime-consumer-evidence.md",
+    "verdict": "PASS"
+  },
+  "must_remain_false": {
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false,
+    "graphql_resolver_ready": false
+  },
+  "graphql_follow_on_decision": {
+    "rest_consumer_evidence_passed": true,
+    "graphql_work_recommended_next": true,
+    "allowed_next_scope": "practitioner_directory_graphql_sdl_resolver_alignment",
+    "reason": "The named REST consumer now has browser evidence plus backend auth, tenancy, no-write, and sensitive-field coverage; GraphQL remains not ready until implemented and verified separately."
+  }
+}

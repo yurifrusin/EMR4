@@ -24,40 +24,41 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 264 Practitioner Directory Internal Runtime Consumer Wiring |
-| Integrated through | Ariadne implementation with DeepSeek PASS review |
+| Batch | Sprint 265 Practitioner Directory Runtime Consumer Evidence |
+| Integrated through | Ariadne browser/backend evidence with DeepSeek PASS review |
 | Status | Integrated, verified, pending commit/push |
 | Last updated | 2026-07-09 |
 
-## Sprint 264 What Changed
+## Sprint 265 What Changed
 
-- Wired the approved Office add-in Diary booking practitioner selector/list to
-  `GET /api/v1/practice/practitioners?activeOnly=true&limit=200` through the
-  existing `apiFetch` staff-auth path.
-- Added `activePractitionerDirectory` plus normalization for only `id`,
-  `displayName`, and display-safe `defaultLocation` subfields.
-- Updated the booking practitioner dropdown to prefer route UUIDs when the
-  selected practitioner can be preserved, while keeping the legacy
-  template/AHPRA fallback for older columns or unavailable route data.
-- Updated booking save resolution to accept route UUID selections first and
-  fall back to the existing AHPRA map.
-- Bumped `docs/diary/diary.html` from `diary.js?v=180` to `diary.js?v=181`.
+- Added route-intercepted Playwright evidence in `review/test_diary_smoke.py`
+  for the approved Diary booking practitioner selector/list consumer.
 - Added
-  `tests/test_practitioner_directory_internal_runtime_consumer_wiring.py`.
-- Corrected the Sprint 263 approval packet and tests from snake_case field
-  names to the actual REST contract fields: `id`, `displayName`, and
-  `defaultLocation`.
-- Added DeepSeek Sprint 264 review artifact.
+  `docs/api-spine/practitioner-directory-runtime-consumer-evidence.json`.
+- Added
+  `docs/api-spine/practitioner-directory-runtime-consumer-evidence.md`.
+- Added
+  `tests/test_practitioner_directory_runtime_consumer_evidence.py`.
+- Added DeepSeek Sprint 265 evidence review artifact.
+- Proved the browser calls
+  `GET /api/v1/practice/practitioners?activeOnly=true&limit=200` through the
+  existing bearer-token `apiFetch` path.
+- Proved route UUID/display-name/default-location rendering, legacy AHPRA
+  fallback for unmapped older columns, route 401 fail-closed auth-banner/token
+  clearing, smoke-mode no-route fallback, no write methods, and 200 returned
+  rows rendering into the selector.
+- Reconfirmed the backend route contract for auth, tenancy, active-only policy,
+  default-location scoping, sensitive-field absence, and `limit <= 200`.
 
 Worker mix:
 
-- DeepSeek via direct Codex `deepseek-worker`: PASS; confirmed existing route
-  reuse, display-safe field consumption, legacy fallback, no storage outside the
-  active Diary session, and no GraphQL/provider/memory/H15/trove/write path.
+- DeepSeek via direct Codex `deepseek-worker`: PASS; requested the browser
+  endpoint/auth-header, 401, smoke fallback, 200-cap, tenancy, no-sensitive,
+  no-write/no-provider/no-memory evidence captured in this sprint.
 
 Boundary:
 
-- One named internal runtime consumer only.
+- Evidence only for the one named internal runtime consumer.
 - No route/schema/service behavior change, no global readiness snapshot change,
   no external-readiness DAG change, no SDL or GraphQL resolver, no provider/
   Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime
@@ -69,19 +70,37 @@ Verification:
 
 ```powershell
 node --check docs\diary\diary.js
-.venv\Scripts\python.exe scripts\check_frontend_versions.py
-.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_internal_runtime_consumer_wiring.py tests\test_practitioner_directory_internal_runtime_consumer_approval.py -q
-.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route_readiness_release_check.py tests\test_practitioner_directory_route_readiness_status.py tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py::test_practitioner_directory_route_data_populates_booking_selector review\test_diary_smoke.py::test_practitioner_directory_selector_keeps_legacy_fallback_for_unmapped_ahpra review\test_diary_smoke.py::test_practitioner_directory_401_fails_closed_with_auth_banner review\test_diary_smoke.py::test_practitioner_directory_smoke_mode_does_not_call_route_and_uses_template_fallback review\test_diary_smoke.py::test_practitioner_directory_limit_200_cap_renders_all_returned_rows -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_runtime_consumer_evidence.py tests\test_practitioner_directory_internal_runtime_consumer_wiring.py tests\test_practitioner_directory_internal_runtime_consumer_approval.py -q
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route.py -q
 ```
 
-Result: JS syntax check passed; frontend asset-version integrity check passed;
-focused wiring/approval suite `13 passed`; adjacent release/status/API-spine
-suite `44 passed`.
+Result: JS syntax check passed; practitioner-directory Playwright evidence
+slice `5 passed`; evidence/wiring/approval suite `18 passed`; backend route
+suite `31 passed` after resetting the disposable test schema.
 
-Implementation commit: integrating commit for Sprint 264.
+Implementation commit: integrating commit for Sprint 265.
 
-Sprint engine state: continuing to Sprint 265 runtime/browser evidence before
-GraphQL.
+Sprint engine state: continuing to practitioner-directory GraphQL SDL/resolver
+alignment. GraphQL readiness remains false until that work is implemented and
+verified.
+
+---
+
+## Previous Closeout - Sprint 264
+
+| Item | Value |
+|---|---|
+| Batch | Sprint 264 Practitioner Directory Internal Runtime Consumer Wiring |
+| Integrated through | Ariadne implementation with DeepSeek PASS review |
+| Status | Integrated, verified, and pushed |
+| Last updated | 2026-07-09 |
+
+Sprint 264 wired the approved Office add-in Diary booking practitioner
+selector/list to `GET /api/v1/practice/practitioners?activeOnly=true&limit=200`
+through existing `apiFetch`, normalized display-safe route fields, preserved
+legacy AHPRA fallback, corrected the approval packet to the actual REST field
+names, and kept adjacent gates closed. Commit: `3c48ab59`.
 
 ---
 
