@@ -24,9 +24,80 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 262 Practitioner Directory Static Release Check |
+| Integrated through | Ariadne implementation with DeepSeek static-boundary PASS, Claude complete-diff PASS, and Antigravity consumer/deployment PASS |
+| Status | Integrated, verified, and pending push |
+| Last updated | 2026-07-09 |
+
+## Sprint 262 What Changed
+
+- Added `scripts/practitioner_directory_route_readiness_release_check.py`.
+- Added `tests/test_practitioner_directory_route_readiness_release_check.py`.
+- Hardened `scripts/practitioner_directory_route_readiness_status.py` so
+  readiness artifact drift raises `ValueError` rather than relying on bare
+  Python `assert`.
+- Updated `orchestration/bernie_release_gates.md` so the preferred practitioner
+  directory static gate is the release-check wrapper, with the raw status helper
+  still available as supporting evidence.
+- Added DeepSeek, Claude, and Antigravity review artifacts for Sprint 262.
+- Preserved the Sprint 261 consumer boundary: the new helper may be used only by
+  static CI/pytest release gates or developer-facing release summaries.
+
+Worker mix:
+
+- DeepSeek via direct Codex `deepseek-worker` spawn: PASS; recommended verifying
+  the adjacent-gate count and replacing bare `assert` with fail-closed runtime
+  checks.
+- Claude via `scripts\drive_agent_headless.py`: initially BLOCKED because its
+  worker branch was stale and then because the first pasted diff omitted the new
+  untracked helper; after complete-diff review it returned PASS and Ariadne
+  integrated its exact-membership and runtime-isolation suggestions.
+- Antigravity via `agy.exe`: PASS for static-only consumer/deployment boundary;
+  its worker CLI unexpectedly merged `origin/master` in the Antigravity worktree,
+  so Ariadne did not rely on any worker-tree changes and integrated only the
+  review content.
+
+Boundary:
+
+- Static script, tests, release-gate text, and worker review packets only.
+- No route/schema/service behavior change, no global readiness snapshot change,
+  no external-readiness DAG change, no SDL or GraphQL resolver, no provider/
+  Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series runtime
+  import, no historical diary/local_data import, no external patient-client
+  exposure, no write authority, no deployment claim, and no production-readiness
+  claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m py_compile scripts\practitioner_directory_route_readiness_status.py scripts\practitioner_directory_route_readiness_release_check.py tests\test_practitioner_directory_route_readiness_release_check.py
+.venv\Scripts\python.exe scripts\practitioner_directory_route_readiness_release_check.py
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_route_readiness_release_check.py tests\test_practitioner_directory_route_readiness_status.py tests\test_practitioner_directory_route_readiness_consumer_boundary.py -q
+.venv\Scripts\python.exe -m pytest tests\test_api_spine_artifacts.py -q
+.venv\Scripts\python.exe -m pytest tests\test_external_read_model_readiness_status.py tests\test_sprint_closeout_protocol.py -q
+git diff --check
+```
+
+Result: focused release/status/consumer-boundary suite `18 passed`; API-spine
+artifact suite `31 passed`; external-readiness/protocol suite `16 passed`;
+`py_compile`, CLI sample, and whitespace check passed. A deliberately parallel
+broader run hit the known disposable Postgres enum race and passed after schema
+reset and serial rerun.
+
+Implementation commit: pending.
+
+Sprint engine state: continuing only to static release-summary/report
+integration if useful, or pausing for Yuri direction before runtime consumption.
+
+---
+
+## Previous Closeout - Sprint 261
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 261 Practitioner Directory Route Readiness Consumer Boundary |
 | Integrated through | Ariadne implementation with DeepSeek consumer-boundary preflight, Claude API-spine/security PASS, and Antigravity consumer/release/deployment PASS |
-| Status | Integrated, verified, and ready for publication |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 261 What Changed

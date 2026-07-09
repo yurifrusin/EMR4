@@ -85,7 +85,7 @@ def test_route_readiness_status_rejects_wrong_route(tmp_path: Path):
     approval_path = tmp_path / "approval.json"
     approval_path.write_text(json.dumps(approval), encoding="utf-8")
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         build_practitioner_directory_route_readiness_status(approval_path=approval_path)
 
 
@@ -95,7 +95,7 @@ def test_route_readiness_status_rejects_adjacent_gate_true(tmp_path: Path):
     approval_path = tmp_path / "approval.json"
     approval_path.write_text(json.dumps(approval), encoding="utf-8")
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         build_practitioner_directory_route_readiness_status(approval_path=approval_path)
 
 
@@ -105,7 +105,7 @@ def test_route_readiness_status_rejects_expired_approval(tmp_path: Path):
     approval_path = tmp_path / "approval.json"
     approval_path.write_text(json.dumps(approval), encoding="utf-8")
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         build_practitioner_directory_route_readiness_status(approval_path=approval_path)
 
 
@@ -115,7 +115,7 @@ def test_route_readiness_status_rejects_global_snapshot_flip(tmp_path: Path):
     global_snapshot_path = tmp_path / "global.json"
     global_snapshot_path.write_text(json.dumps(global_snapshot), encoding="utf-8")
 
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         build_practitioner_directory_route_readiness_status(
             global_snapshot_path=global_snapshot_path
         )

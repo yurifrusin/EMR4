@@ -108,10 +108,16 @@ access, external patient-client surfaces, or write authority, Ariadne must run
 and record:
 
 ```powershell
+.venv\Scripts\python.exe scripts\practitioner_directory_route_readiness_release_check.py
 .venv\Scripts\python.exe scripts\practitioner_directory_route_readiness_status.py
 ```
 
-The expected current values are `rest_route_ready=true`,
+The preferred static release check is
+`scripts\practitioner_directory_route_readiness_release_check.py`, which wraps
+the route-scoped readiness status with the Sprint 261 consumer boundary and may
+be used only by static CI/pytest release gates or developer-facing release
+summaries. The expected current values are `static_release_check_ready=true`,
+`runtime_consumers_allowed=false`, `rest_route_ready=true`,
 `global_readiness_snapshot_updated=false`, `adjacent_gate_false_count=8`,
 `deployment_ready=false`, `production_ready=false`,
 `external_patient_client_ready=false`, `pause_required=false`, and
