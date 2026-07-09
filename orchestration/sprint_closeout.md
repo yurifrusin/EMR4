@@ -24,9 +24,71 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
+| Batch | Sprint 269 Practitioner Directory GraphQL Runtime Shell |
+| Integrated through | Ariadne runtime shell with DeepSeek PASS review |
+| Status | Integrated, verified, pending commit/push |
+| Last updated | 2026-07-09 |
+
+## Sprint 269 What Changed
+
+- Added `app/graphql/context.py`, reusing the existing `get_current_user` and
+  `get_db` dependency path for GraphQL context.
+- Added `app/graphql/schema.py`, a query-only Strawberry schema with only the
+  authenticated `graphqlHealth` placeholder field.
+- Added `app/graphql/router.py` and mounted it from `app/main.py` at
+  `/api/v1/graphql`.
+- Configured `QueryDepthLimiter(max_depth=6)`,
+  `MaxAliasesLimiter(max_alias_count=500)`, and
+  `MaxTokensLimiter(max_token_count=500)`.
+- Added
+  `docs/api-spine/practitioner-directory-graphql-runtime-shell.json`.
+- Added
+  `docs/api-spine/practitioner-directory-graphql-runtime-shell.md`.
+- Added `tests/test_practitioner_directory_graphql_runtime_shell.py`.
+- Updated Sprint 267/268 guard tests so the mounted shell is allowed while
+  `Query.practice.practitioners` remains absent.
+- Added DeepSeek Sprint 269 runtime-shell review artifact.
+
+Worker mix:
+
+- DeepSeek via direct Codex `deepseek-worker`: PASS; called out the need to
+  supersede old no-endpoint assertions and to record Strawberry 0.320.3's
+  lack of a native field-cost estimator. Sprint 269 uses depth, alias, and
+  token guards and defers any custom cost estimator until richer fields need it.
+
+Boundary:
+
+- GraphQL dependency, endpoint mount, authenticated context, and placeholder
+  health query only.
+- No `Query.practice.practitioners` resolver, no GraphQL `Practice` type, no
+  GraphQL mutation/subscription surface, no readiness flag change, no
+  provider/Access AI invocation, no memory/RAG/GraphRAG wiring, no H15/H-series
+  runtime import, no historical diary/local_data import, no external
+  patient-client exposure, no write authority, no audit write, no deployment
+  claim, and no production-readiness claim.
+
+Verification:
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests\test_practitioner_directory_graphql_runtime_shell.py tests\test_practitioner_directory_graphql_dependency_preflight.py tests\test_practitioner_directory_graphql_runtime_gate.py -q
+```
+
+Result: Sprint 269 shell/gate suite `21 passed`.
+
+Implementation commit: integrating commit for Sprint 269.
+
+Sprint engine state: continuing to Sprint 270 single approved
+`Query.practice.practitioners` resolver against the shared read service.
+
+---
+
+## Previous Closeout - Sprint 268
+
+| Item | Value |
+|---|---|
 | Batch | Sprint 268 Practitioner Directory GraphQL Dependency Preflight |
 | Integrated through | Ariadne dependency pin/evidence with DeepSeek PASS review |
-| Status | Integrated, verified, pending commit/push |
+| Status | Integrated, verified, and pushed |
 | Last updated | 2026-07-09 |
 
 ## Sprint 268 What Changed

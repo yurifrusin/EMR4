@@ -53,7 +53,7 @@ def test_strawberry_dependency_is_pinned_and_importable():
     assert payload["observed_local_install"]["disable_introspection_available"] is True
 
 
-def test_dependency_preflight_does_not_add_endpoint_or_resolver_code():
+def test_dependency_preflight_boundary_is_superseded_only_by_runtime_shell():
     payload = _payload()
     app_text = _app_text().lower()
 
@@ -65,12 +65,9 @@ def test_dependency_preflight_does_not_add_endpoint_or_resolver_code():
         "resolver_code": False,
         "readiness_flag_changes": False,
     }
-    for fragment in (
-        "/api/v1/graphql",
-        "graphqlrouter(",
-        "def resolve_practitioners",
-        "practice.practitioners",
-    ):
+    assert "/api/v1/graphql" in app_text
+    assert "graphqlrouter(" in app_text
+    for fragment in ("def resolve_practitioners", "practice.practitioners"):
         assert fragment not in app_text
 
 

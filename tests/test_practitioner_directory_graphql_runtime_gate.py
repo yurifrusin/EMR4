@@ -127,27 +127,31 @@ def test_required_implementation_test_matrix_is_explicit():
     }.issubset(tests)
 
 
-def test_no_graphql_endpoint_or_resolver_code_exists_after_dependency_preflight():
+def test_graphql_runtime_gate_allows_later_shell_but_not_practitioner_resolver():
     app_text = _app_text().lower()
+    graphql_text = "\n".join(
+        path.read_text(encoding="utf-8", errors="replace").lower()
+        for path in sorted((APP / "graphql").rglob("*.py"))
+    )
     dependency_text = "\n".join(
         path.read_text(encoding="utf-8", errors="replace").lower()
         for pattern in ("pyproject.toml", "requirements*.txt")
         for path in ROOT.glob(pattern)
     )
 
+    assert "strawberry-graphql[fastapi]==0.320.3" in dependency_text
+    assert "graphqlrouter" in app_text
+    assert "/api/v1/graphql" in app_text
     for fragment in (
-        "import strawberry",
-        "from strawberry",
         "import graphene",
         "from graphene",
         "import ariadne",
         "from ariadne",
-        "graphqlrouter",
-        "/api/v1/graphql",
         "def resolve_practitioners",
+        "practice.practitioners",
     ):
         assert fragment not in app_text
-    assert "strawberry-graphql[fastapi]==0.320.3" in dependency_text
+    assert "list_practitioner_directory" not in graphql_text
     for package in ("graphene", "ariadne"):
         assert package not in dependency_text
 

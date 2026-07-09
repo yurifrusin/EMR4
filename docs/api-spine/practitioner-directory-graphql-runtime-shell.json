@@ -1,0 +1,73 @@
+{
+  "schema_version": "api_spine.practitioner_directory_graphql_runtime_shell.v1",
+  "date": "2026-07-09",
+  "sprint": 269,
+  "recorded_by": "ariadne",
+  "approval_source": "explicit Yuri authorization for Sprints 268-272 to add the GraphQL dependency, mount /api/v1/graphql, and implement Query.practice.practitioners only",
+  "decision": "approved_minimal_runtime_shell_only",
+  "target_field": "Query.practice.practitioners",
+  "endpoint_path": "/api/v1/graphql",
+  "runtime_shell": {
+    "dependency_pin": true,
+    "endpoint_mounted": true,
+    "authenticated_context": true,
+    "query_only_schema": true,
+    "placeholder_health_field_only": true,
+    "practice_practitioners_resolver": false
+  },
+  "schema_surface": {
+    "query_fields": [
+      "graphqlHealth"
+    ],
+    "mutation_type": false,
+    "subscription_type": false,
+    "practice_type": false,
+    "practitioners_field": false,
+    "sensitive_practitioner_fields": false
+  },
+  "auth_context": {
+    "source": "app.dependencies.get_current_user",
+    "database_session_source": "app.dependencies.get_db",
+    "missing_token_http_status": 401,
+    "invalid_token_http_status": 401,
+    "second_token_parser_added": false
+  },
+  "depth_cost_posture": {
+    "query_depth_limiter_max_depth": 6,
+    "max_aliases_limiter_count": 500,
+    "max_tokens_limiter_count": 500,
+    "true_field_cost_estimator_available_in_strawberry_0_320_3": false,
+    "cost_budget_500_interpreted_for_shell_as_token_budget": true,
+    "custom_cost_extension_deferred": true
+  },
+  "worker_review": {
+    "reviewer_lane": "deepseek-worker",
+    "artifact": "orchestration/agent_inbox/codex/review-deepseek-sprint269-graphql-runtime-shell.md",
+    "verdict": "PASS",
+    "integrated_cautions": [
+      "old Sprint 267 and Sprint 268 no-endpoint assertions must be superseded by shell-only assertions",
+      "query cost budget is not a native Strawberry cost estimator in 0.320.3; Sprint 269 uses depth, alias, and token guards",
+      "no practitioner resolver should be created in the runtime shell sprint"
+    ]
+  },
+  "authorized_now": {
+    "dependency_pin": true,
+    "graphql_endpoint": true,
+    "schema_runtime_shell": true,
+    "placeholder_health_query": true,
+    "query_practice_practitioners_resolver": false,
+    "readiness_flag_changes": false
+  },
+  "must_remain_false": {
+    "graphql_resolver_ready": false,
+    "graphql_mutation_ready": false,
+    "deployment_ready": false,
+    "production_ready": false,
+    "external_patient_client_ready": false,
+    "write_authority_ready": false,
+    "provider_or_memory_ready": false,
+    "h15_h_series_historical_diary_ready": false
+  },
+  "next_allowed_step": "sprint_270_query_practice_practitioners_schema_types_and_resolver_against_shared_read_service"
+}
+
