@@ -1,0 +1,103 @@
+{
+  "schema_version": "bernie.ui_dag.d5_next_step_approval_payload_draft.v1",
+  "date": "2026-07-10",
+  "sprint": 292,
+  "status": "draft_only_not_applied",
+  "decision": "no_new_d5_approval_applied",
+  "reviewer": "",
+  "reviewed_on": "",
+  "go_no_go_acknowledged": false,
+  "source_artifacts": [
+    "docs/bernie-ui-derived-state-d5-reopening-decision-packet.json",
+    "docs/bernie-ui-derived-state-safe-copy-matrix.json",
+    "docs/bernie-ui-derived-state-dag-d5-first-slice-completion-review.json",
+    "docs/bernie-ui-derived-state-dag-evidence-consolidation.md"
+  ],
+  "current_posture": {
+    "d5_first_slice": "complete_pause_expansion",
+    "new_d5_runtime_authority": "not_granted",
+    "historical_first_slice_approval_is_not_renewed_or_extended": true
+  },
+  "options_for_future_explicit_decision": [
+    {
+      "option": "keep_d5_closed",
+      "recommended_now": true,
+      "would_change_runtime": false
+    },
+    {
+      "option": "approve_route_intercepted_copy_conformity_evidence_only",
+      "recommended_now": false,
+      "would_change_runtime": false,
+      "requires_future_explicit_user_approval": true
+    },
+    {
+      "option": "approve_any_d5_runtime_expansion",
+      "recommended_now": false,
+      "would_change_runtime": true,
+      "requires_separate_future_review_and_explicit_user_approval": true
+    }
+  ],
+  "candidate_scope_if_route_intercepted_evidence_is_later_approved": {
+    "route_intercepted_copy_conformity_tests": false,
+    "docs_or_test_only_artifacts": false,
+    "frontend_javascript_change": false,
+    "backend_route_or_response_change": false,
+    "additional_backend_response_attachment_point": false,
+    "graphql_delivery_or_readiness": false,
+    "provider_or_live_provider_wiring": false,
+    "access_ai_invocation": false,
+    "memory_rag_or_graphrag_runtime_access": false,
+    "h15_or_h_series_runtime_input": false,
+    "historical_diary_runtime_input": false,
+    "external_patient_client_exposure": false,
+    "confirm_payload_or_write_behavior_change": false,
+    "model_to_database_write": false,
+    "deployment_or_production_readiness_claim": false
+  },
+  "required_before_any_future_approval": [
+    "explicit_yuri_decision_recorded_in_this_payload",
+    "safe_copy_matrix_contract_tests_pass",
+    "d5_reopening_decision_packet_still_keeps_runtime_closed_until_change",
+    "route_intercepted_evidence_label_is_explicit",
+    "confirm_payload_and_write_authority_remain_unchanged",
+    "focused_regression_and_boundary_tests_pass"
+  ],
+  "forbidden_even_if_route_intercepted_evidence_is_later_approved": [
+    "frontend_javascript_change",
+    "backend_route_or_response_change",
+    "additional_backend_response_attachment_point",
+    "graphql_resolver_emits_bernie_ui_view_model",
+    "provider_prompt_or_live_provider_wiring",
+    "access_ai_invocation",
+    "memory_rag_or_graphrag_runtime_access",
+    "h15_or_h_series_runtime_input",
+    "historical_diary_runtime_input",
+    "confirm_payload_contains_view_model_fields",
+    "database_write_depends_on_view_model_fields",
+    "external_patient_client_exposure",
+    "deployment_or_production_readiness_claim"
+  ],
+  "pause_triggers": [
+    "status_changes_from_draft_only_not_applied",
+    "decision_changes_from_no_new_d5_approval_applied",
+    "reviewer_or_reviewed_on_or_acknowledgement_is_filled",
+    "any_candidate_scope_field_changes_to_true",
+    "required_before_any_future_approval_is_weakened",
+    "forbidden_scope_is_weakened",
+    "runtime_or_write_change_is_requested"
+  ],
+  "ariadne_s3_shadow_classification": {
+    "mode": "advisory_only",
+    "observed_changed_paths": [
+      "AGENTS.md",
+      "docs/bernie-ui-derived-state-d5-next-step-approval-payload-draft.json",
+      "docs/bernie-ui-derived-state-d5-next-step-approval-payload-draft.md",
+      "orchestration/sprint_closeout.md",
+      "tests/test_bernie_ui_d5_next_step_approval_payload_draft.py"
+    ],
+    "boundary_class": "green",
+    "classification": "allowed",
+    "human_boundary_outcome": "green_draft_only"
+  },
+  "next_recommended_action": "Stop for Yuri decision. No new D5 approval, runtime expansion, or route-intercepted evidence implementation is authorized by this draft."
+}

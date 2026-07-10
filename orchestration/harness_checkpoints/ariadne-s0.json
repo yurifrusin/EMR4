@@ -1,8 +1,8 @@
 {
   "schema_version": "ariadne.checkpoint.v1",
-  "stage": "integration",
+  "stage": "closeout",
   "next_action": {
-    "kind": "await_user_direction_for_sprint_292_draft_only_approval_payload",
+    "kind": "await_user_decision_keep_d5_closed_or_authorize_route_intercepted_copy_evidence_only",
     "boundary_class": "green",
     "classification": "requires_user_approval"
   }

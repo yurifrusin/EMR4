@@ -90,6 +90,32 @@
         "no_choke_point_integration",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s3-sprint-292-shadow-run",
+      "stage": "verification",
+      "kind": "advisory_real_sprint_classification",
+      "status": "passed",
+      "recorded_by": "codex",
+      "state_fingerprint": "45947328f15ba774de7d6180da0ce35b29442057",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_bernie_ui_d5_next_step_approval_payload_draft.py",
+        "tests/test_ariadne_action_classifier.py"
+      ],
+      "scope": [
+        "docs/bernie-ui-derived-state-d5-next-step-approval-payload-draft.json",
+        "docs/bernie-ui-derived-state-d5-next-step-approval-payload-draft.md",
+        "tests/test_bernie_ui_d5_next_step_approval_payload_draft.py"
+      ],
+      "limitations": [
+        "advisory_only",
+        "green_prediction_matched_human_boundary_outcome",
+        "draft_only_not_applied",
+        "no_runtime_change"
+      ]
     }
   ]
 }
