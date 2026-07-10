@@ -20,6 +20,8 @@ APIs, or launch mechanisms. There is no planned GUI or native Ariadne runtime.
 
 Sprint planning is separated from master integration through the conductor and
 verifier protocol in `docs/ariadne-harness-conductor-verifier-protocol.md`.
+The eventual high-assurance worker mode is brokered patch delivery from isolated
+worker sandboxes; shared-user worktrees are a labelled lower-assurance fallback.
 
 ## Purpose
 

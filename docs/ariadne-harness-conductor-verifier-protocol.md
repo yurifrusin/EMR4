@@ -58,3 +58,47 @@ runtime, write, provider, deployment, or release permission.
 
 The first practice remains manual packets via the existing worker channels. No
 harness script launches an agent; only the orchestrator can integrate and push.
+
+## High-Assurance Write Protection
+
+The preferred cross-platform security model is brokered patch delivery from an
+isolated worker sandbox. A worker receives a read-only repository snapshot (or
+read-only mount), a writable scratch/output directory, a Markdown task packet,
+and YAML scope settings. It receives no canonical checkout, `master` worktree,
+Git push credential, production secret, or authority to apply changes.
+
+It returns only artifact files:
+
+```text
+plan.md
+change.patch
+verification.json
+handover.md
+```
+
+The verifier checks the patch against allowed paths, settings, packet scope,
+and evidence. The protected orchestrator, under a separate identity, is the
+only process that applies a verifier-passed patch to the integration worktree,
+runs final checks, commits, and pushes `master`.
+
+```text
+isolated worker sandbox -> patch and evidence
+  -> verifier pass | revision_required
+  -> protected orchestrator applies, verifies, commits, pushes master
+```
+
+This protocol is independent of model and transport: a Claude CLI worker,
+Antigravity, DeepSeek bridge, Codex, CI job, hosted agent, or human can return
+the same artifact set. The security boundary is capability, not the model:
+workers have no write access to the canonical checkout and no credential that
+can publish it.
+
+Platform implementations may use rootless containers or dedicated users with
+read-only mounts on Linux, sandbox/VM or dedicated-user isolation on macOS, and
+Windows Sandbox, Hyper-V, or dedicated local accounts with NTFS ACLs on Windows.
+Remote workers receive disposable clones without remote write tokens.
+
+Separate worktrees and sparse checkouts remain useful compatibility tools, but
+they are not hard write protection. The harness must label local shared-user
+worktrees as `lower_assurance_local_mode`. High-assurance mode is required for
+workers that receive sensitive scope, broad write scope, or untrusted execution.
