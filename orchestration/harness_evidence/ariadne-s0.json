@@ -24,6 +24,20 @@
         "no_live_agent_execution",
         "first_of_two_required_real_sprint_runs"
       ]
+    },
+    {
+      "evidence_id": "ariadne-rehydration-dry-run-002",
+      "stage": "integration",
+      "kind": "context_rehydration_dry_run",
+      "status": "passed",
+      "recorded_by": "codex",
+      "state_fingerprint": "f4edca9f070eb9aae3af8415c02f92224e3b4ecc",
+      "limitations": [
+        "advisory_only",
+        "no_live_agent_execution",
+        "second_of_two_required_real_sprint_runs",
+        "zero_false_pause_outcomes_observed"
+      ]
     }
   ]
 }

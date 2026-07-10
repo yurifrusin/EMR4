@@ -51,7 +51,9 @@ portable schema spine and context rehydration CLI. The core is in the top-level
 `orchestration_harness/` package; the current EMR4 mandate, checkpoint, and
 evidence ledger are under `orchestration/`. The CLI reads state and emits
 `passed` or `pause_required`; it does not modify git state, launch workers, or
-enforce a decision.
+enforce a decision. Two clean-start Green sprint dry runs have passed with zero
+false pauses. The gate remains advisory-only; S3 requires a concrete observed
+orchestration problem before classifier work begins.
 
 Do not start with:
 
