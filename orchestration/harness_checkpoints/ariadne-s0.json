@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.checkpoint.v1",
-  "stage": "verification",
+  "stage": "integration",
   "next_action": {
-    "kind": "run_s3_classifier_alongside_a_real_emr4_sprint_in_advisory_mode",
+    "kind": "await_user_direction_for_sprint_292_draft_only_approval_payload",
     "boundary_class": "green",
-    "classification": "allowed_with_evidence"
+    "classification": "requires_user_approval"
   }
 }

@@ -64,6 +64,32 @@
         "historical_replay_only",
         "no_choke_point_integration"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s3-sprint-291-shadow-run",
+      "stage": "verification",
+      "kind": "advisory_real_sprint_classification",
+      "status": "passed",
+      "recorded_by": "codex",
+      "state_fingerprint": "3c5cdb9bad92f45b93f9ebec4e1ba7f030b7acb3",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_bernie_ui_safe_copy_matrix.py",
+        "tests/test_ariadne_action_classifier.py"
+      ],
+      "scope": [
+        "docs/bernie-ui-derived-state-safe-copy-matrix.json",
+        "docs/bernie-ui-derived-state-safe-copy-matrix.md",
+        "tests/test_bernie_ui_safe_copy_matrix.py"
+      ],
+      "limitations": [
+        "advisory_only",
+        "green_prediction_matched_human_boundary_outcome",
+        "no_choke_point_integration",
+        "no_runtime_change"
+      ]
     }
   ]
 }

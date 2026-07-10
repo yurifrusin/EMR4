@@ -1,0 +1,149 @@
+{
+  "schema_version": "bernie.ui_dag.safe_copy_matrix.v1",
+  "date": "2026-07-10",
+  "sprint": 291,
+  "decision": "docs_tests_only_safe_copy_matrix",
+  "source_fixture": "tests/fixtures/bernie_ui_view_model/cases.json",
+  "source_view_model": "app/services/bernie/ui_view_model.py",
+  "scope": {
+    "runtime_code_change": false,
+    "d5_scope_expansion": false,
+    "frontend_javascript_expansion": false,
+    "provider_or_live_provider_wiring": false,
+    "confirm_payload_or_write_behavior_change": false,
+    "model_to_database_write": false
+  },
+  "rows": [
+    {
+      "id": "instruction_waiting",
+      "source_fixture_id": "instruction_waiting",
+      "copy_mode": "technical_details_only",
+      "confirmation_state": "not_applicable",
+      "permitted_primary_copy": "Bernie is waiting for the next session event.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": false},
+      "recovery_affordance": "await_next_session_event",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made"],
+      "evidence_requirement": "display_only_fixture"
+    },
+    {
+      "id": "clarification_ambiguous_identity",
+      "source_fixture_id": "clarification_ambiguous_identity",
+      "copy_mode": "blocked",
+      "confirmation_state": "blocked",
+      "permitted_primary_copy": "Bernie cannot continue until the blocking detail is resolved.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": false},
+      "recovery_affordance": "clarification_or_identity_selection",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made"],
+      "evidence_requirement": "display_only_fixture"
+    },
+    {
+      "id": "candidate_slots_available",
+      "source_fixture_id": "candidate_slots_available",
+      "copy_mode": "offer",
+      "confirmation_state": "not_applicable",
+      "permitted_primary_copy": "Bernie found candidate times for staff review.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": false},
+      "recovery_affordance": "staff_selects_candidate",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made"],
+      "evidence_requirement": "display_only_fixture"
+    },
+    {
+      "id": "proposal_ready",
+      "source_fixture_id": "margaret_dr_shera_proposal_ready",
+      "copy_mode": "not_booked_yet",
+      "confirmation_state": "ready",
+      "permitted_primary_copy": "No appointment has been made yet. Staff review and backend checks are still required.",
+      "required_flags": {"show_confirm_button": true, "show_success_copy": false},
+      "recovery_affordance": "staff_review_or_choose_another_time",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made"],
+      "evidence_requirement": "display_only_fixture"
+    },
+    {
+      "id": "confirm_pressed_not_booked",
+      "source_fixture_id": "confirm_pressed_not_booked",
+      "copy_mode": "not_booked_yet",
+      "confirmation_state": "pressed",
+      "permitted_primary_copy": "No appointment has been made yet. Staff review and backend checks are still required.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": false},
+      "recovery_affordance": "await_signed_confirm_submission",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made"],
+      "evidence_requirement": "display_only_fixture"
+    },
+    {
+      "id": "awaiting_backend_not_booked",
+      "source_fixture_id": "awaiting_backend_hides_old_candidates",
+      "copy_mode": "not_booked_yet",
+      "confirmation_state": "awaiting_backend",
+      "permitted_primary_copy": "No appointment has been made yet. Staff review and backend checks are still required.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": false},
+      "recovery_affordance": "await_backend_result",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made"],
+      "evidence_requirement": "route_intercepted_only"
+    },
+    {
+      "id": "backend_confirmed_success",
+      "source_fixture_id": "backend_confirmed_success",
+      "copy_mode": "success",
+      "confirmation_state": "confirmed",
+      "permitted_primary_copy": "Appointment booked after backend confirmation.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": true},
+      "recovery_affordance": "review_confirmed_result",
+      "forbidden_fragments": ["route_intercepted_is_live_backend", "provider_confirmed"],
+      "evidence_requirement": "backend_confirmed_session_state_route_intercepted"
+    },
+    {
+      "id": "stale_proposal_retry",
+      "source_fixture_id": "stale_proposal_retry",
+      "copy_mode": "stale_or_retry",
+      "confirmation_state": "stale",
+      "permitted_primary_copy": "This proposal needs refresh or retry before booking.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": false},
+      "recovery_affordance": "refresh_retry_or_edit",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made"],
+      "evidence_requirement": "display_only_fixture"
+    },
+    {
+      "id": "backend_rejection_retry",
+      "source_fixture_id": "backend_rejection_retry",
+      "copy_mode": "stale_or_retry",
+      "confirmation_state": "failed",
+      "permitted_primary_copy": "This proposal needs refresh or retry before booking.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": false},
+      "recovery_affordance": "refresh_retry_or_edit",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made", "not found"],
+      "evidence_requirement": "route_intercepted_only"
+    },
+    {
+      "id": "no_slots_suggestions",
+      "source_fixture_id": "no_slots_suggestions",
+      "copy_mode": "no_slots",
+      "confirmation_state": "not_applicable",
+      "permitted_primary_copy": "Bernie did not find a suitable time in that window.",
+      "required_flags": {"show_confirm_button": false, "show_success_copy": false},
+      "recovery_affordance": "show_next_options",
+      "forbidden_fragments": ["booked", "confirmed", "appointment made"],
+      "evidence_requirement": "display_only_fixture"
+    }
+  ],
+  "matrix_invariants": [
+    "Only confirmation_state=confirmed may use success copy or show_success_copy=true.",
+    "No pre-confirm row may claim that an appointment has been made, booked, or confirmed.",
+    "Copy is display-only and does not authorize a confirm command or appointment write.",
+    "Route-intercepted evidence must never be labelled live backend or live provider evidence.",
+    "Raw identifiers, snake_case codes, and generic not-found wording are not permitted ordinary staff copy."
+  ],
+  "ariadne_s3_shadow_classification": {
+    "mode": "advisory_only",
+    "observed_changed_paths": [
+      "AGENTS.md",
+      "docs/bernie-ui-derived-state-safe-copy-matrix.json",
+      "docs/bernie-ui-derived-state-safe-copy-matrix.md",
+      "orchestration/sprint_closeout.md",
+      "tests/test_bernie_ui_safe_copy_matrix.py"
+    ],
+    "boundary_class": "green",
+    "classification": "allowed",
+    "human_boundary_outcome": "green_docs_tests_only"
+  },
+  "next_recommended_action": "Prepare Sprint 292 as a draft-only D5 next-step approval payload; do not apply approval or reopen D5 runtime."
+}
