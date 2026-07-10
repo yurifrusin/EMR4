@@ -12,9 +12,15 @@ Assign the cheapest currently available resource that can meet the task packet's
 required capability, evidence, and independence level. Record the assignment
 and any reduced independence in closeout evidence.
 
+The conductor allocates the sprint. The verifier checks the allocation against
+the settings before the orchestrator receives it. The orchestrator owns master
+integration only; see `docs/ariadne-harness-conductor-verifier-protocol.md`.
+
 | Need | Normal allocation | Fallback |
 |---|---|---|
-| Orchestration and integration | GPT Terra | DeepSeek 4 Pro after context rehydration |
+| Master integration and orchestration | GPT Terra | DeepSeek 4 Pro after context rehydration |
+| Sprint planning and allocation | Claude Fable | Claude Opus |
+| Allocation/settings verification | DeepSeek 4 Flash | Economical capable verifier with limitation recorded |
 | Ordinary design or code review | Claude Opus at medium reasoning, or Sonnet | GPT/DeepSeek review with reduced-independence label |
 | Exceptional architecture checkpoint | Claude Fable | Explicitly justified alternative review mix |
 | Parallel bounded implementation or tests | GPT worker, Antigravity, or DeepSeek 4 Flash | Any available bounded worker |

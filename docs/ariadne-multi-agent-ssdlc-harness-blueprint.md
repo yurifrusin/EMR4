@@ -7,6 +7,20 @@ approve live subagent execution, autonomous commits, provider calls, route
 wiring, database writes, deployment, production readiness, PHI access,
 historical diary access, memory/RAG/GraphRAG, or any EMR4 runtime behavior.
 
+## Architecture Correction: Protocol, Not Platform
+
+Date: 2026-07-11
+
+The harness is not a dedicated user platform. Its portable surface is committed
+Markdown, existing inbox/outbox communication, YAML project settings, and small
+scripts that validate and report on those artifacts. Codex, Claude Code,
+Antigravity, DeepSeek bridges, CI, and future systems remain replaceable
+execution environments; the harness owns none of their user interfaces, model
+APIs, or launch mechanisms. There is no planned GUI or native Ariadne runtime.
+
+Sprint planning is separated from master integration through the conductor and
+verifier protocol in `docs/ariadne-harness-conductor-verifier-protocol.md`.
+
 ## Purpose
 
 This document captures the proposed sidecar harness that grew out of the Bernie
