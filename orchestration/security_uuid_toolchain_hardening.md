@@ -38,7 +38,8 @@ findings through `office-addin-debugging -> office-addin-dev-settings ->
 @microsoft/m365agentstoolkit-cli -> @azure/msal-node / teamsfx-core ->
 uuid@8.3.2`. This is a distinct Microsoft toolchain modernization decision; it
 is not safely solved by forcing a transitive override. The current GitHub alert
-must be rechecked after Dependabot recalculates on the pushed lockfile.
+was rechecked after commit `99f86616` and remains open, which is expected while
+that separate development-toolchain path still resolves `uuid@8.3.2`.
 
 Outcome: partial hardening completed; full development-toolchain closure remains
 blocked pending a separately tested Microsoft Office tooling upgrade path.
