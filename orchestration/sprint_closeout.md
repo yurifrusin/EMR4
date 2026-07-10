@@ -24,43 +24,40 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 291 Bernie UI Derived-State Safe-Copy Matrix |
-| Integrated through | Ariadne docs/tests-only implementation with S3 advisory shadow classification; no worker lane required |
+| Batch | Sprint 292 D5 Next-Step Approval Payload Draft |
+| Integrated through | Ariadne docs/tests-only draft with S3 advisory shadow classification; no worker lane required |
 | Status | Published to `origin/master` and `origin/handoff/current` |
-| Commit | `90fe11a9` |
+| Commit | `0e9a183a` |
 | Push | `master` and `handoff/current` pushed successfully |
 | Final status | `## master...origin/master` |
 | Last updated | 2026-07-10 |
 
-## Sprint 291 What Changed
+## Sprint 292 What Changed
 
-- Added `docs/bernie-ui-derived-state-safe-copy-matrix.{json,md}`.
-- Added `tests/test_bernie_ui_safe_copy_matrix.py`, which maps every canonical
-  view-model fixture state to safe copy, confirmation posture, and required
-  confirm/success flags.
-- Reserved success copy for backend-confirmed state and prohibited booking
-  claims for every pre-confirm state.
-- Recorded Ariadne S3's first real-sprint shadow run: Green/allowed predicted
-  from the docs/tests changed-path set, matching Yuri's approved Green scope.
+- Added `docs/bernie-ui-derived-state-d5-next-step-approval-payload-draft.{json,md}`.
+- Added `tests/test_bernie_ui_d5_next_step_approval_payload_draft.py`.
+- Kept the payload unapplied: reviewer/date blank, acknowledgement false, and
+  every candidate scope field false.
+- Recorded Ariadne S3 Green/allowed prediction matching the draft-only scope.
 - Kept D5 expansion, route delivery, frontend JavaScript changes,
   provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series,
   historical diary runtime inputs, GraphQL delivery/readiness, external
   clients, confirm payload/write behavior changes, model-to-database writes,
   deployment, and production readiness closed.
 
-## Sprint 291 Verification
+## Sprint 292 Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_safe_copy_matrix.py tests\test_bernie_ui_d5_reopening_decision_packet.py tests\test_bernie_ui_view_model_contract_cross_reference.py tests\test_ariadne_harness.py tests\test_ariadne_action_classifier.py
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_d5_next_step_approval_payload_draft.py tests\test_bernie_ui_safe_copy_matrix.py tests\test_bernie_ui_d5_reopening_decision_packet.py tests\test_ariadne_harness.py tests\test_ariadne_action_classifier.py
 git diff --check
 ```
 
 Result: `35 passed`; existing Starlette and Google GenAI deprecation warnings
 only. Whitespace check clean.
 
-Sprint engine state: stop after Sprint 291 publication for Yuri direction. The
-only proposed next slice is Sprint 292, a draft-only D5 next-step approval
-payload; it must not apply approval or reopen D5 runtime. No deployment,
+Sprint engine state: stop after Sprint 292 publication for Yuri decision.
+Recommended posture is keep D5 closed; any later route-intercepted copy evidence
+needs explicit approval and any runtime expansion needs separate review. No deployment,
 production, readiness, telemetry, external-client, write, provider, memory,
 H15/trove, mutation, subscription, D5 expansion, or field-expansion gate is
 opened.
