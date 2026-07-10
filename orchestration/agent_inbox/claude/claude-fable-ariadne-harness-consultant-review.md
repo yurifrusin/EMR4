@@ -4,7 +4,7 @@
 |---|---|
 | To | claude |
 | Branch | `claude/current` |
-| Status | queued |
+| Status | reviewed |
 | Created | 278663de |
 | Start Command | `python scripts\agent_worktrees.py handin --agent claude` |
 | Plan Command | `python scripts\agent_worktrees.py plan --agent claude --task claude-fable-ariadne-harness-consultant-review --summary "Short plan summary"` |
@@ -87,8 +87,10 @@ Record concerns, alternative designs, or reasons this task should not be merged 
 
 ## Completion Notes
 
-Required before submit. These notes are copied into Codex's review packet automatically:
+Fulfilled by an explicit read-only `claude-fable-5` consultant run. The durable
+Codex-side review artifact is:
+`orchestration/agent_inbox/codex/review-claude-fable-ariadne-harness-implementation-plan.md`.
 
-- Files changed:
-- Verification run:
-- Remaining risks:
+- Files changed: coordination artifacts only.
+- Verification run: explicit Fable read-only consultation completed; `git diff --check` passed before Codex-side commit.
+- Remaining risks: the first Claude headless worker pass used Opus rather than the explicit Fable alias; the final committed review artifact preserves the explicit `claude-fable-5` pass as authoritative for this request.
