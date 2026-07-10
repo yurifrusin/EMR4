@@ -410,6 +410,79 @@ Example:
 If evidence is unavailable, the harness should record the gap explicitly rather
 than letting the orchestrator smooth over it.
 
+## Context Rehydration Gate
+
+Context-window limits and auto-compaction should be treated as engineering
+failure modes. The orchestrator's working memory must not be the source of
+truth.
+
+The harness should include a context rehydration gate that runs after a fresh
+chat, auto-compaction, worker handoff, or long pause before the orchestrator can
+continue sprint work.
+
+The gate should reload and validate:
+
+- current git branch and `HEAD`;
+- local and remote baton refs where applicable;
+- dirty worktree status;
+- active mandate;
+- current SSDLC stage;
+- allowed and forbidden scope;
+- last checkpoint or closeout;
+- evidence ledger readability;
+- unresolved decisions and stop conditions;
+- next proposed action boundary classification.
+
+Minimal command shape:
+
+```text
+python scripts/ariadne_context_rehydration_check.py
+```
+
+Minimal success shape:
+
+```json
+{
+  "rehydration_status": "passed",
+  "repo_state": {
+    "branch": "master",
+    "dirty": false
+  },
+  "mandate": {
+    "id": "ariadne-harness-sidecar",
+    "autonomy": "continue_green_and_blue_sprints",
+    "runtime_wiring_allowed": false,
+    "provider_calls_allowed": false
+  },
+  "next_action": {
+    "kind": "schema_replay_foundation",
+    "boundary_class": "green",
+    "requires_user_approval": false
+  }
+}
+```
+
+Minimal fail-closed shape:
+
+```json
+{
+  "rehydration_status": "pause_required",
+  "reasons": [
+    "dirty_worktree_present",
+    "active_mandate_missing",
+    "next_action_not_classified"
+  ]
+}
+```
+
+The gate should treat auto-compaction summaries as convenience text, not
+authority. Authority comes from committed docs, mandate files, event logs,
+evidence records, and git state.
+
+This makes a fresh session preferable to degraded long-context memory: the new
+session starts from a validated state packet instead of trying to reconstruct
+intent from chat residue.
+
 ## Initial Implementation Path
 
 This is the proposed first safe sequence for EMR4 if Yuri continues the sidecar
@@ -450,6 +523,133 @@ track.
    Require separate approval before the harness can launch real agents, apply
    worker patches, move branches, commit, push, or affect EMR4 runtime work.
 
+8. Context rehydration gate
+
+   Add `scripts/ariadne_context_rehydration_check.py` with fixture-backed tests.
+   The first version should only inspect repo state, mandate state, checkpoint
+   state, evidence readability, and next-action classification.
+
+9. Adapter planning
+
+   Keep Codex as the first operator because EMR4 already uses Codex for
+   integration discipline. Do not make Codex the architecture. The harness core
+   should remain portable to Claude Code, Antigravity, Omnigent, CI, human
+   review, and mock workers through adapters.
+
+10. Extraction review
+
+   After the harness prevents drift or improves handoff in at least one real
+   EMR4 sprint, review whether it should be split into a standalone project.
+
+## Codex-First, Platform-Neutral Rollout
+
+The first implementation should live inside EMR4 and be operated by Codex. That
+is a pragmatic starting point, not a lock-in decision.
+
+The harness should be structured as:
+
+```text
+Ariadne Harness Core
+  portable Python + schemas + replay tests
+
+Execution Adapters
+  Codex first
+  Claude Code later
+  Antigravity later
+  Omnigent if useful
+  CI/human/mock adapters
+
+Interface Layer
+  CLI first
+  optional GUI later
+```
+
+The core must not depend on Codex-specific APIs, Claude-specific APIs, GUI
+state, or hosted-agent behavior. Agent integrations should be adapters that can
+read packets, invoke or hand work to a worker, and return structured results.
+
+The first adapter can be a no-op or filesystem adapter. A real Codex adapter can
+come later if the packet protocol proves useful. Claude Code and other tools
+should be able to attach by implementing the same packet contract.
+
+Omnigent may be useful if it already solves agent execution, queues, logs,
+model-routing, or cross-agent control. It should not be foundational while its
+Windows story is uncertain. Treat it as an optional adapter, not as the harness
+authority layer.
+
+## Interface Strategy
+
+The CLI comes first because it is portable, testable, and easy to run from
+Windows, Linux, macOS, CI, or a fresh chat session.
+
+A GUI can come later, after the core proves itself. The GUI should visualize and
+operate the same deterministic core rather than becoming a separate authority
+surface.
+
+Useful GUI surfaces:
+
+- active mandate;
+- current SSDLC stage;
+- allowed and blocked boundaries;
+- context rehydration status;
+- role assignments;
+- worker packets;
+- evidence gaps;
+- drift warnings;
+- checkpoint and closeout status.
+
+The GUI should not be required for correctness. It is an operator convenience
+layer over the same contracts and validators.
+
+## EMR4-First, Then Extract
+
+The harness should stay inside EMR4 until it proves its value in real work.
+EMR4 is a strong proving ground because it has long-running context, strict
+safety gates, multi-agent handoff pressure, local historical-data boundaries,
+and genuine orchestrator drift risk.
+
+The harness should still be written as if it will be extracted:
+
+- no EMR4 clinical imports in the core;
+- project policy passed in as data;
+- repo-specific mandates stored as examples or config;
+- portable paths and command arrays;
+- synthetic fixtures for generic replay tests;
+- EMR4-specific fixtures clearly labelled as examples;
+- CLI boundaries that a standalone package can preserve.
+
+Possible initial in-repo shape:
+
+```text
+docs/ariadne-multi-agent-ssdlc-harness-blueprint.md
+scripts/ariadne_context_rehydration_check.py
+tests/test_ariadne_context_rehydration_check.py
+app/services/orchestration_harness/
+```
+
+Possible extracted shape later:
+
+```text
+ariadne-harness/
+  ariadne_harness/
+  tests/
+  docs/
+  examples/
+    emr4/
+```
+
+Extraction should wait until the harness has:
+
+- mandate ledger;
+- action and boundary classifier;
+- SSDLC stage model;
+- context rehydration gate;
+- worker packet contract;
+- replay tests;
+- safe aggregate report;
+- at least one real EMR4 sprint where it prevented drift, reduced user
+  permission fatigue, or improved handoff quality.
+
 ## EMR4 Boundary
 
 This sidecar idea must not weaken EMR4's existing gates.
@@ -480,3 +680,7 @@ harness for the orchestration process itself, not a live multi-agent runtime.
   creating friction for ordinary safe sprint progression?
 - What is the minimum useful adapter for a real worker agent once mock packets
   are proven?
+- What exact state must the context rehydration gate require before a compacted
+  or fresh session may continue autonomously?
+- Which extraction threshold is strong enough to justify splitting the harness
+  out of EMR4?
