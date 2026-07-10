@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.checkpoint.v1",
+  "stage": "implementation",
+  "next_action": {
+    "kind": "schema_and_rehydration_fixture_verification",
+    "boundary_class": "green",
+    "classification": "allowed_with_evidence"
+  }
+}

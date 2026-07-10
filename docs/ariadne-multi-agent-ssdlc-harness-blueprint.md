@@ -46,6 +46,13 @@ authority matters.
 
 The first version must not try to become a full multi-agent runtime.
 
+Implementation checkpoint, 2026-07-10: S1-S2 now exist as an advisory-only,
+portable schema spine and context rehydration CLI. The core is in the top-level
+`orchestration_harness/` package; the current EMR4 mandate, checkpoint, and
+evidence ledger are under `orchestration/`. The CLI reads state and emits
+`passed` or `pause_required`; it does not modify git state, launch workers, or
+enforce a decision.
+
 Do not start with:
 
 - live control of Codex, Claude, Antigravity, or other worker agents;
@@ -621,10 +628,13 @@ The harness should still be written as if it will be extracted:
 Possible initial in-repo shape:
 
 ```text
-docs/ariadne-multi-agent-ssdlc-harness-blueprint.md
-scripts/ariadne_context_rehydration_check.py
-tests/test_ariadne_context_rehydration_check.py
-app/services/orchestration_harness/
+  docs/ariadne-multi-agent-ssdlc-harness-blueprint.md
+  orchestration_harness/
+  orchestration/harness_mandates/
+  orchestration/harness_checkpoints/
+  orchestration/harness_evidence/
+  scripts/ariadne_context_rehydration_check.py
+  tests/test_ariadne_harness.py
 ```
 
 Possible extracted shape later:

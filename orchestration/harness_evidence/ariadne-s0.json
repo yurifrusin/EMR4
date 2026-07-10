@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.evidence_ledger.v1",
+  "records": [
+    {
+      "evidence_id": "ariadne-fable-consultant-plan",
+      "stage": "design",
+      "kind": "consultant_review",
+      "status": "passed",
+      "recorded_by": "claude-fable-5",
+      "limitations": [
+        "advisory_only",
+        "no_live_agent_execution"
+      ]
+    }
+  ]
+}

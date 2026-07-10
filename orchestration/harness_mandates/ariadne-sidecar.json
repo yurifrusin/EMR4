@@ -1,0 +1,29 @@
+{
+  "mandate_id": "ariadne-harness-sidecar",
+  "objective": "Develop an advisory-only, portable orchestration harness that improves EMR4 development discipline.",
+  "autonomy": "continue_green_and_blue_sprints",
+  "allowed": [
+    "docs",
+    "tests",
+    "static_contracts",
+    "synthetic_fixtures",
+    "safe_aggregate_reports"
+  ],
+  "requires_user_approval": [
+    "live_subagent_execution",
+    "runtime_wiring",
+    "provider_calls",
+    "database_writes",
+    "real_patient_data",
+    "deployment",
+    "production_readiness_claims",
+    "harness_git_mutation"
+  ],
+  "stop_conditions": [
+    "scope_boundary_crossing",
+    "missing_required_evidence",
+    "subagent_review_conflict",
+    "dirty_worktree_conflict",
+    "security_sensitive_change_without_threat_model"
+  ]
+}
