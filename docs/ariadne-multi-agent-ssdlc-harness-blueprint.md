@@ -55,6 +55,12 @@ enforce a decision. Two clean-start Green sprint dry runs have passed with zero
 false pauses. The gate remains advisory-only; S3 requires a concrete observed
 orchestration problem before classifier work begins.
 
+S3 checkpoint, 2026-07-10: the advisory changed-path classifier and a 15-action
+historical replay corpus are now implemented. The classifier uses only a
+policy-as-data file and observed paths, never commit prose or the orchestrator's
+declared intent. It has no execution or enforcement hook. Its next evidence
+requirement is comparison with a future real sprint's human-approved boundary.
+
 Do not start with:
 
 - live control of Codex, Claude, Antigravity, or other worker agents;

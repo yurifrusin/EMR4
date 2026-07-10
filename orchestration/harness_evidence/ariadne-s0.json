@@ -38,6 +38,32 @@
         "second_of_two_required_real_sprint_runs",
         "zero_false_pause_outcomes_observed"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s3-historical-replay-001",
+      "stage": "verification",
+      "kind": "historical_observable_action_replay",
+      "status": "passed",
+      "recorded_by": "codex",
+      "state_fingerprint": "6b175723e0acea762c208a12b018c2131e5a377b",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_harness.py",
+        "tests/test_ariadne_action_classifier.py"
+      ],
+      "scope": [
+        "orchestration_harness/",
+        "orchestration/harness_policies/ariadne-sidecar-path-boundaries.json",
+        "tests/fixtures/ariadne_harness/historical_action_replay.json"
+      ],
+      "limitations": [
+        "advisory_only",
+        "no_live_agent_execution",
+        "historical_replay_only",
+        "no_choke_point_integration"
+      ]
     }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.path_boundary_policy.v1",
+  "rules": [
+    {"path_prefix": "local_data/", "boundary_class": "black", "classification": "blocked"},
+    {"path_prefix": "app/", "boundary_class": "red", "classification": "requires_user_approval"},
+    {"path_prefix": "alembic/", "boundary_class": "red", "classification": "requires_user_approval"},
+    {"path_prefix": "static/", "boundary_class": "red", "classification": "requires_user_approval"},
+    {"path_prefix": "EMR4 Sidebar/", "boundary_class": "red", "classification": "requires_user_approval"},
+    {"path_prefix": "docs/diary/", "boundary_class": "red", "classification": "requires_user_approval"},
+    {"path_prefix": "AGENTS.md", "boundary_class": "green", "classification": "allowed"},
+    {"path_prefix": "docs/", "boundary_class": "green", "classification": "allowed"},
+    {"path_prefix": "orchestration/", "boundary_class": "green", "classification": "allowed"},
+    {"path_prefix": "orchestration_harness/", "boundary_class": "green", "classification": "allowed"},
+    {"path_prefix": "scripts/", "boundary_class": "green", "classification": "allowed"},
+    {"path_prefix": "tests/", "boundary_class": "green", "classification": "allowed"},
+    {"path_prefix": "review/", "boundary_class": "green", "classification": "allowed"}
+  ],
+  "default": {"boundary_class": "amber", "classification": "underspecified"}
+}
