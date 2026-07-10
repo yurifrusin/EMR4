@@ -19,6 +19,7 @@ from orchestration_harness.rehydration import GitState, build_rehydration_status
 DEFAULT_MANDATE_PATH = REPO_ROOT / "orchestration" / "harness_mandates" / "ariadne-sidecar.json"
 DEFAULT_CHECKPOINT_PATH = REPO_ROOT / "orchestration" / "harness_checkpoints" / "ariadne-s0.json"
 DEFAULT_EVIDENCE_PATH = REPO_ROOT / "orchestration" / "harness_evidence" / "ariadne-s0.json"
+EVIDENCE_LEDGER_SCHEMA_VERSION = "ariadne.evidence_ledger.v1"
 
 
 def load_json_object(path: Path) -> dict[str, Any] | None:
@@ -37,6 +38,17 @@ def load_mandate(path: Path) -> Mandate | None:
         return Mandate.from_dict(payload)
     except ValueError:
         return None
+
+
+def evidence_ledger_is_readable(path: Path) -> bool:
+    """Accept only the minimal ledger shape, never arbitrary readable JSON."""
+
+    payload = load_json_object(path)
+    return (
+        payload is not None
+        and payload.get("schema_version") == EVIDENCE_LEDGER_SCHEMA_VERSION
+        and isinstance(payload.get("records"), list)
+    )
 
 
 def inspect_git_state(repo_root: Path) -> GitState:
@@ -66,7 +78,7 @@ def build_status(
         git_state=inspect_git_state(repo_root),
         mandate=load_mandate(mandate_path),
         checkpoint=load_json_object(checkpoint_path),
-        evidence_ledger_readable=load_json_object(evidence_path) is not None,
+        evidence_ledger_readable=evidence_ledger_is_readable(evidence_path),
     )
 
 

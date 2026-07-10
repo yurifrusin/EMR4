@@ -14,6 +14,7 @@ from scripts.ariadne_context_rehydration_check import (
     DEFAULT_EVIDENCE_PATH,
     DEFAULT_MANDATE_PATH,
     build_status,
+    evidence_ledger_is_readable,
     load_mandate,
 )
 
@@ -97,7 +98,7 @@ def test_portable_core_has_no_emr4_runtime_or_os_specific_dependency():
     assert "subprocess" not in source
 
 
-def test_cli_build_status_reads_real_paths_without_mutation(tmp_path: Path):
+def test_cli_build_status_reads_real_paths_without_mutation():
     status = build_status(
         repo_root=Path(__file__).resolve().parents[1],
         mandate_path=DEFAULT_MANDATE_PATH,
@@ -108,3 +109,11 @@ def test_cli_build_status_reads_real_paths_without_mutation(tmp_path: Path):
     assert status["repo_state"]["branch"]
     assert status["repo_state"]["head"]
     assert DEFAULT_EVIDENCE_PATH.exists()
+
+
+def test_evidence_ledger_requires_its_minimal_schema_shape(tmp_path: Path):
+    invalid_ledger = tmp_path / "invalid-ledger.json"
+    invalid_ledger.write_text('{"unrelated": true}', encoding="utf-8")
+
+    assert evidence_ledger_is_readable(DEFAULT_EVIDENCE_PATH) is True
+    assert evidence_ledger_is_readable(invalid_ledger) is False
