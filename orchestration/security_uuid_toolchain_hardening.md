@@ -15,6 +15,8 @@ tooling, not the three production dependencies.
   vulnerable `sockjs -> uuid` chain.
 - Pinned direct `office-addin-manifest` to `2.1.6`, which resolves its direct
   UUID dependency to `14.0.1`.
+- Pinned `office-addin-debugging` to `6.1.2` and rebuilt the lockfile. This
+  compatible update did not remove the separate Microsoft toolkit chain.
 
 The repository uses webpack 5.107.2 at install time; `webpack-dev-server@6`
 declares webpack `^5.101.0` and Node `>=22.15.0`. The local Node version is
@@ -37,7 +39,8 @@ declares webpack `^5.101.0` and Node `>=22.15.0`. The local Node version is
 findings through `office-addin-debugging -> office-addin-dev-settings ->
 @microsoft/m365agentstoolkit-cli -> @azure/msal-node / teamsfx-core ->
 uuid@8.3.2`. This is a distinct Microsoft toolchain modernization decision; it
-is not safely solved by forcing a transitive override. The current GitHub alert
+is not safely solved by forcing a transitive override or the available patch
+update of `office-addin-debugging`. The current GitHub alert
 was rechecked after commit `99f86616` and remains open, which is expected while
 that separate development-toolchain path still resolves `uuid@8.3.2`.
 
