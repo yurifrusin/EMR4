@@ -24,56 +24,50 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 290 D5 Reopening Decision Packet |
-| Integrated through | Ariadne decision packet with Antigravity review; DeepSeek worker retired and not used |
+| Batch | Sprint 291 Bernie UI Derived-State Safe-Copy Matrix |
+| Integrated through | Ariadne docs/tests-only implementation with S3 advisory shadow classification; no worker lane required |
 | Status | Published to `origin/master` and `origin/handoff/current` |
-| Commit | `e74c2a22` |
+| Commit | `90fe11a9` |
 | Push | `master` and `handoff/current` pushed successfully |
-| Final status | `## master...origin/master` before publication-state correction |
-| Last updated | 2026-07-09 |
+| Final status | `## master...origin/master` |
+| Last updated | 2026-07-10 |
 
-## Sprint 290 What Changed
+## Sprint 291 What Changed
 
-- Added
-  `docs/bernie-ui-derived-state-d5-reopening-decision-packet.{json,md}`.
-- Added
-  `tests/test_bernie_ui_d5_reopening_decision_packet.py`.
-- Added Antigravity review artifact
-  `orchestration/agent_inbox/antigravity/review-antigravity-sprint290-d5-reopening-decision-packet.md`.
-- Recorded the decision not to reopen D5 runtime yet.
-- Recommended Sprint 291 as a docs/tests-only safe-copy matrix and Sprint 292
-  as a draft-only approval payload.
-- Deleted the old unused local DeepSeek worker-agent definition at
-  `C:\Users\sarashera\.codex\agents\deepseek-worker.toml`.
-- Updated `AGENTS.md` and `docs/codex-model-switching-deepseek.md` so future
-  sprint protocol treats DeepSeek as retired unless Yuri explicitly approves a
-  fresh worker setup.
+- Added `docs/bernie-ui-derived-state-safe-copy-matrix.{json,md}`.
+- Added `tests/test_bernie_ui_safe_copy_matrix.py`, which maps every canonical
+  view-model fixture state to safe copy, confirmation posture, and required
+  confirm/success flags.
+- Reserved success copy for backend-confirmed state and prohibited booking
+  claims for every pre-confirm state.
+- Recorded Ariadne S3's first real-sprint shadow run: Green/allowed predicted
+  from the docs/tests changed-path set, matching Yuri's approved Green scope.
 - Kept D5 expansion, route delivery, frontend JavaScript changes,
   provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series,
   historical diary runtime inputs, GraphQL delivery/readiness, external
   clients, confirm payload/write behavior changes, model-to-database writes,
   deployment, and production readiness closed.
 
-## Sprint 290 Verification
+## Sprint 291 Verification
 
 ```powershell
-.venv\Scripts\python.exe -m py_compile tests\test_bernie_ui_d5_reopening_decision_packet.py
-.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_d5_reopening_decision_packet.py -q
+.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_safe_copy_matrix.py tests\test_bernie_ui_d5_reopening_decision_packet.py tests\test_bernie_ui_view_model_contract_cross_reference.py tests\test_ariadne_harness.py tests\test_ariadne_action_classifier.py
 git diff --check
 ```
 
-Result: `6 passed`; existing Starlette and Google GenAI deprecation warnings
+Result: `35 passed`; existing Starlette and Google GenAI deprecation warnings
 only. Whitespace check clean.
 
-Sprint engine state: stop after Sprint 290 commit/push for Yuri direction, or
-continue only into the recommended non-runtime Sprint 291 safe-copy matrix. No
-deployment, production, readiness, telemetry, external-client, write, provider,
-memory, H15/trove, mutation, subscription, D5 expansion, or field-expansion gate
-is opened.
+Sprint engine state: stop after Sprint 291 publication for Yuri direction. The
+only proposed next slice is Sprint 292, a draft-only D5 next-step approval
+payload; it must not apply approval or reopen D5 runtime. No deployment,
+production, readiness, telemetry, external-client, write, provider, memory,
+H15/trove, mutation, subscription, D5 expansion, or field-expansion gate is
+opened.
 
 ---
 
-## Previous Closeout - Sprint 289
+## Previous Closeout - Sprint 290
 
 | Item | Value |
 |---|---|
