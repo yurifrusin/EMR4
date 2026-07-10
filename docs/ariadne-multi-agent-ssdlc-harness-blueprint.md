@@ -87,6 +87,13 @@ packets, and safe aggregate reports.
    `security_reviewer`, `test_engineer`, and `docs_handover_auditor` are role
    obligations, not necessarily separate people or models.
 
+   A role must not become a permanent model assignment. The harness should
+   allocate available models to roles per sprint according to capability,
+   remaining usage, cost, availability, and required independence. A model that
+   is suitable for a UX review may also be suitable for a test-design or
+   adversarial-review task; the packet and evidence requirements define the
+   duty, not the provider's label.
+
 3. The orchestrator proposes. The deterministic harness authorizes.
 
    The orchestrator may propose a sprint, action, delegation, or closeout. A
@@ -337,6 +344,54 @@ Multi-agent mapping example:
 
 The orchestrator may choose staffing. It may not delete required role
 obligations because fewer resources are available.
+
+## Resource Allocation Under Real Constraints
+
+The SSDLC obligations are stable; the resource plan is deliberately elastic.
+The harness must support the normal practical situation where a user has one
+primary subscription, limited secondary subscriptions, fluctuating five-hour or
+weekly quotas, and lower-cost API workers.
+
+Separate three concepts:
+
+| Concept | Stable or variable | Meaning |
+|---|---|---|
+| Role obligation | Stable | The review, design, testing, or integration duty that must be evidenced. |
+| Resource capability | Variable | What a currently available model, human, CI job, or tool can credibly do. |
+| Sprint assignment | Variable | The cost- and availability-aware choice of resource for one role in one sprint. |
+
+Example resource profile for the current EMR4 operator:
+
+```json
+{
+  "primary_orchestrator": "gpt_terra",
+  "orchestrator_fallbacks": ["deepseek_4_pro"],
+  "architecture_review_default": "claude_opus_medium_or_sonnet",
+  "exceptional_consultation": "claude_fable_only_when_leverage_justifies_cost",
+  "additional_workers": ["antigravity", "deepseek_4_flash"],
+  "allocation_rule": "choose_the_cheapest_available_resource_that_meets_the_packet_evidence_and_independence_need"
+}
+```
+
+This is a scheduling policy, not authority. A fallback orchestrator must pass
+the same context-rehydration gate and remains bounded by the same mandate,
+deterministic checks, and user approval requirements. A lower-cost worker may
+perform an implementation, test, architecture, product, or adversarial-review
+role when its packet is appropriately bounded. The closeout must record reduced
+independence or capability where it matters.
+
+Claude Fable is an escalation resource for unusually consequential architecture
+or review checkpoints, not the default sprint reviewer. Claude Opus at an
+appropriate reasoning level or Sonnet can cover ordinary review work when they
+meet the packet's needs. Antigravity must not be boxed into UX work; product/UX
+review is one useful capability, not a permanent duty. DeepSeek Flash is a
+valid economical worker resource, while DeepSeek Pro may be a temporary
+orchestrator fallback if the primary resource is unavailable.
+
+The historical removal of an unused local `deepseek-worker` configuration was a
+specific EMR4 cleanup decision, not a general judgment that DeepSeek is retired
+from the harness. Any future DeepSeek use still needs a bounded packet, declared
+authority, and normal review/integration discipline.
 
 ## Worker Packet Contract
 
