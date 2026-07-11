@@ -70,9 +70,11 @@ writes ignored per-turn events to `local_data/ariadne-harness/deepcode-outbox/`;
 `scripts/ariadne_deepcode_mailbox.py` polls metadata while packet artifacts
 remain the authority-bearing record. The local Deep Code configuration is
 `askAll` but pre-allows `write-in-cwd` so the notify hook can write its ignored
-outbox event unattended; that is transport convenience, not project-write or
-integration authority. Durable packet artifacts, packet ownership, and the
-protected-orchestrator acceptance gate remain mandatory. Out-of-worktree
+outbox event unattended. That permission covers the entire Deep Code process
+cwd, not only the outbox, so worker sessions must run in disposable
+packet-scoped worktrees; packet boundaries are semantic rather than CLI-enforced.
+It is not integration authority. Durable packet artifacts, packet ownership,
+and the protected-orchestrator acceptance gate remain mandatory. Out-of-worktree
 access, deletion, Git mutation, network tools, and MCP are denied. This bridge
 returns messages but does not automate TTY permission prompts or provide a full
 bidirectional PTY.

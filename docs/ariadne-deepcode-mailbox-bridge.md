@@ -32,8 +32,11 @@ is not in a verifier-passed capability packet.
 
 The default user-level permissions are strict. Read-in-workspace, Git-log
 queries, and `write-in-cwd` may be pre-authorized so the notify hook can return
-an event without an operator approval on every turn. This pre-authorization is
-transport convenience only: events are untrusted, and no result is accepted
-without its packet-scoped durable artifact and protected-orchestrator review.
+an event without an operator approval on every turn. Deep Code applies that
+write permission to its whole current working directory, not just the outbox.
+For worker tasks, start Deep Code in a disposable packet-scoped worktree; the
+packet is a semantic scope boundary and is not enforced by the CLI permission
+system. Events remain untrusted, and no result is accepted without its
+packet-scoped durable artifact and protected-orchestrator review.
 Out-of-workspace reads/writes, deletion, Git mutation, network tools, and MCP
-remain denied. Worker packets still limit all non-mailbox project edits.
+remain denied.
