@@ -56,7 +56,13 @@ function stripAnsi(value) {
 function validArtifact(artifact) {
   if (!fs.existsSync(artifact)) return false;
   const body = fs.readFileSync(artifact, "utf8");
-  return /^DECISION:\s*(pass|revision_required)\s*$/im.test(body);
+  return body.split(/\r?\n/).some((line) => {
+    const cells = line.includes("|") ? line.split("|") : [line];
+    return cells.some((cell) => {
+      const normalized = cell.trim().replace(/^[*`_]+|[*`_]+$/g, "").trim();
+      return /^DECISION:\s*(pass|revision_required)$/i.test(normalized);
+    });
+  });
 }
 
 function writeReceipt(receiptPath, payload) {
@@ -104,7 +110,7 @@ function fixtureCommand(mode, artifact, outbox) {
   if (!process.env.ARIADNE_PTY_TEST_MODE) {
     throw new Error("--fixture requires ARIADNE_PTY_TEST_MODE");
   }
-  if (!["success", "permission", "hang", "ignore_exit"].includes(mode)) {
+  if (!["success", "permission", "hang", "ignore_exit", "markdown_decision"].includes(mode)) {
     throw new Error("unsupported fixture mode");
   }
   const fixture = path.join(path.dirname(fileURLToPath(import.meta.url)), "fake_deepcode.mjs");

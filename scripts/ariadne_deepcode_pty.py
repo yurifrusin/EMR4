@@ -59,7 +59,9 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--exit-timeout", type=int, default=30)
     parser.add_argument(
-        "--fixture", choices=("success", "permission", "hang", "ignore_exit"), help=argparse.SUPPRESS
+        "--fixture",
+        choices=("success", "permission", "hang", "ignore_exit", "markdown_decision"),
+        help=argparse.SUPPRESS,
     )
     args = parser.parse_args()
     cwd = args.cwd.resolve()

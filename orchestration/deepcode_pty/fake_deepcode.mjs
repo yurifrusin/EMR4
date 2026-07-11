@@ -11,9 +11,10 @@ if (mode === "permission") {
   process.stdout.write("Permission required\r\nDo you want to proceed?\r\n");
 } else if (mode === "hang") {
   process.stdout.write("Working\r\n");
-} else if (mode === "success" || mode === "ignore_exit") {
+} else if (mode === "success" || mode === "ignore_exit" || mode === "markdown_decision") {
   fs.mkdirSync(path.dirname(artifactPath), { recursive: true });
-  fs.writeFileSync(artifactPath, "DECISION: pass\n\nSynthetic PTY fixture.\n", "utf8");
+  const decision = mode === "markdown_decision" ? "| Decision | **`DECISION: pass`** |" : "DECISION: pass";
+  fs.writeFileSync(artifactPath, `${decision}\n\nSynthetic PTY fixture.\n`, "utf8");
   process.stdout.write("Artifact written\r\nstatus: completed · tokens: 1\r\n");
 } else {
   process.exit(64);

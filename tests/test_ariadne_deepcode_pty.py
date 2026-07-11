@@ -55,6 +55,14 @@ def test_pty_adapter_exits_only_after_artifact_and_observes_mailbox(tmp_path: Pa
     assert receipt["process_cleanup_confirmed"] is True
 
 
+def test_pty_adapter_accepts_markdown_bold_decision(tmp_path: Path):
+    result, receipt = _run(tmp_path, "markdown_decision")
+
+    assert result.returncode == 0
+    assert receipt["status"] == "completed"
+    assert receipt["artifact_observed"] is True
+
+
 def test_pty_adapter_fails_closed_on_permission_prompt(tmp_path: Path):
     result, receipt = _run(tmp_path, "permission")
 
