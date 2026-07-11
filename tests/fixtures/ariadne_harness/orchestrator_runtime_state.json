@@ -1,6 +1,12 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
   "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {"agent_id": "orchestrator", "measurement_source": "platform_compaction_event", "rehydrated_from_receipt": true}
+    ]
+  },
   "adapter_observations": [
     {"adapter_id": "codex_local_deepseek_spawn", "method": "codex_local_spawn", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "claude_cli_print", "method": "claude_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},

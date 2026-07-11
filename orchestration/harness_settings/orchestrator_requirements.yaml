@@ -8,6 +8,15 @@ worker_slot_management:
 workspace_receipts:
   required_agent_ids: [claude, antigravity]
   required_fields: [agent_id, worktree, branch, clean, at_handoff_current, recorded_at]
+context_health:
+  required_agent_ids: [orchestrator]
+  hard_rehydration_events: [new_session, post_compaction, model_or_provider_change, restored_conversation]
+  provider_meter:
+    soft_checkpoint_ratio: 0.70
+    mandatory_rehydration_ratio: 0.85
+    measurement_is_advisory_only: true
+  unknown_meter_policy: require_fresh_receipt_before_high_authority_action
+  high_authority_actions: [sprint_planning, worker_dispatch, verifier_acceptance, integration, commit, push]
 orchestrator_rules:
   - never_infer_transport_unavailability_from_an_unrelated_probe
   - never_dispatch_when_slot_inventory_is_missing_or_stale

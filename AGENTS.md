@@ -50,6 +50,13 @@ pre-plan, and pre-dispatch continuation events; it cannot probe, spawn/close
 workers, realign worktrees, or integrate. The current EMR4 fixture is only a
 profile/example, not part of the core contract: resource-instance slots are
 generic, while `deepseek-flash-workers` is merely this profile's managed pool.
+The generic receipt now includes Context Health: new session, post-compaction,
+restored-conversation, and model/provider changes force rehydration; provider
+token measurements are optional advisory evidence with 70% checkpoint and 85%
+new-continuation policy defaults; unknown context cannot proceed to planning,
+dispatch, verification acceptance, integration, commit, or push without a
+fresh receipt. This replaces any expectation that the orchestrator will simply
+remember critical facts through automatic compaction.
 The revised Opus Conductor plan selected a bounded transport-adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. It is
 not dispatched: the current Codex task surface exposes built-in subagent models

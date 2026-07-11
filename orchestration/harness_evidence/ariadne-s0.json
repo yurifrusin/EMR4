@@ -250,6 +250,31 @@
         "no_worktree_control",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-context-health-receipt",
+      "stage": "implementation",
+      "kind": "generic_context_health_gate",
+      "status": "passed",
+      "recorded_by": "codex",
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "-q"
+      ],
+      "scope": [
+        "orchestration_harness/orchestrator_preflight.py",
+        "orchestration/harness_settings/orchestrator_requirements.yaml",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ],
+      "limitations": [
+        "advisory_only",
+        "provider_meter_optional",
+        "fixture_context_state_only",
+        "no_runtime_change"
+      ]
     }
   ]
 }

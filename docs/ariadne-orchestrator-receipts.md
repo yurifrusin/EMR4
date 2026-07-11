@@ -32,3 +32,19 @@ pre-dispatch action requires a fresh receipt. Missing resource-instance
 inventory, stale instances without recorded reuse/closure, invalid adapter
 evidence, or stale worker worktrees block dispatch. This moves critical facts from a long handover
 document into a repeatable, project-portable gate.
+
+## Context Health
+
+The same receipt carries context health. Platform lifecycle events such as a
+new session, compaction, restored conversation, or model/provider switch are
+hard rehydration triggers. A provider may optionally report input-token and
+context-limit counts; those measurements are advisory because hidden platform
+context and compaction make them incomplete. The project policy uses 70% as a
+checkpoint and 85% as a mandatory new-continuation threshold.
+
+When no provider meter exists, the state is `unknown`, not healthy. Before a
+high-authority action such as planning, worker dispatch, verifier acceptance,
+integration, commit, or push, an unknown context must show
+`rehydrated_from_receipt: true`. Worker profiles can use the same rule with a
+self-contained packet receipt rather than the orchestrator's full project
+receipt.

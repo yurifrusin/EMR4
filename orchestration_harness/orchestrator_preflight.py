@@ -80,11 +80,46 @@ def build_orchestrator_receipt(
         if receipt.get("at_handoff_current") is not True:
             reasons.append(f"workspace_not_at_handoff:{agent_id}")
 
+    context_policy = requirements.get("context_health", {})
+    context_state = runtime_state.get("context_health")
+    contexts_by_agent = {}
+    if isinstance(context_state, dict) and isinstance(context_state.get("agent_contexts"), list):
+        contexts_by_agent = {
+            item.get("agent_id"): item
+            for item in context_state["agent_contexts"]
+            if isinstance(item, dict)
+        }
+    else:
+        reasons.append("context_health_missing")
+
+    planned_action = runtime_state.get("planned_action")
+    hard_event = runtime_state.get("continuation_event") in context_policy.get("hard_rehydration_events", [])
+    high_authority = planned_action in context_policy.get("high_authority_actions", [])
+    mandatory_ratio = context_policy.get("provider_meter", {}).get("mandatory_rehydration_ratio")
+    for agent_id in context_policy.get("required_agent_ids", []):
+        context = contexts_by_agent.get(agent_id)
+        if context is None:
+            reasons.append(f"context_observation_missing:{agent_id}")
+            continue
+        if hard_event and context.get("rehydrated_from_receipt") is not True:
+            reasons.append(f"context_rehydration_required:{agent_id}")
+        source = context.get("measurement_source")
+        if source == "provider_reported":
+            input_tokens = context.get("input_tokens")
+            context_limit = context.get("context_limit_tokens")
+            if not isinstance(input_tokens, int) or not isinstance(context_limit, int) or context_limit < 1:
+                reasons.append(f"provider_context_measurement_invalid:{agent_id}")
+            elif isinstance(mandatory_ratio, (int, float)) and input_tokens / context_limit >= mandatory_ratio:
+                reasons.append(f"context_mandatory_rehydration_threshold:{agent_id}")
+        elif source == "unknown" and high_authority and context.get("rehydrated_from_receipt") is not True:
+            reasons.append(f"context_rehydration_required:{agent_id}")
+
     return {
         "schema_version": "ariadne.orchestrator_receipt.v1",
         "status": "passed" if not reasons else "revision_required",
         "settings_fingerprint": settings_fingerprint,
         "continuation_event": runtime_state.get("continuation_event"),
+        "planned_action": planned_action,
         "reasons": reasons,
         "worker_dispatch_permitted": not reasons,
         "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
