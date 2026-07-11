@@ -1,12 +1,12 @@
 schema_version: ariadne.worker_pool.v1
 workers:
-  - resource_id: gpt-terra-primary
+  - resource_id: openai-primary-orchestrator
     provider: openai
     account_id: openai-subscription
     access_mode: subscription
     transport: manual
     transport_quirks: []
-    default_model: gpt-terra
+    default_model: gpt-sol
     default_reasoning: high
     max_instances: 1
     quota_scope: account_window
@@ -39,6 +39,19 @@ workers:
     quota_class: limited_subscription
     capabilities: [conductor, architect, code_reviewer]
     cost_tier: 1
+  - resource_id: gpt-sol-conductor-fallback
+    provider: openai
+    account_id: openai-subscription
+    access_mode: subscription
+    transport: bridge_subagent
+    transport_quirks: [shares_primary_openai_subscription_window, distinct_subagent_context_required, no_integration_authority]
+    default_model: gpt-sol
+    default_reasoning: high
+    max_instances: 1
+    quota_scope: account_window
+    quota_class: primary_subscription
+    capabilities: [conductor, architect, code_reviewer]
+    cost_tier: 0
   - resource_id: antigravity-gemini-flash-3-5-worker
     provider: antigravity
     account_id: antigravity-subscription

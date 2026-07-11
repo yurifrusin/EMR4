@@ -2,16 +2,16 @@ schema_version: ariadne.role_preferences.v1
 roles:
   - role: conductor
     required: true
-    preferences: [claude-fable-conductor, claude-opus-conductor]
-    preference_rationale: Fable is preferred for high-leverage planning; Opus is the ordinary Claude fallback. The generalist profile is the final resource-constrained fallback.
+    preferences: [claude-fable-conductor, claude-opus-conductor, gpt-sol-conductor-fallback]
+    preference_rationale: Fable is the default conductor; Opus is used only when Fable has usage or availability problems; a distinct spawned GPT Sol subagent is third. The protected orchestrator session must never fill this fallback directly.
     review_by: 2026-08-11
   - role: verifier
     required: true
-    preferences: [deepseek-flash-verifier, gpt-terra-primary]
+    preferences: [deepseek-flash-verifier, openai-primary-orchestrator]
     preference_rationale: Economical independent settings verification is preferred.
     review_by: 2026-08-11
   - role: orchestrator
     required: true
-    preferences: [gpt-terra-primary]
+    preferences: [openai-primary-orchestrator]
     preference_rationale: The protected primary integration resource owns master.
     review_by: 2026-08-11

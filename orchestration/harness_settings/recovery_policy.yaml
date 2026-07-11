@@ -1,0 +1,26 @@
+schema_version: ariadne.recovery_policy.v1
+closeout_provenance:
+  transferable: false
+  orchestrator_may_rewrite_worker_attestation: false
+implementation_repair:
+  transferable: true
+  requires_explicit_recovery_lease: true
+  imported_worker_source_trust: untrusted_candidate
+  orchestrator_owns_all_amendments: true
+required_recovery_evidence:
+  - original_worker_outcome_preserved
+  - worker_scope_breaches_preserved
+  - adopted_files_and_orchestrator_changes_separated
+  - deterministic_verification_recorded
+  - recovery_risk_class_recorded
+risk_policy:
+  low:
+    examples: [documentation, focused_tests, non_runtime_harness_code]
+    acceptance_gate: deterministic_tests_plus_diff_review
+  high:
+    examples: [runtime, security_boundary, database, deployment, release]
+    acceptance_gate: independent_verifier_plus_deterministic_tests_plus_diff_review
+scope:
+  expansion_prohibited: true
+  reallocation_by_orchestrator_prohibited: true
+  user_or_conductor_approval_required_for_new_role_assignment: true

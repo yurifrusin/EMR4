@@ -11,7 +11,8 @@
     {"adapter_id": "deepcode_cli", "method": "deepcode_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "claude_cli_print", "method": "claude_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
-    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["authored_fixture"]}
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["authored_fixture"]}
   ],
   "worker_slots": [
     {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}

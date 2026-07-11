@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated user platform, GUI, native runtime, or general agent-launch platform. `CLAUDE.md` defines Claude as conductor only when it receives an Ariadne planning invocation: Fable/high reasoning is preferred and Opus/medium is the ordinary fallback; Claude cannot launch workers, alter a verifier-passed allocation, integrate, commit, or push. S4a/S4b provide strict settings and a synthetic-only pure allocator. S4c adds `scripts/ariadne_allocation_plan.py`. DeepSeek Flash is now reached through a bounded cross-platform Deep Code PTY adapter: it bootstraps secret-free disposable-worktree settings, fails on permission prompts, requires a fresh durable artifact plus Deep Code turn-completion signal, attempts documented graceful exits, forcibly cleans up an unresponsive completed TUI, and writes an untrusted adapter mailbox event and receipt without retaining terminal output. The V3 plan at fingerprint `sha256:f52d391472d9fb0e361d1bef9b840bbcad9a028e4ebae56e2e2401bc6edbc61f` passed Deep Code verification. The pool distinguishes the DeepSeek Flash verifier from `deepseek-flash-workers` (one to three bounded worker lanes) and includes the Antigravity platform resource `antigravity-gemini-flash-3-5-worker` (zero or one current lane). Antigravity is the platform/transport and Gemini Flash 3.5 is its current model. S4d remains docs/tests-only and evidence-gated. No provider/runtime/frontend/database/GraphQL/H-series/D5/deployment/release authority or EMR4 runtime behavior is opened. |
-| **Next recommended work** | Commit and hand off the PTY adapter checkpoint, then dispatch the verifier-passed D1/D2/D3 packets through three disposable Deep Code worker worktrees. Require a fresh artifact, adapter event, receipt, and ownership check from each. Run the Antigravity/Gemini Flash 3.5 artifact-only veto lane if available; otherwise record stand-down and perform bounded Ariadne-local review. GPT Terra remains sole integrator/committer/pusher. Security sprint 2026-07-11 removed direct vulnerable uuid paths but Dependabot alert 5 remains open through six development-only Microsoft toolkit transitive dependencies; do not force overrides. D5 remains closed unless Yuri separately authorizes it. |
+| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated platform. DeepSeek Flash now runs through a bounded cross-platform PTY adapter with secret-free disposable-worktree setup, permission-prompt refusal, fresh artifact and turn-completion gates, confirmed process cleanup, untrusted adapter events/receipts, and no retained terminal output. S4d exercised three DeepSeek lanes. D2 was accepted normally; D1 and D3 exposed contradictory closeout, timeout, false-evidence, and ownership-breach cases. Yuri approved a provenance-preserving recovery lease: worker attestation is non-transferable, but the protected orchestrator may adopt source as untrusted candidate material, amend it under its own identity, and close low-risk recovery through deterministic tests and diff review. The active protected orchestrator is GPT Sol; its stable resource ID is `openai-primary-orchestrator`, replacing the brittle model-specific `gpt-terra-primary`. Historical Terra-labelled artifacts remain historical evidence. Seventy focused tests pass at complete settings fingerprint `sha256:14b8ae3439d6ce03bb1c4405dd42694acc62ca1fd4278f0812c480b57e7e775c`. No EMR4 runtime authority is opened. |
+| **Next recommended work** | Commit and hand off GPT Sol's recovery checkpoint, realign Antigravity, and request the verifier-planned Gemini Flash 3.5 artifact-only veto review over the final S4d diff. If Antigravity is unavailable, record stand-down and run bounded Ariadne-local review. Then close S4d, retire D1/D3 disposable worktrees, and return to regular EMR4 work through the proven orchestration layer. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. D5 remains closed unless Yuri separately authorizes it. |
 
 S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
 are distinct CLI transports. Deep Code requires a real TTY; non-TTY refusal is
@@ -76,9 +76,22 @@ cwd, not only the outbox, so worker sessions must run in disposable
 packet-scoped worktrees; packet boundaries are semantic rather than CLI-enforced.
 It is not integration authority. Durable packet artifacts, packet ownership,
 and the protected-orchestrator acceptance gate remain mandatory. Out-of-worktree
-access, deletion, Git mutation, network tools, and MCP are denied. This bridge
+access, deletion, Git mutation, network tools, and MCP are denied.
 The PTY adapter never answers a permission prompt. It provides bounded process
 lifecycle control, not a general bidirectional conversation channel.
+
+S4d recovery policy: closeout provenance is non-transferable, but implementation
+repair is transferable through an explicit recovery lease. The protected
+orchestrator may adopt failed worker source only as an untrusted candidate,
+must own and identify every amendment, preserve worker failures/scope breaches,
+and run the risk-class verification gate. Low-risk docs/tests/harness recovery
+uses deterministic tests plus diff review; runtime/security/database/deployment/
+release recovery also requires independent verification. See
+`docs/ariadne-orchestrator-recovery-lease.md`.
+Conductor allocation order is now explicit: Claude Fable first; Claude Opus
+only when Fable has usage or availability problems; then a distinct spawned
+GPT Sol subagent with no integration authority. S4d itself used Opus/medium.
+The protected GPT Sol orchestrator session cannot masquerade as that fallback.
 The revised Opus Conductor plan selected a bounded Deep Code adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. The
 real interactive Deep Code verifier artifact at

@@ -23,9 +23,16 @@ adapters:
     shell_probe_applicable: true
     authority_boundary: transport_only_no_integration_authority
   - adapter_id: codex_primary_session
-    resource_ids: [gpt-terra-primary]
+    resource_ids: [openai-primary-orchestrator]
     platform: codex_desktop
     invocation: protected_primary_session
     allowed_probe_methods: [synthetic_fixture, codex_session_observation]
     shell_probe_applicable: false
     authority_boundary: protected_orchestrator_only
+  - adapter_id: codex_subagent_spawn
+    resource_ids: [gpt-sol-conductor-fallback]
+    platform: codex_desktop
+    invocation: bounded_subagent_spawn
+    allowed_probe_methods: [synthetic_fixture, codex_subagent_observation]
+    shell_probe_applicable: false
+    authority_boundary: conductor_transport_only_no_integration_authority

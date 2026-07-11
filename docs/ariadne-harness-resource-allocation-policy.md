@@ -18,8 +18,8 @@ integration only; see `docs/ariadne-harness-conductor-verifier-protocol.md`.
 
 | Need | Normal allocation | Fallback |
 |---|---|---|
-| Master integration and orchestration | GPT Terra | DeepSeek 4 Pro after context rehydration |
-| Sprint planning and allocation | Claude Fable | Claude Opus |
+| Master integration and orchestration | OpenAI primary orchestrator (currently GPT Sol) | DeepSeek 4 Pro after context rehydration |
+| Sprint planning and allocation | Claude Fable | Claude Opus, then a distinct spawned GPT Sol subagent |
 | Allocation/settings verification | DeepSeek 4 Flash | Economical capable verifier with limitation recorded |
 | Ordinary design or code review | Claude Opus at medium reasoning, or Sonnet | GPT/DeepSeek review with reduced-independence label |
 | Exceptional architecture checkpoint | Claude Fable | Explicitly justified alternative review mix |
@@ -30,6 +30,13 @@ The table is illustrative, not a permanent routing rule. Antigravity is not a
 UX-only agent. DeepSeek is not globally retired. The earlier removal of an
 unused local DeepSeek worker configuration applies only to that obsolete local
 setup; it does not prevent a new explicitly enabled DeepSeek packet.
+
+The Conductor order is nevertheless explicit: Fable is the default. Opus is
+selected only when Fable has a usage or availability problem. A spawned GPT Sol
+subagent is third. That subagent has a distinct context and no integration
+authority; it is never the protected GPT Sol orchestrator session acting under
+a second label. S4d's actual Conductor calls used Opus/medium and are retained
+as historical evidence, not treated as the future default.
 
 ## Non-Negotiable Controls
 
@@ -62,10 +69,10 @@ an unreliable bridge cannot be mistaken for a quota or capability declaration.
   "schema_version": "ariadne.worker_pool.v1",
   "workers": [
     {
-      "resource_id": "gpt-terra-primary",
+      "resource_id": "openai-primary-orchestrator",
       "provider": "openai",
       "access_mode": "subscription",
-      "default_model": "gpt-terra",
+      "default_model": "gpt-sol",
       "default_reasoning": "high",
       "max_instances": 1,
       "availability": "available",
@@ -98,7 +105,7 @@ an unreliable bridge cannot be mistaken for a quota or capability declaration.
 }
 ```
 
-`default_model` may be Fable, Opus, Sonnet, GPT Terra, DeepSeek Flash, DeepSeek
+`default_model` may be Fable, Opus, Sonnet, GPT Sol, DeepSeek Flash, DeepSeek
 Pro, or another provider-specific sub-model. `default_reasoning` is the normal
 starting setting, not a guarantee: a sprint packet can request a different
 approved setting and must record the effective choice. `max_instances` is a
@@ -117,19 +124,19 @@ assigning one model to one duty.
   "roles": {
     "orchestrator": {
       "required": true,
-      "preferences": ["gpt-terra-primary", "deepseek-pro-fallback"]
+      "preferences": ["openai-primary-orchestrator", "deepseek-pro-fallback"]
     },
     "architecture_reviewer": {
       "required": true,
-      "preferences": ["claude-review", "gpt-terra-primary", "deepseek-flash-workers"]
+      "preferences": ["claude-review", "openai-primary-orchestrator", "deepseek-flash-workers"]
     },
     "implementer": {
       "required": true,
-      "preferences": ["gpt-terra-primary", "deepseek-flash-workers", "claude-review"]
+      "preferences": ["openai-primary-orchestrator", "deepseek-flash-workers", "claude-review"]
     },
     "test_engineer": {
       "required": true,
-      "preferences": ["deepseek-flash-workers", "gpt-terra-primary", "claude-review"]
+      "preferences": ["deepseek-flash-workers", "openai-primary-orchestrator", "claude-review"]
     },
     "product_or_adversarial_reviewer": {
       "required": false,

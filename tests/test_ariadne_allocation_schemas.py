@@ -31,7 +31,8 @@ def test_worker_pool_is_strict_and_declares_transport_separately_from_capability
 
     assert pool["schema_version"] == "ariadne.worker_pool.v1"
     assert {worker.resource_id for worker in workers} == {
-        "gpt-terra-primary", "claude-fable-conductor", "claude-opus-conductor",
+        "openai-primary-orchestrator", "claude-fable-conductor", "claude-opus-conductor",
+        "gpt-sol-conductor-fallback",
         "antigravity-gemini-flash-3-5-worker", "deepseek-flash-verifier", "deepseek-flash-workers",
     }
     assert any(worker.transport.value == "cli_interactive" for worker in workers)
@@ -50,6 +51,12 @@ def test_role_preferences_and_generalist_profile_are_schema_valid():
     assert generalist.independence == "self_review"
     assert Role.ORCHESTRATOR in generalist.covers
     assert set(generalist.covers) == set(Role) - {Role.GENERALIST}
+    conductor = next(item for item in roles if item.role is Role.CONDUCTOR)
+    assert conductor.preferences == (
+        "claude-fable-conductor",
+        "claude-opus-conductor",
+        "gpt-sol-conductor-fallback",
+    )
 
 
 def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
@@ -86,7 +93,7 @@ def test_user_override_schema_is_strict_and_compaction_safe():
     assert overrides == {"schema_version": "ariadne.user_overrides.v1", "overrides": []}
     override = UserOverride.from_dict({
         "override_id": "override-1", "scope": "sprint", "target": "role:verifier",
-        "value": "gpt-terra-primary", "expiry": "2026-08-11", "recorded_at": "2026-07-11",
+        "value": "openai-primary-orchestrator", "expiry": "2026-08-11", "recorded_at": "2026-07-11",
     })
     assert override.target == "role:verifier"
 

@@ -1,7 +1,7 @@
 {
   "probes": [
     {
-      "resource_id": "gpt-terra-primary",
+      "resource_id": "openai-primary-orchestrator",
       "probed_at": "2026-07-11T00:00:00Z",
       "method": "synthetic_fixture",
       "reachability": "reachable",

@@ -2,7 +2,7 @@ schema_version: ariadne.allocation_replay.v1
 scenarios:
   - scenario_id: normal_three_resource_pool
     probes:
-      - resource_id: gpt-terra-primary
+      - resource_id: openai-primary-orchestrator
         probed_at: 2026-07-11T00:00:00Z
         method: synthetic_fixture
         reachability: reachable
@@ -26,11 +26,11 @@ scenarios:
     expected_assignments:
       conductor: claude-fable-conductor
       verifier: deepseek-flash-verifier
-      orchestrator: gpt-terra-primary
+      orchestrator: openai-primary-orchestrator
     expected_unfilled_required_roles: []
   - scenario_id: claude_unavailable_generalist_fallback
     probes:
-      - resource_id: gpt-terra-primary
+      - resource_id: openai-primary-orchestrator
         probed_at: 2026-07-11T00:00:00Z
         method: synthetic_fixture
         reachability: reachable
@@ -52,8 +52,8 @@ scenarios:
         ttl_seconds: 300
         evidence: [fixture]
     expected_assignments:
-      conductor: gpt-terra-primary
-      verifier: gpt-terra-primary
-      orchestrator: gpt-terra-primary
+      conductor: openai-primary-orchestrator
+      verifier: openai-primary-orchestrator
+      orchestrator: openai-primary-orchestrator
     expected_unfilled_required_roles: []
     expected_reduced_independence_roles: [conductor, verifier]

@@ -412,6 +412,34 @@
         "raw_artifacts_and_receipts_local_ignored",
         "no_emr4_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s4d-gpt-sol-recovery",
+      "stage": "integration",
+      "kind": "provenance_preserving_orchestrator_recovery",
+      "status": "passed",
+      "recorded_by": "gpt-sol",
+      "state_fingerprint": "sha256:14b8ae3439d6ce03bb1c4405dd42694acc62ca1fd4278f0812c480b57e7e775c",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "focused_ariadne_s4d_suites",
+        "-q"
+      ],
+      "scope": [
+        "tests/test_ariadne_deepcode_adapter_settings.py",
+        "tests/test_ariadne_deepcode_mailbox_settings.py",
+        "docs/ariadne-deepcode-adapter-authority.md",
+        "orchestration/agent_inbox/codex/review-gpt-sol-s4d-recovery-integration.md"
+      ],
+      "limitations": [
+        "worker_closeout_failures_preserved",
+        "worker_source_adopted_as_untrusted_candidate",
+        "low_risk_docs_tests_harness_scope_only",
+        "antigravity_veto_review_pending",
+        "no_emr4_runtime_change"
+      ]
     }
   ]
 }
