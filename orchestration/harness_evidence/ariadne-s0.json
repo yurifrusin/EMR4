@@ -437,7 +437,8 @@
         "worker_closeout_failures_preserved",
         "worker_source_adopted_as_untrusted_candidate",
         "low_risk_docs_tests_harness_scope_only",
-        "antigravity_veto_review_pending",
+        "antigravity_stood_down_no_decision_artifact",
+        "ariadne_local_veto_fallback_passed_with_reduced_independence",
         "no_emr4_runtime_change"
       ]
     }

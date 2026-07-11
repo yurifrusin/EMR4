@@ -37,6 +37,7 @@ schemas/replay/CLI, orchestrator preflight, and complete-settings fingerprinting
 All passed. The allocator selected Claude Fable conductor, DeepSeek Flash
 verifier, and `openai-primary-orchestrator`. No EMR4 runtime code changed.
 
-The pending closeout obligation is one Antigravity/Gemini Flash 3.5 artifact-only
-veto review, or a recorded stand-down plus bounded Ariadne-local review if that
-transport is unavailable.
+Antigravity/Gemini Flash 3.5 did not return a decision artifact and was stood
+down. The bounded Ariadne-local fallback review passed with reduced independence
+recorded at
+`orchestration/agent_inbox/codex/review-ariadne-local-s4d-veto-fallback.md`.
