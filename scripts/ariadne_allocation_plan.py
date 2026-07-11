@@ -26,6 +26,7 @@ SETTINGS_FILES = (
     "generalist.yaml",
     "user_overrides.yaml",
     "sprint_worker_policy.yaml",
+    "transport_adapters.yaml",
 )
 
 
@@ -46,12 +47,30 @@ def _settings_fingerprint(settings_dir: Path) -> str:
     return f"sha256:{digest.hexdigest()}"
 
 
+def _validate_probe_adapters(probes: list[AvailabilityProbe], adapter_payload: dict[str, Any]) -> None:
+    adapters = adapter_payload.get("adapters")
+    if adapter_payload.get("schema_version") != "ariadne.transport_adapters.v1" or not isinstance(adapters, list):
+        raise ValueError("transport adapter settings are invalid")
+    allowed_methods: dict[str, set[str]] = {}
+    for adapter in adapters:
+        if not isinstance(adapter, dict) or not isinstance(adapter.get("resource_ids"), list) or not isinstance(adapter.get("allowed_probe_methods"), list):
+            raise ValueError("transport adapter entry is invalid")
+        for resource_id in adapter["resource_ids"]:
+            allowed_methods.setdefault(resource_id, set()).update(adapter["allowed_probe_methods"])
+    for probe in probes:
+        if probe.resource_id not in allowed_methods:
+            raise ValueError(f"probe resource has no declared transport adapter: {probe.resource_id}")
+        if probe.method not in allowed_methods[probe.resource_id]:
+            raise ValueError(f"probe method is not declared for {probe.resource_id}: {probe.method}")
+
+
 def build_allocation_report(*, sprint_id: str, probes_path: Path, settings_dir: Path = SETTINGS_DIR) -> dict[str, Any]:
     """Build a plan from local artifacts only; never probe or invoke a worker."""
     worker_pool = _load_yaml(settings_dir / "worker_pool.yaml")
     role_preferences = _load_yaml(settings_dir / "role_preferences.yaml")
     generalist_payload = _load_yaml(settings_dir / "generalist.yaml")
     worker_policy = _load_yaml(settings_dir / "sprint_worker_policy.yaml")
+    adapter_payload = _load_yaml(settings_dir / "transport_adapters.yaml")
     probes_payload = json.loads(probes_path.read_text(encoding="utf-8"))
     if not isinstance(probes_payload, dict) or not isinstance(probes_payload.get("probes"), list):
         raise ValueError("probe input must be a JSON object with a probes list")
@@ -60,6 +79,7 @@ def build_allocation_report(*, sprint_id: str, probes_path: Path, settings_dir: 
     preferences = [RolePreference.from_dict(item) for item in role_preferences["roles"]]
     generalist = GeneralistProfile.from_dict({key: value for key, value in generalist_payload.items() if key != "schema_version"})
     probes = [AvailabilityProbe.from_dict(item) for item in probes_payload["probes"]]
+    _validate_probe_adapters(probes, adapter_payload)
     outcome = allocate_roles(resources=resources, preferences=preferences, probes=probes, generalist=generalist)
     fingerprint = _settings_fingerprint(settings_dir)
 
@@ -107,6 +127,9 @@ def build_allocation_report(*, sprint_id: str, probes_path: Path, settings_dir: 
             "antigravity_platform_maximum_instances": worker_policy["worker_mix"]["antigravity"]["maximum_instances"],
             "deepseek_flash_minimum_instances": worker_policy["worker_mix"]["deepseek_flash"]["minimum_instances"],
             "deepseek_flash_maximum_instances": worker_policy["worker_mix"]["deepseek_flash"]["maximum_instances"],
+        },
+        "probe_transport_adapters": {
+            probe.resource_id: probe.method for probe in probes
         },
     }
 

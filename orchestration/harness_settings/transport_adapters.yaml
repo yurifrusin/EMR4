@@ -1,0 +1,30 @@
+schema_version: ariadne.transport_adapters.v1
+adapters:
+  - adapter_id: codex_local_deepseek_spawn
+    resource_ids: [deepseek-flash-verifier, deepseek-flash-workers]
+    platform: codex_desktop
+    invocation: local_codex_call_or_spawn
+    allowed_probe_methods: [synthetic_fixture, codex_local_spawn]
+    shell_probe_applicable: false
+    authority_boundary: transport_only_no_integration_authority
+  - adapter_id: claude_cli_print
+    resource_ids: [claude-fable-conductor, claude-opus-conductor]
+    platform: claude_code
+    invocation: claude_print_cli
+    allowed_probe_methods: [synthetic_fixture, claude_cli_observation]
+    shell_probe_applicable: true
+    authority_boundary: transport_only_no_integration_authority
+  - adapter_id: antigravity_cli_print
+    resource_ids: [antigravity-gemini-flash-3-5-worker]
+    platform: antigravity
+    invocation: agy_print_cli
+    allowed_probe_methods: [synthetic_fixture, agy_cli_observation]
+    shell_probe_applicable: true
+    authority_boundary: transport_only_no_integration_authority
+  - adapter_id: codex_primary_session
+    resource_ids: [gpt-terra-primary]
+    platform: codex_desktop
+    invocation: protected_primary_session
+    allowed_probe_methods: [synthetic_fixture, codex_session_observation]
+    shell_probe_applicable: false
+    authority_boundary: protected_orchestrator_only

@@ -21,3 +21,13 @@ mix constraints that a later Conductor plan must satisfy.
 It is not a DeepSeek verifier result. `verifier_decision` is intentionally
 `null`; S4d uses a human-invoked DeepSeek Flash review of the plan against the
 same committed settings before any workers receive packets.
+
+## Transport Evidence
+
+`transport_adapters.yaml` declares how a resource is reached separately from
+whether it is presently available. In particular, DeepSeek Flash is reached by
+a **local Codex call or spawn**. It has no required shell executable, so a
+PowerShell command-not-found result is not DeepSeek unavailability. A real S4d
+probe for DeepSeek must use `method: codex_local_spawn` and record the observed
+result. The CLI rejects a probe method not declared for that resource's
+transport adapter.

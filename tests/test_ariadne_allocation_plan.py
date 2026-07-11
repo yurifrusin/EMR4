@@ -45,3 +45,17 @@ def test_s4c_cli_writes_only_the_requested_report_artifact(tmp_path: Path):
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert payload["conductor_plan"]["sprint_id"] == "s4c-cli"
     assert payload["execution_permitted"] is False
+
+
+def test_s4c_rejects_a_probe_method_that_is_not_declared_for_its_transport(tmp_path: Path):
+    payload = json.loads(PROBES.read_text(encoding="utf-8"))
+    payload["probes"][0]["method"] = "claude_cli_observation"
+    invalid_probes = tmp_path / "invalid-probes.json"
+    invalid_probes.write_text(json.dumps(payload), encoding="utf-8")
+
+    try:
+        build_allocation_report(sprint_id="invalid-adapter", probes_path=invalid_probes)
+    except ValueError as error:
+        assert "not declared" in str(error)
+    else:
+        raise AssertionError("undeclared transport probe method must fail closed")

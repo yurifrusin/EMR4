@@ -64,6 +64,16 @@ def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
     assert "no_orchestrator_substitution" in policy["verifier_checks"]
 
 
+def test_transport_adapters_record_codex_local_deepseek_spawn_as_non_shell_transport():
+    adapters = _yaml("transport_adapters.yaml")
+    deepseek = next(item for item in adapters["adapters"] if item["adapter_id"] == "codex_local_deepseek_spawn")
+
+    assert adapters["schema_version"] == "ariadne.transport_adapters.v1"
+    assert deepseek["invocation"] == "local_codex_call_or_spawn"
+    assert deepseek["shell_probe_applicable"] is False
+    assert "codex_local_spawn" in deepseek["allowed_probe_methods"]
+
+
 def test_user_override_schema_is_strict_and_compaction_safe():
     overrides = _yaml("user_overrides.yaml")
 
