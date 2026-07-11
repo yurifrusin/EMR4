@@ -203,6 +203,26 @@
         "verifier_decision_not_performed",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s4d-workspace-and-transport-preflight",
+      "stage": "pilot",
+      "kind": "manual_conductor_verifier_preflight",
+      "status": "revision_required",
+      "recorded_by": "codex",
+      "scope": [
+        "C:\\Users\\sarashera\\EMR4-worktrees\\claude",
+        "C:\\Users\\sarashera\\EMR4-worktrees\\antigravity",
+        "docs/ariadne-s4d-pilot-preflight.md"
+      ],
+      "limitations": [
+        "conductor_plan_read_only",
+        "deepseek_transport_user_confirmed_but_not_exposed_by_current_task_surface",
+        "no_deepseek_verifier_artifact",
+        "no_worker_dispatch",
+        "no_integration_or_commit_authority_granted_to_workers",
+        "no_runtime_change"
+      ]
     }
   ]
 }

@@ -41,6 +41,13 @@ realigned when run from `EMR4-worktrees\claude`. This is expected guardrail
 behaviour. The harness must require a workspace preflight receipt (target
 worktree, expected branch, cleanliness, relation to `handoff/current`, and
 recorded realignment) before any Conductor or worker reads a packet.
+The revised Opus Conductor plan selected a bounded transport-adapter guard
+docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. It is
+not dispatched: the current Codex task surface exposes built-in subagent models
+only, not the configured DeepSeek local-spawn handle. This is a
+`revision_required` S4d preflight, not a claim that DeepSeek is globally
+unavailable and not permission to substitute the orchestrator or Antigravity as
+verifier. See `docs/ariadne-s4d-pilot-preflight.md`.
 
 2026-07-08 Yuri proposed applying DAG-style conditioning dependencies to the
 Bernie UI so a few canonical state nodes, especially confirmation state, can
