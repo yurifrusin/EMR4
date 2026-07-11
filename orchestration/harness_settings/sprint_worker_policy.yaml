@@ -1,7 +1,10 @@
 schema_version: ariadne.sprint_worker_policy.v1
 worker_mix:
   antigravity:
-    resource_id: antigravity-worker
+    platform: antigravity
+    default_resource_id: antigravity-gemini-flash-3-5-worker
+    default_model: gemini-flash-3.5
+    future_model_or_instance_expansion_requires_worker_pool_entry: true
     minimum_instances: 0
     maximum_instances: 1
     use_when: [independent_domain_review, separable_implementation, test_design, adversarial_review]

@@ -22,8 +22,9 @@ Before producing a sprint plan, read:
 - `docs/ariadne-harness-conductor-verifier-protocol.md`
 
 Produce a bounded allocation plan for DeepSeek Flash verification. It must name
-the boundary, roles, assigned resources/models/reasoning, Antigravity use or
-stand-down rationale, one to three DeepSeek Flash worker lanes, disjoint file or
+the boundary, roles, assigned resources/models/reasoning, Antigravity platform
+use (currently Gemini Flash 3.5) or stand-down rationale, one to three DeepSeek
+Flash worker lanes, disjoint file or
 review ownership, expected artifacts, verification, fallbacks, reduced
 independence, and unfilled obligations. Claude must not launch workers, change
 the verified allocation, write to `master`, integrate, commit, or push. A plan

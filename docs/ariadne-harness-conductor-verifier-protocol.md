@@ -64,11 +64,13 @@ harness script launches an agent; only the orchestrator can integrate and push.
 Claude Fable is the preferred conductor and Claude Opus is its ordinary
 fallback. The conductor reads the committed settings under
 `orchestration/harness_settings/`, particularly `sprint_worker_policy.yaml`.
-For a normal substantive sprint it chooses whether Antigravity has a distinct
-artifact or veto surface, then assigns between one and three DeepSeek Flash
-worker lanes according to separability, file/review ownership, and verification
-need. One DeepSeek Flash lane is the minimum worker posture; additional lanes
-are not ceremonial and require distinct bounded packets.
+For a normal substantive sprint it chooses whether the Antigravity platform,
+currently using Gemini Flash 3.5, has a distinct artifact or veto surface, then
+assigns between one and three DeepSeek Flash worker lanes according to
+separability, file/review ownership, and verification need. One DeepSeek Flash
+lane is the minimum worker posture; additional lanes are not ceremonial and
+require distinct bounded packets. Future Gemini models or additional Flash
+instances require distinct worker-pool entries and explicit capacity settings.
 
 DeepSeek Flash as verifier checks the plan against those same settings. It does
 not decide the worker mix, alter it, or integrate work. The present S4b

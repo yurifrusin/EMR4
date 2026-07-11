@@ -39,13 +39,13 @@ workers:
     quota_class: limited_subscription
     capabilities: [conductor, architect, code_reviewer]
     cost_tier: 1
-  - resource_id: antigravity-worker
-    provider: google
+  - resource_id: antigravity-gemini-flash-3-5-worker
+    provider: antigravity
     account_id: antigravity-subscription
     access_mode: subscription
     transport: cli_print
     transport_quirks: [cli_artifact_required, quota_is_observed_separately]
-    default_model: gemini
+    default_model: gemini-flash-3.5
     default_reasoning: medium
     max_instances: 1
     quota_scope: account_window
