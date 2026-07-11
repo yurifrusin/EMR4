@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.deepcode_pty_event.v1",
+  "event_id": "1b829875-4d93-4047-9b2a-524bbf114ca0",
+  "recorded_at": "2026-07-11T13:20:47.251Z",
+  "source": "deepcode_pty_adapter",
+  "status": "completed",
+  "artifact": "orchestration/agent_inbox/codex/review-deepcode-s5-plan.md",
+  "trust": "untrusted_transport_completion_requires_artifact_validation"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.deepcode_pty_receipt.v1",
+  "status": "completed",
+  "reason": "artifact_and_adapter_event_observed_forced_cleanup",
+  "started_at": "2026-07-11T13:18:02.643Z",
+  "finished_at": "2026-07-11T13:20:47.252Z",
+  "platform": "win32",
+  "packet": "orchestration/agent_inbox/codex/plan-claude-fable-emr4-receptionist-workflow-audit.md",
+  "artifact": "orchestration/agent_inbox/codex/review-deepcode-s5-plan.md",
+  "artifact_observed": true,
+  "turn_completion_observed": true,
+  "exit_sent_after_artifact": true,
+  "exit_signal_count": 4,
+  "forced_cleanup": true,
+  "process_cleanup_confirmed": true,
+  "permission_prompt_observed": false,
+  "mailbox_event_count": 1,
+  "mailbox_events": [
+    "2026-07-11T132047.251_0000_1b829875-4d93-4047-9b2a-524bbf114ca0.json"
+  ],
+  "child_exit_code": 1,
+  "terminal_output_persisted": false
+}
