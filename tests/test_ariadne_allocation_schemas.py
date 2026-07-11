@@ -31,10 +31,11 @@ def test_worker_pool_is_strict_and_declares_transport_separately_from_capability
 
     assert pool["schema_version"] == "ariadne.worker_pool.v1"
     assert {worker.resource_id for worker in workers} == {
-        "gpt-terra-primary", "claude-conductor", "deepseek-flash-verifier"
+        "gpt-terra-primary", "claude-fable-conductor", "claude-opus-conductor",
+        "antigravity-worker", "deepseek-flash-verifier", "deepseek-flash-workers",
     }
     assert any(worker.transport.value == "bridge_subagent" for worker in workers)
-    assert Role.CONDUCTOR in next(worker.capabilities for worker in workers if worker.resource_id == "claude-conductor")
+    assert Role.CONDUCTOR in next(worker.capabilities for worker in workers if worker.resource_id == "claude-fable-conductor")
 
 
 def test_role_preferences_and_generalist_profile_are_schema_valid():
@@ -49,6 +50,16 @@ def test_role_preferences_and_generalist_profile_are_schema_valid():
     assert generalist.independence == "self_review"
     assert Role.ORCHESTRATOR in generalist.covers
     assert set(generalist.covers) == set(Role) - {Role.GENERALIST}
+
+
+def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
+    policy = _yaml("sprint_worker_policy.yaml")
+
+    assert policy["schema_version"] == "ariadne.sprint_worker_policy.v1"
+    assert policy["worker_mix"]["antigravity"]["maximum_instances"] == 1
+    assert policy["worker_mix"]["deepseek_flash"]["minimum_instances"] == 1
+    assert policy["worker_mix"]["deepseek_flash"]["maximum_instances"] == 3
+    assert "no_orchestrator_substitution" in policy["verifier_checks"]
 
 
 def test_user_override_schema_is_strict_and_compaction_safe():

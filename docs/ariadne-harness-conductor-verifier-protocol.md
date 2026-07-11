@@ -59,6 +59,22 @@ runtime, write, provider, deployment, or release permission.
 The first practice remains manual packets via the existing worker channels. No
 harness script launches an agent; only the orchestrator can integrate and push.
 
+## Initial Worker Mix
+
+Claude Fable is the preferred conductor and Claude Opus is its ordinary
+fallback. The conductor reads the committed settings under
+`orchestration/harness_settings/`, particularly `sprint_worker_policy.yaml`.
+For a normal substantive sprint it chooses whether Antigravity has a distinct
+artifact or veto surface, then assigns between one and three DeepSeek Flash
+worker lanes according to separability, file/review ownership, and verification
+need. One DeepSeek Flash lane is the minimum worker posture; additional lanes
+are not ceremonial and require distinct bounded packets.
+
+DeepSeek Flash as verifier checks the plan against those same settings. It does
+not decide the worker mix, alter it, or integrate work. The present S4b
+allocator proves settings-and-synthetic-probe assignment only; a later approved
+verifier command is required before this becomes a machine-executed plan check.
+
 ## High-Assurance Write Protection
 
 The preferred cross-platform security model is brokered patch delivery from an

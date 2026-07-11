@@ -2,8 +2,8 @@ schema_version: ariadne.role_preferences.v1
 roles:
   - role: conductor
     required: true
-    preferences: [claude-conductor, gpt-terra-primary]
-    preference_rationale: Independent planning resource preferred before primary integration resource.
+    preferences: [claude-fable-conductor, claude-opus-conductor]
+    preference_rationale: Fable is preferred for high-leverage planning; Opus is the ordinary Claude fallback. The generalist profile is the final resource-constrained fallback.
     review_by: 2026-08-11
   - role: verifier
     required: true

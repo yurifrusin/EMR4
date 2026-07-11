@@ -1,0 +1,41 @@
+schema_version: ariadne.sprint_worker_policy.v1
+worker_mix:
+  antigravity:
+    resource_id: antigravity-worker
+    minimum_instances: 0
+    maximum_instances: 1
+    use_when: [independent_domain_review, separable_implementation, test_design, adversarial_review]
+    stand_down_when: [quota_unavailable, no_distinct_artifact_or_veto_surface, overlapping_ownership]
+  deepseek_flash:
+    resource_id: deepseek-flash-workers
+    minimum_instances: 1
+    maximum_instances: 3
+    use_when: [bounded_implementation, test_engineering, security_review, code_review, documentation_handover]
+    lane_rule: each_lane_requires_distinct_packet_ownership_and_verification
+planning_inputs:
+  - boundary_classification
+  - required_ssdlc_obligations
+  - separable_work_packages
+  - declared_resource_probes
+  - cost_and_quota_constraints
+  - user_overrides
+required_plan_fields:
+  - boundary
+  - assignments
+  - antigravity_decision
+  - deepseek_lane_count
+  - worker_packets
+  - ownership_boundaries
+  - verification_plan
+  - fallback_reasons
+  - independence_labels
+  - unfilled_obligations
+verifier_checks:
+  - settings_fingerprint_matches
+  - conductor_and_orchestrator_authority_separation
+  - worker_count_within_declared_limits
+  - deepseek_lanes_are_between_one_and_three
+  - each_worker_has_a_distinct_artifact_or_veto_surface
+  - assignment_capability_and_probe_eligibility
+  - fallback_and_reduced_independence_are_explicit
+  - no_orchestrator_substitution

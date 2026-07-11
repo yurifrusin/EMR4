@@ -9,7 +9,7 @@ scenarios:
         availability: available
         ttl_seconds: 300
         evidence: [fixture]
-      - resource_id: claude-conductor
+      - resource_id: claude-fable-conductor
         probed_at: 2026-07-11T00:00:00Z
         method: synthetic_fixture
         reachability: reachable
@@ -24,7 +24,7 @@ scenarios:
         ttl_seconds: 300
         evidence: [fixture]
     expected_assignments:
-      conductor: claude-conductor
+      conductor: claude-fable-conductor
       verifier: deepseek-flash-verifier
       orchestrator: gpt-terra-primary
     expected_unfilled_required_roles: []
@@ -37,7 +37,7 @@ scenarios:
         availability: available
         ttl_seconds: 300
         evidence: [fixture]
-      - resource_id: claude-conductor
+      - resource_id: claude-fable-conductor
         probed_at: 2026-07-11T00:00:00Z
         method: synthetic_fixture
         reachability: reachable

@@ -13,7 +13,7 @@ workers:
     quota_class: primary_subscription
     capabilities: [orchestrator, implementer, test_engineer, code_reviewer]
     cost_tier: 0
-  - resource_id: claude-conductor
+  - resource_id: claude-fable-conductor
     provider: anthropic
     account_id: claude-subscription
     access_mode: subscription
@@ -26,6 +26,32 @@ workers:
     quota_class: limited_subscription
     capabilities: [conductor, architect, code_reviewer]
     cost_tier: 2
+  - resource_id: claude-opus-conductor
+    provider: anthropic
+    account_id: claude-subscription
+    access_mode: subscription
+    transport: cli_print
+    transport_quirks: [shares_claude_subscription_window, quota_is_observed_separately]
+    default_model: opus
+    default_reasoning: medium
+    max_instances: 1
+    quota_scope: account_window
+    quota_class: limited_subscription
+    capabilities: [conductor, architect, code_reviewer]
+    cost_tier: 1
+  - resource_id: antigravity-worker
+    provider: google
+    account_id: antigravity-subscription
+    access_mode: subscription
+    transport: cli_print
+    transport_quirks: [cli_artifact_required, quota_is_observed_separately]
+    default_model: gemini
+    default_reasoning: medium
+    max_instances: 1
+    quota_scope: account_window
+    quota_class: limited_subscription
+    capabilities: [architect, implementer, test_engineer, security_reviewer, code_reviewer]
+    cost_tier: 0
   - resource_id: deepseek-flash-verifier
     provider: deepseek
     account_id: deepseek-api
@@ -38,4 +64,17 @@ workers:
     quota_scope: api_budget
     quota_class: low_cost_api
     capabilities: [verifier, test_engineer, security_reviewer]
+    cost_tier: 1
+  - resource_id: deepseek-flash-workers
+    provider: deepseek
+    account_id: deepseek-api
+    access_mode: api_key
+    transport: bridge_subagent
+    transport_quirks: [bridge_reachability_is_not_authority, separate_worker_packet_required]
+    default_model: deepseek-4-flash
+    default_reasoning: medium
+    max_instances: 3
+    quota_scope: api_budget
+    quota_class: low_cost_api
+    capabilities: [implementer, test_engineer, security_reviewer, code_reviewer, docs_handover_auditor]
     cost_tier: 1

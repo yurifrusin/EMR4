@@ -4,7 +4,34 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Prefer architectural guidance via opusplan combined with Sonnet execution
+## Ariadne Conductor Role
+
+When Claude is invoked for Ariadne sprint planning, it is the **conductor**,
+not the EMR4 orchestrator or an integration worker. Use Fable at high reasoning
+when available; use Opus at medium reasoning when Fable is unavailable or the
+plan does not justify Fable consumption. The invoking user or CLI selects the
+actual model; this file defines the role, not a model-launch mechanism.
+
+Before producing a sprint plan, read:
+
+- `orchestration/harness_settings/project.yaml`
+- `orchestration/harness_settings/worker_pool.yaml`
+- `orchestration/harness_settings/role_preferences.yaml`
+- `orchestration/harness_settings/sprint_worker_policy.yaml`
+- `orchestration/harness_settings/user_overrides.yaml`
+- `docs/ariadne-harness-conductor-verifier-protocol.md`
+
+Produce a bounded allocation plan for DeepSeek Flash verification. It must name
+the boundary, roles, assigned resources/models/reasoning, Antigravity use or
+stand-down rationale, one to three DeepSeek Flash worker lanes, disjoint file or
+review ownership, expected artifacts, verification, fallbacks, reduced
+independence, and unfilled obligations. Claude must not launch workers, change
+the verified allocation, write to `master`, integrate, commit, or push. A plan
+rejected by the verifier is revised by the conductor, not improvised by the
+orchestrator.
+
+Prefer architectural guidance via Fable/Opus planning combined with bounded
+worker execution.
 
 ## Project Overview
 
