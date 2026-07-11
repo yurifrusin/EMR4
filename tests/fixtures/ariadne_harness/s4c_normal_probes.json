@@ -1,0 +1,40 @@
+{
+  "probes": [
+    {
+      "resource_id": "gpt-terra-primary",
+      "probed_at": "2026-07-11T00:00:00Z",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "availability": "available",
+      "ttl_seconds": 300,
+      "evidence": ["fixture"]
+    },
+    {
+      "resource_id": "claude-fable-conductor",
+      "probed_at": "2026-07-11T00:00:00Z",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "availability": "available",
+      "ttl_seconds": 300,
+      "evidence": ["fixture"]
+    },
+    {
+      "resource_id": "claude-opus-conductor",
+      "probed_at": "2026-07-11T00:00:00Z",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "availability": "available",
+      "ttl_seconds": 300,
+      "evidence": ["fixture"]
+    },
+    {
+      "resource_id": "deepseek-flash-verifier",
+      "probed_at": "2026-07-11T00:00:00Z",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "availability": "available",
+      "ttl_seconds": 300,
+      "evidence": ["fixture"]
+    }
+  ]
+}

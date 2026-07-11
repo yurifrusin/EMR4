@@ -174,6 +174,35 @@
         "no_worktree_write",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s4c-advisory-plan-cli",
+      "stage": "implementation",
+      "kind": "deterministic_advisory_allocation_plan",
+      "status": "passed",
+      "recorded_by": "codex",
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "scripts/ariadne_allocation_plan.py",
+        "--sprint-id",
+        "s4c-fixture-run",
+        "--probes",
+        "tests/fixtures/ariadne_harness/s4c_normal_probes.json"
+      ],
+      "scope": [
+        "scripts/ariadne_allocation_plan.py",
+        "tests/fixtures/ariadne_harness/s4c_normal_probes.json",
+        "tests/test_ariadne_allocation_plan.py"
+      ],
+      "limitations": [
+        "advisory_only",
+        "synthetic_probes_only",
+        "no_provider_or_quota_probe",
+        "no_live_agent_execution",
+        "no_worktree_write",
+        "verifier_decision_not_performed",
+        "no_runtime_change"
+      ]
     }
   ]
 }

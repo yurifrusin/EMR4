@@ -2,8 +2,8 @@
   "schema_version": "ariadne.checkpoint.v1",
   "stage": "closeout",
   "next_action": {
-    "kind": "await_user_decision_authorize_s4c_advisory_plan_cli_or_keep_s4b_as_replay_only",
+    "kind": "run_s4d_manual_emr4_sprint_pilot_with_conductor_verifier_and_worker_packets",
     "boundary_class": "green",
-    "classification": "requires_user_approval"
+    "classification": "allowed_with_evidence"
   }
 }
