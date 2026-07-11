@@ -1,0 +1,10 @@
+{
+  "name": "ariadne-deepcode-pty-adapter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bounded PTY lifecycle adapter for Deep Code workers",
+  "type": "module",
+  "dependencies": {
+    "node-pty": "1.1.0"
+  }
+}

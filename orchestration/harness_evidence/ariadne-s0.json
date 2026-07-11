@@ -371,6 +371,47 @@
         "no_worker_dispatch",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s4d-deepcode-verifier-v3",
+      "stage": "pilot",
+      "kind": "interactive_deepcode_verifier_artifact",
+      "status": "passed",
+      "recorded_by": "deepcode",
+      "scope": [
+        "orchestration/agent_inbox/deepcode/deepcode-s4d-verifier-packet-v3.md",
+        "orchestration/agent_inbox/codex/plan-claude-s4d-deepcode-mailbox-settings-guard-v3.md",
+        "orchestration/agent_inbox/codex/review-deepcode-s4d-mailbox-settings-guard-v3.md"
+      ],
+      "limitations": [
+        "plan_verification_only",
+        "worker_dispatch_not_granted_to_verifier",
+        "no_runtime_change"
+      ]
+    },
+    {
+      "evidence_id": "ariadne-deepcode-pty-live-smoke",
+      "stage": "implementation",
+      "kind": "live_disposable_worktree_pty_lifecycle",
+      "status": "passed",
+      "recorded_by": "codex",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/ariadne_deepcode_pty.py",
+        "--cwd",
+        "disposable_deepcode_worktree"
+      ],
+      "scope": [
+        "orchestration/deepcode_pty/",
+        "scripts/ariadne_deepcode_pty.py",
+        "docs/ariadne-deepcode-pty-live-smoke.md"
+      ],
+      "limitations": [
+        "deepseek_v4_flash_high_smoke_only",
+        "forced_cleanup_after_completed_turn",
+        "raw_artifacts_and_receipts_local_ignored",
+        "no_emr4_runtime_change"
+      ]
     }
   ]
 }

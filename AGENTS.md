@@ -28,13 +28,13 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated user platform, GUI, native runtime, or agent-launch layer. `CLAUDE.md` defines Claude as conductor only when it receives an Ariadne planning invocation: Fable/high reasoning is preferred and Opus/medium is the ordinary fallback; Claude cannot launch workers, alter a verifier-passed allocation, integrate, commit, or push. S4a/S4b provide strict settings and a synthetic-only pure allocator. S4c adds `scripts/ariadne_allocation_plan.py`: a deterministic advisory CLI that reads only committed settings plus caller-supplied local JSON probes and emits a settings-fingerprinted Conductor allocation report. Its fixture run selected Fable conductor, DeepSeek Flash verifier, and GPT Terra orchestrator, with `execution_permitted: false` and no verifier decision. `orchestration/harness_settings/transport_adapters.yaml` is mandatory transport evidence: DeepSeek Flash is currently reached through the interactive Deep Code TTY, so non-TTY shell refusal is adapter evidence, never proof that DeepSeek is unavailable. The pool distinguishes the DeepSeek Flash verifier from `deepseek-flash-workers` (one to three bounded worker lanes) and includes the Antigravity platform resource `antigravity-gemini-flash-3-5-worker` (zero or one current lane). Antigravity is the agentic platform/transport; Gemini Flash 3.5 is its current default model, while future Gemini models or additional Flash instances require their own worker-pool entries and capacity settings. S4d is user-authorized but evidence-gated: its real EMR4 pilot must preserve the Conductor plan, DeepSeek verifier `pass|revision_required` result, worker packets, per-worker evidence, and protected-orchestrator integration evidence. No autonomous live worker adapter, provider/quota probe, runtime wiring, D5 expansion, frontend JavaScript change, provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series, historical diary runtime input, GraphQL delivery/readiness, external patient client, confirm payload/write behavior change, model-to-database write, deployment, production, telemetry, global readiness gate, autonomous release authority, or EMR4 runtime behavior is opened. |
-| **Next recommended work** | Return the mailbox-aware S4d plan to Fable/Opus for a narrow revision: remove the prohibited fourth-DeepSeek fallback, retain the one-to-three DeepSeek lane cap, and use either Antigravity stand-down or a bounded Ariadne-local review if the veto lane is unavailable. Then issue a fresh verifier packet and require a passing durable artifact plus local mailbox event before dispatching the three disjoint D1/D2/D3 worker packets. GPT Terra remains the protected orchestrator and sole integrator/committer/pusher. `docs/ariadne-harness-bootstrapper-strategy.md` records the later first end-user experience. Security sprint 2026-07-11 removed direct vulnerable uuid paths but Dependabot alert 5 remains open through six development-only Microsoft toolkit transitive dependencies; do not force overrides. D5 remains closed unless Yuri separately authorizes the draft-only route-intercepted copy-evidence option. |
+| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated user platform, GUI, native runtime, or general agent-launch platform. `CLAUDE.md` defines Claude as conductor only when it receives an Ariadne planning invocation: Fable/high reasoning is preferred and Opus/medium is the ordinary fallback; Claude cannot launch workers, alter a verifier-passed allocation, integrate, commit, or push. S4a/S4b provide strict settings and a synthetic-only pure allocator. S4c adds `scripts/ariadne_allocation_plan.py`. DeepSeek Flash is now reached through a bounded cross-platform Deep Code PTY adapter: it bootstraps secret-free disposable-worktree settings, fails on permission prompts, requires a fresh durable artifact plus Deep Code turn-completion signal, attempts documented graceful exits, forcibly cleans up an unresponsive completed TUI, and writes an untrusted adapter mailbox event and receipt without retaining terminal output. The V3 plan at fingerprint `sha256:f52d391472d9fb0e361d1bef9b840bbcad9a028e4ebae56e2e2401bc6edbc61f` passed Deep Code verification. The pool distinguishes the DeepSeek Flash verifier from `deepseek-flash-workers` (one to three bounded worker lanes) and includes the Antigravity platform resource `antigravity-gemini-flash-3-5-worker` (zero or one current lane). Antigravity is the platform/transport and Gemini Flash 3.5 is its current model. S4d remains docs/tests-only and evidence-gated. No provider/runtime/frontend/database/GraphQL/H-series/D5/deployment/release authority or EMR4 runtime behavior is opened. |
+| **Next recommended work** | Commit and hand off the PTY adapter checkpoint, then dispatch the verifier-passed D1/D2/D3 packets through three disposable Deep Code worker worktrees. Require a fresh artifact, adapter event, receipt, and ownership check from each. Run the Antigravity/Gemini Flash 3.5 artifact-only veto lane if available; otherwise record stand-down and perform bounded Ariadne-local review. GPT Terra remains sole integrator/committer/pusher. Security sprint 2026-07-11 removed direct vulnerable uuid paths but Dependabot alert 5 remains open through six development-only Microsoft toolkit transitive dependencies; do not force overrides. D5 remains closed unless Yuri separately authorizes it. |
 
-S4d live finding, 2026-07-11: Claude CLI and Antigravity `agy.exe` are CLI
-transports; DeepSeek Flash is reachable via local Codex calls/spawns, not a
-standalone shell executable. Do not infer DeepSeek unavailability from a shell
-probe. A first Opus Conductor attempt was rejected because the clean
+S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
+are distinct CLI transports. Deep Code requires a real TTY; non-TTY refusal is
+adapter evidence, not DeepSeek unavailability. A first Opus Conductor attempt
+was rejected because the clean
 `claude/current` mirror was stale and lacked the committed Ariadne settings;
 the documented realignment initially refused from `master`, then correctly
 realigned when run from `EMR4-worktrees\claude`. This is expected guardrail
@@ -65,10 +65,11 @@ recorded leverage reason. Deep Code is an interactive permissioned TUI, so a
 durable packet artifact, not terminal output or a local tool approval, is the
 only accepted worker result. It requires a real interactive TTY: a non-TTY
 refusal is current-surface adapter unavailability, not DeepSeek unavailability.
-Deep Code now has a local-only mailbox bridge: its documented `notify` hook
-writes ignored per-turn events to `local_data/ariadne-harness/deepcode-outbox/`;
-`scripts/ariadne_deepcode_mailbox.py` polls metadata while packet artifacts
-remain the authority-bearing record. The local Deep Code configuration is
+Deep Code now has a local-only mailbox bridge. Manual sessions can use its
+documented `notify` hook, while automated sessions use the PTY adapter's own
+completion event because Deep Code cannot reliably execute `.cmd` notify hooks
+on Windows. `scripts/ariadne_deepcode_mailbox.py` polls metadata while packet
+artifacts remain the authority-bearing record. The local configuration is
 `askAll` but pre-allows `write-in-cwd` so the notify hook can write its ignored
 outbox event unattended. That permission covers the entire Deep Code process
 cwd, not only the outbox, so worker sessions must run in disposable
@@ -76,8 +77,8 @@ packet-scoped worktrees; packet boundaries are semantic rather than CLI-enforced
 It is not integration authority. Durable packet artifacts, packet ownership,
 and the protected-orchestrator acceptance gate remain mandatory. Out-of-worktree
 access, deletion, Git mutation, network tools, and MCP are denied. This bridge
-returns messages but does not automate TTY permission prompts or provide a full
-bidirectional PTY.
+The PTY adapter never answers a permission prompt. It provides bounded process
+lifecycle control, not a general bidirectional conversation channel.
 The revised Opus Conductor plan selected a bounded Deep Code adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. The
 real interactive Deep Code verifier artifact at
@@ -85,8 +86,11 @@ real interactive Deep Code verifier artifact at
 returned `DECISION: pass`. The mailbox-aware V2 Deep Code review then returned
 `DECISION: revision_required`: the Conductor proposed an invalid fourth
 DeepSeek fallback beyond the declared one-to-three lane cap. No worker dispatch
-may occur until the Conductor revises that fallback and a new verifier artifact
-passes. The original Codex-local bridge preflight remains a historical
+could occur until the Conductor revised that fallback. The V3 plan removed the
+fourth lane, refreshed the settings fingerprint, and the durable Deep Code V3
+artifact returned `DECISION: pass`. A disposable live PTY smoke then completed
+without user interaction and left no process from that run. The original
+Codex-local bridge preflight remains a historical
 `revision_required` finding, not a claim that DeepSeek is globally unavailable. See
 `docs/ariadne-s4d-pilot-preflight.md`.
 

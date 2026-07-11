@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if [ -x "$SCRIPT_DIR/../.venv/bin/python" ]; then
+  PYTHON="$SCRIPT_DIR/../.venv/bin/python"
+else
+  PYTHON=python3
+fi
+
+exec "$PYTHON" "$SCRIPT_DIR/ariadne_deepcode_notify.py" \
+  --outbox "$SCRIPT_DIR/../local_data/ariadne-harness/deepcode-outbox"

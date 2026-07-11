@@ -1,0 +1,182 @@
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+
+from scripts.ariadne_deepcode_pty import ensure_project_settings
+
+
+def _run(
+    tmp_path: Path, mode: str, timeout: int = 5, exit_timeout: int = 2
+) -> tuple[subprocess.CompletedProcess[str], dict]:
+    packet = tmp_path / "packet.md"
+    packet.write_text("Synthetic packet.\n", encoding="utf-8")
+    receipt = tmp_path / "receipt.json"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/ariadne_deepcode_pty.py",
+            "--cwd",
+            str(tmp_path),
+            "--packet",
+            "packet.md",
+            "--artifact",
+            "artifact.md",
+            "--outbox",
+            "outbox",
+            "--receipt",
+            "receipt.json",
+            "--timeout",
+            str(timeout),
+            "--exit-timeout",
+            str(exit_timeout),
+            "--fixture",
+            mode,
+        ],
+        capture_output=True,
+        check=False,
+        text=True,
+    )
+    return result, json.loads(receipt.read_text(encoding="utf-8"))
+
+
+def test_pty_adapter_exits_only_after_artifact_and_observes_mailbox(tmp_path: Path):
+    result, receipt = _run(tmp_path, "success")
+
+    assert result.returncode == 0
+    assert receipt["status"] == "completed"
+    assert receipt["artifact_observed"] is True
+    assert receipt["turn_completion_observed"] is True
+    assert receipt["exit_sent_after_artifact"] is True
+    assert receipt["mailbox_event_count"] == 1
+    assert receipt["terminal_output_persisted"] is False
+    assert receipt["process_cleanup_confirmed"] is True
+
+
+def test_pty_adapter_fails_closed_on_permission_prompt(tmp_path: Path):
+    result, receipt = _run(tmp_path, "permission")
+
+    assert result.returncode == 3
+    assert receipt["status"] == "blocked"
+    assert receipt["reason"] == "unexpected_permission_prompt"
+    assert receipt["exit_sent_after_artifact"] is False
+
+
+def test_pty_adapter_accepts_bounded_forced_cleanup_after_completed_turn(tmp_path: Path):
+    result, receipt = _run(tmp_path, "ignore_exit", exit_timeout=1)
+
+    assert result.returncode == 0
+    assert receipt["status"] == "completed"
+    assert receipt["reason"] == "artifact_and_adapter_event_observed_forced_cleanup"
+    assert receipt["forced_cleanup"] is True
+    assert receipt["mailbox_event_count"] == 1
+
+
+def test_pty_adapter_times_out_without_artifact(tmp_path: Path):
+    result, receipt = _run(tmp_path, "hang", timeout=1)
+
+    assert result.returncode == 4
+    assert receipt["status"] == "failed"
+    assert receipt["reason"] == "artifact_timeout"
+
+
+def test_pty_adapter_rejects_artifact_outside_worker_cwd(tmp_path: Path):
+    packet = tmp_path / "packet.md"
+    packet.write_text("Synthetic packet.\n", encoding="utf-8")
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/ariadne_deepcode_pty.py",
+            "--cwd",
+            str(tmp_path),
+            "--packet",
+            "packet.md",
+            "--artifact",
+            "../escaped.md",
+            "--outbox",
+            "outbox",
+            "--receipt",
+            "receipt.json",
+            "--fixture",
+            "success",
+        ],
+        capture_output=True,
+        check=False,
+        text=True,
+    )
+
+    assert result.returncode == 2
+    assert "artifact must resolve inside --cwd" in result.stderr
+
+
+def test_pty_adapter_rejects_preexisting_artifact(tmp_path: Path):
+    packet = tmp_path / "packet.md"
+    packet.write_text("Synthetic packet.\n", encoding="utf-8")
+    (tmp_path / "artifact.md").write_text("DECISION: pass\n", encoding="utf-8")
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/ariadne_deepcode_pty.py",
+            "--cwd",
+            str(tmp_path),
+            "--packet",
+            "packet.md",
+            "--artifact",
+            "artifact.md",
+            "--outbox",
+            "outbox",
+            "--receipt",
+            "receipt.json",
+            "--fixture",
+            "success",
+        ],
+        capture_output=True,
+        check=False,
+        text=True,
+    )
+
+    assert result.returncode == 2
+    assert "artifact must not exist before PTY launch" in result.stderr
+
+
+def test_project_settings_bootstrap_is_secret_free_and_pre_authorizes_bounded_writes(tmp_path: Path):
+    ensure_project_settings(tmp_path)
+
+    payload = json.loads((tmp_path / ".deepcode" / "settings.json").read_text(encoding="utf-8"))
+    assert "env" not in payload
+    assert payload["permissions"]["allow"] == ["read-in-cwd", "query-git-log", "write-in-cwd"]
+    assert payload["permissions"]["ask"] == []
+    assert "write-out-cwd" in payload["permissions"]["deny"]
+
+
+def test_project_settings_bootstrap_rejects_conflicting_write_prompt(tmp_path: Path):
+    settings = tmp_path / ".deepcode" / "settings.json"
+    settings.parent.mkdir()
+    settings.write_text(
+        json.dumps({"permissions": {"allow": [], "ask": ["write-in-cwd"]}}), encoding="utf-8"
+    )
+
+    with pytest.raises(ValueError, match="must allow write-in-cwd"):
+        ensure_project_settings(tmp_path)
+
+
+def test_project_settings_bootstrap_rejects_missing_required_denies(tmp_path: Path):
+    settings = tmp_path / ".deepcode" / "settings.json"
+    settings.parent.mkdir()
+    settings.write_text(
+        json.dumps(
+            {
+                "permissions": {
+                    "allow": ["write-in-cwd"],
+                    "ask": [],
+                    "deny": [],
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="required denied capabilities"):
+        ensure_project_settings(tmp_path)

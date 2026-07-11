@@ -7,6 +7,12 @@ notify:
   adapter: deepcode_notify
   source_fields: [STATUS, DURATION, FAIL_REASON, BODY, TITLE]
   per_turn_event: true
+pty_lifecycle:
+  adapter: deepcode_pty_adapter
+  automated_completion_event: true
+  event_trust: untrusted_transport_completion_requires_artifact_validation
+  deepcode_notify_hook_required_for_automated_sessions: false
+  controlled_exit_required: true
 inbox:
   packet_root: orchestration/agent_inbox/deepcode
   session_resume_requires_human_tty_operator: true

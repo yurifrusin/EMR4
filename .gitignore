@@ -87,6 +87,7 @@ CLAUDE.local.md
 claude.json
 antigravity.local.json
 .deepcode/
+orchestration/deepcode_pty/node_modules/
 orchestration/runtime_logs/
 
 # Loose local design exports
