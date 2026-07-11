@@ -65,6 +65,14 @@ recorded leverage reason. Deep Code is an interactive permissioned TUI, so a
 durable packet artifact, not terminal output or a local tool approval, is the
 only accepted worker result. It requires a real interactive TTY: a non-TTY
 refusal is current-surface adapter unavailability, not DeepSeek unavailability.
+Deep Code now has a local-only mailbox bridge: its documented `notify` hook
+writes ignored per-turn events to `local_data/ariadne-harness/deepcode-outbox/`;
+`scripts/ariadne_deepcode_mailbox.py` polls metadata while packet artifacts
+remain the authority-bearing record. The user-level Deep Code configuration is
+strict (`askAll`): only in-worktree reads and Git-log queries are pre-allowed;
+in-worktree writes are prompted and out-of-worktree access, deletion, Git
+mutation, network tools, and MCP are denied. This bridge returns messages but
+does not automate TTY permission prompts or provide a full bidirectional PTY.
 The revised Opus Conductor plan selected a bounded Deep Code adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. The
 real interactive Deep Code verifier artifact at

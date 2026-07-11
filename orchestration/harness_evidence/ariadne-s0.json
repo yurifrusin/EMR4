@@ -331,6 +331,29 @@
         "no_worker_dispatch_by_verifier",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-deepcode-mailbox-notify-smoke",
+      "stage": "implementation",
+      "kind": "local_deepcode_notify_outbox_smoke",
+      "status": "passed",
+      "recorded_by": "codex",
+      "command": [
+        "scripts/ariadne_deepcode_notify.cmd",
+        "synthetic_completion_environment"
+      ],
+      "scope": [
+        "scripts/ariadne_deepcode_notify.py",
+        "scripts/ariadne_deepcode_mailbox.py",
+        "local_data/ariadne-harness/deepcode-outbox/"
+      ],
+      "limitations": [
+        "synthetic_notify_environment_only",
+        "local_ignored_outbox",
+        "no_api_call",
+        "no_worker_dispatch",
+        "no_runtime_change"
+      ]
     }
   ]
 }
