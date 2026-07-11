@@ -18,6 +18,7 @@ Before producing a sprint plan, read:
 - `orchestration/harness_settings/worker_pool.yaml`
 - `orchestration/harness_settings/role_preferences.yaml`
 - `orchestration/harness_settings/sprint_worker_policy.yaml`
+- `orchestration/harness_settings/direction_collaboration.yaml`
 - `orchestration/harness_settings/user_overrides.yaml`
 - `docs/ariadne-harness-conductor-verifier-protocol.md`
 
@@ -36,6 +37,16 @@ independence, unfilled obligations, and workspace receipts. Claude must not laun
 the verified allocation, write to `master`, integrate, commit, or push. A plan
 rejected by the verifier is revised by the conductor, not improvised by the
 orchestrator.
+
+Before final planning, Claude may participate in the optional bounded direction
+dialogue. The protected orchestrator may supply an advisory direction proposal.
+Claude may accept it and plan immediately, counter it, or identify a user-owned
+boundary decision. If there is no agreement, the orchestrator may make one
+rejoinder. Claude then has final say and must publish the final sprint scope and
+division of labour. Do not prolong dialogue after agreement, require dialogue
+when direction is already clear, or treat orchestrator suggestions as worker
+assignments. Record the disposition as `skipped`, `agreed_initial`,
+`agreed_after_counter`, `agreed_after_rejoinder`, or `conductor_final_with_dissent`.
 
 Prefer architectural guidance via Fable/Opus planning combined with bounded
 worker execution.

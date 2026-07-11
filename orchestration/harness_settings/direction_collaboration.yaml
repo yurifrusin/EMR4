@@ -1,0 +1,38 @@
+schema_version: ariadne.direction_collaboration.v1
+mode: optional_bounded_dialogue
+participants:
+  orchestrator:
+    may:
+      - propose_sprint_direction
+      - provide_product_and_codebase_evidence
+      - accept_conductor_response
+      - issue_one_rejoinder
+    may_not:
+      - publish_final_sprint_definition
+      - allocate_or_reallocate_workers
+      - alter_verified_assignments
+  conductor:
+    exclusive_authority:
+      - publish_final_sprint_definition
+      - divide_sprint_work
+      - allocate_workers
+      - select_worker_models_and_reasoning_from_settings
+dialogue:
+  orchestrator_initial_proposal: optional
+  conductor_response_when_proposal_exists: [accept, counter, request_user_boundary_decision]
+  orchestrator_rejoinder_when_no_agreement: optional
+  maximum_orchestrator_rejoinders: 1
+  conductor_final_say: true
+  final_output: conductor_plan_and_allocation
+early_exit:
+  enabled: true
+  agreement_ends_direction_dialogue: true
+  conductor_may_plan_directly_when_direction_is_obvious: true
+  orchestrator_may_decline_to_propose: true
+disagreement:
+  preserve_dissent_in_plan: true
+  user_input_required_only_for_mandate_boundary_or_material_product_choice: true
+verification:
+  final_plan_must_be_authored_by_conductor: true
+  orchestrator_assignment_language_prohibited: true
+  verifier_checks_dialogue_did_not_transfer_allocation_authority: true

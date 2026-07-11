@@ -8,3 +8,7 @@ allocation:
   user_override_required_to_change_verified_assignment: true
   replan_required_when_resource_availability_changes: true
   live_agent_adapters_enabled: false
+direction_collaboration:
+  settings_file: direction_collaboration.yaml
+  optional: true
+  conductor_retains_final_say: true

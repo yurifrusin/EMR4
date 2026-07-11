@@ -16,6 +16,8 @@ worker_mix:
     use_when: [bounded_implementation, test_engineering, security_review, code_review, documentation_handover]
     lane_rule: each_lane_requires_distinct_packet_ownership_verification_and_deepcode_artifact
 planning_inputs:
+  - optional_orchestrator_direction_proposal
+  - optional_conductor_orchestrator_direction_dialogue
   - boundary_classification
   - required_ssdlc_obligations
   - separable_work_packages
@@ -32,6 +34,7 @@ workspace_preflight:
   failure_posture: revision_required_before_packet_dispatch
 required_plan_fields:
   - boundary
+  - direction_dialogue_disposition
   - assignments
   - antigravity_decision
   - deepseek_lane_count
@@ -44,6 +47,8 @@ required_plan_fields:
   - workspace_receipts
 verifier_checks:
   - settings_fingerprint_matches
+  - final_sprint_and_allocation_authored_by_conductor
+  - direction_dialogue_did_not_transfer_allocation_authority
   - conductor_and_orchestrator_authority_separation
   - worker_count_within_declared_limits
   - deepseek_lanes_are_between_one_and_three

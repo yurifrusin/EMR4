@@ -16,6 +16,37 @@ If the orchestrator cannot safely execute a verified plan, it returns it to the
 conductor with evidence. If availability changes, the conductor replans and the
 verifier checks the revision; the orchestrator does not improvise a replacement.
 
+## Optional Direction Dialogue
+
+Direction-finding may be collaborative even though sprint definition and worker
+allocation remain exclusively the Conductor's authority. This dialogue is
+optional and bounded:
+
+```text
+orchestrator direction proposal (optional)
+  -> conductor accepts, counters, or requests a user boundary decision
+  -> orchestrator accepts or makes one rejoinder (optional)
+  -> conductor publishes the final sprint and allocation
+```
+
+Agreement at any stage ends the direction dialogue immediately. If the
+Conductor accepts the initial proposal, it proceeds directly to its final plan.
+If the orchestrator accepts a Conductor counterproposal, the Conductor simply
+formalizes that agreement and allocates work. A second rejoinder or open-ended
+debate is prohibited.
+
+The dialogue is not mandatory. The Conductor may plan directly when direction
+is obvious, and the orchestrator may decline to make a proposal. Disagreement
+is preserved as dissent in the final plan; user input is required only when the
+remaining issue crosses the mandate boundary or represents a material product
+choice the user has not delegated.
+
+The orchestrator may suggest direction and provide product/codebase evidence.
+It may not define the final sprint, divide work, name worker assignments, or
+alter a verified allocation. The Conductor has final say on sprint scope and
+division of labour. The verifier rejects any plan where dialogue transferred
+that authority to the orchestrator.
+
 ## Workspace Preflight
 
 Transport reachability and workspace readiness are separate facts. A reachable
@@ -52,7 +83,7 @@ roles:
   verifier:
     preferred_resources: [deepseek_4_flash]
   orchestrator:
-    preferred_resources: [gpt_terra, deepseek_4_pro]
+    preferred_resources: [openai_primary_orchestrator, deepseek_4_pro]
 master_authority:
   exclusive_role: orchestrator
   conductor_can_commit: false
@@ -60,6 +91,10 @@ master_authority:
 allocation:
   user_override_required_to_change_verified_assignment: true
   replan_required_when_resource_availability_changes: true
+direction_collaboration:
+  optional: true
+  maximum_orchestrator_rejoinders: 1
+  conductor_retains_final_say: true
 ```
 
 Fable then Opus and DeepSeek Flash are ranked preferences, not permanent model

@@ -441,6 +441,34 @@
         "ariadne_local_veto_fallback_passed_with_reduced_independence",
         "no_emr4_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-direction-collaboration-protocol",
+      "stage": "design",
+      "kind": "optional_bounded_orchestrator_conductor_dialogue",
+      "status": "passed",
+      "recorded_by": "gpt-sol",
+      "state_fingerprint": "sha256:6d5a113aa1c0f418f402032b7503c6a0478e71a05fe6c18f093c91ef95831b78",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_direction_collaboration.py",
+        "focused_allocation_and_preflight_suites",
+        "-q"
+      ],
+      "scope": [
+        "orchestration/harness_settings/direction_collaboration.yaml",
+        "docs/ariadne-direction-collaboration.md",
+        "docs/ariadne-harness-conductor-verifier-protocol.md",
+        "CLAUDE.md"
+      ],
+      "limitations": [
+        "dialogue_optional",
+        "maximum_one_orchestrator_rejoinder",
+        "conductor_final_sprint_and_allocation_authority_preserved",
+        "no_emr4_runtime_change"
+      ]
     }
   ]
 }
