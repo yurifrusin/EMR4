@@ -1,0 +1,17 @@
+schema_version: ariadne.role_preferences.v1
+roles:
+  - role: conductor
+    required: true
+    preferences: [claude-conductor, gpt-terra-primary]
+    preference_rationale: Independent planning resource preferred before primary integration resource.
+    review_by: 2026-08-11
+  - role: verifier
+    required: true
+    preferences: [deepseek-flash-verifier, gpt-terra-primary]
+    preference_rationale: Economical independent settings verification is preferred.
+    review_by: 2026-08-11
+  - role: orchestrator
+    required: true
+    preferences: [gpt-terra-primary]
+    preference_rationale: The protected primary integration resource owns master.
+    review_by: 2026-08-11

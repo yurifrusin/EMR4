@@ -116,6 +116,34 @@
         "draft_only_not_applied",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s4a-allocation-schema-tests",
+      "stage": "implementation",
+      "kind": "strict_allocation_schema_validation",
+      "status": "passed",
+      "recorded_by": "codex",
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_allocation_schemas.py",
+        "tests/test_ariadne_harness.py",
+        "tests/test_ariadne_action_classifier.py",
+        "-q"
+      ],
+      "scope": [
+        "orchestration_harness/allocation.py",
+        "orchestration/harness_settings/",
+        "tests/test_ariadne_allocation_schemas.py"
+      ],
+      "limitations": [
+        "advisory_only",
+        "no_live_agent_execution",
+        "no_availability_probe_execution",
+        "no_allocator_execution",
+        "no_runtime_change"
+      ]
     }
   ]
 }

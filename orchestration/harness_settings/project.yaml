@@ -1,0 +1,10 @@
+schema_version: ariadne.project_settings.v1
+project_id: emr4
+master_authority:
+  exclusive_role: orchestrator
+  conductor_can_commit: false
+  verifier_can_commit: false
+allocation:
+  user_override_required_to_change_verified_assignment: true
+  replan_required_when_resource_availability_changes: true
+  live_agent_adapters_enabled: false

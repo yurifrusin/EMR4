@@ -1,0 +1,5 @@
+schema_version: ariadne.generalist_profile.v1
+resource_id: gpt-terra-primary
+covers: [orchestrator, architect, implementer, test_engineer, security_reviewer, code_reviewer, docs_handover_auditor]
+independence: self_review
+required_compensating_controls: [context_rehydration_gate, focused_tests, scope_classifier, user_approval_for_red_boundaries]

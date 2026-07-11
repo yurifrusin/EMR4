@@ -52,9 +52,10 @@ release authority.
 
 The harness needs a machine-readable worker pool, not a hard-coded list of
 providers. A pool entry records how a resource is reached, how many concurrent
-instances the user permits, its preferred sub-model and reasoning setting, and
-its current availability. Subscription-backed and API-backed workers are both
-first-class resources.
+instances the user permits, and its preferred sub-model and reasoning setting.
+Subscription-backed and API-backed workers are both first-class resources.
+Current availability is a separately timestamped, time-bounded observation, so
+an unreliable bridge cannot be mistaken for a quota or capability declaration.
 
 ```json
 {
