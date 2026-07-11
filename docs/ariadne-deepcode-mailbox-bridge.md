@@ -30,7 +30,10 @@ TTY session. A future PTY bridge may automate only pre-approved read-only
 turns; it must never answer permission prompts or silently grant an action that
 is not in a verifier-passed capability packet.
 
-The default user-level permissions are strict. Read-in-workspace and Git-log
-queries may be pre-authorized; all writes need packet-scoped approval and
-out-of-workspace reads/writes, deletion, Git mutation, network tools, and MCP
-are denied.
+The default user-level permissions are strict. Read-in-workspace, Git-log
+queries, and `write-in-cwd` may be pre-authorized so the notify hook can return
+an event without an operator approval on every turn. This pre-authorization is
+transport convenience only: events are untrusted, and no result is accepted
+without its packet-scoped durable artifact and protected-orchestrator review.
+Out-of-workspace reads/writes, deletion, Git mutation, network tools, and MCP
+remain denied. Worker packets still limit all non-mailbox project edits.

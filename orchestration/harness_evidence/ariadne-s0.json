@@ -354,6 +354,23 @@
         "no_worker_dispatch",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s4d-deepcode-mailbox-verifier-v2",
+      "stage": "pilot",
+      "kind": "interactive_deepcode_verifier_artifact",
+      "status": "revision_required",
+      "recorded_by": "deepcode",
+      "scope": [
+        "orchestration/agent_inbox/deepcode/deepcode-s4d-verifier-packet-v2.md",
+        "orchestration/agent_inbox/codex/review-deepcode-s4d-mailbox-settings-guard.md"
+      ],
+      "limitations": [
+        "interactive_tty_execution",
+        "fourth_deepseek_lane_fallback_rejected",
+        "no_worker_dispatch",
+        "no_runtime_change"
+      ]
     }
   ]
 }

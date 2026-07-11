@@ -86,6 +86,7 @@ EMR4 Sidebar/.vscode/*
 CLAUDE.local.md
 claude.json
 antigravity.local.json
+.deepcode/
 orchestration/runtime_logs/
 
 # Loose local design exports

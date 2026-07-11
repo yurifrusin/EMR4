@@ -12,7 +12,10 @@ inbox:
   session_resume_requires_human_tty_operator: true
 permissions:
   base_default_mode: askAll
-  base_allow: [read-in-cwd, query-git-log]
+  # An unattended notify hook needs one local outbox write. This does not grant
+  # worker authority: durable packet artifacts and orchestrator acceptance remain required.
+  base_allow: [read-in-cwd, query-git-log, write-in-cwd]
   base_deny: [read-out-cwd, write-out-cwd, delete-in-cwd, delete-out-cwd, mutate-git-log, network, mcp]
-  packet_scoped_approval_required_for: [write-in-cwd]
+  preauthorized_write_boundary: local_notify_outbox_only
+  packet_scoped_approval_required_for: [all_non_mailbox_project_writes]
   unknown_operation_requires_interactive_prompt: true
