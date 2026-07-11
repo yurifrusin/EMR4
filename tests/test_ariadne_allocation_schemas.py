@@ -48,6 +48,7 @@ def test_role_preferences_and_generalist_profile_are_schema_valid():
     assert all(preference.required for preference in roles)
     assert generalist.independence == "self_review"
     assert Role.ORCHESTRATOR in generalist.covers
+    assert set(generalist.covers) == set(Role) - {Role.GENERALIST}
 
 
 def test_user_override_schema_is_strict_and_compaction_safe():

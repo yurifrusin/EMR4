@@ -2,7 +2,7 @@
   "schema_version": "ariadne.checkpoint.v1",
   "stage": "closeout",
   "next_action": {
-    "kind": "await_user_decision_keep_d5_closed_or_authorize_route_intercepted_copy_evidence_only",
+    "kind": "await_user_decision_authorize_s4c_advisory_plan_cli_or_keep_s4b_as_replay_only",
     "boundary_class": "green",
     "classification": "requires_user_approval"
   }

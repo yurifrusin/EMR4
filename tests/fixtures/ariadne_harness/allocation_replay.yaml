@@ -1,0 +1,59 @@
+schema_version: ariadne.allocation_replay.v1
+scenarios:
+  - scenario_id: normal_three_resource_pool
+    probes:
+      - resource_id: gpt-terra-primary
+        probed_at: 2026-07-11T00:00:00Z
+        method: synthetic_fixture
+        reachability: reachable
+        availability: available
+        ttl_seconds: 300
+        evidence: [fixture]
+      - resource_id: claude-conductor
+        probed_at: 2026-07-11T00:00:00Z
+        method: synthetic_fixture
+        reachability: reachable
+        availability: available
+        ttl_seconds: 300
+        evidence: [fixture]
+      - resource_id: deepseek-flash-verifier
+        probed_at: 2026-07-11T00:00:00Z
+        method: synthetic_fixture
+        reachability: reachable
+        availability: available
+        ttl_seconds: 300
+        evidence: [fixture]
+    expected_assignments:
+      conductor: claude-conductor
+      verifier: deepseek-flash-verifier
+      orchestrator: gpt-terra-primary
+    expected_unfilled_required_roles: []
+  - scenario_id: claude_unavailable_generalist_fallback
+    probes:
+      - resource_id: gpt-terra-primary
+        probed_at: 2026-07-11T00:00:00Z
+        method: synthetic_fixture
+        reachability: reachable
+        availability: available
+        ttl_seconds: 300
+        evidence: [fixture]
+      - resource_id: claude-conductor
+        probed_at: 2026-07-11T00:00:00Z
+        method: synthetic_fixture
+        reachability: reachable
+        availability: quota_exhausted
+        ttl_seconds: 300
+        evidence: [fixture]
+      - resource_id: deepseek-flash-verifier
+        probed_at: 2026-07-11T00:00:00Z
+        method: synthetic_fixture
+        reachability: unreachable
+        availability: unknown
+        ttl_seconds: 300
+        evidence: [fixture]
+    expected_assignments:
+      conductor: gpt-terra-primary
+      verifier: gpt-terra-primary
+      orchestrator: gpt-terra-primary
+    expected_unfilled_required_roles: []
+    expected_reduced_independence_roles: [conductor, verifier]

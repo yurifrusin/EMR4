@@ -136,7 +136,7 @@ class AvailabilityProbe:
             raise ValueError("ttl_seconds must be a positive integer")
         return cls(
             resource_id=_string(payload["resource_id"], "resource_id"),
-            probed_at=_string(payload["probed_at"], "probed_at"),
+            probed_at=_date_string(payload["probed_at"], "probed_at"),
             method=_string(payload["method"], "method"),
             reachability=Reachability(payload["reachability"]),
             availability=Availability(payload["availability"]),
@@ -197,8 +197,9 @@ class GeneralistProfile:
         if set(payload) != required:
             raise ValueError("GeneralistProfile fields must exactly match the schema")
         covers = tuple(Role(item) for item in _string_list(payload["covers"], "covers"))
-        if Role.ORCHESTRATOR not in covers or Role.IMPLEMENTER not in covers:
-            raise ValueError("GeneralistProfile must cover orchestrator and implementer")
+        required_roles = set(Role) - {Role.GENERALIST}
+        if not required_roles.issubset(covers):
+            raise ValueError("GeneralistProfile must cover every SSDLC role")
         return cls(
             resource_id=_string(payload["resource_id"], "resource_id"),
             covers=covers,

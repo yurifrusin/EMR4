@@ -16,10 +16,11 @@ from .allocation import (
     VerifierResult,
     WorkerResource,
 )
+from .allocator import AllocationOutcome, allocate_roles
 
 __all__ = [
-    "ActionClassification", "AssignmentRecord", "Availability", "AvailabilityProbe",
+    "ActionClassification", "AllocationOutcome", "AssignmentRecord", "Availability", "AvailabilityProbe",
     "BoundaryClass", "ConductorPlan", "Evidence", "GeneralistProfile", "Mandate",
     "Reachability", "Role", "RolePreference", "Transport", "UserOverride",
-    "VerifierDecision", "VerifierResult", "WorkerResource",
+    "VerifierDecision", "VerifierResult", "WorkerResource", "allocate_roles",
 ]

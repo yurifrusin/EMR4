@@ -144,6 +144,36 @@
         "no_allocator_execution",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s4b-synthetic-allocation-replay",
+      "stage": "verification",
+      "kind": "deterministic_synthetic_allocation_replay",
+      "status": "passed",
+      "recorded_by": "codex",
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_ariadne_allocator.py",
+        "tests/test_ariadne_allocation_schemas.py",
+        "tests/test_ariadne_harness.py",
+        "tests/test_ariadne_action_classifier.py",
+        "-q"
+      ],
+      "scope": [
+        "orchestration_harness/allocator.py",
+        "tests/fixtures/ariadne_harness/allocation_replay.yaml",
+        "tests/test_ariadne_allocator.py"
+      ],
+      "limitations": [
+        "advisory_only",
+        "synthetic_probes_only",
+        "no_live_agent_execution",
+        "no_provider_or_quota_probe",
+        "no_worktree_write",
+        "no_runtime_change"
+      ]
     }
   ]
 }
