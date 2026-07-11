@@ -56,10 +56,10 @@ workers:
     provider: deepseek
     account_id: deepseek-api
     access_mode: api_key
-    transport: bridge_subagent
-    transport_quirks: [bridge_reachability_is_not_authority]
-    default_model: deepseek-4-flash
-    default_reasoning: medium
+    transport: cli_interactive
+    transport_quirks: [deepcode_tui_result_artifact_required, permission_prompts_are_not_authority]
+    default_model: deepseek-v4-flash
+    default_reasoning: high
     max_instances: 3
     quota_scope: api_budget
     quota_class: low_cost_api
@@ -69,10 +69,10 @@ workers:
     provider: deepseek
     account_id: deepseek-api
     access_mode: api_key
-    transport: bridge_subagent
-    transport_quirks: [bridge_reachability_is_not_authority, separate_worker_packet_required]
-    default_model: deepseek-4-flash
-    default_reasoning: medium
+    transport: cli_interactive
+    transport_quirks: [deepcode_tui_result_artifact_required, separate_worker_packet_required, permission_prompts_are_not_authority]
+    default_model: deepseek-v4-flash
+    default_reasoning: high
     max_instances: 3
     quota_scope: api_budget
     quota_class: low_cost_api

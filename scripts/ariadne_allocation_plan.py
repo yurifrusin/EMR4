@@ -27,6 +27,7 @@ SETTINGS_FILES = (
     "user_overrides.yaml",
     "sprint_worker_policy.yaml",
     "transport_adapters.yaml",
+    "deepcode_model_profile.yaml",
 )
 
 

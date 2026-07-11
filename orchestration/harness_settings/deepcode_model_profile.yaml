@@ -1,0 +1,20 @@
+schema_version: ariadne.deepcode_model_profile.v1
+adapter_id: deepcode_cli
+command: deepcode
+prompt_entrypoint: deepcode -p <packet>
+session_controls:
+  fresh: /new
+  resume: /resume
+  model_control: /model
+models:
+  default: deepseek-v4-flash
+  allowed: [deepseek-v4-flash, deepseek-v4-pro]
+  exceptional_use_only: [deepseek-v4-pro]
+reasoning:
+  default: high
+  allowed: [high, max]
+  exceptional_use_only: [max]
+thinking_enabled: true
+completion_contract: durable_artifact_required_before_result_is_accepted
+permission_contract: interactive_prompt_or_explicit_project_policy_required
+telemetry: user_configured_not_harness_inferred

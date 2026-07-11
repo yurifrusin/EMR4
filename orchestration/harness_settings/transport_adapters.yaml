@@ -1,12 +1,13 @@
 schema_version: ariadne.transport_adapters.v1
 adapters:
-  - adapter_id: codex_local_deepseek_spawn
+  - adapter_id: deepcode_cli
     resource_ids: [deepseek-flash-verifier, deepseek-flash-workers]
-    platform: codex_desktop
-    invocation: local_codex_call_or_spawn
-    allowed_probe_methods: [synthetic_fixture, codex_local_spawn]
-    shell_probe_applicable: false
-    authority_boundary: transport_only_no_integration_authority
+    platform: deep_code
+    invocation: deepcode_prompt_tui
+    prompt_entrypoint: deepcode -p <packet>
+    allowed_probe_methods: [synthetic_fixture, deepcode_cli_observation]
+    shell_probe_applicable: true
+    authority_boundary: interactive_cli_transport_only_no_integration_authority
   - adapter_id: claude_cli_print
     resource_ids: [claude-fable-conductor, claude-opus-conductor]
     platform: claude_code

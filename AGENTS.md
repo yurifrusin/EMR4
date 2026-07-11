@@ -57,6 +57,13 @@ new-continuation policy defaults; unknown context cannot proceed to planning,
 dispatch, verification acceptance, integration, commit, or push without a
 fresh receipt. This replaces any expectation that the orchestrator will simply
 remember critical facts through automatic compaction.
+DeepSeek's active EMR4 transport is now Deep Code (`deepcode -p <packet>`),
+not the retired Codex bridge assumption. The profile in
+`orchestration/harness_settings/deepcode_model_profile.yaml` defaults to
+`deepseek-v4-flash`/`high`; it permits `deepseek-v4-pro` or `max` only with a
+recorded leverage reason. Deep Code is an interactive permissioned TUI, so a
+durable packet artifact, not terminal output or a local tool approval, is the
+only accepted worker result.
 The revised Opus Conductor plan selected a bounded transport-adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. It is
 not dispatched: the current Codex task surface exposes built-in subagent models

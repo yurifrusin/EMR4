@@ -8,7 +8,7 @@
     ]
   },
   "adapter_observations": [
-    {"adapter_id": "codex_local_deepseek_spawn", "method": "codex_local_spawn", "reachability": "reachable", "evidence": ["authored_fixture"]},
+    {"adapter_id": "deepcode_cli", "method": "deepcode_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "claude_cli_print", "method": "claude_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["authored_fixture"]}

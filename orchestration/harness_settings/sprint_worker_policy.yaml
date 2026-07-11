@@ -14,7 +14,7 @@ worker_mix:
     minimum_instances: 1
     maximum_instances: 3
     use_when: [bounded_implementation, test_engineering, security_review, code_review, documentation_handover]
-    lane_rule: each_lane_requires_distinct_packet_ownership_and_verification
+    lane_rule: each_lane_requires_distinct_packet_ownership_verification_and_deepcode_artifact
 planning_inputs:
   - boundary_classification
   - required_ssdlc_obligations

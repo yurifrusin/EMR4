@@ -275,6 +275,28 @@
         "fixture_context_state_only",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-deepcode-adapter-profile",
+      "stage": "implementation",
+      "kind": "interactive_deepseek_transport_profile",
+      "status": "passed",
+      "recorded_by": "codex",
+      "command": [
+        "deepcode",
+        "--version"
+      ],
+      "scope": [
+        "orchestration/harness_settings/deepcode_model_profile.yaml",
+        "orchestration/harness_settings/transport_adapters.yaml",
+        "docs/ariadne-deepcode-adapter.md"
+      ],
+      "limitations": [
+        "deepcode_cli_version_only",
+        "no_api_call",
+        "no_worker_dispatch",
+        "no_runtime_change"
+      ]
     }
   ]
 }

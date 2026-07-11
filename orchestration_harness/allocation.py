@@ -11,6 +11,7 @@ from typing import Any
 class Transport(StrEnum):
     CLI_HEADLESS = "cli_headless"
     CLI_PRINT = "cli_print"
+    CLI_INTERACTIVE = "cli_interactive"
     BRIDGE_SUBAGENT = "bridge_subagent"
     FILESYSTEM_PACKET = "filesystem_packet"
     MANUAL = "manual"

@@ -34,7 +34,7 @@ def test_worker_pool_is_strict_and_declares_transport_separately_from_capability
         "gpt-terra-primary", "claude-fable-conductor", "claude-opus-conductor",
         "antigravity-gemini-flash-3-5-worker", "deepseek-flash-verifier", "deepseek-flash-workers",
     }
-    assert any(worker.transport.value == "bridge_subagent" for worker in workers)
+    assert any(worker.transport.value == "cli_interactive" for worker in workers)
     assert Role.CONDUCTOR in next(worker.capabilities for worker in workers if worker.resource_id == "claude-fable-conductor")
 
 
@@ -66,14 +66,17 @@ def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
     assert "workspace_receipts" in policy["required_plan_fields"]
 
 
-def test_transport_adapters_record_codex_local_deepseek_spawn_as_non_shell_transport():
+def test_transport_adapters_record_deepcode_as_a_cli_transport_with_bounded_model_profile():
     adapters = _yaml("transport_adapters.yaml")
-    deepseek = next(item for item in adapters["adapters"] if item["adapter_id"] == "codex_local_deepseek_spawn")
+    deepseek = next(item for item in adapters["adapters"] if item["adapter_id"] == "deepcode_cli")
+    profile = _yaml("deepcode_model_profile.yaml")
 
     assert adapters["schema_version"] == "ariadne.transport_adapters.v1"
-    assert deepseek["invocation"] == "local_codex_call_or_spawn"
-    assert deepseek["shell_probe_applicable"] is False
-    assert "codex_local_spawn" in deepseek["allowed_probe_methods"]
+    assert deepseek["invocation"] == "deepcode_prompt_tui"
+    assert deepseek["shell_probe_applicable"] is True
+    assert "deepcode_cli_observation" in deepseek["allowed_probe_methods"]
+    assert profile["models"]["default"] == "deepseek-v4-flash"
+    assert profile["reasoning"]["allowed"] == ["high", "max"]
 
 
 def test_user_override_schema_is_strict_and_compaction_safe():
