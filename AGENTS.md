@@ -41,6 +41,15 @@ realigned when run from `EMR4-worktrees\claude`. This is expected guardrail
 behaviour. The harness must require a workspace preflight receipt (target
 worktree, expected branch, cleanliness, relation to `handoff/current`, and
 recorded realignment) before any Conductor or worker reads a packet.
+`orchestration_harness/orchestrator_preflight.py` plus
+`scripts/ariadne_orchestrator_preflight.py` now implement the extraction-ready
+receipt core: generic requirements, project transport adapters, worker-pool
+limits, and an operator-supplied transient runtime-state JSON produce only
+`passed|revision_required`. It is required at new-session, post-compaction,
+pre-plan, and pre-dispatch continuation events; it cannot probe, spawn/close
+workers, realign worktrees, or integrate. The current EMR4 fixture is only a
+profile/example, not part of the core contract: resource-instance slots are
+generic, while `deepseek-flash-workers` is merely this profile's managed pool.
 The revised Opus Conductor plan selected a bounded transport-adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. It is
 not dispatched: the current Codex task surface exposes built-in subagent models

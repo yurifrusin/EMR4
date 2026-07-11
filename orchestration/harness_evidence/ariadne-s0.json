@@ -223,6 +223,33 @@
         "no_integration_or_commit_authority_granted_to_workers",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-generic-orchestrator-receipt",
+      "stage": "implementation",
+      "kind": "generic_orchestrator_continuation_receipt",
+      "status": "passed",
+      "recorded_by": "codex",
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "--runtime-state",
+        "tests/fixtures/ariadne_harness/orchestrator_runtime_state.json"
+      ],
+      "scope": [
+        "orchestration_harness/orchestrator_preflight.py",
+        "orchestration/harness_settings/orchestrator_requirements.yaml",
+        "orchestration/harness_settings/transport_adapters.yaml",
+        "scripts/ariadne_orchestrator_preflight.py"
+      ],
+      "limitations": [
+        "advisory_only",
+        "authored_runtime_state_fixture_only",
+        "no_provider_probe",
+        "no_worker_control",
+        "no_worktree_control",
+        "no_runtime_change"
+      ]
     }
   ]
 }

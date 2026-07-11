@@ -1,0 +1,15 @@
+schema_version: ariadne.orchestrator_requirements.v1
+continuation_events: [new_session, post_compaction, pre_sprint_planning, pre_worker_dispatch]
+required_adapter_observations: all_declared
+worker_slot_management:
+  # This is an EMR4 profile choice. The receipt core is resource-neutral.
+  managed_resource_ids: [deepseek-flash-workers]
+  stale_worker_policy: reuse_with_recorded_scope_or_close_before_dispatch
+workspace_receipts:
+  required_agent_ids: [claude, antigravity]
+  required_fields: [agent_id, worktree, branch, clean, at_handoff_current, recorded_at]
+orchestrator_rules:
+  - never_infer_transport_unavailability_from_an_unrelated_probe
+  - never_dispatch_when_slot_inventory_is_missing_or_stale
+  - never_substitute_a_verified_assignment_without_conductor_replan_and_verifier_result
+  - require_a_new_receipt_at_each_continuation_event

@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "adapter_observations": [
+    {"adapter_id": "codex_local_deepseek_spawn", "method": "codex_local_spawn", "reachability": "reachable", "evidence": ["authored_fixture"]},
+    {"adapter_id": "claude_cli_print", "method": "claude_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["authored_fixture"]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    {"agent_id": "claude", "worktree": "fixture/claude", "branch": "claude/current", "clean": true, "at_handoff_current": true, "recorded_at": "2026-07-11T00:00:00Z"},
+    {"agent_id": "antigravity", "worktree": "fixture/antigravity", "branch": "antigravity/current", "clean": true, "at_handoff_current": true, "recorded_at": "2026-07-11T00:00:00Z"}
+  ]
+}
