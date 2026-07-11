@@ -65,13 +65,15 @@ recorded leverage reason. Deep Code is an interactive permissioned TUI, so a
 durable packet artifact, not terminal output or a local tool approval, is the
 only accepted worker result. It requires a real interactive TTY: a non-TTY
 refusal is current-surface adapter unavailability, not DeepSeek unavailability.
-The revised Opus Conductor plan selected a bounded transport-adapter guard
-docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. It is
-not dispatched: the current Codex task surface exposes built-in subagent models
-only, not the configured DeepSeek local-spawn handle. This is a
-`revision_required` S4d preflight, not a claim that DeepSeek is globally
-unavailable and not permission to substitute the orchestrator or Antigravity as
-verifier. See `docs/ariadne-s4d-pilot-preflight.md`.
+The revised Opus Conductor plan selected a bounded Deep Code adapter guard
+docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. The
+real interactive Deep Code verifier artifact at
+`orchestration/agent_inbox/codex/review-deepcode-s4d-adapter-settings-guard.md`
+returned `DECISION: pass`. S4d worker dispatch may now proceed only under the
+passed plan's separate packets, receipts, and artifact rules. The original
+Codex-local bridge preflight remains a historical `revision_required` finding,
+not a claim that DeepSeek is globally unavailable. See
+`docs/ariadne-s4d-pilot-preflight.md`.
 
 2026-07-08 Yuri proposed applying DAG-style conditioning dependencies to the
 Bernie UI so a few canonical state nodes, especially confirmation state, can

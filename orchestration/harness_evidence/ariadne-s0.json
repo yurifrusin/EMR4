@@ -314,6 +314,23 @@
         "no_worker_dispatch",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-s4d-deepcode-verifier",
+      "stage": "pilot",
+      "kind": "interactive_deepcode_verifier_artifact",
+      "status": "passed",
+      "recorded_by": "deepcode",
+      "scope": [
+        "orchestration/agent_inbox/deepcode/deepcode-s4d-verifier-packet.md",
+        "orchestration/agent_inbox/codex/review-deepcode-s4d-adapter-settings-guard.md"
+      ],
+      "limitations": [
+        "interactive_tty_execution",
+        "plan_verification_only",
+        "no_worker_dispatch_by_verifier",
+        "no_runtime_change"
+      ]
     }
   ]
 }
