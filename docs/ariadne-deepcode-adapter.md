@@ -36,3 +36,11 @@ The user-level API configuration remains outside the repository in
 `~/.deepcode/settings.json`; do not commit secrets or project-specific
 overrides. Project-level Deep Code settings override user settings, so a worker
 must disclose any project-level `.deepcode/settings.json` in its packet receipt.
+
+## Interactive Smoke Evidence
+
+On 2026-07-11, a real PowerShell TTY ran the no-tool/no-file prompt
+`Reply exactly: DEEPCODE_SMOKE_PASS.` and the user observed
+`DEEPCODE_SMOKE_PASS`. This proves the installed Deep Code CLI, user-level
+configuration, and interactive API path are reachable. It does not prove a
+verifier decision, worker dispatch, write permission, or EMR4 runtime behavior.

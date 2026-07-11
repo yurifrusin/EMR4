@@ -297,6 +297,23 @@
         "no_worker_dispatch",
         "no_runtime_change"
       ]
+    },
+    {
+      "evidence_id": "ariadne-deepcode-interactive-smoke",
+      "stage": "pilot",
+      "kind": "interactive_tty_adapter_smoke",
+      "status": "passed",
+      "recorded_by": "user_observed_deepcode",
+      "scope": [
+        "C:\\Users\\sarashera\\.deepcode\\settings.json",
+        "deepcode interactive TTY"
+      ],
+      "limitations": [
+        "no_tool_or_file_action_requested",
+        "no_verifier_decision",
+        "no_worker_dispatch",
+        "no_runtime_change"
+      ]
     }
   ]
 }
