@@ -77,6 +77,7 @@ def test_transport_adapters_record_deepcode_as_a_cli_transport_with_bounded_mode
     assert "deepcode_cli_observation" in deepseek["allowed_probe_methods"]
     assert profile["models"]["default"] == "deepseek-v4-flash"
     assert profile["reasoning"]["allowed"] == ["high", "max"]
+    assert profile["execution_mode"] == "interactive_tty_required"
 
 
 def test_user_override_schema_is_strict_and_compaction_safe():

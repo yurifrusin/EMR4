@@ -10,6 +10,12 @@ service. The harness invokes its documented prompt entry point:
 deepcode -p "<bounded packet>"
 ```
 
+Deep Code requires a real interactive terminal. A non-TTY shell refusal means
+this execution surface cannot use the adapter; it does not mean DeepSeek or the
+configured API key is unavailable. The interactive operator must review any
+Deep Code permission prompt; the harness still requires a durable artifact and
+does not treat a local tool approval as sprint or integration authority.
+
 The active profile is `deepseek-v4-flash` with `high` reasoning. The documented
 model choices are `deepseek-v4-flash` and `deepseek-v4-pro`; Deep Code exposes
 only `high` and `max` reasoning. `deepseek-v4-pro` and `max` are exceptional

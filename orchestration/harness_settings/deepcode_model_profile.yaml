@@ -2,6 +2,8 @@ schema_version: ariadne.deepcode_model_profile.v1
 adapter_id: deepcode_cli
 command: deepcode
 prompt_entrypoint: deepcode -p <packet>
+execution_mode: interactive_tty_required
+non_tty_posture: adapter_unavailable_for_current_execution_surface
 session_controls:
   fresh: /new
   resume: /resume

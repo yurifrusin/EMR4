@@ -63,7 +63,8 @@ not the retired Codex bridge assumption. The profile in
 `deepseek-v4-flash`/`high`; it permits `deepseek-v4-pro` or `max` only with a
 recorded leverage reason. Deep Code is an interactive permissioned TUI, so a
 durable packet artifact, not terminal output or a local tool approval, is the
-only accepted worker result.
+only accepted worker result. It requires a real interactive TTY: a non-TTY
+refusal is current-surface adapter unavailability, not DeepSeek unavailability.
 The revised Opus Conductor plan selected a bounded transport-adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. It is
 not dispatched: the current Codex task surface exposes built-in subagent models
