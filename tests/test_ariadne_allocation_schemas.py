@@ -62,6 +62,8 @@ def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
     assert policy["worker_mix"]["deepseek_flash"]["minimum_instances"] == 1
     assert policy["worker_mix"]["deepseek_flash"]["maximum_instances"] == 3
     assert "no_orchestrator_substitution" in policy["verifier_checks"]
+    assert policy["workspace_preflight"]["failure_posture"] == "revision_required_before_packet_dispatch"
+    assert "workspace_receipts" in policy["required_plan_fields"]
 
 
 def test_transport_adapters_record_codex_local_deepseek_spawn_as_non_shell_transport():

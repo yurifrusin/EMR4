@@ -16,6 +16,21 @@ If the orchestrator cannot safely execute a verified plan, it returns it to the
 conductor with evidence. If availability changes, the conductor replans and the
 verifier checks the revision; the orchestrator does not improvise a replacement.
 
+## Workspace Preflight
+
+Transport reachability and workspace readiness are separate facts. A reachable
+CLI or local Codex spawn does not establish that the assigned worker has the
+current mandate, settings, or code. Before the Conductor or a worker reads a
+packet, it must supply a workspace receipt containing its target worktree,
+expected agent branch, cleanliness, relation to `handoff/current`, and any
+recorded divergence.
+
+If a clean worker mirror must be realigned, the realignment command runs from
+that target worker worktree. A command issued from the integration checkout is
+supposed to refuse when the branch does not match the requested agent; that is
+a guardrail, not a transport failure. A missing, stale, dirty, or mis-targeted
+receipt requires plan revision before packet dispatch.
+
 ## Artifact Flow
 
 ```text

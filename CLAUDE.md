@@ -21,12 +21,18 @@ Before producing a sprint plan, read:
 - `orchestration/harness_settings/user_overrides.yaml`
 - `docs/ariadne-harness-conductor-verifier-protocol.md`
 
+Do not plan from a stale worker checkout. Before reading project state, emit or
+request a workspace receipt showing the assigned worktree, expected branch,
+cleanliness, relation to `handoff/current`, and any realignment. A realignment
+command must run from the target worker worktree; invoking it from the
+integration checkout is an intentional safety refusal, not a failed sync.
+
 Produce a bounded allocation plan for DeepSeek Flash verification. It must name
 the boundary, roles, assigned resources/models/reasoning, Antigravity platform
 use (currently Gemini Flash 3.5) or stand-down rationale, one to three DeepSeek
 Flash worker lanes, disjoint file or
 review ownership, expected artifacts, verification, fallbacks, reduced
-independence, and unfilled obligations. Claude must not launch workers, change
+independence, unfilled obligations, and workspace receipts. Claude must not launch workers, change
 the verified allocation, write to `master`, integrate, commit, or push. A plan
 rejected by the verifier is revised by the conductor, not improvised by the
 orchestrator.

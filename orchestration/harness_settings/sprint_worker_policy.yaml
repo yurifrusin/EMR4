@@ -22,6 +22,14 @@ planning_inputs:
   - declared_resource_probes
   - cost_and_quota_constraints
   - user_overrides
+workspace_preflight:
+  required_before_conductor_or_worker_packet:
+    - target_worktree_exists
+    - target_branch_matches_assigned_agent
+    - target_worktree_is_clean_or_explicitly_classified
+    - target_head_matches_handoff_current_or_has_recorded_divergence
+    - realignment_is_executed_from_target_worktree_not_integration_worktree
+  failure_posture: revision_required_before_packet_dispatch
 required_plan_fields:
   - boundary
   - assignments
@@ -33,6 +41,7 @@ required_plan_fields:
   - fallback_reasons
   - independence_labels
   - unfilled_obligations
+  - workspace_receipts
 verifier_checks:
   - settings_fingerprint_matches
   - conductor_and_orchestrator_authority_separation
@@ -42,3 +51,4 @@ verifier_checks:
   - assignment_capability_and_probe_eligibility
   - fallback_and_reduced_independence_are_explicit
   - no_orchestrator_substitution
+  - workspace_receipts_match_assigned_agent_and_handoff_state
