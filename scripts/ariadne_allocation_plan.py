@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import sys
 from pathlib import Path
@@ -17,18 +16,9 @@ if str(REPO_ROOT) not in sys.path:
 
 from orchestration_harness.allocation import AvailabilityProbe, ConductorPlan, GeneralistProfile, RolePreference, WorkerResource
 from orchestration_harness.allocator import allocate_roles
+from orchestration_harness.settings_fingerprint import settings_fingerprint
 
 SETTINGS_DIR = REPO_ROOT / "orchestration" / "harness_settings"
-SETTINGS_FILES = (
-    "project.yaml",
-    "worker_pool.yaml",
-    "role_preferences.yaml",
-    "generalist.yaml",
-    "user_overrides.yaml",
-    "sprint_worker_policy.yaml",
-    "transport_adapters.yaml",
-    "deepcode_model_profile.yaml",
-)
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
@@ -36,16 +26,6 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"{path} must contain a YAML object")
     return payload
-
-
-def _settings_fingerprint(settings_dir: Path) -> str:
-    digest = hashlib.sha256()
-    for name in SETTINGS_FILES:
-        digest.update(name.encode("utf-8"))
-        digest.update(b"\0")
-        digest.update((settings_dir / name).read_bytes())
-        digest.update(b"\0")
-    return f"sha256:{digest.hexdigest()}"
 
 
 def _validate_probe_adapters(probes: list[AvailabilityProbe], adapter_payload: dict[str, Any]) -> None:
@@ -82,7 +62,7 @@ def build_allocation_report(*, sprint_id: str, probes_path: Path, settings_dir: 
     probes = [AvailabilityProbe.from_dict(item) for item in probes_payload["probes"]]
     _validate_probe_adapters(probes, adapter_payload)
     outcome = allocate_roles(resources=resources, preferences=preferences, probes=probes, generalist=generalist)
-    fingerprint = _settings_fingerprint(settings_dir)
+    fingerprint = settings_fingerprint(settings_dir)
 
     assignments = [
         {

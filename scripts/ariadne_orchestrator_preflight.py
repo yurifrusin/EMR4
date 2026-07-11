@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import sys
 from pathlib import Path
@@ -16,9 +15,9 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from orchestration_harness.orchestrator_preflight import build_orchestrator_receipt
+from orchestration_harness.settings_fingerprint import settings_fingerprint
 
 SETTINGS_DIR = REPO_ROOT / "orchestration" / "harness_settings"
-SETTINGS_FILES = ("orchestrator_requirements.yaml", "transport_adapters.yaml", "worker_pool.yaml")
 
 
 def _yaml(path: Path) -> dict[str, Any]:
@@ -26,16 +25,6 @@ def _yaml(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"{path} must contain a YAML object")
     return payload
-
-
-def _fingerprint(settings_dir: Path) -> str:
-    digest = hashlib.sha256()
-    for name in SETTINGS_FILES:
-        digest.update(name.encode("utf-8"))
-        digest.update(b"\0")
-        digest.update((settings_dir / name).read_bytes())
-        digest.update(b"\0")
-    return f"sha256:{digest.hexdigest()}"
 
 
 def build_receipt(*, runtime_state_path: Path, settings_dir: Path = SETTINGS_DIR) -> dict[str, Any]:
@@ -47,7 +36,7 @@ def build_receipt(*, runtime_state_path: Path, settings_dir: Path = SETTINGS_DIR
         adapters=_yaml(settings_dir / "transport_adapters.yaml"),
         worker_pool=_yaml(settings_dir / "worker_pool.yaml"),
         runtime_state=runtime_state,
-        settings_fingerprint=_fingerprint(settings_dir),
+        settings_fingerprint=settings_fingerprint(settings_dir),
     )
 
 
