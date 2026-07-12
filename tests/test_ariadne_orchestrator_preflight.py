@@ -29,6 +29,33 @@ def test_generic_orchestrator_receipt_fails_closed_for_stale_worker_slots(tmp_pa
     assert "stale_worker_resolution_required:deepseek-flash-workers" in receipt["reasons"]
 
 
+def test_unassigned_platform_workspaces_do_not_block_sprint_planning(tmp_path: Path):
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["assigned_agent_ids"] = []
+    for workspace in runtime_state["workspace_receipts"]:
+        workspace["at_handoff_current"] = False
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "passed"
+
+
+def test_assigned_agent_requires_clean_current_workspace_receipt(tmp_path: Path):
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["assigned_agent_ids"] = ["claude"]
+    claude = next(item for item in runtime_state["workspace_receipts"] if item["agent_id"] == "claude")
+    claude["at_handoff_current"] = False
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert "workspace_not_at_handoff:claude" in receipt["reasons"]
+
+
 def test_context_health_requires_rehydration_for_unknown_context_before_integration(tmp_path: Path):
     runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
     runtime_state["continuation_event"] = "pre_sprint_planning"
