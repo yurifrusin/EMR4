@@ -114,6 +114,20 @@ Classify every finding as one of:
 
 Write your completion artifact at `orchestration/agent_inbox/codex/review-deepcode-s5-backend-audit.md`.
 
+## Completion Notes (filled by worker)
+
+### Files changed
+- `orchestration/agent_inbox/codex/review-deepcode-s5-backend-audit.md` (created — audit artifact, DECISION: pass)
+- `review/test_raw_status_terminal_rollback_guard.py` (created — failing-test proposal for terminal→non-terminal status rollback)
+
+### Verification
+Static code review completed. pytest could not be executed from this Deep Code session (non-TTY constraints).
+
+### Remaining risks
+- Terminal-status rollback gap on raw PATCH status endpoint (documented via failing-test proposal)
+- No pagination on GET /appointments (scale issue)
+- Raw-compat PUT allows mutation of terminal appointments
+
 The artifact must begin with `DECISION: pass` or `DECISION: revision_required`. Include:
 - Contract-by-contract audit results
 - Each finding classified (material functional defect / material usability defect / minor / observation)
