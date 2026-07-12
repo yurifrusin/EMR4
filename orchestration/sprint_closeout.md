@@ -26,10 +26,10 @@ Every closeout entry should record:
 |---|---|
 | Batch | S6 Diary Contract Repair |
 | Integrated through | DeepSeek Pro conductor fallback, DeepSeek Flash implementation/revisions, corrected independent review, and Sol acceptance |
-| Status | Integrated locally; closeout publication pending |
-| Commit | Through `d5e40194`; closeout commit pending |
-| Push | Pending closeout commit |
-| Final status | Pending publication check |
+| Status | Published to `origin/master` and `origin/handoff/current` |
+| Commit | `b1292c49` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` after S6 closeout publication |
 | Last updated | 2026-07-13 |
 
 ## S6 What Changed

@@ -1,7 +1,7 @@
 # EMR4 S6 Diary Contract Repair Closeout
 
 Date: 2026-07-13
-Status: complete, pending publication-state receipt
+Status: complete and published through `b1292c49`
 
 S6 restored the diary browser suite from eight known failures to a clean
 139-test signal. The initial test-only plan was amended after Sol proved four
