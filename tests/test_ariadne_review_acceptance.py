@@ -888,6 +888,136 @@ class TestPytestCollection:
         assert result.accepted is True
         assert result.authoritative_pytest_count == 47
 
+    # ------------------------------------------------------------------
+    # Multi-file aggregation contract (S7 revision 3)
+    # ------------------------------------------------------------------
+
+    def test_two_files_aggregated_30_plus_52_equals_82(self, tmp_worktree: Path):
+        """Two per-file lines 30 + 52 = 82 are accepted and summed."""
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "agg1", "add main")
+        art = _make_artifact(tmp_worktree, "STATUS: complete\n")
+        receipt = _make_receipt(tmp_worktree)
+        collect = _make_collect_file(
+            tmp_worktree,
+            "tests/test_ariadne_deepcode_adapter_settings.py: 30\n"
+            "tests/test_ariadne_review_acceptance.py: 52",
+        )
+
+        result = accept_review_artifact(
+            artifact_path=art, artifact_kind="completion",
+            receipt_path=receipt, review_worktree=tmp_worktree,
+            expected_branch=branch, candidate_commit=commit,
+            pytest_collect_path=collect, review_mode="executable",
+        )
+        assert result.accepted is True, f"reasons: {result.reasons}"
+        assert result.authoritative_pytest_count == 82
+
+    def test_one_file_139_accepted(self, tmp_worktree: Path):
+        """Single per-file line 139 -> 139 accepted."""
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "agg2", "add main")
+        art = _make_artifact(tmp_worktree, "STATUS: complete\n")
+        receipt = _make_receipt(tmp_worktree)
+        collect = _make_collect_file(
+            tmp_worktree, "tests/test_ariadne_review_acceptance.py: 139"
+        )
+
+        result = accept_review_artifact(
+            artifact_path=art, artifact_kind="completion",
+            receipt_path=receipt, review_worktree=tmp_worktree,
+            expected_branch=branch, candidate_commit=commit,
+            pytest_collect_path=collect, review_mode="executable",
+        )
+        assert result.accepted is True, f"reasons: {result.reasons}"
+        assert result.authoritative_pytest_count == 139
+
+    def test_two_files_plus_matching_summary_accepted(self, tmp_worktree: Path):
+        """Two .py lines plus a matching summary count are accepted."""
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "agg3", "add main")
+        art = _make_artifact(tmp_worktree, "STATUS: complete\n")
+        receipt = _make_receipt(tmp_worktree)
+        collect = _make_collect_file(
+            tmp_worktree,
+            "tests/test_ariadne_deepcode_adapter_settings.py: 30\n"
+            "tests/test_ariadne_review_acceptance.py: 52\n"
+            "82 tests collected",
+        )
+
+        result = accept_review_artifact(
+            artifact_path=art, artifact_kind="completion",
+            receipt_path=receipt, review_worktree=tmp_worktree,
+            expected_branch=branch, candidate_commit=commit,
+            pytest_collect_path=collect, review_mode="executable",
+        )
+        assert result.accepted is True, f"reasons: {result.reasons}"
+        assert result.authoritative_pytest_count == 82
+
+    def test_two_files_plus_mismatching_summary_rejected(self, tmp_worktree: Path):
+        """Two .py lines with a non-matching summary count are rejected."""
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "agg4", "add main")
+        art = _make_artifact(tmp_worktree, "STATUS: complete\n")
+        receipt = _make_receipt(tmp_worktree)
+        collect = _make_collect_file(
+            tmp_worktree,
+            "tests/test_ariadne_deepcode_adapter_settings.py: 30\n"
+            "tests/test_ariadne_review_acceptance.py: 52\n"
+            "80 tests collected",
+        )
+
+        result = accept_review_artifact(
+            artifact_path=art, artifact_kind="completion",
+            receipt_path=receipt, review_worktree=tmp_worktree,
+            expected_branch=branch, candidate_commit=commit,
+            pytest_collect_path=collect, review_mode="executable",
+        )
+        assert result.accepted is False
+        assert result.authoritative_pytest_count is None
+
+    def test_duplicate_same_path_same_count_not_double_counted(self, tmp_worktree: Path):
+        """Same path with same count is not double-counted."""
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "agg5", "add main")
+        art = _make_artifact(tmp_worktree, "STATUS: complete\n")
+        receipt = _make_receipt(tmp_worktree)
+        collect = _make_collect_file(
+            tmp_worktree,
+            "tests/test_a.py: 10\n"
+            "tests/test_a.py: 10",
+        )
+
+        result = accept_review_artifact(
+            artifact_path=art, artifact_kind="completion",
+            receipt_path=receipt, review_worktree=tmp_worktree,
+            expected_branch=branch, candidate_commit=commit,
+            pytest_collect_path=collect, review_mode="executable",
+        )
+        assert result.accepted is True, f"reasons: {result.reasons}"
+        assert result.authoritative_pytest_count == 10
+
+    def test_duplicate_same_path_different_count_rejected(self, tmp_worktree: Path):
+        """Same path with different counts is rejected."""
+        branch = _get_branch(tmp_worktree)
+        commit = _commit_file(tmp_worktree, "src/main.py", "agg6", "add main")
+        art = _make_artifact(tmp_worktree, "STATUS: complete\n")
+        receipt = _make_receipt(tmp_worktree)
+        collect = _make_collect_file(
+            tmp_worktree,
+            "tests/test_a.py: 10\n"
+            "tests/test_a.py: 15",
+        )
+
+        result = accept_review_artifact(
+            artifact_path=art, artifact_kind="completion",
+            receipt_path=receipt, review_worktree=tmp_worktree,
+            expected_branch=branch, candidate_commit=commit,
+            pytest_collect_path=collect, review_mode="executable",
+        )
+        assert result.accepted is False
+        assert result.authoritative_pytest_count is None
+
 
 class TestWorkerCountMismatch:
     def test_worker_count_mismatch_flagged(self, tmp_worktree: Path):

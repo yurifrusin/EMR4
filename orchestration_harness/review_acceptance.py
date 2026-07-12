@@ -189,40 +189,70 @@ def _parse_artifact_marker(
 # ---------------------------------------------------------------------------
 # Pytest collection parsing
 # ---------------------------------------------------------------------------
-
-# Tight patterns:
-#   "139 tests collected"
-#   "1 test collected"
-#   "review/test_diary_smoke.py: 139"            (pytest file output form)
-#   "tests/test_foo.py: 47"                       (pytest file output form)
-_COLLECT_PATTERNS = [
-    re.compile(r"(\d+)\s+tests?\s+collected"),
-    # Only match .py: N (pytest file output), not arbitrary colon-number patterns
-    re.compile(r"^.*?\.py:\s*(\d+)\s*$", re.MULTILINE),
-]
+#
+# Two distinct forms are accepted:
+#   1. Per-file ".py: N" lines — normalised by file path, conflicting
+#      duplicate counts for the same path are rejected, unique file counts
+#      are summed.
+#   2. Summary "N test(s) collected" lines — all summary counts must agree.
+#
+# If both forms are present the summary count must equal the per-file sum.
+# If only one form is present, use it.
+# Zero, missing, conflicting duplicate, or summary-versus-sum mismatch
+# are rejected. Arbitrary colon-number patterns (e.g. "total: 42") are
+# rejected because they don't match ".py: N".
 
 
 def _parse_pytest_collect(text: str) -> int | None:
     """Return the collected test count, or ``None`` if parsing fails.
 
-    Accepts multiple matches as long as they agree (conflicting = ``None``).
+    Parses per-file ``.py: N`` entries and summary ``N test(s) collected``
+    entries, aggregating them according to the contract documented above.
     """
-    counts: set[int] = set()
-    for pat in _COLLECT_PATTERNS:
-        for m in pat.finditer(text):
-            try:
-                counts.add(int(m.group(1)))
-            except ValueError:
-                continue
+    # -- Per-file .py: N entries (pytest file output form) -----------------
+    file_counts: dict[str, int] = {}
+    for m in re.finditer(r"^(.*?\.py):\s*(\d+)\s*$", text, re.MULTILINE):
+        path = m.group(1).strip()
+        count = int(m.group(2))
+        if path in file_counts:
+            if file_counts[path] != count:
+                return None  # conflicting count for same path
+        else:
+            file_counts[path] = count
 
-    if len(counts) == 0:
-        return None
-    if len(counts) > 1:
-        return None  # conflicting counts
-    (val,) = counts
-    if val <= 0:
-        return None
-    return val
+    # -- Summary N test(s) collected entries --------------------------------
+    summary_counts: set[int] = set()
+    for m in re.finditer(r"(\d+)\s+tests?\s+collected", text):
+        summary_counts.add(int(m.group(1)))
+
+    if len(summary_counts) > 1:
+        return None  # conflicting summary counts
+
+    file_sum = sum(file_counts.values()) if file_counts else None
+    summary_val = next(iter(summary_counts)) if len(summary_counts) == 1 else None
+
+    # -- Reconcile forms ----------------------------------------------------
+    if file_sum is not None and summary_val is not None:
+        # Both forms present — must agree
+        if file_sum != summary_val:
+            return None
+        if file_sum <= 0:
+            return None
+        return file_sum
+
+    if file_sum is not None:
+        # Only per-file form
+        if file_sum <= 0:
+            return None
+        return file_sum
+
+    if summary_val is not None:
+        # Only summary form
+        if summary_val <= 0:
+            return None
+        return summary_val
+
+    return None  # no recognised form
 
 
 # ---------------------------------------------------------------------------
