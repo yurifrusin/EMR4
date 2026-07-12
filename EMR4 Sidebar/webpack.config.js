@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 
+const path = require("path");
 const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -82,6 +83,16 @@ module.exports = async (env, options) => {
       }),
     ],
     devServer: {
+      static: [
+        {
+          directory: path.join(__dirname, "..", "docs", "diary"),
+          publicPath: "/diary",
+        },
+        {
+          directory: path.join(__dirname, "..", "docs", "images"),
+          publicPath: "/images",
+        },
+      ],
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
