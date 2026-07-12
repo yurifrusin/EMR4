@@ -150,14 +150,15 @@ class TestWorkerPoolDeepCodeContract:
             if w.get("transport") == "cli_interactive"
         ]
 
-    def test_two_deepcode_resources_defined(self):
-        assert len(self._deepcode_resources) == 2
+    def test_three_deepcode_resources_defined(self):
+        assert len(self._deepcode_resources) == 3
 
-    def test_verifier_and_worker_resource_ids_match(self):
+    def test_resource_ids_match_expected(self):
         ids = sorted(r["resource_id"] for r in self._deepcode_resources)
         assert ids == [
             "deepseek-flash-verifier",
             "deepseek-flash-workers",
+            "deepseek-pro-conductor-fallback",
         ]
 
     def test_all_deepcode_resources_require_real_tty(self):
@@ -175,11 +176,36 @@ class TestWorkerPoolDeepCodeContract:
             )
 
     def test_all_deepcode_resources_default_model_is_flash(self):
+        """Verifier and worker resources default to Flash; the Pro conductor
+        fallback defaults to deepseek-v4-pro."""
         for resource in self._deepcode_resources:
-            assert resource["default_model"] == "deepseek-v4-flash", (
-                f"{resource['resource_id']} defaults to "
-                f"{resource['default_model']}"
-            )
+            if resource["resource_id"] == "deepseek-pro-conductor-fallback":
+                assert resource["default_model"] == "deepseek-v4-pro", (
+                    f"{resource['resource_id']} defaults to "
+                    f"{resource['default_model']}, expected deepseek-v4-pro"
+                )
+            else:
+                assert resource["default_model"] == "deepseek-v4-flash", (
+                    f"{resource['resource_id']} defaults to "
+                    f"{resource['default_model']}"
+                )
+
+    def test_pro_conductor_fallback_contract(self):
+        """The Pro conductor fallback must use the cli_interactive transport,
+        have Pro as default, deny integration authority, and be limited to 1
+        instance."""
+        fb = None
+        for r in self._deepcode_resources:
+            if r["resource_id"] == "deepseek-pro-conductor-fallback":
+                fb = r
+                break
+        assert fb is not None
+        assert fb["transport"] == "cli_interactive"
+        assert fb["default_model"] == "deepseek-v4-pro"
+        assert fb["max_instances"] == 1
+        quirks = fb.get("transport_quirks", [])
+        assert "permission_prompts_are_not_authority" in quirks
+        assert "no_integration_authority" in quirks
 
     def test_all_deepcode_resources_default_reasoning_is_high(self):
         for resource in self._deepcode_resources:
@@ -188,16 +214,9 @@ class TestWorkerPoolDeepCodeContract:
                 f"{resource['default_reasoning']}"
             )
 
-    def test_workers_have_separate_packet_quirk(self):
-        """Worker lane resources require a distinct packet per lane."""
-        for resource in self._deepcode_resources:
-            quirks = resource.get("transport_quirks", [])
-            if resource["resource_id"] == "deepseek-flash-workers":
-                assert "separate_worker_packet_required" in quirks
-
     def test_all_deepcode_resources_deny_integration_authority(self):
-        """Permission prompts are transport decisions, not integration
-        authority."""
+        """Every DeepSeek cli_interactive resource has both
+        no_integration_authority and permission_prompts_are_not_authority."""
         for resource in self._deepcode_resources:
             quirks = resource.get("transport_quirks", [])
             assert "permission_prompts_are_not_authority" in quirks, (
@@ -207,20 +226,27 @@ class TestWorkerPoolDeepCodeContract:
 
     # -- Negative assertions for worker pool -----------------------------
 
-    def test_no_deepcode_resource_defaults_to_pro(self):
-        """No DeepSeek resource must default to deepseek-v4-pro."""
+    def test_no_flash_resource_defaults_to_pro(self):
+        """Flash-role resources (verifier and workers) must not default to
+        deepseek-v4-pro. The Pro conductor fallback is intentionally Pro."""
         for resource in self._deepcode_resources:
+            if resource["resource_id"] == "deepseek-pro-conductor-fallback":
+                continue
             assert resource["default_model"] != "deepseek-v4-pro", (
                 f"{resource['resource_id']} must not default to pro"
             )
 
-    def test_verifier_does_not_have_separate_packet_quirk(self):
-        """Only the worker lane (not the verifier) requires a separate
-        packet per lane."""
+    def test_verifier_and_conductor_fallback_do_not_have_separate_packet_quirk(self):
+        """Only the worker lane requires a separate packet per lane."""
         for resource in self._deepcode_resources:
             quirks = resource.get("transport_quirks", [])
-            if resource["resource_id"] == "deepseek-flash-verifier":
-                assert "separate_worker_packet_required" not in quirks
+            if resource["resource_id"] == "deepseek-flash-workers":
+                assert "separate_worker_packet_required" in quirks
+            else:
+                assert "separate_worker_packet_required" not in quirks, (
+                    f"{resource['resource_id']} must not have "
+                    f"separate_worker_packet_required"
+                )
 
 
 # ---------------------------------------------------------------------------
@@ -253,6 +279,7 @@ class TestTransportAdapterDeepCodeContract:
         assert self._adapter["resource_ids"] == [
             "deepseek-flash-verifier",
             "deepseek-flash-workers",
+            "deepseek-pro-conductor-fallback",
         ]
 
     def test_adapter_prompt_entrypoint_matches_profile(self):
