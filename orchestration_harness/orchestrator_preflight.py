@@ -70,7 +70,14 @@ def build_orchestrator_receipt(
         for item in runtime_state.get("workspace_receipts", [])
         if isinstance(item, dict)
     }
-    for agent_id in receipt_policy.get("required_agent_ids", []):
+    required_agent_ids = set(receipt_policy.get("required_agent_ids", []))
+    if receipt_policy.get("require_assigned_agent_ids") is True:
+        assigned_agent_ids = runtime_state.get("assigned_agent_ids", [])
+        if not isinstance(assigned_agent_ids, list):
+            reasons.append("assigned_agent_ids_invalid")
+            assigned_agent_ids = []
+        required_agent_ids.update(assigned_agent_ids)
+    for agent_id in sorted(required_agent_ids):
         receipt = receipt_by_agent.get(agent_id)
         if receipt is None:
             reasons.append(f"workspace_receipt_missing:{agent_id}")
