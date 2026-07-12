@@ -14942,3 +14942,19 @@ Status: accepted and integrated on 2026-07-13.
 
 Sprint engine state: continuing directly into the bounded S10-S12 Terra
 executor pilot. No user decision is required.
+
+---
+
+## S10 Terra Preflight Escalation
+
+Status: blocked before Conductor dispatch.
+
+The fresh S10 planning receipt returned `revision_required` because the clean
+Claude and Antigravity worktrees were not at `handoff/current`. The required
+receipt cannot be waived or its policy changed by Terra. No Conductor or worker
+was launched, no implementation or test files changed, and no integration was
+attempted. The durable escalation record is
+`orchestration/agent_inbox/codex/s10-terra-preflight-escalation.md`.
+
+Sprint engine state: paused only for the declared Sol authority-boundary
+decision. S11 and S12 remain unopened.
