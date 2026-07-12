@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.deepcode_pty_receipt.v1",
+  "status": "failed",
+  "reason": "artifact_timeout",
+  "started_at": "2026-07-12T11:27:48.028Z",
+  "finished_at": "2026-07-12T11:32:48.252Z",
+  "platform": "win32",
+  "packet": "orchestration/agent_inbox/codex/plan-claude-fable-s5-d1-continuation-v2.md",
+  "artifact": "orchestration/agent_inbox/codex/review-deepseek-v1-s5-d1-continuation-delta.md",
+  "artifact_observed": false,
+  "turn_completion_observed": true,
+  "exit_sent_after_artifact": false,
+  "exit_signal_count": 0,
+  "forced_cleanup": false,
+  "process_cleanup_confirmed": true,
+  "permission_prompt_observed": false,
+  "mailbox_event_count": 0,
+  "mailbox_events": [],
+  "child_exit_code": 1,
+  "terminal_output_persisted": false
+}
