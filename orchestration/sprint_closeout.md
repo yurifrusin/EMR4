@@ -24,42 +24,53 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | S6 Diary Contract Repair |
-| Integrated through | DeepSeek Pro conductor fallback, DeepSeek Flash implementation/revisions, corrected independent review, and Sol acceptance |
-| Status | Published to `origin/master` and `origin/handoff/current` |
-| Commit | `b1292c49` |
-| Push | `master` and `handoff/current` pushed successfully |
-| Final status | `## master...origin/master` after S6 closeout publication |
+| Batch | S7 Review Acceptance Contract Audit |
+| Integrated through | DeepSeek Pro conductor fallback, DeepSeek Flash implementation/revisions and independent review, executable gate acceptance, and Sol integration |
+| Status | Complete locally; publication pending closeout commit |
+| Commit | `pending S7 closeout commit` |
+| Push | pending |
+| Final status | `## master...origin/master [ahead 3]` before S7 closeout edits |
 | Last updated | 2026-07-13 |
 
-## S6 What Changed
+## S7 What Changed
 
-- Repaired `saveBooking()` AHPRA resolution after practitioner validation.
-- Updated practitioner-directory Playwright contracts for default-on GraphQL.
-- Preserved signed create/update-confirm assertions and advanced diary.js to
-  cache version 183.
-- Exercised the DeepSeek Pro conductor fallback and corrected DeepSeek Flash
-  implementation/review lanes.
-- Quarantined invalid review evidence and seeded S7 with the observed harness
-  contract failures.
+- Reconciled Deep Code adapter settings/tests with the approved Pro Conductor
+  fallback and preserved explicit no-authority security quirks.
+- Added an executable review acceptance gate and CLI covering artifact/receipt
+  identity, marker parity, exact worktree/branch, candidate ancestry, process
+  cleanup, review mode, and authoritative test collection.
+- Fixed the gate's first real-run multi-file collection defect before accepting
+  the candidate.
+- Persisted the final machine acceptance decision and Sol evidence.
 
-## S6 Verification
+## S7 Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q --tb=short
-.venv\Scripts\python.exe -m pytest tests\test_sprint_closeout_protocol.py tests\test_ariadne_deepcode_pty.py -q --tb=short
-node --check docs\diary\diary.js
-.venv\Scripts\python.exe scripts\check_frontend_versions.py
+.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_adapter_settings.py tests\test_ariadne_review_acceptance.py -q --tb=short
+.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_pty.py tests\test_ariadne_deepcode_mailbox_settings.py -q --tb=short
+.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_adapter_settings.py tests\test_ariadne_deepcode_mailbox.py tests\test_ariadne_deepcode_mailbox_settings.py tests\test_ariadne_deepcode_pty.py tests\test_ariadne_review_acceptance.py tests\test_sprint_closeout_protocol.py -q --tb=short
+.venv\Scripts\python.exe -m py_compile orchestration_harness\review_acceptance.py scripts\ariadne_review_acceptance.py
+.venv\Scripts\python.exe scripts\ariadne_review_acceptance.py --help
 git diff --check
 ```
 
-Result: diary `139 passed`; closeout/PTY adapter `21 passed`; JavaScript,
-frontend-version, and whitespace checks passed. Six stale Pro-fallback settings
-assertions are explicitly deferred to S7.
+Result: focused `88 passed`; adjacent `22 passed`; broad `121 passed`; CLI,
+compilation, and whitespace checks passed. Existing Starlette and Google GenAI
+deprecation warnings only.
 
-Sprint engine state: continuing automatically to S7 contract audit. No
+Sprint engine state: continuing automatically to the next Conductor boundary. No
 deployment, production, external-client, provider, memory/RAG, H15/trove,
 schema, database, new-write-authority, or product-policy gate is opened.
+
+---
+
+## Previous Closeout - S6 Diary Contract Repair
+
+S6 restored the diary browser suite to 139/139, repaired the AHPRA runtime
+`ReferenceError`, updated GraphQL practitioner-directory contracts, and proved
+the DeepSeek Pro Conductor fallback. It was published through `b1292c49` to
+`origin/master` and `origin/handoff/current`. Full evidence is in
+`docs/emr4-s6-diary-contract-repair-closeout.md`.
 
 ---
 
@@ -14382,6 +14393,31 @@ Evidence: `docs/emr4-s6-diary-contract-repair-closeout.md`.
 
 Sprint engine state: continuing automatically to S7 contract audit. No user
 intervention is required.
+
+---
+
+## Sprint S7 Closeout - Review Acceptance Contract Audit
+
+- Reconciled all stale Deep Code adapter settings tests with the approved
+  `deepseek-pro-conductor-fallback`.
+- Added the standard-library review acceptance gate and direct CLI.
+- Bound acceptance to exact artifact/receipt identity, marker parity,
+  worktree/branch, candidate ancestry, cleanup, review mode, and authoritative
+  pytest collection.
+- Rejected the first candidate in a real gate run, returned the multi-file
+  aggregation defect to Lane 1, and required a fresh Lane 2 review.
+- Final executable gate decision is accepted with 88 authoritative focused
+  tests and no worker count mismatch.
+
+Verification: focused `88 passed`; adjacent Deep Code PTY/mailbox `22 passed`;
+broad Ariadne closeout `121 passed`; direct CLI, Python compilation, and
+whitespace checks passed.
+
+Evidence: `docs/ariadne-s7-review-acceptance-closeout.md` and
+`orchestration/harness_evidence/s7-review-v2-acceptance.json`.
+
+Sprint engine state: continuing automatically to the next Conductor planning
+boundary. No user intervention is required.
 
 ---
 
