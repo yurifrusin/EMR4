@@ -14926,3 +14926,19 @@ whitespace check clean apart from the known CRLF notice on
 Sprint engine state: continuing. No user intervention is required; next
 recommended direction is bounded readiness/gate hardening before runtime/provider
 wiring.
+## Sprint S9 Closeout - Local Diary Development Loop
+
+Status: accepted and integrated on 2026-07-13.
+
+- webpack-dev-server now serves `docs/diary` at `/diary` and `docs/images` at
+  `/images` without copying those assets into the production bundle.
+- DeepSeek Flash supplied commits `9ce31b42` and `b83b797a`; Sol independently
+  accepted them as `19678a13` and `398b0df5` on `master`.
+- Twenty-five focused Python tests and Node syntax checks pass.
+- A clean worker-config server on port 3001 returned HTTP 200 for
+  `/diary/diary.html` and `/images/emr_cube1.png`.
+- The detached worker survived an outer receipt-poll timeout and completed by
+  canonical artifact marker with confirmed process cleanup.
+
+Sprint engine state: continuing directly into the bounded S10-S12 Terra
+executor pilot. No user decision is required.

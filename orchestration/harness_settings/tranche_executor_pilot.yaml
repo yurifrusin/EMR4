@@ -1,0 +1,37 @@
+schema_version: ariadne.tranche_executor_pilot.v1
+status: active_bounded_pilot
+pilot_sprints: [S10, S11, S12]
+tranche_gate_owner: gpt-sol
+executor:
+  resource_id: openai-terra-tranche-executor
+  authority:
+    may:
+      - dispatch_conductor_allocated_workers
+      - request_same_lane_revision
+      - run_deterministic_acceptance_gates
+      - integrate_accepted_commits_on_staging_branch
+      - maintain_tranche_receipt
+    may_not:
+      - define_or_reallocate_sprint_work
+      - change_scope_or_acceptance_criteria
+      - integrate_or_push_protected_master
+      - weaken_security_write_deployment_or_release_boundaries
+mechanical_coordinator:
+  resource_id: openai-luna-mechanical-coordinator
+  enabled: false
+  allowed_duties: [poll_receipts, reconcile_artifact_paths, summarize_test_results]
+escalate_to_tranche_gate_owner_when:
+  - scope_authority_or_acceptance_change
+  - ambiguous_product_policy
+  - repeated_worker_defect
+  - security_write_deployment_or_release_boundary
+  - conflicting_acceptance_evidence
+  - protected_master_integration
+measure:
+  - gate_owner_interventions
+  - executor_retries
+  - invalid_integrations
+  - escalations
+  - final_correction_commits
+  - duplicated_context_events
+terminal_posture: continue_until_tranche_closeout_or_escalation

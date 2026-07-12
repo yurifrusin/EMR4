@@ -34,6 +34,7 @@ def test_worker_pool_is_strict_and_declares_transport_separately_from_capability
         "openai-primary-orchestrator", "claude-fable-conductor", "claude-opus-conductor",
         "gpt-sol-conductor-fallback",
         "deepseek-pro-conductor-fallback",
+        "openai-terra-tranche-executor", "openai-luna-mechanical-coordinator",
         "antigravity-gemini-flash-3-5-worker", "deepseek-flash-verifier", "deepseek-flash-workers",
     }
     assert any(worker.transport.value == "cli_interactive" for worker in workers)

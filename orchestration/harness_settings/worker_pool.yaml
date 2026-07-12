@@ -13,6 +13,32 @@ workers:
     quota_class: primary_subscription
     capabilities: [orchestrator, implementer, test_engineer, code_reviewer]
     cost_tier: 0
+  - resource_id: openai-terra-tranche-executor
+    provider: openai
+    account_id: openai-subscription
+    access_mode: subscription
+    transport: bridge_subagent
+    transport_quirks: [shares_primary_openai_subscription_window, no_protected_master_authority, staging_integration_only]
+    default_model: gpt-5.6-terra
+    default_reasoning: high
+    max_instances: 1
+    quota_scope: account_window
+    quota_class: primary_subscription
+    capabilities: [implementer, test_engineer, code_reviewer, docs_handover_auditor]
+    cost_tier: 0
+  - resource_id: openai-luna-mechanical-coordinator
+    provider: openai
+    account_id: openai-subscription
+    access_mode: subscription
+    transport: bridge_subagent
+    transport_quirks: [shares_primary_openai_subscription_window, no_integration_authority, mechanical_receipts_only]
+    default_model: gpt-5.6-luna
+    default_reasoning: medium
+    max_instances: 1
+    quota_scope: account_window
+    quota_class: primary_subscription
+    capabilities: [test_engineer, docs_handover_auditor]
+    cost_tier: 0
   - resource_id: claude-fable-conductor
     provider: anthropic
     account_id: claude-subscription
