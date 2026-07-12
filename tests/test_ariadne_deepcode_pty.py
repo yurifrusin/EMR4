@@ -181,9 +181,16 @@ def test_project_settings_bootstrap_is_secret_free_and_pre_authorizes_bounded_wr
 
     payload = json.loads((tmp_path / ".deepcode" / "settings.json").read_text(encoding="utf-8"))
     assert "env" not in payload
-    assert payload["permissions"]["allow"] == ["read-in-cwd", "query-git-log", "write-in-cwd"]
+    assert payload["permissions"]["allow"] == [
+        "read-in-cwd",
+        "query-git-log",
+        "write-in-cwd",
+        "mutate-git-log",
+    ]
     assert payload["permissions"]["ask"] == []
     assert "write-out-cwd" in payload["permissions"]["deny"]
+    assert "network" in payload["permissions"]["deny"]
+    assert "mutate-git-log" not in payload["permissions"]["deny"]
 
 
 def test_project_settings_can_select_pro_conductor_without_writing_secrets(tmp_path: Path):
@@ -203,7 +210,34 @@ def test_project_settings_bootstrap_rejects_conflicting_write_prompt(tmp_path: P
         json.dumps({"permissions": {"allow": [], "ask": ["write-in-cwd"]}}), encoding="utf-8"
     )
 
-    with pytest.raises(ValueError, match="must allow write-in-cwd"):
+    with pytest.raises(ValueError, match="required allowed capabilities"):
+        ensure_project_settings(tmp_path)
+
+
+def test_project_settings_bootstrap_rejects_git_mutation_prompt(tmp_path: Path):
+    settings = tmp_path / ".deepcode" / "settings.json"
+    settings.parent.mkdir()
+    settings.write_text(
+        json.dumps(
+            {
+                "permissions": {
+                    "allow": ["read-in-cwd", "query-git-log", "write-in-cwd"],
+                    "ask": ["mutate-git-log"],
+                    "deny": [
+                        "read-out-cwd",
+                        "write-out-cwd",
+                        "delete-in-cwd",
+                        "delete-out-cwd",
+                        "network",
+                        "mcp",
+                    ],
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="required allowed capabilities"):
         ensure_project_settings(tmp_path)
 
 
@@ -214,7 +248,12 @@ def test_project_settings_bootstrap_rejects_missing_required_denies(tmp_path: Pa
         json.dumps(
             {
                 "permissions": {
-                    "allow": ["write-in-cwd"],
+                    "allow": [
+                        "read-in-cwd",
+                        "query-git-log",
+                        "write-in-cwd",
+                        "mutate-git-log",
+                    ],
                     "ask": [],
                     "deny": [],
                 }

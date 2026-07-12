@@ -14,13 +14,12 @@ RUNNER = REPO_ROOT / "orchestration" / "deepcode_pty" / "runner.mjs"
 PROJECT_SETTINGS = {
     "telemetryEnabled": False,
     "permissions": {
-        "allow": ["read-in-cwd", "query-git-log", "write-in-cwd"],
+        "allow": ["read-in-cwd", "query-git-log", "write-in-cwd", "mutate-git-log"],
         "deny": [
             "read-out-cwd",
             "write-out-cwd",
             "delete-in-cwd",
             "delete-out-cwd",
-            "mutate-git-log",
             "network",
             "mcp",
         ],
@@ -39,10 +38,11 @@ def ensure_project_settings(
     if settings_path.exists():
         payload = json.loads(settings_path.read_text(encoding="utf-8"))
         permissions = payload.get("permissions", {})
-        if "write-in-cwd" not in permissions.get("allow", []):
-            raise ValueError("existing Deep Code project settings must allow write-in-cwd")
-        if "write-in-cwd" in permissions.get("ask", []):
-            raise ValueError("existing Deep Code project settings must not ask for write-in-cwd")
+        required_allows = set(PROJECT_SETTINGS["permissions"]["allow"])
+        if not required_allows.issubset(permissions.get("allow", [])):
+            raise ValueError("existing Deep Code project settings must retain all required allowed capabilities")
+        if required_allows.intersection(permissions.get("ask", [])):
+            raise ValueError("existing Deep Code project settings must not ask for required allowed capabilities")
         required_denies = set(PROJECT_SETTINGS["permissions"]["deny"])
         if not required_denies.issubset(permissions.get("deny", [])):
             raise ValueError("existing Deep Code project settings must retain all required denied capabilities")

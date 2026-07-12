@@ -20,9 +20,11 @@ permissions:
   base_default_mode: askAll
   # Deep Code grants this at cwd scope. Use a disposable worker worktree whenever
   # it is pre-authorized; durable packet artifacts and orchestrator acceptance remain required.
-  base_allow: [read-in-cwd, query-git-log, write-in-cwd]
-  base_deny: [read-out-cwd, write-out-cwd, delete-in-cwd, delete-out-cwd, mutate-git-log, network, mcp]
+  base_allow: [read-in-cwd, query-git-log, write-in-cwd, mutate-git-log]
+  base_deny: [read-out-cwd, write-out-cwd, delete-in-cwd, delete-out-cwd, network, mcp]
   preauthorized_write_scope: entire_deepcode_process_cwd
+  local_git_mutation_scope: disposable_worker_candidate_commits_only
+  worker_push_and_integration_authority: prohibited
   containment_requirement: disposable_packet_scoped_worker_worktree
   packet_scope_is_semantic_not_cli_enforced: true
   packet_scoped_approval_required_for: [all_non_pre_authorized_capabilities]

@@ -42,7 +42,14 @@ def test_write_scope_requires_disposable_worktree_and_semantic_packet_enforcemen
     assert permissions["preauthorized_write_scope"] == "entire_deepcode_process_cwd"
     assert permissions["containment_requirement"] == "disposable_packet_scoped_worker_worktree"
     assert permissions["packet_scope_is_semantic_not_cli_enforced"] is True
-    assert permissions["base_allow"] == ["read-in-cwd", "query-git-log", "write-in-cwd"]
+    assert permissions["base_allow"] == [
+        "read-in-cwd",
+        "query-git-log",
+        "write-in-cwd",
+        "mutate-git-log",
+    ]
+    assert permissions["local_git_mutation_scope"] == "disposable_worker_candidate_commits_only"
+    assert permissions["worker_push_and_integration_authority"] == "prohibited"
 
 
 def test_denied_capabilities_are_exact_and_do_not_overlap_allowed_capabilities():
@@ -52,7 +59,6 @@ def test_denied_capabilities_are_exact_and_do_not_overlap_allowed_capabilities()
         "write-out-cwd",
         "delete-in-cwd",
         "delete-out-cwd",
-        "mutate-git-log",
         "network",
         "mcp",
     }
