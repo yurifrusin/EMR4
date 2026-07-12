@@ -12,9 +12,7 @@ review/test_diary_smoke.py but uses a dedicated full-page lifecycle per test
 to avoid cross-test state contamination from the shared diary_page fixture.
 """
 
-import json
 import sys
-import time
 from pathlib import Path
 
 import pytest
@@ -57,7 +55,6 @@ def _select_appointment_by_id(page, appt_id):
 def _trigger_silent_refresh(page):
     """Invoke loadDiary(true) directly to simulate a silent auto-refresh."""
     page.evaluate("() => loadDiary(true)")
-    page.wait_for_timeout(500)  # Allow async render to complete
 
 
 @pytest.fixture(scope="module")
