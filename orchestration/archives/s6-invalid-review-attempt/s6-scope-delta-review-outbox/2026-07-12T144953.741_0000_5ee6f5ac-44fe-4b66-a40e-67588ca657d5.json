@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.deepcode_pty_event.v1",
+  "event_id": "5ee6f5ac-44fe-4b66-a40e-67588ca657d5",
+  "recorded_at": "2026-07-12T14:49:53.741Z",
+  "source": "deepcode_pty_adapter",
+  "status": "completed",
+  "artifact": "orchestration/agent_inbox/codex/review-deepseek-s6-scope-delta-review.md",
+  "trust": "untrusted_transport_completion_requires_artifact_validation"
+}
