@@ -33,3 +33,18 @@ evidence:
   record_every_attempt: true
   preserve_failed_artifacts_and_receipts: true
   final_closeout_includes_continuation_history: true
+task_lifecycle:
+  internal_checkpoint_message_channel: commentary
+  terminal_handback_prohibited_when_no_user_decision_required: true
+  continue_tools_in_same_task: true
+  terminal_handback_allowed_only_when:
+    - verified_sprint_or_requested_block_complete
+    - pause_for_user_condition_is_true
+    - unrecoverable_platform_interruption_with_durable_resume_checkpoint
+  awaiting_worker_or_verifier_is_not_terminal: true
+  committed_internal_plan_is_not_terminal: true
+  next_step_known_is_not_terminal: true
+resume_checkpoint:
+  required_for_platform_interruption: true
+  must_name: [active_sprint, completed_stage, next_executable_stage, retry_counters, settings_fingerprint]
+  automatic_resume_preferred: true

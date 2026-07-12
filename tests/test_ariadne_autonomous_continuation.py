@@ -29,3 +29,13 @@ def test_user_pause_surface_is_narrow() -> None:
     assert "retry_budget_exhausted" in policy["pause_for_user_only_when"]
     assert "ordinary_worker_timeout" in policy["must_not_pause_for"]
     assert "verifier_requested_plan_revision" in policy["must_not_pause_for"]
+
+
+def test_internal_checkpoint_cannot_end_the_task() -> None:
+    policy = load_policy()
+    lifecycle = policy["task_lifecycle"]
+    assert lifecycle["terminal_handback_prohibited_when_no_user_decision_required"] is True
+    assert lifecycle["continue_tools_in_same_task"] is True
+    assert lifecycle["awaiting_worker_or_verifier_is_not_terminal"] is True
+    assert lifecycle["committed_internal_plan_is_not_terminal"] is True
+    assert lifecycle["next_step_known_is_not_terminal"] is True

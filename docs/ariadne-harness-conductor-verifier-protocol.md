@@ -62,6 +62,12 @@ evidence, exhausted retries, irreconcilable planning, or human-only external
 actions. Continuation cannot authorize orchestrator reallocation or convert a
 failed result into success.
 
+When no user decision is required, an internal checkpoint is not a conversational
+stopping point. The orchestrator reports progress non-terminally and continues
+the next executable stage in the same task. "Awaiting verification", "plan
+committed", and "next step known" are explicitly non-terminal states. See the
+task-lifecycle section of `autonomous_continuation.yaml`.
+
 ## Workspace Preflight
 
 Transport reachability and workspace readiness are separate facts. A reachable

@@ -19,3 +19,17 @@ or a genuinely human-only external action.
 
 The machine-readable policy is
 `orchestration/harness_settings/autonomous_continuation.yaml`.
+
+## Task Lifecycle
+
+Autonomous authority is ineffective if the orchestrator ends its task at every
+internal checkpoint. While no user decision is required, status messages are
+progress updates only and the orchestrator continues issuing tools in the same
+task. It must not send a terminal handback merely because a plan was committed,
+a worker or verifier is pending, or the next step is known.
+
+A terminal handback is valid only when the requested sprint/block is complete,
+a listed user-owned pause condition is active, or the host platform has an
+unrecoverable interruption and a durable automatic-resume checkpoint has been
+written. That checkpoint names the active sprint, completed and next executable
+stages, retry counters, and settings fingerprint.
