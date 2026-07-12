@@ -68,6 +68,16 @@ the next executable stage in the same task. "Awaiting verification", "plan
 committed", and "next step known" are explicitly non-terminal states. See the
 task-lifecycle section of `autonomous_continuation.yaml`.
 
+## Cost And Subscription Limits
+
+Cost controls are a dormant generic harness capability in the current EMR4
+subscription profile. The orchestrator must not impose `--max-budget-usd`, use
+estimated dollar cost as a stop condition, or treat such an estimate as model
+unavailability. Fable remains first-choice Conductor until Claude reports an
+actual usage-window limit or genuine model/transport unavailability; only then
+does the configured Opus fallback apply. Activating monetary enforcement later
+requires an explicit user override under `cost_controls.yaml`.
+
 ## Workspace Preflight
 
 Transport reachability and workspace readiness are separate facts. A reachable

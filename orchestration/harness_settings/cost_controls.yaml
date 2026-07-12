@@ -1,0 +1,26 @@
+schema_version: ariadne.cost_controls.v1
+feature_available: true
+current_profile:
+  accounting_mode: subscription_usage_window
+  monetary_budget_enforcement: inactive
+  estimated_cost_reporting: advisory_only
+  pass_cli_max_budget_usd: false
+activation:
+  requires_explicit_user_override: true
+  settings_field: current_profile.monetary_budget_enforcement
+  active_value: active
+fallback_semantics:
+  estimated_cost_or_local_cap_exceeded_triggers_fallback: false
+  actual_provider_usage_limit_triggers_fallback: true
+  provider_model_unavailable_triggers_fallback: true
+  authentication_or_transport_unavailable_triggers_fallback: true
+claude_conductor_order: [claude-fable-conductor, claude-opus-conductor, gpt-sol-conductor-fallback]
+actual_limit_evidence:
+  - provider_reported_usage_limit
+  - provider_reported_rate_or_window_exhaustion
+  - provider_reported_model_unavailable
+  - authenticated_transport_failure_after_bounded_retry
+prohibited_in_current_profile:
+  - inferred_dollar_cost_as_stop_condition
+  - orchestrator_selected_max_budget_usd
+  - fallback_caused_only_by_estimated_cost

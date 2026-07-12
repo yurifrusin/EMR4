@@ -82,6 +82,8 @@ import sys
 import uuid as _uuid
 from pathlib import Path
 
+import yaml
+
 # ── Permission posture — RATIFY BEFORE PRODUCTION USE ────────────────────────
 # A headless worker must never block on a permission prompt (nobody answers it).
 # We allowlist exactly what a sprint worker needs — git / python / pytest /
@@ -228,6 +230,16 @@ def build_claude_argv(claude_bin: str, args: argparse.Namespace, prompt: str) ->
     return argv
 
 
+def monetary_budget_control_active(cwd: Path) -> bool:
+    """Return whether the current project explicitly activates CLI spend caps."""
+    settings = cwd / "orchestration" / "harness_settings" / "cost_controls.yaml"
+    if not settings.is_file():
+        return True
+    payload = yaml.safe_load(settings.read_text(encoding="utf-8")) or {}
+    profile = payload.get("current_profile", {})
+    return profile.get("monetary_budget_enforcement") == "active"
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description="Headless driver for a worker agent's worktree.")
     p.add_argument("--cwd", required=True,
@@ -307,6 +319,16 @@ def main() -> int:
     cwd = Path(args.cwd)
     if not cwd.is_dir():
         print(json.dumps({"error": f"--cwd is not a directory: {cwd}"}), file=sys.stderr)
+        return 2
+
+    if args.max_budget_usd is not None and not monetary_budget_control_active(cwd):
+        print(
+            json.dumps({
+                "error": "--max-budget-usd is inactive for this project profile",
+                "hint": "activate monetary enforcement through an explicit user override before using a CLI spend cap",
+            }),
+            file=sys.stderr,
+        )
         return 2
 
     worktree_check = validate_worker_worktree(cwd, args)

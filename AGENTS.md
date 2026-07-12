@@ -28,7 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated platform. S5 is the first real EMR4 product sprint through the harness: Fable accepted Sol's receptionist workflow-audit direction, authored the sprint/allocation, and DeepSeek verified it. The first D-1 worker attempt timed out without an artifact and was correctly rejected with process cleanup. Autonomous continuation is now explicit: ordinary in-mandate execution failure returns to the Conductor for bounded replan and verifier delta-check without requiring renewed user permission. Internal checkpoints are non-terminal: when no user decision is required, Sol must report progress in commentary and continue tools in the same task rather than handing back. Current complete-settings fingerprint is `sha256:5110a3dca2941b3b9b10172fb80699a7399e7c12ff513557657689dbc5194cfc`. D5 and all other recorded runtime gates remain closed. |
+| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated platform. S5 is the first real EMR4 product sprint through the harness: Fable accepted Sol's receptionist workflow-audit direction, authored the sprint/allocation, and DeepSeek verified it. The first D-1 worker attempt timed out without an artifact and was correctly rejected with process cleanup. Autonomous continuation is explicit: ordinary in-mandate failure returns to the Conductor for bounded replan and verifier delta-check without renewed user permission, and internal checkpoints are non-terminal. Monetary budget controls remain available generically but are inactive for the current Claude subscription profile: Sol must not pass `--max-budget-usd` or use estimated dollar cost as a fallback trigger. Fable remains default until Claude reports a real usage/window limit or genuine unavailability, then Opus is next. Current complete-settings fingerprint is `sha256:a9b05c232e5d0907332381f69517141546fee342994a32cf2278479a336dfbfd`. D5 and all other recorded runtime gates remain closed. |
 | **Next recommended work** | Continue S5 automatically: Fable replans the failed D-1 lane using a distinct remediation, DeepSeek verifies the delta, and Sol resumes Phase A alongside D-2 and A-1. Pause only if an `autonomous_continuation.yaml` user-owned condition occurs or the bounded retry budget is exhausted. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
 
 S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
@@ -104,6 +104,11 @@ failures, and verifier-requested revisions return to the Conductor rather than
 the user. The Conductor replans, the verifier checks the delta, and Sol resumes.
 Retries are bounded and must use distinct remediation. See
 `docs/ariadne-autonomous-continuation.md`.
+Cost controls are retained but inactive for the current subscription profile.
+Estimated dollar cost is advisory only, and the Claude launcher rejects
+`--max-budget-usd` unless monetary enforcement is explicitly activated by user
+override. Actual provider-reported usage limits still trigger the configured
+Fable-to-Opus fallback. See `docs/ariadne-cost-controls.md`.
 The revised Opus Conductor plan selected a bounded Deep Code adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. The
 real interactive Deep Code verifier artifact at

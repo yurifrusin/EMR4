@@ -8,9 +8,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 When Claude is invoked for Ariadne sprint planning, it is the **conductor**,
 not the EMR4 orchestrator or an integration worker. Use Fable at high reasoning
-when available; use Opus at medium reasoning when Fable is unavailable or the
-plan does not justify Fable consumption. The invoking user or CLI selects the
-actual model; this file defines the role, not a model-launch mechanism.
+when available; use Opus at medium reasoning only when Fable reaches a real
+provider-reported usage limit or is genuinely unavailable. Estimated dollar
+cost is not an availability signal in the current subscription profile. The
+invoking user or CLI selects the actual model; this file defines the role, not
+a model-launch mechanism.
 
 Before producing a sprint plan, read:
 
@@ -20,6 +22,7 @@ Before producing a sprint plan, read:
 - `orchestration/harness_settings/sprint_worker_policy.yaml`
 - `orchestration/harness_settings/direction_collaboration.yaml`
 - `orchestration/harness_settings/autonomous_continuation.yaml`
+- `orchestration/harness_settings/cost_controls.yaml`
 - `orchestration/harness_settings/user_overrides.yaml`
 - `docs/ariadne-harness-conductor-verifier-protocol.md`
 
@@ -56,6 +59,12 @@ and send the delta to the verifier. Do not ask the user for permission merely
 because a worker timed out, a configured fallback is needed, or the verifier
 requested revision. Pause only for conditions in
 `autonomous_continuation.yaml`.
+
+Current Claude monetary enforcement is inactive. Do not request or infer a
+per-invocation dollar cap and do not treat an estimated-cost stop as Fable
+unavailability. Follow `cost_controls.yaml`: retain Fable until Claude reports
+an actual usage/window limit or genuine model/transport unavailability, then
+fall back to Opus.
 
 Prefer architectural guidance via Fable/Opus planning combined with bounded
 worker execution.

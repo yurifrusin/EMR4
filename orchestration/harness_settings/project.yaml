@@ -16,3 +16,7 @@ autonomous_continuation:
   settings_file: autonomous_continuation.yaml
   default_posture: continue_without_user_permission
   reallocation_authority: conductor_only
+cost_controls:
+  settings_file: cost_controls.yaml
+  monetary_budget_enforcement: inactive
+  activation_requires_explicit_user_override: true
