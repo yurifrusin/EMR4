@@ -185,7 +185,7 @@ html, body {
   align-items: center;
   justify-content: flex-end;
   flex: 1 1 210px;
-  min-width: 0;
+  min-width: fit-content;
   gap: 8px;
 }
 #btn-refresh {
@@ -3498,4 +3498,150 @@ html, body {
   color: var(--grey-4);
   font-weight: normal;
   font-size: 10px;
+}
+
+/* ─── S8 W2: Reason-code highlight & inline validation ────── */
+#booking-status-reason-code-container.reason-code-highlight {
+  animation: reason-code-fade-in 0.3s ease-out;
+  border-left: 3px solid var(--blue-mid);
+  padding-left: 10px;
+}
+#booking-status-reason-code-container.reason-code-error {
+  border-left-color: var(--red);
+  background-color: #fff5f5;
+}
+#booking-status-reason-code-container.reason-code-error select {
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px rgba(192, 57, 43, 0.2);
+}
+@keyframes reason-code-fade-in {
+  from { opacity: 0.4; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── S8 W2: Date-picker fallback (visible native input) ── */
+.date-picker-wrapper.date-picker-fallback #diary-date-picker {
+  height: 24px;
+  opacity: 1;
+  pointer-events: auto;
+  position: static;
+  width: 130px;
+  font-size: 11px;
+  padding: 2px 4px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 3px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  cursor: pointer;
+}
+.date-picker-wrapper.date-picker-fallback #diary-date-picker::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+/* ─── S8 W2: Same-day search/filter input ─────────────────── */
+#diary-search-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+#diary-search-input {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 4px;
+  color: white;
+  font-size: 11px;
+  font-family: var(--font);
+  padding: 3px 8px;
+  width: 120px;
+  outline: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+#diary-search-input::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+#diary-search-input:focus {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.22);
+}
+#diary-search-input.has-value {
+  border-color: #93c5fd;
+  background: rgba(255,255,255,0.22);
+}
+#btn-diary-search-clear {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 2px;
+  line-height: 1;
+  display: none;
+}
+#btn-diary-search-clear.visible {
+  display: inline;
+}
+#btn-diary-search-clear:hover {
+  color: white;
+}
+.appt-search-match {
+  outline: 2px solid #fbbf24;
+  outline-offset: -2px;
+  border-radius: 5px;
+}
+
+/* ─── S8 W2: Read-only reason/notes preview card ─────────── */
+.appt-preview-card {
+  display: none;
+  position: absolute;
+  z-index: 200;
+  background: var(--white);
+  border: 1px solid var(--grey-2);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  padding: 10px 12px;
+  min-width: 200px;
+  max-width: 300px;
+  font-size: 11px;
+  line-height: 1.4;
+  pointer-events: none;
+  top: -8px;
+  left: calc(100% + 6px);
+}
+.appt-preview-card.visible {
+  display: block;
+}
+.appt-preview-card.preview-left {
+  left: auto;
+  right: calc(100% + 6px);
+}
+.appt-preview-card .preview-card-title {
+  font-weight: 700;
+  font-size: 10px;
+  color: var(--grey-4);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+.appt-preview-card .preview-card-reason {
+  color: var(--text);
+  margin-bottom: 4px;
+  word-wrap: break-word;
+}
+.appt-preview-card .preview-card-notes {
+  color: var(--grey-4);
+  font-style: italic;
+  font-size: 10px;
+  word-wrap: break-word;
+}
+.appt-preview-card .preview-card-status {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-top: 4px;
+}
+.appt-preview-trigger {
+  cursor: help;
 }

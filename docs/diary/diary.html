@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <link rel="stylesheet" href="diary.css?v=135" />
-  <script src="diary.js?v=183" defer></script>
+  <link rel="stylesheet" href="diary.css?v=137" />
+  <script src="diary.js?v=184" defer></script>
 </head>
 <body>
 
@@ -40,6 +40,10 @@
   </div>
 
   <div class="diary-actions">
+    <div id="diary-search-container">
+      <input type="text" id="diary-search-input" placeholder="Search day…" autocomplete="off" aria-label="Filter appointments by patient name or reason" />
+      <button id="btn-diary-search-clear" aria-label="Clear search">&times;</button>
+    </div>
     <button id="btn-toggle-flow" class="btn-flow-toggle" title="Toggle Waiting Room Sidebar" aria-expanded="false">
       <span aria-hidden="true">👥</span>
       <span>Waiting Room</span>

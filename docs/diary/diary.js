@@ -2485,6 +2485,8 @@ let refreshTimer = null;
 const REFRESH_INTERVAL_MS = 60_000;
 let editingColIndex = null;  // which column's breaks are being edited
 let autoScrolledDateKey = null;
+let diarySearchQuery = "";   // S8 W2: same-day search/filter query
+let diarySearchRawQuery = ""; // original-case query for input display
 
 // ─── UTILITIES ────────────────────────────────────────────
 function escHtml(str) {
@@ -2503,6 +2505,51 @@ function showLoading(on) {
 function showError(msg) {
   const err = document.getElementById("diary-error");
   if (err) { err.textContent = msg; err.classList.toggle("hidden", !msg); }
+}
+
+// ─── S8 W2: Same-day appointment search/filter ─────────────
+function applyDiarySearch(query) {
+  const rawQuery = query || "";
+  diarySearchRawQuery = rawQuery.trim();
+  diarySearchQuery = diarySearchRawQuery.toLowerCase();
+  const inputEl = document.getElementById("diary-search-input");
+  const clearBtn = document.getElementById("btn-diary-search-clear");
+  if (inputEl) {
+    inputEl.value = diarySearchRawQuery;
+    inputEl.classList.toggle("has-value", diarySearchRawQuery.length > 0);
+  }
+  if (clearBtn) {
+    clearBtn.classList.toggle("visible", diarySearchQuery.length > 0);
+  }
+  // Clear previous search highlights
+  document.querySelectorAll(".appt-search-match").forEach(el => el.classList.remove("appt-search-match"));
+  if (!diarySearchQuery) return;
+  // Apply highlights to matching appointments across all diary columns
+  const apptElements = document.querySelectorAll(".appt");
+  let matchCount = 0;
+  apptElements.forEach(el => {
+    const apptId = el.getAttribute("data-id");
+    if (!apptId) return;
+    const appt = activeAppointments.find(a => a.id === apptId);
+    if (!appt) return;
+    const patientName = (
+      (appt.patient && `${appt.patient.first_name} ${appt.patient.last_name}`.trim()) ||
+      appt.patient_name_provisional ||
+      appt.provisional_name ||
+      ""
+    ).toLowerCase();
+    const reason = (appt.reason || "").toLowerCase();
+    if (patientName.includes(diarySearchQuery) || reason.includes(diarySearchQuery)) {
+      el.classList.add("appt-search-match");
+      matchCount++;
+    }
+  });
+}
+
+function clearDiarySearch() {
+  const inputEl = document.getElementById("diary-search-input");
+  if (inputEl) inputEl.value = "";
+  applyDiarySearch("");
 }
 
 function isAuthBannerVisible() {
@@ -3782,6 +3829,67 @@ function renderGrid(template, slots, apptLookup, typeMap, occupied) {
         reason.textContent = a.reason;
         span.appendChild(reason);
       }
+      // ─── S8 W2: Read-only reason/notes preview card ─────────
+      const previewCard = document.createElement("div");
+      previewCard.className = "appt-preview-card";
+      previewCard.setAttribute("data-testid", "appt-preview-card");
+      const cardTitle = document.createElement("div");
+      cardTitle.className = "preview-card-title";
+      cardTitle.textContent = "Details";
+      previewCard.appendChild(cardTitle);
+      if (a.reason) {
+        const reasonLine = document.createElement("div");
+        reasonLine.className = "preview-card-reason";
+        reasonLine.textContent = a.reason;
+        previewCard.appendChild(reasonLine);
+      } else {
+        const noReason = document.createElement("div");
+        noReason.className = "preview-card-reason";
+        noReason.textContent = "(No reason given)";
+        noReason.style.color = "var(--grey-3)";
+        noReason.style.fontStyle = "italic";
+        previewCard.appendChild(noReason);
+      }
+      if (a.notes) {
+        const notesLine = document.createElement("div");
+        notesLine.className = "preview-card-notes";
+        notesLine.textContent = a.notes;
+        previewCard.appendChild(notesLine);
+      }
+      const previewStatusBadge = document.createElement("span");
+      previewStatusBadge.className = `preview-card-status badge-${(a.status || "booked").toLowerCase()}`;
+      previewStatusBadge.textContent = getStatusLabel(a.status);
+      previewCard.appendChild(previewStatusBadge);
+      span.appendChild(previewCard);
+      // Show preview on hover (mouse) and focus (keyboard)
+      let previewTimer = null;
+      const showPreview = () => {
+        if (previewTimer) clearTimeout(previewTimer);
+        previewTimer = setTimeout(() => {
+          // Position the preview card based on available space
+          const rect = span.getBoundingClientRect();
+          const columnBody = span.closest(".diary-column-body");
+          if (columnBody) {
+            const colRect = columnBody.getBoundingClientRect();
+            const spaceRight = colRect.right - rect.right;
+            if (spaceRight < 210) {
+              previewCard.classList.add("preview-left");
+            } else {
+              previewCard.classList.remove("preview-left");
+            }
+          }
+          previewCard.classList.add("visible");
+        }, 400);
+      };
+      const hidePreview = () => {
+        if (previewTimer) clearTimeout(previewTimer);
+        previewTimer = null;
+        previewCard.classList.remove("visible");
+      };
+      span.addEventListener("mouseenter", showPreview);
+      span.addEventListener("mouseleave", hidePreview);
+      span.addEventListener("focusin", showPreview);
+      span.addEventListener("focusout", hidePreview);
       if (isProvisional && isClinicalProgressStatus(a.status) && heightPx >= 32) {
         const warning = document.createElement("span");
         warning.className = "appt-identity-warning";
@@ -4358,6 +4466,11 @@ async function loadDiary(silent = false, options = {}) {
     if (_activeBeforeId) {
       const _el = document.querySelector(`.appt[data-id="${_activeBeforeId}"]`);
       if (_el) _el.classList.add("appt-active");
+    }
+
+    // Re-apply same-day search after grid rebuild (S8 W2)
+    if (diarySearchQuery) {
+      applyDiarySearch(diarySearchRawQuery);
     }
 
     // Load today's appointments for flow sidebar in background
@@ -6615,12 +6728,17 @@ Office.onReady(() => {
       syncBookingReasonCodeVisibility();
       if (!STATUS_REASON_CODE_STATUSES.has(bookingStatusSelect.value)) {
         setBookingReasonCodeVisible(false, true);
+      } else {
+        highlightReasonCodeIfEmpty();
       }
     });
   }
   const bookingReasonCodeSelect = document.getElementById("booking-status-reason-code");
   if (bookingReasonCodeSelect) {
-    bookingReasonCodeSelect.addEventListener("change", resetProposalConfirmation);
+    bookingReasonCodeSelect.addEventListener("change", () => {
+      resetProposalConfirmation();
+      clearReasonCodeHighlight();
+    });
   }
   ["booking-date", "booking-time"].forEach(id => {
     const el = document.getElementById(id);
@@ -6749,11 +6867,20 @@ Office.onReady(() => {
   const dateWrapper = document.querySelector(".date-picker-wrapper");
   const datePicker = document.getElementById("diary-date-picker");
   if (dateWrapper && datePicker) {
+    const hasShowPicker = typeof datePicker.showPicker === "function";
+    if (!hasShowPicker) {
+      dateWrapper.classList.add("date-picker-fallback");
+    }
     dateWrapper.onclick = () => {
-      try {
-        datePicker.showPicker();
-      } catch (_) {
-        datePicker.click();
+      if (hasShowPicker) {
+        try {
+          datePicker.showPicker();
+        } catch (_) {
+          datePicker.click();
+        }
+      } else {
+        datePicker.show?.() || datePicker.click();
+        datePicker.focus();
       }
     };
     datePicker.onchange = (e) => {
@@ -6765,6 +6892,23 @@ Office.onReady(() => {
         loadDiary();
       }
     };
+  }
+
+  // ─── S8 W2: Same-day search/filter event listeners ───────
+  const searchInput = document.getElementById("diary-search-input");
+  const searchClearBtn = document.getElementById("btn-diary-search-clear");
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      applyDiarySearch(searchInput.value);
+    });
+    searchInput.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        clearDiarySearch();
+      }
+    });
+  }
+  if (searchClearBtn) {
+    searchClearBtn.addEventListener("click", clearDiarySearch);
   }
 
   document.getElementById("diary-grid").addEventListener("click", () => {
@@ -6968,12 +7112,42 @@ function populateBookingReasonCodeOptions(status, context = "future") {
 function setBookingReasonCodeVisible(visible, clearValue = false) {
   const container = document.getElementById("booking-status-reason-code-container");
   const select = document.getElementById("booking-status-reason-code");
-  if (container) container.classList.toggle("hidden", !visible);
+  if (container) {
+    container.classList.toggle("hidden", !visible);
+    if (visible) {
+      container.classList.add("reason-code-highlight");
+      container.setAttribute("data-revealed", "true");
+    } else {
+      container.classList.remove("reason-code-highlight");
+      container.removeAttribute("data-revealed");
+    }
+  }
   if (visible) populateBookingReasonCodeOptions(
     document.getElementById("booking-status")?.value,
     bookingReasonCodeContext()
   );
   if (select && clearValue) select.value = "";
+}
+
+function highlightReasonCodeIfEmpty() {
+  const status = document.getElementById("booking-status")?.value;
+  if (!STATUS_REASON_CODE_STATUSES.has(status)) return;
+  const container = document.getElementById("booking-status-reason-code-container");
+  const select = document.getElementById("booking-status-reason-code");
+  if (!container || container.classList.contains("hidden")) return;
+  if (!select || select.value) {
+    container.classList.remove("reason-code-error");
+    return;
+  }
+  container.classList.add("reason-code-error");
+  select.focus();
+}
+
+function clearReasonCodeHighlight() {
+  const container = document.getElementById("booking-status-reason-code-container");
+  if (container) {
+    container.classList.remove("reason-code-error");
+  }
 }
 
 function resetBookingReasonCode() {
