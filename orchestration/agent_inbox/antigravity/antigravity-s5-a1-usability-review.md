@@ -10,7 +10,7 @@
 | Branch | `antigravity/current` |
 | Packet | `orchestration/agent_inbox/antigravity/antigravity-s5-a1-usability-review.md` |
 | Completion artifact | `orchestration/agent_inbox/codex/review-antigravity-s5-usability.md` |
-| Status | dispatched |
+| Status | submitted |
 | Date | 2026-07-11 |
 | Parent plan | `plan-claude-fable-emr4-receptionist-workflow-audit.md` |
 
