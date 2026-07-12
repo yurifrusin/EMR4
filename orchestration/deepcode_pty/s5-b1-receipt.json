@@ -1,0 +1,25 @@
+{
+  "schema_version": "ariadne.deepcode_pty_receipt.v1",
+  "status": "completed",
+  "reason": "artifact_and_adapter_event_observed_forced_cleanup",
+  "started_at": "2026-07-12T12:57:01.149Z",
+  "finished_at": "2026-07-12T13:03:10.779Z",
+  "platform": "win32",
+  "packet": "orchestration/agent_inbox/deepcode/deepcode-s5-b1-diary-selection-preservation-repair.md",
+  "artifact": "orchestration/agent_inbox/codex/review-deepseek-s5-b1-selection-repair.md",
+  "artifact_kind": "completion",
+  "artifact_deadline_active": false,
+  "artifact_observed": true,
+  "turn_completion_observed": true,
+  "exit_sent_after_artifact": true,
+  "exit_signal_count": 4,
+  "forced_cleanup": true,
+  "process_cleanup_confirmed": true,
+  "permission_prompt_observed": false,
+  "mailbox_event_count": 1,
+  "mailbox_events": [
+    "2026-07-12T130310.778_0000_3ae64a2c-a76c-446a-86f4-4f5b6401bc58.json"
+  ],
+  "child_exit_code": 1,
+  "terminal_output_persisted": false
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.deepcode_pty_event.v1",
+  "event_id": "3ae64a2c-a76c-446a-86f4-4f5b6401bc58",
+  "recorded_at": "2026-07-12T13:03:10.778Z",
+  "source": "deepcode_pty_adapter",
+  "status": "completed",
+  "artifact": "orchestration/agent_inbox/codex/review-deepseek-s5-b1-selection-repair.md",
+  "trust": "untrusted_transport_completion_requires_artifact_validation"
+}

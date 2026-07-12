@@ -4348,8 +4348,17 @@ async function loadDiary(silent = false, options = {}) {
       });
     });
 
+    // Capture active selection before silent rebuild (S5 B-1 selection repair)
+    const _activeBeforeId = document.querySelector(".appt-active")?.getAttribute("data-id") || null;
     const autoScroll = shouldAutoScrollToNow(activeTemplate);
+
     renderGrid(activeTemplate, slots, apptLookup, typeMap, occupied);
+
+    // Restore active selection if the appointment still exists after rebuild
+    if (_activeBeforeId) {
+      const _el = document.querySelector(`.appt[data-id="${_activeBeforeId}"]`);
+      if (_el) _el.classList.add("appt-active");
+    }
 
     // Load today's appointments for flow sidebar in background
     await loadTodayAppointments();
