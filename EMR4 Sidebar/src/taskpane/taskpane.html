@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=54" />
-  <script src="taskpane.js?v=57" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=55" />
+  <script src="taskpane.js?v=58" defer></script>
 </head>
 <body>
 
@@ -56,6 +56,12 @@
     <button id="btn-command-center" class="btn btn-primary btn-full btn-sm" disabled title="Coming soon">
       🎤🖥️ Open Command Centre &amp; Scribe
     </button>
+  </div>
+
+  <!-- Diary error message (hidden by default) -->
+  <div id="diary-error" class="diary-error hidden" role="alert">
+    <div class="diary-error-msg" id="diary-error-msg"></div>
+    <button id="btn-diary-retry" class="btn btn-sm btn-diary-retry" onclick="retryOpenDiary()">&#x21BB; Retry</button>
   </div>
 
   <!-- New Patient Overlay -->
