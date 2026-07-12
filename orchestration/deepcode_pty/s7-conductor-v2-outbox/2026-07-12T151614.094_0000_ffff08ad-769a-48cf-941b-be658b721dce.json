@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.deepcode_pty_event.v1",
+  "event_id": "ffff08ad-769a-48cf-941b-be658b721dce",
+  "recorded_at": "2026-07-12T15:16:14.094Z",
+  "source": "deepcode_pty_adapter",
+  "status": "completed",
+  "artifact": "orchestration/agent_inbox/codex/plan-deepseek-pro-s7-contract-audit-v2.md",
+  "trust": "untrusted_transport_completion_requires_artifact_validation"
+}
