@@ -1,0 +1,4 @@
+﻿review/test_diary_date_picker_fallback.py: 2
+review/test_diary_day_search.py: 5
+review/test_diary_note_preview.py: 5
+review/test_diary_reason_code_affordance.py: 3
