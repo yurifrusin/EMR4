@@ -7714,6 +7714,10 @@ async function saveBooking() {
     errorEl.classList.remove("hidden");
     return;
   }
+  const ahpra = practitioner.ahpra_number
+    || Object.keys(ahpraToPractitionerMap).find(k => ahpraToPractitionerMap[k].id === practitioner.id)
+    || activeTemplate?.columns.find(c => c.practitioner_id === practitioner.id)?.practitioner_ahpra
+    || null;
 
   const typeId = document.getElementById("booking-type").value || null;
   const dateVal = document.getElementById("booking-date").value;

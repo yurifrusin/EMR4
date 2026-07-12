@@ -112,8 +112,13 @@ def route_practitioner_directory_consumer_api(
     template_practitioner_id="prac-route-1",
     practitioner_status=200,
 ):
-    """Route the authenticated non-smoke diary API path for practitioner consumer evidence."""
-    captured = {"practitioner_requests": [], "methods": []}
+    """Route the authenticated non-smoke diary API path for practitioner consumer evidence.
+
+    Intercepts POST /api/v1/graphql as the default practitioner-directory path
+    (ENABLE_GRAPHQL_PRACTITIONERS = true) and keeps the REST fallback surface
+    for legacy smoke-exclusive paths.
+    """
+    captured = {"practitioner_requests": [], "graphql_requests": [], "methods": []}
 
     def handle_api(route):
         request = route.request
@@ -132,7 +137,59 @@ def route_practitioner_directory_consumer_api(
                     "practitioner_ahpra": "MED0001234567"
                 }]
             }))
+        elif "/api/v1/graphql" in url and request.method == "POST":
+            try:
+                body = json.loads(request.post_data or "{}")
+                graphql_query = body.get("query", "")
+                variables = body.get("variables", {})
+            except (json.JSONDecodeError, TypeError):
+                graphql_query = ""
+                variables = {}
+
+            captured["graphql_requests"].append({
+                "url": url,
+                "method": request.method,
+                "authorization": request.headers.get("authorization", ""),
+                "query": graphql_query,
+                "variables": variables,
+            })
+
+            # Only handle practitioner-directory queries; let others fall through
+            if "GetPractitioners" in graphql_query or "practice" in url:
+                if practitioner_status != 200:
+                    route.fulfill(
+                        status=practitioner_status,
+                        content_type="application/json",
+                        body=json.dumps({"errors": [{"extensions": {"code": "UNAUTHORIZED"}}]}),
+                    )
+                else:
+                    # Transform REST-style rows into GraphQL response shape
+                    gql_rows = []
+                    for row in practitioner_rows:
+                        gql_row = {
+                            "id": row.get("id", ""),
+                            "displayName": row.get("displayName", ""),
+                            "roleLabel": row.get("roleLabel", ""),
+                            "active": row.get("active", False),
+                        }
+                        if row.get("defaultLocation"):
+                            gql_row["defaultLocation"] = row["defaultLocation"]
+                        gql_rows.append(gql_row)
+                    route.fulfill(
+                        status=200,
+                        content_type="application/json",
+                        body=json.dumps({
+                            "data": {
+                                "practice": {
+                                    "practitioners": gql_rows,
+                                }
+                            }
+                        }),
+                    )
+            else:
+                route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
         elif "/api/v1/practice/practitioners" in url:
+            # REST fallback — kept for legacy/non-GraphQL paths
             captured["practitioner_requests"].append({
                 "url": url,
                 "method": request.method,
@@ -330,14 +387,23 @@ def test_practitioner_directory_route_data_populates_booking_selector(diary_page
         """)
         diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
 
-        assert len(captured["practitioner_requests"]) == 1
-        request = captured["practitioner_requests"][0]
-        assert request["method"] == "GET"
-        assert "/api/v1/practice/practitioners" in request["url"]
-        assert "activeOnly=true" in request["url"]
-        assert "limit=200" in request["url"]
-        assert request["authorization"].startswith("Bearer ")
-        assert not any(method in {"POST", "PUT", "PATCH", "DELETE"} for method in captured["methods"])
+        # GraphQL is the default-on practitioner-directory path
+        assert len(captured["graphql_requests"]) == 1
+        gql_req = captured["graphql_requests"][0]
+        assert gql_req["method"] == "POST"
+        assert "/api/v1/graphql" in gql_req["url"]
+        assert gql_req["authorization"].startswith("Bearer ")
+        assert "GetPractitioners" in gql_req["query"]
+        assert gql_req["variables"] == {"activeOnly": True, "limit": 200, "offset": 0}
+        # Assert query does not request sensitive practitioner fields (REST and GraphQL names)
+        for sensitive in ("provider_number", "ahpra_number", "prescriber_number", "hpi_i",
+                          "providerNumber", "prescriberNumber", "ahpraNumber", "hpiI",
+                          "email", "phone", "address"):
+            assert sensitive not in gql_req["query"]
+        assert gql_req["query"].count("displayName") == 1
+        # No REST practitioner-directory fallback used
+        assert len(captured["practitioner_requests"]) == 0
+        assert not any(method in {"PUT", "PATCH", "DELETE"} for method in captured["methods"])
 
         options = diary_page.locator("#booking-practitioner option").evaluate_all(
             "(options) => options.map(option => ({ value: option.value, text: option.textContent }))"
@@ -384,8 +450,15 @@ def test_practitioner_directory_selector_keeps_legacy_fallback_for_unmapped_ahpr
         """)
         diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
 
-        assert len(captured["practitioner_requests"]) == 1
-        assert not any(method in {"POST", "PUT", "PATCH", "DELETE"} for method in captured["methods"])
+        assert len(captured["graphql_requests"]) == 1
+        gql_req = captured["graphql_requests"][0]
+        assert gql_req["method"] == "POST"
+        assert "/api/v1/graphql" in gql_req["url"]
+        assert gql_req["authorization"].startswith("Bearer ")
+        assert "GetPractitioners" in gql_req["query"]
+        # No REST fallback needed since GraphQL succeeded
+        assert len(captured["practitioner_requests"]) == 0
+        assert not any(method in {"PUT", "PATCH", "DELETE"} for method in captured["methods"])
         options = diary_page.locator("#booking-practitioner option").evaluate_all(
             "(options) => options.map(option => ({ value: option.value, text: option.textContent }))"
         )
@@ -411,7 +484,14 @@ def test_practitioner_directory_401_fails_closed_with_auth_banner(diary_page):
         harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
         diary_page.goto(base_url + "/diary/diary.html")
         diary_page.wait_for_selector("[data-testid='diary-auth-banner']:not(.hidden)", state="visible", timeout=5000)
-        assert len(captured["practitioner_requests"]) == 1
+        # GraphQL 401 triggers token clear and auth banner
+        assert len(captured["graphql_requests"]) == 1
+        gql_req = captured["graphql_requests"][0]
+        assert gql_req["method"] == "POST"
+        assert "/api/v1/graphql" in gql_req["url"]
+        assert gql_req["authorization"].startswith("Bearer ")
+        # 401 on GraphQL prevents REST fallback
+        assert len(captured["practitioner_requests"]) == 0
         assert diary_page.evaluate("() => localStorage.getItem('emr4_token')") is None
         assert diary_page.locator("#diary-grid-container.hidden").count() == 1
         assert "Session expired" in diary_page.locator("[data-testid='diary-auth-banner']").text_content()
@@ -493,11 +573,30 @@ def test_practitioner_directory_limit_200_cap_renders_all_returned_rows(diary_pa
         diary_page.wait_for_selector("#booking-modal:not(.hidden)", state="visible", timeout=5000)
         elapsed_ms = (time.perf_counter() - start) * 1000
 
-        assert len(captured["practitioner_requests"]) == 1
-        assert "limit=200" in captured["practitioner_requests"][0]["url"]
+        # GraphQL returns all 200 rows
+        assert len(captured["graphql_requests"]) == 1
+        gql_req = captured["graphql_requests"][0]
+        assert gql_req["method"] == "POST"
+        assert gql_req["variables"]["limit"] == 200
+        assert gql_req["variables"]["activeOnly"] is True
+        assert gql_req["variables"]["offset"] == 0
+        # No REST fallback
+        assert len(captured["practitioner_requests"]) == 0
         assert diary_page.locator("#booking-practitioner option").count() == 200
         assert diary_page.locator("#booking-practitioner").input_value() == "prac-route-000"
         assert elapsed_ms < 500
+        # Verify invalid-practitioner guard fires for unresolvable directory ID
+        # Establish provisional context so the patient check passes, then select a
+        # practitioner value that does not exist in activePractitionerDirectory or
+        # ahpraToPractitionerMap, confirming the derived null guard fires.
+        diary_page.evaluate("""
+            selectedPatient = null;
+            provisionalName = "Test Provisional";
+            document.getElementById("booking-practitioner").value = "non-existent-prac-uuid";
+            saveBooking();
+        """)
+        diary_page.wait_for_selector("#booking-error:not(.hidden)", state="visible", timeout=3000)
+        assert "Practitioner ID not found" in diary_page.locator("#booking-error").text_content()
     finally:
         diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])

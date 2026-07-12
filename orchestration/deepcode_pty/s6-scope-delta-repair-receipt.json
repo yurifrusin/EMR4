@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.deepcode_pty_receipt.v1",
+  "status": "completed",
+  "reason": "artifact_and_adapter_event_observed_forced_cleanup",
+  "started_at": "2026-07-12T13:58:10.886Z",
+  "finished_at": "2026-07-12T14:07:14.529Z",
+  "platform": "win32",
+  "packet": "orchestration/agent_inbox/deepcode/deepcode-s6-scope-delta-repair.md",
+  "artifact": "orchestration/agent_inbox/codex/review-deepseek-s6-scope-delta-repair.md",
+  "artifact_kind": "completion",
+  "artifact_deadline_active": false,
+  "configured_model": "deepseek-v4-flash",
+  "configured_reasoning": "high",
+  "artifact_observed": true,
+  "turn_completion_observed": true,
+  "exit_sent_after_artifact": true,
+  "exit_signal_count": 4,
+  "forced_cleanup": true,
+  "process_cleanup_confirmed": true,
+  "permission_prompt_observed": false,
+  "mailbox_event_count": 1,
+  "mailbox_events": [
+    "2026-07-12T140714.528_0000_3e4d355c-1cfc-4a82-bf64-213b348697de.json"
+  ],
+  "child_exit_code": 1,
+  "terminal_output_persisted": false
+}
