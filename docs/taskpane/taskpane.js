@@ -1019,12 +1019,51 @@ async function approveAndFinalize() {
 // DIARY WINDOW
 // ═══════════════════════════════════════════════════════════
 
-const DIARY_URL = "https://yurifrusin.github.io/EMR4/diary/diary.html";
+// Pure, testable diary URL resolver.
+// Dev server (port 3000) → local diary via npm dev server serving docs/.
+// Everything else (Pages, ngrok, unknown) → deployed Pages diary (safe fallback).
+function resolveDiaryUrl(location) {
+  if (location.port === "3000") {
+    return location.origin + "/diary/diary.html";
+  }
+  return "https://yurifrusin.github.io/EMR4/diary/diary.html";
+}
+
+const DIARY_URL = resolveDiaryUrl(window.location);
 let diaryDialogRef = null;
+
+// Office displayDialogAsync error codes and their receptionist-readable messages.
+const DIARY_ERROR_MAP = {
+  12007: { message: "The Diary window was already open. Closing the old window and trying again\u2026", action: "retry_once" },
+  12009: { message: "Diary window request was declined. When Word shows the Allow prompt, select Allow to open the Diary.", action: "retry_user" },
+  12011: { message: "Popup blocked by your browser. Please enable popups for this site and try again.", action: "retry_user" },
+};
+
+function getDiaryErrorMessage(code, rawMessage) {
+  const known = DIARY_ERROR_MAP[code];
+  if (known) return known;
+  return { message: "Could not open Diary: " + (rawMessage || "Unknown error"), action: "retry_user" };
+}
+
+function showDiaryError(message) {
+  const container = document.getElementById("diary-error");
+  const msgEl = document.getElementById("diary-error-msg");
+  const retryBtn = document.getElementById("btn-diary-retry");
+  if (container) container.classList.remove("hidden");
+  if (msgEl) msgEl.textContent = message;
+  if (retryBtn) retryBtn.classList.remove("hidden");
+  setStatus(message);
+}
+
+function hideDiaryError() {
+  const container = document.getElementById("diary-error");
+  if (container) container.classList.add("hidden");
+}
 
 // NOTE: synchronous within the click gesture — same rule as openCommandCentre.
 // No patient guard — the diary is practice/day-scoped, not patient-scoped.
 function openDiary() {
+  hideDiaryError();
   if (diaryDialogRef) {
     try {
       diaryDialogRef.close();
@@ -1032,31 +1071,66 @@ function openDiary() {
       // If Office already considers the handle closed, just open a fresh dialog.
     }
     diaryDialogRef = null;
-    setStatus("Reopening Diary window...");
+    setStatus("Opening Diary window\u2026");
   }
 
   Office.context.ui.displayDialogAsync(DIARY_URL, { height: 90, width: 90 }, result => {
     if (result.status === Office.AsyncResultStatus.Failed) {
-      setStatus("Could not open Diary: " + result.error.message);
+      const code = result.error.code;
+      const raw = result.error.message;
+      const { message, action } = getDiaryErrorMessage(code, raw);
+
+      if (code === 12007 && action === "retry_once") {
+        // 12007 means a dialog handle was left behind. Safely close the stale
+        // dialog (best-effort — Office may already have cleaned it up), then
+        // retry exactly once without looping.
+        try {
+          if (diaryDialogRef) diaryDialogRef.close();
+        } catch (_) {}
+        diaryDialogRef = null;
+        setStatus("Retrying Diary window\u2026");
+        Office.context.ui.displayDialogAsync(DIARY_URL, { height: 90, width: 90 }, retryResult => {
+          if (retryResult.status === Office.AsyncResultStatus.Failed) {
+            const retryCode = retryResult.error.code;
+            const retryRaw = retryResult.error.message;
+            const retryInfo = getDiaryErrorMessage(retryCode, retryRaw);
+            showDiaryError(retryInfo.message);
+          } else {
+            _setupDiaryDialog(retryResult.value);
+          }
+        });
+        return;
+      }
+
+      showDiaryError(message);
       return;
     }
-    diaryDialogRef = result.value;
-
-    diaryDialogRef.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
-      try {
-        const msg = JSON.parse(arg.message);
-        if (msg.type === "ready") {
-          // Deliver the auth token so the diary can call the API
-          diaryDialogRef.messageChild(JSON.stringify({ type: "auth", token }));
-        }
-      } catch (_) {}
-    });
-
-    diaryDialogRef.addEventHandler(Office.EventType.DialogEventReceived, () => {
-      diaryDialogRef = null;
-    });
+    _setupDiaryDialog(result.value);
   });
 }
+
+function _setupDiaryDialog(dialog) {
+  diaryDialogRef = dialog;
+  hideDiaryError();
+
+  diaryDialogRef.addEventHandler(Office.EventType.DialogMessageReceived, arg => {
+    try {
+      const msg = JSON.parse(arg.message);
+      if (msg.type === "ready") {
+        diaryDialogRef.messageChild(JSON.stringify({ type: "auth", token }));
+      }
+    } catch (_) {}
+  });
+
+  diaryDialogRef.addEventHandler(Office.EventType.DialogEventReceived, () => {
+    diaryDialogRef = null;
+  });
+}
+
+window.retryOpenDiary = function () {
+  hideDiaryError();
+  openDiary();
+};
 
 // ═══════════════════════════════════════════════════════════
 // COMMAND CENTRE
