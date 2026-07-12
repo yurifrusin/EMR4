@@ -24,43 +24,42 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | Sprint 292 D5 Next-Step Approval Payload Draft |
-| Integrated through | Ariadne docs/tests-only draft with S3 advisory shadow classification; no worker lane required |
-| Status | Published to `origin/master` and `origin/handoff/current` |
-| Commit | `0e9a183a` |
-| Push | `master` and `handoff/current` pushed successfully |
-| Final status | `## master...origin/master` |
-| Last updated | 2026-07-10 |
+| Batch | S6 Diary Contract Repair |
+| Integrated through | DeepSeek Pro conductor fallback, DeepSeek Flash implementation/revisions, corrected independent review, and Sol acceptance |
+| Status | Integrated locally; closeout publication pending |
+| Commit | Through `d5e40194`; closeout commit pending |
+| Push | Pending closeout commit |
+| Final status | Pending publication check |
+| Last updated | 2026-07-13 |
 
-## Sprint 292 What Changed
+## S6 What Changed
 
-- Added `docs/bernie-ui-derived-state-d5-next-step-approval-payload-draft.{json,md}`.
-- Added `tests/test_bernie_ui_d5_next_step_approval_payload_draft.py`.
-- Kept the payload unapplied: reviewer/date blank, acknowledgement false, and
-  every candidate scope field false.
-- Recorded Ariadne S3 Green/allowed prediction matching the draft-only scope.
-- Kept D5 expansion, route delivery, frontend JavaScript changes,
-  provider/live-provider wiring, Access AI, memory/RAG/GraphRAG, H15/H-series,
-  historical diary runtime inputs, GraphQL delivery/readiness, external
-  clients, confirm payload/write behavior changes, model-to-database writes,
-  deployment, and production readiness closed.
+- Repaired `saveBooking()` AHPRA resolution after practitioner validation.
+- Updated practitioner-directory Playwright contracts for default-on GraphQL.
+- Preserved signed create/update-confirm assertions and advanced diary.js to
+  cache version 183.
+- Exercised the DeepSeek Pro conductor fallback and corrected DeepSeek Flash
+  implementation/review lanes.
+- Quarantined invalid review evidence and seeded S7 with the observed harness
+  contract failures.
 
-## Sprint 292 Verification
+## S6 Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_bernie_ui_d5_next_step_approval_payload_draft.py tests\test_bernie_ui_safe_copy_matrix.py tests\test_bernie_ui_d5_reopening_decision_packet.py tests\test_ariadne_harness.py tests\test_ariadne_action_classifier.py
+.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py -q --tb=short
+.venv\Scripts\python.exe -m pytest tests\test_sprint_closeout_protocol.py tests\test_ariadne_deepcode_pty.py -q --tb=short
+node --check docs\diary\diary.js
+.venv\Scripts\python.exe scripts\check_frontend_versions.py
 git diff --check
 ```
 
-Result: `35 passed`; existing Starlette and Google GenAI deprecation warnings
-only. Whitespace check clean.
+Result: diary `139 passed`; closeout/PTY adapter `21 passed`; JavaScript,
+frontend-version, and whitespace checks passed. Six stale Pro-fallback settings
+assertions are explicitly deferred to S7.
 
-Sprint engine state: stop after Sprint 292 publication for Yuri decision.
-Recommended posture is keep D5 closed; any later route-intercepted copy evidence
-needs explicit approval and any runtime expansion needs separate review. No deployment,
-production, readiness, telemetry, external-client, write, provider, memory,
-H15/trove, mutation, subscription, D5 expansion, or field-expansion gate is
-opened.
+Sprint engine state: continuing automatically to S7 contract audit. No
+deployment, production, external-client, provider, memory/RAG, H15/trove,
+schema, database, new-write-authority, or product-policy gate is opened.
 
 ---
 
@@ -14355,6 +14354,34 @@ wiring.
 Evidence: `docs/emr4-s5-receptionist-workflow-audit-closeout.md`.
 
 Sprint engine state: continuing directly to Conductor next-sprint planning.
+
+---
+
+## Sprint S6 Closeout - Diary Contract Repair
+
+- Restored the full diary browser suite from eight known failures to 139/139
+  passing tests.
+- Repaired the production `saveBooking()` AHPRA `ReferenceError` without
+  treating directory UUIDs as AHPRA identifiers.
+- Updated default-on GraphQL practitioner-directory route interception and
+  security/authorization assertions; signed-confirm tests remain intact.
+- Exercised DeepSeek 4 Pro as the real Claude-limit Conductor fallback and two
+  separate DeepSeek Flash implementation/review sessions.
+- Quarantined two invalid review attempts; only corrected v3 review evidence is
+  acceptance-bearing.
+- Recorded six stale Pro-fallback settings-test failures and five transport/
+  evidence incidents as required S7 contract-audit inputs.
+
+Verification: diary Playwright `139 passed`; closeout/PTY adapter `21 passed`;
+JavaScript syntax, frontend asset version, and whitespace checks passed. Wider
+Ariadne batch: `47 passed, 6 failed`, all six stale pre-S6 resource assumptions
+in `tests/test_ariadne_deepcode_adapter_settings.py` and deferred explicitly to
+S7.
+
+Evidence: `docs/emr4-s6-diary-contract-repair-closeout.md`.
+
+Sprint engine state: continuing automatically to S7 contract audit. No user
+intervention is required.
 
 ---
 
