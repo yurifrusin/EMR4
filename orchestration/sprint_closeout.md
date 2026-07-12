@@ -14958,3 +14958,19 @@ attempted. The durable escalation record is
 
 Sprint engine state: paused only for the declared Sol authority-boundary
 decision. S11 and S12 remain unopened.
+
+---
+
+## S10 W1 Acceptance Escalation
+
+W1 supplied provider-free workflow-chain harness candidate `ae0fb775`, but
+Terra rejected it before staging integration. The candidate modified the
+excluded runtime-isolation guard to exempt its new `app/services` module, which
+imports interpretation-harness tooling. The Conductor plan requires that guard
+to pass and does not authorize weakening it.
+
+The existing guard also has a separate baseline failure in `app/config.py`; this
+does not resolve the new isolation conflict. Replanning the harness onto a
+test-only surface or changing the runtime-isolation boundary requires Sol.
+W2 was not dispatched, no candidate code was integrated, and S11/S12 remain
+unopened. See `orchestration/agent_inbox/codex/review-terra-s10-w1-acceptance.md`.
