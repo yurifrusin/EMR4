@@ -14339,6 +14339,25 @@ wiring.
 
 ---
 
+## Sprint S5 Closeout - Receptionist Workflow Audit
+
+- D-1 frontend audit completed with no material static defect.
+- D-2 backend audit confirmed terminal-status reversal behavior and recorded a
+  failing-test proposal; product policy remains deferred.
+- A-1 returned Conditional Go and identified silent-refresh selection loss.
+- Fable selected one Phase B repair: preserve active diary selection.
+- D-1 implemented the repair and focused test; D-2 cross-review passed.
+- Focused Playwright: `3 passed`; JavaScript syntax passed.
+- Diary smoke baseline remains exactly 8 known failures with no new B-1 failure.
+- Full project tests remain non-clean for pre-existing environment/readiness
+  reasons and were not claimed as passing.
+
+Evidence: `docs/emr4-s5-receptionist-workflow-audit-closeout.md`.
+
+Sprint engine state: continuing directly to Conductor next-sprint planning.
+
+---
+
 ## Sprint H62 Closeout - Readiness Snapshot Assertion
 
 Integrated outcome:
