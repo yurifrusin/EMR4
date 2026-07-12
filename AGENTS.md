@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | S8 receptionist workflow implementation is published through `f8b354cf`. Environment-aware Diary launch, actionable Office dialog failure handling, inline terminal-reason affordance, webview date fallback, same-day search, and read-only reason/notes preview are integrated. Both DeepSeek candidates passed independent W3 review and the executable S7 gate; 28 focused, 142 smoke/selection, and 15 adjacent GraphQL/deprecation tests pass. DeepCode local candidate commits are enabled in disposable worktrees while network, deletion, out-of-worktree access, worker push, and integration remain denied; W2 proved the permission by creating `a2effefd`. Current complete-settings fingerprint is `sha256:932db1810e8479b1fd95d25c88689c0f7e67ee2e6e7594bdc3ebf2dadf9f1d7f`. All unrelated runtime and product-policy gates remain closed. |
-| **Next recommended work** | Enter the next Conductor boundary. Candidate directions are a bounded local Diary-hosting/dev-loop verification or another substantial receptionist workflow tranche; terminal-to-active status policy remains user-owned and must not be chosen implicitly. The proposal to use DeepSeek 4 Pro for routine conduction and reserve Fable/Opus for escalation is not yet a committed worker-pool policy change. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
+| **Current active track** | S8 is published through `f8b354cf`; S8H harness hardening is published through `cb45eb1d`. DeepSeek 4 Pro/high is now the routine Conductor, with Fable/Opus reserved for escalation. Canonical artifact markers drive PTY completion, live supervisors may run detached from outer shell deadlines, receipt waits are re-entrant, and exact shared Python/Node paths are injected into worker prompts. Seventy-one focused harness tests pass. Current complete-settings fingerprint is `sha256:d755fec02ca84a0f1f6ab21782dda31219cb0ec65d0340fb9f806b32c6775679`. All unrelated runtime and product-policy gates remain closed. |
+| **Next recommended work** | Proceed without pause into the S9-S12 EMR4 receptionist operational-hardening tranche. Use DeepSeek 4 Pro through the new detached path to define and allocate S9 first; the advisory tranche order is S9 local Diary development loop, S10 end-to-end receptionist workflow, S11 appointment API operational hardening, and S12 receptionist acceptance checkpoint. Terminal-to-active status policy remains user-owned and must not be chosen implicitly. Dependabot alert 5 remains open; do not force overrides. |
 
 S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
 are distinct CLI transports. Deep Code requires a real TTY; non-TTY refusal is
@@ -79,8 +79,12 @@ and the protected-orchestrator acceptance gate remain mandatory. Out-of-worktree
 access, deletion, network tools, and MCP are denied. Local Git mutation is
 permitted only for candidate commits in disposable worker worktrees; worker
 push and integration authority remain prohibited.
-The PTY adapter never answers a permission prompt. It provides bounded process
-lifecycle control, not a general bidirectional conversation channel.
+The PTY adapter never answers a permission prompt. A canonical artifact marker
+is the completion signal; controlled exit and cleanup follow without waiting
+for DeepCode's optional TUI status line. Live supervisors run detached so outer
+shell timeouts cannot kill workers, and receipt polling may be resumed safely.
+Exact shared integration Python/Node paths are injected before a worker may
+claim those tools are unavailable.
 
 S4d recovery policy: closeout provenance is non-transferable, but implementation
 repair is transferable through an explicit recovery lease. The protected
@@ -90,21 +94,23 @@ and run the risk-class verification gate. Low-risk docs/tests/harness recovery
 uses deterministic tests plus diff review; runtime/security/database/deployment/
 release recovery also requires independent verification. See
 `docs/ariadne-orchestrator-recovery-lease.md`.
-Conductor allocation order is now explicit: Claude Fable first; Claude Opus
-only when Fable has usage or availability problems; DeepSeek 4 Pro through
-Deep Code when the Claude subscription cannot provide either; then a distinct
-spawned GPT Sol subagent. Every fallback has no integration authority. S4d used Opus/medium.
+Conductor allocation order is now explicit: DeepSeek 4 Pro/high through Deep
+Code for routine sprint boundaries; Claude Fable then Opus for escalation at
+programme boundaries, architecture disputes, material product policy, or
+repeated sprint failure; then a distinct spawned GPT Sol subagent. No Conductor
+has integration authority.
 The protected GPT Sol orchestrator session cannot masquerade as that fallback.
 Direction collaboration is optional and bounded. GPT Sol may propose or defend
 a sprint direction but cannot define the final sprint or allocate workers.
-Fable may accept/counter, GPT Sol may make at most one rejoinder, and Fable then
-has final say. Agreement cuts the exchange short; obvious work may skip it.
+The selected Conductor may accept/counter, GPT Sol may make at most one
+rejoinder, and the Conductor then has final say. Agreement cuts the exchange
+short; obvious work may skip it.
 Every final plan records the dialogue disposition for deterministic review. See
 `docs/ariadne-direction-collaboration.md`.
 Operating Model V2 keeps governance at sprint boundaries and execution inside
-the sprint. Fable defines and allocates each next sprint; Sol then waits,
+the sprint. The selected Conductor defines and allocates each next sprint; Sol then waits,
 retries unchanged lanes, repairs transport, runs tests, and integrates without
-another planning cycle. Fable re-enters only for a material scope, assignment,
+another planning cycle. The Conductor re-enters only for a material scope, assignment,
 ownership, or acceptance change, or for the next sprint. Deterministic checks
 always run; independent LLM verification is risk-triggered. See
 `docs/ariadne-operating-model-v2.md` and
@@ -112,8 +118,8 @@ always run; independent LLM verification is risk-triggered. See
 Cost controls are retained but inactive for the current subscription profile.
 Estimated dollar cost is advisory only, and the Claude launcher rejects
 `--max-budget-usd` unless monetary enforcement is explicitly activated by user
-override. Actual provider-reported usage limits still trigger the configured
-Fable-to-Opus fallback. See `docs/ariadne-cost-controls.md`.
+override. Actual provider-reported limits or unavailable models trigger the
+configured routine/escalation fallback order. See `docs/ariadne-cost-controls.md`.
 The revised Opus Conductor plan selected a bounded Deep Code adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. The
 real interactive Deep Code verifier artifact at

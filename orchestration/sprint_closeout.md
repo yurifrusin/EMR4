@@ -24,40 +24,34 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | S8 Receptionist Workflow Implementation |
-| Integrated through | Fable conduction, DeepSeek W1/W2 implementation, W3 executable review gates, Antigravity GO verdict, and Sol integration |
-| Status | Published to `origin/master` and `origin/handoff/current` |
-| Commit | `f8b354cf` |
+| Batch | S8H DeepCode Runtime Hardening |
+| Integrated through | Sol implementation and deterministic adapter/settings verification |
+| Status | Implemented and pushed; live detached acceptance assigned to S9 planning |
+| Commit | `cb45eb1d` |
 | Push | `master` and `handoff/current` pushed successfully |
-| Final status | `## master...origin/master` after S8 closeout publication |
+| Final status | `## master...origin/master` before S8H documentation commit |
 | Last updated | 2026-07-13 |
 
-## S8 What Changed
+## S8H What Changed
 
-- Hardened taskpane Diary launch resolution, error guidance, and bounded retry.
-- Added inline terminal-reason guidance, webview date fallback, same-day search,
-  and read-only reason/notes preview to the diary.
-- Passed both DeepSeek candidates through W3 and the executable acceptance gate.
-- Integrated Antigravity's corrected GO consumer verdict.
-- Enabled local DeepCode candidate commits without push/integration authority.
+- Made DeepSeek 4 Pro the routine Conductor and Claude the escalation path.
+- Made canonical artifact markers the PTY completion signal.
+- Added detached live supervision and re-entrant receipt waiting.
+- Injected exact shared Python/Node paths into every DeepCode prompt.
 
-## S8 Verification
+## S8H Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest review\test_taskpane_diary_launch.py review\test_diary_reason_code_affordance.py review\test_diary_date_picker_fallback.py review\test_diary_day_search.py review\test_diary_note_preview.py -q
-.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py review\test_diary_selection_preservation.py -q
-.venv\Scripts\python.exe -m pytest review\test_diary_graphql_practitioner_switch.py review\test_diary_deprecation_consumer.py -q
-.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_pty.py tests\test_ariadne_deepcode_mailbox_settings.py tests\test_ariadne_deepcode_adapter_settings.py -q
-node --check docs\diary\diary.js
-.venv\Scripts\python.exe scripts\check_frontend_versions.py
+.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_pty.py tests\test_ariadne_deepcode_mailbox_settings.py tests\test_ariadne_cost_controls.py tests\test_ariadne_deepcode_adapter_settings.py tests\test_ariadne_allocation_schemas.py -q
+node --check orchestration\deepcode_pty\runner.mjs
+.venv\Scripts\python.exe -m py_compile scripts\ariadne_deepcode_pty.py scripts\ariadne_deepcode_wait.py
 git diff --check
 ```
 
-Result: product focused `28 passed`; smoke/selection `142 passed`; adjacent
-GraphQL/deprecation `15 passed`; DeepCode permission contract `53 passed`;
-syntax, versions, executable reviews, and whitespace checks passed.
+Result: `71 passed`; JavaScript syntax, Python compilation, and whitespace
+checks passed. S9 planning owns the first detached live acceptance.
 
-Sprint engine state: continuing to the next Conductor boundary after publication. No
+Sprint engine state: continuing directly to S9 planning. No
 deployment, production, external-client, provider, memory/RAG, H15/trove,
 schema, database, new-write-authority, or product-policy gate is opened.
 
@@ -14449,6 +14443,25 @@ Evidence: `docs/emr4-s8-receptionist-workflow-closeout.md`.
 
 Sprint engine state: continuing to the next Conductor boundary after closeout
 publication. No user intervention is required for routine execution.
+
+---
+
+## Sprint S8H Closeout - DeepCode Runtime Hardening
+
+- DeepSeek 4 Pro/high is the routine Conductor; Fable/Opus are escalation.
+- Canonical artifacts now trigger controlled PTY exit without waiting for the
+  optional TUI completion line.
+- Detached supervisors survive outer shell/waiter timeouts; receipt waits are
+  re-entrant and do not own worker lifecycle.
+- Shared integration Python and Node paths are injected into every worker turn.
+
+Verification: 71 focused tests passed; JavaScript syntax, Python compilation,
+and whitespace checks passed. Live detached acceptance continues immediately
+through S9 planning.
+
+Evidence: `docs/ariadne-s8h-runtime-hardening-closeout.md`.
+
+Sprint engine state: continuing directly to S9 without user handback.
 
 ---
 
