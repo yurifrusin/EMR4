@@ -11,14 +11,15 @@ from scripts.ariadne_deepcode_pty import ensure_project_settings
 def test_live_prompt_injects_the_monitored_artifact_path() -> None:
     runner = Path("orchestration/deepcode_pty/runner.mjs").read_text(encoding="utf-8")
 
-    assert "function liveCommand(packetRelative, artifactRelative)" in runner
+    assert "function liveCommand(packetRelative, artifactRelative, artifactKind)" in runner
     assert "Write the final durable artifact to exactly ${artifactPath}." in runner
     assert "Do not choose, infer, or substitute another artifact filename." in runner
-    assert "liveCommand(path.relative(cwd, packet), path.relative(cwd, artifact))" in runner
+    assert 'options["artifact-kind"]' in runner
 
 
 def _run(
-    tmp_path: Path, mode: str, timeout: int = 5, exit_timeout: int = 2
+    tmp_path: Path, mode: str, timeout: int = 5, exit_timeout: int = 2,
+    artifact_kind: str = "decision",
 ) -> tuple[subprocess.CompletedProcess[str], dict]:
     packet = tmp_path / "packet.md"
     packet.write_text("Synthetic packet.\n", encoding="utf-8")
@@ -33,6 +34,8 @@ def _run(
             "packet.md",
             "--artifact",
             "artifact.md",
+            "--artifact-kind",
+            artifact_kind,
             "--outbox",
             "outbox",
             "--receipt",
@@ -49,6 +52,14 @@ def _run(
         text=True,
     )
     return result, json.loads(receipt.read_text(encoding="utf-8"))
+
+
+def test_pty_adapter_accepts_worker_completion_artifact(tmp_path: Path):
+    result, receipt = _run(tmp_path, "completion", artifact_kind="completion")
+
+    assert result.returncode == 0
+    assert receipt["status"] == "completed"
+    assert receipt["artifact_kind"] == "completion"
 
 
 def test_pty_adapter_exits_only_after_artifact_and_observes_mailbox(tmp_path: Path):

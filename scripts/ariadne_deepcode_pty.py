@@ -54,13 +54,14 @@ def main() -> int:
     parser.add_argument("--cwd", type=Path, required=True)
     parser.add_argument("--packet", type=Path, required=True)
     parser.add_argument("--artifact", type=Path, required=True)
+    parser.add_argument("--artifact-kind", choices=("decision", "completion"), default="decision")
     parser.add_argument("--outbox", type=Path, required=True)
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--exit-timeout", type=int, default=30)
     parser.add_argument(
         "--fixture",
-        choices=("success", "permission", "hang", "ignore_exit", "markdown_decision"),
+        choices=("success", "permission", "hang", "ignore_exit", "markdown_decision", "completion"),
         help=argparse.SUPPRESS,
     )
     args = parser.parse_args()
@@ -80,6 +81,8 @@ def main() -> int:
         str(args.packet),
         "--artifact",
         str(args.artifact),
+        "--artifact-kind",
+        args.artifact_kind,
         "--outbox",
         str(args.outbox),
         "--receipt",

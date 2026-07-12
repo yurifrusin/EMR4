@@ -29,6 +29,10 @@ function parseArgs(argv) {
   if (!Number.isFinite(options["exit-timeout"]) || options["exit-timeout"] < 1 || options["exit-timeout"] > 60) {
     throw new Error("--exit-timeout must be between 1 and 60 seconds");
   }
+  options["artifact-kind"] = options["artifact-kind"] || "decision";
+  if (!["decision", "completion"].includes(options["artifact-kind"])) {
+    throw new Error("--artifact-kind must be decision or completion");
+  }
   return options;
 }
 
@@ -53,13 +57,14 @@ function stripAnsi(value) {
     .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "");
 }
 
-function validArtifact(artifact) {
+function validArtifact(artifact, artifactKind) {
   if (!fs.existsSync(artifact)) return false;
   const body = fs.readFileSync(artifact, "utf8");
   return body.split(/\r?\n/).some((line) => {
     const cells = line.includes("|") ? line.split("|") : [line];
     return cells.some((cell) => {
       const normalized = cell.trim().replace(/^[*`_]+|[*`_]+$/g, "").trim();
+      if (artifactKind === "completion") return /^STATUS:\s*complete$/i.test(normalized);
       return /^DECISION:\s*(pass|revision_required)$/i.test(normalized);
     });
   });
@@ -95,14 +100,16 @@ function quoteCmd(value) {
   return `"${value.replaceAll('"', '""')}"`;
 }
 
-function liveCommand(packetRelative, artifactRelative) {
+function liveCommand(packetRelative, artifactRelative, artifactKind) {
   const packetPath = packetRelative.replaceAll("\\", "/");
   const artifactPath = artifactRelative.replaceAll("\\", "/");
   const prompt = [
     `Read and follow ${packetPath} exactly.`,
     `Write the final durable artifact to exactly ${artifactPath}.`,
     "Do not choose, infer, or substitute another artifact filename.",
-    "For a verifier packet, include a canonical DECISION: pass or DECISION: revision_required line.",
+    artifactKind === "completion"
+      ? "Include a canonical STATUS: complete line only after the packet work and evidence are complete."
+      : "Include a canonical DECISION: pass or DECISION: revision_required line.",
   ].join(" ");
   if (process.platform === "win32") {
     return {
@@ -117,7 +124,7 @@ function fixtureCommand(mode, artifact, outbox) {
   if (!process.env.ARIADNE_PTY_TEST_MODE) {
     throw new Error("--fixture requires ARIADNE_PTY_TEST_MODE");
   }
-  if (!["success", "permission", "hang", "ignore_exit", "markdown_decision"].includes(mode)) {
+  if (!["success", "permission", "hang", "ignore_exit", "markdown_decision", "completion"].includes(mode)) {
     throw new Error("unsupported fixture mode");
   }
   const fixture = path.join(path.dirname(fileURLToPath(import.meta.url)), "fake_deepcode.mjs");
@@ -137,7 +144,7 @@ async function main() {
   const baselineEvents = listEvents(outbox);
   const command = options.fixture
     ? fixtureCommand(options.fixture, artifact, outbox)
-    : liveCommand(path.relative(cwd, packet), path.relative(cwd, artifact));
+    : liveCommand(path.relative(cwd, packet), path.relative(cwd, artifact), options["artifact-kind"]);
   const startedAt = new Date();
   let terminalWindow = "";
   let artifactObserved = false;
@@ -185,7 +192,7 @@ async function main() {
   let exitDeadline = null;
   while (true) {
     if (permissionPrompt) break;
-    if (!artifactObserved && validArtifact(artifact)) {
+    if (!artifactObserved && validArtifact(artifact, options["artifact-kind"])) {
       artifactObserved = true;
       turnCompletionDeadline = Date.now() + 60000;
     }
@@ -266,6 +273,7 @@ async function main() {
     platform: os.platform(),
     packet: path.relative(cwd, packet).replaceAll("\\", "/"),
     artifact: path.relative(cwd, artifact).replaceAll("\\", "/"),
+    artifact_kind: options["artifact-kind"],
     artifact_observed: artifactObserved,
     turn_completion_observed: turnCompletionObserved,
     exit_sent_after_artifact: exitSent,
