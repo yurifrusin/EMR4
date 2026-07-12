@@ -11,16 +11,21 @@
 | Date | 2026-07-12 |
 | Status | awaiting_verifier_delta_check |
 | Continuation authority | `autonomous_continuation.yaml` — ordinary worker timeout inside an active verified sprint; no user-owned decision implicated; user not paused |
-| Settings fingerprint (complete, recomputed this session) | `sha256:f72d2bb1bad4d829c23748d68822ce7cbf738afb2e6bbc99440a3f035ee9fc47` |
+| Settings fingerprint (complete, recomputed this session) | `sha256:a9b05c232e5d0907332381f69517141546fee342994a32cf2278479a336dfbfd` |
 | direction_dialogue_disposition | `skipped` (continuation replan inside an already-agreed sprint direction; no new direction question exists) |
+| user_stopped latch | **cleared 2026-07-12 by explicit user resume** — the prior session ended on a user stop; this resume is user-initiated, so the latch does not persist and autonomous continuation resumes under `autonomous_continuation.yaml` |
+| Rejected stopped-Opus partial | documented separately; **not adopted** — no content from that partial is incorporated into this delta |
 
 Fingerprint note: the parent S5 packet header recorded
-`sha256:6d5a113a…` at its authoring time. The complete-settings fingerprint has
-since legitimately advanced to `sha256:f72d2bb1…` (recorded in AGENTS.md as the
-current baton value) through committed harness-settings additions, including
-`autonomous_continuation.yaml` itself. Recomputed this session via
-`orchestration_harness.settings_fingerprint.settings_fingerprint()` over
-`orchestration/harness_settings/` — matches the baton record exactly. No
+`sha256:6d5a113a…` at its authoring time; this delta's first authoring session
+recorded `sha256:f72d2bb1…`. The complete-settings fingerprint has since
+legitimately advanced to `sha256:a9b05c23…` (recorded in AGENTS.md as the
+current baton value) through two committed harness-settings changes at current
+HEAD `553a8a8b`: `053dcb45` (prohibit terminal internal handbacks —
+`autonomous_continuation.yaml` `task_lifecycle`) and `553a8a8b` (disable
+unapproved monetary caps — `cost_controls.yaml`). Recomputed on explicit user
+resume via `orchestration_harness.settings_fingerprint.settings_fingerprint()`
+over `orchestration/harness_settings/` — matches the baton record exactly. No
 unexplained settings drift.
 
 ## 1. Failure Evidence (preserved, attempt 1)
@@ -158,8 +163,9 @@ The verifier checks **only the delta**, per `autonomous_continuation.yaml`
 4. Conductor authorship: this delta is authored by the Conductor; the
    orchestrator has not reallocated workers or expanded scope.
 5. Fingerprint: recomputed complete-settings fingerprint matches the current
-   baton value `sha256:f72d2bb1…` and the drift from the parent packet's
-   header value is explained by committed settings additions.
+   baton value `sha256:a9b05c23…` and the drift from the parent packet's
+   header value is explained by committed settings additions (see fingerprint
+   note).
 6. Evidence preservation: attempt-1 failure receipt fields are recorded in §1
    and must appear in the final closeout continuation history.
 7. Harness-evidence integrity: the sprint still produces the §6 (parent)
@@ -181,16 +187,18 @@ Conductor; the orchestrator must not improvise.
   pre-authorized D-3-style lane substitution pattern applied within the cap);
   after that, `retry_budget_exhausted` is a genuine user pause condition.
 
-## 7. Conductor Workspace Receipt (this session)
+## 7. Conductor Workspace Receipt (resume session, 2026-07-12)
 
 | Field | Value |
 |---|---|
 | Target worktree | `C:\Users\sarashera\EMR4-worktrees\claude` |
 | Expected branch | `claude/current` — confirmed (`## claude/current...origin/claude/current`, no divergence) |
-| Cleanliness | clean at replan time (no modified/untracked tracked-code files) |
-| HEAD | `0765708f` (feat(ariadne): continue bounded sprints autonomously) |
-| Relation to `handoff/current` | committed Ariadne harness commits ahead of the recorded baton, consistent with the parent-plan session lineage; no realignment required, none performed |
-| Settings fingerprint | recomputed and matching (see header) |
+| Cleanliness | clean at resume time; this packet was refreshed from its committed HEAD version (`git restore --source=HEAD`) before this session's receipt/fingerprint update, which is the only working-tree change |
+| HEAD | `553a8a8b` (fix(ariadne): disable unapproved monetary caps) |
+| Relation to `handoff/current` | HEAD equals `origin/handoff/current` and `origin/master` (`553a8a8b`); no realignment required, none performed |
+| Settings fingerprint | recomputed at this HEAD and matching the baton (see header) |
+| Conductor resource | `claude-fable-conductor` retained — no provider-reported usage limit or unavailability; per `cost_controls.yaml`, estimated cost is advisory only and no monetary cap is requested or inferred |
+| Resume trigger | explicit user resume clearing the prior user_stopped latch; continuation authority reverts to `autonomous_continuation.yaml` |
 
 The Conductor does not launch workers, integrate, commit, or push. This delta
 plus the parent packet is the complete S5 definition after replan 1.
