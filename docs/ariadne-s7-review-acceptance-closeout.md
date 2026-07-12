@@ -1,7 +1,7 @@
 # Ariadne S7 Review Acceptance Closeout
 
 Date: 2026-07-13
-Status: complete; publication pending closeout commit
+Status: complete and published through `1ff7dd9a`
 
 S7 repaired the cross-boundary contract gaps exposed by S6 and added one thin,
 executable acceptance decision for independent worker reviews. The gate does
