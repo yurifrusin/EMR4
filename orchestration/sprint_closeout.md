@@ -24,43 +24,50 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | S7 Review Acceptance Contract Audit |
-| Integrated through | DeepSeek Pro conductor fallback, DeepSeek Flash implementation/revisions and independent review, executable gate acceptance, and Sol integration |
-| Status | Published to `origin/master` and `origin/handoff/current` |
-| Commit | `1ff7dd9a` |
-| Push | `master` and `handoff/current` pushed successfully |
-| Final status | `## master...origin/master` after S7 publication |
+| Batch | S8 Receptionist Workflow Implementation |
+| Integrated through | Fable conduction, DeepSeek W1/W2 implementation, W3 executable review gates, Antigravity GO verdict, and Sol integration |
+| Status | Complete locally; publication pending closeout commit |
+| Commit | `pending S8 closeout commit` |
+| Push | product/review checkpoints pushed through `cc438884`; closeout pending |
+| Final status | `## master...origin/master` before S8 closeout edits |
 | Last updated | 2026-07-13 |
 
-## S7 What Changed
+## S8 What Changed
 
-- Reconciled Deep Code adapter settings/tests with the approved Pro Conductor
-  fallback and preserved explicit no-authority security quirks.
-- Added an executable review acceptance gate and CLI covering artifact/receipt
-  identity, marker parity, exact worktree/branch, candidate ancestry, process
-  cleanup, review mode, and authoritative test collection.
-- Fixed the gate's first real-run multi-file collection defect before accepting
-  the candidate.
-- Persisted the final machine acceptance decision and Sol evidence.
+- Hardened taskpane Diary launch resolution, error guidance, and bounded retry.
+- Added inline terminal-reason guidance, webview date fallback, same-day search,
+  and read-only reason/notes preview to the diary.
+- Passed both DeepSeek candidates through W3 and the executable acceptance gate.
+- Integrated Antigravity's corrected GO consumer verdict.
+- Enabled local DeepCode candidate commits without push/integration authority.
 
-## S7 Verification
+## S8 Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_adapter_settings.py tests\test_ariadne_review_acceptance.py -q --tb=short
-.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_pty.py tests\test_ariadne_deepcode_mailbox_settings.py -q --tb=short
-.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_adapter_settings.py tests\test_ariadne_deepcode_mailbox.py tests\test_ariadne_deepcode_mailbox_settings.py tests\test_ariadne_deepcode_pty.py tests\test_ariadne_review_acceptance.py tests\test_sprint_closeout_protocol.py -q --tb=short
-.venv\Scripts\python.exe -m py_compile orchestration_harness\review_acceptance.py scripts\ariadne_review_acceptance.py
-.venv\Scripts\python.exe scripts\ariadne_review_acceptance.py --help
+.venv\Scripts\python.exe -m pytest review\test_taskpane_diary_launch.py review\test_diary_reason_code_affordance.py review\test_diary_date_picker_fallback.py review\test_diary_day_search.py review\test_diary_note_preview.py -q
+.venv\Scripts\python.exe -m pytest review\test_diary_smoke.py review\test_diary_selection_preservation.py -q
+.venv\Scripts\python.exe -m pytest review\test_diary_graphql_practitioner_switch.py review\test_diary_deprecation_consumer.py -q
+.venv\Scripts\python.exe -m pytest tests\test_ariadne_deepcode_pty.py tests\test_ariadne_deepcode_mailbox_settings.py tests\test_ariadne_deepcode_adapter_settings.py -q
+node --check docs\diary\diary.js
+.venv\Scripts\python.exe scripts\check_frontend_versions.py
 git diff --check
 ```
 
-Result: focused `88 passed`; adjacent `22 passed`; broad `121 passed`; CLI,
-compilation, and whitespace checks passed. Existing Starlette and Google GenAI
-deprecation warnings only.
+Result: product focused `28 passed`; smoke/selection `142 passed`; adjacent
+GraphQL/deprecation `15 passed`; DeepCode permission contract `53 passed`;
+syntax, versions, executable reviews, and whitespace checks passed.
 
-Sprint engine state: continuing automatically to the next Conductor boundary. No
+Sprint engine state: continuing to the next Conductor boundary after publication. No
 deployment, production, external-client, provider, memory/RAG, H15/trove,
 schema, database, new-write-authority, or product-policy gate is opened.
+
+---
+
+## Previous Closeout - S7 Review Acceptance Contract Audit
+
+S7 added the executable cross-boundary review acceptance gate and was published
+through `1ff7dd9a`, with publication-state correction through `559bc0ac`.
+Evidence: `docs/ariadne-s7-review-acceptance-closeout.md`.
 
 ---
 
@@ -14418,6 +14425,30 @@ Evidence: `docs/ariadne-s7-review-acceptance-closeout.md` and
 
 Sprint engine state: continuing automatically to the next Conductor planning
 boundary. No user intervention is required.
+
+---
+
+## Sprint S8 Closeout - Receptionist Workflow Implementation
+
+- Implemented taskpane Diary launch reliability and actionable Office dialog
+  failure handling.
+- Implemented four diary usability affordances: terminal-reason guidance,
+  webview date fallback, same-day search, and read-only detail preview.
+- Required same-lane revisions for eight W1 test failures, a W1 ownership breach,
+  W2 navigation overlap, and incomplete/stalled transport closeouts.
+- Gate-accepted both W3 reviews and integrated Antigravity's GO verdict.
+- Enabled DeepCode local candidate commits while preserving push/integration
+  prohibition; W2 created candidate `a2effefd` under the corrected policy.
+
+Verification: product focused `28 passed`; smoke/selection `142 passed`;
+GraphQL/deprecation `15 passed`; DeepCode permission contract `53 passed`;
+JavaScript syntax, frontend versions, executable review gates, and whitespace
+checks passed.
+
+Evidence: `docs/emr4-s8-receptionist-workflow-closeout.md`.
+
+Sprint engine state: continuing to the next Conductor boundary after closeout
+publication. No user intervention is required for routine execution.
 
 ---
 
