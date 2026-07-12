@@ -1,0 +1,18 @@
+﻿{
+  "accepted": true,
+  "reasons": [],
+  "artifact": "C:\\Users\\sarashera\\EMR4-worktrees\\deepcode-s8-w3-w1-review\\orchestration\\agent_inbox\\codex\\review-deepseek-s8-w1-independent-review.md",
+  "artifact_kind": "decision",
+  "observed_branch": "deepcode/s8-w3-w1-review",
+  "observed_head": "5ce6908c816f0ae500a22548f169f1b04ac4ebaa",
+  "ancestry_result": "ancestor",
+  "canonical_marker": "DECISION: pass",
+  "receipt_cross_check": "passed",
+  "authoritative_pytest_count": 13,
+  "worker_reported_count": 13,
+  "worker_count_mismatch": false,
+  "review_mode": "executable",
+  "scratch_outputs_ignored": true,
+  "schema_version": "ariadne.review_acceptance.v1",
+  "status": "accepted"
+}
