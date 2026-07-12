@@ -12,3 +12,7 @@ direction_collaboration:
   settings_file: direction_collaboration.yaml
   optional: true
   conductor_retains_final_say: true
+autonomous_continuation:
+  settings_file: autonomous_continuation.yaml
+  default_posture: continue_without_user_permission
+  reallocation_authority: conductor_only

@@ -19,6 +19,7 @@ Before producing a sprint plan, read:
 - `orchestration/harness_settings/role_preferences.yaml`
 - `orchestration/harness_settings/sprint_worker_policy.yaml`
 - `orchestration/harness_settings/direction_collaboration.yaml`
+- `orchestration/harness_settings/autonomous_continuation.yaml`
 - `orchestration/harness_settings/user_overrides.yaml`
 - `docs/ariadne-harness-conductor-verifier-protocol.md`
 
@@ -47,6 +48,14 @@ division of labour. Do not prolong dialogue after agreement, require dialogue
 when direction is already clear, or treat orchestrator suggestions as worker
 assignments. Record the disposition as `skipped`, `agreed_initial`,
 `agreed_after_counter`, `agreed_after_rejoinder`, or `conductor_final_with_dissent`.
+
+During an active verified sprint, ordinary execution failure returns to Claude
+for an automatic bounded replan when no user-owned decision is implicated.
+Revise failed lanes inside the existing boundary, preserve failure evidence,
+and send the delta to the verifier. Do not ask the user for permission merely
+because a worker timed out, a configured fallback is needed, or the verifier
+requested revision. Pause only for conditions in
+`autonomous_continuation.yaml`.
 
 Prefer architectural guidance via Fable/Opus planning combined with bounded
 worker execution.

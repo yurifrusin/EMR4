@@ -47,6 +47,21 @@ alter a verified allocation. The Conductor has final say on sprint scope and
 division of labour. The verifier rejects any plan where dialogue transferred
 that authority to the orchestrator.
 
+## Autonomous Continuation
+
+Once a sprint is verified, execution continues without renewed user permission
+while it remains inside the approved mandate. A worker timeout, configured
+fallback, recoverable transport fault, test failure, or verifier plan revision
+returns control to the Conductor rather than to the user. The orchestrator
+records evidence; the Conductor revises allocation or lane scope; the verifier
+checks the delta; the orchestrator resumes.
+
+This loop is bounded by `autonomous_continuation.yaml`. User input is reserved
+for scope or authority expansion, material product choices, conflicting valid
+evidence, exhausted retries, irreconcilable planning, or human-only external
+actions. Continuation cannot authorize orchestrator reallocation or convert a
+failed result into success.
+
 ## Workspace Preflight
 
 Transport reachability and workspace readiness are separate facts. A reachable

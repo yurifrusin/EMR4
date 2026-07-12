@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated platform. S4d completed the real multi-agent pilot and established the bounded Deep Code PTY adapter plus provenance-preserving recovery leases. The active protected orchestrator is GPT Sol under stable resource `openai-primary-orchestrator`; historical Terra-labelled artifacts remain historical evidence. Conductor preference is Fable, then Opus for Fable usage/availability failure, then a distinct spawned GPT Sol subagent. Direction-finding is now optionally collaborative: the orchestrator may propose product direction, the Conductor may accept/counter/request a user boundary decision, the orchestrator may make one rejoinder, and the Conductor has final say on sprint definition and all worker allocation. Agreement at any stage ends dialogue immediately; dialogue may be skipped entirely. The verifier rejects any transfer of allocation authority. Current complete-settings fingerprint is `sha256:6d5a113aa1c0f418f402032b7503c6a0478e71a05fe6c18f093c91ef95831b78`. No EMR4 runtime authority is opened. |
-| **Next recommended work** | Use the optional direction dialogue on the next real EMR4 sprint: GPT Sol supplies a concise product-frontier recommendation, Fable accepts or counters, and discussion stops on agreement before Fable publishes the final sprint/allocation. Opus and spawned GPT Sol remain fallbacks, not co-Conductors. D5 remains closed unless Yuri separately authorizes it. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
+| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated platform. S5 is the first real EMR4 product sprint through the harness: Fable accepted Sol's receptionist workflow-audit direction, authored the sprint/allocation, and DeepSeek verified it. The first D-1 worker attempt timed out without an artifact and was correctly rejected with process cleanup. Autonomous continuation is now explicit: ordinary in-mandate execution failure returns to the Conductor for bounded replan and verifier delta-check without requiring renewed user permission. The orchestrator records/resumes but cannot reallocate or expand scope. Current complete-settings fingerprint is `sha256:f72d2bb1bad4d829c23748d68822ce7cbf738afb2e6bbc99440a3f035ee9fc47`. D5 and all other recorded runtime gates remain closed. |
+| **Next recommended work** | Continue S5 automatically: Fable replans the failed D-1 lane using a distinct remediation, DeepSeek verifies the delta, and Sol resumes Phase A alongside D-2 and A-1. Pause only if an `autonomous_continuation.yaml` user-owned condition occurs or the bounded retry budget is exhausted. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
 
 S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
 are distinct CLI transports. Deep Code requires a real TTY; non-TTY refusal is
@@ -98,6 +98,12 @@ Fable may accept/counter, GPT Sol may make at most one rejoinder, and Fable then
 has final say. Agreement cuts the exchange short; obvious work may skip it.
 Every final plan records the dialogue disposition for verifier review. See
 `docs/ariadne-direction-collaboration.md`.
+Autonomous continuation is also explicit. Once a sprint is verified, ordinary
+worker timeouts, configured fallbacks, recoverable transport faults, test
+failures, and verifier-requested revisions return to the Conductor rather than
+the user. The Conductor replans, the verifier checks the delta, and Sol resumes.
+Retries are bounded and must use distinct remediation. See
+`docs/ariadne-autonomous-continuation.md`.
 The revised Opus Conductor plan selected a bounded Deep Code adapter guard
 docs/tests sprint with two DeepSeek lanes and an Antigravity veto lane. The
 real interactive Deep Code verifier artifact at
