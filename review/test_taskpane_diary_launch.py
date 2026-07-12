@@ -79,7 +79,7 @@ assert_valid_review_token(TEST_AUTH_TOKEN)
 
 # ── Fixtures ────────────────────────────────────────────────────────────────
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def browser():
     with sync_playwright() as p:
         b = p.chromium.launch()
