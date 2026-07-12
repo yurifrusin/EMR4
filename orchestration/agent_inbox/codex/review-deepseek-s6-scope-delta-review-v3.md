@@ -1,11 +1,11 @@
 # S6 Lane 2: Independent Static Veto Review — DeepSeek Flash
 
-**Role:** independent code/security/reviewer  
-**Review worktree:** `C:\Users\sarashera\EMR4-worktrees\deepcode-s6-scope-delta-review`  
-**Observed HEAD:** `0690f77dffb2d36178d3773e841f5716711d0606`  
-**Candidate commit in ancestry:** `8b91eccc`  
-**Sol verification HEAD:** `b0536c31` (ancestor of current HEAD; subsequent commits are docs-only)  
-**Review date:** 2026-07-13  
+**Role:** independent code/security/reviewer
+**Review worktree:** `C:\Users\sarashera\EMR4-worktrees\deepcode-s6-scope-delta-review`
+**Observed HEAD:** `0690f77dffb2d36178d3773e841f5716711d0606`
+**Candidate commit in ancestry:** `8b91eccc`
+**Sol verification HEAD:** `b0536c31` (ancestor of current HEAD; subsequent commits are docs-only)
+**Review date:** 2026-07-13
 **Review artifact:** `orchestration/agent_inbox/codex/review-deepseek-s6-scope-delta-review-v3.md`
 
 ---
