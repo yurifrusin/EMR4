@@ -1,11 +1,11 @@
 # DeepSeek Flash W1 — S10 Workflow Chain Harness
 
-**Role:** implementation owner  
-**Resource:** `deepseek-flash-workers` (instance 1)  
-**Model:** `deepseek-v4-flash` / high  
-**Parent plan:** `orchestration/agent_inbox/codex/plan-deepseek-pro-s10-receptionist-workflow.md`  
-**Candidate commit:** `ae0fb7754fb22f0b368530afeba3160815be52fd`  
-**Branch:** `deepcode/s10-w1-workflow-chain`  
+**Role:** implementation owner
+**Resource:** `deepseek-flash-workers` (instance 1)
+**Model:** `deepseek-v4-flash` / high
+**Parent plan:** `orchestration/agent_inbox/codex/plan-deepseek-pro-s10-receptionist-workflow.md`
+**Candidate commit:** `ae0fb7754fb22f0b368530afeba3160815be52fd`
+**Branch:** `deepcode/s10-w1-workflow-chain`
 **Status:** Candidate only — not accepted or integrated by Terra
 
 ---
