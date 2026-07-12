@@ -26,10 +26,10 @@ Every closeout entry should record:
 |---|---|
 | Batch | S8 Receptionist Workflow Implementation |
 | Integrated through | Fable conduction, DeepSeek W1/W2 implementation, W3 executable review gates, Antigravity GO verdict, and Sol integration |
-| Status | Complete locally; publication pending closeout commit |
-| Commit | `pending S8 closeout commit` |
-| Push | product/review checkpoints pushed through `cc438884`; closeout pending |
-| Final status | `## master...origin/master` before S8 closeout edits |
+| Status | Published to `origin/master` and `origin/handoff/current` |
+| Commit | `f8b354cf` |
+| Push | `master` and `handoff/current` pushed successfully |
+| Final status | `## master...origin/master` after S8 closeout publication |
 | Last updated | 2026-07-13 |
 
 ## S8 What Changed

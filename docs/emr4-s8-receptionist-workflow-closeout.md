@@ -1,7 +1,7 @@
 # EMR4 S8 Receptionist Workflow Closeout
 
 Date: 2026-07-13
-Status: complete; publication pending closeout commit
+Status: complete and published through `f8b354cf`
 
 S8 implemented the remaining Conditional Go receptionist workflow tranche from
 S5. Fable accepted Sol's direction and allocated two DeepSeek implementation
