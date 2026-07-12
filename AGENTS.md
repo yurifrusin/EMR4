@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | S7 is published through `1ff7dd9a`. The stale DeepSeek Pro fallback tests are reconciled and `orchestration_harness/review_acceptance.py` now makes review acceptance executable: exact worktree/branch, candidate ancestry, canonical markers, receipt identity/kind, cleanup, review mode, and authoritative multi-file pytest collection must agree. DeepSeek 4 Pro/high successfully served as Conductor while Claude was subscription-limited; DeepSeek Flash implemented/revised and independently reviewed the candidate. The first real gate run rejected its own multi-file parser defect, which was fixed and independently re-reviewed before final acceptance. Focused 88, adjacent 22, and broad 121-test suites pass. All unrelated runtime and product-policy gates remain closed. Current complete-settings fingerprint is `sha256:58313bbfd011f4eb70234fc320b1c0393f2a6a56dd537f329baacd830010cb24`. |
-| **Next recommended work** | Begin the next automatic sprint boundary. Probe the configured Conductor order afresh because Claude's real subscription window may have reset: Fable, Opus, DeepSeek 4 Pro through Deep Code, then a distinct Sol subagent. The next Conductor should return focus to the highest-leverage EMR4 product work while retaining the now-tested acceptance gate and regular commit/push cadence; do not add time, cost, or procedural stops without a real risk trigger or user decision. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
+| **Current active track** | S8 receptionist workflow implementation is active under Fable's published plan at `253edd3f`: W1 owns taskpane diary-launch reliability, W2 owns diary usability affordances, W3 will independently review both through the S7 acceptance gate, and Antigravity will provide the cross-provider consumer verdict. W1's first artifact was rejected after Sol found 8 focused-test failures and is in same-lane revision; W2 resumed after the outer orchestration shell interrupted its first turn. Deep Code worker permissions now allow local candidate commits only inside disposable worktrees while network, deletion, out-of-worktree access, worker push, and integration authority remain prohibited; the change is published at `1674f07c` with 53 focused tests passing. Current complete-settings fingerprint is `sha256:932db1810e8479b1fd95d25c88689c0f7e67ee2e6e7594bdc3ebf2dadf9f1d7f`. All unrelated runtime and product-policy gates remain closed. |
+| **Next recommended work** | Complete S8 W1/W2 same-lane revisions, require W3 gate-accepted reviews, integrate accepted candidates at regular pushed checkpoints, then obtain Antigravity's consumer verdict and close S8. At the next sprint boundary, prefer DeepSeek 4 Pro/high for routine Conductor work and reserve Fable/Opus for programme boundaries, architecture disputes, material product policy, or repeated sprint failure, subject to documenting that policy amendment after S8. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
 
 S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
 are distinct CLI transports. Deep Code requires a real TTY; non-TTY refusal is
@@ -76,7 +76,9 @@ cwd, not only the outbox, so worker sessions must run in disposable
 packet-scoped worktrees; packet boundaries are semantic rather than CLI-enforced.
 It is not integration authority. Durable packet artifacts, packet ownership,
 and the protected-orchestrator acceptance gate remain mandatory. Out-of-worktree
-access, deletion, Git mutation, network tools, and MCP are denied.
+access, deletion, network tools, and MCP are denied. Local Git mutation is
+permitted only for candidate commits in disposable worker worktrees; worker
+push and integration authority remain prohibited.
 The PTY adapter never answers a permission prompt. It provides bounded process
 lifecycle control, not a general bidirectional conversation channel.
 
