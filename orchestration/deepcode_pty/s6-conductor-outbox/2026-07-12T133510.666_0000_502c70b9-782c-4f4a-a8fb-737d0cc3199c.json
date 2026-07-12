@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.deepcode_pty_event.v1",
+  "event_id": "502c70b9-782c-4f4a-a8fb-737d0cc3199c",
+  "recorded_at": "2026-07-12T13:35:10.666Z",
+  "source": "deepcode_pty_adapter",
+  "status": "completed",
+  "artifact": "orchestration/agent_inbox/codex/plan-deepseek-pro-post-s5-next-sprint.md",
+  "trust": "untrusted_transport_completion_requires_artifact_validation"
+}
