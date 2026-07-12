@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -56,6 +57,34 @@ def ensure_project_settings(
     settings_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
+def shared_toolchain() -> tuple[Path | None, Path | None]:
+    python_candidates = [
+        REPO_ROOT / ".venv" / "Scripts" / "python.exe",
+        REPO_ROOT / ".venv" / "bin" / "python",
+    ]
+    python = next((candidate.resolve() for candidate in python_candidates if candidate.is_file()), None)
+    node_value = shutil.which("node")
+    node = Path(node_value).resolve() if node_value else None
+    return python, node
+
+
+def launch_detached(command: list[str], environment: dict[str, str]) -> int:
+    kwargs: dict[str, object] = {
+        "cwd": REPO_ROOT,
+        "env": environment,
+        "stdin": subprocess.DEVNULL,
+        "stdout": subprocess.DEVNULL,
+        "stderr": subprocess.DEVNULL,
+        "close_fds": True,
+    }
+    if os.name == "nt":
+        kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS
+    else:
+        kwargs["start_new_session"] = True
+    process = subprocess.Popen(command, **kwargs)
+    return process.pid
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run one Deep Code packet in a bounded real PTY.")
     parser.add_argument("--cwd", type=Path, required=True)
@@ -69,8 +98,13 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=0, help="Artifact deadline seconds; 0 disables it")
     parser.add_argument("--exit-timeout", type=int, default=30)
     parser.add_argument(
+        "--detach",
+        action="store_true",
+        help="Launch the live PTY supervisor independently so an outer shell timeout cannot stop it",
+    )
+    parser.add_argument(
         "--fixture",
-        choices=("success", "permission", "hang", "ignore_exit", "markdown_decision", "completion"),
+        choices=("success", "permission", "hang", "ignore_exit", "markdown_decision", "completion", "artifact_only"),
         help=argparse.SUPPRESS,
     )
     args = parser.parse_args()
@@ -105,10 +139,22 @@ def main() -> int:
         command.extend(("--model", args.model))
     if args.reasoning:
         command.extend(("--reasoning", args.reasoning))
+    shared_python, shared_node = shared_toolchain()
+    if shared_python:
+        command.extend(("--shared-python", str(shared_python)))
+    if shared_node:
+        command.extend(("--shared-node", str(shared_node)))
     environment = os.environ.copy()
     if args.fixture:
         command.extend(("--fixture", args.fixture))
         environment["ARIADNE_PTY_TEST_MODE"] = "1"
+    if args.detach:
+        if args.fixture:
+            print("--detach is reserved for live sessions", file=sys.stderr)
+            return 2
+        pid = launch_detached(command, environment)
+        print(json.dumps({"status": "launched", "pid": pid, "receipt": str(args.receipt)}))
+        return 0
     return subprocess.run(command, cwd=REPO_ROOT, env=environment, check=False).returncode
 
 

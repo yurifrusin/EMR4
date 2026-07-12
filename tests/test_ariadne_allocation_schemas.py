@@ -56,9 +56,9 @@ def test_role_preferences_and_generalist_profile_are_schema_valid():
     assert set(generalist.covers) == set(Role) - {Role.GENERALIST}
     conductor = next(item for item in roles if item.role is Role.CONDUCTOR)
     assert conductor.preferences == (
+        "deepseek-pro-conductor-fallback",
         "claude-fable-conductor",
         "claude-opus-conductor",
-        "deepseek-pro-conductor-fallback",
         "gpt-sol-conductor-fallback",
     )
 

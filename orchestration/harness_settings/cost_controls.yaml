@@ -14,7 +14,8 @@ fallback_semantics:
   actual_provider_usage_limit_triggers_fallback: true
   provider_model_unavailable_triggers_fallback: true
   authentication_or_transport_unavailable_triggers_fallback: true
-claude_conductor_order: [claude-fable-conductor, claude-opus-conductor, deepseek-pro-conductor-fallback, gpt-sol-conductor-fallback]
+routine_conductor_order: [deepseek-pro-conductor-fallback, claude-fable-conductor, claude-opus-conductor, gpt-sol-conductor-fallback]
+claude_escalation_order: [claude-fable-conductor, claude-opus-conductor]
 actual_limit_evidence:
   - provider_reported_usage_limit
   - provider_reported_rate_or_window_exhaustion

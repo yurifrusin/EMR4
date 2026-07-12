@@ -100,7 +100,7 @@ function quoteCmd(value) {
   return `"${value.replaceAll('"', '""')}"`;
 }
 
-function liveCommand(packetRelative, artifactRelative, artifactKind) {
+function liveCommand(packetRelative, artifactRelative, artifactKind, sharedPython, sharedNode) {
   const packetPath = packetRelative.replaceAll("\\", "/");
   const artifactPath = artifactRelative.replaceAll("\\", "/");
   const prompt = [
@@ -110,6 +110,12 @@ function liveCommand(packetRelative, artifactRelative, artifactKind) {
     artifactKind === "completion"
       ? "Include a canonical STATUS: complete line only after the packet work and evidence are complete."
       : "Include a canonical DECISION: pass or DECISION: revision_required line.",
+    sharedPython
+      ? `Use this shared Python for tests: ${sharedPython}. Do not claim Python or pytest is unavailable before trying it.`
+      : "No shared Python interpreter was discovered; report that exact preflight limitation if Python tests are required.",
+    sharedNode
+      ? `Use this shared Node executable for JavaScript checks: ${sharedNode}.`
+      : "No shared Node executable was discovered; report that exact preflight limitation if Node checks are required.",
   ].join(" ");
   if (process.platform === "win32") {
     return {
@@ -124,7 +130,7 @@ function fixtureCommand(mode, artifact, outbox) {
   if (!process.env.ARIADNE_PTY_TEST_MODE) {
     throw new Error("--fixture requires ARIADNE_PTY_TEST_MODE");
   }
-  if (!["success", "permission", "hang", "ignore_exit", "markdown_decision", "completion"].includes(mode)) {
+  if (!["success", "permission", "hang", "ignore_exit", "markdown_decision", "completion", "artifact_only"].includes(mode)) {
     throw new Error("unsupported fixture mode");
   }
   const fixture = path.join(path.dirname(fileURLToPath(import.meta.url)), "fake_deepcode.mjs");
@@ -144,7 +150,13 @@ async function main() {
   const baselineEvents = listEvents(outbox);
   const command = options.fixture
     ? fixtureCommand(options.fixture, artifact, outbox)
-    : liveCommand(path.relative(cwd, packet), path.relative(cwd, artifact), options["artifact-kind"]);
+    : liveCommand(
+        path.relative(cwd, packet),
+        path.relative(cwd, artifact),
+        options["artifact-kind"],
+        options["shared-python"] || null,
+        options["shared-node"] || null,
+      );
   const startedAt = new Date();
   let terminalWindow = "";
   let artifactObserved = false;
@@ -153,6 +165,7 @@ async function main() {
   let childExitCode = null;
   let artifactDeadlineReached = false;
   let turnCompletionObserved = false;
+  let completionSignal = null;
   let exitSignalStage = 0;
   let nextExitSignalAt = null;
 
@@ -168,6 +181,8 @@ async function main() {
         "scripts",
         process.platform === "win32" ? "ariadne_deepcode_notify.cmd" : "ariadne_deepcode_notify.sh",
       ),
+      ARIADNE_SHARED_PYTHON: options["shared-python"] || "",
+      ARIADNE_SHARED_NODE: options["shared-node"] || "",
     },
     name: "xterm-256color",
     useConptyDll: process.platform === "win32",
@@ -190,13 +205,13 @@ async function main() {
   const artifactDeadline = options.timeout === 0
     ? Number.POSITIVE_INFINITY
     : Date.now() + options.timeout * 1000;
-  let turnCompletionDeadline = null;
   let exitDeadline = null;
   while (true) {
     if (permissionPrompt) break;
     if (!artifactObserved && validArtifact(artifact, options["artifact-kind"])) {
       artifactObserved = true;
-      turnCompletionDeadline = Date.now() + 60000;
+      turnCompletionObserved = true;
+      completionSignal = "artifact_marker";
     }
     if (artifactObserved && turnCompletionObserved && !exitSent) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -221,14 +236,12 @@ async function main() {
     }
     if (childExitCode !== null) break;
     if (!artifactObserved && Date.now() >= artifactDeadline) break;
-    if (artifactObserved && !turnCompletionObserved && Date.now() >= turnCompletionDeadline) break;
     if (exitDeadline !== null && Date.now() >= exitDeadline) break;
     await new Promise((resolve) => setTimeout(resolve, 200));
   }
 
   artifactDeadlineReached = !permissionPrompt && !artifactObserved && childExitCode === null;
   const exitDeadlineReached = artifactObserved && exitSent && childExitCode === null;
-  const turnCompletionDeadlineReached = artifactObserved && !turnCompletionObserved;
   const forcedCleanup = exitDeadlineReached;
 
   if (childExitCode === null) {
@@ -253,9 +266,6 @@ async function main() {
   } else if (!artifactObserved) {
     status = "failed";
     reason = artifactDeadlineReached ? "artifact_timeout" : "process_exited_without_artifact";
-  } else if (turnCompletionDeadlineReached) {
-    status = "failed";
-    reason = "turn_completion_timeout";
   } else if (!processCleanupConfirmed) {
     status = "failed";
     reason = "process_cleanup_unconfirmed";
@@ -281,6 +291,7 @@ async function main() {
     configured_reasoning: options.reasoning || null,
     artifact_observed: artifactObserved,
     turn_completion_observed: turnCompletionObserved,
+    completion_signal: completionSignal,
     exit_sent_after_artifact: exitSent,
     exit_signal_count: exitSignalStage,
     forced_cleanup: forcedCleanup,

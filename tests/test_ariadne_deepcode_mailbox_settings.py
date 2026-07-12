@@ -74,10 +74,26 @@ def test_automated_pty_event_replaces_notify_hook_and_remains_untrusted():
 
     assert lifecycle == {
         "adapter": "deepcode_pty_adapter",
+        "live_invocation_mode": "detached_supervisor",
+        "deadline_authority": "deepcode_pty_adapter_only",
+        "outer_shell_timeout_must_not_own_worker_lifecycle": True,
+        "canonical_artifact_marker_is_completion_signal": True,
+        "receipt_wait_is_reentrant_and_does_not_own_worker": True,
         "automated_completion_event": True,
         "event_trust": "untrusted_transport_completion_requires_artifact_validation",
         "deepcode_notify_hook_required_for_automated_sessions": False,
         "controlled_exit_required": True,
+    }
+
+
+def test_shared_toolchain_is_injected_before_workers_claim_unavailability():
+    toolchain = _profile()["shared_toolchain"]
+
+    assert toolchain == {
+        "integration_worktree_preferred": True,
+        "inject_python_path": True,
+        "inject_node_path": True,
+        "worker_must_try_injected_tool_before_unavailable_claim": True,
     }
 
 
@@ -92,6 +108,7 @@ def test_runner_emits_event_only_after_artifact_turn_exit_and_cleanup_guards():
     assert 'schema_version: "ariadne.deepcode_pty_event.v1"' in source
     assert 'source: "deepcode_pty_adapter"' in source
     assert "const forcedCleanup = exitDeadlineReached" in source
+    assert 'completionSignal = "artifact_marker"' in source
 
 
 def test_runner_detects_permission_screen_and_fails_closed():

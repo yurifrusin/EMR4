@@ -27,8 +27,14 @@ def test_estimated_cost_cannot_trigger_conductor_fallback() -> None:
     assert semantics["actual_provider_usage_limit_triggers_fallback"] is True
 
 
-def test_fable_remains_first_then_opus() -> None:
-    assert policy()["claude_conductor_order"][:2] == [
+def test_deepseek_pro_is_routine_conductor_and_claude_is_escalation() -> None:
+    assert policy()["routine_conductor_order"] == [
+        "deepseek-pro-conductor-fallback",
+        "claude-fable-conductor",
+        "claude-opus-conductor",
+        "gpt-sol-conductor-fallback",
+    ]
+    assert policy()["claude_escalation_order"] == [
         "claude-fable-conductor",
         "claude-opus-conductor",
     ]

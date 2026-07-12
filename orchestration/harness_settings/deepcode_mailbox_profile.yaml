@@ -9,10 +9,20 @@ notify:
   per_turn_event: true
 pty_lifecycle:
   adapter: deepcode_pty_adapter
+  live_invocation_mode: detached_supervisor
+  deadline_authority: deepcode_pty_adapter_only
+  outer_shell_timeout_must_not_own_worker_lifecycle: true
+  canonical_artifact_marker_is_completion_signal: true
+  receipt_wait_is_reentrant_and_does_not_own_worker: true
   automated_completion_event: true
   event_trust: untrusted_transport_completion_requires_artifact_validation
   deepcode_notify_hook_required_for_automated_sessions: false
   controlled_exit_required: true
+shared_toolchain:
+  integration_worktree_preferred: true
+  inject_python_path: true
+  inject_node_path: true
+  worker_must_try_injected_tool_before_unavailable_claim: true
 inbox:
   packet_root: orchestration/agent_inbox/deepcode
   session_resume_requires_human_tty_operator: true

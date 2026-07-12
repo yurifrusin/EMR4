@@ -5,13 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from scripts.ariadne_deepcode_pty import ensure_project_settings
+from scripts.ariadne_deepcode_pty import ensure_project_settings, shared_toolchain
+from scripts.ariadne_deepcode_wait import wait_for_receipt
 
 
 def test_live_prompt_injects_the_monitored_artifact_path() -> None:
     runner = Path("orchestration/deepcode_pty/runner.mjs").read_text(encoding="utf-8")
 
-    assert "function liveCommand(packetRelative, artifactRelative, artifactKind)" in runner
+    assert "function liveCommand(packetRelative, artifactRelative, artifactKind, sharedPython, sharedNode)" in runner
     assert "Write the final durable artifact to exactly ${artifactPath}." in runner
     assert "Do not choose, infer, or substitute another artifact filename." in runner
     assert 'options["artifact-kind"]' in runner
@@ -60,6 +61,16 @@ def test_pty_adapter_accepts_worker_completion_artifact(tmp_path: Path):
     assert result.returncode == 0
     assert receipt["status"] == "completed"
     assert receipt["artifact_kind"] == "completion"
+    assert receipt["completion_signal"] == "artifact_marker"
+
+
+def test_pty_adapter_uses_canonical_artifact_when_tui_status_is_absent(tmp_path: Path):
+    result, receipt = _run(tmp_path, "artifact_only")
+
+    assert result.returncode == 0
+    assert receipt["status"] == "completed"
+    assert receipt["completion_signal"] == "artifact_marker"
+    assert receipt["exit_sent_after_artifact"] is True
 
 
 def test_pty_adapter_allows_disabled_artifact_deadline(tmp_path: Path):
@@ -76,6 +87,7 @@ def test_pty_adapter_exits_only_after_artifact_and_observes_mailbox(tmp_path: Pa
     assert receipt["status"] == "completed"
     assert receipt["artifact_observed"] is True
     assert receipt["turn_completion_observed"] is True
+    assert receipt["completion_signal"] == "artifact_marker"
     assert receipt["exit_sent_after_artifact"] is True
     assert receipt["mailbox_event_count"] == 1
     assert receipt["terminal_output_persisted"] is False
@@ -191,6 +203,38 @@ def test_project_settings_bootstrap_is_secret_free_and_pre_authorizes_bounded_wr
     assert "write-out-cwd" in payload["permissions"]["deny"]
     assert "network" in payload["permissions"]["deny"]
     assert "mutate-git-log" not in payload["permissions"]["deny"]
+
+
+def test_shared_toolchain_resolves_integration_python_and_node() -> None:
+    python, node = shared_toolchain()
+
+    assert python is not None and python.is_file()
+    assert ".venv" in str(python)
+    assert node is not None and node.is_file()
+
+
+def test_live_launcher_supports_detached_supervision_and_injects_toolchain() -> None:
+    source = Path("scripts/ariadne_deepcode_pty.py").read_text(encoding="utf-8")
+    runner = Path("orchestration/deepcode_pty/runner.mjs").read_text(encoding="utf-8")
+
+    assert '"--detach"' in source
+    assert "subprocess.DETACHED_PROCESS" in source
+    assert '"--shared-python"' in source
+    assert '"--shared-node"' in source
+    assert "ARIADNE_SHARED_PYTHON" in runner
+    assert "Do not claim Python or pytest is unavailable before trying it." in runner
+
+
+def test_receipt_waiter_reads_completion_without_owning_worker(tmp_path: Path) -> None:
+    receipt = tmp_path / "receipt.json"
+    receipt.write_text(json.dumps({"status": "completed"}), encoding="utf-8")
+
+    assert wait_for_receipt(receipt, timeout=0.1, interval=0.01) == {"status": "completed"}
+
+
+def test_receipt_waiter_timeout_is_non_destructive(tmp_path: Path) -> None:
+    with pytest.raises(TimeoutError, match="lifecycle is unchanged"):
+        wait_for_receipt(tmp_path / "missing.json", timeout=0.02, interval=0.005)
 
 
 def test_project_settings_can_select_pro_conductor_without_writing_secrets(tmp_path: Path):
