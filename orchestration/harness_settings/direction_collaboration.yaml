@@ -35,4 +35,5 @@ disagreement:
 verification:
   final_plan_must_be_authored_by_conductor: true
   orchestrator_assignment_language_prohibited: true
-  verifier_checks_dialogue_did_not_transfer_allocation_authority: true
+  deterministic_check_confirms_no_allocation_authority_transfer: true
+  independent_verifier_only_on_material_disagreement_or_drift_signal: true

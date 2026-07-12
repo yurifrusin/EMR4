@@ -45,7 +45,7 @@ required_plan_fields:
   - independence_labels
   - unfilled_obligations
   - workspace_receipts
-verifier_checks:
+deterministic_plan_checks:
   - settings_fingerprint_matches
   - final_sprint_and_allocation_authored_by_conductor
   - direction_dialogue_did_not_transfer_allocation_authority
@@ -57,3 +57,11 @@ verifier_checks:
   - fallback_and_reduced_independence_are_explicit
   - no_orchestrator_substitution
   - workspace_receipts_match_assigned_agent_and_handoff_state
+independent_verifier:
+  mode: risk_triggered_optional
+  triggers:
+    - new_security_write_deployment_or_release_authority
+    - conductor_orchestrator_material_disagreement
+    - ambiguous_mandate_or_scope_boundary
+    - resource_limit_exception
+    - authority_or_ownership_drift_signal

@@ -3,25 +3,25 @@ default_posture: continue_without_user_permission
 applies_when: [verified_sprint_is_active, failure_is_inside_existing_mandate, no_user_owned_decision_is_required]
 failure_loop:
   - orchestrator_records_observable_failure
-  - conductor_replans_failed_or_unavailable_lanes
-  - verifier_checks_plan_delta
-  - orchestrator_resumes_verified_execution
+  - orchestrator_recovers_execution_inside_existing_assignment
+  - conductor_reenters_only_for_scope_assignment_or_acceptance_change
+  - independent_verifier_runs_only_when_risk_triggered
+  - orchestrator_resumes_execution
 authority:
   orchestrator_may: [classify_transport_and_execution_evidence, request_conductor_replan, resume_after_verifier_pass]
   orchestrator_may_not: [reallocate_workers, expand_scope, convert_failure_into_success]
   conductor_exclusive: [revise_worker_assignment, revise_lane_scope_inside_verified_sprint_boundary]
-retry_budget:
-  maximum_replans_per_failure_class: 2
-  maximum_attempts_per_lane_transport: 3
-  repeated_failure_requires_distinct_remediation: true
-  reset_only_by_success_or_materially_changed_plan: true
+execution_limits:
+  enforcement: inactive
+  retry_counts: advisory_evidence_only
+  wall_clock_deadlines: inactive
+  progress_observation_preferred: true
 pause_for_user_only_when:
   - mandate_or_scope_expansion
   - material_product_choice
   - new_security_write_deployment_or_release_authority
   - conflicting_valid_evidence
-  - retry_budget_exhausted
-  - conductor_and_verifier_cannot_reach_a_valid_plan
+  - conductor_and_orchestrator_cannot_resolve_a_material_boundary_disagreement
   - required_external_credential_or_human_only_action
 must_not_pause_for:
   - ordinary_worker_timeout
@@ -29,6 +29,8 @@ must_not_pause_for:
   - recoverable_transport_failure
   - verifier_requested_plan_revision
   - test_failure_investigable_inside_scope
+  - same_lane_execution_retry
+  - transport_or_artifact_contract_correction
 evidence:
   record_every_attempt: true
   preserve_failed_artifacts_and_receipts: true

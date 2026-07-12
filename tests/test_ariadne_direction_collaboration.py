@@ -39,9 +39,9 @@ def test_conductor_retains_final_sprint_and_worker_allocation_authority():
     assert policy["verification"]["final_plan_must_be_authored_by_conductor"] is True
 
 
-def test_sprint_policy_requires_dialogue_disposition_and_authority_verification():
+def test_sprint_policy_requires_dialogue_disposition_and_deterministic_authority_checks():
     policy = _yaml("sprint_worker_policy.yaml")
 
     assert "direction_dialogue_disposition" in policy["required_plan_fields"]
-    assert "final_sprint_and_allocation_authored_by_conductor" in policy["verifier_checks"]
-    assert "direction_dialogue_did_not_transfer_allocation_authority" in policy["verifier_checks"]
+    assert "final_sprint_and_allocation_authored_by_conductor" in policy["deterministic_plan_checks"]
+    assert "direction_dialogue_did_not_transfer_allocation_authority" in policy["deterministic_plan_checks"]

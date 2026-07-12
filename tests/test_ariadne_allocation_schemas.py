@@ -47,7 +47,9 @@ def test_role_preferences_and_generalist_profile_are_schema_valid():
         {key: value for key, value in generalist_payload.items() if key != "schema_version"}
     )
 
-    assert all(preference.required for preference in roles)
+    assert next(item for item in roles if item.role is Role.CONDUCTOR).required is True
+    assert next(item for item in roles if item.role is Role.ORCHESTRATOR).required is True
+    assert next(item for item in roles if item.role is Role.VERIFIER).required is False
     assert generalist.independence == "self_review"
     assert Role.ORCHESTRATOR in generalist.covers
     assert set(generalist.covers) == set(Role) - {Role.GENERALIST}
@@ -68,7 +70,7 @@ def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
     assert policy["worker_mix"]["antigravity"]["maximum_instances"] == 1
     assert policy["worker_mix"]["deepseek_flash"]["minimum_instances"] == 1
     assert policy["worker_mix"]["deepseek_flash"]["maximum_instances"] == 3
-    assert "no_orchestrator_substitution" in policy["verifier_checks"]
+    assert "no_orchestrator_substitution" in policy["deterministic_plan_checks"]
     assert policy["workspace_preflight"]["failure_posture"] == "revision_required_before_packet_dispatch"
     assert "workspace_receipts" in policy["required_plan_fields"]
 

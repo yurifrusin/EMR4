@@ -6,9 +6,9 @@ roles:
     preference_rationale: Fable is the default conductor; Opus is used only when Fable has usage or availability problems; a distinct spawned GPT Sol subagent is third. The protected orchestrator session must never fill this fallback directly.
     review_by: 2026-08-11
   - role: verifier
-    required: true
+    required: false
     preferences: [deepseek-flash-verifier, openai-primary-orchestrator]
-    preference_rationale: Economical independent settings verification is preferred.
+    preference_rationale: Deterministic checks are always required; an independent LLM verifier is reserved for authority, ambiguity, disagreement, or drift-risk triggers.
     review_by: 2026-08-11
   - role: orchestrator
     required: true

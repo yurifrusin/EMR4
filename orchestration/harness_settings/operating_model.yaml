@@ -1,0 +1,50 @@
+schema_version: ariadne.operating_model.v2
+purpose: prevent_orchestrator_drift_without_bureaucratizing_execution
+sprint_boundary:
+  conductor:
+    exclusive_authority: [define_next_sprint, divide_work, allocate_workers]
+  orchestrator:
+    duties: [provide_product_and_codebase_evidence, review_executability, challenge_once, execute_accepted_plan]
+    may_not: [silently_omit_allocated_workers, silently_reallocate_workers]
+  reciprocal_check:
+    bounded: true
+    stop_on_agreement: true
+    conductor_final_plan_authority: true
+    orchestrator_may_return_unexecutable_or_unsafe_plan_with_evidence: true
+within_sprint:
+  executive_role: orchestrator
+  conductor_reentry_only_when:
+    - sprint_scope_changes
+    - worker_assignment_or_ownership_changes
+    - acceptance_criteria_changes
+    - sprint_is_closed_and_next_sprint_is_needed
+  conductor_reentry_not_required_for:
+    - waiting_for_worker
+    - rerunning_same_lane
+    - transport_recovery
+    - artifact_path_or_process_lifecycle_correction
+    - test_command_selection
+    - worktree_recreation
+    - removal_or_extension_of_inactive_time_limits
+verifier:
+  mode: risk_triggered_optional
+  deterministic_plan_checks_always_run: true
+  independent_llm_required_when:
+    - new_security_write_deployment_or_release_authority
+    - conductor_orchestrator_material_disagreement
+    - mandate_or_scope_boundary_is_ambiguous
+    - allocation_exceeds_declared_resource_limits
+    - prior_drift_signal_affects_authority_or_ownership
+  independent_llm_not_required_for:
+    - ordinary_low_risk_sprint_plan
+    - same_lane_execution_retry
+    - deterministic_schema_or_fingerprint_check
+    - transport_or_filename_correction
+execution_controls:
+  wall_clock_deadlines: inactive
+  monetary_caps: inherit_cost_controls
+  prefer_progress_observation_over_elapsed_time: true
+  worker_may_continue_while_progress_is_observable: true
+  stalled_worker_intervention_is_orchestrator_judgment: true
+user_pause:
+  only_for: [undelegated_material_product_choice, mandate_expansion, explicit_user_stop, required_human_only_action]

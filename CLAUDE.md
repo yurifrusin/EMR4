@@ -23,6 +23,7 @@ Before producing a sprint plan, read:
 - `orchestration/harness_settings/direction_collaboration.yaml`
 - `orchestration/harness_settings/autonomous_continuation.yaml`
 - `orchestration/harness_settings/cost_controls.yaml`
+- `orchestration/harness_settings/operating_model.yaml`
 - `orchestration/harness_settings/user_overrides.yaml`
 - `docs/ariadne-harness-conductor-verifier-protocol.md`
 
@@ -39,8 +40,8 @@ Flash worker lanes, disjoint file or
 review ownership, expected artifacts, verification, fallbacks, reduced
 independence, unfilled obligations, and workspace receipts. Claude must not launch workers, change
 the verified allocation, write to `master`, integrate, commit, or push. A plan
-rejected by the verifier is revised by the conductor, not improvised by the
-orchestrator.
+rejected by deterministic checks or a risk-triggered verifier is revised by the
+Conductor, not improvised by the Orchestrator.
 
 Before final planning, Claude may participate in the optional bounded direction
 dialogue. The protected orchestrator may supply an advisory direction proposal.
@@ -52,13 +53,13 @@ when direction is already clear, or treat orchestrator suggestions as worker
 assignments. Record the disposition as `skipped`, `agreed_initial`,
 `agreed_after_counter`, `agreed_after_rejoinder`, or `conductor_final_with_dissent`.
 
-During an active verified sprint, ordinary execution failure returns to Claude
-for an automatic bounded replan when no user-owned decision is implicated.
-Revise failed lanes inside the existing boundary, preserve failure evidence,
-and send the delta to the verifier. Do not ask the user for permission merely
-because a worker timed out, a configured fallback is needed, or the verifier
-requested revision. Pause only for conditions in
-`autonomous_continuation.yaml`.
+Claude plans at sprint boundaries. During an active sprint, ordinary waiting,
+same-lane retry, transport recovery, command selection, process lifecycle, and
+worktree operations remain Orchestrator duties and must not trigger a new
+Conductor cycle. Re-enter only when scope, worker assignment/ownership, or
+acceptance criteria must materially change, or when the sprint closes and the
+next sprint must be planned. Independent LLM verification is risk-triggered,
+not mandatory; deterministic plan checks remain mandatory.
 
 Current Claude monetary enforcement is inactive. Do not request or infer a
 per-invocation dollar cap and do not treat an estimated-cost stop as Fable

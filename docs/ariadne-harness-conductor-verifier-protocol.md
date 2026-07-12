@@ -7,14 +7,20 @@ The harness is a Markdown/YAML/script protocol, not a platform or agent runtime.
 | Role | Authority | Explicit prohibition |
 |---|---|---|
 | Conductor | Plans sprints and assigns workers from project settings | Cannot integrate submissions, modify `master`, commit, or push |
-| Verifier | Checks a conductor plan against YAML settings and protocol rules | Cannot reassign workers, grant authority, integrate, commit, or push |
+| Verifier | Optional independent review when a configured risk trigger is present | Cannot reassign workers, grant authority, integrate, commit, or push |
 | Orchestrator | Vets/amends worker submissions, integrates, tests, commits, and pushes `master` | Cannot change verifier-passed assignments or bypass verifier rejection |
 | Worker | Performs its bounded packet and submits output | Cannot modify `master`, self-expand scope, or assign workers |
 
 The user controls mandates, settings, availability declarations, and overrides.
-If the orchestrator cannot safely execute a verified plan, it returns it to the
-conductor with evidence. If availability changes, the conductor replans and the
-verifier checks the revision; the orchestrator does not improvise a replacement.
+At each sprint boundary the Conductor defines and allocates the next sprint.
+The Orchestrator reviews executability and may challenge once, then owns
+execution and integration. It returns to the Conductor only when scope,
+assignment/ownership, or acceptance criteria must change. Ordinary waiting,
+same-lane retries, transport repair, test selection, and worktree operations
+remain Orchestrator execution duties.
+
+Deterministic plan checks always run. Independent LLM verification is
+risk-triggered rather than mandatory; see `operating_model.yaml`.
 
 ## Optional Direction Dialogue
 
@@ -49,17 +55,17 @@ that authority to the orchestrator.
 
 ## Autonomous Continuation
 
-Once a sprint is verified, execution continues without renewed user permission
+Once a sprint is accepted, execution continues without renewed user permission
 while it remains inside the approved mandate. A worker timeout, configured
 fallback, recoverable transport fault, test failure, or verifier plan revision
-returns control to the Conductor rather than to the user. The orchestrator
-records evidence; the Conductor revises allocation or lane scope; the verifier
-checks the delta; the orchestrator resumes.
+is handled by the Orchestrator while assignment and scope remain unchanged.
+The Conductor re-enters only for a material planning change. An independent
+verifier checks that change only when a configured risk trigger applies.
 
-This loop is bounded by `autonomous_continuation.yaml`. User input is reserved
+This loop is governed by `autonomous_continuation.yaml`. User input is reserved
 for scope or authority expansion, material product choices, conflicting valid
 evidence, exhausted retries, irreconcilable planning, or human-only external
-actions. Continuation cannot authorize orchestrator reallocation or convert a
+actions. Continuation cannot authorize Orchestrator reallocation or convert a
 failed result into success.
 
 When no user decision is required, an internal checkpoint is not a conversational

@@ -16,7 +16,8 @@ direction is obvious or neither role sees value in discussion. The harness does
 not require ceremonial debate.
 
 Only the Conductor can divide sprint work, select workers/models/reasoning from
-settings, and publish the allocation sent to the verifier. The orchestrator
-cannot smuggle assignments into a direction proposal or change assignments
-after verification. The final plan records whether dialogue was skipped,
+settings, and publish the allocation. Deterministic authority and resource
+checks always run; an independent LLM verifier is added only on a configured
+risk trigger. The Orchestrator cannot smuggle assignments into a direction
+proposal or change assignments during execution. The final plan records whether dialogue was skipped,
 agreed early, agreed after a counter/rejoinder, or ended with preserved dissent.

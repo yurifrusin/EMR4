@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Ariadne is a portable Markdown/YAML/script protocol, not a dedicated platform. S5 is the first real EMR4 product sprint through the harness: Fable accepted Sol's receptionist workflow-audit direction, authored the sprint/allocation, and DeepSeek verified it. The first D-1 worker attempt timed out without an artifact and was correctly rejected with process cleanup. Autonomous continuation is explicit: ordinary in-mandate failure returns to the Conductor for bounded replan and verifier delta-check without renewed user permission, and internal checkpoints are non-terminal. Monetary budget controls remain available generically but are inactive for the current Claude subscription profile: Sol must not pass `--max-budget-usd` or use estimated dollar cost as a fallback trigger. Fable remains default until Claude reports a real usage/window limit or genuine unavailability, then Opus is next. Current complete-settings fingerprint is `sha256:a9b05c232e5d0907332381f69517141546fee342994a32cf2278479a336dfbfd`. D5 and all other recorded runtime gates remain closed. |
-| **Next recommended work** | Continue S5 automatically: Fable replans the failed D-1 lane using a distinct remediation, DeepSeek verifies the delta, and Sol resumes Phase A alongside D-2 and A-1. Pause only if an `autonomous_continuation.yaml` user-owned condition occurs or the bounded retry budget is exhausted. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
+| **Current active track** | S5 is user-paused after D-1 completed its static receptionist workflow audit with no material finding. D-2 was terminated by an incorrectly transplanted 900-second D-1 limit; its outcome is inconclusive, not a worker failure. Ariadne now uses Operating Model V2: Fable owns next-sprint definition and worker allocation at sprint boundaries; Sol reviews/challenges once, then owns pragmatic execution and integration inside the sprint. Deterministic plan checks remain mandatory, but independent LLM verification is risk-triggered and optional. Same-lane retries, waiting, transport repair, commands, worktrees, and process lifecycle do not return to Fable. Monetary caps and wall-clock execution deadlines remain generic capabilities but are inactive in the current profile. Current complete-settings fingerprint is `sha256:672fb77388b92463fc7cf1d4a1fd3c2ac4e568ce306a4881f8ae965146cc9ef8`. D5 and all other recorded runtime gates remain closed. |
+| **Next recommended work** | When Yuri resumes S5, rerun unchanged D-2 without an arbitrary wall-clock deadline and with progress observation, then run unchanged A-1. Sol closes Phase A from evidence; Fable re-enters only if scope/allocation/acceptance must change or to plan the next sprint. After S5 closeout, run the requested bounded cross-boundary Ariadne contract audit. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
 
 S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
 are distinct CLI transports. Deep Code requires a real TTY; non-TTY refusal is
@@ -96,13 +96,15 @@ Direction collaboration is optional and bounded. GPT Sol may propose or defend
 a sprint direction but cannot define the final sprint or allocate workers.
 Fable may accept/counter, GPT Sol may make at most one rejoinder, and Fable then
 has final say. Agreement cuts the exchange short; obvious work may skip it.
-Every final plan records the dialogue disposition for verifier review. See
+Every final plan records the dialogue disposition for deterministic review. See
 `docs/ariadne-direction-collaboration.md`.
-Autonomous continuation is also explicit. Once a sprint is verified, ordinary
-worker timeouts, configured fallbacks, recoverable transport faults, test
-failures, and verifier-requested revisions return to the Conductor rather than
-the user. The Conductor replans, the verifier checks the delta, and Sol resumes.
-Retries are bounded and must use distinct remediation. See
+Operating Model V2 keeps governance at sprint boundaries and execution inside
+the sprint. Fable defines and allocates each next sprint; Sol then waits,
+retries unchanged lanes, repairs transport, runs tests, and integrates without
+another planning cycle. Fable re-enters only for a material scope, assignment,
+ownership, or acceptance change, or for the next sprint. Deterministic checks
+always run; independent LLM verification is risk-triggered. See
+`docs/ariadne-operating-model-v2.md` and
 `docs/ariadne-autonomous-continuation.md`.
 Cost controls are retained but inactive for the current subscription profile.
 Estimated dollar cost is advisory only, and the Claude launcher rejects

@@ -5,9 +5,14 @@ master_authority:
   conductor_can_commit: false
   verifier_can_commit: false
 allocation:
-  user_override_required_to_change_verified_assignment: true
-  replan_required_when_resource_availability_changes: true
+  user_override_required_to_change_verified_assignment: false
+  conductor_revision_required_to_change_assignment: true
+  conductor_replan_required_only_when_availability_forces_assignment_change: true
   live_agent_adapters_enabled: false
+operating_model:
+  settings_file: operating_model.yaml
+  within_sprint_executive_role: orchestrator
+  independent_verifier_mode: risk_triggered_optional
 direction_collaboration:
   settings_file: direction_collaboration.yaml
   optional: true
