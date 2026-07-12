@@ -277,6 +277,8 @@ async function main() {
     artifact: path.relative(cwd, artifact).replaceAll("\\", "/"),
     artifact_kind: options["artifact-kind"],
     artifact_deadline_active: options.timeout > 0,
+    configured_model: options.model || null,
+    configured_reasoning: options.reasoning || null,
     artifact_observed: artifactObserved,
     turn_completion_observed: turnCompletionObserved,
     exit_sent_after_artifact: exitSent,

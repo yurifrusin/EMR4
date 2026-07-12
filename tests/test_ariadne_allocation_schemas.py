@@ -33,6 +33,7 @@ def test_worker_pool_is_strict_and_declares_transport_separately_from_capability
     assert {worker.resource_id for worker in workers} == {
         "openai-primary-orchestrator", "claude-fable-conductor", "claude-opus-conductor",
         "gpt-sol-conductor-fallback",
+        "deepseek-pro-conductor-fallback",
         "antigravity-gemini-flash-3-5-worker", "deepseek-flash-verifier", "deepseek-flash-workers",
     }
     assert any(worker.transport.value == "cli_interactive" for worker in workers)
@@ -57,6 +58,7 @@ def test_role_preferences_and_generalist_profile_are_schema_valid():
     assert conductor.preferences == (
         "claude-fable-conductor",
         "claude-opus-conductor",
+        "deepseek-pro-conductor-fallback",
         "gpt-sol-conductor-fallback",
     )
 

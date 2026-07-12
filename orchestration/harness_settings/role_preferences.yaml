@@ -2,8 +2,8 @@ schema_version: ariadne.role_preferences.v1
 roles:
   - role: conductor
     required: true
-    preferences: [claude-fable-conductor, claude-opus-conductor, gpt-sol-conductor-fallback]
-    preference_rationale: Fable is the default conductor; Opus is used only when Fable has usage or availability problems; a distinct spawned GPT Sol subagent is third. The protected orchestrator session must never fill this fallback directly.
+    preferences: [claude-fable-conductor, claude-opus-conductor, deepseek-pro-conductor-fallback, gpt-sol-conductor-fallback]
+    preference_rationale: Fable is default; Opus follows on real Claude usage or availability limits; DeepSeek 4 Pro via Deep Code provides cross-provider continuity until Claude refills; a distinct GPT Sol subagent is fourth. The protected orchestrator session never fills the fallback directly.
     review_by: 2026-08-11
   - role: verifier
     required: false

@@ -67,3 +67,9 @@ injects the normalized monitored artifact path into the live Deep Code prompt;
 the model must write exactly that path and must not infer an alternate filename.
 The same resolved path is used for containment checks, artifact validation,
 mailbox completion, and the receipt.
+
+The launcher also accepts explicit `--model deepseek-v4-flash|deepseek-v4-pro`
+and `--reasoning high|max` controls. These write only model/reasoning fields to
+the disposable worktree's project settings and never copy API keys or base URLs.
+This supports `deepseek-pro-conductor-fallback` when Claude reports a real usage
+limit; the receipt records the configured model and reasoning.

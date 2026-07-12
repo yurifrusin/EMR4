@@ -186,6 +186,16 @@ def test_project_settings_bootstrap_is_secret_free_and_pre_authorizes_bounded_wr
     assert "write-out-cwd" in payload["permissions"]["deny"]
 
 
+def test_project_settings_can_select_pro_conductor_without_writing_secrets(tmp_path: Path):
+    ensure_project_settings(tmp_path, model="deepseek-v4-pro", reasoning="high")
+
+    payload = json.loads((tmp_path / ".deepcode" / "settings.json").read_text(encoding="utf-8"))
+    assert payload["env"] == {"MODEL": "deepseek-v4-pro"}
+    assert payload["reasoningEffort"] == "high"
+    assert "API_KEY" not in payload["env"]
+    assert "BASE_URL" not in payload["env"]
+
+
 def test_project_settings_bootstrap_rejects_conflicting_write_prompt(tmp_path: Path):
     settings = tmp_path / ".deepcode" / "settings.json"
     settings.parent.mkdir()

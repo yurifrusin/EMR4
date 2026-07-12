@@ -12,6 +12,8 @@ models:
   default: deepseek-v4-flash
   allowed: [deepseek-v4-flash, deepseek-v4-pro]
   exceptional_use_only: [deepseek-v4-pro]
+  role_authorization:
+    deepseek-v4-pro: [conductor_fallback, exceptional_high_leverage_review]
 reasoning:
   default: high
   allowed: [high, max]

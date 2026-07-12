@@ -30,7 +30,9 @@ PROJECT_SETTINGS = {
 }
 
 
-def ensure_project_settings(cwd: Path) -> None:
+def ensure_project_settings(
+    cwd: Path, model: str | None = None, reasoning: str | None = None
+) -> None:
     if not cwd.is_dir():
         raise ValueError("Deep Code worker cwd must already exist")
     settings_path = cwd / ".deepcode" / "settings.json"
@@ -44,9 +46,14 @@ def ensure_project_settings(cwd: Path) -> None:
         required_denies = set(PROJECT_SETTINGS["permissions"]["deny"])
         if not required_denies.issubset(permissions.get("deny", [])):
             raise ValueError("existing Deep Code project settings must retain all required denied capabilities")
-        return
-    settings_path.parent.mkdir(parents=True, exist_ok=True)
-    settings_path.write_text(json.dumps(PROJECT_SETTINGS, indent=2) + "\n", encoding="utf-8")
+    else:
+        payload = json.loads(json.dumps(PROJECT_SETTINGS))
+        settings_path.parent.mkdir(parents=True, exist_ok=True)
+    if model:
+        payload.setdefault("env", {})["MODEL"] = model
+    if reasoning:
+        payload["reasoningEffort"] = reasoning
+    settings_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> int:
@@ -55,6 +62,8 @@ def main() -> int:
     parser.add_argument("--packet", type=Path, required=True)
     parser.add_argument("--artifact", type=Path, required=True)
     parser.add_argument("--artifact-kind", choices=("decision", "completion"), default="decision")
+    parser.add_argument("--model", choices=("deepseek-v4-flash", "deepseek-v4-pro"))
+    parser.add_argument("--reasoning", choices=("high", "max"))
     parser.add_argument("--outbox", type=Path, required=True)
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--timeout", type=int, default=0, help="Artifact deadline seconds; 0 disables it")
@@ -67,7 +76,7 @@ def main() -> int:
     args = parser.parse_args()
     cwd = args.cwd.resolve()
     try:
-        ensure_project_settings(cwd)
+        ensure_project_settings(cwd, model=args.model, reasoning=args.reasoning)
     except (OSError, ValueError, json.JSONDecodeError) as error:
         print(f"Deep Code project-settings preflight failed: {error}", file=sys.stderr)
         return 2
@@ -92,6 +101,10 @@ def main() -> int:
         "--exit-timeout",
         str(args.exit_timeout),
     ]
+    if args.model:
+        command.extend(("--model", args.model))
+    if args.reasoning:
+        command.extend(("--reasoning", args.reasoning))
     environment = os.environ.copy()
     if args.fixture:
         command.extend(("--fixture", args.fixture))

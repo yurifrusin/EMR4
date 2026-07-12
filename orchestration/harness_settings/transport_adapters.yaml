@@ -1,7 +1,7 @@
 schema_version: ariadne.transport_adapters.v1
 adapters:
   - adapter_id: deepcode_cli
-    resource_ids: [deepseek-flash-verifier, deepseek-flash-workers]
+    resource_ids: [deepseek-flash-verifier, deepseek-flash-workers, deepseek-pro-conductor-fallback]
     platform: deep_code
     invocation: deepcode_prompt_tui
     prompt_entrypoint: deepcode -p <packet>

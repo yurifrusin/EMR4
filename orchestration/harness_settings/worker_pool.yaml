@@ -52,6 +52,19 @@ workers:
     quota_class: primary_subscription
     capabilities: [conductor, architect, code_reviewer]
     cost_tier: 0
+  - resource_id: deepseek-pro-conductor-fallback
+    provider: deepseek
+    account_id: deepseek-api
+    access_mode: api_key
+    transport: cli_interactive
+    transport_quirks: [deepcode_real_tty_required, deepcode_tui_result_artifact_required, shares_deepseek_worker_quota, no_integration_authority]
+    default_model: deepseek-v4-pro
+    default_reasoning: high
+    max_instances: 1
+    quota_scope: api_budget
+    quota_class: low_cost_api
+    capabilities: [conductor, architect, code_reviewer]
+    cost_tier: 1
   - resource_id: antigravity-gemini-flash-3-5-worker
     provider: antigravity
     account_id: antigravity-subscription

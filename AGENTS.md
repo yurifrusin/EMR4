@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | S5 is resumed. D-1 completed its static receptionist workflow audit with no material finding. D-2 was terminated by an incorrectly transplanted 900-second D-1 limit; its outcome is inconclusive, not a worker failure, and it must rerun unchanged without an artifact deadline. Ariadne Operating Model V2 keeps Fable planning/allocation at sprint boundaries and Sol execution/integration inside sprints. Deterministic checks are mandatory; independent LLM verification is risk-triggered. The continuous sprint engine automatically moves from closeout to Fable's next-sprint allocation and back to Sol execution without conversational handback, stopping only for explicit user intervention or a genuine undelegated decision. Accepted artifacts, harness corrections, integrations, and closeouts are committed/pushed regularly with `handoff/current` advanced. Current complete-settings fingerprint is `sha256:62d949e026a4191287b516f90d117ee4138dbd3ee1b2417e8b543a4caefa025d`. D5 and all other recorded runtime gates remain closed. |
-| **Next recommended work** | Rerun unchanged D-2 with the PTY artifact deadline disabled, then run unchanged A-1. Sol closes S5 from evidence and immediately hands the next sprint to Fable under the continuous engine. After S5, run the requested bounded cross-boundary Ariadne contract audit without interrupting the sprint cycle. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
+| **Current active track** | S5 Phase A completed. D-2 reran unchanged without an artifact deadline and confirmed terminal-status reversal behavior; A-1 returned Conditional Go; Fable selected the single pre-authorized B-1 repair to preserve active diary selection across silent refresh. D-1 implemented candidate `934871be`; focused Playwright and JavaScript checks pass, and D-2 cross-review is next. The continuous sprint engine moves from S5 closeout to Fable's next sprint without conversational handback. Conductor fallback order is now Fable, Opus on real Claude limits, DeepSeek 4 Pro via Deep Code while Claude refills, then a distinct GPT Sol subagent; fallbacks have no integration authority. Accepted artifacts and corrections are committed/pushed regularly. Current complete-settings fingerprint is `sha256:5ea2b3522cd6c7238640ad8d251206a64561e3c22d89234a73610063e0d2b77b`. D5 and all other recorded runtime gates remain closed. |
+| **Next recommended work** | Run D-2 cross-review of B-1, integrate on pass, close S5, then automatically invoke the Conductor for the next sprint. The leading product follow-up is the eight known diary smoke-harness failures; the requested bounded Ariadne cross-boundary contract audit must also follow S5 without interrupting the sprint cycle. Dependabot alert 5 remains open through development-only Microsoft toolkit transitive dependencies; do not force overrides. |
 
 S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
 are distinct CLI transports. Deep Code requires a real TTY; non-TTY refusal is
@@ -89,8 +89,9 @@ uses deterministic tests plus diff review; runtime/security/database/deployment/
 release recovery also requires independent verification. See
 `docs/ariadne-orchestrator-recovery-lease.md`.
 Conductor allocation order is now explicit: Claude Fable first; Claude Opus
-only when Fable has usage or availability problems; then a distinct spawned
-GPT Sol subagent with no integration authority. S4d itself used Opus/medium.
+only when Fable has usage or availability problems; DeepSeek 4 Pro through
+Deep Code when the Claude subscription cannot provide either; then a distinct
+spawned GPT Sol subagent. Every fallback has no integration authority. S4d used Opus/medium.
 The protected GPT Sol orchestrator session cannot masquerade as that fallback.
 Direction collaboration is optional and bounded. GPT Sol may propose or defend
 a sprint direction but cannot define the final sprint or allocate workers.
