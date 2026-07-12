@@ -1,0 +1,2 @@
+tests/test_ariadne_deepcode_adapter_settings.py: 30
+tests/test_ariadne_review_acceptance.py: 58
