@@ -95,8 +95,15 @@ function quoteCmd(value) {
   return `"${value.replaceAll('"', '""')}"`;
 }
 
-function liveCommand(packetRelative) {
-  const prompt = `Read and follow ${packetRelative.replaceAll("\\", "/")} exactly.`;
+function liveCommand(packetRelative, artifactRelative) {
+  const packetPath = packetRelative.replaceAll("\\", "/");
+  const artifactPath = artifactRelative.replaceAll("\\", "/");
+  const prompt = [
+    `Read and follow ${packetPath} exactly.`,
+    `Write the final durable artifact to exactly ${artifactPath}.`,
+    "Do not choose, infer, or substitute another artifact filename.",
+    "For a verifier packet, include a canonical DECISION: pass or DECISION: revision_required line.",
+  ].join(" ");
   if (process.platform === "win32") {
     return {
       executable: process.env.ComSpec || "cmd.exe",
@@ -130,7 +137,7 @@ async function main() {
   const baselineEvents = listEvents(outbox);
   const command = options.fixture
     ? fixtureCommand(options.fixture, artifact, outbox)
-    : liveCommand(path.relative(cwd, packet));
+    : liveCommand(path.relative(cwd, packet), path.relative(cwd, artifact));
   const startedAt = new Date();
   let terminalWindow = "";
   let artifactObserved = false;

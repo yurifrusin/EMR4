@@ -61,3 +61,9 @@ Exit status `0` means artifact and mailbox event were observed. Exit status `3`
 means an unexpected permission prompt blocked execution. Exit status `4` means
 the artifact or mailbox completion contract failed. No nonzero result permits
 dispatch continuation or integration.
+
+The adapter is the single source of truth for completion-artifact identity. It
+injects the normalized monitored artifact path into the live Deep Code prompt;
+the model must write exactly that path and must not infer an alternate filename.
+The same resolved path is used for containment checks, artifact validation,
+mailbox completion, and the receipt.

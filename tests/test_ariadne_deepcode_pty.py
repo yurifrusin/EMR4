@@ -8,6 +8,15 @@ import pytest
 from scripts.ariadne_deepcode_pty import ensure_project_settings
 
 
+def test_live_prompt_injects_the_monitored_artifact_path() -> None:
+    runner = Path("orchestration/deepcode_pty/runner.mjs").read_text(encoding="utf-8")
+
+    assert "function liveCommand(packetRelative, artifactRelative)" in runner
+    assert "Write the final durable artifact to exactly ${artifactPath}." in runner
+    assert "Do not choose, infer, or substitute another artifact filename." in runner
+    assert "liveCommand(path.relative(cwd, packet), path.relative(cwd, artifact))" in runner
+
+
 def _run(
     tmp_path: Path, mode: str, timeout: int = 5, exit_timeout: int = 2
 ) -> tuple[subprocess.CompletedProcess[str], dict]:
