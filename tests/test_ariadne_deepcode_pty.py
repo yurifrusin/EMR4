@@ -62,6 +62,13 @@ def test_pty_adapter_accepts_worker_completion_artifact(tmp_path: Path):
     assert receipt["artifact_kind"] == "completion"
 
 
+def test_pty_adapter_allows_disabled_artifact_deadline(tmp_path: Path):
+    result, receipt = _run(tmp_path, "success", timeout=0)
+
+    assert result.returncode == 0
+    assert receipt["artifact_deadline_active"] is False
+
+
 def test_pty_adapter_exits_only_after_artifact_and_observes_mailbox(tmp_path: Path):
     result, receipt = _run(tmp_path, "success")
 

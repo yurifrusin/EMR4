@@ -31,3 +31,19 @@ def test_time_limits_are_inactive_and_progress_is_preferred() -> None:
     assert controls["wall_clock_deadlines"] == "inactive"
     assert controls["prefer_progress_observation_over_elapsed_time"] is True
     assert controls["worker_may_continue_while_progress_is_observable"] is True
+
+
+def test_sprint_engine_cycles_without_conversational_handback() -> None:
+    engine = load("operating_model.yaml")["continuous_sprint_engine"]
+    assert engine["enabled"] is True
+    assert engine["conversational_handback_between_sprints"] is False
+    assert engine["cycle"][0] == "orchestrator_closes_current_sprint"
+    assert "conductor_defines_and_allocates_next_sprint" in engine["cycle"]
+
+
+def test_orchestrator_commits_and_pushes_regular_checkpoints() -> None:
+    checkpoints = load("operating_model.yaml")["integration_checkpoints"]
+    assert checkpoints["owner"] == "orchestrator"
+    assert checkpoints["commit_and_push_regularly"] is True
+    assert checkpoints["advance_handoff_current_after_accepted_checkpoint"] is True
+    assert checkpoints["workers_may_push_master"] is False

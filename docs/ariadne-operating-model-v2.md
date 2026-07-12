@@ -42,3 +42,17 @@ but are inactive in the current profile. Progress observation is preferred to
 elapsed time. A live worker may continue while it is making observable
 progress; intervention is an Orchestrator execution judgment, not a new sprint
 planning event.
+
+## Continuous Sprint Engine
+
+Sprint closeout is not a conversational stopping point. Sol closes the sprint,
+hands planning authority to Fable, reviews the resulting next-sprint plan,
+runs deterministic checks and any risk-triggered independent review, then
+executes. This cycle continues sprint after sprint without asking the user to
+say "continue". It stops only for an explicit user stop or a genuine
+undelegated decision boundary.
+
+Accepted worker artifacts, harness corrections, bounded integrations, and
+sprint closeouts are committed and pushed regularly by Sol, with
+`handoff/current` advanced. Worker agents never push master. Continuous
+execution must not mean an indefinitely dirty integration worktree.

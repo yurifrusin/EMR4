@@ -57,7 +57,7 @@ def main() -> int:
     parser.add_argument("--artifact-kind", choices=("decision", "completion"), default="decision")
     parser.add_argument("--outbox", type=Path, required=True)
     parser.add_argument("--receipt", type=Path, required=True)
-    parser.add_argument("--timeout", type=int, default=180)
+    parser.add_argument("--timeout", type=int, default=0, help="Artifact deadline seconds; 0 disables it")
     parser.add_argument("--exit-timeout", type=int, default=30)
     parser.add_argument(
         "--fixture",

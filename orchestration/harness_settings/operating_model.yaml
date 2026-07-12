@@ -48,3 +48,24 @@ execution_controls:
   stalled_worker_intervention_is_orchestrator_judgment: true
 user_pause:
   only_for: [undelegated_material_product_choice, mandate_expansion, explicit_user_stop, required_human_only_action]
+continuous_sprint_engine:
+  enabled: true
+  cycle:
+    - orchestrator_closes_current_sprint
+    - conductor_defines_and_allocates_next_sprint
+    - orchestrator_reviews_and_optionally_challenges_once
+    - deterministic_plan_checks_run
+    - risk_triggered_verifier_runs_if_needed
+    - orchestrator_executes_and_integrates
+  conversational_handback_between_sprints: false
+  stop_only_for: [user_pause_condition, explicit_user_stop]
+integration_checkpoints:
+  owner: orchestrator
+  commit_and_push_regularly: true
+  advance_handoff_current_after_accepted_checkpoint: true
+  checkpoint_after:
+    - accepted_worker_artifact
+    - verified_harness_correction
+    - integrated_bounded_repair
+    - sprint_closeout
+  workers_may_push_master: false

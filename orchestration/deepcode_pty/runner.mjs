@@ -22,8 +22,8 @@ function parseArgs(argv) {
     if (!options[required]) throw new Error(`--${required} is required`);
   }
   options.timeout = Number(options.timeout || "180");
-  if (!Number.isFinite(options.timeout) || options.timeout <= 0 || options.timeout > 3600) {
-    throw new Error("--timeout must be between 1 and 3600 seconds");
+  if (!Number.isFinite(options.timeout) || options.timeout < 0 || options.timeout > 3600) {
+    throw new Error("--timeout must be 0 (disabled) or between 1 and 3600 seconds");
   }
   options["exit-timeout"] = Number(options["exit-timeout"] || "30");
   if (!Number.isFinite(options["exit-timeout"]) || options["exit-timeout"] < 1 || options["exit-timeout"] > 60) {
@@ -187,7 +187,9 @@ async function main() {
     childExitCode = exitCode;
   });
 
-  const artifactDeadline = Date.now() + options.timeout * 1000;
+  const artifactDeadline = options.timeout === 0
+    ? Number.POSITIVE_INFINITY
+    : Date.now() + options.timeout * 1000;
   let turnCompletionDeadline = null;
   let exitDeadline = null;
   while (true) {
@@ -274,6 +276,7 @@ async function main() {
     packet: path.relative(cwd, packet).replaceAll("\\", "/"),
     artifact: path.relative(cwd, artifact).replaceAll("\\", "/"),
     artifact_kind: options["artifact-kind"],
+    artifact_deadline_active: options.timeout > 0,
     artifact_observed: artifactObserved,
     turn_completion_observed: turnCompletionObserved,
     exit_sent_after_artifact: exitSent,
