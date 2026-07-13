@@ -84,8 +84,7 @@ def validate_envelope_authority(
             combination.
     """
     # 0. Validate envelope type before any action-name resolution
-    envelope_type_lower = envelope_type.lower()
-    if envelope_type_lower not in _SUPPORTED_ENVELOPE_TYPES:
+    if envelope_type not in _SUPPORTED_ENVELOPE_TYPES:
         raise ValueError(
             f"Unsupported envelope type '{envelope_type}'. Supported types: "
             + ", ".join(sorted(_SUPPORTED_ENVELOPE_TYPES))
@@ -129,7 +128,7 @@ def validate_envelope_authority(
     # 3. Determine tier and the envelope-specific author boundary.
     tier = descriptor.tier if descriptor is not None else capability.tier
     allowed_authors = capability.allowed_authors
-    if envelope_type_lower == "confirmation" and tier is BernieCapabilityTier.confirm:
+    if envelope_type == "confirmation" and tier is BernieCapabilityTier.confirm:
         # A registered confirm-tier grammar action remains staff-confirmed even
         # when its adjacent proposal capability permits Bernie authorship.
         allowed_authors = (DiaryActionAuthor.staff_ui,)
@@ -143,21 +142,21 @@ def validate_envelope_authority(
 
     # 4. Validate envelope type against determined tier.
 
-    if envelope_type_lower == "proposal":
+    if envelope_type == "proposal":
         if tier is not BernieCapabilityTier.propose:
             raise ValueError(
                 f"Registered action '{action_name}' (capability '{capability.name}', "
                 f"tier '{tier.value}') is not propose-tier and cannot be used in a "
                 "'proposal' envelope."
             )
-    elif envelope_type_lower == "suggestion":
+    elif envelope_type == "suggestion":
         if tier not in (BernieCapabilityTier.read_only, BernieCapabilityTier.meta):
             raise ValueError(
                 f"Registered action '{action_name}' (capability '{capability.name}', "
                 f"tier '{tier.value}') is not read-only or meta and cannot be used "
                 "in a 'suggestion' envelope."
             )
-    elif envelope_type_lower == "confirmation":
+    elif envelope_type == "confirmation":
         if tier is not BernieCapabilityTier.confirm:
             raise ValueError(
                 f"Registered action '{action_name}' (capability '{capability.name}', "

@@ -644,7 +644,7 @@ _SUPPORTED_ENVELOPE_TYPES = frozenset({"intent", "proposal", "suggestion", "conf
 _UNSUPPORTED_ENVELOPE_TYPES = [
     "",
     "inten",  # misspelled
-    "Proposal",  # correct spelling but wrong case (the function lowers, so this is valid)
+    "Proposal",
     "intention",
     "proposal_v2",
     "suggest",
@@ -665,10 +665,7 @@ _UNSUPPORTED_ENVELOPE_TYPES = [
 @pytest.mark.parametrize("envelope_type", _UNSUPPORTED_ENVELOPE_TYPES)
 def test_unsupported_envelope_type_fails_closed(envelope_type):
     """Any envelope type that is not exactly one of the four supported values
-    (comparison is case-insensitive via .lower()) must raise ValueError before
-    action-name resolution."""
-    if envelope_type.lower() in _SUPPORTED_ENVELOPE_TYPES:
-        pytest.skip(f"'{envelope_type}' lowers to a supported type")
+    must raise ValueError before action-name resolution."""
     with pytest.raises(ValueError, match="Unsupported envelope type"):
         validate_envelope_authority(
             envelope_type=envelope_type,
@@ -826,7 +823,12 @@ class TestDirectCapabilityMatrix:
 # 14. Deterministic matrix — every registered grammar alias
 # ---------------------------------------------------------------------------
 
-from app.services.diary.action_grammar import DIARY_ACTION_GRAMMAR, DiaryActionVerb, action_verb_for_envelope
+from app.services.diary.action_grammar import (
+    DIARY_ACTION_GRAMMAR,
+    _ACTION_NAME_TO_VERB,
+    DiaryActionVerb,
+    action_verb_for_envelope,
+)
 from app.services.diary.capabilities import get_bernie_capability
 
 
@@ -850,6 +852,15 @@ _KNOWN_ALIASES: dict[str, DiaryActionVerb] = {
     "handoff": DiaryActionVerb.handoff,
     "handoff_to_receptionist": DiaryActionVerb.handoff,
 }
+
+
+def test_registered_alias_matrix_covers_the_grammar_source_of_truth():
+    registered_aliases = {
+        alias: verb
+        for alias, verb in _ACTION_NAME_TO_VERB.items()
+        if DIARY_ACTION_GRAMMAR[verb].capability_name is not None
+    }
+    assert _KNOWN_ALIASES == registered_aliases
 
 
 def _build_grammar_alias_matrix() -> list[
