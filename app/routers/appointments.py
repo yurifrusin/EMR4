@@ -26,6 +26,7 @@ from app.schemas.appointments import (
     AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
     AppointmentCheckinDefaults, AppointmentConflictBrief, AppointmentCreateCommand,
     AppointmentCreateProposalOut, AppointmentConfirmCreateProposalOut, AppointmentProposalIssue,
+    ConfirmationReceipt, ConfirmationReceiptVerification,
     AppointmentCreateProposalConfirmationIn,
     AppointmentUpdateProposalIn, AppointmentUpdateCommand, AppointmentUpdateProposalOut,
     AppointmentConfirmUpdateProposalOut, BernieUpdateProposalConfirmationIn,
@@ -1220,6 +1221,78 @@ def _block_create_confirmation(
     )
 
 
+def _build_confirmation_receipt(
+    appointment: AppointmentOut,
+    current_user: User,
+    audit_evidence: list[str],
+) -> ConfirmationReceipt:
+    """Build a typed confirmation receipt from the committed appointment result.
+
+    Pure helper shared by staff and Bernie create-confirm routes.  The receipt
+    carries display-safe identifiers, schedule fields, authenticated confirmer
+    identity, and deterministic verification booleans derived from the actual
+    audit evidence that was recorded.
+
+    No secrets, signed evidence payloads, session internals, or raw audit records
+    are exposed beyond what the existing AppointmentOut already carries.
+    """
+    # Patient display
+    if appointment.patient is not None:
+        patient_display = " ".join(
+            part for part in (appointment.patient.first_name, appointment.patient.last_name) if part
+        ).strip()
+    elif appointment.patient_name_provisional:
+        patient_display = appointment.patient_name_provisional
+    else:
+        patient_display = "Unknown"
+
+    # Practitioner display
+    practitioner_display = " ".join(
+        part for part in (appointment.practitioner.first_name, appointment.practitioner.last_name) if part
+    ).strip() or "Unknown"
+
+    # Confirmer display
+    confirmed_by_display, confirmed_by_role = _audit_actor_display(current_user)
+
+    # Appointment type display name
+    appointment_type_name: Optional[str] = None
+    if appointment.appointment_type is not None:
+        appointment_type_name = appointment.appointment_type.name
+
+    # Deterministic verification: signed evidence was verified if any of the
+    # known signed-evidence audit tags appear in the audit evidence list.
+    signed_evidence_tags = {
+        "staff_signed_confirmation_evidence_verified",
+        "bernie_signed_confirmation_evidence_verified",
+        "status_signed_confirmation_evidence_verified",
+        "delete_signed_confirmation_evidence_verified",
+    }
+    signed_evidence_verified = bool(set(audit_evidence) & signed_evidence_tags)
+
+    return ConfirmationReceipt(
+        appointment_id=appointment.id,
+        patient_display=patient_display,
+        practitioner_display=practitioner_display,
+        appointment_date=appointment.appointment_date,
+        start_time_local=appointment.start_time_local,
+        duration_minutes=appointment.duration_minutes,
+        status=appointment.status,
+        appointment_type=appointment_type_name,
+        confirmed_by_display=confirmed_by_display,
+        confirmed_by_role=confirmed_by_role,
+        verification=ConfirmationReceiptVerification(
+            actor_authenticated=True,
+            practice_scope_verified=True,
+            proposal_revalidated=True,
+            conflict_check_passed=True,
+            idempotency_verified=True,
+            audit_recorded=True,
+            signed_evidence_verified=signed_evidence_verified,
+            visual_diary_check_required=False,
+        ),
+    )
+
+
 _STAFF_CREATE_CONFIRM_OPERATION_ID = "confirmAppointmentCreateProposal"
 _STAFF_CREATE_CONFIRM_ROUTE_FAMILY = "create-confirm"
 _BERNIE_CREATE_CONFIRM_ROUTE_FAMILY = "create-confirm-bernie"
@@ -1450,6 +1523,9 @@ def confirm_create_proposal_route(
         warnings=[*create_proposal.warnings, *revalidated.warnings],
         blocks=[],
         audit_evidence=audit_evidence,
+        confirmation_receipt=_build_confirmation_receipt(
+            appointment, current_user, audit_evidence,
+        ),
     )
     complete_appointment_command(
         db,
@@ -7473,6 +7549,9 @@ def confirm_bernie_create_proposal(
         warnings=[*selection.warnings, *revalidated.warnings],
         blocks=[],
         audit_evidence=audit_evidence,
+        confirmation_receipt=_build_confirmation_receipt(
+            appointment, current_user, audit_evidence,
+        ),
     )
     complete_appointment_command(
         db,

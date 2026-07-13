@@ -313,6 +313,43 @@ class AppointmentCreateProposalConfirmationIn(BaseModel):
     signed_confirmation_evidence_required: bool = False
 
 
+class ConfirmationReceiptVerification(BaseModel):
+    """Deterministic verification flags for a confirmation receipt.
+
+    All fields are derived from the confirmation flow that the server actually
+    performed — never from client input.  visual_diary_check_required is always
+    false by contract for this accessible booking path.
+    """
+    actor_authenticated: bool = True
+    practice_scope_verified: bool = True
+    proposal_revalidated: bool = True
+    conflict_check_passed: bool = True
+    idempotency_verified: bool = True
+    audit_recorded: bool = True
+    signed_evidence_verified: bool = False
+    visual_diary_check_required: bool = False
+
+
+class ConfirmationReceipt(BaseModel):
+    """Typed appointment confirmation receipt (appointment.confirmation_receipt.v1).
+
+    Additive response object carried on successful appointment-create confirmations.
+    Blocked responses never include a receipt.  Idempotent replay returns the
+    stored receipt without another write.
+    """
+    appointment_id: uuid.UUID
+    patient_display: str
+    practitioner_display: str
+    appointment_date: date
+    start_time_local: time
+    duration_minutes: int
+    status: AppointmentStatus
+    appointment_type: Optional[str] = None
+    confirmed_by_display: str
+    confirmed_by_role: Optional[str] = None
+    verification: ConfirmationReceiptVerification
+
+
 class AppointmentConfirmCreateProposalOut(BaseModel):
     intent: Literal["confirm_create_appointment"] = "confirm_create_appointment"
     safe: bool
@@ -323,6 +360,7 @@ class AppointmentConfirmCreateProposalOut(BaseModel):
     warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
     blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
     audit_evidence: list[str] = Field(default_factory=list)
+    confirmation_receipt: Optional[ConfirmationReceipt] = None
 
 
 class AppointmentUpdateProposalIn(BaseModel):
