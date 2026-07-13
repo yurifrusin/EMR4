@@ -15033,3 +15033,10 @@ files, processes, receipts, and mailbox signals. Elapsed time remains advisory
 and cannot independently classify failure. Terminal status parsing now accepts
 harmless Markdown presentation while requiring one unambiguous semantic marker
 near the expected artifact end.
+## S12 DeepCode Ownership Repair
+
+S12 exposed concurrent PTY attempts targeting one artifact and a false Windows
+`process_missing` observation. The runner now acquires an atomic per-artifact
+owner lock before launch, so a second writer fails closed. Windows liveness now
+uses a native limited process handle and exit-code query. Stale locks are never
+silently stolen; external process-absence evidence is required before cleanup.

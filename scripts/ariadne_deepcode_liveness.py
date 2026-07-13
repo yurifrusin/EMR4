@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
 import hashlib
 import json
 import os
@@ -171,6 +172,23 @@ def _git_state(cwd: Path) -> dict[str, Any]:
 
 def _process_state(pid: int) -> dict[str, Any]:
     state: dict[str, Any] = {"pid": pid, "present": False, "activity_available": False}
+    if platform.system() == "Windows":
+        process_query_limited_information = 0x1000
+        still_active = 259
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        handle = kernel32.OpenProcess(process_query_limited_information, False, pid)
+        if not handle:
+            state["observation_error_code"] = ctypes.get_last_error()
+            return state
+        try:
+            exit_code = ctypes.c_ulong()
+            if not kernel32.GetExitCodeProcess(handle, ctypes.byref(exit_code)):
+                state["observation_error_code"] = ctypes.get_last_error()
+                return state
+            state["present"] = exit_code.value == still_active
+            return state
+        finally:
+            kernel32.CloseHandle(handle)
     try:
         os.kill(pid, 0)
         state["present"] = True
@@ -183,8 +201,6 @@ def _process_state(pid: int) -> dict[str, Any]:
         state["observation_error"] = type(error).__name__
 
     if not state["present"]:
-        return state
-    if platform.system() == "Windows":
         return state
     output, returncode = _run_text(["ps", "-p", str(pid), "-o", "stat=,time="], Path.cwd())
     if output and returncode == 0:

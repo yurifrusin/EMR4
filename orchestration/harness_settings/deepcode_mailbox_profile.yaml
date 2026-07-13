@@ -33,6 +33,11 @@ liveness:
   signals: [artifact_state, git_worktree_fingerprint, relevant_file_mtimes, child_process_presence_activity, receipt_mailbox_events]
   elapsed_time_is_advisory_only: true
   automatic_process_termination: false
+  windows_process_probe: native_limited_process_handle
+artifact_ownership:
+  atomic_single_writer_lock: true
+  second_owner_fails_closed: true
+  stale_lock_requires_external_absence_evidence: true
 shared_toolchain:
   integration_worktree_preferred: true
   inject_python_path: true
