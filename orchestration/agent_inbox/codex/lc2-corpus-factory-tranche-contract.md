@@ -1,13 +1,28 @@
 # LC2 Corpus Factory and Independent Adjudication — Tranche Contract
 
-Role: Routine Delegated Executor (Ariadne)
-Resource: `deepseek-pro-routine-coordinator` / high
-Model: `deepseek-v4-pro` / high
-Leverage reason: LC2 freezes the provenance-tier ontology, promotion rules, and
-independent-adjudication framework. Incorrect allocation would contaminate the
-entire corpus pipeline (LC3 evaluator, LC4 holdout, LC5 live-model shadow).
+Active planner and acceptance owner: protected Sol orchestrator/integrator.
+Initial allocation draft: `deepseek-pro-routine-coordinator` /
+`deepseek-v4-pro` / high, adopted and bounded by Sol after Yuri's 2026-07-14
+decision that routine sprint planning stays with Sol. DeepSeek Pro is no longer
+the default routine coordinator.
 Settings fingerprint:
-`sha256:20e82ee5251321c4987158176b29f8c780ba5debc2c515592c320e869be418d5`
+`sha256:0dce975ccb05026a186df59313345590af2552a2364c944606ada9372dc617dd`
+
+## Sol Adoption And Preflight Recovery
+
+The accepted worker allocation remains two DeepSeek Flash implementation lanes
+plus one availability-gated Gemini 3.5 Flash Antigravity peer lane. Sol adopted
+the corrected allocation without a third external planning pass.
+
+During the governance-policy commit, a staging-relative path was used for an
+ignored preflight input stored in the integration worktree. The preflight
+failed to find the file, but the compound PowerShell command continued to the
+already-tested commit. The failure is preserved here. The same runtime evidence
+then passed through absolute paths with the new settings fingerprint above,
+before any product worker dispatch. No product source, provider, route,
+database, historical material, write authority, or protected master changed in
+the failed sequence. Subsequent authority-bearing compound commands must be
+fail-fast.
 
 ## Direction-Dialogue Disposition
 
@@ -622,7 +637,7 @@ receipt must confirm:
 | Worktree cleanliness | Clean (no uncommitted changes, no stale worker artifacts) |
 | HEAD relation to `handoff/current` | Matches or has recorded divergence |
 | Realignment | Executed from target worktree (not integration worktree) |
-| Settings fingerprint | `sha256:20e82ee5251321c4987158176b29f8c780ba5debc2c515592c320e869be418d5` |
+| Settings fingerprint | `sha256:0dce975ccb05026a186df59313345590af2552a2364c944606ada9372dc617dd` |
 | Preflight decision | `passed` |
 
 The receipt is required at: new-session, post-compaction, pre-plan, and
