@@ -14974,3 +14974,13 @@ does not resolve the new isolation conflict. Replanning the harness onto a
 test-only surface or changing the runtime-isolation boundary requires Sol.
 W2 was not dispatched, no candidate code was integrated, and S11/S12 remain
 unopened. See `orchestration/agent_inbox/codex/review-terra-s10-w1-acceptance.md`.
+
+---
+
+## S10 V2 W1 Acceptance
+
+Sol preserved the runtime-isolation boundary and DeepSeek Pro reallocated W1 to
+the test-only `tests/workflow_chain/` surface. Terra accepted and integrated
+candidate `520e21de` as `71f3b0d7`: it has no `app/` changes, leaves protected
+isolation files untouched, and adds zero failures beyond the existing documented
+`app/config.py` baseline. W2 remains allocated for adversarial review only.
