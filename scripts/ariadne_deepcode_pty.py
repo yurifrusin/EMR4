@@ -58,9 +58,28 @@ def ensure_project_settings(
 
 
 def shared_toolchain() -> tuple[Path | None, Path | None]:
+    worktree_roots = [REPO_ROOT]
+    try:
+        worktrees = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "worktree", "list", "--porcelain"],
+            capture_output=True,
+            check=False,
+            text=True,
+        )
+    except OSError:
+        worktrees = None
+    if worktrees and worktrees.returncode == 0:
+        for block in worktrees.stdout.split("\n\n"):
+            lines = block.splitlines()
+            if "branch refs/heads/master" not in lines:
+                continue
+            worktree = next((line.removeprefix("worktree ") for line in lines if line.startswith("worktree ")), None)
+            if worktree:
+                worktree_roots.append(Path(worktree))
     python_candidates = [
-        REPO_ROOT / ".venv" / "Scripts" / "python.exe",
-        REPO_ROOT / ".venv" / "bin" / "python",
+        candidate
+        for root in worktree_roots
+        for candidate in (root / ".venv" / "Scripts" / "python.exe", root / ".venv" / "bin" / "python")
     ]
     python = next((candidate.resolve() for candidate in python_candidates if candidate.is_file()), None)
     node_value = shutil.which("node")
