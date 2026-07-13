@@ -14,7 +14,7 @@ worker_mix:
     minimum_instances: 1
     maximum_instances: 3
     use_when: [bounded_implementation, test_engineering, security_review, code_review, documentation_handover]
-    lane_rule: each_lane_requires_distinct_packet_ownership_verification_and_deepcode_artifact
+    lane_rule: each_lane_requires_distinct_ownership_and_local_structured_receipt; candidate_commit_is_primary_completion_artifact
 planning_inputs:
   - optional_orchestrator_direction_proposal
   - optional_conductor_orchestrator_direction_dialogue

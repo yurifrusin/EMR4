@@ -144,14 +144,20 @@ class TestWorkerPoolDeepCodeContract:
 
     @property
     def _deepcode_resources(self) -> list[dict]:
+        resource_ids = {
+            "deepseek-flash-verifier",
+            "deepseek-flash-workers",
+            "deepseek-pro-conductor-fallback",
+            "deepseek-pro-routine-executor",
+        }
         return [
             w
             for w in self.POOL["workers"]
-            if w.get("transport") == "cli_interactive"
+            if w.get("resource_id") in resource_ids
         ]
 
-    def test_three_deepcode_resources_defined(self):
-        assert len(self._deepcode_resources) == 3
+    def test_four_deepseek_resources_defined(self):
+        assert len(self._deepcode_resources) == 4
 
     def test_resource_ids_match_expected(self):
         ids = sorted(r["resource_id"] for r in self._deepcode_resources)
@@ -159,27 +165,31 @@ class TestWorkerPoolDeepCodeContract:
             "deepseek-flash-verifier",
             "deepseek-flash-workers",
             "deepseek-pro-conductor-fallback",
+            "deepseek-pro-routine-executor",
         ]
 
-    def test_all_deepcode_resources_require_real_tty(self):
+    def test_all_deepseek_resources_prefer_headless_bare_mode(self):
         for resource in self._deepcode_resources:
+            assert resource["transport"] == "cli_headless"
             quirks = resource.get("transport_quirks", [])
-            assert "deepcode_real_tty_required" in quirks, (
-                f"{resource['resource_id']} missing real-tty quirk"
+            assert "claude_code_bare_mode_required" in quirks, (
+                f"{resource['resource_id']} missing bare-mode quirk"
             )
 
-    def test_all_deepcode_resources_require_durable_artifact(self):
+    def test_all_deepseek_resources_retain_deepcode_fallback(self):
         for resource in self._deepcode_resources:
             quirks = resource.get("transport_quirks", [])
-            assert "deepcode_tui_result_artifact_required" in quirks, (
-                f"{resource['resource_id']} missing artifact quirk"
+            assert "deepcode_tui_fallback_available" in quirks, (
+                f"{resource['resource_id']} missing DeepCode fallback"
             )
 
     def test_all_deepcode_resources_default_model_is_flash(self):
         """Verifier and worker resources default to Flash; the Pro conductor
         fallback defaults to deepseek-v4-pro."""
         for resource in self._deepcode_resources:
-            if resource["resource_id"] == "deepseek-pro-conductor-fallback":
+            if resource["resource_id"] in {
+                "deepseek-pro-conductor-fallback", "deepseek-pro-routine-executor"
+            }:
                 assert resource["default_model"] == "deepseek-v4-pro", (
                     f"{resource['resource_id']} defaults to "
                     f"{resource['default_model']}, expected deepseek-v4-pro"
@@ -200,7 +210,7 @@ class TestWorkerPoolDeepCodeContract:
                 fb = r
                 break
         assert fb is not None
-        assert fb["transport"] == "cli_interactive"
+        assert fb["transport"] == "cli_headless"
         assert fb["default_model"] == "deepseek-v4-pro"
         assert fb["max_instances"] == 1
         quirks = fb.get("transport_quirks", [])
@@ -230,23 +240,21 @@ class TestWorkerPoolDeepCodeContract:
         """Flash-role resources (verifier and workers) must not default to
         deepseek-v4-pro. The Pro conductor fallback is intentionally Pro."""
         for resource in self._deepcode_resources:
-            if resource["resource_id"] == "deepseek-pro-conductor-fallback":
+            if resource["resource_id"] in {
+                "deepseek-pro-conductor-fallback", "deepseek-pro-routine-executor"
+            }:
                 continue
             assert resource["default_model"] != "deepseek-v4-pro", (
                 f"{resource['resource_id']} must not default to pro"
             )
 
-    def test_verifier_and_conductor_fallback_do_not_have_separate_packet_quirk(self):
-        """Only the worker lane requires a separate packet per lane."""
+    def test_worker_lane_requires_compact_local_receipt(self):
         for resource in self._deepcode_resources:
             quirks = resource.get("transport_quirks", [])
             if resource["resource_id"] == "deepseek-flash-workers":
-                assert "separate_worker_packet_required" in quirks
+                assert "compact_local_receipt_required" in quirks
             else:
-                assert "separate_worker_packet_required" not in quirks, (
-                    f"{resource['resource_id']} must not have "
-                    f"separate_worker_packet_required"
-                )
+                assert "compact_local_receipt_required" not in quirks
 
 
 # ---------------------------------------------------------------------------
@@ -280,6 +288,7 @@ class TestTransportAdapterDeepCodeContract:
             "deepseek-flash-verifier",
             "deepseek-flash-workers",
             "deepseek-pro-conductor-fallback",
+            "deepseek-pro-routine-executor",
         ]
 
     def test_adapter_prompt_entrypoint_matches_profile(self):

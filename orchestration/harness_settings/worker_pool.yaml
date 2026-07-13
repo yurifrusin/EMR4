@@ -44,7 +44,7 @@ workers:
     account_id: claude-subscription
     access_mode: subscription
     transport: cli_print
-    transport_quirks: [quota_is_observed_separately]
+    transport_quirks: [quota_is_observed_separately, subscription_cancelled_after_2026_07_13, require_live_availability_probe]
     default_model: fable
     default_reasoning: high
     max_instances: 1
@@ -57,7 +57,7 @@ workers:
     account_id: claude-subscription
     access_mode: subscription
     transport: cli_print
-    transport_quirks: [shares_claude_subscription_window, quota_is_observed_separately]
+    transport_quirks: [shares_claude_subscription_window, quota_is_observed_separately, subscription_cancelled_after_2026_07_13, require_live_availability_probe]
     default_model: opus
     default_reasoning: medium
     max_instances: 1
@@ -82,14 +82,27 @@ workers:
     provider: deepseek
     account_id: deepseek-api
     access_mode: api_key
-    transport: cli_interactive
-    transport_quirks: [deepcode_real_tty_required, deepcode_tui_result_artifact_required, shares_deepseek_worker_quota, no_integration_authority, permission_prompts_are_not_authority]
+    transport: cli_headless
+    transport_quirks: [claude_code_bare_mode_required, deepcode_tui_fallback_available, shares_deepseek_worker_quota, no_integration_authority, permission_prompts_are_not_authority]
     default_model: deepseek-v4-pro
     default_reasoning: high
     max_instances: 1
     quota_scope: api_budget
     quota_class: low_cost_api
     capabilities: [conductor, architect, code_reviewer]
+    cost_tier: 1
+  - resource_id: deepseek-pro-routine-executor
+    provider: deepseek
+    account_id: deepseek-api
+    access_mode: api_key
+    transport: cli_headless
+    transport_quirks: [claude_code_bare_mode_required, deepcode_tui_fallback_available, no_protected_master_authority, staging_integration_only, permission_prompts_are_not_authority]
+    default_model: deepseek-v4-pro
+    default_reasoning: high
+    max_instances: 1
+    quota_scope: api_budget
+    quota_class: low_cost_api
+    capabilities: [implementer, test_engineer, code_reviewer, docs_handover_auditor]
     cost_tier: 1
   - resource_id: antigravity-gemini-flash-3-5-worker
     provider: antigravity
@@ -108,8 +121,8 @@ workers:
     provider: deepseek
     account_id: deepseek-api
     access_mode: api_key
-    transport: cli_interactive
-    transport_quirks: [deepcode_real_tty_required, deepcode_tui_result_artifact_required, permission_prompts_are_not_authority]
+    transport: cli_headless
+    transport_quirks: [claude_code_bare_mode_required, deepcode_tui_fallback_available, permission_prompts_are_not_authority]
     default_model: deepseek-v4-flash
     default_reasoning: high
     max_instances: 3
@@ -121,8 +134,8 @@ workers:
     provider: deepseek
     account_id: deepseek-api
     access_mode: api_key
-    transport: cli_interactive
-    transport_quirks: [deepcode_real_tty_required, deepcode_tui_result_artifact_required, separate_worker_packet_required, permission_prompts_are_not_authority]
+    transport: cli_headless
+    transport_quirks: [claude_code_bare_mode_required, deepcode_tui_fallback_available, compact_local_receipt_required, permission_prompts_are_not_authority]
     default_model: deepseek-v4-flash
     default_reasoning: high
     max_instances: 3

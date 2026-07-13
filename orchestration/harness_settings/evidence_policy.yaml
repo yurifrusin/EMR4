@@ -1,0 +1,21 @@
+schema_version: ariadne.evidence_policy.v1
+default_mode: compact_tranche_ledger
+routine_committed_artifacts:
+  - tranche_contract
+  - tranche_integration_manifest
+  - tranche_closeout
+local_ignored_artifacts:
+  - worker_packet
+  - worker_receipt
+  - terminal_transcript
+  - liveness_observation
+commit_exception_evidence_only_when:
+  - worker_result_is_rejected_or_materially_corrected
+  - lifecycle_failure_requires_diagnosis
+  - security_or_authority_boundary_is_disputed
+  - user_requests_durable_detail
+worker_completion_source_of_truth: candidate_commit_plus_structured_local_receipt
+integration_manifest_frequency: once_per_tranche
+acceptance_review_frequency: exception_only
+agents_handover_update_frequency: tranche_closeout
+duplicate_full_suite_policy: incremental_per_sprint_full_once_at_tranche_closeout

@@ -90,7 +90,20 @@ def test_rehydration_gate_pauses_for_missing_or_uncertain_state(
 
 def test_portable_core_has_no_emr4_runtime_or_os_specific_dependency():
     core_root = Path(__file__).resolve().parents[1] / "orchestration_harness"
-    source = "\n".join(path.read_text(encoding="utf-8") for path in core_root.glob("*.py"))
+    # Host-facing adapters such as review_acceptance may invoke local tools;
+    # the schema and decision core must remain portable and provider-free.
+    portable_modules = {
+        "allocation.py",
+        "allocator.py",
+        "models.py",
+        "orchestrator_preflight.py",
+        "rehydration.py",
+        "settings_fingerprint.py",
+    }
+    source = "\n".join(
+        (core_root / name).read_text(encoding="utf-8")
+        for name in sorted(portable_modules)
+    )
 
     assert "import app" not in source
     assert "from app" not in source

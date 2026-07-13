@@ -34,10 +34,11 @@ def test_worker_pool_is_strict_and_declares_transport_separately_from_capability
         "openai-primary-orchestrator", "claude-fable-conductor", "claude-opus-conductor",
         "gpt-sol-conductor-fallback",
         "deepseek-pro-conductor-fallback",
+        "deepseek-pro-routine-executor",
         "openai-terra-tranche-executor", "openai-luna-mechanical-coordinator",
         "antigravity-gemini-flash-3-5-worker", "deepseek-flash-verifier", "deepseek-flash-workers",
     }
-    assert any(worker.transport.value == "cli_interactive" for worker in workers)
+    assert any(worker.transport.value == "cli_headless" for worker in workers)
     assert Role.CONDUCTOR in next(worker.capabilities for worker in workers if worker.resource_id == "claude-fable-conductor")
 
 
@@ -78,12 +79,15 @@ def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
     assert "workspace_receipts" in policy["required_plan_fields"]
 
 
-def test_transport_adapters_record_deepcode_as_a_cli_transport_with_bounded_model_profile():
+def test_transport_adapters_record_headless_primary_and_deepcode_fallback():
     adapters = _yaml("transport_adapters.yaml")
+    headless = next(item for item in adapters["adapters"] if item["adapter_id"] == "deepseek_via_claude_code_bare")
     deepseek = next(item for item in adapters["adapters"] if item["adapter_id"] == "deepcode_cli")
     profile = _yaml("deepcode_model_profile.yaml")
 
     assert adapters["schema_version"] == "ariadne.transport_adapters.v1"
+    assert headless["invocation"] == "claude_print_bare_deepseek_api"
+    assert "deepseek_claude_cli_observation" in headless["allowed_probe_methods"]
     assert deepseek["invocation"] == "deepcode_prompt_tui"
     assert deepseek["shell_probe_applicable"] is True
     assert "deepcode_cli_observation" in deepseek["allowed_probe_methods"]
