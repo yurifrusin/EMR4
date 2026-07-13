@@ -1,5 +1,6 @@
 import json
 import sys
+from copy import deepcopy
 from pathlib import Path
 import pytest
 
@@ -269,6 +270,34 @@ def test_http_200_blocked_body(diary_page):
     assert "This slot was booked by another practitioner in the last 2 seconds." in error_msg.text_content()
 
     # Assert no confirmed state (reset/success badges are not rendered, confirm button is still enabled)
+    assert diary_page.locator("[data-testid='bernie-receipt-group']").count() == 0
+    assert diary_page.locator("[data-testid='bernie-review-reset-button']").count() == 0
+    assert confirm_btn.is_enabled()
+
+
+def test_http_200_incomplete_receipt_cannot_claim_success(diary_page):
+    """A nominal success body must fail closed when core receipt checks are absent."""
+    incomplete = deepcopy(MOCK_SUCCESS_RECEIPT_RESPONSE)
+    incomplete["confirmation_receipt"]["verification"]["audit_recorded"] = False
+    diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+    diary_page.route(
+        "**/api/v1/appointments/proposals/create/confirm-bernie",
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/json",
+            body=json.dumps(incomplete),
+        ),
+    )
+
+    diary_page.evaluate(
+        "(payload) => { isBerniePilotActive = true; renderBernieReview(payload); }",
+        MOCK_PROPOSAL_PAYLOAD,
+    )
+    confirm_btn = diary_page.locator("#btn-bernie-confirm")
+    confirm_btn.click()
+
+    error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
+    error_msg.wait_for(state="visible", timeout=5000)
     assert diary_page.locator("[data-testid='bernie-receipt-group']").count() == 0
     assert diary_page.locator("[data-testid='bernie-review-reset-button']").count() == 0
     assert confirm_btn.is_enabled()
