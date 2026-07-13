@@ -19,10 +19,13 @@ manifest preparation are stopped. This is an explicit trigger in
 3. Attempt 2 wrote an artifact but its foreground supervisor was interrupted
    before a PTY receipt. The artifact is preserved as ignored
    `s12-w1-attempt2-artifact-no-receipt.md` and is not accepted.
-4. A same-lane correction packet was issued. Attempt 3, supervisor `90484`,
-   again exited before artifact or receipt. The liveness observer recorded
-   `process_missing`; its bounded terminal transcript is preserved at
-   `local_data/ariadne-harness/s12-w1-attempt3-outbox/s12-w1-attempt3-terminal-final.jsonl`.
+4. A same-lane correction packet was issued. The liveness observer reported
+   `process_missing` for attempt 3 even though later direct process inspection
+   found supervisor `90484`, command shell `52136`, CLI `29724`, and ConPTY
+   child `32536` still alive with no artifact or receipt. The observer
+   misclassification is additional lifecycle evidence. The transcript remained
+   unchanged; the attempt-three tree was then terminated only after its final
+   transcript was preserved. No attempt-three artifact or receipt exists.
 
 ## Current safety posture
 
