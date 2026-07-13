@@ -1,7 +1,7 @@
 schema_version: ariadne.transport_adapters.v1
 adapters:
   - adapter_id: deepseek_via_claude_code_bare
-    resource_ids: [deepseek-flash-verifier, deepseek-flash-workers, deepseek-pro-conductor-fallback, deepseek-pro-routine-executor]
+    resource_ids: [deepseek-flash-verifier, deepseek-flash-workers, deepseek-pro-conductor-fallback, deepseek-pro-routine-coordinator]
     platform: claude_code
     invocation: claude_print_bare_deepseek_api
     prompt_entrypoint: python scripts/ariadne_deepseek_claude.py
@@ -9,7 +9,7 @@ adapters:
     shell_probe_applicable: true
     authority_boundary: headless_cli_transport_only_no_integration_authority
   - adapter_id: deepcode_cli
-    resource_ids: [deepseek-flash-verifier, deepseek-flash-workers, deepseek-pro-conductor-fallback, deepseek-pro-routine-executor]
+    resource_ids: [deepseek-flash-verifier, deepseek-flash-workers, deepseek-pro-conductor-fallback, deepseek-pro-routine-coordinator]
     platform: deep_code
     invocation: deepcode_prompt_tui
     prompt_entrypoint: deepcode -p <packet>
@@ -26,10 +26,11 @@ adapters:
   - adapter_id: antigravity_cli_print
     resource_ids: [antigravity-gemini-flash-3-5-worker]
     platform: antigravity
-    invocation: agy_print_cli
+    invocation: antigravity_new_project_bound_worktree
+    prompt_entrypoint: python scripts/ariadne_antigravity.py
     allowed_probe_methods: [synthetic_fixture, agy_cli_observation]
     shell_probe_applicable: true
-    authority_boundary: transport_only_no_integration_authority
+    authority_boundary: bound_worktree_transport_only_no_integration_authority
   - adapter_id: codex_primary_session
     resource_ids: [openai-primary-orchestrator]
     platform: codex_desktop

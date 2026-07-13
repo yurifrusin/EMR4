@@ -148,7 +148,7 @@ class TestWorkerPoolDeepCodeContract:
             "deepseek-flash-verifier",
             "deepseek-flash-workers",
             "deepseek-pro-conductor-fallback",
-            "deepseek-pro-routine-executor",
+            "deepseek-pro-routine-coordinator",
         }
         return [
             w
@@ -165,7 +165,7 @@ class TestWorkerPoolDeepCodeContract:
             "deepseek-flash-verifier",
             "deepseek-flash-workers",
             "deepseek-pro-conductor-fallback",
-            "deepseek-pro-routine-executor",
+            "deepseek-pro-routine-coordinator",
         ]
 
     def test_all_deepseek_resources_prefer_headless_bare_mode(self):
@@ -188,7 +188,7 @@ class TestWorkerPoolDeepCodeContract:
         fallback defaults to deepseek-v4-pro."""
         for resource in self._deepcode_resources:
             if resource["resource_id"] in {
-                "deepseek-pro-conductor-fallback", "deepseek-pro-routine-executor"
+                "deepseek-pro-conductor-fallback", "deepseek-pro-routine-coordinator"
             }:
                 assert resource["default_model"] == "deepseek-v4-pro", (
                     f"{resource['resource_id']} defaults to "
@@ -241,7 +241,7 @@ class TestWorkerPoolDeepCodeContract:
         deepseek-v4-pro. The Pro conductor fallback is intentionally Pro."""
         for resource in self._deepcode_resources:
             if resource["resource_id"] in {
-                "deepseek-pro-conductor-fallback", "deepseek-pro-routine-executor"
+                "deepseek-pro-conductor-fallback", "deepseek-pro-routine-coordinator"
             }:
                 continue
             assert resource["default_model"] != "deepseek-v4-pro", (
@@ -288,7 +288,7 @@ class TestTransportAdapterDeepCodeContract:
             "deepseek-flash-verifier",
             "deepseek-flash-workers",
             "deepseek-pro-conductor-fallback",
-            "deepseek-pro-routine-executor",
+            "deepseek-pro-routine-coordinator",
         ]
 
     def test_adapter_prompt_entrypoint_matches_profile(self):

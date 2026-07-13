@@ -1,0 +1,26 @@
+schema_version: ariadne.deepseek_cost_calibration.v1
+calibrations:
+  - calibration_id: deepseek-v4-pro-claude-bare-s16-s18
+    model: deepseek-v4-pro
+    transport: claude_code_bare_deepseek
+    reasoning: high
+    sample_count: 1
+    confidence: provisional_single_sample_similar_token_mix_only
+    adapter_estimate_usd: 2.905994
+    provider_billed_usd:
+      low: 0.06
+      midpoint: 0.07
+      high: 0.08
+      source: user_reported_deepseek_usage_page
+    actual_from_adapter_multiplier:
+      low: 0.02064698
+      midpoint: 0.024088143
+      high: 0.027529307
+    adapter_estimate_divisor:
+      low: 36.324925
+      midpoint: 41.5142
+      high: 48.433233
+    restrictions:
+      - do_not_apply_to_deepseek_v4_flash
+      - do_not_treat_as_authoritative_billing
+      - refine_with_per_run_provider_usage_deltas

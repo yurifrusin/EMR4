@@ -91,7 +91,7 @@ workers:
     quota_class: low_cost_api
     capabilities: [conductor, architect, code_reviewer]
     cost_tier: 1
-  - resource_id: deepseek-pro-routine-executor
+  - resource_id: deepseek-pro-routine-coordinator
     provider: deepseek
     account_id: deepseek-api
     access_mode: api_key
@@ -102,14 +102,14 @@ workers:
     max_instances: 1
     quota_scope: api_budget
     quota_class: low_cost_api
-    capabilities: [implementer, test_engineer, code_reviewer, docs_handover_auditor]
+    capabilities: [conductor, architect, test_engineer, code_reviewer, docs_handover_auditor]
     cost_tier: 1
   - resource_id: antigravity-gemini-flash-3-5-worker
     provider: antigravity
     account_id: antigravity-subscription
     access_mode: subscription
     transport: cli_print
-    transport_quirks: [cli_artifact_required, quota_is_observed_separately]
+    transport_quirks: [fresh_project_required, exact_worktree_add_dir_required, protected_branch_refusal, os_sandbox_optional_may_prompt_for_windows_elevation, cli_artifact_required, quota_is_observed_separately]
     default_model: gemini-flash-3.5
     default_reasoning: medium
     max_instances: 1

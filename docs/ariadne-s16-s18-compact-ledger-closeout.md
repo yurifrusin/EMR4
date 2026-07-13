@@ -18,7 +18,9 @@ No route, provider, database, UI, deployment, or write authority changed.
 ## Process Result
 
 - DeepSeek V4 Pro/high implemented and tested the candidate through Claude Code
-  bare mode. Reported API cost: US$2.906; 79,602 input, 24,466 output, and
+  bare mode. Claude Code estimated US$2.906 using its own pricing model; this is
+  not DeepSeek billing. Yuri's DeepSeek usage page showed an actual charge of
+  approximately US$0.06-0.08. The receipt recorded 79,602 input, 24,466 output, and
   3,774,208 cached-read tokens. Its commit followed about 11.6 minutes after
   process start.
 - Sol found two acceptance gaps: case normalization contradicted the contract,
@@ -47,6 +49,6 @@ manifests used in S13-S15.
 
 The process was substantially less document-heavy, but not yet operationally
 smooth: Sol correction remained necessary, and Antigravity requires explicit
-new-project binding. DeepSeek Pro was effective but costlier than expected for
-this small tranche, so future packets should reduce broad reads and test-output
-verbosity while preserving bare mode.
+new-project binding. DeepSeek Pro was economically effective, but future work
+uses Pro for planning/coordination and Flash for coding legwork. Packets should
+still reduce broad reads and test-output verbosity while preserving bare mode.

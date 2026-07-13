@@ -4,6 +4,7 @@ current_profile:
   accounting_mode: subscription_usage_window
   monetary_budget_enforcement: inactive
   estimated_cost_reporting: advisory_only
+  deepseek_adapter_estimate_calibration: deepseek_cost_calibration.yaml
   pass_cli_max_budget_usd: false
 activation:
   requires_explicit_user_override: true

@@ -100,7 +100,10 @@ def run_worker(
         "effort": effort,
         "result": payload.get("result", ""),
         "usage": payload.get("usage", {}),
-        "total_cost_usd": payload.get("total_cost_usd"),
+        "adapter_cost_estimate_usd": payload.get("total_cost_usd"),
+        "adapter_cost_estimate_authoritative": False,
+        "authoritative_billing_source": "deepseek_provider_usage",
+        "provider_billed_cost_usd": None,
         "permission_denials": payload.get("permission_denials", []),
         "terminal_reason": payload.get("terminal_reason"),
     }

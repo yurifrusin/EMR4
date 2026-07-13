@@ -77,7 +77,12 @@ def test_run_worker_writes_compact_receipt_without_session_id_or_raw_stderr(
 
     assert receipt["status"] == "completed"
     assert receipt["result"] == "done"
+    assert receipt["adapter_cost_estimate_usd"] == 0.001
+    assert receipt["adapter_cost_estimate_authoritative"] is False
+    assert receipt["authoritative_billing_source"] == "deepseek_provider_usage"
+    assert receipt["provider_billed_cost_usd"] is None
     rendered = output.read_text(encoding="utf-8")
+    assert '"total_cost_usd"' not in rendered
     assert "session_id" not in rendered
     assert "sensitive terminal detail" not in rendered
 
@@ -118,3 +123,26 @@ def test_economical_pool_keeps_gemini_as_a_peer_worker():
     assert economical["worker_allocation_rule"].startswith(
         "allocate_only_distinct_bounded_surfaces"
     )
+    assert economical["preferred_routine_coordinator"] == (
+        "deepseek-pro-routine-coordinator"
+    )
+    assert economical["preferred_coding_worker"] == "deepseek-flash-workers"
+
+
+def test_deepseek_pro_cost_calibration_is_provisional_and_model_specific():
+    calibration_path = (
+        Path(__file__).resolve().parents[1]
+        / "orchestration"
+        / "harness_settings"
+        / "deepseek_cost_calibration.yaml"
+    )
+    payload = yaml.safe_load(calibration_path.read_text(encoding="utf-8"))
+    calibration = payload["calibrations"][0]
+
+    assert calibration["adapter_estimate_usd"] == pytest.approx(2.905994)
+    assert calibration["actual_from_adapter_multiplier"]["midpoint"] == pytest.approx(
+        0.024088143
+    )
+    assert calibration["provider_billed_usd"]["low"] == pytest.approx(0.06)
+    assert calibration["provider_billed_usd"]["high"] == pytest.approx(0.08)
+    assert "do_not_apply_to_deepseek_v4_flash" in calibration["restrictions"]
