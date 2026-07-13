@@ -85,3 +85,141 @@ def test_evidence_writer_emits_only_redacted_contract(tmp_path):
 
     assert payload == result.evidence_record
     assert "raw internal evidence" not in path.read_text(encoding="utf-8")
+
+
+# ─── external_appointment loader validation ───────────────────────────────
+
+
+def test_loader_accepts_external_appointment_create(tmp_path):
+    scenario = load_scenario_yaml(_write(tmp_path, """
+id: ext-create
+category: booking_create
+reference_date: 2026-07-13
+initial_state: {}
+turns:
+  - action: external_appointment
+    input:
+      operation: create
+      patient: Margaret Thompson
+      practitioner: Dr Shera
+      date: "2026-07-14"
+      time: "15:00"
+      duration_minutes: 30
+      status: Booked
+      id: ext-appt
+    expect:
+      appointment_delta: 0
+      audit_delta: 0
+"""))
+    turn = scenario.turns[0]
+    assert turn.action == "external_appointment"
+    assert turn.input["operation"] == "create"
+    assert turn.input["id"] == "ext-appt"
+
+
+def test_loader_accepts_external_appointment_set_status(tmp_path):
+    scenario = load_scenario_yaml(_write(tmp_path, """
+id: ext-set-status
+category: booking_create
+reference_date: 2026-07-13
+initial_state: {}
+turns:
+  - action: external_appointment
+    input:
+      operation: set_status
+      appointment_id: existing
+      status: Cancelled
+    expect:
+      appointment_delta: 0
+      audit_delta: 0
+"""))
+    turn = scenario.turns[0]
+    assert turn.action == "external_appointment"
+    assert turn.input["operation"] == "set_status"
+    assert turn.input["appointment_id"] == "existing"
+
+
+@pytest.mark.parametrize("bad_op", ["delete", "update", "patch", ""])
+def test_loader_rejects_unknown_external_operation(tmp_path, bad_op):
+    with pytest.raises(ValueError, match="operation"):
+        load_scenario_yaml(_write(tmp_path, f"""
+id: bad-ext-op
+category: booking_create
+reference_date: 2026-07-13
+initial_state: {{}}
+turns:
+  - action: external_appointment
+    input:
+      operation: {bad_op!r}
+      date: "2026-07-14"
+      time: "15:00"
+    expect: {{}}
+"""))
+
+
+def test_loader_rejects_external_create_missing_date(tmp_path):
+    with pytest.raises(ValueError, match="date"):
+        load_scenario_yaml(_write(tmp_path, """
+id: ext-no-date
+category: booking_create
+reference_date: 2026-07-13
+initial_state: {}
+turns:
+  - action: external_appointment
+    input:
+      operation: create
+      time: "15:00"
+    expect: {}
+"""))
+
+
+def test_loader_rejects_external_set_status_missing_appointment_id(tmp_path):
+    with pytest.raises(ValueError, match="appointment_id"):
+        load_scenario_yaml(_write(tmp_path, """
+id: ext-no-aid
+category: booking_create
+reference_date: 2026-07-13
+initial_state: {}
+turns:
+  - action: external_appointment
+    input:
+      operation: set_status
+      status: Cancelled
+    expect: {}
+"""))
+
+
+def test_loader_rejects_external_unsupported_fields(tmp_path):
+    with pytest.raises(ValueError, match="unsupported"):
+        load_scenario_yaml(_write(tmp_path, """
+id: ext-unsupported
+category: booking_create
+reference_date: 2026-07-13
+initial_state: {}
+turns:
+  - action: external_appointment
+    input:
+      operation: create
+      date: "2026-07-14"
+      time: "15:00"
+      arbitrary_field: true
+    expect: {}
+"""))
+
+
+def test_loader_rejects_external_create_zero_duration(tmp_path):
+    with pytest.raises(ValueError, match="duration_minutes"):
+        load_scenario_yaml(_write(tmp_path, """
+id: ext-zero-dur
+category: booking_create
+reference_date: 2026-07-13
+initial_state: {}
+turns:
+  - action: external_appointment
+    input:
+      operation: create
+      date: "2026-07-14"
+      time: "15:00"
+      duration_minutes: 0
+    expect: {}
+"""))

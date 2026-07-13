@@ -57,7 +57,8 @@ KNOWN_OUTCOMES = frozenset({
 })
 
 KNOWN_ACTIONS = frozenset({
-    "normalize", "search", "select", "supervise", "confirm", "interpret"
+    "normalize", "search", "select", "supervise", "confirm", "interpret",
+    "external_appointment",
 })
 
 

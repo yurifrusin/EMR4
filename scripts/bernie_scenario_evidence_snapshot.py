@@ -71,7 +71,7 @@ def build_evidence_snapshot(fixture_dir: Path = DEFAULT_FIXTURE_DIR) -> dict[str
         "interpret_fixture_count": interpret_count,
         "harness_demo_fixture_count": harness_demo_count,
         "non_interpret_fixture_count": non_interpret_count,
-        "fixtures_since_last_backend_pass": 6,
+        "fixtures_since_last_backend_pass": 10,
         "last_backend_pass_refreshed_on": "2026-07-07",
         "fake_provider_evidence": True,
         "route_level_backend_evidence": True,
@@ -95,11 +95,11 @@ def assert_evidence_snapshot_safety(snapshot: dict[str, Any]) -> None:
     assert snapshot["schema_version"] == SNAPSHOT_SCHEMA_VERSION
     assert snapshot["source"] == SOURCE
     assert snapshot["evidence_type"] == EVIDENCE_TYPE
-    assert snapshot["scenario_yaml_fixture_count"] >= 50
+    assert snapshot["scenario_yaml_fixture_count"] >= 56
     assert snapshot["interpret_fixture_count"] >= 31
     assert snapshot["harness_demo_fixture_count"] == 2
-    assert snapshot["non_interpret_fixture_count"] >= 17
-    assert snapshot["fixtures_since_last_backend_pass"] >= 6
+    assert snapshot["non_interpret_fixture_count"] >= 23
+    assert snapshot["fixtures_since_last_backend_pass"] >= 10
     assert snapshot["fake_provider_evidence"] is True
     assert snapshot["route_level_backend_evidence"] is True
     assert snapshot["live_provider_evidence"] is False

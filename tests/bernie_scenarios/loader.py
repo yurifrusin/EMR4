@@ -26,6 +26,18 @@ KNOWN_ACTIONS = frozenset({
     "supervise",
     "confirm",
     "interpret",
+    "external_appointment",
+})
+
+EXTERNAL_OPERATIONS = frozenset({"create", "set_status"})
+
+EXTERNAL_CREATE_ALLOWED = frozenset({
+    "operation", "patient", "practitioner", "date", "time",
+    "duration_minutes", "status", "reason", "id",
+})
+
+EXTERNAL_SET_STATUS_ALLOWED = frozenset({
+    "operation", "appointment_id", "status",
 })
 KNOWN_FORBIDDEN_OUTCOMES = frozenset({
     "provider_called",
@@ -81,6 +93,56 @@ class Scenario:
     source_file: Optional[Path] = None
 
 
+def _validate_external_appointment_input(
+    inp: dict[str, Any], scenario_id: str, idx: int,
+) -> None:
+    """Validate external_appointment turn input fields."""
+    operation = inp.get("operation")
+    if not operation or operation not in EXTERNAL_OPERATIONS:
+        raise ValueError(
+            f"Scenario {scenario_id!r} turn {idx}: "
+            f"external_appointment 'operation' must be one of "
+            f"{sorted(EXTERNAL_OPERATIONS)}; got {operation!r}"
+        )
+
+    unknown = set(inp) - (
+        EXTERNAL_CREATE_ALLOWED if operation == "create"
+        else EXTERNAL_SET_STATUS_ALLOWED
+    )
+    if unknown:
+        raise ValueError(
+            f"Scenario {scenario_id!r} turn {idx}: "
+            f"external_appointment({operation}) has unsupported "
+            f"fields {sorted(unknown)}"
+        )
+
+    if operation == "create":
+        for required in ("date", "time"):
+            if not inp.get(required):
+                raise ValueError(
+                    f"Scenario {scenario_id!r} turn {idx}: "
+                    f"external_appointment(create) '{required}' is required"
+                )
+        duration = inp.get("duration_minutes", 15)
+        if not isinstance(duration, int) or isinstance(duration, bool) or duration <= 0:
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(create) duration_minutes must be "
+                "a positive integer"
+            )
+    elif operation == "set_status":
+        if not inp.get("appointment_id"):
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(set_status) 'appointment_id' is required"
+            )
+        if not inp.get("status"):
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(set_status) 'status' is required"
+            )
+
+
 def _parse_turn(raw: dict, idx: int, scenario_id: str) -> ScenarioTurn:
     action = raw.get("action")
     if action is None:
@@ -92,6 +154,10 @@ def _parse_turn(raw: dict, idx: int, scenario_id: str) -> ScenarioTurn:
             f"Scenario {scenario_id!r} turn {idx}: "
             f"unknown action {action!r}; expected one of {sorted(KNOWN_ACTIONS)}"
         )
+
+    if action == "external_appointment":
+        _validate_external_appointment_input(raw.get("input") or {}, scenario_id, idx)
+
     inp = raw.get("input") or {}
     raw_expect = raw.get("expect") or {}
     for delta_name in ("appointment_delta", "audit_delta"):

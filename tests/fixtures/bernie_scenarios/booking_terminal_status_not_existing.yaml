@@ -1,0 +1,61 @@
+id: booking_terminal_status_not_existing
+category: booking_confirmation
+description: >
+  Prove that a terminal-status (Cancelled) seeded appointment does not cause
+  the system to return existing_booking_found for the same slot. The external
+  fixture event sets the status to Cancelled between seed and supervise.
+reference_date: "2026-07-14"
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+  simulated_clinic_time: "08:00"
+  seeded_appointments:
+    - id: cancelled-target
+      patient: Margaret Thompson
+      practitioner: Dr Shera
+      date: "2026-07-15"
+      time: "15:00"
+      duration_minutes: 15
+      status: Booked
+turns:
+  - action: external_appointment
+    input:
+      operation: set_status
+      appointment_id: cancelled-target
+      status: Cancelled
+    expect:
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: fixture_applied
+  - action: supervise
+    input:
+      command:
+        practitioner_id: "{practitioner_id}"
+        patient_id: "{patient_id}"
+        date_from: "2026-07-15"
+        date_to: "2026-07-15"
+        earliest_time: "15:00"
+        latest_time: "16:30"
+        duration_minutes: 15
+      patient_id: "{patient_id}"
+      selected_candidate_index: 0
+    expect:
+      status: 200
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        safe: true
+        requires_confirmation: true
+        "staff_review.confirmation_ready": true
+expected:
+  appointment_written: false
+  audit_written: false
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

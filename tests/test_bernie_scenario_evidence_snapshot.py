@@ -21,11 +21,11 @@ def test_scenario_evidence_snapshot_counts_current_fixture_corpus():
     snapshot = build_evidence_snapshot()
 
     assert snapshot["schema_version"] == SNAPSHOT_SCHEMA_VERSION
-    assert snapshot["scenario_yaml_fixture_count"] == 50
+    assert snapshot["scenario_yaml_fixture_count"] == 56
     assert snapshot["interpret_fixture_count"] == 31
     assert snapshot["harness_demo_fixture_count"] == 2
-    assert snapshot["non_interpret_fixture_count"] == 17
-    assert snapshot["fixtures_since_last_backend_pass"] == 6
+    assert snapshot["non_interpret_fixture_count"] == 23
+    assert snapshot["fixtures_since_last_backend_pass"] == 10
 
 
 def test_scenario_evidence_snapshot_labels_fake_provider_only():

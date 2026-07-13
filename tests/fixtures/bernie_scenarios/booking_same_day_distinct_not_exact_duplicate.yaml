@@ -1,0 +1,67 @@
+id: booking_same_day_distinct_not_exact_duplicate
+category: booking_confirmation
+description: >
+  Prove that a distinct same-day appointment (different time) does not cause
+  the system to incorrectly classify a later request at a different time as
+  an existing booking. The seeded 09:00 appointment remains separate from
+  the 15:00 request.
+reference_date: "2026-07-14"
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+  simulated_clinic_time: "08:00"
+  seeded_appointments:
+    - id: morning-appt
+      patient: Margaret Thompson
+      practitioner: Dr Shera
+      date: "2026-07-15"
+      time: "09:00"
+      duration_minutes: 15
+      status: Booked
+turns:
+  - action: external_appointment
+    input:
+      operation: create
+      patient: Margaret Thompson
+      practitioner: Dr Shera
+      date: "2026-07-15"
+      time: "10:00"
+      duration_minutes: 30
+      status: Booked
+      id: mid-morning-appt
+    expect:
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: fixture_applied
+  - action: supervise
+    input:
+      command:
+        practitioner_id: "{practitioner_id}"
+        patient_id: "{patient_id}"
+        date_from: "2026-07-15"
+        date_to: "2026-07-15"
+        earliest_time: "15:00"
+        latest_time: "16:30"
+        duration_minutes: 15
+      patient_id: "{patient_id}"
+      selected_candidate_index: 0
+    expect:
+      status: 200
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        safe: true
+        requires_confirmation: true
+        "staff_review.confirmation_ready": true
+expected:
+  appointment_written: false
+  audit_written: false
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

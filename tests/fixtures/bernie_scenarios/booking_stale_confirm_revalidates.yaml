@@ -1,0 +1,70 @@
+id: booking_stale_confirm_revalidates
+category: booking_confirmation
+description: >
+  Prove that an appointment inserted mid-scenario (after preparation but before
+  confirmation) causes the confirm endpoint to detect the conflict and fail
+  closed rather than creating a double booking.
+reference_date: "2026-07-14"
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+  simulated_clinic_time: "08:00"
+turns:
+  - action: interpret
+    input:
+      instruction: "Book Margaret Thompson with Dr Shera tomorrow at 15:00 for 15 minutes"
+      context_frames: []
+    expect:
+      status: 200
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: interpreted
+        safe: true
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+  - action: supervise
+    input:
+      selected_candidate_index: 0
+      reason: "Standard appointment"
+    expect:
+      status: 200
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: confirmation_ready
+        safe: true
+        requires_confirmation: true
+        "staff_review.confirmation_ready": true
+  - action: external_appointment
+    input:
+      operation: create
+      patient: Margaret Thompson
+      practitioner: Dr Shera
+      date: "2026-07-15"
+      time: "15:00"
+      duration_minutes: 15
+      status: Booked
+    expect:
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: fixture_applied
+  - action: confirm
+    input:
+      confirmed: true
+    expect:
+      status: 200
+      fields:
+        safe: false
+expected:
+  appointment_written: false
+  audit_written: false
+forbidden_outcomes:
+  - provider_called
+  - appointment_written
+  - audit_written

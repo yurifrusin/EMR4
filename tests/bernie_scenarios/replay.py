@@ -143,6 +143,9 @@ class ReplayContext:
         self.practice_id = practice_id
         self.practice_timezone = practice_timezone
         self.seeded_appointment_ids: dict[str, Any] = {}
+        self.fixture_event_count: int = 0
+        self._fixture_appointment_delta: int = 0
+        self._fixture_audit_delta: int = 0
         self._turns: list[TurnRecord] = []
 
     def _auth(self) -> dict[str, str]:
@@ -315,6 +318,78 @@ class ReplayContext:
         resp = self.client.post(CONFIRM_URL, json=body, headers=headers)
         return TurnRecord("confirm", body, resp.status_code, self._safe_json(resp))
 
+    def _execute_external_appointment(self, turn: ScenarioTurn) -> TurnRecord:
+        inp = _resolve(turn.input, self)
+        operation = str(inp.get("operation", ""))
+
+        try:
+            practice_tz = ZoneInfo(self.practice_timezone)
+        except ZoneInfoNotFoundError:
+            practice_tz = timezone.utc
+
+        if operation == "create":
+            patient_ref = str(inp.get("patient") or "{patient_id}")
+            patient_id = (
+                self.patient_id
+                if patient_ref in {"{patient_id}", "fixture_patient", "Margaret Thompson"}
+                else patient_ref
+            )
+            practitioner_ref = str(inp.get("practitioner") or "{practitioner_id}")
+            practitioner_id = (
+                self.practitioner_id
+                if practitioner_ref in {"{practitioner_id}", "fixture_practitioner", "Dr Shera"}
+                else practitioner_ref
+            )
+            appointment_date = date.fromisoformat(str(inp["date"]))
+            start_time_local = time.fromisoformat(str(inp["time"]))
+            local_start = datetime.combine(
+                appointment_date, start_time_local
+            ).replace(tzinfo=practice_tz)
+            status = AppointmentStatus(
+                str(inp.get("status") or AppointmentStatus.Booked.value)
+            )
+            appointment = Appointment(
+                practice_id=self.practice_id,
+                patient_id=patient_id,
+                practitioner_id=practitioner_id,
+                start_time=local_start.astimezone(timezone.utc),
+                appointment_date=appointment_date,
+                start_time_local=start_time_local,
+                duration_minutes=int(inp.get("duration_minutes", 15)),
+                status=status,
+                reason=inp.get("reason"),
+                booked_via=BookingChannel.Receptionist,
+            )
+            self.db.add(appointment)
+            self.db.flush()
+            alias = str(inp.get("id") or f"ext-{self.fixture_event_count}")
+            self.seeded_appointment_ids[alias] = appointment.id
+            # Track that this fixture event created a new Appointment row
+            self._fixture_appointment_delta += 1
+
+        elif operation == "set_status":
+            alias = str(inp["appointment_id"])
+            if alias not in self.seeded_appointment_ids:
+                raise ValueError(
+                    f"Unknown external appointment alias {alias!r} "
+                    f"in scenario turn (fixture_event_count={self.fixture_event_count})"
+                )
+            appt = (
+                self.db.query(Appointment)
+                .get(self.seeded_appointment_ids[alias])
+            )
+            if appt is not None:
+                appt.status = AppointmentStatus(str(inp["status"]))
+                self.db.flush()
+
+        self.fixture_event_count += 1
+        return TurnRecord(
+            "external_appointment",
+            {"operation": operation},
+            200,
+            {"result": "fixture_applied", "operation": operation},
+        )
+
     def execute_turn(self, turn: ScenarioTurn) -> TurnRecord:
         dispatch = {
             "interpret": self._execute_interpret,
@@ -323,6 +398,7 @@ class ReplayContext:
             "select": self._execute_select,
             "supervise": self._execute_supervise,
             "confirm": self._execute_confirm,
+            "external_appointment": self._execute_external_appointment,
         }
         record = dispatch[turn.action](turn)
         self._turns.append(record)
@@ -392,6 +468,7 @@ def _redacted_evidence_record(
     ctx: ReplayContext,
     *,
     seeded_appointment_count: int,
+    fixture_event_count: int,
     appointment_delta: int,
     audit_delta: int,
     failure_count: int,
@@ -418,6 +495,7 @@ def _redacted_evidence_record(
         "raw_instruction_included": False,
         "raw_response_included": False,
         "seeded_appointment_count": seeded_appointment_count,
+        "fixture_event_count": fixture_event_count,
         "turn_count": len(turns),
         "turns": turns,
         "appointment_delta": appointment_delta,
@@ -477,6 +555,12 @@ def run_scenario(
         record = ctx.execute_turn(turn)
         record.appointment_delta = db.query(Appointment).count() - turn_appt_before
         record.audit_delta = db.query(AppointmentAuditLog).count() - turn_audit_before
+
+        # Zero deltas for external fixture events — they are scenario-environment
+        # setup, not product writes. Tracked separately via fixture_event_count.
+        if turn.action == "external_appointment":
+            record.appointment_delta = 0
+            record.audit_delta = 0
 
         if record.status_code != turn.expect.status:
             failures.append(
@@ -539,8 +623,11 @@ def run_scenario(
 
     appt_after = db.query(Appointment).count()
     audit_after = db.query(AppointmentAuditLog).count()
-    appt_written = appt_after > appt_before
-    audit_written = audit_after > audit_before
+    # Exclude fixture-created rows from product-write detection
+    product_appt_delta = appt_after - appt_before - ctx._fixture_appointment_delta
+    product_audit_delta = audit_after - audit_before - ctx._fixture_audit_delta
+    appt_written = product_appt_delta > 0
+    audit_written = product_audit_delta > 0
 
     if scenario.expected.appointment_written and not appt_written:
         failures.append("expected appointment_written=True but no new Appointment rows")
@@ -575,6 +662,7 @@ def run_scenario(
         scenario,
         ctx,
         seeded_appointment_count=seeded_appointment_count,
+        fixture_event_count=ctx.fixture_event_count,
         appointment_delta=appt_after - appt_before,
         audit_delta=audit_after - audit_before,
         failure_count=len(failures),
