@@ -67,8 +67,8 @@ tracks that actual architecture.
 |---|---|
 | Status | In progress |
 | Outcome | Reception can create, edit, link, and status-change appointments through proposal-first flows with clear conflict/break/provisional warnings |
-| Representative Sprints | Command proposal layer, create proposal flow, appointment update/status proposal contract, provisional patient linking, duplicate review API, patient search alerts |
-| Next Candidate Sprints | Sprint 25 status/waiting-area proposal retrofit dispatched; then drag/reschedule design groundwork, cancel/no-show/DNA confirmation semantics, recurrence/reason-note polish |
+| Representative Sprints | Command proposal layer, create/update/status/delete confirmation families, idempotent command ledger, duplicate recovery, patient search alerts, authoritative accessible confirmation receipt |
+| Next Candidate Sprints | T1 Stateful Diary Scenario Laboratory, followed by behaviour-matrix gaps exposed by its corpus |
 | Done Signals | All high-risk receptionist appointment writes pass through deterministic proposal/confirmation contracts before mutation |
 
 ### Programme 2C - Ariadne Tooling and Review Automation
@@ -85,11 +85,11 @@ tracks that actual architecture.
 
 | Item | Value |
 |---|---|
-| Status | Design groundwork only |
-| Outcome | Bernie can later suggest receptionist actions safely without direct model-to-database mutation |
-| Representative Sprints | Resource admin and Bernie tool design, command proposal harnesses, appointment proposal contracts |
-| Start Gate | Programme 2B's appointment mutation contracts are stable; audit trail and human-confirmation semantics are explicit |
-| Next Candidate Sprints | Tool-schema audit log foundation, staff message-taking model, slot-search proposal contract, non-autonomous Bernie command preview |
+| Status | In progress; deterministic staff-confirmed booking loop and accessible authority receipt integrated |
+| Outcome | Bernie suggests and prepares receptionist actions safely while deterministic APIs retain truth, confirmation, audit, and write authority |
+| Representative Sprints | Action grammar, interpretation and scenario harnesses, supervised booking, duplicate recovery, proposal/confirmation contracts, accessible authoritative receipt |
+| Gate State | Core booking proposal, audit, idempotency, human-confirmation, and receipt semantics exist; autonomous model-to-database writes remain prohibited |
+| Next Candidate Sprints | T1 stateful scenario laboratory, T2 deterministic behaviour matrix, then T3 live-model shadow evaluation with writes disabled |
 
 ### Programme 2E - Practice Messaging and Daily Admin
 
@@ -107,7 +107,7 @@ tracks that actual architecture.
 | Status | In progress |
 | Outcome | EMR4 has one identity-aware, role-aware, keyless internal API for invoking AI capabilities across clinical copilot, Bernie, and later modalities |
 | Representative Sprints | Access AI architecture record, keyless GCP dev auth runbook, AI capability registry, entitlement model, typed audit event catalog, invocation service, audit/cost envelope, enterprise-auth seam, Bernie/Copilot migrations, caller-context pending booking proposals, multi-provider knowledge-base adapter |
-| Next Candidate Sprints | Caller-context booking proposal groundwork or Wiley/Cochrane licensed knowledge-base integration spike |
+| Next Candidate Sprints | T3 provider-neutral diary shadow evaluation, then T4 clinical-safety foundation before any patient-specific GP-assistant runtime; licensed knowledge-base work resumes inside T5 |
 | Done Signals | No frontend or router calls model providers directly; dev uses service-account impersonation rather than JSON keys; every AI call passes through capability policy, product entitlement, provider adapter, and bounded audit metadata; external knowledge bases such as future Wiley/Cochrane integrations route through the same Access AI policy and citation envelope; EMR4's internal org/role/resource model can later map to enterprise SSO/SCIM/FGA without a rewrite |
 | Design Record | `orchestration/access_ai_api_design.md` |
 
@@ -123,6 +123,32 @@ tracks that actual architecture.
 | Done Signals | GraphQL read/context graph, OpenAPI command mutations, async integration placeholders, YAML manifest layer, agent capability charters, and security/audit rules are documented and validated enough to guide future implementation |
 
 ## Recommended Next Planning Move
+
+The durable dependency and tranche-selection map for deterministic Bernie,
+nondeterministic diary interpretation, the clinician-facing GP assistant, and
+later bounded reception triage is
+`docs/bernie-consultant-triage-implementation-roadmap.md`.
+
+This track crosses Programmes 2B, 2C, 2D, 2F, and 2G before later clinical
+phases. Its ordering rule is:
+
+1. stateful deterministic diary scenarios and broad diary invariants;
+2. live-model diary shadow evaluation with writes disabled;
+3. shared clinical safety, privacy, regulatory, and evidence-source foundation;
+4. clinician-facing cited GP-assistant consultation and supervised evaluation;
+5. reception clinical intake without diagnosis or triage autonomy; and
+6. separately validated, protocol-bound reception triage assistance.
+
+The default next tranche after S25-S27 is T1 Stateful Diary Scenario Laboratory.
+Do not begin patient-specific consultant runtime before T4's clinical-safety
+foundation, and do not treat GP-assistant success as sufficient evidence for
+reception triage.
+
+## Historical Planning Record Through Sprint 159
+
+The record below explains how the API Spine reached its Sprint 159 checkpoint.
+It is retained for traceability but is superseded for next-tranche selection by
+the cross-phase roadmap above.
 
 Current position after Sprint 156: the Ariadne/Fable 100+ sprint strategy map
 has been created, the stale worktree residue has been cleaned, the
