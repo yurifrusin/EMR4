@@ -92,3 +92,21 @@ T2.2 should extend the economical generated matrix beyond interval geometry to
 terminal/active status, practitioner/location, roster/break, normalized bounds,
 and stale-proposal axes. Keep each broad generated matrix fast, and retain
 separate authored DB-backed golden cases for semantic and persistence truth.
+
+## T2.2 Allocation
+
+T2.2 concentrates on interactions not covered by the single-axis authored
+tests:
+
+- DeepSeek V4 Flash owns a fast exact-match precedence matrix combining
+  practitioner, appointment type, location, duration, and temporal-evidence
+  axes through the public classifier;
+- Antigravity/Gemini 3.5 Flash owns route-intercepted Playwright checks for
+  stale, failed, and confirmation-pending proposal states; and
+- Sol owns gap analysis, product corrections, integration, protected-master
+  authority, and the final decision about whether T2 needs another slice.
+
+Existing DB-backed tests remain authoritative for terminal-status filtering,
+roster/break/location query behavior, normalized candidate bounds, stale
+confirmation revalidation, audit deltas, and tenancy. Generated query-only
+cases must not pretend to replace those persistence and route boundaries.
