@@ -15183,3 +15183,26 @@ No Conductor or verifier was required because the roadmap fixed the bounded
 contract slices. Sprint engine state: continuing to T3.4 adapter-boundary review
 and a default-blocked live-replay gate. Cost-incurring provider replay remains a
 meaningful execution boundary; no user decision is required before that gate.
+
+## T3.4 Closeout - Narrow Live-Replay Gate
+
+Status: accepted and integrated on 2026-07-13; T3 continues.
+
+- Added a narrow E4 gate separate from the older product-runtime gate. It
+  permits contract, corpus, fake-adapter, static review, and provider-adapter
+  implementation work without external calls.
+- External prompts, provider-executed tools, raw-response persistence,
+  patient/practice inputs, appointment or audit mutation, route/runtime wiring,
+  and promotion claims remain blocked.
+- The checker requires exact provider/model ledger data, synthetic-only input,
+  no-write/read-only-tool proof, bounded cases/repeats, redacted or hashed
+  artifacts, a cost ceiling or explicit run approval, and adapter tests before
+  unblocking.
+- The full T3.1-T3.4 focused suite has 48 passing tests. The gate status reports
+  `external_calls_ready: false`, `runtime_authority_ready: false`, and
+  `sprint_engine_state: continuing_adapter_contract_work`.
+
+No Conductor or verifier was required because this was the fixed safety/cost
+boundary for the approved T3 track. Sprint engine state: continuing to T3.5
+DeepSeek and Gemini adapter implementation without external calls. No user
+decision is required until an external replay would actually be enabled.

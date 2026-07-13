@@ -143,7 +143,8 @@ T1 Stateful Diary Scenario Laboratory and T2 Deterministic Receptionist
 Behaviour Matrix are complete. T3 Nondeterministic Bernie Shadow Evaluation is
 in progress; its provider-neutral contract/scorer, source-safe T1/T2 corpus
 projection, and default-disabled fake-adapter repeat runner are implemented. The
-default next slice is adapter-boundary review and a blocked live-replay gate.
+live-replay gate is now blocked and machine-checked; the default next slice is
+provider-adapter implementation without external calls.
 Do not begin patient-specific consultant runtime before T4's clinical-safety
 foundation, and do not treat GP-assistant success as sufficient evidence for
 reception triage.

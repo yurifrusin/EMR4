@@ -63,9 +63,20 @@ The aggregate reports exact correctness totals, safe/perfect samples, semantic
 variance by case, latency, token counts, and estimated cost. Operational totals
 remain separate fields and cannot affect semantic scores.
 
+## T3.4 Live-Replay Gate
+
+`docs/bernie-t3-live-replay-gate.json` and
+`scripts/bernie_shadow_live_gate_check.py` define the narrow external-call
+boundary. While blocked, provider adapter code and static/fake-adapter review may
+continue, but external prompts, provider-executed tools, raw-response
+persistence, patient/practice inputs, mutations, runtime wiring, and promotion
+claims are prohibited. This is separate from the older interpretation-runtime
+gate because evaluation adapters do not receive product authority.
+
 ## Next Slice
 
-T3.4 should add an adapter-boundary review and a default-blocked live-replay
-gate. Only after those pass should DeepSeek and Gemini adapters be implemented
-behind the protocol, with environment/provider availability checks, exact model
-ledger entries, redacted artifacts, bounded repeats, and no write-capable tools.
+T3.5 should implement DeepSeek and Gemini adapters behind the protocol without
+executing them, including environment/provider availability checks, exact model
+ledger entries, normalized-output validation, bounded request construction, and
+no write-capable tools. External calls remain blocked until the gate's review
+requirements are satisfied.
