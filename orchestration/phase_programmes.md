@@ -68,7 +68,7 @@ tracks that actual architecture.
 | Status | In progress |
 | Outcome | Reception can create, edit, link, and status-change appointments through proposal-first flows with clear conflict/break/provisional warnings |
 | Representative Sprints | Command proposal layer, create/update/status/delete confirmation families, idempotent command ledger, duplicate recovery, patient search alerts, authoritative accessible confirmation receipt |
-| Next Candidate Sprints | T2 deterministic receptionist behaviour matrix using the completed T1 stateful corpus |
+| Next Candidate Sprints | T3 write-disabled live-model shadow evaluation using the completed T1/T2 semantic corpus |
 | Done Signals | All high-risk receptionist appointment writes pass through deterministic proposal/confirmation contracts before mutation |
 
 ### Programme 2C - Ariadne Tooling and Review Automation
@@ -139,8 +139,10 @@ phases. Its ordering rule is:
 5. reception clinical intake without diagnosis or triage autonomy; and
 6. separately validated, protocol-bound reception triage assistance.
 
-T1 Stateful Diary Scenario Laboratory is complete. The default next tranche is
-T2 Deterministic Receptionist Behaviour Matrix.
+T1 Stateful Diary Scenario Laboratory and T2 Deterministic Receptionist
+Behaviour Matrix are complete. T3 Nondeterministic Bernie Shadow Evaluation is
+in progress; its provider-neutral contract and deterministic scorer are
+implemented, and the default next slice is source-safe T1/T2 corpus projection.
 Do not begin patient-specific consultant runtime before T4's clinical-safety
 foundation, and do not treat GP-assistant success as sufficient evidence for
 reception triage.

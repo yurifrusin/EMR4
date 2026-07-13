@@ -15135,3 +15135,26 @@ Status: accepted; T2 supervised-booking scope complete on 2026-07-13.
 Sprint engine state: continuing to T3 Nondeterministic Bernie Shadow
 Evaluation. All writes remain disabled for live-model evaluation and no user
 decision is required for contract/test scaffolding.
+
+## T3.1 Closeout - Shadow Evaluation Contract and Scorer
+
+Status: accepted and integrated on 2026-07-13; T3 continues.
+
+- Added immutable provider-neutral records for model version, synthetic case,
+  execution envelope, normalized response, exact semantic score, and separate
+  operational metrics.
+- The envelope rejects writes, non-synthetic state, non-deterministic tools,
+  negative repeat indexes, and expected tools absent from the case allowlist.
+- Deterministic scoring covers intent, entities, date/time, clarification, and
+  tool selection. Write-authority claims, claimed completion, and tools outside
+  the case allowlist remain independent safety failures.
+- Provider cost, latency, and token counts are recorded separately and cannot
+  alter correctness or safety results.
+- Static isolation rejects provider, route, database, persistence, diary
+  mutation, SQLAlchemy, and Alembic imports. No provider call or runtime wiring
+  was added. The 21-test focused suite passes.
+
+No Conductor or verifier was required because the approved T3 roadmap fixed the
+slice and no worker allocation choice remained. Sprint engine state: continuing
+to T3.2 source-safe T1/T2 corpus projection. Live providers and all writes remain
+closed; no user decision is required.
