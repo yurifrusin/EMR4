@@ -501,10 +501,9 @@ def test_intent_retains_generic_intent_semantics_no_tier_restriction():
     assert intent_confirm.action_name == "confirm_booking"
 
 
-def test_direct_names_and_grammar_aliases_use_same_author_source_of_truth():
-    """Direct capability name 'propose_edit' and alias 'move' use the same allowed authors."""
+def test_direct_proposal_names_keep_their_declared_author_policy():
+    """Direct proposal capability names retain their declared allowed authors."""
     # propose_edit capability allowed_authors = (staff_ui, bernie)
-    # Both direct and alias should pass for allowed authors
     p_direct = DiaryActionProposal(
         proposal_id="p-d",
         author=DiaryActionAuthor.bernie,
@@ -513,16 +512,19 @@ def test_direct_names_and_grammar_aliases_use_same_author_source_of_truth():
     )
     assert p_direct.action_name == "propose_edit"
 
-    c_alias = DiaryActionConfirmation(
-        confirmation_id="c-a",
-        proposal_id="p-a",
-        confirmed_by_user_id="user-1",
-        confirmed_at=_CONFIRMED_AT,
-        author=DiaryActionAuthor.bernie,
-        channel=DiaryActionChannel.diary_panel,
-        action_name="move",
-    )
-    assert c_alias.action_name == "move"
+
+def test_registered_confirm_aliases_remain_staff_only():
+    """A confirm-tier grammar alias cannot borrow Bernie from its proposal capability."""
+    with pytest.raises(ValidationError, match="not permitted"):
+        DiaryActionConfirmation(
+            confirmation_id="c-a",
+            proposal_id="p-a",
+            confirmed_by_user_id="user-1",
+            confirmed_at=_CONFIRMED_AT,
+            author=DiaryActionAuthor.bernie,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="move",
+        )
 
 
 def test_direct_names_and_grammar_aliases_use_same_tier_source_of_truth():
@@ -591,7 +593,7 @@ def test_unauthorized_author_rejected_on_grammar_aliases():
 def test_compatible_unknown_names_pass_through_all_envelopes():
     """An unknown/unregistered action name passes through all envelope types without enforcement."""
     args = dict(author=DiaryActionAuthor.davida, channel=DiaryActionChannel.nl_text)
-    
+
     intent = DiaryActionIntent(intent_id="i-unk", action_name="unknown_action_name", **args)
     assert intent.action_name == "unknown_action_name"
 
@@ -609,7 +611,7 @@ def test_compatible_unknown_names_pass_through_all_envelopes():
         confirmed_by_user_id="u-1",
         confirmed_at=_CONFIRMED_AT,
         action_name="unknown_action_name",
-        **args
+        **args,
     )
     assert confirmation.action_name == "unknown_action_name"
 
@@ -617,7 +619,7 @@ def test_compatible_unknown_names_pass_through_all_envelopes():
 def test_planned_grammar_verbs_with_no_registered_capability_pass_through():
     """Planned verbs with capability_name=None (e.g., check_in) pass through without validation failures."""
     args = dict(author=DiaryActionAuthor.davida, channel=DiaryActionChannel.nl_text)
-    
+
     # check_in has capability_name=None, so it passes through
     proposal = DiaryActionProposal(proposal_id="p-chk", action_name="check_in", **args)
     assert proposal.action_name == "check_in"
@@ -628,7 +630,6 @@ def test_planned_grammar_verbs_with_no_registered_capability_pass_through():
         confirmed_by_user_id="u-1",
         confirmed_at=_CONFIRMED_AT,
         action_name="check_in",
-        **args
+        **args,
     )
     assert confirmation.action_name == "check_in"
-
