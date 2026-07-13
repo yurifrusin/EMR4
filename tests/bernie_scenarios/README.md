@@ -5,9 +5,10 @@ Backend pytest replay harness for the Bernie receptionist scenario corpus.
 ## What it does
 
 Loads YAML scenario fixtures, runs ordered backend/session turns (no live LLM
-calls), and asserts structured outcomes (field values, row writes, forbidden
-outcomes, preserved field invariants). Supports `xfail` scenarios for known
-behaviour that a future sprint will fix.
+calls), and asserts structured outcomes (field values, per-turn and final row
+writes, forbidden outcomes, preserved field invariants). Scenarios can seed
+allowlisted appointment state and pin clinic-local time. Supports `xfail`
+scenarios for known behaviour that a future sprint will fix.
 
 Interpret scenarios run against the deterministic fake Bernie interpreter. They
 are `fake-provider, route-level` evidence only: useful contract regression
@@ -18,6 +19,11 @@ coverage, not live-backend, live-provider, or provider-quality evidence.
 ```powershell
 pytest tests/bernie_scenarios/ -v
 ```
+
+Set `BERNIE_SCENARIO_EVIDENCE_DIR` to write one redacted
+`bernie.scenario.evidence.v1` JSON record per scenario. Records contain action,
+status, result kind, safety/confirmation flags, and row deltas; they omit raw
+instructions, request bodies, response bodies, and entity IDs.
 
 ## Directory layout
 
@@ -49,12 +55,21 @@ initial_state:
     - gp_user
     - patient
     - schedule
+  simulated_clinic_time: "08:00"       # optional; defaults to 08:00 on reference_date
+  seeded_appointments:                  # optional allowlisted test setup
+    - id: existing                      # local alias for {appointment_id:existing}
+      patient: Margaret Thompson        # current fixture patient
+      practitioner: Dr Shera            # current fixture practitioner
+      date: "YYYY-MM-DD"
+      time: "HH:MM"
+      duration_minutes: 15
+      status: Booked
 
 xfail:                                # optional; mark scenario as expected-failing
   reason: "Why this fails today and what sprint will fix it"
 
 turns:
-  - action: interpret | normalize | search | select | confirm
+  - action: interpret | normalize | search | select | supervise | confirm
     input:                            # action-specific; may use {practitioner_id},
       key: value                      # {patient_id}, {practice_id} template vars
     expect:
@@ -62,6 +77,8 @@ turns:
       fields:                         # dotted-path -> expected value
         "safe": true
         "constraint.date_from": "YYYY-MM-DD"
+      appointment_delta: 0            # optional exact row delta for this turn
+      audit_delta: 0                  # optional exact audit-row delta for this turn
 
 expected:
   appointment_written: false          # assert Appointment row count changed (default false)
@@ -101,7 +118,11 @@ contracts such as `command_candidate.patient_id` or
 - **search**: when `input` is empty, reuses the command from the last `normalize` turn
   or the `command_candidate` from the last `interpret` turn
 - **select**: always uses the `search_execution` from the last `search` turn
-- **confirm**: always uses the `selection_proposal` from the last `select` turn
+- **supervise**: posts to the deterministic supervised-booking route, using an
+  explicit `input.command` or the latest interpret/normalize command. It can
+  select a candidate with `selected_candidate_index` and remains non-mutating.
+- **confirm**: uses the `selection_proposal` from the last `select` turn or the
+  authoritative `staff_review.confirm_payload` from the last `supervise` turn,
   and sends a deterministic `Idempotency-Key` unless `input.idempotency_key` is
   supplied
 

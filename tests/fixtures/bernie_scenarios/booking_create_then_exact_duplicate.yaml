@@ -1,0 +1,100 @@
+id: booking_create_then_exact_duplicate
+category: booking_confirmation
+description: >
+  Reproduce the reported receptionist sequence: confirm a booking for Margaret
+  Thompson, then ask for the same booking again. The second request must explain
+  that the appointment already exists and must not create a second write.
+reference_date: "2026-07-13"
+
+initial_state:
+  fixtures:
+    - practice
+    - practitioner
+    - gp_user
+    - patient
+    - schedule
+  simulated_clinic_time: "08:00"
+
+turns:
+  - action: interpret
+    input:
+      instruction: "Make an appointment for Margaret Thompson with Dr Shera tomorrow after 3 but before 4.30 for 15 minutes"
+      context_frames: []
+    expect:
+      status: 200
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: interpreted
+        safe: true
+        "command_candidate.patient_id": "{patient_id}"
+        "command_candidate.practitioner_id": "{practitioner_id}"
+        "normalization.constraint.date_from": "2026-07-14"
+        "normalization.constraint.earliest_time": "15:00:00"
+        "normalization.constraint.latest_time": "16:30:00"
+
+  - action: supervise
+    input:
+      selected_candidate_index: 0
+      reason: "Standard appointment"
+    expect:
+      status: 200
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: confirmation_ready
+        safe: true
+        requires_confirmation: true
+        "staff_review.confirmation_ready": true
+
+  - action: confirm
+    input:
+      confirmed: true
+    expect:
+      status: 200
+      appointment_delta: 1
+      audit_delta: 1
+      fields:
+        intent: confirm_create_appointment
+        safe: true
+        autonomy_tier: confirmed_write
+        "confirmation_receipt.schema_version": appointment.confirmation_receipt.v1
+        "confirmation_receipt.outcome": appointment_created
+
+  - action: interpret
+    input:
+      instruction: "Make an appointment for Margaret Thompson with Dr Shera tomorrow after 3 but before 4.30 for 15 minutes"
+      context_frames: []
+    expect:
+      status: 200
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: interpreted
+        safe: true
+
+  - action: supervise
+    input:
+      selected_candidate_index: 0
+      reason: "Standard appointment"
+    expect:
+      status: 200
+      appointment_delta: 0
+      audit_delta: 0
+      fields:
+        result: existing_booking_found
+        safe: true
+        requires_confirmation: false
+        "staff_review.confirmation_ready": false
+        "staff_review.confirm_endpoint": null
+        "staff_review.confirm_payload": null
+        "existing_booking.appointment_date": "2026-07-14"
+        "existing_booking.start_time_local": "15:00:00"
+        "outcome.family": advisory
+
+expected:
+  appointment_written: true
+  audit_written: true
+
+forbidden_outcomes:
+  - provider_called

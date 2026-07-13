@@ -19,7 +19,14 @@ from typing import Any, Optional
 
 import yaml
 
-KNOWN_ACTIONS = frozenset({"normalize", "search", "select", "confirm", "interpret"})
+KNOWN_ACTIONS = frozenset({
+    "normalize",
+    "search",
+    "select",
+    "supervise",
+    "confirm",
+    "interpret",
+})
 KNOWN_FORBIDDEN_OUTCOMES = frozenset({
     "provider_called",
     "appointment_written",
@@ -38,6 +45,8 @@ class NonExecutableScenario(ValueError):
 class TurnExpect:
     status: int = 200
     fields: dict[str, Any] = field(default_factory=dict)
+    appointment_delta: Optional[int] = None
+    audit_delta: Optional[int] = None
 
 
 @dataclass
@@ -85,11 +94,89 @@ def _parse_turn(raw: dict, idx: int, scenario_id: str) -> ScenarioTurn:
         )
     inp = raw.get("input") or {}
     raw_expect = raw.get("expect") or {}
+    for delta_name in ("appointment_delta", "audit_delta"):
+        delta = raw_expect.get(delta_name)
+        if delta is not None and (not isinstance(delta, int) or isinstance(delta, bool)):
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                f"expect.{delta_name} must be an integer"
+            )
     expect = TurnExpect(
         status=int(raw_expect.get("status", 200)),
         fields=raw_expect.get("fields") or {},
+        appointment_delta=raw_expect.get("appointment_delta"),
+        audit_delta=raw_expect.get("audit_delta"),
     )
     return ScenarioTurn(action=action, input=inp, expect=expect)
+
+
+def _validate_executable_initial_state(raw: Any, scenario_id: str) -> dict[str, Any]:
+    if raw is None:
+        return {}
+    if not isinstance(raw, dict):
+        raise ValueError(f"Scenario {scenario_id!r}: initial_state must be a mapping")
+
+    seeded = raw.get("seeded_appointments") or []
+    if not isinstance(seeded, list):
+        raise ValueError(
+            f"Scenario {scenario_id!r}: initial_state.seeded_appointments must be a list"
+        )
+
+    allowed = {
+        "id",
+        "patient",
+        "practitioner",
+        "date",
+        "time",
+        "duration_minutes",
+        "status",
+        "reason",
+    }
+    aliases: set[str] = set()
+    for index, seed in enumerate(seeded):
+        if not isinstance(seed, dict):
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded_appointments[{index}] "
+                "must be a mapping"
+            )
+        unknown = set(seed) - allowed
+        if unknown:
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded_appointments[{index}] "
+                f"has unsupported fields {sorted(unknown)}"
+            )
+        for required in ("date", "time"):
+            if not seed.get(required):
+                raise ValueError(
+                    f"Scenario {scenario_id!r}: seeded_appointments[{index}]."
+                    f"{required} is required"
+                )
+        alias = str(seed.get("id") or f"seed-{index}")
+        if not re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9_-]*", alias):
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded appointment id {alias!r} is invalid"
+            )
+        if alias in aliases:
+            raise ValueError(
+                f"Scenario {scenario_id!r}: duplicate seeded appointment id {alias!r}"
+            )
+        aliases.add(alias)
+
+        duration = seed.get("duration_minutes", 15)
+        if not isinstance(duration, int) or isinstance(duration, bool) or duration <= 0:
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded_appointments[{index}]."
+                "duration_minutes must be a positive integer"
+            )
+
+    simulated_time = raw.get("simulated_clinic_time")
+    if simulated_time is not None and not re.fullmatch(
+        r"\d{2}:\d{2}(?::\d{2})?", str(simulated_time)
+    ):
+        raise ValueError(
+            f"Scenario {scenario_id!r}: simulated_clinic_time must be HH:MM or HH:MM:SS"
+        )
+    return raw
 
 
 def load_scenario_yaml(path: Path) -> Scenario:
@@ -120,12 +207,11 @@ def load_scenario_yaml(path: Path) -> Scenario:
             f"{path}: 'reference_date' must be YYYY-MM-DD; got {reference_date!r}"
         )
 
-    initial_state = raw.get("initial_state") or {}
-
     raw_turns = raw.get("turns")
     if not isinstance(raw_turns, list) or not raw_turns:
         raise ValueError(f"{path}: 'turns' must be a non-empty list")
     turns = [_parse_turn(t, i, _id) for i, t in enumerate(raw_turns)]
+    initial_state = _validate_executable_initial_state(raw.get("initial_state"), _id)
 
     raw_expected = raw.get("expected") or {}
     expected = ScenarioExpected(

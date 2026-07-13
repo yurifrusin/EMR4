@@ -7,11 +7,23 @@ the forbidden-AI-provider guard, and returns structured pass/fail evidence.
 
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass, field
+from datetime import date, datetime, time, timezone
+import json
+from pathlib import Path
+import re
 from typing import Any, Optional
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from app.config import settings
-from app.models.appointments import Appointment, AppointmentAuditLog
+from app.models.appointments import (
+    Appointment,
+    AppointmentAuditLog,
+    AppointmentStatus,
+    BookingChannel,
+)
+import app.routers.appointments as appointments_router
 import app.services.ai.service as ai_service
 
 from .loader import Scenario, ScenarioTurn
@@ -20,6 +32,7 @@ INTERPRET_URL = "/api/v1/appointments/proposals/bernie/interpret-booking-instruc
 NORMALIZE_URL = "/api/v1/appointments/proposals/slot-search/normalize"
 SEARCH_URL = "/api/v1/appointments/proposals/slot-search/normalized"
 SELECTION_URL = "/api/v1/appointments/proposals/slot-search/selection"
+SUPERVISED_URL = "/api/v1/appointments/proposals/bernie/supervised-booking"
 CONFIRM_URL = "/api/v1/appointments/proposals/create/confirm-bernie"
 
 
@@ -29,6 +42,8 @@ class TurnRecord:
     request_body: Any
     status_code: int
     response: dict
+    appointment_delta: int = 0
+    audit_delta: int = 0
 
 
 @dataclass
@@ -37,6 +52,17 @@ class ReplayResult:
     passed: bool
     evidence: list[str] = field(default_factory=list)
     failures: list[str] = field(default_factory=list)
+    evidence_record: dict[str, Any] = field(default_factory=dict)
+
+
+def write_evidence_record(result: ReplayResult, path: Path) -> Path:
+    """Write only the redacted portable record, never raw turn payloads."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(result.evidence_record, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return path
 
 
 def _resolve(value: Any, ctx: "ReplayContext") -> Any:
@@ -50,6 +76,11 @@ def _resolve(value: Any, ctx: "ReplayContext") -> Any:
             )
         value = value.replace("{patient_id}", str(ctx.patient_id))
         value = value.replace("{practice_id}", str(ctx.practice_id))
+        value = re.sub(
+            r"\{appointment_id:([a-zA-Z0-9][a-zA-Z0-9_-]*)\}",
+            lambda match: str(ctx.seeded_appointment_ids.get(match.group(1), match.group(0))),
+            value,
+        )
         return value
     if isinstance(value, dict):
         return {k: _resolve(v, ctx) for k, v in value.items()}
@@ -100,6 +131,7 @@ class ReplayContext:
         other_practitioner_id,
         patient_id,
         practice_id,
+        practice_timezone: str,
     ):
         self.client = client
         self.db = db
@@ -109,6 +141,8 @@ class ReplayContext:
         self.other_practitioner_id = other_practitioner_id
         self.patient_id = patient_id
         self.practice_id = practice_id
+        self.practice_timezone = practice_timezone
+        self.seeded_appointment_ids: dict[str, Any] = {}
         self._turns: list[TurnRecord] = []
 
     def _auth(self) -> dict[str, str]:
@@ -140,6 +174,13 @@ class ReplayContext:
     def last_search_response(self) -> Optional[dict]:
         for t in reversed(self._turns):
             if t.action == "search":
+                return t.response
+        return None
+
+    @property
+    def last_supervised_response(self) -> Optional[dict]:
+        for t in reversed(self._turns):
+            if t.action == "supervise":
                 return t.response
         return None
 
@@ -213,12 +254,57 @@ class ReplayContext:
         resp = self.client.post(SELECTION_URL, json=body, headers=self._auth())
         return TurnRecord("select", body, resp.status_code, self._safe_json(resp))
 
+    def _execute_supervise(self, turn: ScenarioTurn) -> TurnRecord:
+        inp = _resolve(turn.input, self)
+        command = inp.get("command") or self.last_interpret_command or self.last_normalize_input or {}
+        if "context_frames" in inp:
+            context_frames = inp.get("context_frames") or []
+        else:
+            context_frames = _requested_appointment_frames(self.last_interpret_response)
+        body: dict[str, Any] = {
+            "command": command,
+            "reference_date": inp.get("reference_date", self.reference_date),
+            "context_frames": context_frames,
+            "patient_id": inp.get(
+                "patient_id",
+                command.get("patient_id") if isinstance(command, dict) else str(self.patient_id),
+            ) or str(self.patient_id),
+        }
+        for key in (
+            "selected_candidate_index",
+            "selected_candidate",
+            "practitioner_id",
+            "appointment_type_id",
+            "location_id",
+            "patient_name_provisional",
+            "reason",
+            "notes",
+            "booked_via",
+            "turn_ref",
+            "server_session_id",
+            "server_session_surface_id",
+            "server_session_expected_revision",
+            "server_session_idempotency_key",
+        ):
+            if key in inp:
+                body[key] = inp[key]
+        resp = self.client.post(SUPERVISED_URL, json=body, headers=self._auth())
+        return TurnRecord("supervise", body, resp.status_code, self._safe_json(resp))
+
     def _execute_confirm(self, turn: ScenarioTurn) -> TurnRecord:
         inp = _resolve(turn.input, self)
-        body = {
-            "confirmed": inp.get("confirmed", True),
-            "selection_proposal": self.last_selection_response,
-        }
+        supervised = self.last_supervised_response or {}
+        supervised_payload = (supervised.get("staff_review") or {}).get("confirm_payload")
+        if isinstance(supervised_payload, dict):
+            body = copy.deepcopy(supervised_payload)
+            body["confirmed"] = inp.get("confirmed", True)
+            if "confirmed_warnings" in inp:
+                body["confirmed_warnings"] = inp["confirmed_warnings"]
+        else:
+            body = {
+                "confirmed": inp.get("confirmed", True),
+                "selection_proposal": self.last_selection_response,
+            }
         headers = {
             **self._auth(),
             "Idempotency-Key": inp.get(
@@ -235,11 +321,110 @@ class ReplayContext:
             "normalize": self._execute_normalize,
             "search": self._execute_search,
             "select": self._execute_select,
+            "supervise": self._execute_supervise,
             "confirm": self._execute_confirm,
         }
         record = dispatch[turn.action](turn)
         self._turns.append(record)
         return record
+
+
+def _scenario_clock(scenario: Scenario, practice_timezone: str) -> datetime:
+    state = scenario.initial_state
+    clock_date = date.fromisoformat(str(state.get("diary_date") or scenario.reference_date))
+    clock_time = time.fromisoformat(str(state.get("simulated_clinic_time") or "08:00"))
+    try:
+        tz = ZoneInfo(practice_timezone)
+    except ZoneInfoNotFoundError:
+        tz = timezone.utc
+    return datetime.combine(clock_date, clock_time).replace(tzinfo=tz)
+
+
+def _seed_initial_state(scenario: Scenario, ctx: ReplayContext) -> int:
+    seeds = scenario.initial_state.get("seeded_appointments") or []
+    if not seeds:
+        return 0
+    try:
+        practice_tz = ZoneInfo(ctx.practice_timezone)
+    except ZoneInfoNotFoundError:
+        practice_tz = timezone.utc
+
+    for index, seed in enumerate(seeds):
+        alias = str(seed.get("id") or f"seed-{index}")
+        patient_ref = str(seed.get("patient") or "{patient_id}")
+        practitioner_ref = str(seed.get("practitioner") or "{practitioner_id}")
+        patient_id = (
+            ctx.patient_id
+            if patient_ref in {"{patient_id}", "fixture_patient", "Margaret Thompson"}
+            else patient_ref
+        )
+        practitioner_id = (
+            ctx.practitioner_id
+            if practitioner_ref in {"{practitioner_id}", "fixture_practitioner", "Dr Shera"}
+            else practitioner_ref
+        )
+        appointment_date = date.fromisoformat(str(seed["date"]))
+        start_time_local = time.fromisoformat(str(seed["time"]))
+        local_start = datetime.combine(appointment_date, start_time_local).replace(
+            tzinfo=practice_tz
+        )
+        status = AppointmentStatus(str(seed.get("status") or AppointmentStatus.Booked.value))
+        appointment = Appointment(
+            practice_id=ctx.practice_id,
+            patient_id=patient_id,
+            practitioner_id=practitioner_id,
+            start_time=local_start.astimezone(timezone.utc),
+            appointment_date=appointment_date,
+            start_time_local=start_time_local,
+            duration_minutes=int(seed.get("duration_minutes", 15)),
+            status=status,
+            reason=seed.get("reason"),
+            booked_via=BookingChannel.Receptionist,
+        )
+        ctx.db.add(appointment)
+        ctx.db.flush()
+        ctx.seeded_appointment_ids[alias] = appointment.id
+    return len(seeds)
+
+
+def _redacted_evidence_record(
+    scenario: Scenario,
+    ctx: ReplayContext,
+    *,
+    seeded_appointment_count: int,
+    appointment_delta: int,
+    audit_delta: int,
+    failure_count: int,
+) -> dict[str, Any]:
+    turns = []
+    for index, record in enumerate(ctx._turns):
+        turns.append({
+            "index": index,
+            "action": record.action,
+            "status_code": record.status_code,
+            "result_kind": record.response.get("result")
+            or record.response.get("intent")
+            or record.response.get("status"),
+            "safe": record.response.get("safe"),
+            "requires_confirmation": record.response.get("requires_confirmation"),
+            "appointment_delta": record.appointment_delta,
+            "audit_delta": record.audit_delta,
+        })
+    return {
+        "schema_version": "bernie.scenario.evidence.v1",
+        "scenario_id": scenario.id,
+        "evidence_level": "E1_fake_provider_db_backed_route_replay",
+        "provider_calls_performed": False,
+        "raw_instruction_included": False,
+        "raw_response_included": False,
+        "seeded_appointment_count": seeded_appointment_count,
+        "turn_count": len(turns),
+        "turns": turns,
+        "appointment_delta": appointment_delta,
+        "audit_delta": audit_delta,
+        "failure_count": failure_count,
+        "passed": failure_count == 0,
+    }
 
 
 def run_scenario(
@@ -265,10 +450,19 @@ def run_scenario(
         ),
         patient_id=patient.id,
         practice_id=practice.id,
+        practice_timezone=practice.timezone or "Australia/Sydney",
     )
 
     _install_forbidden_ai_provider_guard(monkeypatch)
     monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    scenario_now = _scenario_clock(scenario, ctx.practice_timezone)
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda tz: scenario_now.astimezone(tz),
+    )
+
+    seeded_appointment_count = _seed_initial_state(scenario, ctx)
 
     appt_before = db.query(Appointment).count()
     audit_before = db.query(AppointmentAuditLog).count()
@@ -278,7 +472,11 @@ def run_scenario(
     preserved_snapshots: dict[str, Any] = {}
 
     for idx, turn in enumerate(scenario.turns):
+        turn_appt_before = db.query(Appointment).count()
+        turn_audit_before = db.query(AppointmentAuditLog).count()
         record = ctx.execute_turn(turn)
+        record.appointment_delta = db.query(Appointment).count() - turn_appt_before
+        record.audit_delta = db.query(AppointmentAuditLog).count() - turn_audit_before
 
         if record.status_code != turn.expect.status:
             failures.append(
@@ -301,6 +499,22 @@ def run_scenario(
             else:
                 evidence.append(
                     f"turn[{idx}] {turn.action}: {path}={actual!r} OK"
+                )
+
+        for label, expected_delta, actual_delta in (
+            ("appointment_delta", turn.expect.appointment_delta, record.appointment_delta),
+            ("audit_delta", turn.expect.audit_delta, record.audit_delta),
+        ):
+            if expected_delta is None:
+                continue
+            if actual_delta != expected_delta:
+                failures.append(
+                    f"turn[{idx}] {turn.action}: {label} "
+                    f"expected={expected_delta} actual={actual_delta}"
+                )
+            else:
+                evidence.append(
+                    f"turn[{idx}] {turn.action}: {label}={actual_delta} OK"
                 )
 
         for pf in scenario.preserved_fields:
@@ -357,9 +571,18 @@ def run_scenario(
     # provider_called is enforced by the monkeypatch guard: if called, turn execution
     # raises AssertionError before we reach this point.
 
+    evidence_record = _redacted_evidence_record(
+        scenario,
+        ctx,
+        seeded_appointment_count=seeded_appointment_count,
+        appointment_delta=appt_after - appt_before,
+        audit_delta=audit_after - audit_before,
+        failure_count=len(failures),
+    )
     return ReplayResult(
         scenario_id=scenario.id,
         passed=len(failures) == 0,
         evidence=evidence,
         failures=failures,
+        evidence_record=evidence_record,
     )

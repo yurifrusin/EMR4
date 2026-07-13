@@ -94,7 +94,7 @@ def test_sprint287_keeps_runtime_and_expansion_gates_closed():
     assert payload["next_recommended_action"].startswith("Run Sprint 288 only if Yuri agrees")
 
 
-def test_sprint287_markdown_and_handover_state_pause_before_readiness():
+def test_sprint287_markdown_is_preserved_while_handover_advances():
     text = " ".join(DOC.read_text(encoding="utf-8").split())
     agents = AGENTS.read_text(encoding="utf-8", errors="replace")
 
@@ -102,10 +102,9 @@ def test_sprint287_markdown_and_handover_state_pause_before_readiness():
     assert "Sprint 288: post-D5 next-slice inventory" in text
     assert "documentation/tests-only" in text
     assert "Stop before any work that adds telemetry" in text
-    assert "Sprint 287 next-block reorientation" in agents
-    assert "Yuri approved Sprints 288-289" in agents
-    assert "Sprint 289 view-model contract cross-reference is complete locally" in agents
-    assert "stop for Yuri direction" in agents
+    assert "T1 Stateful Diary Scenario Laboratory is underway" in agents
+    assert "Continue without pause to T1.2" in agents
+    assert "docs/bernie-consultant-triage-implementation-roadmap.md" in agents
 
 
 def test_sprint287_json_and_markdown_stay_aligned():

@@ -15,12 +15,15 @@ Authorship boundary:
 
 from __future__ import annotations
 
+import os
+from pathlib import Path
+
 import pytest
 
 from app.models.tenancy import Practitioner
 from tests.conftest import make_token
 from tests.bernie_scenarios.loader import Scenario, discover_scenarios
-from tests.bernie_scenarios.replay import run_scenario
+from tests.bernie_scenarios.replay import run_scenario, write_evidence_record
 
 
 def _build_params() -> list:
@@ -75,6 +78,16 @@ def test_bernie_scenario_replay(
         practice=practice,
         monkeypatch=monkeypatch,
     )
+
+    assert result.evidence_record["schema_version"] == "bernie.scenario.evidence.v1"
+    assert result.evidence_record["raw_instruction_included"] is False
+    assert result.evidence_record["raw_response_included"] is False
+    evidence_dir = os.getenv("BERNIE_SCENARIO_EVIDENCE_DIR")
+    if evidence_dir:
+        write_evidence_record(
+            result,
+            Path(evidence_dir) / f"{scenario.id}.json",
+        )
 
     evidence_lines = "\n".join(f"  + {e}" for e in result.evidence)
     failure_lines = "\n".join(f"  ! {f}" for f in result.failures)
