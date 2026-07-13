@@ -8,6 +8,13 @@
   "source_scenario_id": null,
   "derivation_id": null,
   "derivation_seed": "",
+  "authority_grant": {
+    "provider_write": false,
+    "diary_write": false,
+    "confirmation": false,
+    "override_authority": false
+  },
+  "adjudication_record": null,
   "promotion_history": [],
   "scenario": {
     "spec_version": "lc1.v1",

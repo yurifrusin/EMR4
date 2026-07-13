@@ -12,8 +12,15 @@
   },
   "generation_timestamp": "2026-07-14T10:00:00+00:00",
   "source_scenario_id": "booking_create_then_exact_duplicate",
-  "derivation_id": "self-certified-derivation",
+  "derivation_id": "sha256:9dcd7b3c29f4af22d4c698dd8cd69d304f0d5153118214424f8a571236f1e633",
   "derivation_seed": "self-certified",
+  "authority_grant": {
+    "provider_write": false,
+    "diary_write": false,
+    "confirmation": false,
+    "override_authority": false
+  },
+  "adjudication_record": null,
   "promotion_history": [],
   "scenario": {
     "spec_version": "lc1.v1",

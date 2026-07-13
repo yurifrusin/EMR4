@@ -9,8 +9,15 @@
   "judge_identity": null,
   "generation_timestamp": "2026-07-14T10:00:00+00:00",
   "source_scenario_id": "booking_create_then_exact_duplicate",
-  "derivation_id": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+  "derivation_id": "sha256:88d972173d986d93449a6f8ded1495c4d6f42a46d3f300f9bce62bf48561d19a",
   "derivation_seed": "paraphrase-v1",
+  "authority_grant": {
+    "provider_write": false,
+    "diary_write": false,
+    "confirmation": false,
+    "override_authority": false
+  },
+  "adjudication_record": null,
   "promotion_history": [],
   "scenario": {
     "spec_version": "lc1.v1",

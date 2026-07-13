@@ -47,6 +47,21 @@
       "estimated_count": null,
       "decision": "candidate_only",
       "access_notes": "Cambridge University repository; requires licence review before dataset download and use. Some portions may have different licensing terms."
+    },
+    {
+      "name": "Healthcare Appointment Booking Calls Dataset",
+      "official_url": "https://www.kaggle.com/datasets/ammarshafiq/healthcare-appointment-booking-calls-dataset",
+      "declared_licence": "Kaggle Community License (unknown specific terms)",
+      "licence_notes": "Kaggle dataset licence terms are separate from any repository/code licence. No licence is accepted by this evaluation. No content has been downloaded.",
+      "capability_labels": [
+        {"label": "healthcare_appointment_booking", "description": "Real-world healthcare appointment booking telephone conversations"},
+        {"label": "patient_provider_interaction", "description": "Natural patient-caller and healthcare provider dialogues"},
+        {"label": "appointment_scheduling", "description": "Scheduling, rescheduling, and cancellation of medical appointments"},
+        {"label": "privacy_sensitive", "description": "Contains potentially sensitive health information; requires privacy review"}
+      ],
+      "estimated_count": null,
+      "decision": "requires_licence_review",
+      "access_notes": "Kaggle dataset; public metadata only recorded here. Requires licence review, privacy/redaction inspection, and jurisdictional review before any content access. NOT downloaded or accepted."
     }
   ]
 }

@@ -19,7 +19,6 @@ from enum import Enum
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
-from typing_extensions import assert_never
 
 # ─── LC1 canonical import (read-only reference) ────────────────────────────
 from app.services.bernie.scenario_spec import ReceptionScenarioSpec
@@ -58,17 +57,28 @@ class AdjudicationState(str, Enum):
 
 
 class ScenarioFamily(str, Enum):
-    """Known scenario families in the LC1/LCCorpus."""
+    """Known scenario families covering the canonical LC1 action/family surface.
+
+    Families: booking_create, booking_move, booking_resize, booking_cancel,
+    status_change, explain_schedule, clarify_temporal, and adversarial.
+    """
 
     BOOKING_CREATE = "booking_create"
+    BOOKING_MOVE = "booking_move"
+    BOOKING_RESIZE = "booking_resize"
+    BOOKING_CANCEL = "booking_cancel"
+    STATUS_CHANGE = "status_change"
+    EXPLAIN_SCHEDULE = "explain_schedule"
     CLARIFY_TEMPORAL = "clarify_temporal"
-    # Additional families may be added as the corpus grows.
+    ADVERSARIAL = "adversarial"
 
 
 class QuarantineReason(str, Enum):
     """Machine-readable reasons for quarantining a candidate.
 
     Every quarantine outcome must carry exactly one of these reasons.
+    ``generator_equals_judge`` has been removed as a duplicate of
+    ``self_certification``.
     """
 
     SELF_CERTIFICATION = "self_certification"
@@ -78,8 +88,11 @@ class QuarantineReason(str, Enum):
     MISSING_PROVENANCE = "missing_provenance"
     UNSAFE_INSTRUCTION = "unsafe_instruction"
     INVALID_TIER_TRANSITION = "invalid_tier_transition"
-    GENERATOR_EQUALS_JUDGE = "generator_equals_judge"
     MISSING_SOURCE_GOLD = "missing_source_gold"
+    ADJUDICATION_REJECTED = "adjudication_rejected"
+    ADJUDICATION_DISPUTED = "adjudication_disputed"
+    DERIVATION_MISMATCH = "derivation_mismatch"
+    GENERATOR_AUTHORITY_GRANT = "generator_authority_grant"
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -90,8 +103,10 @@ class QuarantineReason(str, Enum):
 class GeneratorIdentity(BaseModel):
     """Immutable identity record for a candidate generator.
 
-    Stable identity comparison is by (model_id, instance_id) — two records
-    with the same model and instance are considered the same generator.
+    Identity comparison for the self-certification gate is by ``model_id``
+    only — two instances of the same model are considered the same
+    identity for independence purposes.  ``instance_id`` is preserved for
+    traceability but does not affect the independence check.
     """
 
     model_config = ConfigDict(extra="forbid", frozen=True)
@@ -99,20 +114,25 @@ class GeneratorIdentity(BaseModel):
     model_id: str = Field(min_length=1, description="Generator model identifier")
     instance_id: str | None = Field(
         default=None,
-        description="Optional instance or lane identifier for disambiguation",
+        description="Optional instance or lane identifier for traceability",
     )
 
     def stable_key(self) -> str:
         """Return a deterministic string key for identity comparison."""
         return f"{self.model_id}::{self.instance_id or ''}"
 
+    def model_key(self) -> str:
+        """Return model-level key (ignores instance) for self-certification gate."""
+        return self.model_id
+
 
 class JudgeIdentity(BaseModel):
     """Immutable identity record for an independent judge.
 
-    Stable identity comparison is by (model_id, instance_id), identical in
-    structure to GeneratorIdentity.  The factory rejects any promotion where
-    ``generator.stable_key() == judge.stable_key()``.
+    Identity comparison for the self-certification gate is by ``model_id``
+    only — two instances of the same model are considered the same
+    identity for independence purposes.  ``instance_id`` is preserved for
+    traceability.
     """
 
     model_config = ConfigDict(extra="forbid", frozen=True)
@@ -120,11 +140,71 @@ class JudgeIdentity(BaseModel):
     model_id: str = Field(min_length=1, description="Judge model identifier")
     instance_id: str | None = Field(
         default=None,
-        description="Optional instance or lane identifier for disambiguation",
+        description="Optional instance or lane identifier for traceability",
     )
 
     def stable_key(self) -> str:
         return f"{self.model_id}::{self.instance_id or ''}"
+
+    def model_key(self) -> str:
+        return self.model_id
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  Authority-grant model (explicit structured policy)
+# ═══════════════════════════════════════════════════════════════════════════
+
+
+class AuthorityGrant(BaseModel):
+    """Explicit, strict authority grant for a corpus candidate.
+
+    For generated (Silver/Bronze) candidates all fields must remain
+    ``False``.  Only Gold candidates authored by Sol may carry a non-empty
+    grant.  ``forbidden_tool_calls`` in the embedded scenario is a
+    *restriction* and is never treated as granted authority.
+    """
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    provider_write: bool = False
+    diary_write: bool = False
+    confirmation: bool = False
+    override_authority: bool = False
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  Adjudication record (strict immutable evidence)
+# ═══════════════════════════════════════════════════════════════════════════
+
+
+class AdjudicationRecord(BaseModel):
+    """Strict immutable record of an independent adjudication.
+
+    This is the sole evidence of independent review.  A candidate may only
+    be promoted when the record carries ``decision == "accepted"``.
+    Rejected or disputed adjudications cause quarantine.
+
+    The ``timestamp`` is supplied as evidence (deterministic) — it is never
+    generated by ``datetime.now()`` inside this module.
+    """
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    decision: Literal["accepted", "rejected", "disputed"]
+    judge: JudgeIdentity
+    timestamp: datetime = Field(description="Deterministic timestamp supplied as evidence")
+    checked_semantic_scope: str = Field(
+        min_length=1,
+        description="What semantic scope was checked (e.g. action, entity, temporal)",
+    )
+    checked_evidence_scope: str = Field(
+        min_length=1,
+        description="What evidence was checked (e.g. source_spans, dialogue_turns)",
+    )
+    evidence_ref: str = Field(
+        min_length=1,
+        description="Reference to supporting evidence (e.g. evidence document ID)",
+    )
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -169,7 +249,7 @@ class PromotionOutcome:
 
     Usage::
 
-        result = promote_candidate(candidate, judge)
+        result = promote_candidate(candidate, adjudication)
         if isinstance(result, PromotionOutcome.Promoted):
             ...
         elif isinstance(result, PromotionOutcome.Quarantined):
@@ -179,14 +259,18 @@ class PromotionOutcome:
     """
 
     class Promoted(BaseModel):
-        """The candidate was successfully promoted."""
+        """The candidate was successfully promoted.
+
+        Returns the resulting **immutable** candidate with updated
+        provenance/adjudication, judge/adjudication evidence, and appended
+        promotion history.  Callers receive the changed candidate directly,
+        not detached metadata.
+        """
 
         model_config = ConfigDict(extra="forbid", frozen=True)
 
         outcome: Literal["promoted"] = "promoted"
-        new_tier: ProvenanceTier
-        new_adjudication: AdjudicationState
-        event: PromotionEvent
+        candidate: "CorpusCandidate"
 
     class Quarantined(BaseModel):
         """The candidate was placed in quarantine with a reason."""
@@ -219,14 +303,69 @@ PromotionResult = (
 
 def _compute_derivation_id(
     source_scenario_id: str,
-    generator_key: str,
-    generation_timestamp: datetime,
+    generator_model_id: str,
     *,
     seed: str = "",
 ) -> str:
-    """Deterministic derivation ID from source, generator, and timestamp."""
-    raw = f"{source_scenario_id}::{generator_key}::{generation_timestamp.isoformat()}::{seed}"
-    return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:32]
+    """Deterministic full ``sha256:<64hex>`` derivation ID.
+
+    Reproducible from **source-scenario content** (identified by its ID) plus
+    explicit transformation parameters (``seed``) and generator **model**
+    identity.  Timestamp and lane instance must **not** change the derivation.
+    """
+    raw = f"{source_scenario_id}::{generator_model_id}::{seed}"
+    digest = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+    return f"sha256:{digest}"
+
+
+def _validate_derivation_id(
+    source_scenario_id: str,
+    generator_model_id: str,
+    seed: str,
+    supplied: str | None,
+) -> str | None:
+    """Validate and optionally return a recomputed derivation ID.
+
+    If ``supplied`` is ``None`` the caller must generate one externally.
+    If supplied it is recomputed and a mismatch is signalled via ``ValueError``.
+    Returns the canonical derivation ID for storage.
+    """
+    if supplied is None:
+        return None
+    # Validate format first (before content check)
+    if not supplied.startswith("sha256:") or len(supplied) != 71:
+        raise ValueError(
+            f"derivation_id must be 'sha256:<64 hex>' format, got {supplied!r}"
+        )
+    hex_part = supplied[7:]
+    if not all(c in "0123456789abcdef" for c in hex_part):
+        raise ValueError(
+            f"derivation_id hex part must be lowercase hex, got {hex_part!r}"
+        )
+    # Then recompute and check content
+    expected = _compute_derivation_id(
+        source_scenario_id, generator_model_id, seed=seed
+    )
+    if supplied != expected:
+        raise ValueError(
+            f"Supplied derivation_id {supplied!r} does not match "
+            f"recomputed value {expected!r}"
+        )
+    return supplied
+
+
+def _check_authority_grant(grant: AuthorityGrant) -> QuarantineDetail | None:
+    """Return a quarantine detail if a non-empty authority grant is found."""
+    if grant.provider_write or grant.diary_write or grant.confirmation or grant.override_authority:
+        true_fields = [
+            k for k, v in grant.model_dump().items() if v
+        ]
+        return QuarantineDetail(
+            reason=QuarantineReason.GENERATOR_AUTHORITY_GRANT,
+            message=f"Generated candidate must have empty authority grant, got: {true_fields}",
+            details={"granted_fields": true_fields},
+        )
+    return None
 
 
 class CorpusCandidate(BaseModel):
@@ -248,18 +387,26 @@ class CorpusCandidate(BaseModel):
     judge_identity: JudgeIdentity | None = None
     generation_timestamp: datetime | None = None
 
-    # Source Gold scenario ID (required for Silver/Bronze; may be None for Gold)
+    # Source Gold scenario ID (required for Silver; optional for Bronze;
+    # must be absent for Gold)
     source_scenario_id: str | None = Field(
         default=None, min_length=1, description="Source Gold scenario_id"
     )
 
-    # Stable derivation identifier — reproducible from source + params
+    # Stable derivation identifier — full sha256:<64hex>
     derivation_id: str | None = Field(
-        default=None, min_length=1, description="SHA-256-based derivation hash"
+        default=None,
+        description="Full sha256:<64hex> derivation hash (reproducible from source + params + model)",
     )
     derivation_seed: str = Field(
         default="", description="Seed string fed into derivation hash"
     )
+
+    # Explicit authority grant (must be empty for generated candidates)
+    authority_grant: AuthorityGrant = Field(default_factory=AuthorityGrant)
+
+    # Adjudication record (evidence of independent review)
+    adjudication_record: AdjudicationRecord | None = None
 
     # Promotion history (oldest first)
     promotion_history: list[PromotionEvent] = Field(default_factory=list)
@@ -276,10 +423,26 @@ class CorpusCandidate(BaseModel):
             return datetime.fromisoformat(value)
         return value
 
+    @field_validator("derivation_id", mode="before")
+    @classmethod
+    def _validate_derivation_format(cls, value: object) -> object:
+        """Validate derivation_id format if supplied."""
+        if value is None or not isinstance(value, str):
+            return value
+        if not value.startswith("sha256:") or len(value) != 71:
+            raise ValueError(
+                f"derivation_id must be 'sha256:<64 hex>' format, got {value!r}"
+            )
+        hex_part = value[7:]
+        if not all(c in "0123456789abcdef" for c in hex_part):
+            raise ValueError(
+                f"derivation_id hex part must be lowercase hex, got {hex_part!r}"
+            )
+        return value
+
     @model_validator(mode="after")
     def _validate_provenance_consistency(self) -> "CorpusCandidate":
-        """Fail-closed checks for missing/mismatched provenance."""
-        # Gold requires no generator identity (never model-generated)
+        """Fail-closed checks for provenance consistency."""
         if self.provenance == ProvenanceTier.GOLD:
             if self.generator_identity is not None:
                 raise ValueError("Gold candidates must not carry a generator_identity")
@@ -287,61 +450,67 @@ class CorpusCandidate(BaseModel):
                 raise ValueError("Gold candidates must be adjudicated")
             if self.source_scenario_id is not None:
                 raise ValueError("Gold candidates must not carry a source_scenario_id")
-        elif self.provenance in (ProvenanceTier.SILVER, ProvenanceTier.BRONZE):
+        elif self.provenance == ProvenanceTier.SILVER:
             if self.generator_identity is None:
-                raise ValueError(
-                    f"{self.provenance.value} candidates must carry a generator_identity"
-                )
+                raise ValueError("Silver candidates must carry a generator_identity")
             if self.generation_timestamp is None:
-                raise ValueError(
-                    f"{self.provenance.value} candidates must carry a generation_timestamp"
-                )
+                raise ValueError("Silver candidates must carry a generation_timestamp")
             if self.source_scenario_id is None:
-                raise ValueError(
-                    f"{self.provenance.value} candidates must carry a source_scenario_id"
-                )
+                raise ValueError("Silver candidates must carry a source_scenario_id")
+        elif self.provenance == ProvenanceTier.BRONZE:
+            # Bronze candidates (external/discovery) may or may not have a source
+            if self.generator_identity is None:
+                raise ValueError("Bronze candidates must carry a generator_identity")
+            if self.generation_timestamp is None:
+                raise ValueError("Bronze candidates must carry a generation_timestamp")
+            # source_scenario_id is OPTIONAL for Bronze
 
-        # Gold candidates must have source_scenario_id unset
-        # (they are the source, not derived from one)
         return self
 
     @model_validator(mode="after")
-    def _validate_derivation_id(self) -> "CorpusCandidate":
-        """Auto-compute derivation_id if not provided."""
-        if self.derivation_id is None and self.provenance in (
-            ProvenanceTier.SILVER,
-            ProvenanceTier.BRONZE,
-        ):
-            gen_key = (
-                self.generator_identity.stable_key()
-                if self.generator_identity
-                else "unknown"
+    def _validate_metadata_agreement(self) -> "CorpusCandidate":
+        """Fail-closed: wrapper and embedded scenario metadata must agree.
+
+        A Silver/pending wrapper around a Gold/adjudicated scenario is
+        rejected.  The wrapper owns the definitive metadata; the scenario
+        must match.
+        """
+        scenario = self.scenario
+        if scenario.provenance != self.provenance.value:
+            raise ValueError(
+                f"Wrapper provenance {self.provenance.value!r} does not match "
+                f"embedded scenario provenance {scenario.provenance!r}"
             )
-            ts = self.generation_timestamp or datetime.now(timezone.utc)
-            src = self.source_scenario_id or "unknown"
-            object.__setattr__(
-                self,
-                "derivation_id",
-                _compute_derivation_id(
-                    src, gen_key, ts, seed=self.derivation_seed
-                ),
+        if scenario.adjudication != self.adjudication.value:
+            raise ValueError(
+                f"Wrapper adjudication {self.adjudication.value!r} does not match "
+                f"embedded scenario adjudication {scenario.adjudication!r}"
             )
+        if scenario.family != self.family.value:
+            raise ValueError(
+                f"Wrapper family {self.family.value!r} does not match "
+                f"embedded scenario family {scenario.family!r}"
+            )
+        return self
+
+    @model_validator(mode="after")
+    def _validate_authority_grant(self) -> "CorpusCandidate":
+        """Generated candidates must have an empty authority grant."""
+        if self.provenance in (ProvenanceTier.SILVER, ProvenanceTier.BRONZE):
+            grant = self.authority_grant
+            if grant.provider_write or grant.diary_write or grant.confirmation or grant.override_authority:
+                true_fields = [
+                    k for k, v in grant.model_dump().items() if v
+                ]
+                raise ValueError(
+                    f"Generated candidate must have empty authority grant, "
+                    f"got: {true_fields}"
+                )
         return self
 
     def stable_key(self) -> str:
         """Return a deterministic key for identity/equality comparison."""
         return f"{self.provenance.value}::{self.scenario.scenario_id}::{self.derivation_id or ''}"
-
-    def derive(self, **overrides: Any) -> "CorpusCandidate":
-        """Produce a derived candidate with overridden fields.
-
-        This is a convenience for generators that need to create a new
-        candidate from an existing one with modified fields.  The embedded
-        scenario is shallow-copied (objects reused, not deep-cloned).
-        """
-        data = self.model_dump(exclude={"scenario"})
-        data.update(overrides)
-        return CorpusCandidate(scenario=self.scenario, **data)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -350,20 +519,33 @@ class CorpusCandidate(BaseModel):
 
 
 def _check_self_certification(
-    candidate: CorpusCandidate, judge: JudgeIdentity | None
+    candidate: CorpusCandidate, adjudication: AdjudicationRecord | None
 ) -> QuarantineDetail | None:
-    """Return a quarantine detail if the candidate is self-certified."""
+    """Return a quarantine detail if the candidate is self-certified.
+
+    Independence is at the **model** level, not instance level.  Two
+    instances/lanes of the same provider model cannot certify that model's
+    generated candidate.  ``model_key()`` is used for comparison;
+    ``instance_id`` is preserved for traceability only.
+    """
     if candidate.generator_identity is None:
         return None
-    if judge is None:
+    if adjudication is None:
         return None
-    if candidate.generator_identity.stable_key() == judge.stable_key():
+    gen_key = candidate.generator_identity.model_key()
+    judge_key = adjudication.judge.model_key()
+    if gen_key == judge_key:
         return QuarantineDetail(
             reason=QuarantineReason.SELF_CERTIFICATION,
-            message="Generator and judge identities must differ",
+            message=(
+                "Generator and judge must differ at the model level; "
+                f"both have model_id={gen_key!r}"
+            ),
             details={
-                "generator": candidate.generator_identity.stable_key(),
-                "judge": judge.stable_key(),
+                "generator_model_id": candidate.generator_identity.model_id,
+                "generator_instance_id": candidate.generator_identity.instance_id,
+                "judge_model_id": adjudication.judge.model_id,
+                "judge_instance_id": adjudication.judge.instance_id,
             },
         )
     return None
@@ -374,7 +556,6 @@ def _check_schema_validity(
 ) -> QuarantineDetail | None:
     """Return a quarantine detail if the embedded scenario fails validation."""
     try:
-        # Re-validate the embedded scenario by constructing a fresh instance
         _ = ReceptionScenarioSpec.model_validate(
             candidate.scenario.model_dump()
         )
@@ -383,42 +564,6 @@ def _check_schema_validity(
             reason=QuarantineReason.SCHEMA_INVALID,
             message=f"Embedded scenario validation failed: {exc}",
         )
-    return None
-
-
-def _check_authority_boundary(
-    candidate: CorpusCandidate,
-) -> QuarantineDetail | None:
-    """Return a quarantine detail if the candidate claims prohibited authority.
-
-    No generated Silver/Bronze candidate may claim provider, write, or
-    confirmation authority.  Currently the authority boundary is enforced by
-    the scenario schema itself (which has no such fields), so this is a
-    structural check.
-    """
-    # The ReceptionScenarioSpec schema is inherently authority-free — it
-    # contains no provider, write, or confirmation fields.  We verify the
-    # candidate does not attempt to embed non-null values in fields that
-    # would imply authority.
-    scenario = candidate.scenario
-    # Check that no forbidden values leak through expected fields
-    forbidden_patterns = {
-        "provider",
-        "write_authority",
-        "confirmation",
-        "provider_call",
-    }
-    dump = scenario.model_dump()
-    for key, value in dump.items():
-        if isinstance(value, str):
-            lower = value.lower()
-            for pattern in forbidden_patterns:
-                if pattern in lower:
-                    return QuarantineDetail(
-                        reason=QuarantineReason.AUTHORITY_BREACH,
-                        message=f"Field '{key}' contains authority-related content: '{value}'",
-                        details={"field": key, "value": value, "pattern": pattern},
-                    )
     return None
 
 
@@ -434,7 +579,6 @@ def _check_evidence_mismatch(
     ]
     for field_name, spans in scenario.source_spans.items():
         for span in spans:
-            # Support both dict (from model_construct) and ScenarioSourceSpan
             if isinstance(span, dict):
                 turn_index = span.get("turn_index", 0)
                 start = span.get("start", 0)
@@ -480,9 +624,7 @@ def _check_missing_provenance(
     candidate: CorpusCandidate,
 ) -> QuarantineDetail | None:
     """Return a quarantine detail if required provenance fields are missing."""
-    # The Pydantic model already enforces presence via field validators.
-    # This is a belt-and-suspenders check.
-    if candidate.provenance in (ProvenanceTier.SILVER, ProvenanceTier.BRONZE):
+    if candidate.provenance == ProvenanceTier.SILVER:
         missing = []
         if candidate.generator_identity is None:
             missing.append("generator_identity")
@@ -494,14 +636,26 @@ def _check_missing_provenance(
             return QuarantineDetail(
                 reason=QuarantineReason.MISSING_PROVENANCE,
                 message=f"Missing required provenance fields: {', '.join(missing)}",
-                details={"missing_fields": missing},
+                details={"missing_fields": missing, "tier": "silver"},
+            )
+    elif candidate.provenance == ProvenanceTier.BRONZE:
+        missing = []
+        if candidate.generator_identity is None:
+            missing.append("generator_identity")
+        if candidate.generation_timestamp is None:
+            missing.append("generation_timestamp")
+        if missing:
+            return QuarantineDetail(
+                reason=QuarantineReason.MISSING_PROVENANCE,
+                message=f"Missing required provenance fields: {', '.join(missing)}",
+                details={"missing_fields": missing, "tier": "bronze"},
             )
     return None
 
 
 def promote_candidate(
     candidate: CorpusCandidate,
-    judge: JudgeIdentity | None = None,
+    adjudication: AdjudicationRecord | None = None,
     *,
     target_tier: ProvenanceTier | None = None,
 ) -> PromotionResult:
@@ -509,33 +663,34 @@ def promote_candidate(
 
     This function is the sole deterministic promotion gate.  It checks:
 
-    * Self-certification (generator == judge)
+    * Self-certification (generator model_id == judge model_id)
     * Schema validity of the embedded scenario
-    * Authority-boundary compliance
     * Source-span evidence match
     * Missing provenance fields
     * Valid tier transitions
+    * Authority grant (must be empty for generated candidates)
+    * Adjudication record decision (must be ``"accepted"``)
+    * Derivation ID format and consistency
 
     Parameters
     ----------
     candidate :
         The corpus candidate to promote.
-    judge :
-        The identity of the independent judge.  Must differ from the
-        candidate's generator identity for any promotion beyond Bronze.
+    adjudication :
+        The independent adjudication record.  Must have
+        ``decision == "accepted"`` for any promotion.  Bare
+        ``JudgeIdentity`` is never sufficient.
     target_tier :
-        Explicit target tier for the promotion.  If omitted, the default
-        transition path is used (Bronze -> Silver, Silver -> Gold).
+        Explicit target tier.  If omitted, the default transition path is
+        used (Bronze -> Silver, Silver -> Gold).
 
     Returns
     -------
     PromotionResult
-        ``Promoted`` if the promotion succeeds, ``Quarantined`` or
-        ``Rejected`` otherwise.
+        ``Promoted`` (with the updated immutable candidate) if the
+        promotion succeeds, ``Quarantined`` or ``Rejected`` otherwise.
     """
     # ── Belt-and-suspenders: re-check Pydantic validity ──────────────────
-    # (Pydantic frozen models are validated at construction time, so this
-    #  catches mis-constructed candidates early.)
     try:
         _ = candidate.model_dump()
     except Exception as exc:
@@ -548,16 +703,80 @@ def promote_candidate(
 
     # ── Run all quarantine checks ─────────────────────────────────────────
     checks = [
-        ("self-certification", _check_self_certification(candidate, judge)),
+        ("self-certification", _check_self_certification(candidate, adjudication)),
         ("schema validity", _check_schema_validity(candidate)),
-        ("authority boundary", _check_authority_boundary(candidate)),
         ("evidence match", _check_evidence_mismatch(candidate)),
         ("missing provenance", _check_missing_provenance(candidate)),
+        ("authority grant", _check_authority_grant(candidate.authority_grant)),
     ]
 
     for check_name, detail in checks:
         if detail is not None:
             return PromotionOutcome.Quarantined(quarantine=detail)
+
+    # ── Adjudication record gate ──────────────────────────────────────────
+    # Bronze -> Silver and Silver -> Gold require an accepted independent
+    # record.  Rejected/disputed adjudications quarantine.
+    if adjudication is None:
+        return PromotionOutcome.Quarantined(
+            quarantine=QuarantineDetail(
+                reason=QuarantineReason.MISSING_PROVENANCE,
+                message="Promotion requires an adjudication record",
+            )
+        )
+
+    if adjudication.decision == "rejected":
+        return PromotionOutcome.Quarantined(
+            quarantine=QuarantineDetail(
+                reason=QuarantineReason.ADJUDICATION_REJECTED,
+                message="Adjudication record decision is 'rejected'",
+                details={
+                    "judge_model_id": adjudication.judge.model_id,
+                    "evidence_ref": adjudication.evidence_ref,
+                },
+            )
+        )
+
+    if adjudication.decision == "disputed":
+        return PromotionOutcome.Quarantined(
+            quarantine=QuarantineDetail(
+                reason=QuarantineReason.ADJUDICATION_DISPUTED,
+                message="Adjudication record decision is 'disputed'",
+                details={
+                    "judge_model_id": adjudication.judge.model_id,
+                    "evidence_ref": adjudication.evidence_ref,
+                },
+            )
+        )
+
+    # ── Derivation ID verification ────────────────────────────────────────
+    if candidate.derivation_id is not None:
+        gen_model_id = (
+            candidate.generator_identity.model_id
+            if candidate.generator_identity
+            else "unknown"
+        )
+        src_id = candidate.source_scenario_id or "unknown"
+        try:
+            _validate_derivation_id(
+                src_id,
+                gen_model_id,
+                candidate.derivation_seed,
+                candidate.derivation_id,
+            )
+        except ValueError as exc:
+            return PromotionOutcome.Quarantined(
+                quarantine=QuarantineDetail(
+                    reason=QuarantineReason.DERIVATION_MISMATCH,
+                    message=str(exc),
+                    details={
+                        "supplied": candidate.derivation_id,
+                        "source_scenario_id": src_id,
+                        "generator_model_id": gen_model_id,
+                        "seed": candidate.derivation_seed,
+                    },
+                )
+            )
 
     # ── Determine target tier ─────────────────────────────────────────────
     current_tier = candidate.provenance
@@ -602,44 +821,72 @@ def promote_candidate(
 
     # ── Promotion-specific checks ─────────────────────────────────────────
     if target_tier == ProvenanceTier.GOLD:
-        # Only Silver candidates can be promoted to Gold
         if current_tier != ProvenanceTier.SILVER:
             return PromotionOutcome.Quarantined(
                 quarantine=QuarantineDetail(
                     reason=QuarantineReason.INVALID_TIER_TRANSITION,
-                    message=f"Only Silver candidates may be promoted to Gold",
+                    message="Only Silver candidates may be promoted to Gold",
                 )
             )
-        # Gold promotion requires an independent judge
-        if judge is None:
-            return PromotionOutcome.Quarantined(
-                quarantine=QuarantineDetail(
-                    reason=QuarantineReason.MISSING_PROVENANCE,
-                    message="Gold promotion requires an independent judge",
-                )
-            )
-        # Generator != Judge already checked above
 
-    # ── Compute promotion event ───────────────────────────────────────────
+    # ── Compute new candidate state ───────────────────────────────────────
     new_adjudication = (
         AdjudicationState.ADJUDICATED
         if target_tier == ProvenanceTier.GOLD
         else AdjudicationState.PENDING
     )
 
+    # Timestamp comes from the adjudication record, never datetime.now()
+    promotion_timestamp = adjudication.timestamp
+
     event = PromotionEvent(
         from_tier=current_tier,
         to_tier=target_tier,
-        timestamp=datetime.now(timezone.utc),
-        judge=judge,
+        timestamp=promotion_timestamp,
+        judge=adjudication.judge,
         reason=f"Promoted from {current_tier.value} to {target_tier.value}",
     )
 
-    return PromotionOutcome.Promoted(
-        new_tier=target_tier,
-        new_adjudication=new_adjudication,
-        event=event,
+    # Build the updated immutable candidate.
+    # The embedded scenario's metadata fields are updated to match the new
+    # wrapper state so the metadata-agreement validator passes.
+    new_history = list(candidate.promotion_history) + [event]
+
+    updated_scenario = ReceptionScenarioSpec.model_validate(
+        {
+            **candidate.scenario.model_dump(),
+            "provenance": target_tier.value,
+            "adjudication": new_adjudication.value,
+        }
     )
+
+    # Gold candidates must not carry generator_identity or source_scenario_id
+    updated_generator = (
+        None if target_tier == ProvenanceTier.GOLD
+        else candidate.generator_identity
+    )
+    updated_source_id = (
+        None if target_tier == ProvenanceTier.GOLD
+        else candidate.source_scenario_id
+    )
+
+    updated = CorpusCandidate(
+        provenance=target_tier,
+        adjudication=new_adjudication,
+        family=candidate.family,
+        generator_identity=updated_generator,
+        judge_identity=adjudication.judge,
+        generation_timestamp=candidate.generation_timestamp,
+        source_scenario_id=updated_source_id,
+        derivation_id=candidate.derivation_id,
+        derivation_seed=candidate.derivation_seed,
+        authority_grant=candidate.authority_grant,
+        adjudication_record=adjudication,
+        promotion_history=new_history,
+        scenario=updated_scenario,
+    )
+
+    return PromotionOutcome.Promoted(candidate=updated)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -711,6 +958,17 @@ class RegistryEntry(BaseModel):
             )
         return self
 
+    @model_validator(mode="after")
+    def _validate_healthcare_entry(self) -> "RegistryEntry":
+        """Specific gate for Healthcare Appointment Booking Calls Dataset."""
+        if "healthcare" in self.name.lower() and "appointment" in self.name.lower():
+            if self.decision != "requires_licence_review":
+                raise ValueError(
+                    "Healthcare Appointment dataset must be marked "
+                    "requires_licence_review"
+                )
+        return self
+
 
 class CandidateRegistry(BaseModel):
     """Schema for an external-source candidate registry.
@@ -730,7 +988,9 @@ class CandidateRegistry(BaseModel):
 # ═══════════════════════════════════════════════════════════════════════════
 
 __all__ = [
+    "AdjudicationRecord",
     "AdjudicationState",
+    "AuthorityGrant",
     "CandidateRegistry",
     "CapabilityLabel",
     "CorpusCandidate",
@@ -746,4 +1006,6 @@ __all__ = [
     "ScenarioFamily",
     "promote_candidate",
     "RegistryDecision",
+    "_compute_derivation_id",
+    "_validate_derivation_id",
 ]

@@ -9,8 +9,8 @@ are implemented deterministically in
 function.
 
 No model may certify its own corpus.  No generated candidate may be
-promoted to Gold without an independent judge.  Sol (the protected
-orchestrator/integrator) is the only authority that can change
+promoted to Gold without an independent adjudication record.  Sol (the
+protected orchestrator/integrator) is the only authority that can change
 `adjudication` from `pending` to `adjudicated`.
 
 ---
@@ -41,8 +41,8 @@ orchestrator/integrator) is the only authority that can change
 
 | From | To | Requirements |
 |---|---|---|
-| Bronze | Silver | Explicit independent adjudication of semantics. Judge identity must be recorded and differ from generator identity. |
-| Silver | Gold | Independent judge (model or human) confirms schema validity and semantic equivalence to the source Gold contract. Judge identity must differ from generator identity. |
+| Bronze | Silver | Explicit independent adjudication record with `decision == "accepted"`. Judge identity must differ from generator identity at **model level**. |
+| Silver | Gold | Independent adjudication record (model or human) with `decision == "accepted"` confirms schema validity and semantic equivalence. Judge model must differ from generator model. |
 
 ### Forbidden
 
@@ -59,15 +59,38 @@ orchestrator/integrator) is the only authority that can change
 
 | Reason | Trigger |
 |---|---|
-| `self_certification` | Generator identity equals judge identity. |
-| `generator_equals_judge` | Same as above (alternate code path). |
+| `self_certification` | Generator model_id equals judge model_id. (Instance-level differences do not bypass this check.) |
 | `schema_invalid` | Embedded `ReceptionScenarioSpec` fails Pydantic validation. |
-| `authority_breach` | Candidate claims provider, write, or confirmation authority. |
+| `authority_breach` | (removed — replaced by `generator_authority_grant`) |
+| `generator_authority_grant` | Generated (Silver/Bronze) candidate carries a non-empty `AuthorityGrant`. |
 | `evidence_mismatch` | Source spans do not match original utterance text byte-for-byte. |
 | `missing_provenance` | Required provenance fields (`generator_identity`, `generation_timestamp`, `source_scenario_id`) are absent. |
 | `unsafe_instruction` | Instruction text contains adversarial or unsafe fragments. |
 | `invalid_tier_transition` | Attempted transition is not in the allowed set. |
-| `missing_source_gold` | Silver/Bronze candidate lacks a valid source Gold scenario ID. |
+| `missing_source_gold` | Silver candidate lacks a valid source Gold scenario ID. |
+| `adjudication_rejected` | Adjudication record decision is `"rejected"`. |
+| `adjudication_disputed` | Adjudication record decision is `"disputed"`. |
+| `derivation_mismatch` | Supplied derivation ID does not match recomputed value. |
+
+---
+
+## Adjudication Record
+
+Every promotion requires a strict immutable `AdjudicationRecord`:
+
+```python
+class AdjudicationRecord(BaseModel):
+    decision: Literal["accepted", "rejected", "disputed"]
+    judge: JudgeIdentity
+    timestamp: datetime        # supplied as evidence; never datetime.now()
+    checked_semantic_scope: str
+    checked_evidence_scope: str
+    evidence_ref: str
+```
+
+- Bronze → Silver and Silver → Gold require `decision == "accepted"`.
+- Rejected or disputed adjudications cause quarantine.
+- A bare `JudgeIdentity` is never sufficient to promote.
 
 ---
 
@@ -76,7 +99,7 @@ orchestrator/integrator) is the only authority that can change
 ```python
 def promote_candidate(
     candidate: CorpusCandidate,
-    judge: JudgeIdentity | None = None,
+    adjudication: AdjudicationRecord | None = None,
     *,
     target_tier: ProvenanceTier | None = None,
 ) -> PromotionResult:
@@ -84,8 +107,9 @@ def promote_candidate(
 
 **Returns** one of:
 
-- `PromotionOutcome.Promoted` — contains `new_tier`, `new_adjudication`,
-  and a `PromotionEvent` record.
+- `PromotionOutcome.Promoted` — contains the resulting **immutable
+  `CorpusCandidate`** with updated provenance/adjudication, attached judge
+  identity, adjudication record, and appended promotion history.
 - `PromotionOutcome.Quarantined` — contains a `QuarantineDetail` with a
   machine-readable `QuarantineReason` and a human-readable message.
 - `PromotionOutcome.Rejected` — the candidate is not eligible for the
@@ -93,16 +117,17 @@ def promote_candidate(
 
 ---
 
-## Generator / Judge Identity
+## Generator / Judge Identity (Model-Level Independence)
 
-Both `GeneratorIdentity` and `JudgeIdentity` are immutable frozen models
-with a `stable_key()` method that returns
-`"{model_id}::{instance_id or ''}"`.  Two identities compare as equal if
-their stable keys match.
+Both `GeneratorIdentity` and `JudgeIdentity` are immutable frozen models.
 
-**Rule:** `generator.stable_key() != judge.stable_key()` for any candidate
-promoted beyond Bronze.  Self-certification results in immediate
-quarantine.
+- `model_key()` returns only the `model_id` (used for self-certification gate).
+- `stable_key()` returns `"{model_id}::{instance_id or ''}"` (preserved for
+  traceability but **not** used for the independence check).
+
+**Rule:** `generator.model_key() != judge.model_key()` for any promotion.
+Self-certification results in immediate quarantine.  Two instances/lanes of
+the same model are still considered self-certification.
 
 ---
 
@@ -112,14 +137,89 @@ quarantine.
 `ReceptionScenarioSpec` (the LC1 canonical schema).  The wrapper carries
 all provenance metadata; the embedded scenario is never mutated.
 
-Mandatory fields for Silver/Bronze candidates:
-- `provenance` — `"silver"` or `"bronze"`
-- `adjudication` — `"pending"` (must not be `"adjudicated"`)
+Mandatory fields for Silver candidates:
+- `provenance` — `"silver"`
+- `adjudication` — `"pending"`
 - `family` — one of the known `ScenarioFamily` values
 - `generator_identity` — who generated this candidate
 - `generation_timestamp` — when it was generated
-- `source_scenario_id` — the Gold scenario ID it derives from
-- `derivation_id` — stable SHA-256 hash reproducible from source + params
+- `source_scenario_id` — the Gold scenario ID it derives from (required)
+- `derivation_id` — full `sha256:<64 hex>` stable hash
+
+Mandatory fields for Bronze candidates:
+- `provenance` — `"bronze"`
+- `adjudication` — `"pending"`
+- `family` — one of the known `ScenarioFamily` values
+- `generator_identity` — who generated this candidate
+- `generation_timestamp` — when it was generated
+- `source_scenario_id` — optional (external/discovery candidates may omit)
+
+### Metadata Agreement
+
+Wrapper and embedded scenario metadata fields must agree:
+- `wrapper.provenance == scenario.provenance`
+- `wrapper.adjudication == scenario.adjudication`
+- `wrapper.family == scenario.family`
+
+A Silver/pending wrapper around a Gold/adjudicated scenario is rejected.
+
+---
+
+## Derivation IDs
+
+Format: `sha256:<64 lowercase hex characters>` (71 characters total).
+
+Reproducible from:
+1. Source scenario ID
+2. Generator model identity (model_id only — no instance, no timestamp)
+3. Transformation parameters (derivation_seed)
+
+```python
+def _compute_derivation_id(source_scenario_id, generator_model_id, *, seed):
+    raw = f"{source_scenario_id}::{generator_model_id}::{seed}"
+    digest = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+    return f"sha256:{digest}"
+```
+
+A supplied derivation ID is recomputed and compared.  A mismatch causes
+quarantine via `DERIVATION_MISMATCH`.
+
+---
+
+## Authority Grants
+
+Authority is managed via an explicit structured `AuthorityGrant` model:
+
+```python
+class AuthorityGrant(BaseModel):
+    provider_write: bool = False
+    diary_write: bool = False
+    confirmation: bool = False
+    override_authority: bool = False
+```
+
+- **Generated (Silver/Bronze) candidates:** `AuthorityGrant` must be empty
+  (all `False`).  A non-empty grant quarantines via `GENERATOR_AUTHORITY_GRANT`.
+- **Gold (Sol-authored) candidates:** May carry any grant.
+- **Substring scanning is removed.** Descriptions/outcomes may mention
+  "provider" or "confirmation" as evidence context without triggering a breach.
+- **`forbidden_tool_calls`** in the embedded scenario is a *restriction* and
+  is never treated as granted authority.
+
+---
+
+## Scenario Family
+
+The `ScenarioFamily` enum covers the canonical LC1 action/family surface:
+
+- `booking_create`
+- `booking_move`
+- `booking_resize`
+- `booking_cancel`
+- `status_change`
+- `explain_schedule`
+- `clarify_temporal`
+- `adversarial`
 
 ---
 
@@ -145,15 +245,19 @@ No licence is accepted by this evaluation.
 
 ---
 
-## Authority Boundaries
+## Adjudication Record (Evidence of Independent Review)
 
-The factory rejects any candidate that claims:
+```python
+class AdjudicationRecord(BaseModel):
+    decision: Literal["accepted", "rejected", "disputed"]
+    judge: JudgeIdentity
+    timestamp: datetime
+    checked_semantic_scope: str
+    checked_evidence_scope: str
+    evidence_ref: str
+```
 
-- **Provider authority** — any field value containing "provider" or
-  "provider_call"
-- **Write authority** — any field value containing "write_authority"
-- **Confirmation authority** — any field value containing "confirmation"
-
-The `ReceptionScenarioSpec` schema is inherently authority-free, so this
-check is a structural safeguard against encoding authority claims in
-string fields.
+The adjudication record is the sole evidence of independent review.  The
+timestamp is supplied as evidence and is **never** generated by
+`datetime.now()` inside the module.  A bare `JudgeIdentity` is never
+sufficient for promotion.
