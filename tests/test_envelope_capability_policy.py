@@ -795,25 +795,19 @@ class TestDirectCapabilityMatrix:
     def test_undeclared_author_rejected(
         self, cap_name, tier, allowed_authors, envelope_type
     ):
-        """An author not in the capability's allowed_authors list must be rejected.
-
-        Picks an envelope type that is tier-compatible with this capability so the
-        author check fires before any tier-incompatibility error.  Skips when all
-        five authors are already declared (no undeclared author exists).
-        """
-        undeclared = _pick_undeclared_author(allowed_authors)
-        if undeclared in allowed_authors:
-            pytest.skip("All authors are declared for this capability")
-        # Use a tier-compatible envelope type
-        if tier is BernieCapabilityTier.confirm:
-            test_type = "confirmation"
-        elif tier in (BernieCapabilityTier.read_only, BernieCapabilityTier.meta):
-            test_type = "suggestion"
+        """An author not in the capability's allowed_authors list must be rejected."""
+        if envelope_type == "confirmation" and tier is BernieCapabilityTier.confirm:
+            actual_allowed = (DiaryActionAuthor.staff_ui,)
         else:
-            test_type = "proposal"
+            actual_allowed = allowed_authors
+
+        undeclared = _pick_undeclared_author(actual_allowed)
+        if undeclared in actual_allowed:
+            pytest.skip("All authors are declared for this capability")
+
         with pytest.raises(ValueError, match="not permitted"):
             validate_envelope_authority(
-                envelope_type=test_type,
+                envelope_type=envelope_type,
                 action_name=cap_name,
                 author=undeclared,
             )
@@ -975,23 +969,19 @@ class TestGrammarAliasMatrix:
     def test_undeclared_author_rejected(
         self, alias, verb, alias_tier, allowed_authors, capability_name, envelope_type
     ):
-        """An author not in the allowed list must be rejected.
+        """An author not in the allowed list must be rejected."""
+        if envelope_type == "confirmation" and alias_tier is BernieCapabilityTier.confirm:
+            actual_allowed = (DiaryActionAuthor.staff_ui,)
+        else:
+            actual_allowed = get_bernie_capability(capability_name).allowed_authors
 
-        Picks an envelope type that is tier-compatible with this alias so the
-        author check fires before any tier-incompatibility error.  For confirm-tier
-        aliases the only envelope type that both passes the tier gate and triggers
-        the staff_ui narrowing is ``"confirmation"``.  Skips when all five authors
-        are already declared (no undeclared author exists).
-        """
-        undeclared = _pick_undeclared_author(allowed_authors)
-        if undeclared in allowed_authors:
+        undeclared = _pick_undeclared_author(actual_allowed)
+        if undeclared in actual_allowed:
             pytest.skip("All authors are declared for this alias")
-        # Use a tier-compatible envelope type: confirmation for confirm-tier
-        # (triggers staff_ui narrowing), intent for everything else.
-        test_type = "confirmation" if alias_tier is BernieCapabilityTier.confirm else "intent"
+
         with pytest.raises(ValueError, match="not permitted"):
             validate_envelope_authority(
-                envelope_type=test_type,
+                envelope_type=envelope_type,
                 action_name=alias,
                 author=undeclared,
             )
