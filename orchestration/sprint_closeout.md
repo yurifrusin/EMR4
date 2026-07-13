@@ -14942,3 +14942,63 @@ Status: accepted and integrated on 2026-07-13.
 
 Sprint engine state: continuing directly into the bounded S10-S12 Terra
 executor pilot. No user decision is required.
+
+---
+
+## S10 Terra Preflight Escalation
+
+Status: blocked before Conductor dispatch.
+
+The fresh S10 planning receipt returned `revision_required` because the clean
+Claude and Antigravity worktrees were not at `handoff/current`. The required
+receipt cannot be waived or its policy changed by Terra. No Conductor or worker
+was launched, no implementation or test files changed, and no integration was
+attempted. The durable escalation record is
+`orchestration/agent_inbox/codex/s10-terra-preflight-escalation.md`.
+
+Sprint engine state: paused only for the declared Sol authority-boundary
+decision. S11 and S12 remain unopened.
+
+---
+
+## S10 W1 Acceptance Escalation
+
+W1 supplied provider-free workflow-chain harness candidate `ae0fb775`, but
+Terra rejected it before staging integration. The candidate modified the
+excluded runtime-isolation guard to exempt its new `app/services` module, which
+imports interpretation-harness tooling. The Conductor plan requires that guard
+to pass and does not authorize weakening it.
+
+The existing guard also has a separate baseline failure in `app/config.py`; this
+does not resolve the new isolation conflict. Replanning the harness onto a
+test-only surface or changing the runtime-isolation boundary requires Sol.
+W2 was not dispatched, no candidate code was integrated, and S11/S12 remain
+unopened. See `orchestration/agent_inbox/codex/review-terra-s10-w1-acceptance.md`.
+
+---
+
+## S10 V2 W1 Acceptance
+
+Sol preserved the runtime-isolation boundary and DeepSeek Pro reallocated W1 to
+the test-only `tests/workflow_chain/` surface. Terra accepted and integrated
+candidate `520e21de` as `71f3b0d7`: it has no `app/` changes, leaves protected
+isolation files untouched, and adds zero failures beyond the existing documented
+`app/config.py` baseline. W2 remains allocated for adversarial review only.
+
+---
+
+## S10 Closeout - Test-Only Receptionist Workflow Evidence
+
+S10 is complete on Terra staging. DeepSeek Pro's V2 plan preserved Sol's
+runtime-isolation boundary and moved the workflow-chain harness to
+`tests/workflow_chain/`. Terra integrated accepted W1 as `71f3b0d7` and accepted
+W2 adversarial review as `ab1bedc3`. The integrated report covers eight authored
+synthetic chains and 26 steps with aggregate-only output.
+
+The combined workflow-chain, adversarial, and interpretation-harness suite
+passes. The runtime-isolation guard retains the one documented unchanged
+`app/config.py` baseline failure, with zero new failures and no `app/` or
+protected-test changes. W2 recorded two medium test-only context-classification
+findings and two low observations; none opened a runtime, provider, write, or
+policy gate. Rejected W1 `ae0fb775`, all plan revisions, and W2's provenance
+correction remain committed evidence. S11 remains unopened pending Sol review.

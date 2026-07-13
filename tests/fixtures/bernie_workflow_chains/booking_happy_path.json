@@ -1,0 +1,44 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "booking_happy_path",
+      "label": "Booking happy path: patient → clarify → slot_search → create proposal",
+      "steps": [
+        {
+          "step_label": "initial_request",
+          "utterance": "Book an appointment this afternoon.",
+          "expected_verb": "create",
+          "expected_dispatch": "route_to_confirm",
+          "expected_frame_kind": "proposal",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "patient_clarification",
+          "utterance": "Which patient did you mean before booking?",
+          "expected_verb": null,
+          "expected_dispatch": "request_clarification",
+          "expected_frame_kind": "clarify",
+          "expected_resolution": "clarification_needed"
+        },
+        {
+          "step_label": "patient_resolved",
+          "utterance": "Find an available appointment slot after 2pm.",
+          "expected_verb": "slot_search",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "create_proposal",
+          "utterance": "Make a booking for the available slot.",
+          "expected_verb": "create",
+          "expected_dispatch": "route_to_confirm",
+          "expected_frame_kind": "proposal",
+          "expected_resolution": "resolved"
+        }
+      ]
+    }
+  ]
+}

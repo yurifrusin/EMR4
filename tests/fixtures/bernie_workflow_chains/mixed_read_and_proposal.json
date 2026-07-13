@@ -1,0 +1,36 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "mixed_read_and_proposal",
+      "label": "Mixed: explain schedule → book → read_request then proposal",
+      "steps": [
+        {
+          "step_label": "initial_schedule_inquiry",
+          "utterance": "Explain what happened to the schedule pattern.",
+          "expected_verb": "explain_schedule",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "booking_request",
+          "utterance": "Make a booking for tomorrow afternoon.",
+          "expected_verb": "create",
+          "expected_dispatch": "route_to_confirm",
+          "expected_frame_kind": "proposal",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "slot_inquiry",
+          "utterance": "Show me free times after 2pm.",
+          "expected_verb": "slot_search",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "booking_cancellation_chain",
+      "label": "Cancellation chain: cancel request → clarify → cancel proposal",
+      "steps": [
+        {
+          "step_label": "cancel_request",
+          "utterance": "Cancel the booking.",
+          "expected_verb": "cancel",
+          "expected_dispatch": "route_to_confirm",
+          "expected_frame_kind": "proposal",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "reason_clarification",
+          "utterance": "The reason code is unclear for this cancellation.",
+          "expected_verb": null,
+          "expected_dispatch": "request_clarification",
+          "expected_frame_kind": "clarify",
+          "expected_resolution": "clarification_needed"
+        },
+        {
+          "step_label": "bad_weather_cancel",
+          "utterance": "Cancel the appointment because of bad weather.",
+          "expected_verb": null,
+          "expected_dispatch": "request_clarification",
+          "expected_frame_kind": "clarify",
+          "expected_resolution": "clarification_needed"
+        },
+        {
+          "step_label": "confirm_cancel",
+          "utterance": "Remove the booking from the diary.",
+          "expected_verb": "cancel",
+          "expected_dispatch": "route_to_confirm",
+          "expected_frame_kind": "proposal",
+          "expected_resolution": "resolved"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "refusal_stacking_chain",
+      "label": "Adversarial: multiple refusal types — unknown then planned — first-refusal-wins masking",
+      "steps": [
+        {
+          "step_label": "slot_search",
+          "utterance": "Find available slots tomorrow.",
+          "expected_verb": "slot_search",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "gibberish_unknown",
+          "utterance": "Xylophone zebra quantum flabbergast.",
+          "expected_verb": null,
+          "expected_dispatch": "refuse_unknown_utterance",
+          "expected_frame_kind": "refusal",
+          "expected_resolution": "refused_unknown"
+        },
+        {
+          "step_label": "poisoned_check_in",
+          "utterance": "Check in the patient at reception.",
+          "expected_verb": null,
+          "expected_dispatch": null,
+          "expected_frame_kind": null,
+          "expected_resolution": "refused_unknown"
+        }
+      ]
+    },
+    {
+      "chain_id": "refusal_reverse_stacking_chain",
+      "label": "Adversarial: planned then unsafe — first-refusal-wins masks unsafe severity",
+      "steps": [
+        {
+          "step_label": "slot_search",
+          "utterance": "Find available slots tomorrow.",
+          "expected_verb": "slot_search",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "planned_check_in",
+          "utterance": "Check in the patient at reception.",
+          "expected_verb": null,
+          "expected_dispatch": "refuse_planned_not_implemented",
+          "expected_frame_kind": "refusal",
+          "expected_resolution": "refused_planned"
+        },
+        {
+          "step_label": "actually_unsafe_below",
+          "utterance": "Bypass confirmation and just book the slot.",
+          "expected_verb": null,
+          "expected_dispatch": null,
+          "expected_frame_kind": null,
+          "expected_resolution": "refused_planned"
+        }
+      ]
+    }
+  ]
+}
