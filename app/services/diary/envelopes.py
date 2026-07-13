@@ -72,6 +72,19 @@ class DiaryActionProposal(DiaryActionEnvelopeBase):
     evidence_refs: list[str] = Field(default_factory=list)
     review_reasons: list[str] = Field(default_factory=list)
 
+    @model_validator(mode="after")
+    def _enforce_registered_proposal_authority(self) -> "DiaryActionProposal":
+        from app.services.diary.envelope_capability_policy import (
+            validate_envelope_authority,
+        )
+
+        validate_envelope_authority(
+            envelope_type="proposal",
+            action_name=self.action_name,
+            author=self.author,
+        )
+        return self
+
 
 class DiaryActionConfirmation(DiaryActionEnvelopeBase):
     """A staff-confirmed envelope that can be consumed by a write path later."""
@@ -86,6 +99,19 @@ class DiaryActionConfirmation(DiaryActionEnvelopeBase):
     writes_authorized: Literal[True] = True
     confirmation_evidence: dict[str, Any] = Field(default_factory=dict)
     audit_evidence: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _enforce_registered_confirmation_authority(self) -> "DiaryActionConfirmation":
+        from app.services.diary.envelope_capability_policy import (
+            validate_envelope_authority,
+        )
+
+        validate_envelope_authority(
+            envelope_type="confirmation",
+            action_name=self.action_name,
+            author=self.author,
+        )
+        return self
 
 
 _SUGGESTION_CONFIRM_GRADE_KEYS = frozenset(
@@ -137,6 +163,19 @@ class DiaryActionSuggestion(DiaryActionEnvelopeBase):
             raise ValueError(
                 f"DiaryActionSuggestion payload cannot carry confirm-grade evidence key: {forbidden_key}"
             )
+        return self
+
+    @model_validator(mode="after")
+    def _enforce_registered_suggestion_authority(self) -> "DiaryActionSuggestion":
+        from app.services.diary.envelope_capability_policy import (
+            validate_envelope_authority,
+        )
+
+        validate_envelope_authority(
+            envelope_type="suggestion",
+            action_name=self.action_name,
+            author=self.author,
+        )
         return self
 
 
