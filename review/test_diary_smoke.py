@@ -53,13 +53,63 @@ SPRINT98_FORBIDDEN_ORDINARY_COPY = [
 ]
 
 
-def assert_bernie_confirmed_state(page):
+def authoritative_confirmation_response():
+    """Route-intercepted S25 create-confirm response with an authoritative receipt."""
+    return {
+        "intent": "confirm_create_appointment",
+        "safe": True,
+        "requires_confirmation": False,
+        "autonomy_tier": "confirmed_write",
+        "summary": "Confirmed create proposal and created one appointment.",
+        "appointment": {
+            "id": "receipt-appt-1",
+            "appointment_date": "2026-06-27",
+            "start_time_local": "09:00:00",
+            "duration_minutes": 15,
+            "status": "Booked",
+        },
+        "warnings": [],
+        "blocks": [],
+        "audit_evidence": ["bernie_confirm_create_proposal"],
+        "confirmation_receipt": {
+            "schema_version": "appointment.confirmation_receipt.v1",
+            "outcome": "appointment_created",
+            "appointment_id": "receipt-appt-1",
+            "patient_display": "Margaret Thompson",
+            "practitioner_display": "Dr Alex Shera",
+            "appointment_date": "2026-06-27",
+            "start_time_local": "09:00:00",
+            "duration_minutes": 15,
+            "status": "Booked",
+            "appointment_type": "Standard Consult",
+            "confirmed_by_display": "Reception Staff",
+            "confirmed_by_role": "Receptionist",
+            "verification": {
+                "actor_authenticated": True,
+                "practice_scope_verified": True,
+                "proposal_revalidated": True,
+                "conflict_check_passed": True,
+                "idempotency_verified": True,
+                "audit_recorded": True,
+                "signed_evidence_verified": False,
+                "visual_diary_check_required": False,
+            },
+        },
+    }
+
+
+def assert_bernie_confirmed_state(page, *, authoritative=True):
     """Sprint 100: confirmation clears the action controls and renders a compact terminal state."""
     page.wait_for_selector("[data-testid='bernie-confirmed-container']", state="visible", timeout=5000)
     status = page.locator("[data-testid='bernie-review-status']")
-    assert "Confirmed" in status.text_content()
+    assert ("Confirmed" if authoritative else "Simulated only") in status.text_content()
     headline = page.locator("[data-testid='bernie-review-headline']")
-    assert "Booking confirmed successfully" in headline.text_content()
+    expected_headline = "Booking confirmed successfully" if authoritative else "Simulated booking preview"
+    assert expected_headline in headline.text_content()
+    if authoritative:
+        assert page.locator("[data-testid='bernie-receipt-group']").count() == 1
+    else:
+        assert page.locator("[data-testid='bernie-simulated-group']").count() == 1
     assert page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
 
 
@@ -917,7 +967,7 @@ def test_bernie_review_confirmation_ready(diary_page):
 
         confirm_btn.click()
 
-        assert_bernie_confirmed_state(diary_page)
+        assert_bernie_confirmed_state(diary_page, authoritative=False)
     finally:
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
@@ -1350,7 +1400,7 @@ def test_bernie_review_route_intercepted_confirmation_ready(diary_page):
         # Click confirm simulates booking
         confirm_btn.click()
 
-        assert_bernie_confirmed_state(diary_page)
+        assert_bernie_confirmed_state(diary_page, authoritative=False)
     finally:
         # Clean up routes
         diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
@@ -1652,7 +1702,7 @@ def test_bernie_confirm_submit_adapter_success(diary_page):
             post_data = req.post_data or "{}"
             print(f"ROUTE INTERCEPT: post_data={post_data}", file=sys.stderr)
             payload_received.append(json.loads(post_data))
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
         except Exception as e:
             print(f"ROUTE INTERCEPT EXCEPTION: {e}", file=sys.stderr)
             import traceback
@@ -1715,7 +1765,7 @@ def test_bernie_confirm_submit_adapter_error_and_retry(diary_page):
             )
         else:
             # Second attempt succeeds
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
 
     diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
 
@@ -2327,7 +2377,7 @@ def test_bernie_route_intercepted_confirm_flow_harness_success(diary_page):
 
     def handle_confirm(route):
         confirm_payloads.append(json.loads(route.request.post_data))
-        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
 
     diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
     diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
@@ -2399,7 +2449,7 @@ def test_bernie_ui_view_model_proposal_ready_drives_display_without_payload_leak
 
     def handle_confirm(route):
         confirm_payloads.append(json.loads(route.request.post_data))
-        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
 
     diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
     diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
@@ -2473,7 +2523,7 @@ def test_bernie_ui_view_model_consumes_backend_staff_review_field_without_js_exp
 
     def handle_confirm(route):
         confirm_payloads.append(json.loads(route.request.post_data))
-        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
 
     diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
     diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
@@ -2920,7 +2970,7 @@ def test_bernie_dev_mode_review_feature_flag_success(diary_page):
 
     def handle_confirm(route):
         confirm_payloads.append(json.loads(route.request.post_data))
-        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
 
     diary_page.route("**/api/v1/appointments/proposals/bernie/supervised-booking", handle_supervised_booking)
     diary_page.route("**/api/v1/appointments/proposals/create/confirm-bernie", handle_confirm)
@@ -2997,7 +3047,7 @@ def test_bernie_dev_review_launcher_and_gating(diary_page):
         lambda route: (
             confirm_requests.append(route.request.url),
             confirm_payloads.append(json.loads(route.request.post_data)),
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
         )
     )
 
@@ -3112,7 +3162,7 @@ def test_bernie_dev_review_fixture_route(diary_page):
         "**/api/v1/appointments/proposals/create/confirm-bernie",
         lambda route: (
             confirm_payloads.append(json.loads(route.request.post_data)),
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
         )
     )
 
@@ -3534,7 +3584,7 @@ def test_bernie_pilot_ordinary_mode_explicit_context_posts_and_confirm_gated(dia
             route.fulfill(status=200, content_type="application/json", body=json.dumps(mock_live_review))
         elif "/api/v1/appointments/proposals/create/confirm-bernie" in url:
             confirm_payloads.append(json.loads(route.request.post_data or "{}"))
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
         elif "/api/v1/auth/me" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
         elif "/api/v1/diary/template" in url:
@@ -3864,7 +3914,7 @@ def test_bernie_pilot_eligibility_confirm_gated(diary_page):
     def handle_confirm(route):
         req = route.request
         confirm_payloads.append(json.loads(req.post_data))
-        route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+        route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
 
     diary_page.route(
         "**/api/v1/appointments/bernie/pilot-eligibility",
@@ -5010,7 +5060,7 @@ def test_bernie_route_intercepted_selected_slot_can_return_to_candidates(diary_p
             )
         elif "/api/v1/appointments/proposals/create/confirm-bernie" in url:
             confirm_payloads.append(json.loads(route.request.post_data or "{}"))
-            route.fulfill(status=200, content_type="application/json", body=json.dumps({"status": "success"}))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(authoritative_confirmation_response()))
         elif "/api/v1/auth/me" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps({"role": "staff"}))
         elif "/api/v1/diary/template" in url:
