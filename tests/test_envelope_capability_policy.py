@@ -129,6 +129,42 @@ def test_registered_proposal_rejects_confirm_tier():
         )
 
 
+def test_direct_registered_proposal_name_is_enforced():
+    """A direct registry name is protected even when it is not a grammar alias."""
+    proposal = DiaryActionProposal(
+        proposal_id="p-3",
+        author=DiaryActionAuthor.bernie,
+        channel=DiaryActionChannel.diary_panel,
+        action_name="propose_booking",
+        evidence_refs=["ref-1"],
+        review_reasons=["staff_review_required"],
+    )
+
+    assert proposal.action_name == "propose_booking"
+
+    with pytest.raises(ValidationError, match="not read-only or meta"):
+        DiaryActionSuggestion(
+            suggestion_id="s-direct-propose",
+            author=DiaryActionAuthor.bernie,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="propose_booking",
+            title="Unsafe suggestion",
+            reason_code="test",
+        )
+
+
+def test_direct_registered_proposal_name_rejects_unauthorised_author():
+    with pytest.raises(ValidationError, match="not permitted"):
+        DiaryActionProposal(
+            proposal_id="p-direct-author",
+            author=DiaryActionAuthor.rayleen,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="propose_booking",
+            evidence_refs=["ref-1"],
+            review_reasons=["staff_review_required"],
+        )
+
+
 # ---------------------------------------------------------------------------
 # 4. Registered suggestion with non-read-only/meta is rejected
 # ---------------------------------------------------------------------------
