@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.tranche_integration_manifest.v1",
+  "tranche": "s16-s18-compact-ledger-pilot",
+  "status": "sol_authorized_for_exact_integration",
+  "protected_base": "1909a1f86bf6b305631b81cf61bd18ae4602dffb",
+  "source_branch": "deepseek/s16-s18-compact-pilot",
+  "accepted_candidate_head": "6bc47ca3fccd6fbb59efd2da9fc004f9ad7fb165",
+  "ordered_candidate_commits": [
+    "adc8675d0ae1a015385db41d32db850bc3cc4e2c",
+    "e734184d183f1d452f8cf5fcb430d994ec15e725",
+    "6bc47ca3fccd6fbb59efd2da9fc004f9ad7fb165"
+  ],
+  "expected_product_test_paths": [
+    "app/services/diary/action_grammar.py",
+    "app/services/diary/envelope_capability_policy.py",
+    "tests/test_envelope_capability_policy.py"
+  ],
+  "acceptance": {
+    "collected": 485,
+    "passed": 469,
+    "skipped": 16,
+    "failed": 0,
+    "py_compile": "passed",
+    "git_diff_check": "passed"
+  },
+  "authority": {
+    "integrator": "sol",
+    "protected_master_push_authorized": true,
+    "scope_expansion_authorized": false,
+    "deployment_authorized": false
+  }
+}

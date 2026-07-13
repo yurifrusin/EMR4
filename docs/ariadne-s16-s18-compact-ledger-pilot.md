@@ -1,6 +1,6 @@
 # Ariadne S16-S18 Compact-Ledger Pilot
 
-Status: authorized for isolated staging execution.
+Status: complete on isolated staging; awaiting Sol's exact integration.
 
 ## Direction
 
