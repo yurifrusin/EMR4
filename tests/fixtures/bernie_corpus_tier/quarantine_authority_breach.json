@@ -1,0 +1,70 @@
+{
+  "provenance": "silver",
+  "adjudication": "pending",
+  "family": "booking_create",
+  "generator_identity": {
+    "model_id": "deepseek-flash-dw2",
+    "instance_id": "test"
+  },
+  "judge_identity": null,
+  "generation_timestamp": "2026-07-14T10:00:00+00:00",
+  "source_scenario_id": "booking_create_then_exact_duplicate",
+  "derivation_id": "authority-breach-derivation",
+  "derivation_seed": "breach",
+  "promotion_history": [],
+  "scenario": {
+    "spec_version": "lc1.v1",
+    "scenario_id": "authority_breach_001",
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "booking_create",
+    "description": "Authority breach: description claims write_authority which is prohibited.",
+    "dialogue_turns": [
+      {
+        "turn": 1,
+        "utterance": "Book Margaret Thompson with Dr Shera tomorrow at 3pm"
+      }
+    ],
+    "reference_date": "2026-07-13",
+    "clinic_clock": "2026-07-13T09:00:00+10:00",
+    "intended_action": "create",
+    "action_semantics": "intended",
+    "temporal_relation": "exact",
+    "earliest_time": "15:00",
+    "latest_time": "15:00",
+    "normalized_values": {
+      "appointment_date": "2026-07-14",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "duration_minutes": 15
+    },
+    "source_spans": {
+      "patient": [{"turn_index": 0, "start": 5, "end": 22, "text": "Margaret Thompson"}]
+    },
+    "duration_minutes": 15,
+    "practitioner_semantics": "exact",
+    "patient_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "diary_state": "empty",
+    "entity_state": "exact",
+    "dialogue_form": "one_shot",
+    "language_form": "plain",
+    "initial_diary_state": {
+      "reference_date": "2026-07-13",
+      "diary_page_date": "2026-07-14",
+      "seeded_appointments": [],
+      "practitioners_available": ["pr-001"],
+      "patients_booked_today": []
+    },
+    "expected_outcome_kind": "write_authority_granted",
+    "expected_tool_sequence": [],
+    "expected_appointment_deltas": [],
+    "expected_audit_deltas": [],
+    "forbidden_outcomes": [],
+    "forbidden_tool_calls": [],
+    "expected_clarification": null,
+    "clarification_choices": []
+  }
+}

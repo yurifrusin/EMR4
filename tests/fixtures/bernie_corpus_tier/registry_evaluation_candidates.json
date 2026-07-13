@@ -1,0 +1,52 @@
+{
+  "schema_version": "lc2.candidate_registry.v1",
+  "entries": [
+    {
+      "name": "Schema-Guided Dialogue / SGD-X",
+      "official_url": "https://github.com/google-research-datasets/dstc8-schema-guided-dialogue",
+      "declared_licence": "CC BY-SA 4.0",
+      "licence_notes": "Repository/code licences may differ from dataset licences. No licence is accepted by this evaluation.",
+      "capability_labels": [
+        {"label": "multi-domain_turns", "description": "Turns spanning multiple service domains within a single dialogue"},
+        {"label": "intent_slot_annotations", "description": "Explicit intent and slot annotations per turn"},
+        {"label": "service_calls", "description": "Dialogue includes structured API/service call patterns"},
+        {"label": "confirmations", "description": "Explicit user confirmation and disambiguation patterns"},
+        {"label": "schema_linguistic_variants", "description": "Linguistic variation across different schema-guided paradigms"}
+      ],
+      "estimated_count": null,
+      "decision": "candidate_only",
+      "access_notes": "Public GitHub repository; requires licence review before dataset download and use"
+    },
+    {
+      "name": "SMCalFlow",
+      "official_url": "https://microsoft.github.io/task_oriented_dialogue_as_dataflow_synthesis/",
+      "declared_licence": "CC BY-SA 4.0",
+      "licence_notes": "Repository/code licences may differ from dataset licences. No licence is accepted by this evaluation.",
+      "capability_labels": [
+        {"label": "multi_turn_calendar", "description": "Natural multi-turn calendar scheduling dialogues"},
+        {"label": "date_time_constraints", "description": "Complex date and time constraint expressions"},
+        {"label": "reference", "description": "Anaphoric and explicit reference to previously mentioned entities"},
+        {"label": "revision", "description": "User-driven revision and correction of previous requests"},
+        {"label": "executable_task_structure", "description": "Dialogue maps to executable dataflow program structure"}
+      ],
+      "estimated_count": null,
+      "decision": "candidate_only",
+      "access_notes": "Microsoft research project page; requires licence review before dataset download and use"
+    },
+    {
+      "name": "MultiWOZ research data",
+      "official_url": "https://www.repository.cam.ac.uk/items/322039b6-ab19-4798-9a80-faee9e62daab",
+      "declared_licence": "CC BY 4.0 except where noted",
+      "licence_notes": "Repository/code licences may differ from dataset licences. No licence is accepted by this evaluation.",
+      "capability_labels": [
+        {"label": "human_human_multi_domain", "description": "Human-human written dialogues spanning multiple domains"},
+        {"label": "dialogue_goals", "description": "Explicit dialogue goal annotations per conversation"},
+        {"label": "slot_value_state", "description": "Belief state tracking with slot/value annotations"},
+        {"label": "booking_related_domains", "description": "Domains include restaurant, hotel, taxi, attraction, and hospital booking"}
+      ],
+      "estimated_count": null,
+      "decision": "candidate_only",
+      "access_notes": "Cambridge University repository; requires licence review before dataset download and use. Some portions may have different licensing terms."
+    }
+  ]
+}
