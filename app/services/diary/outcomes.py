@@ -44,6 +44,7 @@ _SS_CLINIC_DAY_EXHAUSTED = "clinic_day_exhausted"
 _SS_PROPOSAL_PREVIEW = "proposal_preview"
 _SS_CANDIDATE_SELECTION = "candidate_selection"
 _SS_CONTEXT_ENRICHMENT = "context_enrichment"
+_SS_EXISTING_BOOKING_FOUND = "existing_booking_found"
 
 
 class BernieBookingOutcomeKind(str, Enum):
@@ -91,6 +92,9 @@ class BernieBookingOutcomeKind(str, Enum):
     handed_off = "handed_off"
     """The session has been handed off to staff; no further booking steps are possible."""
 
+    existing_booking_found = "existing_booking_found"
+    """An exact duplicate booking exists; no new booking was created."""
+
 
 OutcomeFamily = Literal[
     "proceed",
@@ -100,6 +104,7 @@ OutcomeFamily = Literal[
     "roster_gap",
     "blocked",
     "terminal",
+    "existing_booking",
 ]
 
 
@@ -130,6 +135,7 @@ _KIND_FAMILY: dict[BernieBookingOutcomeKind, OutcomeFamily] = {
     BernieBookingOutcomeKind.guardrail_blocked: "blocked",
     BernieBookingOutcomeKind.clinic_day_exhausted: "terminal",
     BernieBookingOutcomeKind.handed_off: "terminal",
+    BernieBookingOutcomeKind.existing_booking_found: "existing_booking",
 }
 
 _KIND_REQUIRES_CONFIRMATION: dict[BernieBookingOutcomeKind, bool] = {
@@ -145,6 +151,7 @@ _KIND_CAN_CONFIRM: dict[BernieBookingOutcomeKind, bool] = {
 _KIND_IS_TERMINAL: dict[BernieBookingOutcomeKind, bool] = {
     BernieBookingOutcomeKind.clinic_day_exhausted: True,
     BernieBookingOutcomeKind.handed_off: True,
+    BernieBookingOutcomeKind.existing_booking_found: True,
 }
 
 # Primary session state (as string) each outcome kind corresponds to.
@@ -162,6 +169,7 @@ _KIND_PRIMARY_SESSION_STATE: dict[BernieBookingOutcomeKind, str] = {
     BernieBookingOutcomeKind.advisory_warnings_present: _SS_CONTEXT_ENRICHMENT,
     BernieBookingOutcomeKind.interpreted_ready: _SS_CONTEXT_ENRICHMENT,
     BernieBookingOutcomeKind.handed_off: _SS_HANDED_OFF,
+    BernieBookingOutcomeKind.existing_booking_found: _SS_EXISTING_BOOKING_FOUND,
 }
 
 #: Maps each outcome kind to the FULL set of valid session-state STRINGS a
@@ -201,6 +209,9 @@ OUTCOME_SESSION_STATE: dict[BernieBookingOutcomeKind, frozenset[str]] = {
     }),
     BernieBookingOutcomeKind.handed_off: frozenset({
         _SS_HANDED_OFF,
+    }),
+    BernieBookingOutcomeKind.existing_booking_found: frozenset({
+        _SS_EXISTING_BOOKING_FOUND,
     }),
 }
 
@@ -261,18 +272,19 @@ def classify_booking_outcome(
 
     Precedence (first match wins; hard blocks dominate advisory warnings):
 
-    1. handed_off        — route_result == "handed_off" (explicit terminal handoff)
-    2. clarification_required — route_result == "clarification_required"
-    3. guardrail_blocked — availability == "blocked" (hard guardrail frame present)
-    4. interpreted_ready — route_result == "interpreted" and no hard availability fact
-    5. clarification_required — must_ask or must_block_confirmation (stale/missing)
-    6. roster_unavailable — no practitioner schedule available to search against
-    7. clinic_day_exhausted — route signals same-day window exhausted (no_remaining_today)
-    8. no_matching_times  — search ran with available roster, found zero candidates
-    7. confirmation_ready — staged proposal present with no adverse signals
-    8. candidate_selection_required — candidates found but no staged proposal
-    9. advisory_warnings_present — only advisory warnings, nothing stronger
-    10. interpreted_ready — no adverse signals; interpretation succeeded
+    1. handed_off           — route_result == "handed_off"
+    2. existing_booking_found — route_result == "existing_booking_found"
+    3. clarification_required — route_result == "clarification_required"
+    4. guardrail_blocked    — availability == "blocked"
+    5. interpreted_ready    — route_result == "interpreted" and no hard availability fact
+    6. clarification_required — must_ask or must_block_confirmation (stale/missing)
+    7. roster_unavailable   — no practitioner schedule available to search against
+    8. clinic_day_exhausted — route signals same-day window exhausted
+    9. no_matching_times    — search ran with available roster, found zero candidates
+    10. confirmation_ready  — staged proposal present with no adverse signals
+    11. candidate_selection_required — candidates found but no staged proposal
+    12. advisory_warnings_present — only advisory warnings, nothing stronger
+    13. interpreted_ready   — no adverse signals; interpretation succeeded
 
     Advisories alongside candidates ride as reason_codes on
     candidate_selection_required rather than becoming a standalone advisory
@@ -286,6 +298,9 @@ def classify_booking_outcome(
     if route_result == "handed_off":
         kind = BernieBookingOutcomeKind.handed_off
         basis = "Session has been handed off to staff."
+    elif route_result == "existing_booking_found":
+        kind = BernieBookingOutcomeKind.existing_booking_found
+        basis = "An exact duplicate booking already exists; no new booking was created."
     elif route_result == "clarification_required":
         kind = BernieBookingOutcomeKind.clarification_required
         basis = "The route requires clarification before proceeding."

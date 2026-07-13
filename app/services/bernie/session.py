@@ -56,6 +56,7 @@ class BernieSessionState(str, Enum):
     no_slot = "no_slot"
     clinic_day_exhausted = "clinic_day_exhausted"
     handed_off = "handed_off"
+    existing_booking_found = "existing_booking_found"
 
 
 class BernieSessionEventType(str, Enum):
@@ -89,6 +90,7 @@ TRANSIENT_STATES: frozenset[BernieSessionState] = frozenset({
 TERMINAL_STATES: frozenset[BernieSessionState] = frozenset({
     BernieSessionState.confirmed,
     BernieSessionState.handed_off,
+    BernieSessionState.existing_booking_found,
 })
 
 #: Legal client events per state and their target state. ``new_session`` and
@@ -149,6 +151,7 @@ SERVER_ADVANCE_TARGETS: dict[BernieSessionState, frozenset[BernieSessionState]] 
         BernieSessionState.candidate_selection,
         BernieSessionState.no_slot,
         BernieSessionState.clinic_day_exhausted,
+        BernieSessionState.existing_booking_found,
     }),
     BernieSessionState.confirmation: frozenset({
         BernieSessionState.confirmed,

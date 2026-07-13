@@ -833,7 +833,7 @@ class BernieIdentityEvidence(BaseModel):
 
 class BernieStaffReviewPayload(BaseModel):
     headline: str
-    status: Literal["blocked", "candidate_selection_required", "confirmation_ready", "clinic_day_exhausted"]
+    status: Literal["blocked", "candidate_selection_required", "confirmation_ready", "clinic_day_exhausted", "existing_booking_found"]
     staff_action_required: str
     confirmation_ready: bool
     selected_slot: Optional[BernieStaffReviewSlotSummary] = None
@@ -939,6 +939,20 @@ class BernieContextFreshness(BaseModel):
     generated_at: datetime
     stale: bool
     basis: str
+
+
+class ExistingBookingSummary(BaseModel):
+    """Additive typed existing-booking summary for staff review context.
+
+    Carries only structured metadata serving the existing-booking-finding outcome.
+    Does not broaden PHI beyond the current staff-review context.
+    """
+    appointment_date: date
+    start_time_local: time
+    practitioner_display: str
+    status: str
+    appointment_type_name: Optional[str] = None
+    duration_minutes: int
 
 
 class BernieSlotSuggestion(BaseModel):
@@ -1102,7 +1116,7 @@ class BernieSupervisedBookingOut(BaseModel):
     intent: Literal["bernie_supervised_booking"] = "bernie_supervised_booking"
     # clinic_day_exhausted: same-day request whose clamped slot search yielded zero
     # remaining bookable slots; staff should restate the date. Never auto-advances date.
-    result: Literal["blocked", "candidate_selection_required", "confirmation_ready", "clinic_day_exhausted"]
+    result: Literal["blocked", "candidate_selection_required", "confirmation_ready", "clinic_day_exhausted", "existing_booking_found"]
     # Immutable reference date echoed from intake; never overwritten by downstream steps.
     request_reference_date: Optional[date] = None
     safe: bool
@@ -1121,6 +1135,8 @@ class BernieSupervisedBookingOut(BaseModel):
     reception_context: Optional[dict[str, Any]] = None
     reception_policy: Optional[dict[str, Any]] = None
     suggestions: list[BernieSlotSuggestion] = Field(default_factory=list)
+    # ── Additive existing-booking finding (only present when result is existing_booking_found) ──
+    existing_booking: Optional["ExistingBookingSummary"] = None
     # ── Additive turn tracking (default None for backward compat) ──
     turn_ref: Optional["BernieTurnRef"] = None
     server_session: Optional["BernieSessionSnapshotOut"] = None
@@ -1169,6 +1185,7 @@ BernieSessionStateValue = Literal[
     "no_slot",
     "clinic_day_exhausted",
     "handed_off",
+    "existing_booking_found",
 ]
 
 BernieSessionEventTypeValue = Literal[

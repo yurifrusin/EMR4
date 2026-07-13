@@ -52,6 +52,12 @@ from app.schemas.appointments import (
     BernieNoSlotSuggestionSelectionIn, BernieNoSlotSuggestionSelectionOut,
     BernieSessionActiveOut, BernieSessionEventAppendIn, BernieSessionEventAppendOut,
     BernieSessionEventOut, BernieSessionNewIn, BernieSessionSnapshotOut,
+    ExistingBookingSummary,
+)
+from app.services.bernie_booking_classifier import (
+    BookingClassification,
+    BookingClassificationEvidence,
+    classify_existing_booking,
 )
 from app.services.diary.outcomes import (
     BernieBookingOutcomeKind,
@@ -5621,12 +5627,14 @@ def _bernie_staff_review_payload(
         "candidate_selection_required": "Candidate slot summaries are review-only until staff selects one slot.",
         "confirmation_ready": "Confirm payload carries slot-selection and create-proposal evidence for explicit staff approval.",
         "clinic_day_exhausted": "No bookable slots remain today - restate the date to continue.",
+        "existing_booking_found": "This appointment already exists; no new booking was created. Use suggestions to find an alternative.",
     }
     staff_actions = {
         "blocked": "Review blocked issues before retrying; no booking can be confirmed from this payload.",
         "candidate_selection_required": "Select one candidate slot before preparing confirmation evidence.",
         "confirmation_ready": "Review the selected slot and submit the confirm payload only after explicit staff confirmation.",
         "clinic_day_exhausted": "Please restate the date - no slots remain today after the requested time.",
+        "existing_booking_found": "This appointment already exists and no new booking was created. Use a suggestion below to find an alternative time or day.",
     }
     return BernieStaffReviewPayload(
         headline=summary,
@@ -5842,6 +5850,58 @@ def propose_slot_selection_for_create(
     )
 
 
+def _build_existing_booking_found_response(
+    normalization: SlotSearchCommandResult,
+    summary: str,
+    request_reference_date: Optional[date_type] = None,
+    identity_evidence: Optional[BernieIdentityEvidence] = None,
+    patient_evidence: Optional[BerniePatientEvidence] = None,
+    practitioner_evidence: Optional[BerniePractitionerEvidence] = None,
+    existing_booking: Optional[ExistingBookingSummary] = None,
+    warnings: Optional[list[AppointmentProposalIssue]] = None,
+) -> BernieSupervisedBookingOut:
+    """Build a non-confirmable existing_booking_found response.
+
+    Contains no search candidates, selection proposal, confirm endpoint,
+    confirm payload, or confirm affordance.  Provides typed widen_time_window
+    and next_available_day suggestions requiring confirmation.
+    """
+    effective_warnings = warnings or []
+    suggestions = [
+        BernieSlotSuggestion(
+            kind="widen_time_window",
+            summary="The requested time already has a booking. Choose a different time to find available slots.",
+            requires_confirmation=True,
+        ),
+        BernieSlotSuggestion(
+            kind="next_available_day",
+            summary="Search the next day for available slots.",
+            requires_confirmation=True,
+        ),
+    ]
+    return BernieSupervisedBookingOut(
+        result="existing_booking_found",
+        request_reference_date=request_reference_date,
+        safe=False,
+        requires_confirmation=False,
+        autonomy_tier="blocked",
+        summary=summary,
+        normalization=normalization,
+        staff_review=_bernie_staff_review_payload(
+            result="existing_booking_found",
+            summary=summary,
+            warnings=effective_warnings,
+            blocks=[],
+            identity_evidence=identity_evidence,
+            patient_evidence=patient_evidence,
+        ),
+        warnings=effective_warnings,
+        blocks=[],
+        suggestions=suggestions,
+        existing_booking=existing_booking,
+    )
+
+
 def _build_no_slot_suggestions(constraint: SlotSearchProposalIn) -> list[BernieSlotSuggestion]:
     """Build typed non-mutating next-step suggestions when a slot search yields zero candidates.
 
@@ -6008,6 +6068,7 @@ def propose_bernie_supervised_booking(
     # Build once after normalization succeeds; attach to all subsequent returns.
     _sb_patient_ctx: Optional[BerniePatientBookingContext] = None
     _sb_context_freshness: Optional[BernieContextFreshness] = None
+    _sb_src_appt_id: Optional[uuid.UUID] = _source_appointment_id_from_frames(body.context_frames)
     if (
         review_identity_evidence.recognition_status == "recognized"
         and review_identity_evidence.patient_id is not None
@@ -6028,7 +6089,6 @@ def propose_bernie_supervised_booking(
                 else "reference_date differs from clinic-local today; context may be stale"
             ),
         )
-        _sb_src_appt_id = _source_appointment_id_from_frames(body.context_frames)
         # Fast path: compact context catches in-cap collisions when there is no
         # source appointment to exclude. When a source appointment is present the
         # fast path is skipped and the authoritative DB query runs instead.
@@ -6114,6 +6174,87 @@ def propose_bernie_supervised_booking(
         },
         idempotency_suffix="context",
     )
+
+    # ── Existing-booking classification ──────────────────────────────────────
+    # Run for recognized patients after all normalization is complete, before
+    # slot search and before same-day window pre-check. Only exact_duplicate
+    # short-circuits; overlap/same-day-distinct retain existing advisory
+    # behavior and fall through to slot search.
+    if (
+        review_identity_evidence.recognition_status == "recognized"
+        and review_identity_evidence.patient_id is not None
+        and normalization.constraint is not None
+    ):
+        _sb_classification = classify_existing_booking(
+            db,
+            current_user.practice_id,
+            review_identity_evidence.patient_id,
+            requested_date=constraint.date_from,
+            requested_practitioner_id=constraint.practitioner_id,
+            requested_earliest_time=constraint.earliest_time,
+            requested_latest_time=constraint.latest_time,
+            requested_appointment_type_id=constraint.appointment_type_id,
+            requested_location_id=constraint.location_id,
+            requested_duration_minutes=constraint.duration_minutes,
+            source_appointment_id=_sb_src_appt_id,
+        )
+        if _sb_classification.classification == BookingClassification.exact_duplicate:
+            _existing_appt = (
+                db.query(Appointment)
+                .filter(Appointment.id == uuid.UUID(_sb_classification.existing_booking_id))
+                .first()
+            ) if _sb_classification.existing_booking_id else None
+            _practitioner_name = "Unknown"
+            if _existing_appt:
+                _prac = db.query(Practitioner).filter(
+                    Practitioner.id == _existing_appt.practitioner_id,
+                    Practitioner.practice_id == current_user.practice_id,
+                ).first()
+                if _prac:
+                    _practitioner_name = f"{_prac.first_name} {_prac.last_name}".strip()
+            _existing_booking_summary = None
+            if _existing_appt:
+                _existing_appt_type_name: Optional[str] = None
+                if _existing_appt.appointment_type is not None:
+                    _existing_appt_type_name = _existing_appt.appointment_type.name
+                _existing_booking_summary = ExistingBookingSummary(
+                    appointment_date=_existing_appt.appointment_date,
+                    start_time_local=_existing_appt.start_time_local,
+                    practitioner_display=_practitioner_name,
+                    status=_existing_appt.status.value,
+                    appointment_type_name=_existing_appt_type_name,
+                    duration_minutes=_existing_appt.duration_minutes,
+                )
+            _summary = (
+                "This appointment already exists. "
+                f"{_practitioner_name} already has a booking for "
+                f"{constraint.date_from.isoformat()} at this time."
+            )
+            if body.server_session_id:
+                _append_supervised_outcome(
+                    BernieSessionEventType.slot_search_outcome,
+                    BernieSessionState.existing_booking_found,
+                    {
+                        "result": "existing_booking_found",
+                        "safe": False,
+                        "candidate_count": 0,
+                        "reason_code": "exact_duplicate",
+                        "warning_codes": _issue_codes(normalization.warnings),
+                        "block_codes": [],
+                        "suggestion_kinds": ["widen_time_window", "next_available_day"],
+                    },
+                    idempotency_suffix="existing-booking-found",
+                )
+            _response = _build_existing_booking_found_response(
+                normalization=normalization,
+                summary=_summary,
+                request_reference_date=request_reference_date,
+                identity_evidence=review_identity_evidence,
+                patient_evidence=review_patient_evidence,
+                existing_booking=_existing_booking_summary,
+                warnings=normalization.warnings,
+            )
+            return _with_ctx(_response)
 
     # Before-search bounded-window pre-check: if the window's upper bound is entirely
     # in the past, short-circuit without running a slot query.
