@@ -3461,6 +3461,9 @@ async function selectCandidate(slot, index) {
       if (data.reception_policy) {
         payload.reception_policy = data.reception_policy;
       }
+      if (data.existing_booking) {
+        payload.existing_booking = data.existing_booking;
+      }
       if (data.suggestions) {
         payload.suggestions = data.suggestions;
       } else if (data.staff_review?.suggestions) {
@@ -6772,6 +6775,9 @@ async function loadBernieLiveReview() {
       payload = attachBernieUiViewModelToStaffReview(data, data.staff_review);
       if (data.reception_policy) {
         payload.reception_policy = data.reception_policy;
+      }
+      if (data.existing_booking) {
+        payload.existing_booking = data.existing_booking;
       }
       if (data.suggestions) {
         payload.suggestions = data.suggestions;

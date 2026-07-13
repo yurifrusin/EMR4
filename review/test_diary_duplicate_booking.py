@@ -183,14 +183,6 @@ def test_duplicate_booking_receptionist_flow(diary_page):
             "practitioner_evidence": {
                 "display_name": "Dr Alex Shera"
             },
-            "existing_booking": {
-                "appointment_date": "2026-07-14",
-                "start_time_local": "15:00:00",
-                "practitioner_display": "Dr Alex Shera",
-                "status": "Booked",
-                "appointment_type_name": "Standard Consult",
-                "duration_minutes": 15,
-            },
             "selected_slot": None,
             "candidate_slots": [],
             "warning_summary": "No warnings.",
