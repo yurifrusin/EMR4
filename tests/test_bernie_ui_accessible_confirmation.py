@@ -223,6 +223,8 @@ def test_success_status_and_receipt_semantics(diary_page):
 
     confirm_btn.click()
 
+    receipt_group = diary_page.locator("[data-testid='bernie-receipt-group']")
+    receipt_group.wait_for(state="visible", timeout=5000)
     status_message = diary_page.locator("[data-testid='bernie-review-headline']")
     status_message.wait_for(state="visible", timeout=5000)
 
@@ -231,7 +233,6 @@ def test_success_status_and_receipt_semantics(diary_page):
     assert status_message.get_attribute("aria-live") == "polite"
     assert "Margaret Thatcher (Different)" in status_message.text_content()
 
-    receipt_group = diary_page.locator("[data-testid='bernie-receipt-group']")
     assert receipt_group.get_attribute("role") == "group"
     assert receipt_group.get_attribute("aria-label") == "Booking confirmation receipt"
 
