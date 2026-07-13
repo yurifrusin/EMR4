@@ -1,0 +1,41 @@
+{
+  "spec_version": "lc1.v1",
+  "scenario_id": "T1.3-interpret-clarify-temporal-bounds",
+  "provenance": "gold",
+  "adjudication": "pending",
+  "family": "clarify_temporal",
+  "description": "The receptionist provides a partial temporal instruction without specifying exact bounds. The system must recognise the ambiguity and request clarification of the temporal range.",
+  "dialogue_turns": [
+    {
+      "turn": 1,
+      "utterance": "Can I book Margaret Thompson with Dr Shera sometime in the afternoon"
+    }
+  ],
+  "reference_date": "2026-07-13",
+  "intended_action": "create",
+  "temporal_relation": "approximate",
+  "earliest_time": null,
+  "latest_time": null,
+  "source_spans": {
+    "temporal_relation": "sometime in the afternoon",
+    "practitioner": "with Dr Shera",
+    "patient": "Margaret Thompson"
+  },
+  "duration_minutes": 15,
+  "practitioner_semantics": "exact",
+  "patient_semantics": "exact",
+  "initial_diary_state": {
+    "reference_date": "2026-07-13",
+    "diary_page_date": "2026-07-14",
+    "seeded_appointments": [],
+    "practitioners_available": ["pr-001"],
+    "patients_booked_today": []
+  },
+  "expected_outcome_kind": "clarification_required",
+  "expected_tool_sequence": ["search_patients", "find_slots", "request_clarification"],
+  "expected_appointment_deltas": [],
+  "forbidden_outcomes": ["appointment_created", "existing_booking_found"],
+  "forbidden_tool_calls": ["mutate_diary_direct", "override_confirmation"],
+  "expected_clarification": "What time in the afternoon would you prefer? For example, 1pm, 2pm, 3pm, or 4pm.",
+  "clarification_choices": ["1pm", "2pm", "3pm", "4pm"]
+}

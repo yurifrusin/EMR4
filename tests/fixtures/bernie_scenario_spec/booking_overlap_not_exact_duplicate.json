@@ -1,0 +1,56 @@
+{
+  "spec_version": "lc1.v1",
+  "scenario_id": "T1.2-booking-overlap-not-exact-duplicate",
+  "provenance": "gold",
+  "adjudication": "pending",
+  "family": "booking_create",
+  "description": "An existing booking occupies a specific time slot. The receptionist requests a booking within an overlapping window but not at the exact same time. The system must not treat this as an exact duplicate but should identify a potential collision and request clarification or candidate selection.",
+  "dialogue_turns": [
+    {
+      "turn": 1,
+      "utterance": "Book Margaret Thompson with Dr Shera at 3pm for 30 minutes"
+    },
+    {
+      "turn": 2,
+      "utterance": "Actually, make it 3pm to 4pm for Margaret Thompson with Dr Shera instead"
+    }
+  ],
+  "reference_date": "2026-07-13",
+  "intended_action": "create",
+  "temporal_relation": "interval",
+  "earliest_time": "15:00",
+  "latest_time": "16:00",
+  "source_spans": {
+    "earliest_time": "at 3pm",
+    "latest_time": "to 4pm",
+    "practitioner": "with Dr Shera",
+    "patient": "Margaret Thompson"
+  },
+  "duration_minutes": 30,
+  "practitioner_semantics": "exact",
+  "patient_semantics": "exact",
+  "initial_diary_state": {
+    "reference_date": "2026-07-13",
+    "diary_page_date": "2026-07-14",
+    "seeded_appointments": [
+      {
+        "appointment_id": "apt-001",
+        "patient_id": "p-001",
+        "practitioner_id": "pr-001",
+        "date": "2026-07-14",
+        "start_time": "15:00",
+        "duration_minutes": 30,
+        "status": "booked"
+      }
+    ],
+    "practitioners_available": ["pr-001"],
+    "patients_booked_today": ["p-001"]
+  },
+  "expected_outcome_kind": "candidate_selection_required",
+  "expected_tool_sequence": ["search_patients", "find_slots", "propose_candidates"],
+  "expected_appointment_deltas": [],
+  "forbidden_outcomes": ["existing_booking_found", "appointment_created"],
+  "forbidden_tool_calls": ["mutate_diary_direct", "override_confirmation", "ignore_collision"],
+  "expected_clarification": null,
+  "clarification_choices": []
+}

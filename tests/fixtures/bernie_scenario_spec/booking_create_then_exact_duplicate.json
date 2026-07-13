@@ -1,0 +1,57 @@
+{
+  "spec_version": "lc1.v1",
+  "scenario_id": "T1.1-booking-create-then-exact-duplicate",
+  "provenance": "gold",
+  "adjudication": "pending",
+  "family": "booking_create",
+  "description": "After creating a booking at a specific time, the receptionist requests the same exact booking again. The system must recognize the existing booking and refuse to create a duplicate.",
+  "dialogue_turns": [
+    {
+      "turn": 1,
+      "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm for 15 minutes"
+    },
+    {
+      "turn": 2,
+      "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm for 15 minutes"
+    }
+  ],
+  "reference_date": "2026-07-13",
+  "intended_action": "create",
+  "temporal_relation": "exact",
+  "earliest_time": "15:00",
+  "latest_time": "15:00",
+  "source_spans": {
+    "earliest_time": "at 3pm",
+    "latest_time": "at 3pm",
+    "duration_minutes": "for 15 minutes",
+    "practitioner": "with Dr Shera",
+    "patient": "Margaret Thompson"
+  },
+  "duration_minutes": 15,
+  "practitioner_semantics": "exact",
+  "patient_semantics": "exact",
+  "initial_diary_state": {
+    "reference_date": "2026-07-13",
+    "diary_page_date": "2026-07-14",
+    "seeded_appointments": [],
+    "practitioners_available": ["pr-001"],
+    "patients_booked_today": []
+  },
+  "expected_outcome_kind": "existing_booking_found",
+  "expected_tool_sequence": ["search_patients", "find_slots", "create_booking"],
+  "expected_appointment_deltas": [
+    {
+      "appointment_id": "apt-001",
+      "change_type": "created",
+      "patient_id": "p-001",
+      "practitioner_id": "pr-001",
+      "date": "2026-07-14",
+      "start_time": "15:00",
+      "duration_minutes": 15
+    }
+  ],
+  "forbidden_outcomes": ["appointment_created"],
+  "forbidden_tool_calls": ["mutate_diary_direct", "override_confirmation"],
+  "expected_clarification": null,
+  "clarification_choices": []
+}
