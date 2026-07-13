@@ -1,8 +1,10 @@
 """Registered-envelope authority policy seam.
 
 Validates that a registered action name in a diary envelope is authored by a
-permitted author and is compatible with the envelope type (proposal, suggestion,
-confirmation).  Unknown free-string action names pass through without enforcement.
+permitted author and is compatible with the envelope type (intent, proposal,
+suggestion, confirmation).  Unsupported or misspelled envelope types are
+rejected before action-name resolution.  Unknown free-string action names
+pass through without enforcement for valid envelope types.
 
 This module is pure domain logic: no routers, DB, providers, or network.
 It imports from capabilities.py and action_grammar.py only — no top-level import
@@ -23,6 +25,10 @@ from app.services.diary.capabilities import (
     get_bernie_capability,
 )
 from app.services.diary.envelopes import DiaryActionAuthor
+
+_SUPPORTED_ENVELOPE_TYPES: frozenset[str] = frozenset(
+    {"intent", "proposal", "suggestion", "confirmation"}
+)
 
 
 @dataclass(frozen=True)
@@ -71,9 +77,20 @@ def validate_envelope_authority(
         EnvelopeAuthorityDecision summarising the validation result.
 
     Raises:
-        ValueError: When a registered action has an unauthorised author or an
-            incompatible envelope-type / capability-tier combination.
+        ValueError: When envelope_type is not one of the supported values
+            (``"intent"``, ``"proposal"``, ``"suggestion"``, ``"confirmation"``),
+            when a registered action has an unauthorised author, or when a
+            registered action has an incompatible envelope-type / capability-tier
+            combination.
     """
+    # 0. Validate envelope type before any action-name resolution
+    envelope_type_lower = envelope_type.lower()
+    if envelope_type_lower not in _SUPPORTED_ENVELOPE_TYPES:
+        raise ValueError(
+            f"Unsupported envelope type '{envelope_type}'. Supported types: "
+            + ", ".join(sorted(_SUPPORTED_ENVELOPE_TYPES))
+        )
+
     # 1. Resolve verb and descriptor if action_name is a grammar alias
     verb = action_verb_for_envelope(action_name)
     descriptor = DIARY_ACTION_GRAMMAR[verb] if verb is not None else None
@@ -111,7 +128,6 @@ def validate_envelope_authority(
 
     # 3. Determine tier and the envelope-specific author boundary.
     tier = descriptor.tier if descriptor is not None else capability.tier
-    envelope_type_lower = envelope_type.lower()
     allowed_authors = capability.allowed_authors
     if envelope_type_lower == "confirmation" and tier is BernieCapabilityTier.confirm:
         # A registered confirm-tier grammar action remains staff-confirmed even
@@ -148,7 +164,7 @@ def validate_envelope_authority(
                 f"tier '{tier.value}') is not confirm-tier and cannot be used in a "
                 "'confirmation' envelope."
             )
-    # intent and other envelope types have no tier restriction
+    # intent has no tier restriction
 
     return EnvelopeAuthorityDecision(
         action_registered=True,

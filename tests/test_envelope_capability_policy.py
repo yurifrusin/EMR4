@@ -633,3 +633,390 @@ def test_planned_grammar_verbs_with_no_registered_capability_pass_through():
         **args,
     )
     assert confirmation.action_name == "check_in"
+
+
+# ---------------------------------------------------------------------------
+# 12. Envelope type validation — fail closed for unsupported types
+# ---------------------------------------------------------------------------
+
+_SUPPORTED_ENVELOPE_TYPES = frozenset({"intent", "proposal", "suggestion", "confirmation"})
+
+_UNSUPPORTED_ENVELOPE_TYPES = [
+    "",
+    "inten",  # misspelled
+    "Proposal",  # correct spelling but wrong case (the function lowers, so this is valid)
+    "intention",
+    "proposal_v2",
+    "suggest",
+    "confirm",
+    "confirmation_v2",
+    "PROPOSAL",
+    "SUGGESTION",
+    "CONFIRMATION",
+    "INTENT",
+    "unknown",
+    "none",
+    "action",
+    "envelope",
+    "null",
+]
+
+
+@pytest.mark.parametrize("envelope_type", _UNSUPPORTED_ENVELOPE_TYPES)
+def test_unsupported_envelope_type_fails_closed(envelope_type):
+    """Any envelope type that is not exactly one of the four supported values
+    (comparison is case-insensitive via .lower()) must raise ValueError before
+    action-name resolution."""
+    if envelope_type.lower() in _SUPPORTED_ENVELOPE_TYPES:
+        pytest.skip(f"'{envelope_type}' lowers to a supported type")
+    with pytest.raises(ValueError, match="Unsupported envelope type"):
+        validate_envelope_authority(
+            envelope_type=envelope_type,
+            action_name="some_known_action",
+            author=DiaryActionAuthor.staff_ui,
+        )
+
+
+@pytest.mark.parametrize(
+    "envelope_type",
+    ["intent", "proposal", "suggestion", "confirmation"],
+)
+def test_supported_envelope_types_do_not_fail_early(envelope_type):
+    """The four supported envelope types pass the envelope-type gate for an
+    unknown action_name."""
+    decision = validate_envelope_authority(
+        envelope_type=envelope_type,
+        action_name="some_unknown_action",
+        author=DiaryActionAuthor.staff_ui,
+    )
+    assert decision.action_registered is False
+
+
+# ---------------------------------------------------------------------------
+# 13. Deterministic matrix — every registered direct capability
+# ---------------------------------------------------------------------------
+
+# Every registered capability name in BERNIE_CAPABILITY_REGISTRY.
+# Format: (capability_name, tier, allowed_authors_tuple)
+_DIRECT_CAPABILITY_MATRIX: list[tuple[str, BernieCapabilityTier, tuple[DiaryActionAuthor, ...]]] = [
+    (cap.name, cap.tier, cap.allowed_authors)
+    for cap in BERNIE_CAPABILITY_REGISTRY
+]
+
+# A cross-section of authors for the undeclared-author test.
+# For each capability, pick one author *not* in allowed_authors.
+_ALL_AUTHORS = tuple(DiaryActionAuthor)
+
+
+def _pick_undeclared_author(
+    allowed: tuple[DiaryActionAuthor, ...],
+) -> DiaryActionAuthor:
+    """Return an author that is not in *allowed*."""
+    for a in _ALL_AUTHORS:
+        if a not in allowed:
+            return a
+    # Should never happen: every capability has at most 5 of 5 authors, but just in case:
+    return _ALL_AUTHORS[-1]
+
+
+@pytest.mark.parametrize(
+    "cap_name, tier, allowed_authors",
+    _DIRECT_CAPABILITY_MATRIX,
+    ids=lambda val: val if isinstance(val, str) else "",
+)
+class TestDirectCapabilityMatrix:
+    """Exhaustive matrix: every direct capability name × supported envelope type
+    × declared / undeclared author."""
+
+    @pytest.mark.parametrize("envelope_type", _SUPPORTED_ENVELOPE_TYPES)
+    def test_declared_author_tier_compatibility(
+        self, cap_name, tier, allowed_authors, envelope_type
+    ):
+        """A declared author should succeed when tier-compatible, raise ValueError
+        when tier-incompatible."""
+        author = allowed_authors[0]
+        if envelope_type == "intent":
+            # No tier restriction — always passes for declared author
+            decision = validate_envelope_authority(
+                envelope_type=envelope_type,
+                action_name=cap_name,
+                author=author,
+            )
+            assert decision.action_registered is True
+            assert decision.author_authorized is True
+            assert decision.tier_compatible is True
+        elif envelope_type == "proposal":
+            if tier is BernieCapabilityTier.propose:
+                decision = validate_envelope_authority(
+                    envelope_type=envelope_type,
+                    action_name=cap_name,
+                    author=author,
+                )
+                assert decision.action_registered is True
+                assert decision.tier_compatible is True
+            else:
+                with pytest.raises(ValueError, match="not propose-tier"):
+                    validate_envelope_authority(
+                        envelope_type=envelope_type,
+                        action_name=cap_name,
+                        author=author,
+                    )
+        elif envelope_type == "suggestion":
+            if tier in (BernieCapabilityTier.read_only, BernieCapabilityTier.meta):
+                decision = validate_envelope_authority(
+                    envelope_type=envelope_type,
+                    action_name=cap_name,
+                    author=author,
+                )
+                assert decision.action_registered is True
+                assert decision.tier_compatible is True
+            else:
+                with pytest.raises(ValueError, match="not read-only or meta"):
+                    validate_envelope_authority(
+                        envelope_type=envelope_type,
+                        action_name=cap_name,
+                        author=author,
+                    )
+        elif envelope_type == "confirmation":
+            if tier is BernieCapabilityTier.confirm:
+                decision = validate_envelope_authority(
+                    envelope_type=envelope_type,
+                    action_name=cap_name,
+                    author=author,
+                )
+                assert decision.action_registered is True
+                assert decision.tier_compatible is True
+            else:
+                with pytest.raises(ValueError, match="not confirm-tier"):
+                    validate_envelope_authority(
+                        envelope_type=envelope_type,
+                        action_name=cap_name,
+                        author=author,
+                    )
+
+    @pytest.mark.parametrize("envelope_type", _SUPPORTED_ENVELOPE_TYPES)
+    def test_undeclared_author_rejected(
+        self, cap_name, tier, allowed_authors, envelope_type
+    ):
+        """An author not in the capability's allowed_authors list must be rejected.
+
+        Picks an envelope type that is tier-compatible with this capability so the
+        author check fires before any tier-incompatibility error.  Skips when all
+        five authors are already declared (no undeclared author exists).
+        """
+        undeclared = _pick_undeclared_author(allowed_authors)
+        if undeclared in allowed_authors:
+            pytest.skip("All authors are declared for this capability")
+        # Use a tier-compatible envelope type
+        if tier is BernieCapabilityTier.confirm:
+            test_type = "confirmation"
+        elif tier in (BernieCapabilityTier.read_only, BernieCapabilityTier.meta):
+            test_type = "suggestion"
+        else:
+            test_type = "proposal"
+        with pytest.raises(ValueError, match="not permitted"):
+            validate_envelope_authority(
+                envelope_type=test_type,
+                action_name=cap_name,
+                author=undeclared,
+            )
+
+
+# ---------------------------------------------------------------------------
+# 14. Deterministic matrix — every registered grammar alias
+# ---------------------------------------------------------------------------
+
+from app.services.diary.action_grammar import DIARY_ACTION_GRAMMAR, DiaryActionVerb, action_verb_for_envelope
+from app.services.diary.capabilities import get_bernie_capability
+
+
+# Every canonical verb → its known free-string aliases (hand-maintained from source).
+# Aliases whose verb has capability_name=None are excluded (tested separately as
+# pass-through planned verbs).
+_KNOWN_ALIASES: dict[str, DiaryActionVerb] = {
+    "create": DiaryActionVerb.create,
+    "create_appointment": DiaryActionVerb.create,
+    "confirm_booking": DiaryActionVerb.create,
+    "move": DiaryActionVerb.move,
+    "move_appointment": DiaryActionVerb.move,
+    "resize": DiaryActionVerb.resize,
+    "resize_appointment": DiaryActionVerb.resize,
+    "cancel": DiaryActionVerb.cancel,
+    "cancel_appointment": DiaryActionVerb.cancel,
+    "status_change": DiaryActionVerb.status_change,
+    "find_slots": DiaryActionVerb.slot_search,
+    "slot_search": DiaryActionVerb.slot_search,
+    "explain_schedule": DiaryActionVerb.explain_schedule,
+    "handoff": DiaryActionVerb.handoff,
+    "handoff_to_receptionist": DiaryActionVerb.handoff,
+}
+
+
+def _build_grammar_alias_matrix() -> list[
+    tuple[str, DiaryActionVerb, BernieCapabilityTier, tuple[DiaryActionAuthor, ...], str]
+]:
+    """Build matrix entries for every registered grammar alias.
+
+    Returns tuples of (alias_name, verb, tier, allowed_authors, capability_name).
+    Only aliases whose verb descriptor has a non-None capability_name are included.
+    """
+    rows: list[
+        tuple[str, DiaryActionVerb, BernieCapabilityTier, tuple[DiaryActionAuthor, ...], str]
+    ] = []
+    for alias, verb in sorted(_KNOWN_ALIASES.items(), key=lambda x: x[0]):
+        desc = DIARY_ACTION_GRAMMAR[verb]
+        cap_name = desc.capability_name
+        if cap_name is None:
+            continue  # planned verb — tested separately
+        # Cross-check: the alias must resolve through the public API
+        resolved = action_verb_for_envelope(alias)
+        assert resolved is verb, f"Alias '{alias}' resolved to {resolved}, expected {verb}"
+        cap = get_bernie_capability(cap_name)
+        assert cap is not None, f"capability_name '{cap_name}' not found"
+        # For confirm-tier grammar aliases the author narrows to staff_ui
+        if desc.tier is BernieCapabilityTier.confirm:
+            allowed = (DiaryActionAuthor.staff_ui,)
+        else:
+            allowed = cap.allowed_authors
+        rows.append((alias, verb, desc.tier, allowed, cap_name))
+    return rows
+
+
+_GRAMMAR_ALIAS_MATRIX = _build_grammar_alias_matrix()
+
+
+@pytest.mark.parametrize(
+    "alias, verb, alias_tier, allowed_authors, capability_name",
+    _GRAMMAR_ALIAS_MATRIX,
+    ids=lambda val: val if isinstance(val, str) else "",
+)
+class TestGrammarAliasMatrix:
+    """Exhaustive matrix: every registered grammar alias × supported envelope
+    type × declared / undeclared author."""
+
+    @pytest.mark.parametrize("envelope_type", _SUPPORTED_ENVELOPE_TYPES)
+    def test_declared_author_tier_compatibility(
+        self, alias, verb, alias_tier, allowed_authors, capability_name, envelope_type
+    ):
+        """A declared author should succeed when tier-compatible, raise ValueError
+        when tier-incompatible."""
+        author = allowed_authors[0]
+        if envelope_type == "intent":
+            # No tier restriction — always passes for declared author
+            decision = validate_envelope_authority(
+                envelope_type=envelope_type,
+                action_name=alias,
+                author=author,
+            )
+            assert decision.action_registered is True
+            assert decision.author_authorized is True
+            assert decision.tier_compatible is True
+        elif envelope_type == "proposal":
+            if alias_tier is BernieCapabilityTier.propose:
+                decision = validate_envelope_authority(
+                    envelope_type=envelope_type,
+                    action_name=alias,
+                    author=author,
+                )
+                assert decision.action_registered is True
+                assert decision.tier_compatible is True
+            else:
+                with pytest.raises(ValueError, match="not propose-tier"):
+                    validate_envelope_authority(
+                        envelope_type=envelope_type,
+                        action_name=alias,
+                        author=author,
+                    )
+        elif envelope_type == "suggestion":
+            if alias_tier in (BernieCapabilityTier.read_only, BernieCapabilityTier.meta):
+                decision = validate_envelope_authority(
+                    envelope_type=envelope_type,
+                    action_name=alias,
+                    author=author,
+                )
+                assert decision.action_registered is True
+                assert decision.tier_compatible is True
+            else:
+                with pytest.raises(ValueError, match="not read-only or meta"):
+                    validate_envelope_authority(
+                        envelope_type=envelope_type,
+                        action_name=alias,
+                        author=author,
+                    )
+        elif envelope_type == "confirmation":
+            if alias_tier is BernieCapabilityTier.confirm:
+                decision = validate_envelope_authority(
+                    envelope_type=envelope_type,
+                    action_name=alias,
+                    author=author,
+                )
+                assert decision.action_registered is True
+                assert decision.tier_compatible is True
+            else:
+                with pytest.raises(ValueError, match="not confirm-tier"):
+                    validate_envelope_authority(
+                        envelope_type=envelope_type,
+                        action_name=alias,
+                        author=author,
+                    )
+
+    @pytest.mark.parametrize("envelope_type", _SUPPORTED_ENVELOPE_TYPES)
+    def test_undeclared_author_rejected(
+        self, alias, verb, alias_tier, allowed_authors, capability_name, envelope_type
+    ):
+        """An author not in the allowed list must be rejected.
+
+        Picks an envelope type that is tier-compatible with this alias so the
+        author check fires before any tier-incompatibility error.  For confirm-tier
+        aliases the only envelope type that both passes the tier gate and triggers
+        the staff_ui narrowing is ``"confirmation"``.  Skips when all five authors
+        are already declared (no undeclared author exists).
+        """
+        undeclared = _pick_undeclared_author(allowed_authors)
+        if undeclared in allowed_authors:
+            pytest.skip("All authors are declared for this alias")
+        # Use a tier-compatible envelope type: confirmation for confirm-tier
+        # (triggers staff_ui narrowing), intent for everything else.
+        test_type = "confirmation" if alias_tier is BernieCapabilityTier.confirm else "intent"
+        with pytest.raises(ValueError, match="not permitted"):
+            validate_envelope_authority(
+                envelope_type=test_type,
+                action_name=alias,
+                author=undeclared,
+            )
+
+
+# ---------------------------------------------------------------------------
+# 15. Pass-through preservation — unknown actions / planned verbs
+# ---------------------------------------------------------------------------
+
+
+def test_unknown_action_names_pass_through_all_supported_types():
+    """Unknown action names return action_registered=False for all four supported
+    envelope types."""
+    for envelope_type in _SUPPORTED_ENVELOPE_TYPES:
+        decision = validate_envelope_authority(
+            envelope_type=envelope_type,
+            action_name="completely_unknown_action",
+            author=DiaryActionAuthor.davida,
+        )
+        assert decision.action_registered is False
+        assert decision.author_authorized is None
+        assert decision.tier_compatible is None
+
+
+_PLANNED_VERBS_NO_CAPABILITY = ["check_in", "waiting_area_move", "link_patient"]
+
+
+@pytest.mark.parametrize("envelope_type", _SUPPORTED_ENVELOPE_TYPES)
+@pytest.mark.parametrize("action_name", _PLANNED_VERBS_NO_CAPABILITY)
+def test_planned_verbs_no_capability_pass_through(envelope_type, action_name):
+    """Planned grammar verbs with capability_name=None pass through for valid
+    envelope types without raising errors."""
+    decision = validate_envelope_authority(
+        envelope_type=envelope_type,
+        action_name=action_name,
+        author=DiaryActionAuthor.davida,
+    )
+    assert decision.action_registered is False
+    assert "no registered capability_name" in decision.reason

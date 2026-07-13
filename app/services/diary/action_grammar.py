@@ -13,9 +13,10 @@ Defines a typed superset of diary action verbs and binds each to:
 This module is a pure backend/domain contract.  It has no routes, no UI
 surface, no write authority, no envelope strictness changes, no provider
 calls, and no migration.  ``action_name`` free-string behaviour in existing
-envelopes is unchanged.  The grammar is a scaffold for Sprint+2 (replay
-harness) and Sprint+3 (H22 semantic-gate packet); it is not yet wired into
-live dispatch or the manifest prompt.
+envelopes is unchanged.  The grammar drives registered-envelope authority
+    validation through ``envelope_capability_policy.validate_envelope_authority``
+    and the deterministic action-grammar replay harness; it is not yet wired into
+    live route dispatch.
 
 Schema version
 --------------
