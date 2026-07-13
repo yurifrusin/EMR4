@@ -32,6 +32,10 @@ from app.services.diary.capabilities import (
     BernieCapabilityTier,
     get_bernie_capability,
 )
+from app.services.diary.envelope_capability_policy import (
+    EnvelopeAuthorityDecision,
+    validate_envelope_authority,
+)
 from app.services.diary.envelopes import (
     DiaryActionAuthor,
     DiaryActionChannel,
@@ -101,6 +105,8 @@ __all__ = [
     "DiaryConfirmAction",
     "DiaryConfirmActionDescriptor",
     "get_diary_confirm_action",
+    "EnvelopeAuthorityDecision",
+    "validate_envelope_authority",
     "BERNIE_CAPABILITY_REGISTRY",
     "BernieCapability",
     "BernieCapabilityTier",

@@ -177,8 +177,10 @@ def build_bernie_diary_capability_manifest() -> dict[str, Any]:
             "source": "app.services.diary.capabilities.BERNIE_CAPABILITY_REGISTRY",
             "authority": "declared_not_enforced",
             "note": (
-                "allowed_authors is a declared contract in the registry skeleton; "
-                "route-level author enforcement is future work."
+                "allowed_authors is enforced for registered action names in pure "
+                "envelope validation (app.services.diary.envelope_capability_policy); "
+                "route-level author enforcement remains future work.  Unknown "
+                "free-string action names pass through without enforcement."
             ),
         },
         "outcomes": {
@@ -264,7 +266,7 @@ def build_bernie_diary_capability_manifest() -> dict[str, Any]:
         "drift_watch": [
             "Keep frontend Bernie copy keys aligned with backend outcome kinds.",
             "Promote frontend-only status-specific reason-code option lists into backend policy before treating them as authoritative.",
-            "Do not present capability allowed_authors as enforced until route/envelope enforcement exists.",
+            "allowed_authors is enforced for registered action names at envelope-construction time (pure domain), not at route level.  Free-string action names pass through without enforcement.",
             "Replace untyped patient/practitioner confidence bands with a shared enum before exposing them as authoritative manifest facts.",
         ],
     }
