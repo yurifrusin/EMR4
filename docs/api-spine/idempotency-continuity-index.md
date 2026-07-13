@@ -1,6 +1,6 @@
 # Idempotency Continuity Index
 
-Date: 2026-07-08
+Date: 2026-07-13
 
 Sprint: 200
 
@@ -17,13 +17,13 @@ is the current idempotency continuity status?
 
 | OpenAPI path | Kind | Runtime status | Source sprint | Source test |
 |---|---|---|---:|---|
-| `/appointments/proposals/create` | proposal | `documented_gap` | 124 | `tests/test_api_spine_appointment_idempotency_gap.py` |
+| `/appointments/proposals/create` | proposal | `syntactic_only` | 200 | `tests/test_appointment_proposals.py` |
 | `/appointments/proposals/create/confirm` | confirm | `ledger_wired` | 145 | `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` |
-| `/appointments/proposals/update` | proposal | `documented_gap` | 124 | `tests/test_api_spine_appointment_idempotency_gap.py` |
+| `/appointments/proposals/update` | proposal | `syntactic_only` | 200 | `tests/test_appointment_update_proposal.py` |
 | `/appointments/proposals/update/confirm` | confirm | `ledger_wired` | 145 | `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` |
-| `/appointments/proposals/status` | proposal | `documented_gap` | 124 | `tests/test_api_spine_appointment_idempotency_gap.py` |
+| `/appointments/proposals/status` | proposal | `syntactic_only` | 200 | `tests/test_appointment_update_proposal.py` |
 | `/appointments/proposals/status/confirm` | confirm | `ledger_wired` | 145 | `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` |
-| `/appointments/proposals/delete` | proposal | `documented_gap` | 124 | `tests/test_api_spine_appointment_idempotency_gap.py` |
+| `/appointments/proposals/delete` | proposal | `syntactic_only` | 200 | `tests/test_appointment_status_mutations.py` |
 | `/appointments/proposals/delete/confirm` | confirm | `ledger_wired` | 145 | `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` |
 | `/appointments/proposals/slot-search/normalize` | read | `read_no_idempotency` | 199 | `tests/test_api_spine_idempotency_audit_metadata.py` |
 | `/appointments/proposals/slot-search` | read | `read_no_idempotency` | 199 | `tests/test_api_spine_idempotency_audit_metadata.py` |

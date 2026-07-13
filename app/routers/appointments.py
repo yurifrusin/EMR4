@@ -1035,18 +1035,30 @@ def propose_create_appointment(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    _normalize_create_proposal_idempotency_key(idempotency_key)
+    _normalize_proposal_idempotency_key(idempotency_key, "creating appointment proposals")
     return _build_create_appointment_proposal(body, db, current_user.practice_id, current_user=current_user)
 
 
-def _normalize_create_proposal_idempotency_key(raw_key: Optional[str]) -> str:
+def _normalize_proposal_idempotency_key(raw_key: Optional[str], route_label: str) -> str:
+    """Shared proposal-only Idempotency-Key syntactic validator.
+
+    All four canonical proposal routes (create, update, status, delete) use this
+    shared helper.  It rejects missing or whitespace-only keys with HTTP 400 and
+    code idempotency_key_required.  Route-specific messages are controlled
+    via the *route_label* parameter.
+
+    This helper deliberately does **not** call the appointment command
+    ledger helpers, create replay-ledger rows, or write appointments.
+    Durable replay enforcement remains owned by the confirmation route
+    family and the appointment command ledger.
+    """
     normalized = (raw_key or "").strip()
     if not normalized:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail={
                 "code": "idempotency_key_required",
-                "message": "Idempotency-Key is required for creating appointment proposals.",
+                "message": f"Idempotency-Key is required for {route_label}.",
             },
         )
     return normalized
@@ -1483,6 +1495,7 @@ def confirm_update_proposal_route(
         body,
         db,
         current_user,
+        raw_idempotency_key=normalized_idempotency_key,
         commit=False,
     )
     if response_body.safe is not True or response_body.appointment is None:
@@ -1505,6 +1518,7 @@ def confirm_update_proposal_route(
 def propose_update_appointment(
     appointment_id: uuid.UUID,
     body: AppointmentUpdateProposalIn,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
@@ -1514,6 +1528,7 @@ def propose_update_appointment(
     conflicts, break overlaps, and patient-identity state without writing anything.
     The returned command payload is ready to pass to PUT /{id} after staff confirmation.
     """
+    _normalize_proposal_idempotency_key(idempotency_key, "updating appointment proposals")
     practice_id = current_user.practice_id
     practice_tz = _practice_zoneinfo(db, practice_id)
     appt = _get_appointment(appointment_id, practice_id, db)
@@ -1930,6 +1945,7 @@ def propose_bernie_tool_intent(
     proposal = propose_update_appointment(
         appointment_id,
         AppointmentUpdateProposalIn(duration_minutes=duration_minutes),
+        "internal-bernie-tool",
         db,
         current_user,
     )
@@ -1992,6 +2008,7 @@ def confirm_update_proposal(
     db: Session,
     current_user: User,
     *,
+    raw_idempotency_key: str = '',
     commit: bool = True,
 ):
     """Confirm a backend-prepared Bernie update proposal with signed evidence."""
@@ -2092,6 +2109,7 @@ def confirm_update_proposal(
             reason=command.reason,
             notes=command.notes,
         ),
+        raw_idempotency_key,
         db,
         current_user,
     )
@@ -2287,6 +2305,7 @@ def _confirm_status_block(code: str, message: str) -> AppointmentProposalIssue:
 def propose_status_update(
     appointment_id: uuid.UUID,
     body: AppointmentStatusProposalIn,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
@@ -2296,6 +2315,7 @@ def propose_status_update(
     The returned command payload is ready to pass to PATCH /{id}/status after confirmation.
     autonomy_tier is metadata for Bernie/tool policy — this endpoint never executes.
     """
+    _normalize_proposal_idempotency_key(idempotency_key, "changing appointment status proposals")
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
 
@@ -4819,6 +4839,7 @@ def confirm_delete_proposal_route(
 @router.post("/proposals/delete/{appointment_id}", response_model=AppointmentDeleteProposalOut)
 def propose_delete_appointment(
     appointment_id: uuid.UUID,
+    idempotency_key: Optional[str] = Header(None, alias="Idempotency-Key"),
     body: Optional[AppointmentDeleteIn] = Body(default=None),
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
@@ -4829,6 +4850,7 @@ def propose_delete_appointment(
     Always returns autonomy_tier='proposal' — deletion is irreversible.
     The returned command payload is ready to pass to DELETE /{id} after confirmation.
     """
+    _normalize_proposal_idempotency_key(idempotency_key, "deleting appointment proposals")
     practice_id = current_user.practice_id
     appt = _get_appointment(appointment_id, practice_id, db)
 

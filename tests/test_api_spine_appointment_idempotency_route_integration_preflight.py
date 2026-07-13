@@ -130,7 +130,8 @@ def test_current_router_wires_only_approved_confirmation_families():
     assert "claim_appointment_command(" in delete_route
     assert "complete_appointment_command(" in delete_route
     assert "_DELETE_CONFIRM_ROUTE_FAMILY" in delete_route
-    assert "Idempotency-Key" not in rest
+    # Proposal handlers now have Idempotency-Key syntactic validation but
+    # must not contain claim/complete ledger calls
     assert "claim_appointment_command(" not in rest
     assert "complete_appointment_command(" not in rest
     assert "AppointmentCommandIdempotency" not in router_text

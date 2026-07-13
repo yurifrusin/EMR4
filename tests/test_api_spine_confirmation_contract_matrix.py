@@ -299,55 +299,59 @@ def test_each_handler_validates_confirm_body():
 
 
 def test_proposal_only_create_excludes_full_idempotency():
-    """propose_create_appointment only normalizes Idempotency-Key, without
-    claim/complete ledger."""
+    """propose_create_appointment normalizes Idempotency-Key via the shared
+    proposal-only helper, without claim/complete ledger calls."""
     router_text = _read(ROUTER)
     handler_start = router_text.index("def propose_create_appointment(")
-    handler_end = router_text.index("def _normalize_create_proposal_idempotency_key(", handler_start)
+    handler_end = router_text.index("def _normalize_proposal_idempotency_key(", handler_start)
     route = router_text[handler_start:handler_end]
 
-    # It should still have idempotency-key normalization (proposal-level)
-    assert "_normalize_create_proposal_idempotency_key(idempotency_key)" in route
+    # It should have the shared proposal-only idempotency-key normalization
+    assert "_normalize_proposal_idempotency_key(idempotency_key" in route
     # But NOT the full claim/complete ledger
     assert "claim_appointment_command(" not in route
     assert "complete_appointment_command(" not in route
 
 
 def test_proposal_only_update_excludes_full_idempotency():
-    """propose_update_appointment does not use claim/complete idempotency."""
+    """propose_update_appointment normalizes Idempotency-Key via the shared
+    proposal-only helper, without claim/complete idempotency ledger calls."""
     router_text = _read(ROUTER)
     handler_start = router_text.index("def propose_update_appointment(")
     handler_end = router_text.index("def _block_bernie_update_confirmation(", handler_start)
     route = router_text[handler_start:handler_end]
 
-    assert "Header(None, alias=\"Idempotency-Key\")" not in route
+    assert "Header(None, alias=\"Idempotency-Key\")" in route
+    assert "_normalize_proposal_idempotency_key(idempotency_key" in route
     assert "claim_appointment_command(" not in route
     assert "complete_appointment_command(" not in route
 
 
 def test_proposal_only_status_excludes_full_idempotency():
-    """propose_status_update does not use claim/complete idempotency."""
+    """propose_status_update normalizes Idempotency-Key via the shared
+    proposal-only helper, without claim/complete idempotency ledger calls."""
     router_text = _read(ROUTER)
     handler_start = router_text.index("def propose_status_update(")
     handler_end = router_text.index("def propose_waiting_area_update(", handler_start)
 
-    # Compact scan for idempotency patterns
     route = router_text[handler_start:handler_end]
-    route_compact = _compact(route)
 
-    assert "Idempotency-Key" not in route_compact
+    assert "Header(None, alias=\"Idempotency-Key\")" in route
+    assert "_normalize_proposal_idempotency_key(idempotency_key" in route
     assert "claim_appointment_command(" not in route
     assert "complete_appointment_command(" not in route
 
 
 def test_proposal_only_delete_excludes_full_idempotency():
-    """propose_delete_appointment does not use claim/complete idempotency."""
+    """propose_delete_appointment normalizes Idempotency-Key via the shared
+    proposal-only helper, without claim/complete idempotency ledger calls."""
     router_text = _read(ROUTER)
     handler_start = router_text.index("def propose_delete_appointment(")
     handler_end = router_text.index("def propose_slot_search(", handler_start)
     route = router_text[handler_start:handler_end]
 
-    assert "Idempotency-Key" not in route
+    assert "Header(None, alias=\"Idempotency-Key\")" in route
+    assert "_normalize_proposal_idempotency_key(idempotency_key" in route
     assert "claim_appointment_command(" not in route
     assert "complete_appointment_command(" not in route
 

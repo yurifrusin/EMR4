@@ -7,7 +7,7 @@ INDEX_PATH = Path("docs/api-spine/idempotency-continuity-index.md")
 
 STATUS_COUNTS = {
     "ledger_wired": 4,
-    "documented_gap": 4,
+    "syntactic_only": 4,
     "read_no_idempotency": 3,
 }
 
@@ -89,8 +89,8 @@ def test_idempotency_continuity_index_status_matches_path_kind():
             continue
 
         assert row["kind"] == "proposal"
-        assert row["runtime_status"] == "documented_gap"
-        assert row["source_sprint"] == "124"
+        assert row["runtime_status"] == "syntactic_only"
+        assert row["source_sprint"] == "200"
 
 
 def test_idempotency_continuity_index_cites_guard_sources():
@@ -102,7 +102,9 @@ def test_idempotency_continuity_index_cites_guard_sources():
         "tests/test_api_spine_confirmation_family_idempotency_checkpoint.py"
         in source_tests
     )
-    assert "tests/test_api_spine_appointment_idempotency_gap.py" in source_tests
+    assert "tests/test_appointment_proposals.py" in source_tests
+    assert "tests/test_appointment_update_proposal.py" in source_tests
+    assert "tests/test_appointment_status_mutations.py" in source_tests
     for source_test in source_tests:
         assert Path(source_test).is_file()
 

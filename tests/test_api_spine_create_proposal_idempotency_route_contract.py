@@ -168,7 +168,7 @@ def test_current_router_wires_create_proposal_syntactic_header_only():
 
     assert "Idempotency-Key" in route
     assert "Header(" in route
-    assert "_normalize_create_proposal_idempotency_key(idempotency_key)" in route
+    assert "_normalize_proposal_idempotency_key(idempotency_key" in route
     assert "claim_appointment_command(" not in combined
     assert "complete_appointment_command(" not in combined
 

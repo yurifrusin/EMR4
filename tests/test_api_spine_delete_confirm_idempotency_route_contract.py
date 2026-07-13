@@ -168,7 +168,7 @@ def _delete_payload(
     resp = client.post(
         DELETE_PROPOSAL_URL.format(appt_id=appt_id),
         json=body,
-        headers=_auth(token),
+        headers=_auth(token, f"delete-prop-sprint143-{appt_id}"),
     )
     assert resp.status_code == 200, resp.text
     payload = resp.json()["confirm_payload"]
@@ -309,7 +309,7 @@ def test_current_router_keeps_raw_and_proposal_delete_out_of_scope():
     assert "Idempotency-Key" not in raw_delete
     assert "claim_appointment_command(" not in raw_delete
     assert "commit=False" not in raw_delete
-    assert "Idempotency-Key" not in proposal_delete
+    # Proposal handlers now have Idempotency-Key syntactic validation
     assert "claim_appointment_command(" not in proposal_delete
     assert RAW_DELETE_DOC not in delete_route
 

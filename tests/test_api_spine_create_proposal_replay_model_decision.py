@@ -95,7 +95,7 @@ def test_current_create_proposal_route_wires_syntactic_header_without_ledger_aft
 
     assert "Idempotency-Key" in route
     assert "Header(" in route
-    assert "_normalize_create_proposal_idempotency_key(idempotency_key)" in route
+    assert "_normalize_proposal_idempotency_key(idempotency_key" in route
     assert "claim_appointment_command(" not in f"{route}\n{helper}"
     assert "complete_appointment_command(" not in f"{route}\n{helper}"
 
