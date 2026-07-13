@@ -320,14 +320,14 @@ class ConfirmationReceiptVerification(BaseModel):
     performed — never from client input.  visual_diary_check_required is always
     false by contract for this accessible booking path.
     """
-    actor_authenticated: bool = True
-    practice_scope_verified: bool = True
-    proposal_revalidated: bool = True
-    conflict_check_passed: bool = True
-    idempotency_verified: bool = True
-    audit_recorded: bool = True
-    signed_evidence_verified: bool = False
-    visual_diary_check_required: bool = False
+    actor_authenticated: bool
+    practice_scope_verified: bool
+    proposal_revalidated: bool
+    conflict_check_passed: bool
+    idempotency_verified: bool
+    audit_recorded: bool
+    signed_evidence_verified: bool
+    visual_diary_check_required: Literal[False]
 
 
 class ConfirmationReceipt(BaseModel):
@@ -337,6 +337,10 @@ class ConfirmationReceipt(BaseModel):
     Blocked responses never include a receipt.  Idempotent replay returns the
     stored receipt without another write.
     """
+    schema_version: Literal["appointment.confirmation_receipt.v1"] = (
+        "appointment.confirmation_receipt.v1"
+    )
+    outcome: Literal["appointment_created"] = "appointment_created"
     appointment_id: uuid.UUID
     patient_display: str
     practitioner_display: str

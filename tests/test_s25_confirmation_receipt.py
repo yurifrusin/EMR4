@@ -124,6 +124,8 @@ def _assert_generic_receipt_shape(data, expected_patient_display=None):
     assert "confirmation_receipt" in data, "Missing confirmation_receipt in response"
     r = data["confirmation_receipt"]
 
+    assert r["schema_version"] == "appointment.confirmation_receipt.v1"
+    assert r["outcome"] == "appointment_created"
     assert "appointment_id" in r
     assert isinstance(r["appointment_id"], str)
     assert r["patient_display"] and isinstance(r["patient_display"], str)
@@ -235,10 +237,7 @@ def test_staff_confirm_receipt_idempotent_replay(client, db, gp_user, patient, p
     assert data2["safe"] is True
     receipt2 = data2["confirmation_receipt"]
 
-    assert receipt1["appointment_id"] == receipt2["appointment_id"]
-    assert receipt1["patient_display"] == receipt2["patient_display"]
-    assert receipt1["practitioner_display"] == receipt2["practitioner_display"]
-    assert receipt1["verification"] == receipt2["verification"]
+    assert receipt1 == receipt2
 
     assert db.query(Appointment).count() == before_appts + 1
     assert db.query(AppointmentAuditLog).count() == before_audits + 1
@@ -307,10 +306,7 @@ def test_bernie_confirm_receipt_idempotent_replay(client, db, gp_user, patient, 
     assert data2["safe"] is True
     receipt2 = data2["confirmation_receipt"]
 
-    assert receipt1["appointment_id"] == receipt2["appointment_id"]
-    assert receipt1["patient_display"] == receipt2["patient_display"]
-    assert receipt1["practitioner_display"] == receipt2["practitioner_display"]
-    assert receipt1["verification"] == receipt2["verification"]
+    assert receipt1 == receipt2
 
     assert db.query(Appointment).count() == before_appts + 1
     assert db.query(AppointmentAuditLog).count() == before_audits + 1
