@@ -22,9 +22,9 @@
     "time_period": "afternoon"
   },
   "source_spans": {
-    "temporal_relation": "sometime in the afternoon",
-    "practitioner": "with Dr Shera",
-    "patient": "Margaret Thompson"
+    "temporal_relation": [{"turn_index": 0, "start": 43, "end": 68, "text": "sometime in the afternoon"}],
+    "practitioner": [{"turn_index": 0, "start": 29, "end": 42, "text": "with Dr Shera"}],
+    "patient": [{"turn_index": 0, "start": 11, "end": 28, "text": "Margaret Thompson"}]
   },
   "duration_minutes": 15,
   "practitioner_semantics": "exact",

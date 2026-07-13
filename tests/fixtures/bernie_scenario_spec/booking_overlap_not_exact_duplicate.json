@@ -28,10 +28,12 @@
     "duration_minutes": 30
   },
   "source_spans": {
-    "earliest_time": "at 3pm",
-    "latest_time": "to 4pm",
-    "practitioner": "with Dr Shera",
-    "patient": "Margaret Thompson"
+    "temporal_relation": [{"turn_index": 1, "start": 18, "end": 28, "text": "3pm to 4pm"}],
+    "earliest_time": [{"turn_index": 1, "start": 18, "end": 21, "text": "3pm"}],
+    "latest_time": [{"turn_index": 1, "start": 25, "end": 28, "text": "4pm"}],
+    "duration_minutes": [{"turn_index": 0, "start": 44, "end": 58, "text": "for 30 minutes"}],
+    "practitioner": [{"turn_index": 1, "start": 51, "end": 64, "text": "with Dr Shera"}],
+    "patient": [{"turn_index": 1, "start": 33, "end": 50, "text": "Margaret Thompson"}]
   },
   "duration_minutes": 30,
   "practitioner_semantics": "exact",

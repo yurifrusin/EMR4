@@ -6392,7 +6392,17 @@ def propose_bernie_supervised_booking(
             ),
             temporal_relation=constraint.temporal_relation,
         )
-        if adj_earliest != (constraint.earliest_time.strftime("%H:%M") if constraint.earliest_time else None) or adj_latest != (constraint.latest_time.strftime("%H:%M") if constraint.latest_time else None):
+        current_earliest = (
+            constraint.earliest_time.strftime("%H:%M")
+            if constraint.earliest_time
+            else None
+        )
+        current_latest = (
+            constraint.latest_time.strftime("%H:%M")
+            if constraint.latest_time
+            else None
+        )
+        if adj_earliest != current_earliest or adj_latest != current_latest:
             new_earliest = time.fromisoformat(adj_earliest) if adj_earliest else None
             new_latest = time.fromisoformat(adj_latest) if adj_latest else None
             constraint = constraint.model_copy(update={

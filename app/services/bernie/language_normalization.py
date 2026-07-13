@@ -121,8 +121,22 @@ def _detect_time_forms(original: str) -> Dict[str, str]:
             if fragment in detected:
                 continue
             hour = int(m.group("hour"))
-            minute = int(m.group("min")) if m.lastgroup and "min" in m.groupdict() and m.group("min") else 0
-            ampm = m.group("ampm").lower() if "ampm" in m.groupdict() and m.group("ampm") else None
+            minute = (
+                int(m.group("min"))
+                if "min" in m.groupdict() and m.group("min")
+                else 0
+            )
+            ampm = (
+                m.group("ampm").lower()
+                if "ampm" in m.groupdict() and m.group("ampm")
+                else None
+            )
+            if minute > 59:
+                continue
+            if ampm is not None and not 1 <= hour <= 12:
+                continue
+            if ampm is None and not 0 <= hour <= 23:
+                continue
             if ampm == "pm" and hour != 12:
                 hour += 12
             elif ampm == "am" and hour == 12:

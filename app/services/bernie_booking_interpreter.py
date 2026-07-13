@@ -33,7 +33,6 @@ from app.services.ai.contracts import AiCapability, AiMethod, AiProvider
 from app.services.ai.entitlements import AiAccessRole, AiActorContext, actor_context_from_user
 from app.services.ai.service import _get_default_provider
 from app.services.diary.temporal import (
-    TemporalExtraction,
     extract_natural_date_constraint,
     extract_natural_time_constraints,
     parse_time_fragment,

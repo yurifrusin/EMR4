@@ -249,6 +249,12 @@ class TestReceptionScenarioSpecContract:
         assert spec.adjudication == "adjudicated"
         assert spec.patient_semantics == "provisional"
 
+    def test_rejects_source_span_that_does_not_slice_original_turn(self) -> None:
+        data = _load_fixture("booking_create_then_exact_duplicate.json")
+        data["source_spans"]["earliest_time"][0]["start"] = 0
+        with pytest.raises(ValidationError, match="does not match original text"):
+            ReceptionScenarioSpec.model_validate(data)
+
 
 # ---------------------------------------------------------------------------
 # 2.  Seed fixture validation
@@ -446,6 +452,10 @@ class TestNormalizationBasic:
         result = normalize_utterance("at 3.30pm")
         assert "3.30pm" in result.time_forms
         assert result.time_forms["3.30pm"] == "15:30"
+
+    def test_invalid_clock_form_is_not_promoted_to_normalized_time(self) -> None:
+        result = normalize_utterance("at 29:99")
+        assert result.time_forms == {}
 
     def test_preserves_operator_words(self) -> None:
         operators = ["at", "before", "after", "from", "to", "not",

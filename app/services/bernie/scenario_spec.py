@@ -27,6 +27,23 @@ EntitySemantics = Literal[
 ]
 
 
+class ScenarioSourceSpan(BaseModel):
+    """Exact evidence coordinates in one original dialogue turn."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    turn_index: int = Field(ge=0)
+    start: int = Field(ge=0)
+    end: int = Field(gt=0)
+    text: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def validate_order(self) -> "ScenarioSourceSpan":
+        if self.end <= self.start:
+            raise ValueError("source span end must be greater than start")
+        return self
+
+
 class ReceptionScenarioSpec(BaseModel):
     """Versioned semantic oracle for one synthetic receptionist scenario.
 
@@ -55,7 +72,7 @@ class ReceptionScenarioSpec(BaseModel):
     earliest_time: str | None = None
     latest_time: str | None = None
     normalized_values: dict[str, Any]
-    source_spans: dict[str, str]
+    source_spans: dict[str, list[ScenarioSourceSpan]]
     duration_minutes: int | None = Field(default=None, gt=0)
 
     practitioner_semantics: EntitySemantics
@@ -155,12 +172,25 @@ class ReceptionScenarioSpec(BaseModel):
             for turn in self.dialogue_turns
             if isinstance(turn.get("utterance"), str)
         ]
-        for field_name, source_text in self.source_spans.items():
-            if not source_text or not any(source_text in text for text in utterances):
-                raise ValueError(
-                    f"source_spans[{field_name!r}] must quote an original dialogue turn"
-                )
+        for field_name, spans in self.source_spans.items():
+            if not spans:
+                raise ValueError(f"source_spans[{field_name!r}] cannot be empty")
+            for span in spans:
+                if span.turn_index >= len(utterances):
+                    raise ValueError(
+                        f"source_spans[{field_name!r}] references a missing turn"
+                    )
+                original = utterances[span.turn_index]
+                if span.end > len(original) or original[span.start:span.end] != span.text:
+                    raise ValueError(
+                        f"source_spans[{field_name!r}] does not match original text"
+                    )
         return self
 
 
-__all__ = ["EntitySemantics", "ReceptionScenarioSpec", "TemporalRelation"]
+__all__ = [
+    "EntitySemantics",
+    "ReceptionScenarioSpec",
+    "ScenarioSourceSpan",
+    "TemporalRelation",
+]

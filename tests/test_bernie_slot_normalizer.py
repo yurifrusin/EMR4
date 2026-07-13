@@ -420,3 +420,16 @@ def test_summary_populated_on_failure():
     result = normalize_slot_search_command(_cmd())
     assert result.safe is False
     assert len(result.summary) > 0
+
+
+def test_invalid_temporal_relation_fails_closed():
+    result = normalize_slot_search_command(_cmd(
+        practitioner_id=PRAC_ID,
+        date_from=REF_DATE.isoformat(),
+        earliest_time="15:00",
+        latest_time="16:00",
+        temporal_relation="approximately_exact",
+    ))
+    assert result.safe is False
+    assert result.constraint is None
+    assert [block.code for block in result.blocks] == ["invalid_temporal_relation"]

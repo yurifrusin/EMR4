@@ -51,3 +51,13 @@ The reporter can emit the complete cross-product list with
 - Live provider calls, provider prompts, raw historical-trove access,
   memory/RAG/GraphRAG, confirmation changes, and diary write-authority changes
   remain blocked or out of scope.
+
+## API-spine classification
+
+LC1 adds the optional `temporal_relation` field to the existing REST
+`SlotSearchCommandIn` and normalized `SlotSearchProposalIn` shapes. This is an
+additive interpretation/read-model constraint: it changes no route, auth,
+practice scope, idempotency key, audit payload, confirmation evidence, or
+mutation contract. Invalid relation values fail normalization closed. There is
+no GraphQL surface, new OpenAPI command route, async integration, or agent
+context-frame surface added by this tranche.

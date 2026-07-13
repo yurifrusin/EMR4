@@ -175,9 +175,9 @@ def normalize_slot_search_command(
         if raw in ("exact", "not_before", "not_after", "interval", "approximate", "unspecified"):
             temporal_relation = raw
         else:
-            warnings.append(_issue(
-                "invalid_temporal_relation", "warning",
-                f"temporal_relation '{raw}' is not a recognised value; treating as unspecified.",
+            blocks.append(_issue(
+                "invalid_temporal_relation", "blocked",
+                f"temporal_relation '{raw}' is not a recognised value.",
             ))
 
     # ── duration_minutes ──────────────────────────────────────────────────────
