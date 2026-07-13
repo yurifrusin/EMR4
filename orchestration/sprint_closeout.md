@@ -15024,3 +15024,12 @@ economical worker pool and are selected by task capability rather than fixed
 platform stereotypes. Gemini is not restricted to UX. DeepSeek 4 Pro is the
 first economical optional Conductor; Fable and Opus are reserved for
 higher-leverage specialist consultation.
+## DeepCode Runtime Observability Checkpoint
+
+S11 exposed a live PTY stall and a harmless `## STATUS: complete` formatting
+variance. The harness now persists a bounded, redacted JSONL terminal transcript
+and provides a non-destructive liveness observer over artifact, Git, watched
+files, processes, receipts, and mailbox signals. Elapsed time remains advisory
+and cannot independently classify failure. Terminal status parsing now accepts
+harmless Markdown presentation while requiring one unambiguous semantic marker
+near the expected artifact end.
