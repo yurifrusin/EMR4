@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | Bernie language-coverage course correction after T1/T2 completion and T3.1-T3.4 evaluation scaffolding. The deterministic matrices remain valid diary-policy evidence but do not establish broad natural-language understanding. Yuri's real `tomorrow at 3pm` request exposed an interpretation gap before the supervised duplicate route: exact point-time language is not reliably represented by the current natural-language fallback. `docs/bernie-language-coverage-implementation-plan.md` now defines a finite semantic coverage lattice over open-ended language, a canonical scenario contract with explicit temporal relations and source spans, lossless normalization, Gold/Silver/Bronze corpus evidence, historical-trove limits, multi-model generation with independent adjudication, metamorphic/mutation testing, and a composed T3-interpretation/T2-diary evaluator. T3 provider replay and write authority remain blocked. |
-| **Next recommended work** | Begin LC1 Semantic Foundation and Known Regression through the normal Ariadne workflow. Reproduce `tomorrow at 3pm` through the non-intercepted interpretation path; distinguish `exact`, `not_before`, `not_after`, `interval`, `approximate`, and `unspecified` temporal relations; introduce the canonical scenario contract and lossless normalized view; adapt a small independent T1/T2 seed set; and emit the first coverage gap report. Preserve T3.1-T3.4 but defer T3.5 DeepSeek/Gemini adapters until the language bridge is credible. Sol/high owns architecture and acceptance; economical workers may implement/generate, but no model certifies its own corpus. Continue without user pause unless work broadens historical-trove access, sends sensitive data externally, accepts material licence/cost terms, opens live-provider calls, or changes write authority. Dependabot alert 5 remains open; do not force overrides. |
+| **Current active track** | LC1 Semantic Foundation and Known Regression is complete. The non-intercepted fake-interpreter path now maps `tomorrow at 3pm` to equal `15:00` bounds with `temporal_relation=exact`, and the composed public route returns `existing_booking_found` without a second appointment or audit write. Explicit non-exact relations cannot grant duplicate authority; legacy unlabelled commands retain their prior behavior. `ReceptionScenarioSpec` now carries deterministic clock, typed action/entity/temporal semantics, coordinate-checked source spans, normalized values, synthetic state, appointment/audit deltas, provenance, and independent adjudication. Three Gold T1/T2 adaptations cover 3 of 152,064 lattice cells; `docs/bernie-lc1-coverage-gap-report.json` records the 152,061-cell gap with a bounded explicit sample and complete missing-value summary. T3.1-T3.4 remain intact and blocked by default; T3.5 provider adapters and all live/write authority remain deferred. |
+| **Next recommended work** | Begin LC2 Corpus Factory and Independent Adjudication through the normal Ariadne workflow. Use the registered Claude Code `--bare` DeepSeek adapter as the preferred DeepSeek transport; DeepCode is fallback only. Add bounded Gold/Silver/Bronze promotion rules, independently generated/adjudicated paraphrase and minimal-pair families, and quarantine disagreement without allowing any generator to certify its own corpus. Preserve the LC1 source-span/temporal-authority contract, T3.1-T3.4, and the T3.5 deferral. Continue without user pause unless work broadens historical-trove access, sends sensitive data externally, accepts material licence/cost terms, opens live-provider calls, or changes write authority. Dependabot alert 5 remains open; do not force overrides. |
 
 2026-07-13 task-branch work extends the DeepCode PTY harness with bounded,
 redacted terminal-event transcripts and a non-destructive multi-signal liveness
@@ -64,8 +64,15 @@ new-continuation policy defaults; unknown context cannot proceed to planning,
 dispatch, verification acceptance, integration, commit, or push without a
 fresh receipt. This replaces any expectation that the orchestrator will simply
 remember critical facts through automatic compaction.
-DeepSeek's active EMR4 transport is now Deep Code (`deepcode -p <packet>`),
-not the retired Codex bridge assumption. The profile in
+DeepSeek's preferred EMR4 transport is Claude Code `--bare` print mode through
+the DeepSeek Anthropic-compatible API, registered as
+`deepseek_via_claude_code_bare` and launched by
+`scripts/ariadne_deepseek_claude.py`. Deep Code (`deepcode -p <packet>`) remains
+the interactive TUI fallback, not the default and not evidence that DeepSeek is
+unavailable. The current LC1 sprint had already dispatched DeepCode workers
+before Yuri corrected the stale handover wording, so those lanes completed
+without interruption; all next-sprint DeepSeek dispatch must prefer Claude Code
+bare mode. The DeepCode fallback profile in
 `orchestration/harness_settings/deepcode_model_profile.yaml` defaults to
 `deepseek-v4-flash`/`high`; it permits `deepseek-v4-pro` or `max` only with a
 recorded leverage reason. Deep Code is an interactive permissioned TUI, so a
@@ -1770,4 +1777,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-07-13 - DeepCode runtime observability implementation is on the task branch `codex/deepcode-runtime-liveness`; focused harness tests pass, with final commit SHA recorded in the task closeout.*
+*Last updated: 2026-07-14 - LC1 semantic foundation is complete and reviewed; Claude Code bare mode is the preferred next-sprint DeepSeek transport, with DeepCode retained only as fallback.*

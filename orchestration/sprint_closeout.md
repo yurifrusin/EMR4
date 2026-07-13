@@ -15206,3 +15206,51 @@ No Conductor or verifier was required because this was the fixed safety/cost
 boundary for the approved T3 track. Sprint engine state: continuing to T3.5
 DeepSeek and Gemini adapter implementation without external calls. No user
 decision is required until an external replay would actually be enabled.
+
+## LC1 Closeout - Semantic Foundation and Known Regression
+
+Status: accepted and independently reviewed on 2026-07-14.
+
+- Reproduced the real `tomorrow at 3pm` failure through the non-intercepted
+  deterministic interpreter service before implementation: both time bounds
+  were null.
+- Added all six explicit temporal relations and the common receptionist time
+  forms. Exact points retain equal semantic bounds; only the slot-search
+  consumer widens them to the five-minute half-open unit.
+- Threaded relation evidence through the command/proposal schemas, normalizer,
+  interpreter, supervised duplicate classification, and slot search. Explicit
+  non-exact relations cannot produce `existing_booking_found`; invalid labels
+  block normalization; legacy unlabelled commands retain historical behavior.
+- Added a composed public-route regression proving `tomorrow at 3pm` reaches
+  `existing_booking_found` and produces no second appointment or audit write.
+- Added the canonical scenario contract, lossless normalized view, exact source
+  coordinates, three independently adjudicated Gold T1/T2 adaptations, and the
+  first six-dimensional machine-readable gap report: 3 covered of 152,064
+  cells, with 152,061 gaps visible.
+- Sol corrected the initial worker candidates where equal exact bounds had been
+  treated as an empty interval, duplicate authority was not relation-gated,
+  source IDs were not real T1/T2 IDs, and the first lattice omitted entity
+  state. The final fail-closed amendment passed 198 focused tests.
+- DW3 returned PASS on the integrated baseline (31/31 checks, all 16 claims,
+  48/48 T3 tests, blocked readiness), then PASS again on the final amendment
+  diff (38 normalizer tests, 51 contract tests, composed route regression, and
+  whitespace check).
+- The final 360-test LC1/scenario/T3/API-spine aggregate passed with one
+  expected xfail and one skip. The real non-intercepted fake-provider smoke
+  returned equal `15:00` bounds and `temporal_relation=exact`; a fresh bounded
+  lattice export was semantically identical to the committed report.
+- The separate final explicit-clock delta review returned PASS after 39 focused
+  tests plus one expected xfail, all seven selected shadow-boundary tests, all
+  40 scenario replays, edge-clock assertions, and whitespace review. Its PTY
+  cleanup receipt confirms the worker process ended and no permission prompt
+  occurred.
+- No live provider, provider prompt, historical-trove, memory/RAG/GraphRAG,
+  GraphQL, async, confirmation, or write-authority gate opened. T3.5 remains
+  deferred.
+- Current sprint workers completed on the already-dispatched DeepCode fallback.
+  Yuri corrected the stale handover during the sprint; LC2 must use Claude Code
+  bare mode as the preferred DeepSeek transport.
+
+Sprint engine state: LC1 complete. Next recommended product tranche is LC2
+Corpus Factory and Independent Adjudication; no user decision is currently
+required inside its documented synthetic, provider-free boundary.

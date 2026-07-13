@@ -341,6 +341,16 @@ Read these before acting on remembered process details.
   inherit auth/routing overrides and 401. Do not use `--bare` for EMR4 routine
   prompts; it is incompatible with the current subscription/setup-token auth
   path.
+- DeepSeek-through-Claude-Code rule (2026-07-14): the preceding `--bare`
+  prohibition applies to ordinary Anthropic subscription/setup-token prompts,
+  not to the separate DeepSeek API transport. DeepSeek dispatch must prefer the
+  registered `deepseek_via_claude_code_bare` adapter through
+  `scripts/ariadne_deepseek_claude.py`; its process-local DeepSeek credentials,
+  compact system prompt, JSON output, no-session persistence, and isolated
+  worktree are mandatory. DeepCode remains the TUI fallback. LC1 workers that
+  were already active on DeepCode when Yuri corrected this protocol were
+  allowed to finish; the transport switch takes effect at the next sprint
+  boundary.
 - Computer Use restart rule: after a Windows/Codex restart, Computer Use may be
   available through the skill's JS bootstrap path even when no standalone
   desktop-control tool appears in tool discovery. Ariadne should read/use the
