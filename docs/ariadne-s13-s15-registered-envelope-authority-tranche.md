@@ -1,7 +1,7 @@
 # Ariadne S13-S15 Registered Envelope Authority Hardening
 
-Status: S13 approved for staging execution; S14-S15 closed pending Sol
-authorization of the exact S13 protected-master manifest.
+Status: S13 integrated to protected master under Sol's exact manifest. S14 is
+approved for staging execution; S15 remains closed pending later Sol direction.
 
 ## Direction
 
@@ -15,7 +15,7 @@ Unknown free-string names remain compatible with existing generic envelopes.
 | Sprint | Scope | Dependency | Allocation |
 | --- | --- | --- | --- |
 | S13 | Enforce registered action author and envelope-tier compatibility in the pure Diary contract layer. | Sol authorization of this tranche. | One DeepSeek 4 Flash/high worker through detached Deep Code PTY. |
-| S14 | Cross-contract alias/tier adversarial hardening. | Accepted S13 staging result and new Sol authorization. | Gemini 3.5 Flash via Antigravity. |
+| S14 | Cross-contract alias/tier adversarial hardening. | Integrated S13 result and Sol authorization. | Gemini 3.5 Flash via Antigravity. |
 | S15 | Deterministic final acceptance and process measurement. | Accepted S13-S14 staging results and new Sol authorization. | Terra; no extra worker unless evidence conflicts. |
 
 ## API Steward Classification
