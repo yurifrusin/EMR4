@@ -2475,6 +2475,12 @@ html, body {
   color: #92400e;
 }
 
+.bernie-status-badge.existing_booking_found {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+
 .bernie-status-badge.confirmation_ready,
 .bernie-status-badge.advisory_warnings_only {
   background-color: #dcfce7;

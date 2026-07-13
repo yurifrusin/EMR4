@@ -970,7 +970,9 @@ function bernieReviewTransitionFromViewModel(payload, viewModel, candidateSlots,
   const freshness = bernieUiNodeValue(viewModel, "freshness_state");
 
   let state = "blocked";
-  if (confirmation === "confirmed" || copyMode === "success" || flags.show_success_copy === true) {
+  if (payload.status === "existing_booking_found" || payload.outcome?.kind === "existing_booking_found" || payload.result === "existing_booking_found") {
+    state = "existing_booking_found";
+  } else if (confirmation === "confirmed" || copyMode === "success" || flags.show_success_copy === true) {
     state = "confirmed";
   } else if (flags.show_stale_warning === true || freshness === "stale" || confirmation === "stale") {
     state = "stale";
@@ -997,19 +999,19 @@ function bernieReviewTransitionFromViewModel(payload, viewModel, candidateSlots,
 
   return {
     state,
-    canShowCandidates: flags.show_candidate_slots === true && candidateSlots.length > 0,
-    canShowNoSlots: flags.show_no_slot_suggestions === true || state === "no_slots",
+    canShowCandidates: state === "existing_booking_found" ? false : (flags.show_candidate_slots === true && candidateSlots.length > 0),
+    canShowNoSlots: state === "existing_booking_found" ? false : (flags.show_no_slot_suggestions === true || state === "no_slots"),
     candidateSlots,
     suggestions,
     uiViewModel: viewModel,
-    showPendingProposalCard: flags.show_pending_proposal_card === true,
-    showConfirmButton: flags.show_confirm_button === true,
-    enableConfirmButton: flags.enable_confirm_button === true,
-    showChooseAnotherTime: flags.show_choose_another_time === true,
-    showSuccessCopy: flags.show_success_copy === true,
-    showStaleWarning: flags.show_stale_warning === true,
-    showRetryAction: flags.show_retry_action === true,
-    showEditAction: flags.show_edit_action === true
+    showPendingProposalCard: state === "existing_booking_found" ? false : (flags.show_pending_proposal_card === true),
+    showConfirmButton: state === "existing_booking_found" ? false : (flags.show_confirm_button === true),
+    enableConfirmButton: state === "existing_booking_found" ? false : (flags.enable_confirm_button === true),
+    showChooseAnotherTime: state === "existing_booking_found" ? false : (flags.show_choose_another_time === true),
+    showSuccessCopy: state === "existing_booking_found" ? false : (flags.show_success_copy === true),
+    showStaleWarning: state === "existing_booking_found" ? false : (flags.show_stale_warning === true),
+    showRetryAction: state === "existing_booking_found" ? false : (flags.show_retry_action === true),
+    showEditAction: state === "existing_booking_found" ? false : (flags.show_edit_action === true)
   };
 }
 
@@ -1028,6 +1030,8 @@ function bernieReviewTransition(payload) {
     };
   }
 
+  const isDuplicate = payload.status === "existing_booking_found" || payload.outcome?.kind === "existing_booking_found" || payload.result === "existing_booking_found";
+
   const uiViewModel = bernieUiViewModelFromPayload(payload);
   if (uiViewModel) {
     const viewModelTransition = bernieReviewTransitionFromViewModel(payload, uiViewModel, candidateSlots, suggestions);
@@ -1035,6 +1039,15 @@ function bernieReviewTransition(payload) {
       viewModelTransition.state = "blocked";
       viewModelTransition.showConfirmButton = false;
       viewModelTransition.enableConfirmButton = false;
+    }
+    if (isDuplicate) {
+      viewModelTransition.state = "existing_booking_found";
+      viewModelTransition.canShowCandidates = false;
+      viewModelTransition.showConfirmButton = false;
+      viewModelTransition.enableConfirmButton = false;
+      viewModelTransition.showChooseAnotherTime = false;
+      viewModelTransition.showPendingProposalCard = false;
+      viewModelTransition.canShowNoSlots = false;
     }
     return viewModelTransition;
   }
@@ -1044,7 +1057,11 @@ function bernieReviewTransition(payload) {
   let state = payload.status || "blocked";
   const outcomeKind = payload.outcome?.kind;
 
-  if (outcomeKind) {
+  if (isDuplicate) {
+    state = "existing_booking_found";
+    canShowCandidates = false;
+    canShowNoSlots = false;
+  } else if (outcomeKind) {
     canShowCandidates = outcomeKind === "candidate_selection_required" && candidateSlots.length > 0;
     canShowNoSlots = outcomeKind === "no_matching_times";
     if (outcomeKind === "roster_unavailable") {
@@ -1153,6 +1170,7 @@ function bernieReviewTransition(payload) {
 
 function bernieStatusCopyForPayload(payload) {
   const transition = bernieReviewTransition(payload);
+  if (transition.state === "existing_booking_found") return "Existing booking found";
   const explanationCopy = getScheduleExplanationCopy(payload);
   if (explanationCopy) {
     return explanationCopy.status;
@@ -1167,6 +1185,7 @@ function bernieStatusCopyForPayload(payload) {
 
 function bernieHeadlineCopyForPayload(payload) {
   const transition = bernieReviewTransition(payload);
+  if (transition.state === "existing_booking_found") return "Appointment already exists";
   const explanationCopy = getScheduleExplanationCopy(payload);
   if (explanationCopy) {
     return explanationCopy.headline;
@@ -1184,6 +1203,9 @@ function bernieReviewActionCopy(payload) {
     return "Nothing is booked until you confirm.";
   }
   const transition = bernieReviewTransition(payload);
+  if (transition.state === "existing_booking_found") {
+    return "The appointment already exists; no new booking was made. Choose another time or day if wanted.";
+  }
   const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
   if (hasProviderUnavailable && !isBernieDevOrDebug()) {
     return "Bernie could not search just now. Nothing was booked. Try again in a moment.";
@@ -5070,6 +5092,8 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   statusBadge.className = `bernie-status-badge ${transition.state}`;
   statusBadge.setAttribute("data-testid", "bernie-review-status");
   statusBadge.textContent = bernieStatusCopyForPayload(payload);
+  statusBadge.setAttribute("role", "status");
+  statusBadge.setAttribute("aria-live", "polite");
   contentEl.appendChild(statusBadge);
 
   // 2. Headline
@@ -5230,7 +5254,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   renderBerniePracticeKnowledgeAdvisories(contentEl, payload, interpretEnvelope);
 
   // 4. Content Section depending on Status
-  if ((transition.state === "blocked" || transition.state === "clinic_day_exhausted") && transition.state !== "roster_unavailable" && transition.state !== "no_slots") {
+  if ((transition.state === "blocked" || transition.state === "clinic_day_exhausted") && transition.state !== "roster_unavailable" && transition.state !== "no_slots" && transition.state !== "existing_booking_found") {
     const isDevOrDebug = isBernieDevOrDebug();
     const hasProviderUnavailable = Array.isArray(payload.blocks) && payload.blocks.some(b => PROVIDER_UNAVAILABLE_CODES.includes(b.code));
 
@@ -5304,6 +5328,73 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
     blocksContainer.appendChild(list);
     contentEl.appendChild(blocksContainer);
+  }
+  else if (transition.state === "existing_booking_found") {
+    const cardContainer = document.createElement("div");
+    cardContainer.className = "bernie-selection-container";
+
+    const sectionTitle = document.createElement("span");
+    sectionTitle.className = "bernie-section-title";
+    sectionTitle.textContent = "Existing booking details";
+    cardContainer.appendChild(sectionTitle);
+
+    const card = document.createElement("div");
+    card.className = "bernie-selected-slot-card";
+    card.setAttribute("data-testid", "bernie-review-existing-booking");
+
+    const booking = payload.existing_booking || {};
+
+    appendBernieDetailRow(card, "Date", booking.appointment_date);
+    appendBernieDetailRow(card, "Time", booking.start_time_local ? booking.start_time_local.slice(0, 5) : "");
+    appendBernieDetailRow(card, "Practitioner", booking.practitioner_display);
+    appendBernieDetailRow(card, "Status", booking.status);
+
+    if (booking.appointment_type_name) {
+      appendBernieDetailRow(card, "Type", booking.appointment_type_name);
+    }
+    if (booking.duration_minutes) {
+      appendBernieDetailRow(card, "Duration", `${booking.duration_minutes} mins`);
+    }
+
+    cardContainer.appendChild(card);
+    contentEl.appendChild(cardContainer);
+
+    const suggestions = transition.suggestions || [];
+    if (suggestions.length > 0) {
+      const suggestionsSection = document.createElement("div");
+      suggestionsSection.className = "bernie-candidates-container";
+
+      const suggestionsTitle = document.createElement("span");
+      suggestionsTitle.className = "bernie-section-title";
+      suggestionsTitle.textContent = "Suggested options";
+      suggestionsSection.appendChild(suggestionsTitle);
+
+      const suggestionsList = document.createElement("div");
+      suggestionsList.setAttribute("data-testid", "bernie-review-candidates-list");
+
+      const suggestionsContainer = document.createElement("div");
+      suggestionsContainer.className = "bernie-suggested-instructions";
+      suggestionsContainer.setAttribute("data-testid", "bernie-no-slot-suggestions");
+
+      suggestions.forEach((suggestion, index) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "bernie-suggestion-chip";
+        chip.setAttribute("data-testid", `bernie-no-slot-suggestion-${index}`);
+        const label = suggestion.summary || "Try another search";
+        chip.textContent = label;
+        chip.addEventListener("click", () => {
+          const lastClarification = [...bernieSession.turns].reverse().find(t => t.kind === "bernie_clarification");
+          const originalTurnId = lastClarification ? lastClarification.id : null;
+          handleNoSlotSuggestionClick(label, originalTurnId);
+        });
+        suggestionsContainer.appendChild(chip);
+      });
+
+      suggestionsList.appendChild(suggestionsContainer);
+      suggestionsSection.appendChild(suggestionsList);
+      contentEl.appendChild(suggestionsSection);
+    }
   }
   else if (transition.canShowCandidates || payload.status === "candidate_selection_required" || transition.state === "roster_unavailable" || transition.state === "no_slots") {
     const candidatesContainer = document.createElement("div");
