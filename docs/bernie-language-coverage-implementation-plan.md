@@ -203,6 +203,10 @@ separate coordination sprint for each bullet.
 
 ### LC1 - Semantic Foundation And Known Regression
 
+Implementation status: complete on 2026-07-14. Evidence and remaining gaps are
+recorded in `docs/bernie-lc1-semantic-foundation.md` and
+`docs/bernie-lc1-coverage-gap-report.json`.
+
 - Add a failing regression for Yuri's real `tomorrow at 3pm` request through
   the non-intercepted interpretation path.
 - Cover `3pm`, `3 pm`, `3.00pm`, `15:00`, and exact/open/approximate temporal

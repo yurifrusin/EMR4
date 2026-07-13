@@ -1,8 +1,8 @@
 {
   "spec_version": "lc1.v1",
-  "scenario_id": "T1.1-booking-create-then-exact-duplicate",
+  "scenario_id": "booking_create_then_exact_duplicate",
   "provenance": "gold",
-  "adjudication": "pending",
+  "adjudication": "adjudicated",
   "family": "booking_create",
   "description": "After creating a booking at a specific time, the receptionist requests the same exact booking again. The system must recognize the existing booking and refuse to create a duplicate.",
   "dialogue_turns": [
@@ -16,10 +16,18 @@
     }
   ],
   "reference_date": "2026-07-13",
+  "clinic_clock": "2026-07-13T09:00:00+10:00",
   "intended_action": "create",
+  "action_semantics": "intended",
   "temporal_relation": "exact",
   "earliest_time": "15:00",
   "latest_time": "15:00",
+  "normalized_values": {
+    "appointment_date": "2026-07-14",
+    "earliest_time": "15:00",
+    "latest_time": "15:00",
+    "duration_minutes": 15
+  },
   "source_spans": {
     "earliest_time": "at 3pm",
     "latest_time": "at 3pm",
@@ -30,6 +38,13 @@
   "duration_minutes": 15,
   "practitioner_semantics": "exact",
   "patient_semantics": "exact",
+  "location_semantics": "omitted",
+  "appointment_type_semantics": "omitted",
+  "duration_semantics": "exact",
+  "diary_state": "exact_duplicate",
+  "entity_state": "exact",
+  "dialogue_form": "repeated",
+  "language_form": "plain",
   "initial_diary_state": {
     "reference_date": "2026-07-13",
     "diary_page_date": "2026-07-14",
@@ -50,7 +65,14 @@
       "duration_minutes": 15
     }
   ],
-  "forbidden_outcomes": ["appointment_created"],
+  "expected_audit_deltas": [
+    {
+      "change_type": "created",
+      "appointment_id": "apt-001",
+      "count": 1
+    }
+  ],
+  "forbidden_outcomes": ["second_appointment_created"],
   "forbidden_tool_calls": ["mutate_diary_direct", "override_confirmation"],
   "expected_clarification": null,
   "clarification_choices": []

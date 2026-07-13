@@ -101,6 +101,18 @@ class TestRequiredKeys:
         report = self._get_report()
         assert "total_cell_count" in report
 
+    def test_has_complete_gap_summary_and_empty_count(self) -> None:
+        report = self._get_report()
+        assert report["empty_cell_count"] > 0
+        assert set(report["gap_summary"]) == {
+            "diary_action",
+            "diary_state",
+            "entity_state",
+            "temporal_form",
+            "dialogue_form",
+            "language_form",
+        }
+
 
 # ---------------------------------------------------------------------------
 # 3.  Empty cells list is non-empty
@@ -151,6 +163,11 @@ class TestEmptyCellStructure:
         cell = data["empty_cells"][0]
         assert "temporal_form" in cell
 
+    def test_empty_cell_has_entity_state(self) -> None:
+        result = _run_lattice()
+        data = json.loads(result.stdout)
+        assert "entity_state" in data["empty_cells"][0]
+
     def test_empty_cell_has_dialogue_form(self) -> None:
         result = _run_lattice()
         data = json.loads(result.stdout)
@@ -167,7 +184,7 @@ class TestEmptyCellStructure:
         result = _run_lattice()
         data = json.loads(result.stdout)
         cell = data["empty_cells"][0]
-        for key in ("diary_action", "diary_state", "temporal_form",
+        for key in ("diary_action", "diary_state", "entity_state", "temporal_form",
                     "dialogue_form", "language_form"):
             assert isinstance(cell[key], str), (
                 f"{key} is not a string: {type(cell[key])}"

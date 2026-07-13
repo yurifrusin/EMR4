@@ -1,8 +1,8 @@
 {
   "spec_version": "lc1.v1",
-  "scenario_id": "T1.2-booking-overlap-not-exact-duplicate",
+  "scenario_id": "booking_overlap_not_exact_duplicate",
   "provenance": "gold",
-  "adjudication": "pending",
+  "adjudication": "adjudicated",
   "family": "booking_create",
   "description": "An existing booking occupies a specific time slot. The receptionist requests a booking within an overlapping window but not at the exact same time. The system must not treat this as an exact duplicate but should identify a potential collision and request clarification or candidate selection.",
   "dialogue_turns": [
@@ -16,10 +16,17 @@
     }
   ],
   "reference_date": "2026-07-13",
+  "clinic_clock": "2026-07-13T09:00:00+10:00",
   "intended_action": "create",
+  "action_semantics": "intended",
   "temporal_relation": "interval",
   "earliest_time": "15:00",
   "latest_time": "16:00",
+  "normalized_values": {
+    "earliest_time": "15:00",
+    "latest_time": "16:00",
+    "duration_minutes": 30
+  },
   "source_spans": {
     "earliest_time": "at 3pm",
     "latest_time": "to 4pm",
@@ -29,6 +36,13 @@
   "duration_minutes": 30,
   "practitioner_semantics": "exact",
   "patient_semantics": "exact",
+  "location_semantics": "omitted",
+  "appointment_type_semantics": "omitted",
+  "duration_semantics": "exact",
+  "diary_state": "overlap",
+  "entity_state": "exact",
+  "dialogue_form": "correction",
+  "language_form": "plain",
   "initial_diary_state": {
     "reference_date": "2026-07-13",
     "diary_page_date": "2026-07-14",
@@ -49,6 +63,7 @@
   "expected_outcome_kind": "candidate_selection_required",
   "expected_tool_sequence": ["search_patients", "find_slots", "propose_candidates"],
   "expected_appointment_deltas": [],
+  "expected_audit_deltas": [],
   "forbidden_outcomes": ["existing_booking_found", "appointment_created"],
   "forbidden_tool_calls": ["mutate_diary_direct", "override_confirmation", "ignore_collision"],
   "expected_clarification": null,

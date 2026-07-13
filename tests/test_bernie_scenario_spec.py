@@ -30,6 +30,7 @@ from app.services.bernie.scenario_spec import ReceptionScenarioSpec
 # ---------------------------------------------------------------------------
 HERE = Path(__file__).resolve().parent
 FIXTURE_DIR = HERE / "fixtures" / "bernie_scenario_spec"
+SOURCE_SCENARIO_DIR = HERE / "fixtures" / "bernie_scenarios"
 
 
 def _load_fixture(name: str) -> Dict[str, Any]:
@@ -54,15 +55,28 @@ class TestReceptionScenarioSpecContract:
             description="A test scenario",
             dialogue_turns=[{"utterance": "hello"}],
             reference_date="2026-07-13",
+            clinic_clock="2026-07-13T09:00:00+10:00",
             intended_action="create",
+            action_semantics="intended",
             temporal_relation="exact",
+            earliest_time="15:00",
+            latest_time="15:00",
+            normalized_values={"earliest_time": "15:00", "latest_time": "15:00"},
             source_spans={},
             practitioner_semantics="exact",
             patient_semantics="exact",
+            location_semantics="omitted",
+            appointment_type_semantics="omitted",
+            duration_semantics="omitted",
+            diary_state="empty",
+            entity_state="exact",
+            dialogue_form="one_shot",
+            language_form="plain",
             initial_diary_state={},
             expected_outcome_kind="interpreted_ready",
             expected_tool_sequence=[],
             expected_appointment_deltas=[],
+            expected_audit_deltas=[],
             forbidden_outcomes=[],
             forbidden_tool_calls=[],
             clarification_choices=[],
@@ -204,17 +218,29 @@ class TestReceptionScenarioSpecContract:
             adjudication="adjudicated",
             family="booking_move",
             description="explicit version",
-            dialogue_turns=[],
+            dialogue_turns=[{"utterance": "Move the appointment after 9am"}],
             reference_date="2026-07-13",
+            clinic_clock="2026-07-13T09:00:00+10:00",
             intended_action="move",
+            action_semantics="intended",
             temporal_relation="not_before",
+            earliest_time="09:00",
+            normalized_values={"earliest_time": "09:00"},
             source_spans={},
             practitioner_semantics="omitted",
             patient_semantics="provisional",
+            location_semantics="omitted",
+            appointment_type_semantics="omitted",
+            duration_semantics="omitted",
+            diary_state="empty",
+            entity_state="omitted",
+            dialogue_form="one_shot",
+            language_form="plain",
             initial_diary_state={},
             expected_outcome_kind="clarification_required",
             expected_tool_sequence=[],
             expected_appointment_deltas=[],
+            expected_audit_deltas=[],
             forbidden_outcomes=[],
             forbidden_tool_calls=[],
             clarification_choices=[],
@@ -251,10 +277,39 @@ class TestSeedFixtureValidation:
             data = _load_fixture(name)
             assert data["provenance"] == "gold", f"{name} is not gold"
 
-    def test_all_fixtures_have_pending_adjudication(self) -> None:
+    def test_all_fixtures_have_independent_adjudication(self) -> None:
         for name in FIXTURE_NAMES:
             data = _load_fixture(name)
-            assert data["adjudication"] == "pending", f"{name} is not pending"
+            assert data["adjudication"] == "adjudicated", f"{name} is not adjudicated"
+
+    def test_all_fixtures_reference_committed_t1_t2_scenario_ids(self) -> None:
+        source_ids = {
+            line.removeprefix("id:").strip()
+            for path in SOURCE_SCENARIO_DIR.glob("*.yaml")
+            for line in path.read_text(encoding="utf-8").splitlines()[:6]
+            if line.startswith("id:")
+        }
+        for name in FIXTURE_NAMES:
+            scenario_id = _load_fixture(name)["scenario_id"]
+            assert scenario_id in source_ids, f"{name}: unknown source {scenario_id}"
+
+    def test_all_fixtures_include_full_canonical_semantics(self) -> None:
+        for name in FIXTURE_NAMES:
+            data = _load_fixture(name)
+            for field in (
+                "clinic_clock",
+                "action_semantics",
+                "normalized_values",
+                "location_semantics",
+                "appointment_type_semantics",
+                "duration_semantics",
+                "expected_audit_deltas",
+                "diary_state",
+                "entity_state",
+                "dialogue_form",
+                "language_form",
+            ):
+                assert field in data, f"{name}: missing {field}"
 
     def test_all_fixtures_use_synthetic_ids(self) -> None:
         for name in FIXTURE_NAMES:
@@ -291,7 +346,9 @@ class TestSeedSemantics:
         spec = ReceptionScenarioSpec(**data)
         assert spec.temporal_relation == "exact"
         assert spec.expected_outcome_kind == "existing_booking_found"
-        assert "appointment_created" in spec.forbidden_outcomes
+        assert "second_appointment_created" in spec.forbidden_outcomes
+        assert len(spec.expected_appointment_deltas) == 1
+        assert len(spec.expected_audit_deltas) == 1
 
     def test_exact_duplicate_earliest_equals_latest(self) -> None:
         data = _load_fixture("booking_create_then_exact_duplicate.json")
@@ -318,7 +375,7 @@ class TestSeedSemantics:
     def test_clarify_temporal_outcome_kind(self) -> None:
         data = _load_fixture("interpret_clarify_temporal_bounds.json")
         spec = ReceptionScenarioSpec(**data)
-        assert spec.temporal_relation == "approximate"
+        assert spec.temporal_relation == "unspecified"
         assert spec.expected_outcome_kind == "clarification_required"
         assert spec.expected_clarification is not None
         assert len(spec.clarification_choices) > 0

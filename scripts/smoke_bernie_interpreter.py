@@ -89,6 +89,19 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Exit non-zero unless command_candidate.latest_time matches HH:MM.",
     )
     parser.add_argument(
+        "--expect-temporal-relation",
+        choices=(
+            "exact",
+            "not_before",
+            "not_after",
+            "interval",
+            "approximate",
+            "unspecified",
+        ),
+        default=None,
+        help="Exit non-zero unless command_candidate.temporal_relation matches.",
+    )
+    parser.add_argument(
         "--expect-mode",
         default=None,
         help="Exit non-zero unless provider_metadata.mode matches.",
@@ -222,6 +235,7 @@ def main(argv: list[str] | None = None) -> int:
     for key, expected in (
         ("earliest_time", args.expect_earliest_time),
         ("latest_time", args.expect_latest_time),
+        ("temporal_relation", args.expect_temporal_relation),
     ):
         if expected is not None and _command_value(envelope, key) != expected:
             print(

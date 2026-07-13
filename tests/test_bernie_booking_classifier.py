@@ -277,6 +277,46 @@ def test_exact_duplicate_start_equal_latest_not_included(db, practice, patient, 
     assert ev.classification != BookingClassification.exact_duplicate
 
 
+def test_explicit_exact_equal_bounds_are_point_evidence(
+    db, practice, patient, practitioner
+):
+    """LC1 exact semantics treat equal bounds as a point, not [t, t)."""
+    _make_appt(db, practice.id, patient.id, practitioner.id, CLASS_DATE, 15, 0)
+    ev = classify_existing_booking(
+        db,
+        practice.id,
+        patient.id,
+        CLASS_DATE,
+        practitioner.id,
+        requested_earliest_time=time(15, 0),
+        requested_latest_time=time(15, 0),
+        requested_temporal_relation="exact",
+    )
+    assert ev.classification == BookingClassification.exact_duplicate
+
+
+@pytest.mark.parametrize(
+    "relation",
+    ["not_before", "not_after", "interval", "approximate", "unspecified"],
+)
+def test_explicit_non_exact_relation_cannot_grant_duplicate_authority(
+    db, practice, patient, practitioner, relation
+):
+    """An appointment inside a preference/window is not an exact request."""
+    _make_appt(db, practice.id, patient.id, practitioner.id, CLASS_DATE, 15, 0)
+    ev = classify_existing_booking(
+        db,
+        practice.id,
+        patient.id,
+        CLASS_DATE,
+        practitioner.id,
+        requested_earliest_time=time(14, 30),
+        requested_latest_time=time(15, 30),
+        requested_temporal_relation=relation,
+    )
+    assert ev.classification != BookingClassification.exact_duplicate
+
+
 # ─── Exact duplicate with earliest-only ──────────────────────────────────────
 
 def test_exact_duplicate_earliest_only(db, practice, patient, practitioner):
@@ -443,7 +483,81 @@ def test_same_day_distinct_no_time_bounds(db, practice, patient, practitioner):
 # ─── Route-level: exact duplicate produces existing_booking_found result ──────
 
 SUPERVISED_URL = "/api/v1/appointments/proposals/bernie/supervised-booking"
+INTERPRET_URL = "/api/v1/appointments/proposals/bernie/interpret-booking-instruction"
 CLASS_REF_DATE = date(2026, 7, 15)
+
+
+def test_tomorrow_at_3pm_interpret_then_duplicate_has_no_second_write(
+    client,
+    db,
+    practice,
+    patient,
+    practitioner,
+    schedule,
+    monkeypatch,
+):
+    """The real LC1 wording traverses interpreter and supervised policy."""
+    from app.config import settings
+    from app.models.appointments import AppointmentAuditLog
+    from app.models.tenancy import User, UserRole
+    from app.services.auth_service import hash_password
+    from tests.conftest import make_token
+
+    monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
+    user = User(
+        practice_id=practice.id,
+        email="lc1-exact-time@test.local",
+        password_hash=hash_password("Password1!"),
+        role=UserRole.Receptionist,
+    )
+    db.add(user)
+    db.flush()
+    token = make_token(user)
+    _make_appt(
+        db,
+        practice.id,
+        patient.id,
+        practitioner.id,
+        CLASS_DATE,
+        15,
+        0,
+        duration=15,
+    )
+    appointment_before = db.query(Appointment).count()
+    audit_before = db.query(AppointmentAuditLog).count()
+    auth = {"Authorization": f"Bearer {token}"}
+
+    interpreted = client.post(
+        INTERPRET_URL,
+        json={
+            "instruction": (
+                f"Make an appointment for patient_id:{patient.id} with "
+                f"practitioner_id:{practitioner.id} tomorrow at 3pm duration:15"
+            ),
+            "reference_date": "2026-07-14",
+        },
+        headers=auth,
+    )
+    assert interpreted.status_code == 200, interpreted.text
+    command = interpreted.json()["command_candidate"]
+    assert command["earliest_time"] == "15:00"
+    assert command["latest_time"] == "15:00"
+    assert command["temporal_relation"] == "exact"
+
+    supervised = client.post(
+        SUPERVISED_URL,
+        json={
+            "command": command,
+            "reference_date": "2026-07-14",
+            "patient_id": str(patient.id),
+        },
+        headers=auth,
+    )
+    assert supervised.status_code == 200, supervised.text
+    assert supervised.json()["result"] == "existing_booking_found"
+    assert supervised.json()["requires_confirmation"] is False
+    assert db.query(Appointment).count() == appointment_before
+    assert db.query(AppointmentAuditLog).count() == audit_before
 
 
 def test_exact_duplicate_route_response(

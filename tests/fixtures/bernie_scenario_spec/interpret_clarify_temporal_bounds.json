@@ -1,8 +1,8 @@
 {
   "spec_version": "lc1.v1",
-  "scenario_id": "T1.3-interpret-clarify-temporal-bounds",
+  "scenario_id": "interpret_time_window_date_change_preserves_upper",
   "provenance": "gold",
-  "adjudication": "pending",
+  "adjudication": "adjudicated",
   "family": "clarify_temporal",
   "description": "The receptionist provides a partial temporal instruction without specifying exact bounds. The system must recognise the ambiguity and request clarification of the temporal range.",
   "dialogue_turns": [
@@ -12,10 +12,15 @@
     }
   ],
   "reference_date": "2026-07-13",
+  "clinic_clock": "2026-07-13T09:00:00+10:00",
   "intended_action": "create",
-  "temporal_relation": "approximate",
+  "action_semantics": "ambiguous",
+  "temporal_relation": "unspecified",
   "earliest_time": null,
   "latest_time": null,
+  "normalized_values": {
+    "time_period": "afternoon"
+  },
   "source_spans": {
     "temporal_relation": "sometime in the afternoon",
     "practitioner": "with Dr Shera",
@@ -24,6 +29,13 @@
   "duration_minutes": 15,
   "practitioner_semantics": "exact",
   "patient_semantics": "exact",
+  "location_semantics": "omitted",
+  "appointment_type_semantics": "omitted",
+  "duration_semantics": "exact",
+  "diary_state": "empty",
+  "entity_state": "exact",
+  "dialogue_form": "clarification",
+  "language_form": "plain",
   "initial_diary_state": {
     "reference_date": "2026-07-13",
     "diary_page_date": "2026-07-14",
@@ -34,6 +46,7 @@
   "expected_outcome_kind": "clarification_required",
   "expected_tool_sequence": ["search_patients", "find_slots", "request_clarification"],
   "expected_appointment_deltas": [],
+  "expected_audit_deltas": [],
   "forbidden_outcomes": ["appointment_created", "existing_booking_found"],
   "forbidden_tool_calls": ["mutate_diary_direct", "override_confirmation"],
   "expected_clarification": "What time in the afternoon would you prefer? For example, 1pm, 2pm, 3pm, or 4pm.",

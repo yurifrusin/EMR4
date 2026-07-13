@@ -254,6 +254,27 @@ def test_slot_search_command_in_accepts_temporal_relation():
     assert cmd3.temporal_relation is None
 
 
+def test_bare_meridiem_time_is_losslessly_preserved_as_unspecified():
+    result = extract_natural_time_constraints("tomorrow 3pm")
+    assert result.earliest == "15:00"
+    assert result.latest is None
+    assert result.temporal_relation == "unspecified"
+
+
+def test_approximate_late_time_never_emits_invalid_24_hour_value():
+    result = extract_natural_time_constraints("tomorrow around 11:45pm")
+    assert result.earliest == "23:15"
+    assert result.latest == "23:59"
+    assert result.temporal_relation == "approximate"
+
+
+def test_exact_late_time_window_never_emits_invalid_24_hour_value():
+    assert adjust_search_window_for_relation("23:59", "23:59", "exact") == (
+        "23:59",
+        None,
+    )
+
+
 # ── Same-day window tests ───────────────────────────────────────────────────
 
 

@@ -144,6 +144,31 @@ def test_smoke_script_time_expectation_failure_is_nonzero(capsys):
     assert exit_code == 1
     assert "Expected earliest_time '15:00', got '14:00'." in captured.err
 
+
+def test_smoke_script_asserts_exact_relation_for_real_lc1_wording(capsys):
+    exit_code = smoke_bernie_interpreter.main([
+        "--provider",
+        "fake",
+        "--instruction",
+        (
+            "practitioner_id:420fb926-750b-4914-910b-e9d3f804e0f0 "
+            "tomorrow at 3pm duration:15"
+        ),
+        "--reference-date",
+        "2026-07-14",
+        "--expect-result",
+        "interpreted",
+        "--expect-earliest-time",
+        "15:00",
+        "--expect-latest-time",
+        "15:00",
+        "--expect-temporal-relation",
+        "exact",
+    ])
+    assert exit_code == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["command_candidate"]["temporal_relation"] == "exact"
+
 def test_smoke_script_ordinary_prompt_compact_output_is_honest_and_redacted(capsys):
     """Sprint 98 release gate: compact output for the ordinary names-only
     receptionist prompt must honestly report provider/mode/result, carry the

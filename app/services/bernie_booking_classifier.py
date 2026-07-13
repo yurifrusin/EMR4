@@ -73,6 +73,7 @@ def classify_existing_booking(
     requested_location_id: Optional[uuid.UUID] = None,
     requested_duration_minutes: Optional[int] = None,
     source_appointment_id: Optional[uuid.UUID] = None,
+    requested_temporal_relation: Optional[str] = None,
 ) -> BookingClassificationEvidence:
     """Classify whether an existing active appointment duplicates, overlaps, or
     is distinct from the requested booking parameters.
@@ -82,10 +83,16 @@ def classify_existing_booking(
     Exact-duplicate rules (conservative):
     - Recognized patient + requested_practitioner_id + requested_date must match.
     - Temporal evidence is mandatory.
-    - With both earliest_time and latest_time: existing start_time_local must be
+    - An explicit temporal relation other than ``exact`` cannot grant exact-
+      duplicate authority.
+    - With explicit ``exact`` semantics: existing start_time_local must equal
+      earliest_time. Equal earliest/latest bounds are valid point evidence,
+      not an empty interval.
+    - For legacy unlabelled callers with both earliest_time and latest_time:
+      existing start_time_local must be
       inside the half-open window [earliest, latest).
-    - With earliest_time only (no latest): existing start_time_local must equal
-      earliest_time exactly.
+    - For legacy unlabelled callers with earliest_time only (no latest):
+      existing start_time_local must equal earliest_time exactly.
     - latest_time only or neither: cannot be exact duplicate.
     - Appointment type, location, and duration must match when supplied.
     """
@@ -112,6 +119,7 @@ def classify_existing_booking(
         requested_practitioner_id,
         requested_earliest_time,
         requested_latest_time,
+        requested_temporal_relation,
     ):
         for appt in existing_appointments:
             if _is_exact_match(
@@ -122,6 +130,7 @@ def classify_existing_booking(
                 requested_appointment_type_id,
                 requested_location_id,
                 requested_duration_minutes,
+                requested_temporal_relation,
             ):
                 return _evidence(BookingClassification.exact_duplicate, appt)
 
@@ -183,9 +192,17 @@ def _might_be_exact_duplicate(
     requested_practitioner_id: uuid.UUID,
     requested_earliest_time: Optional[time],
     requested_latest_time: Optional[time],
+    requested_temporal_relation: Optional[str],
 ) -> bool:
     """Quick pre-check: is it even possible that any existing appointment is an
     exact duplicate based on the requested parameters?"""
+    # Explicit non-exact relations are windows/preferences, not exact-point
+    # authority. None preserves the pre-LC1 behaviour for legacy callers.
+    if (
+        requested_temporal_relation is not None
+        and requested_temporal_relation != "exact"
+    ):
+        return False
     # Temporal evidence is mandatory for exact duplicate.
     if requested_earliest_time is None and requested_latest_time is None:
         return False
@@ -207,6 +224,7 @@ def _is_exact_match(
     requested_appointment_type_id: Optional[uuid.UUID],
     requested_location_id: Optional[uuid.UUID],
     requested_duration_minutes: Optional[int],
+    requested_temporal_relation: Optional[str],
 ) -> bool:
     """Does this single appointment match all exact-duplicate criteria?"""
     # Practitioner must match.
@@ -214,7 +232,13 @@ def _is_exact_match(
         return False
 
     # Temporal check:
-    if requested_earliest_time is not None and requested_latest_time is not None:
+    if requested_temporal_relation == "exact":
+        if (
+            requested_earliest_time is None
+            or appt.start_time_local != requested_earliest_time
+        ):
+            return False
+    elif requested_earliest_time is not None and requested_latest_time is not None:
         # With both bounds: existing start must be in [earliest, latest).
         if not (requested_earliest_time <= appt.start_time_local < requested_latest_time):
             return False

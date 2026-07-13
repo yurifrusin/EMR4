@@ -1,0 +1,279 @@
+{
+  "schema_version": "lc1.coverage_lattice.v1",
+  "scenario_count": 3,
+  "covered_cell_count": 3,
+  "empty_cell_count": 152061,
+  "empty_cells_truncated": true,
+  "total_cell_count": 152064,
+  "dimensions": {
+    "diary_action": {
+      "create": 3
+    },
+    "diary_state": {
+      "exact_duplicate": 1,
+      "overlap": 1,
+      "empty": 1
+    },
+    "entity_state": {
+      "exact": 3
+    },
+    "temporal_form": {
+      "exact": 1,
+      "interval": 1,
+      "unspecified": 1
+    },
+    "dialogue_form": {
+      "repeated": 1,
+      "correction": 1,
+      "clarification": 1
+    },
+    "language_form": {
+      "plain": 3
+    }
+  },
+  "empty_cells": [
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "plain"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "filler"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "typo"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "plain"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "filler"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "abbreviation"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "typo"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "speech_like"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "punctuation_variant"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "adversarial"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "correction",
+      "language_form": "plain"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "correction",
+      "language_form": "paraphrase"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "correction",
+      "language_form": "filler"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "correction",
+      "language_form": "abbreviation"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "correction",
+      "language_form": "typo"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "correction",
+      "language_form": "speech_like"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "correction",
+      "language_form": "punctuation_variant"
+    },
+    {
+      "diary_action": "create",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "temporal_form": "exact",
+      "dialogue_form": "correction",
+      "language_form": "adversarial"
+    }
+  ],
+  "gap_summary": {
+    "diary_action": [
+      "move",
+      "resize",
+      "cancel",
+      "status_change",
+      "explain_schedule"
+    ],
+    "diary_state": [
+      "same_day_distinct",
+      "terminal",
+      "stale",
+      "concurrent",
+      "roster_absent",
+      "break",
+      "no_slots",
+      "elapsed_window"
+    ],
+    "entity_state": [
+      "omitted",
+      "ambiguous",
+      "corrected",
+      "negated",
+      "mismatched"
+    ],
+    "temporal_form": [
+      "not_before",
+      "not_after",
+      "approximate"
+    ],
+    "dialogue_form": [
+      "one_shot",
+      "reversal",
+      "ellipsis",
+      "anaphora",
+      "session_restart"
+    ],
+    "language_form": [
+      "paraphrase",
+      "filler",
+      "abbreviation",
+      "typo",
+      "speech_like",
+      "punctuation_variant",
+      "adversarial"
+    ]
+  },
+  "family_summary": {
+    "booking_create": 2,
+    "clarify_temporal": 1
+  }
+}

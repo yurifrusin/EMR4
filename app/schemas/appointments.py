@@ -743,7 +743,7 @@ class SlotSearchCommandIn(BaseModel):
     location_id: Optional[Any] = None
     earliest_time: Optional[Any] = None
     latest_time: Optional[Any] = None
-    temporal_relation: Optional[Any] = None
+    temporal_relation: Optional[str] = None
     patient_id: Optional[Any] = None
     limit: Optional[Any] = None
 

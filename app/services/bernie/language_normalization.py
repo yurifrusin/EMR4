@@ -179,15 +179,21 @@ def normalize_utterance(original: str) -> NormalizedUtterance:
     # Step 1-4: produce the normalised string.
     normalized = unicodedata.normalize("NFKC", original)
     normalized = _collapse_whitespace(normalized).strip()
-    normalized = normalized.lower()
+    normalized = normalized.casefold()
     normalized = _normalize_punctuation(normalized)
 
     # Step 5-6: detections (on the original for time, on normalised for numbers).
     time_forms = _detect_time_forms(original)
     number_forms = _detect_number_words(normalized)
 
-    # Step 7: source spans.
+    # Step 7: source spans. Operator evidence is retained as well as detected
+    # number/time forms, because negation and open-bound words carry authority.
     source_spans = _compute_source_spans(original, time_forms, number_forms)
+    for operator in sorted(_OPERATOR_WORDS):
+        for index, match in enumerate(
+            re.finditer(rf"\b{re.escape(operator)}\b", original, re.IGNORECASE)
+        ):
+            source_spans[f"operator:{operator}:{index}"] = match.span()
 
     return NormalizedUtterance(
         original=original,

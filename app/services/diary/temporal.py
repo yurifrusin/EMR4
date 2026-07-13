@@ -47,6 +47,11 @@ _ABOUT_TIME_RE = re.compile(
     r"\b(?:around|about)\s+(" + _NAT_TIME_PAT + r")\b",
     re.IGNORECASE,
 )
+_BARE_EXPLICIT_TIME_RE = re.compile(
+    r"\b((?:1?[0-9]|2[0-3])(?:[.:][0-5]\d)?\s*(?:am|pm)|"
+    r"(?:1?[0-9]|2[0-3])[.:][0-5]\d)\b",
+    re.IGNORECASE,
+)
 _AFTER_TIME_RE = re.compile(r"\bafter\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
 _BEFORE_TIME_RE = re.compile(r"\bbefore\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
 _TIME_FRAGMENT_RE = re.compile(
@@ -203,7 +208,7 @@ def extract_natural_time_constraints(
         if parsed:
             mins = _hhmm_to_minutes(parsed)
             earliest_mins = max(0, mins - 30)
-            latest_mins = mins + 30
+            latest_mins = min((24 * 60) - 1, mins + 30)
             return TemporalExtraction(
                 earliest=_minutes_to_hhmm(earliest_mins),
                 latest=_minutes_to_hhmm(latest_mins),
@@ -231,11 +236,16 @@ def extract_natural_time_constraints(
         )
 
     # Priority 6: Positional HH:MM fallback → unspecified
-    times = re.findall(r"\b(?:[01]?\d|2[0-3]):[0-5]\d(?::[0-5]\d)?\b", instruction)
-    if times:
+    times = [match.group(1) for match in _BARE_EXPLICIT_TIME_RE.finditer(instruction)]
+    parsed_times = [
+        parsed
+        for raw in times
+        if (parsed := parse_time_fragment(raw)) is not None
+    ]
+    if parsed_times:
         return TemporalExtraction(
-            earliest=times[0],
-            latest=times[-1] if len(times) > 1 else None,
+            earliest=parsed_times[0],
+            latest=parsed_times[-1] if len(parsed_times) > 1 else None,
             temporal_relation="unspecified",
         )
 
@@ -290,6 +300,8 @@ def adjust_search_window_for_relation(
     ):
         earliest_mins = _hhmm_to_minutes(earliest_time)
         latest_mins = earliest_mins + 5
+        if latest_mins >= 24 * 60:
+            return earliest_time, None
         return earliest_time, _minutes_to_hhmm(latest_mins)
     return earliest_time, latest_time
 

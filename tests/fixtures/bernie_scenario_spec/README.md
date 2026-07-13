@@ -16,10 +16,11 @@ They have been adapted to the `ReceptionScenarioSpec` schema defined in
 
 ## Tier
 
-**Gold (adjudication pending).**  A Gold scenario has a clear structured
+**Gold (independently adjudicated).** A Gold scenario has a clear structured
 specification and is derived from a known real conversation pattern or a
-hand-authored curated scenario.  After independent adjudication by Sol, the
-`adjudication` field may be updated to `adjudicated` or `quarantine`.
+hand-authored curated scenario. These three worker-authored adaptations were
+checked against their named committed T1/T2 sources by the protected Sol
+integrator. Generated additions must preserve that author/judge separation.
 
 ## Adjudication Authority
 
@@ -55,6 +56,6 @@ decisions are recorded.
 
 | Tier | Definition |
 |---|---|
-| **Gold** | Hand-authored from curated prompt patterns; fully specified with all required fields; adjudication pending or complete |
+| **Gold** | Authored from curated evidence; fully specified and independently adjudicated |
 | **Silver** | Derived from synthetic replay or mutation of a Gold fixture; partial field coverage acceptable |
 | **Bronze** | Extracted from real-world interaction notes or historical logs; may have missing fields; must not contain PHI |

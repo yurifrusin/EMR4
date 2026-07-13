@@ -6282,6 +6282,7 @@ def propose_bernie_supervised_booking(
             requested_location_id=constraint.location_id,
             requested_duration_minutes=constraint.duration_minutes,
             source_appointment_id=_sb_src_appt_id,
+            requested_temporal_relation=constraint.temporal_relation,
         )
         if _sb_classification.classification == BookingClassification.exact_duplicate:
             _practitioner_name = _sb_classification.practitioner_display or "Unknown"
