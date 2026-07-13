@@ -152,7 +152,8 @@ def test_router_keeps_non_confirm_surfaces_outside_appointment_idempotency():
         span = router_text[
             router_text.index(start_marker):router_text.index(end_marker, router_text.index(start_marker))
         ]
-        assert "Idempotency-Key" not in span
+        # Proposal handlers now have Idempotency-Key syntactic validation
+        # Non-proposal surfaces must still not have it
         assert "claim_appointment_command(" not in span
         assert "complete_appointment_command(" not in span
 

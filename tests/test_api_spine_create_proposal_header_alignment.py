@@ -29,10 +29,7 @@ PROPOSAL_OPERATION_PATHS = {
 }
 
 UNWIRED_PROPOSAL_HANDLERS = (
-    "propose_update_appointment",
-    "propose_status_update",
     "propose_waiting_area_update",
-    "propose_delete_appointment",
 )
 
 
@@ -104,18 +101,23 @@ def test_fastapi_proposal_header_binding_gap_is_explicitly_documented():
     alignment = ALIGNMENT.read_text(encoding="utf-8")
     readiness = READINESS.read_text(encoding="utf-8")
 
-    assert 'Header(None, alias="Idempotency-Key")' in _function_source(
-        "propose_create_appointment"
-    )
-    for handler in UNWIRED_PROPOSAL_HANDLERS:
+    # All four canonical proposal routes now bind Idempotency-Key
+    for handler in (
+        "propose_create_appointment",
+        "propose_update_appointment",
+        "propose_status_update",
+        "propose_delete_appointment",
+    ):
         source = _function_source(handler)
-        assert 'Header(None, alias="Idempotency-Key")' not in source
-        assert handler in alignment
-        assert handler in readiness
+        assert 'Header(None, alias="Idempotency-Key")' in source, (
+            f"{handler} should now have Idempotency-Key header binding"
+        )
 
-    assert "3 of 4 canonical" in readiness
-    assert "OpenAPI proposal operations" in readiness
-    assert "do not yet bind `Idempotency-Key` in FastAPI" in readiness
+    # waiting-area proposal remains deliberately unwired
+    source = _function_source("propose_waiting_area_update")
+    assert 'Header(None, alias="Idempotency-Key")' not in source
+    assert "propose_waiting_area_update" in alignment
+    assert "propose_waiting_area_update" in readiness
 
 
 def test_minlength_enforcement_has_named_client_readiness_preconditions():
@@ -138,13 +140,13 @@ def test_fastapi_create_proposal_binds_header_before_proposal_evidence():
     arg_names = [arg.arg for arg in route.args.args]
     assert "idempotency_key" in arg_names
     assert 'Header(None, alias="Idempotency-Key")' in source
-    assert source.index("_normalize_create_proposal_idempotency_key(idempotency_key)") < source.index(
+    assert source.index("_normalize_proposal_idempotency_key(idempotency_key") < source.index(
         "_build_create_appointment_proposal("
     )
 
 
 def test_fastapi_create_proposal_runtime_gate_is_non_blank_only_until_client_decision():
-    normalizer = _function_source("_normalize_create_proposal_idempotency_key")
+    normalizer = _function_source("_normalize_proposal_idempotency_key")
     decision = DECISION.read_text(encoding="utf-8")
     alignment = ALIGNMENT.read_text(encoding="utf-8")
 
@@ -162,7 +164,7 @@ def test_create_proposal_alignment_does_not_grant_confirmation_replay_authority(
     route_and_helper = "\n\n".join(
         [
             _function_source("propose_create_appointment"),
-            _function_source("_normalize_create_proposal_idempotency_key"),
+            _function_source("_normalize_proposal_idempotency_key"),
             _function_source("_build_create_appointment_proposal"),
         ]
     )

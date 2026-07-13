@@ -137,7 +137,7 @@ def _status_payload(client, token: str, appt_id, *, status_value="Confirmed") ->
     proposal = client.post(
         STATUS_PROPOSAL_URL.format(appt_id=appt_id),
         json={"status": status_value},
-        headers=_auth(token),
+        headers=_auth(token, f"status-prop-sprint142-{appt_id}"),
     )
     assert proposal.status_code == 200, proposal.text
     payload = proposal.json()["confirm_payload"]

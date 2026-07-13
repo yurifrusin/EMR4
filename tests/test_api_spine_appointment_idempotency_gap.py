@@ -91,7 +91,11 @@ def test_current_appointments_router_has_bounded_staff_create_confirm_binding():
     assert "_UPDATE_CONFIRM_ROUTE_FAMILY" in update_route
     assert "Idempotency-Key" in delete_route
     assert "_DELETE_CONFIRM_ROUTE_FAMILY" in delete_route
-    assert "Idempotency-Key" not in non_create_confirm_later_routes
+    # Proposal handlers now have Idempotency-Key syntactic validation but
+    # must not contain claim/complete ledger calls
+    assert "claim_appointment_command(" not in non_create_confirm_later_routes
+    assert "complete_appointment_command(" not in non_create_confirm_later_routes
+    assert "_normalize_proposal_idempotency_key(" in non_create_confirm_later_routes
 
 
 def test_gap_doc_distinguishes_existing_safety_controls_from_idempotency():

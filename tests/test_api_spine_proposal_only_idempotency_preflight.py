@@ -111,22 +111,22 @@ def test_inventory_classifies_proposal_routes_as_non_mutating_proposal_commands(
 def test_current_fastapi_proposal_routes_reflect_create_only_wiring():
     router_text = _read(ROUTER)
 
-    create_route = _route_body(
-        router_text,
-        PROPOSAL_ROUTES["create"]["handler"],
-        PROPOSAL_ROUTES["create"]["end"],
-    )
-    assert "Idempotency-Key" in create_route
-    assert "claim_appointment_command(" not in create_route
-    assert "complete_appointment_command(" not in create_route
-
-    for name, details in PROPOSAL_ROUTES.items():
-        if name == "create":
-            continue
+    # All four canonical proposal routes now bind Idempotency-Key
+    for name in ("create", "update", "status", "delete"):
+        details = PROPOSAL_ROUTES[name]
         route = _route_body(router_text, details["handler"], details["end"])
-        assert "Idempotency-Key" not in route
+        assert "Idempotency-Key" in route, (
+            f"{name} proposal should have Idempotency-Key header binding"
+        )
         assert "claim_appointment_command(" not in route
         assert "complete_appointment_command(" not in route
+
+    # waiting-area proposal remains deliberately unwired
+    details = PROPOSAL_ROUTES["waiting_area"]
+    route = _route_body(router_text, details["handler"], details["end"])
+    assert "Idempotency-Key" not in route
+    assert "claim_appointment_command(" not in route
+    assert "complete_appointment_command(" not in route
 
 
 def test_preflight_keeps_confirmation_routes_and_raw_routes_separate():

@@ -30,6 +30,25 @@ UPDATE_CONFIRM_URL = "/api/v1/appointments/proposals/update/confirm"
 STATUS_URL = "/api/v1/appointments/proposals/status/{appt_id}"
 WAITING_AREA_URL = "/api/v1/appointments/proposals/waiting-area/{appt_id}"
 _update_confirm_key_counter = 0
+_proposal_key_counter = 0
+
+
+def _proposal_headers(token):
+    global _proposal_key_counter
+    _proposal_key_counter += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"proposal-test-{_proposal_key_counter}",
+    }
+
+
+def _status_proposal_headers(token):
+    global _proposal_key_counter
+    _proposal_key_counter += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"status-proposal-test-{_proposal_key_counter}",
+    }
 
 
 def _update_confirm_headers(token):
@@ -132,7 +151,7 @@ def test_update_proposal_returns_typed_command_without_mutating(
             "start_time_local": "10:00:00",
             "duration_minutes": 30,
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -174,7 +193,7 @@ def test_update_proposal_confirm_payload_writes_with_signed_audit_evidence(
             "start_time_local": "10:00:00",
             "duration_minutes": 30,
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]
@@ -223,7 +242,7 @@ def test_update_confirm_revalidates_same_day_elapsed_window_without_write(
             "start_time_local": "09:00:00",
             "duration_minutes": 15,
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     proposal = proposal_resp.json()
@@ -272,7 +291,7 @@ def test_update_proposal_blocked_on_conflict(
             "start_time_local": "10:15:00",
             "duration_minutes": 15,
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -298,7 +317,7 @@ def test_update_proposal_blocked_on_terminal_status(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt.id),
         json={"start_time_local": "11:00:00", "appointment_date": THURSDAY.isoformat()},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -321,7 +340,7 @@ def test_update_proposal_warns_break_overlap(
             "start_time_local": "10:45:00",
             "duration_minutes": 15,
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -356,7 +375,7 @@ def test_update_proposal_warns_provisional_patient(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt.id),
         json={"duration_minutes": 30},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -381,7 +400,7 @@ def test_update_proposal_merges_current_values(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt.id),
         json={"duration_minutes": 20},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -394,6 +413,134 @@ def test_update_proposal_merges_current_values(
     # Row still has original duration
     db.refresh(appt)
     assert appt.duration_minutes == 45
+
+
+
+# ─── Update proposal idempotency-key tests ──────────────────────────────────
+
+
+def test_update_proposal_requires_idempotency_key(
+        client, db, gp_user, practice, practitioner, patient):
+    """Missing Idempotency-Key on update proposal returns 400."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+    before = db.query(Appointment).count()
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"duration_minutes": 30},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 400, resp.text
+    assert resp.json()["detail"]["code"] == "idempotency_key_required"
+    assert db.query(Appointment).count() == before
+
+
+def test_update_proposal_blank_idempotency_key_is_missing(
+        client, db, gp_user, practice, practitioner, patient):
+    """Whitespace-only Idempotency-Key on update proposal returns 400."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+    before = db.query(Appointment).count()
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"duration_minutes": 30},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Idempotency-Key": "   ",
+        },
+    )
+
+    assert resp.status_code == 400, resp.text
+    assert resp.json()["detail"]["code"] == "idempotency_key_required"
+    assert db.query(Appointment).count() == before
+
+
+def test_update_proposal_valid_key_reaches_evaluation(
+        client, db, gp_user, practice, practitioner, patient):
+    """Nonblank Idempotency-Key on update proposal reaches normal evaluation."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        UPDATE_URL.format(appt_id=appt.id),
+        json={"duration_minutes": 30},
+        headers=_proposal_headers(token),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["intent"] == "update_appointment"
+    assert data["safe"] is True
+    assert "claim_appointment_command" not in str(data)
+    # DB row unchanged
+    db.refresh(appt)
+    assert appt.duration_minutes == 15
+
+
+# ─── Status proposal idempotency-key tests ──────────────────────────────────
+
+
+def test_status_proposal_requires_idempotency_key(
+        client, db, gp_user, practice, practitioner, patient):
+    """Missing Idempotency-Key on status proposal returns 400."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+    before = db.query(Appointment).count()
+
+    resp = client.post(
+        STATUS_URL.format(appt_id=appt.id),
+        json={"status": "Confirmed"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 400, resp.text
+    assert resp.json()["detail"]["code"] == "idempotency_key_required"
+    assert db.query(Appointment).count() == before
+
+
+def test_status_proposal_blank_idempotency_key_is_missing(
+        client, db, gp_user, practice, practitioner, patient):
+    """Whitespace-only Idempotency-Key on status proposal returns 400."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+    before = db.query(Appointment).count()
+
+    resp = client.post(
+        STATUS_URL.format(appt_id=appt.id),
+        json={"status": "Confirmed"},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Idempotency-Key": "   ",
+        },
+    )
+
+    assert resp.status_code == 400, resp.text
+    assert resp.json()["detail"]["code"] == "idempotency_key_required"
+    assert db.query(Appointment).count() == before
+
+
+def test_status_proposal_valid_key_reaches_evaluation(
+        client, db, gp_user, practice, practitioner, patient):
+    """Nonblank Idempotency-Key on status proposal reaches normal evaluation."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        STATUS_URL.format(appt_id=appt.id),
+        json={"status": "Confirmed"},
+        headers=_status_proposal_headers(token),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["intent"] == "update_appointment_status"
+    assert data["safe"] is True
+    # DB row unchanged
+    db.refresh(appt)
+    assert appt.status.value == "Booked"
 
 
 # ─── Status proposal tests ────────────────────────────────────────────────────
@@ -417,7 +564,7 @@ def test_status_proposal_routine_transition_execute_with_report(
     resp = client.post(
         STATUS_URL.format(appt_id=appt.id),
         json={"status": "Confirmed"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -449,7 +596,7 @@ def test_status_proposal_warns_clears_waiting_area(
     resp = client.post(
         STATUS_URL.format(appt_id=appt.id),
         json={"status": "Completed"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -475,7 +622,7 @@ def test_status_proposal_blocked_on_same_status(
     resp = client.post(
         STATUS_URL.format(appt_id=appt.id),
         json={"status": "Confirmed"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -497,7 +644,7 @@ def test_status_proposal_warns_already_terminal(
     resp = client.post(
         STATUS_URL.format(appt_id=appt.id),
         json={"status": "Booked"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -521,7 +668,7 @@ def test_update_proposal_blocked_explicit_null_practitioner(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt.id),
         json={"practitioner_id": None},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -543,7 +690,7 @@ def test_update_proposal_blocked_clear_patient_id_with_no_provisional(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt.id),
         json={"patient_id": None},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -565,7 +712,7 @@ def test_update_proposal_null_patient_id_with_provisional_is_safe(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt.id),
         json={"patient_id": None, "patient_name_provisional": "Walk-in"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -607,7 +754,7 @@ def test_update_proposal_cross_practice_returns_404(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt_b.id),
         json={"duration_minutes": 30},
-        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+        headers=_proposal_headers(make_token(gp_user)),
     )
     assert resp.status_code == 404
 
@@ -619,7 +766,7 @@ def test_update_proposal_nonexistent_appointment_returns_404(
     resp = client.post(
         UPDATE_URL.format(appt_id=_uuid.uuid4()),
         json={},
-        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+        headers=_proposal_headers(make_token(gp_user)),
     )
     assert resp.status_code == 404
 
@@ -633,7 +780,7 @@ def test_update_proposal_empty_body_reflects_current_values(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt.id),
         json={},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -667,7 +814,7 @@ def test_update_proposal_valid_practitioner_change(
     resp = client.post(
         UPDATE_URL.format(appt_id=appt.id),
         json={"practitioner_id": str(pr2.id)},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -709,7 +856,7 @@ def test_status_proposal_cross_practice_returns_404(
     resp = client.post(
         STATUS_URL.format(appt_id=appt_b.id),
         json={"status": "Confirmed"},
-        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+        headers=_status_proposal_headers(make_token(gp_user)),
     )
     assert resp.status_code == 404
 
@@ -721,7 +868,7 @@ def test_status_proposal_nonexistent_appointment_returns_404(
     resp = client.post(
         STATUS_URL.format(appt_id=_uuid.uuid4()),
         json={"status": "Confirmed"},
-        headers={"Authorization": f"Bearer {make_token(gp_user)}"},
+        headers=_status_proposal_headers(make_token(gp_user)),
     )
     assert resp.status_code == 404
 
@@ -736,7 +883,7 @@ def test_status_proposal_warns_waiting_area_assigned_on_terminal(
     resp = client.post(
         STATUS_URL.format(appt_id=appt.id),
         json={"status": "Completed", "waiting_area_id": str(area.id)},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_status_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -898,7 +1045,7 @@ def test_update_proposal_resize_blocked_into_next_booking(
             "start_time_local": "09:00:00",
             "duration_minutes": 30,   # 09:00–09:30 overlaps next_booking at 09:15
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -947,7 +1094,7 @@ def test_update_proposal_drag_to_practitioner_with_conflict(
             "start_time_local": "10:00:00",
             "duration_minutes": 15,
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -987,7 +1134,7 @@ def test_update_proposal_adjacent_slot_is_safe(
             "start_time_local": "09:00:00",
             "duration_minutes": 15,   # ends at 09:15 — exactly when adjacent starts
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text
@@ -1027,7 +1174,7 @@ def test_update_proposal_resize_shrink_is_safe(
             "start_time_local": "09:00:00",
             "duration_minutes": 15,   # shrink to end at 09:15 — clears 09:20 booking
         },
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_proposal_headers(token),
     )
 
     assert resp.status_code == 200, resp.text

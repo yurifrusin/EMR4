@@ -55,11 +55,19 @@ def _patch_status(client, token, appt_id, new_status: str):
     )
 
 
+_status_proposal_key_counter = 0
+
+
 def _post_status_proposal(client, token, appt_id, payload: dict):
+    global _status_proposal_key_counter
+    _status_proposal_key_counter += 1
     return client.post(
         f"/api/v1/appointments/proposals/status/{appt_id}",
         json=payload,
-        headers={"Authorization": f"Bearer {token}"},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Idempotency-Key": f"status-prop-test-{_status_proposal_key_counter}",
+        },
     )
 
 
@@ -76,6 +84,7 @@ def _status_confirm_headers(token: str, prefix: str = "status-confirm-test") -> 
 
 
 _delete_confirm_key_counter = 0
+_delete_proposal_key_counter = 0
 
 
 def _delete_confirm_headers(token: str, prefix: str = "delete-confirm-test") -> dict[str, str]:
@@ -84,6 +93,15 @@ def _delete_confirm_headers(token: str, prefix: str = "delete-confirm-test") -> 
     return {
         "Authorization": f"Bearer {token}",
         "Idempotency-Key": f"{prefix}-{_delete_confirm_key_counter}",
+    }
+
+
+def _delete_proposal_headers(token: str) -> dict[str, str]:
+    global _delete_proposal_key_counter
+    _delete_proposal_key_counter += 1
+    return {
+        "Authorization": f"Bearer {token}",
+        "Idempotency-Key": f"delete-proposal-test-{_delete_proposal_key_counter}",
     }
 
 
@@ -323,7 +341,8 @@ def test_delete_proposal_warns_waiting_area_cleared(
     token = make_token(gp_user)
     resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert resp.status_code == 200
     data = resp.json()
@@ -347,7 +366,8 @@ def test_delete_proposal_blocked_already_cancelled(
     token = make_token(gp_user)
     resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert resp.status_code == 200
     data = resp.json()
@@ -393,7 +413,8 @@ def test_delete_proposal_echoes_reason_in_command(
     resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
         json={"cancellation_reason": "Practitioner unavailable"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert resp.status_code == 200
     data = resp.json()
@@ -402,6 +423,70 @@ def test_delete_proposal_echoes_reason_in_command(
     db.refresh(appt)
     assert appt.cancellation_reason is None
     assert appt.status == AppointmentStatus.Booked
+
+
+
+# ─── Delete proposal idempotency-key tests ──────────────────────────────────
+
+
+def test_delete_proposal_requires_idempotency_key(
+        client, db, gp_user, practice, practitioner, patient):
+    """Missing Idempotency-Key on delete proposal returns 400."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+    before = db.query(Appointment).count()
+
+    resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Test"},
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert resp.status_code == 400, resp.text
+    assert resp.json()["detail"]["code"] == "idempotency_key_required"
+    assert db.query(Appointment).count() == before
+
+
+def test_delete_proposal_blank_idempotency_key_is_missing(
+        client, db, gp_user, practice, practitioner, patient):
+    """Whitespace-only Idempotency-Key on delete proposal returns 400."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+    before = db.query(Appointment).count()
+
+    resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Test"},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Idempotency-Key": "   ",
+        },
+    )
+
+    assert resp.status_code == 400, resp.text
+    assert resp.json()["detail"]["code"] == "idempotency_key_required"
+    assert db.query(Appointment).count() == before
+
+
+def test_delete_proposal_valid_key_reaches_evaluation(
+        client, db, gp_user, practice, practitioner, patient):
+    """Nonblank Idempotency-Key on delete proposal reaches normal evaluation."""
+    appt = _make_appt(db, practice, practitioner, patient, start_h=9)
+    token = make_token(gp_user)
+
+    resp = client.post(
+        DELETE_PROPOSAL_URL.format(appt.id),
+        json={"cancellation_reason": "Patient request"},
+        headers=_delete_proposal_headers(token),
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["intent"] == "delete_appointment"
+    assert data["safe"] is True
+    # DB row unchanged
+    db.refresh(appt)
+    assert appt.status.value == "Booked"
 
 
 def test_delete_proposal_returns_signed_confirm_payload(
@@ -442,7 +527,8 @@ def test_delete_confirm_requires_confirmed_true_without_write(
     token = make_token(gp_user)
     proposal_resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]
@@ -471,7 +557,8 @@ def test_delete_confirm_blocks_tampered_signed_evidence_without_write(
     proposal_resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
         json={"cancellation_reason": "Original reason"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]
@@ -502,7 +589,8 @@ def test_delete_confirm_blocks_stale_freshness_without_write(
     token = make_token(gp_user)
     proposal_resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]
@@ -536,7 +624,8 @@ def test_delete_confirm_soft_cancels_once_with_signed_evidence(
     proposal_resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
         json={"cancellation_reason": "Patient had transport issues"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]
@@ -801,7 +890,8 @@ def test_r9_delete_proposal_allows_past_date_without_temporal_block(
     resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
         json={"cancellation_reason": "Historical patient cancellation"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
 
     assert resp.status_code == 200, resp.text
@@ -820,7 +910,8 @@ def test_r9_delete_confirm_allows_past_date_with_signed_evidence_and_audit(
     proposal_resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
         json={"cancellation_reason": "Historical correction"},
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]
@@ -852,7 +943,8 @@ def test_r9_delete_confirm_past_date_blocks_stale_freshness_without_write(
     token = make_token(gp_user)
     proposal_resp = client.post(
         DELETE_PROPOSAL_URL.format(appt.id),
-        headers={"Authorization": f"Bearer {token}"},
+        headers=_delete_proposal_headers(token),
+
     )
     assert proposal_resp.status_code == 200, proposal_resp.text
     payload = proposal_resp.json()["confirm_payload"]

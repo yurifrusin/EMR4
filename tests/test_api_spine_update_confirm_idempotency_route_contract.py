@@ -152,7 +152,7 @@ def _update_payload(
             "duration_minutes": duration,
             "reason": reason,
         },
-        headers=_auth(token),
+        headers=_auth(token, f"update-prop-sprint141-{appt_id}"),
     )
     assert resp.status_code == 200, resp.text
     payload = resp.json()["confirm_payload"]
@@ -317,13 +317,14 @@ def test_current_router_keeps_proposal_delete_and_raw_update_out_of_scope():
         "@router.get(\"/slots/{practitioner_id}\"",
     )
 
-    assert "Idempotency-Key" not in update_proposal_route
+    # Proposal handlers now have Idempotency-Key syntactic validation
+    # raw update and delete must still NOT have it
     assert "claim_appointment_command(" not in update_proposal_route
     assert "Idempotency-Key" not in raw_update_route
     assert "claim_appointment_command(" not in raw_update_route
     assert "_apply_appointment_update(" in raw_update_route
     assert "commit=False" not in raw_update_route
-    assert "Idempotency-Key" not in delete_proposal_route
+    # Proposal handlers now have Idempotency-Key syntactic validation
     assert "claim_appointment_command(" not in delete_proposal_route
     assert RAW_UPDATE_DOC not in _route_body(
         router_text,
