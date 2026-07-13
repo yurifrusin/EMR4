@@ -192,6 +192,38 @@ def test_pty_adapter_rejects_preexisting_artifact(tmp_path: Path):
     assert "artifact must not exist before PTY launch" in result.stderr
 
 
+def test_pty_adapter_rejects_second_owner_for_same_artifact(tmp_path: Path):
+    packet = tmp_path / "packet.md"
+    packet.write_text("Synthetic packet.\n", encoding="utf-8")
+    (tmp_path / "artifact.md.ariadne-owner.lock").write_text(
+        '{"pid": 1234}\n', encoding="utf-8"
+    )
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/ariadne_deepcode_pty.py",
+            "--cwd",
+            str(tmp_path),
+            "--packet",
+            "packet.md",
+            "--artifact",
+            "artifact.md",
+            "--outbox",
+            "outbox",
+            "--receipt",
+            "receipt.json",
+            "--fixture",
+            "success",
+        ],
+        capture_output=True,
+        check=False,
+        text=True,
+    )
+
+    assert result.returncode == 2
+    assert "artifact owner lock already exists" in result.stderr
+
+
 def test_project_settings_bootstrap_is_secret_free_and_pre_authorizes_bounded_writes(tmp_path: Path):
     ensure_project_settings(tmp_path)
 

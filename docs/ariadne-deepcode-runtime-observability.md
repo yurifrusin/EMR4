@@ -48,3 +48,9 @@ The only classifications are:
 Elapsed time is recorded as advisory evidence and is never used by the
 classifier. The observer does not send signals, kill processes, alter receipts,
 or grant worker/integration authority.
+
+Each artifact also has an atomic `.ariadne-owner.lock`. A second PTY runner
+targeting the same artifact fails closed before launch. Locks are released on
+normal process exit; a stale lock must be removed only after external evidence
+confirms its owner is absent. Windows process presence uses a native limited
+process handle and exit-code query rather than `os.kill(pid, 0)`.

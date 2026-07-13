@@ -82,6 +82,34 @@ function transcriptPathFor(receipt, outbox, requested) {
   return requested || path.join(outbox, `${path.basename(receipt)}.terminal.jsonl`);
 }
 
+function acquireArtifactOwnerLock(artifact) {
+  const lockPath = `${artifact}.ariadne-owner.lock`;
+  fs.mkdirSync(path.dirname(lockPath), { recursive: true });
+  let handle;
+  try {
+    handle = fs.openSync(lockPath, "wx");
+  } catch (error) {
+    if (error?.code === "EEXIST") {
+      throw new Error(`artifact owner lock already exists: ${path.basename(lockPath)}`);
+    }
+    throw error;
+  }
+  fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, artifact, acquired_at: new Date().toISOString() }) + "\n");
+  fs.closeSync(handle);
+  let released = false;
+  const release = () => {
+    if (released) return;
+    released = true;
+    try {
+      fs.unlinkSync(lockPath);
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+    }
+  };
+  process.once("exit", release);
+  return { release };
+}
+
 function createTranscriptWriter(transcriptPath, cwd) {
   fs.mkdirSync(path.dirname(transcriptPath), { recursive: true });
   fs.writeFileSync(transcriptPath, "", "utf8");
@@ -289,6 +317,7 @@ async function main() {
   if (fs.existsSync(artifact)) throw new Error("artifact must not exist before PTY launch");
   if (transcript === receipt || transcript === artifact) throw new Error("transcript must be distinct from receipt and artifact");
 
+  const artifactOwner = acquireArtifactOwnerLock(artifact);
   const transcriptWriter = createTranscriptWriter(transcript, cwd);
 
   const baselineEvents = listEvents(outbox);
@@ -448,6 +477,7 @@ async function main() {
     terminal_output_persisted: true,
     terminal_transcript: transcriptWriter.metadata(),
   });
+  artifactOwner.release();
   process.stdout.write(`${JSON.stringify({ status, reason, receipt }, null, 2)}\n`);
   return status === "completed" ? 0 : status === "blocked" ? 3 : 4;
 }

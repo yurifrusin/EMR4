@@ -1,10 +1,11 @@
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 from orchestration_harness.deepcode_artifact import parse_artifact_marker
-from scripts.ariadne_deepcode_liveness import capture_snapshot, classify_liveness
+from scripts.ariadne_deepcode_liveness import _process_state, capture_snapshot, classify_liveness
 
 
 def test_terminal_marker_parser_accepts_markdown_presentation_but_keeps_status_strict():
@@ -80,6 +81,10 @@ def test_liveness_reports_missing_process_without_terminating_anything():
     result = classify_liveness(None, current)
 
     assert result["status"] == "process_missing"
+
+
+def test_liveness_reports_current_process_present():
+    assert _process_state(os.getpid())["present"] is True
 
 
 def test_transcript_is_redacted_and_bounded(tmp_path: Path):
