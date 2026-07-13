@@ -33,6 +33,7 @@ from app.services.ai.contracts import AiCapability, AiMethod, AiProvider
 from app.services.ai.entitlements import AiAccessRole, AiActorContext, actor_context_from_user
 from app.services.ai.service import _get_default_provider
 from app.services.diary.temporal import (
+    TemporalExtraction,
     extract_natural_date_constraint,
     extract_natural_time_constraints,
     parse_time_fragment,
@@ -381,11 +382,13 @@ def _extract_fake_command(
     # Natural time phrases take precedence over positional HH:MM scanning so
     # that 'after 3' and 'before 3:45' produce correct earlier/later semantics.
     if "earliest_time" not in values or "latest_time" not in values:
-        nat_earliest, nat_latest = _extract_natural_time_constraints(instruction)
-        if "earliest_time" not in values and nat_earliest:
-            values["earliest_time"] = nat_earliest
-        if "latest_time" not in values and nat_latest:
-            values["latest_time"] = nat_latest
+        nat_extraction = _extract_natural_time_constraints(instruction)
+        if "earliest_time" not in values and nat_extraction.earliest:
+            values["earliest_time"] = nat_extraction.earliest
+        if "latest_time" not in values and nat_extraction.latest:
+            values["latest_time"] = nat_extraction.latest
+        if "temporal_relation" not in values:
+            values["temporal_relation"] = nat_extraction.temporal_relation
 
     # HH:MM positional fallback for any still-missing time fields.
     times = TIME_RE.findall(instruction)
@@ -393,6 +396,10 @@ def _extract_fake_command(
         values["earliest_time"] = times[0]
     if "latest_time" not in values and len(times) > 1:
         values["latest_time"] = times[1]
+
+    # Positional HH:MM fallback on its own means unspecified temporal relation.
+    if "temporal_relation" not in values and ("earliest_time" in values or "latest_time" in values):
+        values["temporal_relation"] = "unspecified"
 
     if "duration_minutes" not in values:
         duration_match = re.search(

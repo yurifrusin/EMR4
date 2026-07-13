@@ -120,7 +120,10 @@ _UPDATE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.update)
 _STATUS_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.status)
 _DELETE_CONFIRM_ACTION = get_diary_confirm_action(DiaryConfirmAction.delete)
 from app.services.ai.audit_store import persist_access_ai_audit_events
-from app.services.diary.temporal import evaluate_raw_mutation_temporal_guard
+from app.services.diary.temporal import (
+    adjust_search_window_for_relation,
+    evaluate_raw_mutation_temporal_guard,
+)
 from app.services.appointment_idempotency import (
     AppointmentIdempotencyDecision,
     claim_appointment_command,
@@ -6370,6 +6373,31 @@ def propose_bernie_supervised_booking(
         )
         if normalization.safe and normalization.constraint is not None:
             constraint = normalization.constraint
+
+    # Widen the search window based on temporal relation.
+    # For 'exact', latest is widened to earliest+5min for half-open capture.
+    # For 'approximate', the ±30 min window from extraction is already set.
+    if constraint.temporal_relation is not None:
+        adj_earliest, adj_latest = adjust_search_window_for_relation(
+            earliest_time=(
+                constraint.earliest_time.strftime("%H:%M")
+                if constraint.earliest_time is not None
+                else None
+            ),
+            latest_time=(
+                constraint.latest_time.strftime("%H:%M")
+                if constraint.latest_time is not None
+                else None
+            ),
+            temporal_relation=constraint.temporal_relation,
+        )
+        if adj_earliest != (constraint.earliest_time.strftime("%H:%M") if constraint.earliest_time else None) or adj_latest != (constraint.latest_time.strftime("%H:%M") if constraint.latest_time else None):
+            new_earliest = time.fromisoformat(adj_earliest) if adj_earliest else None
+            new_latest = time.fromisoformat(adj_latest) if adj_latest else None
+            constraint = constraint.model_copy(update={
+                "earliest_time": new_earliest,
+                "latest_time": new_latest,
+            })
 
     search_proposal = _build_slot_search_proposal(
         constraint,

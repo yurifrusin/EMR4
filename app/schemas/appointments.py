@@ -679,6 +679,7 @@ class SlotSearchProposalIn(BaseModel):
     location_id: Optional[uuid.UUID] = None
     earliest_time: Optional[time] = None
     latest_time: Optional[time] = None
+    temporal_relation: Optional[str] = None
     patient_id: Optional[uuid.UUID] = None
     limit: int = Field(default=20, gt=0, le=100)
 
@@ -727,6 +728,10 @@ class SlotSearchCommandIn(BaseModel):
     Unknown keys from LLM output are silently ignored.
     The normalizer (bernie_slot_normalizer.normalize_slot_search_command)
     validates and coerces these into a SlotSearchProposalIn constraint.
+
+    temporal_relation is an optional string indicating the temporal nature
+    of the slot request: 'exact', 'not_before', 'not_after', 'interval',
+    'approximate', or 'unspecified'.
     """
     model_config = ConfigDict(extra="ignore")
 
@@ -738,6 +743,7 @@ class SlotSearchCommandIn(BaseModel):
     location_id: Optional[Any] = None
     earliest_time: Optional[Any] = None
     latest_time: Optional[Any] = None
+    temporal_relation: Optional[Any] = None
     patient_id: Optional[Any] = None
     limit: Optional[Any] = None
 

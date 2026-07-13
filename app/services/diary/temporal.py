@@ -39,6 +39,14 @@ _BETWEEN_TIME_RE = re.compile(
     r"\bbetween\s+(" + _NAT_TIME_PAT + r")\s+and\s+(" + _NAT_TIME_PAT + r")\b",
     re.IGNORECASE,
 )
+_AT_TIME_RE = re.compile(
+    r"\bat\s+(" + _NAT_TIME_PAT + r")\b",
+    re.IGNORECASE,
+)
+_ABOUT_TIME_RE = re.compile(
+    r"\b(?:around|about)\s+(" + _NAT_TIME_PAT + r")\b",
+    re.IGNORECASE,
+)
 _AFTER_TIME_RE = re.compile(r"\bafter\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
 _BEFORE_TIME_RE = re.compile(r"\bbefore\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
 _TIME_FRAGMENT_RE = re.compile(
@@ -58,6 +66,35 @@ RawMutationTemporalKind = Literal[
     "past_date",
     "window_fully_past",
 ]
+
+TemporalRelationKind = Literal[
+    "exact",
+    "not_before",
+    "not_after",
+    "interval",
+    "approximate",
+    "unspecified",
+]
+
+
+@dataclass(frozen=True)
+class TemporalExtraction:
+    """Result of extracting temporal constraints from a natural-language instruction."""
+
+    earliest: str | None = None
+    latest: str | None = None
+    temporal_relation: TemporalRelationKind = "unspecified"
+
+
+def _hhmm_to_minutes(hhmm: str) -> int:
+    """Convert HH:MM string to minutes since midnight."""
+    parts = hhmm.split(":")
+    return int(parts[0]) * 60 + int(parts[1])
+
+
+def _minutes_to_hhmm(mins: int) -> str:
+    """Convert minutes since midnight to HH:MM string."""
+    return f"{mins // 60:02d}:{mins % 60:02d}"
 
 
 def evaluate_raw_mutation_temporal_guard(
@@ -98,7 +135,7 @@ class SameDayWindowDecision:
 
 
 def parse_time_fragment(raw: str) -> str | None:
-    """Convert a natural time fragment (e.g. '3', '3:45', '3 pm') to HH:MM.
+    """Convert a natural time fragment (e.g. '3', '3:45', '3 pm', '3.00pm') to HH:MM.
 
     Business-hours assumption: bare hours 1-11 without am/pm are treated as pm.
     Returns None when the fragment cannot be parsed.
@@ -122,31 +159,149 @@ def parse_time_fragment(raw: str) -> str | None:
 
 def extract_natural_time_constraints(
     instruction: str,
-) -> tuple[str | None, str | None]:
+) -> TemporalExtraction:
     """Extract earliest/latest times from receptionist phrases.
 
     Handles: 'after 3', 'after 3 pm', 'before 3:45', 'before 3.45',
-    'between 2 pm and 3:45'. Returns (earliest_time, latest_time) as HH:MM
-    strings or None when not found.
+    'between 2 pm and 3:45', 'at 3pm', 'at 15:00', 'around 3pm', 'about 3pm'.
+
+    Returns TemporalExtraction with earliest, latest, and temporal_relation.
+
+    Priority order: BETWEEN > AT > ABOUT > AFTER/BEFORE > positional HH:MM fallback.
     """
     earliest: str | None = None
     latest: str | None = None
+    temporal_relation: TemporalRelationKind = "unspecified"
 
+    # Priority 1: BETWEEN → interval
     between_m = _BETWEEN_TIME_RE.search(instruction)
     if between_m:
         earliest = parse_time_fragment(between_m.group(1))
         latest = parse_time_fragment(between_m.group(2))
-        return earliest, latest
+        temporal_relation = "interval"
+        return TemporalExtraction(
+            earliest=earliest,
+            latest=latest,
+            temporal_relation=temporal_relation,
+        )
 
+    # Priority 2: AT → exact
+    at_m = _AT_TIME_RE.search(instruction)
+    if at_m:
+        parsed = parse_time_fragment(at_m.group(1))
+        if parsed:
+            return TemporalExtraction(
+                earliest=parsed,
+                latest=parsed,
+                temporal_relation="exact",
+            )
+
+    # Priority 3: ABOUT/AROUND → approximate (±30 min)
+    about_m = _ABOUT_TIME_RE.search(instruction)
+    if about_m:
+        parsed = parse_time_fragment(about_m.group(1))
+        if parsed:
+            mins = _hhmm_to_minutes(parsed)
+            earliest_mins = max(0, mins - 30)
+            latest_mins = mins + 30
+            return TemporalExtraction(
+                earliest=_minutes_to_hhmm(earliest_mins),
+                latest=_minutes_to_hhmm(latest_mins),
+                temporal_relation="approximate",
+            )
+
+    # Priority 4: AFTER → not_before
     after_m = _AFTER_TIME_RE.search(instruction)
     if after_m:
         earliest = parse_time_fragment(after_m.group(1))
 
+    # Priority 5: BEFORE → not_after
     before_m = _BEFORE_TIME_RE.search(instruction)
     if before_m:
         latest = parse_time_fragment(before_m.group(1))
 
-    return earliest, latest
+    if after_m or before_m:
+        temporal_relation = infer_temporal_relation(earliest, latest)
+
+    if earliest is not None or latest is not None:
+        return TemporalExtraction(
+            earliest=earliest,
+            latest=latest,
+            temporal_relation=temporal_relation,
+        )
+
+    # Priority 6: Positional HH:MM fallback → unspecified
+    times = re.findall(r"\b(?:[01]?\d|2[0-3]):[0-5]\d(?::[0-5]\d)?\b", instruction)
+    if times:
+        return TemporalExtraction(
+            earliest=times[0],
+            latest=times[-1] if len(times) > 1 else None,
+            temporal_relation="unspecified",
+        )
+
+    return TemporalExtraction()
+
+
+def infer_temporal_relation(
+    earliest: str | None,
+    latest: str | None,
+) -> TemporalRelationKind:
+    """Infer temporal relation from raw time bounds for legacy callers.
+
+    earliest==latest → exact
+    only earliest → not_before
+    only latest → not_after
+    both different → interval
+    none → unspecified
+    """
+    if earliest is not None and latest is not None:
+        if earliest == latest:
+            return "exact"
+        return "interval"
+    if earliest is not None:
+        return "not_before"
+    if latest is not None:
+        return "not_after"
+    return "unspecified"
+
+
+def adjust_search_window_for_relation(
+    earliest_time: str | None,
+    latest_time: str | None,
+    temporal_relation: str | None,
+) -> tuple[str | None, str | None]:
+    """Widen or preserve the slot-search window based on temporal relation.
+
+    When temporal_relation == 'exact' and latest_time matches earliest_time,
+    widen latest to earliest + 5 minutes so the half-open search captures
+    the exact-time slot.
+
+    When temporal_relation == 'approximate', the ±30 min window is already
+    set in extraction; pass through unchanged.
+
+    For all other relations, use bounds as-is (existing behaviour).
+
+    Returns (adjusted_earliest, adjusted_latest).
+    """
+    if (
+        temporal_relation == "exact"
+        and earliest_time is not None
+        and (latest_time is None or latest_time == earliest_time)
+    ):
+        earliest_mins = _hhmm_to_minutes(earliest_time)
+        latest_mins = earliest_mins + 5
+        return earliest_time, _minutes_to_hhmm(latest_mins)
+    return earliest_time, latest_time
+
+
+def should_classify_exact_booking(temporal_relation: str | None) -> bool:
+    """Whether the temporal relation allows exact existing-booking classification.
+
+    Only 'exact' can produce existing_booking_found.
+    'approximate', 'unspecified', 'not_before', 'not_after', and 'interval'
+    must NOT classify as exact even if a booking exists in the window.
+    """
+    return temporal_relation == "exact"
 
 
 def resolve_week_relative_date(
@@ -228,6 +383,8 @@ __all__ = [
     "SameDayWindowDecision",
     "SameDayWindowKind",
     "RawMutationTemporalKind",
+    "TemporalRelationKind",
+    "TemporalExtraction",
     "DATE_RE",
     "WEEK_RELATIVE_RE",
     "WEEKDAY_RE",
@@ -236,6 +393,9 @@ __all__ = [
     "parse_time_fragment",
     "extract_natural_time_constraints",
     "extract_natural_date_constraint",
+    "infer_temporal_relation",
+    "adjust_search_window_for_relation",
+    "should_classify_exact_booking",
     "resolve_week_relative_date",
     "resolve_weekday_date",
 ]

@@ -168,6 +168,18 @@ def normalize_slot_search_command(
     earliest_time = _parse_time(payload.earliest_time, "earliest_time", blocks)
     latest_time = _parse_time(payload.latest_time, "latest_time", blocks)
 
+    # ── Temporal relation (pass-through string, no parsing needed) ────────────
+    temporal_relation: Optional[str] = None
+    if payload.temporal_relation is not None:
+        raw = str(payload.temporal_relation).strip().lower()
+        if raw in ("exact", "not_before", "not_after", "interval", "approximate", "unspecified"):
+            temporal_relation = raw
+        else:
+            warnings.append(_issue(
+                "invalid_temporal_relation", "warning",
+                f"temporal_relation '{raw}' is not a recognised value; treating as unspecified.",
+            ))
+
     # ── duration_minutes ──────────────────────────────────────────────────────
     duration_minutes: Optional[int] = None
     dur_raw = _coerce_int(payload.duration_minutes, "duration_minutes", blocks)
@@ -237,6 +249,7 @@ def normalize_slot_search_command(
             location_id=location_id,
             earliest_time=earliest_time,
             latest_time=latest_time,
+            temporal_relation=temporal_relation,
             patient_id=patient_id,
             limit=limit,
         )
