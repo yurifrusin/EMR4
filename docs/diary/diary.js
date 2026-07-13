@@ -162,6 +162,7 @@ class BernieSession {
     this.selectedCandidateIndex = null;
     this.stagedBookingPreview = null;
     this.confirmedBookingPreview = null;
+    this.confirmedBookingReceipt = null;
     this.confirmPayload = null;
     this.confirmEndpoint = null;
     this.interpretEnvelope = null;
@@ -448,6 +449,7 @@ class BernieSession {
     this.selectedCandidateIndex = null;
     this.stagedBookingPreview = null;
     this.confirmedBookingPreview = null;
+    this.confirmedBookingReceipt = null;
     this.confirmPayload = null;
     this.confirmEndpoint = null;
     this.interpretEnvelope = null;
@@ -485,6 +487,7 @@ class BernieSession {
     this.selectedCandidateIndex = null;
     this.stagedBookingPreview = null;
     this.confirmedBookingPreview = null;
+    this.confirmedBookingReceipt = null;
     this.confirmPayload = null;
     this.confirmEndpoint = null;
     this.interpretEnvelope = null;
@@ -3192,6 +3195,8 @@ function renderBernieConfirmedState(contentEl) {
   const successBadge = document.createElement("div");
   successBadge.className = "bernie-status-badge confirmed";
   successBadge.setAttribute("data-testid", "bernie-review-status");
+  successBadge.setAttribute("role", "status");
+  successBadge.setAttribute("aria-live", "polite");
   successBadge.textContent = "Confirmed";
   container.appendChild(successBadge);
 
@@ -3199,15 +3204,125 @@ function renderBernieConfirmedState(contentEl) {
   headline.className = "bernie-review-headline confirmed";
   headline.setAttribute("data-testid", "bernie-review-headline");
 
-  const preview = bernieSession.confirmedBookingPreview || bernieSession.stagedBookingPreview || {};
-  const patient = preview.patient_label || "Patient";
-  const date = preview.appointment_date || "";
-  const rawTime = preview.start_time_local || "";
-  const time = rawTime.slice(0, 5);
-  const practitioner = preview.practitioner_label || "Practitioner";
+  const receipt = bernieSession.confirmedBookingReceipt;
 
-  headline.textContent = `Booking confirmed successfully for ${patient} on ${date} at ${time} with ${practitioner}.`;
-  container.appendChild(headline);
+  if (receipt) {
+    const patient = receipt.patient_display || "Patient";
+    const date = receipt.appointment_date || "";
+    const rawTime = receipt.start_time_local || "";
+    const time = rawTime.slice(0, 5);
+    const practitioner = receipt.practitioner_display || "Practitioner";
+
+    headline.textContent = `Booking confirmed successfully for ${patient} on ${date} at ${time} with ${practitioner}.`;
+    container.appendChild(headline);
+
+    // Create the semantic group for the booking confirmation receipt
+    const receiptGroup = document.createElement("div");
+    receiptGroup.setAttribute("role", "group");
+    receiptGroup.setAttribute("aria-label", "Booking confirmation receipt");
+    receiptGroup.className = "bernie-receipt-group";
+    receiptGroup.setAttribute("data-testid", "bernie-receipt-group");
+
+    const receiptTitle = document.createElement("h4");
+    receiptTitle.className = "bernie-receipt-title";
+    receiptTitle.textContent = "Booking Confirmation Receipt";
+    receiptGroup.appendChild(receiptTitle);
+
+    const detailsList = document.createElement("ul");
+    detailsList.className = "bernie-receipt-details-list";
+    detailsList.setAttribute("data-testid", "bernie-receipt-details");
+
+    const addDetail = (label, val, testid) => {
+      const li = document.createElement("li");
+      li.className = "bernie-receipt-detail-item";
+      if (testid) li.setAttribute("data-testid", testid);
+      li.innerHTML = `<strong>${label}:</strong> <span>${val}</span>`;
+      detailsList.appendChild(li);
+    };
+
+    addDetail("Patient", receipt.patient_display, "receipt-patient");
+    addDetail("Practitioner", receipt.practitioner_display, "receipt-practitioner");
+    addDetail("Date", receipt.appointment_date, "receipt-date");
+    addDetail("Time", receipt.start_time_local.slice(0, 5), "receipt-time");
+    addDetail("Duration", `${receipt.duration_minutes} mins`, "receipt-duration");
+    addDetail("Status", receipt.status, "receipt-status");
+    if (receipt.appointment_type) {
+      addDetail("Appointment Type", receipt.appointment_type, "receipt-type");
+    }
+    const confirmerDisplay = `${receipt.confirmed_by_display} (${receipt.confirmed_by_role || "Staff"})`;
+    addDetail("Confirmed By", confirmerDisplay, "receipt-confirmer");
+
+    // Verification summary
+    const v = receipt.verification || {};
+    const checks = [];
+    if (v.actor_authenticated) checks.push("Actor Authenticated");
+    if (v.practice_scope_verified) checks.push("Practice Scope Verified");
+    if (v.proposal_revalidated) checks.push("Proposal Revalidated");
+    if (v.conflict_check_passed) checks.push("Conflict Checked");
+    if (v.idempotency_verified) checks.push("Idempotency Verified");
+    if (v.audit_recorded) checks.push("Audit Recorded");
+    if (v.signed_evidence_verified) checks.push("Signed Evidence Verified");
+
+    addDetail("Verification Summary", checks.join(", "), "receipt-verification-summary");
+
+    receiptGroup.appendChild(detailsList);
+
+    // Explicit text if visual diary check is not required
+    if (v.visual_diary_check_required === false) {
+      const checkInfo = document.createElement("div");
+      checkInfo.className = "bernie-receipt-verification-info";
+      checkInfo.setAttribute("data-testid", "bernie-receipt-verification-info");
+      checkInfo.textContent = "Deterministic checks passed. No visual diary check is required.";
+      receiptGroup.appendChild(checkInfo);
+    }
+
+    container.appendChild(receiptGroup);
+
+  } else {
+    // simulated/missing receipt (e.g. offline dev / smoke mode)
+    const preview = bernieSession.confirmedBookingPreview || bernieSession.stagedBookingPreview || {};
+    const patient = preview.patient_label || "Patient";
+    const date = preview.appointment_date || "";
+    const rawTime = preview.start_time_local || "";
+    const time = rawTime.slice(0, 5);
+    const practitioner = preview.practitioner_label || "Practitioner";
+
+    headline.textContent = `Booking confirmed successfully for ${patient} on ${date} at ${time} with ${practitioner}. (Simulated)`;
+    container.appendChild(headline);
+
+    // Create the semantic group for simulated details
+    const simulatedGroup = document.createElement("div");
+    simulatedGroup.setAttribute("role", "group");
+    simulatedGroup.setAttribute("aria-label", "Simulated booking details");
+    simulatedGroup.className = "bernie-simulated-group";
+    simulatedGroup.setAttribute("data-testid", "bernie-simulated-group");
+
+    const simTitle = document.createElement("h4");
+    simTitle.className = "bernie-simulated-title";
+    simTitle.textContent = "Simulated Booking (Offline - No Authoritative Receipt)";
+    simulatedGroup.appendChild(simTitle);
+
+    const detailsList = document.createElement("ul");
+    detailsList.className = "bernie-receipt-details-list";
+
+    const addDetail = (label, val) => {
+      const li = document.createElement("li");
+      li.className = "bernie-receipt-detail-item";
+      li.innerHTML = `<strong>${label}:</strong> <span>${val}</span>`;
+      detailsList.appendChild(li);
+    };
+
+    addDetail("Patient", patient);
+    addDetail("Practitioner", practitioner);
+    addDetail("Date", date);
+    addDetail("Time", time);
+    if (preview.duration_minutes) {
+      addDetail("Duration", `${preview.duration_minutes} mins`);
+    }
+
+    simulatedGroup.appendChild(detailsList);
+    container.appendChild(simulatedGroup);
+  }
 
   const resetBtn = document.createElement("button");
   resetBtn.className = "btn-bernie-reset";
@@ -4562,6 +4677,7 @@ function clearStaleBernieBookingState(reason = "refresh") {
   bernieSession.selectedCandidateIndex = null;
   bernieSession.stagedBookingPreview = null;
   bernieSession.confirmedBookingPreview = null;
+  bernieSession.confirmedBookingReceipt = null;
   bernieSession.confirmPayload = null;
   bernieSession.confirmEndpoint = null;
   bernieSession.interpretEnvelope = null;
@@ -5557,6 +5673,14 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     confirmBtn.id = "btn-bernie-confirm";
     confirmBtn.textContent = "Confirm booking";
     confirmBtn.disabled = Boolean(bernieSession.serverConflict) || (payload.reception_policy && payload.reception_policy.must_block_confirmation === true);
+
+    // Set informative accessible name tied to the booking being authorized
+    const patientName = berniePatientLabelFromPayload(payload) || "Patient";
+    const practitionerName = berniePractitionerLabelFromPayload(payload) || "Practitioner";
+    const slotDate = payload.selected_slot?.appointment_date || "selected date";
+    const slotTime = payload.selected_slot?.start_time_local ? payload.selected_slot.start_time_local.slice(0, 5) : "selected time";
+    confirmBtn.setAttribute("aria-label", `Confirm booking for ${patientName} with ${practitionerName} on ${slotDate} at ${slotTime}`);
+
     confirmBox.appendChild(confirmBtn);
 
     const shortcutHint = document.createElement("div");
@@ -5603,12 +5727,12 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     contentEl.appendChild(confirmBox);
 
     // Event listener to simulate or execute confirmation
-      confirmBtn.addEventListener("click", async () => {
+    confirmBtn.addEventListener("click", async () => {
       if (confirmBtn.disabled) return;
 
       bernieSession.transitionTo("CONFIRMING");
       confirmBtn.disabled = true;
-      changeTimeBtn.disabled = true;
+      if (changeTimeBtn) changeTimeBtn.disabled = true;
       successMsg.classList.add("hidden");
       errorMsg.classList.add("hidden");
 
@@ -5629,18 +5753,44 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             body: JSON.stringify(body)
           });
           if (response.ok) {
-            bernieSession.transitionTo("CONFIRMED");
-            bernieSession.confirmedBookingPreview = bernieSession.stagedBookingPreview;
-            bernieSession.stagedBookingPreview = null;
-            bernieStagedBookingPreview = null;
-            bernieStagedBookingFresh = false;
-            bernieSelectedCandidateIndex = null;
-            await loadDiary(true);
-            renderBernieConfirmedState(contentEl);
+            const data = await response.json();
+            const receipt = data?.confirmation_receipt;
+            if (
+              data?.safe === true &&
+              data?.autonomy_tier === "confirmed_write" &&
+              receipt &&
+              receipt.schema_version === "appointment.confirmation_receipt.v1" &&
+              receipt.outcome === "appointment_created"
+            ) {
+              bernieSession.transitionTo("CONFIRMED");
+              bernieSession.confirmedBookingReceipt = receipt;
+              bernieSession.confirmedBookingPreview = null;
+              bernieSession.stagedBookingPreview = null;
+              bernieStagedBookingPreview = null;
+              bernieStagedBookingFresh = false;
+              bernieSelectedCandidateIndex = null;
+              await loadDiary(true);
+              renderBernieConfirmedState(contentEl);
+            } else {
+              bernieSession.transitionTo("SLOT_PREVIEW");
+              confirmBtn.disabled = false;
+              if (changeTimeBtn) changeTimeBtn.disabled = false;
+
+              let blockMsg = "";
+              if (data?.blocks && data.blocks.length > 0) {
+                blockMsg = data.blocks.map(b => b.message).join("; ");
+              } else if (data?.summary) {
+                blockMsg = data.summary;
+              } else {
+                blockMsg = "Confirmation blocked by practice constraints.";
+              }
+              errorMsg.textContent = blockMsg;
+              errorMsg.classList.remove("hidden");
+            }
           } else {
             bernieSession.transitionTo("SLOT_PREVIEW");
             confirmBtn.disabled = false;
-            changeTimeBtn.disabled = false;
+            if (changeTimeBtn) changeTimeBtn.disabled = false;
 
             const isDevOrDebug = isBernieDevOrDebug();
             let detail = "";
@@ -5664,7 +5814,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
         } catch (err) {
           bernieSession.transitionTo("SLOT_PREVIEW");
           confirmBtn.disabled = false;
-          changeTimeBtn.disabled = false;
+          if (changeTimeBtn) changeTimeBtn.disabled = false;
 
           const isDevOrDebug = isBernieDevOrDebug();
           const errMsg = err.message || String(err);
@@ -5684,6 +5834,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
           payload.confirm_payload.confirmed = true;
         }
         bernieSession.transitionTo("CONFIRMED");
+        bernieSession.confirmedBookingReceipt = null;
         bernieSession.confirmedBookingPreview = bernieSession.stagedBookingPreview;
         bernieSession.stagedBookingPreview = null;
         bernieStagedBookingPreview = null;
@@ -5692,7 +5843,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
         await loadDiary(true);
         renderBernieConfirmedState(contentEl);
       }
-      });
+    });
     } else {
       changeTimeBtn = document.createElement("button");
       changeTimeBtn.type = "button";
@@ -6238,6 +6389,7 @@ function renderBernieInstructionInput(contentEl) {
       bernieSession.selectedCandidateIndex = null;
       bernieSession.stagedBookingPreview = null;
       bernieSession.confirmedBookingPreview = null;
+      bernieSession.confirmedBookingReceipt = null;
       bernieSession.confirmPayload = null;
       bernieSession.confirmEndpoint = null;
       bernieSession.interpretEnvelope = null;
