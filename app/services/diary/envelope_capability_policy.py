@@ -74,19 +74,12 @@ def validate_envelope_authority(
         ValueError: When a registered action has an unauthorised author or an
             incompatible envelope-type / capability-tier combination.
     """
-    # Direct capability names must be enforced even when they are not grammar aliases.
-    capability = get_bernie_capability(action_name)
-    if capability is None:
-        verb = action_verb_for_envelope(action_name)
-        if verb is None:
-            return EnvelopeAuthorityDecision(
-                action_registered=False,
-                author_authorized=None,
-                tier_compatible=None,
-                reason=f"Unknown action_name '{action_name}'",
-            )
+    # 1. Resolve verb and descriptor if action_name is a grammar alias
+    verb = action_verb_for_envelope(action_name)
+    descriptor = DIARY_ACTION_GRAMMAR[verb] if verb is not None else None
 
-        descriptor = DIARY_ACTION_GRAMMAR[verb]
+    # 2. Resolve capability
+    if descriptor is not None:
         if descriptor.capability_name is None:
             return EnvelopeAuthorityDecision(
                 action_registered=False,
@@ -94,7 +87,6 @@ def validate_envelope_authority(
                 tier_compatible=None,
                 reason=f"Verb '{verb.value}' has no registered capability_name",
             )
-
         capability = get_bernie_capability(descriptor.capability_name)
         if capability is None:
             return EnvelopeAuthorityDecision(
@@ -106,18 +98,34 @@ def validate_envelope_authority(
                     f"'{verb.value}' is not registered"
                 ),
             )
+    else:
+        # Fall back to direct capability lookup
+        capability = get_bernie_capability(action_name)
+        if capability is None:
+            return EnvelopeAuthorityDecision(
+                action_registered=False,
+                author_authorized=None,
+                tier_compatible=None,
+                reason=f"Unknown action_name '{action_name}'",
+            )
 
-    # Validate author against allowed_authors.
-    if author not in capability.allowed_authors:
+    # 3. Determine tier and the envelope-specific author boundary.
+    tier = descriptor.tier if descriptor is not None else capability.tier
+    envelope_type_lower = envelope_type.lower()
+    allowed_authors = capability.allowed_authors
+    if envelope_type_lower == "confirmation" and tier is BernieCapabilityTier.confirm:
+        # A registered confirm-tier grammar action remains staff-confirmed even
+        # when its adjacent proposal capability permits Bernie authorship.
+        allowed_authors = (DiaryActionAuthor.staff_ui,)
+
+    if author not in allowed_authors:
         raise ValueError(
             f"Author '{author.value}' is not permitted for registered action "
             f"'{action_name}' (capability '{capability.name}').  "
-            f"Allowed authors: {[a.value for a in capability.allowed_authors]}."
+            f"Allowed authors: {[a.value for a in allowed_authors]}."
         )
 
-    # Validate envelope type against capability tier.
-    envelope_type_lower = envelope_type.lower()
-    tier = capability.tier
+    # 4. Validate envelope type against determined tier.
 
     if envelope_type_lower == "proposal":
         if tier is not BernieCapabilityTier.propose:

@@ -59,6 +59,19 @@ class DiaryActionIntent(DiaryActionEnvelopeBase):
     summary: str | None = None
     writes_authorized: Literal[False] = False
 
+    @model_validator(mode="after")
+    def _enforce_registered_intent_authority(self) -> "DiaryActionIntent":
+        from app.services.diary.envelope_capability_policy import (
+            validate_envelope_authority,
+        )
+
+        validate_envelope_authority(
+            envelope_type="intent",
+            action_name=self.action_name,
+            author=self.author,
+        )
+        return self
+
 
 class DiaryActionProposal(DiaryActionEnvelopeBase):
     """A staff-reviewable, non-mutating proposal for diary work."""

@@ -448,3 +448,188 @@ def test_manifest_drift_watch_accurately_describes_enforcement():
     assert "route level" in drift_entries, (
         "Drift watch should clarify route-level enforcement is separate"
     )
+
+
+# ---------------------------------------------------------------------------
+# 11. S14 Adversarial and Cross-Contract tests
+# ---------------------------------------------------------------------------
+
+
+def test_intent_author_enforcement_permitted_author_passes():
+    """DiaryActionIntent enforces author policy for registered action names."""
+    # interpret_instruction is read-only tier, allowed_authors=(bernie,)
+    intent = DiaryActionIntent(
+        intent_id="i-1",
+        author=DiaryActionAuthor.bernie,
+        channel=DiaryActionChannel.nl_text,
+        action_name="interpret_instruction",
+        payload={"raw_text": "book standard appointment"},
+    )
+    assert intent.action_name == "interpret_instruction"
+
+
+def test_intent_author_enforcement_unpermitted_author_fails():
+    """DiaryActionIntent rejects unauthorized authors on registered action names."""
+    # interpret_instruction allows only bernie
+    with pytest.raises(ValidationError, match="not permitted"):
+        DiaryActionIntent(
+            intent_id="i-2",
+            author=DiaryActionAuthor.staff_ui,
+            channel=DiaryActionChannel.nl_text,
+            action_name="interpret_instruction",
+        )
+
+
+def test_intent_retains_generic_intent_semantics_no_tier_restriction():
+    """DiaryActionIntent has no tier restriction (propose and confirm tiers both pass)."""
+    # propose_booking is propose-tier, allowed_authors=(staff_ui, bernie)
+    intent_propose = DiaryActionIntent(
+        intent_id="i-propose",
+        author=DiaryActionAuthor.bernie,
+        channel=DiaryActionChannel.nl_text,
+        action_name="propose_booking",
+    )
+    assert intent_propose.action_name == "propose_booking"
+
+    # confirm_booking is confirm-tier, allowed_authors=(staff_ui,)
+    intent_confirm = DiaryActionIntent(
+        intent_id="i-confirm",
+        author=DiaryActionAuthor.staff_ui,
+        channel=DiaryActionChannel.diary_panel,
+        action_name="confirm_booking",
+    )
+    assert intent_confirm.action_name == "confirm_booking"
+
+
+def test_direct_proposal_names_keep_their_declared_author_policy():
+    """Direct proposal capability names retain their declared allowed authors."""
+    # propose_edit capability allowed_authors = (staff_ui, bernie)
+    p_direct = DiaryActionProposal(
+        proposal_id="p-d",
+        author=DiaryActionAuthor.bernie,
+        channel=DiaryActionChannel.diary_panel,
+        action_name="propose_edit",
+    )
+    assert p_direct.action_name == "propose_edit"
+
+
+def test_registered_confirm_aliases_remain_staff_only():
+    """A confirm-tier grammar alias cannot borrow Bernie from its proposal capability."""
+    with pytest.raises(ValidationError, match="not permitted"):
+        DiaryActionConfirmation(
+            confirmation_id="c-a",
+            proposal_id="p-a",
+            confirmed_by_user_id="user-1",
+            confirmed_at=_CONFIRMED_AT,
+            author=DiaryActionAuthor.bernie,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="move",
+        )
+
+
+def test_direct_names_and_grammar_aliases_use_same_tier_source_of_truth():
+    """Direct capability 'propose_edit' is propose-tier (proposal compatible);
+
+    grammar alias 'move' is confirm-tier (confirmation compatible).
+    """
+    # propose_edit is compatible with proposal envelope
+    p_direct = DiaryActionProposal(
+        proposal_id="p-d",
+        author=DiaryActionAuthor.staff_ui,
+        channel=DiaryActionChannel.diary_panel,
+        action_name="propose_edit",
+    )
+    assert p_direct.action_name == "propose_edit"
+
+    # propose_edit is NOT compatible with confirmation envelope
+    with pytest.raises(ValidationError, match="not confirm-tier"):
+        DiaryActionConfirmation(
+            confirmation_id="c-d",
+            proposal_id="p-d",
+            confirmed_by_user_id="user-1",
+            confirmed_at=_CONFIRMED_AT,
+            author=DiaryActionAuthor.staff_ui,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="propose_edit",
+        )
+
+    # move alias is compatible with confirmation envelope
+    c_alias = DiaryActionConfirmation(
+        confirmation_id="c-a",
+        proposal_id="p-a",
+        confirmed_by_user_id="user-1",
+        confirmed_at=_CONFIRMED_AT,
+        author=DiaryActionAuthor.staff_ui,
+        channel=DiaryActionChannel.diary_panel,
+        action_name="move",
+    )
+    assert c_alias.action_name == "move"
+
+    # move alias is NOT compatible with proposal envelope
+    with pytest.raises(ValidationError, match="not propose-tier"):
+        DiaryActionProposal(
+            proposal_id="p-a",
+            author=DiaryActionAuthor.staff_ui,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="move",
+        )
+
+
+def test_unauthorized_author_rejected_on_grammar_aliases():
+    """Rejects unauthorized author (e.g. rayleen) on a grammar alias (e.g. move)."""
+    # move resolves to propose_edit, which only allows staff_ui and bernie
+    with pytest.raises(ValidationError, match="not permitted"):
+        DiaryActionConfirmation(
+            confirmation_id="c-unauth",
+            proposal_id="p-1",
+            confirmed_by_user_id="user-1",
+            confirmed_at=_CONFIRMED_AT,
+            author=DiaryActionAuthor.rayleen,
+            channel=DiaryActionChannel.diary_panel,
+            action_name="move",
+        )
+
+
+def test_compatible_unknown_names_pass_through_all_envelopes():
+    """An unknown/unregistered action name passes through all envelope types without enforcement."""
+    args = dict(author=DiaryActionAuthor.davida, channel=DiaryActionChannel.nl_text)
+
+    intent = DiaryActionIntent(intent_id="i-unk", action_name="unknown_action_name", **args)
+    assert intent.action_name == "unknown_action_name"
+
+    proposal = DiaryActionProposal(proposal_id="p-unk", action_name="unknown_action_name", **args)
+    assert proposal.action_name == "unknown_action_name"
+
+    suggestion = DiaryActionSuggestion(
+        suggestion_id="s-unk", action_name="unknown_action_name", title="Unk", reason_code="unk", **args
+    )
+    assert suggestion.action_name == "unknown_action_name"
+
+    confirmation = DiaryActionConfirmation(
+        confirmation_id="c-unk",
+        proposal_id="p-unk",
+        confirmed_by_user_id="u-1",
+        confirmed_at=_CONFIRMED_AT,
+        action_name="unknown_action_name",
+        **args,
+    )
+    assert confirmation.action_name == "unknown_action_name"
+
+
+def test_planned_grammar_verbs_with_no_registered_capability_pass_through():
+    """Planned verbs with capability_name=None (e.g., check_in) pass through without validation failures."""
+    args = dict(author=DiaryActionAuthor.davida, channel=DiaryActionChannel.nl_text)
+
+    # check_in has capability_name=None, so it passes through
+    proposal = DiaryActionProposal(proposal_id="p-chk", action_name="check_in", **args)
+    assert proposal.action_name == "check_in"
+
+    confirmation = DiaryActionConfirmation(
+        confirmation_id="c-chk",
+        proposal_id="p-chk",
+        confirmed_by_user_id="u-1",
+        confirmed_at=_CONFIRMED_AT,
+        action_name="check_in",
+        **args,
+    )
+    assert confirmation.action_name == "check_in"
