@@ -2,13 +2,14 @@
 
 Date: 2026-07-13
 
-Sprint: 200
+Tranche: S19-S21
 
 ## Purpose
 
-This index links the static appointment command metadata preflight to the
-existing idempotency runtime checkpoints without opening any new enforcement
-surface.
+This index links the appointment command metadata preflight to the current
+idempotency runtime checkpoints. The S19-S21 tranche opens syntactic header
+enforcement on the four canonical proposal routes without granting replay or
+write authority.
 
 It answers one narrow question: for each OpenAPI appointment command path, what
 is the current idempotency continuity status?
@@ -17,13 +18,13 @@ is the current idempotency continuity status?
 
 | OpenAPI path | Kind | Runtime status | Source sprint | Source test |
 |---|---|---|---:|---|
-| `/appointments/proposals/create` | proposal | `syntactic_only` | 200 | `tests/test_appointment_proposals.py` |
+| `/appointments/proposals/create` | proposal | `syntactic_only` | S19-S21 | `tests/test_appointment_proposals.py` |
 | `/appointments/proposals/create/confirm` | confirm | `ledger_wired` | 145 | `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` |
-| `/appointments/proposals/update` | proposal | `syntactic_only` | 200 | `tests/test_appointment_update_proposal.py` |
+| `/appointments/proposals/update` | proposal | `syntactic_only` | S19-S21 | `tests/test_appointment_update_proposal.py` |
 | `/appointments/proposals/update/confirm` | confirm | `ledger_wired` | 145 | `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` |
-| `/appointments/proposals/status` | proposal | `syntactic_only` | 200 | `tests/test_appointment_update_proposal.py` |
+| `/appointments/proposals/status` | proposal | `syntactic_only` | S19-S21 | `tests/test_appointment_update_proposal.py` |
 | `/appointments/proposals/status/confirm` | confirm | `ledger_wired` | 145 | `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` |
-| `/appointments/proposals/delete` | proposal | `syntactic_only` | 200 | `tests/test_appointment_status_mutations.py` |
+| `/appointments/proposals/delete` | proposal | `syntactic_only` | S19-S21 | `tests/test_appointment_status_mutations.py` |
 | `/appointments/proposals/delete/confirm` | confirm | `ledger_wired` | 145 | `tests/test_api_spine_confirmation_family_idempotency_checkpoint.py` |
 | `/appointments/proposals/slot-search/normalize` | read | `read_no_idempotency` | 199 | `tests/test_api_spine_idempotency_audit_metadata.py` |
 | `/appointments/proposals/slot-search` | read | `read_no_idempotency` | 199 | `tests/test_api_spine_idempotency_audit_metadata.py` |
@@ -34,8 +35,8 @@ Status meanings:
 - `ledger_wired`: existing source-level checkpoint records that the confirmation
   route family requires `Idempotency-Key`, calls the appointment command ledger
   helper before writes, and completes the ledger after appointment/audit success.
-- `documented_gap`: OpenAPI declares `Idempotency-Key`, but proposal-only runtime
-  enforcement remains deliberately deferred and separately tracked.
+- `syntactic_only`: runtime requires a nonblank `Idempotency-Key`, but the
+  non-mutating proposal does not claim durable replay or write authority.
 - `read_no_idempotency`: command-style read surface with `X-Correlation-Id` only;
   it must not be treated as a replayable write command.
 
@@ -54,7 +55,7 @@ notes rather than by this static OpenAPI continuity table.
 
 This index does not authorize:
 
-- proposal-only route idempotency enforcement;
+- proposal-only durable replay-ledger enforcement;
 - raw compatibility `PUT`, `PATCH`, or `DELETE` idempotency enforcement;
 - slot-search reservation or replay semantics;
 - provider calls or live provider gates;
@@ -68,8 +69,8 @@ This index does not authorize:
 
 ## Boundary
 
-This is a documentation continuity artifact. It does not prove runtime concurrency
-behavior, network-loss replay behavior, backend handler correctness,
+This index and its source tests prove the current syntactic proposal boundary.
+They do not prove runtime concurrency behavior, network-loss replay behavior,
 database transaction durability, audit-log append-only semantics, or production
 deployment readiness.
 

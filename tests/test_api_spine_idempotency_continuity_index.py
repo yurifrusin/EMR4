@@ -12,7 +12,7 @@ STATUS_COUNTS = {
 }
 
 REQUIRED_BLOCKED_GATE_PHRASES = {
-    "proposal-only route idempotency enforcement",
+    "proposal-only durable replay-ledger enforcement",
     "raw compatibility `PUT`, `PATCH`, or `DELETE` idempotency enforcement",
     "slot-search reservation or replay semantics",
     "provider calls or live provider gates",
@@ -90,7 +90,7 @@ def test_idempotency_continuity_index_status_matches_path_kind():
 
         assert row["kind"] == "proposal"
         assert row["runtime_status"] == "syntactic_only"
-        assert row["source_sprint"] == "200"
+        assert row["source_sprint"] == "S19-S21"
 
 
 def test_idempotency_continuity_index_cites_guard_sources():
@@ -116,5 +116,7 @@ def test_idempotency_continuity_index_preserves_closed_gate_boundary():
     for phrase in REQUIRED_BLOCKED_GATE_PHRASES:
         assert phrase in text
     assert "does not authorize" in text
-    assert "does not prove runtime concurrency behavior" in compact
+    assert "do not prove runtime concurrency behavior" in compact
     assert "GraphQL mutations" in text
+    assert "`syntactic_only`: runtime requires a nonblank `Idempotency-Key`" in text
+    assert "`documented_gap`" not in text

@@ -1042,15 +1042,8 @@ def propose_create_appointment(
 def _normalize_proposal_idempotency_key(raw_key: Optional[str], route_label: str) -> str:
     """Shared proposal-only Idempotency-Key syntactic validator.
 
-    All four canonical proposal routes (create, update, status, delete) use this
-    shared helper.  It rejects missing or whitespace-only keys with HTTP 400 and
-    code idempotency_key_required.  Route-specific messages are controlled
-    via the *route_label* parameter.
-
-    This helper deliberately does **not** call the appointment command
-    ledger helpers, create replay-ledger rows, or write appointments.
-    Durable replay enforcement remains owned by the confirmation route
-    family and the appointment command ledger.
+    This deliberately grants no replay or write authority; durable replay
+    remains owned by confirmation routes and the appointment command ledger.
     """
     normalized = (raw_key or "").strip()
     if not normalized:
@@ -1943,11 +1936,11 @@ def propose_bernie_tool_intent(
         )
 
     proposal = propose_update_appointment(
-        appointment_id,
-        AppointmentUpdateProposalIn(duration_minutes=duration_minutes),
-        "internal-bernie-tool",
-        db,
-        current_user,
+        appointment_id=appointment_id,
+        body=AppointmentUpdateProposalIn(duration_minutes=duration_minutes),
+        idempotency_key="internal-bernie-tool",
+        db=db,
+        current_user=current_user,
     )
     confirm_endpoint = None
     confirm_payload = None
@@ -2008,7 +2001,7 @@ def confirm_update_proposal(
     db: Session,
     current_user: User,
     *,
-    raw_idempotency_key: str = '',
+    raw_idempotency_key: str,
     commit: bool = True,
 ):
     """Confirm a backend-prepared Bernie update proposal with signed evidence."""
@@ -2096,8 +2089,8 @@ def confirm_update_proposal(
         )
 
     revalidated = propose_update_appointment(
-        command.appointment_id,
-        AppointmentUpdateProposalIn(
+        appointment_id=command.appointment_id,
+        body=AppointmentUpdateProposalIn(
             patient_id=command.patient_id,
             patient_name_provisional=command.patient_name_provisional,
             practitioner_id=command.practitioner_id,
@@ -2109,9 +2102,9 @@ def confirm_update_proposal(
             reason=command.reason,
             notes=command.notes,
         ),
-        raw_idempotency_key,
-        db,
-        current_user,
+        idempotency_key=raw_idempotency_key,
+        db=db,
+        current_user=current_user,
     )
     if (
         not revalidated.safe
