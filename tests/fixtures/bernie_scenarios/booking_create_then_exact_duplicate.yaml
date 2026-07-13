@@ -18,7 +18,7 @@ initial_state:
 turns:
   - action: interpret
     input:
-      instruction: "Make an appointment for Margaret Thompson with Dr Shera tomorrow after 3 but before 4.30 for 15 minutes"
+      instruction: "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm for 15 minutes"
       context_frames: []
     expect:
       status: 200
@@ -31,7 +31,8 @@ turns:
         "command_candidate.practitioner_id": "{practitioner_id}"
         "normalization.constraint.date_from": "2026-07-14"
         "normalization.constraint.earliest_time": "15:00:00"
-        "normalization.constraint.latest_time": "16:30:00"
+        "normalization.constraint.latest_time": "15:00:00"
+        "normalization.constraint.temporal_relation": exact
 
   - action: supervise
     input:
@@ -63,7 +64,7 @@ turns:
 
   - action: interpret
     input:
-      instruction: "Make an appointment for Margaret Thompson with Dr Shera tomorrow after 3 but before 4.30 for 15 minutes"
+      instruction: "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm for 15 minutes"
       context_frames: []
     expect:
       status: 200
@@ -72,6 +73,7 @@ turns:
       fields:
         result: interpreted
         safe: true
+        "command_candidate.temporal_relation": exact
 
   - action: supervise
     input:

@@ -34,7 +34,7 @@ WEEKDAY_INDEX = {
 
 # Natural language time phrase patterns (no DB, no network).
 # Business-hours assumption: bare hour 1-11 without am/pm -> pm.
-_NAT_TIME_PAT = r"(?:1?[0-9]|2[0-3])(?:[.:][0-5]\d)?(?:\s*(?:am|pm))?"
+_NAT_TIME_PAT = r"(?:[01]?[0-9]|2[0-3])(?:[.:][0-5]\d)?(?:\s*(?:am|pm))?"
 _BETWEEN_TIME_RE = re.compile(
     r"\bbetween\s+(" + _NAT_TIME_PAT + r")\s+and\s+(" + _NAT_TIME_PAT + r")\b",
     re.IGNORECASE,
@@ -48,14 +48,14 @@ _ABOUT_TIME_RE = re.compile(
     re.IGNORECASE,
 )
 _BARE_EXPLICIT_TIME_RE = re.compile(
-    r"\b((?:1?[0-9]|2[0-3])(?:[.:][0-5]\d)?\s*(?:am|pm)|"
-    r"(?:1?[0-9]|2[0-3])[.:][0-5]\d)\b",
+    r"\b((?:[01]?[0-9]|2[0-3])(?:[.:][0-5]\d)?\s*(?:am|pm)|"
+    r"(?:[01]?[0-9]|2[0-3])[.:][0-5]\d)\b",
     re.IGNORECASE,
 )
 _AFTER_TIME_RE = re.compile(r"\bafter\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
 _BEFORE_TIME_RE = re.compile(r"\bbefore\s+(" + _NAT_TIME_PAT + r")\b", re.IGNORECASE)
 _TIME_FRAGMENT_RE = re.compile(
-    r"^(1?[0-9]|2[0-3])(?:[.:]([0-5]\d))?(?:\s*(am|pm))?$",
+    r"^([01]?[0-9]|2[0-3])(?:[.:]([0-5]\d))?(?:\s*(am|pm))?$",
     re.IGNORECASE,
 )
 
@@ -148,14 +148,19 @@ def parse_time_fragment(raw: str) -> str | None:
     m = _TIME_FRAGMENT_RE.match(raw.strip())
     if not m:
         return None
-    hour = int(m.group(1))
+    hour_text = m.group(1)
+    hour = int(hour_text)
     minute = int(m.group(2) or 0)
     meridiem = (m.group(3) or "").lower()
     if meridiem == "pm" and hour < 12:
         hour += 12
     elif meridiem == "am" and hour == 12:
         hour = 0
-    elif not meridiem and 1 <= hour <= 11:
+    elif (
+        not meridiem
+        and 1 <= hour <= 11
+        and not (len(hour_text) == 2 and (":" in raw or "." in raw))
+    ):
         hour += 12
     if hour > 23 or minute > 59:
         return None

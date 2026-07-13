@@ -49,6 +49,13 @@ def test_parse_time_fragment_business_hours():
     assert parse_time_fragment("12am") == "00:00"
 
 
+def test_zero_padded_clock_forms_keep_24_hour_meaning():
+    assert parse_time_fragment("09:00") == "09:00"
+    assert parse_time_fragment("10:00") == "10:00"
+    assert parse_time_fragment("11:00") == "11:00"
+    assert parse_time_fragment("3:45") == "15:45"
+
+
 # ── extract_natural_time_constraints tests (new TemporalExtraction return) ──
 
 
