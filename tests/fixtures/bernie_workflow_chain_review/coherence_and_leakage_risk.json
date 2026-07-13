@@ -1,0 +1,56 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "meta_handoff_truncation",
+      "label": "Adversarial: handoff is meta dispatch but resolves — does context show handoff correctly as terminating the interpretable chain",
+      "steps": [
+        {
+          "step_label": "handoff_request",
+          "utterance": "Handoff to receptionist for manual review.",
+          "expected_verb": "handoff",
+          "expected_dispatch": "route_meta",
+          "expected_frame_kind": "refusal",
+          "expected_resolution": "resolved"
+        }
+      ]
+    },
+    {
+      "chain_id": "empty_utterance_unknown",
+      "label": "Adversarial: empty utterance produces refused_unknown",
+      "steps": [
+        {
+          "step_label": "empty_utterance",
+          "utterance": "",
+          "expected_verb": null,
+          "expected_dispatch": "refuse_unknown_utterance",
+          "expected_frame_kind": "refusal",
+          "expected_resolution": "refused_unknown"
+        }
+      ]
+    },
+    {
+      "chain_id": "adversarial_planned_then_resolved",
+      "label": "Adversarial: planned verb followed by unrelated resolved — clarification is not a refusal so planned does not poison but chain mixes planned and resolved",
+      "steps": [
+        {
+          "step_label": "planned_link_patient",
+          "utterance": "Link patient to the booking record.",
+          "expected_verb": null,
+          "expected_dispatch": "refuse_planned_not_implemented",
+          "expected_frame_kind": "refusal",
+          "expected_resolution": "refused_planned"
+        },
+        {
+          "step_label": "unrelated_slot_search",
+          "utterance": "Find appointment slots for Thursday.",
+          "expected_verb": null,
+          "expected_dispatch": null,
+          "expected_frame_kind": null,
+          "expected_resolution": "refused_planned"
+        }
+      ]
+    }
+  ]
+}
