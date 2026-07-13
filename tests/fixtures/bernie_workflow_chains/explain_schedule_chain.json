@@ -1,0 +1,28 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "explain_schedule_chain",
+      "label": "Schedule explanation: what happened → read_request",
+      "steps": [
+        {
+          "step_label": "explain_inquiry",
+          "utterance": "Explain what happened to the schedule pattern.",
+          "expected_verb": "explain_schedule",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "follow_up",
+          "utterance": "Explain why the schedule pattern changed today.",
+          "expected_verb": "explain_schedule",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        }
+      ]
+    }
+  ]
+}

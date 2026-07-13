@@ -1,0 +1,44 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "booking_ambiguous_patient",
+      "label": "Ambiguous patient: initial book → clarification → slot_search",
+      "steps": [
+        {
+          "step_label": "vague_request",
+          "utterance": "Make a booking this afternoon.",
+          "expected_verb": "create",
+          "expected_dispatch": "route_to_confirm",
+          "expected_frame_kind": "proposal",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "clarify_which_patient",
+          "utterance": "Which patient did you mean before booking?",
+          "expected_verb": null,
+          "expected_dispatch": "request_clarification",
+          "expected_frame_kind": "clarify",
+          "expected_resolution": "clarification_needed"
+        },
+        {
+          "step_label": "patient_details",
+          "utterance": "Look for gaps in the schedule this afternoon.",
+          "expected_verb": "slot_search",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        },
+        {
+          "step_label": "find_slots",
+          "utterance": "Show me free times this afternoon.",
+          "expected_verb": "slot_search",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "resolved"
+        }
+      ]
+    }
+  ]
+}

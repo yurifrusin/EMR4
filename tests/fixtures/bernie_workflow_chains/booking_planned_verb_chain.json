@@ -1,0 +1,36 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "booking_planned_verb_chain",
+      "label": "Mixed check-in phrasing with slot search → planned refusal propagated",
+      "steps": [
+        {
+          "step_label": "check_in_request",
+          "utterance": "Check in the patient at reception.",
+          "expected_verb": "check_in",
+          "expected_dispatch": "refuse_planned_not_implemented",
+          "expected_frame_kind": "refusal",
+          "expected_resolution": "refused_planned"
+        },
+        {
+          "step_label": "subsequent_slot_search",
+          "utterance": "Find an available appointment slot after lunch.",
+          "expected_verb": "slot_search",
+          "expected_dispatch": "route_read_only",
+          "expected_frame_kind": "read_request",
+          "expected_resolution": "refused_planned"
+        },
+        {
+          "step_label": "subsequent_create",
+          "utterance": "Book the available slot.",
+          "expected_verb": "create",
+          "expected_dispatch": "route_to_confirm",
+          "expected_frame_kind": "proposal",
+          "expected_resolution": "refused_planned"
+        }
+      ]
+    }
+  ]
+}

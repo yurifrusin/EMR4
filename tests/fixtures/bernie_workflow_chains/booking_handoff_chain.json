@@ -1,0 +1,28 @@
+{
+  "schema_version": "bernie.workflow_chain_harness.v1",
+  "source": "authored_synthetic",
+  "chains": [
+    {
+      "chain_id": "booking_handoff_chain",
+      "label": "Handoff chain: message request → meta handoff → chain ends",
+      "steps": [
+        {
+          "step_label": "message_request",
+          "utterance": "I need to leave a message for the patient.",
+          "expected_verb": null,
+          "expected_dispatch": "refuse_unknown_utterance",
+          "expected_frame_kind": "refusal",
+          "expected_resolution": "refused_unknown"
+        },
+        {
+          "step_label": "handoff",
+          "utterance": "Hand off to receptionist for manual review.",
+          "expected_verb": "handoff",
+          "expected_dispatch": "route_meta",
+          "expected_frame_kind": "refusal",
+          "expected_resolution": "resolved"
+        }
+      ]
+    }
+  ]
+}
