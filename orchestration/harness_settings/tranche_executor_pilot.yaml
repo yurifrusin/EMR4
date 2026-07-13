@@ -1,7 +1,7 @@
 schema_version: ariadne.tranche_executor_pilot.v1
-status: active_revised_pilot
+status: completed
 pilot_sprints: [S10, S11, S12]
-executed_sprints: [S10]
+executed_sprints: [S10, S11, S12]
 resumed_sprints: [S11, S12]
 revision: conductor_optional_and_sol_authorized_terra_master_integration
 tranche_gate_owner: gpt-sol
@@ -40,3 +40,10 @@ measure:
   - final_correction_commits
   - duplicated_context_events
 terminal_posture: continue_until_tranche_closeout_or_escalation
+result:
+  overall_rating_out_of_10: 7
+  invalid_integrations: 0
+  duplicated_context_events: 0
+  mandatory_conductor_retired_after: S10
+  protected_master_authorization_model_proved: true
+  remaining_priority: executor_and_worker_lifecycle_reliability

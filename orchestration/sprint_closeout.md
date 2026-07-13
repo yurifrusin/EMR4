@@ -15040,3 +15040,16 @@ S12 exposed concurrent PTY attempts targeting one artifact and a false Windows
 owner lock before launch, so a second writer fails closed. Windows liveness now
 uses a native limited process handle and exit-code query. Stale locks are never
 silently stolen; external process-absence evidence is required before cleanup.
+## S10-S12 Tranche Final Closeout
+
+The tranche is integrated and pushed through `0d0b5a5f`. S12 passed 186
+deterministic acceptance tests. Sol authorized exact integration manifests;
+Terra executed protected-master integration without conflict, scope variance,
+invalid integration, or duplicated context.
+
+Final process rating: 7/10. The authority and model mix is retained. Mandatory
+Conductor participation is retired; consultation is optional. The remaining
+weakness is lifecycle reliability, for which this tranche added bounded
+transcripts, multi-signal liveness, tolerant semantic markers, atomic artifact
+ownership, native Windows process checks, and shared master-worktree toolchain
+discovery.

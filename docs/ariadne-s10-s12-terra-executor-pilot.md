@@ -1,6 +1,6 @@
 # Ariadne S10-S12 Terra Executor Pilot
 
-Status: revised after S10; continuing through S11-S12
+Status: completed through S12
 
 Sol remains at the S10 tranche-entry gate and the final S12 acceptance gate.
 GPT 5.6 Terra/high handles routine intra-tranche planning and execution. Terra
@@ -42,3 +42,26 @@ The default economical worker pool is DeepSeek 4 Flash and Gemini 3.5 Flash via
 Antigravity. Selection is capability-ranked per task; Gemini is not restricted
 to UX. DeepSeek 4 Pro is the first economical Conductor consultant when one is
 needed, with Fable and Opus reserved for higher-leverage specialist review.
+
+## Final Assessment
+
+Overall process rating: **7/10**. The revised authority model is worth keeping:
+Sol remained the supervisor and integration authorizer, Terra planned and
+executed routine work, and exact manifests allowed Terra to integrate and push
+protected master without any invalid integration or duplicated-context event.
+Removing the mandatory Conductor made S11 materially faster than S10.
+
+The weak point is lifecycle reliability rather than role selection. S11 needed
+a progress-based DeepCode restart and marker correction. S12 exposed premature
+executor handback, concurrent artifact writers, Windows PID misclassification,
+and shared-toolchain discovery failure. The tranche repaired each structural
+cause with bounded transcripts, liveness evidence, tolerant semantic markers,
+atomic artifact ownership, native Windows process checks, and master-worktree
+toolchain discovery.
+
+The model mix is sound: Sol for supervision and exceptions; Terra for routine
+planning, acceptance, and authorized integration; DeepSeek 4 Flash and Gemini
+3.5 Flash as capability-ranked economical workers. DeepSeek 4 Pro/Fable/Opus
+remain optional consultants. The next tranche should focus on ordinary EMR4
+delivery and treat further lifecycle defects as targeted harness repairs, not a
+reason to add another mandatory approval layer.

@@ -10,10 +10,12 @@ def test_terra_pilot_preserves_protected_master_and_conductor_authority():
     pilot = yaml.safe_load((SETTINGS / "tranche_executor_pilot.yaml").read_text(encoding="utf-8"))
 
     assert pilot["schema_version"] == "ariadne.tranche_executor_pilot.v1"
-    assert pilot["status"] == "active_revised_pilot"
+    assert pilot["status"] == "completed"
     assert pilot["pilot_sprints"] == ["S10", "S11", "S12"]
-    assert pilot["executed_sprints"] == ["S10"]
+    assert pilot["executed_sprints"] == ["S10", "S11", "S12"]
     assert pilot["resumed_sprints"] == ["S11", "S12"]
+    assert pilot["result"]["protected_master_authorization_model_proved"] is True
+    assert pilot["result"]["invalid_integrations"] == 0
     assert pilot["tranche_gate_owner"] == "gpt-sol"
     denied = set(pilot["executor"]["authority"]["may_not"])
     assert "change_sol_tranche_direction" in denied
