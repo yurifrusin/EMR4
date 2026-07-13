@@ -1,7 +1,7 @@
 # Bernie T3 Nondeterministic Shadow Evaluation
 
-Status: T3.1 contract and deterministic scorer implemented; no live-provider
-replay is enabled.
+Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, and T3.3
+default-disabled repeat runner implemented; no live-provider replay is enabled.
 
 ## Purpose
 
@@ -37,10 +37,35 @@ thresholds, and runtime wiring remain out of scope. Later replay must use
 synthetic state and deterministic read-only tools, and every provider adapter
 must normalize into this contract before scoring.
 
+## T3.2 Corpus Projection
+
+`app/services/ai/evals/bernie_shadow_corpus.py` loads only the allowlisted JSON
+shape in `tests/fixtures/bernie_shadow_eval/t1_t2_authored_cases.json`. Each case
+cites a known T1/T2 scenario ID but does not expose that source fixture's diary
+setup or synthetic-but-PHI-shaped names to a model. The projected instructions
+use `synthetic-` aliases and the expectations are explicitly marked `manual`.
+
+The loader rejects unknown fields, generated authorship, unknown source IDs,
+non-synthetic entity aliases, mutation-state fields, unsupported tools,
+duplicate cases, and expected tools absent from the case allowlist. The first
+bounded projection contains four cases covering exact duplicate, overlap,
+roster-unavailable, and expired same-day-window semantics.
+
+## T3.3 Default-Disabled Runner
+
+`app/services/ai/evals/bernie_shadow_runner.py` defines the narrow injected
+adapter protocol used by future provider-specific modules. Disabled mode returns
+without calling the adapter. Enabled test mode runs cases serially, constructs a
+write-disabled envelope for each repeat, and requires adapters to return a
+normalized response plus separate operational metrics.
+
+The aggregate reports exact correctness totals, safe/perfect samples, semantic
+variance by case, latency, token counts, and estimated cost. Operational totals
+remain separate fields and cannot affect semantic scores.
+
 ## Next Slice
 
-T3.2 should build a source-safe loader that projects an explicitly selected
-subset of the T1/T2 authored synthetic corpus into `ShadowCase` values. It
-should reject PHI-shaped fields, generated expectations, mutable diary state,
-and any case whose expected tool is absent from its allowlist. Live model calls
-remain a later, separately reviewed slice.
+T3.4 should add an adapter-boundary review and a default-blocked live-replay
+gate. Only after those pass should DeepSeek and Gemini adapters be implemented
+behind the protocol, with environment/provider availability checks, exact model
+ledger entries, redacted artifacts, bounded repeats, and no write-capable tools.

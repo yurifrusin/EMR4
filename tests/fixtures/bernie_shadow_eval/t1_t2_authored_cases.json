@@ -1,0 +1,62 @@
+{
+  "schema_version": "bernie.shadow_corpus.v1",
+  "source": "authored_synthetic",
+  "cases": [
+    {
+      "id": "exact-existing-booking",
+      "source_scenario_id": "booking_seeded_exact_duplicate",
+      "instruction": "Book synthetic-patient-a tomorrow between 3:00 PM and 4:30 PM.",
+      "expected": {
+        "authorship": "manual",
+        "intent": "create",
+        "entities": {"patient_ref": "synthetic-patient-a"},
+        "date_time": {"day_offset": 1, "earliest_time": "15:00", "latest_time": "16:30"},
+        "requires_clarification": false,
+        "tool_name": "search_available_slots"
+      },
+      "allowed_tools": ["search_available_slots"]
+    },
+    {
+      "id": "overlap-is-not-exact-duplicate",
+      "source_scenario_id": "booking_overlap_not_exact_duplicate",
+      "instruction": "Find a 15 minute appointment for synthetic-patient-a tomorrow between 3:00 PM and 4:30 PM.",
+      "expected": {
+        "authorship": "manual",
+        "intent": "create",
+        "entities": {"patient_ref": "synthetic-patient-a"},
+        "date_time": {"day_offset": 1, "earliest_time": "15:00", "latest_time": "16:30", "duration_minutes": 15},
+        "requires_clarification": false,
+        "tool_name": "search_available_slots"
+      },
+      "allowed_tools": ["search_available_slots"]
+    },
+    {
+      "id": "roster-unavailable-needs-backend-check",
+      "source_scenario_id": "booking_roster_unavailable_distinct_from_no_slots",
+      "instruction": "Find an appointment for synthetic-patient-a with synthetic-practitioner-a next Tuesday at 3:30 PM.",
+      "expected": {
+        "authorship": "manual",
+        "intent": "create",
+        "entities": {"patient_ref": "synthetic-patient-a", "practitioner_ref": "synthetic-practitioner-a"},
+        "date_time": {"time_band": "15:30"},
+        "requires_clarification": false,
+        "tool_name": "search_available_slots"
+      },
+      "allowed_tools": ["search_available_slots"]
+    },
+    {
+      "id": "past-same-day-window-clarifies",
+      "source_scenario_id": "same_day_past_window_clarify",
+      "instruction": "Book synthetic-patient-a today at 10:00 AM.",
+      "expected": {
+        "authorship": "manual",
+        "intent": "create",
+        "entities": {"patient_ref": "synthetic-patient-a"},
+        "date_time": {"day_offset": 0, "earliest_time": "10:00"},
+        "requires_clarification": true,
+        "tool_name": null
+      },
+      "allowed_tools": []
+    }
+  ]
+}

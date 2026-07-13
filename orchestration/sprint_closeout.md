@@ -15158,3 +15158,28 @@ No Conductor or verifier was required because the approved T3 roadmap fixed the
 slice and no worker allocation choice remained. Sprint engine state: continuing
 to T3.2 source-safe T1/T2 corpus projection. Live providers and all writes remain
 closed; no user decision is required.
+
+## T3.2-T3.3 Closeout - Source-Safe Corpus and Repeat Runner
+
+Status: accepted and integrated on 2026-07-13; T3 continues.
+
+- Added a strict JSON loader and four manually authored shadow cases citing
+  known T1/T2 scenario IDs. Model-facing cases contain synthetic aliases and do
+  not expose source diary setup, synthetic patient names, IDs, or persistence
+  expectations.
+- The loader rejects unknown fields, generated authorship, unknown provenance,
+  non-synthetic entity aliases, mutation-state fields, unsupported tools,
+  duplicate cases, and expected tools absent from their allowlist.
+- Added a narrow provider-adapter protocol and default-disabled serial repeat
+  runner. Disabled execution returns without touching the adapter.
+- Aggregate output reports correctness, safety, perfect samples, semantic
+  variance, latency, tokens, and estimated cost without blending operational
+  metrics into correctness.
+- No provider SDK, provider implementation, route, database, persistence,
+  runtime wiring, or write-capable tool was added. The full T3.1-T3.3 focused
+  suite has 41 passing tests.
+
+No Conductor or verifier was required because the roadmap fixed the bounded
+contract slices. Sprint engine state: continuing to T3.4 adapter-boundary review
+and a default-blocked live-replay gate. Cost-incurring provider replay remains a
+meaningful execution boundary; no user decision is required before that gate.
