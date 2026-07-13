@@ -5,7 +5,7 @@
 | Tranche | S19-S21 |
 | Boundary | Appointment proposal commands only |
 | Authority | Syntactic request discipline; no replay or write authority |
-| Status | Approved for bounded implementation |
+| Status | Complete and integrated at `6a35d2f2` |
 
 ## Goal
 
