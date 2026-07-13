@@ -3372,11 +3372,10 @@ html, body {
 }
 
 .bernie-receipt-group {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(4px);
+  background: #ffffff;
   border-radius: 6px;
   padding: 12px;
-  border: 1px dashed rgba(22, 101, 52, 0.2);
+  border: 1px solid #bbd5c4;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -3386,7 +3385,7 @@ html, body {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   color: #14532d;
   margin: 0 0 4px 0;
 }
@@ -3409,8 +3408,14 @@ html, body {
   padding-bottom: 3px;
 }
 
-.bernie-receipt-detail-item strong {
+.bernie-receipt-detail-item dt {
   color: #374151;
+  font-weight: 700;
+}
+
+.bernie-receipt-detail-item dd {
+  margin: 0;
+  text-align: right;
 }
 
 .bernie-receipt-verification-info {
@@ -3422,12 +3427,11 @@ html, body {
   border-radius: 4px;
   padding: 6px;
   margin-top: 6px;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(22, 101, 52, 0.05);
+  text-align: left;
 }
 
 .bernie-simulated-group {
-  background: rgba(248, 250, 252, 0.8);
+  background: #f8fafc;
   border: 1px dashed #cbd5e1;
   border-radius: 6px;
   padding: 12px;
@@ -3440,7 +3444,7 @@ html, body {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   color: #475569;
   margin: 0 0 4px 0;
 }

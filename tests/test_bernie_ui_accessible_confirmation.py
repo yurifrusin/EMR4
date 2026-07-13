@@ -150,8 +150,8 @@ def test_keyboard_activation_submits_confirm_enter(diary_page):
     receipt_group.wait_for(state="visible", timeout=5000)
 
     # Verify that the returned receipt (deliberately different values) is what's displayed
-    patient_detail = diary_page.locator("[data-testid='receipt-patient'] span")
-    practitioner_detail = diary_page.locator("[data-testid='receipt-practitioner'] span")
+    patient_detail = diary_page.locator("[data-testid='receipt-patient'] dd")
+    practitioner_detail = diary_page.locator("[data-testid='receipt-practitioner'] dd")
     
     assert patient_detail.text_content().strip() == "Margaret Thatcher (Different)"
     assert practitioner_detail.text_content().strip() == "Dr Alex Shera (Different)"
@@ -222,12 +222,13 @@ def test_success_status_and_receipt_semantics(diary_page):
 
     confirm_btn.click()
 
-    status_badge = diary_page.locator("[data-testid='bernie-review-status']")
-    status_badge.wait_for(state="visible", timeout=5000)
+    status_message = diary_page.locator("[data-testid='bernie-review-headline']")
+    status_message.wait_for(state="visible", timeout=5000)
 
     # role="status" and aria-live="polite"
-    assert status_badge.get_attribute("role") == "status"
-    assert status_badge.get_attribute("aria-live") == "polite"
+    assert status_message.get_attribute("role") == "status"
+    assert status_message.get_attribute("aria-live") == "polite"
+    assert "Margaret Thatcher (Different)" in status_message.text_content()
 
     receipt_group = diary_page.locator("[data-testid='bernie-receipt-group']")
     assert receipt_group.get_attribute("role") == "group"

@@ -3185,6 +3185,36 @@ function renderBernieStagedBookingPreview(columnBody, col, dayStartMins, interva
   }, 50);
 }
 
+function isAuthoritativeConfirmationReceipt(receipt) {
+  if (!receipt || typeof receipt !== "object") return false;
+  const requiredText = [
+    receipt.appointment_id,
+    receipt.patient_display,
+    receipt.practitioner_display,
+    receipt.appointment_date,
+    receipt.start_time_local,
+    receipt.status,
+    receipt.confirmed_by_display
+  ];
+  const verification = receipt.verification;
+  return (
+    receipt.schema_version === "appointment.confirmation_receipt.v1" &&
+    receipt.outcome === "appointment_created" &&
+    requiredText.every(value => typeof value === "string" && value.trim() !== "") &&
+    Number.isFinite(Number(receipt.duration_minutes)) &&
+    Number(receipt.duration_minutes) > 0 &&
+    verification &&
+    verification.actor_authenticated === true &&
+    verification.practice_scope_verified === true &&
+    verification.proposal_revalidated === true &&
+    verification.conflict_check_passed === true &&
+    verification.idempotency_verified === true &&
+    verification.audit_recorded === true &&
+    typeof verification.signed_evidence_verified === "boolean" &&
+    verification.visual_diary_check_required === false
+  );
+}
+
 function renderBernieConfirmedState(contentEl) {
   contentEl.innerHTML = "";
 
@@ -3195,8 +3225,6 @@ function renderBernieConfirmedState(contentEl) {
   const successBadge = document.createElement("div");
   successBadge.className = "bernie-status-badge confirmed";
   successBadge.setAttribute("data-testid", "bernie-review-status");
-  successBadge.setAttribute("role", "status");
-  successBadge.setAttribute("aria-live", "polite");
   successBadge.textContent = "Confirmed";
   container.appendChild(successBadge);
 
@@ -3206,7 +3234,7 @@ function renderBernieConfirmedState(contentEl) {
 
   const receipt = bernieSession.confirmedBookingReceipt;
 
-  if (receipt) {
+  if (isAuthoritativeConfirmationReceipt(receipt)) {
     const patient = receipt.patient_display || "Patient";
     const date = receipt.appointment_date || "";
     const rawTime = receipt.start_time_local || "";
@@ -3214,6 +3242,8 @@ function renderBernieConfirmedState(contentEl) {
     const practitioner = receipt.practitioner_display || "Practitioner";
 
     headline.textContent = `Booking confirmed successfully for ${patient} on ${date} at ${time} with ${practitioner}.`;
+    headline.setAttribute("role", "status");
+    headline.setAttribute("aria-live", "polite");
     container.appendChild(headline);
 
     // Create the semantic group for the booking confirmation receipt
@@ -3228,16 +3258,20 @@ function renderBernieConfirmedState(contentEl) {
     receiptTitle.textContent = "Booking Confirmation Receipt";
     receiptGroup.appendChild(receiptTitle);
 
-    const detailsList = document.createElement("ul");
+    const detailsList = document.createElement("dl");
     detailsList.className = "bernie-receipt-details-list";
     detailsList.setAttribute("data-testid", "bernie-receipt-details");
 
     const addDetail = (label, val, testid) => {
-      const li = document.createElement("li");
-      li.className = "bernie-receipt-detail-item";
-      if (testid) li.setAttribute("data-testid", testid);
-      li.innerHTML = `<strong>${label}:</strong> <span>${val}</span>`;
-      detailsList.appendChild(li);
+      const item = document.createElement("div");
+      item.className = "bernie-receipt-detail-item";
+      if (testid) item.setAttribute("data-testid", testid);
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const description = document.createElement("dd");
+      description.textContent = String(val ?? "");
+      item.append(term, description);
+      detailsList.appendChild(item);
     };
 
     addDetail("Patient", receipt.patient_display, "receipt-patient");
@@ -3267,14 +3301,11 @@ function renderBernieConfirmedState(contentEl) {
 
     receiptGroup.appendChild(detailsList);
 
-    // Explicit text if visual diary check is not required
-    if (v.visual_diary_check_required === false) {
-      const checkInfo = document.createElement("div");
-      checkInfo.className = "bernie-receipt-verification-info";
-      checkInfo.setAttribute("data-testid", "bernie-receipt-verification-info");
-      checkInfo.textContent = "Deterministic checks passed. No visual diary check is required.";
-      receiptGroup.appendChild(checkInfo);
-    }
+    const checkInfo = document.createElement("div");
+    checkInfo.className = "bernie-receipt-verification-info";
+    checkInfo.setAttribute("data-testid", "bernie-receipt-verification-info");
+    checkInfo.textContent = "Deterministic checks passed. No visual diary check is required.";
+    receiptGroup.appendChild(checkInfo);
 
     container.appendChild(receiptGroup);
 
@@ -3287,7 +3318,8 @@ function renderBernieConfirmedState(contentEl) {
     const time = rawTime.slice(0, 5);
     const practitioner = preview.practitioner_label || "Practitioner";
 
-    headline.textContent = `Booking confirmed successfully for ${patient} on ${date} at ${time} with ${practitioner}. (Simulated)`;
+    successBadge.textContent = "Simulated only";
+    headline.textContent = `Simulated booking preview for ${patient} on ${date} at ${time} with ${practitioner}. No appointment receipt was returned.`;
     container.appendChild(headline);
 
     // Create the semantic group for simulated details
@@ -3302,14 +3334,18 @@ function renderBernieConfirmedState(contentEl) {
     simTitle.textContent = "Simulated Booking (Offline - No Authoritative Receipt)";
     simulatedGroup.appendChild(simTitle);
 
-    const detailsList = document.createElement("ul");
+    const detailsList = document.createElement("dl");
     detailsList.className = "bernie-receipt-details-list";
 
     const addDetail = (label, val) => {
-      const li = document.createElement("li");
-      li.className = "bernie-receipt-detail-item";
-      li.innerHTML = `<strong>${label}:</strong> <span>${val}</span>`;
-      detailsList.appendChild(li);
+      const item = document.createElement("div");
+      item.className = "bernie-receipt-detail-item";
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const description = document.createElement("dd");
+      description.textContent = String(val ?? "");
+      item.append(term, description);
+      detailsList.appendChild(item);
     };
 
     addDetail("Patient", patient);
@@ -5758,9 +5794,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
             if (
               data?.safe === true &&
               data?.autonomy_tier === "confirmed_write" &&
-              receipt &&
-              receipt.schema_version === "appointment.confirmation_receipt.v1" &&
-              receipt.outcome === "appointment_created"
+              isAuthoritativeConfirmationReceipt(receipt)
             ) {
               bernieSession.transitionTo("CONFIRMED");
               bernieSession.confirmedBookingReceipt = receipt;
