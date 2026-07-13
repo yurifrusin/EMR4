@@ -5853,6 +5853,7 @@ def propose_slot_selection_for_create(
 def _build_existing_booking_found_response(
     normalization: SlotSearchCommandResult,
     summary: str,
+    constraint: SlotSearchProposalIn,
     request_reference_date: Optional[date_type] = None,
     identity_evidence: Optional[BernieIdentityEvidence] = None,
     patient_evidence: Optional[BerniePatientEvidence] = None,
@@ -5871,20 +5872,25 @@ def _build_existing_booking_found_response(
         BernieSlotSuggestion(
             kind="widen_time_window",
             summary="The requested time already has a booking. Choose a different time to find available slots.",
+            params={"earliest_time": None, "latest_time": None},
             requires_confirmation=True,
         ),
         BernieSlotSuggestion(
             kind="next_available_day",
             summary="Search the next day for available slots.",
+            params={
+                "date_from": (constraint.date_from + timedelta(days=1)).isoformat(),
+                "date_to": (constraint.date_from + timedelta(days=1)).isoformat(),
+            },
             requires_confirmation=True,
         ),
     ]
     return BernieSupervisedBookingOut(
         result="existing_booking_found",
         request_reference_date=request_reference_date,
-        safe=False,
+        safe=True,
         requires_confirmation=False,
-        autonomy_tier="blocked",
+        autonomy_tier="execute_with_report",
         summary=summary,
         normalization=normalization,
         staff_review=_bernie_staff_review_payload(
@@ -6199,44 +6205,29 @@ def propose_bernie_supervised_booking(
             source_appointment_id=_sb_src_appt_id,
         )
         if _sb_classification.classification == BookingClassification.exact_duplicate:
-            _existing_appt = (
-                db.query(Appointment)
-                .filter(Appointment.id == uuid.UUID(_sb_classification.existing_booking_id))
-                .first()
-            ) if _sb_classification.existing_booking_id else None
-            _practitioner_name = "Unknown"
-            if _existing_appt:
-                _prac = db.query(Practitioner).filter(
-                    Practitioner.id == _existing_appt.practitioner_id,
-                    Practitioner.practice_id == current_user.practice_id,
-                ).first()
-                if _prac:
-                    _practitioner_name = f"{_prac.first_name} {_prac.last_name}".strip()
-            _existing_booking_summary = None
-            if _existing_appt:
-                _existing_appt_type_name: Optional[str] = None
-                if _existing_appt.appointment_type is not None:
-                    _existing_appt_type_name = _existing_appt.appointment_type.name
-                _existing_booking_summary = ExistingBookingSummary(
-                    appointment_date=_existing_appt.appointment_date,
-                    start_time_local=_existing_appt.start_time_local,
-                    practitioner_display=_practitioner_name,
-                    status=_existing_appt.status.value,
-                    appointment_type_name=_existing_appt_type_name,
-                    duration_minutes=_existing_appt.duration_minutes,
-                )
+            _practitioner_name = _sb_classification.practitioner_display or "Unknown"
+            _existing_booking_summary = ExistingBookingSummary(
+                appointment_date=_sb_classification.appointment_date,
+                start_time_local=_sb_classification.start_time_local,
+                practitioner_display=_practitioner_name,
+                status=_sb_classification.status,
+                appointment_type_name=_sb_classification.appointment_type_name,
+                duration_minutes=_sb_classification.duration_minutes,
+            )
+            _existing_time = _sb_classification.start_time_local.strftime("%H:%M")
             _summary = (
                 "This appointment already exists. "
                 f"{_practitioner_name} already has a booking for "
-                f"{constraint.date_from.isoformat()} at this time."
+                f"{constraint.date_from.isoformat()} at {_existing_time}. "
+                "No new booking was created. Would you like another time or day?"
             )
             if body.server_session_id:
                 _append_supervised_outcome(
                     BernieSessionEventType.slot_search_outcome,
-                    BernieSessionState.existing_booking_found,
+                    BernieSessionState.no_slot,
                     {
                         "result": "existing_booking_found",
-                        "safe": False,
+                        "safe": True,
                         "candidate_count": 0,
                         "reason_code": "exact_duplicate",
                         "warning_codes": _issue_codes(normalization.warnings),
@@ -6248,6 +6239,7 @@ def propose_bernie_supervised_booking(
             _response = _build_existing_booking_found_response(
                 normalization=normalization,
                 summary=_summary,
+                constraint=constraint,
                 request_reference_date=request_reference_date,
                 identity_evidence=review_identity_evidence,
                 patient_evidence=review_patient_evidence,

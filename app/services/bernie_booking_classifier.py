@@ -44,13 +44,12 @@ class BookingClassificationEvidence(BaseModel):
 
     classification: BookingClassification
 
-    existing_booking_id: Optional[str] = None
-    """The UUID of the matching existing appointment, as a string.  Present only
-    when classification is exact_duplicate, overlapping_same_patient, or
-    same_day_distinct."""
-
-    practitioner_id: Optional[str] = None
-    """Practitioner UUID string from the first matched existing appointment."""
+    appointment_date: Optional[date] = None
+    start_time_local: Optional[time] = None
+    practitioner_display: Optional[str] = None
+    status: Optional[str] = None
+    appointment_type_name: Optional[str] = None
+    duration_minutes: Optional[int] = None
 
 
 # Terminal-status set matching the existing pattern in bernie_patient_context.py.
@@ -124,11 +123,7 @@ def classify_existing_booking(
                 requested_location_id,
                 requested_duration_minutes,
             ):
-                return BookingClassificationEvidence(
-                    classification=BookingClassification.exact_duplicate,
-                    existing_booking_id=str(appt.id),
-                    practitioner_id=str(appt.practitioner_id),
-                )
+                return _evidence(BookingClassification.exact_duplicate, appt)
 
     # Not exact duplicate.  Check for same-day interval overlap.
     has_time_bounds = requested_earliest_time is not None or requested_latest_time is not None
@@ -142,11 +137,7 @@ def classify_existing_booking(
                 requested_latest_time,
                 requested_duration_minutes,
             ):
-                return BookingClassificationEvidence(
-                    classification=BookingClassification.overlapping_same_patient,
-                    existing_booking_id=str(appt.id),
-                    practitioner_id=str(appt.practitioner_id),
-                )
+                return _evidence(BookingClassification.overlapping_same_patient, appt)
         elif has_time_bounds:
             if _times_overlap(
                 appt.start_time_local,
@@ -155,17 +146,35 @@ def classify_existing_booking(
                 requested_latest_time,
                 requested_duration_minutes,
             ):
-                return BookingClassificationEvidence(
-                    classification=BookingClassification.overlapping_same_patient,
-                    existing_booking_id=str(appt.id),
-                    practitioner_id=str(appt.practitioner_id),
-                )
+                return _evidence(BookingClassification.overlapping_same_patient, appt)
 
     # Any remaining appointment on the same day is same_day_distinct.
+    return _evidence(BookingClassification.same_day_distinct, existing_appointments[0])
+
+
+def _evidence(
+    classification: BookingClassification,
+    appointment: Appointment,
+) -> BookingClassificationEvidence:
+    practitioner_display = "Unknown"
+    if appointment.practitioner is not None:
+        practitioner_display = (
+            f"{appointment.practitioner.first_name} "
+            f"{appointment.practitioner.last_name}"
+        ).strip()
+    appointment_type_name = (
+        appointment.appointment_type.name
+        if appointment.appointment_type is not None
+        else None
+    )
     return BookingClassificationEvidence(
-        classification=BookingClassification.same_day_distinct,
-        existing_booking_id=str(existing_appointments[0].id),
-        practitioner_id=str(existing_appointments[0].practitioner_id),
+        classification=classification,
+        appointment_date=appointment.appointment_date,
+        start_time_local=appointment.start_time_local,
+        practitioner_display=practitioner_display,
+        status=appointment.status.value,
+        appointment_type_name=appointment_type_name,
+        duration_minutes=appointment.duration_minutes,
     )
 
 

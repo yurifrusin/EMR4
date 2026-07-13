@@ -44,7 +44,6 @@ _SS_CLINIC_DAY_EXHAUSTED = "clinic_day_exhausted"
 _SS_PROPOSAL_PREVIEW = "proposal_preview"
 _SS_CANDIDATE_SELECTION = "candidate_selection"
 _SS_CONTEXT_ENRICHMENT = "context_enrichment"
-_SS_EXISTING_BOOKING_FOUND = "existing_booking_found"
 
 
 class BernieBookingOutcomeKind(str, Enum):
@@ -104,7 +103,6 @@ OutcomeFamily = Literal[
     "roster_gap",
     "blocked",
     "terminal",
-    "existing_booking",
 ]
 
 
@@ -135,7 +133,7 @@ _KIND_FAMILY: dict[BernieBookingOutcomeKind, OutcomeFamily] = {
     BernieBookingOutcomeKind.guardrail_blocked: "blocked",
     BernieBookingOutcomeKind.clinic_day_exhausted: "terminal",
     BernieBookingOutcomeKind.handed_off: "terminal",
-    BernieBookingOutcomeKind.existing_booking_found: "existing_booking",
+    BernieBookingOutcomeKind.existing_booking_found: "advisory",
 }
 
 _KIND_REQUIRES_CONFIRMATION: dict[BernieBookingOutcomeKind, bool] = {
@@ -151,7 +149,6 @@ _KIND_CAN_CONFIRM: dict[BernieBookingOutcomeKind, bool] = {
 _KIND_IS_TERMINAL: dict[BernieBookingOutcomeKind, bool] = {
     BernieBookingOutcomeKind.clinic_day_exhausted: True,
     BernieBookingOutcomeKind.handed_off: True,
-    BernieBookingOutcomeKind.existing_booking_found: True,
 }
 
 # Primary session state (as string) each outcome kind corresponds to.
@@ -169,7 +166,7 @@ _KIND_PRIMARY_SESSION_STATE: dict[BernieBookingOutcomeKind, str] = {
     BernieBookingOutcomeKind.advisory_warnings_present: _SS_CONTEXT_ENRICHMENT,
     BernieBookingOutcomeKind.interpreted_ready: _SS_CONTEXT_ENRICHMENT,
     BernieBookingOutcomeKind.handed_off: _SS_HANDED_OFF,
-    BernieBookingOutcomeKind.existing_booking_found: _SS_EXISTING_BOOKING_FOUND,
+    BernieBookingOutcomeKind.existing_booking_found: _SS_NO_SLOT,
 }
 
 #: Maps each outcome kind to the FULL set of valid session-state STRINGS a
@@ -211,7 +208,7 @@ OUTCOME_SESSION_STATE: dict[BernieBookingOutcomeKind, frozenset[str]] = {
         _SS_HANDED_OFF,
     }),
     BernieBookingOutcomeKind.existing_booking_found: frozenset({
-        _SS_EXISTING_BOOKING_FOUND,
+        _SS_NO_SLOT,
     }),
 }
 

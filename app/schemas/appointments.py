@@ -1185,7 +1185,6 @@ BernieSessionStateValue = Literal[
     "no_slot",
     "clinic_day_exhausted",
     "handed_off",
-    "existing_booking_found",
 ]
 
 BernieSessionEventTypeValue = Literal[

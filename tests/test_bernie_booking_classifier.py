@@ -97,7 +97,7 @@ def test_no_existing_appointments_returns_none(db, practice, patient, practition
         db, practice.id, patient.id, CLASS_DATE, practitioner.id,
     )
     assert ev.classification == BookingClassification.none
-    assert ev.existing_booking_id is None
+    assert ev.appointment_date is None
 
 
 def test_no_appointments_on_requested_date_returns_none(db, practice, patient, practitioner):
@@ -214,7 +214,7 @@ def test_source_exclusion_other_appointment_still_detected(db, practice, patient
         source_appointment_id=appt_source.id,
     )
     assert ev.classification == BookingClassification.exact_duplicate
-    assert ev.existing_booking_id == str(appt_other.id)
+    assert ev.start_time_local == time(10, 0)
 
 
 # ─── Missing temporal evidence cannot claim exact duplicate ──────────────────
@@ -249,8 +249,9 @@ def test_exact_duplicate_both_bounds(db, practice, patient, practitioner):
         requested_latest_time=time(10, 0),
     )
     assert ev.classification == BookingClassification.exact_duplicate
-    assert ev.existing_booking_id is not None
-    assert ev.practitioner_id is not None
+    assert ev.appointment_date == CLASS_DATE
+    assert ev.start_time_local == time(9, 30)
+    assert ev.practitioner_display
 
 
 def test_exact_duplicate_start_equal_earliest(db, practice, patient, practitioner):
@@ -491,8 +492,11 @@ def test_exact_duplicate_route_response(
     assert response.status_code == 200
     data = response.json()
     assert data["result"] == "existing_booking_found"
-    assert data["safe"] is False
+    assert data["safe"] is True
     assert data["requires_confirmation"] is False
+    assert data["outcome"]["family"] == "advisory"
+    assert data["outcome"]["session_state"] == "no_slot"
+    assert data["outcome"]["is_terminal"] is False
     # No candidates, no search proposal, no selection proposal
     assert data.get("search_proposal") is None
     assert data.get("selection_proposal") is None
@@ -505,10 +509,21 @@ def test_exact_duplicate_route_response(
     suggestion_kinds = {s["kind"] for s in data["suggestions"]}
     assert "widen_time_window" in suggestion_kinds
     assert "next_available_day" in suggestion_kinds
+    suggestion_by_kind = {s["kind"]: s for s in data["suggestions"]}
+    assert suggestion_by_kind["widen_time_window"]["params"] == {
+        "earliest_time": None,
+        "latest_time": None,
+    }
+    assert suggestion_by_kind["next_available_day"]["params"] == {
+        "date_from": "2026-07-16",
+        "date_to": "2026-07-16",
+    }
     # Has existing_booking summary
     assert data.get("existing_booking") is not None
     assert data["existing_booking"]["appointment_date"] == CLASS_DATE.isoformat()
     assert data["existing_booking"]["status"] == "Booked"
+    assert data["existing_booking"]["start_time_local"] == "10:00:00"
+    assert "No new booking was created" in data["summary"]
 
 
 def test_exact_duplicate_no_write(
