@@ -2,9 +2,12 @@
 
 Status: active EMR4 pilot from 2026-07-13.
 
-Sol remains the protected supervisor and integration authority. Routine staging
-execution prefers DeepSeek V4 Pro; bounded implementation, tests, review, and
-handover work prefer DeepSeek V4 Flash. Gemini 3.5 Flash through Antigravity
+Sol remains the protected supervisor, routine sprint planner, and integration
+authority. DeepSeek V4 Pro is reserved for compact high-leverage consultation
+at architecture/programme boundaries, material allocation complexity, or
+repeated failure; it is not the default routine coordinator. Bounded
+implementation, tests, review, and handover work prefer DeepSeek V4 Flash.
+Gemini 3.5 Flash through Antigravity
 remains an economical peer worker, especially for independent cross-checks,
 adversarial review, and separable UI or test surfaces. Workers are allocated
 only where there is a distinct bounded surface; neither provider has a mandatory

@@ -108,26 +108,19 @@ and run the risk-class verification gate. Low-risk docs/tests/harness recovery
 uses deterministic tests plus diff review; runtime/security/database/deployment/
 release recovery also requires independent verification. See
 `docs/ariadne-orchestrator-recovery-lease.md`.
-Conductor allocation order is now explicit: DeepSeek 4 Pro/high through Deep
-Code for routine sprint boundaries; Claude Fable then Opus for escalation at
-programme boundaries, architecture disputes, material product policy, or
-repeated sprint failure; then a distinct spawned GPT Sol subagent. No Conductor
-has integration authority.
-The protected GPT Sol orchestrator session cannot masquerade as that fallback.
-Direction collaboration is optional and bounded. GPT Sol may propose or defend
-a sprint direction but cannot define the final sprint or allocate workers.
-The selected Conductor may accept/counter, GPT Sol may make at most one
-rejoinder, and the Conductor then has final say. Agreement cuts the exchange
-short; obvious work may skip it.
-Every final plan records the dialogue disposition for deterministic review. See
-`docs/ariadne-direction-collaboration.md`.
-Operating Model V2 keeps governance at sprint boundaries and execution inside
-the sprint. The selected Conductor defines and allocates each next sprint; Sol then waits,
-retries unchanged lanes, repairs transport, runs tests, and integrates without
-another planning cycle. The Conductor re-enters only for a material scope, assignment,
-ownership, or acceptance change, or for the next sprint. Deterministic checks
-always run; independent LLM verification is risk-triggered. See
-`docs/ariadne-operating-model-v2.md` and
+Yuri's 2026-07-14 routine-planning decision supersedes the older default
+Conductor cycle: protected GPT Sol directly plans and allocates ordinary bounded
+sprints. DeepSeek 4 Pro/high through Claude Code bare mode is now an optional
+compact consultant only for architecture/programme boundaries, material
+allocation complexity, or repeated failure where the extra round trip has
+clear leverage. DeepSeek Flash remains the preferred bounded implementation
+and test worker; Gemini 3.5 Flash through the Antigravity CLI remains the
+economical peer worker for independent generation, adversarial review, and
+separable implementation/test surfaces. Fable/Opus remain availability-gated
+escalation options. No external Conductor has integration authority. Direction collaboration remains
+optional and bounded when Sol explicitly selects it; independent LLM
+verification stays risk-triggered. See `docs/ariadne-operating-model-v2.md`,
+`docs/ariadne-direction-collaboration.md`, and
 `docs/ariadne-autonomous-continuation.md`.
 Cost controls are retained but inactive for the current subscription profile.
 Estimated dollar cost is advisory only, and the Claude launcher rejects

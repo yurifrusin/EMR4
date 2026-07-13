@@ -1,5 +1,15 @@
 # Ariadne Operating Model V2
 
+Status: compatibility narrative amended by Operating Model V3 on 2026-07-14.
+The machine-readable authority is
+`orchestration/harness_settings/operating_model.yaml`.
+
+Routine bounded sprints are now planned and allocated directly by the protected
+Sol orchestrator. DeepSeek Pro is an optional compact consultant when a genuine
+architecture, programme, material-allocation, or repeated-failure question has
+clear leverage. This change avoids duplicating a large coordinator plan and a
+second Sol acceptance pass merely to allocate ordinary implementation lanes.
+
 The harness exists to prevent orchestrator drift, especially the tendency to
 run successive sprints without deliberately allocating work to available
 agents. It does not exist to supervise every command with another planning
@@ -7,15 +17,14 @@ cycle.
 
 ## Sprint Boundary
 
-At the end of a sprint, executive planning authority passes to the Conductor.
-The Conductor defines the next sprint, divides it into work packages, and
-allocates available workers. The Orchestrator supplies product and codebase
-evidence, reviews the proposal for executability and safety, and may challenge
-it once. Agreement ends discussion. The Conductor publishes the final plan;
-the Orchestrator then resumes executive authority for execution and integration.
+At the end of an ordinary bounded sprint, the protected Sol orchestrator defines
+the next sprint, divides it into work packages, and allocates available workers.
+It may select an independent Conductor consultation when a configured leverage
+trigger applies. In that selected mode, the Conductor publishes the consulted
+plan and Sol retains protected integration authority.
 
-This reciprocal review lets two capable models check direction without making
-them co-owners of allocation or master.
+Optional reciprocal review lets two capable models check difficult direction
+without making them co-owners of protected master.
 
 ## Within A Sprint
 

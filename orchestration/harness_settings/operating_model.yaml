@@ -3,11 +3,18 @@ purpose: prevent_orchestrator_drift_without_bureaucratizing_execution
 sprint_boundary:
   orchestrator:
     exclusive_authority: [select_planning_mode, set_tranche_direction, authorize_protected_master_integration]
-    planning_modes: [routine_delegated_executor, independent_conductor_consultation]
-    default_planning_mode: routine_delegated_executor
+    planning_modes: [sol_direct_routine, routine_delegated_executor, independent_conductor_consultation]
+    default_planning_mode: sol_direct_routine
+  sol_direct_routine:
+    resource_id: openai-primary-orchestrator
+    may: [plan_bounded_sprint, allocate_configured_workers, dispatch_workers, run_acceptance, integrate_staging, authorize_and_integrate_protected_master]
+    evidence_posture: compact_contract_or_plan_plus_deterministic_checks
+    use_when: [ordinary_bounded_sprint, unambiguous_direction, no_material_authority_change]
+    deepseek_pro_consultation: optional_compact_challenge_only
   routine_delegated_executor:
     preferred_resource: deepseek-pro-routine-coordinator
     fallback_resource: openai-terra-tranche-executor
+    use_when: [explicit_user_request, material_parallel_allocation_complexity, protected_orchestrator_context_relief_with_clear_leverage]
     may: [plan_bounded_sprint, allocate_configured_workers, coordinate_and_accept_on_staging]
     may_not: [change_tranche_direction, expand_authority, self_authorize_protected_master_integration]
     protected_master_execution:
@@ -84,7 +91,8 @@ integration_checkpoints:
   executor_may_push_master_without_authorization: false
 economical_execution:
   supervisor: openai-primary-orchestrator
-  preferred_routine_coordinator: deepseek-pro-routine-coordinator
+  preferred_routine_planner: openai-primary-orchestrator
+  deepseek_pro_planning_role: compact_high_leverage_consultant_not_default_coordinator
   preferred_coding_worker: deepseek-flash-workers
   preferred_workers: [deepseek-flash-workers, antigravity-gemini-flash-3-5-worker]
   worker_allocation_rule: allocate_only_distinct_bounded_surfaces; no_model_quota_is_mandatory

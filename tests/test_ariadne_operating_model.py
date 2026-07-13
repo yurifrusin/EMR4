@@ -13,8 +13,11 @@ def load(name: str) -> dict:
 def test_orchestrator_selects_planning_mode_and_protects_master() -> None:
     model = load("operating_model.yaml")
     boundary = model["sprint_boundary"]
-    assert boundary["orchestrator"]["default_planning_mode"] == "routine_delegated_executor"
+    assert boundary["orchestrator"]["default_planning_mode"] == "sol_direct_routine"
     assert "authorize_protected_master_integration" in boundary["orchestrator"]["exclusive_authority"]
+    direct = boundary["sol_direct_routine"]
+    assert direct["resource_id"] == "openai-primary-orchestrator"
+    assert direct["deepseek_pro_consultation"] == "optional_compact_challenge_only"
     executor = boundary["routine_delegated_executor"]
     assert "self_authorize_protected_master_integration" in executor["may_not"]
     assert executor["protected_master_execution"]["allowed_when"] == "orchestrator_issued_exact_integration_manifest"

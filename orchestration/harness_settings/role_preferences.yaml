@@ -3,7 +3,7 @@ roles:
   - role: conductor
     required: false
     preferences: [deepseek-pro-conductor-fallback, claude-fable-conductor, claude-opus-conductor, gpt-sol-conductor-fallback]
-    preference_rationale: Sol decides whether independent Conductor consultation is warranted. DeepSeek 4 Pro is the economical first consultant; Fable and Opus are reserved for programme boundaries, architecture disputes, material product policy, or repeated sprint failure. Routine bounded sprints do not require a Conductor.
+    preference_rationale: Sol directly plans ordinary bounded sprints. DeepSeek 4 Pro is the economical first compact consultant only when architecture, programme direction, allocation complexity, or repeated failure creates clear leverage; Fable and Opus remain escalation options when available. Routine bounded sprints do not require a Conductor.
     review_by: 2026-08-11
   - role: verifier
     required: false

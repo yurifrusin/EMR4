@@ -123,8 +123,9 @@ def test_economical_pool_keeps_gemini_as_a_peer_worker():
     assert economical["worker_allocation_rule"].startswith(
         "allocate_only_distinct_bounded_surfaces"
     )
-    assert economical["preferred_routine_coordinator"] == (
-        "deepseek-pro-routine-coordinator"
+    assert economical["preferred_routine_planner"] == "openai-primary-orchestrator"
+    assert economical["deepseek_pro_planning_role"] == (
+        "compact_high_leverage_consultant_not_default_coordinator"
     )
     assert economical["preferred_coding_worker"] == "deepseek-flash-workers"
 
@@ -137,7 +138,11 @@ def test_deepseek_pro_cost_calibration_is_provisional_and_model_specific():
         / "deepseek_cost_calibration.yaml"
     )
     payload = yaml.safe_load(calibration_path.read_text(encoding="utf-8"))
-    calibration = payload["calibrations"][0]
+    calibration = next(
+        item
+        for item in payload["calibrations"]
+        if item["calibration_id"] == "deepseek-v4-pro-claude-bare-s16-s18"
+    )
 
     assert calibration["adapter_estimate_usd"] == pytest.approx(2.905994)
     assert calibration["actual_from_adapter_multiplier"]["midpoint"] == pytest.approx(

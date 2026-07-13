@@ -351,6 +351,13 @@ Read these before acting on remembered process details.
   were already active on DeepCode when Yuri corrected this protocol were
   allowed to finish; the transport switch takes effect at the next sprint
   boundary.
+- Routine-planning economy rule (2026-07-14, explicit Yuri decision): the
+  protected Sol orchestrator directly plans and allocates ordinary bounded
+  sprints. Do not invoke DeepSeek Pro as a default routine coordinator merely
+  to reproduce a plan Sol must then reread and revise. Use DeepSeek Pro for a
+  compact high-leverage challenge only when architecture, programme direction,
+  material allocation complexity, or repeated failure justifies the round
+  trip. DeepSeek Flash remains the preferred bounded implementation/test lane.
 - Computer Use restart rule: after a Windows/Codex restart, Computer Use may be
   available through the skill's JS bootstrap path even when no standalone
   desktop-control tool appears in tool discovery. Ariadne should read/use the
