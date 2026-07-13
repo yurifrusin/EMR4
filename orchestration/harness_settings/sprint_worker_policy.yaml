@@ -65,3 +65,16 @@ independent_verifier:
     - ambiguous_mandate_or_scope_boundary
     - resource_limit_exception
     - authority_or_ownership_drift_signal
+test_execution:
+  shared_postgresql_schema:
+    concurrency: serial
+    applies_to: all_pytest_processes_using_repository_conftest
+    preflight:
+      - audit_existing_workspace_pytest_processes
+      - classify_current_or_stale_before_schema_owning_run
+      - retire_only_verified_stale_processes
+    rationale: concurrent_create_all_drop_all_or_truncate_can_corrupt_another_test_process
+  parallel_allowed_for:
+    - import_free_static_checks
+    - filesystem_only_checks
+    - independent_browser_checks_that_do_not_load_repository_conftest

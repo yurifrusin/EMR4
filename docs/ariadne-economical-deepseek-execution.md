@@ -76,3 +76,23 @@ and Opus remain declared capabilities for portability and any final provider-
 permitted access, but allocation requires a live availability probe and must
 not assume subscription access. Claude Code used as a DeepSeek shell is a
 separate API-key path and remains available independently of that subscription.
+
+## Shared Test Database Serialization
+
+T2.3 aggregate verification showed that repository pytest processes cannot be
+parallelized merely because their requested test files are disjoint. The shared
+`tests/conftest.py` owns PostgreSQL schema creation, truncation, and teardown;
+concurrent processes can race on enum creation or drop tables while another
+process is running.
+
+The harness must therefore serialize all pytest commands that load the shared
+repository conftest. Before a schema-owning acceptance run, inspect existing
+workspace pytest processes and classify them as current or stale. A process may
+be retired only after its command, start time, and absence from an active worker
+receipt establish that it is stale. Import-free static checks, filesystem-only
+checks, and truly independent browser checks that do not load the repository
+conftest may still run in parallel.
+
+This is an execution-order constraint, not a new approval gate. The orchestrator
+should recover automatically, rerun one clean aggregate process, and report the
+distinction between harness collision and product failure.

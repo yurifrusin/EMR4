@@ -15112,3 +15112,26 @@ Status: accepted and integrated on 2026-07-13; T2 continues.
 No Conductor or verifier was used because the approved roadmap fixed the
 direction and worker ownership was disjoint. Sprint engine state: continuing to
 T2.3 DB-backed route combinations. No user decision is required.
+
+## T2.3 Closeout - DB-Backed Route Matrix and T2 Exit
+
+Status: accepted; T2 supervised-booking scope complete on 2026-07-13.
+
+- DeepSeek Flash submitted 17 DB-backed slot-search scenarios across status,
+  location, duration, bounds, roster, and break interactions.
+- Sol corrected unconditional break setup and replaced a cleanup-masked
+  aggregate no-write check with immediate per-scenario appointment/audit deltas.
+- Aggregate browser testing exposed an async focus timer that could override
+  later receptionist navigation. Result focus is now synchronous, redundant
+  loading-state autofocus is disabled, and focus-event assertions avoid freezing
+  focus after the transition.
+- Nine stale pytest processes from 4 July were retired. Parallel PostgreSQL
+  suites had raced on schema create/drop; shared-conftest pytest execution is now
+  explicitly serial in harness settings.
+- The final single-process T2 acceptance collected 186 nodes and passed with one
+  expected xfail and one expected skip; JavaScript syntax and whitespace checks
+  also pass.
+
+Sprint engine state: continuing to T3 Nondeterministic Bernie Shadow
+Evaluation. All writes remain disabled for live-model evaluation and no user
+decision is required for contract/test scaffolding.

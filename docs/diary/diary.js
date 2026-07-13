@@ -1768,7 +1768,7 @@ function renderBernieToolIntentReview(envelope) {
   if (!contentEl) return;
   contentEl.innerHTML = "";
   if (isBerniePilotActive) {
-    renderBernieInstructionInput(contentEl);
+    renderBernieInstructionInput(contentEl, { autoFocus: false });
   }
 
   const statusBadge = document.createElement("div");
@@ -5261,7 +5261,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
 
   // Move keyboard focus to the completed async result instead of leaving it
   // on a submit control that was removed during rendering.
-  setTimeout(() => statusBadge.focus(), 75);
+  statusBadge.focus();
 
   // 2. Headline
   const headline = document.createElement("h3");
@@ -6166,7 +6166,7 @@ async function checkBerniePilotEligibility() {
   }
 }
 
-function renderBernieInstructionInput(contentEl) {
+function renderBernieInstructionInput(contentEl, { autoFocus = true } = {}) {
   if (!contentEl) return;
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -6320,7 +6320,7 @@ function renderBernieInstructionInput(contentEl) {
   textarea.value = bernieInstructionText || "";
   if (!contextReady) {
     textarea.disabled = true;
-  } else {
+  } else if (autoFocus) {
     setTimeout(() => {
       const panel = document.getElementById("bernie-review-panel");
       if (panel && !panel.classList.contains("hidden")) {
@@ -6669,7 +6669,7 @@ async function loadBernieLiveReview() {
   if (bernieSession.state === "CANDIDATE_SELECTION" && bernieSession.candidateSnapshot) {
     if (contentEl) {
       contentEl.innerHTML = "";
-      renderBernieInstructionInput(contentEl);
+      renderBernieInstructionInput(contentEl, { autoFocus: false });
       if (bernieSession.interpretEnvelope) {
         renderBernieInterpretPreview(contentEl, bernieSession.interpretEnvelope);
       }
@@ -6682,7 +6682,7 @@ async function loadBernieLiveReview() {
   if (bernieSession.state === "SLOT_PREVIEW" && bernieSession.stagedBookingPreview && bernieSession.latestReviewPayload) {
     if (contentEl) {
       contentEl.innerHTML = "";
-      renderBernieInstructionInput(contentEl);
+      renderBernieInstructionInput(contentEl, { autoFocus: false });
       if (bernieSession.interpretEnvelope) {
         renderBernieInterpretPreview(contentEl, bernieSession.interpretEnvelope);
       }
@@ -6745,7 +6745,7 @@ async function loadBernieLiveReview() {
   if (contentEl) {
     // Clear and keep instruction form at the top, then show loading underneath
     contentEl.innerHTML = "";
-    renderBernieInstructionInput(contentEl);
+    renderBernieInstructionInput(contentEl, { autoFocus: false });
     const loader = document.createElement("div");
     loader.className = "bernie-loading";
     loader.textContent = "Asking Bernie...";

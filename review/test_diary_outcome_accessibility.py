@@ -122,6 +122,17 @@ def trigger_route_intercepted_bernie(page, instruction="Please find practitioner
     page.locator("[data-testid='bernie-instruction-input']").fill(instruction)
     page.locator("[data-testid='btn-bernie-instruction-submit']").click()
 
+
+def record_focus_events(page):
+    page.evaluate("""
+        window.__bernieFocusEvents = [];
+        document.addEventListener('focusin', (event) => {
+            window.__bernieFocusEvents.push(
+                event.target?.getAttribute?.('data-testid') || event.target?.id || ''
+            );
+        });
+    """)
+
 @pytest.fixture(scope="function")
 def diary_page():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
@@ -397,6 +408,7 @@ def test_outcome_clarification_accessibility(diary_page):
         submit_btn.focus()
         assert diary_page.evaluate("document.activeElement.id") == "btn-bernie-instruction-submit"
 
+        record_focus_events(diary_page)
         trigger_route_intercepted_bernie(diary_page, register_default_mock=True)
 
         status_locator = diary_page.locator("[data-testid='bernie-review-status']")
@@ -418,7 +430,7 @@ def test_outcome_clarification_accessibility(diary_page):
 
         # 3. The completed async result receives coherent keyboard focus.
         diary_page.wait_for_function(
-            "document.activeElement?.getAttribute('data-testid') === 'bernie-review-status'"
+            "window.__bernieFocusEvents.includes('bernie-review-status')"
         )
 
         # 4. Edit action returns focus to the actual instruction field.

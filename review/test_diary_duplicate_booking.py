@@ -362,6 +362,10 @@ def test_duplicate_booking_receptionist_flow(diary_page):
     assert suggestion_2.count() == 1
 
     # Verify keyboard activation on suggestion 2
+    diary_page.wait_for_timeout(100)
+    suggestion_2 = diary_page.get_by_role(
+        "button", name="Search the next day for available slots."
+    )
     suggestion_2.focus()
     assert suggestion_2.evaluate("el => el === document.activeElement")
     diary_page.keyboard.press("Enter")

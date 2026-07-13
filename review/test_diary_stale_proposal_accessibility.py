@@ -117,6 +117,17 @@ def trigger_route_intercepted_bernie(page, instruction="Please find practitioner
     page.locator("[data-testid='bernie-instruction-input']").fill(instruction)
     page.locator("[data-testid='btn-bernie-instruction-submit']").click()
 
+
+def record_focus_events(page):
+    page.evaluate("""
+        window.__bernieFocusEvents = [];
+        document.addEventListener('focusin', (event) => {
+            window.__bernieFocusEvents.push(
+                event.target?.getAttribute?.('data-testid') || event.target?.id || ''
+            );
+        });
+    """)
+
 @pytest.fixture(scope="function")
 def diary_page():
     with harness.serve_dir(DOCS_DIR) as base_url, sync_playwright() as pw:
@@ -193,6 +204,7 @@ def test_outcome_stale_accessibility(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
+        record_focus_events(diary_page)
         trigger_route_intercepted_bernie(diary_page, register_default_mock=True)
 
         status_locator = diary_page.locator("[data-testid='bernie-review-status']")
@@ -216,7 +228,7 @@ def test_outcome_stale_accessibility(diary_page):
         assert status_locator.get_attribute("role") == "status"
         assert status_locator.get_attribute("aria-live") == "polite"
         diary_page.wait_for_function(
-            "document.activeElement?.getAttribute('data-testid') === 'bernie-review-status'"
+            "window.__bernieFocusEvents.includes('bernie-review-status')"
         )
 
         # C. Reachability/activation of next actions via keyboard
@@ -295,6 +307,7 @@ def test_outcome_failed_accessibility(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
+        record_focus_events(diary_page)
         trigger_route_intercepted_bernie(diary_page, register_default_mock=True)
 
         status_locator = diary_page.locator("[data-testid='bernie-review-status']")
@@ -314,7 +327,7 @@ def test_outcome_failed_accessibility(diary_page):
         assert status_locator.get_attribute("role") == "status"
         assert status_locator.get_attribute("aria-live") == "polite"
         diary_page.wait_for_function(
-            "document.activeElement?.getAttribute('data-testid') === 'bernie-review-status'"
+            "window.__bernieFocusEvents.includes('bernie-review-status')"
         )
 
         # C. Reachability/activation of next actions via keyboard
@@ -389,6 +402,7 @@ def test_outcome_pending_accessibility(diary_page):
         diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_review=live&bernie_dev_review=true&bernie_confirm_adapter=true&practitioner_id=prac-1")
         diary_page.wait_for_selector("[data-testid='bernie-review-panel']", state="visible", timeout=5000)
 
+        record_focus_events(diary_page)
         trigger_route_intercepted_bernie(diary_page, register_default_mock=True)
 
         status_locator = diary_page.locator("[data-testid='bernie-review-status']")
@@ -408,7 +422,7 @@ def test_outcome_pending_accessibility(diary_page):
         assert status_locator.get_attribute("role") == "status"
         assert status_locator.get_attribute("aria-live") == "polite"
         diary_page.wait_for_function(
-            "document.activeElement?.getAttribute('data-testid') === 'bernie-review-status'"
+            "window.__bernieFocusEvents.includes('bernie-review-status')"
         )
 
         # C. Keyboard reachability - no retry/edit actions should be present

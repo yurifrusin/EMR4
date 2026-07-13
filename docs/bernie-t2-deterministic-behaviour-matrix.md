@@ -1,6 +1,6 @@
 # T2 Deterministic Bernie Behaviour Matrix
 
-Status: T2.2 complete; T2 continues
+Status: complete through T2.3
 
 Date: 2026-07-13
 
@@ -145,3 +145,28 @@ appointment status, same/other location conflicts, roster presence/absence,
 break warnings, and normalized time bounds in a compact DB-backed table. Keep
 stale-confirm revalidation as an authored stateful golden case and prove every
 search/proposal combination remains non-mutating.
+
+## T2.3 Result
+
+Seventeen isolated DB-backed scenarios now exercise the authenticated
+slot-search proposal route across active and terminal statuses, same/other
+locations, 15/30-minute blocking, earliest/latest bounds, roster absence, and
+break warnings. Every scenario records appointment and audit-row counts after
+fixture setup and immediately after its request, so fixture cleanup cannot hide
+a product write. Only the break scenario creates a diary break.
+
+Central acceptance found and corrected two candidate-test defects: the original
+fixture injected a break into every scenario, and a separate aggregate
+no-write test deleted setup rows before final counting, which could mask a
+hypothetical route write. No EMR4 route defect was found.
+
+The final T2 aggregate collects 186 test nodes and passes with one expected
+xfail and one expected skip. It includes 746 generated classifier executions,
+17 DB-backed route combinations, the stateful T1 scenario corpus, evidence and
+integrity guards, and focused E3 browser/accessibility outcomes. Async result
+focus is now synchronous and later user navigation is never overridden by a
+timer; tests record the focus event without requiring focus to remain frozen.
+
+T2 is complete for the implemented supervised-booking scope. New diary verbs
+must join the same E0-E3 matrix as they are promoted. The next roadmap tranche
+is T3 nondeterministic Bernie shadow evaluation with all writes disabled.
