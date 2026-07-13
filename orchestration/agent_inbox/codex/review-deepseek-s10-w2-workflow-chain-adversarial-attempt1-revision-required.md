@@ -9,15 +9,7 @@ W1 staging commit: `71f3b0d7`
 
 ## Candidate SHA
 
-`91a58d09b0dae2dcad1d354456e0270e8a47e584` (candidate commit on branch `deepcode/s10-w2-workflow-chain-adversarial-v2`; not pushed or integrated)
-
-## Provenance Correction Note
-
-This artifact is an artifact-only correction replacing the earlier incorrect archived artifact at
-`orchestration/agent_inbox/codex/review-deepseek-s10-w2-workflow-chain-adversarial-attempt1-revision-required.md`,
-which reported candidate SHA `b0f1a2c3`. The actual candidate commit is `91a58d09b0dae2dcad1d354456e0270e8a47e584`.
-No code, tests, fixtures, documentation, protected files, or Git history were edited.
-All review findings, decisions, and verification results are preserved from the original review.
+`b0f1a2c3` (candidate commit; not pushed or integrated)
 
 ## Boundary Confirmation
 
@@ -49,55 +41,55 @@ No W1-owned files (`tests/workflow_chain/`, `tests/fixtures/bernie_workflow_chai
 ## Verification Results
 
 ### 1. Focused W2 Tests (23 tests)
-```
-C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest tests/test_bernie_workflow_chain_adversarial.py -q
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_bernie_workflow_chain_adversarial.py -q
 ```
 Result: **23/23 passed**
 
 ### 2. W1 + W2 Combined Suite (82 tests)
-```
-C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest tests/test_bernie_workflow_chain.py tests/test_bernie_workflow_chain_report.py tests/test_bernie_workflow_chain_adversarial.py -q
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_bernie_workflow_chain.py tests/test_bernie_workflow_chain_report.py tests/test_bernie_workflow_chain_adversarial.py -q
 ```
 Result: **82/82 passed**
 
 ### 3. Existing Interpretation Harness Regression (218 tests)
-```
-C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_harness.py tests/test_bernie_interpretation_harness_report.py -q
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_harness.py tests/test_bernie_interpretation_harness_report.py -q
 ```
 Result: **218/218 passed**
 
 ### 4. Runtime Isolation Baseline Comparison
-```
-C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_runtime_isolation.py -q
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_runtime_isolation.py -q
 ```
 Result: **1 failure** (documented baseline from `app/config.py` referencing `bernie-interpretation-harness-runtime-gate`). **Zero new failures.** No changes to the guard test.
 
 ### 5. Report CLI Execution
-```
-C:\Users\sarashera\emr4\.venv\Scripts\python.exe scripts/bernie_workflow_chain_report.py
+```powershell
+.venv\Scripts\python.exe scripts/bernie_workflow_chain_report.py
 ```
 Result: Aggregate-only JSON emitted. 8 chains, 26 steps, all boundaries `prohibited`, no utterance text or payload identifiers. Safety assertion passes.
 
 ### 6. Readiness Check
-```
-C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_readiness_check.py -q
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_bernie_interpretation_readiness_check.py -q
 ```
 Result: **9/9 passed** (unchanged blocked baseline)
 
 ### 7. Compile Check
-```
-C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m py_compile tests/workflow_chain/harness.py scripts/bernie_workflow_chain_report.py
+```powershell
+.venv\Scripts\python.exe -m py_compile tests/workflow_chain/harness.py scripts/bernie_workflow_chain_report.py
 ```
 Result: No errors
 
 ### 8. Whitespace Check
-```
+```powershell
 git diff --check
 ```
 Result: No whitespace errors
 
 ### 9. Node.js Availability
-```
+```powershell
 "C:\Program Files\nodejs\node.exe" --version
 ```
 Result: v24.18.0 (available as expected)
@@ -136,7 +128,7 @@ ctx.time_window_descriptor = ctx.time_window_descriptor or "synthetic_time_windo
 
 The harness uses a "first refusal poisons all subsequent steps" strategy. When step N encounters any refusal type (`refused_unsafe`, `refused_planned`, `refused_unknown`), it sets `chain_refusal_state` and all later steps are short-circuited with the same refusal type, never evaluated. This means a step that would independently produce a more restrictive refusal (e.g., `refused_unsafe` vs `refused_planned`) gets classified with the less restrictive earlier refusal.
 
-**Evidence:** `test_first_refusal_type_propagates_subsequent_poisoned` proves that when step 2 is `refused_unknown` (gibberish utterance) and step 3 would be `refused_planned` (check-in) if evaluated independently, step 3 shows `refused_unknown`.
+**Evidence:** `test_first_refusal_type_propagates_subsequent_poisoned` proves that when step 2 is `refused_unknown` (gibberish utterance) and step 3 would be `refused_planed` (check-in) if evaluated independently, step 3 shows `refused_unknown`.
 
 **Impact:** The chain-level classification leans toward the first refusal, not the most restrictive. The `_resolve_chain_classification` function re-evaluates step results with a restrictive ordering (`refused_unsafe > refused_planned > clarification_needed > refused_unknown > resolved`), but step results only show the poisoned value. This creates a semantic gap: the chain classification may be LESS restrictive than a full independent evaluation would produce.
 
