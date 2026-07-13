@@ -61,7 +61,7 @@ T2.1 is the first hundreds-scenario deterministic gate. It executes:
   times, four existing durations, and thirteen requested windows;
 - 15 independently authored boundary, date, ordering, route-bound, and
   read-only cases from the DeepSeek worker review;
-- the existing 49 classifier and slot-search regression cases; and
+- the existing 57 classifier and slot-search regression cases; and
 - three focused route-intercepted Playwright scenarios for no-slots,
   roster-unavailable, and clarification states.
 
