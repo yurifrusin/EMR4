@@ -49,7 +49,7 @@ def test_role_preferences_and_generalist_profile_are_schema_valid():
         {key: value for key, value in generalist_payload.items() if key != "schema_version"}
     )
 
-    assert next(item for item in roles if item.role is Role.CONDUCTOR).required is True
+    assert next(item for item in roles if item.role is Role.CONDUCTOR).required is False
     assert next(item for item in roles if item.role is Role.ORCHESTRATOR).required is True
     assert next(item for item in roles if item.role is Role.VERIFIER).required is False
     assert generalist.independence == "self_review"

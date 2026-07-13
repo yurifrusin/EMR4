@@ -10,10 +10,16 @@ def load(name: str) -> dict:
     return yaml.safe_load((SETTINGS / name).read_text(encoding="utf-8"))
 
 
-def test_conductor_governs_sprint_boundary_and_orchestrator_executes() -> None:
+def test_orchestrator_selects_planning_mode_and_protects_master() -> None:
     model = load("operating_model.yaml")
-    assert "define_next_sprint" in model["sprint_boundary"]["conductor"]["exclusive_authority"]
-    assert model["within_sprint"]["executive_role"] == "orchestrator"
+    boundary = model["sprint_boundary"]
+    assert boundary["orchestrator"]["default_planning_mode"] == "routine_delegated_executor"
+    assert "authorize_protected_master_integration" in boundary["orchestrator"]["exclusive_authority"]
+    executor = boundary["routine_delegated_executor"]
+    assert "self_authorize_protected_master_integration" in executor["may_not"]
+    assert executor["protected_master_execution"]["allowed_when"] == "orchestrator_issued_exact_integration_manifest"
+    assert boundary["conductor"]["mode"] == "optional_orchestrator_selected"
+    assert model["within_sprint"]["executive_role"] == "selected_executor"
     assert "waiting_for_worker" in model["within_sprint"]["conductor_reentry_not_required_for"]
     assert "rerunning_same_lane" in model["within_sprint"]["conductor_reentry_not_required_for"]
 
@@ -38,12 +44,17 @@ def test_sprint_engine_cycles_without_conversational_handback() -> None:
     assert engine["enabled"] is True
     assert engine["conversational_handback_between_sprints"] is False
     assert engine["cycle"][0] == "orchestrator_closes_current_sprint"
-    assert "conductor_defines_and_allocates_next_sprint" in engine["cycle"]
+    assert "orchestrator_selects_planning_mode" in engine["cycle"]
+    assert "selected_planner_defines_and_allocates_next_sprint" in engine["cycle"]
+    assert "orchestrator_authorizes_exact_integration_manifest" in engine["cycle"]
+    assert "selected_executor_integrates_protected_master_or_stops_on_variance" in engine["cycle"]
 
 
 def test_orchestrator_commits_and_pushes_regular_checkpoints() -> None:
     checkpoints = load("operating_model.yaml")["integration_checkpoints"]
-    assert checkpoints["owner"] == "orchestrator"
+    assert checkpoints["authorization_owner"] == "orchestrator"
+    assert checkpoints["execution_owner"] == "selected_executor_after_exact_authorization"
     assert checkpoints["commit_and_push_regularly"] is True
     assert checkpoints["advance_handoff_current_after_accepted_checkpoint"] is True
     assert checkpoints["workers_may_push_master"] is False
+    assert checkpoints["executor_may_push_master_without_authorization"] is False

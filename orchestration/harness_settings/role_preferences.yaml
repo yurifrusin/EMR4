@@ -1,9 +1,9 @@
 schema_version: ariadne.role_preferences.v1
 roles:
   - role: conductor
-    required: true
+    required: false
     preferences: [deepseek-pro-conductor-fallback, claude-fable-conductor, claude-opus-conductor, gpt-sol-conductor-fallback]
-    preference_rationale: DeepSeek 4 Pro is the routine Conductor. Fable and then Opus are escalation resources for programme boundaries, architecture disputes, material product policy, or repeated sprint failure; a distinct GPT Sol subagent is fourth. The protected orchestrator session never fills the fallback directly.
+    preference_rationale: Sol decides whether independent Conductor consultation is warranted. DeepSeek 4 Pro is the economical first consultant; Fable and Opus are reserved for programme boundaries, architecture disputes, material product policy, or repeated sprint failure. Routine bounded sprints do not require a Conductor.
     review_by: 2026-08-11
   - role: verifier
     required: false
@@ -13,5 +13,5 @@ roles:
   - role: orchestrator
     required: true
     preferences: [openai-primary-orchestrator]
-    preference_rationale: The protected primary integration resource owns master.
+    preference_rationale: The protected Sol resource owns tranche direction, chooses the planning mode, and alone integrates protected master.
     review_by: 2026-08-11

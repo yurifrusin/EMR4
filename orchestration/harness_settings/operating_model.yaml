@@ -1,19 +1,27 @@
-schema_version: ariadne.operating_model.v2
+schema_version: ariadne.operating_model.v3
 purpose: prevent_orchestrator_drift_without_bureaucratizing_execution
 sprint_boundary:
-  conductor:
-    exclusive_authority: [define_next_sprint, divide_work, allocate_workers]
   orchestrator:
-    duties: [provide_product_and_codebase_evidence, review_executability, challenge_once, execute_accepted_plan]
-    may_not: [silently_omit_allocated_workers, silently_reallocate_workers]
-  reciprocal_check:
-    bounded: true
-    stop_on_agreement: true
-    conductor_final_plan_authority: true
-    orchestrator_may_return_unexecutable_or_unsafe_plan_with_evidence: true
+    exclusive_authority: [select_planning_mode, set_tranche_direction, authorize_protected_master_integration]
+    planning_modes: [routine_delegated_executor, independent_conductor_consultation]
+    default_planning_mode: routine_delegated_executor
+  routine_delegated_executor:
+    preferred_resource: openai-terra-tranche-executor
+    may: [plan_bounded_sprint, allocate_configured_workers, execute_and_accept_on_staging]
+    may_not: [change_tranche_direction, expand_authority, self_authorize_protected_master_integration]
+    protected_master_execution:
+      allowed_when: orchestrator_issued_exact_integration_manifest
+      must_match: [source_branch, exact_commit_set, required_tests, expected_diff_scope]
+      stop_on: [merge_conflict, changed_commit_sha, unexpected_diff, failed_required_test, scope_drift, security_or_release_implication]
+  conductor:
+    mode: optional_orchestrator_selected
+    consultation_triggers: [ambiguous_product_or_architecture_boundary, cross_sprint_allocation_complexity, repeated_executor_or_worker_failure, material_security_write_deployment_or_release_change, orchestrator_requests_independent_challenge]
+    authority_when_selected: [define_consulted_sprint, divide_work, allocate_workers]
+    may_not: [dispatch_workers, integrate, commit, push]
 within_sprint:
-  executive_role: orchestrator
+  executive_role: selected_executor
   conductor_reentry_only_when:
+    - conductor_mode_was_selected
     - sprint_scope_changes
     - worker_assignment_or_ownership_changes
     - acceptance_criteria_changes
@@ -52,15 +60,18 @@ continuous_sprint_engine:
   enabled: true
   cycle:
     - orchestrator_closes_current_sprint
-    - conductor_defines_and_allocates_next_sprint
-    - orchestrator_reviews_and_optionally_challenges_once
+    - orchestrator_selects_planning_mode
+    - selected_planner_defines_and_allocates_next_sprint
     - deterministic_plan_checks_run
     - risk_triggered_verifier_runs_if_needed
-    - orchestrator_executes_and_integrates
+    - selected_executor_executes_on_staging
+    - orchestrator_authorizes_exact_integration_manifest
+    - selected_executor_integrates_protected_master_or_stops_on_variance
   conversational_handback_between_sprints: false
   stop_only_for: [user_pause_condition, explicit_user_stop]
 integration_checkpoints:
-  owner: orchestrator
+  authorization_owner: orchestrator
+  execution_owner: selected_executor_after_exact_authorization
   commit_and_push_regularly: true
   advance_handoff_current_after_accepted_checkpoint: true
   checkpoint_after:
@@ -69,3 +80,4 @@ integration_checkpoints:
     - integrated_bounded_repair
     - sprint_closeout
   workers_may_push_master: false
+  executor_may_push_master_without_authorization: false

@@ -15002,3 +15002,25 @@ protected-test changes. W2 recorded two medium test-only context-classification
 findings and two low observations; none opened a runtime, provider, write, or
 policy gate. Rejected W1 `ae0fb775`, all plan revisions, and W2's provenance
 correction remain committed evidence. S11 remains unopened pending Sol review.
+## S10 Architecture Closeout - Optional Conductor
+
+The S10 worker/executor division was effective, but mandatory Conductor
+participation was not. Two Conductor rejoinders, two Sol escalations, and a
+large coordination-artifact surface were required for one bounded sprint.
+Accordingly, mandatory Conductor sequencing stops after S10; the revised pilot
+continues through S11-S12.
+
+Sol now chooses the planning mode at each sprint boundary. Routine bounded work
+defaults to Terra for planning, worker allocation, execution, and acceptance on
+staging. Sol retains tranche direction, escalation decisions, and exclusive
+authority to approve exact protected-master integration manifests. Terra may
+execute an approved manifest mechanically but cannot approve its own work and
+must stop on any variance. Conductor consultation is optional for ambiguity,
+architecture, security/authority changes, repeated failure, complex allocation,
+or an explicit independent challenge.
+
+DeepSeek 4 Flash and Gemini 3.5 Flash through Antigravity form the default
+economical worker pool and are selected by task capability rather than fixed
+platform stereotypes. Gemini is not restricted to UX. DeepSeek 4 Pro is the
+first economical optional Conductor; Fable and Opus are reserved for
+higher-leverage specialist consultation.

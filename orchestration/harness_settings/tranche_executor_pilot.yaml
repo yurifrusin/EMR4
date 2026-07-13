@@ -1,20 +1,25 @@
 schema_version: ariadne.tranche_executor_pilot.v1
-status: active_bounded_pilot
+status: active_revised_pilot
 pilot_sprints: [S10, S11, S12]
+executed_sprints: [S10]
+resumed_sprints: [S11, S12]
+revision: conductor_optional_and_sol_authorized_terra_master_integration
 tranche_gate_owner: gpt-sol
 executor:
   resource_id: openai-terra-tranche-executor
   authority:
     may:
-      - dispatch_conductor_allocated_workers
+      - plan_bounded_routine_sprints
+      - allocate_configured_workers
+      - dispatch_allocated_workers
       - request_same_lane_revision
       - run_deterministic_acceptance_gates
       - integrate_accepted_commits_on_staging_branch
       - maintain_tranche_receipt
     may_not:
-      - define_or_reallocate_sprint_work
-      - change_scope_or_acceptance_criteria
-      - integrate_or_push_protected_master
+      - change_sol_tranche_direction
+      - expand_scope_or_acceptance_authority
+      - self_authorize_protected_master_integration
       - weaken_security_write_deployment_or_release_boundaries
 mechanical_coordinator:
   resource_id: openai-luna-mechanical-coordinator
@@ -26,7 +31,7 @@ escalate_to_tranche_gate_owner_when:
   - repeated_worker_defect
   - security_write_deployment_or_release_boundary
   - conflicting_acceptance_evidence
-  - protected_master_integration
+  - protected_master_integration_variance
 measure:
   - gate_owner_interventions
   - executor_retries
