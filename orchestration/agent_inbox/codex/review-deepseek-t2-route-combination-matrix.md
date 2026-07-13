@@ -14,8 +14,8 @@
 
 Added a compact DB-backed route combination matrix for `POST /api/v1/appointments/proposals/slot-search`.
 The new test file `tests/test_slot_search_proposal_combination_matrix.py` exercises the real
-authenticated route against the test DB across 16 authored scenarios (17 test cases including
-the non-mutating proof) covering all required acceptance dimensions.
+authenticated route against the test DB across 17 authored scenarios covering
+all required acceptance dimensions.
 
 ## Scenario Table
 
@@ -38,9 +38,7 @@ the non-mutating proof) covering all required acceptance dimensions.
 | `BND-BOTH` | earliest=10:00 + latest=11:00, 30-min duration | 1 | Candidates in [10:00, 11:00) |
 | `ROSTER-ABSENT` | No schedule for requested date | 1 | Zero candidates + no_practitioner_schedule warning |
 | `BREAK-OVERLAP` | Break yields warning at 10:30 but candidate offered | 1 | 10:30 present with break_overlap warning |
-| **Non-mutating proof** | Representative cross-section of search calls | 1 | Zero appointment/audit rows created |
-
-**Total: 18 test cases (16 matrix scenarios + 1 parametrized baseline + 1 non-mutating proof)**
+**Total: 17 independently isolated route scenarios.**
 
 ## Acceptance Coverage
 
@@ -56,15 +54,17 @@ the non-mutating proof) covering all required acceptance dimensions.
 | Normalized date/time bounds per candidate | Every candidate checked for `appointment_date == search date`, correct duration, tz-aware start/end |
 | Stable ordering | `starts_local == sorted(starts_local)` in every scenario |
 | No occupied same-location overlap | Conflict statuses block 09:00; non-blocking statuses don't; location filtering works |
-| No appointment/audit rows created | `test_matrix_overall_writes_no_appointments_and_no_audit_rows` |
+| No appointment/audit rows created | Every matrix row records counts immediately before and after its route request |
 | No regression on existing tests | All 21 existing `test_slot_search_proposal.py` tests continue to pass |
-| CI budget | 18 test cases, ~10.4s runtime for new file, ~19.8s combined with existing |
+| CI budget | 17 route scenarios in the focused matrix |
 
 ## DB / Evidence Boundary
 
 - Tests use `TestClient` against the real FastAPI app with test DB overrides
 - `clean_db` truncates between tests (shared `conftest.py` fixture)
-- Non-mutating proof: counts `Appointment` and `AppointmentAuditLog` rows before/after a representative cross-section
+- Every route scenario counts `Appointment` and `AppointmentAuditLog` rows
+  after fixture setup and immediately after its request, so fixture cleanup
+  cannot hide a product write
 - No production code (`app/`) was changed
 - No existing authored golden expectations were weakened or rewritten
 
@@ -72,26 +72,26 @@ the non-mutating proof) covering all required acceptance dimensions.
 
 | File | Change |
 |---|---|
-| `tests/test_slot_search_proposal_combination_matrix.py` | **Created** — 18 test cases (16 parametrized matrix scenarios + 1 baseline + 1 non-mutating proof) |
+| `tests/test_slot_search_proposal_combination_matrix.py` | **Created** - 17 parametrized DB-backed route scenarios |
 
 ## Test Results
 
 ```powershell
 # New matrix tests only
 pytest tests/test_slot_search_proposal_combination_matrix.py -v
-# Result: 18 passed in 10.36s
+# Result: 17 passed
 
 # Combined with existing tests (no regression)
 pytest tests/test_slot_search_proposal.py tests/test_slot_search_proposal_combination_matrix.py -v
-# Result: 39 passed in 19.83s
+# Result: 38 passed
 #   - 21 existing tests PASS (no regression)
-#   - 18 new matrix tests PASS
+#   - 17 new matrix tests PASS
 ```
 
 ## Reused Coverage
 
 - `conftest.py` fixtures: `client`, `db`, `gp_user`, `practice`, `practitioner`, `patient`, `make_token`
-- Helper patterns from existing `test_slot_search_proposal.py`: `_search()`, `_base_body()`, `_make_appt()`
+- Helper patterns from existing `test_slot_search_proposal.py`: `_search()` and `_make_appt()`
 - Route: `POST /api/v1/appointments/proposals/slot-search` (unchanged)
 
 ## Findings

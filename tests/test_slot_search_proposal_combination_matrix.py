@@ -42,14 +42,6 @@ def _search(client, token, body: dict):
     )
 
 
-def _base_body(practitioner) -> dict:
-    return {
-        "practitioner_id": str(practitioner.id),
-        "date_from": MONDAY.isoformat(),
-        "duration_minutes": 15,
-    }
-
-
 def _make_appt(
     db, practice, practitioner, patient,
     appt_date, hour, minute, duration,
@@ -85,8 +77,7 @@ def two_locations(db, practice):
     return loc_a, loc_b
 
 
-@pytest.fixture()
-def diary_with_break(db, practice, practitioner):
+def _add_diary_break(db, practice, practitioner):
     """Minimal diary template + column + break for the test practitioner."""
     tmpl = DiaryTemplate(
         practice_id=practice.id,
@@ -142,7 +133,7 @@ class MatrixScenario:
 
 
 # ─── The compact combination matrix ───────────────────────────────────────────
-# 16 scenarios covering all required acceptance dimensions without a full
+# 17 scenarios covering all required acceptance dimensions without a full
 # Cartesian product.  Rows target specific pairwise interactions.
 
 MATRIX = [
@@ -434,7 +425,6 @@ def test_slot_search_combination_matrix(
     scenario: MatrixScenario,
     client, db, gp_user, practice, practitioner, patient,
     two_locations,
-    diary_with_break,
 ):
     """Execute one row of the DB-backed route combination matrix."""
     # ── Setup: conditionally create pre-existing appointment ──
@@ -479,10 +469,10 @@ def test_slot_search_combination_matrix(
         db.flush()
 
     # ── Resolve break presence ──
-    # diary_with_break is always injected; for no-break scenarios we skip assertions
-    # about break warnings (they're only relevant for BREAK-OVERLAP)
-
     # ── Build search request ──
+    if scenario.has_break:
+        _add_diary_break(db, practice, practitioner)
+
     loc_a, loc_b = two_locations
     search_location = (
         [loc_a, loc_b][scenario.search_location_idx]
@@ -504,6 +494,8 @@ def test_slot_search_combination_matrix(
 
     # ── Execute ──
     token = make_token(gp_user)
+    appointment_count_before = db.query(Appointment).count()
+    audit_count_before = db.query(AppointmentAuditLog).count()
     resp = _search(client, token, body)
     assert resp.status_code == 200, (
         f"[{scenario.case_id}] Expected 200, got {resp.status_code}: {resp.text}"
@@ -522,6 +514,13 @@ def test_slot_search_combination_matrix(
     )
     assert data["requires_confirmation"] is False
     assert data["resolved_duration_minutes"] == scenario.duration
+    db.expire_all()
+    assert db.query(Appointment).count() == appointment_count_before, (
+        f"[{scenario.case_id}] slot search must not create appointment rows"
+    )
+    assert db.query(AppointmentAuditLog).count() == audit_count_before, (
+        f"[{scenario.case_id}] slot search must not create audit rows"
+    )
 
     # ── Verify candidate count ──
     if scenario.expect_zero_candidates:
@@ -614,90 +613,3 @@ def test_slot_search_combination_matrix(
 
 
 # ─── Non-mutating proof ───────────────────────────────────────────────────────
-
-
-def test_matrix_overall_writes_no_appointments_and_no_audit_rows(
-    client, db, gp_user, practice, practitioner, patient,
-    two_locations, diary_with_break,
-):
-    """Prove the entire matrix (all 16 scenarios combined) creates no rows.
-
-    This is intentionally a separate test from the parametrized matrix above
-    because each parametrized row writes to the DB for its own setup and we
-    cannot count rows inside a single parametrized row.  Instead this test
-    runs a representative cross-section of the matrix scenarios as isolated
-    requests and asserts zero row growth overall.
-    """
-    # Create roster schedule
-    from app.models.appointments import PractitionerSchedule
-    for dow in range(5):
-        db.add(PractitionerSchedule(
-            practitioner_id=practitioner.id,
-            day_of_week=dow,
-            start_time=time(9, 0),
-            end_time=time(17, 0),
-            slot_duration_minutes=15,
-        ))
-    db.flush()
-
-    loc_a, loc_b = two_locations
-    token = make_token(gp_user)
-
-    # Pre-count
-    appt_before = db.query(Appointment).count()
-    audit_before = db.query(AppointmentAuditLog).count()
-
-    # Run a representative subset that exercises all route paths:
-    # baseline, blocking, non-blocking, location-same, location-other,
-    # time bounds, break overlap, roster absent
-
-    # 1. Baseline
-    resp = _search(client, token, _base_body(practitioner))
-    assert resp.status_code == 200
-
-    # 2. With blocking appointment
-    _make_appt(db, practice, practitioner, patient, MONDAY, 9, 0, 15,
-               status=AppointmentStatus.Booked)
-    db.commit()
-    resp = _search(client, token, _base_body(practitioner))
-    assert resp.status_code == 200
-
-    # Remove the blocking appt to avoid cross-contamination
-    db.query(Appointment).delete()
-    db.commit()
-
-    # 3. With break overlap
-    resp = _search(client, token, _base_body(practitioner))
-    assert resp.status_code == 200
-
-    # 4. Location-other (non-blocking)
-    _make_appt(db, practice, practitioner, patient, MONDAY, 9, 0, 15,
-               status=AppointmentStatus.Booked, location_id=loc_a.id)
-    db.commit()
-    resp = _search(client, token, {**_base_body(practitioner),
-                                    "location_id": str(loc_b.id)})
-    assert resp.status_code == 200
-
-    # Clean up
-    db.query(Appointment).delete()
-    db.commit()
-
-    # 5. Time bounds
-    resp = _search(client, token, {**_base_body(practitioner),
-                                    "earliest_time": "10:00:00",
-                                    "latest_time": "11:00:00"})
-    assert resp.status_code == 200
-
-    # Post-count
-    db.expire_all()
-    appt_after = db.query(Appointment).count()
-    audit_after = db.query(AppointmentAuditLog).count()
-
-    assert appt_after == appt_before, (
-        f"slot search matrix must not create appointment rows: "
-        f"{appt_before} -> {appt_after}"
-    )
-    assert audit_after == audit_before, (
-        f"slot search matrix must not create audit rows: "
-        f"{audit_before} -> {audit_after}"
-    )
