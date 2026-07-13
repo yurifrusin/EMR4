@@ -95,6 +95,11 @@ def main() -> int:
     parser.add_argument("--reasoning", choices=("high", "max"))
     parser.add_argument("--outbox", type=Path, required=True)
     parser.add_argument("--receipt", type=Path, required=True)
+    parser.add_argument(
+        "--transcript",
+        type=Path,
+        help="Bounded redacted JSONL terminal evidence path; defaults beside --receipt",
+    )
     parser.add_argument("--timeout", type=int, default=0, help="Artifact deadline seconds; 0 disables it")
     parser.add_argument("--exit-timeout", type=int, default=30)
     parser.add_argument(
@@ -104,7 +109,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--fixture",
-        choices=("success", "permission", "hang", "ignore_exit", "markdown_decision", "completion", "artifact_only"),
+        choices=("success", "permission", "hang", "ignore_exit", "markdown_decision", "completion", "markdown_completion", "bold_completion", "artifact_only", "diagnostic_burst"),
         help=argparse.SUPPRESS,
     )
     args = parser.parse_args()
@@ -135,6 +140,8 @@ def main() -> int:
         "--exit-timeout",
         str(args.exit_timeout),
     ]
+    if args.transcript:
+        command.extend(("--transcript", str(args.transcript)))
     if args.model:
         command.extend(("--model", args.model))
     if args.reasoning:

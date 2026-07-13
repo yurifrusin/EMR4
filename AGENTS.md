@@ -31,6 +31,13 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Current active track** | S10 is accepted on `master` as a test-only, provider-free workflow-chain evidence layer: 8 authored synthetic chains and 26 steps pass focused, adversarial, report-safety, and existing interpretation-harness tests. The rejected runtime-path attempt remains preserved and no runtime-isolation boundary was weakened. The S10-S12 pilot now uses optional Conductor consultation: Sol supervises, sets direction, and authorizes exact integration manifests; Terra routinely plans, allocates workers, executes, accepts, and may mechanically integrate authorized manifests while stopping on any variance. |
 | **Next recommended work** | Continue the revised pilot through S11-S12. Default to Terra planning/execution and capability-ranked DeepSeek 4 Flash or Gemini 3.5 Flash workers. Use DeepSeek 4 Pro as the first economical Conductor consultant only when Sol determines ambiguity, architecture, authority, security, repeated failure, complex allocation, or independent challenge warrants it. Terminal-to-active status policy remains user-owned. Dependabot alert 5 remains open; do not force overrides. |
 
+2026-07-13 task-branch work extends the DeepCode PTY harness with bounded,
+redacted terminal-event transcripts and a non-destructive multi-signal liveness
+observer. The observer is evidence-only: elapsed time cannot independently
+classify failure, canonical artifact markers remain completion authority, and no
+process termination or product-runtime wiring was added. Details and CLI usage
+live in `docs/ariadne-deepcode-runtime-observability.md`.
+
 S4d live finding, 2026-07-11: Claude CLI, Antigravity `agy.exe`, and Deep Code
 are distinct CLI transports. Deep Code requires a real TTY; non-TTY refusal is
 adapter evidence, not DeepSeek unavailability. A first Opus Conductor attempt
@@ -1763,4 +1770,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-06-18 - Sprint 3 diary operations foundation integrated in the latest master integration commit. Native Diary Grid now includes a `Now` button, current-time marker, today auto-scroll, exact-time hover bubbles/tooltips for off-grid booking and break borders, and smoke fixtures for irregular times. Backend now has Room + DiaryRoster foundation (`c3d4e5f6a7b8`) for date-specific room assignments. Gemini calls have moved to the Google Gen AI SDK path with lazy client construction to avoid blocking app/test imports. Visible website/app branding now says `EMR`, with `cuboid4.png` used for taskpane, command centre, diary, and Office ribbon icon assets. Verification for the integrated batch: `pytest tests -q` -> 38 passed, `compileall`, `node --check docs\diary\diary.js`, manifest XML parse, `git diff --check`, and local browser branding smoke. Next: review live diary time-ruler UX, then wire the diary frontend to Room/DiaryRoster data before booking drag/drop mutations.*
+*Last updated: 2026-07-13 - DeepCode runtime observability implementation is on the task branch `codex/deepcode-runtime-liveness`; focused harness tests pass, with final commit SHA recorded in the task closeout.*
