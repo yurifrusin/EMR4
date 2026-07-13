@@ -185,6 +185,22 @@ Fine-tuning is not a prerequisite. Prompting, typed tools, retrieval, and evals
 come first. Fine-tuning may later improve stable interaction patterns but must
 not encode current patient facts, mutable practice rules, or write authority.
 
+#### Language-Coverage Bridge Before Provider Replay
+
+T2's deterministic policy coverage and T3's provider-neutral contracts do not
+by themselves demonstrate adequate coverage of receptionist language. Before
+T3 provider adapters or live shadow calls proceed, implement the language
+coverage programme in
+`docs/bernie-language-coverage-implementation-plan.md`.
+
+The bridge preserves original utterances, introduces typed temporal relations
+and source spans, measures a multidimensional coverage lattice, separates
+Gold/Silver/Bronze evidence, uses models as generators or candidate interpreters
+rather than outcome oracles, and composes language interpretation with the T2
+deterministic diary replay. Stop-word removal, stemming, and lemmatization may
+support offline clustering but must not remove semantic operators from the
+authoritative path.
+
 ### T4 - Shared Clinical Safety Foundation
 
 Outcome: EMR4 has a reviewable safety and governance basis before patient-specific
@@ -323,12 +339,15 @@ sequence:
 5. Replan at tranche boundaries or when evidence falsifies an assumption, not
    merely because a sprint ended.
 
-The default next tranche from the current repository state is **T1 Stateful
-Diary Scenario Laboratory**. T2 follows if T1 exposes no product defect that
-needs immediate correction. T3 may then evaluate nondeterministic diary
-interpretation while T4 begins the separately governed clinical track. T5 must
-not precede T4. T7 must not precede a credible T5-T6 evidence base. T8 must not
-precede all of T4-T7.
+T1 and T2 are now complete, and T3.1-T3.4 have established the write-disabled
+evaluation contract, source-safe projection, repeat runner, and live-replay
+gate. The default next tranche is **LC1 Semantic Foundation and Known
+Regression**, defined in
+`docs/bernie-language-coverage-implementation-plan.md`. T3.5 provider adapters
+are deferred until the language-coverage bridge has a credible corpus and
+composed evaluator. T4 may begin as a genuinely independent governance stream,
+but T5 must not precede T4, T7 must not precede a credible T5-T6 evidence base,
+and T8 must not precede all of T4-T7.
 
 ## User Decision Boundaries
 
@@ -365,6 +384,10 @@ No estimated model-token budget, arbitrary worker timeout, or mandatory
 conductor/verifier exchange is part of product acceptance.
 
 ## Initial Scenario Corpus Priorities
+
+These priorities seed the language-coverage lattice; they are not a claim that
+one historical scenario is uniquely canonical or that a raw number of scenarios
+demonstrates linguistic completeness.
 
 After the golden duplicate case, prioritize scenarios by harm and frequency:
 

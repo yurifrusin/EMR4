@@ -1,7 +1,9 @@
 # Bernie T3 Nondeterministic Shadow Evaluation
 
-Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, and T3.3
-default-disabled repeat runner implemented; no live-provider replay is enabled.
+Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
+default-disabled repeat runner, and T3.4 live-replay gate implemented; no
+live-provider replay is enabled. T3.5 is deferred pending the language-coverage
+programme in `docs/bernie-language-coverage-implementation-plan.md`.
 
 ## Purpose
 
@@ -73,10 +75,25 @@ persistence, patient/practice inputs, mutations, runtime wiring, and promotion
 claims are prohibited. This is separate from the older interpretation-runtime
 gate because evaluation adapters do not receive product authority.
 
+## Methodology Course Correction
+
+The four-case T3.2 projection proves the source-safety and scoring contracts; it
+does not establish adequate receptionist-language coverage. T2's deterministic
+matrix remains the diary outcome oracle, but its generated classifier and route
+combinations mostly begin after natural-language interpretation.
+
+Before provider adapters are useful, EMR4 needs a canonical language-to-semantic
+scenario contract, a measurable coverage lattice, lossless normalization,
+independently adjudicated Gold/Silver/Bronze corpus tiers, metamorphic and
+adversarial generation, and an evaluator that composes interpretation with T2
+diary replay. The approved direction is recorded in
+`docs/bernie-language-coverage-implementation-plan.md`.
+
 ## Next Slice
 
-T3.5 should implement DeepSeek and Gemini adapters behind the protocol without
-executing them, including environment/provider availability checks, exact model
-ledger entries, normalized-output validation, bounded request construction, and
-no write-capable tools. External calls remain blocked until the gate's review
-requirements are satisfied.
+Do not proceed directly to T3.5. Begin LC1 Semantic Foundation and Known
+Regression: reproduce Yuri's `tomorrow at 3pm` failure through the real
+interpretation path, distinguish exact/open/approximate temporal relations,
+introduce the canonical scenario contract, and produce the first coverage gap
+report. Preserve the T3.1-T3.4 infrastructure while external calls remain
+blocked.
