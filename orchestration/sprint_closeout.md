@@ -15089,3 +15089,26 @@ Conductor or verifier was needed because the approved roadmap fixed the tranche.
 
 Sprint engine state: continuing to T2 Deterministic Receptionist Behaviour
 Matrix. No user decision is required.
+
+## T2.1-T2.2 Closeout - Deterministic Bernie Behaviour Matrix
+
+Status: accepted and integrated on 2026-07-13; T2 continues.
+
+- T2.1 added 260 fast half-open interval combinations, 15 independently
+  authored boundary cases, and E3 no-slot/roster/clarification UI checks.
+- T2.1 corrected async-result focus loss, the Edit request selector, and
+  canonical roster-unavailable view-model mapping without changing authority.
+- T2.2 added 486 exact-match precedence combinations across practitioner,
+  type, location, duration, and temporal evidence.
+- T2.2 added E3 stale/failed/pending proposal checks proving coherent status
+  focus, keyboard recovery, and no confirm request or success authority.
+- Central review corrected the Gemini evidence tier and one DeepSeek prose
+  description; executable expectations and product behavior were already
+  correct. No T2.2 product change was required.
+- Focused backend tests, six Playwright outcome tests, JavaScript syntax, and
+  whitespace checks pass. Generated service matrices use query-only sessions;
+  authored DB-backed tests remain the persistence and route authority.
+
+No Conductor or verifier was used because the approved roadmap fixed the
+direction and worker ownership was disjoint. Sprint engine state: continuing to
+T2.3 DB-backed route combinations. No user decision is required.

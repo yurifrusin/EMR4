@@ -1,6 +1,6 @@
 # T2 Deterministic Bernie Behaviour Matrix
 
-Status: T2.1 complete; T2 continues
+Status: T2.2 complete; T2 continues
 
 Date: 2026-07-13
 
@@ -110,3 +110,38 @@ Existing DB-backed tests remain authoritative for terminal-status filtering,
 roster/break/location query behavior, normalized candidate bounds, stale
 confirmation revalidation, audit deltas, and tenancy. Generated query-only
 cases must not pretend to replace those persistence and route boundaries.
+
+## T2.2 Result
+
+The exact-match precedence matrix executes 486 labelled combinations across:
+
+- matching or mismatching practitioner;
+- omitted, matching, or mismatching appointment type;
+- omitted, matching, or mismatching location;
+- omitted, matching, or mismatching duration; and
+- nine temporal-evidence modes covering both bounds, earliest-only,
+  latest-only, no bounds, inside, outside, and endpoint cases.
+
+Together with T2.1, the routine service-level gate now executes 746 generated
+classifier combinations in two test nodes. The query-only sessions expose no
+write methods, while separate DB-backed tests retain authority for filtering,
+persistence, audit, tenancy, and route behavior.
+
+Three new route-intercepted Playwright cases cover stale, failed, and
+confirmation-pending proposal states. They prove distinguishable state/copy,
+status-region focus, keyboard recovery for stale/failed states, and absence of
+confirm controls, requests, success receipts, or completion claims. This is E3
+UI-contract evidence, not E2 backend transport evidence.
+
+No product correction was required. Central review corrected an evidence-tier
+label and a prose description of a touching-endpoint case; the executable
+oracle had already classified that endpoint correctly as non-overlap.
+
+## T2.3 Direction
+
+T2.3 should exercise the remaining persistence-backed route interactions rather
+than add another query-only classifier matrix. Combine active/terminal
+appointment status, same/other location conflicts, roster presence/absence,
+break warnings, and normalized time bounds in a compact DB-backed table. Keep
+stale-confirm revalidation as an authored stateful golden case and prove every
+search/proposal combination remains non-mutating.

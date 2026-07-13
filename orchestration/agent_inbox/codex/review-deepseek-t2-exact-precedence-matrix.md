@@ -28,7 +28,7 @@ The generated precedence matrix iterates over all combinations of:
 |---|---|---|---|---|---|
 | both_bounds_inside | 08:30 | 10:00 | 09:00 | Yes | Yes |
 | both_bounds_equal_earliest | 09:00 | 10:00 | 09:00 | Yes | Yes |
-| both_bounds_equal_latest_excluded | 08:00 | 09:00 | 09:00 | No (==latest) | Yes |
+| both_bounds_equal_latest_excluded | 08:00 | 09:00 | 09:00 | No (==latest) | No; endpoints only touch |
 | both_bounds_outside_before | 10:00 | 11:00 | 09:00 | No (< earliest) | No |
 | both_bounds_outside_after | 07:00 | 08:00 | 09:00 | No (> latest) | No |
 | earliest_only_match | 09:00 | None | 09:00 | Yes (exact eq) | Yes |

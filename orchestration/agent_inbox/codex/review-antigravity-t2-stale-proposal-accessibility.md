@@ -1,7 +1,9 @@
 # Review: Antigravity T2.2 - Stale Proposal Accessibility
 
 ## 1. Evidence Tier
-- **Tier 1 (Authoritative UI Contract)**: Full route-intercepted Playwright test execution within the local offline diary smoke harness.
+- **E3 UI-contract evidence**: Route-intercepted Playwright execution within
+  the local offline diary smoke harness. This is not E2 non-intercepted backend
+  transport evidence and does not independently prove backend authority.
 
 ## 2. State & Assertion Matrix
 
@@ -25,7 +27,7 @@ All 3 new tests in `review/test_diary_stale_proposal_accessibility.py` and 3 exi
 - `test_outcome_clarification_accessibility`: **PASSED**
 
 ## 5. Product Gaps / Findings
-- **Fallback Status Copy**: Because the static mapping `BERNIE_STATUS_COPY` does not define exact overrides for `stale`, `failed`, or `confirmation_pending`, the runtime falls back cleanly to formatting the transition state name using `formatBernieCode(status)`. This works perfectly, yielding `"Stale"`, `"Failed"`, and `"Confirmation Pending"`.
+- **Fallback Status Copy**: Because the static mapping `BERNIE_STATUS_COPY` does not define exact overrides for `stale`, `failed`, or `confirmation_pending`, the current runtime formats the transition state name using `formatBernieCode(status)`, yielding `"Stale"`, `"Failed"`, and `"Confirmation Pending"`.
 - **Keyboard Recovery Behavior**: In the stale and failed states, retry and edit controls are correctly appended and positioned in tab index sequence, and clicking/pressing Enter on "Edit request" shifts focus back into the input textarea as required. Clicking "Try again" correctly resets the review panel state.
 - **Focus Management**: The client code handles focus movement correctly by focusing `[data-testid='bernie-review-status']` with a timeout of 75ms after the async transition, which makes the updated status readable by screen readers via `role="status"` and `aria-live="polite"`.
 

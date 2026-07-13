@@ -68,15 +68,6 @@ class TemporalMode(Enum):
 # Existing appointment: 09:00 for 15 min (ends at 09:15)
 EXISTING_H, EXISTING_M, EXISTING_DURATION = 9, 0, 15
 
-# Compute expected overlap: existing [09:00, 09:15) vs requested window
-def _existing_end_minutes() -> int:
-    return 9 * 60 + 0 + 15  # 555
-
-
-def _to_minutes(h: int, m: int) -> int:
-    return h * 60 + m
-
-
 def _expected_overlap(temporal: TemporalMode) -> bool:
     """Does the existing appointment (09:00-09:15) overlap the requested window?"""
     existing_s = 9 * 60
@@ -90,7 +81,7 @@ def _expected_overlap(temporal: TemporalMode) -> bool:
         return existing_s < 600 and existing_e > 540  # True
     elif temporal == TemporalMode.both_bounds_equal_latest_excluded:
         # [08:00, 09:00) → 480..540
-        return existing_s < 540 and existing_e > 480  # existing_e=555 > 480, True
+        return existing_s < 540 and existing_e > 480  # False: touching endpoints
     elif temporal == TemporalMode.both_bounds_outside_before:
         # [10:00, 11:00) → 600..660
         return existing_s < 660 and existing_e > 600  # existing_e=555 < 600, False
@@ -207,10 +198,6 @@ def _expected_classification(
 
     # No overlap, no exact match
     return BookingClassification.same_day_distinct
-
-
-def _clock(minutes: int) -> time:
-    return time(minutes // 60, minutes % 60)
 
 
 class _ReadOnlyQuery:
