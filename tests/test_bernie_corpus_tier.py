@@ -18,6 +18,7 @@ from app.services.bernie.corpus_tier import (
     AdjudicationRecord,
     AdjudicationState,
     AuthorityGrant,
+    CandidateOrigin,
     CandidateRegistry,
     CorpusCandidate,
     GeneratorIdentity,
@@ -27,6 +28,7 @@ from app.services.bernie.corpus_tier import (
     ProvenanceTier,
     QuarantineReason,
     ScenarioFamily,
+    compute_scenario_hash,
     promote_candidate,
     _compute_derivation_id,
     _validate_derivation_id,
@@ -80,10 +82,15 @@ def make_adjudication(
     *,
     decision: str = "accepted",
     model_id: str = "judge-model",
+    provider_id: str = "unspecified",
     instance_id: str = "judge-lane",
     timestamp: datetime | None = None,
-    semantic_scope: str = "action,entity,temporal",
-    evidence_scope: str = "source_spans,dialogue_turns",
+    semantic_scope: frozenset[str] = frozenset(
+        {"action", "temporal", "entity", "expected_outcome", "authority"}
+    ),
+    evidence_scope: frozenset[str] = frozenset(
+        {"dialogue_turns", "source_spans", "normalized_values", "expected_outcomes"}
+    ),
     evidence_ref: str = "ev-001",
 ) -> AdjudicationRecord:
     """Convenience to build a deterministic adjudication record."""
@@ -91,12 +98,30 @@ def make_adjudication(
         timestamp = datetime(2026, 7, 14, 12, 0, 0, tzinfo=timezone.utc)
     return AdjudicationRecord(
         decision=decision,  # type: ignore[arg-type]
-        judge=JudgeIdentity(model_id=model_id, instance_id=instance_id),
+        judge=JudgeIdentity(
+            provider_id=provider_id,
+            model_id=model_id,
+            instance_id=instance_id,
+        ),
         timestamp=timestamp,
         checked_semantic_scope=semantic_scope,
         checked_evidence_scope=evidence_scope,
         evidence_ref=evidence_ref,
     )
+
+
+def test_accepted_adjudication_requires_complete_semantic_and_evidence_scope():
+    with pytest.raises(ValueError, match="complete semantic scope"):
+        AdjudicationRecord(
+            decision="accepted",
+            judge=JudgeIdentity(model_id="independent"),
+            timestamp=datetime(2026, 7, 14, tzinfo=timezone.utc),
+            checked_semantic_scope={"action"},
+            checked_evidence_scope={
+                "dialogue_turns", "source_spans", "normalized_values", "expected_outcomes"
+            },
+            evidence_ref="incomplete-review",
+        )
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -175,6 +200,21 @@ class TestIdentity:
         gen2 = GeneratorIdentity(model_id="deepseek", instance_id="dw3")
         assert gen1.stable_key() != gen2.stable_key()
 
+    def test_same_model_through_different_provider_is_not_independent(self):
+        gen = GeneratorIdentity(provider_id="provider-a", model_id="same-model")
+        judge = JudgeIdentity(provider_id="provider-b", model_id="same-model")
+        assert gen.model_key() == judge.model_key()
+
+    def test_human_and_orchestrator_identities_are_not_model_aliases(self):
+        human = JudgeIdentity(
+            actor_kind="human", actor_id="reviewer-01", provider_id=None
+        )
+        orchestrator = JudgeIdentity(
+            actor_kind="orchestrator", actor_id="sol", provider_id=None
+        )
+        assert human.model_key() is None
+        assert orchestrator.model_key() is None
+
     def test_same_model_different_instance_rejected(self):
         """Req #1: second instance of same provider model CANNOT certify."""
         gen = GeneratorIdentity(model_id="deepseek-flash", instance_id="dw2")
@@ -184,6 +224,7 @@ class TestIdentity:
         d = json.loads(candidate.model_dump_json())
         d["generator_identity"] = {"model_id": "deepseek-flash", "instance_id": "dw2"}
         d["source_scenario_id"] = "booking_create_then_exact_duplicate"
+        d["derivation_id"] = None
         modified = CorpusCandidate.model_validate(d)
         ad = make_adjudication(model_id="deepseek-flash", instance_id="dw3")
         result = promote_candidate(modified, adjudication=ad)
@@ -199,6 +240,7 @@ class TestIdentity:
         d = json.loads(candidate.model_dump_json())
         d["generator_identity"] = {"model_id": "model-a", "instance_id": "lane-1"}
         d["source_scenario_id"] = "booking_create_then_exact_duplicate"
+        d["derivation_id"] = None
         modified = CorpusCandidate.model_validate(d)
         ad = make_adjudication(model_id="model-b", instance_id="lane-1")
         result = promote_candidate(modified, adjudication=ad)
@@ -263,6 +305,7 @@ class TestCorpusCandidateWrapper:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id=gold_spec.scenario_id,
+            source_scenario_hash=compute_scenario_hash(gold_spec),
             scenario=scenario,
         )
         assert bronze.provenance == ProvenanceTier.BRONZE
@@ -286,7 +329,7 @@ class TestCorpusCandidateWrapper:
     def test_gold_must_not_have_source_scenario_id(self):
         data = load_candidate_raw("valid_gold_seed.json")
         data["source_scenario_id"] = "some_source"
-        with pytest.raises(ValueError, match="source_scenario_id"):
+        with pytest.raises(ValueError, match="source derivation"):
             CorpusCandidate.model_validate(data)
 
     def test_silver_must_have_generator_identity(self):
@@ -320,6 +363,23 @@ class TestCorpusCandidateWrapper:
         assert bronze.source_scenario_id is None
         assert bronze.provenance == ProvenanceTier.BRONZE
 
+    def test_external_source_bronze_needs_no_model_generator(self):
+        gold_spec = load_candidate("valid_gold_seed.json").scenario
+        scenario = _adapt_scenario(
+            gold_spec, provenance="bronze", adjudication="pending"
+        )
+        bronze = CorpusCandidate(
+            provenance=ProvenanceTier.BRONZE,
+            adjudication=AdjudicationState.PENDING,
+            family=ScenarioFamily.BOOKING_CREATE,
+            origin=CandidateOrigin.EXTERNAL_SOURCE,
+            generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
+            scenario=scenario,
+        )
+        result = promote_candidate(bronze, adjudication=make_adjudication())
+        assert isinstance(result, PromotionOutcome.Quarantined)
+        assert result.quarantine.reason == QuarantineReason.MISSING_SOURCE_GOLD
+
     def test_bronze_can_have_source_scenario_id(self):
         """Bronze derived from a Gold source may carry the source ID."""
         gen = GeneratorIdentity(model_id="bronze-gen", instance_id="test")
@@ -334,6 +394,7 @@ class TestCorpusCandidateWrapper:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id=gold_spec.scenario_id,
+            source_scenario_hash=compute_scenario_hash(gold_spec),
             scenario=scenario,
         )
         assert bronze.source_scenario_id is not None
@@ -353,6 +414,7 @@ class TestCorpusCandidateWrapper:
                 generator_identity=gen,
                 generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
                 source_scenario_id=scenario.scenario_id,
+                source_scenario_hash=compute_scenario_hash(scenario),
                 scenario=scenario,
             )
 
@@ -369,6 +431,7 @@ class TestCorpusCandidateWrapper:
                 generator_identity=gen,
                 generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
                 source_scenario_id="test",
+                source_scenario_hash=compute_scenario_hash(scenario),
                 scenario=scenario,
             )
 
@@ -381,6 +444,7 @@ class TestCorpusCandidateWrapper:
             CorpusCandidate(
                 provenance=ProvenanceTier.GOLD,
                 adjudication=AdjudicationState.ADJUDICATED,
+                origin=CandidateOrigin.HUMAN_AUTHORED,
                 family=ScenarioFamily.CLARIFY_TEMPORAL,  # mismatch
                 scenario=scenario,
             )
@@ -397,6 +461,7 @@ class TestCorpusCandidateWrapper:
                 generator_identity=gen,
                 generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
                 source_scenario_id=scenario.scenario_id,
+                source_scenario_hash=compute_scenario_hash(scenario),
                 scenario=scenario,
             )
 
@@ -414,6 +479,7 @@ class TestCorpusCandidateWrapper:
                 generator_identity=gen,
                 generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
                 source_scenario_id="test",
+                source_scenario_hash=compute_scenario_hash(scenario),
                 authority_grant=AuthorityGrant(diary_write=True),
                 scenario=scenario,
             )
@@ -425,6 +491,7 @@ class TestCorpusCandidateWrapper:
         candidate = CorpusCandidate(
             provenance=ProvenanceTier.GOLD,
             adjudication=AdjudicationState.ADJUDICATED,
+            origin=CandidateOrigin.HUMAN_AUTHORED,
             family=ScenarioFamily.BOOKING_CREATE,
             authority_grant=AuthorityGrant(provider_write=True),
             scenario=scenario,
@@ -456,6 +523,7 @@ class TestPromotion:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id=gold_spec.scenario_id,
+            source_scenario_hash=compute_scenario_hash(gold_spec),
             scenario=scenario,
         )
         ad = make_adjudication(model_id="judge-model", instance_id="judge-lane")
@@ -529,6 +597,10 @@ class TestPromotion:
         assert len(promoted.promotion_history) == len(candidate.promotion_history) + 1
         assert promoted.promotion_history[-1].from_tier == ProvenanceTier.SILVER
         assert promoted.promotion_history[-1].to_tier == ProvenanceTier.GOLD
+        assert promoted.generator_identity == candidate.generator_identity
+        assert promoted.source_scenario_id == candidate.source_scenario_id
+        assert promoted.source_scenario_hash == candidate.source_scenario_hash
+        assert promoted.origin == CandidateOrigin.MODEL_GENERATED
 
     def test_promotion_timestamp_comes_from_adjudication(self):
         """Req #3: Promotion-event time must come from adjudication record, not datetime.now()."""
@@ -580,8 +652,8 @@ class TestPromotion:
         event = promoted.promotion_history[-1]
         assert event.from_tier == ProvenanceTier.SILVER
         assert event.to_tier == ProvenanceTier.GOLD
-        assert event.judge is not None
-        assert event.judge.model_id == "independent-judge"
+        assert event.adjudication_record == ad
+        assert event.adjudication_record.judge.model_id == "independent-judge"
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -595,7 +667,11 @@ class TestSelfCertification:
     def test_self_certification_is_quarantined(self):
         """Same model_id (same or different instance) is caught."""
         candidate = load_candidate("self_certified_reject.json")
-        ad = make_adjudication(model_id="same-model", instance_id="different-instance")
+        ad = make_adjudication(
+            provider_id="deepseek",
+            model_id="same-model",
+            instance_id="different-instance",
+        )
         result = promote_candidate(candidate, adjudication=ad)
         assert isinstance(result, PromotionOutcome.Quarantined)
         assert result.quarantine.reason == QuarantineReason.SELF_CERTIFICATION
@@ -608,6 +684,7 @@ class TestSelfCertification:
         candidate = load_candidate("valid_silver_candidate.json")
         d = json.loads(candidate.model_dump_json())
         d["generator_identity"] = {"model_id": "model-a", "instance_id": "lane-1"}
+        d["derivation_id"] = None
         modified = CorpusCandidate.model_validate(d)
         ad = make_adjudication(model_id="model-a", instance_id="lane-2")
         result = promote_candidate(modified, adjudication=ad)
@@ -619,6 +696,7 @@ class TestSelfCertification:
         candidate = load_candidate("valid_silver_candidate.json")
         d = json.loads(candidate.model_dump_json())
         d["generator_identity"] = {"model_id": "model-a", "instance_id": "lane-1"}
+        d["derivation_id"] = None
         modified = CorpusCandidate.model_validate(d)
         ad = make_adjudication(model_id="model-b", instance_id="lane-1")
         result = promote_candidate(modified, adjudication=ad)
@@ -651,6 +729,7 @@ class TestQuarantine:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id="test-source",
+            source_scenario_hash=compute_scenario_hash(invalid_scenario),
             scenario=invalid_scenario,
         )
         result = promote_candidate(candidate, adjudication=self._make_adjudication())
@@ -697,6 +776,7 @@ class TestQuarantine:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id="test-source",
+            source_scenario_hash=compute_scenario_hash(safe_scenario),
             scenario=safe_scenario,
         )
         # Should fail on adjudication requirement, NOT on authority breach
@@ -719,6 +799,7 @@ class TestQuarantine:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id="test-source",
+            source_scenario_hash=compute_scenario_hash(safe_scenario),
             scenario=safe_scenario,
         )
         # Should fail on adjudication requirement, NOT on authority breach
@@ -741,6 +822,7 @@ class TestQuarantine:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id="test-source",
+            source_scenario_hash=compute_scenario_hash(valid_scenario),
             scenario=valid_scenario,
         )
         result = promote_candidate(candidate, adjudication=self._make_adjudication())
@@ -794,6 +876,7 @@ class TestQuarantine:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id=gold_spec.scenario_id,
+            source_scenario_hash=compute_scenario_hash(gold_spec),
             scenario=scenario,
         )
         ad = self._make_adjudication()
@@ -826,36 +909,46 @@ class TestDerivationId:
 
     def test_derivation_id_independent_of_timestamp(self):
         """Req #6: Timestamp must not change the derivation."""
-        id1 = _compute_derivation_id("src-1", "model-a", seed="seed-x")
-        id2 = _compute_derivation_id("src-1", "model-a", seed="seed-x")
+        source_hash = "sha256:" + "1" * 64
+        params = {"seed": "seed-x"}
+        id1 = _compute_derivation_id(source_hash, "provider::model-a", transformation_parameters=params)
+        id2 = _compute_derivation_id(source_hash, "provider::model-a", transformation_parameters=params)
         assert id1 == id2
 
     def test_derivation_id_independent_of_instance(self):
         """Req #6: Lane instance must not change the derivation."""
-        id1 = _compute_derivation_id("src-1", "model-a", seed="seed-x")
-        id2 = _compute_derivation_id("src-1", "model-a", seed="seed-x")
+        source_hash = "sha256:" + "1" * 64
+        id1 = _compute_derivation_id(source_hash, "provider::model-a", transformation_parameters={"seed": "seed-x"})
+        id2 = _compute_derivation_id(source_hash, "provider::model-a", transformation_parameters={"seed": "seed-x"})
         assert id1 == id2
 
     def test_derivation_id_changes_with_seed(self):
-        id1 = _compute_derivation_id("src-1", "model-a", seed="seed-a")
-        id2 = _compute_derivation_id("src-1", "model-a", seed="seed-b")
+        source_hash = "sha256:" + "1" * 64
+        id1 = _compute_derivation_id(source_hash, "provider::model-a", transformation_parameters={"seed": "seed-a"})
+        id2 = _compute_derivation_id(source_hash, "provider::model-a", transformation_parameters={"seed": "seed-b"})
         assert id1 != id2
 
     def test_derivation_id_changes_with_model(self):
-        id1 = _compute_derivation_id("src-1", "model-a", seed="seed-x")
-        id2 = _compute_derivation_id("src-1", "model-b", seed="seed-x")
+        source_hash = "sha256:" + "1" * 64
+        id1 = _compute_derivation_id(source_hash, "provider::model-a", transformation_parameters={"seed": "seed-x"})
+        id2 = _compute_derivation_id(source_hash, "provider::model-b", transformation_parameters={"seed": "seed-x"})
         assert id1 != id2
 
     def test_derivation_id_changes_with_source(self):
-        id1 = _compute_derivation_id("src-1", "model-a", seed="seed-x")
-        id2 = _compute_derivation_id("src-2", "model-a", seed="seed-x")
+        id1 = _compute_derivation_id("sha256:" + "1" * 64, "provider::model-a", transformation_parameters={"seed": "seed-x"})
+        id2 = _compute_derivation_id("sha256:" + "2" * 64, "provider::model-a", transformation_parameters={"seed": "seed-x"})
         assert id1 != id2
+
+    def test_complete_source_content_changes_scenario_hash(self):
+        source = load_candidate("valid_gold_seed.json").scenario
+        changed = _adapt_scenario(source, scenario_id="different-source-content")
+        assert compute_scenario_hash(source) != compute_scenario_hash(changed)
 
     def test_rejects_mismatched_derivation_id(self):
         """Req #6: Recompute and reject a supplied mismatched derivation ID."""
         with pytest.raises(ValueError, match="does not match"):
             _validate_derivation_id(
-                "src-1", "model-a", "seed-x",
+                "sha256:" + "1" * 64, "provider::model-a", {"seed": "seed-x"},
                 supplied="sha256:" + "a" * 64,
             )
 
@@ -863,7 +956,7 @@ class TestDerivationId:
         """Derivation ID must be sha256:<64hex>."""
         with pytest.raises(ValueError, match="derivation_id must be"):
             _validate_derivation_id(
-                "src-1", "model-a", "seed-x",
+                "sha256:" + "1" * 64, "provider::model-a", {"seed": "seed-x"},
                 supplied="invalid-hash",
             )
 
@@ -876,19 +969,8 @@ class TestDerivationId:
 
     def test_promotion_rejects_mismatched_derivation_id(self):
         """Promotion quarantines on derivation ID mismatch."""
-        gen = GeneratorIdentity(model_id="model-a", instance_id="x")
-        gold_spec = load_candidate("valid_gold_seed.json").scenario
-        scenario = _adapt_scenario(gold_spec, provenance="silver", adjudication="pending")
-        candidate = CorpusCandidate(
-            provenance=ProvenanceTier.SILVER,
-            adjudication=AdjudicationState.PENDING,
-            family=ScenarioFamily.BOOKING_CREATE,
-            generator_identity=gen,
-            generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
-            source_scenario_id="src-1",
-            derivation_id="sha256:" + "a" * 64,  # wrong hash
-            derivation_seed="seed-x",
-            scenario=scenario,
+        candidate = load_candidate("valid_silver_candidate.json").model_copy(
+            update={"derivation_id": "sha256:" + "a" * 64}
         )
         ad = make_adjudication(model_id="independent-judge")
         result = promote_candidate(candidate, adjudication=ad)
@@ -1006,8 +1088,8 @@ class TestExtraKeyRejection:
                 decision="accepted",
                 judge=JudgeIdentity(model_id="j"),
                 timestamp=datetime(2026, 1, 1, tzinfo=timezone.utc),
-                checked_semantic_scope="action",
-                checked_evidence_scope="spans",
+                checked_semantic_scope={"action"},
+                checked_evidence_scope={"source_spans"},
                 evidence_ref="ev-001",
                 unknown_field="x",  # type: ignore[call-arg]
             )
@@ -1038,6 +1120,7 @@ class TestSourceCoordinateValidation:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id="test-source",
+            source_scenario_hash=compute_scenario_hash(invalid_scenario),
             scenario=invalid_scenario,
         )
         result = promote_candidate(candidate, adjudication=make_adjudication())
@@ -1062,6 +1145,7 @@ class TestSourceCoordinateValidation:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id="test-source",
+            source_scenario_hash=compute_scenario_hash(invalid_scenario),
             scenario=invalid_scenario,
         )
         result = promote_candidate(candidate, adjudication=make_adjudication())
@@ -1195,6 +1279,14 @@ class TestRegistryFixture:
         # Must not claim eligibility
         assert hc.access_notes is not None
         assert "NOT downloaded or accepted" in hc.access_notes
+        assert hc.estimated_count == 739
+        assert set(hc.required_gates) == {
+            "licence_provenance_review",
+            "recording_consent_review",
+            "jurisdiction_privacy_review",
+            "redaction_leakage_scan",
+            "local_only_inspection",
+        }
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -1220,6 +1312,7 @@ class TestFullPromotionPaths:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id=gold_spec.scenario_id,
+            source_scenario_hash=compute_scenario_hash(gold_spec),
             scenario=bronze_scenario,
         )
         # Bronze -> Silver
@@ -1236,6 +1329,11 @@ class TestFullPromotionPaths:
         assert isinstance(result2, PromotionOutcome.Promoted)
         gold = result2.candidate
         assert gold.provenance == ProvenanceTier.GOLD
+        assert [
+            event.adjudication_record for event in gold.promotion_history
+        ] == [ad1, ad2]
+        assert gold.generator_identity == gen
+        assert gold.source_scenario_hash == compute_scenario_hash(gold_spec)
         assert gold.adjudication == AdjudicationState.ADJUDICATED
         # Check promotion history preserved
         assert len(gold.promotion_history) == 2
@@ -1253,6 +1351,7 @@ class TestFullPromotionPaths:
             generator_identity=gen,
             generation_timestamp=datetime(2026, 7, 14, 10, 0, 0, tzinfo=timezone.utc),
             source_scenario_id=gold_spec.scenario_id,
+            source_scenario_hash=compute_scenario_hash(gold_spec),
             scenario=scenario,
         )
         ad = make_adjudication(model_id="independent-judge")
@@ -1293,6 +1392,7 @@ class TestGoldFixtureValidation:
             candidate = CorpusCandidate(
                 provenance=ProvenanceTier.GOLD,
                 adjudication=AdjudicationState.ADJUDICATED,
+                origin=CandidateOrigin.HUMAN_AUTHORED,
                 family=family,
                 scenario=spec,
             )

@@ -2,18 +2,23 @@
   "provenance": "silver",
   "adjudication": "pending",
   "family": "booking_create",
+  "origin": "model_generated",
   "generator_identity": {
+    "provider_id": "deepseek",
     "model_id": "same-model",
     "instance_id": "same-instance"
   },
   "judge_identity": {
+    "actor_kind": "model",
+    "provider_id": "deepseek",
     "model_id": "same-model",
     "instance_id": "same-instance"
   },
   "generation_timestamp": "2026-07-14T10:00:00+00:00",
   "source_scenario_id": "booking_create_then_exact_duplicate",
-  "derivation_id": "sha256:9dcd7b3c29f4af22d4c698dd8cd69d304f0d5153118214424f8a571236f1e633",
-  "derivation_seed": "self-certified",
+  "source_scenario_hash": "sha256:9e7997238ef48d3e871953db09193bb2bb8b07ce331cc085228c205814cdc2ca",
+  "derivation_id": "sha256:8dc3b74a8c29aa7d61b618db27fb0d7724c1cdc84eaa37c2ab410b63bfd05033",
+  "transformation_parameters": {"seed": "self-certified"},
   "authority_grant": {
     "provider_write": false,
     "diary_write": false,
