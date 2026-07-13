@@ -297,6 +297,12 @@ def test_outcome_roster_unavailable_accessibility(diary_page):
         "must_block_confirmation": True
     }
     response["staff_review"]["blocks"] = []
+    response["ui_view_model"] = _bernie_ui_view_model(
+        proposal_state="blocked",
+        confirmation_state="blocked",
+        copy_mode="blocked",
+        primary_copy="There is no bookable session configured for that request.",
+    )
 
     confirm_payloads = []
     supervised_requests = []
@@ -329,7 +335,7 @@ def test_outcome_roster_unavailable_accessibility(diary_page):
         assert headline_locator.text_content().strip() == "Roster/schedule unavailable"
 
         action_locator = diary_page.locator("[data-testid='bernie-review-action']")
-        assert "I could not find a bookable session" in action_locator.text_content()
+        assert "There is no bookable session configured" in action_locator.text_content()
 
         empty_locator = diary_page.locator("[data-testid='bernie-review-candidates-empty']")
         assert empty_locator.is_visible()
@@ -410,22 +416,16 @@ def test_outcome_clarification_accessibility(diary_page):
         assert status_locator.get_attribute("role") == "status"
         assert status_locator.get_attribute("aria-live") == "polite"
 
-        # 3. Focus coherence gap check
-        # When submit button was clicked and then replaced, the focus got lost.
-        # Verify that the active element is now the body element, showing focus loss.
-        active_tag = diary_page.evaluate("document.activeElement.tagName")
-        assert active_tag == "BODY"
+        # 3. The completed async result receives coherent keyboard focus.
+        diary_page.wait_for_function(
+            "document.activeElement?.getAttribute('data-testid') === 'bernie-review-status'"
+        )
 
-        # 4. Edit action focus gap
-        # Click the "Edit request" button, and check where focus goes.
-        # It tries to focus "bernie-pilot-instruction" which does not exist, so focus remains on the button or body.
+        # 4. Edit action returns focus to the actual instruction field.
         edit_btn = diary_page.locator("[data-testid='bernie-edit-button']")
         assert edit_btn.is_visible()
         edit_btn.click()
-
-        # Verify that the actual instruction textarea (id: 'bernie-instruction-input') is NOT focused
-        # due to the selector bug in the JS click handler.
-        assert diary_page.evaluate("document.activeElement.id") != "bernie-instruction-input"
+        assert diary_page.evaluate("document.activeElement.id") == "bernie-instruction-input"
 
         # 5. Absence of confirmation authority
         assert diary_page.locator("[data-testid='bernie-review-confirm-button']").count() == 0

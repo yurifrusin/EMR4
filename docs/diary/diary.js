@@ -990,6 +990,13 @@ function bernieReviewTransitionFromViewModel(payload, viewModel, candidateSlots,
   } else if (flags.show_no_slot_suggestions === true || candidate === "empty_after_search" || copyMode === "no_slots") {
     state = "no_slots";
   } else if (
+    payload.status === "roster_unavailable" ||
+    payload.outcome?.kind === "roster_unavailable" ||
+    payload.reception_policy?.availability === "roster_unavailable" ||
+    payload.reception_policy?.roster_unavailable === true
+  ) {
+    state = "roster_unavailable";
+  } else if (
     flags.show_clarification_prompt === true ||
     flags.show_identity_verification_panel === true ||
     clarification === "required" ||
@@ -5249,7 +5256,12 @@ function renderBernieReview(payload, interpretEnvelope = null) {
   statusBadge.textContent = bernieStatusCopyForPayload(payload);
   statusBadge.setAttribute("role", "status");
   statusBadge.setAttribute("aria-live", "polite");
+  statusBadge.tabIndex = -1;
   contentEl.appendChild(statusBadge);
+
+  // Move keyboard focus to the completed async result instead of leaving it
+  // on a submit control that was removed during rendering.
+  setTimeout(() => statusBadge.focus(), 75);
 
   // 2. Headline
   const headline = document.createElement("h3");
@@ -5319,7 +5331,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
       editBtn.setAttribute("data-testid", "bernie-edit-button");
       editBtn.textContent = "Edit request";
       editBtn.addEventListener("click", () => {
-        const instruction = document.getElementById("bernie-pilot-instruction");
+        const instruction = document.getElementById("bernie-instruction-input");
         if (instruction) {
           instruction.focus();
         }
