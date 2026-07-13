@@ -59,8 +59,13 @@ turns:
       confirmed: true
     expect:
       status: 200
+      appointment_delta: 0
+      audit_delta: 0
       fields:
         safe: false
+        autonomy_tier: blocked
+        "blocks.0.code": create_proposal_revalidation_blocked
+        "blocks.1.code": appointment_conflict
 expected:
   appointment_written: false
   audit_written: false

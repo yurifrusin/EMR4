@@ -2,8 +2,9 @@ id: booking_overlap_not_exact_duplicate
 category: booking_confirmation
 description: >
   Prove that an appointment created mid-scenario by an external fixture event
-  participates in the existing-booking classifier without being seeded before
-  replay. The supervise step finds the external appointment as an exact match.
+  overlaps the requested slot without being an exact duplicate. The existing
+  booking starts before the requested window and has a different duration, so
+  it must not trigger existing_booking_found and slot search must move onward.
 reference_date: "2026-07-14"
 initial_state:
   fixtures:
@@ -20,8 +21,8 @@ turns:
       patient: Margaret Thompson
       practitioner: Dr Shera
       date: "2026-07-15"
-      time: "15:00"
-      duration_minutes: 15
+      time: "14:50"
+      duration_minutes: 30
       status: Booked
     expect:
       appointment_delta: 0
@@ -39,19 +40,18 @@ turns:
         latest_time: "16:30"
         duration_minutes: 15
       patient_id: "{patient_id}"
+      selected_candidate_index: 0
     expect:
       status: 200
       appointment_delta: 0
       audit_delta: 0
       fields:
-        result: existing_booking_found
+        result: confirmation_ready
         safe: true
-        requires_confirmation: false
-        "staff_review.confirmation_ready": false
-        "staff_review.confirm_endpoint": null
-        "staff_review.confirm_payload": null
-        "existing_booking.appointment_date": "2026-07-15"
-        "existing_booking.start_time_local": "15:00:00"
+        requires_confirmation: true
+        "staff_review.confirmation_ready": true
+        "staff_review.selected_slot.start_time_local": "15:30:00"
+        "existing_booking": null
 expected:
   appointment_written: false
   audit_written: false

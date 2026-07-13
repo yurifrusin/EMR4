@@ -68,7 +68,7 @@ tracks that actual architecture.
 | Status | In progress |
 | Outcome | Reception can create, edit, link, and status-change appointments through proposal-first flows with clear conflict/break/provisional warnings |
 | Representative Sprints | Command proposal layer, create/update/status/delete confirmation families, idempotent command ledger, duplicate recovery, patient search alerts, authoritative accessible confirmation receipt |
-| Next Candidate Sprints | T1 Stateful Diary Scenario Laboratory, followed by behaviour-matrix gaps exposed by its corpus |
+| Next Candidate Sprints | T2 deterministic receptionist behaviour matrix using the completed T1 stateful corpus |
 | Done Signals | All high-risk receptionist appointment writes pass through deterministic proposal/confirmation contracts before mutation |
 
 ### Programme 2C - Ariadne Tooling and Review Automation
@@ -89,7 +89,7 @@ tracks that actual architecture.
 | Outcome | Bernie suggests and prepares receptionist actions safely while deterministic APIs retain truth, confirmation, audit, and write authority |
 | Representative Sprints | Action grammar, interpretation and scenario harnesses, supervised booking, duplicate recovery, proposal/confirmation contracts, accessible authoritative receipt |
 | Gate State | Core booking proposal, audit, idempotency, human-confirmation, and receipt semantics exist; autonomous model-to-database writes remain prohibited |
-| Next Candidate Sprints | T1 stateful scenario laboratory, T2 deterministic behaviour matrix, then T3 live-model shadow evaluation with writes disabled |
+| Next Candidate Sprints | T2 deterministic behaviour matrix, then T3 live-model shadow evaluation with writes disabled |
 
 ### Programme 2E - Practice Messaging and Daily Admin
 
@@ -139,7 +139,8 @@ phases. Its ordering rule is:
 5. reception clinical intake without diagnosis or triage autonomy; and
 6. separately validated, protocol-bound reception triage assistance.
 
-The default next tranche after S25-S27 is T1 Stateful Diary Scenario Laboratory.
+T1 Stateful Diary Scenario Laboratory is complete. The default next tranche is
+T2 Deterministic Receptionist Behaviour Matrix.
 Do not begin patient-specific consultant runtime before T4's clinical-safety
 foundation, and do not treat GP-assistant success as sufficient evidence for
 reception triage.

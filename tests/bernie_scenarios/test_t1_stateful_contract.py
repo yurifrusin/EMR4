@@ -223,3 +223,62 @@ turns:
       duration_minutes: 0
     expect: {}
 """))
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("patient", "another-patient", "fixture patient"),
+        ("practitioner", "another-practitioner", "fixture practitioner"),
+        ("status", "Unknown", "status"),
+        ("date", "not-a-date", "date"),
+        ("time", "25:00", "time"),
+        ("duration_minutes", 481, "duration_minutes"),
+        ("id", "../escape", "local alias"),
+    ],
+)
+def test_loader_rejects_external_values_outside_allowlist(
+    tmp_path, field, value, message
+):
+    values = {
+        "patient": "Margaret Thompson",
+        "practitioner": "Dr Shera",
+        "date": "2026-07-14",
+        "time": "15:00",
+        "duration_minutes": 15,
+        "status": "Booked",
+        "id": "external-one",
+    }
+    values[field] = value
+    body = "\n".join(f"      {key}: {json.dumps(item)}" for key, item in values.items())
+    with pytest.raises(ValueError, match=message):
+        load_scenario_yaml(_write(tmp_path, f"""
+id: ext-outside-allowlist
+category: booking_create
+reference_date: 2026-07-13
+initial_state: {{}}
+turns:
+  - action: external_appointment
+    input:
+      operation: create
+{body}
+    expect: {{}}
+"""))
+
+
+def test_loader_rejects_seeded_entity_outside_fixture_allowlist(tmp_path):
+    with pytest.raises(ValueError, match="fixture patient"):
+        load_scenario_yaml(_write(tmp_path, """
+id: unsafe-seed-reference
+category: booking_create
+reference_date: 2026-07-13
+initial_state:
+  seeded_appointments:
+    - patient: arbitrary-patient-id
+      practitioner: Dr Shera
+      date: "2026-07-14"
+      time: "15:00"
+turns:
+  - action: supervise
+    expect: {}
+"""))

@@ -69,7 +69,7 @@ xfail:                                # optional; mark scenario as expected-fail
   reason: "Why this fails today and what sprint will fix it"
 
 turns:
-  - action: interpret | normalize | search | select | supervise | confirm
+  - action: interpret | normalize | search | select | supervise | confirm | external_appointment
     input:                            # action-specific; may use {practitioner_id},
       key: value                      # {patient_id}, {practice_id} template vars
     expect:
@@ -125,6 +125,12 @@ contracts such as `command_candidate.patient_id` or
   authoritative `staff_review.confirm_payload` from the last `supervise` turn,
   and sends a deterministic `Idempotency-Key` unless `input.idempotency_key` is
   supplied
+- **external_appointment**: applies one test-fixture-owned `create` or
+  `set_status` event between route turns. It accepts only the canonical fixture
+  patient/practitioner, known appointment statuses, local aliases, valid local
+  dates/times, and durations from 1 to 480 minutes. Its database mutation is
+  reported through `fixture_event_count` and is excluded from product
+  appointment/audit deltas.
 
 Example interpret thread:
 

@@ -51,6 +51,26 @@ explicit option when hard OS isolation is worth interactive Windows approval.
 Without it, isolation is Git/worktree plus post-run verification, not a hard
 filesystem sandbox.
 
+## Disposable Worker Launch Invariants
+
+The T1 stateful-scenario tranche exposed four transport/integration details that
+must remain deterministic without becoming approval gates:
+
+- fetch the handoff remote and resolve its exact SHA before `git worktree add`;
+  do not assume the local `handoff/current` ref advanced merely because
+  `master:handoff/current` was pushed;
+- on Windows background launches, preserve spaced model names as one argument;
+  prefer the Python wrapper's argument list directly, or explicitly quote the
+  complete `Start-Process` argument string;
+- a completion artifact committed in the same candidate commit must not claim
+  that commit's final SHA, because amending the artifact changes the SHA again;
+  use the Git branch/receipt as final commit authority and let the artifact name
+  the parent/base SHA or state `candidate_commit: resolved_by_receipt`; and
+- if implementation necessarily touches a support guard outside the packet's
+  ownership list, the worker must report it and Sol must review the exact delta.
+  The exception does not require user approval when it is mechanically coupled,
+  bounded, tested, and does not expand authority.
+
 The Claude Pro subscription was cancelled effective after 2026-07-13. Fable
 and Opus remain declared capabilities for portability and any final provider-
 permitted access, but allocation requires a live availability probe and must

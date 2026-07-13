@@ -1,6 +1,6 @@
 # T1 Stateful Diary Scenario Laboratory
 
-Status: in progress; T1.1 foundation + T1.2 external-event state matrix complete
+Status: complete; T1.1-T1.3 integrated
 
 Date: 2026-07-13
 
@@ -41,6 +41,12 @@ T1.2 adds:
 - the existing fake-provider guard and deterministic clinic-local clock are
   preserved.
 
+T1.3 adds a focused route-intercepted Playwright flow that confirms the first
+booking, starts a fresh request, repeats the same instruction, renders the
+existing-booking outcome, exposes accessible change-time/day actions, and proves
+that only one confirmation request is issued. This is E3 UI-contract evidence;
+it is not a non-intercepted E2 backend transport run.
+
 ## Golden Scenarios
 
 ### T1.1
@@ -66,14 +72,16 @@ between booking states that an exact-duplicate classifier must handle:
 
 | Scenario | Setup | Expected Outcome |
 |---|---|---|
-| `booking_overlap_not_exact_duplicate` | External `create` at 15:00-15:15 same patient/practitioner | `existing_booking_found` — exact match detected via external event |
+| `booking_overlap_not_exact_duplicate` | External `create` at 14:50-15:20; request begins at 15:00 | `confirmation_ready` at 15:30 — overlap is not misclassified as an exact duplicate |
 | `booking_same_day_distinct_not_exact_duplicate` | Seed at 09:00 + external `create` at 10:00; request 15:00 | `confirmation_ready` — distinct times not treated as duplicate |
 | `booking_terminal_status_not_existing` | Seed at 15:00 Booked → external `set_status` Cancelled; request same slot | `confirmation_ready` — cancelled appointment does not masquerade as existing |
 | `booking_stale_confirm_revalidates` | Interpret + supervise → external `create` conflicting slot → confirm | `safe=false`, no write — stale confirm fails closed |
 
-The stale-confirm scenario proves that an appointment inserted between
+The stale-confirm scenario commits the external event as a separate simulated
+transaction. It proves that an appointment inserted between
 proposal preparation and the confirm call causes the confirm endpoint to return
-`safe=false` without creating a second booking or audit row.
+`safe=false` with `create_proposal_revalidation_blocked` and
+`appointment_conflict`, without creating a second booking or audit row.
 
 ## External Appointment Action Schema
 
@@ -89,7 +97,7 @@ and does not count toward `appointment_delta` or `audit_delta`.
     practitioner: Dr Shera         # fixture alias or {practitioner_id}
     date: "2026-07-15"            # required for create
     time: "15:00"                 # required for create
-    duration_minutes: 15          # positive int; defaults to 15
+    duration_minutes: 15          # 1-480; defaults to 15
     status: Booked                # required for create, required for set_status
     id: ext-appt                  # optional alias for {appointment_id:ext-appt}
     appointment_id: existing      # required for set_status; references a prior
@@ -120,21 +128,43 @@ pre-existing missing-directory skip remained.
 
 Result: all 9 evidence snapshot tests passed.
 
+```powershell
+.venv\Scripts\python.exe -m pytest review\test_diary_duplicate_booking.py tests\test_bernie_ui_accessible_confirmation.py -q
+node --check docs\diary\diary.js
+```
+
+Result: all 7 focused browser/accessibility tests passed and the diary script
+passed syntax validation. The in-app Browser transport could not initialize, so
+the established local Playwright harness supplied the browser evidence.
+
+## T1.3 Product Correction
+
+The browser worker found that the backend correctly returned
+`existing_booking` at the supervised-response root, but `loadBernieLiveReview()`
+projected only `staff_review`, `reception_policy`, and `suggestions`. The diary
+therefore lost the booking details on a real duplicate response. The projection
+now preserves root `existing_booking` in both supervised-review paths, and the
+Playwright fixture supplies only the real backend shape so the regression cannot
+be masked by duplicating the field inside `staff_review`.
+
 ## Boundaries
 
 - fake provider only;
 - DB-backed E1 route replay, not live-provider evidence;
 - seeded/external state is test-only and allowlisted;
-- no application route, schema, UI, provider, deployment, or write-authority
+- no application route, schema, provider, deployment, or write-authority
   behaviour changed;
+- one diary response-projection defect was corrected without changing booking
+  authority or backend behaviour;
 - no PHI-bearing replay artifacts are emitted;
 - fixture events are tracked separately via `fixture_event_count` and excluded
   from product delta assertions.
 
-## Next T1 Increment
+## Next Tranche
 
-T1.3 should add selected controlled-backend Playwright evidence for the
-diary grid interaction surface, keeping autonomous/model-to-database writes,
+T2 should build the deterministic behaviour matrix over duplicate, overlap,
+same-day-distinct, terminal-state, ambiguity, no-slot, and concurrent-change
+semantics, keeping autonomous/model-to-database writes,
 patient-specific consultant runtime, reception triage, PHI-enabled new
 providers, live clinical pilots, deployment/release, external clients,
 H15/historical-trove runtime use, memory/RAG/GraphRAG authority, and

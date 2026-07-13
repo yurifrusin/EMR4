@@ -15053,3 +15053,39 @@ weakness is lifecycle reliability, for which this tranche added bounded
 transcripts, multi-signal liveness, tolerant semantic markers, atomic artifact
 ownership, native Windows process checks, and shared master-worktree toolchain
 discovery.
+
+## T1 Closeout - Stateful Diary Scenario Laboratory
+
+Status: accepted and integrated on 2026-07-13.
+
+- T1.1 established deterministic clinic time, allowlisted seeded state,
+  supervised-booking replay, authoritative confirmation payloads, exact per-turn
+  appointment/audit deltas, and redacted evidence.
+- DeepSeek V4 Flash implemented the bounded T1.2 external-state candidate in a
+  disposable worktree. Sol corrected its entity/status/time/duration allowlists,
+  fixture-vs-product evidence deltas, cross-transaction stale-confirm semantics,
+  and the mislabeled overlap scenario before acceptance.
+- Antigravity/Gemini 3.5 Flash implemented a focused stateful Playwright
+  candidate. It exposed a real product defect: root `existing_booking` details
+  were dropped by the diary's staff-review projection. Sol fixed both projection
+  paths and removed the worker fixture's masking workaround.
+- The accepted matrix covers exact duplicate, true overlap, same-day distinct,
+  terminal status, and a concurrent booking inserted after proposal preparation.
+  The latter fails confirmation with explicit revalidation/conflict blocks and
+  zero product writes.
+- Verification passed across the complete scenario/integrity/evidence slice,
+  programme freshness guards, the focused duplicate Playwright test, accessible
+  confirmation tests, diary JavaScript syntax, and whitespace checks. One
+  pre-existing expected-xfail and one missing-directory skip remain.
+- The in-app Browser transport failed during initialization; the established
+  repository Playwright harness supplied the E3 UI-contract evidence. No E2
+  non-intercepted browser/backend claim is made.
+
+Harness observations were converted into launch invariants in
+`docs/ariadne-economical-deepseek-execution.md`: fetched exact handoff SHA,
+Windows argument quoting, no self-referential candidate SHA in committed worker
+artifacts, and Sol review for bounded mechanical ownership exceptions. No
+Conductor or verifier was needed because the approved roadmap fixed the tranche.
+
+Sprint engine state: continuing to T2 Deterministic Receptionist Behaviour
+Matrix. No user decision is required.

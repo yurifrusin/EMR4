@@ -6,12 +6,13 @@ from pathlib import Path
 PHASE_PROGRAMMES = Path("orchestration/phase_programmes.md")
 
 
-def test_phase_programmes_recommended_move_is_current_after_s25_s27():
+def test_phase_programmes_recommended_move_is_current_after_t1():
     text = PHASE_PROGRAMMES.read_text(encoding="utf-8")
 
     assert "## Recommended Next Planning Move" in text
     assert "docs/bernie-consultant-triage-implementation-roadmap.md" in text
-    assert "default next tranche after S25-S27 is T1 Stateful Diary Scenario Laboratory" in text
+    assert "T1 Stateful Diary Scenario Laboratory is complete" in text
+    assert "default next tranche is\nT2 Deterministic Receptionist Behaviour Matrix" in text
     assert "live-model diary shadow evaluation with writes disabled" in text
     assert "clinician-facing cited GP-assistant consultation" in text
     assert "do not treat GP-assistant success as sufficient evidence for" in text

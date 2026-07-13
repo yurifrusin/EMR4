@@ -13,6 +13,7 @@ Authorship boundary:
 from __future__ import annotations
 
 import re
+from datetime import date, time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
@@ -30,6 +31,25 @@ KNOWN_ACTIONS = frozenset({
 })
 
 EXTERNAL_OPERATIONS = frozenset({"create", "set_status"})
+EXTERNAL_MAX_DURATION_MINUTES = 480
+EXTERNAL_PATIENT_REFS = frozenset(
+    {"{patient_id}", "fixture_patient", "Margaret Thompson"}
+)
+EXTERNAL_PRACTITIONER_REFS = frozenset(
+    {"{practitioner_id}", "fixture_practitioner", "Dr Shera"}
+)
+EXTERNAL_APPOINTMENT_STATUSES = frozenset(
+    {
+        "Booked",
+        "Confirmed",
+        "Arrived",
+        "InConsult",
+        "Completed",
+        "Cancelled",
+        "NoShow",
+        "DNA",
+    }
+)
 
 EXTERNAL_CREATE_ALLOWED = frozenset({
     "operation", "patient", "practitioner", "date", "time",
@@ -97,6 +117,11 @@ def _validate_external_appointment_input(
     inp: dict[str, Any], scenario_id: str, idx: int,
 ) -> None:
     """Validate external_appointment turn input fields."""
+    if not isinstance(inp, dict):
+        raise ValueError(
+            f"Scenario {scenario_id!r} turn {idx}: "
+            "external_appointment input must be a mapping"
+        )
     operation = inp.get("operation")
     if not operation or operation not in EXTERNAL_OPERATIONS:
         raise ValueError(
@@ -124,11 +149,54 @@ def _validate_external_appointment_input(
                     f"external_appointment(create) '{required}' is required"
                 )
         duration = inp.get("duration_minutes", 15)
-        if not isinstance(duration, int) or isinstance(duration, bool) or duration <= 0:
+        if (
+            not isinstance(duration, int)
+            or isinstance(duration, bool)
+            or not 1 <= duration <= EXTERNAL_MAX_DURATION_MINUTES
+        ):
             raise ValueError(
                 f"Scenario {scenario_id!r} turn {idx}: "
-                "external_appointment(create) duration_minutes must be "
-                "a positive integer"
+                "external_appointment(create) duration_minutes must be an "
+                f"integer from 1 to {EXTERNAL_MAX_DURATION_MINUTES}"
+            )
+        patient_ref = str(inp.get("patient") or "{patient_id}")
+        if patient_ref not in EXTERNAL_PATIENT_REFS:
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(create) patient must reference the fixture patient"
+            )
+        practitioner_ref = str(inp.get("practitioner") or "{practitioner_id}")
+        if practitioner_ref not in EXTERNAL_PRACTITIONER_REFS:
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(create) practitioner must reference "
+                "the fixture practitioner"
+            )
+        try:
+            date.fromisoformat(str(inp["date"]))
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(create) date must be YYYY-MM-DD"
+            ) from None
+        try:
+            time.fromisoformat(str(inp["time"]))
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(create) time must be a valid local time"
+            ) from None
+        alias = str(inp.get("id") or "external")
+        if not re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9_-]*", alias):
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(create) id must be a local alias"
+            )
+        reason = inp.get("reason")
+        if reason is not None and (not isinstance(reason, str) or len(reason) > 500):
+            raise ValueError(
+                f"Scenario {scenario_id!r} turn {idx}: "
+                "external_appointment(create) reason must be at most 500 characters"
             )
     elif operation == "set_status":
         if not inp.get("appointment_id"):
@@ -141,6 +209,21 @@ def _validate_external_appointment_input(
                 f"Scenario {scenario_id!r} turn {idx}: "
                 "external_appointment(set_status) 'status' is required"
             )
+
+    status = inp.get("status", "Booked")
+    if status not in EXTERNAL_APPOINTMENT_STATUSES:
+        raise ValueError(
+            f"Scenario {scenario_id!r} turn {idx}: external_appointment status "
+            f"must be one of {sorted(EXTERNAL_APPOINTMENT_STATUSES)}"
+        )
+    appointment_alias = inp.get("appointment_id")
+    if appointment_alias is not None and not re.fullmatch(
+        r"[a-zA-Z0-9][a-zA-Z0-9_-]*", str(appointment_alias)
+    ):
+        raise ValueError(
+            f"Scenario {scenario_id!r} turn {idx}: "
+            "external_appointment appointment_id must be a local alias"
+        )
 
 
 def _parse_turn(raw: dict, idx: int, scenario_id: str) -> ScenarioTurn:
@@ -229,10 +312,46 @@ def _validate_executable_initial_state(raw: Any, scenario_id: str) -> dict[str, 
         aliases.add(alias)
 
         duration = seed.get("duration_minutes", 15)
-        if not isinstance(duration, int) or isinstance(duration, bool) or duration <= 0:
+        if (
+            not isinstance(duration, int)
+            or isinstance(duration, bool)
+            or not 1 <= duration <= EXTERNAL_MAX_DURATION_MINUTES
+        ):
             raise ValueError(
                 f"Scenario {scenario_id!r}: seeded_appointments[{index}]."
-                "duration_minutes must be a positive integer"
+                f"duration_minutes must be an integer from 1 to {EXTERNAL_MAX_DURATION_MINUTES}"
+            )
+        patient_ref = str(seed.get("patient") or "{patient_id}")
+        if patient_ref not in EXTERNAL_PATIENT_REFS:
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded_appointments[{index}].patient "
+                "must reference the fixture patient"
+            )
+        practitioner_ref = str(seed.get("practitioner") or "{practitioner_id}")
+        if practitioner_ref not in EXTERNAL_PRACTITIONER_REFS:
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded_appointments[{index}].practitioner "
+                "must reference the fixture practitioner"
+            )
+        status = seed.get("status", "Booked")
+        if status not in EXTERNAL_APPOINTMENT_STATUSES:
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded_appointments[{index}].status "
+                f"must be one of {sorted(EXTERNAL_APPOINTMENT_STATUSES)}"
+            )
+        try:
+            date.fromisoformat(str(seed["date"]))
+            time.fromisoformat(str(seed["time"]))
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded_appointments[{index}] "
+                "date/time must be valid local values"
+            ) from None
+        reason = seed.get("reason")
+        if reason is not None and (not isinstance(reason, str) or len(reason) > 500):
+            raise ValueError(
+                f"Scenario {scenario_id!r}: seeded_appointments[{index}].reason "
+                "must be at most 500 characters"
             )
 
     simulated_time = raw.get("simulated_clinic_time")

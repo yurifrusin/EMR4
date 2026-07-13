@@ -102,8 +102,8 @@ def test_sprint287_markdown_is_preserved_while_handover_advances():
     assert "Sprint 288: post-D5 next-slice inventory" in text
     assert "documentation/tests-only" in text
     assert "Stop before any work that adds telemetry" in text
-    assert "T1 Stateful Diary Scenario Laboratory is underway" in agents
-    assert "Continue without pause to T1.2" in agents
+    assert "T1 Stateful Diary Scenario Laboratory is complete" in agents
+    assert "Continue without pause to T2" in agents
     assert "docs/bernie-consultant-triage-implementation-roadmap.md" in agents
 
 

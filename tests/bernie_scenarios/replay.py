@@ -329,17 +329,25 @@ class ReplayContext:
 
         if operation == "create":
             patient_ref = str(inp.get("patient") or "{patient_id}")
-            patient_id = (
-                self.patient_id
-                if patient_ref in {"{patient_id}", "fixture_patient", "Margaret Thompson"}
-                else patient_ref
-            )
+            if patient_ref not in {
+                "{patient_id}",
+                "fixture_patient",
+                "Margaret Thompson",
+            }:
+                raise ValueError(
+                    "External appointment patient escaped the fixture allowlist"
+                )
+            patient_id = self.patient_id
             practitioner_ref = str(inp.get("practitioner") or "{practitioner_id}")
-            practitioner_id = (
-                self.practitioner_id
-                if practitioner_ref in {"{practitioner_id}", "fixture_practitioner", "Dr Shera"}
-                else practitioner_ref
-            )
+            if practitioner_ref not in {
+                "{practitioner_id}",
+                "fixture_practitioner",
+                "Dr Shera",
+            }:
+                raise ValueError(
+                    "External appointment practitioner escaped the fixture allowlist"
+                )
+            practitioner_id = self.practitioner_id
             appointment_date = date.fromisoformat(str(inp["date"]))
             start_time_local = time.fromisoformat(str(inp["time"]))
             local_start = datetime.combine(
@@ -363,6 +371,8 @@ class ReplayContext:
             self.db.add(appointment)
             self.db.flush()
             alias = str(inp.get("id") or f"ext-{self.fixture_event_count}")
+            if alias in self.seeded_appointment_ids:
+                raise ValueError(f"Duplicate external appointment alias {alias!r}")
             self.seeded_appointment_ids[alias] = appointment.id
             # Track that this fixture event created a new Appointment row
             self._fixture_appointment_delta += 1
@@ -374,14 +384,14 @@ class ReplayContext:
                     f"Unknown external appointment alias {alias!r} "
                     f"in scenario turn (fixture_event_count={self.fixture_event_count})"
                 )
-            appt = (
-                self.db.query(Appointment)
-                .get(self.seeded_appointment_ids[alias])
-            )
+            appt = self.db.get(Appointment, self.seeded_appointment_ids[alias])
             if appt is not None:
                 appt.status = AppointmentStatus(str(inp["status"]))
                 self.db.flush()
 
+        # The event represents a change made by another actor/transaction. It
+        # must survive a later route rollback during stale-confirm revalidation.
+        self.db.commit()
         self.fixture_event_count += 1
         return TurnRecord(
             "external_appointment",
@@ -429,16 +439,22 @@ def _seed_initial_state(scenario: Scenario, ctx: ReplayContext) -> int:
         alias = str(seed.get("id") or f"seed-{index}")
         patient_ref = str(seed.get("patient") or "{patient_id}")
         practitioner_ref = str(seed.get("practitioner") or "{practitioner_id}")
-        patient_id = (
-            ctx.patient_id
-            if patient_ref in {"{patient_id}", "fixture_patient", "Margaret Thompson"}
-            else patient_ref
-        )
-        practitioner_id = (
-            ctx.practitioner_id
-            if practitioner_ref in {"{practitioner_id}", "fixture_practitioner", "Dr Shera"}
-            else practitioner_ref
-        )
+        if patient_ref not in {
+            "{patient_id}",
+            "fixture_patient",
+            "Margaret Thompson",
+        }:
+            raise ValueError("Seeded appointment patient escaped the fixture allowlist")
+        if practitioner_ref not in {
+            "{practitioner_id}",
+            "fixture_practitioner",
+            "Dr Shera",
+        }:
+            raise ValueError(
+                "Seeded appointment practitioner escaped the fixture allowlist"
+            )
+        patient_id = ctx.patient_id
+        practitioner_id = ctx.practitioner_id
         appointment_date = date.fromisoformat(str(seed["date"]))
         start_time_local = time.fromisoformat(str(seed["time"]))
         local_start = datetime.combine(appointment_date, start_time_local).replace(
@@ -663,8 +679,8 @@ def run_scenario(
         ctx,
         seeded_appointment_count=seeded_appointment_count,
         fixture_event_count=ctx.fixture_event_count,
-        appointment_delta=appt_after - appt_before,
-        audit_delta=audit_after - audit_before,
+        appointment_delta=product_appt_delta,
+        audit_delta=product_audit_delta,
         failure_count=len(failures),
     )
     return ReplayResult(
