@@ -55,8 +55,9 @@ def _run(
     return result, json.loads(receipt.read_text(encoding="utf-8"))
 
 
-def test_pty_adapter_accepts_worker_completion_artifact(tmp_path: Path):
-    result, receipt = _run(tmp_path, "completion", artifact_kind="completion")
+@pytest.mark.parametrize("mode", ["completion", "markdown_completion", "bold_completion"])
+def test_pty_adapter_accepts_worker_completion_artifact(tmp_path: Path, mode: str):
+    result, receipt = _run(tmp_path, mode, artifact_kind="completion")
 
     assert result.returncode == 0
     assert receipt["status"] == "completed"
@@ -90,7 +91,10 @@ def test_pty_adapter_exits_only_after_artifact_and_observes_mailbox(tmp_path: Pa
     assert receipt["completion_signal"] == "artifact_marker"
     assert receipt["exit_sent_after_artifact"] is True
     assert receipt["mailbox_event_count"] == 1
-    assert receipt["terminal_output_persisted"] is False
+    assert receipt["terminal_output_persisted"] is True
+    assert receipt["terminal_transcript"]["path"] == "outbox/receipt.json.terminal.jsonl"
+    assert receipt["terminal_transcript"]["event_count"] > 0
+    assert receipt["terminal_transcript"]["byte_count"] <= receipt["terminal_transcript"]["max_bytes"]
     assert receipt["process_cleanup_confirmed"] is True
 
 

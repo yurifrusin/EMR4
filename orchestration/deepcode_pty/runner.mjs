@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 import pty from "node-pty";
 
 const ADAPTER_VERSION = "ariadne.deepcode_pty_receipt.v1";
+const MAX_TRANSCRIPT_EVENTS = 256;
+const MAX_TRANSCRIPT_BYTES = 64 * 1024;
 function parseArgs(argv) {
   const options = {};
   for (let index = 0; index < argv.length; index += 1) {
@@ -57,17 +59,155 @@ function stripAnsi(value) {
     .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "");
 }
 
+function redactTerminalData(value) {
+  let redactions = 0;
+  const replace = (pattern, replacement) => {
+    value = value.replace(pattern, (...args) => {
+      redactions += 1;
+      return `${args[1]}${replacement}`;
+    });
+  };
+  replace(/((?:authorization|proxy-authorization)\s*[:=]\s*(?:bearer\s+)?)[^\s,;]+/gi, "[REDACTED]");
+  replace(/((?:api[_-]?key|access[_-]?token|refresh[_-]?token|client[_-]?secret|password|secret|token)\s*[:=]\s*["']?)[^\s,"']+/gi, "[REDACTED]");
+  replace(/((?:sk|rk|ghp|gho|github_pat|xox[baprs])-)[A-Za-z0-9._-]+/g, "[REDACTED]");
+  replace(/(AIza)[A-Za-z0-9_-]{20,}/g, "[REDACTED]");
+  value = value.replace(/\beyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b/g, () => {
+    redactions += 1;
+    return "[REDACTED]";
+  });
+  return { value, redactions };
+}
+
+function transcriptPathFor(receipt, outbox, requested) {
+  return requested || path.join(outbox, `${path.basename(receipt)}.terminal.jsonl`);
+}
+
+function createTranscriptWriter(transcriptPath, cwd) {
+  fs.mkdirSync(path.dirname(transcriptPath), { recursive: true });
+  fs.writeFileSync(transcriptPath, "", "utf8");
+  let bytes = 0;
+  let events = 0;
+  let redactions = 0;
+  let eventLimitReached = false;
+  let byteLimitReached = false;
+
+  function serialize(text, sequence) {
+    return JSON.stringify({
+      schema_version: "ariadne.deepcode_terminal_event.v1",
+      sequence,
+      recorded_at: new Date().toISOString(),
+      kind: "pty_data",
+      text,
+    }) + "\n";
+  }
+
+  function fitToBytes(text, sequence, available) {
+    if (Buffer.byteLength(serialize(text, sequence), "utf8") <= available) return text;
+    const characters = Array.from(text);
+    let low = 0;
+    let high = characters.length;
+    let best = "";
+    while (low <= high) {
+      const middle = Math.floor((low + high) / 2);
+      const candidate = characters.slice(0, middle).join("");
+      if (Buffer.byteLength(serialize(candidate, sequence), "utf8") <= available) {
+        best = candidate;
+        low = middle + 1;
+      } else {
+        high = middle - 1;
+      }
+    }
+    return best;
+  }
+
+  return {
+    record(data) {
+      const sanitized = redactTerminalData(stripAnsi(data));
+      redactions += sanitized.redactions;
+      if (!sanitized.value) return sanitized;
+      if (events >= MAX_TRANSCRIPT_EVENTS) {
+        eventLimitReached = true;
+        return sanitized;
+      }
+      const sequence = events + 1;
+      const available = MAX_TRANSCRIPT_BYTES - bytes;
+      const text = fitToBytes(sanitized.value, sequence, available);
+      const serialized = serialize(text, sequence);
+      if (!text && Buffer.byteLength(serialized, "utf8") > available) {
+        byteLimitReached = true;
+        return sanitized;
+      }
+      if (text.length !== sanitized.value.length) byteLimitReached = true;
+      fs.appendFileSync(transcriptPath, serialized, "utf8");
+      bytes += Buffer.byteLength(serialized, "utf8");
+      events += 1;
+      return sanitized;
+    },
+    metadata() {
+      return {
+        path: path.relative(cwd, transcriptPath).replaceAll("\\", "/"),
+        event_count: events,
+        byte_count: bytes,
+        max_event_count: MAX_TRANSCRIPT_EVENTS,
+        max_bytes: MAX_TRANSCRIPT_BYTES,
+        event_count_truncated: eventLimitReached,
+        byte_truncated: byteLimitReached,
+        redacted: redactions > 0,
+        redacted_value_count: redactions,
+      };
+    },
+  };
+}
+
+function normalizeMarkerText(value) {
+  value = value.trim();
+  for (let pass = 0; pass < 4; pass += 1) {
+    const heading = value.match(/^#{1,6}\s+(.+)$/);
+    if (heading) {
+      value = heading[1].trim();
+      continue;
+    }
+    let changed = false;
+    for (const wrapper of ["**", "__", "`", "*", "_"]) {
+      if (value.startsWith(wrapper) && value.endsWith(wrapper) && value.length > wrapper.length * 2) {
+        value = value.slice(wrapper.length, -wrapper.length).trim();
+        changed = true;
+        break;
+      }
+    }
+    if (!changed) break;
+  }
+  return value;
+}
+
+function parseArtifactMarker(body, artifactKind) {
+  const supported = artifactKind === "completion"
+    ? new Set(["STATUS: COMPLETE"])
+    : new Set(["DECISION: PASS", "DECISION: REVISION_REQUIRED"]);
+  const prefix = artifactKind === "completion" ? "STATUS:" : "DECISION:";
+  const lines = [];
+  for (const line of body.split(/\r?\n/)) {
+    const cells = line.includes("|") ? line.split("|") : [line];
+    for (const cell of cells) {
+      const normalized = normalizeMarkerText(cell);
+      if (normalized) lines.push(normalized);
+    }
+  }
+  const tailStart = Math.max(0, lines.length - 8);
+  const found = lines
+    .map((line, index) => ({ line: line.toUpperCase(), index }))
+    .filter(({ line }) => supported.has(line));
+  const terminalLines = lines.slice(tailStart).map((line) => line.toUpperCase()).filter((line) => line.startsWith(prefix));
+  if (found.length !== 1) return { valid: false };
+  if (found[0].index < tailStart) return { valid: false };
+  if (terminalLines.some((line) => !supported.has(line)) || terminalLines.length !== 1) return { valid: false };
+  return { valid: true };
+}
+
 function validArtifact(artifact, artifactKind) {
   if (!fs.existsSync(artifact)) return false;
   const body = fs.readFileSync(artifact, "utf8");
-  return body.split(/\r?\n/).some((line) => {
-    const cells = line.includes("|") ? line.split("|") : [line];
-    return cells.some((cell) => {
-      const normalized = cell.trim().replace(/^[*`_]+|[*`_]+$/g, "").trim();
-      if (artifactKind === "completion") return /^STATUS:\s*complete$/i.test(normalized);
-      return /^DECISION:\s*(pass|revision_required)$/i.test(normalized);
-    });
-  });
+  return parseArtifactMarker(body, artifactKind).valid;
 }
 
 function writeReceipt(receiptPath, payload) {
@@ -130,7 +270,7 @@ function fixtureCommand(mode, artifact, outbox) {
   if (!process.env.ARIADNE_PTY_TEST_MODE) {
     throw new Error("--fixture requires ARIADNE_PTY_TEST_MODE");
   }
-  if (!["success", "permission", "hang", "ignore_exit", "markdown_decision", "completion", "artifact_only"].includes(mode)) {
+  if (!["success", "permission", "hang", "ignore_exit", "markdown_decision", "completion", "markdown_completion", "bold_completion", "artifact_only", "diagnostic_burst"].includes(mode)) {
     throw new Error("unsupported fixture mode");
   }
   const fixture = path.join(path.dirname(fileURLToPath(import.meta.url)), "fake_deepcode.mjs");
@@ -144,8 +284,12 @@ async function main() {
   const artifact = resolveWithin(cwd, options.artifact, "artifact");
   const outbox = resolveWithin(cwd, options.outbox, "outbox");
   const receipt = resolveWithin(cwd, options.receipt, "receipt");
+  const transcript = resolveWithin(cwd, transcriptPathFor(receipt, outbox, options.transcript), "transcript");
   if (!fs.existsSync(packet)) throw new Error("packet does not exist");
   if (fs.existsSync(artifact)) throw new Error("artifact must not exist before PTY launch");
+  if (transcript === receipt || transcript === artifact) throw new Error("transcript must be distinct from receipt and artifact");
+
+  const transcriptWriter = createTranscriptWriter(transcript, cwd);
 
   const baselineEvents = listEvents(outbox);
   const command = options.fixture
@@ -189,7 +333,8 @@ async function main() {
   });
 
   child.onData((data) => {
-    terminalWindow = stripAnsi(`${terminalWindow}${data}`).slice(-4000);
+    const sanitized = transcriptWriter.record(data);
+    terminalWindow = `${terminalWindow}${sanitized.value}`.slice(-4000);
     if (/permission required/i.test(terminalWindow) && /do you want to proceed\?/i.test(terminalWindow)) {
       permissionPrompt = true;
       child.write("\x03");
@@ -300,7 +445,8 @@ async function main() {
     mailbox_event_count: newEvents.length,
     mailbox_events: newEvents.sort(),
     child_exit_code: childExitCode,
-    terminal_output_persisted: false,
+    terminal_output_persisted: true,
+    terminal_transcript: transcriptWriter.metadata(),
   });
   process.stdout.write(`${JSON.stringify({ status, reason, receipt }, null, 2)}\n`);
   return status === "completed" ? 0 : status === "blocked" ? 3 : 4;

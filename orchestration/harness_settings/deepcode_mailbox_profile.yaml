@@ -18,6 +18,21 @@ pty_lifecycle:
   event_trust: untrusted_transport_completion_requires_artifact_validation
   deepcode_notify_hook_required_for_automated_sessions: false
   controlled_exit_required: true
+diagnostics:
+  terminal_transcript:
+    format: jsonl
+    local_only_relative_to_caller_area: true
+    default_path: outbox_receipt_named_terminal_jsonl
+    max_event_count: 256
+    max_bytes: 65536
+    redact_authorization_and_token_values: true
+    raw_unbounded_terminal_output_prohibited: true
+liveness:
+  observer: scripts/ariadne_deepcode_liveness.py
+  statuses: [progressing, idle_observed, completed, process_missing]
+  signals: [artifact_state, git_worktree_fingerprint, relevant_file_mtimes, child_process_presence_activity, receipt_mailbox_events]
+  elapsed_time_is_advisory_only: true
+  automatic_process_termination: false
 shared_toolchain:
   integration_worktree_preferred: true
   inject_python_path: true

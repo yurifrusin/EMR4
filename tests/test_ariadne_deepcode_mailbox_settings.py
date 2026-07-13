@@ -123,6 +123,18 @@ def test_runner_detects_permission_screen_and_fails_closed():
 def test_runner_receipt_never_claims_terminal_output_was_persisted():
     source = _runner()
 
-    assert "terminal_output_persisted: false" in source
+    assert "terminal_output_persisted: true" in source
+    assert "terminal_transcript: transcriptWriter.metadata()" in source
     assert "process_cleanup_confirmed: processCleanupConfirmed" in source
     assert "forced_cleanup: forcedCleanup" in source
+
+
+def test_runtime_observability_profile_is_bounded_redacted_and_non_destructive():
+    profile = _profile()
+
+    assert profile["diagnostics"]["terminal_transcript"]["max_event_count"] == 256
+    assert profile["diagnostics"]["terminal_transcript"]["max_bytes"] == 65536
+    assert profile["diagnostics"]["terminal_transcript"]["redact_authorization_and_token_values"] is True
+    assert profile["liveness"]["statuses"] == ["progressing", "idle_observed", "completed", "process_missing"]
+    assert profile["liveness"]["elapsed_time_is_advisory_only"] is True
+    assert profile["liveness"]["automatic_process_termination"] is False
