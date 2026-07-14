@@ -1,0 +1,164 @@
+{
+  "attack_class": "quarantine_bypass",
+  "generator_identity": {
+    "provider_id": "google",
+    "model_id": "gemini-3.5-flash",
+    "instance_id": "ag-lane"
+  },
+  "source_scenario_id": "booking_create_then_exact_duplicate",
+  "expected_disposition": "quarantine",
+  "quarantine_reasons": [
+    "schema_invalid"
+  ],
+  "attempted_adjudication_record": {
+    "decision": "accepted",
+    "judge": {
+      "actor_kind": "model",
+      "provider_id": "google",
+      "model_id": "gemini-3.5-flash",
+      "instance_id": "ag-lane-judge"
+    },
+    "timestamp": "2026-07-14T12:00:00+00:00",
+    "checked_semantic_scope": [
+      "action"
+    ],
+    "checked_evidence_scope": [
+      "dialogue_turns",
+      "source_spans",
+      "normalized_values",
+      "expected_outcomes"
+    ],
+    "evidence_ref": "ev-003"
+  },
+  "candidate_payload": {
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "booking_create",
+    "origin": "model_generated",
+    "generator_identity": {
+      "provider_id": "google",
+      "model_id": "gemini-3.5-flash",
+      "instance_id": "ag-lane"
+    },
+    "judge_identity": null,
+    "generation_timestamp": "2026-07-14T10:00:00+00:00",
+    "source_scenario_id": "booking_create_then_exact_duplicate",
+    "source_scenario_hash": "sha256:9e7997238ef48d3e871953db09193bb2bb8b07ce331cc085228c205814cdc2ca",
+    "derivation_id": null,
+    "transformation_parameters": {
+      "seed": "bypass-attempt-v1"
+    },
+    "authority_grant": {
+      "provider_write": false,
+      "diary_write": false,
+      "confirmation": false,
+      "override_authority": false
+    },
+    "adjudication_record": null,
+    "promotion_history": [],
+    "scenario": {
+      "spec_version": "lc1.v1",
+      "scenario_id": "bypass_silver_001",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "booking_create",
+      "description": "Candidate attempting promotion using an adjudication record with incomplete scope.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Book Margaret Thompson with Dr Shera tomorrow at 3pm"
+        }
+      ],
+      "reference_date": "2026-07-13",
+      "clinic_clock": "2026-07-13T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-14",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 45,
+            "text": "tomorrow"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 23,
+            "end": 36,
+            "text": "with Dr Shera"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 22,
+            "text": "Margaret Thompson"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-13",
+        "diary_page_date": "2026-07-14",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "created",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-14",
+          "start_time": "15:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "created",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "no_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  }
+}

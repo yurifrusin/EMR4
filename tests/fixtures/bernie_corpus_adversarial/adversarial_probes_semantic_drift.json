@@ -1,0 +1,164 @@
+{
+  "attack_class": "semantic_drift",
+  "generator_identity": {
+    "provider_id": "google",
+    "model_id": "gemini-3.5-flash",
+    "instance_id": "ag-lane"
+  },
+  "source_scenario_id": "booking_create_then_exact_duplicate",
+  "expected_disposition": "quarantine",
+  "quarantine_reasons": [
+    "adjudication_rejected"
+  ],
+  "candidate_payload": {
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "booking_create",
+    "origin": "model_generated",
+    "generator_identity": {
+      "provider_id": "google",
+      "model_id": "gemini-3.5-flash",
+      "instance_id": "ag-lane"
+    },
+    "judge_identity": null,
+    "generation_timestamp": "2026-07-14T10:00:00+00:00",
+    "source_scenario_id": "booking_create_then_exact_duplicate",
+    "source_scenario_hash": "sha256:9e7997238ef48d3e871953db09193bb2bb8b07ce331cc085228c205814cdc2ca",
+    "derivation_id": null,
+    "transformation_parameters": {
+      "seed": "semantic-drift-v1"
+    },
+    "authority_grant": {
+      "provider_write": false,
+      "diary_write": false,
+      "confirmation": false,
+      "override_authority": false
+    },
+    "adjudication_record": null,
+    "promotion_history": [],
+    "scenario": {
+      "spec_version": "lc1.v1",
+      "scenario_id": "semantic_drift_silver_001",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "booking_create",
+      "description": "Utterance specifies 4pm but metadata/deltas claim 3pm (15:00).",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 4pm for 15 minutes"
+        },
+        {
+          "turn": 2,
+          "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 4pm for 15 minutes"
+        }
+      ],
+      "reference_date": "2026-07-13",
+      "clinic_clock": "2026-07-13T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-14",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 71,
+            "text": "at 4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 71,
+            "text": "4pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 71,
+            "text": "4pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 55,
+            "text": "with Dr Shera"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 41,
+            "text": "Margaret Thompson"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "dialogue_form": "repeated",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-13",
+        "diary_page_date": "2026-07-14",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "created",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-14",
+          "start_time": "15:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "created",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "no_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  }
+}
