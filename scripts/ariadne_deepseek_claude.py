@@ -47,7 +47,13 @@ def build_command(*, packet: str, model: str, effort: str) -> list[str]:
     ]
 
 
-def deepseek_environment(*, api_key: str, model: str, effort: str) -> dict[str, str]:
+def deepseek_environment(
+    *,
+    api_key: str,
+    model: str,
+    effort: str,
+    cwd: Path | None = None,
+) -> dict[str, str]:
     if not api_key:
         raise ValueError("DEEPSEEK_API_KEY is not set")
     env = os.environ.copy()
@@ -61,6 +67,13 @@ def deepseek_environment(*, api_key: str, model: str, effort: str) -> dict[str, 
             "CLAUDE_CODE_EFFORT_LEVEL": effort,
         }
     )
+    if cwd is not None:
+        resolved_cwd = str(cwd.resolve())
+        # Some CLI/tool layers consult inherited shell-directory variables
+        # instead of the child process' real cwd. Keep every directory signal
+        # pinned to the disposable worker worktree.
+        env["PWD"] = resolved_cwd
+        env["INIT_CWD"] = resolved_cwd
     return env
 
 
@@ -72,12 +85,21 @@ def run_worker(
         raise ValueError("worker packet must not be empty")
     if not cwd.is_dir():
         raise ValueError("worker cwd must be an existing directory")
-    command = build_command(packet=packet, model=model, effort=effort)
+    resolved_cwd = cwd.resolve()
+    bounded_packet = (
+        f"AUTHORIZED_WORKTREE_ROOT: {resolved_cwd}\n"
+        "All file and shell operations must remain under that root.\n\n"
+        f"{packet}"
+    )
+    command = build_command(packet=bounded_packet, model=model, effort=effort)
     completed = subprocess.run(
         command,
-        cwd=cwd,
+        cwd=resolved_cwd,
         env=deepseek_environment(
-            api_key=os.environ.get("DEEPSEEK_API_KEY", ""), model=model, effort=effort
+            api_key=os.environ.get("DEEPSEEK_API_KEY", ""),
+            model=model,
+            effort=effort,
+            cwd=resolved_cwd,
         ),
         capture_output=True,
         text=True,

@@ -36,6 +36,21 @@ def test_environment_uses_only_process_local_deepseek_configuration(monkeypatch)
     assert env["UNRELATED"] == "preserved"
 
 
+def test_environment_pins_shell_directory_signals_to_worker(tmp_path: Path):
+    worktree = tmp_path / "worker"
+    worktree.mkdir()
+
+    env = deepseek_environment(
+        api_key="test-key",
+        model="deepseek-v4-flash",
+        effort="high",
+        cwd=worktree,
+    )
+
+    assert env["PWD"] == str(worktree.resolve())
+    assert env["INIT_CWD"] == str(worktree.resolve())
+
+
 @pytest.mark.parametrize("model", ["deepseek-chat", "claude-opus"])
 def test_command_rejects_unregistered_models(model: str):
     with pytest.raises(ValueError, match="unsupported DeepSeek model"):
@@ -60,12 +75,17 @@ def test_run_worker_writes_compact_receipt_without_session_id_or_raw_stderr(
         "permission_denials": [],
         "terminal_reason": "completed",
     }
-    monkeypatch.setattr(
-        "scripts.ariadne_deepseek_claude.subprocess.run",
-        lambda *args, **kwargs: SimpleNamespace(
+    captured: dict[str, object] = {}
+
+    def fake_run(*args, **kwargs):
+        captured["command"] = args[0]
+        captured["cwd"] = kwargs["cwd"]
+        captured["env"] = kwargs["env"]
+        return SimpleNamespace(
             returncode=0, stdout=json.dumps(raw), stderr="sensitive terminal detail"
-        ),
-    )
+        )
+
+    monkeypatch.setattr("scripts.ariadne_deepseek_claude.subprocess.run", fake_run)
 
     receipt = run_worker(
         packet_path=packet,
@@ -81,6 +101,17 @@ def test_run_worker_writes_compact_receipt_without_session_id_or_raw_stderr(
     assert receipt["adapter_cost_estimate_authoritative"] is False
     assert receipt["authoritative_billing_source"] == "deepseek_provider_usage"
     assert receipt["provider_billed_cost_usd"] is None
+    assert captured["cwd"] == worktree.resolve()
+    env = captured["env"]
+    assert isinstance(env, dict)
+    assert env["PWD"] == str(worktree.resolve())
+    assert env["INIT_CWD"] == str(worktree.resolve())
+    command = captured["command"]
+    assert isinstance(command, list)
+    packet_argument = command[command.index("-p") + 1]
+    assert packet_argument.startswith(
+        f"AUTHORIZED_WORKTREE_ROOT: {worktree.resolve()}\n"
+    )
     rendered = output.read_text(encoding="utf-8")
     assert '"total_cost_usd"' not in rendered
     assert "session_id" not in rendered
