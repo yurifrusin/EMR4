@@ -4,35 +4,57 @@
 
 ### `app/services/bernie/semantic_extraction.py`
 
-Two narrow, oracle-free edits:
+Three narrow, oracle-free edits:
 
-1. **Standalone `someone` → `ambiguous`**  
-   Added `"someone"` to `_AMBIGUOUS_PATIENT` regex (line 327).  
+1. **Standalone `someone` → `ambiguous`**
+   Added `"someone"` to `_AMBIGUOUS_PATIENT` regex (line 327).
    Previously, `someone` passed through to `_PATIENT_PATTERN` without matching
-   (lowercase doesn't satisfy `[A-Z][a-z]+`) and fell back to `omitted`.  
-   Now it is recognised as an ambiguous patient reference.  
+   (lowercase doesn't satisfy `[A-Z][a-z]+`) and fell back to `omitted`.
+   Now it is recognised as an ambiguous patient reference.
    Does not affect existing `a patient`, `this patient`, etc.
 
-2. **Additive non-correction turn resolves `ambiguous` → `exact`**  
-   In `_extract_entity_semantics()`, changed the additive-turn conditions from
-   `== "omitted"` to `in ("omitted", "ambiguous")` for patient, practitioner,
-   and duration semantics (lines 794, 798, 802).  
-   Previously, only `omitted` → `exact` was supported; an initially ambiguous
-   reference followed by an explicit name remained `ambiguous`.  
+2. **Additive non-correction turn resolves only patient `ambiguous` → `exact`**
+   In `_extract_entity_semantics()`, changed the additive-turn condition for
+   patient from `== "omitted"` to `in ("omitted", "ambiguous")` (line 798).
+   Practitioner and duration additive semantics remain at pre-LC4R4
+   `== "omitted"` only — they do NOT resolve `ambiguous → exact`.
+   Previously (LC4R4 initial), all three entity fields gained `ambiguous → exact`
+   resolution; this revision restricts that to patient only.
    Correction semantics (`corrected`) are unchanged.
 
 ### `tests/test_bernie_semantic_extraction.py`
 
-Added `TestLC4R4PatientEntity` class (22 tests) covering:
+Added `TestLC4R4PatientEntity` class (24 tests) covering:
 
 - Standalone `someone` is `ambiguous` (4 tests)
-- Additive ambiguous → exact (3 tests)
+- Additive ambiguous → exact for patient only (4 tests)
+  - Practitioner ambiguous stays ambiguous (bounded boundary)
+  - Duration ambiguous stays ambiguous (bounded boundary)
+  - Practitioner omitted → exact still works
 - Pronouns `she`/`he`/`they` not promoted (3 tests)
 - Correction semantics preserved (3 tests)
 - Substring overmatch protection (2 tests)
 - Lossless normalization preserved (2 tests)
 - Unsafe/negated/clarification boundaries (3 tests)
 - Oracle independence and no-default-synthesis (2 tests)
+
+### `scripts/bernie_lc4r4_report.py`
+
+Complete rewrite to fix six defects:
+
+1. Uses `audit_candidates()` for aligned boundary classification instead
+   of heuristic string matching.
+2. Selection now filters by aligned boundary + uses runtime
+   extractor/correction predicates. Hash uses SHA-256 over
+   newline-joined sorted scenario IDs truncated to 16 hex characters.
+3. Normalization failure signatures computed via per-field comparison
+   with `source_spans` using exact category definitions.
+4. `--check` compares recomputed report against frozen
+   `docs/bernie-lc4r4-report.json` and enforces all hashes, counts,
+   signatures, baselines, safety, and variance.
+5. LC4R4 report has its own deterministic hash computed with the
+   hash field excluded.
+6. No approximation note emitted — exact reproduction achieved.
 
 ## Whole-corpus effect
 
@@ -44,24 +66,23 @@ Added `TestLC4R4PatientEntity` class (22 tests) covering:
 | Safety | 1152/1152 | 1152/1152 |
 | Repeat variance | 0 | 0 |
 
-126 standalone-`someone` scenarios now return `ambiguous` (previously `omitted`).  
-13 additive ambiguous→exact scenarios now resolve correctly.  
+70 aligned standalone-`someone` scenarios now return `ambiguous` (previously `omitted`).
+13 aligned additive ambiguous→exact scenarios now resolve correctly.
 Net entity-semantics improvement: **45 new passes** (the remainder have
 additional entity issues beyond patient).
 
-## Frozen selection discrepancy
+## Frozen selection
 
-The contract states 70 standalone-someone and 13 additive-resolved aligned
-records with selection hashes `50260edcf0fa2c0d` and `485cd258fd5ebd60`.
-My recomputation finds 126 someone scenarios (all corpus scenarios with
-expected `patient_semantics=ambiguous` and `\bsomeone\b` in the first turn)
-and the same 13 additive scenarios.  The someone selection hash
-(`1d99c3484497bc86`) and additive hash (`8c3ce5ddf6347607`) differ from the
-contract's expected values.  This is reported as `revision_required`.
+| Family | Expected | Observed | Match |
+|---|---|---|---|
+| Standalone `someone` | `50260edcf0fa2c0d` (70 records) | `50260edcf0fa2c0d` (70 records) | ✅ |
+| Additive resolved | `485cd258fd5ebd60` (13 records) | `485cd258fd5ebd60` (13 records) | ✅ |
 
-## Normalization
+Selection uses the audit-based aligned boundary and runtime predicates.
+Hashes use SHA-256 over ``\\n``.join(sorted(scenario_ids)) truncated to 16 hex chars.
 
-No normalization parser was changed.  Normalized values remain at 101/1152.
-The seven normalization failure signatures are reported diagnostically but
-exact scenario-level reproduction requires the aligned audit module, which
-is outside the bounded implementation surface.
+## Normalization failure signatures
+
+All seven exact signatures match the Sol contract (total 489 aligned records).
+No approximation — signatures derived from per-field `source_spans` comparison
+over the aligned audit partition.

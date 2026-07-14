@@ -3,7 +3,6 @@
   "development_only": true,
   "silver_pending_only": true,
   "corpus_hash": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
-  "report_hash": "sha256:a2ecc5b45d13c0a0caba6aa9f92a20a2cddbfa99015df530a6674df5443e4a5b",
   "pre_lc4r4_baseline": {
     "intended_action": 880,
     "action_semantics": 730,
@@ -35,24 +34,24 @@
   "frozen_selection": {
     "standalone_someone": {
       "expected_count": 70,
-      "observed_count": 126,
-      "observed_hash": "1d99c3484497bc86",
+      "observed_count": 70,
+      "observed_hash": "50260edcf0fa2c0d",
       "expected_hash": "50260edcf0fa2c0d",
-      "hash_match": false
+      "hash_match": true
     },
     "additive_resolved": {
       "expected_count": 13,
       "observed_count": 13,
-      "observed_hash": "8c3ce5ddf6347607",
+      "observed_hash": "485cd258fd5ebd60",
       "expected_hash": "485cd258fd5ebd60",
-      "hash_match": false
+      "hash_match": true
     }
   },
   "full_partition_entity_effects": {
     "pre_lc4r4_entity_passes": 255,
     "post_lc4r4_entity_passes": 300,
     "net_improvement": 45,
-    "total_someone_scenarios_fixed": 126,
+    "total_someone_scenarios_fixed": 70,
     "total_additive_scenarios_fixed": 13
   },
   "normalized_values_preserved": {
@@ -61,7 +60,7 @@
     "preserved": true
   },
   "normalization_failure_signatures": {
-    "observed_total_nv_failures_per_scenario": 1051,
+    "observed_total_nv_failures_per_scenario": 489,
     "expected_aligned_nv_failure_records": 489,
     "expected_signatures": {
       "unsupported_expected_value_only": 298,
@@ -72,7 +71,16 @@
       "surface_absent_from_contract_plus_surface_disagreement": 12,
       "surface_absent_from_contract_only": 2
     },
-    "note": "Failure signatures from per-sample scores; classification granularity approximates Sol's scenario-level signatures.  Exact scenario-level signature reproduction requires the aligned development audit module."
+    "observed_signatures": {
+      "unsupported_expected_value_only": 298,
+      "surface_disagrees_contract_plus_unsupported_expected": 114,
+      "surface_disagrees_contract_only": 31,
+      "surface_absent_from_contract_plus_unsupported_expected": 17,
+      "all_three_conflict_types": 15,
+      "surface_absent_from_contract_plus_surface_disagreement": 12,
+      "surface_absent_from_contract_only": 2
+    },
+    "note": "Exact scenario-level signature reproduction using the aligned development audit module with per-field source-span comparison."
   },
   "assertions": {
     "entity_semantics_at_least_300": true,
@@ -83,5 +91,6 @@
     "clarification_no_regression": true,
     "safety_exact_1152_of_1152": true,
     "repeat_variance_zero": true
-  }
+  },
+  "report_hash": "sha256:879e2e25959ecf0d60cba63ffc4f7c5073fff85af35f5467c88a99c4290b39bf"
 }

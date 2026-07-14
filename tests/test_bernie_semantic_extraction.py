@@ -93,6 +93,17 @@ class TestLC4R4PatientEntity:
         )
         assert result.entity_semantics["patient"] == "exact"
 
+    def test_additive_ambiguous_duration_stays_ambiguous(self) -> None:
+        """Non-correction turn does NOT resolve ambiguous duration
+        to exact (pre-LC4R4 boundary: only patient additive semantics
+        may resolve ambiguous -> exact)."""
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera for a while tomorrow at 3pm.",
+             "The appointment should be 30 minutes long."],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["duration"] == "ambiguous"
+
     def test_additive_omitted_to_exact(self) -> None:
         """Non-correction turn with explicit name resolves
         initial omitted patient to exact (existing behaviour)."""
@@ -103,15 +114,26 @@ class TestLC4R4PatientEntity:
         )
         assert result.entity_semantics["patient"] == "exact"
 
-    def test_additive_ambiguous_practitioner_to_exact(self) -> None:
-        """Non-correction turn also resolves ambiguous practitioner
-        to exact."""
+    def test_additive_omitted_practitioner_to_exact(self) -> None:
+        """Non-correction turn resolves omitted practitioner
+        to exact (pre-LC4R4 behaviour preserved)."""
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm.",
+             "With Dr Taylor please."],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["practitioner"] == "exact"
+
+    def test_additive_ambiguous_practitioner_stays_ambiguous(self) -> None:
+        """Non-correction turn does NOT resolve ambiguous practitioner
+        to exact (pre-LC4R4 boundary: only patient additive semantics
+        may resolve ambiguous -> exact)."""
         result = extract_semantics(
             ["Book Margaret Thompson with a doctor tomorrow at 3pm.",
              "With Dr Taylor please."],
             "2026-07-13",
         )
-        assert result.entity_semantics["practitioner"] == "exact"
+        assert result.entity_semantics["practitioner"] == "ambiguous"
 
     # --- Pronouns do not become exact patients ---
 
