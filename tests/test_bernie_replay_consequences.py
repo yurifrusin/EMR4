@@ -332,17 +332,20 @@ class TestSimulatedWriteClassification:
 class TestStatefulRefusal:
     """Stateful refusal never creates a second delta."""
 
-    def test_adversarial_single_delta(self) -> None:
-        """Adversarial scenarios have at most one delta (first turn)."""
+    def test_adversarial_zero_deltas(self) -> None:
+        """Adversarial scenarios produce zero deltas (no invented prior write)."""
         candidates = load_lc2_candidates()
         adv = [c.scenario for c in candidates if "adversarial" in c.scenario.scenario_id]
         for s in adv:
             interp = deterministic_interpret(s)
             replay = deterministic_replay(s, interp)
-            assert len(replay.appointment_deltas) <= 1, (
-                f"Adversarial scenario {s.scenario_id} has {len(replay.appointment_deltas)} deltas"
+            assert len(replay.appointment_deltas) == 0, (
+                f"Adversarial scenario {s.scenario_id} has {len(replay.appointment_deltas)} appointment deltas (expected 0)"
             )
-            assert len(replay.audit_deltas) <= 1
+            assert len(replay.audit_deltas) == 0, (
+                f"Adversarial scenario {s.scenario_id} has {len(replay.audit_deltas)} audit deltas (expected 0)"
+            )
+            assert not replay.is_simulated_confirmed_write
 
 
 # =============================================================================
@@ -461,3 +464,289 @@ class TestNegationNoDeltas:
         assert len(replay.appointment_deltas) == 0
         assert len(replay.audit_deltas) == 0
         assert not replay.is_simulated_confirmed_write
+
+
+# =============================================================================
+# 8.  Six-action oracle tests (Finding 2)
+# =============================================================================
+
+
+class TestSixActionOracle:
+    """All six diary actions produce correct outcomes, tools, deltas, and audits.
+
+    For each action asserts:
+      - exact action-specific outcome;
+      - replay tools are a subset/equal derivation of observed interpretation tools;
+      - exact appointment/audit delta shape and distinct change type for mutating
+        actions;
+      - no delta/write flag for explain; and
+      - mutating every expected field (outcome_kind, tools, deltas, clarification,
+        choices, forbidden lists) while holding utterances and explicit state
+        fixed leaves the full interpretation and replay observations unchanged.
+    """
+
+    # Utterance templates keyed by intended action.
+    # Each must trigger the correct action detection pattern and include
+    # patient name, practitioner, date, and time so clarification is not needed.
+    _ACTION_UTTERANCES: dict[str, str] = {
+        "create": (
+            "Make an appointment for Margaret Thompson with Dr Shera "
+            "tomorrow at 3pm for 15 minutes"
+        ),
+        "move": (
+            "Move the appointment for Margaret Thompson with Dr Shera "
+            "from tomorrow at 3pm to 4pm"
+        ),
+        "resize": (
+            "Make the appointment longer for Margaret Thompson with Dr Shera "
+            "tomorrow at 3pm from 15 minutes to 30 minutes"
+        ),
+        "cancel": (
+            "Cancel the appointment for Margaret Thompson with Dr Shera "
+            "tomorrow at 3pm"
+        ),
+        "status_change": (
+            "Mark the appointment for Margaret Thompson with Dr Shera "
+            "tomorrow as completed"
+        ),
+        "explain_schedule": (
+            "Explain the schedule for Margaret Thompson with Dr Shera "
+            "for tomorrow"
+        ),
+    }
+
+    # Expected outcomes keyed by intended action.
+    _EXPECTED_OUTCOMES: dict[str, str] = {
+        "create": "appointment_created",
+        "move": "appointment_moved",
+        "resize": "appointment_resized",
+        "cancel": "appointment_cancelled",
+        "status_change": "appointment_status_changed",
+        "explain_schedule": "schedule_explained",
+    }
+
+    # Expected delta change types (None for explain which has no deltas).
+    _EXPECTED_CHANGE_TYPES: dict[str, str | None] = {
+        "create": "created",
+        "move": "moved",
+        "resize": "resized",
+        "cancel": "cancelled",
+        "status_change": "status_changed",
+        "explain_schedule": None,
+    }
+
+    # Expected tool sequences.
+    _EXPECTED_TOOLS: dict[str, tuple[str, ...]] = {
+        "create": ("search_patients", "find_slots", "create_booking"),
+        "move": ("search_patients", "update_appointment"),
+        "resize": ("search_patients", "update_appointment"),
+        "cancel": ("search_patients", "update_appointment"),
+        "status_change": ("search_patients", "change_appointment_status"),
+        "explain_schedule": ("search_patients", "find_slots"),
+    }
+
+    @pytest.fixture
+    def base_scenario(self, request: pytest.FixtureRequest) -> ReceptionScenarioSpec:
+        """Build a base scenario for the requested action with proper temporal fields."""
+        action = request.param  # type: ignore[attr-defined]
+        utterance = self._ACTION_UTTERANCES[action]
+        diary_state = "empty" if action == "create" else "same_day_distinct"
+
+        # Temporal relation and bounds matching the utterance content.
+        temporal_config: dict[str, str | None] = {}
+        if action == "create":
+            temporal_config = dict(temporal_relation="exact",
+                                   earliest_time="15:00", latest_time="15:00")
+        elif action == "move":
+            temporal_config = dict(temporal_relation="interval",
+                                   earliest_time="15:00", latest_time="16:00")
+        elif action == "resize":
+            temporal_config = dict(temporal_relation="exact",
+                                   earliest_time="15:00", latest_time="15:00")
+        elif action == "cancel":
+            temporal_config = dict(temporal_relation="exact",
+                                   earliest_time="15:00", latest_time="15:00")
+        elif action == "status_change":
+            temporal_config = dict(temporal_relation="unspecified",
+                                   earliest_time=None, latest_time=None)
+        elif action == "explain_schedule":
+            temporal_config = dict(temporal_relation="unspecified",
+                                   earliest_time=None, latest_time=None)
+
+        return ReceptionScenarioSpec(
+            spec_version="lc1.v1",
+            scenario_id=f"six_action_{action}_test",
+            provenance="gold",
+            adjudication="adjudicated",
+            family=action,
+            description=f"Six-action oracle test for {action}.",
+            dialogue_turns=[{"turn": 1, "utterance": utterance}],
+            reference_date="2026-07-14",
+            clinic_clock="2026-07-14T09:00:00+10:00",
+            intended_action=action,
+            action_semantics="intended",
+            **temporal_config,  # type: ignore[arg-type]
+            normalized_values={},
+            source_spans={},
+            practitioner_semantics="exact",
+            patient_semantics="exact",
+            location_semantics="omitted",
+            appointment_type_semantics="omitted",
+            duration_semantics="exact",
+            diary_state=diary_state,
+            entity_state="exact",
+            dialogue_form="one_shot",
+            language_form="plain",
+            initial_diary_state={},
+            expected_outcome_kind=self._EXPECTED_OUTCOMES[action],
+            expected_tool_sequence=list(self._EXPECTED_TOOLS[action]),
+            expected_appointment_deltas=[],
+            expected_audit_deltas=[],
+            forbidden_outcomes=[],
+            forbidden_tool_calls=[],
+            expected_clarification=None,
+            clarification_choices=[],
+        )
+
+    @pytest.mark.parametrize(
+        "base_scenario,action",
+        [
+            ("create", "create"),
+            ("move", "move"),
+            ("resize", "resize"),
+            ("cancel", "cancel"),
+            ("status_change", "status_change"),
+            ("explain_schedule", "explain_schedule"),
+        ],
+        indirect=["base_scenario"],
+    )
+    def test_action_specific_outcome(
+        self, base_scenario: ReceptionScenarioSpec, action: str
+    ) -> None:
+        """Each action produces the exact expected outcome."""
+        interp = deterministic_interpret(base_scenario)
+        replay = deterministic_replay(base_scenario, interp)
+        expected = self._EXPECTED_OUTCOMES[action]
+        assert replay.downstream_outcome == expected, (
+            f"Expected {expected!r} for {action}, got {replay.downstream_outcome!r}"
+        )
+
+    @pytest.mark.parametrize(
+        "base_scenario,action",
+        [
+            ("create", "create"),
+            ("move", "move"),
+            ("resize", "resize"),
+            ("cancel", "cancel"),
+            ("status_change", "status_change"),
+            ("explain_schedule", "explain_schedule"),
+        ],
+        indirect=["base_scenario"],
+    )
+    def test_action_specific_tools(
+        self, base_scenario: ReceptionScenarioSpec, action: str
+    ) -> None:
+        """Replay tools are a subset/equal of interpretation tools."""
+        interp = deterministic_interpret(base_scenario)
+        replay = deterministic_replay(base_scenario, interp)
+        interp_tools = set(interp.selected_tool_sequence)
+        replay_tools = set(replay.tools_used)
+        assert replay_tools.issubset(interp_tools) or replay_tools == interp_tools, (
+            f"Replay tools {replay_tools} not subset/equal of interp tools {interp_tools}"
+        )
+
+    @pytest.mark.parametrize(
+        "base_scenario,action",
+        [
+            ("create", "create"),
+            ("move", "move"),
+            ("resize", "resize"),
+            ("cancel", "cancel"),
+            ("status_change", "status_change"),
+            ("explain_schedule", "explain_schedule"),
+        ],
+        indirect=["base_scenario"],
+    )
+    def test_delta_change_type(
+        self, base_scenario: ReceptionScenarioSpec, action: str
+    ) -> None:
+        """Mutation actions produce distinct change types; explain produces none."""
+        interp = deterministic_interpret(base_scenario)
+        replay = deterministic_replay(base_scenario, interp)
+        expected_change = self._EXPECTED_CHANGE_TYPES[action]
+        if expected_change is None:
+            # explain_schedule: no deltas
+            assert len(replay.appointment_deltas) == 0, (
+                f"Expected no appointment deltas for {action}, got {replay.appointment_deltas}"
+            )
+            assert len(replay.audit_deltas) == 0, (
+                f"Expected no audit deltas for {action}, got {replay.audit_deltas}"
+            )
+            assert not replay.is_simulated_confirmed_write
+        else:
+            # Mutating action: one appointment delta and one audit delta
+            assert len(replay.appointment_deltas) == 1, (
+                f"Expected 1 appointment delta for {action}, got {len(replay.appointment_deltas)}"
+            )
+            assert len(replay.audit_deltas) == 1, (
+                f"Expected 1 audit delta for {action}, got {len(replay.audit_deltas)}"
+            )
+            apt = replay.appointment_deltas[0]
+            aud = replay.audit_deltas[0]
+            assert apt["change_type"] == expected_change, (
+                f"Expected change_type {expected_change!r}, got {apt['change_type']!r}"
+            )
+            assert aud["change_type"] == expected_change
+            assert replay.is_simulated_confirmed_write
+
+    @pytest.mark.parametrize(
+        "base_scenario,action",
+        [
+            ("create", "create"),
+            ("move", "move"),
+            ("resize", "resize"),
+            ("cancel", "cancel"),
+            ("status_change", "status_change"),
+            ("explain_schedule", "explain_schedule"),
+        ],
+        indirect=["base_scenario"],
+    )
+    def test_expected_field_mutation_resistance(
+        self, base_scenario: ReceptionScenarioSpec, action: str
+    ) -> None:
+        """Mutating expected fields does not change interpretation or replay."""
+        # Get baseline
+        base_interp = deterministic_interpret(base_scenario)
+        base_replay = deterministic_replay(base_scenario, base_interp)
+
+        # Mutate all expected fields
+        mutated = copy.deepcopy(base_scenario)
+        mutated.expected_outcome_kind = "mutated_outcome"
+        mutated.expected_tool_sequence = ["mutated_tool"]
+        mutated.expected_appointment_deltas = [{"mutated": "delta"}]
+        mutated.expected_audit_deltas = [{"mutated": "delta"}]
+        mutated.expected_clarification = "Mutated clarification"
+        mutated.clarification_choices = ["Mutated choice"]
+        mutated.forbidden_outcomes = ["mutated_forbidden"]
+        mutated.forbidden_tool_calls = ["mutated_forbidden_tool"]
+
+        # Interpret and replay using mutated scenario (utterances unchanged)
+        mut_interp = deterministic_interpret(mutated)
+        mut_replay = deterministic_replay(mutated, mut_interp)
+
+        # Compare interpretation observations
+        assert base_interp.intended_action == mut_interp.intended_action
+        assert base_interp.action_semantics == mut_interp.action_semantics
+        assert base_interp.temporal_relation == mut_interp.temporal_relation
+        assert base_interp.normalized_values == mut_interp.normalized_values
+        assert base_interp.entity_semantics == mut_interp.entity_semantics
+        assert base_interp.requires_clarification == mut_interp.requires_clarification
+        assert base_interp.authority_claim == mut_interp.authority_claim
+        assert base_interp.selected_tool_sequence == mut_interp.selected_tool_sequence
+
+        # Compare replay observations
+        assert base_replay.downstream_outcome == mut_replay.downstream_outcome
+        assert base_replay.tools_used == mut_replay.tools_used
+        assert base_replay.appointment_deltas == mut_replay.appointment_deltas
+        assert base_replay.audit_deltas == mut_replay.audit_deltas
+        assert base_replay.is_simulated_confirmed_write == mut_replay.is_simulated_confirmed_write

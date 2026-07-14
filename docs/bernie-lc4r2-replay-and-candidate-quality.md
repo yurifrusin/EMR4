@@ -39,7 +39,7 @@ All six diary actions now have distinct outcomes and delta change types:
 | status_change   | appointment_status_changed | status_changed|
 | explain_schedule| schedule_explained         | (no deltas)  |
 | clarification   | clarification_required     | (no deltas)  |
-| unsafe/refused  | instruction_refused        | first-turn only |
+| unsafe/refused  | instruction_refused        | (no deltas)  |
 
 ### Fail-Closed States
 
@@ -63,10 +63,10 @@ Four deterministic classification categories:
 
 | Category | Count | Meaning |
 |----------|-------|---------|
-| aligned_pass | 22/30 | Surface supports label, interpreter agrees |
-| aligned_failure | 0/30 | Surface supports label, interpreter disagrees |
+| aligned_pass | 16/30 | Surface supports label, interpreter agrees |
+| aligned_failure | 8/30 | Surface supports label, interpreter disagrees |
 | surface_contract_conflict | 2/30 | Explicit evidence contradicts the label |
-| unsupported_or_ambiguous_surface | 6/30 | Parser cannot establish which side is correct |
+| unsupported_or_ambiguous_surface | 4/30 | Surface text is genuinely ambiguous |
 
 ### Deterministic Rule IDs
 
@@ -113,23 +113,29 @@ Four deterministic classification categories:
 - 42 new focused tests (25 replay consequences + 17 development gap audit)
 - 9 LC1 route regression tests
 
-### Metrics  (LC4 development partition, 2 repeats)
+### Metrics  (LC4 development partition, 1 repeat / 1152 samples)
 
-| Dimension | Baseline | Current | Change |
-|-----------|----------|---------|--------|
-| downstream_outcome | 108/2304 | 422/2304 | +314 |
-| interpretation_tools | 486/2304 | 1184/2304 | +698 |
-| replay_tools | 486/2304 | 1184/2304 | +698 |
-| clarification | 960/2304 | 1220/2304 | +260 |
-| authority | 1088/2304 | 1284/2304 | +196 |
-| appointment_deltas | 432/2304 | 424/2304 | -8 |
-| audit_deltas | 384/2304 | 384/2304 | 0 |
-| safety | 2304/2304 | 2304/2304 | 0 |
+| Dimension | LC4R1 Baseline | Current | Delta |
+|-----------|---------------|---------|-------|
+| downstream_outcome | 50/1152 | 197/1152 | +147 |
+| interpretation_tools | 592/1152 | 592/1152 | +0 |
+| replay_tools | 592/1152 | 592/1152 | +0 |
+| clarification | 610/1152 | 610/1152 | +0 |
+| authority | 642/1152 | 642/1152 | +0 |
+| appointment_deltas | 212/1152 | 209/1152 | -3\* |
+| audit_deltas | 192/1152 | 192/1152 | +0 |
+| safety | 1152/1152 | 1152/1152 | +0 |
 | repeat variance | 0 | 0 | 0 |
+
+\*\*The -3 decrease in appointment_deltas is solely explained by removing
+the invented prior-write heuristic for adversarial Silver candidates.
+These samples are classified as surface_contract_conflict (2) or
+aligned_failure (8) in the candidate-quality audit and do not affect
+any authored aligned replay regression.\*
 
 ### Report Hash
 
-The development gap report has been generated and checked (--check
+The development gap report (v2) has been generated and checked (--check
 passes).
 
 ### Boundary Confirmation

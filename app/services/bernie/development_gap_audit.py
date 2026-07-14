@@ -250,7 +250,13 @@ def _check_clarification_conflict(
     interpretation: InterpretationObservation,
     utterances: list[str],
 ) -> ConflictRecord | None:
-    """Rule CONFLICT-CLR-001: parser and label disagree on clarification."""
+    """Rule CONFLICT-CLR-001: parser/label clarification disagreement.
+
+    This is an ordinary disagreement — the interpreter output does not match
+    the Silver label.  It is classified as ``aligned_failure`` rather than
+    ``surface_contract_conflict`` because the interpretation result alone
+    does not independently contradict the label's surface evidence.
+    """
     if scenario.action_semantics == "prohibited":
         return None
     scenario_expects_clarify = scenario.expected_clarification is not None
@@ -260,7 +266,7 @@ def _check_clarification_conflict(
         return ConflictRecord(
             rule_id=RULE_CLARIFICATION_MISMATCH,
             candidate_id=scenario.scenario_id,
-            category="surface_contract_conflict",
+            category="aligned_failure",
             observed_value=str(parser_says_clarify),
             expected_value=str(scenario_expects_clarify),
             evidence_excerpt=_safe_excerpt(primary),
@@ -272,7 +278,14 @@ def _check_authority_conflict(
     scenario: ReceptionScenarioSpec,
     interpretation: InterpretationObservation,
 ) -> ConflictRecord | None:
-    """Rule CONFLICT-AUT-001: parser claims different authority."""
+    """Rule CONFLICT-AUT-001: parser claims different authority.
+
+    This is an ordinary disagreement — the interpreter authority claim does
+    not match the label's expected authority.  It is classified as
+    ``aligned_failure`` rather than ``surface_contract_conflict`` because
+    the interpretation result alone does not independently contradict the
+    label's surface evidence.
+    """
     if scenario.action_semantics == "prohibited":
         expected = "refuse"
     elif scenario.action_semantics == "ambiguous" or scenario.expected_clarification is not None:
@@ -284,7 +297,7 @@ def _check_authority_conflict(
         return ConflictRecord(
             rule_id=RULE_AUTHORITY_MISMATCH,
             candidate_id=scenario.scenario_id,
-            category="surface_contract_conflict",
+            category="aligned_failure",
             observed_value=observed,
             expected_value=expected,
             evidence_excerpt="",
@@ -292,31 +305,40 @@ def _check_authority_conflict(
     return None
 
 
+# Surface patterns that indicate genuinely ambiguous utterances
+# (examined from text alone, not from interpretation output).
+_AMBIGUOUS_SURFACE_PHRASES: list[re.Pattern[str]] = [
+    re.compile(r"\bsometime\b", re.I),
+    re.compile(r"\bmaybe\b", re.I),
+    re.compile(r"\bnot sure\b", re.I),
+    re.compile(r"\beither\b", re.I),
+    re.compile(r"\bwhatever\b", re.I),
+    re.compile(r"\bi don'?t know\b", re.I),
+]
+
+
 def _check_ambiguous_surface(
     scenario: ReceptionScenarioSpec,
     interpretation: InterpretationObservation,
     utterances: list[str],
 ) -> ConflictRecord | None:
-    """Rule CONFLICT-AMB-001: parser cannot establish which side is correct."""
-    primary = utterances[0] if utterances else ""
-    if interpretation.intended_action is None:
-        return ConflictRecord(
-            rule_id=RULE_AMBIGUOUS_SURFACE,
-            candidate_id=scenario.scenario_id,
-            category="unsupported_or_ambiguous_surface",
-            observed_value="unknown_action",
-            expected_value=scenario.intended_action,
-            evidence_excerpt=_safe_excerpt(primary),
-        )
-    if interpretation.action_semantics == "ambiguous":
-        return ConflictRecord(
-            rule_id=RULE_AMBIGUOUS_SURFACE,
-            candidate_id=scenario.scenario_id,
-            category="unsupported_or_ambiguous_surface",
-            observed_value="ambiguous_semantics",
-            expected_value=scenario.action_semantics,
-            evidence_excerpt=_safe_excerpt(primary),
-        )
+    """Rule CONFLICT-AMB-001: surface text is genuinely ambiguous.
+
+    Checks utterance text directly for ambiguous phrases — does not use
+    the interpretation result as evidence.  When the bounded surface check
+    cannot decide, returns ``unsupported_or_ambiguous_surface``.
+    """
+    for u in utterances:
+        for pat in _AMBIGUOUS_SURFACE_PHRASES:
+            if pat.search(u):
+                return ConflictRecord(
+                    rule_id=RULE_AMBIGUOUS_SURFACE,
+                    candidate_id=scenario.scenario_id,
+                    category="unsupported_or_ambiguous_surface",
+                    observed_value="ambiguous_surface_text",
+                    expected_value=scenario.intended_action,
+                    evidence_excerpt=_safe_excerpt(u),
+                )
     return None
 
 
@@ -452,8 +474,13 @@ def audit_candidates(
             if detected is not None:
                 if detected.category == "unsupported_or_ambiguous_surface":
                     ambiguous_count += 1
-                else:
+                elif detected.category == "surface_contract_conflict":
                     surface_conflict_count += 1
+                else:  # aligned_failure
+                    # Ordinary disagreement counts as aligned failure,
+                    # not surface conflict.  Still continue to avoid
+                    # double-counting in aligned_pass below.
+                    aligned_failure += 1
                 dedup_key = (
                     f"{detected.rule_id}:{detected.candidate_id}:"
                     f"{detected.observed_value}:{detected.expected_value}"

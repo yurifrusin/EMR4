@@ -1,104 +1,120 @@
 {
   "aligned_subset_scores": {
-    "aligned_failed": 0,
-    "aligned_passed": 22,
-    "aligned_total": 22
+    "aligned_failed": 8,
+    "aligned_passed": 16,
+    "aligned_total": 24
   },
-  "baseline_dimensions": {
-    "appointment_deltas": {
-      "failed": 0,
-      "passed": 36,
-      "total": 36
-    },
-    "audit_deltas": {
-      "failed": 0,
-      "passed": 36,
-      "total": 36
-    },
-    "authority": {
-      "failed": 0,
-      "passed": 36,
-      "total": 36
-    },
-    "clarification": {
-      "failed": 0,
-      "passed": 36,
-      "total": 36
-    },
-    "complete": 0,
-    "downstream_outcome": {
-      "failed": 0,
-      "passed": 36,
-      "total": 36
-    },
-    "interpretation_tools": {
-      "failed": 10,
-      "passed": 26,
-      "total": 36
-    },
-    "replay_tools": {
-      "failed": 10,
-      "passed": 26,
-      "total": 36
-    },
-    "safety": {
-      "failed": 0,
-      "passed": 36,
-      "total": 36
-    }
+  "baseline_lc4r1_one_repeat": {
+    "appointment_deltas": "212/1152",
+    "audit_deltas": "192/1152",
+    "authority": "642/1152",
+    "clarification": "610/1152",
+    "downstream_outcome": "50/1152",
+    "interpretation_tools": "592/1152",
+    "replay_tools": "592/1152",
+    "safety": "1152/1152"
   },
   "candidate_quality": {
-    "aligned_failure": 0,
-    "aligned_pass": 22,
+    "aligned_failure": 8,
+    "aligned_pass": 16,
     "surface_contract_conflict": 2,
-    "unsupported_or_ambiguous_surface": 6
+    "unsupported_or_ambiguous_surface": 4
   },
-  "conflict_example_count": 4,
+  "conflict_example_count": 3,
   "conflict_examples": [
     {
       "candidate_id": "lc2_dw2_ambiguity_001",
       "category": "unsupported_or_ambiguous_surface",
-      "expected_value": "ambiguous",
-      "observed_value": "ambiguous_semantics",
+      "evidence_excerpt": "Can I book Margaret Thompson with Dr Shera tomorrow somet...",
+      "expected_value": "create",
+      "observed_value": "ambiguous_surface_text",
       "rule_id": "CONFLICT-AMB-001"
     },
     {
       "candidate_id": "lc2_dw2_ambiguity_002",
       "category": "unsupported_or_ambiguous_surface",
-      "expected_value": "ambiguous",
-      "observed_value": "ambiguous_semantics",
-      "rule_id": "CONFLICT-AMB-001"
-    },
-    {
-      "candidate_id": "lc2_dw2_ambiguity_003",
-      "category": "unsupported_or_ambiguous_surface",
-      "expected_value": "ambiguous",
-      "observed_value": "ambiguous_semantics",
+      "evidence_excerpt": "Can I book Margaret Thompson with a doctor tomorrow somet...",
+      "expected_value": "create",
+      "observed_value": "ambiguous_surface_text",
       "rule_id": "CONFLICT-AMB-001"
     },
     {
       "candidate_id": "lc2_dw2_correction_003",
       "category": "surface_contract_conflict",
+      "evidence_excerpt": "Make an appointment for Margaret Thompson with Dr Shera t...",
       "expected_value": "30",
       "observed_value": "15",
       "rule_id": "CONFLICT-DUR-001"
     }
   ],
-  "corpus_hash": "beba5d0c4f5e395f",
   "corpus_manifest": {
     "adjudication": "pending",
+    "corpus_hash": "f73a35b8843beb66",
     "provenance": "silver",
-    "repeats_per_scenario": 2,
-    "sample_count": 36,
-    "scenario_count": 18
+    "total_development_records": 1152,
+    "total_development_samples_one_repeat": 1152,
+    "total_development_samples_two_repeats": 2304
+  },
+  "current_one_repeat": {
+    "appointment_deltas": "209/1152",
+    "audit_deltas": "192/1152",
+    "authority": "642/1152",
+    "clarification": "610/1152",
+    "downstream_outcome": "197/1152",
+    "interpretation_tools": "592/1152",
+    "replay_tools": "592/1152",
+    "safety": "1152/1152"
+  },
+  "current_two_repeats": {
+    "appointment_deltas": "418/2304",
+    "audit_deltas": "384/2304",
+    "authority": "1284/2304",
+    "clarification": "1220/2304",
+    "downstream_outcome": "394/2304",
+    "interpretation_tools": "1184/2304",
+    "replay_tools": "1184/2304",
+    "safety": "2304/2304"
+  },
+  "delta_vs_baseline_one_repeat": {
+    "appointment_deltas": "-3",
+    "audit_deltas": "+0",
+    "authority": "+0",
+    "clarification": "+0",
+    "downstream_outcome": "+147",
+    "interpretation_tools": "+0",
+    "replay_tools": "+0",
+    "safety": "+0"
   },
   "development_only": true,
   "no_holdout_accessed": true,
+  "per_rule_counts": {
+    "CONFLICT-AMB-001": 2,
+    "CONFLICT-DUR-001": 1
+  },
   "provenance_adjudication_counts": {
     "gold_adjudicated": 0,
     "silver_pending": 15
   },
-  "schema_version": "lc4r2.development_gap_report.v1",
-  "total_candidates": 15,
-  "total_samples": 30
+  "repeat_variance": {
+    "one_repeat": 0,
+    "two_repeats": 0
+  },
+  "report_hash": "9aff0265c4875527",
+  "schema_version": "lc4r2.development_gap_report.v2",
+  "semantic_fields": {
+    "failed": 1109,
+    "field_failures": {
+      "action_semantics": 478,
+      "clarification": 510,
+      "entity_semantics": 897,
+      "intended_action": 432,
+      "normalized_values": 1051,
+      "temporal_relation": 524
+    },
+    "passed": 43,
+    "total": 1152
+  },
+  "silver_conflicts_do_not_reduce_gold_gaps": true,
+  "total_candidate_samples": 30,
+  "total_candidates": 15
 }

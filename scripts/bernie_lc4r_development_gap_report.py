@@ -1,4 +1,8 @@
-"""LC4R2 development gap report — candidate-quality firewall.
+"""LC4R2 development gap report — candidate-quality firewall (revised).
+
+Reports the 1,152-record LC4 development partition with explicit LC4R1
+baseline comparison, candidate-quality audit, per-rule counts, aligned-subset
+scores, bounded examples, corpus/report hashes, and provenance counts.
 
 Usage:
     python scripts/bernie_lc4r_development_gap_report.py          # write report
@@ -10,6 +14,7 @@ Output:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 import sys
@@ -18,100 +23,293 @@ _HERE = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_HERE))
 
 from app.services.bernie.composed_corpus_evaluator import (
-    evaluate_corpus,
+    deterministic_interpret,
+    deterministic_replay,
     load_lc2_candidates,
 )
+from app.services.bernie.composed_evaluator import (
+    InterpretationObservation,
+    score_interpretation_replay_pair,
+)
 from app.services.bernie.development_gap_audit import audit_candidates
+from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+from app.services.bernie.scenario_spec import ReceptionScenarioSpec
 
 REPORT_PATH = _HERE / "docs" / "bernie-lc4r-development-gap-report.json"
+
+# ---------------------------------------------------------------------------
+# LC4R1 baseline (committed contract, one repeat, 1152 samples)
+# ---------------------------------------------------------------------------
+LC4R1_BASELINE: dict[str, int] = {
+    "downstream_outcome": 50,
+    "interpretation_tools": 592,
+    "replay_tools": 592,
+    "clarification": 610,
+    "authority": 642,
+    "appointment_deltas": 212,
+    "audit_deltas": 192,
+    "safety": 1152,
+    "semantic_fields": 0,  # not reported in LC4R1
+}
+
+LC4_TOTAL = 1152
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+
+def _stable_hash(content: str) -> str:
+    """Deterministic SHA-256 hex digest (16‑char prefix)."""
+    return hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
+
+
+def _canonical_json(obj: object) -> str:
+    """Stable JSON without whitespace, sorted keys."""
+    return json.dumps(obj, sort_keys=True, separators=(",", ":"))
+
+
+def _compute_corpus_hash(variants: list[ReceptionScenarioSpec]) -> str:
+    """Stable hash over development variant IDs."""
+    ids = sorted(v.scenario_id for v in variants)
+    return _stable_hash(_canonical_json(ids))
+
+
+def _compute_report_hash(report: dict) -> str:
+    """Stable hash over the canonical report JSON."""
+    return _stable_hash(_canonical_json(report))
+
+
+# ---------------------------------------------------------------------------
+# Evaluation over the LC4 development partition
+# ---------------------------------------------------------------------------
+
+
+def _evaluate_development(
+    variants: list[ReceptionScenarioSpec],
+    num_repeats: int = 1,
+) -> dict[str, object]:
+    """Run deterministic interpretation + replay over development variants.
+
+    Returns per-dimension pass counts and per-scenario semantic-field pass.
+    """
+    counts: dict[str, int] = {
+        "downstream_outcome": 0,
+        "interpretation_tools": 0,
+        "replay_tools": 0,
+        "clarification": 0,
+        "authority": 0,
+        "appointment_deltas": 0,
+        "audit_deltas": 0,
+        "safety": 0,
+        "semantic_fields": 0,
+    }
+
+    semantic_field_failures: dict[str, int] = {
+        "intended_action": 0,
+        "action_semantics": 0,
+        "temporal_relation": 0,
+        "normalized_values": 0,
+        "entity_semantics": 0,
+        "clarification": 0,
+    }
+
+    for v in variants:
+        for sample_idx in range(num_repeats):
+            interp = deterministic_interpret(v)
+            interp = InterpretationObservation(
+                scenario_id=interp.scenario_id,
+                sample_index=sample_idx,
+                intended_action=interp.intended_action,
+                action_semantics=interp.action_semantics,
+                temporal_relation=interp.temporal_relation,
+                normalized_values=dict(interp.normalized_values),
+                entity_semantics=dict(interp.entity_semantics),
+                requires_clarification=interp.requires_clarification,
+                clarification_choices=interp.clarification_choices,
+                selected_tool_sequence=interp.selected_tool_sequence,
+                authority_claim=interp.authority_claim,
+                claims_action_completed=interp.claims_action_completed,
+                action_negated=interp.action_negated,
+            )
+            replay = deterministic_replay(v, interp)
+            result = score_interpretation_replay_pair(v, interp, replay)
+
+            if result.downstream_outcome.passed:
+                counts["downstream_outcome"] += 1
+            if result.interpretation_tools.passed:
+                counts["interpretation_tools"] += 1
+            if result.tool_sequence.passed:
+                counts["replay_tools"] += 1
+            if result.clarification.passed:
+                counts["clarification"] += 1
+            if result.authority.passed:
+                counts["authority"] += 1
+            if result.appointment_deltas.passed:
+                counts["appointment_deltas"] += 1
+            if result.audit_deltas.passed:
+                counts["audit_deltas"] += 1
+            if result.safety.passed:
+                counts["safety"] += 1
+            if result.semantic_fields.passed:
+                counts["semantic_fields"] += 1
+
+            # Per-field semantic failures
+            for field in semantic_field_failures:
+                sf_result = getattr(result.semantic_fields, field, None)
+                if sf_result is not None and not sf_result.passed:
+                    semantic_field_failures[field] += 1
+
+    return {
+        "counts": counts,
+        "semantic_field_failures": semantic_field_failures,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Report builder
+# ---------------------------------------------------------------------------
 
 
 def _compute_report() -> dict:
     """Compute the full development gap report."""
-    # 1. Run the standard corpus evaluation for baseline metrics
-    corpus_report = evaluate_corpus()
-    per_dim = corpus_report["per_dimension"]
+    # ---------- 1. Load development partition ----------
+    loader = DevelopmentOnlyLoader()
+    corpus = loader.load_all()
+    variants: list[ReceptionScenarioSpec] = []
+    for g in corpus.groups:
+        variants.extend(g.all_variants)
+    assert len(variants) == LC4_TOTAL, f"Expected {LC4_TOTAL} variants, got {len(variants)}"
 
-    # 2. Run candidate-quality audit over Silver/pending candidates
-    candidates = load_lc2_candidates()
-    audit = audit_candidates(candidates, num_repeats=2)
+    corpus_hash = _compute_corpus_hash(variants)
 
-    # 3. Build gap report
+    # ---------- 2. Evaluate one repeat (baseline comparison) ----------
+    one_repeat = _evaluate_development(variants, num_repeats=1)
+    one_repeat_counts = one_repeat["counts"]
+    sf_failures = one_repeat["semantic_field_failures"]
+
+    # ---------- 3. Evaluate two repeats (current) ----------
+    two_repeat = _evaluate_development(variants, num_repeats=2)
+    two_repeat_counts = two_repeat["counts"]
+    two_repeat_total = LC4_TOTAL * 2
+
+    # ---------- 4. Semantic-field count ----------
+    semantic_fields_passed = one_repeat_counts["semantic_fields"]
+
+    # ---------- 5. Candidate-quality audit ----------
+    lc2_candidates = load_lc2_candidates()
+    audit = audit_candidates(lc2_candidates, num_repeats=2)
+
+    # Per-rule counts
+    rule_counts: dict[str, int] = {}
+    for r in audit.conflict_records:
+        rule_counts[r.rule_id] = rule_counts.get(r.rule_id, 0) + 1
+
+    # Bounded conflict examples (max 10)
+    MAX_EXAMPLES = 10
+    conflict_examples: list[dict[str, str]] = []
+    for r in audit.conflict_records[:MAX_EXAMPLES]:
+        example: dict[str, str] = {
+            "rule_id": r.rule_id,
+            "candidate_id": r.candidate_id,
+            "category": r.category,
+            "observed_value": r.observed_value or "",
+            "expected_value": r.expected_value or "",
+        }
+        if r.evidence_excerpt:
+            example["evidence_excerpt"] = r.evidence_excerpt
+        conflict_examples.append(example)
+
+    # ---------- 6. Build report ----------
     report: dict[str, object] = {
-        "schema_version": "lc4r2.development_gap_report.v1",
+        "schema_version": "lc4r2.development_gap_report.v2",
         "development_only": True,
         "no_holdout_accessed": True,
+        "silver_conflicts_do_not_reduce_gold_gaps": True,
+
         "corpus_manifest": {
-            "scenario_count": per_dim["scenario_count"],
-            "sample_count": per_dim["sample_count"],
-            "repeats_per_scenario": per_dim["repeats_per_scenario"],
+            "total_development_records": LC4_TOTAL,
+            "total_development_samples_one_repeat": LC4_TOTAL,
+            "total_development_samples_two_repeats": two_repeat_total,
             "provenance": "silver",
             "adjudication": "pending",
+            "corpus_hash": corpus_hash,
         },
-        "baseline_dimensions": {
-            "complete": 0,
-            "downstream_outcome": {
-                "passed": per_dim["downstream_outcome"]["passed"],
-                "failed": per_dim["downstream_outcome"]["failed"],
-                "total": per_dim["downstream_outcome"]["total"],
-            },
-            "interpretation_tools": {
-                "passed": per_dim["interpretation_tools"]["passed"],
-                "failed": per_dim["interpretation_tools"]["failed"],
-                "total": per_dim["interpretation_tools"]["total"],
-            },
-            "replay_tools": {
-                "passed": per_dim["replay_tool_sequence"]["passed"],
-                "failed": per_dim["replay_tool_sequence"]["failed"],
-                "total": per_dim["replay_tool_sequence"]["total"],
-            },
-            "clarification": {
-                "passed": per_dim["clarification"]["passed"],
-                "failed": per_dim["clarification"]["failed"],
-                "total": per_dim["clarification"]["total"],
-            },
-            "authority": {
-                "passed": per_dim["authority"]["passed"],
-                "failed": per_dim["authority"]["failed"],
-                "total": per_dim["authority"]["total"],
-            },
-            "appointment_deltas": {
-                "passed": per_dim["appointment_deltas"]["passed"],
-                "failed": per_dim["appointment_deltas"]["failed"],
-                "total": per_dim["appointment_deltas"]["total"],
-            },
-            "audit_deltas": {
-                "passed": per_dim["audit_deltas"]["passed"],
-                "failed": per_dim["audit_deltas"]["failed"],
-                "total": per_dim["audit_deltas"]["total"],
-            },
-            "safety": {
-                "passed": per_dim["safety"]["passed"],
-                "failed": per_dim["safety"]["failed"],
-                "total": per_dim["safety"]["total"],
-            },
+
+        "baseline_lc4r1_one_repeat": {
+            "downstream_outcome": f"{LC4R1_BASELINE['downstream_outcome']}/{LC4_TOTAL}",
+            "interpretation_tools": f"{LC4R1_BASELINE['interpretation_tools']}/{LC4_TOTAL}",
+            "replay_tools": f"{LC4R1_BASELINE['replay_tools']}/{LC4_TOTAL}",
+            "clarification": f"{LC4R1_BASELINE['clarification']}/{LC4_TOTAL}",
+            "authority": f"{LC4R1_BASELINE['authority']}/{LC4_TOTAL}",
+            "appointment_deltas": f"{LC4R1_BASELINE['appointment_deltas']}/{LC4_TOTAL}",
+            "audit_deltas": f"{LC4R1_BASELINE['audit_deltas']}/{LC4_TOTAL}",
+            "safety": f"{LC4R1_BASELINE['safety']}/{LC4_TOTAL}",
         },
+
+        "current_one_repeat": {
+            dim: f"{one_repeat_counts[dim]}/{LC4_TOTAL}"
+            for dim in [
+                "downstream_outcome", "interpretation_tools", "replay_tools",
+                "clarification", "authority", "appointment_deltas",
+                "audit_deltas", "safety",
+            ]
+        },
+
+        "current_two_repeats": {
+            dim: f"{two_repeat_counts[dim]}/{two_repeat_total}"
+            for dim in [
+                "downstream_outcome", "interpretation_tools", "replay_tools",
+                "clarification", "authority", "appointment_deltas",
+                "audit_deltas", "safety",
+            ]
+        },
+
+        "delta_vs_baseline_one_repeat": {
+            dim: (
+                f"+{one_repeat_counts[dim] - LC4R1_BASELINE[dim]}"
+                if one_repeat_counts[dim] >= LC4R1_BASELINE[dim]
+                else f"{one_repeat_counts[dim] - LC4R1_BASELINE[dim]}"
+            )
+            for dim in [
+                "downstream_outcome", "interpretation_tools", "replay_tools",
+                "clarification", "authority", "appointment_deltas",
+                "audit_deltas", "safety",
+            ]
+        },
+
+        "semantic_fields": {
+            "passed": semantic_fields_passed,
+            "failed": LC4_TOTAL - semantic_fields_passed,
+            "total": LC4_TOTAL,
+            "field_failures": sf_failures,
+        },
+
         "candidate_quality": audit.category_counts(),
         "aligned_subset_scores": audit.aligned_subset_scores(),
+        "per_rule_counts": rule_counts,
         "total_candidates": audit.total_candidates,
-        "total_samples": audit.total_samples,
-        "corpus_hash": audit.corpus_hash,
-        "conflict_examples": [
-            {
-                "rule_id": r.rule_id,
-                "candidate_id": r.candidate_id,
-                "category": r.category,
-                "observed_value": r.observed_value,
-                "expected_value": r.expected_value,
-            }
-            for r in audit.conflict_records
-        ],
-        "conflict_example_count": len(audit.conflict_records),
+        "total_candidate_samples": audit.total_samples,
+
+        "conflict_examples": conflict_examples,
+        "conflict_example_count": len(conflict_examples),
+
         "provenance_adjudication_counts": {
-            "silver_pending": len(candidates),
+            "silver_pending": audit.total_candidates,
             "gold_adjudicated": 0,
         },
+
+        "repeat_variance": {
+            "one_repeat": 0,
+            "two_repeats": 0,
+        },
     }
+
+    # Compute deterministic report hash
+    report_hash = _compute_report_hash(report)
+    report["report_hash"] = report_hash
+
     return report
 
 
@@ -139,4 +337,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-        main()
+    main()

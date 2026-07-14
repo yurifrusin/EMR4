@@ -150,8 +150,8 @@ class TestConflictRules:
         assert result.rule_id == RULE_ENTITY_MISMATCH
         assert result.category == "surface_contract_conflict"
 
-    def test_clarification_conflict_detected(self) -> None:
-        """CONFLICT-CLR-001 fires when parser disagrees on clarification need."""
+    def test_clarification_conflict_is_aligned_failure(self) -> None:
+        """CONFLICT-CLR-001 fires as aligned_failure, not surface_contract_conflict."""
         # Scenario has no expected_clarification, parser says clarify
         interp = self._make_interp(
             requires_clarification=True, authority_claim="clarify"
@@ -160,21 +160,32 @@ class TestConflictRules:
         result = _check_clarification_conflict(_EXACT_DUP, interp, utterances)
         assert result is not None
         assert result.rule_id == RULE_CLARIFICATION_MISMATCH
+        assert result.category == "aligned_failure"
 
-    def test_authority_conflict_detected(self) -> None:
-        """CONFLICT-AUT-001 fires when parser claims wrong authority."""
+    def test_authority_conflict_is_aligned_failure(self) -> None:
+        """CONFLICT-AUT-001 fires as aligned_failure, not surface_contract_conflict."""
         interp = self._make_interp(authority_claim="refuse")
         result = _check_authority_conflict(_EXACT_DUP, interp)
         assert result is not None
         assert result.rule_id == RULE_AUTHORITY_MISMATCH
+        assert result.category == "aligned_failure"
 
     def test_ambiguous_surface_detected(self) -> None:
-        """CONFLICT-AMB-001 fires when parser cannot establish truth."""
-        interp = self._make_interp(intended_action=None)
-        result = _check_ambiguous_surface(_EXACT_DUP, interp, [""])
+        """CONFLICT-AMB-001 fires when surface text is genuinely ambiguous."""
+        interp = self._make_interp()
+        result = _check_ambiguous_surface(_EXACT_DUP, interp, ["Sometime next week"])
         assert result is not None
         assert result.rule_id == RULE_AMBIGUOUS_SURFACE
         assert result.category == "unsupported_or_ambiguous_surface"
+
+    def test_ambiguous_surface_no_false_positive(self) -> None:
+        """Clear surface text must not trigger CONFLICT-AMB-001."""
+        interp = self._make_interp()
+        result = _check_ambiguous_surface(
+            _EXACT_DUP, interp,
+            ["Make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm"]
+        )
+        assert result is None
 
 
 # =============================================================================
@@ -199,6 +210,34 @@ class TestAlignedCasesNotMislabeled:
         for record in audit.conflict_records:
             if record.category == "surface_contract_conflict":
                 pytest.fail(f"Unexpected conflict on aligned case: {record}")
+
+    def test_clarification_disagreement_is_aligned_failure(self) -> None:
+        """Clarification parser/label disagreement must be aligned_failure, not conflict."""
+        candidates = load_lc2_candidates()
+        # Use ambiguity candidates where parser may disagree on clarification need
+        amb = [c for c in candidates if "ambiguity" in c.scenario.scenario_id]
+        if not amb:
+            pytest.skip("No ambiguity candidates available")
+        audit = audit_candidates(amb[:1], num_repeats=1)
+        # Clarification disagreement must not be classified as surface_contract_conflict
+        for record in audit.conflict_records:
+            assert record.category != "surface_contract_conflict", (
+                f"Clarification/authority disagreement mislabeled as conflict: {record}"
+            )
+
+    def test_authority_disagreement_is_aligned_failure(self) -> None:
+        """Authority parser/label disagreement must be aligned_failure, not conflict."""
+        candidates = load_lc2_candidates()
+        # Use candidates where authority may differ
+        corr = [c for c in candidates if "correction" in c.scenario.scenario_id]
+        if not corr:
+            pytest.skip("No correction candidates available")
+        audit = audit_candidates(corr[:1], num_repeats=1)
+        # Authority disagreement must not be classified as surface_contract_conflict
+        for record in audit.conflict_records:
+            assert record.category != "surface_contract_conflict", (
+                f"Authority disagreement mislabeled as conflict: {record}"
+            )
 
 
 # =============================================================================
