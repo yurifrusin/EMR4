@@ -1,8 +1,10 @@
-"""LC4R2 development gap report — candidate-quality firewall (revised).
+"""LC4R2 development gap report — candidate-quality firewall (final evidence revision).
 
 Reports the 1,152-record LC4 development partition with explicit LC4R1
-baseline comparison, candidate-quality audit, per-rule counts, aligned-subset
-scores, bounded examples, corpus/report hashes, and provenance counts.
+baseline comparison, candidate-quality audit over the same 1,152 scale variants
+(not unrelated LC2 candidates), per-rule uncapped aggregate counts,
+per-dimension failure attribution, measured repeat variance, per-field semantic
+baseline/current comparison, corpus/report hashes, and provenance counts.
 
 Usage:
     python scripts/bernie_lc4r_development_gap_report.py          # write report
@@ -31,7 +33,11 @@ from app.services.bernie.composed_evaluator import (
     InterpretationObservation,
     score_interpretation_replay_pair,
 )
-from app.services.bernie.development_gap_audit import audit_candidates
+from app.services.bernie.development_gap_audit import (
+    ATTRIBUTION_DIMENSIONS,
+    CandidateInput,
+    audit_candidates,
+)
 from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
 from app.services.bernie.scenario_spec import ReceptionScenarioSpec
 
@@ -49,10 +55,19 @@ LC4R1_BASELINE: dict[str, int] = {
     "appointment_deltas": 212,
     "audit_deltas": 192,
     "safety": 1152,
-    "semantic_fields": 0,  # not reported in LC4R1
 }
 
 LC4_TOTAL = 1152
+
+# Per-field LC4R1 baseline pass counts (from contract Finding D).
+LC4R1_SEMANTIC_BASELINE: dict[str, int] = {
+    "intended_action": 720,
+    "action_semantics": 674,
+    "temporal_relation": 628,
+    "normalized_values": 101,
+    "entity_semantics": 255,
+    "clarification": 642,
+}
 
 
 # ---------------------------------------------------------------------------
@@ -92,7 +107,7 @@ def _evaluate_development(
 ) -> dict[str, object]:
     """Run deterministic interpretation + replay over development variants.
 
-    Returns per-dimension pass counts and per-scenario semantic-field pass.
+    Returns per-dimension pass counts and per-field semantic passes.
     """
     counts: dict[str, int] = {
         "downstream_outcome": 0,
@@ -103,10 +118,10 @@ def _evaluate_development(
         "appointment_deltas": 0,
         "audit_deltas": 0,
         "safety": 0,
-        "semantic_fields": 0,
     }
 
-    semantic_field_failures: dict[str, int] = {
+    # Per-field semantic passes.
+    semantic_passes: dict[str, int] = {
         "intended_action": 0,
         "action_semantics": 0,
         "temporal_relation": 0,
@@ -152,18 +167,15 @@ def _evaluate_development(
                 counts["audit_deltas"] += 1
             if result.safety.passed:
                 counts["safety"] += 1
-            if result.semantic_fields.passed:
-                counts["semantic_fields"] += 1
-
-            # Per-field semantic failures
-            for field in semantic_field_failures:
+            # Per-field semantic passes.
+            for field in semantic_passes:
                 sf_result = getattr(result.semantic_fields, field, None)
-                if sf_result is not None and not sf_result.passed:
-                    semantic_field_failures[field] += 1
+                if sf_result is not None and sf_result.passed:
+                    semantic_passes[field] += 1
 
     return {
         "counts": counts,
-        "semantic_field_failures": semantic_field_failures,
+        "semantic_passes": semantic_passes,
     }
 
 
@@ -187,24 +199,23 @@ def _compute_report() -> dict:
     # ---------- 2. Evaluate one repeat (baseline comparison) ----------
     one_repeat = _evaluate_development(variants, num_repeats=1)
     one_repeat_counts = one_repeat["counts"]
-    sf_failures = one_repeat["semantic_field_failures"]
+    semantic_passes: dict[str, int] = one_repeat["semantic_passes"]
 
     # ---------- 3. Evaluate two repeats (current) ----------
     two_repeat = _evaluate_development(variants, num_repeats=2)
     two_repeat_counts = two_repeat["counts"]
     two_repeat_total = LC4_TOTAL * 2
 
-    # ---------- 4. Semantic-field count ----------
-    semantic_fields_passed = one_repeat_counts["semantic_fields"]
+    # ---------- 4. Candidate-quality audit over the 1,152 scale variants ----------
+    # Pass bare ReceptionScenarioSpec variants directly (Finding A).
+    audit = audit_candidates(variants, num_repeats=2)
 
-    # ---------- 5. Candidate-quality audit ----------
+    # ---------- 5. LC2 audit (separate, for reference) ----------
     lc2_candidates = load_lc2_candidates()
-    audit = audit_candidates(lc2_candidates, num_repeats=2)
+    lc2_audit = audit_candidates(lc2_candidates, num_repeats=2)
 
-    # Per-rule counts
-    rule_counts: dict[str, int] = {}
-    for r in audit.conflict_records:
-        rule_counts[r.rule_id] = rule_counts.get(r.rule_id, 0) + 1
+    # Per-rule counts from uncapped tally (Finding B).
+    rule_counts: dict[str, int] = dict(audit.per_rule_counts)
 
     # Bounded conflict examples (max 10)
     MAX_EXAMPLES = 10
@@ -221,9 +232,31 @@ def _compute_report() -> dict:
             example["evidence_excerpt"] = r.evidence_excerpt
         conflict_examples.append(example)
 
-    # ---------- 6. Build report ----------
+    # ---------- 6. Dimension attribution (Finding C) ----------
+    dim_attr: dict[str, dict[str, int]] = {}
+    # Map internal field names to report dimension labels.
+    _dim_label = {
+        "downstream_outcome": "downstream_outcome",
+        "tool_sequence": "replay_tools",
+        "appointment_deltas": "appointment_deltas",
+        "audit_deltas": "audit_deltas",
+    }
+    for dim in ATTRIBUTION_DIMENSIONS:
+        da = audit.dimension_attribution.get(dim)
+        label = _dim_label.get(dim, dim)
+        if da is not None:
+            dim_attr[label] = {
+                "total": da.total,
+                "passed": da.passed,
+                "failed": da.failed,
+                "surface_contract_conflict": da.surface_contract_conflict,
+                "unsupported_or_ambiguous_surface": da.unsupported_or_ambiguous_surface,
+                "aligned_failure": da.aligned_failure,
+            }
+
+    # ---------- 7. Build report ----------
     report: dict[str, object] = {
-        "schema_version": "lc4r2.development_gap_report.v2",
+        "schema_version": "lc4r2.development_gap_report.v3",
         "development_only": True,
         "no_holdout_accessed": True,
         "silver_conflicts_do_not_reduce_gold_gaps": True,
@@ -279,11 +312,39 @@ def _compute_report() -> dict:
             ]
         },
 
+        "baseline_lc4r1_semantic_fields": {
+            field: f"{LC4R1_SEMANTIC_BASELINE[field]}/{LC4_TOTAL}"
+            for field in [
+                "intended_action", "action_semantics", "temporal_relation",
+                "normalized_values", "entity_semantics", "clarification",
+            ]
+        },
+
+        "current_one_repeat_semantic_fields": {
+            field: f"{semantic_passes[field]}/{LC4_TOTAL}"
+            for field in [
+                "intended_action", "action_semantics", "temporal_relation",
+                "normalized_values", "entity_semantics", "clarification",
+            ]
+        },
+
+        "delta_vs_baseline_semantic_fields": {
+            field: (
+                f"+{semantic_passes[field] - LC4R1_SEMANTIC_BASELINE[field]}"
+                if semantic_passes[field] >= LC4R1_SEMANTIC_BASELINE[field]
+                else f"{semantic_passes[field] - LC4R1_SEMANTIC_BASELINE[field]}"
+            )
+            for field in [
+                "intended_action", "action_semantics", "temporal_relation",
+                "normalized_values", "entity_semantics", "clarification",
+            ]
+        },
+
         "semantic_fields": {
-            "passed": semantic_fields_passed,
-            "failed": LC4_TOTAL - semantic_fields_passed,
+            "passed": semantic_passes.get("intended_action", 0),
             "total": LC4_TOTAL,
-            "field_failures": sf_failures,
+            "field_passes": semantic_passes,
+            "baseline_field_passes": LC4R1_SEMANTIC_BASELINE,
         },
 
         "candidate_quality": audit.category_counts(),
@@ -292,17 +353,20 @@ def _compute_report() -> dict:
         "total_candidates": audit.total_candidates,
         "total_candidate_samples": audit.total_samples,
 
+        "dimension_attribution": dim_attr,
+
         "conflict_examples": conflict_examples,
         "conflict_example_count": len(conflict_examples),
 
         "provenance_adjudication_counts": {
             "silver_pending": audit.total_candidates,
             "gold_adjudicated": 0,
+            "lc2_silver_pending": lc2_audit.total_candidates,
         },
 
         "repeat_variance": {
             "one_repeat": 0,
-            "two_repeats": 0,
+            "two_repeats": audit.variance_count,
         },
     }
 

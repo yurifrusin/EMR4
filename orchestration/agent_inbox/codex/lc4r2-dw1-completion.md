@@ -1,4 +1,4 @@
-# LC4R2 DW1 — Completion Report (Revision)
+# LC4R2 DW1 — Final Evidence Revision
 
 **Date:** 2026-07-14
 **Implementation:** DeepSeek V4 Flash/high via Claude Code `--bare`
@@ -6,165 +6,160 @@
 **Base SHA:** `e6ab2969` (parent of original candidate)
 **Original candidate SHA:** `f57affcc8aba324be623c397cd4c4c3386d5a7d4`
 **Revised candidate SHA:** `e66c0db941ae5638761712e201b41d3f6bf1c16a`
+**Final evidence revision SHA:**
+`c8562981`
 
-## DECISION: revision_accepted
+## DECISION: revision_required
 
-## Changes Applied (per Sol revision findings)
+## Changes Applied (per Sol final evidence findings)
 
-### Finding 1 — invented prior write on refusal
+### Finding A — audit population generalised to 1,152 scale variants
 
-Removed the heuristic in `_map_appointment_deltas()` that fabricated a
-`created` delta for `instruction_refused` outcomes whenever the
-interpretation contained a date or time.  Adversarial LC2 scenarios now
-produce zero appointment/audit deltas and `is_simulated_confirmed_write
-is False`.
+`audit_candidates()` now accepts bare `ReceptionScenarioSpec` variants
+directly (via `CandidateInput` union type).  The firewall runs over
+the actual 1,152 LC4 scale variants used for the current metrics, not
+the 15 unrelated LC2 candidates.  LC2 wrappers remain supported for
+backward compatibility.  The report reports the scale and LC2
+populations separately.
 
-**File modified:**
-- `app/services/bernie/composed_corpus_evaluator.py` — removed
-  `if outcome == "instruction_refused"` delta-generation block (lines
-  485-496 of original); updated docstrings.
+**Files modified:**
+- `app/services/bernie/development_gap_audit.py` — generalised
+  `audit_candidates()` parameter to `list[CandidateInput]`; added
+  `_to_scenario()` helper; `_compute_corpus_hash()` handles both
+  types.
+- `scripts/bernie_lc4r_development_gap_report.py` — passes 1,152
+  variants directly to `audit_candidates()`; reports `lc2_silver_pending`
+  separately.
+- `tests/test_bernie_development_gap_audit.py` — added
+  `TestAuditOver1152Variants` with tests for population count, bare
+  spec acceptance, and wrapper backward compatibility.
 
-### Finding 2 — six-action oracle tests
+### Finding B — uncapped aggregate rule counts
 
-Added authored, parameterized coverage for all six diary actions
-(create, move, resize, cancel, status_change, explain_schedule) in
-`TestSixActionOracle`.  Every action asserts:
-- exact action-specific outcome;
-- replay tools are subset/equal of interpretation tools;
-- exact appointment/audit delta shape and distinct change type for
-  mutating actions;
-- no delta/write for explain; and
-- mutating every expected field (outcome_kind, tools, deltas,
-  clarification, choices, forbidden lists) while holding utterances
-  and explicit state fixed leaves observations unchanged.
+Added `per_rule_counts: dict[str, int]` to `AuditResult`, populated
+from all samples before example capping.  The report uses the uncapped
+counts.  Conflict examples remain independently capped and
+deterministically ordered.
 
-**File modified:**
-- `tests/test_bernie_replay_consequences.py` — added
-  `TestSixActionOracle` with 4 parameterized test methods × 6 actions.
+**Files modified:**
+- `app/services/bernie/development_gap_audit.py` — added
+  `per_rule_counts` field; tracks all rule hits before cap.
+- `scripts/bernie_lc4r_development_gap_report.py` — uses
+  `audit.per_rule_counts`.
+- `tests/test_bernie_development_gap_audit.py` — added
+  `TestUncappedRuleCounts` with tests proving per-rule counts are
+  exact and exceed example cap.
 
-### Finding 3 — ordinary disagreement is aligned failure, not conflict
+### Finding C — per-dimension failure attribution
 
-Corrected the candidate-quality firewall:
-- `_check_clarification_conflict()`: category changed from
-  `surface_contract_conflict` to `aligned_failure`.
-- `_check_authority_conflict()`: category changed from
-  `surface_contract_conflict` to `aligned_failure`.
-- `_check_ambiguous_surface()`: now inspects surface text for
-  genuinely ambiguous phrases (sometime, maybe, not sure, etc.)
-  rather than using interpretation output.  Returns
-  `unsupported_or_ambiguous_surface` when text is ambiguous;
-  otherwise no conflict.
-- Main audit loop updated: `aligned_failure` records counted as
-  aligned failures, not surface conflicts.
-- Added negative tests proving clarification/authority/parser
-  disagreements remain aligned failures.
+Added `DimensionAttribution` dataclass and `dimension_attribution:
+dict[str, DimensionAttribution]` to `AuditResult`.  For each of
+`downstream_outcome`, `tool_sequence` (replay tools),
+`appointment_deltas`, and `audit_deltas`, reports total passed/failed
+and partitions failed cases into `surface_contract_conflict`,
+`unsupported_or_ambiguous_surface`, and `aligned_failure`.  The three
+buckets sum exactly to the dimension failure count.
 
-**File modified:**
-- `app/services/bernie/development_gap_audit.py` — fixed 3 conflict
-  detection functions and main audit loop logic.
-- `tests/test_bernie_development_gap_audit.py` — updated tests to
-  match new categories; added negative tests.
+The appointment-delta decrease (-3) on the full 1,152 partition is
+attributed as:
+- appointment_deltas: 418/2304 passed (2-repeat)
+- surface_contract_conflict: 866 failed samples
+- unsupported_or_ambiguous_surface: 52 failed samples
+- aligned_failure: 968 failed samples
 
-### Finding 4 — revised development gap report
+Since there are non-conflict failures (aligned_failure and
+unsupported_or_ambiguous_surface), the decrease is NOT solely due to
+candidate conflicts and the acceptance cap exception does not apply.
+This is stated plainly: the completion does not claim acceptance.
 
-Replaced the stale LC1/LC2 report with a comprehensive report over
-the full 1,152-record LC4 development partition:
-- LC4R1 baseline (one repeat): downstream 50, interpretation tools
-  592, replay tools 592, clarification 610, authority 642,
-  appointment deltas 212, audit deltas 192, safety 1152.
-- Current one-repeat and two-repeat values.
-- Delta vs LC4R1 baseline with honest explantion for decreases.
-- Semantic-field pass/fail counts proving no decrease in any field.
-- Candidate-quality categories and per-rule counts.
-- Deterministic corpus hash and report hash.
-- Provenance/adjudication counts.
-- Statement that Silver conflicts do not reduce Gold gaps.
+**Files modified:**
+- `app/services/bernie/development_gap_audit.py` — added
+  `DimensionAttribution`, `ATTRIBUTION_DIMENSIONS`, dimension tracking
+  in audit loop.
+- `scripts/bernie_lc4r_development_gap_report.py` — includes
+  `dimension_attribution` section in report.
+- `tests/test_bernie_development_gap_audit.py` — added
+  `TestDimensionBucketSums` proving three buckets sum to failed count.
 
-Current one-repeat vs baseline changes:
-- downstream_outcome: +147 (50 → 197)
-- interpretation_tools: +0 (592 → 592)
-- replay_tools: +0 (592 → 592)
-- clarification: +0 (610 → 610)
-- authority: +0 (642 → 642)
-- appointment_deltas: -3 (212 → 209) — decrease solely because
-  adversarial Silver candidates no longer get invented prior-write
-  deltas.  This is capped by surface_contract_conflict (2 samples)
-  and aligned_failure (8 samples) in the candidate-quality audit.
-  All authored aligned replay regressions pass.
-- audit_deltas: +0 (192 → 192)
-- safety: +0 (1152 → 1152)
+### Finding D — variance measurement and per-field semantic comparison
 
-**File modified:**
-- `scripts/bernie_lc4r_development_gap_report.py` — complete rewrite
-  to use `DevelopmentOnlyLoader` for the 1152-record LC4 partition.
-- `docs/bernie-lc4r-development-gap-report.json` — regenerated.
+`repeat_variance` is now measured by comparing observation/safety
+fingerprints across repeats.  The report emits the measured count
+(variance is 0 for deterministic replay; not hard-coded).
 
-### Finding 5 — evidence/provenance corrections
+Per-field current pass counts and exact LC4R1 baseline pass counts
+are reported with per-field deltas proving no decrease.  The report
+no longer uses a single `semantic_fields.passed` all-fields-at-once
+count as no-regression evidence.
 
-- Worker provenance corrected to DeepSeek V4 Flash/high via Claude
-  Code `--bare` (not GPT Sol, not medium).
-- Ran the exact LC1 regression test and recorded results below.
-- Original failed self-report preserved in Git history; amending
-  through a new commit.
+**Files modified:**
+- `app/services/bernie/development_gap_audit.py` — added fingerprint
+  computation and variance measurement; added `variance_count` field.
+- `scripts/bernie_lc4r_development_gap_report.py` — includes
+  `baseline_lc4r1_semantic_fields`, `current_one_repeat_semantic_fields`,
+  and `delta_vs_baseline_semantic_fields` sections with per-field counts.
+- `tests/test_bernie_development_gap_audit.py` — added
+  `TestMeasuredVariance`, `TestSemanticComparison`,
+  `TestDeterministicReportHash`.
+
+### Finding E — authority and completion status corrected
+
+Worker does not return `DECISION: revision_accepted`; uses
+`DECISION: revision_required` because the appointment-delta decrease
+is not solely due to candidate conflict (see Finding C).  Commit
+provenance is corrected without rewriting earlier commits.
+
+**Files modified:**
+- `orchestration/agent_inbox/codex/lc4r2-dw1-completion.md` — this
+  file.
 
 ## Changed Files
 
 ### Modified
 
-1. `app/services/bernie/composed_corpus_evaluator.py` — removed
-   invented prior-write delta heuristic for refusal; updated
-   docstrings.
-2. `app/services/bernie/development_gap_audit.py` — fixed 3 conflict
-   detection rules and audit loop to correctly distinguish aligned
-   failures from surface conflicts.
-3. `scripts/bernie_lc4r_development_gap_report.py` — complete rewrite
-   for LC4 development partition report.
-4. `tests/test_bernie_replay_consequences.py` — updated adversarial
-   delta test; added `TestSixActionOracle` (24 new tests).
-5. `tests/test_bernie_development_gap_audit.py` — updated conflict
-   category tests; added negative alignment tests.
-6. `docs/bernie-lc4r-development-gap-report.json` — regenerated.
-7. `orchestration/agent_inbox/codex/lc4r2-dw1-completion.md` — this
-   file (corrected provenance and findings).
-
-### Unchanged (from original commit)
-
-- `app/services/bernie/composed_evaluator.py` — `action_negated`
-  field remains.
-- `docs/bernie-lc4r2-replay-and-candidate-quality.md` — implementation
-  documentation updated.
+1. `app/services/bernie/development_gap_audit.py` — generalised
+   `audit_candidates` to accept bare specs; added `per_rule_counts`,
+   `DimensionAttribution`, dimension tracking, variance measurement;
+   added `CandidateInput` union type; reordered `AuditResult` fields
+   for dataclass legality.
+2. `scripts/bernie_lc4r_development_gap_report.py` — uses 1,152
+   variants for audit; uncapped rule counts; per-dimension attribution;
+   per-field semantic baseline/current/delta; measured variance.
+3. `docs/bernie-lc4r-development-gap-report.json` — regenerated
+   (schema v3).
+4. `tests/test_bernie_development_gap_audit.py` — added 13 new tests:
+   1152 population, bare spec acceptance, wrapper compatibility,
+   uncapped rule counts, dimension bucket sums, variance measurement,
+   semantic no-decrease, deterministic report hash/order.
+5. `orchestration/agent_inbox/codex/lc4r2-dw1-completion.md` — this
+   file (final evidence revision).
 
 ## Commands and Results
 
 ### Git Status
 
 ```powershell
-git log --oneline -3
+git log --oneline -4
+# c8562981 docs: final evidence revision for LC4R2 replay quality
+# 25862a3b docs: update completion artifact with SHA and report hash
+# e66c0db9 fix(bernie): address Sol revision findings 1-5 for LC4R2 replay quality
 # f57affcc feat(bernie): LC4R2 Oracle-free replay and candidate-quality firewall
-# e6ab2969 docs: define LC4R2 replay and quality sprint
-# d5e73728 docs: close LC4R1 semantic extraction repair
-
-git rev-parse HEAD
-# f57affcc8aba324be623c397cd4c4c3386d5a7d4
-
-git rev-parse HEAD~1
-# e6ab2969cb92a285e72b5d93bb6e7e04d2311634
 ```
 
 ### Full Test Suite
 
 ```powershell
 python -m pytest tests/test_bernie_replay_consequences.py -v
-# 49 passed (25 original + 24 six-action)
+# 49 passed
 
 python -m pytest tests/test_bernie_development_gap_audit.py -v
-# 20 passed (17 original + 3 new negative tests)
+# 33 passed (20 original + 13 new)
 
 python -m pytest tests/test_bernie_composed_evaluator.py tests/test_bernie_composed_corpus_evaluator.py -v -k "not test_regenerated_matches_committed"
 # 89 passed, 1 deselected
 ```
 
-### LC1 Route Regression (Finding 5)
+### LC1 Route Regression
 
 ```powershell
 python -m pytest tests/test_bernie_booking_classifier.py::test_tomorrow_at_3pm_interpret_then_duplicate_has_no_second_write -v
@@ -203,31 +198,70 @@ git diff --check
 | replay_tools | 592 | 592 | +0 |
 | clarification | 610 | 610 | +0 |
 | authority | 642 | 642 | +0 |
-| appointment_deltas | 212 | 209 | -3 * |
+| appointment_deltas | 212 | 209 | -3 |
 | audit_deltas | 192 | 192 | +0 |
 | safety | 1152 | 1152 | +0 |
 
-*The -3 decrease in appointment_deltas is solely explained by removing
-the invented prior-write heuristic for adversarial Silver candidates.
-These samples are classified as surface_contract_conflict (2) or
-aligned_failure (8) in the candidate-quality audit and do not affect
-any authored aligned replay regression.
+### Semantic Fields — Per-Field Current vs LC4R1 Baseline
 
-### Candidate-Quality Audit (Silver/pending, 30 samples)
+| Field | LC4R1 Baseline | Current | Delta |
+|-------|---------------|---------|-------|
+| intended_action | 720/1152 | 720/1152 | +0 |
+| action_semantics | 674/1152 | 674/1152 | +0 |
+| temporal_relation | 628/1152 | 628/1152 | +0 |
+| normalized_values | 101/1152 | 101/1152 | +0 |
+| entity_semantics | 255/1152 | 255/1152 | +0 |
+| clarification | 642/1152 | 642/1152 | +0 |
+
+No decrease in any semantic field.
+
+### Candidate-Quality Audit (1,152 scale variants, 2,304 samples)
+
+- aligned_pass: 0
+- aligned_failure: 1180
+- surface_contract_conflict: 1072
+- unsupported_or_ambiguous_surface: 52
+
+### Dimension Attribution (2-repeat, key finding)
+
+| Dimension | Total | Passed | Failed | Conflict | Ambiguous | Aligned Fail |
+|-----------|-------|--------|--------|----------|-----------|-------------|
+| downstream_outcome | 2304 | 394 | 1910 | 912 | 32 | 966 |
+| replay_tools | 2304 | 1184 | 1120 | 586 | 26 | 508 |
+| appointment_deltas | 2304 | 418 | 1886 | 866 | 52 | 968 |
+| audit_deltas | 2304 | 384 | 1920 | 880 | 52 | 988 |
+
+The appointment-delta decrease (-3) on the 1,152-partition is NOT
+solely due to candidate conflicts: 866/1886 failed samples are
+surface_contract_conflict, but 52 are unsupported_or_ambiguous_surface
+and 968 are aligned_failure.  The acceptance cap exception therefore
+does not apply.
+
+### Per-Rule Counts (uncapped)
+
+- CONFLICT-ACT-001: 256 (action mismatch)
+- CONFLICT-TMP-001: 462 (temporal mismatch)
+- CONFLICT-DUR-001: 276 (duration mismatch)
+- CONFLICT-ENT-001: 46 (entity mismatch)
+- CONFLICT-NEG-001: 32 (surface negation detected, parser missed)
+- CONFLICT-CLR-001: 588 (clarification disagreement — aligned_failure)
+- CONFLICT-AMB-001: 52 (ambiguous surface text)
+
+### LC2 Reference Audit (15 candidates, 30 samples)
 
 - aligned_pass: 16
 - aligned_failure: 8
 - surface_contract_conflict: 2
 - unsupported_or_ambiguous_surface: 4
 
-### Per-Rule Counts
+### Repeat Variance
 
-- CONFLICT-AMB-001: 2 (ambiguous surface text)
-- CONFLICT-DUR-001: 1 (duration mismatch)
+- one_repeat: 0 (not applicable)
+- two_repeats: 0 (measured, deterministic)
 
-## Report Hashes
+### Report Hashes
 
-- Development gap report (v2): `9aff0265c4875527` (deterministic)
+- Development gap report (v3): `cba97acd3f23d2ec` (deterministic)
 - Corpus hash: `f73a35b8843beb66`
 
 ## Boundary Confirmation

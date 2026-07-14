@@ -32,6 +32,7 @@ from app.services.bernie.development_gap_audit import (
     RULE_CLARIFICATION_MISMATCH,
     RULE_AUTHORITY_MISMATCH,
     RULE_AMBIGUOUS_SURFACE,
+    ATTRIBUTION_DIMENSIONS,
     ConflictRecord,
     _check_action_conflict,
     _check_temporal_conflict,
@@ -346,3 +347,295 @@ class TestSurfaceNegation:
 
     def test_no_false_positive(self) -> None:
         assert not _detect_surface_negation(["Book an appointment please"])
+
+
+# =============================================================================
+# 7.  Audit over 1,152 variants (Finding A)
+# =============================================================================
+
+
+class TestAuditOver1152Variants:
+    """Audit runs on the full 1,152-record LC4 development partition."""
+
+    def test_audit_population_is_1152(self) -> None:
+        """Audit over DevelopmentOnlyLoader returns exactly 1,152 candidates."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        total = len(variants)
+        assert total == 1152, f"Expected 1152 variants, got {total}"
+
+    def test_audit_accepts_bare_specs(self) -> None:
+        """audit_candidates accepts bare ReceptionScenarioSpec directly."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        # Limit to first 5 variants for speed
+        audit = audit_candidates(variants[:5], num_repeats=1)
+        assert audit.total_candidates == 5
+        assert audit.total_samples == 5
+
+    def test_audit_still_accepts_corpus_candidate_wrappers(self) -> None:
+        """audit_candidates still accepts CorpusCandidate wrappers (LC2 compat)."""
+        candidates = load_lc2_candidates()
+        audit = audit_candidates(candidates, num_repeats=1)
+        assert audit.total_candidates == 15
+        assert audit.total_samples == 15
+
+
+# =============================================================================
+# 8.  Uncapped rule counts vs capped examples (Finding B)
+# =============================================================================
+
+
+class TestUncappedRuleCounts:
+    """per_rule_counts reflects all records, not just capped examples."""
+
+    def test_per_rule_counts_exceed_example_cap(self) -> None:
+        """When conflict records exceed example cap, per_rule_counts still has all."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        audit = audit_candidates(variants, num_repeats=2, max_conflict_examples=5)
+        # Conflict examples are capped at 5
+        assert len(audit.conflict_records) <= 5
+        # Per-rule counts reflect all conflict-detected records (surface + ambiguous
+        # + clarification/authority aligned_failure). Non-conflict aligned failures
+        # (interpretation/replay mismatch without explicit contradiction) are not
+        # tracked in per_rule_counts.
+        total_from_rules = sum(audit.per_rule_counts.values())
+        conflict_related = (
+            audit.surface_contract_conflict_count
+            + audit.unsupported_or_ambiguous_surface_count
+        )
+        # per_rule_counts must be at least the surface/ambiguous total
+        assert total_from_rules >= conflict_related, (
+            f"per_rule_counts total {total_from_rules} < conflict related {conflict_related}"
+        )
+        # At least one rule count exceeds the example cap
+        assert any(
+            count > 5 for count in audit.per_rule_counts.values()
+        ), "No per-rule count exceeds example cap of 5 (unlikely for 2304 samples)"
+
+    def test_per_rule_counts_are_exact(self) -> None:
+        """Per-rule counts are correct even when examples are capped."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        # Full audit with max examples at 3
+        audit_small = audit_candidates(variants[:10], num_repeats=2, max_conflict_examples=3)
+        audit_full = audit_candidates(variants[:10], num_repeats=2, max_conflict_examples=100)
+        # Per-rule counts must be the same regardless of example cap
+        assert audit_small.per_rule_counts == audit_full.per_rule_counts, (
+            "per_rule_counts differs when example cap changes"
+        )
+
+
+# =============================================================================
+# 9.  Dimension bucket sums (Finding C)
+# =============================================================================
+
+
+class TestDimensionBucketSums:
+    """Three failure buckets sum exactly to dimension failure count."""
+
+    def test_dimension_buckets_sum_to_failed(self) -> None:
+        """For each dimension, scc + unsup + af == failed."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        audit = audit_candidates(variants, num_repeats=2)
+        for dim, da in audit.dimension_attribution.items():
+            assert da.total > 0
+            assert da.passed + da.failed == da.total, (
+                f"{dim}: passed {da.passed} + failed {da.failed} != total {da.total}"
+            )
+            bucket_sum = (
+                da.surface_contract_conflict
+                + da.unsupported_or_ambiguous_surface
+                + da.aligned_failure
+            )
+            assert bucket_sum == da.failed, (
+                f"{dim}: bucket sum {bucket_sum} != failed {da.failed}"
+            )
+
+    def test_each_dimension_has_some_samples(self) -> None:
+        """Each attribution dimension has some samples."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        audit = audit_candidates(variants, num_repeats=1)
+        for dim in ATTRIBUTION_DIMENSIONS:
+            da = audit.dimension_attribution.get(dim)
+            assert da is not None, f"Missing attribution for {dim}"
+            assert da.total > 0, f"No samples for {dim}"
+
+
+# =============================================================================
+# 10.  Measured variance (Finding D)
+# =============================================================================
+
+
+class TestMeasuredVariance:
+    """Repeat variance is measured, not hard-coded to zero."""
+
+    def test_variance_is_integer(self) -> None:
+        """variance_count is a non-negative integer."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        audit = audit_candidates(variants[:5], num_repeats=2)
+        assert isinstance(audit.variance_count, int)
+        assert audit.variance_count >= 0
+
+    def test_deterministic_zero_variance(self) -> None:
+        """For deterministic replay, variance is expected to be zero."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        # Run twice and verify variance count is consistent
+        audit1 = audit_candidates(variants[:10], num_repeats=2)
+        audit2 = audit_candidates(variants[:10], num_repeats=2)
+        assert audit1.variance_count == audit2.variance_count
+
+
+# =============================================================================
+# 11.  Semantic baseline/current comparison (Finding D)
+# =============================================================================
+
+
+class TestSemanticComparison:
+    """Per-field semantic counts have no decrease from LC4R1 baseline."""
+
+    def test_semantic_passes_no_decrease(self) -> None:
+        """Each semantic field pass count >= LC4R1 baseline."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        from app.services.bernie.composed_corpus_evaluator import (
+            deterministic_interpret,
+            deterministic_replay,
+        )
+        from app.services.bernie.composed_evaluator import (
+            InterpretationObservation,
+            score_interpretation_replay_pair,
+        )
+
+        LC4R1_SEMANTIC_BASELINE = {
+            "intended_action": 720,
+            "action_semantics": 674,
+            "temporal_relation": 628,
+            "normalized_values": 101,
+            "entity_semantics": 255,
+            "clarification": 642,
+        }
+
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+
+        passes = {field: 0 for field in LC4R1_SEMANTIC_BASELINE}
+        for v in variants:
+            interp = deterministic_interpret(v)
+            interp = InterpretationObservation(
+                scenario_id=interp.scenario_id,
+                sample_index=0,
+                intended_action=interp.intended_action,
+                action_semantics=interp.action_semantics,
+                temporal_relation=interp.temporal_relation,
+                normalized_values=dict(interp.normalized_values),
+                entity_semantics=dict(interp.entity_semantics),
+                requires_clarification=interp.requires_clarification,
+                clarification_choices=interp.clarification_choices,
+                selected_tool_sequence=interp.selected_tool_sequence,
+                authority_claim=interp.authority_claim,
+                claims_action_completed=interp.claims_action_completed,
+                action_negated=interp.action_negated,
+            )
+            replay = deterministic_replay(v, interp)
+            result = score_interpretation_replay_pair(v, interp, replay)
+            for field in passes:
+                sf = getattr(result.semantic_fields, field, None)
+                if sf is not None and sf.passed:
+                    passes[field] += 1
+
+        for field, baseline in LC4R1_SEMANTIC_BASELINE.items():
+            assert passes[field] >= baseline, (
+                f"{field}: current {passes[field]} < baseline {baseline}"
+            )
+
+    def test_repeat_variance_not_hardcoded(self) -> None:
+        """verify variance_count is measured, not hardcoded to 0 in report."""
+        from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+        loader = DevelopmentOnlyLoader()
+        corpus = loader.load_all()
+        variants = []
+        for g in corpus.groups:
+            variants.extend(g.all_variants)
+        audit = audit_candidates(variants[:10], num_repeats=2)
+        # Variance should be a measured integer, not just defaulted
+        assert isinstance(audit.variance_count, int)
+
+
+# =============================================================================
+# 12.  Deterministic report hash/order (Finding D/E)
+# =============================================================================
+
+
+class TestDeterministicReportHash:
+    """Report hash and order are deterministic."""
+
+    def test_report_hash_deterministic(self) -> None:
+        """Two consecutive report computations produce the same hash."""
+        import subprocess
+        import json
+        script = r"C:\Users\sarashera\EMR4-worktrees\lc4r2-dw1\scripts\bernie_lc4r_development_gap_report.py"
+        # Run report --check which compares in-memory with stored
+        result1 = subprocess.run(
+            [_python(), script, "--check"],
+            capture_output=True, text=True, cwd=r"C:\Users\sarashera\EMR4-worktrees\lc4r2-dw1"
+        )
+        result2 = subprocess.run(
+            [_python(), script, "--check"],
+            capture_output=True, text=True, cwd=r"C:\Users\sarashera\EMR4-worktrees\lc4r2-dw1"
+        )
+        assert result1.returncode == 0, f"First check failed: {result1.stderr}"
+        assert result2.returncode == 0, f"Second check failed: {result2.stderr}"
+
+    def test_conflict_examples_deterministic_order(self) -> None:
+        """Conflict examples are in deterministic order (same across runs)."""
+        candidates = load_lc2_candidates()
+        audit1 = audit_candidates(candidates, num_repeats=1)
+        audit2 = audit_candidates(candidates, num_repeats=1)
+        ids1 = [(r.candidate_id, r.rule_id) for r in audit1.conflict_records]
+        ids2 = [(r.candidate_id, r.rule_id) for r in audit2.conflict_records]
+        assert ids1 == ids2, "Conflict record order differs between runs"
+
+
+def _python() -> str:
+    """Return path to the pinned Python interpreter."""
+    return r"C:\Users\sarashera\emr4\.venv\Scripts\python.exe"

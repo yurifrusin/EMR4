@@ -25,8 +25,8 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from dataclasses import dataclass
-from typing import Any, Literal
+from dataclasses import dataclass, field
+from typing import Any, Literal, Union
 
 from app.services.bernie.composed_corpus_evaluator import (
     deterministic_interpret,
@@ -67,6 +67,21 @@ RULE_AUTHORITY_MISMATCH = "CONFLICT-AUT-001"
 RULE_AMBIGUOUS_SURFACE = "CONFLICT-AMB-001"
 
 # ---------------------------------------------------------------------------
+# Audit category literals
+# ---------------------------------------------------------------------------
+
+# A candidate can be either a CorpusCandidate wrapper or a bare ReceptionScenarioSpec.
+CandidateInput = Union[CorpusCandidate, ReceptionScenarioSpec]
+
+# Dimensions for which we compute per-dimension attribution.
+ATTRIBUTION_DIMENSIONS: tuple[str, ...] = (
+    "downstream_outcome",
+    "tool_sequence",
+    "appointment_deltas",
+    "audit_deltas",
+)
+
+# ---------------------------------------------------------------------------
 # Audit record types
 # ---------------------------------------------------------------------------
 
@@ -84,6 +99,18 @@ class ConflictRecord:
 
 
 @dataclass(frozen=True)
+class DimensionAttribution:
+    """Per-dimension failure attribution."""
+
+    total: int
+    passed: int
+    failed: int
+    surface_contract_conflict: int = 0
+    unsupported_or_ambiguous_surface: int = 0
+    aligned_failure: int = 0
+
+
+@dataclass(frozen=True)
 class AuditResult:
     """Aggregate result of one candidate-quality audit pass."""
 
@@ -98,6 +125,15 @@ class AuditResult:
     conflict_records: tuple[ConflictRecord, ...]
 
     corpus_hash: str
+
+    per_rule_counts: dict[str, int] = field(default_factory=dict)
+
+    dimension_attribution: dict[str, DimensionAttribution] = field(default_factory=dict)
+
+    variance_count: int = 0
+
+    provenance: str = "silver"
+    adjudication: str = "pending"
 
     def category_counts(self) -> dict[str, int]:
         return {
@@ -369,9 +405,19 @@ def _detect_surface_negation(utterances: list[str]) -> bool:
 # ---------------------------------------------------------------------------
 
 
-def _compute_corpus_hash(candidates: list[CorpusCandidate]) -> str:
-    """Stable hash over candidate corpus IDs."""
-    ids = sorted(c.scenario.scenario_id for c in candidates)
+def _to_scenario(candidate: CandidateInput) -> ReceptionScenarioSpec:
+    """Extract the scenario from either a CorpusCandidate or bare spec."""
+    if isinstance(candidate, CorpusCandidate):
+        return candidate.scenario
+    return candidate
+
+
+def _compute_corpus_hash(candidates: list[CandidateInput]) -> str:
+    """Stable hash over candidate/scenario IDs."""
+    ids = sorted(
+        c.scenario.scenario_id if isinstance(c, CorpusCandidate) else c.scenario_id
+        for c in candidates
+    )
     raw = json.dumps(ids, separators=(",", ":"))
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
 
@@ -382,19 +428,22 @@ def _compute_corpus_hash(candidates: list[CorpusCandidate]) -> str:
 
 
 def audit_candidates(
-    candidates: list[CorpusCandidate],
+    candidates: list[CandidateInput],
     num_repeats: int = 2,
     max_conflict_examples: int = 20,
 ) -> AuditResult:
     """Run the candidate-quality firewall over Silver/pending candidates.
 
-    Each candidate is interpreted and replayed deterministically.  The audit
-    classifies every (candidate, sample) pair into one of four categories.
+    Accepts bare ``ReceptionScenarioSpec`` variants directly (the primary use
+    for the 1,152 LC4 development partition) or ``CorpusCandidate`` wrappers
+    (LC2 compatibility).  Each candidate is interpreted and replayed
+    deterministically.  The audit classifies every (candidate, sample) pair
+    into one of four categories.
 
     Parameters
     ----------
     candidates :
-        Silver/pending CorpusCandidate wrappers.
+        Silver/pending variants or CorpusCandidate wrappers.
     num_repeats :
         Number of deterministic repeats (default 2).
     max_conflict_examples :
@@ -403,7 +452,8 @@ def audit_candidates(
     Returns
     -------
     AuditResult
-        Aggregated audit counts and capped conflict records.
+        Aggregated audit counts, uncapped per-rule counts, capped conflict
+        records, per-dimension attribution, and measured variance.
     """
     corpus_hash = _compute_corpus_hash(candidates)
 
@@ -415,9 +465,22 @@ def audit_candidates(
 
     conflict_records: list[ConflictRecord] = []
     seen_records: set[str] = set()
+    all_rule_counts: dict[str, int] = {}
+
+    # Per-dimension attribution accumulators.
+    dim_attribution: dict[str, dict[str, int]] = {
+        dim: {"total": 0, "passed": 0, "failed": 0,
+              "surface_contract_conflict": 0,
+              "unsupported_or_ambiguous_surface": 0,
+              "aligned_failure": 0}
+        for dim in ATTRIBUTION_DIMENSIONS
+    }
+
+    # Variance tracking: store a fingerprint for each (scenario_id, repeat_idx).
+    fingerprints: dict[tuple[str, int], str] = {}
 
     for candidate in candidates:
-        scenario = candidate.scenario
+        scenario = _to_scenario(candidate)
         utterances = _extract_utterances(scenario)
 
         for sample_idx in range(num_repeats):
@@ -442,7 +505,21 @@ def audit_candidates(
             replay = deterministic_replay(scenario, interp)
             result = score_interpretation_replay_pair(scenario, interp, replay)
 
-            # Conflict detection -- first match wins
+            # ---- Compute fingerprint for variance measurement ----
+            fp_parts = [
+                str(replay.downstream_outcome),
+                str(replay.tools_used),
+                str(replay.appointment_deltas),
+                str(replay.audit_deltas),
+                str(replay.is_simulated_confirmed_write),
+                str(replay.requires_clarification),
+                str(interp.authority_claim),
+                str(interp.action_negated),
+            ]
+            fp = hashlib.sha256("|".join(fp_parts).encode("utf-8")).hexdigest()[:16]
+            fingerprints[(scenario.scenario_id, sample_idx)] = fp
+
+            # ---- Conflict detection -- first match wins ----
             detected: ConflictRecord | None = None
 
             surface_negated = _detect_surface_negation(utterances)
@@ -471,16 +548,29 @@ def audit_candidates(
             if detected is None:
                 detected = _check_ambiguous_surface(scenario, interp, utterances)
 
+            # Determine the audit category for this sample.
             if detected is not None:
-                if detected.category == "unsupported_or_ambiguous_surface":
-                    ambiguous_count += 1
-                elif detected.category == "surface_contract_conflict":
-                    surface_conflict_count += 1
-                else:  # aligned_failure
-                    # Ordinary disagreement counts as aligned failure,
-                    # not surface conflict.  Still continue to avoid
-                    # double-counting in aligned_pass below.
-                    aligned_failure += 1
+                cat = detected.category
+            elif result.all_passed:
+                cat: AuditCategory = "aligned_pass"
+            else:
+                cat = "aligned_failure"  # type: ignore[no-redef]
+
+            # ---- Aggregate counts ----
+            if cat == "unsupported_or_ambiguous_surface":
+                ambiguous_count += 1
+            elif cat == "surface_contract_conflict":
+                surface_conflict_count += 1
+            elif cat == "aligned_failure":
+                aligned_failure += 1
+            else:  # aligned_pass
+                aligned_pass += 1
+
+            # ---- Per-rule counts (uncapped) ----
+            if detected is not None:
+                all_rule_counts[detected.rule_id] = (
+                    all_rule_counts.get(detected.rule_id, 0) + 1
+                )
                 dedup_key = (
                     f"{detected.rule_id}:{detected.candidate_id}:"
                     f"{detected.observed_value}:{detected.expected_value}"
@@ -488,12 +578,56 @@ def audit_candidates(
                 if dedup_key not in seen_records and len(conflict_records) < max_conflict_examples:
                     seen_records.add(dedup_key)
                     conflict_records.append(detected)
-                continue
 
-            if result.all_passed:
-                aligned_pass += 1
-            else:
-                aligned_failure += 1
+            # ---- Per-dimension attribution ----
+            for dim in ATTRIBUTION_DIMENSIONS:
+                dim_attr = dim_attribution[dim]
+                dim_attr["total"] += 1
+                dim_result = getattr(result, dim, None)
+                if dim_result is None:
+                    continue
+                if dim_result.passed:
+                    dim_attr["passed"] += 1
+                else:
+                    dim_attr["failed"] += 1
+                    if cat == "surface_contract_conflict":
+                        dim_attr["surface_contract_conflict"] += 1
+                    elif cat == "unsupported_or_ambiguous_surface":
+                        dim_attr["unsupported_or_ambiguous_surface"] += 1
+                    else:
+                        dim_attr["aligned_failure"] += 1
+
+    # ---- Compute variance ----
+    variance_count = 0
+    seen_scenarios: set[str] = set()
+    for scenario_id in {s.scenario.scenario_id if isinstance(s, CorpusCandidate) else s.scenario_id for s in candidates}:
+        if scenario_id in seen_scenarios:
+            continue
+        seen_scenarios.add(scenario_id)
+        fps = [fingerprints.get((scenario_id, i), "") for i in range(num_repeats)]
+        if len(set(fps)) > 1:
+            variance_count += 1
+
+    # Build final dimension attribution.
+    final_dim_attr: dict[str, DimensionAttribution] = {}
+    for dim, counts in dim_attribution.items():
+        final_dim_attr[dim] = DimensionAttribution(
+            total=counts["total"],
+            passed=counts["passed"],
+            failed=counts["failed"],
+            surface_contract_conflict=counts["surface_contract_conflict"],
+            unsupported_or_ambiguous_surface=counts["unsupported_or_ambiguous_surface"],
+            aligned_failure=counts["aligned_failure"],
+        )
+
+    # Determine provenance/adjudication from input.
+    provenance = "silver"
+    adjudication = "pending"
+    if candidates:
+        first = candidates[0]
+        if isinstance(first, CorpusCandidate):
+            provenance = first.provenance.value
+            adjudication = first.adjudication.value
 
     return AuditResult(
         total_candidates=len(candidates),
@@ -503,7 +637,12 @@ def audit_candidates(
         surface_contract_conflict_count=surface_conflict_count,
         unsupported_or_ambiguous_surface_count=ambiguous_count,
         conflict_records=tuple(conflict_records),
+        per_rule_counts=all_rule_counts,
+        dimension_attribution=final_dim_attr,
+        variance_count=variance_count,
         corpus_hash=corpus_hash,
+        provenance=provenance,
+        adjudication=adjudication,
     )
 
 
@@ -511,6 +650,7 @@ __all__ = [
     "AuditCategory",
     "AuditResult",
     "ConflictRecord",
+    "DimensionAttribution",
     "RULE_ACTION_MISMATCH",
     "RULE_TEMPORAL_MISMATCH",
     "RULE_NEGATION_MISMATCH",
@@ -520,5 +660,7 @@ __all__ = [
     "RULE_CLARIFICATION_MISMATCH",
     "RULE_AUTHORITY_MISMATCH",
     "RULE_AMBIGUOUS_SURFACE",
+    "CandidateInput",
+    "ATTRIBUTION_DIMENSIONS",
     "audit_candidates",
 ]

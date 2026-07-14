@@ -1,8 +1,8 @@
 {
   "aligned_subset_scores": {
-    "aligned_failed": 8,
-    "aligned_passed": 16,
-    "aligned_total": 24
+    "aligned_failed": 1180,
+    "aligned_passed": 0,
+    "aligned_total": 1180
   },
   "baseline_lc4r1_one_repeat": {
     "appointment_deltas": "212/1152",
@@ -14,37 +14,101 @@
     "replay_tools": "592/1152",
     "safety": "1152/1152"
   },
-  "candidate_quality": {
-    "aligned_failure": 8,
-    "aligned_pass": 16,
-    "surface_contract_conflict": 2,
-    "unsupported_or_ambiguous_surface": 4
+  "baseline_lc4r1_semantic_fields": {
+    "action_semantics": "674/1152",
+    "clarification": "642/1152",
+    "entity_semantics": "255/1152",
+    "intended_action": "720/1152",
+    "normalized_values": "101/1152",
+    "temporal_relation": "628/1152"
   },
-  "conflict_example_count": 3,
+  "candidate_quality": {
+    "aligned_failure": 1180,
+    "aligned_pass": 0,
+    "surface_contract_conflict": 1072,
+    "unsupported_or_ambiguous_surface": 52
+  },
+  "conflict_example_count": 10,
   "conflict_examples": [
     {
-      "candidate_id": "lc2_dw2_ambiguity_001",
-      "category": "unsupported_or_ambiguous_surface",
-      "evidence_excerpt": "Can I book Margaret Thompson with Dr Shera tomorrow somet...",
-      "expected_value": "create",
-      "observed_value": "ambiguous_surface_text",
-      "rule_id": "CONFLICT-AMB-001"
+      "candidate_id": "lc4_dw1_dev_var_001_03",
+      "category": "aligned_failure",
+      "evidence_excerpt": "New booking: Margaret Thompson, Dr Shera, tomorrow 3pm, 1...",
+      "expected_value": "False",
+      "observed_value": "True",
+      "rule_id": "CONFLICT-CLR-001"
     },
     {
-      "candidate_id": "lc2_dw2_ambiguity_002",
-      "category": "unsupported_or_ambiguous_surface",
-      "evidence_excerpt": "Can I book Margaret Thompson with a doctor tomorrow somet...",
-      "expected_value": "create",
-      "observed_value": "ambiguous_surface_text",
-      "rule_id": "CONFLICT-AMB-001"
-    },
-    {
-      "candidate_id": "lc2_dw2_correction_003",
+      "candidate_id": "lc4_dw1_dev_var_001_04",
       "category": "surface_contract_conflict",
-      "evidence_excerpt": "Make an appointment for Margaret Thompson with Dr Shera t...",
-      "expected_value": "30",
-      "observed_value": "15",
-      "rule_id": "CONFLICT-DUR-001"
+      "evidence_excerpt": "Hi, I need to book Margaret Thompson in to see Dr Shera t...",
+      "expected_value": "exact",
+      "observed_value": "approximate",
+      "rule_id": "CONFLICT-TMP-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_mt_001_01",
+      "category": "aligned_failure",
+      "evidence_excerpt": "Hi, I need to book Margaret Thompson in with Dr Shera som...",
+      "expected_value": "True",
+      "observed_value": "False",
+      "rule_id": "CONFLICT-CLR-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_var_002_01",
+      "category": "aligned_failure",
+      "evidence_excerpt": "Book someone with some doctor tomorrow at 3pm for 15 minu...",
+      "expected_value": "False",
+      "observed_value": "True",
+      "rule_id": "CONFLICT-CLR-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_var_002_02",
+      "category": "aligned_failure",
+      "evidence_excerpt": "Could I schedule an appointment for someone with some doc...",
+      "expected_value": "False",
+      "observed_value": "True",
+      "rule_id": "CONFLICT-CLR-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_var_002_03",
+      "category": "aligned_failure",
+      "evidence_excerpt": "New booking: someone, some doctor, tomorrow 3pm, 15 minutes.",
+      "expected_value": "False",
+      "observed_value": "True",
+      "rule_id": "CONFLICT-CLR-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_var_002_04",
+      "category": "surface_contract_conflict",
+      "evidence_excerpt": "Hi, I need to book someone in to see some doctor tomorrow...",
+      "expected_value": "exact",
+      "observed_value": "approximate",
+      "rule_id": "CONFLICT-TMP-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_var_002_05",
+      "category": "aligned_failure",
+      "evidence_excerpt": "Please make an apt for someone w/ some doctor on tomorrow...",
+      "expected_value": "False",
+      "observed_value": "True",
+      "rule_id": "CONFLICT-CLR-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_var_002_06",
+      "category": "aligned_failure",
+      "evidence_excerpt": "I'd like to put someone down for an appointment with some...",
+      "expected_value": "False",
+      "observed_value": "True",
+      "rule_id": "CONFLICT-CLR-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_var_002_07",
+      "category": "aligned_failure",
+      "evidence_excerpt": "Schedule someone \u2014 some doctor \u2014 tomorrow 3pm \u2014 15 minutes.",
+      "expected_value": "False",
+      "observed_value": "True",
+      "rule_id": "CONFLICT-CLR-001"
     }
   ],
   "corpus_manifest": {
@@ -64,6 +128,14 @@
     "interpretation_tools": "592/1152",
     "replay_tools": "592/1152",
     "safety": "1152/1152"
+  },
+  "current_one_repeat_semantic_fields": {
+    "action_semantics": "674/1152",
+    "clarification": "642/1152",
+    "entity_semantics": "255/1152",
+    "intended_action": "720/1152",
+    "normalized_values": "101/1152",
+    "temporal_relation": "628/1152"
   },
   "current_two_repeats": {
     "appointment_deltas": "418/2304",
@@ -85,36 +157,91 @@
     "replay_tools": "+0",
     "safety": "+0"
   },
+  "delta_vs_baseline_semantic_fields": {
+    "action_semantics": "+0",
+    "clarification": "+0",
+    "entity_semantics": "+0",
+    "intended_action": "+0",
+    "normalized_values": "+0",
+    "temporal_relation": "+0"
+  },
   "development_only": true,
+  "dimension_attribution": {
+    "appointment_deltas": {
+      "aligned_failure": 968,
+      "failed": 1886,
+      "passed": 418,
+      "surface_contract_conflict": 866,
+      "total": 2304,
+      "unsupported_or_ambiguous_surface": 52
+    },
+    "audit_deltas": {
+      "aligned_failure": 988,
+      "failed": 1920,
+      "passed": 384,
+      "surface_contract_conflict": 880,
+      "total": 2304,
+      "unsupported_or_ambiguous_surface": 52
+    },
+    "downstream_outcome": {
+      "aligned_failure": 966,
+      "failed": 1910,
+      "passed": 394,
+      "surface_contract_conflict": 912,
+      "total": 2304,
+      "unsupported_or_ambiguous_surface": 32
+    },
+    "replay_tools": {
+      "aligned_failure": 508,
+      "failed": 1120,
+      "passed": 1184,
+      "surface_contract_conflict": 586,
+      "total": 2304,
+      "unsupported_or_ambiguous_surface": 26
+    }
+  },
   "no_holdout_accessed": true,
   "per_rule_counts": {
-    "CONFLICT-AMB-001": 2,
-    "CONFLICT-DUR-001": 1
+    "CONFLICT-ACT-001": 256,
+    "CONFLICT-AMB-001": 52,
+    "CONFLICT-CLR-001": 588,
+    "CONFLICT-DUR-001": 276,
+    "CONFLICT-ENT-001": 46,
+    "CONFLICT-NEG-001": 32,
+    "CONFLICT-TMP-001": 462
   },
   "provenance_adjudication_counts": {
     "gold_adjudicated": 0,
-    "silver_pending": 15
+    "lc2_silver_pending": 15,
+    "silver_pending": 1152
   },
   "repeat_variance": {
     "one_repeat": 0,
     "two_repeats": 0
   },
-  "report_hash": "9aff0265c4875527",
-  "schema_version": "lc4r2.development_gap_report.v2",
+  "report_hash": "cba97acd3f23d2ec",
+  "schema_version": "lc4r2.development_gap_report.v3",
   "semantic_fields": {
-    "failed": 1109,
-    "field_failures": {
-      "action_semantics": 478,
-      "clarification": 510,
-      "entity_semantics": 897,
-      "intended_action": 432,
-      "normalized_values": 1051,
-      "temporal_relation": 524
+    "baseline_field_passes": {
+      "action_semantics": 674,
+      "clarification": 642,
+      "entity_semantics": 255,
+      "intended_action": 720,
+      "normalized_values": 101,
+      "temporal_relation": 628
     },
-    "passed": 43,
+    "field_passes": {
+      "action_semantics": 674,
+      "clarification": 642,
+      "entity_semantics": 255,
+      "intended_action": 720,
+      "normalized_values": 101,
+      "temporal_relation": 628
+    },
+    "passed": 720,
     "total": 1152
   },
   "silver_conflicts_do_not_reduce_gold_gaps": true,
-  "total_candidate_samples": 30,
-  "total_candidates": 15
+  "total_candidate_samples": 2304,
+  "total_candidates": 1152
 }
