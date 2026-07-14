@@ -91,9 +91,9 @@ diary replay. The approved direction is recorded in
 
 ## Next Slice
 
-Do not proceed directly to T3.5. Begin LC1 Semantic Foundation and Known
-Regression: reproduce Yuri's `tomorrow at 3pm` failure through the real
-interpretation path, distinguish exact/open/approximate temporal relations,
-introduce the canonical scenario contract, and produce the first coverage gap
-report. Preserve the T3.1-T3.4 infrastructure while external calls remain
-blocked.
+Do not proceed directly to T3.5. LC1 Semantic Foundation and LC2 Corpus Factory
+are complete; begin LC3 Composed T2/T3 Evaluator. Run the pending corpus through
+typed interpretation and deterministic diary replay, score semantic and
+authority failures by layer, add metamorphic/property/mutation checks, and
+refresh candidate-aware coverage gaps. Preserve the T3.1-T3.4 infrastructure
+while external calls remain blocked.

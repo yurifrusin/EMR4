@@ -221,6 +221,17 @@ and missing coverage remains visible.
 
 ### LC2 - Corpus Factory And Independent Adjudication
 
+Implementation status: complete on 2026-07-14. The deterministic factory and
+provenance rules are documented in `docs/bernie-lc2-provenance-rules.md`; the
+bounded 15-case generator is documented in
+`docs/bernie-lc2-candidate-generation.md`; and Gemini's independent veto pass
+plus six adversarial probe envelopes are recorded in
+`docs/adversarial/lc2_independent_review.md`. Every generated case remains
+Silver/pending with no judge or promotion record. Sol's executable acceptance
+confirmed two promotion-time quarantines, three fail-closed candidate payloads,
+and one fail-closed adjudication payload; these outcomes are locked by
+`tests/test_bernie_corpus_adversarial.py`.
+
 - Implement Gold/Silver/Bronze provenance and promotion rules.
 - Add bounded multi-model paraphrase, minimal-pair, ambiguity, correction, and
   adversarial generators.
@@ -230,6 +241,31 @@ and missing coverage remains visible.
 
 Exit: generated variants cannot silently become Gold, generator/judge
 independence is enforced, and corpus additions are reproducible.
+
+### Channel And External-Source Posture After LC2
+
+Text remains the deliberately hard surface-form problem. Typed instructions
+and future ASR transcripts must enter the same canonical scenario contract and
+lossless normalization layer. Voice is not assumed to be a semantic subset of
+text: ASR alternatives, confidence, prosody, and homophones such as
+`three/free` remain channel evidence. The future voice adapter should preserve
+the raw transcript and alternatives, then emit the same typed relations,
+entities, source coordinates, and uncertainty fields. No separate voice
+ontology or voice sprint is required before LC3.
+
+The suggested healthcare appointment-booking calls dataset is registered only
+as metadata and remains no-import pending licence provenance, recording
+consent, privacy/jurisdiction, leakage, and local-processing review. It may
+later supply booking-language evaluation surfaces; it is not training or
+semantic truth evidence in LC2.
+
+The suggested MedInstruct/AI-doctor fine-tuning dataset is a future
+consult-assistant (Davida/GP-assistant) evaluation candidate, not a Bernie LC2
+source and not a clinical oracle. Do not download, train on, or promote it
+without underlying source-by-source provenance and licence review, PHI/leakage
+assessment, clinical-safety review, and Australian general-practice
+applicability checks. A Kaggle wrapper licence is not sufficient evidence for
+the mixed upstream sources.
 
 ### LC3 - Composed T2/T3 Evaluator
 
@@ -274,8 +310,9 @@ variance, not average accuracy or persuasive output.
 - Sol Extra High/`max` is reserved for ontology freeze, independent final audit,
   or a live-model promotion decision where the additional reasoning has clear
   leverage.
-- Terra or DeepSeek Pro may execute bounded integration and corpus-analysis
-  work from the approved tranche contract.
+- Protected Sol directly plans and allocates ordinary bounded sprints.
+- DeepSeek Pro is an optional compact consultant for programme/architecture
+  leverage or repeated failure, not the routine Conductor.
 - DeepSeek Flash and Gemini Flash are suitable for implementation, bulk variant
   generation, independent adversarial passes, and economical repeat runs.
 - A model must not certify its own generated corpus. Deterministic validators
@@ -283,12 +320,12 @@ variance, not average accuracy or persuasive output.
 
 ## Immediate Direction
 
-The next EMR4 product tranche is LC1, not T3.5. Preserve T3.1-T3.4, defer live
-or static provider-adapter work that does not help establish language coverage,
-and fix the known exact-time regression as the first end-to-end example of the
-new contract.
+The next EMR4 product tranche is LC3, not T3.5. Preserve T3.1-T3.4, defer live
+or static provider-adapter work, and compose LC2's pending corpus with typed
+interpretation plus deterministic diary replay before growing or promoting the
+corpus.
 
-No user decision is required for ordinary LC1 implementation. Pause only if
+No user decision is required for ordinary LC3 implementation. Pause only if
 work would broaden historical-trove access, send sensitive data to a provider,
 accept material licensing/cost terms, open live-provider execution, or change
 diary write authority.
@@ -297,9 +334,9 @@ diary write authority.
 
 After restarting the app, a new orchestrator should read `AGENTS.md`, this plan,
 the T1/T2 closeouts, and the T3 shadow-evaluation status before changing code.
-It should verify `master` and `origin/master`, inspect the known exact-time
-parser gap, and begin LC1 through the normal Ariadne workflow without reopening
-T3.5 or asking for routine permission.
+It should verify `master` and `origin/master`, confirm the LC1/LC2 closeout and
+the blocked T3 gates, and begin LC3 through the normal Ariadne workflow without
+reopening T3.5 or asking for routine permission.
 
 Recommended new-task prompt:
 
@@ -309,12 +346,11 @@ AGENTS.md and read docs/bernie-language-coverage-implementation-plan.md,
 docs/bernie-t1-stateful-scenario-laboratory.md,
 docs/bernie-t2-deterministic-behaviour-matrix.md, and
 docs/bernie-t3-shadow-evaluation.md. Verify the worktree and origin/master,
-then begin LC1 Semantic Foundation and Known Regression through the normal
-Ariadne workflow. Start by reproducing the real "tomorrow at 3pm" failure
-through the non-intercepted interpretation path, then implement the canonical
-scenario contract, explicit temporal relations, lossless normalization, and
-the first coverage-lattice gap report. Preserve T3.1-T3.4 and defer T3.5
-provider adapters. Continue through ordinary implementation, tests, review,
-commit, and push without pausing unless a documented user decision boundary is
-reached.
+then begin LC3 Composed T2/T3 Evaluator through the normal Ariadne workflow.
+Run the LC2 corpus through typed interpretation and deterministic diary replay;
+score field, downstream outcome, tool, authority, clarification, and variance
+layers; add metamorphic/property/mutation tests; and refresh candidate-aware
+coverage gaps. Preserve T3.1-T3.4 and defer T3.5 provider adapters. Continue
+through ordinary implementation, tests, review, commit, and push without
+pausing unless a documented user decision boundary is reached.
 ```

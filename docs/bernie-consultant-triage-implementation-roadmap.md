@@ -339,15 +339,15 @@ sequence:
 5. Replan at tranche boundaries or when evidence falsifies an assumption, not
    merely because a sprint ended.
 
-T1 and T2 are now complete, and T3.1-T3.4 have established the write-disabled
+T1 and T2 are complete, T3.1-T3.4 have established the write-disabled
 evaluation contract, source-safe projection, repeat runner, and live-replay
-gate. The default next tranche is **LC1 Semantic Foundation and Known
-Regression**, defined in
+gate, and LC1-LC2 have established the semantic foundation plus pending corpus.
+The default next tranche is **LC3 Composed T2/T3 Evaluator**, defined in
 `docs/bernie-language-coverage-implementation-plan.md`. T3.5 provider adapters
-are deferred until the language-coverage bridge has a credible corpus and
-composed evaluator. T4 may begin as a genuinely independent governance stream,
-but T5 must not precede T4, T7 must not precede a credible T5-T6 evidence base,
-and T8 must not precede all of T4-T7.
+are deferred until the language-coverage bridge has the composed evaluator and
+credible candidate-aware coverage evidence. T4 may begin as a genuinely
+independent governance stream, but T5 must not precede T4, T7 must not precede
+a credible T5-T6 evidence base, and T8 must not precede all of T4-T7.
 
 ## User Decision Boundaries
 
