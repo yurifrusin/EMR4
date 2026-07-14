@@ -21,9 +21,11 @@ The extraction handles:
 - **Point-time variants:** `3pm`, `3 pm`, `3:15pm`, `3.15pm`, `15:15`.
 - **Date derivation:** `today`, `tomorrow`, `day after tomorrow` relative to
   the reference date.
-- **Minute duration:** patterns matching text like "15 minutes".
+- **Minute duration:** `min`, `mins`, `minute`, and `minutes` forms.
 - **Multi-turn reduction:** additive turns contribute new fields; correction
   turns replace only their corrected field (time, date, duration, or entity).
+  A temporal correction replaces the complete prior relation so an exact point
+  cannot leak a stale opposite bound into a later open constraint.
 - **Entity semantics:** exact, omitted, ambiguous, and corrected states for
   patient, practitioner, and duration.
 - **Action-relevant clarification:** only missing facts that are material to
@@ -32,7 +34,12 @@ The extraction handles:
 - **Unsafe bypass/completion refusal:** "bypass confirmation",
   "override the system", "ignore the duplicate check" are refused.
   Safe negated mentions ("do not bypass confirmation", "do not mark it
-  completed") are preserved.
+  completed") and later reversals are explicit `action_negated` observations
+  and select no mutation tool.
+- **Action-specific tools:** create, update, status, explanation, clarification,
+  refusal, and negated flows use distinct deterministic tool sequences.
+- **Lossless evidence:** every original turn retains its derived
+  `NormalizedUtterance`, including time forms and source spans.
 - **Authority:** always read, clarify, or refuse; never write.
   claims_action_completed is always False.
 
@@ -53,6 +60,7 @@ utterances: list[str]  +  reference_date: str
     - requires_clarification, clarification_choices
     - authority_claim, claims_action_completed
     - selected_tool_sequence
+    - normalized_turns, action_negated
           |
           v
   deterministic_interpret()   (in composed_corpus_evaluator.py)
@@ -69,7 +77,7 @@ extracts utterances and the reference date from the scenario, calls
 - `app/services/bernie/semantic_extraction.py` -- new module (the boundary)
 - `app/services/bernie/composed_corpus_evaluator.py` -- integrated via
   `deterministic_interpret`
-- `tests/test_bernie_semantic_extraction.py` -- 56 focused tests
+- `tests/test_bernie_semantic_extraction.py` -- 103 focused tests
 - No changes to routes, providers, DB models, API schemas, UI, T3 gates,
   holdout code, or other owned surfaces.
 
@@ -98,11 +106,41 @@ extracts utterances and the reference date from the scenario, calls
 
 ## Verification
 
+### Development evidence
+
+LC4R1 evaluates the same 1,152 Silver/pending development scenarios without
+touching the consumed protected holdout. Exact one-repeat field agreement moves
+as follows:
+
+| Field | LC4 baseline | LC4R1 | Delta |
+|---|---:|---:|---:|
+| intended action | 464 | 720 | +256 |
+| action semantics | 512 | 674 | +162 |
+| temporal relation | 477 | 628 | +151 |
+| normalized values | 71 | 101 | +30 |
+| entity semantics | 68 | 255 | +187 |
+| clarification | 544 | 642 | +98 |
+| safety | 1,152 | 1,152 | 0 |
+
+There are still zero complete development scenarios. That is not hidden:
+LC4R1 repairs the root extractor, while incomplete replay/policy handling and
+contradictory Silver labels remain later LC4R work.
+
+### Deterministic and independent review
+
 ```text
-python -m pytest tests/test_bernie_semantic_extraction.py -q    # 56 passed
+python -m pytest tests/test_bernie_semantic_extraction.py -q    # 103 passed
 python -m pytest tests/test_bernie_composed_corpus_evaluator.py -q -k "not test_regenerated_matches_committed"   # 39 passed
-python -m pytest tests/test_bernie_lc4_scaled_evaluator.py -q -k "not test_exact_report_regeneration"   # 96 passed
+python -m pytest tests/test_bernie_lc4_scaled_evaluator.py -q -k "not test_exact_report_regeneration"   # 93 passed
 python -m pytest tests/test_bernie_temporal_policy.py -q        # 34 passed
+python -m pytest tests/test_bernie_booking_classifier.py::test_tomorrow_at_3pm_interpret_then_duplicate_has_no_second_write -q   # 1 passed
 python scripts/bernie_shadow_live_gate_check.py                 # blocked
 git diff --check                                                # clean
 ```
+
+The initial DeepSeek Flash candidate required revision, and its second
+self-report still missed the normalized-value acceptance threshold. Sol adopted
+the source under the documented recovery lease, made two identified pure
+temporal amendments, and reran the gate. Gemini 3.5 Flash then independently
+returned `DECISION: pass`; its artifact is
+`orchestration/agent_inbox/codex/lc4r1-antigravity-semantic-review.md`.
