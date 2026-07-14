@@ -1,0 +1,105 @@
+{
+  "schema_version": "lc4r6.temporal_source_evidence_audit.v1",
+  "development_only": true,
+  "silver_pending_only": true,
+  "corpus_hash": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
+  "lc4r5_baseline": {
+    "intended_action": 880,
+    "action_semantics": 730,
+    "temporal_relation": 628,
+    "normalized_values": 101,
+    "entity_semantics": 300,
+    "clarification": 698,
+    "safety": 1152
+  },
+  "lc4r5_post_semantic_fields_one_repeat": {
+    "intended_action": "880/1152",
+    "action_semantics": "814/1152",
+    "temporal_relation": "628/1152",
+    "normalized_values": "101/1152",
+    "entity_semantics": "300/1152",
+    "clarification": "782/1152"
+  },
+  "safety": {
+    "all_safe": true,
+    "passed": 1152,
+    "total": 1152
+  },
+  "repeat_variance": {
+    "all_deltas_zero": true,
+    "variant_scenario_count": 0,
+    "method": "per-scenario observation and safety fingerprint",
+    "sample_count": 2304
+  },
+  "temporal_selection": {
+    "count": 159,
+    "hash": "f56b4a20aad6161c",
+    "expected_hash": "f56b4a20aad6161c",
+    "hash_match": true
+  },
+  "temporal_taxonomy": {
+    "insufficient_surface_evidence": {
+      "count": 84,
+      "hash": "c341652065504d17",
+      "expected_count": 84,
+      "expected_hash": "c341652065504d17"
+    },
+    "surface_contract_conflict": {
+      "count": 75,
+      "hash": "fd04b9c86a54fea4",
+      "expected_count": 75,
+      "expected_hash": "fd04b9c86a54fea4"
+    },
+    "parser_gap": {
+      "count": 0,
+      "hash": "e3b0c44298fc1c14",
+      "expected_count": 0,
+      "expected_hash": "e3b0c44298fc1c14"
+    }
+  },
+  "insufficient_subtypes": {
+    "by_expected_relation": {
+      "exact": 18,
+      "not_before": 18,
+      "not_after": 18,
+      "interval": 18,
+      "approximate": 12
+    }
+  },
+  "conflict_pair_counts": {
+    "approximate/exact": 10,
+    "exact/approximate": 2,
+    "interval/approximate": 3,
+    "interval/exact": 14,
+    "not_after/approximate": 2,
+    "not_after/exact": 16,
+    "not_before/approximate": 3,
+    "not_before/exact": 14,
+    "unspecified/approximate": 2,
+    "unspecified/exact": 9
+  },
+  "assertions": {
+    "selection_159": true,
+    "selection_hash_match": true,
+    "insufficient_84": true,
+    "insufficient_hash_match": true,
+    "conflict_75": true,
+    "conflict_hash_match": true,
+    "parser_gap_0": true,
+    "parser_gap_hash_match": true,
+    "insufficient_subtypes_exact_18": true,
+    "insufficient_subtypes_not_before_18": true,
+    "insufficient_subtypes_not_after_18": true,
+    "insufficient_subtypes_interval_18": true,
+    "insufficient_subtypes_approximate_12": true,
+    "intended_action_no_regression": true,
+    "action_semantics_exactly_814": true,
+    "clarification_exactly_782": true,
+    "temporal_relation_no_regression": true,
+    "normalized_values_no_regression": true,
+    "entity_semantics_no_regression": true,
+    "safety_exact_1152_of_1152": true,
+    "repeat_variance_zero": true
+  },
+  "report_hash": "sha256:f894f1c2a695567bb38722f3379eeefcc0500bb2543a9805905afc9a10f0e404"
+}
