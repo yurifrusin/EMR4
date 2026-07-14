@@ -1,146 +1,140 @@
-# LC4R2 — Replay Consequence and Candidate-Quality Firewall
+# LC4R2 — Replay Consequences and Candidate-Quality Firewall
 
 Date: 2026-07-14
 
-## Objective A — Oracle-Free Replay Consequences
+Final disposition: accepted as a safety-first diagnostic closeout by GPT Sol
+after independent Gemini 3.5 Flash review.
 
-### Change Summary
+## Oracle-free replay consequences
 
-The deterministic replay in deterministic_replay() was refactored so
-that outcomes, tools, deltas, and simulated-write classification derive
-ONLY from:
+`deterministic_replay()` now derives outcomes, tool use, appointment/audit
+deltas, and simulated-write metadata only from:
 
-- The InterpretationObservation
-- Synthetic diary state / initial_diary_state from the scenario
-- Bounded action/outcome policy tables
+- `InterpretationObservation`;
+- explicit synthetic diary state and reference date; and
+- bounded action/outcome policy.
 
-All dependency on expected fields was removed:
+It does not read or branch on expected outcome, tool, appointment delta, audit
+delta, clarification, provenance, or adjudication fields. The scorer remains
+the only layer that compares observations with the Silver candidate contract.
 
-| Expected field     | Was | Now |
-|-------------------|-----|-----|
-| expected_outcome_kind | Read for outcome mapping | Never read |
-| expected_appointment_deltas | Read for simulated-write flag | Never read |
-| expected_tool_sequence | Read in helpers | Never read |
-| expected_audit_deltas | Read for simulated-write flag | Never read |
-| expected_clarification | Read in helpers | Never read |
+All six actions have action-specific outcomes and mutation shapes:
 
-### Action-Specific Outcomes
+| Action/state | Outcome | Appointment change type |
+|---|---|---|
+| create / empty | `appointment_created` | `created` |
+| create / exact duplicate | `existing_booking_found` | prior `created` evidence only |
+| create / overlap | `candidate_selection_required` | none |
+| move | `appointment_moved` | `moved` |
+| resize | `appointment_resized` | `resized` |
+| cancel | `appointment_cancelled` | `cancelled` |
+| status change | `appointment_status_changed` | `status_changed` |
+| explain schedule | `schedule_explained` | none |
+| clarification | `clarification_required` | none |
+| unsafe/refused | `instruction_refused` | none |
 
-All six diary actions now have distinct outcomes and delta change types:
+Terminal, stale, concurrent, no-slot, roster-absent, break, and elapsed-window
+states fail closed where the synthetic contract cannot establish safe
+execution. Explicit negation/reversal produces no mutation outcome or delta.
+`is_simulated_confirmed_write` is evaluation metadata derived from replayed
+deltas, never from an expected delta, and performs no real write.
 
-| Action          | Outcome                        | Change type  |
-|-----------------|--------------------------------|--------------|
-| create (empty)  | appointment_created        | created  |
-| create (duplicate)| existing_booking_found   | created  |
-| create (overlap)| candidate_selection_required| (no deltas) |
-| move            | appointment_moved          | moved    |
-| resize          | appointment_resized        | resized  |
-| cancel          | appointment_cancelled      | cancelled|
-| status_change   | appointment_status_changed | status_changed|
-| explain_schedule| schedule_explained         | (no deltas)  |
-| clarification   | clarification_required     | (no deltas)  |
-| unsafe/refused  | instruction_refused        | (no deltas)  |
+## Candidate-quality firewall
 
-### Fail-Closed States
+The development-only audit runs over the same 1,152 Silver/pending scale
+records used for current metrics, with two deterministic repeats. It separates:
 
-Uncertain diary states (terminal, stale, concurrent,
-no_slots, roster_absent, break, elapsed_window) return
-None instead of producing a mutation outcome.  Negated/reversed
-actions also return None with no deltas.
+- `aligned_pass`;
+- `aligned_failure`;
+- `surface_contract_conflict`; and
+- `unsupported_or_ambiguous_surface`.
 
-### Simulated-Write Classification
+Current two-repeat classification is:
 
-is_simulated_confirmed_write now derives purely from whether the
-replay generated deltas:
+| Category | Samples |
+|---|---:|
+| aligned pass | 0 |
+| aligned failure | 1,180 |
+| surface-contract conflict | 1,072 |
+| unsupported/ambiguous | 52 |
 
-It never reads scenario.expected_appointment_deltas.
+These are discovery categories, not Gold adjudication. Silver conflicts do not
+reduce Gold coverage gaps. A separate LC2 reference audit remains labelled as
+15 candidates / 30 samples and is not used to explain the scale partition.
 
-## Objective B — Candidate-Quality Firewall
+Rule counts are uncapped aggregates, while safe examples are independently
+capped. Dimension attribution reports passed/failed totals and partitions each
+failure into conflict, unsupported, or aligned buckets. Repeat variance is
+measured from observation/safety fingerprints rather than asserted.
 
-### Audit Categories
+## Development evidence
 
-Four deterministic classification categories:
+One-repeat metrics against the accepted LC4R1 base are:
 
-| Category | Count | Meaning |
-|----------|-------|---------|
-| aligned_pass | 16/30 | Surface supports label, interpreter agrees |
-| aligned_failure | 8/30 | Surface supports label, interpreter disagrees |
-| surface_contract_conflict | 2/30 | Explicit evidence contradicts the label |
-| unsupported_or_ambiguous_surface | 4/30 | Surface text is genuinely ambiguous |
+| Dimension | LC4R1 | LC4R2 | Delta |
+|---|---:|---:|---:|
+| downstream outcome | 50/1,152 | 197/1,152 | +147 |
+| interpretation tools | 592/1,152 | 592/1,152 | 0 |
+| replay tools | 592/1,152 | 592/1,152 | 0 |
+| clarification | 610/1,152 | 610/1,152 | 0 |
+| authority | 642/1,152 | 642/1,152 | 0 |
+| appointment deltas | 212/1,152 | 209/1,152 | -3 |
+| audit deltas | 192/1,152 | 192/1,152 | 0 |
+| safety | 1,152/1,152 | 1,152/1,152 | 0 |
 
-### Deterministic Rule IDs
+Every semantic-field pass count is unchanged from LC4R1:
 
-| Rule ID | Triggers |
-|---------|----------|
-| CONFLICT-ACT-001 | Different intended action detected |
-| CONFLICT-TMP-001 | Different temporal relation detected |
-| CONFLICT-NEG-001 | Surface negation mismatches parser state |
-| CONFLICT-DUR-001 | Different duration detected |
-| CONFLICT-ENT-001 | Different entity state detected |
-| CONFLICT-CLR-001 | Clarification state mismatch |
-| CONFLICT-AUT-001 | Authority claim mismatch |
-| CONFLICT-AMB-001 | Surface too ambiguous to classify |
+- intended action: 720;
+- action semantics: 674;
+- temporal relation: 628;
+- normalized values: 101;
+- entity semantics: 255; and
+- clarification: 642.
 
-## Owned Surface
+The only lost appointment-delta passes are
+`lc4_dw1_dev_mt_001_03`, `lc4_dw1_dev_mt_002_03`, and
+`lc4_dw1_dev_mt_013_03`. Each has empty seeded appointment state and ends with
+“never mind / not needed,” while its Silver label still expects a created
+appointment. LC4R1 passed those records only by inventing an earlier write from
+date/time text. Removing that heuristic is a fail-closed safety correction, not
+a product regression and not permission to hide the remaining aligned gaps.
 
-### New Files
+The deterministic v3 report is
+`docs/bernie-lc4r-development-gap-report.json`, with corpus hash
+`f73a35b8843beb66` and report hash `cba97acd3f23d2ec`.
 
-- app/services/bernie/development_gap_audit.py — candidate-quality
-  firewall module
-- scripts/bernie_lc4r_development_gap_report.py — development-only
-  gap report script
-- tests/test_bernie_replay_consequences.py — 25 tests for Objective A
-- tests/test_bernie_development_gap_audit.py — 17 tests for Objective B
+## Acceptance history
 
-### Modified Files
+DeepSeek Flash's original and revised worker artifacts are preserved. Its final
+decision remained `revision_required` because the original score-based
+conflict-only exception was not met. Sol adopted the branch under the recovery
+lease, fixed only a disposable-worktree path in a report test, proved the exact
+three safety-correction records, and applied a narrow revised acceptance:
 
-- app/services/bernie/composed_evaluator.py — added
-  action_negated field to InterpretationObservation
-- app/services/bernie/composed_corpus_evaluator.py — Oracle-free
-  replay refactoring
+- safety must remain 1,152/1,152;
+- repeat variance must measure zero;
+- all LC4R1 semantic-field counts must be preserved;
+- all six-action and expected-field mutation regressions must pass;
+- the report must expose rather than erase aligned/unsupported failures;
+- no protected evidence or runtime/write boundary may open; and
+- an independent Gemini veto review must pass.
 
-### Committed Artifacts
+Gemini 3.5 Flash returned `DECISION: pass` at reviewed head `1c41d3b6` and
+independently reproduced 49 replay tests, 33 audit tests, the exact LC1 route
+regression, report check, eight rehydration tests, 89 composed tests with one
+deselection, the blocked shadow gate, and a clean diff.
 
-- docs/bernie-lc4r-development-gap-report.json — machine-readable
-  development gap report
-- docs/bernie-lc4r2-replay-and-candidate-quality.md — this document
+The frozen pre-LC4R exact-report regeneration check is deliberately not
+regenerated in LC4R. It is historical baseline evidence and now drifts because
+the evaluator changed. The LC4R2 v3 report is the owned current artifact.
 
-## Verification Results
+## Boundaries and next step
 
-### All Tests Pass
+No protected holdout, provider, route/API, database, UI, deployment, historical
+diary, memory/RAG/GraphRAG, T3.5 adapter, or live/write authority was opened.
+T3.1-T3.4 remain preserved and blocked by default.
 
-- 89 existing evaluator tests (1 expected xfail for committed-report drift)
-- 42 new focused tests (25 replay consequences + 17 development gap audit)
-- 9 LC1 route regression tests
-
-### Metrics  (LC4 development partition, 1 repeat / 1152 samples)
-
-| Dimension | LC4R1 Baseline | Current | Delta |
-|-----------|---------------|---------|-------|
-| downstream_outcome | 50/1152 | 197/1152 | +147 |
-| interpretation_tools | 592/1152 | 592/1152 | +0 |
-| replay_tools | 592/1152 | 592/1152 | +0 |
-| clarification | 610/1152 | 610/1152 | +0 |
-| authority | 642/1152 | 642/1152 | +0 |
-| appointment_deltas | 212/1152 | 209/1152 | -3\* |
-| audit_deltas | 192/1152 | 192/1152 | +0 |
-| safety | 1152/1152 | 1152/1152 | +0 |
-| repeat variance | 0 | 0 | 0 |
-
-\*\*The -3 decrease in appointment_deltas is solely explained by removing
-the invented prior-write heuristic for adversarial Silver candidates.
-These samples are classified as surface_contract_conflict (2) or
-aligned_failure (8) in the candidate-quality audit and do not affect
-any authored aligned replay regression.\*
-
-### Report Hash
-
-The development gap report (v2) has been generated and checked (--check
-passes).
-
-### Boundary Confirmation
-
-- No protected holdout fixture, support module, seal receipt, or report
-  was accessed
-- No provider, route, database, UI, deployment, or T3 gate was modified
-- No historical diary material, external dataset, or network call was used
+LC4R2 makes replay consequences safer and makes the scale failures honest; it
+does not establish broad language completeness. LC4R3 should target a bounded
+set of the remaining aligned semantic failures without editing Silver fixtures
+to manufacture passes or using protected holdout evidence.
