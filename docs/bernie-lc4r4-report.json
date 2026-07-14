@@ -22,8 +22,8 @@
   },
   "safety": {
     "all_safe": true,
-    "passed": 2304,
-    "total": 2304
+    "passed": 1152,
+    "total": 1152
   },
   "repeat_variance": {
     "all_deltas_zero": true,
@@ -51,8 +51,11 @@
     "pre_lc4r4_entity_passes": 255,
     "post_lc4r4_entity_passes": 300,
     "net_improvement": 45,
-    "total_someone_scenarios_fixed": 70,
-    "total_additive_scenarios_fixed": 13
+    "aligned_target_records": 83,
+    "matching_someone_surfaces": 126,
+    "matching_someone_surface_hash": "b4a228c2c4339b53",
+    "matching_additive_resolution_surfaces": 16,
+    "matching_additive_resolution_surface_hash": "1d1cc5fd9eba83ff"
   },
   "normalized_values_preserved": {
     "pre_lc4r4": 101,
@@ -92,5 +95,5 @@
     "safety_exact_1152_of_1152": true,
     "repeat_variance_zero": true
   },
-  "report_hash": "sha256:879e2e25959ecf0d60cba63ffc4f7c5073fff85af35f5467c88a99c4290b39bf"
+  "report_hash": "sha256:dd0173647a33fe8124ad92bdad4c7cdfc821ba0994170e572f8832dd4904c408"
 }

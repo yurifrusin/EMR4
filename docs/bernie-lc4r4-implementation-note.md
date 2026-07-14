@@ -71,6 +71,12 @@ Complete rewrite to fix six defects:
 Net entity-semantics improvement: **45 new passes** (the remainder have
 additional entity issues beyond patient).
 
+The runtime rules match a wider Silver/pending surface than the bounded
+acceptance target: 126 scenarios contain standalone `someone`, and 16 have an
+initial ambiguous patient followed by an explicit name in a non-correction
+turn. These are disclosed as development effects, not promoted to aligned or
+adjudicated coverage.
+
 ## Frozen selection
 
 | Family | Expected | Observed | Match |

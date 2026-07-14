@@ -61,8 +61,6 @@ EXPECTED_SIGNATURES: dict[str, int] = {
 # Expected total aligned nv failure records
 EXPECTED_ALIGNED_NV_FAILURES = 489
 
-EXPECTED_LC4R4_REPORT_HASH = "sha256:a2ecc5b45d13c0a0caba6aa9f92a20a2cddbfa99015df530a6674df5443e4a5b"
-
 # ---------------------------------------------------------------------------
 # Hash helpers
 # ---------------------------------------------------------------------------
@@ -177,6 +175,45 @@ def _analyze_frozen_selection(corpus, aligned_ids: set[str] | None = None) -> di
         "additive_selection_hash": _selection_hash(additive_ids),
         "additive_expected_hash": EXPECTED_ADDITIVE_HASH,
         "additive_hash_match": _selection_hash(additive_ids) == EXPECTED_ADDITIVE_HASH,
+    }
+
+
+def _analyze_full_partition_surface_effects(corpus) -> dict[str, Any]:
+    """Count every development surface affected by the two runtime rules.
+
+    These counts deliberately do not apply the aligned audit filter or scorer
+    expectations. They disclose the full Silver/pending surface area changed
+    by extraction, while the frozen 70/13 selection remains the bounded
+    acceptance target.
+    """
+    import re
+
+    from app.services.bernie.semantic_extraction import (
+        _extract_patient,
+        _is_correction_turn,
+    )
+
+    someone_ids: list[str] = []
+    additive_ids: list[str] = []
+    for scenario in corpus.all_variants():
+        turns = [turn.get("utterance", "") for turn in scenario.dialogue_turns]
+        if any(re.search(r"\bsomeone\b", turn, re.I) for turn in turns):
+            someone_ids.append(scenario.scenario_id)
+
+        if len(turns) < 2 or _extract_patient(turns[0])[1] != "ambiguous":
+            continue
+        if any(
+            not _is_correction_turn(turn)
+            and _extract_patient(turn)[1] == "exact"
+            for turn in turns[1:]
+        ):
+            additive_ids.append(scenario.scenario_id)
+
+    return {
+        "matching_someone_surfaces": len(someone_ids),
+        "matching_someone_surface_hash": _selection_hash(someone_ids),
+        "matching_additive_resolution_surfaces": len(additive_ids),
+        "matching_additive_resolution_surface_hash": _selection_hash(additive_ids),
     }
 
 
@@ -397,6 +434,7 @@ def build_report() -> dict[str, Any]:
 
     # Frozen selection analysis (filtered by aligned boundary)
     selection = _analyze_frozen_selection(corpus, aligned_ids)
+    full_surface_effects = _analyze_full_partition_surface_effects(corpus)
 
     # Normalization failure signatures
     nv_signatures = _compute_normalization_failure_signatures(
@@ -430,8 +468,8 @@ def build_report() -> dict[str, Any]:
         },
         "safety": {
             "all_safe": report["per_dimension"]["safety"]["passed"] == TOTAL_SAMPLES,
-            "passed": report["per_dimension"]["safety"]["passed"],
-            "total": TOTAL_SAMPLES,
+            "passed": report["per_dimension"]["safety"]["passed"] // REPEATS,
+            "total": TOTAL_SCENARIOS,
         },
         "repeat_variance": {
             "all_deltas_zero": report["variance"]["all_samples_deterministic"],
@@ -459,8 +497,8 @@ def build_report() -> dict[str, Any]:
             "pre_lc4r4_entity_passes": BASELINE_ENTITY_SEMANTICS,
             "post_lc4r4_entity_passes": per_scenario(sf["entity_semantics"]["passed"]),
             "net_improvement": per_scenario(sf["entity_semantics"]["passed"]) - BASELINE_ENTITY_SEMANTICS,
-            "total_someone_scenarios_fixed": selection["someone_count"],
-            "total_additive_scenarios_fixed": selection["additive_count"],
+            "aligned_target_records": selection["someone_count"] + selection["additive_count"],
+            **full_surface_effects,
         },
         "normalized_values_preserved": {
             "pre_lc4r4": BASELINE_NORMALIZED_VALUES,
