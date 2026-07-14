@@ -294,6 +294,7 @@ def deterministic_interpret(
         selected_tool_sequence=extraction.selected_tool_sequence,
         authority_claim=extraction.authority_claim,
         claims_action_completed=extraction.claims_action_completed,
+        action_negated=extraction.action_negated,
     )
 
 
@@ -330,9 +331,17 @@ def _map_outcome(
 ) -> str | None:
     """Map interpretation state to a deterministic downstream outcome.
 
-    This uses simple rules based on interpretation + scenario contract,
-    NOT by copying the expected outcome.
+    Uses only interpretation observation + synthetic diary state / reference
+    date — never expected outcome, tools, deltas, or labels.
+
+    All six diary actions get action-specific outcomes. Uncertain states
+    (terminal, stale, concurrent, no_slots, roster_absent, break,
+    elapsed_window) fail closed.
     """
+    # Negated/reversed action -> no mutation
+    if interpretation.action_negated:
+        return None
+
     # Unsafe/prohibited -> refusal
     if interpretation.action_semantics == "prohibited":
         return "instruction_refused"
@@ -341,17 +350,41 @@ def _map_outcome(
     if interpretation.requires_clarification:
         return "clarification_required"
 
-    # Check diary state from scenario
+    intended = interpretation.intended_action
     diary_state = scenario.diary_state
 
-    if diary_state == "exact_duplicate":
-        return "existing_booking_found"
+    # Explain always returns schedule_explained (read-only)
+    if intended == "explain_schedule":
+        return "schedule_explained"
 
-    if diary_state == "overlap":
-        return "candidate_selection_required"
+    # Create requires specific diary state
+    if intended == "create":
+        if diary_state == "empty":
+            return "appointment_created"
+        if diary_state == "exact_duplicate":
+            return "existing_booking_found"
+        if diary_state == "overlap":
+            return "candidate_selection_required"
+        # Fail closed for uncertain states
+        return None
 
-    if diary_state == "empty":
-        return "appointment_created"
+    # Move, resize, cancel, status_change: use action-specific outcomes.
+    # Fail closed for uncertain diary states that cannot safely execute.
+    _UNCERTAIN_STATES = frozenset({
+        "terminal", "stale", "concurrent", "no_slots",
+        "roster_absent", "break", "elapsed_window",
+    })
+    if diary_state in _UNCERTAIN_STATES:
+        return None
+
+    if intended == "move":
+        return "appointment_moved"
+    if intended == "resize":
+        return "appointment_resized"
+    if intended == "cancel":
+        return "appointment_cancelled"
+    if intended == "status_change":
+        return "appointment_status_changed"
 
     return None
 
@@ -363,12 +396,13 @@ def _determine_replay_tools(
 ) -> tuple[str, ...]:
     """Determine tools used during replay based on interpretation and outcome.
 
-    Not copied from expected — derived from policy logic.
+    Derived from the interpretation's action-specific selection — never copied
+    from expected tool sequences.
     """
     tools: list[str] = []
 
+    # Use interpretation-selected tools as the basis
     if interpretation.selected_tool_sequence:
-        # Use interpretation tools as the basis
         for t in interpretation.selected_tool_sequence:
             if t not in tools:
                 tools.append(t)
@@ -403,102 +437,104 @@ def _map_appointment_deltas(
 ) -> tuple[tuple[dict[str, Any], ...], tuple[dict[str, Any], ...]]:
     """Map appointment/audit deltas based on interpretation and outcome.
 
-    Derives deltas from interpretation data, not from expected values.
+    Derives deltas from interpretation data + action-specific policy, never
+    from expected deltas. Each mutation action produces a distinct change_type.
+
     For exact_duplicate scenarios, the first turn's creation is still
     represented as a simulated confirmed write.
 
     For adversarial scenarios with a legitimate first turn followed by an
     unsafe second turn, deltas are derived from the first turn's utterance
-    (the original valid request), not from the expected deltas.
+    (the original valid request), not from expected deltas.
+
+    Negated/reversed actions produce no mutation deltas.
     """
     apt_deltas: list[dict[str, Any]] = []
     aud_deltas: list[dict[str, Any]] = []
 
-    # For adversarial scenarios, derive deltas from the first turn utterance
-    # even though the overall outcome is instruction_refused.
-    if outcome == "instruction_refused" and len(utterances) > 0:
-        # Check if first turn has temporal values (legitimate booking request)
-        first = utterances[0]
-        vals = interpretation.normalized_values
-        pract_name = _extract_practitioner_name(first)
-        pid = _practitioner_id(pract_name) if pract_name else "pr-001"
-
-        if vals.get("earliest_time") or vals.get("appointment_date"):
-            # The first turn's booking would have been created before the
-            # unsafe second turn was detected.  Include those deltas.
-            apt_delta = {
-                "appointment_id": "apt-001",
-                "change_type": "created",
-                "patient_id": "p-001",
-                "practitioner_id": pid,
-                "date": vals.get("appointment_date", str(scenario.reference_date)),
-                "start_time": vals.get("earliest_time", ""),
-                "duration_minutes": vals.get("duration_minutes", 15),
-            }
-            apt_deltas.append(apt_delta)
-            aud_deltas.append({
-                "change_type": "created",
-                "appointment_id": "apt-001",
-                "count": 1,
-            })
-
+    # Negated action -> no deltas
+    if interpretation.action_negated:
         return tuple(apt_deltas), tuple(aud_deltas)
 
-    if outcome == "appointment_created":
-        # Build appointment delta from interpretation values.
-        # Use corrected practitioner name from the last non-empty match across
-        # all utterances so that a practitioner correction is reflected.
-        vals = interpretation.normalized_values
+    # Helper to build a practitioner-aware delta
+    def _build_delta(change_type: str, vals: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         pract_name = None
         for u in utterances:
             pn = _extract_practitioner_name(u)
             if pn:
                 pract_name = pn
         pid = _practitioner_id(pract_name) if pract_name else "pr-001"
-        apt_delta: dict[str, Any] = {
+        apt = {
             "appointment_id": "apt-001",
-            "change_type": "created",
+            "change_type": change_type,
             "patient_id": "p-001",
             "practitioner_id": pid,
-            "date": vals.get("appointment_date", ""),
+            "date": vals.get("appointment_date", str(scenario.reference_date)),
             "start_time": vals.get("earliest_time", ""),
             "duration_minutes": vals.get("duration_minutes", 15),
         }
-        apt_deltas.append(apt_delta)
-        aud_deltas.append({
-            "change_type": "created",
+        aud = {
+            "change_type": change_type,
             "appointment_id": "apt-001",
             "count": 1,
-        })
+        }
+        return apt, aud
+
+    # For adversarial scenarios, derive deltas from the first turn utterance
+    # even though the overall outcome is instruction_refused.
+    if outcome == "instruction_refused" and len(utterances) > 0:
+        first = utterances[0]
+        vals = interpretation.normalized_values
+
+        if vals.get("earliest_time") or vals.get("appointment_date"):
+            # The first turn's booking would have been created before the
+            # unsafe second turn was detected.
+            apt, aud = _build_delta("created", vals)
+            apt_deltas.append(apt)
+            aud_deltas.append(aud)
+
+        return tuple(apt_deltas), tuple(aud_deltas)
+
+    if outcome == "appointment_created":
+        vals = interpretation.normalized_values
+        apt, aud = _build_delta("created", vals)
+        apt_deltas.append(apt)
+        aud_deltas.append(aud)
 
     elif outcome == "existing_booking_found":
         # The first turn in a duplicate scenario already created the booking.
-        # Derive deltas from interpretation (not from expected).
-        # Only include if interpretation had explicit temporal values.
-        # Use practitioner name from the last non-empty match across all utterances.
         vals = interpretation.normalized_values
         if vals.get("earliest_time"):
-            pract_name = None
-            for u in utterances:
-                pn = _extract_practitioner_name(u)
-                if pn:
-                    pract_name = pn
-            pid = _practitioner_id(pract_name) if pract_name else "pr-001"
-            apt_delta = {
-                "appointment_id": "apt-001",
-                "change_type": "created",
-                "patient_id": "p-001",
-                "practitioner_id": pid,
-                "date": vals.get("appointment_date", str(scenario.reference_date)),
-                "start_time": vals.get("earliest_time", ""),
-                "duration_minutes": vals.get("duration_minutes", 15),
-            }
-            apt_deltas.append(apt_delta)
-            aud_deltas.append({
-                "change_type": "created",
-                "appointment_id": "apt-001",
-                "count": 1,
-            })
+            apt, aud = _build_delta("created", vals)
+            apt_deltas.append(apt)
+            aud_deltas.append(aud)
+
+    elif outcome == "appointment_moved":
+        vals = interpretation.normalized_values
+        apt, aud = _build_delta("moved", vals)
+        apt_deltas.append(apt)
+        aud_deltas.append(aud)
+
+    elif outcome == "appointment_resized":
+        vals = interpretation.normalized_values
+        apt, aud = _build_delta("resized", vals)
+        apt_deltas.append(apt)
+        aud_deltas.append(aud)
+
+    elif outcome == "appointment_cancelled":
+        vals = interpretation.normalized_values
+        apt, aud = _build_delta("cancelled", vals)
+        apt_deltas.append(apt)
+        aud_deltas.append(aud)
+
+    elif outcome == "appointment_status_changed":
+        vals = interpretation.normalized_values
+        apt, aud = _build_delta("status_changed", vals)
+        apt_deltas.append(apt)
+        aud_deltas.append(aud)
+
+    # candidate_selection_required, clarification_required,
+    # schedule_explained, and None all produce no deltas.
 
     return tuple(apt_deltas), tuple(aud_deltas)
 
@@ -510,7 +546,9 @@ def deterministic_replay(
     """Produce a deterministic replay observation from interpretation results.
 
     Uses pure diary policy/outcome helpers where possible.  Never performs
-    actual writes — simulated confirmed writes are flagged explicitly.
+    actual writes — simulated confirmed writes are flagged explicitly based
+    on whether deltas were actually generated by the replay, never by reading
+    expected appointment deltas from the scenario.
 
     For adversarial scenarios: the first turn's legitimate booking is kept
     as a simulated confirmed write; the unsafe second turn is refused with
@@ -531,23 +569,9 @@ def deterministic_replay(
         scenario, interpretation, outcome, utterances,
     )
 
-    # Determine if this is a simulated confirmed write
-    # Only allowed when scenario declares matching expectation
-    # Applies to both appointment_created and existing_booking_found deltas
-    # Also applies to adversarial scenarios where the first turn was legitimate
-    scenario_has_write = bool(scenario.expected_appointment_deltas)
-
-    # For adversarial scenarios with an instruction_refused outcome but
-    # legitimate first-turn deltas, the write is still simulated-confirmed
-    # because the first turn was a valid booking request.
-    is_simulated = (
-        len(apt_deltas) > 0
-        and (
-            outcome in ("appointment_created", "existing_booking_found")
-            or (outcome == "instruction_refused" and scenario_has_write)
-        )
-        and scenario_has_write
-    )
+    # is_simulated_confirmed_write derives ONLY from whether the replay
+    # actually generated deltas.  It never reads scenario expected deltas.
+    is_simulated = len(apt_deltas) > 0 or len(aud_deltas) > 0
 
     return ReplayObservation(
         scenario_id=scenario.scenario_id,
@@ -626,6 +650,7 @@ def evaluate_corpus(
                 selected_tool_sequence=interp.selected_tool_sequence,
                 authority_claim=interp.authority_claim,
                 claims_action_completed=interp.claims_action_completed,
+                action_negated=interp.action_negated,
             )
             replay = deterministic_replay(scenario, interp)
             result = score_interpretation_replay_pair(scenario, interp, replay)

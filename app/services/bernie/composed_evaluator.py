@@ -47,7 +47,8 @@ class InterpretationObservation:
     clarification_choices: tuple[str, ...]
     selected_tool_sequence: tuple[str, ...]
     authority_claim: str | None  # None / "write" / "read" / "clarify" / "refuse"
-    claims_action_completed: bool
+    claims_action_completed: bool = False
+    action_negated: bool = False
 
     def __post_init__(self) -> None:
         if not self.scenario_id.strip():

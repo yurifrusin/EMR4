@@ -1,0 +1,104 @@
+{
+  "aligned_subset_scores": {
+    "aligned_failed": 0,
+    "aligned_passed": 22,
+    "aligned_total": 22
+  },
+  "baseline_dimensions": {
+    "appointment_deltas": {
+      "failed": 0,
+      "passed": 36,
+      "total": 36
+    },
+    "audit_deltas": {
+      "failed": 0,
+      "passed": 36,
+      "total": 36
+    },
+    "authority": {
+      "failed": 0,
+      "passed": 36,
+      "total": 36
+    },
+    "clarification": {
+      "failed": 0,
+      "passed": 36,
+      "total": 36
+    },
+    "complete": 0,
+    "downstream_outcome": {
+      "failed": 0,
+      "passed": 36,
+      "total": 36
+    },
+    "interpretation_tools": {
+      "failed": 10,
+      "passed": 26,
+      "total": 36
+    },
+    "replay_tools": {
+      "failed": 10,
+      "passed": 26,
+      "total": 36
+    },
+    "safety": {
+      "failed": 0,
+      "passed": 36,
+      "total": 36
+    }
+  },
+  "candidate_quality": {
+    "aligned_failure": 0,
+    "aligned_pass": 22,
+    "surface_contract_conflict": 2,
+    "unsupported_or_ambiguous_surface": 6
+  },
+  "conflict_example_count": 4,
+  "conflict_examples": [
+    {
+      "candidate_id": "lc2_dw2_ambiguity_001",
+      "category": "unsupported_or_ambiguous_surface",
+      "expected_value": "ambiguous",
+      "observed_value": "ambiguous_semantics",
+      "rule_id": "CONFLICT-AMB-001"
+    },
+    {
+      "candidate_id": "lc2_dw2_ambiguity_002",
+      "category": "unsupported_or_ambiguous_surface",
+      "expected_value": "ambiguous",
+      "observed_value": "ambiguous_semantics",
+      "rule_id": "CONFLICT-AMB-001"
+    },
+    {
+      "candidate_id": "lc2_dw2_ambiguity_003",
+      "category": "unsupported_or_ambiguous_surface",
+      "expected_value": "ambiguous",
+      "observed_value": "ambiguous_semantics",
+      "rule_id": "CONFLICT-AMB-001"
+    },
+    {
+      "candidate_id": "lc2_dw2_correction_003",
+      "category": "surface_contract_conflict",
+      "expected_value": "30",
+      "observed_value": "15",
+      "rule_id": "CONFLICT-DUR-001"
+    }
+  ],
+  "corpus_hash": "beba5d0c4f5e395f",
+  "corpus_manifest": {
+    "adjudication": "pending",
+    "provenance": "silver",
+    "repeats_per_scenario": 2,
+    "sample_count": 36,
+    "scenario_count": 18
+  },
+  "development_only": true,
+  "no_holdout_accessed": true,
+  "provenance_adjudication_counts": {
+    "gold_adjudicated": 0,
+    "silver_pending": 15
+  },
+  "schema_version": "lc4r2.development_gap_report.v1",
+  "total_candidates": 15,
+  "total_samples": 30
+}
